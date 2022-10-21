@@ -32,13 +32,13 @@ xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damag
     if element == xi.magic.ele.LIGHT then
         bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
-            bonus = bonus + (bonus - 40) / 2;
+            bonus = bonus + (bonus - 40) / 2
             damage = damage + bonus
         end
     else
         bonus = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
         if bonus > 20 then
-            bonus = bonus + (bonus -20) /2;
+            bonus = bonus + (bonus -20) / 2
             damage = damage + bonus
         end
     end

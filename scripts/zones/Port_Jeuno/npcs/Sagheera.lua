@@ -454,14 +454,14 @@ end
 local handleMainEvent = function(player, option, coinAmount)
     -- "Just wanted to chat" for the first time
     if option == 1 then
-        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 1, false));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 1, false))
 
     -- purchase COSMO_CLEANSE
     elseif option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
         local cost = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
         if cosmoTime == cosmoReady and player:delGil(cost) then
-            player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 0, false));
+            player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 0, false))
             npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
         end
 
@@ -473,7 +473,7 @@ local handleMainEvent = function(player, option, coinAmount)
 
     -- Relic restoration exited
     elseif option == 5 then
-        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false))
 
     -- purchase item using ancient beastcoins
     elseif abcShop[option] then

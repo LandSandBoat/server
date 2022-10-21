@@ -35,7 +35,7 @@ function onTrigger(player, mobId, despawntime, respawntime)
             return
         end
         SpawnMob(mobId, instance)
-        player:PrintToPlayer(string.format("Spawned %s %s in %s.", GetMobByID(mobId, instance):getName(), mobId, instance));
+        player:PrintToPlayer(string.format("Spawned %s %s in %s.", GetMobByID(mobId, instance):getName(), mobId, instance))
     else
         -- validate mobId
         if mobId == nil then

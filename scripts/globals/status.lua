@@ -2444,7 +2444,7 @@ xi.auraTarget =
 {
     ALLIES  = 0,
     ENEMIES = 1,
-};
+}
 
 -----------------------------------
 -- MOBMODs
@@ -3087,7 +3087,7 @@ xi.pathflag =
     REVERSE  = 0x04, -- reverse the path
     SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
     SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
-};
+}
 
 -- Check Lua item with:
 -- local isEx = bit.band(item:getFlag(), xi.itemFlag.EX) ~= 0
