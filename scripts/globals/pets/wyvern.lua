@@ -121,11 +121,13 @@ entity.onMobSpawn = function(mob)
     elseif wyvernType == wyvernCapabilities.OFFENSIVE or wyvernType == wyvernCapabilities.MULTI then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local weaknessTargetChance = 75
-            local breaths = {}
+            local breaths              = {}
+
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 weaknessTargetChance = 100
             end
-            if math.random(100) <= weaknessTargetChance then
+
+            if math.random(1, 100) <= weaknessTargetChance then
                 local breathList =
                 {
                     xi.jobAbility.FLAME_BREATH,
@@ -146,12 +148,14 @@ entity.onMobSpawn = function(mob)
                 }
                 local lowest = resistances[1]
                 local breath = breathList[1]
+
                 for i, v in ipairs(breathList) do
                     if resistances[i] < lowest then
                         lowest = resistances[i]
                         breath = v
                     end
                 end
+
                 table.insert(breaths, breath)
             else
                 breaths =
@@ -164,9 +168,11 @@ entity.onMobSpawn = function(mob)
                     xi.jobAbility.HYDRO_BREATH,
                 }
             end
-            player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
+
+            player:getPet():useJobAbility(breaths[math.random(1, #breaths)], target)
         end)
     end
+
     if wyvernType == wyvernCapabilities.MULTI then
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
             -- check master first!
@@ -190,14 +196,16 @@ entity.onMobSpawn = function(mob)
     end)
 
     master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
-        local pet = player:getPet()
+        local pet      = player:getPet()
         local prev_exp = pet:getLocalVar("wyvern_exp")
+
         if prev_exp < 1000 then
             -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
             local currentExp = exp
             if prev_exp + exp > 1000 then
                 currentExp = 1000 - prev_exp
             end
+
             local diff = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
             if diff ~= 0 then
                 -- wyvern levelled up (diff is the number of level ups)
@@ -210,6 +218,7 @@ entity.onMobSpawn = function(mob)
                 master:addMod(xi.mod.DEFP, 4 * diff)
                 master:addMod(xi.mod.HASTE_ABILITY, 200 * diff)
             end
+
             pet:setLocalVar("wyvern_exp", prev_exp + exp)
             pet:setLocalVar("level_Ups", pet:getLocalVar("level_Ups") + diff)
         end
@@ -217,13 +226,15 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player)
-    local master = mob:getMaster()
+    local master  = mob:getMaster()
     local numLvls = mob:getLocalVar("level_Ups")
+
     if numLvls ~= 0 then
         master:delMod(xi.mod.ATTP, 4 * numLvls)
         master:delMod(xi.mod.DEFP, 4 * numLvls)
         master:delMod(xi.mod.HASTE_ABILITY, 200 * numLvls)
     end
+
     master:removeListener("PET_WYVERN_WS")
     master:removeListener("PET_WYVERN_MAGIC")
     master:removeListener("PET_WYVERN_ENGAGE")

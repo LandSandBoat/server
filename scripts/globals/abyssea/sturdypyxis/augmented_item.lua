@@ -512,7 +512,7 @@ local function GetAugment(npc, itemid, slot)
         randLimit = 80
     end
 
-    if math.random(100) > randLimit then
+    if math.random(1, 100) > randLimit then
         secondAugment = true
     end
 
@@ -532,7 +532,7 @@ local function GetAugment(npc, itemid, slot)
     npc:setLocalVar("ITEM" .. slot .. "AUG1VAL", multival1 - 1)
 
     if secondAugment then
-        randaugment2 = math.random(1,#augs[itemid].augments - augTierDeduction[itemid][tier])
+        randaugment2 = math.random(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
 
         if randaugment2 == randaugment1 then
             randaugment2 = 0

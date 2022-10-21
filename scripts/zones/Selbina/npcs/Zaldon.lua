@@ -508,9 +508,9 @@ local function tradeFish(player, fishId)
     player:setCharVar("insideBellyItemIdx", 0)
 
     local rewards = fishRewards[fishId].items
-    local roll = math.random(1000) / 10
-    local found = false
-    local sum = 0
+    local roll    = math.random(1, 1000) / 10
+    local found   = false
+    local sum     = 0
 
     for i = 1, #rewards do
         sum = sum + rewards[i].chance
@@ -569,7 +569,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- UNDER THE SEA
     if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
-        if math.random(100) <= 20 then
+        if math.random(1, 100) <= 20 then
             player:startEvent(35) -- Ring found !
         else
             player:startEvent(36) -- Ring not found
