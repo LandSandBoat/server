@@ -1788,6 +1788,8 @@ namespace charutils
                 break;
             }
 
+            luautils::OnItemUnequip(PChar, PItem);
+
             if (update)
             {
                 charutils::BuildingCharSkillsTable(PChar);
@@ -2513,6 +2515,11 @@ namespace charutils
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
             BuildingCharWeaponSkills(PChar);
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+        }
+
+        if (PItem != nullptr)
+        {
+            luautils::OnItemEquip(PChar, PItem);
         }
 
         charutils::BuildingCharSkillsTable(PChar);
