@@ -4,11 +4,16 @@
 -- Note: Place holder Nis Puk
 -----------------------------------
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
+mixins = { require("scripts/mixins/families/puk") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.WIND_ABSORB, 100)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

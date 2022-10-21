@@ -12,13 +12,13 @@
 -- 1.75      1.75      1.75
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
     params.ftp100 = 1.75 params.ftp200 = 1.75 params.ftp300 = 1.75
@@ -31,7 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     params.multiHitfTP = true
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.dex_wsc = 0.8
     end
 
@@ -49,4 +49,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

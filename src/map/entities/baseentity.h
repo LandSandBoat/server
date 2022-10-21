@@ -22,13 +22,14 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
 #include "../packets/message_basic.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 #include <map>
 #include <memory>
+#include <vector>
 
-enum ENTITYTYPE
+enum ENTITYTYPE : uint8
 {
     TYPE_NONE   = 0x00,
     TYPE_PC     = 0x01,
@@ -43,7 +44,7 @@ enum ENTITYTYPE
 enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
-    MOB           = 1,   // STATUS_UPDATE        = 1,
+    MOB           = 1,
     DISAPPEAR     = 2,
     INVISIBLE     = 3,
     STATUS_4      = 4,
@@ -52,7 +53,7 @@ enum class STATUS_TYPE : uint8
     SHUTDOWN      = 20,
 };
 
-enum ANIMATIONTYPE
+enum ANIMATIONTYPE : uint8
 {
     ANIMATION_NONE    = 0,
     ANIMATION_ATTACK  = 1,
@@ -68,18 +69,24 @@ enum ANIMATIONTYPE
     ANIMATION_ELEVATOR_DOWN = 11,
     // seems to be WALLHACK                     = 28,
     // seems to be WALLHACK also..              = 31,
-    ANIMATION_HEALING            = 33,
-    ANIMATION_FISHING_FISH       = 38,
-    ANIMATION_FISHING_CAUGHT     = 39,
-    ANIMATION_FISHING_ROD_BREAK  = 40,
-    ANIMATION_FISHING_LINE_BREAK = 41,
-    ANIMATION_FISHING_MONSTER    = 42,
-    ANIMATION_FISHING_STOP       = 43,
-    ANIMATION_SYNTH              = 44,
-    ANIMATION_SIT                = 47,
-    ANIMATION_RANGED             = 48,
-    ANIMATION_FISHING_START_OLD  = 50,
-    ANIMATION_FISHING_START      = 56,
+    ANIMATION_HEALING                = 33,
+    ANIMATION_FISHING_FISH_OLD       = 38,
+    ANIMATION_FISHING_CAUGHT_OLD     = 39,
+    ANIMATION_FISHING_ROD_BREAK_OLD  = 40,
+    ANIMATION_FISHING_LINE_BREAK_OLD = 41,
+    ANIMATION_FISHING_MONSTER_OLD    = 42,
+    ANIMATION_FISHING_STOP_OLD       = 43,
+    ANIMATION_SYNTH                  = 44,
+    ANIMATION_SIT                    = 47,
+    ANIMATION_RANGED                 = 48,
+    ANIMATION_FISHING_START_OLD      = 50,
+    ANIMATION_FISHING_START          = 56,
+    ANIMATION_FISHING_FISH           = 57,
+    ANIMATION_FISHING_CAUGHT         = 58,
+    ANIMATION_FISHING_ROD_BREAK      = 59,
+    ANIMATION_FISHING_LINE_BREAK     = 60,
+    ANIMATION_FISHING_MONSTER        = 61,
+    ANIMATION_FISHING_STOP           = 62,
     // 63 through 72 are used with /sitchair
     ANIMATION_SITCHAIR_0  = 63,
     ANIMATION_SITCHAIR_1  = 64,
@@ -97,7 +104,7 @@ enum ANIMATIONTYPE
     // ANIMATION_TRUST              = 90 // This is the animation for a trust NPC spawning in.
 };
 
-enum MOUNTTYPE
+enum MOUNTTYPE : uint8
 {
     MOUNT_CHOCOBO        = 0,
     MOUNT_QUEST_RAPTOR   = 1,
@@ -131,8 +138,10 @@ enum MOUNTTYPE
     MOUNT_BUFFALO        = 29,
     MOUNT_WIVRE          = 30,
     MOUNT_RED_RAPTOR     = 31,
+    MOUNT_IRON_GIANT     = 32,
+    MOUNT_BYAKKO         = 33,
     //
-    MOUNT_MAX            = 32,
+    MOUNT_MAX = 34,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -146,7 +155,7 @@ enum class ALLEGIANCE_TYPE : uint8
     GRIFFONS  = 6,
 };
 
-enum UPDATETYPE
+enum UPDATETYPE : uint8
 {
     UPDATE_NONE     = 0x00,
     UPDATE_POS      = 0x01,
@@ -154,22 +163,44 @@ enum UPDATETYPE
     UPDATE_HP       = 0x04,
     UPDATE_COMBAT   = 0x07,
     UPDATE_NAME     = 0x08,
-    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
+    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_CHAR = 0x1F,
+    UPDATE_DESPAWN  = 0x20,
 };
 
-enum ENTITYFLAGS
+enum ENTITYFLAGS : uint16
 {
-    FLAG_NONE          = 0x000,
-    FLAG_INFO_ICON     = 0x001, // (I) Icon next to name
+    FLAG_NONE      = 0x000,
+    FLAG_INFO_ICON = 0x001, // (I) Icon next to name
+
+    // TODO: Flags 0x002, 0x004 and 0x008 do different things for different entities.
+    //     : It isn't one-size-fits-all, and different combinations may do different things.
+    //     : It'll need to researched more.
+    // FLAG_ALT_APPEARANCE = 0x002,
+
     FLAG_HIDE_NAME     = 0x008,
     FLAG_CALL_FOR_HELP = 0x020,
+    FLAG_HIDE_MODEL    = 0x080,
     FLAG_HIDE_HP       = 0x100,
     FLAG_UNTARGETABLE  = 0x800,
 };
 
-// TODO: возможо стоит сделать эту структуру частью класса, взамен нынешних id и targid, но уже без метода clean
+enum NAMEVIS : uint8
+{
+    VIS_NONE        = 0x00,
+    VIS_ICON        = 0x01,
+    VIS_HIDE_NAME   = 0x08,
+    VIS_GHOST_PHASE = 0x80,
+};
+
+enum class SPAWN_ANIMATION : uint8
+{
+    NORMAL  = 0,
+    SPECIAL = 1,
+};
+
+// TODO:it is possible to make this structure part of the class, instead of the current ID and Targid, but without the Clean method
 
 struct EntityID_t
 {
@@ -187,12 +218,21 @@ class CZone;
 
 struct location_t
 {
-    position_t p;           // позиция сущности
-    uint16     destination; // текущая зона
-    CZone*     zone;        // текущая зона
-    uint16     prevzone;    // предыдущая зона (для монстров и npc не используется)
-    bool       zoning; // флаг сбрасывается при каждом входе в новую зону. необходим для реализации логики игровых задач ("quests")
-    uint16     boundary; // определенная область в зоне, в которой находится сущность (используется персонажами и транспортом)
+    position_t p;           // Position of entity
+    uint16     destination; // Destination zone while zoning
+    CZone*     zone;        // Current zone
+    uint16     prevzone;    // Previous zone (Not used for monsters and NPCs)
+    bool       zoning;      // The flag is reset at each entrance to the new zone. We are needed to implement the logic of game tasks ("Quests")
+    uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
+
+    location_t()
+    {
+        destination = 0;
+        zone        = nullptr;
+        prevzone    = 0;
+        zoning      = false;
+        boundary    = 0;
+    }
 };
 
 class CAIContainer;
@@ -201,30 +241,36 @@ class CBattlefield;
 
 /************************************************************************
  *                                                                       *
- *  Базовый класс для всех сущностей в игре                              *
+ *  Basic class for all entities in the game                             *
  *                                                                       *
  ************************************************************************/
 
 class CBaseEntity
 {
 public:
-    CBaseEntity();          // конструктор
-    virtual ~CBaseEntity(); // деструктор
+    CBaseEntity();
+    virtual ~CBaseEntity();
 
-    virtual void        Spawn();
-    virtual void        FadeOut();
-    virtual const int8* GetName();       // имя сущности
-    uint16              getZone() const; // текущая зона
-    float               GetXPos() const; // позиция по координате X
-    float               GetYPos() const; // позиция по координате Y
-    float               GetZPos() const; // позиция по координате Z
-    uint8               GetRotPos() const;
-    void                HideName(bool hide);  // hide / show name
-    bool                IsNameHidden() const; // checks if name is hidden
-    bool                IsTargetable() const; // checks if entity is targetable
-    virtual bool        isWideScannable();    // checks if the entity should show up on wide scan
+    virtual void Spawn();
+    virtual void FadeOut();
+
+    virtual const int8* GetName();       // Internal name of entity
+    virtual const int8* GetPacketName(); // Name of entity sent to the client
+
+    uint16 getZone() const; // Current zone
+    float  GetXPos() const; // Position of co-ordinate X
+    float  GetYPos() const; // Position of co-ordinate Y
+    float  GetZPos() const; // Position of co-ordinate Z
+    uint8  GetRotPos() const;
+
+    void         HideName(bool hide);     // hide / show name
+    void         GhostPhase(bool ghost);  // makes mob semi transparent
+    bool         IsNameHidden() const;    // checks if name is hidden
+    virtual bool GetUntargetable() const; // checks if entity is untargetable
+    virtual bool isWideScannable();       // checks if the entity should show up on wide scan
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
+    void         SendZoneUpdate();
 
     void   ResetLocalVars();
     uint32 GetLocalVar(const char* var);
@@ -240,26 +286,35 @@ public:
 
     virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&){};
 
+    bool IsDynamicEntity() const;
+
     uint32          id;           // global identifier unique on the server
     uint16          targid;       // local identifier unique to the zone
-    ENTITYTYPE      objtype;      // тип сущности
-    STATUS_TYPE     status;       // статус сущности (разные сущности - разные статусы)
-    uint16          m_TargID;     // targid объекта, на который смотрит сущность
-    string_t        name;         // имя сущности
-    look_t          look;         // внешний вид всех сущностей
+    ENTITYTYPE      objtype;      // Type of entity
+    STATUS_TYPE     status;       // Entity status (different entities - different statuses)
+    uint16          m_TargID;     // the targid of the object the entity is looking at
+    std::string     name;         // Entity name
+    std::string     packetName;   // Used to override name when being sent to the client
+    look_t          look;         //
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
-    location_t      loc;          // местоположение сущности
-    uint8           animation;    // анимация
-    uint8           animationsub; // дополнительный параметры анимации
-    uint8           speed;        // скорость передвижения
-    uint8           speedsub;     // подолнительный параметр скорости передвижения
+    location_t      loc;          // Location of entity
+    uint8           animation;    // animation
+    uint8           animationsub; // Additional animation parameter
+    uint8           speed;        // speed of movement
+    uint8           speedsub;     // Additional movement speed parameter
     uint8           namevis;
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
 
+    bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
+
+    SPAWN_ANIMATION spawnAnimation;
+
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)
     CInstance*                    PInstance;
+
+    std::chrono::steady_clock::time_point m_nextUpdateTimer; // next time the entity should push an update packet
 
 protected:
     std::map<std::string, uint32> m_localVars;

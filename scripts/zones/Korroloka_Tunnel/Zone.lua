@@ -1,15 +1,13 @@
 -----------------------------------
---
 -- Zone: Korroloka Tunnel (173)
---
 -----------------------------------
-local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/helm")
+local ID = require('scripts/zones/Korroloka_Tunnel/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/helm')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     -- Waterfalls (RegionID, X, Radius, Z)
     zone:registerRegion(1,  -87, 4, -105, 0, 0, 0) -- Left pool
     zone:registerRegion(2, -101, 7, -114, 0, 0, 0) -- Center Pool
@@ -18,19 +16,21 @@ zone_object.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-500, -21.824, 0.358, 60)
     end
+
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     if player:getCharVar("BathedInScent") == 1 then  -- pollen scent from touching all 3 Blue Rafflesias in Yuhtunga
         switch (region:GetRegionID()): caseof
         {
@@ -38,10 +38,12 @@ zone_object.onRegionEnter = function(player, region)
                 player:messageSpecial(ID.text.ENTERED_SPRING)
                 player:setLocalVar("POOL_TIME", os.time())
             end,
+
             [2] = function (x)  -- Center Pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
                 player:setLocalVar("POOL_TIME", os.time())
             end,
+
             [3] = function (x)  -- Right pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
                 player:setLocalVar("POOL_TIME", os.time())
@@ -50,11 +52,11 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
-    local RegionID = region:GetRegionID()
+zoneObject.onRegionLeave = function(player, region)
+    local regionId = region:GetRegionID()
     local pooltime = os.time() - player:getLocalVar("POOL_TIME")
 
-    if RegionID <= 3 and player:getCharVar("BathedInScent") == 1 then
+    if regionId <= 3 and player:getCharVar("BathedInScent") == 1 then
         if pooltime >= 300 then
             player:messageSpecial(ID.text.LEFT_SPRING_CLEAN)
             player:setLocalVar("POOL_TIME", 0)
@@ -66,10 +68,10 @@ zone_object.onRegionLeave = function(player, region)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

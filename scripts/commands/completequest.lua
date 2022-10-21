@@ -2,8 +2,9 @@
 -- func: completequest <logID> <questID> <player>
 -- desc: Completes the given quest for the GM or target player.
 -----------------------------------
-
 require("scripts/globals/quests")
+local logIdHelpers = require('scripts/globals/log_ids')
+-----------------------------------
 
 cmdprops =
 {
@@ -13,13 +14,13 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!completequest <logID> <questID> {player}")
+    player:PrintToPlayer("!completequest <logID> <questID> (player)")
 end
 
 function onTrigger(player, logId, questId, target)
 
     -- validate logId
-    local questLog = GetQuestLogInfo(logId)
+    local questLog = logIdHelpers.getQuestLogInfo(logId)
     if (questLog == nil) then
         error(player, "Invalid logID.")
         return

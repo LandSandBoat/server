@@ -42,6 +42,6 @@ namespace campaign
 
     void SendUpdate(CCharEntity* PChar);
 
-    //CampaignState state;
+    // CampaignState state;
 }; // namespace campaign
 #endif

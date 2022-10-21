@@ -2,22 +2,22 @@
 -- Magic Mortar
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.LIGHT_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local ftp
     local tp = skill:getTP()
 
-    if not xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         ftp = 0.5 + ((0.5/3000) * tp)
     else
         -- Might be wrong, it may only use max hp in its new form, also it may be able to miss and take defense into account as well
@@ -43,4 +43,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

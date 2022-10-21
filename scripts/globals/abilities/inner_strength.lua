@@ -5,18 +5,16 @@
 -- Recast Time: 01:00:00
 -- Duration: 0:00:30
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.monk.checkInnerStrength(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.INNER_STRENGTH, 2, 0, 30)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.monk.useInnerStrength(player, target, ability)
 end
 
-return ability_object
+return abilityObject

@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sandyFame = player:getFameLevel(SANDORIA)
+    local sandyFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
 
     local questIntroToTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     local questIntermediateTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
@@ -134,19 +134,19 @@ entity.onEventFinish = function(player, csid, option)
         local questAdvancedTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
 
         if questIntroToTeamwork == QUEST_ACCEPTED and player:getLocalVar("introToTmwrk_pass") == 1 then
-            npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
+            npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
                 item = 13442,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.THIRD_RATE_ORGANIZER,
             })
         elseif questIntermediateTeamwork == QUEST_ACCEPTED and player:getLocalVar("intermedTmwrk_pass") == 1 then
-            npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
+            npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
                 item = 4994,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.SECOND_RATE_ORGANIZER,
             })
         elseif questAdvancedTeamwork == QUEST_ACCEPTED and player:getLocalVar("advTmwrk_pass") == 1 then
-            npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
+            npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
                 item = 13459,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.FIRST_RATE_ORGANIZER,

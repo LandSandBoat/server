@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cmath>
 #include <cstring>
@@ -47,8 +47,6 @@
 #include "itemutils.h"
 #include "synthutils.h"
 #include "zoneutils.h"
-
-//#define _XI_SYNTH_DEBUG_MESSAGES_ // enable debugging messages
 
 namespace synthutils
 {
@@ -80,31 +78,31 @@ namespace synthutils
             AND Ingredient8 = %u \
         LIMIT 1";
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
-                              PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
-                              PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
-                              PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
+        int32 ret = sql->Query(fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
+                               PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
+                               PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
+                               PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            uint16 KeyItemID = (uint16)Sql_GetUIntData(SqlHandle, 1); // Check if recipe needs KI
+            uint16 KeyItemID = (uint16)sql->GetUIntData(1); // Check if recipe needs KI
 
             if ((KeyItemID == 0) || (charutils::hasKeyItem(PChar, KeyItemID))) // If recipe doesn't need KI OR Player has the required KI
             {
                 // in the ninth cell write the id of the recipe
-                PChar->CraftContainer->setItem(9, Sql_GetUIntData(SqlHandle, 0), 0xFF, 0);
-                PChar->CraftContainer->setItem(10 + 1, (uint16)Sql_GetUIntData(SqlHandle, 10), (uint8)Sql_GetUIntData(SqlHandle, 14), 0); // RESULT_SUCCESS
-                PChar->CraftContainer->setItem(10 + 2, (uint16)Sql_GetUIntData(SqlHandle, 11), (uint8)Sql_GetUIntData(SqlHandle, 15), 0); // RESULT_HQ
-                PChar->CraftContainer->setItem(10 + 3, (uint16)Sql_GetUIntData(SqlHandle, 12), (uint8)Sql_GetUIntData(SqlHandle, 16), 0); // RESULT_HQ2
-                PChar->CraftContainer->setItem(10 + 4, (uint16)Sql_GetUIntData(SqlHandle, 13), (uint8)Sql_GetUIntData(SqlHandle, 17), 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType((uint8)Sql_GetUIntData(SqlHandle, 18)); // Store if it's a desynth
+                PChar->CraftContainer->setItem(9, sql->GetUIntData(0), 0xFF, 0);
+                PChar->CraftContainer->setItem(10 + 1, (uint16)sql->GetUIntData(10), (uint8)sql->GetUIntData(14), 0); // RESULT_SUCCESS
+                PChar->CraftContainer->setItem(10 + 2, (uint16)sql->GetUIntData(11), (uint8)sql->GetUIntData(15), 0); // RESULT_HQ
+                PChar->CraftContainer->setItem(10 + 3, (uint16)sql->GetUIntData(12), (uint8)sql->GetUIntData(16), 0); // RESULT_HQ2
+                PChar->CraftContainer->setItem(10 + 4, (uint16)sql->GetUIntData(13), (uint8)sql->GetUIntData(17), 0); // RESULT_HQ3
+                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store if it's a desynth
 
                 uint16 skillValue   = 0;
                 uint16 currentSkill = 0;
 
                 for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // range for all 8 synth skills
                 {
-                    skillValue   = (uint16)Sql_GetUIntData(SqlHandle, (skillID - 49 + 2));
+                    skillValue   = (uint16)sql->GetUIntData((skillID - 49 + 2));
                     currentSkill = PChar->RealSkills.skill[skillID];
 
                     // skill write in the quantity field of cells 9-16
@@ -225,7 +223,7 @@ namespace synthutils
         uint8 result      = SYNTHESIS_SUCCESS; // We assume by default that we succed
         uint8 hqtier      = 0;
         uint8 finalhqtier = 4;
-        bool  canHQ       = true;              // We assume by default that we can HQ
+        bool  canHQ       = true; // We assume by default that we can HQ
 
         double chance    = 0;
         double random    = 0;
@@ -277,7 +275,7 @@ namespace synthutils
                 }
                 else
                 {
-                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ. 
+                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ.
 
                     if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
                     {
@@ -433,7 +431,7 @@ namespace synthutils
             }
 
             uint16 maxSkill  = (PChar->RealSkills.rank[skillID] + 1) * 100; // Skill cap, depending on rank
-            uint16 charSkill = PChar->RealSkills.skill[skillID]; // Compare against real character skill, without image support, gear or moghancements
+            uint16 charSkill = PChar->RealSkills.skill[skillID];            // Compare against real character skill, without image support, gear or moghancements
 
             // We don't skill Up if the involved skill is caped (As a fail-safe measure, we also check if a naughty GM has set its skill over cap aswell)
             if (charSkill >= maxSkill)
@@ -441,10 +439,10 @@ namespace synthutils
                 continue; // Break current loop iteration.
             }
 
-            int16 baseDiff  = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
+            int16 baseDiff = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
 
             // We don't Skill Up if over 10 levels above synth skill. (Or at AND above synth skill in era)
-            if ((map_config.craft_modern_system == 1 && (baseDiff <= -11)) || (map_config.craft_modern_system == 0 && (baseDiff <= 0)))
+            if ((settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= -11)) || (!settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= 0)))
             {
                 continue; // Break current loop iteration.
             }
@@ -455,23 +453,25 @@ namespace synthutils
                 continue; // Break current loop iteration.
             }
 
-            //Section 2: Skill up equations and penalties
+            // Section 2: Skill up equations and penalties
             double skillUpChance = 0;
 
-            if (map_config.craft_modern_system == 1)
+            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
+
+            if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
             {
                 if (baseDiff > 0)
                 {
-                    skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
+                    skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
                 }
                 else
                 {
-                    skillUpChance = map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
+                    skillUpChance = craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
                 }
             }
             else
             {
-                skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+                skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
             }
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
@@ -564,9 +564,9 @@ namespace synthutils
                 }
 
                 // Do skill amount multiplier
-                if (map_config.craft_amount_multiplier > 1)
+                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1)
                 {
-                    skillUpAmount += skillUpAmount * map_config.craft_amount_multiplier;
+                    skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
                     if (skillUpAmount > 9)
                     {
                         skillUpAmount = 9;
@@ -580,17 +580,18 @@ namespace synthutils
                 }
 
                 // Section 4: Spezialization System (Craft delevel system over certain point)
+                uint16 craftCommonCap    = settings::get<uint16>("map.CRAFT_COMMON_CAP");
                 uint16 skillCumulation   = skillUpAmount;
-                uint8  skillHighest      = skillID;       // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
-                uint16 skillHighestValue = map_config.craft_common_cap;
+                uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
+                uint16 skillHighestValue = settings::get<uint16>("map.CRAFT_COMMON_CAP");
 
-                if ((charSkill + skillUpAmount) > map_config.craft_common_cap) // If server is using the specialization system
+                if ((charSkill + skillUpAmount) > craftCommonCap) // If server is using the specialization system
                 {
                     for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++) // Cycle through all skills
                     {
-                        if (PChar->RealSkills.skill[i] > map_config.craft_common_cap) // If the skill being checked is above the cap from wich spezialitation points start counting.
+                        if (PChar->RealSkills.skill[i] > craftCommonCap) // If the skill being checked is above the cap from wich spezialitation points start counting.
                         {
-                            skillCumulation += (PChar->RealSkills.skill[i] - map_config.craft_common_cap); // Add to the ammount of specialization points in use.
+                            skillCumulation += (PChar->RealSkills.skill[i] - craftCommonCap); // Add to the ammount of specialization points in use.
 
                             if (skillID != i && PChar->RealSkills.skill[i] > skillHighestValue) // Set the ID of the highest craft UNLESS it's the craft currently in use and if it's the highest skill.
                             {
@@ -603,7 +604,7 @@ namespace synthutils
 
                 // Section 5: Handle messages and save results.
 
-                // Skill Up addition: 
+                // Skill Up addition:
                 PChar->RealSkills.skill[skillID] += skillUpAmount;
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillID, skillUpAmount, 38));
 
@@ -617,7 +618,7 @@ namespace synthutils
                 charutils::SaveCharSkills(PChar, skillID);
 
                 // Skill Up removal if using spezialization system
-                if (skillCumulation > map_config.craft_specialization_points)
+                if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
                 {
                     PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
@@ -799,21 +800,26 @@ namespace synthutils
             if (slotid != 0xFF)
             {
                 CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotid);
-                PItem->setReserve(PItem->getReserve() + 1);
+                if (PItem != nullptr)
+                {
+                    PItem->setReserve(PItem->getReserve() + 1);
+                }
             }
         }
 
         // remove crystal
         auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(PChar->CraftContainer->getInvSlotID(0));
-        PItem->setReserve(PItem->getReserve() - 1);
+        if (PItem != nullptr)
+        {
+            PItem->setReserve(PItem->getReserve() - 1);
+        }
+
         charutils::UpdateItem(PChar, LOC_INVENTORY, PChar->CraftContainer->getInvSlotID(0), -1);
 
         uint8 result = calcSynthResult(PChar);
 
         uint8 invSlotID  = 0;
         uint8 tempSlotID = 0;
-        // uint16 itemID     = 0;
-        // uint32 quantity   = 0;
 
         for (uint8 slotID = 1; slotID <= 8; ++slotID)
         {
@@ -822,12 +828,12 @@ namespace synthutils
             {
                 invSlotID = tempSlotID;
 
-                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+                CItem* PCraftItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
-                if (PItem != nullptr)
+                if (PCraftItem != nullptr)
                 {
-                    PItem->setSubType(ITEM_LOCKED);
-                    PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NOSELECT));
+                    PCraftItem->setSubType(ITEM_LOCKED);
+                    PChar->pushPacket(new CInventoryAssignPacket(PCraftItem, INV_NOSELECT));
                 }
             }
         }
@@ -857,7 +863,7 @@ namespace synthutils
     int32 doSynthResult(CCharEntity* PChar)
     {
         uint8 m_synthResult = PChar->CraftContainer->getQuantity(0);
-        if (map_config.anticheat_enabled)
+        if (settings::get<bool>("map.ANTICHEAT_ENABLED"))
         {
             std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
             if (animationDuration < 5s)
@@ -912,9 +918,12 @@ namespace synthutils
                     if (invSlotID != 0xFF)
                     {
                         auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
-                        PItem->setSubType(ITEM_UNLOCKED);
-                        PItem->setReserve(PItem->getReserve() - removeCount);
-                        charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)removeCount);
+                        if (PItem != nullptr)
+                        {
+                            PItem->setSubType(ITEM_UNLOCKED);
+                            PItem->setReserve(PItem->getReserve() - removeCount);
+                            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)removeCount);
+                        }
                     }
                     invSlotID   = nextSlotID;
                     nextSlotID  = 0;
@@ -932,15 +941,17 @@ namespace synthutils
             {
                 if ((PItem->getFlag() & ITEM_FLAG_INSCRIBABLE) && (PChar->CraftContainer->getItemID(0) > 0x1080))
                 {
-                    int8 encodedSignature[12];
+                    int8 encodedSignature[SignatureStringLength];
+
+                    memset(&encodedSignature, 0, sizeof(encodedSignature));
                     PItem->setSignature(EncodeStringSignature((int8*)PChar->name.c_str(), encodedSignature));
 
                     char signature_esc[31]; // max charname: 15 chars * 2 + 1
-                    Sql_EscapeStringLen(SqlHandle, signature_esc, PChar->name.c_str(), strlen(PChar->name.c_str()));
+                    sql->EscapeStringLen(signature_esc, PChar->name.c_str(), strlen(PChar->name.c_str()));
 
                     char fmtQuery[] = "UPDATE char_inventory SET signature = '%s' WHERE charid = %u AND location = 0 AND slot = %u;\0";
 
-                    Sql_Query(SqlHandle, fmtQuery, signature_esc, PChar->id, invSlotID);
+                    sql->Query(fmtQuery, signature_esc, PChar->id, invSlotID);
                 }
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, invSlotID));
             }
@@ -957,21 +968,21 @@ namespace synthutils
             }
 
             // Calculate what craft this recipe "belongs" to based on highest skill required
-            uint32 skillType = 0;
+            uint32 skillType    = 0;
             uint32 highestSkill = 0;
             for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
             {
                 uint8 skillRequired = PChar->CraftContainer->getQuantity(skillID - 40);
                 if (skillRequired > highestSkill)
                 {
-                    skillType = skillID;
+                    skillType    = skillID;
                     highestSkill = skillRequired;
                 }
             }
 
-            RoeDatagram roeItemId = RoeDatagram("itemid", itemID);
-            RoeDatagram roeSkillType = RoeDatagram("skillType", skillType);
-            RoeDatagramList roeSynthResult({roeItemId, roeSkillType});
+            RoeDatagram     roeItemId    = RoeDatagram("itemid", itemID);
+            RoeDatagram     roeSkillType = RoeDatagram("skillType", skillType);
+            RoeDatagramList roeSynthResult({ roeItemId, roeSkillType });
 
             roeutils::event(ROE_EVENT::ROE_SYNTHSUCCESS, PChar, roeSynthResult);
         }

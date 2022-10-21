@@ -1,16 +1,12 @@
 -----------------------------------
 -- Zone: Alzadaal_Undersea_Ruins (72)
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/besieged")
-require("scripts/settings/main")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Alzadaal_Undersea_Ruins/IDs')
+require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -329, -2, 483, -323, 0, 489)    -- map 1 SE porter
     zone:registerRegion(2, -477, -2, 631, -471, 0, 636)    -- map 1 NW porter
     zone:registerRegion(3,  110, -2, -556, 116, 0, -551)   -- map 2 west porter (white)
@@ -38,7 +34,7 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(25, 134, -1, -584, 146, 1, -577)   -- transformations (quest)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == xi.zone.ARRAPAGO_REMNANTS then
@@ -51,13 +47,13 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.afterZoneIn = function(player)
+zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("1pa1")
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
@@ -139,10 +135,10 @@ zone_object.onRegionEnter = function(player, region)
     }
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 1 and option == 10 then -- start
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 1 then -- windows
@@ -157,7 +153,7 @@ zone_object.onEventUpdate = function(player, csid, option)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 2 then
         player:setCharVar("TransformationsProgress", 3)
     elseif csid == 3 then
@@ -171,4 +167,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

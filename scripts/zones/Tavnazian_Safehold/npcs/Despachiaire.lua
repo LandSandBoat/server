@@ -8,7 +8,6 @@
 --                "Tango with a Tracker"
 --                "Requiem of Sin"
 -- Involved in:   "Secrets of Ovens Lost"
--- https://github.com/project-topaz/topaz/issues/1481
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
@@ -18,53 +17,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local copCurrentMission = player:getCurrentMission(COP)
-    local copMissionStatus = player:getCharVar("PromathiaStatus")
-    local copMissions = xi.mission.id.cop
-
-    -- COP 2-2 "The Lost City"
-    if copCurrentMission == copMissions.THE_LOST_CITY and copMissionStatus == 0 then
-        player:startEvent(102)
-    -- COP 4-1 "Sheltering Doubt"
-    elseif copCurrentMission == copMissions.SHELTERING_DOUBT and copMissionStatus == 1 then
-        player:startEvent(108)
-    -- COP 4-4 "Slanderous Utterings" is an area approach handled in Tavnazian_Safehold/Zone.lua
-    -- COP 5-1 "Sheltering Doubt" (optional)
-    elseif
-        copCurrentMission == copMissions.THE_ENDURING_TUMULT_OF_WAR and
-        copMissionStatus == 0 and
-        player:getCharVar("COP_optional_CS_Despachaire") == 0
-    then
-        player:startEvent(117)
-    -- COP 5-3 "Three Paths"
-    elseif copCurrentMission == copMissions.THREE_PATHS then
-        if player:getCharVar("COP_Louverance_s_Path") == 0 then
-            player:startEvent(118)
-        else
-            player:startEvent(134)
-        end
-    -- COP Default dialogue change
-    elseif player:getCurrentMission(COP) > copMissions.DARKNESS_NAMED then
-        player:startEvent(315) -- "Jeuno offered its help"; TODO: might trigger as early as 5-2?
-    -- Default dialogue
-    else
-        player:startEvent(106)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if csid == 102 or csid == 108 then
-        player:setCharVar("PromathiaStatus", 2)
-    elseif csid == 117 then
-        player:setCharVar("COP_optional_CS_Despachaire", 1)
-    elseif csid == 118 then
-        player:setCharVar("COP_Louverance_s_Path", 1)
-    end
-
 end
 
 -- TODO: cutscenes including Despachiaire for reference

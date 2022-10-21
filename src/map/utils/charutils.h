@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARUTILS_H
 #define _CHARUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../entities/charentity.h"
 #include "../items/item_equipment.h"
@@ -48,6 +48,19 @@ enum class EMobDifficulty : uint8
     VeryTough,
     IncrediblyTough,
     MAX
+};
+
+// Capacity Bonuses applied based on RoE Completion
+// TODO: Add RoV Completion and Reive bonuses once implemented
+const std::vector<std::pair<uint16, uint8>> roeCapacityBonusRecords = {
+    { 1332, 10 }, // San d'Oria Missions (10%)
+    { 1352, 10 }, // Bastok Missions (10%)
+    { 1372, 10 }, // Windurst Missions (10%)
+    { 1392, 10 }, // Zilart Missions (10%)
+    { 1400, 10 }, // Chains of Promathia Missions (10%)
+    { 1409, 10 }, // Wings of the Goddess Missions (10%)
+    { 1415, 10 }, // Treasures of Aht Urhgan Missions (10%)
+    { 1430, 10 }, // Seekers of Adoulin Missions (10%
 };
 
 namespace charutils
@@ -99,8 +112,11 @@ namespace charutils
     uint8  AddItem(CCharEntity* PChar, uint8 LocationID, uint16 itemID, uint32 quantity = 1, bool silence = false);
     uint8  MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID);
     uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force = false);
+    void   DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID);
     void   CheckValidEquipment(CCharEntity* PChar);
     void   CheckEquipLogic(CCharEntity* PChar, SCRIPTTYPE ScriptType, uint32 param);
+    void   SaveJobChangeGear(CCharEntity* PChar);
+    void   LoadJobChangeGear(CCharEntity* PChar);
     void   EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
     void   UnequipItem(CCharEntity* PChar, uint8 equipSlotID,
                        bool update = true); // call with update == false to prevent calls to UpdateHealth() - used for correct handling of stats on armor swaps
@@ -110,6 +126,8 @@ namespace charutils
     void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
     void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemWeapon* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+    void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
+    void   EmptyRecycleBin(CCharEntity* PChar);
 
     bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // проверяем наличие ключевого предмета
     bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID);   // проверяем, было ли описание ключевого предмета прочитано
@@ -150,20 +168,21 @@ namespace charutils
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job);  // сохраняем уровень для выбранной профессий персонажа
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job);  // сохраняем опыт для выбранной профессии персонажа
-    void SaveCharEquip(CCharEntity* PChar);             // сохраняем экипировку и внешний вид персонажа
-    void SaveCharLook(CCharEntity* PChar);              // Saves a character's appearance based on style locking.
-    void SaveCharPosition(CCharEntity* PChar);          // сохраняем позицию персонажа
-    void SaveMissionsList(CCharEntity* PChar);          // Save the missions list
-    void SaveEminenceData(CCharEntity* PChar);          // Save Eminence Record (RoE) data
-    void SaveQuestsList(CCharEntity* PChar);            // сохраняем список ксевтов
-    void SaveFame(CCharEntity* PChar);                  // Save area fame / reputation
-    void SaveZonesVisited(CCharEntity* PChar);          // сохраняем посещенные зоны
-    void SaveKeyItems(CCharEntity* PChar);              // сохраняем ключевые предметы
-    void SaveCharInventoryCapacity(CCharEntity* PChar); // Save Character inventory capacity
-    void SaveSpell(CCharEntity* PChar, uint16 spellID); // сохраняем выученные заклинания
-    void DeleteSpell(CCharEntity* PChar, uint16 spellID);
+    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // сохраняем уровень для выбранной профессий персонажа
+    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // сохраняем опыт для выбранной профессии персонажа
+    void SaveCharEquip(CCharEntity* PChar);            // сохраняем экипировку и внешний вид персонажа
+    void SaveCharLook(CCharEntity* PChar);             // Saves a character's appearance based on style locking.
+    void SaveCharPosition(CCharEntity* PChar);         // сохраняем позицию персонажа
+    // void SaveCharLinkshells(CCharEntity* PChar);            // TODO
+    void SaveMissionsList(CCharEntity* PChar);                 // Save the missions list
+    void SaveEminenceData(CCharEntity* PChar);                 // Save Eminence Record (RoE) data
+    void SaveQuestsList(CCharEntity* PChar);                   // сохраняем список ксевтов
+    void SaveFame(CCharEntity* PChar);                         // Save area fame / reputation
+    void SaveZonesVisited(CCharEntity* PChar);                 // сохраняем посещенные зоны
+    void SaveKeyItems(CCharEntity* PChar);                     // сохраняем ключевые предметы
+    void SaveCharInventoryCapacity(CCharEntity* PChar);        // Save Character inventory capacity
+    void SaveSpell(CCharEntity* PChar, uint16 spellID);        // сохраняем выученные заклинания
+    void DeleteSpell(CCharEntity* PChar, uint16 spellID);      //
     void SaveLearnedAbilities(CCharEntity* PChar);             // saved learned abilities (corsair rolls)
     void SaveTitles(CCharEntity* PChar);                       // сохраняем заслуженные звания
     void SaveCharStats(CCharEntity* PChar);                    // сохраняем флаги, текущие значения жихней, маны и профессий
@@ -171,6 +190,8 @@ namespace charutils
     void SaveMentorFlag(CCharEntity* PChar);                   // saves the char's mentor flag
     void SaveJobMasterDisplay(CCharEntity* PChar);             // Saves the char's job master display status
     void SaveMenuConfigFlags(CCharEntity* PChar);              // saves the char's unnamed flags
+    void SaveChatFilterFlags(CCharEntity* PChar);              // saves the char's chat filters
+    void SaveLanguages(CCharEntity* PChar);                    // saves the char's language preference
     void SaveCharNation(CCharEntity* PChar);                   // Save the character's nation of allegiance.
     void SaveCampaignAllegiance(CCharEntity* PChar);           // Save the character's campaign allegiance.
     void SaveCharMoghancement(CCharEntity* PChar);             // Save the character's current moghancement
@@ -179,6 +200,8 @@ namespace charutils
     void SaveDeathTime(CCharEntity* PChar);                    // Saves when this character last died.
     void SavePlayTime(CCharEntity* PChar);                     // Saves this characters total play time.
     bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise.
+
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status. Used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM.
 
     float AddExpBonus(CCharEntity* PChar, float exp);
 
@@ -209,9 +232,16 @@ namespace charutils
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
-    int32 GetCharVar(CCharEntity* PChar, const char* var);
-    void  SetCharVar(CCharEntity* PChar, const char* var, int32 value);
-    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix);
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var);
+    void  SetCharVar(uint32 charId, std::string const& var, int32 value);
+    void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
+    int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix);
+    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
+    void  ClearCharVarFromAll(std::string const& varName, bool localOnly = false);
+    void  IncrementCharVar(CCharEntity* PChar, std::string const& var, int32 value);
+
+    int32 FetchCharVar(uint32 charId, std::string const& var);
+    void  PersistCharVar(uint32 charId, std::string const& var, int32 value);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
     uint16 getWideScanRange(CCharEntity* PChar);
@@ -220,6 +250,13 @@ namespace charutils
     void SendTimerPacket(CCharEntity* PChar, duration dur);
     void SendClearTimerPacket(CCharEntity* PChar);
 
+    time_t getTraverserEpoch(CCharEntity* PChar);
+    void   setTraverserEpoch(CCharEntity* PChar);
+    uint32 getClaimedTraverserStones(CCharEntity* PChar);
+    void   addClaimedTraverserStones(CCharEntity* PChar, uint16 numStones);
+    void   setClaimedTraverserStones(CCharEntity* PChar, uint16 stoneTotal);
+    uint32 getAvailableTraverserStones(CCharEntity* PChar);
+
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);
 
@@ -227,6 +264,10 @@ namespace charutils
     uint8 getItemLevelDifference(CCharEntity* PChar);
     uint8 getMainhandItemLevel(CCharEntity* PChar);
     uint8 getRangedItemLevel(CCharEntity* PChar);
+
+    bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
+
+    uint32 getCharIdFromName(std::string const& name);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

@@ -10,20 +10,20 @@
 -- The math for mob version may be different, it's presumed to be the same here.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SKILL_RECOVERS_HP)
     -- Todo: verify/correct maths
     return xi.mobskills.mobHealMove(mob, math.floor(mob:getHP()/7)*2)
 end
 
-return mobskill_object
+return mobskillObject

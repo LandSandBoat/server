@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getFameLevel(JEUNO) >= 4 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
         player:getCharVar("saveMySisterVar") == 1
     then
         player:startEvent(159) -- For "Save my Sister" quest

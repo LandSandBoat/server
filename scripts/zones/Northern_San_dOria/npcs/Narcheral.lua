@@ -5,7 +5,7 @@
 -- !pos 129 -11 126 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= xi.settings.AF1_QUEST_LEVEL then
+    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
         player:startEvent(689) -- Start quest "Messenger from Beyond"
     else
         player:startEvent(688) -- Standard dialog
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(17422)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17422) -- Blessed Hammer
             player:tradeComplete()
-            player:addFame(SANDORIA, 20)
+            player:addFame(xi.quest.fame_area.SANDORIA, 20)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
         end
     elseif csid == 691 then
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(14091)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14091) -- Healer's Duckbills
             player:tradeComplete()
-            player:addFame(SANDORIA, 40)
+            player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
         end
     elseif csid == 692 then
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(12640)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12640) -- Healer's Briault
             player:tradeComplete()
-            player:addFame(SANDORIA, 60)
+            player:addFame(xi.quest.fame_area.SANDORIA, 60)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
         end
     end

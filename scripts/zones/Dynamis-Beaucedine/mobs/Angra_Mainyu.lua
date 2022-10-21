@@ -3,7 +3,7 @@
 --  Mob: Angra Mainyu
 -- Note: Mega Boss
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/dynamis")
 require("scripts/globals/status")
 -----------------------------------
@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     if mob:getHPP() <= 25 then
         return 244 -- Death
     else
@@ -50,8 +50,8 @@ entity.onMonsterMagicPrepare = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    dynamis.megaBossOnDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.dynamis.megaBossOnDeath(mob, player, optParams)
 end
 
 return entity

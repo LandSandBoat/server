@@ -22,7 +22,7 @@
 #ifndef _CCSPOSITIONPACKET_H
 #define _CCSPOSITIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -21,12 +21,8 @@ end
 entity.onTrigger = function(player, npc)
     local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
 
-    -- THREE PATHS (ULMIA)
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3 then
-        player:startEvent(876)
-
     -- WAKING DREAMS
-    elseif player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
+    if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
         local availRewards = 0
             + (player:hasItem(17599) and 1 or 0) -- Diabolos's Pole
             + (player:hasItem(14814) and 2 or 0) -- Diabolos's Earring
@@ -53,16 +49,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- THREE PATHS
-    if csid == 876 then
-        player:setCharVar("COP_Ulmia_s_Path", 4)
-
     -- WAKING DREAMS
-    elseif csid == 918 then
+    if csid == 918 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_DREAM_INCENSE)
     elseif csid == 920 then
-        local reward = {fame = 0}
+        local reward = { fame = 0 }
 
         if option == 1 and not player:hasItem(17599) then
             reward.item = 17599
@@ -79,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
         end
 
-        if npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", getMidnight())
         end

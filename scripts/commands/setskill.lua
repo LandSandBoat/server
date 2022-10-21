@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setskill <skill name or ID> <skill level> {player}")
+    player:PrintToPlayer("!setskill <skill name or ID> <skill level> (player)")
 end
 
 function onTrigger(player, skillName, skillLV, target)
@@ -27,7 +27,6 @@ function onTrigger(player, skillName, skillLV, target)
         error(player, "You must specify the new skill level to set.")
         return
     end
-
 
     local skillID = tonumber(skillName) or xi.skill[string.upper(skillName)]
     local targ

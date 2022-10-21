@@ -48,7 +48,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
         if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE) == QUEST_COMPLETED then
             if math.random() < 0.5 then
                 player:startEvent(582)
@@ -58,8 +58,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(585)
         end
-    else
-        player:startEvent(584)
     end
 end
 

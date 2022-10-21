@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 134
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -19,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZ
 quest.reward =
 {
     fame = 50,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
 }
 
 quest.sections =
@@ -30,7 +28,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 76 and
                 player:getLevelCap() == 80 and
-                xi.settings.MAX_LEVEL >= 85
+                xi.settings.main.MAX_LEVEL >= 85
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -38,7 +36,7 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(10045, 0, 1, 2, 0)
+                    return quest:progressEvent(10045, 0, 1, 2, 0) -- Confirmed.
                 end,
             },
 
@@ -69,7 +67,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 5}}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.KINDREDS_CREST, 5 } }) and
                         player:getMeritCount() > 3
                     then
                         return quest:progressEvent(10136)

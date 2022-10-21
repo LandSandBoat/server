@@ -22,7 +22,7 @@
 #ifndef _CFISHINGPACKET_H
 #define _CFISHINGPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

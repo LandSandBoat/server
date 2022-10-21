@@ -1,16 +1,21 @@
 ﻿/*
 ===========================================================================
-  Copyright (c) 2020 Topaz Dev Teams
+
+  Copyright (c) 2022 LandSandBoat Dev Teams
+
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
+
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
+
 ===========================================================================
 */
 #include "notoriety_container.h"
@@ -26,25 +31,35 @@ CNotorietyContainer::CNotorietyContainer(CBattleEntity* owner)
 
 std::set<CBattleEntity*>::iterator CNotorietyContainer::begin()
 {
+    TracyZoneScoped;
     return m_Lookup.begin();
 }
 
 std::set<CBattleEntity*>::iterator CNotorietyContainer::end()
 {
+    TracyZoneScoped;
     return m_Lookup.end();
 }
 
 void CNotorietyContainer::add(CBattleEntity* entity)
 {
-    m_Lookup.insert(entity);
+    TracyZoneScoped;
+    if (m_POwner && entity && entity->allegiance != m_POwner->allegiance)
+    {
+        m_Lookup.insert(entity);
+    }
 }
 
 void CNotorietyContainer::remove(CBattleEntity* entity)
 {
-    auto entity_itr = m_Lookup.find(entity);
-    if (entity_itr != m_Lookup.end())
+    TracyZoneScoped;
+    if (m_POwner && entity)
     {
-        m_Lookup.erase(*entity_itr);
+        auto entity_itr = m_Lookup.find(entity);
+        if (entity_itr != m_Lookup.end())
+        {
+            m_Lookup.erase(*entity_itr);
+        }
     }
 }
 
@@ -52,7 +67,7 @@ bool CNotorietyContainer::hasEnmity()
 {
     TracyZoneScoped;
     // Make sure the container is up to date before reporting
-    if (!m_Lookup.empty())
+    if (m_POwner && !m_Lookup.empty())
     {
         std::vector<CBattleEntity*> toRemove;
         for (CBattleEntity* entry : *this)
@@ -79,5 +94,6 @@ bool CNotorietyContainer::hasEnmity()
 
 std::size_t CNotorietyContainer::size()
 {
+    TracyZoneScoped;
     return m_Lookup.size();
 }

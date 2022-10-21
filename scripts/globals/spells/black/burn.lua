@@ -2,18 +2,18 @@
 -- Spell: Burn
 -- Deals fire damage that lowers an enemy's intelligence and gradually reduces its HP.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
 
     if (target:getStatusEffect(xi.effect.DROWN) ~= nil) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
@@ -48,7 +48,7 @@ spell_object.onSpellCast = function(caster, target, spell)
                     target:delStatusEffect(xi.effect.BURN)
                 end
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
-                local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
+                local duration = math.floor(xi.settings.main.ELEMENTAL_DEBUFF_DURATION * resist)
                 duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
 
                 local mbonus = caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT)
@@ -63,4 +63,4 @@ spell_object.onSpellCast = function(caster, target, spell)
 
 end
 
-return spell_object
+return spellObject

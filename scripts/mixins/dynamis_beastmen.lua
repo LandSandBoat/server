@@ -7,7 +7,8 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
-    local procjobs = {
+    local procjobs =
+    {
         [xi.job.WAR] = "ws",
         [xi.job.MNK] = "ja",
         [xi.job.WHM] = "ma",
@@ -37,28 +38,28 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     -- "Without a proc, the coin drop rate is very low (~10%)"
     local thCurrency =
     {
-        [0] = {single = 100, hundo =  5},
-        [1] = {single = 115, hundo = 10},
-        [2] = {single = 145, hundo = 20},
-        [3] = {single = 190, hundo = 35},
-        [4] = {single = 250, hundo = 50},
+        [0] = { single = 100, hundo =  5 },
+        [1] = { single = 115, hundo = 10 },
+        [2] = { single = 145, hundo = 20 },
+        [3] = { single = 190, hundo = 35 },
+        [4] = { single = 250, hundo = 50 },
     }
 
     dynamisBeastmenMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
         if procjobs[target:getMainJob()] == "ma" and math.random(0, 99) < 8 and target:getLocalVar("dynamis_proc") == 0 then
-            dynamis.procMonster(target, caster)
+            xi.dynamis.procMonster(target, caster)
         end
     end)
 
     dynamisBeastmenMob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
         if procjobs[target:getMainJob()] == "ws" and math.random(0, 99) < 25 and target:getLocalVar("dynamis_proc") == 0 then
-            dynamis.procMonster(target, user)
+            xi.dynamis.procMonster(target, user)
         end
     end)
 
     dynamisBeastmenMob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(mob, user, ability, action)
         if procjobs[mob:getMainJob()] == "ja" and math.random(0, 99) < 20 and mob:getLocalVar("dynamis_proc") == 0 then
-            dynamis.procMonster(mob, user)
+            xi.dynamis.procMonster(mob, user)
         end
     end)
 

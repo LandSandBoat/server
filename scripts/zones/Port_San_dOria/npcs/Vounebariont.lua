@@ -3,7 +3,7 @@
 --  NPC: Vounebariont
 -- Starts and Finishes Quest: Thick Shells
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
@@ -22,7 +22,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getFameLevel(SANDORIA) >= 2) then
+    if (player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2) then
         player:startEvent(516)
     else
         player:startEvent(568)
@@ -42,15 +42,15 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 514) then
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
-            player:addFame(SANDORIA, 30)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
         else
-            player:addFame(SANDORIA, 5)
+            player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
 
         player:tradeComplete()
         player:addTitle(xi.title.BUG_CATCHER)
-        player:addGil(xi.settings.GIL_RATE*750)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*750)
+        player:addGil(xi.settings.main.GIL_RATE*750)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*750)
     end
 
 end

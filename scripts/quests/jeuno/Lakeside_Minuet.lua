@@ -10,7 +10,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/status')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
@@ -23,6 +23,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.TROUPE_BRILIOTH_DANCER,
 }
 
@@ -31,8 +32,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and
-                xi.settings.ENABLE_WOTG == 1
+                player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
+                xi.settings.main.ENABLE_WOTG == 1
         end,
 
         [xi.zone.UPPER_JEUNO] =

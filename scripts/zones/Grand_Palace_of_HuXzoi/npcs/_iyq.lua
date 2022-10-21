@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cop = player:getCurrentMission(COP)
+    local cop = player:getCurrentMission(xi.mission.log_id.COP)
     local copStat = player:getCharVar("PromathiaStatus")
 
     if (cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 1 and not GetMobByID(ID.mob.IXGHRAH):isSpawned()) then

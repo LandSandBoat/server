@@ -3,14 +3,14 @@
 -- Scroll of Raise II
 -- Teaches the white magic Raise II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(13)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(13)
 end
 
-return item_object
+return itemObject

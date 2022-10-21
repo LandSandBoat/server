@@ -9,7 +9,7 @@
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
-    local WildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar("WildcatSandy")
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- CIRCLE OF TIME (Bard AF3)
@@ -45,11 +45,11 @@ entity.onTrigger = function(player, npc)
         end
 
     -- LURE OF THE WILDCAT
-    elseif (lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 19)) then
+    elseif (lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatSandy, 19)) then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
-    elseif (herMajestysGarden == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 4) then
+    elseif (herMajestysGarden == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4) then
         player:startEvent(84)
     elseif (herMajestysGarden == QUEST_ACCEPTED) then
         player:startEvent(82)
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
-        player:addFame(SANDORIA, 30)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
     end
 end

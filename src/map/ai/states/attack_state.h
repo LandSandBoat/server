@@ -51,6 +51,7 @@ public:
 
 protected:
     virtual void UpdateTarget(uint16 = 0) override;
+    virtual void UpdateTarget(CBaseEntity* target) override;
     bool         CanAttack(CBattleEntity* PTarget);
 
     bool AttackReady();

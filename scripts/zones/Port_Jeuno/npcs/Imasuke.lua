@@ -5,7 +5,7 @@
 -- !pos -165 11 94 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
     -- THE ANTIQUE COLLECTOR
     elseif
         theAntiqueCollector == QUEST_AVAILABLE and
-        player:getFameLevel(JEUNO) >= 3
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3
     then
         player:startEvent(13) -- Start quest
 
@@ -71,11 +71,11 @@ entity.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_DELKFUTTS_TOWER)
         else
-            player:addGil(2000 * xi.settings.GIL_RATE)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.GIL_RATE)
-            player:addExp(2000 * xi.settings.EXP_RATE)
+            player:addGil(2000 * xi.settings.main.GIL_RATE)
+            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.main.GIL_RATE)
+            player:addExp(2000 * xi.settings.main.EXP_RATE)
         end
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 

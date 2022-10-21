@@ -10,17 +10,17 @@
 -- Shell lowers the damage of this, and items like Jelly Ring can get you killed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     -- remove all by 5%
     local baseDamage = 0
@@ -42,4 +42,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return damage
 end
 
-return mobskill_object
+return mobskillObject

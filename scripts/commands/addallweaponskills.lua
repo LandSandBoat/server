@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addallweaponskills {player}")
+    player:PrintToPlayer("!addallweaponskills (player)")
 end
 
 function onTrigger(player, target)
@@ -29,7 +29,7 @@ function onTrigger(player, target)
     end
 
     -- add all learned weaponskills
-    for i = 1, 48 do
+    for i = 1, 49 do
         targ:addLearnedWeaponskill(i)
     end
     player:PrintToPlayer(string.format("%s now has all learned weaponskills.", targ:getName()))

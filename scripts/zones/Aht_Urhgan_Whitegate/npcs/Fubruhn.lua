@@ -22,7 +22,7 @@
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/missions")
@@ -50,14 +50,13 @@ entity.onTrade = function(player, npc, trade)
     local numBronze = trade:getItemQty(2184)
     local numMythril = trade:getItemQty(2186)
     local numGold = trade:getItemQty(2187)
-    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         if numBronze > 0 and numMythril == 0 and numGold == 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
                 -- remove bronze
                 player:tradeComplete()
                 -- send event
                 player:startEvent(601, xi.moghouse.getMogLockerExpiryTimestamp(player))
-                -- print("Expanded lease with "..numBronze.." bronze.")
             end
         elseif numGold > 0 or numMythril > 0 then
             -- see if we can expand the size
@@ -92,13 +91,12 @@ entity.onTrigger = function(player, npc)
     -- if < mission 2 then
     --      player:startEvent(600)
     -- else
-    if player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
+    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         local accessType = xi.moghouse.getMogLockerAccessType(player)
         local mogLockerExpiryTimestamp = xi.moghouse.getMogLockerExpiryTimestamp(player)
 
         if mogLockerExpiryTimestamp == nil then
             -- a nil timestamp means they haven't unlocked it yet. We're going to unlock it by merely talking to this NPC.
-            --print("Unlocking mog locker for "..player:getName())
             mogLockerExpiryTimestamp = xi.moghouse.unlockMogLocker(player)
             accessType = xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALLAREAS)
         end

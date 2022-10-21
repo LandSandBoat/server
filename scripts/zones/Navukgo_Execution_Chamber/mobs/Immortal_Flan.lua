@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobEngaged = function(mob, target)
     local bf = mob:getBattlefield()
     local mobOffset = (bf:getArea() - 1) * 7
-    if not (bf:getLocalVar('flans_spawned') == 1) then
+    if bf:getLocalVar('flans_spawned') ~= 1 then
         local entrants = bf:getLocalVar('num_entrants')
         if entrants >= 4 then
             GetMobByID(ID.mob.IMMORTAL_FLAN2 + mobOffset):spawn()
@@ -34,7 +34,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

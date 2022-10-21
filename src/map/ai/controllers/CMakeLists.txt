@@ -1,24 +1,17 @@
-set(SOURCES
-    automaton_controller.cpp
-    automaton_controller.h
-    controller.cpp
-    controller.h
-    mob_controller.cpp
-    mob_controller.h
-    pet_controller.cpp
-    pet_controller.h
-    player_charm_controller.cpp
-    player_charm_controller.h
-    player_controller.cpp
-    player_controller.h
-    trust_controller.cpp
-    trust_controller.h)
-
-add_library(ai_controllers STATIC ${SOURCES})
-
-target_link_libraries(ai_controllers
-    PUBLIC
-    common
-    project_options
-    #project_warnings
+set(AI_CONTROLLER_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/automaton_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/automaton_controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/mob_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mob_controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/pet_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pet_controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/player_charm_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/player_charm_controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/player_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/player_controller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/trust_controller.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/trust_controller.h
+    PARENT_SCOPE
 )

@@ -27,7 +27,7 @@ end
 quest.reward =
 {
     fame     = 10,
-    fameArea = WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.STAR_ONION_BRIGADIER,
 }
 
@@ -51,7 +51,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(WINDURST) >= 3 and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
                         not quest:getMustZone(player)
                     then
                         if player:hasKeyItem(xi.ki.OLD_RING) then

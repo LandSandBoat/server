@@ -5,17 +5,16 @@
 -- Recast Time: 00:05:00
 -- Duration: 0:03:00
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.IMPETUS, 2, 0, 180)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.monk.useImpetus(player, target, ability)
 end
 
-return ability_object
+return abilityObject

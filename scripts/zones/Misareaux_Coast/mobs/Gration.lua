@@ -2,7 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Gration
 -----------------------------------
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("fomorHateAdj", -2)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

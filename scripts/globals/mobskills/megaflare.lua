@@ -7,13 +7,13 @@
 --  Range:
 --  Notes: Used by Bahamut every 10% of its HP (except at 10%), but can use at will when under 10%.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
 
     if (mobhp <= 10 and mob:getLocalVar("GigaFlare") ~= 0) then -- make sure Gigaflare has happened first - don't want a random Megaflare to block it.
@@ -23,9 +23,9 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local MegaFlareQueue = mob:getLocalVar("MegaFlareQueue") - 1 -- decrement the amount of queued Megaflares.
-    mob:setLocalVar("MegaFlareQueue", MegaFlareQueue)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local megaFlareQueue = mob:getLocalVar("MegaFlareQueue") - 1 -- decrement the amount of queued Megaflares.
+    mob:setLocalVar("MegaFlareQueue", megaFlareQueue)
     mob:setLocalVar("FlareWait", 0) -- reset the variables for Megaflare.
     mob:setLocalVar("tauntShown", 0)
     mob:SetMobAbilityEnabled(true) -- re-enable the other actions on success
@@ -42,4 +42,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

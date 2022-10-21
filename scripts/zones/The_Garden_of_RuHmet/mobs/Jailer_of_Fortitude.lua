@@ -3,8 +3,8 @@
 --   NM: Jailer of Fortitude
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/settings/main")
+mixins = { require("scripts/mixins/job_special") }
+require("scripts/globals/settings")
 require("scripts/globals/limbus")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.INVINCIBLE, cooldown = 180, hpp = math.random(90, 95)}, -- "Has access to Invincible, which it may use several times."
+            { id = xi.jsa.INVINCIBLE, cooldown = 180, hpp = math.random(90, 95) }, -- "Has access to Invincible, which it may use several times."
         },
     })
 
@@ -26,10 +26,10 @@ end
 
 entity.onMobFight = function(mob, target)
     local delay = mob:getLocalVar("delay")
-    local LastCast = mob:getLocalVar("LAST_CAST")
+    local lastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
 
-    if (mob:getBattleTime() - LastCast > 30) then
+    if (mob:getBattleTime() - lastCast > 30) then
         mob:setLocalVar("COPY_SPELL", 0)
         mob:setLocalVar("delay", 0)
     end
@@ -59,7 +59,7 @@ entity.onMagicHit = function(caster, target, spell)
     return 1
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Despawn the pets if alive
     DespawnMob(ID.mob.KFGHRAH_WHM)
     DespawnMob(ID.mob.KFGHRAH_BLM)

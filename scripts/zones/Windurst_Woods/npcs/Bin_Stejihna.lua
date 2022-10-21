@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local regionOwner = GetRegionOwner(xi.region.ZULKHEIM)
 
-    local RegionOwner = GetRegionOwner(xi.region.ZULKHEIM)
-    if RegionOwner ~= xi.nation.WINDURST then
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.BIN_STEJIHNA_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.BIN_STEJIHNA_OPEN_DIALOG)
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
             table.insert(stock, 1840)
         end
 
-        xi.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
     end
 end
 

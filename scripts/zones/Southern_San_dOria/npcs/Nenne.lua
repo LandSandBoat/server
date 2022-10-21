@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: To Cure a Cough
 -- !pos -114 -6 102 230
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.COUGH_MEDICINE)
         player:addKeyItem(xi.ki.SCROLL_OF_TREASURE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCROLL_OF_TREASURE)
-        player:addFame(SANDORIA, 30)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     end
 

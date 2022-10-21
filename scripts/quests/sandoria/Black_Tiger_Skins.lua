@@ -17,6 +17,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACK_TIG
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     item = xi.items.TIGER_STOLE,
     itemParams = { fromTrade = true },
     title = xi.title.CAT_SKINNER,
@@ -27,7 +28,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(SANDORIA) >= 3 and
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
                 player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
         end,
 
@@ -75,7 +76,7 @@ quest.sections =
             ['Hanaa_Punaa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{ xi.items.TIGER_HIDE, 3 }}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.TIGER_HIDE, 3 } }) then
                         return quest:progressEvent(577)
                     end
                 end,
@@ -96,7 +97,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getFameLevel(SANDORIA) >= 3
+            return status == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

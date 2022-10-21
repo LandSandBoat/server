@@ -6,8 +6,6 @@ xi.ally =
     ASSIST_RANDOM = 2,
 
     startAssist = function(entity, assistMode)
-        -- print("Ally Assist Initiated")
-
         if assistMode == nil then
             assistMode = xi.ally.ASSIST_PLAYER
         end
@@ -24,7 +22,6 @@ xi.ally =
             players = entity:getInstance():getChars()
         end
 
-        -- print("start inserting mob")
         local targetMobs = {}
         for i, mob in pairs(mobs) do
             if mob:isSpawned() and mob:isAlive() then
@@ -32,7 +29,6 @@ xi.ally =
                     table.insert(allies, mob)
                 else
                     table.insert(targetMobs, mob)
-                    -- print("inserting mob")
                 end
             end
         end
@@ -45,12 +41,10 @@ xi.ally =
             for i, player in pairs(players) do
                 local battleTarget = player:getTarget()
                 if battleTarget ~= nil then
-                    assistTarget = battleTarget:getShortID()
+                    assistTarget = battleTarget:getTargID()
                     break
                 end
             end
-
-            -- printf("xi.ally.startAssist: target = %u (xi.ally.ASSIST_PLAYER)", assistTarget)
 
             -- Attack their target if found. If none found, we'll fall to xi.ally.ASSIST_RANDOM.
             -- A variety of reasons could cause this - players have hate but are not engaged is one.
@@ -75,7 +69,7 @@ xi.ally =
         end
 
         for _, ally in ipairs(allies) do
-            ally:engage(target:getShortID())
+            ally:engage(target:getTargID())
         end
     end
 }

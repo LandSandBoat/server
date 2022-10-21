@@ -12,12 +12,12 @@
 -- 1.0625    1.0625    1.0625
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 4
@@ -30,7 +30,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1.05; params.atk200 = 1.05; params.atk300 = 1.05
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/25607.html
         params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
         params.dex_wsc = 0.7 + (player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.03)
@@ -46,4 +46,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
 end
 
-return weaponskill_object
+return weaponskillObject

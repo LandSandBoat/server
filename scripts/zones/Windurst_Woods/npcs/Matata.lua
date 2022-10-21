@@ -13,20 +13,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local IAS = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
-    local IASvar = player:getCharVar("IASvar")
-    local CB = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
+    local inAStew      = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
+    local iasVar       = player:getCharVar("IASvar")
+    local chocobilious = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
 
     -- IN A STEW
-    if IAS == QUEST_ACCEPTED and IASvar == 1 then
+    if inAStew == QUEST_ACCEPTED and iasVar == 1 then
         player:startEvent(233, 0, 0, 4545) -- In a Stew in progress
-    elseif IAS == QUEST_ACCEPTED and IASvar == 2 then
+    elseif inAStew == QUEST_ACCEPTED and iasVar == 2 then
         player:startEvent(237) -- In a Stew reminder
-    elseif IAS == QUEST_COMPLETED then
+    elseif inAStew == QUEST_COMPLETED then
         player:startEvent(241) -- new dialog after In a Stew
 
     -- CHOCOBILIOUS
-    elseif CB == QUEST_COMPLETED then
+    elseif chocobilious == QUEST_COMPLETED then
         player:startEvent(226) -- Chocobilious complete
 
     -- STANDARD DIALOG

@@ -17,8 +17,9 @@ class HXIClient:
 
         # Read from version.conf default
         if client_str == '':
-            with open('conf/default/version.conf') as f:
-                client_str = f.readlines()[1].split(":")[1].strip()
+            with open('settings/default/login.lua') as f:
+                settings_file = f.read()
+                client_str = re.search(r'CLIENT_VER = "(.*?)"', settings_file)[1]
 
         print("Client version:", client_str)
         self.client_str = client_str
@@ -191,9 +192,6 @@ class HXIClient:
             data = self.lobbyview_sock.recv(72) #0x48
             if len(data) != 0x48:
                 raise Exception(f"Did not get back 72 bytes. Got {len(data)}. => {data}")
-            status_code = util.unpack_uint16(data, 32)
-            #if status_code != 305 and status_code != 321:
-            #    raise Exception("Did not get acceptable status code")
         except Exception as ex:
             print(f'Error communicating lobby 0xA2 packet. Error: {status_code}')
             print(ex)
@@ -245,15 +243,17 @@ class HXIClient:
 
     def parse_incoming_packet(self, data):
         #print(f'recv: {data.hex()}')
-        server_packet_id = util.unpack_uint16(data, 0)
-        client_packet_id = util.unpack_uint16(data, 2)
-        packet_time = util.unpack_uint32(data, 8)
+        #server_packet_id = util.unpack_uint16(data, 0)
+        #client_packet_id = util.unpack_uint16(data, 2)
+        #packet_time = util.unpack_uint32(data, 8)
 
         # De-blowfish
 
         # 'zlib' decompress
 
         # Handle packet
+
+        pass
 
     def stop_map_listener(self):
         print('Closing listener to map server')

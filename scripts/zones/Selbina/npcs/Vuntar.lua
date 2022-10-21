@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)
-            player:addFame(SELBINA, 30)
+            player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
         end
 
         if option == 1 then

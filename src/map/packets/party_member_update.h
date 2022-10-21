@@ -22,7 +22,7 @@
 #ifndef _CPARTYMEMBERUPDATEPACKET_H
 #define _CPARTYMEMBERUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

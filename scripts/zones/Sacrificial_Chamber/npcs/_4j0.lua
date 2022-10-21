@@ -10,25 +10,21 @@ local ID = require("scripts/zones/Sacrificial_Chamber/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    TradeBCNM(player, npc, trade)
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (EventTriggerBCNM(player, npc)) then
-        return 1
-    else
+    if not xi.bcnm.onTrigger(player, npc) then
         player:messageSpecial(ID.text.DOOR_SHUT)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (EventFinishBCNM(player, csid, option)) then
-        return
-    end
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

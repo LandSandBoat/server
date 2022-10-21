@@ -9,8 +9,6 @@
 -- Zokima-Rokima       : !pos 0 -16 124 239
 -- Hakkuru-Rinkuru     : !pos -111 -4 101 240
 -- Gate: Magical Gizmo : !pos -291 0 -659 194
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
@@ -47,7 +45,7 @@ local function areJacksSpawned()
     return false
 end
 
-local jackOnMobDeath = function(mob, player, isKiller, noKiller)
+local jackOnMobDeath = function(mob, player, optParams)
     local areMobsDefeated = true
 
     if player:getMissionStatus(mission.areaId) ~= 1 then

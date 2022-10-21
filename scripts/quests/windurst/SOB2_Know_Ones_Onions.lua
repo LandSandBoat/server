@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES
 quest.reward =
 {
     fame     = 10,
-    fameArea = WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.items.SCROLL_OF_BLAZE_SPIKES,
     title    = xi.title.SOB_SUPER_HERO,
 }
@@ -91,7 +91,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.WILD_ONION, 4}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.WILD_ONION, 4 } }) then
                         return quest:progressEvent(398, 0, xi.items.WILD_ONION) -- Trade in time. Quest goes on.
                     end
                 end,
@@ -194,7 +194,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.WILD_ONION, 4}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.WILD_ONION, 4 } }) then
                         return quest:progressEvent(390) -- Quest Complete.
                     end
                 end,

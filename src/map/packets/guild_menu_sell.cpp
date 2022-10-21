@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -35,8 +35,11 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
     this->setType(0x85);
     this->setSize(0xF8);
 
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PGuild == nullptr);
+    if (PChar == nullptr || PGuild == nullptr)
+    {
+        ShowError("CGuildMenuSellPacket::CGuildMenuSellPacket() - PChar or PGuild was null.");
+        return;
+    }
 
     uint8 ItemCount   = 0;
     uint8 PacketCount = 0;
@@ -44,6 +47,12 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
     for (uint8 SlotID = 1; SlotID <= PGuild->GetSize(); ++SlotID)
     {
         CItemShop* PItem = (CItemShop*)PGuild->GetItem(SlotID);
+
+        if (PItem == nullptr)
+        {
+            ShowError("CGuildMenuSellPacket::CGuildMenuSellPacket() - PItem was null for SlotID: %d", SlotID);
+            return;
+        }
 
         if (ItemCount == 30)
         {

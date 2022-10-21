@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_AVAILABLE
     then
-        if player:getFameLevel(NORG) >= 2 then
+        if player:getFameLevel(xi.quest.fame_area.NORG) >= 2 then
             player:startEvent(167) -- Start quest
         else
             player:startEvent(168) -- dialog without correct tenshodo/norg fame
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.TRADER_OF_RENOWN)
         player:addKeyItem(xi.ki.CLOCK_TOWER_OIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CLOCK_TOWER_OIL)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
     end

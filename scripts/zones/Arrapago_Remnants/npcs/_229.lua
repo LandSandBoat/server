@@ -24,7 +24,7 @@ entity.onEventFinish = function(player, csid, option, door)
         SpawnMob(ID.mob[3].qiqirn_mine_1, instance)
         for i, v in pairs(ID.npc[3][1]) do
             local npc = GetNPCByID(v, instance)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
         end
     end
 end

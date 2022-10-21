@@ -35,7 +35,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
-                        (npcUtil.tradeHasExactly(trade, {{ 'gil', 1000 }}) or
+                        (npcUtil.tradeHasExactly(trade, { { 'gil', 1000 } }) or
                         npcUtil.tradeHasExactly(trade, xi.items.IMPERIAL_BRONZE_PIECE))
                     then
                         return mission:progressEvent(3022, { text_table = 0 })
@@ -49,6 +49,17 @@ mission.sections =
                         return mission:progressEvent(3035, { text_table = 0 })
                     elseif missionStatus == 1 then
                         return mission:progressEvent(3036, { text_table = 0 })
+                    elseif missionStatus == 2 then
+                        return mission:event(3023, { text_table = 0 }):replaceDefault()
+                    end
+                end,
+            },
+
+            ['Nadeey'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 3 then
+                        return mission:event(3025, { text_table = 0 })
                     end
                 end,
             },

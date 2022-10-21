@@ -25,8 +25,8 @@ The PathFind class provides an interface for getting an entity to a destination.
 #ifndef _PATHFIND_H
 #define _PATHFIND_H
 
-#include "../../../common/mmo.h"
 #include "../../../common/logging.h"
+#include "../../../common/mmo.h"
 
 #include <vector>
 
@@ -44,7 +44,9 @@ enum PATHFLAG
     PATHFLAG_WALLHACK = 0x02, // run through walls if path is too long
     PATHFLAG_REVERSE  = 0x04, // reverse the path
     PATHFLAG_SCRIPT   = 0x08, // don't overwrite this path before completion (except via another script)
-    PATHFLAG_SLIDE    = 0x10  // Slide to end point if close enough (so no over shoot)
+    PATHFLAG_SLIDE    = 0x10, // Slide to end point if close enough (so no over shoot)
+    PATHFLAG_PATROL   = 0x20, // Automatically restart path once it is finished and resume when roaming
+    PATHFLAG_WAITS    = 0x40, // Using waits
 };
 
 class CPathFind
@@ -65,14 +67,16 @@ public:
     bool PathAround(const position_t& point, float distanceFromPoint, uint8 pathFlags = 0);
 
     // walk through the given points. No new points made.
-    bool PathThrough(std::vector<position_t>&& points, uint8 pathFlags = 0);
+    bool PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags = 0);
 
     // instantly moves an entity to the point
     // this will make sure you're not in a wall
     bool WarpTo(const position_t& point, float maxDistance = 2.0f);
 
+    void ResumePatrol();
+
     // moves mob to next point
-    void FollowPath();
+    void FollowPath(time_point tick);
 
     // returns true if entity is on a way point
     bool OnPoint() const;
@@ -82,9 +86,8 @@ public:
     // all the way to a point
     void LimitDistance(float maxDistance);
 
-    // will only get this close towards the final point
-    // useful to stop mobs from walking too close to players
-    void StopWithin(float within);
+    // Prunes the last points of a path, if they are within the given distance
+    void PrunePathWithin(float within);
 
     // tells entity to take one step towards position
     void StepTo(const position_t& pos, bool run = false);
@@ -92,6 +95,7 @@ public:
     // checks if mob is currently following a path
     bool IsFollowingPath();
     bool IsFollowingScriptedPath();
+    bool IsPatrolling();
 
     // calculate speed of mob with mode, mod_speed, etc
     float GetRealSpeed();
@@ -118,6 +122,12 @@ public:
     // returns the final destination of the current path
     const position_t& GetDestination() const;
 
+    // If careful pathing is set, the owner will continually be "snapped" back
+    // onto a valid poly every time FollowPath() is called.
+    // THIS IS 4-5x MORE EXPENSIVE THAN A REGULAR CALL TO FollowPath()!
+    // YOU HAVE BEEN WARNED!
+    void SetCarefulPathing(bool careful);
+
 private:
     // find a valid path using polys
     bool FindPath(const position_t& start, const position_t& end);
@@ -129,25 +139,31 @@ private:
     // finds a random path around the given point
     bool FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags);
 
-    void AddPoints(std::vector<position_t>&& points, bool reverse = false);
+    void AddPoints(std::vector<pathpoint_t>&& points, bool reverse = false);
 
     void FinishedPath();
 
-    CBaseEntity*            m_PTarget;
-    std::vector<position_t> m_points;
-    std::vector<position_t> m_turnPoints;
-    position_t              m_originalPoint;
-    float                   m_distanceFromPoint;
+    CBaseEntity*             m_POwner;
+    std::vector<pathpoint_t> m_points;
+    std::vector<pathpoint_t> m_patrol;
+    std::vector<position_t>  m_turnPoints;
+    position_t               m_originalPoint;
+    float                    m_distanceFromPoint;
 
     uint8  m_pathFlags;
+    uint8  m_patrolFlags;
     uint16 m_roamFlags;
     bool   m_onPoint;
     int16  m_currentPoint;
+
+    time_point m_timeAtPoint;
 
     uint8 m_currentTurn;
 
     float m_distanceMoved;
     float m_maxDistance;
+
+    bool m_carefulPathing;
 };
 
 #endif

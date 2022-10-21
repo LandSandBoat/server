@@ -14,13 +14,14 @@ local path =
 {
     [2] =
     {
-        {-300.000, 79.500, -130.000},
-        {-300.000, 79.500, -150.000}
+        { -300.000, 79.500, -130.000 },
+        { -300.000, 79.500, -150.000 },
     },
+
     [5] =
     {
-        {-260.000, 79.500, -130.000},
-        {-260.000, 79.500, -150.000}
+        { -260.000, 79.500, -130.000 },
+        { -260.000, 79.500, -150.000 },
     },
 
 }
@@ -36,8 +37,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local spawn = math.random(3) == 1
         local battlefield = mob:getBattlefield()
 

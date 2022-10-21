@@ -11,8 +11,9 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.REGAIN, 75)
     mob:addMod(xi.mod.UFASTCAST, 50)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
 entity.onMobSpawn = function(mob)
@@ -75,7 +76,7 @@ entity.onMagicCastingCheck = function(mob, target, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

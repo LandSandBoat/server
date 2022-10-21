@@ -21,8 +21,8 @@
 
 #include "puppetutils.h"
 #include "../entities/automatonentity.h"
-#include "../lua/luautils.h"
 #include "../job_points.h"
+#include "../lua/luautils.h"
 #include "../packets/char_job_extra.h"
 #include "../packets/message_basic.h"
 #include "../status_effect_container.h"
@@ -40,13 +40,13 @@ namespace puppetutils
                             "char_pet LEFT JOIN pet_name ON automatonid = id "
                             "WHERE charid = %u;";
 
-        int32 ret = Sql_Query(SqlHandle, Query, PChar->id);
+        int32 ret = sql->Query(Query, PChar->id);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             size_t length      = 0;
             char*  attachments = nullptr;
-            Sql_GetData(SqlHandle, 0, &attachments, &length);
+            sql->GetData(0, &attachments, &length);
             memcpy(&PChar->m_unlockedAttachments, attachments, (length > sizeof(PChar->m_unlockedAttachments) ? sizeof(PChar->m_unlockedAttachments) : length));
 
             if (PChar->PAutomaton != nullptr)
@@ -68,10 +68,10 @@ namespace puppetutils
             if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
             {
                 PChar->PAutomaton = new CAutomatonEntity();
-                PChar->PAutomaton->name.insert(0, (const char*)Sql_GetData(SqlHandle, 1));
+                PChar->PAutomaton->name.insert(0, (const char*)sql->GetData(1));
                 automaton_equip_t tempEquip;
                 attachments = nullptr;
-                Sql_GetData(SqlHandle, 2, &attachments, &length);
+                sql->GetData(2, &attachments, &length);
                 memcpy(&tempEquip, attachments, (length > sizeof(tempEquip) ? sizeof(tempEquip) : length));
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is
@@ -146,14 +146,14 @@ namespace puppetutils
             char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
             char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];
             memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
-            Sql_EscapeStringLen(SqlHandle, unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
+            sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
             char equippedAttachmentsEscaped[sizeof(PChar->PAutomaton->m_Equip) * 2 + 1];
             char equippedAttachments[sizeof(PChar->PAutomaton->m_Equip)];
             memcpy(equippedAttachments, &PChar->PAutomaton->m_Equip, sizeof(equippedAttachments));
-            Sql_EscapeStringLen(SqlHandle, equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
+            sql->EscapeStringLen(equippedAttachmentsEscaped, equippedAttachments, sizeof(equippedAttachments));
 
-            Sql_Query(SqlHandle, Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
+            sql->Query(Query, unlockedAttachmentsEscaped, equippedAttachmentsEscaped, PChar->id);
         }
         else
         {
@@ -164,9 +164,9 @@ namespace puppetutils
             char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
             char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];
             memcpy(unlockedAttachments, &PChar->m_unlockedAttachments, sizeof(unlockedAttachments));
-            Sql_EscapeStringLen(SqlHandle, unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
+            sql->EscapeStringLen(unlockedAttachmentsEscaped, unlockedAttachments, sizeof(unlockedAttachments));
 
-            Sql_Query(SqlHandle, Query, unlockedAttachmentsEscaped, PChar->id);
+            sql->Query(Query, unlockedAttachmentsEscaped, PChar->id);
         }
         // TODO: PUP only: save equipped automaton items
     }
@@ -544,11 +544,17 @@ namespace puppetutils
             rank = 13 + rank;
         }
 
-        return battleutils::GetMaxSkill(rank, level);
+        return battleutils::GetMaxSkill(rank, level > 99 ? 99 : level);
     }
 
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill)
     {
+        if (PChar == nullptr)
+        {
+            ShowWarning("puppetutils::getSkillCap() - Null PChar passed to function.");
+            return 0;
+        }
+
         return getSkillCap(PChar, skill, PChar->PAutomaton->GetMLevel());
     }
 
@@ -577,7 +583,11 @@ namespace puppetutils
 
     void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
     {
-        XI_DEBUG_BREAK_IF(!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC);
+        if (!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC)
+        {
+            ShowWarning("puppetutils::TrySkillUP() - PMaster was null, or was not a player.");
+            return;
+        }
 
         CCharEntity* PChar = (CCharEntity*)PAutomaton->PMaster;
         if (getSkillCap(PChar, SkillID) != 0 && !(PAutomaton->WorkingSkills.skill[SkillID] & 0x8000))
@@ -586,7 +596,7 @@ namespace puppetutils
             uint16 MaxSkill = getSkillCap(PChar, SkillID, std::min(PAutomaton->GetMLevel(), lvl));
 
             int16  Diff          = MaxSkill - CurSkill / 10;
-            double SkillUpChance = Diff / 5.0 + map_config.skillup_chance_multiplier * (2.0 - log10(1.0 + CurSkill / 100));
+            double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
 
             double random = xirand::GetRandomNumber(1.);
 
@@ -640,9 +650,9 @@ namespace puppetutils
                 MaxSkill = MaxSkill * 10;
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
-                if (map_config.skillup_amount_multiplier > 1)
+                if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1)
                 {
-                    SkillAmount += (uint8)(SkillAmount * map_config.skillup_amount_multiplier);
+                    SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
                     if (SkillAmount > 9)
                     {
                         SkillAmount = 9;

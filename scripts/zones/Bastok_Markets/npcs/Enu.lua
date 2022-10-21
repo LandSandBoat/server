@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Enu
--- Type: Quest NPC
 -- !pos -253.673 -13 -92.326 235
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
@@ -29,8 +28,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(332)
     elseif (player:getCharVar("WishUponAStar_Status") == 3) then -- Quest: Wish Upon a Star - Enu has asked player to give her a fallen star
         player:startEvent(333)
-    else -- Standard dialog
-        player:startEvent(327)
     end
 end
 
@@ -38,15 +35,13 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf ("CSID: %u", csid)
-    -- printf ("RESULT: %u", option)
     if (csid == 332) then -- Quest: Wish Upon a Star
         player:setCharVar("WishUponAStar_Status", 3)
     elseif (csid == 334) then -- Quest: Wish Upon a Star - Traded Fallen Star
         player:tradeComplete( )
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
-        player:addFame(BASTOK, 50)
+        player:addFame(xi.quest.fame_area.BASTOK, 50)
         player:addItem(1236, 4) -- Reward for quest completion: Cactus Stems x 4
         player:messageSpecial(ID.text.ITEM_OBTAINED, 1236)
     end

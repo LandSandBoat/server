@@ -1,28 +1,32 @@
 ﻿#include "filewatcher.h"
 
+#include "tracy.h"
+
 #include <filesystem>
 #include <functional>
-#include <string>
 #include <memory>
+#include <string>
 
-#include "efsw/efsw.hpp"
-
-Filewatcher::Filewatcher(std::string const& path, std::function<void(const std::filesystem::path& path)> _func)
-: basePath(path)
-, func(_func)
+Filewatcher::Filewatcher(std::vector<std::string> paths)
 #ifdef USE_GENERIC_FILEWATCHER
-, fileWatcher(std::make_unique<efsw::FileWatcher>(true))
+: fileWatcher(std::make_unique<efsw::FileWatcher>(true))
 #else
-, fileWatcher(std::make_unique<efsw::FileWatcher>(false))
+: fileWatcher(std::make_unique<efsw::FileWatcher>(false))
 #endif
+, basePaths(paths)
 {
-    fileWatcher->addWatch(path, this, true);
+    for (auto& path : paths)
+    {
+        fileWatcher->addWatch(path, this, true);
+    }
     fileWatcher->watch();
 }
 
 // cppcheck-suppress passedByValue
-void Filewatcher::handleFileAction(efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename)
+void Filewatcher::handleFileAction(efsw::WatchID watchid, std::string const& dir, std::string const& filename, efsw::Action action, std::string oldFilename)
 {
+    TracySetThreadName("Filewatcher Thread");
+    TracyZoneScoped;
     std::filesystem::path fullPath = dir + "/" + filename;
     switch (action)
     {
@@ -31,7 +35,7 @@ void Filewatcher::handleFileAction(efsw::WatchID watchid, const std::string& dir
         case efsw::Actions::Delete:
             break;
         case efsw::Actions::Modified:
-            func(fullPath.generic_string());
+            modifiedQueue.enqueue(fullPath);
             break;
         case efsw::Actions::Moved:
             break;

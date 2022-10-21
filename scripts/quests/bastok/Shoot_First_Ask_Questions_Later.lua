@@ -20,6 +20,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_A
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.BASTOK,
 }
 
 quest.sections =
@@ -130,7 +131,7 @@ quest.sections =
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
-                        npcUtil.popFromQM(player, npc, boyahdaTreeID.mob.BEET_LEAFHOPPER, {hide = 0})
+                        npcUtil.popFromQM(player, npc, boyahdaTreeID.mob.BEET_LEAFHOPPER, { hide = 0 })
                     then
                         return quest:messageSpecial(boyahdaTreeID.text.SENSE_OMINOUS_PRESENCE)
                     end
@@ -139,7 +140,7 @@ quest.sections =
 
             ['Beet_Leafhopper'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
             },

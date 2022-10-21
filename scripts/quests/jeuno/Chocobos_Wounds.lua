@@ -21,6 +21,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
     keyItem = xi.ki.CHOCOBO_LICENSE,
     title = xi.title.CHOCOBO_TRAINER,
 }

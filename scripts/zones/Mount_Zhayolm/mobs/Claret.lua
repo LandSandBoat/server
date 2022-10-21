@@ -5,7 +5,7 @@
 -- Spawned with Pectin: !additem 2591
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Claret
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

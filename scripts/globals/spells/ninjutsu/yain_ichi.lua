@@ -1,22 +1,16 @@
 -----------------------------------
---     Spell: Yain: Ichi
---     Grants Enmity Down +15 for Caster
+-- Spell: Yain: Ichi
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/spells/enhancing_ninjutsu")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    caster:delStatusEffect(xi.effect.ENMITY_BOOST)
-
-    caster:addStatusEffect(xi.effect.PAX, 15, 0, 300)
-    return xi.effect.PAX
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingNinjutsu(caster, target, spell)
 end
 
-return spell_object
+return spellObject

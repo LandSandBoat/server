@@ -22,8 +22,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CTCPREQUESTPACKET_H_
 #define _CTCPREQUESTPACKET_H_
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #ifdef WIN32
 #include <winsock2.h>

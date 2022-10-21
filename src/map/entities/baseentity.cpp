@@ -28,29 +28,24 @@
 #include "baseentity.h"
 
 CBaseEntity::CBaseEntity()
-: status(STATUS_TYPE::DISAPPEAR)
+: objtype(ENTITYTYPE::TYPE_NONE)
+, status(STATUS_TYPE::DISAPPEAR)
+, allegiance(ALLEGIANCE_TYPE::MOB)
+, spawnAnimation(SPAWN_ANIMATION::NORMAL)
+, PAI(nullptr)
+, m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
     id       = 0;
     targid   = 0;
-    objtype  = ENTITYTYPE::TYPE_NONE;
     m_TargID = 0;
-    memset(&look, 0, sizeof(look));
-    memset(&mainlook, 0, sizeof(mainlook));
-    // False positive: any reasonable compiler is IEEE754-1985 compatible
-    // portability: Using memset() on struct which contains a floating point number.
-    // This is not portable because memset() sets each byte of a block of memory to a specific value and
-    // the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible
-    // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
-    // cppcheck-suppress memsetClassFloat
-    memset(&loc, 0, sizeof(loc));
-    animation    = ANIMATION_NONE;
+
+    isRenamed    = false;
+    animation    = 0;
     animationsub = 0;
-    speed        = 50 + map_config.speed_mod; // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
-    speedsub     = 50; // Retail does NOT adjust this when speed is adjusted.
+    speed        = 50 + settings::get<int8>("map.SPEED_MOD"); // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
+    speedsub     = 50;                                        // Retail does NOT adjust this when speed is adjusted.
     namevis      = 0;
-    allegiance   = ALLEGIANCE_TYPE::MOB;
     updatemask   = 0;
-    PAI          = nullptr;
     PBattlefield = nullptr;
     PInstance    = nullptr;
 }
@@ -83,9 +78,14 @@ const int8* CBaseEntity::GetName()
     return (const int8*)name.c_str();
 }
 
+const int8* CBaseEntity::GetPacketName()
+{
+    return (const int8*)packetName.c_str();
+}
+
 uint16 CBaseEntity::getZone() const
 {
-    return loc.zone != nullptr ? loc.zone->GetID() : loc.destination;
+    return loc.zone != nullptr ? (uint16)loc.zone->GetID() : (uint16)loc.destination;
 }
 
 float CBaseEntity::GetXPos() const
@@ -122,19 +122,32 @@ void CBaseEntity::HideName(bool hide)
     updatemask |= UPDATE_HP;
 }
 
+void CBaseEntity::GhostPhase(bool ghost)
+{
+    if (ghost)
+    {
+        namevis |= VIS_GHOST_PHASE;
+    }
+    else
+    {
+        namevis &= ~VIS_GHOST_PHASE;
+    }
+    updatemask |= UPDATE_HP;
+}
+
 bool CBaseEntity::IsNameHidden() const
 {
     return namevis & FLAG_HIDE_NAME;
 }
 
-bool CBaseEntity::IsTargetable() const
+bool CBaseEntity::GetUntargetable() const
 {
-    return (namevis & FLAG_UNTARGETABLE) == 0;
+    return false;
 }
 
 bool CBaseEntity::isWideScannable()
 {
-    return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && IsTargetable();
+    return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && !GetUntargetable();
 }
 
 CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
@@ -151,6 +164,11 @@ CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
     {
         return loc.zone->GetEntity(targid, filter);
     }
+}
+
+void CBaseEntity::SendZoneUpdate()
+{
+    loc.zone->UpdateEntityPacket(this, ENTITY_SPAWN, UPDATE_ALL_MOB, true);
 }
 
 void CBaseEntity::ResetLocalVars()
@@ -176,4 +194,9 @@ void CBaseEntity::SetModelId(uint16 modelid)
 uint16 CBaseEntity::GetModelId() const
 {
     return look.modelid;
+}
+
+bool CBaseEntity::IsDynamicEntity() const
+{
+    return this->targid >= 0x700;
 }

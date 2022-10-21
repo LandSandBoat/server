@@ -9,18 +9,18 @@ local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local instance = npc:getInstance()
-    local mob = GetMobByID(ID.mob[2][3].wahzil, instance)
-    local COUNT = trade:getItemCount()
-    local INCUS_CELL = 5365
-    local SPISSATUS_CELL = 5384
+    local instance      = npc:getInstance()
+    local mob           = GetMobByID(ID.mob[2][3].wahzil, instance)
+    local tradeCount    = trade:getItemCount()
+    local incusCell     = 5365 -- TODO: Add these to items.lua
+    local spissatusCell = 5384
 
-    for i = INCUS_CELL, SPISSATUS_CELL do
-        if COUNT <= 5 and trade:hasItemQty(i, COUNT) then
+    for i = incusCell, spissatusCell do
+        if tradeCount <= 5 and trade:hasItemQty(i, tradeCount) then
             SpawnMob(ID.mob[2][3].wahzil, instance):updateClaim(player)
             player:tradeComplete()
             mob:setLocalVar("Cell", i)
-            mob:setLocalVar("Qnt", COUNT)
+            mob:setLocalVar("Qnt", tradeCount)
         end
     end
 end

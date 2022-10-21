@@ -22,7 +22,7 @@
 #ifndef _CENTITYANIMATIONPACKET_H
 #define _CENTITYANIMATIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -37,7 +37,7 @@ class CEntityAnimationPacket : public CBasicPacket
 {
 public:
     static const char* Fade_Out;
-    CEntityAnimationPacket(CBaseEntity* PEntity, const char type[4]);
+    CEntityAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, const char type[4]);
 };
 
 #endif

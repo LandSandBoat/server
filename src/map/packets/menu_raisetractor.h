@@ -22,7 +22,7 @@
 #ifndef _CRAISETRACTORMENUPACKET_H
 #define _CRAISETRACTORMENUPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

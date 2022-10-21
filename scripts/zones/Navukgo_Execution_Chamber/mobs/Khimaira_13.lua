@@ -16,15 +16,13 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("updateCSID: %u", csid)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    -- printf("finishCSID: %u", csid)
 end
 
 return entity

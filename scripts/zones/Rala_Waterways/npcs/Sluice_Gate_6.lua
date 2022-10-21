@@ -9,9 +9,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) then
-        player:startEvent(361)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -21,56 +21,236 @@
 
 #include "moduleutils.h"
 
-#include "common/cbasetypes.h"
+#include "../command_handler.h"
 #include "../lua/luautils.h"
+#include "common/cbasetypes.h"
+#include "common/utils.h"
 
 #include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <regex>
+#include <string>
+#include <vector>
+
+namespace
+{
+    // static storage, init and access
+    std::vector<CPPModule*>& cppModules()
+    {
+        static std::vector<CPPModule*> cppModules{};
+        return cppModules;
+    }
+} // namespace
 
 namespace moduleutils
 {
+    void RegisterCPPModule(CPPModule* ptr)
+    {
+        cppModules().emplace_back(ptr);
+    }
+
+    // Hooks for calling modules
+    void OnInit()
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnInit();
+        }
+    }
+
+    void OnZoneTick(CZone* PZone)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnZoneTick(PZone);
+        }
+    }
+
+    void OnTimeServerTick()
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnTimeServerTick();
+        }
+    }
+
+    void OnCharZoneIn(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnCharZoneIn(PChar);
+        }
+    }
+
+    void OnCharZoneOut(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnCharZoneOut(PChar);
+        }
+    }
+
+    void OnPushPacket(CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnPushPacket(packet);
+        }
+    }
+
+    struct Override
+    {
+        std::string              filename;
+        std::string              overrideName;
+        std::vector<std::string> nameParts;
+        sol::object              func;
+        bool                     applied;
+    };
+
+    // Lua-side Module
+    // obj.name = name
+    // obj.overrides = {}
+    // obj.enabled = false
+
+    std::vector<Override> overrides;
+
     void LoadLuaModules()
     {
-        sol::state& lua = luautils::lua;
-
         // Load the helper file
-        lua.script_file("./modules/module_utils.lua");
+        lua.safe_script_file("./modules/module_utils.lua");
 
-        // Load each module file that isn't the helpers.lua file
-        for (auto const& entry : std::filesystem::recursive_directory_iterator("modules"))
+        // Read lines from init.txt
+        std::vector<std::string> list;
+        std::ifstream            file("./modules/init.txt", std::ios_base::in);
+        std::string              line;
+        while (std::getline(file, line))
         {
-            auto path          = entry.path().relative_path();
+            if (!line.empty() && line.at(0) != '#' && line != "\n" && line != "\r" && line != "\r\n")
+            {
+                auto str = trim("./modules/" + line, " \t\r\n");
+                list.emplace_back(str);
+            }
+        }
+
+        // Expand out folders
+        std::vector<std::string> expandedList = list;
+        for (auto const& entry : list)
+        {
+            if (std::filesystem::is_directory(entry))
+            {
+                for (auto const& innerEntry : std::filesystem::recursive_directory_iterator(entry))
+                {
+                    auto path = innerEntry.path().relative_path();
+                    expandedList.emplace_back(path.generic_string());
+                }
+            }
+        }
+
+        // Load each module file that isn't the helpers.lua file or a directory
+        for (auto const& entry : expandedList)
+        {
+            auto path          = std::filesystem::path(entry).relative_path();
             bool isHelpersFile = path.filename() == "module_utils.lua";
 
-            if (!entry.is_directory() &&
-                path.extension() == ".lua" &&
-                !isHelpersFile)
+            if (!isHelpersFile &&
+                !std::filesystem::is_directory(path) &&
+                path.extension() == ".lua")
             {
-                std::string filename  = path.filename().generic_string();
-                std::string pathNoExt = path.replace_extension("").generic_string();
+                std::string filename = path.filename().generic_string();
+                std::string relPath  = path.relative_path().generic_string();
 
-                // Note: Doing this in C++ resulted in self.overrides not being available to Module:apply()
-                auto result = lua.safe_script(fmt::format(R"(
-                    local m = require("{0}")
-                    if m.enabled then
-                        m:apply()
-                    end
-                    return m
-                )", pathNoExt));
-
-                if (!result.valid())
+                auto res = lua.safe_script_file(relPath);
+                if (!res.valid())
                 {
-                    sol::error err = result;
+                    sol::error err = res;
+                    ShowError("Failed to load module: %s", filename);
                     ShowError(err.what());
+                    continue;
                 }
-                else
+
+                // Check the file is a valid command
+                if (lua["cmdprops"].valid() && lua["onTrigger"].valid())
                 {
-                    sol::table table = result;
-                    if (table["enabled"])
+                    auto commandName = path.filename().replace_extension("").generic_string();
+                    DebugModules(fmt::format("Registering module command: !{}", commandName));
+                    CCommandHandler::registerCommand(commandName, relPath);
+                    continue;
+                }
+
+                // Check the file is a valid module
+                sol::table table = res;
+                if (table["overrides"].valid())
+                {
+                    auto moduleName = table.get_or("name", std::string());
+                    ShowInfo(fmt::format("=== Module: {} ===", moduleName));
+                    for (auto& override : table.get_or("overrides", std::vector<sol::table>()))
                     {
-                        std::string name = table["name"];
-                        ShowScript(fmt::format("Loaded module: {}", name));
+                        std::string name = override["name"];
+                        sol::object func = override["func"];
+
+                        DebugModules(fmt::format("Preparing override: {}", name));
+
+                        auto parts = split(name, ".");
+                        overrides.emplace_back(Override{ filename, name, parts, func, false });
                     }
                 }
+            }
+        }
+    }
+
+    void CleanupLuaModules()
+    {
+        overrides.clear();
+    }
+
+    void TryApplyLuaModules()
+    {
+        for (auto& override : overrides)
+        {
+            if (!override.applied)
+            {
+                auto firstElem = override.nameParts.front();
+                auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
+                auto lastElem  = override.nameParts.back();
+
+                sol::table table = lua["_G"];
+                for (auto& part : override.nameParts)
+                {
+                    table = table[part].get_or<sol::table>(sol::lua_nil);
+                    if (table == sol::lua_nil)
+                    {
+                        break;
+                    }
+
+                    if (part == lastTable)
+                    {
+                        DebugModules(fmt::format("Applying override: {}", override.overrideName));
+
+                        lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
+
+                        override.applied = true;
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    void ReportLuaModuleUsage()
+    {
+        for (auto& override : overrides)
+        {
+            if (!override.applied)
+            {
+                ShowError(fmt::format("Override not applied: {} ({})", override.overrideName, override.filename));
             }
         }
     }

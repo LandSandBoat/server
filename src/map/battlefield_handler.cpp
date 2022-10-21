@@ -73,94 +73,153 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
         auto* PBattlefield = it->second;
         if (PBattlefield->CanCleanup())
         {
-            PBattlefield->Cleanup();
-            it = m_Battlefields.erase(it);
-            ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
-            delete PBattlefield;
-        }
-        else
-        {
-            ++it;
-        }
-    }
-}
-
-uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, uint16 battlefieldID, uint8 area)
-{
-    TracyZoneScoped;
-    if (PChar->PBattlefield == nullptr && m_Battlefields.size() < m_MaxBattlefields)
-    {
-        for (auto&& battlefield : m_Battlefields)
-        {
-            if (battlefield.first == area)
+            if (PBattlefield->Cleanup(tick, false))
             {
-                return BATTLEFIELD_RETURN_CODE_INCREMENT_REQUEST;
+                it = m_Battlefields.erase(it);
+                ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
+                delete PBattlefield;
+                continue;
             }
         }
 
-        if (battlefieldID == 0xFFFF)
+        ++it;
+    }
+
+    for (auto iter = m_orphanedPlayers.begin(); iter != m_orphanedPlayers.end();)
+    {
+        if (tick < (*iter).second)
         {
-            // made it this far so looks like there's a free battlefield
-            return BATTLEFIELD_RETURN_CODE_CUTSCENE;
+            ++iter;
+            continue;
         }
 
+        auto* PChar = m_PZone->GetCharByID((*iter).first);
+        if (PChar)
+        {
+            luautils::OnBattlefieldKick(PChar);
+            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+        }
+        iter = m_orphanedPlayers.erase(iter);
+    }
+}
+
+uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration)
+{
+    TracyZoneScoped;
+    if (PChar->PBattlefield != nullptr || m_Battlefields.size() >= m_MaxBattlefields)
+    {
+        return BATTLEFIELD_RETURN_CODE_WAIT;
+    }
+
+    for (auto&& battlefield : m_Battlefields)
+    {
+        if (battlefield.first == registration.area)
+        {
+            return BATTLEFIELD_RETURN_CODE_INCREMENT_REQUEST;
+        }
+    }
+
+    if (registration.id == 0xFFFF)
+    {
+        // made it this far so looks like there's a free battlefield
+        return BATTLEFIELD_RETURN_CODE_CUTSCENE;
+    }
+
+    // maxplayers being 0 means that all the battlefield information needs to come from the database
+    if (registration.maxPlayers == 0)
+    {
         const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize, timeLimit, levelCap, lootDropId, partySize, rules, isMission\
                             FROM bcnm_info i\
                             WHERE bcnmId = %u";
 
-        auto ret = Sql_Query(SqlHandle, fmtQuery, battlefieldID);
+        auto ret = sql->Query(fmtQuery, registration.id);
 
-        if (ret == SQL_ERROR || Sql_NumRows(SqlHandle) == 0 || Sql_NextRow(SqlHandle) != SQL_SUCCESS)
+        if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
         {
-            ShowError("Cannot load battlefield : %u ", battlefieldID);
+            ShowError("Cannot load battlefield : %u ", registration.id);
             return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
         }
-        else
+
+        auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, false);
+
+        auto name                 = sql->GetStringData(0);
+        auto recordholder         = sql->GetStringData(1);
+        auto recordtime           = std::chrono::seconds(sql->GetUIntData(2));
+        auto recordPartySize      = sql->GetUIntData(3);
+        auto timelimit            = std::chrono::seconds(sql->GetUIntData(4));
+        auto levelcap             = sql->GetUIntData(5);
+        auto lootid               = sql->GetUIntData(6);
+        auto maxplayers           = sql->GetUIntData(7);
+        auto rulemask             = sql->GetUIntData(8);
+        PBattlefield->m_isMission = sql->GetUIntData(9);
+
+        PBattlefield->SetName(name);
+        PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
+        PBattlefield->SetTimeLimit(timelimit);
+        PBattlefield->SetLevelCap(levelcap);
+
+        PBattlefield->SetMaxParticipants(maxplayers);
+        PBattlefield->SetRuleMask(rulemask);
+
+        m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
+
+        if (!PBattlefield->LoadMobs())
         {
-            auto* PBattlefield = new CBattlefield(battlefieldID, m_PZone, area, PChar);
-
-            auto* name                = Sql_GetData(SqlHandle, 0);
-            auto* recordholder        = Sql_GetData(SqlHandle, 1);
-            auto  recordtime          = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 2));
-            auto  recordPartySize     = Sql_GetUIntData(SqlHandle, 3);
-            auto  timelimit           = std::chrono::seconds(Sql_GetUIntData(SqlHandle, 4));
-            auto  levelcap            = Sql_GetUIntData(SqlHandle, 5);
-            auto  lootid              = Sql_GetUIntData(SqlHandle, 6);
-            auto  maxplayers          = Sql_GetUIntData(SqlHandle, 7);
-            auto  rulemask            = Sql_GetUIntData(SqlHandle, 8);
-            PBattlefield->m_isMission = Sql_GetUIntData(SqlHandle, 9);
-
-            PBattlefield->SetName((char*)name);
-            PBattlefield->SetRecord((char*)recordholder, recordtime, recordPartySize);
-            PBattlefield->SetTimeLimit(timelimit);
-            PBattlefield->SetLevelCap(levelcap);
-
-            PBattlefield->SetMaxParticipants(maxplayers);
-            PBattlefield->SetRuleMask(rulemask);
-
-            m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
-
-            if (!PBattlefield->LoadMobs())
-            {
-                PBattlefield->SetStatus(BATTLEFIELD_STATUS_LOST);
-                PBattlefield->CanCleanup(true);
-                PBattlefield->Cleanup();
-                ShowDebug("battlefield loading failed");
-                return BATTLEFIELD_RETURN_CODE_WAIT;
-            }
-
-            if (lootid != 0)
-            {
-                PBattlefield->SetLocalVar("loot", lootid);
-            }
-
-            luautils::OnBattlefieldInitialise(PBattlefield);
-            PBattlefield->InsertEntity(PChar, true);
-
-            return BATTLEFIELD_RETURN_CODE_CUTSCENE;
+            PBattlefield->SetStatus(BATTLEFIELD_STATUS_LOST);
+            PBattlefield->CanCleanup(true);
+            PBattlefield->Cleanup(time_point{}, true);
+            ShowDebug("battlefield loading failed");
+            return BATTLEFIELD_RETURN_CODE_WAIT;
         }
+
+        if (lootid != 0)
+        {
+            PBattlefield->SetLocalVar("loot", lootid);
+        }
+
+        luautils::OnBattlefieldRegister(PChar, PBattlefield);
+        luautils::OnBattlefieldInitialise(PBattlefield);
+        PBattlefield->InsertEntity(PChar, true);
+
+        return BATTLEFIELD_RETURN_CODE_CUTSCENE;
     }
-    return BATTLEFIELD_RETURN_CODE_WAIT;
+
+    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, true);
+
+    const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize\
+                            FROM bcnm_info i\
+                            WHERE bcnmId = %u";
+
+    auto ret = sql->Query(fmtQuery, registration.id);
+
+    if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
+    {
+        ShowError("Cannot load battlefield : %u ", registration.id);
+        return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
+    }
+
+    auto name            = sql->GetStringData(0);
+    auto recordholder    = sql->GetStringData(1);
+    auto recordtime      = std::chrono::seconds(sql->GetUIntData(2));
+    auto recordPartySize = sql->GetUIntData(3);
+
+    PBattlefield->SetName(name);
+    PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
+    PBattlefield->SetTimeLimit(registration.timeLimit);
+    PBattlefield->SetLevelCap(registration.levelCap);
+    PBattlefield->SetMaxParticipants(registration.maxPlayers);
+    PBattlefield->SetRuleMask(registration.rules);
+    PBattlefield->m_isMission = registration.isMission;
+    PBattlefield->m_showTimer = registration.showTimer;
+
+    m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
+
+    luautils::OnBattlefieldRegister(PChar, PBattlefield);
+    luautils::OnBattlefieldInitialise(PBattlefield);
+    PBattlefield->InsertEntity(PChar, true);
+
+    return BATTLEFIELD_RETURN_CODE_CUTSCENE;
 }
 
 CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool checkRegistered)
@@ -207,7 +266,7 @@ CBattlefield* CBattlefieldHandler::GetBattlefieldByInitiator(uint32 charID)
     return nullptr;
 }
 
-uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battlefieldId, uint8 area, uint32 initiator)
+uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration)
 {
     if (PChar->PBattlefield)
     {
@@ -217,25 +276,25 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battle
     // attempt to add to an existing battlefield
     auto* PBattlefield = GetBattlefield(PChar, true);
 
-    // couldnt find this character registered, try find by id and initiator
+    // Could not find this character registered, try find by id and initiator
     if (!PBattlefield)
     {
         for (const auto& battlefield : m_Battlefields)
         {
-            if (battlefield.second->GetInitiator().id == initiator && battlefield.second->GetID() == battlefieldId)
+            if (battlefield.second->GetInitiator().id == registration.initiator && battlefield.second->GetID() == registration.id)
             {
                 PBattlefield = battlefield.second;
                 break;
             }
         }
     }
-    // entity wasnt found in battlefield, assume they have the effect but not physically inside battlefield
+    // Entity wasn't found in battlefield, assume they have the effect but not physically inside battlefield
     if (PBattlefield)
     {
         if (!PBattlefield->CheckInProgress())
         {
-            // players havent started fighting yet, try entering
-            if (area != PBattlefield->GetArea())
+            // players haven't started fighting yet, try entering
+            if (registration.area != PBattlefield->GetArea())
             {
                 return BATTLEFIELD_RETURN_CODE_INCREMENT_REQUEST;
             }
@@ -249,7 +308,7 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, uint16 battle
             return BATTLEFIELD_RETURN_CODE_LOCKED;
         }
     }
-    return LoadBattlefield(PChar, battlefieldId, area);
+    return LoadBattlefield(PChar, registration);
 }
 
 bool CBattlefieldHandler::RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield, uint8 leavecode)
@@ -282,12 +341,12 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     if (battlefieldId != -1)
     {
         std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i;");
-        auto        ret = Sql_Query(SqlHandle, query.c_str(), battlefieldId);
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        auto        ret = sql->Query(query.c_str(), battlefieldId);
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
-                auto area = Sql_GetUIntData(SqlHandle, 0);
+                auto area = sql->GetUIntData(0);
                 if (m_Battlefields.find(area) == m_Battlefields.end())
                 {
                     return false; // this area hasnt been loaded in for this battlefield
@@ -299,4 +358,15 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     }
     // we have a free battlefield
     return false;
+}
+
+uint8 CBattlefieldHandler::MaxBattlefieldAreas() const
+{
+    return m_MaxBattlefields;
+}
+
+void CBattlefieldHandler::addOrphanedPlayer(CCharEntity* PChar)
+{
+    auto orphan = std::make_pair(PChar->id, server_clock::now() + 5s);
+    m_orphanedPlayers.push_back(orphan);
 }

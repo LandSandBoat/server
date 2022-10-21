@@ -1,7 +1,7 @@
 -----------------------------------
 -- Gambits decision making system
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -21,6 +21,7 @@ ai.target =
     CASTER     = 7,
     TOP_ENMITY = 8,
     CURILLA    = 9, -- Special case for Rainemard
+    PARTY_DEAD = 10,
 }
 ai.t = ai.target
 
@@ -47,6 +48,10 @@ ai.condition =
     CASTING_MA         = 17,
     RANDOM             = 18,
     NO_SAMBA           = 19,
+    NO_STORM           = 20,
+    PT_HAS_TANK        = 21,
+    NOT_PT_HAS_TANK    = 22,
+    IS_ECOSYSTEM       = 23,
 }
 ai.c = ai.condition
 
@@ -75,14 +80,19 @@ ai.select =
     BEST_AGAINST_TARGET = 6,
     BEST_SAMBA          = 7,
     HIGHEST_WALTZ       = 8,
+    ENTRUSTED           = 9,
+    BEST_INDI           = 10,
+    STORM_DAY           = 11,
+    HELIX_DAY           = 12,
 }
 ai.s = ai.select
 
 -- TP Move Trigger
 ai.tp =
 {
-    ASAP   = 0,
-    RANDOM = 1,
-    OPENER = 2,
-    CLOSER = 3,
+    ASAP            = 0,
+    RANDOM          = 1,
+    OPENER          = 2,
+    CLOSER          = 3,    -- Will Hold TP Indefinitely to close a SC
+    CLOSER_UNTIL_TP = 4,    -- Will Hold TP to close a SC until a certain threshold
 }

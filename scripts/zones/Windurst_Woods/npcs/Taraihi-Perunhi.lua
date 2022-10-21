@@ -16,8 +16,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(xi.region.DERFLAND)
-    if RegionOwner ~= xi.nation.WINDURST then
+    local regionOwner = GetRegionOwner(xi.region.DERFLAND)
+
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.TARAIHIPERUNHI_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.TARAIHIPERUNHI_OPEN_DIALOG)
@@ -31,7 +32,7 @@ entity.onTrigger = function(player, npc)
             633,    14, -- Olive Oil
             951,   110  -- Wijnruit
         }
-        xi.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
     end
 end
 

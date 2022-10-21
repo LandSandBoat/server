@@ -23,7 +23,7 @@ quest.sections =
     -- After completing A Vessel Without a Captain, talk to Omer to begin the quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getCurrentMission(COP) > xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN
+            return status == QUEST_AVAILABLE and player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN
         end,
 
         [xi.zone.LOWER_JEUNO] =

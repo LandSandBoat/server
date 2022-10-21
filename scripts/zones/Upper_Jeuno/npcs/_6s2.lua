@@ -76,7 +76,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, 1200)
             player:addItem(17083)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17083)
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
         end
 
@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, 1200)
             player:addItem(12727)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12727)
-            player:addFame(JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) -- Start next quest "Save the Clock Tower"
         end

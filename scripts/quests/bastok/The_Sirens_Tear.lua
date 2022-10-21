@@ -21,6 +21,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIRENS_TE
 quest.reward =
 {
     fame = 120,
+    fameArea = xi.quest.fame_area.BASTOK,
     gil = 150,
     title = xi.title.TEARJERKER,
 }

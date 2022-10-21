@@ -233,6 +233,7 @@ enum SPELLFLAG
     SPELLFLAG_IGNORE_SHADOWS = 0x04  // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
 };
 
+// clang-format off
 enum class SpellID : uint16
 {
     Cure                 = 1,
@@ -725,6 +726,7 @@ enum class SpellID : uint16
     Gain_MND             = 491,
     Gain_CHR             = 492,
     Temper               = 493,
+    Arise                = 494,
     Adloquium            = 495,
     Firaja               = 496,
     Blizzaja             = 497,
@@ -892,25 +894,90 @@ enum class SpellID : uint16
     Wind_Breath          = 698,
     Barbed_Crescent      = 699,
 
-    Thunderbolt     = 736,
-    Harden_Shell    = 737,
-    Absolute_Terror = 738,
-    Gates_of_Hades  = 739,
-    Tourbillion     = 740,
-    Pyric_Bulwark   = 741,
-    Bilgestorm      = 742,
-    Bloodrake       = 743,
+    Thunderbolt          = 736,
+    Harden_Shell         = 737,
+    Absolute_Terror      = 738,
+    Gates_of_Hades       = 739,
+    Tourbillion          = 740,
+    Pyric_Bulwark        = 741,
+    Bilgestorm           = 742,
+    Bloodrake            = 743,
 
-    Indi_Regen  = 768,
-    Indi_Poison = 769,
-    Geo_Regen   = 798,
-    Geo_Poison  = 799,
-    Geo_Refresh = 800,
-    Geo_Haste   = 801,
-    Geo_STR     = 802,
-    Geo_DEX     = 803,
+    Indi_Regen           = 768,
+    Indi_Poison          = 769,
+    Indi_Refresh         = 770,
+    Indi_Haste           = 771,
+    Indi_Str             = 772,
+    Indi_Dex             = 773,
+    Indi_Vit             = 774,
+    Indi_Agi             = 775,
+    Indi_Int             = 776,
+    Indi_Mnd             = 777,
+    Indi_Chr             = 778,
+    Indi_Fury            = 779,
+    Indi_Barrier         = 780,
+    Indi_Acumen          = 781,
+    Indi_Fend            = 782,
+    Indi_Precision       = 783,
+    Indi_Voidance        = 784,
+    Indi_Focus           = 785,
+    Indi_Attunement      = 786,
+    Indi_Wilt            = 787,
+    Indi_Frailty         = 788,
+    Indi_Fade            = 789,
+    Indi_Malaise         = 790,
+    Indi_Slip            = 791,
+    Indi_Torpor          = 792,
+    Indi_Vex             = 793,
+    Indi_Languor         = 794,
+    Indi_Slow            = 795,
+    Indi_Paralysis       = 796,
+    Indi_Gravity         = 797,
 
+    Geo_Regen            = 798,
+    Geo_Poison           = 799,
+    Geo_Refresh          = 800,
+    Geo_Haste            = 801,
+    Geo_STR              = 802,
+    Geo_DEX              = 803,
+    Geo_VIT              = 804,
+    Geo_AGI              = 805,
+    Geo_INT              = 806,
+    Geo_MND              = 807,
+    Geo_CHR              = 808,
+    Geo_Fury             = 809,
+    Geo_Barrier          = 810,
+    Geo_Acumen           = 811,
+    Geo_Fend             = 812,
+    Geo_Precision        = 813,
+    Geo_Voidance         = 814,
+    Geo_Focus            = 815,
+    Geo_Attunement       = 816,
+    Geo_Wilt             = 817,
+    Geo_Frailty          = 818,
+    Geo_Fade             = 819,
+    Geo_Malaise          = 820,
+    Geo_Slip             = 821,
+    Geo_Torpor           = 822,
+    Geo_Vex              = 823,
+    Geo_Languor          = 824,
+    Geo_Slow             = 825,
+    Geo_Paralysis        = 826,
+    Geo_Gravity          = 827,
+
+    Fira                  = 828,
+    Fira_II               = 829,
+    Blizzara              = 830,
+    Blizzara_II           = 831,
+    Aera                  = 832,
+    Aera_II               = 833,
+    Stonera               = 834,
+    Stonera_II            = 835,
+    Thundara              = 836,
+    Thundara_II           = 837,
+    Watera                = 838,
     Watera_II             = 839,
+
     Foil                  = 840,
     Distract              = 841,
     Distract_II           = 842,
@@ -967,8 +1034,8 @@ enum class SpellID : uint16
     Full_Cure             = 893,
     Refresh_III           = 894,
     Temper_II             = 895,
-
 };
+// clang-format on
 
 #define MAX_SPELL_ID 1024U
 
@@ -1020,6 +1087,7 @@ public:
     bool        isCure();           // is a Cure spell
     bool        isDebuff();         // is a debuff spell
     bool        isNa();             // is a -na spell
+    bool        isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
     bool        canHitShadow();     // check if spell ignores shadows
 
     void setRadius(float radius);
@@ -1055,7 +1123,7 @@ public:
     void        setName(int8* name);
 
 protected:
-    CSpell(const CSpell&) = default;
+    CSpell(const CSpell&)            = default;
     CSpell& operator=(const CSpell&) = default;
 
 private:
@@ -1082,7 +1150,7 @@ private:
     uint16      m_MagicBurstMessage{};             // Message used for magic bursts.
     uint16      m_CE{};                            // cumulative enmity of spell
     uint16      m_VE{};                            // volatile enmity of spell
-    string_t    m_name;                            // spell name
+    std::string m_name;                            // spell name
     uint32      m_modifiedRecastTime{};            // recast time after modifications
     uint8       m_requirements{};                  // requirements before being able to cast spell
     uint16      m_meritId{};                       // associated merit (if applicable)

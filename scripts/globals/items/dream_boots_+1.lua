@@ -5,19 +5,19 @@
 -- Duration: 3 Mins 20 Secs
 -- TODO: Enhances duration of Sneak Effect
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if (not target:hasStatusEffect(xi.effect.SNEAK)) then
-        target:addStatusEffect(xi.effect.SNEAK, 1, 10, math.floor(200 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER))
+        target:addStatusEffect(xi.effect.SNEAK, 1, 10, math.floor(200 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
     end
 end
 
-return item_object
+return itemObject

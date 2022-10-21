@@ -1,21 +1,21 @@
 #include "version.h"
 
-std::string version::GetGitSha()
+const char* version::GetGitSha()
 {
     return "@GIT_SHA1@";
 }
 
-std::string version::GetGitBranch()
+const char* version::GetGitBranch()
 {
     return "@GIT_BRANCH@";
 }
 
-std::string version::GetGitDate()
+const char* version::GetGitDate()
 {
     return "@GIT_DATE@";
 }
 
-std::string version::GetGitCommitSubject()
+const char* version::GetGitCommitSubject()
 {
     return "@GIT_COMMIT_SUBJECT@";
 }

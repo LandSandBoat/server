@@ -23,12 +23,11 @@
 
 CItemShop::CItemShop(uint16 id)
 : CItem(id)
+, m_MinPrice(0)
+, m_MaxPrice(0)
+, m_DailyIncrease(0)
+, m_InitialQuantity(0)
 {
-    m_MinPrice = 0;
-    m_MaxPrice = 0;
-
-    m_DailyIncrease   = 0;
-    m_InitialQuantity = 0;
 }
 
 CItemShop::~CItemShop() = default;

@@ -16,7 +16,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -188,7 +188,7 @@ mission.sections =
 
             ['Eastern_Sphinx'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobWesternSphinx = GetMobByID(westernAltepaID.mob.WESTERN_SPHINX)
 
                     if
@@ -202,7 +202,7 @@ mission.sections =
 
             ['Western_Sphinx'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobEasternSphinx = GetMobByID(westernAltepaID.mob.EASTERN_SPHINX)
 
                     if

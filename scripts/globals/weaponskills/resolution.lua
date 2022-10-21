@@ -14,12 +14,12 @@
 -- 0.71875    1.5       2.25
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 5
@@ -31,7 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 0.85; params.atk200 = 0.85; params.atk300 = 0.85
     params.multiHitfTP = true
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 0.71875 params.ftp200 = 1.5 params.ftp300 = 2.25
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.RESOLUTION) * 0.03)
     end
@@ -41,4 +41,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
 end
 
-return weaponskill_object
+return weaponskillObject

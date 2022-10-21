@@ -40,7 +40,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
         package.loaded[interactionContainersPath] = nil
     end
 
-    local containerFiles = GetQuestAndMissionFilenamesList()
+    local containerFiles = GetContainerFilenamesList()
     local containers = {}
     for i=1, #containerFiles do
         containers[i] = utils.prequire(containerFiles[i])
@@ -111,12 +111,16 @@ function InteractionGlobal.onTrade(player, npc, trade, fallbackFn)
     return InteractionGlobal.lookup:onTrade(player, npc, trade, fallbackFn)
 end
 
-function InteractionGlobal.onMobDeath(mob, player, isKiller, firstCall, fallbackFn)
-    return InteractionGlobal.lookup:onMobDeath(mob, player, isKiller, firstCall, fallbackFn)
+function InteractionGlobal.onMobDeath(mob, player, optParams, fallbackFn)
+    return InteractionGlobal.lookup:onMobDeath(mob, player, optParams, fallbackFn)
 end
 
 function InteractionGlobal.onZoneIn(player, prevZone, fallbackFn)
     return InteractionGlobal.lookup:onZoneIn(player, prevZone, fallbackFn)
+end
+
+function InteractionGlobal.onZoneOut(player, fallbackFn)
+    return InteractionGlobal.lookup:onZoneOut(player, fallbackFn)
 end
 
 function InteractionGlobal.onRegionEnter(player, region, fallbackFn)

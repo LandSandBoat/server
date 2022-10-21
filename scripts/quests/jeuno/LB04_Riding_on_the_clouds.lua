@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 131
 -- Maat : !pos 8 3 118 243
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -52,7 +50,7 @@ end
 quest.reward =
 {
     fame = 60,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.CLOUD_BREAKER,
 }
 
@@ -64,7 +62,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 61 and
                 player:getLevelCap() == 65 and
-                xi.settings.MAX_LEVEL >= 70
+                xi.settings.main.MAX_LEVEL >= 70
         end,
 
         [xi.zone.RULUDE_GARDENS] =

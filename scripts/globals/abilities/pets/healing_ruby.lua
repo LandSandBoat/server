@@ -2,20 +2,20 @@
 -- Healing Ruby
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
-    local base = 14+target:getMainLvl()+skill:getTP()/12
+abilityObject.onPetAbility = function(target, pet, skill)
+    local base = 14+target:getMainLvl()+pet:getTP()/12
     if (pet:getMainLvl()>30) then
-        base = 44 + 3*(pet:getMainLvl()-30) + skill:getTP()/12 * (pet:getMainLvl()*0.075 - 1)
+        base = 44 + 3*(pet:getMainLvl()-30) + pet:getTP()/12 * (pet:getMainLvl()*0.075 - 1)
     end
 
     if (target:getHP()+base > target:getMaxHP()) then
@@ -26,4 +26,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return base
 end
 
-return ability_object
+return abilityObject

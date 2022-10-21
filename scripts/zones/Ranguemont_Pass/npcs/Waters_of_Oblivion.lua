@@ -15,15 +15,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TrosKilled = player:getCharVar("TrosKilled")
+    local trosKilled = player:getCharVar("TrosKilled")
 
-    if (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and
+    if
+        player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and
         not GetMobByID(ID.mob.TROS):isSpawned() and
-        (TrosKilled == 0 or (os.time() - player:getCharVar("Tros_Timer")) > 60)
-    ) then
+        (trosKilled == 0 or (os.time() - player:getCharVar("Tros_Timer")) > 60)
+    then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         SpawnMob(ID.mob.TROS):updateClaim(player)
-    elseif (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and TrosKilled == 1) then
+    elseif (player:hasKeyItem(xi.ki.MERTAIRES_BRACELET) and trosKilled == 1) then
         player:startEvent(8) -- Finish Quest "Painful Memory"
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -35,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 8) then
-        if (npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, {item=16766})) then
+        if (npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY, { item=16766 })) then
             player:delKeyItem(xi.ki.MERTAIRES_BRACELET)
             player:setCharVar("TrosKilled", 0)
             player:setCharVar("Tros_Timer", 0)

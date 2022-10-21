@@ -11,24 +11,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local copMission = player:getCurrentMission(COP)
-    local copStatus = player:getCharVar("PromathiaStatus")
-
     if
-        copMission == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and
-        copStatus == 3 and
-        not GetMobByID(ID.mob.NUNYUNUWI):isSpawned()
-    then
-        SpawnMob(ID.mob.NUNYUNUWI):updateClaim(player)
-    elseif
-        (
-            copMission == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and
-            copStatus == 4
-        ) or
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR) or
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
     then
-        if (player:getZPos() < 318) then
+        if player:getZPos() < 318 then
             player:startEvent(69)
         else
             player:startEvent(70)
@@ -36,8 +23,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)

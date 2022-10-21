@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -66,7 +66,7 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_WEAPONSKILL_FINISH:
         {
-            packBitsBE(data, action.actionid, 86, 10);
+            packBitsBE(data, action.actionid, 86, 16);
         }
         break;
         case ACTION_JOBABILITY_START:
@@ -78,6 +78,11 @@ CActionPacket::CActionPacket(action_t& action)
         {
             packBitsBE(data, action.actionid, 86, 10);
             packBitsBE(data, action.recast, 118, 10);
+        }
+        break;
+        case ACTION_RUN_WARD_EFFUSION:
+        {
+            packBitsBE(data, action.actionid, 86, 10);
         }
         break;
         case ACTION_WEAPONSKILL_START:
@@ -175,65 +180,49 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_MAGIC_START:
         {
-            ref<uint8>(0x0A) = 0xE0;
-            ref<uint8>(0x0B) = 0x58;
+            // FourCC command "ca" - cast
+            packBitsBE(data, 0x6163, 86, 16);
 
             switch (action.spellgroup)
             {
                 case SPELLGROUP_WHITE:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0x1D;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6877, 102, 16); // "wh" - white magic
                 }
                 break;
                 case SPELLGROUP_BLACK:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0xD8;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6B62, 102, 16); // "bk" - black magic
                 }
                 break;
                 case SPELLGROUP_BLUE:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0x18;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6C62, 102, 16); // "bl" - blue magic
                 }
                 break;
                 case SPELLGROUP_SONG:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0xDC;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6F73, 102, 16); // "so" - song
                 }
                 break;
                 case SPELLGROUP_NINJUTSU:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0x9B;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6A6E, 102, 16); // "nj" - ninjutsu
                 }
                 break;
                 case SPELLGROUP_SUMMONING:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0x5C;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6D73, 102, 16); // "sm" - summoning magic
                 }
                 break;
                 case SPELLGROUP_GEOMANCY:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x19;
+                    packBitsBE(data, 0x6567, 102, 16); // "ge" - geomancy
                 }
                 break;
                 case SPELLGROUP_TRUST:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x18;
+                    packBitsBE(data, 0x6166, 102, 16); // "fa" - faith aka trust
                 }
                 break;
                 default:
@@ -252,65 +241,51 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_MAGIC_INTERRUPT:
         {
-            ref<uint8>(0x0A) = 0xE0;
-            ref<uint8>(0x0B) = 0x1C;
+            packBitsBE(data, action.recast, 118, 16);
+
+            // FourCC command "sp" - interrupt
+            packBitsBE(data, 0x7073, 86, 16);
 
             switch (action.spellgroup)
             {
                 case SPELLGROUP_WHITE:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0x1D;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6877, 102, 16); // "wh" - white magic
                 }
                 break;
                 case SPELLGROUP_BLACK:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0xD8;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6B62, 102, 16); // "bk" - black magic
                 }
                 break;
                 case SPELLGROUP_BLUE:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0x18;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6C62, 102, 16); // "bl" - blue magic
                 }
                 break;
                 case SPELLGROUP_SONG:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0xDC;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6F73, 102, 16); // "so" - song
                 }
                 break;
                 case SPELLGROUP_NINJUTSU:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0x9B;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6A6E, 102, 16); // "nj" - ninjutsu
                 }
                 break;
                 case SPELLGROUP_SUMMONING:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0x5C;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6D73, 102, 16); // "sm" - summoning magic
                 }
                 break;
                 case SPELLGROUP_GEOMANCY:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x19;
+                    packBitsBE(data, 0x6567, 102, 16); // "ge" - geomancy
                 }
                 break;
                 case SPELLGROUP_TRUST:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x18;
+                    packBitsBE(data, 0x6166, 102, 16); // "fa" - faith aka trust
                 }
                 break;
                 default:
@@ -344,13 +319,14 @@ CActionPacket::CActionPacket(action_t& action)
 
         for (auto&& target : list.actionTargets)
         {
-            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5); // Physical reaction to damage
-            bitOffset = packBitsBE(data, target.animation, bitOffset, 12); // анимация специальных эффектов (monster TP animations are 1800+)
+            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5);   // Physical reaction to damage
+            bitOffset = packBitsBE(data, target.animation, bitOffset, 12);                      // animation ID
             bitOffset = packBitsBE(data, static_cast<uint64>(target.speceffect), bitOffset, 7); // specialEffect
             bitOffset = packBitsBE(data, target.knockback, bitOffset, 3);                       // knockback amount (mobskill only)
-            bitOffset = packBitsBE(data, target.param, bitOffset, 17);                          // параметр сообщения (урон)
-            bitOffset = packBitsBE(data, target.messageID, bitOffset, 10);                      // сообщение
-            bitOffset += 31;
+            bitOffset = packBitsBE(data, target.param, bitOffset, 17);                          // message parameter (damage/healing)
+            bitOffset = packBitsBE(data, target.messageID, bitOffset, 10);                      // message
+            bitOffset = packBitsBE(data, static_cast<uint64>(target.modifier), bitOffset, 31);  // "Resist!", Immunobreak, MB for Swipe/Lunge, Cover message modifiers.
+                                                                                                // 4 bits are currently used, with the other bits unknown
 
             if (target.additionalEffect != SUBEFFECT_NONE)
             {
@@ -403,7 +379,7 @@ CActionPacket::CActionPacket(action_t& action)
 // 0xE0 0x1C 0xDC 0xDC 0x1B - Song Interrupt
 
 //                                   -11.00011010.000110- ActionStart
-//									 -11.00111000.001110- ActionInterrupt
+//                                   -11.00111000.001110- ActionInterrupt
 //                                   -11.00111000.010110- ActionFinish
 
 // 0xE0 0x58 0xD8 0x1D 0x1A - 00-0001-11.00011010.000110-11.10111000.01-011000 - White Magic Start

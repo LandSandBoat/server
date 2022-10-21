@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if (npc:getAnimation() == 9) then
+    if npc:getAnimation() == 9 then
         npc:openDoor()
     end
 end

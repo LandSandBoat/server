@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!npchere {npcID} {noDepop}")
+    player:PrintToPlayer("!npchere (npcID) (noDepop)")
 end
 
 function onTrigger(player, npcId, noDepop)

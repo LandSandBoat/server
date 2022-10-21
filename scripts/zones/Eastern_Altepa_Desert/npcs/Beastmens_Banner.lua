@@ -15,11 +15,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("OPTION: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf("OPTION: %u", option)
 end
 
 return entity

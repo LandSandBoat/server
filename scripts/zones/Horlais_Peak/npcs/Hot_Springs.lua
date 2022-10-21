@@ -26,7 +26,7 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addItem(4949) -- Scroll of Jubaku: Ichi
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4949)
-        player:addFame(NORG, 75)
+        player:addFame(xi.quest.fame_area.NORG, 75)
         player:addTitle(xi.title.CRACKER_OF_THE_SECRET_CODE)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     end

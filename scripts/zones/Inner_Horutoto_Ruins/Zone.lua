@@ -1,16 +1,14 @@
 -----------------------------------
---
 -- Zone: Inner Horutoto Ruins (192)
---
 -----------------------------------
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
     zone:registerRegion(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
     zone:registerRegion(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
@@ -19,7 +17,7 @@ zone_object.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -29,11 +27,11 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
     local white  = GetNPCByID(circle+1)
@@ -56,6 +54,7 @@ zone_object.onRegionEnter = function(player, region)
                 end
             end
         end,
+
         [2] = function (x)  -- White Circle
             if player:getMainJob() == xi.job.WHM and region:AddCount(1) == 1 then
                 white:setAnimation(xi.anim.OPEN_DOOR)
@@ -66,6 +65,7 @@ zone_object.onRegionEnter = function(player, region)
                 end
             end
         end,
+
         [3] = function (x)  -- Black Circle
             if player:getMainJob() == xi.job.BLM and region:AddCount(1) == 1 then
                 black:setAnimation(xi.anim.OPEN_DOOR)
@@ -76,14 +76,14 @@ zone_object.onRegionEnter = function(player, region)
                 end
             end
         end,
+
         [4] = function (x)  -- Teleport at H-6
             player:startEvent(47)
         end,
     }
-
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
     local white  = GetNPCByID(circle+1)
@@ -97,12 +97,14 @@ zone_object.onRegionLeave = function(player, region)
                 red:entityAnimationPacket("kmin")
             end
         end,
+
         [2] = function (x)  -- White Circle
             if player:getMainJob() == xi.job.WHM and region:DelCount(1) == 0 then
                 white:setAnimation(xi.anim.CLOSE_DOOR)
                 white:entityAnimationPacket("kmin")
             end
         end,
+
         [3] = function (x)  -- Black Circle
             if player:getMainJob() == xi.job.BLM and region:DelCount(1) == 0 then
                 black:setAnimation(xi.anim.CLOSE_DOOR)
@@ -117,10 +119,10 @@ zone_object.onRegionLeave = function(player, region)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

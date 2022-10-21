@@ -2,6 +2,7 @@ require('scripts/globals/interaction/actions/event')
 require('scripts/globals/interaction/actions/message')
 require('scripts/globals/interaction/actions/sequence')
 require('scripts/globals/interaction/actions/lambdaaction')
+require('scripts/globals/interaction/actions/noaction')
 
 actionUtil = actionUtil or {}
 
@@ -111,7 +112,6 @@ function actionUtil.parseActionDef(actionDef)
 
     return action
 end
-
 
 -- Returns a string containing identification for a specific action
 function actionUtil.getActionVarName(secondLevelKey, thirdLevelKey, suffix)

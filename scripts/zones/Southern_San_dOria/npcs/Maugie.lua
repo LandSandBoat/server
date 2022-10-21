@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -16,7 +16,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local grimySignpost = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
-    if (grimySignpost == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then
+    if (grimySignpost == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2) then
         player:startEvent(45)
     elseif (grimySignpost == QUEST_ACCEPTED) then
         if (player:getCharVar("CleanSignPost") == 15) then
@@ -39,9 +39,9 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     elseif (csid == 44) then
         player:setCharVar("CleanSignPost", 0)
-        player:addFame(SANDORIA, 30)
-        player:addGil(xi.settings.GIL_RATE*1500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1500)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
+        player:addGil(xi.settings.main.GIL_RATE*1500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*1500)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
 end

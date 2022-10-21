@@ -22,7 +22,7 @@
 #ifndef _LUASTATUSEFFECT_H
 #define _LUASTATUSEFFECT_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CStatusEffect;
@@ -51,6 +51,7 @@ public:
     uint32 getTimeRemaining();
     uint32 getTickCount();
     uint32 getTick();
+    uint16 getIcon();
 
     void setIcon(uint16 icon);
     void setPower(uint16 power);

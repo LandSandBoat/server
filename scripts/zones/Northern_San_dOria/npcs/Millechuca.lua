@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.MILLECHUCA_OPEN_DIALOG)
-        xi.shop.general(player, stock, SANDORIA)
+        xi.shop.general(player, stock, xi.quest.fame_area.SANDORIA)
     end
 end
 

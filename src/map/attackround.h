@@ -34,9 +34,9 @@
 class CAttack;
 
 /************************************************************************
- *																		*
- *  An attack round object (Can contain multiple swings)					*
- *																		*
+ *                                                                        *
+ *  An attack round object (Can contain multiple swings)                    *
+ *                                                                        *
  ************************************************************************/
 class CAttackRound
 {

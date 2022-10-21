@@ -21,8 +21,9 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKP
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     item = xi.items.LIGHT_AXE,
-    itemParams = {fromTrade = true},
+    itemParams = { fromTrade = true },
     title = xi.title.PICKPOCKET_PINCHER,
 }
 
@@ -46,7 +47,6 @@ quest.sections =
             },
         },
     },
-
 
     -- Informational: You can talk to nearby guards and by-standers, some will report having seen the thief allowing you to pick up the trail.
     {
@@ -216,7 +216,7 @@ quest.sections =
             onEventFinish =
             {
                 [121] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.GILT_GLASSES, {fromTrade = true}) then
+                    if npcUtil.giveItem(player, xi.items.GILT_GLASSES, { fromTrade = true }) then
                         player:confirmTrade()
                     end
                 end,

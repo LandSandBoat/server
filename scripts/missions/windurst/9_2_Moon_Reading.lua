@@ -10,8 +10,6 @@
 -- _6q2             : !pos 0.1 -49 37 242
 -- qm16             : !pos -239.442 -1.000 -18.870 159
 -- Qu'Hau Spring    : !pos 0 -29 64 122
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

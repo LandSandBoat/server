@@ -21,8 +21,10 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCharVar("HollaChipRegistration") == 1 then
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 6) -- Device seems to be functioning correctly.
+    elseif player:checkDistance(npc) <= 2.71 then
+        player:startEvent(163) -- Hexagonal Cones
     else
-        player:startEvent(165) -- Hexagonal Cones
+        player:messageSpecial(ID.text.YOU_MUST_MOVE_CLOSER)
     end
 end
 

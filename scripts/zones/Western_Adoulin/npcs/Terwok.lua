@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Order_Up = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
-    local Order_Terwok = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 7)
+    local orderUp = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
+    local orderTerwok = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 7)
 
-    if Order_Up == QUEST_ACCEPTED and not Order_Terwok then
+    if orderUp == QUEST_ACCEPTED and not orderTerwok then
         -- Progresses Quest: 'Order Up'
         player:startEvent(67)
     else

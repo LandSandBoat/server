@@ -1064,6 +1064,11 @@ xi.title =
     ONGO_OBLITERATOR                          = 1066,
     AREPATI_ASSAULTER                         = 1067,
     BUMBA_BEFOULER                            = 1068,
+    DHARTOK_DEFILER                           = 1069,
+    GARTELL_GRINDER                           = 1070,
+    TRIBOULEX_TERRORIZER                      = 1071,
+    AITA_ABNEGATER                            = 1072,
+    AMINON_APPREHENDER                        = 1073,
     RAPTOR_WRANGLER                           = 1116,
     GARDENER_FOR_THE_AGES                     = 1117,
     LAGOON_EXPLORER                           = 1118,
@@ -1089,6 +1094,11 @@ xi.title =
     DESTINY_MASTER                            = 1138,
     TIRELESS_TRACKER                          = 1139,
     GALKAN_HAZARD                             = 1140,
+    BEARER_OF_SECRETS                         = 1141,
+    LONG_LIVE_MUMOR                           = 1142,
+    PARTER_OF_THE_VEIL                        = 1143,
+    DEMONIC_DREAMER                           = 1144,
+    SEARCHER_OF_THE_VORACIOUS                 = 1145,
 }
 
 -----------------------------------

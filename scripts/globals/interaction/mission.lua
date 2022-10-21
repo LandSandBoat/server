@@ -39,7 +39,11 @@ end
 function Mission:complete(player)
     local didComplete = npcUtil.completeMission(player, self.areaId, self.missionId, self.reward)
     if didComplete then
-        player:setMissionStatus(self.areaId, 0)
+        -- We do not want to reset values for CoP Missions
+        if self.areaId ~= 6 then
+            player:setMissionStatus(self.areaId, 0)
+        end
+
         self:cleanup(player)
     end
     return didComplete

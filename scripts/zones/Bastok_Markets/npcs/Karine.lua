@@ -3,27 +3,22 @@
 --  NPC: Karine
 -- Map Seller NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/magic_maps")
+require("scripts/globals/maps")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
 end
 
 entity.onTrigger = function(player, npc)
-    CheckMaps(player, npc, 210)
+    xi.maps.onTrigger(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if (csid == 210) then
-        CheckMapsUpdate(player, option, ID.text.NOT_HAVE_ENOUGH_GIL, ID.text.KEYITEM_OBTAINED)
-    end
+entity.onEventUpdate = function(player, csid, option, npc)
+    xi.maps.onEventUpdate(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

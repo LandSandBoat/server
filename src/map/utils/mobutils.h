@@ -24,18 +24,23 @@
 
 #include <unordered_map>
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "../entities/mobentity.h"
 #include "../modifier.h"
 
-typedef struct
+struct ModsList_t
 {
     uint32                  id;
     std::vector<CModifier*> mods;
     std::vector<CModifier*> mobMods;
-} ModsList_t;
+
+    ModsList_t()
+    {
+        id = 0;
+    }
+};
 
 enum class WeaknessType
 {
@@ -49,7 +54,7 @@ typedef std::unordered_map<uint32, ModsList_t*> ModsMap_t;
 
 namespace mobutils
 {
-    void CalculateStats(CMobEntity* PMob);
+    void CalculateMobStats(CMobEntity* PMob, bool recover = true);
     void SetupJob(CMobEntity* PMob);
     void SetupRoaming(CMobEntity* PMob);
     void SetupDynamisMob(CMobEntity* PMob);
@@ -78,6 +83,7 @@ namespace mobutils
 
     void        SetSpellList(CMobEntity*, uint16);
     CMobEntity* InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* = nullptr);
+    CMobEntity* InstantiateDynamicMob(uint32 groupid, uint16 groupZoneId, uint16 targetZoneId);
     void        WeaknessTrigger(CBaseEntity* PTarget, WeaknessType level);
 }; // namespace mobutils
 

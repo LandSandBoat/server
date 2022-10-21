@@ -17,7 +17,7 @@
 #ifndef _CCHAREMOTIONJUMPPACKET_H
 #define _CCHAREMOTIONJUMPPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

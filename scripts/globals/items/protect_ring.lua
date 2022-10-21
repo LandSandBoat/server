@@ -6,13 +6,13 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local power = 50
     local tier = 2
     local bonus = 0
@@ -29,4 +29,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

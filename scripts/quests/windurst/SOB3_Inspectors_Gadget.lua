@@ -16,7 +16,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR
 quest.reward =
 {
     fame     = 10,
-    fameArea = WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.items.HEKO_OBI,
     title    = xi.title.FAKE_MOUSTACHED_INVESTIGATOR,
 }
@@ -37,7 +37,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(WINDURST) >= 2 and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                         not quest:getMustZone(player)
                     then
                         return quest:progressEvent(413) -- Quest starting event.
@@ -118,7 +118,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, {{xi.items.BALL_OF_SARUTA_COTTON, 4}}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.BALL_OF_SARUTA_COTTON, 4 } }) and
                         not player:hasKeyItem(xi.ki.FAKE_MOUSTACHE)
                     then
                         return quest:progressEvent(552)

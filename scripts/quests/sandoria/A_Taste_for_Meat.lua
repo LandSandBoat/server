@@ -17,6 +17,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_F
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     gil = 150,
     title = xi.title.RABBITER,
 }
@@ -59,7 +60,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, {{xi.items.SLICE_OF_HARE_MEAT, 5}})
+                        npcUtil.tradeHasExactly(trade, { { xi.items.SLICE_OF_HARE_MEAT, 5 } })
                     then
                         return quest:progressEvent(528)
                     else

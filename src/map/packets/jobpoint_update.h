@@ -17,7 +17,7 @@
 #ifndef _CJOBPOINTUPDATEPACKET_H
 #define _CJOBPOINTUPDATEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../job_points.h"
 #include "basic.h"

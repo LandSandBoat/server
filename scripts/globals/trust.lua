@@ -1,12 +1,13 @@
 -----------------------------------
 -- Trust
 -----------------------------------
+require("scripts/globals/bcnm")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
+require("scripts/globals/settings")
+require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -26,7 +27,7 @@ xi.trust.message_offset =
     SPECIAL_MOVE_2 = 19,
 }
 
-local MAX_MESSAGE_PAGE = 121
+local maxMessagePage = 121
 
 local rovKIBattlefieldIDs = set{
     5,    -- Shattering Stars (WAR LB5)
@@ -55,7 +56,8 @@ local rovKIBattlefieldIDs = set{
 
 -- NOTE: Unfortunately, these are not linear, so we have to use
 --       a big lookup of offsets instead of a single offset
-local poolIDToMessagePageOffset = {
+local poolIDToMessagePageOffset =
+{
     [5896] = 0,   -- Shantotto
     [5897] = 1,   -- Naji
     [5898] = 2,   -- Kupipi
@@ -178,6 +180,28 @@ local poolIDToMessagePageOffset = {
     [6019] = 112, -- Shantotto II
 }
 
+-- TODO: handle Dynamis Divergence, Omen, etc that are not "battlefields" but have a trust upper limit.
+xi.trust.checkBattlefieldTrustCount = function (caster)
+    local battlefield = caster:getBattlefield()
+    if battlefield then
+        local participants     = battlefield:getPlayersAndTrusts()
+        local maxParticipants  = battlefield:getMaxParticipants()
+        local numPlayers       = battlefield:getPlayerCount()
+        local numTrusts        = 0
+
+        for _, entity in ipairs(participants) do
+            local objType = entity:getObjType()
+
+            if objType == xi.objType.TRUST then
+               numTrusts = numTrusts + 1
+            end
+        end
+
+        return (numPlayers + numTrusts) < maxParticipants
+    end
+    return true
+end
+
 xi.trust.hasPermit = function(player)
     return player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
            player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
@@ -233,8 +257,13 @@ end
 
 xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     -- Trusts must be enabled in settings
-    if xi.settings.ENABLE_TRUST_CASTING == 0 then
+    if xi.settings.main.ENABLE_TRUST_CASTING == 0 then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
+    end
+
+    -- GMs can do what they want (as long as ENABLE_TRUST_CASTING is enabled)
+    if caster:getGMLevel() > 0 and caster:checkNameFlags(0x04000000) then
+        return 0
     end
 
     -- Trusts not allowed in an alliance
@@ -325,6 +354,10 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
         return -1
     end
 
+    if not xi.trust.checkBattlefieldTrustCount(caster) then
+        return xi.msg.basic.TRUST_NO_CAST_TRUST
+    end
+
     return 0
 end
 
@@ -351,8 +384,8 @@ xi.trust.message = function(mob, message_offset)
         return
     end
 
-    if page_offset > MAX_MESSAGE_PAGE then
-        print("trust.lua: MAX_MESSAGE_PAGE exceeded!")
+    if page_offset > maxMessagePage then
+        print("trust.lua: maxMessagePage exceeded!")
         return
     end
 

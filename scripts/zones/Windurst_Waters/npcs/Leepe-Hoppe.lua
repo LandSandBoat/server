@@ -4,7 +4,7 @@
 -- Involved in Mission 1-3, Mission 7-2
 -- !pos 13 -9 -197 238
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
@@ -70,8 +70,8 @@ entity.onTrigger = function(player, npc)
 
     -- Tuning In
     if tuningIn == QUEST_AVAILABLE
-        and player:getFameLevel(WINDURST) >= 4
-        and (player:getCurrentMission(COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
+        and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4
+        and (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
     then
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
@@ -84,10 +84,10 @@ entity.onTrigger = function(player, npc)
 
     -- The Moonlit Path and Other Fenrir Stuff!
     elseif (moonlitPath == QUEST_AVAILABLE and
-        player:getFameLevel(WINDURST) >= 6 and
-        player:getFameLevel(SANDORIA) >= 6 and
-        player:getFameLevel(BASTOK) >= 6 and
-        player:getFameLevel(NORG) >= 4) then -- Fenrir flag event
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6 and
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 4) then -- Fenrir flag event
 
         player:startEvent(842, 0, 1125)
     elseif (moonlitPath == QUEST_ACCEPTED) then
@@ -156,8 +156,8 @@ entity.onEventFinish = function(player, csid, option)
         elseif (option == 4) then reward = 13399 -- Fenrir's Earring
         elseif (option == 5) then reward = 1208 -- Ancient's Key
         elseif (option == 6) then
-            player:addGil(xi.settings.GIL_RATE*15000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*15000) -- Gil
+            player:addGil(xi.settings.main.GIL_RATE*15000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*15000) -- Gil
         elseif (option == 7) then
             player:addSpell(297) -- Pact
         elseif (option == 8) then
@@ -171,7 +171,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addTitle(xi.title.HEIR_OF_THE_NEW_MOON)
         player:delKeyItem(xi.ki.WHISPER_OF_THE_MOON)
         player:setCharVar("MoonlitPath_date", getMidnight())
-        player:addFame(WINDURST, 30)
+        player:addFame(xi.quest.fame_area.WINDURST, 30)
 
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
@@ -191,7 +191,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 884 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
 
-    elseif csid == 886 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TUNING_IN, {
+    elseif csid == 886 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN, {
         gil = 4000,
         title = xi.title.FINE_TUNER,
     }) then
@@ -202,7 +202,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("TuningOut_Progress", 1)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
 
-    elseif csid == 897 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TUNING_OUT, {
+    elseif csid == 897 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT, {
         item = 15180, -- Cache-Nez
         title = xi.title.FRIEND_OF_THE_HELMED,
     }) then

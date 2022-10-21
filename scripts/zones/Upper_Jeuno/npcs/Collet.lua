@@ -40,7 +40,7 @@ end
 entity.onTrigger = function(player, npc)
     local aClockMostdelicate = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
     if
-        player:getFameLevel(JEUNO) >= 5 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5 and
         aClockMostdelicate == QUEST_AVAILABLE and
         player:getCharVar("aClockMostdelicateVar") == 0
     then
@@ -61,8 +61,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 112 then
         player:setCharVar("aClockMostdelicateVar", 1)
     elseif csid == 115 then
-        player:addCharVar("saveTheClockTowerVar", 1)
-        player:addCharVar("saveTheClockTowerNPCz1", 2)
+        player:incrementCharVar("saveTheClockTowerVar", 1)
+        player:incrementCharVar("saveTheClockTowerNPCz1", 2)
     end
 end
 

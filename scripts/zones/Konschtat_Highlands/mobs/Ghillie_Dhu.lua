@@ -29,17 +29,17 @@ end
 entity.onMobFight = function(mob, target)
     -- Guesstimating the regain scales from 1-100,
     -- nobody has the excact values but it scales with HP.
-    local TP = (100 - mob:getHPP()) * 0.5
-    if mob:getMod(xi.mod.REGAIN) ~= utils.clamp(TP, 1, 100) then
-        mob:setMod(xi.mod.REGAIN, utils.clamp(TP, 1, 100))
+    local tp = (100 - mob:getHPP()) * 0.5
+    if mob:getMod(xi.mod.REGAIN) ~= utils.clamp(tp, 1, 100) then
+        mob:setMod(xi.mod.REGAIN, utils.clamp(tp, 1, 100))
     end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, {power = math.random(10, 30)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = math.random(10, 30) })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 204)
     -- I think he still counts for the FoV page? Most NM's do not though.
     xi.regime.checkRegime(player, mob, 81, 1, xi.regime.type.FIELDS)

@@ -3,17 +3,17 @@
 -- Deals fire damage that gradually reduces
 -- a target's HP. Damage dealt is greatly affected by the weather.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- get helix acc/att merits
     local merit = caster:getMerit(xi.merit.HELIX_MAGIC_ACC_ATT)
 
@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- add in final adjustments
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
     -- calculate Damage over time
-    dot = target:magicDmgTaken(dot)
+    dot = target:magicDmgTaken(dot, spell:getElement())
 
     local duration = getHelixDuration(caster) + caster:getMod(xi.mod.HELIX_DURATION)
 
@@ -56,4 +56,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

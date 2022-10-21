@@ -21,7 +21,7 @@
 
 #include <math.h>
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "roe_sparkupdate.h"
 
@@ -36,12 +36,12 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 
     uint32 vanaTime        = CVanaTime::getInstance()->getVanaTime();
     uint32 daysSinceEpoch  = vanaTime / (60 * 60 * 24);
-    uint32 weeksSinceEpoch = (vanaTime + 86400) / 7;
+    uint32 weeksSinceEpoch = daysSinceEpoch / 7;
 
-    int ret = Sql_Query(SqlHandle, query, PChar->id);
-    if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    int ret = sql->Query(query, PChar->id);
+    if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
     {
-        ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0);
+        ref<uint32>(0x04) = sql->GetIntData(0);
         ref<uint8>(0x08)  = 0; // Deeds
 
         ref<uint8>(0x0A) = 0x00;

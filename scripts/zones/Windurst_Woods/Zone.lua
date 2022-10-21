@@ -1,41 +1,32 @@
 -----------------------------------
---
 -- Zone: Windurst_Woods (241)
---
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/conquest")
-require("scripts/settings/main")
-require("scripts/globals/chocobo")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Windurst_Woods/IDs')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     applyHalloweenNpcCostumes(zone:getID())
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 367
         end
+
         player:setPos(0, 0, -50, 0)
         player:setHomePoint()
-    elseif xi.settings.ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
-        cs = 30035
-    elseif
-        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
-        (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
-    then
-        cs = 30036
     end
 
     -- MOG HOUSE EXIT
@@ -47,26 +38,20 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 367 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 30035 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
-    elseif csid == 30036 then
-        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
-        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 
-return zone_object
+return zoneObject

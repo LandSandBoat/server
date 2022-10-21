@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local eald_narche = GetMobByID(mob:getID() - 1)
     eald_narche:delStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     eald_narche:delStatusEffect(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
@@ -53,8 +53,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    -- printf("finishCSID: %u", csid)
-
     if (csid == 32004) then
         DespawnMob(target:getID())
         DespawnMob(target:getID()-1)

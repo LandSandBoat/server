@@ -9,8 +9,6 @@
 -- Nareema       : !pos 518.387 -24.707 -467.297 79
 -- Waudeen       : !pos 673.882 -23.995 367.604 61
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

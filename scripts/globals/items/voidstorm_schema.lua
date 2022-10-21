@@ -3,14 +3,14 @@
 -- Voidstorm Schema
 -- Teaches the white magic Voidstorm
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(118)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(118)
 end
 
-return item_object
+return itemObject

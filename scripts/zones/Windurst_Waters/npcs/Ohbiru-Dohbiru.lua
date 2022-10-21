@@ -7,7 +7,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
@@ -33,16 +33,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pfame = player:getFameLevel(WINDURST)
+    local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local needToZone = player:needToZone()
-    local SayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-    local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
+    local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==2) then
-        player:startEvent(872)
-    elseif ((SayFlowers == QUEST_ACCEPTED or SayFlowers == QUEST_COMPLETED) and FlowerProgress == 1) then
+    if ((sayFlowers == QUEST_ACCEPTED or sayFlowers == QUEST_COMPLETED) and flowerProgress == 1) then
         if (needToZone) then
             player:startEvent(518)
         elseif (player:getCharVar("FLOWER_PROGRESS") == 2) then
@@ -65,7 +63,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     local flowerList =
     {
         [0] = { itemid = 948, gil = 300 }, -- Carnation
@@ -84,19 +81,17 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
-        player:addGil(xi.settings.GIL_RATE*4500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
+        player:addGil(xi.settings.main.GIL_RATE*4500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*4500)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-        player:addFame(WINDURST, 100)
+        player:addFame(xi.quest.fame_area.WINDURST, 100)
         player:addTitle(xi.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()
     elseif (csid == 791 and turmoil == 2) then -- Completes Toraimarai turmoil - repeats
-        player:addGil(xi.settings.GIL_RATE*4500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
-        player:addFame(WINDURST, 50)
+        player:addGil(xi.settings.main.GIL_RATE*4500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*4500)
+        player:addFame(xi.quest.fame_area.WINDURST, 50)
         player:tradeComplete()
-    elseif (csid == 872) then
-        player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 3)
     elseif (csid == 516) then
         if (option < 7) then
             local choice = flowerList[option]

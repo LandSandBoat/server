@@ -33,6 +33,15 @@
 #include "../trait.h"
 #include "baseentity.h"
 
+enum DEATH_TYPE
+{
+    NONE        = 0,
+    PHYSICAL    = 1,
+    MAGICAL     = 2,
+    WS_PHYSICAL = 3,
+    WS_MAGICAL  = 4,
+};
+
 enum class ECOSYSTEM : uint8
 {
     ECO_ERROR      = 0,
@@ -262,16 +271,45 @@ enum class DAMAGE_TYPE : uint16
     DARK      = 13
 };
 
-enum class REACTION
+// This enum class is a set of bitfields that modify messages sent to the client.
+// There are helpers (PARRY/EVADE) because it is not inuitive
+// These flag names may not match SE's intent perfectly, but seem to work well.
+
+// For example
+// A guard is HIT + GUARDED
+// A parry is HIT + MISS + GUARDED
+// A block is HIT + BLOCK
+// It also seems weaponskills and job abilities set ABILITY in addition to these flags.
+// All of these flags are also seen in weaponskills.
+enum class REACTION : uint8
 {
-    NONE  = 0x00, // No Reaction
-    MISS  = 0x01, // Miss
-    PARRY = 0x03, // Block with weapons (MISS + PARRY)
-    BLOCK = 0x04, // Block with shield
-    HIT   = 0x08, // Hit
-    EVADE = 0x09, // Evasion (MISS + HIT)
-    GUARD = 0x14  // mnk guard (20 dec)
+    NONE    = 0x00, // No Reaction
+    MISS    = 0x01, // Miss
+    GUARDED = 0x02, // Bit to indicate guard, used individually to indicate guard during WS packet as well
+    PARRY   = 0x03, // Block with weapons (MISS + GUARDED)
+    BLOCK   = 0x04, // Block with shield, bit to indicate blocked during WS packet as well
+    HIT     = 0x08, // Hit
+    EVADE   = 0x09, // Evasion (MISS + HIT)
+    ABILITY = 0x10, // Observed on JA and WS
 };
+
+// These operators are used to combine bits that may not have a discrete value upon combining.
+inline REACTION operator|(REACTION a, REACTION b)
+{
+    return (REACTION)((uint8)a | (uint8)b);
+}
+
+inline REACTION operator&(REACTION a, REACTION b)
+{
+    return (REACTION)((uint8)a & (uint8)b);
+}
+
+inline REACTION operator|=(REACTION& a, REACTION b)
+{
+    a = a | b;
+
+    return a;
+}
 
 enum class SPECEFFECT
 {
@@ -281,6 +319,15 @@ enum class SPECEFFECT
     RAISE        = 0x11,
     RECOIL       = 0x20,
     CRITICAL_HIT = 0x22
+};
+
+enum class MODIFIER
+{
+    NONE        = 0x00,
+    COVER       = 0x01,
+    RESIST      = 0x02,
+    MAGIC_BURST = 0x04, // Currently known to be used for Swipe/Lunge only
+    IMMUNOBREAK = 0x08,
 };
 
 enum SUBEFFECT
@@ -368,6 +415,7 @@ enum TARGETTYPE
     TARGET_NPC                     = 0x40, // скорее всего подразумевается mob, выглядящий как npc и воюющий на стороне персонажа
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
     TARGET_PET                     = 0x100,
+    TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
 };
 
 enum SKILLCHAIN_ELEMENT
@@ -413,6 +461,9 @@ enum IMMUNITY : uint16
     IMMUNITY_REQUIEM     = 0x400,  // 1024
     IMMUNITY_LIGHT_SLEEP = 0x800,  // 2048
     IMMUNITY_DARK_SLEEP  = 0x1000, // 4096
+    IMMUNITY_ASPIR       = 0x2000, // 8192
+    IMMUNITY_TERROR      = 0x4000, // 16384
+    IMMUNITY_DISPEL      = 0x8000, // 32768
 };
 
 struct apAction_t
@@ -432,17 +483,17 @@ struct apAction_t
     uint16         spikesMessage;    // 10 bits
 
     apAction_t()
+    : reaction(REACTION::NONE)
+    , speceffect(SPECEFFECT::NONE)
+    , additionalEffect(SUBEFFECT_NONE)
+    , spikesEffect(SUBEFFECT_NONE)
     {
         ActionTarget     = nullptr;
-        reaction         = REACTION::NONE;
         animation        = 0;
-        speceffect       = SPECEFFECT::NONE;
         param            = 0;
         messageID        = 0;
-        additionalEffect = SUBEFFECT_NONE;
         addEffectParam   = 0;
         addEffectMessage = 0;
-        spikesEffect     = SUBEFFECT_NONE;
         spikesParam      = 0;
         spikesMessage    = 0;
         knockback        = 0;
@@ -450,9 +501,9 @@ struct apAction_t
 };
 
 /************************************************************************
- *																		*
- *  TP хранится то пому же принципу, что и skill, т.е. 6,4% = 64			*
- *																		*
+ *                                                                      *
+ *  TP хранится то пому же принципу, что и skill, т.е. 6,4% = 64        *
+ *                                                                      *
  ************************************************************************/
 
 struct health_t
@@ -525,6 +576,9 @@ public:
     void SetSJob(uint8 sjob);   // дополнительная профессия
     void SetMLevel(uint8 mlvl); // уровень главной профессии
     void SetSLevel(uint8 slvl); // уровень дополнительной профессии
+
+    void  SetDeathType(uint8 type);
+    uint8 GetDeathType();
 
     uint8 GetHPP() const;   // количество hp в процентах
     int32 GetMaxHP() const; // максимальное количество hp
@@ -651,10 +705,13 @@ public:
     virtual void           OnDisengage(CAttackState&);
     /* Casting */
     virtual void OnCastFinished(CMagicState&, action_t&);
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg);
+    virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
+
+    // Used to set an action to an "interrupted" state
+    void setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID);
 
     virtual void OnAbility(CAbilityState&, action_t&)
     {
@@ -685,10 +742,11 @@ public:
     time_point charmTime; // to hold the time entity is charmed
     bool       isCharmed; // is the battle entity charmed?
 
-    uint8           m_ModelSize;  // размер модели сущности, для расчета дальности физической атаки
-    ECOSYSTEM       m_EcoSystem;  // эко-система сущности
-    CItemEquipment* m_Weapons[4]; // четыре основных ячейки, используемыж для хранения оружия (только оружия)
-    bool            m_dualWield;  // True/false depending on if the entity is using two weapons
+    uint8           m_ModelRadius; // The radius of the entity model, for calculating the range of a physical attack
+    ECOSYSTEM       m_EcoSystem;   // Entity eco system
+    CItemEquipment* m_Weapons[4];  // Four main slots used to store weapons (weapons only)
+    bool            m_dualWield;   // True/false depending on if the entity is using two weapons
+    DEATH_TYPE      m_DeathType;
 
     TraitList_t TraitList; // список постянно активных способностей в виде указателей
 
@@ -703,6 +761,8 @@ public:
     CBattleEntity*  PLastAttacker;
     time_point      LastAttacked;
     battlehistory_t BattleHistory; // Stores info related to most recent combat actions taken towards this entity.
+
+    bool m_bReleaseTargIDOnDeath = false;
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;

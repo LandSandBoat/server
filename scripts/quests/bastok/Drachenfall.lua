@@ -19,6 +19,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 quest.reward =
 {
     fame = 120,
+    fameArea = xi.quest.fame_area.BASTOK,
     gil = 2000,
     title = xi.title.DRACHENFALL_ASCETIC,
 }
@@ -29,7 +30,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(BASTOK) >= 2
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MINES] =

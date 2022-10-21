@@ -12,9 +12,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
         result = xi.msg.basic.IS_FULL
@@ -22,13 +22,13 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 6277)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.VIT, 4)
-    target:addMod(xi.mod.FIRE_RES, 21)
+    target:addMod(xi.mod.FIRE_MEVA, 21)
     target:addMod(xi.mod.FOOD_ACCP, 21)
     target:addMod(xi.mod.FOOD_ACC_CAP, 75)
     target:addMod(xi.mod.FOOD_RACCP, 21)
@@ -36,9 +36,9 @@ item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.SUBTLE_BLOW, 9)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.VIT, 4)
-    target:delMod(xi.mod.FIRE_RES, 21)
+    target:delMod(xi.mod.FIRE_MEVA, 21)
     target:delMod(xi.mod.FOOD_ACCP, 21)
     target:delMod(xi.mod.FOOD_ACC_CAP, 75)
     target:delMod(xi.mod.FOOD_RACCP, 21)
@@ -46,4 +46,4 @@ item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.SUBTLE_BLOW, 9)
 end
 
-return item_object
+return itemObject

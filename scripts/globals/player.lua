@@ -1,6 +1,8 @@
+require('scripts/globals/abyssea')
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/quests")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
@@ -12,38 +14,41 @@ require("scripts/quests/full_speed_ahead")
 
 local startingRaceInfo =
 {
-    [xi.race.HUME_M]   = {gear = {body = 12631, hand = 12754, leg = 12883, feet = 13005}, homeNation = xi.nation.BASTOK},
-    [xi.race.HUME_F]   = {gear = {body = 12632, hand = 12760, leg = 12884, feet = 13010}, homeNation = xi.nation.BASTOK},
-    [xi.race.ELVAAN_M] = {gear = {body = 12633, hand = 12755, leg = 12885, feet = 13006}, homeNation = xi.nation.SANDORIA},
-    [xi.race.ELVAAN_F] = {gear = {body = 12634, hand = 12759, leg = 12889, feet = 13011}, homeNation = xi.nation.SANDORIA},
-    [xi.race.TARU_M]   = {gear = {body = 12635, hand = 12756, leg = 12886, feet = 13007}, homeNation = xi.nation.WINDURST},
-    [xi.race.TARU_F]   = {gear = {body = 12635, hand = 12756, leg = 12886, feet = 13007}, homeNation = xi.nation.WINDURST},
-    [xi.race.MITHRA]   = {gear = {body = 12636, hand = 12757, leg = 12887, feet = 13008}, homeNation = xi.nation.WINDURST},
-    [xi.race.GALKA]    = {gear = {body = 12637, hand = 12758, leg = 12888, feet = 13009}, homeNation = xi.nation.BASTOK},
+    [xi.race.HUME_M]   = { gear = { body = 12631, hand = 12754, leg = 12883, feet = 13005 }, homeNation = xi.nation.BASTOK },
+    [xi.race.HUME_F]   = { gear = { body = 12632, hand = 12760, leg = 12884, feet = 13010 }, homeNation = xi.nation.BASTOK },
+    [xi.race.ELVAAN_M] = { gear = { body = 12633, hand = 12755, leg = 12885, feet = 13006 }, homeNation = xi.nation.SANDORIA },
+    [xi.race.ELVAAN_F] = { gear = { body = 12634, hand = 12759, leg = 12889, feet = 13011 }, homeNation = xi.nation.SANDORIA },
+    [xi.race.TARU_M]   = { gear = { body = 12635, hand = 12756, leg = 12886, feet = 13007 }, homeNation = xi.nation.WINDURST },
+    [xi.race.TARU_F]   = { gear = { body = 12635, hand = 12756, leg = 12886, feet = 13007 }, homeNation = xi.nation.WINDURST },
+    [xi.race.MITHRA]   = { gear = { body = 12636, hand = 12757, leg = 12887, feet = 13008 }, homeNation = xi.nation.WINDURST },
+    [xi.race.GALKA]    = { gear = { body = 12637, hand = 12758, leg = 12888, feet = 13009 }, homeNation = xi.nation.BASTOK },
 }
 
 local startingNationInfo =
 {
-    [xi.nation.SANDORIA] = {ring = 13495, map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA},
-    [xi.nation.BASTOK]   = {ring = 13497, map = xi.ki.MAP_OF_THE_BASTOK_AREA},
-    [xi.nation.WINDURST] = {ring = 13496, map = xi.ki.MAP_OF_THE_WINDURST_AREA},
+    [xi.nation.SANDORIA] = { ring = 13495, map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA },
+    [xi.nation.BASTOK]   = { ring = 13497, map = xi.ki.MAP_OF_THE_BASTOK_AREA },
+    [xi.nation.WINDURST] = { ring = 13496, map = xi.ki.MAP_OF_THE_WINDURST_AREA },
 }
 
 local startingJobGear =
 {
-    [xi.job.WAR] = {16534},       -- onion sword
-    [xi.job.MNK] = {13184},       -- white belt
-    [xi.job.WHM] = {17068, 4608}, -- onion rod, scroll of cure
-    [xi.job.BLM] = {17104, 4607}, -- onion staff, scroll of stone
-    [xi.job.RDM] = {16482, 4606}, -- onion dagger, scroll of dia
-    [xi.job.THF] = {16483},       -- onion knife
+    [xi.job.WAR] = { 16534 },       -- onion sword
+    [xi.job.MNK] = { 13184 },       -- white belt
+    [xi.job.WHM] = { 17068, 4608 }, -- onion rod, scroll of cure
+    [xi.job.BLM] = { 17104, 4607 }, -- onion staff, scroll of stone
+    [xi.job.RDM] = { 16482, 4606 }, -- onion dagger, scroll of dia
+    [xi.job.THF] = { 16483 },       -- onion knife
 }
 
 -----------------------------------
--- local functions
+-- public functions
 -----------------------------------
 
-local function CharCreate(player)
+xi = xi or {}
+xi.player = {}
+
+xi.player.charCreate = function(player)
     local race = player:getRace()
     local raceInfo = startingRaceInfo[race]
     local nation = player:getNation()
@@ -67,25 +72,33 @@ local function CharCreate(player)
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
 
+    -- add job-emote Key items
+    player:addKeyItem(xi.ki.JOB_GESTURE_WARRIOR)
+    player:addKeyItem(xi.ki.JOB_GESTURE_MONK)
+    player:addKeyItem(xi.ki.JOB_GESTURE_WHITE_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_BLACK_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_RED_MAGE)
+    player:addKeyItem(xi.ki.JOB_GESTURE_THIEF)
+
     -- add nation- and race-specific ring
     if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
         player:addItem(nationInfo.ring)
     end
 
     -- unlock advanced jobs
-    if xi.settings.ADVANCED_JOB_LEVEL == 0 then
+    if xi.settings.main.ADVANCED_JOB_LEVEL == 0 then
         for i = xi.job.PLD, xi.job.SCH do
             player:unlockJob(i)
         end
     end
 
     -- unlock subjob
-    if xi.settings.SUBJOB_QUEST_LEVEL == 0 then
+    if xi.settings.main.SUBJOB_QUEST_LEVEL == 0 then
         player:unlockJob(0)
     end
 
     -- give all maps
-    if xi.settings.ALL_MAPS == 1 then
+    if xi.settings.main.ALL_MAPS == 1 then
         for i = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_DIO_ABDHALJS_GHELSBA do
             player:addKeyItem(i)
         end
@@ -101,14 +114,14 @@ local function CharCreate(player)
     end
 
     -- set initial level cap
-    if xi.settings.INITIAL_LEVEL_CAP ~= 50 then
-        player:setLevelCap(xi.settings.INITIAL_LEVEL_CAP)
+    if xi.settings.main.INITIAL_LEVEL_CAP ~= 50 then
+        player:setLevelCap(xi.settings.main.INITIAL_LEVEL_CAP)
     end
 
     -- increase starting inventory
-    if xi.settings.START_INVENTORY > 30 then
-        player:changeContainerSize(xi.inv.INVENTORY, xi.settings.START_INVENTORY - 30)
-        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.START_INVENTORY - 30)
+    if xi.settings.main.START_INVENTORY > 30 then
+        player:changeContainerSize(xi.inv.INVENTORY, xi.settings.main.START_INVENTORY - 30)
+        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY - 30)
     end
 
     --[[
@@ -119,8 +132,8 @@ local function CharCreate(player)
         on servers with very high values of START_GIL, I guess.
     --]]
 
-    if player:getGil() < xi.settings.START_GIL then
-       player:setGil(xi.settings.START_GIL)
+    if player:getGil() < xi.settings.main.START_GIL then
+       player:setGil(xi.settings.main.START_GIL)
     end
 
     player:addItem(536) -- adventurer coupon
@@ -133,26 +146,48 @@ local function CharCreate(player)
     player:setNewPlayer(true) -- apply new player flag
 end
 
------------------------------------
--- public functions
------------------------------------
-
-xi = xi or {}
-xi.player = {}
-
 -- called by core after a player logs into the server or zones
 xi.player.onGameIn = function(player, firstLogin, zoning)
     if not zoning then
         -- things checked ONLY during logon go here
         if firstLogin then
-            CharCreate(player)
+            xi.player.charCreate(player)
         end
     else
         -- things checked ONLY during zone in go here
+        if
+            player:getLocalVar('gameLogin') == 1 and
+            xi.abyssea.isInAbysseaZone(player) and
+            not player:hasStatusEffect(xi.effect.VISITANT)
+        then
+            local zoneID = player:getZoneID()
+            local ID = zones[zoneID]
+
+            player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
+            player:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
+        end
+
+        player:setLocalVar('gameLogin', 0)
+    end
+
+    -- Abyssea starting quest should be flagged when expansion is active
+    if
+        xi.settings.main.ENABLE_ABYSSEA == 1 and
+        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+    then
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
+    end
+
+    -- This is for migration safety only, and should be removed at a later date
+    if
+        player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) and
+        player:getTraverserEpoch() == 0
+    then
+        player:setTraverserEpoch()
     end
 
     -- apply mods from gearsets (scripts/globals/gear_sets.lua)
-    checkForGearSet(player)
+    xi.gear_sets.checkForGearSet(player)
 
     -- god mode
     if player:getCharVar("GodMode") == 1 then
@@ -210,6 +245,18 @@ end
 xi.player.onPlayerLevelDown = function(player)
 end
 
+xi.player.onPlayerMount = function(player)
+    -- For PM3-3 The Road Forks.  This value will be checked periodically, and break
+    -- the Mimeo Jewel should a player be mounted, zone, or disconnect.
+    if
+        player:getZoneID() == xi.zone.ATTOHWA_CHASM and
+        player:hasKeyItem(xi.ki.MIMEO_JEWEL)
+    then
+        player:messageSpecial(zones[xi.zone.ATTOHWA_CHASM].text.MIMEO_JEWEL_OFFSET + 4, xi.ki.MIMEO_JEWEL)
+        player:delKeyItem(xi.ki.MIMEO_JEWEL)
+    end
+end
+
 xi.player.onPlayerEmote = function(player, emoteId)
     if emoteId == xi.emote.CHEER and player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
         xi.fsa.onCheer(player)
@@ -217,7 +264,6 @@ xi.player.onPlayerEmote = function(player, emoteId)
 end
 
 xi.player.onPlayerVolunteer = function(player, text)
-    --print(string.format("(%s) /volunteer %s", player:getName(), text))
 end
 
 return xi.player

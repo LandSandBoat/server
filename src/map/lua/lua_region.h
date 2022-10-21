@@ -22,7 +22,7 @@
 #ifndef _LUAREGION_H
 #define _LUAREGION_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CRegion;

@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Mamool Ja Training Grounds
 -----------------------------------
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/assault")
+require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
@@ -10,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local instance = npc:getInstance()
 
     if instance:completed() then
@@ -18,16 +17,14 @@ entity.onTrigger = function(player, npc)
     end
 
     return 1
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 100 and option == 1 then
-        xi.assaultUtil.runeReleaseFinish(player)
-    end
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.BHAFLAU_THICKETS)
+    xi.assault.runeReleaseFinish(player, csid, option)
 end
 
 return entity

@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.VATTIAN_OPEN_DIALOG)
-        xi.shop.general(player, stock, BASTOK)
+        xi.shop.general(player, stock, xi.quest.fame_area.BASTOK)
     end
 end
 

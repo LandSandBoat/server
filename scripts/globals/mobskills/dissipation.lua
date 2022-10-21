@@ -3,17 +3,17 @@
 -- Dispels all buffs add terror effect
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.TERROR
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 10)
 
@@ -28,4 +28,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return count
 end
 
-return mobskill_object
+return mobskillObject

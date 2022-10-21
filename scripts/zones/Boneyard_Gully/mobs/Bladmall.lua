@@ -46,9 +46,9 @@ entity.onMobFight = function(mob,target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Adds die with parent
-    if isKiller then
+    if optParams.isKiller then
         local bfID = mob:getBattlefield():getArea()
         for _, petId in ipairs(ID.shellWeDance[bfID].BLADMALL_PET_IDS) do
             local pet = GetMobByID(petId)

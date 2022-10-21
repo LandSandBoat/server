@@ -11,7 +11,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
@@ -22,7 +22,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_I
 quest.reward =
 {
     fame = 60,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.items.MYOCHIN_KABUTO,
     title = xi.title.PARAGON_OF_SAMURAI_EXCELLENCE,
 }
@@ -34,7 +34,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI) and
                 player:getMainJob() == xi.job.SAM and
-                player:getMainLvl() >= xi.settings.AF3_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
         end,
 
         [xi.zone.NORG] =

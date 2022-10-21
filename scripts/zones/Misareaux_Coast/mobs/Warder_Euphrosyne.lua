@@ -2,14 +2,24 @@
 -- Area: Misareaux Coast
 --  Mob: Warder Euphrosyne
 -----------------------------------
-require("scripts/globals/missions")
+require('scripts/globals/missions')
+mixins = { require('scripts/mixins/warders_cop') }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and player:getCharVar("PromathiaStatus") == 1) then
-        player:setCharVar("Warder_Euphrosyne_KILL", 1)
-    end
+entity.onMobSpawn = function(mob)
+    mob:SetMobAbilityEnabled(false) -- ability use handled in mixin
+    mob:setLocalVar('warder', 2)
+    mob:setLocalVar('electro', 1)
+end
+
+entity.onMobDisengage = function(mob)
+    -- reset variables so that disengaging mobs won't break mixin
+    mob:setLocalVar('changeTime', 0)
+    mob:setLocalVar('initiate', 0)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

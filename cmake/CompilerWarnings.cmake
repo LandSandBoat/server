@@ -18,9 +18,10 @@ function(set_project_warnings project_name)
       /wd4457 # declaration of 'var' hides function parameter
       /wd4458 # declaration of 'var' hides class member
       /wd4459 # declaration of 'var' hides global declaration
-      /wd4701 # potentially uninitialized local variable used
-      /wd4702 # unreachable code
-      /wd4703 # potentially uninitialized local pointer variable used
+
+      # TODO: concurrentqueue triggers this. Remove once MSVC fixes it.
+      # https://developercommunity2.visualstudio.com/t/C4554-triggers-when-both-lhs-and-rhs-is/10034931
+      /wd4554 # 'operator' : check operator precedence for possible error; use parentheses to clarify precedence
 
       # /w1 Promote to level 1
       /w14254 # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
@@ -39,54 +40,52 @@ function(set_project_warnings project_name)
       /w14555 # expression has no effect; expected expression with side- effect
       /w14619 # pragma warning: there is no warning number 'number'
       /w14640 # Enable warning on thread un-safe static member initialization
-      /w14826 # Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
       /w14905 # wide string literal cast to 'LPSTR'
       /w14906 # string literal cast to 'LPWSTR'
       /w14928 # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+
       /permissive- # standards conformance mode for MSVC compiler.
   )
 
   set(CLANG_WARNINGS
       -Wall
-      -Wextra # reasonable and standard
-      # TODO: -Wshadow # warn the user if a variable declaration shadows one from a parent context
-      -Wnon-virtual-dtor # warn the user if a class with virtual functions has a non-virtual destructor. This helps
-                         # catch hard to track down memory errors
-      # TODO: -Wold-style-cast # warn for c-style casts
-      # TODO: -Wcast-align # warn for potential performance problem casts
-      # TODO: -Wunused # warn on anything being unused
-      -Woverloaded-virtual # warn if you overload (not override) a virtual function
-      # TODO: -Wpedantic # warn if non-standard C++ is used
-      # TODO: -Wconversion # warn on type conversions that may lose data
-      # TODO: -Wsign-conversion # warn on sign conversions
-      -Wnull-dereference # warn if a null dereference is detected
-      # TODO: -Wdouble-promotion # warn if float is implicit promoted to double
-      -Wformat=2 # warn on security issues around functions that format output (ie printf)
+      -Wextra                # reasonable and standard
+      -Wnon-virtual-dtor     # warn the user if a class with virtual functions has a non-virtual destructor. This helps
+                             # catch hard to track down memory errors
+      -Wunused-function      # warn on unused functions
+      -Wunused-variable      # warn on unused variables
+      -Woverloaded-virtual   # warn if you overload (not override) a virtual function
+      -Wnull-dereference     # warn if a null dereference is detected
+      -Wformat=2             # warn on security issues around functions that format output (ie printf)
 
-      # TODO: Remove these
-      -Wno-format-nonliteral
-      -Wno-unused-parameter
-      -Wno-error=sizeof-pointer-memaccess
-      -Wno-sizeof-pointer-memaccess
+      # TODO: Remove this exception
+      -Wno-unused-parameter           # warn on unused function parameters
+      -Wno-missing-field-initializers
+      -Wno-sign-compare
+
+      # TODO: This is good, but it's Clang only
+      # -Wunused-private-field # warn on unused private fields
+
+      # TODO: -pedantic          # warn if non-standard C++ is used
+      # TODO: -pedantic-errors   # Error on language extensions
+      # TODO: -Wconversion       # warn on type conversions that may lose data
+      # TODO: -Wcast-align       # warn for potential performance problem casts
+      # TODO: -Wdouble-promotion # warn if float is implicit promoted to double
+      # TODO: -Wold-style-cast   # warn for c-style casts
+      # TODO: -Wshadow           # warn the user if a variable declaration shadows one from a parent context
+      # TODO: -Wsign-conversion  # warn on sign conversions
+      # TODO: -Wunused-template  # warn on unused templates
+      # TODO: -Wunused-macros    # warn on unused macros
   )
 
   set(GCC_WARNINGS
       ${CLANG_WARNINGS}
       -Wmisleading-indentation # warn if indentation implies blocks where blocks do not exist
-      -Wduplicated-cond # warn if if / else chain has duplicated conditions
-      -Wduplicated-branches # warn if if / else branches have duplicated code
-      -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
-      # TODO: -Wuseless-cast # warn if you perform a cast to the same type
-      
-      # TODO: Remove these
-      -Wno-implicit-fallthrough
-      -Wno-non-virtual-dtor
-      -Wno-overloaded-virtual
-      -Wno-type-limits
-      -Wno-extra
-      -Wno-restrict
-      -Wno-duplicated-branches
-      
+      -Wduplicated-cond        # warn if if / else chain has duplicated conditions
+      -Wduplicated-branches    # warn if if / else branches have duplicated code
+      -Wlogical-op             # warn about logical operations being used where bitwise were probably wanted
+      -Wuseless-cast           # warn if you perform a cast to the same type
+
       # Silence GCC note/warning:
       # note: variable tracking size limit exceeded with ‘-fvar-tracking-assignments’
       -fno-var-tracking-assignments
@@ -113,13 +112,3 @@ function(set_project_warnings project_name)
 
   target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
 endfunction() #set_project_warnings
-
-function(set_no_warnings project_name)
-  if(WARNINGS_AS_ERRORS)
-    if(UNIX)
-      target_compile_options(${project_name} INTERFACE "-w")
-    elseif(WIN32)
-      #target_compile_options(${project_name} INTERFACE "/w")
-    endif()
-  endif()
-endfunction() # set_no_warnings

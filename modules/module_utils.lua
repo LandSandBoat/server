@@ -1,8 +1,29 @@
 -----------------------------------
 -- Module helpers
 -----------------------------------
+require("scripts/globals/settings")
 require("scripts/globals/utils")
 -----------------------------------
+
+-- Global, for use in C++
+function applyOverride(base_table, name, func, fullname, filename)
+    local old = base_table[name]
+
+    if old == nil then
+        if xi.settings.logging.DEBUG_MODULES then
+            print(string.format("Inserting empty function to override for: %s (%s)", fullname, filename))
+        end
+        old = function() end -- Insert empty function
+    end
+
+    local thisenv = getfenv(old)
+
+    local env = { super = old }
+    setmetatable(env, { __index = thisenv })
+
+    setfenv(func, env)
+    base_table[name] = func
+end
 
 -- Override Object
 Override = {}
@@ -12,31 +33,10 @@ function Override:new(target_func_str, new_func)
     local obj = {}
     setmetatable(obj, self)
 
-    local parts = utils.splitStr(target_func_str, ".")
-    local parts_size = #parts
-
-    local lookupTable = _G
-    for i = 1, parts_size - 1 do
-        local part = parts[i]
-        lookupTable = lookupTable[part]
-    end
-
-    obj.base_table = lookupTable
-    obj.name = parts[parts_size]
+    obj.name = target_func_str
     obj.func = new_func
 
     return obj
-end
-
-function Override:apply()
-    local old = self.base_table[self.name]
-    local thisenv = getfenv(old)
-
-    local env = { super = old }
-    setmetatable(env, { __index = thisenv })
-
-    setfenv(self.func, env)
-    self.base_table[self.name] = self.func
 end
 
 -- Module Object
@@ -65,10 +65,4 @@ end
 function Module:addOverride(target_func_str, func)
     local override = Override:new(target_func_str, func)
     table.insert(self.overrides, override)
-end
-
-function Module:apply()
-    for _, override in ipairs(self.overrides) do
-        override:apply()
-    end
 end

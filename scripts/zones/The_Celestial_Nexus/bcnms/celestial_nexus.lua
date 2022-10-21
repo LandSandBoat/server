@@ -6,27 +6,27 @@ require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldInitialise = function(battlefield)
+battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
 
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_CELESTIAL_NEXUS then
+        if player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.THE_CELESTIAL_NEXUS then
             player:setLocalVar("battlefieldWin", battlefield:getID())
         end
 
@@ -37,10 +37,10 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option)
 end
 
-return battlefield_object
+return battlefieldObject

@@ -32,8 +32,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CInstance::CInstance(CZone* zone, uint16 instanceid)
 : CZoneEntities(zone)
-, m_zone(zone)
 , m_instanceid(instanceid)
+, m_zone(zone)
 {
     LoadInstance();
 
@@ -101,20 +101,20 @@ void CInstance::LoadInstance()
                                "WHERE instanceid = %u "
                                "LIMIT 1";
 
-    if (Sql_Query(SqlHandle, Query, m_instanceid) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    if (sql->Query(Query, m_instanceid) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        m_instanceName.insert(0, (const char*)Sql_GetData(SqlHandle, 0));
+        m_instanceName.insert(0, (const char*)sql->GetData(0));
 
-        m_timeLimit                       = std::chrono::minutes(Sql_GetUIntData(SqlHandle, 1));
-        m_entrance                        = Sql_GetUIntData(SqlHandle, 2);
-        m_entryloc.x                      = Sql_GetFloatData(SqlHandle, 3);
-        m_entryloc.y                      = Sql_GetFloatData(SqlHandle, 4);
-        m_entryloc.z                      = Sql_GetFloatData(SqlHandle, 5);
-        m_entryloc.rotation               = Sql_GetUIntData(SqlHandle, 6);
-        m_zone_music_override.m_songDay   = Sql_GetUIntData(SqlHandle, 7);
-        m_zone_music_override.m_songNight = Sql_GetUIntData(SqlHandle, 8);
-        m_zone_music_override.m_bSongS    = Sql_GetUIntData(SqlHandle, 9);
-        m_zone_music_override.m_bSongM    = Sql_GetUIntData(SqlHandle, 10);
+        m_timeLimit                       = std::chrono::minutes(sql->GetUIntData(1));
+        m_entrance                        = sql->GetUIntData(2);
+        m_entryloc.x                      = sql->GetFloatData(3);
+        m_entryloc.y                      = sql->GetFloatData(4);
+        m_entryloc.z                      = sql->GetFloatData(5);
+        m_entryloc.rotation               = sql->GetUIntData(6);
+        m_zone_music_override.m_songDay   = sql->GetUIntData(7);
+        m_zone_music_override.m_songNight = sql->GetUIntData(8);
+        m_zone_music_override.m_bSongS    = sql->GetUIntData(9);
+        m_zone_music_override.m_bSongM    = sql->GetUIntData(10);
 
         // Add to Lua cache
         // TODO: This will happen more often than needed, but not so often that it's a performance concern
@@ -125,7 +125,7 @@ void CInstance::LoadInstance()
     }
     else
     {
-        ShowFatalError("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
+        ShowCritical("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
         Fail();
     }
 }
@@ -165,6 +165,11 @@ duration CInstance::GetTimeLimit()
     return m_timeLimit;
 }
 
+void CInstance::SetTimeLimit(duration time)
+{
+    m_timeLimit = time;
+}
+
 duration CInstance::GetLastTimeUpdate()
 {
     return m_lastTimeUpdate;
@@ -180,7 +185,7 @@ duration CInstance::GetElapsedTime(time_point tick)
     return tick - m_startTime;
 }
 
-uint64_t CInstance::GetLocalVar(const std::string& name) const
+uint64_t CInstance::GetLocalVar(std::string const& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -220,7 +225,7 @@ void CInstance::SetWipeTime(duration time)
     m_wipeTimer = time + m_startTime;
 }
 
-void CInstance::SetLocalVar(const std::string& name, uint64_t value)
+void CInstance::SetLocalVar(std::string const& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }
@@ -254,7 +259,8 @@ bool CInstance::CharRegistered(CCharEntity* PChar)
 
 void CInstance::ClearEntities()
 {
-    auto clearStates = [](auto& entity) {
+    auto clearStates = [](auto& entity)
+    {
         if (static_cast<CBattleEntity*>(entity.second)->isAlive())
         {
             entity.second->PAI->ClearStateStack();

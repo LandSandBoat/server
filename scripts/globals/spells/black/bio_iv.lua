@@ -2,19 +2,19 @@
 -- Spell: Bio IV
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local basedmg = caster:getSkillLevel(xi.skill.DARK_MAGIC) / 4
     local params = {}
     params.dmg = basedmg
@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
     -- Try to kill same tier Dia (default behavior)
-    if xi.settings.DIA_OVERWRITE == 1 and dia ~= nil then
+    if xi.settings.main.DIA_OVERWRITE == 1 and dia ~= nil then
         if dia:getPower() <= 4 then
             target:delStatusEffect(xi.effect.DIA)
         end
@@ -63,4 +63,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

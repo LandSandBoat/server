@@ -17,6 +17,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRYS
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
     title = xi.title.RONFAURIAN_RESCUER,
     item = xi.items.BRONZE_SUBLIGAR,
 }

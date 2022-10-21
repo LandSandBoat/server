@@ -19,7 +19,7 @@ require("scripts/globals/msg")
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
     -- Retail has no alpha anymore as of 2014. Weaponskill functions
-    -- should be checking for xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES and
+    -- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
     -- overwriting the results of this function if the server has it set
     local alpha = 1.00
 
@@ -266,7 +266,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdif = {}
     pdif[1] = pdifmin
     pdif[2] = pdifmax
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
+
     local pdifcrit = {}
 
     pdifmin = pdifmin * 1.25
@@ -358,10 +358,21 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
                 magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-                magicdmg = target:magicDmgTaken(magicdmg)
-                magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
+                magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
+
+                if magicdmg > 0 then
+                    magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
+                end
+
+                if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = utils.oneforall(target, magicdmg)
+                    magicdmg = utils.stoneskin(target, magicdmg)
+                end
 
                 finaldmg = finaldmg + magicdmg
+
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -389,6 +400,13 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
         end
     end
+
+    if adjustedDamage > 0 then
+        adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
+        adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
+    end
+
+    adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
     adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
@@ -425,7 +443,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
             calcParams.alpha = getAlpha(attacker:getMainLvl())
@@ -662,13 +680,12 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
-    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
-
 
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
@@ -696,7 +713,7 @@ end
     local calcParams =
     {
         wsID = wsID,
-        weaponDamage = {attacker:getRangedDmg()},
+        weaponDamage = { attacker:getRangedDmg() },
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
         cratio = cratio,
@@ -723,11 +740,14 @@ end
     calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
 
+    -- Delete statuses that may have been spent by the WS
+    attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
+
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
@@ -752,9 +772,10 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
-        ['tpHitsLanded'] = 1,
+        ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
-        ['bonusTP'] = wsParams.bonusTP or 0
+        ['bonusTP']         = wsParams.bonusTP or 0,
+        ['wsID']            = wsID
     }
 
     local bonusfTP, bonusacc = handleWSGorgetBelt(attacker)
@@ -799,16 +820,31 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
         dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
-        dmg = target:magicDmgTaken(dmg)
+        dmg = target:magicDmgTaken(dmg, wsParams.ele)
+
+        if dmg < 0 then
+            calcParams.finalDmg = dmg
+
+            dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+            return dmg
+        end
+
         dmg = adjustForTarget(target, dmg, wsParams.ele)
 
-        dmg = dmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+        if dmg > 0 then
+            dmg = dmg - target:getMod(xi.mod.PHALANX)
+            dmg = utils.clamp(dmg, 0, 99999)
+        end
+
+        dmg = utils.oneforall(target, dmg)
+        dmg = utils.stoneskin(target, dmg)
+
+        dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else
         calcParams.shadowsAbsorbed = 1
     end
 
     calcParams.finalDmg = dmg
-    calcParams.wsID = wsID
 
     if dmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
@@ -844,7 +880,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             end
         end
 
-        action:param(defender:getID(), finaldmg)
+        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -868,8 +904,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
-    xi.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
-
+    xi.magian.checkMagianTrial(attacker, { ['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID })
 
     if finaldmg > 0 then
         defender:setLocalVar("weaponskillHit", 1)
@@ -894,7 +929,7 @@ function getMeleeDmg(attacker, weaponType, kick)
         offhandDamage = mainhandDamage
     end
 
-    return {mainhandDamage, offhandDamage}
+    return { mainhandDamage, offhandDamage }
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
@@ -948,7 +983,6 @@ function getHitRate(attacker, target, capHitRate, bonus)
 
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
-
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
@@ -1054,8 +1088,6 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
     local pdifcrit = {}
     cratio = cratio + 1
     cratio = utils.clamp(cratio, 0, 3)
-
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
@@ -1223,14 +1255,14 @@ function handleWSGorgetBelt(attacker)
         local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
-        local SCProp1, SCProp2, SCProp3 = attacker:getWSSkillchainProp()
+        local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
             if neck == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1
@@ -1248,9 +1280,9 @@ function handleWSGorgetBelt(attacker)
         for i, v in ipairs(elementalBelt) do
             if belt == v then
                 if
-                    doesElementMatchWeaponskill(i, SCProp1) or
-                    doesElementMatchWeaponskill(i, SCProp2) or
-                    doesElementMatchWeaponskill(i, SCProp3)
+                    doesElementMatchWeaponskill(i, scProp1) or
+                    doesElementMatchWeaponskill(i, scProp2) or
+                    doesElementMatchWeaponskill(i, scProp3)
                 then
                     accBonus = accBonus + 10
                     ftpBonus = ftpBonus + 0.1

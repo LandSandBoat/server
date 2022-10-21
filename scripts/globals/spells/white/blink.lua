@@ -1,26 +1,16 @@
 -----------------------------------
 -- Spell: Blink
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/globals/status")
+require("scripts/globals/spells/enhancing_spell")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-
-    if target:addStatusEffect(xi.effect.BLINK, xi.settings.BLINK_SHADOWS, 0, duration) then
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
-
-    return xi.effect.BLINK
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

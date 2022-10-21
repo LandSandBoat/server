@@ -15,7 +15,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.WIJETIREN_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         4148,   290,       --Antidote
         4509,    10,       --Distilled Water
         4151,   728,       --Echo Drops
@@ -25,7 +26,7 @@ entity.onTrigger = function(player, npc)
         5014,    98,       --Scroll of Herb Pastoral
         2864,  9200        --Federation Waystone
     }
-    xi.shop.general(player, stock, WINDURST)
+    xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
 end
 
 entity.onEventUpdate = function(player, csid, option)

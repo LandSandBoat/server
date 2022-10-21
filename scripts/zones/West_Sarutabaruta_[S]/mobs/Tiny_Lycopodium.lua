@@ -5,10 +5,15 @@
 -----------------------------------
 local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
 require("scripts/globals/mobs")
+mixins = { require("scripts/mixins/families/lycopodium") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

@@ -17,16 +17,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local X = player:getXPos()
-    local Z = player:getZPos()
+    local xPos = player:getXPos()
+    local zPos = player:getZPos()
 
-    if X > 94 and Z >= 40 then
+    if xPos > 94 and zPos >= 40 then
         player:messageSpecial(ID.text.SAHAGIN_DOOR_OUTSIDE) -- Give a message if standing on the "outside" of the door (closest to Norg)
-    elseif X < 104 and X >= 94 and Z <= 40 then
+    elseif xPos < 104 and xPos >= 94 and zPos <= 40 then
         player:messageSpecial(ID.text.SAHAGIN_DOOR_INSIDE) -- Give a message if standing on the "inside" of the door
     end
-
-    return 1 -- Keeps the door closed it should not open onTrigger
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -1,4 +1,4 @@
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 
@@ -8,13 +8,13 @@ xi = xi or {}
 xi.survivalGuide = xi.survivalGuide or {}
 
 -- Determines if the survival guide teleport cost is like if you had a Rhapsody in White key item. Does not affect UI! (Default: 0)
-local SURVIVAL_GUIDE_TELEPORT_COST_GIL = 1000
-local SURVIVAL_GUIDE_TELEPORT_COST_TABS = 50
+local baseTeleportCostGil = 1000
+local baseTeleportCostTabs = 50
 
 -- This is used for the NationTeleport save/get
 local travelType = xi.teleport.type.SURVIVAL
 local cutsceneID = 8500
-xi.survivalGuide.expansions = 3 + (4 * xi.settings.ENABLE_COP) + (8 * xi.settings.ENABLE_TOAU) + (16 * xi.settings.ENABLE_WOTG) + (2048 * xi.settings.ENABLE_SOA)
+xi.survivalGuide.expansions = 3 + (4 * xi.settings.main.ENABLE_COP) + (8 * xi.settings.main.ENABLE_TOAU) + (16 * xi.settings.main.ENABLE_WOTG) + (2048 * xi.settings.main.ENABLE_SOA)
 
 local optionMap =
 {
@@ -52,7 +52,7 @@ local function teleportMenuUpdate(player, option)
 
         local index = bit.rshift(bit.band(option, 0xFF0000), 16)
 
-        if not (choice == optionMap.TELEPORT_MENU) then
+        if choice ~= optionMap.TELEPORT_MENU then
             if choice == optionMap.ADD_FAVORITE then
                 local temp = 0
                 for x = 1, 9 do
@@ -122,7 +122,7 @@ xi.survivalGuide.onTrigger = function(player)
                 param = bit.bor(param, 0x2000)
             end
 
-            local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
+            local g1, g2, g3, g4 = unpack(player:getTeleportTable(travelType))
 
             -- param 1 = Does nothing.
             -- param 2 = current area, player amount of tabs, fee reducer(s) and menu layout (region/content).
@@ -132,7 +132,7 @@ xi.survivalGuide.onTrigger = function(player)
             -- param 6 = Zones unlocked (group 3), set to -1 to enable all zones in the group.
             -- param 7 = zones unlocked (Zehrun mines and Eastern Adoulin), set to -1 to enable all zones in the group.
             -- param 8 = expansions available.
-            player:startEvent(cutsceneID, 0, param, player:getGil(), G1, G2, G3, G4, xi.survivalGuide.expansions)
+            player:startEvent(cutsceneID, 0, param, player:getGil(), g1, g2, g3, g4, xi.survivalGuide.expansions)
         end
     else
         player:PrintToPlayer('Survival guides are not enabled!')
@@ -151,9 +151,9 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option)
             local guide = survival.survivalGuides[selectedMenuId]
             local currentZoneId = player:getZoneID()
 
-            if guide and not (guide.zoneId == currentZoneId) then
-                local teleportCostGil = SURVIVAL_GUIDE_TELEPORT_COST_GIL
-                local teleportCostTabs = SURVIVAL_GUIDE_TELEPORT_COST_TABS
+            if guide and guide.zoneId ~= currentZoneId then
+                local teleportCostGil = baseTeleportCostGil
+                local teleportCostTabs = baseTeleportCostTabs
 
                 -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
                 -- GIL: 1000 -> 100

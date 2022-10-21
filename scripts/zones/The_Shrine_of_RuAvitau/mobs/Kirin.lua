@@ -3,7 +3,7 @@
 --   NM: Kirin
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
 -----------------------------------
@@ -15,7 +15,7 @@ entity.onMobInitialize = function( mob )
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.WIND_RES, -64) -- Todo: Move to mob_resists.sql
+    mob:setMod(xi.mod.WIND_MEVA, -64) -- Todo: Move to mob_resists.sql
     mob:setMod(xi.mod.SILENCERES, 35)
     mob:setMod(xi.mod.STUNRES, 35)
     mob:setMod(xi.mod.BINDRES, 35)
@@ -57,7 +57,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle( xi.title.KIRIN_CAPTIVATOR )
     player:showText( mob, ID.text.KIRIN_OFFSET + 1 )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do

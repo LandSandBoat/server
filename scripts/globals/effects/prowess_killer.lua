@@ -4,9 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.VERMIN_KILLER, effect:getPower())
     target:addMod(xi.mod.BIRD_KILLER, effect:getPower())
     target:addMod(xi.mod.AMORPH_KILLER, effect:getPower())
@@ -24,10 +24,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.LUMINION_KILLER, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.VERMIN_KILLER, effect:getPower())
     target:delMod(xi.mod.BIRD_KILLER, effect:getPower())
     target:delMod(xi.mod.AMORPH_KILLER, effect:getPower())
@@ -45,4 +45,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.LUMINION_KILLER, effect:getPower())
 end
 
-return effect_object
+return effectObject

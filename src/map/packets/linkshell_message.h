@@ -22,7 +22,7 @@
 #ifndef _CLINKSHELLMESSAGEPACKET_H
 #define _CLINKSHELLMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../linkshell.h"
 

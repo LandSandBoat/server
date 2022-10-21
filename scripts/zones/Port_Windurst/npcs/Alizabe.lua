@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_SAVAGE then
         if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.WINDURST then
             player:showText(npc, ID.text.ALIZABE_CLOSED_DIALOG)
         else
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             }
 
             player:showText(npc, ID.text.ALIZABE_OPEN_DIALOG)
-            xi.shop.general(player, stock, WINDURST)
+            xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
         end
     else
         player:showText(npc, ID.text.ALIZABE_COP_NOT_COMPLETED)

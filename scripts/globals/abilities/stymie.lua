@@ -5,17 +5,16 @@
 -- Recast Time: 1:00:00
 -- Duration: Stymie fades after either sixty seconds passes or a spell lands, but it does not fade if the spell is resisted.
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/red_mage")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.red_mage.checkStymie(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.STYMIE, 0, 0, 60)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.red_mage.useStymie(player, target, ability)
 end
 
-return ability_object
+return abilityObject

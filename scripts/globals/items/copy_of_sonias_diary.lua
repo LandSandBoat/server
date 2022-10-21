@@ -7,14 +7,14 @@
 -----------------------------------------
 require("scripts/globals/item_utils")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
-    return item_utils.skillBookCheck(target, xi.skill.EVASION)
+itemObject.onItemCheck = function(target)
+    return xi.item_utils.skillBookCheck(target, xi.skill.EVASION)
 end
 
-item_object.onItemUse = function(target)
-    item_utils.skillBookUse(target, xi.skill.EVASION)
+itemObject.onItemUse = function(target)
+    xi.item_utils.skillBookUse(target, xi.skill.EVASION)
 end
 
-return item_object
+return itemObject

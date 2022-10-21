@@ -4,10 +4,10 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
-    if (instance:getStage() == 6 and instance:getProgress() >= 1) then
-        if (isKiller) then
+    if instance:getStage() == 6 and instance:getProgress() >= 1 then
+        if optParams.isKiller then
             instance:setProgress(instance:getProgress() + 1)
         end
     end

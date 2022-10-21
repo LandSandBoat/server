@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 170
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -21,7 +19,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUIS
 quest.reward =
 {
     fame = 50,
-    fameArea = JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     keyItem = xi.ki.SOUL_GEM_CLASP,
 }
 
@@ -33,7 +31,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 91 and
                 player:getLevelCap() == 95 and
-                xi.settings.MAX_LEVEL >= 99
+                xi.settings.main.MAX_LEVEL >= 99
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -65,11 +63,18 @@ quest.sections =
             ['Nomad_Moogle'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(10045, 0, 1, 6, 2)
+                    if quest:getVar(player, 'tradeCompleted') == 1 then
+                        return quest:progressEvent(10045, 0, 1, 5)
+                    else
+                        return quest:event(10045, 0, 1, 6, 2)
+                    end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SEASONING_STONE) then
+                    if
+                        quest:getVar(player, 'tradeCompleted') == 0 and
+                        npcUtil.tradeHasExactly(trade, xi.items.SEASONING_STONE)
+                    then
                         return quest:progressEvent(10045, 0, 1, 5)
                     end
                 end,
@@ -78,17 +83,24 @@ quest.sections =
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    -- All this options complete the trade and complete the current quest.
-                    if option == 13 or option == 14 or option == 15 or option == 19 or option == 20 or option == 21 then
-                        if quest:complete(player) then
-                            player:confirmTrade()
+                    -- Trade is completed regardless of option chosen.
+                    if quest:getVar(player, 'tradeCompleted') == 0 then
+                        player:confirmTrade()
+                        quest:setVar(player, 'tradeCompleted', 1)
+                    end
 
-                            -- This options immediately start next quest. (All except 15).
-                            if option ~= 15 then
+                    -- All this options complete the current quest.
+                    if option == 0 or option == 13 or option == 14 or option == 15 or option == 19 or option == 20 or option == 21 then
+                        if quest:complete(player) then
+                            -- This options immediately start next quest. (All except 0 and 15).
+                            if
+                                not option == 0 or
+                                not option == 15
+                            then
                                 player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
                             end
 
-                            -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated.
+                            -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated in this cases.
                             if option == 14 then
                                 player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
                             elseif option == 19 then

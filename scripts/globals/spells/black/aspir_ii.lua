@@ -6,13 +6,13 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local dmg = 10 + 0.575 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
     --get resist multiplier (1x if no resist)
     local params = {}
@@ -33,7 +33,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.DARK_POWER
+    dmg = dmg * xi.settings.main.DARK_POWER
 
     if (target:isUndead()) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
@@ -52,4 +52,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

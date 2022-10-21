@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.assaultUtil.adjustMobLevel(mob)
+    xi.assault.adjustMobLevel(mob)
     mob:setMobMod(xi.mobMod.NO_REST, 0)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
@@ -29,21 +29,21 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if mob:getLocalVar("dead") == 0 then
         mob:setLocalVar("dead", 1)
         local mobID = mob:getID()
         local instance = mob:getInstance()
 
-        if mobID == ID.mob[xi.assaultUtil.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK1 then
+        if mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK1 then
             GetNPCByID(ID.npc._1rx, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assaultUtil.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK2 then
+        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK2 then
             GetNPCByID(ID.npc._1ry, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assaultUtil.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK3 then
+        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK3 then
             GetNPCByID(ID.npc._1rz, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assaultUtil.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK4 then
+        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK4 then
             GetNPCByID(ID.npc._jr0, instance):setAnimation(xi.animation.OPEN_DOOR)
-        elseif mobID == ID.mob[xi.assaultUtil.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK5 then
+        elseif mobID == ID.mob[xi.assault.mission.EXCAVATION_DUTY].MOBS_START.BRITTLE_ROCK5 then
             GetNPCByID(ID.npc._jr1, instance):setAnimation(xi.animation.OPEN_DOOR)
         end
 

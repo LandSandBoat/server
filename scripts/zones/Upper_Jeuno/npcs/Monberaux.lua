@@ -6,7 +6,7 @@
 -- !pos -43 0 -1 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -44,63 +44,28 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-    local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local theLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
+    local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
-    -- COP mission 1-2
     if
-        player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(9)
-
-    -- COP mission 3-5
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(82)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
-        player:getCharVar("PromathiaStatus") == 3
-    then
-        player:startEvent(75)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 2
-    then
-        player:startEvent(74)
-
-    elseif
-        player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and
-        player:getCharVar("COP_Tenzen_s_Path") == 4
-    then
-        player:startEvent(6)
-
-    elseif
-        CooksPride == QUEST_COMPLETED and
-        TheLostCardien == QUEST_AVAILABLE and
+        cooksPride == QUEST_COMPLETED and
+        theLostCardien == QUEST_AVAILABLE and
         player:getCharVar("theLostCardianVar") == 2
     then
         player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian"
 
     elseif
-        CooksPride == QUEST_COMPLETED and
-        TheLostCardien == QUEST_AVAILABLE and
+        cooksPride == QUEST_COMPLETED and
+        theLostCardien == QUEST_AVAILABLE and
         player:getCharVar("theLostCardianVar") == 3
     then
         player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian"
 
     elseif
-        TheLostCardien == QUEST_COMPLETED and
+        theLostCardien == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED
     then
         player:startEvent(32)
-
-    else
-        player:startEvent(28)
     end
 end
 
@@ -129,34 +94,20 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 6 then
-        player:setCharVar("COP_Tenzen_s_Path", 5)
-    elseif csid == 74 then
-        player:setCharVar("COP_Tenzen_s_Path", 3)
-        player:addKeyItem(xi.ki.ENVELOPE_FROM_MONBERAUX)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ENVELOPE_FROM_MONBERAUX)
-    elseif csid == 82 then
-        player:setCharVar("PromathiaStatus", 1)
-        player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)
-        player:messageSpecial(ID.text.LEND_PRISHE_AMULET, xi.ki.MYSTERIOUS_AMULET_PRISHE)
-    elseif csid == 75 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.SHELTERING_DOUBT)
-    elseif csid == 91 then
-        player:addCharVar("saveTheClockTowerVar", 1)
-        player:addCharVar("saveTheClockTowerNPCz1", 4)
+    if csid == 91 then
+        player:incrementCharVar("saveTheClockTowerVar", 1)
+        player:incrementCharVar("saveTheClockTowerNPCz1", 4)
     elseif
         (csid == 33 and option == 0) or
         (csid == 34 and option == 0)
     then
         player:addTitle(xi.title.TWOS_COMPANY)
         player:setCharVar("theLostCardianVar", 0)
-        player:addGil(xi.settings.GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*2100)
+        player:addGil(xi.settings.main.GIL_RATE*2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*2100)
         player:addKeyItem(xi.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
-        player:addFame(JEUNO, 30)
+        player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
     elseif csid == 33 and option == 1 then

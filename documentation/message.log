@@ -1,417 +1,421 @@
-001 - The <player> hits <target> for .. points of damage
-002 - a <player> casts (NULL). <target> takes .. points of damage.
-003 - The <player> starts casting Curaga IV.
+000 - Display nothing
+001 - <actor> hits <target> for <amount> points of damage.
+002 - <caster> casts <spell>. <target> takes <amount> damage.
+003 - <caster> starts casting <spell>.
 004 - <target> is out of range.
 005 - Unable to see <target>.
 006 - The <player> defeats <target>.
-007 - The <player> casts (NULL). <target> recovers .. HP.
-008 - The <player> gains 0 experience points.
-009 - The <player> attains level 0!
-010 - The <player> loses 0 experience points.
-011 - The <player> falls to level 0.
+007 - <caster> casts <spell>. <target> recovers <amount> HP.
+008 - <player> gains <amount> experience point(s).
+009 - <player> attains level <value>.
+010 - <player> loses <value> experience point(s).
+011 - <player> falls to level <value>
 012 - Cannot attack. Your target is already claimed.
-013 - Debug Message: <player>: <target> is now invincible.
-014 - The <player>'s attack is countered by <target>. 0 of <player>'s shadows absorb the damage and disappear.
-015 - The <player> misses <target>.
-016 - The <player>'s casting is interrupted.
+014 - <attacker>'s attack is countered by <defender>. <number> of <attacker>'s shadows absorb the damage and disappear.
+015 - <attacker> misses <target>.
+016 - The <caster>'s casting is interrupted.
 017 - Unable to cast spells at this time.
 018 - Unable to cast spells at this time.
-019 - The <player> calls for help!
-020 - <target> falls to the ground.
+019 - <player> calls for help!
+020 - <player> falls to the ground.
 021 - No experience points gained.
-020 - <target> falls to the ground.
 022 - You cannot call for help at this time.
-023 - The <player> learns a new spell!
-024 - <target> recovers .. HP.
-025 - <target> recovers .. MP.
-026 - <target> recovers HP and MP.
+023 - <player> learns a new spell!
+024 - ${target} recovers ${number} HP.
+025 - ${target} recovers ${number} MP.
+026 - ${target} recovers ${number} HP and MP.
 027 - Debug Message: Cannot execute command. No (BTCALC) command in ATEL source.
-028 - The <player> uses a ...
+028 -  ${actor} uses a ${item}.
 029 - The <player> is paralyzed.
 030 - <target> anticipates the attack.
 031 - .. of <target>'s shadows absorb the damage and disappear.
-032 - <target> dodges the attack.
-033 - The <player>'s attack is countered by <target>. The <player> takes 0 points of damage.
+032 - <defender> dodges the attack.
+033 - <attacker>'s attack is countered by <defender>. <attacker> takes <number> points of damage.
 034 - The <player> does not have enough MP to cast (NULL).
 035 - The <player> lacks the ninja tools to cast (NULL).
 036 - You lose sight of <target>.
 037 - You are too far from the battle to gain experience.
-038 - <target>'s (N/A) skill rises <nubmer> points.
-039 - You need the Dual Wield ability to equip the  as a sub-weapon.
-040 - You cannot use (spell) in this area.
-041 - <player>: Status ailment check (0) Cannot rest at this time.
-042 - The <player> casts <spell> on <target>.
-043 - The <player> readies Final Heaven.
-044 - <target>'s spikes deal <number> points of damage to the <player>.
-045 - The <player> learns <spell>!
-046 - Debug Message: Current POP number:
-047 - The <player> cannot cast <spell>.
-048 - <spell> cannot be cast on <target>.
+038 - <player>'s <weapon> skill rises <number> points.
+039 - You need the Dual Wield ability to equip the <item> as a sub-weapon.
+040 - You cannot use <spell> in this area.
+041 - <player>: Status ailment check (<status id>) Cannot rest at this time.
+042 - <caster> casts <spell> on <target>.
+043 - ${actor} readies ${weapon_skill}.
+044 - <defender>'s spikes deal <number> points of damage to the <attacker>.
+045 - <player> learns <weaponskill>!
+046 - Debug Message: Current POP number: (<number>)
+047 - <caster> cannot cast <spell>.
+048 - <spell> cannot be cast on <target>. (example: tractor)
 049 - The <player> is unable to cast spells.
-050 - The <player> earns a merit point! (Total: 0)
+050 - <player> earns a merit point! (Total: <number>)
 051 - --Out of sight--
-052 - <target> gives up chasing <player>. ---Find Path Error---
-053 - <target>'s (N/A) skill reaches level ...
-054 - The <player> gains <number> Besieged points.
+052 - <enemy> gives up chasing <player>. --Find Path Error--
+053 - <target>'s <skill> skill reaches level <level>.
+054 - <player> gains <number> Besieged points.
+055 - Unable to use item.
 056 - Unable to use item.
 057 - Job changed.
 058 - Invalid job number.
 059 - You do not have access to specified job yet.
 060 - You do not have access to support jobs yet.
-061 - You cannot have the same job as both main and support jobs.
-062 - The <item> fails to activate.
-063 - The <player> misses <target>.
-064 - <target> is no longer stunned.
-065 - You are not carrying any Petras. You cannot use the .
+061 - You cannot have the same job as both main and supprot jobs.
+062 - The ${item} fails to activate.
+063 - <name> misses <target>.
+064 - <name> is no longer <status>.
+065 - You are not carrying any Petras.${lb}You cannot use the ${item}.
 066 - Debug: Resisted spell!
-067 - The <player> scores a critical hit! <target> takes <number> points of damage.
+067 - <attacker> scores a critical hit! <target> takes <number> damage.
 068 - Debug: Casting interrupted!
-069 - <target> blocks the <player>'s attack with his shield.
-070 - <target> parries the <player>'s attack with his weapon.
+069 - <defender> blocks the <attacker>'s attack with his shield.
+070 - <defender> parries the <attacker>'s attack with his weapon.
 071 - The <player> cannot perform that action.
 072 - That action cannot be performed on <target>.
-073 - Debug: <target>'s status is now <status>'d.
-074 - Debug: <target> recovers from KO.
-075 - The <player>'s (NULL) has no effect on <target>.
+073 - Debug: <target>'s status is now hastened.
+074 - Debug: <target> recovers from <status>.
+075 - <caster>'s <spell> has no effect on <target>.
 076 - No valid target within area of effect.
-077 - The <player> uses Sange. <target> takes <number> points of damage.
+077 - <user> uses Sange. <target> takes <number> point(s) of damage.
 078 - <target> is too far away.
-079 - Debug: <target> uses Double Attack(0)
-080 - Debug: <target> uses Triple Attack(0)
-081 - Debug: Battle Debug No. (0) used on <target>.
-082 - The <player> casts <spell>. <target> is stunned!
-083 - The <player> casts <spell>. The <player> successfully removes <target>'s stun.
-084 - The <player> is paralyzed.
-085 - The <player> casts <spell>. <target> resists the spell.
-086 - The <player> casts <spell>, but <target> is outside the area of effect.
+079 - Debug: <user> uses Double Attack(<value>%).
+080 - Debug: <user> uses Triple Attack(<value>%).
+081 - Debug: Battle Debug No. (<value>) used on <target>.
+082 - <caster> casts <spell>. <target> is <status>!
+083 - <caster> casts <spell>. <caster> successfully removes <target>'s <status>.
+084 - <target> is <status>.
+085 - <caster> casts <spell>. <target> resists the spell.
+086 - <caster> casts <spell>, but <target> is outside the area of effect.
 087 - Unable to use job ability.
 088 - Unable to use job ability.
-089 - Unable to use weapon skill.
-090 - Unable to use weapon skill.
-091 - The <player> does not have any .
-092 - Cannot use the <item> on <target>.
-093 - The <player> casts <spell>. <target> vanishes.
+089 - Unable to use weaponskill.
+090 - Unable to use weaponskill.
+091 - ${actor} does not have any ${item}.
+092 - Cannot use the ${item} on ${target}.
+093 - <caster> casts <spell>. <target> vanishes.
 094 - You must wait longer to perform that action.
 095 - You cannot learn <spell>. You do not meet the job or level requirements.
 096 - You already know <spell>.
-097 - <target> was defeated by the <player>.
-098 - You obtain <item> from <target>.
-099 - <player>><target>:
+097 - <defender> was defeated by <attacker>.
+098 - You obtain a ${item} from ${target}.
+099 - <user> > <target>: <value>, <value>
 100 - The <player> uses ..
-101 - The <player> uses ..
+101 - The <entity> uses ..
 102 - The <player> uses .. <target> recovers .. HP.
 103 - The <player> uses .. <target> recovers .. HP.
-104 - Unable to use item. You do not meet the level requirement.
-105 - The <player> gains <number> experience points.
+104 - Unable to use item.${lb}You do not meet the level requirement.
+105 - <player> gains <amount> experience point(s).
 106 - The <player> is intimidated by <target>'s presence.
-107 - <target> is temporarily unable to access support job abilities.
+107 - <player> is temporarily unable to access support job abilities
 108 - The <player> uses .. Pet's powers increase!
-109 - The <player> uses .. Pet's powers increase!
-110 - The <player> uses .. <target> takes .. points of damage.
-111 - You cannot use <item> while medicated.
-112 - <target>'s doom counter is now down to 0.
-113 - The <player> casts <spell>. <target> falls to the ground.
-114 - The <player> casts <spell> on <target>, but the spell fails to take effect.
-115 - The <player> uses .. Attacks are enhanced but defense weakens.
-116 - The <player> uses .. <target>'s attacks are enhanced.
-117 - The <player> uses .. Defense is enhanced but attacks weaken.
-118 - The <player> uses .. Accuracy is enhanced but evasion is impaired.
-119 - The <player> uses .. on <target>.
-120 - The <player> uses .. <target>'s accuracy is enhanced.
-121 - The <player> uses .. <target>'s evasion is enhanced.
-122 - The <player> uses .. The <player> recovers .. HP.
-123 - The <player> uses .. The <player> successfully removes <target>'s stun.
-124 - The <player> achieves Gate Breach status!
-125 - The <player> uses .. The <player> steals a .. from <target>.
-126 - The <player> uses .. The <player>'s movement speed increases.
-127 - The <player> uses .. <target> is stunned.
-128 - <target> is KO'd and cannot perform that action.
-129 - The <player> uses .. The <player> mugs .. gil from <target>.
-130 - <target> is KO'd for making an equipment change.
-131 - The <player> uses .. <target> is fortified against undead.
-132 - <target>'s spikes drain <number> HP from the <player>.
-133 - The <player> uses .. The <player> steals .. Petras from <target>.
-134 - The <player> uses .. <target> is fortified against arcana.
-135 - The <player> uses .. on <target>.
-136 - The <player> uses .. <target> is now under the <player>'s control.
-137 - The <player> uses .. The <player> fails to charm <target>.
-138 - The <player> uses .. <target> seems friendlier.
-139 - The <player> uses .. but finds nothing.
-140 - The <player> uses .. and finds a ...
-141 - The <player> uses .. <target> is stunned.
-142 - The <player> uses .. <target> receives the effect of Accuracy Down and Evasion Down.
-143 - The <player> uses .. Ranged attacks become more accurate.
-144 - The <player> uses .. <target> receives the effect of Accuracy Down and Evasion Down.
-145 - <target> receives the effect of Accuracy Down and Evasion Down.
-146 - The <player> uses .. <target> receives the effect of Accuracy Boost and Evasion Boost.
-147 - <target> receives the effect of Accuracy Boost and Evasion Boost.
-148 - The <player> uses .. <target> is fortified against demons.
+109 - The <mob> uses .. Pet's powers increase!
+110 - <user> uses <ability>. <target> takes <amount> damage.
+111 - You cannot use ${item} while medicated.
+112 - <name>'s doom counter is now down to <number>.
+113 - <caster> casts <spell>. <target> falls to the ground.
+114 - <caster> casts <spell> on <target>, but the spell fails to take effect.
+115 - <user> uses <ability>. Attacks are enhanced but defense weakens.
+116 - <user> uses <ability>. <user>'s attacks are enhanced.
+117 - <user> uses <ability>. Defense is enhanced but attacks weaken.
+118 - <user> uses <ability>. Accuracy is enhanced but evasion is impaired.
+119 - <user> uses <ability> on <target>.
+120 - <user> uses <ability>. <target>'s accuracy is enhanced.
+121 - <user> uses <ability>. <target>'s evasion is enhanced.
+122 - <user> uses <ability>. <target> recovers <number> HP.
+123 - <user> uses <ability>. <user> successfully removes <target>'s <status>.
+124 - <player> achieves Gate Breach status!
+125 - <user> uses <ability>. <user> steals <item> from <target>.
+126 - <user> uses <ability>. <name>'s movement speed increases.
+127 - <user> uses <ability>. <target> is <status>.
+128 - <player> is weakened and cannot perform that action.
+129 - <user> uses <ability>. <user> mugs <amount> gil from <target>.
+130 - <player> is weakened for making an equipment change.
+131 - <user> uses <ability>. <target> is fortified against undead.
+132 - <Defender>'s spikes drain <number> HP from the <Attacker>.
+133 - <user> uses <ability>. <user> steals <number> Petras from <target>.
+134 - <user> uses <ability>. <target> is fortified against arcana.
+135 - <user> uses <weaponskill> on <target>.
+136 - <user> uses <ability>. <target> is now under <user>'s control.
+137 - <user> uses <ability>. <user> fails to charm <target>.
+138 - <user> uses <ability>. <target> seems friendlier.
+139 - <user> uses <ability>, but finds nothing.
+140 - <user> uses <ability>, and finds a <item>.
+141 - <user> uses <ability>. <target> is stunned.
+142 - <user> uses <skill>. <target> receives the effect of <status> and <status>.
+143 - <user> uses <ability>. Ranged attacks become more accurate.
+144 - <user> uses <ability>. <target> receives the effect of <status> and <status>.
+145 - <target> receives the effect of <status> and <status>.
+146 - <user> uses <ability>. <target> receives the effect of <status> and <status>.
+147 - <target> receives the effect of <status> and <status>.
+148 - <user> uses <ability>. <target> is fortified against demons.
 149 - <target> is fortified against demons.
-150 - The <player> uses .. <target> is fortified against dragons.
+150 - <user> uses <ability>. <target> is fortified against dragons.
 151 - <target> is fortified against dragons.
-152 - Additional effect: The <player> recovers 0 MP.
-153 - The <player> uses .. The <player> fails to steal from <target>.
+152 - Additional effect: The <player> recovers <number> MP.
+153 - <user> uses <ability>. <user> fails to steal from <target>.
 154 - <target> is out of range.
 155 - You cannot perform that action on the specified target.
-156 - The <player> uses .. No effect on <target>.
-157 - The <player> uses Barrage. <target> takes .. points of damage.
-158 - The <player> uses .. but misses.
-159 - The <player> uses .. <target>'s stun effect disappears!
-160 - Additional effect: KO.
-161 - Additional effect: 0 HP drained from <target>.
-162 - Additional effect: 0 MP drained from <target>.
-163 - Additional effect: 0 points of damage.
-164 - Additional effect: KO.
-165 - Additional effect: 0 TP drained from <target>.
-166 - Additional effect: The <player> gains the effect of KO.
-167 - Additional effect: The <player> recovers 0 HP.
-168 - Additional effect: <target>'s KO effect disappears!
-169 - Additional effect: Warp!
-170 - <target> seems .. . It seems to have high evasion and defense.
-171 - <target> seems .. . It seems to have high evasion.
-172 - <target> seems .. . It seems to have high evasion but low defense.
-173 - <target> seems .. . It seems to have high defense.
-174 - <target> seems .. .
-175 - <target> seems .. . It seems to have low defense.
-176 - <target> seems .. . It seems to have low evasion but high defense.
-177 - <target> seems .. . It seems to have low evasion.
-178 - <target> seems .. . It seems to have low evasion and defense.
-179 - <target>: hit-eva(0) => ..
-180 - str-vit(0) dmg-adj(..)
-181 - atk-def(0) ofs-adj%(..)
-182 - <target>: MonNo(0)-Lev(..)
-183 - HIT-EVA(0) ATK-DEF(..)
-184 - <player>:ALLIANCE SUM=0/LEV=..
-185 - The <player> uses .. <target> takes .. points of damage.
-186 - The <player> uses .. <target> gains the effect of stun.
-187 - The <player> uses .. .. HP drained from <target>.
-188 - The <player> uses .. but misses <target>.
-189 - The <player> uses .. No effect on <target>.
+156 - <user> uses <ability>. No effect on <target>. (1 line msg)
+157 - <user> uses Barrage. <target> takes <number> points of damage.
+158 - <user> uses <ability>, but misses. (no name included)
+159 - <user> uses <skill> <target>'s <status> effect disappears!
+160 - Additional effect: <Status Effect>.
+161 - Additional effect: <number> HP drained from <target>.
+162 - Additional effect: <number> MP drained from <target>.
+163 - Additional effect: <number> points of damage.
+164 - Additional effect: <Status Effect>. (Duplicate?)
+165 - Additional effect: <number> TP drained from <target>.
+166 - Additional effect: <player> gains the effect of <Status Effect>.
+167 - Additional effect: The <player> recovers <number> HP.
+168 - Additional effect: <target>'s <Status Effect> effect disappears!
+169 - Additional effect: Warp! (used by Halloween staves)
+170 - <target> seems <difficulty>. It seems to have high evasion and defense.
+171 - <target> seems <difficulty>. It seems to have high evasion.
+172 - <target> seems <difficulty>. It seems to have high evasion but low defense.
+173 - <target> seems <difficulty>. It seems to have high defense.
+174 - <target> seems <difficulty>.
+175 - <target> seems <difficulty>. It seems to have low defense.
+176 - <target> seems <difficulty>. It seems to have low evasion but high defense.
+177 - <target> seems <difficulty>. It seems to have low evasion.
+178 - <target> seems <difficulty>. It seems to have low evasion and low defense.
+179 - <user>:  hit-eva(value) => <value>%
+180 -  str-vit(<value>) dmg-adj(<value>)
+181 -  atk-def(<value>) ofs-adj%(<value>)
+182 - <user>: MonNo(<value>)-Lev(<value>)
+183 - HIT-EVA(value) ATK-DEF(<value>)
+184 -  <user>:ALLIANCE SUM=<value>/LEV=<value>
+185 - player uses, target takes 10 damage. DEFAULT
+186 - <user> uses <skill>. <target> gains the effect of <status>.
+187 - <user> uses <skill>. <amount> HP drained from <target>
+188 - <user> uses <skill>, but misses <target>.
+189 - <user> uses <skill>. No effect on <target>.
 190 - The <player> cannot use that weapon ability.
-191 - The <player> is unable to use weapon skills.
+191 - <user> is unable to use weapon skills.
 192 - The <player> does not have enough TP.
-193 - .. cannot be used against that target.
-194 - The <player> uses .. <target> gains the effect of stun.
-195 - <target>: TOTAL ALLIANCE SUM=0/LEV=..
-196 - Skillchain! <target> takes 0 points of damage.
-197 - The <player> uses .. but <target> resists. <target> takes .. points of damage.
+193 - <skill> cannot be used against that target.
+194 -  <user> uses <skill>. <target> gains the effect of <status>.
+195 -  <user>:   TOTAL ALLIANCE SUM=<value>/LEV=<value>
+196 - Skillchain! <target> takes <number> point(s) of damage.
+197 - <user> uses <skill>, but <target> resists. <target> takes <number> point(s) of damage.
 198 - <target> is too far away.
 199 - That action requires a shield.
-200 - Time left until next use: (0:00:00)
-201 - Current time: (0:00:00)
+200 - Time left until next use: (<hours>:<minutes>:<seconds>)
+201 - Current time: (<hours>:<minutes>:<seconds>)
 202 - Time left: (0:00:00)
-203 - <target> is KO'd.
-204 - <target> is no longer KO'd.
-205 - <target> gains the effect of KO.
-206 - <target>'s KO effect wears off.
-207 - HP / HPMax:0/..
-208 - MP / MPMax:0/..
-209 - TP:0%
-210 - The <player> cannot charm <target>!
-211 - It would be very difficult for the <player> to charm <target>.
-212 - It would be difficult for the <player> to charm <target>.
-213 - The <player> might be able to charm <target>.
-214 - The <player> should be able to charm <target>.
+203 - ${target} is ${status}.
+204 - ${target} is no longer ${status}.
+205 - ${target} gains the effect of ${status}.
+206 - ${target}'s ${status} effect wears off.
+207 -  HP / HPMax:<value>/<value>
+208 -  MP / MPMax:<value>/<value>
+209 -  TP:<value>%
+210 - <actor> cannot charm <target>!
+211 - It would be very difficult for <actor> to charm <target>.
+212 - It would be difficult for <actor> to charm <target>.
+213 - <actor> might be able to charm <target>.
+214 - <actor> should be able to charm <target>.
 215 - That action requires a pet.
 216 - You do not have an appropriate ranged weapon equipped.
 217 - You cannot see <target>.
 218 - You move and interrupt your aim.
 219 - You cannot see <target>.
 220 - You move and interrupt your aim.
-221 - The <player> uses .. <target>'s pet is released.
+221 - <user> uses <ability>. <user>'s pet is released.
 222 - <target> isn't selling anything.
-223 - Skillchain: 0 points of damage.
-224 - The <player> uses .. <target> recovers .. MP.
-225 - The <player> uses .. .. MP drained from <target>.
-226 - The <player> uses .. .. TP drained from <target>.
-227 - The <player> casts (NULL). .. HP drained from <target>.
-228 - The <player> casts (NULL). .. MP drained from <target>.
-229 - Additional effect: <target> takes 0 additional points of damage.
-230 - The <player> casts (NULL). <target> gains the effect of stun.
-231 - The <player> uses .. .. of <target>'s effects disappear!
+223 - Skillchain: <number> points of damage.
+224 - <user> uses <skill>. <target> recovers <amount> MP.
+225 - <user> uses <skill>. <amount> MP drained from <target>
+226 - <user> uses <skill>. <amount> TP drained from <target>
+227 - <caster> casts <spell>. <amount> HP drained from <target>.
+228 - <caster> casts <spell>. <amount> MP drained from <target>.
+229 - Additional effect: The <target> takes <number> additional points of damage.
+230 - <caster> casts <spell>. <target> gains the effect of <status>.
+231 - <num> of <target>'s effects disappear!
 232 - <target> is drawn in!
 233 - You are ineligible to attack that target.
 234 - Auto-targeting <target>.
 235 - That is someone's pet.
-236 - The <player> casts (NULL). <target> is stunned.
-237 - The <player> casts (NULL). <target> receives the effect of stun.
-238 - The <player> uses .. <target> recovers .. HP.
-239 - Size:
-240 - The <player> tries to hide, but is spotted by <target>.
-241 - The <player> hides!
-242 - The <player> uses .. <target> is stunned.
-243 - The <player> uses .. <target> receives the effect of stun.
-244 - The <player> fails to mug <target>.
-245 - The <player> uses Eagle Eye Shot, but misses <target>.
-246 - <target> is full.
-247 - The <player> can't eat the ..
-248 - The <player>'s attack has no effect on <target>.
+236 - <caster> casts <spell>. <target> is <status>.
+237 - <caster> casts <spell>. <target> receives the effect of <status>.
+238 - <user> uses <skill>. <user> recovers <amount> HP.
+239 - Size: <number>
+240 - The <user> tries to hide, but is spotted by <actor>.
+241 - <user> hides!
+242 - <user> uses <skill>. <target> is <status>.
+243 - <user> uses <skill>. <target> receives the effect of <status>.
+244 - <user> fails to mug <target>.
+245 - The <user> uses Eagle Eye Shot, but misses <target>.
+246 - ${target} is full.
+247 - ${actor} can't eat the ${item}.
+248 - <user>'s attack has no effect on <target>.
 249 - <target>'s strength is impossible to gauge!
 250 - Reraise takes effect!
-251 - The effect of KO is about to wear off.
-252 - The <player> casts (NULL). Magic Burst! <target> takes .. points of damage.
-253 - EXP chain #..! The <player> gains 0 experience points.
-254 - Current enmity:
-255 - DEBUG: <target>>0% chance of success.
-256 - In this flower pot:  Seeds sown:
-257 - Crystal used: ..
-258 - Crystal used: ..
-259 - First crystal used: .. Second crystal used: ..
-260 - First crystal used: .. Second crystal used: ..
-261 - First crystal used: .. Second crystal used: ..
-262 - First crystal used: .. Second crystal used: ..
-263 - <target> recovers .. HP.
-264 - <target> takes .. points of damage.
-265 - Magic Burst! <target> takes .. points of damage.
-266 - <target> gains the effect of stun.
-267 - <target> receives the effect of stun.
-268 - The <player> casts (NULL). Magic Burst! <target> receives the effect of stun.
-269 - Magic Burst! <target> receives the effect of stun.
-270 - <target> is stunned.
-271 - The <player> casts (NULL). Magic Burst! <target> is stunned.
-272 - Magic Burst! <target> is stunned.
-273 - <target> vanishes!
-274 - The <player> casts (NULL). Magic Burst! .. HP drained from <target>.
-275 - The <player> casts (NULL). Magic Burst! .. MP drained from <target>.
-276 - <target> recovers .. MP.
-277 - <target> is stunned.
-278 - <target> receives the effect of stun.
-279 - <target> is stunned.
-280 - <target> gains the effect of stun.
-281 - .. HP drained from <target>.
+251 - The effect of ${status} is about to wear off.
+252 - <caster> casts <spell>. Magic Burst! <target> takes <number> point(s) of damage.
+253 - EXP chain #<number>! <target> gains <number> experience point(s).
+254 - Current enmity: <number>
+255 - DEBUG: <user>><number>% chance of success.
+256 - In this flower pot: Seeds sown: <item>
+257 - Crystal used: none
+258 - Crystal used: <item>
+259 - First crystal used: <item> Second crystal used: <item>
+260 - First crystal used: none Second crystal used: <item>
+261 - First crystal used: <item> Second crystal used: none
+262 - First crystal used: none Second crystal used: none
+263 - <target> recovers <amount> HP.
+264 - <target> takes <amount> points of damage.
+265 - Magic Burst! <target> takes <number> point(s) of damage.
+266 - <target> gains the effect of <status>.
+267 - <target> receives the effect of <status>.
+268 - <caster> casts <spell>. Magic Burst! <target> receives the effect of <status>.
+269 - Magic Burst! <target> receives the effect of <status>.
+270 - <target> is <status>.
+271 - <caster> casts <spell>. Magic Burst! <target> is <status>.
+272 - Magic Burst! <target> is <status>.
+273 - <player> vanishes!
+274 - <caster> casts <spell>. Magic Burst! <number> HP drained from <target>.
+275 - <caster> casts <spell>. Magic Burst! <number> MP drained from <target>.
+276 - <player> recovers <number> mp.
+277 - <target> is <status>.
+278 - <player> receives the effect of <status>.
+279 - <player> is <status>.
+280 - <player> is <status>.
+281 - <number> HP is drained from <player>.
 282 - <target> evades.
 283 - No effect on <target>.
 284 - <target> resists the effects of the spell!
-285 - <target>'s attacks are enhanced.
-286 - <target> is fortified against undead.
-287 - <target> is fortified against arcana.
-288 - Skillchain: Light. <target> takes 0 points of damage.
-289 - Skillchain: Darkness. <target> takes 0 points of damage.
-290 - Skillchain: Gravitation. <target> takes 0 points of damage.
-291 - Skillchain: Fragmentation. <target> takes 0 points of damage.
-292 - Skillchain: Distortion. <target> takes 0 points of damage.
-293 - Skillchain: Fusion. <target> takes 0 points of damage.
-294 - Skillchain: Compression. <target> takes 0 points of damage.
-295 - Skillchain: Liquefaction. <target> takes 0 points of damage.
-296 - Skillchain: Induration. <target> takes 0 points of damage.
-297 - Skillchain: Reverberation. <target> takes 0 points of damage.
-298 - Skillchain: Transfixion. <target> takes 0 points of damage.
-299 - Skillchain: Scission. <target> takes 0 points of damage.
-300 - Skillchain: Detonation. <target> takes 0 points of damage.
-301 - Skillchain: Impaction. <target> takes 0 points of damage.
-302 - Skillchain: Cosmic Elucidation. <target> takes .. points of damage.
-303 - The <player> uses Divine Seal.
-304 - The <player> uses Elemental Seal.
-305 - The <player> uses Trick Attack.
-306 - The <player> uses .. <target> recovers .. HP.
+285 - <player>'s attacks are enhanced.
+286 - <player> is fortified against undead.
+287 - <player> is fortified against arcana.
+288 - Skillchain: Light. <player> takes <number> point(s) of damage.
+289 - Skillchain: Darkness. <player> takes <number> point(s) of damage.
+290 - Skillchain: Gravitation. <player> takes <number> point(s) of damage.
+291 - Skillchain: Fragmentation. <player> takes <number> point(s) of damage.
+292 - Skillchain: Distortion. <player> takes <number> point(s) of damage.
+293 - Skillchain: Fusion. <player> takes <number> point(s) of damage.
+294 - Skillchain: Compression. <player> takes <number> point(s) of damage.
+295 - Skillchain: Liquefaction. <player> takes <number> point(s) of damage.
+296 - Skillchain: Induration. <player> takes <number> point(s) of damage.
+297 - Skillchain: Reverberation. <player> takes <number> point(s) of damage.
+298 - Skillchain: Transfixion. <player> takes <number> point(s) of damage.
+299 - Skillchain: Scission. <player> takes <number> point(s) of damage.
+300 - Skillchain: Detonation. <target> takes <number> point(s) of damage.
+301 - Skillchain: Impaction. <target> takes <number> point(s) of damage.
+302 - Skillchain: Cosmic Elucidation. <target> takes <number> point(s) of damage.
+303 - <user> uses Divine Seal.
+304 - <user> uses Elemental Seal.
+305 - <user> uses Trick Attack.
+306 - <user> uses <ability>. <target> recovers <number> HP. (Blue text)
 307 - That action requires a two-handed weapon.
-308 - Unable to use the . Inventory is full.
-309 - The <player> casts (NULL) on <target>.
-310 - The <player>'s (N/A) skill drops 0... points!
+308 - Unable to use the ${item}.${lb}${target}'s inventory is full.
+309 - <caster> casts <spell> on <target>.
+310 - <user>'s <weapon> skill drops 0.<number> points!
 311 - The <player> covers <target>.
 312 - The <player>'s attempt to cover has no effect.
-313 - <target> is out of range. Unable to cast (NULL).
-314 - <target>'s level is currently restricted to 0. Equipment affected by the level restriction will be adjusted accordingly.
+313 - <player> is out of range. Unable to cast <spell>.
+314 - <target>'s level is currently restricted to <number>. Equipment affected by the level restriction will be adjusted accordingly.
 315 - The <player> already has a pet.
 316 - That action cannot be used in this area.
 317 - The <player> uses .. <target> takes .. points of damage.
-318 - The <player> uses .. <target> recovers .. HP.
-319 - The <player> uses .. <target> gains the effect of stun.
-320 - The <player> uses .. <target> receives the effect of stun.
-321 - The <player> uses .. <target> is no longer KO'd.
-322 - The <player> uses .. <target>'s stun effect wears off.
-323 - The <player> uses .. No effect on <target>.
-324 - The <player> uses .. but misses <target>.
+318 - <user> uses <ability>. <player> recovers <number> HP. (Blue text)
+319 - <user> uses <ability. <player> gains the effect of <status>.
+320 - <user> uses <skill>. <target> receives the effect of <status>.
+321 - <user> uses <ability>. <target>'s <status> wears off.
+322 - <user> uses <ability>. <player>s' <status> effect wears off.
+323 - <user> uses <ability>. No effect on <target>. (2 line msg)
+324 - <user> uses <ability>, but misses <target>. (includes target name)
 325 - You are charmed by an enemy and unable to act.
-326 - The <player> readies ..
-327 - The <player> starts casting <spell> on <target>.
+326 - <user> readies <ability>.
+327 - <caster> starts casting <spell> on <target>.
 328 - <target> is too far away.
-329 - The <player> casts (NULL). <target>'s STR is drained.
-330 - The <player> casts (NULL). <target>'s DEX is drained.
-331 - The <player> casts (NULL). <target>'s VIT is drained.
-332 - The <player> casts (NULL). <target>'s AGI is drained.
-333 - The <player> casts (NULL). <target>'s INT is drained.
-334 - The <player> casts (NULL). <target>'s MND is drained.
-335 - The <player> casts (NULL). <target>'s CHR is drained.
+329 - <caster> casts <spell>. <target>'s STR is drained.
+330 - <caster> casts <spell>. <target>'s DEX is drained.
+331 - <caster> casts <spell>. <target>'s VIT is drained.
+332 - <caster> casts <spell>. <target>'s AGI is drained.
+333 - <caster> casts <spell>. <target>'s INT is drained.
+334 - <caster> casts <spell>. <target>'s MND is drained.
+335 - <caster> casts <spell>. <target>'s CHR is drained.
 336 - No effect on that pet.
 337 - You do not have the necessary item equipped to call a beast.
 338 - You cannot summon avatars here.
-339 - Your chocobo senses a hostile presence and refuses to come to your side.
+339 - Your mount senses a hostile presence and refuses to come to your side.
 340 - You must equip your main weapon first to use Dual Wield.
-341 - The <player> casts (NULL). <target>'s stun effect disappears!
-342 - The <player> casts (NULL). <target>'s stun effect disappears!
-343 - <target>'s stun effect disappears!
-344 - <target>'s stun effect disappears!
+341 - <caster> casts <spell>. <target>'s <status> effect disappears!
+342 - <caster> casts <spell>. <player>'s <status> effect disappears!
+343 - <player>'s <status> effect disappears!
+344 - <player>'s <status> effect disappears!
 345 - You cannot heal while you have an avatar summoned.
 346 - You must summon an avatar to use that command.
 347 - You must have pet food equipped to use that command.
 348 - You cannot call wyverns here.
 349 - You cannot call beasts here.
-350 - <target> is no longer stunned.
-351 - The remedy removes <target>'s status ailments.
-352 - The <player>'s ranged attack hits <target> for .. points of damage.
-353 - The <player>'s ranged attack scores a critical hit! <target> takes .. points of damage.
-354 - The <player>'s ranged attack misses.
-355 - The <player>'s ranged attack has no effect on <target>.
+350 - <actor> is no longer weakened.
+351 - The remedy removes <user>'s status ailments.
+352 - <user>'s ranged attack hits <target> for <number> point(s) of damage.
+353 - <user>'s ranged attack scores a critical hit! <target> takes <number> points of damage.
+354 - <user>'s ranged attack misses.
+355 - <user>'s ranged attack has no effect on <target>.
 356 - Cannot execute command. Your inventory is full.
-357 - <target> regains .. HP.
-358 - <target> regains .. MP.
-359 - <target> narrowly escapes impending doom.
-360 - The <player> uses .. All of <target>'s abilities are recharged.
-361 - All of <target>'s abilities are recharged.
-362 - The <player> uses .. <target>'s TP is reduced to ...
-363 - <target>'s TP is reduced to ...
-364 - The <player> uses .. All of <target>'s status parameters are boosted.
+357 - <target> regains <amount> HP.
+358 - <target> regains <amount> MP.
+359 - <name> narrowly escapes impending doom.
+360 - <user> uses <skill>. All of <target>'s abilities are recharged.
+360 - <user> uses <skill>. All of <target>'s abilities are recharged.
+361 - All of ${target}'s abilities are recharged.
+362 - <user> uses <skill>. <target>'s TP is reduced to <number>.
+363 - <target>'s TP is reduced to <number>.
+364 - <user> uses <skill>. All of <target>'s status paramaters are boosted.
 365 - All of <target>'s status parameters are boosted.
-366 - .. MP drained from <target>.
-367 - <target> recovers .. HP.
-368 - The <player> earns a merit point! (Total: 0)
-369 - The <player> uses .. .. of <target>'s attributes are drained.
-370 - The <player> uses .. .. status effects are drained from <target>.
-371 - The <player> gains 0 limit points.
-372 - Limit chain #..! The <player> gains 0 limit points.
-373 - The <player> hits <target>. <target> recovers .. hit points!
-374 - Striking <target>'s armor causes <player> to become <status effect>.
-
-378 - The <player> uses .. <target>'s stun effect disappears! -- Probably item related)
-379 - The <player> uses .. Magic Burst! <target> takes .. points of damage.
-382 - The <player>'s ranged attack hits <target>. <target> recovers .. hit points!
-383 - <target>'s spikes restore 0 HP to the <player>.
-384 - Additional effect: <target> recovers 0 HP.
-385 - Skillchain: Light. <target> recovers 0 hit points!
-386 - Skillchain: Darkness. <target> recovers 0 hit points!
-387 - Skillchain: Gravitation. <target> recovers 0 hit points!
-388 - Skillchain: Fragmentation. <target> recovers 0 hit points!
-389 - Skillchain: Distortion. <target> recovers 0 hit points!
-390 - Skillchain: Fusion. <target> recovers 0 hit points!
-391 - Skillchain: Compression. <target> recovers 0 hit points!
-392 - Skillchain: Liquefaction. <target> recovers 0 hit points!
-393 - Skillchain: Induration. <target> recovers 0 hit points!
-394 - Skillchain: Reverberation. <target> recovers 0 hit points!
-395 - Skillchain: Transfixion. <target> recovers 0 hit points!
-396 - Skillchain: Scission. <target> recovers 0 hit points!
-397 - Skillchain: Detonation. <target> recovers 0 hit points!
-398 - Skillchain: Impaction. <target> recovers 0 hit points!
-399 - The <player> uses .. All of <target>'s Petras vanish!
-400 - The <player> uses .. .. of <target>'s status ailments disappear!
-401 - The <player> uses .. .. of <target>'s effects disappear! -- Item related.
-402 - The <player> uses .. <target>'s magic defense is enhanced.
-403 - .. of <target>'s attributes are drained.
-404 - .. status effects are drained from <target>.
-405 - The <player> uses .. .. of <target>'s effects disappear!
-406 - The <player> uses .. <target> falls to the ground.
-407 - The <player> uses .. <target>'s TP is reduced.
-408 - The <player> uses .. No effect on <target>.
-409 - The <player> uses .. <target>'s TP is increased to ...
+367 - <target> recovers <amount> HP.
+368 - <player> earns a merit point! (Total: <number)
+369 - <user> uses <ability>. <amount> of <target>'s attributes is drained.
+370 - <num> status effects are drained from <target>.
+371 - <actor> gains <number> limit point(s).
+372 - Limit Chain #<number>! <player> gains <number> limit points.
+373 - <attacker> hits <defender>. <defender> recovers <number> hit points!
+374 - Striking <Defender>'s armor causes <Attacker> to become <status effect>.
+375 - ${actor} uses a ${item}.${lb}${target} receives the effect of ${status}.
+376 - ${actor} uses a ${item}.${lb}${target} obtains a ${item2}.
+377 - ${actor} uses a ${item}.${lb}${target} obtains ${item2}.
+378 - ${actor} uses a ${item}.${lb}${target}'s ${status} effect disappears!
+379 - <user> uses <ability>. Magic Burst! <defender> takes <number> point(s) of damage.
+380 - BUGGED? Prevents other messages?
+381 - BUGGED? Prevents other messages?
+382 - <attacker>'s ranged attack hits <defender>. <defender> recovers <number> hit points!
+383 - <?>'s spikes restore <number> HP to the <?>.
+384 - Additional effect: <target> recovers <number> HP.
+385 - Skillchain: Light. <target> recovers <number> hit points!
+386 - Skillchain: Darkness. <target> recovers <number> hit points!
+387 - Skillchain: Gravitation. <target> recovers <number> hit points!
+388 - Skillchain: Fragmentation. <target> recovers <number> hit points!
+389 - Skillchain: Distortion. <target> recovers <number> hit points!
+390 - Skillchain: Fusion. <target> recovers <number> hit points!
+391 - Skillchain: Compression. <target> recovers <number> hit points!
+392 - Skillchain: Liquefaction. <target> recovers <number> hit points!
+393 - Skillchain: Induration. <target> recovers <number> hit points!
+394 - Skillchain: Reverberation. <target> recovers <number> hit points!
+395 - Skillchain: Transfixion. <target> recovers <number> hit points!
+396 - Skillchain: Scission. <target> recovers <number> hit points!
+397 - Skillchain: Detonation. <target> recovers <number> hit points!
+398 - Skillchain: Impaction. <target> recovers <number> hit points!
+399 - <user> uses an <item>. All of <player>'s Petras vanish!
+400 - <user> uses a <item>. <number> of <target>'s status ailments disappears!
+401 - <user> uses a <item>. <number> of <target>'s effects disappear!
+402 - <user> uses <skill>. <target>'s magic defense is enhanced.
+403 - <number> of <target>'s attributes are drained.
+404 - <number> status effects are drained from <target>.
+405 - <user> uses <skill>. <number> of <target>'s effects disappear!
+406 - <user> uses <skill>. <target> falls to the ground.
+407 - <user> uses a <item>. <target>'s TP is reduced
+408 - <user> uses a <item>. No effect on <target>.
+409 - <user> uses <ability>. <target>'s TP is increased to <amount>.
 410 - No target available. Unable to use item.
-411 - The <player> attempts to use the , but lacks the required number of Ballista Points. You currently have .. Ballista Points.
-412 - The <player> uses .. <target> receives the effect of stun.
-413 - The <player> uses .. <target> takes .. points of damage.
-414 - The <player> uses .. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+411 - <user> attempts to use the <item>, but lacks the required number of Ballista Points. You currently have <number> Ballista Points.
+412 - <user> uses an <item>. <target> receives the effect of <status>.
+413 - <user> uses an <item>. <target> takes <number> point(s) of damage.
+414 - <user> uses <ability>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
 415 - <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
-416 - The <player> uses .. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
-417 - The <player> uses .. .. of <target>'s attributes are drained.
-418 - The <player> uses .. on <target>. <target>'s target switches to the <player>!
+416 - <user> uses <skill>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+417 - <user> uses <ability>. <number> of <target>'s attributes are drained.
+418 - <user> uses <skill> on <target>. <target>'s target switches to <user>!
 419 - <target> learns (NULL)!
 420 - The <player> uses .. The total comes to ..! <target> receives the effect of ..
 421 - <target> receives the effect of ..
@@ -423,236 +427,400 @@
 427 - <target> loses the effect of ..
 428 - There are no rolls eligible for Double-Up. Unable to use ability.
 429 - The same roll is already active on the <player>.
-430 - The <player> casts (NULL). .. of <target>'s attributes is drained.
-431 - The <player> casts (NULL). <target>'s TP is reduced.
-432 - The <player> casts (NULL). <target> receives the effect of Accuracy Boost and Evasion Boost.
-433 - The <player> casts (NULL). <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
-434 - You cannot customize an activated automaton.
-435 - The <player> uses ..! <target>'s abilities are recharged.
+430 - <caster> casts <spell>. 1 of <target>'s effects is drained.
+431 - <caster> casts <spell>. <target>'s TP is reduced.
+432 - <caster> casts <spell>. <target> receives the effect of Accuracy Boost and Evasion Boost.
+433 - <caster> casts <spell>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+434 - You cannot customize and activated automaton.
+435 - <user> uses <ability>! <target>'s abilities are recharged.
 436 - <target>'s abilities are recharged.
-437 - The <player> uses ..! <target>'s abilities are recharged. <target>'s TP is increased.
+437 - <user> uses <ability>! <target>'s abilities are recharged. <target>'s TP is increased.
 438 - <target>'s abilities are recharged. <target>'s TP is increased.
-439 - The <player> uses ..! All of <target>'s abilities are recharged. <target> regains MP.
+439 - <user> uses <ability>! All of <target>'s abilities are recharged. <target> regains MP.
 440 - All of <target>'s abilities are recharged. <target> regains MP.
-441 - The <player> uses .. <target> receives the effect of ..
-442 - The <player> learns a new ability!
-443 - You cannot learn .. You do not meet the job or level requirements.
-444 - You already know ..
-445 - You cannot use items at this time
+441 - <user> uses <ability>. <target> receives the effect of <status>.
+442 - <user> learns a new ability!
+443 - You cannot learn <ability>. You do not meet the job or level requirements.
+444 - You already know <ability>.
+445 - You cannot use items at this time.
 446 - You cannot attack that target
-447 - You are provoked and unable to change your target
-448 - Time allowed in Dynamis has been extended by 0 minutes
-449 - ----== WARNING ==----Time remaining in Dynamis: 0 minutes.
-450 - WATCH0 <target>:..
-451 - The <player> uses .. <target> regains .. MP.
-452 - The <player> uses .. <target> regains .. TP.
-453 - The <player> uses .. The <player> steals the effect of stun from <target>.
-454 - The <player> casts (NULL). .. TP drained from <target>.
-455 - Debug : Fishing skill check:  :
-456 - Debug : Level Restriction on. PetType 0/ID
-457 - Debug : Level restriction off. PetType 0/ID
-458 - Debug : Dif - Now > 0  RATE ../1000
-459 - Self-destruct check: skipping calculation of <target>'s self-destruct process md_no0/cmd_arg10
-460 - EXP Check: <player> > <target> XP:0/LvUp..
-461 - <target>:STR 0/..
-462 - <target>:DEX 0/..
-463 - <target>:VIT 0/..
-464 - <target>:AGI 0/..
-465 - <target>:INT 0/..
-466 - <target>:MND 0/..
-467 - <target>:CHR 0/..
-468 - Wyvern: JobLv<0>  TaskLv<..>
-469 - ID: Master<0>  Pet<..>
-470 - Wyvern routine type: Master<0>  Pet<..>
-471 - Avatar type: Master<0>  Pet<..>
-472 - Avatar MP: Master<0>  Pet<..>
-473 - Avatar HP: Master<0>  Pet<..>
-474 - Avatar level: Master<0>  Pet<..>
-475 - Avatar No.: Master<0>  Pet<..>
-476 - Probability of <target> dropping : ../10000
+447 - You are provoked and unable to change your target.
+448 - Time allowed in Dynamis has been extended by <param> minutes
+449 - ----== WARNING ==----Time remaining in Dynamis: <param> minutes.
+450 - WATCH1 <player>:<number>
+451 - <user> uses <ability>. <target> regains <amount> MP.
+452 - <user> uses <ability>. <target> regains <number> TP.
+453 - <user> uses <ability>. <user> steals the effect of <status> from <target>.
+454 - <caster> casts <spell>. <amount> TP drained from <target>.
+455 - Debug : Fishing skill check: <item> : KANJI<number>
+456 - Debug : Level Restriction on. PetType <number>/ID <number
+457 - Debug : Level Restriction off. PetType <number>/ID <number
+458 - Debug : Dif - Now > <number>  RATE <number>/1000
+459 - Self-destruct check: skipping calculation of <user>'s self-destruct process md_no<number>/cmd_arg<number> !
+460 - EXP Check: <target> > <player> XP:<number>/LvUp<number>
+461 - <user>:STR <value/<value>
+462 - <user>:DEX <value/<value>
+463 - <user>:VIT <value/<value>
+464 - <user>:AGI <value/<value>
+465 - <user>:INT <value/<value>
+466 - <user>:MND <value/<value>
+467 - <user>:CHR <value/<value>
+468 - Wyvern: JobLv<<value>> TaskLv<<value>>
+469 - ID: Master<<value>> Pet<<value>>
+470 - Wyvern routine type: Master<<value>> Pet<<value>>
+471 - Avatar type: Master<<value>> Pet<<value>>
+472 - Avatar MP: Master<<value>> Pet<<value>>
+473 - Avatar HP: Master<<value>> Pet<<value>>
+474 - Avatar level: Master<<value>> Pet<<value>>
+475 - Avatar No.: Master<<value>> Pet<<value>>
+476 - Probability of <target> dropping <item>: <value>/10000
 477 - Unable to target <target>. You have not received the level cap status.
-478 - Height differential between <player> and <target>: 0mm.
+478 - Height differential between <user> and <target>: <value>mm.
 479 - Damage taken.
-480 - Number of Targets (0)  Damage (..)
-481 - Overall: Number of Attacks (0)  Misses (..)
-482 - Number of Targets (0)  Damage (..)
-483 - Ranged Attack: Number of Attacks (0)  Misses (..)
-484 - Number of Targets (0)  Damage (..)
-485 - JA: Number of Attacks (0)  Misses (..)
-486 - Number of Targets (0)  Damage (..)
-487 - Weapon Skill: Number of Attacks (0)  Misses (..)
-488 - Number of Targets (0)  Damage(..)
-489 - Spell: Number of Attacks (0)  Misses (..)
-490 - Number of Targets (0)  Damage(..)
-491 - AA: Number of Attacks (0)  Misses (..)
-492 - Time:
-493 - <player>'s log
-494 -
-495 -
-496 -
-497 -
-498 -
-499 - Hate : <player>><target> 0/..
-500 -
-501 -
-502 - StatusGet(<target>:0/..) StatusSet(<target>:0/..)
-503 - <target>: Skillchain Element 0(..)
-504 -
-505 -
-506 -
-507 -
-508 -
-509 - <target>:< 0/.. >
-510 - DEBUG:<target>>great katana = 0%
-511 -
+480 -   Number of Targets (<value>) Damage (<value>)
+481 - Overall: Number of Attacks (<value>) Misses (<value>)
+482 -   Number of Targets (<value>) Damage (<value>)
+483 - Ranged Attack: Number of Attacks (<value>) Misses (<value>)
+484 -   Number of Targets (<value>) Damage (<value>)
+485 - JA: Number of Attacks (<value>) Misses (<value>)
+486 -   Number of Targets (<value>) Damage (<value>)
+487 - Weapon Skill: Number of Attacks (<value>) Misses (<value>)
+488 -   Number of Targets (<value>) Damage (<value>)
+489 - Spell: Number of Attacks (<value>) Misses (<value>)
+490 -   Number of Targets (<value>) Damage (<value>)
+491 - AA: Number of Attacks (<value>) Misses (<value>)
+492 - Time: <value>
+493 - <user>'s log
+494 - <Japanese>:<value> <Japanese>:<value>
+495 - <user><Japanese>:healing magic> <Japanese><value>%
+496 - <user><Japanese>:healing magic> <Japanese><value>%
+497 - <Japanese> <user> : <Japanese> + <value>/<Japanese> + <value>%
+498 - <Japanese> <user> > <target>
+499 - Hate : <user> > <target>
+500 - <Japanese> to <Japanese> <target>:CODE <value/<value>
+501 - StatusGet(<target>:<value>/<value>)
+502 - StatusSet(<target>:<value>/<value>)
+503 - <user>: Skillchain Element <value>(<value>)
+504 - <user>: <Japanese>(<value><Japanese>, <value>%)
+505 - <user>: <Japanese>(<value>). <Japanese>(<value>).
+506 - <user>: <Japanese>(<value>). <Japanese>(<value>).
+507 - <user>: <Japanese><value>/<Japanese><value>.
+508 - <user>: <Japanese><value>%,PS<value>
+509 - <user>:< <value/<value> >
+510 - DEBUG:<user> > (N/A) = <value>%
+511 - DEBUG:<user> > <value>%<Japanese>(<value>)
 512 - You must have a two-handed weapon equipped in the main weapon slot in order to equip a grip.
 513 - This grip is not compatible with the two-handed weapon you currently have equipped.
-514 - You do not have the proper items equipped to use the ..
-515 - <player> has successfully recorded the target's image onto a ..
-516 - <player> was unable to capture the target's image.
-517 - The  cannot be used on that target.
-518 - The  cannot be used while under the effect of Invisible or Sneak.
-519 - The <player> uses .. <target> is afflicted with Lethargic Daze (lv...).
-520 - The <player> uses .. <target> is afflicted with Sluggish Daze (lv...).
-521 - The <player> uses .. <target> is afflicted with Weakened Daze (lv...).
-522 - The <player> uses Violent Flourish. <target> takes .. points of damage and is stunned.
-523 - The same effect is already active on the <player>.
+514 - You do not have the proper items equipped to use the <item>.
+515 - <user> has successfully recorded the target's image onto an <item>.
+516 - <user> was unable to capture the target's image.
+517 - The <item> cannot be used on that target.
+518 - The <item> cannot be used while under the effect of Invisible or Sneak.
+519 - <user> uses <ability>. <target> is afflicted with Lethargic Daze (lv.<number).
+520 - <user> uses <ability>. <target> is afflicted with Sluggish Daze (lv.<number>).
+521 - <user> uses <ability>. <target> is afflicted with Weakened Daze (lv.<number>).
+522 - <user> uses <ability>. <target> takes <number> point(s) of damage and is stunned.
+523 - The same effect is already active on <player>.
 524 - You have not earned enough finishing moves to perform that action.
 525 - .. can only be performed during battle.
-526 - The <player> uses .. Enmity is stolen from <target>.
-527 - The <player> uses .. Ranged attack power and speed are increased. Melee attack power and speed are reduced.
-528 - The <player> uses .. Enmity is transferred to the <player>'s pet.
-529 - The <player> uses .. <target> is chainbound.
-530 - <target>'s petrification counter is now down to 0.
-531 - <target> is no longer KO'd.
-532 - The <player> uses .. <target> receives the effect of Sneak and Invisible.
-533 - The <player> casts (..). <target>'s Accuracy is drained.
-534 - The <player> casts (..). <target>'s Attack is drained.
-535 - <target> retaliates. .. of <player>'s shadows absorb the damage and disappear.
-536 - <target> retaliates. The <player> takes 0 points of damage.
-537 - <target>'s TP is increased to ..%.
-538 - A protective energy absorbs the malice of your enemy!
-539 - The <player> uses .. <target> regains HP.
-540 - Level Sync activated. Your level has been restricted to ... Equipment affected by the level restriction will be adjusted accordingly. Experience points will become unavailable for all party members should the Level Sync designee stray too far from the enemy.
-541 - Level Sync could not be activated. The designated player is below level ...
+526 - <user> uses <ability>. Enmity is stolen from <target>.
+527 - <user> uses <ability>. Ranged attack power and speed are increased. Melee attack power and speed are reduced.
+528 - <user> uses <ability>. Enmity is transferred to the <user>'s pet.
+529 - <user> uses <ability>. <target> is chainbound.
+530 - <actor>'s petrification counter is now down to <number>.
+531 - <player> is no longer <status>.
+532 - <user> uses <ability>. <target> receives the effect of Sneak and Invisible.
+533 - <caster> casts <spell>. <target>'s Accuracy is drained.
+534 - <caster> casts <spell>. <target>'s Attack is drained.
+535 - <defender> retaliates. <number> of <attacker>'s shadows absorb the damage and disappear.
+536 - <defender> retaliates. <attacker> takes <number> point(s) of damage.
+537 - <target>'s TP is increased to <number>%.
+538 - A protective energy absorbs the malice of your enemy.
+539 - <user> uses <skill>. <target> regains HP.
+540 - Level Sync activated. Your level has been restricted to <number>. Equipment affected by the level restriction will be adjusted accordingly. Experience points will become unavailable for all party members should the Level Sync designee stray too far from the enemy.
+541 - Level Sync could not be activated. The designated player is below level 10.
 542 - Level Sync could not be activated. The designated player is in a different area.
 543 - Level Sync could not be activated. One or more party members are currently under the effect of a status which prevents synchronization.
-544 - Level synchronization will be removed in .. seconds.
-545 - No experience points gained... The Level Sync designee is either too far from the enemy, or unconscious.
-546 - Your stun effect duration has been extended.
+544 - Level synchronization will be removed in <number> seconds.
+545 - No experience points gained...The Level Sync designee is either too far from the enemy, or unconscious.
+546 - Your <status> effect duration has been extended.
 547 - This ability can only be used on targets under the effect of a helix.
 548 - The party member you have selected is incapable of receiving experience points, and as such cannot be a Level Sync designee.
-549 - No experience points gained... The Level Sync designee is incapable of receiving experience points.
-550 - Level Sync will be deactivated in .. seconds. One or more party members have received the effect of a status which prevents synchronization.
-551 - Level Sync will be deactivated in .. seconds. The party leader or the Level Sync designee has left the area.
-552 - Level Sync will be deactivated in .. seconds. Less than two party members fulfill the requirements for Level Sync.
-553 - Level Sync will be deactivated in .. seconds. The party leader has removed synchronization, or the Level Sync designee has left the party.
-554 - Level Sync will be deactivated in .. seconds. The Level Sync designee has fallen below level ...
-555 - Level Sync will be deactivated in .. seconds. A party member has undergone a job change.
-556 - Level Sync will be deactivated in .. seconds. The Level Sync designee is incapable of receiving experience points.
-557 - <target> receives .. pieces of alexandrite.
-558 - You defeated a designated target. (Progress: ../..)
+549 - No experience points gained...The Level Sync designee is incapable of receiving experience points.
+550 - Level Sync will be deactivated in <number> seconds. One or more party members have received the effect of a status which prevents synchronization.
+551 - Level Sync will be deactivated in <number> seconds. The party leader or the Level Sync designee has left the area.
+552 - Level Sync will be deactivated in <number> seconds. Less than two party members fulfill the requirements for Level Sync.
+553 - Level Sync will be deactivated in <number> seconds. The party leader has removed synchronization, or the Level Sync designee has left the party.
+554 - Level Sync will be deactivated in <number> seconds. The Level Sync designee has fallen below level 10.
+555 - Level Sync will be deactivated in <number> seconds. A party member has undergone a job change.
+556 - Level Sync will be deactivated in <number> seconds. The Level Sync designee is incapable of receiving experience points.
+557 - <user> receives <number> pieces of alexandrite.
+558 - You defeated a designated target.${lb}(Progress: ${number}/${number2})
 559 - You have successfully completed the training regime.
-560 - <player> uses .. Finishing moves now ...
+560 - <user> uses <ability>. Finishing move(s) now <number>.
 561 - Unable to perform that action. Your have already earned the maximum number of finishing moves.
-562 - The status parameters of <target> have increased.
-563 - The <player> destroys <target>.
+562 - The status parameters of ${target} have increased.
+563 - <user> destroys <target>.
 564 - <target> were destroyed.
-565 - <target> obtains .. gil.
-566 - <target> obtains .. tabs. (Total: ..)
-567 - <player> stowed away a .. in his tattered Maze Monger pouch.
-568 - Your tattered Maze Monger pouch already contains a .. and cannot hold another.
+565 - ${target} obtains ${gil}.
+566 - ${target} obtains ${number} tab.${lb}(Total: ${number})
+567 - <user> stowed away an <item> in his/her tattered Maze Monger pouch.
+568 - Your tattered Maze Monger pouch already contains an <item> and cannot hold another.
 569 - Your current status prevents you from using that ability.
-570 - The <player> casts (NULL). .. of <target>'s status ailments disappear!
-571 - .. of <target>'s status ailments disappear!
-572 - The <player> casts (NULL). You absorb .. of <target>'s status ailments.
-573 - <player> or an alliance member is participating in a union. Ineligible to obtain treasure from this enemy.
+570 - <caster> casts <spell>. <number> of <target>'s status ailments disappears!
+571 - <number> of <target>'s status ailments disappear!
+572 - <caster> casts <spell>. <caster> absorbs <number> of <target>'s status ailments.
+573 - <target> or an alliance member is participating in a union. Ineligible to obtain treasure from this enemy.
 574 - <player>'s pet is currently unable to perform that action.
 575 - <player>'s pet does not have enough TP to perform that action.
-576 - The <player>'s ranged attack hits <target> squarely for .. points of damage!
-577 - The <player>'s ranged attack strikes true, pummeling <target> for .. points of damage!
+576 - <attacker>'s ranged attack hits <defender> squarely for <number> point(s) of damage!
+577 - <attacker>'s ranged attack strikes true, pummeling <defender> for <number> point(s) of damage!
 578 - Hunt objective fulfilled! Please report to a hunt registry to collect your reward.
-579 - Unable to use the .. Party leaders or those not in a party cannot use  ..
-580 - Unable to use the .. The party leader is in either an area beyond warping range or a place you have yet to visit.
-581 - Unable to cast (NULL). Astral Flow must be in effect to cast this spell.
-582 - <player> obtains .. gil.
-583 - Trial ..: .. objectives remain.
-584 - You have completed Trial ... Report your success to a Magian Moogle.
-585 -
-586 -
-587 -
-588 -
-589 -
-590 -
-591 -
-592 -
-593 -
-594 -
-595 -
-596 -
-597 -
-598 -
-599 -
-600 -
-601 - Objective fufilled! ... Please report to a Dominion Sergeant to collect your reward.
-602 -
-603 - Additional Effect: Treasure hunter effectiveness against <param1> increases to <param2>.
-604 -
-605 -
-606 -
-607 -
-608 - <player> uses <ability> ... Treasure Hunter effectiveness against <param1> increases to <param2>.
-609 - Prowess attained: increased treasure casket discovery.
-610 - Prowess attained: increased combat and magic skill gain.
-611 - Prowess attained: increased crystal yield.
-612 - Prowess attained: increased Treasure Hunter Bonus.
-613 - Prowess attained: increased attack speed.
-614 - Prowess attained: increased HP and MP.
-615 - Prowess attained: increased accuracy and ranged accuracy.
-616 - Prowess attained: increased attack and ranged attack.
-617 - Prowess attained: increased magic accuracy and magic attack.
+579 - Unable to use the <item>. Party leaders or those not in a party cannot use an <item>.
+580 - Unable to use the <item>. The party leader is in either an area beyond warping range or a place you have yet to visit.
+581 - Unable to cast <spell>. Astral Flow must be in effect to cast this spell.
+582 - <target> obtains <number> gil.
+583 - Trial <number>: <number> objectives remain.
+584 - You have completed Trial <trialID>. Report your success to a Magian Moogle.
+585 - <user> uses <ability>. <target>'s enmity towards <user> is <number>%.
+586 - Towards <party member> is <number>%.
+587 - <target> regains <number> HP.
+588 - <target> regains <number> MP.
+589 - <target> have been healed of <number> ailments.
+590 - You can now perform <skill>.
+591 - <user> uses <ability>. <target> is afflicted with Bewildered Daze (lv.<number>).
+592 - <defender> attempts to counter <attacker>'s attack, but misses.
+593 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Attack Down.
+594 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Defense Down.
+595 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Magic Atk. Down.
+596 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Magic Def. Down.
+597 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Evasion Down.
+598 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Accuracy Down.
+599 - ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Slow.
+600 - ${actor} eats a ${item}.${lb}${actor} finds a ${item2} inside!
+601 - Objective fulfilled! Please report to a Dominion Sergeant to collect your reward.
+602 - <user> uses <ability>. <target> receives the effect of <status>.
+603 - Additional effect: Treasure Hunter effectiveness against <target> increases to <number>.
+604 - ${actor} eats a ${item}, but finds nothing inside...
+605 - Additional effect: <target> falls to the ground.
+606 - <defender> absorbs <attacker>'s counter. <defender> recovers <number> HP.
+607 - <user> uses <skill>. <number> of <target>'s status ailments disappear!
+608 - <user> uses <ability>. Treasure Hunter effectiveness against <target> increases to <number>.
+609 - Prowess attained: Increased treasure casket discovery.
+610 - Prowess attained: Increased combat and magic skill gain.
+611 - Prowess attained: Increased crystal yield.
+612 - Prowess attained: Treasure Hunter bonus.
+613 - Prowess attained: Increased attack speed.
+614 - Prowess attained: Increased HP and MP.
+615 - Prowess attained: Enhanced accuracy and ranged accuracy.
+616 - Prowess attained: Enhanced attack and ranged attack.
+617 - Prowess attained: Enhanced magic accuracy and magic attack.
 618 - Prowess attained: Enhanced "Cure" potency.
-619 - Prowess attained: increased weapon skill damage.
+619 - Prowess attained: Increased weapon skill damage.
 620 - Prowess attained: "Killer" effects bonus.
-621-624 null?
-625 - Prowess boosted: increased treasure casket discovery.
-626 - Prowess boosted: increased combat and magic skill gain.
-627 - Prowess boosted: increased crystal yield.
-628 - Prowess boosted: increased Treasure Hunter Bonus.
-629 - Prowess boosted: increased attack speed.
-630 - Prowess boosted: increased HP and MP.
-631 - Prowess boosted: increased accuracy and ranged accuracy.
-632 - Prowess boosted: increased attack and ranged attack.
-633 - Prowess boosted: increased magic accuracy and magic attack.
+621 - Blank Line/Prompt
+622 - Blank Line/Prompt
+623 - Blank Line/Prompt
+624 - Blank Line/Prompt
+625 - Prowess boosted: Increased treasure casket discovery.
+626 - Prowess boosted: Increased combat and magic skill gain.
+627 - Prowess boosted: Increased crystal yield.
+628 - Prowess boosted: Treasure Hunter bonus.
+629 - Prowess boosted: Increased attack speed.
+630 - Prowess boosted: Increased HP and MP.
+631 - Prowess boosted: Enhanced accuracy and ranged accuracy.
+632 - Prowess boosted: Enhanced attack and ranged attack.
+633 - Prowess boosted: Enhanced magic accuracy and magic attack.
 634 - Prowess boosted: Enhanced "Cure" potency.
-635 - Prowess boosted: increased weapon skill damage.
+635 - Prowess boosted: Increased weapon skill damage.
 636 - Prowess boosted: "Killer" effects bonus.
-
-673 - <player> obtains <param> corpuscles of mweya plasm.
-674 -
-675 -
-676 -
-677 - You are now able to posess a new monster!
+637 - Blank Line/Prompt
+638 - Blank Line/Prompt
+639 - Blank Line/Prompt
+640 - Blank Line/Prompt
+641 - Additional effect: <number> of <target>'s attributes are drained.
+642 - <caster> casts <spell>. <caster> absorbs <number> of <target>'s status benefits.
+643 - Your current training regime will begin anew!
+644 - <user> uses <ability>. <number> of <target>'s status effects are removed.
+645 - <user> uses <ability>. <target> is <status>.
+646 - <user> uses <ability>. <target> falls to the ground.
+647 - <caster> casts <spell>. <target>'s <status> effect disappears!
+648 - <caster> leads the casting of <spell>. <target> takes <number> point(s) of damage.
+649 - A member of another party is readying <spell> against your target. You cannot cast the same spell at this time.
+650 - <caster> leads the casting of <spell>. Magic Burst! <target> takes <number> point(s) of damage.
+651 - <caster> leads the casting of <spell>. <target> recovers <number> hit points.
+652 - Additional effect: <target> loses <number> TP.
+653 - <caster> casts <spell>. -><target> resists the spell. ->Immunobreak!
+654 - -><target> resists the spell. ->Immunobreak!
+655 - <caster> casts <spell>. -><target> completely resists the spell.
+656 - -><target> completely resists the spell.
+657 - <user> uses <ability>. ->All enmity is transferred to <target>.
+658 - <user> uses <ability>, but misses <target>.
+659 - No effect on <target>.
+660 - The same effect is already active on that luopan!.
+661 - <player> has already placed a luopan. Unable to use ability.
+662 - This action requires a luopan.
+663 - <player> uses <ability>. The luopan's HP consumption rate has been reduced.
+664 - <player> uses <ability>. The luopan's HP consumption rate has been increased.
+665 - <player> has a pet. Unable to use ability.
+666 - That action requires the ability Rune Enchantment.
+667 - <Player> uses <Ability>. Accuracy and evasion are enhanced.
+668 - <Target> receives the effect of Vallation, reducing damage taken from certain elemental magic spells. -- Vallation and Valiance both use this message for the RUN using the ja
+669 - Magic damage of a certain element is reduced for <Target>                                             --- This message is when a party member recieves the aoe effect of Valiance
+670 - <Player> uses <Ability>. <Target> can now absorb magic damage of a certain element.
+671 - <Player> uses <Ability>. <Target> now has enhanced resistance.
+672 - <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
+673 - <target> obtains <number> corpuscles of mweya plasm.
+674 - <user> uses <ability>, and finds <number> <item>.
+675 - <user> readies <skill>.
+676 - <user>'s movement speed increases.
+677 - You are now able to possess a new monster!
 678 - You have learned a new instinct!
-679 -
-680 -
-
-690 - You have completed the following record of Eminence objective: <param>
-691 - This objective may be repeated, and can be canceled from the menu.
-692 - You receive <param1> sparks of eminence, and now possess a total of <param2>.
-693 - As a special bonus for your valiant efforts, you have been awarded a <item>!
-694 - As a special bonus for your valiant efforts, you have been awarded <param> sparks of eminence!
-695 - Unable to receive bonus. ... Make room in your inventory and receive your reward from the records of eminence menu.
-696 - You have yet to receive certain special bonuses from objectives you have completed. Make room in your inventory and receive your rewards from thr record of eminence menu.
-697 - Records of Emminence: <param>
-698 - Progress <param1>/<param2>
+679 - <monster> will return to the Feretory in: <number>.
+680 - A newfound puissance courses through your veins.
+681 - Your muscles ripple with an immensely powerful and invigorating force.
+682 - Your puissance withers slightly.
+683 - You have claimed <target>!
+684 - <target> has been claimed!
+685 - The enemy you are battling will no longer be claimed in: <number>.
+686 - The enemy you were battling is no longer claimed.
+687 - <user> captured <target>.
+688 - <target> has fled!
+689 - <user> captured <target>.
+690 - You have completed the following Records of Eminence objective: <record>.
+691 - This objective may be repeated, and can be cancelled from the menu.
+692 - You receive <amount> sparks of eminence, and now possess a total of <amount>.
+693 - As a special bonus for your valiant efforts, you have been awarded <item>!
+694 - As a special bonus for your valiant efforts, you have been awarded <amount> sparks of eminence!
+695 - Unable to receive special bonus. Make room in your inventory and receive your reward from the Records of Eminence menu.
+696 - You have yet to receive certain special bonuses from the objectives you have completed. Make room in your inventory and receive your reward from the Records of Eminence menu.
+697 - Records of Eminence: <record>.
+698 - Progress: <amount>/<amount>.
 699 - A new objective has been added!
 700 - You are unable to use Trust magic at this time.
 701 - There's no time to do that now!
+702 - Blank Line/Prompt
+703 - Blank Line/Prompt
+704 - You have undertaken <RoE challenge number>.
+705 - You have undertaken the limited-time Records of Eminence challenge "<RoE challenge number>".
+706 - You have obtained <key item> as a special reward!
+707 - As a first-time bonus, you receive <amount> sparks of eminence for a total of <amount>!
+708 - This place is now known as a location that brings memories flooding back to the <actor>.
+709 - As a special bonus for your valiant efforts, you have been awarded the following: <itemid> x<amount>!
+710 - You are cleared to fulfill this objective once again.
+711 - (Adventuring Fellow?) (<name>) It's far too late for your foes to make amends, and with me at your side, they'll meet untimely ends!
+712 - (/checkparam) Primary Accuracy: <number> / Primary Attack: <number>.
+713 - (/checkparam) Auxiliary Accuracy: <number> / Auxiliary Attack: <number>.
+714 - (/checkparam) Ranged Accuracy: <number> / Ranged Attack: <number>.
+715 - (/checkparam) Evasion: <number> / Defense: <number>.
+716 - <caster> starts casting <spell>.
+717 - You cannot call forth alter egos here. they'll meet untimely ends!
+718 - <target> gains <number> capacity point(s). <target> earns a job point! (Total: <number>)
+719 - <player> earns a job point! (Total: <value>)
+720 - CRASHES THE CLIENT
+721 - You receive a bonus of <number> fishing guild point(s)!
+722 - You receive a bonus of <number> woodworking guild point(s)!
+723 - You receive a bonus of <number> smithing guild point(s)!
+724 - You receive a bonus of <number> goldsmithing guild point(s)!
+725 - You receive a bonus of <number> clothcraft guild point(s)!
+726 - You receive a bonus of <number> leathercraft guild point(s)!
+727 - You receive a bonus of <number> bonecraft guild point(s)!
+728 - You receive a bonus of <number> alchemy guild point(s)!
+729 - You receive a bonus of <number> cooking guild point(s)!
+730 - <user> uses <skill>. <target>'s TP is reduced to <number>.
+731 - (/checkparam) Average item level: <number>.
+732 - Skillchain: Universal Enlightenment. <target> takes <number> point(s) of damage.
+733 - <actor>:
+734 - <user> uses <skill> on <target>.
+735 - Capacity chain #<number>! <target> gains <number> capacity point(s).
+736 - <user> uses <skill>. <number> HP drained from <target>.
+737 - <user> uses <skill>. <number> of <target>'s magic effects is drained.
+738 - <user> uses <skill>.
+739 - <target> receives <number> magical effect(s).
+740 - <user>:< $<value>/$<value> >
+741 - You have gained <amount> Unity accolade[/s] for a total of <amount>!
+742 - You are currently unable to undertake this objective.
+743 - <user> uses <skill>. <target>'s enmity decreases.
+744 - Blank Line/Prompt
+745 - Your automaton exceeds one or more elemental capacity values and cannot be activated.
+746 - <user> uses <skill>. <number> TP drained from <target>.
+747 - <user> uses <skill>. Magic Burst! <target> takes <number> point(s) of damage.
+748 - <user> uses <skill>. Magic Burst! <number> HP drained from <target>.
+749 - Magic Burst! <number> HP drained from <target>.
+750 - <user> uses <skill>. Magic Burst! <number> MP drained from <target>.
+751 - Magic Burst! <number> MP drained from <target>.
+752 - <user> uses <skill>. Magic Burst! <number> TP drained from <target>.
+753 - Magic Burst! <number> TP drained from <target>.
+754 - <user> uses <skill>. Magic Burst! <target> is <status>.
+755 - <user> uses <skill>. Magic Burst! <target> receives the effect of <status>.
+756 - <defender>'s spikes cause <attacker> to fall to the ground.
+757 - <number> of <target>'s effects disappears.
+758 - Obtained key item: <key item>.
+759 - You already have key item: <key item>.
+760 - You are only able to possess one <item> and thus are unable to receive your just reward. Clear out your inventory and receive the item from the Records of Eminence Menu.
+761 - You were unable to receive your just reward because you need 1 free space in your inventory. Clear out your bags and receive your item from the Records of Eminence Menu.
+762 - <user> uses <skill>. All of <target>'s status parameters are boosted.
+763 - <user> uses <skill>. <target> has grown noticeably bored.
+764 - <user> uses <skill>. <target> feels the Fever!
+765 - <user> uses a <item>. <target> obtains 2 escha silt.
+766 - <user> uses a <item>. <target> obtains 2 escha beads.
+767 - Skillchain: Radiance. <target> takes <number> points of damage.
+768 - Skillchain: Umbra. <target> takes <number> points of damage.
+769 - Skillchain: Radiance. <target> recovers <number> hit points!
+770 - Skillchain: Umbra. <target> recovers <number> hit points!
+771 - Congratulations! Your deeds of valor will ring throughout the ages - providing inspiration for generations to come.
+772 - <player> stands resolute thanks to the power of the bonds that tie you!
+773 - You are unable to call forth your mount because your main job level is not at least <number>.
+774 - You already possess that item and are unable to receive your just reward!
+775 - A new objective has been added in the Contents > Content (Ambuscade) Records or Eminence category!
+776 - Additional Effect: <target> is chainbound.
+777 - You cannot mount at this time.
+778 - <user> uses <skill>. <user> copies <number> magical effect(s) from <target>.
+779 - <user> uses <skill>. A barrier begins to pulsate around <target>.
+780 - <user> uses <skill>. <user> takes aim at <target>!
+781 - <defender> retaliates, absorbing <number> TP from <attacker>.
+782 - The bonus conditions for increasing the Craftsmanship has changed to {FIR}%+d !
+783 - The Craftsmanship bonus conditions have disappeared!
+784 - Craftsmanship has increased by <number>.<number>%! (ex. 1.1%)
+785 - Craftsmanship has increased by <number>.0<number>%! (ex. 1.01%)
+786 - Craftsmanship has increased to <number>%! (ex. 1%)
+787 - <player> has had the fun sucked out of them!
+788 - <player> no longer recalls what fun is...
+789 - dmgfix(<value>)
+790 - The <item> contains <number> gil.
+791 - <target> uses <skill>. <target> receives <number> motes of paradise.
+792 - <target> uses <spell>. <number> of <target>'s effects disappear!
+793 - you find <number> <item>.
+794 - You find <number> <item>. (plural)
+795 - You receive <number> deeds of heroism, for a total of <number>!
+796 - <player> gains potpourri for a total of <number>!
+797 - <player> attains level <number>!
+798 - The <pet>'s overload chance is <number>%.
+799 - The <pet>'s overload chance is <number>%. The <pet> is overloaded!
+800 - <status> activates. <target> takes <number> point(s) of damage.
+801 - You cannot use the <item> until the <status> effect expires.
+802 - The <user> uses <skill>. <number> HP drained from <target>.
+803 - <user> uses <spell>. Magic Burst! <number> HP drained from <target>.
+804 - <user> uses <spell. Magic Burst! <target> receives the effect of <status>.
+805 - <user> uses <skill>. <target>'s <status> effect disappears!
+806 - <target>'s <status> effect disappears!
+807 - <target> receives <amount> job points.
+808 - <user> was unable to use that because they cannot hold any more.
+809 - <player> gains <amount> exemplar points.
+810 - Master chain #<value>! <player> gains <amount> exemplar points.
+811 - <player> attains master level <amount>!
+812 - Master Level: <value> (<amount> experience)
+813 - <player> falls to master level <value>.
+814 - Level Sync activated. Your master level has been restricted to <value>. Experience points will become unavailable for all party members should the Level Sync designee stray too far from the enemy.
+815 - <user> uses <ability>. <target> is knocked back far into the distance!
 
+816 - Blank Line/Prompt
+...
+1020 - Blank Line/Prompt
 
-735 - Capacity chain#<param2>! ... <player> gains <param1> capacity points.
+1021 - Flower-viewing time!
+1022 - <user> uses <ability>. <user> is ready for flower viewing!
+1023 - <user> uses <ability>. <user>'s attacks and defenses are enhanced.
 
-1023 - <name>'s damage dealt is increased and damage taken is reduced.
 -------------------------------------------------
 End of client dat file. No entries above 1023.

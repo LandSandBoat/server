@@ -20,7 +20,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND
 quest.reward =
 {
     fame = 30,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
 }
 
 quest.sections =
@@ -130,7 +130,7 @@ quest.sections =
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
-                        npcUtil.popFromQM(player, npc, gustavTunnelID.mob.BARONIAL_BAT, {hide = 0})
+                        npcUtil.popFromQM(player, npc, gustavTunnelID.mob.BARONIAL_BAT, { hide = 0 })
                     then
                         return quest:messageSpecial(gustavTunnelID.text.SENSE_OMINOUS_PRESENCE)
                     end
@@ -139,7 +139,7 @@ quest.sections =
 
             ['Baronial_Bat'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
             },

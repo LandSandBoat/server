@@ -8,24 +8,18 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-
-    local Keremet = mob:getID()
+    local keremet = mob:getID()
 
     -- Send spawned skeleton "pets" to Keremet's target
-
-    for i = Keremet+1, Keremet+12 do
+    for i = keremet + 1, keremet + 12 do
         local m = GetMobByID(i)
         if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
         end
     end
-
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 3 and  player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)==false) then
-        player:setCharVar("PromathiaStatus", 4)
-    end
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

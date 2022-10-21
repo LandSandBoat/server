@@ -35,7 +35,7 @@ quest.sections =
             return xi.trust.hasPermit(player) and
             not player:hasSpell(xi.magic.spell.ULMIA) and
             -- On Dawn, but past "the boss"
-            (player:getCurrentMission(COP) > xi.mission.id.cop.DAWN and
+            (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
             player:getCharVar("PromathiaStatus") == 3)
             -- TODO: Additional conditions
         end,

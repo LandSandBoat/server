@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local roz = player:getCurrentMission(ZILART)
+    local roz = player:getCurrentMission(xi.mission.log_id.ZILART)
     local rozStat = player:getMissionStatus(xi.mission.log_id.ZILART)
 
     if player:getZPos() < 200 then

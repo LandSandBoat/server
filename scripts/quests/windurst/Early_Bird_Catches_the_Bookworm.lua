@@ -21,6 +21,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIR
 quest.reward =
 {
     fame = 120,
+    fameArea = xi.quest.fame_area.WINDURST,
     gil = 1500,
     title = xi.title.SAVIOR_OF_KNOWLEDGE,
 }
@@ -31,7 +32,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER) and
-                player:getFameLevel(WINDURST) >= 2 and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                 not quest:getMustZone(player)
         end,
 

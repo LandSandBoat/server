@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

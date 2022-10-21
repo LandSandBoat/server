@@ -1,27 +1,16 @@
 -----------------------------------
 -- Spell: Teleport-Holla
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/spells/enhancing_teleport")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    if target:getObjType() == xi.objType.PC then
-        if target:hasKeyItem(xi.ki.HOLLA_GATE_CRYSTAL) then
-            target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOLLA, 0, 4.7)
-            spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
-        else
-            spell:setMsg(xi.msg.basic.NONE)
-        end
-    end
-    return 0
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useTeleportSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

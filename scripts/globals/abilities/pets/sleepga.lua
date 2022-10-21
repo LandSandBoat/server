@@ -8,16 +8,16 @@ require("scripts/globals/msg")
 require("scripts/globals/spell_data")
 require("scripts/globals/summon")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local duration = 90
     local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local bonus = getSummoningSkillOverCap(pet)
+    local bonus = xi.summon.getSummoningSkillOverCap(pet)
     local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.element.ICE)
     if (resm < 0.5) then
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
@@ -36,4 +36,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return xi.effect.SLEEP_I
 end
 
-return ability_object
+return abilityObject

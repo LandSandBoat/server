@@ -5,7 +5,7 @@
 -- !pos -110 -10 82 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/status")
@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 199) then
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
-        player:addFame(WINDURST, 75)
+        player:addFame(xi.quest.fame_area.WINDURST, 75)
         player:addItem(12316)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12316)
         player:setCharVar("QuestCatchAFallingStar_prog", 2)

@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) > xi.mission.id.cop.THE_WARRIOR_S_PATH then
+    if player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_WARRIORS_PATH then
         player:startEvent(915)
     else
         player:messageSpecial(ID.text.ALREADY_OBTAINED_TELE + 1) -- Telepoint Disappeared
@@ -24,7 +24,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 915 and option == 1 then
-        player:setPos(654.200, -2.799, 100.700, 193, 33) -- To AlTaieu {R}
+        player:setPos(654.200, -2.799, 100.700, 193, 33) -- To AlTaieu (R)
     end
 end
 

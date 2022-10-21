@@ -20,7 +20,8 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                            Cost,  Qty
+    {
+    --  Sel      Item                         Cost
         [ 1] = { xi.items.RAVAGERS_MASK,      5000 },
         [ 2] = { xi.items.TANTRA_CROWN,       5000 },
         [ 3] = { xi.items.ORISON_CAP,         5000 },
@@ -32,28 +33,30 @@ local prospectorItems =
     },
 
     [itemType.TEMP] =
-    {-- Sel      Item                         Cost, Qty
-        [ 1] = { xi.items.LUCID_POTION_I,       80 },
-        [ 2] = { xi.items.LUCID_ETHER_I,        80 },
-        [ 3] = { xi.items.CATHOLICON,           80 },
-        [ 4] = { xi.items.DUSTY_ELIXIR,        120 },
-        [ 5] = { xi.items.CLEAR_SALVE_I,       120 },
-        [ 6] = { xi.items.STALWARTS_TONIC,     150 },
-        [ 7] = { xi.items.ASCETICS_TONIC,      150 },
-        [ 8] = { xi.items.CHAMPIONS_TONIC,     150 },
-        [ 9] = { xi.items.LUCID_POTION_II,     200 },
-        [10] = { xi.items.LUCID_ETHER_II,      200 },
-        [11] = { xi.items.LUCID_ELIXIR_I,      300 },
-        [12] = { xi.items.HEALING_POWDER,      300 },
-        [13] = { xi.items.MANA_POWDER,         300 },
-        [14] = { xi.items.HEALING_SALVE_I,     300 },
-        [15] = { xi.items.VICARS_DRINK,        300 },
-        [16] = { xi.items.CLEAR_SALVE_II,      300 },
-        [17] = { xi.items.PRIMEVAL_BREW,   2000000 },
+    {
+    --  Sel      Item                               Cost
+        [ 1] = { xi.items.LUCID_POTION_I,             80 },
+        [ 2] = { xi.items.LUCID_ETHER_I,              80 },
+        [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },
+        [ 4] = { xi.items.DUSTY_ELIXIR,              120 },
+        [ 5] = { xi.items.TUBE_OF_CLEAR_SALVE_I,     120 },
+        [ 6] = { xi.items.BOTTLE_OF_STALWARTS_TONIC, 150 },
+        [ 7] = { xi.items.BOTTLE_OF_ASCETICS_TONIC,  150 },
+        [ 8] = { xi.items.BOTTLE_OF_CHAMPIONS_TONIC, 150 },
+        [ 9] = { xi.items.LUCID_POTION_II,           200 },
+        [10] = { xi.items.LUCID_ETHER_II,            200 },
+        [11] = { xi.items.LUCID_ELIXIR_I,            300 },
+        [12] = { xi.items.FLASK_OF_HEALING_POWDER,   300 },
+        [13] = { xi.items.PINCH_OF_MANA_POWDER,      300 },
+        [14] = { xi.items.TUBE_OF_HEALING_SALVE_I,   300 },
+        [15] = { xi.items.BOTTLE_OF_VICARS_DRINK,    300 },
+        [16] = { xi.items.TUBE_OF_CLEAR_SALVE_II,    300 },
+        [17] = { xi.items.PRIMEVAL_BREW,         2000000 },
     },
 
     [itemType.KEYITEM] =
-    {-- Sel     Item                                 Cost
+    {
+    --  Sel     Item                                 Cost
         [1] = { xi.ki.MAP_OF_ABYSSEA_ATTOHWA,        4500 },
         [2] = { xi.ki.IVORY_ABYSSITE_OF_AVARICE,     8000 },
         [3] = { xi.ki.IVORY_ABYSSITE_OF_KISMET,      5000 },
@@ -62,7 +65,8 @@ local prospectorItems =
     },
 
     [itemType.ENHANCEMENT] =
-    {-- Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
+    {
+    --  Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
         [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },
         [ 7] = { { { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 }, }, 120 },
         [ 8] = { { { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
@@ -109,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveItem(player, {{ itemData[1], itemQty }})
+            npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
             player:delCurrency("cruor", itemCost)
         end
@@ -119,7 +123,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveTempItem(player, {{ itemData[1], 1 }})
+            npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
             player:delCurrency("cruor", itemCost)
         end

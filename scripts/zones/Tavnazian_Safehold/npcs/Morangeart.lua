@@ -10,7 +10,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(520)
+    -- True default is 523, TODO: Find out what 520 is for
+    -- player:startEvent(520)
 end
 
 entity.onEventUpdate = function(player, csid, option)

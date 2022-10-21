@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local allegiance =  player:getCampaignAllegiance()
-    local rank = getMedalRank(player)
+    local rank = xi.campaign.getMedalRank(player)
 
     player:startEvent(312, allegiance, rank, 0, 0, 0, 0, 0)
 end

@@ -13,15 +13,15 @@ local entity = {}
 
 local rse_map =
 {
-    -- [race] = {body, hands, legs, feet}
-    [xi.race.HUME_M]   = {12654, 12761, 12871, 13015},
-    [xi.race.HUME_F]   = {12655, 12762, 12872, 13016},
-    [xi.race.ELVAAN_M] = {12656, 12763, 12873, 13017},
-    [xi.race.ELVAAN_F] = {12657, 12764, 12874, 13018},
-    [xi.race.TARU_M]   = {12658, 12765, 12875, 13019},
-    [xi.race.TARU_F]   = {12658, 12765, 12875, 13019},
-    [xi.race.MITHRA]   = {12659, 12766, 12876, 13020},
-    [xi.race.GALKA]    = {12660, 12767, 12877, 13021},
+    -- [race] = { body, hands, legs, feet }
+    [xi.race.HUME_M]   = { 12654, 12761, 12871, 13015 },
+    [xi.race.HUME_F]   = { 12655, 12762, 12872, 13016 },
+    [xi.race.ELVAAN_M] = { 12656, 12763, 12873, 13017 },
+    [xi.race.ELVAAN_F] = { 12657, 12764, 12874, 13018 },
+    [xi.race.TARU_M]   = { 12658, 12765, 12875, 13019 },
+    [xi.race.TARU_F]   = { 12658, 12765, 12875, 13019 },
+    [xi.race.MITHRA]   = { 12659, 12766, 12876, 13020 },
+    [xi.race.GALKA]    = { 12660, 12767, 12877, 13021 },
 }
 
 local function hasRSE(player)
@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getMainLvl() >= 10 and
-        player:getFameLevel(JEUNO) >= 3
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3
     then
         if rseGear < 15 then
             if questStatus == QUEST_AVAILABLE then
@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option)
     then
         if npcUtil.giveItem(player, rse_map[player:getRace()][option]) then
             if questStatus == QUEST_ACCEPTED then
-                player:addFame(JEUNO, 30)
+                player:addFame(xi.quest.fame_area.JEUNO, 30)
                 player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
             end
 

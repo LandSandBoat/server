@@ -16,8 +16,6 @@
 -- _5cs (Gizmo #4)  : !pos 295 -3 19 192
 -- _5ct (Gizmo #5)  : !pos 353 -3 60 192
 -- _5cu (Gizmo #6)  : !pos 295 -3 100 192
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

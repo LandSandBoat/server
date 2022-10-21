@@ -2,8 +2,9 @@
 -- func: completemission <logID> <missionID> <player>
 -- desc: Completes the given mission for the target player, if that mission is currently active.
 -----------------------------------
-
 require("scripts/globals/missions")
+local logIdHelpers = require('scripts/globals/log_ids')
+-----------------------------------
 
 cmdprops =
 {
@@ -13,14 +14,14 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!completemission <logID> <missionID> {player}")
+    player:PrintToPlayer("!completemission <logID> <missionID> (player)")
 end
 
 function onTrigger(player, logId, missionId, target)
 
     -- validate logId
     local logName
-    local logInfo = GetMissionLogInfo(logId)
+    local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if (logInfo == nil) then
         error(player, "Invalid logID.")
         return

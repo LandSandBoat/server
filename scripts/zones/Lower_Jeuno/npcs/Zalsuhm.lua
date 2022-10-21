@@ -13,7 +13,7 @@ require("scripts/globals/weaponskillids")
 local entity = {}
 
 local function getQuestId(mainJobId)
-    return xi.quest.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId
+    return xi.quest.id.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId
 end
 
 entity.onTrade = function(player, npc, trade)

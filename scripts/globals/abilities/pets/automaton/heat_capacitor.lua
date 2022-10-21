@@ -2,17 +2,17 @@
 -- Heat Capacitor
 -----------------------------------
 require("scripts/globals/automatonweaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 90)
     local maneuvers = master:countEffect(xi.effect.FIRE_MANEUVER)
     skill:setMsg(xi.msg.basic.TP_INCREASE)
@@ -20,7 +20,6 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     for i = 1, maneuvers do
         master:delStatusEffectSilent(xi.effect.FIRE_MANEUVER)
     end
-
 
     if automaton:getLocalVar("heat_capacitor") >= 3 then -- Heat Capacitor & Heat Capacitor II
         target:addTP(1000 * maneuvers)
@@ -33,4 +32,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return target:getTP()
 end
 
-return ability_object
+return abilityObject

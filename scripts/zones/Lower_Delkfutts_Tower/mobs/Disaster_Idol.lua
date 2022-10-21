@@ -2,8 +2,6 @@
 -- Area: Lower Delkfutt's Tower
 --   NM: Disaster Idol
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
@@ -25,10 +23,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 6 then
-        player:setCharVar("COP_Tenzen_s_Path", 7)
-    end
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

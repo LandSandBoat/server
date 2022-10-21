@@ -8,23 +8,23 @@ require("scripts/globals/pets")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     local result = 0
-    if (caster:hasPet()) then
+    if caster:hasPet() then
         result = xi.msg.basic.ALREADY_HAS_A_PET
-    elseif (not caster:canUseMisc(xi.zoneMisc.PET)) then
+    elseif not caster:canUseMisc(xi.zoneMisc.PET) then
         result = xi.msg.basic.CANT_BE_USED_IN_AREA
-    elseif (caster:getObjType() == xi.objType.PC) then
-        result = avatarMiniFightCheck(caster)
+    elseif caster:getObjType() == xi.objType.PC then
+        result = xi.summon.avatarMiniFightCheck(caster)
     end
     return result
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     xi.pet.spawnPet(caster, xi.pet.id.DARK_SPIRIT)
     return 0
 end
 
-return spell_object
+return spellObject

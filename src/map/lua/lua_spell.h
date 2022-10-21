@@ -22,7 +22,7 @@
 #ifndef _LUASPELL_H
 #define _LUASPELL_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CSpell;
@@ -57,6 +57,7 @@ public:
     uint16 getMPCost();
     uint8  getSkillType();
     uint8  getSpellGroup();
+    uint8  getSpellFamily();
     uint8  getFlag();
     uint32 getCastTime();
 

@@ -28,11 +28,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CDespawnState::CDespawnState(CBaseEntity* _PEntity, duration spawnTime)
 : CState(_PEntity, _PEntity->targid)
-, m_spawnTime(spawnTime)
 {
     if (_PEntity->status != STATUS_TYPE::DISAPPEAR && !(static_cast<CMobEntity*>(_PEntity)->m_Behaviour & BEHAVIOUR_NO_DESPAWN))
     {
-        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, new CEntityAnimationPacket(_PEntity, CEntityAnimationPacket::Fade_Out));
+        _PEntity->loc.zone->PushPacket(_PEntity, CHAR_INRANGE, new CEntityAnimationPacket(_PEntity, _PEntity, CEntityAnimationPacket::Fade_Out));
     }
 }
 

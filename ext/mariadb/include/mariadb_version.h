@@ -30,7 +30,7 @@
 #define MARIADB_PACKAGE_VERSION_ID 30208
 #define MARIADB_SYSTEM_TYPE "Windows"
 #define MARIADB_MACHINE_TYPE "AMD64"
-#define MARIADB_PLUGINDIR "C:/Program Files/topaz/C:/ffxi/server/build"
+#define MARIADB_PLUGINDIR "C:/ffxi/server/build"
 
 /* mysqld compile time options */
 #ifndef MYSQL_CHARSET

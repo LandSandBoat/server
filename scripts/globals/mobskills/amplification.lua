@@ -3,16 +3,16 @@
 -- Enhances Magic Attack and Magic Defense. Bonus stacks when used by mobs.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect1 = xi.effect.MAGIC_ATK_BOOST
     local typeEffect2 = xi.effect.MAGIC_DEF_BOOST
     local mabTotal = mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST)
@@ -28,8 +28,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     else
         mdbTotal = 10
     end
-    -- print(mabTotal)
-    -- print(mdbTotal)
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, mabTotal, 0, 180))
     xi.mobskills.mobBuffMove(mob, typeEffect2, mdbTotal, 0, 180)
@@ -37,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect1
 end
 
-return mobskill_object
+return mobskillObject

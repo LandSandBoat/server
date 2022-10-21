@@ -16,6 +16,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONE
 quest.reward =
 {
     fame = 60,
+    fameArea = xi.quest.fame_area.BASTOK,
     keyItem = xi.ki.MAP_OF_THE_DANGRUF_WADI,
     xp = 2000,
 }

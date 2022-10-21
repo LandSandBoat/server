@@ -10,7 +10,6 @@ cmdprops =
     parameters = "i"
 }
 
-
 function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setmoblevel <level>")

@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         17335,    4, -- Rusty Bolt
     }
 
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         stock =
         {
             16450,  2030,  -- Dagger
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
         }
     end
 
-    player:showText(npc, ID.text.MELLEUPAUX_SHOP_DIALOG)
+    player:showText(npc, ID.text.MELLEUPAUX_SHOP_DIALOG) -- 10910 without ch4 complete, may change
     xi.shop.general(player, stock)
 end
 

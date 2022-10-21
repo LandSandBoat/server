@@ -14,17 +14,17 @@
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.STONESKIN
     local blueskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power = ((blueskill)/3) *2
@@ -37,4 +37,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return typeEffect
 end
 
-return spell_object
+return spellObject

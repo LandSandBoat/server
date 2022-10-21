@@ -23,9 +23,10 @@ local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_T
 -- 610 / 100 = ~6 fame each
 quest.reward =
 {
-    fame  = 6,
-    xp    = 500,
-    bayld = 200,
+    fame     = 6,
+    fameArea = xi.quest.fame_area.ADOULIN,
+    xp       = 500,
+    bayld    = 200,
 }
 
 quest.sections =

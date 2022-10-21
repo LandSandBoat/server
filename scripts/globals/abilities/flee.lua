@@ -5,17 +5,16 @@
 -- Recast Time: 5:00
 -- Duration: 0:30
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/thief")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    local duration = 30 + player:getMod(xi.mod.FLEE_DURATION)
-    player:addStatusEffect(xi.effect.FLEE, 100, 0, duration)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.thief.useFlee(player, target, ability)
 end
 
-return ability_object
+return abilityObject

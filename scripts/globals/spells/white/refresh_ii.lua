@@ -1,33 +1,17 @@
 -----------------------------------
 -- Spell: Refresh II
 -- Gradually restores target party member's MP
--- Composure increases duration 3x
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/globals/status")
+require("scripts/globals/spells/enhancing_spell")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local duration = calculateDuration(150, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    duration = calculateDurationForLvl(duration, 82, target:getMainLvl())
-
-    local mp = 6 + caster:getMod(xi.mod.ENHANCES_REFRESH)
-
-    if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        return 0
-    end
-
-    target:delStatusEffect(xi.effect.REFRESH)
-    target:addStatusEffect(xi.effect.REFRESH, mp, 0, duration)
-
-    return xi.effect.REFRESH
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

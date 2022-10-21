@@ -4,7 +4,6 @@
 -- Involved in Quest: I Can Hear A Rainbow
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
@@ -24,9 +23,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 0) then
-        player:startEvent(203)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -45,8 +41,6 @@ entity.onEventFinish = function(player, csid, option)
 
         local rainbow = GetNPCByID(ID.npc.RAINBOW)
         rainbow:setLocalVar('setRainbow', 1)
-    elseif (csid == 203) then
-        player:setCharVar("COP_Tenzen_s_Path", 1)
     end
 end
 

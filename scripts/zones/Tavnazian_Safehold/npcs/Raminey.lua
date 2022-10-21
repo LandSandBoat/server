@@ -9,6 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    -- TODO: Needs verification
     player:startEvent(159)
 end
 

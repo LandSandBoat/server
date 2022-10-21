@@ -3,7 +3,7 @@
 --   NM: Suzaku
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
 require("scripts/globals/status")
 -----------------------------------
@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
 end
 
 -- Return the selected spell ID.
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     -- Suzaku uses     Burn, Fire IV, Firaga III, Flare
     -- Let's give -ga3 a higher distribution than the others.
     local rnd = math.random()
@@ -38,7 +38,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.SKY_GOD_OFFSET + 8)
     GetNPCByID(ID.npc.PORTAL_TO_SUZAKU):setAnimation(xi.anim.OPEN_DOOR)
 end

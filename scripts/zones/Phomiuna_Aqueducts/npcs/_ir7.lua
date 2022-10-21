@@ -3,32 +3,39 @@
 --  NPC: _ir7 (Iron Gate)
 -- !pos -70.800 -1.500 60.000 27
 -----------------------------------
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
+require('scripts/globals/items')
+require('scripts/globals/npc_util')
+require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getXPos() >= -70 and npc:getAnimation() == 9) then -- only if they're on the locked side and gate is closed.
-        if (trade:hasItemQty(1660, 1) and trade:getItemCount() == 1) then -- Bronze Key
-            player:tradeComplete()
+    -- TODO: There may be a message displayed onTrade if the door is open.
+    if player:getXPos() >= -70 and npc:getAnimation() == 9 then
+        if npcUtil.tradeHasExactly(trade, xi.items.BRONZE_KEY) then
+            player:confirmTrade()
+            player:messageSpecial(ID.text.ITEM_BREAKS, xi.items.BRONZE_KEY)
             npc:openDoor(15)
-        elseif ((trade:hasItemQty(1115, 1) or trade:hasItemQty(1023, 1) or trade:hasItemQty(1022, 1)) and trade:getItemCount() == 1 and player:getMainJob() == xi.job.THF) then
-            -- thief's tool/living key/skeleton key as THF main
-            player:tradeComplete()
+        elseif
+            player:getMainJob() == xi.job.THF and
+            (npcUtil.tradeHasExactly(trade, xi.items.SKELETON_KEY) or
+            npcUtil.tradeHasExactly(trade, xi.items.SET_OF_THIEFS_TOOLS) or
+            npcUtil.tradeHasExactly(trade, xi.items.LIVING_KEY))
+        then
+            -- TODO: Needs verification for messages displayed, and if picking is 100% successful.
+            player:confirmTrade()
             npc:openDoor(15)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getXPos() <= -71) then
-        npc:openDoor(15) -- Retail timed
-    elseif (npc:getAnimation() == 9) then -- don't want it to say the door is locked when it's wide open!
-        player:messageSpecial(ID.text.DOOR_LOCKED, 1660)
+    if player:getXPos() <= -71 then
+        npc:openDoor(15)
+    elseif npc:getAnimation() == 9 then
+        player:messageSpecial(ID.text.DOOR_LOCKED, xi.items.BRONZE_KEY)
     end
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)

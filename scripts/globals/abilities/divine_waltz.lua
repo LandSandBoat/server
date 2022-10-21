@@ -5,13 +5,13 @@
 -- TP Required: 40%
 -- Recast Time: 00:13
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (target:getHP() == 0) then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
     elseif (player:hasStatusEffect(xi.effect.SABER_DANCE)) then
@@ -40,7 +40,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance, and only deduct once instead of for each target.
     if (player:getID() == target:getID() and player:hasStatusEffect(xi.effect.TRANCE) == false) then
         player:delTP(400)
@@ -70,8 +70,8 @@ ability_object.onUseAbility = function(player, target, ability)
         cure = (target:getMaxHP() - target:getHP())
     end
 
-    -- Applying server mods....
-    cure = cure * xi.settings.CURE_POWER
+    -- Applying server mods
+    cure = cure * xi.settings.main.CURE_POWER
 
     target:restoreHP(cure)
     target:wakeUp()
@@ -80,4 +80,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return cure
 end
 
-return ability_object
+return abilityObject

@@ -9,11 +9,7 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_CELENNIA_MEMORIAL_LIBRARY)
@@ -27,15 +23,36 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
+            return currentMission == mission.missionId
         end,
+
+        [xi.zone.WESTERN_ADOULIN] =
+        {
+            ['Levil'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId, mission.missionId) == 0 then
+                        return mission:event(124)
+                    else
+                        return mission:progressEvent(125)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [125] = function(player, csid, option, npc)
+                    mission:complete(player)
+                end,
+            },
+        },
 
         [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
         {
             ['Yefafa'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(1)
+                    return mission:progressEvent(1, 284)
                 end,
             },
 
@@ -52,47 +69,8 @@ mission.sections =
                     -- Was shown the password
                     if option == 1 then
                         player:setMissionStatus(mission.areaId, 1)
+                        player:updateEvent(284)
                     end
-                end,
-            },
-        },
-    },
-
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 1
-        end,
-
-        [xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
-        {
-            ['Yefafa'] =
-            {
-                onTrigger = function(player, npc)
-                    return mission:progressEvent(1)
-                end,
-            },
-
-            ['History'] =
-            {
-                onTrigger = function(player, npc)
-                    return mission:progressEvent(1003, 1)
-                end,
-            },
-        },
-
-        [xi.zone.WESTERN_ADOULIN] =
-        {
-            ['Levil'] =
-            {
-                onTrigger = function(player, npc)
-                    return mission:progressEvent(125)
-                end,
-            },
-
-            onEventFinish =
-            {
-                [125] = function(player, csid, option, npc)
-                    mission:complete(player)
                 end,
             },
         },

@@ -5,7 +5,7 @@
 -- !pos 0 -16 124 239
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     if player:getNation() ~= xi.nation.WINDURST then
         player:startEvent(87) -- for other nation
     else
-        local currentMission = player:getCurrentMission(WINDURST)
+        local currentMission = player:getCurrentMission(xi.mission.log_id.WINDURST)
 
         if currentMission ~= xi.mission.id.windurst.NONE then
             player:startEvent(91) -- Have mission already activated

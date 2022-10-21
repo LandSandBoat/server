@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CDATALOADER_H_
 #define _CDATALOADER_H_
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include <list>
 #include <stdio.h>
@@ -77,6 +77,8 @@ struct SearchEntity
  *                                                                       *
  ************************************************************************/
 
+class SqlConnection;
+
 class CDataLoader
 {
 public:
@@ -91,10 +93,10 @@ public:
     std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
     std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
-    void                     ExpireAHItems();
+    void                     ExpireAHItems(uint16 expireAgeInDays);
 
 private:
-    Sql_t* SqlHandle;
+    std::unique_ptr<SqlConnection> sql;
 };
 
 #endif

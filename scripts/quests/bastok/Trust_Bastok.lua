@@ -8,7 +8,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/spell_data')
 require('scripts/globals/status')
 require('scripts/globals/titles')
@@ -159,7 +159,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 5 and
-                xi.settings.ENABLE_TRUST_QUESTS == 1
+                xi.settings.main.ENABLE_TRUST_QUESTS == 1
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -281,7 +281,7 @@ quest.sections =
                     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
                     if not player:hasSpell(xi.magic.spell.AYAME) then
-                        return quest:progressEvent(985, 0, 0, 0, trustMemoryAyame(player), 0, 0, 0, rank3):oncePerZone()
+                        return quest:event(985, 0, 0, 0, trustMemoryAyame(player), 0, 0, 0, rank3)
                     end
                 end,
             },
@@ -306,7 +306,7 @@ quest.sections =
                     local rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
                     if not player:hasSpell(xi.magic.spell.VOLKER) then
-                        return quest:progressEvent(986, 0, 0, 0, trustMemoryVolker(player), 0, 0, 0, rank6):oncePerZone()
+                        return quest:event(986, 0, 0, 0, trustMemoryVolker(player), 0, 0, 0, rank6)
                     end
                 end,
             },

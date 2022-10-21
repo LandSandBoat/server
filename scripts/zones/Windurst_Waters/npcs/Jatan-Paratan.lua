@@ -5,7 +5,7 @@
 -- !pos -59 -4 22 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -23,9 +23,8 @@ entity.onTrigger = function(player, npc)
 
             --        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
 
-
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    local fame = player:getFameLevel(WINDURST)
+    local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then
         local rand = math.random(1, 2)
         if (rand == 1) then
@@ -66,7 +65,7 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
             player:addItem(17349)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17349)
-            player:addFame(WINDURST, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addTitle(xi.title.DOWN_PIPER_PIPE_UPPERER)
             player:needToZone(true)
             player:setCharVar("QuestWonderingMin_var", 0)

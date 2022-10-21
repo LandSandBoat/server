@@ -1,5 +1,4 @@
 require("scripts/globals/keyitems")
-require("scripts/globals/log_ids")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 
@@ -42,7 +41,6 @@ xi.mission.area =
     [xi.mission.log_id.ROV]         = 'rov',
 }
 
---[[
 xi.mission.status =
 {
     COP =
@@ -57,7 +55,6 @@ xi.mission.status =
         RUBIOUS    = 7,
     },
 }
-]]--
 
 xi.mission.id =
 {
@@ -138,30 +135,30 @@ xi.mission.id =
     },
 
     -----------------------------------
-    --  Windurst (2)
+    --  Windurst - Interaction Framework (2)
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.WINDURST]] =
     {
-        THE_HORUTOTO_RUINS_EXPERIMENT = 0,  -- ±
-        THE_HEART_OF_THE_MATTER       = 1,  -- ±
-        THE_PRICE_OF_PEACE            = 2,  -- ±
-        LOST_FOR_WORDS                = 3,  -- ±
-        A_TESTING_TIME                = 4,  -- ±
-        THE_THREE_KINGDOMS            = 5,  -- ±
-        THE_THREE_KINGDOMS_SANDORIA   = 6,  -- ±
-        THE_THREE_KINGDOMS_BASTOK     = 7,  -- ±
-        THE_THREE_KINGDOMS_SANDORIA2  = 8,  -- ±
-        THE_THREE_KINGDOMS_BASTOK2    = 9,  -- ±
-        TO_EACH_HIS_OWN_RIGHT         = 10, -- ±
-        WRITTEN_IN_THE_STARS          = 11, -- ±
-        A_NEW_JOURNEY                 = 12, -- ±
-        MAGICITE                      = 13, -- ±
-        THE_FINAL_SEAL                = 14, -- ±
-        THE_SHADOW_AWAITS             = 15, -- ±
-        FULL_MOON_FOUNTAIN            = 16, -- ±
-        SAINTLY_INVITATION            = 17, -- ±
-        THE_SIXTH_MINISTRY            = 18, -- ±
-        AWAKENING_OF_THE_GODS         = 19, -- ±
+        THE_HORUTOTO_RUINS_EXPERIMENT = 0,
+        THE_HEART_OF_THE_MATTER       = 1,
+        THE_PRICE_OF_PEACE            = 2,
+        LOST_FOR_WORDS                = 3,
+        A_TESTING_TIME                = 4,
+        THE_THREE_KINGDOMS            = 5,
+        THE_THREE_KINGDOMS_SANDORIA   = 6,
+        THE_THREE_KINGDOMS_BASTOK     = 7,
+        THE_THREE_KINGDOMS_SANDORIA2  = 8,
+        THE_THREE_KINGDOMS_BASTOK2    = 9,
+        TO_EACH_HIS_OWN_RIGHT         = 10,
+        WRITTEN_IN_THE_STARS          = 11,
+        A_NEW_JOURNEY                 = 12,
+        MAGICITE                      = 13,
+        THE_FINAL_SEAL                = 14,
+        THE_SHADOW_AWAITS             = 15,
+        FULL_MOON_FOUNTAIN            = 16,
+        SAINTLY_INVITATION            = 17,
+        THE_SIXTH_MINISTRY            = 18,
+        AWAKENING_OF_THE_GODS         = 19,
         VAIN                          = 20,
         THE_JESTER_WHOD_BE_KING       = 21,
         DOLL_OF_THE_DEAD              = 22,
@@ -189,8 +186,8 @@ xi.mission.id =
         THE_GATE_OF_THE_GODS          = 24, -- ±
         ARK_ANGELS                    = 26, -- ±
         THE_SEALED_SHRINE             = 27, -- ±
-        THE_CELESTIAL_NEXUS           = 28,
-        AWAKENING                     = 30,
+        THE_CELESTIAL_NEXUS           = 28, -- ±
+        AWAKENING                     = 30, -- ±
         THE_LAST_VERSE                = 31,
         NONE                          = 65535,
     },
@@ -257,7 +254,7 @@ xi.mission.id =
         FLAMES_IN_THE_DARKNESS           = 718, -- ±
         FIRE_IN_THE_EYES_OF_MEN          = 728, -- ±
         CALM_BEFORE_THE_STORM            = 738, -- ±
-        THE_WARRIOR_S_PATH               = 748, -- ±
+        THE_WARRIORS_PATH                = 748, -- ±
         EMPTINESS_BLEEDS                 = 758, -- ± ---- Category
         GARDEN_OF_ANTIQUITY              = 800, -- ±
         A_FATE_DECIDED                   = 818, -- ±
@@ -339,47 +336,47 @@ xi.mission.id =
         A_SPOONFUL_OF_SUGAR        = 10, -- ±
         AFFAIRS_OF_STATE           = 11, -- ±
         BORNE_BY_THE_WIND          = 12, -- ±
-        A_NATION_ON_THE_BRINK      = 13,
+        A_NATION_ON_THE_BRINK      = 13, -- ±
         CROSSROADS_OF_TIME         = 14, -- ±
         SANDSWEPT_MEMORIES         = 15, -- ±
         NORTHLAND_EXPOSURE         = 16, -- ±
-        TRAITOR_IN_THE_MIDST       = 17,
-        BETRAYAL_AT_BEAUCEDINE     = 18,
-        ON_THIN_ICE                = 19,
-        PROOF_OF_VALOR             = 20,
-        A_SANGUINARY_PRELUDE       = 21,
-        DUNGEONS_AND_DANCERS       = 22,
-        DISTORTER_OF_TIME          = 23,
-        THE_WILL_OF_THE_WORLD      = 24,
-        FATE_IN_HAZE               = 25,
-        THE_SCENT_OF_BATTLE        = 26,
-        ANOTHER_WORLD              = 27,
-        A_HAWK_IN_REPOSE           = 28,
-        THE_BATTLE_OF_XARCABARD    = 29,
-        PRELUDE_TO_A_STORM         = 30,
-        STORM_S_CRESCENDO          = 31,
-        INTO_THE_BEAST_S_MAW       = 32,
-        THE_HUNTER_ENSNARED        = 33,
-        FLIGHT_OF_THE_LION         = 34,
-        FALL_OF_THE_HAWK           = 35,
-        DARKNESS_DESCENDS          = 36,
-        ADIEU__LILISETTE           = 37,
-        BY_THE_FADING_LIGHT        = 38,
-        EDGE_OF_EXISTENCE          = 39,
-        HER_MEMORIES               = 40,
-        FORGET_ME_NOT              = 41,
-        PILLAR_OF_HOPE             = 42,
-        GLIMMER_OF_LIFE            = 43,
-        TIME_SLIPS_AWAY            = 44,
-        WHEN_WILLS_COLLIDE         = 45,
-        WHISPERS_OF_DAWN           = 46,
-        A_DREAMY_INTERLUDE         = 47,
-        CAIT_IN_THE_WOODS          = 48,
-        FORK_IN_THE_ROAD           = 49,
-        MAIDEN_OF_THE_DUSK         = 50,
-        WHERE_IT_ALL_BEGAN         = 51,
-        A_TOKEN_OF_TROTH           = 52,
-        LEST_WE_FORGET             = 53,
+        TRAITOR_IN_THE_MIDST       = 17, -- ±
+        BETRAYAL_AT_BEAUCEDINE     = 18, -- ±
+        ON_THIN_ICE                = 19, -- ±
+        PROOF_OF_VALOR             = 20, -- ±
+        A_SANGUINARY_PRELUDE       = 21, -- ±
+        DUNGEONS_AND_DANCERS       = 22, -- ±
+        DISTORTER_OF_TIME          = 23, -- ±
+        THE_WILL_OF_THE_WORLD      = 24, -- ±
+        FATE_IN_HAZE               = 25, -- ±
+        THE_SCENT_OF_BATTLE        = 26, -- ±
+        ANOTHER_WORLD              = 27, -- ±
+        A_HAWK_IN_REPOSE           = 28, -- ±
+        THE_BATTLE_OF_XARCABARD    = 29, -- ±
+        PRELUDE_TO_A_STORM         = 30, -- ±
+        STORMS_CRESCENDO           = 31, -- ±
+        INTO_THE_BEASTS_MAW        = 32, -- ±
+        THE_HUNTER_ENSNARED        = 33, -- ±
+        FLIGHT_OF_THE_LION         = 34, -- ±
+        FALL_OF_THE_HAWK           = 35, -- ±
+        DARKNESS_DESCENDS          = 36, -- ±
+        ADIEU_LILISETTE            = 37, -- ±
+        BY_THE_FADING_LIGHT        = 38, -- ±
+        EDGE_OF_EXISTENCE          = 39, -- ±
+        HER_MEMORIES               = 40, -- ±
+        FORGET_ME_NOT              = 41, -- ±
+        PILLAR_OF_HOPE             = 42, -- ±
+        GLIMMER_OF_LIFE            = 43, -- ±
+        TIME_SLIPS_AWAY            = 44, -- ±
+        WHEN_WILLS_COLLIDE         = 45, -- ±
+        WHISPERS_OF_DAWN           = 46, -- ±
+        A_DREAMY_INTERLUDE         = 47, -- ±
+        CAIT_IN_THE_WOODS          = 48, -- ±
+        FORK_IN_THE_ROAD           = 49, -- ±
+        MAIDEN_OF_THE_DUSK         = 50, -- ±
+        WHERE_IT_ALL_BEGAN         = 51, -- ±
+        A_TOKEN_OF_TROTH           = 52, -- ±
+        LEST_WE_FORGET             = 53, -- ±
     },
 
     -----------------------------------
@@ -480,86 +477,86 @@ xi.mission.id =
         THE_LEAFKIN_MONARCH             = 34,  -- ±
         YGGDRASIL                       = 35,  -- ±
         -- SHADOWS_UPON_ADOULIN         =  -- Category
-        RETURN_OF_THE_EXORCIST          = 37,
-        THE_MERCILESS_ONE               = 38,
-        A_CURSE_FROM_THE_PAST           = 39,
-        THE_PURGATION                   = 40,
-        THE_KEY                         = 41,
-        THE_PRINCESSS_DILEMMA           = 42,
-        DARK_CLOUDS_AHEAD               = 43,
-        THE_SMALLEST_OF_FAVORS          = 44,
-        SUMMONED_BY_SPIRITS             = 45,
-        EVIL_ENTITIES                   = 46,
-        ADOULIN_CALLING                 = 47,
-        THE_DISAPPEARANCE_OF_NYLINE     = 48,
-        SHARED_CONSCIOUSNESS            = 49,
-        CLEAR_SKIES                     = 50,
-        THE_MAN_IN_BLACK                = 51,
-        TO_THE_VICTOR                   = 52,
-        AN_EXTRAORDINARY_GENTLEMAN      = 53,
-        THE_ORDERS_TREASURES            = 55,
-        AUGUSTS_HEIRLOOM                = 56,
-        BEAUTY_AND_THE_BEAST            = 57,
-        WILDCAT_WITH_A_GOLD_PELT        = 58,
-        IN_SEARCH_OF_ARCIELA            = 59,
-        LOOKING_FOR_LEADS               = 61,
-        DRIFTING_NORTHWEST              = 62,
-        KUMHAU_THE_FLASHFROST_NAAKUAL   = 63,
-        SOUL_SIPHON                     = 66,
-        STONEWALLED                     = 67,
-        SALVATION                       = 69,
-        GLIMMER_OF_PORTENT              = 70,
+        RETURN_OF_THE_EXORCIST          = 37,  -- ±
+        THE_MERCILESS_ONE               = 38,  -- ±
+        A_CURSE_FROM_THE_PAST           = 39,  -- ±
+        THE_PURGATION                   = 40,  -- ±
+        THE_KEY                         = 41,  -- ±
+        THE_PRINCESSS_DILEMMA           = 42,  -- ±
+        DARK_CLOUDS_AHEAD               = 43,  -- ±
+        THE_SMALLEST_OF_FAVORS          = 44,  -- ±
+        SUMMONED_BY_SPIRITS             = 45,  -- ±
+        EVIL_ENTITIES                   = 46,  -- ±
+        ADOULIN_CALLING                 = 47,  -- ±
+        THE_DISAPPEARANCE_OF_NYLINE     = 48,  -- ±
+        SHARED_CONSCIOUSNESS            = 49,  -- ±
+        CLEAR_SKIES                     = 50,  -- ±
+        THE_MAN_IN_BLACK                = 51,  -- ±
+        TO_THE_VICTOR                   = 52,  -- ±
+        AN_EXTRAORDINARY_GENTLEMAN      = 53,  -- ±
+        THE_ORDERS_TREASURES            = 55,  -- ±
+        AUGUSTS_HEIRLOOM                = 56,  -- ±
+        BEAUTY_AND_THE_BEAST            = 57,  -- ±
+        WILDCAT_WITH_A_GOLD_PELT        = 58,  -- ±
+        IN_SEARCH_OF_ARCIELA            = 59,  -- ±
+        LOOKING_FOR_LEADS               = 61,  -- ±
+        DRIFTING_NORTHWEST              = 62,  -- ±
+        KUMHAU_THE_FLASHFROST_NAAKUAL   = 63,  -- ±
+        SOUL_SIPHON                     = 66,  -- ±
+        STONEWALLED                     = 67,  -- ±
+        SALVATION                       = 69,  -- ±
+        GLIMMER_OF_PORTENT              = 70,  -- ±
         -- THE_SERPENTINE_LABYRINTH     =  -- Category
-        INTO_THE_FIRE                   = 71,
-        MELVIEN_DE_MALECROIX            = 72,
-        COURIER_CATASTROPHE             = 73,
-        DONE_AND_DELIVERED              = 74,
-        MINISTERIAL_WHISPERS            = 75,
-        A_DAY_IN_THE_LIFE_OF_A_PIONEER  = 76,
-        LIGHTING_THE_WAY                = 77,
-        SAJJAKA                         = 78,
-        STUDYING_UP                     = 79,
-        A_VOW_OF_TRUTH                  = 80,
-        DARRCUILN                       = 81,
-        THE_GATES                       = 82,
-        MORIMAR                         = 84,
-        A_NEW_FORCE_ARISES              = 85,
-        THE_SACRED_SAPLING              = 86,
-        TREE_GRAFTING                   = 87,
-        A_SHROUDED_CANOPY               = 88,
-        LEAFALLIA                       = 89,
-        ROSULATIAS_PROMISE              = 90,
-        THE_LIGHTSLAND                  = 91,
-        THE_LIGHT_OF_DAWN_COMES         = 92,
-        CRIES_FROM_THE_DEEP             = 93,
-        SEEDS_OF_DOUBT                  = 94,
-        THE_TOMATOES_OF_WRATH           = 95,
-        A_GRAVE_MISTAKE                 = 96,
-        AN_EMERGENCY_CONVOCATION        = 98,
-        BALAMOR_THE_DEATHBORNE_XOL      = 99,
-        ANAGNORISIS                     = 100,
-        JUST_THE_THING                  = 101,
-        SUGARCOATED_SALVATION           = 102,
-        ARCIELAS_RESOLVE                = 103,
-        BALAMORS_RUSE                   = 104,
-        THE_CHARLATAN                   = 105,
-        ROYAL_BLESSINGS                 = 107,
+        INTO_THE_FIRE                   = 71,  -- ±
+        MELVIEN_DE_MALECROIX            = 72,  -- ±
+        COURIER_CATASTROPHE             = 73,  -- ±
+        DONE_AND_DELIVERED              = 74,  -- ±
+        MINISTERIAL_WHISPERS            = 75,  -- ±
+        A_DAY_IN_THE_LIFE_OF_A_PIONEER  = 76,  -- ±
+        LIGHTING_THE_WAY                = 77,  -- ±
+        SAJJAKA                         = 78,  -- ±
+        STUDYING_UP                     = 79,  -- ±
+        A_VOW_OF_TRUTH                  = 80,  -- ±
+        DARRCUILN                       = 81,  -- ±
+        THE_GATES                       = 82,  -- ±
+        MORIMAR                         = 84,  -- ±
+        A_NEW_FORCE_ARISES              = 85,  -- ±
+        THE_SACRED_SAPLING              = 86,  -- ±
+        TREE_GRAFTING                   = 87,  -- ±
+        A_SHROUDED_CANOPY               = 88,  -- ±
+        LEAFALLIA                       = 89,  -- ±
+        ROSULATIAS_PROMISE              = 90,  -- ±
+        THE_LIGHTSLAND                  = 91,  -- ±
+        THE_LIGHT_OF_DAWN_COMES         = 92,  -- ±
+        CRIES_FROM_THE_DEEP             = 93,  -- ±
+        SEEDS_OF_DOUBT                  = 94,  -- ±
+        THE_TOMATOES_OF_WRATH           = 95,  -- ±
+        A_GRAVE_MISTAKE                 = 96,  -- ±
+        AN_EMERGENCY_CONVOCATION        = 98,  -- ±
+        BALAMOR_THE_DEATHBORNE_XOL      = 99,  -- ±
+        ANAGNORISIS                     = 100, -- ±
+        JUST_THE_THING                  = 101, -- ±
+        SUGARCOATED_SALVATION           = 102, -- ±
+        ARCIELAS_RESOLVE                = 103, -- ±
+        BALAMORS_RUSE                   = 104, -- ±
+        THE_CHARLATAN                   = 105, -- ±
+        ROYAL_BLESSINGS                 = 107, -- ±
         -- HADES                        =  -- Category
-        ARBOREAL_RUMORS                 = 108,
-        ARCIELAS_MISSIVE                = 109,
-        HEROES_UNITE                    = 110,
-        A_PORTENT_MOST_OMINOUS          = 111,
-        YGGDRASIL_BECKONS               = 112,
-        RETURNING_TO_THE_TREES          = 113,
-        THE_KEY_TO_THE_TURRIS           = 114,
-        TEODORS_SUMMONS                 = 116,
-        THE_SEVENTH_GUARDIAN            = 117,
-        WATERY_GRAVE                    = 118,
-        BLOOD_FOR_BLOOD                 = 120,
-        RECKONING                       = 121,
-        ABOMINATION                     = 123,
-        UNDYING_LIGHT                   = 125,
-        THE_LIGHT_WITHIN                = 129,
+        ARBOREAL_RUMORS                 = 108, -- ±
+        ARCIELAS_MISSIVE                = 109, -- ±
+        HEROES_UNITE                    = 110, -- ±
+        A_PORTENT_MOST_OMINOUS          = 111, -- ±
+        YGGDRASIL_BECKONS               = 112, -- ±
+        RETURNING_TO_THE_TREES          = 113, -- ±
+        THE_KEY_TO_THE_TURRIS           = 114, -- ±
+        TEODORS_SUMMONS                 = 116, -- ±
+        THE_SEVENTH_GUARDIAN            = 117, -- ±
+        WATERY_GRAVE                    = 118, -- ±
+        BLOOD_FOR_BLOOD                 = 120, -- ±
+        RECKONING                       = 121, -- ±
+        ABOMINATION                     = 123, -- ±
+        UNDYING_LIGHT                   = 125, -- ±
+        THE_LIGHT_WITHIN                = 129, -- ±
         -- FIN                          = 130,
     },
 
@@ -589,28 +586,28 @@ xi.mission.id =
         RING_MY_BELL                    = 42,  -- ±
         -- REVITALIZATION               =  -- Category
         SPIRITS_AWOKEN                  = 44,  -- ±
-        CRASHING_WAVES                  = 46,
-        CALL_TO_SERVE                   = 48,
-        NUMBERING_DAYS                  = 50,
-        INESCAPABLE_BINDS               = 52,
-        DESERT_WINDS                    = 54,
-        EVER_FORWARD                    = 56,
-        THE_ENDLESS_SKY                 = 60,
-        APHMAUS_LIGHT                   = 62,
-        REUNITED                        = 64,
-        TAKE_WING                       = 66,
-        PRIME_NUMBER                    = 68,
-        FROM_THE_RUINS                  = 70,
-        CAUTERIZE                       = 72,
-        UNCERTAIN_DESTINATIONS          = 78,
-        GANGED_UP_ON                    = 80,
-        SACRIFICE                       = 83,
-        SOMBER_DREAMS                   = 86,
-        OF_LIGHT_AND_DARKNESS           = 92,
-        TEMPORARY_FAREWELLS             = 94,
-        BRUSHING_UP                     = 96,
-        KEEP_ON_GIVING                  = 98,
-        PAST_IMPERFECT                  = 100,
+        CRASHING_WAVES                  = 46,  -- ±
+        CALL_TO_SERVE                   = 48,  -- ±
+        NUMBERING_DAYS                  = 50,  -- ±
+        INESCAPABLE_BINDS               = 52,  -- ±
+        DESERT_WINDS                    = 54,  -- ±
+        EVER_FORWARD                    = 56,  -- ±
+        THE_ENDLESS_SKY                 = 60,  -- ±
+        APHMAUS_LIGHT                   = 62,  -- ±
+        REUNITED                        = 64,  -- ±
+        TAKE_WING                       = 66,  -- ±
+        PRIME_NUMBER                    = 68,  -- ±
+        FROM_THE_RUINS                  = 70,  -- ±
+        CAUTERIZE                       = 72,  -- ±
+        UNCERTAIN_DESTINATIONS          = 78,  -- ±
+        GANGED_UP_ON                    = 80,  -- ±
+        SACRIFICE                       = 83,  -- ±
+        SOMBER_DREAMS                   = 86,  -- ±
+        OF_LIGHT_AND_DARKNESS           = 92,  -- ±
+        TEMPORARY_FAREWELLS             = 94,  -- ±
+        BRUSHING_UP                     = 96,  -- ±
+        KEEP_ON_GIVING                  = 98,  -- ±
+        PAST_IMPERFECT                  = 100, -- ±
         THE_CURSED_TEMPLE               = 102,
         WISDOM_OF_OUR_FOREFATHERS       = 103,
         WHERE_DIVINITIES_COLLIDE        = 104,
@@ -722,9 +719,9 @@ end
 local missionType =
 {
     -- Required Rank             :   1  1  1  2  2  2  2  2  2  2  3  3  3  4  5  5  6  6  7  7  8  8  9  9
-    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.SANDORIA] = { 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.BASTOK]   = { 2, 0, 1, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    [xi.mission.log_id.WINDURST] = { 2, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 }
 
 local function getRequiredRank(missionId)
@@ -813,8 +810,8 @@ local function getVarPrefix(areaId, questId)
     return string.format("Mission[%d][%d]", areaId, questId)
 end
 
-xi.mission.addVar = function(player, areaId, questId, name, value)
-    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.mission.incrementVar = function(player, areaId, questId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
 xi.mission.getVar = function(player, areaId, questId, name)
@@ -833,10 +830,10 @@ xi.mission.setLocalVar = function(player, areaId, questId, name, value)
     return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
-xi.mission.getMustZone = function(player, areaId, questId, name)
+xi.mission.getMustZone = function(player, areaId, questId)
     return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
 end
 
-xi.mission.setMustZone = function(player, areaId, questId, name, value)
+xi.mission.setMustZone = function(player, areaId, questId)
     player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end

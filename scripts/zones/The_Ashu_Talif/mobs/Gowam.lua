@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
@@ -21,7 +21,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:showText(mob, ID.text.GOWAM_DEATH)
 end
 

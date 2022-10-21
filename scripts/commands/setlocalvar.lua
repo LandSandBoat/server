@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setlocalvar <variable name> <value> {'player', 'mob', or 'npc'} {name or ID}")
+    player:PrintToPlayer("!setlocalvar <variable name> <value> { 'player', 'mob', or 'npc' } { name or ID }")
 end
 
 function onTrigger(player, arg1, arg2, arg3, arg4)

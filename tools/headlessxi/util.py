@@ -15,12 +15,12 @@ class util:
     def memcpy(src, src_offset, dst, dst_offset, count):
         try:
             src_bytes = util.to_bytes(src[src_offset:])
-        except:
+        except: # lgtm [py/catch-base-exception]
             src_bytes = src
 
         try:
             dst_bytes = util.to_bytes(dst[dst_offset:])
-        except:
+        except: # lgtm [py/catch-base-exception]
             dst_bytes = dst
 
         for idx in range(count):
@@ -42,6 +42,7 @@ class util:
     def pack_32(data):
         return struct.pack('<I', data)
 
+    @staticmethod
     def int_to_ip(ip):
         return '.'.join([str((ip >> 8 * i) % 256) for i in [3, 2, 1, 0]])
 

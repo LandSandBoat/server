@@ -8,16 +8,16 @@
 -- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: Enfire power, Blaze Spikes reduced power in Salvage zones
     local typeEffectOne = xi.effect.BLAZE_SPIKES
     -- local typeEffectTwo = xi.effect.ENFIRE
@@ -28,4 +28,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffectOne
 end
 
-return mobskill_object
+return mobskillObject

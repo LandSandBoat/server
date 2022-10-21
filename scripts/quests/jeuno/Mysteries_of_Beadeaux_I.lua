@@ -17,6 +17,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BE
 quest.reward =
 {
     fame = 30,
+    fameArea = xi.quest.fame_area.JEUNO,
     keyItem = xi.ki.CORUSCANT_ROSARY,
 }
 

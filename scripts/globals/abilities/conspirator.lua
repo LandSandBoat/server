@@ -6,41 +6,16 @@
 -- Recast Time: 5:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/thief")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    local subtleBlow = 0
-    local accuracy = 0
-    local scale = 1
-    local mob = player:getTarget()
-    if mob then
-        local enmityList = mob:getEnmityList()
-        if enmityList and #enmityList > 0 then
-            if #enmityList < 6 then
-                subtleBlow = 20
-                accuracy = 15
-            elseif #enmityList < 18 then
-                subtleBlow = 50
-                accuracy = 25
-            else
-                subtleBlow = 50
-                accuracy = 49
-            end
-        end
-
-        -- See if we should apply the effects to the player at the top of the hate list
-        if mob:getTarget() == target then
-            scale = player:getMod(xi.mod.AUGMENTS_CONSPIRATOR)
-        end
-    end
-
-    target:addStatusEffect(xi.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.thief.useConspirator(player, target, ability)
 end
 
-return ability_object
+return abilityObject

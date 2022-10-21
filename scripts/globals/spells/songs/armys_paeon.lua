@@ -2,16 +2,16 @@
 -- Spell: Army's Paeon
 -- Gradually restores target's HP.
 -----------------------------------
-require("scripts/globals/magic_utils/spell_song_enhancing")
+require("scripts/globals/spells/enhancing_song")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    return xi.magic_utils.spell_song_enhancing.useEnhancingSong(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingSong(caster, target, spell)
 end
 
-return spell_object
+return spellObject

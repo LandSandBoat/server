@@ -19,8 +19,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(47)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -28,9 +26,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 39 then
-        local Z = player:getZPos()
+        local zPos = player:getZPos()
 
-        if Z >= -61 and Z <= -58 then
+        if zPos >= -61 and zPos <= -58 then
             player:delGil(200)
         end
     end

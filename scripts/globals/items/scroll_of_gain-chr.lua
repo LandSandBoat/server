@@ -3,14 +3,14 @@
 -- Scroll of Gain-CHR
 -- Teaches the white magic Gain-CHR
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(492)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(492)
 end
 
-return item_object
+return itemObject

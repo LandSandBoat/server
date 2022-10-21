@@ -3,7 +3,7 @@
 --  NPC: Endracion
 -- !pos -110 1 -34 230
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     if player:getNation() ~= xi.nation.SANDORIA then
         player:startEvent(1011) -- for Non-San d'Orians
     else
-        local currentMission = player:getCurrentMission(SANDORIA)
+        local currentMission = player:getCurrentMission(xi.mission.log_id.SANDORIA)
 
         if currentMission ~= xi.mission.id.sandoria.NONE then
             player:startEvent(1001) -- Have mission already activated

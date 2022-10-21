@@ -1,9 +1,10 @@
 ----------------------------
 ----- Action base class
 ----------------------------
-Action = { }
+Action = {}
 
-Action.Priority = {
+Action.Priority =
+{
     Ignore = 1,
     Default = 10,
     ReplaceDefault = 20,
@@ -12,7 +13,8 @@ Action.Priority = {
     Progress = 1000,
 }
 
-Action.Type = {
+Action.Type =
+{
     LambdaAction = 0,
     Event = 1,
     Message = 2,
@@ -21,6 +23,7 @@ Action.Type = {
     Wait = 5,
     Release = 6,
     KeyItem = 7,
+    NoAction = 8,
 }
 
 function Action:new(type)
@@ -49,6 +52,13 @@ end
 function Action:replaceDefault()
      -- Always prefer this over falling back to default in lua file
     return self:setPriority(Action.Priority.ReplaceDefault)
+end
+
+-- Perform the action as a Progress priority, and then default back to event
+function Action:importantEvent()
+    self.priority = Action.Priority.Progress
+    self.secondaryPriority = Action.Priority.Event
+    return self
 end
 
  -- After the first time the action is performed, it will have a lower priority

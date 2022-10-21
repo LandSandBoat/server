@@ -109,20 +109,20 @@ local cutscene = -- add cutscenes to this table
 {
     [xi.zone.LA_THEINE_PLATEAU] =
     {
-        [1] = {122},            -- Dark Puppet
-        [2] = {119},            -- Hitting the Marquisate
-        [3] = {124},            -- I Can Hear a Rainbow
-        [4] = {0},              -- A Timely Visit (pt.1)
-        [5] = {1},              -- A Timely Visit (pt.2)
-        [6] = {201},            -- The Mothercrystals
-        [7] = {203},            -- The Pursuit of Paradise
-        [8] = {205},            -- Waking the Beast (pt.1)
-        [9] = {208},            -- Waking the Beast (pt.2)
-        [10] = {209},           -- Chocobo on the Loose!
-        [11] = {9},             -- A Goldstruck Gigas (pt.1)
-        [12] = {10},            -- A Goldstruck Gigas (pt.2)
-        [13] = {11},            -- An Officer and a Pirate
-        [14] = {12},            -- Tenuous Existence
+        [1]  = { 122 },         -- Dark Puppet
+        [2]  = { 119 },         -- Hitting the Marquisate
+        [3]  = { 124 },         -- I Can Hear a Rainbow
+        [4]  = { 0 },           -- A Timely Visit (pt.1)
+        [5]  = { 1 },           -- A Timely Visit (pt.2)
+        [6]  = { 201 },         -- The Mothercrystals
+        [7]  = { 203 },         -- The Pursuit of Paradise
+        [8]  = { 205 },         -- Waking the Beast (pt.1)
+        [9]  = { 208 },         -- Waking the Beast (pt.2)
+        [10] = { 209 },         -- Chocobo on the Loose!
+        [11] = { 9 },           -- A Goldstruck Gigas (pt.1)
+        [12] = { 10 },          -- A Goldstruck Gigas (pt.2)
+        [13] = { 11 },          -- An Officer and a Pirate
+        [14] = { 12 },          -- Tenuous Existence
         [15] = {},              -- QUEST NOT IMPLEMENTED (ROV)
         [16] = {},              -- QUEST NOT IMPLEMENTED (ROV)
         [17] = {},              -- QUEST NOT IMPLEMENTED (ROV)
@@ -138,51 +138,51 @@ local cutscene = -- add cutscenes to this table
     },
     [xi.zone.NORTH_GUSTABERG] =
     {
-        [1] = {200, 1092},      -- As Thick as Thieves
-        [2] = {22},             -- The Gustaberg Tour
-        [3] = {254},            -- Apocalypse
-        [4] = {0},              -- An Ulcerous Uragnite (pt.1)
-        [5] = {1},              -- An Ulcerous Uragnite (pt.2)
+        [1] = { 200, 1092 },      -- As Thick as Thieves
+        [2] = { 22 },             -- The Gustaberg Tour
+        [3] = { 254 },            -- Apocalypse
+        [4] = { 0 },              -- An Ulcerous Uragnite (pt.1)
+        [5] = { 1 },              -- An Ulcerous Uragnite (pt.2)
     },
     [xi.zone.SOUTH_GUSTABERG] =
     {
-        [1] = {906},            -- A Transient Dream
-        [2] = {0},              -- A Beaked Blusterer (pt.1)
-        [3] = {1},              -- A Beaked Blusterer (pt.2)
+        [1] = { 906 },            -- A Transient Dream
+        [2] = { 0 },              -- A Beaked Blusterer (pt.1)
+        [3] = { 1 },              -- A Beaked Blusterer (pt.2)
     },
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        [1] = {33},              -- The Holy Crest
+        [1] = { 33 },              -- The Holy Crest
     },
     [xi.zone.ROMAEVE] =
     {
-        [1] = {2},              -- Vain
-        [2] = {4},              -- Moon Reading
-        [3] = {7, 917, 1408},   -- Divine Might
-        [4] = {71},             -- Fountain of Trouble
+        [1] = { 2 },              -- Vain
+        [2] = { 4 },              -- Moon Reading
+        [3] = { 7, 917, 1408 },   -- Divine Might
+        [4] = { 71 },             -- Fountain of Trouble
     },
     [xi.zone.CASTLE_ZVAHL_KEEP] =
     {
-        [1] = {8},
+        [1] = { 8 },
     },
     [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
-        [1] = {13},             -- The Rumor (pt. 1)
-        [2] = {12},             -- The Rumor (pt. 2)
-        [3] = {17},             -- Trouble at the Sluice
-        [4] = {6},              -- The Holy Crest
-        [5] = {0},              -- Souls in Shadows (pt. 1)
-        [6] = {1},              -- Souls in Shadows (pt. 2)
-        [7] = {5},              -- Souls in Shadows (pt. 3)
+        [1] = { 13 },             -- The Rumor (pt. 1)
+        [2] = { 12 },             -- The Rumor (pt. 2)
+        [3] = { 17 },             -- Trouble at the Sluice
+        [4] = { 6 },              -- The Holy Crest
+        [5] = { 0 },              -- Souls in Shadows (pt. 1)
+        [6] = { 1 },              -- Souls in Shadows (pt. 2)
+        [7] = { 5 },              -- Souls in Shadows (pt. 3)
     },
     [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
-        [1] = {66}              -- Equipped for All Occasions
+        [1] = { 66 }              -- Equipped for All Occasions
     },
     [xi.zone.GARLAIGE_CITADEL] =
     {
-        [1] = {60},             -- Escort for Hire (Windurst)
-        [2] = {14},             -- Peace for the Spirit
+        [1] = { 60 },             -- Escort for Hire (Windurst)
+        [2] = { 14 },             -- Peace for the Spirit
     },
 }
 

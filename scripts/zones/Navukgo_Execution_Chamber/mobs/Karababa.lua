@@ -23,7 +23,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMonsterMagicPrepare = function(mob, target)
+entity.onMobMagicPrepare = function(mob, target, spellId)
     local powerup = mob:getLocalVar("powerup")
     local rnd = math.random(1, 6)
     local warp = mob:getLocalVar("warp")
@@ -54,7 +54,7 @@ entity.onMonsterMagicPrepare = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:getBattlefield():lose()
 end
 

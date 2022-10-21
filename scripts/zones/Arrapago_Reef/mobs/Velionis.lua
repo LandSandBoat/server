@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  ZNM: Velionis
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -24,8 +24,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local FastCast = mob:getLocalVar("HPP")
-    if mob:getHPP() <= FastCast then
+    local fastCast = mob:getLocalVar("HPP")
+    if mob:getHPP() <= fastCast then
         if mob:getHPP() > 10 then
             mob:addMod(xi.mod.FASTCAST, 15)
             mob:setLocalVar("HPP", mob:getHPP() - 10)
@@ -56,7 +56,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     return xi.subEffect.BLAZE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

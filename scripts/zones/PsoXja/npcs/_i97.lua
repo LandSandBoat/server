@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)
     end
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)

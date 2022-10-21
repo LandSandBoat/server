@@ -22,8 +22,8 @@
 #ifndef _CACTIONPACKET_H
 #define _CACTIONPACKET_H
 
-#include "../../common/cbasetypes.h"
 #include "basic.h"
+#include "common/cbasetypes.h"
 
 #include "../entities/battleentity.h"
 #include "../spell.h"
@@ -47,8 +47,9 @@ enum ACTIONTYPE : uint8
     ACTION_RANGED_START          = 12,
     ACTION_PET_MOBABILITY_FINISH = 13,
     ACTION_DANCE                 = 14,
-    ACTION_QUARRY                = 15,
-    ACTION_SPRINT                = 16,
+    ACTION_RUN_WARD_EFFUSION     = 15,
+    ACTION_QUARRY                = 21,
+    ACTION_SPRINT                = 22,
 
     // these aren't actual action packet IDs - they exist for simplicity
     // because we are too lazy to figure out 0x0A - 0x0F in the action packet
@@ -74,6 +75,7 @@ struct actionTarget_t
     SUBEFFECT  spikesEffect;     // 10 bits
     uint16     spikesParam;      // 14 bits
     uint16     spikesMessage;    // 10 bits
+    MODIFIER   modifier;         // 31 bits, but only the first 4 are known to be usable to the client.
 
     actionTarget_t()
     : reaction(REACTION::NONE)
@@ -88,13 +90,14 @@ struct actionTarget_t
     , spikesEffect(SUBEFFECT_NONE)
     , spikesParam(0)
     , spikesMessage(0)
+    , modifier(MODIFIER::NONE)
     {
     }
-    actionTarget_t(const actionTarget_t&) = delete;
+    actionTarget_t(const actionTarget_t&)            = delete;
     actionTarget_t& operator=(const actionTarget_t&) = delete;
 
     /* Not automatically generated */
-    actionTarget_t(actionTarget_t&&) = default;
+    actionTarget_t(actionTarget_t&&)            = default;
     actionTarget_t& operator=(actionTarget_t&&) = default;
 };
 
@@ -107,11 +110,11 @@ struct actionList_t
     : ActionTargetID(0)
     {
     }
-    actionList_t(const actionList_t&) = delete;
+    actionList_t(const actionList_t&)            = delete;
     actionList_t& operator=(const actionList_t&) = delete;
 
     /* Not automatically generated */
-    actionList_t(actionList_t&&) = default;
+    actionList_t(actionList_t&&)            = default;
     actionList_t& operator=(actionList_t&&) = default;
 
     actionTarget_t& getNewActionTarget()

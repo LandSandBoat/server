@@ -31,6 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
+, m_spentTP(0)
 {
     auto* skill = battleutils::GetMobSkill(wsid);
     if (!skill)
@@ -83,7 +84,7 @@ CMobSkill* CMobSkillState::GetSkill()
 
 void CMobSkillState::SpendCost()
 {
-    if (m_PSkill->isTpSkill())
+    if (!m_PSkill->isTpFreeSkill())
     {
         m_spentTP            = m_PEntity->health.tp;
         m_PEntity->health.tp = 0;
@@ -109,6 +110,19 @@ bool CMobSkillState::Update(time_point tick)
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
         }
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+
+        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
+        {
+            CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
+            if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
+            {
+                auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
+                // Retail: Power is gained for BP use
+                auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
+                power += levelGained;
+                PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
+            }
+        }
         return true;
     }
     return false;
@@ -121,12 +135,14 @@ void CMobSkillState::Cleanup(time_point tick)
         action_t action;
         action.id         = m_PEntity->id;
         action.actiontype = ACTION_MOBABILITY_INTERRUPT;
+        action.actionid   = 28787;
 
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = m_PEntity->id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = m_PSkill->getID();
+        actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
+        actionTarget.reaction        = REACTION::HIT;
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }

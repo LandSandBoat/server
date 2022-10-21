@@ -22,7 +22,7 @@
 #ifndef _CCHAREMOTIONPACKET_H
 #define _CCHAREMOTIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -6,17 +6,17 @@
 -- Duration (Charging): Until MP stored is 25% of Max HP or until HP = 50%
 -- Duration (Charged): 2 hours
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
 
     local sublimationComplete = player:getStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
     local sublimationCharging = player:getStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
@@ -54,4 +54,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return mp
 end
 
-return ability_object
+return abilityObject

@@ -11,21 +11,19 @@ require("scripts/globals/bcnm")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    TradeBCNM(player, npc, trade)
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 1 then
         player:startEvent(1)
-    elseif EventTriggerBCNM(player, npc) then
-        return
-    else
+    elseif not xi.bcnm.onTrigger(player, npc) then
         player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
-    EventUpdateBCNM(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)

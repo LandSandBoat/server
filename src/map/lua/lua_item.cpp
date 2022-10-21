@@ -21,13 +21,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
-#include "../../common/logging.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_general.h"
 #include "../items/item_weapon.h"
 #include "../map.h"
 #include "../utils/itemutils.h"
+#include "common/logging.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
 : m_PLuaItem(PItem)
@@ -65,7 +65,7 @@ uint32 CLuaItem::getQuantity()
 
 uint32 CLuaItem::getBasePrice()
 {
-    return static_cast<CItem*>(m_PLuaItem)->getBasePrice();
+    return m_PLuaItem->getBasePrice();
 }
 
 uint8 CLuaItem::getLocationID()
@@ -85,7 +85,11 @@ uint16 CLuaItem::getTrialNumber()
 
 auto CLuaItem::getMatchingTrials() -> sol::table
 {
-    XI_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    if (m_PLuaItem == nullptr)
+    {
+        ShowWarning("CLuaItem::getMatchingTrials() - m_PLuaItem is null.");
+        return lua.create_table();
+    }
 
     auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 
@@ -112,17 +116,17 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         augs[i][1]        = augmentVal;
     }
 
-    int32 ret = Sql_Query(SqlHandle, Query, PItem->getID(),
-                          augs[0][0], augs[1][0], augs[2][0], augs[3][0],
-                          augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
+    int32 ret = sql->Query(Query, PItem->getID(),
+                           augs[0][0], augs[1][0], augs[2][0], augs[3][0],
+                           augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 
-    sol::table table = luautils::lua.create_table();
-    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+    sol::table table = lua.create_table();
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         int32 trialCount = 0;
-        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        while (sql->NextRow() == SQL_SUCCESS)
         {
-            auto id             = static_cast<int32>(Sql_GetIntData(SqlHandle, 0));
+            auto id             = sql->GetIntData(0);
             table[++trialCount] = id;
         }
     }
@@ -130,7 +134,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
     return table;
 }
 
-uint8 CLuaItem::getWornItem()
+uint8 CLuaItem::getWornUses()
 {
     return m_PLuaItem->m_extra[0];
 }
@@ -266,7 +270,9 @@ bool CLuaItem::isShield()
 
 auto CLuaItem::getSignature() -> std::string
 {
-    int8 signature[21];
+    int8 signature[DecodeStringLength];
+
+    memset(&signature, 0, sizeof(signature));
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
         DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);
@@ -300,15 +306,15 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
     m_PLuaItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
 }
 
 auto CLuaItem::getSoulPlateData() -> sol::table
 {
-    auto data        = m_PLuaItem->getSoulPlateData();
-    sol::table table = luautils::lua.create_table();
+    auto       data  = m_PLuaItem->getSoulPlateData();
+    sol::table table = lua.create_table();
 
     table["name"]       = std::get<0>(data);
     table["mobFamily"]  = std::get<1>(data);
@@ -334,7 +340,7 @@ void CLuaItem::Register()
     SOL_REGISTER("getSlotID", CLuaItem::getSlotID);
     SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
     SOL_REGISTER("getMatchingTrials", CLuaItem::getMatchingTrials);
-    SOL_REGISTER("getWornItem", CLuaItem::getWornItem);
+    SOL_REGISTER("getWornUses", CLuaItem::getWornUses);
     SOL_REGISTER("isType", CLuaItem::isType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);
     SOL_REGISTER("getName", CLuaItem::getName);

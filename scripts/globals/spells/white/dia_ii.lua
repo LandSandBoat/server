@@ -2,19 +2,19 @@
 -- Spell: Dia II
 -- Lowers an enemy's defense and gradually deals light elemental damage.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local basedmg = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 4
     local params = {}
     params.dmg = basedmg
@@ -51,7 +51,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
     elseif
         bio:getSubPower() == 10 or
-        (xi.settings.BIO_OVERWRITE == 1 and bio:getSubPower() <= 15) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
+        (xi.settings.main.BIO_OVERWRITE == 1 and bio:getSubPower() <= 15) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
     then -- erase lower tier bio and add dia dot
         target:delStatusEffect(xi.effect.BIO)
         target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
@@ -60,4 +60,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

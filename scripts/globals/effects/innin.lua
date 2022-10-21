@@ -4,9 +4,9 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity
+effectObject.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity
     target:addMod(xi.mod.EVA, -effect:getPower())
     target:addMod(xi.mod.ENMITY, -effect:getSubPower())
 
@@ -14,7 +14,7 @@ effect_object.onEffectGain = function(target, effect) --power=30 initially, subp
     target:addMod(xi.mod.ACC, jpValue)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     --tick down the effect and reduce the overall power
     effect:setPower(effect:getPower()-1)
     target:delMod(xi.mod.EVA, -1)
@@ -24,7 +24,7 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     --remove the remaining power
     target:delMod(xi.mod.EVA, -effect:getPower())
     target:delMod(xi.mod.ENMITY, -effect:getSubPower())
@@ -33,4 +33,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.ACC, jpValue)
 end
 
-return effect_object
+return effectObject

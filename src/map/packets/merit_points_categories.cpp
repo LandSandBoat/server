@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -68,7 +68,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 
         PChar->pushPacket(new CBasicPacket(*this));
     }
-    MeritPointsCategoriesPacket(PChar, (uint8)(5 * MAX_MERITS_IN_PACKET));
+    MeritPointsCategoriesPacket(PChar, static_cast<uint8>(5 * MAX_MERITS_IN_PACKET));
 }
 
 /************************************************************************
@@ -163,6 +163,8 @@ void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PCha
         String Instrument Skill (+2 per upgrade)
         Wind Instrument Skill (+2 per upgrade)
         Blue Magic Skill (+2 per upgrade)
+        Geomancy Magic Skill (+2 per upgrade)
+        Handbell Instrument Skill (+2 per upgrade)
 0x01 0x40 - Others
         Enmity Increase (+1 per upgrade)
         Enmity Decrease (-1 per upgrade)

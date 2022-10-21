@@ -20,7 +20,7 @@ local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR
 quest.reward =
 {
     item = xi.items.SCROLL_OF_HOJO_ICHI,
-    fameArea = NORG,
+    fameArea = xi.quest.fame_area.NORG,
     fame = 75,
     title = xi.title.APPRENTICE_SOMMELIER,
 }
@@ -30,7 +30,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(NORG) >= 4 and
+                player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
                 player:getMainLvl() >= 10
         end,
 

@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
         17335,    4, -- Rusty Bolt
     }
 
-    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         stock =
         {
             16450,  2030,  -- Dagger
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
         }
     end
 
-    player:showText(npc, ID.text.CAIPHIMONRIDE_SHOP_DIALOG)
+    player:showText(npc, ID.text.CAIPHIMONRIDE_SHOP_DIALOG) -- 10908 with only 3 items available, may change
     xi.shop.general(player, stock)
 end
 

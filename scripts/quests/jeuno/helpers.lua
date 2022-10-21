@@ -13,11 +13,11 @@ xi.jeuno = xi.jeuno or {}
 xi.jeuno.helpers = xi.jeuno.helpers or {}
 
 -- Base class for use by the Gobbiebag questline to reduce redundant code.
--- The quests differ slightly in requested items, inventory size key, text, etc...
+-- The quests differ slightly in requested items, inventory size key, text, etc.
 -- The params parameter stores the tunable information needed to perform the proper quest in the chain.
 xi.jeuno.helpers.GobbiebagQuest = {}
 
-setmetatable(xi.jeuno.helpers.GobbiebagQuest, {__index = Quest} )
+setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest } )
 xi.jeuno.helpers.GobbiebagQuest.__index = xi.jeuno.helpers.GobbiebagQuest
 
 function xi.jeuno.helpers.GobbiebagQuest:new(params)
@@ -38,7 +38,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     end
 
     local getReqsMet = function (player)
-        return  player:getFameLevel(JEUNO) >= params.fame and
+        return  player:getFameLevel(xi.quest.fame_area.JEUNO) >= params.fame and
                 player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
                 (params.prerequisite == nil or player:hasCompletedQuest(xi.quest.log_id.JEUNO, params.prerequisite))
     end

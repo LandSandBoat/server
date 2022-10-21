@@ -24,9 +24,10 @@ local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_
 -- 610 / 100 = ~6 fame each
 quest.reward =
 {
-    fame  = 6,
-    xp    = 500,
-    bayld = 200,
+    fame     = 6,
+    fameArea = xi.quest.fame_area.ADOULIN,
+    xp       = 500,
+    bayld    = 200,
 }
 
 quest.sections =
@@ -100,7 +101,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.TWITHERYM_WING, 2}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.TWITHERYM_WING, 2 } }) then
                         return quest:progressEvent(331)
                     end
                 end,

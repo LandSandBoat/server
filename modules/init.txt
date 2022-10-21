@@ -1,0 +1,40 @@
+# This file is for marking which modules you wish to load.
+#
+# - This file is tracked in git, but ignores changes: git update-index --assume-unchanged FILE_NAME
+# - You can list files and folders you wish to load as modules.
+# - One entry per line.
+# - Empty lines and comments are ignored.
+# - Comments are marked with '#'
+# - It is optional to mark folders with a trailing '/'.
+# - If you list a folder, all of it's contents will be available for loading.
+# - If you list a file, it will be made available for loading.
+# - Valid files are: *.cpp, *.lua, *.sql.
+# - cpp files are loaded and built with CMake.
+# - lua files are loaded at runtime by the main program.
+# - sql files are loaded either by dbtool, or by hand.
+#
+# Examples:
+#
+# init.txt:
+# ---------------------
+# | 
+# | renamer
+# | 
+# ---------------------
+#
+# Will load everything under the renamer folder.
+#
+# init.txt:
+# ---------------------
+# | 
+# | custom/cpp/custom_module.cpp
+# | custom/lua/claim_shield.lua
+# |
+# ---------------------
+#
+# Will load only custom/cpp/custom_module.cpp and custom/lua/claim_shield.lua.
+#
+# Live example:
+
+custom/commands/
+custom/lua/test_npcs_in_gm_home.lua

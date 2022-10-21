@@ -7,13 +7,13 @@
 -- Duration: First Step lasts 1 minute, each following Step extends its current duration by 30 seconds.
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
@@ -27,7 +27,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(100)
@@ -193,4 +193,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
 end
 
-return ability_object
+return abilityObject

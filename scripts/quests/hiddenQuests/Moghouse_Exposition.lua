@@ -6,7 +6,7 @@ require('scripts/globals/zone')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------
 
-local quest = HiddenQuest:new("moghouseExpo")
+local quest = HiddenQuest:new("mogExpo")
 
 quest.reward = {}
 
@@ -31,7 +31,7 @@ local moogleZoneInEvent =
     {
         [30000] = function(player, csid, option, npc)
             quest:complete(player)
-            quest:setVar(player, 'otherNation', 1)
+            quest:setVar(player, 'oNation', 1)
         end,
     },
 }
@@ -41,7 +41,7 @@ quest.sections[2] = {}
 quest.sections[2].check = function(player, currentMission, missionStatus, vars)
     return not xi.moghouse.isInMogHouseInHomeNation(player) and
         player:isInMogHouse() and
-        quest:getVar(player, 'otherNation') == 1
+        quest:getVar(player, 'oNation') == 1
 end
 
 local otherNationTriggerEvent =

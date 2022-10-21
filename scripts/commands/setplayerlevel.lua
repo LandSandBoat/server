@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setplayerlevel {player} <level>")
+    player:PrintToPlayer("!setplayerlevel (player) <level>")
 end
 
 function onTrigger(player, arg1, arg2)
