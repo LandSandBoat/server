@@ -331,6 +331,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->saveMobModifiers();
 
         PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
+        PMob->m_isAggroable           = table["isAggroable"].get_or(false);
 
         PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
 

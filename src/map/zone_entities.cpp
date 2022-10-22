@@ -1310,7 +1310,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     luautils::OnZoneTick(this->m_zone);
 
-    EntityList_t::iterator it = m_mobList.begin();
+    std::vector<CMobEntity*> aggroableMobs;
+    EntityList_t::iterator   it = m_mobList.begin();
     while (it != m_mobList.end())
     {
         CMobEntity* PMob = dynamic_cast<CMobEntity*>(it->second);
@@ -1364,7 +1365,30 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             delete PMob;
             continue;
         }
+
+        if (PMob->allegiance == ALLEGIANCE_TYPE::PLAYER && PMob->m_isAggroable)
+        {
+            aggroableMobs.push_back(PMob);
+        }
+
         it++;
+    }
+
+    // Check to see if any aggroable mobs should be aggroed by other mobs
+    for (CMobEntity* PMob : aggroableMobs)
+    {
+        for (auto PMobCurrentIter : m_mobList)
+        {
+            CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(PMobCurrentIter.second);
+            if (PCurrentMob != nullptr && PCurrentMob->isAlive() && PMob->allegiance != PCurrentMob->allegiance && distance(PMob->loc.p, PCurrentMob->loc.p) <= 50)
+            {
+                CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
+                if (PController != nullptr && PController->CanAggroTarget(PMob))
+                {
+                    PCurrentMob->PEnmityContainer->AddBaseEnmity(PMob);
+                }
+            }
+        }
     }
 
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
