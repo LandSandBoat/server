@@ -82,7 +82,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             }
             if (PEntity->spawnAnimation == SPAWN_ANIMATION::SPECIAL)
             {
-                ref<uint8>(0x28) |= 0x45;
+                ref<uint8>(0x28) |= 0x04;
             }
             ref<uint8>(0x0A) = updatemask;
         }
