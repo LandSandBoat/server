@@ -1,27 +1,27 @@
 -----------------------------------
--- Blade of Darkness
+-- Blade of Death
 -----------------------------------
--- Log ID: 1, Quest ID: 28
+-- Log ID: 1, Quest ID: 47
 -- Gumbah : !pos 52 0 -36 234
--- TODO: This quest needs verification!
+-- qm2    : !pos 206 -60 -101 196
 -----------------------------------
 require('scripts/globals/items')
+require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local beadeauxID = require('scripts/zones/Beadeaux/IDs')
------------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
 
 quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    title    = xi.title.DARK_SIDER,
+    item     = xi.items.DEATHBRINGER,
+    title    = xi.title.BLACK_DEATH,
 }
 
 quest.sections =
@@ -29,17 +29,19 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) and
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
         end,
 
         [xi.zone.BASTOK_MINES] =
         {
-            ['Gumbah'] = quest:progressEvent(99),
+            ['Gumbah'] = quest:progressEvent(130),
 
             onEventFinish =
             {
-                [99] = function(player, csid, option, npc)
+                [130] = function(player, csid, option, npc)
                     quest:begin(player)
+                    npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ZEID)
                 end,
             },
         },
@@ -55,50 +57,43 @@ quest.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if prevZone == xi.zone.PALBOROUGH_MINES then
-                        if quest:getVar(player, 'Prog') == 0 then
-                            return 130
-                        elseif not player:hasItem(xi.items.CHAOSBRINGER) then
-                            return 131
-                        end
+                    if
+                        prevZone == xi.zone.PALBOROUGH_MINES and
+                        not player:hasItem(xi.items.CHAOSBRINGER)
+                    then
+                        return 131
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [130] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.CHAOSBRINGER) then
-                        quest:setVar(player, 'Prog', 1)
-                    end
-                end,
-
                 [131] = function(player, csid, option, npc)
                     npcUtil.giveItem(player, xi.items.CHAOSBRINGER)
                 end,
             },
         },
 
-        [xi.zone.BEADEAUX] =
+        [xi.zone.GUSGEN_MINES] =
         {
-            onZoneIn =
+            ['qm2'] =
             {
-                function(player, prevZone)
+                onTrade = function(player, npc, trade)
                     if
-                        prevZone == xi.zone.PASHHOW_MARSHLANDS and
-                        player:getCharVar("ChaosbringerKills") >= 100
+                        npcUtil.tradeHasExactly(trade, xi.items.CHAOSBRINGER) and
+                        player:getCharVar("ChaosbringerKills") >= 200
                     then
-                        return 121
+                        return quest:progressEvent(10)
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [121] = function(player, csid, option, npc)
+                [10] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:unlockJob(xi.job.DRK)
-                        player:messageSpecial(beadeauxID.text.YOU_CAN_NOW_BECOME_A_DARK_KNIGHT)
+                        player:confirmTrade()
+                        player:delKeyItem(xi.ki.LETTER_FROM_ZEID)
                     end
                 end,
             },

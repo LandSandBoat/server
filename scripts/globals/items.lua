@@ -3482,6 +3482,7 @@ xi.items =
     PERDU_SWORD                     = 16602,
     CHAOSBRINGER                    = 16607,
     SMALL_SWORD                     = 16629,
+    DEATHBRINGER                    = 16637,
     BRONZE_AXE                      = 16640,
     BONE_AXE                        = 16642,
     MYTHRIL_PICK                    = 16651,
