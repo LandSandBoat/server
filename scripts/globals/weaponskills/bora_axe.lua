@@ -35,11 +35,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.atk100 = 1.0; params.atk200 = 1.0; params.atk300 = 1.0
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    local chance = (tp-1000) * applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0) > math.random() * 150
+    local chance = (tp-1000) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0) > math.random() * 150
     if (damage > 0 and target:hasStatusEffect(xi.effect.BIND) == false and chance) then
-        local duration = 20 * applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
+        local duration = 20 * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
         target:addStatusEffect(xi.effect.BIND, 1, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

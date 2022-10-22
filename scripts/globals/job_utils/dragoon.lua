@@ -76,7 +76,7 @@ end
 -- Generic Function for damage-based Jumps
 local function performWSJump(player, target, action, params)
     local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
     local totalHits = tpHits + extraHits
 
     if totalHits > 0 then

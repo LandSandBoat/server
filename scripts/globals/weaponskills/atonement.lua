@@ -65,7 +65,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
             params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 2.0
         end
 
-        damage, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+        damage, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     else
         local dmg
         if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
@@ -99,7 +99,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
             calcParams.extraHitsLanded = 1
         end
 
-        damage = takeWeaponskillDamage(target, player, params, primary, attack, calcParams, action)
+        damage = xi.weaponskills.takeWeaponskillDamage(target, player, params, primary, attack, calcParams, action)
     end
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage

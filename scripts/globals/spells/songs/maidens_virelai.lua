@@ -33,14 +33,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.SINGING
     params.bonus = bonus
     params.effect = xi.effect.CHARM_I
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if (resist >= 0.25 and caster:getCharmChance(target, false) > 0) then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
 
         duration = duration * resist
 
-        duration = calculateBuildDuration(target, duration, params.effect, caster)
+        duration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if duration == 0 then
             spell:setMsg(xi.msg.basic.NONE)

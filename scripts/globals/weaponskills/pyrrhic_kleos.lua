@@ -37,14 +37,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.str_wsc = 0.4 params.dex_wsc = 0.4
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Apply Aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     if damage > 0 then
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
-            local duration = tp / 1000 * 60 * applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
+            local duration = tp / 1000 * 60 * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
             target:addStatusEffect(xi.effect.EVASION_DOWN, 10, 0, duration)
         end
     end

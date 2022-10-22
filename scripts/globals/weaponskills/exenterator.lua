@@ -36,10 +36,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ftp100 = 1.1875 params.ftp200 = 1.1875 params.ftp300 = 1.1875
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if (damage > 0 and target:hasStatusEffect(xi.effect.ACCURACY_DOWN) == false) then
-        local duration = (45 + (tp/1000 * 45)) * applyResistanceAddEffectWS(player, target, xi.magic.ele.EARTH, 0)
+        local duration = (45 + (tp/1000 * 45)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.EARTH, 0)
         target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

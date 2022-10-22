@@ -34,10 +34,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.dex_wsc = 1.0
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if (damage > 0 and target:hasStatusEffect(xi.effect.POISON) == false) then
-        local duration = (30 + (tp/1000 * 60)) * applyResistanceAddEffectWS(player, target, xi.magic.ele.WATER, 0)
+        local duration = (30 + (tp/1000 * 60)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.WATER, 0)
         target:addStatusEffect(xi.effect.POISON, 3, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

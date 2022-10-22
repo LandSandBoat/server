@@ -34,10 +34,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ftp100 = 1.5625 params.ftp200 = 2.6875 params.ftp300 = 4.125
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     -- Silence duration changed from 60 to 45 as per bg-wiki: http://www.bg-wiki.com/bg/Tachi:_Gekko
     if (damage > 0 and target:hasStatusEffect(xi.effect.SILENCE) == false) then
-        local duration = 60 * applyResistanceAddEffectWS(player, target, xi.magic.ele.WIND, 0)
+        local duration = 60 * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.WIND, 0)
         target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

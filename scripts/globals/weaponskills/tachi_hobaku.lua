@@ -32,9 +32,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.str_wsc = 0.6
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    local chance = (tp - 1000) * applyResistanceAddEffectWS(player, target, xi.magic.ele.LIGHTNING, 0) > math.random() * 150
+    local chance = (tp - 1000) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.LIGHTNING, 0) > math.random() * 150
     if (damage > 0 and chance) then
         if (target:hasStatusEffect(xi.effect.STUN) == false) then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 4)

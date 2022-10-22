@@ -43,7 +43,7 @@ local function getDexCritRate(source, target)
     return math.min(critRate, 15) * sign
 end
 
-local function getAvatarFSTR(avatarStr, targetVit, avatar)
+local function getAvatarfSTR(avatarStr, targetVit, avatar)
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- fSTR for avatars has no cap and a lower bound of floor(weaponDmg/9)
     local dSTR = avatarStr - targetVit
@@ -88,10 +88,6 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
 local function avatarHitDmg(baseDmg, fSTR, pDif, attacker, target, ftp)
     -- https://www.bg-wiki.com/bg/Physical_Damage
     -- Physical Damage = Base Damage * pDIF
@@ -102,7 +98,7 @@ local function avatarHitDmg(baseDmg, fSTR, pDif, attacker, target, ftp)
 
     local dmg = (baseDmg + fSTR) * ftp * pDif
 
-    dmg = handleBlock(attacker, target, dmg)
+    dmg = xi.weaponskills.handleBlock(attacker, target, dmg)
     return dmg
 end
 
@@ -114,10 +110,6 @@ xi.summon.getSummoningSkillOverCap = function(avatar)
     return math.max(summoningSkill - maxSkill, 0)
 end
 
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
 xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300, wSC)
     local returninfo = {}
 
@@ -143,12 +135,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local firstHitAccBonus = 0.5
 
     -- Normal hits computed first
-    local hitrateSubsequent = baseHitRate
-    -- First hit gets bonus hit rate
-    hitrateFirst = hitrateSubsequent + firstHitAccBonus
-
-    hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
-    hitrateFirst = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+    local hitrateFirst = utils.clamp(baseHitRate + firstHitAccBonus, minHitRate, maxHitRate)
+    local hitrateSubsequent = utils.clamp(baseHitRate, minHitRate, maxHitRate)
 
     -- Compute hits first so we can exit early
     local firstHitLanded = false
@@ -158,7 +146,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     local missChance = math.random()
 
-    missChance = handleParry(avatar, target, missChance, false)
+    missChance = xi.weaponskills.handleParry(avatar, target, missChance, false)
 
     if missChance < hitrateFirst then
         firstHitLanded = true
@@ -167,7 +155,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     while numHitsProcessed < numberofhits do
         missChance = math.random()
-        missChance = handleParry(avatar, target, missChance, false)
+        missChance = xi.weaponskills.handleParry(avatar, target, missChance, false)
 
         if missChance < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
@@ -195,10 +183,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         local baseDmg = avatar:getWeaponDmg() + (wSC * 0.85)
 
-        local fSTR = getAvatarFSTR(avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), avatar)
+        local fSTR = getAvatarfSTR(avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), avatar)
 
         -- Calculating with the known era pdif ratio for weaponskills.
-        if mtp100 == nil or mtp200 == nil or mtp300 == nil then -- Nil gate for cMeleeRatio, will default mtp for each level to 1.
+        if mtp100 == nil or mtp200 == nil or mtp300 == nil then -- Nil gate for xi.weaponskills.cMeleeRatio, will default mtp for each level to 1.
             mtp100 = 1.0
             mtp200 = 1.0
             mtp300 = 1.0
@@ -206,7 +194,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         local tp = avatar:getTP()
         local params = { atk100 = mtp100, atk200 = mtp200, atk300 = mtp300 }
-        local pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
+        local pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
         local pDif = utils.clamp(pDifTable[1], 0, 2)
         local pDifCrit = utils.clamp(pDifTable[2], 0, 3)
 
@@ -230,7 +218,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         while numHitsProcessed < numHitsLanded do
             local ftp = 1
             local isCrit = math.random() < critRate
-            pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
+            pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
             pDif = utils.clamp(pDifTable[1], 0, 2)
             pDifCrit = utils.clamp(pDifTable[2], 0, 3)
 

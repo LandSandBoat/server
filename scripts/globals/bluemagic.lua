@@ -370,9 +370,9 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
     local rparams = {}
     rparams.diff = dStat
     rparams.skillType = xi.skill.BLUE_MAGIC
-    magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
+    magicAttack = math.floor(magicAttack * xi.magic.applyResistance(caster, target, spell, rparams))
 
-    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
+    local dmg = math.floor(xi.magic.addBonuses(caster, spell, target, magicAttack))
 
     caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
 
