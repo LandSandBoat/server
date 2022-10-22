@@ -8,12 +8,13 @@ local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-local this = {}
+local entity = {}
 
-this.onTrade = function(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-this.onTrigger = function(player, npc)
+entity.onTrigger = function(player, npc)
+    local index = npc:getID() - ID.npc.QUASILUMIN_OFFSET
     if not player:hasKeyItem(xi.ki.MAP_OF_HUXZOI) then
         local progress = player:getVar("huxzoi_map_progress")
         if progress == 1023 then
@@ -21,19 +22,18 @@ this.onTrigger = function(player, npc)
             npcUtil.giveKeyItem(player, xi.ki.MAP_OF_HUXZOI)
             return
         else
-            index = npc:getID() - ID.npc.QUASILUMIN_OFFSET
             if bit.band(progress, bit.lshift(1, index)) ~= 1 then
                 player:setVar("huxzoi_map_progress", bit.bor(progress, bit.lshift(1, index)))
             end
         end
     end
-    player:showText(npc, ID.quasilumin_text[npc:getID()])
+    player:showText(npc, ID.text.QUASILUMIN_MAP_QUEST_OFFSET + index)
 end
 
-this.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-this.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
 
-return this
+return entity
