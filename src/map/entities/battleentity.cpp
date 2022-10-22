@@ -1692,7 +1692,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     }
 
     battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
-    this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK | EFFECTFLAG_DETECTABLE);
     PTarget->LastAttacked = server_clock::now();
 
     if (battleutils::IsParalyzed(this))
@@ -1986,6 +1985,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
     /////////////////////////////////////////////////////////////////////////////////////////////
+
+    this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK | EFFECTFLAG_DETECTABLE);
 
     return true;
 }
