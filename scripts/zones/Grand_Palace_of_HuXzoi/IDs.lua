@@ -20,26 +20,21 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7082, -- Tallying conquest results...
         DOES_NOT_RESPOND              = 7246, -- The gate does not respond...
+        REQUEST_CONFIRMED             = 7367, -- Security portal access request confirmed.Commencing patrol routine. Stay on alert for intruder interference.
+        PATROL_COMPLETED              = 7368, -- Patrol routine completed. Request transfer of final security portal access duty. Awaiting confirmation.
         DUTY_COMPLETE                 = 7369, -- Transfer of final security portal access duty complete.
+        TRANSFER_OF_ACCESS_DUTY       = 7370, -- Transfer of access duty complete.
+        RETURNING_TO_REGULAR_DUTIES   = 7371, -- Returning to regular duties.
         PORTAL_EAST                   = 7372, -- You hear a portal open to the east...
         PORTAL_WEST                   = 7373, -- You hear a portal open to the west...
         PORTAL_NORTH                  = 7374, -- You hear a portal open to the north...
         TIME_EXCEEDED                 = 7375, -- Patrol routine time restriction exceeded. Patrol aborted.
-        RECOMMENCING_PATROL           = 7376, -- Recommencing patrol.
+        PATROL_SUSPENDED              = 7376, -- Patrol suspended. Awaiting orders.
+        RECOMMENCING_PATROL           = 7377, -- Recommencing patrol.
+        RECENTLY_ACTIVATED            = 7378, -- The alcove has been recently activated...
+        TIME_RESTRICTION              = 7379, -- Time restriction: <number> [minute/minutes] (Earth time)
         HOMEPOINT_SET                 = 7464, -- Home point set!
-    },
-    quasilumin_text =
-    {
-        [16916897] = 7369,
-        [16916898] = 7370,
-        [16916899] = 7371,
-        [16916900] = 7372,
-        [16916901] = 7373,
-        [16916902] = 7374,
-        [16916903] = 7375,
-        [16916904] = 7376,
-        [16916905] = 7377,
-        [16916906] = 7378,
+        QUASILUMIN_MAP_QUEST_OFFSET   = 7380, -- Warning. Chamber of Eventide accessed by unauthorized personnel, 4789209-980 increments previous.
     },
     mob =
     {
