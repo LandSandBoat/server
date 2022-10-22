@@ -333,6 +333,14 @@ def check_tables_in_file(name):
                 print("")
                 errcount += 1
 
+            # [^ =~\<\>][\=\+\*\~]|[\=\+\*][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~= operators or comparators
+            stripped_line = re.sub("--.*?(\r\n?|\n)", "", line)        # Strip to end of line if it begins with '--'
+            stripped_line = re.sub("\".*?\"|'.*?'", "", stripped_line) # Ignore data in quotes
+            for match in re.finditer("[^ =~\<\>][\=\+\*\~]|[\=\+\*][^ =\n]", stripped_line):
+                print(f"Operator or comparator without padding detected at end of line: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
 
         # If you want to modify the files during the checks, write your changed lines to the appropriate
         # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
