@@ -64,9 +64,6 @@ zoneObject.onRegionEnter = function( player, region)
     end
 end
 
-zoneObject.onRegionEnter = function( player, region)
-end
-
 zoneObject.onEventUpdate = function( player, csid, option)
     if csid == 11 then
         quests.rainbow.onEventUpdate(player)

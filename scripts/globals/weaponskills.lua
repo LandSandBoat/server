@@ -224,7 +224,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, c
         elseif calcParams.tp >= 2000 then
             accVarryTP = (wsParams.acc200 - 1) * 100
         else
-            accVarryTP = (wsParams.acc300 - 1) * 100
+            accVarryTP = (wsParams.acc100 - 1) * 100
         end
         attacker:addMod(xi.mod.RACC, accVarryTP)
     end
@@ -308,7 +308,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
             if calcParams.hybridHit then
                 -- Calculate magical bonuses and reductions
                 local ftpHybrid = xi.weaponskills.fTP(calcParams.tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
-                local magicdmg = math.floor(finaldmg * ftpHybrid)
+                local magicdmg = finaldmg * ftpHybrid
 
                 wsParams.bonus = calcParams.bonusAcc
                 magicdmg = magicdmg * xi.magic.applyResistanceAbility(attacker, target, wsParams.ele, wsParams)
@@ -355,14 +355,14 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         end
     end
 
+    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
+
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
-
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -427,7 +427,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         ftp = 1
     end
 
-    local base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
+    local base = (calcParams.weaponDamage[1] + wsMods) * ftp
 
     local dmg = base
 
@@ -497,7 +497,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
     calcParams.forcedFirstCrit = false
-    calcParams.hybridHit = false
     calcParams.sneakApplicable = false
     calcParams.trickApplicable = false
 
@@ -508,7 +507,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- Reset fTP if it's not supposed to carry over across all hits for this WS
     ftp = 1 + calcParams.bonusfTP
 
-    base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
+    base = (calcParams.weaponDamage[1] + wsMods) * ftp
 
     calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
     calcParams.tpHitsLanded = calcParams.hitsLanded -- Store number of TP hits that have landed thus far
@@ -550,7 +549,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     end
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged, false)
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, base, wsParams, calcParams, false, isRanged, false)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -943,7 +942,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
         elseif calcParams.tp >= 2000 then
             accVarryTP = (wsParams.acc200 - 1) * 100
         else
-            accVarryTP = (wsParams.acc300 - 1) * 100
+            accVarryTP = (wsParams.acc100 - 1) * 100
         end
         attacker:addMod(xi.mod.ACC, accVarryTP)
     end

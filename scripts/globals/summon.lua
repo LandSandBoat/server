@@ -96,7 +96,7 @@ local function avatarHitDmg(baseDmg, fSTR, pDif, attacker, target, ftp)
         ftp = 1
     end
 
-    local dmg = (baseDmg + fSTR) * ftp * pDif
+    local dmg = (baseDmg + fSTR) * utils.clamp(ftp * pDif, 0, 4.0)
 
     dmg = xi.weaponskills.handleBlock(attacker, target, dmg)
     return dmg
@@ -181,7 +181,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         local critRate = (baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)) / 100
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
 
-        local baseDmg = avatar:getWeaponDmg() + (wSC * 0.85)
+        local baseDmg = (avatar:getMainLvl() * 0.75) + (wSC * 0.85)
 
         local fSTR = getAvatarfSTR(avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), avatar)
 
@@ -192,18 +192,24 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             mtp300 = 1.0
         end
 
+        local pdifSoftCap = { nonCrit = 1.6, crit = 2.1 }
         local tp = avatar:getTP()
         local params = { atk100 = mtp100, atk200 = mtp200, atk300 = mtp300 }
         local pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
-        local pDif = utils.clamp(pDifTable[1], 0, 2)
-        local pDifCrit = utils.clamp(pDifTable[2], 0, 3)
+        local pDif = utils.clamp(pDifTable[1], 0, pdifSoftCap.nonCrit)
+        local pDifCrit = utils.clamp(pDifTable[2], 0, pdifSoftCap.crit)
 
         --Everything past this point is randomly computed per hit
 
         numHitsProcessed = 0
 
         if firstHitLanded then
-            local ftp = fTP(tp, 1.25, 2.5, 2.8125)
+            local ftp = fTP(tp, 1.35, 1.65, 1.875)
+
+            if numberofhits > 1 then
+                ftp = fTP(tp, 1.1, 1.3, 1.425)
+            end
+
             local isCrit = math.random() < critRate
 
             if isCrit then
@@ -219,8 +225,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             local ftp = 1
             local isCrit = math.random() < critRate
             pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
-            pDif = utils.clamp(pDifTable[1], 0, 2)
-            pDifCrit = utils.clamp(pDifTable[2], 0, 3)
+            pDif = utils.clamp(pDifTable[1], 0, pdifSoftCap.nonCrit)
+            pDifCrit = utils.clamp(pDifTable[2], 0, pdifSoftCap.crit)
 
             if isCrit then
                 pDif = pDifCrit
