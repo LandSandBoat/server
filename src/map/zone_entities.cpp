@@ -530,8 +530,8 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (MOB == PChar->SpawnMOBList.end())
             {
                 PChar->SpawnMOBList.insert(MOB, SpawnIDList_t::value_type(PCurrentMob->id, PCurrentMob));
+                PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
-            PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
 
             // Check to skip aggro routine
             if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
@@ -575,8 +575,8 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
             if (PET == PChar->SpawnPETList.end())
             {
                 PChar->SpawnPETList.insert(PET, SpawnIDList_t::value_type(PCurrentPet->id, PCurrentPet));
+                PChar->updateEntityPacket(PCurrentPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
-            PChar->updateEntityPacket(PCurrentPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
         }
         // Pet not visible, remove it from spawn list if it's in there
         else if (PET != PChar->SpawnPETList.end())
@@ -606,8 +606,8 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                     if (NPC == PChar->SpawnNPCList.end())
                     {
                         PChar->SpawnNPCList.insert(NPC, SpawnIDList_t::value_type(PCurrentNpc->id, PCurrentNpc));
+                        PChar->updateEntityPacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     }
-                    PChar->updateEntityPacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB);
                 }
                 // npc not visible, remove it from spawn list if it's in there
                 else if (NPC != PChar->SpawnNPCList.end())
@@ -640,9 +640,9 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                     if (PMaster)
                     {
                         PChar->pushPacket(new CEntitySetNamePacket(PCurrentTrust));
+                        PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     }
                 }
-                PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
             // trust not visible, remove it from spawn list if it's in there
             else if (SpawnTrustItr != PChar->SpawnTRUSTList.end())
