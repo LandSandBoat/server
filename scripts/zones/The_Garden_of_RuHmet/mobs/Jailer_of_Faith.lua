@@ -7,39 +7,31 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
--- Jailer of Faith takes extra damage when flower is open
+-- Jailer of Faith takes double damage when flower is open
 local openFlower = function(mob)
     mob:setLocalVar("PhysicalDamage", 0)
     mob:setLocalVar("MagicalDamage", 0)
     mob:setLocalVar("RangedDamage", 0)
     mob:setLocalVar("BreathDamage", 0)
     mob:delMod(xi.mod.ATTP, 10)
-    mob:setMod(xi.mod.HTH_SDT, 1250)
-    mob:setMod(xi.mod.SLASH_SDT, 1250)
-    mob:setMod(xi.mod.PIERCE_SDT, 1250)
-    mob:setMod(xi.mod.IMPACT_SDT, 1250)
-    mob:setMod(xi.mod.DMGPHYS, 112)
-    mob:setMod(xi.mod.DMGMAGIC, 112)
-    mob:setMod(xi.mod.DMGRANGE, 112)
-    mob:setMod(xi.mod.DMGBREATH, 112)
+    mob:setMod(xi.mod.DMGPHYS, 1000)
+    mob:setMod(xi.mod.DMGMAGIC, 1000)
+    mob:setMod(xi.mod.DMGRANGE, 1000)
+    mob:setMod(xi.mod.DMGBREATH, 1000)
     mob:setAnimationSub(2)
 end
 
--- Jailer of Faith takes reduced damage while flower is closed
+-- Jailer of Faith takes normal damage while flower is closed
 local closeFlower = function(mob)
     mob:setLocalVar("PhysicalDamage", 0)
     mob:setLocalVar("MagicalDamage", 0)
     mob:setLocalVar("RangedDamage", 0)
     mob:setLocalVar("BreathDamage", 0)
     mob:addMod(xi.mod.ATTP, 10) -- hits harder while flower is closed
-    mob:setMod(xi.mod.HTH_SDT, 750)
-    mob:setMod(xi.mod.SLASH_SDT, 750)
-    mob:setMod(xi.mod.PIERCE_SDT, 750)
-    mob:setMod(xi.mod.IMPACT_SDT, 750)
-    mob:setMod(xi.mod.DMGPHYS,  75)
-    mob:setMod(xi.mod.DMGMAGIC, 75)
-    mob:setMod(xi.mod.DMGRANGE, 75)
-    mob:setMod(xi.mod.DMGBREATH, 75)
+    mob:setMod(xi.mod.DMGPHYS, 0)
+    mob:setMod(xi.mod.DMGMAGIC, 0)
+    mob:setMod(xi.mod.DMGRANGE, 0)
+    mob:setMod(xi.mod.DMGBREATH, 0)
     mob:setLocalVar("[faith]changeTime", mob:getBattleTime() + math.random(20, 40))
     mob:setAnimationSub(1)
 end
