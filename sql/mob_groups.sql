@@ -3913,7 +3913,7 @@ INSERT INTO `mob_groups` VALUES (251,0,77,'Gharial',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (252,0,77,'Aynu-kaysey',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (253,0,77,'Killer_Jonny',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (254,0,77,'Ignamoth',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (255,2254,77,'King_Arthro',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (255,2254,77,'King_Arthro',0,128,0,35000,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (256,1491,77,'Genbu',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (257,3540,77,'Seiryu',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (258,3816,77,'Suzaku',0,128,0,0,0,0,0,0);
@@ -10837,7 +10837,7 @@ INSERT INTO `mob_groups` VALUES (30,2988,157,'Ophion',0,32,787,2100,0,33,38,0);
 INSERT INTO `mob_groups` VALUES (31,3359,157,'Rhoikos',0,32,787,0,0,33,38,0);
 INSERT INTO `mob_groups` VALUES (32,2124,157,'Jagd_Doll',300,0,192,0,0,33,34,0);
 INSERT INTO `mob_groups` VALUES (33,2956,157,'Ogygos',0,32,1844,0,0,33,38,0);
-INSERT INTO `mob_groups` VALUES (34,1502,157,'Gerwitzs_Scythe',0,128,0,8000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (34,1502,157,'Gerwitzs_Scythe',0,128,0,6000,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (35,3514,157,'Scythe_Victim_war',0,128,0,2500,0,58,58,0);
 INSERT INTO `mob_groups` VALUES (36,6564,157,'Scythe_Victim_blm',0,128,0,2500,0,58,58,0);
 
