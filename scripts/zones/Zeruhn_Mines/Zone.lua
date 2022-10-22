@@ -18,12 +18,6 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if prevZone == xi.zone.PALBOROUGH_MINES then
         cs = 150
-
-        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED then
-            if not player:hasItem(16607) then
-                cs = 131
-            end
-        end
     elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-270.707, 14.159, -20.268, 0)
     end
