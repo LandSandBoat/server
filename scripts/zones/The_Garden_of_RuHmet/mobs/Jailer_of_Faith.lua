@@ -61,17 +61,30 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("PhysicalDamage", 0)
-    mob:setLocalVar("MagicalDamage", 0)
-    mob:setLocalVar("RangedDamage", 0)
-    mob:setLocalVar("BreathDamage", 0)
+
+    -- Observed to use manafont at 80/50/25% HP
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {
                 id = xi.jsa.MANAFONT,
-                endCode = function(mobArg) -- Uses Manafont and casts Quake II -- only casts this during manafont.
-                    mobArg:castSpell(211) -- quake II
+                hpp = 80,
+                endCode = function(mobArg)
+                    mobArg:castSpell(xi.magic.spell.QUAKE_II, mobArg:getTarget())
+                end,
+            },
+            {
+                id = xi.jsa.MANAFONT,
+                hpp = 50,
+                endCode = function(mobArg)
+                    mobArg:castSpell(xi.magic.spell.QUAKE_II, mobArg:getTarget())
+                end,
+            },
+            {
+                id = xi.jsa.MANAFONT,
+                hpp = 25,
+                endCode = function(mobArg)
+                    mobArg:castSpell(xi.magic.spell.QUAKE_II, mobArg:getTarget())
                 end,
             },
         },
@@ -97,17 +110,8 @@ entity.onMobFight = function(mob)
 end
 
 entity.onMobMagicPrepare = function(mob, target, spell)
-    local rnd = math.random()
-    if rnd < 0.5 and mob:hasStatusEffect(xi.effect.MANAFONT) == true then -- quake II replaces existing earth damage spells during manafont
-        return xi.magic.spell.QUAKE_II -- quake II casted exclusively while Manafont is active.
-    elseif rnd < 0.25 then
-        return xi.magic.spell.STONE_IV
-    elseif rnd < 0.5 then
-        return xi.magic.spell.STONEGA_III
-    elseif rnd < 0.75 then
-        return xi.magic.spell.BREAKGA
-    else
-        return xi.magic.spell.SLOWGA
+    if mob:hasStatusEffect(xi.effect.MANAFONT) and math.random() < 0.5 then
+        return xi.magic.spell.QUAKE_II
     end
 end
 
