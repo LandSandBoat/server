@@ -168,6 +168,8 @@ def fetch_credentials():
         print(colorama.Fore.RED + 'Error fetching credentials.\nCheck ../settings/network.lua.')
         return False
 
+    return True
+
 def fetch_versions():
     global current_client, release_version, release_client
     current_client = release_version = release_client = None
@@ -365,6 +367,8 @@ def connect():
         else:
             print(colorama.Fore.RED + err)
         return False
+
+    return True
 
 def close():
     if db:

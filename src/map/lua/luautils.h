@@ -236,7 +236,9 @@ namespace luautils
     int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);                                                                                     // triggers when item is used
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem);                                                                                                          // trigger when an item is dropped
-    int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
+    int32 OnItemEquip(CBaseEntity* PUser, CItem* PItem);
+    int32 OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
+    int32 CheckForGearSet(CBaseEntity* PTarget); // check for gear sets
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
@@ -260,7 +262,9 @@ namespace luautils
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
 
-    int32 OnPath(CBaseEntity* PEntity); // triggers when a patrol npc finishes its pathfind
+    int32 OnPath(CBaseEntity* PEntity);         // triggers when an entity is on a pathfind point
+    int32 OnPathPoint(CBaseEntity* PEntity);    // triggers when an entity stops on a path point and has finished waiting at it
+    int32 OnPathComplete(CBaseEntity* PEntity); // triggers when an entity finishes its pathing
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone);
     int32 OnBattlefieldInitialise(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot

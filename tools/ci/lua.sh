@@ -319,6 +319,21 @@ def check_tables_in_file(name):
                 print("")
                 errcount += 1
 
+            # ,[^ \n] : Any comma that does not have space or newline following
+            for match in re.finditer(",[^ \n]", line):
+                print(f"Multiple parameters used without an appropriate following space or newline: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # .*\;$ : Any line that ends with a semi-colon
+            for match in re.finditer(".*\;$", line):
+                print(f"Semicolon detected at end of line: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+
         # If you want to modify the files during the checks, write your changed lines to the appropriate
         # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
         #

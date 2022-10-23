@@ -18,7 +18,7 @@ itemObject.onItemUse = function(target)
 
     if not target:hasStatusEffect(typeEffect) and (target:getID() == ID.mob.ATORI_TUTORI_QM[1] or
     target:getID() == ID.mob.ATORI_TUTORI_QM[2] or target:getID() == ID.mob.ATORI_TUTORI_QM[3]) then
-        target:addStatusEffect(typeEffect,1,3,duration)
+        target:addStatusEffect(typeEffect, 1, 3, duration)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

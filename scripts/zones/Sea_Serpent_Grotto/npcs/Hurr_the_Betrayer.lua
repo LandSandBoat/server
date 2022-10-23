@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         if npcUtil.tradeHas(trade, { { xi.items.MYTHRIL_BEASTCOIN, 3 }, { xi.items.NORG_SHELL, 1 } }) then
             player:startEvent(107)
         end
-    elseif (player:getCharVar("SahaginKeyItems") == 2) then -- If player was told to use a Gold Beastcoin
+    elseif player:getCharVar("SahaginKeyItems") == 2 then -- If player was told to use a Gold Beastcoin
         if npcUtil.tradeHas(trade, { xi.items.GOLD_BEASTCOIN, xi.items.NORG_SHELL }) then
             player:startEvent(107)
         end
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(105)
         player:setCharVar("SahaginKeyItems", 1)
     elseif player:getCharVar("SahaginKeyProgress") == 3 and player:getCharVar("SahaginKeyItems") == 0 and not player:hasItem(xi.items.SAHAGIN_KEY) then
-        if math.random(2) == 1 then
+        if math.random(1, 2) == 1 then
             player:startEvent(105) -- Requires 3 Mythril Beastcoins and a Norg Shell
             player:setCharVar("SahaginKeyItems", 1)
         else

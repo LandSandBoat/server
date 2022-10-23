@@ -281,7 +281,7 @@ function hasMawActivated(player, portal)
     local mawActivated = player:getNationTeleport(MAW)
     local bit = {}
 
-    for i = 8,0,-1 do
+    for i = 8, 0, -1 do
         local twop = 2^i
 
         if (mawActivated >= twop) then

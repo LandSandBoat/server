@@ -31,7 +31,7 @@ quest.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Kohlo-Lakolo'] = quest:progressEvent(368),-- Quest starting event.
+            ['Kohlo-Lakolo'] = quest:progressEvent(368), -- Quest starting event.
 
             onEventFinish =
             {

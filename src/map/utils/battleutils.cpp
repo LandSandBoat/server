@@ -750,20 +750,12 @@ namespace battleutils
     int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
     {
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
+        int32   damage       = Action->spikesParam;
 
-        int32 damage = Action->spikesParam;
-
-        // int16 intStat = PDefender->INT();
-        // int16 mattStat = PDefender->getMod(Mod::MATT);
-
-        switch (static_cast<SPIKES>(Action->spikesEffect))
+        if (static_cast<SPIKES>(Action->spikesEffect) == SPIKES::SPIKE_DREAD)
         {
-            case SPIKE_DREAD:
-                // drain same as damage taken
-                damage = damageTaken;
-                break;
-            default:
-                break;
+            // drain same as damage taken
+            damage = damageTaken;
         }
 
         damage = MagicDmgTaken(PAttacker, damage, spikeElement); // apply MDT/MDT2/DT, liement to whoever is taking damage
@@ -2109,26 +2101,31 @@ namespace battleutils
                     {
                         // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
                         CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
-                        float          spikesBonus    = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
-                        int16          effectPower    = (int16)(reprisalEffect->GetPower() * spikesBonus);
-                        int32          blockedDamage  = (damage * (100 - absorb)) / 100;
-                        int32          spikesDamage   = 0;
 
-                        if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
+                        if (reprisalEffect != nullptr)
                         {
-                            blockedDamage = (baseDamage * (100 - absorb)) / 100;
+                            float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
+                            int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
+                            int32 blockedDamage = (damage * (100 - absorb)) / 100;
+                            int32 spikesDamage  = 0;
+
+                            if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
+                            {
+                                blockedDamage = (baseDamage * (100 - absorb)) / 100;
+                            }
+
+                            spikesDamage = blockedDamage * (effectPower / 100);
+
+                            // Set Reprisal spike damage
+                            PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
                         }
-
-                        spikesDamage = blockedDamage * (effectPower / 100);
-
-                        // Set Reprisal spike damage
-                        PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
                     }
                 }
 
                 damage = (damage * absorb) / 100;
             }
         }
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -2532,7 +2529,6 @@ namespace battleutils
             {
                 offsetAccuracy -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
-            // ShowDebug("Accuracy mod after direction checks: %d", offsetAccuracy);
 
             // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
             // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
@@ -2679,7 +2675,6 @@ namespace battleutils
                 }
             }
 
-            // ShowDebug("Crit rate mod before Innin/Yonin: %d", crithitrate);
             if (PDefender->objtype == TYPE_PC)
             {
                 critHitRate -= ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_ENEMY_CRIT_RATE, (CCharEntity*)PDefender);
@@ -2695,8 +2690,6 @@ namespace battleutils
             {
                 critHitRate -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
-
-            // ShowDebug("Crit rate mod after Innin/Yonin: %d", crithitrate);
 
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
@@ -3775,7 +3768,6 @@ namespace battleutils
             if (skillchain != SC_NONE)
             {
                 PSCEffect->SetStartTime(server_clock::now());
-                //   ShowDebug("duration: %d", PSCEffect->GetDuration());
                 PSCEffect->SetDuration(PSCEffect->GetDuration() - 1000);
                 PSCEffect->SetTier(GetSkillchainTier(skillchain));
                 PSCEffect->SetPower(skillchain);
@@ -3948,6 +3940,12 @@ namespace battleutils
         }
 
         CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+
+        if (PEffect == nullptr)
+        {
+            ShowWarning("battleutils::TakeSkillchainDamage() - PEffect was null.");
+            return 0;
+        }
 
         // Determine the skill chain level and elemental resistance.
         SKILLCHAIN_ELEMENT skillchain = (SKILLCHAIN_ELEMENT)PEffect->GetPower();
@@ -4398,8 +4396,6 @@ namespace battleutils
             return;
         }
 
-        // CBaseEntity* PMob = CharHateGiver->GetEntity(mobID, TYPE_MOB);
-
         PMob->PEnmityContainer->LowerEnmityByPercent(PHateGiver, percentToTransfer, PHateReceiver);
     }
 
@@ -4473,8 +4469,7 @@ namespace battleutils
             if (infront(m_PChar->loc.p, PDefender->loc.p, 64))
             {
                 uint8 meritCount = m_PChar->PMeritPoints->GetMeritValue(MERIT_OVERWHELM, m_PChar);
-                // ShowDebug("Merits: %u", meritCount);
-                float tmpDamage = static_cast<float>(damage);
+                float tmpDamage  = static_cast<float>(damage);
 
                 switch (meritCount)
                 {
@@ -4948,9 +4943,6 @@ namespace battleutils
         uint8 charmerLvl = PCharmer->GetMLevel();
         uint8 targetLvl  = PTarget->GetMLevel();
 
-        // printf("Charmer = %s, Lvl. %u\n", PCharmer->name.c_str(), charmerLvl);
-        // printf("Target = %s, Lvl. %u\n", PTarget->name.c_str(), targetLvl);
-
         EMobDifficulty mobCheck    = charutils::CheckMob(charmerLvl, targetLvl);
         float          charmChance = 0.f;
 
@@ -5270,7 +5262,6 @@ namespace battleutils
             }
         }
 
-        // ShowDebug(CL_CYAN"MagicDmgTaken: Element = %d", element);
         return damage;
     }
 
@@ -5414,7 +5405,6 @@ namespace battleutils
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AFFLATUS_MISERY) && damage > 0)
         {
             PDefender->setModifier(Mod::AFFLATUS_MISERY, damage);
-            // ShowDebug("Misery power: %d", damage);
         }
     }
 
@@ -5456,8 +5446,6 @@ namespace battleutils
             {
                 reductionPercent = 25;
             }
-
-            // ShowDebug(CL_CYAN"HandleTranquilHeart: Tranquil Heart is Active! Reduction Percent = %f", reductionPercent);
 
             reductionPercent = reductionPercent / 100.f;
         }
@@ -5559,9 +5547,6 @@ namespace battleutils
             // We calcluate the Damage Threshold off of Max HP & the Threshold Percentage
             float damageThreshold = maxHp * threshold;
 
-            // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Severe Damage Occurred! Damage = %d, Threshold = %f, Damage Threshold = %f", damage,
-            // threshold, damageThreshold);
-
             // Severe Damage is when the Attack's Damage Exceeds a Certain Threshold
             if (damage > damageThreshold)
             {
@@ -5573,12 +5558,8 @@ namespace battleutils
                 {
                     PDefender->StatusEffectContainer->DelStatusEffect(effect);
                 }
-
-                // ShowDebug(CL_CYAN"HandleSevereDamageEffect: Reduciing Severe Damage!");
             }
         }
-
-        // ShowDebug(CL_CYAN"HandleSevereDamageEffect: NOT Reducing Severe Damage!");
 
         return damage;
     }

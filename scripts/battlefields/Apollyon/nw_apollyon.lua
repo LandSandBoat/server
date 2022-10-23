@@ -100,8 +100,8 @@ content.paths =
 
     [ID.NW_APOLLYON.mob.ZLATOROG] =
     {
-        { x = -384.0, y = 0.0, z = 268.0, wait = 5000 },
-        { x = -336.0, y = -0.5,z =  320.0, wait = 5000 },
+        { x = -384.0, y = 0.0,  z = 268.0, wait = 5000 },
+        { x = -336.0, y = -0.5, z = 320.0, wait = 5000 },
     },
 
     [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[1]] =
@@ -124,8 +124,8 @@ content.paths =
 
     [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[4]] =
     {
-        { x = -334.0, y = 0.0, z = 233.0, wait = 5000 },
-        { x = -345.0, y = -1.0,z =  246.0, wait = 5000 },
+        { x = -334.0, y = 0.0,  z = 233.0, wait = 5000 },
+        { x = -345.0, y = -1.0, z = 246.0, wait = 5000 },
     },
 
     [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[5]] =

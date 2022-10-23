@@ -209,15 +209,15 @@ xi.trust.hasPermit = function(player)
 end
 
 xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
-    local itemId = trade:getItemId(0)
-    local subId = trade:getItemSubId(0)
+    local itemId   = trade:getItemId(0)
+    local subId    = trade:getItemSubId(0)
     local isCipher = itemId >= 10112 and itemId <= 10193
 
     -- subId is a smallInt in the database (16 bits).
     -- The bottom 12 bits of the subId are the spellId taught by the ciper
     -- The top 4 bits of the subId are for the flags to be given to the csid
     local spellId = bit.band(subId, 0x0FFF)
-    local flags = bit.rshift(bit.band(subId, 0xF000), 12)
+    local flags   = bit.rshift(bit.band(subId, 0xF000), 12)
 
     -- To generate this packed subId for storage in the db:
     -- local encoded = spellId + bit.lshift(flags, 12)
@@ -303,9 +303,10 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     end
 
     -- Check party for trusts
-    local num_pt = 0
+    local num_pt     = 0
     local num_trusts = 0
-    local party = caster:getPartyWithTrusts()
+    local party      = caster:getPartyWithTrusts()
+
     for _, member in pairs(party) do
         if member:getObjType() == xi.objType.TRUST then
             -- Check for same trust
@@ -376,7 +377,7 @@ end
 -- Example: Shantotto II summon message ID: 11201
 -- page_offset: (11201 - 1) / 100 = 112
 xi.trust.message = function(mob, message_offset)
-    local poolID = mob:getPool()
+    local poolID      = mob:getPool()
     local page_offset = poolIDToMessagePageOffset[poolID]
 
     if page_offset == nil then
@@ -397,7 +398,8 @@ xi.trust.teamworkMessage = function(mob, teamwork_messages)
     local messages = {}
 
     local master = mob:getMaster()
-    local party = master:getPartyWithTrusts()
+    local party  = master:getPartyWithTrusts()
+
     for _, member in pairs(party) do
         if member:getObjType() == xi.objType.TRUST then
             for id, message in pairs(teamwork_messages) do
@@ -409,7 +411,7 @@ xi.trust.teamworkMessage = function(mob, teamwork_messages)
     end
 
     if #messages > 0 then
-        xi.trust.message(mob, messages[math.random(#messages)])
+        xi.trust.message(mob, messages[math.random(1, #messages)])
     else
         -- Defaults to regular spawn message
         xi.trust.message(mob, xi.trust.message_offset.SPAWN)
@@ -418,13 +420,13 @@ end
 
 -- For debugging and lining up teamwork messages
 xi.trust.dumpMessages = function(mob, pageOffset)
-    for i=0, 20 do
+    for i = 0, 20 do
         xi.trust.message(mob, pageOffset, i)
     end
 end
 
 xi.trust.dumpMessagePages = function(mob)
-    for i=0, 120 do
+    for i = 0, 120 do
         xi.trust.message(mob, i)
     end
 end

@@ -22,7 +22,7 @@ end
 
 itemObject.onItemUse = function(target, player)
     target:delStatusEffectSilent(xi.effect.INTIMIDATE)
-    target:addStatusEffect(xi.effect.INTIMIDATE, 100, 0, math.random(25,32))
+    target:addStatusEffect(xi.effect.INTIMIDATE, 100, 0, math.random(25, 32))
 end
 
 return itemObject

@@ -107,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 10011 and option == 2 then
         if guildMember == 1 then
-            player:setCharVar("ClothcraftExpertQuest",1)
+            player:setCharVar("ClothcraftExpertQuest", 1)
         end
     elseif csid == 10011 and option == 1 then
         if player:getFreeSlotsCount() == 0 then

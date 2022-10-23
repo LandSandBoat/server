@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
-    mob:addMod(xi.mod.DEFP,35)
+    mob:addMod(xi.mod.DEFP, 35)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

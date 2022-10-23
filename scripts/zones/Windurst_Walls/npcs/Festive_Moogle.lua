@@ -42,7 +42,7 @@ local function getFestiveItems(player)
     return festiveItemsAvailable
 end
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     --TODO: trade of pells for prize
 end
 

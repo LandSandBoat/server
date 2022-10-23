@@ -13,7 +13,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:hasKeyItem(xi.ki.TRAINERS_WHISTLE) and
         trade:getSlotCount() == 1 and
@@ -38,7 +38,7 @@ entity.onTrade = function(player,npc,trade)
     end
 end
 
-entity.onTrigger = function(player,npc)
+entity.onTrigger = function(player, npc)
     local fsaQuest = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
 
@@ -62,7 +62,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player,csid,option)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 10223 or csid == 10224) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
         player:setCharVar("[QUEST]FullSpeedAhead", 1) -- Flag to start minigame

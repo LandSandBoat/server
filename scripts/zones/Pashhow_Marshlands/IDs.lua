@@ -105,12 +105,12 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
     {
         [17224168] = -- Blobdingnag
         {
-            17224174,-- Septic Boils
-            17224173,-- Septic Boils
-            17224172,-- Septic Boils
-            17224171,-- Septic Boils
-            17224170,-- Septic Boils
-            17224169,-- Septic Boils
+            17224174, -- Septic Boils
+            17224173, -- Septic Boils
+            17224172, -- Septic Boils
+            17224171, -- Septic Boils
+            17224170, -- Septic Boils
+            17224169, -- Septic Boils
         },
     },
 

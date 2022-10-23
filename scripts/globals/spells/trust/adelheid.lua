@@ -16,7 +16,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     -- Records of Eminence: Alter Ego: Adelheid
     if caster:getEminenceProgress(936) then
         xi.roe.onRecordTrigger(caster, 936)
@@ -52,7 +51,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "ADELHEID_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3469 then -- Twirling Dervish
         -- You may want to cover your ears!
-            if math.random(100) <= 33 then
+            if math.random(1, 100) <= 33 then
                 xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
             end
         end

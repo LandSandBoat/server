@@ -49,7 +49,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 
 #include "battlefield.h"
-#include "utils/battlefieldutils.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
 #include "utils/moduleutils.h"
@@ -531,8 +530,8 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (MOB == PChar->SpawnMOBList.end())
             {
                 PChar->SpawnMOBList.insert(MOB, SpawnIDList_t::value_type(PCurrentMob->id, PCurrentMob));
+                PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
-            PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
 
             // Check to skip aggro routine
             if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
@@ -576,8 +575,8 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
             if (PET == PChar->SpawnPETList.end())
             {
                 PChar->SpawnPETList.insert(PET, SpawnIDList_t::value_type(PCurrentPet->id, PCurrentPet));
+                PChar->updateEntityPacket(PCurrentPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
-            PChar->updateEntityPacket(PCurrentPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
         }
         // Pet not visible, remove it from spawn list if it's in there
         else if (PET != PChar->SpawnPETList.end())
@@ -607,8 +606,8 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
                     if (NPC == PChar->SpawnNPCList.end())
                     {
                         PChar->SpawnNPCList.insert(NPC, SpawnIDList_t::value_type(PCurrentNpc->id, PCurrentNpc));
+                        PChar->updateEntityPacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     }
-                    PChar->updateEntityPacket(PCurrentNpc, ENTITY_SPAWN, UPDATE_ALL_MOB);
                 }
                 // npc not visible, remove it from spawn list if it's in there
                 else if (NPC != PChar->SpawnNPCList.end())
@@ -641,9 +640,9 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                     if (PMaster)
                     {
                         PChar->pushPacket(new CEntitySetNamePacket(PCurrentTrust));
+                        PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     }
                 }
-                PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
             // trust not visible, remove it from spawn list if it's in there
             else if (SpawnTrustItr != PChar->SpawnTRUSTList.end())
@@ -1311,7 +1310,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     luautils::OnZoneTick(this->m_zone);
 
-    EntityList_t::iterator it = m_mobList.begin();
+    std::vector<CMobEntity*> aggroableMobs;
+    EntityList_t::iterator   it = m_mobList.begin();
     while (it != m_mobList.end())
     {
         CMobEntity* PMob = dynamic_cast<CMobEntity*>(it->second);
@@ -1365,7 +1365,30 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             delete PMob;
             continue;
         }
+
+        if (PMob->allegiance == ALLEGIANCE_TYPE::PLAYER && PMob->m_isAggroable)
+        {
+            aggroableMobs.push_back(PMob);
+        }
+
         it++;
+    }
+
+    // Check to see if any aggroable mobs should be aggroed by other mobs
+    for (CMobEntity* PMob : aggroableMobs)
+    {
+        for (auto PMobCurrentIter : m_mobList)
+        {
+            CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(PMobCurrentIter.second);
+            if (PCurrentMob != nullptr && PCurrentMob->isAlive() && PMob->allegiance != PCurrentMob->allegiance && distance(PMob->loc.p, PCurrentMob->loc.p) <= 50)
+            {
+                CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
+                if (PController != nullptr && PController->CanAggroTarget(PMob))
+                {
+                    PCurrentMob->PEnmityContainer->AddBaseEnmity(PMob);
+                }
+            }
+        }
     }
 
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)

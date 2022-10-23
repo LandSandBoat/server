@@ -226,13 +226,19 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
-
-    if cratio > 3 - levelCorrection then
-        cratio = 3 - levelCorrection
+    -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
+    local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
+    local cRatioCap = 0
+    if weaponType == xi.skill.MARKSMANSHIP then
+        cRatioCap = 3.5
+    else
+        cRatioCap = 3.25
     end
 
     if cratio < 0 then
         cratio = 0
+    elseif cratio > cRatioCap then
+        cratio = cRatioCap
     end
 
     -- max
@@ -299,13 +305,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
     local hitdiff = 0
     local hitrate = 75
 
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = ((-1) * (eva - acc)) / 2
-    end
+    hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
 
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
@@ -424,6 +424,37 @@ local modParameters =
     [xi.mod.WS_CHR_BONUS] = 'chr_wsc',
 }
 
+local function calculateWsMods(attacker, calcParams, wsParams)
+    local wsMods = calcParams.fSTR +
+        (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
+         attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
+         attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
+         attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) * calcParams.alpha
+    return wsMods
+end
+
+local function calculateDEXvsAGICritRate(attacker, target)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local nativecrit = 0
+    local dexVsAgi = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    if dexVsAgi < 7 then
+        nativecrit = 0
+    elseif dexVsAgi < 14 then
+        nativecrit = 0.01
+    elseif dexVsAgi < 20 then
+        nativecrit = 0.02
+    elseif dexVsAgi < 30 then
+        nativecrit = 0.03
+    elseif dexVsAgi < 40 then
+        nativecrit = 0.04
+    elseif dexVsAgi <= 50 then
+        nativecrit = (dexVsAgi - 35) / 100
+    else
+        nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
+    end
+    return nativecrit
+end
+
 -- Calculates the raw damage for a weaponskill, used by both doPhysicalWeaponskill and doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
@@ -460,18 +491,14 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         end
     end
 
-    local wsMods = calcParams.fSTR +
-        (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-         attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) * calcParams.alpha
+    local wsMods = calculateWsMods(attacker, calcParams, wsParams)
     local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
 
     -- Calculate fTP multiplier
     local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
 
     -- Calculate critrates
-    local critrate = 0
+    local critrate = calculateDEXvsAGICritRate(attacker, target)
 
     if wsParams.canCrit then -- Work out critical hit ratios
         local nativecrit = 0
@@ -480,10 +507,6 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
             critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
         end
-
-        -- Add on native crit hit rate (guesstimated, it actually follows an exponential curve)
-        nativecrit = (attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
-        nativecrit = utils.clamp(nativecrit, 0.05, 0.2) -- caps only apply to base rate, not merits and mods
 
         local fencerBonusVal = calcParams.fencerBonus or 0
         nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100

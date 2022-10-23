@@ -1618,7 +1618,9 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     if (flags & PATHFLAG_PATROL)
     {
         // Grab points from array and store in points array
-        float x, y, z = -1;
+        float x = m_PBaseEntity->loc.p.x;
+        float y = m_PBaseEntity->loc.p.y;
+        float z = m_PBaseEntity->loc.p.z;
         for (std::size_t i = 1; i <= pointsTable.size(); ++i)
         {
             sol::table  pointData = pointsTable[i];
@@ -3640,7 +3642,10 @@ uint8 CLuaBaseEntity::getWornUses(uint16 itemID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
-        return PItem->m_extra[0];
+        if (PItem != nullptr)
+        {
+            return PItem->m_extra[0];
+        }
     }
 
     return 0;
@@ -3661,6 +3666,12 @@ uint8 CLuaBaseEntity::incrementItemWear(uint16 itemID)
     if (slotID != ERROR_SLOTID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+
+        if (PItem == nullptr)
+        {
+            return 0;
+        }
+
         if (PItem->m_extra[0] == UINT8_MAX)
         {
             return PItem->m_extra[0];
@@ -13242,6 +13253,32 @@ bool CLuaBaseEntity::getUntargetable()
 }
 
 /************************************************************************
+ *  Function: setIsAggroable()
+ *  Purpose : Sets is a mob can be aggroed by other mobs. Requires it to be in the player allegiance.
+ *  Example : target:isAggroable(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setIsAggroable(bool isAggroable)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    static_cast<CMobEntity*>(m_PBaseEntity)->m_isAggroable = isAggroable;
+}
+
+/************************************************************************
+ *  Function: IsAggroable()
+ *  Purpose : Returns true if a Mob can be aggroed
+ *  Example : if target:isAggroable() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isAggroable()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    return static_cast<CMobEntity*>(m_PBaseEntity)->m_isAggroable;
+}
+
+/************************************************************************
  *  Function: setDelay()
  *  Purpose : Override default delay settings for a Mob
  *  Example : mob:setDelay(2400)
@@ -15221,6 +15258,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setUnkillable", CLuaBaseEntity::setUnkillable);
     SOL_REGISTER("setUntargetable", CLuaBaseEntity::setUntargetable);
     SOL_REGISTER("getUntargetable", CLuaBaseEntity::getUntargetable);
+    SOL_REGISTER("setIsAggroable", CLuaBaseEntity::setIsAggroable);
+    SOL_REGISTER("isAggroable", CLuaBaseEntity::isAggroable);
 
     SOL_REGISTER("setDelay", CLuaBaseEntity::setDelay);
     SOL_REGISTER("setDamage", CLuaBaseEntity::setDamage);

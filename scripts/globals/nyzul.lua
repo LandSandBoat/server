@@ -605,7 +605,7 @@ xi.nyzul.tempBoxPickItems = function(npc)
     end
 
     if item2_random > 4 and item3_random > 8 then
-        random = math.random(1,#tempBoxItems)
+        random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
         npc:setLocalVar("itemID_3", item.itemID)
@@ -871,7 +871,7 @@ xi.nyzul.removePathos = function(instance)
                     end
                 end
 
-                instance:setLocalVar("floorPathos",utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
+                instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
             end
         end
     end

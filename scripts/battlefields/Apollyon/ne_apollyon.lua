@@ -42,8 +42,8 @@ content.paths =
 {
     [ID.NE_APOLLYON.mob.GOOBBUE_HARVESTER] =
     {
-        { x = 425.0, y = 0.0,z = 22.0, wait = 1000 },
-        { x = 475.0, y = 0.0,z = 22.0, wait = 1000 },
+        { x = 425.0, y = 0.0, z = 22.0, wait = 1000 },
+        { x = 475.0, y = 0.0, z = 22.0, wait = 1000 },
     },
 
     [ID.NE_APOLLYON.mob.TROGLODYTE_DHALMEL[1]] =

@@ -907,7 +907,7 @@ function npcUtil.disappearCrate(crate)
     if crate:isNPC() then
         crate:entityAnimationPacket("kesu")
         crate:timer(3000, function(npc)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
             npc:setStatus(xi.status.DISAPPEAR)
         end)
     else

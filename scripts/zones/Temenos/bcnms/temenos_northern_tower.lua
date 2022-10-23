@@ -11,7 +11,7 @@ local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
-    battlefield:setLocalVar("randomF1", math.random(2,5))
+    battlefield:setLocalVar("randomF1", math.random(2, 5))
     SetServerVariable("[Temenos_Northern_Tower]Time", battlefield:getTimeLimit()/60)
     xi.limbus.handleDoors(battlefield)
     xi.limbus.setupArmouryCrates(battlefield:getID())
