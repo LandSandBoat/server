@@ -101,7 +101,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:addHP(final)
 
         target:wakeUp()
-        caster:updateEnmityFromCure(target, 65535)
+        caster:updateEnmityFromCure(target, 0, true)
     else
         if (target:isUndead()) then -- e.g. PCs healing skeles for damage (?)
             spell:setMsg(xi.msg.basic.MAGIC_DMG)
