@@ -130,7 +130,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     -- bonuses cap at level diff of 38 based on this testing:
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- If there are penalties they seem to be applied differently similarly to monsters.
-    local baseHitRate = getHitRate(avatar, target, 0, xi.summon.getSummoningSkillOverCap(avatar))
+    local baseHitRate = xi.weaponskills.getHitRate(avatar, target, 0, xi.summon.getSummoningSkillOverCap(avatar))
     -- First hit gets a +100 ACC bonus which translates to +50 hit
     local firstHitAccBonus = 0.5
 

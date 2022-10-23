@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 600
-    power = getCurePower(caster)
+    power = xi.magic.getCurePower(caster)
     if (power < 210) then
         divisor = 1.5
         constant = 600

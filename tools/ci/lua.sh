@@ -80,25 +80,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    doAutoPhysicalWeaponskill
-    doAutoRangedWeaponskill
-    doPhysicalWeaponskill
-    doRangedWeaponskill
-    doMagicWeaponskill
-    doesElementMatchWeaponskill
-    applyResistanceAddEffect
-    takeWeaponskillDamage
-
-    fTP
-    fSTR
-    fSTR2
-    calculateRawWSDmg
-    calculatedIgnoredDef
-    cMeleeRatio
-    generatePdif
-    getMeleeDmg
-    handleWSGorgetBelt
-
     getRecommendedAssaultLevel
 
     PATHFLAG_WALLHACK
@@ -122,53 +103,18 @@ global_objects=(
 
     salvageUtil
 
-    addBonuses
-    addBonusesAbility
-    applyBarspell
-    applyBarstatus
-    applyResistance
-    applyResistanceAbility
-    applyResistanceEffect
-    adjustForTarget
-    calculateDuration
-    calculateDurationForLvl
-    calculateMagicDamage
-    calculatePotency
-    canOverwrite
-    dayWeatherBonus
-    doBoostGain
-    doDivineBanishNuke
-    doDivineNuke
-    doElementalNuke
-    doEnspell
-    doNinjutsuNuke
-    finalMagicAdjustments
-    finalMagicNonSpellAdjustments
-    getBaseCure
-    getCurePower
-    getCurePowerOld
-    getCureFinal
-    getBaseCureOld
-    getEffectResistance
-    getElementalDamageReduction
-    getElementalDebuffDOT
     getFlourishAnimation
-    getHelixDuration
-    getHitRate
-    getMagicHitRate
-    getMagicResist
     getStepAnimation
-    getElementalDebuffStatDownFromDOT
-    handleAfflatusMisery
-    handleNinjutsuDebuff
-    handleThrenody
     hasSleepEffects
-    isValidHealTarget
     skillchainCount
     takeAbilityDamage
 
+    doAutoRangedWeaponskill
+    doAutoPhysicalWeaponskill
+
     FormMagicBurst
     MobFormMagicBurst
+    doesElementMatchWeaponskill
 
     AbilityFinalAdjustments
 

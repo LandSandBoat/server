@@ -187,7 +187,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     }
 
     local calcParams = {}
-    calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
+    calcParams.weaponDamage = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.attackInfo = attack
     calcParams.fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
     calcParams.cratio = cratio
