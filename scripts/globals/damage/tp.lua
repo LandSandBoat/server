@@ -31,9 +31,10 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
         modifiedDelay = (delay * (100 - attacker:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
     elseif attacker:isUsingH2H() then
 
-        if attacker:getObjType() == xi.objType.PC then             -- handle h2h with > 1 swing only on PC
-            if (attacker:getEquippedItem(xi.slot.SUB) ~= nil or    -- equipped shield = one swing
-                attacker:getSkillRank(xi.skill.HAND_TO_HAND) == 0) -- zero h2h rank skill = one swing
+        if attacker:getObjType() == xi.objType.PC then            -- handle h2h with > 1 swing only on PC
+            if
+                attacker:getEquippedItem(xi.slot.SUB) ~= nil or   -- equipped shield = one swing
+                attacker:getSkillRank(xi.skill.HAND_TO_HAND) == 0 -- zero h2h rank skill = one swing
             then
                 modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)), 96) -- min delay of 96 total, -- https://www.bg-wiki.com/ffxi/Attack_Speed
                 canZanshin = true -- Zanshin can proc on an "unarmed" swing                  -- https://www.bg-wiki.com/ffxi/Zanshin

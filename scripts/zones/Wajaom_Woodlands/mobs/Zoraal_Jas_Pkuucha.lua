@@ -27,11 +27,11 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if (
+    if
         mob:getHPP() <= mob:getLocalVar("whenToPopZoraal") and
         not GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned() and
         mob:getLocalVar("hasPoppedZoraal") == 0
-    ) then
+    then
         GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):setSpawn(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
         SpawnMob(ID.mob.PERCIPIENT_ZORAAL_JA):updateEnmity(target)
         mob:setHP(mob:getMaxHP())

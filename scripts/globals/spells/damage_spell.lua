@@ -252,7 +252,8 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
         end
 
     -- Divine magic and Non-Player Elemental magic. TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
-    elseif skillType == xi.skill.DIVINE_MAGIC or
+    elseif
+        skillType == xi.skill.DIVINE_MAGIC or
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
     then
         local spellMultiplier = pTable[spellId][mNPC] -- M

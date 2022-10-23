@@ -276,18 +276,20 @@ xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     local zoneid = player:getZoneID()
     local digsite = getAssignedDigSite(player)
 
-    if npcUtil.tradeHasExactly(trade, 605)
-        and player:getCharVar(zoneData[zoneid].statusvar) == QUEST_COMPLETED
-        and npc:getID() == digsiteids[digsite] then
-            --[[ Event 105 needs args to spawn and animate a treasure chest
-                 Example args from retail capture: 105 123 450762 1745 201805 7 723 490292 4095
-                 An arg in the 5th parameter will spawn and animate a chest somewhere in the zone
-                    based on some internal list in the game files. For example, an arg of 7, as
-                    in the retail capture above, will spawn and animate a chest at Yuhtunga Jungle
-                    qm10. Chests will spawn at a static location regardless of whether or not
-                    coordinates are passed in, and will always be rotated to face the player.
-            ]]--
-            player:startEvent(105, zoneid, 0, 0, 0, digsite - 1)
+    if
+        npcUtil.tradeHasExactly(trade, 605) and
+        player:getCharVar(zoneData[zoneid].statusvar) == QUEST_COMPLETED and
+        npc:getID() == digsiteids[digsite]
+    then
+        --[[ Event 105 needs args to spawn and animate a treasure chest
+             Example args from retail capture: 105 123 450762 1745 201805 7 723 490292 4095
+             An arg in the 5th parameter will spawn and animate a chest somewhere in the zone
+             based on some internal list in the game files. For example, an arg of 7, as
+             in the retail capture above, will spawn and animate a chest at Yuhtunga Jungle
+             qm10. Chests will spawn at a static location regardless of whether or not
+             coordinates are passed in, and will always be rotated to face the player.
+        ]]--
+        player:startEvent(105, zoneid, 0, 0, 0, digsite - 1)
     end
 end
 

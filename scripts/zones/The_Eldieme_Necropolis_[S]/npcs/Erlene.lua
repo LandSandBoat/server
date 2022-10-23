@@ -19,11 +19,13 @@ entity.onTrade = function(player, npc, trade)
 
     if (aLittleKnowledge == QUEST_ACCEPTED and aLittleKnowledgeProgress == 1) then
         if (trade:hasItemQty(2550, 12) and trade:getGil() == 0 and trade:getItemCount() == 12) then
-            if( player:getMainJob() == xi.job.BLM or
+            if
+                player:getMainJob() == xi.job.BLM or
                 player:getMainJob() == xi.job.RDM or
                 player:getMainJob() == xi.job.SMN or
-                player:getMainJob() == xi.job.BLU) then
-                player:startEvent(12, 1)
+                player:getMainJob() == xi.job.BLU
+            then
+               player:startEvent(12, 1)
             else
                 player:startEvent(12)
             end
@@ -49,10 +51,12 @@ entity.onTrigger = function(player, npc)
     elseif (aLittleKnowledgeProgress == 1 and aLittleKnowledge == QUEST_ACCEPTED) then
         player:startEvent(11)
     elseif (aLittleKnowledgeProgress == 2 and aLittleKnowledge == QUEST_ACCEPTED) then
-        if (player:hasStatusEffect(xi.effect.MANAFONT) or
+        if
+            player:hasStatusEffect(xi.effect.MANAFONT) or
             player:hasStatusEffect(xi.effect.CHAINSPELL) or
             player:hasStatusEffect(xi.effect.ASTRAL_FLOW) or
-            player:hasStatusEffect(xi.effect.AZURE_LORE)) then
+            player:hasStatusEffect(xi.effect.AZURE_LORE)
+        then
             player:startEvent(14)
         else
             player:startEvent(13)

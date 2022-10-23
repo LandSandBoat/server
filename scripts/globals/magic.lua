@@ -157,7 +157,8 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end,
 
         [xi.job.SCH] = function()
-            if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            if
+                (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
                 (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
             then
                 local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)

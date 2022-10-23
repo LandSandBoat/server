@@ -13,23 +13,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") == 3 then
         player:startEvent(1)
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-        player:getCharVar('ApocalypseNigh') == 2 then
+    elseif
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+        player:getCharVar('ApocalypseNigh') == 2
+    then
         player:startEvent(4)
     else
         player:startEvent(52)
     end
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 52 and option == 1) then
         player:setPos(-419.995, 0, 248.483, 191, 35); -- To The Garden of RuHmet
     elseif csid == 4 then

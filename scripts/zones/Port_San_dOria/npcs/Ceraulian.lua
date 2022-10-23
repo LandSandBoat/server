@@ -13,8 +13,13 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and player:getCharVar("ChasingQuotas_Progress") == 0 and
-        trade:getItemCount() == 1 and trade:hasItemQty(12494, 1) and trade:getGil() == 0) then -- Trading gold hairpin only
+    if
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and
+        player:getCharVar("ChasingQuotas_Progress") == 0 and
+        trade:getItemCount() == 1 and
+        trade:hasItemQty(12494, 1) and
+        trade:getGil() == 0
+    then -- Trading gold hairpin only
             player:tradeComplete()
             player:startEvent(17)
     end

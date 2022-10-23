@@ -38,13 +38,17 @@ entity.onMobFight = function(mob, target)
             --and record the time this phase was started
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
-        elseif (mob:getAnimationSub() == 1 and
-                mob:getBattleTime() - changeTime > 120) then
+        elseif
+            mob:getAnimationSub() == 1 and
+            mob:getBattleTime() - changeTime > 120
+        then
             mob:useMobAbility(1302)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 2 is grounded mode, so check if he should take off
-        elseif (mob:getAnimationSub() == 2 and
-                mob:getBattleTime() - changeTime > 120) then
+        elseif
+            mob:getAnimationSub() == 2 and
+            mob:getBattleTime() - changeTime > 120
+        then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:SetMobSkillAttack(731)

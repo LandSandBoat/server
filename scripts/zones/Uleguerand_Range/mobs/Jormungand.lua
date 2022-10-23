@@ -32,8 +32,10 @@ entity.onMobFight = function(mob, target)
             -- and record the time this phase was started
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
-        elseif (mob:getAnimationSub() == 1 and
-                mob:getBattleTime() - changeTime > 30) then
+        elseif
+            mob:getAnimationSub() == 1 and
+            mob:getBattleTime() - changeTime > 30
+        then
             mob:useMobAbility(1292)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 2 is grounded mode, so check if he should take off

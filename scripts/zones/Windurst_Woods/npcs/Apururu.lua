@@ -44,13 +44,17 @@ end
 
 entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 969) then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 969)
+    then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
-    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 551) then
+    elseif
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 551)
+    then
         player:startEvent(325, 0, 20000, 5000)
     end
 end
@@ -103,9 +107,10 @@ entity.onEventFinish = function(player, csid, option)
         -- CAN CARDIANS CRY?
     elseif csid == 319 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
-    elseif csid == 325 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, {
-        gil = 5000
-    }) then
+    elseif
+        csid == 325 and
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY, { gil = 5000 })
+    then
         player:confirmTrade()
 
         -- TRUST
