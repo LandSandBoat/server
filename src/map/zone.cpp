@@ -1033,6 +1033,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
                 // Is not inside of a battlefield arena so remove the battlefield effect
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
                 PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+                if (PChar->PPet)
+                {
+                    PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+                }
             }
         }
     }
@@ -1040,6 +1044,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     {
         // Player is zoning into a zone that does not have a battlefield but the player has a confrontation effect - remove it
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+        if (PChar->PPet)
+        {
+            PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+        }
     }
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
