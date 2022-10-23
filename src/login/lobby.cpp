@@ -798,6 +798,14 @@ int32 lobbyview_parse(int32 fd)
                         }
                     }
 
+                    // Check for invalid length name
+                    // NOTE: The client checks for this. This is to guard
+                    // against packet injection
+                    if (nameStr.size() < 3 || nameStr.size() > 15)
+                    {
+                        invalidNameReason = "Invalid name length.";
+                    }
+
                     // Check if the name is already in use by another character
                     if (sql->Query("SELECT charname FROM chars WHERE charname LIKE '%s'", escapedCharName) == SQL_ERROR)
                     {
