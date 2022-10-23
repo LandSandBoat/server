@@ -524,7 +524,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             if ae.applyEffect then
                 local resist = 1
                 if ae.ele then
-                    resist = applyResistanceAddEffect(mob, target, ae.ele, ae.eff)
+                    resist = xi.magic.applyResistanceAddEffect(mob, target, ae.ele, ae.eff)
                 end
 
                 if resist > 0.5 and not target:hasStatusEffect(ae.eff) then
@@ -567,11 +567,11 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
                 -- target:PrintToPlayer(string.format("Initial Power: %f", power)) -- DEBUG
 
-                power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
-                power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
-                power = adjustForTarget(target, power, ae.ele)
+                power = xi.magic.addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
+                power = power * xi.magic.applyResistanceAddEffect(mob, target, ae.ele, 0)
+                power = xi.magic.adjustForTarget(target, power, ae.ele)
                 if ae.sub ~= xi.subEffect.TP_DRAIN and ae.sub ~= xi.subEffect.MP_DRAIN then
-                    power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
+                    power = xi.magic.finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
                 end
 
                 -- target:PrintToPlayer(string.format("Adjusted Power: %f", power)) -- DEBUG

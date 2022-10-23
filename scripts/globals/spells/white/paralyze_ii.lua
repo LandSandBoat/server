@@ -20,20 +20,20 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Base potency
     local potency = utils.clamp(math.floor(dMND / 4) + 20, 10, 30)
 
-    potency = calculatePotency(potency, spell:getSkillType(), caster, target)
+    potency = xi.magic.calculatePotency(potency, spell:getSkillType(), caster, target)
 
-    local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = xi.magic.calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local params = {}
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.PARALYSIS
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then
         local resduration = duration * resist
 
-        resduration = calculateBuildDuration(target, duration, params.effect, caster)
+        resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)

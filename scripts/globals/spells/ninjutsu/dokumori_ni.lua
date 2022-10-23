@@ -21,7 +21,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
-    duration = duration * applyResistance(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistance(caster, target, spell, params)
     local power = 10
 
     --Calculates resist chanve from Reist Blind

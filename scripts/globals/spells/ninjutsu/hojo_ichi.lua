@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
-    duration = duration * applyResistance(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistance(caster, target, spell, params)
     --Calculates the resist chance from Resist Blind trait
     if math.random(0, 100) >= target:getMod(xi.mod.SLOWRES) then
         -- Spell succeeds if a 1 or 1/2 resist check is achieved

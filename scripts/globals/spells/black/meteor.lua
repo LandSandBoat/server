@@ -37,9 +37,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
+    dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
     return dmg
 
 end

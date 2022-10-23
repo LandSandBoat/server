@@ -22,7 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
     params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     --Base power is 10 and is not affected by resistaces.
     local power = 10
 
