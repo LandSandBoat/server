@@ -36,13 +36,13 @@ entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_N_MOB[6]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 2)+1
+        local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
         mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
         if offset == 2 then
-            mob:setLocalVar("pause", os.time()+30)
+            mob:setLocalVar("pause", os.time() + 30)
         else
-            mob:setLocalVar("pause", os.time()+15)
+            mob:setLocalVar("pause", os.time() + 15)
         end
     end
 end

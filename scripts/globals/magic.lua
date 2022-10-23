@@ -251,7 +251,7 @@ local function doNuke(caster, target, spell, params)
     --get resist multiplier (1x if no resist)
     local resist = applyResistance(caster, target, spell, params)
     --get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     if skill == xi.skill.NINJUTSU then
         if caster:getMainJob() == xi.job.NIN then -- NIN main gets a bonus to their ninjutsu nukes
             local ninSkillBonus = 100
@@ -1010,7 +1010,7 @@ end
 
 function getElementalDebuffStatDownFromDOT(dot)
     local stat_down = 0
-    stat_down = (dot-1)*2 +5
+    stat_down = (dot - 1) * 2 + 5
     return stat_down
 end
 
@@ -1056,7 +1056,7 @@ function handleThrenody(caster, target, spell, basePower, baseDuration, modifier
     target:delStatusEffect(xi.effect.THRENODY)
 
     local iBoost = caster:getMod(xi.mod.THRENODY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
-    local power = basePower + iBoost*5
+    local power = basePower + iBoost * 5
     local duration = baseDuration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
 
     if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
@@ -1094,7 +1094,7 @@ function canOverwrite(target, effect, power, mod)
     end
 
     -- overwrite if its weaker
-    if statusEffect:getPower()*mod > power then
+    if statusEffect:getPower() * mod > power then
         return false
     end
 
@@ -1242,7 +1242,7 @@ function doDivineBanishNuke(caster, target, spell, params)
     --get resist multiplier (1x if no resist)
     local resist = applyResistance(caster, target, spell, params)
     --get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
 
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg, params)

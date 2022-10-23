@@ -115,7 +115,7 @@ end
 entity.onCriticalHit = function(mob)
     local critNum = mob:getLocalVar("crits")
 
-    if ((critNum+1) > mob:getLocalVar("CritToTheFace")) then  -- Lose a head
+    if ((critNum + 1) > mob:getLocalVar("CritToTheFace")) then  -- Lose a head
         if (mob:getAnimationSub() == 0) then
             mob:setAnimationSub(1)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))

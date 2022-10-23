@@ -170,7 +170,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local levelCorrection = 0
     if shouldApplyLevelCorrection then
         if levelDiff > 0 then
-            levelCorrection = math.max((levelDiff*2), 0)
+            levelCorrection = math.max((levelDiff * 2), 0)
         end
     end
     -- Delta acc / 2 for hit rate

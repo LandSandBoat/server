@@ -60,22 +60,22 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 202) then
         player:setCharVar("PromathiaStatus", 2)
-    elseif (124 and option ~=0) then -- Mithra
+    elseif (124 and option ~= 0) then -- Mithra
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
         player:addKeyItem(xi.ki.LIGHT_OF_DEM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_DEM)
-    elseif (121 and option ~=0) then -- Elvaan
+    elseif (121 and option ~= 0) then -- Elvaan
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
         player:addKeyItem(xi.ki.LIGHT_OF_MEA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_MEA)
-    elseif (123 and option ~=0) then -- Tarutaru
+    elseif (123 and option ~= 0) then -- Tarutaru
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
         player:addKeyItem(xi.ki.LIGHT_OF_HOLLA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_HOLLA)
-    elseif (122 and option ~=0) then -- Galka
+    elseif (122 and option ~= 0) then -- Galka
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
         player:addKeyItem(xi.ki.LIGHT_OF_ALTAIEU)

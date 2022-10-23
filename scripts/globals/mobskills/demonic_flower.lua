@@ -16,8 +16,8 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.WEAKNESS
-    local dmg1 = mob:getHP()*0.24
-    local dmg2 = dmg1*0.5
+    local dmg1 = mob:getHP() * 0.24
+    local dmg2 = dmg1 * 0.5
     -- The dmg amounts and duration are guesstimated based on wiki info.
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 90))
 

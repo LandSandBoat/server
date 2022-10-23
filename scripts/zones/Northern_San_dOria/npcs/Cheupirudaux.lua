@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("WoodworkingExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_CARPENTER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.WOODWORKING, newRank)
             player:startEvent(622, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("WoodworkingExpertQuest", 0)
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(622, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.WOODWORKING, newRank)
         player:startEvent(622, 0, 0, 0, 0, newRank)
         player:setLocalVar("WoodworkingTraded", 1)

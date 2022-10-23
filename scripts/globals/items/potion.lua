@@ -16,7 +16,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(50*xi.settings.main.ITEM_POWER))
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(50 * xi.settings.main.ITEM_POWER))
 end
 
 return itemObject

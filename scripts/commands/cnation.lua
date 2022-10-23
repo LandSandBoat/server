@@ -26,7 +26,7 @@ function onTrigger(player, target, nation)
     local nationNumToName = {}
 
     for k, v in pairs(nationNameToNum) do
-        nationNumToName[v]=k
+        nationNumToName[v] = k
     end
 
     -- validate target

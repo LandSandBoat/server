@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         -- no effect
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-        if (target:addStatusEffect(xi.effect.STUN, 1, 0, duration*resist)) then
+        if (target:addStatusEffect(xi.effect.STUN, 1, 0, duration * resist)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

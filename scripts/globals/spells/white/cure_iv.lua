@@ -103,9 +103,9 @@ spellObject.onSpellCast = function(caster, target, spell)
             params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
             params.bonus = 1.0
 
-            local dmg = calculateMagicDamage(caster, target, spell, params)*0.5
+            local dmg = calculateMagicDamage(caster, target, spell, params) * 0.5
             local resist = applyResistance(caster, target, spell, params)
-            dmg = dmg*resist
+            dmg = dmg * resist
             dmg = addBonuses(caster, spell, target, dmg)
             dmg = adjustForTarget(target, dmg, spell:getElement())
             dmg = finalMagicAdjustments(caster, target, spell, dmg)
@@ -130,7 +130,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT))/100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

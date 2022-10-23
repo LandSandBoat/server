@@ -25,7 +25,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             1 modifier = 1 second]]
         local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
         if (recastMod ~= 0) then
-            local newRecast = ability:getRecast() +recastMod
+            local newRecast = ability:getRecast() + recastMod
             ability:setRecast(utils.clamp(newRecast, 0, newRecast))
         end
         -- Apply "Fan Dance" Waltz recast reduction
@@ -55,11 +55,11 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     --Performing sj mj check.
     if mjob == xi.job.DNC then
-        cure = (vit+chr)*0.5+130
+        cure = (vit + chr) * 0.5 + 130
     end
 
     if sjob == xi.job.DNC then
-        cure = (vit+chr)*0.25+130
+        cure = (vit + chr) * 0.25 + 130
     end
 
     -- apply waltz modifiers

@@ -257,7 +257,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     firstHitChance = utils.clamp(firstHitChance, 35, 95)
 
     if (chance * 100) <= firstHitChance then
-        pdif = math.random((minRatio*1000), (maxRatio*1000)) --generate random PDIF
+        pdif = math.random((minRatio * 1000), (maxRatio * 1000)) --generate random PDIF
         pdif = pdif/1000 --multiplier set.
         finaldmg = finaldmg + hitdamage * pdif
         hitslanded = hitslanded + 1
@@ -341,7 +341,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     end
 
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-        damage = damage * (((skill:getTP() / 10)*tpvalue) / 100)
+        damage = damage * (((skill:getTP() / 10) * tpvalue) / 100)
     end
 
     -- resistence is added last
@@ -534,7 +534,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     if
         (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
         target:hasStatusEffect(xi.effect.ALL_MISS)) and
-        attackType== xi.attackType.PHYSICAL
+        attackType == xi.attackType.PHYSICAL
     then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0
@@ -812,7 +812,7 @@ xi.mobskills.mobHealMove = function(target, heal)
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if (mobHP+heal > mobMaxHP) then
+    if (mobHP + heal > mobMaxHP) then
         heal = mobMaxHP - mobHP
     end
 

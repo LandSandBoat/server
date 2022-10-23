@@ -97,12 +97,12 @@ entity.onMobDeath = function(mob, player, optParams)
 
         if spawn then
             for i = 0, 2 do
-                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[4]+i):getStatus() == xi.status.DISAPPEAR then
+                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[4] + i):getStatus() == xi.status.DISAPPEAR then
                     local mobX = mob:getXPos()
                     local mobY = mob:getYPos()
                     local mobZ = mob:getZPos()
-                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[4]+i):setPos(mobX, mobY, mobZ)
-                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[4]+i, battlefield, "crateMaskF4", battlefield:getLocalVar("crateMaskF4"))
+                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[4] + i):setPos(mobX, mobY, mobZ)
+                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[4] + i, battlefield, "crateMaskF4", battlefield:getLocalVar("crateMaskF4"))
                     break
                 end
             end

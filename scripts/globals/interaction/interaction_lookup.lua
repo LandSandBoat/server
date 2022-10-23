@@ -160,7 +160,7 @@ function InteractionLookup:addContainers(containers, zoneIds)
     local validZoneTable = nil
     if zoneIds ~= nil then
         validZoneTable = {}
-        for i=1, #zoneIds do
+        for i = 1, #zoneIds do
            validZoneTable[zoneIds[i]] = true
         end
     end
@@ -252,8 +252,8 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
             if entry.container.getCheckArgs then
                 checkArgs = entry.container:getCheckArgs(player)
             end
-            checkArgs[#checkArgs+1] = containerVarCache[entry.container]
-            checkArgs[#checkArgs+1] = varCache
+            checkArgs[#checkArgs + 1] = containerVarCache[entry.container]
+            checkArgs[#checkArgs + 1] = varCache
         end
 
         local ok, res = true, true

@@ -548,12 +548,12 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         if calcParams.sneakApplicable then
             finaldmg = finaldmg +
                         (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX)/100) * calcParams.pdif) *
-                        ((100+(attacker:getMod(xi.mod.AUGMENTS_SA)))/100)
+                        ((100 + (attacker:getMod(xi.mod.AUGMENTS_SA)))/100)
         end
         if calcParams.trickApplicable then
             finaldmg = finaldmg +
                         (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI)/100) * calcParams.pdif) *
-                        ((100+(attacker:getMod(xi.mod.AUGMENTS_TA)))/100)
+                        ((100 + (attacker:getMod(xi.mod.AUGMENTS_TA)))/100)
         end
     end
 
@@ -973,9 +973,9 @@ function getHitRate(attacker, target, capHitRate, bonus)
     acc = acc + bonus
 
     if attacker:getMainLvl() > target:getMainLvl() then              -- Accuracy Bonus
-        acc = acc + ((attacker:getMainLvl()-target:getMainLvl())*4)
+        acc = acc + ((attacker:getMainLvl()-target:getMainLvl()) * 4)
     elseif (attacker:getMainLvl() < target:getMainLvl()) then        -- Accuracy Penalty
-        acc = acc - ((target:getMainLvl()-attacker:getMainLvl())*4)
+        acc = acc - ((target:getMainLvl()-attacker:getMainLvl()) * 4)
     end
 
     local hitdiff = 0

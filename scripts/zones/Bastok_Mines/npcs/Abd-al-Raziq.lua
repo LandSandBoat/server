@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("AlchemyExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("AlchemyExpertQuest", 0)
@@ -30,7 +30,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
 
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
         player:setLocalVar("AlchemyTraded", 1)

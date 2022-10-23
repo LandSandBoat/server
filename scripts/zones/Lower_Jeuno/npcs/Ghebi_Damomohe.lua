@@ -59,13 +59,13 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 107 then
         -- Finish Quest: Tenshodo Membership (Application Form)
-        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=xi.title.TENSHODO_MEMBER, ki=xi.ki.TENSHODO_MEMBERS_CARD }) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item = 548, title = xi.title.TENSHODO_MEMBER, ki = xi.ki.TENSHODO_MEMBERS_CARD }) then
             player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
         end
 
     elseif csid == 108 then
         -- Finish Quest: Tenshodo Membership (Invitation)
-        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=xi.title.TENSHODO_MEMBER, ki=xi.ki.TENSHODO_MEMBERS_CARD }) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item = 548, title = xi.title.TENSHODO_MEMBER, ki = xi.ki.TENSHODO_MEMBERS_CARD }) then
             player:confirmTrade()
             player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
         end

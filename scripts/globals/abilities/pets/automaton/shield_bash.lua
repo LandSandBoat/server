@@ -46,7 +46,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         ratio = 0.2
     end
 
-    local pdif = math.random(ratio*0.8*1000, ratio*1.2*1000)
+    local pdif = math.random(ratio * 0.8 * 1000, ratio * 1.2 * 1000)
 
     damage = damage * (pdif / 1000)
 

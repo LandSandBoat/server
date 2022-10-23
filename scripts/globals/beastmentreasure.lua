@@ -182,7 +182,7 @@ local function startMapMarkerEvent(eventid, player, digsiteids)
             5: unknown, dynamic
             6: unknown, dynamic
             7: unknown, seems static
-            8: unknown*, seems static (possibly y position of qm + 95)
+            8: unknown, seems static (possibly y position of qm + 95)
 
         Example: `player:startEvent(101, 123, 0, 369795, 201805, 0, 0, 0, 4095)`
             ...plays event 101 in Yuhtunga Jungle (zone 123), which creates a map marker
