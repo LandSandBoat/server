@@ -1506,10 +1506,10 @@ xi.magic.calculateBuildDuration = function(target, duration, effect, caster)
     if target:isMob() then
         local buildRes = xi.magic.getEffectResistance(target, effect, true, caster)
 
-        if target:getMod(buildRes) ~= 0 then
+        if target:getMod(buildRes) ~= nil then
             local builtRes = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
 
-            duration = duration - ((builtRes + target:getMod(buildRes)) / 10) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
+            duration = utils.clamp(duration - ((builtRes + target:getMod(buildRes)) / 10), 0, 65535) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
             target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), builtRes + target:getMod(buildRes))
         end
     end
