@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local base = 14 + target:getMainLvl() + pet:getTP()/12
+    local base = 14 + target:getMainLvl() + pet:getTP() / 12
     if (pet:getMainLvl()>30) then
         base = 44 + 3 * (pet:getMainLvl() - 30) + pet:getTP() / 12 * (pet:getMainLvl() * 0.075 - 1)
     end

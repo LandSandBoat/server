@@ -33,7 +33,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
             -- Every tier beyond the 1st is -5% recast time
             if (fanDanceMerits > 5) then
-                ability:setRecast(ability:getRecast() * ((fanDanceMerits -5)/100))
+                ability:setRecast(ability:getRecast() * ((fanDanceMerits -5) / 100))
             end
         end
         return 0, 0
@@ -60,7 +60,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     -- apply waltz modifiers
-    cure = math.floor(cure * (1.0 + (player:getMod(xi.mod.WALTZ_POTENTCY)/100)))
+    cure = math.floor(cure * (1.0 + (player:getMod(xi.mod.WALTZ_POTENTCY) / 100)))
 
     --Reducing TP.
 

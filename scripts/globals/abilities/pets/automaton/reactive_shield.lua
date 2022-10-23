@@ -16,7 +16,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 65)
     local pMod = automaton:getSkillLevel(xi.skill.AUTOMATON_MAGIC)
     local duration = 60
-    local power = math.floor((pMod/56)^3 / 8) + 4 -- No idea how the actual formula used Automaton skill level, so heres a placeholder (4 @ lvl 1, 10 @ lvl 61, 20 @ lvl 75, 62 @ lvl 99)
+    local power = math.floor((pMod / 56)^3 / 8) + 4 -- No idea how the actual formula used Automaton skill level, so heres a placeholder (4 @ lvl 1, 10 @ lvl 61, 20 @ lvl 75, 62 @ lvl 99)
 
     if target:addStatusEffect(xi.effect.BLAZE_SPIKES, power, 0, duration) then
         skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)

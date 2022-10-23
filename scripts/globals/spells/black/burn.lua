@@ -52,7 +52,7 @@ spellObject.onSpellCast = function(caster, target, spell)
                 duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
 
                 local mbonus = caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT)
-                DOT = DOT + mbonus/2 -- Damage
+                DOT = DOT + mbonus / 2 -- Damage
 
                 target:addStatusEffect(xi.effect.BURN, DOT, 3, duration)
             end

@@ -26,7 +26,7 @@ abilityObject.onUseAbility = function(pet, target, skill, action)
         pet:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
     end
 
-    local gear = master:getMod(xi.mod.WYVERN_BREATH)/256 -- Master gear that enhances breath
+    local gear = master:getMod(xi.mod.WYVERN_BREATH) / 256 -- Master gear that enhances breath
 
     local dmgmod = xi.mobskills.mobBreathMove(pet, target, 0.185, pet:getMainLvl() * 15, xi.magic.ele.ICE) -- Works out to (hp/6) + 15, as desired
     dmgmod = (dmgmod * (1 + gear)) * deep

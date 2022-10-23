@@ -260,7 +260,7 @@ xi.job_utils.geomancer.fullCircle = function(player, target, ability)
 
     if cr_merit > 0 then
         -- calculate final hp value
-        hp_returned = math.floor(hp_multiplier * mp_cost * (hpp_remaining /100))
+        hp_returned = math.floor(hp_multiplier * mp_cost * (hpp_remaining / 100))
         player:restoreHP(hp_returned)
     end
 

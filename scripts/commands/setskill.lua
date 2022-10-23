@@ -60,6 +60,6 @@ function onTrigger(player, skillName, skillLV, target)
     targ:messageBasic(xi.msg.basic.SKILL_REACHES_LEVEL, skillID, skillLV)
 
     if targ ~= player then
-        player:PrintToPlayer(string.format("%s's new skillID '%s' Skill: %s", targ:getName(), skillName, (targ:getCharSkillLevel(skillID)/10)..".0"))
+        player:PrintToPlayer(string.format("%s's new skillID '%s' Skill: %s", targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..".0"))
     end
 end

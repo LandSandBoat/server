@@ -11,7 +11,7 @@ entity.onMobFight = function(mob, target)
     local partner = (mob:getID() + 1)
     if GetMobByID(partner):isDead() and mob:getLocalVar("buffed") == 0 then
         mob:setLocalVar("buffed", 1)
-        mob:addHP(mob:getMaxHP()/2)
+        mob:addHP(mob:getMaxHP() / 2)
         mob:addMod(xi.mod.ATT, 500)
 
         if math.random(1, 2) == 2 then

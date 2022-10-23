@@ -22,9 +22,9 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if (mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime) then
+        if (mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime) then
             mob:useMobAbility(695)
-            mob:setLocalVar("twohourTime", (mob:getBattleTime()/15) + 20)
+            mob:setLocalVar("twohourTime", (mob:getBattleTime() / 15) + 20)
         elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)

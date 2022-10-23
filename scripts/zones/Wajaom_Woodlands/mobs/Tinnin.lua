@@ -26,7 +26,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:setHP(mob:getMaxHP()/2)
+    mob:setHP(mob:getMaxHP() / 2)
     mob:setUnkillable(true)
     mob:setMod(xi.mod.REGEN, 50)
 

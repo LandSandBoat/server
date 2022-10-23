@@ -204,7 +204,7 @@ local function calculateMagicBurst(caster, spell, target, params)
     modburst = modburst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + params.AMIIburstBonus
 
     if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
-        modburst = modburst + (caster:getMerit(xi.merit.INNIN_EFFECT)/100)
+        modburst = modburst + (caster:getMerit(xi.merit.INNIN_EFFECT) / 100)
     end
 
     -- BLM Job Point: Magic Burst Damage
@@ -256,16 +256,16 @@ local function doNuke(caster, target, spell, params)
         if caster:getMainJob() == xi.job.NIN then -- NIN main gets a bonus to their ninjutsu nukes
             local ninSkillBonus = 100
             if spell:getID() % 3 == 2 then -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
-                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50)/2) -- getSkillLevel includes bonuses from merits and modifiers (ie. gear)
+                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50) / 2) -- getSkillLevel includes bonuses from merits and modifiers (ie. gear)
             elseif spell:getID() % 3 == 0 then -- ni nuke spell ids are 1 more than their corresponding ichi spell
-                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125)/2)
+                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125) / 2)
             else -- san nuke spell, also has ids 1 more than their corresponding ni spell
-                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275)/2)
+                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275) / 2)
             end
 
             ninSkillBonus = utils.clamp(ninSkillBonus, 100, 200) -- bonus caps at +100%, and does not go negative
             dmg = dmg + (caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
-            dmg = dmg * ninSkillBonus/100
+            dmg = dmg * ninSkillBonus / 100
         end
         -- boost with Futae
         if caster:hasStatusEffect(xi.effect.FUTAE) then
@@ -337,7 +337,7 @@ function getCurePower(caster, isBlueMagic)
     local mnd = caster:getStat(xi.mod.MND)
     local vit = caster:getStat(xi.mod.VIT)
     local skill = caster:getSkillLevel(xi.skill.HEALING_MAGIC)
-    local power = math.floor(mnd/2) + math.floor(vit/4) + skill
+    local power = math.floor(mnd / 2) + math.floor(vit / 4) + skill
     return power
 end
 
@@ -345,7 +345,7 @@ function getCurePowerOld(caster)
     local mnd = caster:getStat(xi.mod.MND)
     local vit = caster:getStat(xi.mod.VIT)
     local skill = caster:getSkillLevel(xi.skill.HEALING_MAGIC) -- it's healing magic skill for the BLU cures as well
-    local power = (3 * mnd) + vit + (3 * math.floor(skill/5))
+    local power = (3 * mnd) + vit + (3 * math.floor(skill / 5))
     return power
 end
 
@@ -374,7 +374,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
     local rapture = 1
     if isBlueMagic == false then --rapture doesn't affect BLU cures as they're not white magic
         if caster:hasStatusEffect(xi.effect.RAPTURE) then
-            rapture = 1.5 + caster:getMod(xi.mod.RAPTURE_AMOUNT)/100
+            rapture = 1.5 + caster:getMod(xi.mod.RAPTURE_AMOUNT) / 100
             caster:delStatusEffectSilent(xi.effect.RAPTURE)
         end
     end
@@ -578,7 +578,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     magicacc = magicacc + bonusAcc
 
     -- Add macc% from food
-    local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP)/100)
+    local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
@@ -663,7 +663,7 @@ function handleAfflatusMisery(caster, spell, dmg)
         -- According to BGWiki Caps at 300 magic damage.
         local miseryMax = 300
 
-        miseryMax = miseryMax * (1 - caster:getMerit(xi.merit.ANIMUS_MISERY)/100)
+        miseryMax = miseryMax * (1 - caster:getMerit(xi.merit.ANIMUS_MISERY) / 100)
 
         -- BGwiki puts the boost capping at 200% bonus at 1/4th max HP.
         if misery > miseryMax then
@@ -1057,7 +1057,7 @@ function handleThrenody(caster, target, spell, basePower, baseDuration, modifier
 
     local iBoost = caster:getMod(xi.mod.THRENODY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     local power = basePower + iBoost * 5
-    local duration = baseDuration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
+    local duration = baseDuration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100) + 1)
 
     if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
         power = power * 2

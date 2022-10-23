@@ -30,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
         final = diff

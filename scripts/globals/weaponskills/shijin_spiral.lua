@@ -37,7 +37,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     if (damage > 0) then
-        local duration = (tp/1000) + 4
+        local duration = (tp / 1000) + 4
         if (target:hasStatusEffect(xi.effect.PLAGUE) == false) then
             target:addStatusEffect(xi.effect.PLAGUE, 5, 0, duration)
         end
