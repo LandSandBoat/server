@@ -39,8 +39,8 @@ local function handlerToString(handler, player, containerVarCache, varCache)
             if handler.container.getCheckArgs then
                 checkArgs = handler.container:getCheckArgs(player)
             end
-            checkArgs[#checkArgs+1] = containerVarCache[handler.container]
-            checkArgs[#checkArgs+1] = varCache
+            checkArgs[#checkArgs + 1] = containerVarCache[handler.container]
+            checkArgs[#checkArgs + 1] = varCache
         end
 
         message = message .. " [check: " .. (handler.check(player, unpack(checkArgs)) and "true" or "false") .. "]"

@@ -91,11 +91,11 @@ abilityObject.onUseAbility = function(player, target, ability)
         toremove = toremove - 1
     end
 
-    local bonus = 1 + player:getMerit(xi.merit.REPAIR_EFFECT)/100
+    local bonus = 1 + player:getMerit(xi.merit.REPAIR_EFFECT) / 100
 
     totalHealing = totalHealing * bonus
 
-    bonus = bonus + player:getMod(xi.mod.REPAIR_POTENCY)/100
+    bonus = bonus + player:getMod(xi.mod.REPAIR_POTENCY) / 100
 
     regenAmount = regenAmount * bonus
 

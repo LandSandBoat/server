@@ -21,10 +21,10 @@ local path =
 entity.onMobRoam = function(mob)
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 4)+1
+        local point = (mob:getLocalVar("point") % 4) + 1
         mob:setLocalVar("point", point)
         mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
-        mob:setLocalVar("pause", os.time()+15)
+        mob:setLocalVar("pause", os.time() + 15)
     end
 end
 

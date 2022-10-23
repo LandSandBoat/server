@@ -128,7 +128,7 @@ xi.abyssea.visionsCruorProspectorTemps =
     [17] = { xi.items.PRIMEVAL_BREW,         2000000 },
 }
 
-xi.abyssea.visionsCruorProspectorBuffs=
+xi.abyssea.visionsCruorProspectorBuffs =
 {
 --  Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
     [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },

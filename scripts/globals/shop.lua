@@ -26,12 +26,10 @@ xi = xi or {}
 
 xi.shop =
 {
-    --[[ *******************************************************************************
-        send general shop dialog to player
-        stock cuts off after 16 items. if you add more, extras will not display
-        stock is of form { itemId1, price1, itemId2, price2, ... }
-        log is a fame area from xi.quest.fame_area
-    ******************************************************************************* --]]
+    -- send general shop dialog to player
+    -- stock cuts off after 16 items. if you add more, extras will not display
+    -- stock is of form { itemId1, price1, itemId2, price2, ... }
+    -- log is a fame area from xi.quest.fame_area
     general = function(player, stock, log)
         local priceMultiplier = 1
 
@@ -44,74 +42,66 @@ xi.shop =
         player:createShop(#stock / 2, log)
 
         for i = 1, #stock, 2 do
-            player:addShopItem(stock[i], stock[i+1] * priceMultiplier)
+            player:addShopItem(stock[i], stock[i + 1] * priceMultiplier)
         end
 
         player:sendMenu(2)
     end,
 
-    --[[ *******************************************************************************
-        send general guild shop dialog to player (Added on June 2014 QoL)
-        stock is of form { itemId1, price1, guildID, guildRank, ... }
-        log is default set to -1 as it's needed as part of createShop()
-    ******************************************************************************* --]]
+    -- send general guild shop dialog to player (Added on June 2014 QoL)
+    -- stock is of form { itemId1, price1, guildID, guildRank, ... }
+    -- log is default set to -1 as it's needed as part of createShop()
     generalGuild = function(player, stock, guildSkillId)
         local log = -1
 
         player:createShop(#stock / 3, log)
 
         for i = 1, #stock, 3 do
-            player:addShopItem(stock[i], stock[i+1], guildSkillId, stock[i+2])
+            player:addShopItem(stock[i], stock[i + 1], guildSkillId, stock[i + 2])
         end
 
         player:sendMenu(2)
     end,
 
-    --[[ *******************************************************************************
-        send curio vendor moogle shop shop dialog to player
-        stock is of form { itemId1, price1, keyItemRequired, ... }
-        log is default set to -1 as it's needed as part of createShop()
-    ******************************************************************************* --]]
+    -- send curio vendor moogle shop shop dialog to player
+    -- stock is of form { itemId1, price1, keyItemRequired, ... }
+    -- log is default set to -1 as it's needed as part of createShop()
     curioVendorMoogle = function(player, stock)
         local log = -1
 
         player:createShop(#stock / 3, log)
 
         for i = 1, #stock, 3 do
-            if player:hasKeyItem(stock[i+2]) then
-                player:addShopItem(stock[i], stock[i+1])
+            if player:hasKeyItem(stock[i + 2]) then
+                player:addShopItem(stock[i], stock[i + 1])
             end
         end
 
         player:sendMenu(2)
     end,
 
-    --[[ *******************************************************************************
-        send nation shop dialog to player
-        stock cuts off after 16 items. if you add more, extras will not display
-        stock is of form { itemId1, price1, place1, itemId2, price2, place2, ... }
-            where place is what place the nation must be in for item to be stocked
-        nation is a xi.nation ID from scripts/globals/zone.lua
-    ******************************************************************************* --]]
+    -- send nation shop dialog to player
+    -- stock cuts off after 16 items. if you add more, extras will not display
+    -- stock is of form { itemId1, price1, place1, itemId2, price2, place2, ... }
+    --     where place is what place the nation must be in for item to be stocked
+    -- nation is a xi.nation ID from scripts/globals/zone.lua
     nation = function(player, stock, nation)
         local rank = GetNationRank(nation)
         local newStock = {}
         for i = 1, #stock, 3 do
             if
-                (stock[i+2] == 1 and player:getNation() == nation and rank == 1) or
-                (stock[i+2] == 2 and rank <= 2) or
-                (stock[i+2] == 3)
+                (stock[i + 2] == 1 and player:getNation() == nation and rank == 1) or
+                (stock[i + 2] == 2 and rank <= 2) or
+                (stock[i + 2] == 3)
             then
                 table.insert(newStock, stock[i])
-                table.insert(newStock, stock[i+1])
+                table.insert(newStock, stock[i + 1])
             end
         end
         xi.shop.general(player, newStock, nation)
     end,
 
-    --[[ *******************************************************************************
-        send outpost shop dialog to player
-    ******************************************************************************* --]]
+    -- send outpost shop dialog to player
     outpost = function(player)
         local stock =
         {
@@ -124,9 +114,7 @@ xi.shop =
         xi.shop.general(player, stock)
     end,
 
-    --[[ *******************************************************************************
-        send celebratory chest shop dialog to player
-    ******************************************************************************* --]]
+    -- send celebratory chest shop dialog to player
     celebratory = function(player)
         local stock =
         {
@@ -148,9 +136,7 @@ xi.shop =
         xi.shop.general(player, stock)
     end,
 
-    --[[ *******************************************************************************
-        stock for guild vendors that are open 24/8
-    ******************************************************************************* --]]
+    -- stock for guild vendors that are open 24/8
     generalGuildStock =
     {
         [xi.skill.COOKING] =

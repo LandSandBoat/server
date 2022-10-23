@@ -202,7 +202,7 @@ function onMobRoamAction(follower)
             follower:pathTo(targetPos.x, targetPos.y, targetPos.z)
         end
     elseif followerDistance > warpDistance then
-        follower:teleport(utils.getNearPosition(leaderPos, 2+math.random()*(followDistance-2), math.random() * 2 * math.pi), leader)
+        follower:teleport(utils.getNearPosition(leaderPos, 2 + math.random() * (followDistance - 2), math.random() * 2 * math.pi), leader)
     end
 end
 

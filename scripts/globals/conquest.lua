@@ -1345,7 +1345,7 @@ xi.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterE
     if csid == teleporterEvent then
         local region = option - 1073741829
         local fee = xi.conquest.outpostFee(player, region)
-        local cpFee = fee/10
+        local cpFee = fee / 10
 
         player:updateEvent(player:getGil(), fee, 0, cpFee, player:getCP())
     end
@@ -1365,7 +1365,7 @@ xi.conquest.teleporterOnEventFinish = function(player, csid, option, teleporterE
         -- TELEPORT WITH CP
         elseif option >= 1029 and option <= 1047 then
             local region = option - 1029
-            local cpFee = xi.conquest.outpostFee(player, region)/10
+            local cpFee = xi.conquest.outpostFee(player, region) / 10
 
             if xi.conquest.canTeleportToOutpost(player, region) and player:getCP() >= cpFee then
                 player:delCP(cpFee)

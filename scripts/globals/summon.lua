@@ -63,11 +63,11 @@ local function getRandRatio(wRatio)
     if wRatio < 0.38 then
         lowerLimit = math.max(wRatio, 0.5)
     elseif wRatio < 1.25 then
-        lowerLimit = (wRatio * (1176/1024)) - (448/1024)
+        lowerLimit = (wRatio * (1176 / 1024)) - (448 / 1024)
     elseif wRatio < 1.51 then
         lowerLimit = 1
     elseif wRatio < 2.44 then
-        lowerLimit = (wRatio * (1176/1024)) - (755/1024)
+        lowerLimit = (wRatio * (1176 / 1024)) - (755 / 1024)
     else
         lowerLimit = math.min(wRatio - 0.375, maxRatio)
     end
@@ -113,7 +113,7 @@ local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
         fSTR = (dSTR + 13) / 4
     end
 
-    local min = math.floor(weaponDmg/9)
+    local min = math.floor(weaponDmg / 9)
     return math.max(-min, fSTR)
 end
 
@@ -170,11 +170,11 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local levelCorrection = 0
     if shouldApplyLevelCorrection then
         if levelDiff > 0 then
-            levelCorrection = math.max((levelDiff*2), 0)
+            levelCorrection = math.max((levelDiff * 2), 0)
         end
     end
     -- Delta acc / 2 for hit rate
-    local dAcc = math.floor((acc - eva)/2)
+    local dAcc = math.floor((acc - eva) / 2)
 
     -- Normal hits computed first
     hitrateSubsequent = baseHitRate + dAcc + levelCorrection

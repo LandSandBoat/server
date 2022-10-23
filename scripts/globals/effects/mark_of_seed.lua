@@ -15,16 +15,16 @@ effectObject.onEffectTick = function(target, effect)
     local halfMinutes = target:getCharVar("SEED_AFTERGLOW_TIMER")
 
     if (halfMinutes == 1) then
-        target:setCharVar("SEED_AFTERGLOW_TIMER", (halfMinutes+1))
+        target:setCharVar("SEED_AFTERGLOW_TIMER", halfMinutes + 1)
         target:messageSpecial(ID.text.MARK_OF_SEED_FLICKERS)
     elseif (halfMinutes == 40) then
         target:messageSpecial(ID.text.MARK_OF_SEED_IS_ABOUT_TO_DISSIPATE)
-        target:setCharVar("SEED_AFTERGLOW_TIMER", (halfMinutes+1))
+        target:setCharVar("SEED_AFTERGLOW_TIMER", halfMinutes + 1)
     elseif (halfMinutes == 20) then
         target:messageSpecial(ID.text.MARK_OF_SEED_GROWS_FAINTER)
-        target:setCharVar("SEED_AFTERGLOW_TIMER", (halfMinutes+1))
+        target:setCharVar("SEED_AFTERGLOW_TIMER", halfMinutes + 1)
     elseif (halfMinutes >= 2) then
-        target:setCharVar("SEED_AFTERGLOW_TIMER", (halfMinutes+1))
+        target:setCharVar("SEED_AFTERGLOW_TIMER", halfMinutes + 1)
     end
 end
 

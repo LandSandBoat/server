@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    for i = opMariselle+1, opMariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             m:updateEnmity(target)

@@ -204,7 +204,7 @@ local function getMultiAttacks(attacker, target, numHits)
             -- recalculate DA/TA/QA rate
             doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
             tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
-            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK)/100
+            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
         end
     end
 
@@ -334,7 +334,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
     if (missChance <= calcParams.hitRate or-- See if we hit the target
         calcParams.guaranteedHit or
-        calcParams.melee and math.random() < attacker:getMod(xi.mod.ZANSHIN)/100) and
+        calcParams.melee and math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100) and
         not calcParams.mustMiss
     then
         if not shadowAbsorb(target) then
@@ -505,7 +505,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
-            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
+            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower() / 2) / 100
         end
 
         local fencerBonusVal = calcParams.fencerBonus or 0
@@ -547,13 +547,13 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
             finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX)/100) * calcParams.pdif) *
-                        ((100+(attacker:getMod(xi.mod.AUGMENTS_SA)))/100)
+                        (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * calcParams.pdif) *
+                        ((100 + (attacker:getMod(xi.mod.AUGMENTS_SA))) / 100)
         end
         if calcParams.trickApplicable then
             finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI)/100) * calcParams.pdif) *
-                        ((100+(attacker:getMod(xi.mod.AUGMENTS_TA)))/100)
+                        (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100) * calcParams.pdif) *
+                        ((100 + (attacker:getMod(xi.mod.AUGMENTS_TA))) / 100)
         end
     end
 
@@ -973,9 +973,9 @@ function getHitRate(attacker, target, capHitRate, bonus)
     acc = acc + bonus
 
     if attacker:getMainLvl() > target:getMainLvl() then              -- Accuracy Bonus
-        acc = acc + ((attacker:getMainLvl()-target:getMainLvl())*4)
+        acc = acc + ((attacker:getMainLvl()-target:getMainLvl()) * 4)
     elseif (attacker:getMainLvl() < target:getMainLvl()) then        -- Accuracy Penalty
-        acc = acc - ((target:getMainLvl()-attacker:getMainLvl())*4)
+        acc = acc - ((target:getMainLvl()-attacker:getMainLvl()) * 4)
     end
 
     local hitdiff = 0

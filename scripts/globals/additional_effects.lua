@@ -91,7 +91,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     This should rightly be modified by resistance checks, and while those DO they are presently not perfect.
     If you want to force some randomness, un-comment the line below to artificially force 20% variance.
     ]]
-    -- damage = damage * (math.random(90, 110)/100)
+    -- damage = damage * (math.random(90, 110) / 100)
 
     return damage
 end

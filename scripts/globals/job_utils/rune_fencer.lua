@@ -97,7 +97,7 @@ local function calculateVivaciousPulseHealing(target)
         hpHealAmount = hpHealAmount + getRuneHealAmount(type, target) -- type checked internally
 
         if removableDebuffMap[type] ~= nil then -- effect in debuff table, count it as a debuff.
-            debuffs[debuffCount+1] = type
+            debuffs[debuffCount + 1] = type
             debuffCount = debuffCount + 1
         end
 
@@ -786,7 +786,7 @@ xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
 
     for _, rune in ipairs(runeEffects) do
         local absorbType = getLiementAbsorbType(rune)
-        absorbTypes[i+1] = absorbType
+        absorbTypes[i + 1] = absorbType
         i = i + 1
     end
 

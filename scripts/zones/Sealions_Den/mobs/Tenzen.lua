@@ -26,7 +26,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:showText(mob, ID.text.TENZEN_MSG_OFFSET +1)
+    mob:showText(mob, ID.text.TENZEN_MSG_OFFSET + 1)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     -- three tarus fight with tenzen
     local mobId  = mob:getID()
@@ -86,7 +86,7 @@ entity.onMobFight = function(mob, target)
         battlefield:getID() == 993 and
         mob:getHPP() <= 15
     then -- Tenzen gives up at 15% - win
-        mob:showText(target, ID.text.TENZEN_MSG_OFFSET +2)
+        mob:showText(target, ID.text.TENZEN_MSG_OFFSET + 2)
         mob:setAnimationSub(5)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         battlefield:win()

@@ -24,8 +24,8 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobID = mob:getID()
     if mobID == ID.mob.TEMENOS_C_MOB[2] then --Carbuncle (Central Temenos 2nd Floor)
-        GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):updateEnmity(target)
-        GetMobByID(ID.mob.TEMENOS_C_MOB[2]+1):updateEnmity(target)
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 2):updateEnmity(target)
+        GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 1):updateEnmity(target)
     end
 end
 
@@ -39,8 +39,8 @@ entity.onMobDeath = function(mob, player, optParams)
             if crateMask == 0 then
                 xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[floor])
             end
-        elseif mobID >= ID.mob.TEMENOS_C_MOB[2]+9 then
-            local element_offset = mobID - ID.mob.TEMENOS_C_MOB[2]+8
+        elseif mobID >= ID.mob.TEMENOS_C_MOB[2] + 9 then
+            local element_offset = mobID - ID.mob.TEMENOS_C_MOB[2] + 8
             local partner_offset = element_offset % 6 -- Levithan's partner starts at 0
             GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.FIRE_SDT - 1 + element_offset, -5000) -- ? IDK
             if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset):isAlive() then

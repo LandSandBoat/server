@@ -27,9 +27,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 655) then
-        player:addGil(xi.settings.main.GIL_RATE*50)
+        player:addGil(xi.settings.main.GIL_RATE * 50)
         player:tradeComplete()
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*50)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 50)
     end
 end
 

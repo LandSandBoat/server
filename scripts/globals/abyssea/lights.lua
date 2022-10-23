@@ -623,7 +623,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
             end
         else
             if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 10 then
-                dropRate = math.floor(xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE /2)
+                dropRate = math.floor(xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE / 2)
             end
         end
     end

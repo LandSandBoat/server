@@ -36,7 +36,7 @@ local function parseParams(player)
     end
     local params = { 0, 0, 0, 0, 0 }
     for i = 1, #paramTrials, 2 do
-        params[(i+1)/2] = paramTrials[i] + bit.lshift((paramTrials[i+1] or 0), 16)
+        params[(i + 1) / 2] = paramTrials[i] + bit.lshift((paramTrials[i + 1] or 0), 16)
     end
     return params, #paramTrials
 end
@@ -237,7 +237,7 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     local nbTrialsPlayer = 0
 
     -- currentItem = Part of stuff use for event
-    local currentItem = { id=0, quantity=0 }
+    local currentItem = { id = 0, quantity = 0 }
     local currentItemTrial = nil
 
     -- currentTrial = trial use for event

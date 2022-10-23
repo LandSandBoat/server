@@ -48,13 +48,13 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    DespawnMob(mob:getID()+1)
-    DespawnMob(mob:getID()+2)
+    DespawnMob(mob:getID() + 1)
+    DespawnMob(mob:getID() + 2)
 end
 
 entity.onMobDespawn = function(mob)
-    DespawnMob(mob:getID()+1)
-    DespawnMob(mob:getID()+2)
+    DespawnMob(mob:getID() + 1)
+    DespawnMob(mob:getID() + 2)
 
     local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
     if (math.random(0, 1) == 1) then

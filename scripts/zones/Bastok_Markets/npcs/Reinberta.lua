@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("GoldsmithingExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("GoldsmithingExpertQuest", 0)
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
         player:setLocalVar("GoldsmithingTraded", 1)

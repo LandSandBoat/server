@@ -18,9 +18,9 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
 
     local magicskill = utils.getSkillLvl(1, target:getMainLvl())
 
-    local potency = 3 + ((6*magicskill)/100)
+    local potency = 3 + ((6 * magicskill) / 100)
     if (magicskill>200) then
-        potency = 5 + ((5*magicskill)/100)
+        potency = 5 + ((5 * magicskill) / 100)
     end
 
     local typeEffect = xi.effect.ENTHUNDER

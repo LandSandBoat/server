@@ -30,7 +30,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     xi.pet.spawnPet(player, xi.pet.id.AUTOMATON)
     local pet = player:getPet()
     if pet then
-        local percent = math.floor((player:getMainLvl()/3))/100
+        local percent = math.floor((player:getMainLvl() / 3)) / 100
         pet:setHP(math.max(pet:getHP() * percent, 1))
         pet:setMP(pet:getMP() * percent)
     end

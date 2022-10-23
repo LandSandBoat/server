@@ -32,7 +32,7 @@ entity.onMobFight = function(mob, target)
         not GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned() and
         mob:getLocalVar("hasPoppedZoraal") == 0
     ) then
-        GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):setSpawn(mob:getXPos()+math.random(-2, 2), mob:getYPos(), mob:getZPos()+math.random(-2, 2))
+        GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):setSpawn(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
         SpawnMob(ID.mob.PERCIPIENT_ZORAAL_JA):updateEnmity(target)
         mob:setHP(mob:getMaxHP())
         mob:setUnkillable(true)

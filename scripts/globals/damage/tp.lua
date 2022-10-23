@@ -129,7 +129,7 @@ xi.damage.tp.calculateTPGainOnPhysicalDamage = function (totalDamage, delay, att
             return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
         else
             -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
-            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1/3))
+            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
         end
     end
 

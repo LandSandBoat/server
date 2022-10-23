@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("BonecraftExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_BONEWORKER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.BONECRAFT, newRank)
             player:startEvent(10017, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("BonecraftExpertQuest", 0)
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(10017, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.BONECRAFT, newRank)
         player:startEvent(10017, 0, 0, 0, 0, newRank)
         player:setLocalVar("BonecraftTraded", 1)

@@ -14,9 +14,9 @@ entity.onMobDeath = function(mob, player, optParams)
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
                 GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.FIRE_SDT, -5000) -- IDK WTF is going on here. Will refactor when Temenos is converted.
-                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+4):isAlive() then
-                    DespawnMob(ID.mob.TEMENOS_C_MOB[2]+4)
-                    SpawnMob(ID.mob.TEMENOS_C_MOB[2]+10)
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 4):isAlive() then
+                    DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 4)
+                    SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 10)
                 end
             else
                 local mobX = mob:getXPos()
