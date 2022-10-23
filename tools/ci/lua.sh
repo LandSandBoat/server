@@ -241,6 +241,9 @@ python3 << EOF
 import glob
 import re
 
+def contains_word(word):
+    return re.compile(r'\b({0})\b'.format(word)).search
+
 def check_for_underscores(str):
     if "local " in str and " =" in str:
         str = str.split(" =", 1)[0]
@@ -351,6 +354,25 @@ def check_tables_in_file(name):
                 print(f"{lines[counter - 1].strip()}                              <-- HERE")
                 print("")
                 errcount += 1
+
+            # Multiline conditionals should not have data in if, elseif, or then
+            stripped_line = re.sub("--.*?(\r\n?|\n)", "", line)        # Strip to end of line if it begins with '--'
+            stripped_line = re.sub("\".*?\"|'.*?'", "", stripped_line) # Ignore data in quotes
+            if contains_word('if')(stripped_line) or contains_word('elseif')(stripped_line):
+                condition_start = stripped_line.replace('elseif','').replace('if','').strip()
+                if not 'then' in condition_start and condition_start != '':
+                    print(f"Invalid multiline conditional format: {name}:{counter}")
+                    print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                    print("")
+                    errcount += 1
+
+            if contains_word('then')(stripped_line):
+                condition_end = stripped_line.replace('then','').strip()
+                if not 'if' in condition_end and condition_end != '':
+                    print(f"Invalid multiline conditional format: {name}:{counter}")
+                    print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                    print("")
+                    errcount += 1
 
         # If you want to modify the files during the checks, write your changed lines to the appropriate
         # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
