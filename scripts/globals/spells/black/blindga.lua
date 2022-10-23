@@ -35,11 +35,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.BLINDNESS
-    duration = duration * applyResistanceEffect(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if (duration >= 60) then --Do it!
 
-        resduration = calculateBuildDuration(target, duration, params.effect, caster)
+        local resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)

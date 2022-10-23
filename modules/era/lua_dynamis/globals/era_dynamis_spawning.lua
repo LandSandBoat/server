@@ -827,10 +827,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Wind Pukis"] = { "Wind Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- WPuk
         ["Petro Pukis"] = { "Petro Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- PPuk
         ["Poison Pukis"] = { "Poison Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- pPuk
-        ["Dynamis Statue"] = { "D. Statue" , 36, 42, 1144, 1, 92, "Enabled Auto Attack" }, -- Dynamis Statue (DynS)
-        ["Dynamis Tombstone"] = { "D. Tombstone" , 20, 42, 2201, 5000, 93, "Enabled Auto Attack" }, -- Dynamis Tombstone (DynT)
-        ["Dynamis Effigy"] = { "D. Effigy" , 9, 42, 20, 0, 94, "Enabled Auto Attack" }, -- Dynamis Effigy (DynE)
-        ["Dynamis Icon"] = { "D. Icon" , 32, 42, 195, 5000, 95, "Enabled Auto Attack" }, -- Dynamis Icon (DynI)
+        ["Dynamis Statue"] = { "D. Statue" , 199, 134, 1144, 1, 92, "Enabled Auto Attack" }, -- Dynamis Statue (DynS)
+        ["Dynamis Tombstone"] = { "D. Tombstone" , 201, 134, 2201, 5000, 93, "Enabled Auto Attack" }, -- Dynamis Tombstone (DynT)
+        ["Dynamis Effigy"] = { "D. Effigy" , 200, 134, 20, 0, 94, "Enabled Auto Attack" }, -- Dynamis Effigy (DynE)
+        ["Dynamis Icon"] = { "D. Icon" , 198, 134, 195, 5000, 95, "Enabled Auto Attack" }, -- Dynamis Icon (DynI)
         -- Dynamis - Buburimu Non-Beastmen
         ["Aitvaras"] = { "Aitvaras", 105, 40, 230, 0, 5008, "Buburimu Dwagon" }, -- Aitv
         ["Alklha"] = { "Alklha", 105, 40, 230, 0, 5006, "Buburimu Dwagon" }, -- Alkl

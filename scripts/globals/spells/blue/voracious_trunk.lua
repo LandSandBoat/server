@@ -22,7 +22,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local resist = applyResistanceAbility(caster, target, xi.magic.ele.WIND, 0, 0)
+    local resist = xi.magic.applyResistanceAbility(caster, target, xi.magic.ele.WIND, 0, 0)
     local stealChance = math.random(1, 100)
     local stolen = 0
 

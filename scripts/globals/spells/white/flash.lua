@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus =  150
     params.effect = nil
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local duration = 12 * resist
 
     if (resist > 0.0625) then

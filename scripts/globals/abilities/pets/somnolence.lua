@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     dmg = xi.mobskills.mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
 
     -- TODO: spell is nil here
-    --dmg = finalMagicAdjustments(pet, target, spell, dmg)
+    --dmg = xi.magic.finalMagicAdjustments(pet, target, spell, dmg)
 
     if (resist < 0.15) then  --the gravity effect from this ability is more likely to land than Tail Whip
         resist = 0

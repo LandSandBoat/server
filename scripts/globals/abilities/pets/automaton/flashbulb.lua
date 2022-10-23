@@ -24,7 +24,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         highestskill = 24
     end
 
-    local resist = applyResistanceAbility(automaton, target, 7, highestskill, 150)
+    local resist = xi.magic.applyResistanceAbility(automaton, target, 7, highestskill, 150)
     local duration = 12 * resist
 
     if resist > 0.0625 then

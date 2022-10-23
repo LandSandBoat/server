@@ -1007,7 +1007,7 @@ namespace petutils
         uint8 grade;
 
         uint8   mlvl = PPet->GetMLevel();
-        uint8   slvl = PPet->GetSLevel();
+        uint8   slvl = PPet->GetSLevel() / 2;
         JOBTYPE mjob = PPet->GetMJob();
         JOBTYPE sjob = PPet->GetSJob();
 
@@ -1844,14 +1844,13 @@ namespace petutils
                 }
 
                 PPet->SetMLevel(mLvl);
-                // For now, assume subjob level is half of main job level
-                // PPet->SetSLevel(mLvl > 1 ? floor(mLvl / 2) : 1);
                 PPet->SetSLevel(mLvl);
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetSLevel());
-                PPet->SetSLevel(PMaster->GetSLevel());
+                uint8 sLvl = PMaster->GetSLevel();
+                PPet->SetMLevel(sLvl);
+                PPet->SetSLevel(sLvl);
             }
             else
             { // should never happen
@@ -2028,7 +2027,7 @@ namespace petutils
                 PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
-            else
+            else if (PMaster->GetSJob() == JOB_PUP)
             {
                 PPet->SetMLevel(PMaster->GetSLevel());
                 PPet->SetSLevel(PMaster->GetSLevel() / 2); // Todo: SetSLevel() already reduces the level?
@@ -2089,6 +2088,7 @@ namespace petutils
         uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
 
         PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
+        PPet->SetSLevel(PPet->GetMLevel() / 2);
 
         LoadAvatarStats(PMaster, PPet);                                                                               // follows PC calcs (w/o SJ)
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
@@ -2097,9 +2097,20 @@ namespace petutils
         // Set A+ weapon skill
         PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
         PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
-        // Set D evasion and def
+        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        // Set D evasion
         PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
-        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+
+        // Psuedo add accuracy bonus
+        if (PPet->GetMLevel() >= 50)
+        {
+            PPet->addModifier(Mod::ACC, 22);
+        }
+        else if (PPet->GetMLevel() >= 10)
+        {
+            PPet->addModifier(Mod::ACC, 10);
+        }
+
         // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
         PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
 

@@ -27,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local minCure = 120
     local divisor = 1
     local constant = 60
-    local power = getCurePowerOld(caster)
+    local power = xi.magic.getCurePowerOld(caster)
 
     if (power > 299) then
         divisor = 15.6666
@@ -37,7 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         constant = 105
     end
 
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
+    local final = xi.magic.getCureFinal(caster, spell, xi.magic.getBaseCureOld(power, divisor, constant), minCure, true)
 
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 

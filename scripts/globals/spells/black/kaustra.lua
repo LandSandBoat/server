@@ -32,12 +32,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 0
     params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local dmg = base * resist
     duration = duration * resist
-    dmg = addBonuses(caster, spell, target, dmg)
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
+    dmg = xi.magic.addBonuses(caster, spell, target, dmg)
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     target:addStatusEffect(xi.effect.KAUSTRA, math.floor(dmg/3), 3, duration)
 

@@ -28,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.effect = xi.effect.VIT_DOWN
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local duration = 60 * resist
     local power = 5
 

@@ -12,10 +12,14 @@ require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
 require("scripts/globals/status")
+require("scripts/globals/spell_data")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 require("scripts/globals/damage")
+
+xi = xi or { }
+xi.weaponskills = xi.weaponskills or { }
 
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
@@ -199,7 +203,7 @@ local function getMultiAttacks(attacker, target, numHits)
 end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
-    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
+    local atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
 
     if ignoredDef == nil then
         ignoredDef = 0
@@ -211,11 +215,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     return { pdif, pdifcrit }
 end
 
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
-local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams)
+local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, calcParams)
     local accVarryTP = 0
 
     if wsParams and wsParams.acc100 ~= 0 then
@@ -224,7 +224,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams)
         elseif calcParams.tp >= 2000 then
             accVarryTP = (wsParams.acc200 - 1) * 100
         else
-            accVarryTP = (wsParams.acc300 - 1) * 100
+            accVarryTP = (wsParams.acc100 - 1) * 100
         end
         attacker:addMod(xi.mod.RACC, accVarryTP)
     end
@@ -241,10 +241,6 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
 local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, firstHitAccBonus, isRanged, isSubAttack)
     local criticalHit = false
     local finaldmg = 0
@@ -263,15 +259,15 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
         calcParams.hitRate = getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
     else
         if isSubAttack and calcParams.extraOffhandHit and calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND then
-            ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
+            ratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
-            calcParams.hitRate = getHitRate(attacker, target, false, 0, true, wsParams, calcParams)
+            calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, false, 0, true, wsParams, calcParams)
         else
-            ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.MAIN)
+            ratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.MAIN)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
-            calcParams.hitRate = getHitRate(attacker, target, false, 0, false, wsParams, calcParams)
+            calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, false, 0, false, wsParams, calcParams)
         end
     end
 
@@ -284,7 +280,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     local missChance = math.random()
 
-    missChance = handleParry(attacker, target, missChance, calcParams.guaranteedHit)
+    missChance = xi.weaponskills.handleParry(attacker, target, missChance, calcParams.guaranteedHit)
 
     if (missChance <= calcParams.hitRate or-- See if we hit the target
         calcParams.guaranteedHit or
@@ -306,20 +302,20 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
             finaldmg = dmg * calcParams.pdif
 
-            finaldmg = handleBlock(attacker, target, finaldmg)
+            finaldmg = xi.weaponskills.handleBlock(attacker, target, finaldmg)
 
             -- Duplicate the first hit with an added magical component for hybrid WSes
             if calcParams.hybridHit then
                 -- Calculate magical bonuses and reductions
-                local ftpHybrid = fTP(calcParams.tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
-                local magicdmg = math.floor(finaldmg * ftpHybrid)
+                local ftpHybrid = xi.weaponskills.fTP(calcParams.tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
+                local magicdmg = finaldmg * ftpHybrid
 
                 wsParams.bonus = calcParams.bonusAcc
-                magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams)
+                magicdmg = magicdmg * xi.magic.applyResistanceAbility(attacker, target, wsParams.ele, wsParams)
                 magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
                 if magicdmg > 0 then
-                    magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
+                    magicdmg = xi.magic.adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
                 end
 
                 if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
@@ -359,14 +355,14 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         end
     end
 
+    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
+
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
-
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -382,22 +378,18 @@ local modParameters =
     [xi.mod.WS_CHR_BONUS] = 'chr_wsc',
 }
 
--- Calculates the raw damage for a weaponskill, used by both doPhysicalWeaponskill and doRangedWeaponskill.
+-- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
 --
 -- wsParams can contain: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, canCrit, crit100, crit200, crit300,
 -- acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
 --
--- See doPhysicalWeaponskill or doRangedWeaponskill for how calcParams are determined.
+-- See xi.weaponskills.doPhysicalWeaponskill or xi.weaponskills.doRangedWeaponskill for how calcParams are determined.
 -- TODO: Reduce complexity
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
-function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, isRanged)
+xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action, wsParams, calcParams, isRanged)
     local targetLvl = target:getMainLvl()
     local targetHp = target:getHP() + target:getMod(xi.mod.STONESKIN)
 
@@ -429,13 +421,13 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local chr = math.floor(attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc)
 
     local wsMods = calcParams.fSTR + (math.floor(str + dex + vit + agi + int + mnd + chr) * calcParams.alpha)
-    local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
+    local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
 
     if wsParams.hybridWS then
         ftp = 1
     end
 
-    base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
+    local base = (calcParams.weaponDamage[1] + wsMods) * ftp
 
     local dmg = base
 
@@ -454,7 +446,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     if wsParams.canCrit then -- Work out critical hit ratios
         local nativecrit = 0
-        critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
+        critrate = xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
             critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
@@ -505,7 +497,6 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
     calcParams.forcedFirstCrit = false
-    calcParams.hybridHit = false
     calcParams.sneakApplicable = false
     calcParams.trickApplicable = false
 
@@ -516,7 +507,9 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local hitsDone = 1
 
     ftp = 1 + calcParams.bonusfTP
-    base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
+
+    base = (calcParams.weaponDamage[1] + wsMods) * ftp
+
     calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
 
     -- Do the extra hit for our offhand if applicable
@@ -557,7 +550,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     end
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged, false)
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, base, wsParams, calcParams, false, isRanged, false)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -589,18 +582,18 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     return calcParams
 end
 
--- Sets up the necessary calcParams for a melee WS before passing it to calculateRawWSDmg. When the raw
--- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
-function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
+-- Sets up the necessary calcParams for a melee WS before passing it to xi.weaponskills.calculateRawWSDmg. When the raw
+-- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
+xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
     if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
-        ignoredDef = calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
+        ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
-    local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
+    local gorgetBeltFTP, gorgetBeltAcc = xi.weaponskills.handleWSGorgetBelt(attacker)
     local attack =
     {
         ['type'] = xi.attackType.PHYSICAL,
@@ -619,8 +612,8 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     local calcParams = {}
     calcParams.wsID = wsID
     calcParams.attackInfo = attack
-    calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
-    calcParams.fSTR = fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
+    calcParams.weaponDamage = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
+    calcParams.fSTR = xi.weaponskills.fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
@@ -644,7 +637,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.bonusfTP = gorgetBeltFTP or 0
     calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
     calcParams.bonusWSmods = wsParams.bonusWSmods or 0
-    calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc, false, wsParams, calcParams)
+    calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc, false, wsParams, calcParams)
     calcParams.skillType = attack.weaponType
 
     if calcParams.extraOffhandHit and attack.weaponType ~= xi.skill.HAND_TO_HAND then
@@ -658,7 +651,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     end
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
-    calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, false)
+    calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, false)
     local finaldmg = calcParams.finalDmg
 
     -- Delete statuses that may have been spent by the WS
@@ -666,28 +659,27 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
-    if attacker:checkThirdEye(defender) then
+    if attacker:checkThirdEye(target) then
         finaldmg = 0
         primaryMsg = xi.msg.basic.ANTICIPATE
     end
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
-
-    finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action, calcParams.tpHitsLanded, calcParams.extraHitsLanded * 10)
+    finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
--- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
--- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
-function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
+-- Sets up the necessary calcParams for a ranged WS before passing it to xi.weaponskills.calculateRawWSDmg. When the raw
+-- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
+xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
 
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
     if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
-        ignoredDef = calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
+        ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
 
     local ratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
@@ -695,7 +687,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     local pdifCrit = ratio[2]
 
     -- Set up conditions and params used for calculating weaponskill damage
-    local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
+    local gorgetBeltFTP, gorgetBeltAcc = xi.weaponskills.handleWSGorgetBelt(attacker)
     local attack =
     {
         ['type'] = xi.attackType.RANGED,
@@ -709,7 +701,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
         wsID = wsID,
         weaponDamage = { attacker:getRangedDmg() },
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
-        fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
+        fSTR = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
         pdif = pdif,
         pdifCrit = pdifCrit,
         accStat = attacker:getRACC(),
@@ -732,7 +724,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     calcParams.hitRate = 0
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed
-    calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, true)
+    calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, true)
     local finaldmg = calcParams.finalDmg
 
     -- Delete statuses that may have been spent by the WS
@@ -745,7 +737,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
-    finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+    finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -753,7 +745,7 @@ end
 -- params: ftp100, ftp200, ftp300, wsc_str, wsc_dex, wsc_vit, wsc_agi, wsc_int, wsc_mnd, wsc_chr,
 --         ele (xi.magic.ele.FIRE), skill (xi.skill.STAFF)
 
-function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
+xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local attack =
@@ -773,7 +765,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         ['wsID']            = wsID
     }
 
-    local bonusfTP, bonusacc = handleWSGorgetBelt(attacker)
+    local bonusfTP, bonusacc = xi.weaponskills.handleWSGorgetBelt(attacker)
     bonusacc = bonusacc + attacker:getMod(xi.mod.WSACC)
 
     local fint = utils.clamp(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), -32, 32)
@@ -798,7 +790,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
              attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) + fint
 
         -- Applying fTP multiplier
-        local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
+        local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
 
         dmg = dmg * ftp
 
@@ -813,18 +805,18 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = dmg + ((dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100) -- Add in our "first hit" WS dmg bonus
 
         -- Calculate magical bonuses and reductions
-        dmg = addBonusesAbility(attacker, wsParams.element, target, dmg, wsParams)
-        dmg = dmg * applyResistanceAbility(attacker, target, wsID, wsParams)
+        dmg = xi.magic.addBonusesAbility(attacker, wsParams.element, target, dmg, wsParams)
+        dmg = dmg * xi.magic.applyResistanceAbility(attacker, target, wsID, wsParams)
         dmg = target:magicDmgTaken(dmg, wsParams.element)
 
         if dmg < 0 then
             calcParams.finalDmg = dmg
 
-            dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+            dmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
             return dmg
         end
 
-        dmg = adjustForTarget(target, dmg, wsParams.element)
+        dmg = xi.magic.adjustForTarget(target, dmg, wsParams.element)
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -845,14 +837,14 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
     end
 
-    dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+    dmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return dmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
 -- After WS damage is calculated and damage reduction has been taken into account by the calling function,
 -- handles displaying the appropriate action/message, delivering the damage to the mob, and any enmity from it
-function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack, wsResults, action)
+xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, primaryMsg, attack, wsResults, action)
     local finaldmg = wsResults.finalDmg
 
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
@@ -918,7 +910,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
 end
 
 -- Helper function to get Main damage depending on weapon type
-function getMeleeDmg(attacker, weaponType, kick)
+xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
     local offhandDamage = attacker:getOffhandDmg()
 
@@ -936,11 +928,7 @@ function getMeleeDmg(attacker, weaponType, kick)
     return { mainhandDamage, offhandDamage }
 end
 
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
-function getHitRate(attacker, target, capHitRate, bonus, isSubAttack, wsParams, calcParams)
+xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSubAttack, wsParams, calcParams)
     if isSubAttack == nil then
         isSubAttack = false
     end
@@ -955,7 +943,7 @@ function getHitRate(attacker, target, capHitRate, bonus, isSubAttack, wsParams, 
         elseif calcParams.tp >= 2000 then
             accVarryTP = (wsParams.acc200 - 1) * 100
         else
-            accVarryTP = (wsParams.acc300 - 1) * 100
+            accVarryTP = (wsParams.acc100 - 1) * 100
         end
         attacker:addMod(xi.mod.ACC, accVarryTP)
     end
@@ -989,7 +977,7 @@ function getHitRate(attacker, target, capHitRate, bonus, isSubAttack, wsParams, 
     return utils.clamp((hitrate / 100), 0.2, 0.95)
 end
 
-function fTP(tp, ftp1, ftp2, ftp3)
+xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
     if (tp < 1000) then
         tp = 1000
     end
@@ -1020,7 +1008,7 @@ local function fTPMob(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-function calculatedIgnoredDef(tp, def, ignore1, ignore2, ignore3)
+xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignore1, ignore2, ignore3)
     if tp >= 1000 and tp < 2000 then
         return (ignore1 + (((ignore2 - ignore1) / 1000) * (tp - 1000))) * def
     elseif tp >= 2000 and tp <= 3000 then
@@ -1031,11 +1019,7 @@ function calculatedIgnoredDef(tp, def, ignore1, ignore2, ignore3)
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
--- TODO: Fix undefined and non-standard variable usage.
--- Disable variable checking for this function.
--- luacheck: ignore 113
--- luacheck: ignore 111
-function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
+xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp, slot)
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     local isGuarded = false
 
@@ -1048,7 +1032,7 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
     if params.atk150 ~= nil then -- Use mob fTP
         atkmulti = fTPMob(tp, params.atk000, params.atk150, params.atk300)
     else -- Use player fTP
-        atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
+        atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
     end
 
     if ignoredDef == nil then
@@ -1075,7 +1059,7 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
     return { pdif, pdifcrit }
 end
 
-function handleBlock(attacker, target, finaldmg)
+xi.weaponskills.handleBlock = function(attacker, target, finaldmg)
     if (target:getBlockRate(attacker) > math.random(100) and target:isFacing(attacker) and target:getSystem() == xi.eco.BEASTMEN and target:getMainJob() == xi.job.PLD) then
         finaldmg = math.floor(finaldmg * 0.5)
     elseif (target:getBlockRate(attacker) > math.random(100) and target:isFacing(attacker) and target:isPC() and (target:getEquippedItem(xi.slot.SUB):getSkillType() == xi.skill.SHIELD)) then
@@ -1088,7 +1072,7 @@ function handleBlock(attacker, target, finaldmg)
     return finaldmg
 end
 
-function handleParry(attacker, target, missChance, guaranteedHit)
+xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedHit)
     local gHit = guaranteedHit or false
     if (target:isFacing(attacker) and (target:getParryRate(attacker) >= math.random(100)) and target:getMainJob() ~= xi.job.MNK and not gHit) then -- Try parry, if so miss.
         if (target:getSystem() == xi.eco.BEASTMEN or target:isPC()) then
@@ -1100,7 +1084,7 @@ function handleParry(attacker, target, missChance, guaranteedHit)
 end
 
 -- Returns fSTR based on range and divisor
-local function calculateRawFstr(dSTR, divisor)
+local function calculateRawfSTR(dSTR, divisor)
     local fSTR = 0
 
     if dSTR >= 12 then
@@ -1125,9 +1109,9 @@ local function calculateRawFstr(dSTR, divisor)
 end
 
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
-function fSTR(atk_str, def_vit, weapon_rank)
+xi.weaponskills.fSTR = function(atk_str, def_vit, weapon_rank)
     local dSTR = atk_str - def_vit
-    local fSTR = calculateRawFstr(dSTR, 4)
+    local fSTR = calculateRawfSTR(dSTR, 4)
 
     -- Apply fSTR caps.
     local lower_cap = weapon_rank * -1
@@ -1141,9 +1125,9 @@ function fSTR(atk_str, def_vit, weapon_rank)
 end
 
 -- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
-function fSTR2(atk_str, def_vit, weapon_rank)
+xi.weaponskills.fSTR2 = function(atk_str, def_vit, weapon_rank)
     local dSTR = atk_str - def_vit
-    local fSTR2 = calculateRawFstr(dSTR, 2)
+    local fSTR2 = calculateRawfSTR(dSTR, 2)
 
     -- Apply fSTR2 caps.
     local lower_cap = weapon_rank * -2
@@ -1158,7 +1142,7 @@ function fSTR2(atk_str, def_vit, weapon_rank)
     return fSTR2
 end
 
-function getStepAnimation(skill)
+xi.weaponskills.getStepAnimation = function(skill)
     if skill <= 1 then
         return 15
     elseif skill <= 3 then
@@ -1184,7 +1168,7 @@ function getStepAnimation(skill)
     end
 end
 
-function getFlourishAnimation(skill)
+xi.weaponskills.getFlourishAnimation = function(skill)
     if skill <= 1 then
         return 25
     elseif skill <= 3 then
@@ -1210,7 +1194,7 @@ function getFlourishAnimation(skill)
     end
 end
 
-function handleWSGorgetBelt(attacker)
+xi.weaponskills.handleWSGorgetBelt = function(attacker)
     local ftpBonus = 0
     local accBonus = 0
 
