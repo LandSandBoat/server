@@ -1007,7 +1007,7 @@ namespace petutils
         uint8 grade;
 
         uint8   mlvl = PPet->GetMLevel();
-        uint8   slvl = PPet->GetSLevel();
+        uint8   slvl = PPet->GetSLevel() / 2;
         JOBTYPE mjob = PPet->GetMJob();
         JOBTYPE sjob = PPet->GetSJob();
 
@@ -1844,14 +1844,13 @@ namespace petutils
                 }
 
                 PPet->SetMLevel(mLvl);
-                // For now, assume subjob level is half of main job level
-                // PPet->SetSLevel(mLvl > 1 ? floor(mLvl / 2) : 1);
                 PPet->SetSLevel(mLvl);
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetSLevel());
-                PPet->SetSLevel(PMaster->GetSLevel());
+                uint8 sLvl = PMaster->GetSLevel();
+                PPet->SetMLevel(sLvl);
+                PPet->SetSLevel(sLvl);
             }
             else
             { // should never happen
@@ -2028,7 +2027,7 @@ namespace petutils
                 PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
-            else
+            else if (PMaster->GetSJob() == JOB_PUP)
             {
                 PPet->SetMLevel(PMaster->GetSLevel());
                 PPet->SetSLevel(PMaster->GetSLevel() / 2); // Todo: SetSLevel() already reduces the level?

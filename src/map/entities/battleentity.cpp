@@ -980,6 +980,12 @@ void CBattleEntity::SetSLevel(uint8 slvl)
         // But there is no place in the DB to set subLV right now.
         m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
     }
+    else if (this->objtype == TYPE_PET &&
+             (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR) &&
+             static_cast<CPetEntity*>(this)->PMaster->objtype == TYPE_PC)
+    {
+        m_slvl = this->GetMLevel();
+    }
     else
     {
         auto ratio = settings::get<uint8>("map.SUBJOB_RATIO");
