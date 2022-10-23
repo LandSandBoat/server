@@ -94,7 +94,7 @@ namespace attackutils
 
             float powerMulti = std::clamp((32.0f - power * powerMod) / 32.0f, 0.f, 1.f);
             float tickMulti  = std::clamp((127.0f - tickCount * 8) / 128.0f, 0.f, 1.f);
-            float keepChance = std::clamp(tickMulti * powerMulti, 0.f, 1.f);
+            float keepChance = std::clamp((tickMulti * powerMulti) / 1.6f, 0.f, 1.f);
             float random     = xirand::GetRandomNumber(1.0f);
 
             // chance to counter - 25% base plus augment and not preventing action and is facing
