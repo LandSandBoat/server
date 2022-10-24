@@ -484,6 +484,8 @@ namespace petutils
         uint8 lvlmax = petStats->maxLevel;
         uint8 lvlmin = petStats->minLevel;
 
+        lvl = std::clamp(lvl, lvlmin, lvlmax);
+
         // give hp boost every 10 levels after 25
         // special boosts at 25 and 50
         if (lvl > 75)
