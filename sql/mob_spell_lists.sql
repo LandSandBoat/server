@@ -1435,6 +1435,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Club',108,367,1,255); -- death (
 
 -- Ouryu (109)
 INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,190,1,80);   -- stonega_ii
+INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,54,1,255);   -- stoneskin
 INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,191,80,255); -- stonega_iii
 INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,255,80,255); -- break
 INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,357,1,80);   -- slowga

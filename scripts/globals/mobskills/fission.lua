@@ -8,13 +8,10 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local id = mob:getID()
 
-    -- Progenerator - Ancient Flames Beckon
-    if mob:getPool() == 3204 then
-        for i = id + 1, id + mob:getLocalVar("maxBabies") do
-            local baby = GetMobByID(i)
-            if not baby:isSpawned() then
-                return 0
-            end
+    for i = id + 1, id + mob:getLocalVar("maxBabies") do
+        local baby = GetMobByID(i)
+        if not baby:isSpawned() then
+            return 0
         end
     end
 

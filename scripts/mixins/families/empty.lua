@@ -8,6 +8,21 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 local setModel = function(mob, skin)
+    -- Strays in Vahzl can also spawn as Weeper and Seether models
+    if mob:getZone():getID() == xi.zone.PROMYVION_VAHZL and mob:getName() == "Stray" then
+        local chance = math.random(1,10)
+        if chance == 1 then -- Weeper
+            mob:setLocalVar("strayType", 1)
+            mob:setMobMod(xi.mobMod.SKILL_LIST, 256)
+        elseif chance == 2 then -- Seether
+            mob:setLocalVar("strayType", 2)
+            mob:setMobMod(xi.mobMod.SKILL_LIST, 220)
+        else -- Stray
+            mob:setLocalVar("strayType", 3)
+            mob:setMobMod(xi.mobMod.SKILL_LIST, 255)
+        end
+    end
+
     -- Two elements per model
     local model = 0
     if skin < 3 then
@@ -21,14 +36,14 @@ local setModel = function(mob, skin)
     end
 
     -- Set model depending on mob family
-    if mob:getFamily() == 255 or mob:getFamily() == 499 then -- Wanderer/Stray
+    if mob:getFamily() == 255 or (mob:getFamily() == 499 and mob:getLocalVar("strayType") == 3) then -- Wanderer/Stray
         if model == 4 then
             model = model + 1
         end
         mob:setModelId(1105 + model)
-    elseif mob:getFamily() == 256 then -- Weeper
+    elseif mob:getFamily() == 256 or (mob:getFamily() == 499 and mob:getLocalVar("strayType") == 1) then -- Weeper / Stray
         mob:setModelId(1111 + model)
-    elseif mob:getFamily() == 220 then -- Seether
+    elseif mob:getFamily() == 220 or (mob:getFamily() == 499 and mob:getLocalVar("strayType") == 2) then -- Seether / Stray
         if model > 1 then
             model = model + 1
         end

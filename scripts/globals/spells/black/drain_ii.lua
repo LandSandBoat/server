@@ -46,6 +46,11 @@ spellObject.onSpellCast = function(caster, target, spell)
         return dmg
     end
 
+    -- Don't drain more HP than the target has left
+    if target:getHP() < dmg then
+        dmg = target:getHP()
+    end
+
     dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()

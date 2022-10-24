@@ -91,6 +91,8 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    -- Win happens on death instead of despawn
+    mob:getBattlefield():win()
 end
 
 return entity
