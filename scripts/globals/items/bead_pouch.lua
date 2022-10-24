@@ -17,7 +17,9 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addItem(6392, math.random(3, 15))
+    beads = math.random(3,15)
+    target:addCurrency("escha_beads", beads)
+	target:PrintToPlayer(string.format("You earn %i beads.", beads), xi.msg.channel.SYSTEM_3)
 end
 
 return item_object
