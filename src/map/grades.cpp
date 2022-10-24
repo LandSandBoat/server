@@ -136,7 +136,7 @@ std::array<std::array<float, 4>, 8> StatScale = { {
  *                                                                        *
  ************************************************************************/
 
-std::array<std::array<float, 3>, 8> MobHPScale = { {
+std::array<std::array<uint8, 3>, 8> MobHPScale = { {
     // Base | Job/SJ Scale | ScaleX
     { 0, 0, 0 },  // 0
     { 36, 9, 1 }, // A
@@ -154,7 +154,7 @@ std::array<std::array<float, 3>, 8> MobHPScale = { {
  *                                                                        *
  ************************************************************************/
 
-std::array<std::array<float, 2>, 6> MobRBI = { {
+std::array<std::array<uint8, 2>, 6> MobRBI = { {
     // RBI | Scale
     { 0, 0 },  // 0
     { 1, 0 },  // 1
@@ -226,7 +226,7 @@ namespace grade
      *      Add stat scaling modifiers for mob HP                             *
      *                                                                        *
      ************************************************************************/
-    float GetMobHPScale(uint8 rank, uint8 scale)
+    uint8 GetMobHPScale(uint8 rank, uint8 scale)
     {
         return MobHPScale[rank][scale];
     }
@@ -237,7 +237,7 @@ namespace grade
      *                                                                        *
      ************************************************************************/
 
-    float GetMobRBI(uint8 rank, uint8 scale)
+    uint8 GetMobRBI(uint8 rank, uint8 scale)
     {
         return MobRBI[rank][scale];
     }

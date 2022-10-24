@@ -236,48 +236,37 @@ namespace mobutils
         {
             if (PMob->HPmodifier == 0)
             {
-                int32 mobHP = 1; // Set mob HP
+                uint32 mobHP = 1; // Set mob HP
 
-                float baseMobHP = 0; // Define base mobs hp
-                float sjHP      = 0; // Define base subjob hp
+                uint32 baseMobHP = 0; // Define base mobs hp
+                uint32 sjHP      = 0; // Define base subjob hp
 
                 grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
                 gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
 
-                int32 base     = 0; // Column for base hp
-                int32 jobScale = 1; // Column for job scaling
-                int32 scaleX   = 2; // Column for modifier scale
+                uint8 base    = 0; // Column for base hp
+                uint8 jobScale = 1; // Column for job scaling
+                uint8 scaleX   = 2; // Column for modifier scale
 
-                float BaseHP   = grade::GetMobHPScale(grade, base);     // Main job base HP
-                float JobScale = grade::GetMobHPScale(grade, jobScale); // Main job scaling
-                float ScaleXHP = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
-
-                float sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
-                float sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
+                uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
+                uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
+                uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
+                uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
+                uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
 
                 uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
-                int32 RBIbase  = 1;                        // Column for RBI base
+                uint8 RBIbase  = 1;                        // Column for RBI base
 
-                float RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
+                uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
 
-                uint8 mLvlIf    = 0;
-                uint8 mLvlIf30  = 0;
-                int32 raceScale = 6;
+                uint8 mLvlIf   = (PMob->GetMLevel() > 5 ? 1 : 0);
+                uint8 mLvlIf30 = (PMob->GetMLevel() > 30 ? 1 : 0);
+                uint8 raceScale = 6;
 
-                float mLvl24 = std::floor(mLvl * 0.25); // 25-30 = 1/4 hp sjstats
-                float mLvl30 = std::floor(mLvl * 0.50); // 31-39 = 1/2 hp sjstats
-                float mLvl39 = std::floor(mLvl * 0.75); // 40-49 = 3/4 hp sjstats
-                float mLvl49 = std::floor(mLvl);        // 50+ = 1 hp sjstats
-
-                if (mLvl > 5)
-                {
-                    mLvlIf = 1;
-                }
-
-                if (mLvl > 30)
-                {
-                    mLvlIf30 = 1;
-                }
+                uint8 mLvl24 = std::floor(mLvl * 0.25); // 25-30 = 1/4 hp sjstats
+                uint8 mLvl30 = std::floor(mLvl * 0.50); // 31-39 = 1/2 hp sjstats
+                uint8 mLvl39 = std::floor(mLvl * 0.75); // 40-49 = 3/4 hp sjstats
+                uint8 mLvl49 = std::floor(mLvl);        // 50+ = 1 hp sjstats
 
                 if (mLvl > 0)
                 {
@@ -287,22 +276,22 @@ namespace mobutils
                 // 50+ = 1 hp sjstats
                 if (mLvl > 49)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl49 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl49 - 10, 0.f)) + std::max(mLvl49 - 30, 0.f) + std::max(mLvl49 - 50, 0.f) + std::max(mLvl49 - 70, 0.f)) / 2);
+                    sjHP = std::ceil((sjJobScale * (std::max((mLvl49 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl49 - 10, 0)) + std::max(mLvl49 - 30, 0) + std::max(mLvl49 - 50, 0) + std::max(mLvl49 - 70, 0)) / 2);
                 }
                 // 40-49 = 3/4 hp sjstats
                 else if (mLvl > 39)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl39 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl39 - 10, 0.f)) + std::max(mLvl39 - 30, 0.f) + std::max(mLvl39 - 50, 0.f) + std::max(mLvl39 - 70, 0.f)) / 2);
+                    sjHP = std::ceil((sjJobScale * (std::max((mLvl39 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl39 - 10, 0)) + std::max(mLvl39 - 30, 0) + std::max(mLvl39 - 50, 0) + std::max(mLvl39 - 70, 0)) / 2);
                 }
                 // 31-39 = 1/2 hp sjstats
                 else if (mLvl > 30)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl30 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl30 - 10, 0.f)) + std::max(mLvl30 - 30, 0.f) + std::max(mLvl30 - 50, 0.f) + std::max(mLvl30 - 70, 0.f)) / 2);
+                    sjHP = std::ceil((sjJobScale * (std::max((mLvl30 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl30 - 10, 0)) + std::max(mLvl30 - 30, 0) + std::max(mLvl30 - 50, 0) + std::max(mLvl30 - 70, 0)) / 2);
                 }
                 // 25-30 = 1/4 hp sjstats
                 else if (mLvl > 24)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl24 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl24 - 10, 0.f)) + std::max(mLvl24 - 30, 0.f) + std::max(mLvl24 - 50, 0.f) + std::max(mLvl24 - 70, 0.f)) / 2);
+                    sjHP = std::ceil((sjJobScale * (std::max((mLvl24 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl24 - 10, 0)) + std::max(mLvl24 - 30, 0) + std::max(mLvl24 - 50, 0) + std::max(mLvl24 - 70, 0)) / 2);
                 }
                 // 1-24 = no hp sjstats
                 else

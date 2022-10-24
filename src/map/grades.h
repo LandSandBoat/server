@@ -34,8 +34,8 @@ namespace grade
     float GetHPScale(uint8 rank, uint8 scale);
     float GetMPScale(uint8 rank, uint8 scale);
     float GetStatScale(uint8 rank, uint8 scale);
-    float GetMobHPScale(uint8 rank, uint8 scale);
-    float GetMobRBI(uint8 rank, uint8 scale);
+    uint8 GetMobHPScale(uint8 rank, uint8 scale);
+    uint8 GetMobRBI(uint8 rank, uint8 scale);
 }; // namespace grade
 
 #endif
