@@ -561,6 +561,14 @@ namespace trustutils
                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
+        
+        if (sLvl > 0)
+        {
+            grade = grade::GetJobGrade(sJob, 0);
+
+            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (sLvl - 1)) +
+                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
+        }
 
         if (mLvl >= 115)
         {
