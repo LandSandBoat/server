@@ -31,14 +31,14 @@ entity.onTrigger = function(player, npc)
     local progressMask         = player:getCharVar("SEED_AFTERGLOW_MASK")
     local intensity            = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
 
-    if (
+    if
         player:hasKeyItem(xi.ki.MARK_OF_SEED) or
         player:hasKeyItem(xi.ki.AZURE_KEY) or
         player:hasKeyItem(xi.ki.IVORY_KEY) or
         os.time() < player:getCharVar("LastAzureKey") or
         os.time() < player:getCharVar("LastIvoryKey") or
         aCrystallineProphecy < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
-    ) then
+    then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)
 
     elseif (needToZone and not player:hasStatusEffect(xi.effect.MARK_OF_SEED)) then

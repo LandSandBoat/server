@@ -146,8 +146,10 @@ local function getCasketID(mob)
 
     for i = baseChestId, baseChestId + 15 do
         if timeElapsedCheck(GetNPCByID(i)) then
-            if GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.DESPAWNED or
-                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == 0 then
+            if
+                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.DESPAWNED or
+                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == 0
+            then
                 chestId = i
                 break
             end

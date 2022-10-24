@@ -19,8 +19,11 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if player:getCharVar("FickblixCS") == 1 and player:getNation() ~= xi.nation.SANDORIA then
         cs = 10000
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
-        player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time() then
+    elseif
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
+        player:getMainLvl() >= 60 and
+        player:getCharVar("moraldecline") <= os.time()
+    then
         cs = 46
     elseif player:getCharVar("moral") == 4 and head == 15202 then -- Yagudo Headgear
         cs = 47

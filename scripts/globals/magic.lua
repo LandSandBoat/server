@@ -173,7 +173,8 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end,
 
         [xi.job.SCH] = function()
-            if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            if
+                (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
                 (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
             then
                 local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
@@ -351,8 +352,12 @@ xi.magic.doEnspell = function(caster, target, spell, effect)
         potencybonus = 2 + potencybonus
     elseif caster:getEquipID(xi.slot.EAR1) == xi.items.HOLLOW_EARRING or caster:getEquipID(xi.slot.EAR2) == xi.items.HOLLOW_EARRING then
         potencybonus = 3 + potencybonus
-    elseif(caster:getHPP() <= 75 and caster:getTP() <= 100) and
-    (caster:getEquipID(xi.slot.RING1) == xi.items.FENCERS_RING or caster:getEquipID(xi.slot.RING2) == xi.items.FENCERS_RING) then
+    elseif
+        caster:getHPP() <= 75 and
+        caster:getTP() <= 100 and
+        (caster:getEquipID(xi.slot.RING1) == xi.items.FENCERS_RING or
+        caster:getEquipID(xi.slot.RING2) == xi.items.FENCERS_RING)
+    then
         potencybonus = 5 + potencybonus
     elseif caster:getEquipID(xi.slot.MAIN) == xi.items.ENHANCING_SWORD then
         potencybonus = 5 + potencybonus
