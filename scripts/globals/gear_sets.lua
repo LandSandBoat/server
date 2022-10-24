@@ -820,10 +820,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.HOPE_STAFF,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -834,10 +833,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.JUSTICE_SWORD,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -848,10 +846,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.TEMPERANCE_AXE,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -862,10 +859,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.LOVE_HALBERD,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -876,10 +872,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.FORTITUDE_AXE,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -890,10 +885,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.FAITH_BAGHNAKHS,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -904,10 +898,9 @@ local gearSets =
     {
         items =
         {
-            xi.items.VIRTUE_STONE,
             xi.items.PRUDENCE_ROD,
         },
-        minEquipped = 2,
+        minEquipped = 1,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -2575,7 +2568,11 @@ xi.gear_sets.checkForGearSet = function(player)
             local modTierIndex = math.min(setCount, maxEquippedReq) - minEquippedReq
 
             for _, modData in ipairs(gearSets[setId].mods) do
-                player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
+                if (setId >= 47 and setId <= 53 and player:getEquipID(xi.slot.AMMO) == xi.items.VIRTUE_STONE) then
+                    player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
+                elseif setId < 47 or setId > 53 then
+                    player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
+                end
             end
         end
     end
