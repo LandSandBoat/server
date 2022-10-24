@@ -903,7 +903,7 @@ namespace battleutils
                     break;
 
                 case SPIKE_REPRISAL:
-                    if (Action->reaction == REACTION::BLOCK)
+                    if ((Action->reaction & REACTION::BLOCK) == REACTION::BLOCK)
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                     }
@@ -1784,18 +1784,18 @@ namespace battleutils
     Base block rates are (small to large shield type) 55% -> 50% -> 45% -> 30%
     Aegis is a special case, having the base block rate of a size 2 type.
     ************************************************************************/
-    uint8 GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
+    float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        int8   base          = 0;
+        float  base          = 0;
         int8   shieldSize    = 3;
-        int8   blockRate     = 0;
-        int8   skillModifier = 0;
+        float  blockRate     = 0;
+        float  skillModifier = 0;
         int16  blockRateMod  = PDefender->getMod(Mod::SHIELDBLOCKRATE);
         int16  palisadeMod   = PDefender->getMod(Mod::PALISADE_BLOCK_BONUS);
         float  reprisalMult  = 1.0f;
         auto*  weapon        = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
         uint16 attackSkill   = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
-        uint16 blockSkill    = PDefender->GetSkill(SKILL_SHIELD);
+        float  blockSkill    = PDefender->GetSkill(SKILL_SHIELD);
 
         if (PDefender->objtype == TYPE_PC)
         {
@@ -1857,7 +1857,7 @@ namespace battleutils
                 base = 50;
                 break;
             case 6: // Ochain
-                base = 110;
+                base = 108;
                 break;
             default:
                 return 0;
@@ -1866,7 +1866,7 @@ namespace battleutils
         // Check for Reprisal and adjust skill and block rate bonus multiplier
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
         {
-            blockSkill   = (uint16)(blockSkill * 1.15f);
+            blockSkill = blockSkill * 1.15f;
             reprisalMult = 1.5f; // Default is 1.5x
 
             // Adamas and Priwen set the multiplier to 3.0x while equipped
@@ -1876,12 +1876,12 @@ namespace battleutils
             }
         }
 
-        skillModifier = (int16)((blockSkill - attackSkill) * 0.2325f);
+        skillModifier = (blockSkill - attackSkill) * 0.2325f;
 
         // Add skill and Palisade bonuses
         base += skillModifier + palisadeMod;
         // Multiply by Reprisal's bonus
-        base = (int8)(base * reprisalMult);
+        base = base * reprisalMult;
         // Add Chance of Successful Block
         base += blockRateMod;
 
@@ -2117,10 +2117,10 @@ namespace battleutils
 
                         if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
                         {
-                            blockedDamage = (baseDamage * (100 - absorb)) / 100;
+                            blockedDamage = (baseDamage * (100.f - absorb)) / 100.f;
                         }
 
-                        spikesDamage = blockedDamage * (effectPower / 100);
+                        spikesDamage = blockedDamage * (effectPower / 100.f);
 
                         // Set Reprisal spike damage
                         PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
