@@ -256,7 +256,7 @@ namespace mobutils
                 float sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
 
                 uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
-                int32 RBIbase  = 1;                       // Column for RBI base
+                int32 RBIbase  = 1;                        // Column for RBI base
 
                 float RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
 
@@ -281,7 +281,7 @@ namespace mobutils
 
                 if (mLvl > 0)
                 {
-                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl-30) * (63 + ScaleXHP) + (mLvl-31) * ( JobScale + raceScale ));
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
                 }
 
                 // 50+ = 1 hp sjstats
