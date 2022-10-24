@@ -44,12 +44,13 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 : CMobEntity()
 , m_PetType(petType)
 {
-    objtype        = TYPE_PET;
-    m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    allegiance     = ALLEGIANCE_TYPE::PLAYER;
-    m_MobSkillList = 0;
-    m_PetID        = 0;
-    m_IsClaimable  = false;
+    objtype                 = TYPE_PET;
+    m_EcoSystem             = ECOSYSTEM::UNCLASSIFIED;
+    allegiance              = ALLEGIANCE_TYPE::PLAYER;
+    m_MobSkillList          = 0;
+    m_PetID                 = 0;
+    m_IsClaimable           = false;
+    m_bReleaseTargIDOnDeath = true;
 
     memset(&m_TraitList, 0, sizeof(m_TraitList));
 

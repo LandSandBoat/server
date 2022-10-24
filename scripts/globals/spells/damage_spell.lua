@@ -855,7 +855,7 @@ xi.spells.damage.calculateTMDA = function(caster, target, damageType)
         return targetMagicDamageAdjustment
     end
 
-    -- The values set for this modifiers are base 10,000.
+    -- The values set for this modifiers are base 10000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
     -- The effects of the "Shell" spells are also included in this step.

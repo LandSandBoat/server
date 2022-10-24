@@ -26,6 +26,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"
 #include "../packets/entity_animation.h"
+#include "../status_effect_container.h"
 #include "controllers/mob_controller.h"
 #include "controllers/pet_controller.h"
 #include "controllers/player_controller.h"
@@ -200,11 +201,19 @@ bool CAIContainer::Internal_Engage(uint16 targetid)
     if (entity)
     {
         //#TODO: remove m_battleTarget if possible (need to check disengage)
-        if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()))
+        // Check if an entity can change to the attack state
+        // Allow entity with prevent action effect to very briefly switch to the attack state to be properly engaged
+        if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()) || entity->StatusEffectContainer->HasPreventActionEffect())
         {
             if (ForceChangeState<CAttackState>(entity, targetid))
             {
                 entity->OnEngage(*static_cast<CAttackState*>(m_stateStack.top().get()));
+
+                // Resume being inactive if entity has a status effect preventing them from doing actions
+                if (entity->StatusEffectContainer->HasPreventActionEffect())
+                {
+                    entity->PAI->Inactive(0ms, false);
+                }
             }
         }
         return true;

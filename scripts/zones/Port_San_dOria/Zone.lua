@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
     quests.ffr.initZone(zone) -- register regions 1 through 5
 end
 
-zoneObject.onZoneIn = function(player,prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- FIRST LOGIN (START CS)

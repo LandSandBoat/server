@@ -259,8 +259,18 @@ def check_tables_in_file(name):
     with open(name, 'r+') as f:
         counter = 0
         lines = f.readlines()
+        in_block_comment = False
         for line in lines:
             counter = counter + 1
+
+            if "--[[" in line:
+                in_block_comment = True
+
+            if "]]--" in line:
+                in_block_comment = False
+
+            if in_block_comment:
+                continue
 
             # [ ]{0,} : Any number of spaces
             # =       : = character
@@ -315,6 +325,29 @@ def check_tables_in_file(name):
             #  =    : ' =' (variable assignment)
             if check_for_underscores(line):
                 print(f"Underscore in variable name: {name}:{counter}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # ,[^ \n] : Any comma that does not have space or newline following
+            for match in re.finditer(",[^ \n]", line):
+                print(f"Multiple parameters used without an appropriate following space or newline: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # .*\;$ : Any line that ends with a semi-colon
+            for match in re.finditer(".*\;$", line):
+                print(f"Semicolon detected at end of line: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # [^ =~\<\>][\=\+\*\~\/]|[\=\+\*\/][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
+            stripped_line = re.sub("--.*?(\r\n?|\n)", "", line)        # Strip to end of line if it begins with '--'
+            stripped_line = re.sub("\".*?\"|'.*?'", "", stripped_line) # Ignore data in quotes
+            for match in re.finditer("[^ =~\<\>][\=\+\*\~\/]|[\=\+\*\/][^ =\n]", stripped_line):
+                print(f"Operator or comparator without padding detected at end of line: {name}:{counter}:{match.start() + 2}")
                 print(f"{lines[counter - 1].strip()}                              <-- HERE")
                 print("")
                 errcount += 1

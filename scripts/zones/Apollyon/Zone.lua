@@ -56,7 +56,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player,region)
+zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
     switch (regionID): caseof
@@ -173,7 +173,7 @@ zoneObject.onEventUpdate = function(player,csid,option)
     end
 end
 
-zoneObject.onEventFinish = function(player,csid,option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 100 and option == 1 then
         player:setPos(557, -1, 441, 128, 33) -- Apollyon: SE_NE exit
     elseif csid == 101 and option == 1 then

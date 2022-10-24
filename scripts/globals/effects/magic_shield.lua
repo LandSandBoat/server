@@ -17,7 +17,7 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
     if power == 3 then
-        target:addMod(xi.mod.MAGIC_ABSORB,100)
+        target:addMod(xi.mod.MAGIC_ABSORB, 100)
     elseif power == 2 then
         target:addMod(xi.mod.FIRE_ABSORB, 100)
         target:addMod(xi.mod.EARTH_ABSORB, 100)
@@ -40,7 +40,7 @@ end
 effectObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
     if power == 3 then
-        target:delMod(xi.mod.MAGIC_ABSORB,100)
+        target:delMod(xi.mod.MAGIC_ABSORB, 100)
     elseif power == 2 then
         target:delMod(xi.mod.FIRE_ABSORB, 100)
         target:delMod(xi.mod.EARTH_ABSORB, 100)

@@ -16,7 +16,7 @@ local function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
     end
 
     local hitrate = acc - eva + levelbonus + 75
-    hitrate = hitrate/100
+    hitrate = hitrate / 100
 
     -- Applying hitrate caps
     if (capHitRate) then -- this isn't capped for when acc varies with tp, as more penalties are due

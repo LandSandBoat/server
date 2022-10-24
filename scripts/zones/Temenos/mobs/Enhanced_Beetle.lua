@@ -51,31 +51,33 @@ local path =
 
 entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_W_MOB[3]
-    local pause = mob:getLocalVar("pause")
+    local pause  = mob:getLocalVar("pause")
+
     if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 2)+1
+        local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
         mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
-        mob:setLocalVar("pause", os.time()+30)
+        mob:setLocalVar("pause", os.time() + 30)
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
-        local spawn = math.random(3) == 1
+        local spawn       = math.random(1, 3) == 1
         local battlefield = mob:getBattlefield()
+
         if GetNPCByID(ID.npc.TEMENOS_W_GATE[3]):getAnimation() == xi.animation.CLOSE_DOOR then
             xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_W_GATE[3])
         end
 
         if spawn then
             for i = 0, 2 do
-                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[3]+i):getStatus() == xi.status.DISAPPEAR then
+                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[3] + i):getStatus() == xi.status.DISAPPEAR then
                     local mobX = mob:getXPos()
                     local mobY = mob:getYPos()
                     local mobZ = mob:getZPos()
-                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[3]+i):setPos(mobX, mobY, mobZ)
-                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[3]+i, battlefield, "crateMaskF3", battlefield:getLocalVar("crateMaskF3"))
+                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[3] + i):setPos(mobX, mobY, mobZ)
+                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[3] + i, battlefield, "crateMaskF3", battlefield:getLocalVar("crateMaskF3"))
                     break
                 end
             end

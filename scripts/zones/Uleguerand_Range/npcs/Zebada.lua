@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     else
         if (zephyrFanCD >= os.time()) then
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
-            player:startEvent(15, VanadielTime()+(zephyrFanCD-os.time()))
+            player:startEvent(15, VanadielTime() + (zephyrFanCD - os.time()))
         else
             if (player:hasItem(1780) or player:hasItem(1779)) then -- Chamnaet Ice -- Cotton Pouch
                 player:startEvent(16)
@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 13) then
         player:addKeyItem(xi.ki.ZEPHYR_FAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZEPHYR_FAN)
-        player:setCharVar("[ENM]ZephyrFan", os.time()+(xi.settings.main.ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar("[ENM]ZephyrFan", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif (csid == 14) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1779) -- Cotton Pouch

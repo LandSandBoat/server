@@ -13,7 +13,7 @@ require("scripts/globals/trust")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     xi.trust.onTradeCipher(player, trade, 3503, 3552, 3553)
 end
 

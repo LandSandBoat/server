@@ -146,7 +146,7 @@ xi.assault.runeReleaseFinish = function(player, csid, option)
         local chars = instance:getChars()
         local zone = player:getZoneID()
         local ID = zones[zone]
-        local playerpoints = math.max((#chars -3)*.1, 0)
+        local playerpoints = math.max((#chars - 3) * 0.1, 0)
         local points = 0
         local assaultID = player:getCurrentAssault()
         local mobs = instance:getMobs()
@@ -164,7 +164,7 @@ xi.assault.runeReleaseFinish = function(player, csid, option)
                 local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
                 points = pointModifier - (pointModifier * playerpoints)
                 if entity:getCharVar("Assault_Armband") == 1 then
-                    points = points*(1.1)
+                    points = points * 1.1
                 end
                 if entity:hasCompletedAssault(assaultID) then
                     points = math.floor(points)
@@ -172,12 +172,12 @@ xi.assault.runeReleaseFinish = function(player, csid, option)
                     entity:addAssaultPoint(pointsArea, points)
                     entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 else
-                    points = math.floor(points*(1.5))
+                    points = math.floor(points * 1.5)
                     entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 5)
                     entity:addAssaultPoint(pointsArea, points)
                     entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 end
-                entity:setVar("AssaultComplete",1)
+                entity:setVar("AssaultComplete", 1)
                 entity:startEvent(102)
             end
         end

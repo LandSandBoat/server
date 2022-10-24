@@ -17,7 +17,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addHP(60*xi.settings.main.ITEM_POWER)
+    target:addHP(60 * xi.settings.main.ITEM_POWER)
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 300)
 end
 

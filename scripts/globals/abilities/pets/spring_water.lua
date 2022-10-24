@@ -13,7 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local base = 47 + pet:getMainLvl()*3
+    local base = 47 + pet:getMainLvl() * 3
     local tp   = pet:getTP()
 
     if tp < 1000 then
@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
     base = base * tp / 1000
 
-    if (target:getHP()+base > target:getMaxHP()) then
+    if (target:getHP() + base > target:getMaxHP()) then
         base = target:getMaxHP() - target:getHP() --cap it
     end
     target:delStatusEffect(xi.effect.BLINDNESS)

@@ -14,9 +14,9 @@ entity.onMobDeath = function(mob, player, optParams)
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
                 GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.WATER_SDT, -5000)
-                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+3):isAlive() then
-                    DespawnMob(ID.mob.TEMENOS_C_MOB[2]+3)
-                    SpawnMob(ID.mob.TEMENOS_C_MOB[2]+9)
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 3):isAlive() then
+                    DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 3)
+                    SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 9)
                 end
             else
                 local mobX = mob:getXPos()

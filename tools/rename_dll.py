@@ -40,7 +40,7 @@ if args.arch == "x86":
     machine = "/MACHINE:X86"
 
 process = subprocess.Popen(['lib', machine, '/DEF:' + deffile_name], )
-out, err = process.communicate()
+process.communicate()
 
 # copy the dll over
 copyfile(args.inputdll, args.outputdll)

@@ -191,7 +191,7 @@ local function getMultiAttacks(attacker, target, numHits)
             -- recalculate DA/TA/QA rate
             doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
             tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
-            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK)/100
+            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
         end
     end
 
@@ -442,19 +442,15 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     end
 
     -- Calculate critrates
-    local critrate = 0
+    local critrate = calculateDEXvsAGICritRate(attacker, target)
 
     if wsParams.canCrit then -- Work out critical hit ratios
         local nativecrit = 0
         critrate = xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
-            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()/2)/100
+            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower() / 2) / 100
         end
-
-        -- Add on native crit hit rate (guesstimated, it actually follows an exponential curve)
-        nativecrit = (attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)) * 0.005 -- assumes +0.5% crit rate per 1 dDEX
-        nativecrit = utils.clamp(nativecrit, 0.05, 0.2) -- caps only apply to base rate, not merits and mods
 
         local fencerBonusVal = calcParams.fencerBonus or 0
         nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100

@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(20)
         end
-    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
+    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer") ~= VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
         player:startEvent(23)
     elseif (downwardHelix == QUEST_ACCEPTED) then
         if (player:getCharVar("DownwardHelix") == 0) then

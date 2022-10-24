@@ -29,11 +29,11 @@ local function inverseBellRand(min, max, weight)
     end
 end
 
-spellObject.onMagicCastingCheck = function(caster,target,spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster,target,spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION

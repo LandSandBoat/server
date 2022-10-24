@@ -85,7 +85,7 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
         [1306] = function()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(xi.status.DISAPPEAR)
 
-            for i = ID.npc.TEMENOS_C_CRATE[4][1]+2, ID.npc.TEMENOS_C_CRATE[4][1]+20 do
+            for i = ID.npc.TEMENOS_C_CRATE[4][1] + 2, ID.npc.TEMENOS_C_CRATE[4][1] + 20 do
                 if hide then
                     GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 else
@@ -281,9 +281,9 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                 if spawnMimic and canMimic then
                     GetNPCByID(npc):setModelId(961) --mimic
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask+8)
+                    battlefield:setLocalVar(var, mask + 8)
                 else
-                    local random = math.random(0,1)
+                    local random = math.random(0, 1)
                     if random == 1 then random = 2 end
                     switch (random): caseof
                     {
@@ -291,7 +291,7 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                         [2] = function() GetNPCByID(npc):setModelId(962) end, -- Blue
                     }
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2,random), mask))
+                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
                 end
             end,
 

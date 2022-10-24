@@ -8,7 +8,7 @@ require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
-mobskillObject.onMobSkillCheck = function(target,mob,skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
         return 0
     end

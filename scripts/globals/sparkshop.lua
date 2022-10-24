@@ -619,7 +619,7 @@ function xi.sparkshop.onTrigger(player, npc, event)
     player:startEvent(event, 0, sparks, vouchers, naakual, cipher, remainingLimit)
 end
 
-function xi.sparkshop.onEventUpdate(player,csid,option)
+function xi.sparkshop.onEventUpdate(player, csid, option, npc)
     local sparks = player:getCurrency("spark_of_eminence")
     local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent

@@ -36,7 +36,7 @@ local function spawnNMs(player)
 end
 
 entity.onTrigger = function(player, npc)
-    local tuningOutProgress= player:getCharVar("TuningOut_Progress")
+    local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     if tuningOutProgress == 4
         and npc:getLocalVar("QuestPlayer") == player:getID()

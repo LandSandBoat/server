@@ -54,7 +54,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { xi.items.AHTAPOT, xi.items.ISTAKOZ, xi.items.ISTAVRIT, xi.items.ISTIRIDYE, xi.items.MERCANBALIGI }) then
-                        quest:setVar(player, 'Prog', math.random(2,3))
+                        quest:setVar(player, 'Prog', math.random(2, 3))
                         return quest:progressEvent(243, { [7] = quest:getVar(player, 'Prog') })
                     end
                 end,
@@ -86,7 +86,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { xi.items.AHTAPOT, xi.items.ISTAKOZ, xi.items.ISTAVRIT, xi.items.ISTIRIDYE, xi.items.MERCANBALIGI }) then
-                        quest:setVar(player, 'Prog', math.random(2,3))
+                        quest:setVar(player, 'Prog', math.random(2, 3))
                         return quest:progressEvent(243, { [7] = quest:getVar(player, 'Prog') })
                     end
                 end,

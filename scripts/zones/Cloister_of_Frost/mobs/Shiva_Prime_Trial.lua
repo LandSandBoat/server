@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = 884, hpp = math.random(30,55) }, -- uses Diamond Dust once while near 50% HPP.
+            { id = 884, hpp = math.random(30, 55) }, -- uses Diamond Dust once while near 50% HPP.
         },
     })
 end

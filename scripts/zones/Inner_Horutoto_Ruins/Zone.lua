@@ -34,8 +34,8 @@ end
 zoneObject.onRegionEnter = function(player, region)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
-    local white  = GetNPCByID(circle+1)
-    local black  = GetNPCByID(circle+2)
+    local white  = GetNPCByID(circle + 1)
+    local black  = GetNPCByID(circle + 2)
 
     -- Prevent negatives..
     if region:GetCount() < 0 then
@@ -49,8 +49,8 @@ zoneObject.onRegionEnter = function(player, region)
                 red:setAnimation(xi.anim.OPEN_DOOR)
                 red:entityAnimationPacket("smin")
                 if white:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
-                    GetNPCByID(circle+3):openDoor(30)
-                    GetNPCByID(circle+4):openDoor(30)
+                    GetNPCByID(circle + 3):openDoor(30)
+                    GetNPCByID(circle + 4):openDoor(30)
                 end
             end
         end,
@@ -60,8 +60,8 @@ zoneObject.onRegionEnter = function(player, region)
                 white:setAnimation(xi.anim.OPEN_DOOR)
                 white:entityAnimationPacket("smin")
                 if red:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
-                    GetNPCByID(circle+3):openDoor(30)
-                    GetNPCByID(circle+4):openDoor(30)
+                    GetNPCByID(circle + 3):openDoor(30)
+                    GetNPCByID(circle + 4):openDoor(30)
                 end
             end
         end,
@@ -71,8 +71,8 @@ zoneObject.onRegionEnter = function(player, region)
                 black:setAnimation(xi.anim.OPEN_DOOR)
                 black:entityAnimationPacket("smin")
                 if red:getAnimation() == xi.anim.OPEN_DOOR and white:getAnimation() == xi.anim.OPEN_DOOR then
-                    GetNPCByID(circle+3):openDoor(30)
-                    GetNPCByID(circle+4):openDoor(30)
+                    GetNPCByID(circle + 3):openDoor(30)
+                    GetNPCByID(circle + 4):openDoor(30)
                 end
             end
         end,
@@ -86,8 +86,8 @@ end
 zoneObject.onRegionLeave = function(player, region)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
-    local white  = GetNPCByID(circle+1)
-    local black  = GetNPCByID(circle+2)
+    local white  = GetNPCByID(circle + 1)
+    local black  = GetNPCByID(circle + 2)
 
     switch (region:GetRegionID()): caseof
     {

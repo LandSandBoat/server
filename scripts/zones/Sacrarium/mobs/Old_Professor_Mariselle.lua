@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    for i = opMariselle+1, opMariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             m:updateEnmity(target)
@@ -97,7 +97,7 @@ entity.onMobDespawn = function(mob)
     end
 
     -- Randomize Old Prof. Mariselle's spawn location
-    local nextSpawn = math.random(0,5)
+    local nextSpawn = math.random(0, 5)
     for i = 0, 5 do
         GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar('hasProfessorMariselle', (i == nextSpawn) and 1 or 0)
     end

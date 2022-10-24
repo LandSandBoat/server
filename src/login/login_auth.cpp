@@ -132,17 +132,6 @@ int32 login_parse(int32 fd)
 
                     if (status & ACCOUNT_STATUS_CODE::NORMAL)
                     {
-                        // fmtQuery = "SELECT * FROM accounts_sessions WHERE accid = %d AND client_port <> 0";
-
-                        // int32 ret = sql->Query(fmtQuery,sd->accid);
-
-                        // if( ret != SQL_ERROR && sql->NumRows() != 0 )
-                        //{
-                        //  ref<uint8>(sessions[fd]->wdata,0) = 0x05; // SESSION has already activated
-                        //  WFIFOSET(fd,33);
-                        //  do_close_login(sd,fd);
-                        //  return 0;
-                        //}
                         fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
                         sql->Query(fmtQuery, sd->accid);
                         fmtQuery = "SELECT charid, server_addr, server_port \
@@ -178,7 +167,6 @@ int32 login_parse(int32 fd)
                     {
                         memset(&sessions[fd]->wdata[0], 0, 33);
                         sessions[fd]->wdata.resize(33);
-                        //  ref<uint8>(sessions[fd]->wdata,0) = LOGIN_SUCCESS;
                         do_close_login(sd, fd);
                     }
 
@@ -205,7 +193,7 @@ int32 login_parse(int32 fd)
                             {
                                 if ((*i)->accid == sd->accid)
                                 {
-                                    // ShowInfo("Current login fd=%i Removing fd=%i",sd->login_fd,(*i)->login_fd);
+                                    ShowTrace("Current login fd=%i Removing fd=%i", sd->login_fd, (*i)->login_fd);
                                     login_sd_list.erase(i);
                                     break;
                                 }
@@ -389,7 +377,6 @@ int32 login_parse(int32 fd)
                 do_close_login(sd, fd);
                 break;
         };
-        // RFIFOSKIP(fd,33);
     }
     else
     {

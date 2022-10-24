@@ -56,7 +56,7 @@ zoneObject.onEventFinish = function(player, csid, option)
     elseif csid == 237 then
         player:startEvent(240)
     elseif csid == 238 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, { item=15266, var="AgainstAllOdds" })
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, { item = 15266, var = "AgainstAllOdds" })
     elseif csid == 240 then
         player:setCharVar("AgainstAllOdds", 2)
     end

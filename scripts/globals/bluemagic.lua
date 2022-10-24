@@ -244,7 +244,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- calculation below.
 
     local bonusWSC = 0
-    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
        bonusWSC = 2
     end
 
@@ -294,7 +294,7 @@ function BluePhysicalSpell(caster, target, spell, params)
             -- TODO: Check for shadow absorbs.
 
             -- Generate a random pDIF between min and max
-            local pdif = math.random((cratio[1]*1000), (cratio[2]*1000))
+            local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif = pdif / 1000
 
             -- Apply it to our final D

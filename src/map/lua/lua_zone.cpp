@@ -245,7 +245,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
 
-    PEntity->id = 0x1000100 + (ZoneID << 12) + PEntity->targid;
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+    // Add 0x100 if targid is >= 0x800 -- observed on retail.
+    if (PEntity->targid >= 0x800)
+    {
+        PEntity->id += 0x100;
+    }
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
@@ -326,6 +331,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->saveMobModifiers();
 
         PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
+        PMob->m_isAggroable           = table["isAggroable"].get_or(false);
 
         PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
 

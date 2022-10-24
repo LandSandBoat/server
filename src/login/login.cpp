@@ -239,8 +239,6 @@ int do_sockets(fd_set* rfd, duration next)
                     {
                         continue;
                     }
-
-                    // RFIFOFLUSH(fd);
                 }
                 --ret;
             }

@@ -37,7 +37,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if (damage > 0) then
         local chance = (tp-1000) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0) > math.random() * 150
         if (target:hasStatusEffect(xi.effect.BIND) == false and chance) then
-            local duration = (5 + (tp/1000 * 5)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
+            local duration = (5 + (tp / 1000 * 5)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
             target:addStatusEffect(xi.effect.BIND, 1, 0, duration)
         end
     end

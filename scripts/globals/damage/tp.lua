@@ -45,7 +45,6 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
             -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one "fist". Perhaps they have a shield with no main weapon.
             -- elseif attacker:getAutoAttackHits() > 1
             modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48)
-            printf("%d",delay)
         end
     else -- single melee swing, either 1H or 2H
         canZanshin = true -- https://www.bg-wiki.com/ffxi/Zanshin
@@ -130,7 +129,7 @@ xi.damage.tp.calculateTPGainOnPhysicalDamage = function (totalDamage, delay, att
             return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
         else
             -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
-            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1/3))
+            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
         end
     end
 

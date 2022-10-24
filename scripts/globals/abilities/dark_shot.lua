@@ -34,31 +34,34 @@ abilityObject.onUseAbility = function(player, target, ability)
     duration = duration * resist
 
     local effects = {}
+
     local bio = target:getStatusEffect(xi.effect.BIO)
     if bio ~= nil then
         table.insert(effects, bio)
     end
+
     local blind = target:getStatusEffect(xi.effect.BLINDNESS)
     if blind ~= nil then
         table.insert(effects, blind)
     end
+
     local threnody = target:getStatusEffect(xi.effect.THRENODY)
     if threnody ~= nil and threnody:getSubPower() == xi.mod.LIGHT_MEVA then
         table.insert(effects, threnody)
     end
 
     if #effects > 0 then
-        local effect = effects[math.random(#effects)]
+        local effect = effects[math.random(1, #effects)]
         -- TODO: duration here overwrites all previous values, this logic needs to be verified
         duration = effect:getDuration()
         local startTime = effect:getStartTime()
-        local tick = effect:getTick()
-        local power = effect:getPower()
-        local subpower = effect:getSubPower()
-        local tier = effect:getTier()
-        local effectId = effect:getType()
-        local subId = effect:getSubType()
-        power = power * 1.5
+        local tick      = effect:getTick()
+        local power     = effect:getPower()
+        local subpower  = effect:getSubPower()
+        local tier      = effect:getTier()
+        local effectId  = effect:getType()
+        local subId     = effect:getSubType()
+        power    = power * 1.5
         subpower = subpower * 1.5
         target:delStatusEffectSilent(effectId)
         target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
@@ -67,6 +70,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     ability:setMsg(xi.msg.basic.JA_REMOVE_EFFECT_2)
+
     local dispelledEffect = target:dispelStatusEffect()
     if dispelledEffect == xi.effect.NONE then
         -- no effect

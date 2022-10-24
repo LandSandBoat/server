@@ -23,7 +23,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobid = mob:getID()
 
-    for member = mobid-6, mobid+1 do
+    for member = mobid-6, mobid + 1 do
         local m = GetMobByID(member)
         if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
