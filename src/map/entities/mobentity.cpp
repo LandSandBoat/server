@@ -564,16 +564,14 @@ void CMobEntity::Spawn()
 
     PEnmityContainer->Clear();
 
-    uint8 level = m_minLevel;
+    // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
+    // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
+    uint8 level = static_cast<uint8>(xirand::GetRandomNumber<uint32>(m_minLevel, m_maxLevel + 1));
 
-    // Generate a random level between min and max level
-    if (m_maxLevel > m_minLevel)
-    {
-        level += xirand::GetRandomNumber(0, m_maxLevel - m_minLevel + 1);
-    }
-
+    TraitList.clear(); // Clear traits just in case from random levels. Traits are recalculated in mobutils::CalculateMobStat().
+                       // Note: Traits are NOT stored on DB load as of writing, so mobs won't gradually get stronger on respawn from restoreModifiers()
     SetMLevel(level);
-    SetSLevel(level); // calculated in function
+    SetSLevel(level); // subjob calculated in function as appropriate
 
     mobutils::CalculateMobStats(this);
     mobutils::GetAvailableSpells(this);
