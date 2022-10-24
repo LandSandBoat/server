@@ -148,7 +148,7 @@ namespace battleutils
     uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-    uint8 GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
+    float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent);
