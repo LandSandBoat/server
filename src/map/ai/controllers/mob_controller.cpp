@@ -226,8 +226,9 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return false;
     }
 
-    auto detects         = PMob->m_Detects;
-    auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
+    int16 detection       = PMob->getMobMod(MOBMOD_DETECTION);
+    auto  detects         = detection != 0 ? detection : PMob->m_Detects;
+    auto  currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
 
     bool detectSight  = (detects & DETECT_SIGHT) || forceSight;
     bool hasInvisible = false;

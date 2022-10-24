@@ -2470,7 +2470,7 @@ xi.mobMod =
     SEVERE_SPELL_CHANCE = 13, -- % chance to use a severe spell like death or impact
     SKILL_LIST          = 14, -- uses given mob skill list
     MUG_GIL             = 15, -- amount gil carried for mugging
-    -- 16 Available for use
+    DETECTION           = 16, -- Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
     NO_DESPAWN          = 17, -- do not despawn when too far from spawn. Gob Diggers have this.
     VAR                 = 18, -- temp var for whatever. Gets cleared on spawn
     -- 19 Available for use
@@ -2833,6 +2833,24 @@ xi.behavior =
     RAISABLE     = 0x004, -- mob can be raised via Raise spells
     AGGRO_AMBUSH = 0x200, -- mob aggroes by ambush
     NO_TURN      = 0x400, -- mob does not turn to face target
+}
+
+-----------------------------------
+-- Detects bits
+-----------------------------------
+
+xi.detects =
+{
+    NONE        = 0x000,
+    SIGHT       = 0x001,
+    HEARING     = 0x002,
+    LOWHP       = 0x004,
+    NONE1       = 0x008,
+    NONE2       = 0x010,
+    MAGIC       = 0x020,
+    WEAPONSKILL = 0x040,
+    JOBABILITY  = 0x080,
+    SCENT       = 0x100,
 }
 
 -----------------------------------
