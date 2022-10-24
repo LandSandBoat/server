@@ -642,7 +642,7 @@ int32 lobbyview_parse(int32 fd)
             break;
             case 0x14:
             {
-                if (!settings::get<bool>("map.CHARACTER_DELETION"))
+                if (!settings::get<bool>("login.CHARACTER_DELETION"))
                 {
                     int32         sendsize = 0x28;
                     unsigned char MainReservePacket[0x28];
