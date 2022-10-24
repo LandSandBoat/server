@@ -233,66 +233,131 @@ namespace mobutils
         uint8     mLvl     = PMob->GetMLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
+        uint8 grade;
+        uint8 gradesj;
+
         if (recover == true)
         {
             if (PMob->HPmodifier == 0)
             {
-                float hpScale = PMob->HPscale;
+                int32 mobHP      = 1; // Set mob HP
 
-                if (PMob->getMobMod(MOBMOD_HP_SCALE) != 0)
-                {
-                    hpScale = (float)PMob->getMobMod(MOBMOD_HP_SCALE) / 100.0f;
-                }
+                float baseMobHP  = 0; // Define base mobs hp
+                float sjHP       = 0; // Define base subjob hp
 
-                float growth    = 1.06f;
-                float petGrowth = 0.75f;
-                float base      = 18.0f;
+                grade            = grade::GetJobGrade(mJob, 0); // main jobs grade
+                gradesj          = grade::GetJobGrade(sJob, 0); // subjobs grade
 
-                // give hp boost every 10 levels after 25
-                // special boosts at 25 and 50
-                if (mLvl > 75)
+                int32 base       = 0; // Column for base hp
+                int32 jobScale   = 1; // Column for job scaling
+                int32 scaleX     = 2; // Column for modifier scale
+
+                float BaseHP     = grade::GetMobHPScale(grade,base);     // Main job base HP
+                float JobScale   = grade::GetMobHPScale(grade,jobScale); // Main job scaling
+                float ScaleXHP   = grade::GetMobHPScale(grade,scaleX);   // Main job modifier scale
+
+                float sjJobScale = grade::GetMobHPScale(gradesj,jobScale); // Sub job scaling
+                float sjScaleXHP = grade::GetMobHPScale(gradesj,scaleX);   // Sub job modifier scale
+
+                uint8 RBIgrade   = std::min(mLvl,(uint8)5); // RBI Grade
+                int32 RBIbase    = 1;                       // Column for RBI base
+
+                float RBI        = grade::GetMobRBI(RBIgrade,RBIbase); // RBI
+
+                uint8 mLvlIf     = 0;
+                uint8 mLvlIf30   = 0;
+                int32 raceScale  = 6;
+
+                float mLvl24     = std::floor(mLvl * 0.25); // 25-30 = 1/4 hp sjstats
+                float mLvl30     = std::floor(mLvl * 0.50); // 31-39 = 1/2 hp sjstats
+                float mLvl39     = std::floor(mLvl * 0.75); // 40-49 = 3/4 hp sjstats
+                float mLvl49     = std::floor(mLvl);        // 50+ = 1 hp sjstats
+
+                if (mLvl > 5)
                 {
-                    growth    = 1.28f;
-                    petGrowth = 1.03f;
-                }
-                else if (mLvl > 65)
-                {
-                    growth    = 1.27f;
-                    petGrowth = 1.02f;
-                }
-                else if (mLvl > 55)
-                {
-                    growth    = 1.25f;
-                    petGrowth = 0.99f;
-                }
-                else if (mLvl > 50)
-                {
-                    growth    = 1.21f;
-                    petGrowth = 0.96f;
-                }
-                else if (mLvl > 45)
-                {
-                    growth    = 1.17f;
-                    petGrowth = 0.95f;
-                }
-                else if (mLvl > 35)
-                {
-                    growth    = 1.14f;
-                    petGrowth = 0.92f;
-                }
-                else if (mLvl > 25)
-                {
-                    growth    = 1.1f;
-                    petGrowth = 0.82f;
+                    mLvlIf = 1;
                 }
 
-                // pets have lower health
+                if (mLvl > 30)
+                {
+                    mLvlIf30 = 1;
+                }
+
+                if (mLvl > 0)
+                {
+                    baseMobHP = BaseHP + ( std::min(mLvl,(uint8)5) - 1 ) * ( JobScale + raceScale - 1 ) + RBI + mLvlIf * ( std::min(mLvl,(uint8)30) - 5 ) * ( 2 * (JobScale + raceScale) + std::min(mLvl,(uint8)30) - 6 ) / 2 + mLvlIf30 * ( (mLvl-30) * (63 + ScaleXHP) + (mLvl-31) * ( JobScale + raceScale ) );
+                }
+
+                // 50+ = 1 hp sjstats
+                if (mLvl > 49)
+                {
+                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl49 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl49 - 10, 0.f)) + std::max(mLvl49 - 30, 0.f) + std::max(mLvl49 - 50, 0.f) + std::max(mLvl49 - 70, 0.f)) / 2);
+                }
+                // 40-49 = 3/4 hp sjstats
+                else if (mLvl > 39)
+                {
+                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl39 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl39 - 10, 0.f)) + std::max(mLvl39 - 30, 0.f) + std::max(mLvl39 - 50, 0.f) + std::max(mLvl39 - 70, 0.f)) / 2);
+                }
+                // 31-39 = 1/2 hp sjstats
+                else if (mLvl > 30)
+                {
+                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl30 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl30 - 10, 0.f)) + std::max(mLvl30 - 30, 0.f) + std::max(mLvl30 - 50, 0.f) + std::max(mLvl30 - 70, 0.f)) / 2);
+                }
+                // 25-30 = 1/4 hp sjstats
+                else if (mLvl > 24)
+                {
+                    sjHP  = std::ceil((sjJobScale * (std::max((mLvl24 - 1), 0.f)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl24 - 10, 0.f)) + std::max(mLvl24 - 30, 0.f) + std::max(mLvl24 - 50, 0.f) + std::max(mLvl24 - 70, 0.f)) / 2);
+                }
+                // 1-24 = no hp sjstats
+                else
+                {
+                    sjHP = 0;
+                }
+
+                // Orcs 5% more hp
+                if ( (PMob->m_Family == 189) || (PMob->m_Family == 190) || (PMob->m_Family == 334) || (PMob->m_Family == 407) )
+                {
+                    mobHP = (baseMobHP + sjHP) * 1.05;
+                }
+                // Quadavs 5% less hp
+                else if ( (PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397 ) || (PMob->m_Family == 408) )
+                {
+                    mobHP = (baseMobHP + sjHP) * .95;
+                }
+                else
+                {
+                    mobHP = baseMobHP + sjHP;
+                }
+
+                if (PMob->GetMJob() == JOB_MNK)
+                {
+                    switch (mLvl)
+                    {
+                    case 15:
+                        mobHP += 30;
+                        break;
+                    case 35:
+                        mobHP += 60;
+                        break;
+                    case 55:
+                        mobHP += 120;
+                        break;
+                    case 70:
+                        mobHP += 180;
+                        break;
+
+                    default:
+                        break;
+                    }
+                }
+
+                // pets have lower health (TODO: Capture pet HP and correct scaling)
                 if (PMob->PMaster != nullptr)
                 {
-                    growth = petGrowth;
+                    mobHP *= 0.35f;
                 }
 
-                PMob->health.maxhp = (int16)(base * pow(mLvl, growth) * hpScale);
+                PMob->health.maxhp = (int16)(mobHP);
             }
             else
             {
@@ -1533,3 +1598,4 @@ Usage:
     }
 
 }; // namespace mobutils
+
