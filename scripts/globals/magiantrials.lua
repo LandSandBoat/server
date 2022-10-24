@@ -58,11 +58,13 @@ local function getPlayerTrialByItemId(player, itemId)
 
     for index, obj in pairs(trialsPlayer) do
         local trialId = obj.trial
-        if trials[trialId] and
-           trials[trialId].reqs and
-           trials[trialId].reqs.itemId and
-           trials[trialId].reqs.itemId[itemId] and
-           trialsPlayer[index].progress < trialsPlayer[index].objectiveTotal then
+        if
+            trials[trialId] and
+            trials[trialId].reqs and
+            trials[trialId].reqs.itemId and
+            trials[trialId].reqs.itemId[itemId] and
+            trialsPlayer[index].progress < trialsPlayer[index].objectiveTotal
+        then
             table.insert(resultTrials, { trial = trialId, progress = trialsPlayer[index].progress, objectiveTotal = trialsPlayer[index].objectiveTotal })
         end
     end

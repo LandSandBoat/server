@@ -13,8 +13,12 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if ((player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP and player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.MARKSMANSHIP) or
-    (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.ARCHERY and player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.ARCHERY)) then
+    if
+        (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP and
+        player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.MARKSMANSHIP) or
+        (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.ARCHERY and
+        player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.ARCHERY)
+    then
         return 0, 0
     end
     return 216, 0 -- You do not have an appropriate ranged weapon equipped.

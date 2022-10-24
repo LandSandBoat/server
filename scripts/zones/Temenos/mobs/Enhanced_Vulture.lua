@@ -17,7 +17,8 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
-        if GetMobByID(ID.mob.TEMENOS_W_MOB[7]):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7] + 1):isDead() and
+        if
+            GetMobByID(ID.mob.TEMENOS_W_MOB[7]):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7] + 1):isDead() and
             GetMobByID(ID.mob.TEMENOS_W_MOB[7] + 2):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7] + 3):isDead() and
             GetMobByID(ID.mob.TEMENOS_W_MOB[7] + 4):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7] + 5):isDead()
         then

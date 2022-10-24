@@ -47,14 +47,20 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("changeTime", mob:getBattleTime())
             mob:setLocalVar("changeHP", mob:getHP() / 1000)
         -- subanimation 1 is flight, so check if she should land
-        elseif (mob:getAnimationSub() == 1 and (mob:getHP() / 1000 <= changeHP - 10 or
-                mob:getBattleTime() - changeTime > 120)) then
+        elseif
+            mob:getAnimationSub() == 1 and
+            (mob:getHP() / 1000 <= changeHP - 10 or
+            mob:getBattleTime() - changeTime > 120)
+        then
             mob:useMobAbility(1282)
             mob:setLocalVar("changeTime", mob:getBattleTime())
             mob:setLocalVar("changeHP", mob:getHP() / 1000)
         -- subanimation 2 is grounded mode, so check if she should take off
-        elseif (mob:getAnimationSub() == 2 and (mob:getHP() / 1000 <= changeHP - 10 or
-                mob:getBattleTime() - changeTime > 120)) then
+        elseif
+            mob:getAnimationSub() == 2 and
+            (mob:getHP() / 1000 <= changeHP - 10 or
+            mob:getBattleTime() - changeTime > 120)
+        then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:SetMobSkillAttack(730)

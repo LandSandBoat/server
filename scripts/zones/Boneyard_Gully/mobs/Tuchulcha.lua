@@ -28,9 +28,11 @@ end
 entity.onMobFight = function(mob, target)
     -- Every 25% of its HP Tuchulcha will bury itself under the sand
     -- accompanied by use of the ability Sandpit
-    if (mob:getHPP() < 75 and mob:getLocalVar('Sandpits') == 0)
-    or (mob:getHPP() < 50 and mob:getLocalVar('Sandpits') == 1)
-    or (mob:getHPP() < 25 and mob:getLocalVar('Sandpits') == 2) then
+    if
+        (mob:getHPP() < 75 and mob:getLocalVar('Sandpits') == 0) or
+        (mob:getHPP() < 50 and mob:getLocalVar('Sandpits') == 1) or
+        (mob:getHPP() < 25 and mob:getLocalVar('Sandpits') == 2)
+    then
         mob:setLocalVar('Sandpits', mob:getLocalVar('Sandpits') + 1)
         mob:useMobAbility(276)
         mob:timer(4000, function(tuchulcha)

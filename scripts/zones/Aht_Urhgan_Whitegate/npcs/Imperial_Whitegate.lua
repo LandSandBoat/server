@@ -21,11 +21,17 @@ end
 entity.onTrigger = function(player, npc)
     local noWeapons = player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0
 
-    if player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
-        whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
+    if
+        player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
+        whitegateShared.doRoyalPalaceArmorCheck(player) and
+        noWeapons
+    then
         player:startEvent(3140, xi.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
-    elseif player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
-        whitegateShared.doRoyalPalaceArmorCheck(player) and noWeapons then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
+        whitegateShared.doRoyalPalaceArmorCheck(player) and
+        noWeapons
+    then
         local ring = player:getCharVar("TOAU_RINGTIME")
         local standard = player:hasItem(129)
 

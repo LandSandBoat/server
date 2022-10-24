@@ -11,7 +11,9 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
-        if GetMobByID(ID.mob.TEMENOS_N_MOB[5]):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[5] + 1):isDead() and
+        if
+            GetMobByID(ID.mob.TEMENOS_N_MOB[5]):isDead() and
+            GetMobByID(ID.mob.TEMENOS_N_MOB[5] + 1):isDead() and
             GetMobByID(ID.mob.TEMENOS_N_MOB[5] + 2):isDead()
         then
             GetNPCByID(ID.npc.TEMENOS_N_CRATE[5]):setStatus(xi.status.NORMAL)
