@@ -12,7 +12,7 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -18.366, y = 1.750, z = -59.804, wait = 8000 },
     { x = -18.303, y = 1.750, z = -59.925 },
@@ -28,8 +28,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)

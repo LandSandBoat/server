@@ -7,7 +7,7 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 98.726, y = -14.000, z = -100.304, wait = 2000 },
     { x = 102.019, z = -103.237, wait = 2000 },
@@ -20,8 +20,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 return entity

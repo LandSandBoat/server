@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 63.612, y = -4.250, z = 102.695, wait = 4000 },
     { x = 60.000, y = -4.250, z = 103.188 },
@@ -14,8 +14,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
