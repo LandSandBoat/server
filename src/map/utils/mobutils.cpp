@@ -244,7 +244,7 @@ namespace mobutils
                 grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
                 gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
 
-                uint8 base    = 0; // Column for base hp
+                uint8 base     = 0; // Column for base hp
                 uint8 jobScale = 1; // Column for job scaling
                 uint8 scaleX   = 2; // Column for modifier scale
 
@@ -259,8 +259,8 @@ namespace mobutils
 
                 uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
 
-                uint8 mLvlIf   = (PMob->GetMLevel() > 5 ? 1 : 0);
-                uint8 mLvlIf30 = (PMob->GetMLevel() > 30 ? 1 : 0);
+                uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
+                uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
                 uint8 raceScale = 6;
 
                 uint8 mLvl24 = std::floor(mLvl * 0.25); // 25-30 = 1/4 hp sjstats
