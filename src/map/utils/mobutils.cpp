@@ -248,17 +248,17 @@ namespace mobutils
                 int32 jobScale = 1; // Column for job scaling
                 int32 scaleX   = 2; // Column for modifier scale
 
-                float BaseHP   = grade::GetMobHPScale(grade,base);     // Main job base HP
-                float JobScale = grade::GetMobHPScale(grade,jobScale); // Main job scaling
-                float ScaleXHP = grade::GetMobHPScale(grade,scaleX);   // Main job modifier scale
+                float BaseHP   = grade::GetMobHPScale(grade, base);     // Main job base HP
+                float JobScale = grade::GetMobHPScale(grade, jobScale); // Main job scaling
+                float ScaleXHP = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
 
-                float sjJobScale = grade::GetMobHPScale(gradesj,jobScale); // Sub job scaling
-                float sjScaleXHP = grade::GetMobHPScale(gradesj,scaleX);   // Sub job modifier scale
+                float sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
+                float sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
 
-                uint8 RBIgrade = std::min(mLvl,(uint8)5); // RBI Grade
+                uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
                 int32 RBIbase  = 1;                       // Column for RBI base
 
-                float RBI = grade::GetMobRBI(RBIgrade,RBIbase); // RBI
+                float RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
 
                 uint8 mLvlIf    = 0;
                 uint8 mLvlIf30  = 0;
@@ -281,7 +281,7 @@ namespace mobutils
 
                 if (mLvl > 0)
                 {
-                    baseMobHP = BaseHP + (std::min(mLvl,(uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl,(uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl,(uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl-30) * (63 + ScaleXHP) + (mLvl-31) * ( JobScale + raceScale ));
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl-30) * (63 + ScaleXHP) + (mLvl-31) * ( JobScale + raceScale ));
                 }
 
                 // 50+ = 1 hp sjstats
@@ -316,7 +316,7 @@ namespace mobutils
                     mobHP = (baseMobHP + sjHP) * 1.05;
                 }
                 // Quadavs 5% less hp
-                else if ((PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397 ) || (PMob->m_Family == 408))
+                else if ((PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397) || (PMob->m_Family == 408))
                 {
                     mobHP = (baseMobHP + sjHP) * .95;
                 }
