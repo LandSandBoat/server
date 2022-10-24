@@ -262,11 +262,7 @@ namespace mobutils
                 uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
                 uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
                 uint8 raceScale = 6;
-
-                uint8 mLvl24 = std::floor(mLvl * 0.25); // 25-30 = 1/4 hp sjstats
-                uint8 mLvl30 = std::floor(mLvl * 0.50); // 31-39 = 1/2 hp sjstats
-                uint8 mLvl39 = std::floor(mLvl * 0.75); // 40-49 = 3/4 hp sjstats
-                uint8 mLvl49 = std::floor(mLvl);        // 50+ = 1 hp sjstats
+                uint8 mLvlScale = 0;
 
                 if (mLvl > 0)
                 {
@@ -276,28 +272,31 @@ namespace mobutils
                 // 50+ = 1 hp sjstats
                 if (mLvl > 49)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl49 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl49 - 10, 0)) + std::max(mLvl49 - 30, 0) + std::max(mLvl49 - 50, 0) + std::max(mLvl49 - 70, 0)) / 2);
+                    mLvlScale = std::floor(mLvl);
                 }
                 // 40-49 = 3/4 hp sjstats
                 else if (mLvl > 39)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl39 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl39 - 10, 0)) + std::max(mLvl39 - 30, 0) + std::max(mLvl39 - 50, 0) + std::max(mLvl39 - 70, 0)) / 2);
+                    mLvlScale = std::floor(mLvl * 0.75);
                 }
                 // 31-39 = 1/2 hp sjstats
                 else if (mLvl > 30)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl30 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl30 - 10, 0)) + std::max(mLvl30 - 30, 0) + std::max(mLvl30 - 50, 0) + std::max(mLvl30 - 70, 0)) / 2);
+                    mLvlScale = std::floor(mLvl * 0.50);
                 }
                 // 25-30 = 1/4 hp sjstats
                 else if (mLvl > 24)
                 {
-                    sjHP = std::ceil((sjJobScale * (std::max((mLvl24 - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvl24 - 10, 0)) + std::max(mLvl24 - 30, 0) + std::max(mLvl24 - 50, 0) + std::max(mLvl24 - 70, 0)) / 2);
+                    mLvlScale = std::floor(mLvl * 0.25);
                 }
                 // 1-24 = no hp sjstats
                 else
                 {
-                    sjHP = 0;
+                    mLvlScale = 0;
+                    // sjHP = 0;
                 }
+
+                sjHP = std::ceil((sjJobScale * (std::max((mLvlScale - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvlScale - 10, 0)) + std::max(mLvlScale - 30, 0) + std::max(mLvlScale - 50, 0) + std::max(mLvlScale - 70, 0)) / 2);
 
                 // Orcs 5% more hp
                 if ((PMob->m_Family == 189) || (PMob->m_Family == 190) || (PMob->m_Family == 334) || (PMob->m_Family == 407))
@@ -314,25 +313,24 @@ namespace mobutils
                     mobHP = baseMobHP + sjHP;
                 }
 
+                // Mimic HP boost traits for monks
                 if (PMob->GetMJob() == JOB_MNK)
                 {
-                    switch (mLvl)
+                    if (mLvl >= 70)
                     {
-                        case 15:
-                            mobHP += 30;
-                            break;
-                        case 35:
-                            mobHP += 60;
-                            break;
-                        case 55:
-                            mobHP += 120;
-                            break;
-                        case 70:
-                            mobHP += 180;
-                            break;
-
-                        default:
-                            break;
+                        mobHP += 180;
+                    }
+                    else if (mLvl >= 55)
+                    {
+                        mobHP += 120;
+                    }
+                    else if (mLvl >= 35)
+                    {
+                        mobHP += 60;
+                    }
+                    else if (mLvl >= 15)
+                    {
+                        mobHP += 30;
                     }
                 }
 
