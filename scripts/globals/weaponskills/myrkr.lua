@@ -11,7 +11,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
-    local ftpmp = fTP(tp, 0.2, 0.4, 0.6)
+    local ftpmp = xi.weaponskills.ftp(tp, 0.2, 0.4, 0.6)
     return 1, 0, false, ftpmp * player:getMaxMP()
 end
 

@@ -25,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.skillType = xi.skill.ELEMENTAL_MAGIC
         params.bonus = 0
         params.effect = nil
-        local resist = applyResistance(caster, target, spell, params)
+        local resist = xi.magic.applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
@@ -33,7 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell)
                 target:delStatusEffect(xi.effect.FROST)
             end
             local sINT = caster:getStat(xi.mod.INT)
-            local DOT = getElementalDebuffDOT(sINT)
+            local DOT = xi.magic.getElementalDebuffDOT(sINT)
             local effect = target:getStatusEffect(xi.effect.BURN)
             local noeffect = false
             if (effect ~= nil) then
@@ -52,7 +52,7 @@ spellObject.onSpellCast = function(caster, target, spell)
                 duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
 
                 local mbonus = caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT)
-                DOT = DOT + mbonus/2 -- Damage
+                DOT = DOT + mbonus / 2 -- Damage
 
                 target:addStatusEffect(xi.effect.BURN, DOT, 3, duration)
             end

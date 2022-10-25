@@ -38,6 +38,7 @@
 
 #include "../ability.h"
 #include "../alliance.h"
+#include "../attack.h"
 #include "../battlefield.h"
 #include "../daily_system.h"
 #include "../enmity_container.h"
@@ -151,6 +152,7 @@
 #include "../packets/timer_bar_util.h"
 #include "../packets/weather.h"
 
+#include "../utils/attackutils.h"
 #include "../utils/battleutils.h"
 #include "../utils/blueutils.h"
 #include "../utils/charutils.h"
@@ -750,7 +752,7 @@ void CLuaBaseEntity::entityVisualPacket(std::string const& command, sol::object 
     CBaseEntity* PNpc = nullptr;
     if (entity != sol::lua_nil)
     {
-        CLuaBaseEntity* PLuaBaseEntity = entity.as<CLuaBaseEntity*>(); // nullptr;
+        CLuaBaseEntity* PLuaBaseEntity = entity.as<CLuaBaseEntity*>();
         PNpc                           = PLuaBaseEntity->m_PBaseEntity;
     }
 
@@ -1625,7 +1627,9 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     if (flags & PATHFLAG_PATROL || (flags & PATHFLAG_COORDS))
     {
         // Grab points from array and store in points array
-        float x, y, z = -1;
+        float x = m_PBaseEntity->loc.p.x;
+        float y = m_PBaseEntity->loc.p.y;
+        float z = m_PBaseEntity->loc.p.z;
         for (std::size_t i = 1; i <= pointsTable.size(); ++i)
         {
             sol::table  pointData = pointsTable[i];
@@ -2649,7 +2653,6 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             PChar->m_moghouseID    = 0;
             PChar->clearPacketList();
             charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
-            // PChar->loc.zone->DecreaseZoneCounter(PChar);
         }
         else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
@@ -3656,7 +3659,10 @@ uint8 CLuaBaseEntity::getWornUses(uint16 itemID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
-        return PItem->m_extra[0];
+        if (PItem != nullptr)
+        {
+            return PItem->m_extra[0];
+        }
     }
 
     return 0;
@@ -3677,6 +3683,12 @@ uint8 CLuaBaseEntity::incrementItemWear(uint16 itemID)
     if (slotID != ERROR_SLOTID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+
+        if (PItem == nullptr)
+        {
+            return 0;
+        }
+
         if (PItem->m_extra[0] == UINT8_MAX)
         {
             return PItem->m_extra[0];
@@ -4126,7 +4138,7 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
     {
         return false;
     }
-    // ShowDebug("Item ID: %u Item Jobs: %u Player Job: %u",itemID,PItem->getJobs(),PChar->GetMJob());
+
     return true;
 }
 
@@ -4394,19 +4406,12 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
             if (slotId != 255)
             {
                 // TODO: Items need to be checked for an in-progress magian trial before storing.
-                // auto item = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
-                // if (item->isType(ITEM_EQUIPMENT) && ((CItemEquipment*)item)->getTrialNumber() != 0)
                 CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
                 if (PItem)
                 {
                     PItem->setReserve(0);
                     charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
                 }
-                // else
-                //{
-                // lua_pushinteger(L, 2);
-                // return 1;
-                //}
             }
         }
     }
@@ -8046,6 +8051,25 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
     }
 }
 
+bool CLuaBaseEntity::checkThirdEye(CLuaBaseEntity* PLuaDefender)
+{
+    if (m_PBaseEntity == nullptr || PLuaDefender == nullptr)
+    {
+        return false;
+    }
+
+    auto* PAttacker = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PDefender = dynamic_cast<CBattleEntity*>(PLuaDefender->GetBaseEntity());
+    auto  result    = 0;
+
+    if (PAttacker != nullptr && PDefender != nullptr)
+    {
+        result = attackutils::TryAnticipate(PDefender, PAttacker, PHYSICAL_ATTACK_TYPE::NORMAL);
+    }
+
+    return result > (uint8)ANTICIPATE_RESULT::FAIL;
+}
+
 /************************************************************************
  *  Function: hideHP()
  *  Purpose : Toggles the display of the Hit Points bar for a Mob or NPC
@@ -8444,7 +8468,6 @@ void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
         PChar->WorkingSkills.rank[skillID]  = newrank;
         PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
         PChar->RealSkills.rank[skillID]     = newrank;
-        // PChar->RealSkills.skill[skillID] += 1;
 
         jobpointutils::RefreshGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
@@ -9508,6 +9531,7 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
         registration.levelCap   = battlefield["levelCap"];
         registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
         registration.isMission  = battlefield.get_or("isMission", false);
+        registration.showTimer  = battlefield.get_or("showTimer", true);
         registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
         registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
     }
@@ -10010,14 +10034,9 @@ void CLuaBaseEntity::wakeUp()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    // is asleep is not working!
-    // if(PEntity->isAsleep())
-    // {
-    // wake them up!
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SLEEP);
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SLEEP_II);
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_LULLABY);
-    // }
 }
 
 /************************************************************************
@@ -11529,9 +11548,6 @@ uint16 CLuaBaseEntity::getStat(uint16 statId)
             value = PEntity->EVA();
             break;
         // TODO: support getStat for ACC/RACC/RATT
-        // case Mod::ACC:  lua_pushinteger(L, PEntity->ACC()); break;
-        // case Mod::RACC: lua_pushinteger(L, PEntity->RACC()); break;
-        // case Mod::RATT: lua_pushinteger(L, PEntity->RATT()); break;
         default:
             // We should probably show a warning here
             break;
@@ -11903,14 +11919,14 @@ uint8 CLuaBaseEntity::getParryRate(CLuaBaseEntity* PLuaBaseEntity)
  *  Notes   : Battleutils calculates via GetHitRate
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getCHitRate(CLuaBaseEntity* PLuaBaseEntity)
+uint8 CLuaBaseEntity::getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
 
-    return battleutils::GetHitRate(PAttacker, PDefender, 0);
+    return battleutils::GetHitRate(PAttacker, PDefender, attackNum);
 }
 
 /************************************************************************
@@ -12385,7 +12401,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
  *  Notes   : Adds a behaviour to the gambit system
  ************************************************************************/
 
-void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry)
+std::string CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
@@ -12404,11 +12420,47 @@ void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_
     g.predicates.emplace_back(Predicate_t{ target, condition, condition_arg });
     g.actions.emplace_back(Action_t{ reaction, selector, selector_arg });
     g.retry_delay = retry_delay;
+    g.identifier  = fmt::format("{}_{}_{}_{}_{}_{}_{}", targ, cond, condition_arg, react, select, selector_arg, retry_delay);
 
     auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
-    controller->m_GambitsContainer->AddGambit(g);
+    return controller->m_GambitsContainer->AddGambit(g);
+}
+
+/************************************************************************
+ *  Function: removeSimpleGambit()
+ *  Purpose :
+ *  Example : trust:removeSimpleGambit(id)
+ *  Notes   : Removes a behaviour from the gambit system, using the id returned
+ *          : from addSimpleGambit
+ ************************************************************************/
+
+void CLuaBaseEntity::removeSimpleGambit(std::string const& id)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+
+    auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
+
+    controller->m_GambitsContainer->RemoveGambit(id);
+}
+
+/************************************************************************
+ *  Function: removeAllSimpleGambits()
+ *  Purpose :
+ *  Example : trust:removeAllSimpleGambits()
+ *  Notes   : Removes all gambits from a trust.
+ ************************************************************************/
+
+void CLuaBaseEntity::removeAllSimpleGambits()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+
+    auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
+
+    controller->m_GambitsContainer->RemoveAllGambits();
 }
 
 /************************************************************************
@@ -13632,6 +13684,32 @@ bool CLuaBaseEntity::getUntargetable()
 }
 
 /************************************************************************
+ *  Function: setIsAggroable()
+ *  Purpose : Sets is a mob can be aggroed by other mobs. Requires it to be in the player allegiance.
+ *  Example : target:isAggroable(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setIsAggroable(bool isAggroable)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    static_cast<CMobEntity*>(m_PBaseEntity)->m_isAggroable = isAggroable;
+}
+
+/************************************************************************
+ *  Function: IsAggroable()
+ *  Purpose : Returns true if a Mob can be aggroed
+ *  Example : if target:isAggroable() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isAggroable()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    return static_cast<CMobEntity*>(m_PBaseEntity)->m_isAggroable;
+}
+
+/************************************************************************
  *  Function: setDelay()
  *  Purpose : Override default delay settings for a Mob
  *  Example : mob:setDelay(2400)
@@ -14351,7 +14429,7 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 
 /************************************************************************
  *  Function: stun()
- *  Purpose : Stuns a mob for a specified amount of time (in ms)
+ *  Purpose : Stuns an entity for a specified amount of time (in ms)
  *  Example : mob:stun(5000) -- Stun for 5 seconds
  *  Notes   : To Do: Change to seconds for standardization?
  ************************************************************************/
@@ -14359,6 +14437,19 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 void CLuaBaseEntity::stun(uint32 milliseconds)
 {
     m_PBaseEntity->PAI->Inactive(std::chrono::milliseconds(milliseconds), false);
+}
+
+/************************************************************************
+ *  Function: untargetableAndUnactionable()
+ *  Purpose : Puts an entity into a stun state
+ *            Also disallows them from being targed as part of a check in PAI->TargetFind
+ *  Example : mob:stun(5000) -- Stun for 5 seconds
+ *  Notes   : To Do: Change to seconds for standardization?
+ ************************************************************************/
+
+void CLuaBaseEntity::untargetableAndUnactionable(uint32 milliseconds)
+{
+    m_PBaseEntity->PAI->Untargetable(std::chrono::milliseconds(milliseconds), false);
 }
 
 /************************************************************************
@@ -15444,6 +15535,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreHP", CLuaBaseEntity::restoreHP);
     SOL_REGISTER("delHP", CLuaBaseEntity::delHP);
     SOL_REGISTER("takeDamage", CLuaBaseEntity::takeDamage);
+    SOL_REGISTER("checkThirdEye", CLuaBaseEntity::checkThirdEye);
     SOL_REGISTER("hideHP", CLuaBaseEntity::hideHP);
     SOL_REGISTER("getDeathType", CLuaBaseEntity::getDeathType);
     SOL_REGISTER("setDeathType", CLuaBaseEntity::setDeathType);
@@ -15749,6 +15841,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getTrustID", CLuaBaseEntity::getTrustID);
     SOL_REGISTER("trustPartyMessage", CLuaBaseEntity::trustPartyMessage);
     SOL_REGISTER("addSimpleGambit", CLuaBaseEntity::addSimpleGambit);
+    SOL_REGISTER("removeSimpleGambit", CLuaBaseEntity::removeSimpleGambit);
+    SOL_REGISTER("removeAllSimpleGambits", CLuaBaseEntity::removeAllSimpleGambits);
     SOL_REGISTER("setTrustTPSkillSettings", CLuaBaseEntity::setTrustTPSkillSettings);
 
     // Mob Entity-Specific
@@ -15782,6 +15876,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setUnkillable", CLuaBaseEntity::setUnkillable);
     SOL_REGISTER("setUntargetable", CLuaBaseEntity::setUntargetable);
     SOL_REGISTER("getUntargetable", CLuaBaseEntity::getUntargetable);
+    SOL_REGISTER("setIsAggroable", CLuaBaseEntity::setIsAggroable);
+    SOL_REGISTER("isAggroable", CLuaBaseEntity::isAggroable);
 
     SOL_REGISTER("setDelay", CLuaBaseEntity::setDelay);
     SOL_REGISTER("getDelay", CLuaBaseEntity::getDelay);
@@ -15824,6 +15920,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreFromChest", CLuaBaseEntity::restoreFromChest);
     SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
     SOL_REGISTER("stun", CLuaBaseEntity::stun);
+    SOL_REGISTER("untargetableAndUnactionable", CLuaBaseEntity::untargetableAndUnactionable);
 
     SOL_REGISTER("getPool", CLuaBaseEntity::getPool);
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);

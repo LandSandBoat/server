@@ -72,16 +72,253 @@ xi.battlefield.dropChance =
 
 xi.battlefield.id =
 {
-    FLAMES_FOR_THE_DEAD = 640,
-    BROTHERS = 643,
-    HOLY_COW = 644,
-    SHADOW_LORD_BATTLE = 160,
-    WHERE_TWO_PATHS_CONVERGE = 161,
-    NW_APOLLYON = 1290,
-    SW_APOLLYON = 1291,
-    NE_APOLLYON = 1292,
-    SE_APOLLYON = 1293,
-    CS_APOLLYON = 1294,
+    RANK_2_MISSION_1                           = 0,
+    TAILS_OF_WOE                               = 1,
+    DISMEMBERMENT_BRIGADE                      = 2,
+    THE_SECRET_WEAPON                          = 3,
+    HOSTILE_HERBIVORES                         = 4,
+    SHATTERING_STARS_WAR                       = 5,
+    SHATTERING_STARS_BLM                       = 6,
+    SHATTERING_STARS_RNG                       = 7,
+    CARAPACE_COMBATANTS                        = 8,
+    SHOOTING_FISH                              = 9,
+    DROPPING_LIKE_FLIES                        = 10,
+    HORNS_OF_WAR                               = 11,
+    UNDER_OBSERVATION                          = 12,
+    EYE_OF_THE_TIGER                           = 13,
+    SHOTS_IN_THE_DARK                          = 14,
+    DOUBLE_DRAGONIAN                           = 15,
+    TODAYS_HOROSCOPE                           = 16,
+    CONTAMINATED_COLOSSEUM                     = 17,
+    KINDERGARTEN_CAP                           = 18,
+    LAST_ORC_SHUNNED_HERO                      = 19,
+    BEYOND_INFINITY_HORLAIS_PEAK               = 20,
+    SAVE_THE_CHILDREN                          = 32,
+    HOLY_CREST                                 = 33,
+    WINGS_OF_FURY                              = 34,
+    PETRIFYING_PAIR                            = 35,
+    TOADAL_RECALL                              = 36,
+    MIRROR_MIRROR                              = 37,
+    RANK_2_MISSION_2                           = 64,
+    WORMS_TURN                                 = 65,
+    GRIMSHELL_SHOCKTROOPERS                    = 66,
+    ON_MY_WAY                                  = 67,
+    THIEF_IN_NORG                              = 68,
+    THREE_TWO_ONE                              = 69,
+    SHATTERING_STARS_RDM                       = 70,
+    SHATTERING_STARS_THF                       = 71,
+    SHATTERING_STARS_BST                       = 72,
+    BIRDS_OF_A_FEATHER                         = 73,
+    CRUSTACEAN_CONUNDRUM                       = 74,
+    GROVE_GUARDIANS                            = 75,
+    HILLS_ARE_ALIVE                            = 76,
+    ROYAL_JELLY                                = 77,
+    FINAL_BOUT                                 = 78,
+    UP_IN_ARMS                                 = 79,
+    COPYCAT                                    = 80,
+    OPERATION_DESERT_SWARM                     = 81,
+    PREHISTORIC_PIGEONS                        = 82,
+    PALBOROUGH_PROJECT                         = 83,
+    SHELL_SHOCKED                              = 84,
+    BEYOND_INFINITY_WAUGHROON_SHRINE           = 85,
+    RANK_2_MISSION                             = 96,
+    STEAMED_SPROUTS                            = 97,
+    DIVINE_PUNISHERS                           = 98,
+    SAINTLY_INVITATION                         = 99,
+    TREASURE_AND_TRIBULATIONS                  = 100,
+    SHATTERING_STARS_MNK                       = 101,
+    SHATTERING_STARS_WHM                       = 102,
+    SHATTERING_STARS_SMN                       = 103,
+    CREEPING_DOOM                              = 104,
+    CHARMING_TRIO                              = 105,
+    HAREM_SCAREM                               = 106,
+    EARLY_BIRD_CATCHES_THE_WYRM                = 107,
+    ROYAL_SUCCESSION                           = 108,
+    RAPID_RAPTORS                              = 109,
+    WILD_WILD_WHISKERS                         = 110,
+    SEASONS_GREETINGS                          = 111,
+    ROYALE_RAMBLE                              = 112,
+    MOA_CONSTRICTORS                           = 113,
+    V_FORMATION                                = 114,
+    AVIAN_APOSTATES                            = 115,
+    BEYOND_INFINITY_BALGAS_DAIS                = 116,
+    TEMPLE_OF_UGGALEPIH                        = 128,
+    JUNGLE_BOOGYMEN                            = 129,
+    AMPHIBIAN_ASSAULT                          = 130,
+    PROJECT_SHANTOTTOFICATION                  = 131,
+    WHOM_WILT_THOU_CALL                        = 132,
+    SHADOW_LORD_BATTLE                         = 160,
+    WHERE_TWO_PATHS_CONVERGE                   = 161,
+    KINDRED_SPIRITS                            = 162,
+    SURVIVAL_OF_THE_WISEST                     = 163,
+    SMASH_A_MALEVOLENT_MENACE                  = 164,
+    THROUGH_THE_QUICKSAND_CAVES                = 192,
+    LEGION_XI_COMITATENSIS                     = 193,
+    SHATTERING_STARS_SAM                       = 194,
+    SHATTERING_STARS_NIN                       = 195,
+    SHATTERING_STARS_DRG                       = 196,
+    CACTUAR_SUAVE                              = 197,
+    EYE_OF_THE_STORM                           = 198,
+    SCARLET_KING                               = 199,
+    CAT_BURGLAR_BARES_FANGS                    = 200,
+    DRAGON_SCALES                              = 201,
+    MOONLIT_PATH                               = 224,
+    MOON_READING                               = 225,
+    WAKING_THE_BEAST_FULLMOON                  = 226,
+    BATTARU_ROYALE                             = 227,
+    RETURN_TO_DELKFUTTS_TOWER                  = 256,
+    INDOMITABLE_TRIUMVIRATE_VS3                = 257,
+    DAUNTLESS_DUO_VS2                          = 258,
+    SOLITARY_DEMOLISHER_VS1                    = 259,
+    HEROINES_COMBAT                            = 260,
+    MERCENARY_CAMP                             = 261,
+    ODE_OF_LIFE_BESTOWING                      = 262,
+    ARK_ANGELS_1                               = 288,
+    ARK_ANGELS_2                               = 289,
+    ARK_ANGELS_3                               = 290,
+    ARK_ANGELS_4                               = 291,
+    ARK_ANGELS_5                               = 292,
+    DIVINE_MIGHT                               = 293,
+    CELESTIAL_NEXUS                            = 320,
+    FIAT_LUX                                   = 352,
+    DARKNESS_DESCENDS                          = 353,
+    BONDS_OF_MYTHRIL                           = 354,
+    MAIDEN_OF_THE_DUSK                         = 385,
+    TRIAL_BY_WIND                              = 416,
+    CARBUNCLE_DEBACLE_CLOISTER_OF_GALES        = 417,
+    TRIAL_SIZE_TRIAL_BY_WIND                   = 418,
+    WAKING_THE_BEAST_CLOISTER_OF_GALES         = 419,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES   = 420,
+    TRIAL_BY_LIGHTNING                         = 448,
+    CARBUNCLE_DEBACLE_CLOISTER_OF_STORMS       = 449,
+    TRIAL_SIZE_TRIAL_BY_LIGHTNING              = 450,
+    WAKING_THE_BEAST_CLOISTER_OF_STORMS        = 451,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS  = 452,
+    TRIAL_BY_ICE                               = 480,
+    CLASS_REUNION                              = 481,
+    TRIAL_SIZE_TRIAL_BY_ICE                    = 482,
+    WAKING_THE_BEAST_CLOISTER_OF_FROST         = 483,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST   = 484,
+    RANK_5_MISSION                             = 512,
+    COME_INTO_MY_PARLOR                        = 513,
+    E_VASE_IVE_ACTION                          = 514,
+    INFERNAL_SWARM                             = 515,
+    HEIR_TO_THE_LIGHT                          = 516,
+    SHATTERING_STARS_PLD                       = 517,
+    SHATTERING_STARS_DRK                       = 518,
+    SHATTERING_STARS_BRD                       = 519,
+    DEMOLITION_SQUAD                           = 520,
+    DIE_BY_THE_SWORD                           = 521,
+    LET_SLEEPING_DOGS_DIE                      = 522,
+    BROTHERS_D_AURPHE                          = 523,
+    UNDYING_PROMISE                            = 524,
+    FACTORY_REJECTS                            = 525,
+    IDOL_THOUGHTS                              = 526,
+    AWFUL_AUTOPSY                              = 527,
+    CELERY                                     = 528,
+    MIRROR_IMAGES                              = 529,
+    FURIOUS_FINALE                             = 530,
+    CLASH_OF_THE_COMRADES                      = 531,
+    THOSE_WHO_LURK_IN_SHADOWS                  = 532,
+    BEYOND_INFINITY                            = 533,
+    TRIAL_BY_FIRE                              = 544,
+    TRIAL_SIZE_TRIAL_BY_FIRE                   = 545,
+    WAKING_THE_BEAST_CLOISTER_OF_FLAMES        = 546,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547,
+    TRIAL_BY_EARTH                             = 576,
+    PUPPET_MASTER                              = 577,
+    TRIAL_SIZE_TRIAL_BY_EARTH                  = 578,
+    WAKING_THE_BEAST_CLOISTER_OF_TREMORS       = 579,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS = 580,
+    TRIAL_BY_WATER                             = 608,
+    TRIAL_SIZE_TRIAL_BY_WATER                  = 609,
+    WAKING_THE_BEAST_CLOISTER_OF_TIDES         = 610,
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES   = 611,
+    FLAMES_FOR_THE_DEAD                        = 640,
+    FOLLOW_THE_WHITE_RABBIT                    = 641,
+    WHEN_HELL_FREEZES_OVER                     = 642,
+    BROTHERS                                   = 643,
+    HOLY_COW                                   = 644,
+    HEAD_WIND                                  = 672,
+    LIKE_THE_WIND                              = 673,
+    SHEEP_IN_ANTLIONS_CLOTHING                 = 674,
+    SHELL_WE_DANCE                             = 675,
+    TOTENTANZ                                  = 676,
+    TANGO_WITH_A_TRACKER                       = 677,
+    REQUIEM_OF_A_SIN                           = 678,
+    ANTAGONISTIC_AMBUSCADE                     = 679,
+    DARKNESS_NAMED                             = 704,
+    TEST_YOUR_MITE                             = 705,
+    WAKING_DREAMS                              = 706,
+    CENTURY_OF_HARDSHIP                        = 736,
+    RETURN_TO_THE_DEPTHS                       = 737,
+    BIONIC_BUG                                 = 738,
+    PULLING_THE_STRINGS                        = 739,
+    AUTOMATON_ASSAULT                          = 740,
+    MOBLINE_COMEDY                             = 741,
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA       = 768,
+    SIMULANT                                   = 769,
+    EMPTY_HOPES                                = 770,
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM         = 800,
+    YOU_ARE_WHAT_YOU_EAT                       = 801,
+    EMPTY_DREAMS                               = 802,
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA         = 832,
+    PLAYING_HOST                               = 833,
+    EMPTY_DESIRES                              = 834,
+    DESIRES_OF_EMPTINESS                       = 864,
+    PULLING_THE_PLUG                           = 865,
+    EMPTY_ASPIRATIONS                          = 866,
+    STORMS_OF_FATE                             = 896,
+    WYRMKING_DESCENDS                          = 897,
+    OURYU_COMETH                               = 928,
+    ANCIENT_VOWS                               = 960,
+    SAVAGE                                     = 961,
+    FIRE_IN_THE_SKY                            = 962,
+    BAD_SEED                                   = 963,
+    BUGARD_IN_THE_CLOUDS                       = 964,
+    BELOVED_OF_THE_ATLANTES                    = 965,
+    UNINVITED_GUESTS                           = 966,
+    NEST_OF_NIGHTMARES                         = 967,
+    ONE_TO_BE_FEARED                           = 992,
+    WARRIORS_PATH                              = 993,
+    WHEN_ANGELS_FALL                           = 1024,
+    DAWN                                       = 1056,
+    APOCALYPSE_NIGH                            = 1057,
+    CALL_TO_ARMS                               = 1088,
+    COMPLIMENTS_TO_THE_CHEF                    = 1089,
+    PUPPETMASTER_BLUES                         = 1090,
+    BREAKING_THE_BONDS_OF_FATE                 = 1091,
+    LEGACY_OF_THE_LOST                         = 1092,
+    TOUGH_NUT_TO_CRACK                         = 1120,
+    HAPPY_CASTER                               = 1121,
+    OMENS                                      = 1122,
+    ACHIEVING_TRUE_POWER                       = 1123,
+    SHIELD_OF_DIPLOMACY                        = 1124,
+    MAKING_A_MOCKERY                           = 1152,
+    SHADOWS_OF_THE_MIND                        = 1153,
+    BEAST_WITHIN                               = 1154,
+    MOMENT_OF_TRUTH                            = 1155,
+    PUPPET_IN_PERIL                            = 1156,
+    RIDER_COMETH                               = 1184,
+    NW_APOLLYON                                = 1290,
+    SW_APOLLYON                                = 1291,
+    NE_APOLLYON                                = 1292,
+    SE_APOLLYON                                = 1293,
+    CS_APOLLYON                                = 1294,
+    CS_APOLLYON_II                             = 1295,
+    CENTRAL_APOLLYON                           = 1296,
+    CENTRAL_APOLLYON_II                        = 1297,
+    TEMENOS_WESTERN_TOWER                      = 1298,
+    TEMENOS_NORTHERN_TOWER                     = 1299,
+    TEMENOS_EASTERN_TOWER                      = 1300,
+    CENTRAL_TEMENOS_BASEMENT                   = 1301,
+    CENTRAL_TEMENOS_BASEMENT_II                = 1302,
+    CENTRAL_TEMENOS_1ST_FLOOR                  = 1303,
+    CENTRAL_TEMENOS_2ND_FLOOR                  = 1304,
+    CENTRAL_TEMENOS_3RD_FLOOR                  = 1305,
+    CENTRAL_TEMENOS_4TH_FLOOR                  = 1306,
+    CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307,
+    PURPLE_THE_NEW_BLACK                       = 2721,
 }
 
 xi.battlefield.itemUses =
@@ -122,10 +359,12 @@ end
 --  - levelCap: Level cap imposed upon the battlefield. Defaults to 0 - no level cap. (optional)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNpc: The name of the NPC used for entering (required)
---  - exitNpc: The name of the NPC used for exiting
+--  - exitNpc: The name of the NPC used for exiting (optional)
+--  - exitNpcs: The names of the NPC used for exiting (optional)
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
+--  - showTimer: Show the time remaining in the battlefield in the UI for the player. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield.
 --                   Needs to be in the format of { itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }. (optional)
@@ -144,13 +383,20 @@ function Battlefield:new(data)
     obj.entryNpc = data.entryNpc
 
     obj.area = data.area
-    obj.exitNpc = data.exitNpc
+
+    if data.exitNpcs then
+        obj.exitNpcs = data.exitNpcs
+    elseif data.exitNpc then
+        obj.exitNpcs = { data.exitNpc }
+    end
+
     obj.title = data.title
     obj.grantXP = data.grantXP
     obj.levelCap = data.levelCap or 0
     obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
     obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false
+    obj.showTimer = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit = data.delayToExit or 5
     obj.requiredItems = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
@@ -178,7 +424,7 @@ function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
     local setupEvents = true
     local setupEntryNpc = true
-    local setupExitNpc = true
+    local setupExitNpcs = true
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
         for _, content in ipairs(contents) do
@@ -186,7 +432,7 @@ function Battlefield:register()
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
                 setupEvents = true
                 setupEntryNpc = true
-                setupExitNpc = true
+                setupExitNpcs = true
                 break
             end
 
@@ -197,9 +443,17 @@ function Battlefield:register()
             if self.entryNpc == content.entryNpc then
                 setupEntryNpc = false
             end
-            if self.exitNpc == content.exitNpc then
-                setupExitNpc = false
+
+            -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
+            if self.exitNpcs then
+                for _, exitNpc in ipairs(self.exitNpcs) do
+                    if utils.contains(exitNpc, content.exitNpcs) then
+                        setupExitNpcs = false
+                        break
+                    end
+                end
             end
+
         end
     end
 
@@ -234,13 +488,15 @@ function Battlefield:register()
         })
     end
 
-    if setupExitNpc and self.exitNpc then
-        utils.append(zoneSection, {
-            [self.exitNpc] =
-            {
-                onTrigger = Battlefield.onExitTrigger,
-            }
-        })
+    if setupExitNpcs and self.exitNpcs then
+        for _, exitNpc in ipairs(self.exitNpcs) do
+            utils.append(zoneSection, {
+                [exitNpc] =
+                {
+                    onTrigger = Battlefield.onExitTrigger,
+                }
+            })
+        end
     end
 
     xi.battlefield.contents[self.battlefieldId] = self
@@ -256,14 +512,14 @@ function Battlefield:isValidEntry(player, npc)
     return self.entryNpc == npc:getName()
 end
 
-function Battlefield:checkRequirements(player, npc, registrant, trade)
+function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
     if not self:isValidEntry(player, npc) then
         return false
     end
 
-    -- Do not show battlefields when either they don't require items and player is trading or
+    -- Do not show battlefields to registrant when either they don't require items and player is trading or
     -- that do require items and but player is not trading
-    if (trade == nil) ~= (#self.tradeItems == 0) then
+    if isRegistrant and (trade == nil) ~= (#self.tradeItems == 0) then
         return false
     end
 
@@ -383,7 +639,7 @@ function Battlefield.onEntryTrigger(player, npc)
             return
         end
 
-        if not content:checkRequirements(player, npc, content.id, false) then
+        if not content:checkRequirements(player, npc, false) then
             return
         end
 
@@ -764,7 +1020,7 @@ function Battlefield:onBattlefieldWipe(battlefield, players)
 end
 
 function Battlefield:addEssentialMobs(mobNames)
-    table.insert(self.groups,{
+    table.insert(self.groups, {
         mobs = mobNames,
         superlink = true,
         allDeath = utils.bind(self.handleAllMonstersDefeated, self),
@@ -822,7 +1078,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                             end
 
                             if entry.itemid == 65535 then
-                                local gil = entry.amount/#players
+                                local gil = entry.amount / #players
 
                                 for k = 1, #players, 1 do
                                     players[k]:addGil(gil)
@@ -902,8 +1158,11 @@ function BattlefieldMission:new(data)
     return obj
 end
 
-function BattlefieldMission:checkRequirements(player, npc, registrant, trade)
-    Battlefield.checkRequirements(self, player, npc, registrant, trade)
+function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
+    if not Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) then
+        return false
+    end
+
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
@@ -921,7 +1180,8 @@ function BattlefieldMission:checkSkipCutscene(player)
 end
 
 function BattlefieldMission:onBattlefieldWin(player, battlefield)
-    local current = player:getCurrentMission(self.missionArea)
+    local missionArea = self.missionArea or player:getNation()
+    local current = player:getCurrentMission(missionArea)
     if current == self.mission then
         player:setLocalVar("battlefieldWin", battlefield:getID())
     end
@@ -1127,7 +1387,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                     if roll > max then
                         if entry.itemid ~= 0 then
                             if entry.itemid == 65535 then
-                                local gil = entry.amount/#players
+                                local gil = entry.amount / #players
 
                                 for j = 1, #players, 1 do
                                     players[j]:addGil(gil)

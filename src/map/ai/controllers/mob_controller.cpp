@@ -259,8 +259,9 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return false;
     }
 
-    auto detects         = PMob->m_Detects;
-    auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
+    int16 detection       = PMob->getMobMod(MOBMOD_DETECTION);
+    auto  detects         = detection != 0 ? detection : PMob->m_Detects;
+    auto  currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
 
     bool detectSight  = (detects & DETECT_SIGHT) || forceSight;
     bool hasInvisible = false;
@@ -674,6 +675,7 @@ void CMobController::DoCombatTick(time_point tick)
                 CBattleEntity* PLowest       = nullptr;
                 float          lowestPercent = 100.f;
                 uint8          choice        = xirand::GetRandomNumber(2, 4);
+                uint16         chosenSpell   = static_cast<uint16>(SpellID::Cure);
 
                 // clang-format off
                 PPet->PMaster->ForParty([&](CBattleEntity* PMember)
@@ -700,14 +702,28 @@ void CMobController::DoCombatTick(time_point tick)
                 switch (choice)
                 {
                     case 1:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_healSpells)));
+                        if (PPet->m_healSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_healSpells);
+                        }
                         break;
                     case 2:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_buffSpells)));
+                        if (PPet->m_buffSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_buffSpells);
+                        }
                         break;
                     case 3:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_offensiveSpells)));
+                        if (PPet->m_offensiveSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_offensiveSpells);
+                        }
                         break;
+                }
+
+                if (CanCastSpells())
+                {
+                    CastSpell(static_cast<SpellID>(chosenSpell));
                 }
 
                 if (PPet)

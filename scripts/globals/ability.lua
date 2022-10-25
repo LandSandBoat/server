@@ -720,7 +720,7 @@ xi.addType =
     ADDTYPE_AUTOMATON   = 512,
 }
 
-function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav) -- seems to only be used for Wyvern breaths
+function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
     if (msg == 158 or msg == 188 or msg == 31 or msg == 30) then
@@ -728,8 +728,11 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
     end
 
     --handle pd
-    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) )
-            and skilltype == xi.attackType.PHYSICAL) then
+    if
+        (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)) and
+        skilltype == xi.attackType.PHYSICAL
+    then
         skill:setMsg(xi.msg.basic.JA_MISS_2)
         return 0
     end
@@ -762,7 +765,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
     end
 
     --handle Third Eye using shadowbehav as a guide
-    if (skilltype == xi.attackType.PHYSICAL and utils.thirdeye(target)) then
+    if skilltype == xi.attackType.PHYSICAL and mob:checkThirdEye(target) then
         skill:setMsg(xi.msg.basic.ANTICIPATE)
         return 0
     end
@@ -794,7 +797,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
 
     if (dmg > 0) then
         target:wakeUp()
-        target:updateEnmityFromDamage(mob,dmg)
+        target:updateEnmityFromDamage(mob, dmg)
     end
 
     return dmg

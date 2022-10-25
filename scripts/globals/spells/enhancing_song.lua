@@ -108,6 +108,9 @@ local pTable =
 }
 
 -- Enhancing Song Potency function. (1/2)
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId, tier, songEffect, instrumentBoost, soulVoicePower)
     local power       = pTable[spellId][7] -- The variable we want to calculate.
     local meritEffect = pTable[spellId][5]

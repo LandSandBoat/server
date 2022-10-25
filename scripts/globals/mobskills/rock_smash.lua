@@ -21,7 +21,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         else
             return 1
         end
-    elseif mob:AnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then
+    elseif mob:getAnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then
         return 0
     else
         return 1
@@ -38,7 +38,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
     local typeEffect = xi.effect.PETRIFICATION
-    local power = math.random(25, 40) + mob:getMainLvl()/3
+    local power = math.random(25, 40) + mob:getMainLvl() / 3
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 50, 0, power)
 

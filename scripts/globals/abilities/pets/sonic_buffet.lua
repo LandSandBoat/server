@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill)
     xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
 
     -- TODO: upon smn BP damage rewrite, the base damage & mods etc need to be re-evaluated. These are eyeballed and guesstimated to fit what damage looks like on retail.
-    local damage = math.floor(37.5 * (2.0 + 0.1*tp/150)) -- fTP starts at 2.0 and scales every 150 tp by .1 for a range of 2.0 to 4.0. Base value ballparked from retail.
+    local damage = math.floor(37.5 * (2.0 + 0.1 * tp / 150)) -- fTP starts at 2.0 and scales every 150 tp by .1 for a range of 2.0 to 4.0. Base value ballparked from retail.
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.magic.ele.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.WIND)
@@ -30,7 +30,7 @@ abilityObject.onPetAbility = function(target, pet, petskill)
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)
     target:updateEnmityFromDamage(pet, damage)
 
-    local resist = applyResistanceAbility(pet, target, xi.magic.ele.WIND, xi.skill.NONE, 0) -- Does this get bonus macc from SMN skill?
+    local resist = xi.magic.applyResistanceAbility(pet, target, xi.magic.ele.WIND, xi.skill.NONE, 0) -- Does this get bonus macc from SMN skill?
     if (resist > 0.0625) then -- Is there _any_ circumstance wherein a dispel adds a message? Based on testing it seems the ability is magic damage only visibly.
         target:dispelStatusEffect()
     end

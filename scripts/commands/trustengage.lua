@@ -34,6 +34,6 @@ function onTrigger(player, type)
         error(player)
     end
 
-    player:setCharVar("TrustEngageType", type);
+    player:setCharVar("TrustEngageType", type)
     player:PrintToPlayer(string.format("Set Trust engage type to: %i: %s", type, types[type][2]))
 end

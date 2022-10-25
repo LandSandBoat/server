@@ -50,7 +50,12 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(200)
+    if player:getLocalVar('[BOAT]Paid') == 1 then
+        player:startEvent(200)
+    else
+        player:setPos(33.1626, -2.5586, -26.3290, 69)
+        player:setLocalVar('[BOAT]Paid', 0)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -65,6 +70,8 @@ zoneObject.onEventFinish = function(player, csid, option)
         end
     elseif csid == 1101 and npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.quest.fame_area.NORG, var = { "Enagakure_Killed", "illTakeTheBigBoxCS" } }) then
         player:delKeyItem(xi.ki.SEANCE_STAFF)
+    elseif csid == 220 and option == 0 then
+        player:setLocalVar('[BOAT]Paid', 0)
     end
 end
 

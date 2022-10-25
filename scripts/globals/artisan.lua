@@ -46,7 +46,7 @@ xi.artisan.moogleOnUpdate = function(player, csid, option)
             player:delGil(9980)
             player:changeContainerSize(xi.inv.MOGSACK, 30)
             player:setCharVar("[artisan]visited", 0)
-            player:updateEvent(0, 0, 0, 30+1, 0, 0, 0, 2)
+            player:updateEvent(0, 0, 0, 30 + 1, 0, 0, 0, 2)
         end
 
     elseif option == 2 then -- Expand sack
@@ -55,7 +55,7 @@ xi.artisan.moogleOnUpdate = function(player, csid, option)
         local gobbieCanUpgrade = gobbieSize < 80 and 1 or 0
         if sackSize < gobbieSize and sackSize > 0 then
             player:changeContainerSize(xi.inv.MOGSACK, gobbieSize - sackSize)
-            player:updateEvent((gobbieSize-30)/5, 0, 0, player:getContainerSize(xi.inv.MOGSACK)+1, 0, 0, 2, 0)
+            player:updateEvent((gobbieSize - 30) / 5, 0, 0, player:getContainerSize(xi.inv.MOGSACK) + 1, 0, 0, 2, 0)
         else
             player:updateEvent(0, 0, 0, 0, 0, 0, gobbieCanUpgrade, 0)
         end

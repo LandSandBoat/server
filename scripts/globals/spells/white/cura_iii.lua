@@ -31,7 +31,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local minCure = 130
     if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
-        power = getCurePowerOld(caster)
+        power = xi.magic.getCurePowerOld(caster)
         divisor = 1
         constant = 70
         if (power > 300) then
@@ -42,13 +42,13 @@ spellObject.onSpellCast = function(caster, target, spell)
             constant = 115
         end
     else
-        power = getCurePower(caster)
+        power = xi.magic.getCurePower(caster)
         if (power < 125) then
             divisor = 2.2
             constant = 130
             basepower = 70
         elseif (power < 200) then
-            divisor =  75/65
+            divisor =  75 / 65
             constant = 155
             basepower = 125
         elseif (power < 300) then
@@ -67,9 +67,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
-        basecure = getBaseCureOld(power, divisor, constant)
+        basecure = xi.magic.getBaseCureOld(power, divisor, constant)
     else
-        basecure = getBaseCure(power, divisor, constant, basepower)
+        basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
     end
 
     --Apply Afflatus Misery Bonus to the Result
@@ -99,7 +99,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
     end
 
-    final = getCureFinal(caster, spell, basecure, minCure, false)
+    final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods
@@ -117,7 +117,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

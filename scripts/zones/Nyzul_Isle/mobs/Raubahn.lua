@@ -43,7 +43,7 @@ entity.onMobSpawn = function(mob)
                     mobTimerArg:updateEnmity(new_target)
                 end
 
-                mobTimerArg:setLocalVar("RERAISES", reraises+1)
+                mobTimerArg:setLocalVar("RERAISES", reraises + 1)
             end)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type

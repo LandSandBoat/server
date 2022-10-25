@@ -44,7 +44,7 @@ entity.onMobFight = function( mob, target )
     if mob:getBattleTime() / 180 == numAdds then
         local godsRemaining = {}
         for i = 1, 4 do
-            if (mob:getLocalVar("add"..i) == 0) then
+            if mob:getLocalVar("add"..i) == 0 then
                 table.insert(godsRemaining, i)
             end
         end

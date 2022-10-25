@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target, player)
     local result = 0
     if
         target:getSystem() ~= xi.ecosystem.EMPTY and
-        player:getRegion() == xi.region.PROMYVION
+        player:getZone():getRegionID() == xi.region.PROMYVION
     then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif target:checkDistance(player) > 10 then
@@ -24,7 +24,7 @@ itemObject.onItemCheck = function(target, player)
 end
 
 itemObject.onItemUse = function(target, player)
-    local duration = math.random(25,32) -- Random duration between 25s and 32s
+    local duration = math.random(25, 32) -- Random duration between 25s and 32s
     target:setLocalVar("EmptyTerror", os.time()) -- Sets terror start time.
     target:setLocalVar("EmptyTerrorDuration", duration) -- Sets terror duration.
 end

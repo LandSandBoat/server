@@ -435,6 +435,7 @@ public:
     void  delHP(int32 delAmt);             // Subtract hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
                      sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
+    bool  checkThirdEye(CLuaBaseEntity* PLuaDefender);
     void  hideHP(bool value);
     int32 getDeathType();            // Returns Death Type for Abyssea
     void  setDeathType(int32 value); // Sets Death Type for Abyssea
@@ -664,7 +665,7 @@ public:
     uint8  getGuardRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the guard rate for an attack.
     uint8  getBlockRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the block rate for an attack.
     uint8  getParryRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the parry rate for an attack.
-    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                     // Returns the hit rate for an attack.
+    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum = 0);                                                                // Returns the hit rate for an attack. Defaults to main weapon.
     uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                               // Returns the ranged hit rate for an attack.
     uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
     uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
@@ -697,8 +698,9 @@ public:
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);
-    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
-    int32  addFullGambit(lua_State*);
+    auto   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry) -> std::string;
+    void   removeSimpleGambit(std::string const& id);
+    void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
@@ -778,6 +780,8 @@ public:
     void setUnkillable(bool unkillable);
     void setUntargetable(bool untargetable);
     bool getUntargetable();
+    void setIsAggroable(bool isAggroable);
+    bool isAggroable();
 
     void  setDelay(uint16 delay);             // sets a mobs weapon delay
     int16 getDelay();                         // return the delay value
@@ -820,6 +824,7 @@ public:
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
+    void untargetableAndUnactionable(uint32 milliseconds);
 
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();

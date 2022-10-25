@@ -55,7 +55,7 @@ zones[xi.zone.WEST_RONFAURE] =
     {
         FUNGUS_BEETLE_PH      =
         {
-            [17187026] = 17187047, -- -332.722,-21.032,-112.044
+            [17187026] = 17187047, -- -332.722 -21.032 -112.044
         },
         JAGGEDY_EARED_JACK_PH =
         {

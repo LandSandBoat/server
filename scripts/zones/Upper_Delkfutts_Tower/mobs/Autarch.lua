@@ -26,10 +26,10 @@ entity.onSpikesDamage = function(mob, target, damage)
     local params = {}
     params.bonusmab = 0
     params.includemab = false
-    dmg = addBonusesAbility(mob, xi.magic.ele.THUNDER, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.THUNDER, 0)
-    dmg = adjustForTarget(target, dmg, xi.magic.ele.THUNDER)
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.THUNDER, dmg)
+    dmg = xi.magic.addBonusesAbility(mob, xi.magic.ele.THUNDER, target, dmg, params)
+    dmg = dmg * xi.magic.applyResistanceAddEffect(mob, target, xi.magic.ele.THUNDER, 0)
+    dmg = xi.magic.adjustForTarget(target, dmg, xi.magic.ele.THUNDER)
+    dmg = xi.magic.finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.THUNDER, dmg)
 
     if dmg < 0 then
         dmg = 0

@@ -20,7 +20,7 @@ attachmentObject.onEquip = function(pet)
             mpthreshold = 65
         end
 
-        local mpp = (automaton:getMaxMP() > 0) and math.ceil(automaton:getMP()/automaton:getMaxMP() * 100) or 100
+        local mpp = (automaton:getMaxMP() > 0) and math.ceil(automaton:getMP() / automaton:getMaxMP() * 100) or 100
         if mpp < mpthreshold and automaton:getLocalVar("convert") < VanadielTime() then
             automaton:useMobAbility(xi.automaton.abilities.MANA_CONVERTER, automaton)
         end

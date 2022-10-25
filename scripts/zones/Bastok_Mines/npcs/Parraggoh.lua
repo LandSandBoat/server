@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10)
 
     elseif beautyAndTheGalka == QUEST_ACCEPTED then
-        if math.random(2) == 1 then
+        if math.random(1, 2) == 1 then
             player:startEvent(8)
         else
             player:startEvent(9)

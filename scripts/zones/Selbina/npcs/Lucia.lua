@@ -22,6 +22,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 221 and player:getZPos() < -28.750 then
         player:delGil(100)
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 

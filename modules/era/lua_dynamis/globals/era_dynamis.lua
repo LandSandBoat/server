@@ -310,11 +310,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaSandoria_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = {161.838, -2.000, 161.673, 93, 185},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                   (player:getMainLvl() >= dynamis_min_lvl)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.BASTOK_MINES] =
     {
@@ -330,11 +329,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaBastok_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         enterPos = {116.482, 0.994, -72.121, 128, 186},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                   (player:getMainLvl() >= dynamis_min_lvl)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.WINDURST_WALLS] =
     {
@@ -350,11 +348,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaWindurst_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
         enterPos = {-221.988, 1.000, -120.184, 0, 187},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                   (player:getMainLvl() >= dynamis_min_lvl)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.RULUDE_GARDENS] =
     {
@@ -370,11 +367,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaJeuno_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = {48.930, 10.002, -71.032, 195, 188},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                   (player:getMainLvl() >= dynamis_min_lvl)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
@@ -389,14 +385,14 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaBeaucedine_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         enterPos = {-284.751, -39.923, -422.948, 235, 134},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.HYDRA_CORPS_COMMAND_SCEPTER) and
-                    player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
-                    player:hasKeyItem(xi.ki.HYDRA_CORPS_LANTERN) and
-                    player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP) and
-                   (player:getMainLvl() >= dynamis_min_lvl)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+            xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
+            xi.ki.HYDRA_CORPS_EYEGLASS,
+            xi.ki.HYDRA_CORPS_LANTERN,
+            xi.ki.HYDRA_CORPS_TACTICAL_MAP,
+        },
     },
     [xi.zone.XARCABARD] =
     {
@@ -411,11 +407,11 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaXarcabard_HasSeenWinCS",
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = {569.312, -0.098, -270.158, 90, 135},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA) and
-                   (player:getMainLvl() >= dynamis_min_lvl)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+            xi.ki.HYDRA_CORPS_INSIGNIA,
+        },
     },
     [xi.zone.VALKURM_DUNES] =
     {
@@ -431,12 +427,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                    player:getMainLvl() >= dynamis_min_lvl and
-                   (player:hasCompletedMission(COP, xi.mission.id.cop.DARKNESS_NAMED) == true)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.BUBURIMU_PENINSULA] =
     {
@@ -452,12 +446,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                    player:getMainLvl() >= dynamis_min_lvl and
-                   (player:hasCompletedMission(COP, xi.mission.id.cop.DARKNESS_NAMED) == true)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.QUFIM_ISLAND] =
     {
@@ -473,12 +465,10 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
-                    player:getMainLvl() >= dynamis_min_lvl and
-                   (player:hasCompletedMission(COP, xi.mission.id.cop.DARKNESS_NAMED) == true)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+        },
     },
     [xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
@@ -494,14 +484,13 @@ xi.dynamis.entryInfoEra =
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = {0.1, -7, -21, 190, 42},
-        reqs = function(player)
-            return (player:hasKeyItem(xi.ki.DYNAMIS_VALKURM_SLIVER) and
-                    player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
-                    player:hasKeyItem(xi.ki.DYNAMIS_BUBURIMU_SLIVER) and
-                    player:getMainLvl() >= dynamis_min_lvl and
-                   (player:hasCompletedMission(COP, xi.mission.id.cop.DARKNESS_NAMED) == true)) or
-                   (checkGM(player))
-        end,
+        reqs =
+        {
+            xi.ki.VIAL_OF_SHROUDED_SAND,
+            xi.ki.DYNAMIS_VALKURM_SLIVER,
+            xi.ki.DYNAMIS_QUFIM_SLIVER,
+            xi.ki.DYNAMIS_BUBURIMU_SLIVER,
+        },
     },
 }
 
@@ -715,6 +704,35 @@ xi.dynamis.dynaInfoEra =
 
 }
 
+local function checkEntryReqs(player, zoneId)
+    if checkGM(player) or
+        (player:getCharVar(xi.dynamis.entryInfoEra[zoneId].enteredVar) ~= 0)
+    then
+        return true
+    end
+
+    if player:getMainLvl() <= dynamis_min_lvl or
+        (xi.dynamis.entryInfoEra[zoneId].csBit >= 7 and not player:hasCompletedMission(COP, xi.mission.id.cop.DARKNESS_NAMED))
+    then
+        return false
+    end
+
+    local numKIs = #xi.dynamis.entryInfoEra[zoneId].reqs
+    local keyItemsPossessed = 0
+
+    for _, ki in pairs(xi.dynamis.entryInfoEra[zoneId].reqs) do
+        if player:hasKeyItem(ki) then
+            keyItemsPossessed = keyItemsPossessed + 1
+        end
+    end
+
+    if keyItemsPossessed == numKIs then
+        return true
+    end
+
+    return false
+end
+
 local function cleanupNeeded(zone, zoneMobs)
     local i = 0
     for _, mob in pairs(zoneMobs) do
@@ -770,12 +788,10 @@ xi.dynamis.handleDynamis = function(zone)
             player:setLocalVar("Requires_Initial_Update", 1)
         end
 
-        if not checkGM(player) then -- GMs can stay in zone until expiry.
+        if not checkGM(player) and player:getLocalVar('[DYNA]NextHourglassCheck') < os.time() then -- GMs can stay in zone until expiry.
             local hasValidHourglass = xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamistoken, zoneTimepoint) -- Checks for a valid hourglass.
-            if hasValidHourglass == false then
-                if os.time() >= player:getCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID)) then -- If Var time passes boot.
-                    xi.dynamis.ejectPlayer(player)
-                end
+            if hasValidHourglass then
+                player:setLocalVar('[DYNA]NextHourglassCheck', os.time() + 5)
             end
         end
     end
@@ -979,16 +995,30 @@ xi.dynamis.isPlayerRegistered = function(player, dynamisToken)
     end
 end
 
-xi.dynamis.ejectPlayer = function(player)
+xi.dynamis.ejectPlayer = function(player, forceEject)
     local zoneID = player:getZoneID()
+    if forceEject == nil then
+        forceEject = false
+    end
+
     if player:getCurrentRegion() == xi.region.DYNAMIS then
         if player:getLocalVar("Received_Eject_Warning") ~= 1 then
             player:delStatusEffectSilent(xi.effect.BATTLEFIELD)
-            player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
-            player:setLocalVar("Received_Eject_Warning", 1)
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
-            player:disengage() -- Force disengage.
-            player:timer(2000, function(player) player:startCutscene(100) end) -- Wait 2 seconds then play exit CS.
+            if not forceEject then
+                player:timer(2000, function(playerArg) playerArg:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
+                player:setLocalVar("Received_Eject_Warning", 1)
+                player:timer(30000, function(playerArg)
+                    playerArg:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
+                    playerArg:disengage() -- Force disengage.
+                    playerArg:timer(2000, function(playerArg) player:startCutscene(100) end) -- Wait 2 seconds then play exit CS.
+                end)
+            else
+                player:timer(2000, function(playerArg) playerArg:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 0)
+                    playerArg:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
+                    playerArg:disengage() -- Force disengage.
+                    playerArg:timer(4000, function(playerArg) player:startCutscene(100) end) -- Wait 2 seconds then play exit CS.
+                end) -- Wait 1 second, send no clearance message.
+            end
         end
     end
 end
@@ -1002,9 +1032,9 @@ xi.dynamis.verifyHoldsValidHourglass = function(player, zoneDynamistoken, zoneTi
         if checkGM(player) then
             player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID), zoneTimepoint) -- Player is a GM and can bypass the hourglass requirement.
         elseif player:getCharVar(string.format("[DYNA]PlayerZoneToken_%s", player:getZoneID())) ~= zoneDynamistoken then
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID), (os.time() + 0)) -- Player is not in the correct dynamis instance.
+            xi.dynamis.ejectPlayer(player, true)
         else
-            player:setCharVar(string.format("[DYNA]EjectPlayer_%s", zoneID), (os.time() + 30)) -- Player does not have a valid hourglass.
+            xi.dynamis.ejectPlayer(player)
         end
 
         return false
@@ -1040,7 +1070,7 @@ xi.dynamis.entryNpcOnTrade = function(player, npc, trade)
     local zoneID = npc:getZoneID()
     if xi.dynamis.entryInfoEra[zoneID].enabled == false then return end -- If zone is not enabled, return.
     if (player:getLocalVar(xi.dynamis.entryInfoEra[zoneID].enteredVar) == 0) then -- Check if player has entered the Dynamis before.
-    if (xi.dynamis.entryInfoEra[zoneID].reqs == false) then return end end -- Check if player meets all requirements or is a GM.
+        if not checkEntryReqs(player, zoneID) then return end end -- Check if player meets all requirements or is a GM.
 
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
     local dynamis_time_remaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint) -- Get time remaining of Dynamis
@@ -1170,23 +1200,23 @@ end)
 --      Dynamis Player/Zone Functions     --
 --------------------------------------------
 
-m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
+xi.dynamis.zoneOnZoneInEra = function(player, prevZone)
     local zoneID = player:getZoneID()
     local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
     local info = xi.dynamis.dynaInfoEra[zoneID]
     local ID = zones[zoneID]
 
-    player:addStatusEffectEx(xi.effect.BATTLEFIELD, 0, 1, 0, 0, true)
     -- usually happens when zoning in with !zone command
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
-    player:timer(5000, function(player)
+    player:timer(5000, function(playerArg)
         local timepoint = xi.dynamis.getDynaTimeRemaining(zoneTimepoint)
-        player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(utils.clamp(timepoint, 0, timepoint) / 60), 1) -- Send message letting player know how long they have.
+        playerArg:addStatusEffectEx(xi.effect.BATTLEFIELD, 0, 1, 0, 0, true)
+        playerArg:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(utils.clamp(timepoint, 0, timepoint) / 60), 1) -- Send message letting player know how long they have.
     end)
 
     return -1
-end)
+end
 
 xi.dynamis.zoneOnZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then

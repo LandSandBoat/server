@@ -35,12 +35,12 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.skillType = xi.skill.BLUE_MAGIC
         params.bonus = 0
         params.effect = nil
-        local resist = applyResistance(caster, target, spell, params)
+        local resist = xi.magic.applyResistance(caster, target, spell, params)
         if (resist <= 0) then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ERASE)
-            target:addStatusEffect(xi.effect.STR_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT*resist, xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT*xi.settings.main.ABSORB_SPELL_TICK) -- target loses STR
+            target:addStatusEffect(xi.effect.STR_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT * resist, xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK) -- target loses STR
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

@@ -67,5 +67,14 @@
                 "command": "${workspaceFolder}/xi_map.exe",
             },
         },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${fileDirname}"
+        },
     ],
 }

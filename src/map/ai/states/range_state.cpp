@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "range_state.h"
+#include "../../entities/battleentity.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
 #include "../../items/item_weapon.h"

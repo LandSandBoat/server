@@ -293,7 +293,8 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
         end
 
     -- Divine magic and Non-Player Elemental magic. TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
-    elseif skillType == xi.skill.DIVINE_MAGIC or
+    elseif
+        skillType == xi.skill.DIVINE_MAGIC or
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
     then
         local spellMultiplier = pTable[spellId][mNPC] -- M
@@ -419,6 +420,9 @@ end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff, bonusMagicAccuracy, element)
     local resist        = 1 -- The variable we want to calculate
     local casterJob     = caster:getMainJob()
@@ -580,7 +584,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
 
         [xi.job.RDM] = function()
             -- Category 1
-            if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
+            if spellElement >= xi.magic.ele.FIRE and spellElement <= xi.magic.ele.WATER then
                 magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
             end
 
@@ -693,7 +697,6 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     local magicBurstBonus        = 1.0
     local modBurst               = 1.0
     local ancientMagicBurstBonus = 0
-    local _, skillchainCount     = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
     if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
@@ -853,7 +856,7 @@ xi.spells.damage.calculateTMDA = function(caster, target, damageType)
         return targetMagicDamageAdjustment
     end
 
-    -- The values set for this modifiers are base 10,000.
+    -- The values set for this modifiers are base 10000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
     -- The effects of the "Shell" spells are also included in this step.

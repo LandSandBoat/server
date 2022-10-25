@@ -12,8 +12,8 @@ entity.onTrigger = function(player, npc)
     local DoorID = npc:getID()
 
     GetNPCByID(DoorID):openDoor(7)
-    GetNPCByID(DoorID+1):openDoor(7)
-    GetNPCByID(DoorID+2):openDoor(7)
+    GetNPCByID(DoorID + 1):openDoor(7)
+    GetNPCByID(DoorID + 2):openDoor(7)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -410,11 +410,14 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (uint32 mobid : mobIds)
                 {
                     CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
-                    groupEntities.push_back(entity);
-                    if (entities.find(entity->id) == entities.end())
+                    if (entity != nullptr)
                     {
-                        m_PLuaBattlefield->InsertEntity(entity, true);
-                        entities.insert(entity->id);
+                        groupEntities.push_back(entity);
+                        if (entities.find(entity->id) == entities.end())
+                        {
+                            m_PLuaBattlefield->InsertEntity(entity, true);
+                            entities.insert(entity->id);
+                        }
                     }
                 }
             };
@@ -437,36 +440,19 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         BattlefieldGroup group;
         for (CBaseEntity* entity : groupEntities)
         {
+            auto PMob = dynamic_cast<CMobEntity*>(entity);
+            XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+            // Restore modifiers here since we save the modifiers below but don't want any previous modifiers persisting
+            PMob->restoreModifiers();
+            PMob->restoreMobModifiers();
+
             group.mobIds.push_back(entity->id);
         }
 
         group.deathCallback       = groupData.get<sol::function>("death");
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
-
-        bool spawned = groupData.get_or("spawned", true);
-        if (spawned)
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
-                {
-                    entity->Spawn();
-                    spawnedEntities.insert(entity->id);
-                }
-            }
-        }
-
-        auto setup = groupData.get<sol::function>("setup");
-        if (setup.valid())
-        {
-            auto mobs = lua.create_table();
-            for (CBaseEntity* entity : groupEntities)
-            {
-                mobs.add(CLuaBaseEntity(entity));
-            }
-            setup(this, mobs);
-        }
 
         bool isParty = groupData.get_or("isParty", false);
         if (isParty)
@@ -551,16 +537,42 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             }
         }
 
+        bool spawned = groupData.get_or("spawned", true);
+        if (spawned)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
+                {
+                    entity->Spawn();
+                    spawnedEntities.insert(entity->id);
+                }
+            }
+        }
+
+        auto setup = groupData.get<sol::function>("setup");
+        if (setup.valid())
+        {
+            auto mobs = lua.create_table();
+            for (CBaseEntity* entity : groupEntities)
+            {
+                mobs.add(CLuaBaseEntity(entity));
+            }
+            setup(this, mobs);
+        }
+
         m_PLuaBattlefield->addGroup(std::move(group));
     }
 
     if (m_PLuaBattlefield->GetArmouryCrate() != 0)
     {
-        CNpcEntity* entity = static_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC));
-        m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
-        entity->SetUntargetable(true);
-        entity->ResetLocalVars();
-        entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
+        if (auto* entity = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC)))
+        {
+            m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
+            entity->SetUntargetable(true);
+            entity->ResetLocalVars();
+            entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
+        }
     }
 }
 

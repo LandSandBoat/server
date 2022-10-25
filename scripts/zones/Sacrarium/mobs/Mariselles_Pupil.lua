@@ -22,9 +22,10 @@ end
 
 entity.onMobFight = function(mob, target)
     local teleTime = mob:getLocalVar('teleTime')
-    if mob:getBattleTime() - teleTime > 30 and
-       mob:getBattleTime() > 59 and
-       mob:actionQueueEmpty()
+    if
+        mob:getBattleTime() - teleTime > 30 and
+        mob:getBattleTime() > 59 and
+        mob:actionQueueEmpty()
     then
         local profLocation = mob:getLocalVar('spawnLocation')
         local randomPosition = math.random(1, 9)

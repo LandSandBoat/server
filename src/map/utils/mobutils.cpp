@@ -229,66 +229,118 @@ namespace mobutils
         uint8     mLvl     = PMob->GetMLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
+        uint8 grade;
+        uint8 gradesj;
+
         if (recover == true)
         {
             if (PMob->HPmodifier == 0)
             {
-                float hpScale = PMob->HPscale;
+                uint32 mobHP = 1; // Set mob HP
 
-                if (PMob->getMobMod(MOBMOD_HP_SCALE) != 0)
-                {
-                    hpScale = (float)PMob->getMobMod(MOBMOD_HP_SCALE) / 100.0f;
-                }
+                uint32 baseMobHP = 0; // Define base mobs hp
+                uint32 sjHP      = 0; // Define base subjob hp
 
-                float growth    = 1.06f;
-                float petGrowth = 0.75f;
-                float base      = 18.0f;
+                grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
+                gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
 
-                // give hp boost every 10 levels after 25
-                // special boosts at 25 and 50
-                if (mLvl > 75)
+                uint8 base     = 0; // Column for base hp
+                uint8 jobScale = 1; // Column for job scaling
+                uint8 scaleX   = 2; // Column for modifier scale
+
+                uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
+                uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
+                uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
+                uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
+                uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
+
+                uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
+                uint8 RBIbase  = 1;                        // Column for RBI base
+
+                uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
+
+                uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
+                uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
+                uint8 raceScale = 6;
+                uint8 mLvlScale = 0;
+
+                if (mLvl > 0)
                 {
-                    growth    = 1.28f;
-                    petGrowth = 1.03f;
-                }
-                else if (mLvl > 65)
-                {
-                    growth    = 1.27f;
-                    petGrowth = 1.02f;
-                }
-                else if (mLvl > 55)
-                {
-                    growth    = 1.25f;
-                    petGrowth = 0.99f;
-                }
-                else if (mLvl > 50)
-                {
-                    growth    = 1.21f;
-                    petGrowth = 0.96f;
-                }
-                else if (mLvl > 45)
-                {
-                    growth    = 1.17f;
-                    petGrowth = 0.95f;
-                }
-                else if (mLvl > 35)
-                {
-                    growth    = 1.14f;
-                    petGrowth = 0.92f;
-                }
-                else if (mLvl > 25)
-                {
-                    growth    = 1.1f;
-                    petGrowth = 0.82f;
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
                 }
 
-                // pets have lower health
+                // 50+ = 1 hp sjstats
+                if (mLvl > 49)
+                {
+                    mLvlScale = std::floor(mLvl);
+                }
+                // 40-49 = 3/4 hp sjstats
+                else if (mLvl > 39)
+                {
+                    mLvlScale = std::floor(mLvl * 0.75);
+                }
+                // 31-39 = 1/2 hp sjstats
+                else if (mLvl > 30)
+                {
+                    mLvlScale = std::floor(mLvl * 0.50);
+                }
+                // 25-30 = 1/4 hp sjstats
+                else if (mLvl > 24)
+                {
+                    mLvlScale = std::floor(mLvl * 0.25);
+                }
+                // 1-24 = no hp sjstats
+                else
+                {
+                    mLvlScale = 0;
+                    // sjHP = 0;
+                }
+
+                sjHP = std::ceil((sjJobScale * (std::max((mLvlScale - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvlScale - 10, 0)) + std::max(mLvlScale - 30, 0) + std::max(mLvlScale - 50, 0) + std::max(mLvlScale - 70, 0)) / 2);
+
+                // Orcs 5% more hp
+                if ((PMob->m_Family == 189) || (PMob->m_Family == 190) || (PMob->m_Family == 334) || (PMob->m_Family == 407))
+                {
+                    mobHP = (baseMobHP + sjHP) * 1.05;
+                }
+                // Quadavs 5% less hp
+                else if ((PMob->m_Family == 200) || (PMob->m_Family == 201) || (PMob->m_Family == 202) || (PMob->m_Family == 337) || (PMob->m_Family == 397) || (PMob->m_Family == 408))
+                {
+                    mobHP = (baseMobHP + sjHP) * .95;
+                }
+                else
+                {
+                    mobHP = baseMobHP + sjHP;
+                }
+
+                // Mimic HP boost traits for monks
+                if (PMob->GetMJob() == JOB_MNK)
+                {
+                    if (mLvl >= 70)
+                    {
+                        mobHP += 180;
+                    }
+                    else if (mLvl >= 55)
+                    {
+                        mobHP += 120;
+                    }
+                    else if (mLvl >= 35)
+                    {
+                        mobHP += 60;
+                    }
+                    else if (mLvl >= 15)
+                    {
+                        mobHP += 30;
+                    }
+                }
+
+                // pets have lower health (TODO: Capture pet HP and correct scaling)
                 if (PMob->PMaster != nullptr)
                 {
-                    growth = petGrowth;
+                    mobHP *= 0.35f;
                 }
 
-                PMob->health.maxhp = (int16)(base * pow(mLvl, growth) * hpScale);
+                PMob->health.maxhp = (int16)(mobHP);
             }
             else
             {
@@ -741,15 +793,11 @@ namespace mobutils
         uint16 cool     = 20;
         uint16 rate     = 15;
 
-        switch (PMob->m_EcoSystem)
+        if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
         {
-            case ECOSYSTEM::BEASTMAN:
-                distance = 10;
-                turns    = 3;
-                cool     = 45;
-                break;
-            default:
-                break;
+            distance = 10;
+            turns    = 3;
+            cool     = 45;
         }
 
         // default mob roaming mods

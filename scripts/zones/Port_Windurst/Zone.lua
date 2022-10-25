@@ -12,7 +12,7 @@ zoneObject.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-zoneObject.onZoneIn = function(player,prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- FIRST LOGIN (START CS)
@@ -43,7 +43,12 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(10002)
+    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        player:startEvent(10002)
+    else
+        player:setPos(207.0728, -6.5000, 124.9320, 30)
+        player:setLocalVar('[AIRSHIP]Paid', 0)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -54,6 +59,8 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 10002 then
         player:setPos(0, 0, 0, 0, 225)
+    elseif csid == 182 and option == 0 then
+        player:setLocalVar('[AIRSHIP]Paid', 0)
     end
 end
 

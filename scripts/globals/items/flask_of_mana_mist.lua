@@ -14,7 +14,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:forMembersInRange(10, function(member)
-        member:messageBasic(xi.msg.basic.RECOVERS_MP, 0, member:addMP(300*xi.settings.main.ITEM_POWER))
+        member:messageBasic(xi.msg.basic.RECOVERS_MP, 0, member:addMP(300 * xi.settings.main.ITEM_POWER))
     end)
 end
 

@@ -14,7 +14,6 @@ xi.job_utils.summoner = xi.job_utils.summoner or {}
 
 -- sort of a misnomer, as if Apogee is up, the "base" mp cost rises.
 local function getBaseMPCost(player, ability)
-
     local baseMPCostMap =
     {
         -- Siren
@@ -24,6 +23,7 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.TORNADO_II]       = 182,
         [xi.jobAbility.HYSTERIC_ASSAULT] = 222,
     }
+
     local baseMPCost = nil
 
     if ability:getAddType() == xi.addType.ADDTYPE_ASTRAL_FLOW then
@@ -47,14 +47,13 @@ local function getBaseMPCost(player, ability)
 end
 
 local function getMPCost(baseMPCost, player, petskill)
-
     local mpCost = baseMPCost
 
     -- don't proc blood boon on Astral Flow
     if petskill:getAddType() ~= xi.addType.ADDTYPE_ASTRAL_FLOW then
         local bloodBoonRate = player:getMod(xi.mod.BLOOD_BOON)
         -- assuming it works like Conserve MP... https://www.bg-wiki.com/ffxi/Conserve_MP
-        if math.random(100) < bloodBoonRate then
+        if math.random(1, 100) <= bloodBoonRate then
             mpCost = mpCost * math.random(8, 15) / 16
         end
     end
@@ -64,7 +63,6 @@ end
 
 -- Bloodpact Delay is handled in charentity.cpp
 xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility)
-
     -- TODO: verify order of out of MP/range/etc checks.
     if pet ~= nil then
         -- There is some complex interaction here.
@@ -105,7 +103,6 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
 end
 
 xi.job_utils.summoner.onUseBloodPact = function(player, pet, target, petskill)
-
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
     local baseMPCost       = getBaseMPCost(player, bloodPactAbility)
     local mpCost           = getMPCost(baseMPCost, player, bloodPactAbility)

@@ -35,8 +35,11 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar("changeTime", mob:getBattleTime())
                 mob:setLocalVar("changeHP", mob:getHP())
             -- subanimation 2 is physical mode, so check if he should change into magic mode
-            elseif (mob:getAnimationSub() == 2 and (mob:getHP() <= changeHP - 1000 or
-                    mob:getBattleTime() - changeTime > 300)) then
+            elseif
+                mob:getAnimationSub() == 2 and
+                (mob:getHP() <= changeHP - 1000 or
+                mob:getBattleTime() - changeTime > 300)
+            then
                 mob:setAnimationSub(1)
                 mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
                 mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
@@ -46,8 +49,11 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar("changeTime", mob:getBattleTime())
                 mob:setLocalVar("changeHP", mob:getHP())
             -- subanimation 1 is magic mode, so check if he should change into physical mode
-            elseif (mob:getAnimationSub() == 1 and (mob:getHP() <= changeHP - 1000 or
-                    mob:getBattleTime() - changeTime > 300)) then
+            elseif
+                mob:getAnimationSub() == 1 and
+                (mob:getHP() <= changeHP - 1000 or
+                mob:getBattleTime() - changeTime > 300)
+            then
                 -- and use an ability before changing
                 mob:useMobAbility(673)
                 mob:setAnimationSub(2)

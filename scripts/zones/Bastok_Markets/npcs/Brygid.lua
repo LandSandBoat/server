@@ -25,12 +25,12 @@ entity.onTrade = function(player, npc, trade)
 
     if brygidReturns == QUEST_ACCEPTED and wantsSubligar ~= 0 then
         if wantsSubligar == 13 then
-            if trade:getItemCount() == 1 and trade:hasItemQty(15375+wantsSubligar, 1) then
+            if trade:getItemCount() == 1 and trade:hasItemQty(15375 + wantsSubligar, 1) then
                 player:tradeComplete()
                 player:startEvent(383)
             end
         else
-            if trade:getItemCount() == 1 and trade:hasItemQty(15374+wantsSubligar, 1) then
+            if trade:getItemCount() == 1 and trade:hasItemQty(15374 + wantsSubligar, 1) then
                 player:tradeComplete()
                 player:startEvent(383)
             end
@@ -89,9 +89,9 @@ entity.onTrigger = function(player, npc)
     elseif brygidReturns == QUEST_ACCEPTED and wantsSubligar ~= 0 then
         -- Remind player what subligar they need to turn in and the reward
         if wantsSubligar == 13 then
-            player:startEvent(385, 0, 14400+wantsSubligar, 15375+wantsSubligar)
+            player:startEvent(385, 0, 14400 + wantsSubligar, 15375 + wantsSubligar)
         else
-            player:startEvent(385, 0, 14400+wantsSubligar, 15374+wantsSubligar)
+            player:startEvent(385, 0, 14400 + wantsSubligar, 15374 + wantsSubligar)
         end
     end
 
@@ -102,11 +102,11 @@ entity.onEventUpdate = function(player, csid, option)
         local canEquip = 0
         local hasBody = 0
 
-        if player:canEquipItem(14400+option, true) then
+        if player:canEquipItem(14400 + option, true) then
             canEquip = 1
         end
 
-        if not player:hasItem(14400+option) then
+        if not player:hasItem(14400 + option) then
             hasBody = 1
         end
 
@@ -129,8 +129,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BrygidGetLegs", 0)
         player:setCharVar("BrygidWantsSubligar", 0)
         player:addTitle(xi.title.BASTOKS_SECOND_BEST_DRESSED)
-        player:addItem(14400+wantsSubligar)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 14400+wantsSubligar)
+        player:addItem(14400 + wantsSubligar)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, 14400 + wantsSubligar)
         player:addFame(xi.quest.fame_area.BASTOK, 30)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     end

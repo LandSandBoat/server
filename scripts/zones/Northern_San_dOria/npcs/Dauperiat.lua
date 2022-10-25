@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(647, 0, 530) --647 recap of 646
 
     else
-        if (player:needToZone() ==true) then
+        if player:needToZone() then
             player:startEvent(642) --642 Quiet!
         else
             player:startEvent(641) --641 -- Quiet! leave me alone

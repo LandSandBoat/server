@@ -128,6 +128,10 @@ for _, zoneID in pairs(dynamisZones) do
     function(player)
         xi.dynamis.zoneOnZoneOut(player) -- Run onZoneIn functions.
     end)
+    m:addOverride(string.format("xi.zones.%s.Zone.onZoneIn", zoneID[2]),
+    function(player)
+        xi.dynamis.zoneOnZoneInEra(player, prevZone) -- Run onZoneInEra functions.
+    end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
     function(zone)
         xi.dynamis.handleDynamis(zone)

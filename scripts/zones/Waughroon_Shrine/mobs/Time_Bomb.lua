@@ -12,11 +12,11 @@ local entity = {}
 
 local timeTable =
 {
-    { 59, ID.text.BOMB_TIMER_1, 8 },
-    { 58, ID.text.BOMB_TIMER_2, 7 },
-    { 57, ID.text.BOMB_TIMER_3, 6 },
-    { 56, ID.text.BOMB_TIMER_4, 5 },
-    { 55, ID.text.BOMB_TIMER_5, 4 },
+    { 59, ID.text.BOMB_TIMER_1,  8 },
+    { 58, ID.text.BOMB_TIMER_2,  7 },
+    { 57, ID.text.BOMB_TIMER_3,  6 },
+    { 56, ID.text.BOMB_TIMER_4,  5 },
+    { 55, ID.text.BOMB_TIMER_5,  4 },
     { 50, ID.text.BOMB_TIMER_10, 3 },
     { 40, ID.text.BOMB_TIMER_20, 2 },
     { 30, ID.text.BOMB_TIMER_30, 1 },
@@ -50,11 +50,9 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if optParams.isKiller then
-        if player:getBattlefield():getLocalVar("control") == 0 then
-            player:getBattlefield():getLocalVar("lootSpawned", 0)
-        end
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getBattlefield():getLocalVar("control") == 0 then
+        player:getBattlefield():setLocalVar("lootSpawned", 0)
     end
 end
 

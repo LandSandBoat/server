@@ -24,7 +24,7 @@ g_mixins.families.aern = function(aernMob)
             if curr_reraise < reraises then
                 mob:setMobMod(xi.mobMod.NO_DROPS, 1)  -- Drops off if reraising
                 local dropid = mob:getDropID()
-                local target = mob:getTarget()
+                local target = killer
                 if
                     target:isPet() and
                     not target:isAlive()

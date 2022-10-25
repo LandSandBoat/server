@@ -25,7 +25,7 @@ end
 abilityObject.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
     if pet then
-        local bonus = 1 + (player:getMerit(xi.merit.ROLE_REVERSAL)-5)/100
+        local bonus = 1 + (player:getMerit(xi.merit.ROLE_REVERSAL)-5) / 100
         local playerHP = player:getHP()
         local petHP = pet:getHP()
         pet:setHP(math.max(playerHP * bonus, 1))

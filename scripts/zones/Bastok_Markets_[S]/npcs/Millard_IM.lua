@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
         elseif utils.contains(option, optionList) then
             local cost = 0
             local power = ( (option - 1) / 4096 )
-            local duration = 10800+((15*medalRank)*60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
+            local duration = 10800 + ((15 * medalRank) * 60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
             local subPower = 35 -- Sets % trigger for regen/refresh. Static at minimum value (35%) for now.
 
             if power == 1 or power == 2 or power == 4 then

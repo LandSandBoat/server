@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option)
             xi.teleport.to(player, portalPick[option])
         elseif option >= 1001 and option <= 1006 then
             if player:getCurrency("imperial_standing") >= 200 then
-                player:delCurrency("imperial_standing",200)
+                player:delCurrency("imperial_standing", 200)
                 xi.teleport.to(player, portalPick[option])
             else
                 player:messageSpecial(ID.text.SUFFICIENT_IMPERIAL_STANDING)

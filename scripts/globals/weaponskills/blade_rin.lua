@@ -27,14 +27,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- to do critical hit rate of this ws is base on amount of tp alone, does not consider Critical Hit Rate from dDEX, equipment, or likely merits/base
     -- https://www.bg-wiki.com/ffxi/Blade:_Rin
     params.canCrit = true
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
+    params.acc100 = 1.0 params.acc200= 1.0 params.acc300= 1.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.dex_wsc = 0.6
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 
 end

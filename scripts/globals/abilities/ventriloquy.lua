@@ -36,7 +36,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         end
 
         if playerfound and petfound then
-            local bonus = (player:getMerit(xi.merit.VENTRILOQUY)-5)/100
+            local bonus = (player:getMerit(xi.merit.VENTRILOQUY)-5) / 100
 
             local playerCE = target:getCE(player)
             local playerVE = target:getVE(player)

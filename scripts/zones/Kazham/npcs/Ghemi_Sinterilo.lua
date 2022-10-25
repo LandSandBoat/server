@@ -27,7 +27,9 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.GHEMISENTERILO_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        xi.shop.general(player, stock)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

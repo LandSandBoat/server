@@ -57,6 +57,14 @@ enum class AttackAnimation
     THROW       = 4
 };
 
+enum class ANTICIPATE_RESULT
+{
+    FAIL            = 0,
+    ANTICIPATE      = 1,
+    COUNTER         = 2,
+    CRITICALCOUNTER = 3
+};
+
 class CAttackRound;
 
 /************************************************************************

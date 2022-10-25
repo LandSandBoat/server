@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import mysql.connector
+import mariadb
 import re
 
 prizes = {
@@ -43,14 +43,13 @@ def connect():
     password = credentials["mysql_password"]
 
     try:
-        db = mysql.connector.connect(host=host,
+        db = mariadb.connect(host=host,
                 user=login,
                 passwd=password,
                 db=database,
-                port=port,
-                use_pure=True)
+                port=port)
         cur = db.cursor()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print(err)
         close()
     else:

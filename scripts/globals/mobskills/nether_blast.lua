@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local ignoreres = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, dmg, xi.magic.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, ignoreres)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, dmg, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, ignoreres)
 
     dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

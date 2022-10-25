@@ -38,12 +38,12 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.skillType = xi.skill.ENFEEBLING_MAGIC
         params.bonus = 0
         params.effect = xi.effect.PARALYSIS
-        local resist = applyResistanceEffect(caster, target, spell, params)
+        local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
         if (resist >= 0.5) then --there are no quarter or less hits, if target resists more than .5 spell is resisted completely
             local resduration = duration * resist
 
-            resduration = calculateBuildDuration(target, duration, params.effect, caster)
+            resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
             if resduration == 0 then
                 spell:setMsg(xi.msg.basic.NONE)
