@@ -22,12 +22,13 @@ xi.aeonics.onTrigger = function(player, wsID)
         [11] = { "hasBladeShunUnlock",    xi.weaponskill.BLADE_SHUN    },
         [12] = { "hasExenteratorUnlock",  xi.weaponskill.EXENTERATOR   },
         [13] = { "hasLastStandUnlock",    xi.weaponskill.LAST_STAND    },
-        [14] = { "hasStadiverUnlock",     xi.weaponskill.STARDIVER     },
+        [14] = { "hasStardiverUnlock",    xi.weaponskill.STARDIVER     },
         [15] = { "hasResolutionUnlock",   xi.weaponskill.RESOLUTION    },
+        [16] = { "hasUpheavalUnlock",     xi.weaponskill.UPHEAVAL      },
     }
 
     if player:isPC() then
-        for i = 1, 15 do
+        for i = 1, 16 do
             local unlockVar = player:getCharVar(aTable[i][1])
             local usedWs    = aTable[i][2]
             
