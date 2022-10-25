@@ -9769,6 +9769,36 @@ void CLuaBaseEntity::wakeUp()
 }
 
 /************************************************************************
+ *  Function: setBattleID()
+ *  Purpose : Sets the battle ID on the entity. Only entities with the same battle ID can interact with each other.
+ *  Example : target:setBattleID(1)
+ *  Notes   : Default value for battle ID is 0.
+ ************************************************************************/
+
+void CLuaBaseEntity::setBattleID(uint16 battleID)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->setBattleID(battleID);
+}
+
+/************************************************************************
+ *  Function: getBattleID()
+ *  Purpose : Gets the battle ID on the entity
+ *  Example : target:getBattleID()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBattleID()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->getBattleID();
+}
+
+/************************************************************************
  *  Function: recalculateStats()
  *  Purpose : Recalculate the total Stats for a PC (force update)
  *  Example : target:recalculateStats()
@@ -15052,6 +15082,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("canChangeState", CLuaBaseEntity::canChangeState);
 
     SOL_REGISTER("wakeUp", CLuaBaseEntity::wakeUp);
+
+    SOL_REGISTER("setBattleID", CLuaBaseEntity::setBattleID);
+    SOL_REGISTER("getBattleID", CLuaBaseEntity::getBattleID);
 
     SOL_REGISTER("recalculateStats", CLuaBaseEntity::recalculateStats);
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
