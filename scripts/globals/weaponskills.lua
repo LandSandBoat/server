@@ -282,11 +282,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     missChance = xi.weaponskills.handleParry(attacker, target, missChance, calcParams.guaranteedHit)
 
-    if (missChance <= calcParams.hitRate or-- See if we hit the target
-        calcParams.guaranteedHit or
-        (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN)/100))) and
-        not calcParams.mustMiss
-    then
+    if (missChance <= calcParams.hitRate or calcParams.guaranteedHit or (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100))) and not calcParams.mustMiss then
         if not shadowAbsorb(target) then
             local critChance = math.random() -- See if we land a critical hit
             criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
@@ -377,6 +373,28 @@ local modParameters =
     [xi.mod.WS_MND_BONUS] = 'mnd_wsc',
     [xi.mod.WS_CHR_BONUS] = 'chr_wsc',
 }
+
+local function calculateDEXvsAGICritRate(attacker, target)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local nativecrit = 0
+    local dexVsAgi = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    if dexVsAgi < 7 then
+        nativecrit = 0
+    elseif dexVsAgi < 14 then
+        nativecrit = 0.01
+    elseif dexVsAgi < 20 then
+        nativecrit = 0.02
+    elseif dexVsAgi < 30 then
+        nativecrit = 0.03
+    elseif dexVsAgi < 40 then
+        nativecrit = 0.04
+    elseif dexVsAgi <= 50 then
+        nativecrit = (dexVsAgi - 35) / 100
+    else
+        nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
+    end
+    return nativecrit
+end
 
 -- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
@@ -996,10 +1014,10 @@ local function fTPMob(tp, ftp1, ftp2, ftp3)
     end
 
     if (tp >= 1000 and tp < 1500) then
-        return ftp1 + ( ((ftp2-ftp1)/500) * (tp-1000))
+        return ftp1 + ( ((ftp2 - ftp1 ) / 500) * (tp - 1000) )
     elseif (tp >= 1500 and tp <= 3000) then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3-ftp2)/1500) * (tp-1500))
+        return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500) )
     end
     return 1 -- no ftp mod
 end
