@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "pathfind.h"
+#include "../ai_container.h"
 #include "../../../common/utils.h"
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
@@ -653,7 +654,7 @@ void CPathFind::FinishedPath()
             Clear();
         }
     }
-    else if (IsPatrolling())
+    else if (IsPatrolling() && m_POwner->PAI->IsRoaming())
     {
         m_currentPoint = 0;
         m_currentTurn  = 0;
