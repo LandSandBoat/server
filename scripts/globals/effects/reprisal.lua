@@ -8,7 +8,7 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.SPIKES, 6)
     -- Spike damage is calculated on hit in battleutils::TakePhysicalDamage
-    target:setMod(xi.mod.SPIKES_DMG, 0)
+    target:setMod(xi.mod.SPIKES_DMG, effect:getPower())
 end
 
 effectObject.onEffectTick = function(target, effect)

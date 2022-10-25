@@ -898,6 +898,10 @@ namespace battleutils
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                     }
+                    else if (PDefender->objtype == TYPE_TRUST && PDefender->GetMJob() == JOB_PLD)
+                    {
+                        Action->spikesEffect = (SUBEFFECT)6;
+                    }
                     else
                     {
                         // only works on shield blocks
@@ -1824,6 +1828,10 @@ namespace battleutils
             {
                 return base + skillModifier;
             }
+        }
+        else if (PDefender->objtype == TYPE_TRUST && PDefender->GetMJob() == JOB_PLD)
+        {
+            base = 45;
         }
         else
         {
