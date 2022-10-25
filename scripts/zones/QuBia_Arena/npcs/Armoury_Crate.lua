@@ -128,11 +128,11 @@ local loot =
             { itemid = 1110, droprate =  50 }, -- Beetle Blood
         },
         {
-                { itemid = xi.items.CLAYMORE_GRIP,   droprate = 150 },
-                { itemid = xi.items.CORAL_FRAGMENT,  droprate = 150 },
-                { itemid = xi.items.PHOENIX_FEATHER, droprate = 150 },
-                { itemid = xi.items.SWORD_STRAP,     droprate = 350 },
-                { itemid = xi.items.POLE_GRIP,       droprate = 200 },
+            { itemid = xi.items.CLAYMORE_GRIP,   droprate = 150 },
+            { itemid = xi.items.CORAL_FRAGMENT,  droprate = 150 },
+            { itemid = xi.items.PHOENIX_FEATHER, droprate = 150 },
+            { itemid = xi.items.SWORD_STRAP,     droprate = 350 },
+            { itemid = xi.items.POLE_GRIP,       droprate = 200 },
         },
         {
             { itemid = 0,    droprate = 450 }, -- nothing
