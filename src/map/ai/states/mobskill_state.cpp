@@ -84,12 +84,11 @@ CMobSkill* CMobSkillState::GetSkill()
 
 void CMobSkillState::SpendCost()
 {
-    auto tp = 0;
     if (!m_PSkill->isTpFreeSkill())
     {
         if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))
         {
-            tp = m_PEntity->addTP(-1000);
+            m_spentTP = m_PEntity->addTP(-1000);
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
         }
         else
@@ -97,9 +96,7 @@ void CMobSkillState::SpendCost()
             m_spentTP            = m_PEntity->health.tp;
             m_PEntity->health.tp = 0;
         }
-    }    
-
-    m_spentTP = tp;
+    }
 }
 
 bool CMobSkillState::Update(time_point tick)
