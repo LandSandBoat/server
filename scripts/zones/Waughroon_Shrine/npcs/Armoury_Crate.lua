@@ -289,7 +289,7 @@ local loot =
     [76] =
     {
         {
-                { itemid = 3343, droprate = 1000 }, -- Blue Pondweed
+            { itemid = 3343, droprate = 1000 }, -- Blue Pondweed
         },
 
         {
