@@ -695,10 +695,10 @@ namespace trustutils
 
         if (mJob == JOB_PLD)
         {
-            uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)30, mJob, mLvl > 99 ? 99 : mLvl);
+            uint16 maxSkill = battleutils::GetMaxSkill(SKILLTYPE::SKILL_SHIELD, mJob, mLvl > 99 ? 99 : mLvl);
             if (maxSkill != 0)
             {
-                PTrust->WorkingSkills.skill[30] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
+                PTrust->WorkingSkills.skill[SKILLTYPE::SKILL_SHIELD] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
             }
         }
 

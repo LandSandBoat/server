@@ -900,7 +900,7 @@ namespace battleutils
                     }
                     else if (PDefender->objtype == TYPE_TRUST && PDefender->GetMJob() == JOB_PLD)
                     {
-                        Action->spikesEffect = (SUBEFFECT)6;
+                        Action->spikesEffect = SUBEFFECT::SUBEFFECT_REPRISAL;
                     }
                     else
                     {
@@ -1831,7 +1831,7 @@ namespace battleutils
         }
         else if (PDefender->objtype == TYPE_TRUST && PDefender->GetMJob() == JOB_PLD)
         {
-            base = 45;
+            base = 45; // Todo : verify actual retail block rates do not vary from trust to trust
         }
         else
         {
