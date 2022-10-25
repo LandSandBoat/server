@@ -540,6 +540,9 @@ INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);  -- SIGHT_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);  -- SOUND_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1); -- LINK_RADIUS: 30
 
+-- Kaiser Behemoth (Apollyon NW)
+INSERT INTO `mob_pool_mods` VALUES (6732,3,100,1); -- MP_BASE: 100
+
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

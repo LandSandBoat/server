@@ -21,18 +21,18 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("LeathercraftExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
             player:startEvent(649, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("LeathercraftExpertQuest",0)
-            player:setLocalVar("LeathercraftTraded",1)
+            player:setCharVar("LeathercraftExpertQuest", 0)
+            player:setLocalVar("LeathercraftTraded", 1)
         else
             player:startEvent(649, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
         player:startEvent(649, 0, 0, 0, 0, newRank)
-        player:setLocalVar("LeathercraftTraded",1)
+        player:setLocalVar("LeathercraftTraded", 1)
     end
 end
 
@@ -100,7 +100,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 648 and option == 2 then
         if guildMember == 1 then
-            player:setCharVar("LeathercraftExpertQuest",1)
+            player:setCharVar("LeathercraftExpertQuest", 1)
         end
     elseif csid == 648 and option == 1 then
         local crystal = 4103 -- dark crystal
@@ -114,7 +114,7 @@ entity.onEventFinish = function(player, csid, option)
     else
         if player:getLocalVar("LeathercraftTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("LeathercraftTraded",0)
+            player:setLocalVar("LeathercraftTraded", 0)
         end
     end
 

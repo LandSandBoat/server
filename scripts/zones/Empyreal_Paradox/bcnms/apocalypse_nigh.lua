@@ -31,13 +31,16 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and player:getCharVar('ApocalypseNigh') == 4 then
+        if
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+            player:getCharVar('ApocalypseNigh') == 4
+        then
             player:setCharVar('ApocalypseNigh', 5)
-            player:setCharVar("Apoc_Nigh_Reward",getMidnight())
+            player:setCharVar("Apoc_Nigh_Reward", getMidnight())
             player:startEvent(7)
         end
     elseif csid == 7 then
-        player:setPos(-.0745,-10,-465.1132,63,33)
+        player:setPos(-.0745, -10, -465.1132, 63, 33)
     end
 end
 

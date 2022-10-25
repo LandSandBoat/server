@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 local flags = xi.path.flag.NONE
-local path =
+local pathNodes =
 {
     [0] =
     {
@@ -41,10 +41,10 @@ entity.onMobRoam = function(mob)
         local offset = mob:getID() - ID.mob.TEMENOS_E_MOB[2]
         local pause = mob:getLocalVar("pause")
         if pause < os.time() then
-            local point = (mob:getLocalVar("point") % 2)+1
+            local point = (mob:getLocalVar("point") % 2) + 1
             mob:setLocalVar("point", point)
-            mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
-            mob:setLocalVar("pause", os.time()+5)
+            mob:pathTo(pathNodes[offset][point][1], pathNodes[offset][point][2], pathNodes[offset][point][3], flags)
+            mob:setLocalVar("pause", os.time() + 5)
         end
     end
 end
@@ -56,9 +56,9 @@ entity.onMobDeath = function(mob, player, optParams)
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
                 GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.ICE_SDT, -5000) -- IDK WTF is going on here. Will refactor when Temenos is converted.
-                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+5):isAlive() then
-                    DespawnMob(ID.mob.TEMENOS_C_MOB[2]+5)
-                    SpawnMob(ID.mob.TEMENOS_C_MOB[2]+11)
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 5):isAlive() then
+                    DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 5)
+                    SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 11)
                 end
             else
                 local mobX = mob:getXPos()

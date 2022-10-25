@@ -1360,7 +1360,7 @@ local loot =
     },
 
     -- central temenos floor 3
-    [1305]=
+    [1305] =
     {
         {
             { itemid = 1875, droprate = 1000 },
@@ -1519,7 +1519,7 @@ entity.onTrigger = function(player, npc)
                 if crateID ~= ID.npc.TEMENOS_W_CRATE[7] then
                     for i = 1, 6 do
                         for j = 0, 2 do
-                            if crateID == ID.npc.TEMENOS_W_CRATE[i]+j then
+                            if crateID == ID.npc.TEMENOS_W_CRATE[i] + j then
                                 if model == 960 then
                                     xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
@@ -1540,10 +1540,10 @@ entity.onTrigger = function(player, npc)
                 if crateID ~= ID.npc.TEMENOS_N_CRATE[7] then
                     for i = 1, 6 do
                         for j = 0, 2 do
-                            if crateID == ID.npc.TEMENOS_N_CRATE[i]+j then
+                            if crateID == ID.npc.TEMENOS_N_CRATE[i] + j then
                                 if j ~= 0 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]):setStatus(xi.status.DISAPPEAR) end
-                                if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]+1):setStatus(xi.status.DISAPPEAR) end
-                                if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]+2):setStatus(xi.status.DISAPPEAR) end
+                                if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i] + 1):setStatus(xi.status.DISAPPEAR) end
+                                if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i] + 2):setStatus(xi.status.DISAPPEAR) end
                                 if model == 960 then
                                     xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
@@ -1561,33 +1561,33 @@ entity.onTrigger = function(player, npc)
                 end
             end,
             [1300] = function() -- Temenos East Crate Handling
-                local spawnMimic = math.random(0,1) == 1
-                if crateID ~= ID.npc.TEMENOS_E_CRATE[7] and crateID ~= ID.npc.TEMENOS_E_CRATE[7]+1 then
+                local spawnMimic = math.random(0, 1) == 1
+                if crateID ~= ID.npc.TEMENOS_E_CRATE[7] and crateID ~= ID.npc.TEMENOS_E_CRATE[7] + 1 then
                     for i = 1, 6 do
                         local mask = battlefield:getLocalVar("crateMaskF"..i)
                         for j = 0, 3 do
-                            if crateID == ID.npc.TEMENOS_E_CRATE[i]+j then
-                                if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):isDead() then
+                            if crateID == ID.npc.TEMENOS_E_CRATE[i] + j then
+                                if GetMobByID(ID.mob.TEMENOS_E_MOB[i] + 4):isDead() then
                                     battlefield:setLocalVar("crateOpenedF"..i, 1)
                                     if model ~= 961 or not (mask > 7 and spawnMimic) then
                                         if j ~= 0 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]):setStatus(xi.status.DISAPPEAR) end
-                                        if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]+1):setStatus(xi.status.DISAPPEAR) end
-                                        if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]+2):setStatus(xi.status.DISAPPEAR) end
-                                        if j ~= 3 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i]+3):setStatus(xi.status.DISAPPEAR) end
+                                        if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i] + 1):setStatus(xi.status.DISAPPEAR) end
+                                        if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i] + 2):setStatus(xi.status.DISAPPEAR) end
+                                        if j ~= 3 then GetNPCByID(ID.npc.TEMENOS_E_CRATE[i] + 3):setStatus(xi.status.DISAPPEAR) end
                                     end
                                     if GetMobByID(ID.mob.TEMENOS_E_MOB[i]):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]) end
-                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+1):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+1) end
-                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+2):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+2) end
-                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+3):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+3) end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i] + 1):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i] + 1) end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i] + 2):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i] + 2) end
+                                    if GetMobByID(ID.mob.TEMENOS_E_MOB[i] + 3):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i] + 3) end
                                     if model == 960 then
                                         xi.battlefield.HealPlayers(battlefield)
                                         xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
                                     elseif model == 961 then
                                         if mask > 7 and spawnMimic then
                                             battlefield:setLocalVar("crateMaskF"..i, mask-8)
-                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):setSpawn(xPos, yPos, zPos)
-                                            SpawnMob(ID.mob.TEMENOS_E_MOB[i]+4):setPos(xPos, yPos, zPos)
-                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):updateClaim(player)
+                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i] + 4):setSpawn(xPos, yPos, zPos)
+                                            SpawnMob(ID.mob.TEMENOS_E_MOB[i] + 4):setPos(xPos, yPos, zPos)
+                                            GetMobByID(ID.mob.TEMENOS_E_MOB[i] + 4):updateClaim(player)
                                         else
                                             xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                             xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
@@ -1604,13 +1604,13 @@ entity.onTrigger = function(player, npc)
                         end
                     end
                 else
-                    if GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):isDead() then
+                    if GetMobByID(ID.mob.TEMENOS_E_MOB[7] + 2):isDead() then
                         local otherCrate = ID.npc.TEMENOS_E_CRATE[7]
                         if crateID % 2 == 0 then otherCrate = otherCrate + 1 end
                         if spawnMimic and battlefield:getLocalVar("otherCrate") == 0 then
-                            GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):setSpawn(xPos, yPos, zPos)
-                            SpawnMob(ID.mob.TEMENOS_E_MOB[7]+2):setPos(xPos, yPos, zPos)
-                            GetMobByID(ID.mob.TEMENOS_E_MOB[7]+2):updateClaim(player)
+                            GetMobByID(ID.mob.TEMENOS_E_MOB[7] + 2):setSpawn(xPos, yPos, zPos)
+                            SpawnMob(ID.mob.TEMENOS_E_MOB[7] + 2):setPos(xPos, yPos, zPos)
+                            GetMobByID(ID.mob.TEMENOS_E_MOB[7] + 2):updateClaim(player)
                             battlefield:setLocalVar("otherCrate", otherCrate)
                         else
                             GetNPCByID(otherCrate):setStatus(xi.status.DISAPPEAR)
@@ -1650,14 +1650,14 @@ entity.onTrigger = function(player, npc)
                     if randmimic < 17 then
                         local mimicList =
                         {
-                            ID.mob.TEMENOS_C_MOB[4]+20, ID.mob.TEMENOS_C_MOB[4]+21,
-                            ID.mob.TEMENOS_C_MOB[4]+22, ID.mob.TEMENOS_C_MOB[4]+25,
-                            ID.mob.TEMENOS_C_MOB[4]+26, ID.mob.TEMENOS_C_MOB[4]+27,
-                            ID.mob.TEMENOS_C_MOB[4]+28, ID.mob.TEMENOS_C_MOB[4]+29,
-                            ID.mob.TEMENOS_C_MOB[4]+30, ID.mob.TEMENOS_C_MOB[4]+31,
-                            ID.mob.TEMENOS_C_MOB[4]+32, ID.mob.TEMENOS_C_MOB[4]+33,
-                            ID.mob.TEMENOS_C_MOB[4]+34, ID.mob.TEMENOS_C_MOB[4]+35,
-                            ID.mob.TEMENOS_C_MOB[4]+36, ID.mob.TEMENOS_C_MOB[4]+37,
+                            ID.mob.TEMENOS_C_MOB[4] + 20, ID.mob.TEMENOS_C_MOB[4] + 21,
+                            ID.mob.TEMENOS_C_MOB[4] + 22, ID.mob.TEMENOS_C_MOB[4] + 25,
+                            ID.mob.TEMENOS_C_MOB[4] + 26, ID.mob.TEMENOS_C_MOB[4] + 27,
+                            ID.mob.TEMENOS_C_MOB[4] + 28, ID.mob.TEMENOS_C_MOB[4] + 29,
+                            ID.mob.TEMENOS_C_MOB[4] + 30, ID.mob.TEMENOS_C_MOB[4] + 31,
+                            ID.mob.TEMENOS_C_MOB[4] + 32, ID.mob.TEMENOS_C_MOB[4] + 33,
+                            ID.mob.TEMENOS_C_MOB[4] + 34, ID.mob.TEMENOS_C_MOB[4] + 35,
+                            ID.mob.TEMENOS_C_MOB[4] + 36, ID.mob.TEMENOS_C_MOB[4] + 37,
                         }
                         GetMobByID(mimicList[randmimic]):setSpawn(xPos, yPos, zPos)
                         SpawnMob(mimicList[randmimic]):setPos(xPos, yPos, zPos)
@@ -1665,7 +1665,7 @@ entity.onTrigger = function(player, npc)
                     else
                         xi.limbus.handleLootRolls(battlefield, loot[bfid][2], nil, npc)
                     end
-                    for i = ID.npc.TEMENOS_C_CRATE[4][1]+2, ID.npc.TEMENOS_C_CRATE[4][1]+20 do
+                    for i = ID.npc.TEMENOS_C_CRATE[4][1] + 2, ID.npc.TEMENOS_C_CRATE[4][1] + 20 do
                         if ID.npc.TEMENOS_C_CRATE[4][crateID] == ID.npc.TEMENOS_C_CRATE[4][i] then
                             if crateID ~= i then
                                 GetNPCByID(i):setStatus(xi.status.DISAPPEAR)

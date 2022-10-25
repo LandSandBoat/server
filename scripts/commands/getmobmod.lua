@@ -19,7 +19,7 @@ function onTrigger(player, id)
     -- invert xi.mobMod table
     local modNameByNum = {}
     for k, v in pairs(xi.mobMod) do
-        modNameByNum[v]=k
+        modNameByNum[v] = k
     end
 
     -- validate modID

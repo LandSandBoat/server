@@ -722,8 +722,22 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             RemoveEntity(PChar, leavecode);
+        }
+    }
+
+    // Remove all registered players as long as they're in the zone
+    for (auto id : m_RegisteredPlayers)
+    {
+        auto* PChar = GetZone()->GetCharByID(id);
+        if (PChar)
+        {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+
+            if (PChar->PPet)
+            {
+                PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            }
         }
     }
 

@@ -930,13 +930,19 @@ local regimeInfo =
 
 local function getPageByRegimeId(regimeType, zoneId, regimeId)
     local info = regimeInfo[regimeType]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.zone[zoneId]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.page
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     for _, v in pairs(info) do
         if v[8] == regimeId then
@@ -1014,7 +1020,7 @@ local function addGovProwessBonusEffect(player)
 
     -- pick one and apply
     if #availableProwesses > 0 then
-        local p = availableProwesses[math.random(#availableProwesses)]
+        local p = availableProwesses[math.random(1, #availableProwesses)]
         local e = player:getStatusEffect(p.effect)
 
         -- get current power
@@ -1054,6 +1060,7 @@ end
 xi.regime.bookOnTrigger = function(player, regimeType)
     local cipher = 0 -- Trust Alter Ego Extravaganza
     local active = xi.extravaganza.campaignActive()
+
     if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
         cipher = 3
     end
@@ -1070,11 +1077,13 @@ xi.regime.bookOnTrigger = function(player, regimeType)
         local pages = table.getn(info.page)
         local arg2 = 0
         local arg4 = 0
+
         for i = 1, 10 do
             if i > pages then
                 arg2 = arg2 + 2^i
             end
         end
+
         if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
             arg4 = 1
         end
@@ -1090,7 +1099,7 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
 
     -- check valid option
     local opts = getUpdateOpts(regimeType)
-    local opt = opts[option]
+    local opt  = opts[option]
 
     if not opt then
         return
@@ -1122,11 +1131,11 @@ xi.regime.bookOnEventUpdate = function(player, option, regimeType)
 end
 
 xi.regime.bookOnEventFinish = function(player, option, regimeType)
-    local zoneId = player:getZoneID()
-    local msgOffset = zones[zoneId].text.REGIME_REGISTERED
-    local tabs = player:getCurrency("valor_point")
+    local zoneId       = player:getZoneID()
+    local msgOffset    = zones[zoneId].text.REGIME_REGISTERED
+    local tabs         = player:getCurrency("valor_point")
     local regimeRepeat = bit.band(option, 0x80000000)
-    local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
+    local hasKI        = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
     option = bit.band(option, 0x7FFFFFFF)
 
@@ -1136,7 +1145,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
     -- check valid option
     local opts = getFinishOpts(regimeType)
-    local opt = opts[option]
+    local opt  = opts[option]
 
     if not opt then
         return
@@ -1248,9 +1257,9 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['SHELL'] = function()
-                local mLvl = player:getMainLvl()
+                local mLvl  = player:getMainLvl()
                 local power = 0
-                local tier = 0
+                local tier  = 0
 
                 if mLvl < 37 then
                     power = 1055 -- Shell I   (27/256)
@@ -1357,7 +1366,6 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 end
 
 xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
-
     -- dead players, or players not on this training regime, get no credit
     -- also prevents error when this function is called onMobDeath from a mob not killed by a player
     if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
@@ -1420,6 +1428,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     if xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
         local avgCapLevel = (xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
         local avgMobLevel = (page[5] + page[6]) / 2
+
         reward = math.floor(reward * avgCapLevel / avgMobLevel)
     end
 
@@ -1430,8 +1439,9 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         -- repeat clears bonus
         if player:hasStatusEffect(xi.effect.PROWESS) then
             -- increase reward based on number of clears. hard caps at 2x base reward.
-            local govClears = player:getStatusEffect(xi.effect.PROWESS):getPower()
+            local govClears  = player:getStatusEffect(xi.effect.PROWESS):getPower()
             local baseReward = reward
+
             reward = reward * (100 + (govClears * 4)) / 100
             reward = utils.clamp(reward, 0, baseReward * 2)
 
@@ -1454,7 +1464,8 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
         -- tabs
         local tabs = math.floor(reward / 10) * xi.settings.main.TABS_RATE
-        tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
+        tabs       = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
+
         player:addCurrency("valor_point", tabs)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
 

@@ -205,13 +205,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,477);
 INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,1794);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,551);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1533);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1534);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1535);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1536);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1537);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1538);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1539);
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1235); -- hyper pulse
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1237); -- guided missle
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1238); -- target analysis
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1240); -- ion efflux
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1241); -- rear lasers
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,622);
 INSERT INTO `mob_skill_lists` VALUES ('Bird',55,623);
 INSERT INTO `mob_skill_lists` VALUES ('Bomb',56,510);
@@ -3558,7 +3556,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Semih_Lafihna',1055,3490); -- Stell
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lhu_Mhakaracca',1058,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ferreous_Coffin',1059,170); -- Randgrith
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette',1060,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor',1061,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor',1061,165); -- Skullbreaker
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,167); -- Judgement
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Klara',1063,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Romaa_Mihgo',1064,0);

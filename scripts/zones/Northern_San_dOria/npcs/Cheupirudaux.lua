@@ -21,18 +21,18 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("WoodworkingExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_CARPENTER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.WOODWORKING, newRank)
             player:startEvent(622, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("WoodworkingExpertQuest",0)
-            player:setLocalVar("WoodworkingTraded",1)
+            player:setCharVar("WoodworkingExpertQuest", 0)
+            player:setLocalVar("WoodworkingTraded", 1)
         else
             player:startEvent(622, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.WOODWORKING, newRank)
         player:startEvent(622, 0, 0, 0, 0, newRank)
-        player:setLocalVar("WoodworkingTraded",1)
+        player:setLocalVar("WoodworkingTraded", 1)
     end
 end
 
@@ -80,7 +80,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 621 and option == 2 then
         if guildMember == 1 then
-            player:setCharVar("WoodworkingExpertQuest",1)
+            player:setCharVar("WoodworkingExpertQuest", 1)
         end
     elseif csid == 621 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
     else
         if player:getLocalVar("WoodworkingTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("WoodworkingTraded",0)
+            player:setLocalVar("WoodworkingTraded", 0)
         end
     end
 

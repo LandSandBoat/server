@@ -27,15 +27,15 @@ end
 entity.onMobFight = function( mob, target )
     -- spawn gods
     local numAdds = mob:getLocalVar("numAdds")
-    if (mob:getBattleTime() / 180 == numAdds) then
+    if mob:getBattleTime() / 180 == numAdds then
         local godsRemaining = {}
         for i = 1, 4 do
-            if (mob:getLocalVar("add"..i) == 0) then
+            if mob:getLocalVar("add"..i) == 0 then
                 table.insert(godsRemaining, i)
             end
         end
-        if (#godsRemaining > 0) then
-            local g = godsRemaining[math.random(#godsRemaining)]
+        if #godsRemaining > 0 then
+            local g   = godsRemaining[math.random(1, #godsRemaining)]
             local god = SpawnMob(ID.mob.KIRIN + g)
             god:updateEnmity(target)
             god:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
@@ -47,7 +47,7 @@ entity.onMobFight = function( mob, target )
     -- ensure all spawned pets are doing stuff
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         local god = GetMobByID(i)
-        if (god:getCurrentAction() == xi.act.ROAMING) then
+        if god:getCurrentAction() == xi.act.ROAMING then
             god:updateEnmity(target)
         end
     end
@@ -58,8 +58,8 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle( xi.title.KIRIN_CAPTIVATOR )
-    player:showText( mob, ID.text.KIRIN_OFFSET + 1 )
+    player:addTitle(xi.title.KIRIN_CAPTIVATOR)
+    player:showText(mob, ID.text.KIRIN_OFFSET + 1)
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end

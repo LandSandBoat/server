@@ -22,7 +22,7 @@ effectObject.onEffectGain = function(target, effect)
         target:addMod(xi.mod.BLACK_MAGIC_CAST, 20)
         target:addMod(xi.mod.BLACK_MAGIC_RECAST, 20)
         target:addMod(xi.mod.LIGHT_ARTS_REGEN, regen)
-        target:addMod(xi.mod.REGEN_DURATION, regen*2)
+        target:addMod(xi.mod.REGEN_DURATION, regen * 2)
     end
     target:recalculateSkillsTable()
 end
@@ -47,7 +47,7 @@ effectObject.onEffectLose = function(target, effect)
         target:delMod(xi.mod.BLACK_MAGIC_CAST, 20)
         target:delMod(xi.mod.BLACK_MAGIC_RECAST, 20)
         target:delMod(xi.mod.LIGHT_ARTS_REGEN, regen)
-        target:delMod(xi.mod.REGEN_DURATION, regen*2)
+        target:delMod(xi.mod.REGEN_DURATION, regen * 2)
     end
     target:recalculateSkillsTable()
 end

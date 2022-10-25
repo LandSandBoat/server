@@ -21,7 +21,7 @@ require("scripts/globals/msg")
 
 npcUtil = {}
 
---[[ *******************************************************************************
+--[[
     Pop mob(s) from question mark NPC.
     If any mob is already spawned, return false.
     Params (table) can contain the following parameters:
@@ -35,7 +35,7 @@ npcUtil = {}
     message (number)
         if set a message will play if a entity spawns
 
-******************************************************************************* --]]
+--]]
 function npcUtil.popFromQM(player, qm, mobId, params)
     local qmId = qm:getID()
 
@@ -126,7 +126,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Queue a position change for an NPC.  We do this because if you setPos() an NPC
     immediately after you setStatus(xi.status.DISAPPEAR) it, the QM does not hide
     on the players' screens.
@@ -136,7 +136,7 @@ end
     { x, y, z, rot }
     { x = x, y = y, z = z }
     { x = x, y = y, z = z, rot = r }
-******************************************************************************* --]]
+--]]
 local function doMove(x, y, z, r)
     if not r then
         r = 0
@@ -192,7 +192,7 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     return { ["x"] = positionTable[newPosition][1], ["y"] = positionTable[newPosition][2], ["z"] = positionTable[newPosition][3] }
 end
 
---[[ *******************************************************************************
+--[[
     Give item(s) to player.
     If player has inventory space, give items, display message, and return true.
     If not, do not give items, display a message to indicate this, and return false.
@@ -212,7 +212,7 @@ end
         "Try trading again after sorting your inventory"
         instead of
         "Come back again after sorting your inventory"
-******************************************************************************* --]]
+--]]
 function npcUtil.giveItem(player, items, params)
     params = params or {}
     local ID = zones[player:getZoneID()]
@@ -265,7 +265,7 @@ function npcUtil.giveItem(player, items, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give temp item(s) to player.
     If player has inventory space, give items, display message, and return true.
     If not, do not give items, display a message to indicate this, and return false.
@@ -285,7 +285,7 @@ end
         "Try trading again after sorting your inventory"
         instead of
         "Come back again after sorting your inventory"
-******************************************************************************* --]]
+--]]
 function npcUtil.giveTempItem(player, items, params)
     params = params or {}
     local ID = zones[player:getZoneID()]
@@ -329,14 +329,14 @@ function npcUtil.giveTempItem(player, items, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give currency to a player.
     Message is displayed showing currency obtained.
 
     Examples of valid parameters:
         gil, 500
         bayld, 1000
-******************************************************************************* --]]
+--]]
 function npcUtil.giveCurrency(player, currency, amount)
     local ID = zones[player:getZoneID()]
 
@@ -378,7 +378,7 @@ function npcUtil.giveCurrency(player, currency, amount)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give key item(s) to player.
     Message is displayed showing key items obtained.
 
@@ -386,7 +386,7 @@ end
         xi.ki.ZERUHN_REPORT
         { xi.ki.PALBOROUGH_MINES_LOGS }
         { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER }
-******************************************************************************* --]]
+--]]
 function npcUtil.giveKeyItem(player, keyitems)
     local ID = zones[player:getZoneID()]
 
@@ -411,7 +411,7 @@ function npcUtil.giveKeyItem(player, keyitems)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Give a reward (Hidden Quests)
     If hidden quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
@@ -431,7 +431,7 @@ end
             title = xi.title.ENTRANCE_DENIED,
             var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
         })
-******************************************************************************* --]]
+--]]
 function npcUtil.giveReward(player, params)
     params = params or {}
 
@@ -492,7 +492,7 @@ function npcUtil.giveReward(player, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Complete a quest.
     If quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
@@ -512,7 +512,7 @@ end
             title = xi.title.ENTRANCE_DENIED,
             var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
         })
-******************************************************************************* --]]
+--]]
 function npcUtil.completeQuest(player, area, quest, params)
     params = params or {}
 
@@ -594,7 +594,7 @@ function npcUtil.completeQuest(player, area, quest, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     Complete a Mission.
     If quest rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
@@ -611,7 +611,7 @@ end
             xp = 1000,
             title = xi.title.ENTRANCE_DENIED,
         })
-******************************************************************************* --]]
+--]]
 function npcUtil.completeMission(player, logId, missionId, params)
     params = params or {}
 
@@ -690,7 +690,7 @@ function npcUtil.completeMission(player, logId, missionId, params)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     check whether trade has all required items
         if yes, confirm all the items and return true
         if no, return false
@@ -702,7 +702,7 @@ end
         { { 640, 2 } }          -- copper ore x2
         { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
         { 640, { "gil", 200 } } -- copper ore x1, gil x200
-******************************************************************************* --]]
+--]]
 function npcUtil.tradeHas(trade, items, exact)
     if type(exact) ~= "boolean" then exact = false end
 
@@ -772,7 +772,7 @@ function npcUtil.tradeHas(trade, items, exact)
     return true
 end
 
---[[ *******************************************************************************
+--[[
     check whether trade has exactly required items
         if yes, confirm all the items and return true
         if no, return false
@@ -784,7 +784,7 @@ end
         { { 640, 2 } }          -- copper ore x2
         { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
         { 640, { "gil", 200 } } -- copper ore x1, gil x200
-******************************************************************************* --]]
+--]]
 function npcUtil.tradeHasExactly(trade, items)
     return npcUtil.tradeHas(trade, items, true)
 end
@@ -907,7 +907,7 @@ function npcUtil.disappearCrate(crate)
     if crate:isNPC() then
         crate:entityAnimationPacket("kesu")
         crate:timer(3000, function(npc)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
             npc:setStatus(xi.status.DISAPPEAR)
         end)
     else

@@ -40,7 +40,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story")== 0 then
+    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story") == 0 then
         cs = 322
     end
 

@@ -8,10 +8,10 @@ require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player,npc,trade)
-end;
+entity.onTrade = function(player, npc, trade)
+end
 
-entity.onTrigger = function(player,npc)
+entity.onTrigger = function(player, npc)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     -- TRANSFORMATIONS
     if transformationsProgress == 4 then
@@ -25,10 +25,10 @@ entity.onTrigger = function(player,npc)
     end
 end
 
-entity.onEventUpdate = function(player,csid,option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player,csid,option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 4 then
         npcUtil.popFromQM(player, GetNPCByID(ID.npc.NEPIONIC_QM), ID.mob.NEPIONIC_SOULFLAYER, {hide = 1})
     elseif csid == 5 then

@@ -33,7 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         constant = 680
         basepower = 210
     elseif (power < 400) then
-        divisor = 10/7
+        divisor = 10 / 7
         constant = 780
         basepower = 300
     elseif (power < 500) then
@@ -41,7 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         constant = 850
         basepower = 400
     elseif (power < 700) then
-        divisor = 5/3
+        divisor = 5 / 3
         constant = 890
         basepower = 500
     else
@@ -64,11 +64,11 @@ spellObject.onSpellCast = function(caster, target, spell)
                 solaceStoneskin = math.floor(final * 0.25)
             end
 
-            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE)/100)
+            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE) / 100)
 
             target:addStatusEffect(xi.effect.STONESKIN, solaceStoneskin, 0, 25, 0, 0, 1)
         end
-        final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+        final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
         --Applying server mods
         final = final * xi.settings.main.CURE_POWER
@@ -93,9 +93,9 @@ spellObject.onSpellCast = function(caster, target, spell)
             params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
             params.bonus = 1.0
 
-            local dmg = calculateMagicDamage(caster, target, spell, params)*0.5
+            local dmg = calculateMagicDamage(caster, target, spell, params) * 0.5
             local resist = applyResistance(caster, target, spell, params)
-            dmg = dmg*resist
+            dmg = dmg * resist
             dmg = addBonuses(caster, spell, target, dmg)
             dmg = adjustForTarget(target, dmg, spell:getElement())
             dmg = finalMagicAdjustments(caster, target, spell, dmg)
@@ -120,7 +120,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

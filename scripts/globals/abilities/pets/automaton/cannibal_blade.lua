@@ -50,11 +50,11 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     if automaton:checkDistance(target) > 7 then
         if params.weaponDamage then
-            params.weaponDamage = params.weaponDamage/4
+            params.weaponDamage = params.weaponDamage / 4
         else
-            params.ftp100 = params.ftp100/4
-            params.ftp200 = params.ftp200/4
-            params.ftp300 = params.ftp300/4
+            params.ftp100 = params.ftp100 / 4
+            params.ftp200 = params.ftp200 / 4
+            params.ftp300 = params.ftp300 / 4
         end
     end
 

@@ -160,7 +160,7 @@ function InteractionLookup:addContainers(containers, zoneIds)
     local validZoneTable = nil
     if zoneIds ~= nil then
         validZoneTable = {}
-        for i=1, #zoneIds do
+        for i = 1, #zoneIds do
            validZoneTable[zoneIds[i]] = true
         end
     end
@@ -174,7 +174,7 @@ end
 function InteractionLookup:addContainer(container, validZoneTable)
     if self.containers[container.id] then
         -- Container already added, need to remove it first to re-add.
-        printf("Can't add a container that is already a loaded. Need to remove it first: " .. container.id);
+        printf("Can't add a container that is already a loaded. Need to remove it first: " .. container.id)
         return
     end
 
@@ -252,8 +252,8 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
             if entry.container.getCheckArgs then
                 checkArgs = entry.container:getCheckArgs(player)
             end
-            checkArgs[#checkArgs+1] = containerVarCache[entry.container]
-            checkArgs[#checkArgs+1] = varCache
+            checkArgs[#checkArgs + 1] = containerVarCache[entry.container]
+            checkArgs[#checkArgs + 1] = varCache
         end
 
         local ok, res = true, true

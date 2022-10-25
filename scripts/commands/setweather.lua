@@ -29,9 +29,9 @@ function onTrigger(player, weather)
     end
 
     -- invert weather table
-    local weatherByNum={}
+    local weatherByNum = {}
     for k, v in pairs(xi.weather) do
-        weatherByNum[v]=k
+        weatherByNum[v] = k
     end
 
     -- set weather

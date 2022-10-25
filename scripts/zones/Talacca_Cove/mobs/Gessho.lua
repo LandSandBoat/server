@@ -12,7 +12,7 @@ entity.onMobFight = function(mob, target)
 
         if (chance == 50) then
             local clones = math.random(1, 6)
-            for i=1, clones, 1 do SpawnMob(mob:getID()+i) end
+            for i = 1, clones, 1 do SpawnMob(mob:getID() + i) end
         end
 
         if (mob:getHPP() <= 15) then
@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
         end
     else
         local count = mob:getLocalVar("DespawnCount")
-        mob:setLocalVar("DespawnCount", count+1)
+        mob:setLocalVar("DespawnCount", count + 1)
 
         if (count == 100) then
             DespawnMob(mob:getID())

@@ -685,8 +685,9 @@ public:
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);
-    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
-    int32  addFullGambit(lua_State*);
+    auto   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry) -> std::string;
+    void   removeSimpleGambit(std::string const& id);
+    void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
@@ -766,6 +767,8 @@ public:
     void setUnkillable(bool unkillable);
     void setUntargetable(bool untargetable);
     bool getUntargetable();
+    void setIsAggroable(bool isAggroable);
+    bool isAggroable();
 
     void setDelay(uint16 delay);   // sets a mobs weapon delay
     void setDamage(uint16 damage); // sets a mobs weapon damage

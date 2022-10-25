@@ -14,7 +14,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SLEEP_I
-    local power = math.random(15, 20) + mob:getMainLvl()/4
+    local power = math.random(15, 20) + mob:getMainLvl() / 4
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, power))
 

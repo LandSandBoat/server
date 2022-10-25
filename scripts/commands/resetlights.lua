@@ -15,7 +15,7 @@ function error(player, msg)
     player:PrintToPlayer("!resetlights (player)")
 end
 
-function onTrigger(player,target)
+function onTrigger(player, target)
     -- validate target
     local targ
     if (target == nil) then
@@ -29,5 +29,5 @@ function onTrigger(player,target)
     end
 
     xi.abyssea.resetPlayerLights(targ)
-    player:PrintToPlayer(string.format("%s's lights have been reset!. ",targ:getName()))
+    player:PrintToPlayer(string.format("%s's lights have been reset!. ", targ:getName()))
 end

@@ -219,15 +219,15 @@ int32 lobbydata_parse(int32 fd)
                         ref<uint8>(CharList, charListOffset + 46) = MainJob;
                         ref<uint8>(CharList, charListOffset + 73) = lvlMainJob;
 
-                        ref<uint8>(CharList, charListOffset + 44)  = (uint8)sql->GetUIntData(5);   // race;
-                        ref<uint8>(CharList, charListOffset + 56)  = (uint8)sql->GetUIntData(6);   // face;
-                        ref<uint16>(CharList, charListOffset + 58) = (uint16)sql->GetUIntData(7);  // head;
-                        ref<uint16>(CharList, charListOffset + 60) = (uint16)sql->GetUIntData(8);  // body;
-                        ref<uint16>(CharList, charListOffset + 62) = (uint16)sql->GetUIntData(9);  // hands;
-                        ref<uint16>(CharList, charListOffset + 64) = (uint16)sql->GetUIntData(10); // legs;
-                        ref<uint16>(CharList, charListOffset + 66) = (uint16)sql->GetUIntData(11); // feet;
-                        ref<uint16>(CharList, charListOffset + 68) = (uint16)sql->GetUIntData(12); // main;
-                        ref<uint16>(CharList, charListOffset + 70) = (uint16)sql->GetUIntData(13); // sub;
+                        ref<uint8>(CharList, charListOffset + 44)  = (uint8)sql->GetUIntData(5);   // race
+                        ref<uint8>(CharList, charListOffset + 56)  = (uint8)sql->GetUIntData(6);   // face
+                        ref<uint16>(CharList, charListOffset + 58) = (uint16)sql->GetUIntData(7);  // head
+                        ref<uint16>(CharList, charListOffset + 60) = (uint16)sql->GetUIntData(8);  // body
+                        ref<uint16>(CharList, charListOffset + 62) = (uint16)sql->GetUIntData(9);  // hands
+                        ref<uint16>(CharList, charListOffset + 64) = (uint16)sql->GetUIntData(10); // legs
+                        ref<uint16>(CharList, charListOffset + 66) = (uint16)sql->GetUIntData(11); // feet
+                        ref<uint16>(CharList, charListOffset + 68) = (uint16)sql->GetUIntData(12); // main
+                        ref<uint16>(CharList, charListOffset + 70) = (uint16)sql->GetUIntData(13); // sub
 
                         ref<uint8>(CharList, charListOffset + 72)  = (uint8)zone;
                         ref<uint16>(CharList, charListOffset + 78) = zone;
@@ -243,7 +243,6 @@ int32 lobbydata_parse(int32 fd)
                 {
                     LOBBBY_ERROR_MESSAGE(ReservePacketEmptyList);
                     ref<uint16>(ReservePacketEmptyList, 32) = 321;
-                    // std::memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
                     unsigned char Hash[16];
                     uint8         SendBuffSize = ref<uint8>(ReservePacketEmptyList, 0);
@@ -746,17 +745,13 @@ int32 lobbyview_parse(int32 fd)
                     do_close_lobbyview(sd, fd);
                     return -1;
                 }
-                // char lobbydata_code[] = { 0x15, 0x07 };
-                //              sessions[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
-                //              sessions[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
-                //              WFIFOSET(sd->login_lobbydata_fd,2);
+
                 ShowInfo("lobbyview_parse: char <%s> was successfully created", sd->charname);
                 /////////////////////////
                 LOBBY_ACTION_DONE(ReservePacket);
                 unsigned char hash[16];
 
                 int32 sendsize = 32;
-                // std::memset(ReservePacket+12,0,sizeof(16));
                 md5((unsigned char*)(ReservePacket), hash, sendsize);
 
                 std::memcpy(ReservePacket + 12, hash, sizeof(hash));

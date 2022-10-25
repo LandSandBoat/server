@@ -39,7 +39,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     if damage > 0 then
         local bonusduration = 1 + 0.00033 * (skill:getTP() - 1000)
         if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 15, 0, 90*bonusduration)
+            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 15, 0, 90 * bonusduration)
         end
     end
 

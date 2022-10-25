@@ -12,7 +12,7 @@ effectObject.onEffectTick = function(target, effect)
     if (effect:getTickCount() > 5) then
         target:leaveGame()
     else
-        target:messageSystem(effect:getPower(), 30-effect:getTickCount()*5)
+        target:messageSystem(effect:getPower(), 30 - effect:getTickCount() * 5)
     end
 end
 

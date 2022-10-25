@@ -28,7 +28,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
     duration = duration * resm
 
-    if duration > 0 and
+    if
+        duration > 0 and
         xi.summon.avatarPhysicalHit(skill, totaldamage) and
         not target:hasStatusEffect(xi.effect.WEIGHT)
     then

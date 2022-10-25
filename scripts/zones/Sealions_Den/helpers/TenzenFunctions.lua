@@ -57,9 +57,10 @@ tenzenFunctions.wsSequence = function(mob)
             mob:setLocalVar("changeTime", mob:getBattleTime()) -- don't go back to bow form right away
             mob:setLocalVar("step", 0)
             mob:setLocalVar("meikyo", 0) -- reset for next meikyo and allow tenzen to now swap to bow form
-            mob:setLocalVar("skillchain", math.random(100)) -- calculate next skillchain success chance
+            mob:setLocalVar("skillchain", math.random(1, 100)) -- calculate next skillchain success chance
             mob:SetMobAbilityEnabled(true)
             mob:SetAutoAttackEnabled(true)
+
             if mob:getLocalVar("twohourtrigger") == 1 then
                 mob:setLocalVar("twohourtrigger", 2) -- prevent tenzen from using second meikyo while first one is active
             end
@@ -70,7 +71,7 @@ tenzenFunctions.wsSequence = function(mob)
         mob:timer(3000, function(mobArg, target)
             battlefield:setLocalVar("gameover", battlefield:getRemainingTime()) -- initiate loss condition trigger & record the time remaining
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:showText(mob, ID.text.TENZEN_MSG_OFFSET +1)
+            mob:showText(mob, ID.text.TENZEN_MSG_OFFSET + 1)
         end)
     end
 end
@@ -88,6 +89,7 @@ tenzenFunctions.formSwap = function(mob)
             mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
             mob:SetMobSkillAttack(1171)
             mob:setLocalVar("changeTime", mob:getBattleTime())
+
             if mob:getAnimationSub() == 5 then -- need to sheath his great katana before pulling out bow
                 mob:timer(1000, function(mobArg)
                     mob:setMod(xi.mod.DELAY, 2400) -- attacks more frequently while bow is drawn
@@ -118,7 +120,7 @@ tenzenFunctions.riceBall = function(mob, target, busyState)
             mob:getLocalVar("riceball") == 0
         then
             if battlefield:getLocalVar("fireworks") ~= 1 then
-                mob:showText(target, ID.text.TENZEN_MSG_OFFSET +3)
+                mob:showText(target, ID.text.TENZEN_MSG_OFFSET + 3)
                 mob:useMobAbility(1398)
                 mob:addMod(xi.mod.ATT, 50)
                 mob:addMod(xi.mod.DEF, 30)

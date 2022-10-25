@@ -64,7 +64,7 @@ entity.onMobFight = function(mob, target)
             elseif #phuaboUp == 0 or #phuaboUp == 3 then
                 numToSpawn = 3
             elseif #phuaboUp == 1 then
-                numToSpawn = math.random(3)
+                numToSpawn = math.random(1, 3)
             end
 
             -- spawn sharks
@@ -80,7 +80,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    if math.random(100) <= 25 then -- 25% chance to spawn Absolute Virtue
+    if math.random(1, 100) <= 25 then -- 25% chance to spawn Absolute Virtue
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
     end
 end

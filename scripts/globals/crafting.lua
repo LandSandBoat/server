@@ -97,9 +97,10 @@ xi.crafting.isGuildMember = function(player, guild)
         local twop = 2^i
 
         if guildOK >= twop then
-            bit[i]=1 guildOK = guildOK - twop
+            bit[i]  = 1
+            guildOK = guildOK - twop
         else
-            bit[i]=0
+            bit[i] = 0
         end
     end
 

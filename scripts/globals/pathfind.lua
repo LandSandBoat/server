@@ -16,6 +16,7 @@ xi.path =
         SCRIPT   = 8,
         SLIDE    = 16,
         PATROL   = 32,
+        COORDS   = 64,
     },
 
     -- returns the point at the given index
@@ -54,7 +55,7 @@ xi.path =
         end
 
         if #valid_points > 0 then
-            local target = points[valid_points[math.random(#valid_points)]]
+            local target = points[valid_points[math.random(1, #valid_points)]]
             mob:pathThrough({ target.x, target.y, target.z })
         end
     end

@@ -21,7 +21,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid==11) then
+    if (csid == 11) then
         player:setCharVar("FiresOfDiscProg", 4)
     end
 end

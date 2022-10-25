@@ -46,8 +46,8 @@ end
 
 entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
-    local petOne = GetMobByID(mobId+1)
-    local petTwo = GetMobByID(mobId+2)
+    local petOne = GetMobByID(mobId + 1)
+    local petTwo = GetMobByID(mobId + 2)
     local petCooldown = mob:getLocalVar("petCooldown")
     local inShell = mob:getLocalVar("inShell")
 
@@ -89,7 +89,7 @@ entity.onSpellPrecast = function(mob, spell)
 
     if spell:getID() == 214 then
         for i = 1, 2 do
-            local pet = GetMobByID(mob:getID()+i)
+            local pet = GetMobByID(mob:getID() + i)
             if not pet:isSpawned() then
                 SpawnMob(pet:getID())
                 pet:updateEnmity(target)
@@ -103,7 +103,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local petID = GetMobByID(mobId+i)
+        local petID = GetMobByID(mobId + i)
         petID:setHP(0)
     end
     mob:resetLocalVars()

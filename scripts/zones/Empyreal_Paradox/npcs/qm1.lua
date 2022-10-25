@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
 end
 
-entity.onTrigger = function(player,npc)
+entity.onTrigger = function(player, npc)
     if
         player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and not
         (
@@ -27,10 +27,10 @@ entity.onTrigger = function(player,npc)
     end
 end
 
-entity.onEventUpdate = function(player,csid,option,extras)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player,csid,option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5 and option == 1 then
         player:delMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
         player:delMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)

@@ -45,12 +45,12 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onRegionEnter = function(player, region)
-    local regionID =region:GetRegionID()
+    local regionID = region:GetRegionID()
 
     if
         regionID == 1 and
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("COP_louverance_story")== 2
+        player:getCharVar("COP_louverance_story") == 2
     then
         player:startEvent(758)
     end

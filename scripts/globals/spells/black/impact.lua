@@ -70,7 +70,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Calculate raw damage
     local dmg = calculateMagicDamage(caster, target, spell, params)
     -- Get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
