@@ -27,19 +27,19 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus = 1.0
 
     -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
+    local dmg = xi.magic.calculateMagicDamage(caster, target, spell, params)
     -- Softcaps at 30, should always do at least 1
     dmg = utils.clamp(dmg, 1, 30)
     -- Get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     -- Get the resisted damage
     dmg = dmg * resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = xi.magic.addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     -- Add in final adjustments including the actual damage dealt
-    local final = finalMagicAdjustments(caster, target, spell, dmg)
+    local final = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration
     local duration = 120

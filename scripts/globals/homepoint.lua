@@ -220,7 +220,7 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
                 for x = 1, 9 do
                     if favs[x] == index then
                         for y = x, 8 do
-                            favs[y] = favs[y+1]
+                            favs[y] = favs[y + 1]
                         end
                         favs[9] = -1
                         break
@@ -238,8 +238,8 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
         end
 
         for x = 1, 3 do -- Condense arrays for event params
-            favs[1] = favs[1] + favs[x+1] * 256^x
-            favs[5] = favs[5] + favs[x+5] * 256^x
+            favs[1] = favs[1] + favs[x + 1] * 256^x
+            favs[5] = favs[5] + favs[x + 5] * 256^x
         end
 
         favs[9] = favs[9] + favs[10] * 256

@@ -1506,9 +1506,9 @@ xi.appraisal.appraiseItem = function(player, npc, trade, gil, appraisalCsid)
     if player:getGil() >= gil then
         for _, tradedItem in pairs(xi.appraisal.unappraisedItems) do
             if npcUtil.tradeHasExactly(trade, tradedItem) then
-                local tradeID = trade:getItemId()
-                local info = xi.appraisal.appraisalItems[tradeID]
-                local appraisalID = trade:getItem():getAppraisalID()
+                local tradeID        = trade:getItemId()
+                local info           = xi.appraisal.appraisalItems[tradeID]
+                local appraisalID    = trade:getItem():getAppraisalID()
                 local appraisedItem  = xi.appraisal.itemPick(player, info, appraisalID)
 
                 if appraisedItem ~= 0 then
@@ -1533,8 +1533,9 @@ xi.appraisal.itemPick = function(player, info, appraisalID)
 
     -- pick weighted result
     local item = 0
-    local pick = math.random(sum)
+    local pick = math.random(1, sum)
     sum = 0
+
     for i = 1, #items do
         sum = sum + items[i][1]
         if sum >= pick then
@@ -1558,11 +1559,13 @@ end
 
 xi.appraisal.canGetUnappraisedItem = function(player, area)
     local instance = player:getInstance()
-    local result = false
-    local cap = instance:getLevelCap()
+    local result   = false
+    local cap      = instance:getLevelCap()
+
     if cap == 0 or cap >= xi.assault.missionInfo[area].suggestedLevel then
         result = true
     end
+
     return result
 end
 
@@ -1575,13 +1578,15 @@ xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
                 for _, entry in pairs(lootGroup) do
                     max = max + entry.droprate
                 end
-                local roll = math.random(max)
+                local roll = math.random(1, max)
+
                 for _, entry in pairs(lootGroup) do
                     max = max - entry.droprate
                     if roll > max then
                         if entry.itemid > 0 then
-                            npc:setLocalVar("UnappraisedItem",entry.itemid)
+                            npc:setLocalVar("UnappraisedItem", entry.itemid)
                         end
+
                         break
                     end
                 end
@@ -1592,8 +1597,8 @@ end
 
 xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTable)
     local instance = player:getInstance()
-    local chars = instance:getChars()
-    local area = player:getCurrentAssault()
+    local chars    = instance:getChars()
+    local area     = player:getCurrentAssault()
 
     if instance:completed() and npc:getLocalVar("open") == 0 then
         if xi.appraisal.canGetUnappraisedItem(player, area) then
@@ -1609,11 +1614,13 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
                 end
             end
         end
+
         npc:entityAnimationPacket("open")
         npc:setLocalVar("open", 1)
         npc:setUntargetable(true)
         npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
         npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
+
         for i = 1, #regItemTable, 1 do
             local lootGroup = regItemTable[i]
             if lootGroup then
@@ -1621,7 +1628,8 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
                 for _, entry in pairs(lootGroup) do
                     max = max + entry.droprate
                 end
-                local roll = math.random(max)
+
+                local roll = math.random(1, max)
                 for _, entry in pairs(lootGroup) do
                     max = max - entry.droprate
                     if roll > max then

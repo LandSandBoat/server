@@ -22,7 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus = caster:getMod(xi.mod.FINALE_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     params.effect = nil
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local effect = xi.effect.NONE
 
     if (resist > 0.0625) then

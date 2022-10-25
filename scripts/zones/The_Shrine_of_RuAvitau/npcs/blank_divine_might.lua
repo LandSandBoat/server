@@ -25,14 +25,14 @@ entity.onTrigger = function(player, npc)
     local moonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
 
     -- Count keyitems
-    for i=xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
+    for i = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
         if (player:hasKeyItem(i) == true) then
             aaKeyitems = aaKeyitems + 1
         end
     end
 
     -- Count Earrings
-    for i=14739, 14743 do
+    for i = 14739, 14743 do
         if (player:hasItem(i) == true) then
             dmEarrings = dmEarrings + 1
         end

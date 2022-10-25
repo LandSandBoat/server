@@ -533,7 +533,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
 
             npc:entityAnimationPacket("open")
             npc:setLocalVar("opened", 1)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
             npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
             npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:resetLocalVars() npcvar:setAnimationSub(0) end)
 
@@ -605,7 +605,7 @@ xi.nyzul.tempBoxPickItems = function(npc)
     end
 
     if item2_random > 4 and item3_random > 8 then
-        random = math.random(1,#tempBoxItems)
+        random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
         npc:setLocalVar("itemID_3", item.itemID)
@@ -829,7 +829,7 @@ xi.nyzul.spawnChest = function(mob, player)
 
             if coffer:getStatus() == xi.status.DISAPPEAR then
                 local pos = mob:getPos()
-                coffer:untargetable(false)
+                coffer:setUntargetable(false)
                 coffer:setPos(pos.x, pos.y, pos.z, pos.rot)
                 coffer:setLocalVar("appraisalItem", mobID)
                 coffer:setStatus(xi.status.NORMAL)
@@ -871,7 +871,7 @@ xi.nyzul.removePathos = function(instance)
                     end
                 end
 
-                instance:setLocalVar("floorPathos",utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
+                instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
             end
         end
     end

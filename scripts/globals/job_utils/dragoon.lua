@@ -76,7 +76,7 @@ end
 -- Generic Function for damage-based Jumps
 local function performWSJump(player, target, action, params)
     local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
     local totalHits = tpHits + extraHits
 
     if totalHits > 0 then
@@ -99,11 +99,11 @@ local function cutEmpathyEffectTable(validEffects, i, maxCount)
 
     while maxCount < i do
         delindex = math.random(1, i)
-        while validEffects[delindex+1] ~= nil do
-            validEffects[delindex] = validEffects[delindex+1]
+        while validEffects[delindex + 1] ~= nil do
+            validEffects[delindex] = validEffects[delindex + 1]
             delindex = delindex + 1
         end
-        validEffects[delindex+1] = nil -- could be in the above loop, but unsure if Lua allows copying of nil?
+        validEffects[delindex + 1] = nil -- could be in the above loop, but unsure if Lua allows copying of nil?
         i = i - 1
     end
 
@@ -299,7 +299,7 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
 
         for _, effect in pairs(effects) do
             if bit.band(effect:getFlag(), xi.effectFlag.EMPATHY) == xi.effectFlag.EMPATHY then
-                validEffects[i+1] = effect
+                validEffects[i + 1] = effect
                 i = i + 1
             end
         end
@@ -312,12 +312,12 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
 
         local copyEffect = nil
         while copyi < empathyTotal do
-            copyEffect = validEffects[copyi+1]
+            copyEffect = validEffects[copyi + 1]
             if pet:hasStatusEffect(copyEffect:getType()) then
                 pet:delStatusEffect(copyEffect:getType())
             end
 
-            pet:addStatusEffect(copyEffect:getType(), copyEffect:getPower(), copyEffect:getTick(), math.ceil((copyEffect:getTimeRemaining())/1000)) -- id, power, tick, duration(convert ms to s)
+            pet:addStatusEffect(copyEffect:getType(), copyEffect:getPower(), copyEffect:getTick(), math.ceil((copyEffect:getTimeRemaining()) / 1000)) -- id, power, tick, duration(convert ms to s)
             copyi = copyi + 1
         end
     end
@@ -362,10 +362,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
 
     -- Prevent the player from performing actions while in the air
     player:queue(0, function(playerArg)
-        playerArg:addStatusEffectEx(xi.effect.ALL_MISS, xi.effect.NONE, 2, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
-        playerArg:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, xi.effect.NONE, 1, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
-        playerArg:addStatusEffectEx(xi.effect.MAGIC_SHIELD, xi.effect.NONE, 1, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
-        playerArg:stun(5000)
+        playerArg:untargetableAndUnactionable(5000)
     end)
 
     -- If the Dragoon's wyvern is out and alive, tell it to use Super Climb

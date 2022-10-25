@@ -17,7 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = mob:getMainLvl()/10 * 4 + 5
+    local power = mob:getMainLvl() / 10 * 4 + 5
     local duration = 60
 
     local typeEffect = xi.effect.REGEN

@@ -14,6 +14,10 @@ entity.onMobFight = function(mob, target)
     xi.promyvion.receptacleOnFight(mob, target)
 end
 
+entity.onMobRoam = function(mob)
+    xi.promyvion.receptacleIdle(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.promyvion.receptacleOnDeath(mob, optParams)
 end

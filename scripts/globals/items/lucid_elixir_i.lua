@@ -16,8 +16,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addHP(target:getMaxHP()*0.5*xi.settings.main.ITEM_POWER)
-    target:addMP(target:getMaxMP()*0.5*xi.settings.main.ITEM_POWER)
+    target:addHP(target:getMaxHP() * 0.5 * xi.settings.main.ITEM_POWER)
+    target:addMP(target:getMaxMP() * 0.5 * xi.settings.main.ITEM_POWER)
     target:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP)
 end
 

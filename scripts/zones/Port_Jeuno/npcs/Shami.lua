@@ -127,8 +127,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(317)
     elseif beastmensSeal + kindredsSeal + kindredsCrest + highKindredsCrest + sacredKindredsCrest == 0 then
         player:startEvent(23) -- Standard dialog ?
+    elseif xi.settings.main.ENABLE_ABYSSEA == 1 then
+        player:startEvent(322, (kindredsSeal * 65536) + beastmensSeal, (highKindredsCrest * 65536) + kindredsCrest, 0, 0, 1, 0, 0) -- Standard dialog with menu
     else
-        player:startEvent(322, (kindredsSeal * 65536) + beastmensSeal, (highKindredsCrest * 65536) + kindredsCrest, sacredKindredsCrest, 0, 1, 0, 0) -- Standard dialog with menu
+        player:startEvent(322, (kindredsSeal * 65536) + beastmensSeal, 0, 0, 0, 1, 0, 0) -- WoTG Era Dialogue
     end
 end
 

@@ -51,7 +51,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         isSneakValid = false
     end
 
-    local hitrate = getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT))
+    local hitrate = xi.weaponskills.getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT))
 
     if (math.random() <= hitrate or isSneakValid) then
 
@@ -60,7 +60,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         params.diff = 0
         params.skillType = player:getWeaponSkillType(xi.slot.MAIN)
         params.bonus = 50 - target:getMod(xi.mod.STUNRES)
-        local resist = applyResistance(player, target, spell, params)
+        local resist = xi.magic.applyResistance(player, target, spell, params)
 
         if resist > 0.25 then
             target:delStatusEffectSilent(xi.effect.WEIGHT)

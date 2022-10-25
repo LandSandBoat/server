@@ -11,10 +11,11 @@ xi.settings = xi.settings or {}
 
 xi.settings.logging =
 {
-    DEBUG_NAVMESH   = false,
-    DEBUG_PACKETS   = false,
-    DEBUG_ACTIONS   = false,
-    DEBUG_SQL       = false,
-    DEBUG_ID_LOOKUP = false,
-    DEBUG_MODULES   = false,
+    DEBUG_NAVMESH        = false,
+    DEBUG_PACKETS        = false,
+    DEBUG_ACTIONS        = false,
+    DEBUG_SQL            = false,
+    DEBUG_ID_LOOKUP      = false,
+    DEBUG_MODULES        = false,
+    DEBUG_PACKET_BACKLOG = false,
 }

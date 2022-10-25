@@ -62,7 +62,11 @@ xi.ally =
         -- Pick an enemy to attack. Some allies do this intentionally. Some allies start to attack on their own if
         -- a player stalls too long. This can be used to set a target in both cases.
 
-        local target = targetMobs[math.random(#targetMobs)]
+        local target
+
+        if #targetMobs > 0 then
+            target = targetMobs[math.random(1, #targetMobs)]
+        end
 
         if not target then
             return

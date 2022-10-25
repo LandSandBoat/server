@@ -24,7 +24,7 @@ end
 
 itemObject.onItemUse = function(target, player)
     target:delStatusEffectSilent(xi.effect.HYSTERIA)
-    target:addStatusEffectEx(xi.effect.HYSTERIA, xi.effect.HYSTERIA, 1, 0, math.random(25,32), 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
+    target:addStatusEffectEx(xi.effect.HYSTERIA, xi.effect.HYSTERIA, 1, 0, math.random(25, 32), 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
 end
 
 return itemObject

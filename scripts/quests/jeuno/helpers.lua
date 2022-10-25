@@ -80,7 +80,8 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                 ['Bluffnix'] =
                 {
                     onTrade = function(player, npc, trade)
-                        if  npcUtil.tradeHasExactly(trade, params.tradeItems) or
+                        if
+                            npcUtil.tradeHasExactly(trade, params.tradeItems) or
                             npcUtil.tradeHasExactly(trade, params.tradeStew)
                         then
                             return quest:progressEvent(73, getCompleteDiaglogueId(player))

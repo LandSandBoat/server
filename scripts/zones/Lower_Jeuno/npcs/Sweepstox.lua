@@ -23,7 +23,7 @@ local events =
     OTHER_BAD_TRADE = 20068
 }
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     xi.mystery.onTrade(player, npc, trade, events)
 end
 

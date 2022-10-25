@@ -326,12 +326,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                // Show timer except in Temenos and Apollyon
-                if (this->GetZoneID() != 37 && this->GetZoneID() != 38)
+
+                if (m_showTimer)
                 {
                     charutils::SendTimerPacket(PChar, GetRemainingTime());
                 }
-                charutils::SendTimerPacket(PChar, GetRemainingTime());
 
                 // Try to add the player's pet in case they have one that can
                 if (PChar->PPet != nullptr)
@@ -746,8 +745,22 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             RemoveEntity(PChar, leavecode);
+        }
+    }
+
+    // Remove all registered players as long as they're in the zone
+    for (auto id : m_RegisteredPlayers)
+    {
+        auto* PChar = GetZone()->GetCharByID(id);
+        if (PChar)
+        {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+
+            if (PChar->PPet)
+            {
+                PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            }
         }
     }
 

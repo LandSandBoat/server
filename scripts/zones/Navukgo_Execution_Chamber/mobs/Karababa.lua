@@ -31,7 +31,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     if warp == 1 then
         mob:showText(mob, ID.text.KARABABA_QUIT)
         mob:setLocalVar("warp", 2)
-        mob:setLocalVar("wait", os.time()+8)
+        mob:setLocalVar("wait", os.time() + 8)
         return 261
     elseif rnd == 1 then
         mob:showText(mob, ID.text.KARABARA_FIRE)

@@ -37,7 +37,7 @@ end
 
 entity.onMobDisengage = function(mob)
     -- When it becomes unclaimed, it will immediately regen to 100%.
-    mob:setHPP(100)
+    mob:setHP(mob:getMaxHP())
 end
 
 entity.onMobDeath = function(mob, player, optParams)

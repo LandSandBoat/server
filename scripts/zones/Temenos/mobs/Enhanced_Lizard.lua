@@ -69,24 +69,26 @@ local path =
 
 entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_W_MOB[4]
-    local pause = mob:getLocalVar("pause")
+    local pause  = mob:getLocalVar("pause")
+
     if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 2)+1
+        local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
         mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
+
         if offset == 5 then
-            mob:setLocalVar("pause", os.time()+10)
+            mob:setLocalVar("pause", os.time() + 10)
         elseif offset == 1 or offset == 2 or offset == 6 or offset == 7 then
-            mob:setLocalVar("pause", os.time()+17)
+            mob:setLocalVar("pause", os.time() + 17)
         else
-            mob:setLocalVar("pause", os.time()+25)
+            mob:setLocalVar("pause", os.time() + 25)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
-        local spawn = math.random(4) == 1
+        local spawn       = math.random(1, 4) == 1
         local battlefield = mob:getBattlefield()
 
         if GetNPCByID(ID.npc.TEMENOS_W_GATE[4]):getAnimation() == xi.animation.CLOSE_DOOR then
@@ -95,12 +97,12 @@ entity.onMobDeath = function(mob, player, optParams)
 
         if spawn then
             for i = 0, 2 do
-                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[4]+i):getStatus() == xi.status.DISAPPEAR then
+                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[4] + i):getStatus() == xi.status.DISAPPEAR then
                     local mobX = mob:getXPos()
                     local mobY = mob:getYPos()
                     local mobZ = mob:getZPos()
-                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[4]+i):setPos(mobX, mobY, mobZ)
-                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[4]+i, battlefield, "crateMaskF4", battlefield:getLocalVar("crateMaskF4"))
+                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[4] + i):setPos(mobX, mobY, mobZ)
+                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[4] + i, battlefield, "crateMaskF4", battlefield:getLocalVar("crateMaskF4"))
                     break
                 end
             end

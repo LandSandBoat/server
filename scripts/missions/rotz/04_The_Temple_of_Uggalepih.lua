@@ -88,6 +88,13 @@ mission.sections =
                 [8] = function(player, csid, option, npc)
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
+
+                        -- NOTE: RoV mission transition occurs if the player is on Cursed Temple following the completion
+                        -- of this event.
+                        if player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.THE_CURSED_TEMPLE then
+                            player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_CURSED_TEMPLE)
+                            player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WISDOM_OF_OUR_FOREFATHERS)
+                        end
                     end
                 end,
             },

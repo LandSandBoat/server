@@ -251,6 +251,11 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.CAIT_SITH,
     },
 
+    [xi.mission.id.rov.PAST_IMPERFECT] =
+    {
+        xi.rhapsodies.character.TENZEN,
+    },
+
     [xi.mission.id.rov.THE_CURSED_TEMPLE] =
     {
         xi.rhapsodies.character.TENZEN,

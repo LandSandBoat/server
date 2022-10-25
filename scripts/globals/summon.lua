@@ -43,40 +43,62 @@ local function getDexCritRate(source, target)
     return math.min(critRate, 15) * sign
 end
 
-local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
+local function getAvatarfSTR(avatarStr, targetVit, avatar)
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- fSTR for avatars has no cap and a lower bound of floor(weaponDmg/9)
     local dSTR = avatarStr - targetVit
-    local fSTR = dSTR
+    local divisor = 4
+    local fSTR = 0
     if dSTR >= 12 then
-        fSTR = (dSTR + 4) / 4
+        fSTR = (dSTR + 4) / divisor
     elseif dSTR >= 6 then
-        fSTR = (dSTR + 6) / 4
+        fSTR = (dSTR + 6) / divisor
     elseif dSTR >= 1 then
-        fSTR = (dSTR + 7) / 4
+        fSTR = (dSTR + 7) / divisor
     elseif dSTR >= -2 then
-        fSTR = (dSTR + 8) / 4
+        fSTR = (dSTR + 8) / divisor
     elseif dSTR >= -7 then
-        fSTR = (dSTR + 9) / 4
+        fSTR = (dSTR + 9) / divisor
     elseif dSTR >= -15 then
-        fSTR = (dSTR + 10) / 4
+        fSTR = (dSTR + 10) / divisor
     elseif dSTR >= -21 then
-        fSTR = (dSTR + 12) / 4
+        fSTR = (dSTR + 12) / divisor
     else
-        fSTR = (dSTR + 13) / 4
+        fSTR = (dSTR + 13) / divisor
     end
 
-    local min = math.floor(weaponDmg/9)
-    return math.max(-min, fSTR)
+    local weapon_rank = 0
+    local lower_cap = weapon_rank * -1
+    if weapon_rank == 0 then
+        lower_cap = -1
+    end
+
+    fSTR = utils.clamp(fSTR, lower_cap, weapon_rank + 8)
+    return fSTR
 end
 
-local function avatarHitDmg(weaponDmg, fSTR, pDif, attacker, target)
+local function fTP(tp, ftp1, ftp2, ftp3)
+    if tp >= 1000 and tp < 2000 then
+        return ftp1 + ( ((ftp2 - ftp1) / 1000) * (tp - 1000) )
+    elseif tp >= 2000 and tp <= 3000 then
+        -- generate a straight line between ftp2 and ftp3 and find point @ tp
+        return ftp2 + ( ((ftp3 - ftp2) / 1000) * (tp - 2000) )
+    end
+
+    return 1 -- no ftp mod
+end
+
+local function avatarHitDmg(baseDmg, fSTR, pDif, attacker, target, ftp)
     -- https://www.bg-wiki.com/bg/Physical_Damage
     -- Physical Damage = Base Damage * pDIF
     -- where Base Damange is defined as Weapon Damage + fSTR
-    local dmg = (weaponDmg + fSTR) * pDif
+    if ftp == nil then
+        ftp = 1
+    end
 
-    dmg = handleBlock(attacker, target, dmg)
+    local dmg = (baseDmg + fSTR) * utils.clamp(ftp * pDif, 0, 4.0)
+
+    dmg = xi.weaponskills.handleBlock(attacker, target, dmg)
     return dmg
 end
 
@@ -108,17 +130,13 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     -- bonuses cap at level diff of 38 based on this testing:
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- If there are penalties they seem to be applied differently similarly to monsters.
-    local baseHitRate = getHitRate(avatar, target, 0, xi.summon.getSummoningSkillOverCap(avatar))
+    local baseHitRate = xi.weaponskills.getHitRate(avatar, target, 0, xi.summon.getSummoningSkillOverCap(avatar))
     -- First hit gets a +100 ACC bonus which translates to +50 hit
     local firstHitAccBonus = 0.5
 
     -- Normal hits computed first
-    local hitrateSubsequent = baseHitRate
-    -- First hit gets bonus hit rate
-    hitrateFirst = hitrateSubsequent + firstHitAccBonus
-
-    hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
-    hitrateFirst = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+    local hitrateFirst = utils.clamp(baseHitRate + firstHitAccBonus, minHitRate, maxHitRate)
+    local hitrateSubsequent = utils.clamp(baseHitRate, minHitRate, maxHitRate)
 
     -- Compute hits first so we can exit early
     local firstHitLanded = false
@@ -128,7 +146,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     local missChance = math.random()
 
-    missChance = handleParry(avatar, target, missChance, false)
+    missChance = xi.weaponskills.handleParry(avatar, target, missChance, false)
 
     if missChance < hitrateFirst then
         firstHitLanded = true
@@ -137,7 +155,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
     while numHitsProcessed < numberofhits do
         missChance = math.random()
-        missChance = handleParry(avatar, target, missChance, false)
+        missChance = xi.weaponskills.handleParry(avatar, target, missChance, false)
 
         if missChance < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
@@ -163,51 +181,58 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         local critRate = (baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)) / 100
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
 
-        local weaponDmg = avatar:getWeaponDmg()
-        weaponDmg = weaponDmg + wSC
+        local baseDmg = (avatar:getMainLvl() * 0.75) + (wSC * 0.85)
 
-        local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
+        local fSTR = getAvatarfSTR(avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), avatar)
 
         -- Calculating with the known era pdif ratio for weaponskills.
-        if mtp100 == nil or mtp200 == nil or mtp300 == nil then -- Nil gate for cMeleeRatio, will default mtp for each level to 1.
+        if mtp100 == nil or mtp200 == nil or mtp300 == nil then -- Nil gate for xi.weaponskills.cMeleeRatio, will default mtp for each level to 1.
             mtp100 = 1.0
             mtp200 = 1.0
             mtp300 = 1.0
         end
 
+        local pdifSoftCap = { nonCrit = 1.6, crit = 2.1 }
         local tp = avatar:getTP()
         local params = { atk100 = mtp100, atk200 = mtp200, atk300 = mtp300 }
-        local pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
-        local pDif = pDifTable[1]
-        local pDifCrit = pDifTable[2]
+        local pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
+        local pDif = utils.clamp(pDifTable[1], 0, pdifSoftCap.nonCrit)
+        local pDifCrit = utils.clamp(pDifTable[2], 0, pdifSoftCap.crit)
 
         --Everything past this point is randomly computed per hit
 
         numHitsProcessed = 0
 
         if firstHitLanded then
+            local ftp = fTP(tp, 1.35, 1.65, 1.875)
+
+            if numberofhits > 1 then
+                ftp = fTP(tp, 1.1, 1.3, 1.425)
+            end
+
             local isCrit = math.random() < critRate
 
             if isCrit then
                 pDif = pDifCrit
             end
 
-            finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif, avatar, target) * dmgmod
+            finaldmg = avatarHitDmg(baseDmg, fSTR, pDif, avatar, target, ftp) * dmgmod
 
             numHitsProcessed = 1
         end
 
         while numHitsProcessed < numHitsLanded do
+            local ftp = 1
             local isCrit = math.random() < critRate
-            pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
-            pDif = pDifTable[1]
-            pDifCrit = pDifTable[2]
+            pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
+            pDif = utils.clamp(pDifTable[1], 0, pdifSoftCap.nonCrit)
+            pDifCrit = utils.clamp(pDifTable[2], 0, pdifSoftCap.crit)
 
             if isCrit then
                 pDif = pDifCrit
             end
 
-            finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif, avatar, target) * dmgmodsubsequent)
+            finaldmg = finaldmg + (avatarHitDmg(baseDmg, fSTR, pDif, avatar, target, ftp) * dmgmodsubsequent)
             numHitsProcessed = numHitsProcessed + 1
         end
     end
@@ -320,6 +345,8 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
         target:updateEnmityFromDamage(mob, dmg)
         target:handleAfflatusMiseryDamage(dmg)
     end
+
+    mob:setTP(0)
 
     return dmg
 end

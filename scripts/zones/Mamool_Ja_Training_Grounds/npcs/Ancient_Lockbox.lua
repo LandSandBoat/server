@@ -9,7 +9,7 @@ require("scripts/globals/items")
 
 local entity = {}
 
-entity.onTrigger = function(player,npc)
+entity.onTrigger = function(player, npc)
     local qItem =
     {
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =

@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 -----------------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck= function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
     local id = target:getID()
     local checkID = true

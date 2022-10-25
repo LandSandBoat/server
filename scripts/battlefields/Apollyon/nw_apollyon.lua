@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name: NW Apollyon
 -- !addkeyitem red_card
 -- !addkeyitem cosmo_cleanse
@@ -36,10 +36,16 @@ function content:onBattlefieldInitialise(battlefield)
     end
 end
 
+local enpowerBoss = function(battlefield, mobs)
+    local boss = mobs[1]
+    boss:addMod(xi.mod.ATTP, 100)
+    boss:addMod(xi.mod.ACC, 50)
+end
+
 local depowerBoss = function(bossID)
     local boss = GetMobByID(bossID)
-    boss:setMod(xi.mod.ATTP, 100)
-    boss:setMod(xi.mod.ACC, 0)
+    boss:delMod(xi.mod.ATTP, 100)
+    boss:delMod(xi.mod.ACC, 50)
 end
 
 content.paths =
@@ -94,8 +100,8 @@ content.paths =
 
     [ID.NW_APOLLYON.mob.ZLATOROG] =
     {
-        { x = -384.0, y = 0.0, z = 268.0, wait = 5000 },
-        { x = -336.0, y = -0.5,z =  320.0, wait = 5000 },
+        { x = -384.0, y = 0.0,  z = 268.0, wait = 5000 },
+        { x = -336.0, y = -0.5, z = 320.0, wait = 5000 },
     },
 
     [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[1]] =
@@ -118,8 +124,8 @@ content.paths =
 
     [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[4]] =
     {
-        { x = -334.0, y = 0.0, z = 233.0, wait = 5000 },
-        { x = -345.0, y = -1.0,z =  246.0, wait = 5000 },
+        { x = -334.0, y = 0.0,  z = 233.0, wait = 5000 },
+        { x = -345.0, y = -1.0, z = 246.0, wait = 5000 },
     },
 
     [ID.NW_APOLLYON.mob.MOUNTAIN_BUFFALO[5]] =
@@ -233,10 +239,11 @@ content.groups =
         mobs = { "Pluto" },
         mods =
         {
-            [xi.mod.ATTP] = 200,
-            [xi.mod.ACC] = 100,
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
         },
 
+        setup = enpowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[1])
         end,
@@ -244,12 +251,19 @@ content.groups =
 
     {
         mobs = { "Bardha" },
-        allDeath = function(mob)
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
+            [xi.mod.SLEEPRES] = -25,
+        },
+
+        allDeath = function(battlefield, mob)
             depowerBoss(ID.NW_APOLLYON.mob.PLUTO)
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[1])
+            content:openDoor(battlefield, 1)
         end,
     },
 
@@ -258,10 +272,12 @@ content.groups =
         mobs = { "Zlatorog" },
         mods =
         {
-            [xi.mod.ATTP] = 200,
-            [xi.mod.ACC] = 100,
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
+            [xi.mod.SLEEPRES] = -25,
         },
 
+        setup = enpowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[2])
         end,
@@ -269,12 +285,19 @@ content.groups =
 
     {
         mobs = { "Mountain_Buffalo" },
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
+            [xi.mod.SLEEPRES] = -25,
+        },
+
         allDeath = function(battlefield, mob)
             depowerBoss(ID.NW_APOLLYON.mob.ZLATOROG)
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[2])
+            content:openDoor(battlefield, 2)
         end,
     },
 
@@ -282,12 +305,7 @@ content.groups =
     {
         mobs = { "Millenary_Mossback" },
         stationary = true,
-        mods =
-        {
-            [xi.mod.ATTP] = 200,
-            [xi.mod.ACC] = 100,
-        },
-
+        setup = enpowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[3])
         end,
@@ -295,13 +313,20 @@ content.groups =
 
     {
         mobs = { "Apollyon_Scavenger" },
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
+            [xi.mod.SLEEPRES] = -25,
+        },
+
         stationary = true,
-        allDeath = function(mob)
+        allDeath = function(battlefield, mob)
             depowerBoss(ID.NW_APOLLYON.mob.MILLENARY_MOSSBACK)
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[3])
+            content:openDoor(battlefield, 3)
         end,
     },
 
@@ -310,10 +335,11 @@ content.groups =
         mobs = { "Cynoprosopi" },
         mods =
         {
-            [xi.mod.ATTP] = 200,
-            [xi.mod.ACC] = 100,
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
         },
 
+        setup = enpowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[4])
         end,
@@ -321,12 +347,19 @@ content.groups =
     {
         --
         mobs = { "Gorynich" },
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = -25,
+            [xi.mod.SLEEPRES] = -25,
+        },
+
         allDeath = function(battlefield, mob)
             depowerBoss(ID.NW_APOLLYON.mob.CYNOPROSOPI)
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[4])
+            content:openDoor(battlefield, 4)
         end,
     },
 
@@ -336,15 +369,11 @@ content.groups =
         mobMods =
         {
             [xi.mobMod.ALLI_HATE] = 50,
-            [xi.mobMod.MAGIC_COOL] = 60,
+            [xi.mobMod.MAGIC_COOL] = 30,
+            [xi.mobMod.SEVERE_SPELL_CHANCE] = 100,
         },
 
-        mods =
-        {
-            [xi.mod.ATTP] = 200,
-            [xi.mod.ACC] = 100,
-        },
-
+        setup = enpowerBoss,
         death = function(battlefield, mob, count)
             npcUtil.showCrate(GetNPCByID(ID.NW_APOLLYON.npc.LOOT_CRATE))
         end,
@@ -352,6 +381,13 @@ content.groups =
 
     {
         mobs = { "Kronprinz_Behemoth" },
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = -25,
+            [xi.mod.BINDRES] = 25,
+            [xi.mod.SLEEPRES] = 25,
+        },
+
         mobMods = { [xi.mobMod.ALLI_HATE] = 50 },
         stationary = false,
         allDeath = function(battlefield, mob)

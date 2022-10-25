@@ -175,7 +175,7 @@ local defaults =
 }
 
 -- Apply defaults for records
-for i,v in pairs(records) do
+for _, v in pairs(records) do
     setmetatable(v, { __index = defaults })
 end
 
@@ -183,7 +183,7 @@ end
 -- This is used to deny taking records which aren't implemented in the above table.
 RoeParseRecords(records)
 
---[[ **************************************************************************
+--[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
     For external calls use onRecordTrigger below. (see healing.lua for example)
     If record rewards items, and the player cannot carry them, return false.
@@ -193,14 +193,14 @@ RoeParseRecords(records)
     completeRecord(player, record#)
     reward =
     {
-        item = { { 640,2 }, 641 },       -- see npcUtil.giveItem for formats (Only given on first completion)
+        item = { { 640, 2 }, 641 },      -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
         xp = 1000,
         accolades = 300,
         capacity = 400,
     })
-*************************************************************************** --]]
+--------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
     local recordEntry = records[record]
     local recordFlags = recordEntry.flags
@@ -213,7 +213,7 @@ local function completeRecord(player, record)
         end
     end
 
-    player:messageBasic(xi.msg.basic.ROE_COMPLETE,record)
+    player:messageBasic(xi.msg.basic.ROE_COMPLETE, record)
 
     if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
         local bonus = 1

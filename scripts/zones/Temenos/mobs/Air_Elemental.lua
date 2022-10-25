@@ -29,10 +29,10 @@ entity.onMobRoam = function(mob)
         local offset = mob:getID() - ID.mob.TEMENOS_E_MOB[3]
         local pause = mob:getLocalVar("pause")
         if pause < os.time() and offset == 1 or offset == 3 then
-            local point = (mob:getLocalVar("point") % 2)+1
+            local point = (mob:getLocalVar("point") % 2) + 1
             mob:setLocalVar("point", point)
             mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
-            mob:setLocalVar("pause", os.time()+5)
+            mob:setLocalVar("pause", os.time() + 5)
         end
     end
 end
@@ -44,9 +44,9 @@ entity.onMobDeath = function(mob, player, optParams)
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
                 GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.WIND_SDT, -5000) -- IDK WTF is going on here. Will refactor when Temenos is converted.
-                if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+6):isAlive() then
-                    DespawnMob(ID.mob.TEMENOS_C_MOB[2]+6)
-                    SpawnMob(ID.mob.TEMENOS_C_MOB[2]+12)
+                if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 6):isAlive() then
+                    DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 6)
+                    SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 12)
                 end
             else
                 local mobX = mob:getXPos()

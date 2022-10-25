@@ -121,11 +121,13 @@ entity.onMobSpawn = function(mob)
     elseif wyvernType == wyvernCapabilities.OFFENSIVE or wyvernType == wyvernCapabilities.MULTI then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local weaknessTargetChance = 75
-            local breaths = {}
+            local breaths              = {}
+
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 weaknessTargetChance = 100
             end
-            if math.random(100) <= weaknessTargetChance then
+
+            if math.random(1, 100) <= weaknessTargetChance then
                 local breathList =
                 {
                     xi.jobAbility.FLAME_BREATH,
@@ -146,12 +148,14 @@ entity.onMobSpawn = function(mob)
                 }
                 local lowest = resistances[1]
                 local breath = breathList[1]
+
                 for i, v in ipairs(breathList) do
                     if resistances[i] < lowest then
                         lowest = resistances[i]
                         breath = v
                     end
                 end
+
                 table.insert(breaths, breath)
             else
                 breaths =
@@ -164,9 +168,11 @@ entity.onMobSpawn = function(mob)
                     xi.jobAbility.HYDRO_BREATH,
                 }
             end
-            player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
+
+            player:getPet():useJobAbility(breaths[math.random(1, #breaths)], target)
         end)
     end
+
     if wyvernType == wyvernCapabilities.MULTI then
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
             -- check master first!
@@ -189,27 +195,31 @@ entity.onMobSpawn = function(mob)
         player:petRetreat()
     end)
 
-    master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
-        local pet = player:getPet()
-        local prev_exp = pet:getLocalVar("wyvern_exp")
-        if prev_exp < 1000 then
-            -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
-            local currentExp = exp
-            if prev_exp + exp > 1000 then
-                currentExp = 1000 - prev_exp
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
+            local pet = player:getPet()
+            local prev_exp = pet:getLocalVar("wyvern_exp")
+            local levels_gained = pet:getLocalVar("wyvern_level_ups")
+            if prev_exp < 1000 and levels_gained < 5 then
+                -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
+                local currentExp = utils.clamp(exp + prev_exp, 0, 1000)
+                local diff = math.floor(currentExp / 200) - levels_gained
+
+                while diff > 0 do
+                    -- wyvern levelled up (diff is the number of level ups)
+                    pet:addMod(xi.mod.ACC, 6)
+                    pet:addMod(xi.mod.HPP, 6)
+                    pet:addMod(xi.mod.ATTP, 5)
+                    pet:setHP(pet:getMaxHP())
+                    player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
+                    pet:setLocalVar("wyvern_level_ups", levels_gained + 1)
+                    diff = diff - 1
+                end
+
+                pet:setLocalVar("wyvern_exp", prev_exp + exp)
             end
-            local diff = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
-            if diff ~= 0 then
-                -- wyvern levelled up (diff is the number of level ups)
-                pet:addMod(xi.mod.ACC, 6 * diff)
-                pet:addMod(xi.mod.HPP, 6 * diff)
-                pet:addMod(xi.mod.ATTP, 5 * diff)
-                pet:setHP(pet:getMaxHP())
-                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
-            end
-            pet:setLocalVar("wyvern_exp", prev_exp + exp)
-        end
-    end)
+        end)
+    end
 end
 
 entity.onMobDeath = function(mob, player)

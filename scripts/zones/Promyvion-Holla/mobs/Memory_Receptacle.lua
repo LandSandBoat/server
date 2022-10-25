@@ -8,18 +8,19 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:SetAutoAttackEnabled(false) -- Receptacles only use TP moves.
+    mob:addMod(xi.mod.DEF, 55)
 end
 
 entity.onMobFight = function(mob, target)
     xi.promyvion.receptacleOnFight(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    xi.promyvion.receptacleOnDeath(mob, optParams)
+entity.onMobRoam = function(mob)
+    xi.promyvion.receptacleIdle(mob)
 end
 
-entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.DEF, 55)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.promyvion.receptacleOnDeath(mob, optParams)
 end
 
 return entity

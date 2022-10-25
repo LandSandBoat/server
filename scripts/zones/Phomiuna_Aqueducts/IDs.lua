@@ -34,6 +34,24 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
         EBA          = 16887953,
         MAHISHA      = 16887885,
         TRES_DUENDES = 16887908,
+        FOMOR_PARTY_ONE =
+        {
+            16887855,
+            16887857
+        },
+        FOMOR_PARTY_TWO =
+        {
+            16887903,
+            16887904,
+            16887905,
+            16887906
+        },
+        FOMOR_PARTY_THREE =
+        {
+            16887920,
+            16887921,
+            16887922
+        },
     },
     npc =
     {

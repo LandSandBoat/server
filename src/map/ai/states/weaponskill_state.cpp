@@ -51,8 +51,6 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
     }
     m_PSkill = std::make_unique<CWeaponSkill>(*skill);
 
-    // m_castTime = std::chrono::milliseconds(m_PSkill->getActivationTime());
-
     action_t action;
     action.id         = m_PEntity->id;
     action.actiontype = ACTION_WEAPONSKILL_START;

@@ -18,15 +18,15 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local divisor = 1
     local constant = 570
-    local power = getCurePowerOld(caster)
+    local power = xi.magic.getCurePowerOld(caster)
     if (power > 780) then
         divisor = 2.667
         constant = 814--this is too powerful and needs to be fixed when the rest of the curaga 5 numbers are determined
     end
 
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, false)
+    local final = xi.magic.getCureFinal(caster, spell, xi.magic.getBaseCureOld(power, divisor, constant), minCure, false)
 
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
     --Applying server mods
     final = final * xi.settings.main.CURE_POWER
@@ -42,7 +42,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

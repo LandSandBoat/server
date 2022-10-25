@@ -13,8 +13,8 @@ end
 entity.onTrigger = function(player, npc)
     -- local vars to reduce repeat calls..
     local lever = npc:getID()
-    local gear = GetNPCByID(lever +2)
-    local bigWinch = GetNPCByID(lever -1)
+    local gear = GetNPCByID(lever + 2)
+    local bigWinch = GetNPCByID(lever - 1)
 
     -- Animate lever
     npc:openDoor(1)

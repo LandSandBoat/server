@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
 	return "Adding currency2 columns to char_points table"
@@ -99,5 +99,5 @@ def migrate(cur, db):
                 ADD COLUMN `darkness_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0, \
                 ADD COLUMN `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0;")
 		db.commit()
-	except mysql.connector.Error as err:
+	except mariadb.Error as err:
 		print("Something went wrong: {}".format(err))

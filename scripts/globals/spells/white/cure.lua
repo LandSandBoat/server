@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local minCure = 10
     if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
-        power = getCurePowerOld(caster)
+        power = xi.magic.getCurePowerOld(caster)
         divisor = 1
         constant = -10
         if (power > 100) then
@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             constant = 5
         end
     else
-        power = getCurePower(caster)
+        power = xi.magic.getCurePower(caster)
         if (power < 20) then
             divisor = 4
             constant = 10
@@ -63,13 +63,13 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
 
-    if isValidHealTarget(caster, target) then
+    if xi.magic.isValidHealTarget(caster, target) then
         if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
-            basecure = getBaseCureOld(power, divisor, constant)
+            basecure = xi.magic.getBaseCureOld(power, divisor, constant)
         else
-            basecure = getBaseCure(power, divisor, constant, basepower)
+            basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
         end
-        final = getCureFinal(caster, spell, basecure, minCure, false)
+        final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
         if (caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false) then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
@@ -81,11 +81,11 @@ spellObject.onSpellCast = function(caster, target, spell)
                 solaceStoneskin = math.floor(final * 0.25)
             end
 
-            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE)/100)
+            solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE) / 100)
 
             target:addStatusEffect(xi.effect.STONESKIN, solaceStoneskin, 0, 25, 0, 0, 1)
         end
-        final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+        final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
         --Applying server mods
         final = final * xi.settings.main.CURE_POWER
@@ -112,12 +112,12 @@ spellObject.onSpellCast = function(caster, target, spell)
             params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
             params.bonus = 1.0
 
-            local dmg = calculateMagicDamage(caster, target, spell, params)*0.5
-            local resist = applyResistance(caster, target, spell, params)
+            local dmg = xi.magic.calculateMagicDamage(caster, target, spell, params)*0.5
+            local resist = xi.magic.applyResistance(caster, target, spell, params)
             dmg = dmg*resist
-            dmg = addBonuses(caster, spell, target, dmg)
-            dmg = adjustForTarget(target, dmg, spell:getElement())
-            dmg = finalMagicAdjustments(caster, target, spell, dmg)
+            dmg = xi.magic.addBonuses(caster, spell, target, dmg)
+            dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
+            dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
             final = dmg
             target:takeDamage(final, caster, xi.attackType.MAGICAL, xi.damageType.LIGHT)
             target:updateEnmityFromDamage(caster, final)
@@ -126,11 +126,11 @@ spellObject.onSpellCast = function(caster, target, spell)
         else
             -- e.g. monsters healing themselves.
             if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
-                basecure = getBaseCureOld(power, divisor, constant)
+                basecure = xi.magic.getBaseCureOld(power, divisor, constant)
             else
-                basecure = getBaseCure(power, divisor, constant, basepower)
+                basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
             end
-            final = getCureFinal(caster, spell, basecure, minCure, false)
+            final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
             local diff = (target:getMaxHP() - target:getHP())
             if (final > diff) then
                 final = diff
@@ -139,7 +139,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

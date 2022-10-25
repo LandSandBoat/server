@@ -60,7 +60,7 @@ zoneObject.onGameHour = function(zone)
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
     if vanadielHour == 7 then
-        for i=0, 11 do
+        for i = 0, 11 do
             local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
             lamp:setAnimation(xi.anim.CLOSE_DOOR)
         end

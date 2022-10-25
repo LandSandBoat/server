@@ -7,24 +7,23 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local paths =
 {
-    { x = -72.580, y = -10.000, z = 115.877, wait = 5000 },
-    { x = -68.580, y = -10.002, z = 118.223 },
-    { x = -66.538, y = -10.505, z = 119.421 },
-    { x = -63.684, y = -11.289, z = 121.096 },
-    { x = -61.175, y = -11.926, z = 122.568 },
-    { x = -59.242, y = -12.416, z = 123.703, wait = 5000 },
-    { x = -61.175, y = -11.926, z = 122.568 },
-    { x = -63.684, y = -11.289, z = 121.096 },
-    { x = -66.538, y = -10.505, z = 119.421 },
-    { x = -68.580, y = -10.002, z = 118.223 },
+    { { x = -72.580, y = -10.500, z = 115.877, wait = 2000 } },
+    { { x = -65.567, y = -11.000, z = 120.000, wait = 2000 } },
+    { { x = -59.242, y = -12.500, z = 123.703, wait = 2000 } },
+    { { wait = 2000, rotation = 0 } },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(paths[1]))
+    npc:pathThrough(paths[1], xi.path.flag.PATROL)
+end
+
+entity.onPathComplete = function(npc)
+    local index = math.random(1, #paths)
+    npc:pathThrough(paths[index], xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)

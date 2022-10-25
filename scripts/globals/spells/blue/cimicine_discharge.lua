@@ -34,7 +34,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
 
     if resist < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) --resist message

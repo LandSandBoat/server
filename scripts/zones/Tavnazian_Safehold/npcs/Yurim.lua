@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
         elseif (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and itemInProgress == 0 then
             player:startEvent(525, obi, earring, gorget)
         elseif nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED then
-            if math.random(100) <= 30 then
+            if math.random(1, 100) <= 30 then
                 player:startEvent(532, unpack(nosTrades[itemInProgress].base))
             else
                 player:startEvent(528, unpack(nosTrades[itemInProgress].base))
@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
     elseif csid == 529 then
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
-        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, { item=itemInProgress, var={ "NAME_OF_SCIENCE_target" } }) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, { item = itemInProgress, var = { "NAME_OF_SCIENCE_target" } }) then
             player:confirmTrade()
         end
     end

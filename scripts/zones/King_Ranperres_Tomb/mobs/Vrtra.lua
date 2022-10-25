@@ -57,7 +57,7 @@ end
 
 entity.onMobDisengage = function(mob, weather)
     for i, offset in ipairs(offsets) do
-        DespawnMob(mob:getID()+offset)
+        DespawnMob(mob:getID() + offset)
     end
 end
 

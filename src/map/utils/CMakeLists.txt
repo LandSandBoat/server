@@ -1,8 +1,6 @@
 set(UTIL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/attackutils.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/battlefieldutils.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/battlefieldutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battleutils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/battleutils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blacklistutils.cpp

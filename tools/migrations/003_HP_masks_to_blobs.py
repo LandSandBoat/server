@@ -1,5 +1,5 @@
 import array
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "HP Masks to BLOB Data"
@@ -50,7 +50,7 @@ def migrate(cur, db):
             try:
                 cur.execute("UPDATE char_unlocks SET homepoints = %s WHERE charid = %s", (hpData, charid))
                 db.commit()
-            except mysql.connector.Error as err:
+            except mariadb.Error as err:
                 print("Something went wrong: {}".format(err))                
 
     cur.execute("DELETE FROM char_vars WHERE varname LIKE('HpTeleportMask%')")

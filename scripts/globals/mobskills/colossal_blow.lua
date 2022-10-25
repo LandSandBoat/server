@@ -10,12 +10,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
-
-    if (currentForm == 2) then
-        return 0
-    end
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
