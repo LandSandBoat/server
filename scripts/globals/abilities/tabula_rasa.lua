@@ -36,7 +36,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     player:resetRecast(xi.recast.ABILITY, 228)
     player:resetRecast(xi.recast.ABILITY, 231)
     player:resetRecast(xi.recast.ABILITY, 232)
-    player:addStatusEffect(xi.effect.TABULA_RASA, math.floor(helixbonus*1.5), 0, 180, 0, math.floor(regenbonus*1.5))
+    player:addStatusEffect(xi.effect.TABULA_RASA, math.floor(helixbonus * 1.5), 0, 180, 0, math.floor(regenbonus * 1.5))
 
     return xi.effect.TABULA_RASA
 end

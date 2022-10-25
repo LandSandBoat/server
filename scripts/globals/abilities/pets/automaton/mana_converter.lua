@@ -16,12 +16,12 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
     local hp = target:getHP()
     local duration = 30
-    local amount = math.floor((hp/2)/10)
-    local difference = math.ceil(hp/2 - (amount*10))
+    local amount = math.floor((hp / 2) / 10)
+    local difference = math.ceil(hp / 2 - (amount * 10))
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
 
     target:addMP(difference) -- To prevent possible loss of MP from flooring the refresh
-    target:setHP(math.floor(hp/2))
+    target:setHP(math.floor(hp / 2))
     target:delStatusEffect(xi.effect.REFRESH)
     target:addStatusEffect(xi.effect.REFRESH, amount, 3, duration)
 

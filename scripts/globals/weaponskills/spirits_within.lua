@@ -40,7 +40,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local wsc = 0
     -- Damage calculations based on https://www.bg-wiki.com/index.php?title=Spirits_Within&oldid=269806
     if (tp == 3000) then
-        wsc = math.floor(playerHP * 120/256)
+        wsc = math.floor(playerHP * 120 / 256)
     elseif (tp >= 2000) then
         wsc = math.floor(playerHP * (math.floor(0.072 * tp) - 96) / 256)
     elseif (tp >= 1000) then
@@ -67,7 +67,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         end
     end
     if (player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then
-        damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID))/100
+        damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
     end
     damage = damage * xi.settings.main.WEAPON_SKILL_POWER
     calcParams.finalDmg = damage

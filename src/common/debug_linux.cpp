@@ -19,6 +19,8 @@ void dumpBacktrace(int signal)
     printer.color_mode = backward::ColorMode::always;
     printer.address    = true;
 
+    DumpBacktrace();
+
     std::ostringstream traceStream;
     printer.print(trace, traceStream);
     spdlog::get("critical")->critical(traceStream.str());

@@ -16,6 +16,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
         return 216, 0
     end
+
     if player:hasItem(2177, 0) or player:hasItem(2974, 0) then
         return 0, 0
     else
@@ -38,6 +39,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     if dmg > 0 then
         local effects = {}
+
         local frost = target:getStatusEffect(xi.effect.FROST)
         if frost ~= nil then
             table.insert(effects, frost)
@@ -54,15 +56,15 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         end
 
         if #effects > 0 then
-            local effect = effects[math.random(#effects)]
-            local duration = effect:getDuration()
+            local effect    = effects[math.random(1, #effects)]
+            local duration  = effect:getDuration()
             local startTime = effect:getStartTime()
-            local tick = effect:getTick()
-            local power = effect:getPower()
-            local subpower = effect:getSubPower()
-            local tier = effect:getTier()
-            local effectId = effect:getType()
-            local subId = effect:getSubType()
+            local tick      = effect:getTick()
+            local power     = effect:getPower()
+            local subpower  = effect:getSubPower()
+            local tier      = effect:getTier()
+            local effectId  = effect:getType()
+            local subId     = effect:getSubType()
             power = power * 1.2
             target:delStatusEffectSilent(effectId)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)

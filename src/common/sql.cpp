@@ -137,13 +137,6 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
     InitPreparedStatements();
 
     SetupKeepalive();
-
-    // if (!asyncThread)
-    // {
-    //     asyncRunning = true;
-    //     asyncThread = std::make_unique<std::thread>(
-    //         AsyncThreadBody, m_User, m_Passwd, m_Host, m_Port, m_Db);
-    // }
 }
 
 SqlConnection::~SqlConnection()

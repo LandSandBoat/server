@@ -10,7 +10,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.REFRESH_DOWN, math.ceil(effect:getPower() / 2))
-    target:addMod(xi.mod.REGAIN_DOWN, effect:getPower()*10)
+    target:addMod(xi.mod.REGAIN_DOWN, effect:getPower() * 10)
 end
 
 effectObject.onEffectTick = function(target, effect)
@@ -18,7 +18,7 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.REFRESH_DOWN, math.ceil(effect:getPower() / 2))
-    target:delMod(xi.mod.REGAIN_DOWN, effect:getPower()*10)
+    target:delMod(xi.mod.REGAIN_DOWN, effect:getPower() * 10)
 end
 
 return effectObject

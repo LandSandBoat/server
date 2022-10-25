@@ -120,7 +120,7 @@ entity.onMobFight = function(mob, target)
         local mobID = mob:getID()
         switch (mobID): caseof
         {
-            [ID.mob.IXZDEI_BASE+2] = function()
+            [ID.mob.IXZDEI_BASE + 2] = function()
                 local spawnPos = zdeiOne:getSpawnPos()
                 mob:SetMagicCastingEnabled(false)
                 mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
@@ -138,7 +138,7 @@ entity.onMobFight = function(mob, target)
                     end
                 end)
             end,
-            [ID.mob.IXZDEI_BASE+3] = function()
+            [ID.mob.IXZDEI_BASE + 3] = function()
                 local spawnPos = zdeiTwo:getSpawnPos()
                 mob:SetMagicCastingEnabled(false)
                 mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
@@ -166,7 +166,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setAnimationSub(0)
         local opticCounter = mob:getLocalVar("opticCounter")
 
-        opticCounter = opticCounter +1
+        opticCounter = opticCounter + 1
         mob:setLocalVar("opticCounter", opticCounter)
 
         if opticCounter > 2 then

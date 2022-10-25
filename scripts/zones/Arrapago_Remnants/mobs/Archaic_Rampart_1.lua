@@ -22,7 +22,7 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
-                SpawnMob((m:getID() +1), instance)
+                SpawnMob((m:getID() + 1), instance)
             end)
         end
     end

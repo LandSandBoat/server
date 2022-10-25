@@ -17,7 +17,7 @@ entity.onMobFight = function(mob, target)
 
     if (battleTime - mob:getLocalVar("RepopWarriors") > 30) then
         local warriorsSpawned = 0
-        for warrior = mob:getID()+3, mob:getID()+6 do
+        for warrior = mob:getID() + 3, mob:getID() + 6 do
             if (not GetMobByID(warrior):isSpawned() and warriorsSpawned < 2) then
                 SpawnMob(warrior):updateEnmity(target)
                 if (warriorsSpawned == 1) then

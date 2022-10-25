@@ -27,7 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.STONESKIN
     local blueskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-    local power = (blueskill/3) + (caster:getMainLvl()/3) + 10
+    local power = (blueskill / 3) + (caster:getMainLvl() / 3) + 10
     local duration = 300
 
     if (power > 150) then
@@ -38,7 +38,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
         if (diffMerit > 0) then
-            duration = duration + (duration/100)* diffMerit
+            duration = duration + (duration / 100) * diffMerit
         end
 
         caster:delStatusEffect(xi.effect.DIFFUSION)

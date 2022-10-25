@@ -17,7 +17,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, 0, xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.DARK)
     local duration = 120
 
-    dmg = dmg*resist
+    dmg = dmg * resist
     dmg = xi.mobskills.mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
 
     -- TODO: spell is nil here

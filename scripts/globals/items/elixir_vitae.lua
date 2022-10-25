@@ -22,8 +22,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addHP((target:getMaxHP()/100)*3)
-    target:addMP((target:getMaxMP()/100)*3)
+    target:addHP((target:getMaxHP() / 100) * 3)
+    target:addMP((target:getMaxMP() / 100) * 3)
     target:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP)
 end
 

@@ -19,6 +19,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     -- number of normal hits for ws
     params.numHits = 1
+    -- This is a 2 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
     -- stat-modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
     params.str_wsc = 0.0        params.dex_wsc = 0.0
     params.vit_wsc = 0.6        params.agi_wsc = 0.0
@@ -36,6 +37,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.vit_wsc = 0.8
+        -- as of 02.03.2022 the ws doesnt yet apply ftp to all stage, was delaied to be done in line with other relic ws
+        -- http://wiki.ffo.jp/html/2426.html and https://forum.square-enix.com/ffxi/threads/55998-October-2019-FINAL-FANTASY-XI-Digest?highlight=2019+update
     end
 
     -- Apply aftermath

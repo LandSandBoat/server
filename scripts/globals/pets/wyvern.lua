@@ -121,11 +121,13 @@ entity.onMobSpawn = function(mob)
     elseif wyvernType == wyvernCapabilities.OFFENSIVE or wyvernType == wyvernCapabilities.MULTI then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local weaknessTargetChance = 75
-            local breaths = {}
+            local breaths              = {}
+
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 weaknessTargetChance = 100
             end
-            if math.random(100) <= weaknessTargetChance then
+
+            if math.random(1, 100) <= weaknessTargetChance then
                 local breathList =
                 {
                     xi.jobAbility.FLAME_BREATH,
@@ -146,12 +148,14 @@ entity.onMobSpawn = function(mob)
                 }
                 local lowest = resistances[1]
                 local breath = breathList[1]
+
                 for i, v in ipairs(breathList) do
                     if resistances[i] < lowest then
                         lowest = resistances[i]
                         breath = v
                     end
                 end
+
                 table.insert(breaths, breath)
             else
                 breaths =
@@ -164,9 +168,11 @@ entity.onMobSpawn = function(mob)
                     xi.jobAbility.HYDRO_BREATH,
                 }
             end
-            player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
+
+            player:getPet():useJobAbility(breaths[math.random(1, #breaths)], target)
         end)
     end
+
     if wyvernType == wyvernCapabilities.MULTI then
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
             -- check master first!

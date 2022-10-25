@@ -95,9 +95,9 @@ local function convertTime(rawTime)
    local rawSeconds = tonumber(rawTime)
    local timeTable = { 0, 0, 0 }
 
-    timeTable[1] = string.format("%02.f", math.floor(rawSeconds/3600))
-    timeTable[2] = string.format("%02.f", math.floor(rawSeconds/60 - (timeTable[1]*60)))
-    timeTable[3] = string.format("%02.f", math.floor(rawSeconds - timeTable[1]*3600 - timeTable[2] *60))
+    timeTable[1] = string.format("%02.f", math.floor(rawSeconds / 3600))
+    timeTable[2] = string.format("%02.f", math.floor(rawSeconds / 60 - (timeTable[1] * 60)))
+    timeTable[3] = string.format("%02.f", math.floor(rawSeconds - timeTable[1] * 3600 - timeTable[2] * 60))
 
     return timeTable
 end
@@ -146,8 +146,10 @@ local function getCasketID(mob)
 
     for i = baseChestId, baseChestId + 15 do
         if timeElapsedCheck(GetNPCByID(i)) then
-            if GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.DESPAWNED or
-                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == 0 then
+            if
+                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.DESPAWNED or
+                GetNPCByID(i):getLocalVar("[caskets]SPAWNSTATUS") == 0
+            then
                 chestId = i
                 break
             end
@@ -888,7 +890,7 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                     end
 
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.COMBINATION_GREATER_LESS, lowNum, highNum, 0, 0)
-                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts + 1)
                 else
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.UNABLE_TO_GET_HINT, 0, 0, 0, 0)
                 end

@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus = 1.0
     local resist = xi.magic.applyResistance(caster, target, spell, params)
     --get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = xi.magic.addBonuses(caster, spell, target, dmg)
     --add in target adjustment

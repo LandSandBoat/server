@@ -299,10 +299,10 @@ end
 -- xi.mobskills.magicalTpBonus.MAB_BONUS -> direct multiplier to mab (1 for default)
 -- xi.mobskills.magicalTpBonus.DMG_BONUS -> direct multiplier to damage (V+dINT) (1 for default)
 --Examples:
--- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=100, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1)/100 = 150
--- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=200, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1)/100 = 300
--- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 300
--- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 100, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1) / 100 = 150
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 1, assume V=150  --> damage is now 150*(TP*1) / 100 = 300
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 300
+-- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 600
 
 xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue, ignoreresist)
     local returninfo = { }
@@ -326,7 +326,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     mab = utils.clamp(mab, 0.7, 1.3)
 
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-        damage = damage * (((skill:getTP() / 10)*tpvalue) / 100)
+        damage = damage * (((skill:getTP() / 10) * tpvalue) / 100)
     end
 
     -- resistence is added last
@@ -373,7 +373,7 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     local magicaccbonus = 0
 
     if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10)/2
+        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
     else
         magicaccbonus = magicaccbonus + diff
     end
@@ -463,7 +463,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     if cap == nil then
         -- cap max damage
-        cap = math.floor(mob:getHP()/5)
+        cap = math.floor(mob:getHP() / 5)
     end
 
     -- Deal bonus damage vs mob ecosystem
@@ -494,7 +494,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
         return math.floor(damage * liement)
     end
 
-    -- The values set for this modifiers are base 10,000.
+    -- The values set for this modifiers are base 10000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
     -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
@@ -535,7 +535,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     if
         (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
         target:hasStatusEffect(xi.effect.ALL_MISS)) and
-        attackType== xi.attackType.PHYSICAL
+        attackType == xi.attackType.PHYSICAL
     then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0
@@ -816,7 +816,7 @@ xi.mobskills.mobHealMove = function(target, heal)
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if (mobHP+heal > mobMaxHP) then
+    if (mobHP + heal > mobMaxHP) then
         heal = mobMaxHP - mobHP
     end
 

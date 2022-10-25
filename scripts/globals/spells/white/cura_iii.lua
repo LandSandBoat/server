@@ -48,7 +48,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             constant = 130
             basepower = 70
         elseif (power < 200) then
-            divisor =  75/65
+            divisor =  75 / 65
             constant = 155
             basepower = 125
         elseif (power < 300) then
@@ -117,7 +117,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

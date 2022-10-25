@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 0, 120))
 
     if (mob:getPool() == 1318 and mob:getLocalVar("SAND_BLAST") == 1) then -- Feeler Anltion
-        local alastorId = mob:getID()+6
+        local alastorId = mob:getID() + 6
         local alastor = GetMobByID(alastorId)
         if (not alastor:isSpawned()) then -- Alastor Antlion
             mob:setLocalVar("SAND_BLAST", 0) -- Don't spawn more NMs

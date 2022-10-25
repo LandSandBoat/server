@@ -256,7 +256,7 @@ end
 xi.job_utils.thief.useHide = function(player, target, ability)
     local duration = math.random(30, 300)
 
-    duration = duration * (1 + player:getMod(xi.mod.HIDE_DURATION)/100)
+    duration = duration * (1 + player:getMod(xi.mod.HIDE_DURATION) / 100)
 
     player:addStatusEffect(xi.effect.HIDE, 1, 0, math.floor(duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))
 end

@@ -38,6 +38,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     if dmg > 0 then
         local effects = {}
+
         local rasp = target:getStatusEffect(xi.effect.RASP)
         if rasp ~= nil then
             table.insert(effects, rasp)
@@ -54,15 +55,15 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         end
 
         if #effects > 0 then
-            local effect = effects[math.random(#effects)]
-            local duration = effect:getDuration()
+            local effect    = effects[math.random(1, #effects)]
+            local duration  = effect:getDuration()
             local startTime = effect:getStartTime()
-            local tick = effect:getTick()
-            local power = effect:getPower()
-            local subpower = effect:getSubPower()
-            local tier = effect:getTier()
-            local effectId = effect:getType()
-            local subId = effect:getSubType()
+            local tick      = effect:getTick()
+            local power     = effect:getPower()
+            local subpower  = effect:getSubPower()
+            local tier      = effect:getTier()
+            local effectId  = effect:getType()
+            local subId     = effect:getSubType()
             power = power * 1.2
             target:delStatusEffectSilent(effectId)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)

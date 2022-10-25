@@ -93,6 +93,7 @@ local digInfo =
         {   701,   8, digReq.BORE     },
         {   696,  30, digReq.BORE     },
         {  4570,  10, digReq.MODIFIER },
+        {  4570,  10, digReq.MODIFIER },
         {  4487,  11, digReq.MODIFIER },
         {  4409,  12, digReq.MODIFIER },
         {  1188,  10, digReq.MODIFIER },

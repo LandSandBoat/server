@@ -16,7 +16,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 926 then
         local stormwindCounter = mob:getLocalVar("stormwindCounter")
 
-        stormwindCounter = stormwindCounter +1
+        stormwindCounter = stormwindCounter + 1
         mob:setLocalVar("stormwindCounter", stormwindCounter)
         mob:setLocalVar("stormwindDamage", stormwindCounter) -- extra var for dmg calculation (in stormwind.lua)
 
@@ -41,7 +41,7 @@ entity.onMobDespawn = function(mob)
     -- Set Kruetzet's spawnpoint and respawn time (9-12 hours)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(32400, 43200))
-    mob:setLocalVar("cooldown", os.time() + mob:getRespawnTime()/1000)
+    mob:setLocalVar("cooldown", os.time() + mob:getRespawnTime() / 1000)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end
 

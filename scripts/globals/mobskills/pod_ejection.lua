@@ -9,7 +9,7 @@
 
 local mobskillObject = {}
 
-mobskillObject.onMobSkillCheck = function(target,mob,skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 

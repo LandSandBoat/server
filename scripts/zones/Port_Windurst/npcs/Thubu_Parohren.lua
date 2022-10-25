@@ -20,12 +20,12 @@ entity.onTrade = function(player, npc, trade)
     then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setCharVar("FishingExpertQuest",0)
-        player:setLocalVar("FishingTraded",1)
-    elseif newRank ~= 0 and newRank <=9 then
+        player:setCharVar("FishingExpertQuest", 0)
+        player:setLocalVar("FishingTraded", 1)
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setLocalVar("FishingTraded",1)
+        player:setLocalVar("FishingTraded", 1)
     end
 end
 
@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10009 and option == 2) then
         if guildMember == 1 then
-            player:setCharVar("FishingExpertQuest",1)
+            player:setCharVar("FishingExpertQuest", 1)
         end
     elseif (csid == 10009 and option == 1) then
         local crystal = 4101 -- water crystal
@@ -87,7 +87,7 @@ entity.onEventFinish = function(player, csid, option)
     else
         if player:getLocalVar("FishingTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("FishingTraded",0)
+            player:setLocalVar("FishingTraded", 0)
         end
     end
 end

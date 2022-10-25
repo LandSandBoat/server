@@ -18,8 +18,11 @@ end
 entity.onTrigger = function(player, npc)
     if (xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
         local hasStone = xi.abyssea.getHeldTraverserStones(player)
-        if (hasStone >= 1 and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
-        and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) == QUEST_AVAILABLE) then
+        if
+            hasStone >= 1 and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) == QUEST_AVAILABLE
+        then
             player:startEvent(62)
         else
             player:startEvent(61, 0, 1) -- No param = no entry.

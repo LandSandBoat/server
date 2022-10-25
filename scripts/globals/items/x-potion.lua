@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(150*xi.settings.main.ITEM_POWER))
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(150 * xi.settings.main.ITEM_POWER))
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 5)
 end
 
