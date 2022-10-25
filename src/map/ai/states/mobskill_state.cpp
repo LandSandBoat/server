@@ -96,7 +96,7 @@ void CMobSkillState::SpendCost()
         m_PEntity->health.tp = 0;
     }
 
-    m_spent = tp;
+    m_spentTP = tp;
 }
 
 bool CMobSkillState::Update(time_point tick)
