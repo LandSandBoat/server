@@ -166,7 +166,7 @@ local loot =
             { itemid = xi.items.PHOENIX_FEATHER, droprate = 500 },
         },
         {
-            { itemid =0, droprate = 250 }, -- nothing
+            { itemid = 0, droprate = 250 }, -- nothing
             { itemid = xi.items.SOLDIERS_EARRING,  droprate = 50 },
             { itemid = xi.items.KAMPFER_EARRING,   droprate = 50 },
             { itemid = xi.items.MEDICINE_EARRING,  droprate = 50 },
@@ -230,11 +230,11 @@ local loot =
 
         {
             { itemid = 0, droprate = 640 }, -- nothing
-            { itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,   droprate =  150 },
-            { itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE, droprate = 50 },
-            { itemid = xi.items.CHUNK_OF_ADAMAN_ORE,    droprate =    10 },
+            { itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,   droprate = 150 },
+            { itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE, droprate =  50 },
+            { itemid = xi.items.CHUNK_OF_ADAMAN_ORE,    droprate =  10 },
             { itemid = xi.items.CHUNK_OF_PLATINUM_ORE,  droprate = 100 },
-            { itemid = xi.items.SLAB_OF_GRANITE,        droprate =        50 },
+            { itemid = xi.items.SLAB_OF_GRANITE,        droprate =  50 },
         },
         {
             { itemid = 0, droprate = 350 }, -- nothing
