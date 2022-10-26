@@ -28,7 +28,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     if quests.rainbow.onZoneIn(player) then
-        cs = 50;
+        cs = 50
     elseif
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and
         prevZone == xi.zone.WINDURST_WOODS and

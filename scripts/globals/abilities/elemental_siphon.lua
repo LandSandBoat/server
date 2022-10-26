@@ -23,7 +23,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     end
 end
 
-abilityObject.onUseAbility = function(player,target,ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local spiritEle = player:getPetID() + 1 -- get the spirit's ID, it is already aligned in proper element order
     -- element order: fire, ice, wind, earth, thunder, water, light, dark
 

@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
 
     local currentHP = mob:getHP()
-    local newHP = currentHP - (currentHP * (math.random(5,15)/100))
+    local newHP = currentHP - (currentHP * (math.random(5, 15) / 100))
     mob:setHP(newHP)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)

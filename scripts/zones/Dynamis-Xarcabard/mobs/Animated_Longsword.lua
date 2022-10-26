@@ -8,7 +8,6 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-
     if (mob:getAnimationSub() == 3) then
         SetDropRate(111, 1573, 1000)
     else
@@ -23,12 +22,11 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:showText(mob, ID.text.ANIMATED_LONGSWORD_DIALOG+2)
+    mob:showText(mob, ID.text.ANIMATED_LONGSWORD_DIALOG + 2)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-
-    player:showText(mob, ID.text.ANIMATED_LONGSWORD_DIALOG+1)
+    player:showText(mob, ID.text.ANIMATED_LONGSWORD_DIALOG + 1)
 end
 
 return entity

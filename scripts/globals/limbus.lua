@@ -24,75 +24,9 @@ function xi.limbus.enter(player, entrance)
 end
 
 function xi.limbus.setupArmouryCrates(bfid, hide)
-    local ID
-    if
-        bfid == 1290 or
-        bfid == 1291 or
-        bfid == 1292 or
-        bfid == 1293 or
-        bfid == 1294 or
-        bfid == 1296
-    then
-        ID = zones[xi.zone.APOLLYON]
-    else
-        ID = zones[xi.zone.TEMENOS]
-    end
-
+    local ID = zones[xi.zone.TEMENOS]
     switch (bfid): caseof
     {
-        -- NW Apollyon
-        [1290] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NW_CRATE[i][1]):setStatus(xi.status.DISAPPEAR)
-                for j = 2, 5 do
-                    GetNPCByID(ID.npc.APOLLYON_NW_CRATE[i][j]):setStatus(xi.status.NORMAL)
-                end
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- SW Apollyon
-        [1291] = function()
-            for i = 1, 2 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            for i = 0, 9 do
-                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[3]+i):setUntargetable(false)
-                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[3]+i):setStatus(xi.status.NORMAL)
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- NE Apollyon
-        [1292] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NE_CRATE[i][1]):setStatus(xi.status.DISAPPEAR)
-
-                for j = 2, 5 do
-                    GetNPCByID(ID.npc.APOLLYON_NE_CRATE[i][j]):setStatus(xi.status.NORMAL)
-                end
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[5]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- CS Apollyon
-        [1294] = function()
-            for i = 0, 2 do
-                GetNPCByID(ID.npc.APOLLYON_CS_CRATE + i):setStatus(xi.status.DISAPPEAR)
-            end
-        end,
-
-        -- Central Apollyon
-        [1296] = function()
-            GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.DISAPPEAR)
-        end,
-
         -- Temenos: Western Tower
         [1298] = function()
             for i = 1, #ID.npc.TEMENOS_W_CRATE - 1 do
@@ -151,7 +85,7 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
         [1306] = function()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(xi.status.DISAPPEAR)
 
-            for i = ID.npc.TEMENOS_C_CRATE[4][1]+2, ID.npc.TEMENOS_C_CRATE[4][1]+20 do
+            for i = ID.npc.TEMENOS_C_CRATE[4][1] + 2, ID.npc.TEMENOS_C_CRATE[4][1] + 20 do
                 if hide then
                     GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 else
@@ -165,21 +99,10 @@ end
 function xi.limbus.handleDoors(battlefield, open, door)
     local battlefieldID = battlefield:getID()
     local animation     = xi.animation.CLOSE_DOOR
-    local ID
+    local ID = zones[xi.zone.TEMENOS]
 
     if open then
         animation = xi.animation.OPEN_DOOR
-    end
-
-    if
-        battlefieldID == 1290 or
-        battlefieldID == 1291 or
-        battlefieldID == 1292 or
-        battlefieldID == 1293
-    then
-        ID = zones[xi.zone.APOLLYON]
-    else
-        ID = zones[xi.zone.TEMENOS]
     end
 
     if door then
@@ -198,34 +121,6 @@ function xi.limbus.handleDoors(battlefield, open, door)
 
     switch (battlefieldID): caseof
     {
-        -- NW Apollyon
-        [1290] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
-        -- SW Apollyon
-        [1291] = function()
-            for i = 1, 3 do
-                GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
-        -- NE Apollyon
-        [1292] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
-        -- SE Apollyon
-        [1293] = function()
-            for i = 1, 3 do
-                GetNPCByID(ID.SE_APOLLYON.npc.PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
         -- Temenos: Northern Tower
         [1299] = function()
             for i = 1, 7 do
@@ -386,9 +281,9 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                 if spawnMimic and canMimic then
                     GetNPCByID(npc):setModelId(961) --mimic
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask+8)
+                    battlefield:setLocalVar(var, mask + 8)
                 else
-                    local random = math.random(0,1)
+                    local random = math.random(0, 1)
                     if random == 1 then random = 2 end
                     switch (random): caseof
                     {
@@ -396,7 +291,7 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                         [2] = function() GetNPCByID(npc):setModelId(962) end, -- Blue
                     }
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2,random), mask))
+                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
                 end
             end,
 
@@ -503,25 +398,13 @@ function xi.limbus.spawnFrom(mob, crateID)
     crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
     crate:setStatus(xi.status.NORMAL)
     crate:setUntargetable(false)
-    crate:AnimationSub(8)
+    crate:setAnimationSub(8)
 end
 
 function xi.limbus.spawnRecoverFrom(mob, crateID)
     local crate = GetMobByID(crateID)
     crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
     xi.limbus.showRecoverCrate(crateID)
-end
-
-function xi.limbus.openDoor(battlefield, doorID)
-    local door = GetNPCByID(doorID)
-    local ID = zones[door:getZoneID()]
-    local remaining = battlefield:getRemainingTime() / 60
-
-    for i, player in pairs(battlefield:getPlayers()) do
-        player:messageSpecial(ID.text.GATE_OPEN)
-        player:messageSpecial(ID.text.TIME_LEFT, remaining)
-    end
-    door:setAnimation(xi.animation.OPEN_DOOR)
 end
 
 Limbus = setmetatable({ }, { __index = Battlefield })
@@ -538,11 +421,13 @@ Limbus.serverVar = ""
 --  - name: The name of the Limbus area
 function Limbus:new(data)
     data.createsWornItem = false
+    data.showTimer = false
     local obj = Battlefield:new(data)
     setmetatable(obj, self)
     obj.name = data.name
     obj.ID = zones[obj.zoneId][obj.name]
     obj.serverVar = "[" .. obj.name .. "]Time"
+    obj.exitLocation = data.exitLocation or 0
     return obj
 end
 
@@ -575,7 +460,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
     Battlefield.onBattlefieldInitialise(self, battlefield)
     SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
 
-    xi.limbus.handleDoors(battlefield)
+    self:closeDoors()
 
     local ID = zones[battlefield:getZoneID()][self.name]
     -- Setup Item Crates
@@ -608,6 +493,18 @@ function Limbus:onBattlefieldInitialise(battlefield)
     crate:resetLocalVars()
     crate:removeListener("TRIGGER_LOOT_CRATE")
     crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
+
+    -- Setup Linked Crates (can only open one)
+    if ID.LINKED_CRATES then
+        for crateID, _ in pairs(ID.LINKED_CRATES) do
+            local mainCrate = GetNPCByID(crateID)
+            if mainCrate == nil then
+                mainCrate = GetMobByID(crateID)
+            end
+            mainCrate:removeListener("TRIGGER_LINKED_CRATE")
+            mainCrate:addListener("ON_TRIGGER", "TRIGGER_LINKED_CRATE", utils.bind(self.handleLinkedCrate, self))
+        end
+    end
 end
 
 function Limbus:onBattlefieldTick(battlefield, tick)
@@ -626,8 +523,11 @@ function Limbus:onBattlefieldEnter(player, battlefield)
 end
 
 function Limbus:onBattlefieldDestroy(battlefield)
-    xi.limbus.handleDoors(battlefield, true)
     SetServerVariable(self.serverVar, 0)
+end
+
+function Limbus:onBattlefieldWin(player, battlefield)
+    player:startEvent(32001, { [0] = self.exitLocation, [4] = self.zoneId, [5] = battlefield:getArea() - 1 })
 end
 
 function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
@@ -649,7 +549,7 @@ end
 
 function Limbus:handleOpenItemCrate(player, npc)
     npcUtil.openCrate(npc, function()
-        xi.limbus.handleLootRolls(player:getBattlefield(), self.loot[npc:getID()], nil, npc)
+        self:handleLootRolls(player:getBattlefield(), self.loot[npc:getID()], npc)
     end)
 end
 
@@ -669,8 +569,37 @@ end
 function Limbus:handleOpenLootCrate(player, npc)
     npcUtil.openCrate(npc, function()
         local battlefield = player:getBattlefield()
-        xi.limbus.handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], nil, npc)
+        self:handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], npc)
         battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
         battlefield:setStatus(xi.battlefield.status.WON)
     end)
+end
+
+function Limbus:handleLinkedCrate(player, npc)
+    for _, crateID in ipairs(self.ID.LINKED_CRATES[npc:getID()]) do
+        local crate = GetNPCByID(crateID)
+        if crate == nil then
+            crate = GetMobByID(crateID)
+        end
+        crate:setLocalVar("opened", 1)
+        npcUtil.disappearCrate(crate)
+    end
+end
+
+function Limbus:openDoor(battlefield, floor)
+    local door = GetNPCByID(self.ID.npc.PORTAL[floor])
+    local ID = zones[door:getZoneID()]
+    local remaining = battlefield:getRemainingTime() / 60
+
+    for i, player in pairs(battlefield:getPlayers()) do
+        player:messageSpecial(ID.text.GATE_OPEN)
+        player:messageSpecial(ID.text.TIME_LEFT, remaining)
+    end
+    door:setAnimation(xi.animation.OPEN_DOOR)
+end
+
+function Limbus:closeDoors()
+    for _, doorID in ipairs(self.ID.npc.PORTAL) do
+        GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
+    end
 end

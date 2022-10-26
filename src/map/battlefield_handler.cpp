@@ -178,6 +178,13 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
             PBattlefield->SetLocalVar("loot", lootid);
         }
 
+        if (!PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
+        {
+            PChar->StatusEffectContainer->AddStatusEffect(
+                new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0, 0, PChar->id, PBattlefield->GetArea()), true);
+        }
+
+        luautils::OnBattlefieldRegister(PChar, PBattlefield);
         luautils::OnBattlefieldInitialise(PBattlefield);
         PBattlefield->InsertEntity(PChar, true);
 
@@ -209,9 +216,18 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     PBattlefield->SetLevelCap(registration.levelCap);
     PBattlefield->SetMaxParticipants(registration.maxPlayers);
     PBattlefield->SetRuleMask(registration.rules);
+    PBattlefield->m_isMission = registration.isMission;
+    PBattlefield->m_showTimer = registration.showTimer;
 
     m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
 
+    if (!PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD))
+    {
+        PChar->StatusEffectContainer->AddStatusEffect(
+            new CStatusEffect(EFFECT_BATTLEFIELD, EFFECT_BATTLEFIELD, PBattlefield->GetID(), 0, 0, PChar->id, PBattlefield->GetArea()), true);
+    }
+
+    luautils::OnBattlefieldRegister(PChar, PBattlefield);
     luautils::OnBattlefieldInitialise(PBattlefield);
     PBattlefield->InsertEntity(PChar, true);
 

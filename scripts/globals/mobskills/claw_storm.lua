@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.POISON
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, mob:getMainLvl()/2.5, 3, 30)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, mob:getMainLvl() / 2.5, 3, 30)
 
     return dmg
 end

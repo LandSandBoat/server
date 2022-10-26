@@ -39,7 +39,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
 
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
     if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
         --Applying server mods

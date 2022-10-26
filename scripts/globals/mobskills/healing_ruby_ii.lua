@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         potency = 25
     end
 
-    potency = potency - math.random(0, potency/4)
+    potency = potency - math.random(0, potency / 4)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 

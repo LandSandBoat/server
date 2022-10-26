@@ -41,14 +41,17 @@ entity.onEventFinish = function(player, csid, option)
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR)
         end
         player:setCharVar("EcoStatus", 201) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
-    elseif csid == 822 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR, {
-        gil = 5000,
-        item = 4198,
-        title = xi.title.EMERALD_EXTERMINATOR,
-        fame = 80,
-        fameArea = xi.quest.fame_area.WINDURST,
-        var = "EcoStatus"
-    }) then
+    elseif
+        csid == 822 and
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR, {
+            gil = 5000,
+            item = 4198,
+            title = xi.title.EMERALD_EXTERMINATOR,
+            fame = 80,
+            fameArea = xi.quest.fame_area.WINDURST,
+            var = "EcoStatus"
+        })
+    then
         player:delKeyItem(xi.ki.INDIGESTED_MEAT)
         player:setCharVar("EcoReset", getConquestTally())
     end

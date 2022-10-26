@@ -142,13 +142,13 @@ zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 1 and option == 10 then -- start
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 1 then -- windows
-        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting")+1)
+        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting") + 1)
         player:updateEvent(player:getLocalVar("UnderseaScouting"), 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 2 then -- pillars
-        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting")+2)
+        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting") + 2)
         player:updateEvent(player:getLocalVar("UnderseaScouting"), 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 3 then -- floor
-        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting")+4)
+        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting") + 4)
         player:updateEvent(player:getLocalVar("UnderseaScouting"), 0, 0, 0, 0, 0, 0, 0)
     end
 end

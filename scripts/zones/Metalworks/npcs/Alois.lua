@@ -23,11 +23,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 805 then
-        if npcUtil.completeQuest(
-            player,
-            xi.quest.log_id.BASTOK,
-            xi.quest.id.bastok.FADED_PROMISES,
-            { item = 17775, xi.title.ASSASSIN_REJECT, var = { "FadedPromises" }, fame=10 })
+        if
+            npcUtil.completeQuest(
+                player,
+                xi.quest.log_id.BASTOK,
+                xi.quest.id.bastok.FADED_PROMISES,
+                { item = 17775, xi.title.ASSASSIN_REJECT, var = { "FadedPromises" }, fame = 10 }
+            )
         then
             player:delKeyItem(xi.ki.DIARY_OF_MUKUNDA)
         end

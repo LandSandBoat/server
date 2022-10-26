@@ -61,15 +61,17 @@ namespace logging
 #define ShowCritical(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("critical"), _msgStr); }
 
 // Debug Loggers
-#define DebugNavmesh(...)  { if (settings::get<bool>("logging.DEBUG_NAVMESH")) { ShowDebug(__VA_ARGS__); } }
-#define DebugPackets(...)  { if (settings::get<bool>("logging.DEBUG_PACKETS")) { ShowDebug(__VA_ARGS__); } }
-#define DebugActions(...)  { if (settings::get<bool>("logging.DEBUG_ACTIONS")) { ShowDebug(__VA_ARGS__); } }
-#define DebugSQL(...)      { if (settings::get<bool>("logging.DEBUG_SQL")) { ShowDebug(__VA_ARGS__); } }
+#define DebugNavmesh(...)  { if (settings::get<bool>("logging.DEBUG_NAVMESH"))   { ShowDebug(__VA_ARGS__); } }
+#define DebugPackets(...)  { if (settings::get<bool>("logging.DEBUG_PACKETS"))   { ShowDebug(__VA_ARGS__); } }
+#define DebugActions(...)  { if (settings::get<bool>("logging.DEBUG_ACTIONS"))   { ShowDebug(__VA_ARGS__); } }
+#define DebugSQL(...)      { if (settings::get<bool>("logging.DEBUG_SQL"))       { ShowDebug(__VA_ARGS__); } }
 #define DebugIDLookup(...) { if (settings::get<bool>("logging.DEBUG_ID_LOOKUP")) { ShowDebug(__VA_ARGS__); } }
-#define DebugModules(...)  { if (settings::get<bool>("logging.DEBUG_MODULES")) { ShowDebug(__VA_ARGS__); } }
+#define DebugModules(...)  { if (settings::get<bool>("logging.DEBUG_MODULES"))   { ShowDebug(__VA_ARGS__); } }
 
 // Special Loggers (different patterns)
 #define ShowLua(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("lua"), _msgStr); }
+
+#define DumpBacktrace() spdlog::get("trace")->dump_backtrace()
 
 // clang-format on
 

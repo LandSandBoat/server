@@ -318,7 +318,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                charutils::SendTimerPacket(PChar, GetRemainingTime());
+
+                if (m_showTimer)
+                {
+                    charutils::SendTimerPacket(PChar, GetRemainingTime());
+                }
 
                 // Try to add the player's pet in case they have one that can
                 if (PChar->PPet != nullptr)
@@ -329,7 +333,6 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
             else if (!IsRegistered(PChar))
             {
                 m_RegisteredPlayers.emplace(PEntity->id);
-                luautils::OnBattlefieldRegister(PChar, this);
                 return true;
             }
         }
@@ -719,8 +722,22 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             RemoveEntity(PChar, leavecode);
+        }
+    }
+
+    // Remove all registered players as long as they're in the zone
+    for (auto id : m_RegisteredPlayers)
+    {
+        auto* PChar = GetZone()->GetCharByID(id);
+        if (PChar)
+        {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+
+            if (PChar->PPet)
+            {
+                PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            }
         }
     }
 

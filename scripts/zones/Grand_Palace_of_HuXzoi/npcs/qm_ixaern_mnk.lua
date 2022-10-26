@@ -33,11 +33,11 @@ entity.onTrade = function(player, npc, trade)
             nm:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())
             SpawnMob(ID.mob.IXAERN_MNK):updateClaim(player)
             if (chance >= 66) then
-                GetMobByID(ID.mob.IXAERN_MNK + 1):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos()-4)
+                GetMobByID(ID.mob.IXAERN_MNK + 1):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos() - 4)
                 SpawnMob(ID.mob.IXAERN_MNK + 1):updateClaim(player)
             end
             if (chance == 100) then
-                GetMobByID(ID.mob.IXAERN_MNK + 2):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos()+4)
+                GetMobByID(ID.mob.IXAERN_MNK + 2):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos() + 4)
                 SpawnMob(ID.mob.IXAERN_MNK + 2):updateClaim(player)
             end
 

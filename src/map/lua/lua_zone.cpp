@@ -245,7 +245,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
 
-    PEntity->id = 0x1000100 + (ZoneID << 12) + PEntity->targid;
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+    // Add 0x100 if targid is >= 0x800 -- observed on retail.
+    if (PEntity->targid >= 0x800)
+    {
+        PEntity->id += 0x100;
+    }
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
@@ -326,6 +331,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->saveMobModifiers();
 
         PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
+        PMob->m_isAggroable           = table["isAggroable"].get_or(false);
 
         PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
 
@@ -333,7 +339,9 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         auto onMobDeath = table["onMobDeath"].get<sol::function>();
         if (!onMobDeath.valid())
         {
-            cacheEntry["onMobDeath"] = []() {}; // Empty func
+            // TODO: Using an empty C++ lambda here wasn't working.
+            // Figure out why and fix.
+            cacheEntry["onMobDeath"] = lua.safe_script("return function() end");
         }
 
         m_pLuaZone->InsertMOB(PMob);
@@ -345,16 +353,11 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (table["look"].get_type() == sol::type::string)
     {
-        auto lookStr = table.get<std::string>("look");
-        if (lookStr.size() >= 4 && ((lookStr[1] == 'x' && lookStr[3] == '1') || lookStr[1] == '1'))
-        {
-            PEntity->look.size = MODEL_EQUIPPED;
-        }
-        auto look = stringToLook(lookStr);
-        std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
+        auto lookStr  = table.get<std::string>("look");
+        PEntity->look = stringToLook(lookStr);
     }
 
-    PEntity->updatemask |= UPDATE_ALL_MOB;
+    PEntity->updatemask |= UPDATE_ALL_CHAR;
 
     return CLuaBaseEntity(PEntity);
 }

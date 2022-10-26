@@ -12,6 +12,18 @@ local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
 local entity = {}
 
+local pathNodes =
+{
+    { x = 60.600, y = -12.000, z = -33.913, wait = 3000 },
+    { z = -38.151, wait = 3000 },
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
+end
+
 entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then
         if (trade:getGil() >= player:getCharVar("MAGRIFFON_GIL_REQUEST")) then

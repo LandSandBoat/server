@@ -14,7 +14,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.STONESKIN
-    local base = mob:getMainLvl()*2 + 50
+    local base = mob:getMainLvl() * 2 + 50
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, base, 0, 180))
 

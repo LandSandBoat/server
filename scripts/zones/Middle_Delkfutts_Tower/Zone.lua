@@ -44,11 +44,7 @@ end
 zoneObject.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
 
-    if regionId == 8 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
-        player:startEvent(14)
-    else
-        player:startEvent(regionId - 1)
-    end
+    player:startEvent(regionId - 1)
 end
 
 zoneObject.onRegionLeave = function(player, region)
@@ -69,9 +65,6 @@ zoneObject.onEventFinish = function(player, csid, option)
         elseif csid == 10 then
             player:setPos(-355, -144, 91, 64, 158)
         end
-    -- BLADE OF EVIL
-    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, { item=12516, title=xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60 }) then
-        player:setCharVar("bladeOfEvilCS", 0)
     end
 end
 

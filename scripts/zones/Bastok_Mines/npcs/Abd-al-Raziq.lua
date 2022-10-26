@@ -21,19 +21,19 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("AlchemyExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("AlchemyExpertQuest",0)
-            player:setLocalVar("AlchemyTraded",1)
+            player:setCharVar("AlchemyExpertQuest", 0)
+            player:setLocalVar("AlchemyTraded", 1)
         else
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
 
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
-        player:setLocalVar("AlchemyTraded",1)
+        player:setLocalVar("AlchemyTraded", 1)
     end
 end
 
@@ -101,7 +101,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 120 and option == 2 then
         if guildMember == 1 then
-            player:setCharVar("AlchemyExpertQuest",1)
+            player:setCharVar("AlchemyExpertQuest", 1)
         end
     elseif csid == 120 and option == 1 then
         local crystal = 4101 -- water crystal
@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option)
     else
         if player:getLocalVar("AlchemyTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("AlchemyTraded",0)
+            player:setLocalVar("AlchemyTraded", 0)
         end
     end
 

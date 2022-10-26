@@ -55,7 +55,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     local selectiontype = bit.band(option, 0xF)
     if csid == 275 and selectiontype == 2 then
-        local item = bit.rshift(option,14)
+        local item = bit.rshift(option, 14)
         local choice = items[item]
         local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.LEBROS_CAVERN)
         local canEquip = player:canEquipItem(choice.itemid) and 2 or 0

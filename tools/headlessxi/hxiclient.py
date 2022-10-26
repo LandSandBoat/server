@@ -192,9 +192,6 @@ class HXIClient:
             data = self.lobbyview_sock.recv(72) #0x48
             if len(data) != 0x48:
                 raise Exception(f"Did not get back 72 bytes. Got {len(data)}. => {data}")
-            #status_code = util.unpack_uint16(data, 32)
-            #if status_code != 305 and status_code != 321:
-            #    raise Exception("Did not get acceptable status code")
         except Exception as ex:
             print(f'Error communicating lobby 0xA2 packet. Error: {status_code}')
             print(ex)

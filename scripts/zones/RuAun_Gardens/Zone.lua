@@ -77,7 +77,7 @@ zoneObject.onRegionEnter = function(player, region)
 
     elseif type(p["event"]) == "table" then -- portal with random destination
         local events = p["event"]
-        player:startOptionalCutscene(events[math.random(#events)])
+        player:startOptionalCutscene(events[math.random(1, #events)])
 
     else -- portal with static destination
         player:startOptionalCutscene(p["event"])

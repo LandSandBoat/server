@@ -198,5 +198,5 @@ uint16 CBaseEntity::GetModelId() const
 
 bool CBaseEntity::IsDynamicEntity() const
 {
-    return this->targid >= 0x800;
+    return this->targid >= 0x700;
 }

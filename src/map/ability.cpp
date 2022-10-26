@@ -388,7 +388,7 @@ namespace ability
                 PAbility->setValidTarget(sql->GetIntData(5));
                 PAbility->setRecastTime(sql->GetIntData(6));
                 PAbility->setMessage(sql->GetIntData(7));
-                // PAbility->setMessage(Sql_GetIntData(SqlHandle,8));
+                // Unused - message2
                 PAbility->setAnimationID(sql->GetIntData(9));
                 PAbility->setAnimationTime(std::chrono::milliseconds(sql->GetIntData(10)));
                 PAbility->setCastTime(std::chrono::milliseconds(sql->GetIntData(11)));

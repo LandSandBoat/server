@@ -21,10 +21,10 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PIERCE_SDT, 0)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
-    for n =1, #xi.magic.resistMod, 1 do
+    for n = 1, #xi.magic.resistMod, 1 do
         mob:setMod(xi.magic.resistMod[n], 0)
     end
-    for n =1, #xi.magic.specificDmgTakenMod, 1 do
+    for n = 1, #xi.magic.specificDmgTakenMod, 1 do
         mob:setMod(xi.magic.specificDmgTakenMod[n], 10000)
     end
 end

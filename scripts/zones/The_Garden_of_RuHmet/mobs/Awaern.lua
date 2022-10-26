@@ -58,7 +58,7 @@ entity.onMobDespawn = function(mob)
     if (IxAernDRG_PH == currentMobID) then
         -- Select spawn location based on ID
         local offset = currentMobID - ID.mob.AWAERN_DRG_GROUPS[1]
-        if (offset >=0 and offset <=3) then
+        if (offset >= 0 and offset <= 3) then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-520, 5, -520, 225) -- Bottom Left
         elseif (offset >= 4 and offset <= 7) then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-520, 5, -359, 30) -- Top Left

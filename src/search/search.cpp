@@ -420,15 +420,13 @@ int32 main(int32 argc, char** argv)
 
 void TCPComm(SOCKET socket)
 {
-    // ShowInfo("TCP connection from client with port: %u", htons(CommInfo.port));
-
     CTCPRequestPacket PTCPRequest(&socket);
 
     if (PTCPRequest.ReceiveFromSocket() == 0)
     {
         return;
     }
-    // PrintPacket((int8*)PTCPRequest->GetData(), PTCPRequest->GetSize());
+
     ShowInfo("= = = = = = = Type: %u Size: %u ", PTCPRequest.GetPacketType(), PTCPRequest.GetSize());
 
     switch (PTCPRequest.GetPacketType())
@@ -585,7 +583,6 @@ void HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
         if (currentResult == totalResults)
             PSearchPacket.SetFinal();
 
-        // PrintPacket((int8*)PSearchPacket->GetData(), PSearchPacket->GetSize());
         auto ret = PTCPRequest.SendToSocket(PSearchPacket.GetData(), PSearchPacket.GetSize());
         if (ret <= 0)
             break;
@@ -706,8 +703,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
     uint8 commentType = 0;
 
-    // ShowInfo("Received a search packet with size %u byte", size);
-
     while (bitOffset < workloadBits)
     {
         if ((bitOffset + 5) >= workloadBits)
@@ -754,24 +749,20 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
                         name[i] = (char)unpackBitsLE(&data[0x11], bitOffset, 7);
                         bitOffset += 7;
                     }
-                    // ShowInfo("Name Entry Found. (%s).\n",name);
                 }
-                // ShowInfo("SortByName: %s.\n",(sortDescending == 0 ? "ascending" : "descending"));
-                // packetData.sortDescendingByName=sortDescending;
                 break;
             }
             case SEARCH_AREA: // Area Code Entry - 10 bit
             {
                 if (isPresent == 0) // no more Area entries
                 {
-                    // ShowInfo("Area List End found.\n");
+                    ShowTrace("Area List End found.");
                 }
                 else // 8 Bit = 1 Byte per Area Code
                 {
                     areas[areaCount] = (uint16)unpackBitsLE(&data[0x11], bitOffset, 10);
                     areaCount++;
                     bitOffset += 10;
-                    //  ShowInfo("Area List Entry found(%2X)!\n",areas[areaCount-1]);
                 }
                 break;
             }
@@ -794,10 +785,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
                     unsigned char job = (unsigned char)unpackBitsLE(&data[0x11], bitOffset, 5);
                     bitOffset += 5;
                     jobid = job;
-                    // ShowInfo("Job Entry found. (%2X) Sorting: (%s).\n",job,(sortDescending==0x00)?"ascending":"descending");
                 }
-                // packetData.sortDescendingByJob=sortDescending;
-                // ShowInfo("SortByJob: %s.\n",(sortDescending==0x00)?"ascending":"descending");
                 break;
             }
             case SEARCH_LEVEL: // Level- 16 bit
@@ -810,10 +798,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
                     bitOffset += 8;
                     minLvl = fromLvl;
                     maxLvl = toLvl;
-                    // ShowInfo("Level Entry found. (%d - %d) Sorting: (%s).\n",fromLvl,toLvl,(sortDescending==0x00)?"ascending":"descending");
                 }
-                // packetData.sortDescendingByLevel=sortDescending;
-                // ShowInfo("SortByLevel: %s.\n",(sortDescending==0x00)?"ascending":"descending");
                 break;
             }
             case SEARCH_RACE: // Race - 4 bit
@@ -827,7 +812,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
                     ShowInfo("Race Entry found. (%2X) Sorting: (%s).\n", race, (sortDescending == 0x00) ? "ascending" : "descending");
                 }
                 ShowInfo("SortByRace: %s.\n", (sortDescending == 0x00) ? "ascending" : "descending");
-                // packetData.sortDescendingByRace=sortDescending;
                 break;
             }
             case SEARCH_RANK: // Rank - 2 byte
@@ -844,7 +828,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
                     ShowInfo("Rank Entry found. (%d - %d) Sorting: (%s).\n", fromRank, toRank, (sortDescending == 0x00) ? "ascending" : "descending");
                 }
                 ShowInfo("SortByRank: %s.\n", (sortDescending == 0x00) ? "ascending" : "descending");
-                // packetData.sortDescendingByRank=sortDescending;
                 break;
             }
             case SEARCH_COMMENT: // 4 Byte
@@ -882,7 +865,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
                     flags = flags1;
                 }
                 ShowInfo("SortByFlags: %s\n", (sortDescending == 0 ? "ascending" : "descending"));
-                // packetData.sortDescendingByFlags=sortDescending;
                 break;
             }
             case SEARCH_FLAGS2: // Flag Entry #2 - 4 byte
@@ -891,20 +873,11 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
                 bitOffset += 32;
                 flags = flags2;
-                /*
-                if ((flags & 0xFFFF)!=(packetData.flags1))
-                {
-                ShowInfo("Flag mismatch: %.8X != %.8X\n",flags,packetData.flags1&0xFFFF);
-                }
-                packetData.flags2=flags;
-                ShowInfo("Flag Entry #2 (%.8X) found.\n",packetData.flags2);
-                */
                 break;
             }
             default:
             {
                 ShowInfo("Unknown Search Param %.2X!\n", EntryType);
-                // outputPacket=true;
                 break;
             }
         }

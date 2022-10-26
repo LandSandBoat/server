@@ -61,6 +61,33 @@ xi.job =
 }
 xi.MAX_JOB_TYPE = 23
 
+xi.jobNames =
+{
+    [ 0] = { "NONE", "None" },
+    [ 1] = { "WAR", "Warrior" },
+    [ 2] = { "MNK", "Monk" },
+    [ 3] = { "WHM", "White Mage" },
+    [ 4] = { "BLM", "Black Mage" },
+    [ 5] = { "RDM", "Red Mage" },
+    [ 6] = { "THF", "Thief" },
+    [ 7] = { "PLD", "Paladin" },
+    [ 8] = { "DRK", "Dark Knight" },
+    [ 9] = { "BST", "Beastmaster" },
+    [10] = { "BRD", "Bard" },
+    [11] = { "RNG", "Ranger" },
+    [12] = { "SAM", "Samurai" },
+    [13] = { "NIN", "Ninja" },
+    [14] = { "DRG", "Dragoon" },
+    [15] = { "SMN", "Summoner" },
+    [16] = { "BLU", "Blue Mage" },
+    [17] = { "COR", "Corsair" },
+    [18] = { "PUP", "Puppermaster" },
+    [19] = { "DNC", "Dancer" },
+    [20] = { "SCH", "Scholar" },
+    [21] = { "GEO", "Geomancer" },
+    [22] = { "RUN", "Rune Fencer" },
+}
+
 -----------------------------------
 -- Race IDs
 -----------------------------------
@@ -1483,6 +1510,7 @@ xi.mod =
 
     MAGIC_ABSORB                    = 475, -- Occasionally absorbs magic damage taken, in percents
     MAGIC_NULL                      = 476, -- Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage taken, in percents
     PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
@@ -2428,7 +2456,7 @@ xi.auraTarget =
 {
     ALLIES  = 0,
     ENEMIES = 1,
-};
+}
 
 -----------------------------------
 -- MOBMODs
@@ -2454,7 +2482,7 @@ xi.mobMod =
     SEVERE_SPELL_CHANCE = 13, -- % chance to use a severe spell like death or impact
     SKILL_LIST          = 14, -- uses given mob skill list
     MUG_GIL             = 15, -- amount gil carried for mugging
-    -- 16 Available for use
+    DETECTION           = 16, -- Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
     NO_DESPAWN          = 17, -- do not despawn when too far from spawn. Gob Diggers have this.
     VAR                 = 18, -- temp var for whatever. Gets cleared on spawn
     -- 19 Available for use
@@ -2820,6 +2848,24 @@ xi.behavior =
 }
 
 -----------------------------------
+-- Detects bits
+-----------------------------------
+
+xi.detects =
+{
+    NONE        = 0x000,
+    SIGHT       = 0x001,
+    HEARING     = 0x002,
+    LOWHP       = 0x004,
+    NONE1       = 0x008,
+    NONE2       = 0x010,
+    MAGIC       = 0x020,
+    WEAPONSKILL = 0x040,
+    JOBABILITY  = 0x080,
+    SCENT       = 0x100,
+}
+
+-----------------------------------
 -- Roam flags
 -----------------------------------
 
@@ -3071,7 +3117,7 @@ xi.pathflag =
     REVERSE  = 0x04, -- reverse the path
     SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
     SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
-};
+}
 
 -- Check Lua item with:
 -- local isEx = bit.band(item:getFlag(), xi.itemFlag.EX) ~= 0

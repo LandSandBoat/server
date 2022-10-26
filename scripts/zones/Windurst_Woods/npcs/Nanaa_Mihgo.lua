@@ -81,14 +81,16 @@ entity.onTrigger = function(player, npc)
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar("TrustDialogue") == 0
     then
-        local trustFlag = (player:getRank(player:getNation()) >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+        local trustFlag = (player:getRank(player:getNation()) >= 3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
 
         player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, trustMemory(player), 0, 0, 0, trustFlag)
 
     -- ROCK RACKETEER (Mihgo's Amigo follow-up)
-    elseif mihgosAmigo == QUEST_COMPLETED and rockRacketeer == QUEST_AVAILABLE and
+    elseif
+        mihgosAmigo == QUEST_COMPLETED and
+        rockRacketeer == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         if player:needToZone() then

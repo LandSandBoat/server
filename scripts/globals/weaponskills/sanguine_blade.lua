@@ -24,7 +24,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local drain = 0
 
-    if (tp >= 1000 and tp <=1999) then
+    if (tp >= 1000 and tp <= 1999) then
         drain = 50
     elseif (tp >= 2000 and tp <= 2999) then
         drain = 75
@@ -50,7 +50,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if (target:isUndead() == false) then
-        player:addHP((damage/100) * drain)
+        player:addHP((damage / 100) * drain)
     end
 
     return tpHits, extraHits, criticalHit, damage

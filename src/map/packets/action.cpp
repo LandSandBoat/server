@@ -180,65 +180,49 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_MAGIC_START:
         {
-            ref<uint8>(0x0A) = 0xE0;
-            ref<uint8>(0x0B) = 0x58;
+            // FourCC command "ca" - cast
+            packBitsBE(data, 0x6163, 86, 16);
 
             switch (action.spellgroup)
             {
                 case SPELLGROUP_WHITE:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0x1D;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6877, 102, 16); // "wh" - white magic
                 }
                 break;
                 case SPELLGROUP_BLACK:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0xD8;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6B62, 102, 16); // "bk" - black magic
                 }
                 break;
                 case SPELLGROUP_BLUE:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0x18;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6C62, 102, 16); // "bl" - blue magic
                 }
                 break;
                 case SPELLGROUP_SONG:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0xDC;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6F73, 102, 16); // "so" - song
                 }
                 break;
                 case SPELLGROUP_NINJUTSU:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0x9B;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6A6E, 102, 16); // "nj" - ninjutsu
                 }
                 break;
                 case SPELLGROUP_SUMMONING:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0x5C;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6D73, 102, 16); // "sm" - summoning magic
                 }
                 break;
                 case SPELLGROUP_GEOMANCY:
                 {
-                    ref<uint8>(0x0C) = 0xD8;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x19;
+                    packBitsBE(data, 0x6567, 102, 16); // "ge" - geomancy
                 }
                 break;
                 case SPELLGROUP_TRUST:
                 {
-                    ref<uint8>(0x0C) = 0x98;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x18;
+                    packBitsBE(data, 0x6166, 102, 16); // "fa" - faith aka trust
                 }
                 break;
                 default:
@@ -257,65 +241,51 @@ CActionPacket::CActionPacket(action_t& action)
         break;
         case ACTION_MAGIC_INTERRUPT:
         {
-            ref<uint8>(0x0A) = 0xE0;
-            ref<uint8>(0x0B) = 0x1C;
+            packBitsBE(data, action.recast, 118, 16);
+
+            // FourCC command "sp" - interrupt
+            packBitsBE(data, 0x7073, 86, 16);
 
             switch (action.spellgroup)
             {
                 case SPELLGROUP_WHITE:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0x1D;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6877, 102, 16); // "wh" - white magic
                 }
                 break;
                 case SPELLGROUP_BLACK:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0xD8;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6B62, 102, 16); // "bk" - black magic
                 }
                 break;
                 case SPELLGROUP_BLUE:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0x18;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6C62, 102, 16); // "bl" - blue magic
                 }
                 break;
                 case SPELLGROUP_SONG:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0xDC;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6F73, 102, 16); // "so" - song
                 }
                 break;
                 case SPELLGROUP_NINJUTSU:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0x9B;
-                    ref<uint8>(0x0E) = 0x1A;
+                    packBitsBE(data, 0x6A6E, 102, 16); // "nj" - ninjutsu
                 }
                 break;
                 case SPELLGROUP_SUMMONING:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0x5C;
-                    ref<uint8>(0x0E) = 0x1B;
+                    packBitsBE(data, 0x6D73, 102, 16); // "sm" - summoning magic
                 }
                 break;
                 case SPELLGROUP_GEOMANCY:
                 {
-                    ref<uint8>(0x0C) = 0xDC;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x19;
+                    packBitsBE(data, 0x6567, 102, 16); // "ge" - geomancy
                 }
                 break;
                 case SPELLGROUP_TRUST:
                 {
-                    ref<uint8>(0x0C) = 0x9C;
-                    ref<uint8>(0x0D) = 0x59;
-                    ref<uint8>(0x0E) = 0x18;
+                    packBitsBE(data, 0x6166, 102, 16); // "fa" - faith aka trust
                 }
                 break;
                 default:

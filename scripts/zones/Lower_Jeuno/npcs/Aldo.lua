@@ -12,8 +12,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-        player:getCharVar('ApocalypseNigh') == 5 and player:getRank(player:getNation()) >= 5 then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+        player:getCharVar('ApocalypseNigh') == 5 and
+        player:getRank(player:getNation()) >= 5
+    then
         player:startEvent(10057)
     elseif player:getCharVar('ApocalypseNigh') == 6 then
         player:startEvent(10058)

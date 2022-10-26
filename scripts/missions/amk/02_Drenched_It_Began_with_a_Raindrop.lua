@@ -36,11 +36,8 @@ local moogleTriggerEvent =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, {
-                    xi.items.ORCISH_PLATE_ARMOR,
-                    xi.items.QUADAV_BACKSCALE,
-                    xi.items.YAGUDO_CAULK
-                })
+            if
+                npcUtil.tradeHasExactly(trade, { xi.items.ORCISH_PLATE_ARMOR, xi.items.QUADAV_BACKSCALE, xi.items.YAGUDO_CAULK })
             then
                 return mission:progressEvent(30024)
             end

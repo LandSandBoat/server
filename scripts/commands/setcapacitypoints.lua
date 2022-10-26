@@ -40,7 +40,7 @@ function onTrigger(player, amount, target)
 
     local jobNameByNum = {}
     for k, v in pairs(xi.job) do
-        jobNameByNum[v]=k
+        jobNameByNum[v] = k
     end
 
     -- set capacity points

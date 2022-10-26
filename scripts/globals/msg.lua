@@ -256,6 +256,7 @@ xi.msg.basic =
     RECOVERS_HP             = 24,   -- <target> recovers <number> HP.
     RECOVERS_MP             = 25,   -- <target> recovers <number> MP.
     RECOVERS_HP_AND_MP      = 26,   -- <target> recovers <number> HP and MP.
+    IS_PARALYZED_2          = 84,   -- <target> is paralyzed.
     IS_STATUS               = 203,  -- <target> is <status>.
     IS_NO_LONGER_STATUS     = 204,  -- <target> is no longer <status>.
     GAINS_EFFECT_OF_STATUS  = 205,  -- <target> gains the effect of <status>.

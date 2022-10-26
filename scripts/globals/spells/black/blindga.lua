@@ -17,7 +17,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND)) --blind uses caster INT vs target MND
 
     -- Base power.  May need more research.
-    local power = math.floor(dINT * 9/40) + 23
+    local power = math.floor(dINT * 9 / 40) + 23
 
     if (power < 5) then
         power = 5

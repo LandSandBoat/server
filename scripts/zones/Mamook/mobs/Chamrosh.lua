@@ -33,7 +33,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("COPY_SPELL", 0)
             mob:setLocalVar("delay", 0)
         else
-            mob:setLocalVar("delay", delay+1)
+            mob:setLocalVar("delay", delay + 1)
         end
     end
     if mob:getHPP() < mob:getLocalVar("useWise") and mob:getLocalVar("usedMainSpec") == 0 then

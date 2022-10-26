@@ -228,7 +228,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
             end
         end
 
-        target:setMod(shadowType, shadowsLeft);
+        target:setMod(shadowType, shadowsLeft)
 
         if shadowsLeft <= 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
@@ -342,7 +342,7 @@ function utils.getMobSkillLvl(rank, level)
              return 153 + (level - 50) * 5
          end
          if rank == 2 then
-             return 147 + (level - 50) *4.9
+             return 147 + (level - 50) * 4.9
          end
          if rank == 3 then
              return 136 + (level - 50) * 4.8
@@ -522,7 +522,7 @@ function utils.randomEntryIdx(t)
     local keys = {}
 
     for key, _ in pairs(t) do
-        keys[#keys+1] = key
+        keys[#keys + 1] = key
     end
 
     local index = keys[math.random(1, #keys)]

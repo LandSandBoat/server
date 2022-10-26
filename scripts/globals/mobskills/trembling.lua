@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
    local dispelled = math.random(2, 3)
 
    if (info.hitslanded ~= 0) then
-      for i=1, dispelled do
+      for i = 1, dispelled do
          target:dispelStatusEffect()
       end
    end

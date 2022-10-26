@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
 	return "Adding instance_zone column to instance_list table"
@@ -18,5 +18,5 @@ def migrate(cur, db):
 		cur.execute("ALTER TABLE instance_list \
 		ADD COLUMN `instance_zone` tinyint(3) unsigned NOT NULL DEFAULT '0';")
 		db.commit()
-	except mysql.connector.Error as err:
+	except mariadb.Error as err:
 		print("Something went wrong: {}".format(err))

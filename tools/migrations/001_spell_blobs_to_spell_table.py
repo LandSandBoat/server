@@ -1,5 +1,5 @@
 from migrations import utils
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Spell blobs to spell table"
@@ -60,5 +60,5 @@ def migrate(cur, db):
                 print("Charid %d has no spells, skipping" % charId)
 
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

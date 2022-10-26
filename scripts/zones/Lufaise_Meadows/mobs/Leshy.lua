@@ -29,13 +29,13 @@ entity.onMobRoam = function(mob)
     local offset = ph - ID.mob.LESHY_OFFSET
     if (offset >= 0 and offset <= 7) then
         local nm = GetMobByID(ID.mob.COLORFUL_LESHY)
-        if (
+        if
             not nm:isSpawned() and
             not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned() and
             os.time() > nm:getLocalVar("timeToGrow") and
             nm:getLocalVar("phIndex") == 0 and
             math.random(1, 20) == 1 -- this prevents the same Leshy from growing every cycle
-        ) then
+        then
             local p = mob:getPos()
             DisallowRespawn(ph, true)
             DespawnMob(ph)

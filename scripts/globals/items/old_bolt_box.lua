@@ -16,7 +16,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18189, math.random(99))
+    target:addItem(18189, math.random(10, 20))
 end
 
 return itemObject

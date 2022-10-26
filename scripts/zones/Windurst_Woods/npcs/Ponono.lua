@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("ClothcraftExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_WEAVER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.CLOTHCRAFT, newRank)
             player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("ClothcraftExpertQuest", 0)
@@ -107,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 10011 and option == 2 then
         if guildMember == 1 then
-            player:setCharVar("ClothcraftExpertQuest",1)
+            player:setCharVar("ClothcraftExpertQuest", 1)
         end
     elseif csid == 10011 and option == 1 then
         if player:getFreeSlotsCount() == 0 then

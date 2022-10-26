@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
     local sealBit2 = bit.bor(sealShift[3], sealShift[4])
     local sealBit3 = bit.bor(sealShift[5], 0)
 
-    for i=1, #sealShift do
+    for i = 1, #sealShift do
         if sealShift[i] < 2 then
             hideOptions = bit.bor(hideOptions, bit.lshift(1, i - 1))
         end

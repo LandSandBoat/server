@@ -99,7 +99,6 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
     }
     if (m_size == 0)
     {
-        // ShowError("TCP Connection closing");
         return 0;
     }
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)

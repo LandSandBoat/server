@@ -57,7 +57,7 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar("nuclearWaste") == 1 then
         -- after nuclear waste immediately uses a random element ability
-        local ability = math.random(1262,1267)
+        local ability = math.random(1262, 1267)
         mob:useMobAbility(ability)
         mob:setLocalVar("nuclearWaste", 0)
     end

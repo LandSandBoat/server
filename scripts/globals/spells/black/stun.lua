@@ -16,11 +16,11 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
-        params.diff = nil
+        params.diff      = nil
         params.attribute = xi.mod.INT
         params.skillType = xi.skill.DARK_MAGIC
-        params.bonus = 0
-        params.effect = xi.effect.STUN
+        params.bonus     = 0
+        params.effect    = xi.effect.STUN
     local resist = applyResistanceEffect(caster, target, spell, params)
 
     if resist <= (1 / 16) then

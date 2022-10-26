@@ -66,7 +66,7 @@ function Sequence.performSequenceAction(action, player, targetEntity)
 
     if action.type == Action.Type.Face then
         local npc = action.npcId and GetNPCByID(action.npcId) or targetEntity
-        local angle = type(action.face) == 'number' and action.face or npc:getAngle(player)
+        local angle = type(action.face) == 'number' and action.face or npc:getFacingAngle(player)
         npc:setRotation(angle)
         Sequence.performSequenceAction(action.__nextAction, player, targetEntity)
 

@@ -163,8 +163,8 @@ enum UPDATETYPE : uint8
     UPDATE_HP       = 0x04,
     UPDATE_COMBAT   = 0x07,
     UPDATE_NAME     = 0x08,
-    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
+    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_CHAR = 0x1F,
     UPDATE_DESPAWN  = 0x20,
 };

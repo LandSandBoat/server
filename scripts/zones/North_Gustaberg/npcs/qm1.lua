@@ -30,7 +30,7 @@ local function resetSirenTear(npc)
     elseif currentPos == 1 then
         nextPos = 0
     else
-        nextPos = math.random(2) - 1
+        nextPos = math.random(0, 1)
     end
 
     npc:setLocalVar("pos", nextPos)

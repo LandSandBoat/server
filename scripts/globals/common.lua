@@ -62,7 +62,7 @@ function getVanaMidnight(day)
     if day ~= nil then
         curtime = curtime + 24 * 144 * day
     end
-    local finaltime = curtime + (23-VanadielHour())* 144 + (60-VanadielMinute())*2.4
+    local finaltime = curtime + (23 - VanadielHour()) * 144 + (60 - VanadielMinute()) * 2.4
     return finaltime
 end
 

@@ -45,13 +45,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 : CMobEntity()
 {
-    objtype        = TYPE_TRUST;
-    m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    allegiance     = ALLEGIANCE_TYPE::PLAYER;
-    m_MobSkillList = 0;
-    PMaster        = PChar;
-    m_MovementType = MELEE_RANGE;
-    m_IsClaimable  = false;
+    objtype                 = TYPE_TRUST;
+    m_EcoSystem             = ECOSYSTEM::UNCLASSIFIED;
+    allegiance              = ALLEGIANCE_TYPE::PLAYER;
+    m_MobSkillList          = 0;
+    PMaster                 = PChar;
+    m_MovementType          = MELEE_RANGE;
+    m_IsClaimable           = false;
+    m_bReleaseTargIDOnDeath = true;
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
@@ -127,7 +128,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (battleutils::IsParalyzed(this))
         {
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
             return;
         }
 
@@ -529,6 +530,24 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
         else
         {
             PAI->TargetFind->findSingleTarget(PBattleTarget);
+        }
+
+        // Assumed, it's very difficult to produce this due to WS being nearly instant
+        // TODO: attempt to verify.
+        if (PAI->TargetFind->m_targets.size() == 0)
+        {
+            // No targets, perhaps something like Super Jump or otherwise untargetable
+            action.actiontype         = ACTION_MAGIC_FINISH;
+            action.actionid           = 28787; // Some hardcoded magic for interrupts
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.animation       = 0x1FC; // assumed
+            actionTarget.messageID       = 0;
+            actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
+
+            return;
         }
 
         for (auto&& PTarget : PAI->TargetFind->m_targets)

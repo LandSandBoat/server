@@ -40,8 +40,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
     elseif (csid == 36) then
         player:tradeComplete()
-        player:addGil(xi.settings.main.GIL_RATE*100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*100)
+        player:addGil(xi.settings.main.GIL_RATE * 100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 100)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == QUEST_ACCEPTED) then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)

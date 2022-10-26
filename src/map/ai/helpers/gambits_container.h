@@ -170,6 +170,7 @@ namespace gambits
         std::vector<Action_t>    actions;
         uint16                   retry_delay;
         time_point               last_used;
+        std::string              identifier;
 
         Gambit_t()
         {
@@ -225,7 +226,9 @@ namespace gambits
         }
         ~CGambitsContainer() = default;
 
-        void AddGambit(const Gambit_t& gambit);
+        auto AddGambit(Gambit_t const& gambit) -> std::string;
+        void RemoveGambit(std::string const& id);
+        void RemoveAllGambits();
         void Tick(time_point tick);
 
         // TODO: make private
