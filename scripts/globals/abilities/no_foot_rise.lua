@@ -27,7 +27,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         end
         player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_1)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_1 + moves, 1, 0, 7200)
-        return moves+1
+        return moves + 1
     elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
         if (moves > 3) then
             moves = 3

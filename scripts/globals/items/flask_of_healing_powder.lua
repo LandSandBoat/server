@@ -14,7 +14,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:forMembersInRange(10, function(member)
-        member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, member:addHP((member:getMaxHP()/100)*25))
+        member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, member:addHP((member:getMaxHP() / 100) * 25))
     end)
 end
 

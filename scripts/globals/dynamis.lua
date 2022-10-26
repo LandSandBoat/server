@@ -775,7 +775,7 @@ end
 local function getExtensions(player)
     local count = 0
 
-    for i=xi.ki.CRIMSON_GRANULES_OF_TIME, xi.ki.OBSIDIAN_GRANULES_OF_TIME do
+    for i = xi.ki.CRIMSON_GRANULES_OF_TIME, xi.ki.OBSIDIAN_GRANULES_OF_TIME do
         if player:hasKeyItem(i) then
             count = count + 1
         end

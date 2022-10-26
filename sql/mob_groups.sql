@@ -1299,6 +1299,7 @@ INSERT INTO `mob_groups` VALUES (23,2136,34,'Jailer_of_Temperance',0,32,1402,220
 INSERT INTO `mob_groups` VALUES (24,4661,34,'Ixaern_mnk',0,128,2845,11000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (25,3269,34,'Qnaern_rdm',0,128,0,0,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (26,4651,34,'Qnaern_whm',0,128,0,0,0,77,77,0);
+INSERT INTO `mob_groups` VALUES (27,7057,34,'Quasilumin',0,128,0,1000,0,65,65,0);
 
 -- ------------------------------------------------------------
 -- The_Garden_of_RuHmet (Zone 35)
@@ -1525,7 +1526,7 @@ INSERT INTO `mob_groups` VALUES (23,2661,38,'Millenary_Mossback',0,128,2858,1900
 INSERT INTO `mob_groups` VALUES (24,202,38,'Apollyon_Scavenger',0,128,2858,4750,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (25,883,38,'Cynoprosopi',0,128,2858,15000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (26,1771,38,'Gorynich',0,128,2862,5000,0,79,79,0);
-INSERT INTO `mob_groups` VALUES (27,6732,38,'Kaiser_Behemoth',0,128,2860,15000,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (27,6732,38,'Kaiser_Behemoth',0,128,2860,15000,1000,85,85,0);
 INSERT INTO `mob_groups` VALUES (28,2289,38,'Kronprinz_Behemoth',0,128,2863,7000,1000,78,78,0);
 INSERT INTO `mob_groups` VALUES (29,1515,38,'Ghost_Clot',0,128,2856,10000,0,82,83,0);
 INSERT INTO `mob_groups` VALUES (30,2634,38,'Metalloid_Amoeba',0,128,2856,7500,0,80,80,0);

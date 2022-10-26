@@ -728,8 +728,11 @@ function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam,
     end
 
     --handle pd
-    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) )
-            and skilltype == xi.attackType.PHYSICAL) then
+    if
+        (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)) and
+        skilltype == xi.attackType.PHYSICAL
+    then
         skill:setMsg(xi.msg.basic.JA_MISS_2)
         return 0
     end

@@ -247,9 +247,9 @@ entity.onTrigger = function(player, npc)
         5 - paid mats for valoredge
         6 - paid mats for sharpshot
         7 - paid mats for stormwaker
-        8 - paid mats+coins for valoredge
-        9 - paid mats+coins for sharpshot
-        10 - paid mats+coins for stormwaker
+        8 - paid mats + coins for valoredge
+        9 - paid mats + coins for sharpshot
+        10 - paid mats + coins for stormwaker
         11 - asked about soulsoother/spiritreaver
         12 - paid for soulsoother
         13 - paid for spiritreaver

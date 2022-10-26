@@ -15,7 +15,7 @@ InteractionGlobal.zones = InteractionGlobal.zones or {}
 -----------------------------------
 function InteractionGlobal.initZones(zoneIds)
     -- Add the given zones to the zones table
-    for i=1, #zoneIds do
+    for i = 1, #zoneIds do
         local zone = GetZone(zoneIds[i])
         if zone then
             InteractionGlobal.zones[zoneIds[i]] = zone:getName()
@@ -32,7 +32,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
     -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
-       zoneIds[#zoneIds+1] = zoneId
+       zoneIds[#zoneIds + 1] = zoneId
     end
 
     local interactionContainersPath = 'scripts/globals/interaction_containers'
@@ -42,7 +42,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
 
     local containerFiles = GetContainerFilenamesList()
     local containers = {}
-    for i=1, #containerFiles do
+    for i = 1, #containerFiles do
         containers[i] = utils.prequire(containerFiles[i])
         containers[i].filename = containerFiles[i]
     end

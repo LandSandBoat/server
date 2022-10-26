@@ -12,7 +12,7 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -18.366, y = 1.750, z = -59.804, wait = 8000 },
     { x = -18.303, y = 1.750, z = -59.925 },
@@ -28,8 +28,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -61,7 +61,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 481 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
-    elseif csid == 484 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, { fame=80, title=xi.title.GREAT_GRAPPLER_SCORPIO, gil=1500 }) then
+    elseif csid == 484 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, { fame = 80, title = xi.title.GREAT_GRAPPLER_SCORPIO, gil = 1500 }) then
         player:confirmTrade()
     elseif csid == 735 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 0, true))

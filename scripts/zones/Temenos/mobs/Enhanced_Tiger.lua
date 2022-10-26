@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 local flags = xi.path.flag.NONE
-local path =
+local pathNodes =
 {
     [2] =
     {
@@ -33,7 +33,7 @@ entity.onMobRoam = function(mob)
     if pause < os.time() and (offset == 2 or offset == 6) then
         local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
-        mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
+        mob:pathTo(pathNodes[offset][point][1], pathNodes[offset][point][2], pathNodes[offset][point][3], flags)
         mob:setLocalVar("pause", os.time() + 20)
     end
 end
@@ -49,12 +49,12 @@ entity.onMobDeath = function(mob, player, optParams)
 
         if spawn then
             for i = 0, 2 do
-                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[1]+i):getStatus() == xi.status.DISAPPEAR then
+                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[1] + i):getStatus() == xi.status.DISAPPEAR then
                     local mobX = mob:getXPos()
                     local mobY = mob:getYPos()
                     local mobZ = mob:getZPos()
-                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[1]+i):setPos(mobX, mobY, mobZ)
-                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[1]+i, battlefield, "crateMaskF1", battlefield:getLocalVar("crateMaskF1"))
+                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[1] + i):setPos(mobX, mobY, mobZ)
+                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[1] + i, battlefield, "crateMaskF1", battlefield:getLocalVar("crateMaskF1"))
                     break
                 end
             end

@@ -370,6 +370,7 @@ content.groups =
         {
             [xi.mobMod.ALLI_HATE] = 50,
             [xi.mobMod.MAGIC_COOL] = 30,
+            [xi.mobMod.SEVERE_SPELL_CHANCE] = 100,
         },
 
         setup = enpowerBoss,

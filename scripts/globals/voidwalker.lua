@@ -110,7 +110,7 @@ local getNearestMob = function(player, mobs)
     for _, v in ipairs(mobs) do
         local mob = GetMobByID(v.mobId)
         local distance = player:checkDistance(mob)
-        table.insert(results, { mobId=v.mobId, keyItem=v.keyItem, distance=distance })
+        table.insert(results, { mobId = v.mobId, keyItem = v.keyItem, distance = distance })
     end
     table.sort(results, function(a, b) return a.distance < b.distance end)
     if table.getn(results) > 0 then

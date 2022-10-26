@@ -71,7 +71,7 @@ tenzenFunctions.wsSequence = function(mob)
         mob:timer(3000, function(mobArg, target)
             battlefield:setLocalVar("gameover", battlefield:getRemainingTime()) -- initiate loss condition trigger & record the time remaining
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:showText(mob, ID.text.TENZEN_MSG_OFFSET +1)
+            mob:showText(mob, ID.text.TENZEN_MSG_OFFSET + 1)
         end)
     end
 end
@@ -120,7 +120,7 @@ tenzenFunctions.riceBall = function(mob, target, busyState)
             mob:getLocalVar("riceball") == 0
         then
             if battlefield:getLocalVar("fireworks") ~= 1 then
-                mob:showText(target, ID.text.TENZEN_MSG_OFFSET +3)
+                mob:showText(target, ID.text.TENZEN_MSG_OFFSET + 3)
                 mob:useMobAbility(1398)
                 mob:addMod(xi.mod.ATT, 50)
                 mob:addMod(xi.mod.DEF, 30)

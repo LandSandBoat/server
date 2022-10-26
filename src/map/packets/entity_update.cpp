@@ -82,7 +82,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             }
             if (PEntity->spawnAnimation == SPAWN_ANIMATION::SPECIAL)
             {
-                ref<uint8>(0x28) |= 0x45;
+                ref<uint8>(0x28) |= 0x04;
             }
             ref<uint8>(0x0A) = updatemask;
         }
@@ -169,6 +169,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 }
                 ref<uint8>(0x28) |= PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00;
                 ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
+                ref<uint8>(0x28) |= PMob->status == STATUS_TYPE::NORMAL ? 0x40 : 0; // Make the entity triggerable
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
                 ref<uint8>(0x2B) = PEntity->namevis;
             }

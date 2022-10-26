@@ -1960,9 +1960,22 @@ namespace luautils
             return 0;
         }
 
-        auto zone     = (const char*)PChar->loc.zone->GetName();
-        auto name     = (const char*)PNpc->GetName();
-        auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
+        auto        zone = (const char*)PChar->loc.zone->GetName();
+        auto        name = (const char*)PNpc->GetName();
+        std::string pathFormat;
+        switch (PNpc->objtype)
+        {
+            case TYPE_NPC:
+                pathFormat = "./scripts/zones/{}/npcs/{}.lua";
+                break;
+            case TYPE_MOB:
+                pathFormat = "./scripts/zones/{}/mobs/{}.lua";
+                break;
+            default:
+                // Should never hit this
+                XI_DEBUG_BREAK_IF(true);
+        }
+        auto filename = fmt::format(pathFormat, zone, name);
 
         PChar->eventPreparation->targetEntity = PNpc;
         PChar->eventPreparation->scriptFile   = filename;

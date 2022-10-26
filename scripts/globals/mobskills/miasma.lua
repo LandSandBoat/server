@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- local duration = 180
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl() / 3, 3, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 3, 120)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl()/3, 3, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl() / 3, 3, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 3, 120)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 60)
 

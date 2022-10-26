@@ -183,7 +183,7 @@ end
 -- This is used to deny taking records which aren't implemented in the above table.
 RoeParseRecords(records)
 
---[[ **************************************************************************
+--[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
     For external calls use onRecordTrigger below. (see healing.lua for example)
     If record rewards items, and the player cannot carry them, return false.
@@ -200,7 +200,7 @@ RoeParseRecords(records)
         accolades = 300,
         capacity = 400,
     })
-*************************************************************************** --]]
+--------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
     local recordEntry = records[record]
     local recordFlags = recordEntry.flags

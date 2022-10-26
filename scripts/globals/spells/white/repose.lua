@@ -25,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         return xi.effect.SLEEP_II
     end
 
-    if (target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, 90*resist)) then
+    if (target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, 90 * resist)) then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect

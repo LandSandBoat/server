@@ -86,7 +86,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 32001 or csid == 32002 then
-        player:messageSpecial(ID.text.HUM+1)
+        player:messageSpecial(ID.text.HUM + 1)
     end
 end
 

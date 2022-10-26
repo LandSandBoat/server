@@ -36,7 +36,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 202) then
         player:setCharVar("PromathiaStatus", 2)
-    elseif (120 and option ~=0) then -- Hume
+    elseif (120 and option ~= 0) then -- Hume
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
         player:addKeyItem(xi.ki.LIGHT_OF_VAHZL)

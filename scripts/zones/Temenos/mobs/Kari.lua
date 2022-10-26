@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 local flags = xi.path.flag.WALLHACK
-local path =
+local pathNodes =
 {
     { 185.000, -82.000, 465.000 },
     { 215.000, -82.000, 465.000 },
@@ -21,10 +21,10 @@ local path =
 entity.onMobRoam = function(mob)
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 4)+1
+        local point = (mob:getLocalVar("point") % 4) + 1
         mob:setLocalVar("point", point)
-        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
-        mob:setLocalVar("pause", os.time()+15)
+        mob:pathTo(pathNodes[point][1], pathNodes[point][2], pathNodes[point][3], flags)
+        mob:setLocalVar("pause", os.time() + 15)
     end
 end
 

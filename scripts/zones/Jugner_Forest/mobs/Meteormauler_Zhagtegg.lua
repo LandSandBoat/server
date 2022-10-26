@@ -26,7 +26,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId+i)
+        local guardID = GetMobByID(mobId + i)
         guardID:updateEnmity(target)
     end
 end

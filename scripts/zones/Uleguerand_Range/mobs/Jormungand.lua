@@ -22,9 +22,9 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if (mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime) then
+        if (mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime) then
             mob:useMobAbility(695)
-            mob:setLocalVar("twohourTime", (mob:getBattleTime()/15)+20)
+            mob:setLocalVar("twohourTime", (mob:getBattleTime() / 15) + 20)
         elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
@@ -32,8 +32,10 @@ entity.onMobFight = function(mob, target)
             -- and record the time this phase was started
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
-        elseif (mob:getAnimationSub() == 1 and
-                mob:getBattleTime() - changeTime > 30) then
+        elseif
+            mob:getAnimationSub() == 1 and
+            mob:getBattleTime() - changeTime > 30
+        then
             mob:useMobAbility(1292)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 2 is grounded mode, so check if he should take off
@@ -50,7 +52,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if (skill:getID() == 1296 and mob:getHPP() <= 30) then
         local roarCounter = mob:getLocalVar("roarCounter")
 
-        roarCounter = roarCounter +1
+        roarCounter = roarCounter + 1
         mob:setLocalVar("roarCounter", roarCounter)
 
         if (roarCounter > 2) then

@@ -30,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
     --get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     dmg = addBonuses(caster, spell, target, dmg)
     --add in target adjustment
@@ -55,7 +55,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()
 
     if (leftOver > 0) then
-        caster:addStatusEffect(xi.effect.MAX_HP_BOOST, (leftOver/caster:getMaxHP())*100, 0, 60)
+        caster:addStatusEffect(xi.effect.MAX_HP_BOOST, (leftOver / caster:getMaxHP()) * 100, 0, 60)
     end
 
     caster:addHP(dmg)

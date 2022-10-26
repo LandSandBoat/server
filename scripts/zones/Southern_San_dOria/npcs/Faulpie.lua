@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("LeathercraftExpertQuest") == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER)
     then
-        if signed ~=0 then
+        if signed ~= 0 then
             player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
             player:startEvent(649, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("LeathercraftExpertQuest", 0)
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(649, 0, 0, 0, 0, newRank, 0)
         end
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
         player:startEvent(649, 0, 0, 0, 0, newRank)
         player:setLocalVar("LeathercraftTraded", 1)

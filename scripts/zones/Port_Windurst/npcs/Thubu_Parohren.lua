@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
         player:setCharVar("FishingExpertQuest", 0)
         player:setLocalVar("FishingTraded", 1)
-    elseif newRank ~= 0 and newRank <=9 then
+    elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
         player:setLocalVar("FishingTraded", 1)

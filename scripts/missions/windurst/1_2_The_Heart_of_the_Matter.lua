@@ -100,7 +100,7 @@ end
 local collectOrb = function(player, csid, option, npc)
     local gizmoNum = npc:getID() - outerHorutotoRuinsID.npc.GATE_MAGICAL_GIZMO -- gizmoNum will be 1 through 6
     local numberCollected = mission:getVar(player, "OrbsCollected")
-    local ki = glowingOrbKI[(numberCollected +1)]
+    local ki = glowingOrbKI[(numberCollected + 1)]
 
     mission:setVarBit(player, 'GizmoEmpty', gizmoNum)
     mission:setVar(player, "OrbsCollected", numberCollected + 1)

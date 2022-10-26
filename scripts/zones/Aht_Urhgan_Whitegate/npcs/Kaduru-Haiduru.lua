@@ -13,10 +13,13 @@ local function canUse_KaduruHaiduru_Service(player)
     local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
 
     -- Kaduru-Haiduru can be used unless the following are true.
-    if (shihuDanhuEncounters > 1 and os.time() < shihuDanhuDate) or
-        (os.time() < caughtUsingShihuDanhuDate) then
+    if
+        (shihuDanhuEncounters > 1 and os.time() < shihuDanhuDate) or
+        os.time() < caughtUsingShihuDanhuDate
+    then
         return false
     end
+
     return true
 end
 

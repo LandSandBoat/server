@@ -105,7 +105,7 @@ entity.onTrade = function(player, npc, trade)
                     end
                     local stacks = itemQty / 99
                     carnationsNeeded = carnationsNeeded + stacks
-                    giveToPlayer[#giveToPlayer+1] = { v[2], stacks }
+                    giveToPlayer[#giveToPlayer + 1] = { v[2], stacks }
                     validSlot = true
                     break
                 end

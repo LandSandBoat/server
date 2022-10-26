@@ -158,6 +158,7 @@ content.groups =
     -- Floor 2
     {
         mobs = { "Bialozar_Boss" },
+        mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NE_APOLLYON.npc.ITEM_CRATES[2])
         end,
@@ -170,6 +171,7 @@ content.groups =
     {
         -- Bialozar and Thiazi x2
         mobs = { "Bialozar", "Thiazi" },
+        mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         randomDeath = function(battlefield, mob)
             content:openDoor(battlefield, 2)
 

@@ -13,7 +13,7 @@ entity.onMobFight = function(mob, target)
     -- Going with 60 seconds until I see proof of retails timing.
     if (os.time() - popTime > 60) then
         local alreadyPopped = false
-        for Xzomit = mob:getID()+1, mob:getID()+6 do
+        for Xzomit = mob:getID() + 1, mob:getID() + 6 do
             if (alreadyPopped == true) then
                 break
             else

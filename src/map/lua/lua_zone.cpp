@@ -339,7 +339,9 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         auto onMobDeath = table["onMobDeath"].get<sol::function>();
         if (!onMobDeath.valid())
         {
-            cacheEntry["onMobDeath"] = []() {}; // Empty func
+            // TODO: Using an empty C++ lambda here wasn't working.
+            // Figure out why and fix.
+            cacheEntry["onMobDeath"] = lua.safe_script("return function() end");
         }
 
         m_pLuaZone->InsertMOB(PMob);

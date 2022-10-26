@@ -7,7 +7,7 @@ require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged= function(mob, target)
+entity.onMobEngaged = function(mob, target)
     local instance = mob:getInstance()
 
     if instance:getLocalVar("gearObjective") == xi.nyzul.gearObjective.AVOID_AGRO then

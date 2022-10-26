@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 
     if offset == 4 then
         player:startEvent(115)
-    elseif offset >=0 and offset <= 3 then
+    elseif offset >= 0 and offset <= 3 then
         player:startEvent(107 + offset)
     end
 end

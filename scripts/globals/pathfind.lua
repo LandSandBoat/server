@@ -16,6 +16,7 @@ xi.path =
         SCRIPT   = 8,
         SLIDE    = 16,
         PATROL   = 32,
+        COORDS   = 64,
     },
 
     -- returns the point at the given index
