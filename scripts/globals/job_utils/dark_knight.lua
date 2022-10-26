@@ -132,22 +132,34 @@ xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)
-    -- Applying Weapon Bash stun. Rate is said to be near 100%, so let's say 99%.
-    if (math.random() * 100 < 99) then
+    local level   = player:getMainLvl()
+    local jpValue = target:getJobPointLevel(xi.jp.WEAPON_BASH_EFFECT) * 10
+    local bashMod = player:getMod(xi.mod.WEAPON_BASH)
+    local damage  = 0
+
+    if player:getMainJob() ~= xi.job.DRK then
+        level = player:getSubLvl()
+    end
+
+    damage = (level + 11) / 4
+
+    -- Apply stun. Rate is said to be near 100%, so let's say 99%.
+    if math.random(100) < 99 then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
-    -- Weapon Bash deals damage dependant of Dark Knight level
-    local darkKnightLvl = 0
-    if player:getMainJob() == xi.job.DRK then
-        darkKnightLvl = player:getMainLvl() -- Use Mainjob Lvl
-    elseif player:getSubJob() == xi.job.DRK then
-        darkKnightLvl = player:getSubLvl()  -- Use Subjob Lvl
+    -- Ignominy Gauntlets +2/+3 cause Weapon Bash to apply Chainbound on the target
+    if
+        player:getMod(xi.mod.WEAPON_BASH_CHAINBOUND) > 0 and
+        not target:hasStatusEffect(xi.effect.CHAINBOUND) and
+        not target:hasStatusEffect(xi.effect.SKILLCHAIN)
+    then
+        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
     end
 
     -- Calculating and applying Weapon Bash damage
-    local jpValue = target:getJobPointLevel(xi.jp.WEAPON_BASH_EFFECT)
-    local damage = math.floor(((darkKnightLvl + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH) + jpValue * 10)
+    damage = math.floor(damage + bashMod + jpValue)
+
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
 

@@ -405,6 +405,7 @@ enum class Mod
     ENHANCES_NETHER_VOID     = 1078, // Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%, e.g. mod value 50 = +50%)
     ENHANCES_MUTED_SOUL      = 1080, // Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
     ENHANCES_DESPERATE_BLOWS = 1081, // Enhances "Desperate Blows" effect (Adds +3 Subtle Blow per DESPERATE_BLOWS merit level)
+    WEAPON_BASH_CHAINBOUND   = 1082, // Augments "Weapon Bash" (Adds a Chainbound effect to Weapon Bash)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -940,7 +941,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1082, and onward
+    // SPARE = 1083, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
