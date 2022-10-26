@@ -12,14 +12,14 @@ require("scripts/globals/pathfind")
 local escorts =
 {
     -- Escort 1
-    [16916927] =
+    [ID.mob.CERMET_ALCOVE_OFFSET] =
     {
         direction = ID.text.PORTAL_EAST,
-        complete_door = 16916869,
+        complete_door = ID.npc.ESCORT_1_DOOR_OFFSET + 2,
         doors =
         {
-            16916867,
-            16916868,
+            ID.npc.ESCORT_1_DOOR_OFFSET,
+            ID.npc.ESCORT_1_DOOR_OFFSET + 1,
         },
 
         path =
@@ -31,16 +31,16 @@ local escorts =
     },
 
     -- Escort 2
-    [16916928] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 1] =
     {
         direction = ID.text.PORTAL_EAST,
-        complete_door = 16916870,
+        complete_door = ID.npc.ESCORT_2_DOOR_OFFSET,
         doors =
         {
-            16916871,
-            16916872,
-            16916873,
-            16916874,
+            ID.npc.ESCORT_2_DOOR_OFFSET + 1,
+            ID.npc.ESCORT_2_DOOR_OFFSET + 2,
+            ID.npc.ESCORT_2_DOOR_OFFSET + 3,
+            ID.npc.ESCORT_2_DOOR_OFFSET + 4,
         },
 
         path =
@@ -73,16 +73,16 @@ local escorts =
     },
 
     -- Escort 3
-    [16916929] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
     {
         direction = ID.text.PORTAL_WEST,
-        complete_door = 16916875,
+        complete_door = ID.npc.ESCORT_3_DOOR_OFFSET,
         doors =
         {
-            16916876,
-            16916877,
-            16916878,
-            16916879,
+            ID.npc.ESCORT_3_DOOR_OFFSET + 1,
+            ID.npc.ESCORT_3_DOOR_OFFSET + 2,
+            ID.npc.ESCORT_3_DOOR_OFFSET + 3,
+            ID.npc.ESCORT_3_DOOR_OFFSET + 4,
         },
 
         path =
@@ -113,19 +113,19 @@ local escorts =
     },
 
     -- Escort 4
-    [16916930] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
     {
         direction = ID.text.PORTAL_NORTH,
-        complete_door = 16916880,
+        complete_door = ID.npc.ESCORT_4_DOOR_OFFSET,
         doors =
         {
-            16916881,
-            16916882,
-            16916883,
-            16916884,
-            16916885,
-            16916886,
-            16916887,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 1,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 2,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 3,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 4,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 5,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 6,
+            ID.npc.ESCORT_4_DOOR_OFFSET + 7,
         },
 
         path =

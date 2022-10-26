@@ -10,25 +10,25 @@ require("scripts/globals/pathfind")
 
 local escorts =
 {
-    [16916927] =
+    [ID.mob.CERMET_ALCOVE_OFFSET] =
     {
         ['limit'] = 5,
         ['spawn'] = { x = -260.000, y = -1.000, z = 423.000, rotation = 190 },
     },
 
-    [16916928] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 1] =
     {
         ['limit'] = 30,
         ['spawn'] = { x = 797.000, y = -1.000, z = 460.000, rotation = 125 },
     },
 
-    [16916929] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
     {
         ['limit'] = 30,
         ['spawn'] = { x = 540.000, y = -1.000, z = 297.000, rotation = 60 },
     },
 
-    [16916930] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 3] =
     {
         ['limit'] = 40,
         ['spawn'] = { x = -540.000, y = -1.000, z = 297.000, rotation = 60 },
@@ -50,6 +50,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
+    -- Create a dynamic entity for the Quasilumin that the player has to escort
     local quasilumin = npc:getZone():insertDynamicEntity({
         objtype = xi.objType.MOB,
         name = "Quasilumin",
@@ -64,9 +65,11 @@ entity.onTrigger = function(player, npc)
         specialSpawnAnimation = true,
         releaseIdOnDeath = true,
     })
+
     if quasilumin == nil then
         return
     end
+
     npc:setLocalVar("QuasiluminId", quasilumin:getID())
 
     quasilumin:setSpawn(data.spawn.x, data.spawn.y, data.spawn.z, data.spawn.rotation)
