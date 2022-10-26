@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Mount Zhayolm
---   NM: Sarameya
+-- NM: Sarameya
 -- !pos 322 -14 -581 61
 -- Spawned with Buffalo Corpse: !additem 2583
--- Wiki: http://ffxiclopedia.wikia.com/wiki/Sarameya
--- TODO: PostAIRewrite: Code the Howl effect and gradual resists.
+-- Weak to water elemental damage
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
@@ -17,6 +16,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:addMod(xi.mod.MDEF, -12)
@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DEX, 40)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.EARTH_MEVA, 170)
-    mob:setMod(xi.mod.DARK_MEVA, 250)
+    mob:setMod(xi.mod.DARK_MEVA, 125)
     mob:setMod(xi.mod.LIGHT_MEVA, 128)
     mob:setMod(xi.mod.FIRE_MEVA, 250)
     mob:setMod(xi.mod.THUNDER_MEVA, 170)
