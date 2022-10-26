@@ -898,9 +898,12 @@ namespace battleutils
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                     }
-                    else if (PDefender->objtype == TYPE_TRUST && PDefender->GetMJob() == JOB_PLD)
+                    else if (PDefender->objtype == TYPE_TRUST)
                     {
-                        Action->spikesEffect = SUBEFFECT::SUBEFFECT_REPRISAL;
+                        if (PDefender->getMod(Mod::SHIELDBLOCKRATE) > 0)
+                        {
+                            Action->spikesEffect = SUBEFFECT::SUBEFFECT_REPRISAL;
+                        }
                     }
                     else
                     {
@@ -1829,9 +1832,14 @@ namespace battleutils
                 return base + skillModifier;
             }
         }
-        else if (PDefender->objtype == TYPE_TRUST && PDefender->GetMJob() == JOB_PLD)
+        else if (PDefender->objtype == TYPE_TRUST && PDefender->getMod(Mod::SHIELDBLOCKRATE) > 0)
         {
-            base = 45; // Todo : verify actual retail block rates do not vary from trust to trust
+            base = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+            if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+            {
+                base = base * 1.5f;
+            }
+            return base + palisadeMod;
         }
         else
         {
@@ -2069,6 +2077,7 @@ namespace battleutils
 
             if (isBlocked)
             {
+                int16 blockRateMod = PDefender->getMod(Mod::SHIELDBLOCKRATE);
                 uint8 absorb = 100;
                 if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
                 {
@@ -2086,50 +2095,62 @@ namespace battleutils
                             PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                         }
                     }
-                    else if (PDefender->objtype == TYPE_PET)
+                }
+                else if (PDefender->objtype == TYPE_PET && blockRateMod > 0)
+                {
+                    absorb = 50;
+
+                    // Shield Mastery
+                    if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                        (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
                     {
-                        absorb = 50;
-
-                        // Shield Mastery
-                        if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
-                        {
-                            // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
-                            // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
-                            PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
-                        }
-                    }
-                    else
-                    {
-                        absorb = 50;
-                    }
-
-                    // Reprisal
-                    if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
-                    {
-                        // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
-                        CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
-
-                        if (reprisalEffect != nullptr)
-                        {
-                            float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
-                            int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
-                            int32 blockedDamage = (damage * (100 - absorb)) / 100;
-                            int32 spikesDamage  = 0;
-
-                            if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
-                            {
-                                blockedDamage = (baseDamage * (100.f - absorb)) / 100.f;
-                            }
-
-                            spikesDamage = blockedDamage * (effectPower / 100.f);
-
-                            // Set Reprisal spike damage
-                            PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
-                        }
+                        // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                     }
                 }
+                else if (PDefender->objtype == TYPE_TRUST && blockRateMod > 0)
+                {
+                    absorb = 50;
 
+                    // Shield Mastery
+                    if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                        (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
+                    {
+                        // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
+                    }
+                }
+                else
+                {
+                    absorb = 50;
+                }
+
+                // Reprisal
+                if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                {
+                    // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
+                    CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
+
+                    if (reprisalEffect != nullptr)
+                    {
+                        float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
+                        int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
+                        int32 blockedDamage = (damage * (100 - absorb)) / 100;
+                        int32 spikesDamage  = 0;
+
+                        if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
+                        {
+                            blockedDamage = (baseDamage * (100.f - absorb)) / 100.f;
+                        }
+
+                        spikesDamage = blockedDamage * (effectPower / 100.f);
+
+                        // Set Reprisal spike damage
+                        PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
+                    }
+                }
                 damage = (damage * absorb) / 100;
             }
         }
