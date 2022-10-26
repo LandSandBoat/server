@@ -72,20 +72,33 @@ local function souleaterBonus(attacker, wsParams)
     local bonus = 0
 
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
+        local boostPercent = 0.1
+        local currentHP    = attacker:getHP()
+        local removedHP    = 0
+        local souleaterMod = attacker:getMod(xi.mod.SOULEATER_EFFECT)         -- Gear modifier
+        local souleaterPot = attacker:getMod(xi.mod.SOULEATER_EFFECT_POTENCY) -- Augment modifier
+        local stalwartSoul = attacker:getMod(xi.mod.STALWART_SOUL) * 0.001
+        local drainPercent = 0.1 - stalwartSoul
 
         if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
+            boostPercent = boostPercent / 2
         end
 
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
+        if attacker:getObjType() == xi.objType.PC then
+            -- Check all gear slots for Enhances "Souleater" effect modifier and use the highest
+            souleaterMod = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT)
         end
 
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
+        -- Combine Souleater bonuses (Souleater Modifier + Souleater Augment)
+        boostPercent = boostPercent + ((souleaterMod + souleaterPot) * 0.01)
+
+        if currentHP > 10 then
+            -- Calculate damage bonus and HP to be removed per hit
+            bonus     = currentHP * boostPercent
+            removedHP = currentHP * drainPercent
+
+            attacker:delHP(wsParams.numHits * removedHP)
+        end
     end
 
     return bonus
@@ -1234,7 +1247,7 @@ function fSTR2(atk_str, def_vit, weapon_rank)
     return fSTR2
 end
 
-function generatePdif (cratiomin, cratiomax, melee)
+function generatePdif(cratiomin, cratiomax, melee)
     local pdif = math.random(cratiomin * 1000, cratiomax * 1000) / 1000
 
     if melee then

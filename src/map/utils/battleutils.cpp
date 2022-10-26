@@ -4456,18 +4456,33 @@ namespace battleutils
      ************************************************************************/
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage)
     {
-        // Souleater has no effect <10HP.
+        // https://www.bg-wiki.com/ffxi/Souleater
+        // Souleater has no effect < 10HP.
         if (m_PChar->GetMJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            // lost 10% current hp, converted to damage (displayed as just a strong regular hit)
-            float drainPercent = 0.1f;
+            float  boostPercent = 0.1f;
+            uint32 currentHP    = m_PChar->health.hp;
+            uint32 removedHP    = 0;
+            int16  souleaterMod = m_PChar->getMod(Mod::SOULEATER_EFFECT);
+            int16  souleaterPot = m_PChar->getMod(Mod::SOULEATER_EFFECT_POTENCY);
+            float  stalwartSoul = m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f;
+            float  drainPercent = 0.1f - stalwartSoul;
 
-            // at most 2% bonus from gear
-            auto gearBonusPercent = m_PChar->getMod(Mod::SOULEATER_EFFECT);
-            drainPercent          = drainPercent + std::min(0.02f, 0.01f * gearBonusPercent);
+            // Check all PC gear slots for the highest Souleater effect mod
+            if (m_PChar->objtype == TYPE_PC)
+            {
+                souleaterMod = charutils::getMaxGearMod(m_PChar, Mod::SOULEATER_EFFECT);
+            }
 
-            damage += (uint32)(m_PChar->health.hp * drainPercent);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * (drainPercent - m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f))));
+            // Combine Souleater bonuses (Souleater Modifier + Souleater Augment) and calculate damage bonus
+            boostPercent += (souleaterMod + souleaterPot) * 0.01f;
+            damage += (uint32)(currentHP * boostPercent);
+
+            // Calculate HP to be removed
+            removedHP = (uint32)(currentHP * drainPercent);
+
+            // Remove HP
+            m_PChar->addHP(-HandleStoneskin(m_PChar, removedHP));
         }
         else if (m_PChar->GetSJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {

@@ -100,8 +100,9 @@ end
 
 xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.LAST_RESORT_DURATION)
+    local subPower = (player:getMerit(xi.merit.DESPERATE_BLOWS) / 200) * player:getMod(xi.mod.ENHANCES_DESPERATE_BLOWS)
 
-    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, duration)
+    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, duration, 0, subPower)
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
@@ -123,14 +124,16 @@ xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
-    local jpValue = target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
+    local jpValue  = target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
+    local duration = 60 + jpValue
+    local subPower = (target:getMerit(xi.merit.MUTED_SOUL) / 10) * target:getMod(xi.mod.ENHANCES_MUTED_SOUL)
 
-    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, 60 + jpValue)
+    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, duration, 0, subPower)
 end
 
 xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)
     -- Applying Weapon Bash stun. Rate is said to be near 100%, so let's say 99%.
-    if (math.random()*100 < 99) then
+    if (math.random() * 100 < 99) then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
