@@ -540,7 +540,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
     if element == nil and skill ~= nil and skill >= 32 and skill <= 45 then -- Covers all magic
         element = spell:getElement()
     elseif element == nil then -- Cover mobskills
-        element = xi.element.NONE
+        element = xi.magic.ele.NONE
     end
 
     if spell ~= nil and skill >= 32 and skill <= 45 then
@@ -743,7 +743,15 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local sixteenthTrigger = false
     local eighthTrigger = false
     local quarterTrigger = false
-    local resMod = target:getMod(xi.magic.resistMod[element])
+    local resMod = 0
+
+    if element and element ~= xi.magic.ele.NONE then
+        resMod = target:getMod(xi.magic.resistMod[element])
+    end
+
+    if effectRes then
+        resMod = resMod + target:getMod(effectRes)
+    end
 
     if (target:isPC() or (target:isPet() and target:getMaster():getObjType() == xi.objType.PC)) and resMod >= 0 then
         if resMod > 145 then

@@ -670,7 +670,10 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local sixteenthTrigger = false
     local eighthTrigger = false
     local quarterTrigger = false
-    resMod = target:getMod(xi.magic.resistMod[element])
+
+    if element and element ~= xi.magic.ele.NONE then
+        resMod = target:getMod(xi.magic.resistMod[element])
+    end
 
     if (target:isPC() or (target:isPet() and target:getMaster():getObjType() == xi.objType.PC)) and resMod >= 0 then
         if resMod > 145 then
