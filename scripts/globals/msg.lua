@@ -135,6 +135,10 @@ xi.msg.basic =
     JA_MISS_2              = 324, -- <user> uses <ability>, but misses <target>. (includes target name)
     JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     JA_ATK_ENHANCED        = 285, -- <target>'s attacks are enhanced.
+    FORTIFIED_UNDEAD       = 286, -- <target> is fortified against undead.
+    FORTIFIED_ARCANA       = 287, -- <target> is fortified against arcana.
+    FORTIFIED_DEMONS       = 149, -- <target> is fortified against demons.
+    FORTIFIED_DRAGONS      = 151, -- <target> is fortified against dragons.
 
     -- Misc Other
     DEFEATS_TARG           = 6,   -- The <player> defeats <target>.

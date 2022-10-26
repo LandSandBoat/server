@@ -63,7 +63,13 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
         power = 5
     end
 
+    if player:getID() ~= target:getID() then
+        ability:setMsg(xi.msg.basic.FORTIFIED_ARCANA)
+    end
+
     target:addStatusEffect(xi.effect.ARCANE_CIRCLE, power, 0, duration)
+
+    return xi.effect.ARCANE_CIRCLE
 end
 
 xi.job_utils.dark_knight.useArcaneCrest = function(player, target, ability)
