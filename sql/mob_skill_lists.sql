@@ -3884,9 +3884,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope',4022,1358);
 INSERT INTO `mob_skill_lists` VALUES ('Zipacna',4023,678);
 INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',4024,397);
 INSERT INTO `mob_skill_lists` VALUES ('DynastBeetle',4025,341);
-INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',4026,452); -- Screwdriver
-INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',4027,453); -- Water Wall
-INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',4028,392); -- Ultrasonics
 INSERT INTO `mob_skill_lists` VALUES ('Blighting_Brand',4029,398);
 INSERT INTO `mob_skill_lists` VALUES ('Osschaart',4030,549); -- eyes on me
 INSERT INTO `mob_skill_lists` VALUES ('Osschaart',4030,550); -- hypnosis
