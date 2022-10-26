@@ -432,6 +432,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + bonusMagicAccuracy
     local magicHitRate  = 0
     local resMod        = 0 -- Some spells may possibly be non elemental.
+    local resModAdj     = 0
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = FormMagicBurst(spellElement, target)
@@ -471,6 +472,16 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         end
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
+
+        if resMod > 0 then
+            if resMod <= 100 then
+                resModAdj = math.floor(resMod / 100)
+            elseif resMod <= 145 then
+                resModAdj = 1 + (resMod - 100)
+            else
+                resModAdj = 46 + math.floor((resMod - 145) / 2)
+            end
+        end
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
@@ -622,10 +633,10 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     local magiceva = target:getMod(xi.mod.MEVA)
     if target:isPC() then
-        magiceva = magiceva + resMod
+        magiceva = magiceva + resModAdj
     else
         levelDiff = utils.clamp(levelDiff, 0, 200) -- Mobs should not have a disadvantage when targeted
-        magiceva =  magiceva + (4 * levelDiff) + resMod
+        magiceva =  magiceva + (4 * levelDiff) + resModAdj
     end
 
     -----------------------------------
@@ -656,22 +667,53 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         end
     end
 
+    local sixteenthTrigger = false
+    local eighthTrigger = false
+    local quarterTrigger = false
+    resMod = target:getMod(xi.magic.resistMod[element])
+
+    if (target:isPC() or (target:isPet() and target:getMaster():getObjType() == xi.objType.PC)) and resMod >= 0 then
+        if resMod > 145 then
+            sixteenthTrigger = true
+        end
+
+        if resMod > 100 then
+            eighthTrigger = true
+        end
+
+        quarterTrigger = true
+    end
+
+    if target:isMob() then
+        if evaMult < 1.50 then
+            quarterTrigger = true
+        end
+
+        if evaMult < 1.30 then
+            eighthTrigger = true
+        end
+
+        if evaMult < 1.15 then
+            sixteenthTrigger = true
+        end
+    end
+
     local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 3.00) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
     local resistVal = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half     = (1 - p)
+    local half      = (1 - p)
     local quart     = ((1 - p)^2)
     local eighth    = ((1 - p)^3)
     local sixteenth = ((1 - p)^4)
     local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= sixteenth then
+    if resvar <= sixteenth and sixteenthTrigger then
         resistVal = 0.0625
-    elseif resvar <= eighth then
+    elseif resvar <= eighth and eighthTrigger then
         resistVal = 0.125
-    elseif resvar <= quart then
+    elseif resvar <= quart and quarterTrigger then
         resistVal = 0.25
     elseif resvar <= half then
         resistVal = 0.5
