@@ -343,7 +343,9 @@ enum SUBEFFECT
     SUBEFFECT_DARKNESS_DAMAGE  = 8,  // 1-00010   17
     SUBEFFECT_SLEEP            = 9,  // 110010    19
     SUBEFFECT_POISON           = 10, // 1-01010   21
-    SUBEFFECT_PARALYSIS        = 11,
+    SUBEFFECT_ADDLE            = 11, // Verified shared group 1
+    SUBEFFECT_AMNESIA          = 11, // Verified shared group 1
+    SUBEFFECT_PARALYSIS        = 11, // Verified shared group 1
     SUBEFFECT_BLIND            = 12, // 1-00110   25
     SUBEFFECT_SILENCE          = 13,
     SUBEFFECT_PETRIFY          = 14,
@@ -351,13 +353,14 @@ enum SUBEFFECT
     SUBEFFECT_STUN             = 16,
     SUBEFFECT_CURSE            = 17,
     SUBEFFECT_DEFENSE_DOWN     = 18, // 1-01001   37
-    SUBEFFECT_EVASION_DOWN     = 18, // Same subeffect as DEFENSE_DOWN
-    SUBEFFECT_ATTACK_DOWN      = 18, // Same subeffect as DEFENSE_DOWN
+    SUBEFFECT_EVASION_DOWN     = 18, // Verified shared group 2
+    SUBEFFECT_ATTACK_DOWN      = 18, // Verified shared group 2
+    SUBEFFECT_SLOW             = 18, // Verified shared group 2
     SUBEFFECT_DEATH            = 19,
     SUBEFFECT_SHIELD           = 20,
     SUBEFFECT_HP_DRAIN         = 21, // 1-10101   43  This is retail correct animation
-    SUBEFFECT_MP_DRAIN         = 22, // This is retail correct animation
-    SUBEFFECT_TP_DRAIN         = 22, // Pretty sure this is correct, but might use same animation as HP drain.
+    SUBEFFECT_MP_DRAIN         = 22, // Verified shared group 3
+    SUBEFFECT_TP_DRAIN         = 22, // Verified shared group 3
     SUBEFFECT_HASTE            = 23,
     // There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
 
