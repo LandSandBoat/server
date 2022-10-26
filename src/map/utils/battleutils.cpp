@@ -2078,7 +2078,7 @@ namespace battleutils
             if (isBlocked)
             {
                 int16 blockRateMod = PDefender->getMod(Mod::SHIELDBLOCKRATE);
-                uint8 absorb = 100;
+                uint8 absorb       = 100;
                 if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
                 {
                     if (PDefender->objtype == TYPE_PC)
