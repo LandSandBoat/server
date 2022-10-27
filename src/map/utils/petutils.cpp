@@ -50,13 +50,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/controllers/pet_controller.h"
 #include "../ai/states/ability_state.h"
 
+#include "../mob_modifier.h"
 #include "../packets/char_abilities.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
 #include "../packets/entity_update.h"
 #include "../packets/message_standard.h"
 #include "../packets/pet_sync.h"
-#include "../mob_modifier.h"
 
 struct Pet_t
 {
