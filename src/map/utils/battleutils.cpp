@@ -898,13 +898,7 @@ namespace battleutils
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                     }
-                    else if (PDefender->objtype == TYPE_TRUST)
-                    {
-                        if (PDefender->getMod(Mod::SHIELDBLOCKRATE) > 0)
-                        {
-                            Action->spikesEffect = SUBEFFECT::SUBEFFECT_REPRISAL;
-                        }
-                    }
+
                     else
                     {
                         // only works on shield blocks
@@ -1832,15 +1826,22 @@ namespace battleutils
                 return base + skillModifier;
             }
         }
-        else if (PDefender->objtype == TYPE_TRUST && PDefender->getMod(Mod::SHIELDBLOCKRATE) > 0)
+        else if (PDefender->objtype == TYPE_TRUST)
         {
-            base = PDefender->getMod(Mod::SHIELDBLOCKRATE);
-            if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+            CMobEntity* PTrust = (CMobEntity*)PDefender;
+            if (PTrust->getMobMod(MOBMOD_CAN_SHIELD_BLOCK) > 0)
             {
-                base = base * 1.5f;
+                base = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+                if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                {
+                    base = base * 1.5f;
+                }
+                return base + palisadeMod;
             }
-            return base + palisadeMod;
-        }
+            else
+            {
+                return 0;
+            }
         else
         {
             return 0;
@@ -2077,8 +2078,7 @@ namespace battleutils
 
             if (isBlocked)
             {
-                int16 blockRateMod = PDefender->getMod(Mod::SHIELDBLOCKRATE);
-                uint8 absorb       = 100;
+                uint8 absorb = 100;
                 if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
                 {
                     if (PDefender->objtype == TYPE_PC)
@@ -2096,7 +2096,7 @@ namespace battleutils
                         }
                     }
                 }
-                else if (PDefender->objtype == TYPE_PET && blockRateMod > 0)
+                else if (PDefender->objtype == TYPE_PET)
                 {
                     absorb = 50;
 
@@ -2104,12 +2104,12 @@ namespace battleutils
                     if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
                         (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
                     {
-                        // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // If the pet blocked with a shield and has shield mastery, add shield mastery TP bonus
                         // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
                         PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                     }
                 }
-                else if (PDefender->objtype == TYPE_TRUST && blockRateMod > 0)
+                else if (PDefender->objtype == TYPE_TRUST)
                 {
                     absorb = 50;
 
@@ -2117,7 +2117,7 @@ namespace battleutils
                     if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
                         (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
                     {
-                        // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // If the trust blocked with a shield and has shield mastery, add shield mastery TP bonus
                         // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
                         PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                     }
