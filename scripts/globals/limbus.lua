@@ -463,35 +463,38 @@ function Limbus:onBattlefieldInitialise(battlefield)
     self:closeDoors()
 
     local ID = zones[battlefield:getZoneID()][self.name]
+
     -- Setup Item Crates
-    for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
-        local crate = GetNPCByID(crateID)
-        xi.limbus.hideCrate(crate)
-        crate:removeListener("TRIGGER_ITEM_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", utils.bind(self.handleOpenItemCrate, self))
+    if ID.npc.ITEM_CRATES then
+        for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
+            local crate = GetNPCByID(crateID)
+            xi.limbus.hideCrate(crate)
+            crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", utils.bind(self.handleOpenItemCrate, self))
+        end
     end
 
     -- Setup Time Crates
-    for i, crateID in ipairs(ID.npc.TIME_CRATES) do
-        local crate = GetNPCByID(crateID)
-        xi.limbus.hideCrate(crate)
-        crate:removeListener("TRIGGER_TIME_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", utils.bind(self.handleOpenTimeCrate, self))
+    if ID.npc.TIME_CRATES then
+        for i, crateID in ipairs(ID.npc.TIME_CRATES) do
+            local crate = GetNPCByID(crateID)
+            xi.limbus.hideCrate(crate)
+            crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", utils.bind(self.handleOpenTimeCrate, self))
+        end
     end
 
     -- Setup Recover Crates
     -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
-    for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
-        local crate = GetMobByID(crateID)
-        xi.limbus.hideCrate(crate)
-        crate:removeListener("TRIGGER_RECOVER_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", utils.bind(self.handleOpenRecoverCrate, self))
+    if ID.npc.RECOVER_CRATES then
+        for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
+            local crate = GetMobByID(crateID)
+            xi.limbus.hideCrate(crate)
+            crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", utils.bind(self.handleOpenRecoverCrate, self))
+        end
     end
 
     -- Setup Winning Loot Crate
     local crate = GetNPCByID(ID.npc.LOOT_CRATE)
     crate:resetLocalVars()
-    crate:removeListener("TRIGGER_LOOT_CRATE")
     crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
 
     -- Setup Linked Crates (can only open one)
@@ -501,7 +504,6 @@ function Limbus:onBattlefieldInitialise(battlefield)
             if mainCrate == nil then
                 mainCrate = GetMobByID(crateID)
             end
-            mainCrate:removeListener("TRIGGER_LINKED_CRATE")
             mainCrate:addListener("ON_TRIGGER", "TRIGGER_LINKED_CRATE", utils.bind(self.handleLinkedCrate, self))
         end
     end
