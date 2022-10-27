@@ -1055,9 +1055,10 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return (xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 2 or
-                            xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 3) and
-                            not player:hasKeyItem(xi.ki.JOKER_CARD)
+                            return player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD) == QUEST_ACCEPTED and
+                                (xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 2 or
+                                xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 3) and
+                                not player:hasKeyItem(xi.ki.JOKER_CARD)
                         end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.JOKER_CARD)
