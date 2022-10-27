@@ -1826,7 +1826,6 @@ namespace battleutils
                     // Check for Reprisal and adjust skill and block rate bonus multiplier
                     if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
                     {
-                        blockSkill   = blockSkill * 1.15f;
                         reprisalMult = 1.5f; // Default is 1.5x
 
                         // Adamas and Priwen set the multiplier to 3.0x while equipped
@@ -1836,10 +1835,8 @@ namespace battleutils
                         }
                     }
 
-                    skillModifier = (blockSkill - attackSkill) * 0.2325f;
-
                     // Add skill and Palisade bonuses
-                    base += skillModifier + palisadeMod;
+                    base += palisadeMod;
                     // Multiply by Reprisal's bonus
                     base = base * reprisalMult;
 
