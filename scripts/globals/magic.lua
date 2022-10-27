@@ -597,7 +597,6 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     local resMod = 0
     local dLvl = target:getMainLvl() - caster:getMainLvl()
     local dStatAcc = 0
-    local resModAdj = 0
 
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
@@ -688,17 +687,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
             xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], nil, caster)
         end
 
-        resMod = target:getMod(xi.magic.resistMod[element])
-
-        if resMod > 0 then
-            if resMod <= 100 then
-                resModAdj = math.floor(resMod / 100)
-            elseif resMod <= 145 then
-                resModAdj = 1 + (resMod - 100)
-            else
-                resModAdj = 46 + math.floor((resMod - 145) / 2)
-            end
-        end
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
@@ -707,10 +696,10 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     end
 
     if target:isPC() then
-        magiceva = target:getMod(xi.mod.MEVA) + resModAdj
+        magiceva = target:getMod(xi.mod.MEVA) + resMod
     else
         dLvl = utils.clamp(dLvl, 0, 200) -- Mobs should not have a disadvantage when targeted
-        magiceva = target:getMod(xi.mod.MEVA) + (4 * dLvl) + resModAdj
+        magiceva = target:getMod(xi.mod.MEVA) + (4 * dLvl) + resMod
     end
 
     bonusAcc = bonusAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY) + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
@@ -744,36 +733,45 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local eighthTrigger = false
     local quarterTrigger = false
     local resMod = 0
-    local playerTriggerPoints =
-    {
-        { sixteenthTrigger, resMod > 145 },
-        { eighthTrigger, resMod > 100 },
-        { quarterTrigger, resMod >= 0 },
-    }
-    local mobTriggerPoints =
-    {
-        { sixteenthTrigger, evaMult < 1.15 },
-        { eighthTrigger, evaMult < 1.30 },
-        { quarterTrigger, evaMult < 1.50 },
-    }
-    local selectedTable = mobTriggerPoints
 
     if element and element ~= xi.magic.ele.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
     end
 
-    if target and target:isPC() then
+    local playerTriggerPoints =
+    {
+        resMod > 200,
+        resMod > 100,
+        resMod >= 0,
+    }
+    local mobTriggerPoints =
+    {
+        evaMult < 1.15,
+        evaMult < 1.30,
+        evaMult < 1.50,
+    }
+    local selectedTable = mobTriggerPoints
+
+    if target:isPC() then
         selectedTable = playerTriggerPoints
     end
 
-    for _, valTable in pairs(selectedTable) do
-        valTable[1] = valTable[2]
+    if playerTriggerPoints[1] then
+        sixteenthTrigger = true
+    end
+
+    if selectedTable[2] then
+        eighthTrigger = true
+    end
+
+    if selectedTable[3] then
+        quarterTrigger = true
     end
 
     local baseRes = 1
 
     if effectRes and effectRes > 0 then
-        evaMult = evaMult - (effectRes / 100)
+        baseRes = baseRes - (effectRes / 100)
     end
 
     local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95)
