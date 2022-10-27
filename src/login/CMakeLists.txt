@@ -1,16 +1,15 @@
 set(SOURCES
     ${COMMON_SOURCES}
-    lobby.cpp
-    lobby.h
-    login_auth.cpp
-    login_auth.h
-    login_conf.cpp
-    login_conf.h
-    login_session.cpp
-    login_session.h
-    login.cpp
-    login.h
-)
+    main.cpp
+    connect_server.h)
+
+# Temporarily remove clashing old code
+# TODO: Remove this block
+list(REMOVE_ITEM SOURCES
+    ${CMAKE_SOURCE_DIR}/src/common/kernel.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/kernel.h
+    ${CMAKE_SOURCE_DIR}/src/common/socket.cpp
+    ${CMAKE_SOURCE_DIR}/src/common/socket.h)
 
 if(UNIX)
     set(resource "")
@@ -27,13 +26,6 @@ endif()
 if(WIN32)
     set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect)
 endif()
-
-target_compile_definitions(
-    xi_connect
-    PUBLIC
-    -DdsTCPSERV
-    -DDEBUGLOGLOGIN
-)
 
 target_link_libraries(xi_connect
     PUBLIC
