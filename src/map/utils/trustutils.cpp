@@ -693,6 +693,15 @@ namespace trustutils
             }
         }
 
+        if (mJob == JOB_PLD)
+        {
+            uint16 maxSkill = battleutils::GetMaxSkill(SKILLTYPE::SKILL_SHIELD, mJob, mLvl > 99 ? 99 : mLvl);
+            if (maxSkill != 0)
+            {
+                PTrust->WorkingSkills.skill[SKILLTYPE::SKILL_SHIELD] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
+            }
+        }
+
         PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
         PTrust->addModifier(Mod::EVA, mobutils::GetEvasion(PTrust));
         PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));

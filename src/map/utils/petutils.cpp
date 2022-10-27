@@ -711,6 +711,7 @@ namespace petutils
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
                 break;
             case FRAME_VALOREDGE:
+                PPet->setModifier(Mod::SHIELDBLOCKRATE, 45);
                 PPet->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
