@@ -56,6 +56,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/entity_update.h"
 #include "../packets/message_standard.h"
 #include "../packets/pet_sync.h"
+#include "../mob_modifier.h"
 
 struct Pet_t
 {
@@ -710,7 +711,7 @@ namespace petutils
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
                 break;
             case FRAME_VALOREDGE:
-                PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
+                PPet->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
                 break;
