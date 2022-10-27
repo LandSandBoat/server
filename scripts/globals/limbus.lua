@@ -418,7 +418,9 @@ Limbus.serverVar = ""
 
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
---  - name: The name of the Limbus area
+--  - name: The name of the Limbus area.
+--  - exitLocation: Where to boot the player out. This is specifically used for Apollyon areas.
+--  - timeExtension: How much time to grant when openning a time Armoury Crate.
 function Limbus:new(data)
     data.createsWornItem = false
     data.showTimer = false
@@ -428,6 +430,7 @@ function Limbus:new(data)
     obj.ID = zones[obj.zoneId][obj.name]
     obj.serverVar = "[" .. obj.name .. "]Time"
     obj.exitLocation = data.exitLocation or 0
+    obj.timeExtension = data.timeExtension or 0
     return obj
 end
 
@@ -538,13 +541,13 @@ function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
     player:messageSpecial(ID.text.HUM + 1)
 end
 
-function Limbus:extendTimeLimit(ID, battlefield, amount)
+function Limbus:extendTimeLimit(ID, battlefield)
     local timeLimit = battlefield:getTimeLimit()
-    battlefield:setTimeLimit(timeLimit + amount * 60)
+    battlefield:setTimeLimit(timeLimit + utils.minutes(self.timeExtension))
     local remaining = battlefield:getRemainingTime() / 60
 
     for _, player in pairs(battlefield:getPlayers()) do
-        player:messageSpecial(ID.text.TIME_EXTENDED, amount)
+        player:messageSpecial(ID.text.TIME_EXTENDED, self.timeExtension)
         player:messageSpecial(ID.text.TIME_LEFT, remaining)
     end
 end
@@ -557,7 +560,7 @@ end
 
 function Limbus:handleOpenTimeCrate(player, npc)
     npcUtil.openCrate(npc, function()
-        self:extendTimeLimit(zones[self.zoneId], player:getBattlefield(), self.ID.TIME_EXTENSIONS[npc:getID()])
+        self:extendTimeLimit(zones[self.zoneId], player:getBattlefield())
     end)
 end
 
