@@ -1849,7 +1849,8 @@ namespace battleutils
 
                     return blockRate;
                 }
-                else (PDefender->objtype == TYPE_TRUST)
+                else
+                (PDefender->objtype == TYPE_TRUST)
                 {
                     // Check for Reprisal and adjust skill and block rate bonus multiplier
                     if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
