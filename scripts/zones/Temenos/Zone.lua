@@ -9,14 +9,14 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetServerVariable("[Temenos_Northern_Tower]Time", 0)
-    SetServerVariable("[Temenos_Eastern_Tower]Time", 0)
-    SetServerVariable("[Temenos_Western_Tower]Time", 0)
-    SetServerVariable("[Central_Temenos_4th_Floor]Time", 0)
-    SetServerVariable("[Central_Temenos_3rd_Floor]Time", 0)
-    SetServerVariable("[Central_Temenos_2nd_Floor]Time", 0)
-    SetServerVariable("[Central_Temenos_1st_Floor]Time", 0)
-    SetServerVariable("[Central_Temenos_Basement]Time", 0)
+    SetServerVariable("[TEMENOS_NORTHERN_TOWER]Time", 0)
+    SetServerVariable("[TEMENOS_EASTERN_TOWER]Time", 0)
+    SetServerVariable("[TEMENOS_WESTERN_TOWER]Time", 0)
+    SetServerVariable("[CENTRAL_TEMENOS_4TH_FLOOR]Time", 0)
+    SetServerVariable("[CENTRAL_TEMENOS_3RD_FLOOR]Time", 0)
+    SetServerVariable("[CENTRAL_TEMENOS_2ND_FLOOR]Time", 0)
+    SetServerVariable("[CENTRAL_TEMENOS_1ST_FLOOR]Time", 0)
+    SetServerVariable("[CENTRAL_TEMENOS_BASEMENT]Time", 0)
 
     -- Temenos North Elevators
     zone:registerRegion(1,   340.000, 5,  376.000, 0, 0, 0) -- F1 -> F2

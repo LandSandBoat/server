@@ -9,7 +9,7 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetServerVariable("[Central_Apollyon]Time", 0)
+    SetServerVariable("[CENTRAL_APOLLYON]Time", 0)
     SetServerVariable("[CS_Apollyon]Time", 0)
     SetServerVariable("[NE_Apollyon]Time", 0)
     SetServerVariable("[NW_Apollyon]Time", 0)
