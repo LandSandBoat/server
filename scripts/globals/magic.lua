@@ -557,7 +557,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
 
     local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
 
-    return xi.magic.getMagicResist(p, target, params.element, effectRes)
+    return xi.magic.getMagicResist(p, target, element, effectRes)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
@@ -744,45 +744,36 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local eighthTrigger = false
     local quarterTrigger = false
     local resMod = 0
+    local playerTriggerPoints =
+    {
+        { sixteenthTrigger, resMod > 145 },
+        { eighthTrigger, resMod > 100 },
+        { quarterTrigger, resMod >= 0 },
+    }
+    local mobTriggerPoints =
+    {
+        { sixteenthTrigger, evaMult < 1.15 },
+        { eighthTrigger, evaMult < 1.30 },
+        { quarterTrigger, evaMult < 1.50 },
+    }
+    local selectedTable = mobTriggerPoints
 
     if element and element ~= xi.magic.ele.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
     end
 
-    if effectRes then
-        resMod = resMod + target:getMod(effectRes)
+    if target and target:isPC() then
+        selectedTable = playerTriggerPoints
     end
 
-    if (target:isPC() or (target:isPet() and target:getMaster():getObjType() == xi.objType.PC)) and resMod >= 0 then
-        if resMod > 145 then
-            sixteenthTrigger = true
-        end
-
-        if resMod > 100 then
-            eighthTrigger = true
-        end
-
-        quarterTrigger = true
-    end
-
-    if target:isMob() then
-        if evaMult < 1.50 then
-            quarterTrigger = true
-        end
-
-        if evaMult < 1.30 then
-            eighthTrigger = true
-        end
-
-        if evaMult < 1.15 then
-            sixteenthTrigger = true
-        end
+    for _, valTable in pairs(selectedTable) do
+        valTable[1] = valTable[2]
     end
 
     local baseRes = 1
 
-    if effectRes ~= nil then
-        baseRes = baseRes - (effectRes / 100)
+    if effectRes and effectRes > 0 then
+        evaMult = evaMult - (effectRes / 100)
     end
 
     local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95)
