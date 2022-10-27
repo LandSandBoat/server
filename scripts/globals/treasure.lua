@@ -621,11 +621,12 @@ xi.treasure.treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getCharVar("needs_crawler_blood") == 1 end,
-                        code = function(player)
-                            npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD)
-                            player:setCharVar("needs_crawler_blood", 0)
+                        test = function(player)
+                            return xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2
+                            and player:hasKeyItem(xi.ki.OLD_BOOTS)
+                            and not player:hasKeyItem(xi.ki.CRAWLER_BLOOD)
                         end,
+                        code = function(player) npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD) end,
                     },
                 },
                 points =
