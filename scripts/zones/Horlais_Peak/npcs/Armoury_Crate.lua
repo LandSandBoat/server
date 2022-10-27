@@ -715,9 +715,9 @@ local loot =
 
         {
             { itemid =     0, droprate = 392 }, -- Nothing
-            { itemid = 19026, droprate = 354 }, -- Spear Strap
-            { itemid = 19024, droprate = 165 }, -- Sword Strap
-            { itemid = 19025, droprate =  89 }, -- Pole Grip
+            { itemid = xi.items.SPEAR_STRAP, droprate = 354 },
+            { itemid = xi.items.SWORD_STRAP, droprate = 165 },
+            { itemid = xi.items.POLE_GRIP,   droprate =  89 },
         },
 
         {
@@ -841,11 +841,11 @@ local loot =
 
         {
             { itemid = 13402, droprate = 101 }, -- Cassie Earring
-            { itemid = 19027, droprate =  43 }, -- Claymore Grip
             { itemid =   920, droprate = 275 }, -- Malboro Vine
             { itemid =  1013, droprate = 275 }, -- Morbolger Vine
-            { itemid = 19025, droprate = 203 }, -- Pole Grip
-            { itemid = 19026, droprate = 116 }, -- Spear Strap
+            { itemid = xi.items.CLAYMORE_GRIP, droprate =  43 },
+            { itemid = xi.items.POLE_GRIP,     droprate = 203 },
+            { itemid = xi.items.SPEAR_STRAP,   droprate = 116 },
         },
 
         {
