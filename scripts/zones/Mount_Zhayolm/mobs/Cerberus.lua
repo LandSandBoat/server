@@ -8,7 +8,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     -- prevent cheesiness
     mob:setMod(xi.mod.SILENCERES, 50)
     mob:setMod(xi.mod.STUNRES, 50)
@@ -18,6 +18,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.POISONRES, 100)
     mob:setMod(xi.mod.PARALYZERES, 100)
     mob:setMod(xi.mod.LULLABYRES, 10000)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
 end
 
