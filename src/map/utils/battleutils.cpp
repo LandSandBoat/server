@@ -1878,7 +1878,7 @@ namespace battleutils
                     return blockRate;
                 }
             }
-        }        
+        }
         else
         {
             return 0;
