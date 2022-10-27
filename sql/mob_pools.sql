@@ -7118,6 +7118,8 @@ INSERT INTO `mob_pools` VALUES (7055,'Armoury_Crate','Armoury_Crate',183,0x0000C
 -- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja 
 INSERT INTO `mob_pools` VALUES (7056,'Hundredfaced_clone','Hundredfaced_Hapool_Ja',176,0x0600530600000000000000000000000000000000,13,13,10,280,100,0,1,1,1,2,0,32,0,159,4,0,7,0,0,176,176);
 
+INSERT INTO `mob_pools` VALUES (7057,'Quasilumin','Quasilumin',507,0x0000150400000000000000000000000000000000,1,0,0,240,100,0,0,0,0,64,0,8,0,129,0,0,0,2,0,0,507);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
