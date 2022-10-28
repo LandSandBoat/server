@@ -394,7 +394,7 @@ function xi.limbus.hideCrate(crate)
 end
 
 function xi.limbus.spawnFrom(mob, crateID)
-    local crate = GetNPCByID(crateID)
+    local crate = GetEntityByID(crateID)
     crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
     crate:setStatus(xi.status.NORMAL)
     crate:setUntargetable(false)
@@ -470,7 +470,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
     -- Setup Item Crates
     if ID.npc.ITEM_CRATES then
         for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
-            local crate = GetNPCByID(crateID)
+            local crate = GetEntityByID(crateID)
             xi.limbus.hideCrate(crate)
             crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", utils.bind(self.handleOpenItemCrate, self))
         end
@@ -479,7 +479,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
     -- Setup Time Crates
     if ID.npc.TIME_CRATES then
         for i, crateID in ipairs(ID.npc.TIME_CRATES) do
-            local crate = GetNPCByID(crateID)
+            local crate = GetEntityByID(crateID)
             xi.limbus.hideCrate(crate)
             crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", utils.bind(self.handleOpenTimeCrate, self))
         end
@@ -489,24 +489,21 @@ function Limbus:onBattlefieldInitialise(battlefield)
     -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
     if ID.npc.RECOVER_CRATES then
         for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
-            local crate = GetMobByID(crateID)
+            local crate = GetEntityByID(crateID)
             xi.limbus.hideCrate(crate)
             crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", utils.bind(self.handleOpenRecoverCrate, self))
         end
     end
 
     -- Setup Winning Loot Crate
-    local crate = GetNPCByID(ID.npc.LOOT_CRATE)
-    crate:resetLocalVars()
+    local crate = GetEntityByID(ID.npc.LOOT_CRATE)
+    xi.limbus.hideCrate(crate)
     crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
 
     -- Setup Linked Crates (can only open one)
     if ID.LINKED_CRATES then
         for crateID, _ in pairs(ID.LINKED_CRATES) do
-            local mainCrate = GetNPCByID(crateID)
-            if mainCrate == nil then
-                mainCrate = GetMobByID(crateID)
-            end
+            local mainCrate = GetEntityByID(crateID)
             mainCrate:addListener("ON_TRIGGER", "TRIGGER_LINKED_CRATE", utils.bind(self.handleLinkedCrate, self))
         end
     end
@@ -552,29 +549,29 @@ function Limbus:extendTimeLimit(ID, battlefield)
     end
 end
 
-function Limbus:handleOpenItemCrate(player, npc)
-    npcUtil.openCrate(npc, function()
-        self:handleLootRolls(player:getBattlefield(), self.loot[npc:getID()], npc)
+function Limbus:handleOpenItemCrate(player, crate)
+    npcUtil.openCrate(crate, function()
+        self:handleLootRolls(player:getBattlefield(), self.loot[crate:getID()], crate)
     end)
 end
 
-function Limbus:handleOpenTimeCrate(player, npc)
-    npcUtil.openCrate(npc, function()
+function Limbus:handleOpenTimeCrate(player, crate)
+    npcUtil.openCrate(crate, function()
         self:extendTimeLimit(zones[self.zoneId], player:getBattlefield())
     end)
 end
 
-function Limbus:handleOpenRecoverCrate(player, npc)
-    npcUtil.openCrate(npc, function()
+function Limbus:handleOpenRecoverCrate(player, crate)
+    npcUtil.openCrate(crate, function()
         -- Use wz_recover_all to heal players
-        npc:useMobAbility(1531, player)
+        crate:useMobAbility(1531, player)
     end)
 end
 
-function Limbus:handleOpenLootCrate(player, npc)
-    npcUtil.openCrate(npc, function()
+function Limbus:handleOpenLootCrate(player, crate)
+    npcUtil.openCrate(crate, function()
         local battlefield = player:getBattlefield()
-        self:handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], npc)
+        self:handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], crate)
         battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
         battlefield:setStatus(xi.battlefield.status.WON)
     end)
@@ -582,10 +579,7 @@ end
 
 function Limbus:handleLinkedCrate(player, npc)
     for _, crateID in ipairs(self.ID.LINKED_CRATES[npc:getID()]) do
-        local crate = GetNPCByID(crateID)
-        if crate == nil then
-            crate = GetMobByID(crateID)
-        end
+        local crate = GetEntityByID(crateID)
         crate:setLocalVar("opened", 1)
         npcUtil.disappearCrate(crate)
     end
