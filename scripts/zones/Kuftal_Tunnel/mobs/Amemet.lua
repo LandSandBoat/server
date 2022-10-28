@@ -79,59 +79,59 @@ local pathBb =
 local pathFind =
 {
     ['pathFind1'] = function(mob, reversePath)
-        local path = {}
+        local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
-            local pathRnd = math.random(0,1)
-            local reverseCheck = math.random(0,2)
+            local pathRnd = math.random(0, 1)
+            local reverseCheck = math.random(0, 2)
             if pathRnd == 1 then
                 mob:setLocalVar("mobPath", 2)
                 if reverseCheck ~= 2 then
                     mob:setLocalVar("reversePath", 0)
-                    path = pathA
+                    pathNodes = pathA
                 else
                     mob:setLocalVar("reversePath", 1)
-                    path = pathAb
+                    pathNodes = pathAb
                 end
             else
                 mob:setLocalVar("mobPath", 4)
                 if reverseCheck ~= 2 then
                     mob:setLocalVar("reversePath", 0)
-                    path = pathB
+                    pathNodes = pathB
                 else
                     mob:setLocalVar("reversePath", 1)
-                    path = pathBb
+                    pathNodes = pathBb
                 end
             end
         end
-        return path
+        return pathNodes
     end,
     ['pathFind2'] = function(mob, reversePath)
-        local path = {}
+        local pathNodes = {}
         mob:setLocalVar("mobPath", 3)
         if reversePath == 0 then
-            path = pathAb
+            pathNodes = pathAb
         else
-            path = pathA
+            pathNodes = pathA
         end
-        return path
+        return pathNodes
     end,
     ['pathFind3'] = function(mob, reversePath)
-        local path = {}
+        local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 1)
-            path = pathStart
+            pathNodes = pathStart
         end
-        return path
+        return pathNodes
     end,
     ['pathFind4'] = function(mob, reversePath)
-        local path = {}
+        local pathNodes = {}
         mob:setLocalVar("mobPath", 3)
         if reversePath == 0 then
-            path = pathBb
+            pathNodes = pathBb
         else
-            path = pathB
+            pathNodes = pathB
         end
-        return path
+        return pathNodes
     end,
 }
 
@@ -146,15 +146,15 @@ entity.onPath = function(mob)
         if mob:getLocalVar("isPaused") ~= 0 then
             local currentPath = "pathFind" .. mob:getLocalVar("mobPath")
             local reversePath = mob:getLocalVar("reversePath")
-            local path = {}
+            local pathNodes = {}
             mob:setLocalVar("isPaused", 0)
             mob:clearPath()
-            path = pathFind[currentPath](mob, reversePath)
+            pathNodes = pathFind[currentPath](mob, reversePath)
             local newReverse = mob:getLocalVar("reversePath")
             if newReverse == 0 then
-                mob:pathThrough(path, xi.path.flag.COORDS)
+                mob:pathThrough(pathNodes, xi.path.flag.COORDS)
             else
-                mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
+                mob:pathThrough(pathNodes, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
             end
         else
             -- Amemet has a chance to pause, if successful he will wait
@@ -164,12 +164,12 @@ entity.onPath = function(mob)
             local y = mob:getYPos()
             local z = mob:getZPos()
             local pauses = {}
-            local pauseRnd = math.random(0,2)
+            local pauseRnd = math.random(0, 2)
             if pauseRnd == 2 then
-                local count = math.random(0,6)
+                local count = math.random(0, 6)
                 for i = 0, count do
-                    local wait = math.random(4000,6000)
-                    pauses[i+1] =
+                    local wait = math.random(4000, 6000)
+                    pauses[i + 1] =
                     {
                         x = x, y = y, z = z, wait = wait
                     }
@@ -177,7 +177,7 @@ entity.onPath = function(mob)
             else
                 local count = 1
                 for i = 0, count do
-                    pauses[i+1] =
+                    pauses[i + 1] =
                     {
                         x = x, y = y, z = z
                     }

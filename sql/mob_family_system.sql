@@ -537,6 +537,7 @@ INSERT INTO `mob_family_system` VALUES (509,'Shredded_Samson',28,'Ghost',19,'Und
 INSERT INTO `mob_family_system` VALUES (510,'Punctured_Percy',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
 INSERT INTO `mob_family_system` VALUES (511,'Mauled_Murdock',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
 INSERT INTO `mob_family_system` VALUES (512,'Cockatrice_Ziz',43,'Cockatrice',8,'Bird',1,40,118,140,4,5,3,4,4,4,4,1,3,1,5,4,1,0);
+INSERT INTO `mob_family_system` VALUES (513,'Quasilumin',15,'Luminian',0,'Unclassified',1,25,100,100,5,5,5,5,5,5,5,5,5,5,5,0,2,0);
 
 -- Family IDs 10,22,50,96,111,317-318,405,412-434,439-443 available for use
 

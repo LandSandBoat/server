@@ -67,7 +67,7 @@ end
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
 instanceObject.onTrack = function(instance)
-    local path =
+    local pathNodes =
     {
         [0] =
         {
@@ -327,7 +327,7 @@ instanceObject.onTrack = function(instance)
     local missionActive = mob:getLocalVar("missionActive")
     local pathLeg = mob:getLocalVar("pathLeg")
     local pathPoint = mob:getLocalVar("pathPoint")
-    pathPoint = utils.clamp(pathPoint, 1, #path[pathLeg]) -- pathPoint cannot be 0
+    pathPoint = utils.clamp(pathPoint, 1, #pathNodes[pathLeg]) -- pathPoint cannot be 0
     local pathProgressMask = mob:getLocalVar("pathProgressMask")
         -- 0 = Incomplete  1 = Complete
         -- bit 0: Mission Start [1]
@@ -467,7 +467,7 @@ instanceObject.onTrack = function(instance)
     end
 
     if moveLock == 1 and constantMove == 1 then
-        if mob:atPoint(path[pathLeg][pathPoint]) then
+        if mob:atPoint(pathNodes[pathLeg][pathPoint]) then
             if moveStatus == 0 then
                 mob:setLocalVar("pathPoint", pathPoint + 1)
             else
@@ -495,12 +495,12 @@ instanceObject.onTrack = function(instance)
             end
 -- Pathing Control Conditions
             if moveStatus == 0 then
-                if mob:atPoint(path[0][#path[0]]) and bit.band(pathProgressMask, bit.lshift(1, 0)) == 0 then
+                if mob:atPoint(pathNodes[0][#pathNodes[0]]) and bit.band(pathProgressMask, bit.lshift(1, 0)) == 0 then
                     mob:setLocalVar("pathLeg", 1)
                     mob:setLocalVar("pathPoint", 19)
                     mob:setLocalVar("pathProgressMask", 1)
 -- Top Room Option Conditions
-                elseif mob:atPoint(path[1][30]) and bit.band(pathProgressMask, bit.lshift(1, 1)) == 0 then
+                elseif mob:atPoint(pathNodes[1][30]) and bit.band(pathProgressMask, bit.lshift(1, 1)) == 0 then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -511,7 +511,7 @@ instanceObject.onTrack = function(instance)
                         end)
                         mob:setLocalVar("lockToggle", 1)
                     end
-                elseif mob:atPoint(path[topRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 1)) == 0 then
+                elseif mob:atPoint(pathNodes[topRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 1)) == 0 then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -524,7 +524,7 @@ instanceObject.onTrack = function(instance)
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Middle Room Option Conditions
-                elseif mob:atPoint(path[1][34]) and bit.band(pathProgressMask, bit.lshift(1, 2)) == 0 then
+                elseif mob:atPoint(pathNodes[1][34]) and bit.band(pathProgressMask, bit.lshift(1, 2)) == 0 then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -535,7 +535,7 @@ instanceObject.onTrack = function(instance)
                         end)
                         mob:setLocalVar("lockToggle", 1)
                     end
-                elseif mob:atPoint(path[middleRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 2)) == 0 then
+                elseif mob:atPoint(pathNodes[middleRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 2)) == 0 then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -548,7 +548,7 @@ instanceObject.onTrack = function(instance)
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Bottom Room Option Conditions
-                elseif mob:atPoint(path[1][38]) and bit.band(pathProgressMask, bit.lshift(1, 3)) == 0 then
+                elseif mob:atPoint(pathNodes[1][38]) and bit.band(pathProgressMask, bit.lshift(1, 3)) == 0 then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -559,7 +559,7 @@ instanceObject.onTrack = function(instance)
                         end)
                         mob:setLocalVar("lockToggle", 1)
                     end
-                elseif mob:atPoint(path[bottomRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 3)) == 0 then
+                elseif mob:atPoint(pathNodes[bottomRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 3)) == 0 then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -572,11 +572,11 @@ instanceObject.onTrack = function(instance)
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Lower Fork Option Conditions
-                elseif mob:atPoint(path[1][#path[1]]) then
+                elseif mob:atPoint(pathNodes[1][#pathNodes[1]]) then
                     mob:setLocalVar("pathLeg", lowerForkOption)
                     mob:setLocalVar("pathPoint", 1)
 -- Mission Complete Conditions
-                elseif mob:atPoint(path[lowerForkOption][#path[lowerForkOption]]) then
+                elseif mob:atPoint(pathNodes[lowerForkOption][#pathNodes[lowerForkOption]]) then
                 -- mob reached the escort point - PASS mission
                     mob:showText(mob, ID.text.EXCALIACE_END1)
                     mob:showText(mob, ID.text.EXCALIACE_END2)
@@ -586,29 +586,29 @@ instanceObject.onTrack = function(instance)
                 end
  -- else moveStatus == 1 (Running)
             else
-                if mob:atPoint(path[1][1]) then
+                if mob:atPoint(pathNodes[1][1]) then
                 -- mob reached the escape point - FAIL mission
                     mob:showText(mob, ID.text.EXCALIACE_ESCAPE)
                     mob:setLocalVar("missionActive", 3) -- End Mission
                     mob:setLocalVar("moveLock", 0) -- stop Movement and condition checks
                     instance:fail()
-                elseif mob:atPoint(path[topRoomsOption][1]) then
+                elseif mob:atPoint(pathNodes[topRoomsOption][1]) then
                     mob:setLocalVar("pathLeg", 1)
                     mob:setLocalVar("pathPoint", 30)
-                elseif mob:atPoint(path[middleRoomsOption][1]) then
+                elseif mob:atPoint(pathNodes[middleRoomsOption][1]) then
                     mob:setLocalVar("pathLeg", 1)
                     mob:setLocalVar("pathPoint", 34)
-                elseif mob:atPoint(path[bottomRoomsOption][1]) then
+                elseif mob:atPoint(pathNodes[bottomRoomsOption][1]) then
                     mob:setLocalVar("pathLeg", 1)
                     mob:setLocalVar("pathPoint", 38)
-                elseif mob:atPoint(path[lowerForkOption][1]) then
+                elseif mob:atPoint(pathNodes[lowerForkOption][1]) then
                     mob:setLocalVar("pathLeg", 1)
-                    mob:setLocalVar("pathPoint", #path[1])
+                    mob:setLocalVar("pathPoint", #pathNodes[1])
                 end
             end
  -- mob not at assigned point yet so move there
         else
-            mob:pathThrough(path[pathLeg][pathPoint])
+            mob:pathThrough(pathNodes[pathLeg][pathPoint])
         end
     end
 end

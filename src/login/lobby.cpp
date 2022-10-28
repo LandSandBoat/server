@@ -20,7 +20,9 @@
 */
 
 #include "common/logging.h"
+#include "common/lua.h"
 #include "common/md52.h"
+#include "common/settings.h"
 #include "common/socket.h"
 #include "common/utils.h"
 
@@ -640,7 +642,7 @@ int32 lobbyview_parse(int32 fd)
             break;
             case 0x14:
             {
-                if (!settings::get<bool>("map.CHARACTER_DELETION"))
+                if (!settings::get<bool>("login.CHARACTER_DELETION"))
                 {
                     int32         sendsize = 0x28;
                     unsigned char MainReservePacket[0x28];
@@ -779,42 +781,86 @@ int32 lobbyview_parse(int32 fd)
                     std::memset(CharName, 0, sizeof(CharName));
                     std::memcpy(CharName, sessions[fd]->rdata.data() + 32, sizeof(CharName));
 
-                    // find assigns
-                    const char* fmtQuery = "SELECT charname FROM chars WHERE charname LIKE '%s'";
+                    // Sanitize name
+                    char escapedCharName[16 * 2 + 1];
+                    sql->EscapeString(escapedCharName, CharName);
 
-                    std::string myNameIs(&CharName[0]);
-                    bool        invalidName = false;
-                    for (auto letters : myNameIs)
+                    std::optional<std::string> invalidNameReason = std::nullopt;
+
+                    // Check for invalid characters
+                    std::string nameStr(&escapedCharName[0]);
+                    for (auto letters : nameStr)
                     {
                         if (!std::isalpha(letters))
                         {
-                            invalidName = true;
+                            invalidNameReason = "Invalid characters present in name.";
                             break;
                         }
                     }
 
-                    char escapedCharName[16 * 2 + 1];
-                    sql->EscapeString(escapedCharName, CharName);
-                    if (sql->Query(fmtQuery, escapedCharName) == SQL_ERROR)
+                    // Check for invalid length name
+                    // NOTE: The client checks for this. This is to guard
+                    // against packet injection
+                    if (nameStr.size() < 3 || nameStr.size() > 15)
                     {
-                        do_close_lobbyview(sd, fd);
-                        return -1;
+                        invalidNameReason = "Invalid name length.";
                     }
 
-                    if (sql->NumRows() != 0 || invalidName)
+                    // Check if the name is already in use by another character
+                    if (sql->Query("SELECT charname FROM chars WHERE charname LIKE '%s'", escapedCharName) == SQL_ERROR)
                     {
-                        if (invalidName)
+                        invalidNameReason = "Internal entity name query failed.";
+                    }
+                    else if (sql->NumRows() != 0)
+                    {
+                        invalidNameReason = "Name already in use.";
+                    }
+
+                    // (optional) Check if the name is in use by NPC or Mob entities
+                    if (settings::get<bool>("login.DISABLE_MOB_NPC_CHAR_NAMES"))
+                    {
+                        auto query =
+                            "WITH results AS "
+                            "( "
+                            "    SELECT polutils_name AS `name` FROM npc_list "
+                            "    UNION "
+                            "    SELECT packet_name AS `name` FROM mob_pools "
+                            ") "
+                            "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '');";
+
+                        if (sql->Query(query, nameStr) == SQL_ERROR)
                         {
-                            ShowWarning("lobbyview_parse: character name <%s> invalid", CharName);
+                            invalidNameReason = "Internal entity name query failed";
                         }
-                        else
+                        else if (sql->NumRows() != 0)
                         {
-                            ShowWarning("lobbyview_parse: character name <%s> already taken", CharName);
+                            invalidNameReason = "Name already in use.";
                         }
-                        // Send error code
-                        LOBBBY_ERROR_MESSAGE(ReservePacket);
+                    }
+
+                    // (optional) Check if the name contains any words on the bad word list
+                    auto badWordsList = lua["xi"]["settings"]["login"]["BANNED_WORDS_LIST"].get<sol::table>();
+                    if (badWordsList.valid())
+                    {
+                        auto potentialName = to_upper(nameStr);
+                        for (auto entry : badWordsList)
+                        {
+                            auto badWord = to_upper(entry.second.as<std::string>());
+                            if (potentialName.find(badWord) != std::string::npos)
+                            {
+                                invalidNameReason = fmt::format("Name matched with bad words list <{}>.", badWord);
+                            }
+                        }
+                    }
+
+                    if (invalidNameReason.has_value())
+                    {
+                        ShowWarning("lobbyview_parse: new character name error <%s>: %s", CharName, (*invalidNameReason).c_str());
+
+                        // Send error code:
                         // The character name you entered is unavailable. Please choose another name.
-                        // A message is displayed in Japanese
+                        // TODO: This message is displayed in Japanese, needs fixing.
+                        LOBBBY_ERROR_MESSAGE(ReservePacket);
                         ref<uint16>(ReservePacket, 32) = 313;
                         std::memcpy(MainReservePacket, ReservePacket, sendsize);
                     }
