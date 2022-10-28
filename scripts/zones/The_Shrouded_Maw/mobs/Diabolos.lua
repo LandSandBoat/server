@@ -33,7 +33,7 @@ entity.onMobSpawn = function(mob)
         xi.mix.jobSpecial.config(mob, {
             specials =
             {
-                { id = 1911, hpp = math.random(30,55) }, -- uses Ruinous Omen once while near 50% HPP.
+                { id = 1911, hpp = math.random(30, 55) }, -- uses Ruinous Omen once while near 50% HPP.
             },
         })
     end
@@ -68,7 +68,7 @@ entity.onMobFight = function(mob, target)
             { "byc1", "bya1", "byb1" },
         }
 
-    local hpp = math.floor(mob:getHP()*100/mob:getMaxHP())
+    local hpp = math.floor(mob:getHP() * 100 / mob:getMaxHP())
     if hpp < trigger then   -- Trigger the tile drop events
         mob:setLocalVar("TileTriggerHPP", -1)            -- Prevent tiles from being dropped twice
         local tileBase = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (area) * 8
@@ -91,6 +91,8 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    -- Win happens on death instead of despawn
+    mob:getBattlefield():win()
 end
 
 return entity

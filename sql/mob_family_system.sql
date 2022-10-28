@@ -523,7 +523,7 @@ INSERT INTO `mob_family_system` VALUES (495,'Astral_Flow_Pet',0,'Astral_Flow_Pet
 INSERT INTO `mob_family_system` VALUES (496,'Mandragora-Chaneque',99,'Mandragora',17,'Plantoid',0,40,107,120,5,3,4,4,4,4,4,1,3,1,2,4,6,0);
 INSERT INTO `mob_family_system` VALUES (497,'Cloud_of_Darkness',78,'Supreme_Being',0,'Unclassified',3,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0,3,0);
 INSERT INTO `mob_family_system` VALUES (498,'Doll',53,'Doll',3,'Arcana',1,40,108,90,1,3,3,5,6,6,5,1,3,1,3,2,33,0);
-INSERT INTO `mob_family_system` VALUES (499,'Wanderer-Stray',145,'Wanderer',12,'Empty',0,40,20,90,1,3,5,5,6,6,5,1,3,1,3,0,2,0);
+INSERT INTO `mob_family_system` VALUES (499,'Stray',145,'Wanderer',12,'Empty',0,40,20,90,1,3,5,5,6,6,5,1,3,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (500,'Golem-Mokkurkalfi',79,'Golem',3,'Arcana',1,40,130,130,2,3,3,5,3,6,5,1,2,1,3,7,34,0);
 INSERT INTO `mob_family_system` VALUES (501,'Doll-Nio_A-Nio_Hum',53,'Doll',3,'Arcana',1,40,108,90,1,3,3,5,6,6,5,1,3,1,3,2,34,0);
 INSERT INTO `mob_family_system` VALUES (502,'Evil_Weapon-Shikigami',6,'Evil_Weapon',3,'Arcana',0,40,105,120,1,3,4,3,3,3,4,1,5,1,3,3,32,0);

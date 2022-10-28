@@ -9,6 +9,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(xi.mod.STORETP, 100)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
@@ -23,11 +24,8 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getTP() >= 2000 then
-        mob:useMobAbility()
-    end
     if mob:getHPP() <= 35 then
-       mob:setMod(xi.mod.STORETP, 250)
+        mob:setMod(xi.mod.STORETP, 250)
     end
 end
 

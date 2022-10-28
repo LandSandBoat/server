@@ -46,12 +46,17 @@ spellObject.onSpellCast = function(caster, target, spell)
         return dmg
     end
 
+    -- Don't drain more HP than the target has left
+    if target:getHP() < dmg then
+        dmg = target:getHP()
+    end
+
     dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()
-    local overHeal = (leftOver/caster:getMaxHP())*100
+    local overHeal = (leftOver / caster:getMaxHP()) * 100
     if caster:hasStatusEffect(xi.effect.WEAKNESS) then
-        overHeal = (leftOver/(caster:getBaseHP() + caster:getMod(xi.mod.HP)))*100
+        overHeal = (leftOver / (caster:getBaseHP() + caster:getMod(xi.mod.HP))) * 100
     end
 
     if leftOver > 0 then
