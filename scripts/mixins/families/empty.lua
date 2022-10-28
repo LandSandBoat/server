@@ -10,7 +10,7 @@ g_mixins = g_mixins or {}
 local setModel = function(mob, skin)
     -- Strays in Vahzl can also spawn as Weeper and Seether models
     if mob:getZone():getID() == xi.zone.PROMYVION_VAHZL and mob:getName() == "Stray" then
-        local chance = math.random(1,10)
+        local chance = math.random(1, 10)
         if chance == 1 then -- Weeper
             mob:setLocalVar("strayType", 1)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 256)

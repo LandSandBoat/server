@@ -25,9 +25,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Ingester - ENM: You are what you eat
     if mob:getPool() == 2080 then
         for i = 4, 1, -1 do
-            if not GetMobByID(id+i):isSpawned() then
-                GetMobByID(id+i):setSpawn(pos.x, pos.y, pos.z)
-                SpawnMob(id+i):updateEnmity(mob:getTarget())
+            if not GetMobByID(id + i):isSpawned() then
+                GetMobByID(id + i):setSpawn(pos.x, pos.y, pos.z)
+                SpawnMob(id + i):updateEnmity(mob:getTarget())
                 break
             end
         end

@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime and mob:getHPP() < 95 then
+        if mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime and mob:getHPP() < 95 then
             mob:useMobAbility(694)
             mob:setLocalVar("twohourTime", math.random((mob:getBattleTime() / 15) + 12, (mob:getBattleTime() / 15) + 16))
         elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
