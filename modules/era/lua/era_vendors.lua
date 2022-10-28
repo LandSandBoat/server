@@ -10,6 +10,9 @@ local m = Module:new("era_vendors")
 xi = xi or {}
 xi.eraShops = xi.eraShops or {}
 
+-- --------------------------------
+-- Bastok
+-- --------------------------------
 --Bastok Markets
 xi.eraShops.Mjoll =
 {
@@ -18,6 +21,132 @@ xi.eraShops.Mjoll =
     17320,     7, 3, -- Iron Arrow
     5069,    199, 3, -- Scroll of Dark Threnody
     5063,   1000, 3, -- Scroll of Ice Threnody
+}
+
+xi.eraShops.Charging_Chocobo =
+{
+    12801, 58738, 1,    -- Mythril Cuisses
+    12929, 36735, 1,    -- Mythril Leggings
+    12817, 14131, 2,    -- Brass Cuisses
+    12800, 34776, 2,    -- Cuisses
+    12945,  8419, 2,    -- Brass Greaves
+    12928, 21859, 2,    -- Plate Leggings
+    13080, 16891, 2,    -- Gorget
+    12832,   191, 3,    -- Bronze Subligar
+    12816,  1646, 3,    -- Scale Cuisses
+    12960,   117, 3,    -- Bronze Leggings
+    12944,   998, 3,    -- Scale Greaves
+}
+
+xi.eraShops.Zhikkom =
+{
+    16537, 31648, 1, -- Mythril Sword
+    16545, 21535, 1, -- Broadsword
+    16513, 11845, 1, -- Tuck
+    16558, 62560, 1, -- Falchion
+    16473,  5713, 1, -- Kukri
+    16536,  7286, 2, -- Iron Sword
+    16552,  4163, 2, -- Scimitar
+    16466,  2231, 2, -- Knife
+    16465,   150, 3, -- Bronze Knife
+    16517,  9406, 3, -- Degens
+    16551,   713, 3, -- Saparas
+    16530,   618, 3, -- Xiphos
+    16565,  1711, 3, -- Spatha
+    16512,  3215, 3, -- Bilbo
+}
+
+xi.eraShops.Peritrage =
+{
+    17218, 14158, 1, -- Zamburak
+    17298,   294, 1, -- Tathlum
+    17217,  2166, 2, -- Crossbow
+    17337,    22, 2, -- Mythril Bolt
+    17216,   165, 3, -- Light Crossbow
+    17336,     5, 3, -- Crossbow Bolt
+}
+
+xi.eraShops.Ciqala =
+{
+    16392,  4818, 1, -- Metal Knuckles
+    17044,  6033, 1, -- Warhammer
+    16643, 11285, 1, -- Battleaxe
+    16705,  4186, 1, -- Greataxe
+    16391,   828, 2, -- Brass Knuckles
+    17043,  2083, 2, -- Brass Hammer
+    16641,  1435, 2, -- Brass Axe
+    16704,   618, 2, -- Butterfly Axe
+    16390,   224, 3, -- Bronze Knuckles
+    17042,   312, 3, -- Bronze Hammer
+    16640,   290, 3, -- Bronze Axe
+    17049,    47, 3, -- Maple Wand
+    17088,    58, 3, -- Ash Staff
+}
+
+xi.eraShops.Hortense =
+{
+    4976,    64, 3, -- Scroll of Foe Requiem
+    4977,   441, 3, -- Scroll of Foe Requiem II
+    4978,  3960, 3, -- Scroll of Foe Requiem III
+    4979,  6912, 3, -- Scroll of Foe Requiem IV
+    4986,    37, 3, -- Scroll of Army's Paeon
+    4987,   321, 3, -- Scroll of Army's Paeon II
+    4988,  3240, 3, -- Scroll of Army's Paeon III
+    4989,  5940, 3, -- Scroll of Army's Paeon IV
+    5002,    21, 3, -- Scroll of Valor Minuet
+    5003,  1101, 3, -- Scroll of Valor Minuet II
+    5004,  5544, 3, -- Scroll of Valor Minuet III
+}
+
+xi.eraShops.Sororo =
+{
+    4641,  1165, 1, -- Diaga
+    4662,  7025, 1, -- Stoneskin
+    4664,   837, 1, -- Slow
+    4610,   585, 2, -- Cure II
+    4636,   140, 2, -- Banish
+    4646,  1165, 2, -- Banishga
+    4661,  2097, 2, -- Blink
+    4608,    61, 3, -- Cure
+    4615,  1363, 3, -- Curaga
+    4622,   180, 3, -- Poisona
+    4623,   324, 3, -- Paralyna
+    4624,   990, 3, -- Blindna
+    4606,    82, 3, -- Dia
+    4651,   219, 3, -- Protect
+    4656,  1584, 3, -- Shell
+    4721, 29700, 3, -- Repose
+    4663,   368, 3, -- Aquaveil
+}
+
+-- Port Bastok
+xi.eraShops.Valeriano =
+{
+    4394,     10, -- Ginger Cookie
+    17345,    43, -- Flute
+    17347,   990, -- Piccolo
+    5017,    585, -- Scroll of Scop's Operetta
+    5018,  16920, -- Scroll of Puppet's Operetta
+    5013,   2916, -- Scroll of Fowl Aubade
+    5027,   2059, -- Scroll of Advancing March
+    5072,  90000, -- Scroll of Goddess's Hymnus
+}
+
+xi.eraShops.Numa =
+{
+    12457, 5079, 1,    -- Cotton Hachimaki
+    12585, 7654, 1,    -- Cotton Dogi
+    12713, 4212, 1,    -- Cotton Tekko
+    12841, 6133, 1,    -- Cotton Sitabaki
+    12969, 3924, 1,    -- Cotton Kyahan
+    13205, 3825, 1,    -- Silver Obi
+    12456,  759, 2,    -- Hachimaki
+    12584, 1145, 2,    -- Kenpogi
+    12712,  630, 2,    -- Tekko
+    12840,  915, 2,    -- Sitabaki
+    12968,  584, 2,    -- Kyahan
+    704,    132, 2,    -- Bamboo Stick
+    605,    180, 3,    -- Pickaxe
 }
 
 --Kazham
@@ -183,25 +312,13 @@ xi.eraShops.SolbyMaholby =
     4899,    450, -- Earth Spirit Pact
 }
 
--- Port Bastok
-xi.eraShops.Valeriano =
-{
-    4394,     10, -- Ginger Cookie
-    17345,    43, -- Flute
-    17347,   990, -- Piccolo
-    5017,    585, -- Scroll of Scop's Operetta
-    5018,  16920, -- Scroll of Puppet's Operetta
-    5013,   2916, -- Scroll of Fowl Aubade
-    5027,   2059, -- Scroll of Advancing March
-    5072,  90000, -- Scroll of Goddess's Hymnus
-}
 
 -- Port Jeuno
 xi.eraShops.Gekko =
 {
     4150,  2387, -- Eye Drops
     4148,   290, -- Antidote
-    4151,   367, -- Echo Drops
+    4151,   720, -- Echo Drops
     4112,   837, -- Potion
     4128,  4445, -- Ether
     4365,   120, -- Rolanberry
@@ -292,7 +409,17 @@ local lookupTable =
 --]]
 {
     -- Bastok Markets
-    {"nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.quest.fame_area.BASTOK, "MJOLL_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.nation.BASTOK, "MJOLL_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Charging_Chocobo", xi.eraShops.Charging_Chocobo, xi.nation.BASTOK, "CHARGINGCHOCOBO_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Zhikkom", xi.eraShops.Zhikkom, xi.nation.BASTOK, "ZHIKKOM_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Peritrage", xi.eraShops.Peritrage, xi.nation.BASTOK, "PERITRAGE_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Ciqala", xi.eraShops.Ciqala, xi.nation.BASTOK, "CIQALA_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Hortense", xi.eraShops.Hortense, xi.nation.BASTOK, "HORTENSE_SHOP_DIALOG", 1},
+    {"nation", "Bastok_Markets", "Sororo", xi.eraShops.Sororo, xi.nation.BASTOK, "SORORO_SHOP_DIALOG", 1},
+    -- Port Bastok
+    {"standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
+    {"nation", "Port_Bastok", "Numa", xi.eraShops.Numa, xi.nation.BASTOK, "NUMA_SHOP_DIALOG", 1},
+
     -- Kazham
     {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
     -- Lower Jeuno
@@ -310,8 +437,6 @@ local lookupTable =
     {"nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
     -- Norg
     {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
-    -- port Bastok
-    {"standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
     -- Port Jeuno
     {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
     {"none", "Port_Jeuno", "Kindlix", 1},

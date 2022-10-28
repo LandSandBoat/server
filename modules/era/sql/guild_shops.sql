@@ -1388,20 +1388,20 @@ INSERT INTO `guild_shops` VALUES
     (60419, 4934, 1561, 1747, 30, 6, 12), -- scroll of huton ichi
     (60419, 4937, 1561, 1747, 30, 6, 12), -- scroll of doton ichi
     (60419, 4943, 1561, 1747, 30, 6, 12), -- scroll of suiton ichi
-    (60419, 4878, 4000, 4500, 7, 0, 0), -- scroll of absorb-int
+    (60419, 4878, 37800, 41370, 7, 0, 0), -- scroll of absorb-int
     (60419, 4879, 14070, 15750, 7, 0, 0), -- scroll of absorb-mnd
     (60419, 4880, 14070, 15750, 7, 0, 0), -- scroll of absorb-chr
     (60419, 1554, 431, 512, 64, 24, 24), -- onz of turmeric
     (60419, 1555, 1061, 1259, 64, 24, 24), -- onz of coriander
     (60419, 1590, 536, 700, 64, 24, 24), -- sprig of holy basil
     (60419, 1475, 579, 1188, 64, 24, 24), -- onz of curry powder
-    (60419, 4876, 39270, 41370, 7, 0, 0), -- scroll of absorb-vit
+    (60419, 4876, 14070, 15750, 7, 0, 0), -- scroll of absorb-vit
     (60419, 4877, 39270, 41370, 7, 0, 0), -- scroll of absorb-agi
-    (60419, 1164, 30, 120, 2970, 0, 0), -- tsurara
+    (60419, 1164, 30, 65, 2970, 0, 0), -- tsurara
     (60419, 4874, 4000, 4500, 7, 0, 0), -- scroll of absorb-str
     (60419, 5164, 1945, 2854, 64, 24, 24), -- jar of ground wasabi
     (60419, 1652, 150, 160, 64, 24, 24), -- bottle of rice vinegar
-    (60419, 5236, 509, 525, 64, 24, 24), -- clump of shungiku
+    (60419, 5236, 194, 224, 64, 24, 24), -- clump of shungiku
     (60419, 4875, 4000, 4500, 7, 0, 0), -- scroll of absorb-dex
     -- Silver_Owl (Port_Bastok)
     (60420, 16896, 517, 592, 20, 10, 20), -- kunai
