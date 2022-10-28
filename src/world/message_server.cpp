@@ -385,6 +385,8 @@ void message_server_init(const bool& requestExit)
 
 void message_server_close()
 {
+    ShowInfo("Closing ZMQ");
+
     if (zSocket)
     {
         zSocket->close();
