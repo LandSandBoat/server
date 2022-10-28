@@ -432,7 +432,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + bonusMagicAccuracy
     local magicHitRate  = 0
     local resMod        = 0 -- Some spells may possibly be non elemental.
-    local resModAdj     = 0
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = FormMagicBurst(spellElement, target)
@@ -473,15 +472,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
 
-        if resMod > 0 then
-            if resMod <= 100 then
-                resModAdj = math.floor(resMod / 100)
-            elseif resMod <= 145 then
-                resModAdj = 1 + (resMod - 100)
-            else
-                resModAdj = 46 + math.floor((resMod - 145) / 2)
-            end
-        end
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
@@ -633,10 +624,10 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     local magiceva = target:getMod(xi.mod.MEVA)
     if target:isPC() then
-        magiceva = magiceva + resModAdj
+        magiceva = magiceva + resMod
     else
         levelDiff = utils.clamp(levelDiff, 0, 200) -- Mobs should not have a disadvantage when targeted
-        magiceva =  magiceva + (4 * levelDiff) + resModAdj
+        magiceva =  magiceva + (4 * levelDiff) + resMod
     end
 
     -----------------------------------
@@ -675,30 +666,34 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         resMod = target:getMod(xi.magic.resistMod[element])
     end
 
-    if (target:isPC() or (target:isPet() and target:getMaster():getObjType() == xi.objType.PC)) and resMod >= 0 then
-        if resMod > 145 then
-            sixteenthTrigger = true
-        end
+    local playerTriggerPoints =
+    {
+        resMod > 145,
+        resMod > 100,
+        resMod >= 0,
+    }
+    local mobTriggerPoints =
+    {
+        evaMult < 1.15,
+        evaMult < 1.30,
+        evaMult < 1.50,
+    }
+    local selectedTable = mobTriggerPoints
 
-        if resMod > 100 then
-            eighthTrigger = true
-        end
-
-        quarterTrigger = true
+    if target:isPC() then
+        selectedTable = playerTriggerPoints
     end
 
-    if target:isMob() then
-        if evaMult < 1.50 then
-            quarterTrigger = true
-        end
+    if playerTriggerPoints[1] then
+        sixteenthTrigger = true
+    end
 
-        if evaMult < 1.30 then
-            eighthTrigger = true
-        end
+    if selectedTable[2] then
+        eighthTrigger = true
+    end
 
-        if evaMult < 1.15 then
-            sixteenthTrigger = true
-        end
+    if selectedTable[3] then
+        quarterTrigger = true
     end
 
     local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 3.00) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe

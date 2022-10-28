@@ -283,7 +283,7 @@ UPDATE mob_groups SET content_tag='WOTG' WHERE name='Flockbock' AND groupid='32'
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Sengann' AND groupid='79' AND zoneid='24';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Yal-un_Eke' AND groupid='82' AND zoneid='24';
 
-UPDATE mob_groups SET minLevel = 80, maxLevel = 83 WHERE name = "Abraxas" and zoneid = 22;
+UPDATE mob_groups SET minLevel = 80, maxLevel = 83 WHERE name = "Abraxas" and zoneid = 24;
     -- 79-82
 UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Ninja"       and zoneid = 24 and groupid = 33;
 UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Monk"        and zoneid = 24 and groupid = 34;
@@ -298,9 +298,9 @@ UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Dark_Knig
 UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Black_Mage"  and zoneid = 24 and groupid = 45;
 UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Ranger"      and zoneid = 24 and groupid = 46;
 UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Summoner"    and zoneid = 24 and groupid = 47;
-UPDATE mob_groups SET minLevel = 72, maxLevel = 74 WHERE name = "Fomors_Elemental"  and zoneid = 22 and groupid = 48;
+UPDATE mob_groups SET minLevel = 72, maxLevel = 74 WHERE name = "Fomors_Elemental"  and zoneid = 24 and groupid = 48;
 UPDATE mob_groups SET minLevel = 79, maxLevel = 82 WHERE name = "Fomor_Beastmaster" and zoneid = 24 and groupid = 49;
-UPDATE mob_groups SET minLevel = 72, maxLevel = 74 WHERE name = "Fomors_Bat"        and zoneid = 22 and groupid = 50;
+UPDATE mob_groups SET minLevel = 72, maxLevel = 74 WHERE name = "Fomors_Bat"        and zoneid = 24 and groupid = 50;
     -- 52-54
 UPDATE mob_groups SET minLevel = 52, maxLevel = 54 WHERE name = "Fomor_Thief" and zoneid = 24 and groupid = 61;
 INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES

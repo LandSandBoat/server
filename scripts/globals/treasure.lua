@@ -504,7 +504,9 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("Quest[0][108]Prog") == 2 and not player:hasKeyItem(xi.ki.TORN_OUT_PAGES)
+                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and
+                            xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD, 'Prog') == 2 and
+                            not player:hasKeyItem(xi.ki.TORN_OUT_PAGES)
                         end,
                         code = function(player) npcUtil.giveKeyItem(player, xi.ki.TORN_OUT_PAGES) end,
                     },
@@ -621,11 +623,13 @@ xi.treasure.treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getCharVar("needs_crawler_blood") == 1 end,
-                        code = function(player)
-                            npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD)
-                            player:setCharVar("needs_crawler_blood", 0)
+                        test = function(player)
+                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS) == QUEST_ACCEPTED and
+                                xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2 and
+                                player:hasKeyItem(xi.ki.OLD_BOOTS) and
+                                not player:hasKeyItem(xi.ki.CRAWLER_BLOOD)
                         end,
+                        code = function(player) npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD) end,
                     },
                 },
                 points =
