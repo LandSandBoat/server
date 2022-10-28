@@ -1,7 +1,8 @@
 set(SOURCES
     ${COMMON_SOURCES}
+    connect_server.h
     main.cpp
-    connect_server.h)
+)
 
 # Temporarily remove clashing old code
 # TODO: Remove this block

@@ -350,6 +350,10 @@ void message_server_init(const bool& requestExit)
 {
     TracySetThreadName("Message Server (ZMQ)");
 
+    ShowInfo("Starting ZMQ");
+
+    ShowInfo("Starting ZMQ");
+
     // Setup SQL
     sql = std::make_unique<SqlConnection>();
 
@@ -386,6 +390,8 @@ void message_server_init(const bool& requestExit)
 
 void message_server_close()
 {
+    ShowInfo("Closing ZMQ");
+
     if (zSocket)
     {
         zSocket->close();
