@@ -14,14 +14,6 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
-end
-
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
-    mob:setMod(xi.mod.MDEF, 20)
-    mob:addMod(xi.mod.ATT, 150)
-    mob:addMod(xi.mod.DEF, 200)
-    mob:addMod(xi.mod.EVA, 110)
     -- prevent cheesiness
     mob:setMod(xi.mod.SILENCERES, 50)
     mob:setMod(xi.mod.STUNRES, 50)
@@ -31,8 +23,15 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.POISONRES, 100)
     mob:setMod(xi.mod.PARALYZERES, 100)
     mob:setMod(xi.mod.LULLABYRES, 10000)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setMod(xi.mod.MDEF, 20)
+    mob:addMod(xi.mod.ATT, 150)
+    mob:addMod(xi.mod.DEF, 200)
+    mob:addMod(xi.mod.EVA, 110)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
-	
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end
