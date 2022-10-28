@@ -68,10 +68,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         case ENTITY_SPAWN:
         {
             updatemask = UPDATE_ALL_MOB;
-            if (PEntity->objtype == TYPE_PET)
-            {
-                ref<uint8>(0x28) = 0x04;
-            }
+
             if (PEntity->look.size == MODEL_EQUIPPED || PEntity->look.size == MODEL_CHOCOBO)
             {
                 updatemask = 0x57;
