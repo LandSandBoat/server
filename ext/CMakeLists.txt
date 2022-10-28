@@ -151,7 +151,7 @@ CPMAddPackage(
     VERSION 1.24.1
     GITHUB_REPOSITORY chriskohlhoff/asio
     GIT_TAG asio-1-24-0 # asio uses non-standard version tag, we must specify GIT_TAG
-)
+) #defines asio
 
 # ASIO doesn't use CMake, we have to configure it manually. Extra notes for using on Windows:
 #
