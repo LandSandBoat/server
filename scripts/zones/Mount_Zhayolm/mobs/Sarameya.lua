@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Mount Zhayolm
---   NM: Sarameya
+-- NM: Sarameya
 -- !pos 322 -14 -581 61
 -- Spawned with Buffalo Corpse: !additem 2583
--- Wiki: http://ffxiclopedia.wikia.com/wiki/Sarameya
--- TODO: PostAIRewrite: Code the Howl effect and gradual resists.
+-- Weak to water elemental damage
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
@@ -16,7 +15,13 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.SILENCERES, 10000)
+    mob:setMod(xi.mod.BINDRES, 10000)
+    mob:setMod(xi.mod.GRAVITYRES, 10000)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
 end
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:addMod(xi.mod.MDEF, -12)
@@ -30,7 +35,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DEX, 40)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.EARTH_MEVA, 170)
-    mob:setMod(xi.mod.DARK_MEVA, 250)
+    mob:setMod(xi.mod.DARK_MEVA, 125)
     mob:setMod(xi.mod.LIGHT_MEVA, 128)
     mob:setMod(xi.mod.FIRE_MEVA, 250)
     mob:setMod(xi.mod.THUNDER_MEVA, 170)
@@ -43,12 +48,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.THUNDER_SDT, 170)
     mob:setMod(xi.mod.ICE_SDT, 200)
     mob:setMod(xi.mod.WIND_SDT, 170)
-    mob:setMod(xi.mod.SILENCERES, 10000)
     mob:setMod(xi.mod.FIRE_ABSORB, 100)
-    mob:setMod(xi.mod.BINDRES, 10000)
-    mob:setMod(xi.mod.GRAVITYRES, 10000)
-    mob:setMod(xi.mod.SLEEPRES, 10000)
-    mob:setMod(xi.mod.LULLABYRES, 10000)
     mob:setMod(xi.mod.FASTCAST, 10)
     mob:addStatusEffect(xi.effect.REGAIN, 5, 3, 0)
     mob:addStatusEffect(xi.effect.REGEN, 5, 3, 0)

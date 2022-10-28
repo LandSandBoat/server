@@ -9,8 +9,16 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
+    mob:addMod(xi.mod.BINDRES, 10000)
+    mob:setMod(xi.mod.GRAVITYRES, 10000)
+    mob:setMod(xi.mod.SILENCERES, 10000)
     mob:setMod(xi.mod.SLOWRES, 10000)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:addMod(xi.mod.MDEF, 20)
     mob:addMod(xi.mod.DEF, 50)
@@ -36,10 +44,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.WIND_SDT, 170)
     mob:setMod(xi.mod.SILENCERES, 10000)
     mob:setMod(xi.mod.LTNG_ABSORB, 100)
-    mob:setMod(xi.mod.BINDRES, 10000)
-    mob:setMod(xi.mod.GRAVITYRES, 10000)
-    mob:setMod(xi.mod.SLEEPRES, 10000)
-    mob:setMod(xi.mod.LULLABYRES, 10000)
     mob:setMod(xi.mod.FASTCAST, 10)
     mob:addStatusEffect(xi.effect.REGAIN, 5, 3, 0)
     mob:addStatusEffect(xi.effect.REGEN, 5, 3, 0)
