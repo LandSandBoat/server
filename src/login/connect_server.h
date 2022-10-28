@@ -33,7 +33,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstdlib>
 #include <iostream>
 #include <memory>
+#include <type_traits>
+#include <unordered_map>
 #include <utility>
+#include <vector>
 
 // TODO: Move to enum
 #define LOGIN_ATTEMPT         0x10
@@ -82,7 +85,6 @@ public:
         do_read();
     }
 
-protected:
     void do_read()
     {
         auto self(shared_from_this());
@@ -126,7 +128,6 @@ protected:
     virtual void read_func()  = 0;
     virtual void write_func() = 0;
 
-protected:
     asio::ip::tcp::socket socket_;
 
     // TODO: Use std::array
@@ -137,6 +138,22 @@ protected:
     char data_[max_length];
 };
 
+// TODO: Metadata about each session
+struct session_t
+{
+    std::shared_ptr<handler_session> auth_session;
+    std::shared_ptr<handler_session> data_session;
+    std::shared_ptr<handler_session> view_session;
+};
+
+std::unordered_map<std::string, session_t> sessions_;
+
+session_t& get_session(asio::ip::tcp::socket& socket)
+{
+    std::string ip_str = socket.remote_endpoint().address().to_string();
+    return sessions_[ip_str]; // NOTE: Will construct if doesn't exist
+}
+
 // Interaction with xiloader
 class auth_session : public handler_session
 {
@@ -144,12 +161,14 @@ public:
     auth_session(asio::ip::tcp::socket socket)
     : handler_session(std::move(socket))
     {
+        ShowInfo("auth_session");
     }
 
 protected:
     void read_func() override
     {
         int8 code = ref<uint8>(data_, 32);
+
         std::string username(data_, data_ + 16);
         std::string password(data_ + 16, data_ + 32);
 
@@ -226,6 +245,7 @@ public:
     view_session(asio::ip::tcp::socket socket)
     : handler_session(std::move(socket))
     {
+        ShowInfo("view_session");
     }
 
 protected:
@@ -241,7 +261,8 @@ protected:
                 // TODO: Version Check
                 ShowInfo("Version Check");
                 std::string client_ver_data((data_ + 0x74), 6); // Full length is 10 but we drop last 4
-                client_ver_data = client_ver_data + "xx_x";    // And then we replace those last 4..
+                client_ver_data = client_ver_data + "xx_x";     // And then we replace those last 4
+                ShowInfo(fmt::format("Version: {}", client_ver_data));
 
                 // TODO: Expansions Check
                 ShowInfo("Expansions Check");
@@ -255,23 +276,36 @@ protected:
                 packet[6] = 0x46; // F
                 packet[7] = 0x46; // F
 
-                packet[8] = 0x03; // result
+                packet[8] = 0x05; // result
 
                 // TODO: Get this from the db
                 ref<uint16>(packet.data(), 32) = 4094; // Expansion Bitmask
                 ref<uint16>(packet.data(), 36) = 253;  // Feature Bitmask
 
-                // Hash the packet data and then write the value of the hash into the packet.
-                unsigned char hash[16];
-                md5((uint8*)data_, hash, 0x28);
-                std::memcpy(data_ + 12, hash, 16);
-                do_write(0x28);
+                if (auto data = get_session(socket_).data_session)
+                {
+                    // Copy packet data into packet.
+                    std::memcpy(data->data_, packet.data(), 0x28);
+
+                    // Hash the packet data and then write the value of the hash into the packet.
+                    unsigned char hash[16];
+                    md5((uint8*)data->data_, hash, 0x28);
+                    std::memcpy(data->data_ + 12, hash, 16);
+
+                    ShowInfo("Sending version and expansions info");
+                    data->do_write(0x28);
+                }
             }
             break;
             case 0x1F: // 31:
             {
-                // ref<uint8>(data_, 0) = 0x01;
-                // do_write(5);
+                ShowInfo("Data send triggered from view");
+                if (auto data = get_session(socket_).data_session)
+                {
+                    std::memset(data->data_, 0, 5);
+                    data->data_[0] = 0x01;
+                    data->do_write(5);
+                }
             }
             break;
         }
@@ -289,13 +323,22 @@ public:
     data_session(asio::ip::tcp::socket socket)
     : handler_session(std::move(socket))
     {
+        ShowInfo("data_session");
     }
 
 protected:
     void read_func() override
     {
-        ShowInfo("data");
-        ShowInfo(data_);
+        uint8 code = ref<uint8>(data_, 0);
+        ShowInfo(fmt::format("data code: {}", code));
+
+        switch (code)
+        {
+            case 0xA1:
+            {
+                ShowInfo("Requested char list");
+            }
+        }
     }
 
     void write_func() override
@@ -324,7 +367,22 @@ private:
         {
             if (!ec)
             {
-                std::make_shared<T>(std::move(socket_))->start();
+                auto& session = get_session(socket_);
+                if constexpr (std::is_same_v<T, auth_session>)
+                {
+                    session.auth_session = std::make_shared<T>(std::move(socket_));
+                    session.auth_session->start();
+                }
+                else if constexpr (std::is_same_v<T, view_session>)
+                {
+                    session.view_session = std::make_shared<T>(std::move(socket_));
+                    session.view_session->start();
+                }
+                else if constexpr (std::is_same_v<T, data_session>)
+                {
+                    session.data_session = std::make_shared<T>(std::move(socket_));
+                    session.data_session->start();
+                }
             }
             else
             {
@@ -358,8 +416,8 @@ public:
         {
             asio::io_context io_context;
 
+            // Handler creates session of type T for specific port on connection.
             ShowInfo("creating ports");
-
             handler<auth_session> auth(io_context, 54231);
             handler<view_session> view(io_context, 54001);
             handler<data_session> data(io_context, 54230);
