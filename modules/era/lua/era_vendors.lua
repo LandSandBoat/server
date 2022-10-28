@@ -134,19 +134,26 @@ xi.eraShops.Valeriano =
 
 xi.eraShops.Numa =
 {
-    12457, 5079, 1,    -- Cotton Hachimaki
-    12585, 7654, 1,    -- Cotton Dogi
-    12713, 4212, 1,    -- Cotton Tekko
-    12841, 6133, 1,    -- Cotton Sitabaki
-    12969, 3924, 1,    -- Cotton Kyahan
-    13205, 3825, 1,    -- Silver Obi
-    12456,  759, 2,    -- Hachimaki
-    12584, 1145, 2,    -- Kenpogi
-    12712,  630, 2,    -- Tekko
-    12840,  915, 2,    -- Sitabaki
-    12968,  584, 2,    -- Kyahan
-    704,    132, 2,    -- Bamboo Stick
-    605,    180, 3,    -- Pickaxe
+    12457, 5079, 1, -- Cotton Hachimaki
+    12585, 7654, 1, -- Cotton Dogi
+    12713, 4212, 1, -- Cotton Tekko
+    12841, 6133, 1, -- Cotton Sitabaki
+    12969, 3924, 1, -- Cotton Kyahan
+    13205, 3825, 1, -- Silver Obi
+    12456,  759, 2, -- Hachimaki
+    12584, 1145, 2, -- Kenpogi
+    12712,  630, 2, -- Tekko
+    12840,  915, 2, -- Sitabaki
+    12968,  584, 2, -- Kyahan
+    704,    132, 2, -- Bamboo Stick
+    605,    180, 3, -- Pickaxe
+}
+
+-- Metalworks
+xi.eraShops.Nogga =
+{
+    17316,  675, 2, -- Bomb Arm
+    17313, 1083, 3, -- Grenade
 }
 
 --Kazham
@@ -407,6 +414,8 @@ local lookupTable =
     Standard: {"standard",Zone,NPCName,customShopTable,fameArea,DIALOG_NAME}
     Tenshodo: {"tenshodo",Zone,NPCName,customShopTable,fameArea,DIALOG_NAME}
 --]]
+
+-- TODO: Check if standard merchants are working with fame
 {
     -- Bastok Markets
     {"nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.nation.BASTOK, "MJOLL_SHOP_DIALOG", 1},
@@ -419,16 +428,15 @@ local lookupTable =
     -- Port Bastok
     {"standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
     {"nation", "Port_Bastok", "Numa", xi.eraShops.Numa, xi.nation.BASTOK, "NUMA_SHOP_DIALOG", 1},
-
     -- Kazham
-    {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
+    {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.Toji_Mumosulah, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
     -- Lower Jeuno
     {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.eraShops.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, "WAAG_DEEG_SHOP_DIALOG", 1},
     -- Mhaura
     {"none", "Mhaura", "Tya_Padolih", xi.settings.main.ENABLE_WOTG},
     -- Nashmau
@@ -438,24 +446,23 @@ local lookupTable =
     -- Norg
     {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
     -- Port Jeuno
-    {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
+    {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, "DUTY_FREE_SHOP_DIALOG", 1},
     {"none", "Port_Jeuno", "Kindlix", 1},
     {"none", "Port_Jeuno", "Pyropox",1},
     -- Rabao
-    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, xi.quest.fame_area.SELBINA_RABAO, "BRAVEOX_SHOP_DIALOG", 1},
+    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, "BRAVEOX_SHOP_DIALOG", 1},
     -- Selbina
     {"none", "Selbina", "Falgima", xi.settings.main.ENABLE_WOTG},
-    -- Southern Sandoria
-    {"standard", "Southern_San_dOria", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1},
+
     -- Tavnazian Safehold
     {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.eraShops.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG", 1},
     -- Upper Jeuno
-    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, xi.quest.fame_area.JEUNO, "VIETTES_SHOP_DIALOG", 1},
+    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, "VIETTES_SHOP_DIALOG", 1},
     -- Windurst Waters
     {"nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
     -- Windurst Woods
     {"nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
-    {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
+    {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, "VALERIANO_SHOP_DIALOG", 1},
 }
 
 for _, shop in pairs(lookupTable) do
@@ -492,8 +499,8 @@ for _, shop in pairs(lookupTable) do
     then
         m:addOverride(onTrigger,
         function(player, npc)
-            player:showText(npc, ID.text[shop[6]])
-            xi.shop.general(player, shop[4], shop[5])
+            player:showText(npc, ID.text[shop[5]])
+            xi.shop.general(player, shop[4])
         end)
     elseif
         shop[1] == 'tenshodo' and
