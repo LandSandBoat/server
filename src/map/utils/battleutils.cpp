@@ -1840,7 +1840,7 @@ namespace battleutils
                     }
 
                     skillModifier = (blockSkill - attackSkill) * 0.2325f;
-                    
+
                     // Add skill and Palisade bonuses
                     base += skillModifier + palisadeMod;
                     // Multiply by Reprisal's bonus
