@@ -3,10 +3,7 @@
 -- Custom work of Neckbeard (CatsEyeXI)
 -- Steal this and die.
 --------------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/teleports")
 require("scripts/globals/utils")
 require("scripts/globals/status")
 require("scripts/globals/zone")
@@ -114,20 +111,20 @@ local augmentTable =
     [15742] = { 83, 288, 293, 291}, -- *Shadow Clogs*
     [15743] = { 83, 288, 293, 291}, -- *Valkyrie's Clogs*
 
-    b1 = { 54,  25,  23,  31}, -- *Kirin's Osode (Genbu)*
-    w1 = { 25,  23, 79, 514}, -- *Kirin's Pole (Genbu)*
-    b2 = {328,  25,  23,  31}, -- *Kirin's Osode (Suzaku)*
-    w2 = { 25,  23, 83, 512}, -- *Kirin's Pole (Suzaku)*
-    b3 = { 29,  31,  23,  25}, -- *Kirin's Osode (Seiryu)*
-    w3 = { 25,  23, 83, 515}, -- *Kirin's Pole (Seiryu)*
-    b4 = { 41,  25,  23,  31}, -- *Kirin's Osode (Byakko)*
-    w4 = {79,  25,  23, 513}, -- *Kirin's Pole (Byakko)*
+    b1 = { 54,  25, 23,  31 }, -- *Kirin's Osode (Genbu)*
+    w1 = { 25,  23, 79, 514 }, -- *Kirin's Pole (Genbu)*
+    b2 = {328,  25, 23,  31 }, -- *Kirin's Osode (Suzaku)*
+    w2 = { 25,  23, 83, 512 }, -- *Kirin's Pole (Suzaku)*
+    b3 = { 29,  31, 23,  25 }, -- *Kirin's Osode (Seiryu)*
+    w3 = { 25,  23, 83, 515 }, -- *Kirin's Pole (Seiryu)*
+    b4 = { 41,  25, 23,  31 }, -- *Kirin's Osode (Byakko)*
+    w4 = { 79,  25, 23, 513 }, -- *Kirin's Pole (Byakko)*
 
-    [19304] = { 23, 25, 512, 188}, -- *Sarissa*
-    [18603] = { 133, 83, 516, 141}, -- *Majestas*
-    [19159] = { 23, 25, 512, 188}, -- *Galatyn*
-    [17765] = { 23, 299, 332, 512}, -- *Concordia*	
-    [19118] = { 23, 25, 513, 515}, -- *Machismo*
+    [19304] = {  23,  25, 512, 188 }, -- *Sarissa*
+    [18603] = { 133,  83, 516, 141 }, -- *Majestas*
+    [19159] = {  23,  25, 512, 188 }, -- *Galatyn*
+    [17765] = {  23, 299, 332, 512 }, -- *Concordia*    
+    [19118] = {  23,  25, 513, 515 }, -- *Machismo*
 }
 
 local randomAug =
@@ -168,456 +165,329 @@ local craftingSmocks =
     [ 7] = { 4108,   12,   14398,    1 }, -- Lightning Cluster, Alchemists Apron 
     [ 8] = { 4106,   12,   14399,    1 }, -- Wind Cluster, Culinarians Apron 
     [ 9] = { 4109,   12,   14400,    1 }, -- Water Cluster, Fishermans Apron
-}	
+}   
 
-local function handleKirinItemCreation(player, itemId, au0, po0) -- This is for Kirin Items(God). Augment 0 will carry over from our NPC trade function.
-    -- NQ: ~15%, HQ1: ~60%, HQ2: ~15%, HQ3: ~10%.
-    math.randomseed(os.time())
-    local HQ3 = 90
-    local HQ2 = 85
-    local HQ1 = 15
-    local NQ  = 1
+------------------------------------------------------------
+-- Handle Kirin Item Creation
+------------------------------------------------------------
+local function handleKirinItemCreation(player, itemId, aug0, pow0)
+    -- Define augment variables.
+    local aug1 = 0
+    local pow1 = math.random(0, 2)
+    local aug2 = 0
+    local pow2 = 0
 
-    local au1 = 0 -- Augment 1
-    local po1 = 0 -- Augment 1 Power
-    local au2 = 0 -- Augment 2
-    local po2 = 0 -- Augment 2 Power
+    -- Define augment 1 and 2 based on item and existing augment 0.
+    if itemId == 12562 then
+        if aug0 == 137 then
+            aug1 = augmentTable.b1[math.random(1, 4)]
+            aug2 = augmentTable.b1[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.b1[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        elseif aug0 == 143 then
+            aug1 = augmentTable.b2[math.random(1, 4)]
+            aug2 = augmentTable.b2[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.b2[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        elseif aug0 == 146 then
+            aug1 = augmentTable.b4[math.random(1, 4)]
+            aug2 = augmentTable.b4[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.b4[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        elseif aug0 == 211 then
+            aug1 = augmentTable.b3[math.random(1, 4)]
+            aug2 = augmentTable.b3[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.b3[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        end
 
-    local fuckery = math.random(1, 100) -- HQ Roll Chance
-
--- Below is our check for what table we should roll. Rather than itemId index only we will check also check au0
-    if itemId == 12562 and au0 == 137 then
-        au1 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 12562 and au0 == 143 then
-        au1 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 12562 and au0 == 211 then
-        au1 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 12562 and au0 == 146 then
-        au1 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+    elseif itemId == 17567 then
+        if aug0 == 290 then
+            aug1 = augmentTable.w1[math.random(1, 4)]
+            aug2 = augmentTable.w1[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.w1[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        elseif aug0 == 291 then
+            aug1 = augmentTable.w3[math.random(1, 4)]
+            aug2 = augmentTable.w3[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.w3[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        elseif aug0 == 292 then
+            aug1 = augmentTable.w2[math.random(1, 4)]
+            aug2 = augmentTable.w2[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.w2[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        elseif aug0 == 294 then
+            aug1 = augmentTable.w4[math.random(1, 4)]
+            aug2 = augmentTable.w4[math.random(1, 4)]
+            if aug1 == aug2 then
+                repeat aug2 = augmentTable.w4[math.random(1, 4)]
+                until(aug2 ~= aug1)
+            end
+        end
     end
 
-    if itemId == 17567 and au0 == 290 then
-        au1 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 17567 and au0 == 292 then
-        au1 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 17567 and au0 == 291 then
-        au1 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 17567 and au0 == 294 then
-        au1 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    end
+    -- Roll for quality.
+    local qualityRoll = math.random(1, 100)
 
--- ROLL AGAIN (TY Wadski)
-    if au1 == au2 and itemId == 12562 and au0 == 137 then -- Check if augments are equal in value. If so we will reroll
-    repeat
-        au2 = augmentTable.b1[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 12562 and au0 == 143 then
-    repeat
-        au2 = augmentTable.b2[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 12562 and au0 == 211 then
-    repeat
-        au2 = augmentTable.b3[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 12562 and au0 == 146 then
-    repeat
-        au2 = augmentTable.b4[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 17567 and au0 == 290 then
-    repeat
-        au2 = augmentTable.w1[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 17567 and au0 == 292 then
-    repeat
-        au2 = augmentTable.w2[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 17567 and au0 == 291 then
-    repeat
-        au2 = augmentTable.w3[math.random(1, 4)]
-    until( au2 ~= au1)
-
-    elseif au1 == au2 and itemId == 17567 and au0 == 294 then
-    repeat
-        au2 = augmentTable.w4[math.random(1, 4)]
-    until( au2 ~= au1)
-    end
-
-    if au1 > 0 then
-        po1 = math.random(0, 2) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-3)
-    end
-
-    if au2 > 0 then
-        po2 = math.random(0, 2) -- AUGMENT 2 POWER (THIS IS OUR AUGMENT POWERS 1-3)
-    end
-
-    if fuckery > HQ3 then -- Add +2 to each randomly selected augment and +2 to Item Base Augment POWERS
-        po0 = po0 +2
-        po1 = po1 +2
-        po2 = po2 +2
+    if qualityRoll > 90 then     -- Add +2 to augment 0, 1 and 2 power.
+        pow0 = pow0 + 2
+        pow1 = pow1 + 2
+        pow2 = math.random(0, 2) + 2
         player:PrintToPlayer( "You have reached a HQ3 Augment! Please show us on Discord!", 0xd )
-    elseif fuckery > HQ2 then -- Add +1 to Augment 1 and Augment 0 (Item Base augment) POWERS
-        po0 = po0 +1
-        po1 = po1 +1
-        au2 = nil -- Remove Augment 2
-        po2 = nil
+    elseif qualityRoll > 85 then -- Remove Augment 2. Add +1 to Augment 0 and 1 power.
+        pow0 = pow0 + 1
+        pow1 = pow1 + 1
         player:PrintToPlayer( "You have reached a HQ2 Augment!", 0xd )
-    elseif fuckery > HQ1 then -- Remove Augment 2
-        au2 = nil
-        po2 = nil
+    elseif qualityRoll > 15 then -- Remove Augment 2.
+        aug2 = nil
+        pow2 = nil
         player:PrintToPlayer( "You have reached a HQ1 Augment!", 0xd )
-    elseif fuckery > NQ then -- Remove Augment 0 (Item Base Augment)
-        au0 = nil
-        po0 = nil
-        au2 = nil
-        po2 = nil
+    else                         -- Remove Augment 0 and 2.
+        aug0 = nil
+        pow0 = nil
+        aug2 = nil
+        pow2 = nil
         player:PrintToPlayer( "The Furnace has spoken! You can have the damaged NQ remains!", 0xd )
     end
 
     player:tradeComplete()
-    player:addItem(itemId, 1, au0, po0, au1, po1, au2, po2)
+    player:addItem(itemId, 1, aug0, pow0, aug1, po1, aug2, po2)
     player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
 end
 
-local function handleHqItemCreation(player, itemId, au0, po0) -- This is for HQ items. Augment 0 will carry over from our NPC trade function.
-    -- HQ items will roll upto +6 on all status
-    -- NQ: ~15%, HQ1: ~60%, HQ2: ~15%, HQ3: ~10%.
-    math.randomseed(os.time())
-    local HQ3 = 90
-    local HQ2 = 85
-    local HQ1 = 15
-    local NQ  = 1
+------------------------------------------------------------
+-- Handle HQ Item Creation
+------------------------------------------------------------
+local function handleHqItemCreation(player, itemId, aug0, pow0) -- This is for HQ items. Augment 0 will carry over from our NPC trade function.
+    -- Define augment variables.
+    local aug1 = augmentTable[itemId][math.random(1, 4)] -- Augment 1 happens always, so we define it now.
+    local pow1 = math.random(0, 3)
+    local aug2 = nil
+    local pow2 = nil
 
-    local au1 = 0 -- Augment 1
-    local po1 = 0
-    local au2 = 0 -- Augment 2
-    local po2 = 0
+    -- Roll for quality.
+    local qualityRoll = math.random(1, 100)
 
-    local fuckery = math.random(1, 100) -- HQ Roll Chance
+    if qualityRoll > 90 then -- Add +2 to Augment 0, 1 and 2 power.
+        pow0 = pow0 + 2
+        pow1 = pow1 + 2
+        aug2 = augmentTable[itemId][math.random(1, 4)]
+        pow2 = 2 + math.random(0, 3)
 
-    au1 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    au2 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-
--- ROLL AGAIN (TY Wadski)
-    if au1 == au2 then -- Check if augments are equal in value. If so we will reroll
-        repeat
-            au2 = augmentTable[itemId][math.random(1, 4)]
-        until(au2 ~= au1)
-    end
-
-    if au1 > 0 then
-        po1 = math.random(0, 3) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-4)
-    else
-        po1 = 0
-    end
-
-    if au2 > 0 then
-        po2 = math.random(0, 3) -- AUGMENT 2 POWER (THIS IS OUR AUGMENT POWERS 1-4)
-    else
-        po2 = 0
-    end
-
-
-    if fuckery > HQ3 then -- Add +2 to each randomly selected augment and +2 to Item Base Augment POWERS
-        po0 = po0 +2
-        po1 = po1 +2
-        po2 = po2 +2
         player:PrintToPlayer( "You have reached a HQ3 Augment(HQ)! Please show us on Discord!", 0xd )
-    elseif fuckery > HQ2 then -- Add +1 to Augment 1 and Augment 0 (Item Base augment) POWERS
-        po0 = po0 +1
-        po1 = po1 +1
-        au2 = nil -- Remove Augment 2
-        po2 = nil
+    elseif qualityRoll > 85 then -- Remove Augment 2. Add +1 to Augment 0 and Augment 1 power.
+        pow0 = pow0 + 1
+        pow1 = pow1 + 1
+
         player:PrintToPlayer( "You have reached a HQ2 Augment(HQ)!", 0xd )
-    elseif fuckery > HQ1 then -- Remove Augment 2
-        au2 = nil
-        po2 = nil
+    elseif qualityRoll > 15 then -- Remove Augment 2.
         player:PrintToPlayer( "You have reached a HQ1 Augment(HQ)!", 0xd )
-    elseif fuckery > NQ then -- Remove Augment 0 (Item Base Augment)
-        au0 = nil
-        po0 = nil
+    else -- Remove Augment 0.
+        aug0 = nil
+        pow0 = nil
+        aug2 = augmentTable[itemId][math.random(1, 4)]
+        pow2 = math.random(0, 3)
+
         player:PrintToPlayer( "The Furnace has spoken! You can have the crispy NQ remains!", 0xd )
     end
 
+    if aug1 == aug2 then -- Check if augments are equal in value. If so we will reroll
+        repeat aug2 = augmentTable[itemId][math.random(1, 4)]
+        until(aug2 ~= aug1)
+    end
+
     player:tradeComplete()
-    player:addItem(itemId, 1, au0, po0, au1, po1, au2, po2)
+    player:addItem(itemId, 1, aug0, pow0, aug1, po1, aug2, po2)
     player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
 end
 
--- Puke Girl is the real MVP <3 TY for looking into this code
+------------------------------------------------------------
+-- Handle Augmented Item Creation
+------------------------------------------------------------
+local function handleAugmentedItemCreation(player, itemId, aug0, pow0)
+    -- Define augment variables.
+    local aug1 = augmentTable[itemId][math.random(1, 4)] -- Augment 1 happens always, so we define it now.
+    local pow1 = math.random(0, 3)
+    local aug2 = nil -- Augment 2 only happens 1 time, so we assume nil.
+    local pow2 = nil
 
-local function handleAugmentedItemCreation(player, itemId, au0, po0)
--- NQ: ~15%, HQ1: ~60%, HQ2: ~15%, HQ3: ~10%.
-    local HQ3 = 90
-    local HQ2 = 85
-    local HQ1 = 15
-    local NQ  = 0
+    -- Roll for quality.
+    local qualityRoll = math.random(1, 100)
 
-    local au1 = 0 -- Augment 1
-    local po1 = 0 -- Augment 1 Power
-    local au2 = 0 -- Augment 2
-    local po2 = 0 -- AUgment 2 Power
-
-    local fuckery = math.random(1,100) -- HQ Roll Chance
-
-    au1 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    au2 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-
--- ROLL AGAIN (TY Wadski)
-    if au1 == au2 then -- Check if augments are equal in value. If so we will reroll
-        repeat
-            au2 = augmentTable[itemId][math.random(1, 4)]
-        until(au2 ~= au1)
-    end
-
-    if au1 > 0 then -- refresh limit
-        po1 = math.random(0, 3) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-4)
-    end
-
-    if au2 > 0 then -- refresh limit
-        po2 = math.random(0, 3) -- AUGMENT 2 POWER (THIS IS OUR AUGMENT POWERS 1-4)
-    end
-
-    if fuckery > HQ3 then -- Add +2 to each randomly selected augment and +2 to Item Base Augment POWERS
-        po0 = po0 +2
-        po1 = po1 +2
-        po2 = po2 +2
+    if qualityRoll > 90 then     -- Add +2 to augment 0, 1 and 2 power.
+        pow0 = pow0 + 2
+        pow1 = pow1 + 2
+        aug2 = augmentTable[itemId][math.random(1, 4)]
+        pow2 = 2 + math.random(0, 3)
+        if aug1 == aug2 then
+            repeat aug2 = augmentTable[itemId][math.random(1, 4)]
+            until(aug2 ~= aug1)
+        end
         player:PrintToPlayer( "You have reached a HQ3 Augment! Please show us on Discord!", 0xd )
-    elseif fuckery > HQ2 then -- Add +1 to Augment 1 and Augment 0 (Item Base augment) POWERS
-        po0 = po0 +1
-        po1 = po1 +1
-        au2 = nil -- Remove Augment 2
-        po2 = nil
+    elseif qualityRoll > 85 then -- Remove Augment 2. Add +1 to Augment 0 and 1 power.
+        pow0 = pow0 + 1
+        pow1 = pow1 + 1
         player:PrintToPlayer( "You have reached a HQ2 Augment!", 0xd )
-    elseif fuckery > HQ1 then -- Remove Augment 2
-        au2 = nil
-        po2 = nil
+    elseif qualityRoll > 15 then -- Remove Augment 2.
         player:PrintToPlayer( "You have reached a HQ1 Augment!", 0xd )
-    elseif fuckery > NQ then -- Remove Augment 0 (Item Base Augment)
-        au0 = nil
-        po0 = nil
-        au2 = nil
-        po2 = nil
+    else                         -- Remove Augment 0 and 2.
+        aug0 = nil
+        pow0 = nil
         player:PrintToPlayer( "The Furnace has spoken! You can have the damaged NQ remains!", 0xd )
     end
 
     player:tradeComplete()
-    player:addItem(itemId, 1, au0, po0, au1, po1, au2, po2)
+    player:addItem(itemId, 1, aug0, pow0, aug1, pow1, aug2, pow2)
     player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
 end
 
-local function handleRandomAugment(player, itemId, au0, po0)
--- We are collecting au1 and po1 from the items augment table
-    local ra1 = 0
-    local rp1 = 0
-    local au1 = 0
-    local po1 = 0
+------------------------------------------------------------
+-- Handle Random Augments
+------------------------------------------------------------
+local function handleRandomAugment(player, itemId, aug0, pow0)
+    -- Define augment variables.
+    local aug1 = 0
+    local pow1 = 0
+    local aug2 = 0
+    local pow2 = 0
 
-    local random = math.random(1, 6) -- How we pick a random augment table(4 tables and 2 for HP and or MP)
-    local randomA = math.random(1, 6) -- How we randomly reroll augments if val == val
-    local randomB = math.random(1, 4) -- This will be our HQ roll chance
+    -- Roll for quality.
+    local qualityRoll = math.random(1, 4)
 
-    if itemId == 12562 and au0 == 137 then -- Kirin's Osode
-        au1 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 12562 and au0 == 143 then
-        au1 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 12562 and au0 == 211 then
-        au1 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 12562 and au0 == 146 then
-        au1 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-
-    elseif itemId == 17567 and au0 == 290 then -- Kirin's Pole
-        au1 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 17567 and au0 == 292 then
-        au1 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 17567 and au0 == 291 then
-        au1 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-    elseif itemId == 17567 and au0 == 294 then
-        au1 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
-
-    elseif itemId ~= 12562 or 17567 then
-        au1 = augmentTable[itemId][math.random(1, 4)]
-    end
-
-    if au1 > 0 then
-        po1 = math.random(0, 2) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-3)
-    end
-
-    -- AUGMENT 2 IS NOT NEEDED HERE
-
--- We will roll for a augment within randomtable
-    if random == 1 then
-        ra1 = randomAug.r1[math.random(1, 8)] -- We will randomly select a augment from our [itemId] = {table}
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    elseif random == 2 then
-        ra1 = randomAug.r2[math.random(1, 13)] -- We will randomly select a augment from our [itemId] = {table}
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    elseif random == 3 then
-        ra1 = randomAug.r3[math.random(1, 8)] -- We will randomly select a augment from our [itemId] = {table}
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    elseif random == 4 then
-        ra1 = randomAug.r4[math.random(1, 7)] -- We will randomly select a augment from our [itemId] = {table}
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    elseif random == 5 then -- HP +3 augment roll
-        ra1 = 79
-        rp1 = math.random(0, 4) -- POWER IS CAPPED AT +15
-    elseif random == 6 then -- MP +3 augment roll
-        ra1 = 83
-        rp1 = math.random(0, 4) -- POWER IS CAPPED AT +15
-    end
-
--- We will check for augment 1 and Random Augment equality. If val == val we will reroll
-    if ra1 == au1 and randomA == 1 then
-    repeat
-        ra1 = randomAug.r1[math.random(1, 8)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au1 )
-
-    elseif ra1 == au1 and randomA == 2 then
-    repeat
-        ra1 = randomAug.r2[math.random(1, 13)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au1 )
-
-    elseif ra1 == au1 and randomA == 3 then
-    repeat
-        ra1 = randomAug.r3[math.random(1, 8)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au1 )
-
-    elseif ra1 == au1 and randomA == 4 then
-    repeat
-        ra1 = randomAug.r4[math.random(1, 7)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au1 )
-
-    elseif ra1 == au1 and randomA == 5 then
-    repeat
-        ra1 = 79
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au1 )
-
-    elseif ra1 == au1 and randomA == 6 then
-    repeat
-        ra1 = 83
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au1 )
-    end
--- We will check for augment 0 (Item Base Augment) and Random Augment equality. If val == val we will reroll
-    if ra1 == au0 and randomA == 1 then
-    repeat
-        ra1 = randomAug.r1[math.random(1, 8)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au0 )
-
-    elseif ra1 == au0 and randomA == 2 then
-    repeat
-        ra1 = randomAug.r2[math.random(1, 13)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au0 )
-
-    elseif ra1 == au0 and randomA == 3 then
-    repeat
-        ra1 = randomAug.r3[math.random(1, 8)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au0 )
-
-    elseif ra1 == au0 and randomA == 4 then
-    repeat
-        ra1 = randomAug.r4[math.random(1, 7)]
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au0 )
-
-    elseif ra1 == au0 and randomA == 5 then
-    repeat
-        ra1 = 79
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au0 )
-
-    elseif ra1 == au0 and randomA == 6 then
-    repeat
-        ra1 = 83
-        rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
-    until( ra1 ~= au0 )
-    end
-
-    -- HQ Roll of Random Augment Pool
-    if randomB == 1 then -- nope
-        au0 = nil
-        po0 = nil
-        au1 = nil
-        po1 = nil
+    if qualityRoll == 1 then     -- Nullify augments 0 and 1.
+        aug0 = nil
+        pow0 = nil
+        aug1 = nil
+        pow1 = nil
         player:PrintToPlayer( "Your item has been damaged! A Random Augment has remained!", 0xd )
-    elseif randomB == 2 then -- 1 augment lost
-        au1 = nil
-        po1 = nil
+    elseif qualityRoll == 2 then -- Nullify augment 1.
+        aug1 = nil
+        pow1 = nil
         player:PrintToPlayer( "Randomizing your items base Augment with a Randomly selected Augment!", 0xd )
-    elseif randomB == 3 then -- RIP Random Aug
-        ra1 = nil
-        rp1 = nil
+    elseif qualityRoll == 3 then -- Nullify augment 2.
+        aug2 = nil
+        pow2 = nil
         player:PrintToPlayer( "You have lost the Random Augment! Your item was saved by the Furnace!", 0xd )
-    elseif randomB == 4 then -- Two Augs with one random aug (rare)
-        po0 = po0 + 2
-        po1 = po1 + 2
+    else                         -- Enhances augment 0 and 1 power.
+        pow0 = pow0 + 2
+        pow1 = 2
         player:PrintToPlayer( "You have reached a HQ Random Augment! The Furnace approves!", 0xd )
     end
 
+    -- Augment 1 work.
+    if qualityRoll >= 3 then
+        if itemId == 12562 then -- Kirin's Osode
+            if aug0 == 137 then
+                aug1 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            elseif aug0 == 143 then
+                aug1 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            elseif aug0 == 211 then
+                aug1 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            elseif aug0 == 146 then
+                aug1 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            end
+        elseif itemId == 17567 then -- Kirin's Pole
+            if aug0 == 290 then
+                aug1 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            elseif aug0 == 292 then
+                aug1 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            elseif aug0 == 291 then
+                aug1 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            elseif aug0 == 294 then
+                aug1 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+            end
+        else
+            aug1 = augmentTable[itemId][math.random(1, 4)]
+        end
+       
+        -- Set power.
+        pow1 = pow1 + math.random(0, 2)
+    end
+       
+    -- Augment 2 work.
+    if qualityRoll ~= 3 then
+        local augmentRoll = math.random(1, 6) -- How we pick a random augment table (4 tables and 2 for HP and or MP)
+
+        if augmentRoll == 1 then
+            aug2 = randomAug.r1[math.random(1, 8)]
+            if aug2 == aug0 or aug2 == aug1 then
+                repeat aug2 = randomAug.r1[math.random(1, 8)]
+                until(aug2 ~= aug0 and aug2 ~= aug1)
+            end
+        elseif augmentRoll == 2 then
+            aug2 = randomAug.r2[math.random(1, 13)]
+            if aug2 == aug0 or aug2 == aug1 then
+                repeat aug2 = randomAug.r2[math.random(1, 13)]
+                until(aug2 ~= aug0 and aug2 ~= aug1)
+            end
+        elseif augmentRoll == 3 then
+            aug2 = randomAug.r3[math.random(1, 8)]
+            if aug2 == aug0 or aug2 == aug1 then
+                repeat aug2 = randomAug.r3[math.random(1, 8)]
+                until(aug2 ~= aug0 and aug2 ~= aug1)
+            end
+        elseif augmentRoll == 4 then
+            aug2 = randomAug.r4[math.random(1, 7)]
+            if aug2 == aug0 or aug2 == aug1 then
+                repeat aug2 = randomAug.r4[math.random(1, 7)]
+                until(aug2 ~= aug0 and aug2 ~= aug1)
+            end
+        elseif augmentRoll == 5 then -- HP+ augment.
+            aug2 = 79
+        elseif augmentRoll == 6 then -- MP+ augment.
+            aug2 = 83
+        end
+
+        -- Set power.
+        pow2 = math.random(0, 4)
+    end
+
     player:tradeComplete()
-    player:addItem(itemId, 1, au0, po0, au1, po1, ra1, rp1)
+    player:addItem(itemId, 1, aug0, pow0, aug1, pow1, aug2, pow2)
     player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
 end
 
 -----------------------------------
--- public functions
+-- Public functions
 -----------------------------------
-
 xi.synergyFurnace.onTrigger = function(player)
     player:PrintToPlayer( "The Furnace is powered by the souls [GM]Xaver has collected.", 0xd )
 end
 
-xi.synergyFurnace.onTrade = function(player, npc, trade)
-    if player:getZoneID() == 231 then
-	    local ID = require("scripts/zones/Northern_San_dOria/IDs")
-	end
-	
-    local randomC = math.random(1, 100)
+xi.synergyFurnace.onTrade = function(player, npc, trade)    
+    ----------------------------------------------------------------------------------------------
+    -- Crafting Track Suit
+    local fireclusters = npcUtil.tradeHas(trade, {{ 4104, 12 }})
 
-    local itemId = 0
-    local au0 = 0 -- Augments from table randomly selected
-    local po0 = 0 -- Power randomly selected
-    local augId = 0
-
-----------------------------------------------------------------------------------------------
--- Crafting Track Suit
-local fireclusters = npcUtil.tradeHas(trade, {{ 4104, 12 }})
-
-   	if npcUtil.tradeHas(trade, 27325, 27325) and fireclusters then
+    if fireclusters then
+        if npcUtil.tradeHas(trade, 27325, 27325) then
             player:tradeComplete()
             player:addItem(27326)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 27326) -- Give Track Pants +1
-            end
-			
-   	if npcUtil.tradeHas(trade, 25713, 25713) and fireclusters then
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, 27326) -- Give Track Pants +1  
+        elseif npcUtil.tradeHas(trade, 25713, 25713) then
             player:tradeComplete()
             player:addItem(25714)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 25714) -- Give Track Shirt +1
-            end
-			
-----------------------------------------------------------------------------------------------
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, 25714) -- Give Track Shirt +1
+        end
+    end
 
+    ----------------------------------------------------------------------------------------------
+    -- Crafting Smocks
     for i = 1, 9 do -- This variable "i" will be the index in the table.
         local reward = 11328 + i
 
@@ -630,14 +500,14 @@ local fireclusters = npcUtil.tradeHas(trade, {{ 4104, 12 }})
         then
             player:tradeComplete()
             player:addItem(reward)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, reward)
             
             break
         end
     end
--- End Crafting Smocks
-----------------------------------------------------------------------------------------------
 
+    ----------------------------------------------------------------------------------------------
+    -- Crafting Stalls
     for i = 1, 9 do -- This variable "i" will be the index in the table.
         local reward = 3624 + i
 
@@ -656,7 +526,7 @@ local fireclusters = npcUtil.tradeHas(trade, {{ 4104, 12 }})
             then
                 player:tradeComplete()
                 player:addItem(reward)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, reward)
             
                 break
             end
@@ -674,1772 +544,750 @@ local fireclusters = npcUtil.tradeHas(trade, {{ 4104, 12 }})
             then
                 player:tradeComplete()
                 player:addItem(reward)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, reward)
             
                 break
             end
         end
     end
--- End Crafting Stalls
---------------------------------------------------------------------------------------------------
-    -- *Genbu's Kabuto*
-    if randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12434, 3275}) and player:getFreeSlotsCount() >= 1 then
+
+    ----------------------------------------------------------------------------------------------
+    -- Augments
+    if player:getFreeSlotsCount() >= 1 then
+        local randomC = math.random(1, 100)
+    
+        local itemId = 0
+        local aug0   = 0 -- Augments from table randomly selected
+        local pow0   = 0 -- Power randomly selected
+        local type   = 0 -- Type of augment (Kirin = 3, HQ = 2, NQ = 1)
+
+        -- *Genbu's Kabuto*
+        if npcUtil.tradeHasExactly(trade, {12434, 3275}) then
             itemId = 12434
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 49 -- + 1-3% Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12434, 3275}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12434
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Genbu's Shield*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12296, 3275}) and player:getFreeSlotsCount() >= 1 then
+        -- *Genbu's Shield*
+        elseif npcUtil.tradeHasExactly(trade, {12296, 3275}) then
             itemId = 12296
-            au0 = 329 -- + 1-3% Cure Potency. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 329 -- + 1-3% Cure Potency. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12296, 3275}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12296
-            au0 = 329 -- + 1-3% Cure Potency. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Suzaku's Sune-Ate*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12946, 3276}) and player:getFreeSlotsCount() >= 1 then
+        -- *Suzaku's Sune-Ate*
+        elseif npcUtil.tradeHasExactly(trade, {12946, 3276}) then
             itemId = 12946
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
---            po0 = math.random(0, 2)
-            po0 = 0 -- This should cap out at 3% haste
+            aug0   = 49 -- + 1-3% Haste. Guaranteed.
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
+            if randomC > 30 then  
+                pow0 = 0 -- This should cap out at 3% haste
+            else
+                pow0 = math.random(0, 2)
+            end
 
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12946, 3276}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12946
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Suzaku's Scythe*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {18043, 3276}) and player:getFreeSlotsCount() >= 1 then
+        -- *Suzaku's Scythe*
+        elseif npcUtil.tradeHasExactly(trade, {18043, 3276}) then
             itemId = 18043
-            au0 = 45 -- + 1-16 Base Damage. Guaranteed.
-            po0 = math.random(0, 15)
+            aug0   = 45 -- + 1-16 Base Damage. Guaranteed.
+            pow0   = math.random(0, 15)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {18043, 3276}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 18043
-            au0 = 45 -- + 1-16 Base Damage. Guaranteed.
-            po0 = math.random(0, 15)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Seiryu's Kote*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12690, 3277}) and player:getFreeSlotsCount() >= 1 then
+        -- *Seiryu's Kote*
+        elseif npcUtil.tradeHasExactly(trade, {12690, 3277}) then
             itemId = 12690
-            au0 = 142 -- + 1-3 Store TP. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 142 -- + 1-3 Store TP. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12690, 3277}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12690
-            au0 = 142 -- + 1-3 Store TP. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Seiryu's Sword* NOTE THIS IS NOT RETAIL. CHECK AUGMENT TABLE
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {17659, 3277}) and player:getFreeSlotsCount() >= 1 then
+        -- *Seiryu's Sword* NOTE THIS IS NOT RETAIL. CHECK AUGMENT TABLE
+        elseif npcUtil.tradeHasExactly(trade, {17659, 3277}) then
             itemId = 17659
-            au0 = 45 -- + 1-16 Base Damage. Guaranteed.
-            po0 = math.random(0, 15)
+            aug0   = 45 -- + 1-16 Base Damage. Guaranteed.
+            pow0   = math.random(0, 15)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {17659, 3277}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17659
-            au0 = 45 -- + 1-16 Base Damage. Guaranteed.
-            po0 = math.random(0, 15)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Byakko's Haidate*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12818, 3278}) and player:getFreeSlotsCount() >= 1 then
+        -- *Byakko's Haidate*
+        elseif npcUtil.tradeHasExactly(trade, {12818, 3278}) then
             itemId = 12818
-            au0 = 142 -- + 1-3 Store TP. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 142 -- + 1-3 Store TP. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12818, 3278}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12818
-            au0 = 142 -- + 1-3 Store TP. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Byakko's Axe* NOTE THIS IS NOT RETAIL. CHECK AUGMENT TABLE
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {18198, 3278}) and player:getFreeSlotsCount() >= 1 then
+        -- *Byakko's Axe* NOTE THIS IS NOT RETAIL. CHECK AUGMENT TABLE
+        elseif npcUtil.tradeHasExactly(trade, {18198, 3278}) then
             itemId = 18198
-            au0 = 45 -- + 1-16 Base Damage. Guaranteed.
-            po0 = math.random(0, 15)
+            aug0   = 45 -- + 1-16 Base Damage. Guaranteed.
+            pow0   = math.random(0, 15)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {18198, 3278}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 18198
-            au0 = 45 -- + 1-16 Base Damage. Guaranteed.
-            po0 = math.random(0, 15)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Zenith Crown* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13876, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Crown*
+        elseif npcUtil.tradeHasExactly(trade, {13876, 3283}) then
             itemId = 13876
-            au0 = 133 --- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 133 --- + 1-3 Magic Attack Bonus. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13876, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13876
-            au0 = 133 --- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13877, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Crown +1*
+        elseif npcUtil.tradeHasExactly(trade, {13877, 3283}) then
             itemId = 13877
-            au0 = 133 --- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 133 --- + 1-4 Magic Attack Bonus. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13877, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13877
-            au0 = 133 --- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Dalmatica* or +1 (BiS item after augments consider nerfing)
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13787, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Dalmatica*
+        elseif npcUtil.tradeHasExactly(trade, {13787, 3283}) then
             itemId = 13787
-            au0 = 351 -- + 1-3% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = 0
+            aug0   = 351 -- + 1-3% Occasionally Quickens Spellcasting. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13787, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13787
-            au0 = 351 -- + 1-3% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13788, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Dalmatica +1*
+        elseif npcUtil.tradeHasExactly(trade, {13788, 3283}) then    
             itemId = 13788
-            au0 = 351 -- + 1-4% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = 0
+            aug0   = 351 -- + 1-4% Occasionally Quickens Spellcasting. Guaranteed.
+            pow0   = 0
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13788, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13788
-            au0 = 351 -- + 1-4% Occasionally Quickens Spellcasting. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Zenith Mitts* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14006, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Mitts*
+        elseif npcUtil.tradeHasExactly(trade, {14006, 3283}) then
             itemId = 14006
-            au0 = 516 -- + INT (1-3)
-            po0 = math.random(0, 2)
+            aug0   = 516 -- + INT (1-3)
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14006, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14006
-            au0 = 516 -- + INT (1-3)
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14007, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Mitts +1*
+        elseif npcUtil.tradeHasExactly(trade, {14007, 3283}) then
             itemId = 14007
-            au0 = 516 -- + INT (1-4)
-            po0 = math.random(0, 3)
+            aug0   = 516 -- + INT (1-4)
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14007, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14007
-            au0 = 516 -- + INT (1-4)
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Zenith Slacks* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14247, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Slacks*
+        elseif npcUtil.tradeHasExactly(trade, {14247, 3283}) then
             itemId = 14247
-            au0 = 322 -- + 1-3% Song Spellcasting Time -. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 322 -- + 1-3% Song Spellcasting Time -. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14247, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14247
-            au0 = 322 -- + 1-3% Song Spellcasting Time -. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14248, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Slacks +1*
+        elseif npcUtil.tradeHasExactly(trade, {14248, 3283}) then
             itemId = 14248
-            au0 = 322 -- + 1-4% Song Spellcasting Time -. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 322 -- + 1-4% Song Spellcasting Time -. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14248, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14248
-            au0 = 322 -- + 1-4% Song Spellcasting Time -. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Zenith Pumps* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14123, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Pumps*
+        elseif npcUtil.tradeHasExactly(trade, {14123, 3283}) then
             itemId = 14123
-            au0 = 294 -- Summoning Magic Skill (1-3)
-            po0 = math.random(0, 2)
+            aug0   = 294 -- Summoning Magic Skill (1-3)
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14123, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14123
-            au0 = 294 -- Summoning Magic Skill (1-3)
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14124, 3283}) and player:getFreeSlotsCount() >= 1 then
+        -- *Zenith Pumps +1*
+        elseif npcUtil.tradeHasExactly(trade, {14124, 3283}) then
             itemId = 14124
-            au0 = 294 -- Summoning Magic Skill (1-4)
-            po0 = math.random(0, 3)
+            aug0   = 294 -- Summoning Magic Skill (1-4)
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14124, 3283}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14124
-            au0 = 294 -- Summoning Magic Skill (1-4)
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Hecatomb Cap* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13927, 3279}) and player:getFreeSlotsCount() >= 1 then
+        -- *Hecatomb Cap*
+        elseif npcUtil.tradeHasExactly(trade, {13927, 3279}) then
             itemId = 13927
-            au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 143 -- + 1-3 Double Attack. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13927, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13927
-            au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13928, 3279}) and player:getFreeSlotsCount() >= 1 then
+        -- *Hecatomb Cap +1*
+        elseif npcUtil.tradeHasExactly(trade, {13928, 3279}) then
             itemId = 13928
-            au0 = 143 -- + 1-4 Double Attack. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 143 -- + 1-4 Double Attack. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13928, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13928
-            au0 = 143 -- + 1-4 Double Attack. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Hecatomb Harness* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14378, 3279}) and player:getFreeSlotsCount() >= 1 then
+        -- *Hecatomb Harness* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14378, 3279}) then
             itemId = 14378
-            au0 = 513 -- + 1-3 DEX. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 513 -- + 1-3 DEX. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14378, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14378
-            au0 = 513 -- + 1-3 DEX. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14379, 3279}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14379, 3279}) then
             itemId = 14379
-            au0 = 513 -- + 1-4 DEX. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 513 -- + 1-4 DEX. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14379, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14379
-            au0 = 513 -- + 1-4 DEX. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Hecatomb Mittens* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14076, 3279}) and player:getFreeSlotsCount() >= 1 then
+        -- *Hecatomb Mittens* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14076, 3279}) then
             itemId = 14076
-            au0 = 328 -- + 1-3% Crit. Hit Damage. Guaranteed.
-            po0 = 0
+            aug0   = 328 -- + 1-3% Crit. Hit Damage. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14076, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14076
-            au0 = 328 -- + 1-3% Crit. Hit Damage. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14077, 3279}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14077, 3279}) then
             itemId = 14077
-            au0 = 328 -- + 1-4% Crit. Hit Damage. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 328 -- + 1-4% Crit. Hit Damage. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14077, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14077
-            au0 = 328 -- + 1-4% Crit. Hit Damage. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Hecatomb Subligar* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14308, 3279}) and player:getFreeSlotsCount() >= 1 then
+        -- *Hecatomb Subligar* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14308, 3279}) then
             itemId = 14308
-            au0 = 41 -- + 1-3 Crit. Hit Rate. Guaranteed.
-            po0 = 0
+            aug0   = 41 -- + 1-3 Crit. Hit Rate. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14308, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14308
-            au0 = 41 -- + 1-3 Crit. Hit Rate. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14309, 3279}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14309, 3279}) then
             itemId = 14309
-            au0 = 41 -- + 1-4 Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 41 -- + 1-4 Crit. Hit Rate. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14309, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14309
-            au0 = 41 -- + 1-4 Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Hecatomb Leggings* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14180, 3279}) and player:getFreeSlotsCount() >= 1 then
+        -- *Hecatomb Leggings* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14180, 3279}) then
             itemId = 14180
-            au0 = 512 -- + 1-3 STR. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 512 -- + 1-3 STR. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14180, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14180
-            au0 = 512 -- + 1-3 STR. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14181, 3279}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14181, 3279}) then
             itemId = 14181
-            au0 = 512 -- + 1-4 STR. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 512 -- + 1-4 STR. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14181, 3279}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14181
-            au0 = 512 -- + 1-4 STR. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Koenig Schaller* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12421, 3280}) and player:getFreeSlotsCount() >= 1 then
+        -- *Koenig Schaller* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12421, 3280}) then
             itemId = 12421
-            au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = 0
+            aug0   = 140 -- + 1-3 Fast Cast. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12421, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12421
-            au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13911, 3280}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {13911, 3280}) then
             itemId = 13911
-            au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 140 -- + 1-4 Fast Cast. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13911, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13911
-            au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Koenig Cuirass* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12549, 3280}) and player:getFreeSlotsCount() >= 1 then
+        -- *Koenig Cuirass* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12549, 3280}) then
             itemId = 12549
-            au0 = 54 -- + 1-3% Physical Damage Taken -. Guaranteed.
-            po0 = 0
+            aug0   = 54 -- + 1-3% Physical Damage Taken -. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12549, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12549
-            au0 = 54 -- + 1-3% Physical Damage Taken -. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14370, 3280}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14370, 3280}) then
             itemId = 14370
-            au0 = 54 -- + 1-4% Physical Damage Taken -. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 54 -- + 1-4% Physical Damage Taken -. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14370, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14370
-            au0 = 54 -- + 1-4% Physical Damage Taken -. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Koenig Handschuhs* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12677, 3280}) and player:getFreeSlotsCount() >= 1 then
+        -- *Koenig Handschuhs* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12677, 3280}) then
             itemId = 12677
-            au0 = 145 -- + 1-3 Counter. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 145 -- + 1-3 Counter. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12677, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12677
-            au0 = 145 -- + 1-3 Counter. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14061, 3280}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14061, 3280}) then
             itemId = 14061
-            au0 = 145 -- + 1-4 Counter. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 145 -- + 1-4 Counter. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14061, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14061
-            au0 = 145 -- + 1-4 Counter. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Koenig Diechlings* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12805, 3280}) and player:getFreeSlotsCount() >= 1 then
+        -- *Koenig Diechlings* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12805, 3280}) then
             itemId = 12805
-            au0 = 55 -- + 1-3 Magic Damage Taken -. Guaranteed.
-            po0 = 0
+            aug0   = 55 -- + 1-3 Magic Damage Taken -. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12805, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12805
-            au0 = 55 -- + 1-3 Magic Damage Taken -. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14283, 3280}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14283, 3280}) then
             itemId = 14283
-            au0 = 55 -- + 1-4 Magic Damage Taken -. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 55 -- + 1-4 Magic Damage Taken -. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14283, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14283
-            au0 = 55 -- + 1-4 Magic Damage Taken -. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Koenig Schuhs* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12933, 3280}) and player:getFreeSlotsCount() >= 1 then
+        -- *Koenig Schuhs* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12933, 3280}) then
             itemId = 12933
-            au0 = 137 -- + 1-3 Regen. Guaranteed.
-            po0 = 0
+            aug0   = 137 -- + 1-3 Regen. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12933, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12933
-            au0 = 137 -- + 1-3 Regen. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14163, 3280}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14163, 3280}) then
             itemId = 14163
-            au0 = 137 -- + 1-4 Regen. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 137 -- + 1-4 Regen. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14163, 3280}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14163
-            au0 = 137 -- + 1-4 Regen. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Adaman Celata* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12429, 3281}) and player:getFreeSlotsCount() >= 1 then
+        -- *Adaman Celata* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12429, 3281}) then
             itemId = 12429
-            au0 = 293 -- + 1-3 Dark Magic Skill. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 293 -- + 1-3 Dark Magic Skill. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12429, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12429
-            au0 = 293 -- + 1-3 Dark Magic Skill. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13924, 3281}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {13924, 3281}) then
             itemId = 13924
-            au0 = 293 -- + 1-4 Dark Magic Skill. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 293 -- + 1-4 Dark Magic Skill. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13924, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13924
-            au0 = 293 -- + 1-4 Dark Magic Skill. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Adaman Hauberk* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12557, 3281}) and player:getFreeSlotsCount() >= 1 then
+        -- *Adaman Hauberk* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12557, 3281}) then
             itemId = 12557
-            au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 143 -- + 1-3 Double Attack. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12557, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12557
-            au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14371, 3281}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14371, 3281}) then
             itemId = 14371
-            au0 = 143 -- + 1-4 Double Attack. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 143 -- + 1-4 Double Attack. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14371, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14371
-            au0 = 143 -- + 1-4 Double Attack. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Adaman Mufflers* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12685, 3281}) and player:getFreeSlotsCount() >= 1 then
+        -- *Adaman Mufflers* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12685, 3281}) then
             itemId = 12685
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = 0
+            aug0   = 49 -- + 1-3% Haste. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12685, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12685
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14816, 3281}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14816, 3281}) then
             itemId = 14816
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 49 -- + 1-4% Haste. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14816, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14816
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Adaman Breeches* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12813, 3281}) and player:getFreeSlotsCount() >= 1 then
+        -- *Adaman Breeches* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12813, 3281}) then
             itemId = 12813
-            au0 = 512 -- + 1-3 STR. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 512 -- + 1-3 STR. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12813, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12813
-            au0 = 512 -- + 1-3 STR. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14296, 3281}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14296, 3281}) then
             itemId = 14296
-            au0 = 512 -- + 1-4 STR. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 512 -- + 1-4 STR. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14296, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14296
-            au0 = 512 -- + 1-4 STR. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Adaman Sollerets* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12941, 3281}) and player:getFreeSlotsCount() >= 1 then
+        -- *Adaman Sollerets* or +1
+        elseif npcUtil.tradeHasExactly(trade, {12941, 3281}) then
             itemId = 12941
-            au0 = 111 -- + 1-3% Pet: Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 111 -- + 1-3% Pet: Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12941, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12941
-            au0 = 111 -- + 1-3% Pet: Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14175, 3281}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14175, 3281}) then
             itemId = 14175
-            au0 = 111 -- + 1-4% Pet: Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 111 -- + 1-4% Pet: Haste. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14175, 3281}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14175
-            au0 = 111 -- + 1-4% Pet: Haste. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shura Zunari Kabuto* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13934, 3282}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shura Zunari Kabuto* or +1
+        elseif npcUtil.tradeHasExactly(trade, {13934, 3282}) then
             itemId = 13934
-            au0 = 327 -- + 1-3% Weapon Skill Damage. Guaranteed.
-            po0 = 0
+            aug0   = 327 -- + 1-3% Weapon Skill Damage. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13934, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13934
-            au0 = 327 -- + 1-3% Weapon Skill Damage. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13935, 3282}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {13935, 3282}) then
             itemId = 13935
-            au0 = 327 -- + 1-4% Weapon Skill Damage. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 327 -- + 1-4% Weapon Skill Damage. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13935, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13935
-            au0 = 327 -- + 1-4% Weapon Skill Damage. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shura Togi* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14387, 3282}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shura Togi* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14387, 3282}) then
             itemId = 14387
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 49 -- + 1-3% Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14387, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14387
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14388, 3282}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14388, 3282}) then
             itemId = 14388
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 49 -- + 1-4% Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14388, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14388
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shura Kote* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14821, 3282}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shura Kote* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14821, 3282}) then
             itemId = 14821
-            au0 = 145 -- + 1-3 Counter. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 145 -- + 1-3 Counter. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14821, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14821
-            au0 = 145 -- + 1-3 Counter. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14822, 3282}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14822, 3282}) then
             itemId = 14822
-            au0 = 145 -- + 1-4 Counter. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 145 -- + 1-4 Counter. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14822, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14822
-            au0 = 145 -- + 1-4 Counter. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shura Haidate* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14303, 3282}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shura Haidate* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14303, 3282}) then
             itemId = 14303
-            au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = 0
+            aug0   = 146 -- + 1-3 Dual Weild. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14303, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14303
-            au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14304, 3282}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14304, 3282}) then
             itemId = 14304
-            au0 = 146 -- + 1-4 Dual Weild. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 146 -- + 1-4 Dual Weild. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14304, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14304
-            au0 = 146 -- + 1-4 Dual Weild. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shura Sune-Ate* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14184, 3282}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shura Sune-Ate* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14184, 3282}) then
             itemId = 14184
-            au0 = 194 -- + 1-3 Kick Attacks. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 194 -- + 1-3 Kick Attacks. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14184, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14184
-            au0 = 194 -- + 1-3 Kick Attacks. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14185, 3282}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14185, 3282}) then
             itemId = 14185
-            au0 = 194 -- + 1-4 Kick Attacks. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 194 -- + 1-4 Kick Attacks. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14185, 3282}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14185
-            au0 = 194 -- + 1-4 Kick Attacks. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Crimson Mask* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13908, 3284}) and player:getFreeSlotsCount() >= 1 then
+        -- *Crimson Mask* or +1
+        elseif npcUtil.tradeHasExactly(trade, {13908, 3284}) then
             itemId = 13908
-            au0 = 35 -- + 1-3 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 35 -- + 1-3 Magic Accuracy. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13908, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13908
-            au0 = 35 -- + 1-3 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {13909, 3284}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {13909, 3284}) then
             itemId = 13909
-            au0 = 35 -- + 1-4 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 35 -- + 1-4 Magic Accuracy. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {13909, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 13909
-            au0 = 35 -- + 1-4 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Crimson Scale Mail* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14367, 3284}) and player:getFreeSlotsCount() >= 1 then
+        -- *Crimson Scale Mail* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14367, 3284}) then
             itemId = 14367
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 49 -- + 1-3% Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14367, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14367
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14368, 3284}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14368, 3284}) then
             itemId = 14368
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 49 -- + 1-4% Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14368, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14368
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Crimson Finger Gauntlets* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14058, 3284}) and player:getFreeSlotsCount() >= 1 then
+        -- *Crimson Finger Gauntlets* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14058, 3284}) then
             itemId = 14058
-            au0 = 211 -- + 1-3 Snapshot. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 211 -- + 1-3 Snapshot. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14058, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14058
-            au0 = 211 -- + 1-3 Snapshot. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14059, 3284}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14059, 3284}) then
             itemId = 14059
-            au0 = 211 -- + 1-4 Snapshot. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 211 -- + 1-4 Snapshot. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14059, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14059
-            au0 = 211 -- + 1-4 Snapshot. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Crimson Cuisses* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14280, 3284}) and player:getFreeSlotsCount() >= 1 then
+        -- *Crimson Cuisses* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14280, 3284}) then
             itemId = 14280
-            au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = 0
+            aug0   = 140 -- + 1-3 Fast Cast. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14280, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14280
-            au0 = 140 -- + 1-3 Fast Cast. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14281, 3284}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14281, 3284}) then
             itemId = 14281
-            au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 140 -- + 1-4 Fast Cast. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14281, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14281
-            au0 = 140 -- + 1-4 Fast Cast. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Crimson Greaves* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14160, 3284}) and player:getFreeSlotsCount() >= 1 then
+        -- *Crimson Greaves* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14160, 3284}) then
             itemId = 14160
-            au0 = 299 -- + 1-3 Blue Magic Skill. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 299 -- + 1-3 Blue Magic Skill. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14160, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14160
-            au0 = 299 -- + 1-3 Blue Magic Skill. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14161, 3284}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14161, 3284}) then
             itemId = 14161
-            au0 = 299 -- + 1-4 Blue Magic Skill. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 299 -- + 1-4 Blue Magic Skill. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14161, 3284}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14161
-            au0 = 299 -- + 1-4 Blue Magic Skill. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Hat* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {16115, 3286}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Hat* or +1
+        elseif npcUtil.tradeHasExactly(trade, {16115, 3286}) then
             itemId = 16115
-            au0 = 101 -- + 1-3 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = 0
+            aug0   = 101 -- + 1-3 Pet: Magic Attack Bonus. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {16115, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 16115
-            au0 = 101 -- + 1-3 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {16116, 3286}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {16116, 3286}) then
             itemId = 16116
-            au0 = 101 -- + 1-4 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 101 -- + 1-4 Pet: Magic Attack Bonus. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {16116, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 16116
-            au0 = 101 -- + 1-4 Pet: Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Coat* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14575, 3286}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Coat* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14575, 3286}) then
             itemId = 14575
-            au0 = 35 -- + 1-3 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 35 -- + 1-3 Magic Accuracy. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14575, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14575
-            au0 = 35 -- + 1-3 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14576, 3286}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14576, 3286}) then
             itemId = 14576
-            au0 = 35 -- + 1-4 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 35 -- + 1-4 Magic Accuracy. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14576, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14576
-            au0 = 35 -- + 1-4 Magic Accuracy. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Cuffs* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14997, 3286}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Cuffs* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14997, 3286}) then
             itemId = 14997
-            au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = 0
+            aug0   = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14997, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14997
-            au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14998, 3286}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14998, 3286}) then
             itemId = 14998
-            au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14998, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14998
-            au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Trews* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15657, 3286}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Trews* or +1
+        elseif npcUtil.tradeHasExactly(trade, {15657, 3286}) then
             itemId = 15657
-            au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = 0
+            aug0   = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15657, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15657
-            au0 = 133 -- + 1-3 Magic Attack Bonus. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15658, 3286}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {15658, 3286}) then
             itemId = 15658
-            au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15658, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15658
-            au0 = 133 -- + 1-4 Magic Attack Bonus. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Clogs* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15742, 3286}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Clogs* or +1
+        elseif npcUtil.tradeHasExactly(trade, {15742, 3286}) then
             itemId = 15742
-            au0 = 296 -- + 1-3 Singing Skill. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 296 -- + 1-3 Singing Skill. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15742, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15742
-            au0 = 296 -- + 1-3 Singing Skill. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15743, 3286}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {15743, 3286}) then
             itemId = 15743
-            au0 = 296 -- + 1-4 Singing Skill. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 296 -- + 1-4 Singing Skill. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15743, 3286}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15743
-            au0 = 296 -- + 1-4 Singing Skill. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Helm* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {16113, 3285}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Helm* or +1
+        elseif npcUtil.tradeHasExactly(trade, {16113, 3285}) then
             itemId = 16113
-            au0 = 138 -- + 1-3 Refresh. Guaranteed.
---            po0 = math.random(0, 2)
-            po0 = 0
+            aug0   = 138 -- + 1-3 Refresh. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {16113, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 16113
-            au0 = 138 -- + 1-3 Refresh. Guaranteed.
---            po0 = math.random(0, 2)
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {16114, 3285}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {16114, 3285}) then
             itemId = 16114
-            au0 = 138 -- + 1-4 Refresh. Guaranteed.
---            po0 = math.random(0, 3)
-            po0 = 0
-			
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {16114, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 16114
-            au0 = 138 -- + 1-4 Refresh. Guaranteed.
---            po0 = math.random(0, 3)
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Breastplate* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14573, 3285}) and player:getFreeSlotsCount() >= 1 then
+            aug0   = 138 -- + 1-4 Refresh. Guaranteed.
+            pow0   = 0
+            type   = 2
+        
+        -- *Shadow Breastplate* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14573, 3285}) then
             itemId = 14573
-            au0 = 144 -- + 1-3 Triple Attack. Guaranteed.
-            po0 = 0
+            aug0   = 144 -- + 1-3 Triple Attack. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14573, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14573
-            au0 = 144 -- + 1-3 Triple Attack. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14574, 3285}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14574, 3285}) then
             itemId = 14574
-            au0 = 144 -- + 1-4 Triple Attack. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 144 -- + 1-4 Triple Attack. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14574, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14574
-            au0 = 144 -- + 1-4 Triple Attack. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Gauntlets* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14995, 3285}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Gauntlets* or +1
+        elseif npcUtil.tradeHasExactly(trade, {14995, 3285}) then
             itemId = 14995
-            au0 = 143 -- + 1-3% Double Attack. Guaranteed.
-            po0 = 0
+            aug0   = 143 -- + 1-3% Double Attack. Guaranteed.
+            pow0   = 0
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14995, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14995
-            au0 = 143 -- + 1-3% Double Attack. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {14996, 3285}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {14996, 3285}) then
             itemId = 14996
-            au0 = 143 -- + 1-4% Double Attack. Guaranteed.
-            po0 = math.random(0, 1)
+            aug0   = 143 -- + 1-4% Double Attack. Guaranteed.
+            pow0   = math.random(0, 1)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {14996, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 14996
-            au0 = 143 -- + 1-4% Double Attack. Guaranteed.
-            po0 = math.random(0, 1)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Cuishes* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15655, 3285}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Cuishes* or +1
+        elseif npcUtil.tradeHasExactly(trade, {15655, 3285}) then
             itemId = 15655
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 49 -- + 1-3% Haste. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15655, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15655
-            au0 = 49 -- + 1-3% Haste. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15656, 3285}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {15656, 3285}) then
             itemId = 15656
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 49 -- + 1-4% Haste. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15656, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15656
-            au0 = 49 -- + 1-4% Haste. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Shadow Sabatons* or +1
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15740, 3285}) and player:getFreeSlotsCount() >= 1 then
+        -- *Shadow Sabatons* or +1
+        elseif npcUtil.tradeHasExactly(trade, {15740, 3285}) then
             itemId = 15740
-            au0 = 41 -- + 1-3% Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 41 -- + 1-3% Crit. Hit Rate. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15740, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15740
-            au0 = 41 -- + 1-3% Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
-
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {15741, 3285}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {15741, 3285}) then
             itemId = 15741
-            au0 = 41 -- + 1-4% Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 3)
+            aug0   = 41 -- + 1-4% Crit. Hit Rate. Guaranteed.
+            pow0   = math.random(0, 3)
+            type   = 2
 
-            handleHqItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {15741, 3285}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 15741
-            au0 = 41 -- + 1-4% Crit. Hit Rate. Guaranteed.
-            po0 = math.random(0, 3)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
--- *Kirin's Osode (Genbu)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3275}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Osode (Genbu)*
+        elseif npcUtil.tradeHasExactly(trade, {12562, 3275}) then
             itemId = 12562
-            au0 = 137 -- + 1-3 Regen. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 137 -- + 1-3 Regen. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 3
 
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3275}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Osode (Suzaku)*
+        elseif npcUtil.tradeHasExactly(trade, {12562, 3276}) then
             itemId = 12562
-            au0 = 137 -- + 1-3 Regen. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 143 -- + 1-3 Double Attack. Guaranteed.
+            pow0   = 0
+            type   = 3
 
-            handleRandomAugment(player, itemId, au0, po0)
--- *Kirin's Osode (Suzaku)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3276}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Osode (Seiryu)*
+        elseif npcUtil.tradeHasExactly(trade, {12562, 3277}) then
             itemId = 12562
-            au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = 0
+            aug0   = 211 -- + 1-3 Snapshot. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 3
 
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3276}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Osode (Byakko)*
+        elseif npcUtil.tradeHasExactly(trade, {12562, 3278}) then
             itemId = 12562
-            au0 = 143 -- + 1-3 Double Attack. Guaranteed.
-            po0 = 0
+            aug0   = 146 -- + 1-3 Dual Weild. Guaranteed.
+            pow0   = 0
+            type   = 3
 
-            handleRandomAugment(player, itemId, au0, po0)
--- *Kirin's Osode (Seiryu)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3277}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12562
-            au0 = 211 -- + 1-3 Snapshot. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3277}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12562
-            au0 = 211 -- + 1-3 Snapshot. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
--- *Kirin's Osode (Byakko)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3278}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12562
-            au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = 0
-
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {12562, 3278}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 12562
-            au0 = 146 -- + 1-3 Dual Weild. Guaranteed.
-            po0 = 0
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
--- *Kirin's Pole (Genbu)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3275}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Pole (Genbu)*
+        elseif npcUtil.tradeHasExactly(trade, {17567, 3275}) then
             itemId = 17567
-            au0 = 290 -- + 1-3 Enhancing Magic Skill
-            po0 = math.random(0, 2)
+            aug0   = 290 -- + 1-3 Enhancing Magic Skill
+            pow0   = math.random(0, 2)
+            type   = 3
 
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3275}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Pole (Suzaku)*
+        elseif npcUtil.tradeHasExactly(trade, {17567, 3276}) then
             itemId = 17567
-            au0 = 290 -- + 1-3 Enhancing Magic Skill
-            po0 = math.random(0, 2)
+            aug0   = 292 -- + 1-3 Elemental Magic Skill
+            pow0   = math.random(0, 2)
+            type   = 3
 
-            handleRandomAugment(player, itemId, au0, po0)
--- *Kirin's Pole (Suzaku)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3276}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Pole (Seiryu)*
+        elseif npcUtil.tradeHasExactly(trade, {17567, 3277}) then
             itemId = 17567
-            au0 = 292 -- + 1-3 Elemental Magic Skill
-            po0 = math.random(0, 2)
+            aug0   = 291 -- + 1-3 Enfeebling Magic Skill
+            pow0   = math.random(0, 2)
+            type   = 3
 
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3276}) and player:getFreeSlotsCount() >= 1 then
+        -- *Kirin's Pole (Byakko)*
+        elseif npcUtil.tradeHasExactly(trade, {17567, 3278}) then
             itemId = 17567
-            au0 = 292 -- + 1-3 Elemental Magic Skill
-            po0 = math.random(0, 2)
+            aug0   = 294 -- + 1-3 Summoning Magic Skill
+            pow0   = math.random(0, 2)
+            type   = 3
 
-            handleRandomAugment(player, itemId, au0, po0)
--- *Kirin's Pole (Seiryu)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3277}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17567
-            au0 = 291 -- + 1-3 Enfeebling Magic Skill
-            po0 = math.random(0, 2)
-
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3277}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17567
-            au0 = 291 -- + 1-3 Enfeebling Magic Skill
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
--- *Kirin's Pole (Byakko)*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3278}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17567
-            au0 = 294 -- + 1-3 Summoning Magic Skill
-            po0 = math.random(0, 2)
-
-            handleKirinItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {17567, 3278}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17567
-            au0 = 294 -- + 1-3 Summoning Magic Skill
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)
------------------------------------------------------------------------------------------------
-    -- *Sarissa*
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19307}) and player:getFreeSlotsCount() >= 1 then
+        -- *Sarissa*
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19307}) then
             itemId = 19304
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
+            aug0   = 45 -- + 1-12 Base Damage. Guaranteed.
+            pow0   = math.random(0, 11)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19307}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19304}) then
             itemId = 19304
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
+            aug0   = 45 -- + 1-12 Base Damage. Guaranteed.
+            pow0   = math.random(0, 11)
+            type   = 1
 
-            handleRandomAugment(player, itemId, au0, po0)
-			
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19304}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 19304
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 19304}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 19304
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
-
-            handleRandomAugment(player, itemId, au0, po0)			
------------------------------------------------------------------------------------------------
-    -- *Majestas* 
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18617}) and player:getFreeSlotsCount() >= 1 then
+        -- *Majestas* 
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18617}) then
             itemId = 18603
-            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
-            po0 = math.random(0, 9)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18617}) and player:getFreeSlotsCount() >= 1 then
+            aug0   = 35 -- + 1-10 Magic Acc. Guaranteed.
+            pow0   = math.random(0, 9)
+            type   = 1
+            
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18603}) then
             itemId = 18603
-            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
-            po0 = math.random(0, 9)
+            aug0   = 35 -- + 1-10 Magic Acc. Guaranteed.
+            pow0   = math.random(0, 9)
+            type   = 1
 
-            handleRandomAugment(player, itemId, au0, po0)
-			
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18603}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 18603
-            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
-            po0 = math.random(0, 9)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0) 
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 18603}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 18603
-            au0 = 35 -- + 1-10 Magic Acc. Guaranteed.
-            po0 = math.random(0, 9)
-
-            handleRandomAugment(player, itemId, au0, po0)			
------------------------------------------------------------------------------------------------
-    -- *Galatyn* 
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19162}) and player:getFreeSlotsCount() >= 1 then
+        -- *Galatyn* 
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19162}) then
             itemId = 19159
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
+            aug0   = 45 -- + 1-12 Base Damage. Guaranteed.
+            pow0   = math.random(0, 11)
+            type   = 1
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)  
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19162}) and player:getFreeSlotsCount() >= 1 then
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19159}) then
             itemId = 19159
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
+            aug0   = 45 -- + 1-12 Base Damage. Guaranteed.
+            pow0   = math.random(0, 11)
+            type   = 1
 
-            handleRandomAugment(player, itemId, au0, po0)
-			
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19159}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 19159
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2858, 2859, 19159}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 19159
-            au0 = 45 -- + 1-12 Base Damage. Guaranteed.
-            po0 = math.random(0, 11)
-
-            handleRandomAugment(player, itemId, au0, po0)			
------------------------------------------------------------------------------------------------
-    -- *Concordia* 
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17767}) and player:getFreeSlotsCount() >= 1 then
+        -- *Concordia* 
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17767}) then
             itemId = 17765
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17767}) and player:getFreeSlotsCount() >= 1 then
+            aug0   = 45 -- + 1-3 Base Damage. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
+            
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17765}) then
             itemId = 17765
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 45 -- + 1-3 Base Damage. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
 
-            handleRandomAugment(player, itemId, au0, po0)
-			
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17765}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17765
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2858, 2859, 2859, 17765}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 17765
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)			
------------------------------------------------------------------------------------------------
-    -- *Machismo* 
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19128}) and player:getFreeSlotsCount() >= 1 then
+        -- *Machismo* 
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19128}) then
             itemId = 19118
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19128}) and player:getFreeSlotsCount() >= 1 then
+            aug0   = 45 -- + 1-3 Base Damage. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
+     
+        elseif npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19118}) then
             itemId = 19118
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
+            aug0   = 45 -- + 1-3 Base Damage. Guaranteed.
+            pow0   = math.random(0, 2)
+            type   = 1
+        end
 
-            handleRandomAugment(player, itemId, au0, po0)
-			
-    elseif randomC > 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19118}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 19118
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
+        -- FallBack
+        if type > 0 then
+            if randomC > 30 then
+                if type == 1 then
+                    handleAugmentedItemCreation(player, itemId, aug0, pow0)
+                elseif type == 2 then
+                    handleHqItemCreation(player, itemId, aug0, pow0)
+                elseif type == 3 then
+                    handleKirinItemCreation(player, itemId, aug0, pow0)
+                end
+            else
+                handleRandomAugment(player, itemId, aug0, pow0)
+            end
+        else
+            player:PrintToPlayer( "This item combination is incorrect.", 0xd )
+        end
 
-            handleAugmentedItemCreation(player, itemId, au0, po0)
-
-        elseif randomC < 30 and
-            npcUtil.tradeHasExactly(trade, {2858, 2859, 2859, 19118}) and player:getFreeSlotsCount() >= 1 then
-            itemId = 19118
-            au0 = 45 -- + 1-3 Base Damage. Guaranteed.
-            po0 = math.random(0, 2)
-
-            handleRandomAugment(player, itemId, au0, po0)			
------------------------------------------------------------------------------------------------
--- FallBack
-else
-    player:PrintToPlayer( "This item combination is incorrect or not enough inventory space available.", 0xd ) -- OG CODE TY
+    else
+        player:PrintToPlayer( "Not enough space in the inventory.", 0xd )
     end
 end
