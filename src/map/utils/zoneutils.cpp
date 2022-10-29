@@ -1191,4 +1191,22 @@ namespace zoneutils
         return PChar->m_moghouseID != 0;
     }
 
+    /************************************************************************
+     *                                                                       *
+     *  Checks whether or not the zone is enabled                            *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsZoneActive(uint16 zoneId)
+    {
+        if (auto* PZone = GetZone(zoneId))
+        {
+            if (PZone->GetIP() == 0 || PZone->GetPort() == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }; // namespace zoneutils
