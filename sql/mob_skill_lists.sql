@@ -1136,7 +1136,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Worm',258,429);
 INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1299);
 INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1300);
 INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1301);
-INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1302);
 INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1303);
 INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1304);
 INSERT INTO `mob_skill_lists` VALUES ('OuryuWyrm',259,1305);

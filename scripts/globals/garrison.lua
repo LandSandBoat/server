@@ -464,7 +464,7 @@ xi.garrison.tick = function(npc)
     local allNPCsDead = true
     for _, entityId in pairs(zoneData.npcs) do
         local entity = GetMobByID(entityId)
-        if entity:isAlive() then
+        if entity and entity:isAlive() then
             allNPCsDead = false
         end
     end
@@ -473,7 +473,7 @@ xi.garrison.tick = function(npc)
     for _, entityId in pairs(zoneData.players) do
         local entity = GetPlayerByID(entityId)
         -- TODO: Only check valid players
-        if entity:isAlive() then
+        if entity and entity:isAlive() then
             allPlayersDead = false
         end
     end
@@ -481,7 +481,7 @@ xi.garrison.tick = function(npc)
     local allMobsDead = true
     for _, entityId in pairs(zoneData.mobs) do
         local entity = GetMobByID(entityId)
-        if entity:isAlive() then
+        if entity and entity:isAlive() then
             allMobsDead = false
         end
     end

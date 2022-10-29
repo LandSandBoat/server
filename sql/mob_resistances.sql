@@ -509,3 +509,4 @@ INSERT INTO `mob_resistances` VALUES (508,'Annihilated_Anthony',0.25,0.75,0.5,0.
 INSERT INTO `mob_resistances` VALUES (509,'Shredded_Samson',1.25,0.75,0.25,0.25,-2500,5000,0,0,0,0,-2500,5000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (510,'Punctured_Percy',0.75,1.25,0.5,0.5,-2500,5000,0,0,0,0,-2500,5000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (511,'Mauled_Murdock',0.75,0.75,1.25,1.25,-2500,5000,0,0,0,0,-2500,5000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (513,'Quasilumin',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);

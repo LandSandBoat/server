@@ -624,12 +624,13 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS) == QUEST_ACCEPTED and
-                                xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2 and
-                                player:hasKeyItem(xi.ki.OLD_BOOTS) and
+                            return xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2 and
+                                xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Time') == 0 and
                                 not player:hasKeyItem(xi.ki.CRAWLER_BLOOD)
                         end,
-                        code = function(player) npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD) end,
+                        code = function(player)
+                            npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD)
+                        end,
                     },
                 },
                 points =
@@ -1059,8 +1060,10 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return (player:getCharVar("Quest[2][77]Prog") == 2 or player:getCharVar("Quest[2][77]Prog") == 3) and
-                            not player:hasKeyItem(xi.ki.JOKER_CARD)
+                            return player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD) == QUEST_ACCEPTED and
+                                (xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 2 or
+                                xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 3) and
+                                not player:hasKeyItem(xi.ki.JOKER_CARD)
                         end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.JOKER_CARD)
