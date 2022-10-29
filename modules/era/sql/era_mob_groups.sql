@@ -749,7 +749,7 @@ UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Grwnan' AND groupid='5
 
 UPDATE mob_groups SET minLevel = 38, maxLevel = 41 WHERE name = "Bigclaw_fished"  and zoneid = 121;
 UPDATE mob_groups SET minLevel = 42, maxLevel = 45 WHERE name = "Apsaras"  and zoneid = 121;
-s
+
 -- ------------------------------------------------------------
 -- RoMaeve (Zone 122)
 -- ------------------------------------------------------------
