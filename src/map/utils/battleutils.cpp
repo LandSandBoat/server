@@ -1555,11 +1555,6 @@ namespace battleutils
         return finalhitrate;
     }
 
-    uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage)
-    {
-        return GetRangedHitRate(PAttacker, PDefender, isBarrage, 0);
-    }
-
     // todo: need to penalise attacker's RangedAttack depending on distance from mob. (% decrease)
     float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, uint16 ignoredDef)
     {

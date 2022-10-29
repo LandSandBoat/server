@@ -218,6 +218,10 @@ end
 local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, calcParams)
     local accVarryTP = 0
 
+    if bonus == nil then
+        bonus = 0
+    end
+
     if wsParams and wsParams.acc100 ~= 0 then
         if calcParams.tp >= 3000 then
             accVarryTP = (wsParams.acc300 - 1) * 100
@@ -226,18 +230,10 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, c
         else
             accVarryTP = (wsParams.acc100 - 1) * 100
         end
-        attacker:addMod(xi.mod.RACC, accVarryTP)
+        bonus = bonus + accVarryTP
     end
 
-    local hitrate = attacker:getCRangedHitRate(target) / 100
-
-    if wsParams and wsParams.acc100 ~= 0 then
-        attacker:delMod(xi.mod.RACC, accVarryTP)
-    end
-
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    return utils.clamp(attacker:getCRangedHitRate(target, bonus) / 100, 0.2, 0.95)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
@@ -947,45 +943,33 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
         isSubAttack = false
     end
 
+    if bonus == nil then
+        bonus = 0
+    end
+
     local hitrate = 0
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     local accVarryTP = 0
 
     if wsParams and wsParams.acc100 ~= 0 then
         if calcParams.tp >= 3000 then
-            accVarryTP = (wsParams.acc300 - 1) * 100
+            accVarryTP = wsParams.acc300 - 1
         elseif calcParams.tp >= 2000 then
-            accVarryTP = (wsParams.acc200 - 1) * 100
+            accVarryTP = wsParams.acc200 - 1
         else
-            accVarryTP = (wsParams.acc100 - 1) * 100
+            accVarryTP = wsParams.acc100 - 1
         end
-        attacker:addMod(xi.mod.ACC, accVarryTP)
+        bonus = bonus + (accVarryTP * 100)
     end
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
-    end
-
-    if bonus ~= nil or bonus == 0 then
-        attacker:addMod(xi.mod.ACC, bonus)
+        bonus = bonus + (20 + flourisheffect:getPower())
     end
 
     if isSubAttack then
-        hitrate = attacker:getCHitRate(target, 1)
+        hitrate = attacker:getCHitRate(target, 1, bonus)
     else
-        hitrate = attacker:getCHitRate(target, 0)
-    end
-
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
-    end
-
-    if wsParams and wsParams.acc100 ~= 0 then
-        attacker:delMod(xi.mod.ACC, accVarryTP)
-    end
-
-    if bonus ~= nil or bonus == 0 then
-        attacker:delMod(xi.mod.ACC, bonus)
+        hitrate = attacker:getCHitRate(target, 0, bonus)
     end
 
     return utils.clamp((hitrate / 100), 0.2, 0.95)
