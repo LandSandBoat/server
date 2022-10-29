@@ -922,6 +922,11 @@ namespace petutils
                 PPet->PInstance = PMaster->PInstance;
             }
 
+            if (spawningFromZone)
+            {
+                PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Don't play special spawn animation on zone in
+            }
+
             PMaster->loc.zone->InsertPET(PPet);
 
             PPet->Spawn();
@@ -964,7 +969,7 @@ namespace petutils
             // apply stats from previous zone if this pet is being transferred
             if (spawningFromZone)
             {
-                PPet->health.tp = (int16) static_cast<CCharEntity*>(PMaster)->petZoningInfo.petTP;
+                PPet->health.tp = static_cast<uint16>(static_cast<CCharEntity*>(PMaster)->petZoningInfo.petTP);
                 PPet->health.hp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petHP;
                 PPet->health.mp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petMP;
             }
