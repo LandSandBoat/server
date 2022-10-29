@@ -846,6 +846,13 @@ public:
 
     uint32 getHistory(uint8 index);
 
+    auto getFishingStats() -> sol::table;
+    auto getFishingCatches() -> sol::table;
+    void setFishCaught(uint32 fishId, bool isCaught);
+    bool hasCaughtFish(uint32 fishId);
+    void clearFishCaught();
+    void clearFishHistory();
+
     void setAnimPath(uint8);
     void setAnimStart(bool);
     void setAnimBegin(uint32);
