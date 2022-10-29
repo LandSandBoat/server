@@ -500,13 +500,14 @@ UPDATE mob_groups SET minLevel = 33, maxLevel = 35 WHERE name = "Kraken_fished" 
 -- ------------------------------------------------------------
 
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Bedrock_Barry' AND groupid='26' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Yilbegan' AND groupid='55' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Blobdingnag' AND groupid='56' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Septic_Boil' AND groupid='57' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Shoggoth' AND groupid='58' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Lamprey_Lord' AND groupid='59' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Ground_Guzzler' AND groupid='60' AND zoneid='106';
-UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Globster' AND groupid='61' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Yilbegan' AND groupid='42' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Blobdingnag' AND groupid='43' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Septic_Boil' AND groupid='44' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Shoggoth' AND groupid='45' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Lamprey_Lord' AND groupid='46' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Ground_Guzzler' AND groupid='47' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Globster' AND groupid='48' AND zoneid='106';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Yilbegan' AND groupid='42' AND zoneid='106';
 
 UPDATE mob_groups SET minLevel = 2, maxLevel = 5 WHERE name = "Maneating_Hornet"     and zoneid = 106;
 UPDATE mob_groups SET minLevel = 2, maxLevel = 5 WHERE name = "Stone_Eater"     and zoneid = 106;
@@ -744,10 +745,11 @@ UPDATE mob_groups SET minLevel = 35, maxLevel = 38 WHERE name = "Kraken_fished" 
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Elusive_Edwin' AND groupid='15' AND zoneid='121';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Huwasi' AND groupid='20' AND zoneid='121';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Bastet' AND groupid='34' AND zoneid='121';
+UPDATE mob_groups SET content_tag='VOIDWATCH' WHERE name='Grwnan' AND groupid='58' AND zoneid='121';
 
 UPDATE mob_groups SET minLevel = 38, maxLevel = 41 WHERE name = "Bigclaw_fished"  and zoneid = 121;
 UPDATE mob_groups SET minLevel = 42, maxLevel = 45 WHERE name = "Apsaras"  and zoneid = 121;
-
+s
 -- ------------------------------------------------------------
 -- RoMaeve (Zone 122)
 -- ------------------------------------------------------------
