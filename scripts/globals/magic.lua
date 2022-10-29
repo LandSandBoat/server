@@ -134,12 +134,12 @@ local function getSpellBonusAcc(caster, target, spell, params)
     if casterJob == xi.job.DRK then
         -- Add MACC for Dark Seal
         if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-            magicAccBonus = magicAccBonus + 75
+            magicAccBonus = magicAccBonus + 100
         end
     end
 
     if caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) then
-        magicAccBonus = magicAccBonus + 75
+        magicAccBonus = magicAccBonus + 100
     end
 
     switch(casterJob): caseof
@@ -734,7 +734,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local quarterTrigger = false
     local resMod = 0
 
-    if element and element ~= xi.magic.ele.NONE then
+    if target and element and element ~= xi.magic.ele.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
     end
 
@@ -746,13 +746,13 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     }
     local mobTriggerPoints =
     {
-        evaMult < 1.15,
-        evaMult < 1.30,
-        evaMult < 1.50,
+        evaMult <= 0.50,
+        evaMult <= 0.80,
+        evaMult <= 1.00,
     }
     local selectedTable = mobTriggerPoints
 
-    if target:isPC() then
+    if target and target:isPC() then
         selectedTable = playerTriggerPoints
     end
 
@@ -960,6 +960,9 @@ xi.magic.finalMagicAdjustments = function(caster, target, spell, dmg)
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
 
+    -- Handle Rampart Magic Shield
+    dmg = utils.rampart(target, dmg)
+
     --handling stoneskin
     dmg = utils.stoneskin(target, dmg)
     dmg = utils.clamp(dmg, -99999, 99999)
@@ -992,6 +995,11 @@ xi.magic.finalMagicNonSpellAdjustments = function(caster, target, ele, dmg)
 
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
+
+    -- Handle Rampart Magic Shield
+    if dmg > 0 then
+        dmg = utils.clamp(utils.rampart(target, dmg), -99999, 99999)
+    end
 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)

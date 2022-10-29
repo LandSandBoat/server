@@ -318,6 +318,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
                     magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
                     magicdmg = utils.clamp(magicdmg, 0, 99999)
                     magicdmg = utils.oneforall(target, magicdmg)
+                    magicdmg = utils.rampart(target, magicdmg)
                     magicdmg = utils.stoneskin(target, magicdmg)
                 end
 
@@ -358,6 +359,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
+    adjustedDamage = utils.rampart(target, adjustedDamage)
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
     return adjustedDamage
@@ -838,6 +840,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         dmg = utils.oneforall(target, dmg)
+        dmg = utils.rampart(target, dmg)
         dmg = utils.stoneskin(target, dmg)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus

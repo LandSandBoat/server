@@ -371,6 +371,7 @@ end
 xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, element)
     local magicaccbonus = 0
     local percentBonus = 0
+    local effectRes = 0
 
     if diff > 10 then
         magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
@@ -383,7 +384,8 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     end
 
     if effect ~= nil then
-        percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
+        effectRes = xi.magic.getEffectResistance(target, effect, nil, mob)
+        percentBonus = percentBonus - effectRes
     end
 
     local p = xi.magic.getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)
@@ -604,6 +606,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     if attackType == xi.attackType.MAGICAL then
         dmg = utils.oneforall(target, dmg)
+        dmg = utils.rampart(target, dmg)
 
         if dmg < 0 then
             return 0
