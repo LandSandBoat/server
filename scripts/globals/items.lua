@@ -2799,6 +2799,7 @@ xi.items =
     MANNEQUIN_PUMPS                 = 12973,
     ASH_CLOGS                       = 12984,
     SOLEA                           = 12992,
+    POWER_SANDALS                   = 13012,
     STUMBLING_SANDALS               = 13013,
     LEAPING_BOOTS                   = 13014,
     FUMA_KYAHAN                     = 13054,
