@@ -125,6 +125,7 @@ namespace luautils
         lua.set_function("GarbageCollectStep", &luautils::garbageCollectStep);
         lua.set_function("GarbageCollectFull", &luautils::garbageCollectFull);
         lua.set_function("GetZone", &luautils::GetZone);
+        lua.set_function("IsZoneActive", &luautils::IsZoneActive);
         lua.set_function("GetNPCByID", &luautils::GetNPCByID);
         lua.set_function("GetMobByID", &luautils::GetMobByID);
         lua.set_function("WeekUpdateConquest", &luautils::WeekUpdateConquest);
@@ -933,6 +934,11 @@ namespace luautils
         }
 
         return std::nullopt;
+    }
+
+    bool IsZoneActive(uint16 zoneId)
+    {
+        return zoneutils::IsZoneActive(zoneId);
     }
 
     std::optional<CLuaBaseEntity> GetMobByID(uint32 mobid, sol::object const& instanceObj)
