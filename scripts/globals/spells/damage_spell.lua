@@ -472,6 +472,8 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
 
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
+
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
         local elementBonus  = caster:getMod(spellAcc[spellElement])
@@ -656,22 +658,60 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         end
     end
 
+    local sixteenthTrigger = false
+    local eighthTrigger = false
+    local quarterTrigger = false
+
+    if element and element ~= xi.magic.ele.NONE then
+        resMod = target:getMod(xi.magic.resistMod[element])
+    end
+
+    local playerTriggerPoints =
+    {
+        resMod > 145,
+        resMod > 100,
+        resMod >= 0,
+    }
+    local mobTriggerPoints =
+    {
+        evaMult < 1.15,
+        evaMult < 1.30,
+        evaMult < 1.50,
+    }
+    local selectedTable = mobTriggerPoints
+
+    if target:isPC() then
+        selectedTable = playerTriggerPoints
+    end
+
+    if playerTriggerPoints[1] then
+        sixteenthTrigger = true
+    end
+
+    if selectedTable[2] then
+        eighthTrigger = true
+    end
+
+    if selectedTable[3] then
+        quarterTrigger = true
+    end
+
     local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 3.00) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
     local resistVal = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half     = (1 - p)
+    local half      = (1 - p)
     local quart     = ((1 - p)^2)
     local eighth    = ((1 - p)^3)
     local sixteenth = ((1 - p)^4)
     local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= sixteenth then
+    if resvar <= sixteenth and sixteenthTrigger then
         resistVal = 0.0625
-    elseif resvar <= eighth then
+    elseif resvar <= eighth and eighthTrigger then
         resistVal = 0.125
-    elseif resvar <= quart then
+    elseif resvar <= quart and quarterTrigger then
         resistVal = 0.25
     elseif resvar <= half then
         resistVal = 0.5

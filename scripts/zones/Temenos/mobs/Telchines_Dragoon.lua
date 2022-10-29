@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 local flags = xi.path.flag.NONE
-local path =
+local pathNodes =
 {
     { 50.000, 80.000, 419.500 },
     { 30.000, 80.000, 419.500 },
@@ -21,7 +21,7 @@ entity.onMobRoam = function(mob)
     if pause < os.time() then
         local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
-        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
+        mob:pathTo(pathNodes[point][1], pathNodes[point][2], pathNodes[point][3], flags)
         mob:setLocalVar("pause", os.time() + 10)
     end
 end

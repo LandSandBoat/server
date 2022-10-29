@@ -8,8 +8,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 -- TODO: Set proper walking animation on engage
-
-local path =
+local pathNodes =
 {
     { x = -45, y = 0, z = -204 },
     { x = -99, y = 0, z = -179 },
@@ -120,7 +119,7 @@ local path =
 
 entity.onMobSpawn = function(mob)
     mob:setSpeed(250)
-    mob:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 entity.onMobFight = function(mob)

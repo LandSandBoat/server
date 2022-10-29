@@ -540,7 +540,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
     if element == nil and skill ~= nil and skill >= 32 and skill <= 45 then -- Covers all magic
         element = spell:getElement()
     elseif element == nil then -- Cover mobskills
-        element = xi.element.NONE
+        element = xi.magic.ele.NONE
     end
 
     if spell ~= nil and skill >= 32 and skill <= 45 then
@@ -557,7 +557,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
 
     local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
 
-    return xi.magic.getMagicResist(p, target, params.element, effectRes)
+    return xi.magic.getMagicResist(p, target, element, effectRes)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
@@ -650,7 +650,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
             local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
             magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
         else
-            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
+            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc + caster:getMod(xi.mod.MACC)
         end
     elseif
         skillType ~= nil and
@@ -670,16 +670,16 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
                 magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
             end
         else
-            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
+            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc + caster:getMod(xi.mod.MACC)
         end
     elseif caster:isPC() and skillType <= xi.skill.STAFF then
         magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType())
     elseif caster:isMob() and skillType == nil then
-        magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl())
+        magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPet() and skillType == nil then
-        magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl())
+        magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl()) + caster:getMod(xi.mod.MACC)
     else
-        magicacc = utils.getSkillLvl(4, caster:getMainLvl()) + dStatAcc
+        magicacc = utils.getSkillLvl(4, caster:getMainLvl()) + dStatAcc + caster:getMod(xi.mod.MACC)
     end
 
     if element ~= xi.magic.ele.NONE then
@@ -687,7 +687,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
             xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], nil, caster)
         end
 
-        resMod = target:getMod(xi.magic.resistMod[element])
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
@@ -729,9 +729,48 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
         end
     end
 
+    local sixteenthTrigger = false
+    local eighthTrigger = false
+    local quarterTrigger = false
+    local resMod = 0
+
+    if element and element ~= xi.magic.ele.NONE then
+        resMod = target:getMod(xi.magic.resistMod[element])
+    end
+
+    local playerTriggerPoints =
+    {
+        resMod > 200,
+        resMod > 100,
+        resMod >= 0,
+    }
+    local mobTriggerPoints =
+    {
+        evaMult < 1.15,
+        evaMult < 1.30,
+        evaMult < 1.50,
+    }
+    local selectedTable = mobTriggerPoints
+
+    if target:isPC() then
+        selectedTable = playerTriggerPoints
+    end
+
+    if playerTriggerPoints[1] then
+        sixteenthTrigger = true
+    end
+
+    if selectedTable[2] then
+        eighthTrigger = true
+    end
+
+    if selectedTable[3] then
+        quarterTrigger = true
+    end
+
     local baseRes = 1
 
-    if effectRes ~= nil then
+    if effectRes and effectRes > 0 then
         baseRes = baseRes - (effectRes / 100)
     end
 
@@ -742,18 +781,18 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local resist = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half     = (1 - p)
+    local half      = (1 - p)
     local quart     = ((1 - p)^2)
     local eighth    = ((1 - p)^3)
     local sixteenth = ((1 - p)^4)
     local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= sixteenth then
+    if resvar <= sixteenth and sixteenthTrigger then
         resist = 0.0625
-    elseif resvar <= eighth then
+    elseif resvar <= eighth and eighthTrigger then
         resist = 0.125
-    elseif resvar <= quart then
+    elseif resvar <= quart and quarterTrigger then
         resist = 0.25
     elseif resvar <= half then
         resist = 0.5

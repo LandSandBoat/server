@@ -72,6 +72,8 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.SEANCE_STAFF)
     elseif csid == 220 and option == 0 then
         player:setLocalVar('[BOAT]Paid', 0)
+    elseif csid == 202 then
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 
