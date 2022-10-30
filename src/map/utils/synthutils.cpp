@@ -345,7 +345,7 @@ namespace synthutils
 
             if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
             {
-                chance *= 0.4 + (hqtier * 0.03);
+                chance = 0.4 + (hqtier * 0.03);
             }
 
             // Using x/512 calculation for HQ success rate modifier
