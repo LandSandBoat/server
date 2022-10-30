@@ -11851,14 +11851,14 @@ float CLuaBaseEntity::getPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, f
  *  Notes   : Battleutils calculates via GetRangedDamageRatio
  ************************************************************************/
 
-float CLuaBaseEntity::getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, uint16 ignoredDef)
+float CLuaBaseEntity::getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, float atkMulti, uint16 ignoredDef)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
 
-    return battleutils::GetRangedDamageRatio(PAttacker, PDefender, isCritical, ignoredDef);
+    return battleutils::GetDamageRatio(PAttacker, PDefender, isCritical, atkMulti, SLOT_RANGED, ignoredDef, false);
 }
 
 /************************************************************************
