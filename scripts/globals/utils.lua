@@ -154,6 +154,23 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
+function utils.rampart(target, dmg)
+    if dmg > 0 then
+        local shield = target:getMod(xi.mod.RAMPART_MAGIC_SHIELD)
+        if shield > 0 then
+            if shield > dmg then -- absorbs damage
+                target:delMod(xi.mod.RAMPART_MAGIC_SHIELD, dmg)
+                return 0
+            else -- absorbs some damage
+                target:setMod(xi.mod.RAMPART_MAGIC_SHIELD, 0)
+                return dmg - shield
+            end
+        end
+    end
+
+    return dmg
+end
+
 -- returns reduced magic damage from RUN buff, "One for All"
 function utils.oneforall(target, dmg)
     if dmg > 0 then
@@ -232,7 +249,7 @@ function utils.takeShadows(target, mob, dmg, shadowbehav)
             target:addEnmity(mob, -25 * shadowbehav, 0)
         end
 
-        target:setMod(shadowType, shadowsLeft);
+        target:setMod(shadowType, shadowsLeft)
 
         if shadowsLeft <= 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
@@ -289,7 +306,7 @@ function utils.thirdeye(target)
 
     if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
         --anticipated!
-        if seigan == nil or prevAnt == 6 or math.random()*100 > 100-(prevAnt+1)*15 then
+        if seigan == nil or prevAnt == 6 or math.random() * 100 > 100 - (prevAnt + 1) * 15 then
             target:delStatusEffect(xi.effect.THIRD_EYE)
         else
             teye:setPower(prevAnt + 1)
