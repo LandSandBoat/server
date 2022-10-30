@@ -18,15 +18,29 @@ entity.onTrade = function(player, npc, trade)
     local hour     = VanadielHour()
     local rovEnabled = xi.settings.main.ENABLE_ROV
 
-    if IsMoonFull() then
+    if
+        IsMoonFull()
+    then
         -- ROV: Make Ro'Maeve come to life between 6pm and 6am during a full moon, any weather
         -- Pre-ROV: between midnight and 3am during a full moon and clear weather
-        if (rovEnabled == 0 and (hour >= 0 and hour < 3) and (weather == xi.weather.NONE or weather == xi.weather.SUNSHINE)) or
-            (rovEnabled == 1 and (hour >= 18 or hour < 7)) then
-            if dmFirst == QUEST_ACCEPTED or dmRepeat == QUEST_ACCEPTED then -- allow for Ark Pentasphere on both first and repeat quests
-                if npcUtil.tradeHasExactly(trade, { 1408, 917 }) then
+        if
+            (rovEnabled == 0 and (hour >= 0 and hour < 3) and
+            (weather == xi.weather.NONE or weather == xi.weather.SUNSHINE)) or
+            (rovEnabled == 1 and (hour >= 18 or hour < 7))
+        then
+            if
+                dmFirst == QUEST_ACCEPTED or dmRepeat == QUEST_ACCEPTED
+            then
+                -- allow for Ark Pentasphere on both first and repeat quests
+                if
+                    npcUtil.tradeHasExactly(trade, { 1408, 917 })
+                then
                     player:startEvent(7, 917, 1408) -- Ark Pentasphere Trade
-                elseif dmRepeat == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, 1261) and not player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
+                elseif
+                    dmRepeat == QUEST_ACCEPTED and
+                    npcUtil.tradeHasExactly(trade, 1261) and
+                    not player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+                then
                     player:startEvent(8) -- Moonlight Ore trade
                 end
             end
