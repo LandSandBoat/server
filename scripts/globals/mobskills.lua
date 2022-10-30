@@ -169,15 +169,13 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         base = 1
     end
 
-    local lvldiff = mob:getMainLvl() - target:getMainLvl()
 
     --work out hit rate for mobs
     local hitrate = xi.weaponskills.getHitRate(mob, target, 0, 0)
 
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     --work out the base damage for a single hit
-    local hitdamage = base + lvldiff
+    local hitdamage = base
     if hitdamage < 1 then
         hitdamage = 0 -- If I hit below 1 I actually did 0 damage.
     end
