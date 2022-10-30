@@ -10,7 +10,7 @@ local entity = {}
 
 local pathNodes =
 {
-    { x = -122.540, y = -2.000000, z = 14.494, r = 3}, -- left side turnaround
+    { x = -122.540, y = -2.000000, z = 14.490, r = 3}, -- left side turnaround
     { x = -125.709, y = -2.000000, z = 14.805, r = 131, wait = 0100}, -- right side quick stop before continuing
 }
 
