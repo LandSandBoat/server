@@ -1338,6 +1338,7 @@ void CBattleEntity::Spawn()
     HideName(false);
     CBaseEntity::Spawn();
     m_OwnerID.clean();
+    setBattleID(0);
 }
 
 void CBattleEntity::Die()
