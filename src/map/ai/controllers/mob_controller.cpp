@@ -266,6 +266,12 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return CanSeePoint(PTarget->loc.p);
     }
 
+    if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
+        PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
+    {
+        return CanSeePoint(PTarget->loc.p);
+    }
+
     // everything below require distance to be below 20
     if (currentDistance > 20)
     {
@@ -273,12 +279,6 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
     }
 
     if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
-    {
-        return CanSeePoint(PTarget->loc.p);
-    }
-
-    if ((detects & DETECT_MAGIC) && PTarget->PAI->IsCurrentState<CMagicState>() &&
-        static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
     {
         return CanSeePoint(PTarget->loc.p);
     }
