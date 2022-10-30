@@ -12,4 +12,5 @@ return {
     ['Zaldon']       = { event = 150 },
     ['Oswald']       = { event = 30 },
     ['Devean']       = { event = 124 },
+    ['Mathilde']     = { event = 171 },
 }
