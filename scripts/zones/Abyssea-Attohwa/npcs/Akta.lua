@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Attohwa
 --  NPC: Akta
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

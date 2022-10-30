@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Magephaud
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/keyitems")

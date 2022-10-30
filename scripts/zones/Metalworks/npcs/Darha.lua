@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Darha
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

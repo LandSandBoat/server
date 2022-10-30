@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: LoneHorn
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

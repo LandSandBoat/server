@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Tohka Telposkha
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

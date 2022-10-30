@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Muyadah
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

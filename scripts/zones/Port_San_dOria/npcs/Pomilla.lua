@@ -15,7 +15,10 @@ end
 entity.onTrigger = function(player, npc)
     local wildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatSandy, 11)) then
+    if
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        not utils.mask.getBit(wildcatSandy, 11)
+    then
         player:startEvent(749)
     else
         player:startEvent(562)
@@ -26,7 +29,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 749) then
+    if csid == 749 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 11, true))
     end
 end

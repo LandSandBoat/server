@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Bhi Telifahgo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

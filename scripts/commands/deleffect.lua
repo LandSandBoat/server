@@ -32,7 +32,7 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (targ == nil) then
+    if targ == nil then
         error(player, string.format("Player named '%s' not found!", arg1))
         return
     end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Awaheen
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Nashmau/IDs")
 -----------------------------------

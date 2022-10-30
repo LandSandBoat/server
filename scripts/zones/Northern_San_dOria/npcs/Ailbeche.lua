@@ -88,7 +88,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 45 and option == 0) then
         player:setCharVar("sharpeningTheSwordCS", 1)
     elseif (csid == 44) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17643)
         else
             player:delKeyItem(xi.ki.ORDELLE_WHETSTONE)

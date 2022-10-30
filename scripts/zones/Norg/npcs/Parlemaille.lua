@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Parlemaille
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

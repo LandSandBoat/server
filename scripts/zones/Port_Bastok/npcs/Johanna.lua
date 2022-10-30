@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Johanna
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

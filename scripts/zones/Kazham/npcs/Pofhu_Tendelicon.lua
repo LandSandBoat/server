@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Pofhu Tendelicon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

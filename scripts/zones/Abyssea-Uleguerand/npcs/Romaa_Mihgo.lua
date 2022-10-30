@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Romaa Mihgo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

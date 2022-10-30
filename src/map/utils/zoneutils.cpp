@@ -541,6 +541,12 @@ namespace zoneutils
                         PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
                     }
 
+                    if (PMob->GetMJob() == JOB_PLD && PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
+                    {
+                        PMob->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
+                        PMob->setModifier(Mod::SHIELDBLOCKRATE, 45);
+                    }
+
                     // Setup HP / MP Stat Percentage Boost
                     PMob->HPscale = sql->GetFloatData(64);
                     PMob->MPscale = sql->GetFloatData(65);

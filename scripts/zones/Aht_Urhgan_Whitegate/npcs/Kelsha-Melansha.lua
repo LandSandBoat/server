@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Kelsha-Melansha
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

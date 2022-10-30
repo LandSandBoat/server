@@ -24,17 +24,17 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.6 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 1.0 params.acc200= 1.0 params.acc300= 1.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 0.8
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if (damage > 0 and target:hasStatusEffect(xi.effect.PARALYSIS) == false) then
-        local duration = (tp/1000 * 60) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
+        local duration = (tp / 1000 * 60) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
         target:addStatusEffect(xi.effect.PARALYSIS, 30, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

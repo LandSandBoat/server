@@ -47,6 +47,7 @@ enum MOBMODIFIER : int
     MOBMOD_DETECTION           = 16, // Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
     MOBMOD_NO_DESPAWN          = 17, // do not despawn when too far from spawn. Gob Diggers have this.
     MOBMOD_VAR                 = 18, // temp var for whatever. Gets cleared on spawn
+    MOBMOD_CAN_SHIELD_BLOCK    = 19, // toggle shield use for mobs without physical shields (trusts)
     // 19 Available for use
     MOBMOD_TP_USE_CHANCE      = 20, // % chance to use tp
     MOBMOD_PET_SPELL_LIST     = 21, // set pet spell list

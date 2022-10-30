@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Shey Wayatih
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

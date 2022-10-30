@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Hadelind
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

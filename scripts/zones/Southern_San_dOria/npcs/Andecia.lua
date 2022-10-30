@@ -42,7 +42,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 541 and option == 0) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
         else
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)

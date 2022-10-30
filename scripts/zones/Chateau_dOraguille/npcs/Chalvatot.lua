@@ -65,13 +65,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- CIRCLE OF TIME
-    if (csid == 99 and option == 0) then
+    if csid == 99 and option == 0 then
         player:setCharVar("circleTime", 6)
-    elseif ((csid == 98 or csid == 99) and option == 1) then
+    elseif (csid == 98 or csid == 99) and option == 1 then
         player:setCharVar("circleTime", 7)
         player:addKeyItem(xi.ki.MOON_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_RING)
-    elseif (csid == 96) then
+    elseif csid == 96 then
         if (player:getFreeSlotsCount() ~= 0) then
             player:addItem(12647)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12647)
@@ -83,13 +83,13 @@ entity.onEventFinish = function(player, csid, option)
         end
 
     -- LURE OF THE WILDCAT
-    elseif (csid == 561) then
+    elseif csid == 561 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 19, true))
 
     -- HER MAJESTY'S GARDEN
-    elseif (csid == 84 and option == 1) then
+    elseif csid == 84 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
-    elseif (csid == 83) then
+    elseif csid == 83 then
         player:tradeComplete()
         player:addKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)

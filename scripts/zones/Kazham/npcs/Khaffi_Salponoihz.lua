@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Khaffi Salponoihz
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

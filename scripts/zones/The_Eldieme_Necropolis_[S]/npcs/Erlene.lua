@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ULBRECHTS_SEALED_LETTER)
         player:setCharVar("OnSabbatical", 1)
     elseif (csid == 20) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
             player:delKeyItem(xi.ki.ULBRECHTS_SEALED_LETTER)
@@ -135,7 +135,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 25) then
         player:setCharVar("DownwardHelix", 2)
     elseif (csid == 27) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
