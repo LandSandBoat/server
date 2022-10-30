@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Atoranne
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

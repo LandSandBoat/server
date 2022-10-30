@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Wazyih
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

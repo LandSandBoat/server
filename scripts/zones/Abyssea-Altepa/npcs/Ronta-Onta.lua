@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Ronta-Onta
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

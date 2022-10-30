@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Bhukka Sahbeo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

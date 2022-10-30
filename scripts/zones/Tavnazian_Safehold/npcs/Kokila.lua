@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Kokila
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

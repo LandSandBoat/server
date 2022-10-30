@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Diederik
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

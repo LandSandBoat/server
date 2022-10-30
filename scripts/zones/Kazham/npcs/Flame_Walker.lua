@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Flame Walker
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

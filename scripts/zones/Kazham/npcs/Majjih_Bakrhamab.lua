@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Majjih Bakrhamab
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

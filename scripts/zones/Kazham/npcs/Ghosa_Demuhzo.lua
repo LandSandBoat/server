@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Ghosa Demuhzo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Rujen-Gorgen
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Charlaimagnat
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")

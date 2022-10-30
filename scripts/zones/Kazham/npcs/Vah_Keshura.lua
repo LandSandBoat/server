@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Vah Keshura
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

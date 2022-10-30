@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Otto
--- Standard Info NPC
--- Involved in Quest: The Siren's Tear
 -- !pos -145.929 -7.48 13.701 236
 -----------------------------------
 local entity = {}

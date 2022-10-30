@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Rielle
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

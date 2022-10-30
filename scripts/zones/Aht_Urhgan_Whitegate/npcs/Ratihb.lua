@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Ratihb
--- Standard Info NPC
 -- !pos 75.225 -6.000 -137.203 50
 -----------------------------------
 require("scripts/globals/keyitems")
