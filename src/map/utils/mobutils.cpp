@@ -54,8 +54,9 @@ namespace mobutils
 
     uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot)
     {
-        uint16 lvl   = PMob->GetMLevel();
-        uint8  bonus = 0;
+        uint16 lvl    = PMob->GetMLevel();
+        int8   bonus  = 0;
+        uint16 damage = 0;
 
         if (slot == SLOT_RANGED)
         {
@@ -63,10 +64,25 @@ namespace mobutils
         }
         else
         {
-            bonus = 2;
+            if (lvl >= 75)
+            {
+                bonus = 3;
+            }
+            else if (lvl >= 60)
+            {
+                bonus = 2;
+            }
+            else if (lvl >= 50)
+            {
+                bonus = 1;
+            }
+            else if (lvl == 1)
+            {
+                bonus = -1;
+            }
         }
 
-        uint16 damage = lvl + bonus;
+        damage = lvl + bonus;
 
         damage = (uint16)(damage * PMob->m_dmgMult / 100.0f);
 
