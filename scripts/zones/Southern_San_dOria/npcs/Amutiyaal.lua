@@ -79,12 +79,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 812) then
+    if csid == 812 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatSandy", 0)
         player:addKeyItem(xi.ki.RED_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RED_SENTINEL_BADGE)
-    elseif (csid == 815) then
+    elseif csid == 815 then
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
         player:addFame(xi.quest.fame_area.SANDORIA, 150)
         player:setCharVar("WildcatSandy", 0)
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.RED_INVITATION_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.RED_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RED_INVITATION_CARD)
-    elseif (csid == 881) then
+    elseif csid == 881 then
         player:tradeComplete()
         xi.teleport.to(player, xi.teleport.id.WHITEGATE)
     end
