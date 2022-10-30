@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Hajaom
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

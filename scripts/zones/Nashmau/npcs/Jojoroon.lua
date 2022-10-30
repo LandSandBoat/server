@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Jojoroon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

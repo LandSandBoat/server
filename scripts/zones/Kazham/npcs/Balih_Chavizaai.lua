@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Balih Chavizaai
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

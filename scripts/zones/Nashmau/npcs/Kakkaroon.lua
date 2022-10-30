@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Kakkaroon
--- Standard Info NPC
 -- !pos 13.245 0.000 -25.307 53
 -----------------------------------
 local entity = {}

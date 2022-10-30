@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Muzaffar
--- Standard Info NPC
 -- Quests: Black Market
 -- !pos 16.678, -2.044, -14.600 252
 -----------------------------------

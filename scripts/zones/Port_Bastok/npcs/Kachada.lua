@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Kachada
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

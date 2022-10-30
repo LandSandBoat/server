@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Zwinam
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

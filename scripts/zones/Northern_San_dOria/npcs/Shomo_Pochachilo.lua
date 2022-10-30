@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Shomo Pochachilo
--- Type: Standard Info NPC
 -- !pos 28.369 -0.199 30.061 231
 -----------------------------------
 require("scripts/globals/settings")

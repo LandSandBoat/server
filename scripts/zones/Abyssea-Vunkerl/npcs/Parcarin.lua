@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Vunkeral
 --  NPC: Parcarin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Lotine
--- Type: Standard Info NPC
 -- !pos -137.504 11.999 171.090 231
 -----------------------------------
 local entity = {}

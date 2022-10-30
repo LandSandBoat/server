@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Geebeh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

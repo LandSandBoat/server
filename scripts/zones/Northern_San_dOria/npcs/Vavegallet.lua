@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Vavegallet
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

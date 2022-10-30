@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Dietrich
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

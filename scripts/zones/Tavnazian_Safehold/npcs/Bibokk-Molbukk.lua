@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Bibokk-Molbukk
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

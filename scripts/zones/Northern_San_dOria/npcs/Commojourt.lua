@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Commojourt
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

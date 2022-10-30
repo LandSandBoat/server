@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Justinius
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

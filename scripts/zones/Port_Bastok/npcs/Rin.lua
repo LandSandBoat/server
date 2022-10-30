@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Rin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

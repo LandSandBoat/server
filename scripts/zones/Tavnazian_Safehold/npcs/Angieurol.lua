@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Angieurol
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

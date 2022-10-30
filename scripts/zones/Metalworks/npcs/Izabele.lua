@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Izabele
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

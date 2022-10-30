@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Oruga
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

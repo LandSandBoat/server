@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Cobbi Malgharam
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

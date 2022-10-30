@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Evindigar
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

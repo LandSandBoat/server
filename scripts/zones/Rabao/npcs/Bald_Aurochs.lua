@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Bald Aurochs
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

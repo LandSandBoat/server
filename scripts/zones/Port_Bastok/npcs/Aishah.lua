@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Aishah
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------

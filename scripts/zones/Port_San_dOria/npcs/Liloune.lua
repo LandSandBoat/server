@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Liloune
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

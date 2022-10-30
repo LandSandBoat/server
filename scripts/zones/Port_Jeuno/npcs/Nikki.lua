@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Nikki
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

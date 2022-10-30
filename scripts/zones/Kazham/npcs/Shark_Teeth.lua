@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Shark Teeth
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

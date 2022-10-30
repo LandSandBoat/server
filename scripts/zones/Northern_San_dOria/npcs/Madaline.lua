@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Madaline
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
