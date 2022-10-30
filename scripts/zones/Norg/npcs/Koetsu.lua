@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Koetsu
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

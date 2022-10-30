@@ -34,7 +34,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ignored200 = 0.35
     params.ignored300 = 0.5
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 0.7 + (player:getMerit(xi.merit.APEX_ARROW) * 0.03)
     end
 

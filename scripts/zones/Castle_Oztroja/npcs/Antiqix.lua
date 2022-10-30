@@ -148,7 +148,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- singles to hundos
     elseif (csid == 55) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
         else
             player:tradeComplete()
@@ -158,7 +158,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- hundos to 10k pieces
     elseif (csid == 56) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[3])
         else
             player:tradeComplete()
@@ -186,7 +186,7 @@ entity.onEventFinish = function(player, csid, option)
     -- bought item from shop
     elseif (csid == 57) then
         local item = player:getLocalVar("hundoItemBought")
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             player:tradeComplete()

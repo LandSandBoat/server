@@ -28,7 +28,7 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (targ == nil) then
+    if targ == nil then
         targ = player:getCursorTarget()
         if (targ == nil or not targ:isPC()) then
             targ = player
@@ -39,7 +39,7 @@ function onTrigger(player, arg1, arg2)
         else
             local target = targ
             targ = GetPlayerByName(targ)
-            if (targ == nil) then
+            if targ == nil then
                 error(player, string.format("Player named '%s' not found!", target))
                 return
             end

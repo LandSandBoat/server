@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Coyah Neblahe
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

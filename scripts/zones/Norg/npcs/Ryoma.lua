@@ -49,16 +49,16 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 95) then
+    if csid == 95 then
         player:addKeyItem(xi.ki.SEALED_DAGGER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEALED_DAGGER)
         player:delKeyItem(xi.ki.STRANGELY_SHAPED_CORAL)
         player:setCharVar("AyameAndKaede_Event", 4)
-    elseif (csid == 133) then
+    elseif csid == 133 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         player:setCharVar("twentyInPirateYearsCS", 1)
-    elseif (csid == 134) then
-        if (player:getFreeSlotsCount() <= 1) then
+    elseif csid == 134 then
+        if player:getFreeSlotsCount() <= 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17771)
         else
             player:delKeyItem(xi.ki.TRICK_BOX)
@@ -71,11 +71,11 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.NORG, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
-    elseif (csid == 135) then
+    elseif csid == 135 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
-    elseif (csid == 136) then
+    elseif csid == 136 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
-    elseif (csid == 137) then
+    elseif csid == 137 then
         player:setCharVar("trueWillCS", 1)
     end
 end

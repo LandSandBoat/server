@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: San d'Oria-Jeuno Airship
 --  NPC: Nigel
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/San_dOria-Jeuno_Airship/IDs")
 -----------------------------------

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Hashayra
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

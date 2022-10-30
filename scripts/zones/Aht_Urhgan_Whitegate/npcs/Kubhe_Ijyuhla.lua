@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Kubhe Ijyuhla
--- Standard Info NPC
 -- !pos 23.257 0.000 21.532 50
 -----------------------------------
 require("scripts/globals/quests")

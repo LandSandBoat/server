@@ -26952,12 +26952,12 @@ INSERT INTO `mob_droplist` VALUES (6033,4,0,1000,4552,0);         -- Serving Of 
 -- ZoneID:  38 - Yagudo Prelatess
 -- ZoneID:  38 - Yagudo Kapellmeister
 -- ZoneID:  38 - Yagudo Eradicator
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

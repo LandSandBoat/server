@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Eflatun
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

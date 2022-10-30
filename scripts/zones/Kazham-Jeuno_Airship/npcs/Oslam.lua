@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham-Jeuno Airship
 --  NPC: Oslam
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Kazham-Jeuno_Airship/IDs")
 -----------------------------------

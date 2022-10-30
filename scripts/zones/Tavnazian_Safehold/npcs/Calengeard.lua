@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Calengeard
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

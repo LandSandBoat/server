@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Haih Ahmpagako
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

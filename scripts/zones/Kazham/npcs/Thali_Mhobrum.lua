@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Thali Mhobrum
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

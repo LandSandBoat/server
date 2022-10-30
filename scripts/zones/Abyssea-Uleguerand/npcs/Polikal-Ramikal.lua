@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Polikal-Ramikal
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

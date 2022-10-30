@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Mathurin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -181,6 +181,9 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
                 PCurrentChar->updateEntityPacket(PPet, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
         }
+
+        PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
+
         return;
     }
     ShowError("CZone::InsertPET : entity is null");
@@ -223,6 +226,9 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
                 PCurrentChar->updateEntityPacket(PTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
         }
+
+        PTrust->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Turn off special spawn animation
+
         return;
     }
 }

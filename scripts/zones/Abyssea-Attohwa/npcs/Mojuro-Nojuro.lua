@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_attohwa
 --  NPC: Mojuro-Nojuro
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

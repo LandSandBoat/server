@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Patricius
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

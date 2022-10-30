@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Leporaitceau
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

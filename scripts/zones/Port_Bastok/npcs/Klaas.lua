@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Klaas
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Nului-Nlui
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

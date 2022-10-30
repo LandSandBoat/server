@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Nti Badolsoma
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

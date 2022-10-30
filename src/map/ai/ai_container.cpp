@@ -544,11 +544,11 @@ void CAIContainer::ClearActionQueue()
     ActionQueue.clearQueue();
 }
 
-bool CAIContainer::Internal_Despawn()
+bool CAIContainer::Internal_Despawn(bool instantDespawn)
 {
     if (!IsCurrentState<CDespawnState>() && !IsCurrentState<CRespawnState>())
     {
-        return ForceChangeState<CDespawnState>(PEntity);
+        return ForceChangeState<CDespawnState>(PEntity, instantDespawn);
     }
     return false;
 }

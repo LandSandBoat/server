@@ -51,6 +51,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     m_PetID                 = 0;
     m_IsClaimable           = false;
     m_bReleaseTargIDOnDeath = true;
+    spawnAnimation          = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
     memset(&m_TraitList, 0, sizeof(m_TraitList));
 
@@ -164,7 +165,17 @@ void CPetEntity::FadeOut()
 void CPetEntity::Die()
 {
     PAI->ClearStateStack();
-    PAI->Internal_Die(0s);
+
+    // master is zoning, don't go to death state, instead despawn instantly
+    if (health.hp > 0 && PMaster && PMaster->objtype == TYPE_PC && static_cast<CCharEntity*>(PMaster)->petZoningInfo.respawnPet)
+    {
+        PAI->Internal_Despawn(true);
+    }
+    else
+    {
+        PAI->Internal_Die(0s);
+    }
+
     luautils::OnMobDeath(this, nullptr);
 
     // NOTE: This is purposefully calling CBattleEntity's impl.

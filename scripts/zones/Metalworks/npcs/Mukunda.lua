@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Mukunda
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
