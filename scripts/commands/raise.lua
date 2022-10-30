@@ -39,11 +39,11 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (target == nil) then
+    if target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return
         end
