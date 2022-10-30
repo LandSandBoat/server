@@ -1,6 +1,7 @@
 -----------------------------------
 -- Mog House related functions
 -----------------------------------
+require('scripts/globals/items')
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
@@ -60,26 +61,28 @@ xi.moghouse.isInMogHouseInHomeNation = function(player)
     end
 
     local currentZone = player:getZoneID()
-    local nation = player:getNation()
+    local nation      = player:getNation()
+
     if nation == xi.nation.BASTOK then
-        if currentZone >= xi.zone.BASTOK_MINES and currentZone <= xi.zone.METALWORKS then
+        if currentZone >= xi.zone.BASTOK_MINES and currentZone <= xi.zone.PORT_BASTOK then
             return true
         end
     elseif nation == xi.nation.SANDORIA then
-        if currentZone >= xi.zone.SOUTHERN_SAN_DORIA and currentZone <= xi.zone.CHATEAU_DORAGUILLE then
+        if currentZone >= xi.zone.SOUTHERN_SAN_DORIA and currentZone <= xi.zone.PORT_SAN_DORIA then
             return true
         end
-    else -- Windurst
+    else
         if currentZone >= xi.zone.WINDURST_WATERS and currentZone <= xi.zone.WINDURST_WOODS then
             return true
         end
     end
+
     return false
 end
 
 xi.moghouse.moogleTrade = function(player, npc, trade)
     if player:isInMogHouse() then
-        local numBronze = trade:getItemQty(2184)
+        local numBronze = trade:getItemQty(xi.items.IMPERIAL_BRONZE_PIECE)
 
         if numBronze > 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
@@ -95,8 +98,8 @@ xi.moghouse.moogleTrigger = function(player, npc)
         local lockerTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
 
         if lockerTs ~= nil then
-            if lockerTs == -1 then -- expired
-                player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 1, 2184) -- 2184 is imperial bronze piece item id
+            if lockerTs == -1 then -- Expired
+                player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 1, xi.items.IMPERIAL_BRONZE_PIECE)
             else
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET, lockerTs)
             end
@@ -115,16 +118,19 @@ end
 -- Unlocks a mog locker for a player. Returns the 'expired' timestamp (-1)
 xi.moghouse.unlockMogLocker = function(player)
     player:setCharVar(mogLockerTimestampVarName, -1)
-    local currentSize = player:getContainerSize(xi.inv.MOGLOCKER)
-    if currentSize == 0 then -- we do this check in case some servers auto-set 80 slots for mog locker items
+
+    -- Safety check in case some servers auto-set 80 slots for mog locker items.
+    if player:getContainerSize(xi.inv.MOGLOCKER) == 0 then
         player:changeContainerSize(xi.inv.MOGLOCKER, 30)
     end
+
     return -1
 end
 
 -- Sets the mog locker access type (all area or alzahbi only). Returns the new access type.
 xi.moghouse.setMogLockerAccessType = function(player, accessType)
     player:setCharVar(xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE, accessType)
+
     return accessType
 end
 
@@ -137,13 +143,15 @@ end
 xi.moghouse.getMogLockerExpiryTimestamp = function(player)
     local expiryTime = player:getCharVar(mogLockerTimestampVarName)
 
-    if (expiryTime == 0) then
+    if expiryTime == 0 then
         return nil
     end
 
     local now = os.time() - mogLockerStartTimestamp
+
     if now > expiryTime then
         player:setCharVar(mogLockerTimestampVarName, -1)
+
         return -1
     end
 
@@ -155,13 +163,15 @@ end
 -- The expiry time itself is the number of seconds past 2001/12/31 15:00
 -- Returns true if time was added successfully, false otherwise.
 xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
-    local accessType = xi.moghouse.getMogLockerAccessType(player)
+    local accessType       = xi.moghouse.getMogLockerAccessType(player)
     local numDaysPerBronze = 5
+
     if accessType == xi.moghouse.lockerAccessType.ALZAHBI then
         numDaysPerBronze = 7
     end
 
     local currentTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
+
     if currentTs == nil then
         return false
     end
@@ -171,10 +181,12 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
     end
 
     local timeIncrease = 60 * 60 * 24 * numDaysPerBronze * numBronze
-    local newTs = currentTs + timeIncrease
+    local newTs        = currentTs + timeIncrease
 
     player:setCharVar(mogLockerTimestampVarName, newTs)
-    -- send an invent size packet to enable the items if they weren't
+
+    -- Send an invent size packet to enable the items if they weren't.
     player:changeContainerSize(xi.inv.MOGLOCKER, 0)
+
     return true
 end
