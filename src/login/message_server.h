@@ -25,6 +25,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
+#include <nonstd/jthread.hpp>
+
 struct chat_message_t
 {
     uint64         dest;
@@ -36,3 +38,19 @@ struct chat_message_t
 void message_server_init(const bool& requestExit);
 void message_server_close();
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+
+struct message_server_wrapper_t
+{
+    message_server_wrapper_t(const bool& requestExit)
+    {
+        m_thread = std::make_unique<nonstd::jthread>(message_server_init, std::ref(requestExit));
+    }
+
+    ~message_server_wrapper_t()
+    {
+        message_server_close();
+    }
+
+private:
+    std::unique_ptr<nonstd::jthread> m_thread;
+};

@@ -28,6 +28,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "map/packets/basic.h"
 
+#include "message_server.h"
+
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
 #include <cstdlib>
@@ -37,6 +39,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#include <thread>
+
+#include <nonstd/jthread.hpp>
 
 // TODO: Move to enum
 #define LOGIN_ATTEMPT         0x10
@@ -412,6 +417,8 @@ public:
         });
         // clang-format on
 
+        message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_IsRunning));
+
         try
         {
             asio::io_context io_context;
@@ -422,6 +429,8 @@ public:
             handler<view_session> view(io_context, 54001);
             handler<data_session> data(io_context, 54230);
 
+            // NOTE: io_context.run() takes over and blocks this thread. Anything after this point will only fire
+            // if io_context finishes!
             ShowInfo("starting io_context");
             io_context.run();
         }
@@ -442,4 +451,7 @@ public:
 
         // Connect Server specific things
     }
+
+private:
+    std::unique_ptr<message_server_wrapper_t> message_server;
 };
