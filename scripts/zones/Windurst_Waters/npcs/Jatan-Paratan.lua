@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(633)          -- WONDERING_MINSTREL: Before Quest
         else
             player:startEvent(634)          -- WONDERING_MINSTREL: Quest Start
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(611)             -- Singing 1 (daytime < 6 or daytime >= 18)
         else
             local rand = math.random(1, 2)
-            if (rand == 1) then
+            if rand == 1 then
                 player:startEvent(610)          -- Standard Conversation 1 (daytime)
             else
                 player:startEvent(615)             -- Standard Conversation 2 (daytime)
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 634) then    -- WONDERING_MINSTREL: Quest Start
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     elseif (csid == 638) then  -- WONDERING_MINSTREL: Quest Finish
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)
         else
             player:tradeComplete()

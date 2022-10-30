@@ -39,7 +39,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.WEAPONS_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WEAPONS_ORDER)
     elseif (csid == 607) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17090) -- Elm Staff
         else
             player:addTitle(xi.title.ARMS_TRADER)

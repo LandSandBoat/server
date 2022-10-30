@@ -29,12 +29,12 @@ entity.onTrigger = function(player, npc)
 
     if (reapstatus == QUEST_AVAILABLE) then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(463, 0, 4565, 572)                 -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START
         end
     elseif (reapstatus == QUEST_ACCEPTED) then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(464, 0, 4565, 572)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
         else
             player:startEvent(476)                          -- Another Conversation During Quest
@@ -43,12 +43,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(478)                              -- REAP WHAT YOU SOW: After Quest
     elseif (reapstatus == QUEST_COMPLETED and player:needToZone() == false and player:getCharVar("QuestReapSow_var") == 0) then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(479, 0, 4565, 572)                -- REAP WHAT YOU SOW + HERB SEEDS: REPEATABLE QUEST START
         end
     elseif (reapstatus == QUEST_COMPLETED and player:getCharVar("QuestReapSow_var") == 1) then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(464, 0, 4565, 572)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
         else
             player:startEvent(476)                          -- Another Conversation During Quest

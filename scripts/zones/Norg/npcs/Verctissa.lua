@@ -43,7 +43,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 199 and option == 1) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1549) --Mini tuning fork
         else
             player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER)
@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1549)
         end
     elseif (csid == 203 and option == 1) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1549) --Mini tuning fork
         else
             player:addItem(1549)

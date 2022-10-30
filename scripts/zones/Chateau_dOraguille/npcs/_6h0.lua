@@ -76,8 +76,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 88) then
-        if (player:getFreeSlotsCount() == 0) then
+    if csid == 88 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
             if (player:getMainJob() == xi.job.PLD) then
@@ -94,7 +94,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         player:setCharVar("UnderOathCS", 0)
     elseif (csid == 89) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12644)
         else
             player:addItem(12644)

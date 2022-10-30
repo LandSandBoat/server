@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar('ApocalypseNigh', 3)
         player:setPos(-419.995, 0, 248.483, 191, 35)
     elseif csid == 1 then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14672)
         else
             if (player:addItem(14672)) then

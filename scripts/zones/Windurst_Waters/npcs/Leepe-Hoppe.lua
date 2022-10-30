@@ -94,10 +94,10 @@ entity.onTrigger = function(player, npc)
     then -- Fenrir flag event
 
         player:startEvent(842, 0, 1125)
-    elseif (moonlitPath == QUEST_ACCEPTED) then
+    elseif moonlitPath == QUEST_ACCEPTED then
         if (player:hasKeyItem(xi.ki.MOON_BAUBLE)) then -- Default text after acquiring moon bauble and before fighting Fenrir
             player:startEvent(845, 0, 1125, 334)
-        elseif (player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)) then -- First turn-in
+        elseif player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON) then -- First turn-in
             local availRewards = 0
             if
                 not player:hasKeyItem(xi.ki.TRAINERS_WHISTLE) or
@@ -113,10 +113,10 @@ entity.onTrigger = function(player, npc)
         else -- Talked to after flag without the whispers
             player:startEvent(843, 0, 1125)
         end
-    elseif (moonlitPath == QUEST_COMPLETED) then
-        if (player:hasKeyItem(xi.ki.MOON_BAUBLE)) then -- Default text after acquiring moon bauble and before fighting Fenrir
+    elseif moonlitPath == QUEST_COMPLETED then
+        if player:hasKeyItem(xi.ki.MOON_BAUBLE) then -- Default text after acquiring moon bauble and before fighting Fenrir
             player:startEvent(845, 0, 1125, 334)
-        elseif (player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)) then -- Repeat turn-in
+        elseif player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON) then -- Repeat turn-in
             local availRewards = getFenrirRewardMask(player)
 
             player:startEvent(850, 0, 13399, 1208, 1125, availRewards, 18165, 13572)
@@ -139,9 +139,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- Moonlit Path and Other Fenrir Stuff
-    if (csid == 842 and option == 2) then
+    if csid == 842 and option == 2 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
-    elseif (csid == 844) then
+    elseif csid == 844 then
         player:addKeyItem(xi.ki.MOON_BAUBLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_BAUBLE)
         player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
@@ -158,17 +158,17 @@ entity.onEventFinish = function(player, csid, option)
         player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     elseif csid == 846 or csid == 850 then -- Turn-in event
         local reward = 0
-        if (option == 1) then reward = 18165 -- Fenrir's Stone
-        elseif (option == 2) then reward = 13572 -- Fenrir's Cape
-        elseif (option == 3) then reward = 13138 -- Fenrir's Torque
-        elseif (option == 4) then reward = 13399 -- Fenrir's Earring
-        elseif (option == 5) then reward = 1208 -- Ancient's Key
-        elseif (option == 6) then
+        if option == 1 then reward = 18165 -- Fenrir's Stone
+        elseif option == 2 then reward = 13572 -- Fenrir's Cape
+        elseif option == 3 then reward = 13138 -- Fenrir's Torque
+        elseif option == 4 then reward = 13399 -- Fenrir's Earring
+        elseif option == 5 then reward = 1208 -- Ancient's Key
+        elseif option == 6 then
             player:addGil(xi.settings.main.GIL_RATE * 15000)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 15000) -- Gil
-        elseif (option == 7) then
+        elseif option == 7 then
             player:addSpell(297) -- Pact
-        elseif (option == 8) then
+        elseif option == 8 then
             player:addKeyItem(xi.ki.FENRIR_WHISTLE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FENRIR_WHISTLE)
             -- Pact as Mount
