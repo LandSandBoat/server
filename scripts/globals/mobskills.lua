@@ -169,10 +169,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         base = 1
     end
 
-
     --work out hit rate for mobs
     local hitrate = xi.weaponskills.getHitRate(mob, target, 0, 0)
-
 
     --work out the base damage for a single hit
     local hitdamage = base
