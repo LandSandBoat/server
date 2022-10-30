@@ -32,7 +32,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.skill = xi.skill.MARKSMANSHIP
     params.includemab = true
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp200 = 1.55 params.ftp300 = 2.1
         params.agi_wsc = 0.7
     end
