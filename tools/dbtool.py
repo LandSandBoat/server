@@ -163,18 +163,16 @@ def fetch_errors(result):
     for line in result.stderr.splitlines():
         # Safe to ignore this warning
         if "Using a password on the command line interface can be insecure" not in line:
-                print_red(line)
+            print_red(line)
 
 
 def fetch_credentials():
     global database, host, port, login, password
     credentials = {}
-
     # Grab mysql credentials
     filename = from_server_path("settings/default/network.lua")
     if from_server_path("settings/network.lua"):
         filename = from_server_path("settings/network.lua")
-
     try:
         with open(filename) as f:
             while True:
@@ -187,7 +185,6 @@ def fetch_credentials():
                     type = parts[0].strip()
                     val = parts[1].strip()
                     credentials[type] = val
-
         database = os.getenv("XI_NETWORK_SQL_DATABASE") or credentials["SQL_DATABASE"]
         host = os.getenv("XI_NETWORK_SQL_HOST") or credentials["SQL_HOST"]
         port = os.getenv("XI_NETWORK_SQL_PORT") or int(credentials["SQL_PORT"])
@@ -196,19 +193,16 @@ def fetch_credentials():
     except:  # lgtm [py/catch-base-exception]
         print_red("Error fetching credentials.\nCheck settings/network.lua.")
         return False
-
     return True
 
 
 def fetch_versions():
     global current_client, release_version, release_client
     current_client = release_version = release_client = None
-
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
     except:  # lgtm [py/catch-base-exception]
         print_red("Unable to read current version hash.")
-
     try:
         with open(from_server_path("settings/default/login.lua")) as f:
             while True:
@@ -220,7 +214,6 @@ def fetch_versions():
                     release_client = match.group(1)
     except:  # lgtm [py/catch-base-exception]
         print_red("Unable to read settings/default/login.lua.")
-
     if os.path.exists(from_server_path("settings/login.lua")):
         try:
             with open(from_server_path("settings/login.lua")) as f:
@@ -233,7 +226,6 @@ def fetch_versions():
                         current_client = match.group(1)
         except:  # lgtm [py/catch-base-exception]
             print_red("Unable to read settings/login.lua")
-
     if db_ver and release_version:
         fetch_files(True)
     else:
@@ -361,7 +353,6 @@ def write_version(silent=False):
     update_client = update_client and release_client
     db_ver = release_version
     write_configs()
-
     if os.path.exists(from_server_path("settings/login.lua")):
         try:
             if current_client != release_client:
@@ -384,7 +375,6 @@ def write_version(silent=False):
 
 def import_file(file):
     file = os.path.normpath(file).replace("\\", "/")
-
     if not os.path.exists(file):
         print_red(
             f"Trying to import file that does not exist ({file}), or is an incomplete path."
@@ -450,7 +440,6 @@ def connect():
         else:
             print_red(err)
         return False
-
     return True
 
 
@@ -505,10 +494,10 @@ def backup_db(silent=False, lite=False):
                 stdout=outfile,
                 stderr=subprocess.PIPE,
                 text=True,
-                )
+            )
             fetch_errors(result)
-        print_green("Database saved!")
-        time.sleep(0.5)
+            print_green("Database saved!")
+            time.sleep(0.5)
 
 
 def express_update(silent=False):
@@ -765,12 +754,9 @@ def settings():
 
 def set_external_ip(ip_str):
     global mysql_bin, exe
-
     query = f"UPDATE zone_settings SET zoneip = '{ip_str}';"
-
     print("Executing query:")
     print(query)
-
     result = subprocess.run(
         [
             f"{mysql_bin}mysql{exe}",
@@ -878,7 +864,6 @@ def main():
         while cur:
             menu()
             selection = input("> ").lower()
-
             print(colorama.ansi.clear_screen())
             if "q" == selection:
                 close()
@@ -887,7 +872,6 @@ def main():
                 continue
             use_tool = actions.get(selection, bad_selection)
             use_tool()
-
     except KeyboardInterrupt:
         try:
             sys.exit(0)
