@@ -156,37 +156,23 @@ if os.name == "nt":
     exe = ".exe"
 else:
     exe = ""
-log_errors = " 2>>error.log"
 colorama.init(autoreset=True)
 
 # Redirect errors through this to hide annoying password warning
-def fetch_errors():
-    try:
-        with open(from_dbtool_path("error.log")) as f:
-            while True:
-                line = f.readline()
-                if not line:
-                    break
-                if (
-                    "Using a password on the command line interface can be insecure."
-                    in line
-                ):
-                    continue
-                print_red(line)
-        os.remove(from_dbtool_path("error.log"))
-    except:  # lgtm [py/catch-base-exception]
-        return
+def fetch_errors(result):
+    for line in result.stderr.splitlines():
+        # Safe to ignore this warning
+        if "Using a password on the command line interface can be insecure" not in line:
+            print_red(line)
 
 
 def fetch_credentials():
     global database, host, port, login, password
     credentials = {}
-
     # Grab mysql credentials
     filename = from_server_path("settings/default/network.lua")
     if from_server_path("settings/network.lua"):
         filename = from_server_path("settings/network.lua")
-
     try:
         with open(filename) as f:
             while True:
@@ -199,7 +185,6 @@ def fetch_credentials():
                     type = parts[0].strip()
                     val = parts[1].strip()
                     credentials[type] = val
-
         database = os.getenv("XI_NETWORK_SQL_DATABASE") or credentials["SQL_DATABASE"]
         host = os.getenv("XI_NETWORK_SQL_HOST") or credentials["SQL_HOST"]
         port = os.getenv("XI_NETWORK_SQL_PORT") or int(credentials["SQL_PORT"])
@@ -208,19 +193,16 @@ def fetch_credentials():
     except:  # lgtm [py/catch-base-exception]
         print_red("Error fetching credentials.\nCheck settings/network.lua.")
         return False
-
     return True
 
 
 def fetch_versions():
     global current_client, release_version, release_client
     current_client = release_version = release_client = None
-
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
     except:  # lgtm [py/catch-base-exception]
         print_red("Unable to read current version hash.")
-
     try:
         with open(from_server_path("settings/default/login.lua")) as f:
             while True:
@@ -232,7 +214,6 @@ def fetch_versions():
                     release_client = match.group(1)
     except:  # lgtm [py/catch-base-exception]
         print_red("Unable to read settings/default/login.lua.")
-
     if os.path.exists(from_server_path("settings/login.lua")):
         try:
             with open(from_server_path("settings/login.lua")) as f:
@@ -245,7 +226,6 @@ def fetch_versions():
                         current_client = match.group(1)
         except:  # lgtm [py/catch-base-exception]
             print_red("Unable to read settings/login.lua")
-
     if db_ver and release_version:
         fetch_files(True)
     else:
@@ -304,15 +284,17 @@ def check_protected():
     for table in player_data:
         import_protected.append("'" + table[:-4] + "'")
     cur.execute(
-        "SELECT TABLE_NAME FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = '{}' AND `TABLE_NAME` IN ({})".format(
-            database, ", ".join(import_protected)
-        )
+        f"SELECT TABLE_NAME FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = '{database}' AND `TABLE_NAME` IN ({', '.join(import_protected)})"
     )
     tables = cur.fetchall()
     import_protected.clear()
     for value in tables:
         import_protected.append("".join(value) + ".sql")
-    import_protected = [value for value in player_data if value not in import_protected]
+    import_protected = [
+        from_server_path("sql/" + value)
+        for value in player_data
+        if value not in import_protected
+    ]
     if import_protected:
         express_enabled = True
 
@@ -371,7 +353,6 @@ def write_version(silent=False):
     update_client = update_client and release_client
     db_ver = release_version
     write_configs()
-
     if os.path.exists(from_server_path("settings/login.lua")):
         try:
             if current_client != release_client:
@@ -394,40 +375,27 @@ def write_version(silent=False):
 
 def import_file(file):
     file = os.path.normpath(file).replace("\\", "/")
-
     if not os.path.exists(file):
         print_red(
             f"Trying to import file that does not exist ({file}), or is an incomplete path."
         )
         return
-
     print("Importing " + file)
-    query = "SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;".format(
-        file
-    )
-
+    query = f"SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {file}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;"
     result = subprocess.run(
         [
-            "{}mysql{}".format(mysql_bin, exe),
-            "-h",
-            host,
-            "-P",
-            str(port),
-            "-u",
-            login,
-            "-p{}".format(password),
+            f"{mysql_bin}mysql{exe}",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
             database,
-            "-e",
-            query,
+            f"-e {query}",
         ],
         capture_output=True,
         text=True,
     )
-
-    for line in result.stderr.splitlines():
-        # Safe to ignore this warning
-        if "Using a password on the command line interface can be insecure" not in line:
-            print_red(line)
+    fetch_errors(result)
 
 
 def connect():
@@ -451,24 +419,20 @@ def connect():
                 ).lower()
                 == "y"
             ):
-                create_command = (
-                    '"'
-                    + mysql_bin
-                    + "mysqladmin"
-                    + exe
-                    + '" -h '
-                    + host
-                    + " -P "
-                    + str(port)
-                    + " -u "
-                    + login
-                    + " -p"
-                    + password
-                    + " CREATE "
-                    + database
+                result = subprocess.run(
+                    [
+                        f"{mysql_bin}mysqladmin{exe}",
+                        f"-h{host}",
+                        f"-P{str(port)}",
+                        f"-u{login}",
+                        f"-p{password}",
+                        "CREATE",
+                        database,
+                    ],
+                    capture_output=True,
+                    text=True,
                 )
-                os.system(create_command + log_errors)
-                fetch_errors()
+                fetch_errors(result)
                 setup_db()
                 connect()
             else:
@@ -476,7 +440,6 @@ def connect():
         else:
             print_red(err)
         return False
-
     return True
 
 
@@ -504,88 +467,37 @@ def backup_db(silent=False, lite=False):
                 input("Would you like to only backup protected tables? [y/N] ").lower()
                 == "y"
             )
+        dumpcmd = [
+            f"{mysql_bin}mysqldump{exe}",
+            "--hex-blob",
+            "--add-drop-trigger",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
+            database,
+        ]
         if lite:
-            tables = " "
+            tables = []
             for table in player_data:
-                tables += table[:-4] + " "
-            dumpcmd = (
-                '"'
-                + mysql_bin
-                + "mysqldump"
-                + exe
-                + '" --hex-blob --add-drop-trigger -h '
-                + host
-                + " -P "
-                + str(port)
-                + " -u "
-                + login
-                + " -p"
-                + password
-                + " "
-                + database
-                + tables
-                + "> "
-                + server_dir_path
-                + "/sql/backups/"
-                + database
-                + "-"
-                + time.strftime("%Y%m%d-%H%M%S")
-                + "-lite.sql"
-            )
+                tables.append(table[:-4])
+            dumpcmd.extend(tables)
+            outfile_path = f"{server_dir_path}/sql/backups/{database}-{time.strftime('%Y%m%d-%H%M%S')}-lite.sql"
         else:
             if db_ver:
-                dumpcmd = (
-                    '"'
-                    + mysql_bin
-                    + "mysqldump"
-                    + exe
-                    + '" --hex-blob --add-drop-trigger -h '
-                    + host
-                    + " -P "
-                    + str(port)
-                    + " -u "
-                    + login
-                    + " -p"
-                    + password
-                    + " "
-                    + database
-                    + " > "
-                    + server_dir_path
-                    + "/sql/backups/"
-                    + database
-                    + "-"
-                    + time.strftime("%Y%m%d-%H%M%S")
-                    + "-"
-                    + db_ver
-                    + ".sql"
-                )
+                outfile_path = f"{server_dir_path}/sql/backups/{database}-{time.strftime('%Y%m%d-%H%M%S')}-{db_ver}.sql"
             else:
-                dumpcmd = (
-                    '"'
-                    + mysql_bin
-                    + "mysqldump"
-                    + exe
-                    + '" --hex-blob --add-drop-trigger -h '
-                    + host
-                    + " -P "
-                    + str(port)
-                    + " -u "
-                    + login
-                    + " -p"
-                    + password
-                    + " "
-                    + database
-                    + " > "
-                    + server_dir_path
-                    + "/sql/backups/"
-                    + database
-                    + time.strftime("%Y%m%d-%H%M%S")
-                    + "-full.sql"
-                )
-        os.system(dumpcmd + log_errors)
-        fetch_errors()
-        print_green("Database saved!")
-        time.sleep(0.5)
+                outfile_path = f"{server_dir_path}/sql/backups/{database}-{time.strftime('%Y%m%d-%H%M%S')}-full.sql"
+        with open(outfile_path, "w") as outfile:
+            result = subprocess.run(
+                dumpcmd,
+                stdout=outfile,
+                stderr=subprocess.PIPE,
+                text=True,
+            )
+            fetch_errors(result)
+            print_green("Database saved!")
+            time.sleep(0.5)
 
 
 def express_update(silent=False):
@@ -762,7 +674,7 @@ def restore_backup():
                     backup_file = backups[choice - 1]
                     print(colorama.ansi.clear_screen())
                     if input("Delete " + backup_file + "? [y/N] ").lower() == "y":
-                        os.remove(from_server_path("sql/backups/") + backup_file)
+                        os.remove(backup_file)
                         print_green("Deleted " + backup_file + "!")
                         fetch_files()
                 else:
@@ -785,120 +697,37 @@ def bad_selection():
     time.sleep(0.5)
 
 
+# fmt: off
 def menu():
     print(
-        colorama.Fore.GREEN
-        + "o"
-        + colorama.Fore.RED
-        + "---------------------------------------"
-        + colorama.Fore.GREEN
-        + "o\n"
-        + colorama.Fore.RED
-        + "| "
-        + colorama.Style.RESET_ALL
-        + "LandSandBoat Database Management Tool"
-        + colorama.Fore.RED
-        + " |\n"
-        "| "
-        + colorama.Style.RESET_ALL
-        + str("Connected to " + database).center(37)
-        + colorama.Fore.RED
-        + " |"
+        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o\n"
+        + colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + "LandSandBoat Database Management Tool" + colorama.Fore.RED + " |\n"
+        "| " + colorama.Style.RESET_ALL + str("Connected to " + database).center(37) + colorama.Fore.RED + " |"
     )
     if db_ver:
         print(
-            colorama.Fore.RED
-            + "| "
-            + colorama.Style.RESET_ALL
-            + str("#" + db_ver).center(37)
-            + colorama.Fore.RED
-            + " |"
+            colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + str("#" + db_ver).center(37) + colorama.Fore.RED + " |"
         )
     print(
-        colorama.Fore.GREEN
-        + "o"
-        + colorama.Fore.RED
-        + "---------------------------------------"
-        + colorama.Fore.GREEN
-        + "o"
+        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
     )
     if express_enabled:
         print(
-            colorama.Fore.RED
-            + "|"
-            + colorama.Fore.GREEN
-            + "e"
-            + colorama.Style.RESET_ALL
-            + ". Express Update "
-            + str("(#" + release_version + ")").ljust(21)
-            + colorama.Fore.RED
-            + "|"
+            colorama.Fore.RED + "|" + colorama.Fore.GREEN + "e" + colorama.Style.RESET_ALL + ". Express Update " + str("(#" + release_version + ")").ljust(21) + colorama.Fore.RED + "|"
         )
     print(
-        colorama.Fore.RED
-        + "|"
-        + colorama.Fore.GREEN
-        + "1"
-        + colorama.Style.RESET_ALL
-        + ". Update DB                           "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "2"
-        + colorama.Style.RESET_ALL
-        + ". Check migrations                    "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "3"
-        + colorama.Style.RESET_ALL
-        + ". Backup                              "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "4"
-        + colorama.Style.RESET_ALL
-        + ". Restore/Import                      "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "r"
-        + colorama.Style.RESET_ALL
-        + ". Reset DB                            "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "t"
-        + colorama.Style.RESET_ALL
-        + ". Tasks                               "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "s"
-        + colorama.Style.RESET_ALL
-        + ". Settings                            "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "q"
-        + colorama.Style.RESET_ALL
-        + ". Quit                                "
-        + colorama.Fore.RED
-        + "|\n"
-        + colorama.Fore.GREEN
-        + "o"
-        + colorama.Fore.RED
-        + "---------------------------------------"
-        + colorama.Fore.GREEN
-        + "o"
+        colorama.Fore.RED +
+        "|" + colorama.Fore.GREEN + "1" + colorama.Style.RESET_ALL + str(". Update DB").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "2" + colorama.Style.RESET_ALL + str(". Check migrations").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "3" + colorama.Style.RESET_ALL + str(". Backup").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "4" + colorama.Style.RESET_ALL + str(". Restore/Import").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "r" + colorama.Style.RESET_ALL + str(". Reset DB").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "t" + colorama.Style.RESET_ALL + str(". Tasks").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "s" + colorama.Style.RESET_ALL + str(". Settings").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "q" + colorama.Style.RESET_ALL + str(". Quit").ljust(38) + colorama.Fore.RED + "|\n"
+        + colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
     )
+# fmt: on
 
 
 def settings():
@@ -923,37 +752,25 @@ def settings():
     write_configs()
 
 
-# TODO: Hook this up to a menu option
 def set_external_ip(ip_str):
     global mysql_bin, exe
-
     query = f"UPDATE zone_settings SET zoneip = '{ip_str}';"
-
     print("Executing query:")
     print(query)
-
     result = subprocess.run(
         [
-            "{}mysql{}".format(mysql_bin, exe),
-            "-h",
-            host,
-            "-P",
-            str(port),
-            "-u",
-            login,
-            "-p{}".format(password),
+            f"{mysql_bin}mysql{exe}",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
             database,
-            "-e",
-            query,
+            f"-e {query}",
         ],
         capture_output=True,
         text=True,
     )
-
-    for line in result.stderr.splitlines():
-        # Safe to ignore this warning
-        if "Using a password on the command line interface can be insecure" not in line:
-            print_red(line)
+    fetch_errors(result)
 
 
 def tasks():
@@ -1016,24 +833,20 @@ def main():
                 return
             elif "setup" == arg1:
                 if len(sys.argv) > 2 and str(sys.argv[2]) == database:
-                    create_command = (
-                        '"'
-                        + mysql_bin
-                        + "mysqladmin"
-                        + exe
-                        + '" -h '
-                        + host
-                        + " -P "
-                        + str(port)
-                        + " -u "
-                        + login
-                        + " -p"
-                        + password
-                        + " CREATE "
-                        + database
+                    result = subprocess.run(
+                        [
+                            f"{mysql_bin}mysqladmin{exe}",
+                            f"-h{host}",
+                            f"-P{str(port)}",
+                            f"-u{login}",
+                            f"-p{password}",
+                            "CREATE",
+                            database,
+                        ],
+                        capture_output=True,
+                        text=True,
                     )
-                    os.system(create_command + log_errors)
-                    fetch_errors()
+                    fetch_errors(result)
                     setup_db()
                 return
         # Main loop
@@ -1051,7 +864,6 @@ def main():
         while cur:
             menu()
             selection = input("> ").lower()
-
             print(colorama.ansi.clear_screen())
             if "q" == selection:
                 close()
@@ -1060,7 +872,6 @@ def main():
                 continue
             use_tool = actions.get(selection, bad_selection)
             use_tool()
-
     except KeyboardInterrupt:
         try:
             sys.exit(0)
