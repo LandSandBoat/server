@@ -14,7 +14,10 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+    if
+        mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or
+        mob:isMobType(xi.mobskills.mobType.BATTLEFIELD)
+    then
         return 0
     end
     return 1
