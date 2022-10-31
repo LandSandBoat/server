@@ -156,26 +156,14 @@ if os.name == "nt":
     exe = ".exe"
 else:
     exe = ""
-log_errors = " 2>>error.log"
 colorama.init(autoreset=True)
 
 # Redirect errors through this to hide annoying password warning
-def fetch_errors():
-    try:
-        with open(from_dbtool_path("error.log")) as f:
-            while True:
-                line = f.readline()
-                if not line:
-                    break
-                if (
-                    "Using a password on the command line interface can be insecure."
-                    in line
-                ):
-                    continue
+def fetch_errors(result):
+    for line in result.stderr.splitlines():
+        # Safe to ignore this warning
+        if "Using a password on the command line interface can be insecure" not in line:
                 print_red(line)
-        os.remove(from_dbtool_path("error.log"))
-    except:  # lgtm [py/catch-base-exception]
-        return
 
 
 def fetch_credentials():
@@ -408,26 +396,18 @@ def import_file(file):
 
     result = subprocess.run(
         [
-            "{}mysql{}".format(mysql_bin, exe),
-            "-h",
-            host,
-            "-P",
-            str(port),
-            "-u",
-            login,
-            "-p{}".format(password),
+            f"{mysql_bin}mysql{exe}",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
             database,
-            "-e",
-            query,
+            f"-e {query}",
         ],
         capture_output=True,
         text=True,
     )
-
-    for line in result.stderr.splitlines():
-        # Safe to ignore this warning
-        if "Using a password on the command line interface can be insecure" not in line:
-            print_red(line)
+    fetch_errors(result)
 
 
 def connect():
@@ -451,24 +431,20 @@ def connect():
                 ).lower()
                 == "y"
             ):
-                create_command = (
-                    '"'
-                    + mysql_bin
-                    + "mysqladmin"
-                    + exe
-                    + '" -h '
-                    + host
-                    + " -P "
-                    + str(port)
-                    + " -u "
-                    + login
-                    + " -p"
-                    + password
-                    + " CREATE "
-                    + database
+                result = subprocess.run(
+                    [
+                        f"{mysql_bin}mysqladmin{exe}",
+                        f"-h{host}",
+                        f"-P{str(port)}",
+                        f"-u{login}",
+                        f"-p{password}",
+                        "CREATE",
+                        database,
+                    ],
+                    capture_output=True,
+                    text=True,
                 )
-                os.system(create_command + log_errors)
-                fetch_errors()
+                fetch_errors(result)
                 setup_db()
                 connect()
             else:
@@ -504,86 +480,35 @@ def backup_db(silent=False, lite=False):
                 input("Would you like to only backup protected tables? [y/N] ").lower()
                 == "y"
             )
+        dumpcmd = [
+            f"{mysql_bin}mysqldump{exe}",
+            "--hex-blob",
+            "--add-drop-trigger",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
+            database,
+        ]
         if lite:
-            tables = " "
+            tables = []
             for table in player_data:
-                tables += table[:-4] + " "
-            dumpcmd = (
-                '"'
-                + mysql_bin
-                + "mysqldump"
-                + exe
-                + '" --hex-blob --add-drop-trigger -h '
-                + host
-                + " -P "
-                + str(port)
-                + " -u "
-                + login
-                + " -p"
-                + password
-                + " "
-                + database
-                + tables
-                + "> "
-                + server_dir_path
-                + "/sql/backups/"
-                + database
-                + "-"
-                + time.strftime("%Y%m%d-%H%M%S")
-                + "-lite.sql"
-            )
+                tables.append(table[:-4])
+            dumpcmd.extend(tables)
+            outfile_path = f"{server_dir_path}/sql/backups/{database}-{time.strftime('%Y%m%d-%H%M%S')}-lite.sql"
         else:
             if db_ver:
-                dumpcmd = (
-                    '"'
-                    + mysql_bin
-                    + "mysqldump"
-                    + exe
-                    + '" --hex-blob --add-drop-trigger -h '
-                    + host
-                    + " -P "
-                    + str(port)
-                    + " -u "
-                    + login
-                    + " -p"
-                    + password
-                    + " "
-                    + database
-                    + " > "
-                    + server_dir_path
-                    + "/sql/backups/"
-                    + database
-                    + "-"
-                    + time.strftime("%Y%m%d-%H%M%S")
-                    + "-"
-                    + db_ver
-                    + ".sql"
-                )
+                outfile_path = f"{server_dir_path}/sql/backups/{database}-{time.strftime('%Y%m%d-%H%M%S')}-{db_ver}.sql"
             else:
-                dumpcmd = (
-                    '"'
-                    + mysql_bin
-                    + "mysqldump"
-                    + exe
-                    + '" --hex-blob --add-drop-trigger -h '
-                    + host
-                    + " -P "
-                    + str(port)
-                    + " -u "
-                    + login
-                    + " -p"
-                    + password
-                    + " "
-                    + database
-                    + " > "
-                    + server_dir_path
-                    + "/sql/backups/"
-                    + database
-                    + time.strftime("%Y%m%d-%H%M%S")
-                    + "-full.sql"
+                outfile_path = f"{server_dir_path}/sql/backups/{database}-{time.strftime('%Y%m%d-%H%M%S')}-full.sql"
+        with open(outfile_path, "w") as outfile:
+            result = subprocess.run(
+                dumpcmd,
+                stdout=outfile,
+                stderr=subprocess.PIPE,
+                text=True,
                 )
-        os.system(dumpcmd + log_errors)
-        fetch_errors()
+            fetch_errors(result)
         print_green("Database saved!")
         time.sleep(0.5)
 
@@ -923,7 +848,6 @@ def settings():
     write_configs()
 
 
-# TODO: Hook this up to a menu option
 def set_external_ip(ip_str):
     global mysql_bin, exe
 
@@ -934,26 +858,18 @@ def set_external_ip(ip_str):
 
     result = subprocess.run(
         [
-            "{}mysql{}".format(mysql_bin, exe),
-            "-h",
-            host,
-            "-P",
-            str(port),
-            "-u",
-            login,
-            "-p{}".format(password),
+            f"{mysql_bin}mysql{exe}",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
             database,
-            "-e",
-            query,
+            f"-e {query}",
         ],
         capture_output=True,
         text=True,
     )
-
-    for line in result.stderr.splitlines():
-        # Safe to ignore this warning
-        if "Using a password on the command line interface can be insecure" not in line:
-            print_red(line)
+    fetch_errors(result)
 
 
 def tasks():
@@ -1016,24 +932,20 @@ def main():
                 return
             elif "setup" == arg1:
                 if len(sys.argv) > 2 and str(sys.argv[2]) == database:
-                    create_command = (
-                        '"'
-                        + mysql_bin
-                        + "mysqladmin"
-                        + exe
-                        + '" -h '
-                        + host
-                        + " -P "
-                        + str(port)
-                        + " -u "
-                        + login
-                        + " -p"
-                        + password
-                        + " CREATE "
-                        + database
+                    result = subprocess.run(
+                        [
+                            f"{mysql_bin}mysqladmin{exe}",
+                            f"-h{host}",
+                            f"-P{str(port)}",
+                            f"-u{login}",
+                            f"-p{password}",
+                            "CREATE",
+                            database,
+                        ],
+                        capture_output=True,
+                        text=True,
                     )
-                    os.system(create_command + log_errors)
-                    fetch_errors()
+                    fetch_errors(result)
                     setup_db()
                 return
         # Main loop
