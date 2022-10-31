@@ -71,9 +71,7 @@ function content:onBattlefieldInitialise(battlefield)
 end
 
 content.handleMobDeath = function(floor, battlefield, mob, count)
-    if GetNPCByID(ID.TEMENOS_WESTERN_TOWER.npc.PORTAL[floor]):getAnimation() == xi.animation.CLOSE_DOOR then
-        content:openDoor(battlefield, floor)
-    end
+    content:openDoor(battlefield, floor)
 
     local crateCount = battlefield:getLocalVar("CrateCount"..floor)
     if crateCount < 3 and math.random(4) == 1 then

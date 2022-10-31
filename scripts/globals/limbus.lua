@@ -228,10 +228,12 @@ end
 
 function xi.limbus.spawnFrom(mob, crateID)
     local crate = GetEntityByID(crateID)
-    crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-    crate:setStatus(xi.status.NORMAL)
-    crate:setUntargetable(false)
-    crate:setAnimationSub(8)
+    if crate:getLocalVar("opened") == 0 then
+        crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+        crate:setStatus(xi.status.NORMAL)
+        crate:setUntargetable(false)
+        crate:setAnimationSub(8)
+    end
 end
 
 function xi.limbus.spawnRecoverFrom(mob, crateID)
@@ -329,9 +331,11 @@ function Limbus:onBattlefieldInitialise(battlefield)
     end
 
     -- Setup Winning Loot Crate
-    local crate = GetEntityByID(ID.npc.LOOT_CRATE)
-    xi.limbus.hideCrate(crate)
-    crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
+    if ID.npc.LOOT_CRATE then
+        local crate = GetEntityByID(ID.npc.LOOT_CRATE)
+        xi.limbus.hideCrate(crate)
+        crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
+    end
 
     -- Setup Linked Crates (can only open one)
     if ID.LINKED_CRATES then
@@ -420,6 +424,10 @@ end
 
 function Limbus:openDoor(battlefield, floor)
     local door = GetNPCByID(self.ID.npc.PORTAL[floor])
+    if door:getAnimation() == xi.animation.OPEN_DOOR then
+        return
+    end
+
     local ID = zones[door:getZoneID()]
     local remaining = battlefield:getRemainingTime() / 60
 
