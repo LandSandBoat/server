@@ -32,7 +32,7 @@ def get_commit_messages():
 
         if len(lines) > 0:
             # Skip merge commits
-            if not lines[0].startswith("Merge pull request #"):
+            if not lines[0].startswith("Merge") and (not 'pull request' in lines[0] or not 'into' in lines[0]):
                 commit_messages[hash] = lines
 
     return commit_messages
@@ -85,5 +85,4 @@ for hash, lines in get_commit_messages().items():
         if 'oops' in line.lower() or 'lol' in line.lower():
             print_error(hash, lines, line, "Detected unhelpful language in commit message.\nPlease "
                 "describe what you have changed with this commit.\nUnhelpful language:\nOops\nWhoops\nlol")
-
 EOF
