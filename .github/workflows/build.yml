@@ -11,6 +11,10 @@ on:
       - base
       - everything
 
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
@@ -43,7 +47,7 @@ jobs:
       if: github.event_name == 'pull_request'
       run: |
         touch git_checks.txt
-        bash tools/ci/git.sh ${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
+        bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
         cat git_checks.txt
         if [ -s git_checks.txt ]
         then
