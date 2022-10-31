@@ -169,6 +169,7 @@ jobs:
         exit 0
 
   Linux_Clang14_64bit:
+    needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
@@ -202,6 +203,7 @@ jobs:
           xi_search
 
   Linux_GCC11_64bit:
+    needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
@@ -227,6 +229,7 @@ jobs:
         cmake --build build -j4
 
   Windows_32bit:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -250,6 +253,7 @@ jobs:
           cmake --build build -j4
 
   Windows_64bit_Debug:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -281,6 +285,7 @@ jobs:
             xi_search.exe
 
   Windows_64bit_Release_Tracy_Modules_World:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -313,6 +318,7 @@ jobs:
           cmake --build build -j4
 
   MacOS_64bit:
+    needs: Sanity_Checks
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
     runs-on: macos-latest
     steps:
