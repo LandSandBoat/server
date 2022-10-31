@@ -708,120 +708,37 @@ def bad_selection():
     time.sleep(0.5)
 
 
+# fmt: off
 def menu():
     print(
-        colorama.Fore.GREEN
-        + "o"
-        + colorama.Fore.RED
-        + "---------------------------------------"
-        + colorama.Fore.GREEN
-        + "o\n"
-        + colorama.Fore.RED
-        + "| "
-        + colorama.Style.RESET_ALL
-        + "LandSandBoat Database Management Tool"
-        + colorama.Fore.RED
-        + " |\n"
-        "| "
-        + colorama.Style.RESET_ALL
-        + str("Connected to " + database).center(37)
-        + colorama.Fore.RED
-        + " |"
+        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o\n"
+        + colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + "LandSandBoat Database Management Tool" + colorama.Fore.RED + " |\n"
+        "| " + colorama.Style.RESET_ALL + str("Connected to " + database).center(37) + colorama.Fore.RED + " |"
     )
     if db_ver:
         print(
-            colorama.Fore.RED
-            + "| "
-            + colorama.Style.RESET_ALL
-            + str("#" + db_ver).center(37)
-            + colorama.Fore.RED
-            + " |"
+            colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + str("#" + db_ver).center(37) + colorama.Fore.RED + " |"
         )
     print(
-        colorama.Fore.GREEN
-        + "o"
-        + colorama.Fore.RED
-        + "---------------------------------------"
-        + colorama.Fore.GREEN
-        + "o"
+        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
     )
     if express_enabled:
         print(
-            colorama.Fore.RED
-            + "|"
-            + colorama.Fore.GREEN
-            + "e"
-            + colorama.Style.RESET_ALL
-            + ". Express Update "
-            + str("(#" + release_version + ")").ljust(21)
-            + colorama.Fore.RED
-            + "|"
+            colorama.Fore.RED + "|" + colorama.Fore.GREEN + "e" + colorama.Style.RESET_ALL + ". Express Update " + str("(#" + release_version + ")").ljust(21) + colorama.Fore.RED + "|"
         )
     print(
-        colorama.Fore.RED
-        + "|"
-        + colorama.Fore.GREEN
-        + "1"
-        + colorama.Style.RESET_ALL
-        + ". Update DB                           "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "2"
-        + colorama.Style.RESET_ALL
-        + ". Check migrations                    "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "3"
-        + colorama.Style.RESET_ALL
-        + ". Backup                              "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "4"
-        + colorama.Style.RESET_ALL
-        + ". Restore/Import                      "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "r"
-        + colorama.Style.RESET_ALL
-        + ". Reset DB                            "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "t"
-        + colorama.Style.RESET_ALL
-        + ". Tasks                               "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "s"
-        + colorama.Style.RESET_ALL
-        + ". Settings                            "
-        + colorama.Fore.RED
-        + "|\n"
-        "|"
-        + colorama.Fore.GREEN
-        + "q"
-        + colorama.Style.RESET_ALL
-        + ". Quit                                "
-        + colorama.Fore.RED
-        + "|\n"
-        + colorama.Fore.GREEN
-        + "o"
-        + colorama.Fore.RED
-        + "---------------------------------------"
-        + colorama.Fore.GREEN
-        + "o"
+        colorama.Fore.RED +
+        "|" + colorama.Fore.GREEN + "1" + colorama.Style.RESET_ALL + str(". Update DB").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "2" + colorama.Style.RESET_ALL + str(". Check migrations").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "3" + colorama.Style.RESET_ALL + str(". Backup").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "4" + colorama.Style.RESET_ALL + str(". Restore/Import").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "r" + colorama.Style.RESET_ALL + str(". Reset DB").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "t" + colorama.Style.RESET_ALL + str(". Tasks").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "s" + colorama.Style.RESET_ALL + str(". Settings").ljust(38) + colorama.Fore.RED + "|\n"
+        "|" + colorama.Fore.GREEN + "q" + colorama.Style.RESET_ALL + str(". Quit").ljust(38) + colorama.Fore.RED + "|\n"
+        + colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
     )
+# fmt: on
 
 
 def settings():
