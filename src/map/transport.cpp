@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -409,6 +409,33 @@ void CTransportHandler::TransportTimer()
                     else
                     {
                         zoneIterator->voyageZone->SetZoneDirection(0);
+                    }
+                }
+                else if (zoneId == ZONE_MANACLIPPER)
+                {
+                    uint32 hour = CVanaTime::getInstance()->getHour();
+                    switch (hour)
+                    {
+                        case 0:
+                            zoneIterator->voyageZone->SetZoneAnimation(0);
+                            zoneIterator->voyageZone->SetZoneAnimLength(590);
+                            break;
+                        case 4:
+                            [[fallthrough]];
+                        case 16:
+                            zoneIterator->voyageZone->SetZoneAnimation(16);
+                            zoneIterator->voyageZone->SetZoneAnimLength(445);
+                            break;
+                        case 8:
+                            [[fallthrough]];
+                        case 20:
+                            zoneIterator->voyageZone->SetZoneAnimation(24);
+                            zoneIterator->voyageZone->SetZoneAnimLength(445);
+                            break;
+                        case 12:
+                            zoneIterator->voyageZone->SetZoneAnimation(8);
+                            zoneIterator->voyageZone->SetZoneAnimLength(590);
+                            break;
                     }
                 }
             }
