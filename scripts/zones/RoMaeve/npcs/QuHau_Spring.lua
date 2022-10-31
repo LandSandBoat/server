@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
         if
             (rovEnabled == 0 and (hour >= 0 and hour < 3) and
             (weather == xi.weather.NONE or weather == xi.weather.SUNSHINE)) or
-            (rovEnabled == 1 and (hour >= 18 or hour < 7))
+            (rovEnabled == 1 and (hour >= 18 or hour < 6))
         then
             if
                 dmFirst == QUEST_ACCEPTED or dmRepeat == QUEST_ACCEPTED
