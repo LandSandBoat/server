@@ -24,6 +24,7 @@ local content = Limbus:new({
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.items.METAL_CHIP },
     name             = "CS_APOLLYON",
+    timeExtension   = 5,
 })
 
 function content:isValidEntry(player, npc)

@@ -11,14 +11,14 @@ local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
-    SetServerVariable("[Central_Temenos_4th_Floor]Time", battlefield:getTimeLimit() / 60)
+    SetServerVariable("[CENTRAL_TEMENOS_4TH_FLOOR]Time", battlefield:getTimeLimit() / 60)
     xi.limbus.handleDoors(battlefield)
     xi.limbus.setupArmouryCrates(battlefield:getID())
 end
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
-        SetServerVariable("[Central_Temenos_4th_Floor]Time", battlefield:getRemainingTime() / 60)
+        SetServerVariable("[CENTRAL_TEMENOS_4TH_FLOOR]Time", battlefield:getRemainingTime() / 60)
     end
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
@@ -34,7 +34,7 @@ end
 
 battlefieldObject.onBattlefieldDestroy = function(battlefield)
     xi.limbus.handleDoors(battlefield, true)
-    SetServerVariable("[Central_Temenos_4th_Floor]Time", 0)
+    SetServerVariable("[CENTRAL_TEMENOS_4TH_FLOOR]Time", 0)
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
