@@ -2822,7 +2822,45 @@ namespace battleutils
 
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded)
     {
-        uint16 attack = PAttacker->ATT(slot);
+        uint16 attack = 1;
+        if (slot == SLOT_RANGED || slot == SLOT_AMMO)
+        {
+            if (PAttacker->objtype == TYPE_PC)
+            {
+                CCharEntity* PChar = (CCharEntity*)PAttacker;
+                CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
+                {
+                    attack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
+                }
+                else
+                {
+                    PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                    if (PItem == nullptr || !PItem->isType(ITEM_WEAPON) || (PItem->getSkillType() != SKILL_THROWING))
+                    {
+                        ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for.");
+                    }
+                    else
+                    {
+                        attack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
+                    }
+                }
+            }
+            else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
+            {
+                attack = PAttacker->RATT(SKILL_AUTOMATON_RANGED, distance(PAttacker->loc.p, PDefender->loc.p));
+            }
+            else
+            {
+                // assume mobs capped
+                attack = battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_RNG, PAttacker->GetMLevel());
+            }
+        }
+        else
+        {
+            attack = PAttacker->ATT(slot);
+        }
+
         // Bonus attack currently only from footwork
         if (bonusAttPercent >= 1)
         {
@@ -2908,11 +2946,12 @@ namespace battleutils
         // Damage Limit+ trait adds 0.1/rank to these values
         // type : non-crit : crit
         // 1H : 2 : 3
-        // H2H & GK : 2.25 : 3.25
         // 2H : 2.25 : 3.25
-        // Scythe : 2.25 : 3.25
+        // H2H: 2.25 : 3.25
         // Archery & Throwing : 2 : 3
         // Marksmanship : 2 : 3
+        // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+        // Monster pDIF = Avatar pDIF = Pet pDIF
 
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
@@ -2932,15 +2971,7 @@ namespace battleutils
             // If null ignore the checks and fallback to 1H values
             if (targ_weapon)
             {
-                if (targ_weapon->isHandToHand() || targ_weapon->getSkillType() == SKILL_GREAT_KATANA)
-                {
-                    maxRatio = 2.25f;
-                }
-                else if (targ_weapon->getSkillType() == SKILL_SCYTHE)
-                {
-                    maxRatio = 2.25f;
-                }
-                else if (targ_weapon->isTwoHanded())
+                if (targ_weapon->isTwoHanded() || targ_weapon->isHandToHand())
                 {
                     maxRatio = 2.25f;
                 }
@@ -3100,7 +3131,7 @@ namespace battleutils
         {
             fstr = static_cast<int32>((dif + 13) / 2);
         }
-        if (SlotID == SLOT_RANGED)
+        if (SlotID == SLOT_RANGED || SlotID == SLOT_AMMO)
         {
             rank = PAttacker->GetRangedWeaponRank();
             // Different caps than melee weapons
