@@ -292,9 +292,7 @@ def check_protected():
     for table in player_data:
         import_protected.append("'" + table[:-4] + "'")
     cur.execute(
-        "SELECT TABLE_NAME FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = '{}' AND `TABLE_NAME` IN ({})".format(
-            database, ", ".join(import_protected)
-        )
+        f"SELECT TABLE_NAME FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = '{database}' AND `TABLE_NAME` IN ({', '.join(import_protected)})"
     )
     tables = cur.fetchall()
     import_protected.clear()
@@ -388,12 +386,8 @@ def import_file(file):
             f"Trying to import file that does not exist ({file}), or is an incomplete path."
         )
         return
-
     print("Importing " + file)
-    query = "SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;".format(
-        file
-    )
-
+    query = f"SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {file}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;"
     result = subprocess.run(
         [
             f"{mysql_bin}mysql{exe}",
