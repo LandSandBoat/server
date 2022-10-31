@@ -483,11 +483,19 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
 uint16 CBattleEntity::GetMainWeaponRank()
 {
+    // https://www.bg-wiki.com/ffxi/Weapon_Rank
+    // https://ffxiclopedia.fandom.com/wiki/Category:Hand-to-Hand?oldid=342430
+    uint16 wDamage = 0;
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        return (weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK)) / 9;
+        wDamage = weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK);
+
+        if (weapon->getSkillType() == SKILL_HAND_TO_HAND)
+        {
+            wDamage += 3;
+        }
     }
-    return 0;
+    return wDamage / 9;
 }
 
 uint16 CBattleEntity::GetSubWeaponRank()

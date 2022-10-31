@@ -469,6 +469,11 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
         m_baseDamage       = 0;
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
 
+        if (m_attacker->objtype == TYPE_MOB)
+        {
+            m_naturalH2hDamage /= 2;
+        }
+
         if (!isKick)
         {
             m_baseDamage = m_attacker->GetMainWeaponDmg();
