@@ -298,7 +298,11 @@ def check_protected():
     import_protected.clear()
     for value in tables:
         import_protected.append("".join(value) + ".sql")
-    import_protected = [value for value in player_data if value not in import_protected]
+    import_protected = [
+        from_server_path("sql/" + value)
+        for value in player_data
+        if value not in import_protected
+    ]
     if import_protected:
         express_enabled = True
 
@@ -681,7 +685,7 @@ def restore_backup():
                     backup_file = backups[choice - 1]
                     print(colorama.ansi.clear_screen())
                     if input("Delete " + backup_file + "? [y/N] ").lower() == "y":
-                        os.remove(from_server_path("sql/backups/") + backup_file)
+                        os.remove(backup_file)
                         print_green("Deleted " + backup_file + "!")
                         fetch_files()
                 else:
