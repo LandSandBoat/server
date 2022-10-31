@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Equette
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

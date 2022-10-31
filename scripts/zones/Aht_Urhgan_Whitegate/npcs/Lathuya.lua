@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Lathuya
--- Standard Info NPC
 -- Involved in quests: Omens
 -- !pos -95.081 -6.000 31.638 50
 -----------------------------------

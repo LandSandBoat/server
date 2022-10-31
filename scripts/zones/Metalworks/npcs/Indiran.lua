@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Indiran
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

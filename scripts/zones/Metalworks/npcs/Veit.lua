@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Veit
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

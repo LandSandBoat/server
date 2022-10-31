@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Kyun Magopiteh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

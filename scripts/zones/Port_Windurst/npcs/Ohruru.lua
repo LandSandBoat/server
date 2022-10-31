@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
 -- ======== FOR TESTING ONLY ==========-----
 --    if (player:getCharVar("QuestCatchItIfYouCan_var") == 0 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false) then
 --        rand = math.random(1, 3)
---        if (rand == 1) then
+--        if rand == 1 then
 --            player:addStatusEffect(xi.effect.MUTE, 0, 0, 100)
 --        elseif (rand == 2) then
 --            player:addStatusEffect(xi.effect.BANE, 0, 0, 100)
@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(255) -- CATCH IT IF YOU CAN: After Quest
     elseif (catch == 1 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false) then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(248) -- CATCH IT IF YOU CAN: During Quest 1
         else
             player:startEvent(251) -- CATCH IT IF YOU CAN: During Quest 2

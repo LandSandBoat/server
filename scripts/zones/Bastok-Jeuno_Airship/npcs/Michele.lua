@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok-Jeuno Airship
 --  NPC: Michele
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Bastok-Jeuno_Airship/IDs")
 -----------------------------------

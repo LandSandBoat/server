@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Noam
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

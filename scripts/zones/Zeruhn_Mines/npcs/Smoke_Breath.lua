@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Smoke Breath
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Kedhareshvar
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

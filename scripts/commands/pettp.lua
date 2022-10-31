@@ -17,7 +17,7 @@ end
 function onTrigger(player, tp)
     -- validate target
     local targ = player:getPet()
-    if (targ == nil) then
+    if targ == nil then
         error(player, "You do not have a pet.")
         return
     end

@@ -320,7 +320,7 @@ function onTrigger(player, bytes)
     else
         target = string.sub(bytes, 1, sppos-1)
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format( "Player named '%s' not found!", target ))
             return
         end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Tsahbi Ifalombo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Frescheque
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

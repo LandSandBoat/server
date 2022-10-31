@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Tsui Golalapahn
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

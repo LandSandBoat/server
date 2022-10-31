@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Alfesar
--- Standard Info NPC
 --Starts The Missing Piece
 -----------------------------------
 require("scripts/globals/settings")

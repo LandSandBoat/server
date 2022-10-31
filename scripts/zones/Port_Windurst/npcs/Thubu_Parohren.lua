@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 10009 and option == 1) then
         local crystal = 4101 -- water crystal
 
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else
             player:addItem(crystal)

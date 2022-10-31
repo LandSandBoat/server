@@ -103,7 +103,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ChasingQuotas_Progress", 2)
         player:setCharVar("ChasingQuotas_date", 0)
     elseif (csid == 15) then
-        if (player:getFreeSlotsCount() < 1) then
+        if player:getFreeSlotsCount() < 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14227)
         else
             player:delKeyItem(xi.ki.RANCHURIOMES_LEGACY)

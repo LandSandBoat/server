@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina (248)
 --  NPC: Naillina
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

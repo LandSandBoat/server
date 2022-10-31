@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Esoteric Hound
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

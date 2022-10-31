@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Gigirk
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
