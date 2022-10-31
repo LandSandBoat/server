@@ -1325,8 +1325,8 @@ INSERT INTO `mob_groups` VALUES (17,6187,35,'Awaern_smn',960,0,775,0,9999,81,84,
 INSERT INTO `mob_groups` VALUES (18,54,35,'Aerns_Elemental',0,128,0,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (19,299,35,'Aweuvhi',960,0,199,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (20,6180,35,'Awaern_drk',960,0,775,0,9999,81,84,0);
-INSERT INTO `mob_groups` VALUES (21,301,35,'Awzdei',960,0,0,0,0,80,83,0);
--- 22: free
+INSERT INTO `mob_groups` VALUES (21,301,35,'Awzdei',960,0,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (22,301,35,'Awzdei_Still',960,0,0,0,0,83,83,0);
 INSERT INTO `mob_groups` VALUES (23,6179,35,'Awaern_pld',960,0,775,0,9999,81,84,0);
 INSERT INTO `mob_groups` VALUES (24,2114,35,'Ixzdei_BLM',0,128,0,6500,0,78,78,0);
 INSERT INTO `mob_groups` VALUES (25,2131,35,'Jailer_of_Fortitude',0,128,1397,25000,0,79,80,0);
