@@ -18,6 +18,17 @@ zoneObject.onInitialize = function(zone)
     zone:registerRegion(5, -302.493, 42, -179.995, -297.386, 48, -176.078) -- Uncapped area 2 (G-9 Tower)
     zone:registerRegion(6,  299.847, 42,  257.716,  303.824, 48,  262.391) -- Uncapped area 3 (I-7 Tower)
 
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[1]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[2]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[3]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[4]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[5]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[6]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[7]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[8]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[9]):addPeriodicTrigger(0, 2, 0)
+    GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[10]):addPeriodicTrigger(0, 2, 0)
+
     xi.treasure.initZone(zone)
 end
 
