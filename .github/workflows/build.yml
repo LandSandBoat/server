@@ -39,6 +39,17 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           echo "${changed_file}"
         done
+    - name: Git Formatting Checks
+      if: github.event_name == 'pull_request'
+      run: |
+        touch git_checks.txt
+        bash tools/ci/git.sh ${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
+        cat git_checks.txt
+        if [ -s git_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: General File Checks
       if: always()
       run: |
@@ -148,17 +159,6 @@ jobs:
         done
         cat python_checks.txt
         if [ -s python_checks.txt ]
-        then
-          exit 1
-        fi
-        exit 0
-    - name: Git Formatting Checks
-      if: github.event_name == 'pull_request'
-      run: |
-        touch git_checks.txt
-        bash tools/ci/git.sh ${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
-        cat git_checks.txt
-        if [ -s git_checks.txt ]
         then
           exit 1
         fi
