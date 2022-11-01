@@ -707,7 +707,20 @@ void CMobController::DoCombatTick(time_point tick)
 
                 if (lowestPercent < 0.5f) // 50% HP
                 {
-                    choice = xirand::GetRandomNumber(1, 4);
+                    choice = xirand::GetRandomNumber(100);
+
+                    if (choice <= 20)
+                    {
+                        choice = 1;
+                    }
+                    else if (choice <= 60)
+                    {
+                        choice = 2;
+                    }
+                    else
+                    {
+                        choice = 3;
+                    }
                 }
 
                 switch (choice)

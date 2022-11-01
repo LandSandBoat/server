@@ -51,6 +51,7 @@ void CPetController::Tick(time_point tick)
     if (PPet->m_PetID <= PETID_DARKSPIRIT && PPet->PMaster && PPet->PMaster->objtype == TYPE_PC && !m_Setup)
     {
         SetSMNCastTime();
+        PPet->m_lastCast = tick;
 
         if (PPet->m_PetID == PETID_LIGHTSPIRIT)
         {
@@ -212,7 +213,12 @@ void CPetController::TryIdleSpellCast()
 
                 if (lowestPercent < 0.5f) // 50% HP
                 {
-                    choice = xirand::GetRandomNumber(1, 3);
+                    choice = xirand::GetRandomNumber(100);
+
+                    if (choice <= 25)
+                    {
+                        choice = 1;
+                    }
                 }
 
                 switch (choice)
@@ -355,8 +361,7 @@ void CPetController::SetSpiritSpellTables()
 
 void CPetController::SetSMNCastTime()
 {
-    PPet->m_lastCast = std::chrono::system_clock::now();
-    uint32 castTime  = ((48000 + GetSMNSkillReduction()) / 3) + GetDayWeatherBonus();
+    uint32 castTime = ((48000 + GetSMNSkillReduction()) / 3) + GetDayWeatherBonus();
 
     if (PPet->PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_ASTRAL_FLOW))
     {
