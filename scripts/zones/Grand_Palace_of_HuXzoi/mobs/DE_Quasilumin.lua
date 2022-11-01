@@ -113,7 +113,7 @@ local escorts =
     },
 
     -- Escort 4
-    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
+    [ID.mob.CERMET_ALCOVE_OFFSET + 3] =
     {
         direction = ID.text.PORTAL_NORTH,
         complete_door = ID.npc.ESCORT_4_DOOR_OFFSET,
