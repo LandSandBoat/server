@@ -60,7 +60,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif (csid == 71) then
+    elseif csid == 71 then
         player:setPos(0, 0, 0, 0, 224)
     end
 end
