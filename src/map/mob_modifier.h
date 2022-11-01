@@ -100,6 +100,7 @@ enum MOBMODIFIER : int
     MOBMOD_NO_LINK             = 69, // If set, mob cannot link until unset.
     MOBMOD_NO_REST             = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     MOBMOD_LEADER              = 71, // Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
+    MOBMOD_MAGIC_RANGE         = 72, // magic aggro range
 };
 
 #endif
