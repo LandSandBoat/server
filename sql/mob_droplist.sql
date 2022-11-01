@@ -23755,6 +23755,12 @@ INSERT INTO `mob_droplist` VALUES (2855,0,0,1000,12298,@ALWAYS); -- Parana Shiel
 -- ZoneID:  37 - Telchines Dragoon
 -- ZoneID:  37 - Telchines Monk
 -- ZoneID:  37 - Enhanced Slime
+-- ZoneID:  37 - Enhanced Tiger
+-- ZoneID:  37 - Enhanced Mandragora
+-- ZoneID:  37 - Enhanced Pugil
+-- ZoneID:  37 - Enhanced Beetle
+-- ZoneID:  37 - Enhanced Lizard
+-- ZoneID:  37 - Enhanced Vulture
 -- ZoneID:  38 - Pluto
 -- ZoneID:  38 - Bardha
 -- ZoneID:  38 - Ghost Clot
@@ -23785,9 +23791,6 @@ INSERT INTO `mob_droplist` VALUES (2857,0,0,1000,1875,400); -- Ancient Beastcoin
 -- ZoneID:  37 - Praetorian Guard Ccxx
 -- ZoneID:  37 - Praetorian Guard Cxlviii
 -- ZoneID:  37 - Praetorian Guard Lxxiii
--- ZoneID:  37 - Enhanced Tiger
--- ZoneID:  37 - Enhanced Mandragora
--- ZoneID:  37 - Enhanced Pugil
 -- ZoneID:  38 - Millenary Mossback
 -- ZoneID:  38 - Apollyon Scavenger
 -- ZoneID:  38 - Cynoprosopi
@@ -23803,7 +23806,6 @@ INSERT INTO `mob_droplist` VALUES (2858,0,0,1000,1875,500); -- Ancient Beastcoin
 -- ZoneID:  37 - Earth Elemental
 -- ZoneID:  37 - Thunder Elemental
 -- ZoneID:  37 - Water Elemental
--- ZoneID:  37 - Enhanced Beetle
 -- ZoneID:  38 - Grave Digger
 -- ZoneID:  38 - Inhumer
 INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin (70.0%)
@@ -23820,8 +23822,6 @@ INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin
 -- ZoneID:  37 - Cryptonberry Skulker
 -- ZoneID:  37 - Cryptonberry Abductor
 -- ZoneID:  37 - Cryptonberry Designator
--- ZoneID:  37 - Enhanced Lizard
--- ZoneID:  37 - Enhanced Vulture
 -- ZoneID:  38 - Arboricole Hornet
 -- ZoneID:  38 - Arboricole Raven
 -- ZoneID:  38 - Arboricole Opo-Opo
@@ -26801,12 +26801,12 @@ INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4111,125);  -- Dark Cluster (
 -- ZoneID:  38 - Yagudo Prelatess
 -- ZoneID:  38 - Yagudo Kapellmeister
 -- ZoneID:  38 - Yagudo Eradicator
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -47,7 +47,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 600) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13465)
         else
             player:addItem(13465)

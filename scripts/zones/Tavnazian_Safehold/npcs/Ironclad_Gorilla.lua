@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Ironclad Gorilla
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

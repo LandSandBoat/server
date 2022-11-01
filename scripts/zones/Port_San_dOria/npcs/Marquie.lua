@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Marquie
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

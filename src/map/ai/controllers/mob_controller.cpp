@@ -80,7 +80,17 @@ bool CMobController::TryDeaggro()
             PMob->PEnmityContainer->Clear(PTarget->id);
         }
         PTarget = PMob->PEnmityContainer->GetHighestEnmity();
-        PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
+        if (PTarget)
+        {
+            PMob->SetBattleTargetID(PTarget->targid);
+            // Reset deaggro time so that the mob is given time to actually try to path towards the new highest enmity target
+            TapDeaggroTime();
+        }
+        else
+        {
+            PMob->SetBattleTargetID(0);
+        }
+
         return TryDeaggro();
     }
 
@@ -150,7 +160,8 @@ bool CMobController::CheckDetection(CBattleEntity* PTarget)
         TapDeaggroTime();
     }
 
-    return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s);
+    auto additionalDeaggroTime = std::chrono::seconds(settings::get<uint32>("map.MOB_ADDITIONAL_TIME_TO_DEAGGRO"));
+    return PMob->CanDeaggro() && (m_Tick >= m_DeaggroTime + 25s + additionalDeaggroTime);
 }
 
 void CMobController::TryLink()
@@ -255,6 +266,12 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return CanSeePoint(PTarget->loc.p);
     }
 
+    if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
+        PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
+    {
+        return CanSeePoint(PTarget->loc.p);
+    }
+
     // everything below require distance to be below 20
     if (currentDistance > 20)
     {
@@ -262,12 +279,6 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
     }
 
     if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
-    {
-        return CanSeePoint(PTarget->loc.p);
-    }
-
-    if ((detects & DETECT_MAGIC) && PTarget->PAI->IsCurrentState<CMagicState>() &&
-        static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
     {
         return CanSeePoint(PTarget->loc.p);
     }

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Aleria
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

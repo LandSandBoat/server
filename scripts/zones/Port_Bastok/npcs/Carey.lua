@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Carey
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------

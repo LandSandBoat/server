@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Raquel
--- Standard Info NPC
 -- !pos -146.168 0.000 -541.022 70
 -----------------------------------
 local entity = {}

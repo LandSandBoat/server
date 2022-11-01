@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Toeh Leddenbah
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

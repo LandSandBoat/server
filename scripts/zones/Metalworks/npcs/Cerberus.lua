@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Cerberus
--- Type: Standard Info NPC
 -----------------------------------
 local entity = {}
 

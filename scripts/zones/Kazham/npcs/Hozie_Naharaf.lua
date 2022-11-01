@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Hozie Naharaf
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
             end
         end
 
-        if (reward ~= 0) then
+        if reward ~= 0 then
             --Trade pair for a nice reward.
             player:startEvent(720, item, reward)
             player:setCharVar("reward", reward)
@@ -43,9 +43,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 720) then
+    if csid == 720 then
         local reward = player:getCharVar("reward")
-        if (reward ~= 0) then
+        if reward ~= 0 then
             player:tradeComplete()
             player:addItem(reward)
             player:setCharVar("reward", 0)

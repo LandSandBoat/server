@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Yohj Dukonlhy
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

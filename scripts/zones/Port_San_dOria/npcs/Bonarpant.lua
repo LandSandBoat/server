@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Bonarpant
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

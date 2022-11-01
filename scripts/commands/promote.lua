@@ -23,12 +23,12 @@ function onTrigger(player, target, level)
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         error(player, "You must provide a player name.")
         return
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return
         end

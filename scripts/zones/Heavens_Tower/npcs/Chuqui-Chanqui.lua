@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Chuqui-Chanqui
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

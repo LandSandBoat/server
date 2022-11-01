@@ -32,7 +32,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ele = xi.magic.ele.DARK
     end
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
 

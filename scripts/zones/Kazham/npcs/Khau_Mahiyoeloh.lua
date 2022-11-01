@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Khau Mahiyoeloh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

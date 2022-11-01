@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Dnegan
--- Standard Info NPC
 -- Involved in quest: Wayward Automaton
 -- !pos 29.89 -6 55.83 53
 -----------------------------------

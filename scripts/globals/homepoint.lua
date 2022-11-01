@@ -68,8 +68,8 @@ local homepointData =
     [ 57] = { group = 0, fee = 2, dest = {      -80,      46,      62,   0, 160 } }, -- Den of Rancor #1
     [ 58] = { group = 0, fee = 2, dest = {     -554,     -70,      66,   0, 162 } }, -- Castle Zvahl Keep #1
     [ 59] = { group = 0, fee = 2, dest = {        5,     -42,     526,   0, 130 } }, -- Ru'Aun Gardens #1
-    [ 60] = { group = 0, fee = 2, dest = {     -499,     -42,     167,   0, 130 } }, -- Ru'Aun Gardens #2
-    [ 61] = { group = 0, fee = 2, dest = {     -312,     -42,    -422,   0, 130 } }, -- Ru'Aun Gardens #3
+    [ 60] = { group = 0, fee = 2, dest = {     -312,     -42,    -422,   0, 130 } }, -- Ru'Aun Gardens #3
+    [ 61] = { group = 0, fee = 2, dest = {     -499,     -42,     167,   0, 130 } }, -- Ru'Aun Gardens #2
     [ 62] = { group = 0, fee = 2, dest = {      500,     -42,     158,   0, 130 } }, -- Ru'Aun Gardens #4
     [ 63] = { group = 0, fee = 2, dest = {      305,     -42,    -427,   0, 130 } }, -- Ru'Aun Gardens #5
     [ 64] = { group = 6, fee = 1, dest = {       -1,     -28,     107,   0,  26 } }, -- Tavnazian Safehold #1

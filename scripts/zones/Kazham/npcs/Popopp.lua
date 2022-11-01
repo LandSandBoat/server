@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Popopp
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

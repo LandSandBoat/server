@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Mijeh Sholpoilo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

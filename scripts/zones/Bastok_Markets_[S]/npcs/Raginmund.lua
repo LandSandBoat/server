@@ -2,7 +2,6 @@
 -- Area: Bastok Markets (S)
 --  NPC: Raginmund
 -- Involved in Quest: Too Many Chefs
--- Standard Info NPC
 -- Location L-10
 -----------------------------------
 local entity = {}

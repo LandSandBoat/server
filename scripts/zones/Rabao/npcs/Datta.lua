@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Datta
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

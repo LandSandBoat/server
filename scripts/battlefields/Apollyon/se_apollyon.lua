@@ -24,6 +24,7 @@ local content = Limbus:new({
     lossEventParams  = { [5] = 1 },
     name             = "SE_APOLLYON",
     exitLocation     = 1,
+    timeExtension   = 10,
 })
 
 content.paths =

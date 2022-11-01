@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Dheo Nbolo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

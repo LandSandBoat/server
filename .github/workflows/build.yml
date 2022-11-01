@@ -11,6 +11,10 @@ on:
       - base
       - everything
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
@@ -39,6 +43,17 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           echo "${changed_file}"
         done
+    - name: Git Formatting Checks
+      if: github.event_name == 'pull_request'
+      run: |
+        touch git_checks.txt
+        bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
+        cat git_checks.txt
+        if [ -s git_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: General File Checks
       if: always()
       run: |
@@ -154,6 +169,7 @@ jobs:
         exit 0
 
   Linux_Clang14_64bit:
+    needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
@@ -187,6 +203,7 @@ jobs:
           xi_search
 
   Linux_GCC11_64bit:
+    needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
@@ -212,6 +229,7 @@ jobs:
         cmake --build build -j4
 
   Windows_32bit:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -235,6 +253,7 @@ jobs:
           cmake --build build -j4
 
   Windows_64bit_Debug:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -266,6 +285,7 @@ jobs:
             xi_search.exe
 
   Windows_64bit_Release_Tracy_Modules_World:
+    needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -298,6 +318,7 @@ jobs:
           cmake --build build -j4
 
   MacOS_64bit:
+    needs: Sanity_Checks
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
     runs-on: macos-latest
     steps:

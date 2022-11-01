@@ -50,6 +50,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/controllers/pet_controller.h"
 #include "../ai/states/ability_state.h"
 
+#include "../mob_modifier.h"
 #include "../packets/char_abilities.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
@@ -710,7 +711,8 @@ namespace petutils
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
                 break;
             case FRAME_VALOREDGE:
-                PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
+                PPet->setModifier(Mod::SHIELDBLOCKRATE, 45);
+                PPet->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
                 break;
@@ -920,6 +922,11 @@ namespace petutils
                 PPet->PInstance = PMaster->PInstance;
             }
 
+            if (spawningFromZone)
+            {
+                PPet->spawnAnimation = SPAWN_ANIMATION::NORMAL; // Don't play special spawn animation on zone in
+            }
+
             PMaster->loc.zone->InsertPET(PPet);
 
             PPet->Spawn();
@@ -962,7 +969,7 @@ namespace petutils
             // apply stats from previous zone if this pet is being transferred
             if (spawningFromZone)
             {
-                PPet->health.tp = (int16) static_cast<CCharEntity*>(PMaster)->petZoningInfo.petTP;
+                PPet->health.tp = static_cast<uint16>(static_cast<CCharEntity*>(PMaster)->petZoningInfo.petTP);
                 PPet->health.hp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petHP;
                 PPet->health.mp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petMP;
             }

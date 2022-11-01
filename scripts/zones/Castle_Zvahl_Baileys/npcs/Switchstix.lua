@@ -320,19 +320,19 @@ entity.onEventFinish = function(player, csid, option)
     local reward = player:getCharVar("RELIC_IN_PROGRESS")
 
     -- User is cancelling a relic.  Null everything out, it never happened.
-    if (csid == 87 and option == 666) then
+    if csid == 87 and option == 666 then
         player:setCharVar("RELIC_IN_PROGRESS", 0)
         player:setCharVar("RELIC_DUE_AT", 0)
         player:setCharVar("RELIC_MAKE_ANOTHER", 0)
         player:setCharVar("RELIC_CONQUEST_WAIT", 0)
 
         -- User is okay with making a relic they cannot possibly accept
-    elseif (csid == 20 and option == 1) then
+    elseif csid == 20 and option == 1 then
         player:setCharVar("RELIC_MAKE_ANOTHER", 1)
 
         -- Picking up a finished relic stage 1>2 and 2>3.
-    elseif ((csid == 16 or csid == 19) and reward ~= 0) then
-        if (player:getFreeSlotsCount() < 1) then
+    elseif (csid == 16 or csid == 19) and reward ~= 0 then
+        if player:getFreeSlotsCount() < 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward + 1)
         else
             player:addItem(reward + 1)
@@ -343,8 +343,8 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("RELIC_CONQUEST_WAIT", getConquestTally())
         end
         -- Picking up a finished relic stage 3>4.
-    elseif (csid == 52 and reward ~= 0) then
-        if (player:getFreeSlotsCount() < 1) then
+    elseif csid == 52 and reward ~= 0 then
+        if player:getFreeSlotsCount() < 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward + 1)
         else
             player:addItem(reward + 1)

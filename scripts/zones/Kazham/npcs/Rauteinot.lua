@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAUTEINOTS_PARCEL)
         player:tradeComplete()
     elseif (csid == 141) then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4728)
         else
             player:setCharVar("MissionaryManVar", 0)

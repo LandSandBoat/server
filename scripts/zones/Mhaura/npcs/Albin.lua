@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Albin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

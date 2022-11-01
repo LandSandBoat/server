@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Ailee
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

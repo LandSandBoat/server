@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
         end
     else
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(225)   -- Standard Conversation
         else
             player:startEvent(226)   -- Standard Conversation

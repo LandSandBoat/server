@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Qhio Plittibhi
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Cha Tigunalhgo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
