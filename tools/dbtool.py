@@ -520,7 +520,7 @@ def update_db(silent=False, express=False):
         if import_files:
             print_green("The following files will be imported:")
             for sql_file in import_files:
-                if sql_file not in player_data:
+                if pathlib.Path(sql_file).name not in player_data:
                     print(os.path.normpath(sql_file).replace("\\", "/"))
     if silent or input("Proceed with update? [y/N] ").lower() == "y":
         for sql_file in import_protected:
