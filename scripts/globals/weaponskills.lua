@@ -68,36 +68,19 @@ local function getAlpha(level)
     return alpha
 end
 
-local function souleaterBonus(attacker, wsParams)
+local function fencerBonus(attacker)
     local bonus = 0
 
-    if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local boostPercent = 0.1
-        local currentHP    = attacker:getHP()
-        local removedHP    = 0
-        local souleaterMod = attacker:getMod(xi.mod.SOULEATER_EFFECT)         -- Gear modifier
-        local souleaterPot = attacker:getMod(xi.mod.SOULEATER_EFFECT_POTENCY) -- Augment modifier
-        local stalwartSoul = attacker:getMod(xi.mod.STALWART_SOUL) * 0.001
-        local drainPercent = 0.1 - stalwartSoul
+    if attacker:getObjType() ~= xi.objType.PC then
+        return 0
+    end
 
-        if attacker:getMainJob() ~= xi.job.DRK then
-            boostPercent = boostPercent / 2
-        end
+    local mainEquip = attacker:getStorageItem(0, 0, xi.slot.MAIN)
+    if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
+        local subEquip = attacker:getStorageItem(0, 0, xi.slot.SUB)
 
-        if attacker:getObjType() == xi.objType.PC then
-            -- Check all gear slots for Enhances "Souleater" effect modifier and use the highest
-            souleaterMod = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT)
-        end
-
-        -- Combine Souleater bonuses (Souleater Modifier + Souleater Augment)
-        boostPercent = boostPercent + ((souleaterMod + souleaterPot) * 0.01)
-
-        if currentHP > 10 then
-            -- Calculate damage bonus and HP to be removed per hit
-            bonus     = currentHP * boostPercent
-            removedHP = currentHP * drainPercent
-
-            attacker:delHP(wsParams.numHits * removedHP)
+        if subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield() then
+            bonus = attacker:getMod(xi.mod.FENCER_CRITHITRATE) / 100
         end
     end
 
@@ -123,25 +106,6 @@ local function consumeManaBonus(attacker)
     return bonus
 end
 
-local function fencerBonus(attacker)
-    local bonus = 0
-
-    if attacker:getObjType() ~= xi.objType.PC then
-        return 0
-    end
-
-    local mainEquip = attacker:getStorageItem(0, 0, xi.slot.MAIN)
-    if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
-        local subEquip = attacker:getStorageItem(0, 0, xi.slot.SUB)
-
-        if subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield() then
-            bonus = attacker:getMod(xi.mod.FENCER_CRITHITRATE) / 100
-        end
-    end
-
-    return bonus
-end
-
 local function scarletDeliriumBonus(attacker)
     local bonus = 1
 
@@ -149,6 +113,44 @@ local function scarletDeliriumBonus(attacker)
         local effect = attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1)
 
         bonus = 1 + (effect:getPower() / 100)
+    end
+
+    return bonus
+end
+
+local function souleaterBonus(attacker, wsParams)
+    local bonus = 0
+
+    if
+        attacker:hasStatusEffect(xi.effect.SOULEATER) and
+        attacker:getHP() > 10
+    then
+        local boostPercent = 0.1
+        local currentHP    = attacker:getHP()
+        local removedHP    = 0
+        local souleaterMod = attacker:getMod(xi.mod.SOULEATER_EFFECT)         -- Gear modifier
+        local souleaterPot = attacker:getMod(xi.mod.SOULEATER_EFFECT_POTENCY) -- Augment modifier
+        local stalwartSoul = attacker:getMod(xi.mod.STALWART_SOUL) * 0.001
+        local drainPercent = 0.1 - stalwartSoul
+
+        if attacker:getMainJob() ~= xi.job.DRK then
+            boostPercent = boostPercent / 2
+        end
+
+        if attacker:getObjType() == xi.objType.PC then
+            -- Check all gear slots for Enhances "Souleater" effect modifier and use the highest
+            souleaterMod = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT)
+        end
+
+        -- Combine Souleater bonuses (Souleater Modifier + Souleater Augment)
+        boostPercent = boostPercent + ((souleaterMod + souleaterPot) * 0.01)
+
+        -- Calculate damage bonus and HP to be removed
+        bonus     = currentHP * boostPercent
+        removedHP = currentHP * drainPercent
+
+        -- Remove HP
+        attacker:delHP(removedHP)
     end
 
     return bonus

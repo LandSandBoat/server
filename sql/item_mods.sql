@@ -44086,6 +44086,16 @@ INSERT INTO `item_mods` VALUES (21700,25,20); -- ACC: 20
 -- Blurred Claymore +1
 INSERT INTO `item_mods` VALUES (21701,25,25); -- ACC: 25
 
+-- Kladenets
+INSERT INTO `item_mods` VALUES (21702,5,80);   -- MP: 80
+INSERT INTO `item_mods` VALUES (21702,30,20);  -- MACC: 20
+INSERT INTO `item_mods` VALUES (21702,902,20); -- OCCULT_ACUMEN: 20
+
+-- Kladenets +1
+INSERT INTO `item_mods` VALUES (21703,5,85);   -- MP: 80
+INSERT INTO `item_mods` VALUES (21703,30,21);  -- MACC: 21
+INSERT INTO `item_mods` VALUES (21703,902,21); -- OCCULT_ACUMEN: 21
+
 -- Arasy Tabar
 INSERT INTO `item_mods` VALUES (21704,8,6);     -- STR: 6
 INSERT INTO `item_mods` VALUES (21704,9,6);     -- DEX: 6
@@ -44426,10 +44436,10 @@ INSERT INTO `item_mods` VALUES (21832,8,15);   -- STR: 15
 INSERT INTO `item_mods` VALUES (21832,12,40);  -- ACC: 40
 INSERT INTO `item_mods` VALUES (21832,23,30);  -- ATT: 30
 INSERT INTO `item_mods` VALUES (21832,30,40);  -- MACC: 40
-INSERT INTO `item_mods` VALUES (21832,288,5);  -- DOUBLE_ATTACK: 5
-INSERT INTO `item_mods` VALUES (21832,170,5);  -- FASTCAST: 5
-INSERT INTO `item_mods` VALUES (21832,907,30); -- STALWART_SOUL: 30
 INSERT INTO `item_mods` VALUES (21832,96,20);  -- SOULEATER_EFFECT: 20
+INSERT INTO `item_mods` VALUES (21832,170,5);  -- FASTCAST: 5
+INSERT INTO `item_mods` VALUES (21832,288,5);  -- DOUBLE_ATTACK: 5
+INSERT INTO `item_mods` VALUES (21832,907,30); -- STALWART_SOUL: 30
 
 -- Reienkyo
 INSERT INTO `item_mods` VALUES (21854,8,20);  -- STR: 20
@@ -53592,6 +53602,24 @@ INSERT INTO `item_mods` VALUES (25643,384,600); -- HASTE_GEAR: 600
 
 -- Crab Cap
 INSERT INTO `item_mods` VALUES (25652,1,1); -- DEF: 1
+
+-- Welkin Crown
+INSERT INTO `item_mods` VALUES (25654,1,95);    -- DEF: 95
+INSERT INTO `item_mods` VALUES (25654,2,36);    -- HP: 36
+INSERT INTO `item_mods` VALUES (25654,5,32);    -- MP: 32
+INSERT INTO `item_mods` VALUES (25654,8,22);    -- STR: 22
+INSERT INTO `item_mods` VALUES (25654,9,22);    -- DEX: 22
+INSERT INTO `item_mods` VALUES (25654,10,22);   -- VIT: 22
+INSERT INTO `item_mods` VALUES (25654,11,22);   -- AGI: 22
+INSERT INTO `item_mods` VALUES (25654,12,29);   -- INT: 29
+INSERT INTO `item_mods` VALUES (25654,13,29);   -- MND: 29
+INSERT INTO `item_mods` VALUES (25654,14,27);   -- CHR: 27
+INSERT INTO `item_mods` VALUES (25654,28,35);   -- MATT: 35
+INSERT INTO `item_mods` VALUES (25654,29,5);    -- MDEF: 5
+INSERT INTO `item_mods` VALUES (25654,31,75);   -- MEVA: 75
+INSERT INTO `item_mods` VALUES (25654,68,36);   -- EVA: 36
+INSERT INTO `item_mods` VALUES (25654,384,600); -- HASTE_GEAR: 600
+INSERT INTO `item_mods` VALUES (25654,902,10);  -- OCCULT_ACUMEN: 10
 
 -- Meghanada Visor
 INSERT INTO `item_mods` VALUES (25661,1,101);    -- DEF: 101
