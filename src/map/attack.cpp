@@ -479,7 +479,16 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
             m_baseDamage = m_attacker->GetMainWeaponDmg();
         }
 
-        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded)));
+        if (m_attacker->objtype == TYPE_MOB)
+        {
+            // mobdamage = (floor((level + 2 + fstr) * .9) / 2) * pdif
+            int8 mobH2HDamage = m_attacker->GetMLevel() + 2;
+            m_damage = (uint32)((std::floor( (mobH2HDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * 0.9f) / 2 ) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded));
+        }
+        else
+        {
+            m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded)));
+        }
     }
     else if (slot == SLOT_MAIN)
     {
