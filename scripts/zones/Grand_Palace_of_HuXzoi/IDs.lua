@@ -49,7 +49,6 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         IXGHRAH                 = 16916813,
         JAILER_OF_TEMPERANCE    = 16916814,
         IXAERN_MNK              = 16916815,
-        CERMET_ALCOVE_OFFSET    = 16916927,
     },
     npc =
     {
@@ -59,6 +58,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         ESCORT_2_DOOR_OFFSET = 16916870,
         ESCORT_3_DOOR_OFFSET = 16916875,
         ESCORT_4_DOOR_OFFSET = 16916880,
+        CERMET_ALCOVE_OFFSET = 16916927,
     },
 }
 

@@ -12,7 +12,7 @@ require("scripts/globals/pathfind")
 local escorts =
 {
     -- Escort 1
-    [ID.mob.CERMET_ALCOVE_OFFSET] =
+    [ID.npc.CERMET_ALCOVE_OFFSET] =
     {
         direction = ID.text.PORTAL_EAST,
         complete_door = ID.npc.ESCORT_1_DOOR_OFFSET + 2,
@@ -31,7 +31,7 @@ local escorts =
     },
 
     -- Escort 2
-    [ID.mob.CERMET_ALCOVE_OFFSET + 1] =
+    [ID.npc.CERMET_ALCOVE_OFFSET + 1] =
     {
         direction = ID.text.PORTAL_EAST,
         complete_door = ID.npc.ESCORT_2_DOOR_OFFSET,
@@ -73,7 +73,7 @@ local escorts =
     },
 
     -- Escort 3
-    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
+    [ID.npc.CERMET_ALCOVE_OFFSET + 2] =
     {
         direction = ID.text.PORTAL_WEST,
         complete_door = ID.npc.ESCORT_3_DOOR_OFFSET,
@@ -113,7 +113,7 @@ local escorts =
     },
 
     -- Escort 4
-    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
+    [ID.npc.CERMET_ALCOVE_OFFSET + 3] =
     {
         direction = ID.text.PORTAL_NORTH,
         complete_door = ID.npc.ESCORT_4_DOOR_OFFSET,
