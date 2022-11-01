@@ -1853,6 +1853,10 @@ namespace battleutils
                     return blockRate;
                 }
             }
+            else // No block mobmod, so zero rate
+            {
+                return 0;
+            }
         }
         else
         {
