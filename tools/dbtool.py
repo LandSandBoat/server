@@ -526,7 +526,7 @@ def update_db(silent=False, express=False):
         for sql_file in import_protected:
             import_file(sql_file)
         for sql_file in import_files:
-            if sql_file not in player_data:
+            if pathlib.Path(sql_file).name not in player_data:
                 import_file(sql_file)
         print_green("Finished importing!")
         express_enabled = False
