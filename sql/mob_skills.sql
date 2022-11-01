@@ -1261,7 +1261,7 @@ INSERT INTO `mob_skills` VALUES (1359,855,'chthonian_ray',4,27.0,2000,5000,4,0,0
 INSERT INTO `mob_skills` VALUES (1360,855,'apocalyptic_ray',4,7.0,2000,5000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1361,827,'viscid_secretion',4,12.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1362,37,'wild_ginseng',0,7.0,2000,1500,1,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1363,1107,'hungry_crunch',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1363,822,'hungry_crunch',0,7.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1364,848,'mighty_snort',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1365,1043,'tail_thrust',0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1366,1044,'temporal_shift',1,15.0,2000,1000,4,0,0,0,0,0,0);
@@ -1296,7 +1296,7 @@ INSERT INTO `mob_skills` VALUES (1394,1041,'amatsu_hanaikusa',0,15.0,2000,1000,4
 INSERT INTO `mob_skills` VALUES (1395,1036,'amatsu_tsukikage',0,15.0,2000,1000,4,0,0,0,12,6,0);
 INSERT INTO `mob_skills` VALUES (1396,1034,'tenzen_ranged_alt',0,25,2000,0,4,4,0,0,0,0,0); -- tenzen ranged attack
 INSERT INTO `mob_skills` VALUES (1397,1042,'oisoya',0,15.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1398,1032,'riceball',0,15.0,2000,1500,1,0,0,0,0,0,0); -- riceball eating
+INSERT INTO `mob_skills` VALUES (1398,1032,'riceball',0,15.0,2000,0,1,0,0,0,0,0,0); -- riceball eating
 INSERT INTO `mob_skills` VALUES (1399,1035,'cosmic_elucidation',0,15.0,2000,1000,4,0,0,0,0,0,0); -- cosmic elucidation
 -- INSERT INTO `mob_skills` VALUES (1400,1144,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1401,138,'soul_accretion',0,7.0,2000,1500,4,0,0,0,0,0,0);

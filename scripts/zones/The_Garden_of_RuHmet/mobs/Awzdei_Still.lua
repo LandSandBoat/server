@@ -7,6 +7,10 @@ mixins = { require("scripts/mixins/families/zdei") }
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.LEDGE_AGGRO, 1)
+end
+
 entity.onPath = function(mob)
     local spawnPos = mob:getSpawnPos()
     mob:pathThrough({ spawnPos.x, spawnPos.y, spawnPos.z })

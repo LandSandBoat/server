@@ -50,6 +50,30 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             16920665, -- SE
         },
 
+        QNZDEI_GROUP_1 =
+        {
+            16920577,
+            16920578,
+            16920579,
+            16920580,
+        },
+
+        QNZDEI_GROUP_2 =
+        {
+            16920581,
+            16920582,
+            16920583,
+            16920584,
+        },
+
+        QNZDEI_GROUP_3 =
+        {
+            16920585,
+            16920586,
+            16920587,
+            16920588,
+        },
+
         JAILER_OF_FORTITUDE = 16921015,
         KFGHRAH_WHM         = 16921016,
         KFGHRAH_BLM         = 16921017,
