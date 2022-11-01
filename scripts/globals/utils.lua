@@ -43,6 +43,22 @@ function utils.bind(func, ...)
     end
 end
 
+-- Creates a slice of an input table and returns a new table
+function utils.slice(inputTable, first, last, step)
+    local slicedTable = {}
+    first = first or 1
+    last = last or #inputTable
+    step = step or 1
+    local position = 1
+
+    for i = first, last, step do
+        slicedTable[position] = inputTable[i]
+        position = position + 1
+    end
+
+    return slicedTable
+end
+
 -- Shuffles a table and returns a new table containing the randomized result.
 function utils.shuffle(inputTable)
     local shuffledTable = {}

@@ -213,6 +213,39 @@ zones[xi.zone.TEMENOS] =
             },
             LOOT_CRATE = 16928958,
         },
+    },
+
+    TEMENOS_EASTERN_TOWER =
+    {
+        mob =
+        {
+            ICE_ELEMENTAL     = 16928849,
+            AIR_ELEMENTAL     = 16928858,
+            THUNDER_ELEMENTAL = 16928876,
+        },
+        npc =
+        {
+            PORTAL =
+            {
+                16929204,
+                16929205,
+                16929206,
+                16929207,
+                16929208,
+                16929209,
+                16929210,
+            },
+            CRATE_OFFSETS =
+            {
+                16928836,
+                16928845,
+                16928854,
+                16928863,
+                16928872,
+                16928881,
+                16928890,
+            },
+        },
     }
 }
 
