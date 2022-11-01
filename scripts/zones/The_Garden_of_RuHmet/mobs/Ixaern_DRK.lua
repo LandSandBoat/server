@@ -84,7 +84,7 @@ entity.onMobSpawn = function(mob)
         specials =
         {
             {
-                id = xi.jsa.BLOOD_WEAPON_IXDRK,
+                id = xi.jsa.BLOOD_WEAPON,
                 hpp = math.random(90, 95),
                 cooldown = 120,
                 endCode = function(mobArg)
