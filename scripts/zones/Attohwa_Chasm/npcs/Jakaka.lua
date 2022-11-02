@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Parradamo Stones
-    if (trade:hasItemQty(1778, 1) and trade:getItemCount() == 1) then
+    if trade:hasItemQty(1778, 1) and trade:getItemCount() == 1 then
         player:tradeComplete()
         player:startEvent(12)
     end

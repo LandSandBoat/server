@@ -12,8 +12,8 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- "The Setting Sun" conditional script
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(535, 1) and trade:getItemCount() == 1) then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN) == QUEST_ACCEPTED then
+        if trade:hasItemQty(535, 1) and trade:getItemCount() == 1 then
             player:startEvent (658)
         end
     end
@@ -42,7 +42,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 654 and option == 1 then --Player accepts the quest
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN)
     elseif csid == 658 then --The player trades the Engraved Key to the NPC. Here come the rewards!

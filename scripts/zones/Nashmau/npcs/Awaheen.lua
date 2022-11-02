@@ -14,11 +14,18 @@ entity.onTrade = function(player, npc, trade)
     local nbr = 0
     local reward = 0
     if trade:getItemCount() == 1 then
-        if (trade:hasItemQty(2187, 1)) then nbr = 5 ; reward = 2186
-        elseif (trade:hasItemQty(2186, 1)) then nbr = 2 ; reward = 2185
-        elseif (trade:hasItemQty(2185, 1)) then nbr = 5 ; reward = 2184
+        if trade:hasItemQty(2187, 1) then
+            nbr = 5
+            reward = 2186
+        elseif trade:hasItemQty(2186, 1) then
+            nbr = 2
+            reward = 2185
+        elseif trade:hasItemQty(2185, 1) then
+            nbr = 5
+            reward = 2184
         end
     end
+
     if reward > 0 then
         if player:getFreeSlotsCount() >= 1 then
             player:tradeComplete()
