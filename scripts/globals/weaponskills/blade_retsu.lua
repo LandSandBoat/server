@@ -19,7 +19,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 2
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
@@ -34,19 +33,18 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
-    if (damage > 0 and target:hasStatusEffect(xi.effect.PARALYSIS) == false) then
+    if damage > 0 and target:hasStatusEffect(xi.effect.PARALYSIS) == false then
         local duration = (tp / 1000 * 30) * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
         -- paralyze proc based on lvl difference
         local power = 30 + (player:getMainLvl() - target:getMainLvl()) * 3
-        if (power > 35) then
+        if power > 35 then
             power = 35
-        elseif (power < 5) then
+        elseif power < 5 then
             power = 5
         end
         target:addStatusEffect(xi.effect.PARALYSIS, power, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
-
 end
 
 return weaponskillObject

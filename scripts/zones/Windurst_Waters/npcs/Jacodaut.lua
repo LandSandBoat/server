@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local skillLevel = player:getSkillLevel(xi.skill.COOKING)
 
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false) then
+    if guildMember == 1 then
+        if player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false then
             player:startEvent(10016, skillCap, skillLevel, 1, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
         else
             player:startEvent(10016, skillCap, skillLevel, 1, 495, player:getGil(), 7180, 4095, 0)
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 10016 and option == 1) then
+    if csid == 10016 and option == 1 then
         player:messageSpecial(ID.text.COOKING_SUPPORT, 0, 8, 1)
         player:addStatusEffect(xi.effect.COOKING_IMAGERY, 1, 0, 120)
     end

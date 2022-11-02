@@ -39,10 +39,10 @@ function onTrigger(player, arg1, arg2)
 
     -- validate effect
     id = tonumber(id) or xi.effect[string.upper(id)]
-    if (id == nil) then
+    if id == nil then
         error(player, "Invalid effect.")
         return
-    elseif (id == 0) then
+    elseif id == 0 then
         id = 1
     end
 
