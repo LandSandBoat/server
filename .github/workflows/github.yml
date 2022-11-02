@@ -1,16 +1,15 @@
 name: "github"
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened]
   issues:
     types: [opened]
 
-permissions: write-all
-
 jobs:
   Check_Checkboxes:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - uses: actions/github-script@v6
         with:
@@ -24,7 +23,7 @@ jobs:
             var   body_text  = ""
             var   type_name  = ""
 
-            if (event_type === "pull_request")
+            if (event_type === "pull_request_target")
             {
                 body_text = context.payload.pull_request.body
                 type_name = "PR"
@@ -56,7 +55,6 @@ jobs:
                     repo: context.repo.repo,
                     body: `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly completed all of the checkboxes in the pre-filled template.`
                  })
-                console.log(result)
             }
             else
             {
