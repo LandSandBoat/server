@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
     local raptorRapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
     local raptorRaptureStatus = player:getCharVar("Raptor_Rapture_Status")
 
-    if (raptorRapture == QUEST_AVAILABLE) then
-        if (raptorRaptureStatus < 3) then
+    if raptorRapture == QUEST_AVAILABLE then
+        if raptorRaptureStatus < 3 then
             -- Starts chain of events for the introduction CS for Quest: 'Raptor Rapture'.
             -- If player somehow doesn't finish the chain of events, they can just talk to Pagnelle again to retry.
             player:setCharVar("Raptor_Rapture_Status", 1)
@@ -29,31 +29,31 @@ entity.onTrigger = function(player, npc)
             -- Offers Quest: 'Raptor Rapture' if player has yet to accept it.
             player:startEvent(5061)
         end
-    elseif (raptorRapture == QUEST_ACCEPTED) then
-        if (raptorRaptureStatus == 4) then
+    elseif raptorRapture == QUEST_ACCEPTED then
+        if raptorRaptureStatus == 4 then
             -- Reminder during Quest: 'Raptor Rapture', speak to Ilney.
             player:startEvent(5033)
-        elseif (raptorRaptureStatus == 5) then
+        elseif raptorRaptureStatus == 5 then
             -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
             player:startEvent(5035)
-        elseif (raptorRaptureStatus == 6) then
+        elseif raptorRaptureStatus == 6 then
             local hasRockberries = player:hasKeyItem(xi.ki.ROCKBERRY1) and player:hasKeyItem(xi.ki.ROCKBERRY2) and player:hasKeyItem(xi.ki.ROCKBERRY3)
-            if (hasRockberries) then
+            if hasRockberries then
                 -- Progresses Quest: 'Raptor Rapture', turning in rockberries.
                 player:startEvent(5037)
             else
                 -- Reminder during Quest: 'Raptor Rapture', bring rockberries.
                 player:startEvent(5036)
             end
-        elseif (raptorRaptureStatus == 7) then
+        elseif raptorRaptureStatus == 7 then
             -- Reminder during Quest: 'Raptor Rapture', go to Rala.
             player:startEvent(5038)
-        elseif (raptorRaptureStatus == 8) then
+        elseif raptorRaptureStatus == 8 then
             -- Finishes Quest: 'Raptor Rapture'
             player:startEvent(5039)
         end
     else
-        if (player:needToZone()) then
+        if player:needToZone() then
             -- Dialogue after finishing Quest: 'Raptor Rapture', before zoning
             player:startEvent(5040)
         else
@@ -67,23 +67,23 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 5032) then
+    if csid == 5032 then
         -- Warps player to Rala Waterways to continue intrductory CS for Quest: 'Raptor Rapture'
         player:setPos(0, 0, 0, 0, 258)
-    elseif ((csid == 5061) and (option == 1)) then
+    elseif csid == 5061 and option == 1 then
         -- Starts Quest: 'Raptor Rapture'
         player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
         player:setCharVar("Raptor_Rapture_Status", 4)
-    elseif (csid == 5035) then
+    elseif csid == 5035 then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney, now need rockberries.
         player:setCharVar("Raptor_Rapture_Status", 6)
-    elseif (csid == 5037) then
+    elseif csid == 5037 then
         -- Progresses Quest: 'Raptor Rapture', brought rockberries, now need to go to Rala.
         player:delKeyItem(xi.ki.ROCKBERRY1)
         player:delKeyItem(xi.ki.ROCKBERRY2)
         player:delKeyItem(xi.ki.ROCKBERRY3)
         player:setCharVar("Raptor_Rapture_Status", 7)
-    elseif (csid == 5039) then
+    elseif csid == 5039 then
         -- Finishing Quest: 'Raptor Rapture'
         player:setCharVar("Raptor_Rapture_Status", 0)
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
