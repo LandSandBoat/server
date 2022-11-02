@@ -447,6 +447,26 @@ entity.onTrigger = function(player, npc)
     page6 =
 	{
         {
+            "Alchemist's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10954
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Culinarian torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10955
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
             "Fylgja torque +1",
             function(playerArg)
                 player:timer(50, function(playerArg)
