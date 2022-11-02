@@ -48,12 +48,13 @@ jobs:
             if (checkbox_count < 3)
             {
                 console.log(`Found ${checkbox_count} completed checkboxes. Leaving a reminder comment.`)
-                github.rest.issues.createComment({
+                const result = await github.rest.issues.createComment({
                     issue_number: context.issue.number,
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     body: `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly completed all of the checkboxes in the pre-filled template.`
                  })
+                console.log(result)
             }
             else
             {
