@@ -8,6 +8,7 @@ import re
 
 function_names = []
 
+
 def extract_function_names():
     for filename in os.listdir("src/map/lua/"):
         full_filename = os.path.join("src/map/lua/", filename)
@@ -16,6 +17,7 @@ def extract_function_names():
                 for line in file.readlines():
                     if 'SOL_REGISTER("' in line:
                         function_names.append(line.strip().split('"')[1])
+
 
 def main():
     extract_function_names()
@@ -119,11 +121,15 @@ def main():
                     line = line.replace("\n", "")
 
                     for match in re.finditer('(?<=:)[^\(\/\\\: "]*', line):
-                        if len(match.group()) > 1 and match.group() not in function_names:
+                        if (
+                            len(match.group()) > 1
+                            and match.group() not in function_names
+                        ):
                             filename = filename.replace("\\", "/")
                             print(
                                 f"Could not find function match for {match.group()} ({filename}:{counter}:{match.start() + 1})"
                             )
+
 
 if __name__ == "__main__":
     main()

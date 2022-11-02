@@ -1,21 +1,26 @@
 import mariadb
 
+
 def migration_name():
-	return "Adding currency2 columns to char_points table"
+    return "Adding currency2 columns to char_points table"
+
 
 def check_preconditions(cur):
-	return
+    return
+
 
 def needs_to_run(cur):
-	# Ensure daily_tally column exists in char_points
-	cur.execute("SHOW COLUMNS FROM char_points LIKE 'mystical_canteen'")
-	if not cur.fetchone():
-		return True
-	return False
+    # Ensure daily_tally column exists in char_points
+    cur.execute("SHOW COLUMNS FROM char_points LIKE 'mystical_canteen'")
+    if not cur.fetchone():
+        return True
+    return False
+
 
 def migrate(cur, db):
-	try:
-		cur.execute("ALTER TABLE char_points \
+    try:
+        cur.execute(
+            "ALTER TABLE char_points \
                 ADD COLUMN `mystical_canteen` tinyint(3) unsigned NOT NULL DEFAULT 0, \
                 ADD COLUMN `ghastly_stone` tinyint(3) unsigned NOT NULL DEFAULT 0, \
                 ADD COLUMN `ghastly_stone_1` tinyint(3) unsigned NOT NULL DEFAULT 0, \
@@ -97,7 +102,8 @@ def migrate(cur, db):
                 ADD COLUMN `gravitation_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0, \
                 ADD COLUMN `light_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0, \
                 ADD COLUMN `darkness_spheres_set` tinyint(3) unsigned NOT NULL DEFAULT 0, \
-                ADD COLUMN `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0;")
-		db.commit()
-	except mariadb.Error as err:
-		print("Something went wrong: {}".format(err))
+                ADD COLUMN `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0;"
+        )
+        db.commit()
+    except mariadb.Error as err:
+        print("Something went wrong: {}".format(err))
