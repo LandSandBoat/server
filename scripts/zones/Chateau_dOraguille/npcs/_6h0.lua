@@ -80,7 +80,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
-            if (player:getMainJob() == xi.job.PLD) then
+            if player:getMainJob() == xi.job.PLD then
                 player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)

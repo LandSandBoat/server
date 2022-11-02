@@ -19,12 +19,12 @@ end
 
 function onTrigger(player, keyId, target)
     -- validate itemId
-    if (keyId == nil) then
+    if keyId == nil then
         error(player, "You must provide a key item ID.")
         return
     else
         keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
-        if (keyId == nil or keyId < 1) then
+        if keyId == nil or keyId < 1 then
             error(player, "Invalid key item ID.")
             return
         end

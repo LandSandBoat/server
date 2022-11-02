@@ -29,25 +29,25 @@ end
 abilityObject.onUseAbility = function(player, target, ability)
     local jpBonusVE = player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT) * 10
 
-    if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
         target:addEnmity(player, 0, 1000 + jpBonusVE)
 
     --Add extra enmity if 2 finishing moves are used
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
         target:addEnmity(player, 0, 1500 + jpBonusVE)
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
         target:addEnmity(player, 0, 1500 + jpBonusVE)
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
         player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
         target:addEnmity(player, 0, 1500 + jpBonusVE)
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
         player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_5)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
         target:addEnmity(player, 0, 1500 + jpBonusVE)
