@@ -27,6 +27,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         NONE_HOSTILE                  = 7767, -- You sense some unknown presence, but it does not seem hostile.
         MENACING_CREATURES            = 7768, -- Menacing creatures appear out of nowhere!
         SHEER_ANIMOSITY               = 7769, -- <name> is enveloped in sheer animosity!
+        PORTAL_WONT_OPEN_ON_THIS_SIDE = 7623, -- The portal won't open from this side.
         HOMEPOINT_SET                 = 7774, -- Home point set!
     },
 
@@ -55,6 +56,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         JAILER_OF_FAITH     = 16921021,
         IXAERN_DRG          = 16921022,
         IXZDEI_BASE         = 16921011,
+        QNZDEI_OFFSET       = 16920577,
     },
 
     npc =
@@ -88,6 +90,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         QM_JAILER_OF_FORTITUDE     = 16921027,
         QM_IXAERN_DRK              = 16921028,
         QM_JAILER_OF_FAITH         = 16921029,
+        QNZDEI_DOOR_OFFSET         = 16921068,
     },
 }
 
