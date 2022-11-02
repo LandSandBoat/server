@@ -33,7 +33,7 @@ abilityObject.onUseAbility = function(pet, target, skill, action)
     pet:setTP(0)
 
     local dmg = AbilityFinalAdjustments(dmgmod, pet, skill, target, xi.attackType.BREATH, xi.damageType.LIGHTNING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, pet, xi.attackType.BREATH, xi.damageType.FIRE)
+    target:takeDamage(dmg, pet, xi.attackType.BREATH, xi.damageType.LIGHTNING)
     return dmg
 end
 
