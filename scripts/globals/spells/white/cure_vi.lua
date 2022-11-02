@@ -24,23 +24,23 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local minCure = 600
     power = getCurePower(caster)
-    if (power < 210) then
+    if power < 210 then
         divisor = 1.5
         constant = 600
         basepower = 90
-    elseif (power < 300) then
+    elseif power < 300 then
         divisor =  0.9
         constant = 680
         basepower = 210
-    elseif (power < 400) then
+    elseif power < 400 then
         divisor = 10 / 7
         constant = 780
         basepower = 300
-    elseif (power < 500) then
+    elseif power < 500 then
         divisor = 2.5
         constant = 850
         basepower = 400
-    elseif (power < 700) then
+    elseif power < 700 then
         divisor = 5 / 3
         constant = 890
         basepower = 500
@@ -56,9 +56,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
-            if (equippedBody == 11186) then
+            if equippedBody == 11186 then
                 solaceStoneskin = math.floor(final * 0.30)
-            elseif (equippedBody == 11086) then
+            elseif equippedBody == 11086 then
                 solaceStoneskin = math.floor(final * 0.35)
             else
                 solaceStoneskin = math.floor(final * 0.25)
@@ -74,7 +74,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         final = final * xi.settings.main.CURE_POWER
 
         local diff = (target:getMaxHP() - target:getHP())
-        if (final > diff) then
+        if final > diff then
             final = diff
         end
         target:restoreHP(final)
@@ -82,7 +82,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:wakeUp()
         caster:updateEnmityFromCure(target, final)
     else
-        if (target:isUndead()) then
+        if target:isUndead() then
             spell:setMsg(xi.msg.basic.MAGIC_DMG)
             local params = {}
             params.dmg = minCure
@@ -102,7 +102,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             final = dmg
             target:takeDamage(final, caster, xi.attackType.MAGICAL, xi.damageType.LIGHT)
             target:updateEnmityFromDamage(caster, final)
-        elseif (caster:getObjType() == xi.objType.PC) then
+        elseif caster:getObjType() == xi.objType.PC then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
@@ -113,7 +113,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             end
             final = getCureFinal(caster, spell, basecure, minCure, false)
             local diff = (target:getMaxHP() - target:getHP())
-            if (final > diff) then
+            if final > diff then
                 final = diff
             end
             target:addHP(final)
@@ -121,7 +121,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if (mpBonusPercent > 0) then
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 

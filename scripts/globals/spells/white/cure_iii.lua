@@ -23,32 +23,32 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 130
-    if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+    if xi.settings.main.USE_OLD_CURE_FORMULA == true then
         power = getCurePowerOld(caster)
         divisor = 1
         constant = 70
-        if (power > 300) then
+        if power > 300 then
             divisor = 15.6666
             constant = 180.43
-        elseif (power > 180) then
+        elseif power > 180 then
             divisor = 2
             constant = 115
         end
     else
         power = getCurePower(caster)
-        if (power < 125) then
+        if power < 125 then
             divisor = 2.2
             constant = 130
             basepower = 70
-        elseif (power < 200) then
+        elseif power < 200 then
             divisor =  75 / 65
             constant = 155
             basepower = 125
-        elseif (power < 300) then
+        elseif power < 300 then
             divisor = 2.5
             constant = 220
             basepower = 200
-        elseif (power < 700) then
+        elseif power < 700 then
             divisor = 5
             constant = 260
             basepower = 300
@@ -60,13 +60,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     if isValidHealTarget(caster, target) then
-        if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+        if xi.settings.main.USE_OLD_CURE_FORMULA == true then
             basecure = getBaseCureOld(power, divisor, constant)
         else
             basecure = getBaseCure(power, divisor, constant, basepower)
         end
         final = getCureFinal(caster, spell, basecure, minCure, false)
-        if (caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false) then
+        if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
             if (equippedBody == 11186) then
@@ -87,7 +87,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         final = final * xi.settings.main.CURE_POWER
 
         local diff = (target:getMaxHP() - target:getHP())
-        if (final > diff) then
+        if final > diff then
             final = diff
         end
         target:addHP(final)
@@ -95,7 +95,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:wakeUp()
         caster:updateEnmityFromCure(target, final)
     else
-        if (target:isUndead()) then
+        if target:isUndead() then
             spell:setMsg(xi.msg.basic.MAGIC_DMG)
             local params = {}
             params.dmg = minCure
@@ -115,18 +115,18 @@ spellObject.onSpellCast = function(caster, target, spell)
             final = dmg
             target:takeDamage(final, caster, xi.attackType.MAGICAL, xi.damageType.LIGHT)
             target:updateEnmityFromDamage(caster, final)
-        elseif (caster:getObjType() == xi.objType.PC) then
+        elseif caster:getObjType() == xi.objType.PC then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
-            if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+            if xi.settings.main.USE_OLD_CURE_FORMULA == true then
                 basecure = getBaseCureOld(power, divisor, constant)
             else
                 basecure = getBaseCure(power, divisor, constant, basepower)
             end
             final = getCureFinal(caster, spell, basecure, minCure, false)
             local diff = (target:getMaxHP() - target:getHP())
-            if (final > diff) then
+            if final > diff then
                 final = diff
             end
             target:addHP(final)
@@ -134,7 +134,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if (mpBonusPercent > 0) then
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 

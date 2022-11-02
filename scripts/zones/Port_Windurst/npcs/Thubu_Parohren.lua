@@ -38,7 +38,9 @@ entity.onTrigger = function(player, npc)
     local rank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (craftSkill - rank) / 32
 
-    if (guildMember == 1) then guildMember = 150995375; end
+    if guildMember == 1 then
+        guildMember = 150995375
+    end
 
     if player:getCharVar("FishingExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC) then
