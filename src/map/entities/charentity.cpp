@@ -2191,7 +2191,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+        if (PPet->objtype == TYPE_MOB)
         {
             petutils::DetachPet(this);
         }
