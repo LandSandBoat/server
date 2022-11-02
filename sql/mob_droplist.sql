@@ -23758,6 +23758,12 @@ INSERT INTO `mob_droplist` VALUES (2855,0,0,1000,12298,@ALWAYS); -- Parana Shiel
 -- ZoneID:  37 - Telchines Dragoon
 -- ZoneID:  37 - Telchines Monk
 -- ZoneID:  37 - Enhanced Slime
+-- ZoneID:  37 - Enhanced Tiger
+-- ZoneID:  37 - Enhanced Mandragora
+-- ZoneID:  37 - Enhanced Pugil
+-- ZoneID:  37 - Enhanced Beetle
+-- ZoneID:  37 - Enhanced Lizard
+-- ZoneID:  37 - Enhanced Vulture
 -- ZoneID:  38 - Pluto
 -- ZoneID:  38 - Bardha
 -- ZoneID:  38 - Ghost Clot
@@ -23775,6 +23781,13 @@ INSERT INTO `mob_droplist` VALUES (2855,0,0,1000,12298,@ALWAYS); -- Parana Shiel
 -- ZoneID:  38 - Borametz
 INSERT INTO `mob_droplist` VALUES (2856,0,0,1000,1875,300); -- Ancient Beastcoin (30.0%)
 
+-- ZoneID:  37 - Fire Elemental
+-- ZoneID:  37 - Ice Elemental
+-- ZoneID:  37 - Air Elemental
+-- ZoneID:  37 - Earth Elemental
+-- ZoneID:  37 - Thunder Elemental
+-- ZoneID:  37 - Water Elemental
+-- ZoneID:  37 - Dark Elemental
 -- ZoneID:  38 - Zlatorog
 -- ZoneID:  38 - Mountain Buffalo
 -- ZoneID:  38 - Thiazi
@@ -23788,9 +23801,6 @@ INSERT INTO `mob_droplist` VALUES (2857,0,0,1000,1875,400); -- Ancient Beastcoin
 -- ZoneID:  37 - Praetorian Guard Ccxx
 -- ZoneID:  37 - Praetorian Guard Cxlviii
 -- ZoneID:  37 - Praetorian Guard Lxxiii
--- ZoneID:  37 - Enhanced Tiger
--- ZoneID:  37 - Enhanced Mandragora
--- ZoneID:  37 - Enhanced Pugil
 -- ZoneID:  38 - Millenary Mossback
 -- ZoneID:  38 - Apollyon Scavenger
 -- ZoneID:  38 - Cynoprosopi
@@ -23800,17 +23810,11 @@ INSERT INTO `mob_droplist` VALUES (2857,0,0,1000,1875,400); -- Ancient Beastcoin
 -- ZoneID:  38 - Apollyon Cleaner
 INSERT INTO `mob_droplist` VALUES (2858,0,0,1000,1875,500); -- Ancient Beastcoin (50.0%)
 
--- ZoneID:  37 - Fire Elemental
--- ZoneID:  37 - Ice Elemental
--- ZoneID:  37 - Air Elemental
--- ZoneID:  37 - Earth Elemental
--- ZoneID:  37 - Thunder Elemental
--- ZoneID:  37 - Water Elemental
--- ZoneID:  37 - Enhanced Beetle
 -- ZoneID:  38 - Grave Digger
 -- ZoneID:  38 - Inhumer
 INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin (70.0%)
 
+-- ZoneID:  37 - Mystic_Avatar (Eastern Tower)
 -- ZoneID:  37 - Skadi
 -- ZoneID:  37 - Thrym
 -- ZoneID:  37 - Beli
@@ -23823,8 +23827,6 @@ INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin
 -- ZoneID:  37 - Cryptonberry Skulker
 -- ZoneID:  37 - Cryptonberry Abductor
 -- ZoneID:  37 - Cryptonberry Designator
--- ZoneID:  37 - Enhanced Lizard
--- ZoneID:  37 - Enhanced Vulture
 -- ZoneID:  38 - Arboricole Hornet
 -- ZoneID:  38 - Arboricole Raven
 -- ZoneID:  38 - Arboricole Opo-Opo

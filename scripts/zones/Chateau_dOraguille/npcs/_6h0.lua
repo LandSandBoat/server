@@ -90,10 +90,10 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         end
-    elseif (csid == 90 and option == 1) then
+    elseif csid == 90 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         player:setCharVar("UnderOathCS", 0)
-    elseif (csid == 89) then
+    elseif csid == 89 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12644)
         else
