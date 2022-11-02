@@ -309,8 +309,10 @@ def fetch_files(express=False):
             )
             if len(sql_diffs) > 0:
                 for diff in sql_diffs:
-                    import_files.append(from_server_path("sql/" + diff))
-                express_enabled = True
+                    if os.path.exists(from_server_path(diff.b_path)):
+                        import_files.append(from_server_path(diff.b_path))
+                if len(import_files) > 0:
+                    express_enabled = True
             else:
                 express_enabled = False
                 if (
@@ -339,7 +341,9 @@ def fetch_files(express=False):
     backups.sort()
     import_files.sort()
     try:
-        import_files.append(import_files.pop(import_files.index("triggers.sql")))
+        import_files.append(
+            import_files.pop(import_files.index(from_server_path("sql/triggers.sql")))
+        )
     except:  # lgtm [py/catch-base-exception]
         pass
     fetch_module_files()
