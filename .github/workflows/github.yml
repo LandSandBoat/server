@@ -33,17 +33,19 @@ jobs:
                 type_name = "report"
             }
 
+            // Remove block comments
+            body_text = body_text.replaceAll(/<!--.*-->/g, "")
+
             console.log(`github.event_name: ${event_type}`)
             console.log(`body_text: ${body_text}`)
             console.log(`type_name: ${type_name}`)
 
             // Count the filled in checkboxes:
-            // 1x in the comment example
             // 1x pre-filled
             // 2x to be filled
-            // Minimum total: 4
+            // Minimum total: 3
             const checkbox_count = count_instances(body_text, "[x]")
-            if (checkbox_count < 4)
+            if (checkbox_count < 3)
             {
                 console.log(`Found ${checkbox_count} completed checkboxes. Leaving a reminder comment.`)
                 github.rest.issues.createComment({
