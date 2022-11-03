@@ -1368,7 +1368,7 @@ INSERT INTO `mob_skills` VALUES (1531,772,'wz_recover_all',1,20.0,0,0,4,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (1532,1124,'pod_ejection',0,7.0,4500,1,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1533,1117,'pile_pitch',0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1534,1118,'guided_missile',2,5.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1535,1119,'hyper_pulse',0,10.0,2000,1500,4,0,0,0,0,0,0); -- Omega
+INSERT INTO `mob_skills` VALUES (1535,1119,'hyper_pulse',1,10.0,2000,1500,4,0,0,0,0,0,0); -- Omega
 INSERT INTO `mob_skills` VALUES (1536,1120,'target_analysis',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1537,1121,'discharger',0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1538,1122,'ion_efflux',4,10.0,2000,1500,4,0,0,0,0,0,0);
