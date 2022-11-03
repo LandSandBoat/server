@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(xi.settings.main.GIL_RATE * 500)
         player:tradeComplete()
         player:needToZone(true)
-        if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addItem(131)

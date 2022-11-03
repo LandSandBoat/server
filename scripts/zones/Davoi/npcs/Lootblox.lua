@@ -166,12 +166,12 @@ entity.onEventFinish = function(player, csid, option)
     -- 10k pieces to hundos
     elseif csid == 138 then
         local slotsReq = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
-        if (player:getFreeSlotsCount() < slotsReq) then
+        if player:getFreeSlotsCount() < slotsReq then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
         else
             player:tradeComplete()
             for i = 1, slotsReq do
-                if (i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0) then
+                if i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0 then
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
                 else
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)

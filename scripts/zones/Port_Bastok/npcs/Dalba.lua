@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
         bastokQuests = bastokQuests - 1048576     -- Ayame and Kaede(pt.5).
     end
 -- *Need to determine the correct csid/appropriate options for this cutscene
-    --if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)) then
+    --if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) then
     --    bastokQuests = bastokQuests - 2097152   -- Trial by Earth.
     --end
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND) then
