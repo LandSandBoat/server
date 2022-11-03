@@ -2345,13 +2345,13 @@ auto CLuaBaseEntity::getZoneName() -> const char*
 }
 
 /************************************************************************
- *  Function: isZoneVisited()
+ *  Function: hasVisitedZone()
  *  Purpose : Returns true if a player has ever visited the zone
- *  Example : if not target:isZoneVisited(xi.zone.BIBIKI_BAY) then
+ *  Example : if not target:hasVisitedZone(xi.zone.BIBIKI_BAY) then
  *  Notes   : Mainly used for teleport items (like to Bibiki Bay)
  ************************************************************************/
 
-bool CLuaBaseEntity::isZoneVisited(uint16 zone)
+bool CLuaBaseEntity::hasVisitedZone(uint16 zone)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -14704,7 +14704,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getZone", CLuaBaseEntity::getZone);
     SOL_REGISTER("getZoneID", CLuaBaseEntity::getZoneID);
     SOL_REGISTER("getZoneName", CLuaBaseEntity::getZoneName);
-    SOL_REGISTER("isZoneVisited", CLuaBaseEntity::isZoneVisited);
+    SOL_REGISTER("hasVisitedZone", CLuaBaseEntity::hasVisitedZone);
     SOL_REGISTER("getPreviousZone", CLuaBaseEntity::getPreviousZone);
     SOL_REGISTER("getCurrentRegion", CLuaBaseEntity::getCurrentRegion);
     SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
