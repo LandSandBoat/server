@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     local stalkerStatus   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar("KnightStalker_Progress")
 
-    if (player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
+    if player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE then
         player:startEvent(24)
 
     -- Chasing Quotas (DRG AF2)
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     elseif quotasStatus == QUEST_ACCEPTED and quotasProgress == 0 then
         player:startEvent(13) -- Reminder to bring Gold Hairpin
     elseif quotasProgress == 1 then
-        if (player:getCharVar("ChasingQuotas_date") > os.time()) then
+        if player:getCharVar("ChasingQuotas_date") > os.time() then
             player:startEvent(3) -- Fluff cutscene because you haven't waited a day
         else
             player:startEvent(7) -- Boss got mugged

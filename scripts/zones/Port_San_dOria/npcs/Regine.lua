@@ -18,13 +18,13 @@ entity.onTrade = function(player, npc, trade)
     local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
-    if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, { { "gil", 10 } })) then
+    if flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, { { "gil", 10 } }) then
         if (npcUtil.giveItem(player, xi.items.MAGICMART_FLYER)) then
             player:confirmTrade()
         end
 
     -- THE BRUGAIRE CONSORTIUM
-    elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.PARCEL_FOR_THE_MAGIC_SHOP)) then
+    elseif theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.PARCEL_FOR_THE_MAGIC_SHOP) then
         player:startEvent(535)
     end
 end
@@ -66,12 +66,12 @@ entity.onEventFinish = function(player, csid, option)
         )
 
     -- THE BRUGAIRE CONSORTIUM
-    elseif (csid == 535) then
+    elseif csid == 535 then
         player:confirmTrade()
         player:setCharVar("TheBrugaireConsortium-Parcels", 11)
 
     -- WHITE MAGIC SHOP
-    elseif (csid == 510 and option == 0) then
+    elseif csid == 510 and option == 0 then
         local stockA =
         {
             4641, 1165, 1, -- Scroll of Diaga
@@ -96,7 +96,7 @@ entity.onEventFinish = function(player, csid, option)
         xi.shop.nation(player, stockA, xi.nation.SANDORIA)
 
     -- BLACK MAGIC SHOP
-    elseif (csid == 510 and option == 1) then
+    elseif csid == 510 and option == 1 then
         local stockB =
         {
             4862, 111, 1,  -- Scroll of Blind

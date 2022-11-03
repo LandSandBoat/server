@@ -107,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_SCHOLAR)
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     elseif csid == 47 then
-        if (player:canLearnSpell(478) and player:canLearnSpell(502)) then
+        if player:canLearnSpell(478) and player:canLearnSpell(502) then
             player:addSpell(478, true)
             player:addSpell(502, true)
             player:messageSpecial(ID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)

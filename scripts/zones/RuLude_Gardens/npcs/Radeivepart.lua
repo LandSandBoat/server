@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 61 then
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
         player:addTitle(xi.title.ENVOY_TO_THE_NORTH)
-        if (player:hasKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL) == false) then
+        if player:hasKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL) == false then
             player:addKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_CASTLE_ZVAHL)
         end

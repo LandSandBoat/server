@@ -35,7 +35,7 @@ function onTrigger(player, currency, amount, target)
     end
 
     -- validate amount
-    if (amount == nil or amount < 1) then
+    if amount == nil or amount < 1 then
         error(player, "Invalid amount.")
         return
     end

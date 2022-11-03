@@ -14,11 +14,11 @@ end
 
 itemObject.onItemUse = function(target)
     local worked = false
-    if (not target:hasStatusEffect(xi.effect.REGEN)) then
+    if not target:hasStatusEffect(xi.effect.REGEN) then
         target:addStatusEffect(xi.effect.REGEN, 2, 3, 90)
         worked = true
     end
-    if (not target:hasStatusEffect(xi.effect.REFRESH)) then
+    if not target:hasStatusEffect(xi.effect.REFRESH) then
         target:addStatusEffect(xi.effect.REFRESH, 2, 3, 90)
         worked = true
     end

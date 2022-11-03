@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     waywardWaypoints = waywardWaypoints == QUEST_ACCEPTED and player:getCharVar("WW_Need_Shipilolo") > 0
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
-    if (soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+    if soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
         if tomath == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.BROKEN_HARPOON) then
             -- Progresses Quest: 'The Old Man and the Harpoon'
             player:startEvent(2543)

@@ -95,7 +95,7 @@ entity.onTrigger = function(player, npc)
 
         player:startEvent(842, 0, 1125)
     elseif moonlitPath == QUEST_ACCEPTED then
-        if (player:hasKeyItem(xi.ki.MOON_BAUBLE)) then -- Default text after acquiring moon bauble and before fighting Fenrir
+        if player:hasKeyItem(xi.ki.MOON_BAUBLE) then -- Default text after acquiring moon bauble and before fighting Fenrir
             player:startEvent(845, 0, 1125, 334)
         elseif player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON) then -- First turn-in
             local availRewards = 0
@@ -158,11 +158,16 @@ entity.onEventFinish = function(player, csid, option)
         player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     elseif csid == 846 or csid == 850 then -- Turn-in event
         local reward = 0
-        if option == 1 then reward = 18165 -- Fenrir's Stone
-        elseif option == 2 then reward = 13572 -- Fenrir's Cape
-        elseif option == 3 then reward = 13138 -- Fenrir's Torque
-        elseif option == 4 then reward = 13399 -- Fenrir's Earring
-        elseif option == 5 then reward = 1208 -- Ancient's Key
+        if option == 1 then
+            reward = 18165 -- Fenrir's Stone
+        elseif option == 2 then
+            reward = 13572 -- Fenrir's Cape
+        elseif option == 3 then
+            reward = 13138 -- Fenrir's Torque
+        elseif option == 4 then
+            reward = 13399 -- Fenrir's Earring
+        elseif option == 5 then
+            reward = 1208 -- Ancient's Key
         elseif option == 6 then
             player:addGil(xi.settings.main.GIL_RATE * 15000)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 15000) -- Gil

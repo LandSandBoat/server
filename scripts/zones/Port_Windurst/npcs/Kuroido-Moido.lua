@@ -25,24 +25,24 @@ entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
     local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
-    if (makingAmends == QUEST_ACCEPTED) then -- MAKING AMENDS: During Quest
+    if makingAmends == QUEST_ACCEPTED then -- MAKING AMENDS: During Quest
         player:startEvent(276)
-    elseif (makingAmends == QUEST_COMPLETED and makingAmens ~= QUEST_COMPLETED and wonderWands ~= QUEST_COMPLETED and needToZone) then -- MAKING AMENDS: After Quest
+    elseif makingAmends == QUEST_COMPLETED and makingAmens ~= QUEST_COMPLETED and wonderWands ~= QUEST_COMPLETED and needToZone then -- MAKING AMENDS: After Quest
         player:startEvent(279)
-    elseif (makingAmends == QUEST_COMPLETED and makingAmens == QUEST_AVAILABLE) then
-        if (pfame >= 4 and not needToZone) then
+    elseif makingAmends == QUEST_COMPLETED and makingAmens == QUEST_AVAILABLE then
+        if pfame >= 4 and not needToZone then
             player:startEvent(280) -- Start Making Amens! if prerequisites are met
         else
             player:startEvent(279) -- MAKING AMENDS: After Quest
         end
-    elseif (makingAmens == QUEST_ACCEPTED and not brokenWand) then -- Reminder for Making Amens!
+    elseif makingAmens == QUEST_ACCEPTED and not brokenWand then -- Reminder for Making Amens!
         player:startEvent(283)
-    elseif (makingAmens == QUEST_ACCEPTED and brokenWand) then -- Complete Making Amens!
+    elseif makingAmens == QUEST_ACCEPTED and brokenWand then -- Complete Making Amens!
         player:startEvent(284, xi.settings.main.GIL_RATE * 6000)
-    elseif (makingAmens == QUEST_COMPLETED) then
-        if (wonderWands == QUEST_ACCEPTED) then -- During Wonder Wands dialogue
+    elseif makingAmens == QUEST_COMPLETED then
+        if wonderWands == QUEST_ACCEPTED then -- During Wonder Wands dialogue
             player:startEvent(261)
-        elseif (wonderWands == QUEST_COMPLETED) then -- Post Wonder Wands dialogue
+        elseif wonderWands == QUEST_COMPLETED then -- Post Wonder Wands dialogue
             player:startEvent(266)
         else
             player:startEvent(286, 0, 937) -- Post Making Amens! dialogue (before Wonder Wands)
@@ -58,9 +58,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 280) then
+    if csid == 280 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
-    elseif (csid == 284) then
+    elseif csid == 284 then
         player:needToZone(true)
         player:delKeyItem(xi.ki.BROKEN_WAND)
         player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)

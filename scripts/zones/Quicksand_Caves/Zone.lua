@@ -102,7 +102,7 @@ zoneObject.onRegionEnter = function(player, region)
         totalWeight = totalWeight + getWeight(player)
         plate:setLocalVar("weight", totalWeight)
 
-        if (player:hasKeyItem(xi.ki.LOADSTONE) or totalWeight >= 3) then
+        if player:hasKeyItem(xi.ki.LOADSTONE) or totalWeight >= 3 then
             door:openDoor(15) -- open door with a 15 second time delay.
             plate:setAnimation(xi.anim.OPEN_DOOR) -- this is supposed to light up the platform but it's not working. Tried other values too.
         end
@@ -120,7 +120,7 @@ zoneObject.onRegionLeave = function(player, region)
         totalWeight = totalWeight - getWeight(player)
         plate:setLocalVar("weight", totalWeight)
 
-        if (plate:getAnimation() == xi.anim.OPEN_DOOR and totalWeight < 3) then
+        if plate:getAnimation() == xi.anim.OPEN_DOOR and totalWeight < 3 then
             plate:setAnimation(xi.anim.CLOSE_DOOR)
         end
     end

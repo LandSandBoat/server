@@ -15,7 +15,7 @@ effectObject.onEffectTick = function(target, effect)
         target:takeDamage(dmg)
     end
 
-    if (effect:getTick() == 3000) then
+    if effect:getTick() == 3000 then
         effect:setTick(9000)
     end
 end

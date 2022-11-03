@@ -27,7 +27,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
 
     if player:checkDistance(pet) <= 25 then
-        if (pet:hasStatusEffect(xi.effect.HEALING)) then
+        if pet:hasStatusEffect(xi.effect.HEALING) then
             pet:delStatusEffect(xi.effect.HEALING)
         end
 

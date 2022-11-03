@@ -121,7 +121,7 @@ entity.onCriticalHit = function(mob)
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
-        elseif (mob:getAnimationSub() == 1) then
+        elseif mob:getAnimationSub() == 1 then
             mob:setAnimationSub(2)
             mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
         else

@@ -976,7 +976,7 @@ function getHitRate(attacker, target, capHitRate, bonus)
 
     if attacker:getMainLvl() > target:getMainLvl() then              -- Accuracy Bonus
         acc = acc + ((attacker:getMainLvl()-target:getMainLvl()) * 4)
-    elseif (attacker:getMainLvl() < target:getMainLvl()) then        -- Accuracy Penalty
+    elseif attacker:getMainLvl() < target:getMainLvl() then        -- Accuracy Penalty
         acc = acc - ((target:getMainLvl()-attacker:getMainLvl()) * 4)
     end
 
