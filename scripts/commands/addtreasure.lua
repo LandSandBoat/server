@@ -16,10 +16,10 @@ end
 
 function onTrigger(player, itemId, target, dropper)
     -- validate itemId
-    if (itemId ~= nil) then
+    if itemId ~= nil then
         itemId = tonumber(itemId)
     end
-    if (itemId == nil or itemId == 0) then
+    if itemId == nil or itemId == 0 then
         error(player, "Invalid itemID.")
         return
     end
@@ -37,9 +37,9 @@ function onTrigger(player, itemId, target, dropper)
     end
 
     -- validate dropper
-    if (dropper ~= nil) then
+    if dropper ~= nil then
         dropper = GetNPCByID(dropper)
-        if (dropper == nil) then
+        if dropper == nil then
             error(player, "Invalid npcID.")
             return
         end

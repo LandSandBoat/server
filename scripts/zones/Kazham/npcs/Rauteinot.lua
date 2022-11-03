@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Kazham/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getCharVar("MissionaryManVar") == 1 and trade:hasItemQty(1146, 1) == true and trade:getItemCount() == 1) then
+    if player:getCharVar("MissionaryManVar") == 1 and trade:hasItemQty(1146, 1) == true and trade:getItemCount() == 1 then
         player:startEvent(139) -- Trading elshimo marble
     end
 end

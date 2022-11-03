@@ -10,16 +10,14 @@ local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and
         player:getCharVar("recollectionsQuest") == 2
     then
-        if (trade:hasItemQty(1106, 1) and trade:getItemCount() == 1) then
+        if trade:hasItemQty(1106, 1) and trade:getItemCount() == 1 then
             player:startEvent(8, 1106)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)

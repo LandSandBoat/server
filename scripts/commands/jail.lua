@@ -33,12 +33,12 @@ function onTrigger(player, target, cellId, reason)
     end
 
     -- Validate the cell id..
-    if (cellId == nil or cellId == 0 or cellId > 32) then
+    if cellId == nil or cellId == 0 or cellId > 32 then
         cellId = 1
     end
 
     -- Validate the reason..
-    if (reason == nil) then
+    if reason == nil then
         reason = "Unspecified."
     end
 
