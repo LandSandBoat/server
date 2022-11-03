@@ -20,7 +20,7 @@ entity.onMobFight = function(mob)
     local changeTime = mob:getLocalVar("changeTime")
 
     if (mob:getBattleTime() - changeTime > randomTime) then
-        if (mob:getAnimationSub() == 2) then
+        if mob:getAnimationSub() == 2 then
             mob:setAnimationSub(1)
         else
             mob:setAnimationSub(2)
@@ -30,7 +30,7 @@ entity.onMobFight = function(mob)
         -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
         -- When in an open state, damage taken by the Euvhi is doubled. Inflicting a large amount of damage to an Euvhi in an open state will cause it to close.
         -- Make everything do double
-        if (mob:getAnimationSub() == 2) then
+        if mob:getAnimationSub() == 2 then
             mob:setMod(xi.mod.HTH_SDT, 2000)
             mob:setMod(xi.mod.SLASH_SDT, 2000)
             mob:setMod(xi.mod.PIERCE_SDT, 2000)

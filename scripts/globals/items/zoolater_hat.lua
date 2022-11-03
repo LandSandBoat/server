@@ -14,7 +14,7 @@ end
 
 itemObject.onItemUse = function(target)
     local pet = target:getPet()
-    if (pet) then
+    if pet then
         pet:addStatusEffect(xi.effect.REGAIN, 15, 3, 15)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

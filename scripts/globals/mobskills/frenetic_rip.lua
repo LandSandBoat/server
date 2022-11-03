@@ -12,7 +12,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 0 and mob:getFamily() == 165) then -- Imps - with horn
+    if mob:getAnimationSub() == 0 and mob:getFamily() == 165 then -- Imps - with horn
         return 1
     else
         return 0

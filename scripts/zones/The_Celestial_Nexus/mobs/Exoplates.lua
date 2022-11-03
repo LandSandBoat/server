@@ -23,21 +23,21 @@ entity.onMobFight = function(mob, target)
     local shifts = mob:getLocalVar("shifts")
     local shiftTime = mob:getLocalVar("shiftTime")
 
-    if (mob:getAnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
+    if mob:getAnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67 then
         mob:useMobAbility(993)
         mob:setLocalVar("shifts", shifts + 1)
         mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
-    elseif (mob:getAnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
+    elseif mob:getAnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33 then
         mob:useMobAbility(997)
         mob:setLocalVar("shifts", shifts + 1)
         mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
-    elseif (mob:getAnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
+    elseif mob:getAnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2 then
         mob:useMobAbility(1001)
         mob:setLocalVar("shifts", shifts + 1)
         mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
-    elseif (mob:getHPP() <= 67 and mob:getAnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
+    elseif mob:getHPP() <= 67 and mob:getAnimationSub() == 0 and mob:getBattleTime() >= shiftTime then
         mob:setAnimationSub(1)
-    elseif (mob:getHPP() <= 33 and mob:getAnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
+    elseif mob:getHPP() <= 33 and mob:getAnimationSub() == 1 and mob:getBattleTime() >= shiftTime then
         mob:setAnimationSub(2)
     end
 end
@@ -53,7 +53,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    if (csid == 32004) then
+    if csid == 32004 then
         DespawnMob(target:getID())
         DespawnMob(target:getID() - 1)
         DespawnMob(target:getID() + 2)
