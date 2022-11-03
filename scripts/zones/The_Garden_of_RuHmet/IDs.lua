@@ -21,6 +21,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7450, -- Tallying conquest results...
+        PORTAL_WONT_OPEN              = 7623, -- The portal won't open from this side.
         NO_NEED_INVESTIGATE           = 7629, -- There is no need to investigate further.
         PORTAL_SEALED                 = 7658, -- The portal is firmly sealed by a mysterious energy.
         UNKNOWN_PRESENCE              = 7766, -- You sense some unknown presence...

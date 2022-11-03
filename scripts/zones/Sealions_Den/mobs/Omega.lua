@@ -13,6 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 10)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
     mob:setMod(xi.mod.REGEN, 1)
 end
 
