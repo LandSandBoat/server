@@ -72,11 +72,11 @@ end
 entity.onEventFinish = function(player, csid, option)
     local guildMember = xi.crafting.isGuildMember(player, 5)
 
-    if (csid == 10009 and option == 2) then
+    if csid == 10009 and option == 2 then
         if guildMember == 1 then
             player:setCharVar("FishingExpertQuest", 1)
         end
-    elseif (csid == 10009 and option == 1) then
+    elseif csid == 10009 and option == 1 then
         local crystal = 4101 -- water crystal
 
         if player:getFreeSlotsCount() == 0 then

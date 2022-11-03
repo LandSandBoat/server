@@ -643,7 +643,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
         local cost = item.cost * qty
 
         -- makes sure player has room for three stacks of tomes
-        if (qty > 12 and qty < 99) and player:getFreeSlotsCount() < 3 then
+        if qty > 12 and qty < 99 and player:getFreeSlotsCount() < 3 then
             player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, item.id)
             player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
             return

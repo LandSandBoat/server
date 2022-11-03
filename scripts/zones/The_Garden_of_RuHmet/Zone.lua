@@ -195,7 +195,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if
-        (csid >149 and csid < 184) or
+        (csid > 149 and csid < 184) or
         csid == 102 or
         csid == 103 or
         csid == 101

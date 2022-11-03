@@ -57,7 +57,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    if (csid == 32004) then
+    if csid == 32004 then
         DespawnMob(target:getID())
         local mob = SpawnMob(target:getID() + 2)
         mob:updateEnmity(player)
