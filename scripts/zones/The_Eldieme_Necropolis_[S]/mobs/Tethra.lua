@@ -4,7 +4,7 @@
 ------------------------------
 mixins =
 {
-	require("scripts/mixins/fomor_hate"),
+    require("scripts/mixins/fomor_hate"),
     require("scripts/mixins/job_special"),
     require("scripts/mixins/rage")
 }
@@ -26,7 +26,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- All Mods Here Are Assigned For Initial Difficulty Tuning
-	mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
     mob:addMod(xi.mod.STR, 40)
     mob:addMod(xi.mod.VIT, 20)
@@ -48,7 +48,7 @@ end
 entity.onAdditionalEffect = function(mob, target, damage)
     -- 25% En-Petrify https://ffxiclopedia.fandom.com/wiki/Tethra
     if target:hasStatusEffect(xi.effect.PETRIFICATION) == false then
-        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY, {chance = 25})
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY, { chance = 25 })
     end
 end
 
@@ -86,61 +86,61 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Combat Tick Logic
-    mob:addListener("COMBAT_TICK", "TETHRA_CTICK", function(mob)
-        local magicretaliate = mob:getLocalVar("TMagicRetaliate")
-        local abilityretaliate = mob:getLocalVar("TAbilityRetaliate")
-        local abilitylevelup = mob:getLocalVar("TAbilityLevelUp")
+    mob:addListener("COMBAT_TICK", "TETHRA_CTICK", function(mobArg)
+        local magicretaliate = mobArg:getLocalVar("TMagicRetaliate")
+        local abilityretaliate = mobArg:getLocalVar("TAbilityRetaliate")
+        local abilitylevelup = mobArg:getLocalVar("TAbilityLevelUp")
 
-        if mob:getAnimationSub() == 1 then
+        if mobArg:getAnimationSub() == 1 then
             -- Magic Retaliation Should Always Be Stone IV And Instant Cast (https://ffxiclopedia.fandom.com/wiki/Tethra)
             if magicretaliate > 0 then
                 -- Instant Cast
-                mob:setMod(xi.mod.UFASTCAST, 100)
+                mobArg:setMod(xi.mod.UFASTCAST, 100)
                 -- Cast Stone IV
-                mob:castSpell(162)
+                mobArg:castSpell(162)
                 -- Clear Vars
-                mob:setLocalVar("TMagicRetaliate", 0)
-                mob:removeListener("PLAYER_ABILITY_USED")
-                mob:setAnimationSub(0)
+                mobArg:setLocalVar("TMagicRetaliate", 0)
+                mobArg:removeListener("PLAYER_ABILITY_USED")
+                mobArg:setAnimationSub(0)
             -- Retaliates JAs With Instant Cast Stone IV and Level Up (https://ffxiclopedia.fandom.com/wiki/Tethra)
             elseif abilityretaliate > 0 then
                 -- Instant Cast
-                mob:setMod(xi.mod.UFASTCAST, 100)
+                mobArg:setMod(xi.mod.UFASTCAST, 100)
                 -- Cast Stone IV
-                mob:castSpell(162)
-                local levelupsum = mob:getLocalVar("TotalLevelUp")
+                mobArg:castSpell(162)
+                local levelupsum = mobArg:getLocalVar("TotalLevelUp")
                 -- Level Up
                 if levelupsum <= 25 then
-                    mob:useMobAbility(2460)
-                    mob:setLocalVar("TotalLevelUp", levelupsum + 1)
+                    mobArg:useMobAbility(2460)
+                    mobArg:setLocalVar("TotalLevelUp", levelupsum + 1)
                 end
                 -- Clear Vars
-                mob:setLocalVar("TAbilityRetaliate", 0)
-                mob:removeListener("PLAYER_ABILITY_USED")
-                mob:setAnimationSub(0)
+                mobArg:setLocalVar("TAbilityRetaliate", 0)
+                mobArg:removeListener("PLAYER_ABILITY_USED")
+                mobArg:setAnimationSub(0)
             -- Uses Level Up When JA Used (https://ffxiclopedia.fandom.com/wiki/Tethra)
             elseif abilitylevelup > 0 then
-                local levelupsum = mob:getLocalVar("TotalLevelUp")
+                local levelupsum = mobArg:getLocalVar("TotalLevelUp")
                 -- Level Up
                 if levelupsum <= 25 then
-                    mob:useMobAbility(2460)
-                    mob:setLocalVar("TotalLevelUp", levelupsum + 1)
+                    mobArg:useMobAbility(2460)
+                    mobArg:setLocalVar("TotalLevelUp", levelupsum + 1)
                 end
                 -- Clear Vars
-                mob:setLocalVar("TAbilityLevelUp", 0)
-                mob:removeListener("PLAYER_ABILITY_USED")
-                mob:setAnimationSub(0)
+                mobArg:setLocalVar("TAbilityLevelUp", 0)
+                mobArg:removeListener("PLAYER_ABILITY_USED")
+                mobArg:setAnimationSub(0)
             -- Resets States And Mods
             else
-                mob:setLocalVar("TAbilityLevelUp", 0)
-                mob:setLocalVar("TAbilityRetaliate", 0)
-                mob:setLocalVar("TMagicRetaliate", 0)
-                mob:setMod(xi.mod.UFASTCAST, 0)
-                mob:setAnimationSub(0)
+                mobArg:setLocalVar("TAbilityLevelUp", 0)
+                mobArg:setLocalVar("TAbilityRetaliate", 0)
+                mobArg:setLocalVar("TMagicRetaliate", 0)
+                mobArg:setMod(xi.mod.UFASTCAST, 0)
+                mobArg:setAnimationSub(0)
             end
         else
-            if mob:getCurrentAction() ~= 30 then
-                mob:setMod(xi.mod.UFASTCAST, 0)
+            if mobArg:getCurrentAction() ~= 30 then
+                mobArg:setMod(xi.mod.UFASTCAST, 0)
             end
         end
     end)
@@ -158,43 +158,43 @@ entity.onMobFight = function(mob, target)
     -- Job Ability Functions
     -- Retaliates With Instant Stone IV And Level Up If Targeted (https://ffxiclopedia.fandom.com/wiki/Tethra)
     -- Starts Level Up Sequence When Any Other Ability Is Used (https://ffxiclopedia.fandom.com/wiki/Tethra)
-    mob:addListener("PLAYER_ABILITY_USED", "TETHRA_PLAYER_ABILITY_USED", function(mob, player, ability, action, target)
+    mob:addListener("PLAYER_ABILITY_USED", "TETHRA_PLAYER_ABILITY_USED", function(mobArg, player, ability, action, targetArg)
         --Retaliate and Level Up
         if ability:getID() == (46) then
-            mob:setLocalVar("TAbilityRetaliate", 1)
-            mob:AnimationSub(1)
+            mobArg:setLocalVar("TAbilityRetaliate", 1)
+            mobArg:setAnimationSub(1)
         -- Level Up
         else
-            mob:setLocalVar("TAbilityLevelUp", 1)
-            mob:AnimationSub(1)
+            mobArg:setLocalVar("TAbilityLevelUp", 1)
+            mobArg:setAnimationSub(1)
         end
     end)
 
     -- Magic Handling
     -- Mob Should Retaliate With Instant Cast Stone IV (https://ffxiclopedia.fandom.com/wiki/Tethra)
     -- Mob Should Have Little To No Enmity Control (https://ffxiclopedia.fandom.com/wiki/Tethra)
-    mob:addListener("MAGIC_TAKE", "TETHRA_MAGIC_TAKE", function(target, caster, spell)
+    mob:addListener("MAGIC_TAKE", "TETHRA_MAGIC_TAKE", function(targetArg, caster, spell)
         if
-            target:getAnimationSub() == 0 and
+            targetArg:getAnimationSub() == 0 and
             spell:tookEffect() and
             (caster:isPC() or caster:isPet())
         then
-            target:setLocalVar("TMagicRetaliate", 1)
-            target:addEnmity(caster, 1000, 1000)
-            target:setAnimationSub(1)
+            targetArg:setLocalVar("TMagicRetaliate", 1)
+            targetArg:addEnmity(caster, 1000, 1000)
+            targetArg:setAnimationSub(1)
         end
     end)
 
     -- Enmity Handling
     -- Mob Should Have Little To No Enmity Control (https://ffxiclopedia.fandom.com/wiki/Tethra)
-    mob:addListener("TAKE_DAMAGE", "TETHRA_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
+    mob:addListener("TAKE_DAMAGE", "TETHRA_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.PHYSICAL then
-            mob:addEnmity(attacker, 1000, 1000)
+            mobArg:addEnmity(attacker, 1000, 1000)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_TAKE", "TETHRA_WEAPONSKILL_TAKE", function(target, attacker, skillid, tp, action)
-        target:addEnmity(attacker, 1000, 1000)
+    mob:addListener("WEAPONSKILL_TAKE", "TETHRA_WEAPONSKILL_TAKE", function(targetArg, attacker, skillid, tp, action)
+        targetArg:addEnmity(attacker, 1000, 1000)
     end)
 
 end
@@ -223,7 +223,7 @@ entity.onMobDisengage = function(mob)
     mob:removeListener("TEHTRA_PLAYER_ABILITY_USED")
 end
 
-entity.onMobDespawn = function(mob) 
+entity.onMobDespawn = function(mob)
     if mob:getLocalVar("MobPoof") == 1 then
         mob:showText(mob, zones[mob:getZoneID()].text.NM_DESPAWN)
         mob:setLocalVar("MobPoof", 0)
@@ -235,4 +235,4 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:setTitle(xi.title.TETHRA_EXORCIST)
 end
 
-return entity 
+return entity
