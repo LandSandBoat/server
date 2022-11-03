@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     local hideTime = 0
 
-    if (player:hasItem(16575) == false and player:getFreeSlotsCount() >= 1) then
+    if player:hasItem(16575) == false and player:getFreeSlotsCount() >= 1 then
         player:addItem(16575)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16575) -- Curtana
 
@@ -41,7 +41,6 @@ entity.onTrigger = function(player, npc)
     }
 
     npc:hideNPC(hideTime)
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

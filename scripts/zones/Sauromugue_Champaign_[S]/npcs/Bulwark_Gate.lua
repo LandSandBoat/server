@@ -21,7 +21,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED then
-        if (player:getCharVar("KnotQuiteThere") == 0) then
+        if player:getCharVar("KnotQuiteThere") == 0 then
             player:startEvent(105)
         end
     end
