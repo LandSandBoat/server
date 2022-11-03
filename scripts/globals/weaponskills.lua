@@ -879,6 +879,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
                 action:param(defender:getID(), math.abs(finaldmg))
             else
                 action:messageID(defender:getID(), xi.msg.basic.DAMAGE_SECONDARY)
+                action:param(defender:getID(), math.abs(finaldmg))
             end
 
             if finaldmg > 0 then
