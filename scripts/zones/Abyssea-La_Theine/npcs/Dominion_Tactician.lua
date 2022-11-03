@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local DM = player:getDominionNotes()
+    local DM = player:getCurrency("dominion_note")
     local Trophies = 0 -- Max all Trophy = 4294967295 sort out its bit mask later.
     player:startEvent(120, DM, 0, 0, 0, 0, Trophies)
 end
@@ -106,7 +106,7 @@ entity.onEventFinish = function(player, csid, option)
     end
 
     if option > 256 and option < 2818 then
-        if player:getDominionNotes() > Price then
+        if player:getCurrency("dominion_note") > Price then
             if TempItem then
                 if player:addTempItem(ItemID, 1) then
                     player:delCurrency("dominion_note", Price)

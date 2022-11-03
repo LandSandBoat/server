@@ -162,11 +162,11 @@ entity.onMobFight = function(mob, target)
         --Retaliate and Level Up
         if ability:getID() == (46) then
             mob:setLocalVar("TAbilityRetaliate", 1)
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         -- Level Up
         else
             mob:setLocalVar("TAbilityLevelUp", 1)
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         end
     end)
 
