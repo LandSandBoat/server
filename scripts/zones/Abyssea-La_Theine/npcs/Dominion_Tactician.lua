@@ -108,7 +108,7 @@ entity.onEventFinish = function(player, csid, option)
     if option > 256 and option < 2818 then
         if player:getCurrency("dominion_note") > price then
             if tempItem then
-                if player:addtempItem(itemId, 1) then
+                if player:addTempItem(itemId, 1) then
                     player:delCurrency("dominion_note", price)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
                 else
