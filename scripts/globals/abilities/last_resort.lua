@@ -5,8 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: 3:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dark_knight")
 -----------------------------------
 local abilityObject = {}
 
@@ -15,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
+    xi.job_utils.dark_knight.useLastResort(player, target, ability)
 end
 
 return abilityObject

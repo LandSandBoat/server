@@ -135,6 +135,10 @@ xi.msg.basic =
     JA_MISS_2              = 324, -- <user> uses <ability>, but misses <target>. (includes target name)
     JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     JA_ATK_ENHANCED        = 285, -- <target>'s attacks are enhanced.
+    FORTIFIED_UNDEAD       = 286, -- <target> is fortified against undead.
+    FORTIFIED_ARCANA       = 287, -- <target> is fortified against arcana.
+    FORTIFIED_DEMONS       = 149, -- <target> is fortified against demons.
+    FORTIFIED_DRAGONS      = 151, -- <target> is fortified against dragons.
 
     -- Misc Other
     DEFEATS_TARG           = 6,   -- The <player> defeats <target>.
@@ -263,6 +267,7 @@ xi.msg.basic =
     STATUS_WEARS_OFF        = 206,  -- <target>'s <status> effect wears off.
     ABOUT_TO_WEAR_OFF       = 251,  -- The effect of <status> is about to wear off.
     ALL_ABILITIES_RECHARGED = 361,  -- All of <target>'s abilities are recharged.
+    STATUS_DRAIN            = 404,  -- <number> status effects are drained from <target>.
 
     -- Battlefield
     UNABLE_TO_ACCESS_SJ     = 107, -- <player> is temporarily unable to access support job abilities

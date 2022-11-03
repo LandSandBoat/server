@@ -6613,6 +6613,25 @@ namespace charutils
         return 0;
     }
 
+    // Search all equipped items for the mod ID given and return the highest mod value if found
+    int16 getMaxGearMod(CCharEntity* PChar, Mod modId)
+    {
+        int16 highestValue = 0;
+
+        for (uint8 i = SLOT_MAIN; i <= SLOT_BACK; i++)
+        {
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)i);
+
+            if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)) &&
+                PItem->getModifier(modId) > highestValue)
+            {
+                highestValue = PItem->getModifier(modId);
+            }
+        }
+
+        return highestValue;
+    }
+
     bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity)
     {
         SpawnIDList_t* spawnlist = nullptr;

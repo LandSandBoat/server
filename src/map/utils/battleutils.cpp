@@ -1209,6 +1209,45 @@ namespace battleutils
                     PChar->updatemask |= UPDATE_HP;
                 }
             }
+            else if (enspell == ENSPELL_SOUL_ENSLAVEMENT)
+            {
+                int8  jpValue = 0;
+                int16 power   = xirand::GetRandomNumber(480, 590);
+                int16 enemyTP = PDefender->health.tp;
+
+                if (PAttacker->objtype == TYPE_PC)
+                {
+                    jpValue = static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_SOUL_ENSLAVEMENT_EFFECT);
+                }
+
+                // Apply job points after base power
+                power = static_cast<int16>(power * (1.f + (jpValue / 100.f)));
+
+                // Each H2H or Dual Wielding hit cannot exceed half of the total drained
+                if (weapon->getSkillType() == SKILL_NONE || weapon->getSkillType() == SKILL_HAND_TO_HAND || PAttacker->m_dualWield)
+                {
+                    power /= 2;
+                }
+
+                // Attacker only drains as much TP as the target has
+                if (power > enemyTP)
+                {
+                    power = enemyTP;
+                }
+                // Attacker has capped TP, no drain
+                else if (PAttacker->health.tp == 3000)
+                {
+                    power = 0;
+                }
+
+                Action->additionalEffect = SUBEFFECT_TP_DRAIN;
+                Action->addEffectMessage = 165;
+
+                PAttacker->addTP(power);
+                PDefender->addTP(-power);
+
+                Action->addEffectParam = power;
+            }
             else if (PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement enspell damage, takes priority over all but blood weapon.
             {
                 EFFECT highestRuneEffect = PAttacker->StatusEffectContainer->GetHighestRuneEffect();
@@ -2059,14 +2098,14 @@ namespace battleutils
                 damage = PhysicalDmgTaken(PDefender, damage, damageType, isCovered);
             }
 
-            // absorb mods are handled in the above functions, but they do not affect counters
-            // this is a little hacky, but will work for now
+            // Absorb mods are handled in the above functions, but they do not affect counters
+            // This is a little hacky, but will work for now
             if (damage < 0 && isCounter)
             {
                 damage = -damage;
             }
 
-            if (!isCounter || giveTPtoAttacker) // counters are always considered blunt (assuming h2h) damage, except retaliation (which is the only counter
+            if (!isCounter || giveTPtoAttacker) // Counters are always considered blunt (assuming h2h) damage, except retaliation (which is the only counter
                                                 // that gives TP to the attacker)
             {
                 switch (damageType)
@@ -2095,6 +2134,7 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
+
                 if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
                 {
                     if (PDefender->objtype == TYPE_PC)
@@ -2178,9 +2218,15 @@ namespace battleutils
             damage = HandleStoneskin(PDefender, damage);
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
+
         damage = std::clamp(damage, -99999, 99999);
 
+        // Scarlet Delirium
+        // Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
+
         if (damage < 0)
         {
             damage = -corrected;
@@ -2484,6 +2530,10 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        // Scarlet Delirium
+        // Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -4451,18 +4501,33 @@ namespace battleutils
      ************************************************************************/
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage)
     {
-        // Souleater has no effect <10HP.
+        // https://www.bg-wiki.com/ffxi/Souleater
+        // Souleater has no effect < 10HP.
         if (m_PChar->GetMJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            // lost 10% current hp, converted to damage (displayed as just a strong regular hit)
-            float drainPercent = 0.1f;
+            float  boostPercent = 0.1f;
+            uint32 currentHP    = m_PChar->health.hp;
+            uint32 removedHP    = 0;
+            int16  souleaterMod = m_PChar->getMod(Mod::SOULEATER_EFFECT);
+            int16  souleaterPot = m_PChar->getMod(Mod::SOULEATER_EFFECT_POTENCY);
+            float  stalwartSoul = m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f;
+            float  drainPercent = 0.1f - stalwartSoul;
 
-            // at most 2% bonus from gear
-            auto gearBonusPercent = m_PChar->getMod(Mod::SOULEATER_EFFECT);
-            drainPercent          = drainPercent + std::min(0.02f, 0.01f * gearBonusPercent);
+            // Check all PC gear slots for the highest Souleater effect mod
+            if (m_PChar->objtype == TYPE_PC)
+            {
+                souleaterMod = charutils::getMaxGearMod(m_PChar, Mod::SOULEATER_EFFECT);
+            }
 
-            damage += (uint32)(m_PChar->health.hp * drainPercent);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * (drainPercent - m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f))));
+            // Combine Souleater bonuses (Souleater Modifier + Souleater Augment) and calculate damage bonus
+            boostPercent += (souleaterMod + souleaterPot) * 0.01f;
+            damage += (uint32)(currentHP * boostPercent);
+
+            // Calculate HP to be removed
+            removedHP = (uint32)(currentHP * drainPercent);
+
+            // Remove HP
+            m_PChar->addHP(-HandleStoneskin(m_PChar, removedHP));
         }
         else if (m_PChar->GetSJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
@@ -4478,9 +4543,11 @@ namespace battleutils
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
             damage += (uint32)(floor(m_PChar->health.mp / 10));
+
             m_PChar->health.mp = 0;
             m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
+
         return damage;
     }
 
@@ -5580,6 +5647,26 @@ namespace battleutils
         return damage;
     }
 
+    void HandleScarletDelirium(CBattleEntity* PDefender, int32 damage)
+    {
+        // Check for Scarlet Delirium and update Effect Power with bonus from damage
+        CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
+
+        // Damage bonus calculation, update Effect Power
+        if (effectScarDel &&
+            effectScarDel->GetPower() == 0)
+        {
+            // Damage to Max HP Ratio
+            int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
+            int8   jpValue  = effectScarDel->GetSubPower();
+            uint32 duration = 90 + jpValue;
+
+            // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
+            PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), true);
+        }
+    }
+
     int32 HandleSevereDamageEffect(CBattleEntity* PDefender, EFFECT effect, int32 damage, bool removeEffect)
     {
         if (PDefender->StatusEffectContainer->HasStatusEffect(effect))
@@ -6272,6 +6359,12 @@ namespace battleutils
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
                 applyArts = false;
             }
+            // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
+            else if (PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+            {
+                cast      = (uint32)(cast * (1.0f + ((PEntity->getMod(Mod::BLACK_MAGIC_CAST) + PEntity->getMod(Mod::DARK_MAGIC_CAST)) / 100.0f)));
+                applyArts = false;
+            }
             else if (applyArts)
             {
                 if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
@@ -6603,20 +6696,25 @@ namespace battleutils
     // Calculate TP generated by spell for Occult Acumen trait
     int16 CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell)
     {
-        // Players onry
-        if (PEntity->objtype == TYPE_PC)
+        int16 bonus = 0;
+
+        // Only applies to players casting a damaging elemental or dark magic spell
+        if (PEntity->objtype == TYPE_PC &&
+            (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC || PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC))
         {
-            if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC || PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+            CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
+
+            if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
             {
-                CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
-                if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
-                {
-                    return static_cast<int16>(PSpell->getMPCost() * PChar->getMod(Mod::OCCULT_ACUMEN) / 100.f * (1 + (PChar->getMod(Mod::STORETP) / 100.f)));
-                }
+                int16 mpCost       = PSpell->getMPCost();
+                int16 occultAcumen = PChar->getMod(Mod::OCCULT_ACUMEN);
+                float storeTP      = 1.f + (PChar->getMod(Mod::STORETP) / 100.f);
+
+                bonus = static_cast<int16>((mpCost * occultAcumen * storeTP) / 100.f);
             }
         }
 
-        return 0;
+        return bonus;
     }
 
     int16 CalculateWeaponSkillTP(CBattleEntity* PEntity, CWeaponSkill* PWeaponSkill, int16 spentTP)

@@ -1044,9 +1044,6 @@ xi.mod =
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
     WARDING_CIRCLE_DURATION         = 95,  -- Warding Circle duration in seconds
-    SOULEATER_EFFECT                = 96,  -- Souleater power in percents
-    DESPERATE_BLOWS                 = 906, -- Adds ability haste to Last Resort
-    STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
 
@@ -1283,6 +1280,25 @@ xi.mod =
     PALISADE_BLOCK_BONUS            = 1066, -- Increases base block rate while under the effects of Palisade (additive, not multiplicative)
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
+
+    -- Dark Knight
+    SOULEATER_EFFECT                = 96,   -- Souleater power in percents
+    SOULEATER_EFFECT_POTENCY        = 1079, -- Enhances "Souleater" effect augment power in percents (Additive and stacks with Enhances "Souleater" effect gear)
+    DESPERATE_BLOWS                 = 906,  -- Adds ability haste to Last Resort
+    STALWART_SOUL                   = 907,  -- Reduces damage taken from Souleater
+    ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_ABSORB_TP              = 1074, -- Enhances "Absorb-TP" effect (Increases TP absorbed by percentage, e.g. mod value 5 = +5% TP absorbed)
+    ENHANCES_DIABOLIC_EYE           = 1075, -- Enhances "Diabolic Eye" effect (Increases duration by <value> seconds per merit, e.g. mod value 6 = +6s)
+    LAST_RESORT_DURATION            = 1076, -- "Last Resort" effect duration + (Increases duration by <value> seconds, e.g. mod value 15 = +15s)
+    ABSORB_DURATION                 = 1077, -- "Absorb" effect duration +% (Increases duration by <value>%, e.g. mod value 10 = +10%)
+    ENHANCES_NETHER_VOID            = 1078, -- Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%, e.g. mod value 50 = +50%)
+    ENHANCES_MUTED_SOUL             = 1080, -- Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
+    ENHANCES_DESPERATE_BLOWS        = 1081, -- Enhances "Desperate Blows" effect (Adds +3 Subtle Blow per DESPERATE_BLOWS merit level)
+    WEAPON_BASH_CHAINBOUND          = 1082, -- Augments "Weapon Bash" (Adds a Chainbound effect to Weapon Bash)
 
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)

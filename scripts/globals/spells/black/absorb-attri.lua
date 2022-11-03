@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Absorb-INT
--- Steals an enemy's intelligence.
+-- Spell: Absorb-Attri
+-- Steals an enemy's beneficial status effects.
 -----------------------------------
 require("scripts/globals/spells/absorb_spell")
 -----------------------------------
@@ -11,7 +11,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    return xi.spells.absorb.useStatAbsorb(caster, target, spell)
+    -- TODO: Get correct animation from retail captures
+    return xi.spells.absorb.useEffectAbsorb(caster, target, spell)
 end
 
 return spellObject

@@ -264,6 +264,7 @@ namespace charutils
     uint8 getItemLevelDifference(CCharEntity* PChar);
     uint8 getMainhandItemLevel(CCharEntity* PChar);
     uint8 getRangedItemLevel(CCharEntity* PChar);
+    int16 getMaxGearMod(CCharEntity* PChar, Mod modId);
 
     bool hasEntitySpawned(CCharEntity* PChar, CBaseEntity* entity);
 

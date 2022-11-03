@@ -68,29 +68,6 @@ local function getAlpha(level)
     return alpha
 end
 
-local function souleaterBonus(attacker, wsParams)
-    local bonus = 0
-
-    if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
-
-        if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
-        end
-
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
-        end
-
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
-    end
-
-    return bonus
-end
-
 local function fencerBonus(attacker)
     local bonus = 0
 
@@ -105,6 +82,75 @@ local function fencerBonus(attacker)
         if subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield() then
             bonus = attacker:getMod(xi.mod.FENCER_CRITHITRATE) / 100
         end
+    end
+
+    return bonus
+end
+
+local function consumeManaBonus(attacker)
+    local bonus = 0
+    local mana  = 0
+    local rate  = 10
+
+    if
+        attacker:hasStatusEffect(xi.effect.CONSUME_MANA) and
+        attacker:getMP() >= 10
+    then
+        mana  = attacker:getMP()
+        bonus = bonus + math.floor(mana / rate)
+
+        attacker:setMP(0)
+        attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+    end
+
+    return bonus
+end
+
+local function scarletDeliriumBonus(attacker)
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local effect = attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1)
+
+        bonus = 1 + (effect:getPower() / 100)
+    end
+
+    return bonus
+end
+
+local function souleaterBonus(attacker, wsParams)
+    local bonus = 0
+
+    if
+        attacker:hasStatusEffect(xi.effect.SOULEATER) and
+        attacker:getHP() > 10
+    then
+        local boostPercent = 0.1
+        local currentHP    = attacker:getHP()
+        local removedHP    = 0
+        local souleaterMod = attacker:getMod(xi.mod.SOULEATER_EFFECT)         -- Gear modifier
+        local souleaterPot = attacker:getMod(xi.mod.SOULEATER_EFFECT_POTENCY) -- Augment modifier
+        local stalwartSoul = attacker:getMod(xi.mod.STALWART_SOUL) * 0.001
+        local drainPercent = 0.1 - stalwartSoul
+
+        if attacker:getMainJob() ~= xi.job.DRK then
+            boostPercent = boostPercent / 2
+        end
+
+        if attacker:getObjType() == xi.objType.PC then
+            -- Check all gear slots for Enhances "Souleater" effect modifier and use the highest
+            souleaterMod = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT)
+        end
+
+        -- Combine Souleater bonuses (Souleater Modifier + Souleater Augment)
+        boostPercent = boostPercent + ((souleaterMod + souleaterPot) * 0.01)
+
+        -- Calculate damage bonus and HP to be removed
+        bonus     = currentHP * boostPercent
+        removedHP = currentHP * drainPercent
+
+        -- Remove HP
+        attacker:delHP(removedHP)
     end
 
     return bonus
@@ -410,7 +456,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
+    adjustedDamage = (adjustedDamage + consumeManaBonus(attacker) * scarletDeliriumBonus(attacker)) + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -532,6 +578,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate the damage from the first hit
     local dmg = mainBase * ftp
+
     hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
     if calcParams.melee then
@@ -817,6 +864,9 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         dmg = dmg * ftp
 
+        -- Apply Consume Mana and Scarlet Delirium
+        dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
+
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
         if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and not attacker:isPet() then -- For specific WS
@@ -926,17 +976,23 @@ end
 -- Helper function to get Main damage depending on weapon type
 function getMeleeDmg(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
-    local offhandDamage = attacker:getOffhandDmg()
+    local offhandDamage  = attacker:getOffhandDmg()
 
-    if weaponType == xi.skill.HAND_TO_HAND or weaponType == xi.skill.NONE then
+    if
+        weaponType == xi.skill.HAND_TO_HAND or
+        weaponType == xi.skill.NONE
+    then
         local h2hSkill = attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3
 
-        if kick and attacker:hasStatusEffect(xi.effect.FOOTWORK) then
+        if
+            kick and
+            attacker:hasStatusEffect(xi.effect.FOOTWORK)
+        then
             mainhandDamage = attacker:getMod(xi.mod.KICK_DMG) -- Use Kick damage if footwork is on
         end
 
         mainhandDamage = mainhandDamage + h2hSkill
-        offhandDamage = mainhandDamage
+        offhandDamage  = mainhandDamage
     end
 
     return { mainhandDamage, offhandDamage }
@@ -1193,7 +1249,7 @@ function fSTR2(atk_str, def_vit, weapon_rank)
     return fSTR2
 end
 
-function generatePdif (cratiomin, cratiomax, melee)
+function generatePdif(cratiomin, cratiomax, melee)
     local pdif = math.random(cratiomin * 1000, cratiomax * 1000) / 1000
 
     if melee then

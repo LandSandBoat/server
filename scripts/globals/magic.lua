@@ -1265,6 +1265,9 @@ function calculateDurationForLvl(duration, spellLvl, targetLvl)
 end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
+    -- TODO: Add ABSORB_DURATION mod handling here using spell:getSpellFamily()
+    -- Update function to pass spell instead of magicSkill and spellGroup
+    -- Move magicSkill and spellGroup inside function
     local casterJob = caster:getMainJob()
 
     if magicSkill == xi.skill.ENHANCING_MAGIC then -- Enhancing Magic
@@ -1310,6 +1313,8 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
+    elseif magicSkill == xi.skill.DARK_MAGIC then
+        duration = duration * (1 + (caster:getMod(xi.mod.DARK_MAGIC_DURATION) / 100))
     end
 
     return math.floor(duration)

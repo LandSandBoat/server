@@ -5,8 +5,7 @@
 -- Recast Time: 00:01:30
 -- Duration: 00:01:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dark_knight")
 -----------------------------------
 local abilityObject = {}
 
@@ -15,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 8, 1, 90)
+    xi.job_utils.dark_knight.useScarletDelirium(player, target, ability)
 end
 
 return abilityObject

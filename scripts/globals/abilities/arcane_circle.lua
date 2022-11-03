@@ -5,7 +5,7 @@
 -- Recast Time: 5:00 minutes
 -- Duration: 3:00 minutes
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dark_knight")
 -----------------------------------
 local abilityObject = {}
 
@@ -14,14 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local duration = 180 + player:getMod(xi.mod.ARCANE_CIRCLE_DURATION)
-    local power = 5
-
-    if player:getMainJob() == xi.job.DRK then
-        power = 15
-    end
-
-    target:addStatusEffect(xi.effect.ARCANE_CIRCLE, power, 0, duration)
+    return xi.job_utils.dark_knight.useArcaneCircle(player, target, ability)
 end
 
 return abilityObject
