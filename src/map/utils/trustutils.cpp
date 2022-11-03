@@ -356,6 +356,7 @@ namespace trustutils
         CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
         PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
+        PTrust->setBattleID(PMaster->getBattleID());
 
         if (PMaster->PBattlefield)
         {

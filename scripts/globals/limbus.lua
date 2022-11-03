@@ -326,6 +326,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
         for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
             local crate = GetEntityByID(crateID)
             xi.limbus.hideCrate(crate)
+            crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
             crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", utils.bind(self.handleOpenRecoverCrate, self))
         end
     end

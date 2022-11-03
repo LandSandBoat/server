@@ -562,6 +562,9 @@ public:
 
     void wakeUp(); // wakes target if necessary
 
+    void   setBattleID(uint16 battleID);
+    uint16 getBattleID();
+
     void recalculateStats();
     bool checkImbuedItems();
 
