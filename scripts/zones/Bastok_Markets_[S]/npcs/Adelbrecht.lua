@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 143 then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if player:getCharVar("Campaign_Nation") == 0 then
-            if (player:getFreeSlotsCount() >= 1) then
+            if player:getFreeSlotsCount() >= 1 then
                 player:setCampaignAllegiance(2)
                 player:setCharVar("BLUE_R_LETTER_USED", 0)
                 player:addTitle(xi.title.FOURTH_DIVISION_SOLDIER)

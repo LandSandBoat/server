@@ -19,7 +19,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     else
         if player:hasStatusEffect(xi.effect.TRANCE) then
             return 0, 0
-        elseif (player:getTP() < 100) then
+        elseif player:getTP() < 100 then
             return xi.msg.basic.NOT_ENOUGH_TP, 0
         else
             return 0, 0

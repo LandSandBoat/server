@@ -84,7 +84,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             elseif target:hasStatusEffect(xi.effect.BEWILDERED_DAZE_4) then
                 local duration = target:getStatusEffect(xi.effect.BEWILDERED_DAZE_4):getDuration()
                 target:delStatusEffectSilent(xi.effect.BEWILDERED_DAZE_4)
-                if (player:hasStatusEffect(xi.effect.PRESTO)) then
+                if player:hasStatusEffect(xi.effect.PRESTO) then
                     daze = 3
                 else
                     daze = 2

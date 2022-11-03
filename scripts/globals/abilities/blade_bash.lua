@@ -29,7 +29,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     local damage = 0
     if player:getMainJob() == xi.job.DRK then
         damage = math.floor(((player:getMainLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
-    elseif (player:getSubJob() == xi.job.DRK) then
+    elseif player:getSubJob() == xi.job.DRK then
         damage = math.floor(((player:getSubLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
     end
 
