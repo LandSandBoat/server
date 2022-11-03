@@ -20,7 +20,7 @@ itemObject.onItemUse = function(target)
         bonus = 39 -- (1/256 bonus buff per tier)
     end
     power = power + (bonus * tier)
-    if (target:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)) then
+    if target:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.SHELL)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

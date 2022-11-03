@@ -11,7 +11,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasKeyItem(xi.ki.VAHZL_GATE_CRYSTAL) == false) then
+    if target:hasKeyItem(xi.ki.VAHZL_GATE_CRYSTAL) == false then
         result = 445
     end
     return result

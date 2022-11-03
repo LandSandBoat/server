@@ -28,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if resist <= 0.125 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            if (target:getStatusEffect(xi.effect.BURN) ~= nil) then
+            if target:getStatusEffect(xi.effect.BURN) ~= nil then
                 target:delStatusEffect(xi.effect.BURN)
             end
             local sINT = caster:getStat(xi.mod.INT)
