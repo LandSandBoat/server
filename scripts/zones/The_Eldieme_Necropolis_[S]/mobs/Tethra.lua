@@ -4,7 +4,7 @@
 ------------------------------
 mixins =
 {
-	require("scripts/mixins/fomor_hate"),
+    require("scripts/mixins/fomor_hate"),
     require("scripts/mixins/job_special"),
     require("scripts/mixins/rage")
 }
@@ -26,7 +26,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- All Mods Here Are Assigned For Initial Difficulty Tuning
-	mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
     mob:addMod(xi.mod.STR, 40)
     mob:addMod(xi.mod.VIT, 20)
