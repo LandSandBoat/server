@@ -2158,12 +2158,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
                 }
-
-                if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
-                {
-                    // 1 ce for a missed attack for TH application
-                    ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
-                }
             }
         }
         else
@@ -2180,6 +2174,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             if (PTarget->objtype == TYPE_PC)
             {
                 charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+            }
+
+            if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
+            {
+                // 1 ce for a missed attack for TH application
+                ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
             }
         }
 
