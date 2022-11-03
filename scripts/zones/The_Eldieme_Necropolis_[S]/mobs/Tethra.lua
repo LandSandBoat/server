@@ -158,7 +158,7 @@ entity.onMobFight = function(mob, target)
     -- Job Ability Functions
     -- Retaliates With Instant Stone IV And Level Up If Targeted (https://ffxiclopedia.fandom.com/wiki/Tethra)
     -- Starts Level Up Sequence When Any Other Ability Is Used (https://ffxiclopedia.fandom.com/wiki/Tethra)
-    mob:addListener("PLAYER_ABILITY_USED", "TETHRA_PLAYER_ABILITY_USED", function(mobArg, player, ability, action, target)
+    mob:addListener("PLAYER_ABILITY_USED", "TETHRA_PLAYER_ABILITY_USED", function(mobArg, player, ability, action, targetArg)
         --Retaliate and Level Up
         if ability:getID() == (46) then
             mobArg:setLocalVar("TAbilityRetaliate", 1)
@@ -173,15 +173,15 @@ entity.onMobFight = function(mob, target)
     -- Magic Handling
     -- Mob Should Retaliate With Instant Cast Stone IV (https://ffxiclopedia.fandom.com/wiki/Tethra)
     -- Mob Should Have Little To No Enmity Control (https://ffxiclopedia.fandom.com/wiki/Tethra)
-    mob:addListener("MAGIC_TAKE", "TETHRA_MAGIC_TAKE", function(target, caster, spell)
+    mob:addListener("MAGIC_TAKE", "TETHRA_MAGIC_TAKE", function(targetArg, caster, spell)
         if
-            target:getAnimationSub() == 0 and
+            targetArg:getAnimationSub() == 0 and
             spell:tookEffect() and
             (caster:isPC() or caster:isPet())
         then
-            target:setLocalVar("TMagicRetaliate", 1)
-            target:addEnmity(caster, 1000, 1000)
-            target:setAnimationSub(1)
+            targetArg:setLocalVar("TMagicRetaliate", 1)
+            targetArg:addEnmity(caster, 1000, 1000)
+            targetArg:setAnimationSub(1)
         end
     end)
 
@@ -193,8 +193,8 @@ entity.onMobFight = function(mob, target)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_TAKE", "TETHRA_WEAPONSKILL_TAKE", function(target, attacker, skillid, tp, action)
-        target:addEnmity(attacker, 1000, 1000)
+    mob:addListener("WEAPONSKILL_TAKE", "TETHRA_WEAPONSKILL_TAKE", function(targetArg, attacker, skillid, tp, action)
+        targetArg:addEnmity(attacker, 1000, 1000)
     end)
 
 end
