@@ -344,7 +344,7 @@ void CTransportHandler::TransportTimer()
 
         if (zoneIterator->state == STATE_TRANSPORTZONE_VOYAGE)
         {
-            int    zoneOffset = 5;
+            int    zoneOffset = 3;
             ZONEID zoneId     = zoneIterator->voyageZone->GetID();
 
             if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
@@ -352,7 +352,7 @@ void CTransportHandler::TransportTimer()
                 zoneId == ZONE_SAN_DORIA_JEUNO_AIRSHIP ||
                 zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
             {
-                zoneOffset = -5;
+                zoneOffset = -3;
             }
 
             if (shipTimerOffset < zoneIterator->timeVoyageStart && shipTimerOffset > zoneIterator->timeArriveDock - zoneOffset)
@@ -384,7 +384,7 @@ void CTransportHandler::TransportTimer()
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES)
                 {
-                    zoneIterator->voyageZone->SetZoneAnimLength(915);
+                    zoneIterator->voyageZone->SetZoneAnimLength(940);
                 }
                 else if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                          zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||
@@ -392,7 +392,7 @@ void CTransportHandler::TransportTimer()
                          zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
                 {
                     uint32 hour = CVanaTime::getInstance()->getHour();
-                    zoneIterator->voyageZone->SetZoneAnimLength(288);
+                    zoneIterator->voyageZone->SetZoneAnimLength(310);
 
                     if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP && (hour == 1 || hour == 7 || hour == 13 || hour == 19))
                     {

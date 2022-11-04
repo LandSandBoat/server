@@ -2298,13 +2298,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',499,678);  -- Crystal Rain
 INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',499,679);  -- Crystal Weapon (Fire)
 INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,676); -- Ice Break
 INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,678); -- Crystal Rain
-INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,680); -- Crystal Weapon (Water)
+INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,681); -- Crystal Weapon (Water)
 INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,677);   -- Thunder Break
 INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,678);   -- Crystal Rain
-INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,681);   -- Crystal Weapon (Wind)
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,682);   -- Crystal Weapon (Wind)
 INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,677); -- Ice Break
 INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,678); -- Crystal Rain
-INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,682); -- Crystal Weapon (Earth)
+INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,680); -- Crystal Weapon (Earth)
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347); -- velocious blade
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419); -- scission thrust
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422); -- sonic blade

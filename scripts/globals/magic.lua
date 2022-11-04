@@ -716,6 +716,7 @@ end
 -- Returns resistance value from given magic hit rate (p)
 xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local evaMult = 1
+    local resMod = 0
 
     if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
         evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
@@ -729,42 +730,24 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
         end
     end
 
-    local sixteenthTrigger = false
     local eighthTrigger = false
     local quarterTrigger = false
-    local resMod = 0
 
-    if target and element and element ~= xi.magic.ele.NONE then
+    if element and element ~= xi.magic.ele.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
     end
 
-    local playerTriggerPoints =
+    local resTriggerPoints =
     {
-        resMod > 200,
-        resMod > 100,
+        resMod > 101,
         resMod >= 0,
     }
-    local mobTriggerPoints =
-    {
-        evaMult <= 0.50,
-        evaMult <= 0.80,
-        evaMult <= 1.00,
-    }
-    local selectedTable = mobTriggerPoints
 
-    if target and target:isPC() then
-        selectedTable = playerTriggerPoints
-    end
-
-    if playerTriggerPoints[1] then
-        sixteenthTrigger = true
-    end
-
-    if selectedTable[2] then
+    if resTriggerPoints[1] then
         eighthTrigger = true
     end
 
-    if selectedTable[3] then
+    if resTriggerPoints[2] then
         quarterTrigger = true
     end
 
@@ -784,13 +767,10 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
     local half      = (1 - p)
     local quart     = ((1 - p)^2)
     local eighth    = ((1 - p)^3)
-    local sixteenth = ((1 - p)^4)
     local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= sixteenth and sixteenthTrigger then
-        resist = 0.0625
-    elseif resvar <= eighth and eighthTrigger then
+    if resvar <= eighth and eighthTrigger then
         resist = 0.125
     elseif resvar <= quart and quarterTrigger then
         resist = 0.25
@@ -798,6 +778,10 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
         resist = 0.5
     else
         resist = 1.0
+    end
+
+    if evaMult <= 0.5 then
+        resist = resist / 2
     end
 
     return resist
