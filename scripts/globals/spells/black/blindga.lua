@@ -14,16 +14,16 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
 
     -- Pull base stats.
-    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND)) --blind uses caster INT vs target MND
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND) --blind uses caster INT vs target MND
 
     -- Base power.  May need more research.
     local power = math.floor(dINT * 9 / 40) + 23
 
-    if (power < 5) then
+    if power < 5 then
         power = 5
     end
 
-    if (power > 50) then
+    if power > 50 then
         power = 50
     end
 
@@ -37,7 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.BLINDNESS
     duration = duration * xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (duration >= 60) then --Do it!
+    if duration >= 60 then --Do it!
 
         local resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 

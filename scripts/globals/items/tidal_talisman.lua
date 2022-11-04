@@ -36,7 +36,7 @@ itemObject.onItemCheck = function(target)
 
     if
         teleportData[zoneId] and
-        target:isZoneVisited(teleportData[zoneId][5])
+        target:hasVisitedZone(teleportData[zoneId][5])
     then
         return 0
     end
@@ -75,7 +75,7 @@ itemObject.onItemUse = function(target)
     end
 
     if target:checkDistance(target:getXPos(), target:getYPos(), target:getZPos() <= 5) and not target:isInMogHouse() then -- I am within 5 yalms, teleport me.
-        if destZone == 0 or not target:isZoneVisited(destZone) then
+        if destZone == 0 or not target:hasVisitedZone(destZone) then
             return
         end
 

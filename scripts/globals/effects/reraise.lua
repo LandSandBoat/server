@@ -11,7 +11,7 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    if (target:getHP() <= 0) then
+    if target:getHP() <= 0 then
         target:sendReraise(effect:getPower())
     end
 end

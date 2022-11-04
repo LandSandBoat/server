@@ -13,10 +13,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:getRace() ~= xi.race.MITHRA) then
+    if target:getRace() ~= xi.race.MITHRA then
         result = xi.msg.basic.CANNOT_EAT
     end
-    if (target:getMod(xi.mod.EAT_RAW_FISH) == 1) then
+    if target:getMod(xi.mod.EAT_RAW_FISH) == 1 then
         result = 0
     end
     if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then

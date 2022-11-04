@@ -10,25 +10,25 @@ require("scripts/globals/pathfind")
 
 local escorts =
 {
-    [ID.mob.CERMET_ALCOVE_OFFSET] =
+    [ID.npc.CERMET_ALCOVE_OFFSET] =
     {
         ['limit'] = 5,
         ['spawn'] = { x = -260.000, y = -1.000, z = 423.000, rotation = 190 },
     },
 
-    [ID.mob.CERMET_ALCOVE_OFFSET + 1] =
+    [ID.npc.CERMET_ALCOVE_OFFSET + 1] =
     {
         ['limit'] = 30,
         ['spawn'] = { x = 797.000, y = -1.000, z = 460.000, rotation = 125 },
     },
 
-    [ID.mob.CERMET_ALCOVE_OFFSET + 2] =
+    [ID.npc.CERMET_ALCOVE_OFFSET + 2] =
     {
         ['limit'] = 30,
         ['spawn'] = { x = 540.000, y = -1.000, z = 297.000, rotation = 60 },
     },
 
-    [ID.mob.CERMET_ALCOVE_OFFSET + 3] =
+    [ID.npc.CERMET_ALCOVE_OFFSET + 3] =
     {
         ['limit'] = 40,
         ['spawn'] = { x = -540.000, y = -1.000, z = 297.000, rotation = 60 },

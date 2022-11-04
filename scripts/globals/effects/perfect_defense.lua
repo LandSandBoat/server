@@ -23,8 +23,8 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    if (effect:getTickCount() > ((effect:getDuration() / effect:getTick()) / 2)) then
-        if (effect:getPower() > 2) then
+    if effect:getTickCount() > ((effect:getDuration() / effect:getTick()) / 2) then
+        if effect:getPower() > 2 then
             effect:setPower(effect:getPower() - 200)
             target:delMod(xi.mod.UDMGPHYS, -200)
             target:delMod(xi.mod.UDMGBREATH, -200)

@@ -41,11 +41,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 12) then
+    if csid == 12 then
         player:addKeyItem(xi.ki.MIASMA_FILTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MIASMA_FILTER)
         player:setCharVar("[ENM]MiasmaFilter", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
-    elseif (csid == 13) then
+    elseif csid == 13 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1777) -- Flaxen Pouch
             return

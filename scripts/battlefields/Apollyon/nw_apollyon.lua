@@ -22,6 +22,7 @@ local content = Limbus:new({
     entryNpc         = '_127',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = "NW_APOLLYON",
+    timeExtension   = 5,
 })
 
 function content:onBattlefieldInitialise(battlefield)
@@ -36,7 +37,7 @@ function content:onBattlefieldInitialise(battlefield)
     end
 end
 
-local enpowerBoss = function(battlefield, mobs)
+local empowerBoss = function(battlefield, mobs)
     local boss = mobs[1]
     boss:addMod(xi.mod.ATTP, 100)
     boss:addMod(xi.mod.ACC, 50)
@@ -243,7 +244,7 @@ content.groups =
             [xi.mod.BINDRES] = -25,
         },
 
-        setup = enpowerBoss,
+        setup = empowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[1])
         end,
@@ -277,7 +278,7 @@ content.groups =
             [xi.mod.SLEEPRES] = -25,
         },
 
-        setup = enpowerBoss,
+        setup = empowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[2])
         end,
@@ -305,7 +306,7 @@ content.groups =
     {
         mobs = { "Millenary_Mossback" },
         stationary = true,
-        setup = enpowerBoss,
+        setup = empowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[3])
         end,
@@ -339,7 +340,7 @@ content.groups =
             [xi.mod.BINDRES] = -25,
         },
 
-        setup = enpowerBoss,
+        setup = empowerBoss,
         death = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NW_APOLLYON.npc.ITEM_CRATES[4])
         end,
@@ -373,7 +374,7 @@ content.groups =
             [xi.mobMod.SEVERE_SPELL_CHANCE] = 100,
         },
 
-        setup = enpowerBoss,
+        setup = empowerBoss,
         death = function(battlefield, mob, count)
             npcUtil.showCrate(GetNPCByID(ID.NW_APOLLYON.npc.LOOT_CRATE))
         end,

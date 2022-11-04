@@ -24,6 +24,7 @@ local content = Limbus:new({
     lossEventParams  = { [5] = 1 },
     name             = "NE_APOLLYON",
     exitLocation     = 1,
+    timeExtension   = 5,
 })
 
 function content:onBattlefieldInitialise(battlefield)

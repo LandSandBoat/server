@@ -1,6 +1,7 @@
 from .util import util
 
-SIZEOF_INT = 4 # 4-bytes
+SIZEOF_INT = 4  # 4-bytes
+# fmt: off
 DECOMPRESS_DAT_DATA = [
     364096164, 364096184, 364103244, 0, 0, 0, 364096664, 364096204, 364096164,
     0, 0, 364096444, 364096224, 364096184, 0, 0, 364096244, 364096284,
@@ -229,23 +230,25 @@ DECOMPRESS_DAT_DATA = [
     0, 364105904, 123, 0, 0, 0, 364099764, 124, 0, 0, 0, 364096884, 125, 0, 0,
     0, 364106204, 126, 0, 0, 0, 364104004, 127, 0
 ]
+# fmt: on
+
 
 class Decompress:
-    def __init__(self, read_decompress_dat_file = False):
+    def __init__(self, read_decompress_dat_file=False):
         data = []
         if read_decompress_dat_file:
-            with open('decompress.dat', 'rb') as dat_file:
+            with open("decompress.dat", "rb") as dat_file:
                 # Loop and read 4-bytes -> int at a time
                 read_data = dat_file.read(SIZEOF_INT)
                 while read_data:
-                    value = int.from_bytes(read_data, 'little')
+                    value = int.from_bytes(read_data, "little")
                     data.append(value)
                     # Read next int, maybe
                     read_data = dat_file.read(4)
         else:
             data = DECOMPRESS_DAT_DATA
 
-        base_slot = data[0] - SIZEOF_INT;
+        base_slot = data[0] - SIZEOF_INT
         jumps = [int] * len(data)
 
         for idx, entry in enumerate(data):
@@ -295,7 +298,6 @@ class Decompress:
         # Loop
         i = 0
         while i < size and w < 1750:
-
 
             # Loop itr
             i = i + 1

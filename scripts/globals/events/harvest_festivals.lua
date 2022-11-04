@@ -59,7 +59,7 @@ local function halloweenItemsCheck(player)
 
     while cnt ~= 0 do
         local picked = reward_list[math.random(1, #reward_list)]
-        if (player:hasItem(picked) == false) then
+        if player:hasItem(picked) == false then
             reward = picked
             cnt = 0
         else
