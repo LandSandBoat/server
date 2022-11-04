@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 --  NPC: Gustavo
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

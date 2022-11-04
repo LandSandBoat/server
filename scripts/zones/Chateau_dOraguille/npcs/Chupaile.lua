@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Chupaile
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

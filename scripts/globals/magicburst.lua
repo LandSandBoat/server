@@ -64,8 +64,8 @@ end
 function MobFormMagicBurst(element, target)
     local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
 
-    if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
-        if (doesMobSpellElementMatchResonance(element, resonance) == true) then
+    if resonance ~= nil and resonance:getTier() > 0 then -- Resonance exists, ignore it if its tier 0
+        if doesMobSpellElementMatchResonance(element, resonance) == true then
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance

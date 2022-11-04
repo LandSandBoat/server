@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Apollyon
--- Name: SE Apollyon
+-- Name: CS Apollyon
 -- !addkeyitem black_card
 -- !addkeyitem cosmo_cleanse
+-- !additem 2127
 -- !pos 600 -0.5 -600 38
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
@@ -23,6 +24,7 @@ local content = Limbus:new({
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.items.METAL_CHIP },
     name             = "CS_APOLLYON",
+    timeExtension   = 5,
 })
 
 function content:isValidEntry(player, npc)
@@ -99,7 +101,7 @@ end
 
 function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
     local group = boss:getLocalVar("supportGroup")
-    local offsets = group == 0 and supportOffsets or otherSupportOffsets
+    local offsets = group == 1 and supportOffsets or otherSupportOffsets
     local bossID = boss:getID()
 
     for _, offset in ipairs(offsets) do
@@ -114,7 +116,7 @@ function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
     local bossY = boss:getYPos()
     local bossZ = boss:getZPos()
 
-    offsets = group == 1 and supportOffsets or otherSupportOffsets
+    offsets = group == 0 and supportOffsets or otherSupportOffsets
     for _, offset in ipairs(offsets) do
         local support = GetMobByID(bossID + offset)
         support:setSpawn(bossX + math.random(-2, 2), bossY, bossZ + math.random(-2, 2))
@@ -177,7 +179,7 @@ content.groups =
         isParty = true,
         superlink = true,
         spawned = false,
-        setup = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK),
+        initialize = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK),
     },
 
     {
@@ -208,7 +210,7 @@ content.groups =
         isParty = true,
         superlink = true,
         spawned = false,
-        setup = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.NAQBA_CHIRURGEON),
+        initialize = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.NAQBA_CHIRURGEON),
     },
 
     {
@@ -239,7 +241,7 @@ content.groups =
         isParty = true,
         superlink = true,
         spawned = false,
-        setup = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR),
+        initialize = utils.bind(setupSharedHate, ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR),
     },
 
     {
@@ -248,6 +250,12 @@ content.groups =
             "Carnagechief_Jackbodokk",
             "NaQba_Chirurgeon",
             "Dee_Wapa_the_Desolator",
+        },
+
+        mobMods =
+        {
+            [xi.mobMod.SOUND_RANGE] = 10,
+            [xi.mobMod.DETECTION] = bit.bor(xi.detects.SIGHT, xi.detects.HEARING),
         },
 
         death = function(battlefield, mob, count)

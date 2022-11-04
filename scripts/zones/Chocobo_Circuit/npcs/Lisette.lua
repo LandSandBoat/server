@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Lisette
--- Standard Info NPC
 -- !pos -150.073 0.000 -377.292 70
 -----------------------------------
 local entity = {}

@@ -19,7 +19,7 @@ entity.onMobFight = function(mob)
 
     if mob:getBattleTime() - changeTime > randomTime then
         -- Change close to open.
-        if (mob:getAnimationSub() == 1) then
+        if mob:getAnimationSub() == 1 then
             mob:setAnimationSub(2)
         else -- Change from open to close
             mob:setAnimationSub(1)

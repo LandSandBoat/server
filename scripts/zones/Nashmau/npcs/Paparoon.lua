@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Paparoon
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/besieged")

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Aladoverre
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

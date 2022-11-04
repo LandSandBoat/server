@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Deigoff
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

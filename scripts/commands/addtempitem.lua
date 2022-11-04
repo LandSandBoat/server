@@ -18,17 +18,17 @@ function onTrigger(player, itemId, quantity)
     -- Load needed text ids for players current zone..
     local ID = zones[player:getZoneID()]
     -- validate itemId
-    if (itemId ~= nil) then
+    if itemId ~= nil then
         itemId = tonumber(itemId)
     end
-    if (itemId == nil or itemId == 0) then
+    if itemId == nil or itemId == 0 then
         error(player, "Invalid itemID.")
         return
     end
 
     -- validate quantity
     quantity = tonumber(quantity) or 1
-    if (quantity == nil or quantity < 1) then
+    if quantity == nil or quantity < 1 then
         error(player, "Invalid quantity.")
         return
     end

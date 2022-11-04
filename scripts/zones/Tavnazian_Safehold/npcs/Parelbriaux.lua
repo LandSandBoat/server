@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Parelbriaux
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

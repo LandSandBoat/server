@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Hildith
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

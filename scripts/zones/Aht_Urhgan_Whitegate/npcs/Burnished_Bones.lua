@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Burnished Bones
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

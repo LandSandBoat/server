@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 -- Gate: The Colosseum
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

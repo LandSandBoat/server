@@ -12,7 +12,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getPet() == nil) then
+    if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     end
 
@@ -22,14 +22,14 @@ end
 abilityObject.onUseAbility = function(player, target, ability, action)
     local pet = player:getPet()
 
-    if (not pet:hasPreventActionEffect()) then
+    if not pet:hasPreventActionEffect() then
       -- reduce tick speed based on level. but never less than 5 and never
       -- more than 10.  This seems to mimic retail.  There is no formula
       -- that I can find, but this seems close.
         local level = 0
-        if (player:getMainJob() == xi.job.BST) then
+        if player:getMainJob() == xi.job.BST then
             level = player:getMainLvl()
-        elseif (player:getSubJob() == xi.job.BST) then
+        elseif player:getSubJob() == xi.job.BST then
             level = player:getSubLvl()
         end
 

@@ -44,7 +44,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 680 then
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4732)
         else
             player:addTitle(xi.title.PILGRIM_TO_MEA)

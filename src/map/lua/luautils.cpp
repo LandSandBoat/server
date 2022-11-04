@@ -127,6 +127,7 @@ namespace luautils
         lua.set_function("GetZone", &luautils::GetZone);
         lua.set_function("GetNPCByID", &luautils::GetNPCByID);
         lua.set_function("GetMobByID", &luautils::GetMobByID);
+        lua.set_function("GetEntityByID", &luautils::GetEntityByID);
         lua.set_function("WeekUpdateConquest", &luautils::WeekUpdateConquest);
         lua.set_function("GetRegionOwner", &luautils::GetRegionOwner);
         lua.set_function("GetRegionInfluence", &luautils::GetRegionInfluence);
@@ -961,6 +962,36 @@ namespace luautils
         }
 
         return std::optional<CLuaBaseEntity>(PMob);
+    }
+
+    std::optional<CLuaBaseEntity> GetEntityByID(uint32 entityid, sol::object const& instanceObj)
+    {
+        TracyZoneScoped;
+
+        CInstance* PInstance = nullptr;
+        if (instanceObj.is<CLuaInstance>())
+        {
+            PInstance = instanceObj.as<CLuaInstance>().GetInstance();
+        }
+
+        CBaseEntity* PEntity{ nullptr };
+
+        if (PInstance)
+        {
+            PEntity = PInstance->GetEntity(entityid & 0xFFF, TYPE_MOB | TYPE_PET | TYPE_NPC);
+        }
+        else
+        {
+            PEntity = zoneutils::GetEntity(entityid, TYPE_MOB | TYPE_PET | TYPE_NPC);
+        }
+
+        if (!PEntity)
+        {
+            ShowWarning("luautils::GetEntityByID Mob doesn't exist (%d)", entityid);
+            return std::nullopt;
+        }
+
+        return std::optional<CLuaBaseEntity>(PEntity);
     }
 
     /************************************************************************
@@ -1960,9 +1991,22 @@ namespace luautils
             return 0;
         }
 
-        auto zone     = (const char*)PChar->loc.zone->GetName();
-        auto name     = (const char*)PNpc->GetName();
-        auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
+        auto        zone = (const char*)PChar->loc.zone->GetName();
+        auto        name = (const char*)PNpc->GetName();
+        std::string pathFormat;
+        switch (PNpc->objtype)
+        {
+            case TYPE_NPC:
+                pathFormat = "./scripts/zones/{}/npcs/{}.lua";
+                break;
+            case TYPE_MOB:
+                pathFormat = "./scripts/zones/{}/mobs/{}.lua";
+                break;
+            default:
+                // Should never hit this
+                XI_DEBUG_BREAK_IF(true);
+        }
+        auto filename = fmt::format(pathFormat, zone, name);
 
         PChar->eventPreparation->targetEntity = PNpc;
         PChar->eventPreparation->scriptFile   = filename;

@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
 
-    if (guildMember == 1) then
-        if (player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == false) then
+    if guildMember == 1 then
+        if player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == false then
             player:startEvent(630, skillCap, skillLevel, 2, 205, player:getGil(), 0, 90, 0)
         else
             player:startEvent(630, skillCap, skillLevel, 2, 205, player:getGil(), 7054, 90, 0)
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 630 and option == 1) then
+    if csid == 630 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 2, 2)
         player:addStatusEffect(xi.effect.SMITHING_IMAGERY, 1, 0, 120)
     end

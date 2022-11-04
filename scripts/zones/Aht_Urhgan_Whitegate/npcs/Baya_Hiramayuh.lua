@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Baya Hiramayuh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

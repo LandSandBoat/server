@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst-Jeuno Airship
 --  NPC: Mauricio
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
 -----------------------------------

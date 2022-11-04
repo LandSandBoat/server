@@ -2345,13 +2345,13 @@ auto CLuaBaseEntity::getZoneName() -> const char*
 }
 
 /************************************************************************
- *  Function: isZoneVisited()
+ *  Function: hasVisitedZone()
  *  Purpose : Returns true if a player has ever visited the zone
- *  Example : if not target:isZoneVisited(xi.zone.BIBIKI_BAY) then
+ *  Example : if not target:hasVisitedZone(xi.zone.BIBIKI_BAY) then
  *  Notes   : Mainly used for teleport items (like to Bibiki Bay)
  ************************************************************************/
 
-bool CLuaBaseEntity::isZoneVisited(uint16 zone)
+bool CLuaBaseEntity::hasVisitedZone(uint16 zone)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -9769,6 +9769,36 @@ void CLuaBaseEntity::wakeUp()
 }
 
 /************************************************************************
+ *  Function: setBattleID()
+ *  Purpose : Sets the battle ID on the entity. Only entities with the same battle ID can interact with each other.
+ *  Example : target:setBattleID(1)
+ *  Notes   : Default value for battle ID is 0.
+ ************************************************************************/
+
+void CLuaBaseEntity::setBattleID(uint16 battleID)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->setBattleID(battleID);
+}
+
+/************************************************************************
+ *  Function: getBattleID()
+ *  Purpose : Gets the battle ID on the entity
+ *  Example : target:getBattleID()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBattleID()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->getBattleID();
+}
+
+/************************************************************************
  *  Function: recalculateStats()
  *  Purpose : Recalculate the total Stats for a PC (force update)
  *  Example : target:recalculateStats()
@@ -14674,7 +14704,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getZone", CLuaBaseEntity::getZone);
     SOL_REGISTER("getZoneID", CLuaBaseEntity::getZoneID);
     SOL_REGISTER("getZoneName", CLuaBaseEntity::getZoneName);
-    SOL_REGISTER("isZoneVisited", CLuaBaseEntity::isZoneVisited);
+    SOL_REGISTER("hasVisitedZone", CLuaBaseEntity::hasVisitedZone);
     SOL_REGISTER("getPreviousZone", CLuaBaseEntity::getPreviousZone);
     SOL_REGISTER("getCurrentRegion", CLuaBaseEntity::getCurrentRegion);
     SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
@@ -15052,6 +15082,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("canChangeState", CLuaBaseEntity::canChangeState);
 
     SOL_REGISTER("wakeUp", CLuaBaseEntity::wakeUp);
+
+    SOL_REGISTER("setBattleID", CLuaBaseEntity::setBattleID);
+    SOL_REGISTER("getBattleID", CLuaBaseEntity::getBattleID);
 
     SOL_REGISTER("recalculateStats", CLuaBaseEntity::recalculateStats);
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);

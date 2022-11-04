@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Paito-Maito
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

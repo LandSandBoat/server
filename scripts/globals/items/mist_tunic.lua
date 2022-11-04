@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (not target:hasStatusEffect(xi.effect.EVASION_BOOST)) then
+    if not target:hasStatusEffect(xi.effect.EVASION_BOOST) then
         target:addStatusEffect(xi.effect.EVASION_BOOST, 20, 0, 180)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

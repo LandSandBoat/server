@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Pyopyoroon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

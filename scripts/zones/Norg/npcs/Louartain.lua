@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Louartain
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

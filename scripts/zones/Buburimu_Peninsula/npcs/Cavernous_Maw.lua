@@ -36,11 +36,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 62) then
+    if csid == 62 then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND)
-    elseif (csid == 63) then
+    elseif csid == 63 then
         -- Killed Itzpapalotl
-    elseif (csid == 61 and option == 1) then
+    elseif csid == 61 and option == 1 then
         player:setPos(-140, 20, -181, 131, 215)
     end
 end

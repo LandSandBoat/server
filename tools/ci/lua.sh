@@ -339,7 +339,7 @@ def check_tables_in_file(name):
                 print("")
                 errcount += 1
 
-            # .*\;$ : Any line that ends with a semi-colon
+            # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
             for match in re.finditer(".*\;$", line):
                 print(f"Semicolon detected at end of line: {name}:{counter}:{match.start() + 2}")
                 print(f"{lines[counter - 1].strip()}                              <-- HERE")

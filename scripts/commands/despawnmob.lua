@@ -26,7 +26,7 @@ function onTrigger(player, mobId)
         end
     else
         targ = GetMobByID(mobId)
-        if (targ == nil) then
+        if targ == nil then
             error(player, "Invalid mobID.")
             return
         end

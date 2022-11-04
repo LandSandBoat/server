@@ -32,7 +32,7 @@ function onTrigger(player, arg1, arg2)
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player:getCursorTarget()
         if (targ == nil or not targ:isMob()) then
             error(player, "You must either provide a mob ID or target a mob.")
@@ -40,7 +40,7 @@ function onTrigger(player, arg1, arg2)
         end
     else
         targ = GetMobByID(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, "Invalid mob ID.")
             return
         end

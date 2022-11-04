@@ -31,7 +31,7 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (targ == nil) then
+    if targ == nil then
         error(player, "You must either enter a valid npcID or target an NPC.")
         return
     end

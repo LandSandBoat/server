@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Hans
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, target)
     -- validate target
-    if (target == nil) then
+    if target == nil then
         error(player, "You must supply the name of an offline player.")
     else
         player:resetPlayer( target )

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Bodaway
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

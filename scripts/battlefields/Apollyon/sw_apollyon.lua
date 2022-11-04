@@ -22,6 +22,7 @@ local content = Limbus:new({
     entryNpc         = '_127',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     name             = "SW_APOLLYON",
+    timeExtension   = 10,
 })
 
 function content:onBattlefieldRegister(player, battlefield)
@@ -306,7 +307,9 @@ content.groups =
             local add = GetMobByID(addID)
             add:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
             SpawnMob(addID)
-            local target = mob:getTarget()
+
+            local enmityList = mob:getEnmityList()
+            local target = utils.randomEntry(enmityList)["entity"]
             if target ~= nil then
                 add:updateEnmity(target)
             end

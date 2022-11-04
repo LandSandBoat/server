@@ -12,7 +12,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(pet, target, skill, action)
-    if (target:delStatusEffect(xi.effect.PARALYSIS)) then
+    if target:delStatusEffect(xi.effect.PARALYSIS) then
         skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
     else
         skill:setMsg(xi.msg.basic.JA_NO_EFFECT)

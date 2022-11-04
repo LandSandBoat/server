@@ -171,7 +171,7 @@ public:
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
     auto   getZoneName() -> const char*;                                // Get Entity zone name
-    bool   isZoneVisited(uint16 zone);                                  // true если указанная зона посещалась персонажем ранее
+    bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
@@ -561,6 +561,9 @@ public:
     bool canChangeState();
 
     void wakeUp(); // wakes target if necessary
+
+    void   setBattleID(uint16 battleID);
+    uint16 getBattleID();
 
     void recalculateStats();
     bool checkImbuedItems();

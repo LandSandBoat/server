@@ -26,8 +26,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     local typeEffect = xi.effect.POISON
-    local power = (mob:getMainLvl() / 10)
-    if (power < 1 ) then
+    local power = mob:getMainLvl() / 10
+    if power < 1 then
         power = 1
     end
 

@@ -890,7 +890,6 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             end
         end
 
-        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -905,6 +904,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
 
     local targetTPMult = wsParams.targetTPMult or 1
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
+    action:param(defender:getID(), math.abs(finaldmg))
     local enmityEntity = wsResults.taChar or attacker
 
     if (wsParams.overrideCE and wsParams.overrideVE) then
@@ -976,7 +976,7 @@ function getHitRate(attacker, target, capHitRate, bonus)
 
     if attacker:getMainLvl() > target:getMainLvl() then              -- Accuracy Bonus
         acc = acc + ((attacker:getMainLvl()-target:getMainLvl()) * 4)
-    elseif (attacker:getMainLvl() < target:getMainLvl()) then        -- Accuracy Penalty
+    elseif attacker:getMainLvl() < target:getMainLvl() then        -- Accuracy Penalty
         acc = acc - ((target:getMainLvl()-attacker:getMainLvl()) * 4)
     end
 
