@@ -7,6 +7,7 @@
 require("scripts/globals/barge")
 -----------------------------------
 local entity = {}
+
 local eventId = 20
 local location = xi.barge.location.NORTH_LANDING
 

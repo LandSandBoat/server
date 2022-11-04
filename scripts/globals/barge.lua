@@ -71,8 +71,8 @@ local bargeSchedule =
     {
         { time =  960, act = act.ARRIVE_OOS, dest = dest.CENTRAL_LANDING }, -- 16:00 Arrive OOS (Confirmed)
         { time =  970, act = act.DEPART_OOS, dest = dest.CENTRAL_LANDING }, -- 16:10 Depart OOS (Confirmed)
-        { time = 1005, act = act.ARRIVE    , dest = dest.CENTRAL_LANDING }, -- 16:45 to Central (Confirmed)
-        { time = 1045, act = act.DEPART    , dest = dest.CENTRAL_LANDING }, -- 17:25 to Centrel (Confirmed)
+        { time = 1005, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING }, -- 16:45 to Central (Confirmed)
+        { time = 1045, act = act.DEPART,     dest = dest.CENTRAL_LANDING }, -- 17:25 to Central (Confirmed)
     },
     [xi.barge.location.CENTRAL_LANDING] =
     {
@@ -83,15 +83,14 @@ local bargeSchedule =
     },
     [xi.barge.location.SOUTH_LANDING] =
     {
-        { time =   15, act = act.ARRIVE ,    dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 from Central Landing - EMFEA (Confirmed)
-        { time =   50, act = act.DEPART ,    dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:50 to Central Landing - EMFEA (Confirmed)
+        { time =   15, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 from Central Landing - EMFEA (Confirmed)
+        { time =   50, act = act.DEPART,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:50 to Central Landing - EMFEA (Confirmed)
         { time =  535, act = act.ARRIVE_OOS, dest = dest.NORTH_LANDING         }, -- 08:55 Arrive OOS (Confirmed)
         { time =  545, act = act.DEPART_OOS, dest = dest.NORTH_LANDING         }, -- 09:05 Depart OOS (Confirmed)
-        { time =  575, act = act.ARRIVE ,    dest = dest.NORTH_LANDING         }, -- 09:35 Arrive from North Landing (Confirmed)
-        { time =  610, act = act.DEPART ,    dest = dest.NORTH_LANDING         }, -- 10:10 to North Landing - Main Canal (Confirmed)
+        { time =  575, act = act.ARRIVE,     dest = dest.NORTH_LANDING         }, -- 09:35 Arrive from North Landing (Confirmed)
+        { time =  610, act = act.DEPART,     dest = dest.NORTH_LANDING         }, -- 10:10 to North Landing - Main Canal (Confirmed)
         { time = 1415, act = act.ARRIVE_OOS, dest = dest.CENTRAL_LANDING_EMFEA }, -- 23:35 Arrive OOS (Confirmed)
         { time = 1425, act = act.DEPART_OOS, dest = dest.CENTRAL_LANDING_EMFEA }, -- 23:45 Depart OOS (Confirmed)
-
     },
     [xi.barge.location.BARGE] =
     {
@@ -106,8 +105,8 @@ local bargeSchedule =
 local bargeTable =
 {
     -- [xi.ki.ticketki] = {ticketVar, locationVar, validRegion1, validRegion2, validRegion3, invalidRegion1, invalidRegion2, invalidRegion3}
-    [xi.ki.BARGE_MULTI_TICKET] = { "Barrge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
-    [xi.ki.BARGE_TICKET] =       { "Barrge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+    [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+    [xi.ki.BARGE_TICKET] =       { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
 }
 
 -- Works 100%
