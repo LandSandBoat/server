@@ -14,10 +14,10 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-  if(mob:getFamily() == 91) then
+  if mob:getFamily() == 91 then
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1680) then
+    if mobSkin == 1680 then
         return 0
     else
         return 1
@@ -27,7 +27,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 1
     local accmod = 2
     local dmgmod = 3

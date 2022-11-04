@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:getItemCount() == 1 and trade:hasItemQty(571, 1)) then
+    if trade:getItemCount() == 1 and trade:hasItemQty(571, 1) then
         player:tradeComplete()
         player:addItem(570)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 570)

@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local multi = 2.90
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
     end
 

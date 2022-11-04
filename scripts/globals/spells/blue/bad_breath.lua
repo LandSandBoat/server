@@ -26,7 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     local multi = 2.08
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
     end
     params.attackType = xi.attackType.BREATH

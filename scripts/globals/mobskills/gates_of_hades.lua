@@ -16,10 +16,10 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-  if(mob:getFamily() == 316) then
+  if mob:getFamily() == 316 then
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1793) then
+    if mobSkin == 1793 then
         return 0
     else
         return 1
@@ -28,7 +28,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local result = 1
     local mobhp = mob:getHPP()
 
-    if (mobhp <= 25) then
+    if mobhp <= 25 then
         result = 0
     end
 
