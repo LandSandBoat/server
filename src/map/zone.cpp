@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -114,11 +114,12 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
  *                                                                       *
  ************************************************************************/
 
-CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
+CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
 , m_zoneType(ZONE_TYPE::NONE)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
+, m_levelRestriction(levelRestriction)
 {
     TracyZoneScoped;
     m_useNavMesh = false;
@@ -172,6 +173,11 @@ REGION_TYPE CZone::GetRegionID()
 CONTINENT_TYPE CZone::GetContinentID()
 {
     return m_continentID;
+}
+
+uint8 CZone::getLevelRestriction()
+{
+    return m_levelRestriction;
 }
 
 uint32 CZone::GetIP() const
