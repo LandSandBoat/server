@@ -23,7 +23,7 @@ function onTrigger(player, tp)
     end
 
     -- validate tp amount
-    if (tp == nil or tp < 0) then
+    if tp == nil or tp < 0 then
         error(player, "Invalid amount of tp.")
         return
     end

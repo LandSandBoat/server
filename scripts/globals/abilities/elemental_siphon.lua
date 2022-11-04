@@ -16,7 +16,7 @@ local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     local pet = player:getPetID()
-    if (pet >= 0 and pet <= 7) then -- spirits
+    if pet >= 0 and pet <= 7 then -- spirits
         return 0, 0
     else
         return xi.msg.basic.UNABLE_TO_USE_JA, 0
@@ -29,7 +29,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local pEquipMods = player:getMod(xi.mod.ENHANCES_ELEMENTAL_SIPHON)
     local basePower = player:getSkillLevel(xi.skill.SUMMONING_MAGIC) + pEquipMods - 50
-    if (basePower < 0) then
+    if basePower < 0 then
         basePower = 0
     end
     local weatherDayBonus = 1
@@ -37,19 +37,19 @@ abilityObject.onUseAbility = function(player, target, ability)
     local weather = player:getWeather()
 
     -- Day bonus/penalty
-    if (dayElement == xi.magic.dayStrong[spiritEle]) then
+    if dayElement == xi.magic.dayStrong[spiritEle] then
         weatherDayBonus = weatherDayBonus + 0.1
-    elseif (dayElement == xi.magic.dayWeak[spiritEle]) then
+    elseif dayElement == xi.magic.dayWeak[spiritEle] then
         weatherDayBonus = weatherDayBonus - 0.1
     end
     -- Weather bonus/penalty
-    if (weather == xi.magic.singleWeatherStrong[spiritEle]) then
+    if weather == xi.magic.singleWeatherStrong[spiritEle] then
         weatherDayBonus = weatherDayBonus + 0.1
-    elseif (weather == xi.magic.singleWeatherWeak[spiritEle]) then
+    elseif weather == xi.magic.singleWeatherWeak[spiritEle] then
         weatherDayBonus = weatherDayBonus - 0.1
-    elseif (weather == xi.magic.doubleWeatherStrong[spiritEle]) then
+    elseif weather == xi.magic.doubleWeatherStrong[spiritEle] then
         weatherDayBonus = weatherDayBonus + 0.25
-    elseif (weather == xi.magic.doubleWeatherWeak[spiritEle]) then
+    elseif weather == xi.magic.doubleWeatherWeak[spiritEle] then
         weatherDayBonus = weatherDayBonus - 0.25
     end
 

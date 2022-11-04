@@ -907,7 +907,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
     action:param(defender:getID(), math.abs(finaldmg))
     local enmityEntity = wsResults.taChar or attacker
 
-    if (wsParams.overrideCE and wsParams.overrideVE) then
+    if wsParams.overrideCE and wsParams.overrideVE then
         defender:addEnmity(enmityEntity, wsParams.overrideCE, wsParams.overrideVE)
     else
         local enmityMult = wsParams.enmityMult or 1

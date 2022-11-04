@@ -305,12 +305,12 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
-    if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
-        if (option == 1) then
+    if (csid == 11 or csid == 12 or csid == 13) and option ~= 0 then
+        if option == 1 then
             player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1)
-        elseif (option == 2) then
+        elseif option == 2 then
             player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4)
-        elseif (option == 3) then
+        elseif option == 3 then
             player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20)
         end
     end

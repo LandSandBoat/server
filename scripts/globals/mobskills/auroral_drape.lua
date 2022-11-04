@@ -26,9 +26,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display silenced first, else blind
-    if (silenced == xi.msg.basic.SKILL_ENFEEB_IS) then
+    if silenced == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.SILENCE
-    elseif (blinded == xi.msg.basic.SKILL_ENFEEB_IS) then
+    elseif blinded == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.BLINDNESS
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)

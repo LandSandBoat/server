@@ -69,7 +69,7 @@ zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
     -- holes in the sand
-    if (regionID >= 30) then
+    if regionID >= 30 then
         switch (regionID): caseof
         {
             [30] = function (x)

@@ -29,7 +29,7 @@ function onTrigger(player, target)
 
     -- homepoint target
     targ:warp()
-    if (targ:getID() ~= player:getID()) then
+    if targ:getID() ~= player:getID() then
         player:PrintToPlayer(string.format("Sent %s to their homepoint.", targ:getName()))
     end
 end

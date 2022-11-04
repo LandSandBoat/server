@@ -723,7 +723,7 @@ xi.addType =
 function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
-    if (msg == 158 or msg == 188 or msg == 31 or msg == 30) then
+    if msg == 158 or msg == 188 or msg == 31 or msg == 30 then
         return 0
     end
 
@@ -789,7 +789,7 @@ function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam,
 
     dmg = utils.stoneskin(target, dmg)
 
-    if (dmg > 0) then
+    if dmg > 0 then
         target:wakeUp()
         target:updateEnmityFromDamage(mob, dmg)
     end

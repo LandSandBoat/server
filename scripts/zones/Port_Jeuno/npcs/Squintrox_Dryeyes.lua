@@ -115,7 +115,7 @@ entity.onEventFinish = function(player, csid, option)
                 -- Doesn't seem to be a message for trying when you don't have the key items?
             end
         -- Blue coral Key
-        -- elseif (option == 101) then
+        -- elseif option == 101 then
         end
     end
 end

@@ -22,7 +22,7 @@ function onTrigger(player, logId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
-    if (logInfo == nil) then
+    if logInfo == nil then
         error(player, "Invalid logID.")
         return
     end
@@ -33,7 +33,7 @@ function onTrigger(player, logId, target)
     local targ
     if target == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else
@@ -47,7 +47,7 @@ function onTrigger(player, logId, target)
     -- report mission
     local currentMission = targ:getCurrentMission(logId)
 
-    if ((logId <= 3) and (currentMission == 65535)) then
+    if logId <= 3 and currentMission == 65535 then
         player:PrintToPlayer( string.format( "No current %s mission for %s.", logName, targ:getName() ) )
     else
         player:PrintToPlayer( string.format( "Current %s Mission ID is %s for %s.", logName, currentMission, targ:getName() ) )

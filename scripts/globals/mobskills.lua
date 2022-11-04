@@ -351,7 +351,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local avatarAccBonus = 0
     if mob:isPet() and mob:getMaster() ~= nil then
         local master = mob:getMaster()
-        if (master:getPetID() >= 0 and master:getPetID() <= 20) then -- check to ensure pet is avatar
+        if master:getPetID() >= 0 and master:getPetID() <= 20 then -- check to ensure pet is avatar
             avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
