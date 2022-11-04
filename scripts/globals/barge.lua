@@ -109,7 +109,6 @@ local bargeTable =
     [xi.ki.BARGE_TICKET] =       { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
 }
 
--- Works 100%
 xi.barge.timekeeperOnTrigger = function(player, location, eventId)
     if verbose then
         printf("INFO: [%i] [%i] in xi.barge.timekeeperOnTrigger, location, eventID")
@@ -231,89 +230,62 @@ xi.barge.onTransportEvent = function(player, transport)
 
 end
 
--- xi.barge.onTransportEvent = function(player, transport)
---     local ID = zones[player:getZoneID()]
---     local aboard = player:getCharVar("[barge]aboard")
---     local canride = false
+xi.barge.onTransportEvent = function(player, transport)
+    local ID = zones[player:getZoneID()]
+    local aboard = player:getCharVar("[barge]aboard")
+    local canride = false
 
---     if aboard > 0 then
---         if player:hasKeyItem(xi.ki.ALLYOUCANRIDEPASS) then
---             -- GM only KI
---             canride = true
---         elseif player:hasKeyItem(xi.ki.BARGE_TICKET) then
---             player:delKeyItem(xi.ki.BARGE_TICKET)
---             canride = true
---         elseif player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
---             local uses = player:getCharVar("Barge_Ticket")
+    if aboard > 0 then
+        if player:hasKeyItem(xi.ki.ALLYOUCANRIDEPASS) then
+            -- GM only KI
+            canride = true
+        elseif player:hasKeyItem(xi.ki.BARGE_TICKET) then
+            player:delKeyItem(xi.ki.BARGE_TICKET)
+            canride = true
+        elseif player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
+            local uses = player:getCharVar("Barge_Ticket")
 
---             if uses == 1 then
---                 player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.BARGE_MULTI_TICKET)
---                 player:delKeyItem(xi.ki.BARGE_MULTI_TICKET)
---             else
---                 player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.BARGE_MULTI_TICKET, uses - 1)
---             end
---             player:setCharVar("Barge_Ticket", uses - 1)
---             canride = true
---         else
---             canride = false
---         end
---     end
+            if uses == 1 then
+                player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.BARGE_MULTI_TICKET)
+                player:delKeyItem(xi.ki.BARGE_MULTI_TICKET)
+            else
+                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.BARGE_MULTI_TICKET, uses - 1)
+            end
+            player:setCharVar("Barge_Ticket", uses - 1)
+            canride = true
+        else
+            canride = false
+        end
+    end
 
--- --[[    if verbose then
---         printf("INFO: [%s] [%s] [%s] [%s] in xi.barge.onTransportEvent", player:getName(), aboard, tostring(canride), player:getCharVar("Barge_Ticket"))
---     end]]
+--[[    if verbose then
+        printf("INFO: [%s] [%s] [%s] [%s] in xi.barge.onTransportEvent", player:getName(), aboard, tostring(canride), player:getCharVar("Barge_Ticket"))
+    end]]
 
---     -- leaving North Landing. must be standing in region 1. must have a ticket.
---     if aboard == 1 then
---         if canride then
---             player:startEvent(16)
---         else
---             player:startEvent(34)
---         end
---         -- leaving South Landing. must be standing in region 2. must have a ticket.
---     elseif aboard == 2 then
---         if canride then
---             player:startEvent(14)
---         else
---             player:startEvent(33)
---         end
---         -- leaving Central Landing. must be standing in region 3. must have a ticket.
---     elseif aboard == 3 then
---         if canride then
---             player:startEvent(40)
---         else
---             player:startEvent(42)
---         end
---     end
+    -- leaving North Landing. must be standing in region 1. must have a ticket.
+    if aboard == 1 then
+        if canride then
+            player:startEvent(16)
+        else
+            player:startEvent(34)
+        end
+        -- leaving South Landing. must be standing in region 2. must have a ticket.
+    elseif aboard == 2 then
+        if canride then
+            player:startEvent(14)
+        else
+            player:startEvent(33)
+        end
+        -- leaving Central Landing. must be standing in region 3. must have a ticket.
+    elseif aboard == 3 then
+        if canride then
+            player:startEvent(40)
+        else
+            player:startEvent(42)
+        end
+    end
 
--- end
-
--- xi.barge.ticketshopOnTrigger = function(player, eventId)
---     local currentticket = player:getLocalVar("currentticket")
---     local gils = player:getGil()
---     local ticketsleft = player:getCharVar("Barge_Ticket")
-
---     local ticketVars = {z
---         [xi.ki.BARGE_TICKET] = 1,
---         [xi.ki.BARGE_MULTI_TICKET] = 2,
---     }
-
---     -- For loop   for _, ticket in pairs([ticketVars])
---     if player:hasKeyItem(xi.ki.BARGE_TICKET) then
---         player:setLocalVar("currentticket", 1)
---     end
-
---     if player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
---         player:setLocalVar("currentticket", 2)
---     end
-
---     if player:hasKeyItem(xi.ki.BARGE_TICKET) and player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
---         player:setLocalVar("currentticket", 3)
---     end
-
---     -- Params (KI1, KI2, Price of KI1, Price of KI2, Multiticket #s left, Which tickets does player have)
---     player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, ticketsleft, currentticket, 0, 4095)
--- end
+end
 
 xi.barge.ticketshopOnTrigger = function(player, eventId)
     local ticketInformation =

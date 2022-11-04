@@ -74,7 +74,7 @@ void Transport_Ship::setName(uint32 value) const
 
 void TransportZone_Town::updateShip() const
 {
-    this->ship.dock.zone->UpdateEntityPacket(this->ship.npc, ENTITY_UPDATE, UPDATE_COMBAT, true);
+    this->ship.dock.zone->UpdateEntityPacket(this->ship.npc, ENTITY_UPDATE, UPDATE_POS, true);
 }
 
 void TransportZone_Town::openDoor(bool sendPacket) const
@@ -163,7 +163,7 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.timeDepartDock  = zoneTown.ship.timeArriveDock + (uint16)sql->GetIntData(13);
             zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)sql->GetIntData(15) - 1;
 
-            zoneTown.ship.npc->animPath   = (uint8)sql->GetIntData(16);
+            zoneTown.ship.npc->animPath = (uint8)sql->GetIntData(16);
 
             zoneTown.ship.origin.p = zoneTown.ship.npc->loc.p;
             zoneTown.ship.state    = STATE_TRANSPORT_INIT;
@@ -249,13 +249,12 @@ void CTransportHandler::TransportTimer()
         {
             if (shipTimerOffset < townZone->ship.timeArriveDock)
             {
-                townZone->ship.state = STATE_TRANSPORT_ARRIVING;
-                townZone->ship.npc->animBegin = vanaTime;
+                townZone->ship.state          = STATE_TRANSPORT_ARRIVING;
+                townZone->ship.npc->animBegin = CVanaTime::getInstance()->getVanaTime();
                 townZone->ship.npc->animStart = true;
                 townZone->ship.animateSetup(townZone->ship.animationArrive, CVanaTime::getInstance()->getVanaTime());
                 townZone->ship.spawn();
-
-                townZone->updateShip();
+                townZone->ship.dock.zone->UpdateEntityPacket(townZone->ship.npc, ENTITY_SPAWN, UPDATE_POS, true);
             }
         }
         else if (townZone->ship.state == STATE_TRANSPORT_ARRIVING)
@@ -272,20 +271,25 @@ void CTransportHandler::TransportTimer()
             if (shipTimerOffset >= townZone->ship.timeDepartDock)
             {
                 townZone->ship.state          = STATE_TRANSPORT_DEPARTING;
-                townZone->ship.npc->animBegin = vanaTime;
+                townZone->ship.npc->animBegin = CVanaTime::getInstance()->getVanaTime();
                 townZone->ship.npc->animStart = true;
                 townZone->ship.animateSetup(townZone->ship.animationDepart, CVanaTime::getInstance()->getVanaTime());
 
                 townZone->closeDoor(true);
                 townZone->depart();
-                townZone->updateShip();
             }
+            else
+            {
+                townZone->ship.npc->animation = 0;
+            }
+            townZone->updateShip();
+            townZone->ship.dock.zone->UpdateEntityPacket(townZone->ship.npc, ENTITY_SPAWN, UPDATE_POS, true);
         }
         else if (townZone->ship.state == STATE_TRANSPORT_DEPARTING)
         {
             if (shipTimerOffset >= townZone->ship.timeVoyageStart)
             {
-                townZone->ship.state = STATE_TRANSPORT_AWAY;
+                townZone->ship.state    = STATE_TRANSPORT_AWAY;
                 townZone->ship.npc->loc = townZone->ship.origin;
                 townZone->ship.setVisible(false);
 
@@ -300,9 +304,9 @@ void CTransportHandler::TransportTimer()
             }
             else if (shipTimerOffset >= townZone->ship.timeDepartDock)
             {
-                uint32 departTime    = shipTimerOffset - townZone->ship.timeDepartDock;
-                townZone->ship.state = STATE_TRANSPORT_DEPARTING;
-                townZone->ship.npc->animBegin = vanaTime;
+                uint32 departTime             = shipTimerOffset - townZone->ship.timeDepartDock;
+                townZone->ship.state          = STATE_TRANSPORT_DEPARTING;
+                townZone->ship.npc->animBegin = CVanaTime::getInstance()->getVanaTime();
                 townZone->ship.npc->animStart = true;
                 townZone->ship.spawn();
                 townZone->ship.animateSetup(townZone->ship.animationDepart, (uint32)(CVanaTime::getInstance()->getVanaTime() - departTime * 2.4));
@@ -311,6 +315,7 @@ void CTransportHandler::TransportTimer()
             {
                 townZone->ship.state = STATE_TRANSPORT_DOCKED;
                 townZone->openDoor(false);
+                townZone->ship.npc->animBegin = CVanaTime::getInstance()->getVanaTime();
                 townZone->ship.spawn();
                 townZone->ship.animateSetup(townZone->ship.animationArrive, (uint32)(CVanaTime::getInstance()->getVanaTime() - shipTimerOffset * 2.4));
             }
@@ -318,7 +323,7 @@ void CTransportHandler::TransportTimer()
             {
                 townZone->ship.state = STATE_TRANSPORT_ARRIVING;
 
-                townZone->ship.npc->animBegin = vanaTime;
+                townZone->ship.npc->animBegin = CVanaTime::getInstance()->getVanaTime();
                 townZone->ship.npc->animStart = true;
                 townZone->ship.spawn();
                 townZone->ship.animateSetup(townZone->ship.animationArrive, (uint32)(CVanaTime::getInstance()->getVanaTime() - shipTimerOffset * 2.4));
@@ -339,16 +344,15 @@ void CTransportHandler::TransportTimer()
 
         if (zoneIterator->state == STATE_TRANSPORTZONE_VOYAGE)
         {
-
-            int zoneOffset = 5;
-            ZONEID zoneId = zoneIterator->voyageZone->GetID();
+            int    zoneOffset = 3;
+            ZONEID zoneId     = zoneIterator->voyageZone->GetID();
 
             if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                 zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||
                 zoneId == ZONE_SAN_DORIA_JEUNO_AIRSHIP ||
                 zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
             {
-                zoneOffset = -5;
+                zoneOffset = -3;
             }
 
             if (shipTimerOffset < zoneIterator->timeVoyageStart && shipTimerOffset > zoneIterator->timeArriveDock - zoneOffset)
@@ -380,7 +384,7 @@ void CTransportHandler::TransportTimer()
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES)
                 {
-                    zoneIterator->voyageZone->SetZoneAnimLength(915);
+                    zoneIterator->voyageZone->SetZoneAnimLength(940);
                 }
                 else if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                          zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||
@@ -388,7 +392,7 @@ void CTransportHandler::TransportTimer()
                          zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
                 {
                     uint32 hour = CVanaTime::getInstance()->getHour();
-                    zoneIterator->voyageZone->SetZoneAnimLength(288);
+                    zoneIterator->voyageZone->SetZoneAnimLength(310);
 
                     if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP && (hour == 1 || hour == 7 || hour == 13 || hour == 19))
                     {
@@ -409,6 +413,33 @@ void CTransportHandler::TransportTimer()
                     else
                     {
                         zoneIterator->voyageZone->SetZoneDirection(0);
+                    }
+                }
+                else if (zoneId == ZONE_MANACLIPPER)
+                {
+                    uint32 hour = CVanaTime::getInstance()->getHour();
+                    switch (hour)
+                    {
+                        case 0:
+                            zoneIterator->voyageZone->SetZoneAnimation(0);
+                            zoneIterator->voyageZone->SetZoneAnimLength(590);
+                            break;
+                        case 4:
+                            [[fallthrough]];
+                        case 16:
+                            zoneIterator->voyageZone->SetZoneAnimation(16);
+                            zoneIterator->voyageZone->SetZoneAnimLength(445);
+                            break;
+                        case 8:
+                            [[fallthrough]];
+                        case 20:
+                            zoneIterator->voyageZone->SetZoneAnimation(24);
+                            zoneIterator->voyageZone->SetZoneAnimLength(445);
+                            break;
+                        case 12:
+                            zoneIterator->voyageZone->SetZoneAnimation(8);
+                            zoneIterator->voyageZone->SetZoneAnimLength(590);
+                            break;
                     }
                 }
             }
