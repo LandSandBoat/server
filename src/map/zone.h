@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -580,8 +580,9 @@ public:
     virtual void DeletePET(CBaseEntity* PPet); // derefs the pet's ID from this zone
     virtual void DeleteTRUST(CBaseEntity* PTrust);
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity);         // ищем группу для монстра
-    virtual void TransportDepart(uint16 boundary, uint16 zone); // транспотр отправляется, необходимо собрать пассажиров
+    virtual void FindPartyForMob(CBaseEntity* PEntity);          // ищем группу для монстра
+    virtual void TransportDepart(uint16 boundary, uint16 zone);  // транспотр отправляется, необходимо собрать пассажиров
+    virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction it applies the zone's after removing it.
 
     void InsertRegion(CRegion* Region); // добавляем в зону активную область
 

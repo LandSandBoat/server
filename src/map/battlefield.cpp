@@ -294,6 +294,11 @@ bool CBattlefield::isInteraction() const
     return m_isInteraction;
 }
 
+bool CBattlefield::isEntered(CCharEntity* PChar) const
+{
+    return m_EnteredPlayers.find(PChar->id) != m_EnteredPlayers.end();
+}
+
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
 {
     if (PEntity == nullptr)
@@ -508,10 +513,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         {
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
         }
-        if (m_LevelCap)
-        {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-        }
+
+        m_Zone->updateCharLevelRestriction(PChar);
 
         if (PChar->isDead())
         {
@@ -732,7 +735,7 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            m_Zone->updateCharLevelRestriction(PChar);
 
             if (PChar->PPet)
             {
