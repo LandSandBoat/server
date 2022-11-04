@@ -11,18 +11,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local DM = player:getDominionNotes()
-    local Trophies = 0 -- Max all Trophy = 4294967295 sort out its bit mask later.
-    player:startEvent(120, DM, 0, 0, 0, 0, Trophies)
+    local DM = player:getCurrency("dominion_note")
+    local trophies = 0 -- Max all Trophy = 4294967295 sort out its bit mask later.
+    player:startEvent(120, DM, 0, 0, 0, 0, trophies)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Price = 0
-    local TempItem = false
-    local ItemID = 0
+    local price = 0
+    local tempItem = false
+    local itemId = 0
     -- local aug1 = 0
     -- local aug2 = 0
     -- local aug3 = 0
@@ -38,88 +38,88 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Spending Dominion Notes
     if option == 257 then -- Unkai Domaru
-        Price = 1500
-        ItemID = 12039
+        price = 1500
+        itemId = 12039
     elseif option == 258 then -- Petrify Screen
-        Price = 300
-        TempItem = true
-        ItemID = 5876
+        price = 300
+        tempItem = true
+        itemId = 5876
     elseif option == 259 then -- Augmented Yataghan
-        Price = 2500
-        ItemID = 16485
+        price = 2500
+        itemId = 16485
         -- Work out augment selection via math.random
         -- (see Lower Jeuno Tenshodo Coffer script)
     elseif option == 513 then -- Inga Ningi
-        Price = 1500
-        ItemID = 12040
+        price = 1500
+        itemId = 12040
     elseif option == 514 then -- Terror Screen
-        Price = 300
-        TempItem = true
-        ItemID = 5877
+        price = 300
+        tempItem = true
+        itemId = 5877
     elseif option == 515 then -- Augmented Doom Tabar
-        Price = 2500
-        ItemID = 16660
+        price = 2500
+        itemId = 16660
         -- Augment here
     elseif option == 769 then -- Lancer's Plackart
-        Price = 1500
-        ItemID = 12041
+        price = 1500
+        itemId = 12041
     elseif option == 770 then -- Amnesia Screen
-        Price = 300
-        TempItem = true
-        ItemID = 5878
+        price = 300
+        tempItem = true
+        itemId = 5878
     elseif option == 771 then -- Augmented Yukitsugu
-        Price = 2500
-        ItemID = 16971
+        price = 2500
+        itemId = 16971
         -- Augment here
     elseif option == 1025 then -- Caller's Doublet
-        Price = 1500
-        ItemID = 12042
+        price = 1500
+        itemId = 12042
     elseif option == 1026 then -- Doom Screen
-        Price = 300
-        TempItem = true
-        ItemID = 5879
+        price = 300
+        tempItem = true
+        itemId = 5879
     elseif option == 1281 then -- Mavi Mintan
-        Price = 1500
-        ItemID = 12043
+        price = 1500
+        itemId = 12043
     elseif option == 1282 then -- Poison Screen
-        Price = 300
-        TempItem = true
-        ItemID = 5880
+        price = 300
+        tempItem = true
+        itemId = 5880
     elseif option == 1537 then -- Navarch's Frac
-        Price = 1500
-        ItemID = 12044
+        price = 1500
+        itemId = 12044
     elseif option == 1793 then -- Cirque Farsetto
-        Price = 1500
-        ItemID = 12045
+        price = 1500
+        itemId = 12045
     elseif option == 2049 then -- Charis Casaque
-        Price = 1500
-        ItemID = 12046
+        price = 1500
+        itemId = 12046
     elseif option == 2305 then -- Savant's Gown
-        Price = 1500
-        ItemID = 12047
+        price = 1500
+        itemId = 12047
     elseif option == 2561 then -- Incredescent Shade
-        Price = 300
-        ItemID = 3295
+        price = 300
+        itemId = 3295
     elseif option == 2817 then -- Decredescent Shade
-        Price = 300
-        ItemID = 3296
+        price = 300
+        itemId = 3296
     end
 
     if option > 256 and option < 2818 then
-        if player:getDominionNotes() > Price then
-            if TempItem then
-                if player:addTempItem(ItemID, 1) then
-                    player:delCurrency("dominion_note", Price)
-                    player:messageSpecial(ID.text.ITEM_OBTAINED, ItemID)
+        if player:getCurrency("dominion_note") > price then
+            if tempItem then
+                if player:addTempItem(itemId, 1) then
+                    player:delCurrency("dominion_note", price)
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
                 else
-                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ItemID)
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, itemId)
                 end
             else
-                if player:addItem(ItemID, 1, a1, v1, a2, v2, a3, v3, a4, v4) then
-                    player:delCurrency("dominion_note", Price)
-                    player:messageSpecial(ID.text.ITEM_OBTAINED, ItemID)
+                if player:addItem(itemId, 1, a1, v1, a2, v2, a3, v3, a4, v4) then
+                    player:delCurrency("dominion_note", price)
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
                 else
-                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ItemID)
+                    player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, itemId)
                 end
             end
         end
