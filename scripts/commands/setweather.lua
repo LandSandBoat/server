@@ -18,12 +18,12 @@ end
 
 function onTrigger(player, weather)
     -- validate weather
-    if (weather == nil) then
+    if weather == nil then
         error(player, "You must supply a weather ID.")
         return
     end
     weather = tonumber(weather) or xi.weather[string.upper(weather)]
-    if (weather == nil or weather < 0 or weather > 19) then
+    if weather == nil or weather < 0 or weather > 19 then
         error(player, "Invalid weather ID.")
         return
     end

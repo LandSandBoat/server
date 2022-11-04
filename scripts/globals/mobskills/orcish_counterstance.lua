@@ -10,7 +10,7 @@ require("scripts/globals/zone")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getContinentID() == xi.continent.THE_SHADOWREIGN_ERA) then
+    if mob:getContinentID() == xi.continent.THE_SHADOWREIGN_ERA then
         return 0
     else
         return 1

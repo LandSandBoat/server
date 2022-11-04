@@ -11,7 +11,7 @@ cmdprops =
 
 function onTrigger(player)
     local pet = player:getPet()
-    if (pet and pet:getLocalVar("GodMode") == 0) then
+    if pet and pet:getLocalVar("GodMode") == 0 then
         -- Toggle GodMode on..
         pet:setLocalVar("GodMode", 1)
 

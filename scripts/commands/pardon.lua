@@ -22,7 +22,7 @@ function onTrigger(player, target)
         return
     end
 
-    if (targ:getCharVar( 'inJail' ) >= 1) then
+    if targ:getCharVar( 'inJail' ) >= 1 then
         local message = string.format( '%s is pardoning %s from jail.', player:getName(), targ:getName() )
         printf( message )
 

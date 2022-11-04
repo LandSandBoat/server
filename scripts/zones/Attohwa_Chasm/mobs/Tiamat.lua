@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
 
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
     if mob:getHP() < ((mob:getMaxHP() / 10) * 2.5) then
-        if (mob:hasStatusEffect(xi.effect.ATTACK_BOOST) == false) then
+        if mob:hasStatusEffect(xi.effect.ATTACK_BOOST) == false then
             mob:addStatusEffect(xi.effect.ATTACK_BOOST, 75, 0, 0)
             mob:getStatusEffect(xi.effect.ATTACK_BOOST):setFlag(xi.effectFlag.DEATH)
         end

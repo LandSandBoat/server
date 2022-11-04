@@ -14,10 +14,10 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-  if (mob:getFamily() == 91) then
+  if mob:getFamily() == 91 then
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1680) then
+    if mobSkin == 1680 then
         return 0
     else
         return 1

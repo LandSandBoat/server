@@ -22,10 +22,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dis1 = target:dispelStatusEffect()
     local dis2 = target:dispelStatusEffect()
 
-    if (dis1 ~= xi.effect.NONE and dis2 ~= xi.effect.NONE) then
+    if dis1 ~= xi.effect.NONE and dis2 ~= xi.effect.NONE then
         skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
         return 2
-    elseif (dis1 ~= xi.effect.NONE or dis2 ~= xi.effect.NONE) then
+    elseif dis1 ~= xi.effect.NONE or dis2 ~= xi.effect.NONE then
         -- dispeled only one
         skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
         return 1

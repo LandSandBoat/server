@@ -60,7 +60,7 @@ entity.onEventFinish = function(player, csid, option)
     local medalRank = xi.campaign.getMedalRank(player)
     if csid == 110 then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
-        if (option >= 2 and option <= 2306) then -- player bought item
+        if option >= 2 and option <= 2306 then -- player bought item
             local item, price, adj = xi.campaign.getSandOriaNotesItem(option)
             --if player is allied with Sandy, they get adjusted price on most items
             if player:getCampaignAllegiance() == 1 and adj ~= nil then

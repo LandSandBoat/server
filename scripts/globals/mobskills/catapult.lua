@@ -10,7 +10,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Ranged attack only used when target is out of range
-    if (mob:checkDistance(target) > 2) then
+    if mob:checkDistance(target) > 2 then
         return 0
     else
         return 1
@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
-    if (dmg > 0) then
+    if dmg > 0 then
        target:addTP(20)
        mob:addTP(80)
     end

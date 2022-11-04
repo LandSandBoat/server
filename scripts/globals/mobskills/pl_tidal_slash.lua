@@ -18,7 +18,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1643) then
+    if mobSkin == 1643 then
         return 0
     else
         return 1

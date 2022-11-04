@@ -17,14 +17,13 @@ function error(player, msg)
 end
 
 function onTrigger(player, titleId, target)
-
     -- validate titleId
-    if (titleId == nil) then
+    if titleId == nil then
         error(player, "You must supply a title ID.")
         return
     end
     titleId = tonumber(titleId) or xi.title[string.upper(titleId)]
-    if (titleId == nil or titleId < 1) then
+    if titleId == nil or titleId < 1 then
         error(player, "Invalid title ID.")
         return
     end

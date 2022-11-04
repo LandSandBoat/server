@@ -29,10 +29,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local constant = -6
     local power = getCurePowerOld(caster)
 
-    if (power > 99) then
+    if power > 99 then
         divisor = 57
         constant = 33.125
-    elseif (power > 59) then
+    elseif power > 59 then
         divisor =  2
         constant = 9
     end
@@ -41,18 +41,18 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
+    if target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB) then
         --Applying server mods
         final = final * xi.settings.main.CURE_POWER
     end
 
     local diff = (target:getMaxHP() - target:getHP())
-    if (final > diff) then
+    if final > diff then
         final = diff
     end
     target:addHP(final)
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
+    if target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB) then
         caster:updateEnmityFromCure(target, final)
     end
     spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)

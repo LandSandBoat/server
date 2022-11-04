@@ -286,7 +286,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
         bonus = 0
     end
 
-    if (target:hasStatusEffect(xi.effect.YONIN) and target:isFacing(attacker, 23)) then -- Yonin evasion boost if defender is facing attacker
+    if target:hasStatusEffect(xi.effect.YONIN) and target:isFacing(attacker, 23) then -- Yonin evasion boost if defender is facing attacker
         bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
@@ -907,7 +907,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
     action:param(defender:getID(), math.abs(finaldmg))
     local enmityEntity = wsResults.taChar or attacker
 
-    if (wsParams.overrideCE and wsParams.overrideVE) then
+    if wsParams.overrideCE and wsParams.overrideVE then
         defender:addEnmity(enmityEntity, wsParams.overrideCE, wsParams.overrideVE)
     else
         local enmityMult = wsParams.enmityMult or 1

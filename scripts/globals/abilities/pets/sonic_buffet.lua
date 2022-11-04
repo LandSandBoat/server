@@ -31,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, petskill)
     target:updateEnmityFromDamage(pet, damage)
 
     local resist = applyResistanceAbility(pet, target, xi.magic.ele.WIND, xi.skill.NONE, 0) -- Does this get bonus macc from SMN skill?
-    if (resist > 0.0625) then -- Is there _any_ circumstance wherein a dispel adds a message? Based on testing it seems the ability is magic damage only visibly.
+    if resist > 0.0625 then -- Is there _any_ circumstance wherein a dispel adds a message? Based on testing it seems the ability is magic damage only visibly.
         target:dispelStatusEffect()
     end
 

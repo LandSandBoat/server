@@ -17,7 +17,7 @@ end
 
 function onTrigger(player, mentorMode, target)
     -- validate mode
-    if (mentorMode == nil or mentorMode < 0 or mentorMode > 1) then
+    if mentorMode == nil or mentorMode < 0 or mentorMode > 1 then
         error(player, "Invalid mode.")
         return
     end

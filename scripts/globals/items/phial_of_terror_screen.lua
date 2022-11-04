@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if (target:hasStatusEffect(xi.effect.NEGATE_TERROR)) then
+    if target:hasStatusEffect(xi.effect.NEGATE_TERROR) then
         return 56
     end
     return 0

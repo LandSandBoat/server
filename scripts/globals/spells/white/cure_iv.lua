@@ -131,7 +131,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if (mpBonusPercent > 0) then
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 

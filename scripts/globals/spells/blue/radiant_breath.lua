@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local multi = 2.90
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
     end
 
@@ -51,13 +51,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (damage > 0 and resist > 0.3) then
+    if damage > 0 and resist > 0.3 then
     local typeEffect = xi.effect.SLOW
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 3500, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
-    if (damage > 0 and resist > 0.3) then
+    if damage > 0 and resist > 0.3 then
         target:delStatusEffect(xi.effect.SILENCE)
         target:addStatusEffect(xi.effect.SILENCE, 25, 0, getBlueEffectDuration(caster, resist, xi.effect.SILENCE))
     end

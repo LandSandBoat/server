@@ -68,7 +68,7 @@ function onTrigger(player, mobId, noDepop)
         if player:getZoneID() == targ:getZoneID() then
             targ:setPos( player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID() )
         else
-            if (noDepop == nil or noDepop == 0) then
+            if noDepop == nil or noDepop == 0 then
                 DespawnMob( mobId )
                 player:PrintToPlayer("Despawned the mob because of an error.")
             end

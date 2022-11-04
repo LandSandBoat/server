@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, visualstring)
     -- validate visualstring
-    if (visualstring == nil) then
+    if visualstring == nil then
         error(player, "You must enter a valid animation string.")
         return
     end

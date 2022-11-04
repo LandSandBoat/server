@@ -29,25 +29,25 @@ spellObject.onSpellCast = function(caster, target, spell)
     local constant = -45
     local power = getCurePowerOld(caster)
 
-    if (power > 459) then
+    if power > 459 then
         divisor = 6.5
         constant = 144.6666
-    elseif (power > 219) then
+    elseif power > 219 then
         divisor =  2
         constant = 65
     end
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
-    local diff = (target:getMaxHP() - target:getHP())
+    local diff = target:getMaxHP() - target:getHP()
 
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
-    if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
+    if target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB) then
         --Applying server mods
         final = final * xi.settings.main.CURE_POWER
     end
 
-    if (final > diff) then
+    if final > diff then
         final = diff
     end
 

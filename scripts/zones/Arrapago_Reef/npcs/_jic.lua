@@ -16,11 +16,11 @@ end
 entity.onTrigger = function(player, npc)
     -- TODO: Fix, implement & balance Assault
     --[[
-    if (player:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS)) then
+    if player:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS) then
         local assaultid = player:getCurrentAssault()
         local recommendedLevel = getRecommendedAssaultLevel(assaultid)
         local armband = 0
-        if (player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)) then
+        if player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) then
             armband = 1
         end
         player:startEvent(219, assaultid, -4, 0, recommendedLevel, 4, armband)

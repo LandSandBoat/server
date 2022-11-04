@@ -14,7 +14,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     if target:getStatusEffect(xi.effect.FROST) ~= nil then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
@@ -29,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if resist <= 0.125 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            if (target:getStatusEffect(xi.effect.RASP) ~= nil) then
+            if target:getStatusEffect(xi.effect.RASP) ~= nil then
                 target:delStatusEffect(xi.effect.RASP)
             end
             local sINT = caster:getStat(xi.mod.INT)

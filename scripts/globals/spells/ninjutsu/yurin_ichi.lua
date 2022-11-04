@@ -27,14 +27,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = 10
 
     --Calculates Resist Chance
-    if (resist >= 0.125) then
+    if resist >= 0.125 then
         local duration = 180 * resist
 
-        if (duration >= 50) then
+        if duration >= 50 then
             -- Erases a weaker inhibit tp and applies the stronger one
             local inhibit_tp = target:getStatusEffect(effect)
-            if (inhibit_tp ~= nil) then
-                if (inhibit_tp:getPower() < power) then
+            if inhibit_tp ~= nil then
+                if inhibit_tp:getPower() < power then
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)

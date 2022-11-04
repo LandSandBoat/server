@@ -19,12 +19,12 @@ end
 function onTrigger(player, keyId, target)
 
     -- validate key item id
-    if (keyId == nil) then
+    if keyId == nil then
         error(player, "You must supply a key item ID.")
         return
     end
     keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
-    if (keyId == nil or keyId < 1) then
+    if keyId == nil or keyId < 1 then
         error(player, "Invalid Key Item ID.")
         return
     end
@@ -42,7 +42,7 @@ function onTrigger(player, keyId, target)
     end
 
     -- delete key item from target
-    if (targ:hasKeyItem(keyId)) then
+    if targ:hasKeyItem(keyId) then
         local ID = zones[targ:getZoneID()]
         targ:delKeyItem( keyId )
         targ:messageSpecial(ID.text.KEYITEM_OBTAINED + 1, keyId)

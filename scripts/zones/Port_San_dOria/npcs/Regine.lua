@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- FLYERS FOR REGINE
     if flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, { { "gil", 10 } }) then
-        if (npcUtil.giveItem(player, xi.items.MAGICMART_FLYER)) then
+        if npcUtil.giveItem(player, xi.items.MAGICMART_FLYER) then
             player:confirmTrade()
         end
 

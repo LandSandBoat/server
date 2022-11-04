@@ -20,7 +20,7 @@ itemObject.onItemUse = function(target)
         healAmount = healAmount * xi.settings.main.CURE_POWER
 
         local diff = (member:getMaxHP() - member:getHP())
-        if (healAmount > diff) then
+        if healAmount > diff then
             healAmount = diff
         end
         member:addHP(healAmount)

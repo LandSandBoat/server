@@ -14,8 +14,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
-    if (target:hasStatusEffect(xi.effect.DEX_DOWN) or caster:hasStatusEffect(xi.effect.DEX_BOOST)) then
+    if target:hasStatusEffect(xi.effect.DEX_DOWN) or caster:hasStatusEffect(xi.effect.DEX_BOOST) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
@@ -26,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
-        if (resist <= 0.125) then
+        if resist <= 0.125 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ABSORB_DEX)

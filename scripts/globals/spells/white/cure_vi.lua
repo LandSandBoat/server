@@ -106,7 +106,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
-            if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+            if xi.settings.main.USE_OLD_CURE_FORMULA == true then
                 basecure = getBaseCureOld(power, divisor, constant)
             else
                 basecure = getBaseCure(power, divisor, constant, basepower)

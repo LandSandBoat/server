@@ -25,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = 10
 
     --Calculates resist chanve from Reist Blind
-    if (target:hasStatusEffect(effect)) then
+    if target:hasStatusEffect(effect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         return effect
     end
