@@ -22,6 +22,8 @@
 #ifndef _FISHINGUTILS_H
 #define _FISHINGUTILS_H
 
+#define MAX_FISH_TYPES 164
+
 #include "../../common/cbasetypes.h"
 #include "../items/item_fish.h"
 
@@ -1006,6 +1008,11 @@ namespace fishingutils
     catchresponse_t* ReelCheck(CCharEntity* PChar, fishresponse_t* response, rod_t* rod);
     void             FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special);
 
+    // Fish List
+    uint8  GetFishIndex(uint32 fishId);
+    uint32 GetFishIdFromIndex(uint8 index);
+    void   SetPlayerFishIndex(CCharEntity* PChar, uint32 fishId, bool value);
+
     // Initialization
     void LoadFishingMessages();
     void LoadFishingAreas();
@@ -1016,6 +1023,7 @@ namespace fishingutils
     void LoadFishingBaitAffinities();
     void LoadFishGroups();
     void LoadFishingCatchLists();
+    void LoadFishIndex();
     void InitializeFishingSystem();
 }; // namespace fishingutils
 

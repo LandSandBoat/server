@@ -541,6 +541,12 @@ namespace zoneutils
                         PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
                     }
 
+                    if (PMob->GetMJob() == JOB_PLD && PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
+                    {
+                        PMob->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
+                        PMob->setModifier(Mod::SHIELDBLOCKRATE, 45);
+                    }
+
                     // Setup HP / MP Stat Percentage Boost
                     PMob->HPscale = sql->GetFloatData(64);
                     PMob->MPscale = sql->GetFloatData(65);
@@ -1189,6 +1195,24 @@ namespace zoneutils
     bool IsResidentialArea(CCharEntity* PChar)
     {
         return PChar->m_moghouseID != 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Checks whether or not the zone is enabled                            *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsZoneActive(uint16 zoneId)
+    {
+        if (auto* PZone = GetZone(zoneId))
+        {
+            if (PZone->GetIP() == 0 || PZone->GetPort() == 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
 }; // namespace zoneutils

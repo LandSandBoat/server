@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Comitiolus
--- Standard Info NPC
 -- !pos 100 -7 -13 252
 -----------------------------------
 require("scripts/globals/missions")

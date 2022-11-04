@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Sashosho
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

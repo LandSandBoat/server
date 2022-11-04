@@ -26,10 +26,10 @@ entity.onMobDeath = function(mob, player, optParams)
         local hatedPlayer = qmDrk:getLocalVar("hatedPlayer")
         local isInTime = qmDrk:getLocalVar("hateTimer") > os.time()
 
-        if (qmDrk:getStatus() ~= xi.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime)) then
+        if qmDrk:getStatus() ~= xi.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime) then
 
             -- if hated player took too long, reset
-            if (hatedPlayer ~= 0) then
+            if hatedPlayer ~= 0 then
                 qmDrk:setLocalVar("hatedPlayer", 0)
                 qmDrk:setLocalVar("hateTimer", 0)
             end
@@ -38,7 +38,7 @@ entity.onMobDeath = function(mob, player, optParams)
             local position = GetNPCByID(ID.npc.QM_IXAERN_DRK):getLocalVar("position")
             local offset = mob:getID() - ID.mob.AWAERN_DRK_GROUPS[position]
             if offset >= 0 and offset <= 2 then
-                if (math.random(1, 8) == 1) then
+                if math.random(1, 8) == 1 then
                     qmDrk:setLocalVar("hatedPlayer", player:getID())
                     qmDrk:setLocalVar("hateTimer", os.time() + 600) -- player with animosity has 10 minutes to touch QM
                     player:messageSpecial(ID.text.SHEER_ANIMOSITY)
@@ -56,22 +56,21 @@ entity.onMobDespawn = function(mob)
     local IxAernDRG_PH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH.
 
     -- If the mob killed was the randomized PH, then Ix'Aern (DRG) in the specific spot, unclaimed and not aggroed.
-    if (IxAernDRG_PH == currentMobID) then
+    if IxAernDRG_PH == currentMobID then
         -- Select spawn location based on ID
         local offset = currentMobID - ID.mob.AWAERN_DRG_GROUPS[1]
-        if (offset >= 0 and offset <= 3) then
+        if offset >= 0 and offset <= 3 then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-520, 5, -520, 225) -- Bottom Left
-        elseif (offset >= 4 and offset <= 7) then
+        elseif offset >= 4 and offset <= 7 then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-520, 5, -359, 30) -- Top Left
-        elseif (offset >= 8 and offset <= 11) then
+        elseif offset >= 8 and offset <= 11 then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-319, 5, -359, 95) -- Top Right
-        elseif (offset >= 12 and offset <= 15) then
+        elseif offset >= 12 and offset <= 15 then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-319, 5, -520, 156) -- Bottom Right
         end
         SpawnMob(ID.mob.IXAERN_DRG)
         SetServerVariable("[SEA]IxAernDRG_PH", 0) -- Clear the variable because it is spawned!
     end
-
 end
 
 return entity

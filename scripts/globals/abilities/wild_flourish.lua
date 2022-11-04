@@ -14,23 +14,23 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getAnimation() ~= 1) then
+    if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
-        if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
             return xi.msg.basic.NO_FINISHINGMOVES, 0
-        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
             player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
             return 0, 0
-        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
             player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
             player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_5)
             player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
             return 0, 0
@@ -41,7 +41,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    if (not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)) then
+    if not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0) then
         target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 1, 0, 5, 0, 1)
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)

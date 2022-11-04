@@ -27,14 +27,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.skillType = xi.skill.GREAT_SWORD
     params.includemab = true
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.vit_wsc = 0.8
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if (damage > 0 and target:hasStatusEffect(xi.effect.PARALYSIS) == false) then
-        local duration = (tp/1000 * 60) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
+        local duration = (tp / 1000 * 60) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
         target:addStatusEffect(xi.effect.PARALYSIS, 30, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

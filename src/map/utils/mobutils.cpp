@@ -48,14 +48,15 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Расчет базовой величины оружия монстров                              *
+     *  Calculate mob base weapon damage                                     *
      *                                                                       *
      ************************************************************************/
 
     uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot)
     {
-        uint16 lvl   = PMob->GetMLevel();
-        uint8  bonus = 0;
+        uint16 lvl    = PMob->GetMLevel();
+        int8   bonus  = 0;
+        uint16 damage = 0;
 
         if (slot == SLOT_RANGED)
         {
@@ -63,10 +64,25 @@ namespace mobutils
         }
         else
         {
-            bonus = 2;
+            if (lvl >= 75)
+            {
+                bonus = 3;
+            }
+            else if (lvl >= 60)
+            {
+                bonus = 2;
+            }
+            else if (lvl >= 50)
+            {
+                bonus = 1;
+            }
+            else if (lvl == 1)
+            {
+                bonus = -1;
+            }
         }
 
-        uint16 damage = lvl + bonus;
+        damage = lvl + bonus;
 
         damage = (uint16)(damage * PMob->m_dmgMult / 100.0f);
 
@@ -127,12 +143,11 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Базовое значение для расчера характеристик                           *
-     *  (на название не хватило фантазии)                                    *
+     *  Base value for stat calculations                                     *
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetBaseToRank(CMobEntity* PMob, uint8 rank, uint16 lvl)
+    uint16 GetBaseToRank(uint8 rank, uint16 lvl)
     {
         switch (rank)
         {
@@ -157,8 +172,7 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Базовое значение для расчерта защиты и уклонения                     *
-     *  (на название не хватило фантазии)                                    *
+     *  Base value for defense and evasion calculation                       *
      *                                                                       *
      ************************************************************************/
 
@@ -212,7 +226,7 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
-     *  Расчет атрибутов (характеристик) монстра                             *
+     *  Calculate mob stats                                                  *
      *                                                                       *
      ************************************************************************/
 
@@ -293,7 +307,6 @@ namespace mobutils
                 else
                 {
                     mLvlScale = 0;
-                    // sjHP = 0;
                 }
 
                 sjHP = std::ceil((sjJobScale * (std::max((mLvlScale - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvlScale - 10, 0)) + std::max(mLvlScale - 30, 0) + std::max(mLvlScale - 50, 0) + std::max(mLvlScale - 70, 0)) / 2);
@@ -337,7 +350,7 @@ namespace mobutils
                 // pets have lower health (TODO: Capture pet HP and correct scaling)
                 if (PMob->PMaster != nullptr)
                 {
-                    mobHP *= 0.35f;
+                    mobHP *= 0.30f; // Retail captures have all pets at 30% of the mobs family of the same level
                 }
 
                 PMob->health.maxhp = (int16)(mobHP);
@@ -444,29 +457,29 @@ namespace mobutils
             PMob->m_dualWield = true;
         }
 
-        uint16 fSTR = GetBaseToRank(PMob, PMob->strRank, mLvl);
-        uint16 fDEX = GetBaseToRank(PMob, PMob->dexRank, mLvl);
-        uint16 fVIT = GetBaseToRank(PMob, PMob->vitRank, mLvl);
-        uint16 fAGI = GetBaseToRank(PMob, PMob->agiRank, mLvl);
-        uint16 fINT = GetBaseToRank(PMob, PMob->intRank, mLvl);
-        uint16 fMND = GetBaseToRank(PMob, PMob->mndRank, mLvl);
-        uint16 fCHR = GetBaseToRank(PMob, PMob->chrRank, mLvl);
+        uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
+        uint16 fDEX = GetBaseToRank(PMob->dexRank, mLvl);
+        uint16 fVIT = GetBaseToRank(PMob->vitRank, mLvl);
+        uint16 fAGI = GetBaseToRank(PMob->agiRank, mLvl);
+        uint16 fINT = GetBaseToRank(PMob->intRank, mLvl);
+        uint16 fMND = GetBaseToRank(PMob->mndRank, mLvl);
+        uint16 fCHR = GetBaseToRank(PMob->chrRank, mLvl);
 
-        uint16 mSTR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 2), mLvl);
-        uint16 mDEX = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 3), mLvl);
-        uint16 mVIT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 4), mLvl);
-        uint16 mAGI = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 5), mLvl);
-        uint16 mINT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 6), mLvl);
-        uint16 mMND = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
-        uint16 mCHR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
+        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 2), mLvl);
+        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 3), mLvl);
+        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 4), mLvl);
+        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 5), mLvl);
+        uint16 mINT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 6), mLvl);
+        uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
+        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
-        uint16 sDEX = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
-        uint16 sVIT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
-        uint16 sAGI = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
-        uint16 sINT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
-        uint16 sMND = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
-        uint16 sCHR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
 
         // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
         // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
@@ -1032,6 +1045,7 @@ namespace mobutils
                             92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
         PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);
         PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
+        PMob->defaultMobMod(MOBMOD_MAGIC_RANGE, (int16)CMobEntity::magic_range);
 
         // Killer Effect
         switch (PMob->m_EcoSystem)

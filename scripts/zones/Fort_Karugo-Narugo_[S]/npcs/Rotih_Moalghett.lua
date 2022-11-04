@@ -12,8 +12,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_ACCEPTED) then
-        if (player:getCharVar("TigressStrikesProg") == 1) then
+    if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_ACCEPTED then
+        if player:getCharVar("TigressStrikesProg") == 1 then
             player:startEvent(101)
         else
             player:startEvent(104)
@@ -25,7 +25,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 104) then
+    if csid == 104 then
         player:setCharVar("TigressStrikesProg", 1)
     end
 end

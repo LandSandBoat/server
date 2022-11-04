@@ -254,10 +254,12 @@ namespace gardenutils
                     CItem* PItemContained = PContainer->GetItem(slotID);
                     if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
                     {
-                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItemContained);
-                        if (PFurniture->isInstalled())
+                        auto PFurniture = dynamic_cast<CItemFurnishing*>(PItemContained);
+                        if (PFurniture && PFurniture->isInstalled())
                         {
-                            auras[PFurniture->getElement()] += PFurniture->getAura();
+                            // -1 because element values range from 1-8
+                            // Converts from lua 1 based index to c/c++ 0 based index
+                            auras[PFurniture->getElement() - 1] += PFurniture->getAura();
                         }
                     }
                 }
@@ -267,10 +269,7 @@ namespace gardenutils
             uint16 dominantAura = 0;
             for (uint8 elementID = 0; elementID < 8; ++elementID)
             {
-                if (elements[elementID] > dominantAura)
-                {
-                    dominantAura = elements[elementID];
-                }
+                dominantAura = std::max(auras[elementID], dominantAura);
             }
             strength += dominantAura / 10;
         }

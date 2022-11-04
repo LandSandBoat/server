@@ -408,6 +408,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
             return dmg
         end
         dmg = utils.oneforall(target, dmg)
+        dmg = utils.rampart(target, dmg)
     end
 
     -- Handle Phalanx

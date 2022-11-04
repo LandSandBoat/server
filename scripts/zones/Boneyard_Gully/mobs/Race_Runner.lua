@@ -8,7 +8,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     {
         { -588.6, -5.0, -458.5 },
@@ -56,19 +56,22 @@ entity.onMobSpawn = function(mob)
         end
 
         if mob:getLocalVar("currHits") >= mobArg:getLocalVar("hitsRequired") then
-            mob:setLocalVar("hitsRequired", math.random(1,10))
+            mob:setLocalVar("hitsRequired", math.random(1, 10))
             mob:setLocalVar("runControl", 1)
             mob:setLocalVar("currHits", 0)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
         end
     end)
+
+    entity.onMobRoam(mob)
+    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.REVERSE))
 end
 
 entity.onMobRoam = function(mob)
     local bfNum = mob:getBattlefield():getArea()
-    local point = math.random(1,8)
-    mob:pathTo(path[bfNum][point][1], path[bfNum][point][2], path[bfNum][point][3], xi.path.flag.SCRIPT)
+    local point = math.random(1, 8)
+    mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
@@ -91,10 +94,10 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getLocalVar("runControl") == 1 then
-        local point = math.random(1,8)
+        local point = math.random(1, 8)
         mob:setLocalVar("runControl", 0)
 
-        mob:pathTo(path[bfNum][point][1], path[bfNum][point][2], path[bfNum][point][3], xi.path.flag.SCRIPT)
+        mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 
         mob:timer(5000, function(mobArg)
             mobArg:SetMagicCastingEnabled(true)

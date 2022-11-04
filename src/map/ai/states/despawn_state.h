@@ -27,8 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CDespawnState : public CState
 {
 public:
-    CDespawnState(CBaseEntity* PEntity);
-    CDespawnState(CBaseEntity* PEntity, duration spawnTime);
+    CDespawnState(CBaseEntity* PEntity, bool instantDespawn);
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
     virtual bool CanChangeState() override;

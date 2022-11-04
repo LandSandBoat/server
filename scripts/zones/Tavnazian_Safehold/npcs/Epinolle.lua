@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Epinolle
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

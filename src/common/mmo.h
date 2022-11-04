@@ -149,6 +149,10 @@ enum MSGSERVTYPE : uint8
     // gm commands
     MSG_SEND_TO_ZONE,
     MSG_SEND_TO_ENTITY,
+
+    // rpc
+    MSG_RPC_SEND, // sent by sender -> reciever
+    MSG_RPC_RECV, // sent by reciever -> sender
 };
 
 constexpr auto msgTypeToStr = [](uint8 msgtype)
@@ -191,6 +195,10 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_SEND_TO_ZONE";
         case MSG_SEND_TO_ENTITY:
             return "MSG_SEND_TO_ENTITY";
+        case MSG_RPC_SEND:
+            return "MSG_RPC_SEND";
+        case MSG_RPC_RECV:
+            return "MSG_RPC_RECV";
         default:
             return "Unknown";
     };

@@ -418,7 +418,7 @@ bool CCharEntity::isNewPlayer() const
 
 void CCharEntity::setPetZoningInfo()
 {
-    if (PPet->objtype == TYPE_PET)
+    if (PPet && PPet->objtype == TYPE_PET)
     {
         switch (((CPetEntity*)PPet)->getPetType())
         {
@@ -439,6 +439,7 @@ void CCharEntity::setPetZoningInfo()
             default:
                 break;
         }
+        petZoningInfo.respawnPet = true;
     }
 }
 
@@ -2190,7 +2191,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+        if (PPet->objtype == TYPE_MOB)
         {
             petutils::DetachPet(this);
         }

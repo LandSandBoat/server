@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Bruno
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

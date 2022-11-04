@@ -904,6 +904,7 @@ namespace battleutils
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                     }
+
                     else
                     {
                         // only works on shield blocks
@@ -1555,11 +1556,6 @@ namespace battleutils
         return finalhitrate;
     }
 
-    uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage)
-    {
-        return GetRangedHitRate(PAttacker, PDefender, isBarrage, 0);
-    }
-
     // todo: need to penalise attacker's RangedAttack depending on distance from mob. (% decrease)
     float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, uint16 ignoredDef)
     {
@@ -1804,27 +1800,59 @@ namespace battleutils
                 return 0;
             }
         }
-        else if (PDefender->objtype == TYPE_MOB && PDefender->GetMJob() == JOB_PLD)
+        else if (PDefender->objtype != TYPE_PC)
         {
-            CMobEntity* PMob = (CMobEntity*)PDefender;
+            CMobEntity* PEntity = (CMobEntity*)PDefender;
+            if (PEntity->getMobMod(MOBMOD_CAN_SHIELD_BLOCK) > 0)
+            {
+                base = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+                if (PDefender->objtype == TYPE_PET)
+                {
+                    skillModifier = (int8)((PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackSkill) * 0.215f);
+                    if (base <= 0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return base + skillModifier;
+                    }
+                }
+                else
+                {
+                    // TODO: check trust type for ilvl > 99 when implemented
+                    blockSkill = GetMaxSkill(SKILLTYPE::SKILL_SHIELD, PDefender->GetMJob(), PDefender->GetMLevel() > 99 ? 99 : PDefender->GetMLevel());
 
-            if (PMob->m_EcoSystem != ECOSYSTEM::UNDEAD && PMob->m_EcoSystem != ECOSYSTEM::BEASTMAN)
+                    // Check for Reprisal and adjust skill and block rate bonus multiplier
+                    if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                    {
+                        blockSkill   = blockSkill * 1.15f;
+                        reprisalMult = 1.5f; // Default is 1.5x
+
+                        // Adamas and Priwen set the multiplier to 3.0x while equipped
+                        if (PDefender->getMod(Mod::REPRISAL_BLOCK_BONUS) > 0)
+                        {
+                            reprisalMult = 3.0f;
+                        }
+                    }
+
+                    skillModifier = (blockSkill - attackSkill) * 0.2325f;
+
+                    // Add skill and Palisade bonuses
+                    base += skillModifier + palisadeMod;
+                    // Multiply by Reprisal's bonus
+                    base = base * reprisalMult;
+
+                    // Apply the lower and upper caps
+                    blockRate = (base < 5) ? 5 : base;
+                    blockRate = (base > 100) ? 100 : base;
+
+                    return blockRate;
+                }
+            }
+            else // No block mobmod, so zero rate
             {
                 return 0;
-            }
-        }
-        else if (PDefender->objtype == TYPE_PET && static_cast<CPetEntity*>(PDefender)->getPetType() == PET_TYPE::AUTOMATON && PDefender->GetMJob() == JOB_PLD)
-        {
-            skillModifier = (int8)((PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackSkill) * 0.215f);
-            base          = PDefender->getMod(Mod::SHIELDBLOCKRATE);
-
-            if (base <= 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return base + skillModifier;
             }
         }
         else
@@ -2071,50 +2099,62 @@ namespace battleutils
                             PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                         }
                     }
-                    else if (PDefender->objtype == TYPE_PET)
+                }
+                else if (PDefender->objtype == TYPE_PET)
+                {
+                    absorb = 50;
+
+                    // Shield Mastery
+                    if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                        (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
                     {
-                        absorb = 50;
-
-                        // Shield Mastery
-                        if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
-                        {
-                            // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
-                            // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
-                            PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
-                        }
-                    }
-                    else
-                    {
-                        absorb = 50;
-                    }
-
-                    // Reprisal
-                    if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
-                    {
-                        // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
-                        CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
-
-                        if (reprisalEffect != nullptr)
-                        {
-                            float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
-                            int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
-                            int32 blockedDamage = (damage * (100 - absorb)) / 100;
-                            int32 spikesDamage  = 0;
-
-                            if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
-                            {
-                                blockedDamage = (baseDamage * (100.f - absorb)) / 100.f;
-                            }
-
-                            spikesDamage = blockedDamage * (effectPower / 100.f);
-
-                            // Set Reprisal spike damage
-                            PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
-                        }
+                        // If the pet blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
                     }
                 }
+                else if (PDefender->objtype == TYPE_TRUST)
+                {
+                    absorb = 50;
 
+                    // Shield Mastery
+                    if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                        (PDefender->getMod(Mod::SHIELD_MASTERY_TP)))
+                    {
+                        // If the trust blocked with a shield and has shield mastery, add shield mastery TP bonus
+                        // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
+                        PDefender->addTP(PDefender->getMod(Mod::SHIELD_MASTERY_TP));
+                    }
+                }
+                else
+                {
+                    absorb = 50;
+                }
+
+                // Reprisal
+                if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                {
+                    // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
+                    CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
+
+                    if (reprisalEffect != nullptr)
+                    {
+                        float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
+                        int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
+                        int32 blockedDamage = (damage * (100 - absorb)) / 100;
+                        int32 spikesDamage  = 0;
+
+                        if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
+                        {
+                            blockedDamage = (baseDamage * (100.f - absorb)) / 100.f;
+                        }
+
+                        spikesDamage = blockedDamage * (effectPower / 100.f);
+
+                        // Set Reprisal spike damage
+                        PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
+                    }
+                }
                 damage = (damage * absorb) / 100;
             }
         }
@@ -2827,7 +2867,45 @@ namespace battleutils
 
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded)
     {
-        uint16 attack = PAttacker->ATT(slot);
+        uint16 attack = 1;
+        if (slot == SLOT_RANGED || slot == SLOT_AMMO)
+        {
+            if (PAttacker->objtype == TYPE_PC)
+            {
+                CCharEntity* PChar = (CCharEntity*)PAttacker;
+                CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
+                {
+                    attack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
+                }
+                else
+                {
+                    PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                    if (PItem == nullptr || !PItem->isType(ITEM_WEAPON) || (PItem->getSkillType() != SKILL_THROWING))
+                    {
+                        ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for.");
+                    }
+                    else
+                    {
+                        attack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
+                    }
+                }
+            }
+            else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
+            {
+                attack = PAttacker->RATT(SKILL_AUTOMATON_RANGED, distance(PAttacker->loc.p, PDefender->loc.p));
+            }
+            else
+            {
+                // assume mobs capped
+                attack = battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_RNG, PAttacker->GetMLevel());
+            }
+        }
+        else
+        {
+            attack = PAttacker->ATT(slot);
+        }
+
         // Bonus attack currently only from footwork
         if (bonusAttPercent >= 1)
         {
@@ -2913,11 +2991,12 @@ namespace battleutils
         // Damage Limit+ trait adds 0.1/rank to these values
         // type : non-crit : crit
         // 1H : 2 : 3
-        // H2H & GK : 2.25 : 3.25
         // 2H : 2.25 : 3.25
-        // Scythe : 2.25 : 3.25
+        // H2H: 2.25 : 3.25
         // Archery & Throwing : 2 : 3
         // Marksmanship : 2 : 3
+        // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
+        // Monster pDIF = Avatar pDIF = Pet pDIF
 
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
@@ -2937,15 +3016,7 @@ namespace battleutils
             // If null ignore the checks and fallback to 1H values
             if (targ_weapon)
             {
-                if (targ_weapon->isHandToHand() || targ_weapon->getSkillType() == SKILL_GREAT_KATANA)
-                {
-                    maxRatio = 2.25f;
-                }
-                else if (targ_weapon->getSkillType() == SKILL_SCYTHE)
-                {
-                    maxRatio = 2.25f;
-                }
-                else if (targ_weapon->isTwoHanded())
+                if (targ_weapon->isTwoHanded() || targ_weapon->isHandToHand())
                 {
                     maxRatio = 2.25f;
                 }
@@ -3105,7 +3176,7 @@ namespace battleutils
         {
             fstr = static_cast<int32>((dif + 13) / 2);
         }
-        if (SlotID == SLOT_RANGED)
+        if (SlotID == SLOT_RANGED || SlotID == SLOT_AMMO)
         {
             rank = PAttacker->GetRangedWeaponRank();
             // Different caps than melee weapons

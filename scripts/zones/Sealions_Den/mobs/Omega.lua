@@ -11,6 +11,9 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 10)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 10)
+    mob:setMod(xi.mod.REGEN, 1)
 end
 
 entity.onMobSpawn = function(mob)
@@ -40,7 +43,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    oneToBeFeared.handleOmegaDeath(mob, player, optParams)
+    if optParams.isKiller then
+        oneToBeFeared.handleOmegaDeath(mob, player, optParams)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)

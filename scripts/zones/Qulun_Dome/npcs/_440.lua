@@ -27,11 +27,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 50 or csid == 51) and option == 1 then
         player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, xi.ki.SILVER_BELL, xi.ki.CORUSCANT_ROSARY, xi.ki.BLACK_MATINEE_NECKLACE)
     end
-
 end
 
 return entity

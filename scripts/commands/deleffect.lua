@@ -32,17 +32,17 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- validate target
-    if (targ == nil) then
+    if targ == nil then
         error(player, string.format("Player named '%s' not found!", arg1))
         return
     end
 
     -- validate effect
     id = tonumber(id) or xi.effect[string.upper(id)]
-    if (id == nil) then
+    if id == nil then
         error(player, "Invalid effect.")
         return
-    elseif (id == 0) then
+    elseif id == 0 then
         id = 1
     end
 

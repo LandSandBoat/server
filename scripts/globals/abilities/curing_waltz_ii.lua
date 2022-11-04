@@ -12,27 +12,27 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (target:getHP() == 0) then
+    if target:getHP() == 0 then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
-    elseif (player:hasStatusEffect(xi.effect.SABER_DANCE)) then
+    elseif player:hasStatusEffect(xi.effect.SABER_DANCE) then
         return xi.msg.basic.UNABLE_TO_USE_JA2, 0
-    elseif (player:hasStatusEffect(xi.effect.TRANCE)) then
+    elseif player:hasStatusEffect(xi.effect.TRANCE) then
         return 0, 0
-    elseif (player:getTP() < 350) then
+    elseif player:getTP() < 350 then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
         --[[ Apply "Waltz Ability Delay" reduction
             1 modifier = 1 second]]
         local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
-        if (recastMod ~= 0) then
+        if recastMod ~= 0 then
             local newRecast = ability:getRecast() + recastMod
             ability:setRecast(utils.clamp(newRecast, 0, newRecast))
         end
         -- Apply "Fan Dance" Waltz recast reduction
-        if (player:hasStatusEffect(xi.effect.FAN_DANCE)) then
+        if player:hasStatusEffect(xi.effect.FAN_DANCE) then
             local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
             -- Every tier beyond the 1st is -5% recast time
-            if (fanDanceMerits > 5) then
+            if fanDanceMerits > 5 then
                 ability:setRecast(ability:getRecast() * ((fanDanceMerits -5) / 100))
             end
         end
@@ -71,7 +71,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     cure = cure * xi.settings.main.CURE_POWER
 
     --Cap the final amount to max HP.
-    if ((target:getMaxHP() - target:getHP()) < cure) then
+    if (target:getMaxHP() - target:getHP()) < cure then
         cure = (target:getMaxHP() - target:getHP())
     end
 

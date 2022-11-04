@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Michilca
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

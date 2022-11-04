@@ -17,7 +17,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master)
     local power = master:getMP() / master:getMaxMP()
     master:setMP(0)
 
-    if (target:isNM()) then
+    if target:isNM() then
         local dmg = 0.1 * target:getHP() + 0.1 * target:getHP() * power
         if dmg > 9999 then
             dmg = 9999

@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = xi.magic.applyResistance(caster, target, spell, params)
-    dmg = dmg*resist
+    dmg = dmg * resist
     dmg = xi.magic.addBonuses(caster, spell, target, dmg)
     dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     if (dmg > (caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 20)) then

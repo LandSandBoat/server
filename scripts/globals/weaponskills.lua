@@ -218,6 +218,10 @@ end
 local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, calcParams)
     local accVarryTP = 0
 
+    if bonus == nil then
+        bonus = 0
+    end
+
     if wsParams and wsParams.acc100 ~= 0 then
         if calcParams.tp >= 3000 then
             accVarryTP = (wsParams.acc300 - 1) * 100
@@ -226,18 +230,10 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, c
         else
             accVarryTP = (wsParams.acc100 - 1) * 100
         end
-        attacker:addMod(xi.mod.RACC, accVarryTP)
+        bonus = bonus + accVarryTP
     end
 
-    local hitrate = attacker:getCRangedHitRate(target) / 100
-
-    if wsParams and wsParams.acc100 ~= 0 then
-        attacker:delMod(xi.mod.RACC, accVarryTP)
-    end
-
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
-
-    return hitrate
+    return utils.clamp(attacker:getCRangedHitRate(target, bonus) / 100, 0.2, 0.95)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
@@ -282,11 +278,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     missChance = xi.weaponskills.handleParry(attacker, target, missChance, calcParams.guaranteedHit)
 
-    if (missChance <= calcParams.hitRate or-- See if we hit the target
-        calcParams.guaranteedHit or
-        (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN)/100))) and
-        not calcParams.mustMiss
-    then
+    if (missChance <= calcParams.hitRate or calcParams.guaranteedHit or (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100))) and not calcParams.mustMiss then
         if not shadowAbsorb(target) then
             local critChance = math.random() -- See if we land a critical hit
             criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
@@ -322,6 +314,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
                     magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
                     magicdmg = utils.clamp(magicdmg, 0, 99999)
                     magicdmg = utils.oneforall(target, magicdmg)
+                    magicdmg = utils.rampart(target, magicdmg)
                     magicdmg = utils.stoneskin(target, magicdmg)
                 end
 
@@ -362,6 +355,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
+    adjustedDamage = utils.rampart(target, adjustedDamage)
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
     return adjustedDamage
@@ -377,6 +371,28 @@ local modParameters =
     [xi.mod.WS_MND_BONUS] = 'mnd_wsc',
     [xi.mod.WS_CHR_BONUS] = 'chr_wsc',
 }
+
+local function calculateDEXvsAGICritRate(attacker, target)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local nativecrit = 0
+    local dexVsAgi = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    if dexVsAgi < 7 then
+        nativecrit = 0
+    elseif dexVsAgi < 14 then
+        nativecrit = 0.01
+    elseif dexVsAgi < 20 then
+        nativecrit = 0.02
+    elseif dexVsAgi < 30 then
+        nativecrit = 0.03
+    elseif dexVsAgi < 40 then
+        nativecrit = 0.04
+    elseif dexVsAgi <= 50 then
+        nativecrit = (dexVsAgi - 35) / 100
+    else
+        nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
+    end
+    return nativecrit
+end
 
 -- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
@@ -820,6 +836,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         dmg = utils.oneforall(target, dmg)
+        dmg = utils.rampart(target, dmg)
         dmg = utils.stoneskin(target, dmg)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
@@ -863,7 +880,6 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             end
         end
 
-        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -887,6 +903,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
     local targetTPMult = wsParams.targetTPMult or 1
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
+    action:param(defender:getID(), math.abs(finaldmg))
     local enmityEntity = wsResults.taChar or attacker
 
     if (wsParams.overrideCE and wsParams.overrideVE) then
@@ -929,45 +946,33 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
         isSubAttack = false
     end
 
+    if bonus == nil then
+        bonus = 0
+    end
+
     local hitrate = 0
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     local accVarryTP = 0
 
     if wsParams and wsParams.acc100 ~= 0 then
         if calcParams.tp >= 3000 then
-            accVarryTP = (wsParams.acc300 - 1) * 100
+            accVarryTP = wsParams.acc300 - 1
         elseif calcParams.tp >= 2000 then
-            accVarryTP = (wsParams.acc200 - 1) * 100
+            accVarryTP = wsParams.acc200 - 1
         else
-            accVarryTP = (wsParams.acc100 - 1) * 100
+            accVarryTP = wsParams.acc100 - 1
         end
-        attacker:addMod(xi.mod.ACC, accVarryTP)
+        bonus = bonus + (accVarryTP * 100)
     end
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
-    end
-
-    if bonus ~= nil or bonus == 0 then
-        attacker:addMod(xi.mod.ACC, bonus)
+        bonus = bonus + (20 + flourisheffect:getPower())
     end
 
     if isSubAttack then
-        hitrate = attacker:getCHitRate(target, 1)
+        hitrate = attacker:getCHitRate(target, 1, bonus)
     else
-        hitrate = attacker:getCHitRate(target, 0)
-    end
-
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
-    end
-
-    if wsParams and wsParams.acc100 ~= 0 then
-        attacker:delMod(xi.mod.ACC, accVarryTP)
-    end
-
-    if bonus ~= nil or bonus == 0 then
-        attacker:delMod(xi.mod.ACC, bonus)
+        hitrate = attacker:getCHitRate(target, 0, bonus)
     end
 
     return utils.clamp((hitrate / 100), 0.2, 0.95)
@@ -996,10 +1001,10 @@ local function fTPMob(tp, ftp1, ftp2, ftp3)
     end
 
     if (tp >= 1000 and tp < 1500) then
-        return ftp1 + ( ((ftp2-ftp1)/500) * (tp-1000))
+        return ftp1 + ( ((ftp2 - ftp1 ) / 500) * (tp - 1000) )
     elseif (tp >= 1500 and tp <= 3000) then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3-ftp2)/1500) * (tp-1500))
+        return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500) )
     end
     return 1 -- no ftp mod
 end

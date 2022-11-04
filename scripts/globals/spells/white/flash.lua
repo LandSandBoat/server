@@ -27,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration = 12 * resist
 
     if (resist > 0.0625) then
-        if (target:addStatusEffect(xi.effect.FLASH, 200, 0, duration)) then
+        if (target:addStatusEffect(xi.effect.FLASH, 300, 4, duration)) then -- Flash should be 300 and quickly wear off, tick value results in 1 ACC penalty at max duration.
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

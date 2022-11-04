@@ -472,6 +472,8 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
 
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
+
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
         local elementBonus  = caster:getMod(spellAcc[spellElement])
@@ -622,10 +624,10 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     local magiceva = target:getMod(xi.mod.MEVA)
     if target:isPC() then
-        magiceva = magiceva * ((100 + resMod) / 100)
+        magiceva = magiceva + resMod
     else
         levelDiff = utils.clamp(levelDiff, 0, 200) -- Mobs should not have a disadvantage when targeted
-        magiceva =  (magiceva + (4 * levelDiff)) * ((100 + resMod) / 100)
+        magiceva =  magiceva + (4 * levelDiff) + resMod
     end
 
     -----------------------------------
@@ -656,27 +658,49 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         end
     end
 
-    local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 3.00) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
+    local eighthTrigger = false
+    local quarterTrigger = false
+
+    if element and element ~= xi.magic.ele.NONE then
+        resMod = target:getMod(xi.magic.resistMod[element])
+    end
+
+    local resTriggerPoints =
+    {
+        resMod > 101,
+        resMod >= 0,
+    }
+
+    if resTriggerPoints[1] then
+        eighthTrigger = true
+    end
+
+    if resTriggerPoints[2] then
+        quarterTrigger = true
+    end
+
+    local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
     local resistVal = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half     = (1 - p)
+    local half      = (1 - p)
     local quart     = ((1 - p)^2)
     local eighth    = ((1 - p)^3)
-    local sixteenth = ((1 - p)^4)
     local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= sixteenth then
-        resistVal = 0.0625
-    elseif resvar <= eighth then
+    if resvar <= eighth and eighthTrigger then
         resistVal = 0.125
-    elseif resvar <= quart then
+    elseif resvar <= quart and quarterTrigger then
         resistVal = 0.25
     elseif resvar <= half then
         resistVal = 0.5
     else
         resistVal = 1.0
+    end
+
+    if evaMult <= 0.5 then
+        resistVal = resistVal / 2
     end
 
     return resistVal
@@ -1024,7 +1048,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     --finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
 
-    if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (target:getStatusEffect(xi.effect.SKILLCHAIN):getTier() > 0) then -- Gated since this is recalculated for each target.
+    if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated since this is recalculated for each target.
         finalDamage = math.floor(finalDamage * magicBurst)
         finalDamage = math.floor(finalDamage * magicBurstBonus)
     end
@@ -1040,18 +1064,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
-    -- Handle Phalanx
     if finalDamage > 0 then
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
-    end
-
-    -- Handle One For All
-    if finalDamage > 0 then
         finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
-    end
-
-    -- Handle Stoneskin
-    if finalDamage > 0 then
+        finalDamage = utils.clamp(utils.rampart(target, finalDamage), -99999, 99999)
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
     end
 
@@ -1077,7 +1093,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         end
 
         -- Add "Magic Burst!" message
-        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (target:getStatusEffect(xi.effect.SKILLCHAIN):getTier() > 0) then -- Gated as this is run per target.
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated as this is run per target.
             spell:setMsg(spell:getMagicBurstMessage())
             caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
         end

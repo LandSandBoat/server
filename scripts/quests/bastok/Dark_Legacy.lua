@@ -128,7 +128,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 2
                     then
                         player:confirmTrade()
-                        SpawnMob(ID.mob.VAA_HUJA_THE_ERUDITE):updateClaim(player)
+                        SpawnMob(giddeusID.mob.VAA_HUJA_THE_ERUDITE):updateClaim(player)
 
                         return quest:messageSpecial(giddeusID.text.SENSE_OF_FOREBODING)
                     end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Subodh
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

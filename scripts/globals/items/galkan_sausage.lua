@@ -36,7 +36,7 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onEffectGain = function(target, effect)
-    if (target:getRace() ~= xi.race.GALKA) then
+    if target:getRace() ~= xi.race.GALKA then
         target:addMod(xi.mod.STR, 3)
         target:addMod(xi.mod.INT, -4)
         target:addMod(xi.mod.ATT, 9)
@@ -52,7 +52,7 @@ itemObject.onEffectGain = function(target, effect)
 end
 
 itemObject.onEffectLose = function(target, effect)
-    if (target:getRace() ~= xi.race.GALKA) then
+    if target:getRace() ~= xi.race.GALKA then
         target:delMod(xi.mod.STR, 3)
         target:delMod(xi.mod.INT, -4)
         target:delMod(xi.mod.ATT, 9)

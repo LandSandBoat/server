@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Vorzill
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -483,11 +483,19 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
 uint16 CBattleEntity::GetMainWeaponRank()
 {
+    // https://www.bg-wiki.com/ffxi/Weapon_Rank
+    // https://ffxiclopedia.fandom.com/wiki/Category:Hand-to-Hand?oldid=342430
+    uint16 wDamage = 0;
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        return (weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK)) / 9;
+        wDamage = weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK);
+
+        if (weapon->getSkillType() == SKILL_HAND_TO_HAND)
+        {
+            wDamage += 3;
+        }
     }
-    return 0;
+    return wDamage / 9;
 }
 
 uint16 CBattleEntity::GetSubWeaponRank()
@@ -1555,6 +1563,7 @@ void CBattleEntity::Spawn()
     HideName(false);
     CBaseEntity::Spawn();
     m_OwnerID.clean();
+    setBattleID(0);
 }
 
 void CBattleEntity::Die()
@@ -2158,12 +2167,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
                 }
-
-                if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
-                {
-                    // 1 ce for a missed attack for TH application
-                    ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
-                }
             }
         }
         else
@@ -2180,6 +2183,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             if (PTarget->objtype == TYPE_PC)
             {
                 charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+            }
+
+            if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
+            {
+                // 1 ce for a missed attack for TH application
+                ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
             }
         }
 
@@ -2283,6 +2292,16 @@ void CBattleEntity::SetBattleStartTime(time_point time)
 duration CBattleEntity::GetBattleTime()
 {
     return server_clock::now() - m_battleStartTime;
+}
+
+void CBattleEntity::setBattleID(uint16 battleID)
+{
+    m_battleID = battleID;
+}
+
+uint16 CBattleEntity::getBattleID()
+{
+    return m_battleID;
 }
 
 void CBattleEntity::Tick(time_point /*unused*/)

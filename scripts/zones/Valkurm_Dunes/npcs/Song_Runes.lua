@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- PATH OF THE BARD (Bard Flag)
-    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD) == QUEST_AVAILABLE and player:getCharVar("PathOfTheBard_Event") == 1) then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD) == QUEST_AVAILABLE and player:getCharVar("PathOfTheBard_Event") == 1 then
         player:startEvent(2)
 
     -- DEFAULT DIALOG
@@ -30,7 +30,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 2) then
+    if csid == 2 then
         player:addGil(xi.settings.main.GIL_RATE * 3000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 3000)
         player:addTitle(xi.title.WANDERING_MINSTREL)

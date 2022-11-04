@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Abbudin
--- Type: Standard Info NPC
 -- !pos -56.338 2.777 -31.446 237
 -----------------------------------
 local entity = {}

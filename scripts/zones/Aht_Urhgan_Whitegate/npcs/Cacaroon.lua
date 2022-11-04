@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Cacaroon
--- Standard Info NPC
 -- !pos -72.026 0.000 -82.337 50
 -----------------------------------
 local entity = {}

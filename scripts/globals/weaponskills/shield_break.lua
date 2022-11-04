@@ -31,14 +31,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.vit_wsc = 0.6
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if (damage > 0 and target:hasStatusEffect(xi.effect.EVASION_DOWN) == false) then
-        local duration = (120 + (tp/1000 * 60)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
+        local duration = (120 + (tp / 1000 * 60)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
         target:addStatusEffect(xi.effect.EVASION_DOWN, 40, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage

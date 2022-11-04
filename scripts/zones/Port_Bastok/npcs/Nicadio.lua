@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Nicadio
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

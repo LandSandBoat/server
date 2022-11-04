@@ -430,7 +430,8 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     }
 
     if (m_PBattleEntity->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance)
+        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance ||
+        m_PBattleEntity->getBattleID() != PTarget->getBattleID())
     {
         return false;
     }
@@ -586,7 +587,7 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return m_PBattleEntity->PPet;
     }
 
-    if (PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
+    if (m_PBattleEntity->getBattleID() == PTarget->getBattleID() && PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
     {
         return PTarget;
     }

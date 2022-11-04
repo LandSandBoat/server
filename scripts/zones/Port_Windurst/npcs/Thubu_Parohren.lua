@@ -38,7 +38,9 @@ entity.onTrigger = function(player, npc)
     local rank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (craftSkill - rank) / 32
 
-    if (guildMember == 1) then guildMember = 150995375; end
+    if guildMember == 1 then
+        guildMember = 150995375
+    end
 
     if player:getCharVar("FishingExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC) then
@@ -70,14 +72,14 @@ end
 entity.onEventFinish = function(player, csid, option)
     local guildMember = xi.crafting.isGuildMember(player, 5)
 
-    if (csid == 10009 and option == 2) then
+    if csid == 10009 and option == 2 then
         if guildMember == 1 then
             player:setCharVar("FishingExpertQuest", 1)
         end
-    elseif (csid == 10009 and option == 1) then
+    elseif csid == 10009 and option == 1 then
         local crystal = 4101 -- water crystal
 
-        if (player:getFreeSlotsCount() == 0) then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
         else
             player:addItem(crystal)

@@ -66,13 +66,22 @@ xi.promyvion.initZone = function(zone)
     end
 end
 
+xi.promyvion.zoneGameDay = function(zone)
+    local ID = zones[zone:getID()]
+
+    -- randomize floor exits
+    for i = 1, maxFloor(ID) do
+        randomizeFloorExit(ID, i)
+    end
+end
+
 xi.promyvion.strayOnSpawn = function(mob)
     local mother = GetMobByID(findMother(mob))
 
     if mother ~= nil and mother:isSpawned() then
         mob:setPos(mother:getXPos(), mother:getYPos() - 5, mother:getZPos())
         mother:setAnimationSub(1)
-        mother:timer(600, function(motherArg)
+        mother:timer(1000, function(motherArg)
             if motherArg:isAlive() then
                 motherArg:setAnimationSub(2)
             end
@@ -91,7 +100,7 @@ xi.promyvion.receptacleOnFight = function(mob, target)
             local stray = GetMobByID(i)
             if stray:isSpawned() then
                 count = count + 1
-                if stray:getCurrentAction() == xi.act.ROAMING then
+                if stray:getCurrentAction() == xi.act.ROAMING and mob:checkDistance(stray) < 8 then
                     stray:updateEnmity(target)
                 end
             end
@@ -127,7 +136,7 @@ xi.promyvion.receptacleIdle = function(mob)
         end
 
         if count < numStrays then
-            mob:setLocalVar("[promy]nextStray", os.time() + 20)
+            mob:setLocalVar("[promy]nextStray", os.time() + 300)
             for i = mobId + 1, mobId + numStrays do
                 local stray = GetMobByID(i)
                 if not stray:isSpawned() then
@@ -146,21 +155,39 @@ end
 
 xi.promyvion.receptacleOnDeath = function(mob, optParams)
     if optParams.isKiller then
+        local zone = mob:getZone()
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
         local floor = ID.mob.MEMORY_RECEPTACLES[mobId][1]
         local streamId = ID.mob.MEMORY_RECEPTACLES[mobId][3]
         local stream = GetNPCByID(streamId)
+        local receptDead = zone:getLocalVar(string.format("receptDead[%i][%i]", mob:getZone():getID(), floor))
 
+        -- Memory receptacles do not respawn until all on current floor are killed
+        DisallowRespawn(mob:getID(), true)
+        receptDead = receptDead + 1
+        zone:setLocalVar(string.format("receptDead[%i][%i]", mob:getZone():getID(), floor), receptDead)
         mob:setAnimationSub(0)
 
-        -- open floor exit portal
-        if stream:getLocalVar("[promy]floorExit") == 1 then
-            randomizeFloorExit(ID, floor)
-            local events = ID.npc.MEMORY_STREAMS[streamId][7]
-            local event = events[math.random(#events)]
-            stream:setLocalVar("[promy]destination", event)
-            stream:openDoor(180)
+        -- open floor exit portal either random choice or all receptacles dead
+        for _, v in pairs(ID.mob.MEMORY_RECEPTACLES) do
+            if (v[1] == floor and receptDead == v[4]) or stream:getLocalVar("[promy]floorExit") == 1 then
+                randomizeFloorExit(ID, floor)
+                local events = ID.npc.MEMORY_STREAMS[streamId][7]
+                local event = events[math.random(#events)]
+                stream:setLocalVar("[promy]destination", event)
+                stream:openDoor(180)
+                break
+            end
+        end
+
+        -- Allow respawn if all receptacles on floor are dead
+        for _, v in pairs(ID.mob.MEMORY_RECEPTACLES) do
+            if v[1] == floor and receptDead == v[4] then
+                zone:setLocalVar(string.format("receptDead[%i][%i]", mob:getZone():getID(), floor), 0)
+                DisallowRespawn(mob:getID(), false)
+                mob:setRespawnTime(300)
+            end
         end
     end
 end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Risunela
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

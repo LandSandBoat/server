@@ -11,7 +11,7 @@ local itemObject = {}
 itemObject.onItemCheck = function(target)
     local result = 0
     -- Need retail verification: Is having set foot in the zone a requirement?
-    if not target:isZoneVisited(162) then
+    if not target:hasVisitedZone(162) then
         result = 56
     end
     return result

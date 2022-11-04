@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
 --  NPC: Bonarpant
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
