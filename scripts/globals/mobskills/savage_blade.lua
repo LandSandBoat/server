@@ -14,7 +14,7 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() ~= 4006) then
+    if mob:getPool() ~= 4006 then
         mob:messageBasic(xi.msg.basic.READIES_WS, 0, 42)
     end
 
@@ -22,7 +22,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if (mob:getPool() == 4006) then -- Trion@QuBia_Arena only
+    if mob:getPool() == 4006 then -- Trion@QuBia_Arena only
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.SAVAGE_LAND)
     end
 

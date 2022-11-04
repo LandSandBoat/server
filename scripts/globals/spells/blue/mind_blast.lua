@@ -50,7 +50,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.multiplier = params.multiplier + 0.50
     end
 
-    if (damage > 0 and resist > 0.3) then
+    if damage > 0 and resist > 0.3 then
         local typeEffect = xi.effect.PARALYSIS
         target:addStatusEffect(typeEffect, 20, 0, getBlueEffectDuration(caster, resist, typeEffect)) -- https://www.bg-wiki.com/bg/Mind_Blast says 20%
     end

@@ -50,7 +50,7 @@ spellObject.onSpellCast = function(caster, target, spell)
       multi = multi + 0.50
     end
 
-    if (damage > 0 and resist > 0.3) then
+    if damage > 0 and resist > 0.3 then
         local typeEffect = xi.effect.PARALYSIS
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))

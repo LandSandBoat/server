@@ -59,8 +59,8 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:isFollowingPath() == false then
-        if (os.time() - runTime > 10) then
-            if (mob:actionQueueEmpty() == true and isBusy == false) then
+        if os.time() - runTime > 10 then
+            if mob:actionQueueEmpty() == true and isBusy == false then
                 if mob:getLocalVar("run") <= 1 then
                     mob:setLocalVar("run", 1)
                     mob:setLocalVar("runTime", os.time())

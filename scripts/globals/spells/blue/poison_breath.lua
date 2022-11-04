@@ -55,7 +55,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = (casterHP / 10) + (casterLvl / 1.25)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (damage > 0 and resist > 0.3) then
+    if damage > 0 and resist > 0.3 then
         local typeEffect = xi.effect.POISON
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, resist, typeEffect))

@@ -23,7 +23,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     local params = {}
 
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
@@ -48,7 +47,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (damage > 0 and resist > 0.125) then
+    if damage > 0 and resist > 0.125 then
         local typeEffect = xi.effect.BLINDNESS
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 5, 0, getBlueEffectDuration(caster, resist, typeEffect))

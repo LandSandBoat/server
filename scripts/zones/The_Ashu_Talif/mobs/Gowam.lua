@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:hasStatusEffect(xi.effect.AZURE_LORE))then
+    if mob:hasStatusEffect(xi.effect.AZURE_LORE) then
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 0)
     else
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
