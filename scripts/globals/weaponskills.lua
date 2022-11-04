@@ -869,11 +869,11 @@ end
 -- handles displaying the appropriate action/message, delivering the damage to the mob, and any enmity from it
 function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack, wsResults, action)
     local finaldmg = wsResults.finalDmg
+
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
         if finaldmg >= 0 then
             if primaryMsg then
                 action:messageID(defender:getID(), xi.msg.basic.DAMAGE)
-                action:param(defender:getID(), math.abs(finaldmg))
             else
                 action:messageID(defender:getID(), xi.msg.basic.DAMAGE_SECONDARY)
             end
@@ -901,6 +901,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         end
         action:reaction(defender:getID(), xi.reaction.EVADE)
     end
+
     local targetTPMult = wsParams.targetTPMult or 1
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
