@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
 
     -- Count keyitems
     for i = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
-        if player:hasKeyItem(i) == true then
+        if player:hasKeyItem(i) then
             aaKeyitems = aaKeyitems + 1
         end
     end

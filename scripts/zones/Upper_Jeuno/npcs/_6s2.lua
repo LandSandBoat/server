@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(118) -- Start short cs quest with option "a clock most delicate"
 
     elseif aClockMostdelicate == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.CLOCK_TOWER_OIL) == true then
+        if player:hasKeyItem(xi.ki.CLOCK_TOWER_OIL) then
             player:startEvent(202) -- Ending quest "a clock most delicate"
         else
             player:startEvent(117) -- During quest "a clock most delicate"

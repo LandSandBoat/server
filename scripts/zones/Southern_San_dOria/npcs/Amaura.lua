@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar("DiaryPage") == 3 or toCureaCough == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.THYME_MOSS) == false and player:hasKeyItem(xi.ki.COUGH_MEDICINE) == false then
             player:startEvent(645) -- need thyme moss for cough med
-        elseif player:hasKeyItem(xi.ki.THYME_MOSS) == true then
+        elseif player:hasKeyItem(xi.ki.THYME_MOSS) then
             player:startEvent(646) -- receive cough med for Nenne
         end
     end

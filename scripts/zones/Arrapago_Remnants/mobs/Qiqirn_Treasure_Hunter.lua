@@ -47,7 +47,7 @@ entity.onMobFight = function(mob, target)
     if mob:isFollowingPath() == false and (os.time() - runTime > 20) then
         mob:setLocalVar("runTime", os.time())
         entity.onMobRoamAction(mob)
-    elseif mob:isFollowingPath() == true then
+    elseif mob:isFollowingPath() then
         if os.time() - popTime > 7 then
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)

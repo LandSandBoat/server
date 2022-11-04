@@ -26,11 +26,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(271)
     elseif aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 3 then
         player:startEvent(272)
-    elseif aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 4 and player:needToZone() == true then
+    elseif aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 4 and player:needToZone() then
         player:startEvent(273)
-    elseif aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 4 and player:needToZone() == false then
+    elseif aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 4 and not player:needToZone() then
         player:startEvent(274)
-    elseif loversInTheDusk == QUEST_AVAILABLE and aTestOfTrueLove == QUEST_COMPLETED and player:needToZone() == false then
+    elseif loversInTheDusk == QUEST_AVAILABLE and aTestOfTrueLove == QUEST_COMPLETED and not player:needToZone() then
         player:startEvent(275)
     elseif loversInTheDusk == QUEST_ACCEPTED then
         player:startEvent(276)

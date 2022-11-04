@@ -75,15 +75,15 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
     elseif csid == 246 and option == 0 then
         player:needToZone(true)
-        if player:hasStatusEffect(xi.effect.MUTE) == true then
+        if player:hasStatusEffect(xi.effect.MUTE) then
             player:delStatusEffect(xi.effect.MUTE)
             player:addGil(xi.settings.main.GIL_RATE * 1000)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1000)
-        elseif player:hasStatusEffect(xi.effect.BANE) == true then
+        elseif player:hasStatusEffect(xi.effect.BANE) then
             player:delStatusEffect(xi.effect.BANE)
             player:addGil(xi.settings.main.GIL_RATE * 1200)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1200)
-        elseif player:hasStatusEffect(xi.effect.PLAGUE) == true then
+        elseif player:hasStatusEffect(xi.effect.PLAGUE) then
             player:delStatusEffect(xi.effect.PLAGUE)
             player:addGil(xi.settings.main.GIL_RATE * 1500)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1500)

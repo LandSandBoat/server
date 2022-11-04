@@ -39,9 +39,9 @@ function onTrigger(player, str)
     end
 
     -- Execute the string..
-    local status, err1 = pcall(scriptObj)
-    if status == false then
-        player:PrintToPlayer("Error calling: " .. str .. "\n" .. err1)
+    local successfullyExecuted, errorMessage = pcall(scriptObj)
+    if not successfullyExecuted then
+        player:PrintToPlayer("Error calling: " .. str .. "\n" .. errorMessage)
     end
 
     -- Restore the os table..

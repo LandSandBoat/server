@@ -61,7 +61,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 10160 and option == 1 then
-        if player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) == false then
+        if not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIAN_LEARNERS_LOG)
             player:addKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
         end

@@ -26,7 +26,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) == false and mob:actionQueueEmpty() == true then
+    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) == false and mob:actionQueueEmpty() then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
         local changeHP = mob:getLocalVar("changeHP")

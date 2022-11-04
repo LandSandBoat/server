@@ -79,7 +79,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 230 and option == 10 then
-        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true then
+        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS)
         end
     elseif csid == 230 and option == 20 then
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("saveTheClockTowerNPCz2", 0)
         end
     elseif csid == 230 and option == 30 then
-        if player:hasItem(555) == true then
+        if player:hasItem(555) then
             player:messageSpecial(ID.text.ITEM_OBTAINED, 555)
             player:setCharVar("saveTheClockTowerVar", 1)
             player:setCharVar("saveTheClockTowerNPCz1", 0)

@@ -16,9 +16,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local reapstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
     if reapstatus >= 1 and trade:getItemCount() == 1 and trade:getGil() == 0 then
-        if trade:hasItemQty(4565, 1) == true then
+        if trade:hasItemQty(4565, 1) then
             player:startEvent(475, 500, 131)                     -- REAP WHAT YOU SOW + GIL: Quest Turn In: Sobbing Fungus turned in
-        elseif trade:hasItemQty(4566, 1) == true then
+        elseif trade:hasItemQty(4566, 1) then
             player:startEvent(477, 700)                     -- REAP WHAT YOU SOW + GIL + Stationary Set: Deathball turned in
         end
     end
