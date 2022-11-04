@@ -2585,6 +2585,7 @@ xi.mobMod =
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
+    MAGIC_RANGE         = 72, -- magic aggro range
 
     -- ASB Mod Start
     DRAW_IN_INCLUDE_PARTY     = 100, -- This will cause the mob's draw-in to also affect all party and alliance members
@@ -2978,7 +2979,7 @@ xi.animation =
 {
     NONE                    = 0,
     ATTACK                  = 1,
-    -- Death 2              = 2,
+    DESPAWN                 = 2,
     DEATH                   = 3,
     CHOCOBO                 = 5,
     FISHING                 = 6,

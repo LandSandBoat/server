@@ -25,7 +25,7 @@ effectObject.onEffectTick = function(target, effect)
     effect:setPower(effect:getPower()-1)
     target:delMod(xi.mod.ACC, -1)
     target:delMod(xi.mod.NINJA_TOOL, 1)
-    if (effect:getPower() % 2 == 0) then -- enmity+ decays from 20 to 10, so half as often as the rest.
+    if effect:getPower() % 2 == 0 then -- enmity+ decays from 20 to 10, so half as often as the rest.
         effect:setSubPower(effect:getSubPower()-1)
         target:delMod(xi.mod.ENMITY, 1)
     end

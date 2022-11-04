@@ -65,7 +65,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 274) then
+    if csid == 274 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 and npcUtil.giveKeyItem(player, xi.ki.MAMOOL_JA_ASSAULT_ORDERS) then
             -- taken assault mission

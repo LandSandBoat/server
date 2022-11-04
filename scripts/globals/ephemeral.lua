@@ -64,7 +64,7 @@ xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
             player:addCurrency(v.name, total)
 
             -- Make sure we flag success if any of the crystals can be traded
-            if (qty > 0) or (hqQty > 0) then
+            if qty > 0 or hqQty > 0 then
                 success = true
             end
         end

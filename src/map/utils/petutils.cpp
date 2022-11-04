@@ -1158,6 +1158,7 @@ namespace petutils
             PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
 
             PPet->PMaster = PMaster;
+            PPet->setBattleID(PMaster->getBattleID());
 
             if (PMaster->PBattlefield)
             {

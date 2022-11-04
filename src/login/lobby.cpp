@@ -839,8 +839,8 @@ int32 lobbyview_parse(int32 fd)
                     }
 
                     // (optional) Check if the name contains any words on the bad word list
-                    auto badWordsList = lua["xi"]["settings"]["login"]["BANNED_WORDS_LIST"].get<sol::table>();
-                    if (badWordsList.valid())
+                    auto loginSettingsTable = lua["xi"]["settings"]["login"].get<sol::table>();
+                    if (auto badWordsList = loginSettingsTable.get_or<sol::table>("BANNED_WORDS_LIST", sol::lua_nil); badWordsList.valid())
                     {
                         auto potentialName = to_upper(nameStr);
                         for (auto entry : badWordsList)

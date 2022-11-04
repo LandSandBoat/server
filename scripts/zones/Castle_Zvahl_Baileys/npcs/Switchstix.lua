@@ -128,14 +128,14 @@ local relics =
 local function hasRelic(player, isTrade)
     if isTrade then
         for key, value in pairs(relics) do
-            if (player:hasItemQty(key, 1)) then
+            if player:hasItemQty(key, 1) then
                 return key
             end
         end
         return nil
     else
         for key, value in pairs(relics) do
-            if (player:hasItem(key, xi.inv.INVENTORY)) then
+            if player:hasItem(key, xi.inv.INVENTORY) then
                 return key
             end
         end

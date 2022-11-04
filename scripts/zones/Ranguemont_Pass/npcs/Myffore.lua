@@ -17,7 +17,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if (csid == 1 and option == 0) then
+    if csid == 1 and option == 0 then
         local DoorID = npc:getID() + 1
         GetNPCByID(DoorID):openDoor(10)
     end

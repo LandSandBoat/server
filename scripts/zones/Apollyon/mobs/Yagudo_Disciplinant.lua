@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Apollyon CS
---  Mob: Yagudo Discipilnant
+--  Mob: Yagudo Disciplinant
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

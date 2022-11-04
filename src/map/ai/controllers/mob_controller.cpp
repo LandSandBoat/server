@@ -75,7 +75,8 @@ bool CMobController::TryDeaggro()
     // target is no longer valid, so wipe them from our enmity list
     if (!PTarget || PTarget->isDead() || PTarget->isMounted() || PTarget->loc.zone->GetID() != PMob->loc.zone->GetID() ||
         PMob->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        PMob->allegiance == PTarget->allegiance || CheckDetection(PTarget) || CheckHide(PTarget) || CheckLock(PTarget))
+        PMob->allegiance == PTarget->allegiance || CheckDetection(PTarget) || CheckHide(PTarget) || CheckLock(PTarget) ||
+        PMob->getBattleID() != PTarget->getBattleID())
     {
         if (PTarget)
         {
@@ -303,6 +304,12 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return CanSeePoint(PTarget->loc.p);
     }
 
+    if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
+        PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
+    {
+        return CanSeePoint(PTarget->loc.p);
+    }
+
     // everything below require distance to be below 20
     if (currentDistance > 20)
     {
@@ -310,12 +317,6 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
     }
 
     if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
-    {
-        return CanSeePoint(PTarget->loc.p);
-    }
-
-    if ((detects & DETECT_MAGIC) && PTarget->PAI->IsCurrentState<CMagicState>() &&
-        static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
     {
         return CanSeePoint(PTarget->loc.p);
     }
@@ -1308,6 +1309,11 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
     TracyZoneScoped;
     TracyZoneIString(PMob->GetName());
     TracyZoneIString(PTarget->GetName());
+
+    if (PMob->getBattleID() != PTarget->getBattleID())
+    {
+        return false;
+    }
 
     // Don't aggro I'm neutral
     if ((PMob->getMobMod(MOBMOD_ALWAYS_AGGRO) == 0 && !PMob->m_Aggro) || PMob->m_neutral || PMob->isDead())

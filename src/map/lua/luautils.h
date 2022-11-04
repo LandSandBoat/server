@@ -142,6 +142,7 @@ namespace luautils
     bool  IsZoneActive(uint16 zoneId);
     auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto  GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
