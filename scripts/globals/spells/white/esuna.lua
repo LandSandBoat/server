@@ -78,7 +78,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         -- collect a list of what caster currently has
         for i, effect in ipairs(removables) do
-            if (caster:hasStatusEffect(effect)) then
+            if caster:hasStatusEffect(effect) then
                 statusNum = statusNum + 1
                 has[statusNum] = removables[i]
             end
@@ -100,7 +100,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             -- collect a list of what caster currently has, again.
             has = {}
             for i, effect in ipairs(removables) do
-                if (caster:hasStatusEffect(effect)) then
+                if caster:hasStatusEffect(effect) then
                     statusNumMis = statusNumMis + 1
                     has[statusNumMis] = removables[i]
                 end

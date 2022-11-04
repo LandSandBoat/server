@@ -52,7 +52,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (resist > 0.25) then -- This line may need adjusting for retail accuracy.
+    if resist > 0.25 then -- This line may need adjusting for retail accuracy.
         target:addStatusEffect(xi.effect.STUN, 1, 0, 20 * resist) -- Wiki says duration of "up to" 20 second..
     end
 

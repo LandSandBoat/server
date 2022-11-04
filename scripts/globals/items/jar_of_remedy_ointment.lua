@@ -17,23 +17,23 @@ itemObject.onItemUse = function(target)
         local effectRemoved = 0
         while effectRemoved == 0 do
             local num = math.random(1, 5)
-            if (num == 1 and target:hasStatusEffect(xi.effect.SILENCE)) then
+            if num == 1 and target:hasStatusEffect(xi.effect.SILENCE) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.SILENCE)
 
-            elseif (num == 2 and target:hasStatusEffect(xi.effect.BLINDNESS)) then
+            elseif num == 2 and target:hasStatusEffect(xi.effect.BLINDNESS) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.BLINDNESS)
 
-            elseif (num == 3 and target:hasStatusEffect(xi.effect.POISON)) then
+            elseif num == 3 and target:hasStatusEffect(xi.effect.POISON) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.POISON)
 
-            elseif (num == 4 and target:hasStatusEffect(xi.effect.PARALYSIS)) then
+            elseif num == 4 and target:hasStatusEffect(xi.effect.PARALYSIS) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.PARALYSIS)
 
-            elseif (num == 5 and target:hasStatusEffect(xi.effect.DISEASE)) then
+            elseif num == 5 and target:hasStatusEffect(xi.effect.DISEASE) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.DISEASE)
             end

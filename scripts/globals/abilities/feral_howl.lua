@@ -51,7 +51,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     -- Adjusting duration based on resistance.
     if resist >= 20 then
-        if (resist / 10) >= (duration) then
+        if resist / 10 >= duration then
             duration = (duration - math.random(1, (duration - 2)))
         else
             duration = (duration - math.random(1, (resist / 10)))

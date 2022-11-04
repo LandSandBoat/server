@@ -22,9 +22,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     if mob:getName() == "Kreutzet" then
         local stormwindDamage = mob:getLocalVar("stormwindDamage")
-        if (stormwindDamage == 2) then
+        if stormwindDamage == 2 then
             dmgmod = 1.25
-        elseif (stormwindDamage == 3) then
+        elseif stormwindDamage == 3 then
             dmgmod = 1.6
         end
     end

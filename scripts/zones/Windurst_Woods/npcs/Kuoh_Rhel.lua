@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     -- Uncomment once conquest tally in place
     --elseif inAStew == QUEST_COMPLETED then
         --player:startEvent(240) -- new dialog between repeats
-    elseif (inAStew == QUEST_COMPLETED) then
+    elseif inAStew == QUEST_COMPLETED then
         player:startEvent(234) -- start repeat
 
     -- CHOCOBILIOUS

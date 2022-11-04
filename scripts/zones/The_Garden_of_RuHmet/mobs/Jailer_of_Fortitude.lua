@@ -34,9 +34,9 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("delay", 0)
     end
 
-    if (not GetMobByID(ID.mob.KFGHRAH_WHM):isDead() or not GetMobByID(ID.mob.KFGHRAH_BLM):isDead()) then -- check for kf'ghrah
+    if not GetMobByID(ID.mob.KFGHRAH_WHM):isDead() or not GetMobByID(ID.mob.KFGHRAH_BLM):isDead() then -- check for kf'ghrah
         if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
-            if (delay >= 3) then
+            if delay >= 3 then
                 mob:castSpell(spell)
                 mob:setLocalVar("COPY_SPELL", 0)
                 mob:setLocalVar("delay", 0)

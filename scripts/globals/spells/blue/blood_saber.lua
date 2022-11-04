@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = dmg * resist
     dmg = addBonuses(caster, spell, target, dmg)
     dmg = adjustForTarget(target, dmg, spell:getElement())
-    if (dmg > (caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 20)) then
+    if dmg > (caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 20) then
         dmg = (caster:getSkillLevel(xi.skill.BLUE_MAGIC) + 20)
     end
 

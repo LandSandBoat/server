@@ -54,7 +54,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(134)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
+        elseif count == 1 and trade:hasItemQty(timelessHourglassID, 1) then
             player:startEvent(153)
 
         -- currency exchanges

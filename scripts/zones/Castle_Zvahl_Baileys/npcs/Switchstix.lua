@@ -356,7 +356,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         -- Stage 4 cutscenes
-    elseif ((csid >= 68 and csid <= 82) or csid == 86) then
+    elseif (csid >= 68 and csid <= 82) or csid == 86 then
         player:setCharVar("RELIC_CONQUEST_WAIT", 0)
         switch(csid):caseof
             {

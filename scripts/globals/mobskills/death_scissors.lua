@@ -1,10 +1,7 @@
 -----------------------------------
 --  Death Scissors
---
 --  Description: Damage varies with TP.
 --  Type: Physical (Slashing)
---
---
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -24,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     -- keep damage around 700
-    if (dmg > 700) then
+    if dmg > 700 then
         dmg = dmg * 0.7
     end
 

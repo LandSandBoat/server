@@ -24,8 +24,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 1016 and option == 0xFFF00FF then -- Show the Mog House menu
         -- Print the expire time for mog locker if exists
         local lockerLease = xi.moghouse.getMogLockerExpiryTimestamp(player)
-        if (lockerLease ~= nil) then
-            if (lockerLease == -1) then -- Lease expired..
+        if lockerLease ~= nil then
+            if lockerLease == -1 then -- Lease expired..
                 player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 2, xi.items.IMPERIAL_BRONZE_PIECE)
             else
                 player:messageSpecial(ID.text.MOGLOCKER_MESSAGE_OFFSET + 1, lockerLease)

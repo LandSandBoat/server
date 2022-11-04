@@ -25,7 +25,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
    local dispelled = math.random(2, 3)
 
-   if (info.hitslanded ~= 0) then
+   if info.hitslanded ~= 0 then
       for i = 1, dispelled do
          target:dispelStatusEffect()
       end

@@ -55,7 +55,7 @@ entity.onTrade = function(player, npc, trade)
         then
             player:messageSpecial(ID.text.DRYEYES_3, xi.ki.CRIMSON_KEY)
         -- White Coral Key:
-        -- elseif (xi.settings.main.ENABLE_AMK == 1 and
+        -- elseif xi.settings.main.ENABLE_AMK == 1 and
             -- haven't even started AMK related trades yet.
         end
     end

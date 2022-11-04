@@ -12,7 +12,7 @@ entity.onMobFight = function(mob, target)
     local headgrow = mob:getLocalVar("headgrow")
     local broken = mob:getAnimationSub()
 
-    if (headgrow < battletime and broken > 4) then
+    if headgrow < battletime and broken > 4 then
         mob:setAnimationSub(broken - 1)
         mob:setLocalVar("headgrow", battletime + 300)
     end
@@ -24,7 +24,7 @@ entity.onCriticalHit = function(mob)
     local headbreak = mob:getLocalVar("headbreak")
     local broken = mob:getAnimationSub()
 
-    if (rand <= 0.15 and battletime >= headbreak and broken < 6) then
+    if rand <= 0.15 and battletime >= headbreak and broken < 6 then
         mob:setAnimationSub(broken + 1)
         mob:setLocalVar("headgrow", battletime + math.random(120, 240))
         mob:setLocalVar("headbreak", battletime + 300)

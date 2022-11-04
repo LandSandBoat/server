@@ -69,9 +69,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
-            if (equippedBody == 11186) then
+            if equippedBody == 11186 then
                 solaceStoneskin = math.floor(final * 0.30)
-            elseif (equippedBody == 11086) then
+            elseif equippedBody == 11086 then
                 solaceStoneskin = math.floor(final * 0.35)
             else
                 solaceStoneskin = math.floor(final * 0.25)

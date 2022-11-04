@@ -35,7 +35,7 @@ entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
     local battleForm
 
-    if mob:getBattleTime() - changeTime > 60)then
+    if mob:getBattleTime() - changeTime > 60 then
         battleForm = math.random(1, 3) -- same deal as above
         if battleForm == 1 then
             battleForm = 0

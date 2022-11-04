@@ -17,7 +17,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local dispel = target:eraseStatusEffect()
 
-    if (dispel ~= xi.effect.NONE) then
+    if dispel ~= xi.effect.NONE then
         return 0
     end
 
@@ -25,7 +25,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     mob:eraseAllStatusEffect()
 
     return 0

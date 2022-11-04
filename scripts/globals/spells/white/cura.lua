@@ -34,10 +34,10 @@ spellObject.onSpellCast = function(caster, target, spell)
         power = getCurePowerOld(caster)
         divisor = 1
         constant = -10
-        if (power > 100) then
+        if power > 100 then
                 divisor = 57
                 constant = 29.125
-        elseif (power > 60) then
+        elseif power > 60 then
                 divisor = 2
                 constant = 5
         end
