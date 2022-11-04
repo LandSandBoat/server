@@ -31,7 +31,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local effectbonus = player:getMod(xi.mod.LIGHT_ARTS_EFFECT)
     local regenbonus = 0
-    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+    if player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20 then
         regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10)
     end
 

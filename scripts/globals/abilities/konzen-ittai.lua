@@ -13,7 +13,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getAnimation() ~= 1) then
+    if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
         return 0, 0

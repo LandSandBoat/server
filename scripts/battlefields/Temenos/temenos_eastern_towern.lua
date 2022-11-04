@@ -253,7 +253,12 @@ content.paths =
 content.groups =
 {
     {
-        mobs = { "Armoury_Crate_Eastern" }
+        mobs = { "Armoury_Crate_Eastern" },
+        setup = function(battlefield, crates)
+            for _, crate in ipairs(crates) do
+                crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
+            end
+        end
     },
 
     {

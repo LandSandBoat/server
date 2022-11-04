@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
 
     -- Count Earrings
     for i = 14739, 14743 do
-        if (player:hasItem(i) == true) then
+        if player:hasItem(i) then
             dmEarrings = dmEarrings + 1
         end
     end

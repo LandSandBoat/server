@@ -19,20 +19,34 @@ entity.onTrigger = function(player, npc)
     local trialByFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
     local whisperOfFlames = player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
 
-    if ((trialByFire == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (trialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date"))) then
+    if (trialByFire == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (trialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date")) then
         player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
-    elseif (trialByFire == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) == false and whisperOfFlames == false) then
+    elseif trialByFire == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) == false and whisperOfFlames == false then
         player:startEvent(285, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Defeat against Ifrit : Need new Fork
-    elseif (trialByFire == QUEST_ACCEPTED and whisperOfFlames == false) then
+    elseif trialByFire == QUEST_ACCEPTED and whisperOfFlames == false then
         player:startEvent(271, 0, xi.ki.TUNING_FORK_OF_FIRE, 0)
-    elseif (trialByFire == QUEST_ACCEPTED and whisperOfFlames) then
+    elseif trialByFire == QUEST_ACCEPTED and whisperOfFlames then
         local numitem = 0
 
-        if (player:hasItem(17665)) then numitem = numitem + 1; end  -- Ifrits Blade
-        if (player:hasItem(13241)) then numitem = numitem + 2; end  -- Fire Belt
-        if (player:hasItem(13560)) then numitem = numitem + 4; end  -- Fire Ring
-        if (player:hasItem(1203)) then numitem = numitem + 8; end   -- Egil's Torch
-        if (player:hasSpell(298)) then numitem = numitem + 32; end  -- Ability to summon Ifrit
+        if player:hasItem(17665) then
+            numitem = numitem + 1
+        end  -- Ifrits Blade
+
+        if player:hasItem(13241) then
+            numitem = numitem + 2
+        end  -- Fire Belt
+
+        if player:hasItem(13560) then
+            numitem = numitem + 4
+        end  -- Fire Ring
+
+        if player:hasItem(1203) then
+            numitem = numitem + 8
+        end   -- Egil's Torch
+
+        if player:hasSpell(298) then
+            numitem = numitem + 32
+        end  -- Ability to summon Ifrit
 
         player:startEvent(273, 0, xi.ki.TUNING_FORK_OF_FIRE, 0, 0, numitem)
     else
@@ -44,18 +58,18 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 270 and option == 1) then
-        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
+    if csid == 270 and option == 1 then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         player:setCharVar("TrialByFire_date", 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
-    elseif (csid == 285) then
+    elseif csid == 285 then
         player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
-    elseif (csid == 273) then
+    elseif csid == 273 then
         local item = 0
         if (option == 1) then item = 17665         -- Ifrits Blade
         elseif (option == 2) then item = 13241  -- Fire Belt
@@ -63,13 +77,13 @@ entity.onEventFinish = function(player, csid, option)
         elseif (option == 4) then item = 1203     -- Egil's Torch
         end
 
-        if (player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6)) then
+        if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
-            if (option == 5) then
+            if option == 5 then
                 player:addGil(xi.settings.main.GIL_RATE * 10000)
                 player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
-            elseif (option == 6) then
+            elseif option == 6 then
                 player:addSpell(298) -- Ifrit Spell
                 player:messageSpecial(ID.text.IFRIT_UNLOCKED, 0, 0, 0)
             else

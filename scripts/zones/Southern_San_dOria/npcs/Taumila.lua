@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE then
-        if (trade:hasItemQty(884, 3) and trade:getItemCount() == 3) then
+        if trade:hasItemQty(884, 3) and trade:getItemCount() == 3 then
             player:startEvent(572)
         end
     end

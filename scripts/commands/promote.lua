@@ -35,7 +35,7 @@ function onTrigger(player, target, level)
     end
 
     -- catch players trying to change level of equal or higher tiered GMs.
-    if (targ:getGMLevel() >= player:getGMLevel()) then
+    if targ:getGMLevel() >= player:getGMLevel() then
         printf( "%s attempting to adjust same or higher tier GM %s.", player:getName(), targ:getName() )
         targ:PrintToPlayer(string.format( "%s attempted to adjust your GM rank.", player:getName() ))
         error(player, "You can not use this command on same or higher tiered GMs.")
@@ -43,7 +43,7 @@ function onTrigger(player, target, level)
     end
 
     -- validate level
-    if (level == nil or level < 0 or level > maxLevel) then
+    if level == nil or level < 0 or level > maxLevel then
         error(player, string.format("Invalid level.  Must be 0 to %i.", maxLevel ))
         return
     end

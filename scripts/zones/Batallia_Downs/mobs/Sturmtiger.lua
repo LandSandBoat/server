@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    if (player:getCharVar("ChasingQuotas_Progress") == 5) then
+    if player:getCharVar("ChasingQuotas_Progress") == 5 then
         player:setCharVar("SturmtigerKilled", 1)
     end
 end

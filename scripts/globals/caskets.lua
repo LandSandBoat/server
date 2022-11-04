@@ -289,7 +289,7 @@ local function multipleItemCheck(itemId)
     local multiples = { 1214, 1215, 1211, 1212, 1213, 1217, 1222, 1962 }
 
     for i = 1, #multiples do
-        if (itemId == multiples[i]) then
+        if itemId == multiples[i] then
             return true
         end
     end

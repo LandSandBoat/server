@@ -36,7 +36,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
         local varToSet = aernKills[mob:getID()]
 
-        if (varToSet ~= nil) then
+        if varToSet ~= nil then
             player:setCharVar(varToSet, 1)
         end
 

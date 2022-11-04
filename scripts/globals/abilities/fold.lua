@@ -12,7 +12,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (target:hasCorsairEffect()) then
+    if target:hasCorsairEffect() then
         return 0, 0
     else
         return xi.msg.basic.CANNOT_PERFORM, 0
@@ -25,7 +25,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     local merit = target:getMerit(xi.merit.FOLD)
     merit = merit - 10
 
-    if (math.random(0, 99) < merit) then
+    if math.random(0, 99) < merit then
         target:resetRecast(xi.recast.ABILITY, 193)
     end
 

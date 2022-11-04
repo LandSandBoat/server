@@ -25,27 +25,26 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-
-    if (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP) then -- can't have your crossbow/gun held like a bow, now can we?
+    if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then -- can't have your crossbow/gun held like a bow, now can we?
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
 
     local duration = 30 + player:getMod(xi.mod.SHADOW_BIND_EXT) + player:getJobPointLevel(xi.jp.SHADOWBIND_DURATION)
     local recycleChance = player:getMod(xi.mod.RECYCLE) + player:getMerit(xi.merit.RECYCLE)
-    if (player:hasStatusEffect(xi.effect.UNLIMITED_SHOT)) then
+    if player:hasStatusEffect(xi.effect.UNLIMITED_SHOT) then
         player:delStatusEffect(xi.effect.UNLIMITED_SHOT)
         recycleChance = 100
     end
 
      -- TODO: Acc penalty for /RNG, acc vs. mob level?
-    if (math.random(0, 99) >= target:getMod(xi.mod.BINDRES) and target:hasStatusEffect(xi.effect.BIND) == false) then
+    if math.random(0, 99) >= target:getMod(xi.mod.BINDRES) and target:hasStatusEffect(xi.effect.BIND) == false then
         target:addStatusEffect(xi.effect.BIND, 0, 0, duration)
         ability:setMsg(xi.msg.basic.IS_EFFECT) -- Target is bound.
     else
         ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
     end
 
-    if (math.random(0, 99) >= recycleChance) then
+    if math.random(0, 99) >= recycleChance then
         player:removeAmmo() -- Shadowbind depletes one round of ammo.
     end
 

@@ -17,7 +17,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.FOOD)) then
+    if target:hasStatusEffect(xi.effect.FOOD) then
         result = xi.msg.basic.IS_FULL
     end
     return result

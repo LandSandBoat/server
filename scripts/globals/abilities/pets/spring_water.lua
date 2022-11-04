@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
     base = base * tp / 1000
 
-    if (target:getHP() + base > target:getMaxHP()) then
+    if target:getHP() + base > target:getMaxHP() then
         base = target:getMaxHP() - target:getHP() --cap it
     end
     target:delStatusEffect(xi.effect.BLINDNESS)

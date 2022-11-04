@@ -36,6 +36,8 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/utils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/version.cpp # auto-generated
     ${CMAKE_CURRENT_SOURCE_DIR}/version.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/watchdog.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/watchdog.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zlib.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zlib.h
     $<$<PLATFORM_ID:Windows>:${CMAKE_CURRENT_SOURCE_DIR}/debug_windows.cpp>

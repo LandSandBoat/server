@@ -49,13 +49,13 @@ zoneObject.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Cutscene for Got It All quest.
-            if (player:getCharVar("gotitallCS") == 5) then
+            if player:getCharVar("gotitallCS") == 5 then
                 player:startEvent(526)
             end
         end,
 
         [2] = function (x) -- CS for Vanishing Act Quest
-            if (player:getCharVar("vanishingactCS") == 3) then
+            if player:getCharVar("vanishingactCS") == 3 then
                 player:startEvent(44)
             end
         end,
