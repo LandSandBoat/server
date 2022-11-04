@@ -22,7 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             local statusEffect = target:getStatusEffect(effect)
 
             -- only add it to me if I don't have it
-            if caster:hasStatusEffect(effect) == false then
+            if not caster:hasStatusEffect(effect) then
                 caster:addStatusEffect(effect, statusEffect:getPower(), statusEffect:getTickCount(), statusEffect:getDuration())
             end
 

@@ -24,9 +24,9 @@ entity.onTrigger = function(player, npc)
     if player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and trialSizeFire == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then --Requires player to be Summoner at least lvl 20
         player:startEvent(286, 0, 1544, 0, 20)     --mini tuning fork, zone, level
     elseif trialSizeFire == QUEST_ACCEPTED then
-        local fireFork = player:hasItem(1544)
+        local hasFireFork = player:hasItem(1544)
 
-        if fireFork == true then
+        if hasFireFork then
             player:startEvent(272) --Dialogue given to remind player to be prepared
         else
             player:startEvent(290, 0, 1544, 0, 20) --Need another mini tuning fork

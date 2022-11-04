@@ -179,7 +179,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
     end
 
     -- Additional Potency from Status Effects.
-    if soulVoicePower == true then -- Soul Voice/Macarato affects Power.
+    if soulVoicePower then -- Soul Voice/Macarato affects Power.
         if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
             power = math.floor(power * 2)
         elseif caster:hasStatusEffect(xi.effect.MARCATO) then

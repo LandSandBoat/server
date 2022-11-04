@@ -49,7 +49,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if target:isUndead() == false then
+    if not target:isUndead() then
         player:addHP((damage / 100) * drain)
     end
 

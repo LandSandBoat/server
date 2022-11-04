@@ -41,9 +41,13 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    if target:addStatusEffect(typeEffectOne, power, 0, duration) == false and target:addStatusEffect(typeEffectTwo, power, 0, duration) == false then -- both statuses fail to apply
+    if
+        not target:addStatusEffect(typeEffectOne, power, 0, duration) and
+        not target:addStatusEffect(typeEffectTwo, power, 0, duration)
+    then
+        -- both statuses fail to apply
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    elseif target:addStatusEffect(typeEffectOne, power, 0, duration) == false then -- the first status fails to apply
+    elseif not target:addStatusEffect(typeEffectOne, power, 0, duration) then -- the first status fails to apply
         target:addStatusEffect(typeEffectTwo, power, 0, duration)
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         returnEffect = typeEffectTwo

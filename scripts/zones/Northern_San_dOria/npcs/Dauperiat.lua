@@ -30,14 +30,13 @@ end
 entity.onTrigger = function(player, npc)
     -- "Blackmail" quest status
     local blackMail = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
-    local envelope = player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local homeRank = player:getRank(player:getNation())
     local questState = player:getCharVar("BlackMailQuest")
 
     if blackMail == QUEST_AVAILABLE and sanFame >= 3 and homeRank >= 3 then
         player:startEvent(643) -- 643 gives me letter
-    elseif blackMail == QUEST_ACCEPTED and envelope == true then
+    elseif blackMail == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE) then
         player:startEvent(645)  -- 645 recap, take envelope!
 
     elseif blackMail == QUEST_ACCEPTED and questState == 1 then

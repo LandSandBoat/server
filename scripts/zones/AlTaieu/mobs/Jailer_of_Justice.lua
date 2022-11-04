@@ -14,7 +14,7 @@ entity.onMobFight = function(mob, target)
     if os.time() - popTime > 60 then
         local alreadyPopped = false
         for Xzomit = mob:getID() + 1, mob:getID() + 6 do
-            if alreadyPopped == true then
+            if alreadyPopped then
                 break
             else
                 if not GetMobByID(Xzomit):isSpawned() then

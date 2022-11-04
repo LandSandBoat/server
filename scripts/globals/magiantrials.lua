@@ -555,7 +555,7 @@ xi.magian.magianEventUpdate = function(player, csid, option, EVENT_IDS)
                 local trialId = bit.rshift(option, 8)
                 local t = GetMagianTrial(trialId)
 
-                if player:hasItem(t.rewardItem) and rareItems[t.rewardItem] == true then
+                if player:hasItem(t.rewardItem) and rareItems[t.rewardItem] then
                     player:updateEvent(1)
                 else
                     player:updateEvent(0)
