@@ -1529,13 +1529,13 @@ namespace luautils
         return std::nullopt;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Gets all npcs matching the given name. (Some npcs exist in multiple  *
-     *  zones). Used for GM commands.                                         *
-     *                                                                       *
-     ************************************************************************/
-
+    /**
+     * Returns the npcs with a name matching the given pattern.
+     *
+     * @param pattern The pattern used to match the npc name. We use % as wildcard for consistency
+     * with other methods that perform patter matching.
+     * E.g: %anto% matches Shantotto and Canto-anto
+     */
     sol::table GetNPCsByName(std::string const& pattern)
     {
         TracyZoneScoped;
