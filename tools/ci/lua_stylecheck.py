@@ -28,6 +28,12 @@ def show_error(error_string):
     errcount += 1
 
 def check_table_formatting(line):
+    """Check for proper table styling:
+    Multi-line tables should use Allman braces, and all braces should be have at least one space or newline
+    prior to any nested table definition.
+
+    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#allman-braces
+    """
     # [ ]{0,} : Any number of spaces
     # =       : = character
     # [ ]{0,} : Any number of spaces
@@ -51,18 +57,32 @@ def check_table_formatting(line):
         show_error("Table closed without an appropriate preceding space or newline")
 
 def check_parameter_padding(line):
+    """Require padding between all parameters
+    All function parameters and tabled data should contain at least one space following every
+    comma.
+
+    See: TBD
+    """
     # ,[^ \n] : Any comma that does not have space or newline following
 
     for _ in re.finditer(",[^ \n]", line):
         show_error("Multiple parameters used without an appropriate following space or newline")
 
 def check_semicolon(line):
+    """No semi-colons should be used in Lua scripts.
+
+    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
+    """
     # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
 
     for _ in re.finditer(".*\;$", line):
         show_error("Semicolon detected at end of line")
 
 def check_variable_names(line):
+    """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
+
+    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#naming-and-misc
+    """
     # local     : 'local ' (with a space)
     # (?=       : Positive lookahead
     # [^(ID)])  : A token that is NOT 'ID'
@@ -90,10 +110,19 @@ def check_variable_names(line):
 
 # Require four-space intervals for indents
 def check_indentation(line):
+    """Indentation should be multiples of four spaces.
+
+    See: TBD
+    """
     if (len(line) - len(line.lstrip(' '))) % 4 != 0:
         show_error("Indentation must be multiples of 4 spaces")
 
 def check_operator_padding(line):
+    """All operators and comparators (>, <, >=, <=, ==, +, *, ~=, /, etc) should contain one space before and
+    after their usage.
+
+    See: TBD
+    """
     # [^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
 
     stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
@@ -101,6 +130,12 @@ def check_operator_padding(line):
         show_error("Operator or comparator without padding detected at end of line")
 
 def check_multiline_condition_format(line):
+    """Multi-line conditional blocks should contain if/elseif and then on their own lines,
+    with conditions indented between them.
+
+    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#formatting-conditional-blocks
+    """
+
     stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
     if contains_word('if')(stripped_line) or contains_word('elseif')(stripped_line):
         condition_start = stripped_line.replace('elseif','').replace('if','').strip()
