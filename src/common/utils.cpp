@@ -828,7 +828,8 @@ bool matches(std::string const& pattern, std::string const& target, std::string 
     {
         // This should never happen as we call this lambda from std::strings converted to const char*,
         // but good to be safe.
-        if (pattern == nullptr || target == nullptr) {
+        if (pattern == nullptr || target == nullptr)
+        {
             return false;
         }
 
@@ -839,29 +840,33 @@ bool matches(std::string const& pattern, std::string const& target, std::string 
         }
 
         // Make sure to eliminate consecutive '*'
-        if (*pattern == *wildcard) {
-            while (*(pattern + 1) == '*') {
+        if (*pattern == *wildcard)
+        {
+            while (*(pattern + 1) == '*')
+            {
                 pattern++;
             }
         }
 
         // Make sure that the characters after '*' are present
         // in target string.
-        if (*pattern == *wildcard && *(pattern + 1) != '\0' && *target == '\0') {
+        if (*pattern == *wildcard && *(pattern + 1) != '\0' && *target == '\0')
+        {
             return false;
         }
 
         // If the current characters of both strings match
-        if (*pattern == *target) {
+        if (*pattern == *target)
+        {
             return matchesRecur(pattern + 1, target + 1, wildcard, matchesRecur);
         }
 
         // If there is *, then there are two possibilities
         // a) We consider current character of target string
         // b) We ignore current character of target string.
-        if (*pattern == *wildcard) {
-            return matchesRecur(pattern + 1, target, wildcard, matchesRecur)
-                   || matchesRecur(pattern, target + 1, wildcard, matchesRecur);
+        if (*pattern == *wildcard)
+        {
+            return matchesRecur(pattern + 1, target, wildcard, matchesRecur) || matchesRecur(pattern, target + 1, wildcard, matchesRecur);
         }
 
         return false;

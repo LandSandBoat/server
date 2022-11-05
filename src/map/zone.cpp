@@ -840,7 +840,8 @@ CCharEntity* CZone::GetCharByID(uint32 id)
  *                                                                       *
  ************************************************************************/
 
-const NPCEntityList_t CZone::GetNPCsByName(std::string const& pattern) {
+const NPCEntityList_t CZone::GetNPCsByName(std::string const& pattern)
+{
     return m_zoneEntities->GetNPCsByName(pattern);
 }
 

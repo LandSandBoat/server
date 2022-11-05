@@ -54,9 +54,9 @@ namespace zoneutils
     CBaseEntity* GetEntity(uint32 ID, uint8 filter = -1);
     CCharEntity* GetCharByName(int8* name);
     auto         GetNPCsByName(std::string const& pattern) -> NPCEntityList_t const; // returns all npcs matching the given pattern (use % for wildcard), in all zones
-    CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid);  // returns pointer to character by id and target id
-    CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
-    CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returnes pointer to preferred char to update for party changes
+    CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid);                     // returns pointer to character by id and target id
+    CCharEntity* GetChar(uint32 id);                                                 // returns pointer to character by id
+    CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary);                    // returns pointer to preferred char to update for party changes
     void         ForEachZone(const std::function<void(CZone*)>& func);
     uint64       GetZoneIPP(uint16 zoneid);       // returns IPP for zone ID
     bool         IsResidentialArea(CCharEntity*); // returns whether or not the area is a residential zone

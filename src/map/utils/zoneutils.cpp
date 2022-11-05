@@ -152,7 +152,8 @@ namespace zoneutils
         for (auto PZone : g_PZoneList)
         {
             auto npcsInZone = PZone.second->GetNPCsByName(pattern);
-            for (CNpcEntity* npc : npcsInZone) {
+            for (CNpcEntity* npc : npcsInZone)
+            {
                 npcs.emplace_back(npc);
             }
         }
