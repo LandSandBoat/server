@@ -1109,8 +1109,10 @@ const NPCEntityList_t CZoneEntities::GetNPCsByName(std::string const& pattern)
 
     std::vector<CNpcEntity*> npcs;
 
-    for (const auto& npc : m_npcList) {
-        if (matches(pattern, npc.second->name)) {
+    for (const auto& npc : m_npcList)
+    {
+        if (matches(pattern, npc.second->name))
+        {
             npcs.emplace_back(dynamic_cast<CNpcEntity*>(npc.second));
         }
     }

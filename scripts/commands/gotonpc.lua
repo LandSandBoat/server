@@ -19,10 +19,10 @@ local removeInvalidNpcs = function(npcs)
     local validNpcs = {}
     for i, npc in pairs(npcs) do
         local pos = npc:getPos()
-        local pos0 = (pos.x == 0 and pos.y == 0 and pos.z == 0)
+        local invalidCoordinates = (pos.x == 0 and pos.y == 0 and pos.z == 0)
 
         -- only add npc if it is at valid coordinates
-        if not pos0 then
+        if not invalidCoordinates then
             table.insert(validNpcs, npc)
         end
     end

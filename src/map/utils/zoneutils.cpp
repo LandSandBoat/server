@@ -145,7 +145,7 @@ namespace zoneutils
         return nullptr;
     }
 
-    const NPCEntityList_t GetNPCsByName(std::string const& pattern)
+    NPCEntityList_t const GetNPCsByName(std::string const& pattern)
     {
         std::vector<CNpcEntity*> npcs;
 

@@ -832,6 +832,13 @@ CCharEntity* CZone::GetCharByID(uint32 id)
     return m_zoneEntities->GetCharByID(id);
 }
 
+/************************************************************************
+ *                                                                       *
+ *  Finds all npcs matching the given pattern. Patterns can contain      *
+ *  % as wildcard characters to match incomplete names. e.g: %anto%      *
+ *  matches Shantotto and Canto-Ranto                                    *
+ ************************************************************************/
+
 const NPCEntityList_t CZone::GetNPCsByName(std::string const& pattern) {
     return m_zoneEntities->GetNPCsByName(pattern);
 }
