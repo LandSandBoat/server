@@ -584,6 +584,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 }
 
                 PEntity->status = STATUS_TYPE::DISAPPEAR;
+                // Remove from battlefield so the dynamic entity can cleanup and clear it's dynamic entity ID
+                PEntity->PBattlefield = nullptr;
                 return found;
             }
             else
