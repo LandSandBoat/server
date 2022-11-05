@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -519,6 +519,11 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         }
 
         m_Zone->updateCharLevelRestriction(PChar);
+
+        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+        {
+            PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->SetSubPower(0);
+        }
 
         if (PChar->isDead())
         {
