@@ -88,7 +88,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if reward ~= 0 then
-            if player:getFreeSlotsCount() >= 1 and player:hasItem(reward) == false then
+            if player:getFreeSlotsCount() >= 1 and not player:hasItem(reward) then
                 player:addItem(reward)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
                 if csid == 55 then

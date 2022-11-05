@@ -145,7 +145,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    if player:delGil(10) == false then
+    if not player:delGil(10) then
         player:setLocalVar("Dalba_PlayCutscene", 2)  -- Cancel the cutscene.
         player:updateEvent(0)
     else

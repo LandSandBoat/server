@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     local aTestOfTrueLoveProgress = player:getCharVar("ATestOfTrueLoveProgress")
     local loversInTheDusk = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
-    if player:getFameLevel(xi.quest.fame_area.BASTOK) >= 7 and aTestOfTrueLove == QUEST_AVAILABLE and loveAndIce == QUEST_COMPLETED and player:needToZone() == false then
+    if player:getFameLevel(xi.quest.fame_area.BASTOK) >= 7 and aTestOfTrueLove == QUEST_AVAILABLE and loveAndIce == QUEST_COMPLETED and not player:needToZone() then
         player:startEvent(270)
     elseif aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress < 3 then
         player:startEvent(271)

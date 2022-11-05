@@ -20,7 +20,7 @@ end
 entity.onTrigger = function(player, npc)
 --    player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN) -- ======== FOR TESTING ONLY ==========-----
 -- ======== FOR TESTING ONLY ==========-----
---    if player:getCharVar("QuestCatchItIfYouCan_var") == 0 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false then
+--    if player:getCharVar("QuestCatchItIfYouCan_var") == 0 and not player:hasStatusEffect(xi.effect.MUTE) and not player:hasStatusEffect(xi.effect.BANE) and not player:hasStatusEffect(xi.effect.PLAGUE) then
 --        rand = math.random(1, 3)
 --        if rand == 1 then
 --            player:addStatusEffect(xi.effect.MUTE, 0, 0, 100)
@@ -49,11 +49,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(231) -- CATCH IT IF YOU CAN: Before Quest 2
         end
 
-    elseif catch >= 1 and (player:hasStatusEffect(xi.effect.MUTE) == true or player:hasStatusEffect(xi.effect.BANE) == true or player:hasStatusEffect(xi.effect.PLAGUE) == true) then
+    elseif catch >= 1 and (player:hasStatusEffect(xi.effect.MUTE) or player:hasStatusEffect(xi.effect.BANE) or player:hasStatusEffect(xi.effect.PLAGUE)) then
         player:startEvent(246) -- CATCH IT IF YOU CAN: Quest Turn In 1
     elseif catch >= 1 and player:needToZone() then
         player:startEvent(255) -- CATCH IT IF YOU CAN: After Quest
-    elseif catch == 1 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false then
+    elseif catch == 1 and not player:hasStatusEffect(xi.effect.MUTE) and not player:hasStatusEffect(xi.effect.BANE) and not player:hasStatusEffect(xi.effect.PLAGUE) then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(248) -- CATCH IT IF YOU CAN: During Quest 1

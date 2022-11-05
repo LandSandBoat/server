@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) == false then
+    if not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) then
         player:startEvent(111)
     end
 

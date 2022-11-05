@@ -36,17 +36,13 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    local learnerLog = player:hasKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
-    local trialLog = player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG)
-
     if player:getMainLvl() < 30 then
         player:startEvent(10151)
-
     elseif
         player:getCharVar("MetGreenMagianMog") == 0 and
-        learnerLog == false
+        not player:hasKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
     then
-        if trialLog == false then
+        if not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
             player:startEvent(10160, 0)
         else
             player:startEvent(10160, 1)

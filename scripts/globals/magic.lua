@@ -995,7 +995,7 @@ end
 
 function getElementalDebuffDOT(INT)
     local DOT = 0
-    if INT<= 39 then
+    if INT <= 39 then
         DOT = 1
     elseif INT <= 69 then
         DOT = 2
