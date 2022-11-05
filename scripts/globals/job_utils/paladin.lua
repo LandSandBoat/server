@@ -168,8 +168,8 @@ xi.job_utils.paladin.useSentinel = function(player, target, ability)
     local jpValue     = player:getJobPointLevel(xi.jp.SENTINEL_EFFECT)
     local duration    = 30 + enhGuardian
 
-   -- Sent as positive power because UINTs, man.
-   player:addStatusEffect(xi.effect.SENTINEL, power, 3, duration, 0, guardian + jpValue)
+    -- Sent as positive power because UINTs, man.
+    player:addStatusEffect(xi.effect.SENTINEL, power, 3, duration, 0, guardian + jpValue)
 end
 
 xi.job_utils.paladin.useSepulcher = function(player, target, ability)

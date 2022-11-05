@@ -13,20 +13,22 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-  if mob:getFamily() == 316 then
-    local mobSkin = mob:getModelId()
+    if mob:getFamily() == 316 then
+        local mobSkin = mob:getModelId()
 
-    if mobSkin == 1805 then
-        return 0
-    else
-        return 1
+        if mobSkin == 1805 then
+            return 0
+        else
+            return 1
+        end
     end
-  end
-   --[[TODO: Khimaira should only use this when its wings are up, which is animationsub() == 0.
-   There's no system to put them "down" yet, so it's not really fair to leave it active.
-   Tyger's fair game, though. :)]]
+
+    --[[TODO: Khimaira should only use this when its wings are up, which is animationsub() == 0.
+    There's no system to put them "down" yet, so it's not really fair to leave it active.
+    Tyger's fair game, though. :)]]
     return 0
 end
+
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3

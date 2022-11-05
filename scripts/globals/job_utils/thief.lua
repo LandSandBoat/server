@@ -374,7 +374,7 @@ xi.job_utils.thief.usePerfectDodge = function(player, target, ability)
 end
 
 xi.job_utils.thief.useSneakAttack = function(player, target, ability)
-   player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
+    player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
 end
 
 xi.job_utils.thief.useSteal = function(player, target, ability, action)
@@ -446,5 +446,5 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
 end
 
 xi.job_utils.thief.useTrickAttack = function(player, target, ability)
-   player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
+    player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
 end

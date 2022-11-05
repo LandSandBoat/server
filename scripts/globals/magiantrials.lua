@@ -586,7 +586,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         player:setLocalVar("storeItemId", 0)
 
     -- returns item to player
-   elseif csid == EVENT_IDS[5] and (optionMod == 0 or optionMod == 4) then
+    elseif csid == EVENT_IDS[5] and (optionMod == 0 or optionMod == 4) then
         local trialId = player:getLocalVar("storeTrialId")
         local t = GetMagianTrial(trialId)
         player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)

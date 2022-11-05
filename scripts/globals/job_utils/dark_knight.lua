@@ -81,7 +81,7 @@ xi.job_utils.dark_knight.useBloodWeapon = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useConsumeMana = function(player, target, ability)
-   player:addStatusEffect(xi.effect.CONSUME_MANA, 1, 0, 60)
+    player:addStatusEffect(xi.effect.CONSUME_MANA, 1, 0, 60)
 end
 
 xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)

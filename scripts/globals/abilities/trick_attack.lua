@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-   xi.job_utils.thief.useTrickAttack(player, target, ability)
+    xi.job_utils.thief.useTrickAttack(player, target, ability)
 end
 
 return abilityObject

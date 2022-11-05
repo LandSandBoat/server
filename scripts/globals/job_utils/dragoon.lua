@@ -125,7 +125,7 @@ end
 
 xi.job_utils.dragoon.abilityCheckCallWyvern = function(player, target, ability)
     if player:getPet() ~= nil then
-         return xi.msg.basic.ALREADY_HAS_A_PET, 0
+        return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
         return xi.msg.basic.UNABLE_TO_USE_JA, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
@@ -390,8 +390,8 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
 end
 
 xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
-   local wyvern = getWyvern(player)
-   wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is "Magic Attack boost wears off."
+    local wyvern = getWyvern(player)
+    wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is "Magic Attack boost wears off."
 end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)

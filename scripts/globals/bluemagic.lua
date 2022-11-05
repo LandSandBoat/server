@@ -64,9 +64,9 @@ end
 
 local function BlueGetWsc(attacker, params)
     local wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
-         attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
+        attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
+        attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
+        attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
     return wsc
 end
 
@@ -245,7 +245,7 @@ function BluePhysicalSpell(caster, target, spell, params)
 
     local bonusWSC = 0
     if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
-       bonusWSC = 2
+        bonusWSC = 2
     end
 
     -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)

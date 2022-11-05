@@ -161,7 +161,7 @@ function InteractionLookup:addContainers(containers, zoneIds)
     if zoneIds ~= nil then
         validZoneTable = {}
         for i = 1, #zoneIds do
-           validZoneTable[zoneIds[i]] = true
+            validZoneTable[zoneIds[i]] = true
         end
     end
 

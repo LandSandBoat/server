@@ -1062,7 +1062,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                 else
                     player:showText(npc, mOffset + 55, item, ring.cp) -- "You do not have the required conquest points to recharge."
                 end
-             else
+            else
                 -- TODO: Verify that message is retail correct.
                 -- This gives feedback on a failure at least, and is grouped with the recharge messages.  Confident enough for a commit.
                 player:showText(npc, mOffset + 56, item) -- "Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.

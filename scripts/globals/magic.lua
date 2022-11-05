@@ -226,7 +226,7 @@ local function calculateMagicBurst(caster, spell, target, params)
         elseif skillchainCount == 2 then -- three weaponskills
             skillchainburst = 1.45
         elseif skillchainCount == 3 then -- four weaponskills
-             skillchainburst = 1.55
+            skillchainburst = 1.55
         elseif skillchainCount == 4 then -- five weaponskills
             skillchainburst = 1.65
         elseif skillchainCount == 5 then -- six weaponskills
@@ -481,7 +481,7 @@ function applyResistanceEffect(caster, target, spell, params)
             target:hasStatusEffect(xi.effect.FEALTY) and
             not family == xi.magic.spellFamily.FOE_REQUIEM and
             not (family >= xi.magic.spellFamily.FIRE_THRENODY and
-                 family <= xi.magic.spellFamily.DARK_THRENODY)
+            family <= xi.magic.spellFamily.DARK_THRENODY)
         then
             return 0
         end
@@ -682,7 +682,7 @@ function handleAfflatusMisery(caster, spell, dmg)
     return dmg
 end
 
- function finalMagicAdjustments(caster, target, spell, dmg)
+function finalMagicAdjustments(caster, target, spell, dmg)
     --Handles target's HP adjustment and returns UNSIGNED dmg (absorb message is set in this function)
 
     -- handle multiple targets
@@ -749,7 +749,7 @@ end
     end
 
     return dmg
- end
+end
 
 function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- Handles target's HP adjustment and returns SIGNED dmg (negative values on absorb)
@@ -873,7 +873,7 @@ function addBonuses(caster, spell, target, dmg, params)
 
         local mab_crit = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
         if math.random(1, 100) < mab_crit then
-           mab = mab + ( 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE ) )
+            mab = mab + ( 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE ) )
         end
 
         local mdefBarBonus = 0
