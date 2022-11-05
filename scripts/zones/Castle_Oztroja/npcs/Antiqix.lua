@@ -21,18 +21,18 @@ local currency =
 
 local shop =
 {
-     7, 1312, -- Angel Skin
-     8, 1518, -- Colossal Skull
-     9, 1464, -- Lancewood Log
+    7,  1312, -- Angel Skin
+    8,  1518, -- Colossal Skull
+    9,  1464, -- Lancewood Log
     23, 1463, -- Chronos Tooth
     24, 1467, -- Relic Steel
     25, 1462, -- Lancewood Lumber
-    28, 658,  -- Damascus Ingot
+    28,  658, -- Damascus Ingot
 }
 
 local maps =
 {
-    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]  = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,

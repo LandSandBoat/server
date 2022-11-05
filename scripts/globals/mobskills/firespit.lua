@@ -24,7 +24,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 4, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

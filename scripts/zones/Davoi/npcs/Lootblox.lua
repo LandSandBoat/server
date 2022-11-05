@@ -21,12 +21,12 @@ local currency =
 
 local shop =
 {
-     5, 1295, -- Twincoon
-     6, 1466, -- Relic Iron
-     7, 1520, -- Goblin Grease
-     8, 1516, -- Griffon Hide
+    5,  1295, -- Twincoon
+    6,  1466, -- Relic Iron
+    7,  1520, -- Goblin Grease
+    8,  1516, -- Griffon Hide
     23, 1459, -- Griffon Leather
-    25, 883,  -- Behemoth Horn
+    25,  883,  -- Behemoth Horn
     28, 1458, -- Mammoth Tusk
 }
 

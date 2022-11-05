@@ -33,7 +33,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return result
 end
 
-
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BURN
     local power = 21

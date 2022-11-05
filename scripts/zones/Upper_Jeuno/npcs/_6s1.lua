@@ -65,8 +65,8 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     if
-       (csid == 84 or csid == 204) and
-       option == 4
+        (csid == 84 or csid == 204) and
+        option == 4
     then
         player:updateEvent(ring[1], ring[2], ring[3])
     end

@@ -32,7 +32,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- addEx to pervent dispel
     mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 45)

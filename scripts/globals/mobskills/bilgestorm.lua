@@ -26,7 +26,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = math.random(20, 25)
 

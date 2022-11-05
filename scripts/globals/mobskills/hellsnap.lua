@@ -32,7 +32,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 4)
 

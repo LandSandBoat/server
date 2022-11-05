@@ -10,17 +10,17 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.EXCAVATION_DUTY and
-           player:getCharVar("assaultEntered") == 0 and
-           player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.EXCAVATION_DUTY and
+        player:getCharVar("assaultEntered") == 0 and
+        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:getMainLvl() > 50
 end
 
 instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.EXCAVATION_DUTY and
-           player:getCharVar("assaultEntered") == 0 and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.EXCAVATION_DUTY and
+        player:getCharVar("assaultEntered") == 0 and
+        player:getMainLvl() > 50
 end
 
 instanceObject.onInstanceCreated = function(instance)

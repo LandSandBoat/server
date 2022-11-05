@@ -38,7 +38,7 @@ function quest.unlockingMyth.onTrade(player, npc, trade)
                 elseif wsPoints <= 8000 then
                     player:startEvent(10093)
                 elseif wsPoints >= 16000 then
-                     player:startEvent(10088, jobID)
+                    player:startEvent(10088, jobID)
                 end
             end
 

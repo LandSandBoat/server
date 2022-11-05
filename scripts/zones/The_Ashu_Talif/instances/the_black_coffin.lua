@@ -10,12 +10,12 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and
-           player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
 end
 
 instanceObject.entryRequirements = function(player)
     return player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.THE_BLACK_COFFIN and
-           player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
+        player:hasKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
 end
 
 instanceObject.onInstanceCreated = function(instance)

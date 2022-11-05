@@ -357,51 +357,52 @@ function utils.getSkillLvl(rank, level)
 end
 
 function utils.getMobSkillLvl(rank, level)
-     if level > 50 then
-         if rank == 1 then
-             return 153 + (level - 50) * 5
-         end
-         if rank == 2 then
-             return 147 + (level - 50) * 4.9
-         end
-         if rank == 3 then
-             return 136 + (level - 50) * 4.8
-         end
-         if rank == 4 then
-             return 126 + (level - 50) * 4.7
-         end
-         if rank == 5 then
-             return 116 + (level - 50) * 4.5
-         end
-         if rank == 6 then
-             return 106 + (level - 50) * 4.4
-         end
-         if rank == 7 then
-             return 96 + (level - 50) * 4.3
-         end
-     end
+    if level > 50 then
+        if rank == 1 then
+            return 153 + (level - 50) * 5
+        end
+        if rank == 2 then
+            return 147 + (level - 50) * 4.9
+        end
+        if rank == 3 then
+            return 136 + (level - 50) * 4.8
+        end
+        if rank == 4 then
+            return 126 + (level - 50) * 4.7
+        end
+        if rank == 5 then
+            return 116 + (level - 50) * 4.5
+        end
+        if rank == 6 then
+            return 106 + (level - 50) * 4.4
+        end
+        if rank == 7 then
+            return 96 + (level - 50) * 4.3
+        end
+    end
 
-     if rank == 1 then
-         return 6 + (level - 1) * 3
-     end
-     if rank == 2 then
-         return 5 + (level - 1) * 2.9
-     end
-     if rank == 3 then
-         return 5 + (level - 1) * 2.8
-     end
-     if rank == 4 then
-         return 4 + (level - 1) * 2.7
-     end
-     if rank == 5 then
-         return 4 + (level - 1) * 2.5
-     end
-     if rank == 6 then
-         return 3 + (level - 1) * 2.4
-     end
-     if rank == 7 then
-         return 3 + (level - 1) * 2.3
-     end
+    if rank == 1 then
+        return 6 + (level - 1) * 3
+    end
+    if rank == 2 then
+        return 5 + (level - 1) * 2.9
+    end
+    if rank == 3 then
+        return 5 + (level - 1) * 2.8
+    end
+    if rank == 4 then
+        return 4 + (level - 1) * 2.7
+    end
+    if rank == 5 then
+        return 4 + (level - 1) * 2.5
+    end
+    if rank == 6 then
+        return 3 + (level - 1) * 2.4
+    end
+    if rank == 7 then
+        return 3 + (level - 1) * 2.3
+    end
+
     return 0
 end
 
