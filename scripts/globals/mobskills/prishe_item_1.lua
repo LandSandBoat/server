@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 8, false)
     else
         -- using Daedalus Wing!
-        mob:addTP(1000)
+        mob:addTP(3000)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 9, false)
     end
     return 0

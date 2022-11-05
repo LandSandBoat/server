@@ -17,7 +17,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         if (v.entity:isPC()) then
             local race = v.entity:getRace()
             if (race == xi.race.TARU_M or race == xi.race.TARU_F) and not v.entity:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) then
-                mob:showText(mob, ID.text.PROMATHIA_TEXT + 2)
                 return 0
             end
         end

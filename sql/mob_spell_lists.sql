@@ -1601,12 +1601,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Disaster_Idol_Darksday',125,275,1,255); -
 -- Casting_Behemoth (126)
 INSERT INTO `mob_spell_lists` VALUES ('Casting_Behemoth',126,218,1,255); -- meteor (1~255)
 
--- Promathia_1 (127)
-INSERT INTO `mob_spell_lists` VALUES ('Promathia_1',127,219,1,255); -- comet (1~255)
-
--- Promathia_2 (128)
-INSERT INTO `mob_spell_lists` VALUES ('Promathia_2',128,218,1,255); -- meteor (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Promathia_2',128,219,1,255); -- comet (1~255)
+-- 126 - 127 Free
 
 -- Prishe (129)
 INSERT INTO `mob_spell_lists` VALUES ('Prishe',129,4,1,255);  -- cure_iv (1~255)
