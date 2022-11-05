@@ -15,7 +15,7 @@ function error(player, msg)
     player:PrintToPlayer("!gotonpc <npcName> (index)")
 end
 
-function removeInvalidNpcs(npcs)
+local removeInvalidNpcs = function(npcs)
     local validNpcs = {}
     for i, npc in pairs(npcs) do
         local pos = npc:getPos()
@@ -30,7 +30,7 @@ function removeInvalidNpcs(npcs)
     return validNpcs
 end
 
-function goToNpc(player, npc)
+local goToNpc = function(player, npc)
     -- determine whether we need zoneId parameter
     local gotoZone = nil
     if npc:getZoneID() ~= player:getZoneID() then
