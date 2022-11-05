@@ -45,9 +45,6 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:setCharVar('StormsOfFate', 3)
             player:addTitle(xi.title.CONQUEROR_OF_FATE)
         end
-        if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
-            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
-        end
     end
 end
 
