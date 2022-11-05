@@ -15,6 +15,37 @@ function error(player, msg)
     player:PrintToPlayer("!gotonpc <npcName> (index)")
 end
 
+function removeInvalidNpcs(npcs)
+    local validNpcs = {}
+    for i, npc in pairs(npcs) do
+        local pos = npc:getPos()
+        local pos0 = (pos.x == 0 and pos.y == 0 and pos.z == 0)
+
+        -- only add npc if it is at valid coordinates
+        if not pos0 then
+            table.insert(validNpcs, npc)
+        end
+    end
+
+    return validNpcs
+end
+
+function goToNpc(player, npc)
+    -- determine whether we need zoneId parameter
+    local gotoZone = nil
+    if npc:getZoneID() ~= player:getZoneID() then
+        gotoZone = npc:getZoneID()
+    end
+
+    -- display message
+    player:PrintToPlayer(string.format("Going to %s %s (%i).", npc:getName(), npc:getZoneName(), npc:getID()))
+
+    -- half a second later, go.  this delay gives time for previous message to appear
+    player:timer(500, function(playerArg)
+        playerArg:setPos(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos(), gotoZone)
+    end)
+end
+
 function onTrigger(player, npcName, index)
     -- validate npc
     if npcName == nil or npcName == "" then
@@ -50,35 +81,4 @@ function onTrigger(player, npcName, index)
     for i, npc in pairs(npcs) do
         player:PrintToPlayer(string.format("[%d]: %s %s (%s)", i, npc:getName(), npc:getZoneName(), npc:getID()))
     end
-end
-
-function removeInvalidNpcs(npcs)
-    validNpcs = {}
-    for i, npc in pairs(npcs) do
-        local pos = npc:getPos()
-        pos0 = (pos.x == 0 and pos.y == 0 and pos.z == 0)
-
-        -- only add npc if not at 0,0,0
-        if not pos0 then
-            table.insert(validNpcs, npc)
-        end
-    end
-
-    return validNpcs
-end
-
-function goToNpc(player, npc)
-    -- determine whether we need zoneId parameter
-    local gotoZone = nil
-    if npc:getZoneID() ~= player:getZoneID() then
-        gotoZone = npc:getZoneID()
-    end
-
-    -- display message
-    player:PrintToPlayer(string.format("Going to %s %s (%i).", npc:getName(), npc:getZoneName(), npc:getID()))
-
-    -- half a second later, go.  this delay gives time for previous message to appear
-    player:timer(500, function(playerArg)
-        playerArg:setPos(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos(), gotoZone)
-    end)
 end
