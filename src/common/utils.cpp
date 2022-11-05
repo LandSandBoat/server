@@ -826,6 +826,12 @@ bool matches(std::string const& pattern, std::string const& target, std::string 
 {
     auto matchesRecur = [&](const char* pattern, const char* target, const char* wildcard, auto&& matchesRecur)
     {
+        // This should never happen as we call this lambda from std::strings converted to const char*,
+        // but good to be safe.
+        if (pattern == nullptr || target == nullptr) {
+            return false;
+        }
+
         // If we reach at the end of both strings, we are done
         if (*pattern == '\0' && *target == '\0')
         {
