@@ -1113,7 +1113,10 @@ const NPCEntityList_t CZoneEntities::GetNPCsByName(std::string const& pattern)
     {
         if (matches(pattern, npc.second->name))
         {
-            npcs.emplace_back(dynamic_cast<CNpcEntity*>(npc.second));
+            if (auto* PNpc = dynamic_cast<CNpcEntity*>(npc.second))
+            {
+                npcs.emplace_back(PNpc);
+            }
         }
     }
 
