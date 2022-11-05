@@ -36,7 +36,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local chance = (tp - 1000) * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0) > math.random() * 150
     if damage > 0 and chance then
-        if target:hasStatusEffect(xi.effect.STUN) == false then
+        if not target:hasStatusEffect(xi.effect.STUN) then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 4)
         end
     end

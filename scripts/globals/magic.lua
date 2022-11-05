@@ -373,7 +373,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
     end
 
     local rapture = 1
-    if isBlueMagic == false then --rapture doesn't affect BLU cures as they're not white magic
+    if not isBlueMagic then --rapture doesn't affect BLU cures as they're not white magic
         if caster:hasStatusEffect(xi.effect.RAPTURE) then
             rapture = 1.5 + caster:getMod(xi.mod.RAPTURE_AMOUNT) / 100
             caster:delStatusEffectSilent(xi.effect.RAPTURE)

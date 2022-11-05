@@ -54,7 +54,7 @@ entity.onTrigger = function(player, npc)
     elseif evenmoreTravelsStatus == QUEST_ACCEPTED and player:getCharVar("EVEN_MORE_GULLIBLES_PROGRESS") == 2 then
         player:startEvent(152, 0, 1144, 256)
     elseif gulliblesTravelsStatus == QUEST_COMPLETED then
-        if evenmoreTravelsStatus == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 7 and player:needToZone() == false then
+        if evenmoreTravelsStatus == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 7 and not player:needToZone() then
         player:startEvent(148, 0, 256, 0, 0, 35000)
         else
             player:startEvent(147)

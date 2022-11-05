@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.FISHING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.FISHING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
             player:startEvent(10012, skillCap, skillLevel, 1, 239, player:getGil(), 0, 0, 0) -- p1 = skill level
         else
             player:startEvent(10012, skillCap, skillLevel, 1, 239, player:getGil(), 19194, 4031, 0)

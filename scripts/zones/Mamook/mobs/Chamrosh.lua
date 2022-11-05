@@ -27,7 +27,7 @@ entity.onMobFight = function(mob, target)
     local spell = mob:getLocalVar("COPY_SPELL")
     local changeTime = mob:getLocalVar("changeTime")
 
-    if spell > 0 and mob:hasStatusEffect(xi.effect.SILENCE) == false then
+    if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
         if delay >= 3 then
             mob:castSpell(spell)
             mob:setLocalVar("COPY_SPELL", 0)

@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 
     if guildMember == 1 then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(231, 8, 0, 0, 0, 188, 0, 3, 0)
             else
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
             player:startEvent(230, 8, skillLevel, 0, 511, 188, 0, 3, 2184)
         else
             player:startEvent(230, 8, skillLevel, 0, 511, 188, 7101, 3, 2184)

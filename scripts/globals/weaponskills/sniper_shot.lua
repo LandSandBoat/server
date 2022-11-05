@@ -32,7 +32,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if damage > 0 and target:hasStatusEffect(xi.effect.INT_DOWN) == false then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.INT_DOWN) then
         target:addStatusEffect(xi.effect.INT_DOWN, 10, 0, 140)
     end
 

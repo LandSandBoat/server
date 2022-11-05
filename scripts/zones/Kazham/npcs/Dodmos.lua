@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Kazham/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1544, 1) == true and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN then
+    if trade:hasItemQty(1544, 1) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN then
         player:startEvent(287, 0, 1544, 0, 20)
     end
 end

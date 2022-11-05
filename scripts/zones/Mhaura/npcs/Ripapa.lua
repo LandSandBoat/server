@@ -18,7 +18,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local trialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
-    local whisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+    local hasWhisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
@@ -26,17 +26,17 @@ entity.onTrigger = function(player, npc)
     -- Carbunlce Debacle
     if carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 3 and player:hasItem(1172) == false then
+    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 3 and not player:hasItem(1172) then
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
     elseif (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date")) then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
-    elseif trialByLightning == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) == false and whisperOfStorms == false then
+    elseif trialByLightning == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) and not hasWhisperOfStorms then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
-    elseif trialByLightning == QUEST_ACCEPTED and whisperOfStorms == false then
+    elseif trialByLightning == QUEST_ACCEPTED and not hasWhisperOfStorms then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
-    elseif trialByLightning == QUEST_ACCEPTED and whisperOfStorms then
+    elseif trialByLightning == QUEST_ACCEPTED and hasWhisperOfStorms then
         local numitem = 0
 
         if player:hasItem(17531) then

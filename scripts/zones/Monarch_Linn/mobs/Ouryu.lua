@@ -18,7 +18,7 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    if mob:hasStatusEffect(xi.effect.INVINCIBLE) == false and mob:actionQueueEmpty() then
+    if not mob:hasStatusEffect(xi.effect.INVINCIBLE) and mob:actionQueueEmpty() then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
 

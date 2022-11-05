@@ -18,10 +18,7 @@ entity.onTrade = function(player, npc, trade)
     local questState = player:getCharVar("BlackMailQuest")
 
     if black == QUEST_ACCEPTED and questState == 2 or black == QUEST_COMPLETED then
-        local count = trade:getItemCount()
-        local carta = trade:hasItemQty(530, 1)
-
-        if carta == true and count == 1 then
+        if trade:hasItemQty(530, 1) and trade:getItemCount() == 1 then
             player:startEvent(648, 0, 530) --648
         end
     end

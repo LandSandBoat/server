@@ -209,7 +209,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    if caster:isPC() and xi.settings.main.USE_OLD_MAGIC_DAMAGE == false then
+    if caster:isPC() and not xi.settings.main.USE_OLD_MAGIC_DAMAGE then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
     else
         baseSpellDamage = pTable[spellId][vNPC] -- vNPC
