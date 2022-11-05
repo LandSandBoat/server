@@ -818,6 +818,43 @@ std::string trim(std::string const& str, std::string const& whitespace)
     return str.substr(strBegin, strRange);
 }
 
+/// Matches the given target with the given pattern, using the algorithm linked below.
+/// There's possibly a more clever / modern c way of doing this.
+/// https://www.geeksforgeeks.org/wildcard-character-matching/
+bool matchesRecursive(const char* pattern, const char* target, const char* wildcard) {
+    // If we reach at the end of both strings, we are done
+    if (*pattern == '\0' && *target == '\0')
+        return true;
+
+    // Make sure to eliminate consecutive '*'
+    if (*pattern == *wildcard) {
+        while (*(pattern + 1) == '*')
+            pattern++;
+    }
+
+    // Make sure that the characters after '*' are present
+    // in target string.
+    if (*pattern == *wildcard && *(pattern + 1) != '\0'
+        && *target == '\0')
+        return false;
+
+    // If the current characters of both strings match
+    if (*pattern == *target)
+        return matchesRecursive(pattern + 1, target + 1, wildcard);
+
+    // If there is *, then there are two possibilities
+    // a) We consider current character of target string
+    // b) We ignore current character of target string.
+    if (*pattern == *wildcard)
+        return matchesRecursive(pattern + 1, target, wildcard)
+               || matches(pattern, target + 1, wildcard);
+    return false;
+}
+
+bool matches(const std::string& pattern, const std::string& target, const std::string& wildcard) {
+    return matchesRecursive(pattern.c_str(), target.c_str(), wildcard.c_str());
+}
+
 look_t stringToLook(std::string str)
 {
     look_t out{};

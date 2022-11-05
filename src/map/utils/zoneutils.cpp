@@ -145,6 +145,21 @@ namespace zoneutils
         return nullptr;
     }
 
+    const NPCEntityList_t GetNPCsByName(std::string const& pattern)
+    {
+        std::vector<CNpcEntity*> npcs;
+
+        for (auto PZone : g_PZoneList)
+        {
+            auto npcsInZone = PZone.second->GetNPCsByName(pattern);
+            for (CNpcEntity* npc : npcsInZone) {
+                npcs.emplace_back(npc);
+            }
+        }
+
+        return npcs;
+    }
+
     CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid)
     {
         // will not return pointers to players in Mog House

@@ -832,6 +832,10 @@ CCharEntity* CZone::GetCharByID(uint32 id)
     return m_zoneEntities->GetCharByID(id);
 }
 
+const NPCEntityList_t CZone::GetNPCsByName(std::string const& pattern) {
+    return m_zoneEntities->GetNPCsByName(pattern);
+}
+
 /************************************************************************
  *                                                                       *
  *  Отправляем глобальные пакеты                                         *

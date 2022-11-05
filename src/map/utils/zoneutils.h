@@ -53,6 +53,7 @@ namespace zoneutils
     CNpcEntity*  GetTrigger(uint16 TargID, uint16 ZoneID);
     CBaseEntity* GetEntity(uint32 ID, uint8 filter = -1);
     CCharEntity* GetCharByName(int8* name);
+    const NPCEntityList_t GetNPCsByName(std::string const& pattern); // returns all npcs matching the given pattern (use % for wildcard), in all zones
     CCharEntity* GetCharFromWorld(uint32 charid, uint16 targid);  // returns pointer to character by id and target id
     CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
     CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returnes pointer to preferred char to update for party changes

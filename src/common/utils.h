@@ -88,6 +88,10 @@ auto split(std::string const& s, std::string const& delimiter = " ") -> std::vec
 auto to_lower(std::string const& s) -> std::string;
 auto to_upper(std::string const& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
+/// Returns true if the given str matches the given pattern
+/// Wildcards can be used in the pattern to match "any character"
+/// e.g: %anto% matches Shantotto or Canto-Ranto
+bool matches(const std::string& pattern, const std::string& target, const std::string& wildcard = "%");
 
 look_t stringToLook(std::string str);
 

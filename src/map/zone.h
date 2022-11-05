@@ -512,6 +512,7 @@ typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 typedef std::map<uint16, CBaseEntity*> EntityList_t;
 
 using QueryByNameResult_t = std::vector<CBaseEntity*>;
+using NPCEntityList_t = std::vector<CNpcEntity*>;
 
 int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 
@@ -546,6 +547,9 @@ public:
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
+    /// Finds all npcs matching the given pattern. Patterns can contain % as wildcard characters to
+    /// match incomplete names. e.g: %anto% matches Shantotto and Canto-Ranto
+    virtual const NPCEntityList_t GetNPCsByName(std::string const& pattern);
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
 

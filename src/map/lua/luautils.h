@@ -142,6 +142,15 @@ namespace luautils
     auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto  GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    /**
+     * Returns the npcs with a name matching the given pattern.
+     *
+     * @param pattern The pattern used to match the npc name. We use % as wildcard for consistency
+     * with other methods that perform patter matching.
+     * E.g: %anto% matches Shantotto and Canto-anto
+     */
+    auto GetNPCsByName(std::string const& pattern) -> sol::table;
+
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
