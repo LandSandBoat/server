@@ -70,9 +70,9 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Do it!
     if caster:isPC() then
-        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, merits, 0, 20, 3)
+        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, merits, 0, 15, 3)
     else
-        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 20, 3)
+        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 15, 3)
     end
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
