@@ -21,7 +21,6 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
-    player:delStatusEffect(xi.effect.LEVEL_RESTRICTION) -- can't be capped at 50 for this fight !
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
