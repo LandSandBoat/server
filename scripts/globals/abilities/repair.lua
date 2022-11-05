@@ -101,7 +101,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local diff = petMaxHP - petCurrentHP
 
-    if (diff < totalHealing) then
+    if diff < totalHealing then
         totalHealing = diff
     end
 

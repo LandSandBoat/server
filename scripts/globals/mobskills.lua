@@ -565,7 +565,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    if attackType == xi.attackType.PHYSICAL and skill:isSingle() == false then
+    if attackType == xi.attackType.PHYSICAL and not skill:isSingle() then
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
@@ -647,7 +647,7 @@ end
 -- end
 
 xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, damageType)
-    if target:isUndead() == false then
+    if not target:isUndead() then
         if drainType == xi.mobskills.drainType.MP then
             -- can't go over limited mp
             if target:getMP() < drain then

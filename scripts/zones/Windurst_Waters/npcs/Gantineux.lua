@@ -21,9 +21,9 @@ entity.onTrigger = function(player, npc)
     if actingInGoodFaith == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and player:getMainLvl() >= 10 then
         player:startEvent(10019) -- Start quest "Acting in Good Faith"
     elseif actingInGoodFaith == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) == true then
+        if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
             player:startEvent(10020) -- During quest "Acting in Good Faith" (with Spirit Incense KI)
-        elseif player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) == true then
+        elseif player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
             player:startEvent(10022) --  During quest "Acting in Good Faith" (with Gantineux's Letter)
         else
             player:startEvent(10021) -- During quest "Acting in Good Faith" (before Gantineux's Letter)

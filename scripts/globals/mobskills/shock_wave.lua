@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if target:isBehind(mob, 48) == true then
+    if target:isBehind(mob, 48) then
         return 1
     end
 

@@ -159,7 +159,7 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Check for time limit, too
-    if os.time() > depopTime and mob:actionQueueEmpty() == true then
+    if os.time() > depopTime and mob:actionQueueEmpty() then
         for i = 0, 1 do
             for j = 1, 8 do
                 if pets[i][j]:isSpawned() then

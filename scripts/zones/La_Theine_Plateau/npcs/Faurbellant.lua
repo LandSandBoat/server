@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     if gates == QUEST_COMPLETED then
         player:showText(npc, ID.text.FAURBELLANT_4)
     elseif gates == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WIND) == true then
+        if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WIND) then
             player:showText(npc, ID.text.FAURBELLANT_2, 0, xi.ki.SCRIPTURE_OF_WIND)
             player:delKeyItem(xi.ki.SCRIPTURE_OF_WIND)
             player:addKeyItem(xi.ki.SCRIPTURE_OF_WATER)

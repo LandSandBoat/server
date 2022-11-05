@@ -43,10 +43,10 @@ entity.onTrigger = function(player, npc)
             player:startEvent(274, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
     elseif makingAmends == QUEST_ACCEPTED then
             player:startEvent(275, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
-    elseif makingAmends == QUEST_COMPLETED and needToZone == true then
+    elseif makingAmends == QUEST_COMPLETED and needToZone then
             player:startEvent(278) -- MAKING AMENDS: After Quest
 --End Making Amends Section; Begin Wonder Wands Section
-    elseif makingAmends == QUEST_COMPLETED and makingAmens == QUEST_COMPLETED and wonderWands == QUEST_AVAILABLE and pFame >= 5 and needToZone == false then
+    elseif makingAmends == QUEST_COMPLETED and makingAmens == QUEST_COMPLETED and wonderWands == QUEST_AVAILABLE and pFame >= 5 and not needToZone then
             player:startEvent(259) --Starts Wonder Wands
     elseif wonderWands == QUEST_ACCEPTED then
             player:startEvent(260) --Reminder for Wonder Wands

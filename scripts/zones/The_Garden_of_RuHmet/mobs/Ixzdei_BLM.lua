@@ -71,7 +71,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if
-        mob:actionQueueEmpty() == true and
+        mob:actionQueueEmpty() and
         not isBusy
     then -- dont change forms while charging Optic Induration
         if

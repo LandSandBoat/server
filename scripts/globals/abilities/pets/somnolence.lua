@@ -29,7 +29,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     duration = duration * resist
 
-    if duration > 0 and target:hasStatusEffect(xi.effect.WEIGHT) == false then
+    if duration > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
         target:addStatusEffect(xi.effect.WEIGHT, 50, 0, duration)
     end
 

@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 
     ----- Save The Clock Tower Quest -----
     if
-        trade:hasItemQty(555, 1) == true and
+        trade:hasItemQty(555, 1) and
         trade:getItemCount() == 1
     then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2

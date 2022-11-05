@@ -50,7 +50,7 @@ entity.onEventUpdate = function(player, csid, option, target)
 
     local party = player:getParty()
 
-    if (party ~= nil) then
+    if party ~= nil then
         for i, v in pairs(party) do
             if not v:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS and v:getCurrentAssault() == assaultid) then
                 player:messageText(target, ID.text.MEMBER_NO_REQS, false)

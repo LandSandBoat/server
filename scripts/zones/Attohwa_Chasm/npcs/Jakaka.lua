@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             -- Both Vanadiel time and unix timestamps are based on seconds. Add the difference to the event.
             player:startEvent(14, VanadielTime() + (miasmaFilterCD - os.time()))
         else
-            if player:hasItem(1778) == true or player:hasItem(1777) then -- Parradamo Stones, Flaxen Pouch
+            if player:hasItem(1778) or player:hasItem(1777) then -- Parradamo Stones, Flaxen Pouch
                 player:startEvent(15)
             else
                 player:startEvent(13)

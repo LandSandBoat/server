@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 450
-    if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         power = getCurePowerOld(caster)
         divisor = 0.6666
         constant = 330
@@ -68,13 +68,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     if isValidHealTarget(caster, target) then -- e.g. is a PC and not a monster (?)
-        if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+        if xi.settings.main.USE_OLD_CURE_FORMULA then
             basecure = getBaseCureOld(power, divisor, constant)
         else
             basecure = getBaseCure(power, divisor, constant, basepower)
         end
         final = getCureFinal(caster, spell, basecure, minCure, false)
-        if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false then
+        if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and not target:hasStatusEffect(xi.effect.STONESKIN) then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
             if equippedBody == 11186 then
@@ -127,7 +127,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
-            if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+            if xi.settings.main.USE_OLD_CURE_FORMULA then
                 basecure = getBaseCureOld(power, divisor, constant)
             else
                 basecure = getBaseCure(power, divisor, constant, basepower)

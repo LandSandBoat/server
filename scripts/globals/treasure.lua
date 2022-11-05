@@ -1551,7 +1551,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
             end
         end
         local gilAmount = math.random(info.gil[2], info.gil[3])
-        local gil = gilAmount/#membersInZone
+        local gil = gilAmount / #membersInZone
         for i = 1, #membersInZone do
             membersInZone[i]:addGil(gil)
             membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gil)

@@ -43,7 +43,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delStatusEffect(xi.effect.REFRESH)
     end
 
-    if target:addStatusEffect(typeEffect, power, 3, duration) == false then
+    if not target:addStatusEffect(typeEffect, power, 3, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

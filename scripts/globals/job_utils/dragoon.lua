@@ -379,7 +379,7 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     local typeEffect = xi.effect.DEFENSE_DOWN
     local duration = 15 + player:getMerit(xi.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
 
-    if target:addStatusEffect(typeEffect, 20, 0, duration) == false then
+    if not target:addStatusEffect(typeEffect, 20, 0, duration) then
         ability:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

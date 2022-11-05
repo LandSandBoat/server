@@ -30,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 60
-    if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         power = getCurePowerOld(caster)
         divisor = 1
         constant = 20
@@ -70,7 +70,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
 
-    if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         basecure = getBaseCureOld(power, divisor, constant)
     else
         basecure = getBaseCure(power, divisor, constant, basepower)

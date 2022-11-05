@@ -14,7 +14,7 @@ entity.onMobRoamAction = function(mob)
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
-    if mob:isFollowingPath() == false then
+    if not mob:isFollowingPath() then
         mob:setSpeed(40)
         mob:pathThrough(ID.points[stage][prog].route, 9)
     end
@@ -44,10 +44,10 @@ entity.onMobFight = function(mob, target)
     --    isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     -- end
 
-    if mob:isFollowingPath() == false and (os.time() - runTime > 20) then
+    if not mob:isFollowingPath() and (os.time() - runTime > 20) then
         mob:setLocalVar("runTime", os.time())
         entity.onMobRoamAction(mob)
-    elseif mob:isFollowingPath() == true then
+    elseif mob:isFollowingPath() then
         if os.time() - popTime > 7 then
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)

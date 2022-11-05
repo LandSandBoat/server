@@ -14,7 +14,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- TODO: Replace this when there's a better method than isFacingTheSameDirection() aka isBehind
-    if target:isBehind(mob) == false then
+    if not target:isBehind(mob) then
         return 1
     end
     return 0

@@ -178,7 +178,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             -- Finish.
-            if winCondition == true then
+            if winCondition then
                 instance:setLocalVar("procedureTime", os.time() + 6)
                 npc:timer(6000, function(npcLamp)
                     instance:setLocalVar("lampsCorrect", 0)
