@@ -889,7 +889,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
                 action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
             end
         end
-
+        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
