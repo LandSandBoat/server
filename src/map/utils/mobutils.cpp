@@ -1382,24 +1382,10 @@ Usage:
                 CZone* newZone = zoneutils::GetZone(zoneID);
 
                 // Get dynamic targid
-                PMob->targid = newZone->GetZoneEntities()->GetNewDynamicTargID();
+                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
 
-                // Insert ally's new targid into zone's dynamic entity list
-                newZone->GetZoneEntities()->dynamicTargIds.insert(PMob->targid);
                 // Ensure dynamic targid is released on death
                 PMob->m_bReleaseTargIDOnDeath = true;
-
-                // Calculate ID based off targID
-                PMob->id = 0x1000000 + (zoneID << 12) + PMob->targid;
-
-                // Add 0x100 if targid is >= 0x800 -- observed on retail.
-                if (PMob->targid >= 0x800)
-                {
-                    PMob->id += 0x100;
-                }
-
-                // assign new zone
-                PMob->loc.zone = newZone;
 
                 // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
                 newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;

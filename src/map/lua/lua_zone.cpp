@@ -232,27 +232,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     // NOTE: Mob allegiance is the default for NPCs
     PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
 
-    uint16 ZoneID = m_pLuaZone->GetID();
+    m_pLuaZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PEntity);
 
-    // TODO: Wrap this entity in a unique_ptr that will free this dynamic targ ID
-    //       on despawn/destruction
-    // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
-    PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
-    if (PEntity->targid >= 0x900)
-    {
-        ShowError("CLuaZone::insertDynamicEntity : targid is high (03hX), update packets will be ignored", PEntity->targid);
-    }
-
-    m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
-
-    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
-    // Add 0x100 if targid is >= 0x800 -- observed on retail.
-    if (PEntity->targid >= 0x800)
-    {
-        PEntity->id += 0x100;
-    }
-
-    PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
     PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
     PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
