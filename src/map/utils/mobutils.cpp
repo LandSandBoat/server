@@ -37,6 +37,7 @@
 #include "battleutils.h"
 #include "mobutils.h"
 #include "petutils.h"
+#include "zone_entities.h"
 #include "zoneutils.h"
 #include <vector>
 
@@ -1378,13 +1379,33 @@ Usage:
                 PMob->m_TrueDetection = sql->GetUIntData(68);
                 PMob->m_Detects       = sql->GetUIntData(69);
 
+                CZone* newZone = zoneutils::GetZone(zoneID);
+
+                // Get dynamic targid
+                PMob->targid = newZone->GetZoneEntities()->GetNewDynamicTargID();
+
+                // Insert ally's new targid into zone's dynamic entity list
+                newZone->GetZoneEntities()->dynamicTargIds.insert(PMob->targid);
+                // Ensure dynamic targid is released on death
+                PMob->m_bReleaseTargIDOnDeath = true;
+
+                // Calculate ID based off targID
+                PMob->id = 0x1000000 + (zoneID << 12) + PMob->targid;
+
+                // Add 0x100 if targid is >= 0x800 -- observed on retail.
+                if (PMob->targid >= 0x800)
+                {
+                    PMob->id += 0x100;
+                }
+
+                // assign new zone
+                PMob->loc.zone = newZone;
+
+                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
-
-                // TODO: This shouldn't go into the pet list, it appears to only
-                //     : do this because that was the only way to have temporary
-                //     : entities at the time.
-                zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);
 
