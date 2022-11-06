@@ -5628,14 +5628,56 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
             if (PChar->PPet)
             {
                 CPetEntity* PPet = static_cast<CPetEntity*>(PChar->PPet);
-                if (PPet->getPetType() == PET_TYPE::WYVERN)
+
+                if (PPet->getPetType() == PET_TYPE::CHARMED_MOB)
                 {
-                    petutils::LoadWyvernStatistics(PChar, PPet, true);
+                    // Charmed mobs only detach if they are above the level restriction
+                    if (PPet->GetMLevel() > NewMLevel)
+                    {
+                        petutils::DetachPet(PChar);
+                    }
+                    return PChar->m_LevelRestriction;
                 }
-                else
+
+                // Preserve pet's HP and MP
+                int32 hp = PPet->health.hp;
+                int32 mp = PPet->health.mp;
+
+                // Reset pet to a clean slate
+                PPet->StatusEffectContainer->KillAllStatusEffect();
+                PPet->restoreModifiers();
+                PPet->restoreMobModifiers();
+                PPet->TraitList.clear();
+
+                switch (PPet->getPetType())
                 {
-                    petutils::DespawnPet(PChar);
+                    case PET_TYPE::AVATAR:
+                        petutils::CalculateAvatarStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::WYVERN:
+                        petutils::CalculateWyvernStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::JUG_PET:
+                        petutils::CalculateJugPetStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::AUTOMATON:
+                        petutils::CalculateAutomatonStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::LUOPAN:
+                        petutils::CalculateLoupanStats(PChar, PPet);
+                        break;
+                    default:
+                        petutils::DespawnPet(PChar);
+                        return PChar->m_LevelRestriction;
                 }
+
+                // Setup pet with master since traits, abilities and some status effects need to be reapplied
+                petutils::SetupPetWithMaster(PChar, PPet);
+
+                // Restore pet's HP and MP to what it was before the stat recalculation
+                PPet->health.hp = std::min(hp, PPet->GetMaxHP());
+                PPet->health.mp = std::min(mp, PPet->GetMaxMP());
+                PPet->updatemask |= UPDATE_HP;
             }
         }
     }
