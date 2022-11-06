@@ -45,8 +45,8 @@ function onTrigger(player, keyId, target)
         player:PrintToPlayer(string.format("%s already has key item %i.", targ:getName(), keyId))
     else
         local ID = zones[targ:getZoneID()]
-        targ:addKeyItem( keyId )
-        targ:messageSpecial( ID.text.KEYITEM_OBTAINED, keyId )
+        targ:addKeyItem(keyId)
+        targ:messageSpecial(ID.text.KEYITEM_OBTAINED, keyId)
         player:PrintToPlayer(string.format("Key item %i was given to %s.", keyId, targ:getName()))
     end
 end

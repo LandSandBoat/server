@@ -873,7 +873,7 @@ function addBonuses(caster, spell, target, dmg, params)
 
         local mab_crit = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
         if math.random(1, 100) < mab_crit then
-            mab = mab + ( 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE ) )
+            mab = mab + (10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE))
         end
 
         local mdefBarBonus = 0
@@ -1124,11 +1124,11 @@ function doElementalNuke(caster, spell, target, spellParams)
             end
 
         elseif dINT < inflectionPoint then
-             -- If dINT > 0 but below inflection point I
+            -- If dINT > 0 but below inflection point I
             dmg = baseValue + dINT * tierMultiplier
 
         else
-             -- Above inflection point I additional dINT is only half as effective
+            -- Above inflection point I additional dINT is only half as effective
             dmg = baseValue + inflectionPoint + ((dINT - inflectionPoint) * (tierMultiplier / 2))
         end
 

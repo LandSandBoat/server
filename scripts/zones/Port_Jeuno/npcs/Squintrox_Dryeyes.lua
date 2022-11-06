@@ -111,7 +111,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:messageSpecial(ID.text.DRYEYES_3, xi.ki.VIRIDIAN_KEY)
 
             else
-                -- player:showText(player, ? )
+                -- player:showText(player, ?)
                 -- Doesn't seem to be a message for trying when you don't have the key items?
             end
         -- Blue coral Key

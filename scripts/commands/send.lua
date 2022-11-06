@@ -321,7 +321,7 @@ function onTrigger(player, bytes)
         target = string.sub(bytes, 1, sppos-1)
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -369,7 +369,7 @@ function onTrigger(player, bytes)
             target = dest
             dest = GetPlayerByName(dest)
             if dest == nil then
-                error(player, string.format( "Player named '%s' not found!", target ))
+                error(player, string.format("Player named '%s' not found!", target))
                 return
             end
             x = dest:getXPos()
@@ -383,6 +383,6 @@ function onTrigger(player, bytes)
     -- send target to destination
     targ:setPos(x, y, z, rot, zone)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer( string.format("Sent %s to zone %i.", targ:getName(), zone) )
+        player:PrintToPlayer(string.format("Sent %s to zone %i.", targ:getName(), zone))
     end
 end

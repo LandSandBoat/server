@@ -114,10 +114,10 @@ local function fTP(tp, ftp1, ftp2, ftp3)
         tp = 1000
     end
     if tp >= 1000 and tp < 1500 then
-        return ftp1 + ( ((ftp2 - ftp1) / 500) * (tp - 1000))
+        return ftp1 + (((ftp2 - ftp1) / 500) * (tp - 1000))
     elseif tp >= 1500 and tp <= 3000 then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500))
+        return ftp2 + (((ftp3 - ftp2) / 1500) * (tp - 1500))
     end
     return 1 -- no ftp mod
 end
@@ -184,7 +184,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     ratio = utils.clamp(ratio, 0, 4)
 
     --work out hit rate for mobs
-    local hitrate = ( (acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
+    local hitrate = ((acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
 
     hitrate = utils.clamp(hitrate, 20, 95)
 

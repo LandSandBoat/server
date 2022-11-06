@@ -120,10 +120,8 @@ local entryInfo =
         beatKI   = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = { 100, -8, 131, 47, 39 },
         reqs = function(player)
-            return (
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
                 xi.settings.main.FREE_COP_DYNAMIS == 1
-            )
         end,
     },
 
@@ -137,10 +135,8 @@ local entryInfo =
         beatKI   = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = { 155, -1, -169, 170, 40 },
         reqs = function(player)
-            return (
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
                 xi.settings.main.FREE_COP_DYNAMIS == 1
-            )
         end,
     },
 
@@ -154,10 +150,8 @@ local entryInfo =
         beatKI   = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = { -19, -17, 104, 253, 41 },
         reqs = function(player)
-            return (
-                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
                 xi.settings.main.FREE_COP_DYNAMIS == 1
-            )
         end,
     },
 

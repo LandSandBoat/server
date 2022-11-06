@@ -14,16 +14,16 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- The Afflictor System (RegionID, X, Radius, Z) for curse
-    zone:registerRegion( 1, -163, 15, -137, 0, 0, 0) -- The Afflictor, Map 1, G-10
-    zone:registerRegion( 2, -209, 15, -131, 0, 0, 0) -- The Afflictor, Map 1, F-10
-    zone:registerRegion( 3, -140, 15,   20, 0, 0, 0) -- The Afflictor, Map 2, G-8
-    zone:registerRegion( 4,  261, 15,  140, 0, 0, 0) -- The Afflictor, Map 2, L-6
-    zone:registerRegion( 5,  340, 15,  100, 0, 0, 0) -- The Afflictor, Map 2, M-7, north-west
-    zone:registerRegion( 6,  380, 15,   60, 0, 0, 0) -- The Afflictor, Map 2, M-7, south-east
+    zone:registerRegion(1,  -163, 15, -137, 0, 0, 0) -- The Afflictor, Map 1, G-10
+    zone:registerRegion(2,  -209, 15, -131, 0, 0, 0) -- The Afflictor, Map 1, F-10
+    zone:registerRegion(3,  -140, 15,   20, 0, 0, 0) -- The Afflictor, Map 2, G-8
+    zone:registerRegion(4,   261, 15,  140, 0, 0, 0) -- The Afflictor, Map 2, L-6
+    zone:registerRegion(5,   340, 15,  100, 0, 0, 0) -- The Afflictor, Map 2, M-7, north-west
+    zone:registerRegion(6,   380, 15,   60, 0, 0, 0) -- The Afflictor, Map 2, M-7, south-east
     -- The Afflictor Warning Message
-    zone:registerRegion( 7, -163, 30, -137, 0, 0, 0) -- The Afflictor, Map 1, G-10
-    zone:registerRegion( 8, -209, 30, -131, 0, 0, 0) -- The Afflictor, Map 1, F-10
-    zone:registerRegion( 9, -140, 30,   20, 0, 0, 0) -- The Afflictor, Map 2, G-8
+    zone:registerRegion(7,  -163, 30, -137, 0, 0, 0) -- The Afflictor, Map 1, G-10
+    zone:registerRegion(8,  -209, 30, -131, 0, 0, 0) -- The Afflictor, Map 1, F-10
+    zone:registerRegion(9,  -140, 30,   20, 0, 0, 0) -- The Afflictor, Map 2, G-8
     zone:registerRegion(10,  261, 30,  140, 0, 0, 0) -- The Afflictor, Map 2, L-6
     zone:registerRegion(11,  340, 30,  100, 0, 0, 0) -- The Afflictor, Map 2, M-7, north-west
     zone:registerRegion(12,  380, 30,   60, 0, 0, 0) -- The Afflictor, Map 2, M-7, south-east

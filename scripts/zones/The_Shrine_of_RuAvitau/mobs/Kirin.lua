@@ -9,7 +9,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function( mob )
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("numAdds", 1)
 end
 
-entity.onMobFight = function( mob, target )
+entity.onMobFight = function(mob, target)
     -- spawn gods
     local numAdds = mob:getLocalVar("numAdds")
     if mob:getBattleTime() / 180 == numAdds then
@@ -65,7 +65,7 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 end
 
-entity.onMobDespawn = function( mob )
+entity.onMobDespawn = function(mob)
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end

@@ -11,5 +11,5 @@ cmdprops =
 
 function onTrigger(player)
     player:capAllSkills()
-    player:PrintToPlayer( 'All skills capped!' )
+    player:PrintToPlayer('All skills capped!')
 end

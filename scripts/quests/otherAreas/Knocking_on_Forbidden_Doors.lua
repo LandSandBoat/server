@@ -237,21 +237,21 @@ quest.sections =
                         if player:getGil() >= xi.mannequin.cost.PURCHASE then
                             richEnough = 1
                         end
-                        player:updateEvent( { [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
+                        player:updateEvent({ [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
                             [1] = xi.mannequin.getMannequins(player),
                             [2] = option,
-                            })
+                        })
                     elseif
                         option >= 11 and
                         option <= 18
                     then
                         -- Pose a mannequin
                         local race = option - 10 -- From 1 to 8, for consistency in lua
-                        player:updateEvent( { [0] = 1,
+                        player:updateEvent({ [0] = 1,
                             [1] = xi.mannequin.getMannequins(player),
                             [2] = option,
                             [3] = xi.mannequin.getMannequinPose(player, race),
-                            })
+                        })
                     end
                 end,
             },

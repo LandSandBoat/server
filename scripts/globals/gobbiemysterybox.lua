@@ -24,7 +24,7 @@ local keyToDial =
     [8973] = 6,  -- special dial
     [9217] = 9,  -- abjuration
     [9218] = 10, -- fortune
-  --[????] = 11, -- furnishing
+--  [????] = 11, -- furnishing
     [9274] = 13, -- anniversary
 }
 local abjurationItems =
@@ -158,7 +158,7 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
                     end
                 end,
                 [10] = function() itemID = fortuneItems[math.random(1, #fortuneItems)] end, -- fortune
-              --[??] = function()  end, -- furnishing
+            --  [??] = function()  end, -- furnishing
                 [13] = function()-- anniversary
                     if math.random(1, 100) == 1 then -- 1% chance for ANV exclusive item?
                         itemID = anniversaryItems[math.random(1, #anniversaryItems)]

@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
     local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
-    if flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, { { "gil", 10 } }) then
+    if flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas(trade, { { "gil", 10 } }) then
         if npcUtil.giveItem(player, xi.items.MAGICMART_FLYER) then
             player:confirmTrade()
         end

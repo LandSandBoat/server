@@ -160,8 +160,8 @@ xi.job_utils.paladin.useRampart = function(player, target, ability)
 end
 
 xi.job_utils.paladin.useSentinel = function(player, target, ability)
-   -- Whether feet have to be equipped before using ability, or if they can be swapped in
-   -- is disputed.  Source used: http://wiki.bluegartr.com/bg/Sentinel
+    -- Whether feet have to be equipped before using ability, or if they can be swapped in
+    -- is disputed.  Source used: http://wiki.bluegartr.com/bg/Sentinel
     local power       = (90 + player:getMod(xi.mod.SENTINEL_EFFECT)) * 100
     local guardian    = player:getMerit(xi.merit.GUARDIAN)
     local enhGuardian = player:getMod(xi.mod.ENHANCES_GUARDIAN) * (guardian / 19)

@@ -66,5 +66,5 @@ function onTrigger(player, logId, questId, target)
     }
 
     -- show quest status
-    player:PrintToPlayer( string.format( "%s's status for %s quest ID %i is: %s", targ:getName(), logName, questId, status ) )
+    player:PrintToPlayer(string.format("%s's status for %s quest ID %i is: %s", targ:getName(), logName, questId, status))
 end

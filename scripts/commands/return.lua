@@ -24,7 +24,7 @@ function onTrigger(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -37,8 +37,8 @@ function onTrigger(player, target)
     end
 
     -- zone target
-    targ:setPos( 0, 0, 0, 0, zoneId )
+    targ:setPos(0, 0, 0, 0, zoneId)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer( string.format( "%s was returned to zone %i.", targ:getName(), zoneId ) )
+        player:PrintToPlayer(string.format("%s was returned to zone %i.", targ:getName(), zoneId))
     end
 end

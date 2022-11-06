@@ -22,6 +22,6 @@ function onTrigger(player, cp)
     end
 
     -- add cp
-    player:addCP( cp )
+    player:addCP(cp)
     player:PrintToPlayer(string.format("Added %i cp to %s.", cp, player:getName()))
 end
