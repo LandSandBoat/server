@@ -410,7 +410,11 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
     -- Attempt Aura steal
     -- local effect = xi.effect.NONE
     if stolen == 0 and player:hasTrait(75) then
-        local resist = xi.magic.applyResistanceAbility(player, target, xi.magic.ele.NONE, 0, 0)
+        local params = {}
+        params.element = xi.magic.ele.NONE
+        params.maccBonus = 0
+
+        local resist = xi.magic.applyAbilityResistance(player, target, params)
         -- local effectStealSuccess = false
         if resist > 0.0625 then
             local auraStealChance = math.min(player:getMerit(xi.merit.AURA_STEAL), 95)

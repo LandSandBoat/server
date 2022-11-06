@@ -29,20 +29,21 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.skillType = xi.skill.STAFF
     params.includemab = true
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
-        params.str_wsc = 0.3 params.mnd_wsc = 0.7
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.LIGHT
+    effectParams.effect = xi.effect.DEFENSE_DOWN
+    effectParams.skillType = xi.skill.STAFF
+    effectParams.duration = 30 + tp / 1000 * 30
+    effectParams.power = 12.5
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     -- Apply Aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
-            local duration = (30 + tp / 1000 * 30) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.WIND, 0)
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration)
-        end
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
     return tpHits, extraHits, criticalHit, damage

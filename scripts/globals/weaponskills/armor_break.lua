@@ -27,18 +27,22 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.2 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.acc100 = 1 params.acc200 = 1 params.acc300 = 1
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.6 params.vit_wsc = 0.6
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.WIND
+    effectParams.effect = xi.effect.DEFENSE_DOWN
+    effectParams.skillType = xi.skill.GREAT_AXE
+    effectParams.duration = 120 + (tp / 1000 * 60)
+    effectParams.power = 25
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.DEFENSE_DOWN) == false) then
-        local duration = (120 + (tp / 1000 * 60)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.WIND, 0)
-        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 25, 0, duration)
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
     return tpHits, extraHits, criticalHit, damage

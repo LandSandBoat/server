@@ -28,14 +28,17 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.acc100 = 1 params.acc200 = 1 params.acc300 = 1
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.multiHitfTP = true -- http://wiki.ffo.jp/html/15896.html
-        params.ftp100 = 1.75 params.ftp200 = 1.75 params.ftp300 = 1.75
-        params.str_wsc = 0.4 params.dex_wsc = 0.4
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.ICE
+    effectParams.effect = xi.effect.EVASION_DOWN
+    effectParams.skillType = xi.skill.DAGGER
+    effectParams.duration = tp / 1000 * 60
+    effectParams.power = 10
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
@@ -43,10 +46,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
-            local duration = tp / 1000 * 60 * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
-            target:addStatusEffect(xi.effect.EVASION_DOWN, 10, 0, duration)
-        end
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
     return tpHits, extraHits, criticalHit, damage

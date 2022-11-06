@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
     if dmg > 0 then
-        local resist = xi.magic.applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, 0)
+        local resist = xi.magic.applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, xi.effect.BIND, 0)
         if not target:hasStatusEffect(xi.effect.BIND) and resist >= 0.5 then
             local duration = (5 + 5) * resist
             target:addStatusEffect(xi.effect.BIND, 1, 0, duration)

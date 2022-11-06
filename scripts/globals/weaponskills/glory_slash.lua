@@ -28,11 +28,19 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.LIGHTNING
+    effectParams.effect = xi.effect.STUN
+    effectParams.skillType = xi.skill.SWORD
+    effectParams.duration = tp / 500
+    effectParams.power = 1
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
+
     local damage, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.STUN) == false) then
-        local duration = (tp / 500) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.LIGHTNING, 0)
-        target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
     return tpHits, extraHits, damage

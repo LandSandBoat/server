@@ -303,7 +303,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
                 local magicdmg = finaldmg * ftpHybrid
 
                 wsParams.bonus = calcParams.bonusAcc
-                magicdmg = magicdmg * xi.magic.applyResistanceAbility(attacker, target, wsParams.ele, wsParams)
+                magicdmg = magicdmg * xi.magic.applyAbilityResistance(attacker, target, wsParams)
                 magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
                 if magicdmg > 0 then
@@ -818,7 +818,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         -- Calculate magical bonuses and reductions
         dmg = xi.magic.addBonusesAbility(attacker, wsParams.element, target, dmg, wsParams)
-        dmg = dmg * xi.magic.applyResistanceAbility(attacker, target, wsID, wsParams)
+        dmg = dmg * xi.magic.applyAbilityResistance(attacker, target, wsParams)
         dmg = target:magicDmgTaken(dmg, wsParams.element)
 
         if dmg < 0 then

@@ -560,32 +560,82 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
     return xi.magic.getMagicResist(p, target, element, effectRes)
 end
 
--- Applies resistance for things that may not be spells - ie. Quick Draw
-xi.magic.applyResistanceAbility = function(player, target, wsID, params)
-    return xi.magic.applyResistanceEffect(player, target, wsID, params)
-end
-
 -- Applies resistance for additional effects
-xi.magic.applyResistanceAddEffect = function(player, target, element, bonus)
+xi.magic.applyResistanceAddEffect = function(player, target, element, effect, bonus)
+    local effectRes = 0
 
-    local p = xi.magic.getMagicHitRate(player, target, 0, element, 0, bonus)
+    if effect and target:hasStatusEffect(effect) then
+        return 0
+    end
 
-    return xi.magic.getMagicResist(p, target, element)
-end
+    if effect then
+        effectRes = xi.magic.getEffectResistance(target, effect, false, player)
+    end
 
-xi.magic.applyResistanceAddEffectWS = function(player, target, element, bonus)
-    local p = xi.magic.getMagicHitRate(player, target, 0, element, 0, bonus)
+    local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus)
     local resist = xi.magic.getMagicResist(p, target, element)
 
     if resist < 0.5 then
         resist = 0
     elseif resist < 1 then
         resist = 0.5
-    else
-        resist = 1
     end
 
     return resist
+end
+
+xi.magic.applyAbilityResistance = function(player, target, params)
+    if params.effect and target:hasStatusEffect(params.effect) then
+        return
+    end
+
+    if not params.element then
+        params.element = xi.magic.ele.NONE
+    end
+
+    if not params.skillType then
+        params.skillType = nil
+    end
+
+    if params.effect and not params.tick then
+        params.tick = 0
+    end
+
+    if params.effect and not params.power then
+        params.power = 1
+    end
+
+    local effectRes = 0
+
+    if params.effect then
+        effectRes = xi.magic.getEffectResistance(target, params.effect, false, player)
+    end
+
+    local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus)
+    local resist = xi.magic.getMagicResist(p, target, params.element, effectRes)
+
+    if resist < 0.5 then
+        resist = 0
+    elseif resist < 1 then
+        resist = 0.5
+    end
+
+    if
+        params.effect and
+        params.chance and
+        params.chance * resist > math.random() * 150 and
+        params.duration * resist > 0
+    then
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+    elseif
+        params.effect and
+        params.duration * resist > 0 and
+        not params.chance
+    then
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+    else
+        return resist
+    end
 end
 
 -- TODO: Reduce complexity
@@ -672,8 +722,10 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
         else
             magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc + caster:getMod(xi.mod.MACC)
         end
+    elseif caster:isPC() and skillType == nil then
+        magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPC() and skillType <= xi.skill.STAFF then
-        magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType())
+        magicacc = dStatAcc + caster:getSkillLevel(skillType) + caster:getMod(xi.mod.MACC)
     elseif caster:isMob() and skillType == nil then
         magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPet() and skillType == nil then

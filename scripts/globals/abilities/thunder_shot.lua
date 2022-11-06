@@ -27,11 +27,14 @@ end
 abilityObject.onUseAbility = function(player, target, ability, action)
     local params = {}
     params.includemab = true
+    params.element = xi.magic.ele.LIGHTNING
+    params.skillType = xi.skill.NONE
+    params.maccBonus = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+
     local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
     dmg = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
     dmg  = xi.magic.addBonusesAbility(player, xi.magic.ele.LIGHTNING, target, dmg, params)
-    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
-    dmg = dmg * xi.magic.applyResistanceAbility(player, target, xi.magic.ele.LIGHTNING, xi.skill.NONE, bonusAcc)
+    dmg = dmg * xi.magic.applyAbilityResistance(player, target, params)
     dmg = xi.magic.adjustForTarget(target, dmg, xi.magic.ele.LIGHTNING)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
