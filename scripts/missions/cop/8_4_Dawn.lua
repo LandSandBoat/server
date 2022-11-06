@@ -167,9 +167,10 @@ mission.sections =
             ['Cid'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < os.time() and
-                       mission:getVar(player, 'TenzenCS') < 1
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'TenzenCS') < 1
                     then
                         return mission:progressEvent(897)
                     end
@@ -236,9 +237,10 @@ mission.sections =
             ['Hinaree'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < os.time() and
-                       mission:getVar(player, 'LouveranceCS') < 1
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'LouveranceCS') < 1
                     then
                         return mission:progressEvent(757)
                     end
@@ -248,9 +250,10 @@ mission.sections =
             onRegionEnter =
             {
                 [1] = function(player, region)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < os.time() and
-                       mission:getVar(player, 'LouveranceCS') == 2
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'LouveranceCS') == 2
                     then
                         return mission:progressEvent(758)
                     end
@@ -275,7 +278,8 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 4 and
+                    if
+                        mission:getVar(player, 'Status') == 4 and
                         mission:getVar(player, 'Wait') < os.time() and
                         mission:getVar(player, 'LouveranceCS') == 3
                     then
@@ -297,9 +301,10 @@ mission.sections =
             ['Chipmy-Popmy'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < os.time() and
-                       mission:getVar(player, 'ChebukkisCS') < 1
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'ChebukkisCS') < 1
                     then
                         return mission:progressEvent(619)
                     end
@@ -320,9 +325,10 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     local coloredDrop = 4258 + math.random(0, 7)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < os.time() and
-                       mission:getVar(player, 'ChebukkisCS') == 2
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'ChebukkisCS') == 2
                     then
                         if player:getFreeSlotsCount() == 0 then
                             if mission:getVar(player, 'ColoredDrop') < 4258 then
