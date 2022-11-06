@@ -1,12 +1,13 @@
 -----------------------------------
 -- Dragoon Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/ability")
-require("scripts/globals/status")
-require("scripts/globals/msg")
-require("scripts/globals/weaponskills")
+require("scripts/globals/items")
 require("scripts/globals/jobpoints")
+require("scripts/globals/msg")
+require("scripts/globals/settings")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -165,10 +166,10 @@ end
 xi.job_utils.dragoon.abilityCheckAngon = function(player, target, ability)
     local id = player:getEquipID(xi.slot.AMMO)
 
-    if id == 18259 then
+    if id == xi.items.ANGON then
         return 0, 0
     else
-        return xi.msg.basic.UNABLE_TO_USE_JA, 0
+        return xi.msg.basic.CANNOT_PERFORM, 0
     end
 end
 
