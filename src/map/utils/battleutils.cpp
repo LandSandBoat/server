@@ -2430,8 +2430,8 @@ namespace battleutils
             if (primary)
             // Calculate TP Return from WS
             {
-                standbyTp = ((int16)(((tpMultiplier * baseTp) + bonusTP) *
-                                     (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
+                standbyTp = bonusTP + ((int16)((tpMultiplier * baseTp) *
+                                               (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
             }
 
             // account for attacker's subtle blow which reduces the baseTP gain for the defender
