@@ -1361,9 +1361,13 @@ xi.mod =
     STEALTH                         = 358,
     RAPID_SHOT                      = 359,
     CHARM_TIME                      = 360,
-    JUMP_TP_BONUS                   = 361,
-    JUMP_ATT_BONUS                  = 362,
-    HIGH_JUMP_ENMITY_REDUCTION      = 363,
+    JUMP_TP_BONUS                   = 361,  -- bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS            = 285,  -- bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS                  = 362,  -- ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS      = 286,  -- ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS                  = 936,  -- accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK              = 888,  -- DA% bonus for all jumps
+    HIGH_JUMP_ENMITY_REDUCTION      = 363,  -- for gear that reduces more enmity from high jump
     REWARD_HP_BONUS                 = 364,
     SNAP_SHOT                       = 365,
 
@@ -1648,7 +1652,7 @@ xi.mod =
     AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
     AUGMENTS_CONSPIRATOR            = 912, -- Applies Conspirator benefits to player at the top of the hate list
     JUG_LEVEL_RANGE                 = 564, -- Decreases the level range of spawned jug pets. Maxes out at 2.
-    FORCE_JUMP_CRIT                 = 828, -- Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT                 = 828, -- Force critical hit for all jumps
     QUICK_DRAW_DMG_PERCENT          = 834, -- Percentage increase to QD damage
 
     -- Crafting food effects

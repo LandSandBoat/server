@@ -465,10 +465,14 @@ enum class Mod
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
-    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump (must be divided by 10)
-    JUMP_ATT_BONUS             = 362,  // ATT% bonus for jump + high jump
+    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS       = 285,  // bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS             = 362,  // ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS = 286,  // ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS             = 936,  // accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK         = 888,  // DA% bonus for all jumps
     HIGH_JUMP_ENMITY_REDUCTION = 363,  // for gear that reduces more enmity from high jump
-    FORCE_JUMP_CRIT            = 828,  // Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT            = 828,  // Force critical hit for all jumps
     WYVERN_EFFECTIVE_BREATH    = 829,  // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
     WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
@@ -925,9 +929,7 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 192 to 223
-    // 261 to 286
-    // 888
-    // 936
+    // 261 to 284
     //
     // SPARE = 1071, and onward
 };
