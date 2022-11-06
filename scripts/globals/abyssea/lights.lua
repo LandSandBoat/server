@@ -574,9 +574,9 @@ end
 xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if killer then
         if not killer:isPC() and killer:getAllegiance() == 1 then
-           local master = killer:getMaster()
+            local master = killer:getMaster()
             if master then
-               killer = master
+                killer = master
             end
         end
     else

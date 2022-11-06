@@ -4980,13 +4980,13 @@ function getRoeRecords(triggers)
         },
 
         [886] =
-       { -- Conflict: Escha - Zi'Tah II
-           trigger = triggers.mobKill,
-           goal = 10,
-           reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
-           flags = set { "repeat" },
-           reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
-       },
+        { -- Conflict: Escha - Zi'Tah II
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
 
         [887] =
         { -- Conflict: Escha - Zi'Tah III
@@ -5172,7 +5172,7 @@ function getRoeRecords(triggers)
         },
 
         [948] =
-       { -- Conflict: Reisenjima VI
+        { -- Conflict: Reisenjima VI
             trigger = triggers.mobKill,
             goal = 10,
             reqs = { mobName = set { "Devouring_Mosquito" }, zone = set { 291 } },
@@ -5195,7 +5195,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Quarrelsome_Hippogryph" }, zone = set { 291 } },
             flags = set { "repeat" },
-           reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
         [951] =
@@ -5210,7 +5210,7 @@ function getRoeRecords(triggers)
         [952] =
         { -- Conflict: Reisenjima X
             trigger = triggers.mobKill,
-           goal = 10,
+            goal = 10,
             reqs = { mobName = set { "Glowering_Ladybug" }, zone = set { 291 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },

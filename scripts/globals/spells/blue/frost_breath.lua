@@ -47,7 +47,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-      multi = multi + 0.50
+        multi = multi + 0.50
     end
 
     if damage > 0 and resist > 0.3 then

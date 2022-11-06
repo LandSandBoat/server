@@ -342,8 +342,8 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
         if not shadowAbsorb(target) then
             local critChance = math.random() -- See if we land a critical hit
             criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
-                          calcParams.forcedFirstCrit or
-                          calcParams.mightyStrikesApplicable
+                calcParams.forcedFirstCrit or
+                calcParams.mightyStrikesApplicable
 
             if criticalHit then
                 calcParams.criticalHit = true
@@ -429,9 +429,9 @@ local modParameters =
 local function calculateWsMods(attacker, calcParams, wsParams)
     local wsMods = calcParams.fSTR +
         (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-         attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) * calcParams.alpha
+        attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
+        attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
+        attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) * calcParams.alpha
     return wsMods
 end
 
@@ -660,10 +660,10 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-                          (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
+        (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
     calcParams.sneakApplicable = attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
-                                 (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or
-                                 target:hasStatusEffect(xi.effect.DOUBT))
+        (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or
+        target:hasStatusEffect(xi.effect.DOUBT))
     calcParams.taChar = taChar
     calcParams.trickApplicable = calcParams.taChar ~= nil
     calcParams.assassinApplicable = calcParams.trickApplicable and attacker:hasTrait(68)
@@ -699,7 +699,7 @@ end
 
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
- function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
+function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
 
     -- Determine cratio and ccritratio
     local ignoredDef = 0
@@ -808,9 +808,9 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         end
 
         dmg = attacker:getMainLvl() + 2 + (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-             attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-             attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-             attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) + fint
+            attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
+            attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
+            attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) + fint
 
         -- Applying fTP multiplier
         local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
