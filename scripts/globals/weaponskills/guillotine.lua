@@ -28,18 +28,22 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.3 params.mnd_wsc = 0.5
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.WIND
+    effectParams.effect = xi.effect.SILENCE
+    effectParams.skillType = xi.skill.SCYTHE
+    effectParams.duration = 30 + (tp / 1000 * 30)
+    effectParams.power = 1
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.SILENCE) == false) then
-        local duration = (30 + (tp / 1000 * 30)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.WIND, 0)
-        target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration)
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

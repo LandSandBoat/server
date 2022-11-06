@@ -45,7 +45,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     params.bonusmab = 0
     params.includemab = false
     dmg = xi.magic.addBonusesAbility(mob, xi.magic.ele.FIRE, target, dmg, params)
-    dmg = dmg * xi.magic.applyResistanceAddEffect(mob, target, xi.magic.ele.FIRE, 0)
+    dmg = dmg * xi.magic.applyResistanceAddEffect(mob, target, xi.magic.ele.FIRE, nil, 0)
     dmg = xi.magic.adjustForTarget(target, dmg, xi.magic.ele.FIRE)
     dmg = xi.magic.finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.FIRE, dmg)
 
