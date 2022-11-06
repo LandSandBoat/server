@@ -522,6 +522,7 @@ public:
     ZONE_TYPE      GetType();
     REGION_TYPE    GetRegionID();
     CONTINENT_TYPE GetContinentID();
+    uint8          getLevelRestriction();
     uint32         GetIP() const;
     uint16         GetPort() const;
     uint16         GetTax() const;
@@ -579,8 +580,9 @@ public:
     virtual void DeletePET(CBaseEntity* PPet); // derefs the pet's ID from this zone
     virtual void DeleteTRUST(CBaseEntity* PTrust);
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity);         // ищем группу для монстра
-    virtual void TransportDepart(uint16 boundary, uint16 zone); // транспотр отправляется, необходимо собрать пассажиров
+    virtual void FindPartyForMob(CBaseEntity* PEntity);          // ищем группу для монстра
+    virtual void TransportDepart(uint16 boundary, uint16 zone);  // транспотр отправляется, необходимо собрать пассажиров
+    virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction it applies the zone's after removing it.
 
     void InsertRegion(CRegion* Region); // добавляем в зону активную область
 
@@ -607,7 +609,7 @@ public:
     virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func);
     virtual void ForEachNpc(std::function<void(CNpcEntity*)> func);
 
-    CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID);
+    CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
 
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
@@ -622,10 +624,11 @@ private:
     ZONE_TYPE      m_zoneType;
     REGION_TYPE    m_regionID;    // ID области
     CONTINENT_TYPE m_continentID; // ID континента
-    std::string    m_zoneName;    // имя зоны
-    uint16         m_zonePort;    // порт зоны
-    uint32         m_zoneIP;      // IP зоны
-    bool           m_useNavMesh;  // Use navmesh for roaming, chasing
+    uint8          m_levelRestriction;
+    std::string    m_zoneName;   // имя зоны
+    uint16         m_zonePort;   // порт зоны
+    uint32         m_zoneIP;     // IP зоны
+    bool           m_useNavMesh; // Use navmesh for roaming, chasing
 
     WEATHER m_Weather;
     uint32  m_WeatherChangeTime;

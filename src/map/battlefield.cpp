@@ -276,6 +276,10 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
     }
+    else
+    {
+        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+    }
 
     // Check if we should remove SJ, whether or not there is a lv cap.
     if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
@@ -292,6 +296,11 @@ bool CBattlefield::IsOccupied() const
 bool CBattlefield::isInteraction() const
 {
     return m_isInteraction;
+}
+
+bool CBattlefield::isEntered(CCharEntity* PChar) const
+{
+    return m_EnteredPlayers.find(PChar->id) != m_EnteredPlayers.end();
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -508,9 +517,12 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         {
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
         }
-        if (m_LevelCap)
+
+        m_Zone->updateCharLevelRestriction(PChar);
+
+        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->SetSubPower(0);
         }
 
         if (PChar->isDead())
@@ -734,7 +746,7 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            m_Zone->updateCharLevelRestriction(PChar);
 
             if (PChar->PPet)
             {

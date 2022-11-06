@@ -26,6 +26,7 @@
 
 #include "../ai/ai_container.h"
 
+#include "../battlefield.h"
 #include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../entities/mobentity.h"
@@ -609,18 +610,20 @@ namespace zoneutils
 
     CZone* CreateZone(uint16 ZoneID)
     {
-        static const char* Query = "SELECT zonetype FROM zone_settings "
+        static const char* Query = "SELECT zonetype, restriction FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
         if (sql->Query(Query, ZoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            if (static_cast<ZONE_TYPE>(sql->GetUIntData(0)) == ZONE_TYPE::DUNGEON_INSTANCED)
+            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(sql->GetUIntData(0));
+            uint8     restriction = static_cast<uint8>(sql->GetUIntData(1));
+            if (zoneType == ZONE_TYPE::DUNGEON_INSTANCED)
             {
-                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
+                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
             else
             {
-                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
+                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
         }
         else
@@ -1090,6 +1093,17 @@ namespace zoneutils
     bool IsResidentialArea(CCharEntity* PChar)
     {
         return PChar->m_moghouseID != 0;
+    }
+
+    void AfterZoneIn(CBaseEntity* PEntity)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity);
+        if (PChar != nullptr && (PChar->PBattlefield == nullptr || !PChar->PBattlefield->isEntered(PChar)))
+        {
+            GetZone(PChar->getZone())->updateCharLevelRestriction(PChar);
+        }
+
+        luautils::AfterZoneIn(PChar);
     }
 
 }; // namespace zoneutils

@@ -21,7 +21,6 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
-    player:delStatusEffect(xi.effect.LEVEL_RESTRICTION) -- can't be capped at 50 for this fight !
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
@@ -44,9 +43,6 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_THE_WYRMKING)
             player:setCharVar('StormsOfFate', 3)
             player:addTitle(xi.title.CONQUEROR_OF_FATE)
-        end
-        if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
-            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     end
 end
