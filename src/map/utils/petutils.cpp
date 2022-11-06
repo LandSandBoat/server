@@ -893,6 +893,7 @@ namespace petutils
     void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
         XI_DEBUG_BREAK_IF(PMaster->PPet != nullptr);
+
         if (PMaster->objtype == TYPE_PC &&
             (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
         {
@@ -1534,6 +1535,12 @@ namespace petutils
         PPet->m_Element = PPetData->m_Element;
         PPet->m_PetID   = PPetData->PetID;
 
+        uint8 spawnLevel = UINT8_MAX;
+        if (spawningFromZone)
+        {
+            spawnLevel = static_cast<uint8>(static_cast<CCharEntity*>(PMaster)->petZoningInfo.petLevel);
+        }
+
         if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
             uint8 mLvl = PMaster->GetMLevel();
@@ -1550,18 +1557,18 @@ namespace petutils
                 {
                     mLvl += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS);
                 }
-
-                PPet->SetMLevel(mLvl);
+                PPet->SetMLevel(std::min(spawnLevel, mLvl));
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetSLevel());
+                PPet->SetMLevel(std::min(spawnLevel, PMaster->GetSLevel()));
             }
             else
             { // should never happen
                 ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->GetName());
                 PPet->SetMLevel(1);
             }
+
             LoadAvatarStats(PMaster, PPet); // follows PC calcs (w/o SJ)
 
             PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
@@ -1668,7 +1675,7 @@ namespace petutils
             // Randomize: 0-2 lvls lower, less Monster Gloves(+1/+2) bonus
             highestLvl -= xirand::GetRandomNumber(3 - std::clamp<int16>(PChar->getMod(Mod::JUG_LEVEL_RANGE), 0, 2));
 
-            PPet->SetMLevel(highestLvl);
+            PPet->SetMLevel(std::min(spawnLevel, highestLvl));
             LoadJugStats(PPet, PPetData); // follow monster calcs (w/o SJ)
         }
         else if (PPet->getPetType() == PET_TYPE::WYVERN)
@@ -1697,18 +1704,15 @@ namespace petutils
                     PPet->SetSJob(JOB_WHM);
                     break;
             }
+
             // TEMP: should be MLevel when unsummoned, and PUP level when summoned
-            if (PMaster->GetMJob() == JOB_PUP)
-            {
-                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
-                PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
-            }
-            else
-            {
-                PPet->SetMLevel(PMaster->GetSLevel());
-                PPet->SetSLevel(PMaster->GetSLevel() / 2); // Todo: SetSLevel() already reduces the level?
-            }
+            uint8 mainLevel = PMaster->GetMJob() == JOB_PUP ? PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS) : PMaster->GetSLevel();
+            mainLevel       = std::min<uint8>(spawnLevel, mainLevel);
+            PPet->SetMLevel(mainLevel);
+            PPet->SetSLevel(mainLevel / 2); // Todo: SetSLevel() already reduces the level?
+
             LoadAutomatonStats(static_cast<CCharEntity*>(PMaster), PPet, g_PPetList.at(PetID)); // temp
+
             if (PMaster->objtype == TYPE_PC)
             {
                 CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
@@ -1723,8 +1727,8 @@ namespace petutils
         }
         else if (PPet->getPetType() == PET_TYPE::LUOPAN && PMaster->objtype == TYPE_PC)
         {
-            PPet->SetMLevel(PMaster->GetMLevel());
-            PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
+            PPet->SetMLevel(std::min(spawnLevel, PMaster->GetMLevel()));
+            PPet->health.maxhp = (uint32)floor((250 * spawnLevel) / 15);
 
             if (PMaster->StatusEffectContainer->HasStatusEffect(EFFECT_BOLSTER))
             {
@@ -1743,6 +1747,7 @@ namespace petutils
         }
 
         FinalizePetStatistics(PMaster, PPet);
+        PPet->setSpawnLevel(PPet->GetMLevel());
         PPet->status        = STATUS_TYPE::NORMAL;
         PPet->m_ModelRadius = PPetData->radius;
         PPet->m_EcoSystem   = PPetData->EcoSystem;

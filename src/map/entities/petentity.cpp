@@ -49,6 +49,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     allegiance              = ALLEGIANCE_TYPE::PLAYER;
     m_MobSkillList          = 0;
     m_PetID                 = 0;
+    m_spawnLevel            = 0;
     m_IsClaimable           = false;
     m_bReleaseTargIDOnDeath = true;
     spawnAnimation          = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
@@ -61,6 +62,16 @@ CPetEntity::~CPetEntity() = default;
 PET_TYPE CPetEntity::getPetType()
 {
     return m_PetType;
+}
+
+uint8 CPetEntity::getSpawnLevel()
+{
+    return m_spawnLevel;
+}
+
+void CPetEntity::setSpawnLevel(uint8 level)
+{
+    m_spawnLevel = level;
 }
 
 bool CPetEntity::isBstPet()

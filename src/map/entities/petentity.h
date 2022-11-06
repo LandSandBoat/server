@@ -53,6 +53,8 @@ public:
     ~CPetEntity();                // деструктор
 
     PET_TYPE     getPetType();
+    uint8        getSpawnLevel();
+    void         setSpawnLevel(uint8 level);
     bool         isBstPet();
     uint32       m_PetID;
     std::string  GetScriptName();
@@ -66,7 +68,8 @@ public:
     void         OnPetSkillFinished(CPetSkillState& state, action_t& action);
 
 private:
-    PET_TYPE m_PetType; // the type of pet e.g. avatar/wyvern/jugpet etc
+    PET_TYPE m_PetType;    // the type of pet e.g. avatar/wyvern/jugpet etc
+    uint8    m_spawnLevel; // The level the pet was spawned at
 };
 
 #endif
