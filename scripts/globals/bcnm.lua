@@ -1161,52 +1161,189 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
-        [ 640] = function() return ( npc:getXPos() > -721 and npc:getXPos() < 719                                                                          ) end, -- PM5-3 U3: Flames for the Dead
-        [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Follow the White Rabbit
-        [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: When Hell Freezes Over
-        [ 673] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Like the Wind
-        [ 674] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Sheep in Antlion's Clothing
-        [ 675] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Shell We Dance?
-        [ 676] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Totentanz
-        [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                              ) end, -- ENM: Test Your Mite
-        [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                   ) end, -- ENM: Bionic Bug
-        [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Pulling Your Strings
-        [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Automaton Assault
-        [ 769] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)                                                                        ) end, -- ENM: Simulant
-        [ 801] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)                                                                          ) end, -- ENM: You Are What You Eat
-        [ 833] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)                                                                             ) end, -- ENM: Playing Host
-        [ 865] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)                                                                           ) end, -- ENM: Pulling the Plug
-        [ 897] = function() return ( player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)                                                                      ) end, -- Quest: The Wyrmking Descends
-        [ 962] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Fire in the Sky
-        [ 963] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bad Seed
-        [ 964] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bugard in the Clouds
-        [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Beloved of Atlantes
-        [ 928] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS) or
-                                    ( promathiaMission == xi.mission.id.cop.ANCIENT_VOWS and player:getCharVar('Mission[6][248]Status') >= 2)                                      ) end, -- Quest: Ouryu Cometh
-        [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
-                                    ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-                                    player:getCharVar('ApocalypseNigh') == 4)                                                                              ) end, -- Quest: Apocalypse Nigh
-        [1290] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)        ) end, -- NW Apollyon
-        [1291] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)        ) end, -- SW Apollyon
-        [1292] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1)      ) end, -- NE Apollyon
-        [1293] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1)      ) end, -- SE Apollyon
-        [1294] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0))
-                                    or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1)))                                            ) end, -- CS Apollyon
-        [1296] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0))
-                                    or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1)))                                            ) end, -- Central Apollyon
-        [1298] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Western Tower
-        [1299] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Northern Tower
-        [1300] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Eastern Tower
-        [1301] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos Basement
-        [1303] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 1st Floor
-        [1304] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 2nd Floor
-        [1305] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 3rd Floor
-        [1306] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Central Temenos 4th Floor
-        [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)                                      ) end, -- WOTG07: Purple, The New Black
+        [640] = function() -- PM5-3 U3: Flames for the Dead
+            return npc:getXPos() > -721 and npc:getXPos() < 719
+        end,
+
+        [641] = function() -- ENM: Follow the White Rabbit
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
+        end,
+
+        [642] = function() -- ENM: When Hell Freezes Over
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
+        end,
+
+        [673] = function() -- ENM: Like the Wind
+            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
+        end,
+
+        [674] = function() -- ENM: Sheep in Antlion's Clothing
+            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
+        end,
+
+        [675] = function() -- ENM: Shell We Dance?
+            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
+        end,
+
+        [676] = function() -- ENM: Totentanz
+            return player:hasKeyItem(xi.ki.MIASMA_FILTER)
+        end,
+
+        [705] = function() -- ENM: Test Your Mite
+            return player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
+        end,
+
+        [738] = function() -- ENM: Bionic Bug
+            return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
+        end,
+
+        [739] = function() -- ENM: Pulling Your Strings
+            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+        end,
+
+        [740] = function() -- ENM: Automaton Assault
+            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+        end,
+
+        [769] = function() -- ENM: Simulant
+            return player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
+        end,
+
+        [801] = function() -- ENM: You Are What You Eat
+            return player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
+        end,
+
+        [833] = function() -- ENM: Playing Host
+            return player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
+        end,
+
+        [865] = function() -- ENM: Pulling the Plug
+            return player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
+        end,
+
+        [897] = function() -- Quest: The Wyrmking Descends
+            return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
+        end,
+
+        [962] = function() -- ENM: Fire in the Sky
+            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
+        end,
+
+        [963] = function() -- ENM: Bad Seed
+            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
+        end,
+
+        [964] = function() -- ENM: Bugard in the Clouds
+            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
+        end,
+
+        [965] = function() -- ENM: Beloved of Atlantes
+            return player:hasKeyItem(xi.ki.MONARCH_BEARD)
+        end,
+
+        [928] = function() -- Quest: Ouryu Cometh
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS) or
+                (
+                    promathiaMission == xi.mission.id.cop.ANCIENT_VOWS and
+                    player:getCharVar('Mission[6][248]Status') >= 2
+                )
+        end,
+
+        [1057] = function() -- Quest: Apocalypse Nigh
+            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
+                (
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+                    player:getCharVar('ApocalypseNigh') == 4
+                )
+        end,
+
+        [1290] = function() -- NW Apollyon
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.RED_CARD) and
+                npcId == getEntranceOffset(0)
+        end,
+
+        [1291] = function() -- SW Apollyon
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.RED_CARD) and
+                npcId == getEntranceOffset(0)
+        end,
+
+        [1292] = function() -- NE Apollyon
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.BLACK_CARD) and
+                npcId == getEntranceOffset(1)
+        end,
+
+        [1293] = function() -- SE Apollyon
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.BLACK_CARD) and
+                npcId == getEntranceOffset(1)
+        end,
+
+        [1294] = function() -- CS Apollyon
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                (
+                    (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
+                    (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
+                )
+        end,
+
+        [1296] = function() -- Central Apollyon
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+            (
+                (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
+                (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
+            )
+        end,
+
+        [1298] = function() -- Temenos Western Tower
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1299] = function() -- Temenos Northern Tower
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1300] = function() -- Temenos Eastern Tower
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1301] = function() -- Central Temenos Basement
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1303] = function() -- Central Temenos 1st Floor
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1304] = function() -- Central Temenos 2nd Floor
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1305] = function() -- Central Temenos 3rd Floor
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [1306] = function() -- Central Temenos 4th Floor
+            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
+                player:hasKeyItem(xi.ki.WHITE_CARD)
+        end,
+
+        [2721] = function() -- WOTG07: Purple, The New Black
+            return player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
+        end,
     }
 
     -- Determine whether player meets battlefield requirements
-    local req = (registrant == true) and registerReqs[bfid] or enterReqs[bfid]
+    local req = registrant and registerReqs[bfid] or enterReqs[bfid]
 
     if not req or req() then
         return true
