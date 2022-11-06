@@ -29,7 +29,6 @@ class CZoneEntities
 public:
     void HealAllMobs();
 
-    auto         GetNPCsByName(std::string const& pattern) -> NPCEntityList_t const; // Finds all npcs matching the given pattern
     CCharEntity* GetCharByName(int8* name);                                          // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне

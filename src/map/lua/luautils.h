@@ -142,7 +142,6 @@ namespace luautils
     auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto GetNPCsByName(std::string const& pattern) -> sol::table;
 
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);

@@ -512,7 +512,6 @@ typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 typedef std::map<uint16, CBaseEntity*> EntityList_t;
 
 using QueryByNameResult_t = std::vector<CBaseEntity*>;
-using NPCEntityList_t     = std::vector<CNpcEntity*>;
 
 int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 
@@ -541,13 +540,12 @@ public:
     void SetBackgroundMusicDay(uint8 music);
     void SetBackgroundMusicNight(uint8 music);
 
-    const QueryByNameResult_t& queryEntitiesByName(std::string const& name);
+    auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
 
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    virtual auto         GetNPCsByName(std::string const& pattern) -> NPCEntityList_t const;
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
 

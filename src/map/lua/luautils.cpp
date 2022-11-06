@@ -126,7 +126,6 @@ namespace luautils
         lua.set_function("GarbageCollectFull", &luautils::garbageCollectFull);
         lua.set_function("GetZone", &luautils::GetZone);
         lua.set_function("GetNPCByID", &luautils::GetNPCByID);
-        lua.set_function("GetNPCsByName", &luautils::GetNPCsByName);
         lua.set_function("GetMobByID", &luautils::GetMobByID);
         lua.set_function("GetEntityByID", &luautils::GetEntityByID);
         lua.set_function("WeekUpdateConquest", &luautils::WeekUpdateConquest);
@@ -1527,33 +1526,6 @@ namespace luautils
         }
 
         return std::nullopt;
-    }
-
-    /**
-     * Returns the npcs with a name matching the given pattern.
-     *
-     * @param pattern The pattern used to match the npc name. We use % as wildcard for consistency
-     * with other methods that perform patter matching.
-     * E.g: %anto% matches Shantotto and Canto-anto
-     */
-    sol::table GetNPCsByName(std::string const& pattern)
-    {
-        TracyZoneScoped;
-
-        const NPCEntityList_t& npcs = zoneutils::GetNPCsByName(pattern);
-
-        auto table = lua.create_table();
-        for (CNpcEntity* npc : npcs)
-        {
-            table.add(CLuaBaseEntity(npc));
-        }
-
-        if (table.empty())
-        {
-            ShowWarning("Get NPCs by name: %s returned no results", pattern);
-        }
-
-        return table;
     }
 
     /************************************************************************

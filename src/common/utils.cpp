@@ -822,9 +822,9 @@ std::string trim(std::string const& str, std::string const& whitespace)
 // Wildcards can be used in the pattern to match "any character"
 // e.g: %anto% matches Shantotto or Canto-Ranto
 // Modification of https://www.geeksforgeeks.org/wildcard-character-matching/
-bool matches(std::string const& pattern, std::string const& target, std::string const& wildcard)
+bool matches(std::string const& target, std::string const& pattern, std::string const& wildcard)
 {
-    auto matchesRecur = [&](const char* pattern, const char* target, const char* wildcard, auto&& matchesRecur)
+    auto matchesRecur = [&](const char* target, const char* pattern, const char* wildcard, auto&& matchesRecur)
     {
         // This should never happen as we call this lambda from std::strings converted to const char*,
         // but good to be safe.
@@ -858,7 +858,7 @@ bool matches(std::string const& pattern, std::string const& target, std::string 
         // If the current characters of both strings match
         if (*pattern == *target)
         {
-            return matchesRecur(pattern + 1, target + 1, wildcard, matchesRecur);
+            return matchesRecur(target + 1, pattern + 1, wildcard, matchesRecur);
         }
 
         // If there is *, then there are two possibilities
@@ -866,13 +866,13 @@ bool matches(std::string const& pattern, std::string const& target, std::string 
         // b) We ignore current character of target string.
         if (*pattern == *wildcard)
         {
-            return matchesRecur(pattern + 1, target, wildcard, matchesRecur) || matchesRecur(pattern, target + 1, wildcard, matchesRecur);
+            return matchesRecur(target + 1, pattern, wildcard, matchesRecur) || matchesRecur(target, pattern + 1, wildcard, matchesRecur);
         }
 
         return false;
     };
 
-    return matchesRecur(pattern.c_str(), target.c_str(), wildcard.c_str(), matchesRecur);
+    return matchesRecur(target.c_str(), pattern.c_str(), wildcard.c_str(), matchesRecur);
 }
 
 look_t stringToLook(std::string str)

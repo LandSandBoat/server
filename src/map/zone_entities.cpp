@@ -1103,26 +1103,6 @@ CCharEntity* CZoneEntities::GetCharByID(uint32 id)
     return nullptr;
 }
 
-const NPCEntityList_t CZoneEntities::GetNPCsByName(std::string const& pattern)
-{
-    TracyZoneScoped;
-
-    std::vector<CNpcEntity*> npcs;
-
-    for (const auto& npc : m_npcList)
-    {
-        if (matches(pattern, npc.second->name))
-        {
-            if (auto* PNpc = dynamic_cast<CNpcEntity*>(npc.second))
-            {
-                npcs.emplace_back(PNpc);
-            }
-        }
-    }
-
-    return npcs;
-}
-
 void CZoneEntities::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
 {
     TracyZoneScoped;

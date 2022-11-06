@@ -244,12 +244,19 @@ void CZone::SetBackgroundMusicNight(uint8 music)
     m_zoneMusic.m_songNight = music;
 }
 
-const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
+/**
+ * Queries for entities (mobs or npcs) which name match the given pattern.
+ *
+ * @param pattern The pattern used to match the entity name. We use % as wildcard for consistency
+ * with other methods that perform patter matching.
+ * E.g: %anto% matches Shantotto and Canto-anto
+ */
+QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern)
 {
     TracyZoneScoped;
 
     // Use memoization since lookups are typically for the same mob names
-    auto result = m_queryByNameResults.find(name);
+    auto result = m_queryByNameResults.find(pattern);
     if (result != m_queryByNameResults.end())
     {
         return result->second;
@@ -261,7 +268,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (std::string((const char*)PNpc->GetName()) == name)
+        if (matches(std::string((const char*)PNpc->GetName()), pattern))
         {
             entities.push_back(PNpc);
         }
@@ -269,15 +276,15 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (std::string((const char*)PMob->GetName()) == name)
+        if (matches(std::string((const char*)PMob->GetName()), pattern))
         {
             entities.push_back(PMob);
         }
      });
     // clang-format on
 
-    m_queryByNameResults[name] = std::move(entities);
-    return m_queryByNameResults[name];
+    m_queryByNameResults[pattern] = std::move(entities);
+    return m_queryByNameResults[pattern];
 }
 
 uint32 CZone::GetLocalVar(const char* var)
@@ -830,19 +837,6 @@ CCharEntity* CZone::GetCharByName(int8* name)
 CCharEntity* CZone::GetCharByID(uint32 id)
 {
     return m_zoneEntities->GetCharByID(id);
-}
-
-/************************************************************************
- *                                                                       *
- *  Finds all npcs matching the given pattern. Patterns can contain      *
- *  % as wildcard characters to match incomplete names. e.g: %anto%      *
- *  matches Shantotto and Canto-Ranto                                    *
- *                                                                       *
- ************************************************************************/
-
-const NPCEntityList_t CZone::GetNPCsByName(std::string const& pattern)
-{
-    return m_zoneEntities->GetNPCsByName(pattern);
 }
 
 /************************************************************************
