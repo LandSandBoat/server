@@ -71,12 +71,12 @@ INSERT INTO `augments` VALUES (42,0,166,-1,0,0); -- Enemy crit. hit rate-1%
 INSERT INTO `augments` VALUES (43,0,391,1,0,0); -- Charm+1 Could not determine retail AUGMENT effect. Duration? Chance to land charm? Just set as chance for now.
 INSERT INTO `augments` VALUES (44,0,73,1,0,0); -- Store TP+1 Subtle Blow+1
 INSERT INTO `augments` VALUES (44,0,289,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (45,0,366,1,0,0); -- DMG:+1 (melee,not ranged...Mainhand only?)
-INSERT INTO `augments` VALUES (46,0,366,-1,0,0); -- DMG:-1 (melee,not ranged...Mainhand only?)
+INSERT INTO `augments` VALUES (45,0,287,1,0,0);  -- DMG:+(X+1), Increases damage rating of this weapon (Maximum X=31 for DMG+32) (Retail: melee,not ranged...Mainhand only?) Item displays a value 1 larger than stored in item
+INSERT INTO `augments` VALUES (46,0,287,-1,0,0); -- DMG:-(X+1), Decreases damage rating of this weapon (Maximum X=31 for DMG-32) (Retail: melee,not ranged...Mainhand only?) Item displays a (negative) value 1 larger than stored in item
 INSERT INTO `augments` VALUES (47,0,380,1,0,0); -- Delay:+1% (melee,not ranged)
 INSERT INTO `augments` VALUES (48,0,380,-1,0,0); -- Delay:-1% (melee,not ranged)
-INSERT INTO `augments` VALUES (49,0,384,100,0,0); -- Haste+1
-INSERT INTO `augments` VALUES (50,0,384,-100,0,0); -- Slow+1
+INSERT INTO `augments` VALUES (49,100,384,1,0,0); -- Haste+1
+INSERT INTO `augments` VALUES (50,100,384,-1,0,0); -- Slow+1
 INSERT INTO `augments` VALUES (51,0,72,1,0,0); -- HP recovered while healing+1
 INSERT INTO `augments` VALUES (52,0,71,1,0,0); -- MP recovered while healing+1
 INSERT INTO `augments` VALUES (53,0,168,-1,0,0); -- Spell interruption rate down 1%
@@ -1652,10 +1652,10 @@ INSERT INTO `augments` VALUES (1360,0,0,0,0,0); -- Enhances "Feint" effect
 INSERT INTO `augments` VALUES (1361,0,886,1,0,0); -- Enh. "Assassins Charge" effect
 INSERT INTO `augments` VALUES (1362,0,0,0,0,0); -- 1362 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1363,0,0,0,0,0); -- 1363 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1364,0,0,0,0,0); -- Enhances "Iron Will" effect
-INSERT INTO `augments` VALUES (1365,0,0,0,0,0); -- Enhances "Fealty" effect
-INSERT INTO `augments` VALUES (1366,0,0,0,0,0); -- Enhances "Chivalry" effect
-INSERT INTO `augments` VALUES (1367,0,0,0,0,0); -- Enhances "Guardian" effect
+INSERT INTO `augments` VALUES (1364,3,1064,1,0,0); -- Enhances "Iron Will" effect
+INSERT INTO `augments` VALUES (1365,4,1063,1,0,0); -- Enhances "Fealty" effect
+INSERT INTO `augments` VALUES (1366,5,1061,1,0,0); -- Enhances "Chivalry" effect
+INSERT INTO `augments` VALUES (1367,2,1065,1,0,0); -- Enhances "Guardian" effect
 INSERT INTO `augments` VALUES (1368,0,0,0,0,0); -- 1368 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1369,0,0,0,0,0); -- 1369 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1370,0,0,0,0,0); -- Enhances "Dark Seal" effect

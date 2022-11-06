@@ -11,9 +11,9 @@ require("scripts/globals/zone")
 require("scripts/globals/roe")
 require("scripts/globals/voidwalker")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:setAnimation(33)
 
     -- Abyssea Lights and time remaining check
@@ -55,7 +55,7 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     local healtime = effect:getTickCount()
 
     if healtime > 2 then
@@ -79,14 +79,14 @@ effect_object.onEffectTick = function(target, effect)
                 xi.roe.onRecordTrigger(target, 4)
             end
 
-            target:addHP(healHP)
+            target:addHPLeaveSleeping(healHP)
             target:updateEnmityFromCure(target, healHP)
             target:addMP(12 + ((healtime - 2) * (1 + target:getMod(xi.mod.CLEAR_MIND))) + target:getMod(xi.mod.MPHEAL))
         end
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:setAnimation(0)
     target:delStatusEffect(xi.effect.LEAVEGAME)
 
@@ -94,4 +94,4 @@ effect_object.onEffectLose = function(target, effect)
     target:setLocalVar("GEO_DWL_Resting", 0)
 end
 
-return effect_object
+return effectObject

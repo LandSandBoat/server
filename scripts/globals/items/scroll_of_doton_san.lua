@@ -3,14 +3,14 @@
 -- Scroll of Doton: San
 -- Teaches the ninjutsu Doton: San
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(331)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(331)
 end
 
-return item_object
+return itemObject

@@ -5,7 +5,7 @@
 require("scripts/globals/titles")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Mamook/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 
 -----------------------------------
 local entity = {}
@@ -50,7 +50,7 @@ entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.SHINING_SCALE_RIFLER)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end

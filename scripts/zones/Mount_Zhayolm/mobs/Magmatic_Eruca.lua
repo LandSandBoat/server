@@ -4,12 +4,12 @@
 -- Note: Place Holder Energetic Eruca
 -----------------------------------
 local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-mixins = {require("scripts/mixins/families/eruca")}
+mixins = { require("scripts/mixins/families/eruca") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

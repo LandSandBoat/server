@@ -100,13 +100,13 @@ quest.sections =
                         not quest.hasKeyItem(player) and
                         npcUtil.tradeHasExactly(trade, xi.items.PICKAXE)
                     then
-                        if math.random(1,10) > 5 then
-                            quest:setVar(player, 'Prog', math.random(1,3))
+                        if math.random(1, 10) > 5 then
+                            quest:setVar(player, 'Prog', math.random(1, 3))
 
-                            return quest:progressEvent(0, {[0] = keyItems[quest:getVar(player, 'Prog')]})
+                            return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
                             player:setLocalVar("mineFail", 1)
-                            return quest:progressEvent(0, {[1] = 1})
+                            return quest:progressEvent(0, { [1] = 1 })
                         end
                     end
                 end,
@@ -148,7 +148,7 @@ quest.sections =
                         if newRingCS > 1 then
                             newRingCS = 1
                         end
-                        return quest:event(7, {[7] = newRingCS + 1})
+                        return quest:event(7, { [7] = newRingCS + 1 })
                     end
                 end,
             },
@@ -156,7 +156,7 @@ quest.sections =
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player,xi.items.LIGHTNING_BAND)
+                    npcUtil.giveItem(player, xi.items.LIGHTNING_BAND)
                     player:delKeyItem(keyItems[quest:getVar(player, 'Prog')])
                     quest:setVar(player, 'Prog', 0)
                 end,
@@ -204,13 +204,13 @@ quest.sections =
                         not quest.hasKeyItem(player) and
                         npcUtil.tradeHasExactly(trade, xi.items.PICKAXE)
                     then
-                        if math.random(1,10) > 5 then
-                            quest:setVar(player, 'Prog', math.random(1,3))
+                        if math.random(1, 10) > 5 then
+                            quest:setVar(player, 'Prog', math.random(1, 3))
 
-                            return quest:progressEvent(0, {[0] = keyItems[quest:getVar(player, 'Prog')]})
+                            return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
                             player:setLocalVar("mineFail", 1)
-                            return quest:progressEvent(0, {[1] = 1})
+                            return quest:progressEvent(0, { [1] = 1 })
                         end
                     end
                 end,

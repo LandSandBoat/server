@@ -173,7 +173,7 @@ mission.sections =
 
             ['Suparna'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobSuparnaFledgling = GetMobByID(batalliaID.mob.SUPARNA_FLEDGLING)
 
                     if
@@ -187,7 +187,7 @@ mission.sections =
 
             ['Suparna_Fledgling'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobSuparna = GetMobByID(batalliaID.mob.SUPARNA)
 
                     if

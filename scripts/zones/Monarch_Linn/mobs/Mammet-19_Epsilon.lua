@@ -31,7 +31,7 @@ local tpMoves =
     [2] = { 441, 447, 457 },
     -- Psychomancy: AoE Aspir, drains 80+ MP.
     -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
-    [3] = { 464, 471},
+    [3] = { 464, 471 },
 }
 
 entity.onMobSpawn = function(mob)
@@ -81,25 +81,25 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     switch (mob:getAnimationSub()): caseof
     {
         [forms.UNARMED] = function()
-            local wsChoice = math.random(1,2)
+            local wsChoice = math.random(1, 2)
             return tpMoves[forms.UNARMED][wsChoice]
         end,
         [forms.SWORD] = function()
-            local wsChoice = math.random(1,3)
+            local wsChoice = math.random(1, 3)
             return tpMoves[forms.SWORD][wsChoice]
         end,
         [forms.POLEARM] = function()
-            local wsChoice = math.random(1,3)
+            local wsChoice = math.random(1, 3)
             return tpMoves[forms.POLEARM][wsChoice]
         end,
         [forms.STAFF] = function()
-            local wsChoice = math.random(1,2)
+            local wsChoice = math.random(1, 2)
             return tpMoves[forms.STAFF][wsChoice]
         end,
     }
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

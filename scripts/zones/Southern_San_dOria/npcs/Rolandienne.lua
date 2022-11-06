@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
     else
         player:triggerRoeEvent(xi.roe.triggers.talkToRoeNpc)
         player:messageSpecial(ID.text.YOU_WISH_TO_EXCHANGE_SPARKS)
-        xi.sparkshop.onTrigger(player,npc,995)
+        xi.sparkshop.onTrigger(player, npc, 995)
     end
 end
 

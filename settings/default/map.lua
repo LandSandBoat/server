@@ -215,6 +215,9 @@ xi.settings.map =
     -- Minimum time between uses of yell command (in seconds).
     YELL_COOLDOWN = 30,
 
+    -- Prevent players from sending tells to hidden GMs. You will still receive them from other GMs.
+    BLOCK_TELL_TO_HIDDEN_GM = false,
+
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
     AUDIT_GM_CMD = false,

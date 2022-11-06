@@ -8,9 +8,9 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
         return 561, 0
     else
@@ -18,7 +18,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
 
     local moves = player:getMerit(xi.merit.NO_FOOT_RISE)
     if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
@@ -55,4 +55,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

@@ -5,9 +5,9 @@ local ID = require('scripts/zones/Attohwa_Chasm/IDs')
 require('scripts/globals/helm')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     -- Poison Flowers!
     zone:registerRegion(1, -475.809, 5, 316.499, 0, 0, 0)
     zone:registerRegion(2, -440.938, 7, 281.749, 0, 0, 0)
@@ -46,7 +46,7 @@ zone_object.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -56,11 +56,11 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     -- TODO: Gasponia's shouldn't "always" poison you. However, in retail regions constantly reapply themselves without having to re-enter the region. That doesn't happen currently so I'm leaving it as-is for now.
     local regionId = region:GetRegionID()
 
@@ -77,10 +77,10 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     --[[
         the hard-coded id that was here was wrong. there are 22 miasmas in attohwa chasm
         starting at ID.npc.MIASMA_OFFSET. some are supposed to toggle open, but need retail test
@@ -88,10 +88,10 @@ zone_object.onGameHour = function(zone)
     --]]
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

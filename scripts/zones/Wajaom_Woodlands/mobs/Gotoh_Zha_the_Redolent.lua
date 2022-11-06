@@ -38,8 +38,8 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.MANAFONT, hpp = math.random(66, 95)},
-            {id = xi.jsa.BENEDICTION, hpp = 0},
+            { id = xi.jsa.MANAFONT, hpp = math.random(66, 95) },
+            { id = xi.jsa.BENEDICTION, hpp = 0 },
         },
     })
 
@@ -55,8 +55,8 @@ entity.onMobFight = function(mob, target)
         xi.mix.jobSpecial.config(mob, {
             specials =
             {
-                {id = xi.jsa.MANAFONT, hpp = 0},
-                {id = xi.jsa.BENEDICTION, hpp = math.random(25, 50)},
+                { id = xi.jsa.MANAFONT, hpp = 0 },
+                { id = xi.jsa.BENEDICTION, hpp = math.random(25, 50) },
             },
         })
     end

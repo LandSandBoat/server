@@ -5,13 +5,13 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local curse = target:getStatusEffect(xi.effect.CURSE_I)
     local curse2 = target:getStatusEffect(xi.effect.CURSE_II)
     local bane = target:getStatusEffect(xi.effect.BANE)
@@ -58,4 +58,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

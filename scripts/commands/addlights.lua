@@ -25,10 +25,10 @@ local lightType =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addlights <light type> <amount> {player}")
+    player:PrintToPlayer("!addlights <light type> <amount> (player)")
 end
 
-function onTrigger(player,light,amount,target)
+function onTrigger(player, light, amount, target)
     -- validate target
     local targ
     if (target == nil) then

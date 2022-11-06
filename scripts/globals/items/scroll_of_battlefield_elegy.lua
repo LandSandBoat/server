@@ -3,14 +3,14 @@
 -- Scroll of Battlefield Elegy
 -- Teaches the song Battlefield Elegy
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(421)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(421)
 end
 
-return item_object
+return itemObject

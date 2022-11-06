@@ -7,12 +7,12 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onAdditionalEffect = function(player, target, damage)
+itemObject.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if math.random(100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0) > 0.5 then
+    if math.random(1, 100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0) > 0.5 then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 3)
         return xi.subEffect.STUN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.STUN
     end
@@ -20,4 +20,4 @@ item_object.onAdditionalEffect = function(player, target, damage)
     return 0, 0, 0
 end
 
-return item_object
+return itemObject

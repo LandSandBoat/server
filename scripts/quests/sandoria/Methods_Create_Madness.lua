@@ -137,7 +137,7 @@ quest.sections =
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
-                        npcUtil.popFromQM(player, npc, seaSerpentGrottoID.mob.WATER_LEAPER, {hide = 0})
+                        npcUtil.popFromQM(player, npc, seaSerpentGrottoID.mob.WATER_LEAPER, { hide = 0 })
                     then
                         return quest:messageSpecial(seaSerpentGrottoID.text.SENSE_OMINOUS_PRESENCE)
                     end
@@ -146,7 +146,7 @@ quest.sections =
 
             ['Water_Leaper'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
             },

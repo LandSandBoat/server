@@ -12,6 +12,10 @@ assignees:
 - [ ] I have searched existing [issues](https://github.com/LandSandBoat/server/issues) to see if the issue has already been opened, and I have checked the commit log to see if the issue has been resolved since my server was last updated
 - [ ] I have read and understood the [Contributing Guide](https://github.com/LandSandBoat/server/blob/base/CONTRIBUTING.md)
 
+## OS / platform the server is running (if known)
+
+<!-- Windows10 / Unbuntu / Mac / ARM etc -->
+
 ## Branch affected by issue <!-- Change to the branch the issue exists on (if relevant) -->
 
 `base`

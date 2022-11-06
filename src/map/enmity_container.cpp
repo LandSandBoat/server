@@ -255,8 +255,8 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
 
     if (isCureV)
     {
-        CE = (int32)(400.f * bonus * tranquilHeartReduction);
-        VE = (int32)(800.f * bonus * tranquilHeartReduction);
+        CE = (int32)(300.f * bonus * tranquilHeartReduction);
+        VE = (int32)(600.f * bonus * tranquilHeartReduction);
     }
     else
     {
@@ -462,7 +462,6 @@ void CEnmityContainer::DecayEnmity()
         constexpr int   decay_amount  = (int)(60 / server_tick_rate);
 
         PEnmityObject.VE -= PEnmityObject.VE > decay_amount ? decay_amount : PEnmityObject.VE;
-        // ShowDebug("%d: active: %d CE: %d VE: %d", it->first, PEnmityObject.active, PEnmityObject.CE, PEnmityObject.VE);
     }
 }
 

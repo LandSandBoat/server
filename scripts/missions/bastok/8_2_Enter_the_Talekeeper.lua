@@ -209,7 +209,7 @@ mission.sections =
 
             ['Dervos_Ghost'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isGhostsAlive()
@@ -221,7 +221,7 @@ mission.sections =
 
             ['Gizerls_Ghost'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isGhostsAlive()
@@ -233,7 +233,7 @@ mission.sections =
 
             ['Gordovs_Ghost'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isGhostsAlive()

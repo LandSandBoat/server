@@ -10,7 +10,7 @@
 -- may (but not reliably so) prevent Warbles from summoning Urchins or
 -- activating the Housemaker.[3].
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
@@ -66,7 +66,7 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

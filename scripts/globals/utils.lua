@@ -1,3 +1,4 @@
+require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/interaction/quest")
 
@@ -12,6 +13,36 @@ utils.MAX_INT32  = 2147483647
 function utils.unused(...)
 end
 
+-- bind and related functions are from https://stackoverflow.com/a/18229720
+local unpack = unpack or table.unpack
+
+local function packn(...)
+    return { n = select('#', ...), ... }
+end
+
+local function unpackn(t)
+    return unpack(t, 1, t.n)
+end
+
+local function mergen(...)
+    local res = { n = 0 }
+    for i = 1, select('#', ...) do
+        local t = select(i, ...)
+        for j = 1, t.n do
+            res.n = res.n + 1
+            res[res.n] = t[j]
+        end
+    end
+    return res
+end
+
+function utils.bind(func, ...)
+    local args = packn(...)
+    return function(...)
+        return func(unpackn(mergen(args, packn(...))))
+    end
+end
+
 -- Shuffles a table and returns a new table containing the randomized result.
 function utils.shuffle(inputTable)
     local shuffledTable = {}
@@ -22,6 +53,34 @@ function utils.shuffle(inputTable)
     end
 
     return shuffledTable
+end
+utils.append = nil
+
+-- Recursively appends the input table into the provided base table.
+-- Non-table keys are overwritten by input.
+function utils.append(base, input)
+    for k, v in pairs(input) do
+        local baseValue = base[k]
+        if baseValue ~= nil and type(baseValue) == 'table' and type(v) == 'table' then
+            utils.append(baseValue, v)
+        else
+            base[k] = v
+        end
+    end
+    return base
+end
+
+-- Returns a new table with the two input tables joined together.
+-- Values from second input have higher priority.
+function utils.join(input1, input2)
+    local result = {}
+    utils.append(result, input1)
+    utils.append(result, input2)
+    return result
+end
+
+function utils.minutes(minutes)
+    return minutes * 60
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
@@ -247,11 +306,11 @@ end
 -- Original formula: ((level - <baseInRange>) * <multiplier>) + <additive>; where level is a range defined in utils.getSkillLvl
 local skillLevelTable =
 {
-    --        A+           A-           B+           B            B-           C+           C            C-           D            E            F
-    [1]  = { {3.00,   6}, {3.00,   6}, {2.90,   5}, {2.90,   5}, {2.90,   5}, {2.80,   5}, {2.80,   5}, {2.80,   5}, {2.70,   4}, {2.50,   4}, {2.30,   4} }, -- Level <= 50
-    [50] = { {5.00, 153}, {5.00, 153}, {4.90, 147}, {4.90, 147}, {4.90, 147}, {4.80, 142}, {4.80, 142}, {4.80, 142}, {4.70, 136}, {4.50, 126}, {4.30, 116} }, -- Level > 50 and Level <= 60
-    [60] = { {4.85, 203}, {4.10, 203}, {3.70, 196}, {3.23, 196}, {2.70, 196}, {2.50, 190}, {2.25, 190}, {2.00, 190}, {1.85, 183}, {1.95, 171}, {2.05, 159} }, -- Level > 60 and Level <= 70
-    [70] = { {5.00, 251}, {5.00, 244}, {3.70, 233}, {3.23, 228}, {2.70, 223}, {3.00, 215}, {2.60, 212}, {2.00, 210}, {1.85, 201}, {1.95, 190}, {2.00, 179} }, -- Level > 70
+    --         A+             A-             B+             B              B-             C+             C              C-             D              E              F
+    [1]  = { { 3.00,   6 }, { 3.00,   6 }, { 2.90,   5 }, { 2.90,   5 }, { 2.90,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.80,   5 }, { 2.70,   4 }, { 2.50,   4 }, { 2.30,   4 } }, -- Level <= 50
+    [50] = { { 5.00, 153 }, { 5.00, 153 }, { 4.90, 147 }, { 4.90, 147 }, { 4.90, 147 }, { 4.80, 142 }, { 4.80, 142 }, { 4.80, 142 }, { 4.70, 136 }, { 4.50, 126 }, { 4.30, 116 } }, -- Level > 50 and Level <= 60
+    [60] = { { 4.85, 203 }, { 4.10, 203 }, { 3.70, 196 }, { 3.23, 196 }, { 2.70, 196 }, { 2.50, 190 }, { 2.25, 190 }, { 2.00, 190 }, { 1.85, 183 }, { 1.95, 171 }, { 2.05, 159 } }, -- Level > 60 and Level <= 70
+    [70] = { { 5.00, 251 }, { 5.00, 244 }, { 3.70, 233 }, { 3.23, 228 }, { 2.70, 223 }, { 3.00, 215 }, { 2.60, 212 }, { 2.00, 210 }, { 1.85, 201 }, { 1.95, 190 }, { 2.00, 179 } }, -- Level > 70
 }
 
 -- Get the corresponding table entry to use in skillLevelTable based on level range
@@ -426,7 +485,7 @@ function utils.prequire(...)
     if ok then
         return result
     else
-        local vars = {...}
+        local vars = { ... }
         printf("Error while trying to load '%s': %s", vars[1], result)
     end
 end
@@ -490,7 +549,7 @@ function utils.setQuestVar(player, logId, questId, varName, value)
     player:setCharVar(charVarName, value)
 end
 
--- utils.splitStr("a.b.c", ".") => {"a", "b", "c"}
+-- utils.splitStr("a.b.c", ".") => { "a", "b", "c" }
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)

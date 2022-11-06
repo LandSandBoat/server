@@ -91,7 +91,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.WILD_ONION, 4}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.WILD_ONION, 4 } }) then
                         return quest:progressEvent(398, 0, xi.items.WILD_ONION) -- Trade in time. Quest goes on.
                     end
                 end,
@@ -194,7 +194,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.WILD_ONION, 4}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.WILD_ONION, 4 } }) then
                         return quest:progressEvent(390) -- Quest Complete.
                     end
                 end,

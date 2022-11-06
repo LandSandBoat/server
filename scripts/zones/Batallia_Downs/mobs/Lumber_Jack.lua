@@ -2,7 +2,7 @@
 -- Area: Batallia Downs (105)
 --   NM: Lumber Jack
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
@@ -22,7 +22,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setLocalVar("death", 1)
 end
 

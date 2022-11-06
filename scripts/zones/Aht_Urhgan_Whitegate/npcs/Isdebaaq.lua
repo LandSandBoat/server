@@ -16,19 +16,19 @@ local entity = {}
 
 local items =
 {
-    [1]  = {itemid = xi.items.ANTIVENOM_EARRING,            price = 3000},
-    [2]  = {itemid = xi.items.EBULLIENT_RING,               price = 5000},
-    [3]  = {itemid = xi.items.ENLIGHTENED_CHAIN,            price = 8000},
-    [4]  = {itemid = xi.items.SPECTRAL_BELT,                price = 10000},
-    [5]  = {itemid = xi.items.BULLSEYE_CAPE,                price = 10000},
-    [6]  = {itemid = xi.items.STORM_TULWAR,                 price = 15000},
-    [7]  = {itemid = xi.items.IMPERIAL_NEZA,                price = 15000},
-    [8]  = {itemid = xi.items.STORM_TABAR,                  price = 15000},
-    [9]  = {itemid = xi.items.YIGIT_GAGES,                  price = 20000},
-    [10] = {itemid = xi.items.AMIR_BOOTS,                   price = 20000},
-    [11] = {itemid = xi.items.PAHLUWAN_SERAWEELS,           price = 20000},
-    [12] = {itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price = 3000},
-    [13] = {itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price = 3000},
+    [1]  = { itemid = xi.items.ANTIVENOM_EARRING,            price =  3000 },
+    [2]  = { itemid = xi.items.EBULLIENT_RING,               price =  5000 },
+    [3]  = { itemid = xi.items.ENLIGHTENED_CHAIN,            price =  8000 },
+    [4]  = { itemid = xi.items.SPECTRAL_BELT,                price = 10000 },
+    [5]  = { itemid = xi.items.BULLSEYE_CAPE,                price = 10000 },
+    [6]  = { itemid = xi.items.STORM_TULWAR,                 price = 15000 },
+    [7]  = { itemid = xi.items.IMPERIAL_NEZA,                price = 15000 },
+    [8]  = { itemid = xi.items.STORM_TABAR,                  price = 15000 },
+    [9]  = { itemid = xi.items.YIGIT_GAGES,                  price = 20000 },
+    [10] = { itemid = xi.items.AMIR_BOOTS,                   price = 20000 },
+    [11] = { itemid = xi.items.PAHLUWAN_SERAWEELS,           price = 20000 },
+    [12] = { itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price =  3000 },
+    [13] = { itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price =  3000 },
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -55,7 +55,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     local selectiontype = bit.band(option, 0xF)
     if csid == 274 and selectiontype == 2 then
-        local item = bit.rshift(option,14)
+        local item = bit.rshift(option, 14)
         local choice = items[item]
         local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.MAMOOL_JA_TRAINING_GROUNDS)
         local canEquip = player:canEquipItem(choice.itemid) and 2 or 0

@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local chance = 90
     local damage = (automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)/2) * (1 + automaton:getMod(xi.mod.SHIELD_BASH)/100)
 
@@ -58,4 +58,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

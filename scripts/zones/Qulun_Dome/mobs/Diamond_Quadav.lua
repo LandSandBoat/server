@@ -4,7 +4,7 @@
 -- Note: PH for Za Dha Adamantking PH
 -- TODO: messages should be zone-wide
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 require("scripts/globals/status")
 -----------------------------------
@@ -21,8 +21,8 @@ entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         mob:showText(mob, ID.text.DIAMOND_QUADAV_DEATH)
     end
 end

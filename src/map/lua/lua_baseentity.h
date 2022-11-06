@@ -32,6 +32,7 @@ class CLuaInstance;
 class CLuaItem;
 class CLuaSpell;
 class CLuaStatusEffect;
+class CLuaTradeContainer;
 class CLuaZone;
 
 class CLuaBaseEntity
@@ -213,8 +214,8 @@ public:
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
-    bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))
-    void   createWornItem(uint16 itemID);                                                   // Update this item in worn item (player:createWornItem(itemid))
+    uint8  getWornUses(uint16 itemID);                                                      // Check if the item is already worn
+    uint8  incrementItemWear(uint16 itemID);                                                // Increment the item's worn value and returns it
     auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
 
     void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
@@ -231,6 +232,7 @@ public:
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
     void  tradeComplete();                                     // Complete trade with an npc
+    auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping
     bool canEquipItem(uint16 itemID, sol::object const& chkLevel); // returns true if the player is able to equip the item
@@ -419,14 +421,15 @@ public:
     auto addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<uint8, int16>;
 
     // Health and Status
-    int32 getHP();                     // Returns Entity Health
-    uint8 getHPP();                    // Returns Entity Health %
-    int32 getMaxHP();                  // Get max hp of entity
-    int32 getBaseHP();                 // Returns Entity base Health before modifiers
-    int32 addHP(int32 hpAdd);          // Modify hp of Entity +/-
-    void  setHP(int32 value);          // Set hp of Entity to value
-    int32 restoreHP(int32 restoreAmt); // Modify hp of Entity, but check if alive first
-    void  delHP(int32 delAmt);         // Subtract hp of Entity
+    int32 getHP();                         // Returns Entity Health
+    uint8 getHPP();                        // Returns Entity Health %
+    int32 getMaxHP();                      // Get max hp of entity
+    int32 getBaseHP();                     // Returns Entity base Health before modifiers
+    int32 addHP(int32 hpAdd);              // Modify hp of Entity +/-
+    int32 addHPLeaveSleeping(int32 hpAdd); // Modify hp of Entity +/- but do not awaken the Entity
+    void  setHP(int32 value);              // Set hp of Entity to value
+    int32 restoreHP(int32 restoreAmt);     // Modify hp of Entity, but check if alive first
+    void  delHP(int32 delAmt);             // Subtract hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
                      sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
     void  hideHP(bool value);
@@ -519,13 +522,13 @@ public:
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getTargID()
 
     // Battlefields
-    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
-    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
-    bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
-    bool  enterBattlefield(sol::object const& area);                                                      // enter a battlefield entity is registered with
-    bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
-    bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
+    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                                                      // returns CBattlefield* or nullptr if not available
+    int32 getBattlefieldID();                                                                                                      // returns entity->PBattlefield->GetID() or -1 if not available
+    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
+    bool  battlefieldAtCapacity(int battlefieldID);                                                                                // 1 if this battlefield is full
+    bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
+    bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
+    bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -682,8 +685,9 @@ public:
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);
-    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
-    int32  addFullGambit(lua_State*);
+    auto   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry) -> std::string;
+    void   removeSimpleGambit(std::string const& id);
+    void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
@@ -801,6 +805,7 @@ public:
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
+    void untargetableAndUnactionable(uint32 milliseconds);
 
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
@@ -825,6 +830,9 @@ public:
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table table);
     bool deleteRaisedChocobo();
+
+    void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
+    uint8 getMannequinPose(uint16 itemID);
 
     static void Register();
 };

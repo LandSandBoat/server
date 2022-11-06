@@ -4,7 +4,7 @@
 -- Note: PH for Ix'Aern DRK and DRG
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = {require("scripts/mixins/families/aern")}
+mixins = { require("scripts/mixins/families/aern") }
 -----------------------------------
 local entity = {}
 
@@ -19,9 +19,9 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Ix'Aern DRK animosity mechanic
-    if (isKiller) then
+    if optParams.isKiller then
         local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
         local hatedPlayer = qmDrk:getLocalVar("hatedPlayer")
         local isInTime = qmDrk:getLocalVar("hateTimer") > os.time()

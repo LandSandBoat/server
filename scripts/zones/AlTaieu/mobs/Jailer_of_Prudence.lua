@@ -4,7 +4,7 @@
 -- AnimationSubs: 0 - Normal, 3 - Mouth Open
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -58,7 +58,7 @@ end
 entity.onMobDisengage = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

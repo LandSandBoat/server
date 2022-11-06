@@ -10,14 +10,14 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1898) and npcUtil.popFromQM(player, npc, ID.mob.CHOCOBOLEECH, {radius=1}) then -- fresh blood
+    if npcUtil.tradeHas(trade, 1898) and npcUtil.popFromQM(player, npc, ID.mob.CHOCOBOLEECH, { radius=1 }) then -- fresh blood
         player:confirmTrade()
 
         local positions =
         {
-            {-430.330, 4.400, 115.100},
-            {-492.926, 4.337,  -7.936},
-            { -75.392, 2.531, 293.357},
+            { -430.330, 4.400, 115.100 },
+            { -492.926, 4.337,  -7.936 },
+            {  -75.392, 2.531, 293.357 },
         }
         local newPosition = npcUtil.pickNewPosition(npc:getID(), positions, true)
         npcUtil.queueMove(npc, newPosition)

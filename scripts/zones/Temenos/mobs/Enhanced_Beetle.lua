@@ -14,51 +14,58 @@ local path =
 {
     [0] =
     {
-        {18.000, 80.000, -140.000},
-        {8.000, 80.000, -140.000}
+        { 18.000, 80.000, -140.000 },
+        {  8.000, 80.000, -140.000 },
     },
+
     [1] =
     {
-        {20.000, 80.000, -138.000},
-        {20.000, 80.000, -128.000}
+        { 20.000, 80.000, -138.000 },
+        { 20.000, 80.000, -128.000 },
     },
+
     [2] =
     {
-        {22.000, 80.000, -140.000},
-        {32.000, 80.000, -140.000}
+        { 22.000, 80.000, -140.000 },
+        { 32.000, 80.000, -140.000 },
     },
+
     [3] =
     {
-        {58.000, 80.000, -140.000},
-        {48.000, 80.000, -140.000}
+        { 58.000, 80.000, -140.000 },
+        { 48.000, 80.000, -140.000 },
     },
+
     [4] =
     {
-        {60.000, 80.000, -138.000},
-        {60.000, 80.000, -128.000}
+        { 60.000, 80.000, -138.000 },
+        { 60.000, 80.000, -128.000 },
     },
+
     [5] =
     {
-        {62.000, 80.000, -140.000},
-        {72.000, 80.000, -140.000}
+        { 62.000, 80.000, -140.000 },
+        { 72.000, 80.000, -140.000 },
     },
 }
 
 entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_W_MOB[3]
-    local pause = mob:getLocalVar("pause")
+    local pause  = mob:getLocalVar("pause")
+
     if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 2)+1
+        local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
         mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
-        mob:setLocalVar("pause", os.time()+30)
+        mob:setLocalVar("pause", os.time() + 30)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local spawn = math.random(3) == 1
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        local spawn       = math.random(1, 3) == 1
         local battlefield = mob:getBattlefield()
+
         if GetNPCByID(ID.npc.TEMENOS_W_GATE[3]):getAnimation() == xi.animation.CLOSE_DOOR then
             xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_W_GATE[3])
         end

@@ -151,7 +151,7 @@ public:
     void HideHP(bool hide);
     bool IsHPHidden() const;
     void SetUntargetable(bool untargetable);
-    bool GetUntargetable() const;
+    bool GetUntargetable() const override;
 
     void         PostTick() override;
     float        GetRoamDistance();
@@ -261,8 +261,6 @@ public:
     CMobSpellContainer* SpellContainer; // retrieves spells for the mob
 
     bool m_IsClaimable;
-
-    bool m_bReleaseTargIDOnDeath = false;
 
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };

@@ -5,16 +5,16 @@
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if (target:getMP() == target:getMaxMP()) then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local mpHeal = math.random(50, 75)
     local dif = target:getMaxMP() - target:getMP()
     if (mpHeal > dif) then
@@ -24,4 +24,4 @@ item_object.onItemUse = function(target)
     target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, mpHeal)
 end
 
-return item_object
+return itemObject

@@ -33,67 +33,69 @@ zones[xi.zone.DYNAMIS_WINDURST] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17543258},
-            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17543342},
-            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17543372},
-            {minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17543446},
-            {minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17543259},
+            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17543258 },
+            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17543342 },
+            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17543372 },
+            { minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17543446 },
+            { minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17543259 },
         },
+
         REFILL_STATUE =
         {
             {
-                {mob = 17543268, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543269, eye = xi.dynamis.eye.BLUE },
+                { mob = 17543268, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                { mob = 17543269, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17543305, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543306, eye = xi.dynamis.eye.GREEN},
+                { mob = 17543305, eye = xi.dynamis.eye.RED   }, -- Avatar_Icon
+                { mob = 17543306, eye = xi.dynamis.eye.GREEN },
             },
             {
-                {mob = 17543353, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543354, eye = xi.dynamis.eye.BLUE },
+                { mob = 17543353, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                { mob = 17543354, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17543362, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543363, eye = xi.dynamis.eye.GREEN},
+                { mob = 17543362, eye = xi.dynamis.eye.RED   }, -- Avatar_Icon
+                { mob = 17543363, eye = xi.dynamis.eye.GREEN },
             },
             {
-                {mob = 17543392, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543393, eye = xi.dynamis.eye.GREEN},
+                { mob = 17543392, eye = xi.dynamis.eye.RED   }, -- Avatar_Icon
+                { mob = 17543393, eye = xi.dynamis.eye.GREEN },
             },
             {
-                {mob = 17543409, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543410, eye = xi.dynamis.eye.BLUE },
+                { mob = 17543409, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                { mob = 17543410, eye = xi.dynamis.eye.BLUE },
             },
             {
-                {mob = 17543419, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543420, eye = xi.dynamis.eye.BLUE },
-                {mob = 17543421, eye = xi.dynamis.eye.GREEN},
+                { mob = 17543419, eye = xi.dynamis.eye.RED   }, -- Avatar_Icon
+                { mob = 17543420, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17543421, eye = xi.dynamis.eye.GREEN },
             },
             {
-                {mob = 17543461, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17543462, eye = xi.dynamis.eye.BLUE },
-                {mob = 17543463, eye = xi.dynamis.eye.GREEN},
+                { mob = 17543461, eye = xi.dynamis.eye.RED   }, -- Avatar_Icon
+                { mob = 17543462, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17543463, eye = xi.dynamis.eye.GREEN },
             },
         },
     },
+
     npc =
     {
         QM =
         {
             [17543479] =
             {
-                param = {3355, 3414, 3415, 3416, 3417, 3418},
+                param = { 3355, 3414, 3415, 3416, 3417, 3418 },
                 trade =
                 {
-                    {item = 3355,                           mob = 17543169}, -- Tzee Xicu Idol
-                    {item = {3414, 3415, 3416, 3417, 3418}, mob = 17543469}, -- Arch Tzee Xicu Idol
+                    { item = 3355,                             mob = 17543169 }, -- Tzee Xicu Idol
+                    { item = { 3414, 3415, 3416, 3417, 3418 }, mob = 17543469 }, -- Arch Tzee Xicu Idol
                 }
             },
-            [17543480] = {trade = {{item = 3388, mob = 17543464}}}, -- Xuu Bhoqa the Enigma
-            [17543481] = {trade = {{item = 3389, mob = 17543466}}}, -- Fuu Tzapo the Blessed
-            [17543482] = {trade = {{item = 3390, mob = 17543467}}}, -- Naa Yixo the Stillrage
-            [17543483] = {trade = {{item = 3391, mob = 17543468}}}, -- Tee Zaksa the Ceaseless
+            [17543480] = { trade = { { item = 3388, mob = 17543464 } } }, -- Xuu Bhoqa the Enigma
+            [17543481] = { trade = { { item = 3389, mob = 17543466 } } }, -- Fuu Tzapo the Blessed
+            [17543482] = { trade = { { item = 3390, mob = 17543467 } } }, -- Naa Yixo the Stillrage
+            [17543483] = { trade = { { item = 3391, mob = 17543468 } } }, -- Tee Zaksa the Ceaseless
         },
     },
 }

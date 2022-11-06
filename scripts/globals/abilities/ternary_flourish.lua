@@ -10,9 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return xi.msg.basic.NO_FINISHINGMOVES, 0
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
@@ -28,7 +28,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
 
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
@@ -44,4 +44,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

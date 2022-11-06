@@ -7,9 +7,9 @@ require("scripts/globals/magic")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     if (caster:getPet() ~= nil) then
         return xi.msg.basic.ALREADY_HAS_A_PET
     elseif (target:getMaster() ~= nil and target:getMaster():isPC()) then
@@ -23,7 +23,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
     local bonus = 0 -- No idea what value, but seems likely to need this edited later to get retail resist rates.
     local params = {}
@@ -50,4 +50,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.CHARM_I
 end
 
-return spell_object
+return spellObject

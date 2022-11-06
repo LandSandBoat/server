@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Converting zilart status"
@@ -22,8 +22,8 @@ def migrate(cur, db):
         zilart_status = row[2]
         missions[214:216] = zilart_status.to_bytes(2, 'little')
         try:
-            cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (missions, charid))
+            cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (bytes(missions), charid))
             cur.execute("DELETE char_vars FROM char_vars WHERE charid = {} AND varname = 'ZilartStatus';".format(charid))
             db.commit()
-        except mysql.connector.Error as err:
+        except mariadb.Error as err:
             print("Something went wrong: {}".format(err))

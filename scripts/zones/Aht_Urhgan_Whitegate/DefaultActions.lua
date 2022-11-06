@@ -5,7 +5,11 @@ return {
     ['Imperial_Whitegate'] = { messageSpecial = ID.text.GATE_IS_FIRMLY_CLOSED },
     ['Lathuya']            = { event = 770 },
     ['Maudaal']            = { event = 240 },
-    ['Nadee_Periyaha']     = { event = 90 },
+    ['Mhasbaf']            = { event = 542 },
+    ['Nadee_Periyaha']     = { event =  90 },
     ['Rodin-Comidin']      = { event = 665 },
+    ['Saliyahf']           = { event = 700 },
+    ['Tohka_Telposkha']    = { event = 663 },
     ['Waoud']              = { event = 61 },
+    ['Wazyih']             = { event = 699 },
 }

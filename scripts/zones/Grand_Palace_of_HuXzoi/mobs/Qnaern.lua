@@ -3,7 +3,7 @@
 --   NM: Qn'aern
 -- Note: The RDM and WHM versions in Palace assist Ix'Aern (MNK)
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

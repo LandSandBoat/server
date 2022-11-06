@@ -2,7 +2,7 @@
 -- Area: Abyssea - Altepa
 --  Mob: Desert Puk
 -----------------------------------
-mixins = {require("scripts/mixins/families/puk")}
+mixins = { require("scripts/mixins/families/puk") }
 -----------------------------------
 
 local entity = {}
@@ -14,7 +14,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

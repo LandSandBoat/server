@@ -23,7 +23,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local indicies = {1, 2, 3}
+    local indicies = { 1, 2, 3 }
     local currentColor = mob:getLocalVar("currentColor")
     local abilities = { 624, 625, 627 }
 
@@ -72,7 +72,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

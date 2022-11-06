@@ -5,13 +5,13 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
 end
 
-entity.onMobWeaponSkill = function(target,mob,skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     local id = skill:getID()
 
     if id == 624 or id == 625 or id == 626 then

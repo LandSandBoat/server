@@ -5,17 +5,17 @@
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
         return xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addItem(6010, 1)
 end
 
-return item_object
+return itemObject

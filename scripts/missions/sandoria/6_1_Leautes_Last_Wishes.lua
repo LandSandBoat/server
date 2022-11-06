@@ -155,7 +155,7 @@ mission.sections =
 
             ['Sabotender_Enamorado'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId) == 2 then
                         mission:setVar(player, 'Progress', 1)
                     end

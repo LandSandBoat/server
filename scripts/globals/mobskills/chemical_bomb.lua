@@ -7,9 +7,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -27,7 +27,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = xi.effect.ELEGY
     local typeEffectTwo = xi.effect.SLOW
 
@@ -37,4 +37,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- This likely doesn't behave like retail.
     return typeEffectTwo
 end
-return mobskill_object
+return mobskillObject

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -23,6 +23,7 @@
 
 #include <cmath>
 
+#include "../battlefield.h"
 #include "../grades.h"
 #include "../items/item_weapon.h"
 #include "../lua/luautils.h"
@@ -543,6 +544,10 @@ namespace mobutils
         {
             SetupDungeonMob(PMob);
         }
+        else if (zoneType == ZONE_TYPE::LIMBUS)
+        {
+            SetupLimbusMob(PMob);
+        }
         else if (zoneType == ZONE_TYPE::BATTLEFIELD || PMob->m_Type & MOBTYPE_BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
@@ -550,10 +555,6 @@ namespace mobutils
         else if (zoneType == ZONE_TYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
-        }
-        else if (zoneType == ZONE_TYPE::LIMBUS)
-        {
-            SetupLimbusMob(PMob);
         }
 
         if (PMob->m_Type & MOBTYPE_NOTORIOUS)
@@ -731,15 +732,11 @@ namespace mobutils
         uint16 cool     = 20;
         uint16 rate     = 15;
 
-        switch (PMob->m_EcoSystem)
+        if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
         {
-            case ECOSYSTEM::BEASTMAN:
-                distance = 20;
-                turns    = 5;
-                cool     = 45;
-                break;
-            default:
-                break;
+            distance = 20;
+            turns    = 5;
+            cool     = 45;
         }
 
         // default mob roaming mods
@@ -848,6 +845,13 @@ namespace mobutils
 
         // never despawn
         PMob->SetDespawnTime(0s);
+
+        // Stop early if this is a new battlefield
+        if (PMob->PBattlefield != nullptr && PMob->PBattlefield->isInteraction())
+        {
+            return;
+        }
+
         // do not roam around
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);

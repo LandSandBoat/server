@@ -140,14 +140,14 @@ bool CBaseEntity::IsNameHidden() const
     return namevis & FLAG_HIDE_NAME;
 }
 
-bool CBaseEntity::IsTargetable() const
+bool CBaseEntity::GetUntargetable() const
 {
-    return (namevis & FLAG_UNTARGETABLE) == 0;
+    return false;
 }
 
 bool CBaseEntity::isWideScannable()
 {
-    return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && IsTargetable();
+    return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && !GetUntargetable();
 }
 
 CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const
@@ -198,5 +198,5 @@ uint16 CBaseEntity::GetModelId() const
 
 bool CBaseEntity::IsDynamicEntity() const
 {
-    return this->targid >= 0x800;
+    return this->targid >= 0x700;
 }

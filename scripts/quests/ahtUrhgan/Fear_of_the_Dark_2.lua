@@ -60,7 +60,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.IMP_WING, 2}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.IMP_WING, 2 } }) then
                         return quest:progressEvent(16)
                     end
                 end,
@@ -92,7 +92,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.IMP_WING, 2}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.IMP_WING, 2 } }) then
                         return quest:progressEvent(18)
                     end
                 end,

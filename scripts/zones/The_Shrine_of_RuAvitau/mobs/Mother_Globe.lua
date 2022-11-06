@@ -51,12 +51,12 @@ local function calculateValidSlaveGlobePositions(zone, mgPos, spacingDistance)
     -- extreme terminal decision so we don't recurse endlessly
     -- fall back to just piling up ontop of mg
     if spacingDistance > spacingDistanceMinimum then
-        return {mgPos, mgPos, mgPos, mgPos, mgPos, mgPos}
+        return { mgPos, mgPos, mgPos, mgPos, mgPos, mgPos }
     end
 
     for slavePositionSlot, _ in ipairs(slaveGlobes) do
         local xOffset = spacingDistance * slavePositionSlot
-        local slavePosition =  utils.lateralTranslateWithOriginRotation(mgPos, {x = xOffset, y = 0, z = 0})
+        local slavePosition =  utils.lateralTranslateWithOriginRotation(mgPos, { x = xOffset, y = 0, z = 0 })
 
         if zone:isNavigablePoint(slavePosition) then
             table.insert(slavePositions, slavePosition)
@@ -157,7 +157,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     -- Unknown if this can be stolen/dispelled like spikes.  Isn't mentioned, probably not.
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
 
     for _, slaveGlobeID in ipairs(slaveGlobes) do

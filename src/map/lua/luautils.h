@@ -122,10 +122,11 @@ namespace luautils
     int32 init();
     int32 garbageCollectStep();
     int32 garbageCollectFull();
+    void  cleanup();
 
     void ReloadFilewatchList();
 
-    std::vector<std::string> GetQuestAndMissionFilenamesList();
+    std::vector<std::string> GetContainerFilenamesList();
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
@@ -234,7 +235,10 @@ namespace luautils
 
     int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);                                                                                     // triggers when item is used
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
-    int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
+    int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem);                                                                                                          // trigger when an item is dropped
+    int32 OnItemEquip(CBaseEntity* PUser, CItem* PItem);
+    int32 OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
+    int32 CheckForGearSet(CBaseEntity* PTarget); // check for gear sets
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
@@ -258,7 +262,9 @@ namespace luautils
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
 
-    int32 OnPath(CBaseEntity* PEntity); // triggers when a patrol npc finishes its pathfind
+    int32 OnPath(CBaseEntity* PEntity);         // triggers when an entity is on a pathfind point
+    int32 OnPathPoint(CBaseEntity* PEntity);    // triggers when an entity stops on a path point and has finished waiting at it
+    int32 OnPathComplete(CBaseEntity* PEntity); // triggers when an entity finishes its pathing
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone);
     int32 OnBattlefieldInitialise(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot
@@ -267,6 +273,7 @@ namespace luautils
 
     void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield);                  // triggers when enter a bcnm
     void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode); // see battlefield.h BATTLEFIELD_LEAVE_CODE
+    void OnBattlefieldKick(CCharEntity* PChar);
 
     void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
     void OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
@@ -312,6 +319,7 @@ namespace luautils
     int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage); // for armor with spikes
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
+    auto GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta) -> sol::table;
 
     void OnPlayerDeath(CCharEntity* PChar);
     void OnPlayerLevelUp(CCharEntity* PChar);
@@ -338,6 +346,41 @@ namespace luautils
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+
+    template <typename... Targs>
+    int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
+    {
+        // Calls the Battlefield event through the interaction object if it can find it
+        sol::table contents = lua["xi"]["battlefield"]["contents"];
+        if (!contents.valid())
+        {
+            return -1;
+        }
+
+        auto battlefield = contents[battlefieldId];
+        if (!battlefield.valid())
+        {
+            return -1;
+        }
+
+        auto content = battlefield.get<sol::table>();
+        auto handler = content[eventName];
+        if (!handler.valid())
+        {
+            return -1;
+        }
+
+        auto result = handler.get<sol::protected_function>()(content, args...);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::%s: %s", eventName, err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

@@ -40,31 +40,31 @@ local lightInfo =
         ["Ypotryll"]               = { azure = 8,   pearl = 5,   ruby = 16,  amber = 16 }, -- Bugards
 
         -- NM's
-        ["Alkonost"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Arimaspi"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Ashtaerh_the_Gallvexed"] = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 }, -- yes its spelled wrong
-        ["Bakka"]                  = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Balaur"]                 = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Bloodeye_Vileberry"]     = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Bloodguzzler"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Bombadeel"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Clingy_Clare"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Eccentric_Eve"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Fistule"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Fear_Gorta"]             = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Gangly_Gean"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Guimauve"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Hexenpilz"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Keratyrannos"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Khalamari"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Kukulkan"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Lentor"]                 = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Pavan"]                  = { azure = 8,   pearl = 5,   ruby = 16,  amber = 100}, -- Avatars
-        ["Raskovnik"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Sarcophilus"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Siranpa-Kamuy"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Tonberry_Lieje"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Turul"]                  = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
+        ["Alkonost"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Arimaspi"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Ashtaerh_the_Gallvexed"] = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  }, -- yes its spelled wrong
+        ["Bakka"]                  = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Balaur"]                 = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Bloodeye_Vileberry"]     = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Bloodguzzler"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Bombadeel"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Clingy_Clare"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Eccentric_Eve"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Fistule"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Fear_Gorta"]             = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Gangly_Gean"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Guimauve"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Hexenpilz"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Keratyrannos"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Khalamari"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Kukulkan"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Lentor"]                 = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Pavan"]                  = { azure = 8,   pearl = 5,   ruby = 16,  amber = 100 }, -- Avatars
+        ["Raskovnik"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Sarcophilus"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Siranpa-Kamuy"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Tonberry_Lieje"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Turul"]                  = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
 
         -- VWNM
         ["Meanderer"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
@@ -101,31 +101,31 @@ local lightInfo =
         ["Veld_Clionid"]           = { azure = 8,   pearl = 5,   ruby = 8,   amber = 8  }, -- Clionidae
 
         -- NM's
-        ["Akash"]                  = { azure = 50,  pearl = 5,   ruby = 16,  amber = 100}, -- Avatars
-        ["Adamastor"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Baba_Yaga"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Briareus"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Carabosse"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Chasmic_Hornet"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Dozing_Dorian"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Grandgousier"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Hadhayosh"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Irrlicht"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Karkinos"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Keesha_Poppo"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["La_Theine_Liege"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Lugarhoo"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Mangy-tailed_Marvin"]    = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Megamaw_Mikey"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Megantereon"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Nahn"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Ovni"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Nguruvilu"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Pantagruel"]             = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Piasa"]                  = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Poroggo_Dom_Juan"]       = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Toppling_Tuber"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Trudging_Thomas"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
+        ["Akash"]                  = { azure = 50,  pearl = 5,   ruby = 16,  amber = 100 }, -- Avatars
+        ["Adamastor"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Baba_Yaga"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Briareus"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Carabosse"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Chasmic_Hornet"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Dozing_Dorian"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Grandgousier"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Hadhayosh"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Irrlicht"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Karkinos"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Keesha_Poppo"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["La_Theine_Liege"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Lugarhoo"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Mangy-tailed_Marvin"]    = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Megamaw_Mikey"]          = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Megantereon"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Nahn"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Ovni"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Nguruvilu"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Pantagruel"]             = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Piasa"]                  = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Poroggo_Dom_Juan"]       = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Toppling_Tuber"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Trudging_Thomas"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
 
         -- VWNM
         ["Meditator"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
@@ -158,32 +158,32 @@ local lightInfo =
         ["Sturdy_Pyxis"]           = { azure = 8,   pearl = 5,   ruby = 0,   amber = 0  }, -- Mimic
 
         -- NM's
-        ["Bhumi"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 100}, -- Avatars
-        ["Abas"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Adze"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Alectryon"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Cannered_Noz"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Chloris"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Chukwa"]                 = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Cuelebre"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Gancanagh"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Glavoid"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Hedetet"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Halimede"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Iratham"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Lachrymater"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Lacovie"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Manananggal"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Mictlantecuhtli"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Minhocao"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Muscaliet"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Myrmecoleon"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Ophanim"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Quetzalli"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Rubicund_Adenium"]       = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Tefenet"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Treble_Noctules"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
-        ["Vetehinen"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
+        ["Bhumi"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 100 }, -- Avatars
+        ["Abas"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Adze"]                   = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Alectryon"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Cannered_Noz"]           = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Chloris"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Chukwa"]                 = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Cuelebre"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Gancanagh"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Glavoid"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Hedetet"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Halimede"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Iratham"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Lachrymater"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Lacovie"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Manananggal"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Mictlantecuhtli"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Minhocao"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Muscaliet"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Myrmecoleon"]            = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Ophanim"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Quetzalli"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Rubicund_Adenium"]       = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Tefenet"]                = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Treble_Noctules"]        = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
+        ["Vetehinen"]              = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16  },
 
         -- VWNM
         ["Hungerer"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
@@ -218,30 +218,30 @@ local lightInfo =
         ["Dusk_Lizard"]            = { azure = 8,   pearl = 5,   ruby = 8,   amber = 8  }, -- Lizards
 
         -- NM's
-        ["Abyssic_Cluster"]        = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Amhuluk"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Asanbosam"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Athamas"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Avalerion"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Cep-Kamuy"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Cirein-croin"]           = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Flame_Skimmer"]          = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Funereal_Apkallu"]       = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Gukumatz"]               = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Heqet"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Ironclad_Observer"]      = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Ironclad_Pulverizer"]    = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Ironclad_Severer"]       = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Jala"]                   = { azure = 16,  pearl = 5,   ruby = 16,  amber = 128}, -- Avatars
-        ["Karkatakam"]             = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Manohra"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Minax_Bugard"]           = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Nehebkau"]               = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Nonno"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Npfundlwa"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Sirrush"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Sobek"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
-        ["Tuskertrap"]             = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16 },
+        ["Abyssic_Cluster"]        = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Amhuluk"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Asanbosam"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Athamas"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Avalerion"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Cep-Kamuy"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Cirein-croin"]           = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Flame_Skimmer"]          = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Funereal_Apkallu"]       = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Gukumatz"]               = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Heqet"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Ironclad_Observer"]      = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Ironclad_Pulverizer"]    = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Ironclad_Severer"]       = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Jala"]                   = { azure = 16,  pearl = 5,   ruby = 16,  amber = 128 }, -- Avatars
+        ["Karkatakam"]             = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Manohra"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Minax_Bugard"]           = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Nehebkau"]               = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Nonno"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Npfundlwa"]              = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Sirrush"]                = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Sobek"]                  = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
+        ["Tuskertrap"]             = { azure = 16,  pearl = 5,   ruby = 16,  amber = 16  },
 
         -- VWNM
         ["Mi'ghrah"]               = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
@@ -542,9 +542,9 @@ xi.abyssea.AddDeathListeners = function(mob)
         -- TODO: Make this human-readable, and break out from the listener
         local magicalWS =
         {
-            19,20,30,33,34,36,37,47,50,51,58,74,76,97,98,107,113,114,130,
-            131,132,133,139,146,147,148,149,160,161,172,177,178,179,180,
-            186,187,188,189,192,208,217,218,220,
+            19, 20, 30, 33, 34, 36, 37, 47, 50, 51, 58, 74, 76, 97, 98, 107, 113, 114, 130,
+            131, 132, 133, 139, 146, 147, 148, 149, 160, 161, 172, 177, 178, 179, 180,
+            186, 187, 188, 189, 192, 208, 217, 218, 220,
         }
 
         local wsType = xi.abyssea.deathType.WS_PHYSICAL
@@ -589,8 +589,8 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     end
 
     local dropLight = 0
-    local amount = 0
-    local dropRate = xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE
+    local amount    = 0
+    local dropRate  = xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE
 
     if lightInfo[zoneID][mobName][lightTypes[killType].lightType] ~= nil then
         amount = lightInfo[zoneID][mobName][lightTypes[killType].lightType]
@@ -599,13 +599,13 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if amount == 0 then
         return
     elseif amount == 100 then
-        if math.random(100) < 20 then
-            amount = 16 * math.random(1,4)
+        if math.random(1, 100) <= 20 then
+            amount = 16 * math.random(1, 4)
         else
-            amount = 16 * math.random(1,2)
+            amount = 16 * math.random(1, 2)
         end
     elseif amount == 50 then
-        amount = 16 * math.random(1,2)
+        amount = 16 * math.random(1, 2)
     end
 
     dropLight = lightTypes[killType].light
@@ -642,7 +642,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
         end
     end
 
-    local canDrop = math.random(100)
+    local canDrop = math.random(1, 100)
 
     if canDrop <= dropRate then
         for _, member in pairs(killer:getAlliance()) do

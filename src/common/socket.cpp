@@ -186,7 +186,6 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
         return -1;
     }
 
-    // setsocketopts(fd);
     struct linger opt;
     opt.l_onoff  = 0; // SO_DONTLINGER
     opt.l_linger = 0; // Do not care
@@ -739,8 +738,8 @@ int32 makeConnection_tcp(uint32 ip, uint16 port)
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
     TracyZoneScoped;
-    int fd;
-    // struct sockaddr_in client_address;
+
+    int       fd;
     socklen_t len;
 
     len = sizeof(client_address);
@@ -765,9 +764,6 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
         return -1;
     }
 
-    // setsocketopts(fd);
-    // set_nonblocking(fd, 1);
-
     if (ip_rules && !connect_check(ntohl(client_address.sin_addr.s_addr)))
     {
         do_close(fd);
@@ -779,9 +775,6 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
         fd_max = fd + 1;
     }
     sFD_SET(fd, &readfds);
-
-    // create_session(fd, recv_to_fifo, send_from_fifo, default_func_parse);
-    // sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
 
     return fd;
 }
@@ -816,9 +809,6 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
         sClose(fd);
         return -1;
     }
-
-    // setsocketopts(fd);
-    // set_nonblocking(fd, 1);
 
     server_address.sin_family = AF_INET;
     inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
@@ -881,105 +871,6 @@ void do_close_tcp(int32 fd)
     {
         delete_session(fd);
     }
-}
-
-int socket_config_read(const char* cfgName)
-{
-    TracyZoneScoped;
-    char  line[1024] = {};
-    char  w1[1024]   = {};
-    char  w2[1024]   = {};
-    FILE* fp;
-
-    fp = fopen(cfgName, "r");
-    if (fp == nullptr)
-    {
-        ShowError("File not found: %s", cfgName);
-        return 1;
-    }
-
-    while (fgets(line, sizeof(line), fp))
-    {
-        if (line[0] == '/' && line[1] == '/')
-        {
-            continue;
-        }
-        if (sscanf(line, "%[^:]: %[^\r\n]", w1, w2) != 2)
-        {
-            continue;
-        }
-
-        if (!strcmpi(w1, "stall_time"))
-        {
-            stall_time = atoi(w2);
-        }
-        else if (!strcmpi(w1, "enable_ip_rules"))
-        {
-            ip_rules = config_switch(w2);
-        }
-        else if (!strcmpi(w1, "order"))
-        {
-            if (!strcmpi(w2, "deny,allow"))
-            {
-                access_order = ACO_DENY_ALLOW;
-            }
-            else if (!strcmpi(w2, "allow,deny"))
-            {
-                access_order = ACO_ALLOW_DENY;
-            }
-            else if (!strcmpi(w2, "mutual-failure"))
-            {
-                access_order = ACO_MUTUAL_FAILURE;
-            }
-        }
-        else if (!strcmpi(w1, "allow"))
-        {
-            AccessControl acc{};
-            if (access_ipmask(w2, &acc))
-            {
-                access_allow.push_back(acc);
-            }
-            else
-            {
-                ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
-            }
-        }
-        else if (!strcmpi(w1, "deny"))
-        {
-            AccessControl acc{};
-            if (access_ipmask(w2, &acc))
-            {
-                access_deny.push_back(acc);
-            }
-            else
-            {
-                ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
-            }
-        }
-        else if (!strcmpi(w1, "connect_interval"))
-        {
-            connect_interval = std::chrono::milliseconds(atoi(w2));
-        }
-        else if (!strcmpi(w1, "connect_count"))
-        {
-            connect_count = atoi(w2);
-        }
-        else if (!strcmpi(w1, "connect_lockout"))
-        {
-            connect_lockout = std::chrono::milliseconds(atoi(w2));
-        }
-        else if (!strcmpi(w1, "debug"))
-        {
-            access_debug = config_switch(w2);
-        }
-        else if (!strcmpi(w1, "import"))
-        {
-            socket_config_read(w2);
-        }
-    }
-
-    fclose(fp);
-    return 0;
 }
 
 ///
@@ -1352,7 +1243,6 @@ void socket_final_udp()
     {
         return;
     }
-    // do_close_udp(listen_fd);
 }
 
 int32 recvudp(int32 fd, void* buff, size_t nbytes, int32 flags, struct sockaddr* from, socklen_t* addrlen)

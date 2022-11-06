@@ -43,6 +43,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaBattlefield& battlefield);
 
     uint16   getID();
+    uint16   getZoneID();
     uint8    getArea();
     uint32   getTimeLimit();
     uint32   getTimeInside();
@@ -62,6 +63,7 @@ public:
     uint64_t getLocalVar(std::string const& name);
     uint32   getLastTimeUpdate();
     auto     getInitiator() -> std::pair<uint32, std::string>;
+    uint32   getArmouryCrate();
 
     void setLastTimeUpdate(uint32 seconds);
     void setTimeLimit(uint32 seconds);
@@ -75,6 +77,7 @@ public:
     bool cleanup(bool cleanup);
     void win();
     void lose();
+    void addGroups(sol::table groups, bool hasMultipleArenas);
 
     static void Register();
 };

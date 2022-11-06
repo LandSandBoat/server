@@ -1,18 +1,18 @@
 -----------------------------------
 -- xi.effect.BIND
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     effect:setPower(target:getSpeed())
     target:setSpeed(0)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:setSpeed(effect:getPower())
 end
 
-return effect_object
+return effectObject

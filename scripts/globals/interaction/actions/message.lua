@@ -19,7 +19,7 @@ function Message:new(messageId, messageType, ...)
     obj.id = messageId
     obj.priority = Action.Priority.Message -- messages have lowest default priority
     obj.messageType = messageType or Message.Type.Text
-    obj.options = {...}
+    obj.options = { ... }
     return obj
 end
 

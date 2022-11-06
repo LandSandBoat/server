@@ -15,9 +15,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
     params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
@@ -26,7 +26,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1,000 TP
+    -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1000 TP
     -- http://wiki.ffo.jp/html/382.html does not list ACC Bonus
     -- https://www.bg-wiki.com/ffxi/Swift_Blade does not list ACC Bonus
     params.acc100 = 1.0 params.acc200 = 1.1 params.acc300 = 1.2 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
@@ -42,4 +42,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

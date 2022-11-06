@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- func: !checkinteraction {handlerName}
+-- func: !checkinteraction (handlerName)
 -- desc:
 ---------------------------------------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checkinteraction {handlerName}")
+    player:PrintToPlayer("!checkinteraction (handlerName)")
 end
 
 local typeToName = {}
@@ -51,7 +51,7 @@ end
 
 function onTrigger(player, handlerName)
     local function cmdPrint(message, ...)
-        player:PrintToPlayer(string.format(message, unpack({...}) or nil), 17)
+        player:PrintToPlayer(string.format(message, unpack({ ... }) or nil), 17)
     end
 
     if handlerName == nil then

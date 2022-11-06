@@ -25,10 +25,7 @@ end
 entity.onTrigger = function(player, npc)
     local somethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
-    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
-        player:startEvent(318)
-        player:setCharVar("BlastFromThePast_Prog", 1)
-    elseif (somethingFishy >= QUEST_ACCEPTED) then
+    if (somethingFishy >= QUEST_ACCEPTED) then
         if (player:needToZone()) then
             player:startEvent(211)
         else
@@ -36,11 +33,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif (somethingFishy == QUEST_AVAILABLE) then
         player:startEvent(208, 0, 4360)
-    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
-        player:startEvent(318)
-        player:setCharVar("BlastFromThePast_Prog", 1)
-    else
-        player:startEvent(207)
     end
 end
 

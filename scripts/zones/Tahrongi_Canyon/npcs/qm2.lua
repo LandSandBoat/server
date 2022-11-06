@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         if os.time() > npc:getLocalVar("tradeCooldown") then
             local trades = npc:getLocalVar("trades")
 
-            if trades >= 3 and math.random(100) <= 50 then
+            if trades >= 3 and math.random(1, 100) <= 50 then
                 player:messageSpecial(ID.text.REPULSIVE_CREATURE_EMERGES)
                 SpawnMob(ID.mob.YARA_MA_YHA_WHO):updateClaim(player)
                 npc:setLocalVar("trades", 0)

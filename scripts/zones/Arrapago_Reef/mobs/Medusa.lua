@@ -5,7 +5,7 @@
 -- TODO: resists, attack/def boosts
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
         chance = 75, -- "Is possible that she will not use Eagle Eye Shot at all." (guessing 75 percent)
         specials =
         {
-            {id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99)},
+            { id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99) },
         },
     })
 end
@@ -56,7 +56,7 @@ entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.MEDUSA + i) end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.MEDUSA_DEATH)
     player:addTitle(xi.title.GORGONSTONE_SUNDERER)
     for i = 1, 4 do DespawnMob(ID.mob.MEDUSA + i) end

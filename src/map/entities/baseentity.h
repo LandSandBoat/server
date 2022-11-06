@@ -44,7 +44,7 @@ enum ENTITYTYPE : uint8
 enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
-    MOB           = 1, // STATUS_UPDATE = 1,
+    MOB           = 1,
     DISAPPEAR     = 2,
     INVISIBLE     = 3,
     STATUS_4      = 4,
@@ -163,8 +163,8 @@ enum UPDATETYPE : uint8
     UPDATE_HP       = 0x04,
     UPDATE_COMBAT   = 0x07,
     UPDATE_NAME     = 0x08,
-    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
+    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_CHAR = 0x1F,
     UPDATE_DESPAWN  = 0x20,
 };
@@ -263,11 +263,11 @@ public:
     float  GetZPos() const; // Position of co-ordinate Z
     uint8  GetRotPos() const;
 
-    void         HideName(bool hide);    // hide / show name
-    void         GhostPhase(bool ghost); // makes mob semi transparent
-    bool         IsNameHidden() const;   // checks if name is hidden
-    bool         IsTargetable() const;   // checks if entity is targetable
-    virtual bool isWideScannable();      // checks if the entity should show up on wide scan
+    void         HideName(bool hide);     // hide / show name
+    void         GhostPhase(bool ghost);  // makes mob semi transparent
+    bool         IsNameHidden() const;    // checks if name is hidden
+    virtual bool GetUntargetable() const; // checks if entity is untargetable
+    virtual bool isWideScannable();       // checks if the entity should show up on wide scan
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
     void         SendZoneUpdate();

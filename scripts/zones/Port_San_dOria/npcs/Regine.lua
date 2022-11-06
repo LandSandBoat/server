@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
     local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
-    if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, {{"gil", 10}} )) then
+    if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, { { "gil", 10 } })) then
         if (npcUtil.giveItem(player, xi.items.MAGICMART_FLYER)) then
             player:confirmTrade()
         end
@@ -52,7 +52,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
-        if npcUtil.giveItem(player, {{xi.items.MAGICMART_FLYER, 12}, {xi.items.MAGICMART_FLYER, 3}}) then
+        if npcUtil.giveItem(player, { { xi.items.MAGICMART_FLYER, 12 }, { xi.items.MAGICMART_FLYER, 3 } }) then
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then

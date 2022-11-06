@@ -127,7 +127,7 @@ quest.sections =
 
             ['Migratory_Hippogryph'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         quest:getLocalVar(player, 'hippoEvent') == 1
                     then

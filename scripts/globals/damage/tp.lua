@@ -45,7 +45,6 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
             -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one "fist". Perhaps they have a shield with no main weapon.
             -- elseif attacker:getAutoAttackHits() > 1
             modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48)
-            printf("%d",delay)
         end
     else -- single melee swing, either 1H or 2H
         canZanshin = true -- https://www.bg-wiki.com/ffxi/Zanshin
@@ -53,7 +52,7 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
 
     modifiedDelay = modifiedDelay * math.max((100 + attacker:getMod(xi.mod.DELAYP)) / 100, 0.85) -- minimum cap of -15% https://www.bg-wiki.com/ffxi/Attack_Speed. Undocumented if 15% + Claymore Grip goes above 15%.
 
-    return ({canZanshin = canZanshin , modifiedDelay = math.floor(modifiedDelay)})
+    return ({ canZanshin = canZanshin , modifiedDelay = math.floor(modifiedDelay) })
 end
 
 -- returns a single melee hit's TP return

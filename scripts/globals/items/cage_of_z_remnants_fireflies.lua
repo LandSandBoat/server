@@ -3,21 +3,27 @@
 -- Z. Rem. Fireflies
 -- Transports the user out of Zhayolm Remnants
 -----------------------------------
-require("scripts/globals/teleports")
+require("scripts/globals/items")
+require("scripts/globals/msg")
 require("scripts/globals/status")
+require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if target:getZoneID() == xi.zone.ZHAYOLM_REMNANTS then
         return 0
     end
-    return 56
+    return xi.msg.basic.ITEM_UNABLE_TO_USE_2
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.Z_REM, 0, 1)
 end
 
-return item_object
+itemObject.onItemDrop = function(target, item)
+   target:addTempItem(xi.items.CAGE_OF_Z_REMNANTS_FIREFLIES)
+end
+
+return itemObject

@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getwspoints {main/sub/ranged} <optional target>")
+    player:PrintToPlayer("!getwspoints (main/sub/ranged) (optional target)")
 end
 
 function onTrigger(player, equipSlot, name)
@@ -48,6 +48,6 @@ function onTrigger(player, equipSlot, name)
         return
     end
 
-    local points = target:getStorageItem(0,0,equip):getWeaponskillPoints()
+    local points = target:getStorageItem(0, 0, equip):getWeaponskillPoints()
     player:PrintToPlayer(string.format("The weapon in %s's %s slot has %i ws points", name, equipSlot, points))
 end

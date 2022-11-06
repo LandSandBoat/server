@@ -14,13 +14,14 @@ local path =
 {
     [2] =
     {
-        {-300.000, 79.500, -130.000},
-        {-300.000, 79.500, -150.000}
+        { -300.000, 79.500, -130.000 },
+        { -300.000, 79.500, -150.000 },
     },
+
     [5] =
     {
-        {-260.000, 79.500, -130.000},
-        {-260.000, 79.500, -150.000}
+        { -260.000, 79.500, -130.000 },
+        { -260.000, 79.500, -150.000 },
     },
 
 }
@@ -29,16 +30,16 @@ entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_W_MOB[5]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() and (offset == 2 or offset == 5) then
-        local point = (mob:getLocalVar("point") % 2)+1
+        local point = (mob:getLocalVar("point") % 2) + 1
         mob:setLocalVar("point", point)
         mob:pathTo(path[offset][point][1], path[offset][point][2], path[offset][point][3], flags)
-        mob:setLocalVar("pause", os.time()+35)
+        mob:setLocalVar("pause", os.time() + 35)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        local spawn = math.random(3) == 1
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        local spawn = math.random(1, 3) == 1
         local battlefield = mob:getBattlefield()
 
         if GetNPCByID(ID.npc.TEMENOS_W_GATE[5]):getAnimation() == xi.animation.CLOSE_DOOR then

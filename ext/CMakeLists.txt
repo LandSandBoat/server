@@ -35,5 +35,31 @@ set(EXTERNAL_LIBS
     sol2_single
     argparse
     efsw
+)
+
+if (WIN32)
+    #add wepoll for epoll support on windows
+    add_subdirectory(wepoll)
+
+    list(APPEND EXTERNAL_LIBS
+        wepoll
+    )
+# backwards needs these to add to linker
+elseif (APPLE)
+    # MacOS has bfd built in clang
+    list(APPEND EXTERNAL_LIBS
+        dl
+    )
+elseif(UNIX)
+    # Linux needs bfd as it's not native like MacOS
+    list(APPEND EXTERNAL_LIBS
+        bfd
+        dl
+    )
+endif()
+
+# copy external libs to parent scope
+set(EXTERNAL_LIBS
+    ${EXTERNAL_LIBS}
     PARENT_SCOPE
 )

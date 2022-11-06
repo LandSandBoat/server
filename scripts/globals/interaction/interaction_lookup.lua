@@ -420,8 +420,8 @@ function InteractionLookup:onTrade(player, npc, trade, fallbackFn)
     return onHandler(self.data, npc:getName(), 'onTrade', { player, npc, trade }, fallbackFn, nil, npc:getID())
 end
 
-function InteractionLookup:onMobDeath(mob, player, isKiller, firstCall, fallbackFn)
-    return onHandler(self.data, mob:getName(), 'onMobDeath', { mob, player, isKiller, firstCall, playerArg = 2 }, fallbackFn)
+function InteractionLookup:onMobDeath(mob, player, optParams, fallbackFn)
+    return onHandler(self.data, mob:getName(), 'onMobDeath', { mob, player, optParams, playerArg = 2 }, fallbackFn)
 end
 
 function InteractionLookup:onRegionEnter(player, region, fallbackFn)

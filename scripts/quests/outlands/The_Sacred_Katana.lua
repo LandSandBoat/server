@@ -80,7 +80,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:findItem(xi.items.MUMEITO) and
-                        npcUtil.tradeHasExactly(trade, {{ "gil", 30000 }})
+                        npcUtil.tradeHasExactly(trade, { { "gil", 30000 } })
                     then
                         return quest:progressEvent(145)
                     end
@@ -123,7 +123,7 @@ quest.sections =
         {
             ['Isonade'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     quest:setLocalVar(player, 'Prog', 1)
                 end,
             },

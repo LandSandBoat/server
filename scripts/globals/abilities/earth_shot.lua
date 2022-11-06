@@ -8,9 +8,9 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
     if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
@@ -23,12 +23,12 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     local params = {}
     params.includemab = true
     local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
     dmg = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
-    dmg  = addBonusesAbility(player, xi.magic.ele.EARTH, target, dmg, params)
+    dmg = addBonusesAbility(player, xi.magic.ele.EARTH, target, dmg, params)
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
     dmg = dmg * applyResistanceAbility(player, target, xi.magic.ele.EARTH, xi.skill.NONE, bonusAcc)
     dmg = adjustForTarget(target, dmg, xi.magic.ele.EARTH)
@@ -38,6 +38,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
     if dmg > 0 then
         local effects = {}
+
         local rasp = target:getStatusEffect(xi.effect.RASP)
         if rasp ~= nil then
             table.insert(effects, rasp)
@@ -54,15 +55,15 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
 
         if #effects > 0 then
-            local effect = effects[math.random(#effects)]
-            local duration = effect:getDuration()
+            local effect    = effects[math.random(1, #effects)]
+            local duration  = effect:getDuration()
             local startTime = effect:getStartTime()
-            local tick = effect:getTick()
-            local power = effect:getPower()
-            local subpower = effect:getSubPower()
-            local tier = effect:getTier()
-            local effectId = effect:getType()
-            local subId = effect:getSubType()
+            local tick      = effect:getTick()
+            local power     = effect:getPower()
+            local subpower  = effect:getSubPower()
+            local tier      = effect:getTier()
+            local effectId  = effect:getType()
+            local subId     = effect:getSubType()
             power = power * 1.2
             target:delStatusEffectSilent(effectId)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
@@ -76,4 +77,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
     return dmg
 end
 
-return ability_object
+return abilityObject

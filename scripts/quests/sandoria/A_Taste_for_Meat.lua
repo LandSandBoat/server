@@ -60,7 +60,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, {{xi.items.SLICE_OF_HARE_MEAT, 5}})
+                        npcUtil.tradeHasExactly(trade, { { xi.items.SLICE_OF_HARE_MEAT, 5 } })
                     then
                         return quest:progressEvent(528)
                     else

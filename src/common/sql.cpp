@@ -104,9 +104,14 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 : m_LatencyWarning(false)
 {
     TracyZoneScoped;
-    self = new Sql_t{};
-    mysql_init(&self->handle);
-    if (self == nullptr)
+
+    self = new Sql_t();
+
+    // Allocates or initializes a MYSQL object suitable for mysql_real_connect().
+    // If mysql is a NULL pointer, the function allocates, initializes, and returns a new object.
+    // Otherwise, the object is initialized and the address of the object is returned.
+    // If mysql_init() allocates a new object, it is freed when mysql_close() is called to close the connection.
+    if (mysql_init(&self->handle) == nullptr)
     {
         ShowCritical("mysql_init failed!");
     }
@@ -132,13 +137,6 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
     InitPreparedStatements();
 
     SetupKeepalive();
-
-    // if (!asyncThread)
-    // {
-    //     asyncRunning = true;
-    //     asyncThread = std::make_unique<std::thread>(
-    //         AsyncThreadBody, m_User, m_Passwd, m_Host, m_Port, m_Db);
-    // }
 }
 
 SqlConnection::~SqlConnection()
@@ -151,6 +149,23 @@ SqlConnection::~SqlConnection()
         FreeResult();
         delete self;
     }
+}
+
+std::string SqlConnection::GetClientVersion()
+{
+    return fmt::format("database client version: {}", MARIADB_PACKAGE_VERSION);
+}
+
+std::string SqlConnection::GetServerVersion()
+{
+    std::string serverVer = "";
+    auto        ret       = Query("SELECT VERSION()");
+    if (ret != SQL_ERROR && NumRows() != 0 && NextRow() == SQL_SUCCESS)
+    {
+        serverVer = GetStringData(0);
+    }
+
+    return fmt::format("database server version: {}", serverVer);
 }
 
 int32 SqlConnection::GetTimeout(uint32* out_timeout)

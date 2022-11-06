@@ -245,7 +245,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
 
-    PEntity->id = 0x1000100 + (ZoneID << 12) + PEntity->targid;
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+    // Add 0x100 if targid is >= 0x800 -- observed on retail.
+    if (PEntity->targid >= 0x800)
+    {
+        PEntity->id += 0x100;
+    }
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
@@ -345,16 +350,11 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (table["look"].get_type() == sol::type::string)
     {
-        auto lookStr = table.get<std::string>("look");
-        if (lookStr.size() >= 4 && ((lookStr[1] == 'x' && lookStr[3] == '1') || lookStr[1] == '1'))
-        {
-            PEntity->look.size = MODEL_EQUIPPED;
-        }
-        auto look = stringToLook(lookStr);
-        std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
+        auto lookStr  = table.get<std::string>("look");
+        PEntity->look = stringToLook(lookStr);
     }
 
-    PEntity->updatemask |= UPDATE_ALL_MOB;
+    PEntity->updatemask |= UPDATE_ALL_CHAR;
 
     return CLuaBaseEntity(PEntity);
 }
@@ -421,29 +421,13 @@ auto CLuaZone::getBackgroundMusicNight()
 
 sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 {
-    TracyZoneScoped;
+    const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
 
     auto table = lua.create_table();
-
-    // TODO: Make work for instances
-    // TODO: Replace with a constant-time lookup
-    // clang-format off
-    m_pLuaZone->ForEachNpc([&](CNpcEntity* PNpc)
+    for (CBaseEntity* entity : entities)
     {
-        if (std::string((const char*)PNpc->GetName()) == name)
-        {
-            table.add(CLuaBaseEntity(PNpc));
-        }
-    });
-
-    m_pLuaZone->ForEachMob([&](CMobEntity* PMob)
-    {
-        if (std::string((const char*)PMob->GetName()) == name)
-        {
-            table.add(CLuaBaseEntity(PMob));
-        }
-    });
-    // clang-format on
+        table.add(CLuaBaseEntity(entity));
+    }
 
     if (table.empty())
     {

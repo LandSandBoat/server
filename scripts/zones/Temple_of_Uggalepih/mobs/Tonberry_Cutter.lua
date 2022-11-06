@@ -4,13 +4,13 @@
 -- Note: PH for Sozu Sarberry
 -----------------------------------
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-mixins = {require("scripts/mixins/families/tonberry")}
+mixins = { require("scripts/mixins/families/tonberry") }
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 790, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 791, 1, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 792, 1, xi.regime.type.GROUNDS)

@@ -179,7 +179,7 @@ mission.sections =
             {
                 [165] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.LAPIS_MONOCLE)
-                    mission:setVar(player, "Rock", math.random(1,6))
+                    mission:setVar(player, "Rock", math.random(1, 6))
                     player:setMissionStatus(mission.areaId, 3)
                 end,
             },

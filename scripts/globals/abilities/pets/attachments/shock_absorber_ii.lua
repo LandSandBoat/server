@@ -4,9 +4,9 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
-attachment_object.onEquip = function(pet)
+attachmentObject.onEquip = function(pet)
     pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") + 2)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_SHOCK_ABSORBER_II", function(automaton, target)
         local master = automaton:getMaster()
@@ -21,15 +21,15 @@ attachment_object.onEquip = function(pet)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") - 2)
     pet:removeListener("ATTACHMENT_SHOCK_ABSORBER_II")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
 end
 
-return attachment_object
+return attachmentObject

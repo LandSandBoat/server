@@ -16,15 +16,15 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 33)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
     mob:addMod(xi.mod.ATT, 100)
-    mob:addResist({ xi.resist.ENFEEBLING_STUN, 10, 0 })
+    -- TODO: mob:addResist({ xi.resist.ENFEEBLING_STUN, 10, 0 })
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
         xi.nyzul.handleRunicKey(mob)

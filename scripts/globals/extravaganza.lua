@@ -69,7 +69,7 @@ end
 xi.extravaganza.shadowEraFinish = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     local notes = player:getCurrency("allied_notes")
-    local cipherid = {player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2")}
+    local cipherid = { player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2") }
     local choice = 0
 
     if csid == 7300 then -- All 3 Shadow Era Cipher vendors share the same CSID and options

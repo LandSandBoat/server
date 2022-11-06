@@ -14,8 +14,8 @@ entity.onMobSpawn = function(mob)
     mob:setModelId(1168) -- Dark
 
     -- Todo: confirm this is legit and move to mob_reistances table if so
-    mob:addmob(xi.mod.LIGHT_MEVA, -100)
-    mob:addmob(xi.mod.DARK_MEVA, 100)
+    mob:addMod(xi.mod.LIGHT_MEVA, -100)
+    mob:addMod(xi.mod.DARK_MEVA, 100)
 end
 
 entity.onMobRoam = function(mob)
@@ -56,7 +56,7 @@ entity.onMagicCastingCheck = function(mob, target, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

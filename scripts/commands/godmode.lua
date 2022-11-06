@@ -70,16 +70,16 @@ end
 
 local god_mode_tier_one_on = function(player)
     -- Add bonus effects to the player..
-    player:addStatusEffect(xi.effect.MAX_HP_BOOST,200,0,0)
-    player:addStatusEffect(xi.effect.REGAIN,50,0,0)
-    player:addStatusEffect(xi.effect.REFRESH,999,0,0)
-    player:addStatusEffect(xi.effect.REGEN,999,0,0)
+    player:addStatusEffect(xi.effect.MAX_HP_BOOST, 200, 0, 0)
+    player:addStatusEffect(xi.effect.REGAIN, 50, 0, 0)
+    player:addStatusEffect(xi.effect.REFRESH, 999, 0, 0)
+    player:addStatusEffect(xi.effect.REGEN, 999, 0, 0)
     player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 0)
     player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 0)
 
     -- Heal the player from the new buffs..
-    player:addHP( 50000 )
-    player:setMP( 50000 )
+    player:addHP(50000)
+    player:setMP(50000)
 end
 
 local god_mode_tier_one_off = function(player)

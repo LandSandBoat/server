@@ -31,6 +31,7 @@ zones[xi.zone.VALKURM_DUNES] =
         AMK_DIGGING_OFFSET             = 7322,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         SONG_RUNES_DEFAULT             = 7341,  -- Lyrics on the old monument sing the story of lovers torn apart.
         UNLOCK_BARD                    = 7362,  -- You can now become a bard!
+        JUST_A_PILE_OF_SAND            = 7363,  -- Just a pile of sand.
         SIGNPOST2                      = 7370,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands West: Selbina
         SIGNPOST1                      = 7371,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands Southwest: Selbina
         CONQUEST                       = 7381,  -- You've earned conquest points!

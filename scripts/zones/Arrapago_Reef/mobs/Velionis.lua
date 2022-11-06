@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  ZNM: Velionis
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -56,7 +56,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     return xi.subEffect.BLAZE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

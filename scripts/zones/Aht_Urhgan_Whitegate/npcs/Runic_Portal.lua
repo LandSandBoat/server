@@ -20,12 +20,12 @@ entity.onTrigger = function(player, npc)
     local validTeleport = 0
     local assaultOrders =
     {
-        [0] = {KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120},
-        [1] = {KI = xi.ki.MAMOOL_JA_ASSAULT_ORDERS,  tele = 0x08, valid = 8,  event = 121},
-        [2] = {KI = xi.ki.LEBROS_ASSAULT_ORDERS,     tele = 0x10, valid = 16, event = 122},
-        [3] = {KI = xi.ki.PERIQIA_ASSAULT_ORDERS,    tele = 0x04, valid = 4,  event = 123},
-        [4] = {KI = xi.ki.ILRUSI_ASSAULT_ORDERS,     tele = 0x20, valid = 32, event = 124},
-        [5] = {KI = xi.ki.NYZUL_ISLE_ASSAULT_ORDERS, tele = 0x40, valid = 64, event = 125},
+        [0] = { KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120 },
+        [1] = { KI = xi.ki.MAMOOL_JA_ASSAULT_ORDERS,  tele = 0x08, valid = 8,  event = 121 },
+        [2] = { KI = xi.ki.LEBROS_ASSAULT_ORDERS,     tele = 0x10, valid = 16, event = 122 },
+        [3] = { KI = xi.ki.PERIQIA_ASSAULT_ORDERS,    tele = 0x04, valid = 4,  event = 123 },
+        [4] = { KI = xi.ki.ILRUSI_ASSAULT_ORDERS,     tele = 0x20, valid = 32, event = 124 },
+        [5] = { KI = xi.ki.NYZUL_ISLE_ASSAULT_ORDERS, tele = 0x40, valid = 64, event = 125 },
     }
 
     if xi.assault.hasOrders(player) then
@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option)
             xi.teleport.to(player, portalPick[option])
         elseif option >= 1001 and option <= 1006 then
             if player:getCurrency("imperial_standing") >= 200 then
-                player:delCurrency("imperial_standing",200)
+                player:delCurrency("imperial_standing", 200)
                 xi.teleport.to(player, portalPick[option])
             else
                 player:messageSpecial(ID.text.SUFFICIENT_IMPERIAL_STANDING)

@@ -32,53 +32,58 @@ zones[xi.zone.DYNAMIS_JEUNO] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = {17547301, 17547302, 17547303}},
-            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17547389},
-            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17547390},
-            {minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17547420},
-            {minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17547467},
+            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = { 17547301, 17547302, 17547303 } },
+            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17547389 },
+            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17547390 },
+            { minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17547420 },
+            { minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17547467 },
         },
+
         REFILL_STATUE =
         {
             {
-                {mob = 17547295, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547296, eye = xi.dynamis.eye.BLUE },
-                {mob = 17547297, eye = xi.dynamis.eye.GREEN},
+                { mob = 17547295, eye = xi.dynamis.eye.RED   }, -- Goblin_Replica
+                { mob = 17547296, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17547297, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17547391, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547392, eye = xi.dynamis.eye.BLUE },
-                {mob = 17547393, eye = xi.dynamis.eye.GREEN},
+                { mob = 17547391, eye = xi.dynamis.eye.RED   }, -- Goblin_Replica
+                { mob = 17547392, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17547393, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17547421, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547422, eye = xi.dynamis.eye.BLUE },
-                {mob = 17547423, eye = xi.dynamis.eye.GREEN},
+                { mob = 17547421, eye = xi.dynamis.eye.RED   }, -- Goblin_Replica
+                { mob = 17547422, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17547423, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17547456, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17547457, eye = xi.dynamis.eye.BLUE },
-                {mob = 17547458, eye = xi.dynamis.eye.GREEN},
+                { mob = 17547456, eye = xi.dynamis.eye.RED   }, -- Goblin_Replica
+                { mob = 17547457, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17547458, eye = xi.dynamis.eye.GREEN },
             },
         },
     },
+
     npc =
     {
         QM =
         {
             [17547509] =
             {
-                param = {3356, 3419, 3420, 3421, 3422, 3423},
+                param = { 3356, 3419, 3420, 3421, 3422, 3423 },
                 trade =
                 {
-                    {item = 3356,                           mob = 17547265}, -- Goblin Golem
-                    {item = {3419, 3420, 3421, 3422, 3423}, mob = 17547499}, -- Arch Goblin Golem
+                    { item = 3356,                             mob = 17547265 }, -- Goblin Golem
+                    { item = { 3419, 3420, 3421, 3422, 3423 }, mob = 17547499 }, -- Arch Goblin Golem
                 }
             },
-            [17547510] = {trade = {{item = 3392, mob = 17547493}}}, -- Quicktrix Hexhands
-            [17547511] = {trade = {{item = 3393, mob = 17547494}}}, -- Feralox Honeylips
-            [17547512] = {trade = {{item = 3394, mob = 17547496}}}, -- Scourquix Scaleskin
-            [17547513] = {trade = {{item = 3395, mob = 17547498}}}, -- Wilywox Tenderpalm
+            [17547510] = { trade = { { item = 3392, mob = 17547493 } } }, -- Quicktrix Hexhands
+            [17547511] = { trade = { { item = 3393, mob = 17547494 } } }, -- Feralox Honeylips
+            [17547512] = { trade = { { item = 3394, mob = 17547496 } } }, -- Scourquix Scaleskin
+            [17547513] = { trade = { { item = 3395, mob = 17547498 } } }, -- Wilywox Tenderpalm
         },
     },
 }

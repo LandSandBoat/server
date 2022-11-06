@@ -26,13 +26,13 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- also have small constant to account for 0 dark skill
     local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 165)
     -- get resist multiplier (1x if no resist)
@@ -73,4 +73,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

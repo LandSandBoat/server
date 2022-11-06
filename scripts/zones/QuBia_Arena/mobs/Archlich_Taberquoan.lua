@@ -3,7 +3,7 @@
 --   NM: Archlich Taber'quoan
 -- Mission 5-1 BCNM Fight
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -31,7 +31,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.ARCHMAGE_ASSASSIN)
 end
 

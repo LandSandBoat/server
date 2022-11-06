@@ -13,13 +13,14 @@ local path =
 {
     [1] =
     {
-        {20.000, 6.000, 150.000},
-        {20.000, 6.000, 142.640}
+        { 20.000, 6.000, 150.000 },
+        { 20.000, 6.000, 142.640 },
     },
+
     [3] =
     {
-        {60.000, 6.000, 150.000},
-        {60.000, 6.000, 142.640}
+        { 60.000, 6.000, 150.000 },
+        { 60.000, 6.000, 142.640 },
     },
 }
 
@@ -36,8 +37,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield:getLocalVar("crateOpenedF3") ~= 1 then
             local mobID = mob:getID()

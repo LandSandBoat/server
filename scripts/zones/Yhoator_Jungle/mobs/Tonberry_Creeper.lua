@@ -4,13 +4,13 @@
 -- Note: PH for Hoar-knuckled Rimberry
 -----------------------------------
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-mixins = {require("scripts/mixins/families/tonberry")}
+mixins = { require("scripts/mixins/families/tonberry") }
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 133, 1, xi.regime.type.FIELDS)
 end
 

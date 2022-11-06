@@ -226,7 +226,7 @@ void CNavMesh::outputError(uint32 status)
     }
 }
 
-std::vector<position_t> CNavMesh::findPath(const position_t& start, const position_t& end)
+std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
@@ -235,16 +235,14 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
         return {};
     }
 
-    std::vector<position_t> ret;
-    dtStatus                status;
+    std::vector<pathpoint_t> ret;
+    dtStatus                 status;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
-    // ShowDebug("start pos %f %f %f", spos[0], spos[1], spos[2]);
 
     float epos[3];
     CNavMesh::ToDetourPos(&end, epos);
-    // ShowDebug("end pos %f %f %f", epos[0], epos[1], epos[2]);
 
     dtQueryFilter filter;
     filter.setIncludeFlags(0xffff);
@@ -321,7 +319,7 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
 
             CNavMesh::ToFFXIPos(pathPos);
 
-            ret.push_back({ pathPos[0], pathPos[1], pathPos[2], 0, 0 });
+            ret.push_back({ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0 });
         }
     }
 
@@ -432,6 +430,13 @@ bool CNavMesh::validPosition(const position_t& position)
 
 bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint)
 {
+    TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return true;
+    }
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -459,6 +464,13 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
 
 bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint)
 {
+    TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return true;
+    }
+
     float spos[3];
     CNavMesh::ToDetourPos(&startPosition, spos);
 
@@ -539,6 +551,11 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
 {
     TracyZoneScoped;
 
+    if (!m_navMesh)
+    {
+        return true;
+    }
+
     float verticalDistance = abs(start.y - end.y);
     if (verticalDistance > 2 * verticalLimit)
     {
@@ -585,7 +602,6 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
             // if we are within verticalLimitTrunc of a point, that's our closest.
             if (startHeight != endHeight)
             {
-                // ShowInfo("Different Floors");
                 return false;
             }
         }

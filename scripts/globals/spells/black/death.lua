@@ -7,19 +7,19 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     if
         target:isUndead() or
         target:hasStatusEffect(xi.effect.MAGIC_SHIELD) or
         -- Todo: DeathRes has no place in the resistance functions so far..
-        target:getMod(xi.mod.DEATHRES) > math.random(100)
+        math.random(1, 100) <= target:getMod(xi.mod.DEATHRES)
     then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return 0
@@ -31,4 +31,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return 0
 end
 
-return spell_object
+return spellObject

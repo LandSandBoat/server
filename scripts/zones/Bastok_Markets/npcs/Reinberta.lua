@@ -23,15 +23,15 @@ entity.onTrade = function(player, npc, trade)
         if signed ~=0 then
             player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("GoldsmithingExpertQuest",0)
-            player:setLocalVar("GoldsmithingTraded",1)
+            player:setCharVar("GoldsmithingExpertQuest", 0)
+            player:setLocalVar("GoldsmithingTraded", 1)
         else
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
         player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
-        player:setLocalVar("GoldsmithingTraded",1)
+        player:setLocalVar("GoldsmithingTraded", 1)
     end
 end
 
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 300 and option == 2 then
         if guildMember == 1 then
-            player:setCharVar("GoldsmithingExpertQuest",1)
+            player:setCharVar("GoldsmithingExpertQuest", 1)
         end
     elseif csid == 300 and option == 1 then
         local crystal = 4096 -- fire crystal
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
     else
         if player:getLocalVar("GoldsmithingTraded") == 1 then
             player:tradeComplete()
-            player:setLocalVar("GoldsmithingTraded",0)
+            player:setLocalVar("GoldsmithingTraded", 0)
         end
     end
 

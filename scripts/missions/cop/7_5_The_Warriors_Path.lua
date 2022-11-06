@@ -131,6 +131,9 @@ mission.sections =
 
                     mission:complete(player)
                     mission:setVar(player, 'Option', 1)
+                    -- Setup var for initial interactions with Sagheera.
+                    -- This is a bitfield that has its bits removed as the player completes the necessary interactions.
+                    player:setCharVar("SagheeraInteractions", 7)
                 end,
             },
         },

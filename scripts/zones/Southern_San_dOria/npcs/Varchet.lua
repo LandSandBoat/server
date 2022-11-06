@@ -14,7 +14,7 @@ local gameLost = 2
 local gameTie  = 3
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{"gil", 5}}) then
+    if npcUtil.tradeHas(trade, { { "gil", 5 } }) then
         player:confirmTrade()
 
         local vdie1 = math.random(1, 6)

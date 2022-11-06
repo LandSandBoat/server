@@ -100,7 +100,7 @@ entity.onSpellPrecast = function(mob, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local mobId = mob:getID()
     for i = 1, 2 do
         local petID = GetMobByID(mobId+i)

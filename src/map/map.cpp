@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -211,6 +211,9 @@ int32 do_init(int32 argc, char** argv)
     ShowInfo("do_init: connecting to database");
     sql = std::make_unique<SqlConnection>();
 
+    ShowInfo(sql->GetClientVersion().c_str());
+    ShowInfo(sql->GetServerVersion().c_str());
+
     sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
@@ -259,8 +262,6 @@ int32 do_init(int32 argc, char** argv)
 
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
-
-    luautils::PopulateIDLookups();
 
     ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
     map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
@@ -328,6 +329,14 @@ int32 do_init(int32 argc, char** argv)
             fmt::format("You have been set to GM level {}.", level).c_str(), ""));
 
     });
+
+    gConsoleService->RegisterCommand("exit", "Terminate the program.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::print("> Goodbye!\n");
+        gConsoleService->stop();
+        gRunFlag = false;
+    });
     // clang-format on
 
     return 0;
@@ -366,8 +375,15 @@ void do_final(int code)
 
     timer_final();
     socket_final();
-
+    luautils::cleanup();
     logging::ShutDown();
+
+#ifdef WIN32
+    shutdown(map_fd, SD_SEND);
+#else
+    shutdown(map_fd, SHUT_WR);
+#endif
+    close(map_fd);
 
     if (code != EXIT_SUCCESS)
     {
@@ -448,7 +464,6 @@ int32 do_sockets(fd_set* rfd, duration next)
     timeout.tv_usec = std::chrono::duration_cast<std::chrono::microseconds>(next - std::chrono::duration_cast<std::chrono::seconds>(next)).count();
 
     ret = sSelect(fd_max, rfd, nullptr, nullptr, &timeout);
-
     if (ret == SOCKET_ERROR)
     {
         if (sErrno != S_EINTR)
@@ -466,7 +481,7 @@ int32 do_sockets(fd_set* rfd, duration next)
         struct sockaddr_in from;
         socklen_t          fromlen = sizeof(from);
 
-        int32 ret = recvudp(map_fd, g_PBuff, MAX_BUFFER_SIZE, 0, (struct sockaddr*)&from, &fromlen);
+        ret = recvudp(map_fd, g_PBuff, MAX_BUFFER_SIZE, 0, (struct sockaddr*)&from, &fromlen);
         if (ret != -1)
         {
             // find player char
@@ -579,6 +594,10 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     try
     {
+        if (size <= (FFXI_HEADER_SIZE + 16)) // check for underflow or no-data packet
+        {
+            return -1;
+        }
         checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(size - (FFXI_HEADER_SIZE + 16)), (char*)(buff + size - 16));
     }
     catch (...)
@@ -898,11 +917,21 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     auto remainingPackets = PChar->getPacketList().size();
     TotalPacketsDelayedPerTick += static_cast<uint32>(remainingPackets);
-    TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
-    if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
+
+    if (settings::get<bool>("logging.DEBUG_PACKET_BACKLOG"))
     {
-        ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
-                                PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+        TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
+        if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
+        {
+            if (PChar->loc.zone == nullptr)
+            {
+                ShowWarning(fmt::format("Packet backlog exists for char {} with a nullptr zone. Clearing packet list.", PChar->name));
+                PChar->clearPacketList();
+                return 0;
+            }
+            ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
+                                    PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+        }
     }
 
     return 0;

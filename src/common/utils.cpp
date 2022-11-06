@@ -584,9 +584,8 @@ int8* EncodeStringSignature(int8* signature, int8* target)
 {
     uint8 encodedSignature[SignatureStringLength];
     memset(&encodedSignature, 0, sizeof encodedSignature);
-    uint8 chars = 0;
-    // uint8 leftover = 0;
-    auto length = std::min<size_t>(15u, strlen((const char*)signature));
+    uint8 chars  = 0;
+    auto  length = std::min<size_t>(15u, strlen((const char*)signature));
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -606,10 +605,6 @@ int8* EncodeStringSignature(int8* signature, int8* target)
         packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
         chars++;
     }
-    // leftover = (chars * 6) % 8;
-    // leftover = 8 - leftover;
-    // leftover = (leftover == 8 ? 6 : leftover);
-    // packBitsLE(encodedSignature,0xFF,6*chars, leftover);
 
     return (int8*)strncpy((char*)target, (const char*)encodedSignature, SignatureStringLength);
 }
@@ -717,7 +712,6 @@ std::string UnpackSoultrapperName(uint8 input[])
             tempLeft = tempLeft >> 1;
         }
 
-        // uint8 orvalue = tempLeft | remainder;
         indexChar = (char)(tempLeft | remainder);
         if (indexChar >= '0' && indexChar <= 'z')
         {
@@ -826,10 +820,19 @@ std::string trim(std::string const& str, std::string const& whitespace)
 
 look_t stringToLook(std::string str)
 {
+    look_t out{};
+
+    // Sanity checks
     // Remove "0x" if found
-    if (str[0] == '0' && str[1] == 'x')
+    if (str.size() == 42 && str[0] == '0' && str[1] == 'x')
     {
         str = str.substr(2);
+    }
+
+    // Only support full-string looks
+    if (str.size() != 40)
+    {
+        return out;
     }
 
     // A 16-bit number is represented by *4* string characters
@@ -848,10 +851,24 @@ look_t stringToLook(std::string str)
     for (auto& entry : hex)
     {
         // Swap endian-ness
-        entry = (entry >> 8) | (entry << 8);
+        auto top    = entry << 8;
+        auto bottom = entry >> 8;
+        entry       = top | bottom;
     }
 
-    look_t out(hex);
+    out.size = hex[0];
+
+    out.face = hex[1] & 0x00FF;
+    out.race = hex[1] >> 8;
+
+    out.head   = hex[2] &= ~0x1000;
+    out.body   = hex[3] &= ~0x2000;
+    out.hands  = hex[4] &= ~0x3000;
+    out.legs   = hex[5] &= ~0x4000;
+    out.feet   = hex[6] &= ~0x5000;
+    out.main   = hex[7] &= ~0x6000;
+    out.sub    = hex[8] &= ~0x7000;
+    out.ranged = hex[9] &= ~0x8000;
 
     return out;
 }

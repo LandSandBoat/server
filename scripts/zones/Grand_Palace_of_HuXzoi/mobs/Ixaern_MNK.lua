@@ -11,15 +11,22 @@ local entity = {}
 
 local bracerMode = function(mob, qnAern1, qnAern2)
     local mobID = mob:getID()
+
     mob:useMobAbility(690) -- Hundred Fists
-    if qnAern1:isAlive() then qnAern1:useMobAbility(692) end -- Chainspell
-    if qnAern2:isAlive() then qnAern2:useMobAbility(689) end -- Benediction
+
+    if qnAern1:isAlive() then
+        qnAern1:useMobAbility(692) -- Chainspell
+    end
+
+    if qnAern2:isAlive() then
+        qnAern2:useMobAbility(689) -- Benediction
+    end
     mob:addMod(xi.mod.ATT, 200)
 
     for i = mobID+1, mobID+2 do
         local pet = GetMobByID(i)
         if pet:isSpawned() then
-            pet:AnimationSub(2)
+            pet:setAnimationSub(2)
             pet:addMod(xi.mod.ATT, 200)
             pet:setDelay(2100)
         end
@@ -65,10 +72,7 @@ entity.onMobFight = function(mob, target)
     end
     -- Ix'Mnk will not visually add Bracers while under the effect of Hundred Fists
     if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and mob:getLocalVar("enableBracers") == 1 then
-        mob:AnimationSub(2) -- Bracers
-        mob:setDelay(1700)
-    else
-        mob:setDelay(0)
+        mob:setAnimationSub(2) -- Bracers
     end
 end
 
@@ -79,7 +83,7 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local mobID = mob:getID()
     for i = mobID+1, mobID+2 do
         local m = GetMobByID(i)

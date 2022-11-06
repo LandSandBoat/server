@@ -204,7 +204,7 @@ mission.sections =
 
             ['Queen_of_Coins'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 4 and
                         GetMobByID(mob:getID() - 1):isDead()
@@ -216,7 +216,7 @@ mission.sections =
 
             ['Queen_of_Swords'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 4 and
                         GetMobByID(mob:getID() + 1):isDead()
