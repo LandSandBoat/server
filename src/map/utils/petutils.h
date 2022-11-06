@@ -78,7 +78,11 @@ namespace petutils
     int16 PerpetuationCost(uint32 id, uint8 level);
     void  Familiar(CBattleEntity* PPet);
     void  LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-    void  LoadWyvernStatistics(CBattleEntity* PMaster, CPetEntity* PPet, bool finalize);
+    void  CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet);
+    void  CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet);
+    void  CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet);
+    void  CalculateAutomatonStats(CBattleEntity* PMaster, CPetEntity* PPet);
+    void  CalculateLoupanStats(CBattleEntity* PMaster, CPetEntity* PPet);
     void  FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet);
     bool  CheckPetModType(CBattleEntity* PPet, PetModType petmod);
 }; // namespace petutils
