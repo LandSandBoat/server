@@ -16,14 +16,12 @@ xi.job_utils.dragoon = xi.job_utils.dragoon or {}
 
 -- Returns a table of WS Parameters common to all damage-dealing jumps
 local function getJumpWSParams(player, atkMultiplier, tpMultiplier)
-    local ftp = 1 + (player:getStat(xi.mod.VIT) / 256)
-
     local params =
     {
         numHits = 1,
-        ftp100 = ftp,
-        ftp200 = ftp,
-        ftp300 = ftp,
+        ftp100  = 1,
+        ftp200  = 1,
+        ftp300  = 1,
 
         str_wsc = 0.0,
         dex_wsc = 0.0,
@@ -77,7 +75,7 @@ end
 -- Generic Function for damage-based Jumps
 local function performWSJump(player, target, action, params)
     local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
+    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 1000, action, true, taChar)
     local totalHits = tpHits + extraHits
 
     if totalHits > 0 then
@@ -222,7 +220,14 @@ end
 
 xi.job_utils.dragoon.useJump = function(player, target, ability, action)
     local atkMultiplier = (player:getMod(xi.mod.JUMP_ATT_BONUS) + 100) / 100
-    local params = getJumpWSParams(player, atkMultiplier, nil)
+    local params = getJumpWSParams(player, atkMultiplier, 0)
+
+    -- Only "Jump" and not others get the fTP VIT bonus
+    local ftp = 1 + (player:getStat(xi.mod.VIT) / 256)
+    params.ftp100 = ftp
+    params.ftp200 = ftp
+    params.ftp300 = ftp
+
     local damage, totalHits = performWSJump(player, target, action, params)
 
     -- Under Spirit Surge, Jump also decreases target defense by 20% for 60 seconds
@@ -401,7 +406,7 @@ end
 
 xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
     local atkMultiplier = (player:getMod(xi.mod.JUMP_ATT_BONUS) + 100) / 100
-    local params = getJumpWSParams(player, atkMultiplier, nil)
+    local params = getJumpWSParams(player, atkMultiplier, 0)
     local damage, _ = performWSJump(player, target, action, params)
 
     -- Reduce 99% of total accumulated enmity
