@@ -1361,88 +1361,283 @@ local function checkSkip(player, bfid)
         return battlefield:checkSkipCutscene(player)
     end
 
-    local nat       = player:getCurrentMission(player:getNation())
-    local sandoriaMission     = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local bastokMission     = player:getCurrentMission(xi.mission.log_id.BASTOK)
-    local windurstMission     = player:getCurrentMission(xi.mission.log_id.WINDURST)
-    local cop       = player:getCurrentMission(xi.mission.log_id.COP)
-    local nationStatus   = player:getMissionStatus(player:getNation())
-    local promathiaStatus   = player:getCharVar("PromathiaStatus")
-    local sofStat   = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
-    local mission2_3a =
-        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2) or
-        player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) or
-        nationStatus > 9 and
-        (
-            bastokMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2 or
-            windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2
-        )
-    local mission2_3b =
-        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
-        player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) or
-        nationStatus > 10 and
-        (
-            sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-            windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-        )
-    local mission2_3c =
-        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2) or
-        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2) or
-        nationStatus > 8 and
-        (
-            sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
-            bastokMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
-        )
+    local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
+    local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
+    local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
+    local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
+
+    local nationStatus    = player:getMissionStatus(player:getNation())
+    local promathiaStatus = player:getCharVar("PromathiaStatus")
 
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [   0] = function() return ( mission2_3a                                                                                                                                                  ) end, -- Mission 2-3
-        [   3] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON) or (sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and nationStatus > 2)            ) end, -- San d'Oria 7-2: The Secret Weapon
-        [  32] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN) or (sandoriaMission == xi.mission.id.sandoria.SAVE_THE_CHILDREN and nationStatus > 2)            ) end, -- San d'Oria 1-3: Save the Children
-        [  33] = function() return ( player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)                                                                      ) end, -- Quest: The Holy Crest
-        [  64] = function() return ( mission2_3b                                                                                                                                                  ) end, -- Mission 2-3
-        [  67] = function() return ( player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY) or (bastokMission == xi.mission.id.bastok.ON_MY_WAY and nationStatus > 2)                                  ) end, -- Bastok 7-2: On My Way
-        [  96] = function() return ( mission2_3c                                                                                                                                                  ) end, -- Mission 2-3
-        [  99] = function() return ( player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION) or (windurstMission == xi.mission.id.windurst.SAINTLY_INVITATION and nationStatus > 1)          ) end, -- Windurst 6-2: A Saintly Invitation
-        [ 161] = function() return ( player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) or (bastokMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and nationStatus > 4)    ) end, -- Bastok 9-2: Where Two Paths Converge
-        [ 192] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)                                                                  ) end, -- ZM6: Through the Quicksand Caves
-        [ 224] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)                    ) end, -- Quest: The Moonlit Path
-        [ 225] = function() return ( player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) or (windurstMission == xi.mission.id.windurst.MOON_READING and nationStatus > 4)                      ) end, -- windurstMission 9-2: Moon Reading
-        [ 256] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)                                                                    ) end, -- ZM8: Return to Delkfutt's Tower
-        [ 288] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)                                                                                   ) end, -- ZM14: Ark Angels (Hume)
-        [ 289] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)                                                                                   ) end, -- ZM14: Ark Angels (Tarutaru)
-        [ 290] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)                                                                                   ) end, -- ZM14: Ark Angels (Mithra)
-        [ 291] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)                                                                                   ) end, -- ZM14: Ark Angels (Elvaan)
-        [ 292] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)                                                                                   ) end, -- ZM14: Ark Angels (Galka)
-        [ 320] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)                                                                          ) end, -- ZM16: The Celestial Nexus
-        [ 416] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or player:hasKeyItem(xi.ki.WHISPER_OF_GALES)                          ) end, -- Quest: Trial by Wind
-        [ 448] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)               ) end, -- Quest: Trial by Lightning
-        [ 480] = function() return ( player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or player:hasKeyItem(xi.ki.WHISPER_OF_FROST)                           ) end, -- Quest: Trial by Ice
-        [ 512] = function() return ( player:hasCompletedMission(player:getNation(), xi.mission.id.nation.ARCHLICH) or (nat == xi.mission.id.nation.ARCHLICH and nationStatus > 11)                                           ) end, -- Mission 5-1
-        [ 516] = function() return ( player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) or (sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and nationStatus > 4)    ) end, -- San d'Oria 9-2: The Heir to the Light
-        [ 544] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)                         ) end, -- Quest: Trial by Fire
-        [ 576] = function() return ( player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)                           ) end, -- Quest: Trial by Earth
-        [ 608] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)                         ) end, -- Quest: Trial by Water
-        [ 672] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-                                    (cop == xi.mission.id.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7)                                               ) end, -- PM5-3 U2: Head Wind
-        [ 704] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or (cop == xi.mission.id.cop.DARKNESS_NAMED and promathiaStatus > 2)                                   ) end, -- PM3-5: Darkness Named
-        [ 706] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)                         ) end, -- Quest: Waking Dreams
-        [ 736] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or (cop == xi.mission.id.cop.THREE_PATHS and
-                                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8)                                                                         ) end, -- PM5-3 L3: A Century of Hardship
-        [ 768] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)                                      ) end, -- PM1-3: The Mothercrystals
-        [ 800] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_DEM)                                        ) end, -- PM1-3: The Mothercrystals
-        [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals
-        [ 864] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS) or (cop == xi.mission.id.cop.DESIRES_OF_EMPTINESS and
-                                    player:getCharVar('Mission[6][518]Status') > 2)                                                                                                               ) end, -- PM5-2: Desires of Emptiness
-        [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("StormsOfFate") > 2)                                                          ) end, -- Quest: Storms of Fate
-        [ 960] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)                                                                                       ) end, -- PM2-5: Ancient Vows
-        [ 961] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE) or (cop == xi.mission.id.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') > 1)        ) end, -- PM4-2: The Savage
-        [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)                                                                                  ) end, -- PM7-5: The Warrior's Path
-        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or (cop == xi.mission.id.cop.WHEN_ANGELS_FALL and promathiaStatus > 4)                               ) end, -- PM8-3: When Angels Fall
-        [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or (cop == xi.mission.id.cop.DAWN and promathiaStatus > 2)                                                       ) end, -- PM8-4: Dawn
-        [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                           ) end, -- Apocalypse Nigh
-        [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)                                                                             ) end, -- WOTG07: Purple, The New Black
+        [0] = function() -- Mission 2-3
+            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2) or
+                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) or
+                nationStatus > 9 and
+                (
+                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2 or
+                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2
+                )
+        end,
+
+        [3] = function() -- San d'Oria 7-2: The Secret Weapon
+            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON) or
+                (
+                    sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and
+                    nationStatus > 2
+                )
+        end,
+
+        [32] = function() -- San d'Oria 1-3: Save the Children
+            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN) or
+                (
+                    sandoriaMission == xi.mission.id.sandoria.SAVE_THE_CHILDREN and
+                    nationStatus > 2
+                )
+        end,
+
+        [33] = function() -- Quest: The Holy Crest
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+        end,
+
+        [64] = function() -- Mission 2-3
+            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
+                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) or
+                nationStatus > 10 and
+                (
+                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
+                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
+                )
+        end,
+
+        [67] = function() -- Bastok 7-2: On My Way
+            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY) or
+                (
+                    bastokMission == xi.mission.id.bastok.ON_MY_WAY and
+                    nationStatus > 2
+                )
+        end,
+
+        [96] = function() -- Mission 2-3
+            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2) or
+                player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2) or
+                nationStatus > 8 and
+                (
+                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
+                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
+                )
+        end,
+
+        [99] = function() -- Windurst 6-2: A Saintly Invitation
+            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION) or
+                (
+                    windurstMission == xi.mission.id.windurst.SAINTLY_INVITATION and
+                    nationStatus > 1
+                )
+        end,
+
+        [161] = function() -- Bastok 9-2: Where Two Paths Converge
+            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) or
+                (
+                    bastokMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and
+                    nationStatus > 4
+                )
+        end,
+
+        [192] = function() -- ZM6: Through the Quicksand Caves
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
+        end,
+
+        [224] = function() -- Quest: The Moonlit Path
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)
+        end,
+
+        [225] = function() -- windurstMission 9-2: Moon Reading
+            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) or
+                (
+                    windurstMission == xi.mission.id.windurst.MOON_READING and
+                    nationStatus > 4
+                )
+        end,
+
+        [256] = function() -- ZM8: Return to Delkfutt's Tower
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
+        end,
+
+        [288] = function() -- ZM14: Ark Angels (Hume)
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
+        end,
+
+        [289] = function() -- ZM14: Ark Angels (Tarutaru)
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
+        end,
+
+        [290] = function() -- ZM14: Ark Angels (Mithra)
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
+        end,
+
+        [291] = function() -- ZM14: Ark Angels (Elvaan)
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
+        end,
+
+        [292] = function() -- ZM14: Ark Angels (Galka)
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
+        end,
+
+        [320] = function() -- ZM16: The Celestial Nexus
+            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
+        end,
+
+        [416] = function() -- Quest: Trial by Wind
+            return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+        end,
+
+        [448] = function() -- Quest: Trial by Lightning
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+        end,
+
+        [480] = function() -- Quest: Trial by Ice
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+        end,
+
+        [512] = function() -- Mission 5-1
+            return player:hasCompletedMission(player:getNation(), xi.mission.id.nation.ARCHLICH) or
+                (
+                    player:getCurrentMission(player:getNation()) == xi.mission.id.nation.ARCHLICH and
+                    nationStatus > 11
+                )
+        end,
+
+        [516] = function() -- San d'Oria 9-2: The Heir to the Light
+            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) or
+                (
+                    sandoriaMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
+                    nationStatus > 4
+                )
+        end,
+
+        [544] = function() -- Quest: Trial by Fire
+            return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+        end,
+
+        [576] = function() -- Quest: Trial by Earth
+            return player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+        end,
+
+        [608] = function() -- Quest: Trial by Water
+            return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+        end,
+
+        [672] = function() -- PM5-3 U2: Head Wind
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                (
+                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
+                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7
+                )
+        end,
+
+        [704] = function() -- PM3-5: Darkness Named
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
+                (
+                    promathiaMission == xi.mission.id.cop.DARKNESS_NAMED and
+                    player:getCharVar('Mission[6][358]Status') == 5
+                )
+        end,
+
+        [706] = function() -- Quest: Waking Dreams
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
+                player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
+        end,
+
+        [736] = function() -- PM5-3 L3: A Century of Hardship
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                (
+                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
+                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8
+                )
+        end,
+
+        [768] = function() -- PM1-3: The Mothercrystals
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
+                player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)
+        end,
+
+        [800] = function() -- PM1-3: The Mothercrystals
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
+                player:hasKeyItem(xi.ki.LIGHT_OF_DEM)
+        end,
+
+        [832] = function() -- PM1-3: The Mothercrystals
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
+                player:hasKeyItem(xi.ki.LIGHT_OF_MEA)
+        end,
+
+        [864] = function() -- PM5-2: Desires of Emptiness
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DESIRES_OF_EMPTINESS) or
+                (
+                    promathiaMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS and
+                    player:getCharVar('Mission[6][518]Status') > 2
+                )
+        end,
+
+        [896] = function() -- Quest: Storms of Fate
+            local stormsOfFateStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
+
+            return stormsOfFateStatus == QUEST_COMPLETED or
+                (
+                    stormsOfFateStatus == QUEST_ACCEPTED and
+                    player:getCharVar("StormsOfFate") > 2
+                )
+        end,
+
+        [960] = function() -- PM2-5: Ancient Vows
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
+        end,
+
+        [961] = function() -- PM4-2: The Savage
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE) or
+                (
+                    promathiaMission == xi.mission.id.cop.THE_SAVAGE and
+                    player:getCharVar('Mission[6][418]Status') > 1
+                )
+        end,
+
+        [993] = function() -- PM7-5: The Warrior's Path
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH)
+        end,
+
+        [1024] = function() -- PM8-3: When Angels Fall
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
+                (
+                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
+                    promathiaStatus > 4
+                )
+        end,
+
+        [1056] = function() -- PM8-4: Dawn
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
+                (
+                    promathiaMission == xi.mission.id.cop.DAWN and
+                    promathiaStatus > 2
+                )
+        end,
+
+        [1057] = function() -- Apocalypse Nigh
+            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+        end,
+
+        [2721] = function() -- WOTG07: Purple, The New Black
+            return player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
+        end,
     }
 
     -- Determine whether player meets cutscene skip requirements
@@ -1694,20 +1889,61 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
         switch (battlefieldId): caseof
         {
-            [1290] = function() area = 2 end, -- NW_Apollyon
-            [1291] = function() area = 1 end, -- SW_Apollyon
-            [1292] = function() area = 4 end, -- NE_Apollyon
-            [1293] = function() area = 3 end, -- SE_Apollyon
-            [1294] = function() area = 6 end, -- CS_Apollyon
-            [1296] = function() area = 5 end, -- Central_Apollyon
-            [1298] = function() area = 3 end, -- Temenos_Western_Tower
-            [1299] = function() area = 1 end, -- Temenos_Northern_Tower
-            [1300] = function() area = 2 end, -- Temenos_Eastern_Tower
-            [1301] = function() area = 8 end, -- Central_Temenos_Basement
-            [1303] = function() area = 7 end, -- Central_Temenos_1st_Floor
-            [1304] = function() area = 6 end, -- Central_Temenos_2nd_Floor
-            [1305] = function() area = 5 end, -- Central_Temenos_3rd_Floor
-            [1306] = function() area = 4 end, -- Central_Temenos_4th_Floor
+            [1290] = function() -- NW_Apollyon
+                area = 2
+            end,
+
+            [1291] = function() -- SW_Apollyon
+                area = 1
+            end,
+
+            [1292] = function() -- NE_Apollyon
+                area = 4
+            end,
+
+            [1293] = function() -- SE_Apollyon
+                area = 3
+            end,
+
+            [1294] = function() -- CS_Apollyon
+                area = 6
+            end,
+
+            [1296] = function() -- Central_Apollyon
+                area = 5
+            end,
+
+            [1298] = function() -- Temenos_Western_Tower
+                area = 3
+            end,
+
+            [1299] = function() -- Temenos_Northern_Tower
+                area = 1
+            end,
+
+            [1300] = function() -- Temenos_Eastern_Tower
+                area = 2
+            end,
+
+            [1301] = function() -- Central_Temenos_Basement
+                area = 8
+            end,
+
+            [1303] = function() -- Central_Temenos_1st_Floor
+                area = 7
+            end,
+
+            [1304] = function() -- Central_Temenos_2nd_Floor
+                area = 6
+            end,
+
+            [1305] = function() -- Central_Temenos_3rd_Floor
+                area = 5
+            end,
+
+            [1306] = function() -- Central_Temenos_4th_Floor
+                area = 4
+            end,
         }
 
         local result = xi.battlefield.returnCode.REQS_NOT_MET
