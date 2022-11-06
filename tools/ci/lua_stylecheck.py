@@ -129,6 +129,17 @@ def check_operator_padding(line):
     for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", stripped_line):
         show_error("Operator or comparator without padding detected at end of line")
 
+def check_parentheses_padding(line):
+    """Parentheses should have padding prior to opening and after closing, but must not contain padding after
+    the open parenthesis, or prior to closing.
+
+    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-excess-whitespace-inside-of-parentheses-or-solely-for-alignment
+    """
+
+    if len(re.findall("\([ ]| [\)]", line)) > 0:
+        if not line.lstrip(' ')[0] == '(' and not line.lstrip(' ')[0] == ')': # Ignore large blocks ending or opening
+            show_error("No excess whitespace inside of parentheses or solely for alignment.")
+
 def check_multiline_condition_format(line):
     """Multi-line conditional blocks should contain if/elseif and then on their own lines,
     with conditions indented between them.
@@ -155,7 +166,6 @@ def check_multiline_condition_format(line):
 # No useless parens (paren without and|or in entire section)
 # Parentheses must have and|or in conditions
 # Only 1 space before and after comparators
-# No whitespace after opening paren
 # No empty in-line comments
 
 def run_style_check():
@@ -190,8 +200,9 @@ def run_style_check():
             check_parameter_padding(code_line)
             check_variable_names(code_line)
             check_semicolon(code_line)
-            # check_indentation(code_line)
+            check_indentation(code_line)
             check_operator_padding(code_line)
+            check_parentheses_padding(code_line)
 
             # Multiline conditionals should not have data in if, elseif, or then
             check_multiline_condition_format(code_line)
@@ -202,7 +213,7 @@ def run_style_check():
             # TODO: If we have a string inside parentheses, make sure it has and/or in the string
 
             if contains_word('if')(code_line) or contains_word('elseif')(code_line):
-                # Single line conditions
+                # Single line conditions TODO: Slice between if and then; malformed are ignored currently
                 if contains_word('then')(code_line):
                     condition_str = code_line.replace('elseif','').replace('if','').replace('then','').strip()
                     paren_regex = regex.compile("\((([^\)\(]+)|(?R))*+\)", re.S)
