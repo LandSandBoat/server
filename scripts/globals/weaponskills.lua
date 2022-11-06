@@ -165,7 +165,8 @@ local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
     return hrate
 end
 
-local function getMultiAttacks(attacker, target, numHits)
+local function getMultiAttacks(attacker, target, wsParams)
+    local numHits = wsParams.numHits
     local bonusHits = 0
     local multiChances = 1
     local doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
@@ -173,6 +174,12 @@ local function getMultiAttacks(attacker, target, numHits)
     local quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
     local oaThriceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_THRICE) / 100
     local oaTwiceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_TWICE) / 100
+
+    local isJump = wsParams.isJump or false
+
+    if isJump then
+        doubleRate = doubleRate + attacker:getMod(xi.mod.JUMP_DOUBLE_ATTACK)
+    end
 
     -- Add Ambush Augments to Triple Attack
     if attacker:hasTrait(76) and attacker:isBehind(target, 23) then -- TRAIT_AMBUSH
@@ -593,7 +600,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
     dmg = mainBase * ftp
     local hitsDone = 1
-    local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
+    local numHits = getMultiAttacks(attacker, target, wsParams)
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
@@ -675,9 +682,18 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     calcParams.fencerBonus = fencerBonus(attacker)
     calcParams.bonusTP = wsParams.bonusTP or 0
-    calcParams.bonusfTP = gorgetBeltFTP or 0
-    calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
-    calcParams.bonusWSmods = wsParams.bonusWSmods or 0
+
+    local isJump = wsParams.isJump or false
+    if isJump then
+        calcParams.bonusfTP = 0
+        calcParams.bonusAcc = attacker:getMod(xi.mod.JUMP_ACC_BONUS)
+        calcParams.bonusWSmods = 0
+    else
+        calcParams.bonusfTP = gorgetBeltFTP or 0
+        calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
+        calcParams.bonusWSmods = wsParams.bonusWSmods or 0
+    end
+
     calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc)
     calcParams.skillType = attack.weaponType
 
@@ -903,7 +919,16 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
     end
 
     local targetTPMult = wsParams.targetTPMult or 1
-    finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
+    local attackerTPMult = wsParams.attackerTPMult or 1
+    local isJump = wsParams.isJump or false
+
+    -- DA/TA/QA/OaT/Oa2-3 etc give full TP return per hit on Jumps
+    if isJump then
+        attackerTPMult = attackerTPMult * (wsResults.tpHitsLanded + wsResults.extraHitsLanded)
+        wsResults.extraHitsLanded = 0
+    end
+
+    finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
         if finaldmg >= 0 then
             action:param(defender:getID(), math.abs(finaldmg))
