@@ -5251,7 +5251,7 @@ uint8 CLuaBaseEntity::getSpeed()
 
 void CLuaBaseEntity::setSpeed(uint8 speedVal)
 {
-    auto speed = std::min<uint8>(speedVal, 255);
+    auto speed = std::clamp<uint8>(speedVal, 0, 255);
 
     if (m_PBaseEntity->speed != speed)
     {
