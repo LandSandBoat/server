@@ -2684,7 +2684,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack)
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot)
     {
         int32 critHitRate = 5;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES, 0) ||
@@ -2745,6 +2745,16 @@ namespace battleutils
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
             critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+
+            if (PAttacker->objtype & TYPE_PC)
+            {
+                auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(weaponSlot));
+                if (weapon && weapon->getModifier(Mod::CRITHITRATE_SLOT) > 0)
+                {
+                    critHitRate += weapon->getModifier(Mod::CRITHITRATE_SLOT);
+                }
+            }
+
             critHitRate = std::clamp(critHitRate, 0, 100);
         }
         return (uint8)critHitRate;

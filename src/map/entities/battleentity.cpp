@@ -722,6 +722,11 @@ uint16 CBattleEntity::ATT(uint16 slot)
         {
             ATT += GetSkill(weapon->getSkillType()) + weapon->getILvlSkill();
 
+            if (weapon->getModifier(Mod::ATT_SLOT) > 0)
+            {
+                ATT += weapon->getModifier(Mod::ATT_SLOT);
+            }
+
             // Smite applies when using 2H or H2H weapons
             if (weapon->isTwoHanded() || weapon->isHandToHand())
             {
@@ -2077,7 +2082,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             else
             {
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()), SLOT_MAIN, attack.IsGuarded());
+                SLOTTYPE weaponSlot = (SLOTTYPE)attack.GetWeaponSlot();
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing(), weaponSlot), weaponSlot, attack.IsGuarded());
 
                 actionTarget.reaction = REACTION::HIT;
 
@@ -2128,7 +2134,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 actionTarget.param =
-                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1,
+                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), weaponSlot, 1,
                                                     attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
                 if (actionTarget.param < 0)
                 {
