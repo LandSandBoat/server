@@ -551,6 +551,9 @@
         "complex": "cpp",
         "coroutine": "cpp",
         "resumable": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "strstream": "cpp",
+        "codecvt": "cpp",
+        "source_location": "cpp"
     },
 }
