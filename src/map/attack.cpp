@@ -457,7 +457,7 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
     // Sets slot to ranged if RNG/NIN
     if (m_attacker->objtype == TYPE_MOB && (m_attacker->GetMJob() == JOB_RNG || m_attacker->GetMJob() == JOB_NIN))
     {
-            slot = SLOT_RANGED;
+        slot = SLOT_RANGED;
     }
 
     if (m_attackRound->IsH2H())

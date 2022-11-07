@@ -40,10 +40,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../zone_instance.h"
 #include "battleutils.h"
 #include "charutils.h"
+#include "mobutils.h"ss
 #include "petutils.h"
 #include "puppetutils.h"
 #include "zoneutils.h"
-#include "mobutils.h"
 
 #include "../ai/ai_container.h"
 #include "../ai/controllers/automaton_controller.h"
@@ -399,7 +399,7 @@ namespace petutils
                 case 6:
                     return (uint16)(106 + (lvl - 50) * 4.4f); // F
                 case 7:
-                    return (uint16)(96 + (lvl - 50) * 4.3f);  // G
+                    return (uint16)(96 + (lvl - 50) * 4.3f); // G
             }
         }
         else
@@ -450,25 +450,25 @@ namespace petutils
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     {
         // follows monster formulas but jugs have no subjob
-        JOBTYPE mJob = PMob->GetMJob();
-        uint8 lvl    = PMob->GetMLevel();
-        uint8 lvlmax = petStats->maxLevel;
-        uint8 lvlmin = petStats->minLevel;
+        JOBTYPE mJob   = PMob->GetMJob();
+        uint8   lvl    = PMob->GetMLevel();
+        uint8   lvlmax = petStats->maxLevel;
+        uint8   lvlmin = petStats->minLevel;
 
         lvl = std::clamp(lvl, lvlmin, lvlmax);
 
-        uint8 grade;
+        uint8  grade;
         uint32 mobHP = 1; // Set mob HP
 
-        grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
+        grade = grade::GetJobGrade(mJob, 0); // main jobs grade
 
         uint8 base     = 0; // Column for base hp
         uint8 jobScale = 1; // Column for job scaling
         uint8 scaleX   = 2; // Column for modifier scale
 
-        uint8 BaseHP     = grade::GetMobHPScale(grade, base);     // Main job base HP
-        uint8 JobScale   = grade::GetMobHPScale(grade, jobScale); // Main job scaling
-        uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
+        uint8 BaseHP   = grade::GetMobHPScale(grade, base);     // Main job base HP
+        uint8 JobScale = grade::GetMobHPScale(grade, jobScale); // Main job scaling
+        uint8 ScaleXHP = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
 
         uint8 RBIgrade = std::min(lvl, (uint8)5); // RBI Grade
         uint8 RBIbase  = 1;                       // Column for RBI base
