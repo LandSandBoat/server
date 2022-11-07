@@ -6,7 +6,7 @@ require("scripts/globals/battlefield")
 -----------------------------------
 local entity = {}
 
--- Leaving this loot here until their respective battlefields are implemented
+-- -- Leaving this loot here until their respective battlefields are implemented
 -- local loot =
 -- {
 --     -- ENM: Follow the White Rabbit
