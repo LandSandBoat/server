@@ -56613,23 +56613,25 @@ INSERT INTO `item_mods` VALUES (26638,29,1);    -- MDEF: 1
 INSERT INTO `item_mods` VALUES (26638,31,21);   -- MEVA: 21
 INSERT INTO `item_mods` VALUES (26638,68,15);   -- EVA: 15
 INSERT INTO `item_mods` VALUES (26638,384,600); -- HASTE_GEAR: 600
+INSERT INTO `item_mods` VALUES (26638,1071,-9); -- DARK_MAGIC_CAST: -9
 
 -- Fallens Burgeonet +1
-INSERT INTO `item_mods` VALUES (26639,1,114);   -- DEF: 114
-INSERT INTO `item_mods` VALUES (26639,2,76);    -- HP: 76
-INSERT INTO `item_mods` VALUES (26639,5,23);    -- MP: 23
-INSERT INTO `item_mods` VALUES (26639,8,30);    -- STR: 30
-INSERT INTO `item_mods` VALUES (26639,9,14);    -- DEX: 14
-INSERT INTO `item_mods` VALUES (26639,10,30);   -- VIT: 30
-INSERT INTO `item_mods` VALUES (26639,11,14);   -- AGI: 14
-INSERT INTO `item_mods` VALUES (26639,12,12);   -- INT: 12
-INSERT INTO `item_mods` VALUES (26639,13,12);   -- MND: 12
-INSERT INTO `item_mods` VALUES (26639,14,12);   -- CHR: 12
-INSERT INTO `item_mods` VALUES (26639,25,15);   -- ACC: 15
-INSERT INTO `item_mods` VALUES (26639,29,2);    -- MDEF: 2
-INSERT INTO `item_mods` VALUES (26639,31,32);   -- MEVA: 32
-INSERT INTO `item_mods` VALUES (26639,68,33);   -- EVA: 33
-INSERT INTO `item_mods` VALUES (26639,384,700); -- HASTE_GEAR: 700
+INSERT INTO `item_mods` VALUES (26639,1,114);    -- DEF: 114
+INSERT INTO `item_mods` VALUES (26639,2,76);     -- HP: 76
+INSERT INTO `item_mods` VALUES (26639,5,23);     -- MP: 23
+INSERT INTO `item_mods` VALUES (26639,8,30);     -- STR: 30
+INSERT INTO `item_mods` VALUES (26639,9,14);     -- DEX: 14
+INSERT INTO `item_mods` VALUES (26639,10,30);    -- VIT: 30
+INSERT INTO `item_mods` VALUES (26639,11,14);    -- AGI: 14
+INSERT INTO `item_mods` VALUES (26639,12,12);    -- INT: 12
+INSERT INTO `item_mods` VALUES (26639,13,12);    -- MND: 12
+INSERT INTO `item_mods` VALUES (26639,14,12);    -- CHR: 12
+INSERT INTO `item_mods` VALUES (26639,25,15);    -- ACC: 15
+INSERT INTO `item_mods` VALUES (26639,29,2);     -- MDEF: 2
+INSERT INTO `item_mods` VALUES (26639,31,32);    -- MEVA: 32
+INSERT INTO `item_mods` VALUES (26639,68,33);    -- EVA: 33
+INSERT INTO `item_mods` VALUES (26639,384,700);  -- HASTE_GEAR: 700
+INSERT INTO `item_mods` VALUES (26639,1071,-10); -- DARK_MAGIC_CAST: -10
 
 -- Ankusa Helm
 INSERT INTO `item_mods` VALUES (26640,1,74);    -- DEF: 74
