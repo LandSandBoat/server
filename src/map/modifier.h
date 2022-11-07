@@ -394,6 +394,9 @@ enum class Mod
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
     ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -931,7 +934,7 @@ enum class Mod
     // 192 to 223
     // 261 to 284
     //
-    // SPARE = 1071, and onward
+    // SPARE = 1074, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
