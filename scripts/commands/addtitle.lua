@@ -41,6 +41,6 @@ function onTrigger(player, titleId, target)
     end
 
     -- add title
-    targ:addTitle( titleId )
-    player:PrintToPlayer( string.format("%s was given title %s.", targ:getName(), titleId) )
+    targ:addTitle(titleId)
+    player:PrintToPlayer(string.format("%s was given title %s.", targ:getName(), titleId))
 end

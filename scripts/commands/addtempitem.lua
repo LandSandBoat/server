@@ -36,8 +36,8 @@ function onTrigger(player, itemId, quantity)
     -- add temp item
     player:addTempItem(itemId, quantity, 0, 0, 0, 0, 0, 0, 0, 0)
     if quantity and quantity > 1 then
-        player:messageSpecial( ID.text.ITEM_OBTAINED + 9, itemId , quantity )
+        player:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemId , quantity)
     else
-        player:messageSpecial( ID.text.ITEM_OBTAINED, itemId )
+        player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
     end
 end

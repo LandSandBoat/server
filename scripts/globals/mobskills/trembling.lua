@@ -30,7 +30,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         end
     end
 
-   -- TODO: Dispelled messages.  No examples of damage+dispel working to crib notes from.
+    -- TODO: Dispelled messages.  No examples of damage+dispel working to crib notes from.
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

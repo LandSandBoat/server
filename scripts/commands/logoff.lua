@@ -20,9 +20,9 @@ function onTrigger(player, target)
     if target == nil then
         targ = player
     else
-        targ = GetPlayerByName( target )
+        targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Invalid player '%s' given.", target ) )
+            error(player, string.format("Invalid player '%s' given.", target))
             return
         end
     end

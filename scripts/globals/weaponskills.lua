@@ -215,7 +215,7 @@ local function getMultiAttacks(attacker, target, wsParams)
         end
     end
 
-    if (numHits + bonusHits ) > 8 then
+    if (numHits + bonusHits) > 8 then
         return 8
     end
 
@@ -1039,10 +1039,10 @@ end
 
 function fTP(tp, ftp1, ftp2, ftp3)
     if tp >= 1000 and tp < 2000 then
-        return ftp1 + ( ((ftp2 - ftp1) / 1000) * (tp - 1000) )
+        return ftp1 + (((ftp2 - ftp1) / 1000) * (tp - 1000))
     elseif tp >= 2000 and tp <= 3000 then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 1000) * (tp - 2000) )
+        return ftp2 + (((ftp3 - ftp2) / 1000) * (tp - 2000))
     else
         print("fTP error: TP value is not between 1000-3000!")
     end

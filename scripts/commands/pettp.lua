@@ -29,5 +29,5 @@ function onTrigger(player, tp)
     end
 
     -- set pet tp
-    targ:setTP( tp )
+    targ:setTP(tp)
 end

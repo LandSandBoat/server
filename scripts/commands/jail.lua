@@ -26,9 +26,9 @@ function onTrigger(player, target, cellId, reason)
     }
 
     -- Validate the target..
-    local targ = GetPlayerByName( target )
+    local targ = GetPlayerByName(target)
     if targ == nil then
-        player:PrintToPlayer( string.format( "Invalid player '%s' given.", target ) )
+        player:PrintToPlayer(string.format("Invalid player '%s' given.", target))
         return
     end
 
@@ -43,11 +43,11 @@ function onTrigger(player, target, cellId, reason)
     end
 
     -- Print that we have jailed someone..
-    local message = string.format( '%s jailed %s(%d) into cell %d. Reason: %s', player:getName(), target, targ:getID(), cellId, reason )
-    printf( message )
+    local message = string.format('%s jailed %s(%d) into cell %d. Reason: %s', player:getName(), target, targ:getID(), cellId, reason)
+    printf(message)
 
     -- Send the target to jail..
-    local dest = jailCells[ cellId ]
-    targ:setCharVar( "inJail", cellId )
+    local dest = jailCells[cellId]
+    targ:setCharVar("inJail", cellId)
     targ:setPos(dest[1], dest[2], dest[3], dest[4], 131)
 end

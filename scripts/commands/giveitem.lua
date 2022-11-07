@@ -15,9 +15,9 @@ function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val,
         return
     end
 
-    local targ = GetPlayerByName( target )
+    local targ = GetPlayerByName(target)
     if targ == nil then
-        player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) )
+        player:PrintToPlayer(string.format("Player named '%s' not found!", target))
         return
     end
 
@@ -26,15 +26,15 @@ function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val,
 
     -- Attempt to give the target the item..
     if targ:getFreeSlotsCount() == 0 then
-        targ:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, itemId )
-        player:PrintToPlayer( string.format( "Player '%s' does not have free space for that item!", target ) )
+        targ:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, itemId)
+        player:PrintToPlayer(string.format("Player '%s' does not have free space for that item!", target))
     else
-        targ:addItem( itemId, amount, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val )
+        targ:addItem(itemId, amount, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val)
         if amount and amount > 1 then
-            targ:messageSpecial( ID.text.ITEM_OBTAINED + 9, itemId, amount )
+            targ:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemId, amount)
         else
-            targ:messageSpecial( ID.text.ITEM_OBTAINED, itemId )
+            targ:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
         end
-        player:PrintToPlayer( string.format( "Gave player '%s' Item with ID of '%u' ", target, itemId ) )
+        player:PrintToPlayer(string.format("Gave player '%s' Item with ID of '%u' ", target, itemId))
     end
 end

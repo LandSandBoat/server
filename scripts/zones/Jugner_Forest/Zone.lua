@@ -33,11 +33,11 @@ zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zoneObject.onZoneIn = function( player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos( 342, -5, 15.117, 169)
+        player:setPos(342, -5, 15.117, 169)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -56,19 +56,19 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function( player, region)
+zoneObject.onRegionEnter = function(player, region)
     if region:GetRegionID() == 1 and player:getCharVar("UnderOathCS") == 7 then -- Quest: Under Oath - PLD AF3
         player:startEvent(14)
     end
 end
 
-zoneObject.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 15 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zoneObject.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
         player:setCharVar("UnderOathCS", 8) -- Quest: Under Oath - PLD AF3
     end

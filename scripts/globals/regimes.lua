@@ -1066,7 +1066,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
     end
 
     local info = regimeInfo[regimeType].zone[player:getZoneID()]
-     -- checks if hunt is active, if so prompts player to cancel
+    -- checks if hunt is active, if so prompts player to cancel
     if player:getCharVar("[hunt]status") >= 1 then
         player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 

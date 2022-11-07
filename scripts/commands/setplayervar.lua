@@ -21,9 +21,9 @@ function onTrigger(player, target, variable, value)
         error(player, "You must provide a player name.")
         return
     else
-        targ = GetPlayerByName( target )
+        targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -41,5 +41,5 @@ function onTrigger(player, target, variable, value)
     end
 
     targ:setCharVar(variable, value)
-    player:PrintToPlayer( string.format( "Set %s's variable '%s' to %i.", targ:getName(), variable, value ) )
+    player:PrintToPlayer(string.format("Set %s's variable '%s' to %i.", targ:getName(), variable, value))
 end

@@ -381,11 +381,12 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     -- Prioritize important actions from the handler system if applicable
     if
         not fallbackHandler or
-        (#actions > 0 -- only prioritize if there's actually actions to do
-            and (secondLevelKey == 'onZoneIn' -- play onZoneIn cs if given
-                or priority > Action.Priority.Event -- prioritize this if event is important enough
-                or player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
-            )
+        (
+            #actions > 0 and                      -- only prioritize if there's actually actions to do
+            (secondLevelKey == 'onZoneIn' or      -- play onZoneIn cs if given
+            priority > Action.Priority.Event or   -- prioritize this if event is important enough
+            player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
+        )
     then
         player:setLocalVar(fallbackVar, priority <= Action.Priority.Event and 1 or 0)
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn

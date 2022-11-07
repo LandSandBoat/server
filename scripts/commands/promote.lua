@@ -29,22 +29,22 @@ function onTrigger(player, target, level)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
     -- catch players trying to change level of equal or higher tiered GMs.
     if targ:getGMLevel() >= player:getGMLevel() then
-        printf( "%s attempting to adjust same or higher tier GM %s.", player:getName(), targ:getName() )
-        targ:PrintToPlayer(string.format( "%s attempted to adjust your GM rank.", player:getName() ))
+        printf("%s attempting to adjust same or higher tier GM %s.", player:getName(), targ:getName())
+        targ:PrintToPlayer(string.format("%s attempted to adjust your GM rank.", player:getName()))
         error(player, "You can not use this command on same or higher tiered GMs.")
         return
     end
 
     -- validate level
     if level == nil or level < 0 or level > maxLevel then
-        error(player, string.format("Invalid level.  Must be 0 to %i.", maxLevel ))
+        error(player, string.format("Invalid level.  Must be 0 to %i.", maxLevel))
         return
     end
 
@@ -113,6 +113,6 @@ function onTrigger(player, target, level)
         end
     end
 
-    player:PrintToPlayer(string.format( "%s set to tier %i.", targ:getName(), level ))
-    targ:PrintToPlayer(string.format( "You have been set to tier %i.", level ))
+    player:PrintToPlayer(string.format("%s set to tier %i.", targ:getName(), level))
+    targ:PrintToPlayer(string.format("You have been set to tier %i.", level))
 end

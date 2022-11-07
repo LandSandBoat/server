@@ -35,6 +35,6 @@ function onTrigger(player, weather)
     end
 
     -- set weather
-    player:setWeather( weather )
-    player:PrintToPlayer( string.format("Set weather to %s.", weatherByNum[weather]) )
+    player:setWeather(weather)
+    player:PrintToPlayer(string.format("Set weather to %s.", weatherByNum[weather]))
 end

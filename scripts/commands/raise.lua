@@ -44,7 +44,7 @@ function onTrigger(player, arg1, arg2)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -56,6 +56,6 @@ function onTrigger(player, arg1, arg2)
             player:PrintToPlayer(string.format("Raise %i sent to %s.", power, targ:getName()))
         end
     else
-        player:PrintToPlayer( string.format( "%s is not dead.", targ:getName() ) )
+        player:PrintToPlayer(string.format("%s is not dead.", targ:getName()))
     end
 end

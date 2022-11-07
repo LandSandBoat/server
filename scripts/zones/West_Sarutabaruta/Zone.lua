@@ -22,7 +22,7 @@ zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zoneObject.onZoneIn = function( player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -44,10 +44,10 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function( player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zoneObject.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 48 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 62 or csid == 63 then
@@ -55,7 +55,7 @@ zoneObject.onEventUpdate = function( player, csid, option)
     end
 end
 
-zoneObject.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 62 or csid == 63 then
         player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
         player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
