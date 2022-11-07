@@ -1624,3 +1624,47 @@ xi.magic.calculatePotency = function(basePotency, magicSkill, caster, target)
 
     return math.floor(basePotency * (1 + caster:getMod(xi.mod.ENF_MAG_POTENCY) / 100))
 end
+
+xi.magic.doAbsorbSpell = function(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
+    local isAbsorbTp = params.msg == xi.msg.basic.MAGIC_ABSORB_TP
+    print(params.effect)
+    print(params.bonusEffect)
+    local spellTable =
+    {
+        [true] =
+        {
+            base = utils.clamp((target:getTP() * 0.40) * resist, 0, 1200),
+            duration = params.baseDuration,
+            returnVal = utils.clamp((target:getTP() * 0.40) * resist, 0, 1200),
+        },
+        [false] =
+        {
+            base = 3 + (caster:getMainLvl() / 5),
+            duration = (params.baseDuration + caster:getMod(xi.mod.AUGMENTS_ABSORB)) * resist,
+            returnVal = params.effect,
+        }
+    }
+
+    if not isAbsorbTp and (target:hasStatusEffect(params.effect) or caster:hasStatusEffect(params.bonusEffect)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return params.failReturn
+    end
+
+    if resist < 0.5 then
+        spell:setMsg(params.msgFail)
+        return params.failReturn
+    end
+
+    spell:setMsg(params.msg)
+
+    if isAbsorbTp then
+        caster:addTP(spellTable[isAbsorbTp].base)
+        target:addTP(-spellTable[isAbsorbTp].base)
+    else
+        caster:addStatusEffect(params.bonusEffect, spellTable[isAbsorbTp].base, 3, spellTable[isAbsorbTp].duration)
+        target:addStatusEffect(params.effect, -spellTable[isAbsorbTp].base, 3, spellTable[isAbsorbTp].duration)
+    end
+
+    return spellTable[isAbsorbTp].returnVal
+end
