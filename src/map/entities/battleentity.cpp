@@ -733,6 +733,11 @@ uint16 CBattleEntity::ATT(uint16 slot)
     {
         ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
     }
+    else // Mob attack
+    {
+        ATT = (8 + m_modStat[Mod::ATT] + STR() / 2);
+    }
+
     return std::clamp(ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]), 0, 65535);
 }
 
