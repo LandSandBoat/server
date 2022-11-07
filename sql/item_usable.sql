@@ -1111,7 +1111,7 @@ INSERT INTO `item_usable` VALUES (5263,'bottle_of_terroanima',4,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5264,'bottle_of_yellow_liquid',4,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5265,'mistmelt',4,2,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5266,'blackened_muddy_siredon',4,0,0,0,0,0,0,0);
-INSERT INTO `item_usable` VALUES (5267,'chunk_of_shumeyo_salt',4,1,0,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (5267,'chunk_of_shumeyo_salt',4,10,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5268,'ccb_polymer_pump',4,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5269,'special_present',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5270,'old_quiver',1,1,55,0,0,0,0,0);
