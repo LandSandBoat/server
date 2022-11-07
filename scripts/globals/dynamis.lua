@@ -91,9 +91,9 @@ local entryInfo =
         enterPos = { -284.751, -39.923, -422.948, 235, 134 },
         reqs     = function(player)
             return player:hasKeyItem(xi.ki.HYDRA_CORPS_COMMAND_SCEPTER) and
-                   player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
-                   player:hasKeyItem(xi.ki.HYDRA_CORPS_LANTERN) and
-                   player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP)
+                player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
+                player:hasKeyItem(xi.ki.HYDRA_CORPS_LANTERN) and
+                player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP)
         end,
     },
 
@@ -174,8 +174,8 @@ local entryInfo =
         enterPos = { 0.1, -7, -21, 190, 42 },
         reqs     = function(player)
             return player:hasKeyItem(xi.ki.DYNAMIS_BUBURIMU_SLIVER) and
-                   player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
-                   player:hasKeyItem(xi.ki.DYNAMIS_VALKURM_SLIVER)
+                player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
+                player:hasKeyItem(xi.ki.DYNAMIS_VALKURM_SLIVER)
         end,
     },
 }

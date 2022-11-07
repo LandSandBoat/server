@@ -6,9 +6,9 @@ g_mixins = g_mixins or {}
 g_mixins.maat = function(maatMob)
 
     maatMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
-        if (mob:getMainJob() == xi.job.NIN) then
+        if mob:getMainJob() == xi.job.NIN then
             mob:setLocalVar("specialThreshold", 40)
-        elseif (mob:getMainJob() == xi.job.DRG) then
+        elseif mob:getMainJob() == xi.job.DRG then
             mob:setLocalVar("specialThreshold", 75)
         else
             mob:setLocalVar("specialThreshold", math.random(50, 60))
@@ -102,11 +102,11 @@ g_mixins.maat = function(maatMob)
 
     maatMob:addListener("WEAPONSKILL_USE", "MAAT_WEAPONSKILL_USE", function(mob, target, wsid, tp, action)
         local ID = zones[mob:getZoneID()]
-        if (wsid == 1028) then -- Tackle
+        if wsid == 1028 then -- Tackle
             mob:messageText(mob, ID.text.TAKE_THAT_YOU_WHIPPERSNAPPER)
-        elseif (wsid == 1033) then -- Dragon Kick
+        elseif wsid == 1033 then -- Dragon Kick
             mob:messageText(mob, ID.text.TEACH_YOU_TO_RESPECT_ELDERS)
-        elseif (wsid == 1034) then -- Asuran Fists
+        elseif wsid == 1034 then -- Asuran Fists
             mob:messageText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)
         end
     end)

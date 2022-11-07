@@ -16,7 +16,7 @@ end
 
 function onTrigger(player, cp)
     -- validate amount
-    if (cp == nil or cp == 0) then
+    if cp == nil or cp == 0 then
         error(player, "Invalid amount.")
         return
     end

@@ -45,7 +45,7 @@ function onTrigger(player, logId, questId, target)
     local targ
     if target == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else

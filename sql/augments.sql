@@ -1571,7 +1571,7 @@ INSERT INTO `augments` VALUES (1283,0,0,0,0,0); -- Enhances Manafont effect
 INSERT INTO `augments` VALUES (1284,0,0,0,0,0); -- Enhances Chainspell effect
 INSERT INTO `augments` VALUES (1285,0,0,0,0,0); -- Enhances Perfect Dodge effect
 INSERT INTO `augments` VALUES (1286,0,0,0,0,0); -- Enhances Invincible effect
-INSERT INTO `augments` VALUES (1287,0,0,0,0,0); -- Enhances Blood Weapon effect
+INSERT INTO `augments` VALUES (1287,10,1070,1,0,0); -- Enhances Blood Weapon effect
 INSERT INTO `augments` VALUES (1288,0,0,0,0,0); -- Enhances Familiar effect
 INSERT INTO `augments` VALUES (1289,0,0,0,0,0); -- Enhances Soul Voice effect
 INSERT INTO `augments` VALUES (1290,0,0,0,0,0); -- Enhances Eagle Eye Shot effect

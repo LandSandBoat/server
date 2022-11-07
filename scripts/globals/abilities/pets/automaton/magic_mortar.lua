@@ -35,8 +35,8 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     local damage = (hpdamage > skilldamage) and hpdamage or skilldamage
 
     if damage > 0 then
-       target:addTP(20)
-       automaton:addTP(80)
+        target:addTP(20)
+        automaton:addTP(80)
     end
 
     target:takeDamage(damage, automaton, xi.attackType.MAGICAL, xi.damageType.LIGHT)

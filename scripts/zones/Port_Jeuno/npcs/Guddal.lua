@@ -12,9 +12,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if not player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
         if
-            trade:hasItemQty(1024, 1) == true and
-            trade:hasItemQty(1025, 1) == true and
-            trade:hasItemQty(1026, 1) == true and
+            trade:hasItemQty(1024, 1) and
+            trade:hasItemQty(1025, 1) and
+            trade:hasItemQty(1026, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 3
         then

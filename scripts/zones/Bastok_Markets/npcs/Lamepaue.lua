@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         bastokQuests = bastokQuests - 2     -- The Return of the Adventurer
     end
 -- *Need the correct csid
---     if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)) then
+--     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) then
 --         bastokQuests = bastokQuests - 4     -- The First Meeting
 --     end
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR) then
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     end
 
 -- *Need the correct csid/parameters
---    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALL_BY_MYSELF)) then
+--    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALL_BY_MYSELF) then
 --        bastokQuests = bastokQuests - 64    -- All by Myself
 --    end
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ACHIEVING_TRUE_POWER) then
@@ -83,7 +83,7 @@ entity.onTrigger = function(player, npc)
     end
 
 -- *This quest, as of the time this script was written, is not yet defined.
---     if (player:hasCompletedQuest(**Unknown**, DANCER_ATTIRE)) then
+--     if player:hasCompletedQuest(**Unknown**, DANCER_ATTIRE) then
 --         otherQuests = otherQuests - 2048   -- Dancer Attire (pt.1)
 --         otherQuests = otherQuests - 4096   -- Dancer Attire (pt.2)
 --     end
@@ -98,17 +98,17 @@ entity.onTrigger = function(player, npc)
     end
 
 -- *This quest, as of the time this script was written, is not yet defined.
---     if (player:hasCompletedQuest(**Unknown**, RECORDS_OF_EMINENCE)) then
+--     if player:hasCompletedQuest(**Unknown**, RECORDS_OF_EMINENCE) then
 --         otherQuests = otherQuests - 65536  -- Records of Eminence
 --     end
 
 -- *This quest, as of the time this script was written, is not yet defined.
---     if (player:hasCompletedQuest(**Unknown**, TRUST_MUMOR)) then
+--     if player:hasCompletedQuest(**Unknown**, TRUST_MUMOR) then
 --         otherQuests = otherQuests - 131072 -- Trust (Mumor)
 --     end
 
 -- *This quest, as of the time this script was written, is not yet defined.
---     if (player:hasCompletedQuest(**Unknown**, UNITY_CONCORD)) then
+--     if player:hasCompletedQuest(**Unknown**, UNITY_CONCORD) then
 --         otherQuests = otherQuests - 262144 -- Unity Concord (pt.1)
 --         otherQuests = otherQuests - 524288 -- Unity Concord (pt.2)
 --     end
@@ -116,7 +116,7 @@ entity.onTrigger = function(player, npc)
     -- Seekers of Adoulin
     local seekersOfAdoulin = 0xFFFFFFFE
 -- *Need the correct csid
---    if (player:hasCompletedMission (xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)) then
+--    if player:hasCompletedMission (xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST) then
 --        seekersOfAdoulin = seekersOfAdoulin - 2 -- Rumors from the West
 --    end
 
@@ -135,7 +135,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    if player:delGil(10) == false then
+    if not player:delGil(10) then
         player:setLocalVar("Lamepaue_PlayCutscene", 2)  -- Cancel the cutscene.
         player:updateEvent(0)
     else
@@ -151,7 +151,7 @@ entity.onEventFinish = function(player, csid, option)
             player:startEvent(1010)
         elseif option == 33 then        -- The Return of the Adventurer
             player:startEvent(243)
---        elseif option ==  34 then        -- The First Meeting
+--        elseif option == 34 then        -- The First Meeting
 --            player:startEvent(CSID)
         elseif option == 35 then        -- Wish Upon a Star (pt.1)
             player:startEvent(329)
@@ -159,7 +159,7 @@ entity.onEventFinish = function(player, csid, option)
             player:startEvent(332)
         elseif option == 37 then        -- Wish Upon a Star (pt.3)
             player:startEvent(334)
---        elseif option ==  38 then        -- All by Myself
+--        elseif option == 38 then        -- All by Myself
 --            player:startEvent(185)
         elseif option == 39 then        -- Achieving True Power
             player:startEvent(441)
@@ -198,9 +198,9 @@ entity.onEventFinish = function(player, csid, option)
             player:startEvent(439)
         elseif option == 74 then        -- Comeback Queen
             player:startEvent(490)
---        elseif option ==  75 then        -- Dancer Attire (pt.1)
+--        elseif option == 75 then        -- Dancer Attire (pt.1)
 --            player:startEvent(CSID)
---        elseif option ==  76 then        -- Dancer Attire (pt.2)
+--        elseif option == 76 then        -- Dancer Attire (pt.2)
 --            player:startEvent(CSID)
 -- Drafted by the Duchy and Battle on a New Front cutscenes need to be verified, ids may need to be changed or have additional parameters.
         elseif option == 77 then        -- Drafted by the Duchy

@@ -48,11 +48,11 @@ end
 local function scaleMessage(player)
     local numScales = getNumScales(player)
 
-     player:messageSpecial(outerRaKaznarID.text.HAVE_FOUND_SCALES, numScales)
+    player:messageSpecial(outerRaKaznarID.text.HAVE_FOUND_SCALES, numScales)
 
-     if numScales == 3 then
-        player:messageSpecial(outerRaKaznarID.text.SOOTHING_SIGH_FALLS)
-     end
+    if numScales == 3 then
+    player:messageSpecial(outerRaKaznarID.text.SOOTHING_SIGH_FALLS)
+    end
 end
 
 mission.sections =

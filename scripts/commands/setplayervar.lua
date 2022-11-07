@@ -15,7 +15,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, target, variable, value)
-
     -- validate target
     local targ
     if target == nil then
@@ -30,13 +29,13 @@ function onTrigger(player, target, variable, value)
     end
 
     -- validate var
-    if (variable == nil) then
+    if variable == nil then
         error(player, "You must provide a variable name.")
         return
     end
 
     -- validate value
-    if (value == nil) then
+    if value == nil then
         error(player, "You must provide a value.")
         return
     end

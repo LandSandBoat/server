@@ -63,7 +63,7 @@ entity.onMobFight = function(mob)
     local isBusy = false
 
     -- If we're in a pot form, but going to change to either Rings/Poles
-    if ((mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and mob:getBattleTime() - changeTime > randomTime) then
+    if (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and mob:getBattleTime() - changeTime > randomTime then
         local aniChange = math.random(2, 3)
         mob:setAnimationSub(aniChange)
 

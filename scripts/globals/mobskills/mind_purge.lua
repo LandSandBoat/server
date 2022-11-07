@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel =  target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
     local msg -- to be set later
 
-    if (dispel == 0) then
+    if dispel == 0 then
         msg = xi.msg.basic.SKILL_NO_EFFECT -- no effect
     else
         msg = xi.msg.basic.DISAPPEAR_NUM

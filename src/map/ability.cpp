@@ -259,6 +259,8 @@ uint16 CAbility::getAoEMsg() const
 {
     switch (m_message)
     {
+        case 150: // Ancient Circle
+            return m_message + 1;
         case 185:
             return 264;
         case 186:

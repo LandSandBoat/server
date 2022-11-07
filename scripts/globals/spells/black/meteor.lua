@@ -13,9 +13,9 @@ local spellObject = {}
 spellObject.onMagicCastingCheck = function(caster, target, spell)
    -- TODO: Correct message is "Incorrect job, job level too low, or required ability not activated."  Unable to locate this in our basic or system message functions.
    -- The client blocks the spell via menus, but it can still be cast via text commands, so we have to block it here, albiet with the wrong message.
-    if (caster:isMob()) then
+    if caster:isMob() then
         return 0
-    elseif (caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) == true) then
+    elseif caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) then
         return 0
     else
         return xi.msg.basic.STATUS_PREVENTS

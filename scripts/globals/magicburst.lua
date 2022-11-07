@@ -52,8 +52,8 @@ end
 -- Returns the burst level for a spell / target combination
 function FormMagicBurst(ele, target)
     local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
-    if (resonance and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
-        if (doesSpellElementMatchResonance(ele, resonance)) then
+    if resonance and resonance:getTier() > 0 then -- Resonance exists, ignore it if its tier 0
+        if doesSpellElementMatchResonance(ele, resonance) then
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
@@ -65,7 +65,7 @@ function MobFormMagicBurst(element, target)
     local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
 
     if resonance ~= nil and resonance:getTier() > 0 then -- Resonance exists, ignore it if its tier 0
-        if doesMobSpellElementMatchResonance(element, resonance) == true then
+        if doesMobSpellElementMatchResonance(element, resonance) then
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance

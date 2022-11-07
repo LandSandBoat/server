@@ -8,10 +8,9 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
+    local body = target:getEquipID(xi.slot.BODY)
 
-local body = target:getEquipID(xi.slot.BODY)
-
-    if (body == 11363) then
+    if body == 11363 then
         target:addSpell(503)
     else
         target:delSpell(503)

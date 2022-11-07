@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
     -- Check if they have key item "Ordelle whetStone"
-    local ordelleWhetstone = player:hasKeyItem(xi.ki.ORDELLE_WHETSTONE)
+    local hasOrdelleWhetstone = player:hasKeyItem(xi.ki.ORDELLE_WHETSTONE)
     local sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS")
     local aBoysDreamCS = player:getCharVar("aBoysDreamCS")
 
@@ -46,9 +46,9 @@ entity.onTrigger = function(player, npc)
         elseif mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 1 then
             player:startEvent(43) -- Start Quest "Sharpening the Sword"
         end
-    elseif sharpeningTheSword == QUEST_ACCEPTED and ordelleWhetstone == false then
+    elseif sharpeningTheSword == QUEST_ACCEPTED and not hasOrdelleWhetstone then
         player:startEvent(42) -- During Quest "Sharpening the Sword"
-    elseif sharpeningTheSword == QUEST_ACCEPTED and ordelleWhetstone == true then
+    elseif sharpeningTheSword == QUEST_ACCEPTED and hasOrdelleWhetstone then
         player:startEvent(44) -- Finish Quest "Sharpening the Sword"
     -- "A Boy's Dream" Quest Dialogs
     elseif aBoysDream == QUEST_AVAILABLE and mJob == xi.job.PLD and mLvl >= 50 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD) == QUEST_COMPLETED then

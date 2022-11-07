@@ -685,7 +685,7 @@ local function checkReqs(player, npc, bfid, registrant)
                                      player:getCharVar("Quest[3][86]Status") >= 2                                                                                          ) end, -- Quest: Storms of Fate
         [ 897] = function() return ( player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)                                                                                      ) end, -- Quest: The Wyrmking Descends
         [ 960] = function() return ( cop == mi.cop.ANCIENT_VOWS and player:getCharVar('Mission[6][248]Status') == 2 and
-                                     player:getPreviousZone() == xi.zone.RIVERNE_SITE_A01                                                                                  ) end, -- PM2-5: Ancient Vows
+                                    player:getPreviousZone() == xi.zone.RIVERNE_SITE_A01                                                                                   ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') == 1 and player:getPreviousZone() == xi.zone.RIVERNE_SITE_B01 ) end, -- PM4-2: The Savage
         [ 962] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Fire in the Sky
         [ 963] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bad Seed
@@ -701,7 +701,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [1091] = function() return ( mjob == xi.job.COR and mlvl >= 66                                                                                                     ) end, -- Quest: Breaking the Bonds of Fate (COR LB5)
         [1092] = function() return ( toau == mi.toau.LEGACY_OF_THE_LOST                                                                                                    ) end, -- TOAU35: Legacy of the Lost
         [1122] = function() return ( player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and
-                                     xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0                                         ) end, -- Quest: Omens (BLU AF Quest 2)
+                                    xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0                                          ) end, -- Quest: Omens (BLU AF Quest 2)
         [1123] = function() return ( mjob == xi.job.PUP and mlvl >= 66                                                                                                     ) end, -- Quest: Achieving True Power (PUP LB5)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                 ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == xi.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)
@@ -711,9 +711,9 @@ local function checkReqs(player, npc, bfid, registrant)
         [1292] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- NE Apollyon
         [1293] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)                      ) end, -- SE Apollyon
         [1294] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
-                                                                            or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                    ) end, -- CS Apollyon
+                                    or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                                                            ) end, -- CS Apollyon
         [1296] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
-                                                                            or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                    ) end, -- Central Apollyon
+                                    or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                                                            ) end, -- Central Apollyon
         [1298] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Western Tower
         [1299] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Northern Tower
         [1300] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                                        ) end, -- Temenos Eastern Tower
@@ -762,9 +762,9 @@ local function checkReqs(player, npc, bfid, registrant)
         [1292] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- NE Apollyon
         [1293] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)      ) end, -- SE Apollyon
         [1294] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
-                                                                            or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))    ) end, -- CS Apollyon
+                                    or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                                            ) end, -- CS Apollyon
         [1296] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and ((player:hasKeyItem(xi.ki.RED_CARD) and npcid == getEntranceOffset(0))
-                                                                            or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))    ) end, -- Central Apollyon
+                                    or (player:hasKeyItem(xi.ki.BLACK_CARD) and npcid == getEntranceOffset(1)))                                            ) end, -- Central Apollyon
         [1298] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Western Tower
         [1299] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Northern Tower
         [1300] = function() return ( player:hasKeyItem(xi.ki.COSMO_CLEANSE) and player:hasKeyItem(xi.ki.WHITE_CARD)                                        ) end, -- Temenos Eastern Tower
@@ -872,7 +872,7 @@ local function checkSkip(player, bfid)
         [ 704] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                   ) end, -- PM3-5: Darkness Named
         [ 706] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)                         ) end, -- Quest: Waking Dreams
         [ 736] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and
-                                     player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8)                                                                        ) end, -- PM5-3 L3: A Century of Hardship
+                                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8)                                                                         ) end, -- PM5-3 L3: A Century of Hardship
         [ 768] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA)                                      ) end, -- PM1-3: The Mothercrystals
         [ 800] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_DEM)                                        ) end, -- PM1-3: The Mothercrystals
         [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals

@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (not target:hasStatusEffect(xi.effect.BLINDNESS)) then
+    if not target:hasStatusEffect(xi.effect.BLINDNESS) then
         target:addStatusEffect(xi.effect.BLINDNESS, 256, 0, 180)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

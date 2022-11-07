@@ -1140,7 +1140,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
     option = bit.band(option, 0x7FFFFFFF)
 
     if option == 7 then
-      xi.hunts.clearHuntVars(player)
+        xi.hunts.clearHuntVars(player)
     end
 
     -- check valid option

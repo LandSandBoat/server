@@ -17,7 +17,7 @@ end
 function onTrigger(player, target, level)
     -- determine maximum level player can promote to
     local maxLevel = player:getGMLevel() - 1
-    if (maxLevel < 1) then
+    if maxLevel < 1 then
         maxLevel = 0
     end
 

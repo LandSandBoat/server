@@ -433,7 +433,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             applyVallationValianceSDTMods(target, sdtTypes, sdtPower, xi.effect.VALLATION, duration)
 
             if inspirationFCBonus > 0 then
-               target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+                target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
             end
         end
     end

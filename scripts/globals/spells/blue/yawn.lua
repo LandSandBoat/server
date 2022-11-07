@@ -36,9 +36,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     local duration = 90 * resist
 
-    if (resist > 0.5) then -- Do it!
-        if ((target:isFacing(caster))) then -- TODO: Apparently this check shouldn't exist for enemies using this spell? Need more info.
-            if (target:addStatusEffect(typeEffect, 2, 0, duration)) then
+    if resist > 0.5 then -- Do it!
+        if target:isFacing(caster) then -- TODO: Apparently this check shouldn't exist for enemies using this spell? Need more info.
+            if target:addStatusEffect(typeEffect, 2, 0, duration) then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

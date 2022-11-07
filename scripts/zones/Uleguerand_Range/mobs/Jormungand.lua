@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) == false and mob:actionQueueEmpty() == true then
+    if not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and mob:actionQueueEmpty() then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
 
@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(1292)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 2 is grounded mode, so check if he should take off
-        elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 60) then
+        elseif mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:SetMobSkillAttack(732)
@@ -58,7 +58,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         roarCounter = roarCounter + 1
         mob:setLocalVar("roarCounter", roarCounter)
 
-        if (roarCounter > 2) then
+        if roarCounter > 2 then
             mob:setLocalVar("roarCounter", 0)
         else
             mob:useMobAbility(1296)

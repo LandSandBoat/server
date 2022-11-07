@@ -18,7 +18,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
-
     local targ
     local id
     local power
@@ -26,7 +25,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
     local subId
     local subPower
 
-    if (arg1 == nil) then
+    if arg1 == nil then
         error(player, "Invalid effect.")
         return
     else
@@ -86,7 +85,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
     end
 
     -- add effect
-    if (targ:addStatusEffect(id, power, 3, duration, subId, subPower)) then
+    if targ:addStatusEffect(id, power, 3, duration, subId, subPower) then
         targ:messagePublic(280, targ, id, id)
     else
         targ:messagePublic(283, targ, id)

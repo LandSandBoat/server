@@ -161,7 +161,7 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-           ['Romualdo'] = quest:progressEvent(953),
+            ['Romualdo'] = quest:progressEvent(953),
 
             onEventFinish =
             {
@@ -180,7 +180,7 @@ quest.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-           ['Childerich'] = quest:progressEvent(6),
+            ['Childerich'] = quest:progressEvent(6),
 
             onEventFinish =
             {

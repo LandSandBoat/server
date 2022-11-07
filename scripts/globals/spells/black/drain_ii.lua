@@ -18,7 +18,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- also have small constant to account for 0 dark skill
     local dmg = 20 + (1.236 * caster:getSkillLevel(xi.skill.DARK_MAGIC))
 
-    if (dmg > (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 85)) then
+    if dmg > (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 85) then
         dmg = (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 85)
     end
 
@@ -37,11 +37,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
-    if (dmg < 0) then
+    if dmg < 0 then
         dmg = 0
     end
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end

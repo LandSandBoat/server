@@ -12,7 +12,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if (target:delStatusEffect(xi.effect.PETRIFICATION)) then
+    if target:delStatusEffect(xi.effect.PETRIFICATION) then
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

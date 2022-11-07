@@ -37,7 +37,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     end
 
      -- TODO: Acc penalty for /RNG, acc vs. mob level?
-    if math.random(0, 99) >= target:getMod(xi.mod.BINDRES) and target:hasStatusEffect(xi.effect.BIND) == false then
+    if math.random(0, 99) >= target:getMod(xi.mod.BINDRES) and not target:hasStatusEffect(xi.effect.BIND) then
         target:addStatusEffect(xi.effect.BIND, 0, 0, duration)
         ability:setMsg(xi.msg.basic.IS_EFFECT) -- Target is bound.
     else
