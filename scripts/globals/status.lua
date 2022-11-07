@@ -1806,6 +1806,8 @@ xi.mod =
     DARK_EEM                      = 1165, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     TAME_SUCCESS_RATE             = 1166, -- Tame Success Rate +
     RAMPART_MAGIC_SHIELD          = 1167, -- Rampart Magic Shield
+    CRITHITRATE_SLOT              = 1168, -- CRITHITRATE for slot
+    ATT_SLOT                      = 1169, -- ATT for slot
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
