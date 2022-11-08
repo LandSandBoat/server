@@ -53,7 +53,7 @@ effectObject.onEffectLose = function(target, effect)
     elseif effect:getPower() >= 8 and effect:getPower() <= 11 then
         -- target:delMod(xi.mod.EXPLOSS_REDUCTION), ???)
         -- exp loss reduction not implemented.
-    elseif (effect:getPower() >= 12) then
+    elseif effect:getPower() >= 12 then
         target:delMod(xi.mod.FOOD_DURATION, 100)
         -- target:delMod(xi.mod.EXPLOSS_REDUCTION), ???)
         -- exp loss reduction not implemented.

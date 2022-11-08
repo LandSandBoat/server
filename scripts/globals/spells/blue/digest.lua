@@ -40,16 +40,16 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
-    if (dmg < 0) then
+    if dmg < 0 then
         dmg = 0
     end
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return dmg
     end
 
-    if (target:getHP() < dmg) then
+    if target:getHP() < dmg then
         dmg = target:getHP()
     end
 

@@ -45,7 +45,7 @@ function onTrigger(player, logId, questId, target)
     local targ
     if target == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else
@@ -66,5 +66,5 @@ function onTrigger(player, logId, questId, target)
     }
 
     -- show quest status
-    player:PrintToPlayer( string.format( "%s's status for %s quest ID %i is: %s", targ:getName(), logName, questId, status ) )
+    player:PrintToPlayer(string.format("%s's status for %s quest ID %i is: %s", targ:getName(), logName, questId, status))
 end

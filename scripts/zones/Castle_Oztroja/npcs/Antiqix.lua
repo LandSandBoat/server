@@ -21,18 +21,18 @@ local currency =
 
 local shop =
 {
-     7, 1312, -- Angel Skin
-     8, 1518, -- Colossal Skull
-     9, 1464, -- Lancewood Log
+    7,  1312, -- Angel Skin
+    8,  1518, -- Colossal Skull
+    9,  1464, -- Lancewood Log
     23, 1463, -- Chronos Tooth
     24, 1467, -- Relic Steel
     25, 1462, -- Lancewood Lumber
-    28, 658,  -- Damascus Ingot
+    28,  658, -- Damascus Ingot
 }
 
 local maps =
 {
-    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_SAN_DORIA]  = 10000,
     [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
     [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
     [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
@@ -76,7 +76,7 @@ entity.onTrade = function(player, npc, trade)
             for i = 1, 13, 2 do
                 price = shop[i]
                 item = shop[i + 1]
-                if (count == price and trade:hasItemQty(currency[2], price)) then
+                if count == price and trade:hasItemQty(currency[2], price) then
                     player:setLocalVar("hundoItemBought", item)
                     player:startEvent(57, currency[2], price, item)
                     break
@@ -177,7 +177,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:tradeComplete()
             for i = 1, slotsReq do
-                if (i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0) then
+                if i < slotsReq or xi.settings.main.CURRENCY_EXCHANGE_RATE % 99 == 0 then
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
                 else
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)

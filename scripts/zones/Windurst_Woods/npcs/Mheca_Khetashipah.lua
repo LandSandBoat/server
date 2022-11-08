@@ -17,8 +17,8 @@ entity.onTrigger = function(player, npc)
     if starStatus == QUEST_ACCEPTED then
         player:startEvent(83)
     else
-         -- Possibly not their default dialogue. Event #79 witnessed in capture. Leaving for now until
-         -- verified.
+        -- Possibly not their default dialogue. Event #79 witnessed in capture. Leaving for now until
+        -- verified.
         player:startEvent(426)
     end
 end

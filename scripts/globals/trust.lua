@@ -193,7 +193,7 @@ xi.trust.checkBattlefieldTrustCount = function (caster)
             local objType = entity:getObjType()
 
             if objType == xi.objType.TRUST then
-               numTrusts = numTrusts + 1
+                numTrusts = numTrusts + 1
             end
         end
 
@@ -204,8 +204,8 @@ end
 
 xi.trust.hasPermit = function(player)
     return player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
-           player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
-           player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
+        player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
+        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
 end
 
 xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)

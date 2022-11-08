@@ -12,7 +12,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     -- Pull base stats.
     -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
@@ -28,12 +27,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.CURSE_I
     duration = duration * xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (duration >= 150) then --Do it!
+    if duration >= 150 then --Do it!
         duration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if duration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
-        elseif (target:addStatusEffect(xi.effect.CURSE_I, power, 0, duration)) then
+        elseif target:addStatusEffect(xi.effect.CURSE_I, power, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

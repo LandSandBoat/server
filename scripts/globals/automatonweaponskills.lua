@@ -164,10 +164,9 @@ end
 
 -- params contains: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, canCrit, crit100, crit200, crit300, acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atkmulti, kick, accBonus, weaponType, weaponDamage
 function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, action, taChar, wsParams, skill)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
-    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
+    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef then
         ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
     local cratio, ccritratio = getMeleeCRatio(attacker, target, wsParams, ignoredDef)
@@ -195,7 +194,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-                          (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
+        (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
 
     calcParams.sneakApplicable = false
     calcParams.taChar = taChar
@@ -252,7 +251,7 @@ end
 function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMsg, skill, action)
     -- Determine cratio and ccritratio
     local ignoredDef = 0
-    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
+    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef then
         ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
     local cratio, ccritratio = getRangedCRatio(attacker, target, wsParams, ignoredDef)

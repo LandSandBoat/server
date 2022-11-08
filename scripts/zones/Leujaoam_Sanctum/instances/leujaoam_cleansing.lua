@@ -11,17 +11,17 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.LEUJAOAM_CLEANSING and
-           player:getCharVar("assaultEntered") == 0 and
-           player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.LEUJAOAM_CLEANSING and
+        player:getCharVar("assaultEntered") == 0 and
+        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:getMainLvl() > 50
 end
 
 instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.LEUJAOAM_CLEANSING and
-           player:getCharVar("assaultEntered") == 0 and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.LEUJAOAM_CLEANSING and
+        player:getCharVar("assaultEntered") == 0 and
+        player:getMainLvl() > 50
 end
 
 instanceObject.onInstanceCreated = function(instance)

@@ -173,9 +173,11 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
                     actionTarget.param     = -actionTarget.param;
                 }
+
+                prevMsg = actionTarget.messageID;
 
                 state.ApplyEnmity();
             }

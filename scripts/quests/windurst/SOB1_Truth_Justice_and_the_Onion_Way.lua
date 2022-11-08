@@ -66,12 +66,12 @@ quest.sections =
             },
 
             -- Reminder text.
-             ['Gomada-Vulmada'] = quest:event(373),
-             ['Papo-Hopo']      = quest:event(372),
-             ['Pichichi']       = quest:event(374),
-             ['Pyo_Nzon']       = quest:event(375),
-             ['Shanruru']       = quest:event(377),
-             ['Yafa_Yaa']       = quest:event(376),
+            ['Gomada-Vulmada'] = quest:event(373),
+            ['Papo-Hopo']      = quest:event(372),
+            ['Pichichi']       = quest:event(374),
+            ['Pyo_Nzon']       = quest:event(375),
+            ['Shanruru']       = quest:event(377),
+            ['Yafa_Yaa']       = quest:event(376),
 
             onEventFinish =
             {
