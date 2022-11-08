@@ -50,6 +50,6 @@ function onTrigger(player, arg1, arg2)
     end
 
     local oldAnimation = targ:getAnimation()
-    targ:setAnimation( animationId )
+    targ:setAnimation(animationId)
     player:PrintToPlayer(string.format("NPC ID: %i - %s | Old animation: %i | New animation: %i\n", targ:getID(), targ:getName(), oldAnimation, animationId))
 end

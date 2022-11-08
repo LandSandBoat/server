@@ -21,7 +21,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local cap = 300
 
-     -- Bugbear Matman has stronger Flying Hip Press
+    -- Bugbear Matman has stronger Flying Hip Press
     if mob:getPool() == 562 then
         cap = math.random(300, 700)
     end

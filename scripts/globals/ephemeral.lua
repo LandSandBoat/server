@@ -101,7 +101,7 @@ xi.ephemeral.onEventFinish = function(player, option, wasTrade)
             local crystals = quantity % 12
             local clusters = math.floor(quantity / 12)
 
-             -- Player selected "as many as can fit"
+            -- Player selected "as many as can fit"
             if option > 0x80000000 then
                 -- Recalculate the quantity according to open inventory slots
                 local freeSlots = player:getFreeSlotsCount()

@@ -33,7 +33,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         basePower = 0
     end
     local weatherDayBase = 1
-    local dayBonus = 0
+    local weatherDayBonus = 0
     local weatherBonus = 0
     local dayElement = VanadielDayElement()
     local weather = player:getWeather()
@@ -55,7 +55,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         weatherDayBonus = weatherDayBonus - 0.25
     end
 
-    local power = math.floor(basePower * (weatherDayBase + dayBonus + weatherBonus))
+    local power = math.floor(basePower * (weatherDayBase + weatherDayBonus + weatherBonus))
     local spirit = player:getPet()
     power = utils.clamp(power, 0, spirit:getMP()) -- cap MP drained at spirit's MP
     power = utils.clamp(power, 0, player:getMaxMP() - player:getMP()) -- cap MP drained at the max MP - current MP

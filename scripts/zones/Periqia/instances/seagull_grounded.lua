@@ -584,7 +584,7 @@ instanceObject.onTrack = function(instance)
                     mob:setLocalVar("moveLock", 0) -- stop Movement and condition checks
                     instance:setProgress(1)
                 end
- -- else moveStatus == 1 (Running)
+-- else moveStatus == 1 (Running)
             else
                 if mob:atPoint(pathNodes[1][1]) then
                 -- mob reached the escape point - FAIL mission
@@ -606,7 +606,7 @@ instanceObject.onTrack = function(instance)
                     mob:setLocalVar("pathPoint", #pathNodes[1])
                 end
             end
- -- mob not at assigned point yet so move there
+-- mob not at assigned point yet so move there
         else
             mob:pathThrough(pathNodes[pathLeg][pathPoint])
         end

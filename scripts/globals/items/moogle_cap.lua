@@ -23,7 +23,7 @@ itemObject.onItemUse = function(target)
         target:setPos(197, -12, 224, 65, 240)
         return
     end
-    print( "Unable to fetch target's nation." )
+    print("Moogle Cap: Unable to fetch target's nation.")
 end
 
 return itemObject

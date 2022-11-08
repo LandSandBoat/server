@@ -29,6 +29,6 @@ function onTrigger(player, skillId)
     end
 
     -- cap skill
-    player:capSkill( skillId )
-    player:PrintToPlayer( string.format( "Capped skillID %i.", skillId ) )
+    player:capSkill(skillId)
+    player:PrintToPlayer(string.format("Capped skillID %i.", skillId))
 end

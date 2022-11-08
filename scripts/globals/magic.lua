@@ -93,14 +93,21 @@ local function getSpellBonusAcc(caster, target, spell, params)
         magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
+    -- Apply Dark Seal to Dark Magic
+    -- http://wiki.ffo.jp/html/3247.html
+    -- Similar to Elemental Seal but only for Dark Magic
+    if caster:hasStatusEffect(xi.effect.DARK_SEAL) and skill == xi.skill.DARK_MAGIC then
+        magicAccBonus = magicAccBonus + 256
+    end
+
     local skillchainTier, _ = FormMagicBurst(element, target)
 
-    --add acc for skillchains
+    -- Add acc for skillchains
     if skillchainTier > 0 then
         magicAccBonus = magicAccBonus + 30
     end
 
-    --Add acc for klimaform
+    -- Add acc for klimaform
     if element > 0 then
         if caster:hasStatusEffect(xi.effect.KLIMAFORM) and (castersWeather == xi.magic.singleWeatherStrong[element] or castersWeather == xi.magic.doubleWeatherStrong[element]) then
             magicAccBonus = magicAccBonus + 15
@@ -1146,7 +1153,7 @@ xi.magic.addBonuses = function(caster, spell, target, dmg, params)
 
         local mab_crit = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
         if math.random(1, 100) < mab_crit then
-            mab = mab + ( 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE ) )
+            mab = mab + (10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE))
         end
 
         local mdefBarBonus = 0
@@ -1398,11 +1405,11 @@ xi.magic.doElementalNuke = function(caster, spell, target, spellParams)
             end
 
         elseif dINT < inflectionPoint then
-             -- If dINT > 0 but below inflection point I
+            -- If dINT > 0 but below inflection point I
             dmg = baseValue + dINT * tierMultiplier
 
         else
-             -- Above inflection point I additional dINT is only half as effective
+            -- Above inflection point I additional dINT is only half as effective
             dmg = baseValue + inflectionPoint + ((dINT - inflectionPoint) * (tierMultiplier / 2))
         end
 
@@ -1584,6 +1591,8 @@ xi.magic.calculateDuration = function(duration, magicSkill, spellGroup, caster, 
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
+    elseif magicSkill == xi.skill.DARK_MAGIC then
+        duration = duration * (1 + (caster:getMod(xi.mod.DARK_MAGIC_DURATION) / 100))
     end
 
     return math.floor(duration)
