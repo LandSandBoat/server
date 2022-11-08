@@ -65,13 +65,13 @@ function onTrigger(player, pattern, index)
     local entities = zone:queryEntitiesByName(pattern)
     entities = getValidEntities(entities)
 
-    if #entities > 20 then
-        player:PrintToPlayer("Too many results. Narrow your query.")
+    if index ~= nil and index > 0 and index <= #entities then
+        goToEntity(player, entities[index])
         return
     end
 
-    if index ~= nil and index > 0 and index <= #entities then
-        goToEntity(player, entities[index])
+    if #entities > 20 then
+        player:PrintToPlayer("Too many results. Narrow your query or specify an index to go to.")
         return
     end
 
