@@ -454,12 +454,6 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
 
     SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
 
-    // Sets slot to ranged if RNG/NIN
-    if (m_attacker->objtype == TYPE_MOB && (m_attacker->GetMJob() == JOB_RNG || m_attacker->GetMJob() == JOB_NIN))
-    {
-        slot = SLOT_RANGED;
-    }
-
     if (m_attackRound->IsH2H())
     {
         m_baseDamage       = 0;
@@ -491,7 +485,7 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
     }
     else if (slot == SLOT_AMMO || slot == SLOT_RANGED)
     {
-        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, false));
+        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetRangedDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0));
     }
 
     // Apply "Double Attack" damage and "Triple Attack" damage mods

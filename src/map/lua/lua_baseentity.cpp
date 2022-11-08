@@ -11888,7 +11888,7 @@ float CLuaBaseEntity::getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCriti
     CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
 
-    return battleutils::GetDamageRatio(PAttacker, PDefender, isCritical, atkMulti, SLOT_RANGED, ignoredDef, false);
+    return battleutils::GetRangedDamageRatio(PAttacker, PDefender, isCritical, ignoredDef);
 }
 
 /************************************************************************
