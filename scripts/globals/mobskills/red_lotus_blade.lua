@@ -18,9 +18,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if (mob:getPool() == 4006) then -- Trion@QuBia_Arena only
+    if mob:getPool() == 4006 then -- Trion@QuBia_Arena only
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.RLB_LAND)
-    elseif (mob:getPool() == 4249) then -- Volker@Throne_Room only
+    elseif mob:getPool() == 4249 then -- Volker@Throne_Room only
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.FEEL_MY_PAIN)
     end
 

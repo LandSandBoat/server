@@ -4221,6 +4221,7 @@ xi.items =
     ORPHIC_EGG                      = 18256,
     BIBIKI_SEASHELL                 = 18257,
     THROWING_TOMAHAWK               = 18258,
+    ANGON                           = 18259,
     CAESTUS                         = 18263,
     SPHARAI                         = 18264,
     BATARDEAU                       = 18269,

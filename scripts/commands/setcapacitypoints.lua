@@ -45,5 +45,5 @@ function onTrigger(player, amount, target)
 
     -- set capacity points
     targ:setCapacityPoints(amount)
-    player:PrintToPlayer( string.format("%s now has %i capacity points on %s.", targ:getName(), amount, jobNameByNum[targ:getMainJob()] ) )
+    player:PrintToPlayer(string.format("%s now has %i capacity points on %s.", targ:getName(), amount, jobNameByNum[targ:getMainJob()]))
 end

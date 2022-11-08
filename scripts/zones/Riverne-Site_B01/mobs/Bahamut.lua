@@ -59,7 +59,7 @@ entity.onMobFight = function(mob, target)
     end
 
     -- The last check prevents multiple Mega/Gigaflares from being called at the same time.
-    if mob:actionQueueEmpty() == true and not isBusy then
+    if mob:actionQueueEmpty() and not isBusy then
         if megaFlareQueue > 0 then
             -- disable all other actions until Megaflare is used successfully
             mob:SetMobAbilityEnabled(false)

@@ -20,9 +20,9 @@ local currency =
 
 local shop =
 {
-     7, 1313, -- Siren's Hair
-     8, 1521, -- Slime Juice
-     9, 1469, -- Wootz Ore
+    7,  1313, -- Siren's Hair
+    8,  1521, -- Slime Juice
+    9,  1469, -- Wootz Ore
     12, 4246, -- Cantarella
     20, 1468, -- Marksman's Oil
     25, 1461, -- Wootz Ingot

@@ -15,15 +15,15 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and
         trade:getItemCount() == 1
     then
-        if trade:hasItemQty(557, 1) == true then
+        if trade:hasItemQty(557, 1) then
             player:startEvent(192) -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
-        elseif trade:hasItemQty(556, 1) == true then
+        elseif trade:hasItemQty(556, 1) then
             player:startEvent(196) -- Trade divination sphere, finish quest
         end
 
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_ACCEPTED and
-        trade:hasItemQty(12507, 1) == true and
+        trade:hasItemQty(12507, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(203) -- Finish "Never to return" quest

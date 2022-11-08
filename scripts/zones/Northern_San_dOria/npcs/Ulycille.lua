@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.WOODWORKING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
             player:startEvent(623, cost, skillLevel, 0, 207, player:getGil(), 0, 4095, 0)
         else
             player:startEvent(623, cost, skillLevel, 0, 207, player:getGil(), 28482, 4095, 0)

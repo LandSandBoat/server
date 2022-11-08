@@ -10,7 +10,7 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
-           player:getCharVar("AgainstAllOdds") == 2
+        player:getCharVar("AgainstAllOdds") == 2
 end
 
 instanceObject.entryRequirements = function(player)

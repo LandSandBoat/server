@@ -13,10 +13,10 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if(mob:getFamily() == 316) then
+    if mob:getFamily() == 316 then
         local mobSkin = mob:getModelId()
 
-        if (mobSkin == 1805) then
+        if mobSkin == 1805 then
             return 0
         else
             return 1
@@ -26,9 +26,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
     local result = 1
 
-    if (family == 168 and mobhp <= 35) then -- Khimaira < 35%
+    if family == 168 and mobhp <= 35 then -- Khimaira < 35%
         result = 0
-    elseif (family == 315 and mobhp <= 50) then -- Tyger < 50%
+    elseif family == 315 and mobhp <= 50 then -- Tyger < 50%
         result = 0
     end
 
@@ -36,7 +36,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
 -- TODO: Hits all players near Khimaira, not just alliance.
 
     local dmgmod = 3

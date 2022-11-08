@@ -47,7 +47,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (target:hasStatusEffect(xi.effect.ATTACK_DOWN)) then
+    if target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         target:addStatusEffect(xi.effect.ATTACK_DOWN, 15, 0, 20)

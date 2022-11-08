@@ -12,12 +12,11 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-
-    if (target:hasStatusEffect(xi.effect.PLAGUE) == true) then
+    if target:hasStatusEffect(xi.effect.PLAGUE) then
         target:delStatusEffect(xi.effect.PLAGUE)
     end
 
-    if (target:hasStatusEffect(xi.effect.DISEASE) == true) then
+    if target:hasStatusEffect(xi.effect.DISEASE) then
         target:delStatusEffect(xi.effect.DISEASE)
     end
 end
