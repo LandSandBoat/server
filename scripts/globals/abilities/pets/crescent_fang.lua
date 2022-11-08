@@ -22,7 +22,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3, wSC)
     totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, numhits)
 
-    if (damage.hitslanded > 0) then
+    if damage.hitslanded > 0 then
         target:addStatusEffect(xi.effect.PARALYSIS, 22.5, 0, 90)
     end
 

@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
 
     if npc:getAnimationSub() == 1 and npc:getLocalVar("cued") == 0 then
-       if instance:getLocalVar("menuChoice") > 1 then
+        if instance:getLocalVar("menuChoice") > 1 then
             -- Normal Menu
             player:startOptionalCutscene(201, { [0] = 7, cs_option = { 1, 2 } })
         else

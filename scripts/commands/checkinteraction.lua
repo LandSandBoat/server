@@ -18,7 +18,7 @@ end
 
 local typeToName = {}
 for name, typeVal in pairs(Action.Type) do
-   typeToName[typeVal] = name
+    typeToName[typeVal] = name
 end
 
 local function handlerToString(handler, player, containerVarCache, varCache)

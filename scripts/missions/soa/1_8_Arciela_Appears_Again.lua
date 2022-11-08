@@ -23,7 +23,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                   xi.soa.helpers.imprimaturGate(player, 20)
+                xi.soa.helpers.imprimaturGate(player, 20)
         end,
 
         [xi.zone.WESTERN_ADOULIN] =

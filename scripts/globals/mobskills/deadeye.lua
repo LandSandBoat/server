@@ -29,9 +29,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display defense down first, else magic defense down
-    if (defDown == xi.msg.basic.SKILL_ENFEEB_IS) then
+    if defDown == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.DEFENSE_DOWN
-    elseif (mDefDown == xi.msg.basic.NFEEB_IS) then
+    elseif mDefDown == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.MAGIC_DEF_DOWN
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)

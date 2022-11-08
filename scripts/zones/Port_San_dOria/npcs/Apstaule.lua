@@ -8,12 +8,9 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local count = trade:getItemCount()
-    local auctionParcel = trade:hasItemQty(594, 1)
-
-    if (auctionParcel == true and count == 1) then
+    if trade:hasItemQty(594, 1) and trade:getItemCount() == 1 then
         local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
-        if (theBrugaireConsortium == 1) then
+        if theBrugaireConsortium == 1 then
             player:tradeComplete()
             player:startEvent(540)
             player:setCharVar("TheBrugaireConsortium-Parcels", 21)

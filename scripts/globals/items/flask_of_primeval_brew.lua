@@ -28,7 +28,7 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if (target:hasStatusEffect(xi.effect.TRANSCENDENCY)) then
+    if target:hasStatusEffect(xi.effect.TRANSCENDENCY) then
         return 523
     else
         return 0

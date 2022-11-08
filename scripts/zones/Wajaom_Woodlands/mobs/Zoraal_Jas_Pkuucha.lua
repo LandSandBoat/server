@@ -14,14 +14,14 @@ end
 
 entity.onMobDisengage = function(mob)
     mob:setLocalVar("hasPoppedZoraal", 0)
-    if(GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned()) then
+    if GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned() then
         DespawnMob(ID.mob.PERCIPIENT_ZORAAL_JA)
     end
 end
 
 entity.onMobRoam = function(mob)
     mob:setLocalVar("hasPoppedZoraal", 0)
-    if(GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned()) then
+    if GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned() then
         DespawnMob(ID.mob.PERCIPIENT_ZORAAL_JA)
     end
 end

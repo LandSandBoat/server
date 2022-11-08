@@ -11,9 +11,9 @@ require("scripts/globals/avatars_favor")
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    if (not caster:canUseMisc(xi.zoneMisc.PET)) then
+    if not caster:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
-    elseif (caster:hasPet()) then
+    elseif caster:hasPet() then
         return xi.msg.basic.ALREADY_HAS_A_PET
     else
         return 0

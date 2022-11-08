@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
 
     local vMinutes = (vHour * 60) + 40 - vMin
 
-    vHour = math.floor( vMinutes / 60 + 0.5)
+    vHour = math.floor(vMinutes / 60 + 0.5)
 
     local message = ID.text.ON_WAY_TO_MHAURA
 

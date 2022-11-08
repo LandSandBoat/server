@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 13) -- It is a picture of a small group of three men and women.
         end
     else
-        if zPos <-5 then -- SE picture
+        if zPos < -5 then -- SE picture
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 12) -- It is a painting of a beautiful landscape.
         elseif zPos > -5 and zPos < 5 then
             if GetNPCByID(ID.npc.DOOR_TO_RANCOR):getAnimation() == xi.anim.OPEN_DOOR then

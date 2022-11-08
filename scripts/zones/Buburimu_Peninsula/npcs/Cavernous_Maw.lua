@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+    if xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         local hasStone = xi.abyssea.getHeldTraverserStones(player)
         if
             hasStone >= 1 and

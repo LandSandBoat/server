@@ -13,7 +13,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- only brown-skinned mamool should use this move
     local mobSkin = mob:getModelId()
-    if (mobSkin == 1639 or mobSkin == 1619) then
+    if mobSkin == 1639 or mobSkin == 1619 then
         return 0
     else
         return 1
@@ -29,14 +29,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         After checking retail this mobskill appeared to grant only
         1 of the 2 effects unlike the blue magic version
     ]]
-    if (mob:hasStatusEffect(xi.effect.ACCURACY_BOOST)) then
+    if mob:hasStatusEffect(xi.effect.ACCURACY_BOOST) then
         skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
         effectID = xi.effect.EVASION_BOOST
-    elseif (mob:hasStatusEffect(xi.effect.ACCURACY_BOOST)) then
+    elseif mob:hasStatusEffect(xi.effect.ACCURACY_BOOST) then
         skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ACCURACY_BOOST, power, 0, 180))
         effectID = xi.effect.ACCURACY_BOOST
     else
-        if (rand < 0.5) then
+        if rand < 0.5 then
             skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
             effectID = xi.effect.EVASION_BOOST
         else

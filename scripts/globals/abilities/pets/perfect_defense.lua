@@ -18,7 +18,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master)
 
     if master ~= nil then
         local summoningSkill = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
-        if (summoningSkill > 600) then
+        if summoningSkill > 600 then
             summoningSkill = 600
         end
         duration = 30 + summoningSkill / 20

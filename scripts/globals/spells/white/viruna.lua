@@ -12,10 +12,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if (target:delStatusEffect(xi.effect.DISEASE)) then
+    if target:delStatusEffect(xi.effect.DISEASE) then
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
         return xi.effect.DISEASE
-    elseif (target:delStatusEffect(xi.effect.PLAGUE)) then
+    elseif target:delStatusEffect(xi.effect.PLAGUE) then
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
         return xi.effect.PLAGUE
     else
