@@ -22,7 +22,7 @@ function onBattlefieldHandlerInitialise(zone)
         for _, zoneid in pairs(battlefield.Zones) do
             if id == zoneid then
                 return battlefield.Max
-             end
+            end
         end
     end
 

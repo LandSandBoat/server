@@ -34,7 +34,7 @@ function onTrigger(player, keyId, target)
     local targ
     if target == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else
@@ -46,7 +46,7 @@ function onTrigger(player, keyId, target)
     end
 
     -- report hasKeyItem
-    if (targ:hasKeyItem(keyId)) then
+    if targ:hasKeyItem(keyId) then
         player:PrintToPlayer(string.format("%s has key item %i.", targ:getName(), keyId))
     else
         player:PrintToPlayer(string.format("%s does not have key item %i.", targ:getName(), keyId))

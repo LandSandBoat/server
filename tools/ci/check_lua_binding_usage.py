@@ -78,7 +78,6 @@ def main():
     function_names.append("onBattlefieldLoss")
     function_names.append("onBattlefieldWipe")
     function_names.append("handleWipe")
-    function_names.append("needsToZone")
     function_names.append("unsetVarBit")
     function_names.append("addVar")
     function_names.append("getLocaLVar")

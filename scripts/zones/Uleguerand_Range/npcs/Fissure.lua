@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local z = player:getZPos()
 
-    if player:hasKeyItem(xi.ki.MYSTIC_ICE) == true then
+    if player:hasKeyItem(xi.ki.MYSTIC_ICE) then
         if z > -200 and z < -150 then                -- southern Fissure (J-9)
             player:startEvent(2, xi.ki.MYSTIC_ICE)
         elseif z > 200 and z < 250 then            -- middle Fissure (K-7)

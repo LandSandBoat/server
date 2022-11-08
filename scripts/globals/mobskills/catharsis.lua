@@ -11,7 +11,7 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (target:getCurrentRegion() == xi.region.TAVNAZIANARCH) then
+    if target:getCurrentRegion() == xi.region.TAVNAZIANARCH then
         return 0
     end
 
@@ -21,7 +21,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local potency = skill:getParam()
 
-    if (potency == 0) then
+    if potency == 0 then
         potency = 12
     end
 

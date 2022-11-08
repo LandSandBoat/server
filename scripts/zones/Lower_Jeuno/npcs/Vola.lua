@@ -15,9 +15,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY) == QUEST_ACCEPTED and
-        trade:hasItemQty(1012, 1) == true and
-        trade:hasItemQty(1013, 1) == true and
-        trade:hasItemQty(1014, 1) == true and
+        trade:hasItemQty(1012, 1) and
+        trade:hasItemQty(1013, 1) and
+        trade:hasItemQty(1014, 1) and
         trade:getItemCount() == 3
     then
         player:startEvent(213) -- Finish Quest "Fistful of Fury"

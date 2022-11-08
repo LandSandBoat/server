@@ -13,12 +13,12 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.IXAERN_MNK)
 
-    if (not nm:isSpawned()) then
+    if not nm:isSpawned() then
         local chance = 0 -- percent chance that an item will drop.
 
-        if (npcUtil.tradeHas(trade, { { 1900, 3 } })) then
+        if npcUtil.tradeHas(trade, { { 1900, 3 } }) then
             chance = 100
-        elseif (npcUtil.tradeHas(trade, { { 1900, 2 } })) then
+        elseif npcUtil.tradeHas(trade, { { 1900, 2 } }) then
             chance = 66
         elseif npcUtil.tradeHas(trade, 1900) then
             chance = 33

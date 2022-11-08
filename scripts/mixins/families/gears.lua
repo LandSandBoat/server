@@ -7,7 +7,7 @@ g_mixins.gears = function(gearsMob)
 
     gearsMob:addListener("COMBAT_TICK", "GEARS_CTICK", function(mob)
         local mobHPP = mob:getHPP()
-        if (mobHPP >= 26 and mobHPP <= 49) then
+        if mobHPP >= 26 and mobHPP <= 49 then
             if mob:getAnimationSub() ~= 1 then
                 mob:setAnimationSub(1) -- double gear
                 mob:setMobMod(xi.mobMod.SKILL_LIST, 151)

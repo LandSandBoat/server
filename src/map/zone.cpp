@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -127,11 +127,12 @@ const uint16 CZone::ReducedVerticalAggroZones[] = {
  *                                                                       *
  ************************************************************************/
 
-CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
+CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
 , m_zoneType(ZONE_TYPE::NONE)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
+, m_levelRestriction(levelRestriction)
 {
     TracyZoneScoped;
     m_useNavMesh = false;
@@ -190,6 +191,11 @@ REGION_TYPE CZone::GetRegionID()
 CONTINENT_TYPE CZone::GetContinentID()
 {
     return m_continentID;
+}
+
+uint8 CZone::getLevelRestriction()
+{
+    return m_levelRestriction;
 }
 
 uint32 CZone::GetIP() const
@@ -579,6 +585,26 @@ void CZone::FindPartyForMob(CBaseEntity* PEntity)
 void CZone::TransportDepart(uint16 boundary, uint16 zone)
 {
     m_zoneEntities->TransportDepart(boundary, zone);
+}
+
+void CZone::updateCharLevelRestriction(CCharEntity* PChar)
+{
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION))
+    {
+        // If the level restriction is already the same then no need to change it
+        CStatusEffect* statusEffect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_RESTRICTION);
+        if (statusEffect->GetPower() == m_levelRestriction)
+        {
+            return;
+        }
+
+        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+    }
+
+    if (m_levelRestriction != 0)
+    {
+        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, m_levelRestriction, 0, 0));
+    }
 }
 
 void CZone::SetWeather(WEATHER weather)
@@ -1039,9 +1065,11 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     if (m_BattlefieldHandler)
     {
-        if (auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true))
+        auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
+        if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            PBattlefield->InsertEntity(PChar, true);
+            bool isEntered = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1;
+            PBattlefield->InsertEntity(PChar, isEntered);
         }
         else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
@@ -1049,13 +1077,14 @@ void CZone::CharZoneIn(CCharEntity* PChar)
             if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1)
             {
                 // If inside of the battlefield arena then kick them out
+                // Battlefield and level restriction effects will be removed once fully kicked.
                 m_BattlefieldHandler->addOrphanedPlayer(PChar);
             }
             else
             {
                 // Is not inside of a battlefield arena so remove the battlefield effect
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+                updateCharLevelRestriction(PChar);
                 if (PChar->PPet)
                 {
                     PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);

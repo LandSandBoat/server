@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
     elseif stalkerStatus == QUEST_ACCEPTED and stalkerProgress == 0 then
         player:startEvent(19) -- Fetch the last Dragoon's helmet
     elseif stalkerProgress == 1 then
-        if player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) == false then
+        if not player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then
             player:startEvent(23) -- Reminder to get helmet
         else
             player:startEvent(20) -- Response if you try to turn in the challenge to Ceraulian

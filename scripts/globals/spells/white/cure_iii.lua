@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 130
-    if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         power = xi.magic.getCurePowerOld(caster)
         divisor = 1
         constant = 70
@@ -69,9 +69,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
-            if (equippedBody == 11186) then
+            if equippedBody == 11186 then
                 solaceStoneskin = math.floor(final * 0.30)
-            elseif (equippedBody == 11086) then
+            elseif equippedBody == 11086 then
                 solaceStoneskin = math.floor(final * 0.35)
             else
                 solaceStoneskin = math.floor(final * 0.25)
