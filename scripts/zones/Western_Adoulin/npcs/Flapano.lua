@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- EXOTIC DELICACIES
     elseif exoticDelicacies == QUEST_ACCEPTED then
-        if npcUtil.tradeHas( trade, { 3916, 5949, { 5954, 2 } }) then
+        if npcUtil.tradeHas(trade, { 3916, 5949, { 5954, 2 } }) then
             player:startEvent(2861)
         elseif npcUtil.tradeHas(trade, 5974) or npcUtil.tradeHas(trade, 5975) then
             player:startEvent(2862)

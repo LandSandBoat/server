@@ -401,7 +401,8 @@ mission.sections =
                 [145] = function(player, csid, option, npc)
                     for i = 1, 6 do
                         player:delKeyItem(glowingOrbKI[i])
-                   end
+                    end
+
                     mission:complete(player)
                 end,
             },

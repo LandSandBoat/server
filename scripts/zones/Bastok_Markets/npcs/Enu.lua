@@ -38,7 +38,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 332 then -- Quest: Wish Upon a Star
         player:setCharVar("WishUponAStar_Status", 3)
     elseif csid == 334 then -- Quest: Wish Upon a Star - Traded Fallen Star
-        player:tradeComplete( )
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
         player:addFame(xi.quest.fame_area.BASTOK, 50)

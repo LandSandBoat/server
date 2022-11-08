@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 
     if guildMember == 1 then
         if npcUtil.tradeHas(trade, 2184) then
-            if player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
                 player:confirmTrade()
                 player:startEvent(637, 17160, 1, 19405, 21215, 30030, 0, 7, 0)
             else

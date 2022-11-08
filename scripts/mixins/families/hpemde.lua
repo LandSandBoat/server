@@ -97,7 +97,7 @@ g_mixins.families.hpemde = function(hpemdeMob)
 
     hpemdeMob:addListener("CRITICAL_TAKE", "HPEMDE_CRITICAL_TAKE", function(mob)
         if mob:getAnimationSub() == 3 then
-           closeMouth(mob)
+            closeMouth(mob)
         end
     end)
 end

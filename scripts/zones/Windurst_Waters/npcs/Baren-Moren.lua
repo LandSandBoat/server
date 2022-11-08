@@ -18,10 +18,8 @@ entity.onTrade = function(player, npc, trade)
     local aFeatherInOnesCap = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
 
     if
-        (
-            aFeatherInOnesCap == QUEST_ACCEPTED or
-            player:getCharVar("QuestFeatherInOnesCap_var") == 1
-        ) and
+        (aFeatherInOnesCap == QUEST_ACCEPTED or
+        player:getCharVar("QuestFeatherInOnesCap_var") == 1) and
         npcUtil.tradeHas(trade, { { 842, 3 } })
     then
         player:startEvent(79, 1500) -- Quest Turn In

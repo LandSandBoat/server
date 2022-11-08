@@ -12,7 +12,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if (target:getStatusEffect(xi.effect.PARALYSIS) ~= nil) then
+    if target:getStatusEffect(xi.effect.PARALYSIS) ~= nil then
         target:delStatusEffect(xi.effect.PARALYSIS)
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     else

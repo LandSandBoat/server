@@ -55,10 +55,10 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addTitle(xi.title.THE_BENEVOLENT_ONE)
             player:setCharVar("sermonQuestVar", 0)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
         end
     elseif csid == 589 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON )
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
     elseif csid == 591 then
         player:addItem(618)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 618)

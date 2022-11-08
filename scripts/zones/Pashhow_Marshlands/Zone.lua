@@ -65,7 +65,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
     end
 end
 
-zoneObject.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)

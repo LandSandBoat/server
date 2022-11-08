@@ -12,7 +12,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     --Pull base stats.
     -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
@@ -28,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.BIND
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (resist >= 0.5) then --Do it!
+    if resist >= 0.5 then --Do it!
         local resduration = duration * resist
 
         resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)

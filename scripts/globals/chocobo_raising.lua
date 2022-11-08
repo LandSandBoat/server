@@ -99,32 +99,32 @@ local glow =
 
 local validFoods =
 {
-    -- [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
-       [xi.items.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-       [xi.items.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-       [xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-       [xi.items.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-       [xi.items.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-       [xi.items.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-       [xi.items.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-       [xi.items.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-       [xi.items.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-       [xi.items.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    -- [xi.items.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
+    --  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
+        [xi.items.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+        [xi.items.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+        [xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+        [xi.items.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+        [xi.items.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+        [xi.items.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+        [xi.items.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+        [xi.items.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+        [xi.items.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+        [xi.items.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    --  [xi.items.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
 }
 
 -- Items that can be found on a walk in a certain area
@@ -504,22 +504,22 @@ end
 
 local packStats1 = function(chocoState)
     return bit.lshift(chocoState.strength,     0) +
-           bit.lshift(chocoState.endurance,    8) +
-           bit.lshift(chocoState.discernment, 16) +
-           bit.lshift(chocoState.receptivity, 24)
+        bit.lshift(chocoState.endurance,    8) +
+        bit.lshift(chocoState.discernment, 16) +
+        bit.lshift(chocoState.receptivity, 24)
 end
 
 local packStats2 = function(chocoState)
     return bit.lshift(chocoState.affection,     0) +
-           bit.lshift(chocoState.energy,        8) +
-           bit.lshift(chocoState.satisfaction, 16)
+        bit.lshift(chocoState.energy,        8) +
+        bit.lshift(chocoState.satisfaction, 16)
 end
 
 local getWeatherInZone = function(zoneId)
     local zone = GetZone(zoneId)
     if zone == nil then
         print("ChocoboRaising: Failed to get Zone object for weather information. \
-               Is the target zone on another executable?")
+            Is the target zone on another executable?")
         return xi.weather.NONE
     end
     return zone:getWeather()
@@ -1144,13 +1144,13 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 local arg1 = packStats1(chocoState)
 
                 local arg2 = bit.lshift(affectionRank.PARENT, 0) +
-                             bit.lshift(chocoState.hunger, 16)
+                    bit.lshift(chocoState.hunger, 16)
 
                 local arg3 = bit.lshift(chocoState.personality, 0) +
-                             bit.lshift(chocoState.weather_preference, 4) +
-                             bit.lshift(chocoState.ability1, 8) +
-                             bit.lshift(chocoState.ability2, 12) +
-                             bit.lshift(chocoState.stage, 16)
+                    bit.lshift(chocoState.weather_preference, 4) +
+                    bit.lshift(chocoState.ability1, 8) +
+                    bit.lshift(chocoState.ability2, 12) +
+                    bit.lshift(chocoState.stage, 16)
 
                 -- Condition flags (can be combined)
                 -- No flags: Stable

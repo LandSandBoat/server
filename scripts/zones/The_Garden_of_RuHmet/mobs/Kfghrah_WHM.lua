@@ -21,9 +21,9 @@ end
 entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("roamTime")
     local roamForm
-    if (os.time() - roamTime > 60) then
+    if os.time() - roamTime > 60 then
         roamForm = math.random(1, 3) -- forms 2 and 3 are spider and bird; can change forms at will
-        if (roamForm == 1) then
+        if roamForm == 1 then
             roamForm = 0 -- We don't want form 1 as that's humanoid - make it 0 for ball
         end
         mob:setAnimationSub(roamForm)
@@ -35,9 +35,9 @@ entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
     local battleForm
 
-    if (mob:getBattleTime() - changeTime > 60) then
+    if mob:getBattleTime() - changeTime > 60 then
         battleForm = math.random(1, 3) -- same deal as above
-        if (battleForm == 1) then
+        if battleForm == 1 then
             battleForm = 0
         end
         mob:setAnimationSub(battleForm)
