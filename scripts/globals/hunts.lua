@@ -1240,7 +1240,7 @@ local zone =
 --[[    0  |   0000000000   | 0000000000 |  0000
       1bit |    10 bits     |  10 bits   |  4bit
       lock |   Scyld Qty    | NM pageId #  | status
-                                          (Has distinct values) ]]--
+(Has distinct values) ]]--
 
 function xi.hunts.onTrigger(player, npc)
     local huntId = player:getCharVar("[hunt]id")

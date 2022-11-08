@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        player:needToZone() == false and
+        not player:needToZone() and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and
         saveMySon == 2
     then

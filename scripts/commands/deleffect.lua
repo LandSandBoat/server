@@ -20,10 +20,10 @@ function onTrigger(player, arg1, arg2)
     local targ
     local id
 
-    if (arg1 == nil) then
+    if arg1 == nil then
         error(player, "You must provide an effect ID.")
         return
-    elseif (arg2 == nil) then
+    elseif arg2 == nil then
         targ = player
         id = arg1
     else
@@ -48,7 +48,7 @@ function onTrigger(player, arg1, arg2)
 
     -- delete status effect
     targ:delStatusEffect(id)
-    if (targ:getID() ~= player:getID()) then
+    if targ:getID() ~= player:getID() then
         player:PrintToPlayer(string.format("Removed effect %i from %s.", id, targ:getName()))
     end
 end

@@ -28,9 +28,9 @@ entity.onTrigger = function(player, npc)
     local ImmortalLuShang = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
     local indomitableTimer = player:getCharVar("IndomitableSpiritTimer")
 
-    if player:hasItem(489) == true and (ImmortalLuShang == QUEST_AVAILABLE or ImmortalLuShang == QUEST_COMPLETED) then
+    if player:hasItem(489) and (ImmortalLuShang == QUEST_AVAILABLE or ImmortalLuShang == QUEST_COMPLETED) then
         player:startEvent(77) --Offer the quest if the player has the broken rod
-    elseif player:hasKeyItem(xi.ki.SERPENT_RUMORS) == true and Indomitable == QUEST_AVAILABLE then
+    elseif player:hasKeyItem(xi.ki.SERPENT_RUMORS) and Indomitable == QUEST_AVAILABLE then
         player:startEvent(131) --Begins Indomitable Spirit
     elseif indomitableTimer ~= 0 and indomitableTimer > os.time() then
         player:startEvent(133) --Asks the player to wait (next CQ tally)

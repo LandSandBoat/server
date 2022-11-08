@@ -12,9 +12,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (target:hasStatusEffect(xi.effect.FOOD) == true) then
+    if target:hasStatusEffect(xi.effect.FOOD) then
         target:delStatusEffect(xi.effect.FOOD)
-    elseif (target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) == true) then
+    elseif target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
         target:delStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
     end
 end

@@ -1615,6 +1615,11 @@ namespace battleutils
         {
             minPdif = cRatio;
             maxPdif = (10.0f / 9.0f) * cRatio;
+            if (PAttacker->objtype == TYPE_MOB)
+            {
+                minPdif = cRatio * (20.0f / 19.0f);
+                maxPdif = std::clamp<float>((10.0f / 8.0f) * cRatio, 0, 1);
+            }
         }
         else if (ratio <= 1.1f)
         {
@@ -2424,8 +2429,8 @@ namespace battleutils
             if (primary)
             // Calculate TP Return from WS
             {
-                standbyTp = ((int16)(((tpMultiplier * baseTp) + bonusTP) *
-                                     (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
+                standbyTp = bonusTP + ((int16)((tpMultiplier * baseTp) *
+                                               (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
             }
 
             // account for attacker's subtle blow which reduces the baseTP gain for the defender
@@ -2684,7 +2689,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack)
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot)
     {
         int32 critHitRate = 5;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES, 0) ||
@@ -2745,6 +2750,16 @@ namespace battleutils
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
             critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+
+            if (PAttacker->objtype & TYPE_PC)
+            {
+                auto* weapon = dynamic_cast<CItemWeapon*>(static_cast<CCharEntity*>(PAttacker)->getEquip(weaponSlot));
+                if (weapon && weapon->getModifier(Mod::CRITHITRATE_SLOT) > 0)
+                {
+                    critHitRate += weapon->getModifier(Mod::CRITHITRATE_SLOT);
+                }
+            }
+
             critHitRate = std::clamp(critHitRate, 0, 100);
         }
         return (uint8)critHitRate;
@@ -2868,6 +2883,12 @@ namespace battleutils
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded)
     {
         uint16 attack = 1;
+
+        if (PAttacker->objtype == TYPE_MOB && (PAttacker->GetMJob() == JOB_RNG || PAttacker->GetMJob() == JOB_NIN))
+        {
+            slot = SLOT_RANGED;
+        }
+
         if (slot == SLOT_RANGED || slot == SLOT_AMMO)
         {
             if (PAttacker->objtype == TYPE_PC)
@@ -2926,7 +2947,13 @@ namespace battleutils
         // https://www.bg-wiki.com/index.php?title=PDIF&oldid=268066
         // Note that only player autoattacks use this function, weaponskill pDIF is calculated in scripts/global/weaponskills.lua
         float ratio    = (static_cast<float>(attack)) / (static_cast<float>(defense));
-        float ratioCap = 2.25f;
+        float ratioCap = 2.25f; // PC ratioCap
+
+        // Mob & Pet ratiocap
+        if (PAttacker->objtype == TYPE_MOB || PAttacker->objtype == TYPE_PET)
+        {
+            ratioCap = 2.0f;
+        }
 
         ratio = std::clamp<float>(ratio, 0, ratioCap);
 
@@ -2971,7 +2998,7 @@ namespace battleutils
             {
                 if (attackerLvl > defenderLvl)
                 {
-                    cRatio += correction;
+                    cRatio = cRatio + correction; // Match other format
                 }
             }
         }
@@ -3008,8 +3035,8 @@ namespace battleutils
 
         if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
         {
-            // Mobs and pets cap at 4.25 regardless of crit so no need to bother with crits for the max
-            maxRatio = 4.25f;
+            // Mobs and pets cap at 4.0 regardless of crit so no need to bother with crits for the max
+            maxRatio = 4.0f;
         }
         else
         {
@@ -3034,50 +3061,98 @@ namespace battleutils
         // There is an additional step here but I am skipping it for now because we do not have the data in the database.
         // The Damage Limit+ trait adds 0.1 to the maxRatio per trait level so a level 80 DRK would get maxRatio += 0.5
 
-        if (wRatio < 0.5f)
+        if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
         {
-            upperLimit = wRatio + 0.5f;
-        }
-        else if (wRatio < 0.7f)
-        {
-            upperLimit = 1.0f;
-        }
-        else if (wRatio < 1.2f)
-        {
-            upperLimit = wRatio + 0.3f;
-        }
-        else if (wRatio < 1.5)
-        {
-            upperLimit = wRatio * 1.25f;
-        }
-        else if (wRatio < 2.625f)
-        {
-            upperLimit = std::min(wRatio + 0.375f, maxRatio);
+            // Upper limit for mobs
+            if (wRatio < 0.5f)
+            {
+                upperLimit = 1 + (10.0f / 9.0f) * (wRatio - 0.5f);
+            }
+            else if (wRatio < 0.75f)
+            {
+                upperLimit = 1.0f;
+            }
+            else if (wRatio < 2.25f)
+            {
+                upperLimit = 1 + (10.0f / 9.0f) * (wRatio - 0.75f);
+            }
+            else
+            {
+                upperLimit = 3.0f;
+            }
         }
         else
         {
-            upperLimit = 3.0f;
+            // Upper limit for players
+            if (wRatio < 0.5f)
+            {
+                upperLimit = wRatio + 0.5f;
+            }
+            else if (wRatio < 0.7f)
+            {
+                upperLimit = 1.0f;
+            }
+            else if (wRatio < 1.2f)
+            {
+                upperLimit = wRatio + 0.3f;
+            }
+            else if (wRatio < 1.5)
+            {
+                upperLimit = wRatio * 1.25f;
+            }
+            else if (wRatio < 2.625f)
+            {
+                upperLimit = std::min(wRatio + 0.375f, maxRatio);
+            }
+            else
+            {
+                upperLimit = 3.0f;
+            }
         }
 
-        if (wRatio < 0.38f)
+        if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
         {
-            lowerLimit = 0.0f;
-        }
-        else if (wRatio < 1.25f)
-        {
-            lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (448.0f / 1024.0f);
-        }
-        else if (wRatio < 1.51f)
-        {
-            lowerLimit = 1.0f;
-        }
-        else if (wRatio < 2.44f)
-        {
-            lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (755.0f / 1024.0f);
+            // Lower limit for mobs
+            if (wRatio < 0.5f)
+            {
+                lowerLimit = 1.0f / 6.0f;
+            }
+            else if (wRatio < 1.25f)
+            {
+                lowerLimit = 1 + (10.0f / 9.0f) * (wRatio - 1.25f);
+            }
+            else if (wRatio < 1.50f)
+            {
+                lowerLimit = 1.0f;
+            }
+            else
+            {
+                lowerLimit = 1 + (10.0f / 9.0f) * (wRatio - 1.5f);
+            }
         }
         else
         {
-            lowerLimit = std::min(wRatio - 0.375f, maxRatio);
+            // Lower limit for players
+            if (wRatio < 0.5f)
+            {
+                lowerLimit = 0.0f;
+            }
+            else if (wRatio < 1.25f)
+            {
+                lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (448.0f / 1024.0f);
+            }
+            else if (wRatio < 1.51f)
+            {
+                lowerLimit = 1.0f;
+            }
+            else if (wRatio < 2.44f)
+            {
+                lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (755.0f / 1024.0f);
+            }
+            else
+            {
+                lowerLimit = std::min(wRatio - 0.375f, maxRatio);
+            }
         }
 
         if (isGuarded)
@@ -6424,6 +6499,14 @@ namespace battleutils
                 }
 
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
+                applyArts = false;
+            }
+            // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
+            // https://www.bg-wiki.com/ffxi/Abs._Burgeonet_%2B2
+            // https://www.bg-wiki.com/ffxi/Fallen%27s_Burgeonet
+            else if (PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+            {
+                cast      = (uint32)(cast * (1.0f + ((PEntity->getMod(Mod::BLACK_MAGIC_CAST) + PEntity->getMod(Mod::DARK_MAGIC_CAST)) / 100.0f)));
                 applyArts = false;
             }
             else if (applyArts)

@@ -24,10 +24,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local effectSecond = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
     local dmg = 0
 
-    if (effectFirst ~= 0) then
+    if effectFirst ~= 0 then
         local count = 1
 
-        if (effectSecond ~= 0) then
+        if effectSecond ~= 0 then
             count = count + 1
         end
 

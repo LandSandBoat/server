@@ -49,8 +49,11 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 50)
     mob:setMod(xi.mod.REGEN, 25)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:setLocalVar("formTime", os.time() + 120)
     quadrupedForm(mob)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("formTime", os.time() + 120)
 end
 
 entity.onMobFight = function(mob, target)

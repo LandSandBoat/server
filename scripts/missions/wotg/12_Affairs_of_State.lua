@@ -60,7 +60,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     -- TODO: What are these args from caps?
                     -- Observed : 175, 1, 7, 0, 324953651, 58062326, 21829264, 4095, 196677
-                   return mission:progressEvent(175, 2, 27, 0, 0, 0, 0, 1, 4095)
+                    return mission:progressEvent(175, 2, 27, 0, 0, 0, 0, 1, 4095)
                 end,
             },
 

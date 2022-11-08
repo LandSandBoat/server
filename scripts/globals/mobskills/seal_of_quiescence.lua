@@ -9,11 +9,11 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     local typeEffect = xi.effect.MUTE
     local power = 30
     local duration = 75

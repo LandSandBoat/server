@@ -19,7 +19,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BIND
     local dmg = 0
 
-    if (targetcurrentHP > hpset) then
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30)
+
+    if targetcurrentHP > hpset then
         dmg = targetcurrentHP - hpset
     end
 

@@ -15,7 +15,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() == 1846 and mob:getHP() < mob:getMaxHP() / 100 * 35) then
+    if mob:getPool() == 1846 and mob:getHP() < mob:getMaxHP() / 100 * 35 then
         return 0
     else
         return 1

@@ -37,6 +37,7 @@
 #include "battleutils.h"
 #include "mobutils.h"
 #include "petutils.h"
+#include "zone_entities.h"
 #include "zoneutils.h"
 #include <vector>
 
@@ -94,51 +95,79 @@ namespace mobutils
         return damage;
     }
 
+    // Gest base skill rankings for ACC/ATT/EVA/MEVA
+    uint16 GetBase(CMobEntity* PMob, uint8 rank)
+    {
+        int8 mlvl = PMob->GetMLevel();
+
+        switch (rank)
+        {
+            case 1:
+                return battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mlvl); // A+ Skill (1)
+            case 2:
+                return battleutils::GetMaxSkill(SKILL_STAFF, JOB_WAR, mlvl); // B Skill (2)
+            case 3:
+                return battleutils::GetMaxSkill(SKILL_EVASION, JOB_WAR, mlvl); // C Skill (3)
+            case 4:
+                return battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_WAR, mlvl); // D Skill (4)
+            case 5:
+                return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
+        }
+
+        return 0;
+    }
+
     uint16 GetMagicEvasion(CMobEntity* PMob)
     {
-        uint8 mEvaRank = 3;
-
+        uint8 mEvaRank = PMob->evaRank;
         return GetBase(PMob, mEvaRank);
     }
 
-    uint16 GetEvasion(CMobEntity* PMob)
-    {
-        uint8 evaRank = PMob->evaRank;
+    /************************************************************************
+     *                                                                       *
+     *  Base value for defense                       *
+     *                                                                       *
+     ************************************************************************/
 
-        // Mob evasion is based on job
-        // but occasionally war mobs
-        // might have a different rank
-        switch (PMob->GetMJob())
+    uint16 GetDefense(CMobEntity* PMob, uint8 rank)
+    {
+        // family defense = [floor(defRank) + 8 + vit / 2 + job traits] * family multiplier
+        uint8 lvl = PMob->GetMLevel();
+
+        if (lvl > 50)
         {
-            case JOB_THF:
-            case JOB_NIN:
-                evaRank = 1;
-                break;
-            case JOB_MNK:
-            case JOB_DNC:
-            case JOB_SAM:
-            case JOB_PUP:
-            case JOB_RUN:
-                evaRank = 2;
-                break;
-            case JOB_RDM:
-            case JOB_BRD:
-            case JOB_GEO:
-            case JOB_COR:
-                evaRank = 4;
-                break;
-            case JOB_WHM:
-            case JOB_SCH:
-            case JOB_RNG:
-            case JOB_SMN:
-            case JOB_BLM:
-                evaRank = 5;
-                break;
-            default:
-                break;
+            switch (rank)
+            {
+                case 1: // A
+                    return (uint16)(153 + (lvl - 50) * 5.0f);
+                case 2: // B
+                    return (uint16)(147 + (lvl - 50) * 4.9f);
+                case 3: // C
+                    return (uint16)(142 + (lvl - 50) * 4.8f);
+                case 4: // D
+                    return (uint16)(136 + (lvl - 50) * 4.7f);
+                case 5: // E
+                    return (uint16)(126 + (lvl - 50) * 4.5f);
+            }
+        }
+        else
+        {
+            switch (rank)
+            {
+                case 1: // A
+                    return (uint16)(6 + (lvl - 1) * 3.0f);
+                case 2: // B
+                    return (uint16)(5 + (lvl - 1) * 2.9f);
+                case 3: // C
+                    return (uint16)(5 + (lvl - 1) * 2.8f);
+                case 4: // D
+                    return (uint16)(4 + (lvl - 1) * 2.7f);
+                case 5: // E
+                    return (uint16)(4 + (lvl - 1) * 2.5f);
+            }
         }
 
-        return GetBase(PMob, evaRank);
+        return 0;
     }
 
     /************************************************************************
@@ -167,60 +196,6 @@ namespace mobutils
                 return (2 + ((lvl - 1) * 20) / 100); // G
         }
 
-        return 0;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Base value for defense and evasion calculation                       *
-     *                                                                       *
-     ************************************************************************/
-
-    uint16 GetBase(CMobEntity* PMob, uint8 rank)
-    {
-        uint8 lvl = PMob->GetMLevel();
-        if (lvl > 50)
-        {
-            switch (rank)
-            {
-                case 1: // A
-                    return (uint16)(153 + (lvl - 50) * 5.0f);
-                case 2: // B
-                    return (uint16)(147 + (lvl - 50) * 4.9f);
-                case 3: // C
-                    return (uint16)(136 + (lvl - 50) * 4.8f);
-                case 4: // D
-                    return (uint16)(126 + (lvl - 50) * 4.7f);
-                case 5: // E
-                    return (uint16)(116 + (lvl - 50) * 4.5f);
-                case 6: // F
-                    return (uint16)(106 + (lvl - 50) * 4.4f);
-                case 7: // G
-                    return (uint16)(96 + (lvl - 50) * 4.3f);
-            }
-        }
-        else
-        {
-            switch (rank)
-            {
-                case 1:
-                    return (uint16)(6 + (lvl - 1) * 3.0f);
-                case 2:
-                    return (uint16)(5 + (lvl - 1) * 2.9f);
-                case 3:
-                    return (uint16)(5 + (lvl - 1) * 2.8f);
-                case 4:
-                    return (uint16)(4 + (lvl - 1) * 2.7f);
-                case 5:
-                    return (uint16)(4 + (lvl - 1) * 2.5f);
-                case 6:
-                    return (uint16)(3 + (lvl - 1) * 2.4f);
-                case 7:
-                    return (uint16)(3 + (lvl - 1) * 2.3f);
-            }
-        }
-
-        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -347,7 +322,6 @@ namespace mobutils
                     }
                 }
 
-                // pets have lower health (TODO: Capture pet HP and correct scaling)
                 if (PMob->PMaster != nullptr)
                 {
                     mobHP *= 0.30f; // Retail captures have all pets at 30% of the mobs family of the same level
@@ -575,11 +549,11 @@ namespace mobutils
             }
         }
 
-        PMob->addModifier(Mod::DEF, GetBase(PMob, PMob->defRank));
-        PMob->addModifier(Mod::EVA, GetEvasion(PMob));
-        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));
-        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));
-        PMob->addModifier(Mod::PARRY, GetBase(PMob, 3));
+        PMob->addModifier(Mod::DEF, GetDefense(PMob, PMob->defRank));
+        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank)); // Base Evasion for all mobs
+        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank)); // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank)); // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::PARRY, GetBase(PMob, 3));           // Base Parry for all mobs is Rank C
 
         // natural magic evasion
         PMob->addModifier(Mod::MEVA, GetMagicEvasion(PMob));
@@ -1453,13 +1427,19 @@ Usage:
                 PMob->m_TrueDetection = sql->GetUIntData(68);
                 PMob->m_Detects       = sql->GetUIntData(69);
 
+                CZone* newZone = zoneutils::GetZone(zoneID);
+
+                // Get dynamic targid
+                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+
+                // Ensure dynamic targid is released on death
+                PMob->m_bReleaseTargIDOnDeath = true;
+
+                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
-
-                // TODO: This shouldn't go into the pet list, it appears to only
-                //     : do this because that was the only way to have temporary
-                //     : entities at the time.
-                zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);
 

@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local crestProgress = player:getCharVar("TheHolyCrest_Event")
-    local remedyKI = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+    local hasDragonCurseRemedy = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
     local stalkerQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar("KnightStalker_Progress")
     local wildcatSandy = player:getCharVar("WildcatSandy")
@@ -28,9 +28,9 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
-    elseif crestProgress == 5 and remedyKI == false then
+    elseif crestProgress == 5 and not hasDragonCurseRemedy then
         player:startEvent(60) -- Gives key item
-    elseif crestProgress == 5 and remedyKI == true then
+    elseif crestProgress == 5 and hasDragonCurseRemedy then
         player:startEvent(122) -- Reminder to go to Gelsba
 
     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.

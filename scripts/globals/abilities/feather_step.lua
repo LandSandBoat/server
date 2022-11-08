@@ -156,7 +156,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
-            if (daze > 2) then
+            if daze > 2 then
                 daze = 2
             end
             player:addStatusEffect(xi.effect.FINISHING_MOVE_3 + daze, 1, 0, 7200)

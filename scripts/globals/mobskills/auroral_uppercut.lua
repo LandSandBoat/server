@@ -10,15 +10,14 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) then
+    if target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         return 1
     end
-    mob:showText(mob, ID.text.PRISHE_TEXT + 4)
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
+    mob:showText(mob, ID.text.PRISHE_TEXT + 4)
     local numhits = 1
     local accmod = 1
     local dmgmod = 1.0

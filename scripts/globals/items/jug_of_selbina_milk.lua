@@ -14,7 +14,7 @@ end
 
 itemObject.onItemUse = function(target)
     if not target:hasStatusEffect(xi.effect.REGEN) then
-        if (target:getEquipID(xi.slot.BODY) == 14520) then -- Dream Robe +1
+        if target:getEquipID(xi.slot.BODY) == 14520 then -- Dream Robe +1
             target:addStatusEffect(xi.effect.REGEN, 1, 3, 150)
         else
             target:addStatusEffect(xi.effect.REGEN, 1, 3, 120)

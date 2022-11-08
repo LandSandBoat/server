@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
 
     if toCureaCough == QUEST_AVAILABLE and player:getCharVar("toCureaCough") == 0 and medicineWoman == QUEST_COMPLETED then
         player:startEvent(538)
-    elseif player:hasKeyItem(xi.ki.COUGH_MEDICINE) == true then
+    elseif player:hasKeyItem(xi.ki.COUGH_MEDICINE) then
         player:startEvent(647)
     else
         player:startEvent(584)

@@ -9,7 +9,7 @@ require("scripts/globals/settings")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true then
+    if trade:getItemCount() == 1 and trade:hasItemQty(536, 1) then
         player:startEvent(631)
         player:addGil(xi.settings.main.GIL_RATE * 50)
         player:tradeComplete()

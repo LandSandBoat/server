@@ -10,11 +10,11 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
+    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
         return 1
-    elseif (mob:hasStatusEffect(xi.effect.INVINCIBLE)) then
+    elseif mob:hasStatusEffect(xi.effect.INVINCIBLE) then
         return 1
-    elseif (mob:hasStatusEffect(xi.effect.BLOOD_WEAPON)) then
+    elseif mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
         return 1
     elseif target:isBehind(mob, 96) then
         return 1
@@ -27,7 +27,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel =  target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
-    if (dispel == 0) then
+    if dispel == 0 then
         -- no effect
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else

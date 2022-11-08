@@ -114,7 +114,7 @@ entity.onMobFight = function(mob, target)
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
     if (hpTrigger > 0) then -- It'll be zero on his first "life"
         local usedAzure = mob:getLocalVar("usedAzureLore")
-        if (mob:getHPP() <= hpTrigger and usedAzure == 0) then
+        if mob:getHPP() <= hpTrigger and usedAzure == 0 then
             mob:setLocalVar("usedAzureLore", 1)
             mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
             mob:useMobAbility(xi.jsa.AZURE_LORE)

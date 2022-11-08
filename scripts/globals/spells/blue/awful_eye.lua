@@ -24,10 +24,9 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
-    if (target:hasStatusEffect(xi.effect.STR_DOWN)) then
+    if target:hasStatusEffect(xi.effect.STR_DOWN) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    elseif (target:isFacing(caster)) then
+    elseif target:isFacing(caster) then
         -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
@@ -36,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.bonus = 0
         params.effect = nil
         local resist = xi.magic.applyResistance(caster, target, spell, params)
-        if (resist <= 0) then
+        if resist <= 0 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ERASE)

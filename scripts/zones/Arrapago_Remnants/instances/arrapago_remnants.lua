@@ -74,7 +74,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
     elseif instance:getStage() == 7 and progress == 0 then
         local door = GetNPCByID(ID.npc[6].DOOR, instance)
         door:setLocalVar("current", os.time())
-        if (door:getLocalVar("current") - door:getLocalVar("start") <= 420) then
+        if door:getLocalVar("current") - door:getLocalVar("start") <= 420 then
             SpawnMob(ID.mob[6].treasure_hunter1, instance)
             SpawnMob(ID.mob[6].treasure_hunter2, instance)
             SpawnMob(ID.mob[6].qiqirn_mine_1, instance)
