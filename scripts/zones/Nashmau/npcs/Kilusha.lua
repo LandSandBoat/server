@@ -24,7 +24,7 @@ entity.onTrade = function(player, npc, trade)
             player:tradeComplete()
             player:startEvent(25)
         else
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SMOLDERING_LAMP)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SMOLDERING_LAMP)
         end
     end
 end
@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.giveItem(player, row.item)
             player:delCurrency("therion_ichor", row.cost)
         else
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
         end
     end
 end

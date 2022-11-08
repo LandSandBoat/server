@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.WOODWORKING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
             player:startEvent(624, skillCap, skillLevel, 1, 207, player:getGil(), 0, 4095, 0)
         else
             player:startEvent(624, skillCap, skillLevel, 1, 207, player:getGil(), 7127, 4095, 0)

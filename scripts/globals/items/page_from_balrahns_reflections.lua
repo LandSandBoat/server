@@ -11,7 +11,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local check = 56
-    if (target:getMainLvl() >= 60) then
+    if target:getMainLvl() >= 60 then
         check = 0
     end
     return check

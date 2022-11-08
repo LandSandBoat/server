@@ -15,7 +15,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Rarely used Optic Induration. Only charge if not an NM and in normal mode (no bars or rings)
-    if mob:isNM() or mob:getAnimationSub() >= 2 or utils.chance(75) then
+    if mob:getAnimationSub() >= 2 or utils.chance(75) then
         return 1
     end
     return 0

@@ -16,7 +16,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- only used during daytime
     local currentTime = VanadielHour()
-    if (currentTime >= 6 and currentTime <= 18) then
+    if currentTime >= 6 and currentTime <= 18 then
         return 0
     end
     return 1

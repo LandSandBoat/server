@@ -16,15 +16,15 @@ end
 
 entity.onTrigger = function(player, npc)
     local trialByEarth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
-    local whisperOfTremors = player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+    local hasWhisperOfTremors = player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
 
     if (trialByEarth == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6) or (trialByEarth == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByEarth_date")) then
         player:startEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Start and restart quest "Trial by Earth"
-    elseif trialByEarth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) == false and whisperOfTremors == false then
+    elseif trialByEarth == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) and not hasWhisperOfTremors then
         player:startEvent(284, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Defeat against Titan : Need new Fork
-    elseif trialByEarth == QUEST_ACCEPTED and whisperOfTremors == false then
+    elseif trialByEarth == QUEST_ACCEPTED and not hasWhisperOfTremors then
         player:startEvent(250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1)
-    elseif trialByEarth == QUEST_ACCEPTED and whisperOfTremors then
+    elseif trialByEarth == QUEST_ACCEPTED and hasWhisperOfTremors then
         local numitem = 0
 
         if player:hasItem(17438) then
@@ -56,7 +56,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 249 and option == 1 then
-        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
+        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         end
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)

@@ -19,7 +19,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Lets not heal if we haven't taken any damage..
-    if (mob:getHPP() == 100) then
+    if mob:getHPP() == 100 then
         return 1
     end
 

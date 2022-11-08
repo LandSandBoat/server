@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasStatusEffect(xi.effect.ENCHANTMENT) == true then
+    if target:hasStatusEffect(xi.effect.ENCHANTMENT) then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
         target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15487)
     else

@@ -15,7 +15,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1 then
+    if trade:hasItemQty(555, 1) and trade:getItemCount() == 1 then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Part1
         if
             a == 0 or

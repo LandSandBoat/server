@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.COOKING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
             player:startEvent(10017, skillCap, skillLevel, 2, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
         else
             player:startEvent(10017, skillCap, skillLevel, 2, 495, player:getGil(), 7094, 4095, 0)

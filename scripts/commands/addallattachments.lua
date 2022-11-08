@@ -39,7 +39,7 @@ function onTrigger(player, target)
     else
         local targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format( "Player named '%s' not found!", target ))
+            player:PrintToPlayer(string.format("Player named '%s' not found!", target))
         else
             AddAllAttachments(targ)
         end

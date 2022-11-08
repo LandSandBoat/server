@@ -161,7 +161,7 @@ function InteractionLookup:addContainers(containers, zoneIds)
     if zoneIds ~= nil then
         validZoneTable = {}
         for i = 1, #zoneIds do
-           validZoneTable[zoneIds[i]] = true
+            validZoneTable[zoneIds[i]] = true
         end
     end
 
@@ -235,9 +235,11 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
     end
 
     local secondLevelTable = data[player:getZoneID()]
-    if not secondLevelTable
-        or not secondLevelTable[secondLevelKey]
-        or not secondLevelTable[secondLevelKey][thirdLevelKey] then
+    if
+        not secondLevelTable or
+        not secondLevelTable[secondLevelKey] or
+        not secondLevelTable[secondLevelKey][thirdLevelKey]
+    then
         return { }
     end
 
@@ -377,12 +379,14 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     end
 
     -- Prioritize important actions from the handler system if applicable
-    if not fallbackHandler
-        or (#actions > 0 -- only prioritize if there's actually actions to do
-            and (secondLevelKey == 'onZoneIn' -- play onZoneIn cs if given
-                or priority > Action.Priority.Event -- prioritize this if event is important enough
-                or player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
-            )
+    if
+        not fallbackHandler or
+        (
+            #actions > 0 and                      -- only prioritize if there's actually actions to do
+            (secondLevelKey == 'onZoneIn' or      -- play onZoneIn cs if given
+            priority > Action.Priority.Event or   -- prioritize this if event is important enough
+            player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
+        )
     then
         player:setLocalVar(fallbackVar, priority <= Action.Priority.Event and 1 or 0)
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
@@ -395,9 +399,10 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
 
     -- Fall back to side-loaded handler from other lua file
     local result = fallbackHandler(unpack(args))
-    if player:isInEvent() or player:didGetMessage() -- Fallback handler triggered something
-        or (result == -1 and thirdLevelKey == 'onTrigger')  -- Doors return -1 to open
-        or (result ~= nil and result ~= -1 and secondLevelKey == 'onZoneIn') -- onZoneIn returns a csid if any, else -1
+    if
+        player:isInEvent() or player:didGetMessage() or -- Fallback handler triggered something
+        (result == -1 and thirdLevelKey == 'onTrigger') or  -- Doors return -1 to open
+        (result ~= nil and result ~= -1 and secondLevelKey == 'onZoneIn') -- onZoneIn returns a csid if any, else -1
     then
         return result
     end

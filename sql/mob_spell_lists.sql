@@ -1601,12 +1601,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Disaster_Idol_Darksday',125,275,1,255); -
 -- Casting_Behemoth (126)
 INSERT INTO `mob_spell_lists` VALUES ('Casting_Behemoth',126,218,1,255); -- meteor (1~255)
 
--- Promathia_1 (127)
-INSERT INTO `mob_spell_lists` VALUES ('Promathia_1',127,219,1,255); -- comet (1~255)
-
--- Promathia_2 (128)
-INSERT INTO `mob_spell_lists` VALUES ('Promathia_2',128,218,1,255); -- meteor (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Promathia_2',128,219,1,255); -- comet (1~255)
+-- 126 - 127 Free
 
 -- Prishe (129)
 INSERT INTO `mob_spell_lists` VALUES ('Prishe',129,4,1,255);  -- cure_iv (1~255)
@@ -4825,19 +4820,33 @@ INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,53,1,255); -- blink (1~25
 INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,55,1,255); -- aquaveil (1~255)
 
 -- Ixzdei_BLM (467)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,147,1,255); -- fire_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,152,1,255); -- blizzard_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,157,1,255); -- aero_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,162,1,255); -- stone_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,167,1,255); -- thunder_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,172,1,255); -- water_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,176,1,255); -- firaga_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,181,1,255); -- blizzaga_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,186,1,255); -- aeroga_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,191,1,255); -- stonega_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,4,26,255);   -- cure_iv (26~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,144,26,255); -- fire (26~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,149,34,255); -- blizzard (34~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,154,18,255); -- aero (18~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,159,2,255);  -- stone (2~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,164,42,255); -- thunder (42~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,169,10,255); -- water (10~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,147,1,255);  -- fire_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,152,1,255);  -- blizzard_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,157,1,255);  -- aero_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,162,1,255);  -- stone_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,167,1,255);  -- thunder_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,172,1,255);  -- water_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,176,1,255);  -- firaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,181,1,255);  -- blizzaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,186,1,255);  -- aeroga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM',467,191,1,255);  -- stonega_iii (1~255)
 
 -- Ixzdei_RDM (468)
-INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,191,1,255); -- stonega_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,25,1,255);  -- dia_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,34,1,255);  -- diaga_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,59,1,255);  -- silence (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,108,1,255); -- regen (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,112,1,255); -- flash (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,216,1,255); -- gravity (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,221,1,255); -- poison_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,232,1,255); -- bio_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,254,1,255); -- blind (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_RDM',468,260,1,255); -- dispel (1~255)
 
@@ -5611,6 +5620,15 @@ INSERT INTO `mob_spell_lists` VALUES ('Bugaboo',5073,240,1,255); -- drown
 INSERT INTO `mob_spell_lists` VALUES ('Bugaboo',5073,245,1,255); -- drain
 INSERT INTO `mob_spell_lists` VALUES ('Bugaboo',5073,250,1,255); -- ice_spikes
 INSERT INTO `mob_spell_lists` VALUES ('Bugaboo',5073,273,1,255); -- sleepga
+
+-- Ixzdei_BLM_start (467)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,4,26,255);   -- cure_iv (26~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,144,26,255); -- fire (26~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,149,34,255); -- blizzard (34~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,154,18,255); -- aero (18~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,159,2,255);  -- stone (2~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,164,42,255); -- thunder (42~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,169,10,255); -- water (10~255)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

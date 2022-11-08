@@ -46,8 +46,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     local resist = xi.magic.applyResistance(caster, target, spell, params)
-    if (damage > 0 and resist > 0.0625) then
-        if (target:canGainStatusEffect(xi.effect.STR_DOWN)) then
+    if damage > 0 and resist > 0.0625 then
+        if target:canGainStatusEffect(xi.effect.STR_DOWN) then
             target:addStatusEffect(xi.effect.STR_DOWN, 20, 3, 60)
         end
     end

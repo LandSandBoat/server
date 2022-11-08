@@ -5251,7 +5251,7 @@ uint8 CLuaBaseEntity::getSpeed()
 
 void CLuaBaseEntity::setSpeed(uint8 speedVal)
 {
-    auto speed = std::min<uint8>(speedVal, 255);
+    auto speed = std::clamp<uint8>(speedVal, 0, 255);
 
     if (m_PBaseEntity->speed != speed)
     {
@@ -8006,7 +8006,7 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
     // Check for special flags which may prevent damage from waking up the target
     bool wakeUp        = true;
     bool breakBind     = true;
-    bool removePetrify = true;
+    bool removePetrify = false;
 
     // TODO: Unused in current code, needs testing; change type to sol::table?
     //       Find a way to make this better! (Optional keys as well?)

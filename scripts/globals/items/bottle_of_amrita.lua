@@ -22,7 +22,7 @@ itemObject.onItemUse = function(target)
         target:addStatusEffect(xi.effect.REFRESH, 5, 3, 300)
         worked = true
     end
-    if (not worked) then
+    if not worked then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end

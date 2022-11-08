@@ -14,7 +14,7 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 1 and mob:getFamily() == 165) then -- Imps without horn
+    if mob:getAnimationSub() == 1 and mob:getFamily() == 165 then -- Imps without horn
         return 1
     else
         return 0
