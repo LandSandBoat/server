@@ -63,7 +63,6 @@ content.groups =
 content:addEssentialMobs({ "Count_Andromalius", "Duke_Amduscias", "Grand_Marquis_Chomiel", "Duke_Dantalian" })
 content.loot =
 {
-  
 
     {
         { itemid = xi.items.DEMON_HORN, droprate = xi.battlefield.dropChance.NORMAL },
@@ -91,7 +90,7 @@ content.loot =
         { itemid = xi.items.DRAGVANDIL, droprate = xi.battlefield.dropChance.NORMAL },
         { itemid = xi.items.HAMELIN_FLUTE, droprate = xi.battlefield.dropChance.NORMAL },
     },
-    
+
     {
         { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.HIGH },
         { itemid = xi.items.SCROLL_OF_CARNAGE_ELEGY, droprate = xi.battlefield.dropChance.NORMAL },
