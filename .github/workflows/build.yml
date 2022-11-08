@@ -24,6 +24,14 @@ jobs:
         fetch-depth: 0
     - name: Install Dependencies
       run: |
+        # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
+        # Ubuntu is using an old libmariadb but python3 pip expects it to be newer. Use the mariadb provided deb packages.
+        wget -P /tmp/ https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+        # Note: there is a sha256sum command here according to the above link, but I am unsure if this file may change with time
+        chmod +x /tmp/mariadb_repo_setup
+        sudo /tmp/mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
+        # Remove the above when it's no longer necessary
+
         sudo apt-get update
         sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
