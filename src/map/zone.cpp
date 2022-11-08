@@ -248,7 +248,7 @@ void CZone::SetBackgroundMusicNight(uint8 music)
  * Queries for entities (mobs or npcs) which name match the given pattern.
  *
  * @param pattern The pattern used to match the entity name. We use % as wildcard for consistency
- * with other methods that perform patter matching.
+ * with other methods that perform pattern matching.
  * E.g: %anto% matches Shantotto and Canto-anto
  */
 QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern)

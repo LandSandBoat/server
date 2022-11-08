@@ -63,7 +63,7 @@ function onTrigger(player, pattern, index)
 
     local zone = player:getZone()
     local unfilteredEntities = zone:queryEntitiesByName(pattern)
-    entities = getValidEntities(unfilteredEntities)
+    local entities = getValidEntities(unfilteredEntities)
 
     if index ~= nil and index > 0 and index <= #entities then
         goToEntity(player, entities[index])
@@ -90,8 +90,8 @@ function onTrigger(player, pattern, index)
         return
     end
 
-    player:PrintToPlayer("Multiple entities found. Use !gotoname <mob or npc name> <index> to choose:")
+    player:PrintToPlayer("Multiple entities found. Use !gotoname <mob or npc name> <index> to choose:", xi.msg.channel.SYSTEM_3)
     for i, entity in pairs(entities) do
-        player:PrintToPlayer(string.format("[%d]: %s %s (%s)", i, entity:getName(), entity:getZoneName(), entity:getID()))
+        player:PrintToPlayer(string.format("[%d] %s %s (%s)", i, entity:getName(), entity:getZoneName(), entity:getID()), xi.msg.channel.SYSTEM_3)
     end
 end
