@@ -1629,7 +1629,7 @@ namespace battleutils
         else
         {
             minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * cRatio);
-            maxPdif = std::min(cRatio,3.0f);
+            maxPdif = std::min(cRatio, 3.0f);
         }
 
         // return random number between the two
@@ -3051,7 +3051,7 @@ namespace battleutils
             // Lower limit for 2h
             if (wRatio < 1.25f)
             {
-                lowerLimit = std::clamp((-0.5f + 1.2f * wRatio),0.0f,1.0f);
+                lowerLimit = std::clamp((-0.5f + 1.2f * wRatio), 0.0f, 1.0f);
             }
             else if (wRatio <= 1.51f)
             {
