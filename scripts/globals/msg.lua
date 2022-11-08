@@ -300,6 +300,7 @@ xi.msg.basic =
     COVER_FAILURE          = 312, -- The <player>'s attempt to cover has no effect.
 
     -- PUP
+    AUTO_EXCEEDS_CAPACITY  = 745, -- Your automaton exceeds one or more elemental capacity values and cannot be activated.
     AUTO_OVERLOAD_CHANCE   = 798, -- The <pet>'s overload chance is <number>%.
     AUTO_OVERLOADED        = 799, -- The <pet>'s overload chance is <number>%. The <pet> is overloaded!
     PROVOKE_SWITCH         = 418, -- The <actor> uses <action> on <target>. The <target> switches to <actor>!
