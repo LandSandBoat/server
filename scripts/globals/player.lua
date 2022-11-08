@@ -133,7 +133,7 @@ xi.player.charCreate = function(player)
     --]]
 
     if player:getGil() < xi.settings.main.START_GIL then
-       player:setGil(xi.settings.main.START_GIL)
+        player:setGil(xi.settings.main.START_GIL)
     end
 
     player:addItem(536) -- adventurer coupon

@@ -32,7 +32,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
     -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
-       zoneIds[#zoneIds + 1] = zoneId
+        zoneIds[#zoneIds + 1] = zoneId
     end
 
     local interactionContainersPath = 'scripts/globals/interaction_containers'

@@ -15,12 +15,11 @@ function error(player, msg)
 end
 
 function onTrigger(player, mobId)
-
     -- validate mobId
     local targ
-    if (mobId == nil) then
+    if mobId == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isMob()) then
+        if targ == nil or not targ:isMob() then
             error(player, "You must either provide a mobID or target a mob.")
             return
         end

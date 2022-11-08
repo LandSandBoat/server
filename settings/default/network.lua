@@ -23,6 +23,8 @@ xi.settings.network =
     LOGIN_VIEW_PORT = 54001,
     LOGIN_AUTH_IP   = "0.0.0.0",
     LOGIN_AUTH_PORT = 54231,
+    LOGIN_CONF_IP   = "0.0.0.0",
+    LOGIN_CONF_PORT = 51220,
 
     MAP_PORT = 54230,
 

@@ -15,7 +15,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, target)
-
     -- validate target
     local targ
     if target == nil then
@@ -29,11 +28,11 @@ function onTrigger(player, target)
     end
 
     -- toggle wallhack for target
-    if (targ:checkNameFlags(0x00000200)) then
+    if targ:checkNameFlags(0x00000200) then
         targ:setFlag(0x00000200)
-        player:PrintToPlayer( string.format("Toggled %s's wallhack flag OFF.", targ:getName()) )
+        player:PrintToPlayer(string.format("Toggled %s's wallhack flag OFF.", targ:getName()))
     else
         targ:setFlag(0x00000200)
-        player:PrintToPlayer( string.format("Toggled %s's wallhack flag ON.", targ:getName()) )
+        player:PrintToPlayer(string.format("Toggled %s's wallhack flag ON.", targ:getName()))
     end
 end

@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     if trade:hasItemQty(1107, 1) and trade:getItemCount() == 1 then -- glitter sand
         local sinHunting = player:getCharVar("sinHunting")    -- RNG AF1
 
-        if (sinHunting == 2) then
+        if sinHunting == 2 then
             player:startEvent(5)
         end
     end

@@ -387,11 +387,16 @@ enum class Mod
     REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
-    SOULEATER_EFFECT       = 96,  // Souleater power in percents
-    DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907, // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
+    ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
+    ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
+    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -463,10 +468,14 @@ enum class Mod
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
-    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump (must be divided by 10)
-    JUMP_ATT_BONUS             = 362,  // ATT% bonus for jump + high jump
+    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS       = 285,  // bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS             = 362,  // ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS = 286,  // ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS             = 936,  // accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK         = 888,  // DA% bonus for all jumps
     HIGH_JUMP_ENMITY_REDUCTION = 363,  // for gear that reduces more enmity from high jump
-    FORCE_JUMP_CRIT            = 828,  // Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT            = 828,  // Force critical hit for all jumps
     WYVERN_EFFECTIVE_BREATH    = 829,  // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
     WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
@@ -960,11 +969,9 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 192 to 223
-    // 261 to 286
-    // 888
-    // 936
+    // 261 to 284
     //
-    // SPARE = 1069, and onward
+    // SPARE = 1074, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

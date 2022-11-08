@@ -112,7 +112,7 @@ end
 tenzenFunctions.riceBall = function(mob, target, busyState)
     local battlefield = mob:getBattlefield()
     if
-        mob:actionQueueEmpty() == true and
+        mob:actionQueueEmpty() and
         not busyState
     then
         if

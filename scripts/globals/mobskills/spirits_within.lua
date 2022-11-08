@@ -19,7 +19,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if (mob:getPool() == 4249) then -- Volker@Throne_Room only
+    if mob:getPool() == 4249 then -- Volker@Throne_Room only
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
@@ -37,14 +37,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Handling phalanx
     dmg = dmg - target:getMod(xi.mod.PHALANX)
 
-    if (dmg < 0) then
+    if dmg < 0 then
         return 0
     end
 
     dmg = utils.rampart(target, dmg)
     dmg = utils.stoneskin(target, dmg)
 
-    if (dmg > 0) then
+    if dmg > 0 then
         target:wakeUp()
         target:updateEnmityFromDamage(mob, dmg)
     end

@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
     local mMP = target:getMaxMP()
     local cMP = target:getMP()
 
-    if (mHP == cHP and mMP == cMP) then
+    if mHP == cHP and mMP == cMP then
         result = 56 -- Does not let player use item if their hp and mp are full
     end
 

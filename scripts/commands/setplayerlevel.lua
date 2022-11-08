@@ -22,7 +22,7 @@ function onTrigger(player, arg1, arg2)
     if arg2 ~= nil then
         targ = GetPlayerByName(arg1)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", arg1 ) )
+            error(player, string.format("Player named '%s' not found!", arg1))
             return
         end
         level = tonumber(arg2)

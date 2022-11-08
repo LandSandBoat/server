@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
     if lufetSalt and cnt == 1 and beansAhoy == QUEST_ACCEPTED then
         if player:getCharVar("BeansAhoy") == 0 then
             player:startEvent(337) -- Traded the Correct Item Dialogue (NOTE: You have to trade the Salts one at according to wiki)
-        elseif player:needsToZone() == false then
+        elseif not player:needToZone() then
             player:startEvent(340) -- Quest Complete Dialogue
         end
     else
@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 337 then
         player:tradeComplete()
         player:setCharVar("BeansAhoy", 1)
-        player:needsToZone(true)
+        player:needToZone(true)
     elseif csid == 340 or csid == 342 then
         if player:hasItem(5704, 1) or player:getFreeSlotsCount() < 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 5704)

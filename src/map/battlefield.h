@@ -162,6 +162,7 @@ public:
     bool CheckInProgress();
     bool IsOccupied() const;
     bool isInteraction() const;
+    bool isEntered(CCharEntity* PChar) const;
 
     void ForEachPlayer(const std::function<void(CCharEntity*)>& func);
     void ForEachEnemy(const std::function<void(CMobEntity*)>& func);

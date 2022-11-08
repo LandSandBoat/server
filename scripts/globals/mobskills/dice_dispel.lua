@@ -1,10 +1,7 @@
 -----------------------------------
 -- Goblin Dice
---
 -- Description: Stun
 -- Type: Physical (Blunt)
---
---
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -23,19 +20,19 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local effect3 = target:dispelStatusEffect()
     local num = 0
 
-    if (effect ~= xi.effect.NONE) then
+    if effect ~= xi.effect.NONE then
         num = num + 1
     end
 
-    if (effect2 ~= xi.effect.NONE) then
+    if effect2 ~= xi.effect.NONE then
         num = num + 1
     end
 
-    if (effect3 ~= xi.effect.NONE) then
+    if effect3 ~= xi.effect.NONE then
         num = num + 1
     end
 
-    if (num == 0) then
+    if num == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else
         skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)

@@ -1,4 +1,4 @@
- -----------------------------------------
+-----------------------------------------
 -- Spell: Cure IV
 -- Restores target's HP.
 -----------------------------------
@@ -22,7 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 270
-    if xi.settings.main.USE_OLD_CURE_FORMULA == true then
+    if xi.settings.main.USE_OLD_CURE_FORMULA then
         power = xi.magic.getCurePowerOld(caster)
         divisor = 0.6666
         constant = 165
@@ -131,7 +131,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if (mpBonusPercent > 0) then
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 
