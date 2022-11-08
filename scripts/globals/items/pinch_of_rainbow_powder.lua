@@ -16,7 +16,7 @@ end
 itemObject.onItemUse = function(target)
     local duration = 180
     if target:hasStatusEffect(xi.effect.INVISIBLE) then
-       target:delStatusEffect(xi.effect.INVISIBLE)
+        target:delStatusEffect(xi.effect.INVISIBLE)
     end
 
     duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)

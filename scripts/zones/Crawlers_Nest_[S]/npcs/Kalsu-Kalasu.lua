@@ -21,9 +21,9 @@ entity.onTrigger = function(player, npc)
             -- message for other nations missing
             player:startEvent(3)
         end
-    elseif player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) == true then
+    elseif player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) then
         player:startEvent(2)
-    elseif player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) == false then
+    elseif not player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER) then
         player:startEvent(1)
     end
 end

@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
             player:startEvent(630, skillCap, skillLevel, 2, 205, player:getGil(), 0, 90, 0)
         else
             player:startEvent(630, skillCap, skillLevel, 2, 205, player:getGil(), 7054, 90, 0)

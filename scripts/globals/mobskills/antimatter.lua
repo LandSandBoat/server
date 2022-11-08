@@ -21,7 +21,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
-    if ((skillList == 729 and phase < 4) or (skillList == 728 and mobhp < 20)) then
+    if (skillList == 729 and phase < 4) or (skillList == 728 and mobhp < 20) then
         if mob:getLocalVar("nuclearWaste") == 0 then
             return 0
         end

@@ -18,13 +18,13 @@ entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED then
         if count == 1 and trade:getGil() == 100 then  -- pay to replace package
             local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
-            if prog == 10 and player:hasItem(593) == false then
+            if prog == 10 and not player:hasItem(593) then
                 player:startEvent(608)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 11)
-            elseif prog == 20 and player:hasItem(594) == false then
+            elseif prog == 20 and not player:hasItem(594) then
                 player:startEvent(609)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 21)
-            elseif prog == 30 and player:hasItem(595) == false then
+            elseif prog == 30 and not player:hasItem(595) then
                 player:startEvent(610)
                 player:setCharVar("TheBrugaireConsortium-Parcels", 31)
             end

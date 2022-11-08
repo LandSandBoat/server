@@ -342,7 +342,7 @@ end
 
 -- increments progress if conditions are met
 xi.magian.checkMagianTrial = function(player, conditions)
-    for _, slot in pairs( { xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED } ) do
+    for _, slot in pairs({ xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED }) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
             checkAndSetProgression(player, trialIdOnItem, conditions, xi.settings.main.MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
@@ -360,7 +360,7 @@ xi.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
     if EVENT_IDS[1] and player:getMainLvl() < 75 then
         player:startEvent(EVENT_IDS[1]) -- can't take a trial before lvl 75
 
-    elseif player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) == false then
+    elseif not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
         player:startEvent(EVENT_IDS[2]) -- player can start magian for the first time
 
     else
@@ -380,7 +380,7 @@ xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
 
     player:setLocalVar("storeItemId", itemId)
 
-    if player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) == true and trade:getSlotCount() == 1 then
+    if player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) and trade:getSlotCount() == 1 then
         if not next(matchId) and item:isType(TYPE) then
             player:setLocalVar("invalidItem", 1)
             player:startEvent(EVENT_IDS[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32) -- invalid weapon
@@ -555,7 +555,7 @@ xi.magian.magianEventUpdate = function(player, csid, option, EVENT_IDS)
                 local trialId = bit.rshift(option, 8)
                 local t = GetMagianTrial(trialId)
 
-                if player:hasItem(t.rewardItem) and rareItems[t.rewardItem] == true then
+                if player:hasItem(t.rewardItem) and rareItems[t.rewardItem] then
                     player:updateEvent(1)
                 else
                     player:updateEvent(0)
@@ -586,7 +586,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         player:setLocalVar("storeItemId", 0)
 
     -- returns item to player
-   elseif csid == EVENT_IDS[5] and (optionMod == 0 or optionMod == 4) then
+    elseif csid == EVENT_IDS[5] and (optionMod == 0 or optionMod == 4) then
         local trialId = player:getLocalVar("storeTrialId")
         local t = GetMagianTrial(trialId)
         player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)

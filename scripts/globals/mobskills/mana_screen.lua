@@ -1,8 +1,6 @@
 -----------------------------------
 -- Mana_Screen
---
 -- Description: Magic Shield
-
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -12,11 +10,12 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local phase = mob:getLocalVar("battlePhase")
-    if (phase >= 3) then
+    if phase >= 3 then
         if mob:getLocalVar("nuclearWaste") == 0 and mob:getLocalVar("citadelBuster") == 0 then
             return 0
         end
     end
+
     return 1
 end
 

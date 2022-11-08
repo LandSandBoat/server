@@ -42,7 +42,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance, and only deduct once instead of for each target.
-    if (player:getID() == target:getID() and player:hasStatusEffect(xi.effect.TRANCE) == false) then
+    if player:getID() == target:getID() and not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(400)
     end
 

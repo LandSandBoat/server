@@ -580,7 +580,7 @@ local function GiveAugItem(player, npc, slot)
                 player:messageSpecial(zones[zoneId].text.ITEM_CANNOT_BE_OBTAINED, item1)
                 return 0
             elseif player:getFreeSlotsCount() > 0 then
-                    if (GetAugItemID(npc, 1) ~= 0) then
+                    if GetAugItemID(npc, 1) ~= 0 then
                     player:addItem(item1, 1, item1aug1, item1aug1val, item1aug2, item1aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item1, 0, 0, 0)
                     npc:setLocalVar("ITEM1ID", 0)

@@ -40,8 +40,8 @@ function onTrigger(player, target)
     end
 
     -- add maps
-    for _, v in ipairs( keyIds ) do
-        targ:addKeyItem( v )
+    for _, v in ipairs(keyIds) do
+        targ:addKeyItem(v)
     end
     player:PrintToPlayer(string.format("%s now has all maps.", targ:getName()))
 end

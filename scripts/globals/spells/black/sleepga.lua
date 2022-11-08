@@ -23,8 +23,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.SLEEP_I
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (caster:isMob()) then
-        if (caster:getPool() == 5310) then -- Amnaf (Flayer)
+    if caster:isMob() then
+        if caster:getPool() == 5310 then -- Amnaf (Flayer)
             caster:resetEnmity(target)
         end
         -- Todo: get rid of this whole block by handling it in the mob script

@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     mob:resetEnmity(target)
 
-    if (xi.mobskills.mobPhysicalHit(skill)) then
+    if xi.mobskills.mobPhysicalHit(skill) then
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 60))
         return typeEffect
     end

@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 
     if guildMember == 1 then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(229, 8, 0, 0, 0, 188, 0, 4, 0)
             else
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.CLOTHCRAFT)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
             player:startEvent(228, 8, skillLevel, 0, 511, 188, 0, 4, 2184)
         else
             player:startEvent(228, 8, skillLevel, 0, 511, 188, 7127, 4, 2184)
