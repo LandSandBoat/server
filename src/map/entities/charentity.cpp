@@ -213,12 +213,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    petZoningInfo.respawnPet = false;
-    petZoningInfo.petID      = 0;
-    petZoningInfo.petType    = PET_TYPE::AVATAR; // dummy data, the bool tells us to respawn if required
-    petZoningInfo.petHP      = 0;
-    petZoningInfo.petMP      = 0;
-    petZoningInfo.petTP      = 0;
+    resetPetZoningInfo();
+    petZoningInfo.petID = 0;
 
     m_PlayTime    = 0;
     m_SaveTime    = 0;
@@ -415,34 +411,45 @@ bool CCharEntity::isNewPlayer() const
 
 void CCharEntity::setPetZoningInfo()
 {
-    if (PPet && PPet->objtype == TYPE_PET)
+    if (PPet == nullptr || PPet->objtype != TYPE_PET)
     {
-        switch (((CPetEntity*)PPet)->getPetType())
-        {
-            case PET_TYPE::JUG_PET:
-                if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
-                {
-                    break;
-                }
-                [[fallthrough]];
-            case PET_TYPE::AVATAR:
-            case PET_TYPE::AUTOMATON:
-            case PET_TYPE::WYVERN:
-                petZoningInfo.petHP   = PPet->health.hp;
-                petZoningInfo.petTP   = PPet->health.tp;
-                petZoningInfo.petMP   = PPet->health.mp;
-                petZoningInfo.petType = ((CPetEntity*)PPet)->getPetType();
-                break;
-            default:
-                break;
-        }
-        petZoningInfo.respawnPet = true;
+        return;
     }
+
+    auto PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+    if (PPetEntity == nullptr)
+    {
+        return;
+    }
+
+    switch (PPetEntity->getPetType())
+    {
+        case PET_TYPE::JUG_PET:
+            if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+            {
+                break;
+            }
+            [[fallthrough]];
+        case PET_TYPE::AVATAR:
+        case PET_TYPE::AUTOMATON:
+        case PET_TYPE::WYVERN:
+            petZoningInfo.petLevel = PPetEntity->getSpawnLevel();
+            petZoningInfo.petHP    = PPet->health.hp;
+            petZoningInfo.petTP    = PPet->health.tp;
+            petZoningInfo.petMP    = PPet->health.mp;
+            petZoningInfo.petType  = PPetEntity->getPetType();
+            break;
+        default:
+            break;
+    }
+
+    petZoningInfo.respawnPet = true;
 }
 
 void CCharEntity::resetPetZoningInfo()
 {
     // reset the petZoning info
+    petZoningInfo.petLevel   = 0;
     petZoningInfo.petHP      = 0;
     petZoningInfo.petTP      = 0;
     petZoningInfo.petMP      = 0;
