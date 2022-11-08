@@ -62,8 +62,8 @@ function onTrigger(player, pattern, index)
     end
 
     local zone = player:getZone()
-    local entities = zone:queryEntitiesByName(pattern)
-    entities = getValidEntities(entities)
+    local unfilteredEntities = zone:queryEntitiesByName(pattern)
+    entities = getValidEntities(unfilteredEntities)
 
     if index ~= nil and index > 0 and index <= #entities then
         goToEntity(player, entities[index])
@@ -76,7 +76,12 @@ function onTrigger(player, pattern, index)
     end
 
     if #entities == 0 then
-        player:PrintToPlayer(string.format("%s not found in current zone", pattern))
+        if #unfilteredEntities > 0 then
+            player:PrintToPlayer(string.format("%s not spawned in current zone", pattern))
+        else
+            player:PrintToPlayer(string.format("%s not found in current zone", pattern))
+        end
+
         return
     end
 
