@@ -6,6 +6,8 @@
 -- 
 -- 
 -- --------------------------------------------------------
+LOCK TABLES `item_mods` WRITE,
+            `item_weapon` WRITE;
 
 REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
     (15070,163,-2500), -- Aegis DMGMAGIC: -2500
@@ -17,3 +19,23 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
     (14010,521,10), -- Black Gadlings AUGMENTS_ABSORB: 10
     (15400,521,10), -- Black Cuisses AUGMENTS_ABSORB: 10
     (15339,521,10); -- Black Sollerets AUGMENTS_ABSORB: 10
+
+UPDATE item_mods
+SET modId = 1168
+WHERE itemId IN (
+    SELECT itemId
+    FROM item_weapon
+    WHERE skill < 25
+    )
+AND modId = 165;
+
+UPDATE item_mods
+SET modId = 1169
+WHERE itemId IN (
+    SELECT itemId
+    FROM item_weapon
+    WHERE skill < 25
+    )
+AND modId = 23;
+
+UNLOCK TABLES;

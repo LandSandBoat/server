@@ -1662,8 +1662,8 @@ xi.magic.doAbsorbSpell = function(caster, target, spell, params)
         caster:addTP(spellTable[isAbsorbTp].base)
         target:addTP(-spellTable[isAbsorbTp].base)
     else
-        caster:addStatusEffect(params.bonusEffect, spellTable[isAbsorbTp].base, 3, spellTable[isAbsorbTp].duration)
-        target:addStatusEffect(params.effect, -spellTable[isAbsorbTp].base, 3, spellTable[isAbsorbTp].duration)
+        caster:addStatusEffect(params.bonusEffect, spellTable[isAbsorbTp].base, 8, spellTable[isAbsorbTp].duration)
+        target:addStatusEffect(params.effect, -spellTable[isAbsorbTp].base, 8, spellTable[isAbsorbTp].duration)
     end
 
     return spellTable[isAbsorbTp].returnVal

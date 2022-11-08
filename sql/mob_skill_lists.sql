@@ -1205,7 +1205,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1376);
 -- INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1377);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1463);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1464);
-INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1465);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1466);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1467);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1468);
@@ -3988,6 +3987,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1994); -- Wind Maneu
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1995); -- Earth Maneuver
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1996); -- Thunder Maneuver
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1997); -- Water Maneuver
+
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1463);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1465);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1466);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1467);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1468);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1469);
 
 -- End of AirSkyBoat section
 
