@@ -26,7 +26,8 @@
 #include <condition_variable>
 #include <functional>
 #include <mutex>
-#include <thread>
+
+#include <nonstd/jthread.hpp>
 
 class Watchdog
 {
@@ -45,8 +46,8 @@ private:
     voidFunc_t m_callback;
     time_point m_lastUpdate;
 
-    std::thread             m_watchdog;
+    nonstd::jthread         m_watchdog;
     std::atomic_bool        m_running;
-    std::mutex              m_bottlneck;
+    std::mutex              m_bottleneck;
     std::condition_variable m_stopCondition;
 };
