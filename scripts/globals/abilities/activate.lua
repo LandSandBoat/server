@@ -18,6 +18,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
+    elseif player:isExceedingElementalCapacity() then
+        return xi.msg.basic.AUTO_EXCEEDS_CAPACITY, 0
     else
         return 0, 0
     end

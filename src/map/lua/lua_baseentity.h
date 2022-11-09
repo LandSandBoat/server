@@ -729,6 +729,7 @@ public:
     void  removeAllManeuvers();
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+    bool  isExceedingElementalCapacity();
 
     auto   getAllRuneEffects() -> sol::table;
     uint8  getActiveRuneCount();
