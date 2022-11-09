@@ -68,6 +68,11 @@ except Exception as e:
     )
     preflight_exit()
 
+GREEN = colorama.Fore.GREEN
+RED = colorama.Fore.RED
+RESET = colorama.Style.RESET_ALL
+NOOP = lambda *args, **kwargs: None
+
 
 def print_red(str):
     print(colorama.Fore.RED + str)
@@ -158,12 +163,31 @@ else:
     exe = ""
 colorama.init(autoreset=True)
 
+
 # Redirect errors through this to hide annoying password warning
 def fetch_errors(result):
     for line in result.stderr.splitlines():
         # Safe to ignore this warning
         if "Using a password on the command line interface can be insecure" not in line:
             print_red(line)
+
+
+def db_query(query):
+    result = subprocess.run(
+        [
+            f"{mysql_bin}mysql{exe}",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
+            database,
+            f"-e {query}",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    fetch_errors(result)
+    return result
 
 
 def fetch_credentials():
@@ -386,20 +410,7 @@ def import_file(file):
         return
     print("Importing " + file)
     query = f"SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {file}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;"
-    result = subprocess.run(
-        [
-            f"{mysql_bin}mysql{exe}",
-            f"-h{host}",
-            f"-P{str(port)}",
-            f"-u{login}",
-            f"-p{password}",
-            database,
-            f"-e {query}",
-        ],
-        capture_output=True,
-        text=True,
-    )
-    fetch_errors(result)
+    result = db_query(query)
 
 
 def connect():
@@ -701,39 +712,6 @@ def bad_selection():
     time.sleep(0.5)
 
 
-# fmt: off
-def menu():
-    print(
-        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o\n"
-        + colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + "LandSandBoat Database Management Tool" + colorama.Fore.RED + " |\n"
-        "| " + colorama.Style.RESET_ALL + str("Connected to " + database).center(37) + colorama.Fore.RED + " |"
-    )
-    if db_ver:
-        print(
-            colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + str("#" + db_ver).center(37) + colorama.Fore.RED + " |"
-        )
-    print(
-        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
-    )
-    if express_enabled:
-        print(
-            colorama.Fore.RED + "|" + colorama.Fore.GREEN + "e" + colorama.Style.RESET_ALL + ". Express Update " + str("(#" + release_version + ")").ljust(21) + colorama.Fore.RED + "|"
-        )
-    print(
-        colorama.Fore.RED +
-        "|" + colorama.Fore.GREEN + "1" + colorama.Style.RESET_ALL + str(". Update DB").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "2" + colorama.Style.RESET_ALL + str(". Check migrations").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "3" + colorama.Style.RESET_ALL + str(". Backup").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "4" + colorama.Style.RESET_ALL + str(". Restore/Import").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "r" + colorama.Style.RESET_ALL + str(". Reset DB").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "t" + colorama.Style.RESET_ALL + str(". Tasks").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "s" + colorama.Style.RESET_ALL + str(". Settings").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "q" + colorama.Style.RESET_ALL + str(". Quit").ljust(38) + colorama.Fore.RED + "|\n"
-        + colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
-    )
-# fmt: on
-
-
 def settings():
     fetch_configs()
     print_green("Current MySQL bin location: " + colorama.Style.RESET_ALL + mysql_bin)
@@ -758,29 +736,18 @@ def settings():
 
 def set_external_ip(ip_str):
     global mysql_bin, exe
-    query = f"UPDATE zone_settings SET zoneip = '{ip_str}';"
+    query = f"""
+    UPDATE zone_settings SET zoneip = '{ip_str}';
+    """
     print("Executing query:")
     print(query)
-    result = subprocess.run(
-        [
-            f"{mysql_bin}mysql{exe}",
-            f"-h{host}",
-            f"-P{str(port)}",
-            f"-u{login}",
-            f"-p{password}",
-            database,
-            f"-e {query}",
-        ],
-        capture_output=True,
-        text=True,
-    )
-    fetch_errors(result)
+    result = db_query(query)
 
 
-def tasks():
+def set_external_ip_dialog():
+    import urllib.request
+
     if input("Make server public-facing? [y/N] ").lower() == "y":
-        import urllib.request
-
         external_ip = urllib.request.urlopen("https://ident.me").read().decode("utf8")
         print_green(f"Detected your public-facing IP as: {external_ip}")
         if input("Is this correct? [y/N] ").lower() == "y":
@@ -789,6 +756,197 @@ def tasks():
             external_ip = input("Please enter your public-facing IP: ")
             if len(external_ip.strip()) > 0:
                 set_external_ip(external_ip)
+
+
+def print_db_tables_by_size():
+    global mysql_bin, exe
+
+    query = """
+    SELECT table_name AS 'Table',
+    ROUND(((data_length + index_length) / 1024 / 1024), 2) AS 'Size (MB)'
+    FROM information_schema.TABLES
+    WHERE ROUND(((data_length + index_length) / 1024 / 1024), 2) > 1.0
+    ORDER BY (data_length + index_length) DESC;
+    """
+
+    print("Executing query:")
+    print(query)
+    result = db_query(query)
+    print(result.stdout)
+
+
+def offload_to_auction_house_history():
+    global mysql_bin, exe
+
+    if (
+        input(
+            "This feature is very slow, and runs the risk of wiping out some or all of your auction_house history.\n"
+            + RED
+            + "USE AT YOUR OWN RISK!\n"
+            + RESET
+            + "Do you wish to continue? [y/N] "
+        ).lower()
+        != "y"
+    ):
+        return
+
+    if not cur:
+        connect()
+
+    ah_before = db_query("SELECT COUNT(*) FROM auction_house;").stdout
+    ah_history_before = db_query("SELECT COUNT(*) FROM auction_house_history;").stdout
+
+    cur.execute("SELECT DISTINCT itemid FROM auction_house;")
+
+    items = cur.fetchall()
+    index = 0
+    for itemid in items:
+        if index % 500 == 0:
+            percent = (index / len(items)) * 100
+            print(
+                f"Offloading historical data auction_house data: {percent:.1f}% ({index}/{len(items)})"
+            )
+        index = index + 1
+
+        query = f"""
+        START TRANSACTION;
+        SET @itemid = {itemid[0]};
+
+        -- Insert into history table
+        INSERT INTO auction_house_history
+        SELECT * FROM auction_house
+        WHERE
+            itemid = @itemid AND
+            buyer_name IS NOT NULL AND -- Sold
+            id NOT IN (
+                SELECT id
+                FROM (
+                    -- Most recent 20 unsold listings for item @itemid
+                    SELECT id, itemid, buyer_name
+                    FROM auction_house
+                    WHERE
+                        itemid = @itemid AND
+                        buyer_name IS NOT NULL
+                    ORDER BY sell_date DESC
+                    LIMIT 20
+                ) listed
+            );
+
+        -- Delete from non-history (same query as above, just for deleting)
+        DELETE auction_house.*
+        FROM auction_house
+        WHERE
+            itemid = @itemid AND
+            buyer_name IS NOT NULL AND -- Sold
+            id NOT IN (
+                SELECT id
+                FROM (
+                    -- Most recent 20 unsold listings for item @itemid
+                    SELECT id, itemid, buyer_name
+                    FROM auction_house
+                    WHERE
+                        itemid = @itemid AND
+                        buyer_name IS NOT NULL
+                    ORDER BY sell_date DESC
+                    LIMIT 20
+                ) listed
+            );
+        COMMIT;
+        """
+        db_query(query)
+
+    print("Done!")
+
+    print("Number of rows in auction_house (before):")
+    print(ah_before)
+
+    print("Number of rows in auction_house_history (before):")
+    print(ah_history_before)
+
+    print("Number of rows in auction_house (after):")
+    print(db_query("SELECT COUNT(*) FROM auction_house;").stdout)
+
+    print("Number of rows in auction_house_history (after):")
+    print(db_query("SELECT COUNT(*) FROM auction_house_history;").stdout)
+
+
+def announce_menu():
+    from announce import send_server_message
+
+    message = input("What message would you like to send to the whole server?\n> ")
+    if (
+        input(
+            "Are you sure you want to send the this to the whole server? [y/N]"
+        ).lower()
+        == "y"
+    ):
+        send_server_message(message)
+
+
+# fmt: off
+def present_menu(title, contents):
+    # Determine width of entire menu, including multiline titles
+    # and menu items
+    length = 0
+    title_parts = title.split("\n")
+
+    for part in title_parts:
+        length = max(len(part), length)
+
+    for value in contents.values():
+        length = max(len(value[0]), length)
+
+    # Add some more padding to account for the manual styling of
+    # menu options and spacings
+    option_pad = 3
+    length = length + option_pad
+
+    LEFT  = "| "
+    RIGHT = " |"
+
+    # Present title
+    print(
+        GREEN + "o" + RED + "-" + "-" * length + "-" + GREEN + "o"
+    )
+    for part in title_parts:
+        print(
+            RED + LEFT + RESET + part.center(length) + RED + RIGHT
+        )
+    print(
+        GREEN + "o" + RED + "-" + "-" * length + "-" + GREEN + "o"
+    )
+
+    # Menu options
+    for key, value in contents.items():
+        description = value[0]
+        print(
+            RED + LEFT + GREEN + key + RESET + ". " + description + " " * (length - len(description) - option_pad) + RED + RIGHT
+        )
+
+    # Footer
+    print(colorama.Fore.GREEN + "o" + colorama.Fore.RED + "-" + "-" * length + "-" + colorama.Fore.GREEN + "o\n")
+
+    # Handle inputs
+    selection = input("> ").lower()
+    print(colorama.ansi.clear_screen())
+    contents.get(selection, ["", bad_selection])[1]()
+# fmt: on
+
+
+def tasks_menu():
+    present_menu(
+        "Maintenance Tasks",
+        {
+            "1": ["Set zone IP addresses", set_external_ip_dialog],
+            "2": ["Server-wide announcement", announce_menu],
+            "3": ["Show table sizes (min 2MB)", print_db_tables_by_size],
+            # "4": [
+            #     "Offload historical auction data to auction_house_history",
+            #     offload_to_auction_house_history,
+            # ],
+            "q": ["Quit to main menu", NOOP],
+        },
+    )
 
 
 def main():
@@ -856,26 +1014,34 @@ def main():
         # Main loop
         print(colorama.ansi.clear_screen())
         connect()
-        actions = {
-            "1": update_db,
-            "2": run_all_migrations,
-            "3": backup_db,
-            "4": restore_backup,
-            "r": reset_db,
-            "t": tasks,
-            "s": settings,
-        }
         while cur:
-            menu()
-            selection = input("> ").lower()
-            print(colorama.ansi.clear_screen())
-            if "q" == selection:
-                close()
-            if "e" == selection and express_enabled:
-                express_update()
-                continue
-            use_tool = actions.get(selection, bad_selection)
-            use_tool()
+            title = (
+                "LandSandBoat Database Management Tool\n" + "Connected to " + database
+            )
+            if db_ver:
+                title = title + "\n" + str("#" + db_ver)
+
+            options = {
+                "1": ["Update DB", update_db],
+                "2": ["Check migrations", run_all_migrations],
+                "3": ["Backup", backup_db],
+                "4": ["Restore/Import", restore_backup],
+                "r": ["Reset DB", reset_db],
+                "t": ["Maintenance Tasks", tasks_menu],
+                "s": ["Settings", settings],
+                "q": ["Quit", close],
+            }
+
+            if express_enabled:
+                append = {
+                    "e": [
+                        "Express Update " + "(#" + release_version + ")",
+                        express_update,
+                    ],
+                }
+                options = {**append, **options}
+
+            present_menu(title, options)
     except KeyboardInterrupt:
         try:
             sys.exit(0)
