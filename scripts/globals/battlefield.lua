@@ -29,9 +29,9 @@ function onBattlefieldHandlerInitialise(zone)
     return default
 end
 
-xi.battlefield = {}
-xi.battlefield.contents = {}
-xi.battlefield.contentsByZone = {}
+xi.battlefield = xi.battlefield or {}
+xi.battlefield.contents = xi.battlefield.contents or {}
+xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
 
 xi.battlefield.status =
 {
