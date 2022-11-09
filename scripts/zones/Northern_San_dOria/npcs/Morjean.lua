@@ -15,11 +15,11 @@ end
 entity.onTrigger = function(player, npc)
     local theHolyCrest = player:getCharVar("TheHolyCrest_Event")
 
-    if (theHolyCrest == 2) then
+    if theHolyCrest == 2 then
         player:startEvent(65)
-    elseif ((theHolyCrest == 3 and player:hasItem(1159)) or theHolyCrest == 4) then -- Wyvern Egg
+    elseif (theHolyCrest == 3 and player:hasItem(1159)) or theHolyCrest == 4 then -- Wyvern Egg
         player:startEvent(62)
-    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED then
         player:startEvent(602)
     else
         player:startEvent(601)
@@ -30,10 +30,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 65) then
+    if csid == 65 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
         player:setCharVar("TheHolyCrest_Event", 3)
-    elseif (csid == 62 and option == 0) then
+    elseif csid == 62 and option == 0 then
         player:setCharVar("TheHolyCrest_Event", 4)
     end
 end

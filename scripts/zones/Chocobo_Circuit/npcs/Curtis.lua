@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 --  NPC: Curtis
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

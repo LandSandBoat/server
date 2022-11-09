@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Nenepp
--- Standard Info NPC
 -----------------------------------
 local ID = require("scripts/zones/Kazham/IDs")
 require("scripts/globals/pathfind")

@@ -22,7 +22,7 @@ itemObject.onItemUse = function(target)
 
     power = power + (bonus * tier)
 
-    if (target:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)) then
+    if target:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.PROTECT)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

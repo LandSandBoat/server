@@ -11,7 +11,7 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
-           player:getMissionStatus(xi.mission.log_id.SOA) == 2
+        player:getMissionStatus(xi.mission.log_id.SOA) == 2
 end
 
 instanceObject.entryRequirements = function(player)

@@ -53,6 +53,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     m_MovementType          = MELEE_RANGE;
     m_IsClaimable           = false;
     m_bReleaseTargIDOnDeath = true;
+    spawnAnimation          = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
@@ -172,9 +173,11 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
                     actionTarget.param     = -actionTarget.param;
                 }
+
+                prevMsg = actionTarget.messageID;
 
                 state.ApplyEnmity();
             }

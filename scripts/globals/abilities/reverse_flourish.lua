@@ -31,19 +31,19 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local numMerits = player:getMerit(xi.merit.REVERSE_FLOURISH_EFFECT)
 
-    if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         tpGain = 9.5 * 1 + stm * 1 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         tpGain = 9.5 * 2 + stm * 2 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         tpGain = 9.5 * 3 + stm * 3 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
         tpGain = 9.5 * 4 + stm * 4 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
         tpGain = 9.5 * 5 + stm * 5 ^ 2 + numMerits
     end
 

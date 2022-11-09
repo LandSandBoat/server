@@ -33,7 +33,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local effectbonus = player:getMod(xi.mod.DARK_ARTS_EFFECT)
     local helixbonus = 0
-    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+    if player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20 then
         helixbonus = math.floor(player:getMainLvl() / 4)
     end
 

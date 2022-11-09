@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Salim
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

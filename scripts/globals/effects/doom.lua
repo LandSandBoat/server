@@ -5,7 +5,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     -- minimum time is 10 seconds!
-    if (effect:getPower() < 10) then
+    if effect:getPower() < 10 then
         effect:setPower(10)
     end
 end
@@ -18,7 +18,7 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    if (effect:getTimeRemaining() == 0) then
+    if effect:getTimeRemaining() == 0 then
         target:setHP(0)
     end
 end

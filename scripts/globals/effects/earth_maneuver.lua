@@ -7,7 +7,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     local pet = target:getPet()
-    if (pet) then
+    if pet then
         pet:addMod(xi.mod.VIT, effect:getPower())
     end
 end
@@ -17,7 +17,7 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     local pet = target:getPet()
-    if (pet) then
+    if pet then
         pet:delMod(xi.mod.VIT, effect:getPower())
     end
 end

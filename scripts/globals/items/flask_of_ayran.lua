@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (not target:hasStatusEffect(xi.effect.REGEN)) then
+    if not target:hasStatusEffect(xi.effect.REGEN) then
         target:addStatusEffect(xi.effect.REGEN, 2, 3, 180)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

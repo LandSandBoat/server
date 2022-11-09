@@ -58,9 +58,9 @@ function onTrigger(player)
         target:getName(), target:getMod(xi.mod.TREASURE_HUNTER)), xi.msg.channel.SYSTEM_3)
     elseif targetType == xi.objType.PET then
         -- not needed yet, but we don't want to run MOB so just die in empty conditionals
-    elseif targetType ~= xi.objType.TRUST then
+    elseif targetType == xi.objType.TRUST then
         -- see above
-    elseif targetType ~= xi.objType.FELLOW then
+    elseif targetType == xi.objType.FELLOW then
         -- see above
     elseif targetType == xi.objType.MOB then
         player:PrintToPlayer(string.format("Mob's current Treasure Hunter Tier: %i", target:getTHlevel()), xi.msg.channel.SYSTEM_3)

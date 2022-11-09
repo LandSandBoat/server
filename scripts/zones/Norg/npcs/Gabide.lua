@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Gabide
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

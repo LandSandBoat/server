@@ -1204,7 +1204,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1375);
 INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1376);
 -- INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1377);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1463);
-INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1465);
+INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1464);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1466);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1467);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1468);
@@ -2297,13 +2297,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',499,678);  -- Crystal Rain
 INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',499,679);  -- Crystal Weapon (Fire)
 INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,676); -- Ice Break
 INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,678); -- Crystal Rain
-INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,680); -- Crystal Weapon (Water)
+INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',500,681); -- Crystal Weapon (Water)
 INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,677);   -- Thunder Break
 INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,678);   -- Crystal Rain
-INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,681);   -- Crystal Weapon (Wind)
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',501,682);   -- Crystal Weapon (Wind)
 INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,677); -- Ice Break
 INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,678); -- Crystal Rain
-INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,682); -- Crystal Weapon (Earth)
+INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',502,680); -- Crystal Weapon (Earth)
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347); -- velocious blade
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419); -- scission thrust
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422); -- sonic blade
@@ -2433,7 +2433,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533); -- pile_pitch
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534); -- guided_missile
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1535); -- hyper_pulse
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536); -- target_analysis
-INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1537); -- discharger
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538); -- ion_efflux
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539); -- rear_lasers
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);
@@ -3987,6 +3986,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1994); -- Wind Maneu
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1995); -- Earth Maneuver
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1996); -- Thunder Maneuver
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',4045,1997); -- Water Maneuver
+
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1463);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1465);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1466);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1467);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1468);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1469);
 
 -- End of AirSkyBoat section
 

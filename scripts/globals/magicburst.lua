@@ -22,15 +22,15 @@ local matches = -- [element id][resonance id]
 {
 --    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17
 --    N  T  C  L  S  R  D  I  I  G  D  F  F  L  D  L  D
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- ( 1) NONE
-    { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 }, -- ( 2) FIRE
-    { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1 }, -- ( 3) ICE
-    { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0 }, -- ( 4) WIND
-    { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 }, -- ( 5) EARTH
-    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0 }, -- ( 6) THUNDER
-    { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 }, -- ( 7) WATER
-    { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 }, -- ( 8) LIGHT
-    { 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 }, -- ( 9) DARK
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (1) NONE
+    { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 }, -- (2) FIRE
+    { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1 }, -- (3) ICE
+    { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0 }, -- (4) WIND
+    { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 }, -- (5) EARTH
+    { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0 }, -- (6) THUNDER
+    { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 }, -- (7) WATER
+    { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0 }, -- (8) LIGHT
+    { 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1 }, -- (9) DARK
     -- Blue mage spells.  Included for the sake of completeness
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (10) BLU - Physical Blunt
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, -- (11) BLU - Physical Hand-to-Hand
@@ -41,19 +41,19 @@ local matches = -- [element id][resonance id]
 -- Returns a boolean if the spell's element matches the resonace given
 local function doesSpellElementMatchResonance(ele, resonance)
     local isMatch = matches[ele + 1][resonance:getPower() + 1]
-    return (isMatch ~= nil and isMatch > 0)
+    return (isMatch and isMatch > 0)
 end
 
 local function doesMobSpellElementMatchResonance(element, resonance)
     local isMatch = matches[element + 1][resonance:getPower() + 1]
-    return (isMatch ~= nil and isMatch > 0)
+    return (isMatch and isMatch > 0)
 end
 
 -- Returns the burst level for a spell / target combination
 function FormMagicBurst(ele, target)
     local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
-    if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
-        if (doesSpellElementMatchResonance(ele, resonance) == true) then
+    if resonance and resonance:getTier() > 0 then -- Resonance exists, ignore it if its tier 0
+        if doesSpellElementMatchResonance(ele, resonance) then
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
@@ -64,8 +64,8 @@ end
 function MobFormMagicBurst(element, target)
     local resonance = target:getStatusEffect(xi.effect.SKILLCHAIN)
 
-    if (resonance ~= nil and resonance:getTier() > 0) then -- Resonance exists, ignore it if its tier 0
-        if (doesMobSpellElementMatchResonance(element, resonance) == true) then
+    if resonance ~= nil and resonance:getTier() > 0 then -- Resonance exists, ignore it if its tier 0
+        if doesMobSpellElementMatchResonance(element, resonance) then
             return resonance:getTier(), resonance:getSubPower()
         end
     end -- if resonance
@@ -76,5 +76,5 @@ end
 -- Returns a boolean if the element matches the skillchain property given
 function doesElementMatchWeaponskill(ele, SCProp)
     local isMatch = matches[ele + 1][SCProp + 1]
-    return (isMatch ~= nil and isMatch > 0)
+    return (isMatch and isMatch > 0)
 end

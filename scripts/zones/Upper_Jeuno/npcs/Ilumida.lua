@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(201) --asks player again, SearchingForTheRightWords accept/deny
 
     elseif searchingForWords == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.MOONDROP) == true then
+        if player:hasKeyItem(xi.ki.MOONDROP) then
             player:startEvent(198)
         else
             player:startEvent(199) -- SearchingForTheRightWords quest accepted dialog

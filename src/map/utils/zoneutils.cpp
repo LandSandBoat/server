@@ -26,6 +26,7 @@
 
 #include "../ai/ai_container.h"
 
+#include "../battlefield.h"
 #include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../entities/battleentity.h"
@@ -541,6 +542,12 @@ namespace zoneutils
                         PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
                     }
 
+                    if (PMob->GetMJob() == JOB_PLD && PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
+                    {
+                        PMob->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
+                        PMob->setModifier(Mod::SHIELDBLOCKRATE, 45);
+                    }
+
                     // Setup HP / MP Stat Percentage Boost
                     PMob->HPscale = sql->GetFloatData(64);
                     PMob->MPscale = sql->GetFloatData(65);
@@ -674,18 +681,20 @@ namespace zoneutils
 
     CZone* CreateZone(uint16 ZoneID)
     {
-        static const char* Query = "SELECT zonetype FROM zone_settings "
+        static const char* Query = "SELECT zonetype, restriction FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
         if (sql->Query(Query, ZoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            if (static_cast<ZONE_TYPE>(sql->GetUIntData(0)) == ZONE_TYPE::DUNGEON_INSTANCED)
+            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(sql->GetUIntData(0));
+            uint8     restriction = static_cast<uint8>(sql->GetUIntData(1));
+            if (zoneType == ZONE_TYPE::DUNGEON_INSTANCED)
             {
-                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
+                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
             else
             {
-                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
+                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
         }
         else
@@ -1189,6 +1198,35 @@ namespace zoneutils
     bool IsResidentialArea(CCharEntity* PChar)
     {
         return PChar->m_moghouseID != 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Checks whether or not the zone is enabled                            *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsZoneActive(uint16 zoneId)
+    {
+        if (auto* PZone = GetZone(zoneId))
+        {
+            if (PZone->GetIP() == 0 || PZone->GetPort() == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void AfterZoneIn(CBaseEntity* PEntity)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity);
+        if (PChar != nullptr && (PChar->PBattlefield == nullptr || !PChar->PBattlefield->isEntered(PChar)))
+        {
+            GetZone(PChar->getZone())->updateCharLevelRestriction(PChar);
+        }
+
+        luautils::AfterZoneIn(PChar);
     }
 
 }; // namespace zoneutils

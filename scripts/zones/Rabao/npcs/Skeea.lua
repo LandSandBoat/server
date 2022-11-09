@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Skeea
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

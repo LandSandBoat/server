@@ -50,9 +50,9 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     if bio == nil then -- if no bio, just add dia dot
         if caster:isPC() then
-            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, merits, 0, 20, 3)
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, merits, 0, 15, 3)
         else
-            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 15, 3)
         end
     elseif
         bio:getSubPower() <= 15 or
@@ -60,9 +60,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     then -- erase lower tier bio and add dia dot
         target:delStatusEffect(xi.effect.BIO)
         if caster:isPC() then
-            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, merits, 0, 20, 3)
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, merits, 0, 15, 3)
         else
-            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 15, 3)
         end
     end
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Fariel
--- Type: Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

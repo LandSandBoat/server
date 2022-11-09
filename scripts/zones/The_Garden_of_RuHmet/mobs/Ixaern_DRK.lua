@@ -17,7 +17,7 @@ local entity = {}
 entity.onMobInitialize = function(IxAernDrkMob)
     IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
-        if(math.random (1, 10) < 10) then
+        if math.random (1, 10) < 10 then
             -- reraise
             local target = mob:getTarget()
             if
@@ -84,7 +84,7 @@ entity.onMobSpawn = function(mob)
         specials =
         {
             {
-                id = xi.jsa.BLOOD_WEAPON_IXDRK,
+                id = xi.jsa.BLOOD_WEAPON,
                 hpp = math.random(90, 95),
                 cooldown = 120,
                 endCode = function(mobArg)

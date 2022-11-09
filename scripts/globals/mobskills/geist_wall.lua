@@ -21,7 +21,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel = target:dispelStatusEffect()
 
-    if (dispel == xi.effect.NONE) then
+    if dispel == xi.effect.NONE then
         -- no effect
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else

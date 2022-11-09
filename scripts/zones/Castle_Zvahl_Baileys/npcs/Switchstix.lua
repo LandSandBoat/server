@@ -128,14 +128,14 @@ local relics =
 local function hasRelic(player, isTrade)
     if isTrade then
         for key, value in pairs(relics) do
-            if (player:hasItemQty(key, 1)) then
+            if player:hasItemQty(key, 1) then
                 return key
             end
         end
         return nil
     else
         for key, value in pairs(relics) do
-            if (player:hasItem(key, xi.inv.INVENTORY)) then
+            if player:hasItem(key, xi.inv.INVENTORY) then
                 return key
             end
         end
@@ -305,12 +305,12 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
-    if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
-        if (option == 1) then
+    if (csid == 11 or csid == 12 or csid == 13) and option ~= 0 then
+        if option == 1 then
             player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1)
-        elseif (option == 2) then
+        elseif option == 2 then
             player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4)
-        elseif (option == 3) then
+        elseif option == 3 then
             player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20)
         end
     end
@@ -320,19 +320,19 @@ entity.onEventFinish = function(player, csid, option)
     local reward = player:getCharVar("RELIC_IN_PROGRESS")
 
     -- User is cancelling a relic.  Null everything out, it never happened.
-    if (csid == 87 and option == 666) then
+    if csid == 87 and option == 666 then
         player:setCharVar("RELIC_IN_PROGRESS", 0)
         player:setCharVar("RELIC_DUE_AT", 0)
         player:setCharVar("RELIC_MAKE_ANOTHER", 0)
         player:setCharVar("RELIC_CONQUEST_WAIT", 0)
 
         -- User is okay with making a relic they cannot possibly accept
-    elseif (csid == 20 and option == 1) then
+    elseif csid == 20 and option == 1 then
         player:setCharVar("RELIC_MAKE_ANOTHER", 1)
 
         -- Picking up a finished relic stage 1>2 and 2>3.
-    elseif ((csid == 16 or csid == 19) and reward ~= 0) then
-        if (player:getFreeSlotsCount() < 1) then
+    elseif (csid == 16 or csid == 19) and reward ~= 0 then
+        if player:getFreeSlotsCount() < 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward + 1)
         else
             player:addItem(reward + 1)
@@ -343,8 +343,8 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("RELIC_CONQUEST_WAIT", getConquestTally())
         end
         -- Picking up a finished relic stage 3>4.
-    elseif (csid == 52 and reward ~= 0) then
-        if (player:getFreeSlotsCount() < 1) then
+    elseif csid == 52 and reward ~= 0 then
+        if player:getFreeSlotsCount() < 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward + 1)
         else
             player:addItem(reward + 1)
@@ -356,7 +356,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         -- Stage 4 cutscenes
-    elseif ((csid >= 68 and csid <= 82) or csid == 86) then
+    elseif (csid >= 68 and csid <= 82) or csid == 86 then
         player:setCharVar("RELIC_CONQUEST_WAIT", 0)
         switch(csid):caseof
             {

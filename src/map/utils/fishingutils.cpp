@@ -63,6 +63,7 @@ namespace fishingutils
     uint16                                            MessageOffset[MAX_ZONEID];
     fishing_area_pool                                 FishingPools[MAX_ZONEID];
     std::map<uint32, fish_t*>                         FishList;
+    std::map<uint8, uint32>                           FishIndex; // Maps storage bits to Fish IDs
     std::map<uint16, rod_t*>                          FishingRods;
     std::map<uint16, bait_t*>                         FishingBaits;
     std::map<uint16, std::map<uint32, fishmob_t*>>    FishZoneMobList;       // zoneid, mobid, mob
@@ -1505,6 +1506,22 @@ namespace fishingutils
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCaughtFishPacket(PChar, FishID, MessageOffset + FISHMESSAGEOFFSET_CATCH, Count));
             }
 
+            // Update fishing statistics
+            PChar->m_fishHistory.fishReeled++;
+
+            if (length > PChar->m_fishHistory.fishLongest)
+            {
+                PChar->m_fishHistory.fishLongest   = length;
+                PChar->m_fishHistory.fishLongestId = Fish->getID();
+            }
+            if (weight > PChar->m_fishHistory.fishHeaviest)
+            {
+                PChar->m_fishHistory.fishHeaviest   = weight;
+                PChar->m_fishHistory.fishHeaviestId = Fish->getID();
+            }
+
+            SetPlayerFishIndex(PChar, FishID, true);
+
             return 1;
         }
         else
@@ -1988,6 +2005,7 @@ namespace fishingutils
                 PChar->animation = ANIMATION_FISHING_START;
                 PChar->updatemask |= UPDATE_HP;
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+                PChar->m_fishHistory.fishLinesCast++;
             }
             else
             {
@@ -2886,6 +2904,56 @@ namespace fishingutils
         }
     }
 
+    uint8 GetFishIndex(uint32 fishId)
+    {
+        for (auto& it : FishIndex)
+        {
+            if (it.second == fishId)
+            {
+                return (uint8)it.first;
+            }
+        }
+
+        return 0;
+    }
+
+    uint32 GetFishIdFromIndex(uint8 index)
+    {
+        if (index > 0 && FishIndex[index])
+        {
+            return FishIndex[index];
+        }
+
+        return 0;
+    }
+
+    void SetPlayerFishIndex(CCharEntity* PChar, uint32 fishId, bool value)
+    {
+        uint8 index    = GetFishIndex(fishId);
+        uint8 indexSet = (index & 0xE0) >> 5;
+
+        if (indexSet <= 5 && index > 0) // index is the rightmost 5 bits
+        {
+            uint32 oldValue = PChar->m_fishHistory.fishList[indexSet];
+            uint32 newValue;
+
+            if (value)
+            {
+                newValue = oldValue | (1UL << (index & 0x1F));
+            }
+            else
+            {
+                newValue = oldValue & ~(1UL << (index & 0x1F));
+            }
+
+            PChar->m_fishHistory.fishList[indexSet] = newValue;
+            if (newValue != oldValue)
+            {
+                charutils::WriteFishingHistory(PChar);
+            }
+        }
+    }
+
     /************************************************************************
      *                                                                       *
      *                            INITIALIZATION                             *
@@ -3274,6 +3342,24 @@ namespace fishingutils
         }
     }
 
+    void LoadFishIndex()
+    {
+        const char* Query = "SELECT "
+                            "fishindex, " // 0
+                            "fishid "     // 1
+                            "FROM fishing_index ORDER BY fishindex;";
+
+        int32 ret = sql->Query(Query);
+
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                FishIndex[(uint8)sql->GetUIntData(0)] = sql->GetUIntData(1);
+            }
+        }
+    }
+
     void InitializeFishingSystem()
     {
         LoadFishingMessages();
@@ -3285,6 +3371,7 @@ namespace fishingutils
         LoadFishingAreas();
         LoadFishGroups();
         LoadFishingCatchLists();
+        LoadFishIndex();
         CreateFishingPools();
     }
 } // namespace fishingutils

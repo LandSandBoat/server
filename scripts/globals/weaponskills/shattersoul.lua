@@ -23,7 +23,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 3
     params.ftp100 = 1.375 params.ftp200 = 1.375 params.ftp300 = 1.375
@@ -33,13 +32,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.int_wsc = 0.7 + (player:getMerit(xi.merit.SHATTERSOUL) * 0.03)
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) then
         target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 0, 120)
     end
     return tpHits, extraHits, criticalHit, damage

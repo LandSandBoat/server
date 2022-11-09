@@ -14,7 +14,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:getRace() ~= xi.race.MITHRA) then
+    if target:getRace() ~= xi.race.MITHRA then
         result = xi.msg.basic.CANNOT_EAT
     elseif target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
         result = xi.msg.basic.IS_FULL

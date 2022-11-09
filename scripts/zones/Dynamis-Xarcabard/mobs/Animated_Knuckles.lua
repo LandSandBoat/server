@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobEngaged = function(mob, target)
 
-    if (mob:getAnimationSub() == 3) then
+    if mob:getAnimationSub() == 3 then
         SetDropRate(108, 1571, 1000)
     else
         SetDropRate(108, 1571, 0)

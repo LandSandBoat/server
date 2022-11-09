@@ -116,15 +116,15 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, target)
-    if (csid == 10024) then
+    if csid == 10024 then
         xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    if (csid == 10024) then
+    if csid == 10024 then
         xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
-    elseif (csid == 10025) then
+    elseif csid == 10025 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end

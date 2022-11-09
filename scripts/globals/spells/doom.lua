@@ -14,7 +14,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.DOOM
-    if (target:hasStatusEffect(effect) == false) then
+    if not target:hasStatusEffect(effect) then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB) -- gains effect
         target:addStatusEffect(effect, 10, 3, 30)
     else

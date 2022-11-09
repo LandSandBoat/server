@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Pala_Korin
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

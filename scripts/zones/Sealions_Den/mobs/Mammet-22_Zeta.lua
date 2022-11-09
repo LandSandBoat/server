@@ -113,7 +113,9 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    oneToBeFeared.handleMammetDeath(mob, player, optParams)
+    if optParams.isKiller then
+        oneToBeFeared.handleMammetDeath(mob, player, optParams)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)

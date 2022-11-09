@@ -49,7 +49,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local chance = math.random()
 
-    if (damage > 0 and chance > 10) then
+    if damage > 0 and chance > 10 then
         target:delStatusEffect(xi.effect.POISON)
         target:addStatusEffect(xi.effect.POISON, 3, 0, getBlueEffectDuration(caster, 0, xi.effect.POISON))
     end

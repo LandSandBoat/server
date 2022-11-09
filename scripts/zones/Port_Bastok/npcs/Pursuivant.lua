@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Pursuivant
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

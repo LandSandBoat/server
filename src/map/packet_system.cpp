@@ -629,7 +629,7 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    PChar->PAI->QueueAction(queueAction_t(4000ms, false, luautils::AfterZoneIn));
+    PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
 
     // todo: kill player til theyre dead and bsod
     const char* fmtQuery = "SELECT version_mismatch FROM accounts_sessions WHERE charid = %u";
@@ -873,7 +873,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             CBaseEntity* PNpc = nullptr;
             PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
 
-            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0) && PNpc->status == STATUS_TYPE::NORMAL)
+            // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
+            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->m_moghouseID != 0))
             {
                 PNpc->PAI->Trigger(PChar);
                 PChar->m_charHistory.npcInteractions++;
@@ -900,7 +901,10 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
             }
 
-            PChar->PAI->Engage(TargID);
+            if (PChar->animation != ANIMATION_HEALING)
+            {
+                PChar->PAI->Engage(TargID);
+            }
         }
         break;
         case 0x03: // spellcast

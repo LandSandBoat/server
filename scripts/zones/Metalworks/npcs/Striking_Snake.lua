@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Striking Snake
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

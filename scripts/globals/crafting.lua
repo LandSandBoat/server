@@ -288,12 +288,12 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
         local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
 
         if ki and rank >= ki.rank then
-            if (player:getCurrency(currency) >= ki.cost) then
+            if player:getCurrency(currency) >= ki.cost then
                 player:delCurrency(currency, ki.cost)
                 player:addKeyItem(ki.id)
                 player:messageSpecial(text.KEYITEM_OBTAINED, ki.id)
             else
-               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     elseif category == 2 or category == 1 then -- item
@@ -306,7 +306,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
             if player:getCurrency(currency) >= cost then
                 local delivered = 0
                 for count = 1, quantity do -- addItem does not appear to honor quantity if the item doesn't stack.
-                    if (player:addItem(i.id, true)) then
+                    if player:addItem(i.id, true) then
                         player:delCurrency(currency, i.cost)
                         player:messageSpecial(text.ITEM_OBTAINED, i.id)
                         delivered = delivered + 1
@@ -316,7 +316,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
                     player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
                 end
             else
-               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     elseif category == 0 and option ~= 1073741824 then -- HQ crystal
@@ -332,7 +332,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
                     player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
                 end
             else
-               player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
+                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
     end

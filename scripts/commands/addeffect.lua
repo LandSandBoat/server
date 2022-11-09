@@ -18,7 +18,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
-
     local targ
     local id
     local power
@@ -26,12 +25,12 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
     local subId
     local subPower
 
-    if (arg1 == nil) then
+    if arg1 == nil then
         error(player, "Invalid effect.")
         return
     else
         targ = GetPlayerByName(arg1)
-        if (targ == nil) then
+        if targ == nil then
             -- no valid target given. shift arguments by one.
             targ = player
             id = arg1
@@ -50,43 +49,43 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
     end
 
     -- validate effect
-    if (id == nil) then
+    if id == nil then
         error(player, "Invalid effect.")
         return
     else
         id = tonumber(id) or xi.effect[string.upper(id)]
-        if (id == nil) then
+        if id == nil then
             error(player, "Invalid player or effect.")
             return
         end
     end
 
     -- validate power
-    if (power < 0) then
+    if power < 0 then
         error(player, "Invalid power.")
         return
     end
 
     -- validate duration
-    if (duration < 0) then
+    if duration < 0 then
         error(player, "Invalid duration.")
         return
     end
 
     -- validate subId
-    if (subId < 0) then
+    if subId < 0 then
         error(player, "Invalid subId.")
         return
     end
 
     -- validate subPower
-    if (subPower < 0) then
+    if subPower < 0 then
         error(player, "Invalid subPower.")
         return
     end
 
     -- add effect
-    if (targ:addStatusEffect(id, power, 3, duration, subId, subPower)) then
+    if targ:addStatusEffect(id, power, 3, duration, subId, subPower) then
         targ:messagePublic(280, targ, id, id)
     else
         targ:messagePublic(283, targ, id)

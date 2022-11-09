@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Trilok
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

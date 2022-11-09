@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
-    if (xi.mobskills.mobPhysicalHit(skill, dmg, target, info.hitslanded)) then
+    if xi.mobskills.mobPhysicalHit(skill, dmg, target, info.hitslanded) then
         target:dispelStatusEffect()
     end
 

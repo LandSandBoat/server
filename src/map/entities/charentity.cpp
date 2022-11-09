@@ -418,7 +418,7 @@ bool CCharEntity::isNewPlayer() const
 
 void CCharEntity::setPetZoningInfo()
 {
-    if (PPet->objtype == TYPE_PET)
+    if (PPet && PPet->objtype == TYPE_PET)
     {
         switch (((CPetEntity*)PPet)->getPetType())
         {
@@ -439,6 +439,7 @@ void CCharEntity::setPetZoningInfo()
             default:
                 break;
         }
+        petZoningInfo.respawnPet = true;
     }
 }
 
@@ -1502,9 +1503,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
                     actionTarget.param     = -actionTarget.param;
                 }
+
+                prevMsg = actionTarget.messageID;
 
                 state.ApplyEnmity();
             }
@@ -1670,7 +1673,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             else
             {
                 bool  isCritical = xirand::GetRandomNumber(100) < battleutils::GetRangedCritHitRate(this, PTarget);
-                float pdif       = battleutils::GetRangedDamageRatio(this, PTarget, isCritical, 0);
+                float pdif       = battleutils::GetDamageRatio(this, PTarget, isCritical, 0, slot, 0, false);
 
                 if (isCritical)
                 {
@@ -2190,7 +2193,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+        if (PPet->objtype == TYPE_MOB)
         {
             petutils::DetachPet(this);
         }

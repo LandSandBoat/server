@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Pula Rhatti
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

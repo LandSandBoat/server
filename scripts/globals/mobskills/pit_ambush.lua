@@ -15,7 +15,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() == 1318 and mob:getLocalVar("AMBUSH") == 1) then
+    if mob:getPool() == 1318 and mob:getLocalVar("AMBUSH") == 1 then
         return 1
     else
         return 0

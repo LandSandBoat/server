@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Ru'Lud Gardens
 --  NPC: Muhoho
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
