@@ -18,29 +18,13 @@ local content = Battlefield:new({
     index         = 2,
     entryNpc      = "_4l1",
     exitNpcs      = { "_4l2", "_4l3", "_4l4" },
-    requiredItems = { xi.items.MOON_ORB, message = ID.text.A_CRACK_HAS_FORMED },
-
+    requiredItems = { xi.items.MOON_ORB, wearMessage = ID.text.A_CRACK_HAS_FORMED, wornMessage = ID.text.ORB_CRACKED },
 })
-
-function content:isValidEntry(player, npc)
-    return self.entryNpc == '_4l1'
-end
-
-function content:onEntryEventUpdate(player, csid, option, npc)
-    if Battlefield.onEntryEventUpdate(self, player, csid, option, npc) then
-        if npc:getName() == '_4l1' then
-            self.exitLocation = 1
-            self.lossEventParams  = { [5] = 1 }
-        else
-            self.exitLocation = 0
-            self.lossEventParams  = {}
-        end
-    end
-end
 
 content.groups =
 {
     { mobs = { "Demons_Elemental" } },
+    { mobs = { "Demons_Avatar" } },
 }
 
 content:addEssentialMobs({ "Count_Andromalius", "Duke_Amduscias", "Grand_Marquis_Chomiel", "Duke_Dantalian" })
