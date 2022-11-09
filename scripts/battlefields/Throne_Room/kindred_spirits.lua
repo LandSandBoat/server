@@ -40,24 +40,7 @@ end
 
 content.groups =
 {
-    {
-        mobs = { "Count_Andromalius" },
-    },
-    {
-        mobs = { "Duke_Amduscias" },
-    },
-    {
-        mobs = { "Grand_Marquis_Chomiel" },
-    },
-    {
-        mobs = { "Duke_Dantalian" },
-    },
-    {
-        mobs = { "Demons_Avatar" },
-    },
-    {
-        mobs = { "Demons_Elemental" },
-    },
+    { mobs = { "Demons_Elemental" } },
 }
 
 content:addEssentialMobs({ "Count_Andromalius", "Duke_Amduscias", "Grand_Marquis_Chomiel", "Duke_Dantalian" })

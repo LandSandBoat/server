@@ -22,25 +22,6 @@ local content = Battlefield:new({
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
     grantXP          = 2500,
 })
-content.groups =
-{
-    {
-        mobs = { "Bearclaw_Rabbit" },
-
-        mobMods =
-        {
-            [xi.mobMod.SIGHT_RANGE] = 20,
-        },
-    },
-    {
-        mobs = { "Bearclaw_Leveret" },
-
-        mobMods =
-        {
-            [xi.mobMod.SIGHT_RANGE] = 30,
-        },
-    },
-}
 
 content:addEssentialMobs({ "Bearclaw_Rabbit", "Bearclaw_Leveret" })
 content.loot =

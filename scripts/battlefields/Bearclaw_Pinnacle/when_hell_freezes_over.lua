@@ -22,12 +22,6 @@ local content = Battlefield:new({
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
     grantXP          = 3000,
 })
-content.groups =
-{
-    {
-        mobs = { "Snow_Devil" },
-    },
-}
 
 content:addEssentialMobs({ "Snow_Devil" })
 content.loot =
