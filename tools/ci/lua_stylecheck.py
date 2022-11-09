@@ -167,6 +167,7 @@ def check_multiline_condition_format(line):
 # Parentheses must have and|or in conditions
 # Only 1 space before and after comparators
 # No empty in-line comments
+# Newline required after End if in the same column
 
 def run_style_check():
     global counter
@@ -225,11 +226,11 @@ def run_style_check():
                         print("")
                         errcount += 1
 
-                    #if len(re.findall("and|or", condition_str)) > 0 and len(condition_str) > 40:
-                    #    print(f"Multiline conditional format required: {filename}:{counter}")
-                    #    print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                    #    print("")
-                    #    errcount += 1
+                    if len(re.findall(" and | or ", condition_str)) > 0 and len(condition_str) > 72:
+                        print(f"Multiline conditional format required: {filename}:{counter}")
+                        print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                        print("")
+                        errcount += 1
 
                     if len(re.findall("== true|== false|~= true|~= false", condition_str)) > 0:
                         print(f"Boolean with explicit value check: {filename}:{counter}")
