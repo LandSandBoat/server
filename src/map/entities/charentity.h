@@ -170,13 +170,15 @@ struct teleport_t
 
 struct PetInfo_t
 {
-    bool     respawnPet; // used for spawning pet on zone
-    uint8    petID;      // id as in wyvern(48) , carbuncle(8) ect..
-    PET_TYPE petType;    // type of pet being transfered
-    uint8    petLevel;   // level the pet was spawned with
-    int16    petHP;      // pets hp
-    int16    petMP;
-    float    petTP; // pets tp
+    bool     respawnPet;   // used for spawning pet on zone
+    int32    jugSpawnTime; // Keeps track of original spawn time in seconds since epoch
+    int32    jugDuration;  // Number of seconds a jug pet should last after its original spawn time
+    uint8    petID;        // id as in wyvern(48) , carbuncle(8) ect..
+    PET_TYPE petType;      // type of pet being transfered
+    uint8    petLevel;     // level the pet was spawned with
+    int16    petHP;        // pets hp
+    int16    petMP;        // pets mp
+    float    petTP;        // pets tp
 };
 
 struct AuctionHistory_t

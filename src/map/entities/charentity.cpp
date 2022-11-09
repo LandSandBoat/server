@@ -433,11 +433,13 @@ void CCharEntity::setPetZoningInfo()
         case PET_TYPE::AVATAR:
         case PET_TYPE::AUTOMATON:
         case PET_TYPE::WYVERN:
-            petZoningInfo.petLevel = PPetEntity->getSpawnLevel();
-            petZoningInfo.petHP    = PPet->health.hp;
-            petZoningInfo.petTP    = PPet->health.tp;
-            petZoningInfo.petMP    = PPet->health.mp;
-            petZoningInfo.petType  = PPetEntity->getPetType();
+            petZoningInfo.petLevel     = PPetEntity->getSpawnLevel();
+            petZoningInfo.petHP        = PPet->health.hp;
+            petZoningInfo.petTP        = PPet->health.tp;
+            petZoningInfo.petMP        = PPet->health.mp;
+            petZoningInfo.petType      = PPetEntity->getPetType();
+            petZoningInfo.jugSpawnTime = ((CPetEntity*)PPet)->getJugSpawnTime();
+            petZoningInfo.jugDuration  = ((CPetEntity*)PPet)->getJugDuration();
             break;
         default:
             break;
@@ -449,12 +451,14 @@ void CCharEntity::setPetZoningInfo()
 void CCharEntity::resetPetZoningInfo()
 {
     // reset the petZoning info
-    petZoningInfo.petLevel   = 0;
-    petZoningInfo.petHP      = 0;
-    petZoningInfo.petTP      = 0;
-    petZoningInfo.petMP      = 0;
-    petZoningInfo.respawnPet = false;
-    petZoningInfo.petType    = PET_TYPE::AVATAR;
+    petZoningInfo.petLevel     = 0;
+    petZoningInfo.petHP        = 0;
+    petZoningInfo.petTP        = 0;
+    petZoningInfo.petMP        = 0;
+    petZoningInfo.respawnPet   = false;
+    petZoningInfo.petType      = PET_TYPE::AVATAR;
+    petZoningInfo.jugSpawnTime = 0;
+    petZoningInfo.jugDuration  = 0;
 }
 /************************************************************************
  *
