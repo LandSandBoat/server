@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -38,7 +38,10 @@ Watchdog::~Watchdog()
 
         m_running = false;
         m_stopCondition.notify_all();
+    }
 
+    if (m_watchdog.joinable())
+    {
         m_watchdog.join();
     }
 }
