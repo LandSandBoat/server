@@ -645,7 +645,6 @@ xi.items =
     SQUARE_OF_ELTORO_LEATHER        = 1767,
     RHEIYOH_LEATHER                 = 1768,
     DRAGON_BONE                     = 1771,
-    CLOUD_EVOKER                    = 1842,
     POT_OF_VIRIDIAN_URUSHI          = 1763,
     SQUARE_OF_KEJUSU_SATIN          = 1764,
     SQUARE_OF_GALATEIA              = 1769,
