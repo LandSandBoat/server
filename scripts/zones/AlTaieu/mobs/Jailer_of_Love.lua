@@ -123,6 +123,7 @@ end
 entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)
+    mob:SetMagicCastingEnabled(true)
     mob:setAnimationSub(2)
     mob:setLocalVar("elementAbsorb", os.time() + 120)
     mob:setLocalVar("pop_pets", os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
@@ -132,6 +133,8 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
+    mob:setAnimationSub(2)
+
     -- reduce regen after nine Xzomits and Hpemdes (total of both) groups are killed
     if
         mob:getLocalVar("JoL_Regen_Reduction") == 0 and
@@ -148,7 +151,7 @@ entity.onMobFight = function(mob, target)
         local abilities = { 307, 404, 603, 604, 624, 625, 626, 627 }
         local previousAbsorb = mob:getLocalVar("currentAbsorb")
         mob:setLocalVar("currentAbsorb", math.random(459, 466))
-        mob:setLocalVar("elementAbsorb", os.time() + 120)
+        mob:setLocalVar("elementAbsorb", os.time() + 60)
         mob:setLocalVar("twohour_tp", mob:getTP())
         mob:useMobAbility(abilities[math.random(#abilities)])
         mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])

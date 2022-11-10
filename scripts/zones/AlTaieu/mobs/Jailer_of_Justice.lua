@@ -53,9 +53,9 @@ entity.onMobFight = function(mob, target)
                     not GetMobByID(xzomit):isSpawned() and
                     mob:canUseAbilities() == true
                 then
-                    spawnXzomit(mob, xzomit)
                     mob:setLocalVar("lastPetPop", os.time())
                     alreadyPopped = true
+                    spawnXzomit(mob, xzomit)
                 end
             end
         end
