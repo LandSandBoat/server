@@ -368,7 +368,7 @@ end
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield.
 --                   Needs to be in the format of { itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }. (optional)
---  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
+--  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry unless 'keep = true' (optional)
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
 --  - lossEventParams: Parameters given to the loss event (32002). Defaults to none. (optional)
@@ -909,12 +909,16 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
             if type(item) == 'table' then
                 for _, subitem in ipairs(item) do
                     if player:hasKeyItem(subitem) then
-                        player:delKeyItem(subitem)
+                        if not self.requiredKeyItems.keep then
+                            player:delKeyItem(subitem)
+                        end
                         table.insert(items, subitem)
                     end
                 end
             else
-                player:delKeyItem(item)
+                if not self.requiredKeyItems.keep then
+                    player:delKeyItem(item)
+                end
                 table.insert(items, item)
             end
         end
