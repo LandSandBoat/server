@@ -870,6 +870,14 @@ xi.effect =
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    FIRE_EEM_MOD             = 900,
+    ICE_EEM_MOD              = 901,
+    WIND_EEM_MOD             = 902,
+    EARTH_EEM_MOD            = 903,
+    THUNDER_EEM_MOD          = 904,
+    WATER_EEM_MOD            = 905,
+    LIGHT_EEM_MOD            = 906,
+    DARK_EEM_MOD             = 907,
     -- PLACEHOLDER           = 806, -- Description
     -- 806-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
