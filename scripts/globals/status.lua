@@ -3002,8 +3002,10 @@ xi.mount =
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
     BYAKKO         = 33,
+    NOBLE_CHOCOBO  = 34, -- NOTE: This is currently blank, probably needs additional packets sent
+    IXION          = 35,
     --
-    MOUNT_MAX      = 34,
+    MOUNT_MAX      = 36,
 }
 
 -----------------------------------
