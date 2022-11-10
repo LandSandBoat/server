@@ -3,7 +3,7 @@
 --  Mob: Eft
 -- Note: PH for Intulo
 -----------------------------------
-require("scripts/globals/mobs")
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 

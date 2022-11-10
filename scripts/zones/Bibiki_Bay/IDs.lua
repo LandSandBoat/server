@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Bibiki_Bay
 -----------------------------------
-require("scripts/globals/zone")
+require('scripts/globals/zone')
 -----------------------------------
 
 zones = zones or {}

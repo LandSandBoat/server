@@ -3,7 +3,7 @@
 --  Mob: Jagil
 -- Note: PH for Serra
 -----------------------------------
-require("scripts/globals/mobs")
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 
