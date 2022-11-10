@@ -152,18 +152,6 @@ local battlefields =
     --  { 9, 1307,    0 },   -- Central 4th Floor II
     },
 
-    [xi.zone.APOLLYON] =
-    {
-        { 0, 1291,    0 },   -- SW Apollyon
-        { 1, 1290,    0 },   -- NW Apollyon
-        { 2, 1293,    0 },   -- SE Apollyon
-        { 3, 1292,    0 },   -- NE Apollyon
-    --  { 4, 1296,   -2 },   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-    --  { 5, 1294, 2127 },   -- CS Apollyon
-    --  { 6, 1295,    0 },   -- CS Apollyon II
-    --  { 7, 1297,    0 },   -- Central Apollyon II
-    },
-
     [xi.zone.ARRAPAGO_REEF] =
     {
     --  { 0,    ?,    0 },   -- Lamia Reprisal
@@ -1889,42 +1877,6 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
         switch (battlefieldId): caseof
         {
-            [1290] = function() -- NW_Apollyon
-                area = 2
-            end,
-
-            [1291] = function() -- SW_Apollyon
-                area = 1
-            end,
-
-            [1292] = function() -- NE_Apollyon
-                area = 4
-            end,
-
-            [1293] = function() -- SE_Apollyon
-                area = 3
-            end,
-
-            [1294] = function() -- CS_Apollyon
-                area = 6
-            end,
-
-            [1296] = function() -- Central_Apollyon
-                area = 5
-            end,
-
-            [1298] = function() -- Temenos_Western_Tower
-                area = 3
-            end,
-
-            [1299] = function() -- Temenos_Northern_Tower
-                area = 1
-            end,
-
-            [1300] = function() -- Temenos_Eastern_Tower
-                area = 2
-            end,
-
             [1301] = function() -- Central_Temenos_Basement
                 area = 8
             end,

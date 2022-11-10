@@ -27,40 +27,6 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
     local ID = zones[xi.zone.TEMENOS]
     switch (bfid): caseof
     {
-        -- Temenos: Western Tower
-        [1298] = function()
-            for i = 1, #ID.npc.TEMENOS_W_CRATE - 1 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            GetNPCByID(ID.npc.TEMENOS_W_CRATE[7]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- Temenos: Northern Tower
-        [1299] = function()
-            for i = 1, #ID.npc.TEMENOS_N_CRATE-1 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.TEMENOS_N_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            GetNPCByID(ID.npc.TEMENOS_N_CRATE[7]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- Temenos: Eastern Tower
-        [1300] = function()
-            for i = 1, #ID.npc.TEMENOS_E_CRATE-1 do
-                for j = 0, 3 do
-                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]):setStatus(xi.status.DISAPPEAR)
-            GetNPCByID(ID.npc.TEMENOS_E_CRATE[7] + 1):setStatus(xi.status.DISAPPEAR)
-        end,
-
         -- Central Temenos: Basement
         [1301] = function()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[5]):setStatus(xi.status.DISAPPEAR)
