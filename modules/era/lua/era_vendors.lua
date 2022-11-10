@@ -156,47 +156,267 @@ xi.eraShops.Nogga =
     17313, 1083, 3, -- Grenade
 }
 
---Kazham
-xi.eraShops.Toji_Mumosulah =
+
+-- Sandoria --
+-- Northern Sandy
+xi.eraShops.Arlenne =
 {
-    112,    456, -- Yellow Jar
-    13199,   95, -- Blood Stone
-    13076, 3510, -- Fang Necklace
-    13321, 1667, -- Bone Earring
-    17351, 4747, -- Gemshorn
-    16993,   69, -- Peeled Crayfish
-    16998,   36, -- Insect Paste
-    17876,  165, -- Fish Broth
-    17880,  695, -- Seedbed Soil
-    1021,   450, -- Hatchet
-    4987,   328, -- Scroll of Army's Paeon II
-    4988,  3312, -- Scroll of Army's Paeon III
-    4964, 10549, -- Scroll of Monomi: Ichi
+    17051,  1409, 1, -- Yew Wand
+    17090,  3245, 1, -- Elm Staff
+    17097, 16416, 1, -- Elm Pole
+    16835, 15876, 1, -- Spear
+    16845, 16578, 1, -- Lance
+    16770, 11286, 1, -- Zaghnal
+    17050,   333, 2, -- Willow Wand
+    17089,   571, 2, -- Holly Staff
+    17096,  4568, 2, -- Holly Pole
+    16834,  4680, 2, -- Brass Spear
+    16769,  2542, 2, -- Brass Zaghnal
+    17049,    46, 3, -- Maple Wand
+    17088,    57, 3, -- Ash Staff
+    16833,   792, 3, -- Brass Baghnakhs
+    16768,   309, 3, -- Bronze Zaghnal
 }
 
---Lower Jeuno
-xi.eraShops.Amalasanda =
+xi.eraShops.Tavourine =
 {
-    704,     36, -- Bamboo Stick
-    829,  35070, -- Silk Cloth
-    626,     52, -- Black Pepper
-    1240,  2000, -- Koma
-    657,   8000, -- Tama-Hagane
-    1415, 20000, -- Urushi
-    4928,  1700, -- Katon: Ichi
-    4934,  1700, -- Huton: Ichi
-    4937,  1700, -- Doton: Ichi
-    4943,  1700, -- Suiton: Ni
-    1471,   190, -- Sticky Rice
-    1554,   140, -- Turmeric
-    1555,   317, -- Coriander
-    1590,   700, -- Holy Basil
-    1475,   244, -- Curry Powder
-    5164,  2595, -- Ground Wasabi
-    1652,   492, -- Rice Vinegar
-    1161,    70, -- Uchitake
-    1170,    70, -- Makibishi
-    1176,    70, -- Mizu-Deppo
+    16584, 37800, 1,    -- Mythril Claymore
+    16466,  2182, 1,    -- Knife
+    17060,  2386, 1,    -- Rod
+    16640,   284, 2,    -- Bronze Axe
+    16465,   147, 2,    -- Bronze Knife
+    17081,   621, 2,    -- Brass Rod
+    16583,  2448, 2,    -- Claymore
+    17035,  4363, 2,    -- Mace
+    17081,   627, 3,    -- Brass Rod
+    17034,   169, 3,    -- Bronze Mace
+}
+
+xi.eraShops.Pirvidiauce =
+{
+    12986, 9180, 1, -- Chestnut Sabbots
+    4128,  4445, 1, -- Ether
+    4112,   837, 1, -- Potion
+    17336,    6, 2, -- Crossbow bolt
+    4151,   720, 2, -- Echo Drops
+    12985, 1462, 2, -- Holly Clogs
+    4148,   284, 3, -- Antidote
+    12984,  111, 3, -- Ash Clogs
+    219,    900, 3, -- Ceramic Flowerpot
+    4150,  2335, 3, -- Eye Drops
+    1774,  1984, 3, -- Red Gravel
+    17318,    3, 3, -- Wooden Arrow
+}
+
+xi.eraShops.Coullave =
+{
+    4128,  4445, 1, -- Ether
+    17313, 1107, 1, -- Grenade
+    12456,  552, 1, -- Hachimaki
+    12584,  833, 1, -- Kenpogi
+    12968,  424, 1, -- Kyahan
+    4112,   837, 1, -- Potion
+    12712,  458, 1, -- Tekko
+    12840,  666, 1, -- Sitabaki
+    704,     96, 2, -- Bamboo Stick
+    4151,   736, 2, -- Echo Drops
+    4148,   290, 3, -- Antidote
+    4150,  2387, 3, -- Eye Drops
+    13469, 1150, 3, -- Leather Ring
+}
+
+-- Southern Sandoria
+xi.eraShops.Ashene =
+{
+    16455,  4309, 1, -- Baselard
+    16532, 16934, 1, -- Gladius
+    16545, 21067, 1, -- Broadsword
+    16576, 35769, 1, -- Hunting Sword
+    16524, 13406, 1, -- Fleuret
+    16450,  1827, 2, -- Dagger
+    16536,  7128, 2, -- Iron Sword
+    16566,  8294, 2, -- Longsword
+    16385,   129, 3, -- Cesti
+    16448,   140, 3, -- Bronze Dagger
+    16449,   837, 3, -- Brass Dagger
+    16531,  3523, 3, -- Brass Xiphos
+    16535,   241, 3, -- Bronze Sword
+    16565,  1674, 3, -- Spatha
+}
+
+xi.eraShops.Carautia =
+{
+    12808, 11340, 1, -- Chain Hose
+    12936,  6966, 1, -- Greaves
+    12306, 10281, 1, -- Kite Shield
+    12292,  4482, 2, -- Mahogany Shield
+    12826, 16552, 2, -- Studded Trousers
+    12954, 10054, 2, -- Studded Boots
+    12290,   544, 3, -- Maple Shield
+    12832,   187, 3, -- Bronze Subligar
+    12833,  1800, 3, -- Brass Subligar
+    12824,   482, 3, -- Leather Trousers
+    12960,   115, 3, -- Bronze Leggings
+    12961,  1116, 3, -- Brass Leggings
+    12952,   302, 3, -- Leather Highboots
+}
+
+xi.eraShops.Ferdoulemiont =
+{
+    845,   1125, 1, -- Black Chocobo Feather
+    17307,    9, 2, -- Dart
+    17862,  680, 3, -- Bug Broth
+    17866,  680, 3, -- Carrion Broth
+    17860,   81, 3, -- Carrot Broth
+    17864,  124, 3, -- Herbal Broth
+    840,      7, 3, -- Chocobo Feather
+    4545,    61, 3, -- Gysahl Greens
+    17016,   10, 3, -- Pet Food Alpha Biscuit
+    17017,   81, 3, -- Pet Food Beta Biscuit
+    5073, 49680, 3, -- Scroll of Chocobo Mazurka
+    4997,    16, 3, -- Scroll of Knight's Minne
+    4998,   864, 3, -- Scroll of Knight's Minne II
+    4999,  5148, 3, -- Scroll of Knight's Minne III
+    2343,  1984, 3, -- La Theine Millet
+}
+
+xi.eraShops.Benaige =
+{
+    628,   234, 1, -- Cinnamon
+    629,    43, 1, -- Millioncorn
+    622,    43, 2, -- Dried Marjoram
+    610,    54, 2, -- San d'Orian Flour
+    1840, 1800, 2, -- Semolina
+    627,    36, 2, -- Maple Sugar
+    621,    25, 3, -- Crying Mustard
+    611,    36, 3, -- Rye Flour
+    936,    14, 3, -- Rock Salt
+    4509,   10, 3, -- Distilled Water
+    5234,  198, 3, -- Cibol
+}
+
+xi.eraShops.Ostalie =
+{
+    4128,  4445, 1,    -- Ether
+    4112,   837, 1,    -- Potion
+    4151,   736, 2,    -- Echo Drops
+    4148,   290, 3,    -- Antidote
+    12472,  144, 3,    -- Circlet
+    12728,  118, 3,    -- Cuffs
+    4150,  2387, 3,    -- Eye Drops
+    1021,   450, 3,    -- Hatchet
+    13192,  382, 3,    -- Leather Belt
+    13193, 2430, 3,    -- Lizard Belt
+    605,    180, 3,    -- Pickaxe
+    12600,  216, 3,    -- Robe
+    12856,  172, 3,    -- Slops
+}
+
+-- Windurst
+xi.eraShops.HohbibaMubiba =
+{
+    17051,  1440, 1, -- Yew Wand
+    17090,  3642, 1, -- Elm Staff
+    17097, 18422, 1, -- Elm Pole
+    17059,    91, 1, -- Bronze Rod
+    17050,   340, 2, -- Willow Wand
+    17026,  4945, 2, -- Bone Cudgel
+    17089,   584, 2, -- Holly Staff
+    17096,  4669, 2, -- Holly Pole
+    17049,    47, 3, -- Maple Wand
+    17024,    66, 3, -- Ash Club
+    17025,  1600, 3, -- Chestnut Club
+    17088,    58, 3, -- Ash Staff
+    17095,   386, 3, -- Ash Pole
+    16448,   140, 3, -- Bronze Dagger
+}
+
+xi.eraShops.TanikoManiko =
+{
+    16769, 2542, 1, -- Brass Zaghnal
+    17154, 7999, 1, -- Wrapped Bow
+    17323,  141, 1, -- Ice Arrow
+    17324,  141, 1, -- Lighning Arrow
+    16405,  104, 2, -- Cat Baghnakhs
+    16385,  129, 2, -- Cesti
+    16649, 5864, 2, -- Bone Pick
+    17153,  493, 2, -- Self Bow
+    17318,    3, 2, -- Wooden Arrow
+    17308,   55, 2, -- Hawkeye
+    17280, 1610, 2, -- Boomerang
+    16642, 4198, 3, -- Bone Axe
+    16768,  309, 3, -- Bronze Zaghnal
+    16832,   97, 3, -- Harpoon
+    17152,   40, 3, -- Bone Axe
+    17319, 1610, 3, -- Bone Arrow
+}
+
+xi.eraShops.GurunaMaguruna =
+{
+    13090,  4714, 1, -- Beetle Gorget
+    12601,  2776, 1, -- Linen Robe
+    12729,  1570, 1, -- Linen Cuffs
+    12608,  1260, 2, -- Tunic
+    12593, 12355, 2, -- Cotton Doublet
+    12696,   324, 2, -- Leather Gloves
+    12736,   589, 2, -- Mitts
+    12721,  6696, 2, -- Cotton Gloves
+    13085,   972, 3, -- Hemp Gorget
+    12592,  2470, 3, -- Doublet
+    12600,   216, 3, -- Robe
+    12568,   604, 3, -- Leather Vest
+    12720,  1363, 3, -- Gloves
+    12728,   118, 3, -- Cuffs
+}
+
+xi.eraShops.Kumama =
+{
+    12857, 2268, 1, -- Linen Slops
+    12985, 1462, 1, -- Holly Clogs
+    12292, 4481, 1, -- Mahogony Shield
+    12824,  482, 2, -- Leather Trousers
+    12849, 9936, 2, -- Cotton Brais
+    12952,  309, 2, -- Leather Highboots
+    12992,  544, 2, -- Solea
+    12977, 6633, 2, -- Cotton Gaiters
+    12290,  556, 2, -- Maple Shield
+    12848, 1899, 3, -- Brais
+    12856,  172, 3, -- Slops
+    12976, 1269, 3, -- Gaiters
+    12984,  111, 3, -- Ash Clogs
+    12289,  110, 3, -- Lauan Shield
+}
+
+-- Windurst Woods
+xi.eraShops.WijeTiren =
+{
+    4148,   290,       --Antidote
+    4509,    10,       --Distilled Water
+    4151,   728,       --Echo Drops
+    4128,  4445,       --Ether
+    4150,  2387,       --Eye Drops
+    4112,   837,       --Potion
+    5014,    98,       --Scroll of Herb Pastoral
+}
+
+-- Lower Jueno
+xi.eraShops.Yoskolo =
+{
+    4509,    10, -- Distilled Water
+    4422,   184, -- Orange Juice
+    4423,   276, -- Apple Juice
+    4424,  1012, -- Melon Juice
+    4441,   855, -- Grape Juice
+    4442,   368, -- Pineapple Juice
+    4556,  5544, -- Icecap Rolanberry
+    5046,  6380, -- Scroll of Fire Carol
+    5047,  7440, -- Scroll of Ice Carol
+    5048,  5940, -- Scroll of Wind Carol
+    5049,  4600, -- Scroll of Earth Carol
+    5050,  7920, -- Scroll of Lightning Carol
+    5051,  5000, -- Scroll of Water Carol
+    5052,  4200, -- Scroll of Light Carol
+    5053,  8400, -- Scroll of Dark Carol
 }
 
 xi.eraShops.Creepstix =
@@ -277,6 +497,91 @@ xi.eraShops.Taza =
     4774, 45930, -- Scroll of Thunder III
 }
 
+-- Upper Jeuno
+xi.eraShops.Coumuna =
+{
+    16705,  4550, -- Greataxe
+    16518, 31000, -- Mythril Degen
+    16460, 12096, -- Kris
+    16467, 14560, -- Mythril Knife
+    16399, 15488, -- Katars
+    16589, 13962, -- Two-Handed Sword
+    16412, 29760, -- Mythril Claws
+    16567, 85250, -- Knight's Sword
+}
+
+xi.eraShops.Areebah =
+{
+    636,  119, -- Chamomile
+    951,  110, -- Wijnruit
+    948,   60, -- Carnation
+    941,   80, -- Red Rose
+    949,   96, -- Rain Lily
+    956,  120, -- Lilac
+    957,  120, -- Amaryllis
+    958,  120, -- Marguerite
+}
+
+--Kazham
+xi.eraShops.TojiMumosulah =
+{
+    112,    456, -- Yellow Jar
+    13199,   95, -- Blood Stone
+    13076, 3510, -- Fang Necklace
+    13321, 1667, -- Bone Earring
+    17351, 4747, -- Gemshorn
+    16993,   69, -- Peeled Crayfish
+    16998,   36, -- Insect Paste
+    17876,  165, -- Fish Broth
+    17880,  695, -- Seedbed Soil
+    1021,   450, -- Hatchet
+    4987,   328, -- Scroll of Army's Paeon II
+    4988,  3312, -- Scroll of Army's Paeon III
+}
+
+-- Rulude Gardens
+xi.eraShops.DabihJajalioh =
+{
+    957,     120, -- Amaryllis
+    948,      60, -- Carnation
+    636,     119, -- Chamomile
+    956,     120, -- Lilac
+    958,     120, -- Marguerite
+    949,      96, -- Rain Lily
+    941,      80, -- Red Rose
+    951,     110, -- Wijnruit
+}
+
+-- Mhaura
+xi.eraShops.PikiniMikini =
+{
+    4150, 2335,    -- Eye Drops
+    4148,  284,    -- Antidote
+    4151,  720,    -- Echo Drops
+    4112,  819,    -- Potion
+    4509,   10,    -- Distilled Water
+    917,  1821,    -- Parchment
+    17395,   9,    -- Lugworm
+    1021,  450,    -- Hatchet
+    4376,  108,    -- Meat Jerky
+    5299,  133,    -- Salsa
+}
+
+-- Selbina
+xi.eraShops.Dohdjuma =
+{
+    611,    36,    -- Rye Flour
+    5011,  233,    -- Scroll of Sheepfoe Mambo
+    4150, 2335,    -- Eye Drops
+    4148,  284,    -- Antidote
+    4509,   10,    -- Distilled Water
+    4112,  819,    -- Potion
+    17395,  10,    -- Lugworm
+    4378,   54,    -- Selbina Milk
+    4490,  432,    -- Pickled Herring
+    4559, 4485,    -- Herb Quus
+}
+
 --Nashmau
 xi.eraShops.Mamaroon =
 {
@@ -343,10 +648,10 @@ xi.eraShops.Brave_Ox =
     4720,  31850, -- Flash
     4750, 546000, -- Reraise III
     4638,  78260, -- Banish III
-    4701, 20092, -- Cura
-    4702, 62192, -- Sacrifice
-    4703, 64584, -- Esuna
-    4704, 30967, -- Auspice
+    -- 4701, 20092, -- Cura
+    -- 4702, 62192, -- Sacrifice
+    -- 4703, 64584, -- Esuna
+    -- 4704, 30967, -- Auspice
 }
 
 -- Tavnazian Safehold
@@ -377,7 +682,6 @@ xi.eraShops.OrezEbrez =
     12466, 20000,1, --Red Cap
     12458,  8972,1, --Soil Hachimaki
     12455,  7026,1, --Beetle Mask
-
     12472,   144,2, --Circlet
     12465,  8024,2, --Cotton Headgear
     12440,   396,2, --Leather Bandana
@@ -386,7 +690,6 @@ xi.eraShops.OrezEbrez =
     12457,  3272,2, --Cotton Hachimaki
     12454,  3520,2, --Bone Mask
     12474, 10924,2, --Wool Hat
-
     12464,  1742,3, --Headgear
     12456,   552,3, --Hachimaki
     12498,  1800,3, --Cotton Headband
@@ -415,9 +718,8 @@ local lookupTable =
     Tenshodo: {"tenshodo",Zone,NPCName,customShopTable,fameArea,DIALOG_NAME}
 --]]
 
--- TODO: Check if standard merchants are working with fame
 {
-    -- Bastok Markets
+    -- Bastok
     {"nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.nation.BASTOK, "MJOLL_SHOP_DIALOG", 1},
     {"nation", "Bastok_Markets", "Charging_Chocobo", xi.eraShops.Charging_Chocobo, xi.nation.BASTOK, "CHARGINGCHOCOBO_SHOP_DIALOG", 1},
     {"nation", "Bastok_Markets", "Zhikkom", xi.eraShops.Zhikkom, xi.nation.BASTOK, "ZHIKKOM_SHOP_DIALOG", 1},
@@ -425,44 +727,65 @@ local lookupTable =
     {"nation", "Bastok_Markets", "Ciqala", xi.eraShops.Ciqala, xi.nation.BASTOK, "CIQALA_SHOP_DIALOG", 1},
     {"nation", "Bastok_Markets", "Hortense", xi.eraShops.Hortense, xi.nation.BASTOK, "HORTENSE_SHOP_DIALOG", 1},
     {"nation", "Bastok_Markets", "Sororo", xi.eraShops.Sororo, xi.nation.BASTOK, "SORORO_SHOP_DIALOG", 1},
-    -- Port Bastok
     {"standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
     {"nation", "Port_Bastok", "Numa", xi.eraShops.Numa, xi.nation.BASTOK, "NUMA_SHOP_DIALOG", 1},
-    -- Kazham
-    {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.Toji_Mumosulah, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
-    -- Lower Jeuno
-    {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.eraShops.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"nation", "Metalworks", "Nogga", xi.eraShops.Nogga, xi.nation.BASTOK, "NOGGA_SHOP_DIALOG", 1},
+
+    -- Sandoria
+    {"nation", "Northern_San_dOria", "Arlenne", xi.eraShops.Arlenne, xi.nation.SANDORIA, "ARLENNE_SHOP_DIALOG", 1},
+    {"nation", "Northern_San_dOria", "Tavourine", xi.eraShops.Tavourine, xi.nation.SANDORIA, "TAVOURINE_SHOP_DIALOG", 1},
+    {"nation", "Northern_San_dOria", "Pirvidiauce", xi.eraShops.Pirvidiauce, xi.nation.SANDORIA, "PIRVIDIAUCE_SHOP_DIALOG", 1},
+    {"nation", "Port_San_dOria", "Coullave", xi.eraShops.Coullave, xi.nation.SANDORIA, "COULLAVE_SHOP_DIALOG", 1},
+    {"nation", "Southern_San_dOria", "Ashene", xi.eraShops.Ashene, xi.nation.SANDORIA, "ASHENE_SHOP_DIALOG", 1},
+    {"nation", "Southern_San_dOria", "Carautia", xi.eraShops.Carautia, xi.nation.SANDORIA, "CARAUTIA_SHOP_DIALOG", 1},
+    {"nation", "Southern_San_dOria", "Ferdoulemiont", xi.eraShops.Ferdoulemiont, xi.nation.SANDORIA, "FERDOULEMIONT_SHOP_DIALOG", 1},
+    {"nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "RAIMBROYS_SHOP_DIALOG" + 1, 1},
+    {"nation", "Southern_San_dOria", "Ostalie", xi.eraShops.Ostalie, xi.nation.SANDORIA, "OSTALIE_SHOP_DIALOG", 1},
+
+    -- Windurst
+    {"nation", "Port_Windurst", "Hohbiba-Mubiba", xi.eraShops.HohbibaMubiba, xi.nation.WINDURST, "HOHBIBAMUBIBA_SHOP_DIALOG", 1},
+    {"nation", "Port_Windurst", "Taniko-Maniko", xi.eraShops.TanikoManiko, xi.nation.WINDURST, "TANIKOMANIKO_SHOP_DIALOG", 1},
+    {"nation", "Port_Windurst", "Guruna-Maguruna", xi.eraShops.GurunaMaguruna, xi.nation.WINDURST, "GURUNAMAGURUNA_SHOP_DIALOG", 1},
+    {"nation", "Port_Windurst", "Kumama", xi.eraShops.Kumama, xi.nation.WINDURST, "KUMAMA_SHOP_DIALOG", 1},
+    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
+    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
+    {"standard", "Windurst_Woods", "Wije Tiren", xi.eraShops.WijeTiren, xi.quest.fame_area.WINDURST, "WIJETIREN_SHOP_DIALOG", 1},
+    {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
+
+    -- Jeuno
+    {"standard", "Lower_Jeuno", "Yoskolo", xi.eraShops.Yoskolo, xi.quest.fame_area.JEUNO, "YOSKOLO_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, NULL, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, NULL, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, NULL, "VIETTES_SHOP_DIALOG", 1},
+    {"standard", "Upper_Jeuno", "Coumuna", xi.eraShops.Coumuna, NULL, "VIETTES_SHOP_DIALOG", 1},
+    {"standard", "Upper_Jeuno", "Areebah", xi.eraShops.Areebah, xi.quest.fame_area.JEUNO, "MP_SHOP_DIALOG", 1},
+    {"standard", "RuLude_Gardens", "Dabih_Jajalioh", xi.eraShops.DabihJajalioh, xi.quest.fame_area.JEUNO, "DABIHJAJALIOH_SHOP_DIALOG", 1},
+
     -- Mhaura
-    {"none", "Mhaura", "Tya_Padolih", xi.settings.main.ENABLE_WOTG},
+    {"standard", "Mhaura", "Pikini_Mikini", xi.eraShops.PikiniMikini, xi.quest.fame_area.WINDURST, "PIKINIMIKINI_SHOP_DIALOG", 1},
+    -- Selbina
+    {"standard", "Selbina", "Dohdjuma", xi.eraShops.Dohdjuma, xi.quest.fame_area.SELBINA_RABAO, "DOHDJUMA_SHOP_DIALOG", 1},
+    -- Kazham
+    {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.TojiMumosulah, xi.quest.fame_area.WINDURST, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
+    -- Norg
+    {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
+
     -- Nashmau
     {"none", "Nashmau","Chichiroon"},
     {"nofame", "Nashmau", "Mamaroon", xi.eraShops.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
     {"nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
-    -- Norg
-    {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
     -- Port Jeuno
     {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, "DUTY_FREE_SHOP_DIALOG", 1},
     {"none", "Port_Jeuno", "Kindlix", 1},
     {"none", "Port_Jeuno", "Pyropox",1},
     -- Rabao
     {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, "BRAVEOX_SHOP_DIALOG", 1},
-    -- Selbina
-    {"none", "Selbina", "Falgima", xi.settings.main.ENABLE_WOTG},
 
     -- Tavnazian Safehold
     {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.eraShops.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG", 1},
-    -- Upper Jeuno
-    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, "VIETTES_SHOP_DIALOG", 1},
-    -- Windurst Waters
-    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
-    -- Windurst Woods
-    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
-    {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, "VALERIANO_SHOP_DIALOG", 1},
 }
 
 for _, shop in pairs(lookupTable) do
@@ -499,8 +822,8 @@ for _, shop in pairs(lookupTable) do
     then
         m:addOverride(onTrigger,
         function(player, npc)
-            player:showText(npc, ID.text[shop[5]])
-            xi.shop.general(player, shop[4])
+            player:showText(npc, ID.text[shop[6]])
+            xi.shop.general(player, shop[4], shop[5])
         end)
     elseif
         shop[1] == 'tenshodo' and

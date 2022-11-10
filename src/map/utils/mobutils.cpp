@@ -497,6 +497,12 @@ namespace mobutils
         PMob->stats.MND = fMND + mMND + sMND;
         PMob->stats.CHR = fCHR + mCHR + sCHR;
 
+        if (PMob->m_Family == 227)
+        {
+            uint8 skelebullshit = std::clamp<uint8>(0 + 2 * std::floor((mLvl-46) / 5),0,50);
+            PMob->stats.CHR = skelebullshit;
+        }
+
         auto statMultiplier = isNM ? settings::get<float>("map.NM_STAT_MULTIPLIER") : settings::get<float>("map.MOB_STAT_MULTIPLIER");
         PMob->stats.STR     = (uint16)(PMob->stats.STR * statMultiplier);
         PMob->stats.DEX     = (uint16)(PMob->stats.DEX * statMultiplier);
