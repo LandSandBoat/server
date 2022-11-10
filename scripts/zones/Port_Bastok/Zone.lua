@@ -31,7 +31,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setHomePoint()
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP then
             cs = 73
             player:setPos(-36.000, 7.000, -58.000, 194)
