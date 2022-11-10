@@ -11,16 +11,16 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- JAILER OF LOVE
-    if (
-        not GetMobByID(ID.mob.JAILER_OF_LOVE):isSpawned() and
+    if
+        (not GetMobByID(ID.mob.JAILER_OF_LOVE):isSpawned() and
         not GetMobByID(ID.mob.ABSOLUTE_VIRTUE):isSpawned() and
         trade:hasItemQty(1848, 1) and -- fourth_virtue
         trade:hasItemQty(1847, 1) and -- fifth_virtue
         trade:hasItemQty(1849, 1) and -- sixth_virtue
-        trade:getItemCount() == 3
-    ) then
+        trade:getItemCount() == 3 and
+        npcUtil.popFromQM(player, npc, { ID.mob.JAILER_OF_LOVE }, { claim = true }))
+    then
         player:tradeComplete()
-        SpawnMob(ID.mob.JAILER_OF_LOVE):updateClaim(player)
     end
 end
 

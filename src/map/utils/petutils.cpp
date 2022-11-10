@@ -2109,7 +2109,7 @@ namespace petutils
         memset(&PPet->m_TraitList, 0, sizeof(PPet->m_TraitList));
         AddTraits(PPet, traits::GetTraits(PPet->GetMJob()), PPet->GetMLevel());
 
-        if (PPet->PMaster->objtype == TYPE_PC && PPet->PMaster->GetMJob() == JOB_DRG)
+        if (PPet->PMaster && PPet->PMaster->objtype == TYPE_PC && PPet->PMaster->GetMJob() == JOB_DRG)
         {
             auto PChar = static_cast<CCharEntity*>(PPet->PMaster);
 

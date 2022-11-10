@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
         end
         mob:setAnimationSub(battleForm)
         mob:setLocalVar("changeTime", mob:getBattleTime())
-        if mob:getAnimationSub() == 0 then
+        if mob:setAnimationSub() == 0 then
             mob:SetMagicCastingEnabled(true) -- will only cast magic in ball form
         else
             mob:SetMagicCastingEnabled(false)

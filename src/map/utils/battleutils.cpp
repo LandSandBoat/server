@@ -1577,7 +1577,7 @@ namespace battleutils
 
                 if (PItem == nullptr || !PItem->isType(ITEM_WEAPON) || (PItem->getSkillType() != SKILL_THROWING))
                 {
-                    ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for. ");
+                    ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for.");
                 }
                 else
                 {
@@ -1629,7 +1629,7 @@ namespace battleutils
         else
         {
             minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * cRatio);
-            maxPdif = cRatio;
+            maxPdif = std::min(cRatio, 3.0f);
         }
 
         // return random number between the two
@@ -2882,49 +2882,17 @@ namespace battleutils
 
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded)
     {
-        uint16 attack = 1;
+        uint16 attack = PAttacker->ATT(slot);
 
+        // Sets slot to ranged if RNG/NIN and checks distance
         if (PAttacker->objtype == TYPE_MOB && (PAttacker->GetMJob() == JOB_RNG || PAttacker->GetMJob() == JOB_NIN))
         {
-            slot = SLOT_RANGED;
-        }
-
-        if (slot == SLOT_RANGED || slot == SLOT_AMMO)
-        {
-            if (PAttacker->objtype == TYPE_PC)
+            auto* PMob    = static_cast<CBaseEntity*>(PAttacker);
+            auto* PTarget = static_cast<CBaseEntity*>(PDefender);
+            if (distance(PMob->loc.p, PTarget->loc.p) > 4)
             {
-                CCharEntity* PChar = (CCharEntity*)PAttacker;
-                CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-                if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
-                {
-                    attack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
-                }
-                else
-                {
-                    PItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-                    if (PItem == nullptr || !PItem->isType(ITEM_WEAPON) || (PItem->getSkillType() != SKILL_THROWING))
-                    {
-                        ShowDebug("battleutils::GetRangedPDIF Cannot find a valid ranged weapon to calculate PDIF for.");
-                    }
-                    else
-                    {
-                        attack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
-                    }
-                }
+                return GetRangedDamageRatio(PAttacker, PDefender, isCritical, ignoredDef);
             }
-            else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
-            {
-                attack = PAttacker->RATT(SKILL_AUTOMATON_RANGED, distance(PAttacker->loc.p, PDefender->loc.p));
-            }
-            else
-            {
-                // assume mobs capped
-                attack = battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_RNG, PAttacker->GetMLevel());
-            }
-        }
-        else
-        {
-            attack = PAttacker->ATT(slot);
         }
 
         // Bonus attack currently only from footwork
@@ -2940,9 +2908,6 @@ namespace battleutils
             defense = 1;
         }
 
-        // Using 2013 model since it is the most up-to-date and tested version of the one used in 75 era
-        // https://www.bg-wiki.com/index.php?title=PDIF&oldid=268066
-        // Note that only player autoattacks use this function, weaponskill pDIF is calculated in scripts/global/weaponskills.lua
         // Using 2013 model since it is the most up-to-date and tested version of the one used in 75 era
         // https://www.bg-wiki.com/index.php?title=PDIF&oldid=268066
         // Note that only player autoattacks use this function, weaponskill pDIF is calculated in scripts/global/weaponskills.lua
@@ -3024,9 +2989,7 @@ namespace battleutils
         // Marksmanship : 2 : 3
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
-
-        // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-        // Monster pDIF = Avatar pDIF = Pet pDIF
+        // Mobs follow 1h pdif
 
         auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[slot]);
 
@@ -3043,7 +3006,7 @@ namespace battleutils
             // If null ignore the checks and fallback to 1H values
             if (targ_weapon)
             {
-                if (targ_weapon->isTwoHanded() || targ_weapon->isHandToHand())
+                if (targ_weapon->isTwoHanded())
                 {
                     maxRatio = 2.25f;
                 }
@@ -3061,9 +3024,47 @@ namespace battleutils
         // There is an additional step here but I am skipping it for now because we do not have the data in the database.
         // The Damage Limit+ trait adds 0.1 to the maxRatio per trait level so a level 80 DRK would get maxRatio += 0.5
 
-        if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
+        if (targ_weapon->isTwoHanded() && attackerType == TYPE_PC)
         {
-            // Upper limit for mobs
+            // Upper limit for 2h
+            if (wRatio < 0.5f)
+            {
+                upperLimit = 0.4f + 1.2f * wRatio;
+            }
+            else if (wRatio < 0.84f)
+            {
+                upperLimit = 1.0f;
+            }
+            else if (wRatio < 1.68f)
+            {
+                upperLimit = 1.25f * wRatio;
+            }
+            else if (wRatio < 2.01f)
+            {
+                upperLimit = 1.2f * wRatio;
+            }
+            else
+            {
+                upperLimit = std::min(wRatio, 3.0f); // Must cap at 3 before x1.0-x1.05 randomzation is applied
+            }
+
+            // Lower limit for 2h
+            if (wRatio < 1.25f)
+            {
+                lowerLimit = std::clamp((-0.5f + 1.2f * wRatio), 0.0f, 1.0f);
+            }
+            else if (wRatio <= 1.51f)
+            {
+                lowerLimit = 1.0f;
+            }
+            else
+            {
+                lowerLimit = -0.8f + 1.2f * wRatio;
+            }
+        }
+        else
+        {
+            // Upper limit for mobs, 1h, h2h and pets
             if (wRatio < 0.5f)
             {
                 upperLimit = 1 + (10.0f / 9.0f) * (wRatio - 0.5f);
@@ -3078,41 +3079,17 @@ namespace battleutils
             }
             else
             {
-                upperLimit = 3.0f;
+                if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
+                {
+                    upperLimit = std::min(wRatio, 4.0f); // Must cap at 4 before x1.0-x1.05 randomzation is applied
+                }
+                else
+                {
+                    upperLimit = std::min(wRatio, 3.0f); // Must cap at 3 before x1.0-x1.05 randomzation is applied
+                }
             }
-        }
-        else
-        {
-            // Upper limit for players
-            if (wRatio < 0.5f)
-            {
-                upperLimit = wRatio + 0.5f;
-            }
-            else if (wRatio < 0.7f)
-            {
-                upperLimit = 1.0f;
-            }
-            else if (wRatio < 1.2f)
-            {
-                upperLimit = wRatio + 0.3f;
-            }
-            else if (wRatio < 1.5)
-            {
-                upperLimit = wRatio * 1.25f;
-            }
-            else if (wRatio < 2.625f)
-            {
-                upperLimit = std::min(wRatio + 0.375f, maxRatio);
-            }
-            else
-            {
-                upperLimit = 3.0f;
-            }
-        }
 
-        if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
-        {
-            // Lower limit for mobs
+            // Lower limit for mobs, 1h, h2h and pets
             if (wRatio < 0.5f)
             {
                 lowerLimit = 1.0f / 6.0f;
@@ -3121,37 +3098,13 @@ namespace battleutils
             {
                 lowerLimit = 1 + (10.0f / 9.0f) * (wRatio - 1.25f);
             }
-            else if (wRatio < 1.50f)
+            else if (wRatio < 1.51f)
             {
                 lowerLimit = 1.0f;
             }
             else
             {
                 lowerLimit = 1 + (10.0f / 9.0f) * (wRatio - 1.5f);
-            }
-        }
-        else
-        {
-            // Lower limit for players
-            if (wRatio < 0.5f)
-            {
-                lowerLimit = 0.0f;
-            }
-            else if (wRatio < 1.25f)
-            {
-                lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (448.0f / 1024.0f);
-            }
-            else if (wRatio < 1.51f)
-            {
-                lowerLimit = 1.0f;
-            }
-            else if (wRatio < 2.44f)
-            {
-                lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (755.0f / 1024.0f);
-            }
-            else
-            {
-                lowerLimit = std::min(wRatio - 0.375f, maxRatio);
             }
         }
 
