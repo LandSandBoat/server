@@ -1968,6 +1968,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
                 -- and id:getStatus() == xi.battlefield.status.OPEN -- TODO: Uncomment only once that can-of-worms is dealt with.
             then
                 player:enterBattlefield()
+                player:setTP(0)
             end
 
             -- Handle record
