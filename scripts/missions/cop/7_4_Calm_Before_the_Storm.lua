@@ -62,11 +62,12 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not getMissionStatusBit(player, 2) then
+                        local dalham = player:getZone():queryEntitiesByName('Dalham')[1]
                         if mission:getLocalVar(player, 'nmBibiki') == 1 then
                             return mission:progressEvent(41)
-                        elseif not GetMobByID(bibikiBayID.mob.DALHAM):isSpawned() then
-                            SpawnMob(bibikiBayID.mob.DALHAM):updateClaim(player)
-
+                        elseif not dalham:isSpawned() then
+                            dalham:spawn()
+                            dalham:updateClaim(player)
                             return mission:messageSpecial(bibikiBayID.text.YOU_ARE_NOT_ALONE)
                         end
                     end
