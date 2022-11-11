@@ -26,13 +26,13 @@ entity.onTrigger = function(player, npc)
         player:startEvent(681) -- Start quest "Healing the Land"
     elseif healingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
         player:startEvent(682) -- During quest "Healing the Land"
-    elseif healingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) == false then
+    elseif healingTheLand == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
         player:startEvent(683) -- Finish quest "Healing the Land"
     elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and player:needToZone() then
         player:startEvent(684) -- New standard dialog after "Healing the Land"
-    elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and player:needToZone() == false then
+    elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and not player:needToZone() then
         player:startEvent(685) -- Start quest "Sorcery of the North"
-    elseif sorceryOfTheNorth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) == false then
+    elseif sorceryOfTheNorth == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) then
         player:startEvent(686) -- During quest "Sorcery of the North"
     elseif sorceryOfTheNorth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) then
         player:startEvent(687) -- Finish quest "Sorcery of the North"

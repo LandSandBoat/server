@@ -21,12 +21,11 @@ entity.onTrigger = function(player, npc)
     local ayameAndKaede = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
 
     if ayameAndKaede == QUEST_ACCEPTED then
-
         local questStatus = player:getCharVar("AyameAndKaede_Event")
 
-        if (questStatus == 1 or questStatus == 2) and player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) == false then
+        if (questStatus == 1 or questStatus == 2) and not player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) then
             player:startEvent(242)
-        elseif questStatus == 2 and player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) == true then
+        elseif questStatus == 2 and player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) then
             player:startEvent(245)
         elseif questStatus == 3 then
             player:startEvent(243)

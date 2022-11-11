@@ -21,6 +21,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7450, -- Tallying conquest results...
+        PORTAL_WONT_OPEN_ON_THIS_SIDE = 7623, -- The portal won't open from this side.
         NO_NEED_INVESTIGATE           = 7629, -- There is no need to investigate further.
         PORTAL_SEALED                 = 7658, -- The portal is firmly sealed by a mysterious energy.
         UNKNOWN_PRESENCE              = 7766, -- You sense some unknown presence...
@@ -55,6 +56,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         JAILER_OF_FAITH     = 16921021,
         IXAERN_DRG          = 16921022,
         IXZDEI_BASE         = 16921011,
+        QNZDEI_OFFSET       = 16920577,
     },
 
     npc =
@@ -88,6 +90,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         QM_JAILER_OF_FORTITUDE     = 16921027,
         QM_IXAERN_DRK              = 16921028,
         QM_JAILER_OF_FAITH         = 16921029,
+        QNZDEI_DOOR_OFFSET         = 16921068,
     },
 }
 

@@ -15,7 +15,7 @@ end
 
 itemObject.onItemUse = function(target)
     if target:hasStatusEffect(xi.effect.INVISIBLE) then
-       target:delStatusEffect(xi.effect.INVISIBLE)
+        target:delStatusEffect(xi.effect.INVISIBLE)
     end
 
     target:addStatusEffect(xi.effect.INVISIBLE, 1, 10, math.floor(600 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER))

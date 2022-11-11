@@ -12,7 +12,7 @@ end
 
 entity.onMobFight = function(mob, target)
     local hpTrigger = mob:getLocalVar("hpTrigger")
-    if (mob:getLocalVar("SoulVoice") == 0 and mob:getHPP() <= hpTrigger) then
+    if mob:getLocalVar("SoulVoice") == 0 and mob:getHPP() <= hpTrigger then
         mob:setLocalVar("SoulVoice", 1)
         mob:useMobAbility(696) -- Soul Voice
     end
@@ -31,7 +31,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         [8] = 462,
         [9] = 466 -- Virelai (charm)
     }
-    if (mob:hasStatusEffect(xi.effect.SOUL_VOICE)) then
+    if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
         return spellList[math.random(1, 9)] -- Virelai possible.
     else
         return spellList[math.random(1, 8)] -- No Virelai!

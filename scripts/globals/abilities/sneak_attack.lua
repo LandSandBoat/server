@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-   xi.job_utils.thief.useSneakAttack(player, target, ability)
+    xi.job_utils.thief.useSneakAttack(player, target, ability)
 end
 
 return abilityObject

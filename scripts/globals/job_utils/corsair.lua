@@ -129,14 +129,15 @@ local function corsairSetup(caster, ability, action, effect, job)
     local roll = math.random(1, 6)
     caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
     caster:addStatusEffectEx(xi.effect.DOUBLE_UP_CHANCE,
-                             xi.effect.DOUBLE_UP_CHANCE,
-                             roll,
-                             0,
-                             45,
-                             ability:getID(),
-                             effect,
-                             job,
-                             true)
+        xi.effect.DOUBLE_UP_CHANCE,
+        roll,
+        0,
+        45,
+        ability:getID(),
+        effect,
+        job,
+        true
+    )
     caster:setLocalVar("corsairRollTotal", roll)
     action:speceffect(caster:getID(), roll)
 
@@ -177,7 +178,7 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
     end
 
-    if target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) == false then
+    if not target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) then
         -- no effect or otherwise prevented
         if caster:getID() == target:getID() then                  -- dead code? you can't roll if the same roll is already active. There is no known buff that would prevent a corsair roll.
             currentAbility:setMsg(xi.msg.basic.ROLL_MAIN_FAIL)    -- no effect for the COR rolling if they had the buff already

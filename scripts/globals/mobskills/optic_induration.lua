@@ -1,7 +1,7 @@
 -----------------------------------
 --  Optic Induration
 --
---  Description: Charges up a powerful, calcifying beam directed at targets in a fan-shaped area of effect. Additional effect: Petrification &amp enmity reset
+--  Description: Charges up a powerful, calcifying beam directed at targets in a fan-shaped area of effect. Additional effect: Petrification & enmity reset
 --  Type: Magical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
@@ -14,7 +14,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 2 or mob:getAnimationSub() == 3) then
+    if not mob:isNM() or mob:getAnimationSub() == 2 or mob:getAnimationSub() == 3 then
         return 1
     end
     return 0

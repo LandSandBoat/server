@@ -33,7 +33,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getHPP() <= 35 then
-       mob:setMod(xi.mod.STORETP, 250)
+        mob:setMod(xi.mod.STORETP, 250)
     end
 end
 

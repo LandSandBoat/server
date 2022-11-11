@@ -14,8 +14,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
-    if (target:getStatusEffect(xi.effect.SHOCK) ~= nil) then
+    if target:getStatusEffect(xi.effect.SHOCK) ~= nil then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
@@ -26,25 +25,25 @@ spellObject.onSpellCast = function(caster, target, spell)
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
-        if (resist <= 0.125) then
+        if resist <= 0.125 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            if (target:getStatusEffect(xi.effect.BURN) ~= nil) then
+            if target:getStatusEffect(xi.effect.BURN) ~= nil then
                 target:delStatusEffect(xi.effect.BURN)
             end
             local sINT = caster:getStat(xi.mod.INT)
             local DOT = getElementalDebuffDOT(sINT)
             local effect = target:getStatusEffect(xi.effect.DROWN)
             local noeffect = false
-            if (effect ~= nil) then
-                if (effect:getPower() >= DOT) then
+            if effect ~= nil then
+                if effect:getPower() >= DOT then
                     noeffect = true
                 end
             end
-            if (noeffect) then
+            if noeffect then
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
             else
-                if (effect ~= nil) then
+                if effect ~= nil then
                     target:delStatusEffect(xi.effect.DROWN)
                 end
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)

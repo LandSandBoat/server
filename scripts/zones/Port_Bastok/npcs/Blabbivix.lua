@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:sendGuild(60418, 11, 22, 3)) then
+    if player:sendGuild(60418, 11, 22, 3) then
         player:showText(npc, ID.text.BLABBIVIX_SHOP_DIALOG)
     end
 end

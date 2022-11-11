@@ -10,20 +10,20 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local hate = player:getCharVar("FOMOR_HATE")
 
-    if (hate < 8) then --hate lvl 1
+    if hate < 8 then --hate lvl 1
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-    elseif (hate < 12) then
+    elseif hate < 12 then
         player:messageSpecial(ID.text.START_GET_GOOSEBUMPS)
-    elseif (hate < 50) then
+    elseif hate < 50 then
         player:messageSpecial(ID.text.HEART_RACING)
-    elseif (hate >= 50) then
+    elseif hate >= 50 then
         player:messageSpecial(ID.text.LEAVE_QUICKLY_AS_POSSIBLE)
     end
 end
 
 entity.onTrade = function(player, npc, trade)
     -- fomor codex
-    if (trade:hasItemQty(1877, 1) and trade:getItemCount() == 1) then
+    if trade:hasItemQty(1877, 1) and trade:getItemCount() == 1 then
         local draftOffset = npc:getID() - ID.npc.STALE_DRAFT_OFFSET
         local nmId = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][1]
         local races = ID.mob.SWIFT_BELT_NMS[draftOffset + 1][2]
@@ -31,7 +31,7 @@ entity.onTrade = function(player, npc, trade)
         local race = player:getRace()
         local hate = player:getCharVar("FOMOR_HATE")
 
-        if (races[race] and not nm:isSpawned() and hate >= 50) then
+        if races[race] and not nm:isSpawned() and hate >= 50 then
             player:tradeComplete()
             player:setCharVar("FOMOR_HATE", 0)
             SpawnMob(nmId):updateClaim(player)

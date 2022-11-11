@@ -14,7 +14,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_ACCEPTED and
-        trade:hasItemQty(554, 1) == true and
+        trade:hasItemQty(554, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(166) -- Ending quest

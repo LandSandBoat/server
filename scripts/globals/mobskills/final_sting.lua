@@ -14,11 +14,11 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local param = skill:getParam()
-    if (param == 0) then
+    if param == 0 then
         param = 50
     end
 
-    if (mob:getHPP() <= param) then
+    if mob:getHPP() <= param then
         return 0
     end
 

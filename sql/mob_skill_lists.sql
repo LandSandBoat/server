@@ -1229,6 +1229,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1375);
 INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1376);
 -- INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1377);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1463);
+INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1464);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1465);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1466);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1467);
@@ -2441,7 +2442,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1533); -- pile_pitch
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1534); -- guided_missile
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1535); -- hyper_pulse
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536); -- target_analysis
-INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1537); -- discharger
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538); -- ion_efflux
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539); -- rear_lasers
 INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);

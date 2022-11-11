@@ -1853,6 +1853,10 @@ namespace battleutils
                     return blockRate;
                 }
             }
+            else // No block mobmod, so zero rate
+            {
+                return 0;
+            }
         }
         else
         {
@@ -2426,8 +2430,8 @@ namespace battleutils
             if (primary)
             // Calculate TP Return from WS
             {
-                standbyTp = ((int16)(((tpMultiplier * baseTp) + bonusTP) *
-                                     (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
+                standbyTp = bonusTP + ((int16)((tpMultiplier * baseTp) *
+                                               (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
             }
 
             // account for attacker's subtle blow which reduces the baseTP gain for the defender
@@ -4036,7 +4040,7 @@ namespace battleutils
         {
             case TYPE_PC:
             {
-                if (PDefender->animation == ANIMATION_SIT)
+                if (PDefender->animation == ANIMATION_SIT || (PDefender->animation >= ANIMATION_SITCHAIR_0 && PDefender->animation <= ANIMATION_SITCHAIR_10))
                 {
                     PDefender->animation = ANIMATION_NONE;
                     PDefender->updatemask |= UPDATE_HP;
@@ -4095,6 +4099,11 @@ namespace battleutils
             if (PPlayer->animation == ANIMATION_HEALING)
             {
                 PPlayer->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
+                PPlayer->updatemask |= UPDATE_HP;
+            }
+            else if (PPlayer->animation == ANIMATION_SIT || (PPlayer->animation >= ANIMATION_SITCHAIR_0 && PPlayer->animation <= ANIMATION_SITCHAIR_10))
+            {
+                PPlayer->animation = ANIMATION_NONE;
                 PPlayer->updatemask |= UPDATE_HP;
             }
         }
@@ -6266,6 +6275,14 @@ namespace battleutils
                 }
 
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
+                applyArts = false;
+            }
+            // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
+            // https://www.bg-wiki.com/ffxi/Abs._Burgeonet_%2B2
+            // https://www.bg-wiki.com/ffxi/Fallen%27s_Burgeonet
+            else if (PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+            {
+                cast      = (uint32)(cast * (1.0f + ((PEntity->getMod(Mod::BLACK_MAGIC_CAST) + PEntity->getMod(Mod::DARK_MAGIC_CAST)) / 100.0f)));
                 applyArts = false;
             }
             else if (applyArts)

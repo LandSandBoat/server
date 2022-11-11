@@ -12,10 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT) == QUEST_ACCEPTED then
-        local count = trade:getItemCount()
-        local lufetSalt = trade:hasItemQty(1019, 3)
-
-        if lufetSalt == true and count == 3 then
+        if trade:hasItemQty(1019, 3) and trade:getItemCount() == 3 then
             player:tradeComplete()
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addGil(xi.settings.main.GIL_RATE * 600)

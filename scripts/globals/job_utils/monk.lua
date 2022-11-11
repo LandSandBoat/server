@@ -114,7 +114,7 @@ xi.job_utils.monk.useFootwork = function(player, target, ability)
 end
 
 xi.job_utils.monk.useFormlessStrikes = function(player, target, ability)
-   player:addStatusEffect(xi.effect.FORMLESS_STRIKES, 1, 0, 180)
+    player:addStatusEffect(xi.effect.FORMLESS_STRIKES, 1, 0, 180)
 end
 
 xi.job_utils.monk.useHundredFists = function(player, target, ability)

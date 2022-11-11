@@ -28,9 +28,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = utils.takeShadows(target, 1, math.random(2, 3)) --removes 2-3 shadows
     --if removed more shadows than were up or there weren't any
-    if (dmg > 0) then
+    if dmg > 0 then
         for i, effect in ipairs(removables) do
-            if (mob:hasStatusEffect(effect)) then
+            if mob:hasStatusEffect(effect) then
                 local statusEffect = mob:getStatusEffect(effect)
                 target:addStatusEffect(effect, statusEffect:getPower(), statusEffect:getTickCount(), statusEffect:getDuration())
                 mob:delStatusEffect(effect)

@@ -125,6 +125,6 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x98) = PChar->PAutomaton->stats.CHR;
         ref<uint16>(0x9A) = PChar->PAutomaton->getMod(Mod::CHR);
 
-        ref<uint8>(0x9C) = 0; // extra elemental capacity from gifts
+        ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
     }
 }

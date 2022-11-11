@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     if (sayFlowers == QUEST_ACCEPTED or sayFlowers == QUEST_COMPLETED) and flowerProgress == 1 then
         if needToZone then
             player:startEvent(518)
-        elseif (player:getCharVar("FLOWER_PROGRESS") == 2) then
+        elseif player:getCharVar("FLOWER_PROGRESS") == 2 then
             player:startEvent(517, 0, 0, 0, 0, 950)
         else
             player:startEvent(516, 0, 0, 0, 0, 950)

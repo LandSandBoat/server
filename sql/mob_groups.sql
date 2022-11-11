@@ -1305,7 +1305,7 @@ INSERT INTO `mob_groups` VALUES (27,7057,34,'Quasilumin',0,128,0,1000,0,65,65,0)
 -- The_Garden_of_RuHmet (Zone 35)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,3272,35,'Qnzdei',960,0,0,0,0,77,83,0);
+INSERT INTO `mob_groups` VALUES (1,3272,35,'Qnzdei',960,0,0,0,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (2,6176,35,'Awaern_blm',960,0,775,0,9999,81,84,0);
 INSERT INTO `mob_groups` VALUES (3,6178,35,'Awaern_thf',960,0,775,0,0,81,84,0);
 INSERT INTO `mob_groups` VALUES (4,6177,35,'Awaern_rdm',960,0,775,0,9999,81,84,0);
@@ -1325,8 +1325,8 @@ INSERT INTO `mob_groups` VALUES (17,6187,35,'Awaern_smn',960,0,775,0,9999,81,84,
 INSERT INTO `mob_groups` VALUES (18,54,35,'Aerns_Elemental',0,128,0,0,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (19,299,35,'Aweuvhi',960,0,199,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (20,6180,35,'Awaern_drk',960,0,775,0,9999,81,84,0);
-INSERT INTO `mob_groups` VALUES (21,301,35,'Awzdei',960,0,0,0,0,80,83,0);
--- 22: free
+INSERT INTO `mob_groups` VALUES (21,301,35,'Awzdei',960,0,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (22,301,35,'Awzdei_Still',960,0,0,0,0,83,83,0);
 INSERT INTO `mob_groups` VALUES (23,6179,35,'Awaern_pld',960,0,775,0,9999,81,84,0);
 INSERT INTO `mob_groups` VALUES (24,2114,35,'Ixzdei_BLM',0,128,0,6500,0,78,78,0);
 INSERT INTO `mob_groups` VALUES (25,2131,35,'Jailer_of_Fortitude',0,128,1397,25000,0,79,80,0);
@@ -1390,20 +1390,20 @@ INSERT INTO `mob_groups` VALUES (27,3970,37,'Tonberrys_Avatar',0,128,0,4000,1000
 INSERT INTO `mob_groups` VALUES (28,1743,37,'Goblin_Warlord',0,128,2862,11000,1000,78,80,0);
 INSERT INTO `mob_groups` VALUES (29,1656,37,'Goblin_Fencer',0,128,2862,11000,1000,78,80,0);
 INSERT INTO `mob_groups` VALUES (30,1736,37,'Goblin_Theurgist',0,128,2862,11000,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (31,6137,37,'Fire_Elemental',0,128,2859,8000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (32,6117,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- ifrit
-INSERT INTO `mob_groups` VALUES (33,6138,37,'Ice_Elemental',0,128,2859,8000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (34,6118,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- shiva
-INSERT INTO `mob_groups` VALUES (35,6139,37,'Air_Elemental',0,128,2859,8000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (36,6119,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- garuda
-INSERT INTO `mob_groups` VALUES (37,6140,37,'Earth_Elemental',0,128,2859,8000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (38,6120,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- titan
-INSERT INTO `mob_groups` VALUES (39,6141,37,'Thunder_Elemental',0,128,2859,8000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (40,6121,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- ramuh
-INSERT INTO `mob_groups` VALUES (41,6142,37,'Water_Elemental',0,128,2859,8000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (42,6122,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- leviathan
-INSERT INTO `mob_groups` VALUES (43,6143,37,'Dark_Elemental',0,128,0,10000,3000,78,80,0);
-INSERT INTO `mob_groups` VALUES (44,6123,37,'Mystic_Avatar',0,128,0,5000,4000,78,81,0); -- fenrir
+INSERT INTO `mob_groups` VALUES (31,6137,37,'Fire_Elemental',0,128,2857,8000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (32,6117,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- ifrit
+INSERT INTO `mob_groups` VALUES (33,6138,37,'Ice_Elemental',0,128,2857,8000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (34,6118,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- shiva
+INSERT INTO `mob_groups` VALUES (35,6139,37,'Air_Elemental',0,128,2857,8000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (36,6119,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- garuda
+INSERT INTO `mob_groups` VALUES (37,6140,37,'Earth_Elemental',0,128,2857,8000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (38,6120,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- titan
+INSERT INTO `mob_groups` VALUES (39,6141,37,'Thunder_Elemental',0,128,2857,8000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (40,6121,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- ramuh
+INSERT INTO `mob_groups` VALUES (41,6142,37,'Water_Elemental',0,128,2857,8000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (42,6122,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- leviathan
+INSERT INTO `mob_groups` VALUES (43,6143,37,'Dark_Elemental',0,128,2857,10000,3000,78,80,0);
+INSERT INTO `mob_groups` VALUES (44,6123,37,'Mystic_Avatar',0,128,2860,5000,4000,80,81,0); -- fenrir
 INSERT INTO `mob_groups` VALUES (45,1230,37,'Enhanced_Tiger',0,128,2856,10000,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (46,1225,37,'Enhanced_Mandragora',0,128,2856,10000,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (47,1218,37,'Enhanced_Beetle',0,128,2856,10000,0,78,80,0);

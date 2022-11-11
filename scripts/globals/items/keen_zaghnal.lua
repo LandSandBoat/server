@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if (target:getEquipID(xi.slot.MAIN) ~= 18067) then
+    if target:getEquipID(xi.slot.MAIN) ~= 18067 then
         target:delStatusEffect(xi.effect.ACCURACY_BOOST, 18067)
     end
     return 0

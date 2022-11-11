@@ -19,8 +19,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
-   -- TODO: Can skillchain?  Unknown property.
+    -- TODO: Can skillchain?  Unknown property.
 
     local numhits = 1
     local accmod = 1
@@ -33,7 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Due to conflicting information, making the dispel resistable.  Correct/tweak if wrong.
     -- Dispel has no status effect or resistance gear, so 0s instead of nulls.
     local resist = xi.mobskills.applyPlayerResistance(mob, 0, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.magic.ele.LIGHT)
-    if (resist > 0.0625) then
+    if resist > 0.0625 then
         target:dispelStatusEffect()
     end
 

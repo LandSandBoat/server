@@ -45,7 +45,7 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 749, 1, xi.regime.type.GROUNDS)
 end
 
-entity.onMobDespawn = function( mob )
+entity.onMobDespawn = function(mob)
     local auraGearId = mob:getID() + 1
 
     mob:resetLocalVars()

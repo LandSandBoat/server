@@ -23778,6 +23778,13 @@ INSERT INTO `mob_droplist` VALUES (2855,0,0,1000,12298,@ALWAYS); -- Parana Shiel
 -- ZoneID:  38 - Borametz
 INSERT INTO `mob_droplist` VALUES (2856,0,0,1000,1875,300); -- Ancient Beastcoin (30.0%)
 
+-- ZoneID:  37 - Fire Elemental
+-- ZoneID:  37 - Ice Elemental
+-- ZoneID:  37 - Air Elemental
+-- ZoneID:  37 - Earth Elemental
+-- ZoneID:  37 - Thunder Elemental
+-- ZoneID:  37 - Water Elemental
+-- ZoneID:  37 - Dark Elemental
 -- ZoneID:  38 - Zlatorog
 -- ZoneID:  38 - Mountain Buffalo
 -- ZoneID:  38 - Thiazi
@@ -23800,16 +23807,11 @@ INSERT INTO `mob_droplist` VALUES (2857,0,0,1000,1875,400); -- Ancient Beastcoin
 -- ZoneID:  38 - Apollyon Cleaner
 INSERT INTO `mob_droplist` VALUES (2858,0,0,1000,1875,500); -- Ancient Beastcoin (50.0%)
 
--- ZoneID:  37 - Fire Elemental
--- ZoneID:  37 - Ice Elemental
--- ZoneID:  37 - Air Elemental
--- ZoneID:  37 - Earth Elemental
--- ZoneID:  37 - Thunder Elemental
--- ZoneID:  37 - Water Elemental
 -- ZoneID:  38 - Grave Digger
 -- ZoneID:  38 - Inhumer
 INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin (70.0%)
 
+-- ZoneID:  37 - Mystic_Avatar (Eastern Tower)
 -- ZoneID:  37 - Skadi
 -- ZoneID:  37 - Thrym
 -- ZoneID:  37 - Beli

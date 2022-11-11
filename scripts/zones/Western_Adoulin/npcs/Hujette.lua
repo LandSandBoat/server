@@ -16,9 +16,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- ALL THE WAY TO THE BANK
-    if (player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE)) then
+    if player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE) then
         local paidHujette = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 1)
-        if ((not paidHujette) and npcUtil.tradeHas( trade, { { "gil", 3000 } })) then
+        if not paidHujette and npcUtil.tradeHas(trade, { { "gil", 3000 } }) then
             player:startEvent(5070)
         end
     end
@@ -42,7 +42,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- ALL THE WAY TO THE BANK
-    if (csid == 5070) then
+    if csid == 5070 then
         player:confirmTrade()
         player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 2, true))
         if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then

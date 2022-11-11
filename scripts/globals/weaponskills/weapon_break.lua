@@ -21,7 +21,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
@@ -37,12 +36,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.ATTACK_DOWN) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
         local duration = (120 + (tp / 1000 * 60)) * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0)
         target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

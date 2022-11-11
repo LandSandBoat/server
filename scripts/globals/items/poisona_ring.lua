@@ -12,8 +12,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-
-    if (target:hasStatusEffect(xi.effect.POISON) == true) then
+    if target:hasStatusEffect(xi.effect.POISON) then
         target:delStatusEffect(xi.effect.POISON)
     end
 end

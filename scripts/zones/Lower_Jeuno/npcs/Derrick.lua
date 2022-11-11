@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         totalNPC == 1023 and
-        trade:hasItemQty(555, 1) == true and
+        trade:hasItemQty(555, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(231) -- Ending quest "save the clock tower"
@@ -24,12 +24,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local airshipKI         = player:hasKeyItem(xi.ki.AIRSHIP_PASS)
+    local hasAirshipKI      = player:hasKeyItem(xi.ki.AIRSHIP_PASS)
     local saveTheClockTower = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     local npcNumber         = player:getCharVar("saveTheClockTowerVar") -- Quest step & number of npc
 
     if
-        airshipKI == false and
+        not hasAirshipKI and
         saveTheClockTower == QUEST_ACCEPTED and
         npcNumber >= 1 and
         npcNumber <= 11
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(230, 4, 10) -- airship + petition help/restart
 
     elseif
-        airshipKI == true and
+        hasAirshipKI and
         saveTheClockTower == QUEST_ACCEPTED and
         npcNumber >= 1 and
         npcNumber <= 11
@@ -45,20 +45,20 @@ entity.onTrigger = function(player, npc)
         player:startEvent(230, 6, 10) -- petition help/restart
 
     elseif
-        airshipKI == false and
+        not hasAirshipKI and
         saveTheClockTower == QUEST_ACCEPTED and
         npcNumber == 0
     then
         player:startEvent(230, 8, 10) -- airship + petition
 
     elseif
-        airshipKI == true and
+        hasAirshipKI and
         saveTheClockTower == QUEST_ACCEPTED and
         npcNumber == 0
     then
         player:startEvent(230, 10, 10) -- petition
 
-    elseif airshipKI == false then
+    elseif not hasAirshipKI then
         player:startEvent(230, 12) -- airship
 
     else
@@ -79,7 +79,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 230 and option == 10 then
-        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true then
+        if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS)
         end
     elseif csid == 230 and option == 20 then
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("saveTheClockTowerNPCz2", 0)
         end
     elseif csid == 230 and option == 30 then
-        if player:hasItem(555) == true then
+        if player:hasItem(555) then
             player:messageSpecial(ID.text.ITEM_OBTAINED, 555)
             player:setCharVar("saveTheClockTowerVar", 1)
             player:setCharVar("saveTheClockTowerNPCz1", 0)

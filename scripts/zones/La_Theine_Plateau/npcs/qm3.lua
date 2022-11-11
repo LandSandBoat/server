@@ -29,7 +29,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 124) then
+    if csid == 124 then
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
         player:addTitle(xi.title.RAINBOW_WEAVER)
         player:unlockJob(xi.job.SMN)

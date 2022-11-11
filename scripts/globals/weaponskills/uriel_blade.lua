@@ -28,7 +28,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.FLASH) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.FLASH) then
     target:addStatusEffect(xi.effect.FLASH, 200, 0, 15)
     end
 

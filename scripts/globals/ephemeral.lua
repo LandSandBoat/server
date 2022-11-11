@@ -64,7 +64,7 @@ xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
             player:addCurrency(v.name, total)
 
             -- Make sure we flag success if any of the crystals can be traded
-            if (qty > 0) or (hqQty > 0) then
+            if qty > 0 or hqQty > 0 then
                 success = true
             end
         end
@@ -101,8 +101,8 @@ xi.ephemeral.onEventFinish = function(player, option, wasTrade)
             local crystals = quantity % 12
             local clusters = math.floor(quantity / 12)
 
-             -- Player selected "as many as can fit"
-            if (option > 0x80000000) then
+            -- Player selected "as many as can fit"
+            if option > 0x80000000 then
                 -- Recalculate the quantity according to open inventory slots
                 local freeSlots = player:getFreeSlotsCount()
                 if freeSlots > 0 then -- If we don't have any free slots, don't bother. Just fail later.

@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if (target:hasStatusEffect(xi.effect.NEGATE_PETRIFY)) then
+    if target:hasStatusEffect(xi.effect.NEGATE_PETRIFY) then
         return 56
     end
     return 0

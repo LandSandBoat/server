@@ -2,7 +2,7 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+require('scripts/globals/magic')
 -----------------------------------
 local entity = {}
 
@@ -38,7 +38,7 @@ entity.onMobSpawn = function(mob)
     exitShell(mob)
 
     mob:addListener("MAGIC_STATE_EXIT", "SHEN_MAGIC_EXIT", function(shen, spell)
-        if spell:getID() == 214 then
+        if spell:getID() == xi.magic.spell.FLOOD then
             mob:SetMagicCastingEnabled(true)
         end
     end)
@@ -70,7 +70,7 @@ entity.onMobFight = function(mob, target)
     if os.time() >= petCooldown and (not petOne:isSpawned() or not petTwo:isSpawned()) and mob:actionQueueEmpty() then
         mob:SetMagicCastingEnabled(false)
         mob:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 2)
-        mob:castSpell(214, target)
+        mob:castSpell(xi.magic.spell.FLOOD, target)
         mob:setLocalVar("petCooldown", os.time() + 20)
     end
 

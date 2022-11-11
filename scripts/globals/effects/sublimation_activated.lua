@@ -12,7 +12,7 @@ end
 effectObject.onEffectTick = function(target, effect)
     local complete = false
     local level = 0
-    if (target:getMainJob() == xi.job.SCH) then
+    if target:getMainJob() == xi.job.SCH then
         level = target:getMainLvl()
     else
         level = target:getSubLvl()
@@ -29,20 +29,20 @@ effectObject.onEffectTick = function(target, effect)
         target:getMerit(xi.merit.MAX_SUBLIMATION) * 10 + target:getJobPointLevel(xi.jp.SUBLIMATION_EFFECT) * 3
 
     if target:getHPP() >= 51 then
-        if (target:hasStatusEffect(xi.effect.STONESKIN)) then
+        if target:hasStatusEffect(xi.effect.STONESKIN) then
             local skin = target:getMod(xi.mod.STONESKIN)
-            if (skin >= dmg) then --absorb all damage
+            if skin >= dmg then --absorb all damage
                 target:delMod(xi.mod.STONESKIN, dmg)
             else
                 target:delStatusEffect(xi.effect.STONESKIN)
                 target:takeDamage(dmg - skin)
-                if (target:getHPP() < 51 ) then
+                if target:getHPP() < 51 then
                     complete = true
                 end
             end
         else
             target:takeDamage(dmg)
-            if (target:getHPP() < 51) then
+            if target:getHPP() < 51 then
                 complete = true
             end
         end
@@ -55,7 +55,7 @@ effectObject.onEffectTick = function(target, effect)
         complete = true
     end
 
-    if (complete) then
+    if complete then
         target:delStatusEffectSilent(xi.effect.SUBLIMATION_ACTIVATED)
         target:addStatusEffect(xi.effect.SUBLIMATION_COMPLETE, store, 0, 7200)
     else

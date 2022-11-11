@@ -12,26 +12,25 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     local bf = mob:getBattlefield()
     if bf:getID() == 961 and mob:getHPP() < 30 then
         bf:win()
         return
     end
 
-    if (mob:hasStatusEffect(xi.effect.INVINCIBLE) == false and mob:actionQueueEmpty() == true) then
+    if not mob:hasStatusEffect(xi.effect.INVINCIBLE) and mob:actionQueueEmpty() then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
 
-        if (twohourTime == 0) then
+        if twohourTime == 0 then
             twohourTime = math.random(8, 14)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if (mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime) then
+        if mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime then
             mob:useMobAbility(694)
             mob:setLocalVar("twohourTime", math.random((mob:getBattleTime() / 15) + 12, (mob:getBattleTime() / 15) + 16))
-        elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
+        elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:SetMobSkillAttack(731)
@@ -58,9 +57,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-
     player:addTitle(xi.title.MIST_MELTER)
-
 end
 
 return entity

@@ -37,6 +37,7 @@
 #include "battleutils.h"
 #include "mobutils.h"
 #include "petutils.h"
+#include "zone_entities.h"
 #include "zoneutils.h"
 #include <vector>
 
@@ -970,6 +971,7 @@ namespace mobutils
                             92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
         PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);
         PMob->defaultMobMod(MOBMOD_SOUND_RANGE, (int16)CMobEntity::sound_range);
+        PMob->defaultMobMod(MOBMOD_MAGIC_RANGE, (int16)CMobEntity::magic_range);
 
         // Killer Effect
         switch (PMob->m_EcoSystem)
@@ -1377,13 +1379,19 @@ Usage:
                 PMob->m_TrueDetection = sql->GetUIntData(68);
                 PMob->m_Detects       = sql->GetUIntData(69);
 
+                CZone* newZone = zoneutils::GetZone(zoneID);
+
+                // Get dynamic targid
+                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+
+                // Ensure dynamic targid is released on death
+                PMob->m_bReleaseTargIDOnDeath = true;
+
+                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
-
-                // TODO: This shouldn't go into the pet list, it appears to only
-                //     : do this because that was the only way to have temporary
-                //     : entities at the time.
-                zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);
 

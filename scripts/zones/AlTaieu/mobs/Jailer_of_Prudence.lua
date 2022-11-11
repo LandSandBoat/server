@@ -64,7 +64,7 @@ end
 entity.onMobDespawn = function(mob)
     local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then
+    if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
         secondPrudence:addMod(xi.mod.ATTP, 100)

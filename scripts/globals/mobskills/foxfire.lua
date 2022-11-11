@@ -14,14 +14,13 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local job = mob:getMainJob()
-    if (job == xi.job.RDM or job == xi.job.THF or job == xi.job.PLD or job == xi.job.BST or job == xi.job.RNG or job == xi.job.BRD or job == xi.job.NIN or job == xi.job.COR) then
+    if job == xi.job.RDM or job == xi.job.THF or job == xi.job.PLD or job == xi.job.BST or job == xi.job.RNG or job == xi.job.BRD or job == xi.job.NIN or job == xi.job.COR then
         return 0
     end
     return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.6

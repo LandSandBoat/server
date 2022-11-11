@@ -48,7 +48,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if mob:actionQueueEmpty() == true and not isBusy then -- the last check prevents multiple Mega/Gigaflares from being called at the same time.
+    if mob:actionQueueEmpty() and not isBusy then -- the last check prevents multiple Mega/Gigaflares from being called at the same time.
         if megaFlareQueue > 0 then
             mob:SetMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
             mob:SetMagicCastingEnabled(false)
@@ -64,7 +64,7 @@ entity.onMobFight = function(mob, target)
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)
                 end
                 if mob:checkDistance(target) <= 15 then -- without this check if the target is out of range it will keep attemping and failing to use Megaflare. Both Megaflare and Gigaflare have range 15.
-                    if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- default behaviour
+                    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- default behaviour
                         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                     end
                     mob:useMobAbility(1551)

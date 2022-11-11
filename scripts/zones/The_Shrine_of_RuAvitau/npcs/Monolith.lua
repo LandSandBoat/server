@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.MONOLITH_OFFSET
-    if (offset >= 0 and offset <= 38) then
+    if offset >= 0 and offset <= 38 then
         local colorTouched = ID.npc.MONOLITHS[offset / 2]
         for i = 0, 21 do
             local anim = ID.npc.DOORS[i] == colorTouched and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR

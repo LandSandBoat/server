@@ -46,7 +46,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-980.193, 14.913, -282.863, 60)
     end
 
@@ -69,7 +73,7 @@ zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
     -- holes in the sand
-    if (regionID >= 30) then
+    if regionID >= 30 then
         switch (regionID): caseof
         {
             [30] = function (x)
@@ -102,7 +106,7 @@ zoneObject.onRegionEnter = function(player, region)
         totalWeight = totalWeight + getWeight(player)
         plate:setLocalVar("weight", totalWeight)
 
-        if (player:hasKeyItem(xi.ki.LOADSTONE) or totalWeight >= 3) then
+        if player:hasKeyItem(xi.ki.LOADSTONE) or totalWeight >= 3 then
             door:openDoor(15) -- open door with a 15 second time delay.
             plate:setAnimation(xi.anim.OPEN_DOOR) -- this is supposed to light up the platform but it's not working. Tried other values too.
         end
@@ -120,7 +124,7 @@ zoneObject.onRegionLeave = function(player, region)
         totalWeight = totalWeight - getWeight(player)
         plate:setLocalVar("weight", totalWeight)
 
-        if (plate:getAnimation() == xi.anim.OPEN_DOOR and totalWeight < 3) then
+        if plate:getAnimation() == xi.anim.OPEN_DOOR and totalWeight < 3 then
             plate:setAnimation(xi.anim.CLOSE_DOOR)
         end
     end

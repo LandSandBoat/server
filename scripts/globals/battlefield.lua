@@ -22,16 +22,16 @@ function onBattlefieldHandlerInitialise(zone)
         for _, zoneid in pairs(battlefield.Zones) do
             if id == zoneid then
                 return battlefield.Max
-             end
+            end
         end
     end
 
     return default
 end
 
-xi.battlefield = {}
-xi.battlefield.contents = {}
-xi.battlefield.contentsByZone = {}
+xi.battlefield = xi.battlefield or {}
+xi.battlefield.contents = xi.battlefield.contents or {}
+xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
 
 xi.battlefield.status =
 {
@@ -368,7 +368,7 @@ end
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield.
 --                   Needs to be in the format of { itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }. (optional)
---  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
+--  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry unless 'keep = true' (optional)
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
 --  - lossEventParams: Parameters given to the loss event (32002). Defaults to none. (optional)
@@ -769,12 +769,19 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
 end
 
 function Battlefield.redirectEventCall(eventName, player, csid, option)
+    local battlefieldID = 0
     local battlefield = player:getBattlefield()
-    if not battlefield then
+    if battlefield then
+        battlefieldID = battlefield:getID()
+    else
+        battlefieldID = player:getLocalVar("battlefieldID")
+    end
+
+    if battlefieldID == 0 then
         return
     end
 
-    local content = xi.battlefield.contents[battlefield:getID()]
+    local content = xi.battlefield.contents[battlefieldID]
     content[eventName](content, player, csid, option)
 end
 
@@ -890,6 +897,8 @@ function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
 end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
+    player:setLocalVar("battlefieldID", battlefield:getID())
+
     local initiatorId, _ = battlefield:getInitiator()
     if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
 
@@ -900,12 +909,16 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
             if type(item) == 'table' then
                 for _, subitem in ipairs(item) do
                     if player:hasKeyItem(subitem) then
-                        player:delKeyItem(subitem)
+                        if not self.requiredKeyItems.keep then
+                            player:delKeyItem(subitem)
+                        end
                         table.insert(items, subitem)
                     end
                 end
             else
-                player:delKeyItem(item)
+                if not self.requiredKeyItems.keep then
+                    player:delKeyItem(item)
+                end
                 table.insert(items, item)
             end
         end

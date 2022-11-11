@@ -14,10 +14,8 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local inAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
-    local count = trade:getItemCount()
-    local gil = trade:getGil()
 
-    if (inAPickle == QUEST_ACCEPTED or inAPickle == QUEST_COMPLETED) and trade:hasItemQty(583, 1) == true and count == 1 and gil == 0 then
+    if (inAPickle == QUEST_ACCEPTED or inAPickle == QUEST_COMPLETED) and trade:hasItemQty(583, 1) and trade:getItemCount() == 1 and trade:getGil() == 0 then
         local rand = math.random(1, 4)
         if rand <= 2 then
             if inAPickle == QUEST_ACCEPTED then
@@ -39,7 +37,7 @@ entity.onTrigger = function(player, npc)
     local inAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     local needToZone = player:needToZone()
 
-    if inAPickle == QUEST_AVAILABLE and needToZone == false then
+    if inAPickle == QUEST_AVAILABLE and not needToZone then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(654, 0, 4444) -- IN A PICKLE + RARAB TAIL: Quest Begin
@@ -50,7 +48,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(655, 0, 4444) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
     elseif inAPickle == QUEST_COMPLETED and needToZone then
         player:startEvent(660) -- IN A PICKLE: After Quest
-    elseif inAPickle == QUEST_COMPLETED and needToZone == false and player:getCharVar("QuestInAPickle_var") ~= 1 then
+    elseif inAPickle == QUEST_COMPLETED and not needToZone and player:getCharVar("QuestInAPickle_var") ~= 1 then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(661) -- IN A PICKLE: Repeatable Quest Begin

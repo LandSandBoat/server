@@ -38,7 +38,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
     -- king vinegrroon
-    if (mob:getPool() == 2262) then
+    if mob:getPool() == 2262 then
         local typeEffect = xi.effect.POISON
         local power = 25
         xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 3, 60)
