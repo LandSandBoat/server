@@ -27,7 +27,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setHomePoint()
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
             cs = 702
             player:setPos(-1.000, 0.000, 44.000, 0)
