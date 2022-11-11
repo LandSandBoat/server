@@ -698,12 +698,17 @@ namespace charutils
             int16 petHP = sql->GetUIntData(11);
             if (petHP)
             {
-                PChar->petZoningInfo.petHP      = petHP;
-                PChar->petZoningInfo.petID      = sql->GetUIntData(9);
-                PChar->petZoningInfo.petMP      = sql->GetIntData(12);
-                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(sql->GetUIntData(10));
-                PChar->petZoningInfo.petLevel   = sql->GetUIntData(13);
-                PChar->petZoningInfo.respawnPet = true;
+                PChar->petZoningInfo.petHP        = petHP;
+                PChar->petZoningInfo.petID        = sql->GetUIntData(9);
+                PChar->petZoningInfo.petMP        = sql->GetIntData(12);
+                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(sql->GetUIntData(10));
+                PChar->petZoningInfo.petLevel     = sql->GetUIntData(13);
+                PChar->petZoningInfo.respawnPet   = true;
+                PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jug-pet-spawn-time");
+                PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jug-duration-seconds");
+
+                // clear the charvars used for jug state
+                PChar->clearCharVarsWithPrefix("jug-");
             }
         }
 
@@ -5059,6 +5064,11 @@ namespace charutils
 
         sql->Query(Query, PChar->health.hp, PChar->health.mp, PChar->nameflags.flags, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
                    PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->petZoningInfo.petLevel, PChar->id);
+
+        // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
+        // we use charvars for jug specific things
+        PChar->setCharVar("jug-pet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
+        PChar->setCharVar("jug-duration-seconds", PChar->petZoningInfo.jugDuration);
     }
 
     /************************************************************************

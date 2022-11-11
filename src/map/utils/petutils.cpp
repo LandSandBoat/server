@@ -1266,12 +1266,11 @@ namespace petutils
             {
                 SetupPetWithMaster(PMaster, PPet);
             }
+
             // apply stats from previous zone if this pet is being transferred
             if (spawningFromZone)
             {
-                PPet->health.tp = static_cast<uint16>(static_cast<CCharEntity*>(PMaster)->petZoningInfo.petTP);
-                PPet->health.hp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petHP;
-                PPet->health.mp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petMP;
+                PPet->loadPetZoningInfo();
             }
         }
         else if (PMaster->objtype == TYPE_PC)
@@ -1352,6 +1351,7 @@ namespace petutils
 
     void DetachPet(CBattleEntity* PMaster)
     {
+        XI_DEBUG_BREAK_IF(PMaster == nullptr);
         XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
         XI_DEBUG_BREAK_IF(PMaster->objtype != TYPE_PC);
 
@@ -1451,6 +1451,7 @@ namespace petutils
 
     void DespawnPet(CBattleEntity* PMaster)
     {
+        XI_DEBUG_BREAK_IF(PMaster == nullptr);
         XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
 
         petutils::DetachPet(PMaster);
@@ -1839,6 +1840,7 @@ namespace petutils
         {
             uint8 spawnLevel = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petLevel;
             PPet->setSpawnLevel(spawnLevel > 0 ? spawnLevel : UINT8_MAX);
+            PPet->setJugDuration(static_cast<int32>(PPetData->time));
             CalculateJugPetStats(PMaster, PPet);
         }
         else if (PPet->getPetType() == PET_TYPE::WYVERN)
