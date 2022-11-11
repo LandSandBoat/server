@@ -40,24 +40,11 @@ bool stdinHasData()
     // this works by harnessing Windows' black magic:
     return _kbhit();
 #else
-    // using a timeout of 0 so we aren't waiting:
-    struct timespec timeout
-    {
-        0l, 0l
-    };
+    struct pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
 
-    // create a file descriptor set
-    fd_set fds{};
-
-    // initialize the fd_set to 0
-    FD_ZERO(&fds);
-    // set the fd_set to target file descriptor 0 (STDIN)
-    FD_SET(0, &fds);
-
-    // pselect the number of file descriptors that are ready, since
-    // we're only passing in 1 file descriptor, it will return either
-    // a 0 if STDIN isn't ready, or a 1 if it is.
-    return pselect(0 + 1, &fds, nullptr, nullptr, &timeout, nullptr) == 1;
+    // poll the stdin file descriptor until it tells us it's ready
+    // poll returns a 0 if STDIN isn't ready, or a 1 if it is.
+    return poll(&pollFileDescriptor, 1, 0) == 1;
 #endif
 }
 
@@ -69,7 +56,7 @@ bool getLine(std::string& line)
     {
         return false;
     }
-
+#if defined(_WIN32)
     auto keyCharacter = static_cast<char>(getchar());
     if (keyCharacter == '\r')
     {
@@ -98,6 +85,10 @@ bool getLine(std::string& line)
     }
 
     return false;
+#else
+    std::getline(std::cin, line);
+    return true;
+#endif
 }
 
 ConsoleService::ConsoleService()
