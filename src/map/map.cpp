@@ -69,6 +69,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+#ifdef WIN32
+#include <io.h>
+#endif
+
 #ifdef TRACY_ENABLE
 void* operator new(std::size_t count)
 {
