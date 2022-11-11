@@ -93,7 +93,7 @@ int32 lobbydata_parse(int32 fd)
         char* buff = &sessions[fd]->rdata[0];
         if (ref<uint8>(buff, 0) == 0x0d)
         {
-            ShowDebug("Posible Crash Attempt from IP: <%s>", ip2str(sessions[fd]->client_addr));
+            ShowWarning("Possible Crash Attempt from IP: <%s>", ip2str(sessions[fd]->client_addr));
         }
         ShowDebug("lobbydata_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 0), ip2str(sd->client_addr));
 
@@ -979,7 +979,6 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
     if (sql->Query(Query, charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
     {
         ShowDebug("lobby_cLook: char<%s>, charid: %u", createchar->m_name, charid);
-
         return -1;
     }
 
@@ -988,7 +987,6 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
     if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {
         ShowDebug("lobby_cStats: charid: %u", charid);
-
         return -1;
     }
 
