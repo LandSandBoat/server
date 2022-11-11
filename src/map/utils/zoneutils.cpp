@@ -538,8 +538,12 @@ namespace zoneutils
                 luautils::ApplyZoneMixins(PMob);
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();
-                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
+            });
 
+            // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
+            PZone->ForEachMob([](CMobEntity* PMob)
+            {
+                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
                 if (PMob->m_AllowRespawn)
                 {
                     PMob->Spawn();
