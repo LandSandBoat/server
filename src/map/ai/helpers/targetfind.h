@@ -53,12 +53,13 @@ enum class AURA_TARGET : uint8
 
 enum FINDFLAGS
 {
-    FINDFLAGS_NONE      = 0,
-    FINDFLAGS_DEAD      = 1, // target dead
-    FINDFLAGS_ALLIANCE  = 2, // force target alliance
-    FINDFLAGS_PET       = 4, // force target pet
-    FINDFLAGS_UNLIMITED = 8, // unlimited distance
-    FINDFLAGS_HIT_ALL   = 16 // hit all targets, regardless of party
+    FINDFLAGS_NONE            = 0,
+    FINDFLAGS_DEAD            = 1,  // target dead
+    FINDFLAGS_ALLIANCE        = 2,  // force target alliance
+    FINDFLAGS_PET             = 4,  // force target pet
+    FINDFLAGS_UNLIMITED       = 8,  // unlimited distance
+    FINDFLAGS_HIT_ALL         = 16, // hit all targets, regardless of party
+    FINDFLAGS_IGNORE_BATTLEID = 32, // ignore battle id check
 };
 
 /*

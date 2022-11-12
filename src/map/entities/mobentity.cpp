@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -641,6 +641,11 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     if (PSkill->getValidTargets() == TARGET_SELF)
     {
         findFlags |= FINDFLAGS_PET;
+    }
+
+    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    {
+        findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
 
     action.id = id;

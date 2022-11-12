@@ -419,6 +419,7 @@ enum TARGETTYPE
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
     TARGET_PET                     = 0x100,
     TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
+    TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
 };
 
 enum SKILLCHAIN_ELEMENT

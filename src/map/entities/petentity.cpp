@@ -380,6 +380,11 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         findFlags |= FINDFLAGS_PET;
     }
 
+    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    {
+        findFlags |= FINDFLAGS_IGNORE_BATTLEID;
+    }
+
     action.id         = id;
     action.actiontype = (ACTIONTYPE)PSkill->getSkillFinishCategory();
     action.actionid   = PSkill->getID();
