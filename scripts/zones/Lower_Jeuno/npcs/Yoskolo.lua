@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    priceMultiplier = (1 + (0.13 * (9 - player:getFameLevel(xi.quest.fame_area.JEUNO)) / 8)) * xi.settings.main.SHOP_PRICE
+    local priceMultiplier = (1 + (0.13 * (9 - player:getFameLevel(xi.quest.fame_area.JEUNO)) / 8)) * xi.settings.main.SHOP_PRICE
     local stock =
     {
         -- Scrolls are not effected by fame
