@@ -12,15 +12,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    priceMultiplier = (1 + (0.13 * (9 - player:getFameLevel(xi.quest.fame_area.JEUNO)) / 8)) * xi.settings.main.SHOP_PRICE
     local stock =
     {
-        4509,    10, -- Distilled Water
-        4422,   184, -- Orange Juice
-        4423,   276, -- Apple Juice
-        4424,  1012, -- Melon Juice
-        4441,   855, -- Grape Juice
-        4442,   368, -- Pineapple Juice
-        4556,  5544, -- Icecap Rolanberry
+        -- Scrolls are not effected by fame
+        4509,    10 * priceMultiplier, -- Distilled Water
+        4422,   184 * priceMultiplier, -- Orange Juice
+        4423,   276 * priceMultiplier, -- Apple Juice
+        4424,  1012 * priceMultiplier, -- Melon Juice
+        4441,   855 * priceMultiplier, -- Grape Juice
+        4442,   368 * priceMultiplier, -- Pineapple Juice
+        4556,  5544 * priceMultiplier, -- Icecap Rolanberry
         5046,  6380, -- Scroll of Fire Carol
         5047,  7440, -- Scroll of Ice Carol
         5048,  5940, -- Scroll of Wind Carol
@@ -29,7 +31,7 @@ entity.onTrigger = function(player, npc)
         5051,  5000, -- Scroll of Water Carol
         5052,  4200, -- Scroll of Light Carol
         5053,  8400, -- Scroll of Dark Carol
-        5078, 60000, -- Scroll of Sentinel's Scherzo
+        -- 5078, 60000, -- Scroll of Sentinel's Scherzo (2010 Abyssea)
     }
 
     player:showText(npc, ID.text.YOSKOLO_SHOP_DIALOG)

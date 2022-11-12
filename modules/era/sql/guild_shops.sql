@@ -596,7 +596,7 @@ INSERT INTO `guild_shops` VALUES
     (519, 4399, 1350, 1350, 64, 24, 24), -- bluetail
     (519, 4443, 9, 32, 64, 24, 24), -- cobalt jellyfish
     (519, 4484, 2100, 2100, 64, 24, 24), -- shall shell
-    (519, 4485, 900, 1200, 64, 24, 24), -- noble lady
+    (519, 4485, 2100, 2800, 64, 24, 24), -- noble lady
     (519, 17382, 7081, 8369, 20, 5, 5), -- single hook fishing rod
     (519, 17388, 766, 906, 30, 10, 20), -- fastwater fishing rod
     -- Rajmonda (Ship_bound_for_Selbina | Ship_bound_for_Selbina_Pirates)
@@ -699,7 +699,7 @@ INSERT INTO `guild_shops` VALUES
     -- Celestina | Yabby_Tanmikey (Mhaura)
     (528, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (528, 642, 595, 620, 24, 0, 0), -- chunk of zinc ore
-    (528, 644, 1500, 8400, 24, 0, 0), -- chunk of mythril ore
+    (528, 644, 1500, 9800, 24, 0, 0), -- chunk of mythril ore
     (528, 650, 952, 4179, 12, 0, 0), -- brass ingot
     (528, 736, 315, 1260, 24, 12, 12), -- chunk of silver ore
     (528, 737, 1890, 13230, 12, 0, 0), -- chunk of gold ore
@@ -718,7 +718,7 @@ INSERT INTO `guild_shops` VALUES
     (528, 648, 571, 571, 55, 0, 22), -- copper ingot
     (528, 745, 9450, 66150, 55, 0, 22), -- gold ingot
     (528, 752, 9291, 65037, 20, 0, 15), -- gold sheet
-    (528, 681, 10500, 55440, 30, 6, 12), -- mythril chain
+    (528, 681, 10500, 55440, 30, 0, 12), -- mythril chain
     (528, 653, 19900, 36400, 55, 0, 22), -- mythril ingot
     (528, 663, 20240, 45600, 80, 0, 32), -- mythril sheet
     (528, 762, 20925, 146475, 55, 0, 22), -- platinum chain
@@ -730,7 +730,7 @@ INSERT INTO `guild_shops` VALUES
     -- Visala | Teerth (Bastok_Markets)
     (5272, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (5272, 642, 595, 620, 24, 12, 12), -- chunk of zinc ore
-    (5272, 644, 1500, 8400, 24, 12, 12), -- chunk of mythril ore
+    (5272, 644, 1500, 9800, 24, 12, 12), -- chunk of mythril ore
     (5272, 650, 952, 4179, 12, 0, 0), -- brass ingot
     (5272, 736, 315, 1260, 24, 12, 12), -- chunk of silver ore
     (5272, 737, 1890, 13230, 12, 0, 0), -- chunk of gold ore
@@ -853,7 +853,7 @@ INSERT INTO `guild_shops` VALUES
     -- Bornahn (Al_Zahbi)
     (60429, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (60429, 642, 595, 620, 24, 0, 0), -- chunk of zinc ore
-    (60429, 644, 1500, 8400, 24, 0, 0), -- chunk of mythril ore
+    (60429, 644, 1500, 9800, 24, 12, 12), -- chunk of mythril ore
     (60429, 650, 952, 4179, 12, 0, 0), -- brass ingot
     (60429, 736, 315, 1260, 24, 12, 12), -- chunk of silver ore
     (60429, 737, 1890, 13230, 12, 0, 0), -- chunk of gold ore
@@ -985,7 +985,6 @@ INSERT INTO `guild_shops` VALUES
     (529, 2129, 75, 75, 150, 50, 25), -- tanning vat
     (529, 4509, 9, 23, 200, 50, 50), -- flask of distilled water
     (529, 13192, 837, 1224, 64, 0, 0), -- leather belt
-    (529, 632, 1575, 4320, 48, 24, 24), -- kukuru bean
     (529, 13203, 2277, 5980, 20, 0, 10), -- barbarians belt
     (529, 13703, 286944, 286944, 20, 0, 10), -- brigandine armor
     (529, 16385, 625, 625, 20, 0, 10), -- cesti
@@ -1046,7 +1045,7 @@ INSERT INTO `guild_shops` VALUES
     (531, 640, 9, 15, 124, 48, 24), -- chunk of copper ore
     (531, 641, 30, 66, 124, 48, 24), -- chunk of tin ore
     (531, 643, 675, 981, 124, 48, 24), -- chunk of iron ore
-    (531, 644, 2000, 10000, 64, 12, 12), -- chunk of mythril ore
+    (531, 644, 2000, 10000, 64, 0, 0), -- chunk of mythril ore
     (531, 2143, 75, 75, 124, 48, 100), -- mandrel
     (531, 2144, 75, 75, 124, 48, 100), -- workshop anvil
     (531, 16455, 3591, 25137, 20, 0, 15), -- baselard

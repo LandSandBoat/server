@@ -399,26 +399,6 @@ xi.eraShops.WijeTiren =
     5014,    98,       --Scroll of Herb Pastoral
 }
 
--- Lower Jueno
-xi.eraShops.Yoskolo =
-{
-    4509,    10, -- Distilled Water
-    4422,   184, -- Orange Juice
-    4423,   276, -- Apple Juice
-    4424,  1012, -- Melon Juice
-    4441,   855, -- Grape Juice
-    4442,   368, -- Pineapple Juice
-    4556,  5544, -- Icecap Rolanberry
-    5046,  6380, -- Scroll of Fire Carol
-    5047,  7440, -- Scroll of Ice Carol
-    5048,  5940, -- Scroll of Wind Carol
-    5049,  4600, -- Scroll of Earth Carol
-    5050,  7920, -- Scroll of Lightning Carol
-    5051,  5000, -- Scroll of Water Carol
-    5052,  4200, -- Scroll of Light Carol
-    5053,  8400, -- Scroll of Dark Carol
-}
-
 xi.eraShops.Creepstix =
 {
     5023,   8160, -- Scroll of Goblin Gavotte
@@ -654,15 +634,6 @@ xi.eraShops.Brave_Ox =
     -- 4704, 30967, -- Auspice
 }
 
--- Tavnazian Safehold
-xi.eraShops.MazuroOozuro =
-{
-    17005,   108, -- Lufaise Fly
-    17383,  2640, -- Clothespole
-    688,     200, -- Arrowwood Log
-    690,    7800, -- Elm Log
-}
-
 -- Upper Jeuno
 xi.eraShops.Antonia =
 {
@@ -739,7 +710,7 @@ local lookupTable =
     {"nation", "Southern_San_dOria", "Ashene", xi.eraShops.Ashene, xi.nation.SANDORIA, "ASHENE_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Carautia", xi.eraShops.Carautia, xi.nation.SANDORIA, "CARAUTIA_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Ferdoulemiont", xi.eraShops.Ferdoulemiont, xi.nation.SANDORIA, "FERDOULEMIONT_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "RAIMBROYS_SHOP_DIALOG" + 1, 1},
+    {"nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "BENAIGE_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Ostalie", xi.eraShops.Ostalie, xi.nation.SANDORIA, "OSTALIE_SHOP_DIALOG", 1},
 
     -- Windurst
@@ -749,11 +720,10 @@ local lookupTable =
     {"nation", "Port_Windurst", "Kumama", xi.eraShops.Kumama, xi.nation.WINDURST, "KUMAMA_SHOP_DIALOG", 1},
     {"nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
     {"nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
-    {"standard", "Windurst_Woods", "Wije Tiren", xi.eraShops.WijeTiren, xi.quest.fame_area.WINDURST, "WIJETIREN_SHOP_DIALOG", 1},
+    {"standard", "Windurst_Woods", "Wije_Tiren", xi.eraShops.WijeTiren, xi.quest.fame_area.WINDURST, "WIJETIREN_SHOP_DIALOG", 1},
     {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
 
     -- Jeuno
-    {"standard", "Lower_Jeuno", "Yoskolo", xi.eraShops.Yoskolo, xi.quest.fame_area.JEUNO, "YOSKOLO_SHOP_DIALOG", 1},
     {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, NULL, "JUNK_SHOP_DIALOG", 1},
     {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
     {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
@@ -763,29 +733,20 @@ local lookupTable =
     {"standard", "Upper_Jeuno", "Coumuna", xi.eraShops.Coumuna, NULL, "VIETTES_SHOP_DIALOG", 1},
     {"standard", "Upper_Jeuno", "Areebah", xi.eraShops.Areebah, xi.quest.fame_area.JEUNO, "MP_SHOP_DIALOG", 1},
     {"standard", "RuLude_Gardens", "Dabih_Jajalioh", xi.eraShops.DabihJajalioh, xi.quest.fame_area.JEUNO, "DABIHJAJALIOH_SHOP_DIALOG", 1},
-
+    {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
     -- Mhaura
-    {"standard", "Mhaura", "Pikini_Mikini", xi.eraShops.PikiniMikini, xi.quest.fame_area.WINDURST, "PIKINIMIKINI_SHOP_DIALOG", 1},
+    {"standard", "Mhaura", "Pikini-Mikini", xi.eraShops.PikiniMikini, xi.quest.fame_area.WINDURST, "PIKINIMIKINI_SHOP_DIALOG", 1},
     -- Selbina
     {"standard", "Selbina", "Dohdjuma", xi.eraShops.Dohdjuma, xi.quest.fame_area.SELBINA_RABAO, "DOHDJUMA_SHOP_DIALOG", 1},
     -- Kazham
     {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.TojiMumosulah, xi.quest.fame_area.WINDURST, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
     -- Norg
     {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
-
+    -- Rabao
+    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, NULL, "BRAVEOX_SHOP_DIALOG", 1},
     -- Nashmau
-    {"none", "Nashmau","Chichiroon"},
     {"nofame", "Nashmau", "Mamaroon", xi.eraShops.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
     {"nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
-    -- Port Jeuno
-    {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, "DUTY_FREE_SHOP_DIALOG", 1},
-    {"none", "Port_Jeuno", "Kindlix", 1},
-    {"none", "Port_Jeuno", "Pyropox",1},
-    -- Rabao
-    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, "BRAVEOX_SHOP_DIALOG", 1},
-
-    -- Tavnazian Safehold
-    {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.eraShops.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG", 1},
 }
 
 for _, shop in pairs(lookupTable) do

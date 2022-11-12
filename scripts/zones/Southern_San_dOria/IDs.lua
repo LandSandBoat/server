@@ -77,6 +77,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         PHAMELISE_OPEN_DIALOG          = 8433,  -- I've got fresh produce from Zulkheim!
         APAIREMANT_OPEN_DIALOG         = 8434,  -- Might you be interested in produce from Gustaberg
         RAIMBROYS_SHOP_DIALOG          = 8435,  -- Welcome to Raimbroy's Grocery!
+        BENAIGE_SHOP_DIALOG            = 8436,  -- Looking for something in particular?
         CARAUTIA_SHOP_DIALOG           = 8437,  -- Well, what sort of armor would you like?
         MACHIELLE_CLOSED_DIALOG        = 8438,  -- We want to sell produce from Norvallen, but the entire region is under foreign control!
         CORUA_CLOSED_DIALOG            = 8439,  -- We specialize in Ronfaure produce, but we cannot import from that region without a strong San d'Orian presence there.
