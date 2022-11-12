@@ -1460,21 +1460,28 @@ Usage:
 
         const char* Query = "SELECT mob_groups.zoneid, mob_groups.`name`, mob_pools.packet_name, \
         mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, \
-        mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, mob_pools.immunity, \
+        mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, mob_pools.cmbSkill, mob_pools.cmbDmgMult, \
+        mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, mob_pools.immunity, \
         mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, \
-        mob_family_system.STR, mob_family_system.DEX, mob_family_system.VIT, mob_family_system.AGI, mob_family_system.`INT`, mob_family_system.MND, mob_family_system.CHR, mob_family_system.EVA, mob_family_system.DEF, mob_family_system.ATT, mob_family_system.ACC, \
+        mob_family_system.STR, mob_family_system.DEX, mob_family_system.VIT, mob_family_system.AGI,\
+        mob_family_system.`INT`, mob_family_system.MND, mob_family_system.CHR, \
+        mob_family_system.EVA, mob_family_system.DEF, mob_family_system.ATT, mob_family_system.ACC, \
         mob_resistances.slash_sdt, mob_resistances.pierce_sdt, mob_resistances.h2h_sdt, mob_resistances.impact_sdt, \
-        mob_resistances.fire_sdt, mob_resistances.ice_sdt, mob_resistances.wind_sdt, mob_resistances.earth_sdt, mob_resistances.lightning_sdt, mob_resistances.water_sdt, mob_resistances.light_sdt, mob_resistances.dark_sdt, \
-        mob_resistances.fire_meva, mob_resistances.ice_meva, mob_resistances.wind_meva, mob_resistances.earth_meva, mob_resistances.lightning_meva, mob_resistances.water_meva, mob_resistances.light_meva, mob_resistances.dark_meva, \
+        mob_resistances.fire_sdt, mob_resistances.ice_sdt, mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
+        mob_resistances.lightning_sdt, mob_resistances.water_sdt, mob_resistances.light_sdt, mob_resistances.dark_sdt, \
+        mob_resistances.fire_meva, mob_resistances.ice_meva, mob_resistances.wind_meva, mob_resistances.earth_meva, \
+        mob_resistances.lightning_meva, mob_resistances.water_meva, mob_resistances.light_meva, mob_resistances.dark_meva, \
         mob_family_system.Element, mob_pools.familyid, mob_pools.name_prefix, mob_pools.entityFlags, mob_pools.animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, \
         mob_groups.allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
         mob_family_system.charmable, \
-        mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, mob_resistances.water_eem, \
-        mob_resistances.light_eem, mob_resistances.dark_eem \
-        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
+        FROM mob_groups \
+        INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+        INNER JOIN mob_ele_evasion ON mob_pools.ele_eva_id = mob_ele_evasion.ele_eva_id \
         WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
         int32 ret = sql->Query(Query, groupid, groupZoneId);
