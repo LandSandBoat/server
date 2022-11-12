@@ -1100,9 +1100,9 @@ void set_eof(int32 fd)
 int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc func_parse)
 {
     TracyZoneScoped;
-#ifdef _DEBUG
-    ShowDebug(fmt::format("create_session fd: {}", fd).c_str());
-#endif // _DEBUG
+
+    DebugSockets(fmt::format("create_session fd: {}", fd).c_str());
+
     sessions[fd] = std::make_unique<socket_data>(func_recv, func_send, func_parse);
 
     sessions[fd]->rdata.reserve(RFIFO_SIZE);
@@ -1117,9 +1117,7 @@ int delete_session(int fd)
 {
     TracyZoneScoped;
 
-#ifdef _DEBUG
-    ShowDebug(fmt::format("delete_session fd: {}", fd).c_str());
-#endif // _DEBUG
+    DebugSockets(fmt::format("delete_session fd: {}", fd).c_str());
 
     if (fd <= 0 || fd >= FD_SETSIZE)
     {
@@ -1143,11 +1141,7 @@ int delete_session(int fd)
 
     fd_max = std::distance(result, sessions.rend());
 
-#ifdef _DEBUG
-    ShowDebug(fmt::format("Resizing fd_max from {} to {}.", old_fd_max, fd_max).c_str());
-#else
-    std::ignore = old_fd_max;
-#endif // _DEBUG
+    DebugSockets(fmt::format("Resizing fd_max from {} to {}.", old_fd_max, fd_max).c_str());
 
     return 0;
 }

@@ -190,7 +190,7 @@ target_include_directories(xi_map
         ${module_include_dirs}
 )
 
-target_precompile_headers(xi_map PUBLIC pch.h)
+target_precompile_headers(xi_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
 
 if(TRACY_ENABLE)
     target_link_libraries(xi_map PUBLIC tracy_client)

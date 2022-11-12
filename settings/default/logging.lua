@@ -11,6 +11,7 @@ xi.settings = xi.settings or {}
 
 xi.settings.logging =
 {
+    DEBUG_SOCKETS        = false,
     DEBUG_NAVMESH        = false,
     DEBUG_PACKETS        = false,
     DEBUG_ACTIONS        = false,

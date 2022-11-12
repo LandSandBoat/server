@@ -206,9 +206,9 @@ int do_sockets(fd_set* rfd, duration next)
     for (int i = 0; i < (int)rfd->fd_count; ++i)
     {
         int fd = sock2fd(rfd->fd_array[i]);
-#ifdef _DEBUG
-        ShowDebug(fmt::format("select fd: {}", i).c_str());
-#endif // _DEBUG
+
+        DebugSockets(fmt::format("select fd: {}", i).c_str());
+
         if (sessions[fd])
         {
             sessions[fd]->func_recv(fd);
