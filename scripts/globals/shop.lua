@@ -33,8 +33,10 @@ xi.shop =
     general = function(player, stock, log)
         local priceMultiplier = 1
 
-        if log then
-            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.main.SHOP_PRICE
+        if log == 0 or log == 4 then -- Sandoria has a 15.55%/fame tax while the other nations only havee 13%.
+            priceMultiplier = (1 + ((7 / 45) * (9 - player:getFameLevel(log)) / 8)) * xi.settings.main.SHOP_PRICE
+        elseif log then
+            priceMultiplier = (1 + (0.13 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.main.SHOP_PRICE
         else
             log = -1
         end
