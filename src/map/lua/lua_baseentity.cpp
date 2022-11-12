@@ -5797,6 +5797,13 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                 charutils::BuildingCharTraitsTable(PChar);
                 charutils::BuildingCharAbilityTable(PChar);
                 charutils::CheckValidEquipment(PChar);
+
+                // Update the character's Automaton capacity bonus regardless if the pet is out or not
+                if (PChar->PAutomaton)
+                {
+                    PChar->PAutomaton->setElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
+                }
+
                 PChar->pushPacket(new CCharJobsPacket(PChar));
                 PChar->pushPacket(new CCharStatsPacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
@@ -5817,34 +5824,67 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                     PPet = static_cast<CPetEntity*>(PChar->PAutomaton);
                 }
 
-                if (PPet->getPetType() == PET_TYPE::WYVERN)
+                if (PPet->getPetType() == PET_TYPE::CHARMED_MOB)
                 {
-                    petutils::LoadWyvernStatistics(PChar, PPet, true);
-                }
-                else if (PPet->getPetType() == PET_TYPE::AUTOMATON)
-                {
-                    if (PChar->GetMJob() == JOB_PUP)
+                    // Charmed mobs only detach if they are above the level restriction
+                    if (PPet->GetMLevel() > NewMLevel)
                     {
-                        PPet->SetMLevel(PChar->GetMLevel());
+                        petutils::DetachPet(PChar);
                     }
-                    else
-                    {
-                        PPet->SetMLevel(PChar->GetSLevel());
-                    }
-
-                    PPet->SetSLevel(PPet->GetMLevel() / 2);
-                    puppetutils::LoadAutomatonStats(PChar);
-                }
-                else
-                {
-                    petutils::DespawnPet(PChar);
+                    return PChar->m_LevelRestriction;
                 }
 
-                if (PChar->PPet || PChar->PAutomaton)
+                // Preserve pet's HP and MP
+                int32 hp = PPet->health.hp;
+                int32 mp = PPet->health.mp;
+
+                // Reset pet to a clean slate
+                PPet->StatusEffectContainer->KillAllStatusEffect();
+                PPet->restoreModifiers();
+                PPet->restoreMobModifiers();
+                PPet->TraitList.clear();
+
+                switch (PPet->getPetType())
                 {
-                    petutils::FinalizePetStatistics(PChar, PPet);
-                    PPet->updatemask |= UPDATE_HP;
+                    case PET_TYPE::AVATAR:
+                        petutils::CalculateAvatarStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::WYVERN:
+                        petutils::CalculateWyvernStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::JUG_PET:
+                        petutils::CalculateJugPetStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::AUTOMATON:
+                        if (isExceedingElementalCapacity())
+                        {
+                            // Reset Activate if Automaton is full HP
+                            if (PPet->health.hp == PPet->GetMaxHP())
+                            {
+                                resetRecast(RECAST_ABILITY, 205);
+                            }
+
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_AUTO_EXCEEDS_CAPACITY));
+                            petutils::DespawnPet(PChar);
+                            return PChar->m_LevelRestriction;
+                        }
+                        petutils::CalculateAutomatonStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::LUOPAN:
+                        petutils::CalculateLoupanStats(PChar, PPet);
+                        break;
+                    default:
+                        petutils::DespawnPet(PChar);
+                        return PChar->m_LevelRestriction;
                 }
+
+                // Setup pet with master since traits, abilities and some status effects need to be reapplied
+                petutils::SetupPetWithMaster(PChar, PPet);
+
+                // Restore pet's HP and MP to what it was before the stat recalculation
+                PPet->health.hp = std::min(hp, PPet->GetMaxHP());
+                PPet->health.mp = std::min(mp, PPet->GetMaxMP());
+                PPet->updatemask |= UPDATE_HP;
             }
         }
     }
@@ -13110,6 +13150,35 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 }
 
 /************************************************************************
+ *  Function: isExceedingElementalCapacity()
+ *  Purpose : Checks if the automaton elemental capacity is being exceeded.
+ *  Example : if master:isExceedingElementalCapacity() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isExceedingElementalCapacity()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar->PAutomaton)
+    {
+        return false;
+    }
+
+    for (uint8 i = 0; i < 8; ++i)
+    {
+        if (PChar->PAutomaton->getElementCapacity(i) > PChar->PAutomaton->getElementMax(i))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
  *  Function: getAllRuneEffects()
  *  Purpose : Returns a sol::table with all rune effects
  *  Example : local runeEffects = player:getAllRuneEffects()
@@ -15871,6 +15940,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
     SOL_REGISTER("getOverloadChance", CLuaBaseEntity::getOverloadChance);
     SOL_REGISTER("setStatDebilitation", CLuaBaseEntity::setStatDebilitation);
+    SOL_REGISTER("isExceedingElementalCapacity", CLuaBaseEntity::isExceedingElementalCapacity);
 
     // Damage Calculation
     SOL_REGISTER("getStat", CLuaBaseEntity::getStat);

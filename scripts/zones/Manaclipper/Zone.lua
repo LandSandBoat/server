@@ -16,7 +16,11 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     xi.manaclipper.onZoneIn(player)
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(0, -3, -8, 60)
     end
 

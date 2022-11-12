@@ -526,10 +526,9 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PChar->PPet != nullptr)
         {
-            auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
-            if (PChar->PPet->objtype != TYPE_MOB)
+            if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet))
             {
-                if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+                if (PPetEntity->shouldPersistThroughZone())
                 {
                     PChar->setPetZoningInfo();
                 }
@@ -537,10 +536,6 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     PChar->resetPetZoningInfo();
                 }
-            }
-            else
-            {
-                PChar->resetPetZoningInfo();
             }
         }
 
@@ -3706,10 +3701,9 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     // handle pets on zone
     if (PChar->PPet != nullptr)
     {
-        auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
-        if (PChar->PPet->objtype != TYPE_MOB)
+        if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet))
         {
-            if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+            if (PPetEntity->shouldPersistThroughZone())
             {
                 PChar->setPetZoningInfo();
             }
@@ -3717,10 +3711,6 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->resetPetZoningInfo();
             }
-        }
-        else
-        {
-            PChar->resetPetZoningInfo();
         }
     }
 

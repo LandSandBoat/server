@@ -29,9 +29,9 @@ function onBattlefieldHandlerInitialise(zone)
     return default
 end
 
-xi.battlefield = {}
-xi.battlefield.contents = {}
-xi.battlefield.contentsByZone = {}
+xi.battlefield = xi.battlefield or {}
+xi.battlefield.contents = xi.battlefield.contents or {}
+xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
 
 xi.battlefield.status =
 {
@@ -769,12 +769,19 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
 end
 
 function Battlefield.redirectEventCall(eventName, player, csid, option)
+    local battlefieldID = 0
     local battlefield = player:getBattlefield()
-    if not battlefield then
+    if battlefield then
+        battlefieldID = battlefield:getID()
+    else
+        battlefieldID = player:getLocalVar("battlefieldID")
+    end
+
+    if battlefieldID == 0 then
         return
     end
 
-    local content = xi.battlefield.contents[battlefield:getID()]
+    local content = xi.battlefield.contents[battlefieldID]
     content[eventName](content, player, csid, option)
 end
 
@@ -890,6 +897,8 @@ function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
 end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
+    player:setLocalVar("battlefieldID", battlefield:getID())
+
     local initiatorId, _ = battlefield:getInitiator()
     if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
 
