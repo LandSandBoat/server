@@ -140,8 +140,10 @@ enum MOUNTTYPE : uint8
     MOUNT_RED_RAPTOR     = 31,
     MOUNT_IRON_GIANT     = 32,
     MOUNT_BYAKKO         = 33,
+    MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This is currently blank, probably needs additional packets sent
+    MOUNT_IXION          = 35,
     //
-    MOUNT_MAX = 34,
+    MOUNT_MAX = 36,
 };
 
 enum class ALLEGIANCE_TYPE : uint8

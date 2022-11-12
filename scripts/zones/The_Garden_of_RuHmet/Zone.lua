@@ -111,10 +111,17 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    local cs = -1
+
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-351.136, -2.25, -380, 253)
     end
-   player:setCharVar("Ru-Hmet-TP", 0)
+
+    player:setCharVar("Ru-Hmet-TP", 0)
 end
 
 zoneObject.onRegionEnter = function(player, region)

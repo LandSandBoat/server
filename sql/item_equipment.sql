@@ -10763,7 +10763,7 @@ INSERT INTO `item_equipment` VALUES (21766,'hepatizon_axe_+1',99,119,2097281,93,
 INSERT INTO `item_equipment` VALUES (21767,'raetic_chopper',99,119,2638473,335,0,0,1,0,3);
 INSERT INTO `item_equipment` VALUES (21768,'raetic_chopper_+1',99,119,2638473,335,0,0,1,0,3);
 INSERT INTO `item_equipment` VALUES (21769,'voluspa_chopper',99,119,2097281,363,0,0,1,0,0);
-INSERT INTO `item_equipment` VALUES (21770,'helgoland',1,0,4194303,869,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (21770,'helgoland',1,0,4194303,869,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21772,'war._chopper',99,119,1,92,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (21773,'agoge_chopper',99,119,1,92,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (21774,'labraunda',99,119,1,812,0,0,1,0,5);

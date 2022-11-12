@@ -4574,6 +4574,7 @@ INSERT INTO `item_weapon` VALUES (21766,'hepatizon_axe_+1',6,0,242,242,188,2,1,4
 INSERT INTO `item_weapon` VALUES (21767,'raetic_chopper',6,0,242,242,215,2,1,504,336,0);  -- DMG:336 Delay:504
 INSERT INTO `item_weapon` VALUES (21768,'raetic_chopper_+1',6,0,242,242,215,2,1,489,337,0); -- DMG:337 Delay:489
 INSERT INTO `item_weapon` VALUES (21769,'voluspa_chopper',6,0,215,215,215,2,1,504,273,0);
+INSERT INTO `item_weapon` VALUES (21770,'helgoland',6,0,0,0,0,2,1,504,1,0); -- DMG:1, Delay 504
 INSERT INTO `item_weapon` VALUES (21772,'war._chopper',6,0,242,242,228,2,1,504,336,0);    -- DMG:336 Delay:504
 INSERT INTO `item_weapon` VALUES (21773,'agoge_chopper',6,0,255,255,242,2,1,489,337,0);   -- DMG:337 Delay:489
 INSERT INTO `item_weapon` VALUES (21774,'labraunda',6,0,269,269,255,2,1,489,338,0);       -- DMG:338 Delay:489
