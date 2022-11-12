@@ -541,7 +541,7 @@ public:
     void SetBackgroundMusicDay(uint8 music);
     void SetBackgroundMusicNight(uint8 music);
 
-    const QueryByNameResult_t& queryEntitiesByName(std::string const& name);
+    auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
 
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);

@@ -136,12 +136,13 @@ namespace luautils
 
     void PopulateIDLookups(std::optional<uint16> maybeZoneId = std::nullopt);
 
-    void  SendEntityVisualPacket(uint32 npcid, const char* command);
-    void  InitInteractionGlobal();
-    auto  GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
-    auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
-    auto  GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    void SendEntityVisualPacket(uint32 npcid, const char* command);
+    void InitInteractionGlobal();
+    auto GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
+    auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+    auto GetEntityByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
+
     void  WeekUpdateConquest(sol::variadic_args va);
     uint8 GetRegionOwner(uint8 type);
     uint8 GetRegionInfluence(uint8 type); // Return influence graphics
