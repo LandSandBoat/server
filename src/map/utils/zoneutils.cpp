@@ -334,8 +334,9 @@ namespace zoneutils
         uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, mob_spawn_points.pos_rot, mob_spawn_points.pos_x, \
-        mob_spawn_points.pos_y, mob_spawn_points.pos_z, mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
+        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, \
+        mob_spawn_points.pos_rot, mob_spawn_points.pos_x, mob_spawn_points.pos_y, mob_spawn_points.pos_z, \
+        mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
         mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, \
         mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, \
         mob_pools.immunity, mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, mob_family_system.STR, \
@@ -350,10 +351,11 @@ namespace zoneutils
         mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, mob_groups.allegiance, mob_pools.namevis, mob_pools.aggro, \
         mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, mob_family_system.charmable, \
         mob_groups.content_tag, \
-        mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, mob_resistances.water_eem, \
-        mob_resistances.light_eem, mob_resistances.dark_eem \
+        mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+        INNER JOIN mob_ele_evasion ON mob_ele_evasion.ele_eva_id = mob_pools.ele_eva_id \
         INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
         INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
