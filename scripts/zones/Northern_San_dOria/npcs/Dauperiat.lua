@@ -33,7 +33,10 @@ entity.onTrigger = function(player, npc)
 
     if blackMail == QUEST_AVAILABLE and sanFame >= 3 and homeRank >= 3 then
         player:startEvent(643) -- 643 gives me letter
-    elseif blackMail == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE) then
+    elseif
+        blackMail == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
+    then
         player:startEvent(645)  -- 645 recap, take envelope!
 
     elseif blackMail == QUEST_ACCEPTED and questState == 1 then

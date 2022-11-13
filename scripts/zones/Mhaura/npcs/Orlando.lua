@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Orlando
--- Type: Standard NPC
 -- !pos -37.268 -9 58.047 249
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
@@ -30,7 +29,10 @@ entity.onTrade = function(player, npc, trade)
     }
 
     for x, item in pairs(itemList) do
-        if questStatus == QUEST_ACCEPTED or player:getLocalVar("OrlandoRepeat") == 1 then
+        if
+            questStatus == QUEST_ACCEPTED or
+            player:getLocalVar("OrlandoRepeat") == 1
+        then
             if item[1] == itemID then
                 if trade:hasItemQty(itemID, 8) and trade:getItemCount() == 8 then
                     -- Correct amount, valid item.

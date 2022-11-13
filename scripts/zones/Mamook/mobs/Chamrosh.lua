@@ -36,10 +36,15 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("delay", delay + 1)
         end
     end
-    if mob:getHPP() < mob:getLocalVar("useWise") and mob:getLocalVar("usedMainSpec") == 0 then
+
+    if
+        mob:getHPP() < mob:getLocalVar("useWise") and
+        mob:getLocalVar("usedMainSpec") == 0
+    then
         mob:useMobAbility(1702)
         mob:setLocalVar("usedMainSpec", 1)
     end
+
     if mob:getBattleTime() == changeTime then
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
@@ -54,7 +59,11 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMagicHit = function(caster, target, spell)
-    if spell:tookEffect() and target:getAnimationSub() == 1 and (caster:isPC() or caster:isPet()) then
+    if
+        spell:tookEffect() and
+        target:getAnimationSub() == 1 and
+        (caster:isPC() or caster:isPet())
+    then
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
     end

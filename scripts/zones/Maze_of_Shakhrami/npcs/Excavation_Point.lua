@@ -11,7 +11,11 @@ require("scripts/globals/helm")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("TheHolyCrest_Event") == 3 and not player:hasItem(xi.items.WYVERN_EGG) and npcUtil.tradeHas(trade, xi.items.PICKAXE) then
+    if
+        player:getCharVar("TheHolyCrest_Event") == 3 and
+        not player:hasItem(xi.items.WYVERN_EGG) and
+        npcUtil.tradeHas(trade, xi.items.PICKAXE)
+    then
         if npcUtil.giveItem(player, xi.items.WYVERN_EGG) then
             player:confirmTrade()
         end

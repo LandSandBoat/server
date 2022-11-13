@@ -18,11 +18,15 @@ end
 
 entity.onTrigger = function(player, npc)
     local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
+
     if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WATER) then
         player:startEvent(620)
     elseif gates == QUEST_ACCEPTED then
         player:showText(npc, ID.text.OLBERGIEUT_DIALOG, xi.ki.SCRIPTURE_OF_WIND)
-    elseif player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and gates == QUEST_AVAILABLE then
+    elseif
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+        gates == QUEST_AVAILABLE
+    then
         player:startEvent(619)
     else
         player:startEvent(612)

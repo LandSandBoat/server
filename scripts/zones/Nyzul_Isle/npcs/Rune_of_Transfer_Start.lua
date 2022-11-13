@@ -36,7 +36,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     local instance = npc:getInstance()
     local chars    = instance:getChars()
 
-    if csid == 94 and option > 0 and option < 21 and instance:getLocalVar("runeHandler") == player:getID() then
+    if
+        csid == 94 and
+        option > 0 and
+        option < 21 and
+        instance:getLocalVar("runeHandler") == player:getID()
+    then
         local floorCost = xi.nyzul.floorCost[option]
 
         if player:getCurrency("nyzul_isle_assault_point") >= floorCost.cost then
