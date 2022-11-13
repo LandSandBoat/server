@@ -79,7 +79,9 @@ entity.onTrigger = function(player, npc)
             player:startEvent(108)
         end
     elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
+        mJob == xi.job.RDM and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
+        envelopedInDarkness == QUEST_COMPLETED and
         peaceForTheSpirit == QUEST_AVAILABLE
     then
         player:startEvent(109) -- Start
@@ -89,7 +91,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(52)
 
     -- Default dialogue after "Enveloped in Darkness"
-    elseif envelopedInDarkness == QUEST_COMPLETED and peaceForTheSpirit == QUEST_AVAILABLE then
+    elseif
+        envelopedInDarkness == QUEST_COMPLETED and
+        peaceForTheSpirit == QUEST_AVAILABLE
+    then
         player:startEvent(114)
 
     -- Default dialogue

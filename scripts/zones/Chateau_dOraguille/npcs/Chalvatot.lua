@@ -19,7 +19,11 @@ entity.onTrade = function(player, npc, trade)
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
-    if herMajestysGarden == QUEST_ACCEPTED and trade:hasItemQty(533, 1) and trade:getItemCount() == 1 then
+    if
+        herMajestysGarden == QUEST_ACCEPTED and
+        trade:hasItemQty(533, 1) and
+        trade:getItemCount() == 1
+    then
         player:startEvent(83)
     end
 end
@@ -44,11 +48,17 @@ entity.onTrigger = function(player, npc)
         end
 
     -- LURE OF THE WILDCAT
-    elseif lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatSandy, 19) then
+    elseif
+        lureOfTheWildcat == QUEST_ACCEPTED and
+        not utils.mask.getBit(wildcatSandy, 19)
+    then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
-    elseif herMajestysGarden == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 then
+    elseif
+        herMajestysGarden == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4
+    then
         player:startEvent(84)
     elseif herMajestysGarden == QUEST_ACCEPTED then
         player:startEvent(82)

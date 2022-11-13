@@ -42,13 +42,19 @@ entity.onTrigger = function(player, npc)
         player:startEvent(29)
     elseif player:getCharVar("RUN_COTR") == cotrStates.RUNE_ENHANCEMENT then
         player:startEvent(26, 1)
-    elseif cotrQuestStatus == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL) then
+    elseif
+        cotrQuestStatus == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
+    then
         player:startEvent(26)
     elseif cotrQuestStatus == QUEST_ACCEPTED then
         player:startEvent(25)
     elseif player:getCharVar("RUN_COTR") == cotrStates.TRIGGERED then
         player:startEvent(24)
-    elseif cotrQuestStatus == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL then
+    elseif
+        cotrQuestStatus == QUEST_AVAILABLE and
+        player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
+    then
         player:startEvent(23)
     else
         player:startEvent(27) -- Standard dialog

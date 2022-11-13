@@ -35,7 +35,10 @@ entity.onMobFight = function(mob)
     local changeTime = mob:getLocalVar("changeTime")
 
     -- If we're in a pot form, but going to change to either Rings/Poles
-    if (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and mob:getBattleTime() - changeTime > randomTime then
+    if
+        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and
+        mob:getBattleTime() - changeTime > randomTime
+    then
         local aniChange = math.random(2, 3)
         mob:setAnimationSub(aniChange)
 
@@ -54,7 +57,10 @@ entity.onMobFight = function(mob)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     -- We're in poles, but changing
-    elseif mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime then
+    elseif
+        mob:getAnimationSub() == 2 and
+        mob:getBattleTime() - changeTime > randomTime
+    then
         local aniChange = math.random(0, 1)
 
         -- Changing to Pot, only take Blunt damage
@@ -74,7 +80,10 @@ entity.onMobFight = function(mob)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     -- We're in rings, but going to change to pot or poles
-    elseif mob:getAnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime then
+    elseif
+        mob:getAnimationSub() == 3 and
+        mob:getBattleTime() - changeTime > randomTime
+    then
         local aniChange = math.random(0, 2)
         mob:setAnimationSub(aniChange)
 

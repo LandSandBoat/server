@@ -59,7 +59,11 @@ zoneObject.onRegionEnter = function(player, region)
 
         [5] = function (x)
             if player:getCharVar("MeaChipRegistration") == 1 then
-                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpMea") < os.time() then -- 5% Chance chip breaks
+                if
+                    math.random(1, 100) <= 95 or
+                    player:getCharVar("LastSkyWarpMea") < os.time()
+                then
+                    -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
                 else
                     player:startEvent(169) -- Chip Breaks!
@@ -71,7 +75,11 @@ zoneObject.onRegionEnter = function(player, region)
 
         [6] = function (x)
             if player:getCharVar("HollaChipRegistration") == 1 then
-                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpHolla") < os.time() then -- 5% Chance chip breaks
+                if
+                    math.random(1, 100) <= 95 or
+                    player:getCharVar("LastSkyWarpHolla") < os.time()
+                then
+                    -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
                 else
                     player:startEvent(170) -- Chip Breaks!
@@ -83,7 +91,11 @@ zoneObject.onRegionEnter = function(player, region)
 
         [7] = function (x)
             if player:getCharVar("DemChipRegistration") == 1 then
-                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpDem") < os.time() then -- 5% Chance chip breaks
+                if
+                    math.random(1, 100) <= 95 or
+                    player:getCharVar("LastSkyWarpDem") < os.time()
+                then
+                    -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
                 else
                     player:startEvent(171) -- Chip Breaks!

@@ -20,7 +20,10 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         player:setPos(-0.011, -1.848, -176.133, 192)
-    elseif player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS and prevZone == xi.zone.ROMAEVE then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS and
+        prevZone == xi.zone.ROMAEVE
+    then
         cs = 5
     end
 

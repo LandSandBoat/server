@@ -15,7 +15,11 @@ entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(xi.mission.log_id.COP)
     local copStat = player:getCharVar("PromathiaStatus")
 
-    if cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 1 and not GetMobByID(ID.mob.IXGHRAH):isSpawned() then
+    if
+        cop == xi.mission.id.cop.A_FATE_DECIDED and
+        copStat == 1 and
+        not GetMobByID(ID.mob.IXGHRAH):isSpawned()
+    then
         SpawnMob(ID.mob.IXGHRAH):updateClaim(player)
     elseif cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 2 then
         player:startEvent(3)
