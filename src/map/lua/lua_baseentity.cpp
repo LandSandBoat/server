@@ -10189,7 +10189,16 @@ bool CLuaBaseEntity::checkImbuedItems()
 bool CLuaBaseEntity::isDualWielding()
 {
     CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
-    if (PBattleEntity)
+
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        if (PChar->getEquip(SLOT_SUB) && !PChar->getEquip(SLOT_SUB)->IsShield())
+        {
+            return PBattleEntity->m_dualWield;
+        }
+    }
+    else if (PBattleEntity)
     {
         return PBattleEntity->m_dualWield;
     }
