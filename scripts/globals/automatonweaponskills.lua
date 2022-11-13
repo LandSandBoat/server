@@ -226,9 +226,15 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
         --finaldmg = target:physicalDmgTaken(finaldmg, attack.damageType)
         if attack.weaponType == xi.skill.HAND_TO_HAND then
             finaldmg = finaldmg * target:getMod(xi.mod.HTH_SDT) / 1000
-        elseif attack.weaponType == xi.skill.DAGGER or attack.weaponType == xi.skill.POLEARM then
+        elseif
+            attack.weaponType == xi.skill.DAGGER or
+            attack.weaponType == xi.skill.POLEARM
+        then
             finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
-        elseif attack.weaponType == xi.skill.CLUB or attack.weaponType == xi.skill.STAFF then
+        elseif
+            attack.weaponType == xi.skill.CLUB or
+            attack.weaponType == xi.skill.STAFF
+        then
             finaldmg = finaldmg * target:getMod(xi.mod.IMPACT_SDT) / 1000
         else
             finaldmg = finaldmg * target:getMod(xi.mod.SLASH_SDT) / 1000

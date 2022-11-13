@@ -19,7 +19,12 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(690) -- Finish quest "Messenger from Beyond"
         end
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED then
-        if trade:hasItemQty(1097, 1) and trade:hasItemQty(12995, 1) and trade:getItemCount() == 2 then -- Trade Yagudo Holy Water & Moccasins
+        if
+            trade:hasItemQty(1097, 1) and
+            trade:hasItemQty(12995, 1) and
+            trade:getItemCount() == 2
+        then
+            -- Trade Yagudo Holy Water & Moccasins
             player:startEvent(691) -- Finish quest "Prelude of Black and White"
         end
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED then
@@ -36,7 +41,11 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
+    if
+        messengerFromBeyond == QUEST_AVAILABLE and
+        mJob == xi.job.WHM and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+    then
         player:startEvent(689) -- Start quest "Messenger from Beyond"
     else
         player:startEvent(688) -- Standard dialog

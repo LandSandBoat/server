@@ -86,7 +86,10 @@ quests.flyers_for_regine.onRegionEnter = function(player, region)
 end
 
 quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+    if
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, 532)
+    then
         local zoneId = player:getZoneID()
         local ID = zones[zoneId]
         local mask = player:getCharVar('[ffr]deliveryMask')

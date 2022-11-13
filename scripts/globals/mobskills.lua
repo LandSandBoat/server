@@ -545,7 +545,10 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     --Handle shadows depending on shadow behaviour / attackType
-    if shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
+    if
+        shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
+        shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    then --remove 'shadowbehav' shadows.
 
         if skill:isAoE() or skill:isConal() then
             shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
@@ -579,7 +582,10 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     if target:getMod(xi.mod.AUTO_ANALYZER) > 0 then
         local analyzerSkill = target:getLocalVar("analyzer_skill")
         local analyzerHits = target:getLocalVar("analyzer_hits")
-        if analyzerSkill == skill:getID() and target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits then
+        if
+            analyzerSkill == skill:getID() and
+            target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits
+        then
             -- Successfully mitigating damage at a fixed 40%
             dmg = dmg * 0.6
             analyzerHits = analyzerHits + 1

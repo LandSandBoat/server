@@ -34,7 +34,13 @@ local onMobRoamAction
 -- @table followOptions
 -----------------------------------
 function xi.follow.follow(mob, leader, options)
-    if not leader:isSpawned() or not mob:isSpawned() or leader:getZoneID() ~= mob:getZoneID() then return false end
+    if
+        not leader:isSpawned() or
+        not mob:isSpawned() or
+        leader:getZoneID() ~= mob:getZoneID()
+    then
+        return false
+    end
 
     options = options or {}
     options.followDistance = options.followDistance or 8.0
@@ -158,7 +164,12 @@ function onMobRoamAction(follower)
     local followerId = follower:getID()
     local leader = followerToLeaderMap[followerId]
 
-    if not follower:isSpawned() or not leader or not leader:isSpawned() or leader:getZoneID() ~= follower:getZoneID() then
+    if
+        not follower:isSpawned() or
+        not leader or
+        not leader:isSpawned() or
+        leader:getZoneID() ~= follower:getZoneID()
+    then
         xi.follow.stopFollowing(follower)
         return
     end

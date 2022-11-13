@@ -25,7 +25,11 @@ entity.onTrigger = function(player, npc)
     -- Class Reunion
     if classReunion == 1 and classReunionProgress == 4 then
         player:startEvent(713, 0, 1171, 0, 0, 0, 0, 0, 0) -- he gives you an ice pendulum and wants you to go to Cloister of Frost
-    elseif classReunion == 1 and classReunionProgress == 5 and not player:hasItem(1171) then
+    elseif
+        classReunion == 1 and
+        classReunionProgress == 5 and
+        not player:hasItem(1171)
+    then
         player:startEvent(712, 0, 1171, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
     elseif

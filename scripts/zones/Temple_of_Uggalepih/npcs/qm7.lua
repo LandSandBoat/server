@@ -10,7 +10,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1267) and npcUtil.popFromQM(player, npc, ID.mob.DEATH_FROM_ABOVE) then -- Bee Larvae
+    if
+        npcUtil.tradeHas(trade, 1267) and
+        npcUtil.popFromQM(player, npc, ID.mob.DEATH_FROM_ABOVE)
+    then
+        -- Bee Larvae
         player:confirmTrade()
     end
 end

@@ -35,7 +35,10 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(0, 0, -11, 191)
         player:setHomePoint()
     -- RDM AF3 CS
-    elseif player:getCharVar("peaceForTheSpiritCS") == 5 and player:getFreeSlotsCount() >= 1 then
+    elseif
+        player:getCharVar("peaceForTheSpiritCS") == 5 and
+        player:getFreeSlotsCount() >= 1
+    then
         cs = 49
     end
 
@@ -62,7 +65,12 @@ zoneObject.onRegionEnter = function(player, region)
             local pNation = player:getNation()
             local currentMission = player:getCurrentMission(pNation)
 
-            if (pNation == 0 and player:getRank(player:getNation()) >= 2) or (pNation > 0 and player:hasCompletedMission(pNation, 5) == 1) or (currentMission >= 5 and currentMission <= 9) or (player:getRank(player:getNation()) >= 3) then
+            if
+                (pNation == 0 and player:getRank(player:getNation()) >= 2) or
+                (pNation > 0 and player:hasCompletedMission(pNation, 5)) or
+                (currentMission >= 5 and currentMission <= 9) or
+                player:getRank(player:getNation()) >= 3
+            then
                 player:startEvent(569)
             else
                 player:startEvent(568)
@@ -84,7 +92,10 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
     elseif csid == 569 then
         player:setPos(0, 0, -13, 192, 233)
-    elseif csid == 49 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, { item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE }) then
+    elseif
+        csid == 49 and
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, { item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE })
+    then
         player:setCharVar("peaceForTheSpiritCS", 0)
     elseif csid == 16 then
         player:setCharVar("Wait1DayM8-1_date", 0)

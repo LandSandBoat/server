@@ -14,7 +14,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if target:hasStatusEffect(xi.effect.STR_DOWN) or caster:hasStatusEffect(xi.effect.STR_BOOST) then
+    if
+        target:hasStatusEffect(xi.effect.STR_DOWN) or
+        caster:hasStatusEffect(xi.effect.STR_BOOST)
+    then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)

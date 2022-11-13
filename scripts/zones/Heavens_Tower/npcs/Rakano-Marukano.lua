@@ -18,7 +18,10 @@ entity.onTrigger = function(player, npc)
 
     if oldNation == newNation then
         player:startEvent(10004, 0, 0, 0, oldNation)
-    elseif player:getCurrentMission(oldNation) ~= xi.mission.id.nation.NONE or player:getMissionStatus(player:getNation()) ~= 0 then
+    elseif
+        player:getCurrentMission(oldNation) ~= xi.mission.id.nation.NONE or
+        player:getMissionStatus(player:getNation()) ~= 0
+    then
         player:startEvent(10003, 0, 0, 0, newNation)
     elseif oldNation ~= newNation then
         local hasGil = 0

@@ -13,7 +13,13 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasStatusEffect(xi.effect.SILENCE) or target:hasStatusEffect(xi.effect.BLINDNESS) or target:hasStatusEffect(xi.effect.POISON) or target:hasStatusEffect(xi.effect.PARALYSIS) or target:hasStatusEffect(xi.effect.DISEASE) then
+    if
+        target:hasStatusEffect(xi.effect.SILENCE) or
+        target:hasStatusEffect(xi.effect.BLINDNESS) or
+        target:hasStatusEffect(xi.effect.POISON) or
+        target:hasStatusEffect(xi.effect.PARALYSIS) or
+        target:hasStatusEffect(xi.effect.DISEASE)
+    then
         local effectRemoved = 0
         while effectRemoved == 0 do
             local num = math.random(1, 5)

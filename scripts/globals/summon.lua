@@ -354,9 +354,13 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     end
 
     -- handle invincible
-    if target:hasStatusEffect(xi.effect.INVINCIBLE) and skilltype == xi.attackType.PHYSICAL then
+    if
+        target:hasStatusEffect(xi.effect.INVINCIBLE) and
+        skilltype == xi.attackType.PHYSICAL
+    then
         return 0
     end
+
     -- handle pd
     if
         target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
@@ -408,7 +412,14 @@ xi.summon.avatarMiniFightCheck = function(caster)
     local bcnmid
     if caster:hasStatusEffect(xi.effect.BATTLEFIELD) then
         bcnmid = caster:getStatusEffect(xi.effect.BATTLEFIELD):getPower()
-        if bcnmid == 418 or bcnmid == 609 or bcnmid == 450 or bcnmid == 482 or bcnmid == 545 or bcnmid == 578 then -- Mini Avatar Fights
+        if
+            bcnmid == 418 or
+            bcnmid == 609 or
+            bcnmid == 450 or
+            bcnmid == 482 or
+            bcnmid == 545 or
+            bcnmid == 578
+        then -- Mini Avatar Fights
             result = 40 -- Cannot use <spell> in this area.
         end
     end

@@ -38,9 +38,16 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     if resist >= 0.5 then
         if target:isFacing(caster) then
-            if target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo) and target:getTP() == 0 then
+            if
+                target:hasStatusEffect(typeEffectOne) and
+                target:hasStatusEffect(typeEffectTwo) and
+                target:getTP() == 0
+            then
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-            elseif target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo) then
+            elseif
+                target:hasStatusEffect(typeEffectOne) and
+                target:hasStatusEffect(typeEffectTwo)
+            then
                 target:delTP(power)
                 spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
             elseif target:hasStatusEffect(typeEffectOne) then

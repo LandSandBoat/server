@@ -61,7 +61,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(50, itemid, firstKI, secondKI)
 
         -- Nothing in progress and meet the starting requirements.
-        elseif downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL then
+        elseif
+            downwardHelix == QUEST_COMPLETED and
+            mJob == xi.job.SCH and
+            mLvl >= xi.settings.main.AF2_QUEST_LEVEL
+        then
             -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0
             if loafersQuestProgress == 4 then
@@ -83,19 +87,34 @@ entity.onTrigger = function(player, npc)
             end
 
             -- Check Key Items and give them their dynamic event.
-            if player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT) and player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL) and loafersQuestProgress == 3 then -- Scholar's Loafers
+            if
+                player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT) and
+                player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL) and
+                loafersQuestProgress == 3
+            then
+                -- Scholar's Loafers
                 player:startEvent(cutsceneID, 15748)
                 player:setLocalVar("item", 15748)
                 player:setLocalVar("firstKI", xi.ki.RAFFLESIA_DREAMSPIT)
                 player:setLocalVar("secondKI", xi.ki.DROGAROGAN_BONEMEAL)
 
-            elseif player:hasKeyItem(xi.ki.SLUG_MUCUS) and player:hasKeyItem(xi.ki.DJINN_EMBER) and pantsQuestProgress == 3 then -- Scholar's Pants
+            elseif
+                player:hasKeyItem(xi.ki.SLUG_MUCUS) and
+                player:hasKeyItem(xi.ki.DJINN_EMBER) and
+                pantsQuestProgress == 3
+            then
+                -- Scholar's Pants
                 player:startEvent(cutsceneID, 16311)
                 player:setLocalVar("item", 16311)
                 player:setLocalVar("firstKI", xi.ki.SLUG_MUCUS)
                 player:setLocalVar("secondKI", xi.ki.DJINN_EMBER)
 
-            elseif player:hasKeyItem(xi.ki.PEISTE_DUNG) and player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT) and gownQuestProgress == 3 then -- Scholar's Gown
+            elseif
+                player:hasKeyItem(xi.ki.PEISTE_DUNG) and
+                player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT) and
+                gownQuestProgress == 3
+            then
+                -- Scholar's Gown
                 player:startEvent(cutsceneID, 14580)
                 player:setLocalVar("item", 14580)
                 player:setLocalVar("firstKI", xi.ki.PEISTE_DUNG)

@@ -99,10 +99,18 @@ local function fencerBonus(attacker)
     end
 
     local mainEquip = attacker:getStorageItem(0, 0, xi.slot.MAIN)
-    if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
+    if
+        mainEquip and
+        not mainEquip:isTwoHanded() and
+        not mainEquip:isHandToHand()
+    then
         local subEquip = attacker:getStorageItem(0, 0, xi.slot.SUB)
 
-        if subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield() then
+        if
+            subEquip == nil or
+            subEquip:getSkillType() == xi.skill.NONE or
+            subEquip:isShield()
+        then
             bonus = attacker:getMod(xi.mod.FENCER_CRITHITRATE) / 100
         end
     end
@@ -187,7 +195,10 @@ local function getMultiAttacks(attacker, target, wsParams)
     end
 
     -- QA/TA/DA can only proc on the first hit of each weapon or each fist
-    if attacker:getOffhandDmg() > 0 or attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
+    if
+        attacker:getOffhandDmg() > 0 or
+        attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND
+    then
         multiChances = 2
     end
 
@@ -293,7 +304,11 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
         bonus = 0
     end
 
-    if target:hasStatusEffect(xi.effect.YONIN) and target:isFacing(attacker, 23) then -- Yonin evasion boost if defender is facing attacker
+    if
+        target:hasStatusEffect(xi.effect.YONIN) and
+        target:isFacing(attacker, 23)
+    then
+        -- Yonin evasion boost if defender is facing attacker
         bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
@@ -401,9 +416,15 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
 
         if attackTbl.weaponType == xi.skill.HAND_TO_HAND then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.HTH_SDT) / 1000
-        elseif attackTbl.weaponType == xi.skill.DAGGER or attackTbl.weaponType == xi.skill.POLEARM then
+        elseif
+            attackTbl.weaponType == xi.skill.DAGGER or
+            attackTbl.weaponType == xi.skill.POLEARM
+        then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
-        elseif attackTbl.weaponType == xi.skill.CLUB or attackTbl.weaponType == xi.skill.STAFF then
+        elseif
+            attackTbl.weaponType == xi.skill.CLUB or
+            attackTbl.weaponType == xi.skill.STAFF
+        then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
         else
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.SLASH_SDT) / 1000
@@ -522,7 +543,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
                                 + fencerBonusVal - target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
 
         -- Innin critical boost when attacker is behind target
-        if attacker:hasStatusEffect(xi.effect.INNIN) and attacker:isBehind(target, 23) then
+        if
+            attacker:hasStatusEffect(xi.effect.INNIN) and
+            attacker:isBehind(target, 23)
+        then
             nativecrit = nativecrit + attacker:getStatusEffect(xi.effect.INNIN):getPower()
         end
 
@@ -622,7 +646,11 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Factor in "all hits" bonus damage mods
     local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
 
-    if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and not attacker:isPet() then -- For specific WS
+    if
+        attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and
+        not attacker:isPet()
+    then
+        -- For specific WS
         bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
     end
 
@@ -835,7 +863,11 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
-        if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and not attacker:isPet() then -- For specific WS
+        if
+            attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and
+            not attacker:isPet()
+        then
+            -- For specific WS
             bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
         end
 
@@ -989,11 +1021,19 @@ function getHitRate(attacker, target, capHitRate, bonus)
         bonus = 0
     end
 
-    if attacker:hasStatusEffect(xi.effect.INNIN) and attacker:isBehind(target, 23) then -- Innin acc boost if attacker is behind target
+    if
+        attacker:hasStatusEffect(xi.effect.INNIN) and
+        attacker:isBehind(target, 23)
+    then
+        -- Innin acc boost if attacker is behind target
         bonus = bonus + attacker:getStatusEffect(xi.effect.INNIN):getPower()
     end
 
-    if target:hasStatusEffect(xi.effect.YONIN) and attacker:isFacing(target, 23) then -- Yonin evasion boost if attacker is facing target
+    if
+        target:hasStatusEffect(xi.effect.YONIN) and
+        attacker:isFacing(target, 23)
+    then
+        -- Yonin evasion boost if attacker is facing target
         bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 

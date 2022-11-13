@@ -69,9 +69,15 @@ local function doStatusBreath(target, player)
         wyvern:useJobAbility(xi.jobAbility.REMOVE_BLINDNESS, target)
     elseif target:hasStatusEffect(xi.effect.PARALYSIS) and wyvern:getMainLvl() > 40 then
         wyvern:useJobAbility(xi.jobAbility.REMOVE_PARALYSIS, target)
-    elseif (target:hasStatusEffect(xi.effect.CURSE_I) or target:hasStatusEffect(xi.effect.DOOM)) and wyvern:getMainLvl() > 60 then
+    elseif
+        (target:hasStatusEffect(xi.effect.CURSE_I) or target:hasStatusEffect(xi.effect.DOOM)) and
+        wyvern:getMainLvl() > 60
+    then
         wyvern:useJobAbility(xi.jobAbility.REMOVE_CURSE, target)
-    elseif (target:hasStatusEffect(xi.effect.DISEASE) or target:hasStatusEffect(xi.effect.PLAGUE)) and wyvern:getMainLvl() > 80 then
+    elseif
+        (target:hasStatusEffect(xi.effect.DISEASE) or target:hasStatusEffect(xi.effect.PLAGUE)) and
+        wyvern:getMainLvl() > 80
+    then
         wyvern:useJobAbility(xi.jobAbility.REMOVE_DISEASE, target)
     else
         usedBreath = false
@@ -118,7 +124,10 @@ entity.onMobSpawn = function(mob)
                 doHealingBreath(player, threshold, healingbreath)
             end)
         end
-    elseif wyvernType == wyvernCapabilities.OFFENSIVE or wyvernType == wyvernCapabilities.MULTI then
+    elseif
+        wyvernType == wyvernCapabilities.OFFENSIVE or
+        wyvernType == wyvernCapabilities.MULTI
+    then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local weaknessTargetChance = 75
             local breaths              = {}

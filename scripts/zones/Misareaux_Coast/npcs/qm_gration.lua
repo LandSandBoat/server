@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (npcUtil.tradeHas(trade, 12370) or npcUtil.tradeHas(trade, 12359)) and npcUtil.popFromQM(player, npc, ID.mob.GRATION) then -- Hickory Shield or Picaroon's Shield
+    if
+        (npcUtil.tradeHas(trade, 12370) or npcUtil.tradeHas(trade, 12359)) and
+        npcUtil.popFromQM(player, npc, ID.mob.GRATION)
+    then
+        -- Hickory Shield or Picaroon's Shield
         player:confirmTrade()
     end
 end

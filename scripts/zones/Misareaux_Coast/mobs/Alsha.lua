@@ -34,7 +34,10 @@ entity.onMobFight = function(mob, target)
     end
 ]]
     -- Occasionally cast Cure III on the target (never on herself)
-    if mob:getLocalVar("FinalPhase") ~= 1 and mob:getLocalVar("CureTime") <= os.time() then
+    if
+        mob:getLocalVar("FinalPhase") ~= 1 and
+        mob:getLocalVar("CureTime") <= os.time()
+    then
         mob:setLocalVar("CureTime", os.time() + math.random(60, 180))
         target:messageSpecial(ID.text.DROP_OF_OIL)
         mob:timer(1000, function(m)

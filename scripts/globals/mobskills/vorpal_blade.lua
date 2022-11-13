@@ -16,7 +16,10 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Check for Grah Family id 122, 123, 124
     -- if not in Paladin form, then ignore.
-    if (mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and mob:getAnimationSub() ~= 1 then
+    if
+        (mob:getFamily() == 122 or mob:getFamily() == 123 or mob:getFamily() == 124) and
+        mob:getAnimationSub() ~= 1
+    then
         return 1
     elseif mob:getFamily() == 176 then
         -- Handle Mamool Ja THF

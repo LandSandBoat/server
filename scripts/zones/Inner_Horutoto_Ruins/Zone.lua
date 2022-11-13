@@ -52,7 +52,10 @@ zoneObject.onRegionEnter = function(player, region)
             if player:getMainJob() == xi.job.RDM and region:AddCount(1) == 1 then
                 red:setAnimation(xi.anim.OPEN_DOOR)
                 red:entityAnimationPacket("smin")
-                if white:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
+                if
+                    white:getAnimation() == xi.anim.OPEN_DOOR and
+                    black:getAnimation() == xi.anim.OPEN_DOOR
+                then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
                 end
@@ -63,7 +66,10 @@ zoneObject.onRegionEnter = function(player, region)
             if player:getMainJob() == xi.job.WHM and region:AddCount(1) == 1 then
                 white:setAnimation(xi.anim.OPEN_DOOR)
                 white:entityAnimationPacket("smin")
-                if red:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
+                if
+                    red:getAnimation() == xi.anim.OPEN_DOOR and
+                    black:getAnimation() == xi.anim.OPEN_DOOR
+                then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
                 end
@@ -74,7 +80,10 @@ zoneObject.onRegionEnter = function(player, region)
             if player:getMainJob() == xi.job.BLM and region:AddCount(1) == 1 then
                 black:setAnimation(xi.anim.OPEN_DOOR)
                 black:entityAnimationPacket("smin")
-                if red:getAnimation() == xi.anim.OPEN_DOOR and white:getAnimation() == xi.anim.OPEN_DOOR then
+                if
+                    red:getAnimation() == xi.anim.OPEN_DOOR and
+                    white:getAnimation() == xi.anim.OPEN_DOOR
+                then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
                 end

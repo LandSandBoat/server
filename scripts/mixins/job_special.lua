@@ -242,11 +242,18 @@ local abilitiesReady = function(mob)
     local now = os.time()
     local readyTime = mob:getLocalVar("[jobSpecial]readyInitial")
 
-    if readyTime > 0 and now > readyTime and now > mob:getLocalVar("[jobSpecial]cooldown") then
+    if
+        readyTime > 0 and
+        now > readyTime and
+        now > mob:getLocalVar("[jobSpecial]cooldown")
+    then
         local numAbilities = mob:getLocalVar("[jobSpecial]numAbilities")
 
         for i = 1, numAbilities do
-            if now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)  then
+            if
+                now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and
+                mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)
+            then
                 table.insert(abilities, i)
             end
         end

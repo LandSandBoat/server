@@ -18,7 +18,10 @@ end
 entity.onTrigger = function(player, npc)
     local currentAssault = player:getCurrentAssault()
 
-    if player:getCurrentMission(xi.mission.log_id.TOAU) <= xi.mission.id.toau.IMMORTAL_SENTRIES or player:getMainLvl() <= 49 then
+    if
+        player:getCurrentMission(xi.mission.log_id.TOAU) <= xi.mission.id.toau.IMMORTAL_SENTRIES or
+        player:getMainLvl() <= 49
+    then
         player:startEvent(270)
     elseif currentAssault ~= 0 and player:getCharVar("assaultEntered") ~= 0 then
         if player:getCharVar("AssaultComplete") == 1 then
@@ -102,7 +105,12 @@ end
 entity.onEventFinish = function(player, csid, option)
     local tagStock = player:getCurrency("id_tags")
 
-    if csid == 268 and option == 1 and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and tagStock > 0 then
+    if
+        csid == 268 and
+        option == 1 and
+        not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and
+        tagStock > 0
+    then
         if player:getCurrentAssault() ~= 0 then
             player:messageSpecial(ID.text.CANNOT_ISSUE_TAG, xi.ki.IMPERIAL_ARMY_ID_TAG)
             return
@@ -120,7 +128,12 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:setCurrency("id_tags", tagStock - 1)
-    elseif csid == 268 and option == 2 and xi.assault.hasOrders(player) and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
+    elseif
+        csid == 268 and
+        option == 2 and
+        xi.assault.hasOrders(player) and
+        not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+    then
         local currentAssault = player:getCurrentAssault()
 
         for _, orders in pairs(xi.assault.assaultOrders) do

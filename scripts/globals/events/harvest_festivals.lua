@@ -11,7 +11,12 @@ function isHalloweenEnabled()
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
 
-    if month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.main.HALLOWEEN_YEAR_ROUND ~= 0 then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
+    if
+        month == 10 and day >= 20 or
+        month == 11 and day == 1 or
+        xi.settings.main.HALLOWEEN_YEAR_ROUND ~= 0
+    then
+        -- According to wiki Harvest Fest is Oct 20 - Nov 1.
         if xi.settings.main.HALLOWEEN_2005 == 1 then
             option = 1
         elseif HALLOWEEN_2008 == 1 then
@@ -147,7 +152,12 @@ function onHalloweenTrade(player, trade, npc)
                 end
 
                 local alreadyTradedChk = utils.mask.getBit(harvestFestTreats, itemInList)
-                if itemReward ~= 0 and player:getFreeSlotsCount() >= 1 and math.random(1, 3) < 2 then -- Math.random added so you have 33% chance on getting item
+                if
+                    itemReward ~= 0 and
+                    player:getFreeSlotsCount() >= 1 and
+                    math.random(1, 3) < 2
+                then
+                    -- Math.random added so you have 33% chance on getting item
 
                     player:messageSpecial(ID.text.HERE_TAKE_THIS)
                     player:addItem(itemReward)
@@ -194,7 +204,14 @@ function onHalloweenTrade(player, trade, npc)
                     }
 
                     for zi = 1, #pitchForkCostumeList, 3 do
-                        if zone == pitchForkCostumeList[zi] and (costumePicked == pitchForkCostumeList[zi + 1] or zone == pitchForkCostumeList[zi] and costumePicked == pitchForkCostumeList[zi + 2]) then -- Gives special hint for pitch fork costume
+                        if
+                            zone == pitchForkCostumeList[zi] and
+                            (
+                                costumePicked == pitchForkCostumeList[zi + 1] or
+                                zone == pitchForkCostumeList[zi] and
+                                costumePicked == pitchForkCostumeList[zi + 2]
+                            )
+                        then -- Gives special hint for pitch fork costume
                             player:messageSpecial(ID.text.IF_YOU_WEAR_THIS)
 
                         elseif zi == 16 then

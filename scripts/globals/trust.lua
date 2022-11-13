@@ -342,7 +342,10 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
 
     -- Some battlefields allow trusts after you get this ROV Key Item
     local casterBattlefieldID = caster:getBattlefieldID()
-    if rovKIBattlefieldIDs[casterBattlefieldID] and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER) then
+    if
+        rovKIBattlefieldIDs[casterBattlefieldID] and
+        not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER)
+    then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 

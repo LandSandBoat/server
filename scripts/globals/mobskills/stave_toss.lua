@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Stave Toss (staff wielding Mamool Ja only!)
---
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
@@ -10,9 +8,13 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- If animationSub is 1, mob has already lost the staff. If zero, still has staff.
-    if mob:getAnimationSub() == 0 and (mob:getMainJob() == xi.job.BLM or mob:getMainJob() == xi.job.WHM) then
+    if
+        mob:getAnimationSub() == 0 and
+        (mob:getMainJob() == xi.job.BLM or mob:getMainJob() == xi.job.WHM)
+    then
         return 0
     end
+
     return 1
 end
 

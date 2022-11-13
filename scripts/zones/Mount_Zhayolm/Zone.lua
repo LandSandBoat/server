@@ -18,7 +18,11 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if prevZone == xi.zone.LEBROS_CAVERN then
         player:setPos(681.950, -24.00, 369.936, 40)
-    elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    elseif
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-521.016, -6.191, 60.013, 126)
     end
 

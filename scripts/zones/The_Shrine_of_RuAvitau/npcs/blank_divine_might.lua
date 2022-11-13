@@ -38,13 +38,28 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if currentZM == xi.mission.id.zilart.ARK_ANGELS and zmProgress == 1 and divineStatus < 2 then -- Reminder CS/starts Divine Might (per Wiki)
+    if
+        currentZM == xi.mission.id.zilart.ARK_ANGELS and
+        zmProgress == 1 and
+        divineStatus < 2
+    then
+        -- Reminder CS/starts Divine Might (per Wiki)
         player:startEvent(54, 917, 1408, 1550)
-    elseif currentZM >= xi.mission.id.zilart.ARK_ANGELS and dmStatus == QUEST_AVAILABLE and aaKeyitems > 0 then -- Alternative cutscene for those that have done one or more AA fight
+    elseif
+        currentZM >= xi.mission.id.zilart.ARK_ANGELS and
+        dmStatus == QUEST_AVAILABLE and
+        aaKeyitems > 0
+    then
+        -- Alternative cutscene for those that have done one or more AA fight
         player:startEvent(56, 917, 1408, 1550)
     elseif dmStatus == QUEST_ACCEPTED and divineStatus >= 2 then -- CS when player has completed Divine might, award earring
         player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-    elseif dmStatus == QUEST_COMPLETED and dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and dmRepeat ~= QUEST_ACCEPTED then -- You threw away old Earring, start the repeat quest
+    elseif
+        dmStatus == QUEST_COMPLETED and
+        dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and
+        dmRepeat ~= QUEST_ACCEPTED
+    then
+        -- You threw away old Earring, start the repeat quest
         player:startEvent(57, player:getCharVar("DM_Earring"))
     elseif dmRepeat == QUEST_ACCEPTED and divineStatus < 2 then
         if not hasMoonOre then
@@ -66,7 +81,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 54 or csid == 56) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE then -- Flag Divine Might
+    if
+        (csid == 54 or csid == 56) and
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE
+    then
+        -- Flag Divine Might
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
 
     elseif csid == 57 then -- Divine Might Repeat

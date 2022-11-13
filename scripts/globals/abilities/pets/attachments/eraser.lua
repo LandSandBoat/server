@@ -37,9 +37,15 @@ attachmentObject.onEquip = function(pet)
                 return false
             end
 
-            if automaton:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or checkEffects(automaton) then
+            if
+                automaton:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or
+                checkEffects(automaton)
+            then
                 erasetarget = automaton
-            elseif (automaton:checkDistance(master) - master:getModelSize()) < 7 and (master:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or checkEffects(master)) then
+            elseif
+                (automaton:checkDistance(master) - master:getModelSize()) < 7 and
+                (master:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or checkEffects(master))
+            then
                 erasetarget = master
             end
 

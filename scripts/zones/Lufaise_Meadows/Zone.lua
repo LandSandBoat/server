@@ -46,7 +46,11 @@ end
 zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
-    if regionID == 1 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 6 then
+    if
+        regionID == 1 and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("PromathiaStatus") == 6
+    then
         player:startEvent(116)
     end
 end

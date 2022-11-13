@@ -35,7 +35,10 @@ mission.sections =
             onRegionEnter =
             {
                 [6] = function(player, region)
-                    if not mission:getMustZone(player) and VanadielUniqueDay() >= mission:getVar(player, 'Timer') then
+                    if
+                        not mission:getMustZone(player) and
+                        VanadielUniqueDay() >= mission:getVar(player, 'Timer')
+                    then
                         return mission:progressEvent(3070, { text_table = 0 })
                     end
                 end,

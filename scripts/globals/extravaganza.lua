@@ -42,7 +42,10 @@ end
 xi.extravaganza.shadowEraHide = function(npc)
     local active = xi.extravaganza.campaignActive()
 
-    if active == xi.extravaganza.campaign.NONE or active == xi.extravaganza.campaign.SPRING_FALL then
+    if
+        active == xi.extravaganza.campaign.NONE or
+        active == xi.extravaganza.campaign.SPRING_FALL
+    then
         GetNPCByID(npc):setStatus(xi.status.DISAPPEAR)
     end
 end
@@ -53,7 +56,10 @@ end
 
 xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
     local active = xi.extravaganza.campaignActive()
-    if active == xi.extravaganza.campaign.SUMMER_NY or active == xi.extravaganza.campaign.BOTH then
+    if
+        active == xi.extravaganza.campaign.SUMMER_NY or
+        active == xi.extravaganza.campaign.BOTH
+    then
         local cipherids = xi.extravaganza.getShadowEraCiphers(npc)
         player:setLocalVar("ShadowCipher1", cipherids[1])
         player:setLocalVar("ShadowCipher2", cipherids[2])

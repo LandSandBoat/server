@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 15066) and npcUtil.popFromQM(player, npc, ID.mob.AMALTHEIA) then -- Relic Shield
+    if
+        npcUtil.tradeHas(trade, 15066) and
+        npcUtil.popFromQM(player, npc, ID.mob.AMALTHEIA)
+    then
+        -- Relic Shield
         player:confirmTrade()
     end
 end

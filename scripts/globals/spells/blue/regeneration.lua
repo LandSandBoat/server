@@ -39,7 +39,10 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    if target:hasStatusEffect(xi.effect.REGEN) and target:getStatusEffect(xi.effect.REGEN):getTier() == 1 then
+    if
+        target:hasStatusEffect(xi.effect.REGEN) and
+        target:getStatusEffect(xi.effect.REGEN):getTier() == 1
+    then
         target:delStatusEffect(xi.effect.REGEN)
     end
 

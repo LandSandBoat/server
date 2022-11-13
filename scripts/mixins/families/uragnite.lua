@@ -92,7 +92,10 @@ g_mixins.families.uragnite = function(uragniteMob)
 
     uragniteMob:addListener("TAKE_DAMAGE", "URAGNITE_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.PHYSICAL then
-            if math.random(1, 100) <= mob:getLocalVar("[uragnite]chanceToShell") and bit.band(mob:getAnimationSub(), 1) == 0 then
+            if
+                math.random(1, 100) <= mob:getLocalVar("[uragnite]chanceToShell") and
+                bit.band(mob:getAnimationSub(), 1) == 0
+            then
                 enterShell(mob)
                 local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))
                 mob:timer(timeInShell * 1000, function(mobArg)

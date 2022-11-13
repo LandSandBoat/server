@@ -185,7 +185,11 @@ xi.armorStorage.onEventFinish = function(player, csid, option, deposit, withdraw
             local cost  = armorSets[idx + 9]
             local ki    = armorSets[idx + 10]
 
-            if player:hasKeyItem(ki) and player:getFreeSlotsCount() >= count and player:getGil() >= cost then
+            if
+                player:hasKeyItem(ki) and
+                player:getFreeSlotsCount() >= count and
+                player:getGil() >= cost
+            then
                 for i = 4, 8 do
                     local itemId = armorSets[idx + i]
                     if itemId > 0 then

@@ -18,7 +18,10 @@ xi.besieged = xi.besieged or {}
 xi.besieged.cipherValue = function()
     local active = xi.extravaganza.campaignActive()
 
-    if active == xi.extravaganza.campaign.SUMMER_NY or active == xi.extravaganza.campaign.BOTH then
+    if
+        active == xi.extravaganza.campaign.SUMMER_NY or
+        active == xi.extravaganza.campaign.BOTH
+    then
         return 65536 * 16384
     else
         return 0

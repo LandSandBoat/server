@@ -74,7 +74,10 @@ g_mixins.maat = function(maatMob)
             mob:setLocalVar("specialThreshold", 0)
         end
 
-        if mob:getHPP() < 20 or (mob:getMainJob() == xi.job.WHM and mob:getBattleTime() > 300) then
+        if
+            mob:getHPP() < 20 or
+            (mob:getMainJob() == xi.job.WHM and mob:getBattleTime() > 300)
+        then
             local ID = zones[mob:getZoneID()]
             mob:showText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
             mob:getBattlefield():win()

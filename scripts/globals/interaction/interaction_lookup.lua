@@ -281,7 +281,11 @@ local function getHighestPriorityActions(data, player, secondLevelKey, thirdLeve
     local possibleActions = runHandlersInData(data, player, secondLevelKey, thirdLevelKey, args)
 
     -- If the possible actions is a number, we should always return immediately since it's CS ID from an onZoneIn
-    if possibleActions and #possibleActions == 0 or type(possibleActions[1]) == 'number' then
+    if
+        possibleActions and
+        #possibleActions == 0 or
+        type(possibleActions[1]) == 'number'
+    then
         return possibleActions, Action.Priority.Progress
     end
 
@@ -372,7 +376,11 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
 
     -- Most handlers should run both the handler system and fallback if available,
     -- except those that should only perform one action at a time, like onTrigger and onTrade
-    if fallbackHandler and thirdLevelKey ~= 'onTrigger' and thirdLevelKey ~= 'onTrade' then
+    if
+        fallbackHandler and
+        thirdLevelKey ~= 'onTrigger' and
+        thirdLevelKey ~= 'onTrade'
+    then
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
         local fallbackResult = fallbackHandler(unpack(args))
         return result or fallbackResult

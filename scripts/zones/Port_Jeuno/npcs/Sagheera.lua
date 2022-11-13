@@ -467,7 +467,10 @@ local handleMainEvent = function(player, option, coinAmount)
 
     -- retrieve stored ABCs
     elseif option == 4 then
-        if player:getCurrency("ancient_beastcoin") >= coinAmount and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } }) then
+        if
+            player:getCurrency("ancient_beastcoin") >= coinAmount and
+            npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } })
+        then
             player:delCurrency("ancient_beastcoin", coinAmount)
         end
 
@@ -479,7 +482,10 @@ local handleMainEvent = function(player, option, coinAmount)
     elseif abcShop[option] then
         local purchase = abcShop[option]
 
-        if player:getCurrency("ancient_beastcoin") >= purchase.abc and npcUtil.giveItem(player, purchase.item) then
+        if
+            player:getCurrency("ancient_beastcoin") >= purchase.abc and
+            npcUtil.giveItem(player, purchase.item)
+        then
             player:delCurrency("ancient_beastcoin", purchase.abc)
         end
 
@@ -501,9 +507,15 @@ end
 
 local handleTradeChipEvent = function(player, option)
     local trade = player:getTrade()
-    if npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } }) then
+    if
+        npcUtil.tradeSetInList(trade, tier1Chips) and
+        npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } })
+    then
         player:confirmTrade()
-    elseif npcUtil.tradeSetInList(trade, tier2Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } }) then
+    elseif
+        npcUtil.tradeSetInList(trade, tier2Chips) and
+        npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } })
+    then
         player:confirmTrade()
     end
 end

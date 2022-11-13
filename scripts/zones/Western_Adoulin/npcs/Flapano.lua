@@ -19,7 +19,10 @@ entity.onTrade = function(player, npc, trade)
     local exoticDelicacies = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- ALL THE WAY TO THE BANK
-    if player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas(trade, { { "gil", 5600 } }) then
+    if
+        player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE) and
+        npcUtil.tradeHas(trade, { { "gil", 5600 } })
+    then
         local paidFlapano = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 2)
         if not paidFlapano then
             player:startEvent(5071)
@@ -40,12 +43,18 @@ entity.onTrigger = function(player, npc)
     local exoticDelicacies = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- THE WEATHERSPOON WAR
-    if theWeatherspoonWar == QUEST_ACCEPTED and player:getCharVar("Weatherspoon_War_Status") == 6 then
+    if
+        theWeatherspoonWar == QUEST_ACCEPTED and
+        player:getCharVar("Weatherspoon_War_Status") == 6
+    then
         player:startEvent(191)
 
     -- EXOTIC DELICACIES
     -- Flapano offers his quest every other time the player talks to him
-    elseif exoticDelicacies ~= QUEST_COMPLETED and player:getCharVar("Flapano_Odd_Even") == 0 then
+    elseif
+        exoticDelicacies ~= QUEST_COMPLETED and
+        player:getCharVar("Flapano_Odd_Even") == 0
+    then
         if exoticDelicacies == QUEST_AVAILABLE then
             player:startEvent(2860)
         elseif exoticDelicacies == QUEST_ACCEPTED then

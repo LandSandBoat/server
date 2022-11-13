@@ -10,7 +10,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 4514) and not GetMobByID(ID.mob.CANCER):isSpawned() and not GetMobByID(ID.mob.CANCER + 1):isSpawned() then
+    if
+        npcUtil.tradeHas(trade, 4514) and
+        not GetMobByID(ID.mob.CANCER):isSpawned() and
+        not GetMobByID(ID.mob.CANCER + 1):isSpawned()
+    then
         local mobId = (math.random(1, 100) <= 7) and ID.mob.CANCER or ID.mob.CANCER + 1 -- Cancer has 7% chance to spawn, else Robber Crab.
         npcUtil.popFromQM(player, npc, mobId)
         player:confirmTrade()

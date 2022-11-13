@@ -18,7 +18,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
-    if (skillList == 729 and phase >= 1 and phase <= 2) or (skillList == 728 and mobhp < 70 and mobhp >= 40) then
+    if
+        (skillList == 729 and phase >= 1 and phase <= 2) or
+        (skillList == 728 and mobhp < 70 and mobhp >= 40)
+    then
         if mob:getLocalVar("nuclearWaste") == 0 then
             return 0
         end
@@ -39,4 +42,5 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
     return typeEffect
 end
+
 return mobskillObject

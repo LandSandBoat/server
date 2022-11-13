@@ -22,11 +22,17 @@ entity.onTrigger = function(player, npc)
         player:startEvent(50)
     elseif player:getCharVar("aBoysDreamCS") >= 7 then
         player:startEvent(32)
-    elseif player:getCharVar("UnderOathCS") == 4 and player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER) then
+    elseif
+        player:getCharVar("UnderOathCS") == 4 and
+        player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER)
+    then
         player:startEvent(77)
     elseif player:getCharVar("UnderOathCS") == 5 then
         player:startEvent(79)
-    elseif player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) and player:getCharVar("UnderOathCS") == 6 then
+    elseif
+        player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) and
+        player:getCharVar("UnderOathCS") == 6
+    then
         player:startEvent(51)
     elseif player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(19)

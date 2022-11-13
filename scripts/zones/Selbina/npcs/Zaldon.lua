@@ -568,7 +568,11 @@ entity.onTrade = function(player, npc, trade)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
     -- UNDER THE SEA
-    if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
+    if
+        underTheSea == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.ETCHED_RING) and
+        npcUtil.tradeHas(trade, 4501)
+    then
         if math.random(1, 100) <= 20 then
             player:startEvent(35) -- Ring found !
         else
@@ -576,7 +580,10 @@ entity.onTrade = function(player, npc, trade)
         end
 
     -- A BOY'S DREAM
-    elseif player:getCharVar("aBoysDreamCS") == 5 and npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) then
+    elseif
+        player:getCharVar("aBoysDreamCS") == 5 and
+        npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS)
+    then
         player:startEvent(85)
 
     -- INSIDE THE BELLY
@@ -602,15 +609,34 @@ entity.onTrigger = function(player, npc)
         player:startEvent(34, 4501) -- During quest "Under the sea" - 3rd dialog
 
     -- INSIDE THE BELLY
-    elseif mLvl >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
+    elseif
+        mLvl >= 30 and
+        theRealGift == QUEST_COMPLETED and
+        insideTheBelly == QUEST_AVAILABLE
+    then
         player:startEvent(161)
-    elseif mLvl >= 30 and mLvl < 39 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif
+        mLvl >= 30 and
+        mLvl < 39 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
+    then
         player:startEvent(162, 5799, 4481, 5802, 4428)
-    elseif mLvl >= 40 and mLvl < 49 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif
+        mLvl >= 40 and
+        mLvl < 49 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
+    then
         player:startEvent(163, 5805, 4385, 5800, 5802, 5450) -- 5802(Istavrit) is skill cap 41, and therefore is used in this and the previous csid
-    elseif mLvl >= 50 and mLvl <= 74 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif
+        mLvl >= 50 and
+        mLvl <= 74 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
+    then
         player:startEvent(164, 5806, 5451, 5801, 5804, 5807, 5135)
-    elseif mLvl >= 75 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif
+        mLvl >= 75 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
+    then
         player:startEvent(165, 4451, 4477, 5803, 4307, 4478, 5467, 4304, 4474)
 
     -- STANDARD DIALOG
