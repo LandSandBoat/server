@@ -1,18 +1,16 @@
 -----------------------------------
--- Curses! A Horrifically Harrowing Hex
--- A Moogle Kupo d'Etat M5
--- !addmission 10 4
--- Shantotto : !pos 122 -2 112 239
+-- Smash! A Malevolent Menace
+-- A Moogle Kupo d'Etat M14
+-- !addmission 10 13
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
+local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.SMASH_A_MALEVOLENT_MENACE)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE },
 }
 
 mission.sections =
@@ -22,18 +20,18 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
-        [xi.zone.WINDURST_WALLS] =
+        [xi.zone.UPPER_JEUNO] =
         {
-            ['Shantotto'] =
+            ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(506)
+                    return mission:progressEvent(10185)
                 end,
             },
 
             onEventFinish =
             {
-                [506] = function(player, csid, option, npc)
+                [10185] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },
