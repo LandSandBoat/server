@@ -70,7 +70,7 @@ public:
     void setBackgroundMusicDay(uint8 musicId);
     void setBackgroundMusicNight(uint8 musicId);
 
-    sol::table queryEntitiesByName(std::string const& name);
+    sol::table queryEntitiesByName(std::string const& name, sol::optional<CLuaInstance> maybeInstance);
 
     static void Register();
 };

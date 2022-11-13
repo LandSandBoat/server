@@ -19,18 +19,21 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
-
-#include "../campaign_system.h"
-#include "../entities/charentity.h"
-#include "../entities/npcentity.h"
-#include "../mob_modifier.h"
-#include "../region.h"
-#include "../utils/mobutils.h"
-#include "../zone.h"
-#include "../zone_entities.h"
-#include "lua_baseentity.h"
 #include "lua_zone.h"
+
+#include "campaign_system.h"
+#include "common/logging.h"
+#include "entities/charentity.h"
+#include "entities/npcentity.h"
+#include "utils/mobutils.h"
+
+#include "instance.h"
+#include "lua_baseentity.h"
+#include "lua_instance.h"
+#include "mob_modifier.h"
+#include "region.h"
+#include "zone.h"
+#include "zone_entities.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -403,11 +406,41 @@ auto CLuaZone::getBackgroundMusicNight()
     return m_pLuaZone->GetBackgroundMusicNight();
 }
 
-sol::table CLuaZone::queryEntitiesByName(std::string const& name)
+sol::table CLuaZone::queryEntitiesByName(std::string const& name, sol::optional<CLuaInstance> maybeInstance)
 {
+    auto table = lua.create_table();
+
+    // Handle (slow) lookup if in an instance
+    // TODO: Move this routine into CInstance and memoize
+    if (maybeInstance.has_value())
+    {
+        CInstance* PInstance = maybeInstance.value().GetInstance();
+        for (auto [targid, PNpc] : PInstance->m_npcList)
+        {
+            if (std::string((const char*)PNpc->GetName()) == name)
+            {
+                table.add(CLuaBaseEntity(PNpc));
+            }
+        }
+
+        for (auto [targid, PMob] : PInstance->m_mobList)
+        {
+            if (std::string((const char*)PMob->GetName()) == name)
+            {
+                table.add(CLuaBaseEntity(PMob));
+            }
+        }
+
+        if (table.empty())
+        {
+            ShowWarning("Query for entity name: %s in instance zone: %s returned no results", name, m_pLuaZone->GetName());
+        }
+
+        return table;
+    }
+
     const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
 
-    auto table = lua.create_table();
     for (CBaseEntity* entity : entities)
     {
         table.add(CLuaBaseEntity(entity));

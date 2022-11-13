@@ -1300,6 +1300,48 @@ INSERT INTO `instance_entities` VALUES (7704,17093102);
 INSERT INTO `instance_entities` VALUES (7704,17093103);
 INSERT INTO `instance_entities` VALUES (7704,17093104);
 
+-- A Nation on the Brink (8600)
+INSERT INTO `instance_entities` VALUES (8600,17129561);
+INSERT INTO `instance_entities` VALUES (8600,17129562);
+INSERT INTO `instance_entities` VALUES (8600,17129563);
+INSERT INTO `instance_entities` VALUES (8600,17129564);
+INSERT INTO `instance_entities` VALUES (8600,17129565);
+INSERT INTO `instance_entities` VALUES (8600,17129566);
+INSERT INTO `instance_entities` VALUES (8600,17129567);
+INSERT INTO `instance_entities` VALUES (8600,17129568);
+INSERT INTO `instance_entities` VALUES (8600,17129569);
+INSERT INTO `instance_entities` VALUES (8600,17129570);
+INSERT INTO `instance_entities` VALUES (8600,17129571);
+INSERT INTO `instance_entities` VALUES (8600,17129572);
+INSERT INTO `instance_entities` VALUES (8600,17129573);
+INSERT INTO `instance_entities` VALUES (8600,17129574);
+INSERT INTO `instance_entities` VALUES (8600,17129575);
+INSERT INTO `instance_entities` VALUES (8600,17129576);
+INSERT INTO `instance_entities` VALUES (8600,17129577);
+INSERT INTO `instance_entities` VALUES (8600,17129578);
+INSERT INTO `instance_entities` VALUES (8600,17129579);
+INSERT INTO `instance_entities` VALUES (8600,17129580);
+INSERT INTO `instance_entities` VALUES (8600,17129581);
+INSERT INTO `instance_entities` VALUES (8600,17129582);
+INSERT INTO `instance_entities` VALUES (8600,17129583);
+INSERT INTO `instance_entities` VALUES (8600,17129584);
+INSERT INTO `instance_entities` VALUES (8600,17129585);
+INSERT INTO `instance_entities` VALUES (8600,17129586);
+INSERT INTO `instance_entities` VALUES (8600,17129587);
+INSERT INTO `instance_entities` VALUES (8600,17129588);
+INSERT INTO `instance_entities` VALUES (8600,17129589);
+INSERT INTO `instance_entities` VALUES (8600,17129590);
+INSERT INTO `instance_entities` VALUES (8600,17129591);
+INSERT INTO `instance_entities` VALUES (8600,17129592);
+INSERT INTO `instance_entities` VALUES (8600,17129593);
+INSERT INTO `instance_entities` VALUES (8600,17129594);
+INSERT INTO `instance_entities` VALUES (8600,17129595);
+INSERT INTO `instance_entities` VALUES (8600,17129596);
+INSERT INTO `instance_entities` VALUES (8600,17129597);
+INSERT INTO `instance_entities` VALUES (8600,17129598);
+INSERT INTO `instance_entities` VALUES (8600,17129599);
+INSERT INTO `instance_entities` VALUES (8600,17129600);
+
 -- Light in the Darkness (9300)
 -- mobs
 INSERT INTO `instance_entities` VALUES (9300,17158192); -- Sapphirine Quadav
