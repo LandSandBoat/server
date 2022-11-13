@@ -55,7 +55,11 @@ g_mixins.families.lycopodium = function(mob)
             if lycopodium:getHP() < lycopodium:getMaxHP() then
                 lycopodium:SetAutoAttackEnabled(true)
                 lycopodium:SetMobAbilityEnabled(true)
-            elseif disengageTime > 0 and lycopodium:getBattleTime() > disengageTime and damaged == 0 then
+            elseif
+                disengageTime > 0 and
+                lycopodium:getBattleTime() > disengageTime and
+                damaged == 0
+            then
                 lycopodium:setLocalVar("[lycopodium]disengageTime",  0)
                 lycopodium:disengage()
             end

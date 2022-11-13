@@ -48,7 +48,10 @@ local assessment = function(player, npc)
     local completed = player:hasCompletedMission(mission.areaId, mission.missionId)
 
     -- player took too long to speak under requirements in time, so they fail mission
-    if (not completed and secondsPassed > 3456) or (completed and secondsPassed > 6912) then
+    if
+        (not completed and secondsPassed > 3456) or
+        (completed and secondsPassed > 6912)
+    then
         return mission:progressEvent(202)
     end
 

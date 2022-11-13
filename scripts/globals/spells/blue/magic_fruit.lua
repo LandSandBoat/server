@@ -41,7 +41,10 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
-    if target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB) then
+    if
+        target:getAllegiance() == caster:getAllegiance() and
+        (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)
+    then
         --Applying server mods
         final = final * xi.settings.main.CURE_POWER
     end

@@ -14,7 +14,11 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if not mob:isNM() or mob:getAnimationSub() == 2 or mob:getAnimationSub() == 3 then
+    if
+        not mob:isNM() or
+        mob:getAnimationSub() == 2 or
+        mob:getAnimationSub() == 3
+    then
         return 1
     end
     return 0

@@ -90,7 +90,15 @@ quest.sections =
                     end
 
                     -- All this options complete the current quest.
-                    if option == 0 or option == 13 or option == 14 or option == 15 or option == 19 or option == 20 or option == 21 then
+                    if
+                        option == 0 or
+                        option == 13 or
+                        option == 14 or
+                        option == 15 or
+                        option == 19 or
+                        option == 20 or
+                        option == 21
+                    then
                         if quest:complete(player) then
                             -- This options immediately start next quest. (All except 0 and 15).
                             if

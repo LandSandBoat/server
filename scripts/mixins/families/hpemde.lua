@@ -87,9 +87,15 @@ g_mixins.families.hpemde = function(hpemdeMob)
                 mob:disengage()
             end
         else
-            if mob:getAnimationSub() == 6 and mob:getBattleTime() > mob:getLocalVar("[hpemde]changeTime") then
+            if
+                mob:getAnimationSub() == 6 and
+                mob:getBattleTime() > mob:getLocalVar("[hpemde]changeTime")
+            then
                 openMouth(mob)
-            elseif mob:getAnimationSub() == 3 and mob:getHP() <  mob:getLocalVar("[hpemde]closeMouthHP") then
+            elseif
+                mob:getAnimationSub() == 3 and
+                mob:getHP() <  mob:getLocalVar("[hpemde]closeMouthHP")
+            then
                 closeMouth(mob)
             end
         end

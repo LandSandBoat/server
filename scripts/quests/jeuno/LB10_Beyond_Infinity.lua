@@ -48,7 +48,13 @@ quest.sections =
             {
                 [10045] = function(player, csid, option, npc)
                     -- This options start quest.
-                    if option == 13 or option == 14 or option == 19 or option == 20 or option == 21 then
+                    if
+                        option == 13 or
+                        option == 14 or
+                        option == 19 or
+                        option == 20 or
+                        option == 21
+                    then
                         quest:begin(player)
                     end
 

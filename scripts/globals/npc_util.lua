@@ -172,7 +172,11 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
 
         if not allowCurrentPosition then
             -- Finding by comparing the NPC's coords
-            if math.floor(v[1]) == math.floor(npc:getXPos()) and math.floor(v[2]) == math.floor(npc:getYPos()) and math.floor(v[3]) == math.floor(npc:getZPos()) then
+            if
+                math.floor(v[1]) == math.floor(npc:getXPos()) and
+                math.floor(v[2]) == math.floor(npc:getYPos()) and
+                math.floor(v[3]) == math.floor(npc:getZPos())
+            then
                 positionIndex = i -- Found where the NPC is!
             end
         end
@@ -225,7 +229,12 @@ function npcUtil.giveItem(player, items, params)
         for _, v in pairs(items) do
             if type(v) == "number" then
                 table.insert(givenItems, { v, 1 })
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "number" and
+                type(v[2]) == "number"
+            then
                 table.insert(givenItems, { v[1], v[2] })
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.", player:getZoneName()))
@@ -298,7 +307,12 @@ function npcUtil.giveTempItem(player, items, params)
         for _, v in pairs(items) do
             if type(v) == "number" then
                 table.insert(givenItems, { v, 1 })
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "number" and
+                type(v[2]) == "number"
+            then
                 table.insert(givenItems, { v[1], v[2] })
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveTempItem in zone %s.", player:getZoneName()))
@@ -455,7 +469,11 @@ function npcUtil.giveReward(player, params)
     if params["fame"] == nil then
         params["fame"] = 30
     end
-    if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
+    if
+        params["fameArea"] ~= nil and
+        params["fameArea"]["fame_area"] ~= nil and
+        type(params["fame"]) == "number"
+    then
         player:addFame(params["fameArea"], params["fame"])
     end
 
@@ -727,10 +745,21 @@ function npcUtil.tradeHas(trade, items, exact)
             if type(v) == "number" then
                 itemIdNeeded = v
                 itemQtyNeeded = 1
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "number" and
+                type(v[2]) == "number"
+            then
                 itemIdNeeded = v[1]
                 itemQtyNeeded = v[2]
-            elseif type(v) == "table" and #v == 2 and type(v[1]) == "string" and type(v[2]) == "number" and string.lower(v[1]) == "gil" then
+            elseif
+                type(v) == "table" and
+                #v == 2 and
+                type(v[1]) == "string" and
+                type(v[2]) == "number" and
+                string.lower(v[1]) == "gil"
+            then
                 itemIdNeeded = 65535
                 itemQtyNeeded = v[2]
             else

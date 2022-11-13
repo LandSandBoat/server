@@ -10,9 +10,16 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
+    if
+        target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or
+        target:hasStatusEffect(xi.effect.MAGIC_SHIELD)
+    then
         return 1
-    elseif mob:hasStatusEffect(xi.effect.PLAGUE) or mob:hasStatusEffect(xi.effect.CURSE_I) or mob:hasStatusEffect(xi.effect.MUTE) then
+    elseif
+        mob:hasStatusEffect(xi.effect.PLAGUE) or
+        mob:hasStatusEffect(xi.effect.CURSE_I) or
+        mob:hasStatusEffect(xi.effect.MUTE)
+    then
         return 0
     elseif math.random() < 0.25 then
         return 1
@@ -22,7 +29,11 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.NONE)
-    if mob:hasStatusEffect(xi.effect.PLAGUE) or mob:hasStatusEffect(xi.effect.CURSE_I) or mob:hasStatusEffect(xi.effect.MUTE) then
+    if
+        mob:hasStatusEffect(xi.effect.PLAGUE) or
+        mob:hasStatusEffect(xi.effect.CURSE_I) or
+        mob:hasStatusEffect(xi.effect.MUTE)
+    then
         -- use Remedy!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 12, false)
         mob:delStatusEffect(xi.effect.PLAGUE)

@@ -36,7 +36,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     local returnEffect = typeEffectOne
 
     if resist >= 0.5 then
-        if target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo) then -- the def/mag def down does not overwrite the same debuff from any other source
+        if
+            target:hasStatusEffect(typeEffectOne) and
+            target:hasStatusEffect(typeEffectTwo)
+        then
+            -- the def/mag def down does not overwrite the same debuff from any other source
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         elseif target:hasStatusEffect(typeEffectOne) then
             target:addStatusEffect(typeEffectTwo, 8, 0, duration)
