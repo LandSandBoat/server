@@ -42,7 +42,10 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
             player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
         end
-        if not player:hasKeyItem(xi.ki.IVORY_KEY) and player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
+        if
+            not player:hasKeyItem(xi.ki.IVORY_KEY) and
+            player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
+        then
             player:setCharVar("LastIvoryKey", getMidnight())
             player:addKeyItem(xi.ki.IVORY_KEY)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)

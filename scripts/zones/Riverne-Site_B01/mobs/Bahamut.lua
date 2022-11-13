@@ -35,7 +35,14 @@ entity.onMobFight = function(mob, target)
     local isBusy = false
     local act = mob:getCurrentAction()
 
-    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
+    if
+        act == xi.act.MOBABILITY_START or
+        act == xi.act.MOBABILITY_USING or
+        act == xi.act.MOBABILITY_FINISH or
+        act == xi.act.MAGIC_START or
+        act == xi.act.MAGIC_CASTING or
+        act == xi.act.MAGIC_START
+    then
         isBusy = true -- is set to true if Bahamut is in any stage of using a mobskill or casting a spell
     end
 
@@ -70,7 +77,13 @@ entity.onMobFight = function(mob, target)
                     mob:useMobAbility(1551)
                 end
             end
-        elseif megaFlareQueue == 0 and mobHPP < 10 and gigaFlare < 1 and mob:checkDistance(target) <= 15 then  -- All of the scripted Megaflares are to happen before Gigaflare.
+        elseif
+            megaFlareQueue == 0 and
+            mobHPP < 10 and
+            gigaFlare < 1 and
+            mob:checkDistance(target) <= 15
+        then
+            -- All of the scripted Megaflares are to happen before Gigaflare.
             if tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
                 mob:setLocalVar("tauntShown", 3) -- again, taunt won't show again until the move is successfully used.

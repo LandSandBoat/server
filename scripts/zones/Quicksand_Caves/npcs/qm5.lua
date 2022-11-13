@@ -23,7 +23,12 @@ entity.onTrigger = function(player, npc)
 
     -- Need to make sure the quest is flagged the player is no further along in the quest
 
-    if theMissingPiece == QUEST_ACCEPTED and not (hasAncientTablet or hasAncientFragment or player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM) then
+    if
+        theMissingPiece == QUEST_ACCEPTED and
+        not hasAncientTablet and
+        not hasAncientFragment and
+        not player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM
+    then
         player:addKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_TABLET_FRAGMENT)
 
