@@ -410,7 +410,7 @@ def import_file(file):
         return
     print("Importing " + file)
     query = f"SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {file}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;"
-    result = db_query(query)
+    _ = db_query(query)
 
 
 def connect():
@@ -741,7 +741,7 @@ def set_external_ip(ip_str):
     """
     print("Executing query:")
     print(query)
-    result = db_query(query)
+    _ = db_query(query)
 
 
 def set_external_ip_dialog():
