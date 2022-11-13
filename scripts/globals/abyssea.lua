@@ -582,7 +582,10 @@ xi.abyssea.visionsCruorProspectorOnTrigger = function(player, npc)
     local cruor = player:getCurrency("cruor")
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
-    if active == xi.extravaganza.campaign.SUMMER_NY or active == xi.extravaganza.campaign.BOTH then
+    if
+        active == xi.extravaganza.campaign.SUMMER_NY or
+        active == xi.extravaganza.campaign.BOTH
+    then
         cipher = 1
     end
 

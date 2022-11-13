@@ -742,7 +742,11 @@ function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam,
     skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
     --Handle shadows depending on shadow behaviour / skilltype
-    if shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
+    if
+        shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
+        shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    then
+        --remove 'shadowbehav' shadows.
 
         dmg = utils.takeShadows(target, dmg, shadowbehav)
 

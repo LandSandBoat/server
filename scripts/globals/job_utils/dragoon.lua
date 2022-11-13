@@ -91,7 +91,10 @@ local function performWSJump(player, target, action, params, abilityID)
             specEffect = bit.bor(specEffect, 0x02)
         end
 
-        if abilityID == xi.jobAbility.SOUL_JUMP or abilityID == xi.jobAbility.SPIRIT_JUMP then
+        if
+            abilityID == xi.jobAbility.SOUL_JUMP or
+            abilityID == xi.jobAbility.SPIRIT_JUMP
+        then
             specEffect = bit.bor(specEffect, 0x04) -- Add in Soul/Spirit bit
         end
 

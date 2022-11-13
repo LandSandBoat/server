@@ -30,7 +30,10 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     -- Dances with Luopans
-    if target:getLocalVar("GEO_DWL_Locus_Area") == 1 and target:getCharVar("GEO_DWL_Luopan") == 0 then
+    if
+        target:getLocalVar("GEO_DWL_Locus_Area") == 1 and
+        target:getCharVar("GEO_DWL_Luopan") == 0
+    then
         local ID = zones[target:getZoneID()]
         target:messageSpecial(ID.text.ENERGIES_COURSE)
 
@@ -60,9 +63,16 @@ effectObject.onEffectTick = function(target, effect)
 
     if healtime > 2 then
         -- curse II also known as "zombie"
-        if not target:hasStatusEffect(xi.effect.DISEASE) and not target:hasStatusEffect(xi.effect.PLAGUE) and not target:hasStatusEffect(xi.effect.CURSE_II) then
+        if
+            not target:hasStatusEffect(xi.effect.DISEASE) and
+            not target:hasStatusEffect(xi.effect.PLAGUE) and
+            not target:hasStatusEffect(xi.effect.CURSE_II)
+        then
             local healHP = 0
-            if target:getContinentID() == 1 and target:hasStatusEffect(xi.effect.SIGNET) then
+            if
+                target:getContinentID() == 1 and
+                target:hasStatusEffect(xi.effect.SIGNET)
+            then
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)
             else
                 target:addTP(xi.settings.main.HEALING_TP_CHANGE)

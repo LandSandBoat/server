@@ -41,7 +41,10 @@ end
 
 itemObject.onItemUse = function(target)
     target:forMembersInRange(30, function(member)
-        if not member:hasStatusEffect(xi.effect.FOOD) and not member:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        if
+            not member:hasStatusEffect(xi.effect.FOOD) and
+            not member:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+        then
             member:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 6540)
         end
     end)

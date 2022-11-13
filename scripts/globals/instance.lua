@@ -479,7 +479,13 @@ xi.instance.updateInstanceTime = function(instance, elapsed, text)
     local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
     local wipeTime = instance:getWipeTime()
 
-    if remainingTimeLimit < 0 or (wipeTime ~= 0 and (elapsed - wipeTime) / 1000 > 180) then
+    if
+        remainingTimeLimit < 0 or
+        (
+            wipeTime ~= 0 and
+            (elapsed - wipeTime) / 1000 > 180
+        )
+    then
         instance:fail()
         return
     end

@@ -18,7 +18,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.COPY_IMAGE) or player:hasStatusEffect(xi.effect.BLINK) then
+    if
+        player:hasStatusEffect(xi.effect.COPY_IMAGE) or
+        player:hasStatusEffect(xi.effect.BLINK)
+    then
         -- Returns "no effect" message when Copy Image is active when Third Eye is used.
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     else

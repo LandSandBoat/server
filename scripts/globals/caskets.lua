@@ -122,7 +122,11 @@ local function timeElapsedCheck(npc)
 
     timeTable = convertTime(lastSpawned)
 
-    if tonumber(timeTable[1]) >= 01 or tonumber(timeTable[1]) < 01 and tonumber(timeTable[2]) >= 05 then
+    if
+        tonumber(timeTable[1]) >= 01 or
+        tonumber(timeTable[1]) < 01 and
+        tonumber(timeTable[2]) >= 05
+    then
         return true
     end
 
@@ -739,7 +743,10 @@ xi.caskets.onTrade = function(player, npc, trade)
     end
 
     if locked == 1 then
-        if player:getMainJob() == xi.job.THF and npcUtil.tradeHasExactly(trade, 1022) then
+        if
+            player:getMainJob() == xi.job.THF and
+            npcUtil.tradeHasExactly(trade, 1022)
+        then
             local splitNumbers = {}
             local tradeAttempt = math.random()
             local firstAttempt = npc:getLocalVar("[caskets]HINT_TRADE")

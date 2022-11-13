@@ -1652,7 +1652,11 @@ local function findBattlefields(player, npc, itemId)
     end
 
     for k, v in pairs(zbfs) do
-        if v[3] == itemId and checkReqs(player, npc, v[2], true) and not player:battlefieldAtCapacity(v[2]) then
+        if
+            v[3] == itemId and
+            checkReqs(player, npc, v[2], true) and
+            not player:battlefieldAtCapacity(v[2])
+        then
             mask = bit.bor(mask, math.pow(2, v[1]))
         end
     end
@@ -1729,11 +1733,22 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
         return false
 
     -- Chips for limbus
-    elseif trade:getItemCount() == 3 and trade:hasItemQty(1907, 1) and trade:hasItemQty(1908, 1) and trade:hasItemQty(1986, 1) then
+    elseif
+        trade:getItemCount() == 3 and
+        trade:hasItemQty(1907, 1) and
+        trade:hasItemQty(1908, 1) and
+        trade:hasItemQty(1986, 1)
+    then
         itemId = -1
 
     -- Chips for limbus
-    elseif trade:getItemCount() == 4 and trade:hasItemQty(1909, 1) and trade:hasItemQty(1910, 1) and trade:hasItemQty(1987, 1) and trade:hasItemQty(1988, 1) then
+    elseif
+        trade:getItemCount() == 4 and
+        trade:hasItemQty(1909, 1) and
+        trade:hasItemQty(1910, 1) and
+        trade:hasItemQty(1987, 1) and
+        trade:hasItemQty(1988, 1)
+    then
         itemId = -2
 
     -- Orbs / Testimonies

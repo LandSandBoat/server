@@ -125,7 +125,10 @@ xi.damage.tp.calculateTPGainOnPhysicalDamage = function (totalDamage, delay, att
 
         -- mob vs mob (via charm) is observed to use the (base * 1/3) formula instead of (base + 30)
         -- (base + 30) formula appears to be intentional by SE to make mobs "more dangerous" when hit by players/pets
-        if defender:getObjType() == xi.objType.MOB and attacker:getObjType() ~= xi.objType.MOB then
+        if
+            defender:getObjType() == xi.objType.MOB and
+            attacker:getObjType() ~= xi.objType.MOB
+        then
             -- +30 sourced from http://wiki.ffo.jp/html/2621.html and tested in game
             return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
         else

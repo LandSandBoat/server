@@ -75,23 +75,35 @@ local function getSpellBonusAcc(caster, target, spell, params)
     local element        = spell:getElement()
     local casterJob      = caster:getMainJob()
 
-    if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
+    if
+        caster:hasStatusEffect(xi.effect.ALTRUISM) and
+        spellGroup == xi.magic.spellGroup.WHITE
+    then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
     end
 
-    if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
+    if
+        caster:hasStatusEffect(xi.effect.FOCALIZATION) and
+        spellGroup == xi.magic.spellGroup.BLACK
+    then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
     end
 
     -- Apply Divine Emblem to Flash
-    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and skill == xi.skill.DIVINE_MAGIC then
+    if
+        caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and
+        skill == xi.skill.DIVINE_MAGIC
+    then
         magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
     -- Apply Dark Seal to Dark Magic
     -- http://wiki.ffo.jp/html/3247.html
     -- Similar to Elemental Seal but only for Dark Magic
-    if caster:hasStatusEffect(xi.effect.DARK_SEAL) and skill == xi.skill.DARK_MAGIC then
+    if
+        caster:hasStatusEffect(xi.effect.DARK_SEAL) and
+        skill == xi.skill.DARK_MAGIC
+    then
         magicAccBonus = magicAccBonus + 256
     end
 
@@ -104,7 +116,13 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
     -- Add acc for klimaform
     if element > 0 then
-        if caster:hasStatusEffect(xi.effect.KLIMAFORM) and (castersWeather == xi.magic.singleWeatherStrong[element] or castersWeather == xi.magic.doubleWeatherStrong[element]) then
+        if
+            caster:hasStatusEffect(xi.effect.KLIMAFORM) and
+            (
+                castersWeather == xi.magic.singleWeatherStrong[element] or
+                castersWeather == xi.magic.doubleWeatherStrong[element]
+            )
+        then
             magicAccBonus = magicAccBonus + 15
         end
     end
@@ -127,7 +145,10 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
         [xi.job.DRK] = function()
             -- Add MACC for Dark Seal
-            if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+            if
+                skill == xi.skill.DARK_MAGIC and
+                caster:hasStatusEffect(xi.effect.DARK_SEAL)
+            then
                 magicAccBonus = magicAccBonus + 256
             end
         end,
@@ -139,7 +160,10 @@ local function getSpellBonusAcc(caster, target, spell, params)
             end
 
             -- RDM Job Point: During saboteur, Enfeebling MACC +2
-            if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            if
+                skill == xi.skill.ENFEEBLING_MAGIC and
+                caster:hasStatusEffect(xi.effect.SABOTEUR)
+            then
                 local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
 
                 magicAccBonus = magicAccBonus + (jpValue * 2)
@@ -204,7 +228,10 @@ local function calculateMagicBurst(caster, spell, target, params)
     local skillchainburst = 1.0
     local modburst = 1.0
 
-    if spell:getSpellGroup() == 3 and not caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
+    if
+        spell:getSpellGroup() == 3 and
+        not caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+    then
         return burst
     end
 
@@ -623,6 +650,7 @@ end
 
 -- Returns the amount of resistance the
 -- target has to the given effect (stun, sleep, etc..)
+-- TODO: Use keyed table and lookup
 function getEffectResistance(target, effect)
     local effectres = 0
     local statusres = target:getMod(xi.mod.STATUSRES)
@@ -644,7 +672,11 @@ function getEffectResistance(target, effect)
         effectres = xi.mod.PETRIFYRES
     elseif effect == xi.effect.BIND then
         effectres = xi.mod.BINDRES
-    elseif effect == xi.effect.CURSE_I or effect == xi.effect.CURSE_II or effect == xi.effect.BANE then
+    elseif
+        effect == xi.effect.CURSE_I or
+        effect == xi.effect.CURSE_II or
+        effect == xi.effect.BANE
+    then
         effectres = xi.mod.CURSERES
     elseif effect == xi.effect.WEIGHT then
         effectres = xi.mod.GRAVITYRES
@@ -1115,7 +1147,11 @@ function doElementalNuke(caster, spell, target, spellParams)
     local baseValue = 0
     local tierMultiplier = 0
 
-    if xi.settings.main.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
+    if
+        xi.settings.main.USE_OLD_MAGIC_DAMAGE and
+        spellParams.V ~= nil and
+        spellParams.M ~= nil
+    then
         baseValue = spellParams.V -- Base value
         tierMultiplier = spellParams.M -- Tier multiplier
         local inflectionPoint = spellParams.I -- Inflection point
@@ -1287,12 +1323,19 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
         useComposure = useComposure or (useComposure == nil and true)
 
         -- Composure
-        if useComposure and caster:hasStatusEffect(xi.effect.COMPOSURE) and caster:getID() == target:getID() then
+        if
+            useComposure and
+            caster:hasStatusEffect(xi.effect.COMPOSURE) and
+            caster:getID() == target:getID()
+        then
             duration = duration * 3
         end
 
         -- Perpetuance
-        if caster:hasStatusEffect(xi.effect.PERPETUANCE) and spellGroup == xi.magic.spellGroup.WHITE then
+        if
+            caster:hasStatusEffect(xi.effect.PERPETUANCE) and
+            spellGroup == xi.magic.spellGroup.WHITE
+        then
             duration  = duration * 2
         end
     elseif magicSkill == xi.skill.ENFEEBLING_MAGIC then -- Enfeebling Magic
