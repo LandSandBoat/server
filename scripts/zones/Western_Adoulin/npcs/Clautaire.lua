@@ -25,7 +25,11 @@ entity.onTrigger = function(player, npc)
             -- Dialgoue during Quest: 'F.A.I.L.ure Is Not an Option'
             player:startEvent(77)
         end
-    elseif finao == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 4 and player:hasKeyItem(xi.ki.FAIL_BADGE) then
+    elseif
+        finao == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 4 and
+        player:hasKeyItem(xi.ki.FAIL_BADGE)
+    then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:startEvent(78)
     else

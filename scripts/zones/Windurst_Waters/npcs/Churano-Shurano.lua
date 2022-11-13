@@ -39,7 +39,11 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 1080 and option ~= xi.ki.MAGICKED_ASTROLABE then
         player:setLocalVar("Astrolabe", 1)
-    elseif (csid == 1080 or csid == 1081) and option == xi.ki.MAGICKED_ASTROLABE and player:getGil() >= 10000 then
+    elseif
+        (csid == 1080 or csid == 1081) and
+        option == xi.ki.MAGICKED_ASTROLABE and
+        player:getGil() >= 10000
+    then
         npcUtil.giveKeyItem(player, xi.ki.MAGICKED_ASTROLABE)
         player:delGil(10000)
     end

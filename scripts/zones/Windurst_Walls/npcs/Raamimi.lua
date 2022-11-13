@@ -24,7 +24,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(68) -- After honey is given to player...... but before 5th hondy is given to Zayhi
     elseif toBee == QUEST_COMPLETED and toBeeOrNotStatus == 5 then
         player:startEvent(80) -- Quest Finish - Gives Mulsum
-    elseif toBee == QUEST_COMPLETED and toBeeOrNotStatus == 0 and player:needToZone() then
+    elseif
+        toBee == QUEST_COMPLETED and
+        toBeeOrNotStatus == 0 and
+        player:needToZone()
+    then
         player:startEvent(79) -- After Quest but before zoning "it's certainly gotten quiet around here..."
     else
         player:startEvent(296)

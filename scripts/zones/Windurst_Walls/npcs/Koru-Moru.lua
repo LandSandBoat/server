@@ -23,7 +23,10 @@ entity.onTrade = function(player, npc, trade)
             player:setCharVar("rootProblem", 2)
         end
     elseif trade:hasItemQty(17299, 4) and count == 4 and trade:getGil() == 0 then -- trade:getItemCount() is apparently checking total of all 8 slots combined. Could have sworn that wasn't how it worked before.
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") == 2 then
+        if
+            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
+            player:getCharVar("ClassReunionProgress") == 2
+        then
             player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
         end
     end
@@ -41,7 +44,11 @@ entity.onTrigger = function(player, npc)
 
     -----------------------------------
     -- Carbuncle Debacle
-    if carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 1 or carbuncleDebacleProgress == 2 then
+    if
+        carbuncleDebacle == QUEST_ACCEPTED and
+        carbuncleDebacleProgress == 1 or
+        carbuncleDebacleProgress == 2
+    then
         player:startEvent(416) -- go and see Ripapa
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 4 then
         player:startEvent(417) -- now go and see Agado-Pugado
@@ -49,7 +56,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(418) -- Uran-Mafran must be stopped
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 7 then
         player:startEvent(419) -- ending cs
-    elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED and carbuncleDebacle == QUEST_COMPLETED then
+    elseif
+        thePuppetMaster == QUEST_COMPLETED and
+        classReunion == QUEST_COMPLETED and
+        carbuncleDebacle == QUEST_COMPLETED
+    then
         player:startEvent(420) -- new cs after all 3 SMN AFs done
     -----------------------------------
     -- Class Reunion
@@ -57,9 +68,18 @@ entity.onTrigger = function(player, npc)
         player:startEvent(412, 0, 450, 17299, 0, 0, 0, 0, 0) -- bring Koru 4 astragaloi
     elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 2 then
         player:startEvent(414, 0, 0, 17299, 0, 0, 0, 0, 0) -- reminder to bring 4 astragaloi
-    elseif classReunion == QUEST_ACCEPTED and classReunionProgress >= 3 and (talk1 ~= 1 or talk2 ~= 1) then
+    elseif
+        classReunion == QUEST_ACCEPTED and
+        classReunionProgress >= 3 and
+        (talk1 ~= 1 or talk2 ~= 1)
+    then
         player:startEvent(408) -- reminder to visit the students
-    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 6 and talk1 == 1 and talk2 == 1 then
+    elseif
+        classReunion == QUEST_ACCEPTED and
+        classReunionProgress == 6 and
+        talk1 == 1 and
+        talk2 == 1
+    then
             player:startEvent(410) -- ending cs
     elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2

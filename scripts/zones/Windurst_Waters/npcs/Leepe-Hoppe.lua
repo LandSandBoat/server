@@ -81,7 +81,10 @@ entity.onTrigger = function(player, npc)
     elseif tuningIn == QUEST_COMPLETED and tuningOut == QUEST_AVAILABLE then
         player:startEvent(888) -- Starting dialogue
 
-    elseif tuningOut == QUEST_ACCEPTED and player:getCharVar("TuningOut_Progress") == 8 then
+    elseif
+        tuningOut == QUEST_ACCEPTED and
+        player:getCharVar("TuningOut_Progress") == 8
+    then
         player:startEvent(897) -- Finishing dialogue
 
     -- The Moonlit Path and Other Fenrir Stuff!
@@ -194,7 +197,11 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.giveItem(player, reward)
         end
 
-        if player:getNation() == xi.nation.WINDURST and player:getRank(player:getNation()) == 10 and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED then
+        if
+            player:getNation() == xi.nation.WINDURST and
+            player:getRank(player:getNation()) == 10 and
+            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED
+        then
             npcUtil.giveKeyItem(player, xi.ki.DARK_MANA_ORB)
         end
     elseif csid == 848 then

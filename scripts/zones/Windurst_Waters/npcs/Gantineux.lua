@@ -18,7 +18,11 @@ end
 entity.onTrigger = function(player, npc)
     local actingInGoodFaith = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
 
-    if actingInGoodFaith == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and player:getMainLvl() >= 10 then
+    if
+        actingInGoodFaith == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+        player:getMainLvl() >= 10
+    then
         player:startEvent(10019) -- Start quest "Acting in Good Faith"
     elseif actingInGoodFaith == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then

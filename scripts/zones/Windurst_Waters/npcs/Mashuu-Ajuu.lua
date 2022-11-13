@@ -41,12 +41,19 @@ entity.onTrigger = function(player, npc)
         end
     elseif reapstatus == QUEST_COMPLETED and player:needToZone() then
         player:startEvent(478)                              -- REAP WHAT YOU SOW: After Quest
-    elseif reapstatus == QUEST_COMPLETED and not player:needToZone() and player:getCharVar("QuestReapSow_var") == 0 then
+    elseif
+        reapstatus == QUEST_COMPLETED and
+        not player:needToZone() and
+        player:getCharVar("QuestReapSow_var") == 0
+    then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(479, 0, 4565, 572)                -- REAP WHAT YOU SOW + HERB SEEDS: REPEATABLE QUEST START
         end
-    elseif reapstatus == QUEST_COMPLETED and player:getCharVar("QuestReapSow_var") == 1 then
+    elseif
+        reapstatus == QUEST_COMPLETED and
+        player:getCharVar("QuestReapSow_var") == 1
+    then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(464, 0, 4565, 572)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
@@ -60,13 +67,22 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if ((csid == 463 and option == 3) or (csid == 479 and option == 3)) and player:getFreeSlotsCount() == 0 then  -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED - INVENTORY FULL
+    if
+        ((csid == 463 and option == 3) or (csid == 479 and option == 3)) and
+        player:getFreeSlotsCount() == 0
+    then
+        -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED - INVENTORY FULL
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 572)
     elseif csid == 463 and option == 3 then                      -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
         player:addItem(572)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 572)
-    elseif (csid == 475 or csid == 477) and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED and player:getFreeSlotsCount() == 0 then -- inventory full on quest turn in
+    elseif
+        (csid == 475 or csid == 477) and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED and
+        player:getFreeSlotsCount() == 0
+    then
+        -- inventory full on quest turn in
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 131)
     elseif csid == 475 then                                -- REAP WHAT YOU SOW + 500 GIL: Quest Turn In: Sobbing Fungus turned in
         player:addGil(xi.settings.main.GIL_RATE * 500)

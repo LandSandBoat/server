@@ -18,7 +18,11 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if prevZone == xi.zone.PALBOROUGH_MINES then
         cs = 150
-    elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    elseif
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-270.707, 14.159, -20.268, 0)
     end
 
