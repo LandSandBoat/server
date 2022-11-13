@@ -21,13 +21,13 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7450, -- Tallying conquest results...
+        PORTAL_WONT_OPEN_ON_THIS_SIDE = 7623, -- The portal won't open from this side.
         NO_NEED_INVESTIGATE           = 7629, -- There is no need to investigate further.
         PORTAL_SEALED                 = 7658, -- The portal is firmly sealed by a mysterious energy.
         UNKNOWN_PRESENCE              = 7766, -- You sense some unknown presence...
         NONE_HOSTILE                  = 7767, -- You sense some unknown presence, but it does not seem hostile.
         MENACING_CREATURES            = 7768, -- Menacing creatures appear out of nowhere!
         SHEER_ANIMOSITY               = 7769, -- <name> is enveloped in sheer animosity!
-        PORTAL_WONT_OPEN_ON_THIS_SIDE = 7623, -- The portal won't open from this side.
         HOMEPOINT_SET                 = 7774, -- Home point set!
     },
 
@@ -47,6 +47,30 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             16920651, -- NW
             16920660, -- NE
             16920665, -- SE
+        },
+
+        QNZDEI_GROUP_1 =
+        {
+            16920577,
+            16920578,
+            16920579,
+            16920580,
+        },
+
+        QNZDEI_GROUP_2 =
+        {
+            16920581,
+            16920582,
+            16920583,
+            16920584,
+        },
+
+        QNZDEI_GROUP_3 =
+        {
+            16920585,
+            16920586,
+            16920587,
+            16920588,
         },
 
         JAILER_OF_FORTITUDE = 16921015,

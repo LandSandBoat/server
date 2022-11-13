@@ -12,17 +12,17 @@ local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
-           player:getCharVar("assaultEntered") == 0 and
-           player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
+        player:getCharVar("assaultEntered") == 0 and
+        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:getMainLvl() > 50
 end
 
 instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
-           player:getCharVar("assaultEntered") == 0 and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
+        player:getCharVar("assaultEntered") == 0 and
+        player:getMainLvl() > 50
 end
 
 instanceObject.onInstanceCreated = function(instance)
@@ -584,7 +584,7 @@ instanceObject.onTrack = function(instance)
                     mob:setLocalVar("moveLock", 0) -- stop Movement and condition checks
                     instance:setProgress(1)
                 end
- -- else moveStatus == 1 (Running)
+-- else moveStatus == 1 (Running)
             else
                 if mob:atPoint(pathNodes[1][1]) then
                 -- mob reached the escape point - FAIL mission
@@ -606,7 +606,7 @@ instanceObject.onTrack = function(instance)
                     mob:setLocalVar("pathPoint", #pathNodes[1])
                 end
             end
- -- mob not at assigned point yet so move there
+-- mob not at assigned point yet so move there
         else
             mob:pathThrough(pathNodes[pathLeg][pathPoint])
         end

@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 
     if guildMember == 1 then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(223, 8, 0, 0, 0, 188, 0, 8, 0)
             else
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.COOKING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
             player:startEvent(222, 8, skillLevel, 0, 511, 188, 0, 8, 2184)
         else
             player:startEvent(222, 8, skillLevel, 0, 511, 188, 7121, 8, 2184)

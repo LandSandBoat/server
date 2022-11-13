@@ -19,7 +19,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
@@ -27,23 +26,25 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 3.5; params.atk200 = 3.5; params.atk300 = 3.5
+    params.atk100 = 3.5 params.atk200 = 3.5 params.atk300 = 3.5
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 4.5 params.ftp200 = 4.5 params.ftp300 = 4.5
-        params.dex_wsc = 1.0
-        params.atk100 = 1.0; params.atk200 = 1.0; params.atk300 = 1.0
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.ICE
+    effectParams.effect = xi.effect.BIND
+    effectParams.skillType = xi.skill.AXE
+    effectParams.duration = 60
+    effectParams.power = 10
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
+    effectParams.chance = tp - 1000
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    local chance = (tp-1000) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0) > math.random() * 150
-    if (damage > 0 and target:hasStatusEffect(xi.effect.BIND) == false and chance) then
-        local duration = 20 * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0)
-        target:addStatusEffect(xi.effect.BIND, 1, 0, duration)
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

@@ -18,7 +18,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     -- This is a 2 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
@@ -26,21 +25,25 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.3 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.acc100 = 1 params.acc200 = 1 params.acc300 = 1
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.LIGHTNING
+    effectParams.effect = xi.effect.STUN
+    effectParams.skillType = xi.skill.HAND_TO_HAND
+    effectParams.duration = tp / 500
+    effectParams.power = 1
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
+
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.multiHitfTP = true -- http://wiki.ffo.jp/html/2417.html
-        params.vit_wsc = 1.0
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.STUN) == false) then
-        local duration = (tp / 500) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.LIGHTNING, 0)
-        target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
-    end
     return tpHits, extraHits, criticalHit, damage
-
 end
 
 return weaponskillObject

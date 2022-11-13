@@ -83,5 +83,8 @@ DELETE FROM `mob_spell_lists` WHERE spell_id = 377 AND spell_list_name = "Beastm
 -- Army's Paeon VI
 DELETE FROM `mob_spell_lists` WHERE spell_id = 383 AND spell_list_name = "Beastmen_BRD";
 
+--Utsusemi: San
+DELETE FROM `mob_spell_lists` WHERE spell_id = 340 and spell_list_name = "Beastmen_NIN";
+
 UNLOCK TABLES;
 

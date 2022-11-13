@@ -1,4 +1,4 @@
- -- ---------------------------------
+-- ---------------------------------
 -- Tachi Goten
 -- Great Katana weapon skill
 -- Skill Level: 70
@@ -19,7 +19,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0

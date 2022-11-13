@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local iBoost = caster:getMod(xi.mod.REQUIEM_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     power = power + iBoost
 
-     -- JP Bonus
+    -- JP Bonus
     power = power + caster:getJobPointLevel(xi.jp.REQUIEM_EFFECT) * 3
 
     if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
@@ -47,7 +47,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100) + 1)
 
-    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
+    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
         duration = duration * 2
     end
 

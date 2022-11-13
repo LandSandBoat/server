@@ -17,7 +17,7 @@ end
 
 function onTrigger(player, mentorMode, target)
     -- validate mode
-    if (mentorMode == nil or mentorMode < 0 or mentorMode > 1) then
+    if mentorMode == nil or mentorMode < 0 or mentorMode > 1 then
         error(player, "Invalid mode.")
         return
     end
@@ -29,7 +29,7 @@ function onTrigger(player, mentorMode, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end

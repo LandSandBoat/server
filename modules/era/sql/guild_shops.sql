@@ -596,7 +596,7 @@ INSERT INTO `guild_shops` VALUES
     (519, 4399, 1350, 1350, 64, 24, 24), -- bluetail
     (519, 4443, 9, 32, 64, 24, 24), -- cobalt jellyfish
     (519, 4484, 2100, 2100, 64, 24, 24), -- shall shell
-    (519, 4485, 900, 1200, 64, 24, 24), -- noble lady
+    (519, 4485, 2100, 2800, 64, 24, 24), -- noble lady
     (519, 17382, 7081, 8369, 20, 5, 5), -- single hook fishing rod
     (519, 17388, 766, 906, 30, 10, 20), -- fastwater fishing rod
     -- Rajmonda (Ship_bound_for_Selbina | Ship_bound_for_Selbina_Pirates)
@@ -699,7 +699,7 @@ INSERT INTO `guild_shops` VALUES
     -- Celestina | Yabby_Tanmikey (Mhaura)
     (528, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (528, 642, 595, 620, 24, 0, 0), -- chunk of zinc ore
-    (528, 644, 1500, 8400, 24, 0, 0), -- chunk of mythril ore
+    (528, 644, 1500, 9800, 24, 0, 0), -- chunk of mythril ore
     (528, 650, 952, 4179, 12, 0, 0), -- brass ingot
     (528, 736, 315, 1260, 24, 12, 12), -- chunk of silver ore
     (528, 737, 1890, 13230, 12, 0, 0), -- chunk of gold ore
@@ -718,7 +718,7 @@ INSERT INTO `guild_shops` VALUES
     (528, 648, 571, 571, 55, 0, 22), -- copper ingot
     (528, 745, 9450, 66150, 55, 0, 22), -- gold ingot
     (528, 752, 9291, 65037, 20, 0, 15), -- gold sheet
-    (528, 681, 10500, 55440, 30, 6, 12), -- mythril chain
+    (528, 681, 10500, 55440, 30, 0, 12), -- mythril chain
     (528, 653, 19900, 36400, 55, 0, 22), -- mythril ingot
     (528, 663, 20240, 45600, 80, 0, 32), -- mythril sheet
     (528, 762, 20925, 146475, 55, 0, 22), -- platinum chain
@@ -730,7 +730,7 @@ INSERT INTO `guild_shops` VALUES
     -- Visala | Teerth (Bastok_Markets)
     (5272, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (5272, 642, 595, 620, 24, 12, 12), -- chunk of zinc ore
-    (5272, 644, 1500, 8400, 24, 12, 12), -- chunk of mythril ore
+    (5272, 644, 1500, 9800, 24, 12, 12), -- chunk of mythril ore
     (5272, 650, 952, 4179, 12, 0, 0), -- brass ingot
     (5272, 736, 315, 1260, 24, 12, 12), -- chunk of silver ore
     (5272, 737, 1890, 13230, 12, 0, 0), -- chunk of gold ore
@@ -853,7 +853,7 @@ INSERT INTO `guild_shops` VALUES
     -- Bornahn (Al_Zahbi)
     (60429, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (60429, 642, 595, 620, 24, 0, 0), -- chunk of zinc ore
-    (60429, 644, 1500, 8400, 24, 0, 0), -- chunk of mythril ore
+    (60429, 644, 1500, 9800, 24, 12, 12), -- chunk of mythril ore
     (60429, 650, 952, 4179, 12, 0, 0), -- brass ingot
     (60429, 736, 315, 1260, 24, 12, 12), -- chunk of silver ore
     (60429, 737, 1890, 13230, 12, 0, 0), -- chunk of gold ore
@@ -985,7 +985,6 @@ INSERT INTO `guild_shops` VALUES
     (529, 2129, 75, 75, 150, 50, 25), -- tanning vat
     (529, 4509, 9, 23, 200, 50, 50), -- flask of distilled water
     (529, 13192, 837, 1224, 64, 0, 0), -- leather belt
-    (529, 632, 1575, 4320, 48, 24, 24), -- kukuru bean
     (529, 13203, 2277, 5980, 20, 0, 10), -- barbarians belt
     (529, 13703, 286944, 286944, 20, 0, 10), -- brigandine armor
     (529, 16385, 625, 625, 20, 0, 10), -- cesti
@@ -1046,7 +1045,7 @@ INSERT INTO `guild_shops` VALUES
     (531, 640, 9, 15, 124, 48, 24), -- chunk of copper ore
     (531, 641, 30, 66, 124, 48, 24), -- chunk of tin ore
     (531, 643, 675, 981, 124, 48, 24), -- chunk of iron ore
-    (531, 644, 2000, 10000, 64, 12, 12), -- chunk of mythril ore
+    (531, 644, 2000, 10000, 64, 0, 0), -- chunk of mythril ore
     (531, 2143, 75, 75, 124, 48, 100), -- mandrel
     (531, 2144, 75, 75, 124, 48, 100), -- workshop anvil
     (531, 16455, 3591, 25137, 20, 0, 15), -- baselard
@@ -1351,6 +1350,17 @@ INSERT INTO `guild_shops` VALUES
     (60428, 716, 4740, 26544, 12, 4, 12), -- piece of oak lumber
 
     -- Tenshodo Guild
+    -- Amalasanda   60432
+    (60432, 704, 96, 149, 48, 12, 24), -- bamboo stick
+    (60432, 626, 190, 938, 48, 12, 24), -- black pepper
+    (60432, 1555, 1061, 1500, 64, 24, 24), -- onz of coriander
+    (60432, 5164, 1945, 2854, 64, 24, 24), -- Ground Wasabi
+    (60432, 1590, 536, 700, 64, 24, 24), -- sprig of holy basil
+    (60432, 1652, 150, 160, 64, 24, 24), -- bottle of rice vinegar
+    (60432, 5237, 369, 500, 64, 24, 24), -- bundle of shirataki
+    (60432, 1471, 316, 416, 120, 24, 24), -- sticky rice
+    (60432, 1554, 431, 512, 64, 24, 24), -- onz of turmeric
+
     -- Akamafula (Lower_Jeuno)
     (60417, 16896, 517, 592, 20, 10, 20), -- kunai
     (60417, 16900, 1404, 1608, 20, 7, 15), -- wakizashi
@@ -1388,20 +1398,20 @@ INSERT INTO `guild_shops` VALUES
     (60419, 4934, 1561, 1747, 30, 6, 12), -- scroll of huton ichi
     (60419, 4937, 1561, 1747, 30, 6, 12), -- scroll of doton ichi
     (60419, 4943, 1561, 1747, 30, 6, 12), -- scroll of suiton ichi
-    (60419, 4878, 4000, 4500, 7, 0, 0), -- scroll of absorb-int
+    (60419, 4878, 37800, 41370, 7, 0, 0), -- scroll of absorb-int
     (60419, 4879, 14070, 15750, 7, 0, 0), -- scroll of absorb-mnd
     (60419, 4880, 14070, 15750, 7, 0, 0), -- scroll of absorb-chr
     (60419, 1554, 431, 512, 64, 24, 24), -- onz of turmeric
     (60419, 1555, 1061, 1259, 64, 24, 24), -- onz of coriander
     (60419, 1590, 536, 700, 64, 24, 24), -- sprig of holy basil
     (60419, 1475, 579, 1188, 64, 24, 24), -- onz of curry powder
-    (60419, 4876, 39270, 41370, 7, 0, 0), -- scroll of absorb-vit
+    (60419, 4876, 14070, 15750, 7, 0, 0), -- scroll of absorb-vit
     (60419, 4877, 39270, 41370, 7, 0, 0), -- scroll of absorb-agi
-    (60419, 1164, 30, 120, 2970, 0, 0), -- tsurara
+    (60419, 1164, 30, 65, 2970, 0, 0), -- tsurara
     (60419, 4874, 4000, 4500, 7, 0, 0), -- scroll of absorb-str
     (60419, 5164, 1945, 2854, 64, 24, 24), -- jar of ground wasabi
     (60419, 1652, 150, 160, 64, 24, 24), -- bottle of rice vinegar
-    (60419, 5236, 509, 525, 64, 24, 24), -- clump of shungiku
+    (60419, 5236, 194, 224, 64, 24, 24), -- clump of shungiku
     (60419, 4875, 4000, 4500, 7, 0, 0), -- scroll of absorb-dex
     -- Silver_Owl (Port_Bastok)
     (60420, 16896, 517, 592, 20, 10, 20), -- kunai
@@ -1426,14 +1436,14 @@ INSERT INTO `guild_shops` VALUES
     -- Achika (Norg)
     (60421, 12456, 552, 858, 20, 10, 20), -- hachimaki
     (60421, 12457, 3272, 5079, 20, 7, 15), -- cotton hachimaki
-    (60421, 12458, 8972, 13927, 20, 5, 10), -- soil hachimaki
+    (60421, 12458, 10044, 13927, 20, 5, 10), -- soil hachimaki
     (60421, 13111, 20061, 29942, 20, 5, 10), -- nodowa
     (60421, 12584, 833, 1294, 20, 10, 20), -- kenpogi
     (60421, 12585, 4931, 7654, 20, 7, 15), -- cotton dogi
     (60421, 12586, 13266, 14850, 20, 5, 10), -- soil gi
     (60421, 12712, 458, 712, 20, 10, 20), -- tekko
     (60421, 12713, 2528, 3924, 20, 7, 15), -- cotton tekko
-    (60421, 12714, 2713, 8316, 20, 5, 10), -- soil tekko
+    (60421, 12714, 6316, 8316, 20, 5, 10), -- soil tekko
     (60421, 12840, 666, 1034, 20, 10, 20), -- sitabaki
     (60421, 12841, 3951, 8847, 20, 7, 15), -- cotton sitabaki
     (60421, 12842, 2713, 8316, 20, 5, 10), -- soil sitabaki
@@ -1475,7 +1485,7 @@ INSERT INTO `guild_shops` VALUES
     (60423, 17322, 128, 330, 297, 0, 0), -- fire arrow
     (60423, 17340, 58, 174, 297, 0, 0), -- bullet
     -- Vuliaie (Norg)
-    (60424, 704, 96, 149, 375, 75, 150), -- bamboo stick
+    (60424, 704, 96, 149, 48, 24, 24), -- bamboo stick
     (60424, 915, 2700, 16120, 165, 33, 165), -- jar of toad oil
     (60424, 1134, 810, 2095, 255, 48, 100), -- sheet of bast parchment
     (60424, 1155, 436, 645, 165, 33, 165), -- handful of iron sand
@@ -1515,7 +1525,7 @@ INSERT INTO `guild_shops` VALUES
     (60431, 12968, 424, 660, 20, 10, 20), -- kyahan
     (60431, 12969, 2528, 11925, 20, 7, 15), -- cotton kyahan
     (60431, 12970, 11070, 12393, 20, 5, 10), -- soil kyahan
-    (60431, 704, 108, 149, 375, 75, 150), -- bamboo stick
+    (60431, 704, 108, 149, 48, 24, 24), -- bamboo stick
     (60431, 915, 6048, 16120, 165, 33, 165), -- jar of toad oil
     (60431, 1134, 993, 2095, 255, 48, 100), -- sheet of bast parchment
     (60431, 1155, 436, 645, 165, 33, 165), -- handful of iron sand

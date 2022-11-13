@@ -48,7 +48,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     duration = duration * (resist / 2)
 
-    if (dot > 0) then
+    if dot > 0 then
         target:addStatusEffect(xi.effect.HELIX, dot, 3, duration)
     end
 

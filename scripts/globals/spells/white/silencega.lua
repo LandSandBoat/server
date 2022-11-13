@@ -14,7 +14,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local effectType = xi.effect.SILENCE
 
-    if (target:hasStatusEffect(effectType)) then
+    if target:hasStatusEffect(effectType) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         return effectType
     end
@@ -34,14 +34,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.SILENCE
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (resist >= 0.5) then --Do it!
+    if resist >= 0.5 then --Do it!
         local resduration = duration * resist
 
         resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
-        elseif (target:addStatusEffect(effectType, 1, 0, resduration)) then
+        elseif target:addStatusEffect(effectType, 1, 0, resduration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect

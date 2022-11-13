@@ -20,7 +20,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7082, -- Tallying conquest results...
         PORTAL_DOES_NOT_RESPOND       = 7241, -- The portal does not respond...
-        DOES_NOT_RESPOND              = 7246, -- The gate does not respond...
+        GATE_DOES_NOT_RESPOND         = 7246, -- The gate does not respond...
         REQUEST_CONFIRMED             = 7367, -- Security portal access request confirmed.Commencing patrol routine. Stay on alert for intruder interference.
         PATROL_COMPLETED              = 7368, -- Patrol routine completed. Request transfer of final security portal access duty. Awaiting confirmation.
         DUTY_COMPLETE                 = 7369, -- Transfer of final security portal access duty complete.
@@ -32,10 +32,10 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         TIME_EXCEEDED                 = 7375, -- Patrol routine time restriction exceeded. Patrol aborted.
         PATROL_SUSPENDED              = 7376, -- Patrol suspended. Awaiting orders.
         RECOMMENCING_PATROL           = 7377, -- Recommencing patrol.
-        RECENTLY_ACTIVATED            = 7378, -- The alcove has been recently activated...
+        RECENTLY_ACTIVATED            = 7378, -- The alcove has recently been activated...
         TIME_RESTRICTION              = 7379, -- Time restriction: <number> [minute/minutes] (Earth time)
-        HOMEPOINT_SET                 = 7464, -- Home point set!
         QUASILUMIN_MAP_QUEST_OFFSET   = 7380, -- Warning. Chamber of Eventide accessed by unauthorized personnel, 4789209-980 increments previous.
+        HOMEPOINT_SET                 = 7464, -- Home point set!
     },
     mob =
     {

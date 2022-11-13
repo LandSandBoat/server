@@ -99,7 +99,7 @@ end
 
 local function calculateMobMagicBurst(caster, ele, target)
     local burst = 1.0
-    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
+    local skillchainTier, skillchainCount = xi.magic.MobFormMagicBurst(ele, target)
 
     if skillchainTier > 0 then
         if skillchainCount == 1 then
@@ -128,7 +128,6 @@ local function getBarSpellDefBonus(mob, target, spellElement)
         end
     end
 end
-
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -334,7 +333,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     if mob:isPet() and mob:getMaster():isPC() then
         local master = mob:getMaster()
-        if (master:getPetID() >= 0 and master:getPetID() <= 20) then -- check to ensure pet is avatar
+        if master:getPetID() >= 0 and master:getPetID() <= 20 then -- check to ensure pet is avatar
             bonusMacc = bonusMacc + utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
@@ -365,28 +364,7 @@ end
 -- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
 -- This determines how much the monsters ability resists on the player.
 xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, element)
-    local magicaccbonus = 0
-    local percentBonus = 0
-    local effectRes = 0
-
-    if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
-    else
-        magicaccbonus = magicaccbonus + diff
-    end
-
-    if bonus ~= nil then
-        magicaccbonus = magicaccbonus + bonus
-    end
-
-    if effect ~= nil then
-        effectRes = xi.magic.getEffectResistance(target, effect, nil, mob)
-        percentBonus = percentBonus - effectRes
-    end
-
-    local p = xi.magic.getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)
-
-    return xi.magic.getMagicResist(p, target, element, xi.magic.getEffectResistance(target, effect, nil, mob))
+    return xi.magic.applyResistanceAddEffect(mob, target, element, effect, 0)
 end
 
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- used for SMN magical bloodpacts, despite the name.
@@ -566,7 +544,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    if attackType == xi.attackType.PHYSICAL and skill:isSingle() == false then
+    if attackType == xi.attackType.PHYSICAL and not skill:isSingle() then
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
@@ -639,11 +617,10 @@ end
 -- end
 
 xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, damageType)
-
-    if (target:isUndead() == false) then
+    if not target:isUndead() then
         if drainType == xi.mobskills.drainType.MP then
             -- can't go over limited mp
-            if (target:getMP() < drain) then
+            if target:getMP() < drain then
                 drain = target:getMP()
             end
 
@@ -653,7 +630,7 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
             return xi.msg.basic.SKILL_DRAIN_MP
         elseif drainType == xi.mobskills.drainType.TP then
             -- can't go over limited tp
-            if (target:getTP() < drain) then
+            if target:getTP() < drain then
                 drain = target:getTP()
             end
 
@@ -663,7 +640,7 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
             return xi.msg.basic.SKILL_DRAIN_TP
         elseif drainType == xi.mobskills.drainType.HP then
             -- can't go over limited hp
-            if (target:getHP() < drain) then
+            if target:getHP() < drain then
                 drain = target:getHP()
             end
 
@@ -675,7 +652,7 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
     else
         -- it's undead so just deal damage
         -- can't go over limited hp
-        if (target:getHP() < drain) then
+        if target:getHP() < drain then
             drain = target:getHP()
         end
 
@@ -687,13 +664,12 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
 end
 
 xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drain)
-
     -- If target has Hysteria, no message skip rest
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         return xi.msg.basic.NONE
     end
 
-    if (xi.mobskills.mobPhysicalHit(skill)) then
+    if xi.mobskills.mobPhysicalHit(skill) then
         return xi.mobskills.mobDrainMove(mob, target, drainType, drain)
     end
 
@@ -735,7 +711,6 @@ xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, 
 end
 
 xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
-
     -- If target has Hysteria, no message skip rest
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         return xi.msg.basic.NONE
@@ -744,7 +719,7 @@ xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
     -- try to drain buff
     local effect = mob:stealStatusEffect(target)
 
-    if (effect ~= 0) then
+    if effect ~= 0 then
         return xi.msg.basic.EFFECT_DRAINED
     end
 
@@ -760,14 +735,13 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
     subEffect = subEffect or 0
     subPower = subPower or 0
 
-    if (target:canGainStatusEffect(typeEffect, power)) then
+    if target:canGainStatusEffect(typeEffect, power) then
         local statmod = xi.mod.INT
         local element = mob:getStatusEffectElement(typeEffect)
 
         local resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
 
-        if (resist >= 0.25) then
-
+        if resist >= 0.25 then
             local totalDuration = utils.clamp(duration * resist, 1)
             target:addStatusEffect(typeEffect, power, tick, totalDuration, subEffect, subPower)
 
@@ -776,12 +750,13 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
 
         return xi.msg.basic.SKILL_MISS -- resist !
     end
+
     return xi.msg.basic.SKILL_NO_EFFECT -- no effect
 end
 
 -- similar to status effect move except, this will not land if the attack missed
 xi.mobskills.mobPhysicalStatusEffectMove = function(mob, target, skill, typeEffect, power, tick, duration)
-    if (xi.mobskills.mobPhysicalHit(skill)) then
+    if xi.mobskills.mobPhysicalHit(skill) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
 
@@ -809,16 +784,14 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
 end
 
 xi.mobskills.mobHealMove = function(target, heal)
-
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if (mobHP + heal > mobMaxHP) then
+    if mobHP + heal > mobMaxHP then
         heal = mobMaxHP - mobHP
     end
 
     target:wakeUp()
-
     target:addHP(heal)
 
     return heal

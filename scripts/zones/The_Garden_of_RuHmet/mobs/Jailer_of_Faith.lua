@@ -7,33 +7,31 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
--- Jailer of Faith takes extra damage when flower is open
+-- Jailer of Faith takes double damage when flower is open
 local openFlower = function(mob)
     mob:setLocalVar("PhysicalDamage", 0)
     mob:setLocalVar("MagicalDamage", 0)
     mob:setLocalVar("RangedDamage", 0)
     mob:setLocalVar("BreathDamage", 0)
     mob:delMod(xi.mod.ATTP, 10)
-    mob:setMod(xi.mod.HTH_SDT, 1250)
-    mob:setMod(xi.mod.SLASH_SDT, 1250)
-    mob:setMod(xi.mod.PIERCE_SDT, 1250)
-    mob:setMod(xi.mod.IMPACT_SDT, 1250)
-    mob:setMod(xi.mod.DMG, 11200)
+    mob:setMod(xi.mod.DMGPHYS, 10000)
+    mob:setMod(xi.mod.DMGMAGIC, 10000)
+    mob:setMod(xi.mod.DMGRANGE, 10000)
+    mob:setMod(xi.mod.DMGBREATH, 10000)
     mob:setAnimationSub(2)
 end
 
--- Jailer of Faith takes reduced damage while flower is closed
+-- Jailer of Faith takes normal damage while flower is closed
 local closeFlower = function(mob)
     mob:setLocalVar("PhysicalDamage", 0)
     mob:setLocalVar("MagicalDamage", 0)
     mob:setLocalVar("RangedDamage", 0)
     mob:setLocalVar("BreathDamage", 0)
     mob:addMod(xi.mod.ATTP, 10) -- hits harder while flower is closed
-    mob:setMod(xi.mod.HTH_SDT, 750)
-    mob:setMod(xi.mod.SLASH_SDT, 750)
-    mob:setMod(xi.mod.PIERCE_SDT, 750)
-    mob:setMod(xi.mod.IMPACT_SDT, 750)
-    mob:setMod(xi.mod.DMG,  7500)
+    mob:setMod(xi.mod.DMGPHYS, 0)
+    mob:setMod(xi.mod.DMGMAGIC, 0)
+    mob:setMod(xi.mod.DMGRANGE, 0)
+    mob:setMod(xi.mod.DMGBREATH, 0)
     mob:setLocalVar("[faith]changeTime", mob:getBattleTime() + math.random(20, 40))
     mob:setAnimationSub(1)
 end
@@ -55,17 +53,30 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("PhysicalDamage", 0)
-    mob:setLocalVar("MagicalDamage", 0)
-    mob:setLocalVar("RangedDamage", 0)
-    mob:setLocalVar("BreathDamage", 0)
+
+    -- Observed to use manafont at 80/50/25% HP
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {
                 id = xi.jsa.MANAFONT,
-                endCode = function(mobArg) -- Uses Manafont and casts Quake II -- only casts this during manafont.
-                    mobArg:castSpell(211) -- quake II
+                hpp = 80,
+                endCode = function(mobArg)
+                    mobArg:castSpell(xi.magic.spell.QUAKE_II, mobArg:getTarget())
+                end,
+            },
+            {
+                id = xi.jsa.MANAFONT,
+                hpp = 50,
+                endCode = function(mobArg)
+                    mobArg:castSpell(xi.magic.spell.QUAKE_II, mobArg:getTarget())
+                end,
+            },
+            {
+                id = xi.jsa.MANAFONT,
+                hpp = 25,
+                endCode = function(mobArg)
+                    mobArg:castSpell(xi.magic.spell.QUAKE_II, mobArg:getTarget())
                 end,
             },
         },
@@ -91,17 +102,8 @@ entity.onMobFight = function(mob)
 end
 
 entity.onMobMagicPrepare = function(mob, target, spell)
-    local rnd = math.random()
-    if rnd < 0.5 and mob:hasStatusEffect(xi.effect.MANAFONT) == true then -- quake II replaces existing earth damage spells during manafont
-        return xi.magic.spell.QUAKE_II -- quake II casted exclusively while Manafont is active.
-    elseif rnd < 0.25 then
-        return xi.magic.spell.STONE_IV
-    elseif rnd < 0.5 then
-        return xi.magic.spell.STONEGA_III
-    elseif rnd < 0.75 then
-        return xi.magic.spell.BREAKGA
-    else
-        return xi.magic.spell.SLOWGA
+    if mob:hasStatusEffect(xi.effect.MANAFONT) and math.random() < 0.5 then
+        return xi.magic.spell.QUAKE_II
     end
 end
 

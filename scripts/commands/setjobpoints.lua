@@ -45,5 +45,5 @@ function onTrigger(player, amount, target)
 
     -- set job points
     targ:setJobPoints(amount)
-    player:PrintToPlayer( string.format("%s now has %i job points on %s.", targ:getName(), amount, jobNameByNum[targ:getMainJob()] ) )
+    player:PrintToPlayer(string.format("%s now has %i job points on %s.", targ:getName(), amount, jobNameByNum[targ:getMainJob()]))
 end

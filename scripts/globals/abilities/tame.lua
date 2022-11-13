@@ -42,8 +42,12 @@ abilityObject.onUseAbility = function(player, target, ability)
         end
     end
 
-    local params = { diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT) + player:getMod(xi.mod.TAME_SUCCESS_RATE)), skillType = nil, bonus = tameBonus, effect = xi.effect.NONE, element = xi.magic.ele.NONE }
-    local resist = xi.magic.applyResistanceAbility(player, target, ability:getID(), params)
+    local params = {}
+    params.includemab = true
+    params.element = xi.magic.ele.NONE
+    params.maccBonus = tameBonus + player:getMod(xi.mod.TAME_SUCCESS_RATE)
+
+    local resist = xi.magic.applyAbilityResistance(player, target, params)
 
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)

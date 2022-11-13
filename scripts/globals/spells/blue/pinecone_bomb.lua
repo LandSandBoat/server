@@ -59,7 +59,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- After damage is applied (which would have woken the target up from a
     -- preexisting sleep, if necesesary), apply the sleep effect for this spell.
-    if (damage > 0) then
+    if damage > 0 then
         local duration = inverseBellRand(15, 60, 0.3)
         target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, duration)
     end

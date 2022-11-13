@@ -2,8 +2,6 @@
 -- Area: Bibiki Bay
 --  Mob: Shen's Filtrate - Shen Elemental
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -11,7 +9,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    GetMobByID(ID.mob.SHEN):setLocalVar("filtrateDeath", 1)
+    local shen = mob:getZone():queryEntitiesByName("Shen")[1]
+    shen:setLocalVar("filtrateDeath", 1)
 end
 
 return entity

@@ -12,25 +12,46 @@ xi.magic = xi.magic or {}
 -- Tables by element
 -----------------------------------
 
-xi.magic.dayStrong           = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY           }
-xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM          }
-xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
-local elementalObi           = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
-local spellAcc               = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC            }
-local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG  }
-local strongAffinityAcc      = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC  }
-xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA          }
-xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT           }
-xi.magic.eleEvaMult          = { xi.mod.FIRE_EEM,              xi.mod.ICE_EEM,              xi.mod.WIND_EEM,               xi.mod.EARTH_EEM,              xi.mod.THUNDER_EEM,                xi.mod.WATER_EEM,               xi.mod.LIGHT_EEM,           xi.mod.DARK_EEM           }
-xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
-local nullMod                = { xi.mod.FIRE_NULL,             xi.mod.ICE_NULL,             xi.mod.WIND_NULL,              xi.mod.EARTH_NULL,             xi.mod.LTNG_NULL,                  xi.mod.WATER_NULL,              xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL          }
-local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY                                                          }
-local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY                                                         }
-xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER                                                                    }
+xi.magic.dayStrong             = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY           }
+xi.magic.singleWeatherStrong   = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM          }
+xi.magic.doubleWeatherStrong   = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
+local elementalObi             = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
+local spellAcc                 = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC            }
+local strongAffinityDmg        = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG  }
+local strongAffinityAcc        = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC  }
+xi.magic.resistMod             = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA          }
+xi.magic.specificDmgTakenMod   = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT           }
+xi.magic.eleEvaMult            = { xi.mod.FIRE_EEM,              xi.mod.ICE_EEM,              xi.mod.WIND_EEM,               xi.mod.EARTH_EEM,              xi.mod.THUNDER_EEM,                xi.mod.WATER_EEM,               xi.mod.LIGHT_EEM,           xi.mod.DARK_EEM           }
+xi.magic.absorbMod             = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
+local nullMod                  = { xi.mod.FIRE_NULL,             xi.mod.ICE_NULL,             xi.mod.WIND_NULL,              xi.mod.EARTH_NULL,             xi.mod.LTNG_NULL,                  xi.mod.WATER_NULL,              xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL          }
+local blmMerit                 = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY                                                          }
+local rdmMerit                 = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY                                                         }
+xi.magic.barSpell              = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER                                                                    }
 
-xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY          }
-xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS        }
-xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
+xi.magic.dayWeak               = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY          }
+xi.magic.singleWeatherWeak     = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS        }
+xi.magic.doubleWeatherWeak     = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
+xi.magic.eemStatus             = { xi.effect.FIRE_EEM_MOD,       xi.effect.ICE_EEM_MOD,       xi.effect.WIND_EEM_MOD,        xi.effect.EARTH_EEM_MOD,       xi.effect.THUNDER_EEM_MOD,         xi.effect.WATER_EEM_MOD,        xi.effect.LIGHT_EEM_MOD,    xi.effect.DARK_EEM_MOD    }
+xi.magic.eem                   = { 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40, 0.50, 0.60, 0.70, 0.85, 1.00, 1.15, 1.30, 1.50 }
+
+xi.magic.eemTiers =
+{
+    { eem = 1.50, tier = 15 },
+    { eem = 1.30, tier = 14 },
+    { eem = 1.15, tier = 13 },
+    { eem = 1.00, tier = 12 },
+    { eem = 0.85, tier = 11 },
+    { eem = 0.70, tier = 10 },
+    { eem = 0.60, tier = 9 },
+    { eem = 0.50, tier = 8 },
+    { eem = 0.40, tier = 7 },
+    { eem = 0.30, tier = 6 },
+    { eem = 0.25, tier = 5 },
+    { eem = 0.20, tier = 4 },
+    { eem = 0.15, tier = 3 },
+    { eem = 0.10, tier = 2 },
+    { eem = 0.05, tier = 1 },
+}
 
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
 --Calculates magic damage using the standard magic damage calc.
@@ -93,14 +114,14 @@ local function getSpellBonusAcc(caster, target, spell, params)
         magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
-    local skillchainTier, _ = FormMagicBurst(element, target)
-
-    --add acc for skillchains
-    if skillchainTier > 0 then
-        magicAccBonus = magicAccBonus + 30
+    -- Apply Dark Seal to Dark Magic
+    -- http://wiki.ffo.jp/html/3247.html
+    -- Similar to Elemental Seal but only for Dark Magic
+    if caster:hasStatusEffect(xi.effect.DARK_SEAL) and skill == xi.skill.DARK_MAGIC then
+        magicAccBonus = magicAccBonus + 256
     end
 
-    --Add acc for klimaform
+    -- Add acc for klimaform
     if element > 0 then
         if caster:hasStatusEffect(xi.effect.KLIMAFORM) and (castersWeather == xi.magic.singleWeatherStrong[element] or castersWeather == xi.magic.doubleWeatherStrong[element]) then
             magicAccBonus = magicAccBonus + 15
@@ -237,7 +258,7 @@ local function calculateMagicBurst(caster, spell, target, params)
 
     -- Obtain second multiplier from skillchain
     -- Starts at 35% damage bonus, increases by 10% for every additional weaponskill in the chain
-    local skillchainTier, skillchainCount = FormMagicBurst(spell:getElement(), target)
+    local skillchainTier, skillchainCount = xi.magic.FormMagicBurst(spell:getElement(), target)
 
     if skillchainTier > 0 then
         if skillchainCount == 1 then -- two weaponskills
@@ -431,7 +452,7 @@ xi.magic.getCureFinal = function(caster, spell, basecure, minCure, isBlueMagic)
     end
 
     local rapture = 1
-    if isBlueMagic == false then --rapture doesn't affect BLU cures as they're not white magic
+    if not isBlueMagic then --rapture doesn't affect BLU cures as they're not white magic
         if caster:hasStatusEffect(xi.effect.RAPTURE) then
             rapture = 1.5 + caster:getMod(xi.mod.RAPTURE_AMOUNT) / 100
             caster:delStatusEffectSilent(xi.effect.RAPTURE)
@@ -543,6 +564,8 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         element = xi.magic.ele.NONE
     end
 
+    local _, skillchainCount = xi.magic.FormMagicBurst(element, target)
+
     if spell ~= nil and skill >= 32 and skill <= 45 then
         magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
     end
@@ -555,48 +578,110 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         effectRes = effectRes + xi.magic.getEffectResistance(target, effect, false, caster)
     end
 
-    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
+    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, skillchainCount)
 
-    return xi.magic.getMagicResist(p, target, element, effectRes)
-end
-
--- Applies resistance for things that may not be spells - ie. Quick Draw
-xi.magic.applyResistanceAbility = function(player, target, wsID, params)
-    return xi.magic.applyResistanceEffect(player, target, wsID, params)
+    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount)
 end
 
 -- Applies resistance for additional effects
-xi.magic.applyResistanceAddEffect = function(player, target, element, bonus)
+xi.magic.applyResistanceAddEffect = function(player, target, element, effect, bonus)
+    local effectRes = 0
 
-    local p = xi.magic.getMagicHitRate(player, target, 0, element, 0, bonus)
+    if effect and target:hasStatusEffect(effect) then
+        return 0
+    end
 
-    return xi.magic.getMagicResist(p, target, element)
-end
+    if effect then
+        effectRes = xi.magic.getEffectResistance(target, effect, false, player)
+    end
 
-xi.magic.applyResistanceAddEffectWS = function(player, target, element, bonus)
-    local p = xi.magic.getMagicHitRate(player, target, 0, element, 0, bonus)
-    local resist = xi.magic.getMagicResist(p, target, element)
+    if not element then
+        element = xi.magic.ele.NONE
+    end
+
+    local _, skillchainCount = xi.magic.FormMagicBurst(element, target)
+
+    local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus, skillchainCount)
+    local resist = xi.magic.getMagicResist(p, target, element, skillchainCount)
 
     if resist < 0.5 then
         resist = 0
     elseif resist < 1 then
         resist = 0.5
-    else
-        resist = 1
     end
 
     return resist
 end
 
+xi.magic.applyAbilityResistance = function(player, target, params)
+    if params.effect and target:hasStatusEffect(params.effect) then
+        return
+    end
+
+    if not params.element then
+        params.element = xi.magic.ele.NONE
+    end
+
+    local _, skillchainCount = xi.magic.FormMagicBurst(params.element, target)
+
+    if not params.skillType then
+        params.skillType = nil
+    end
+
+    if params.effect and not params.tick then
+        params.tick = 0
+    end
+
+    if params.effect and not params.power then
+        params.power = 1
+    end
+
+    local effectRes = 0
+
+    if params.effect then
+        effectRes = xi.magic.getEffectResistance(target, params.effect, false, player)
+    end
+
+    local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus, skillchainCount)
+    local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount)
+
+    if resist < 0.5 then
+        resist = 0
+    elseif resist < 1 then
+        resist = 0.5
+    end
+
+    if
+        params.effect and
+        params.chance and
+        params.chance * resist > math.random() * 150 and
+        params.duration * resist > 0
+    then
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+    elseif
+        params.effect and
+        params.duration * resist > 0 and
+        not params.chance
+    then
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+    else
+        return resist
+    end
+end
+
 -- TODO: Reduce complexity
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
-xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRes, bonusAcc, dStat)
+xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRes, bonusAcc, dStat, skillchainCount)
     local magicacc = 0
     local magiceva = 0
     local resMod = 0
     local dLvl = target:getMainLvl() - caster:getMainLvl()
     local dStatAcc = 0
+
+    if not skillchainCount then
+        skillchainCount = 0
+    end
 
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
@@ -672,8 +757,10 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
         else
             magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc + caster:getMod(xi.mod.MACC)
         end
+    elseif caster:isPC() and skillType == nil then
+        magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPC() and skillType <= xi.skill.STAFF then
-        magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType())
+        magicacc = dStatAcc + caster:getSkillLevel(skillType) + caster:getMod(xi.mod.MACC)
     elseif caster:isMob() and skillType == nil then
         magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPet() and skillType == nil then
@@ -683,12 +770,6 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     end
 
     if element ~= xi.magic.ele.NONE then
-        if target:isMob() and target:isNM() then
-            xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], nil, caster)
-        end
-
-        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
-
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
@@ -704,6 +785,10 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
 
     bonusAcc = bonusAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY) + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
 
+    if skillchainCount > 0 then
+        magicacc = magicacc + 25
+    end
+
     magicacc = magicacc + bonusAcc
 
     -- Add macc% from food
@@ -714,20 +799,34 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
 end
 
 -- Returns resistance value from given magic hit rate (p)
-xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
-    local evaMult = 1
+xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, skillchainCount)
+    local eemVal = 1
     local resMod = 0
 
-    if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
-        evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
-        local sortEvaMult = { 1.50, 1.30, 1.15, 1.00, 0.85, 0.70, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05 }
+    if not skillchainCount then
+        skillchainCount = 0
+    end
 
-        for _, tier in pairs(sortEvaMult) do -- Finds the highest tier for the resist.
-            if evaMult >= tier then
-                evaMult = tier
+    if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
+        local eemTier = 1
+        eemVal = target:getMod(xi.magic.eleEvaMult[element]) / 100
+
+        for _, eemTable in pairs(xi.magic.eemTiers) do -- Finds the highest tier for the resist.
+            if eemVal >= eemTable.eem then
+                eemTier = utils.clamp(eemTable.tier, 1, 15)
                 break
             end
         end
+
+        if skillchainCount > 0 then
+            eemTier = eemTier + 1
+        end
+
+        if target:hasStatusEffect(xi.magic.eemStatus[element]) then
+            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), 1, 15)
+        end
+
+        eemVal = xi.magic.eem[eemTier]
     end
 
     local eighthTrigger = false
@@ -757,7 +856,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
         baseRes = baseRes - (effectRes / 100)
     end
 
-    local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95)
+    local p = utils.clamp(((magicHitRate * eemVal) / 100), 0.05, 0.95)
 
     p = utils.clamp(p * baseRes, -1, 0.95)
 
@@ -780,7 +879,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes)
         resist = 1.0
     end
 
-    if evaMult <= 0.5 then
+    if eemVal <= 0.5 then
         resist = resist / 2
     end
 
@@ -1094,7 +1193,7 @@ xi.magic.addBonuses = function(caster, spell, target, dmg, params)
 
         local mab_crit = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
         if math.random(1, 100) < mab_crit then
-            mab = mab + ( 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE ) )
+            mab = mab + (10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE))
         end
 
         local mdefBarBonus = 0
@@ -1185,9 +1284,9 @@ xi.magic.addBonusesAbility = function(caster, ele, target, dmg, params)
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
 
-    if params ~= nil and params.bonusmab ~= nil and params.includemab == true then
+    if params ~= nil and params.bonusmab ~= nil and params.includemab then
         mab = (100 + caster:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
-    elseif params == nil or (params ~= nil and params.includemab == true) then
+    elseif params == nil or (params ~= nil and params.includemab) then
         mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     end
 
@@ -1217,7 +1316,7 @@ end
 
 xi.magic.getElementalDebuffDOT = function(INT)
     local DOT = 0
-    if INT<= 39 then
+    if INT <= 39 then
         DOT = 1
     elseif INT <= 69 then
         DOT = 2
@@ -1346,11 +1445,11 @@ xi.magic.doElementalNuke = function(caster, spell, target, spellParams)
             end
 
         elseif dINT < inflectionPoint then
-             -- If dINT > 0 but below inflection point I
+            -- If dINT > 0 but below inflection point I
             dmg = baseValue + dINT * tierMultiplier
 
         else
-             -- Above inflection point I additional dINT is only half as effective
+            -- Above inflection point I additional dINT is only half as effective
             dmg = baseValue + inflectionPoint + ((dINT - inflectionPoint) * (tierMultiplier / 2))
         end
 
@@ -1532,6 +1631,8 @@ xi.magic.calculateDuration = function(duration, magicSkill, spellGroup, caster, 
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
+    elseif magicSkill == xi.skill.DARK_MAGIC then
+        duration = duration * (1 + (caster:getMod(xi.mod.DARK_MAGIC_DURATION) / 100))
     end
 
     return math.floor(duration)
@@ -1571,4 +1672,48 @@ xi.magic.calculatePotency = function(basePotency, magicSkill, caster, target)
     end
 
     return math.floor(basePotency * (1 + caster:getMod(xi.mod.ENF_MAG_POTENCY) / 100))
+end
+
+xi.magic.doAbsorbSpell = function(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
+    local isAbsorbTp = params.msg == xi.msg.basic.MAGIC_ABSORB_TP
+    print(params.effect)
+    print(params.bonusEffect)
+    local spellTable =
+    {
+        [true] =
+        {
+            base = utils.clamp((target:getTP() * 0.40) * resist, 0, 1200),
+            duration = params.baseDuration,
+            returnVal = utils.clamp((target:getTP() * 0.40) * resist, 0, 1200),
+        },
+        [false] =
+        {
+            base = 3 + (caster:getMainLvl() / 5),
+            duration = (params.baseDuration + caster:getMod(xi.mod.AUGMENTS_ABSORB)) * resist,
+            returnVal = params.effect,
+        }
+    }
+
+    if not isAbsorbTp and (target:hasStatusEffect(params.effect) or caster:hasStatusEffect(params.bonusEffect)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return params.failReturn
+    end
+
+    if resist < 0.5 then
+        spell:setMsg(params.msgFail)
+        return params.failReturn
+    end
+
+    spell:setMsg(params.msg)
+
+    if isAbsorbTp then
+        caster:addTP(spellTable[isAbsorbTp].base)
+        target:addTP(-spellTable[isAbsorbTp].base)
+    else
+        caster:addStatusEffect(params.bonusEffect, spellTable[isAbsorbTp].base, 8, spellTable[isAbsorbTp].duration)
+        target:addStatusEffect(params.effect, -spellTable[isAbsorbTp].base, 8, spellTable[isAbsorbTp].duration)
+    end
+
+    return spellTable[isAbsorbTp].returnVal
 end

@@ -18,28 +18,29 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
     params.str_wsc = 0.0 params.dex_wsc = 0.28 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.28 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     -- http://wiki.ffo.jp/html/20351.html
     params.element = xi.magic.ele.WATER
-    params.skillType = xi.skill.KATANA
     params.includemab = true
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
-        params.dex_wsc = 0.4 params.int_wsc = 0.4
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.WATER
+    effectParams.effect = xi.effect.POISON
+    effectParams.skillType = xi.skill.KATANA
+    effectParams.duration = 75 + (tp / 1000 * 15)
+    effectParams.power = 10
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     local damage, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.POISON) == false) then
-        local duration = (75 + (tp / 1000 * 15)) * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.WATER, 0)
-        target:addStatusEffect(xi.effect.POISON, 10, 0, duration)
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
-    return tpHits, extraHits, false, damage
 
+    return tpHits, extraHits, false, damage
 end
 
 return weaponskillObject

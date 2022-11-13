@@ -13,12 +13,14 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 75)
     mob:addMod(xi.mod.UFASTCAST, 50)
+    mob:addMobMod(xi.mobMod.SIGHT_RANGE, 15)
+    mob:addMobMod(xi.mobMod.SOUND_RANGE, 15)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
 entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
-    if GetMobByID(ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2):isDead() then
+    if GetMobByID(ID.mob.PROMATHIA_OFFSET + battlefield:getArea()):isDead() then
         battlefield:setLocalVar("phaseChange", 0)
     end
 end
@@ -36,6 +38,8 @@ entity.onMobEngaged = function(mob, target)
             v:addEnmity(mob, 0, 1)
         end
     end
+
+    mob:setLocalVar("spellWait", os.time() + 50)
 end
 
 entity.onMobFight = function(mob, target)
@@ -54,6 +58,18 @@ entity.onMobFight = function(mob, target)
             v:addEnmity(mob, 0, 1)
         end
     end
+
+    -- Uses Comet or Meteor every minute
+    local spellWait = mob:getLocalVar("spellWait")
+    if os.time() > spellWait and mob:canUseAbilities() then
+        local chance = math.random(1, 4)
+        if chance == 1 then
+            mob:castSpell(219, target)
+        else
+            mob:castSpell(218, target)
+        end
+        mob:setLocalVar("spellWait", os.time() + 66)
+    end
 end
 
 entity.onSpellPrecast = function(mob, spell)
@@ -65,14 +81,6 @@ entity.onSpellPrecast = function(mob, spell)
         spell:setMPCost(1)
     elseif spell:getID() == 219 then
         spell:setMPCost(1)
-    end
-end
-
-entity.onMobMagicPrepare = function(mob, target, spell)
-    if math.random() > 0.75 then
-        return xi.magic.spell.COMET
-    else
-        return xi.magic.spell.METEOR
     end
 end
 

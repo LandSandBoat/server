@@ -46,7 +46,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-980.193, 14.913, -282.863, 60)
     end
 
@@ -69,7 +73,7 @@ zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
     -- holes in the sand
-    if (regionID >= 30) then
+    if regionID >= 30 then
         switch (regionID): caseof
         {
             [30] = function (x)

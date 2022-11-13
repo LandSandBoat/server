@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (not target:hasStatusEffect(xi.effect.FOOD)) then
+    if not target:hasStatusEffect(xi.effect.FOOD) then
         target:addStatusEffect(xi.effect.FOOD, 1, 3, 10800, 4541)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
@@ -24,7 +24,7 @@ itemObject.onEffectGain = function(target, effect)
 end
 
 itemObject.onEffectTick = function(target, effect)
-    if (target:hasStatusEffect(xi.effect.HEALING)) then
+    if target:hasStatusEffect(xi.effect.HEALING) then
         target:addMP(effect:getPower())
     end
 end

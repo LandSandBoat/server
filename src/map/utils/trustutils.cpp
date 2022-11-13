@@ -695,7 +695,7 @@ namespace trustutils
         }
 
         PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
-        PTrust->addModifier(Mod::EVA, mobutils::GetEvasion(PTrust));
+        PTrust->addModifier(Mod::EVA, mobutils::GetBase(PTrust, PTrust->evaRank));
         PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
         PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
 

@@ -37,6 +37,7 @@
 #include "battleutils.h"
 #include "mobutils.h"
 #include "petutils.h"
+#include "zone_entities.h"
 #include "zoneutils.h"
 #include <vector>
 
@@ -94,51 +95,79 @@ namespace mobutils
         return damage;
     }
 
+    // Gest base skill rankings for ACC/ATT/EVA/MEVA
+    uint16 GetBase(CMobEntity* PMob, uint8 rank)
+    {
+        int8 mlvl = PMob->GetMLevel();
+
+        switch (rank)
+        {
+            case 1:
+                return battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mlvl); // A+ Skill (1)
+            case 2:
+                return battleutils::GetMaxSkill(SKILL_STAFF, JOB_WAR, mlvl); // B Skill (2)
+            case 3:
+                return battleutils::GetMaxSkill(SKILL_EVASION, JOB_WAR, mlvl); // C Skill (3)
+            case 4:
+                return battleutils::GetMaxSkill(SKILL_ARCHERY, JOB_WAR, mlvl); // D Skill (4)
+            case 5:
+                return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
+        }
+
+        return 0;
+    }
+
     uint16 GetMagicEvasion(CMobEntity* PMob)
     {
-        uint8 mEvaRank = 3;
-
+        uint8 mEvaRank = PMob->evaRank;
         return GetBase(PMob, mEvaRank);
     }
 
-    uint16 GetEvasion(CMobEntity* PMob)
-    {
-        uint8 evaRank = PMob->evaRank;
+    /************************************************************************
+     *                                                                       *
+     *  Base value for defense                       *
+     *                                                                       *
+     ************************************************************************/
 
-        // Mob evasion is based on job
-        // but occasionally war mobs
-        // might have a different rank
-        switch (PMob->GetMJob())
+    uint16 GetDefense(CMobEntity* PMob, uint8 rank)
+    {
+        // family defense = [floor(defRank) + 8 + vit / 2 + job traits] * family multiplier
+        uint8 lvl = PMob->GetMLevel();
+
+        if (lvl > 50)
         {
-            case JOB_THF:
-            case JOB_NIN:
-                evaRank = 1;
-                break;
-            case JOB_MNK:
-            case JOB_DNC:
-            case JOB_SAM:
-            case JOB_PUP:
-            case JOB_RUN:
-                evaRank = 2;
-                break;
-            case JOB_RDM:
-            case JOB_BRD:
-            case JOB_GEO:
-            case JOB_COR:
-                evaRank = 4;
-                break;
-            case JOB_WHM:
-            case JOB_SCH:
-            case JOB_RNG:
-            case JOB_SMN:
-            case JOB_BLM:
-                evaRank = 5;
-                break;
-            default:
-                break;
+            switch (rank)
+            {
+                case 1: // A
+                    return (uint16)(153 + (lvl - 50) * 5.0f);
+                case 2: // B
+                    return (uint16)(147 + (lvl - 50) * 4.9f);
+                case 3: // C
+                    return (uint16)(142 + (lvl - 50) * 4.8f);
+                case 4: // D
+                    return (uint16)(136 + (lvl - 50) * 4.7f);
+                case 5: // E
+                    return (uint16)(126 + (lvl - 50) * 4.5f);
+            }
+        }
+        else
+        {
+            switch (rank)
+            {
+                case 1: // A
+                    return (uint16)(6 + (lvl - 1) * 3.0f);
+                case 2: // B
+                    return (uint16)(5 + (lvl - 1) * 2.9f);
+                case 3: // C
+                    return (uint16)(5 + (lvl - 1) * 2.8f);
+                case 4: // D
+                    return (uint16)(4 + (lvl - 1) * 2.7f);
+                case 5: // E
+                    return (uint16)(4 + (lvl - 1) * 2.5f);
+            }
         }
 
-        return GetBase(PMob, evaRank);
+        return 0;
     }
 
     /************************************************************************
@@ -167,60 +196,6 @@ namespace mobutils
                 return (2 + ((lvl - 1) * 20) / 100); // G
         }
 
-        return 0;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Base value for defense and evasion calculation                       *
-     *                                                                       *
-     ************************************************************************/
-
-    uint16 GetBase(CMobEntity* PMob, uint8 rank)
-    {
-        uint8 lvl = PMob->GetMLevel();
-        if (lvl > 50)
-        {
-            switch (rank)
-            {
-                case 1: // A
-                    return (uint16)(153 + (lvl - 50) * 5.0f);
-                case 2: // B
-                    return (uint16)(147 + (lvl - 50) * 4.9f);
-                case 3: // C
-                    return (uint16)(136 + (lvl - 50) * 4.8f);
-                case 4: // D
-                    return (uint16)(126 + (lvl - 50) * 4.7f);
-                case 5: // E
-                    return (uint16)(116 + (lvl - 50) * 4.5f);
-                case 6: // F
-                    return (uint16)(106 + (lvl - 50) * 4.4f);
-                case 7: // G
-                    return (uint16)(96 + (lvl - 50) * 4.3f);
-            }
-        }
-        else
-        {
-            switch (rank)
-            {
-                case 1:
-                    return (uint16)(6 + (lvl - 1) * 3.0f);
-                case 2:
-                    return (uint16)(5 + (lvl - 1) * 2.9f);
-                case 3:
-                    return (uint16)(5 + (lvl - 1) * 2.8f);
-                case 4:
-                    return (uint16)(4 + (lvl - 1) * 2.7f);
-                case 5:
-                    return (uint16)(4 + (lvl - 1) * 2.5f);
-                case 6:
-                    return (uint16)(3 + (lvl - 1) * 2.4f);
-                case 7:
-                    return (uint16)(3 + (lvl - 1) * 2.3f);
-            }
-        }
-
-        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -347,7 +322,6 @@ namespace mobutils
                     }
                 }
 
-                // pets have lower health (TODO: Capture pet HP and correct scaling)
                 if (PMob->PMaster != nullptr)
                 {
                     mobHP *= 0.30f; // Retail captures have all pets at 30% of the mobs family of the same level
@@ -575,11 +549,11 @@ namespace mobutils
             }
         }
 
-        PMob->addModifier(Mod::DEF, GetBase(PMob, PMob->defRank));
-        PMob->addModifier(Mod::EVA, GetEvasion(PMob));
-        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));
-        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));
-        PMob->addModifier(Mod::PARRY, GetBase(PMob, 3));
+        PMob->addModifier(Mod::DEF, GetDefense(PMob, PMob->defRank));
+        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank)); // Base Evasion for all mobs
+        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank)); // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank)); // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::PARRY, GetBase(PMob, 3));           // Base Parry for all mobs is Rank C
 
         // natural magic evasion
         PMob->addModifier(Mod::MEVA, GetMagicEvasion(PMob));
@@ -1453,13 +1427,19 @@ Usage:
                 PMob->m_TrueDetection = sql->GetUIntData(68);
                 PMob->m_Detects       = sql->GetUIntData(69);
 
+                CZone* newZone = zoneutils::GetZone(zoneID);
+
+                // Get dynamic targid
+                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+
+                // Ensure dynamic targid is released on death
+                PMob->m_bReleaseTargIDOnDeath = true;
+
+                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(zoneID));
-
-                // TODO: This shouldn't go into the pet list, it appears to only
-                //     : do this because that was the only way to have temporary
-                //     : entities at the time.
-                zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
                 luautils::OnEntityLoad(PMob);
 
@@ -1480,21 +1460,28 @@ Usage:
 
         const char* Query = "SELECT mob_groups.zoneid, mob_groups.`name`, mob_pools.packet_name, \
         mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, \
-        mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, mob_pools.immunity, \
+        mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, mob_pools.cmbSkill, mob_pools.cmbDmgMult, \
+        mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, mob_pools.immunity, \
         mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, \
-        mob_family_system.STR, mob_family_system.DEX, mob_family_system.VIT, mob_family_system.AGI, mob_family_system.`INT`, mob_family_system.MND, mob_family_system.CHR, mob_family_system.EVA, mob_family_system.DEF, mob_family_system.ATT, mob_family_system.ACC, \
+        mob_family_system.STR, mob_family_system.DEX, mob_family_system.VIT, mob_family_system.AGI,\
+        mob_family_system.`INT`, mob_family_system.MND, mob_family_system.CHR, \
+        mob_family_system.EVA, mob_family_system.DEF, mob_family_system.ATT, mob_family_system.ACC, \
         mob_resistances.slash_sdt, mob_resistances.pierce_sdt, mob_resistances.h2h_sdt, mob_resistances.impact_sdt, \
-        mob_resistances.fire_sdt, mob_resistances.ice_sdt, mob_resistances.wind_sdt, mob_resistances.earth_sdt, mob_resistances.lightning_sdt, mob_resistances.water_sdt, mob_resistances.light_sdt, mob_resistances.dark_sdt, \
-        mob_resistances.fire_meva, mob_resistances.ice_meva, mob_resistances.wind_meva, mob_resistances.earth_meva, mob_resistances.lightning_meva, mob_resistances.water_meva, mob_resistances.light_meva, mob_resistances.dark_meva, \
+        mob_resistances.fire_sdt, mob_resistances.ice_sdt, mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
+        mob_resistances.lightning_sdt, mob_resistances.water_sdt, mob_resistances.light_sdt, mob_resistances.dark_sdt, \
+        mob_resistances.fire_meva, mob_resistances.ice_meva, mob_resistances.wind_meva, mob_resistances.earth_meva, \
+        mob_resistances.lightning_meva, mob_resistances.water_meva, mob_resistances.light_meva, mob_resistances.dark_meva, \
         mob_family_system.Element, mob_pools.familyid, mob_pools.name_prefix, mob_pools.entityFlags, mob_pools.animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, \
         mob_groups.allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
         mob_family_system.charmable, \
-        mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, mob_resistances.water_eem, \
-        mob_resistances.light_eem, mob_resistances.dark_eem \
-        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
+        FROM mob_groups \
+        INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+        INNER JOIN mob_ele_evasion ON mob_pools.ele_eva_id = mob_ele_evasion.ele_eva_id \
         WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
         int32 ret = sql->Query(Query, groupid, groupZoneId);

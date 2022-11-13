@@ -10,13 +10,18 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
-    local delAmount = -effect:getPower() / 3 -- Determine how much to remove.
-    target:setLocalVar('[FLASH_TICK]DeletedMod', target:getLocalVar('[FLASH_TICK]DeletedMod') + delAmount) -- Keep track of how much we have removed.
-    target:delMod(xi.mod.ACC, delAmount) -- Remove more.
+    local flashEffect_size = effect:getPower()
+    if flashEffect_size > 0 then
+        effect:setPower(flashEffect_size - math.ceil(flashEffect_size / 2))
+        target:delMod(xi.mod.ACC, -math.ceil(flashEffect_size / 2))
+    end
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.ACC, -effect:getPower() - target:getLocalVar('[FLASH_TICK]DeletedMod')) -- Cleanup any potential lost accuracy after a resist.
+    local flashEffect_size = effect:getPower()
+    if flashEffect_size > 0 then
+        target:delMod(xi.mod.ACC, -flashEffect_size)
+    end
 end
 
 return effectObject

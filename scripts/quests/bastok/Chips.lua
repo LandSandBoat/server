@@ -56,7 +56,8 @@ quest.sections =
                         xi.items.CARMINE_CHIP,
                         xi.items.CYAN_CHIP,
                         xi.items.GRAY_CHIP
-                        })
+                        }) and
+                        not player:hasItem(xi.items.CCB_POLYMER_PUMP)
                     then
                         return quest:progressEvent(883)
                     elseif player:hasItem(xi.items.CCB_POLYMER_PUMP) or player:getFreeSlotsCount() == 0 then

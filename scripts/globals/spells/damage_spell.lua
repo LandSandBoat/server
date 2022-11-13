@@ -198,44 +198,6 @@ local pTable =
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,  250,    2,  250, 300 },
 }
 
-local function tryBuildResistance(target, resistance, isEnfeeb)
-    local isNM = target:isNM()
-    local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
-    local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
-    local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
-    local coolTime = 20
-    local buildPercent = 0
-
-    if baseRes == 0 then
-        target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
-    end
-
-    if isNM == true then
-        buildPercent = 40 -- Equivalent to 4% Resistance Build (40/1000)
-    else
-        buildPercent = 20 -- Equivalent to 2% Resistance Build (20/1000)
-    end
-
-    if not isEnfeeb then
-        buildPercent = buildPercent / 2 -- Reduce Resistence Build to 2%/1% To Help With Timed Casts
-    end
-
-    if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
-        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), 0) -- Reset BuiltPercent Var
-        target:setMod(resistance, baseRes) -- Reset Mod To Base
-        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
-    else
-        if builtPercent + buildPercent + baseRes > 1000 then
-            buildPercent = 1000 - (builtPercent + baseRes)
-        end
-
-        target:setMod(resistance, baseRes + builtPercent + buildPercent)
-        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), builtPercent + buildPercent)
-        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
-    end
-
-end
-
 -----------------------------------
 -- Basic Functions
 -----------------------------------
@@ -250,7 +212,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    if caster:isPC() and xi.settings.main.USE_OLD_MAGIC_DAMAGE == false then
+    if caster:isPC() and not xi.settings.main.USE_OLD_MAGIC_DAMAGE then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
     else
         baseSpellDamage = pTable[spellId][vNPC] -- vNPC
@@ -434,7 +396,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local resMod        = 0 -- Some spells may possibly be non elemental.
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
-    local _, skillchainCount = FormMagicBurst(spellElement, target)
+    local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target)
 
     -- Function flow:
     -- Step 0: We check for exceptions that would make the next steps obsolete.
@@ -467,7 +429,15 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
 
     if spellElement ~= xi.magic.ele.NONE then
         if target:isMob() and target:isNM() then
-            tryBuildResistance(target, xi.magic.resistMod[spellElement], false)
+            local currentPower = 0
+            local effect = xi.magic.eemStatus[spellElement]
+
+            if target:hasStatusEffect(effect) then
+                currentPower = target:getStatusEffect(effect):getPower()
+                target:delStatusEffectSilent(effect)
+            end
+
+            target:addStatusEffectEx(effect, xi.effect.NONE, currentPower + 1, 0, 10, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true)
         end
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
@@ -645,17 +615,27 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- STEP 4: Get Resist Tier
     -----------------------------------
-    local evaMult = 1
+    local eemVal = 1
 
-    if target:getObjType() == xi.objType.MOB then
-        evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
-        local sortEvaMult = { 1.50, 1.30, 1.15, 1.00, 0.85, 0.70, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, }
-        for _, tier in pairs(sortEvaMult) do -- Finds the highest tier for the resist. We sort just to be safe.
-            if evaMult >= tier then
-                evaMult = tier
+    if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
+        local eemTier = 1
+        eemVal = target:getMod(xi.magic.eleEvaMult[element]) / 100
+        for _, eemTable in pairs(xi.magic.eemTiers) do -- Finds the highest tier for the resist.
+            if eemVal >= eemTable.eem then
+                eemTier = utils.clamp(eemTable.tier, 1, 15)
                 break
             end
         end
+
+        if skillchainCount > 0 then
+            eemTier = eemTier + 1
+        end
+
+        if target:hasStatusEffect(xi.magic.eemStatus[element]) then
+            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), 1, 15)
+        end
+
+        eemVal = xi.magic.eem[eemTier]
     end
 
     local eighthTrigger = false
@@ -679,7 +659,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         quarterTrigger = true
     end
 
-    local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
+    local p = utils.clamp(((magicHitRate * eemVal) / 100), 0.05, 0.95) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
     local resistVal = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
@@ -699,7 +679,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         resistVal = 1.0
     end
 
-    if evaMult <= 0.5 then
+    if eemVal <= 0.5 then
         resistVal = resistVal / 2
     end
 
@@ -708,7 +688,7 @@ end
 
 xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellElement) -- Calculates if a magic burst should occur.
     local magicBurst         = 1 -- The variable we want to calculate
-    local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     if skillchainCount > 0 and target:hasStatusEffect(xi.effect.SKILLCHAIN) then
         magicBurst = 1.25 + (0.1 * skillchainCount) -- Here we add SDT DAMAGE bonus for magic bursts aswell, once SDT is implemented. https://www.bg-wiki.com/ffxi/Resist#SDT_and_Magic_Bursting

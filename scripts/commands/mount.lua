@@ -12,15 +12,14 @@ function error(player, msg)
 end
 
 function onTrigger(player, mount, target)
-
     -- Default to Chocobo (0)
-    if (mount == nil) then
+    if mount == nil then
         mount = 0
     end
 
     -- validate mount
     mount = tonumber(mount) or xi.mount[string.upper(mount)]
-    if (mount == nil or mount < 0 or mount >= xi.mount.MOUNT_MAX) then
+    if mount == nil or mount < 0 or mount >= xi.mount.MOUNT_MAX then
         error(player, "Invalid mount ID.")
         return
     end

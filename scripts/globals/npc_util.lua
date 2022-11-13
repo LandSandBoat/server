@@ -841,14 +841,17 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
         {
             [xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
             [xi.anim.FISHING_START] = { duration = 10, nextAnim = { xi.anim.FISHING_FISH } },
-            [xi.anim.FISHING_FISH] = { duration = 10,
-                                            nextAnim =
-                                            {
-                                                xi.anim.FISHING_CAUGHT,
-                                                xi.anim.FISHING_ROD_BREAK,
-                                                xi.anim.FISHING_LINE_BREAK,
-                                            }
-                                       },
+            [xi.anim.FISHING_FISH] =
+            {
+                duration = 10,
+                nextAnim =
+                {
+                    xi.anim.FISHING_CAUGHT,
+                    xi.anim.FISHING_ROD_BREAK,
+                    xi.anim.FISHING_LINE_BREAK,
+                }
+            },
+
             [xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
             [xi.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
             [xi.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.anim.FISHING_NPC } },

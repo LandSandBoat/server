@@ -19,7 +19,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     -- Note: in retail even tractor lands you back at searing ward, will handle later.
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(153, -72, -840, 140)
     end
 

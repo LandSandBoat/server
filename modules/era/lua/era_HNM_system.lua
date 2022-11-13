@@ -39,7 +39,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
     end
 
     -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
+    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) and not GetMobByID(dragonsAeryID.mob.FAFNIR):isAlive() then
         UpdateNMSpawnPoint(dragonsAeryID.mob.NIDHOGG)
 
         -- Spawn mob or set spawn time.
@@ -50,7 +50,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
         end
 
     -- NQ King.
-    else
+    elseif not GetMobByID(dragonsAeryID.mob.FAFNIR):isAlive() and not GetMobByID(dragonsAeryID.mob.NIDHOGG):isAlive() then
         UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
 
         -- Spawn mob or set spawn time.
@@ -131,7 +131,7 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
     end
 
     -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
+    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) and not GetMobByID(valleySorrowsID.mob.ADAMANTOISE):isAlive() then
         UpdateNMSpawnPoint(valleySorrowsID.mob.ASPIDOCHELONE)
 
         -- Spawn mob or set spawn time.
@@ -142,7 +142,7 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
         end
 
     -- NQ King.
-    else
+    elseif not GetMobByID(valleySorrowsID.mob.ADAMANTOISE):isAlive() and not GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):isAlive() then
         UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
 
         -- Spawn mob or set spawn time.
@@ -223,7 +223,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
     end
 
     -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
+    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) and not GetMobByID(behemothDomID.mob.BEHEMOTH):isAlive() then
         UpdateNMSpawnPoint(behemothDomID.mob.KING_BEHEMOTH)
 
         -- Spawn mob or set spawn time.
@@ -234,7 +234,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
         end
 
     -- NQ King.
-    else
+    elseif not GetMobByID(behemothDomID.mob.BEHEMOTH):isAlive() and not GetMobByID(behemothDomID.mob.KING_BEHEMOTH):isAlive() then
         UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
 
         -- Spawn mob or set spawn time.

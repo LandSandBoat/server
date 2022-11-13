@@ -112,10 +112,6 @@ global_objects=(
     doAutoRangedWeaponskill
     doAutoPhysicalWeaponskill
 
-    FormMagicBurst
-    MobFormMagicBurst
-    doesElementMatchWeaponskill
-
     AbilityFinalAdjustments
 
     MOBSKILL_MAGICAL

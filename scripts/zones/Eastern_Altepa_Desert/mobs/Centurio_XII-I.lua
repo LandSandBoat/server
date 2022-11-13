@@ -11,12 +11,12 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.DMG,-5000)
+    mob:setMod(xi.mod.DMG, -5000)
 
     -- May spawn in a party with two other Anticans
-    if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.CENTURIO_XII_I + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.CENTURIO_XII_I + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+    if math.random(1, 2) == 1 then
+        GetMobByID(ID.mob.CENTURIO_XII_I + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.CENTURIO_XII_I + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.CENTURIO_XII_I + 1)
         SpawnMob(ID.mob.CENTURIO_XII_I + 2)
     end
@@ -25,7 +25,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId+i)
+        local guardID = GetMobByID(mobId + i)
         guardID:updateEnmity(target)
     end
 end

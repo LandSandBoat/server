@@ -15,10 +15,10 @@ entity.onTrade = function(player, npc, trade)
         trade:hasItemQty(1850, 1) and -- first_virtue
         trade:hasItemQty(1851, 1) and -- deed_of_placidity
         trade:hasItemQty(1852, 1) and -- high-quality_phuabo_organ
-        trade:getItemCount() == 3
+        trade:getItemCount() == 3 and
+        npcUtil.popFromQM(player, npc, { ID.mob.JAILER_OF_HOPE }, { claim = true })
     then
         player:tradeComplete()
-        SpawnMob(ID.mob.JAILER_OF_HOPE):updateClaim(player)
     end
 end
 
