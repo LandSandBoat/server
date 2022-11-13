@@ -1,20 +1,17 @@
 -----------------------------------
--- Lender Beware! Read the Fine Print
--- A Moogle Kupo d'Etat M8
--- !addmission 10 7
--- Shady Sconce       : !pos -179.563 24.093 274.055 176
--- Waterfall Basin    : !pos 104.888 0.477 -114.185 176
--- Inconspicuous Door : !pos -15 1.300 68 244
+-- Roar! A Cat Burglar Bares Her Fangs
+-- A Moogle Kupo d'Etat M10
+-- !addmission 10 9
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.LENDER_BEWARE_READ_THE_FINE_PRINT)
+local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.RESCUE_A_MOOGLES_LABOR_OF_LOVE },
+    nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.RELIEF_A_TRIUMPHANT_RETURN },
 }
 
 mission.sections =

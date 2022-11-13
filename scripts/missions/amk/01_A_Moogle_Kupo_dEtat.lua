@@ -3,6 +3,10 @@
 -- A Moogle Kupo d'Etat M1
 -- !addmission 10 0
 -----------------------------------
+require('scripts/globals/missions')
+require('scripts/globals/moghouse')
+require('scripts/globals/interaction/mission')
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.A_MOOGLE_KUPO_DETAT)
 
