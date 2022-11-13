@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Temenos N T
+-- Area: Temenos Northern Tower
 --  Mob: Tonberry's Avatar
 -----------------------------------
 mixins = { require("scripts/mixins/families/avatar") }

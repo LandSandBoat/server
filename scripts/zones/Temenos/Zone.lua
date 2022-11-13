@@ -76,7 +76,7 @@ zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
     local cs
 
-    if GetNPCByID(ID.npc.TEMENOS_N_GATE[1] + (regionID - 1)):getAnimation() == xi.animation.OPEN_DOOR then
+    if GetNPCByID(ID.TEMENOS_NORTHERN_TOWER.npc.PORTAL[1] + (regionID - 1)):getAnimation() == xi.animation.OPEN_DOOR then
         if regionID > 20 then
             cs = 120
         else
