@@ -14,7 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.BOOK_OF_TASKS) and not player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST) then
+    if
+        player:hasKeyItem(xi.ki.BOOK_OF_TASKS) and
+        not player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST)
+    then
         player:startEvent(634)
     else
         player:showText(npc, 7817)-- nothing to report

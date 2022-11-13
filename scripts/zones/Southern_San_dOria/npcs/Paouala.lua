@@ -23,7 +23,10 @@ end
 entity.onTrigger = function(player, npc)
     local sleeplessNights = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
-    if player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and sleeplessNights == QUEST_AVAILABLE then
+    if
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+        sleeplessNights == QUEST_AVAILABLE
+    then
         player:startEvent(85)
     elseif sleeplessNights == QUEST_ACCEPTED then
         player:startEvent(83)

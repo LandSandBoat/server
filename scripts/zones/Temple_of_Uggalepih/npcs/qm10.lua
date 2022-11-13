@@ -8,7 +8,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2387) and npcUtil.popFromQM(player, npc, ID.mob.SOZU_ROGBERRY) then -- Flickering Lantern
+    if
+        npcUtil.tradeHas(trade, 2387) and
+        npcUtil.popFromQM(player, npc, ID.mob.SOZU_ROGBERRY)
+    then
+        -- Flickering Lantern
         player:confirmTrade()
     end
 end

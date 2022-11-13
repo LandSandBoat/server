@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1184) and npcUtil.popFromQM(player, npc, ID.mob.SACRIFICIAL_GOBLET, { hide = 0 }) then -- Uggalepih Whistle
+    if
+        npcUtil.tradeHas(trade, 1184) and
+        npcUtil.popFromQM(player, npc, ID.mob.SACRIFICIAL_GOBLET, { hide = 0 })
+    then
+        -- Uggalepih Whistle
         player:confirmTrade()
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
