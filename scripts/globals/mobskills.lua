@@ -364,28 +364,7 @@ end
 -- statmod = the stat to account for resist (INT, MND, etc) e.g. xi.mod.INT
 -- This determines how much the monsters ability resists on the player.
 xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, element)
-    local magicaccbonus = 0
-    local percentBonus = 0
-    local effectRes = 0
-
-    if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
-    else
-        magicaccbonus = magicaccbonus + diff
-    end
-
-    if bonus ~= nil then
-        magicaccbonus = magicaccbonus + bonus
-    end
-
-    if effect ~= nil then
-        effectRes = xi.magic.getEffectResistance(target, effect, nil, mob)
-        percentBonus = percentBonus - effectRes
-    end
-
-    local p = xi.magic.getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)
-
-    return xi.magic.getMagicResist(p, target, element, xi.magic.getEffectResistance(target, effect, nil, mob))
+    return xi.magic.applyResistanceAddEffect(mob, target, element, effect, 0)
 end
 
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- used for SMN magical bloodpacts, despite the name.
