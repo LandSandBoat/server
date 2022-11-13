@@ -9,15 +9,15 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, ID.mob.CARMINE_DOBSONFLY_OFFSET)
-    mob:SetMagicCastingEnabled(false) -- does not cast spells while idle
+    mob:setMagicCastingEnabled(false) -- does not cast spells while idle
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMagicCastingEnabled(true)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

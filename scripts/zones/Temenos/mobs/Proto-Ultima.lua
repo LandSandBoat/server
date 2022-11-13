@@ -9,9 +9,9 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:setMobMod(xi.mobMod.DRAW_IN, 0)
 end
 
@@ -26,7 +26,7 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(1524) -- use Dissipation on phase change
             phase = phase + 1
             if phase == 2 then -- enable Holy II
-                mob:SetMagicCastingEnabled(true)
+                mob:setMagicCastingEnabled(true)
             end
             if phase == 4 then -- add Regain in final phase
                 if not mob:hasStatusEffect(xi.effect.REGAIN) then

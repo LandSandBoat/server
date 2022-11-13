@@ -13,8 +13,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
     if target:isPet() then
         mob:setMod(xi.mod.FASTCAST, 100)
         mob:castSpell(367, target) -- Insta-death any pet with most enmity.

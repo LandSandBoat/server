@@ -10,7 +10,7 @@ local entity = {}
 local function setupFlightMode(mob, battleTime)
     mob:setAnimationSub(1)
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-    mob:SetMobSkillAttack(732)
+    mob:setMobSkillAttack(732)
     mob:setLocalVar("changeTime", battleTime)
 end
 
@@ -20,7 +20,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- Reset animation so it starts grounded.
-    mob:SetMobSkillAttack(0)
+    mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
 end
 

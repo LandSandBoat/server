@@ -28,9 +28,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("MegaFlareQueue", megaFlareQueue)
     mob:setLocalVar("FlareWait", 0) -- reset the variables for Megaflare.
     mob:setLocalVar("tauntShown", 0)
-    mob:SetMobAbilityEnabled(true) -- re-enable the other actions on success
-    mob:SetMagicCastingEnabled(true)
-    mob:SetAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true) -- re-enable the other actions on success
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
     if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end

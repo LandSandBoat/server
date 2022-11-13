@@ -35,7 +35,7 @@ m:addOverride(string.format("xi.globals.spells.trust.%s.onSpellCast", trustToRep
     trust:addStatusEffectEx(xi.effect.GEO_MAGIC_ACC_BOOST, xi.effect.GEO_MAGIC_ACC_BOOST, 6, 3, 0, xi.effect.GEO_MAGIC_ACC_BOOST, boostAmount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
     -- TODO: Ranged accuracy boost
 
-    trust:SetAutoAttackEnabled(false)
+    trust:setAutoAttackEnabled(false)
     trust:setUnkillable(true)
 
     -- Cache this for later

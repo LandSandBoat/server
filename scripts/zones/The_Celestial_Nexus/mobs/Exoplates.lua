@@ -15,7 +15,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setUnkillable(true)
 end
 
