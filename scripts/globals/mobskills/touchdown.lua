@@ -20,7 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     mob:delStatusEffect(xi.effect.ALL_MISS)
-    mob:SetMobSkillAttack(0)
+    mob:setMobSkillAttack(0)
     mob:setAnimationSub(2)
     return dmg
 end

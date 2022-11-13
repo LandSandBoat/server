@@ -7,8 +7,8 @@ local entity = {}
 
 entity.onMobEngaged = function(mob, target)
     mob:setLocalVar("selfDestruct", os.time() + 60)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)

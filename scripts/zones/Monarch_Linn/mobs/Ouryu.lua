@@ -7,7 +7,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
@@ -33,7 +33,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(731)
+            mob:setMobSkillAttack(731)
             --and record the time this phase was started
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
@@ -50,7 +50,7 @@ entity.onMobFight = function(mob, target)
         then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(731)
+            mob:setMobSkillAttack(731)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     end

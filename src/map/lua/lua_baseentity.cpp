@@ -13454,49 +13454,49 @@ void CLuaBaseEntity::setSpellList(uint16 spellList)
 }
 
 /************************************************************************
- *  Function: SetAutoAttackEnabled()
+ *  Function: setAutoAttackEnabled()
  *  Purpose : Enables/disabled auto-attack for a Mob
- *  Example : mob:SetAutoAttackEnabled(false)
+ *  Example : mob:setAutoAttackEnabled(false)
  *  Notes   : See scripts/zones/Throne_Room/mobs/Shadow_Lord.lua
  ************************************************************************/
 
-void CLuaBaseEntity::SetAutoAttackEnabled(bool state)
+void CLuaBaseEntity::setAutoAttackEnabled(bool state)
 {
     m_PBaseEntity->PAI->GetController()->SetAutoAttackEnabled(state);
 }
 
 /************************************************************************
- *  Function: SetMagicCastingEnabled()
+ *  Function: setMagicCastingEnabled()
  *  Purpose : Used to enable/disable the casting of spells for a Mob
- *  Example : mob:SetMagicCastingEnabled(false)
+ *  Example : mob:setMagicCastingEnabled(false)
  *  Notes   : Used primarily for Mob behavior and battle control
  ************************************************************************/
 
-void CLuaBaseEntity::SetMagicCastingEnabled(bool state)
+void CLuaBaseEntity::setMagicCastingEnabled(bool state)
 {
     m_PBaseEntity->PAI->GetController()->SetMagicCastingEnabled(state);
 }
 
 /************************************************************************
- *  Function: SetMobAbilityEnabled()
+ *  Function: setMobAbilityEnabled()
  *  Purpose : Used primarily to clear queue for special ability to be used
- *  Example : mob:SetMobAbilityEnabled(false)
+ *  Example : mob:setMobAbilityEnabled(false)
  *  Notes   : See Bahamut.lua
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
+void CLuaBaseEntity::setMobAbilityEnabled(bool state)
 {
     m_PBaseEntity->PAI->GetController()->SetWeaponSkillEnabled(state);
 }
 
 /************************************************************************
- *  Function: SetMobSkillAttack()
+ *  Function: setMobSkillAttack()
  *  Purpose : Used mainly so Mobs don't respawn in flight?
- *  Example : mob:SetMobSkillAttack(0)
+ *  Example : mob:setMobSkillAttack(0)
  *  Notes   : Used in Ouryu, Jormungand, Tiamat, etc
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
+void CLuaBaseEntity::setMobSkillAttack(int16 listId)
 {
     XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST));
 
@@ -15389,10 +15389,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setDamage", CLuaBaseEntity::setDamage);
     SOL_REGISTER("hasSpellList", CLuaBaseEntity::hasSpellList);
     SOL_REGISTER("setSpellList", CLuaBaseEntity::setSpellList);
-    SOL_REGISTER("SetAutoAttackEnabled", CLuaBaseEntity::SetAutoAttackEnabled);
-    SOL_REGISTER("SetMagicCastingEnabled", CLuaBaseEntity::SetMagicCastingEnabled);
-    SOL_REGISTER("SetMobAbilityEnabled", CLuaBaseEntity::SetMobAbilityEnabled);
-    SOL_REGISTER("SetMobSkillAttack", CLuaBaseEntity::SetMobSkillAttack);
+    SOL_REGISTER("setAutoAttackEnabled", CLuaBaseEntity::setAutoAttackEnabled);
+    SOL_REGISTER("setMagicCastingEnabled", CLuaBaseEntity::setMagicCastingEnabled);
+    SOL_REGISTER("setMobAbilityEnabled", CLuaBaseEntity::setMobAbilityEnabled);
+    SOL_REGISTER("setMobSkillAttack", CLuaBaseEntity::setMobSkillAttack);
 
     SOL_REGISTER("getMobMod", CLuaBaseEntity::getMobMod);
     SOL_REGISTER("setMobMod", CLuaBaseEntity::setMobMod);

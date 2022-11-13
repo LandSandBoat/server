@@ -85,9 +85,9 @@ entity.onMobSpawn = function(mob)
                 hpp = math.random(90, 95),
                 cooldown = 120,
                 endCode = function(mobArg)
-                    mobArg:SetMagicCastingEnabled(false)
+                    mobArg:setMagicCastingEnabled(false)
                     mobArg:timer(30000, function(mobTimerArg)
-                        mobTimerArg:SetMagicCastingEnabled(true)
+                        mobTimerArg:setMagicCastingEnabled(true)
                     end)
                 end,
             }

@@ -57,9 +57,9 @@ entity.onMobFight = function(mob, target)
 
     if mob:actionQueueEmpty() and not isBusy then -- the last check prevents multiple Mega/Gigaflares from being called at the same time.
         if megaFlareQueue > 0 then
-            mob:SetMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
-            mob:SetMagicCastingEnabled(false)
-            mob:SetAutoAttackEnabled(false)
+            mob:setMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
+            mob:setMagicCastingEnabled(false)
+            mob:setAutoAttackEnabled(false)
 
             if flareWait == 0 and tauntShown == 0 then -- if there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
                 target:showText(mob, ID.text.BAHAMUT_TAUNT)

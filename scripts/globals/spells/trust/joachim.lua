@@ -45,7 +45,7 @@ spellObject.onMobSpawn = function(mob)
     -- Try and ranged attack every 60s
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0, 60)
 
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 spellObject.onMobDespawn = function(mob)

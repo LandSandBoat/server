@@ -35,7 +35,7 @@ spellObject.onMobSpawn = function(mob)
     end
 
     mob:addStatusEffectEx(xi.effect.COLURE_ACTIVE, xi.effect.COLURE_ACTIVE, 6, 3, 0, xi.effect.GEO_REGEN, tick_amount, xi.auraTarget.ALLIES, xi.effectFlag.AURA)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 spellObject.onMobDespawn = function(mob)
