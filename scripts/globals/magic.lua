@@ -770,12 +770,6 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     end
 
     if element ~= xi.magic.ele.NONE then
-        if target:isMob() and target:isNM() then
-            xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], nil, caster)
-        end
-
-        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
-
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
