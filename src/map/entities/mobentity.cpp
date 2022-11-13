@@ -117,7 +117,6 @@ CMobEntity::CMobEntity()
     m_neutral       = false;
     m_Aggro         = false;
     m_TrueDetection = false;
-    m_Detects       = DETECT_NONE;
     m_Link          = 0;
     m_isAggroable   = false;
     m_battlefieldID = 0;
@@ -326,13 +325,10 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
         return false;
     }
 
-    // link only if I see him
-    if (m_Detects & DETECT_SIGHT)
+    // Link if can see mob
+    if (getMobMod(MOBMOD_DETECTION) & DETECT_SIGHT && !facing(loc.p, *pos, 64))
     {
-        if (!facing(loc.p, *pos, 64))
-        {
-            return false;
-        }
+        return false;
     }
 
     if (distance(loc.p, *pos) > getMobMod(MOBMOD_LINK_RADIUS))

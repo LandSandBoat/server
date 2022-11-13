@@ -504,7 +504,7 @@ namespace zoneutils
                     PMob->m_MobSkillList = sql->GetUIntData(73);
 
                     PMob->m_TrueDetection = sql->GetUIntData(74);
-                    PMob->m_Detects       = sql->GetUIntData(75);
+                    PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(75));
 
                     PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
 
