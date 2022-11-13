@@ -36,7 +36,10 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Animation (Ground or flight mode) logic.
-    if not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and mob:actionQueueEmpty() then
+    if
+        not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
+        mob:actionQueueEmpty()
+    then
         local changeTime  = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
         local changeHP    = mob:getLocalVar("changeHP")

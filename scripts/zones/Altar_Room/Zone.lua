@@ -17,7 +17,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local head = player:getEquipID(xi.slot.HEAD)
 
-    if player:getCharVar("FickblixCS") == 1 and player:getNation() ~= xi.nation.SANDORIA then
+    if
+        player:getCharVar("FickblixCS") == 1 and
+        player:getNation() ~= xi.nation.SANDORIA
+    then
         cs = 10000
     elseif
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and

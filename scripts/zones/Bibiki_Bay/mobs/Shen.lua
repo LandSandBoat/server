@@ -67,7 +67,11 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Shen instant casts Flood to spawn a pet
-    if os.time() >= petCooldown and (not petOne:isSpawned() or not petTwo:isSpawned()) and mob:actionQueueEmpty() then
+    if
+        os.time() >= petCooldown and
+        (not petOne:isSpawned() or not petTwo:isSpawned()) and
+        mob:actionQueueEmpty()
+    then
         mob:SetMagicCastingEnabled(false)
         mob:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 2)
         mob:castSpell(xi.magic.spell.FLOOD, target)

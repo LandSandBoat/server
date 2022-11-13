@@ -76,7 +76,10 @@ zoneObject.onRegionEnter = function(player, region)
                 player:messageSpecial(ID.text.LIGHT_HEADED)
                 player:setLocalVar("inRegion1", time + 11) -- Display message and set timer.
             end
-        elseif player:hasStatusEffect(xi.effect.CURSE_I) and player:getLocalVar("inRegion") <= time then
+        elseif
+            player:hasStatusEffect(xi.effect.CURSE_I) and
+            player:getLocalVar("inRegion") <= time
+        then
             player:messageSpecial(ID.text.TOO_HEAVY)
             player:setLocalVar("inRegion", time + 11) -- Display message and set timer.
         end

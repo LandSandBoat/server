@@ -32,19 +32,40 @@ entity.onTrigger = function(player, npc)
 
     local theFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
 
-    if theFightingFourth == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER) then
+    if
+        theFightingFourth == QUEST_AVAILABLE and
+        player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
+    then
         player:startEvent(139)
-    elseif theFightingFourth == QUEST_AVAILABLE and player:getCharVar("BLUE_R_LETTER_USED") == 1 then
+    elseif
+        theFightingFourth == QUEST_AVAILABLE and
+        player:getCharVar("BLUE_R_LETTER_USED") == 1
+    then
         player:startEvent(139)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.BATTLE_RATIONS) then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.BATTLE_RATIONS)
+    then
         player:startEvent(140)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 1 then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:getCharVar("THE_FIGHTING_FOURTH") == 1
+    then
         player:startEvent(141)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2 then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:getCharVar("THE_FIGHTING_FOURTH") == 2
+    then
         player:startEvent(142)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 3 then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:getCharVar("THE_FIGHTING_FOURTH") == 3
+    then
         player:startEvent(143)
-    elseif theFightingFourth == QUEST_COMPLETED and allegiance == 1 then
+    elseif
+        theFightingFourth == QUEST_COMPLETED and
+        allegiance == 1
+    then
         player:startEvent(162)
     end
 end

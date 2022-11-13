@@ -88,7 +88,14 @@ entity.onEventFinish = function(player, csid, option)
             -- 3: Regen + Refresh,  5: Regen + Meal Duration,  6: Refresh + Meal Duration,
             -- 8: Reduced EXP loss,  12: Meal Duration + Reduced EXP loss
                 cost = 100
-            elseif power == 7 or power == 9 or power == 10 or power == 11 or power == 13 or power == 14 then
+            elseif
+                power == 7 or
+                power == 9 or
+                power == 10 or
+                power == 11 or
+                power == 13 or
+                power == 14
+            then
             -- 7: Regen + Refresh + Meal Duration,  9: Regen + Reduced EXP loss,
             -- 10: Refresh + Reduced EXP loss,  11: Regen + Refresh + Reduced EXP loss,
             -- 13: Regen + Meal Duration + Reduced EXP loss,  14: Refresh + Meal Duration + Reduced EXP loss
