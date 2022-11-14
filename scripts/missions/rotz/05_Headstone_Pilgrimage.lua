@@ -96,8 +96,7 @@ mission.sections =
                     if option == 1 then
                         player:messageSpecial(behemothsDominionID.text.AIR_AROUND_YOU_CHANGED)
 
-                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
-                        SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON)
+                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON):updateClaim(player)
                     end
                 end,
 
@@ -342,7 +341,6 @@ mission.sections =
                         player:messageSpecial(yuhtungaJungleID.text.THE_OPO_OPOS_ATTACK)
 
                         SpawnMob(yuhtungaJungleID.mob.TIPHA):updateClaim(player)
-                        SpawnMob(yuhtungaJungleID.mob.CARTHI):updateClaim(player)
                     end
                 end,
 
