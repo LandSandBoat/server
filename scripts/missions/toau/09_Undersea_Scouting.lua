@@ -36,9 +36,9 @@ mission.sections =
 
         [xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [23] = function(player, region)
+                [23] = function(player, triggerArea)
                     return mission:progressEvent(1, xi.besieged.getMercenaryRank(player))
                 end,
             },

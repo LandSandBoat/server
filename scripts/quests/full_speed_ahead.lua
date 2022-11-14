@@ -91,7 +91,7 @@ xi.full_speed_ahead.tick = function(player, effect)
     end
 end
 
-xi.full_speed_ahead.onRegionEnter = function(player, index)
+xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
     local food_byte = player:getLocalVar("FSA_Food")
     local food_count = player:getLocalVar("FSA_FoodCount")
     local motivation = player:getLocalVar("FSA_Motivation")

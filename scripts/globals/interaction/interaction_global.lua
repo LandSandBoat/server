@@ -123,12 +123,12 @@ function InteractionGlobal.onZoneOut(player, fallbackFn)
     return InteractionGlobal.lookup:onZoneOut(player, fallbackFn)
 end
 
-function InteractionGlobal.onRegionEnter(player, region, fallbackFn)
-    return InteractionGlobal.lookup:onRegionEnter(player, region, fallbackFn)
+function InteractionGlobal.onTriggerAreaEnter(player, triggerArea, fallbackFn)
+    return InteractionGlobal.lookup:onTriggerAreaEnter(player, triggerArea, fallbackFn)
 end
 
-function InteractionGlobal.onRegionLeave(player, region, fallbackFn)
-    return InteractionGlobal.lookup:onRegionLeave(player, region, fallbackFn)
+function InteractionGlobal.onTriggerAreaLeave(player, triggerArea, fallbackFn)
+    return InteractionGlobal.lookup:onTriggerAreaLeave(player, triggerArea, fallbackFn)
 end
 
 function InteractionGlobal.onEventFinish(player, csid, option, npc, fallbackFn)

@@ -16,7 +16,7 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
+    zone:registerTriggerArea(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
 
     UpdateNMSpawnPoint(ID.mob.FRAELISSA)
     GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
@@ -60,8 +60,8 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    if region:GetRegionID() == 1 and player:getCharVar("UnderOathCS") == 7 then -- Quest: Under Oath - PLD AF3
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    if triggerArea:GetTriggerAreaID() == 1 and player:getCharVar("UnderOathCS") == 7 then -- Quest: Under Oath - PLD AF3
         player:startEvent(14)
     end
 end

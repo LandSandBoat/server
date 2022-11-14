@@ -36,7 +36,7 @@ entity.onTimeTrigger = function(npc, triggerID)
 
         --If a player is on the bridge, kick them off
         for _, player in pairs(players) do
-            if player:getPlayerRegionInZone() == 2 then
+            if player:getPlayerTriggerAreaInZone() == 2 then
                 player:startEvent(70)
             end
         end

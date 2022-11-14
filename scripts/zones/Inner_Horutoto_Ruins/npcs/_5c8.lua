@@ -2,7 +2,7 @@
 -- Area: Inner Horutoto Ruins
 --  NPC: Sealed Portal
 -- Involved in Quest: Making the Grade
--- Door should open when Whm+Blm+Rdm stand in correct regions (see \Inner_Horutoto_Ruins\zone.lua),
+-- Door should open when Whm+Blm+Rdm stand in correct trigger areas (see \Inner_Horutoto_Ruins\zone.lua),
 -- or if player has the KeyItem "portal charm".
 -- !pos -259 -1 -20 192
 -----------------------------------

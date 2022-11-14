@@ -10,9 +10,9 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -133.5, 2, 132.6, -132.7, 4,  133.8)  -- I-8 Geyser
-    zone:registerRegion(2, -213.5, 2,  92.6, -212.7, 4,   94.0)  -- H-8 Geyser
-    zone:registerRegion(3,  -67.3, 2, 532.8,  -66.3, 4,  534.0)  -- J-3 Geyser
+    zone:registerTriggerArea(1, -133.5, 2, 132.6, -132.7, 4,  133.8)  -- I-8 Geyser
+    zone:registerTriggerArea(2, -213.5, 2,  92.6, -212.7, 4,   94.0)  -- H-8 Geyser
+    zone:registerTriggerArea(3,  -67.3, 2, 532.8,  -66.3, 4,  534.0)  -- J-3 Geyser
 
     xi.treasure.initZone(zone)
 end
@@ -35,8 +35,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)
             player:startEvent(10)
@@ -55,7 +55,7 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

@@ -21,14 +21,14 @@ quest.reward =
     item     = xi.items.POISON_CESTI,
 }
 
-local handleAfflictorRegion = function(player, region)
-    local regionId     = region:GetRegionID()
-    local yPos         = player:getYPos()
-    local requiredYPos = nil
+local handleAfflictorTriggerArea = function(player, triggerArea)
+    local triggerAreaId = triggerArea:GetTriggerAreaID()
+    local yPos          = player:getYPos()
+    local requiredYPos  = nil
 
-    if regionId == 4 then
+    if triggerAreaId == 4 then
         requiredYPos = 35
-    elseif regionId >= 3 then
+    elseif triggerAreaId >= 3 then
         requiredYPos = 20
     end
 
@@ -106,14 +106,14 @@ quest.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = handleAfflictorRegion,
-                [2] = handleAfflictorRegion,
-                [3] = handleAfflictorRegion,
-                [4] = handleAfflictorRegion,
-                [5] = handleAfflictorRegion,
-                [6] = handleAfflictorRegion,
+                [1] = handleAfflictorTriggerArea,
+                [2] = handleAfflictorTriggerArea,
+                [3] = handleAfflictorTriggerArea,
+                [4] = handleAfflictorTriggerArea,
+                [5] = handleAfflictorTriggerArea,
+                [6] = handleAfflictorTriggerArea,
             },
         },
     },

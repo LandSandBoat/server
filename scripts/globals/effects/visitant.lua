@@ -84,8 +84,8 @@ effectObject.onEffectTick = function(target, effect)
         target:delStatusEffect(effect)
     end
 
-    -- Searing Ward Tether is set and reset in zone onRegionLeave and
-    -- onRegionEnter.
+    -- Searing Ward Tether is set and reset in zone onTriggerAreaLeave and
+    -- onTriggerAreaEnter.
     if target:getLocalVar('tetherTimer') == 11 then
         xi.abyssea.searingWardTimer(target)
     end
