@@ -22,9 +22,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARENTITY_H
 #define _CHARENTITY_H
 
-#include "../event_info.h"
-#include "../packets/char.h"
-#include "../packets/entity_update.h"
+#include "event_info.h"
+#include "packets/char.h"
+#include "packets/entity_update.h"
+
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
@@ -37,7 +38,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleentity.h"
 #include "petentity.h"
 
-#include "../utils/fishingutils.h"
+#include "utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
 #define MAX_QUESTID      256
@@ -426,13 +427,13 @@ public:
     EntityID_t   BazaarID;        // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
-    uint32     m_InsideRegionID;     // номер региона, в котором сейчас находится персонаж (??? может засунуть в m_event ???)
-    uint8      m_LevelRestriction;   // ограничение уровня персонажа
-    uint16     m_Costume;            // карнавальный костюм персонажа (модель)
-    uint16     m_Monstrosity;        // Monstrosity model ID
-    uint32     m_AHHistoryTimestamp; // Timestamp when last asked to view history
-    uint32     m_DeathTimestamp;     // Timestamp when death counter has been saved to database
-    time_point m_deathSyncTime;      // Timer used for sending an update packet at a regular interval while the character is dead
+    uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
+    uint8      m_LevelRestriction;    // ограничение уровня персонажа
+    uint16     m_Costume;             // карнавальный костюм персонажа (модель)
+    uint16     m_Monstrosity;         // Monstrosity model ID
+    uint32     m_AHHistoryTimestamp;  // Timestamp when last asked to view history
+    uint32     m_DeathTimestamp;      // Timestamp when death counter has been saved to database
+    time_point m_deathSyncTime;       // Timer used for sending an update packet at a regular interval while the character is dead
 
     uint8      m_hasTractor;      // checks if player has tractor already
     uint8      m_hasRaise;        // checks if player has raise already

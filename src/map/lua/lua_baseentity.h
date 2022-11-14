@@ -177,7 +177,7 @@ public:
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
     bool   isInMogHouse();                                              // Check if entity inside a mog house
 
-    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
