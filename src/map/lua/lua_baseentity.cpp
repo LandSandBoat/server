@@ -13263,7 +13263,7 @@ void CLuaBaseEntity::instantiateMob(uint32 groupID)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::hasTrait(uint8 traitID)
+bool CLuaBaseEntity::hasTrait(uint16 traitID)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
