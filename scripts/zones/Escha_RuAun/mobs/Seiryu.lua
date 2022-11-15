@@ -7,7 +7,7 @@
 -- !addkeyitem 2950
 -- weak to ice
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
+local ID = require("scripts/zones/Escha_RuAun/IDs")
 mixins = {
 require("scripts/mixins/job_special"),
 require("scripts/mixins/rage")}
@@ -215,6 +215,8 @@ entity.onMobDespawn = function(mob)
 	for _, despawnMob in ipairs(despawnMobTable) do
 	    SpawnMob(despawnMob)
     end
+    
+    GetNPCByID(ID.npc.QM_SEIRYU):setStatus(xi.status.NORMAL)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

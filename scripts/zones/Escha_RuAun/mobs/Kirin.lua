@@ -3,10 +3,12 @@
 -- NM: Kirin
 -- !spawnmob 17961571
 -----------------------------------
-local ID = require("scripts/zones/Escha_RuAun/IDs")
-require("scripts/globals/titles")
+require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
+require("scripts/globals/titles")
 -----------------------------------
+local ID = require("scripts/zones/Escha_RuAun/IDs")
+
 local entity = {}
 
 local byakko = 17961580
@@ -267,7 +269,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player)
     -- Clean up listeners and variables
     mob:removeListener("KIRIN_2HR_LISTENER")
     player:removeListener("PLAYER_USE_2HRS")
@@ -282,6 +284,11 @@ entity.onMobDeath = function(mob, player, isKiller)
 
     for i = 17961580, 17961580 + 9 do
         DespawnMob(i)
+    end
+
+    for _, partyMember in pairs(player:getAlliance()) do
+        partyMember:addKeyItem(xi.keyItem.KIRINS_FERVOR)
+        partyMember:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.KIRINS_FERVOR)
     end
 end
 
