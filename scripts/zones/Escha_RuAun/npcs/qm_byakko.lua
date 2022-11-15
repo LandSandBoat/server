@@ -2,8 +2,11 @@
 -- Area: Escha Ru'Aun
 --  NPC: ??? (qm_byakko)
 -----------------------------------
-local entity = {}
+require("scripts/globals/keyitems")
+require("scripts/globals/status")
 local ID = require("scripts/zones/Escha_RuAun/IDs")
+
+local entity = {}
 
 entity.onTrigger = function(player, npc)
     player:addKeyItem(xi.keyItem.BYAKKOS_PRIDE)

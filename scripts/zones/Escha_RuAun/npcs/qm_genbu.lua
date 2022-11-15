@@ -3,6 +3,7 @@
 --  NPC: ??? (qm_genbu)
 -----------------------------------
 require("scripts/globals/keyitems")
+require("scripts/globals/status")
 local ID = require("scripts/zones/Escha_RuAun/IDs")
 
 local entity = {}
