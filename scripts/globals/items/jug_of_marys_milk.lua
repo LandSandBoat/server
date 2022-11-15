@@ -13,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (not hasSleepEffects(target)) then
+    if not hasSleepEffects(target) then
         target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 60)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

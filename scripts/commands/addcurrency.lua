@@ -29,7 +29,7 @@ function onTrigger(player, currency, amount, target)
 
     -- validate currency
     -- note: getCurrency does not ever return nil at the moment.  will work on this in future update.
-    if (currency == nil or targ:getCurrency(currency) == nil) then
+    if currency == nil or targ:getCurrency(currency) == nil then
         error(player, "Invalid currency type.")
         return
     end

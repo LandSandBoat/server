@@ -51,7 +51,10 @@ xi.full_speed_ahead.onEffectLose = function(player, effect)
     player:enableEntities({})
 
     -- If in Batallia Downs and didn't get the completion flag (failed/dismounted)
-    if player:getZoneID() == xi.zone.BATALLIA_DOWNS and player:getCharVar("[QUEST]FullSpeedAhead") ~= 4 then
+    if
+        player:getZoneID() == xi.zone.BATALLIA_DOWNS and
+        player:getCharVar("[QUEST]FullSpeedAhead") ~= 4
+    then
         player:startEvent(26, 0, effect:getPower())
     end
 end
@@ -76,7 +79,11 @@ xi.full_speed_ahead.tick = function(player, effect)
         end
     end
 
-    if motivation <= 0 or timeLeft <= 0 or not player:hasStatusEffect(xi.effect.MOUNTED) then
+    if
+        motivation <= 0 or
+        timeLeft <= 0 or
+        not player:hasStatusEffect(xi.effect.MOUNTED)
+    then
         player:delStatusEffectSilent(xi.effect.FULL_SPEED_AHEAD)
     else
         player:countdown(timeLeft, "Motivation", motivation, "Pep", pep)
@@ -84,7 +91,7 @@ xi.full_speed_ahead.tick = function(player, effect)
     end
 end
 
-xi.full_speed_ahead.onRegionEnter = function(player, index)
+xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
     local food_byte = player:getLocalVar("FSA_Food")
     local food_count = player:getLocalVar("FSA_FoodCount")
     local motivation = player:getLocalVar("FSA_Motivation")

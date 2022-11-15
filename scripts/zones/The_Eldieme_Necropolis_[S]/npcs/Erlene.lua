@@ -18,14 +18,18 @@ entity.onTrade = function(player, npc, trade)
     local aLittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
 
     if aLittleKnowledge == QUEST_ACCEPTED and aLittleKnowledgeProgress == 1 then
-        if trade:hasItemQty(2550, 12) and trade:getGil() == 0 and trade:getItemCount() == 12 then
+        if
+            trade:hasItemQty(2550, 12) and
+            trade:getGil() == 0 and
+            trade:getItemCount() == 12
+        then
             if
                 player:getMainJob() == xi.job.BLM or
                 player:getMainJob() == xi.job.RDM or
                 player:getMainJob() == xi.job.SMN or
                 player:getMainJob() == xi.job.BLU
             then
-               player:startEvent(12, 1)
+                player:startEvent(12, 1)
             else
                 player:startEvent(12)
             end
@@ -61,9 +65,18 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(13)
         end
-    elseif aLittleKnowledge == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= 5 and not (player:hasSpell(478) and player:hasSpell(502)) then
+    elseif
+        aLittleKnowledge == QUEST_COMPLETED and
+        mJob == xi.job.SCH and
+        mLvl >= 5 and
+        not (player:hasSpell(478) and player:hasSpell(502))
+    then
             player:startEvent(47)
-    elseif onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
+    elseif
+        onSabbatical == QUEST_AVAILABLE and
+        mJob == xi.job.SCH and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+    then
             player:startEvent(18)
     elseif onSabbatical == QUEST_ACCEPTED then
         if onSabbaticalProgress < 3 then
@@ -71,7 +84,13 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(20)
         end
-    elseif onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer") ~= VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE then
+    elseif
+        onSabbatical == QUEST_COMPLETED and
+        player:getCharVar("Erlene_Sabbatical_Timer") ~= VanadielDayOfTheYear() and
+        mJob == xi.job.SCH and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
+        downwardHelix == QUEST_AVAILABLE
+    then
         player:startEvent(23)
     elseif downwardHelix == QUEST_ACCEPTED then
         if player:getCharVar("DownwardHelix") == 0 then

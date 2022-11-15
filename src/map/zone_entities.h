@@ -68,7 +68,7 @@ public:
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
-    void ZoneServer(time_point tick, bool check_region);
+    void ZoneServer(time_point tick, bool check_trigger_areas);
 
     CZone* GetZone();
 
@@ -77,7 +77,7 @@ public:
     bool         CharListEmpty() const;
 
     uint16 GetNewCharTargID();
-    uint16 GetNewDynamicTargID();
+    void   AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
 
     EntityList_t m_allyList;
     EntityList_t m_mobList; // список всех MOBs в зоне

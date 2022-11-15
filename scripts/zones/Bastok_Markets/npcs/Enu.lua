@@ -12,7 +12,10 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if trade:hasItemQty(1192, 1) and trade:getItemCount() == 1 then -- Quest: Wish Upon a Star - Trade Fallen Star
         if player:getCharVar("WishUponAStar_Status") == 3 then
-            if player:getWeather() == xi.weather.NONE and (VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT) then
+            if
+                player:getWeather() == xi.weather.NONE and
+                (VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT)
+            then
                 player:startEvent(334) -- Trade accepeted
             else
                 player:startEvent(337) -- Player has to wait for clear weather
@@ -38,7 +41,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 332 then -- Quest: Wish Upon a Star
         player:setCharVar("WishUponAStar_Status", 3)
     elseif csid == 334 then -- Quest: Wish Upon a Star - Traded Fallen Star
-        player:tradeComplete( )
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
         player:addFame(xi.quest.fame_area.BASTOK, 50)

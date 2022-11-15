@@ -17,7 +17,7 @@ end
 function onTrigger(player, spellId, target)
 
     -- validate spellId
-    if (spellId == nil) then
+    if spellId == nil then
         error(player, "Invalid spellID.")
         return
     end

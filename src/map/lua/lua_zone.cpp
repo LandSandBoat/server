@@ -21,14 +21,15 @@
 
 #include "common/logging.h"
 
-#include "../campaign_system.h"
-#include "../entities/charentity.h"
-#include "../entities/npcentity.h"
-#include "../mob_modifier.h"
-#include "../region.h"
-#include "../utils/mobutils.h"
-#include "../zone.h"
-#include "../zone_entities.h"
+#include "campaign_system.h"
+#include "entities/charentity.h"
+#include "entities/npcentity.h"
+#include "mob_modifier.h"
+#include "trigger_area.h"
+#include "utils/mobutils.h"
+#include "zone.h"
+#include "zone_entities.h"
+
 #include "lua_baseentity.h"
 #include "lua_zone.h"
 
@@ -72,12 +73,12 @@ void CLuaZone::resetLocalVars()
 
 /************************************************************************
  *                                                                       *
- * Registering the active area in the zone                               *
+ * Registering the active trigger area in the zone                       *
  * Input data format: RegionID, x1, y1, z1, x2, y2, z2                   *
  *                                                                       *
  ************************************************************************/
 
-void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2)
+void CLuaZone::registerTriggerArea(uint32 triggerAreaID, float x1, float y1, float z1, float x2, float y2, float z2)
 {
     bool circleRegion = false;
     if (approximatelyEqual(x2, 0.0f) &&
@@ -87,13 +88,13 @@ void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, flo
         circleRegion = true; // Parameters were 0, we must be a circle.
     }
 
-    CRegion* Region = new CRegion(RegionID, circleRegion);
+    CTriggerArea* region = new CTriggerArea(triggerAreaID, circleRegion);
 
     // If this is a circle, parameter 3 (which would otherwise be vertical coordinate) will be the radius.
-    Region->SetULCorner(x1, y1, z1);
-    Region->SetLRCorner(x2, y2, z2);
+    region->SetULCorner(x1, y1, z1);
+    region->SetLRCorner(x2, y2, z2);
 
-    m_pLuaZone->InsertRegion(Region);
+    m_pLuaZone->InsertTriggerArea(region);
 }
 
 /************************************************************************
@@ -232,27 +233,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     // NOTE: Mob allegiance is the default for NPCs
     PEntity->allegiance = static_cast<ALLEGIANCE_TYPE>(table.get_or<uint8>("allegiance", ALLEGIANCE_TYPE::MOB));
 
-    uint16 ZoneID = m_pLuaZone->GetID();
+    m_pLuaZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PEntity);
 
-    // TODO: Wrap this entity in a unique_ptr that will free this dynamic targ ID
-    //       on despawn/destruction
-    // TODO: The tracking of these IDs is pretty bad also, fix that in zone_entities
-    PEntity->targid = m_pLuaZone->GetZoneEntities()->GetNewDynamicTargID();
-    if (PEntity->targid >= 0x900)
-    {
-        ShowError("CLuaZone::insertDynamicEntity : targid is high (03hX), update packets will be ignored", PEntity->targid);
-    }
-
-    m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
-
-    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
-    // Add 0x100 if targid is >= 0x800 -- observed on retail.
-    if (PEntity->targid >= 0x800)
-    {
-        PEntity->id += 0x100;
-    }
-
-    PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
     PEntity->loc.p.x        = table.get_or<float>("x", 0.01);
     PEntity->loc.p.y        = table.get_or<float>("y", 0.01);
@@ -450,7 +432,7 @@ void CLuaZone::Register()
     SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaZone::resetLocalVars);
 
-    SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
+    SOL_REGISTER("registerTriggerArea", CLuaZone::registerTriggerArea);
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
     SOL_REGISTER("getNPCs", CLuaZone::getNPCs);

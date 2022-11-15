@@ -23,9 +23,9 @@ quest.sections =
 
         [xi.zone.AYDEEWA_SUBTERRANE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [2] = function(player, region)
+                [2] = function(player, triggerArea)
                     return quest:progressEvent(7)
                 end,
             },
@@ -130,7 +130,10 @@ quest.sections =
             ['qm9'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 and player:hasKeyItem(xi.ki.POT_OF_TSETSEROONS_STEW) then
+                    if
+                        quest:getVar(player, 'Prog') == 3 and
+                        player:hasKeyItem(xi.ki.POT_OF_TSETSEROONS_STEW)
+                    then
                         return quest:progressEvent(8)
                     end
                 end,

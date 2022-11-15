@@ -19,28 +19,29 @@
 ===========================================================================
 */
 
-#ifndef _LUAREGION_H
-#define _LUAREGION_H
+#ifndef _LUATRIGGERAREA_H
+#define _LUATRIGGERAREA_H
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
 
-class CRegion;
-class CLuaRegion
+class CTriggerArea;
+
+class CLuaTriggerArea
 {
-    CRegion* m_PLuaRegion;
+    CTriggerArea* m_PLuaTriggerArea;
 
 public:
-    CLuaRegion(CRegion*);
+    CLuaTriggerArea(CTriggerArea*);
 
-    CRegion* GetRegion() const
+    CTriggerArea* GetTriggerArea() const
     {
-        return m_PLuaRegion;
+        return m_PLuaTriggerArea;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const CLuaRegion& region);
+    friend std::ostream& operator<<(std::ostream& out, const CLuaTriggerArea& triggerArea);
 
-    uint32 GetRegionID();
+    uint32 GetTriggerAreaID();
     int16  GetCount();
     int16  AddCount(int16 count);
     int16  DelCount(int16 count);
@@ -48,4 +49,4 @@ public:
     static void Register();
 };
 
-#endif
+#endif // _LUATRIGGERAREA_H

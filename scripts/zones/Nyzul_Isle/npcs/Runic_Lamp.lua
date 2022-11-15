@@ -49,7 +49,10 @@ entity.onTrigger = function(player, npc)
             player:startOptionalCutscene(3, { [0] = 6, cs_option = { 1, 2 } })
         elseif npc:getAnimationSub() == 3 then
             player:messageSpecial(ID.text.LAMP_NOT_ALL_ACTIVE)
-        elseif instance:getLocalVar("procedureTime") > 0 and instance:getLocalVar("procedureTime") < os.time() then
+        elseif
+            instance:getLocalVar("procedureTime") > 0 and
+            instance:getLocalVar("procedureTime") < os.time()
+        then
             player:messageSpecial(ID.text.CONFIRMING_PROCEDURE)
         else
             player:messageSpecial(ID.text.LAMP_CANNOT_ACTIVATE)
@@ -178,7 +181,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             -- Finish.
-            if winCondition == true then
+            if winCondition then
                 instance:setLocalVar("procedureTime", os.time() + 6)
                 npc:timer(6000, function(npcLamp)
                     instance:setLocalVar("lampsCorrect", 0)

@@ -12,8 +12,8 @@ local abilityObject = {}
 abilityObject.onAbilityCheck = function(player, target, ability)
     local level = player:getMainLvl() * 2
 
-    if(player:getMP()<level) then
-       return 87, 0
+    if player:getMP() < level then
+        return 87, 0
     end
 
     return 0, 0

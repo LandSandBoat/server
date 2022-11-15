@@ -22,8 +22,8 @@ g_mixins.families.avatar = function(avatarMob)
         mob:hideName(false)
         mob:setUntargetable(true)
         mob:setUnkillable(true)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMagicCastingEnabled(false)
+        mob:setAutoAttackEnabled(false)
+        mob:setMagicCastingEnabled(false)
 
         -- If something goes wrong, the avatar will clean itself up in 5s
         mob:timer(5000, function(mobArg)

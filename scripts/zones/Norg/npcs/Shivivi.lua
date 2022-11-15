@@ -64,12 +64,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local DampScroll = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+    local dampScroll = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     local mLvl = player:getMainLvl()
 
-    if DampScroll == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true then
+    if
+        dampScroll == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+        mLvl >= 10 and
+        player:hasItem(1210)
+    then
         player:startEvent(31, 1210) -- Start the quest
-    elseif DampScroll == QUEST_ACCEPTED then
+    elseif dampScroll == QUEST_ACCEPTED then
         player:startEvent(32) -- Reminder Dialogue
     else
         player:startEvent(85)

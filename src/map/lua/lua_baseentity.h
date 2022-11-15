@@ -177,7 +177,7 @@ public:
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
     bool   isInMogHouse();                                              // Check if entity inside a mog house
 
-    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
@@ -729,6 +729,7 @@ public:
     void  removeAllManeuvers();
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+    bool  isExceedingElementalCapacity();
 
     auto   getAllRuneEffects() -> sol::table;
     uint8  getActiveRuneCount();
@@ -762,7 +763,7 @@ public:
 
     void instantiateMob(uint32 groupID);
 
-    bool hasTrait(uint8 traitID);
+    bool hasTrait(uint16 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
 
     void setAggressive(bool aggressive);
@@ -777,10 +778,10 @@ public:
     void setDamage(uint16 damage); // sets a mobs weapon damage
     bool hasSpellList();
     void setSpellList(uint16 spellList);
-    void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
-    void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
-    void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    void setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void setMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

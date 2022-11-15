@@ -32,11 +32,19 @@ entity.onTrigger = function(player, npc)
     local stalkerStatus   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar("KnightStalker_Progress")
 
-    if player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE then
+    if
+        player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE
+    then
         player:startEvent(24)
 
     -- Chasing Quotas (DRG AF2)
-    elseif quotasStatus == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and quotasNo == 0 then
+    elseif
+        quotasStatus == QUEST_AVAILABLE and
+        player:getMainJob() == xi.job.DRG and
+        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+        quotasNo == 0
+    then
         player:startEvent(18) -- Long version of quest start
     elseif quotasNo == 1 then
         player:startEvent(14) -- Short version for those that said no.
@@ -64,7 +72,7 @@ entity.onTrigger = function(player, npc)
     elseif stalkerStatus == QUEST_ACCEPTED and stalkerProgress == 0 then
         player:startEvent(19) -- Fetch the last Dragoon's helmet
     elseif stalkerProgress == 1 then
-        if player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) == false then
+        if not player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then
             player:startEvent(23) -- Reminder to get helmet
         else
             player:startEvent(20) -- Response if you try to turn in the challenge to Ceraulian

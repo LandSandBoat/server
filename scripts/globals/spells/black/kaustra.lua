@@ -17,10 +17,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local skill = caster:getSkillLevel(xi.skill.DARK_MAGIC)
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    if (skill > 500) then
+    if skill > 500 then
         skill = 500
     end
-    if (dINT > 300) then
+    if dINT > 300 then
         dINT = 300
     end
 

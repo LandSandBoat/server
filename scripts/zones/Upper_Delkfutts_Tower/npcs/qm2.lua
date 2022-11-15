@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2386) and npcUtil.popFromQM(player, npc, ID.mob.PALLAS) then -- Hoary Battle Horn
+    if
+        npcUtil.tradeHas(trade, 2386) and
+        npcUtil.popFromQM(player, npc, ID.mob.PALLAS)
+    then
+        -- Hoary Battle Horn
         player:confirmTrade()
     end
 end

@@ -161,7 +161,7 @@ function InteractionLookup:addContainers(containers, zoneIds)
     if zoneIds ~= nil then
         validZoneTable = {}
         for i = 1, #zoneIds do
-           validZoneTable[zoneIds[i]] = true
+            validZoneTable[zoneIds[i]] = true
         end
     end
 
@@ -235,9 +235,11 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
     end
 
     local secondLevelTable = data[player:getZoneID()]
-    if not secondLevelTable
-        or not secondLevelTable[secondLevelKey]
-        or not secondLevelTable[secondLevelKey][thirdLevelKey] then
+    if
+        not secondLevelTable or
+        not secondLevelTable[secondLevelKey] or
+        not secondLevelTable[secondLevelKey][thirdLevelKey]
+    then
         return { }
     end
 
@@ -279,7 +281,11 @@ local function getHighestPriorityActions(data, player, secondLevelKey, thirdLeve
     local possibleActions = runHandlersInData(data, player, secondLevelKey, thirdLevelKey, args)
 
     -- If the possible actions is a number, we should always return immediately since it's CS ID from an onZoneIn
-    if possibleActions and #possibleActions == 0 or type(possibleActions[1]) == 'number' then
+    if
+        possibleActions and
+        #possibleActions == 0 or
+        type(possibleActions[1]) == 'number'
+    then
         return possibleActions, Action.Priority.Progress
     end
 
@@ -370,19 +376,25 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
 
     -- Most handlers should run both the handler system and fallback if available,
     -- except those that should only perform one action at a time, like onTrigger and onTrade
-    if fallbackHandler and thirdLevelKey ~= 'onTrigger' and thirdLevelKey ~= 'onTrade' then
+    if
+        fallbackHandler and
+        thirdLevelKey ~= 'onTrigger' and
+        thirdLevelKey ~= 'onTrade'
+    then
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
         local fallbackResult = fallbackHandler(unpack(args))
         return result or fallbackResult
     end
 
     -- Prioritize important actions from the handler system if applicable
-    if not fallbackHandler
-        or (#actions > 0 -- only prioritize if there's actually actions to do
-            and (secondLevelKey == 'onZoneIn' -- play onZoneIn cs if given
-                or priority > Action.Priority.Event -- prioritize this if event is important enough
-                or player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
-            )
+    if
+        not fallbackHandler or
+        (
+            #actions > 0 and                      -- only prioritize if there's actually actions to do
+            (secondLevelKey == 'onZoneIn' or      -- play onZoneIn cs if given
+            priority > Action.Priority.Event or   -- prioritize this if event is important enough
+            player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
+        )
     then
         player:setLocalVar(fallbackVar, priority <= Action.Priority.Event and 1 or 0)
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
@@ -395,9 +407,10 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
 
     -- Fall back to side-loaded handler from other lua file
     local result = fallbackHandler(unpack(args))
-    if player:isInEvent() or player:didGetMessage() -- Fallback handler triggered something
-        or (result == -1 and thirdLevelKey == 'onTrigger')  -- Doors return -1 to open
-        or (result ~= nil and result ~= -1 and secondLevelKey == 'onZoneIn') -- onZoneIn returns a csid if any, else -1
+    if
+        player:isInEvent() or player:didGetMessage() or -- Fallback handler triggered something
+        (result == -1 and thirdLevelKey == 'onTrigger') or  -- Doors return -1 to open
+        (result ~= nil and result ~= -1 and secondLevelKey == 'onZoneIn') -- onZoneIn returns a csid if any, else -1
     then
         return result
     end
@@ -424,12 +437,12 @@ function InteractionLookup:onMobDeath(mob, player, optParams, fallbackFn)
     return onHandler(self.data, mob:getName(), 'onMobDeath', { mob, player, optParams, playerArg = 2 }, fallbackFn)
 end
 
-function InteractionLookup:onRegionEnter(player, region, fallbackFn)
-    return onHandler(self.data, 'onRegionEnter', region:GetRegionID(), { player, region }, fallbackFn)
+function InteractionLookup:onTriggerAreaEnter(player, triggerArea, fallbackFn)
+    return onHandler(self.data, 'onTriggerAreaEnter', triggerArea:GetTriggerAreaID(), { player, triggerArea }, fallbackFn)
 end
 
-function InteractionLookup:onRegionLeave(player, region, fallbackFn)
-    return onHandler(self.data, 'onRegionLeave', region:GetRegionID(), { player, region }, fallbackFn)
+function InteractionLookup:onTriggerAreaLeave(player, triggerArea, fallbackFn)
+    return onHandler(self.data, 'onTriggerAreaLeave', triggerArea:GetTriggerAreaID(), { player, triggerArea }, fallbackFn)
 end
 
 function InteractionLookup:onZoneIn(player, prevZone, fallbackFn)

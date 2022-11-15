@@ -52,5 +52,5 @@ function onTrigger(player, logId, questId, target)
 
     -- complete quest
     targ:completeQuest(logId, questId)
-    player:PrintToPlayer( string.format( "Completed %s Quest with ID %u for %s", logName, questId, targ:getName() ) )
+    player:PrintToPlayer(string.format("Completed %s Quest with ID %u for %s", logName, questId, targ:getName()))
 end

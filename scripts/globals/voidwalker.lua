@@ -61,7 +61,11 @@ end
 local function getMobsFromAbyssites(zoneId, abyssites)
     local results = {}
     for i, keyitem in ipairs(abyssites) do
-        if zones[zoneId] and zones[zoneId].mob and zones[zoneId].mob.VOIDWALKER[keyitem] then
+        if
+            zones[zoneId] and
+            zones[zoneId].mob and
+            zones[zoneId].mob.VOIDWALKER[keyitem]
+        then
             for _, mobId in ipairs(zones[zoneId].mob.VOIDWALKER[keyitem]) do
                 local mob = GetMobByID(mobId)
                 if mob:isAlive() and mob:getLocalVar("[VoidWalker]PopedBy") == 0 then
@@ -318,7 +322,10 @@ local mixinByMobName =
 
     ['Jyeshtha'] = function(mob)
         randomly(mob, 30, 60, xi.jsa.MIGHTY_STRIKES, xi.jsa.MIGHTY_STRIKES)
-        if mob:getLocalVar("MOBSKILL_USE") == 1 and not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
+        if
+            mob:getLocalVar("MOBSKILL_USE") == 1 and
+            not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)
+        then
             mob:setLocalVar("MOBSKILL_USE", 0)
         end
     end,
@@ -337,7 +344,10 @@ local mixinByMobName =
 
     ['Erebus'] = function(mob)
         randomly(mob, 30, 60, xi.effect.BLOOD_WEAPON, xi.jsa.BLOOD_WEAPON)
-        if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
+        if
+            mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
+            not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)
+        then
             mob:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 30)
         end
     end,
@@ -380,7 +390,13 @@ xi.voidwalker.onMobFight = function(mob, target)
     local poptime = mob:getLocalVar("[VoidWalker]PopedAt")
     local now = os.time()
 
-    if mob:isSpawned() and (now > (poptime + 7200) or mob:checkDistance(target) > 25) then
+    if
+        mob:isSpawned() and
+        (
+            now > (poptime + 7200) or
+            mob:checkDistance(target) > 25
+        )
+    then
         local zoneTextTable = zones[mob:getZoneID()].text
 
         target:messageSpecial(zoneTextTable.VOIDWALKER_DESPAWN)
@@ -451,7 +467,11 @@ xi.voidwalker.onHealing = function(player)
     local zoneTextTable = zones[zoneId].text
     local abyssites = getCurrentKIsFromPlayer(player)
 
-    if table.getn(abyssites) == 0 or not zones[zoneId].mob or not zones[zoneId].mob.VOIDWALKER then
+    if
+        table.getn(abyssites) == 0 or
+        not zones[zoneId].mob or
+        not zones[zoneId].mob.VOIDWALKER
+    then
         return
     end
 
@@ -465,13 +485,17 @@ xi.voidwalker.onHealing = function(player)
         mob:setLocalVar("[VoidWalker]PopedBy", player:getID())
         mob:setLocalVar("[VoidWalker]PopedWith", mobNearest.keyItem)
         mob:setLocalVar("[VoidWalker]PopedAt", os.time())
-        if mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and mobNearest.keyItem ~= xi.keyItem.COLORFUL_ABYSSITE then
+        if
+            mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and
+            mobNearest.keyItem ~= xi.keyItem.COLORFUL_ABYSSITE
+        then
             player:delKeyItem(mobNearest.keyItem)
             player:messageSpecial(zoneTextTable.VOIDWALKER_BREAK_KI, mobNearest.keyItem)
         else
             player:messageSpecial(zoneTextTable.VOIDWALKER_SPAWN_MOB)
             mob:hideHP(false)
         end
+
         mob:hideName(false)
         mob:setUntargetable(false)
         mob:setStatus(xi.status.MOB)

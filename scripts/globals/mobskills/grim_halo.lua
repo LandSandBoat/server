@@ -11,9 +11,17 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local job = mob:getMainJob()
-    if (job == xi.job.WAR or job == xi.job.BLM or job == xi.job.DRK or job == xi.job.SAM or job == xi.job.DRG or job == xi.job.SMN) then
+    if
+        job == xi.job.WAR or
+        job == xi.job.BLM or
+        job == xi.job.DRK or
+        job == xi.job.SAM or
+        job == xi.job.DRG or
+        job == xi.job.SMN
+    then
         return 0
     end
+
     return 1
 end
 

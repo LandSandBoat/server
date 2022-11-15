@@ -18,7 +18,7 @@ function error(player, msg)
 end
 
 function onTrigger(player, skillName, skillLV, target)
-    if (skillName == nil) then
+    if skillName == nil then
         error(player, "You must specify a skill to set!")
         return
     end

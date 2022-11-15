@@ -101,7 +101,7 @@ bool CMobController::TryDeaggro()
 bool CMobController::CanPursueTarget(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    if (PMob->m_Detects & DETECT_SCENT)
+    if (PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
     {
         // if mob is in water it will instant deaggro if target cannot be detected
         if (!PMob->PAI->PathFind->InWater() && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
@@ -238,9 +238,8 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         return false;
     }
 
-    int16 detection       = PMob->getMobMod(MOBMOD_DETECTION);
-    auto  detects         = detection != 0 ? detection : PMob->m_Detects;
-    auto  currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
+    auto detects         = PMob->getMobMod(MOBMOD_DETECTION);
+    auto currentDistance = distance(PTarget->loc.p, PMob->loc.p) + PTarget->getMod(Mod::STEALTH);
 
     bool detectSight  = (detects & DETECT_SIGHT) || forceSight;
     bool hasInvisible = false;

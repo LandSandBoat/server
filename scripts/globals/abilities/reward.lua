@@ -20,7 +20,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
-        if (id >= 17016 and id <= 17023) then
+        if id >= 17016 and id <= 17023 then
             return 0, 0
         else
             return xi.msg.basic.MUST_HAVE_FOOD, 0
@@ -129,13 +129,13 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     -- Adding bonus to the total to heal.
 
-    if (rewardHealingMod ~= nil and rewardHealingMod > 0) then
+    if rewardHealingMod ~= nil and rewardHealingMod > 0 then
         totalHealing = totalHealing + math.floor(totalHealing * rewardHealingMod / 100)
     end
 
     local diff = petMaxHP - petCurrentHP
 
-    if (diff < totalHealing) then
+    if diff < totalHealing then
         totalHealing = diff
     end
 

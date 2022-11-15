@@ -18,7 +18,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     -- This is a 2 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
@@ -35,12 +34,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.vit_wsc = 1.0
     end
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.STUN) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) then
         local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

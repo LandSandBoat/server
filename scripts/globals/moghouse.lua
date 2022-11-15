@@ -63,16 +63,26 @@ xi.moghouse.isInMogHouseInHomeNation = function(player)
     local currentZone = player:getZoneID()
     local nation      = player:getNation()
 
+    -- TODO: Simplify nested conditions
     if nation == xi.nation.BASTOK then
-        if currentZone >= xi.zone.BASTOK_MINES and currentZone <= xi.zone.PORT_BASTOK then
+        if
+            currentZone >= xi.zone.BASTOK_MINES and
+            currentZone <= xi.zone.PORT_BASTOK
+        then
             return true
         end
     elseif nation == xi.nation.SANDORIA then
-        if currentZone >= xi.zone.SOUTHERN_SAN_DORIA and currentZone <= xi.zone.PORT_SAN_DORIA then
+        if
+            currentZone >= xi.zone.SOUTHERN_SAN_DORIA and
+            currentZone <= xi.zone.PORT_SAN_DORIA
+        then
             return true
         end
     else
-        if currentZone >= xi.zone.WINDURST_WATERS and currentZone <= xi.zone.WINDURST_WOODS then
+        if
+            currentZone >= xi.zone.WINDURST_WATERS and
+            currentZone <= xi.zone.WINDURST_WOODS
+        then
             return true
         end
     end

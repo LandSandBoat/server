@@ -37,8 +37,8 @@ local god_mode_on = function(player)
     player:addMod(xi.mod.MDEF, 2500)
 
     -- Heal the player from the new buffs..
-    player:addHP( 50000 )
-    player:setMP( 50000 )
+    player:addHP(50000)
+    player:setMP(50000)
 end
 
 local god_mode_off = function(player)

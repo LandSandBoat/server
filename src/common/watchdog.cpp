@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -27,31 +27,30 @@ Watchdog::Watchdog(duration timeout, std::function<void()> callback)
 , m_lastUpdate(server_clock::now())
 , m_running(true)
 {
-    m_watchdog = std::thread(&Watchdog::_innerFunc, this);
+    m_watchdog = nonstd::jthread(&Watchdog::_innerFunc, this);
 }
 
 Watchdog::~Watchdog()
 {
     if (m_running)
     {
-        std::unique_lock<std::mutex> lock(m_bottlneck);
+        std::unique_lock<std::mutex> lock(m_bottleneck);
 
         m_running = false;
         m_stopCondition.notify_all();
-
-        m_watchdog.join();
     }
 }
 
 void Watchdog::update()
 {
-    std::unique_lock<std::mutex> lock(m_bottlneck);
+    std::unique_lock<std::mutex> lock(m_bottleneck);
+
     m_lastUpdate = server_clock::now();
 }
 
 void Watchdog::_innerFunc()
 {
-    std::unique_lock<std::mutex> lock(m_bottlneck);
+    std::unique_lock<std::mutex> lock(m_bottleneck);
 
     while ((server_clock::now() - m_lastUpdate) < m_timeout)
     {

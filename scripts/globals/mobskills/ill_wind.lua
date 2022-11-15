@@ -14,7 +14,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getFamily() == 316 and mob:getModelId() == 1746) then
+    if mob:getFamily() == 316 and mob:getModelId() == 1746 then
         return 0
     else
         return 1

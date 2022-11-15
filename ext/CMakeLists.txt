@@ -1,11 +1,12 @@
+# add_subdirectory(lua) # Handled globally
+# add_subdirectory(mysql) # Handled globally
+# add_subdirectory(zmq) # Handled globally
+
 add_subdirectory(concurrentqueue)
 add_subdirectory(detour)
-# add_subdirectory(lua) # Handled globally 
-# add_subdirectory(mysql) # Handled globally
 add_subdirectory(recast)
 add_subdirectory(sol)
 add_subdirectory(spdlog)
-# add_subdirectory(zmq) # Handled globally
 
 # CPM Modules
 CPMAddPackage(
@@ -26,6 +27,13 @@ CPMAddPackage(
         "EFSW_INSTALL OFF"
 ) # defines: efsw
 
+# TODO: std::jthread lands in C++20. Remove this once all compilers for all platforms implement.
+CPMAddPackage(
+    NAME jthread-lite
+    GITHUB_REPOSITORY martinmoene/jthread-lite
+    GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
+) # defines: jthread-lite
+
 set(EXTERNAL_LIBS
     concurrentqueue
     mariadbclient
@@ -35,6 +43,7 @@ set(EXTERNAL_LIBS
     sol2_single
     argparse
     efsw
+    jthread-lite
 )
 
 if (WIN32)

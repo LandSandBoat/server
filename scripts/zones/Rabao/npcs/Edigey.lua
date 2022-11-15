@@ -13,7 +13,11 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
-    if (forgetTheAntidote == QUEST_ACCEPTED or forgetTheAntidote == QUEST_COMPLETED) and trade:hasItemQty(1209, 1) and trade:getItemCount() == 1 then
+    if
+        (forgetTheAntidote == QUEST_ACCEPTED or forgetTheAntidote == QUEST_COMPLETED) and
+        trade:hasItemQty(1209, 1) and
+        trade:getItemCount() == 1
+    then
         player:startEvent(4, 0, 1209)
     end
 end
@@ -21,7 +25,10 @@ end
 entity.onTrigger = function(player, npc)
     local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
-    if forgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4 then
+    if
+        forgetTheAntidote == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4
+    then
         player:startEvent(2, 0, 1209)
     elseif forgetTheAntidote == QUEST_ACCEPTED then
         player:startEvent(3, 0, 1209)

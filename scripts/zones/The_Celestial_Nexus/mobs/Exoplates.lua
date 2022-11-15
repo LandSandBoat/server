@@ -15,7 +15,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setUnkillable(true)
 end
 
@@ -35,9 +35,17 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(1001)
         mob:setLocalVar("shifts", shifts + 1)
         mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
-    elseif mob:getHPP() <= 67 and mob:getAnimationSub() == 0 and mob:getBattleTime() >= shiftTime then
+    elseif
+        mob:getHPP() <= 67 and
+        mob:getAnimationSub() == 0 and
+        mob:getBattleTime() >= shiftTime
+    then
         mob:setAnimationSub(1)
-    elseif mob:getHPP() <= 33 and mob:getAnimationSub() == 1 and mob:getBattleTime() >= shiftTime then
+    elseif
+        mob:getHPP() <= 33 and
+        mob:getAnimationSub() == 1 and
+        mob:getBattleTime() >= shiftTime
+    then
         mob:setAnimationSub(2)
     end
 end

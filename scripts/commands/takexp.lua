@@ -35,6 +35,6 @@ function onTrigger(player, amount, target)
 
     -- take xp
     targ:delExp(amount)
-    player:PrintToPlayer( string.format( "Removed %i exp from %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl() ))
+    player:PrintToPlayer(string.format("Removed %i exp from %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl()))
 
 end

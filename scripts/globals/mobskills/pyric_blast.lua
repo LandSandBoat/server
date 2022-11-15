@@ -38,7 +38,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
 
-    if mob:getFamily() == 313 and bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 then -- re-enable no turn if all three heads are up
+    if
+        mob:getFamily() == 313 and
+        bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0
+    then
+        -- re-enable no turn if all three heads are up
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 

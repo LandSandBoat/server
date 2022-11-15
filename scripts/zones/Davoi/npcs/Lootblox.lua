@@ -21,12 +21,12 @@ local currency =
 
 local shop =
 {
-     5, 1295, -- Twincoon
-     6, 1466, -- Relic Iron
-     7, 1520, -- Goblin Grease
-     8, 1516, -- Griffon Hide
+    5,  1295, -- Twincoon
+    6,  1466, -- Relic Iron
+    7,  1520, -- Goblin Grease
+    8,  1516, -- Griffon Hide
     23, 1459, -- Griffon Leather
-    25, 883,  -- Behemoth Horn
+    25,  883,  -- Behemoth Horn
     28, 1458, -- Mammoth Tusk
 }
 
@@ -50,17 +50,27 @@ entity.onTrade = function(player, npc, trade)
 
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
         -- buy prismatic hourglass
-        if gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) then
+        if
+            gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and
+            count == 1 and
+            not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)
+        then
             player:startEvent(134)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
+        elseif count == 1 and trade:hasItemQty(timelessHourglassID, 1) then
             player:startEvent(153)
 
         -- currency exchanges
-        elseif count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE) then
+        elseif
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
             player:startEvent(135, xi.settings.main.CURRENCY_EXCHANGE_RATE)
-        elseif count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE) then
+        elseif
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
             player:startEvent(136, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif count == 1 and trade:hasItemQty(currency[3], 1) then
             player:startEvent(138, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
@@ -166,12 +176,12 @@ entity.onEventFinish = function(player, csid, option)
     -- 10k pieces to hundos
     elseif csid == 138 then
         local slotsReq = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
-        if (player:getFreeSlotsCount() < slotsReq) then
+        if player:getFreeSlotsCount() < slotsReq then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
         else
             player:tradeComplete()
             for i = 1, slotsReq do
-                if (i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0) then
+                if i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0 then
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
                 else
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)

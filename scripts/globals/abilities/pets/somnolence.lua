@@ -23,13 +23,13 @@ abilityObject.onPetAbility = function(target, pet, skill)
     -- TODO: spell is nil here
     --dmg = finalMagicAdjustments(pet, target, spell, dmg)
 
-    if (resist < 0.15) then  --the gravity effect from this ability is more likely to land than Tail Whip
+    if resist < 0.15 then  --the gravity effect from this ability is more likely to land than Tail Whip
         resist = 0
     end
 
     duration = duration * resist
 
-    if (duration > 0 and target:hasStatusEffect(xi.effect.WEIGHT) == false) then
+    if duration > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
         target:addStatusEffect(xi.effect.WEIGHT, 50, 0, duration)
     end
 

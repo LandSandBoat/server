@@ -27,7 +27,10 @@ entity.onTrigger = function(player, npc)
     local aSquiresTestII = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     local aKnightsTest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHT_S_TEST)
 
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 2 then
+    if
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and
+        player:getCharVar("KnightStalker_Progress") == 2
+    then
         player:startEvent(63) -- DRG AF3 cutscene, doesn't appear to have a follow up.
     elseif lvl < 7 then
         player:startEvent(668)
@@ -44,13 +47,13 @@ entity.onTrigger = function(player, npc)
     elseif lvl >= 7 and lvl < 15 then
         player:startEvent(671)
     elseif lvl >= 15 and aSquiresTestII ~= QUEST_COMPLETED then
-        local stalactiteDew = player:hasKeyItem(xi.ki.STALACTITE_DEW)
+        local hasStalactiteDew = player:hasKeyItem(xi.ki.STALACTITE_DEW)
 
         if aSquiresTestII == QUEST_AVAILABLE then
             player:startEvent(625)
-        elseif aSquiresTestII == QUEST_ACCEPTED and stalactiteDew == false then
+        elseif aSquiresTestII == QUEST_ACCEPTED and not hasStalactiteDew then
             player:startEvent(630)
-        elseif stalactiteDew then
+        elseif hasStalactiteDew then
             player:startEvent(626)
         else
             player:startEvent(667)

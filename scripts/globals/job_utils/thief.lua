@@ -333,7 +333,11 @@ xi.job_utils.thief.useMug = function(player, target, ability, action)
 
     local mugChance = 90 + thfLevel - target:getMainLvl()
 
-    if target:isMob() and math.random(100) < mugChance and target:getMobMod(xi.mobMod.MUG_GIL) > 0 then
+    if
+        target:isMob() and
+        math.random(100) < mugChance and
+        target:getMobMod(xi.mobMod.MUG_GIL) > 0
+    then
         local purse = target:getMobMod(xi.mobMod.MUG_GIL)
         local fatpurse = target:getGil()
         gil = fatpurse / (8 + math.random(0, 8))
@@ -374,7 +378,7 @@ xi.job_utils.thief.usePerfectDodge = function(player, target, ability)
 end
 
 xi.job_utils.thief.useSneakAttack = function(player, target, ability)
-   player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
+    player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
 end
 
 xi.job_utils.thief.useSteal = function(player, target, ability, action)
@@ -446,5 +450,5 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
 end
 
 xi.job_utils.thief.useTrickAttack = function(player, target, ability)
-   player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
+    player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
 end

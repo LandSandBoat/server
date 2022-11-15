@@ -10,9 +10,9 @@ require("scripts/globals/msg")
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    if (caster:getPet() ~= nil) then
+    if caster:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET
-    elseif (target:getMaster() ~= nil and target:getMaster():isPC()) then
+    elseif target:getMaster() ~= nil and target:getMaster():isPC() then
         return xi.msg.basic.THAT_SOMEONES_PET
     end
 
@@ -34,9 +34,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.CHARM_I
     local resist = applyResistanceEffect(caster, target, spell, params)
 
-    if (resist >= 0.25 and caster:getCharmChance(target, false) > 0) then
+    if resist >= 0.25 and caster:getCharmChance(target, false) > 0 then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        if (caster:isMob()) then
+        if caster:isMob() then
             target:addStatusEffect(xi.effect.CHARM_I, 0, 0, 30 * resist)
             caster:charm(target)
         else

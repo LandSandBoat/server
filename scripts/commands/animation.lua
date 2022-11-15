@@ -19,14 +19,14 @@ end
 function onTrigger(player, animationId)
     local oldAnimation = player:getAnimation()
 
-    if (animationId == nil) then
+    if animationId == nil then
         player:PrintToPlayer(string.format("Current player animation: %d", oldAnimation))
         return
     end
 
     -- validate animationId
     animationId = tonumber(animationId) or xi.anim[string.upper(animationId)]
-    if (animationId == nil or animationId < 0) then
+    if animationId == nil or animationId < 0 then
         error(player, "Invalid animationId.")
         return
     end

@@ -43,8 +43,8 @@ public:
     virtual void Tick();
 
 protected:
-    std::string m_ServerName;
-    bool        m_IsRunning;
+    std::string       m_ServerName;
+    std::atomic<bool> m_IsRunning;
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
     std::unique_ptr<ConsoleService>           gConsoleService;

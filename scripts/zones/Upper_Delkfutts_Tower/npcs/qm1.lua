@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2385) and npcUtil.popFromQM(player, npc, ID.mob.ALKYONEUS) then -- Moldy Buckler
+    if
+        npcUtil.tradeHas(trade, 2385) and
+        npcUtil.popFromQM(player, npc, ID.mob.ALKYONEUS)
+    then
+        -- Moldy Buckler
         player:confirmTrade()
     end
 end

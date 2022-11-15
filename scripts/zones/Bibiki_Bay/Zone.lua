@@ -13,14 +13,18 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1,  474, -10,  667,  511, 10,  708) -- Manaclipper while docked at Sunset Docks
-    zone:registerRegion(2, -410, -10, -385, -371, 10, -343) -- Manaclipper while docked at Purgonorgo Isle
+    zone:registerTriggerArea(1,  474, -10,  667,  511, 10,  708) -- Manaclipper while docked at Sunset Docks
+    zone:registerTriggerArea(2, -410, -10, -385, -371, 10, -343) -- Manaclipper while docked at Purgonorgo Isle
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.MANACLIPPER then
             cs = xi.manaclipper.onZoneIn(player)
         else
@@ -35,12 +39,12 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    xi.manaclipper.aboard(player, region:GetRegionID(), true)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.manaclipper.aboard(player, triggerArea:GetTriggerAreaID(), true)
 end
 
-zoneObject.onRegionLeave = function(player, region)
-    xi.manaclipper.aboard(player, region:GetRegionID(), false)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    xi.manaclipper.aboard(player, triggerArea:GetTriggerAreaID(), false)
 end
 
 zoneObject.onTransportEvent = function(player, transport)

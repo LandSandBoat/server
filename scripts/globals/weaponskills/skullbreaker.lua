@@ -18,7 +18,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
@@ -33,11 +32,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.str_wsc = 1.0
     end
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.INT_DOWN) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.INT_DOWN) then
         target:addStatusEffect(xi.effect.INT_DOWN, 10, 0, 140)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

@@ -76,7 +76,11 @@ entity.onTrigger = function(player, npc)
         end
 
         -- CAN CARDIANS CRY?
-    elseif allNewC3000 == QUEST_COMPLETED and canCardiansCry == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 then
+    elseif
+        allNewC3000 == QUEST_COMPLETED and
+        canCardiansCry == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
+    then
         player:startEvent(319, 0, 20000) -- start quest
     elseif canCardiansCry == QUEST_ACCEPTED then
         player:startEvent(320, 0, 20000) -- reminder
@@ -84,7 +88,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(330) -- new standard dialog
 
         -- TRUST
-    elseif player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(904) then
+    elseif
+        player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and
+        not player:hasSpell(904)
+    then
         local rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
         player:startEvent(866, 0, 0, 0, trustMemory(player), 0, 0, 0, rank6)

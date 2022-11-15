@@ -24,7 +24,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("SpellTime") < os.time() and mob:getLocalVar("SpellTime") ~= 0 then -- Checks for it being 0 because it gets set to 0 to avoid setting the spell list repeatedly
+    if
+        mob:getLocalVar("SpellTime") < os.time() and
+        mob:getLocalVar("SpellTime") ~= 0
+    then
+        -- Checks for it being 0 because it gets set to 0 to avoid setting the spell list repeatedly
         mob:setSpellList(0)
         mob:setLocalVar("SpellTime", 0)
     end

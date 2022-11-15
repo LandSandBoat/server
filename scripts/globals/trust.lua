@@ -193,7 +193,7 @@ xi.trust.checkBattlefieldTrustCount = function (caster)
             local objType = entity:getObjType()
 
             if objType == xi.objType.TRUST then
-               numTrusts = numTrusts + 1
+                numTrusts = numTrusts + 1
             end
         end
 
@@ -204,8 +204,8 @@ end
 
 xi.trust.hasPermit = function(player)
     return player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
-           player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
-           player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
+        player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
+        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
 end
 
 xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
@@ -342,7 +342,10 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
 
     -- Some battlefields allow trusts after you get this ROV Key Item
     local casterBattlefieldID = caster:getBattlefieldID()
-    if rovKIBattlefieldIDs[casterBattlefieldID] and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER) then
+    if
+        rovKIBattlefieldIDs[casterBattlefieldID] and
+        not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER)
+    then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 

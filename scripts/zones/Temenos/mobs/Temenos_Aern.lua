@@ -62,7 +62,10 @@ entity.onMobDespawn = function(mob)
             end
         end
 
-        if leftAern == 0 and not GetMobByID(ID.mob.TEMENOS_C_MOB[5] + 35):isSpawned() then
+        if
+            leftAern == 0 and
+            not GetMobByID(ID.mob.TEMENOS_C_MOB[5] + 35):isSpawned()
+        then
             local mobX = mob:getXPos()
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()

@@ -20,16 +20,16 @@ function onTrigger(player, target)
     if target == nil then
         targ = player
     else
-        targ = GetPlayerByName( target )
+        targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
     -- homepoint target
     targ:warp()
-    if (targ:getID() ~= player:getID()) then
+    if targ:getID() ~= player:getID() then
         player:PrintToPlayer(string.format("Sent %s to their homepoint.", targ:getName()))
     end
 end

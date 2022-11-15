@@ -22,7 +22,10 @@ itemObject.onItemCheck = function(target, user)
 
     -- Can only use on targets within party or self
     if target:getID() ~= user:getID() then
-        if user:getPartyLeader() == nil or target:getPartyLeader():getID() ~= user:getPartyLeader():getID() then
+        if
+            user:getPartyLeader() == nil or
+            target:getPartyLeader():getID() ~= user:getPartyLeader():getID()
+        then
             return xi.msg.basic.ITEM_CANNOT_USE_ON
         end
     end

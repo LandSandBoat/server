@@ -342,23 +342,30 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         {
             uint32 stride = uint32(entityIds.size()) / m_PLuaBattlefield->GetZone()->m_BattlefieldHandler->MaxBattlefieldAreas();
 
-            // Look to see if there's an Armoury Crate after the last monster in the first area. If so then we need to increase the stride.
+            // Look to see if there's an Armoury Crate within the group of monsters
             static const std::string ARMOURY_CRATE = "Armoury_Crate";
 
-            uint32       potentialCrateId = lowestId + stride;
-            CBaseEntity* entity           = zoneutils::GetEntity(potentialCrateId, TYPE_NPC);
-            bool         hasArmouryCrate  = entity != nullptr && entity->name == ARMOURY_CRATE;
-            if (hasArmouryCrate)
+            uint32 armouryCrateOffset = 0;
+            uint32 potentialCrateId   = lowestId + stride;
+            while (potentialCrateId >= lowestId)
             {
-                ++stride;
+                CBaseEntity* entity = zoneutils::GetEntity(potentialCrateId, TYPE_NPC);
+                if (entity != nullptr && entity->name == ARMOURY_CRATE)
+                {
+                    armouryCrateOffset = potentialCrateId - lowestId;
+                    // If an Armoury Crate is in the battlefield we need to account for it in the stride
+                    ++stride;
+                    break;
+                }
+                --potentialCrateId;
             }
 
             uint32 offset = stride * (m_PLuaBattlefield->GetArea() - 1);
             lowestId += offset;
             highestId = lowestId + stride - 1;
-            if (hasArmouryCrate)
+            if (armouryCrateOffset != 0)
             {
-                m_PLuaBattlefield->setArmouryCrate(highestId);
+                m_PLuaBattlefield->setArmouryCrate(lowestId + armouryCrateOffset);
             }
         }
     }

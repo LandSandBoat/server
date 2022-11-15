@@ -8,8 +8,8 @@ require('scripts/globals/treasure')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -369, -146, 83,  -365, -145,  89) -- Tenth Floor F-6 porter to Middle Delkfutt's Tower
-    zone:registerRegion(2, -369, -178, -49, -365, -177, -43) -- Twelfth Floor F-10 porter to Stellar Fulcrum
+    zone:registerTriggerArea(1, -369, -146, 83,  -365, -145,  89) -- Tenth Floor F-6 porter to Middle Delkfutt's Tower
+    zone:registerTriggerArea(2, -369, -178, -49, -365, -177, -43) -- Twelfth Floor F-10 porter to Stellar Fulcrum
 
     xi.treasure.initZone(zone)
 end
@@ -21,15 +21,19 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(12.098, -105.408, 27.683, 239)
     end
 
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)
             --player:setCharVar("porter_lock", 1)
@@ -43,7 +47,7 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -53,7 +57,7 @@ zoneObject.onEventFinish = function(player, csid, option)
     if csid == 0 and option == 1 then
         player:setPos(-490, -130, 81, 231, 157)
     elseif csid == 1 and option == 1 then
-        player:setPos(-520 , 1 , -23, 192, 179) -- to Stellar Fulcrum
+        player:setPos(-520, 1, -23, 192, 179) -- to Stellar Fulcrum
     end
 end
 

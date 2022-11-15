@@ -17,7 +17,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setMod(xi.mod.FASTCAST, 15)
     mob:setLocalVar("HPP", 90)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)

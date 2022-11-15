@@ -134,7 +134,7 @@ xi.player.charCreate = function(player)
     --]]
 
     if player:getGil() < xi.settings.main.START_GIL then
-       player:setGil(xi.settings.main.START_GIL)
+        player:setGil(xi.settings.main.START_GIL)
     end
 
     player:addItem(15198) -- Sprout Beret
@@ -276,7 +276,10 @@ xi.player.onPlayerMount = function(player)
 end
 
 xi.player.onPlayerEmote = function(player, emoteId)
-    if emoteId == xi.emote.CHEER and player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
+    if
+        emoteId == xi.emote.CHEER and
+        player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD)
+    then
         xi.fsa.onCheer(player)
     end
 end

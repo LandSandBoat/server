@@ -362,7 +362,10 @@ local function pickMobs(instance)
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                     instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and instance:getLocalVar("Nyzul_Specified_Enemy") == 0 then
+                elseif
+                    instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
+                    instance:getLocalVar("Nyzul_Specified_Enemy") == 0
+                then
                     instance:setLocalVar("Nyzul_Specified_Enemy", enemy)
                 end
 

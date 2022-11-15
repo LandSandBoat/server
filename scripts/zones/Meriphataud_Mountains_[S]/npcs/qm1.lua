@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2566) and npcUtil.popFromQM(player, npc, ID.mob.BLOODLAPPER, { hide = 0 }) then -- Gnat Pellets
+    if
+        npcUtil.tradeHas(trade, 2566) and
+        npcUtil.popFromQM(player, npc, ID.mob.BLOODLAPPER, { hide = 0 })
+    then
+        -- Gnat Pellets
         player:confirmTrade()
     end
 end

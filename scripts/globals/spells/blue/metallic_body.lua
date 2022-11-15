@@ -30,14 +30,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = (blueskill / 3) + (caster:getMainLvl() / 3) + 10
     local duration = 300
 
-    if (power > 150) then
+    if power > 150 then
         power = 150
     end
 
-    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
+    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
-        if (diffMerit > 0) then
+        if diffMerit > 0 then
             duration = duration + (duration / 100) * diffMerit
         end
 

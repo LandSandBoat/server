@@ -23,7 +23,7 @@ function onTrigger(player, globalLua, other)
         package.loaded[pathString] = nil
         require(pathString)
         player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", pathString))
-    elseif (other == "I_am_sure") then
+    elseif other == "I_am_sure" then
         package.loaded[globalLua] = nil
         require(globalLua)
         player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", globalLua))

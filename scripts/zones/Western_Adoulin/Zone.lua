@@ -7,14 +7,18 @@ require('scripts/globals/quests')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 13, 0, 123.518, 28, 0, 173) -- Approaching Airship Docks
+    zone:registerTriggerArea(1, 13, 0, 123.518, 28, 0, 173) -- Approaching Airship Docks
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local heartwingsAndTheKindhearted = player:getCurrentMission(xi.mission.log_id.SOA) == xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-142, 4, -18, 4)
     end
 
@@ -30,7 +34,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

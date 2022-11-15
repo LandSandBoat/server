@@ -6,7 +6,7 @@ require("scripts/globals/status")
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-   target:addMod(xi.mod.MACC, 256)
+    target:addMod(xi.mod.MACC, 256)
 end
 
 effectObject.onEffectTick = function(target, effect)

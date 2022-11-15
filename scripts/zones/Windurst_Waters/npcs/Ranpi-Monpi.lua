@@ -43,7 +43,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(557)                             -- new dialog before finish of quest
 
     -- A Crisis in the Making
-    elseif crisisstatus == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and player:needToZone() == false then -- A Crisis in the Making + ITEM: Quest Offer
+    elseif
+        crisisstatus == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
+        not player:needToZone()
+    then
+        -- A Crisis in the Making + ITEM: Quest Offer
         player:startEvent(258, 0, 625)
     elseif crisisstatus == QUEST_ACCEPTED then
         local prog = player:getCharVar("QuestCrisisMaking_var")
@@ -52,11 +57,24 @@ entity.onTrigger = function(player, npc)
         elseif prog == 2 then -- A Crisis in the Making: Quest Finish
             player:startEvent(267)
         end
-    elseif crisisstatus == QUEST_COMPLETED and player:needToZone() == false and player:getCharVar("QuestCrisisMaking_var") == 0 then  -- A Crisis in the Making + ITEM: Repeatable Quest Offer
+    elseif
+        crisisstatus == QUEST_COMPLETED and
+        not player:needToZone() and
+        player:getCharVar("QuestCrisisMaking_var") == 0
+    then
+        -- A Crisis in the Making + ITEM: Repeatable Quest Offer
         player:startEvent(259, 0, 625)
-    elseif crisisstatus == QUEST_COMPLETED and player:getCharVar("QuestCrisisMaking_var") == 1 then  -- A Crisis in the Making: Quest Objective Reminder
+    elseif
+        crisisstatus == QUEST_COMPLETED and
+        player:getCharVar("QuestCrisisMaking_var") == 1
+    then
+        -- A Crisis in the Making: Quest Objective Reminder
         player:startEvent(262, 0, 625)
-    elseif crisisstatus == QUEST_COMPLETED and player:getCharVar("QuestCrisisMaking_var") == 2 then -- A Crisis in the Making: Repeatable Quest Finish
+    elseif
+        crisisstatus == QUEST_COMPLETED and
+        player:getCharVar("QuestCrisisMaking_var") == 2
+    then
+        -- A Crisis in the Making: Repeatable Quest Finish
         player:startEvent(268)
     else
     --Standard dialogs

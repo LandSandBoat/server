@@ -42,7 +42,12 @@ entity.onMobFight = function(mob, target)
     -- Detectors can also still spawn the mobToSpawns while sleeping, moving, etc.
     -- Maximum number of pets Detector can spawn is 5
 
-    if petCount <= 5 and mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3 and not mobToSpawn:isSpawned() then
+    if
+        petCount <= 5 and
+        mob:getBattleTime() % 15 < 3 and
+        mob:getBattleTime() > 3 and
+        not mobToSpawn:isSpawned()
+    then
         mobToSpawn:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
         mobToSpawn:spawn()
         mobToSpawn:updateEnmity(target)

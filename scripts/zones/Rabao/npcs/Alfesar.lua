@@ -20,11 +20,23 @@ entity.onTrigger = function(player, npc)
 
     if theMissingPiece == QUEST_AVAILABLE and fame >= 4 then -- start quest
         player:startEvent(6)
-    elseif theMissingPiece == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT) then -- talk to again with quest activated
+    elseif
+        theMissingPiece == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+    then
+        -- talk to again with quest activated
         player:startEvent(7)
-    elseif theMissingPiece == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT) then -- successfully retrieve key item
+    elseif
+        theMissingPiece == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+    then
+        -- successfully retrieve key item
         player:startEvent(8)
-    elseif theMissingPiece == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC) then -- They got their Key items. tell them to goto sandy
+    elseif
+        theMissingPiece == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
+    then
+        -- They got their Key items. tell them to goto sandy
         player:startEvent(9)
     else
         player:startEvent(52) -- standard dialogue

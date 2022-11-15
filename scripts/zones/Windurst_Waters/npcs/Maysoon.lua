@@ -13,7 +13,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED then
-        if trade:hasItemQty(4508, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(4508, 1) and
+            trade:getGil() == 0 and
+            trade:getItemCount() == 1
+        then
             player:startEvent(10001) -- Finish quest "Hoist the Jelly, Roger"
         end
     end

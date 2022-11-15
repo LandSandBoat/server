@@ -479,8 +479,8 @@ local spawnNPC = function(zone, x, y, z, rot, name, look)
     mob:setAllegiance(1)
 
     -- NPCs don't cast spells or use TP skills
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
     return mob
 end

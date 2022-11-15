@@ -15,7 +15,13 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
-        if target:getID() == player:getPet():getID() or (target:getMaster() ~= nil and target:getMaster():isPC()) then
+        if
+            target:getID() == player:getPet():getID() or
+            (
+                target:getMaster() ~= nil and
+                target:getMaster():isPC()
+            )
+        then
             return xi.msg.basic.CANNOT_ATTACK_TARGET, 0
         else
             return 0, 0

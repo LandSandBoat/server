@@ -12,7 +12,11 @@ local ID = require("scripts/zones/Mhaura/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1548, 1) == true and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN then
+    if
+        trade:hasItemQty(1548, 1) and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and
+        player:getMainJob() == xi.job.SMN
+    then
         player:startEvent(10026, 0, 1548, 5, 20)
     end
 end
@@ -20,12 +24,18 @@ end
 entity.onTrigger = function(player, npc)
     local trialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
-    if player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and trialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then --Requires player to be Summoner at least lvl 20
+    if
+        player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN and
+        trialSizeLightning == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+    then
+        --Requires player to be Summoner at least lvl 20
         player:startEvent(10025, 0, 1548, 5, 20)     --mini tuning fork of lightning, zone, level
     elseif trialSizeLightning == QUEST_ACCEPTED then
-        local lightningFork = player:hasItem(1548)
+        local hasLightningFork = player:hasItem(1548)
 
-        if lightningFork == true then
+        if hasLightningFork then
             player:startEvent(10018) --Dialogue given to remind player to be prepared
         else
             player:startEvent(10029, 0, 1548, 5, 20) --Need another mini tuning fork

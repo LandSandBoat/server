@@ -196,7 +196,10 @@ entity.onTrade = function(player, npc, trade)
         if player:hasItem(relicId + 1) and not relicDupe == 1 then
             player:startEvent(20, relicId)
         elseif currentRelic == 0 then
-            if relic[stageNumber] ~= 4 and tradeHasRequiredMaterials(trade, relicId, relic[requiredItems]) then
+            if
+                relic[stageNumber] ~= 4 and
+                tradeHasRequiredMaterials(trade, relicId, relic[requiredItems])
+            then
                 local requiredItem1 = relic[requiredItems][1] ~= nil and relic[requiredItems][1] or 0
                 local requiredItem2 = relic[requiredItems][2] ~= nil and relic[requiredItems][2] or 0
                 local requiredItem3 = relic[requiredItems][3] ~= nil and relic[requiredItems][3] or 0
@@ -232,7 +235,11 @@ entity.onTrigger = function(player, npc)
     local relicWait = player:getCharVar("RELIC_DUE_AT")
     local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
 
-    if currentRelic ~= 0 and relicWait ~= 0 and relics[currentRelic][stageNumber] ~= 4 then
+    if
+        currentRelic ~= 0 and
+        relicWait ~= 0 and
+        relics[currentRelic][stageNumber] ~= 4
+    then
         local relic = relics[currentRelic]
         local currentStage = relic[stageNumber]
 
@@ -255,7 +262,11 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(52, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
             end
         end
-    elseif currentRelic ~= 0 and relicWait == 0 and relics[currentRelic][stageNumber] ~= 4 then
+    elseif
+        currentRelic ~= 0 and
+        relicWait == 0 and
+        relics[currentRelic][stageNumber] ~= 4
+    then
         -- Need currency to start timer
         local relic = relics[currentRelic]
         player:startEvent(12, currentRelic, relic[currencyType], relic[currencyAmount], 0, 0, 0, 0, relic[csParam])
@@ -305,12 +316,12 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
-    if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
-        if (option == 1) then
+    if (csid == 11 or csid == 12 or csid == 13) and option ~= 0 then
+        if option == 1 then
             player:updateEvent(15066, 1453, 1, 1456, 1, 1450, 1)
-        elseif (option == 2) then
+        elseif option == 2 then
             player:updateEvent(15067, 1453, 4, 1456, 4, 1450, 4)
-        elseif (option == 3) then
+        elseif option == 3 then
             player:updateEvent(15068, 1453, 20, 1456, 20, 1450, 20)
         end
     end
@@ -356,7 +367,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         -- Stage 4 cutscenes
-    elseif ((csid >= 68 and csid <= 82) or csid == 86) then
+    elseif (csid >= 68 and csid <= 82) or csid == 86 then
         player:setCharVar("RELIC_CONQUEST_WAIT", 0)
         switch(csid):caseof
             {

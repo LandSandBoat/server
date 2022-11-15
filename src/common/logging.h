@@ -61,6 +61,7 @@ namespace logging
 #define ShowCritical(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("critical"), _msgStr); }
 
 // Debug Loggers
+#define DebugSockets(...)  { if (settings::get<bool>("logging.DEBUG_SOCKETS"))   { ShowDebug(__VA_ARGS__); } }
 #define DebugNavmesh(...)  { if (settings::get<bool>("logging.DEBUG_NAVMESH"))   { ShowDebug(__VA_ARGS__); } }
 #define DebugPackets(...)  { if (settings::get<bool>("logging.DEBUG_PACKETS"))   { ShowDebug(__VA_ARGS__); } }
 #define DebugActions(...)  { if (settings::get<bool>("logging.DEBUG_ACTIONS"))   { ShowDebug(__VA_ARGS__); } }

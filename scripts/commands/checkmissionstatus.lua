@@ -53,8 +53,8 @@ function onTrigger(player, target, logId, statusIndex)
     -- report mission
     local currentMissionStatus = targ:getMissionStatus(logId, statusIndex)
     if statusIndex then
-        player:PrintToPlayer( string.format( "missionStatus for %s (%s index %s): %s", targ:getName(), logName, statusIndex, currentMissionStatus) )
+        player:PrintToPlayer(string.format("missionStatus for %s (%s index %s): %s", targ:getName(), logName, statusIndex, currentMissionStatus))
     else
-        player:PrintToPlayer( string.format( "missionStatus for %s (%s): %s", targ:getName(), logName, currentMissionStatus) )
+        player:PrintToPlayer(string.format("missionStatus for %s (%s): %s", targ:getName(), logName, currentMissionStatus))
     end
 end

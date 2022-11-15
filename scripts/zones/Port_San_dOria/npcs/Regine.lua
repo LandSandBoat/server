@@ -18,13 +18,19 @@ entity.onTrade = function(player, npc, trade)
     local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
-    if flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, { { "gil", 10 } }) then
-        if (npcUtil.giveItem(player, xi.items.MAGICMART_FLYER)) then
+    if
+        flyersForRegine == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, { { "gil", 10 } })
+    then
+        if npcUtil.giveItem(player, xi.items.MAGICMART_FLYER) then
             player:confirmTrade()
         end
 
     -- THE BRUGAIRE CONSORTIUM
-    elseif theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.PARCEL_FOR_THE_MAGIC_SHOP) then
+    elseif
+        theBrugaireConsortium == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, xi.items.PARCEL_FOR_THE_MAGIC_SHOP)
+    then
         player:startEvent(535)
     end
 end
@@ -35,7 +41,11 @@ entity.onTrigger = function(player, npc)
     -- FLYERS FOR REGINE
     if ffr == QUEST_AVAILABLE then -- ready to accept quest
         player:startEvent(510, 2)
-    elseif ffr == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar('[ffr]deliveryMask'), 15) then -- all 15 flyers delivered
+    elseif
+        ffr == QUEST_ACCEPTED and
+        utils.mask.isFull(player:getCharVar('[ffr]deliveryMask'), 15)
+    then
+        -- all 15 flyers delivered
         player:startEvent(603)
     elseif ffr == QUEST_ACCEPTED and not player:hasItem(xi.items.MAGICMART_FLYER) then -- on quest but out of flyers
         player:startEvent(510, 3)

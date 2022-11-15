@@ -10,21 +10,25 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for "Got It All" Quest cutscene.
-    zone:registerRegion(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for "Vanishing Act" Quest cutscene.
-    zone:registerRegion(3,   20, -7.2,  -51,   39, -7.2,  -40) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
-    zone:registerRegion(4,   68, -1.0,   30,   91,  1.0,   53) -- ToAU Mission 4 region. Walahra Temple.
-    zone:registerRegion(5,   64, -7.0, -137,   95, -5.0, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
-    zone:registerRegion(6,   30, -6.6,  -60,   39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
-    zone:registerRegion(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for "Led Astry" Quest cutscene.
-    zone:registerRegion(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for "Led Astry" Quest cutscene.
-    zone:registerRegion(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for "Striking a Balance" Quest cutscene.
+    zone:registerTriggerArea(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for "Got It All" Quest cutscene.
+    zone:registerTriggerArea(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for "Vanishing Act" Quest cutscene.
+    zone:registerTriggerArea(3,   20, -7.2,  -51,   39, -7.2,  -40) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
+    zone:registerTriggerArea(4,   68, -1.0,   30,   91,  1.0,   53) -- ToAU Mission 4 region. Walahra Temple.
+    zone:registerTriggerArea(5,   64, -7.0, -137,   95, -5.0, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
+    zone:registerTriggerArea(6,   30, -6.6,  -60,   39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
+    zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for "Led Astry" Quest cutscene.
+    zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for "Led Astry" Quest cutscene.
+    zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for "Striking a Balance" Quest cutscene.
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
             cs = 201
         elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI then
@@ -45,8 +49,8 @@ zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)  -- Cutscene for Got It All quest.
             if player:getCharVar("gotitallCS") == 5 then
@@ -73,7 +77,7 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)

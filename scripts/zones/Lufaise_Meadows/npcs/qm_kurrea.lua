@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 5210) and npcUtil.popFromQM(player, npc, ID.mob.KURREA) then -- Adamantoise Soup
+    if
+        npcUtil.tradeHas(trade, 5210) and
+        npcUtil.popFromQM(player, npc, ID.mob.KURREA)
+    then
+        -- Adamantoise Soup
         player:confirmTrade()
     end
 end

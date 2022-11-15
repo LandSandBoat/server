@@ -38,7 +38,10 @@ end
 entity.onTrigger = function(player, npc)
     local shiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
-    if shiningSubligar == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 then
+    if
+        shiningSubligar == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3
+    then
         player:startEvent(123) -- Start Like a Shining Subligar
     elseif shiningSubligar == QUEST_ACCEPTED then
         player:startEvent(124, player:getCharVar("shiningSubligar_nb")) -- Update player on number of subligar turned in

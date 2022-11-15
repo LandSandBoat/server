@@ -29,18 +29,18 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
-    if (dmg < 0) then
+    if dmg < 0 then
         dmg = 0
     end
 
     dmg = dmg * xi.settings.main.DARK_POWER
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end
 
-    if (target:getMP() > dmg) then
+    if target:getMP() > dmg then
         caster:addMP(dmg)
         target:delMP(dmg)
     else

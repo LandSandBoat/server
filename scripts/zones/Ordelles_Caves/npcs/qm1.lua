@@ -19,8 +19,11 @@ entity.onTrigger = function(player, npc)
         raceOffset = 1
     end
 
-    if VanadielRSELocation() == 0 and VanadielRSERace() == playerRace and not player:hasItem(18246 + playerRace - raceOffset) then
-
+    if
+        VanadielRSELocation() == 0 and
+        VanadielRSERace() == playerRace and
+        not player:hasItem(18246 + playerRace - raceOffset)
+    then
         npcUtil.popFromQM(player, npc, ID.mob.AROMA_LEECH, { claim = true, hide = math.random(600, 1800), look = true, radius = 1 })  -- ??? despawns and respawns 10-30 minutes after NM dies
 
         for i = 1, 7 do

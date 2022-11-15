@@ -33,7 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
     --add in final adjustments
-    if (resist <= 0.125) then
+    if resist <= 0.125 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         dmg = 0
     else
@@ -41,11 +41,11 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         dmg = dmg * ((100 + caster:getMod(xi.mod.AUGMENTS_ABSORB)) / 100)
 
-        if ((target:getTP()) < dmg) then
+        if target:getTP() < dmg then
             dmg = target:getTP()
         end
 
-        if (dmg > cap) then
+        if dmg > cap then
             dmg = cap
         end
 

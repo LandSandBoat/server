@@ -22,7 +22,10 @@ itemObject.onItemCheck = function(target)
     if target:getMod(xi.mod.EAT_RAW_MEAT) == 1 then
         result = 0
     end
-    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
     return result

@@ -14,7 +14,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- only used in Uleguerand_Range
-    if (mob:getZoneID() == 5) then
+    if mob:getZoneID() == 5 then
         return 0
     end
     return 1

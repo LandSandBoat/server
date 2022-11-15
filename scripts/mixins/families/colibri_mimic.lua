@@ -39,7 +39,12 @@ g_mixins.families.colibri_mimic = function(colibriMob)
         local osTime = os.time()
 
         if mob:getAnimationSub() == 1 then
-            if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(xi.effect.SILENCE) then
+            if
+                spellToMimic > 0 and
+                osTime > castTime and
+                castWindow > osTime and
+                not mob:hasStatusEffect(xi.effect.SILENCE)
+            then
                 mob:castSpell(spellToMimic)
                 mob:setLocalVar("[colibri]spellToMimic", 0)
                 mob:setLocalVar("[colibri]castWindow", 0)

@@ -14,7 +14,12 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local starstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
-    if starstatus == 1 and trade:hasItemQty(546, 1) == true and trade:getItemCount() == 1 and trade:getGil() == 0 then
+    if
+        starstatus == 1 and
+        trade:hasItemQty(546, 1) and
+        trade:getItemCount() == 1 and
+        trade:getGil() == 0
+    then
         player:startEvent(199) -- Quest Finish
     end
 end
@@ -25,7 +30,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(196, 0, 546) -- Quest Start
     elseif starstatus == QUEST_ACCEPTED then
         player:startEvent(197, 0, 546) -- Quest Reminder
-    elseif starstatus == QUEST_COMPLETED and player:getCharVar("QuestCatchAFallingStar_prog") > 0 then
+    elseif
+        starstatus == QUEST_COMPLETED and
+        player:getCharVar("QuestCatchAFallingStar_prog") > 0
+    then
         player:startEvent(200) -- After Quest
         player:setCharVar("QuestCatchAFallingStar_prog", 0)
     else

@@ -16,7 +16,7 @@ end
 itemObject.onItemUse = function(target)
     local mMP = target:getMaxMP()
     local cMP = target:getMP()
-    if (VanadielDayOfTheWeek() == xi.day.LIGHTSDAY) then
+    if VanadielDayOfTheWeek() == xi.day.LIGHTSDAY then
         if cMP < (mMP * .85) then
             if not target:hasStatusEffect(xi.effect.REFRESH) then
                 target:addStatusEffect(xi.effect.REFRESH, 2, 3, 1800)

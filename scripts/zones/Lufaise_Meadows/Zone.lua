@@ -13,7 +13,7 @@ require('scripts/globals/helm')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 179, -26, 327, 219, -18, 347)
+    zone:registerTriggerArea(1, 179, -26, 327, 219, -18, 347)
 
     SetServerVariable("realPadfoot", math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do
@@ -32,22 +32,30 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-475.825, -20.461, 281.149, 11)
     end
 
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    local regionID = region:GetRegionID()
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaID = triggerArea:GetTriggerAreaID()
 
-    if regionID == 1 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 6 then
+    if
+        triggerAreaID == 1 and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("PromathiaStatus") == 6
+    then
         player:startEvent(116)
     end
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

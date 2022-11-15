@@ -14,7 +14,12 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    if wonderingstatus == 1 and trade:hasItemQty(718, 1) == true and trade:getItemCount() == 1 and player:getCharVar("QuestWonderingMin_var") == 1 then
+    if
+        wonderingstatus == 1 and
+        trade:hasItemQty(718, 1) and
+        trade:getItemCount() == 1 and
+        player:getCharVar("QuestWonderingMin_var") == 1
+    then
         player:startEvent(638)                 -- WONDERING_MINSTREL: Quest Finish
     end
 end

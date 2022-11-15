@@ -35,5 +35,5 @@ function onTrigger(player, amount, target)
 
     -- set merits
     targ:setMerits(amount)
-    player:PrintToPlayer( string.format("%s now has %i merits.", targ:getName(), targ:getMeritCount() ) )
+    player:PrintToPlayer(string.format("%s now has %i merits.", targ:getName(), targ:getMeritCount()))
 end

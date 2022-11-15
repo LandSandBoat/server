@@ -19,9 +19,13 @@ entity.onTrigger = function(player, npc)
     local quest_fas = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)      -- 1st Quest in Series
     local quest_poa = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF_ARMS)  -- 2nd Quest in Series
 
-    if player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and quest_fas == QUEST_COMPLETED and quest_poa == QUEST_AVAILABLE then
+    if
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+        quest_fas == QUEST_COMPLETED and
+        quest_poa == QUEST_AVAILABLE
+    then
         player:startEvent(594)  -- Start quest A Purchase of Arms
-    elseif quest_poa == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.WEAPONS_RECEIPT) == true then
+    elseif quest_poa == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.WEAPONS_RECEIPT) then
         player:startEvent(607) -- Finish A Purchase of Arms quest
     else
         player:startEvent(593)  -- Standard Dialog

@@ -16,7 +16,10 @@ entity.onTrade = function(player, npc, trade)
     local easternPottery = trade:hasItemQty(1200, 4)
     local southernMummies = trade:hasItemQty(1201, 4)
 
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED
+    then
         if northernFurs and count == 4 then
             player:tradeComplete()
             player:startEvent(17, 1199, 1199)
@@ -31,7 +34,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED
+    then
         player:startEvent(16)
     else
         player:startEvent(15)
@@ -47,7 +53,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 17 then
         player:addGil(xi.settings.main.GIL_RATE * 1500)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1500)
-        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
         player:addFame(xi.quest.fame_area.NORG, 40)
@@ -56,7 +62,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 18 then
         player:addGil(xi.settings.main.GIL_RATE * 2000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2000)
-        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
         player:addFame(xi.quest.fame_area.NORG, 50)
@@ -65,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 19 then
         player:addGil(xi.settings.main.GIL_RATE * 3000)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 3000)
-        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED) then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET)
         end
         player:addFame(xi.quest.fame_area.NORG, 80)

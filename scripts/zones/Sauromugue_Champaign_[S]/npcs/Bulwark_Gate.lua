@@ -12,8 +12,15 @@ require("scripts/globals/settings")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 1 then
-        if trade:hasItemQty(2562, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1 then
+    if
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and
+        player:getCharVar("KnotQuiteThere") == 1
+    then
+        if
+            trade:hasItemQty(2562, 1) and
+            trade:getGil() == 0 and
+            trade:getItemCount() == 1
+        then
             player:startEvent(106)
         end
     end

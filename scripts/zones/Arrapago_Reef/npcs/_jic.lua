@@ -16,11 +16,11 @@ end
 entity.onTrigger = function(player, npc)
     -- TODO: Fix, implement & balance Assault
     --[[
-    if (player:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS)) then
+    if player:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS) then
         local assaultid = player:getCurrentAssault()
         local recommendedLevel = getRecommendedAssaultLevel(assaultid)
         local armband = 0
-        if (player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)) then
+        if player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) then
             armband = 1
         end
         player:startEvent(219, assaultid, -4, 0, recommendedLevel, 4, armband)
@@ -50,9 +50,12 @@ entity.onEventUpdate = function(player, csid, option, target)
 
     local party = player:getParty()
 
-    if (party ~= nil) then
+    if party ~= nil then
         for i, v in pairs(party) do
-            if not v:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS and v:getCurrentAssault() == assaultid) then
+            if
+                not v:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS and
+                v:getCurrentAssault() == assaultid)
+            then
                 player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                 player:instanceEntry(target, 1)
                 return

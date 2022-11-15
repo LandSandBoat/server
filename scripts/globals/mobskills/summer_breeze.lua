@@ -17,7 +17,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local erase = mob:eraseStatusEffect()
 
-    if (erase ~= xi.effect.NONE) then
+    if erase ~= xi.effect.NONE then
         skill:setMsg(xi.msg.basic.SKILL_ERASE)
         return erase
     else

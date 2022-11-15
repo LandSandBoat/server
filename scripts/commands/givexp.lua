@@ -35,5 +35,5 @@ function onTrigger(player, amount, target)
 
     -- give XP to target
     targ:addExp(amount)
-    player:PrintToPlayer( string.format( "Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl() ))
+    player:PrintToPlayer(string.format("Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl()))
 end

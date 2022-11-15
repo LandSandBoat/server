@@ -533,7 +533,10 @@ end
 
 xi.abyssea.AddDeathListeners = function(mob)
     mob:addListener("MAGIC_TAKE", "ABYSSEA_MAGIC_DEATH_CHECK", function(target, caster, spell)
-        if target:getHP() <= 0 and target:getDeathType() == xi.abyssea.deathType.NONE then
+        if
+            target:getHP() <= 0 and
+            target:getDeathType() == xi.abyssea.deathType.NONE
+        then
             target:setDeathType(xi.abyssea.deathType.MAGICAL)
         end
     end)
@@ -549,7 +552,10 @@ xi.abyssea.AddDeathListeners = function(mob)
 
         local wsType = xi.abyssea.deathType.WS_PHYSICAL
 
-        if target:getHP() <= 0  and target:getDeathType() == xi.abyssea.deathType.NONE then
+        if
+            target:getHP() <= 0 and
+            target:getDeathType() == xi.abyssea.deathType.NONE
+        then
             for i = 1, #magicalWS do
                 if wsid == magicalWS[i] then
                     wsType = xi.abyssea.deathType.WS_MAGICAL
@@ -574,9 +580,9 @@ end
 xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if killer then
         if not killer:isPC() and killer:getAllegiance() == 1 then
-           local master = killer:getMaster()
+            local master = killer:getMaster()
             if master then
-               killer = master
+                killer = master
             end
         end
     else

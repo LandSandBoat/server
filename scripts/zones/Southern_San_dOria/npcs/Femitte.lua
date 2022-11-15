@@ -24,11 +24,18 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 3)
     then
         player:startEvent(807)
-    elseif player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and distantLoyalties == 0 then
+    elseif
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
+        distantLoyalties == 0
+    then
         player:startEvent(663)
     elseif distantLoyalties == 1 and distantLoyaltiesProgress == 1 then
         player:startEvent(664)
-    elseif distantLoyalties == 1 and distantLoyaltiesProgress == 4 and player:hasKeyItem(xi.ki.MYTHRIL_HEARTS) then
+    elseif
+        distantLoyalties == 1 and
+        distantLoyaltiesProgress == 4 and
+        player:hasKeyItem(xi.ki.MYTHRIL_HEARTS)
+    then
         player:startEvent(665)
     else
         player:startEvent(661)

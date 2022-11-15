@@ -17,7 +17,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local head = player:getEquipID(xi.slot.HEAD)
 
-    if player:getCharVar("FickblixCS") == 1 and player:getNation() ~= xi.nation.SANDORIA then
+    if
+        player:getCharVar("FickblixCS") == 1 and
+        player:getNation() ~= xi.nation.SANDORIA
+    then
         cs = 10000
     elseif
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
@@ -31,7 +34,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         cs = 51
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-247.998, 12.609, -100.008, 128)
     end
 
@@ -42,7 +49,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

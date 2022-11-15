@@ -17,7 +17,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-93.268, 0, 170.749, 162) -- Floor 1 (R)
     end
 
@@ -25,19 +29,16 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 30, 0, 0)
-    end
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    xi.promyvion.onRegionEnter(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.promyvion.onTriggerAreaEnter(player, triggerArea)
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, region)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)

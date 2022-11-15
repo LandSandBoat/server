@@ -31,8 +31,16 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        if
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or
+            prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES
+        then
             cs = 202
             player:setPos(14.960, -3.430, 18.423, 192)
         else
@@ -40,7 +48,12 @@ zoneObject.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story") == 0 then
+    if
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("PromathiaStatus") == 3 and
+        player:getCharVar("Promathia_kill_day") < os.time() and
+        player:getCharVar("COP_shikarees_story") == 0
+    then
         cs = 322
     end
 
@@ -53,7 +66,10 @@ end
 
 zoneObject.onTransportEvent = function(player, transport)
     if transport == 47 or transport == 46 then
-        if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
+        if
+            not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or
+            xi.settings.main.ENABLE_TOAU == 0
+        then
             player:setPos(8.200, -1.363, 3.445, 192)
             player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
         else

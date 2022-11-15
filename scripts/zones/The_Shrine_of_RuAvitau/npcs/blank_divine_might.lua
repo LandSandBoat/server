@@ -22,11 +22,11 @@ entity.onTrigger = function(player, npc)
     local aaKeyitems = 0
     local dmEarrings = 0
     local divineStatus = player:getCharVar("DivineMight")
-    local moonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+    local hasMoonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
 
     -- Count keyitems
     for i = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
-        if player:hasKeyItem(i) == true then
+        if player:hasKeyItem(i) then
             aaKeyitems = aaKeyitems + 1
         end
     end
@@ -38,21 +38,36 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if currentZM == xi.mission.id.zilart.ARK_ANGELS and zmProgress == 1 and divineStatus < 2 then -- Reminder CS/starts Divine Might (per Wiki)
+    if
+        currentZM == xi.mission.id.zilart.ARK_ANGELS and
+        zmProgress == 1 and
+        divineStatus < 2
+    then
+        -- Reminder CS/starts Divine Might (per Wiki)
         player:startEvent(54, 917, 1408, 1550)
-    elseif currentZM >= xi.mission.id.zilart.ARK_ANGELS and dmStatus == QUEST_AVAILABLE and aaKeyitems > 0 then -- Alternative cutscene for those that have done one or more AA fight
+    elseif
+        currentZM >= xi.mission.id.zilart.ARK_ANGELS and
+        dmStatus == QUEST_AVAILABLE and
+        aaKeyitems > 0
+    then
+        -- Alternative cutscene for those that have done one or more AA fight
         player:startEvent(56, 917, 1408, 1550)
     elseif dmStatus == QUEST_ACCEPTED and divineStatus >= 2 then -- CS when player has completed Divine might, award earring
         player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-    elseif dmStatus == QUEST_COMPLETED and dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and dmRepeat ~= QUEST_ACCEPTED then -- You threw away old Earring, start the repeat quest
+    elseif
+        dmStatus == QUEST_COMPLETED and
+        dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and
+        dmRepeat ~= QUEST_ACCEPTED
+    then
+        -- You threw away old Earring, start the repeat quest
         player:startEvent(57, player:getCharVar("DM_Earring"))
     elseif dmRepeat == QUEST_ACCEPTED and divineStatus < 2 then
-        if moonOre == false then
+        if not hasMoonOre then
             player:startEvent(58) -- Reminder for Moonlight Ore
         else
             player:startEvent(56, 917, 1408, 1550) -- Reminder for Ark Pentasphere
         end
-    elseif dmRepeat == QUEST_ACCEPTED and divineStatus == 2 and moonOre == true then -- Repeat turn in
+    elseif dmRepeat == QUEST_ACCEPTED and divineStatus == 2 and hasMoonOre then -- Repeat turn in
         player:startEvent(59)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- Need some kind of feedback
@@ -66,7 +81,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 54 or csid == 56) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE then -- Flag Divine Might
+    if
+        (csid == 54 or csid == 56) and
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE
+    then
+        -- Flag Divine Might
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
 
     elseif csid == 57 then -- Divine Might Repeat
@@ -88,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if reward ~= 0 then
-            if player:getFreeSlotsCount() >= 1 and player:hasItem(reward) == false then
+            if player:getFreeSlotsCount() >= 1 and not player:hasItem(reward) then
                 player:addItem(reward)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
                 if csid == 55 then

@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     {
         17248, 46836, 2,    -- Arquebus
         17340,    90, 3,    -- Bullet
-          928,   463, 3,    -- Bomb Ash
+        928,     463, 3,    -- Bomb Ash
     }
 
     player:showText(npc, ID.text.OLAF_SHOP_DIALOG)

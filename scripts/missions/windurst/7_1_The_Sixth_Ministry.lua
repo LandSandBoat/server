@@ -126,12 +126,12 @@ mission.sections =
                 onTrigger = function(player, npc)
                     for i = toraimaraiID.mob.HINGE_OILS_OFFSET, toraimaraiID.mob.HINGE_OILS_OFFSET + 3 do
                         if not GetMobByID(i):isDead() then
-                             -- At least one Hinge Oil is alive
+                            -- At least one Hinge Oil is alive
                             return mission:progressEvent(70, 0, 0, 0, 1)
                         end
                     end
 
-                     -- All four Hinge Oils are dead
+                    -- All four Hinge Oils are dead
                     return mission:progressEvent(70, 0, 0, 0, 2)
                 end,
             },

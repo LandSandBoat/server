@@ -17,7 +17,10 @@ entity.onTrigger = function(player, npc)
     local chasingQuotasStatus = player:getCharVar("ChasingQuotas_Progress")
 
     -- Rock Racketeer
-    if rockRacketeer == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SHARP_GRAY_STONE) then
+    if
+        rockRacketeer == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)
+    then
         player:startEvent(261)
 
     elseif chasingQuotasStatus == 3 then

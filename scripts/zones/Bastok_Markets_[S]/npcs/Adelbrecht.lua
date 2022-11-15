@@ -31,22 +31,41 @@ entity.onTrigger = function(player, npc)
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
     local theFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local blueLetter = player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
-    local battleRations = player:hasKeyItem(xi.ki.BATTLE_RATIONS)
 
-    if theFightingFourth == QUEST_AVAILABLE and blueLetter == true then
+    if
+        theFightingFourth == QUEST_AVAILABLE and
+        player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
+    then
         player:startEvent(139)
-    elseif theFightingFourth == QUEST_AVAILABLE and player:getCharVar("BLUE_R_LETTER_USED") == 1 then
+    elseif
+        theFightingFourth == QUEST_AVAILABLE and
+        player:getCharVar("BLUE_R_LETTER_USED") == 1
+    then
         player:startEvent(139)
-    elseif theFightingFourth == QUEST_ACCEPTED and battleRations == true then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.BATTLE_RATIONS)
+    then
         player:startEvent(140)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 1 then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:getCharVar("THE_FIGHTING_FOURTH") == 1
+    then
         player:startEvent(141)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2 then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:getCharVar("THE_FIGHTING_FOURTH") == 2
+    then
         player:startEvent(142)
-    elseif theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 3 then
+    elseif
+        theFightingFourth == QUEST_ACCEPTED and
+        player:getCharVar("THE_FIGHTING_FOURTH") == 3
+    then
         player:startEvent(143)
-    elseif theFightingFourth == QUEST_COMPLETED and allegiance == 1 then
+    elseif
+        theFightingFourth == QUEST_COMPLETED and
+        allegiance == 1
+    then
         player:startEvent(162)
     end
 end

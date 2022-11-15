@@ -30,15 +30,31 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(94)
         end
-    elseif twentyInPirateYears == QUEST_AVAILABLE and mJob == xi.job.NIN and mLvl >= 40 then
+    elseif
+        twentyInPirateYears == QUEST_AVAILABLE and
+        mJob == xi.job.NIN and
+        mLvl >= 40
+    then
         player:startEvent(133) -- Start Quest "20 in Pirate Years"
-    elseif twentyInPirateYears == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TRICK_BOX) then
+    elseif
+        twentyInPirateYears == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.TRICK_BOX)
+    then
         player:startEvent(134) -- Finish Quest "20 in Pirate Years"
-    elseif twentyInPirateYears == QUEST_COMPLETED and illTakeTheBigBox == QUEST_AVAILABLE and mJob == xi.job.NIN and mLvl >= 50 and player:needToZone() == false then
+    elseif
+        twentyInPirateYears == QUEST_COMPLETED and
+        illTakeTheBigBox == QUEST_AVAILABLE and
+        mJob == xi.job.NIN and
+        mLvl >= 50 and
+        not player:needToZone()
+    then
         player:startEvent(135) -- Start Quest "I'll Take the Big Box"
     elseif illTakeTheBigBox == QUEST_COMPLETED and trueWill == QUEST_AVAILABLE then
         player:startEvent(136) -- Start Quest "True Will"
-    elseif player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and player:getCharVar("trueWillCS") == 0 then
+    elseif
+        player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and
+        player:getCharVar("trueWillCS") == 0
+    then
         player:startEvent(137)
     elseif player:getCharVar("trueWillCS") == 1 then
         player:startEvent(138)

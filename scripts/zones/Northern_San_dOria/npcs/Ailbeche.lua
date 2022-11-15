@@ -16,9 +16,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCharVar("aBoysDreamCS") >= 3 then
-        if npcUtil.tradeHasExactly(trade, xi.items.GIANT_SHELL_BUG) and player:getCharVar("aBoysDreamCS") == 3 then
+        if
+            npcUtil.tradeHasExactly(trade, xi.items.GIANT_SHELL_BUG) and
+            player:getCharVar("aBoysDreamCS") == 3
+        then
             player:startEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
-        elseif npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) and player:getCharVar("aBoysDreamCS") == 4 then
+        elseif
+            npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) and
+            player:getCharVar("aBoysDreamCS") == 4
+        then
             player:startEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
         end
     end
@@ -33,22 +39,26 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
     -- Check if they have key item "Ordelle whetStone"
-    local ordelleWhetstone = player:hasKeyItem(xi.ki.ORDELLE_WHETSTONE)
+    local hasOrdelleWhetstone = player:hasKeyItem(xi.ki.ORDELLE_WHETSTONE)
     local sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS")
     local aBoysDreamCS = player:getCharVar("aBoysDreamCS")
 
     -- Additional Dialog after completing "Father and Son", but is not displayed from prior conditions:
     -- CSID: 12
-    if sharpeningTheSword == QUEST_AVAILABLE and fatherAndSon == QUEST_COMPLETED and player:getCharVar("Quest[0][4]Prog") == 0 then
+    if
+        sharpeningTheSword == QUEST_AVAILABLE and
+        fatherAndSon == QUEST_COMPLETED and
+        player:getCharVar("Quest[0][4]Prog") == 0
+    then
     -- "Sharpening the Sword" Quest Dialogs
         if mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 0 then
             player:startEvent(45) -- Start Quest "Sharpening the Sword" with thank you for the rod
         elseif mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 1 then
             player:startEvent(43) -- Start Quest "Sharpening the Sword"
         end
-    elseif sharpeningTheSword == QUEST_ACCEPTED and ordelleWhetstone == false then
+    elseif sharpeningTheSword == QUEST_ACCEPTED and not hasOrdelleWhetstone then
         player:startEvent(42) -- During Quest "Sharpening the Sword"
-    elseif sharpeningTheSword == QUEST_ACCEPTED and ordelleWhetstone == true then
+    elseif sharpeningTheSword == QUEST_ACCEPTED and hasOrdelleWhetstone then
         player:startEvent(44) -- Finish Quest "Sharpening the Sword"
     -- "A Boy's Dream" Quest Dialogs
     elseif aBoysDream == QUEST_AVAILABLE and mJob == xi.job.PLD and mLvl >= 50 then
@@ -67,7 +77,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(47) -- During Quest "A Boy's Dream" (after trading odontotyrannus)
     elseif aBoysDreamCS >= 6 then
         player:startEvent(25) -- During Quest "A Boy's Dream" (after Zaldon CS)
-    elseif player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) and player:getCharVar("UnderOathCS") == 6 then
+    elseif
+        player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) and
+        player:getCharVar("UnderOathCS") == 6
+    then
         player:startEvent(59) -- During Quest "Under Oath" (he's going fishing in Jugner)
     elseif player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(13) -- During Quest "Under Oath" (After jugner CS)

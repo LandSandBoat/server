@@ -17,7 +17,10 @@ entity.onTrade = function(player, npc, trade)
         pendantChance = 1000
     end
 
-    if pendantChance > 0 and npcUtil.popFromQM(player, npc, ID.mob.GOLDEN_TONGUED_CULBERRY) then
+    if
+        pendantChance > 0 and
+        npcUtil.popFromQM(player, npc, ID.mob.GOLDEN_TONGUED_CULBERRY)
+    then
         player:confirmTrade()
         SetDropRate(1190, 13145, pendantChance)
     end

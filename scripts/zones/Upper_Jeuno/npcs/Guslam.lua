@@ -55,7 +55,10 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
     then
         player:startEvent(155)
-    elseif player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and not player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
+    elseif
+        player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and
+        not player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
+    then
         player:startEvent(43)
     elseif player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
         player:startEvent(26)

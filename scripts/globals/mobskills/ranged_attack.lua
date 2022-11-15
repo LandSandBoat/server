@@ -21,9 +21,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
-    if (dmg > 0) then
-       target:addTP(20)
-       mob:addTP(80)
+    if dmg > 0 then
+        target:addTP(20)
+        mob:addTP(80)
     end
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)

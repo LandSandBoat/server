@@ -137,6 +137,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_COUNTER_ABS_BY_SHADOW = 14,  /* The <player>'s attack is countered by the <target>. .. of <player>'s shadows absorbs the damage and disappears. */
     /* THF */
     MSGBASIC_TREASURE_HUNTER_UP = 603, /* Additional effect: Treasure Hunter effectiveness against <target> increases to .. */
+    /* PUP */
+    MSGBASIC_AUTO_EXCEEDS_CAPACITY = 745, /* Your automaton exceeds one or more elemental capacity values and cannot be activated. */
     /* DNC */
     MSGBASIC_NO_FINISHINGMOVES = 524,
     /* TRUST & ALTER EGO */

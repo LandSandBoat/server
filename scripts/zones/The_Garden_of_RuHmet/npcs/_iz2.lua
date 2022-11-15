@@ -17,9 +17,15 @@ end
 entity.onTrigger = function(player, npc)
     local playerRace = player:getRace()
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 1 then
+    if
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
+        player:getCharVar("PromathiaStatus") == 1
+    then
         player:startEvent(202)
-    elseif player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 2 then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
+        player:getCharVar("PromathiaStatus") == 2
+    then
         if playerRace == xi.race.HUME_M or playerRace == xi.race.HUME_F then
             player:startEvent(120)
         else

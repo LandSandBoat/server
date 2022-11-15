@@ -45,6 +45,7 @@
 #include "lobby.h"
 #include "login.h"
 #include "login_auth.h"
+#include "login_conf.h"
 #include "message_server.h"
 
 std::thread messageThread;
@@ -66,6 +67,10 @@ int32 do_init(int32 argc, char** argv)
 
     login_lobbyview_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_VIEW_IP").c_str(), settings::get<uint16>("network.LOGIN_VIEW_PORT"), connect_client_lobbyview);
     ShowInfo("The login-server-lobbyview is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_VIEW_PORT"));
+
+    // NOTE: See login_conf.h for more information about what happens on this port
+    // login_lobbyconf_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_CONF_IP").c_str(), settings::get<uint16>("network.LOGIN_CONF_PORT"), connect_client_lobbyconf);
+    // ShowInfo("The login-server-lobbyconf is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_CONF_PORT"));
 
     sql = std::make_unique<SqlConnection>();
 
@@ -201,9 +206,9 @@ int do_sockets(fd_set* rfd, duration next)
     for (int i = 0; i < (int)rfd->fd_count; ++i)
     {
         int fd = sock2fd(rfd->fd_array[i]);
-#ifdef _DEBUG
-        ShowDebug(fmt::format("select fd: {}", i).c_str());
-#endif // _DEBUG
+
+        DebugSockets(fmt::format("select fd: {}", i).c_str());
+
         if (sessions[fd])
         {
             sessions[fd]->func_recv(fd);
