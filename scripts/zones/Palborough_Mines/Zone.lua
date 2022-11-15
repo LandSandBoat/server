@@ -15,7 +15,7 @@ zoneObject.onInitialize = function(zone)
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.NOMHO_CRIMSONARMOR)
 
-    if xi.main.settings.ENABLE_WOTG == 1 then
+    if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.QUVHO_DEATHHURLER)
     end
 end

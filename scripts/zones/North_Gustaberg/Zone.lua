@@ -18,7 +18,7 @@ zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 
     --NM Persistence
-    if xi.main.settings.ENABLE_WOTG == 1 then
+    if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.BEDROCK_BARRY)
     end
 end

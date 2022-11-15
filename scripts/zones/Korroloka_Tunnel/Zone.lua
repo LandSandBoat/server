@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerRegion(3, -112, 3, -103, 0, 0, 0) -- Right Pool
 
     --NM Persistence
-    if xi.main.settings.ENABLE_WOTG == 1 then
+    if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.THOON)
     end
 
