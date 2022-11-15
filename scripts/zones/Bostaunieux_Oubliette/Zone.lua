@@ -7,14 +7,10 @@ require('scripts/globals/conquest')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.DREXERION_THE_CONDEMNED)
-    GetMobByID(ID.mob.DREXERION_THE_CONDEMNED):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.PHANDURON_THE_CONDEMNED)
-    GetMobByID(ID.mob.PHANDURON_THE_CONDEMNED):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.BLOODSUCKER)
-    GetMobByID(ID.mob.BLOODSUCKER):setRespawnTime(3600)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.DREXERION_THE_CONDEMNED)
+    xi.mob.nmTODPersistCache(zone, ID.mob.PHANDURON_THE_CONDEMNED)
+    xi.mob.nmTODPersistCache(zone, ID.mob.BLOODSUCKER)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

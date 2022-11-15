@@ -8,6 +8,13 @@ require('scripts/globals/treasure')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ORCISH_PANZER)
+
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.KEGPAUNCH_DOSHGNOSH)
+    end
+
     xi.treasure.initZone(zone)
 end
 

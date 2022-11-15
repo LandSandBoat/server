@@ -15,6 +15,11 @@ end
 
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+
+    --NM Persistence
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.AMANITA)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
