@@ -69,7 +69,7 @@ xi.mob.nmTODPersistCache = function(zone, mobId)
     if xi.settings.main.NM_PERSISTENCE == 1 then
         local mob = GetMobByID(mobId)
         local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getID()))
-        zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
+        zone:setLocalVar(string.format("[SPAWN]%s", mobId), respawn)
 
         if respawn == 0 then
             return
