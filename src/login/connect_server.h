@@ -150,6 +150,7 @@ struct session_t
     std::shared_ptr<handler_session> auth_session;
     std::shared_ptr<handler_session> data_session;
     std::shared_ptr<handler_session> view_session;
+    std::shared_ptr<handler_session> pol_session;
 };
 
 std::unordered_map<std::string, session_t> sessions_;
@@ -173,10 +174,51 @@ public:
 protected:
     void read_func() override
     {
-        int8 code = ref<uint8>(data_, 32);
+        // TODO: Read the first 8 bits, if it is 0xFF, then we're in "new" mode
+        auto newModeFlag = ref<uint8>(data_, 0) == 0xFF;
+        if (newModeFlag)
+        {
+            // Now that we know we're in "new" mode, we can communicate what information we want from the server.
+            // NOTE: This collection of flags is 64-bits wide!
+            enum AUTH_COMPONENTS
+            {
+                // If this flag is set, then all communications will happen over a
+                // secure TLS session.
+                USE_TLS                = 1 << 0,
+
+                // Information to be sent during login sequence.
+                // Each item is added to the data sequentially,
+                // after username and password, which are mandatory:
+                // [username][password][email][hostname][macaddr]
+                // If you opted not to use email and hostname:
+                // [username][password][macaddr]
+                SEND_EMAIL             = 1 << 1,
+                SEND_HOSTNAME          = 1 << 2,
+                SEND_MAC_ADDRESS       = 1 << 3,
+
+                // These flags enable additional workflows between connect and xiloader
+                ENABLE_ACCOUNT_CREATE    = 1 << 4, // Ability for a user to create an account
+                ENABLE_ACCOUNT_DELETE    = 1 << 5, // Ability for a user to delete their account
+                ENABLE_PASSWORD_CHANGE   = 1 << 6, // Ability for a user to change their password through xiloader
+                ENABLE_PASSWORD_RESET    = 1 << 7, // Ability for a user to flag their account for a password reset through connect server
+            } auth;
+            std::ignore = auth;
+
+            auto componentFlags = ref<uint64>(data_, 1);
+
+            if (componentFlags & AUTH_COMPONENTS::USE_TLS)
+            {
+                // ...
+            }
+        }
+        else
+        {
+            // Fallback to "original" mode; [username][password] being sent through the auth socket
+        }
 
         std::string username(data_, data_ + 16);
         std::string password(data_ + 16, data_ + 32);
+        int8 code = ref<uint8>(data_, 32);
 
         // TODO: Don't log these!
         ShowInfo(fmt::format("auth code: {}", code));
@@ -418,7 +460,7 @@ public:
         });
         // clang-format on
 
-        message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_IsRunning));
+        // message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_IsRunning));
 
         try
         {
@@ -454,5 +496,5 @@ public:
     }
 
 private:
-    std::unique_ptr<message_server_wrapper_t> message_server;
+    // std::unique_ptr<message_server_wrapper_t> message_server;
 };
