@@ -201,6 +201,7 @@ protected:
                 ENABLE_PASSWORD_CHANGE   = 1 << 6, // Ability for a user to change their password through xiloader
                 ENABLE_PASSWORD_RESET    = 1 << 7, // Ability for a user to flag their account for a password reset through connect server
             } auth;
+            std::ignore = auth;
 
             auto componentFlags = ref<uint64>(data_, 1);
 
@@ -458,7 +459,7 @@ public:
         });
         // clang-format on
 
-        message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_IsRunning));
+        // message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_IsRunning));
 
         try
         {
@@ -494,5 +495,5 @@ public:
     }
 
 private:
-    std::unique_ptr<message_server_wrapper_t> message_server;
+    // std::unique_ptr<message_server_wrapper_t> message_server;
 };

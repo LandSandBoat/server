@@ -153,6 +153,15 @@ if(asio_ADDED)
     endif()
 endif()
 
+message(STATUS "Downloading wolfssl, this might take a while!")
+CPMAddPackage(
+  NAME wolfssl
+  GITHUB_REPOSITORY wolfSSL/wolfssl
+  GIT_TAG a7635da9e64a43028d2f8f14bce75e4bed39f162
+  OPTIONS
+    "BUILD_SHARED_LIBS OFF"
+)
+
 set(EXTERNAL_LIBS
     concurrentqueue
     mariadbclient
@@ -166,6 +175,7 @@ set(EXTERNAL_LIBS
     httplib::httplib
     nlohmann_json::nlohmann_json
     asio
+    wolfssl
 )
 
 if(WIN32)
