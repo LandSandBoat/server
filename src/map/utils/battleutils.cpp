@@ -4930,6 +4930,11 @@ namespace battleutils
             battleutils::RelinquishClaim(static_cast<CCharEntity*>(PVictim));
             PVictim->PMaster = PCharmer;
             PVictim->updatemask |= UPDATE_ALL_CHAR;
+
+            // Prevent auto attacks for a little bit to simulate retail
+            // On retail, you don't engage for a little bit, which we have no mechanism for yet
+            // TODO: implement the delays on engage (also applies to mobs) and verify exact timings for those things.
+            PVictim->PAI->Inactive(5000ms, false);
         }
         PVictim->allegiance = PCharmer->allegiance;
         PVictim->updatemask |= UPDATE_HP;

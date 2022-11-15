@@ -918,7 +918,10 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 0x04: // disengage
         {
-            PChar->PAI->Disengage();
+            if (!PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }))
+            {
+                PChar->PAI->Disengage();
+            }
         }
         break;
         case 0x05: // call for help
