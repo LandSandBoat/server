@@ -1236,6 +1236,51 @@ function BattlefieldMission:onEventFinishWin(player, csid, option)
     end
 end
 
+BattlefieldQuest = setmetatable({ }, { __index = Battlefield })
+BattlefieldQuest.__index = BattlefieldQuest
+BattlefieldQuest.__eq = function(m1, m2)
+    return m1.name == m2.name
+end
+
+BattlefieldQuest.isQuest = true
+
+-- Creates a new Limbus Battlefield interaction
+-- Data takes the additional following keys:
+--  - questArea: The quest area this battlefield is associated with (optional)
+--  - quest: The quest this battlefield is associated with (optional)
+--  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to false. (optional)
+function BattlefieldQuest:new(data)
+    local obj = Battlefield:new(data)
+    setmetatable(obj, self)
+    obj.questArea = data.questArea
+    obj.quest = data.quest
+    obj.canLoseExp = data.canLoseExp or false
+    return obj
+end
+
+function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
+    if not Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) then
+        return false
+    end
+
+    return player:getQuestStatus(self.questArea, self.quest) >= QUEST_ACCEPTED
+end
+
+function BattlefieldQuest:checkSkipCutscene(player)
+    return player:getQuestStatus(self.questArea, self.quest) == QUEST_COMPLETED
+end
+
+function BattlefieldQuest:onBattlefieldWin(player, battlefield)
+    local status = player:getQuestStatus(self.questArea, self.quest)
+    if status == QUEST_ACCEPTED then
+        player:setLocalVar("battlefieldWin", battlefield:getID())
+    end
+
+    local _, clearTime, partySize = battlefield:getRecord()
+    local canSkipCS = status ~= QUEST_ACCEPTED and 1 or 0
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+end
+
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
