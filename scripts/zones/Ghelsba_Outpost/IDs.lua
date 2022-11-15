@@ -43,6 +43,7 @@ zones[xi.zone.GHELSBA_OUTPOST] =
             [17350806] = 17350826, -- 75.988 -0.084 382.437
             [17350824] = 17350826, -- 82.000 -0.500 366.000
         },
+        ORCISH_BARRICADER = 17350801,
         CARRION_DRAGON = 17350941,
     },
     npc =

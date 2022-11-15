@@ -9,6 +9,9 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ORCISH_BARRICADER)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
