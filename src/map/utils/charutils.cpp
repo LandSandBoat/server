@@ -2263,6 +2263,7 @@ namespace charutils
                 // Send update packets
                 PChar->pushPacket(new CInventoryItemPacket(nullptr, container, slotID));
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_RECYCLEBIN, NewSlotID));
+                PChar->pushPacket(new CMessageStandardPacket(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway));
             }
             else
             {
@@ -2307,6 +2308,7 @@ namespace charutils
                 CItem* PUpdatedItem = RecycleBin->GetItem(i);
                 PChar->pushPacket(new CInventoryItemPacket(PUpdatedItem, LOC_RECYCLEBIN, i));
             }
+            PChar->pushPacket(new CMessageStandardPacket(nullptr, PItem->getID(), quantity, MsgStd::ThrowAway));
         }
         PChar->pushPacket(new CInventoryFinishPacket());
     }
