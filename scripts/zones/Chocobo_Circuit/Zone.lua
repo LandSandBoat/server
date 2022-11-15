@@ -2,6 +2,7 @@
 -- Zone: Chocobo_Circuit
 -----------------------------------
 local ID = require('scripts/zones/Chocobo_Circuit/IDs')
+require('scripts/globals/chocobo_racing')
 -----------------------------------
 local zoneObject = {}
 
@@ -18,9 +19,11 @@ zoneObject.onRegionEnter = function(player, region)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
+    xi.chocoboRacing.onEventUpdate(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
+    xi.chocoboRacing.onEventFinish(player, csid, option)
 end
 
 return zoneObject
