@@ -62,6 +62,7 @@ zones[xi.zone.SOUTH_GUSTABERG] =
             [17215887] = 17215888, -- -322.871 30.052 -401.184
         },
         BUBBLY_BERNIE    = 17215494,
+        TOCOCO           = 17093006,
     },
     npc =
     {

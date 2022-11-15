@@ -13,6 +13,10 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    if xi.main.settings.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.TOCOCO)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
