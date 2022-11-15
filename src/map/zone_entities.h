@@ -68,7 +68,7 @@ public:
 
     void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
 
-    void ZoneServer(time_point tick, bool check_region);
+    void ZoneServer(time_point tick, bool check_trigger_areas);
 
     CZone* GetZone();
 

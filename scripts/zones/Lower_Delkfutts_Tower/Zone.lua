@@ -10,8 +10,8 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 403, -34, 83, 409, -33, 89) -- Third Floor G-6 porter to Middle Delkfutt's Tower
-    zone:registerRegion(2, 390, -34, -49, 397, -33, -43) -- Third Floor F-10 porter to Middle Delkfutt's Tower "1"
+    zone:registerTriggerArea(1, 403, -34, 83, 409, -33, 89) -- Third Floor G-6 porter to Middle Delkfutt's Tower
+    zone:registerTriggerArea(2, 390, -34, -49, 397, -33, -43) -- Third Floor F-10 porter to Middle Delkfutt's Tower "1"
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
@@ -40,8 +40,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)
             player:setCharVar("option", 1)
@@ -55,7 +55,7 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

@@ -47,9 +47,9 @@ mission.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [3] = function(player, region)
+                [3] = function(player, triggerArea)
                     -- Naja Salaheem interactions require the 9th argument set to 0.
                     -- This is because Aht Uhrgan Whitegate uses 2 different dats.
                     if player:getMissionStatus(mission.areaId) > 0 then

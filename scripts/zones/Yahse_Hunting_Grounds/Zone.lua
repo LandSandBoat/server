@@ -7,7 +7,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Ergon Locus area at F-6
-    zone:registerRegion(1, -447.7, 6.6, 362.799, 0, 0, 0)
+    zone:registerTriggerArea(1, -447.7, 6.6, 362.799, 0, 0, 0)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -37,14 +37,14 @@ local function triggerUncannySensationMessage(player)
     end
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function(x) triggerUncannySensationMessage(player) end,
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 

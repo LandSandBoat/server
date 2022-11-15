@@ -1141,7 +1141,7 @@ xi.abyssea.searingWardTimer = function(player)
     end
 end
 
-xi.abyssea.onWardRegionLeave = function(player)
+xi.abyssea.onWardTriggerAreaLeave = function(player)
     local ID = zones[player:getZoneID()]
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
 
@@ -1151,7 +1151,7 @@ xi.abyssea.onWardRegionLeave = function(player)
     end
 end
 
-xi.abyssea.onWardRegionEnter = function(player)
+xi.abyssea.onWardTriggerAreaEnter = function(player)
     player:setLocalVar('tetherTimer', 0)
 end
 

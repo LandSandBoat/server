@@ -43,9 +43,9 @@ mission.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if
                         xi.rhapsodies.charactersAvailable(player) and
                         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and

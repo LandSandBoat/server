@@ -164,9 +164,9 @@ quest.sections =
 
         [xi.zone.AYDEEWA_SUBTERRANE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     local requiredItemID = requiredItemList[quest:getVar(player, 'Option')]
 
                     if

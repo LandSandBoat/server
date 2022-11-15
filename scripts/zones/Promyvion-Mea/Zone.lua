@@ -31,14 +31,14 @@ end
 zoneObject.afterZoneIn = function(player)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    xi.promyvion.onRegionEnter(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.promyvion.onTriggerAreaEnter(player, triggerArea)
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, region)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)

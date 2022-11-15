@@ -9,8 +9,8 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -112, -3, -17, -96, 3, -3)     -- event COP
-    zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
+    zone:registerTriggerArea(1, -112, -3, -17, -96, 3, -3)     -- event COP
+    zone:registerTriggerArea(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
     xi.conquest.toggleRegionalNPCs(zone)
 end
 
@@ -48,10 +48,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)

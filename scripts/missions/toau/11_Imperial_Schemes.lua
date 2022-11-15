@@ -32,9 +32,9 @@ mission.sections =
         {
             ['Naja_Salaheem'] = mission:event(3053, { text_table = 0 }),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [6] = function(player, region)
+                [6] = function(player, triggerArea)
                     if
                         not mission:getMustZone(player) and
                         VanadielUniqueDay() >= mission:getVar(player, 'Timer')

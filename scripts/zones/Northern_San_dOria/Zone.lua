@@ -17,8 +17,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
-    zone:registerRegion(1, -7, -3, 110, 7, -1, 155)
-    quests.ffr.initZone(zone) -- register regions 2 through 6
+    zone:registerTriggerArea(1, -7, -3, 110, 7, -1, 155)
+    quests.ffr.initZone(zone) -- register trigger areas 2 through 6
 
     applyHalloweenNpcCostumes(zone:getID())
 end
@@ -58,8 +58,8 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)  -- Chateau d'Oraguille access
             local pNation = player:getNation()
@@ -78,10 +78,10 @@ zoneObject.onRegionEnter = function(player, region)
         end,
     }
 
-    quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
+    quests.ffr.onTriggerAreaEnter(player, triggerArea) -- player approaching Flyers for Regine NPCs
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

@@ -7,10 +7,10 @@ require('scripts/globals/conquest')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- NOTE: On Retail, Region 1 appears to be a cylindrical region (no Z-axis) that is quite large.  Managed to trigger
+    -- NOTE: On Retail, Trigger Area 1 appears to be a cylindrical area (no Z-axis) that is quite large.  Managed to trigger
     -- it on the top floor while moving up the ramp from homepoint.
-    zone:registerRegion(1, -5, -24, 18, 5, -20, 27)
-    zone:registerRegion(2, 104, -42, -88, 113, -38, -77)
+    zone:registerTriggerArea(1, -5, -24, 18, 5, -20, 27)
+    zone:registerTriggerArea(2, 104, -42, -88, 113, -38, -77)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
@@ -31,10 +31,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

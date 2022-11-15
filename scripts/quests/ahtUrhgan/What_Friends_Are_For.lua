@@ -23,9 +23,9 @@ quest.sections =
 
         [xi.zone.AYDEEWA_SUBTERRANE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [2] = function(player, region)
+                [2] = function(player, triggerArea)
                     return quest:progressEvent(7)
                 end,
             },
