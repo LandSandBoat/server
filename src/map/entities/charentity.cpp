@@ -199,6 +199,8 @@ CCharEntity::CCharEntity()
     m_isBlockingAid = false;
 
     BazaarID.clean();
+
+    lastTradeInvite = {};
     TradePending.clean();
     InvitePending.clean();
 

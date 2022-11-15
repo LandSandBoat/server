@@ -419,10 +419,11 @@ public:
     SpawnIDList_t SpawnTRUSTList; // list of visible trust
     SpawnIDList_t SpawnNPCList;   // list of visible npc's
 
-    void SetName(int8* name); // устанавливаем имя персонажа (имя ограничивается 15-ю символами)
+    void SetName(int8* name); // set the name of character, limtied to 15 characters
 
-    EntityID_t   TradePending;    // ID персонажа, предлагающего обмен
-    EntityID_t   InvitePending;   // ID персонажа, отправившего приглашение в группу
+    time_point   lastTradeInvite;
+    EntityID_t   TradePending;    // character ID offering trade
+    EntityID_t   InvitePending;   // character ID sending party invite
     EntityID_t   BazaarID;        // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
