@@ -723,7 +723,12 @@ xi.addType =
 function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
-    if msg == 158 or msg == 188 or msg == 31 or msg == 30 then
+    if
+        msg == xi.msg.JA_MISS or
+        msg == xi.msg.SKILL_MISS or
+        msg == xi.msg.SHADOW_ABSORB or
+        msg == xi.msg.ANTICIPATE
+    then
         return 0
     end
 

@@ -6233,8 +6233,18 @@ void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    PChar->animation = (PChar->animation == ANIMATION_SIT ? ANIMATION_NONE : ANIMATION_SIT);
+    PChar->animation = PChar->animation == ANIMATION_SIT ? ANIMATION_NONE : ANIMATION_SIT;
     PChar->updatemask |= UPDATE_HP;
+
+    CPetEntity* PPet = dynamic_cast<CPetEntity*>(PChar->PPet);
+    if (PPet)
+    {
+        if (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::AUTOMATON)
+        {
+            PPet->animation = PChar->animation;
+            PPet->updatemask |= UPDATE_HP;
+        }
+    }
 }
 
 /************************************************************************
