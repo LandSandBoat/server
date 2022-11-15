@@ -408,7 +408,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern ~= nil and
         wyvern:getHP() > 0
     then
-        wyvern:useJobAbility(636, wyvern)
+        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 end
 
