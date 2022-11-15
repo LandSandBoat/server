@@ -470,13 +470,14 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         playerArg:untargetableAndUnactionable(5000)
     end)
 
-    -- If the Dragoon's wyvern is out and alive, tell it to use Super Climb
+    -- If the Dragoon's wyvern is out, alive, and engaged, tell it to use Super Climb
     local wyvern = getWyvern(player)
     if
         wyvern ~= nil and
-        wyvern:getHP() > 0
+        wyvern:getHP() > 0 and
+        wyvern:isEngaged()
     then
-        wyvern:useJobAbility(636, wyvern)
+        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 end
 
