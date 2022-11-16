@@ -668,6 +668,8 @@ namespace zoneutils
             do_final(EXIT_FAILURE);
         }
 
+        ShowInfo(fmt::format("Loading {} zones", zones.size()));
+
         for (auto zone : zones)
         {
             g_PZoneList[zone] = CreateZone(zone);
