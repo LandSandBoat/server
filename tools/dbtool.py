@@ -195,7 +195,7 @@ def fetch_credentials():
     credentials = {}
     # Grab mysql credentials
     filename = from_server_path("settings/default/network.lua")
-    if from_server_path("settings/network.lua"):
+    if os.path.exists(from_server_path("settings/network.lua")):
         filename = from_server_path("settings/network.lua")
     try:
         with open(filename) as f:
