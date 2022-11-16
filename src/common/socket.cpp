@@ -198,7 +198,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowInfo("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
+    ShowInfo(fmt::format("Connecting to {}:{}", ip2str(ip), port));
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
@@ -294,7 +294,7 @@ std::string ip2str(uint32 ip)
     uint32 reversed_ip = htonl(ip);
     char   address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-    return std::string(address);
+    return fmt::format("{}", address);
 }
 
 uint32 str2ip(const char* ip_str)
@@ -378,7 +378,7 @@ static int connect_check(uint32 ip)
     int result = connect_check_(ip);
     if (access_debug)
     {
-        ShowInfo("connect_check: Connection from %d.%d.%d.%d %s", CONVIP(ip), result ? "allowed." : "denied!");
+        ShowInfo(fmt::format("connect_check: Connection from {} {}", ip2str(ip), result ? "allowed." : "denied!"));
     }
     return result;
 }
@@ -402,10 +402,10 @@ static int connect_check_(uint32 ip)
             if (access_debug)
             {
                 ShowInfo(
-                    "connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
-                    CONVIP(ip),
-                    CONVIP(entry.ip),
-                    CONVIP(entry.mask));
+                    fmt::format("connect_check: Found match from allow list:{} IP:{} Mask:{}",
+                                ip2str(ip),
+                                ip2str(entry.ip),
+                                ip2str(entry.mask)));
             }
             is_allowip = 1;
             break;
@@ -419,10 +419,10 @@ static int connect_check_(uint32 ip)
             if (access_debug)
             {
                 ShowInfo(
-                    "connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
-                    CONVIP(ip),
-                    CONVIP(entry.ip),
-                    CONVIP(entry.mask));
+                    fmt::format("connect_check: Found match from deny list:{} IP:{} Mask:{}",
+                                ip2str(ip),
+                                ip2str(entry.ip),
+                                ip2str(entry.mask)));
             }
             is_denyip = 1;
             break;
@@ -490,7 +490,7 @@ static int connect_check_(uint32 ip)
                 if (hist->count++ >= connect_count)
                 { // to many attempts detected
                     hist->ddos = 1;
-                    ShowWarning("connect_check: too many connection attempts detected from %d.%d.%d.%d!", CONVIP(ip));
+                    ShowWarning(fmt::format("connect_check: too many connection attempts detected from {}!", ip2str(ip)));
                     return (connect_ok == 2 ? 1 : 0);
                 }
                 return connect_ok;
@@ -605,7 +605,7 @@ int access_ipmask(const char* str, AccessControl* acc)
 
     if (access_debug)
     {
-        ShowInfo("access_ipmask: Loaded IP:%d.%d.%d.%d mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(mask));
+        ShowInfo(fmt::format("access_ipmask: Loaded IP:{} mask:{}", ip2str(ip), ip2str(mask)));
     }
     acc->ip   = ip;
     acc->mask = mask;
