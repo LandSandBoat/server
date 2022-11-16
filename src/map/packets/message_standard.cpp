@@ -98,7 +98,17 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, MsgStd MessageID)
 {
     this->setType(0x09);
-    this->setSize(0x30);
+    auto namesize = PChar->name.size();
+
+    if (namesize == 15)
+    {
+        // Prevents an overflow on 15-character names
+        this->setSize(0x34);
+    }
+    else
+    {
+        this->setSize(0x30);
+    }
 
     // XI_DEBUG_BREAK_IF(MessageID != 0x58);
 
