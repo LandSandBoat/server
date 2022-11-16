@@ -22,7 +22,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
             local ship = GetNPCByID(ID.npc.SHIP)
             ship:setAnimBegin(VanadielTime())
@@ -72,6 +76,8 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.SEANCE_STAFF)
     elseif csid == 220 and option == 0 then
         player:setLocalVar('[BOAT]Paid', 0)
+    elseif csid == 202 then
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 

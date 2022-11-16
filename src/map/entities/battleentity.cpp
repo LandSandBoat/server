@@ -483,11 +483,19 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
 
 uint16 CBattleEntity::GetMainWeaponRank()
 {
+    // https://www.bg-wiki.com/ffxi/Weapon_Rank
+    // https://ffxiclopedia.fandom.com/wiki/Category:Hand-to-Hand?oldid=342430
+    uint16 wDamage = 0;
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        return (weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK)) / 9;
+        wDamage = weapon->getDamage() + getMod(Mod::MAIN_DMG_RANK);
+
+        if (weapon->getSkillType() == SKILL_HAND_TO_HAND)
+        {
+            wDamage += 3;
+        }
     }
-    return 0;
+    return wDamage / 9;
 }
 
 uint16 CBattleEntity::GetSubWeaponRank()
@@ -714,6 +722,11 @@ uint16 CBattleEntity::ATT(uint16 slot)
         {
             ATT += GetSkill(weapon->getSkillType()) + weapon->getILvlSkill();
 
+            if (weapon->getModifier(Mod::ATT_SLOT) > 0)
+            {
+                ATT += weapon->getModifier(Mod::ATT_SLOT);
+            }
+
             // Smite applies when using 2H or H2H weapons
             if (weapon->isTwoHanded() || weapon->isHandToHand())
             {
@@ -725,6 +738,11 @@ uint16 CBattleEntity::ATT(uint16 slot)
     {
         ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
     }
+    else // Mob attack
+    {
+        ATT = (8 + m_modStat[Mod::ATT] + STR() / 2);
+    }
+
     return std::clamp(ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]), 0, 65535);
 }
 
@@ -1033,7 +1051,7 @@ uint8 CBattleEntity::GetDeathType()
 
 void CBattleEntity::addModifier(Mod type, int16 amount)
 {
-    if (type == Mod::MOVE && this->objtype == TYPE_PC)
+    if (type == Mod::MOVE)
     {
         m_MSNonItemValues.push_back(amount);
         m_modStat[type] = CalculateMSFromSources();
@@ -1555,6 +1573,7 @@ void CBattleEntity::Spawn()
     HideName(false);
     CBaseEntity::Spawn();
     m_OwnerID.clean();
+    setBattleID(0);
 }
 
 void CBattleEntity::Die()
@@ -2068,7 +2087,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             else
             {
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()), SLOT_MAIN, attack.IsGuarded());
+                SLOTTYPE weaponSlot = (SLOTTYPE)attack.GetWeaponSlot();
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing(), weaponSlot), weaponSlot, attack.IsGuarded());
 
                 actionTarget.reaction = REACTION::HIT;
 
@@ -2119,7 +2139,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 actionTarget.param =
-                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), attack.GetWeaponSlot(), 1,
+                    battleutils::TakePhysicalDamage(this, PTarget, attack.GetAttackType(), attack.GetDamage(), attack.IsBlocked(), weaponSlot, 1,
                                                     attackRound.GetTAEntity(), true, true, attack.IsCountered(), attack.IsCovered(), POriginalTarget);
                 if (actionTarget.param < 0)
                 {
@@ -2158,12 +2178,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
                 }
-
-                if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
-                {
-                    // 1 ce for a missed attack for TH application
-                    ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
-                }
             }
         }
         else
@@ -2180,6 +2194,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             if (PTarget->objtype == TYPE_PC)
             {
                 charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+            }
+
+            if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
+            {
+                // 1 ce for a missed attack for TH application
+                ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
             }
         }
 
@@ -2283,6 +2303,16 @@ void CBattleEntity::SetBattleStartTime(time_point time)
 duration CBattleEntity::GetBattleTime()
 {
     return server_clock::now() - m_battleStartTime;
+}
+
+void CBattleEntity::setBattleID(uint16 battleID)
+{
+    m_battleID = battleID;
+}
+
+uint16 CBattleEntity::getBattleID()
+{
+    return m_battleID;
 }
 
 void CBattleEntity::Tick(time_point /*unused*/)

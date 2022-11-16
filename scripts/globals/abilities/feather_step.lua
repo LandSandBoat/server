@@ -14,7 +14,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getAnimation() ~= 1) then
+    if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
         if player:hasStatusEffect(xi.effect.TRANCE) then
@@ -84,7 +84,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             elseif target:hasStatusEffect(xi.effect.BEWILDERED_DAZE_4) then
                 local duration = target:getStatusEffect(xi.effect.BEWILDERED_DAZE_4):getDuration()
                 target:delStatusEffectSilent(xi.effect.BEWILDERED_DAZE_4)
-                if (player:hasStatusEffect(xi.effect.PRESTO)) then
+                if player:hasStatusEffect(xi.effect.PRESTO) then
                     daze = 3
                 else
                     daze = 2
@@ -156,7 +156,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
-            if (daze > 2) then
+            if daze > 2 then
                 daze = 2
             end
             player:addStatusEffect(xi.effect.FINISHING_MOVE_3 + daze, 1, 0, 7200)

@@ -140,8 +140,9 @@ xi.subEffect =
     DISPEL              = 8,   -- Verified with video of Lockheart Greatsword proc.
     SLEEP               = 9,   -- 110010       19
     POISON              = 10,  -- 1-01010      21
-    PARALYSIS           = 11,
-    AMNESIA             = 11,  -- Verified uses same animation as para
+    ADDLE               = 11,  -- Verified shared group 1
+    AMNESIA             = 11,  -- Verified shared group 1
+    PARALYSIS           = 11,  -- Verified shared group 1
     BLIND               = 12,  -- 1-00110      25
     SILENCE             = 13,
     PETRIFY             = 14,
@@ -149,13 +150,14 @@ xi.subEffect =
     STUN                = 16,
     CURSE               = 17,
     DEFENSE_DOWN        = 18,  -- 1-01001      37
-    EVASION_DOWN        = 18,  -- Same subeffect as DEFENSE_DOWN
-    ATTACK_DOWN         = 18,  -- Same subeffect as DEFENSE_DOWN
+    EVASION_DOWN        = 18,  -- Verified shared group 2
+    ATTACK_DOWN         = 18,  -- Verified shared group 2
+    SLOW                = 18,  -- Verified shared group 2
     DEATH               = 19,
     SHIELD              = 20,
     HP_DRAIN            = 21,  -- 1-10101      43
-    MP_DRAIN            = 22,  -- This is correct animation
-    TP_DRAIN            = 22,  -- Verified this should look exactly like Aspir Samba.
+    MP_DRAIN            = 22,  -- Verified shared group 3
+    TP_DRAIN            = 22,  -- Verified shared group 3
     HASTE               = 23,
     -- There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
 
@@ -868,6 +870,14 @@ xi.effect =
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    FIRE_EEM_MOD             = 900,
+    ICE_EEM_MOD              = 901,
+    WIND_EEM_MOD             = 902,
+    EARTH_EEM_MOD            = 903,
+    THUNDER_EEM_MOD          = 904,
+    WATER_EEM_MOD            = 905,
+    LIGHT_EEM_MOD            = 906,
+    DARK_EEM_MOD             = 907,
     -- PLACEHOLDER           = 806, -- Description
     -- 806-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
@@ -1282,6 +1292,13 @@ xi.mod =
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
 
+    -- Dark Knight
+    ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
 
@@ -1357,9 +1374,13 @@ xi.mod =
     STEALTH                         = 358,
     RAPID_SHOT                      = 359,
     CHARM_TIME                      = 360,
-    JUMP_TP_BONUS                   = 361,
-    JUMP_ATT_BONUS                  = 362,
-    HIGH_JUMP_ENMITY_REDUCTION      = 363,
+    JUMP_TP_BONUS                   = 361,  -- bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS            = 285,  -- bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS                  = 362,  -- ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS      = 286,  -- ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS                  = 936,  -- accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK              = 888,  -- DA% bonus for all jumps
+    HIGH_JUMP_ENMITY_REDUCTION      = 363,  -- for gear that reduces more enmity from high jump
     REWARD_HP_BONUS                 = 364,
     SNAP_SHOT                       = 365,
 
@@ -1644,7 +1665,7 @@ xi.mod =
     AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
     AUGMENTS_CONSPIRATOR            = 912, -- Applies Conspirator benefits to player at the top of the hate list
     JUG_LEVEL_RANGE                 = 564, -- Decreases the level range of spawned jug pets. Maxes out at 2.
-    FORCE_JUMP_CRIT                 = 828, -- Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT                 = 828, -- Force critical hit for all jumps
     QUICK_DRAW_DMG_PERCENT          = 834, -- Percentage increase to QD damage
 
     -- Crafting food effects
@@ -1803,6 +1824,9 @@ xi.mod =
     LIGHT_EEM                     = 1164, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     DARK_EEM                      = 1165, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     TAME_SUCCESS_RATE             = 1166, -- Tame Success Rate +
+    RAMPART_MAGIC_SHIELD          = 1167, -- Rampart Magic Shield
+    CRITHITRATE_SLOT              = 1168, -- CRITHITRATE for slot
+    ATT_SLOT                      = 1169, -- ATT for slot
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
@@ -2529,7 +2553,7 @@ xi.mobMod =
     DETECTION           = 16, -- Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
     NO_DESPAWN          = 17, -- do not despawn when too far from spawn. Gob Diggers have this.
     VAR                 = 18, -- temp var for whatever. Gets cleared on spawn
-    -- 19 Available for use
+    CAN_SHIELD_BLOCK    = 19, -- toggle shield use for mobs without physical shields (trusts)
     TP_USE_CHANCE       = 20, -- % chance to use tp
     PET_SPELL_LIST      = 21, -- set pet spell list
     NA_CHANCE           = 22, -- % chance to cast -na
@@ -2582,6 +2606,7 @@ xi.mobMod =
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
+    MAGIC_RANGE         = 72, -- magic aggro range
 
     -- ASB Mod Start
     DRAW_IN_INCLUDE_PARTY     = 100, -- This will cause the mob's draw-in to also affect all party and alliance members
@@ -2698,7 +2723,7 @@ xi.jobSpecialAbility =
     -- TRANCE               = 2710,
     -- ELEMENTAL_SFORZO     = 3265,
     -- ELEMENTAL_SFORZO     = 3479,
-     BOLSTER              = 3482,
+    BOLSTER              = 3482,
 }
 xi.jsa = xi.jobSpecialAbility
 
@@ -2975,7 +3000,7 @@ xi.animation =
 {
     NONE                    = 0,
     ATTACK                  = 1,
-    -- Death 2              = 2,
+    DESPAWN                 = 2,
     DEATH                   = 3,
     CHOCOBO                 = 5,
     FISHING                 = 6,
@@ -3053,8 +3078,10 @@ xi.mount =
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
     BYAKKO         = 33,
+    NOBLE_CHOCOBO  = 34, -- NOTE: This is currently blank, probably needs additional packets sent
+    IXION          = 35,
     --
-    MOUNT_MAX      = 34,
+    MOUNT_MAX      = 36,
 }
 
 -----------------------------------

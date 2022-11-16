@@ -2,6 +2,9 @@
 -- Area: Davoi
 --  Mob: Gavotvut
 -----------------------------------
+mixins = { require("scripts/mixins/job_special") }
+-----------------------------------
+
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

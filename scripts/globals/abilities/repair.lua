@@ -19,7 +19,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
-        if (id >= 18731 and id <= 18733 or id == 19185) then
+        if id >= 18731 and id <= 18733 or id == 19185 then
             return 0, 0
         else
             return xi.msg.basic.UNABLE_TO_USE_JA, 0
@@ -101,7 +101,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local diff = petMaxHP - petCurrentHP
 
-    if (diff < totalHealing) then
+    if diff < totalHealing then
         totalHealing = diff
     end
 

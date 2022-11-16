@@ -32,10 +32,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration = 120
     local returnEffect = typeEffectOne
 
-    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
+    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
-        if (diffMerit > 0) then
+        if diffMerit > 0 then
             duration = duration + (duration / 100) * diffMerit
         end
 

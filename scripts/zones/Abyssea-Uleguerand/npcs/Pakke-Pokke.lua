@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Pakke-Pokke
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

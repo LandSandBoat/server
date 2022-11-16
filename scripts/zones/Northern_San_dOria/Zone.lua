@@ -40,7 +40,11 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     -- MOG HOUSE EXIT
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(130, -0.2, -3, 160)
     end
 

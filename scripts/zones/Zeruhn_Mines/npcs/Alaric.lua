@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Alaric
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

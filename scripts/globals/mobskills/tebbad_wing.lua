@@ -14,9 +14,9 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
+    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
         return 1
-    elseif (mob:getAnimationSub() == 1) then
+    elseif mob:getAnimationSub() == 1 then
         return 1
     elseif target:isBehind(mob, 96) then
         return 1

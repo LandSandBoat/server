@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Angry Goat
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -26,11 +26,11 @@ entity.onTrigger = function(player, npc)
         4163,  1080,    -- Blinding Potion
         13328, 4050,    -- Mythril Earring
         107,    180,    -- Water Jug
-        2868,  9000,    -- Rabao Waystone
+        -- 2868,  9000,    -- Rabao Waystone
     }
 
     player:showText(npc, ID.text.SCAMPLIX_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    xi.shop.general(player, stock, xi.quest.fame_area.SELBINA_RABAO)
 end
 
 entity.onEventUpdate = function(player, csid, option)

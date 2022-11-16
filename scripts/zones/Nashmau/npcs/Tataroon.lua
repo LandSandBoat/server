@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Nashmau
 --  NPC: Tataroon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

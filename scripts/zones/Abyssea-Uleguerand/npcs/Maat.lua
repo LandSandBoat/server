@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Uleguerand
 --  NPC: Maat
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

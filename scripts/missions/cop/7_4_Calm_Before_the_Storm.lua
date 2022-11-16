@@ -62,11 +62,12 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if not getMissionStatusBit(player, 2) then
+                        local dalham = player:getZone():queryEntitiesByName('Dalham')[1]
                         if mission:getLocalVar(player, 'nmBibiki') == 1 then
                             return mission:progressEvent(41)
-                        elseif not GetMobByID(bibikiBayID.mob.DALHAM):isSpawned() then
-                            SpawnMob(bibikiBayID.mob.DALHAM):updateClaim(player)
-
+                        elseif not dalham:isSpawned() then
+                            dalham:spawn()
+                            dalham:updateClaim(player)
                             return mission:messageSpecial(bibikiBayID.text.YOU_ARE_NOT_ALONE)
                         end
                     end
@@ -98,7 +99,7 @@ mission.sections =
                     if not getMissionStatusBit(player, 1) then
                         local nmProgress = mission:getLocalVar(player, 'carpentersNm')
 
-                        if nmProgress == 15 then
+                        if nmProgress == 1 and not isCarpentersNmSpawned() then
                             return mission:progressEvent(37)
                         elseif not isCarpentersNmSpawned() then
                             local executor = GetMobByID(carpentersID.mob.CRYPTONBERRY_EXECUTOR)
@@ -115,7 +116,7 @@ mission.sections =
 
             ['Cryptonberry_Assassin'] =
             {
-                onMobDeath = function(mob, player, optParams)
+                onMobDespawn = function(mob, player, optParams)
                     local nmProgress = mission:getLocalVar(player, 'carpentersNm')
                     local nmOffset = mob:getID() - carpentersID.mob.CRYPTONBERRY_EXECUTOR
 

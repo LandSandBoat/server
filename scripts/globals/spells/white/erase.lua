@@ -14,7 +14,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local effect = target:eraseStatusEffect()
 
-    if (effect == xi.effect.NONE) then
+    if effect == xi.effect.NONE then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         spell:setMsg(xi.msg.basic.MAGIC_ERASE)

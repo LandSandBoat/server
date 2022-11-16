@@ -41,7 +41,6 @@ entity.onTrigger = function(player, npc)
     }
 
     npc:hideNPC(hideTime)
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

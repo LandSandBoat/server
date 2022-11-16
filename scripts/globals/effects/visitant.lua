@@ -6,23 +6,7 @@ require("scripts/globals/zone")
 -----------------------------------
 local effectObject = {}
 
-local remainingTimeLimits =
-{
-    300,
-    120,
-     60,
-     30,
-     10,
-      9,
-      8,
-      7,
-      6,
-      5,
-      4,
-      3,
-      2,
-      1,
-}
+local remainingTimeLimits = { 300, 120, 60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }
 
 -- NOTE: Update the last
 local reportTimeRemaining
@@ -35,19 +19,14 @@ reportTimeRemaining = function(player, effect)
 
     -- All possible forms of TE will reset out of the final two minute warning,
     -- reset this here.
-    if
-        currentTime > lastTimeUpdate
-    then
+    if currentTime > lastTimeUpdate then
         lastTimeUpdate = currentTime
         player:setLocalVar('finalCountdown', 0)
         return
     end
 
     for i = 1, #remainingTimeLimits do
-        if
-            lastTimeUpdate > remainingTimeLimits[i] and
-            currentTime <= remainingTimeLimits[i]
-        then
+        if lastTimeUpdate > remainingTimeLimits[i] and currentTime <= remainingTimeLimits[i] then
             messageParam = remainingTimeLimits[i]
             nextTimeReport = remainingTimeLimits[i] ~= 1 and remainingTimeLimits[i + 1] or 0
             player:setLocalVar('lastTimeUpdate', messageParam)
@@ -75,7 +54,9 @@ reportTimeRemaining = function(player, effect)
         if messageParam > 0 then
             local timerVal = (messageParam - nextTimeReport) * 1000
 
-            player:timer(timerVal, function() reportTimeRemaining(player, effect) end)
+            player:timer(timerVal, function()
+                reportTimeRemaining(player, effect)
+            end)
         else
             -- There's 4s of buffer time built in, so that the full countdown is displayed.
             -- If we reached the end, delete the status effect so that the player is ejected.
@@ -109,9 +90,7 @@ effectObject.onEffectTick = function(target, effect)
     -- Handle Time Remaining Messages. This will no longer be called if the time
     -- remaining is less that 30s, as then we move to timers set on the player to
     -- ensure that they're displayed at the appropriate timings.
-    if
-        target:getLocalVar('finalCountdown') == 0
-    then
+    if target:getLocalVar('finalCountdown') == 0 then
         reportTimeRemaining(target, effect)
     end
 end
@@ -120,10 +99,7 @@ effectObject.onEffectLose = function(target, effect)
     local zoneID = target:getZoneID()
     local ID = zones[zoneID]
 
-    if
-        target:getLocalVar('gameLogin') == 0 and
-        xi.abyssea.isInAbysseaZone(target)
-    then
+    if target:getLocalVar('gameLogin') == 0 and xi.abyssea.isInAbysseaZone(target) then
         target:setLocalVar('finalCountdown', 0)
         target:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
         target:setPos(unpack(xi.abyssea.exitPositions[zoneID]))

@@ -24,6 +24,8 @@ entity.onTrigger = function(player, npc)
     elseif player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and not player:hasKeyItem(xi.ki.EYE_OF_TIDES) then
         xi.bcnm.onTrigger(player, npc)
 
+    elseif player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER) then
+        xi.bcnm.onTrigger(player, npc)
     elseif not xi.bcnm.onTrigger(player, npc) then
         player:messageSpecial(ID.text.PROTOCRYSTAL)
     end

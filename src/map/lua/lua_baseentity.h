@@ -171,7 +171,7 @@ public:
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
     auto   getZoneName() -> const char*;                                // Get Entity zone name
-    bool   isZoneVisited(uint16 zone);                                  // true если указанная зона посещалась персонажем ранее
+    bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
@@ -566,6 +566,9 @@ public:
 
     void wakeUp(); // wakes target if necessary
 
+    void   setBattleID(uint16 battleID);
+    uint16 getBattleID();
+
     void recalculateStats();
     bool checkImbuedItems();
 
@@ -661,12 +664,12 @@ public:
     bool   isWeaponTwoHanded();
     int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1);                                                      // gets the damage of a single hit vs the specified mob
     float  getPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded); // Gets PDIF for an attack.
-    float  getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, uint16 ignoredDef);                                               // Gets PDIF for an attack.
+    float  getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical = false, float atkMulti = 1, uint16 ignoredDef = 0);               // Gets PDIF for an attack.
     uint8  getGuardRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the guard rate for an attack.
     uint8  getBlockRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the block rate for an attack.
     uint8  getParryRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the parry rate for an attack.
-    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum = 0);                                                                // Returns the hit rate for an attack. Defaults to main weapon.
-    uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                               // Returns the ranged hit rate for an attack.
+    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum = 0, int8 accBonus = 0);                                             // Returns the hit rate for an attack. Defaults to main weapon.
+    uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity, int8 accBonus = 0);                                                            // Returns the ranged hit rate for an attack.
     uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
     uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
     uint16 getWeaponDmgRank();                                                                                                              // gets the current equipped weapons' DMG rating for Rank calc
@@ -739,6 +742,7 @@ public:
     void  removeAllManeuvers();
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+    bool  isExceedingElementalCapacity();
 
     auto   getAllRuneEffects() -> sol::table;
     uint8  getActiveRuneCount();
@@ -845,6 +849,13 @@ public:
     void   setClaimedTraverserStones(uint16 totalStones);
 
     uint32 getHistory(uint8 index);
+
+    auto getFishingStats() -> sol::table;
+    auto getFishingCatches() -> sol::table;
+    void setFishCaught(uint32 fishId, bool isCaught);
+    bool hasCaughtFish(uint32 fishId);
+    void clearFishCaught();
+    void clearFishHistory();
 
     void setAnimPath(uint8);
     void setAnimStart(bool);

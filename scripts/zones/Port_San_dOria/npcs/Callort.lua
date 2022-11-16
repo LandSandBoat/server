@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Callort
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

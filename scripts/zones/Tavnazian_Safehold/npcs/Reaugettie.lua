@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Reaugettie
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

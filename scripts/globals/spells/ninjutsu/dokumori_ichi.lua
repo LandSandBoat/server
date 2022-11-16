@@ -25,14 +25,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = 3
 
     --Calculates resist chanve from Reist Blind
-    if (target:hasStatusEffect(effect)) then
+    if target:hasStatusEffect(effect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         return effect
     end
 
-    if (math.random(0, 100) >= target:getMod(xi.mod.POISONRES)) then
-        if (duration >= 30) then
-            if (target:addStatusEffect(effect, power, 3, duration)) then
+    if math.random(0, 100) >= target:getMod(xi.mod.POISONRES) then
+        if duration >= 30 then
+            if target:addStatusEffect(effect, power, 3, duration) then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

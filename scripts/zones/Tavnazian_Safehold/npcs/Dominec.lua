@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Dominec
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

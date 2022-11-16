@@ -31,7 +31,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
             local ship = GetNPCByID(ID.npc.SHIP)
 
@@ -92,6 +96,9 @@ zoneObject.onEventFinish = function(player, csid, option)
         end
     elseif csid == 220 and option == 0 then
         player:setLocalVar('[BOAT]Paid', 0)
+
+    elseif csid == 202 then
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 

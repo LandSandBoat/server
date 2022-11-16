@@ -32,9 +32,7 @@ entity.onTrigger = function(player, npc)
         whitegateShared.doRoyalPalaceArmorCheck(player) and
         noWeapons
     then
-        local ring = player:getCharVar("TOAU_RINGTIME")
-        local standard = player:hasItem(129)
-
+        local ring      = player:getCharVar("TOAU_RINGTIME")
         local ringParam = 0
 
         if ring == 0 then
@@ -42,8 +40,7 @@ entity.onTrigger = function(player, npc)
         end
 
         local standardParam = 0
-
-        if standard == false then
+        if not player:hasItem(129) then
             standardParam = 1
         end
 

@@ -5,7 +5,7 @@
 local itemObject = {}
 
 itemObject.onItemDrop = function(target, item)
-   target:setCharVar('ChaosbringerKills', 0)
+    target:setCharVar('ChaosbringerKills', 0)
 end
 
 itemObject.onItemEquip = function(target, item)

@@ -216,12 +216,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    petZoningInfo.respawnPet = false;
-    petZoningInfo.petID      = 0;
-    petZoningInfo.petType    = PET_TYPE::AVATAR; // dummy data, the bool tells us to respawn if required
-    petZoningInfo.petHP      = 0;
-    petZoningInfo.petMP      = 0;
-    petZoningInfo.petTP      = 0;
+    resetPetZoningInfo();
+    petZoningInfo.petID = 0;
 
     m_PlayTime    = 0;
     m_SaveTime    = 0;
@@ -418,38 +414,54 @@ bool CCharEntity::isNewPlayer() const
 
 void CCharEntity::setPetZoningInfo()
 {
-    if (PPet->objtype == TYPE_PET)
+    if (PPet == nullptr || PPet->objtype != TYPE_PET)
     {
-        switch (((CPetEntity*)PPet)->getPetType())
-        {
-            case PET_TYPE::JUG_PET:
-                if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
-                {
-                    break;
-                }
-                [[fallthrough]];
-            case PET_TYPE::AVATAR:
-            case PET_TYPE::AUTOMATON:
-            case PET_TYPE::WYVERN:
-                petZoningInfo.petHP   = PPet->health.hp;
-                petZoningInfo.petTP   = PPet->health.tp;
-                petZoningInfo.petMP   = PPet->health.mp;
-                petZoningInfo.petType = ((CPetEntity*)PPet)->getPetType();
-                break;
-            default:
-                break;
-        }
+        return;
     }
+
+    auto PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+    if (PPetEntity == nullptr)
+    {
+        return;
+    }
+
+    switch (PPetEntity->getPetType())
+    {
+        case PET_TYPE::JUG_PET:
+            if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+            {
+                break;
+            }
+            [[fallthrough]];
+        case PET_TYPE::AVATAR:
+        case PET_TYPE::AUTOMATON:
+        case PET_TYPE::WYVERN:
+            petZoningInfo.petLevel     = PPetEntity->getSpawnLevel();
+            petZoningInfo.petHP        = PPet->health.hp;
+            petZoningInfo.petTP        = PPet->health.tp;
+            petZoningInfo.petMP        = PPet->health.mp;
+            petZoningInfo.petType      = PPetEntity->getPetType();
+            petZoningInfo.jugSpawnTime = ((CPetEntity*)PPet)->getJugSpawnTime();
+            petZoningInfo.jugDuration  = ((CPetEntity*)PPet)->getJugDuration();
+            break;
+        default:
+            break;
+    }
+
+    petZoningInfo.respawnPet = true;
 }
 
 void CCharEntity::resetPetZoningInfo()
 {
     // reset the petZoning info
-    petZoningInfo.petHP      = 0;
-    petZoningInfo.petTP      = 0;
-    petZoningInfo.petMP      = 0;
-    petZoningInfo.respawnPet = false;
-    petZoningInfo.petType    = PET_TYPE::AVATAR;
+    petZoningInfo.petLevel     = 0;
+    petZoningInfo.petHP        = 0;
+    petZoningInfo.petTP        = 0;
+    petZoningInfo.petMP        = 0;
+    petZoningInfo.respawnPet   = false;
+    petZoningInfo.petType      = PET_TYPE::AVATAR;
+    petZoningInfo.jugSpawnTime = 0;
+    petZoningInfo.jugDuration  = 0;
 }
 /************************************************************************
  *
@@ -1502,9 +1514,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
                     actionTarget.param     = -actionTarget.param;
                 }
+
+                prevMsg = actionTarget.messageID;
 
                 state.ApplyEnmity();
             }
@@ -2190,7 +2204,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+        if (PPet->objtype == TYPE_MOB)
         {
             petutils::DetachPet(this);
         }

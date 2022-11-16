@@ -81,11 +81,11 @@ local function teleportMenuUpdate(player, option)
         end
 
         for x = 1, 3 do
-           favorites[1] = favorites[1] + favorites[x + 1] * 256 ^ x
-           favorites[5] = favorites[5] + favorites[x + 5] * 256 ^ x
-         end
+            favorites[1] = favorites[1] + favorites[x + 1] * 256 ^ x
+            favorites[5] = favorites[5] + favorites[x + 5] * 256 ^ x
+        end
 
-         favorites[9] = favorites[9] + favorites[10] * 256
+        favorites[9] = favorites[9] + favorites[10] * 256
 
         player:updateEvent(favorites[1], favorites[5], favorites[9])
     end
@@ -102,8 +102,7 @@ xi.survivalGuide.onTrigger = function(player)
 
     if guide then
         -- If this survival guide hasn't been registered yet (saved to database) do that now.
-        local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player,
-                                                                     guide)
+        local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
 
         if foundRegisteredGuide then
             local param = bit.bor(tableIndex, bit.lshift(player:getCurrency("valor_point"), 16))

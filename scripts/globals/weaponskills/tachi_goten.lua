@@ -1,4 +1,4 @@
- -- ---------------------------------
+-- ---------------------------------
 -- Tachi Goten
 -- Great Katana weapon skill
 -- Skill Level: 70
@@ -19,7 +19,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
@@ -33,7 +32,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.skillType = xi.skill.GREAT_KATANA
     params.includemab = true
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = .5 params.ftp200 = .75 params.ftp300 = 1
         params.str_wsc = 0.6
     end

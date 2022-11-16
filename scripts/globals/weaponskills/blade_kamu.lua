@@ -28,26 +28,24 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 1.3; params.atk200 = 1.3; params.atk300 = 1.3
+    params.atk100 = 1.3 params.atk200 = 1.3 params.atk300 = 1.3
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.6 params.int_wsc = 0.6
-        params.ignoresDef = true
-        params.ignored100 = 0.25
-        params.ignored200 = 0.25
-        params.ignored300 = 0.25
-        params.atk100 = 2.25; params.atk200 = 2.25; params.atk300 = 2.25 -- http://wiki.ffo.jp/html/15893.html
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.EARTH
+    effectParams.effect = xi.effect.ACCURACY_DOWN
+    effectParams.skillType = xi.skill.KATANA
+    effectParams.duration = tp / 1000 * 60
+    effectParams.power = 10
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     -- Apply Aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
-            local duration = tp / 1000 * 60 * xi.magic.applyResistanceAddEffectWS(player, target, xi.magic.ele.EARTH, 0)
-            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 10, 0, duration)
-        end
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
     return tpHits, extraHits, criticalHit, damage

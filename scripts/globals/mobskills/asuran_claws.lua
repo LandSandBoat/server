@@ -10,7 +10,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- animsub 1= standing, animsub 0 = all fours
-    if (mob:getAnimationSub() == 0) then
+    if mob:getAnimationSub() == 0 then
         return 1
     end
 

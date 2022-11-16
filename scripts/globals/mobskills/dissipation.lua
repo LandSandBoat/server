@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local count = target:dispelAllStatusEffect()
 
-    if (count == 0) then
+    if count == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else
         skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)

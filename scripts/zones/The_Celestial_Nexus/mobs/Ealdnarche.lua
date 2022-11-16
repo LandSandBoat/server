@@ -29,7 +29,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:getBattleTime() % 9 <= 2) then
+    if mob:getBattleTime() % 9 <= 2 then
         local orbitalOne = GetMobByID(mob:getID() + 3)
         local orbitalTwo = GetMobByID(mob:getID() + 4)
 
@@ -57,7 +57,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    if (csid == 32004) then
+    if csid == 32004 then
         DespawnMob(target:getID())
         local mob = SpawnMob(target:getID() + 2)
         mob:updateEnmity(player)

@@ -60,7 +60,7 @@ effectObject.onEffectTick = function(target, effect)
 
     if healtime > 2 then
         -- curse II also known as "zombie"
-        if not(target:hasStatusEffect(xi.effect.DISEASE)) and target:hasStatusEffect(xi.effect.PLAGUE) == false and target:hasStatusEffect(xi.effect.CURSE_II) == false then
+        if not target:hasStatusEffect(xi.effect.DISEASE) and not target:hasStatusEffect(xi.effect.PLAGUE) and not target:hasStatusEffect(xi.effect.CURSE_II) then
             local healHP = 0
             if target:getContinentID() == 1 and target:hasStatusEffect(xi.effect.SIGNET) then
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)

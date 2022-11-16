@@ -9,7 +9,7 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetServerVariable("[Central_Apollyon]Time", 0)
+    SetServerVariable("[CENTRAL_APOLLYON]Time", 0)
     SetServerVariable("[CS_Apollyon]Time", 0)
     SetServerVariable("[NE_Apollyon]Time", 0)
     SetServerVariable("[NW_Apollyon]Time", 0)
@@ -165,7 +165,7 @@ end
 zoneObject.onRegionLeave = function(player, region)
 end
 
-zoneObject.onEventUpdate = function(player,csid,option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 200 and csid <= 219 then
         for _, entry in pairs(player:getNotorietyList()) do
             entry:clearEnmity(player) -- reset hate on player after teleporting

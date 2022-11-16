@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if (mob:getAnimationSub() == 3) then
+    if mob:getAnimationSub() == 3 then
         SetDropRate(116, 1575, 1000)
     else
         SetDropRate(116, 1575, 0)

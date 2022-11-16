@@ -18,11 +18,11 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            631,    36,    -- Horo Flour
-            629,    43,    -- Millioncorn
-            4415,  111,    -- Roasted Corn
-            4505,   90,    -- Sunflower Seeds
-            841,    36,     -- Yagudo Feather
+            631,   36, -- Horo Flour
+            629,   44, -- Millioncorn
+            4415, 114, -- Roasted Corn
+            4505,  92, -- Sunflower Seeds
+            841,   36, -- Yagudo Feather
         }
 
         player:showText(npc, ID.text.OGGODETT_OPEN_DIALOG)

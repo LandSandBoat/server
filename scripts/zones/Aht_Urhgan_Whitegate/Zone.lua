@@ -24,7 +24,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
             cs = 201
         elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI then
@@ -49,13 +53,13 @@ zoneObject.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Cutscene for Got It All quest.
-            if (player:getCharVar("gotitallCS") == 5) then
+            if player:getCharVar("gotitallCS") == 5 then
                 player:startEvent(526)
             end
         end,
 
         [2] = function (x) -- CS for Vanishing Act Quest
-            if (player:getCharVar("vanishingactCS") == 3) then
+            if player:getCharVar("vanishingactCS") == 3 then
                 player:startEvent(44)
             end
         end,

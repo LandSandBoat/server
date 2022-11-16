@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Zeruhn Mines
 --  NPC: Balgamirob
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+    if xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         local hasStone = xi.abyssea.getHeldTraverserStones(player)
         if
             hasStone >= 1 and
@@ -36,11 +36,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 9) then
+    if csid == 9 then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
-    elseif (csid == 10) then
+    elseif csid == 10 then
         -- Killed Briareus
-    elseif (csid == 218 and option == 1) then
+    elseif csid == 218 and option == 1 then
         player:setPos(-480, 0, 794, 62, 132)
     end
 end

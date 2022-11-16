@@ -60,7 +60,6 @@ entity.onMobFight = function(mob, target)
         mob:delMod(xi.mod.ATTP, 25)
         mob:setLocalVar("changeTime", battleTime)
     end
-
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -82,7 +81,7 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 end
 
-entity.onMobDespawn = function( mob )
+entity.onMobDespawn = function(mob)
     -- despawn pets
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 3 do

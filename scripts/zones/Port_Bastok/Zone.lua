@@ -31,7 +31,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setHomePoint()
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP then
             cs = 73
             player:setPos(-36.000, 7.000, -58.000, 194)
@@ -65,7 +69,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif (csid == 71) then
+    elseif csid == 71 then
         player:setPos(0, 0, 0, 0, 224)
         player:setLocalVar('[AIRSHIP]Paid', 1)
     elseif csid == 140 and option == 0 then

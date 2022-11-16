@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        trade:hasItemQty(555, 1) == true and
+        trade:hasItemQty(555, 1) and
         trade:getGil() == 0 and
         trade:getItemCount() == 1
     then
@@ -45,7 +45,7 @@ entity.onTrade = function(player, npc, trade)
 
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(16522, 1) == true and
+            trade:hasItemQty(16522, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 61 then
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
         player:addTitle(xi.title.ENVOY_TO_THE_NORTH)
-        if (player:hasKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL) == false) then
+        if not player:hasKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL) then
             player:addKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_CASTLE_ZVAHL)
         end

@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local theWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
-    local wonderMagicSetKI  = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
+    local hasWonderMagicSet = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
     local theKindCardian    = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
@@ -28,11 +28,11 @@ entity.onTrigger = function(player, npc)
 
     elseif
         theWonderMagicSet == QUEST_ACCEPTED and
-        wonderMagicSetKI == false
+        not hasWonderMagicSet
     then
         player:startEvent(55) -- During quest "The wonder magic set"
 
-    elseif wonderMagicSetKI == true then
+    elseif hasWonderMagicSet then
         player:startEvent(33) -- Finish quest "The wonder magic set"
 
     elseif

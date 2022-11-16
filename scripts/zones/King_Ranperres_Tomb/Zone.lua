@@ -11,12 +11,11 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -84.302, 6.5, -120.997, -77, 7.5, -114) -- Used for stairs teleport -85.1, 7, -119.9
 
-    UpdateNMSpawnPoint(ID.mob.VRTRA)
-    GetMobByID(ID.mob.VRTRA):setRespawnTime(math.random(86400, 259200))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.VRTRA)
 
     if xi.settings.main.ENABLE_WOTG == 1 then
-        UpdateNMSpawnPoint(ID.mob.BARBASTELLE)
-        GetMobByID(ID.mob.BARBASTELLE):setRespawnTime(math.random(1800, 5400))
+        xi.mob.nmTODPersistCache(zone, ID.mob.BARBASTELLE)
     end
 
     xi.treasure.initZone(zone)
@@ -25,7 +24,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(242.012, 5.305, 340.059, 121)
     end
 

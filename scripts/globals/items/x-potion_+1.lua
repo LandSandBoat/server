@@ -10,9 +10,9 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if (target:getHP() == target:getMaxHP()) then
+    if target:getHP() == target:getMaxHP() then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
-    elseif (target:hasStatusEffect(xi.effect.MEDICINE)) then
+    elseif target:hasStatusEffect(xi.effect.MEDICINE) then
         return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
     return 0

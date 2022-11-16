@@ -504,7 +504,9 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("Quest[0][108]Prog") == 2 and not player:hasKeyItem(xi.ki.TORN_OUT_PAGES)
+                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and
+                            xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD, 'Prog') == 2 and
+                            not player:hasKeyItem(xi.ki.TORN_OUT_PAGES)
                         end,
                         code = function(player) npcUtil.giveKeyItem(player, xi.ki.TORN_OUT_PAGES) end,
                     },
@@ -621,10 +623,13 @@ xi.treasure.treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getCharVar("needs_crawler_blood") == 1 end,
+                        test = function(player)
+                            return xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2 and
+                                xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Time') == 0 and
+                                not player:hasKeyItem(xi.ki.CRAWLER_BLOOD)
+                        end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD)
-                            player:setCharVar("needs_crawler_blood", 0)
                         end,
                     },
                 },
@@ -1055,8 +1060,10 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return (player:getCharVar("Quest[2][77]Prog") == 2 or player:getCharVar("Quest[2][77]Prog") == 3) and
-                            not player:hasKeyItem(xi.ki.JOKER_CARD)
+                            return player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD) == QUEST_ACCEPTED and
+                                (xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 2 or
+                                xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 3) and
+                                not player:hasKeyItem(xi.ki.JOKER_CARD)
                         end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.JOKER_CARD)
@@ -1575,7 +1582,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
             end
         end
         local gilAmount = math.random(info.gil[2], info.gil[3])
-        local gil = gilAmount/#membersInZone
+        local gil = gilAmount / #membersInZone
         for i = 1, #membersInZone do
             membersInZone[i]:addGil(gil)
             membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gil)

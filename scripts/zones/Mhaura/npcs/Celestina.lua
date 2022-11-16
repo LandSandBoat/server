@@ -20,9 +20,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildSkillId = xi.skill.GOLDSMITHING
-    local stock = xi.shop.generalGuildStock[guildSkillId]
-    xi.shop.generalGuild(player, stock, guildSkillId)
+    if player:sendGuild(528, 8, 23, 4) then
+        player:showText(npc, ID.text.GOLDSMITHING_GUILD)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

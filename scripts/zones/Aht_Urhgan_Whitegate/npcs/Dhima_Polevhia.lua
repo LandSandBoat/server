@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Dhima Polevhia
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

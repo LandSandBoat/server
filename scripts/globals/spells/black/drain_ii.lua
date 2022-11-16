@@ -18,7 +18,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- also have small constant to account for 0 dark skill
     local dmg = 20 + (1.236 * caster:getSkillLevel(xi.skill.DARK_MAGIC))
 
-    if (dmg > (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 85)) then
+    if dmg > (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 85) then
         dmg = (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 85)
     end
 
@@ -37,21 +37,26 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
-    if (dmg < 0) then
+    if dmg < 0 then
         dmg = 0
     end
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
+    end
+
+    -- Don't drain more HP than the target has left
+    if target:getHP() < dmg then
+        dmg = target:getHP()
     end
 
     dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()
-    local overHeal = (leftOver/caster:getMaxHP())*100
+    local overHeal = (leftOver / caster:getMaxHP()) * 100
     if caster:hasStatusEffect(xi.effect.WEAKNESS) then
-        overHeal = (leftOver/(caster:getBaseHP() + caster:getMod(xi.mod.HP)))*100
+        overHeal = (leftOver / (caster:getBaseHP() + caster:getMod(xi.mod.HP))) * 100
     end
 
     if leftOver > 0 then

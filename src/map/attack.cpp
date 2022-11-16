@@ -454,16 +454,6 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
 
     SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
 
-    if (m_attacker->objtype == TYPE_MOB)
-    {
-        auto* PMob    = static_cast<CBaseEntity*>(m_attacker);
-        auto* PTarget = static_cast<CBaseEntity*>(m_victim);
-        if (distance(PMob->loc.p, PTarget->loc.p) > 2)
-        {
-            slot = SLOT_RANGED;
-        }
-    }
-
     if (m_attackRound->IsH2H())
     {
         m_baseDamage       = 0;
@@ -474,19 +464,28 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
             m_baseDamage = m_attacker->GetMainWeaponDmg();
         }
 
-        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN, 0, isGuarded)));
+        if (m_attacker->objtype == TYPE_MOB)
+        {
+            // mobdamage = (floor((level + 2 + fstr) * .9) / 2) * pdif
+            int8 mobH2HDamage = m_attacker->GetMLevel() + 2;
+            m_damage          = (uint32)((std::floor((mobH2HDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * 0.9f) / 2) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded));
+        }
+        else
+        {
+            m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded)));
+        }
     }
     else if (slot == SLOT_MAIN)
     {
-        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN, 0, isGuarded)));
+        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded)));
     }
     else if (slot == SLOT_SUB)
     {
-        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_SUB, 0, isGuarded)));
+        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 1, slot, 0, isGuarded)));
     }
     else if (slot == SLOT_AMMO || slot == SLOT_RANGED)
     {
-        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_AMMO, 0, isGuarded));
+        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetRangedDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0));
     }
 
     // Apply "Double Attack" damage and "Triple Attack" damage mods

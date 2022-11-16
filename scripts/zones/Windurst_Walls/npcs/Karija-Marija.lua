@@ -7,7 +7,11 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+-- Karija-Marija doesn't stop walking, so all the points
+-- below are based on the last position of his current
+-- rotation as he doesnt walk in a straight line.
+-- TODO: npc doesnt need to stop at point to change direction
+local pathNodes =
 {
     { x = 82.146, y = -2.500, z = -113.624 },
     { x = 81.814, z = -101.618 },
@@ -35,8 +39,8 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)

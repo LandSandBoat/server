@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel  = player:getSkillLevel(xi.skill.ALCHEMY)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
             player:startEvent(123, skillCap, skillLevel, 1, 137, player:getGil(), 0, 0, 0)
         else
             player:startEvent(123, skillCap, skillLevel, 1, 137, player:getGil(), 6758, 0, 0)

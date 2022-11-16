@@ -652,7 +652,7 @@ namespace charutils
         }
 
         fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
-                   "pet_id, pet_type, pet_hp, pet_mp "
+                   "pet_id, pet_type, pet_hp, pet_mp, pet_level "
                    "FROM char_stats WHERE charid = %u;";
 
         ret          = sql->Query(fmtQuery, PChar->id);
@@ -687,11 +687,17 @@ namespace charutils
             int16 petHP = sql->GetUIntData(11);
             if (petHP)
             {
-                PChar->petZoningInfo.petHP      = petHP;
-                PChar->petZoningInfo.petID      = sql->GetUIntData(9);
-                PChar->petZoningInfo.petMP      = sql->GetIntData(12);
-                PChar->petZoningInfo.petType    = static_cast<PET_TYPE>(sql->GetUIntData(10));
-                PChar->petZoningInfo.respawnPet = true;
+                PChar->petZoningInfo.petHP        = petHP;
+                PChar->petZoningInfo.petID        = sql->GetUIntData(9);
+                PChar->petZoningInfo.petMP        = sql->GetIntData(12);
+                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(sql->GetUIntData(10));
+                PChar->petZoningInfo.petLevel     = sql->GetUIntData(13);
+                PChar->petZoningInfo.respawnPet   = true;
+                PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jug-pet-spawn-time");
+                PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jug-duration-seconds");
+
+                // clear the charvars used for jug state
+                PChar->clearCharVarsWithPrefix("jug-");
             }
         }
 
@@ -833,12 +839,14 @@ namespace charutils
         charutils::LoadInventory(PChar);
 
         CalculateStats(PChar);
-        blueutils::LoadSetSpells(PChar);
-        puppetutils::LoadAutomaton(PChar);
         BuildingCharSkillsTable(PChar);
         BuildingCharAbilityTable(PChar);
         BuildingCharTraitsTable(PChar);
         jobpointutils::RefreshGiftMods(PChar);
+
+        // Order matters as these use merits and JP gifts
+        blueutils::LoadSetSpells(PChar);
+        puppetutils::LoadAutomaton(PChar);
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
 
@@ -5418,11 +5426,16 @@ namespace charutils
 
         const char* Query = "UPDATE char_stats "
                             "SET hp = %u, mp = %u, nameflags = %u, mhflag = %u, mjob = %u, sjob = %u, "
-                            "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u "
+                            "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u, pet_level = %u "
                             "WHERE charid = %u;";
 
         sql->Query(Query, PChar->health.hp, PChar->health.mp, PChar->nameflags.flags, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
-                   PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->id);
+                   PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->petZoningInfo.petLevel, PChar->id);
+
+        // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
+        // we use charvars for jug specific things
+        PChar->setCharVar("jug-pet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
+        PChar->setCharVar("jug-duration-seconds", PChar->petZoningInfo.jugDuration);
     }
 
     /************************************************************************
@@ -6866,7 +6879,7 @@ namespace charutils
         // Replace will also handle insert if it doesn't exist
         auto fmtQuery = "REPLACE INTO char_history "
                         "(charid, enemies_defeated, times_knocked_out, mh_entrances, joined_parties, joined_alliances, spells_cast, "
-                        "abilities_used, ws_used, items_used, chats_sent, npc_interactions, battles_fought, gm_calls, distance_travelled) "
+                        "abilities_used, ws_used, items_used, chats_sent, npc_interactions, battles_fought, gm_calls, distance_travelled ) "
                         "VALUES("
                         "%u, " // charid
                         "%u, " // 0 enemies_defeated
@@ -6882,7 +6895,7 @@ namespace charutils
                         "%u, " // 10 npc_interactions
                         "%u, " // 11 battles_fought
                         "%u, " // 12 gm_calls
-                        "%u"   // 13 distance_travelled
+                        "%u "  // 13 distance_travelled
                         ");";
 
         auto ret = sql->Query(fmtQuery,
@@ -6905,6 +6918,85 @@ namespace charutils
         if (ret == SQL_ERROR)
         {
             ShowError("Error writing char history for: '%s'", PChar->name.c_str());
+        }
+    }
+
+    void ReadFishingHistory(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        auto fmtQuery = "SELECT "
+                        "fish_list, "       // 0 -- List of all fish caught (boolean, not totals)
+                        "fish_linescast, "  // 1
+                        "fish_reeled, "     // 2
+                        "fish_longest, "    // 3
+                        "fish_longest_id, " // 4
+                        "fish_heaviest, "   // 5
+                        "fish_heaviest_id " // 6
+                        "FROM char_fishing "
+                        "WHERE charid = %u;";
+
+        auto ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            size_t length   = 0;
+            char*  fishList = nullptr;
+            sql->GetData(0, &fishList, &length);
+            memcpy(&PChar->m_fishHistory.fishList, fishList, (length > sizeof(PChar->m_fishHistory.fishList) ? sizeof(PChar->m_fishHistory.fishList) : length));
+
+            PChar->m_fishHistory.fishLinesCast  = (uint32)sql->GetIntData(1);
+            PChar->m_fishHistory.fishReeled     = (uint32)sql->GetIntData(2);
+            PChar->m_fishHistory.fishLongest    = (uint32)sql->GetIntData(3);
+            PChar->m_fishHistory.fishLongestId  = (uint32)sql->GetIntData(4);
+            PChar->m_fishHistory.fishHeaviest   = (uint32)sql->GetIntData(5);
+            PChar->m_fishHistory.fishHeaviestId = (uint32)sql->GetIntData(6);
+        }
+    }
+
+    void WriteFishingHistory(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        // Replace will also handle insert if it doesn't exist
+        auto fmtQuery = "REPLACE INTO char_fishing "
+                        "(charid, fish_list, fish_linescast, fish_reeled, fish_longest, fish_longest_id, fish_heaviest, fish_heaviest_id ) "
+                        "VALUES("
+                        "%u, "   // charid
+                        "'%s', " // 1 - Fish List (Blob)
+                        "%u, "   // 2 - Number of times the line has been cast
+                        "%u, "   // 3 - Number of fish successfully reeled in
+                        "%u, "   // 4 - Length in ilms of the longest fish caught
+                        "%u, "   // 5 - ID of the longest fish caught
+                        "%u, "   // 6 - Weight in ponzes of the heaviest fish caught
+                        "%u "    // 7 - ID of the heavieset fish caught
+                        ");";
+
+        char fishList[sizeof(PChar->m_fishHistory.fishList) * 2 + 1];
+        sql->EscapeStringLen(fishList, (const char*)&PChar->m_fishHistory.fishList, sizeof(PChar->m_fishHistory.fishList));
+
+        auto ret = sql->Query(fmtQuery,
+                              PChar->id,
+                              fishList,
+                              PChar->m_fishHistory.fishLinesCast,
+                              PChar->m_fishHistory.fishReeled,
+                              PChar->m_fishHistory.fishLongest,
+                              PChar->m_fishHistory.fishLongestId,
+                              PChar->m_fishHistory.fishHeaviest,
+                              PChar->m_fishHistory.fishHeaviestId);
+
+        if (ret == SQL_ERROR)
+        {
+            ShowError("Error writing fishing history for: '%s'", PChar->name.c_str());
         }
     }
 

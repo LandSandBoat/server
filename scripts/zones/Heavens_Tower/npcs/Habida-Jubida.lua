@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Habida-Jubida
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -170,12 +170,15 @@ struct teleport_t
 
 struct PetInfo_t
 {
-    bool     respawnPet; // used for spawning pet on zone
-    uint8    petID;      // id as in wyvern(48) , carbuncle(8) ect..
-    PET_TYPE petType;    // type of pet being transfered
-    int16    petHP;      // pets hp
-    int16    petMP;
-    float    petTP; // pets tp
+    bool     respawnPet;   // used for spawning pet on zone
+    int32    jugSpawnTime; // Keeps track of original spawn time in seconds since epoch
+    int32    jugDuration;  // Number of seconds a jug pet should last after its original spawn time
+    uint8    petID;        // id as in wyvern(48) , carbuncle(8) ect..
+    PET_TYPE petType;      // type of pet being transfered
+    uint8    petLevel;     // level the pet was spawned with
+    int16    petHP;        // pets hp
+    int16    petMP;        // pets mp
+    float    petTP;        // pets tp
 };
 
 struct AuctionHistory_t
@@ -234,6 +237,39 @@ struct CharHistory_t
     uint32 battlesFought     = 0;
     uint32 gmCalls           = 0;
     uint32 distanceTravelled = 0;
+};
+
+enum FISHING_HISTORY
+{
+    FISH_CAUGHT = 0,
+    FISH_LINESCAST,
+    FISH_REELED,
+    FISH_LONGEST,
+    FISH_LONGEST_ID,
+    FISH_HEAVIEST,
+    FISH_HEAVIEST_ID,
+};
+
+struct CharFishing_t
+{
+    uint32 fishList[6];    // Maps to the index of each fish [0-5]
+    uint32 fishLinesCast;  // Number of times the fishing line was cast
+    uint32 fishReeled;     // Number of fish caught (actual fish, not items)
+    uint32 fishLongest;    // Length in ilms of the longest fish caught
+    uint32 fishLongestId;  // ID of the longest fish caught
+    uint32 fishHeaviest;   // Weight in ponzes of the heaviest fish caught
+    uint32 fishHeaviestId; // ID of the heaviest fish caught
+
+    CharFishing_t()
+    {
+        std::memset(&fishList, 0, sizeof(fishList));
+        fishLinesCast  = 0;
+        fishReeled     = 0;
+        fishLongest    = 0;
+        fishLongestId  = 0;
+        fishHeaviest   = 0;
+        fishHeaviestId = 0;
+    }
 };
 
 enum CHAR_SUBSTATE
@@ -458,6 +494,7 @@ public:
     uint16 m_moghancementID;
 
     CharHistory_t m_charHistory;
+    CharFishing_t m_fishHistory; // Player fishing data
 
     int8 getShieldSize();
 

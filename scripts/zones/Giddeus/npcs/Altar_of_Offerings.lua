@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local crisisstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    if (crisisstatus >= 1 and player:getCharVar("QuestCrisisMaking_var") == 1) then
+    if crisisstatus >= 1 and player:getCharVar("QuestCrisisMaking_var") == 1 then
         player:startEvent(53) -- A Crisis in the Making: Receive Offering
     else
         player:startEvent(60) -- Standard Message
@@ -28,7 +28,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 53 and option == 1) then
+    if csid == 53 and option == 1 then
         player:addKeyItem(39, xi.ki.OFF_OFFERING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OFF_OFFERING)
         player:setCharVar("QuestCrisisMaking_var", 2)

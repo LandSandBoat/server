@@ -17,7 +17,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
-    target:addStatusEffect(xi.effect.RAMPART, 2500, 0, duration)
+    target:addStatusEffect(xi.effect.RAMPART, (player:getStat(xi.mod.VIT) * 2), 0, duration)
 
     return xi.effect.RAMPART
 end

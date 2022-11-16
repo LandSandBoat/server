@@ -32,20 +32,20 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
 
-    if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
         player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 1, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
         player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 2, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
         player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
         player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_5)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
         player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))

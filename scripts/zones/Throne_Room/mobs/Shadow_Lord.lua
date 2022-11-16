@@ -15,16 +15,16 @@ entity.onMobFight = function(mob, target)
     -- 2nd form
     -- the Shadow Lord will do nothing but his Implosion attack. This attack hits everyone in the battlefield, but he only has 4000 HP
 
-    if (mob:getID() < ID.mob.SHADOW_LORD_PHASE_2_OFFSET) then -- first phase AI
+    if mob:getID() < ID.mob.SHADOW_LORD_PHASE_2_OFFSET then -- first phase AI
         -- once he's under 50% HP, start changing immunities and attack patterns
-        if (mob:getHP() / mob:getMaxHP() <= 0.5) then
+        if mob:getHP() / mob:getMaxHP() <= 0.5 then
 
             -- have to keep track of both the last time he changed immunity and the HP he changed at
             local changeTime = mob:getLocalVar("changeTime")
             local changeHP = mob:getLocalVar("changeHP")
 
             -- subanimation 0 is first phase subanim, so just go straight to magic mode
-            if (mob:getAnimationSub() == 0) then
+            if mob:getAnimationSub() == 0 then
                 mob:setAnimationSub(1)
                 mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
                 mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
@@ -69,7 +69,7 @@ entity.onMobFight = function(mob, target)
     else
         -- second phase AI: Implode every 9 seconds
         local lastImplodeTime = mob:getLocalVar("lastImplodeTime")
-        if (mob:getBattleTime() - lastImplodeTime > 9) then
+        if mob:getBattleTime() - lastImplodeTime > 9 then
             mob:useMobAbility(669)
             mob:setLocalVar("lastImplodeTime", mob:getBattleTime())
         end

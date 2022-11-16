@@ -29,7 +29,6 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instanceObject.onInstanceFailure = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -39,15 +38,12 @@ instanceObject.onInstanceFailure = function(instance)
 end
 
 instanceObject.onInstanceProgressUpdate = function(instance, progress)
-
-    if (progress >= 15) then
+    if progress >= 15 then
         instance:complete()
     end
-
 end
 
 instanceObject.onInstanceComplete = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -60,7 +56,6 @@ instanceObject.onInstanceComplete = function(instance)
     rune:setStatus(xi.status.NORMAL)
     box:setPos(410.41, -41.12, 300.743, 243)
     box:setStatus(xi.status.NORMAL)
-
 end
 
 instanceObject.onEventUpdate = function(player, csid, option)

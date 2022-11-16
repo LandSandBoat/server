@@ -14,9 +14,9 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getID() == target:getID()) then
+    if player:getID() == target:getID() then
         return xi.msg.basic.CANNOT_PERFORM_TARG, 0
-    elseif (player:getTP() < 1000) then
+    elseif player:getTP() < 1000 then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
         return 0, 0

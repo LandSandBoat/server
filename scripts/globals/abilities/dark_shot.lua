@@ -22,9 +22,13 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
+    local params = {}
+    params.element   = xi.magic.ele.DARK
+    params.skillType = xi.skill.NONE
+    params.maccBonus = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+
     local duration = 60
-    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
-    local resist = xi.magic.applyResistanceAbility(player, target, xi.magic.ele.DARK, xi.skill.NONE, bonusAcc)
+    local resist = xi.magic.applyAbilityResistance(player, target, params)
 
     if resist < 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
