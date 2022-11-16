@@ -12,7 +12,7 @@ void safe_print(const char* str)
 {
     // https://man7.org/linux/man-pages/man2/write.2.html
     // https://man7.org/linux/man-pages/man3/strlen.3.html
-    write(1, str, strlen(str));
+    std::ignore = write(1, str, strlen(str));
 }
 
 void dumpBacktrace(int signal)
