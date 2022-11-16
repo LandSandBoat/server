@@ -66,6 +66,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         SHILAH_SHOP_DIALOG             = 8130,  -- Welcome, weary traveler. Make yourself at home!
         VALERIANO_SHOP_DIALOG          = 8148,  -- Oh, a fellow outsider! We are Troupe Valeriano. I am Valeriano, at your service!
         FERDOULEMIONT_SHOP_DIALOG      = 8164,  -- Hello!
+        MALECHARISANT_DIALOG           = 8183,  -- You stand before the Westgate. West Ronfaure lies beyond.
         CLETAE_DIALOG                  = 8216,  -- Why, hello. All our skins are guild-approved.
         KUEH_IGUNAHMORI_DIALOG         = 8217,  -- Good day! We have lots in stock today.
         SOBANE_DIALOG                  = 8235,  -- My name is Sobane, and I'm sharpening my knives.
