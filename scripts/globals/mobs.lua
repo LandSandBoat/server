@@ -55,29 +55,37 @@ end
 
 -- Needs to be added to the NM's onDespawn() function.
 xi.mob.nmTODPersist = function(mob, cooldown)
-    SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
-    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+    if xi.settings.main.NM_PERSISTENCE == 1 then
+        SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+        mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+    end
+
+    UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(cooldown)
 end
 
 -- Needs to be added to the NM's zone onInit() function.
 xi.mob.nmTODPersistCache = function(zone, mobId)
-    local mob = GetMobByID(mobId)
-    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getID()))
-    zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
+    if xi.settings.main.NM_PERSISTENCE == 1 then
+        local mob = GetMobByID(mobId)
+        local respawn = GetServerVariable(string.format("[SPAWN]%s", mobId))
+        zone:setLocalVar(string.format("[SPAWN]%s", mobId), respawn)
 
-    if respawn == 0 then
-        return
-    end
+        if respawn == 0 then
+            return
+        end
 
-    if mob:isAlive() then
-        DespawnMob(mobId)
-    end
+        if mob:isAlive() then
+            DespawnMob(mobId)
+        end
 
-    if respawn <= os.time() then
-        mob:setRespawnTime(300)
-    else
-        mob:setRespawnTime(respawn - os.time())
+        UpdateNMSpawnPoint(mobId)
+
+        if respawn <= os.time() then
+            mob:setRespawnTime(10)
+        else
+            mob:setRespawnTime(respawn - os.time())
+        end
     end
 end
 

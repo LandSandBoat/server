@@ -104,7 +104,8 @@ zones[xi.zone.EAST_RONFAURE] =
             {
                 17191323  -- Yilbegan
             }
-        }
+        },
+        RAMBUKK = 17191044,
     },
 
     npc =

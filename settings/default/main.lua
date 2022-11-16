@@ -243,4 +243,7 @@ xi.settings.main =
 
     -- Synergy
     ENABLE_SYNERGY = 0, -- Default to off as Synergy is not coded
+
+    -- NM Persistence
+    NM_PERSISTENCE = 1, -- When set to 1, timed NM spawns will be persistent through server crashing
 }
