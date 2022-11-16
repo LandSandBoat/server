@@ -222,11 +222,11 @@ namespace luautils
         roeutils::init(); // TODO: Get rid of the need to do this
 
         // Then the rest...
-        for (auto entry : std::filesystem::directory_iterator("./scripts/globals"))
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/globals"))
         {
-            if (entry.path().extension() == ".lua")
+            if (entry.extension() == ".lua")
             {
-                auto relative_path_string = entry.path().relative_path().generic_string();
+                auto relative_path_string = entry.relative_path().generic_string();
 
                 ShowTrace("Loading global script %s", relative_path_string);
 
@@ -246,11 +246,11 @@ namespace luautils
 
         if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
         {
-            for (auto entry : std::filesystem::recursive_directory_iterator("./scripts"))
+            for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>("./scripts"))
             {
-                if (entry.path().extension() == ".lua")
+                if (entry.extension() == ".lua")
                 {
-                    auto result = lua.safe_script_file(entry.path().relative_path().generic_string());
+                    auto result = lua.safe_script_file(entry.relative_path().generic_string());
                     if (!result.valid())
                     {
                         sol::error err = result;
@@ -351,9 +351,9 @@ namespace luautils
         // "scripts/battlefields/(zone)/(filename).lua"
         auto scrapeSubdir = [&](std::string subFolder) -> void
         {
-            for (auto const& entry : std::filesystem::recursive_directory_iterator(subFolder))
+            for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>(subFolder))
             {
-                auto path = entry.path().relative_path();
+                auto path = entry.relative_path();
 
                 // TODO(compiler updates):
                 // entry.depth() is not yet available in all of our compilers
@@ -361,7 +361,7 @@ namespace luautils
 
                 bool isHelpersFile = path.filename() == "helpers.lua";
 
-                if (!entry.is_directory() &&
+                if (!std::filesystem::is_directory(path) &&
                     path.extension() == ".lua" &&
                     depth == 4 &&
                     !isHelpersFile)
