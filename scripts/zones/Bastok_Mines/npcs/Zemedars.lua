@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         12808, 11592, 3, -- Chain Gose
         12960,   117, 3, -- Bronze Leggins
         12936,  7120, 3, -- Greaves
-        12290,   556, 3, -- Maple Shield
+        -- 12290,   556, 3, -- Maple Shield (WoTG)
         12289,   110, 3, -- Lauan Shield
     }
 
