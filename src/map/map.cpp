@@ -207,6 +207,8 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
+    ShowInfo(fmt::format("map_port: {}", map_port));
+
     srand((uint32)time(nullptr));
     xirand::seed();
 
