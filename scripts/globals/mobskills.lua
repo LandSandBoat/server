@@ -228,10 +228,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     -- Mobs cannot crit unless told they can crit
     -- tpeffect == 3 is CRIT_VARIES
+    local critRate = 0
     if tpeffect == 3 and critperc ~= nil then
         critRate = critperc
-    else
-        critRate = 0
     end
 
     local chance = math.random()
