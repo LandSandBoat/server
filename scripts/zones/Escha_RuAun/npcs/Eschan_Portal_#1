@@ -25,7 +25,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    player:delCurrency("escha_silt", siltCost)
+    if option == 1 then
+        player:delCurrency("escha_silt", siltCost)
+    end
 end
 
 return entity
