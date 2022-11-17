@@ -1,10 +1,10 @@
 -----------------------------------
--- Area: Northern San d'Oria
---  NPC: Maurine
--- Type: Standard Dialogue NPC
--- !pos 144.852 0.000 136.828 231
+-- Area: Southern San d'Oria
+--  NPC: Malecharisant
+-- General Info NPC
+-- !pos -109.124 0 -49.180
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.MAURINE_DIALOG)
+    player:showText(npc, ID.text.MALECHARISANT_DIALOG)
 end
 
 entity.onEventUpdate = function(player, csid, option)
