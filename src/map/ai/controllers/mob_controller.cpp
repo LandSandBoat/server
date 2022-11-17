@@ -900,13 +900,13 @@ void CMobController::Move()
                     if (currentDistance > PMob->GetMeleeRange())
                     {
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_RUN);
                     }
                 }
                 else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
                 {
                     // try to find path towards target
-                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_RUN);
                 }
 
                 PMob->PAI->PathFind->FollowPath(m_Tick);
@@ -938,7 +938,7 @@ void CMobController::Move()
 
                                 if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                 {
-                                    PMob->PAI->PathFind->PathTo(new_pos, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                                    PMob->PAI->PathFind->PathTo(new_pos, PATHFLAG_RUN);
                                     needToMove = true;
                                 }
                                 break;
