@@ -568,6 +568,8 @@ local function checkReqs(player, npc, bfid, registrant)
                 return false
             end
         end
+
+        return true
     end
 
     -- Requirements to register a battlefield
