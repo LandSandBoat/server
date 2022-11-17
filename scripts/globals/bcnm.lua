@@ -562,6 +562,16 @@ local function checkReqs(player, npc, bfid, registrant)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
+    local function getPartyRace()
+        for _, v in pairs(player:getParty()) do
+            if v:getRace() ~= player:getRace() then
+                return false
+            end
+        end
+
+        return true
+    end
+
     -- Requirements to register a battlefield
     local registerReqs =
     {
@@ -698,6 +708,15 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 2
         end,
 
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+        end,
+
         [256] = function() -- ZM8: Return to Delkfutt's Tower
             return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
                 zilartStatus == 2
@@ -759,6 +778,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+        end,
+
         [420] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
@@ -776,6 +800,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+        end,
+
         [452] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
@@ -791,6 +820,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [482] = function() -- Quest: Trial-size Trial by Ice
             return mainJob == xi.job.SMN and mainLevel >= 20
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
         end,
 
         [484] = function() -- ASA4: Sugar-coated Directive
@@ -842,6 +876,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+        end,
+
         [547] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
@@ -859,6 +898,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+        end,
+
         [580] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
@@ -870,6 +914,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [609] = function() -- Quest: Trial-size Trial by Water
             return mainJob == xi.job.SMN and mainLevel >= 20
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
         [611] = function() -- ASA4: Sugar-coated Directive
@@ -937,11 +986,13 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [739] = function() -- ENM: Pulling Your Strings
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+                player:getMainJob() < 17 -- ToAU+ jobs not fully implemented
         end,
 
         [740] = function() -- ENM: Automaton Assault
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+                getPartyRace()
         end,
 
         [768] = function() -- PM1-3: The Mothercrystals
@@ -1160,6 +1211,39 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+        end,
+
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return npc:getXPos() > -721 and npc:getXPos() < 719
         end,
