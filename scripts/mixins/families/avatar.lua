@@ -35,10 +35,13 @@ g_mixins.families.avatar = function(avatarMob)
     end)
 
     avatarMob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
-        local modelId = mob:getModelId()
-        local abilityId = abilityIds[modelId - 790]
-        if abilityId ~= nil then
-            mob:useMobAbility(abilityId)
+        if mob:getLocalVar("[ASTRAL_FLOW]Performed") == 0 then
+            local modelId = mob:getModelId()
+            local abilityId = abilityIds[modelId - 790]
+            if abilityId ~= nil then
+                mob:useMobAbility(abilityId)
+                mob:setLocalVar("[ASTRAL_FLOW]Performed", 1)
+            end
         end
     end)
 
