@@ -562,7 +562,7 @@ local function checkReqs(player, npc, bfid, registrant)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
-    local function getPartyRace(player)
+    local function getPartyRace()
         for _, v in pairs(player:getParty()) do
             if v:getRace() ~= player:getRace() then
                 return false
@@ -992,7 +992,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [740] = function() -- ENM: Automaton Assault
             return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
-                getPartyRace(player)
+                getPartyRace()
         end,
 
         [768] = function() -- PM1-3: The Mothercrystals
