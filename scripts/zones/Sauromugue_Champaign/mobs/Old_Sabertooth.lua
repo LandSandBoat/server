@@ -15,12 +15,12 @@ entity.onMobSpawn = function(mob)
     mob:SetAutoAttackEnabled(false)
     mob:setRoamFlags(256, 512)
 
-    mob:addListener("TAKE_DAMAGE", "PRIME_TAKE_DAMAGE", function(mob, amount, attacker)
+    mob:addListener("TAKE_DAMAGE", "PRIME_TAKE_DAMAGE", function(tiger, amount, attacker)
         if attacker then
-            mob:setLocalVar("tookDamage", 1)
-            mob:SetMobAbilityEnabled(true)
-            mob:SetAutoAttackEnabled(true)
-            mob:setBehaviour(0)
+            tiger:setLocalVar("tookDamage", 1)
+            tiger:SetMobAbilityEnabled(true)
+            tiger:SetAutoAttackEnabled(true)
+            tiger:setBehaviour(0)
         end
     end)
 end
