@@ -424,32 +424,14 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->loc.zone->SpawnTransport(PChar);
 
     // respawn any pets from last zone
-    if (PChar->petZoningInfo.respawnPet)
+    if (PChar->loc.zone->CanUseMisc(MISC_PET) && !PChar->m_moghouseID)
     {
-        // only repawn pet in valid zones
-        if (PChar->loc.zone->CanUseMisc(MISC_PET) && !PChar->m_moghouseID)
+        if (PChar->shouldPetPersistThroughZoning())
         {
-            switch (PChar->petZoningInfo.petType)
-            {
-                case PET_TYPE::JUG_PET:
-                    if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
-                    {
-                        break;
-                    }
-                    [[fallthrough]];
-                case PET_TYPE::AVATAR:
-                case PET_TYPE::AUTOMATON:
-                case PET_TYPE::WYVERN:
-                case PET_TYPE::LUOPAN:
-                    petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
-                    break;
-
-                default:
-                    break;
-            }
-            // Reset the petZoning info
-            PChar->resetPetZoningInfo();
+            petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
         }
+
+        PChar->resetPetZoningInfo();
     }
 }
 
@@ -521,19 +503,13 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
 
-        if (PChar->PPet != nullptr)
+        if (PChar->shouldPetPersistThroughZoning())
         {
-            if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet))
-            {
-                if (PPetEntity->shouldPersistThroughZone())
-                {
-                    PChar->setPetZoningInfo();
-                }
-                else
-                {
-                    PChar->resetPetZoningInfo();
-                }
-            }
+            PChar->setPetZoningInfo();
+        }
+        else
+        {
+            PChar->resetPetZoningInfo();
         }
 
         PSession->shuttingDown = 1;
@@ -3708,22 +3684,6 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-
-    // handle pets on zone
-    if (PChar->PPet != nullptr)
-    {
-        if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet))
-        {
-            if (PPetEntity->shouldPersistThroughZone())
-            {
-                PChar->setPetZoningInfo();
-            }
-            else
-            {
-                PChar->resetPetZoningInfo();
-            }
-        }
-    }
 
     uint32 zoneLineID    = data.ref<uint32>(0x04);
     uint8  town          = data.ref<uint8>(0x16);

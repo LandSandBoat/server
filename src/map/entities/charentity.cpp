@@ -431,6 +431,8 @@ void CCharEntity::setPetZoningInfo()
             {
                 break;
             }
+            petZoningInfo.jugSpawnTime = PPetEntity->getJugSpawnTime();
+            petZoningInfo.jugDuration  = PPetEntity->getJugDuration();
             [[fallthrough]];
         case PET_TYPE::AVATAR:
         case PET_TYPE::AUTOMATON:
@@ -440,8 +442,6 @@ void CCharEntity::setPetZoningInfo()
             petZoningInfo.petTP        = PPet->health.tp;
             petZoningInfo.petMP        = PPet->health.mp;
             petZoningInfo.petType      = PPetEntity->getPetType();
-            petZoningInfo.jugSpawnTime = ((CPetEntity*)PPet)->getJugSpawnTime();
-            petZoningInfo.jugDuration  = ((CPetEntity*)PPet)->getJugDuration();
             break;
         default:
             break;
@@ -462,6 +462,32 @@ void CCharEntity::resetPetZoningInfo()
     petZoningInfo.jugSpawnTime = 0;
     petZoningInfo.jugDuration  = 0;
 }
+
+bool CCharEntity::shouldPetPersistThroughZoning()
+{
+    PET_TYPE petType;
+    auto     PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+
+    if (PPetEntity == nullptr && !petZoningInfo.respawnPet)
+    {
+        return false;
+    }
+
+    if (PPetEntity != nullptr)
+    {
+        petType = PPetEntity->getPetType();
+    }
+    else // petZoningInfo.respawnPet == true
+    {
+        petType = petZoningInfo.petType;
+    }
+
+    return petType == PET_TYPE::WYVERN ||
+           petType == PET_TYPE::AVATAR ||
+           petType == PET_TYPE::AUTOMATON ||
+           (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+}
+
 /************************************************************************
  *
  * Return the container with the specified ID.If the ID goes beyond, then *

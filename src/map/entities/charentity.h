@@ -319,17 +319,18 @@ public:
     uint8             m_TraitList[18];        // List of active job traits in the form of a bit mask
     uint8             m_PetCommands[64];      // List of available pet commands
     uint8             m_WeaponSkills[32];
-    questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
-    missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий
-    eminencelog_t     m_eminenceLog;                 // Record of Eminence log
-    eminencecache_t   m_eminenceCache;               // Caching data for Eminence lookups
-    assaultlog_t      m_assaultLog;                  // список assault миссий
-    campaignlog_t     m_campaignLog;                 // список campaign миссий
-    uint32            m_lastBcnmTimePrompt;          // the last message prompt in seconds
-    PetInfo_t         petZoningInfo;                 // used to repawn dragoons pets ect on zone
-    void              setPetZoningInfo();            // set pet zoning info (when zoning and logging out)
-    void              resetPetZoningInfo();          // reset pet zoning info (when changing job ect)
-    uint8             m_SetBlueSpells[20];           // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
+    questlog_t        m_questLog[MAX_QUESTAREA];       // список всех квестов
+    missionlog_t      m_missionLog[MAX_MISSIONAREA];   // список миссий
+    eminencelog_t     m_eminenceLog;                   // Record of Eminence log
+    eminencecache_t   m_eminenceCache;                 // Caching data for Eminence lookups
+    assaultlog_t      m_assaultLog;                    // список assault миссий
+    campaignlog_t     m_campaignLog;                   // список campaign миссий
+    uint32            m_lastBcnmTimePrompt;            // the last message prompt in seconds
+    PetInfo_t         petZoningInfo;                   // used to repawn dragoons pets ect on zone
+    void              setPetZoningInfo();              // set pet zoning info (when zoning and logging out)
+    void              resetPetZoningInfo();            // reset pet zoning info (when changing job ect)
+    bool              shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
+    uint8             m_SetBlueSpells[20];             // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
     uint32            m_FieldChocobo;
 
     UnlockedAttachments_t m_unlockedAttachments; // Unlocked Automaton Attachments (1 bit per attachment)
