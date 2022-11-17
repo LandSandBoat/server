@@ -1,0 +1,31 @@
+-----------------------------------
+-- Area: Escha - Ru'Aun
+--  NPC: Eschan Portal #1
+-----------------------------------
+require("scripts/zones/Escha_RuAun/IDs")
+require("scripts/globals/npc_util")
+require("scripts/globals/items")
+require("scripts/globals/utils")
+-----------------------------------
+local entity = {}
+local siltCost = 50
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    -- (Event ID, ???, portal array, zoneID, currentPortalIndex, ???, playersSilt, siltCost, ???)
+    -- The portal array seems to effect what portals are displayed -1 shows all, anything else i couldnt get anything to pop.
+    -- The silt cost by default is 50 silt per port, it can be reduced somehow but im not sure how, perhaps a KI
+    -- currentPortalIndex 0-7 are used in Escha-Zi'Tah, 8 = portal 1 in escha-ru'aun 9 = portal 2 etc.
+    player:startEvent(9100, 0, -1, 289 , 8, 0, player:getCurrency("escha_silt") , siltCost, 0)
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    player:delCurrency("escha_silt", siltCost)
+end
+
+return entity
