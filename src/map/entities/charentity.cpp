@@ -437,11 +437,11 @@ void CCharEntity::setPetZoningInfo()
         case PET_TYPE::AVATAR:
         case PET_TYPE::AUTOMATON:
         case PET_TYPE::WYVERN:
-            petZoningInfo.petLevel     = PPetEntity->getSpawnLevel();
-            petZoningInfo.petHP        = PPet->health.hp;
-            petZoningInfo.petTP        = PPet->health.tp;
-            petZoningInfo.petMP        = PPet->health.mp;
-            petZoningInfo.petType      = PPetEntity->getPetType();
+            petZoningInfo.petLevel = PPetEntity->getSpawnLevel();
+            petZoningInfo.petHP    = PPet->health.hp;
+            petZoningInfo.petTP    = PPet->health.tp;
+            petZoningInfo.petMP    = PPet->health.mp;
+            petZoningInfo.petType  = PPetEntity->getPetType();
             break;
         default:
             break;

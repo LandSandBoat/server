@@ -6061,15 +6061,15 @@ namespace charutils
     {
         switch (PChar->profile.nation)
         {
-        case 0:
-            return "sandoria_cp";
-        case 1:
-            return "bastok_cp";
-        case 2:
-            return "windurst_cp";
-        default:
-            XI_DEBUG_BREAK_IF(true);
-            return nullptr;
+            case 0:
+                return "sandoria_cp";
+            case 1:
+                return "bastok_cp";
+            case 2:
+                return "windurst_cp";
+            default:
+                XI_DEBUG_BREAK_IF(true);
+                return nullptr;
         }
     }
 
