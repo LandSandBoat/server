@@ -10341,7 +10341,7 @@ INSERT INTO `mob_groups` VALUES (70,0,146,'Naji',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (1,2965,147,'Old_Quadav',330,0,1850,0,0,22,26,0);
 INSERT INTO `mob_groups` VALUES (2,791,147,'Copper_Quadav',330,0,513,0,0,22,27,0);
-INSERT INTO `mob_groups` VALUES (3,2373,147,'Land_Pugil',960,0,975,0,0,20,23,0);
+INSERT INTO `mob_groups` VALUES (3,20013,147,'Land_Pugil',960,0,975,0,0,20,23,0);
 INSERT INTO `mob_groups` VALUES (4,525,147,'Brass_Quadav',330,0,353,0,0,22,28,0);
 INSERT INTO `mob_groups` VALUES (5,427,147,'BiGho_Headtaker',0,32,2851,1100,0,25,25,0);
 INSERT INTO `mob_groups` VALUES (6,2987,147,'Ooze',330,0,1867,0,0,28,30,0);
