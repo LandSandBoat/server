@@ -7,6 +7,7 @@
 UPDATE item_basic
 SET aH = "0"
 WHERE
+    name = "aqreaqa_bomblet" or
     name = "hexed_haubert" or
     name = "hexed_domaru" or
     name = "hexed_jacket" or
