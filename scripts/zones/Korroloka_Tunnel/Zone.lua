@@ -13,6 +13,11 @@ zoneObject.onInitialize = function(zone)
     zone:registerRegion(2, -101, 7, -114, 0, 0, 0) -- Center Pool
     zone:registerRegion(3, -112, 3, -103, 0, 0, 0) -- Right Pool
 
+    --NM Persistence
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.THOON)
+    end
+
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
