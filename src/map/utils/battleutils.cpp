@@ -1598,7 +1598,6 @@ namespace battleutils
         // get ratio (not capped for RAs)
         float ratio = (float)rAttack / ((float)PDefender->DEF() - ignoredDef);
 
-        ratio        = std::clamp<float>(ratio, 0, 3);
         float cRatio = ratio;
 
         // level correct (0.025 not 0.05 like for melee)
@@ -1606,12 +1605,11 @@ namespace battleutils
         {
             cRatio = cRatio - (PDefender->GetMLevel() - PAttacker->GetMLevel()) * 0.025f;
         }
-
         // calculate min/max PDIF
         float minPdif = 0.0f;
         float maxPdif = 3.0f;
 
-        if (ratio < 0.9f)
+        if (cRatio < 0.9f)
         {
             minPdif = cRatio;
             maxPdif = (10.0f / 9.0f) * cRatio;
@@ -1621,7 +1619,7 @@ namespace battleutils
                 maxPdif = std::clamp<float>((10.0f / 8.0f) * cRatio, 0, 1);
             }
         }
-        else if (ratio <= 1.1f)
+        else if (cRatio <= 1.1f)
         {
             minPdif = 1.0f;
             maxPdif = 1.0f;
