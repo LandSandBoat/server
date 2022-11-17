@@ -7149,7 +7149,6 @@ INSERT INTO `mob_pools` VALUES (20012,'Land_Worm_KT','Land_Worm_KT',258,0x0000A8
 -- Beadeaux Pugil
 INSERT INTO `mob_pools` VALUES (20013,'Land_Pugil_BE','Land_Pugil_BE',197,0x00005C0100000000000000000000000000000000,1,1,7,240,100,0,1,0,0,0,0,0,291,131,0,0,0,0,0,197,197);
 
-
 -- End of Ambuscade section
 -- ------------------------------------------------------------
 
