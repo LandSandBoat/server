@@ -54,6 +54,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         ROSEL_GREETINGS                = 7783,  -- Greetings!
         FFR_ROSEL                      = 7802,  -- Hrmm... Now, this is interesting! It pays to keep an eye on the competition. Thanks for letting me know!
         EXOROCHE_PLEASE_TELL           = 7821,  -- Please tell my son that I'll join him as soon as I'm done, so he's to stay right there.
+        RAIMBROY_DIALOG                = 7841,  -- Greetings, and welcome to Raimbroy's Grocery. If you'd like to make a purchase, talk to someone at the counter upstairs.
         LUSIANE_SHOP_DIALOG            = 7976,  -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7977,  -- Welcome, customer. Please have a look.
         ASH_THADI_ENE_SHOP_DIALOG      = 7998,  -- Welcome to Helbort's Blades!
