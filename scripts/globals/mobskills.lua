@@ -62,40 +62,40 @@ xi.mobskills.magicalTpBonus =
     DMG_BONUS   = 3,
     RANGED      = 4,
 }
+-- Temp Fix
+-- local function getDexCritRate(source, target)
+--     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
+--     local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+--     local dDexAbs = math.abs(dDex)
 
-local function getDexCritRate(source, target)
-    -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
-    local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
-    local dDexAbs = math.abs(dDex)
+--     local sign = 1
+--     if dDex < 0 then
+--         -- target has higher AGI so this will be a decrease to crit rate
+--         sign = -1
+--     end
 
-    local sign = 1
-    if dDex < 0 then
-        -- target has higher AGI so this will be a decrease to crit rate
-        sign = -1
-    end
+--     -- default to +0 crit rate for a delta of 0-6
+--     local critRate = 0
+--     if dDexAbs > 39 then
+--         -- 40-50: (dDEX-35)
+--         critRate = dDexAbs - 35
+--     elseif dDexAbs > 29 then
+--         -- 30-39: +4
+--         critRate = 4
+--     elseif dDexAbs > 19 then
+--         -- 20-29: +3
+--         critRate = 3
+--     elseif dDexAbs > 13 then
+--         -- 14-19: +2
+--         critRate = 2
+--     elseif dDexAbs > 6 then
+--         -- 7-13: +1
+--         critRate = 1
+--     end
 
-    -- default to +0 crit rate for a delta of 0-6
-    local critRate = 0
-    if dDexAbs > 39 then
-        -- 40-50: (dDEX-35)
-        critRate = dDexAbs - 35
-    elseif dDexAbs > 29 then
-        -- 30-39: +4
-        critRate = 4
-    elseif dDexAbs > 19 then
-        -- 20-29: +3
-        critRate = 3
-    elseif dDexAbs > 13 then
-        -- 14-19: +2
-        critRate = 2
-    elseif dDexAbs > 6 then
-        -- 7-13: +1
-        critRate = 1
-    end
-
-    -- Crit rate from stats caps at +-15
-    return math.min(critRate, 15) * sign
-end
+--     -- Crit rate from stats caps at +-15
+--     return math.min(critRate, 15) * sign
+-- end
 
 local function calculateMobMagicBurst(caster, ele, target)
     local burst = 1.0
