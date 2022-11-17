@@ -91,7 +91,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.KIRIN_CAPTIVATOR)
     player:showText(mob, ID.text.KIRIN_OFFSET + 1)
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
