@@ -512,16 +512,17 @@ local function tradeFish(player, fishId)
     local found   = false
     local sum     = 0
 
-    -- NOTE: We confirm the trade now, and not at the end of the cutscene as normal
-    --     : because the cutscene gives away whether or not the trade was successful
-    --     : or not, and it's possible for players to cheese this trade by force-dc-ing.
-    player:confirmTrade()
-
     for i = 1, #rewards do
         sum = sum + rewards[i].chance
         if roll <= sum then
             found = true
             player:setCharVar("insideBellyItemIdx", i)
+
+            -- NOTE: We confirm the trade now, and not at the end of the cutscene as normal
+            --     : because the cutscene gives away whether or not the trade was successful
+            --     : or not, and it's possible for players to cheese this trade by force-dc-ing.
+            player:confirmTrade()
+
             player:startEvent(166, 0, rewards[i].itemId)
             break
         end
