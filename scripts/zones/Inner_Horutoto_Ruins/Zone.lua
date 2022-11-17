@@ -14,6 +14,9 @@ zoneObject.onInitialize = function(zone)
     zone:registerRegion(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
     zone:registerRegion(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
 
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.MALTHA)
+
     xi.treasure.initZone(zone)
 end
 

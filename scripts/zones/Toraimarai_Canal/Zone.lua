@@ -8,6 +8,9 @@ require('scripts/globals/treasure')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ONI_CARCASS)
+
     xi.treasure.initZone(zone)
 end
 
