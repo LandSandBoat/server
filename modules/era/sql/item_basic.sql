@@ -810,7 +810,6 @@ REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `
     (4497, 0, 'heart_chocolate', 'heart_chocolate', 12, 1548, 57, 0, 465),
     (4514, 0, 'quus', 'quus', 12, 1548, 51, 0, 19),
     (4520, 0, 'coin_cookie', 'coin_cookie', 99, 1548, 57, 0, 14),
-    (4539, 0, 'goblin_pie', 'goblin_pie', 12, 1548, 53, 0, 648),
     (4543, 0, 'goblin_mushpot', 'goblin_mushpot', 1, 1580, 54, 0, 490),
     (4545, 0, 'bunch_of_gysahl_greens', 'gysahl_greens', 12, 1548, 48, 0, 17),
     (4590, 0, 'salmon_rice_ball', 'salmon_rice_ball', 12, 1548, 56, 0, 106),
