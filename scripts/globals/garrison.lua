@@ -24,6 +24,8 @@ xi.garrison.state =
     ENDED               = 6,
 }
 
+xi.garrison.tickIntervalMs = 1000
+
 -----------------------------------
 -- Helpers: Logging / Messaging
 -----------------------------------
@@ -255,6 +257,25 @@ end
 -- Main Functions
 -----------------------------------
 
+-- Watchdock tick that guarantees our main tick is always running, and if not,
+-- stops garrison and clears the invalid state
+xi.garrison.watchdog = nil -- prototype
+xi.garrison.watchdog = function(npc)
+    npc:timer(5000, function(npcArg)
+        local zoneData = xi.garrison.zoneData[npcArg:getZoneID()]
+        if zoneData.isRunning and os.time() - zoneData.lastTick > 2 * xi.garrison.tickIntervalMs / 1000 then
+            local zone = npcArg:getZone()
+            debugLogf("[error] Invalid garrison state detected for zone: %s. Stopping it now.", zone:getName())
+            xi.garrison.stop(zone)
+        end
+
+        if zoneData.isRunning then
+            xi.garrison.watchdog(npcArg)
+        end
+    end)
+end
+
+-- Main tick that will run the state machine for garrison logic
 xi.garrison.tick = nil -- Prototype
 xi.garrison.tick = function(npc)
     local zone         = npc:getZone()
@@ -408,8 +429,12 @@ xi.garrison.tick = function(npc)
         end,
     }
 
+    -- Updates last tick so watchdog knows we are ok
+    zoneData.lastTick = os.time()
+
+    -- Keep running tick until done
     if zoneData.isRunning then
-        npc:timer(1000, function(npcArg)
+        npc:timer(xi.garrison.tickIntervalMs, function(npcArg)
             xi.garrison.tick(npcArg)
         end)
     end
@@ -433,6 +458,7 @@ xi.garrison.start = function(player, npc)
     zoneData.deadNPCCount      = 0
     zoneData.deadMobCount      = 0
     zoneData.despawnedMobCount = 0
+    zoneData.lastTick          = os.time()
 
     -- Adds level cap / registers lockout for all players
     -- We register lockout at the beginning and end, in case players DC
@@ -446,6 +472,9 @@ xi.garrison.start = function(player, npc)
     end
 
     -- The starting NPC is the 'anchor' for all timers and logic for this Garrison
+    -- Kick off the watchdog to guarantee state consistency
+    xi.garrison.watchdog(npc)
+    -- Kick off the main tick that drives garrison logic
     xi.garrison.tick(npc)
 end
 
