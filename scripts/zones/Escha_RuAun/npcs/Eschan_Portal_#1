@@ -9,16 +9,27 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 local siltCost = 50
+local unlock
+local droplets
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- (Event ID, ???, portal array, zoneID, currentPortalIndex, ???, playersSilt, siltCost, ???)
-    -- The portal array seems to effect what portals are displayed -1 shows all, anything else i couldnt get anything to pop.
-    -- The silt cost by default is 50 silt per port, it can be reduced somehow but im not sure how, perhaps a KI
-    -- currentPortalIndex 0-7 are used in Escha-Zi'Tah, 8 = portal 1 in escha-ru'aun 9 = portal 2 etc.
-    player:startEvent(9100, 0, -1, 289 , 8, 0, player:getCurrency("escha_silt") , siltCost, 0)
+    if (player:getCharVar("EschaRuAunPortalUnlock") == nil) then
+        unlock = 319
+    else
+        unlock = player:getCharVar("EschaRuAunPortalUnlock")
+    end
+
+    if (player:hasItem(9148)) then
+        droplets = 3
+    else
+        droplets = 0
+    end
+
+--                    (Event ID, ???, unlock, zoneID, currentportalid, hasdroplets, playersSilt,                  siltCost, ???) 
+        player:startEvent(9100,   0,  unlock, 289,      8,             droplets, player:getCurrency("escha_silt") , siltCost, 1)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -28,6 +39,17 @@ entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         player:delCurrency("escha_silt", siltCost)
     end
+
+    if option == 3 then
+        -- option 3 deals with the escha portals unlocks so put something here to deal with that
+        player:delItem(9148, 1)
+        if (player:getCharVar("EschaRuAunPortalUnlock") == -1) then
+
+        elseif (player:getCharVar("EschaRuAunPortalUnlock") < 831) then
+            player:setCharVar("EschaRuAunPortalUnlock", 831)
+        end
+    end
 end
 
 return entity
+    
