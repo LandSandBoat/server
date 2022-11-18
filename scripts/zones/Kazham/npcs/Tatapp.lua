@@ -130,7 +130,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(248) -- happy with blackened toad
         end
     else
-        player:startEvent(203)
+        -- No event text only
     end
 end
 

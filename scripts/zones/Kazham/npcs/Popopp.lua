@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(246) -- happy with wandering bulb
         end
     else
-        player:startEvent(201)
+        -- No event text only
     end
 end
 
