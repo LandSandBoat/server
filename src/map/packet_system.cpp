@@ -329,6 +329,12 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->m_charHistory.mhEntrances++;
             gardenutils::UpdateGardening(PChar, false);
         }
+
+        // Restore speed saved by !speed command (if set and gm char)
+        auto savedSpeed = PChar->getCharVar("speed");
+        if (savedSpeed > 0 && PChar->m_GMlevel > 0) {
+            PChar->speed = std::clamp<uint8>(savedSpeed, 0, 255);
+        }
     }
 
     // Only release client from "Downloading Data" if the packet sequence came in without a drop on 0x00D

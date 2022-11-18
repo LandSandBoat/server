@@ -5167,6 +5167,7 @@ void CLuaBaseEntity::setSpeed(uint8 speedVal)
         if (m_PBaseEntity->objtype == TYPE_PC)
         {
             auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+            PChar->setCharVar("speed", speed);
             PChar->pushPacket(new CCharUpdatePacket(PChar));
         }
         else
