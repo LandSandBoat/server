@@ -369,7 +369,7 @@ entity.onMobFight = function(mob, target)
             petCount <= 5 and
             mob:getBattleTime() % 15 < 3 and
             mob:getBattleTime() > 3 and
-            mot caretaker:isSpawned() and
+            not caretaker:isSpawned() and
             canDetectorSummonSC(mob)
         then
             if spawnSteamCleaner(mob) then

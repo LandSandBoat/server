@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STUNRES, 35)
     mob:setMod(xi.mod.BINDRES, 35)
     mob:setMod(xi.mod.GRAVITYRES, 35)
-    mob:setMod(xi.mob.REGEN, 50)
+    mob:setMod(xi.mod.REGEN, 50)
     mob:setDamage(150)
     mob:setLocalVar("numAdds", 1)
     mob:setAutoAttackEnabled(true)
@@ -66,8 +66,8 @@ entity.onMobFight = function(mob, target)
                     if mobArg:getTarget() ~= nil then
                         god:updateEnmity(target)
                     end
-                    mob:setLocalVar("add"..g, 1)
-                    mob:setLocalVar("numAdds", numAdds + 1)
+                    mobArg:setLocalVar("add"..g, 1)
+                    mobArg:setLocalVar("numAdds", numAdds + 1)
                     mobArg:setLocalVar("summoning", 0)
                     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
                     mobArg:setAutoAttackEnabled(true)
@@ -92,8 +92,8 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle( xi.title.KIRIN_CAPTIVATOR )
-    mob:messageText(mob, ID.text.KIRIN_OFFSET + 1)
+    player:addTitle(xi.title.KIRIN_CAPTIVATOR)
+    player:showText(mob, ID.text.KIRIN_OFFSET + 1)
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         GetMobByID(i):setHP(0)
     end

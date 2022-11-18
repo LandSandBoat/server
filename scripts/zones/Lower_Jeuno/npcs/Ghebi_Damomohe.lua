@@ -25,6 +25,12 @@ entity.onTrade = function(player, npc, trade)
     then
         player:startEvent(10047, 1782)
         player:confirmTrade()
+
+    elseif
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and
+        npcUtil.tradeHas(trade, xi.items.TENSHODO_INVITE)
+    then
+        player:startEvent(108)
     end
 end
 
@@ -53,6 +59,11 @@ entity.onEventFinish = function(player, csid, option)
         }
 
         xi.shop.general(player, stock, xi.quest.fame_area.NORG)
+
+    elseif csid == 108 then
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
+        npcUtil.giveKeyItem(player, xi.ki.TENSHODO_MEMBERS_CARD)
+        player:setTitle(xi.title.TENSHODO_MEMBER)
 
     elseif csid == 10047 then
         player:setCharVar("[ENM]AstralCovenant", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
