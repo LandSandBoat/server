@@ -12045,7 +12045,6 @@ uint8 CLuaBaseEntity::getShieldAbsorptionRate()
  *  Function: getWeaponDmg()
  *  Purpose : Returns the real damage value of a Weapon in the Main slot
  *  Example : local weaponDamage = attacker:getWeaponDmg()
- *  Notes   : Also used in Mob damage calculations
  ************************************************************************/
 
 uint16 CLuaBaseEntity::getWeaponDmg()
@@ -12053,6 +12052,22 @@ uint16 CLuaBaseEntity::getWeaponDmg()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     return static_cast<CBattleEntity*>(m_PBaseEntity)->GetMainWeaponDmg();
+}
+
+/************************************************************************
+ *  Function: getMobWeaponDmg()
+ *  Purpose : Returns the real damage value of a Weapon in the Main slot for mobs
+ *  Example : local weaponDamage = attacker:getMobWeaponDmg()
+ *  Notes   : Also used in Mob damage calculations
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getMobWeaponDmg(uint8 slot)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    return mobutils::GetWeaponDamage(PMob, (SLOTTYPE)slot);
 }
 
 /************************************************************************
@@ -15979,6 +15994,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCRangedHitRate", CLuaBaseEntity::getCRangedHitRate);
     SOL_REGISTER("getShieldAbsorptionRate", CLuaBaseEntity::getShieldAbsorptionRate);
     SOL_REGISTER("getWeaponDmg", CLuaBaseEntity::getWeaponDmg);
+    SOL_REGISTER("getMobWeaponDmg", CLuaBaseEntity::getMobWeaponDmg);
     SOL_REGISTER("getWeaponDmgRank", CLuaBaseEntity::getWeaponDmgRank);
     SOL_REGISTER("getOffhandDmg", CLuaBaseEntity::getOffhandDmg);
     SOL_REGISTER("getOffhandDmgRank", CLuaBaseEntity::getOffhandDmgRank);

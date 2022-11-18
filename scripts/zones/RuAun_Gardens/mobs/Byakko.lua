@@ -11,16 +11,15 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.SILENCERES, 90)
-    mob:addMod(xi.mod.ATT, 40)
-    mob:addMod(xi.mod.DEF, 60)
-    mob:addMod(xi.mod.VIT, 40)
+    mob:addMod(xi.mod.ATT, 42)
+    mob:addMod(xi.mod.DEF, 25)
+    mob:addMod(xi.mod.VIT, 43)
     mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
-    mob:setDamage(145)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
 end
 
-entity.onMobSpawn = function(mob ,target)
+entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_BYAKKO):setAnimation(xi.anim.CLOSE_DOOR)
     mob:SetMagicCastingEnabled(false)
 end
