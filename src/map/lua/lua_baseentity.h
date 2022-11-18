@@ -672,6 +672,7 @@ public:
     uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity, int8 accBonus = 0);                                                            // Returns the ranged hit rate for an attack.
     uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
     uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
+    uint16 getMobWeaponDmg(uint8 slot = 0);                                                                                                 // gets the Mob's current equipped weapons' DMG rating
     uint16 getWeaponDmgRank();                                                                                                              // gets the current equipped weapons' DMG rating for Rank calc
     uint16 getOffhandDmg();                                                                                                                 // gets the current equipped offhand's DMG rating (used in WS calcs)
     uint16 getOffhandDmgRank();                                                                                                             // gets the current equipped offhand's DMG rating for Rank calc

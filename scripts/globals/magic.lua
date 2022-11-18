@@ -605,7 +605,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         effectRes = effectRes + xi.magic.getEffectResistance(target, effect, false, caster)
     end
 
-    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, skillchainCount)
+    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount)
 
     return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount)
 end
@@ -797,6 +797,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     end
 
     if element ~= xi.magic.ele.NONE then
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])

@@ -18977,14 +18977,14 @@ INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,722,@UNCOMMON);  -- Divine Log 
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,1311,@UNCOMMON); -- Piece Of Oxblood (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,1313,@UNCOMMON); -- Lock Of Sirens Hair (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,655,@RARE);      -- Adaman Ingot (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,658,@RARE);      -- Damascus Ingot (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,836,@RARE);      -- Square Of Damascene Cloth (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,837,@RARE);      -- Spool Of Malboro Fiber (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,903,@RARE);      -- Dragon Talon (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,1110,@RARE);     -- Vial Of Black Beetle Blood (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,1133,@RARE);     -- Vial Of Dragon Blood (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,4272,@RARE);     -- Slice Of Dragon Meat (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,4486,@RARE);     -- Dragon Heart (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,836,@VRARE);     -- Square Of Damascene Cloth (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,658,@VRARE);     -- Damascus Ingot (Very Rare, 1%)
 
 -- ZoneID: 149 - Tigerbane Bakdak
 INSERT INTO `mob_droplist` VALUES (2417,1,1,1000,16673,760);      -- Warriors Axe (Group 1, 76%)

@@ -104,6 +104,7 @@ INSERT INTO `mob_pool_mods` VALUES (559,302,40,30); -- TATT
 INSERT INTO `mob_pool_mods` VALUES (592,3,100,1);  -- MP_BASE: 100
 INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);  -- EVA: 15
 INSERT INTO `mob_pool_mods` VALUES (592,302,45,0); -- TRIPLE_ATTACK: 45
+INSERT INTO `mob_pool_mods` VALUES (592,59,157,1); -- WEAPON_BONUS: 157
 
 -- Cargo Crab Colin
 INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
@@ -185,6 +186,7 @@ INSERT INTO `mob_pool_mods` VALUES (1461,4,4,1); -- SIGHT_RANGE: 4
 
 -- Genbu
 INSERT INTO `mob_pool_mods` VALUES (1491,3,100,1); -- MP_BASE: 100
+INSERT INTO `mob_pool_mods` VALUES (1491,59,130,1); -- WEAPON_BONUS: 130
 
 -- Goblin Digger Near
 INSERT INTO `mob_pool_mods` VALUES (1648,17,1,1);  -- NO_DESPAWN: 1
@@ -251,6 +253,7 @@ INSERT INTO `mob_pool_mods` VALUES (2262,370,125,0); -- REGEN: 125
 -- Kirin
 INSERT INTO `mob_pool_mods` VALUES (2265,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (2265,370,50,0);  -- REGEN: 50
+INSERT INTO `mob_pool_mods` VALUES (2265,59,150,1); -- WEAPON_BONUS: 150
 
 -- Knight Crab
 INSERT INTO `mob_pool_mods` VALUES (2271,64,15,0);  -- COMBAT_SKILLUP_RATE: 15
@@ -384,6 +387,7 @@ INSERT INTO `mob_pool_mods` VALUES (3426,105,1,1); -- ATTRACT_FAMILY_NM: 1
 
 -- Seiryu
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
+INSERT INTO `mob_pool_mods` VALUES (3540,59,157,1); -- WEAPON_BONUS: 157
 
 -- Serket
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0); -- REGEN: 50
@@ -421,6 +425,7 @@ INSERT INTO `mob_pool_mods` VALUES (3796,21,97,1); -- PET_SPELL_LIST: 97
 
 -- Suzaku
 INSERT INTO `mob_pool_mods` VALUES (3816,3,100,1); -- MP_BASE: 100
+INSERT INTO `mob_pool_mods` VALUES (3816,59,157,1); -- WEAPON_BONUS: 157
 
 -- Swashstox Beadblinker
 INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
