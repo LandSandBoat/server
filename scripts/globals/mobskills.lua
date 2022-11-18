@@ -147,7 +147,7 @@ end
 -- if xi.mobskills.physicalTpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
 -- if xi.mobskills.physicalTpBonus.DMG_VARIES -> three values are
 
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod, wSC)
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod, wSC, attackType)
     local returninfo = { }
     local fStr = 0
 
@@ -156,14 +156,19 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     end
 
     --get dstr (bias to monsters, so no fSTR)
-    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED or attackType == xi.attackType.RANGED then
         fStr = xi.weaponskills.fSTR2(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     else
         fStr = xi.weaponskills.fSTR(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     end
 
-    --apply WSC
-    local base = mob:getWeaponDmg() + fStr + wSC
+    --apply wSC
+    local base = 0
+    if attackType == xi.attackType.RANGED then
+        base = mob:getMobWeaponDmg(xi.slot.RANGED) + fStr + wSC
+    else
+        base = mob:getMobWeaponDmg(xi.slot.MAIN) + fStr + wSC
+    end
     if base < 1 then
         base = 1
     end

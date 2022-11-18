@@ -11,16 +11,15 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.SILENCERES, 90)
-    mob:addMod(xi.mod.ATT, 150)
-    mob:addMod(xi.mod.DEF, 140)
-    mob:addMod(xi.mod.EVA, 100)
-    mob:addMod(xi.mod.VIT, 90)
-    mob:setDamage(145)
+    mob:addMod(xi.mod.ATT, 155)
+    mob:addMod(xi.mod.DEF, 94)
+    mob:addMod(xi.mod.EVA, 104)
+    mob:addMod(xi.mod.VIT, 77)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
 end
 
-entity.onMobSpawn = function(mob ,target)
+entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_SUZAKU):setAnimation(xi.anim.CLOSE_DOOR)
     mob:SetMagicCastingEnabled(false)
 end

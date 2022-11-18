@@ -86,9 +86,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16806216,26,32,1); -- SUPERLINK: 32
 -- Xolotl'S Sacrifice
 INSERT INTO `mob_spawn_mods` VALUES (16806217,26,32,1); -- SUPERLINK: 32
 
--- Tiamat
-INSERT INTO `mob_spawn_mods` VALUES (16806227,12,8,1); -- DRAW_IN: 8
-
 -- Feeler Antlion
 INSERT INTO `mob_spawn_mods` VALUES (16806242,55,120,1); -- IDLE_DESPAWN: 120
 
