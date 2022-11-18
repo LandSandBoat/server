@@ -54,9 +54,6 @@ function onTrigger(player, target)
         xi.effect.CHARM_II,
         xi.effect.POISON,
         xi.effect.PETRIFICATION,
-        xi.effect.DOOM,
-        xi.effect.CURSE_I,
-        xi.effect.CURSE_II,
     }
 
     for _, v in pairs(effects) do
