@@ -40,7 +40,10 @@ entity.onMagicHit = function(caster, target, spell)
 
     if GetServerVariable("AV_Regen_Reduction") < 60 then
         -- Had to serverVar the regen instead of localVar because localVar reset on claim loss.
-        if spellElement == xi.magic.dayElement[dayOfWeek] and (caster:isPC() or caster:isPet()) then
+        if
+            spellElement == xi.magic.dayElement[dayOfWeek] and
+            (caster:isPC() or caster:isPet())
+        then
             SetServerVariable("AV_Regen_Reduction", 1 + GetServerVariable("AV_Regen_Reduction"))
             target:addMod(xi.mod.REGEN, -2)
         end

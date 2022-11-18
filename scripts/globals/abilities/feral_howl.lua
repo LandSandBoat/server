@@ -19,8 +19,12 @@ abilityObject.onUseAbility = function(player, target, ability)
     local feralHowlMod = player:getMod(xi.mod.FERAL_HOWL_DURATION)
     local duration = 10
 
-    if target:hasStatusEffect(xi.effect.TERROR) or target:hasStatusEffect(xi.effect.STUN) then -- effect already on, or target stunned, do nothing
-    -- reserved for miss based on target already having stun or terror effect active
+    if
+        target:hasStatusEffect(xi.effect.TERROR) or
+        target:hasStatusEffect(xi.effect.STUN)
+    then
+        -- effect already on, or target stunned, do nothing
+        -- reserved for miss based on target already having stun or terror effect active
     else
         -- Calculate duration.
         if feralHowlMod >= 1 then

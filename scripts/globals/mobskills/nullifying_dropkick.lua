@@ -1,6 +1,5 @@
 -----------------------------------
 --  Nullifying Dropkick
---
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/settings")
@@ -10,9 +9,13 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) then
+    if
+        target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or
+        target:hasStatusEffect(xi.effect.MAGIC_SHIELD)
+    then
         return 0
     end
+
     return 1
 end
 

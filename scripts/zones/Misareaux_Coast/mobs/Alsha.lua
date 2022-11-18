@@ -19,8 +19,8 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("FinalPhase", 1)
         -- TODO: Uncomment these lines
         -- Fix code below so that Alsha will cast Fire II on herself.  Currently not possible without core changes.
-        --mob:SetAutoAttackEnabled(false)
-        --mob:SetMagicCastingEnabled(false)
+        --mob:setAutoAttackEnabled(false)
+        --mob:setMagicCastingEnabled(false)
     end
 --[[
     -- Queue up a Fire II on herself if FinalPhase is active
@@ -34,7 +34,10 @@ entity.onMobFight = function(mob, target)
     end
 ]]
     -- Occasionally cast Cure III on the target (never on herself)
-    if mob:getLocalVar("FinalPhase") ~= 1 and mob:getLocalVar("CureTime") <= os.time() then
+    if
+        mob:getLocalVar("FinalPhase") ~= 1 and
+        mob:getLocalVar("CureTime") <= os.time()
+    then
         mob:setLocalVar("CureTime", os.time() + math.random(60, 180))
         target:messageSpecial(ID.text.DROP_OF_OIL)
         mob:timer(1000, function(m)

@@ -9,9 +9,13 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if target:getMaxHP() == target:getHP() and target:getMaxMP() == target:getMP() then
+    if
+        target:getMaxHP() == target:getHP() and
+        target:getMaxMP() == target:getMP()
+    then
         return xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return 0
 end
 

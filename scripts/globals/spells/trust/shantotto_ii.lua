@@ -37,7 +37,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ACC, 1000)
 
     -- Shantotto II attack type is suposed to be "typeless physical, like requiescat WS."
-    mob:SetMobSkillAttack(1163)
+    mob:setMobSkillAttack(1163)
 
     -- TODO: Her regular attacks have a big range (distance from mob, not AoE)
 

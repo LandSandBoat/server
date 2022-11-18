@@ -74,9 +74,13 @@ end
 -- packs trial id and trial progress
 local function setTrial(player, slot, trialId, progress)
     local activeTrials = getPlayerTrials(player)
-    if trialId == activeTrials[slot].trial and progress == activeTrials[slot].progress then
+    if
+        trialId == activeTrials[slot].trial and
+        progress == activeTrials[slot].progress
+    then
         return
     end
+
     local trialSQL = GetMagianTrial(trialId)
     local objectiveTotal = trialSQL.objectiveTotal or 0
     activeTrials[slot].trial = trialId

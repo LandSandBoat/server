@@ -9,7 +9,7 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0)
+    mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
@@ -53,7 +53,7 @@ entity.onMobFight = function(mob, target)
         if mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(731)
+            mob:setMobSkillAttack(731)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- land
         elseif mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > 120 then
@@ -63,7 +63,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 120 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(731)
+            mob:setMobSkillAttack(731)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     end

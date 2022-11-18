@@ -16,7 +16,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local grimySignpost = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
-    if grimySignpost == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 then
+    if
+        grimySignpost == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2
+    then
         player:startEvent(45)
     elseif grimySignpost == QUEST_ACCEPTED then
         if player:getCharVar("CleanSignPost") == 15 then

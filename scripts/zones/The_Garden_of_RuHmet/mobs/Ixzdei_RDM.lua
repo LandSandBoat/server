@@ -19,9 +19,9 @@ end
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
-    mob:SetMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(false)
     mob:setLocalVar("runbackChance", math.random(1, 4))
     mob:setLocalVar("healpercent", math.random(15, 25))
 end
@@ -48,7 +48,7 @@ entity.onMobEngaged = function(mob, target)
 
     -- Zdeis wait 3 seconds to cast their first spell
     mob:timer(3000, function(mobArg)
-        mobArg:SetMagicCastingEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
     end)
 end
 
@@ -82,7 +82,7 @@ entity.onMobFight = function(mob, target)
         {
             [ID.mob.IXZDEI_BASE] = function()
                 local spawnPos = zdeiOne:getSpawnPos()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z) -- go back to pedastal to heal
                 if
                     mob:checkDistance(spawnPos.x, spawnPos.y, spawnPos.z) < 2 and
@@ -100,7 +100,7 @@ entity.onMobFight = function(mob, target)
             end,
             [ID.mob.IXZDEI_BASE + 1] = function()
                 local spawnPos = zdeiTwo:getSpawnPos()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
                 if
                     mob:checkDistance(spawnPos.x, spawnPos.y, spawnPos.z) < 2 and
@@ -126,7 +126,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setHP(6500)
         mob:setTP(mob:getLocalVar("twohourTP"))
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-        mob:SetMagicCastingEnabled(true)
+        mob:setMagicCastingEnabled(true)
     end
 end
 

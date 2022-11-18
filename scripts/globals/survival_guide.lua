@@ -47,7 +47,10 @@ end
 local function teleportMenuUpdate(player, option)
     local choice = bit.band(option, 0xFF)
 
-    if choice >= optionMap.SET_MENU_LAYOUT and choice <= optionMap.TELEPORT_MENU then
+    if
+        choice >= optionMap.SET_MENU_LAYOUT and
+        choice <= optionMap.TELEPORT_MENU
+    then
         local favorites = player:getTeleportMenu(travelType)
 
         local index = bit.rshift(bit.band(option, 0xFF0000), 16)

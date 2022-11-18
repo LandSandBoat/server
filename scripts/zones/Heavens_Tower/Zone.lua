@@ -9,8 +9,8 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -1, -1, -35, 1, 1, -33)
-    zone:registerRegion(2, 6, -46, -30, 8, -44, -28)
+    zone:registerTriggerArea(1, -1, -1, -35, 1, 1, -33)
+    zone:registerTriggerArea(2, 6, -46, -30, 8, -44, -28)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,8 +31,8 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)  -- Heaven's Tower exit portal
             player:startEvent(41)
@@ -44,7 +44,7 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

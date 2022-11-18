@@ -79,7 +79,7 @@ xi.dynamis.onSpawnCirrate = function(mob)
     -- Set Mods
     mob:setSpeed(140)
     mob:addMod(xi.mod.REGAIN, 1250)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 xi.dynamis.onSpawnFairy = function(mob)

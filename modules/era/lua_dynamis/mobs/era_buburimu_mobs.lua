@@ -30,8 +30,8 @@ local function apocRemoveAdditionalEffects(mob)
         end
     end
 
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:clearActionQueue()
 end
 
@@ -124,7 +124,7 @@ end
 
 xi.dynamis.onSpawnNoAuto = function(mob)
     xi.dynamis.setNMStats(mob)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:addMod(xi.mod.REGAIN, 1250)
     mob:setRoamFlags(xi.roamFlag.NONE)
     if mob:getFamily() == 87 then
@@ -177,8 +177,8 @@ xi.dynamis.onFightApoc = function(mob, target)
         mob:getLocalVar("nextCast") <= os.time()
     then
         mob:setLocalVar("nextCast", os.time() + 4)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMobAbilityEnabled(false)
+        mob:setAutoAttackEnabled(false)
+        mob:setMobAbilityEnabled(false)
         local spell = nil
 
         if mob:getStatus() ~= xi.action.MAGIC_CASTING then

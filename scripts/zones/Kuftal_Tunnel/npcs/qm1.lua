@@ -15,7 +15,11 @@ entity.onSpawn = function(npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 645) and npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, { radius = 1 }) then -- Darksteel Ore
+    if
+        npcUtil.tradeHas(trade, 645) and
+        npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, { radius = 1 })
+    then
+        -- Darksteel Ore
         player:confirmTrade()
     end
 end

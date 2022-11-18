@@ -10,7 +10,7 @@ local entity = {}
 local function setupFlightMode(mob, battleTime, mobHP)
     mob:setAnimationSub(1) -- Change to flight.
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-    mob:SetMobSkillAttack(730)
+    mob:setMobSkillAttack(730)
     mob:setLocalVar("changeTime", battleTime)
     mob:setLocalVar("changeHP", mobHP / 1000)
 end
@@ -20,7 +20,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
@@ -38,7 +38,10 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Animation (Ground or flight mode) logic.
-    if not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and mob:actionQueueEmpty() then
+    if
+        not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
+        mob:actionQueueEmpty()
+    then
         local changeTime  = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
         local changeHP    = mob:getLocalVar("changeHP")

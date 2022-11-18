@@ -7,7 +7,7 @@ require('scripts/globals/abyssea')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -95, 20, -775, 59.5, 50, -560.1)
+    zone:registerTriggerArea(1, -95, 20, -775, 59.5, 50, -560.1)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -30,8 +30,8 @@ zoneObject.afterZoneIn = function(player)
     xi.abyssea.afterZoneIn(player)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardRegionEnter(player)
@@ -39,8 +39,8 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()
             xi.abyssea.onWardRegionLeave(player)

@@ -18,7 +18,11 @@ end
 entity.onTrigger = function(player, npc)
     local ecoStatus = player:getCharVar("EcoStatus")
 
-    if ecoStatus == 0 and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 1 and player:getCharVar("EcoReset") < os.time() then
+    if
+        ecoStatus == 0 and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 1 and
+        player:getCharVar("EcoReset") < os.time()
+    then
         player:startEvent(677) -- Offer Eco-Warrior quest
     elseif ecoStatus == 1 then
         player:startEvent(679) -- Reminder dialogue to talk to Rojaireaut

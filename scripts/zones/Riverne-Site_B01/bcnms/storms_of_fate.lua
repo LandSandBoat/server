@@ -40,7 +40,10 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('Quest[3][86]Status') == 2 then
+        if
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
+            player:getCharVar('Quest[3][86]Status') == 2
+        then
             player:addKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_THE_WYRMKING)
             player:setCharVar("Quest[3][86]Status", 3)

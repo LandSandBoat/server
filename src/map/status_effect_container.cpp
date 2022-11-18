@@ -1973,8 +1973,13 @@ void CStatusEffectContainer::TickRegen(time_point tick)
     }
 }
 
-bool CStatusEffectContainer::HasPreventActionEffect()
+bool CStatusEffectContainer::HasPreventActionEffect(bool ignoreCharm)
 {
+    if (ignoreCharm)
+    {
+        return HasStatusEffect(
+            { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
+    }
     return HasStatusEffect(
         { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_CHARM, EFFECT_CHARM_II, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
 }

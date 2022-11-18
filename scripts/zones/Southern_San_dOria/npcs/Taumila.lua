@@ -23,7 +23,10 @@ end
 entity.onTrigger = function(player, npc)
     local tigersTeeth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
 
-    if player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and tigersTeeth == QUEST_AVAILABLE then
+    if
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
+        tigersTeeth == QUEST_AVAILABLE
+    then
         player:startEvent(574)
     elseif tigersTeeth == QUEST_ACCEPTED then
         player:startEvent(575)

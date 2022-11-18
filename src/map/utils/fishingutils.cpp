@@ -1622,7 +1622,7 @@ namespace fishingutils
 
         // PMob->SetLocalVar("QuestBattleID", PChar->GetLocalVar("QuestBattleID"));
         // PChar->StatusEffectContainer->CopyConfrontationEffect(PMob);
-        if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && PMob->m_Detects & DETECT_SCENT) || !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
+        if ((mob->log < 255 && mob->quest < 255) || mob->questOnly || (PMob->m_TrueDetection && PMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT) || !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
         {
             PMob->PEnmityContainer->AddBaseEnmity(PChar);
             battleutils::ClaimMob(PMob, (CBattleEntity*)PChar);

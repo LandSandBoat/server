@@ -20,7 +20,7 @@ def preflight_exit():
 # - git should installed and available
 try:
     subprocess.call(["git"], stdout=subprocess.PIPE)
-except:  # lgtm [py/catch-base-exception]
+except Exception:
     print(
         "ERROR: Make sure git is installed and available on your system's PATH environment variable."
     )
@@ -196,7 +196,7 @@ def fetch_credentials():
     credentials = {}
     # Grab mysql credentials
     filename = from_server_path("settings/default/network.lua")
-    if from_server_path("settings/network.lua"):
+    if os.path.exists(from_server_path("settings/network.lua")):
         filename = from_server_path("settings/network.lua")
     try:
         with open(filename) as f:
@@ -215,8 +215,9 @@ def fetch_credentials():
         port = os.getenv("XI_NETWORK_SQL_PORT") or int(credentials["SQL_PORT"])
         login = os.getenv("XI_NETWORK_SQL_LOGIN") or credentials["SQL_LOGIN"]
         password = os.getenv("XI_NETWORK_SQL_PASSWORD") or credentials["SQL_PASSWORD"]
-    except:  # lgtm [py/catch-base-exception]
+    except Exception as e:
         print_red("Error fetching credentials.\nCheck settings/network.lua.")
+        print(e)
         return False
     return True
 
@@ -226,8 +227,9 @@ def fetch_versions():
     current_client = release_version = release_client = None
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
-    except:  # lgtm [py/catch-base-exception]
+    except Exception as e:
         print_red("Unable to read current version hash.")
+        print(e)
     try:
         with open(from_server_path("settings/default/login.lua")) as f:
             while True:
@@ -237,8 +239,9 @@ def fetch_versions():
                 match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
                 if match:
                     release_client = match.group(1)
-    except:  # lgtm [py/catch-base-exception]
+    except Exception as e:
         print_red("Unable to read settings/default/login.lua.")
+        print(e)
     if os.path.exists(from_server_path("settings/login.lua")):
         try:
             with open(from_server_path("settings/login.lua")) as f:
@@ -249,8 +252,9 @@ def fetch_versions():
                     match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
                     if match:
                         current_client = match.group(1)
-        except:  # lgtm [py/catch-base-exception]
+        except Exception as e:
             print_red("Unable to read settings/login.lua")
+            print(e)
     if db_ver and release_version:
         fetch_files(True)
     else:
@@ -260,21 +264,24 @@ def fetch_versions():
 def fetch_configs():
     global mysql_bin, auto_backup, auto_update_client, db_ver
     try:
-        with open(from_dbtool_path("config.yaml")) as file:
-            configs = yaml.full_load(file)
-            for config in configs:
-                for key, value in config.items():
-                    if key == "mysql_bin":
-                        if value != "":
-                            mysql_bin = value
-                    if key == "auto_backup":
-                        auto_backup = int(value)
-                    if key == "auto_update_client":
-                        auto_update_client = bool(value)
-                    if key == "db_ver":
-                        db_ver = value
-    except:  # lgtm [py/catch-base-exception]
-        write_configs()
+        if os.path.exists(from_dbtool_path("config.yaml")):
+            with open(from_dbtool_path("config.yaml")) as file:
+                configs = yaml.full_load(file)
+                for config in configs:
+                    for key, value in config.items():
+                        if key == "mysql_bin":
+                            if value != "":
+                                mysql_bin = value
+                        if key == "auto_backup":
+                            auto_backup = int(value)
+                        if key == "auto_update_client":
+                            auto_update_client = bool(value)
+                        if key == "db_ver":
+                            db_ver = value
+        else:
+            write_configs()
+    except Exception as e:
+        print(e)
 
 
 def write_configs():
@@ -294,7 +301,7 @@ def fetch_module_files():
             if not line.startswith("#") and line.strip() and not line in ["\n", "\r\n"]:
                 line = from_server_path("modules/" + line.strip())
                 if pathlib.Path(line).is_dir():
-                    for filename in pathlib.Path(line).glob("**/*.sql"):
+                    for filename in sorted(pathlib.Path(line).glob("**/*.sql")):
                         import_files.append(str(filename).replace("\\", "/"))
                 else:
                     if line.endswith(".sql"):
@@ -349,17 +356,18 @@ def fetch_files(express=False):
                     > 0
                 ):
                     express_enabled = True
-        except:  # lgtm [py/catch-base-exception]
+        except Exception as e:
             print_red("Error checking diffs.\nCheck that hash is valid in config.yaml.")
+            print(e)
     else:
         for (_, _, filenames) in os.walk(from_server_path("sql/")):
-            for filename in filenames:
+            for filename in sorted(filenames):
                 import_files.append(from_server_path("sql/" + filename))
             break
     check_protected()
     backups.clear()
     for (_, _, filenames) in os.walk(from_server_path("sql/backups/")):
-        for file in filenames:
+        for file in sorted(filenames):
             if not ".gitignore" in file:
                 backups.append(from_server_path("sql/backups/" + file))
         break
@@ -369,7 +377,7 @@ def fetch_files(express=False):
         import_files.append(
             import_files.pop(import_files.index(from_server_path("sql/triggers.sql")))
         )
-    except:  # lgtm [py/catch-base-exception]
+    except Exception:
         pass
     fetch_module_files()
 
@@ -397,9 +405,10 @@ def write_version(silent=False):
             if update_client:
                 print_green("Updated client version!")
             fetch_versions()
-        except:  # lgtm [py/catch-base-exception]
+        except Exception as e:
             fileinput.close()
             print_red("Error writing version.")
+            print(e)
 
 
 def import_file(file):
@@ -411,7 +420,7 @@ def import_file(file):
         return
     print("Importing " + file)
     query = f"SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {file}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;"
-    result = db_query(query)
+    _ = db_query(query)
 
 
 def connect():
@@ -742,7 +751,7 @@ def set_external_ip(ip_str):
     """
     print("Executing query:")
     print(query)
-    result = db_query(query)
+    _ = db_query(query)
 
 
 def set_external_ip_dialog():
@@ -934,6 +943,43 @@ def present_menu(title, contents):
 # fmt: on
 
 
+def configure_and_launch_multi_process_by_zonetype():
+    db_query(
+        f"""
+        UPDATE xidb.zone_settings SET zoneport = 54230 WHERE zonetype = 0;
+        UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zonetype = 1;
+        UPDATE xidb.zone_settings SET zoneport = 54232 WHERE zonetype = 2;
+        UPDATE xidb.zone_settings SET zoneport = 54233 WHERE zonetype = 3;
+        UPDATE xidb.zone_settings SET zoneport = 54234 WHERE zonetype = 4;
+        UPDATE xidb.zone_settings SET zoneport = 54235 WHERE zonetype = 5;
+        UPDATE xidb.zone_settings SET zoneport = 54236 WHERE zonetype = 6;
+        """
+    )
+
+    result = db_query(
+        f"""
+        SELECT DISTINCT zoneport from zone_settings ORDER BY zoneport ASC;
+        """
+    )
+
+    ports = result.stdout.split("\n")[1:-1]
+
+    executable = from_server_path(f"xi_map{exe}")
+
+    # fmt: off
+    for port in ports:
+        print(f"Launching {executable} --log log/map-server-{port}.log --ip 127.0.0.1 --port {port}")
+        subprocess.Popen(
+            [executable, "--log", f"log/map-server-{port}.log", "--ip", "127.0.0.1", "--port", port],
+            shell=True,
+            creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+            cwd=server_dir_path,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    # fmt: on
+
+
 def tasks_menu():
     present_menu(
         "Maintenance Tasks",
@@ -945,6 +991,10 @@ def tasks_menu():
             #     "Offload historical auction data to auction_house_history",
             #     offload_to_auction_house_history,
             # ],
+            "c": [
+                "Configure and launch multi-process server (by zonetype, 7 processes)",
+                configure_and_launch_multi_process_by_zonetype,
+            ],
             "q": ["Quit to main menu", NOOP],
         },
     )

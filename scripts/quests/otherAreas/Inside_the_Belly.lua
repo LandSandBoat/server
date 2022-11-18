@@ -86,6 +86,11 @@ local tradeFish = function(player, fishId)
         end
     end
 
+    -- NOTE: We confirm the trade now, and not at the end of the cutscene as normal
+    --     : because the cutscene gives away whether or not the trade was successful
+    --     : or not, and it's possible for players to cheese this trade by force-dc-ing.
+    player:confirmTrade()
+
     if item then
         return quest:progressEvent(166, 0, item)
     else
@@ -108,7 +113,6 @@ local giveReward = function(player, csid)
         player:setCharVar("insideBellyItemIdx", 0)
 
         -- Regardless of success or failure, confirm the trade, give gil, and set the char vars to 0
-        player:confirmTrade()
         npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * reward.gil)
 
         --If successful (other than gil) give the item

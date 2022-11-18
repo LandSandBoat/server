@@ -12,7 +12,11 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1547, 1) and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN then
+    if
+        trade:hasItemQty(1547, 1) and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH) == QUEST_ACCEPTED and
+        player:getMainJob() == xi.job.SMN
+    then
         player:startEvent(298, 0, 1547, 1, 20)
     end
 end
@@ -20,7 +24,13 @@ end
 entity.onTrigger = function(player, npc)
     local trialSizeEarth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 
-    if player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and trialSizeEarth == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 then -- Requires player to be Summoner at least lvl 20
+    if
+        player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN and
+        trialSizeEarth == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+    then
+        -- Requires player to be Summoner at least lvl 20
         player:startEvent(297, 0, 1547, 1, 20)     --mini tuning fork, zone, level
     elseif trialSizeEarth == QUEST_ACCEPTED then
         local earthFork = player:hasItem(1547)

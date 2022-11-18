@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    mob:SetMobAbilityEnabled(false)
+    mob:setMobAbilityEnabled(false)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

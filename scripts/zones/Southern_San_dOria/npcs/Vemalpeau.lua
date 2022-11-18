@@ -24,9 +24,15 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.MIQUES_PAINTBRUSH)
     then
         player:startEvent(5) --Under Oath - upset about the paintbrush
-    elseif player:getCharVar("UnderOathCS") == 4 and player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER) then
+    elseif
+        player:getCharVar("UnderOathCS") == 4 and
+        player:hasKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER)
+    then
         player:startEvent(3) -- Under Oath - mentions commanding officer
-    elseif player:getCharVar("UnderOathCS") == 9 and player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION) then
+    elseif
+        player:getCharVar("UnderOathCS") == 9 and
+        player:hasKeyItem(xi.ki.KNIGHTS_CONFESSION)
+    then
         player:startEvent(2) -- Under Oath - Thanks you and concludes quest
     else
         player:startEvent(1)

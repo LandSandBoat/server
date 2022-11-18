@@ -13,7 +13,10 @@ require("scripts/globals/keyitems")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") <= 2 then
+    if
+        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and
+        player:getCharVar("NavigatingtheUnfriendlySeas") <= 2
+    then
         if trade:hasItemQty(2341, 1) and trade:getItemCount() == 1 then -- Trade Hydrogauage
             player:startEvent(283)
             player:setCharVar("NavigatingtheUnfriendlySeas", 2)

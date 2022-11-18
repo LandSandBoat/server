@@ -161,9 +161,9 @@ namespace charutils
     int32 addPetAbility(CCharEntity* PChar, uint16 AbilityID);
     int32 delPetAbility(CCharEntity* PChar, uint16 AbilityID);
 
-    int32 hasTrait(CCharEntity* PChar, uint8 TraitID); // check if pchar has trait by traitid and jobid
-    int32 addTrait(CCharEntity* PChar, uint8 TraitID); // add trait by traitid and jobid
-    int32 delTrait(CCharEntity* PChar, uint8 TraitID); // delete trait by traitid and jobid
+    int32 hasTrait(CCharEntity* PChar, uint16 TraitID); // check if pchar has trait by traitid and jobid
+    int32 addTrait(CCharEntity* PChar, uint16 TraitID); // add trait by traitid and jobid
+    int32 delTrait(CCharEntity* PChar, uint16 TraitID); // delete trait by traitid and jobid
 
     int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to add weapon skill
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill

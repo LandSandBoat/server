@@ -7,7 +7,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Ergon Locus area at F-6
-    zone:registerRegion(1, -447.7, 6.6, 362.799, 0, 0, 0)
+    zone:registerTriggerArea(1, -447.7, 6.6, 362.799, 0, 0, 0)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -27,21 +27,24 @@ end
 -- Cutscene for Dances with Luopans.
 local function triggerUncannySensationMessage(player)
     if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.LUOPAN) and player:getCharVar("GEO_DWL_Luopan") == 0 then
+        if
+            player:hasKeyItem(xi.ki.LUOPAN) and
+            player:getCharVar("GEO_DWL_Luopan") == 0
+        then
             player:messageSpecial(ID.text.UNCANNY_SENSATION)
             player:setLocalVar("GEO_DWL_Locus_Area", 1)
         end
     end
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function(x) triggerUncannySensationMessage(player) end,
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 

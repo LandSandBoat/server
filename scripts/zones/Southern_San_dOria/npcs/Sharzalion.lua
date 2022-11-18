@@ -15,13 +15,19 @@ entity.onTrigger = function(player, npc)
     local peaceForTheSpirit   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
     local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
 
-    if envelopedInDarkness == QUEST_COMPLETED and peaceForTheSpirit == QUEST_AVAILABLE then
+    if
+        envelopedInDarkness == QUEST_COMPLETED and
+        peaceForTheSpirit == QUEST_AVAILABLE
+    then
         player:startEvent(69)
     elseif peaceForTheSpirit == QUEST_ACCEPTED and peaceForTheSpiritCS == 0 then
         player:startEvent(64)
     elseif peaceForTheSpirit == QUEST_ACCEPTED and peaceForTheSpiritCS == 1 then
         player:startEvent(65)
-    elseif peaceForTheSpirit == QUEST_ACCEPTED and (peaceForTheSpiritCS == 2 or peaceForTheSpiritCS == 3) then
+    elseif
+        peaceForTheSpirit == QUEST_ACCEPTED and
+        (peaceForTheSpiritCS == 2 or peaceForTheSpiritCS == 3)
+    then
         player:startEvent(66)
     else
         player:startEvent(15)

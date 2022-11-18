@@ -54,9 +54,9 @@ end
 instanceObject.onInstanceComplete = function(instance)
 end
 
-instanceObject.onRegionEnter = function(player, region, instance)
-    if region:GetRegionID() <= 11 then
-        player:startEvent(199 + region:GetRegionID())
+instanceObject.onTriggerAreaEnter = function(player, triggerArea, instance)
+    if triggerArea:GetTriggerAreaID() <= 11 then
+        player:startEvent(199 + triggerArea:GetTriggerAreaID())
     end
 end
 

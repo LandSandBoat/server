@@ -40,16 +40,27 @@ entity.onTrigger = function(player, npc)
     local excenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
-    if trustSandoria == QUEST_ACCEPTED and (trustWindurst == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED) then
+    if
+        trustSandoria == QUEST_ACCEPTED and
+        (trustWindurst == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED)
+    then
         player:startEvent(897, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 0 then
         player:startEvent(893, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
-    elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 1 and excenmilleTrustChatFlag == 0 then
+    elseif
+        trustSandoria == QUEST_ACCEPTED and
+        sandoriaFirstTrust == 1 and
+        excenmilleTrustChatFlag == 0
+    then
         player:startEvent(894)
         player:setLocalVar("ExcenmilleTrustChatFlag", 1)
     elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 2 then
         player:startEvent(895)
-    elseif trustSandoria == QUEST_COMPLETED and not player:hasSpell(902) and excenmilleTrustChatFlag == 0 then
+    elseif
+        trustSandoria == QUEST_COMPLETED and
+        not player:hasSpell(902) and
+        excenmilleTrustChatFlag == 0
+    then
         player:startEvent(896, 0, 0, 0, 0, 0, 0, 0, rank3)
         player:setLocalVar("ExcenmilleTrustChatFlag", 1)
     else

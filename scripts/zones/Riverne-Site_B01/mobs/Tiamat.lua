@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- Resetting so it doesn't respawn in flight mode
+    mob:setMobSkillAttack(0) -- Resetting so it doesn't respawn in flight mode
     mob:setAnimationSub(0) -- AnimationSub 0 is only used when it spawns until first flight
 
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
@@ -53,7 +53,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(730)
+            mob:setMobSkillAttack(730)
             mob:setLocalVar("changeTime", mob:getBattleTime()) -- Record the time and HP this phase was started
             mob:setLocalVar("changeHP", mob:getHP()/1000)
         -- AnimationSub 1 is flight, so check if she should land
@@ -65,7 +65,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 2 and (mob:getHP()/1000 <= changeHP - 10 or mob:getBattleTime() - changeTime > 120) then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(730)
+            mob:setMobSkillAttack(730)
             mob:setLocalVar("changeTime", mob:getBattleTime())
             mob:setLocalVar("changeHP", mob:getHP()/1000)
         end

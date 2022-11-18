@@ -70,6 +70,7 @@ global_objects=(
     Event
     Battlefield
     BattlefieldMission
+    BattlefieldQuest
     Limbus
 
     removeSleepEffects

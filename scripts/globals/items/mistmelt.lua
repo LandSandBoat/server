@@ -23,7 +23,7 @@ end
 itemObject.onItemUse = function(target, player)
     if target:getAnimationSub() == 1 then
         target:delStatusEffect(xi.effect.ALL_MISS)
-        target:SetMobSkillAttack(0)
+        target:setMobSkillAttack(0)
         target:setAnimationSub(2)
         target:setLocalVar("changeTime", target:getBattleTime())
     end

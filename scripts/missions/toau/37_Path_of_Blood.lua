@@ -28,9 +28,9 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [3] = function(player, region)
+                [3] = function(player, triggerArea)
                     -- Event 3131 will automatically move the player to the end point
                     player:startEvent(3131)
                     return mission:progressEvent(3220)

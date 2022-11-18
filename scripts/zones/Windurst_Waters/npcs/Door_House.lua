@@ -26,7 +26,11 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(943) -- accepts materials, now bring me 4 imperial mythril pieces
 
         -- 4 imperial mythril pieces
-        elseif letterGreen == 3 and trade:getItemCount() == 4 and trade:hasItemQty(2186, 4) then
+        elseif
+            letterGreen == 3 and
+            trade:getItemCount() == 4 and
+            trade:hasItemQty(2186, 4)
+        then
             player:startEvent(946) -- accepts mythril pieces, now wait for next vana'diel day
 
         end

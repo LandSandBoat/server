@@ -19,7 +19,11 @@ entity.onTrigger = function(player, npc)
     local stash = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
     local mLvl = player:getMainLvl()
 
-    if stash == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and mLvl >= 5 then
+    if
+        stash == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
+        mLvl >= 5
+    then
         player:startEvent(33) -- Start quest
     elseif stash == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE) then

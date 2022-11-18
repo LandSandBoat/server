@@ -606,7 +606,7 @@ namespace mobutils
             ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
         }
 
-        if (PMob->m_Detects == 0)
+        if (PMob->getMobMod(MOBMOD_DETECTION) == 0)
         {
             ShowError("Mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
         }
@@ -1410,7 +1410,7 @@ Usage:
                 PMob->m_Aggro         = sql->GetUIntData(66);
                 PMob->m_MobSkillList  = sql->GetUIntData(67);
                 PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->m_Detects       = sql->GetUIntData(69);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
 
                 CZone* newZone = zoneutils::GetZone(zoneID);
 
@@ -1589,7 +1589,7 @@ Usage:
                 PMob->m_Aggro         = sql->GetUIntData(66);
                 PMob->m_MobSkillList  = sql->GetUIntData(67);
                 PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->m_Detects       = sql->GetUIntData(69);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
 
                 PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(70));
                 // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable

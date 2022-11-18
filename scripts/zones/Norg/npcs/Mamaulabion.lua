@@ -74,7 +74,11 @@ entity.onTrigger = function(player, npc)
     local evokersRing = player:hasItem(14625)
     local questday = player:getCharVar("MamaMia_date")
 
-    if mamaMia == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and moonlitPath == QUEST_COMPLETED then
+    if
+        mamaMia == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
+        moonlitPath == QUEST_COMPLETED
+    then
         player:startEvent(191) -- Start Quest "Mama Mia"
 
     elseif mamaMia == QUEST_ACCEPTED then

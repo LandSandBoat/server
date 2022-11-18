@@ -17,7 +17,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4 then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and
+        player:getCharVar("saveMySisterFireLantern") < 4
+    then
         player:setCharVar("saveMySisterLanternID", npc:getID())
         player:startEvent(44)
     else

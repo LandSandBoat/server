@@ -9,7 +9,10 @@ effectObject.onEffectGain = function(target, effect)
     local regen = effect:getSubPower()
     local helix = effect:getPower()
 
-    if target:hasStatusEffect(xi.effect.LIGHT_ARTS) or target:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
+    if
+        target:hasStatusEffect(xi.effect.LIGHT_ARTS) or
+        target:hasStatusEffect(xi.effect.ADDENDUM_WHITE)
+    then
         target:addMod(xi.mod.BLACK_MAGIC_COST, -30)
         target:addMod(xi.mod.BLACK_MAGIC_CAST, -30)
         target:addMod(xi.mod.BLACK_MAGIC_RECAST, -30)
@@ -17,7 +20,10 @@ effectObject.onEffectGain = function(target, effect)
         target:addMod(xi.mod.REGEN_DURATION, math.ceil((regen * 2) / 1.5))
         target:addMod(xi.mod.HELIX_EFFECT, helix)
         target:addMod(xi.mod.HELIX_DURATION, 108)
-    elseif target:hasStatusEffect(xi.effect.DARK_ARTS) or target:hasStatusEffect(xi.effect.ADDENDUM_BLACK) then
+    elseif
+        target:hasStatusEffect(xi.effect.DARK_ARTS) or
+        target:hasStatusEffect(xi.effect.ADDENDUM_BLACK)
+    then
         target:addMod(xi.mod.WHITE_MAGIC_COST, -30)
         target:addMod(xi.mod.WHITE_MAGIC_CAST, -30)
         target:addMod(xi.mod.WHITE_MAGIC_RECAST, -30)
@@ -46,7 +52,10 @@ effectObject.onEffectLose = function(target, effect)
     local regen = effect:getSubPower()
     local helix = effect:getPower()
 
-    if target:hasStatusEffect(xi.effect.LIGHT_ARTS) or target:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
+    if
+        target:hasStatusEffect(xi.effect.LIGHT_ARTS) or
+        target:hasStatusEffect(xi.effect.ADDENDUM_WHITE)
+    then
         target:delMod(xi.mod.BLACK_MAGIC_COST, -30)
         target:delMod(xi.mod.BLACK_MAGIC_CAST, -30)
         target:delMod(xi.mod.BLACK_MAGIC_RECAST, -30)
@@ -54,7 +63,10 @@ effectObject.onEffectLose = function(target, effect)
         target:delMod(xi.mod.REGEN_DURATION, math.ceil((regen * 2) / 1.5))
         target:delMod(xi.mod.HELIX_EFFECT, helix)
         target:delMod(xi.mod.HELIX_DURATION, 108)
-    elseif target:hasStatusEffect(xi.effect.DARK_ARTS) or target:hasStatusEffect(xi.effect.ADDENDUM_BLACK) then
+    elseif
+        target:hasStatusEffect(xi.effect.DARK_ARTS) or
+        target:hasStatusEffect(xi.effect.ADDENDUM_BLACK)
+    then
         target:delMod(xi.mod.WHITE_MAGIC_COST, -30)
         target:delMod(xi.mod.WHITE_MAGIC_CAST, -30)
         target:delMod(xi.mod.WHITE_MAGIC_RECAST, -30)

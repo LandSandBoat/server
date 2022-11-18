@@ -14,7 +14,10 @@ entity.onMobDespawn = function(mob)
     local zPos = mob:getZPos()
 
     -- Check if Biast window is open, and there is not an Biast popped already
-    if biastTimeOfDeath <= os.time() and not GetMobByID(mob:getID() + 1):isSpawned() then
+    if
+        biastTimeOfDeath <= os.time() and
+        not GetMobByID(mob:getID() + 1):isSpawned()
+    then
         if math.random(1, 20) == 5 then
             SpawnMob(mob:getID() + 1)
             GetMobByID(mob:getID() + 1):setPos(xPos, yPos, zPos)

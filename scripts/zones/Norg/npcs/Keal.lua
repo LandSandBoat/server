@@ -77,7 +77,11 @@ entity.onTrigger = function(player, npc)
     local vault = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
 
-    if vault == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and mLvl >= 5 then
+    if
+        vault == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+        mLvl >= 5
+    then
         player:startEvent(36, xi.ki.SEALED_IRON_BOX) -- Start quest
     elseif vault == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.SEALED_IRON_BOX) then

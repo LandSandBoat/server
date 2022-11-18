@@ -20,8 +20,8 @@ entity.onMobFight = function(mob, target)
     if petCount <= 5 and mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3 and not auraGear:isSpawned() and mob:getLocalVar("summoning") == 0 then
         mob:setLocalVar("summoning", 1)
         mob:entityAnimationPacket("casm")
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMobAbilityEnabled(false)
+        mob:setAutoAttackEnabled(false)
+        mob:setMobAbilityEnabled(false)
 
         mob:timer(5000, function(mobArg)
             if mobArg:isAlive() then
@@ -33,8 +33,8 @@ entity.onMobFight = function(mob, target)
                 end
                 mobArg:setLocalVar("petCount", petCount + 1)
                 mobArg:setLocalVar("summoning", 0)
-                mobArg:SetAutoAttackEnabled(true)
-                mobArg:SetMobAbilityEnabled(true)
+                mobArg:setAutoAttackEnabled(true)
+                mobArg:setMobAbilityEnabled(true)
             end
         end)
     end

@@ -196,7 +196,10 @@ entity.onTrade = function(player, npc, trade)
         if player:hasItem(relicId + 1) and not relicDupe == 1 then
             player:startEvent(20, relicId)
         elseif currentRelic == 0 then
-            if relic[stageNumber] ~= 4 and tradeHasRequiredMaterials(trade, relicId, relic[requiredItems]) then
+            if
+                relic[stageNumber] ~= 4 and
+                tradeHasRequiredMaterials(trade, relicId, relic[requiredItems])
+            then
                 local requiredItem1 = relic[requiredItems][1] ~= nil and relic[requiredItems][1] or 0
                 local requiredItem2 = relic[requiredItems][2] ~= nil and relic[requiredItems][2] or 0
                 local requiredItem3 = relic[requiredItems][3] ~= nil and relic[requiredItems][3] or 0
@@ -232,7 +235,11 @@ entity.onTrigger = function(player, npc)
     local relicWait = player:getCharVar("RELIC_DUE_AT")
     local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
 
-    if currentRelic ~= 0 and relicWait ~= 0 and relics[currentRelic][stageNumber] ~= 4 then
+    if
+        currentRelic ~= 0 and
+        relicWait ~= 0 and
+        relics[currentRelic][stageNumber] ~= 4
+    then
         local relic = relics[currentRelic]
         local currentStage = relic[stageNumber]
 
@@ -255,7 +262,11 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(52, currentRelic, 0, 0, 0, 0, 0, 0, relic[csParam])
             end
         end
-    elseif currentRelic ~= 0 and relicWait == 0 and relics[currentRelic][stageNumber] ~= 4 then
+    elseif
+        currentRelic ~= 0 and
+        relicWait == 0 and
+        relics[currentRelic][stageNumber] ~= 4
+    then
         -- Need currency to start timer
         local relic = relics[currentRelic]
         player:startEvent(12, currentRelic, relic[currencyType], relic[currencyAmount], 0, 0, 0, 0, relic[csParam])

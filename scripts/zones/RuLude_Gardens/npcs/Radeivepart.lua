@@ -57,7 +57,10 @@ end
 entity.onTrigger = function(player, npc)
     local northward = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 
-    if player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and northward == QUEST_AVAILABLE then
+    if
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
+        northward == QUEST_AVAILABLE
+    then
         player:startEvent(159, 1, 0, 0, 0, 0, 0, 8)
     elseif northward == QUEST_ACCEPTED then
         player:startEvent(159, 2, 0, 0, 0, 0, 0, 8)

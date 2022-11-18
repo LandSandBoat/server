@@ -90,17 +90,17 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
     if mg:isEngaged() then
         mg:setLocalVar("summoning", 1)
         mg:entityAnimationPacket("casm")
-        mg:SetAutoAttackEnabled(false)
-        mg:SetMagicCastingEnabled(false)
-        mg:SetMobAbilityEnabled(false)
+        mg:setAutoAttackEnabled(false)
+        mg:setMagicCastingEnabled(false)
+        mg:setMobAbilityEnabled(false)
 
         mg:timer(3000, function(mob)
             if mob:isAlive() then
                 mob:entityAnimationPacket("shsm")
                 mob:setLocalVar("summoning", 0)
-                mob:SetAutoAttackEnabled(true)
-                mob:SetMagicCastingEnabled(true)
-                mob:SetMobAbilityEnabled(true)
+                mob:setAutoAttackEnabled(true)
+                mob:setMagicCastingEnabled(true)
+                mob:setMobAbilityEnabled(true)
                 slaveGlobe:spawn()
                 if mob:getTarget() ~= nil then
                     slaveGlobe:updateEnmity(mob:getTarget())
@@ -170,9 +170,9 @@ local handleSlaveGlobesRoam = function(mg, validSlavePositions)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:setLocalVar("nextSlaveSpawnTime", os.time() + 30) -- spawn first 30s from now
     mob:setLocalVar("posNum", math.random(1, 9))
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

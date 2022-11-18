@@ -33,7 +33,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -84,7 +84,11 @@ zoneObject.onGameHour = function(zone)
         local shouldOpen = boulderOpen[dir][VanadielHour()]
         local boulder = GetNPCByID(ID.npc.DOOR_ROCK)
 
-        if shouldOpen and shouldOpen() and boulder:getAnimation() == xi.anim.CLOSE_DOOR then
+        if
+            shouldOpen and
+            shouldOpen() and
+            boulder:getAnimation() == xi.anim.CLOSE_DOOR
+        then
             boulder:openDoor(144 * 6) -- one vanadiel hour is 144 earth seconds. lower boulder for 6 vanadiel hours.
         end
     end

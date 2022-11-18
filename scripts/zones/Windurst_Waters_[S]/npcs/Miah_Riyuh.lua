@@ -29,11 +29,20 @@ entity.onTrigger = function(player, npc)
         player:startEvent(122)
     elseif snakeOnThePlains == QUEST_AVAILABLE and greenLetter then
         player:startEvent(103)
-    elseif snakeOnThePlains == QUEST_AVAILABLE and player:getCharVar("GREEN_R_LETTER_USED") == 1 then
+    elseif
+        snakeOnThePlains == QUEST_AVAILABLE and
+        player:getCharVar("GREEN_R_LETTER_USED") == 1
+    then
         player:startEvent(105)
-    elseif snakeOnThePlains == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar("SEALED_DOORS"), 3) then
+    elseif
+        snakeOnThePlains == QUEST_ACCEPTED and
+        utils.mask.isFull(player:getCharVar("SEALED_DOORS"), 3)
+    then
         player:startEvent(106)
-    elseif snakeOnThePlains == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY) then
+    elseif
+        snakeOnThePlains == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
+    then
         local puttyUsed = 0
 
         if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0) then

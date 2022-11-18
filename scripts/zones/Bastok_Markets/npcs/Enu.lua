@@ -12,7 +12,10 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if trade:hasItemQty(1192, 1) and trade:getItemCount() == 1 then -- Quest: Wish Upon a Star - Trade Fallen Star
         if player:getCharVar("WishUponAStar_Status") == 3 then
-            if player:getWeather() == xi.weather.NONE and (VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT) then
+            if
+                player:getWeather() == xi.weather.NONE and
+                (VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT)
+            then
                 player:startEvent(334) -- Trade accepeted
             else
                 player:startEvent(337) -- Player has to wait for clear weather

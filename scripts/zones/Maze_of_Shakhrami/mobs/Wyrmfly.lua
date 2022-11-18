@@ -19,13 +19,17 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+    if
+        player:getCharVar("EcoStatus") == 201 and
+        player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
+    then
         local allFliesDead = true
         for i = ID.mob.WYRMFLY_OFFSET, ID.mob.WYRMFLY_OFFSET + 2 do
             if i ~= mob:getID() and GetMobByID(i):isAlive() then
                 allFliesDead = false
             end
         end
+
         if allFliesDead then
             player:setCharVar("EcoStatus", 202)
         end

@@ -83,7 +83,12 @@ function actionUtil.parseActionDef(actionDef)
         return actionDef
     end
 
-    if not actionDef or type(actionDef) ~= 'table' or actionDef.onTrigger or actionDef.onTrade then
+    if
+        not actionDef or
+        type(actionDef) ~= 'table' or
+        actionDef.onTrigger or
+        actionDef.onTrade
+    then
         return nil
     end
 

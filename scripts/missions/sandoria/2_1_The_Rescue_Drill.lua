@@ -394,7 +394,10 @@ mission.sections =
 
                     if missionStatus >= 2 and missionStatus <= 7 then
                         return mission:progressEvent(1)
-                    elseif missionStatus >= 10 or player:hasCompletedMission(mission.areaId, mission.missionId) then
+                    elseif
+                        missionStatus >= 10 or
+                        player:hasCompletedMission(mission.areaId, mission.missionId)
+                    then
                         return mission:messageText(ordellesCavesID.text.RUILLONT_INITIAL_DIALOG + 9)
                     elseif missionStatus >= 8 then
                         return mission:messageText(ordellesCavesID.text.RUILLONT_INITIAL_DIALOG)

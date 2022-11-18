@@ -14,7 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 3) then
+    if
+        player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
+        not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 3)
+    then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(57)
     else

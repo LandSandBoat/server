@@ -90,7 +90,10 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     if csid == 20 then
-        if player:getCharVar("ClammingKitSize") == 200 and math.random() <= giveReducedIncidents(player) then
+        if
+            player:getCharVar("ClammingKitSize") == 200 and
+            math.random() <= giveReducedIncidents(player)
+        then
             player:setLocalVar("SomethingJumpedInBucket", 1)
         else
             local dropRate = math.random()

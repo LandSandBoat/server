@@ -53,7 +53,7 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE116_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

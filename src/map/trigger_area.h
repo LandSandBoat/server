@@ -19,11 +19,11 @@
 ===========================================================================
 */
 
-#ifndef _CREGION_H
-#define _CREGION_H
+#ifndef _CTRIGGER_AREA_H
+#define _CTRIGGER_AREA_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 /************************************************************************
  *                                                                       *
@@ -31,30 +31,30 @@
  *                                                                       *
  ************************************************************************/
 
-class CRegion
+class CTriggerArea
 {
 public:
-    CRegion(uint32 RegionID, bool isCircle);
+    CTriggerArea(uint32 triggerAreaID, bool isCircle);
 
-    uint32 GetRegionID() const;
+    uint32 GetTriggerAreaID() const;
 
     int16 GetCount() const;
     int16 AddCount(int16 count);
     int16 DelCount(int16 count);
 
-    void SetULCorner(float x, float y, float z); // верхний левый угол (Upper Left)
-    void SetLRCorner(float x, float y, float z); // нижний правый угол (Lower Right)
+    void SetULCorner(float x, float y, float z); // The upper left corner
+    void SetLRCorner(float x, float y, float z); // The lower right corner
 
     bool isPointInside(position_t pos) const;
 
 private:
-    uint32 m_RegionID; // номер региона
-    int16  m_Count;    // количество персонажей в регионе
+    uint32 m_TriggerAreaID;
+    int16  m_Count; // number of characters in the trigger area
 
-    float x1, y1, z1; // верхний левый угол
-    float x2, y2, z2; // лижний правый угол
+    float x1, y1, z1; // The upper left corner
+    float x2, y2, z2; // The lower right corner
 
     bool circle;
 };
 
-#endif
+#endif // _CTRIGGER_AREA_H

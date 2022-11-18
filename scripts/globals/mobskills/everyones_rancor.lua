@@ -14,10 +14,15 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isNM() and mob:getHP() / mob:getMaxHP() <= 0.25 and mob:getLocalVar("everyonesRancorUsed") == 0 then
+    if
+        mob:isNM() and
+        mob:getHP() / mob:getMaxHP() <= 0.25 and
+        mob:getLocalVar("everyonesRancorUsed") == 0
+    then
         mob:setLocalVar("everyonesRancorUsed", 1)
         return 0
     end
+
     return 1
 end
 
