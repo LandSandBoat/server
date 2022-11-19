@@ -13818,8 +13818,9 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
 /************************************************************************
  *  Function: useJobAbility()
  *  Purpose : Instruct a Mob to use a specified Job Ability
- *  Example : wyvern:useJobAbility(636, wyvern) -- Specifying pet to use
- *  Notes   : Inserts directly into queue stack with 0ms delay
+ *  Example : wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern) -- Specifying pet to use
+ *  Notes   : Inserts directly into queue stack with 0ms delay,
+ *  and checks queue for immediate use.
  ************************************************************************/
 
 void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
@@ -13847,6 +13848,9 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
         }
     }));
     // clang-format on
+
+    // Check queue immediately in case of 0 ms delay abilities
+    m_PBaseEntity->PAI->checkQueueImmediately();
 }
 
 /************************************************************************
