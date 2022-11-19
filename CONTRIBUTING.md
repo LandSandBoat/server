@@ -18,7 +18,7 @@
 
 ## License
 
-- We operate under [GNU General Public License v3.0](https://github.com/LandSandBoat/server/blob/base/LICENSE).
+- We operate under [GNU General Public License v3.0](https://github.com/AirSkyBoat/AirSkyBoat/blob/staging/LICENSE).
 - We do not accept contributions that use other more restrictive licenses (such as AGPLv3).
 
 ## General Guidelines
