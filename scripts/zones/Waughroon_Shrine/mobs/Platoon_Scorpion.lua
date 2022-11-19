@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
                 then
                     mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 1)
                     mobArg:timer(5000, function(mimicArg)
-                        mimic:addTP(1000)
+                        mimicArg:addTP(1000)
                     end)
                 end
             end
@@ -39,10 +39,10 @@ entity.onMobSpawn = function(mob)
         -- Scorpions are bound for 10 secounds
         if math.random() <= 0.25 and skillID == 355 then
             mobArg:showText(mob,ID.text.SCORPION_IS_BOUND)
-            mobArg:addStatusEffect(xi.effect.BIND,1,0,10)
+            mobArg:addStatusEffect(xi.effect.BIND, 1, 0, 10)
 
         -- Scorpions can still move around, but will not auto attack
-        elseif math.random() <= 0.25 and skillID == 355 then
+        elseif math.random() <= 0.25 and skillID == 354 then
             mobArg:showText(mob,ID.text.SCORPION_NO_ENERGY)
             mobArg:setAutoAttackEnabled(false)
             mobArg:timer(1000 * math.random(25, 30), function(mobArg1)

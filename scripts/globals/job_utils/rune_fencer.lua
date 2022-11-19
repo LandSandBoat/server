@@ -360,7 +360,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectLose = function (target, effect)
 end
 
 xi.job_utils.rune_fencer.useVivaciousPulse = function(player, target, ability, effect)
-    return calculateVivaciousPulseHealing(player, target)
+    return calculateVivaciousPulseHealing(target)
 end
 
 xi.job_utils.rune_fencer.checkHaveRunes = function(player)
