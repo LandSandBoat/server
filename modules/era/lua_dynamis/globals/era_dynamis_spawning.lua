@@ -371,7 +371,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 onMobSpawn = function(mobArg) xi.dynamis.setMobStats(mobArg) end,
                 onMobEngaged = function(mobArg, target) xi.dynamis.mobOnEngaged(mobArg, target) end,
                 onMobRoam = function(mobArg) end,
-                onMobDeath = function(mob, player, optParams)
+                onMobDeath = function(mobArg, player, optParams)
                     xi.dynamis.mobOnDeath(mobArg)
                 end,
                 releaseIdOnDeath = true,
