@@ -1339,8 +1339,12 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PLinkshell = linkshell::LoadLinkshell(lsid);
             }
-            PLinkshell->BreakLinkshell((int8*)PLinkshell->getName(), false);
-            linkshell::UnloadLinkshell(lsid);
+
+            if (PLinkshell)
+            {
+                PLinkshell->BreakLinkshell((int8*)PLinkshell->getName(), false);
+                linkshell::UnloadLinkshell(lsid);
+            }
         }
     }
 
