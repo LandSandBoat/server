@@ -129,7 +129,7 @@ for _, zoneID in pairs(dynamisZones) do
         xi.dynamis.zoneOnZoneOut(player) -- Run onZoneIn functions.
     end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneIn", zoneID[2]),
-    function(player)
+    function(player, prevZone)
         xi.dynamis.zoneOnZoneInEra(player, prevZone) -- Run onZoneInEra functions.
     end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
