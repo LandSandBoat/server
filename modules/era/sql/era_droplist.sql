@@ -6327,7 +6327,7 @@ INSERT INTO `mob_droplist` VALUES (760,2,0,1000,1452,0);        -- Ordelle Bronz
 
 -- ZoneID:  91 - Emerald Quadav
 -- ZoneID: 171 - Emerald Quadav
-INSERT INTO `mob_droplist` VALUES (761,0,0,1000,4727,210); -- Scroll Of Enwater Ii (21.0%)
+-- INSERT INTO `mob_droplist` VALUES (761,0,0,1000,4727,210); -- Scroll Of Enwater Ii (21.0%) WOTG
 INSERT INTO `mob_droplist` VALUES (761,0,0,1000,2531,120); -- Shard Of Obsidian (12.0%)
 INSERT INTO `mob_droplist` VALUES (761,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
 INSERT INTO `mob_droplist` VALUES (761,2,0,1000,748,0);    -- Gold Beastcoin (Steal)
@@ -12652,7 +12652,7 @@ INSERT INTO `mob_droplist` VALUES (1565,0,0,1000,4820,@VRARE);    -- Scroll Of B
 INSERT INTO `mob_droplist` VALUES (1565,4,0,1000,954,0);          -- Magic Pot Shard (Despoil)
 
 -- ZoneID: 200 - Magic Jug
-INSERT INTO `mob_droplist` VALUES (1566,0,0,1000,4724,@UNCOMMON); -- Scroll Of Enaero Ii (Uncommon, 10%)
+-- INSERT INTO `mob_droplist` VALUES (1566,0,0,1000,4724,@UNCOMMON); -- Scroll Of Enaero Ii (Uncommon, 10%) WOTG
 INSERT INTO `mob_droplist` VALUES (1566,0,0,1000,4659,@RARE);     -- Scroll Of Shell Iv (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1566,0,0,1000,1047,@RARE);     -- Garlaige Coffer Key (Rare, 5%)
 
@@ -15056,14 +15056,14 @@ INSERT INTO `mob_droplist` VALUES (1860,0,0,1000,16969,@VCOMMON); -- Onikiri (Ve
 INSERT INTO `mob_droplist` VALUES (1860,0,0,1000,940,@VRARE);     -- Revival Tree Root (Very Rare, 1%)
 
 -- ZoneID:  88 - Onyx Quadav
-INSERT INTO `mob_droplist` VALUES (1861,0,0,1000,4723,190); -- Scroll Of Enblizzard Ii (19.0%)
+-- INSERT INTO `mob_droplist` VALUES (1861,0,0,1000,4723,190); -- Scroll Of Enblizzard Ii (19.0%) WOTG
 INSERT INTO `mob_droplist` VALUES (1861,0,0,1000,2531,130); -- Shard Of Obsidian (13.0%)
 INSERT INTO `mob_droplist` VALUES (1861,0,0,1000,2527,120); -- Red Oven Mitt (12.0%)
 INSERT INTO `mob_droplist` VALUES (1861,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
 INSERT INTO `mob_droplist` VALUES (1861,2,0,1000,2531,0);   -- Shard Of Obsidian (Steal)
 
 -- ZoneID:  89 - Onyx Quadav
-INSERT INTO `mob_droplist` VALUES (1862,0,0,1000,4723,200);     -- Scroll Of Enblizzard Ii (20.0%)
+-- INSERT INTO `mob_droplist` VALUES (1862,0,0,1000,4723,200);     -- Scroll Of Enblizzard Ii (20.0%) WOTG
 INSERT INTO `mob_droplist` VALUES (1862,0,0,1000,2531,@COMMON); -- Shard Of Obsidian (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (1862,0,0,1000,2527,90);      -- Red Oven Mitt (9.0%)
 INSERT INTO `mob_droplist` VALUES (1862,0,0,1000,2525,20);      -- Bottled Pixie (2.0%)

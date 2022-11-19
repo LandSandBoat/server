@@ -35,6 +35,7 @@ entity.changeState = function(mob, idle)
 end
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.LEDGE_AGGRO, 1)
 end
 
 local spinSpeeds = { 4, 8, 16, 64 }
