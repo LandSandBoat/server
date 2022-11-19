@@ -49,11 +49,11 @@ public:
     }
 
     bool IsAutoAttackEnabled() const;
-    void SetAutoAttackEnabled(bool);
+    void setAutoAttackEnabled(bool);
     bool IsWeaponSkillEnabled() const;
     void SetWeaponSkillEnabled(bool);
     bool IsMagicCastingEnabled() const;
-    void SetMagicCastingEnabled(bool);
+    void setMagicCastingEnabled(bool);
 
     bool canUpdate{ true };
 

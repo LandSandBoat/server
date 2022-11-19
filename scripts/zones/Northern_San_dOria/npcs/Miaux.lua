@@ -19,13 +19,20 @@ entity.onTrigger = function(player, npc)
     local aCraftsmansWork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local quotasStatus    = player:getCharVar("ChasingQuotas_Progress")
 
-    if player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE then
+    if
+        player:getMainJob() == xi.job.DRG and
+        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+        aCraftsmansWork == QUEST_AVAILABLE
+    then
         if player:getCharVar("has_seen_drgaf1_quest_already") == 0 then
             player:startEvent(73)
         else -- If player has seen the big cut scene, give them a smaller one.
             player:startEvent(71)
         end
-    elseif aCraftsmansWork == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ALTEPA_POLISHING_STONE) then
+    elseif
+        aCraftsmansWork == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
+    then
         player:startEvent(69)
     elseif aCraftsmansWork == QUEST_ACCEPTED then
             player:startEvent(70)

@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 
     mob:setMod(xi.mod.COUNTER, 10)
@@ -36,7 +36,7 @@ entity.onMobSpawn = function(mob)
             elseif defender:getAnimationSub() == 2 and not defender:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and defender:canUseAbilities() then
                 defender:setAnimationSub(1)
                 defender:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-                defender:SetMobSkillAttack(730)
+                defender:setMobSkillAttack(730)
                 defender:setLocalVar("damageTaken", 0)
             end
             defender:setLocalVar("changeHP", defender:getHP() / 1000)
@@ -68,7 +68,7 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setBehaviour(0)
-            mob:SetMobSkillAttack(730)
+            mob:setMobSkillAttack(730)
             mob:setLocalVar("changeTime", os.time() + 120)
         -- subanimation 1 is flight, so check if she should land
         elseif mob:getAnimationSub() == 1 and os.time() > changeTime then
@@ -80,7 +80,7 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setBehaviour(0)
-            mob:SetMobSkillAttack(730)
+            mob:setMobSkillAttack(730)
             mob:setLocalVar("changeTime", os.time() + 120)
         end
     end
@@ -128,7 +128,7 @@ entity.onMobDisengage = function(mob)
     if mob:getAnimationSub() == 1 then
         mob:setAnimationSub(0)
         mob:delStatusEffect(xi.effect.ALL_MISS)
-        mob:SetMobSkillAttack(0)
+        mob:setMobSkillAttack(0)
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 end

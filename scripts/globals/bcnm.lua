@@ -151,18 +151,6 @@ local battlefields =
     --  { 9, 1307,    0 },   -- Central 4th Floor II
     },
 
-    [xi.zone.APOLLYON] =
-    {
-        { 0, 1291,    0 },   -- SW Apollyon
-        { 1, 1290,    0 },   -- NW Apollyon
-        { 2, 1293,    0 },   -- SE Apollyon
-        { 3, 1292,    0 },   -- NE Apollyon
-    --  { 4, 1296,   -2 },   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-    --  { 5, 1294, 2127 },   -- CS Apollyon
-    --  { 6, 1295,    0 },   -- CS Apollyon II
-    --  { 7, 1297,    0 },   -- Central Apollyon II
-    },
-
     [xi.zone.ARRAPAGO_REEF] =
     {
     --  { 0,    ?,    0 },   -- Lamia Reprisal
@@ -1747,7 +1735,11 @@ local function findBattlefields(player, npc, itemId)
     end
 
     for k, v in pairs(zbfs) do
-        if v[3] == itemId and checkReqs(player, npc, v[2], true) and not player:battlefieldAtCapacity(v[2]) then
+        if
+            v[3] == itemId and
+            checkReqs(player, npc, v[2], true) and
+            not player:battlefieldAtCapacity(v[2])
+        then
             mask = bit.bor(mask, math.pow(2, v[1]))
         end
     end
@@ -1824,11 +1816,22 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
         return false
 
     -- Chips for limbus
-    elseif trade:getItemCount() == 3 and trade:hasItemQty(1907, 1) and trade:hasItemQty(1908, 1) and trade:hasItemQty(1986, 1) then
+    elseif
+        trade:getItemCount() == 3 and
+        trade:hasItemQty(1907, 1) and
+        trade:hasItemQty(1908, 1) and
+        trade:hasItemQty(1986, 1)
+    then
         itemId = -1
 
     -- Chips for limbus
-    elseif trade:getItemCount() == 4 and trade:hasItemQty(1909, 1) and trade:hasItemQty(1910, 1) and trade:hasItemQty(1987, 1) and trade:hasItemQty(1988, 1) then
+    elseif
+        trade:getItemCount() == 4 and
+        trade:hasItemQty(1909, 1) and
+        trade:hasItemQty(1910, 1) and
+        trade:hasItemQty(1987, 1) and
+        trade:hasItemQty(1988, 1)
+    then
         itemId = -2
 
     -- Orbs / Testimonies
@@ -1972,42 +1975,6 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
         switch (battlefieldId): caseof
         {
-            [1290] = function() -- NW_Apollyon
-                area = 2
-            end,
-
-            [1291] = function() -- SW_Apollyon
-                area = 1
-            end,
-
-            [1292] = function() -- NE_Apollyon
-                area = 4
-            end,
-
-            [1293] = function() -- SE_Apollyon
-                area = 3
-            end,
-
-            [1294] = function() -- CS_Apollyon
-                area = 6
-            end,
-
-            [1296] = function() -- Central_Apollyon
-                area = 5
-            end,
-
-            [1298] = function() -- Temenos_Western_Tower
-                area = 3
-            end,
-
-            [1299] = function() -- Temenos_Northern_Tower
-                area = 1
-            end,
-
-            [1300] = function() -- Temenos_Eastern_Tower
-                area = 2
-            end,
-
             [1301] = function() -- Central_Temenos_Basement
                 area = 8
             end,

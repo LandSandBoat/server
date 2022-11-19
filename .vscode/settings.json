@@ -554,7 +554,8 @@
         "typeindex": "cpp",
         "strstream": "cpp",
         "codecvt": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "*.ipp": "cpp"
     },
     "cSpell.ignoreWords": [
         "PATHFLAG"

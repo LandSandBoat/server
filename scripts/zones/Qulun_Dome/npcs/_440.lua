@@ -13,7 +13,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.SILVER_BELL) and player:hasKeyItem(xi.ki.CORUSCANT_ROSARY) and player:hasKeyItem(xi.ki.BLACK_MATINEE_NECKLACE) then
+    if
+        player:hasKeyItem(xi.ki.SILVER_BELL) and
+        player:hasKeyItem(xi.ki.CORUSCANT_ROSARY) and
+        player:hasKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)
+    then
         if player:getZPos() < -7.2 then
             player:startEvent(51)
         else

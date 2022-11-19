@@ -22,7 +22,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(175)
     elseif player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
         player:startEvent(174)
-    elseif player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) or sayItWithAHandbagCS == 3 then
+    elseif
+        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) or
+        sayItWithAHandbagCS == 3
+    then
         player:startEvent(173)
     elseif sayItWithAHandbag == QUEST_ACCEPTED and sayItWithAHandbagCS == 1 then
         player:startEvent(172)

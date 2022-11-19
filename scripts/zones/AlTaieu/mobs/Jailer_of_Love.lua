@@ -51,15 +51,15 @@ end
 
 local spawnPets = function(mob, minionOffset)
     mob:entityAnimationPacket("casm")
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
             mobArg:entityAnimationPacket("shsm")
-            mobArg:SetAutoAttackEnabled(true)
-            mobArg:SetMagicCastingEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setAutoAttackEnabled(true)
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
             GetMobByID(minionOffset + 0):setSpawn(mobArg:getXPos() + 4, mobArg:getYPos(), mobArg:getZPos())
             GetMobByID(minionOffset + 1):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos() + 4)
             GetMobByID(minionOffset + 2):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos() - 4)
@@ -106,7 +106,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setBehaviour(2)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMagicCastingEnabled(true)
 end
 
 entity.onMobSpawn = function(mob)
@@ -123,7 +123,7 @@ end
 entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMagicCastingEnabled(true)
     mob:setAnimationSub(2)
     mob:setLocalVar("elementAbsorb", os.time() + 120)
     mob:setLocalVar("pop_pets", os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
@@ -181,15 +181,15 @@ entity.onMobFight = function(mob, target)
             spawnPets(mob, minionOffset)
         elseif spawns > 8 then
             mob:entityAnimationPacket("casm")
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setAutoAttackEnabled(false)
+            mob:setMagicCastingEnabled(false)
+            mob:setMobAbilityEnabled(false)
             mob:timer(3000, function(mobArg)
                 if mobArg:isAlive() then
                     mobArg:entityAnimationPacket("shsm")
-                    mobArg:SetAutoAttackEnabled(true)
-                    mobArg:SetMagicCastingEnabled(true)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setAutoAttackEnabled(true)
+                    mobArg:setMagicCastingEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                     spawnSharks(mobArg)
                 end
             end)

@@ -33,7 +33,10 @@ entity.onTrigger = function(player, npc)
             player:startEvent(90)
         elseif illTakeTheBigBoxCS == 2 then
             player:startEvent(91)
-        elseif illTakeTheBigBoxCS == 3 and VanadielDayOfTheYear() == player:getCharVar("illTakeTheBigBox_Timer") then
+        elseif
+            illTakeTheBigBoxCS == 3 and
+            VanadielDayOfTheYear() == player:getCharVar("illTakeTheBigBox_Timer")
+        then
             player:startEvent(93)
         elseif illTakeTheBigBoxCS == 3 then
             player:startEvent(94)

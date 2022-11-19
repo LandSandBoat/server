@@ -7,7 +7,7 @@ require("scripts/globals/promyvion")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:SetAutoAttackEnabled(false) -- Receptacles only use TP moves.
+    mob:setAutoAttackEnabled(false) -- Receptacles only use TP moves.
     mob:addMod(xi.mod.DEF, 55)
     mob:addMod(xi.mod.REGAIN, 100)
 end

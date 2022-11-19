@@ -17,7 +17,11 @@ entity.onTrade = function(player, npc, trade)
     if sermonQuest == QUEST_ACCEPTED then
         local count = trade:getItemCount()
         local bluePeas = trade:getItemQty(618)
-        if bluePeas == 1 and count == 1 and player:getCharVar("sermonQuestVar") == 0 then
+        if
+            bluePeas == 1 and
+            count == 1 and
+            player:getCharVar("sermonQuestVar") == 0
+        then
             player:tradeComplete()
             player:setCharVar("sermonQuestVar", 1)
             player:showText(npc, ID.text.THANKS_TO_GODDESS)

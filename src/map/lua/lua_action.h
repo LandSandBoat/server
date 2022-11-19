@@ -56,6 +56,7 @@ public:
     void   additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
     void   addEffectParam(uint32 actionTargetID, int32 addEffectParam);
     void   addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
+    bool   addAdditionalTarget(uint32 actionTargetID);
 
     static void Register();
 };

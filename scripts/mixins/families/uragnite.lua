@@ -34,7 +34,7 @@ g_mixins.families = g_mixins.families or {}
 
 local function enterShell(mob)
     mob:setAnimationSub(1)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setMod(xi.mod.UDMGPHYS, -9500)
     mob:setMod(xi.mod.UDMGRANGE, -9500)
     mob:setMod(xi.mod.UDMGMAGIC, -4000)
@@ -46,7 +46,7 @@ end
 
 local function exitShell(mob)
     mob:setAnimationSub(0)
-    mob:SetAutoAttackEnabled(true)
+    mob:setAutoAttackEnabled(true)
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)

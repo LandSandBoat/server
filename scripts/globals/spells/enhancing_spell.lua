@@ -204,7 +204,11 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
 
         basePower = utils.clamp(basePower, 40, 150) -- Max is 150 and min is 40 at skill 0.
     -- Bar-Status
-    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
+    elseif
+        spellEffect == xi.effect.BARAMNESIA or
+        (spellEffect >= xi.effect.BARSLEEP and
+        spellEffect <= xi.effect.BARVIRUS)
+    then
         -- Works the same as Bar-Element spells. This is only out of 100
         if skillLevel > 300 then
             basePower = (25 + math.floor(skillLevel / 4)) / 10 -- 15 at 500
@@ -215,7 +219,10 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         basePower = utils.clamp(basePower, 4, 15) -- Max is 15 and min is 4 a skill 0.
 
     -- Boost-Stat / Gain-Stat
-    elseif spellEffect >= xi.effect.STR_BOOST and spellEffect <= xi.effect.CHR_BOOST then
+    elseif
+        spellEffect >= xi.effect.STR_BOOST and
+        spellEffect <= xi.effect.CHR_BOOST
+    then
         basePower = basePower + utils.clamp(math.floor((skillLevel - 300) / 10), 0, 20)
 
     -- Embrava
@@ -255,7 +262,10 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         basePower = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 12) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 25)
 
     -- Ice Spikes, Shock Spikes (Info from from BG-Wiki)
-    elseif spellEffect == xi.effect.ICE_SPIKES or spellEffect == xi.effect.SHOCK_SPIKES then
+    elseif
+        spellEffect == xi.effect.ICE_SPIKES or
+        spellEffect == xi.effect.SHOCK_SPIKES
+    then
         basePower = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 20) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 15)
 
     -- Temper
@@ -276,7 +286,11 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
     -- Enboden effect.
     --------------------
     --  Applied before other bonuses, pet buffs seem to not work.
-    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+    if
+        not caster:isPet() and
+        target:hasStatusEffect(xi.effect.EMBOLDEN) and
+        spellGroup == xi.magic.spellGroup.WHITE
+    then
 
         local emboldenPower = 1.5 + target:getJobPointLevel(xi.jp.EMBOLDEN_EFFECT) / 100 -- 1 point in job point category = 1%
 
@@ -294,7 +308,10 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
         finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_AMOUNT) + caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     -- Bar-Status
-    elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
+    elseif
+        spellEffect == xi.effect.BARAMNESIA or
+        (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS)
+    then
         finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     -- Protect/Protectra
@@ -321,7 +338,10 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
         end
 
     -- -storm
-    elseif spellEffect >= xi.effect.FIRESTORM and spellEffect <= xi.effect.VOIDSTORM then
+    elseif
+        spellEffect >= xi.effect.FIRESTORM and
+        spellEffect <= xi.effect.VOIDSTORM
+    then
         finalPower = finalPower + caster:getMerit(xi.merit.STORMSURGE) + caster:getMod(xi.mod.STORMSURGE_EFFECT)
     end
 
@@ -337,7 +357,11 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     local skillLevel   = caster:getSkillLevel(spell:getSkillType())
 
     -- Deodorize, Invisible and Sneak have a random factor to base duration.
-    if spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
+    if
+        spellEffect == xi.effect.DEODORIZE or
+        spellEffect == xi.effect.INVISIBLE or
+        spellEffect == xi.effect.SNEAK
+    then
         duration = xi.magic.calculateDuration(math.random(130, 310), spell:getSkillType(), spell:getSpellGroup(), caster, target)
         duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
     end
@@ -345,7 +369,11 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     --------------------
     -- Embolden, buffs cast by pet do not work.
     --------------------
-    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+    if
+        not caster:isPet() and
+        target:hasStatusEffect(xi.effect.EMBOLDEN) and
+        spellGroup == xi.magic.spellGroup.WHITE
+    then
         local emboldenDurationModifier = 0.5 + target:getMod(xi.mod.EMBOLDEN_DURATION) / 100 -- 1 point = 1%
         duration = duration * emboldenDurationModifier
     end
@@ -394,12 +422,19 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     -- Status Effects
     --------------------
     -- Composure
-    if useComposure and caster:hasStatusEffect(xi.effect.COMPOSURE) and caster:getID() == target:getID() then
+    if
+        useComposure and
+        caster:hasStatusEffect(xi.effect.COMPOSURE) and
+        caster:getID() == target:getID()
+    then
         duration = duration * 3
     end
 
     -- Perpetuance (Doesnt affect spikes and other Black magic enhancements)
-    if caster:hasStatusEffect(xi.effect.PERPETUANCE) and spellGroup == xi.magic.spellGroup.WHITE then
+    if
+        caster:hasStatusEffect(xi.effect.PERPETUANCE) and
+        spellGroup == xi.magic.spellGroup.WHITE
+    then
         duration  = duration * 2
     end
 
@@ -448,13 +483,19 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
 
     -- Refresh
     elseif spellEffect == xi.effect.REFRESH then
-        if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
+        if
+            target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or
+            target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
+        then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             return 0
         end
 
     -- Boost-Stat / Gain-Stat
-    elseif spellEffect >= xi.effect.STR_BOOST and spellEffect <= xi.effect.CHR_BOOST then
+    elseif
+        spellEffect >= xi.effect.STR_BOOST and
+        spellEffect <= xi.effect.CHR_BOOST
+    then
         -- Only one Boost Effect can be active at once, so if the player has any we have to cancel & overwrite
         local effectOverwrite =
         {
@@ -474,7 +515,10 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
         end
 
     -- -storm spells
-    elseif spellEffect >= xi.effect.FIRESTORM and spellEffect <= xi.effect.VOIDSTORM then
+    elseif
+        spellEffect >= xi.effect.FIRESTORM and
+        spellEffect <= xi.effect.VOIDSTORM
+    then
         -- Only one storm effect can be active at once, so if the player has any we have to cancel & overwrite
         local effectOverwrite =
         {
@@ -505,7 +549,11 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------
     -- Handle Status Effects, Embolden buffs can only be applied by player, so do not remove embolden..
     ------------------------------
-    if not caster:isPet() and target:hasStatusEffect(xi.effect.EMBOLDEN) and spellGroup == xi.magic.spellGroup.WHITE then
+    if
+        not caster:isPet() and
+        target:hasStatusEffect(xi.effect.EMBOLDEN) and
+        spellGroup == xi.magic.spellGroup.WHITE
+    then
         target:delStatusEffectSilent(xi.effect.EMBOLDEN)
     end
 

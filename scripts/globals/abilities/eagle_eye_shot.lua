@@ -19,8 +19,18 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 
     if ranged and ranged:isType(xi.itemType.WEAPON) then
         local skilltype = ranged:getSkillType()
-        if skilltype == xi.skill.ARCHERY or skilltype == xi.skill.MARKSMANSHIP or skilltype == xi.skill.THROWING then
-            if ammo and (ammo:isType(xi.itemType.WEAPON) or skilltype == xi.skill.THROWING) then
+        if
+            skilltype == xi.skill.ARCHERY or
+            skilltype == xi.skill.MARKSMANSHIP or
+            skilltype == xi.skill.THROWING
+        then
+            if
+                ammo and
+                (
+                    ammo:isType(xi.itemType.WEAPON) or
+                    skilltype == xi.skill.THROWING
+                )
+            then
                 ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
                 return 0, 0
             end

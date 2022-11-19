@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
     mob:setMobMod(xi.mobMod.NO_REST, 1)
     mob:addMod(xi.mod.CURE_POTENCY_RCVD, -100)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)

@@ -17,9 +17,9 @@ local flare = function(mob, target, level)
     local flareWait = mob:getLocalVar("FlareWait")
     local tauntShown = mob:getLocalVar("tauntShown")
 
-    mob:SetMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
-    mob:SetMagicCastingEnabled(false)
-    mob:SetAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
+    mob:setMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(false)
 
     if flareWait == 0 and tauntShown == 0 then -- if there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
         mob:setLocalVar("tauntShown", 1)
@@ -31,7 +31,7 @@ local flare = function(mob, target, level)
             target:showText(mob, ID.text.BAHAMUT_TAUNT + 14)
             mob:timer(1000, function(mobArg) if mobArg:isAlive() then mobArg:showText(mobArg, ID.text.BAHAMUT_TAUNT + 15) end end)
             mob:timer(2000, function(mobArg) if mobArg:isAlive() then mobArg:showText(mobArg, ID.text.BAHAMUT_TAUNT + 16) end end)
-            mob:timer(3000, function(mobArg) if mobArg:isAlive() then mobArg:SetMobAbilityEnabled(true) mobArg:SetMagicCastingEnabled(true) mobArg:SetAutoAttackEnabled(true) end end)
+            mob:timer(3000, function(mobArg) if mobArg:isAlive() then mobArg:setMobAbilityEnabled(true) mobArg:setMagicCastingEnabled(true) mobArg:setAutoAttackEnabled(true) end end)
         end
         mob:setLocalVar("FlareWait", mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
     elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
@@ -68,9 +68,9 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
     mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
     mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
-    mob:SetMobAbilityEnabled(true)
-    mob:SetMagicCastingEnabled(true)
-    mob:SetAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
     mob:setLocalVar("gigaFlareCount", 3)
 
     local randomWyrm = utils.shuffle(wyrms)
@@ -100,14 +100,14 @@ entity.onMobFight = function(mob, target)
         for i = 1, #adds do
             if mob:getHPP() < adds[i] and addsSummoned < i then
                 mob:setLocalVar("summoning", 1)
-                mob:SetMobAbilityEnabled(false)
-                mob:SetMagicCastingEnabled(false)
-                mob:SetAutoAttackEnabled(false)
+                mob:setMobAbilityEnabled(false)
+                mob:setMagicCastingEnabled(false)
+                mob:setAutoAttackEnabled(false)
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 5)
                 mob:setLocalVar("addsSummoned", addsSummoned + 1)
                 mob:timer(1000, function(mobArg) mobArg:showText(mobArg, ID.text.BAHAMUT_TAUNT + 6) end)
                 mob:timer(2000, function(mobArg) mobArg:showText(mobArg, ID.text.BAHAMUT_TAUNT + 7) end)
-                mob:timer(3000, function(mobArg) mobArg:useMobAbility(1550) mobArg:SetMobAbilityEnabled(true) mobArg:SetMagicCastingEnabled(true) mobArg:SetAutoAttackEnabled(true) end)
+                mob:timer(3000, function(mobArg) mobArg:useMobAbility(1550) mobArg:setMobAbilityEnabled(true) mobArg:setMagicCastingEnabled(true) mobArg:setAutoAttackEnabled(true) end)
             end
         end
 
@@ -152,9 +152,9 @@ end
 
 entity.onMobDisengage = function(mob)
     -- In case of wipe during Flares, this will reset Bahamut
-    mob:SetMobAbilityEnabled(true)
-    mob:SetMagicCastingEnabled(true)
-    mob:SetAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

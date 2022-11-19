@@ -20,13 +20,13 @@ end
 
 entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.CLOSE_DOOR)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 9)
     mob:timer(5000, function(mobArg)
-        mobArg:SetMagicCastingEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
     end)
 end
 

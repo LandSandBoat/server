@@ -2,8 +2,10 @@
 --  PET: Wyvern
 -----------------------------------
 require("scripts/globals/ability")
+require("scripts/globals/job_utils/dragoon")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/spell_data")
 -----------------------------------
 local entity = {}
 
@@ -40,19 +42,34 @@ local wyvernTypes =
     [xi.job.RUN] = wyvernCapabilities.MULTI,
 }
 
-local function doHealingBreath(player, threshold, breath)
-    local breath_heal_range = 13
+local function doHealingBreath(player, threshold)
+    local breath_heal_range = 14
+
+    local healingbreath = xi.jobAbility.HEALING_BREATH
+
+    if player:getMainLvl() >= 80 then
+        healingbreath = xi.jobAbility.HEALING_BREATH_IV
+    elseif player:getMainLvl() >= 40 then
+        healingbreath = xi.jobAbility.HEALING_BREATH_III
+    elseif player:getMainLvl() >= 20 then
+        healingbreath = xi.jobAbility.HEALING_BREATH_II
+    end
+
+    -- zone ID check? is this some strange master zoning but pet hasn't despawned in the other zone check?
     local function inBreathRange(target)
         return player:getPet():getZoneID() == target:getZoneID() and player:getPet():checkDistance(target) <= breath_heal_range
     end
 
-    if player:getHPP() < threshold and inBreathRange(player) then
-        player:getPet():useJobAbility(breath, player)
+    if
+        player:getHPP() <= threshold and
+        inBreathRange(player)
+    then
+        player:getPet():useJobAbility(healingbreath, player)
     else
         local party = player:getPartyWithTrusts()
         for _, member in pairs(party) do
-            if member:getHPP() < threshold and inBreathRange(member) then
-                player:getPet():useJobAbility(breath, member)
+            if member:getHPP() <= threshold and inBreathRange(member) then
+                player:getPet():useJobAbility(healingbreath, member)
                 break
             end
         end
@@ -60,43 +77,53 @@ local function doHealingBreath(player, threshold, breath)
 end
 
 local function doStatusBreath(target, player)
-    local usedBreath = true
     local wyvern = player:getPet()
+    -- https://forum.square-enix.com/ffxi/threads/22659-dev1108-Job-Adjustments-Dragoon
+    local removeBreathTable =
+    {
+    --  { lvl, ability                      , { statuses            } },
+        { 40, xi.jobAbility.REMOVE_PARALYSIS, { xi.effect.PARALYSIS } },
+        { 60, xi.jobAbility.REMOVE_CURSE    , { xi.effect.CURSE_I, xi.effect.BANE, xi.effect.DOOM } },
+        { 80, xi.jobAbility.REMOVE_DISEASE  , { xi.effect.DISEASE, xi.effect.PLAGUE } },
+        { 20, xi.jobAbility.REMOVE_BLINDNESS, { xi.effect.BLINDNESS } },
+        {  1, xi.jobAbility.REMOVE_POISON   , { xi.effect.POISON    } },
+    }
 
-    if target:hasStatusEffect(xi.effect.POISON) then
-        wyvern:useJobAbility(xi.jobAbility.REMOVE_POISON, target)
-    elseif target:hasStatusEffect(xi.effect.BLINDNESS) and wyvern:getMainLvl() > 20 then
-        wyvern:useJobAbility(xi.jobAbility.REMOVE_BLINDNESS, target)
-    elseif target:hasStatusEffect(xi.effect.PARALYSIS) and wyvern:getMainLvl() > 40 then
-        wyvern:useJobAbility(xi.jobAbility.REMOVE_PARALYSIS, target)
-    elseif (target:hasStatusEffect(xi.effect.CURSE_I) or target:hasStatusEffect(xi.effect.DOOM)) and wyvern:getMainLvl() > 60 then
-        wyvern:useJobAbility(xi.jobAbility.REMOVE_CURSE, target)
-    elseif (target:hasStatusEffect(xi.effect.DISEASE) or target:hasStatusEffect(xi.effect.PLAGUE)) and wyvern:getMainLvl() > 80 then
-        wyvern:useJobAbility(xi.jobAbility.REMOVE_DISEASE, target)
-    else
-        usedBreath = false
+    for k, v in pairs(removeBreathTable) do
+        local minLevel = v[1]
+        local ability = v[2]
+        local statusEffects = v[3]
+
+        if wyvern:getMainLvl() >= minLevel then
+            for _, effect in pairs(statusEffects) do
+                if target:hasStatusEffect(effect) then
+                    wyvern:useJobAbility(ability, target)
+                    return true
+                end
+            end
+        end
     end
 
-    return usedBreath
+    return false
 end
 
 entity.onMobSpawn = function(mob)
     local master = mob:getMaster()
-    local strafe_trait = master:getMod(xi.mod.WYVERN_BREATH_MACC)
-    local strafe_effect_merit = master:getMerit(xi.merit.STRAFE_EFFECT)
 
+    -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
+    -- innate -40% DT, which does not contribute to the -50% cap (this is a unique attribute to pets having a "higher" DT cap)
+    -- TODO: need "UDMG" modifier or equivalent
     mob:addMod(xi.mod.DMG, -4000)
-    mob:addMod(xi.mod.MACC, strafe_trait + strafe_effect_merit)
+
+    -- innate +40 subtle blow
+    mob:addMod(xi.mod.SUBTLE_BLOW, 40)
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
         mob:addJobTraits(master:getSubJob(), master:getSubLvl())
     end
+
     local wyvernType = wyvernTypes[master:getSubJob()]
-    local healingbreath = xi.jobAbility.HEALING_BREATH
-    if mob:getMainLvl() >= 80 then healingbreath = xi.jobAbility.HEALING_BREATH_IV
-    elseif mob:getMainLvl() >= 40 then healingbreath = xi.jobAbility.HEALING_BREATH_III
-    elseif mob:getMainLvl() >= 20 then healingbreath = xi.jobAbility.HEALING_BREATH_II
-    end
+
     if wyvernType == wyvernCapabilities.DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
@@ -108,79 +135,29 @@ entity.onMobSpawn = function(mob)
                 end
             end
         end)
-        if master:getSubJob() ~= xi.job.SMN then
-            master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
-                -- check master first!
-                local threshold = 33
-                if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
-                    threshold = 50
-                end
-                doHealingBreath(player, threshold, healingbreath)
-            end)
-        end
-    elseif wyvernType == wyvernCapabilities.OFFENSIVE or wyvernType == wyvernCapabilities.MULTI then
-        master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
-            local weaknessTargetChance = 75
-            local breaths              = {}
-
+        master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
+            local threshold = 33
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
-                weaknessTargetChance = 100
+                threshold = 50
             end
-
-            if math.random(1, 100) <= weaknessTargetChance then
-                local breathList =
-                {
-                    xi.jobAbility.FLAME_BREATH,
-                    xi.jobAbility.FROST_BREATH,
-                    xi.jobAbility.GUST_BREATH,
-                    xi.jobAbility.SAND_BREATH,
-                    xi.jobAbility.LIGHTNING_BREATH,
-                    xi.jobAbility.HYDRO_BREATH,
-                }
-                local resistances =
-                {
-                    target:getMod(xi.mod.FIRE_MEVA),
-                    target:getMod(xi.mod.ICE_MEVA),
-                    target:getMod(xi.mod.WIND_MEVA),
-                    target:getMod(xi.mod.EARTH_MEVA),
-                    target:getMod(xi.mod.THUNDER_MEVA),
-                    target:getMod(xi.mod.WATER_MEVA),
-                }
-                local lowest = resistances[1]
-                local breath = breathList[1]
-
-                for i, v in ipairs(breathList) do
-                    if resistances[i] < lowest then
-                        lowest = resistances[i]
-                        breath = v
-                    end
-                end
-
-                table.insert(breaths, breath)
-            else
-                breaths =
-                {
-                    xi.jobAbility.FLAME_BREATH,
-                    xi.jobAbility.FROST_BREATH,
-                    xi.jobAbility.GUST_BREATH,
-                    xi.jobAbility.SAND_BREATH,
-                    xi.jobAbility.LIGHTNING_BREATH,
-                    xi.jobAbility.HYDRO_BREATH,
-                }
-            end
-
-            player:getPet():useJobAbility(breaths[math.random(1, #breaths)], target)
+            doHealingBreath(player, threshold)
+        end)
+    elseif
+        wyvernType == wyvernCapabilities.OFFENSIVE or
+        wyvernType == wyvernCapabilities.MULTI
+    then
+        master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
+            xi.job_utils.dragoon.pickAndUseDamageBreath(player, target)
         end)
     end
 
     if wyvernType == wyvernCapabilities.MULTI then
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
-            -- check master first!
             local threshold = 25
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 threshold = 33
             end
-            doHealingBreath(player, threshold, healingbreath)
+            doHealingBreath(player, threshold)
         end)
     end
 
@@ -195,31 +172,10 @@ entity.onMobSpawn = function(mob)
         player:petRetreat()
     end)
 
-    if xi.settings.main.ENABLE_WOTG == 1 then
-        master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
-            local pet = player:getPet()
-            local prev_exp = pet:getLocalVar("wyvern_exp")
-            local levels_gained = pet:getLocalVar("wyvern_level_ups")
-            if prev_exp < 1000 and levels_gained < 5 then
-                -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
-                local currentExp = utils.clamp(exp + prev_exp, 0, 1000)
-                local diff = math.floor(currentExp / 200) - levels_gained
-
-                while diff > 0 do
-                    -- wyvern levelled up (diff is the number of level ups)
-                    pet:addMod(xi.mod.ACC, 6)
-                    pet:addMod(xi.mod.HPP, 6)
-                    pet:addMod(xi.mod.ATTP, 5)
-                    pet:setHP(pet:getMaxHP())
-                    player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
-                    pet:setLocalVar("wyvern_level_ups", levels_gained + 1)
-                    diff = diff - 1
-                end
-
-                pet:setLocalVar("wyvern_exp", prev_exp + exp)
-            end
-        end)
-    end
+    -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Parameter_Increase
+    master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
+        xi.job_utils.dragoon.addWyvernExp(player, exp)
+    end)
 end
 
 entity.onMobDeath = function(mob, player)

@@ -648,7 +648,11 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             end
         end
 
-        if npc:getLocalVar("itemAmount_1") == 0 and npc:getLocalVar("itemAmount_2") == 0 and npc:getLocalVar("itemAmount_3") == 0 then
+        if
+            npc:getLocalVar("itemAmount_1") == 0 and
+            npc:getLocalVar("itemAmount_2") == 0 and
+            npc:getLocalVar("itemAmount_3") == 0
+        then
             npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
             npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:setAnimationSub(0) npcvar:resetLocalVars() end)
         end
@@ -688,7 +692,10 @@ xi.nyzul.handleRunicKey = function(mob)
 
         for _, entity in pairs(chars) do
             -- Does players Runic Disk have data saved to a floor of entering or higher
-            if entity:getVar("NyzulFloorProgress") + 1 >= startFloor and not entity:hasKeyItem(xi.ki.RUNIC_KEY) then
+            if
+                entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
+                not entity:hasKeyItem(xi.ki.RUNIC_KEY)
+            then
                 if xi.settings.RUNIC_DISK_SAVE == 0 then -- On early version only initiator of floor got progress saves and key credit
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
@@ -945,7 +952,11 @@ xi.nyzul.addPenalty = function(mob)
                 local power  = pathos.power
 
                 for _, player in pairs(chars) do
-                    if effect == xi.effect.IMPAIRMENT or effect == xi.effect.OMERTA or effect == xi.effect.DEBILITATION then
+                    if
+                        effect == xi.effect.IMPAIRMENT or
+                        effect == xi.effect.OMERTA or
+                        effect == xi.effect.DEBILITATION
+                    then
                         if player:hasStatusEffect(effect) then
                             local statusEffect = player:getStatusEffect(effect)
                             local effectPower  = statusEffect:getPower()

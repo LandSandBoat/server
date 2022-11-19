@@ -50,7 +50,11 @@ entity.onTrade = function(player, npc, trade)
 
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
         -- buy prismatic hourglass
-        if gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) then
+        if
+            gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and
+            count == 1 and
+            not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)
+        then
             player:startEvent(134)
 
         -- return timeless hourglass for refund
@@ -58,9 +62,15 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(153)
 
         -- currency exchanges
-        elseif count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE) then
+        elseif
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
             player:startEvent(135, xi.settings.main.CURRENCY_EXCHANGE_RATE)
-        elseif count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE) then
+        elseif
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
             player:startEvent(136, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif count == 1 and trade:hasItemQty(currency[3], 1) then
             player:startEvent(138, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)

@@ -12,7 +12,7 @@ zoneObject.onInitialize = function(zone)
     local locusZ = 60.000
     local distance = 15
 
-    zone:registerRegion(1,
+    zone:registerTriggerArea(1,
         locusX - distance, locusY - distance, locusZ - distance,
         locusX + distance, locusY + distance, locusZ + distance)
 end
@@ -31,7 +31,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

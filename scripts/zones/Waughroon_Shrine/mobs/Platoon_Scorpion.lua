@@ -44,9 +44,9 @@ entity.onMobSpawn = function(mob)
         -- Scorpions can still move around, but will not auto attack
         elseif math.random() <= 0.25 and skillID == 355 then
             mobArg:showText(mob,ID.text.SCORPION_NO_ENERGY)
-            mobArg:SetAutoAttackEnabled(false)
+            mobArg:setAutoAttackEnabled(false)
             mobArg:timer(1000 * math.random(25, 30), function(mobArg1)
-                mobArg1:SetAutoAttackEnabled(true)
+                mobArg1:setAutoAttackEnabled(true)
             end)
         end
 

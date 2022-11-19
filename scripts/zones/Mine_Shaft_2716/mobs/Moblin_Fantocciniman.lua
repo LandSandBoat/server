@@ -26,7 +26,7 @@ local rolls =
 
 entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setSpeed(60)
 end
 
@@ -62,7 +62,7 @@ entity.onMobFight = function(mob, target)
     -- Attack player if any HP has been lost
     if mob:getHP() < mob:getMaxHP() and mob:getLocalVar("control") == 0 then
         mob:showText(mob, ID.text.YOU_MAKE_ME_MAD)
-        mob:SetAutoAttackEnabled(true)
+        mob:setAutoAttackEnabled(true)
         mob:setLocalVar("control", 1)
         mob:setBehaviour(0)
 

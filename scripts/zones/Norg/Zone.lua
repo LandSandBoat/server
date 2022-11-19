@@ -9,7 +9,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
-    zone:registerRegion(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
+    zone:registerTriggerArea(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
@@ -30,8 +30,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)  -- An Undying Pledge cs trigger
             if player:getCharVar("anUndyingPledgeCS") == 1 then

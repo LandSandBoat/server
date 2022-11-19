@@ -9,7 +9,7 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -84.302, 6.5, -120.997, -77, 7.5, -114) -- Used for stairs teleport -85.1, 7, -119.9
+    zone:registerTriggerArea(1, -84.302, 6.5, -120.997, -77, 7.5, -114) -- Used for stairs teleport -85.1, 7, -119.9
 
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.VRTRA)
@@ -39,13 +39,13 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    if region:GetRegionID() == 1 then
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    if triggerArea:GetTriggerAreaID() == 1 then
         player:startCutscene(9)
     end
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

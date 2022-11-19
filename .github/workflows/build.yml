@@ -534,8 +534,8 @@ jobs:
         printf "\nStart server processes\n"
         screen -d -m -S xi_connect ./xi_connect --log login-server.log
         screen -d -m -S xi_search ./xi_search --log search-server.log
-        screen -d -m -S xi_map ./xi_map --log map-server-0.log --port 54230
-        screen -d -m -S xi_map ./xi_map --log map-server-1.log --port 54231
+        screen -d -m -S xi_map ./xi_map --log map-server-0.log --ip 127.0.0.1 --port 54230
+        screen -d -m -S xi_map ./xi_map --log map-server-1.log --ip 127.0.0.1 --port 54231
         sleep 2m
         killall screen
     - name: Check for errors and warnings

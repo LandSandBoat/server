@@ -20,7 +20,7 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local z = npc:getZPos()
     local distance = 7
 
-    zone:registerRegion(zoneID,
+    zone:registerTriggerArea(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
@@ -80,9 +80,9 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE105_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
-        xi.fsa.onRegionEnter(player, region:GetRegionID())
+        xi.fsa.onTriggerAreaEnter(player, triggerArea:GetTriggerAreaID())
     end
 end
 

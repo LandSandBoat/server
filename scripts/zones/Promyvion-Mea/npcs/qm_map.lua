@@ -17,7 +17,10 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1722) and not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_MEA) then
+    if
+        npcUtil.tradeHas(trade, 1722) and
+        not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_MEA)
+    then
         player:startEvent(49)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)

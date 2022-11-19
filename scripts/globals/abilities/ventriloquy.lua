@@ -15,7 +15,10 @@ local abilityObject = {}
 abilityObject.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
+    elseif
+        not player:getPetID() or
+        not (player:getPetID() >= 69 and player:getPetID() <= 72)
+    then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         return 0, 0
@@ -45,7 +48,13 @@ abilityObject.onUseAbility = function(player, target, ability)
 
             local playerEnmityBonus = 1
             local petEnmityBonus = 1
-            if target:getTarget():getTargID() == player:getTargID() or ((playerCE + playerVE) >= (petCE + petVE) and target:getTarget():getTargID() ~= pet:getTargID()) then
+            if
+                target:getTarget():getTargID() == player:getTargID() or
+                (
+                    (playerCE + playerVE) >= (petCE + petVE) and
+                    target:getTarget():getTargID() ~= pet:getTargID()
+                )
+            then
                 playerEnmityBonus = playerEnmityBonus + bonus
                 petEnmityBonus = petEnmityBonus - bonus
             else

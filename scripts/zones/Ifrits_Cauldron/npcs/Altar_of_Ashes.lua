@@ -26,7 +26,10 @@ end
 entity.onTrigger = function(player, npc)
     local guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
 
-    if guardian == QUEST_ACCEPTED and (player:getCharVar("PamamaVar") == 1 or player:getCharVar("PamamaVar") == 2) then
+    if
+        guardian == QUEST_ACCEPTED and
+        (player:getCharVar("PamamaVar") == 1 or player:getCharVar("PamamaVar") == 2)
+    then
         player:messageSpecial(ID.text.ALTAR_COMPLETED)
     elseif guardian == QUEST_ACCEPTED and player:getCharVar("PamamaVar") == 0 then
         player:messageSpecial(ID.text.ALTAR_INSPECT)

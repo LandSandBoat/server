@@ -25,72 +25,72 @@
 
 #include <cstring>
 
-#include "../packets/action.h"
-#include "../packets/basic.h"
-#include "../packets/char.h"
-#include "../packets/char_appearance.h"
-#include "../packets/char_health.h"
-#include "../packets/char_recast.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/event.h"
-#include "../packets/event_string.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/key_items.h"
-#include "../packets/lock_on.h"
-#include "../packets/menu_raisetractor.h"
-#include "../packets/message_special.h"
-#include "../packets/message_system.h"
-#include "../packets/message_text.h"
-#include "../packets/release.h"
+#include "packets/action.h"
+#include "packets/basic.h"
+#include "packets/char.h"
+#include "packets/char_appearance.h"
+#include "packets/char_health.h"
+#include "packets/char_recast.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/event.h"
+#include "packets/event_string.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/key_items.h"
+#include "packets/lock_on.h"
+#include "packets/menu_raisetractor.h"
+#include "packets/message_special.h"
+#include "packets/message_system.h"
+#include "packets/message_text.h"
+#include "packets/release.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/player_controller.h"
-#include "../ai/helpers/targetfind.h"
-#include "../ai/states/ability_state.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/death_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/item_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/range_state.h"
-#include "../ai/states/weaponskill_state.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/player_controller.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/death_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/item_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/raise_state.h"
+#include "ai/states/range_state.h"
+#include "ai/states/weaponskill_state.h"
 
-#include "../ability.h"
-#include "../attack.h"
-#include "../battlefield.h"
-#include "../char_recast_container.h"
-#include "../conquest_system.h"
-#include "../enmity_container.h"
-#include "../item_container.h"
-#include "../items/item_furnishing.h"
-#include "../items/item_usable.h"
-#include "../items/item_weapon.h"
-#include "../job_points.h"
-#include "../latent_effect_container.h"
-#include "../mobskill.h"
-#include "../modifier.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/status_effects.h"
-#include "../petskill.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trade_container.h"
-#include "../treasure_pool.h"
-#include "../universal_container.h"
-#include "../utils/attackutils.h"
-#include "../utils/battleutils.h"
-#include "../utils/charutils.h"
-#include "../utils/gardenutils.h"
-#include "../utils/moduleutils.h"
-#include "../utils/petutils.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "attack.h"
 #include "automatonentity.h"
+#include "battlefield.h"
+#include "char_recast_container.h"
 #include "charentity.h"
+#include "conquest_system.h"
+#include "enmity_container.h"
+#include "item_container.h"
+#include "items/item_furnishing.h"
+#include "items/item_usable.h"
+#include "items/item_weapon.h"
+#include "job_points.h"
+#include "latent_effect_container.h"
 #include "mobentity.h"
+#include "mobskill.h"
+#include "modifier.h"
+#include "packets/char_job_extra.h"
+#include "packets/status_effects.h"
+#include "petskill.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trade_container.h"
+#include "treasure_pool.h"
 #include "trustentity.h"
+#include "universal_container.h"
+#include "utils/attackutils.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "utils/gardenutils.h"
+#include "utils/moduleutils.h"
+#include "utils/petutils.h"
+#include "weapon_skill.h"
 
 CCharEntity::CCharEntity()
 {
@@ -174,18 +174,18 @@ CCharEntity::CCharEntity()
     m_mkeCurrent = 0;
     m_asaCurrent = 0;
 
-    m_Costume            = 0;
-    m_Monstrosity        = 0;
-    m_hasTractor         = 0;
-    m_hasRaise           = 0;
-    m_weaknessLvl        = 0;
-    m_hasArise           = false;
-    m_hasAutoTarget      = 1;
-    m_InsideRegionID     = 0;
-    m_LevelRestriction   = 0;
-    m_lastBcnmTimePrompt = 0;
-    m_AHHistoryTimestamp = 0;
-    m_DeathTimestamp     = 0;
+    m_Costume             = 0;
+    m_Monstrosity         = 0;
+    m_hasTractor          = 0;
+    m_hasRaise            = 0;
+    m_weaknessLvl         = 0;
+    m_hasArise            = false;
+    m_hasAutoTarget       = 1;
+    m_InsideTriggerAreaID = 0;
+    m_LevelRestriction    = 0;
+    m_lastBcnmTimePrompt  = 0;
+    m_AHHistoryTimestamp  = 0;
+    m_DeathTimestamp      = 0;
 
     m_EquipFlag         = 0;
     m_EquipBlock        = 0;
@@ -202,6 +202,8 @@ CCharEntity::CCharEntity()
     m_isBlockingAid = false;
 
     BazaarID.clean();
+
+    lastTradeInvite = {};
     TradePending.clean();
     InvitePending.clean();
 

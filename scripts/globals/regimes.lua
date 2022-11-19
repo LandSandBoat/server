@@ -1061,7 +1061,10 @@ xi.regime.bookOnTrigger = function(player, regimeType)
     local cipher = 0 -- Trust Alter Ego Extravaganza
     local active = xi.extravaganza.campaignActive()
 
-    if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
+    if
+        active == xi.extravaganza.campaign.SPRING_FALL or
+        active == xi.extravaganza.campaign.BOTH
+    then
         cipher = 3
     end
 
@@ -1070,7 +1073,10 @@ xi.regime.bookOnTrigger = function(player, regimeType)
     if player:getCharVar("[hunt]status") >= 1 then
         player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-    elseif (regimeType == xi.regime.type.FIELDS and xi.settings.main.ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and xi.settings.main.ENABLE_GROUNDS_TOMES == 1) then
+    elseif
+        (regimeType == xi.regime.type.FIELDS and xi.settings.main.ENABLE_FIELD_MANUALS == 1) or
+        (regimeType == xi.regime.type.GROUNDS and xi.settings.main.ENABLE_GROUNDS_TOMES == 1)
+    then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
@@ -1165,7 +1171,13 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
     end
 
     -- check player can eat
-    if opt.food and (player:hasStatusEffect(xi.effect.FOOD) or player:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+    if
+        opt.food and
+        (
+            player:hasStatusEffect(xi.effect.FOOD) or
+            player:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+        )
+    then
         player:messageBasic(xi.msg.basic.IS_FULL)
         return
     end
@@ -1368,17 +1380,29 @@ end
 xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     -- dead players, or players not on this training regime, get no credit
     -- also prevents error when this function is called onMobDeath from a mob not killed by a player
-    if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
+    if
+        not player or
+        player:getHP() == 0 or
+        player:getCharVar("[regime]id") ~= regimeId
+    then
         return
     end
 
     -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if xi.settings.main.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+    if
+        xi.settings.main.FOV_REWARD_ALLIANCE ~= 1 and
+        regimeType == xi.regime.type.FIELDS and
+        player:checkSoloPartyAlliance() == 2
+    then
         return
     end
 
     -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
-    if xi.settings.main.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
+    if
+        xi.settings.main.GOV_REWARD_ALLIANCE ~= 1 and
+        regimeType == xi.regime.type.GROUNDS and
+        player:checkSoloPartyAlliance() == 2
+    then
         return
     end
 
@@ -1425,7 +1449,10 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- adjust reward down if regime is higher than server mob level cap
     -- example: if you have mobs capped at level 80, and the regime is level 100, you will only get 80% of the reward
-    if xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
+    if
+        xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and
+        page[6] > xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX
+    then
         local avgCapLevel = (xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
         local avgMobLevel = (page[5] + page[6]) / 2
 
@@ -1457,7 +1484,10 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
-    if xi.settings.main.REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
+    if
+        xi.settings.main.REGIME_WAIT == 0 or
+        player:getCharVar("[regime]lastReward") < vanadielEpoch
+    then
         -- gil
         player:addGil(reward)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_GIL, reward)

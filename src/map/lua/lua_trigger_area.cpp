@@ -19,21 +19,16 @@
 ===========================================================================
 */
 
-#include "lua_region.h"
-#include "../region.h"
+#include "lua_trigger_area.h"
 
-/************************************************************************
- *                                                                        *
- *  Конструктор                                                            *
- *                                                                        *
- ************************************************************************/
+#include "trigger_area.h"
 
-CLuaRegion::CLuaRegion(CRegion* PRegion)
-: m_PLuaRegion(PRegion)
+CLuaTriggerArea::CLuaTriggerArea(CTriggerArea* PTriggerArea)
+: m_PLuaTriggerArea(PTriggerArea)
 {
-    if (PRegion == nullptr)
+    if (PTriggerArea == nullptr)
     {
-        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!");
+        ShowError("CLuaTriggerArea created with nullptr instead of valid CTriggerArea*!");
     }
 }
 
@@ -43,9 +38,9 @@ CLuaRegion::CLuaRegion(CRegion* PRegion)
  *                                                                       *
  ************************************************************************/
 
-uint32 CLuaRegion::GetRegionID()
+uint32 CLuaTriggerArea::GetTriggerAreaID()
 {
-    return m_PLuaRegion->GetRegionID();
+    return m_PLuaTriggerArea->GetTriggerAreaID();
 }
 
 /************************************************************************
@@ -54,9 +49,9 @@ uint32 CLuaRegion::GetRegionID()
  *                                                                       *
  ************************************************************************/
 
-int16 CLuaRegion::GetCount()
+int16 CLuaTriggerArea::GetCount()
 {
-    return m_PLuaRegion->GetCount();
+    return m_PLuaTriggerArea->GetCount();
 }
 
 /************************************************************************
@@ -65,9 +60,9 @@ int16 CLuaRegion::GetCount()
  *                                                                       *
  ************************************************************************/
 
-int16 CLuaRegion::AddCount(int16 count)
+int16 CLuaTriggerArea::AddCount(int16 count)
 {
-    return m_PLuaRegion->AddCount(count);
+    return m_PLuaTriggerArea->AddCount(count);
 }
 
 /************************************************************************
@@ -76,26 +71,26 @@ int16 CLuaRegion::AddCount(int16 count)
  *                                                                       *
  ************************************************************************/
 
-int16 CLuaRegion::DelCount(int16 count)
+int16 CLuaTriggerArea::DelCount(int16 count)
 {
-    return m_PLuaRegion->DelCount(count);
+    return m_PLuaTriggerArea->DelCount(count);
 }
 
 //======================================================//
 
-void CLuaRegion::Register()
+void CLuaTriggerArea::Register()
 {
-    SOL_USERTYPE("CRegion", CLuaRegion);
-    SOL_REGISTER("GetRegionID", CLuaRegion::GetRegionID);
-    SOL_REGISTER("GetCount", CLuaRegion::GetCount);
-    SOL_REGISTER("AddCount", CLuaRegion::AddCount);
-    SOL_REGISTER("DelCount", CLuaRegion::DelCount);
+    SOL_USERTYPE("CTriggerArea", CLuaTriggerArea);
+    SOL_REGISTER("GetTriggerAreaID", CLuaTriggerArea::GetTriggerAreaID);
+    SOL_REGISTER("GetCount", CLuaTriggerArea::GetCount);
+    SOL_REGISTER("AddCount", CLuaTriggerArea::AddCount);
+    SOL_REGISTER("DelCount", CLuaTriggerArea::DelCount);
 }
 
-std::ostream& operator<<(std::ostream& os, const CLuaRegion& region)
+std::ostream& operator<<(std::ostream& os, const CLuaTriggerArea& triggerArea)
 {
-    std::string id = region.m_PLuaRegion ? std::to_string(region.m_PLuaRegion->GetRegionID()) : "nullptr";
-    return os << "CLuaRegion(" << id << ")";
+    std::string id = triggerArea.m_PLuaTriggerArea ? std::to_string(triggerArea.m_PLuaTriggerArea->GetTriggerAreaID()) : "nullptr";
+    return os << "CLuaTriggerArea(" << id << ")";
 }
 
 //======================================================//

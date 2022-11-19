@@ -48,7 +48,7 @@ zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("2pc1")
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

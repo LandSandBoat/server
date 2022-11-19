@@ -37,62 +37,62 @@
 #include "lua_item.h"
 #include "lua_mobskill.h"
 #include "lua_petskill.h"
-#include "lua_region.h"
 #include "lua_spell.h"
 #include "lua_statuseffect.h"
 #include "lua_trade_container.h"
+#include "lua_trigger_area.h"
 #include "lua_zone.h"
 #include "luautils.h"
 
-#include "../ability.h"
-#include "../ai/ai_container.h"
-#include "../ai/states/ability_state.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/death_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/item_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/mobskill_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/range_state.h"
-#include "../ai/states/respawn_state.h"
-#include "../ai/states/weaponskill_state.h"
-#include "../alliance.h"
-#include "../battlefield.h"
-#include "../campaign_system.h"
-#include "../conquest_system.h"
-#include "../daily_system.h"
-#include "../entities/automatonentity.h"
-#include "../entities/baseentity.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../instance.h"
-#include "../items/item_puppet.h"
-#include "../map.h"
-#include "../message.h"
-#include "../mobskill.h"
-#include "../packets/action.h"
-#include "../packets/char_emotion.h"
-#include "../packets/char_update.h"
-#include "../packets/entity_update.h"
-#include "../packets/entity_visual.h"
-#include "../packets/menu_raisetractor.h"
-#include "../party.h"
-#include "../petskill.h"
-#include "../roe.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../timetriggers.h"
-#include "../transport.h"
-#include "../utils/battleutils.h"
-#include "../utils/charutils.h"
-#include "../utils/instanceutils.h"
-#include "../utils/itemutils.h"
-#include "../utils/moduleutils.h"
-#include "../utils/serverutils.h"
-#include "../utils/zoneutils.h"
-#include "../vana_time.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "ai/ai_container.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/death_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/item_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/mobskill_state.h"
+#include "ai/states/raise_state.h"
+#include "ai/states/range_state.h"
+#include "ai/states/respawn_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "alliance.h"
+#include "battlefield.h"
+#include "campaign_system.h"
+#include "conquest_system.h"
+#include "daily_system.h"
+#include "entities/automatonentity.h"
+#include "entities/baseentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "instance.h"
+#include "items/item_puppet.h"
+#include "map.h"
+#include "message.h"
+#include "mobskill.h"
+#include "packets/action.h"
+#include "packets/char_emotion.h"
+#include "packets/char_update.h"
+#include "packets/entity_update.h"
+#include "packets/entity_visual.h"
+#include "packets/menu_raisetractor.h"
+#include "party.h"
+#include "petskill.h"
+#include "roe.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "timetriggers.h"
+#include "transport.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "utils/instanceutils.h"
+#include "utils/itemutils.h"
+#include "utils/moduleutils.h"
+#include "utils/serverutils.h"
+#include "utils/zoneutils.h"
+#include "vana_time.h"
+#include "weapon_skill.h"
 
 namespace luautils
 {
@@ -212,7 +212,7 @@ namespace luautils
         CLuaInstance::Register();
         CLuaMobSkill::Register();
         CLuaPetSkill::Register();
-        CLuaRegion::Register();
+        CLuaTriggerArea::Register();
         CLuaSpell::Register();
         CLuaStatusEffect::Register();
         CLuaTradeContainer::Register();
@@ -225,11 +225,11 @@ namespace luautils
         roeutils::init(); // TODO: Get rid of the need to do this
 
         // Then the rest...
-        for (auto entry : std::filesystem::directory_iterator("./scripts/globals"))
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/globals"))
         {
-            if (entry.path().extension() == ".lua")
+            if (entry.extension() == ".lua")
             {
-                auto relative_path_string = entry.path().relative_path().generic_string();
+                auto relative_path_string = entry.relative_path().generic_string();
 
                 ShowTrace("Loading global script %s", relative_path_string);
 
@@ -249,11 +249,11 @@ namespace luautils
 
         if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
         {
-            for (auto entry : std::filesystem::recursive_directory_iterator("./scripts"))
+            for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>("./scripts"))
             {
-                if (entry.path().extension() == ".lua")
+                if (entry.extension() == ".lua")
                 {
-                    auto result = lua.safe_script_file(entry.path().relative_path().generic_string());
+                    auto result = lua.safe_script_file(entry.relative_path().generic_string());
                     if (!result.valid())
                     {
                         sol::error err = result;
@@ -354,9 +354,9 @@ namespace luautils
         // "scripts/battlefields/(zone)/(filename).lua"
         auto scrapeSubdir = [&](std::string subFolder) -> void
         {
-            for (auto const& entry : std::filesystem::recursive_directory_iterator(subFolder))
+            for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>(subFolder))
             {
-                auto path = entry.path().relative_path();
+                auto path = entry.relative_path();
 
                 // TODO(compiler updates):
                 // entry.depth() is not yet available in all of our compilers
@@ -364,7 +364,7 @@ namespace luautils
 
                 bool isHelpersFile = path.filename() == "helpers.lua";
 
-                if (!entry.is_directory() &&
+                if (!std::filesystem::is_directory(path) &&
                     path.extension() == ".lua" &&
                     depth == 4 &&
                     !isHelpersFile)
@@ -1924,11 +1924,11 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  The character has entered the active region                          *
+     *  The character has entered the active trigger area                    *
      *                                                                       *
      ************************************************************************/
 
-    int32 OnRegionEnter(CCharEntity* PChar, CRegion* PRegion)
+    int32 OnTriggerAreaEnter(CCharEntity* PChar, CTriggerArea* PTriggerArea)
     {
         TracyZoneScoped;
 
@@ -1944,7 +1944,7 @@ namespace luautils
         }
 
         // player may be entering because of an earlier event (event that changes position)
-        // these should probably not call another event from onRegionEnter (use onEventFinish instead)
+        // these should probably not call another event from onTriggerAreaEnter (use onEventFinish instead)
         if (!PChar->isInEvent())
         {
             PChar->eventPreparation->scriptFile = filename;
@@ -1952,23 +1952,23 @@ namespace luautils
 
         auto name = (const char*)PChar->loc.zone->GetName();
 
-        sol::function onRegionEnter;
+        sol::function onTriggerAreaEnter;
         if (PChar->PInstance)
         {
             auto instance_name = (const char*)PChar->PInstance->GetName();
-            onRegionEnter      = lua["xi"]["zones"][name]["instance"][instance_name]["onRegionEnter"];
+            onTriggerAreaEnter = lua["xi"]["zones"][name]["instance"][instance_name]["onTriggerAreaEnter"];
         }
         else
         {
-            onRegionEnter = lua["xi"]["zones"][name]["Zone"]["onRegionEnter"];
+            onTriggerAreaEnter = lua["xi"]["zones"][name]["Zone"]["onTriggerAreaEnter"];
         }
 
-        auto onRegionEnterFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onRegionEnter"];
-        auto result                 = onRegionEnterFramework(CLuaBaseEntity(PChar), CLuaRegion(PRegion), onRegionEnter);
+        auto onTriggerAreaEnterFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTriggerAreaEnter"];
+        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), onTriggerAreaEnter);
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onRegionEnter: %s", err.what());
+            ShowError("luautils::onTriggerAreaEnter: %s", err.what());
             return -1;
         }
 
@@ -1977,11 +1977,11 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  The character has left the active region                             *
+     *  The character has left the active trigger area                       *
      *                                                                       *
      ************************************************************************/
 
-    int32 OnRegionLeave(CCharEntity* PChar, CRegion* PRegion)
+    int32 OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea)
     {
         TracyZoneScoped;
 
@@ -2005,23 +2005,23 @@ namespace luautils
         auto name   = (const char*)PChar->loc.zone->GetName();
         auto zoneId = (const uint16*)PChar->loc.zone->GetID();
 
-        sol::function onRegionLeave;
+        sol::function onTriggerAreaLeave;
         if (PChar->PInstance && zoneId == (const uint16*)PChar->PInstance->GetZone()->GetID())
         {
             auto instance_name = (const char*)PChar->PInstance->GetName();
-            onRegionLeave      = lua["xi"]["zones"][name]["instance"][instance_name]["onRegionLeave"];
+            onTriggerAreaLeave = lua["xi"]["zones"][name]["instance"][instance_name]["onTriggerAreaLeave"];
         }
         else
         {
-            onRegionLeave = lua["xi"]["zones"][name]["Zone"]["onRegionLeave"];
+            onTriggerAreaLeave = lua["xi"]["zones"][name]["Zone"]["onTriggerAreaLeave"];
         }
 
-        auto onRegionLeaveFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onRegionLeave"];
-        auto result                 = onRegionLeaveFramework(CLuaBaseEntity(PChar), CLuaRegion(PRegion), onRegionLeave);
+        auto onTriggerAreaLeaveFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onTriggerAreaLeave"];
+        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), onTriggerAreaLeave);
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onRegionLeave: %s", err.what());
+            ShowError("luautils::onTriggerAreaLeave: %s", err.what());
             return -1;
         }
 

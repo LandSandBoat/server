@@ -23,13 +23,13 @@ end
 
 entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_GENBU):setAnimation(xi.anim.CLOSE_DOOR)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 5)
     mob:timer(5000, function(mobArg)
-        mobArg:SetMagicCastingEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
     end)
 end
 

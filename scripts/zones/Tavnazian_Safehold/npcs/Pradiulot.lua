@@ -18,7 +18,10 @@ entity.onTrigger = function(player, npc)
 
     if unforgiven == QUEST_ACCEPTED and player:getCharVar("UnforgivenVar") == 1 then
         player:startEvent(204) -- Dialogue for final stage of Unforgiven Quest
-    elseif unforgiven == QUEST_COMPLETED and player:getCharVar("UnforgivenVar") == 2 then
+    elseif
+        unforgiven == QUEST_COMPLETED and
+        player:getCharVar("UnforgivenVar") == 2
+    then
         player:startEvent(206) -- Dialogue after completing quest (optional)
     else
         player:startEvent(371) -- Default Dialogue TODO: Dialogue default is 192 before Unforgiven, so this might change

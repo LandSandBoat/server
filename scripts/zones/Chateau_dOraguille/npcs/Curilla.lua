@@ -91,7 +91,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(52)
 
     -- Default dialogue after "Enveloped in Darkness"
-    elseif envelopedInDarkness == QUEST_COMPLETED and peaceForTheSpirit == QUEST_AVAILABLE then
+    elseif
+        envelopedInDarkness == QUEST_COMPLETED and
+        peaceForTheSpirit == QUEST_AVAILABLE
+    then
         player:startEvent(114)
 
     -- Default dialogue

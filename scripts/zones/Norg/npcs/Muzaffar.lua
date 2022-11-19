@@ -16,7 +16,10 @@ entity.onTrade = function(player, npc, trade)
     local easternPottery = trade:hasItemQty(1200, 4)
     local southernMummies = trade:hasItemQty(1201, 4)
 
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED
+    then
         if northernFurs and count == 4 then
             player:tradeComplete()
             player:startEvent(17, 1199, 1199)
@@ -31,7 +34,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED
+    then
         player:startEvent(16)
     else
         player:startEvent(15)

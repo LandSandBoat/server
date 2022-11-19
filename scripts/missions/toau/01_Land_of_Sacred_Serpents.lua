@@ -32,9 +32,9 @@ mission.sections =
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [3] = function(player, region)
+                [3] = function(player, triggerArea)
                     -- Naja Salaheem interactions require the 9th argument set to 0.
                     -- This is because Aht Uhrgan Whitegate uses 2 different dats.
                     return mission:progressEvent(3000, { text_table = 0 })

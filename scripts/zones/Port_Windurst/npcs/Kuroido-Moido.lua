@@ -27,7 +27,13 @@ entity.onTrigger = function(player, npc)
 
     if makingAmends == QUEST_ACCEPTED then -- MAKING AMENDS: During Quest
         player:startEvent(276)
-    elseif makingAmends == QUEST_COMPLETED and makingAmens ~= QUEST_COMPLETED and wonderWands ~= QUEST_COMPLETED and needToZone then -- MAKING AMENDS: After Quest
+    elseif
+        makingAmends == QUEST_COMPLETED and
+        makingAmens ~= QUEST_COMPLETED and
+        wonderWands ~= QUEST_COMPLETED and
+        needToZone
+    then
+        -- MAKING AMENDS: After Quest
         player:startEvent(279)
     elseif makingAmends == QUEST_COMPLETED and makingAmens == QUEST_AVAILABLE then
         if pfame >= 4 and not needToZone then

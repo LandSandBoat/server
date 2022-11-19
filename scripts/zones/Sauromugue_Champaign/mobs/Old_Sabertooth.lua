@@ -11,15 +11,15 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:SetMobAbilityEnabled(false)
-    mob:SetAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setRoamFlags(256, 512)
 
     mob:addListener("TAKE_DAMAGE", "PRIME_TAKE_DAMAGE", function(tiger, amount, attacker)
         if attacker then
             tiger:setLocalVar("tookDamage", 1)
-            tiger:SetMobAbilityEnabled(true)
-            tiger:SetAutoAttackEnabled(true)
+            tiger:setMobAbilityEnabled(true)
+            tiger:setAutoAttackEnabled(true)
             tiger:setBehaviour(0)
         end
     end)
@@ -40,7 +40,10 @@ entity.onMobDeath = function(mob, player, optParams)
     local players = mob:getZone():getPlayers()
 
     for i, person in pairs(players) do -- can't use the variable name "player" because it's already being used
-        if person:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == QUEST_ACCEPTED and person:checkDistance(mob) < 32 then
+        if
+            person:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == QUEST_ACCEPTED and
+            person:checkDistance(mob) < 32
+        then
             if mob:getLocalVar("tookDamage") == 0 then
                 person:setCharVar("TheFangedOneCS", 2)
             else

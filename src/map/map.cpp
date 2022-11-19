@@ -69,6 +69,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+#ifdef WIN32
+#include <io.h>
+#endif
+
 #ifdef TRACY_ENABLE
 void* operator new(std::size_t count)
 {
@@ -160,13 +164,14 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     ipp |= port64 << 32;
     map_session_list[ipp] = map_session_data;
 
-    const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
+    auto ipstr    = ip2str(map_session_data->client_addr);
+    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1;", ipstr);
 
-    int32 ret = sql->Query(fmtQuery, ip2str(map_session_data->client_addr));
+    int32 ret = sql->Query(fmtQuery.c_str());
 
     if (ret == SQL_ERROR || sql->NumRows() == 0)
     {
-        ShowError("recv_parse: Invalid login attempt from %s", ip2str(map_session_data->client_addr));
+        ShowError(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
         return nullptr;
     }
     return map_session_data;
@@ -202,17 +207,20 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
+    ShowInfo(fmt::format("map_port: {}", map_port));
+
     srand((uint32)time(nullptr));
     xirand::seed();
-
-    luautils::init();
-    PacketParserInitialize();
 
     ShowInfo("do_init: connecting to database");
     sql = std::make_unique<SqlConnection>();
 
     ShowInfo(sql->GetClientVersion().c_str());
     ShowInfo(sql->GetServerVersion().c_str());
+
+    luautils::init(); // Also calls moduleutils::LoadLuaModules();
+
+    PacketParserInitialize();
 
     sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                map_ip.s_addr, map_port, map_ip.s_addr, map_port);
@@ -575,7 +583,7 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    ShowError("map_encipher_packet: bad packet from <%s>", ip2str(ip));
+    ShowError(fmt::format("map_encipher_packet: bad packet from <{}>", ip2str(ip)));
     return -1;
 }
 
@@ -602,7 +610,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError("Possible crash attempt from: %s", ip2str(map_session_data->client_addr));
+        ShowError(fmt::format("Possible crash attempt from: {}", ip2str(map_session_data->client_addr)));
         return -1;
     }
 

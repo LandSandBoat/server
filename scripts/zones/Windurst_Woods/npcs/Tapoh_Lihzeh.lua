@@ -14,7 +14,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- CHOCOBILIOUS
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and player:getCharVar("ChocobiliousQuest") == 1 and npcUtil.tradeHas(trade, 938) then
+    if
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and
+        player:getCharVar("ChocobiliousQuest") == 1 and
+        npcUtil.tradeHas(trade, 938)
+    then
         player:startEvent(229, 0, 938)
 
     -- PAYING LIP SERVICE

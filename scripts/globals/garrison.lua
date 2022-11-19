@@ -135,8 +135,8 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
     mob:setAllegiance(1)
 
     -- NPCs don't cast spells or use TP skills
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
     -- Death listener for tracking win/lose condition
     mob:addListener("DEATH", "GARRISON_NPC_DEATH", function(mobArg)

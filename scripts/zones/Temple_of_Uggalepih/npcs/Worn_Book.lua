@@ -13,7 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) or player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
+    if
+        player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) or
+        player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS)
+    then
         player:messageSpecial(ID.text.NO_REASON_TO_INVESTIGATE)
     else
         local offset = npc:getID() - ID.npc.BOOK_OFFSET
@@ -27,11 +30,23 @@ end
 entity.onEventFinish = function(player, csid, option)
     local book = player:getCharVar("paintbrushOfSouls_book")
 
-    if csid == 61 and option == 1 and (book == 0 or book == 2 or book == 4 or book == 6) then
+    if
+        csid == 61 and
+        option == 1 and
+        (book == 0 or book == 2 or book == 4 or book == 6)
+    then
         player:setCharVar("paintbrushOfSouls_book", book + 1)
-    elseif csid == 62 and option == 1 and (book == 0 or book == 1 or book == 4 or book == 5) then
+    elseif
+        csid == 62 and
+        option == 1 and
+        (book == 0 or book == 1 or book == 4 or book == 5)
+    then
         player:setCharVar("paintbrushOfSouls_book", book + 2)
-    elseif csid == 63 and option == 1 and (book == 0 or book == 1 or book == 2 or book == 3) then
+    elseif
+        csid == 63 and
+        option == 1 and
+        (book == 0 or book == 1 or book == 2 or book == 3)
+    then
         player:setCharVar("paintbrushOfSouls_book", book + 4)
     end
 

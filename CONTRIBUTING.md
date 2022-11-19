@@ -29,7 +29,7 @@
 
 ## Technical Guidelines
 
-- For more specific guides on how to contribute using Git, GitHub, C++, Lua, SQL, Python, or other technical changes, please see the [Development Landing Page](https://github.com/LandSandBoat/server/wiki/Development) in the [Wiki](https://github.com/LandSandBoat/server/wiki).
+- For more specific guides on how to contribute using Git, GitHub, C++, Lua, SQL, Python, other technical changes, and how to style your code, etc. please see the [Development Landing Page](https://github.com/LandSandBoat/server/wiki/Development) in the [Wiki](https://github.com/LandSandBoat/server/wiki).
 
 ## Workflow Guide
 

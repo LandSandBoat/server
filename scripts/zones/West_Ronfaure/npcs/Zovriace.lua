@@ -937,7 +937,10 @@ entity.onSpawn = function(npc)
 end
 
 entity.onPath = function(npc)
-    if npc:getLocalVar("reported") ~= 1 and npc:atPoint(xi.path.get(pathNodes, 288)) then
+    if
+        npc:getLocalVar("reported") ~= 1 and
+        npc:atPoint(xi.path.get(pathNodes, 288))
+    then
         GetNPCByID(npc:getID() + 4):showText(npc, ID.text.ZOVRIACE_REPORT)
         npc:setLocalVar("reported", 1)
     elseif npc:atPoint(xi.path.last(pathNodes)) then

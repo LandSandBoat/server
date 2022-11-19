@@ -15,7 +15,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.OLD_TRICK_BOX) then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.OLD_TRICK_BOX)
+    then
         if player:getCharVar("trueWillKilledNM") > 0 then
             npcUtil.giveKeyItem(player, xi.ki.OLD_TRICK_BOX)
             player:setCharVar("trueWillKilledNM", 0)

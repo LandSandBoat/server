@@ -62,9 +62,15 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(97)
 
         -- currency exchanges
-        elseif count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE) then
+        elseif
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
             player:startEvent(55, xi.settings.main.CURRENCY_EXCHANGE_RATE)
-        elseif count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE) then
+        elseif
+            count == xi.settings.main.CURRENCY_EXCHANGE_RATE and
+            trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        then
             player:startEvent(56, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif count == 1 and trade:hasItemQty(currency[3], 1) then
             player:startEvent(58, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)

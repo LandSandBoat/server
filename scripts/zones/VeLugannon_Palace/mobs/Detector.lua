@@ -295,8 +295,8 @@ end
 local spawnCaretaker = function(detector)
     detector:setLocalVar("summoning", 1)
     detector:entityAnimationPacket("casm")
-    detector:SetAutoAttackEnabled(false)
-    detector:SetMobAbilityEnabled(false)
+    detector:setAutoAttackEnabled(false)
+    detector:setMobAbilityEnabled(false)
 
     detector:timer(5000, function(mob)
         if mob:isAlive() then
@@ -312,8 +312,8 @@ local spawnCaretaker = function(detector)
             end
             mob:setLocalVar("petCount", petCount + 1)
             mob:setLocalVar("summoning", 0)
-            mob:SetAutoAttackEnabled(true)
-            mob:SetMobAbilityEnabled(true)
+            mob:setAutoAttackEnabled(true)
+            mob:setMobAbilityEnabled(true)
         end
     end)
 end
@@ -324,8 +324,8 @@ local spawnSteamCleaner = function(mob)
         if not sc:isSpawned() then
             mob:setLocalVar("summoning", 1)
             mob:entityAnimationPacket("casm")
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setAutoAttackEnabled(false)
+            mob:setMobAbilityEnabled(false)
 
             mob:timer(5000, function(mobArg)
                 if mobArg:isAlive() then
@@ -340,8 +340,8 @@ local spawnSteamCleaner = function(mob)
                     mobArg:setLocalVar("iSpawnedSC", 1)
                     mobArg:setLocalVar("petCount", petCount + 1)
                     mobArg:setLocalVar("summoning", 0)
-                    mobArg:SetAutoAttackEnabled(true)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setAutoAttackEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                 end
             end)
             return true
@@ -365,13 +365,24 @@ entity.onMobFight = function(mob, target)
     local sc = GetMobByID(ID.mob.STEAM_CLEANER)
 
     if mob:getLocalVar("summoning") == 0 then
-        if petCount <= 5 and mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3 and not caretaker:isSpawned() and canDetectorSummonSC(mob) then
+        if
+            petCount <= 5 and
+            mob:getBattleTime() % 15 < 3 and
+            mob:getBattleTime() > 3 and
+            not caretaker:isSpawned() and
+            canDetectorSummonSC(mob)
+        then
             if spawnSteamCleaner(mob) then
                 return
             elseif mob:getLocalVar("iSpawnedSC") and not sc:isSpawned() then -- If this specific detector spawned SC - dont spawn caretakers until SC is dead
                 spawnCaretaker(mob)
             end
-        elseif petCount <= 5 and mob:getBattleTime() % 15 < 3 and mob:getBattleTime() > 3 and not caretaker:isSpawned() then
+        elseif
+            petCount <= 5 and
+            mob:getBattleTime() % 15 < 3 and
+            mob:getBattleTime() > 3 and
+            not caretaker:isSpawned()
+        then
             spawnCaretaker(mob)
         end
     end

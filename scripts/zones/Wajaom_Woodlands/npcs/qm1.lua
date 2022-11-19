@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2580) and npcUtil.popFromQM(player, npc, ID.mob.VULPANGUE) then -- Trade Hellcage Butterfly
+    if
+        npcUtil.tradeHas(trade, 2580) and
+        npcUtil.popFromQM(player, npc, ID.mob.VULPANGUE)
+    then
+        -- Trade Hellcage Butterfly
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

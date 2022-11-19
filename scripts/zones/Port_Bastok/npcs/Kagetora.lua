@@ -25,7 +25,10 @@ entity.onTrigger = function(player, npc)
         end
     elseif player:getCharVar("twentyInPirateYearsCS") == 1 then
         player:startEvent(261)
-    elseif player:getCharVar("FadedPromises") == 2 and player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA) then
+    elseif
+        player:getCharVar("FadedPromises") == 2 and
+        player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
+    then
         player:startEvent(296)
     else
         player:startEvent(23)

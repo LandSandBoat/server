@@ -22,7 +22,10 @@ entity.onTrade = function(player, npc, trade)
 
         if ahCategory >= 52 and ahCategory <= 57 then
             -- We traded him a food item
-            if player:getCharVar("ATWTTB_Can_Trade_Gruel") == 1 and (itemId == 4489 or itemId == 4534) then
+            if
+                player:getCharVar("ATWTTB_Can_Trade_Gruel") == 1 and
+                (itemId == 4489 or itemId == 4534)
+            then
                 if itemId == 4489 then
                     -- Trading him Vegetable Gruel after completing Quest: 'All The Way To The Bank'
                     player:startEvent(5068)
@@ -55,8 +58,14 @@ end
 entity.onTrigger = function(player, npc)
     local amqtr = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
-    if player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2 and not player:needToZone() and vanaDay() > player:getCharVar("Westerly_Breeze_Wait") then
-        if amqtr ~= QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3 then
+    if
+        player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2 and
+        not player:needToZone() and vanaDay() > player:getCharVar("Westerly_Breeze_Wait")
+    then
+        if
+            amqtr ~= QUEST_COMPLETED and
+            player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3
+        then
             if amqtr == QUEST_AVAILABLE then
                 -- Starts Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3010)

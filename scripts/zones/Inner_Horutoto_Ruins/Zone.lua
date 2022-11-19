@@ -9,10 +9,10 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
-    zone:registerRegion(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
-    zone:registerRegion(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
-    zone:registerRegion(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
+    zone:registerTriggerArea(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
+    zone:registerTriggerArea(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
+    zone:registerTriggerArea(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
+    zone:registerTriggerArea(4, -261, -3, 182, -257, -1, 186) -- Teleport at H-6
 
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.MALTHA)
@@ -38,24 +38,27 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
     local white  = GetNPCByID(circle + 1)
     local black  = GetNPCByID(circle + 2)
 
     -- Prevent negatives..
-    if region:GetCount() < 0 then
-        region:AddCount(math.abs(region:GetCount()))
+    if triggerArea:GetCount() < 0 then
+        triggerArea:AddCount(math.abs(triggerArea:GetCount()))
     end
 
-    switch (region:GetRegionID()): caseof
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)  -- Red Circle
-            if player:getMainJob() == xi.job.RDM and region:AddCount(1) == 1 then
+            if player:getMainJob() == xi.job.RDM and triggerArea:AddCount(1) == 1 then
                 red:setAnimation(xi.anim.OPEN_DOOR)
                 red:entityAnimationPacket("smin")
-                if white:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
+                if
+                    white:getAnimation() == xi.anim.OPEN_DOOR and
+                    black:getAnimation() == xi.anim.OPEN_DOOR
+                then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
                 end
@@ -63,10 +66,13 @@ zoneObject.onRegionEnter = function(player, region)
         end,
 
         [2] = function (x)  -- White Circle
-            if player:getMainJob() == xi.job.WHM and region:AddCount(1) == 1 then
+            if player:getMainJob() == xi.job.WHM and triggerArea:AddCount(1) == 1 then
                 white:setAnimation(xi.anim.OPEN_DOOR)
                 white:entityAnimationPacket("smin")
-                if red:getAnimation() == xi.anim.OPEN_DOOR and black:getAnimation() == xi.anim.OPEN_DOOR then
+                if
+                    red:getAnimation() == xi.anim.OPEN_DOOR and
+                    black:getAnimation() == xi.anim.OPEN_DOOR
+                then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
                 end
@@ -74,10 +80,13 @@ zoneObject.onRegionEnter = function(player, region)
         end,
 
         [3] = function (x)  -- Black Circle
-            if player:getMainJob() == xi.job.BLM and region:AddCount(1) == 1 then
+            if player:getMainJob() == xi.job.BLM and triggerArea:AddCount(1) == 1 then
                 black:setAnimation(xi.anim.OPEN_DOOR)
                 black:entityAnimationPacket("smin")
-                if red:getAnimation() == xi.anim.OPEN_DOOR and white:getAnimation() == xi.anim.OPEN_DOOR then
+                if
+                    red:getAnimation() == xi.anim.OPEN_DOOR and
+                    white:getAnimation() == xi.anim.OPEN_DOOR
+                then
                     GetNPCByID(circle + 3):openDoor(30)
                     GetNPCByID(circle + 4):openDoor(30)
                 end
@@ -90,39 +99,39 @@ zoneObject.onRegionEnter = function(player, region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
     local white  = GetNPCByID(circle + 1)
     local black  = GetNPCByID(circle + 2)
 
-    switch (region:GetRegionID()): caseof
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x)  -- Red Circle
-            if player:getMainJob() == xi.job.RDM and region:DelCount(1) == 0 then
+            if player:getMainJob() == xi.job.RDM and triggerArea:DelCount(1) == 0 then
                 red:setAnimation(xi.anim.CLOSE_DOOR)
                 red:entityAnimationPacket("kmin")
             end
         end,
 
         [2] = function (x)  -- White Circle
-            if player:getMainJob() == xi.job.WHM and region:DelCount(1) == 0 then
+            if player:getMainJob() == xi.job.WHM and triggerArea:DelCount(1) == 0 then
                 white:setAnimation(xi.anim.CLOSE_DOOR)
                 white:entityAnimationPacket("kmin")
             end
         end,
 
         [3] = function (x)  -- Black Circle
-            if player:getMainJob() == xi.job.BLM and region:DelCount(1) == 0 then
+            if player:getMainJob() == xi.job.BLM and triggerArea:DelCount(1) == 0 then
                 black:setAnimation(xi.anim.CLOSE_DOOR)
                 black:entityAnimationPacket("kmin")
             end
         end,
     }
 
-    -- Prevent negatives..
-    if region:GetCount() < 0 then
-        region:AddCount(math.abs(region:GetCount()))
+    -- Prevent negatives
+    if triggerArea:GetCount() < 0 then
+        triggerArea:AddCount(math.abs(triggerArea:GetCount()))
     end
 end
 

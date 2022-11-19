@@ -150,7 +150,7 @@ entity.onMobFight = function(mob, target)
         if GetMobByID(alive[a]):getLocalVar("[depths]castActivate") == 0 then
             GetMobByID(alive[a]):setLocalVar("[depths]castActivate", 1)
             GetMobByID(alive[a]):timer(math.random(20000, 60000), function(m)
-                m:SetMagicCastingEnabled(true)
+                m:setMagicCastingEnabled(true)
             end)
         end
     end
@@ -163,7 +163,7 @@ entity.onMobFight = function(mob, target)
             hmob:setLocalVar("[depths]doAnimation", 0)
         end
         if hmob:getLocalVar("[depths]castActivate") == 0 then
-            hmob:SetMagicCastingEnabled(false)
+            hmob:setMagicCastingEnabled(false)
         end
     end
 

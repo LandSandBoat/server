@@ -29,10 +29,16 @@ entity.onTrigger = function(player, npc)
         if tomath == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.BROKEN_HARPOON) then
             -- Progresses Quest: 'The Old Man and the Harpoon'
             player:startEvent(2543)
-        elseif fertileGround == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.BOTTLE_OF_FERTILIZER_X) then
+        elseif
+            fertileGround == QUEST_ACCEPTED and
+            not player:hasKeyItem(xi.ki.BOTTLE_OF_FERTILIZER_X)
+        then
             -- Progresses Quest: 'Fertile Ground'
             player:startEvent(2850)
-        elseif waywardWaypoints and not player:hasKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT) then
+        elseif
+            waywardWaypoints and
+            not player:hasKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT)
+        then
             -- Progresses Quest: 'Wayward Waypoints'
             player:startEvent(79)
         else
