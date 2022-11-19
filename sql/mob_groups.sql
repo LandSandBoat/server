@@ -84,7 +84,7 @@ INSERT INTO `mob_groups` VALUES (13,1375,2,'Flytrap',330,0,852,0,0,18,22,0);
 INSERT INTO `mob_groups` VALUES (14,3017,2,'Orcish_Grunt',330,0,307,0,0,16,20,0);
 INSERT INTO `mob_groups` VALUES (15,3033,2,'Orcish_Stonechucker',330,0,307,0,0,16,20,0);
 INSERT INTO `mob_groups` VALUES (16,3023,2,'Orcish_Neckchopper',330,0,307,0,0,16,20,0);
-INSERT INTO `mob_groups` VALUES (17,2373,2,'Land_Pugil',330,0,463,0,0,17,19,0);
+INSERT INTO `mob_groups` VALUES (17,20013,2,'Land_Pugil',330,0,463,0,0,17,19,0);
 INSERT INTO `mob_groups` VALUES (18,4309,2,'Water_Elemental',330,4,2629,0,0,29,30,0);
 INSERT INTO `mob_groups` VALUES (19,3752,2,'Stag_Beetle',330,0,2318,0,0,20,23,0);
 INSERT INTO `mob_groups` VALUES (20,371,2,'Battrap',330,0,243,0,0,23,27,0);
