@@ -149,10 +149,10 @@ bool CLuaItem::isSubType(uint8 subtype)
     return m_PLuaItem->isSubType(static_cast<ITEM_SUBTYPE>(subtype));
 }
 
-auto CLuaItem::getName() -> const char*
+auto CLuaItem::getName() -> std::string
 {
     // TODO: Fix c-style cast
-    return (const char*)m_PLuaItem->getName();
+    return m_PLuaItem->getName();
 }
 
 uint16 CLuaItem::getILvl()
@@ -270,20 +270,18 @@ bool CLuaItem::isShield()
 
 auto CLuaItem::getSignature() -> std::string
 {
-    int8 signature[DecodeStringLength];
+    char signature[DecodeStringLength] = {};
 
-    memset(&signature, 0, sizeof(signature));
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
-        DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);
+        DecodeStringLinkshell(m_PLuaItem->getSignature(), signature);
     }
     else
     {
-        DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
+        DecodeStringSignature(m_PLuaItem->getSignature(), signature);
     }
 
-    // TODO: we might lose this...
-    return std::string(reinterpret_cast<const char*>(signature));
+    return signature;
 }
 
 uint8 CLuaItem::getAppraisalID()

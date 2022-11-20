@@ -149,9 +149,9 @@ ZONEID CLuaZone::getID()
     return m_pLuaZone->GetID();
 }
 
-std::string CLuaZone::getName()
+const std::string& CLuaZone::getName()
 {
-    return reinterpret_cast<const char*>(m_pLuaZone->GetName());
+    return m_pLuaZone->GetName();
 }
 
 REGION_TYPE CLuaZone::getRegionID()
@@ -245,7 +245,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     if (name.empty())
     {
         ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
-                    PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
+                    PEntity->GetName(), m_pLuaZone->GetName());
 
         // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
         name = PEntity->name;
@@ -259,7 +259,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     PEntity->isRenamed = true;
 
     auto typeKey    = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
-    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
+    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][m_pLuaZone->GetName()][typeKey][lookupName];
 
     // Bind any functions that are passed in
     for (auto& [entryKey, entryValue] : table)

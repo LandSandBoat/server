@@ -420,7 +420,7 @@ public:
     SpawnIDList_t SpawnTRUSTList; // list of visible trust
     SpawnIDList_t SpawnNPCList;   // list of visible npc's
 
-    void SetName(int8* name); // set the name of character, limtied to 15 characters
+    void SetName(const std::string& name); // set the name of character, limited to 15 characters
 
     time_point   lastTradeInvite;
     EntityID_t   TradePending;    // character ID offering trade

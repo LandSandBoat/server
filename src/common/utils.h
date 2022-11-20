@@ -79,10 +79,10 @@ uint64 unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit);
 uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint8 lengthInBit);
 
 // Encode/Decode Strings to/from FFXI 6-bit format
-void        EncodeStringLinkshell(int8* signature, int8* target);
-void        DecodeStringLinkshell(int8* signature, int8* target);
-int8*       EncodeStringSignature(int8* signature, int8* target);
-void        DecodeStringSignature(int8* signature, int8* target);
+void        EncodeStringLinkshell(const std::string& signature, char* target);
+void        DecodeStringLinkshell(const std::string& signature, char* target);
+std::string EncodeStringSignature(const std::string& signature, char* target);
+void        DecodeStringSignature(const std::string& signature, char* target);
 void        PackSoultrapperName(std::string name, uint8 output[]);
 std::string UnpackSoultrapperName(uint8 input[]);
 
