@@ -3,7 +3,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 return {
     ['Abeaule']    = { text = ID.text.ABEAULE_DIALOG_THANKS },
     ['Ailbeche']   = { event = 868 },
-    ['Bacherune']  = { text = ID.text.BACHERUME_DIALOG },
+    ['Bacherume']  = { text = ID.text.BACHERUME_DIALOG },
     ['Chasalvige'] = { event = 6 },
     ['Eperdur']    = { event = 678 },
     ['Gilipese']   = { text = ID.text.GILIPESE_DIALOG },
