@@ -19,19 +19,16 @@
 ===========================================================================
 */
 
+#include <memory>
+
 #include "jailutils.h"
 
 #include "../conquest_system.h"
 #include "../entities/charentity.h"
 
 #include "../ai/ai_container.h"
+#include "../ai/controllers/noop_controller.h"
 #include "../ai/controllers/player_controller.h"
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 namespace jailutils
 {
@@ -43,15 +40,11 @@ namespace jailutils
 
     void Add(CCharEntity* PChar)
     {
-        PChar->PAI->SetController(nullptr);
-
-        // TODO:
+        PChar->PAI->SetController(std::make_unique<NoopController>(PChar));
     }
 
     void Del(CCharEntity* PChar)
     {
         PChar->PAI->SetController(std::make_unique<CPlayerController>(PChar));
-
-        // TODO:
     }
 }; // namespace jailutils

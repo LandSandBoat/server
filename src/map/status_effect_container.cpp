@@ -488,6 +488,12 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
         return false;
     }
 
+    if (m_POwner->PAI->GetController() == NULL)
+    {
+        ShowWarning("status_effect_container::AddStatusEffect Owner PAI has null controller");
+        return false;
+    }
+
     uint16 statusId = PStatusEffect->GetStatusID();
 
     if (statusId >= MAX_EFFECTID)

@@ -19,26 +19,24 @@
 ===========================================================================
 */
 
-#include "automatonentity.h"
+#include <memory>
+
 #include "../ai/ai_container.h"
-#include "../ai/controllers/automaton_controller.h"
+#include "../ai/controllers/noop_controller.h"
 #include "../ai/states/magic_state.h"
 #include "../ai/states/mobskill_state.h"
-#include "../mob_modifier.h"
 #include "../packets/action.h"
 #include "../packets/char_job_extra.h"
-#include "../packets/entity_update.h"
-#include "../packets/pet_sync.h"
 #include "../recast_container.h"
 #include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/puppetutils.h"
-#include "common/utils.h"
+#include "automatonentity.h"
 
 CAutomatonEntity::CAutomatonEntity()
 : CPetEntity(PET_TYPE::AUTOMATON)
 {
-    PAI->SetController(nullptr);
+    PAI->SetController(std::make_unique<NoopController>(PPet));
 }
 
 CAutomatonEntity::~CAutomatonEntity() = default;
