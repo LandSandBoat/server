@@ -14,10 +14,19 @@ entity.onSpawn = function(npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if not GetMobByID(ID.mob.FAFNIR):isSpawned() and not GetMobByID(ID.mob.NIDHOGG):isSpawned() then
-        if npcUtil.tradeHasExactly(trade, 3339) and npcUtil.popFromQM(player, npc, ID.mob.FAFNIR) then
+    if
+        not GetMobByID(ID.mob.FAFNIR):isSpawned() and
+        not GetMobByID(ID.mob.NIDHOGG):isSpawned()
+    then
+        if
+            npcUtil.tradeHasExactly(trade, 3339) and
+            npcUtil.popFromQM(player, npc, ID.mob.FAFNIR)
+        then
             player:confirmTrade()
-        elseif npcUtil.tradeHasExactly(trade, 3340) and npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG) then
+        elseif
+            npcUtil.tradeHasExactly(trade, 3340) and
+            npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG)
+        then
             player:confirmTrade()
         end
     end

@@ -60,7 +60,11 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
             local pop = nm:getLocalVar("pop")
 
             chance = math.ceil(chance * 10) -- chance / 1000.
-            if os.time() > pop and not lotteryPrimed(phList) and math.random(1, 1000) <= chance then
+            if
+                os.time() > pop and
+                not lotteryPrimed(phList) and
+                math.random(1, 1000) <= chance
+            then
 
                 -- on PH death, replace PH repop with NM repop
                 DisallowRespawn(phId, true)

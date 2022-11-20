@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local regionOwner = GetRegionOwner(xi.region.ARAGONEU)
 
-    if (regionOwner ~= xi.nation.WINDURST) then
+    if regionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.MAQUMOLPIH_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.MAQUMOLPIH_OPEN_DIALOG)

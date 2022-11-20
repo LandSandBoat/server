@@ -12,7 +12,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (not target:isWeaponTwoHanded()) then
+    if not target:isWeaponTwoHanded() then
         return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
         return 0, 0
@@ -20,7 +20,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    if (target:isWeaponTwoHanded()) then
+    if target:isWeaponTwoHanded() then
         target:delStatusEffect(xi.effect.HASSO)
         target:delStatusEffect(xi.effect.SEIGAN)
         target:addStatusEffect(xi.effect.SEIGAN, 0, 0, 300)

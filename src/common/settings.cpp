@@ -60,9 +60,9 @@ namespace settings
         ShowInfo("Loading settings files");
 
         // Load defaults
-        for (auto const& entry : std::filesystem::directory_iterator("./settings/default/"))
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
         {
-            auto path     = std::filesystem::path(entry).relative_path();
+            auto path     = entry.relative_path();
             auto isLua    = path.extension() == ".lua";
             auto filename = path.string();
             auto key      = path.lexically_normal().replace_extension("").generic_string();
@@ -123,9 +123,9 @@ namespace settings
         }
 
         // Load user settings
-        for (auto const& entry : std::filesystem::directory_iterator("./settings/"))
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/"))
         {
-            auto path     = std::filesystem::path(entry).relative_path();
+            auto path     = entry.relative_path();
             auto isLua    = path.extension() == ".lua";
             auto filename = path.string();
             auto key      = path.lexically_normal().replace_extension("").generic_string();

@@ -368,7 +368,7 @@ xi.instance.onEventUpdate = function(player, csid, option)
         for _, v in pairs(party) do
             if v:getID() ~= player:getID() then
                 -- Check entry requirements for party
-                if checkEntryReqs(v, instanceId) == false then
+                if not checkEntryReqs(v, instanceId) then
                     player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(npc, 1)
                     return false
@@ -479,7 +479,13 @@ xi.instance.updateInstanceTime = function(instance, elapsed, text)
     local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
     local wipeTime = instance:getWipeTime()
 
-    if remainingTimeLimit < 0 or (wipeTime ~= 0 and (elapsed - wipeTime) / 1000 > 180) then
+    if
+        remainingTimeLimit < 0 or
+        (
+            wipeTime ~= 0 and
+            (elapsed - wipeTime) / 1000 > 180
+        )
+    then
         instance:fail()
         return
     end

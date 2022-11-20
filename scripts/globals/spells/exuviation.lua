@@ -20,10 +20,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local divisor = 1
     local constant = 40
     local power = getCurePowerOld(caster)
-    if (power > 99) then
+    if power > 99 then
         divisor = 57
         constant = 79.125
-    elseif (power > 59) then
+    elseif power > 59 then
         divisor =  2
         constant = 55
     end
@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
     local diff = (target:getMaxHP() - target:getHP())
-    if (final > diff) then
+    if final > diff then
         final = diff
     end
     caster:eraseStatusEffect()

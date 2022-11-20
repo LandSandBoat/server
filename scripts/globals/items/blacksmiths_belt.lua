@@ -14,7 +14,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == true) then
+    if target:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
         result = 237
     end
     return result

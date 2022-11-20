@@ -19,7 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local divisor = 1
     local constant = 570
     local power = getCurePowerOld(caster)
-    if (power > 780) then
+    if power > 780 then
         divisor = 2.667
         constant = 814--this is too powerful and needs to be fixed when the rest of the curaga 5 numbers are determined
     end
@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     final = final * xi.settings.main.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
-    if (final > diff) then
+    if final > diff then
         final = diff
     end
     target:addHP(final)
@@ -43,7 +43,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if (mpBonusPercent > 0) then
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 

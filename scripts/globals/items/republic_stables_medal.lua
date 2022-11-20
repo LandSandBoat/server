@@ -12,7 +12,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if not target:isZoneVisited(xi.zone.BASTOK_MINES) then
+    if not target:hasVisitedZone(xi.zone.BASTOK_MINES) then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
     return result

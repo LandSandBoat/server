@@ -36,14 +36,21 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = 100 * resist
     local returnEffect = typeEffectOne
 
-    if (resist >= 0.5) then
-        if (target:isFacing(caster)) then
-            if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo) and target:getTP() == 0) then
+    if resist >= 0.5 then
+        if target:isFacing(caster) then
+            if
+                target:hasStatusEffect(typeEffectOne) and
+                target:hasStatusEffect(typeEffectTwo) and
+                target:getTP() == 0
+            then
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-            elseif (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then
+            elseif
+                target:hasStatusEffect(typeEffectOne) and
+                target:hasStatusEffect(typeEffectTwo)
+            then
                 target:delTP(power)
                 spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
-            elseif (target:hasStatusEffect(typeEffectOne)) then
+            elseif target:hasStatusEffect(typeEffectOne) then
                 target:addStatusEffect(typeEffectTwo, 1, 0, duration)
                 target:delTP(power)
                 returnEffect = typeEffectTwo -- make it return bind message if blind can't be inflicted

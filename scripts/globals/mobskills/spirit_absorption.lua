@@ -17,7 +17,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local basehp = skill:getParam()
-    if (basehp == 0) then
+    if basehp == 0 then
         basehp = 50
     end
 

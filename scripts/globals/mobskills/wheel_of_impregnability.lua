@@ -10,9 +10,13 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or mob:hasStatusEffect(xi.effect.MAGIC_SHIELD)) then
+    if
+        mob:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or
+        mob:hasStatusEffect(xi.effect.MAGIC_SHIELD)
+    then
         return 1
     end
+
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 5)
     return 0
 end

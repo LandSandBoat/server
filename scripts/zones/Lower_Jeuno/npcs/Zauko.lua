@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 
     ----- Save The Clock Tower Quest -----
     if
-        trade:hasItemQty(555, 1) == true and
+        trade:hasItemQty(555, 1) and
         trade:getItemCount() == 1
     then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
     local allLampsLit = true
     for i = 0, 11 do
         local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-        if (lamp:getAnimation() == xi.anim.CLOSE_DOOR) then
+        if lamp:getAnimation() == xi.anim.CLOSE_DOOR then
             allLampsLit = false
             break
         end

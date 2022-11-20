@@ -34,7 +34,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.CRIT_HIT_EVASION_DOWN) == false) then
+    if
+        damage > 0 and
+        not target:hasStatusEffect(xi.effect.CRIT_HIT_EVASION_DOWN)
+    then
         target:addStatusEffect(xi.effect.CRIT_HIT_EVASION_DOWN, 5, 0, 60)
     end
 

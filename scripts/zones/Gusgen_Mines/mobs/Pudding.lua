@@ -19,7 +19,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar("EcoStatus") == 101 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+    if
+        player:getCharVar("EcoStatus") == 101 and
+        player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
+    then
         local bothDead = true
         for i = ID.mob.PUDDING_OFFSET, ID.mob.PUDDING_OFFSET + 1 do
             if i ~= mob:getID() and GetMobByID(i):isAlive() then

@@ -27,7 +27,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(442.781, -1.641, -40.144, 160)
     end
 
@@ -47,7 +51,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -71,7 +75,11 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     if habrok:isSpawned() and not isHabrokWeather(weather) then
         DespawnMob(ID.mob.HABROK)
-    elseif not habrok:isSpawned() and isHabrokWeather(weather) and os.time() > habrok:getLocalVar("pop") then
+    elseif
+        not habrok:isSpawned() and
+        isHabrokWeather(weather) and
+        os.time() > habrok:getLocalVar("pop")
+    then
         SpawnMob(ID.mob.HABROK)
     end
 end

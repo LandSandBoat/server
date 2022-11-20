@@ -277,7 +277,7 @@ content.groups =
         setup = function(battlefield, mobs)
             for _, mob in ipairs(mobs) do
                 -- Prevent boss from being targetable until first mob Flying_Spear is killed
-                mob:setUntargetable(true)
+                mob:setBattleID(1)
                 mob:setStatus(xi.status.NORMAL)
                 mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
                 mob:setMobMod(xi.mobMod.NO_LINK, 1)
@@ -300,7 +300,7 @@ content.groups =
             boss:setMod(xi.mod.UDMGPHYS, (8 - count) * -1000)
             if count == 1 then
                 -- Make the boss become targetable after the first kill
-                boss:setUntargetable(false)
+                boss:setBattleID(0)
                 boss:setStatus(xi.status.MOB)
                 boss:setMobMod(xi.mobMod.NO_AGGRO, 0)
                 boss:setMobMod(xi.mobMod.NO_LINK, 0)

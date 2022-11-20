@@ -7,7 +7,10 @@ require("scripts/globals/world")
 local entity = {}
 
 entity.onMobRoam = function(mob)
-    if not (mob:getWeather() == xi.weather.WIND or mob:getWeather() == xi.weather.GALES) then
+    if
+        not mob:getWeather() == xi.weather.WIND and
+        not mob:getWeather() == xi.weather.GALES
+    then
         DespawnMob(mob:getID())
     end
 end
@@ -29,7 +32,10 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobDisengage = function(mob, weather)
-    if not (mob:getWeather() == xi.weather.WIND or mob:getWeather() == xi.weather.GALES) then
+    if
+        not mob:getWeather() == xi.weather.WIND and
+        not mob:getWeather() == xi.weather.GALES
+    then
         DespawnMob(mob:getID())
     end
 end

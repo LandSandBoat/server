@@ -13,7 +13,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getAnimation() ~= 1) then
+    if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
         return 0, 0
@@ -21,11 +21,15 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-    if (not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)) then
+    if
+        not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
+        not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
+    then
         target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 2, 0, 5, 0, 1)
     else
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
+
     local skill = player:getWeaponSkillType(xi.slot.MAIN)
     local anim = 36
     if skill <= 1 then
@@ -51,6 +55,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     else
         anim = 36
     end
+
     action:setAnimation(target:getID(), anim)
     action:speceffect(target:getID(), 1)
     return 0

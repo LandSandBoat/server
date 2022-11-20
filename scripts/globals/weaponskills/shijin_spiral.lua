@@ -36,9 +36,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.dex_wsc = 0.7 + (player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.03)
     end
 
-    if (damage > 0) then
+    if damage > 0 then
         local duration = (tp / 1000) + 4
-        if (target:hasStatusEffect(xi.effect.PLAGUE) == false) then
+        if not target:hasStatusEffect(xi.effect.PLAGUE) then
             target:addStatusEffect(xi.effect.PLAGUE, 5, 0, duration)
         end
     end

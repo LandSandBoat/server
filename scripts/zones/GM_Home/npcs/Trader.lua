@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:hasItemQty(4096, 1) and trade:getItemCount() == 1) then
+    if trade:hasItemQty(4096, 1) and trade:getItemCount() == 1 then
         player:startEvent(126)
     end
 end

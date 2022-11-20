@@ -13,7 +13,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-2.517, 0.452, -5.068, 190)
     end
 
@@ -22,16 +26,16 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    xi.mog_garden.onRegionEnter(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.mog_garden.onTriggerAreaEnter(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
-    xi.mog_garden.onRegionEnter(player, csid, option)
+    xi.mog_garden.onEventUpdate(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    xi.mog_garden.onRegionEnter(player, csid, option)
+    xi.mog_garden.onEventFinish(player, csid, option)
 end
 
 return zoneObject

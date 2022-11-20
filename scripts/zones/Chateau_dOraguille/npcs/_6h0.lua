@@ -59,7 +59,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(90) -- Start
 
     -- Trust: San d'Oria (Trion)
-    elseif player:getRank(player:getNation()) >= 6 and player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+    elseif
+        player:getRank(player:getNation()) >= 6 and
+        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
+        not player:hasSpell(905)
+    then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
     -- "A Boy's Dream" (PLD AF Feet)
@@ -67,7 +71,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(88)
 
     -- San d'Oria Rank 10 (different default)
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
+    elseif
+        player:getNation() == xi.nation.SANDORIA and
+        player:getRank(player:getNation()) == 10
+    then
         player:startEvent(62)
     end
 end
@@ -80,7 +87,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
-            if (player:getMainJob() == xi.job.PLD) then
+            if player:getMainJob() == xi.job.PLD then
                 player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
@@ -90,10 +97,10 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         end
-    elseif (csid == 90 and option == 1) then
+    elseif csid == 90 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         player:setCharVar("UnderOathCS", 0)
-    elseif (csid == 89) then
+    elseif csid == 89 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12644)
         else

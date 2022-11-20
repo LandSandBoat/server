@@ -23,7 +23,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local multi = 1.0
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 1.50
     end
     local params = {}
@@ -44,7 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 0.0
 
     local resist = applyResistance(caster, target, spell, params)
-    if (resist > 0.0625) then
+    if resist > 0.0625 then
         target:dispelStatusEffect()
     end
 

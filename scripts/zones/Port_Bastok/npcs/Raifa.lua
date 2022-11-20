@@ -18,7 +18,11 @@ end
 entity.onTrigger = function(player, npc)
     local ecoStatus = player:getCharVar("EcoStatus")
 
-    if ecoStatus == 0 and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 1 and player:getCharVar("EcoReset") < os.time() then
+    if
+        ecoStatus == 0 and
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 1 and
+        player:getCharVar("EcoReset") < os.time()
+    then
         player:startEvent(278) -- Offer Eco-Warrior quest
     elseif ecoStatus == 101 then
         player:startEvent(280) -- Reminder dialogue to talk to Degga

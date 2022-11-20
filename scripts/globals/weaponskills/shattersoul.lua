@@ -23,7 +23,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 3
     params.ftp100 = 1.375 params.ftp200 = 1.375 params.ftp300 = 1.375
@@ -39,7 +38,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) == false) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) then
         target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 0, 120)
     end
     return tpHits, extraHits, criticalHit, damage

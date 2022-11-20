@@ -1,11 +1,7 @@
 -----------------------------------
 -- Hydro Breath
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
-require("scripts/globals/ability")
-
+require("scripts/globals/job_utils/dragoon")
 -----------------------------------
 local abilityObject = {}
 
@@ -14,27 +10,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(pet, target, skill, action)
-    local master = pet:getMaster()
-    ---------- Deep Breathing ----------
-    -- 0 for none
-    -- 1 for first merit
-    -- 0.25 for each merit after the first
-    -- TODO: 0.1 per merit for augmented AF2 (10663 *w/ augment*)
-    local deep = 1
-    if (pet:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) == true) then
-        deep = deep + 1 + (master:getMerit(xi.merit.DEEP_BREATHING) - 1) * 0.25
-        pet:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
-    end
-
-    local gear = master:getMod(xi.mod.WYVERN_BREATH) / 256 -- Master gear that enhances breath
-
-    local dmgmod = xi.mobskills.mobBreathMove(pet, target, 0.185, pet:getMainLvl() * 15, xi.magic.ele.WATER) -- Works out to (hp/6) + 15, as desired
-    dmgmod = (dmgmod * (1 + gear)) * deep
-    pet:setTP(0)
-
-    local dmg = AbilityFinalAdjustments(dmgmod, pet, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, pet, xi.attackType.BREATH, xi.damageType.WATER)
-    return dmg
+    return xi.job_utils.dragoon.useDamageBreath(pet, target, skill, action, xi.damageType.WATER)
 end
 
 return abilityObject

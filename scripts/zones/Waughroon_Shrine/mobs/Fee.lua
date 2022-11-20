@@ -19,7 +19,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("tentacles", 6)
-    mob:SetMobSkillAttack(0)
+    mob:setMobSkillAttack(0)
 end
 
 -- Remove a tentacle from Fe'e.  This happens six times during the fight, with final at about 33% HP.
@@ -33,7 +33,7 @@ local function removeTentacle(mob, tentacles)
         mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)
     else
         mob:messageText(mob, ID.text.ALL_TENTACLES_WOUNDED, false)
-        mob:SetMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
+        mob:setMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
     end
     mob:addMod(xi.mod.ATT, 50)
     mob:addMod(xi.mod.REGAIN, 50)

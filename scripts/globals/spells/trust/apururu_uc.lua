@@ -63,7 +63,7 @@ spellObject.onMobSpawn = function(mob)
     -- BGwiki states 75/tick regain.  Only used for Nott WS.
     mob:addMod(xi.mod.REGAIN, 75)
 
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 spellObject.onMobDespawn = function(mob)

@@ -20,7 +20,7 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local z = npc:getZPos()
     local distance = 7
 
-    zone:registerRegion(zoneID,
+    zone:registerTriggerArea(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
@@ -49,7 +49,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(457, 8, -156, 142)
     end
 
@@ -72,9 +76,9 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
-        xi.fsa.onRegionEnter(player, region:GetRegionID())
+        xi.fsa.onTriggerAreaEnter(player, triggerArea:GetTriggerAreaID())
     end
 end
 

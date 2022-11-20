@@ -36,7 +36,7 @@ itemObject.onItemCheck = function(target)
 
     if
         teleportData[zoneId] and
-        target:isZoneVisited(teleportData[zoneId][5])
+        target:hasVisitedZone(teleportData[zoneId][5])
     then
         return 0
     end

@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+    if xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         local hasStone = xi.abyssea.getHeldTraverserStones(player)
 
         if
@@ -37,11 +37,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 56) then
+    if csid == 56 then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_DELECTABLE_DEMON)
-    elseif (csid == 57) then
+    elseif csid == 57 then
         -- Killed Cirein-croin
-    elseif (csid == 55 and option == 1) then
+    elseif csid == 55 and option == 1 then
         player:setPos(670, -15, 318, 119, 216)
     end
 end

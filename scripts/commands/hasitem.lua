@@ -16,10 +16,10 @@ end
 
 function onTrigger(player, itemId, target)
     -- validate itemId
-    if (itemId == nil) then
+    if itemId == nil then
         error(player, "You must provide an itemID.")
         return
-    elseif (itemId < 1) then
+    elseif itemId < 1 then
         error(player, "Invalid itemID.")
         return
     end
@@ -28,7 +28,7 @@ function onTrigger(player, itemId, target)
     local targ
     if target == nil then
         targ = player:getCursorTarget()
-        if (targ == nil or not targ:isPC()) then
+        if targ == nil or not targ:isPC() then
             targ = player
         end
     else
@@ -40,7 +40,7 @@ function onTrigger(player, itemId, target)
     end
 
     -- report hasItem
-    if (targ:hasItem(itemId)) then
+    if targ:hasItem(itemId) then
         player:PrintToPlayer(string.format("%s has item %i.", targ:getName(), itemId))
     else
         player:PrintToPlayer(string.format("%s does not have item %i.", targ:getName(), itemId))

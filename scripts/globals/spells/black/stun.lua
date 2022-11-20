@@ -22,17 +22,17 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus = 0
     params.effect = xi.effect.STUN
     local resist = applyResistanceEffect(caster, target, spell, params)
-    if (resist <= (1 / 16)) then
+    if resist <= 1 / 16 then
         -- resisted!
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return 0
     end
 
-    if (target:hasStatusEffect(xi.effect.STUN)) then
+    if target:hasStatusEffect(xi.effect.STUN) then
         -- no effect
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-        if (target:addStatusEffect(xi.effect.STUN, 1, 0, duration * resist)) then
+        if target:addStatusEffect(xi.effect.STUN, 1, 0, duration * resist) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

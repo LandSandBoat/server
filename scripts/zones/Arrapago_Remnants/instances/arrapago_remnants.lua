@@ -54,9 +54,9 @@ end
 instanceObject.onInstanceComplete = function(instance)
 end
 
-instanceObject.onRegionEnter = function(player, region, instance)
-    if region:GetRegionID() <= 11 then
-        player:startEvent(199 + region:GetRegionID())
+instanceObject.onTriggerAreaEnter = function(player, triggerArea, instance)
+    if triggerArea:GetTriggerAreaID() <= 11 then
+        player:startEvent(199 + triggerArea:GetTriggerAreaID())
     end
 end
 
@@ -74,7 +74,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
     elseif instance:getStage() == 7 and progress == 0 then
         local door = GetNPCByID(ID.npc[6].DOOR, instance)
         door:setLocalVar("current", os.time())
-        if (door:getLocalVar("current") - door:getLocalVar("start") <= 420) then
+        if door:getLocalVar("current") - door:getLocalVar("start") <= 420 then
             SpawnMob(ID.mob[6].treasure_hunter1, instance)
             SpawnMob(ID.mob[6].treasure_hunter2, instance)
             SpawnMob(ID.mob[6].qiqirn_mine_1, instance)

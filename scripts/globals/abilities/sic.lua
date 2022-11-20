@@ -12,14 +12,14 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if (player:getPet() == nil) then
+    if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
-        if (player:getPet():getHP() == 0) then
+        if player:getPet():getHP() == 0 then
             return xi.msg.basic.UNABLE_TO_USE_JA, 0
-        elseif (player:getPet():getTarget() == nil) then
+        elseif player:getPet():getTarget() == nil then
             return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
-        elseif (not player:getPet():hasTPMoves()) then
+        elseif not player:getPet():hasTPMoves() then
             return xi.msg.basic.UNABLE_TO_USE_JA, 0
         else
             return 0, 0

@@ -20,7 +20,10 @@ entity.onTrigger = function(player, npc)
         npcUtil.giveKeyItem(player, xi.ki.ORDELLE_WHETSTONE)
         player:setCharVar("PolevikKilled", 0)
         player:setCharVar("sharpeningTheSwordCS", 4)
-    elseif sharpeningTheSwordStat == 3 and npcUtil.popFromQM(player, npc, ID.mob.POLEVIK, { hide = 0 }) then
+    elseif
+        sharpeningTheSwordStat == 3 and
+        npcUtil.popFromQM(player, npc, ID.mob.POLEVIK, { hide = 0 })
+    then
         -- do nothing else
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

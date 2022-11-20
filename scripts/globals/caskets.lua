@@ -61,14 +61,14 @@ local casketInfo =
         193, 194, 195, 196, 197, 198, 204, 205, 207, 208, 212, 213
     },
     splitZones = set{
-       xi.zone.ZERUHN_MINES,
-       xi.zone.KORROLOKA_TUNNEL,
-       xi.zone.DANGRUF_WADI,
-       xi.zone.KING_RANPERRES_TOMB,
-       xi.zone.ORDELLES_CAVES,
-       xi.zone.OUTER_HORUTOTO_RUINS,
-       xi.zone.GUSGEN_MINES,
-       xi.zone.MAZE_OF_SHAKHRAMI
+        xi.zone.ZERUHN_MINES,
+        xi.zone.KORROLOKA_TUNNEL,
+        xi.zone.DANGRUF_WADI,
+        xi.zone.KING_RANPERRES_TOMB,
+        xi.zone.ORDELLES_CAVES,
+        xi.zone.OUTER_HORUTOTO_RUINS,
+        xi.zone.GUSGEN_MINES,
+        xi.zone.MAZE_OF_SHAKHRAMI
     },
     cs =
     {
@@ -92,8 +92,8 @@ local casketInfo =
 -- Desc: Helper function for making it easier to read time between spawns.
 -----------------------------------
 local function convertTime(rawTime)
-   local rawSeconds = tonumber(rawTime)
-   local timeTable = { 0, 0, 0 }
+    local rawSeconds = tonumber(rawTime)
+    local timeTable = { 0, 0, 0 }
 
     timeTable[1] = string.format("%02.f", math.floor(rawSeconds / 3600))
     timeTable[2] = string.format("%02.f", math.floor(rawSeconds / 60 - (timeTable[1] * 60)))
@@ -122,7 +122,11 @@ local function timeElapsedCheck(npc)
 
     timeTable = convertTime(lastSpawned)
 
-    if tonumber(timeTable[1]) >= 01 or tonumber(timeTable[1]) < 01 and tonumber(timeTable[2]) >= 05 then
+    if
+        tonumber(timeTable[1]) >= 01 or
+        tonumber(timeTable[1]) < 01 and
+        tonumber(timeTable[2]) >= 05
+    then
         return true
     end
 
@@ -289,7 +293,7 @@ local function multipleItemCheck(itemId)
     local multiples = { 1214, 1215, 1211, 1212, 1213, 1217, 1222, 1962 }
 
     for i = 1, #multiples do
-        if (itemId == multiples[i]) then
+        if itemId == multiples[i] then
             return true
         end
     end
@@ -438,8 +442,8 @@ local function getDrops(npc, dropType, zoneId)
             for k, v in pairs(tempDrops) do
                 rand = rand - v[1]
                 if rand <= 0 then
-                   temp = v[2]
-                   break
+                    temp = v[2]
+                    break
                 end
             end
             if temp == 0 or temp == nil then
@@ -482,8 +486,8 @@ local function getDrops(npc, dropType, zoneId)
             for k, v in pairs(drops) do
                 rand = rand - v[1]
                 if rand <= 0 then
-                   item = v[2]
-                   break
+                    item = v[2]
+                    break
                 end
             end
             if item == 0 or item == nil then
@@ -739,7 +743,10 @@ xi.caskets.onTrade = function(player, npc, trade)
     end
 
     if locked == 1 then
-        if player:getMainJob() == xi.job.THF and npcUtil.tradeHasExactly(trade, 1022) then
+        if
+            player:getMainJob() == xi.job.THF and
+            npcUtil.tradeHasExactly(trade, 1022)
+        then
             local splitNumbers = {}
             local tradeAttempt = math.random()
             local firstAttempt = npc:getLocalVar("[caskets]HINT_TRADE")

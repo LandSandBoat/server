@@ -15,7 +15,11 @@ entity.onMobFight = function(mob, player)
     local chainCount = mob:getLocalVar("chainCount")
     local hpTrigger = { 75, 50, 25 }
     for k, v in pairs(hpTrigger) do
-        if mob:getHPP() <= v and chainCount == k and not mob:hasStatusEffect(xi.effect.CHAINSPELL) then
+        if
+            mob:getHPP() <= v and
+            chainCount == k and
+            not mob:hasStatusEffect(xi.effect.CHAINSPELL)
+        then
             mob:useMobAbility(692)
             mob:setLocalVar("chainCount", chainCount + 1)
         end

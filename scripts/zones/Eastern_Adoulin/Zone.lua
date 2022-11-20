@@ -6,7 +6,7 @@ local ID = require('scripts/zones/Eastern_Adoulin/IDs')
 local zoneObject = {}
 
 local defineZoneAroundXYZ = function(zone, id, x, y, z, distance)
-    zone:registerRegion(id,
+    zone:registerTriggerArea(id,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
@@ -20,14 +20,18 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-155, 0, -19, 250)
     end
 
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

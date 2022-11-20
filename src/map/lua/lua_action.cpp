@@ -192,6 +192,23 @@ void CLuaAction::addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage
     }
 }
 
+bool CLuaAction::addAdditionalTarget(uint32 actionTargetID)
+{
+    for (auto&& actionList : m_PLuaAction->actionLists)
+    {
+        if (actionList.ActionTargetID == actionTargetID)
+        {
+            return false;
+        }
+    }
+
+    auto& newAction          = m_PLuaAction->getNewActionList();
+    newAction.ActionTargetID = actionTargetID;
+    newAction.getNewActionTarget();
+
+    return true;
+}
+
 //==========================================================//
 
 void CLuaAction::Register()
@@ -212,6 +229,7 @@ void CLuaAction::Register()
     SOL_REGISTER("additionalEffect", CLuaAction::additionalEffect);
     SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
     SOL_REGISTER("addEffectMessage", CLuaAction::addEffectMessage);
+    SOL_REGISTER("addAdditionalTarget", CLuaAction::addAdditionalTarget);
 };
 
 std::ostream& operator<<(std::ostream& os, const CLuaAction& action)

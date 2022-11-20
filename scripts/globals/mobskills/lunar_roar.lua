@@ -20,14 +20,18 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     for i, effect in pairs(effects) do
         -- check mask bit for xi.effectFlag.DISPELABLE
-        if (utils.mask.getBit(effect:getFlag(), 0) and effect:getType() ~= xi.effect.RERAISE and num < 10) then
+        if
+            utils.mask.getBit(effect:getFlag(), 0) and
+            effect:getType() ~= xi.effect.RERAISE and
+            num < 10
+        then
             target:delStatusEffect(effect:getType())
             num = num + 1
         end
     end
 
     skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
-    if (num == 0) then
+    if num == 0 then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
 

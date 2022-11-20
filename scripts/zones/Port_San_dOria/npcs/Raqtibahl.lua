@@ -23,7 +23,11 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(755) -- accepts materials, now bring me imperial gold piece
 
     -- imperial gold piece
-    elseif letterRed == 3 and trade:getItemCount() == 1 and trade:hasItemQty(2187, 1) then
+    elseif
+        letterRed == 3 and
+        trade:getItemCount() == 1 and
+        trade:hasItemQty(2187, 1)
+    then
         player:startEvent(760) -- accepts gold piece, now wait for next vana'diel day
 
     end

@@ -67,7 +67,7 @@ entity.onMobDeath = function(mob, player, optParams)
         local bf = mob:getBattlefield()
         -- should not have to verify because Platoon scorps are only ever in a BC
         local num_scorps_dead = bf:getLocalVar("[ODS]NumScorpsDead")
-        bf:setLocalVar("[ODS]NumScorpsDead", num_scorps_dead + 1 )
+        bf:setLocalVar("[ODS]NumScorpsDead", num_scorps_dead + 1)
     end
 end
 

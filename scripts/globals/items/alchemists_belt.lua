@@ -14,7 +14,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) == true) then
+    if target:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
         result = 242
     end
     return result

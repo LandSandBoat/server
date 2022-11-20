@@ -11,7 +11,7 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    quests.ffr.initZone(zone) -- register regions 1 through 5
+    quests.ffr.initZone(zone) -- register trigger areas 1 through 5
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -27,7 +27,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setHomePoint()
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
             cs = 702
             player:setPos(-1.000, 0.000, 44.000, 0)
@@ -43,11 +47,11 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    quests.ffr.onTriggerAreaEnter(player, triggerArea) -- player approaching Flyers for Regine NPCs
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)

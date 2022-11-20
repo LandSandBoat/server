@@ -12,7 +12,11 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("GiohAijhriSpokenTo") == 1 and not player:needToZone() and npcUtil.tradeHas(trade, 13360) then
+    if
+        player:getCharVar("GiohAijhriSpokenTo") == 1 and
+        not player:needToZone() and
+        npcUtil.tradeHas(trade, 13360)
+    then
         player:startEvent(490)
     end
 end
@@ -28,7 +32,10 @@ entity.onTrigger = function(player, npc)
         end
     elseif twinstoneBonding == QUEST_ACCEPTED then
         player:startEvent(488, 0, 13360)
-    elseif twinstoneBonding == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
+    elseif
+        twinstoneBonding == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+    then
         player:startEvent(487, 0, 13360)
     else
         player:startEvent(424)

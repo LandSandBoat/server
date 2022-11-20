@@ -49,9 +49,9 @@ executeCitadelBusterState = function(mob)
     else
         mob:setLocalVar("citadelBuster", 0)
         mob:setLocalVar("citadelBusterState", 0)
-        mob:SetMagicCastingEnabled(true)
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMobAbilityEnabled(true)
+        mob:setMagicCastingEnabled(true)
+        mob:setAutoAttackEnabled(true)
+        mob:setMobAbilityEnabled(true)
         mob:setMobMod(xi.mobMod.DRAW_IN, 0)
         return
     end
@@ -67,9 +67,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local phase = mob:getLocalVar("battlePhase")
     if phase == 4 then
         mob:setLocalVar("citadelBuster", 1)
-        mob:SetMobAbilityEnabled(false)
-        mob:SetMagicCastingEnabled(false)
-        mob:SetAutoAttackEnabled(false)
+        mob:setMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+        mob:setAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 
         executeCitadelBusterState(mob)

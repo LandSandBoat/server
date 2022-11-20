@@ -41,7 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    if (caster:isBehind(target, 15)) then -- guesstimating the angle at 15 degrees here
+    if caster:isBehind(target, 15) then -- guesstimating the angle at 15 degrees here
         damage = math.floor(damage * 1.25)
     end
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
@@ -49,7 +49,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     --TODO: Knockback? Where does that get handled? How much knockback does it have?
 
     local resist = applyResistance(caster, target, spell, params)
-    if (damage > 0 and resist > 0.125) then
+    if damage > 0 and resist > 0.125 then
         local typeEffect = xi.effect.BIND
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))

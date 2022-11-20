@@ -15,9 +15,8 @@ function error(player, msg)
 end
 
 function onTrigger(player, amount, target)
-
     -- validate amount
-    if (amount == nil or amount < 1) then
+    if amount == nil or amount < 1 then
         error(player, "Invalid amount.")
         return
     end
@@ -36,6 +35,6 @@ function onTrigger(player, amount, target)
 
     -- take xp
     targ:delExp(amount)
-    player:PrintToPlayer( string.format( "Removed %i exp from %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl() ))
+    player:PrintToPlayer(string.format("Removed %i exp from %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl()))
 
 end

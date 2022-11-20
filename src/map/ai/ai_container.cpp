@@ -203,14 +203,14 @@ bool CAIContainer::Internal_Engage(uint16 targetid)
         //#TODO: remove m_battleTarget if possible (need to check disengage)
         // Check if an entity can change to the attack state
         // Allow entity with prevent action effect to very briefly switch to the attack state to be properly engaged
-        if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()) || entity->StatusEffectContainer->HasPreventActionEffect())
+        if (CanChangeState() || (GetCurrentState() && GetCurrentState()->IsCompleted()) || entity->StatusEffectContainer->HasPreventActionEffect(true))
         {
             if (ForceChangeState<CAttackState>(entity, targetid))
             {
                 entity->OnEngage(*static_cast<CAttackState*>(m_stateStack.top().get()));
 
                 // Resume being inactive if entity has a status effect preventing them from doing actions
-                if (entity->StatusEffectContainer->HasPreventActionEffect())
+                if (entity->StatusEffectContainer->HasPreventActionEffect(true))
                 {
                     entity->PAI->Inactive(0ms, false);
                 }
@@ -527,6 +527,11 @@ void CAIContainer::QueueAction(queueAction_t&& action)
 bool CAIContainer::QueueEmpty()
 {
     return ActionQueue.isEmpty();
+}
+
+void CAIContainer::checkQueueImmediately()
+{
+    ActionQueue.checkAction(server_clock::now());
 }
 
 bool CAIContainer::Internal_Despawn(bool instantDespawn)

@@ -15,9 +15,17 @@ entity.onTrade = function(player, npc, trade)
     local mineShaftWarpCost = 2000
     local tradeGil = trade:getGil()
 
-    if player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and npcUtil.tradeHas(trade, { { "gil", mineShaftWarpCost } }) then
+    if
+        player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+        npcUtil.tradeHas(trade, { { "gil", mineShaftWarpCost } })
+    then
         player:startEvent(56)
-    elseif not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and tradeGil > 0 and tradeGil <= 10000 and npcUtil.tradeHas(trade, { { "gil", tradeGil } }) then
+    elseif
+        not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+        tradeGil > 0 and
+        tradeGil <= 10000 and
+        npcUtil.tradeHas(trade, { { "gil", tradeGil } })
+    then
         local maxRoll = tradeGil / 200
         local diceRoll = math.random(2, 100)
         player:startEvent(55, tradeGil, maxRoll, diceRoll, mineShaftWarpCost)

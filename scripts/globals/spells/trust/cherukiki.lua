@@ -50,7 +50,7 @@ spellObject.onMobSpawn = function(mob)
     -- BGwiki states 5/tick regen.
     mob:addMod(xi.mod.REGEN, 5)
 
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 spellObject.onMobDespawn = function(mob)

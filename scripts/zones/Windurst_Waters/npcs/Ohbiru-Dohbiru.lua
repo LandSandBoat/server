@@ -40,17 +40,25 @@ entity.onTrigger = function(player, npc)
     local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
-    if (sayFlowers == QUEST_ACCEPTED or sayFlowers == QUEST_COMPLETED) and flowerProgress == 1 then
+    if
+        (sayFlowers == QUEST_ACCEPTED or sayFlowers == QUEST_COMPLETED) and
+        flowerProgress == 1
+    then
         if needToZone then
             player:startEvent(518)
-        elseif (player:getCharVar("FLOWER_PROGRESS") == 2) then
+        elseif player:getCharVar("FLOWER_PROGRESS") == 2 then
             player:startEvent(517, 0, 0, 0, 0, 950)
         else
             player:startEvent(516, 0, 0, 0, 0, 950)
         end
 
     -- Begin Toraimarai Turmoil Section
-    elseif blueRibbonBlues == QUEST_COMPLETED and turmoil == QUEST_AVAILABLE and pfame >= 6 and not needToZone then
+    elseif
+        blueRibbonBlues == QUEST_COMPLETED and
+        turmoil == QUEST_AVAILABLE and
+        pfame >= 6 and
+        not needToZone
+    then
         player:startEvent(785, 4500, 267, 906)
     elseif turmoil == QUEST_ACCEPTED then
         player:startEvent(786, 4500, 267, 906) -- Reminder of needed items

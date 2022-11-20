@@ -19,10 +19,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local divisor = 0.6666
     local constant = 330
     local power = getCurePowerOld(caster)
-    if (power > 560) then
+    if power > 560 then
         divisor = 2.8333
         constant = 591.2
-    elseif (power > 320) then
+    elseif power > 320 then
         divisor =  1
         constant = 410
     end
@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     final = final * xi.settings.main.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
-    if (final > diff) then
+    if final > diff then
         final = diff
     end
     target:addHP(final)
@@ -46,7 +46,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
-    if (mpBonusPercent > 0) then
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 

@@ -43,6 +43,22 @@ function utils.bind(func, ...)
     end
 end
 
+-- Creates a slice of an input table and returns a new table
+function utils.slice(inputTable, first, last, step)
+    local slicedTable = {}
+    first = first or 1
+    last = last or #inputTable
+    step = step or 1
+    local position = 1
+
+    for i = first, last, step do
+        slicedTable[position] = inputTable[i]
+        position = position + 1
+    end
+
+    return slicedTable
+end
+
 -- Shuffles a table and returns a new table containing the randomized result.
 function utils.shuffle(inputTable)
     local shuffledTable = {}
@@ -123,6 +139,10 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     end
 
     return resultTable
+end
+
+function utils.chance(likelihood)
+    return math.random(100) <= likelihood
 end
 
 function utils.clamp(input, min_val, max_val)
@@ -337,51 +357,52 @@ function utils.getSkillLvl(rank, level)
 end
 
 function utils.getMobSkillLvl(rank, level)
-     if level > 50 then
-         if rank == 1 then
-             return 153 + (level - 50) * 5
-         end
-         if rank == 2 then
-             return 147 + (level - 50) * 4.9
-         end
-         if rank == 3 then
-             return 136 + (level - 50) * 4.8
-         end
-         if rank == 4 then
-             return 126 + (level - 50) * 4.7
-         end
-         if rank == 5 then
-             return 116 + (level - 50) * 4.5
-         end
-         if rank == 6 then
-             return 106 + (level - 50) * 4.4
-         end
-         if rank == 7 then
-             return 96 + (level - 50) * 4.3
-         end
-     end
+    if level > 50 then
+        if rank == 1 then
+            return 153 + (level - 50) * 5
+        end
+        if rank == 2 then
+            return 147 + (level - 50) * 4.9
+        end
+        if rank == 3 then
+            return 136 + (level - 50) * 4.8
+        end
+        if rank == 4 then
+            return 126 + (level - 50) * 4.7
+        end
+        if rank == 5 then
+            return 116 + (level - 50) * 4.5
+        end
+        if rank == 6 then
+            return 106 + (level - 50) * 4.4
+        end
+        if rank == 7 then
+            return 96 + (level - 50) * 4.3
+        end
+    end
 
-     if rank == 1 then
-         return 6 + (level - 1) * 3
-     end
-     if rank == 2 then
-         return 5 + (level - 1) * 2.9
-     end
-     if rank == 3 then
-         return 5 + (level - 1) * 2.8
-     end
-     if rank == 4 then
-         return 4 + (level - 1) * 2.7
-     end
-     if rank == 5 then
-         return 4 + (level - 1) * 2.5
-     end
-     if rank == 6 then
-         return 3 + (level - 1) * 2.4
-     end
-     if rank == 7 then
-         return 3 + (level - 1) * 2.3
-     end
+    if rank == 1 then
+        return 6 + (level - 1) * 3
+    end
+    if rank == 2 then
+        return 5 + (level - 1) * 2.9
+    end
+    if rank == 3 then
+        return 5 + (level - 1) * 2.8
+    end
+    if rank == 4 then
+        return 4 + (level - 1) * 2.7
+    end
+    if rank == 5 then
+        return 4 + (level - 1) * 2.5
+    end
+    if rank == 6 then
+        return 3 + (level - 1) * 2.4
+    end
+    if rank == 7 then
+        return 3 + (level - 1) * 2.3
+    end
+
     return 0
 end
 
@@ -590,9 +611,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:entityAnimationPacket(disAnim)
     mob:hideName(true)
     mob:setUntargetable(true)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
     mob:setPos(pos, 0)
     mob:setSpeed(0)
 
@@ -600,9 +621,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         mobArg:setPos(pos, 0)
         mobArg:hideName(false)
         mobArg:setUntargetable(false)
-        mobArg:SetAutoAttackEnabled(true)
-        mobArg:SetMagicCastingEnabled(true)
-        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setAutoAttackEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
+        mobArg:setMobAbilityEnabled(true)
         mobArg:setSpeed(mobSpeed)
         mobArg:entityAnimationPacket(reapAnim)
 

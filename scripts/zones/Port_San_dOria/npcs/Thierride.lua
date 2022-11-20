@@ -14,9 +14,11 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local count = trade:getItemCount()
-
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED and trade:hasItemQty(595, 1) == true and count == 1) then
+    if
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED and
+        trade:hasItemQty(595, 1) and
+        trade:getItemCount() == 1
+    then
         player:tradeComplete()
         player:startEvent(539)
         player:setCharVar("TheBrugaireConsortium-Parcels", 31)

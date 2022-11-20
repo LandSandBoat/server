@@ -36,133 +36,133 @@
 #include "common/timer.h"
 #include "common/utils.h"
 
-#include "../ability.h"
-#include "../alliance.h"
-#include "../battlefield.h"
-#include "../daily_system.h"
-#include "../enmity_container.h"
-#include "../guild.h"
-#include "../instance.h"
-#include "../item_container.h"
-#include "../latent_effect_container.h"
-#include "../linkshell.h"
-#include "../map.h"
-#include "../message.h"
-#include "../mob_modifier.h"
-#include "../mob_spell_container.h"
-#include "../mobskill.h"
-#include "../notoriety_container.h"
-#include "../recast_container.h"
-#include "../roe.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../timetriggers.h"
-#include "../trade_container.h"
-#include "../transport.h"
-#include "../treasure_pool.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "alliance.h"
+#include "battlefield.h"
+#include "daily_system.h"
+#include "enmity_container.h"
+#include "guild.h"
+#include "instance.h"
+#include "item_container.h"
+#include "latent_effect_container.h"
+#include "linkshell.h"
+#include "map.h"
+#include "message.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "mobskill.h"
+#include "notoriety_container.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "timetriggers.h"
+#include "trade_container.h"
+#include "transport.h"
+#include "treasure_pool.h"
+#include "weapon_skill.h"
 
-#include "../ai/ai_container.h"
+#include "ai/ai_container.h"
 
-#include "../ai/states/ability_state.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/death_state.h"
-#include "../ai/states/inactive_state.h"
-#include "../ai/states/item_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/mobskill_state.h"
-#include "../ai/states/petskill_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/range_state.h"
-#include "../ai/states/respawn_state.h"
-#include "../ai/states/weaponskill_state.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/death_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/item_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/mobskill_state.h"
+#include "ai/states/petskill_state.h"
+#include "ai/states/raise_state.h"
+#include "ai/states/range_state.h"
+#include "ai/states/respawn_state.h"
+#include "ai/states/weaponskill_state.h"
 
-#include "../ai/controllers/mob_controller.h"
-#include "../ai/controllers/trust_controller.h"
+#include "ai/controllers/mob_controller.h"
+#include "ai/controllers/trust_controller.h"
 
-#include "../ai/helpers/gambits_container.h"
+#include "ai/helpers/gambits_container.h"
 
-#include "../entities/automatonentity.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/npcentity.h"
-#include "../entities/petentity.h"
-#include "../entities/trustentity.h"
+#include "entities/automatonentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/npcentity.h"
+#include "entities/petentity.h"
+#include "entities/trustentity.h"
 
-#include "../packets/action.h"
-#include "../packets/auction_house.h"
-#include "../packets/change_music.h"
-#include "../packets/char.h"
-#include "../packets/char_abilities.h"
-#include "../packets/char_appearance.h"
-#include "../packets/char_emotion.h"
-#include "../packets/char_equip.h"
-#include "../packets/char_health.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/char_jobs.h"
-#include "../packets/char_mounts.h"
-#include "../packets/char_recast.h"
-#include "../packets/char_skills.h"
-#include "../packets/char_spells.h"
-#include "../packets/char_stats.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/chat_message.h"
-#include "../packets/conquest_map.h"
-#include "../packets/entity_animation.h"
-#include "../packets/entity_enable_list.h"
-#include "../packets/entity_update.h"
-#include "../packets/entity_visual.h"
-#include "../packets/event.h"
-#include "../packets/event_string.h"
-#include "../packets/event_update.h"
-#include "../packets/event_update_string.h"
-#include "../packets/guild_menu.h"
-#include "../packets/guild_menu_buy.h"
-#include "../packets/independent_animation.h"
-#include "../packets/instance_entry.h"
-#include "../packets/inventory_assign.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/inventory_modify.h"
-#include "../packets/inventory_size.h"
-#include "../packets/key_items.h"
-#include "../packets/linkshell_equip.h"
-#include "../packets/menu_jobpoints.h"
-#include "../packets/menu_merit.h"
-#include "../packets/menu_mog.h"
-#include "../packets/menu_raisetractor.h"
-#include "../packets/message_basic.h"
-#include "../packets/message_combat.h"
-#include "../packets/message_name.h"
-#include "../packets/message_special.h"
-#include "../packets/message_standard.h"
-#include "../packets/message_system.h"
-#include "../packets/message_text.h"
-#include "../packets/monipulator1.h"
-#include "../packets/monipulator2.h"
-#include "../packets/position.h"
-#include "../packets/quest_mission_log.h"
-#include "../packets/release.h"
-#include "../packets/roe_questlog.h"
-#include "../packets/server_ip.h"
-#include "../packets/shop_items.h"
-#include "../packets/shop_menu.h"
-#include "../packets/timer_bar_util.h"
-#include "../packets/weather.h"
+#include "packets/action.h"
+#include "packets/auction_house.h"
+#include "packets/change_music.h"
+#include "packets/char.h"
+#include "packets/char_abilities.h"
+#include "packets/char_appearance.h"
+#include "packets/char_emotion.h"
+#include "packets/char_equip.h"
+#include "packets/char_health.h"
+#include "packets/char_job_extra.h"
+#include "packets/char_jobs.h"
+#include "packets/char_mounts.h"
+#include "packets/char_recast.h"
+#include "packets/char_skills.h"
+#include "packets/char_spells.h"
+#include "packets/char_stats.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/chat_message.h"
+#include "packets/conquest_map.h"
+#include "packets/entity_animation.h"
+#include "packets/entity_enable_list.h"
+#include "packets/entity_update.h"
+#include "packets/entity_visual.h"
+#include "packets/event.h"
+#include "packets/event_string.h"
+#include "packets/event_update.h"
+#include "packets/event_update_string.h"
+#include "packets/guild_menu.h"
+#include "packets/guild_menu_buy.h"
+#include "packets/independent_animation.h"
+#include "packets/instance_entry.h"
+#include "packets/inventory_assign.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/inventory_modify.h"
+#include "packets/inventory_size.h"
+#include "packets/key_items.h"
+#include "packets/linkshell_equip.h"
+#include "packets/menu_jobpoints.h"
+#include "packets/menu_merit.h"
+#include "packets/menu_mog.h"
+#include "packets/menu_raisetractor.h"
+#include "packets/message_basic.h"
+#include "packets/message_combat.h"
+#include "packets/message_name.h"
+#include "packets/message_special.h"
+#include "packets/message_standard.h"
+#include "packets/message_system.h"
+#include "packets/message_text.h"
+#include "packets/monipulator1.h"
+#include "packets/monipulator2.h"
+#include "packets/position.h"
+#include "packets/quest_mission_log.h"
+#include "packets/release.h"
+#include "packets/roe_questlog.h"
+#include "packets/server_ip.h"
+#include "packets/shop_items.h"
+#include "packets/shop_menu.h"
+#include "packets/timer_bar_util.h"
+#include "packets/weather.h"
 
-#include "../utils/battleutils.h"
-#include "../utils/blueutils.h"
-#include "../utils/charutils.h"
-#include "../utils/guildutils.h"
-#include "../utils/instanceutils.h"
-#include "../utils/itemutils.h"
-#include "../utils/jailutils.h"
-#include "../utils/mobutils.h"
-#include "../utils/petutils.h"
-#include "../utils/puppetutils.h"
-#include "../utils/trustutils.h"
-#include "../utils/zoneutils.h"
+#include "utils/battleutils.h"
+#include "utils/blueutils.h"
+#include "utils/charutils.h"
+#include "utils/guildutils.h"
+#include "utils/instanceutils.h"
+#include "utils/itemutils.h"
+#include "utils/jailutils.h"
+#include "utils/mobutils.h"
+#include "utils/petutils.h"
+#include "utils/puppetutils.h"
+#include "utils/trustutils.h"
+#include "utils/zoneutils.h"
 
 //======================================================//
 
@@ -2345,13 +2345,13 @@ auto CLuaBaseEntity::getZoneName() -> const char*
 }
 
 /************************************************************************
- *  Function: isZoneVisited()
+ *  Function: hasVisitedZone()
  *  Purpose : Returns true if a player has ever visited the zone
- *  Example : if not target:isZoneVisited(xi.zone.BIBIKI_BAY) then
+ *  Example : if not target:hasVisitedZone(xi.zone.BIBIKI_BAY) then
  *  Notes   : Mainly used for teleport items (like to Bibiki Bay)
  ************************************************************************/
 
-bool CLuaBaseEntity::isZoneVisited(uint16 zone)
+bool CLuaBaseEntity::hasVisitedZone(uint16 zone)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -2408,20 +2408,22 @@ bool CLuaBaseEntity::isInMogHouse()
 
     return static_cast<CCharEntity*>(m_PBaseEntity)->m_moghouseID;
 }
+
 /************************************************************************
-*  Function: getPlayerRegionInZone
-*  Purpose : Returns the player's current region inside the zone
-*  Example : local regionID = player:getPlayerRegionInZone()
-*  Notes   : This refers to regions added via the registerRegion function
+*  Function: getPlayerTriggerAreaInZone
+*  Purpose : Returns the player's current trigger area inside the zone
+*  Example : local triggerAreaID = player:getPlayerTriggerAreaInZone()
+*  Notes   : This refers to trigger areas added via the registerTriggerArea function
              Currently only used for port bastok drawbridge
 ************************************************************************/
-uint32 CLuaBaseEntity::getPlayerRegionInZone()
+uint32 CLuaBaseEntity::getPlayerTriggerAreaInZone()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->m_InsideRegionID;
+    return PChar->m_InsideTriggerAreaID;
 }
+
 /************************************************************************
 *  Function: updateToEntireZone
 *  Purpose : Updates NPC status/animation then sends an update packet zone-wide.
@@ -2449,6 +2451,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
 
     PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
 }
+
 /************************************************************************
  *  Function: getPos()
  *  Purpose : Returns a table of signed coordinates (x,y,z,rot)
@@ -5614,6 +5617,13 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                 charutils::BuildingCharTraitsTable(PChar);
                 charutils::BuildingCharAbilityTable(PChar);
                 charutils::CheckValidEquipment(PChar);
+
+                // Update the character's Automaton capacity bonus regardless if the pet is out or not
+                if (PChar->PAutomaton)
+                {
+                    PChar->PAutomaton->setElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
+                }
+
                 PChar->pushPacket(new CCharJobsPacket(PChar));
                 PChar->pushPacket(new CCharStatsPacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
@@ -5628,14 +5638,68 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
             if (PChar->PPet)
             {
                 CPetEntity* PPet = static_cast<CPetEntity*>(PChar->PPet);
-                if (PPet->getPetType() == PET_TYPE::WYVERN)
+
+                if (PPet->getPetType() == PET_TYPE::CHARMED_MOB)
                 {
-                    petutils::LoadWyvernStatistics(PChar, PPet, true);
+                    // Charmed mobs only detach if they are above the level restriction
+                    if (PPet->GetMLevel() > NewMLevel)
+                    {
+                        petutils::DetachPet(PChar);
+                    }
+                    return PChar->m_LevelRestriction;
                 }
-                else
+
+                // Preserve pet's HP and MP
+                int32 hp = PPet->health.hp;
+                int32 mp = PPet->health.mp;
+
+                // Reset pet to a clean slate
+                PPet->StatusEffectContainer->KillAllStatusEffect();
+                PPet->restoreModifiers();
+                PPet->restoreMobModifiers();
+                PPet->TraitList.clear();
+
+                switch (PPet->getPetType())
                 {
-                    petutils::DespawnPet(PChar);
+                    case PET_TYPE::AVATAR:
+                        petutils::CalculateAvatarStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::WYVERN:
+                        petutils::CalculateWyvernStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::JUG_PET:
+                        petutils::CalculateJugPetStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::AUTOMATON:
+                        if (isExceedingElementalCapacity())
+                        {
+                            // Reset Activate if Automaton is full HP
+                            if (PPet->health.hp == PPet->GetMaxHP())
+                            {
+                                resetRecast(RECAST_ABILITY, 205);
+                            }
+
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_AUTO_EXCEEDS_CAPACITY));
+                            petutils::DespawnPet(PChar);
+                            return PChar->m_LevelRestriction;
+                        }
+                        petutils::CalculateAutomatonStats(PChar, PPet);
+                        break;
+                    case PET_TYPE::LUOPAN:
+                        petutils::CalculateLoupanStats(PChar, PPet);
+                        break;
+                    default:
+                        petutils::DespawnPet(PChar);
+                        return PChar->m_LevelRestriction;
                 }
+
+                // Setup pet with master since traits, abilities and some status effects need to be reapplied
+                petutils::SetupPetWithMaster(PChar, PPet);
+
+                // Restore pet's HP and MP to what it was before the stat recalculation
+                PPet->health.hp = std::min(hp, PPet->GetMaxHP());
+                PPet->health.mp = std::min(mp, PPet->GetMaxMP());
+                PPet->updatemask |= UPDATE_HP;
             }
         }
     }
@@ -7767,7 +7831,7 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
     // Check for special flags which may prevent damage from waking up the target
     bool wakeUp        = true;
     bool breakBind     = true;
-    bool removePetrify = true;
+    bool removePetrify = false;
 
     // TODO: Unused in current code, needs testing; change type to sol::table?
     //       Find a way to make this better! (Optional keys as well?)
@@ -9766,6 +9830,36 @@ void CLuaBaseEntity::wakeUp()
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SLEEP);
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SLEEP_II);
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_LULLABY);
+}
+
+/************************************************************************
+ *  Function: setBattleID()
+ *  Purpose : Sets the battle ID on the entity. Only entities with the same battle ID can interact with each other.
+ *  Example : target:setBattleID(1)
+ *  Notes   : Default value for battle ID is 0.
+ ************************************************************************/
+
+void CLuaBaseEntity::setBattleID(uint16 battleID)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    PEntity->setBattleID(battleID);
+}
+
+/************************************************************************
+ *  Function: getBattleID()
+ *  Purpose : Gets the battle ID on the entity
+ *  Example : target:getBattleID()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBattleID()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    return PEntity->getBattleID();
 }
 
 /************************************************************************
@@ -12649,6 +12743,35 @@ void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& int
 }
 
 /************************************************************************
+ *  Function: isExceedingElementalCapacity()
+ *  Purpose : Checks if the automaton elemental capacity is being exceeded.
+ *  Example : if master:isExceedingElementalCapacity() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isExceedingElementalCapacity()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!PChar->PAutomaton)
+    {
+        return false;
+    }
+
+    for (uint8 i = 0; i < 8; ++i)
+    {
+        if (PChar->PAutomaton->getElementCapacity(i) > PChar->PAutomaton->getElementMax(i))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
  *  Function: getAllRuneEffects()
  *  Purpose : Returns a sol::table with all rune effects
  *  Example : local runeEffects = player:getAllRuneEffects()
@@ -13143,7 +13266,7 @@ void CLuaBaseEntity::instantiateMob(uint32 groupID)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::hasTrait(uint8 traitID)
+bool CLuaBaseEntity::hasTrait(uint16 traitID)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -13334,49 +13457,49 @@ void CLuaBaseEntity::setSpellList(uint16 spellList)
 }
 
 /************************************************************************
- *  Function: SetAutoAttackEnabled()
+ *  Function: setAutoAttackEnabled()
  *  Purpose : Enables/disabled auto-attack for a Mob
- *  Example : mob:SetAutoAttackEnabled(false)
+ *  Example : mob:setAutoAttackEnabled(false)
  *  Notes   : See scripts/zones/Throne_Room/mobs/Shadow_Lord.lua
  ************************************************************************/
 
-void CLuaBaseEntity::SetAutoAttackEnabled(bool state)
+void CLuaBaseEntity::setAutoAttackEnabled(bool state)
 {
     m_PBaseEntity->PAI->GetController()->SetAutoAttackEnabled(state);
 }
 
 /************************************************************************
- *  Function: SetMagicCastingEnabled()
+ *  Function: setMagicCastingEnabled()
  *  Purpose : Used to enable/disable the casting of spells for a Mob
- *  Example : mob:SetMagicCastingEnabled(false)
+ *  Example : mob:setMagicCastingEnabled(false)
  *  Notes   : Used primarily for Mob behavior and battle control
  ************************************************************************/
 
-void CLuaBaseEntity::SetMagicCastingEnabled(bool state)
+void CLuaBaseEntity::setMagicCastingEnabled(bool state)
 {
     m_PBaseEntity->PAI->GetController()->SetMagicCastingEnabled(state);
 }
 
 /************************************************************************
- *  Function: SetMobAbilityEnabled()
+ *  Function: setMobAbilityEnabled()
  *  Purpose : Used primarily to clear queue for special ability to be used
- *  Example : mob:SetMobAbilityEnabled(false)
+ *  Example : mob:setMobAbilityEnabled(false)
  *  Notes   : See Bahamut.lua
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobAbilityEnabled(bool state)
+void CLuaBaseEntity::setMobAbilityEnabled(bool state)
 {
     m_PBaseEntity->PAI->GetController()->SetWeaponSkillEnabled(state);
 }
 
 /************************************************************************
- *  Function: SetMobSkillAttack()
+ *  Function: setMobSkillAttack()
  *  Purpose : Used mainly so Mobs don't respawn in flight?
- *  Example : mob:SetMobSkillAttack(0)
+ *  Example : mob:setMobSkillAttack(0)
  *  Notes   : Used in Ouryu, Jormungand, Tiamat, etc
  ************************************************************************/
 
-void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
+void CLuaBaseEntity::setMobSkillAttack(int16 listId)
 {
     XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST));
 
@@ -13695,8 +13818,9 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
 /************************************************************************
  *  Function: useJobAbility()
  *  Purpose : Instruct a Mob to use a specified Job Ability
- *  Example : wyvern:useJobAbility(636, wyvern) -- Specifying pet to use
- *  Notes   : Inserts directly into queue stack with 0ms delay
+ *  Example : wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern) -- Specifying pet to use
+ *  Notes   : Inserts directly into queue stack with 0ms delay,
+ *  and checks queue for immediate use.
  ************************************************************************/
 
 void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
@@ -13724,6 +13848,9 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
         }
     }));
     // clang-format on
+
+    // Check queue immediately in case of 0 ms delay abilities
+    m_PBaseEntity->PAI->checkQueueImmediately();
 }
 
 /************************************************************************
@@ -14674,7 +14801,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getZone", CLuaBaseEntity::getZone);
     SOL_REGISTER("getZoneID", CLuaBaseEntity::getZoneID);
     SOL_REGISTER("getZoneName", CLuaBaseEntity::getZoneName);
-    SOL_REGISTER("isZoneVisited", CLuaBaseEntity::isZoneVisited);
+    SOL_REGISTER("hasVisitedZone", CLuaBaseEntity::hasVisitedZone);
     SOL_REGISTER("getPreviousZone", CLuaBaseEntity::getPreviousZone);
     SOL_REGISTER("getCurrentRegion", CLuaBaseEntity::getCurrentRegion);
     SOL_REGISTER("getContinentID", CLuaBaseEntity::getContinentID);
@@ -15053,6 +15180,9 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("wakeUp", CLuaBaseEntity::wakeUp);
 
+    SOL_REGISTER("setBattleID", CLuaBaseEntity::setBattleID);
+    SOL_REGISTER("getBattleID", CLuaBaseEntity::getBattleID);
+
     SOL_REGISTER("recalculateStats", CLuaBaseEntity::recalculateStats);
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
 
@@ -15127,6 +15257,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
     SOL_REGISTER("getOverloadChance", CLuaBaseEntity::getOverloadChance);
     SOL_REGISTER("setStatDebilitation", CLuaBaseEntity::setStatDebilitation);
+    SOL_REGISTER("isExceedingElementalCapacity", CLuaBaseEntity::isExceedingElementalCapacity);
 
     // Damage Calculation
     SOL_REGISTER("getStat", CLuaBaseEntity::getStat);
@@ -15265,10 +15396,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setDamage", CLuaBaseEntity::setDamage);
     SOL_REGISTER("hasSpellList", CLuaBaseEntity::hasSpellList);
     SOL_REGISTER("setSpellList", CLuaBaseEntity::setSpellList);
-    SOL_REGISTER("SetAutoAttackEnabled", CLuaBaseEntity::SetAutoAttackEnabled);
-    SOL_REGISTER("SetMagicCastingEnabled", CLuaBaseEntity::SetMagicCastingEnabled);
-    SOL_REGISTER("SetMobAbilityEnabled", CLuaBaseEntity::SetMobAbilityEnabled);
-    SOL_REGISTER("SetMobSkillAttack", CLuaBaseEntity::SetMobSkillAttack);
+    SOL_REGISTER("setAutoAttackEnabled", CLuaBaseEntity::setAutoAttackEnabled);
+    SOL_REGISTER("setMagicCastingEnabled", CLuaBaseEntity::setMagicCastingEnabled);
+    SOL_REGISTER("setMobAbilityEnabled", CLuaBaseEntity::setMobAbilityEnabled);
+    SOL_REGISTER("setMobSkillAttack", CLuaBaseEntity::setMobSkillAttack);
 
     SOL_REGISTER("getMobMod", CLuaBaseEntity::getMobMod);
     SOL_REGISTER("setMobMod", CLuaBaseEntity::setMobMod);
@@ -15311,7 +15442,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getTHlevel", CLuaBaseEntity::getTHlevel);
     SOL_REGISTER("addDropListModification", CLuaBaseEntity::addDropListModification);
 
-    SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
+    SOL_REGISTER("getPlayerTriggerAreaInZone", CLuaBaseEntity::getPlayerTriggerAreaInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
     // Abyssea

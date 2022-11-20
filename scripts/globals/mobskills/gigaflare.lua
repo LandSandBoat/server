@@ -16,10 +16,10 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
 
-    if (mobhp <= 10) then -- set up Gigaflare for being called by the script again.
+    if mobhp <= 10 then -- set up Gigaflare for being called by the script again.
         mob:setLocalVar("GigaFlare", 0)
-        mob:SetMobAbilityEnabled(false) -- disable mobskills/spells until Gigaflare is used successfully (don't want to delay it/queue Megaflare)
-        mob:SetMagicCastingEnabled(false)
+        mob:setMobAbilityEnabled(false) -- disable mobskills/spells until Gigaflare is used successfully (don't want to delay it/queue Megaflare)
+        mob:setMagicCastingEnabled(false)
     end
 
     return 1
@@ -28,9 +28,9 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("GigaFlare", 1) -- When set to 1 the script won't call it.
     mob:setLocalVar("tauntShown", 0)
-    mob:SetMobAbilityEnabled(true) -- enable the spells/other mobskills again
-    mob:SetMagicCastingEnabled(true)
-    if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0) then -- re-enable noturn
+    mob:setMobAbilityEnabled(true) -- enable the spells/other mobskills again
+    mob:setMagicCastingEnabled(true)
+    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0 then -- re-enable noturn
         mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 

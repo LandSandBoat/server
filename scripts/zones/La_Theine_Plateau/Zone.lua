@@ -29,6 +29,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos( -559, 0, 680, 73)
     end
@@ -44,7 +49,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -61,9 +66,19 @@ zoneObject.onZoneWeatherChange = function(weather)
     local timeOfTheDay = VanadielTOTD()
     local setRainbow = rainbow:getLocalVar("setRainbow")
 
-    if setRainbow == 1 and weather ~= xi.weather.RAIN and timeOfTheDay >= xi.time.DAWN and timeOfTheDay <= xi.time.EVENING and rainbow:getAnimation() == xi.anim.CLOSE_DOOR then
+    if
+        setRainbow == 1 and
+        weather ~= xi.weather.RAIN and
+        timeOfTheDay >= xi.time.DAWN and
+        timeOfTheDay <= xi.time.EVENING and
+        rainbow:getAnimation() == xi.anim.CLOSE_DOOR
+    then
         rainbow:setAnimation(xi.anim.OPEN_DOOR)
-    elseif setRainbow == 1 and weather == xi.weather.RAIN and rainbow:getAnimation() == xi.anim.OPEN_DOOR then
+    elseif
+        setRainbow == 1 and
+        weather == xi.weather.RAIN and
+        rainbow:getAnimation() == xi.anim.OPEN_DOOR
+    then
         rainbow:setAnimation(xi.anim.CLOSE_DOOR)
         rainbow:setLocalVar('setRainbow', 0)
     end
@@ -73,9 +88,19 @@ zoneObject.onTOTDChange = function(timeOfTheDay)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local setRainbow = rainbow:getLocalVar("setRainbow")
 
-    if setRainbow == 1 and timeOfTheDay >= xi.time.DAWN and timeOfTheDay <= xi.time.EVENING and rainbow:getAnimation() == xi.anim.CLOSE_DOOR then
+    if
+        setRainbow == 1 and
+        timeOfTheDay >= xi.time.DAWN and
+        timeOfTheDay <= xi.time.EVENING and
+        rainbow:getAnimation() == xi.anim.CLOSE_DOOR
+    then
         rainbow:setAnimation(xi.anim.OPEN_DOOR)
-    elseif setRainbow == 1 and timeOfTheDay < xi.time.DAWN or timeOfTheDay > xi.time.EVENING and rainbow:getAnimation() == xi.anim.OPEN_DOOR then
+    elseif
+        setRainbow == 1 and
+        timeOfTheDay < xi.time.DAWN or
+        timeOfTheDay > xi.time.EVENING and
+        rainbow:getAnimation() == xi.anim.OPEN_DOOR
+    then
         rainbow:setAnimation(xi.anim.CLOSE_DOOR)
         rainbow:setLocalVar('setRainbow', 0)
     end

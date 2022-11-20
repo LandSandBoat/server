@@ -42,9 +42,15 @@ entity.onMobFight = function(mob, target)
     if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(xi.effect.STUN) then
         mob:setAnimationSub(0)
         mob:stun(1500)
-    elseif mob:getAnimationSub() == 2 and not mob:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
+    elseif
+        mob:getAnimationSub() == 2 and
+        not mob:hasStatusEffect(xi.effect.MAGIC_SHIELD)
+    then
         mob:setAnimationSub(0)
-    elseif mob:getAnimationSub() == 1 and not mob:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) then
+    elseif
+        mob:getAnimationSub() == 1 and
+        not mob:hasStatusEffect(xi.effect.PHYSICAL_SHIELD)
+    then
         mob:setAnimationSub(0)
     end
 

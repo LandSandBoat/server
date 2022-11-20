@@ -15,9 +15,8 @@ function error(player, msg)
 end
 
 function onTrigger(player, amount, target)
-
     -- validate amount
-    if (amount == nil or amount < 0) then
+    if amount == nil or amount < 0 then
         error(player, "Invalid amount.")
         return
     end
@@ -36,5 +35,5 @@ function onTrigger(player, amount, target)
 
     -- set merits
     targ:setMerits(amount)
-    player:PrintToPlayer( string.format("%s now has %i merits.", targ:getName(), targ:getMeritCount() ) )
+    player:PrintToPlayer(string.format("%s now has %i merits.", targ:getName(), targ:getMeritCount()))
 end

@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local baseDamage = 0
 
     -- estimation based on "Throat Stab-like damage"
-    if (currentHP / target:getMaxHP() > 0.2) then
+    if currentHP / target:getMaxHP() > 0.2 then
         baseDamage = currentHP * .95
     else
         baseDamage = currentHP

@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
+#include "common/logging.h"
 
-#include "region.h"
+#include "trigger_area.h"
 
 #include <cmath>
 
-// Initialize the region to a unique number within the zone.
+// Initialize the trigger area to a unique number within the zone.
 // When trying to set 0, issue a warning.
-CRegion::CRegion(uint32 RegionID, bool isCircle)
-: m_RegionID(RegionID)
+CTriggerArea::CTriggerArea(uint32 triggerAreaID, bool isCircle)
+: m_TriggerAreaID(triggerAreaID)
 , m_Count(0)
 , circle(isCircle)
 {
@@ -39,37 +39,36 @@ CRegion::CRegion(uint32 RegionID, bool isCircle)
     z1 = 0.f;
     z2 = 0.f;
 
-    if (m_RegionID == 0)
+    if (m_TriggerAreaID == 0)
     {
-        ShowWarning("Region ID cannot be zero");
+        ShowWarning("TriggerArea ID cannot be zero");
     }
 }
 
-// return unique region of the area
-uint32 CRegion::GetRegionID() const
+uint32 CTriggerArea::GetTriggerAreaID() const
 {
-    return m_RegionID;
+    return m_TriggerAreaID;
 }
 
-int16 CRegion::GetCount() const
+int16 CTriggerArea::GetCount() const
 {
     return m_Count;
 }
 
-int16 CRegion::AddCount(int16 count)
+int16 CTriggerArea::AddCount(int16 count)
 {
     m_Count += count;
     return m_Count;
 }
 
-int16 CRegion::DelCount(int16 count)
+int16 CTriggerArea::DelCount(int16 count)
 {
     m_Count -= count;
     return m_Count;
 }
 
 // set upper left corner of area
-void CRegion::SetULCorner(float x, float y, float z)
+void CTriggerArea::SetULCorner(float x, float y, float z)
 {
     x1 = x;
     y1 = y;
@@ -77,7 +76,7 @@ void CRegion::SetULCorner(float x, float y, float z)
 }
 
 // set lower right corner of area
-void CRegion::SetLRCorner(float x, float y, float z)
+void CTriggerArea::SetLRCorner(float x, float y, float z)
 {
     x2 = x;
     y2 = y;
@@ -85,7 +84,7 @@ void CRegion::SetLRCorner(float x, float y, float z)
 }
 
 // check whether the position is inside the area
-bool CRegion::isPointInside(position_t pos) const
+bool CTriggerArea::isPointInside(position_t pos) const
 {
     if (circle)
     {

@@ -11,7 +11,11 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 4)
 
-    if player:getZPos() > -11.9 and npc:getAnimation() == xi.anim.CLOSE_DOOR and brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
+    if
+        player:getZPos() > -11.9 and
+        npc:getAnimation() == xi.anim.CLOSE_DOOR and
+        brassDoor:getAnimation() == xi.anim.CLOSE_DOOR
+    then
         npc:openDoor(6.5)
         -- Should be a ~1 second delay here before the door opens
         brassDoor:openDoor(4.5)

@@ -20,7 +20,7 @@ def preflight_exit():
 # - git should installed and available
 try:
     subprocess.call(["git"], stdout=subprocess.PIPE)
-except:  # lgtm [py/catch-base-exception]
+except Exception:
     print(
         "ERROR: Make sure git is installed and available on your system's PATH environment variable."
     )
@@ -67,6 +67,11 @@ except Exception as e:
         "Ensure you've run/re-run the command you use to install python dependencies (ex: pip install --upgrade -r requirements.txt)"
     )
     preflight_exit()
+
+GREEN = colorama.Fore.GREEN
+RED = colorama.Fore.RED
+RESET = colorama.Style.RESET_ALL
+NOOP = lambda *args, **kwargs: None
 
 
 def print_red(str):
@@ -158,6 +163,7 @@ else:
     exe = ""
 colorama.init(autoreset=True)
 
+
 # Redirect errors through this to hide annoying password warning
 def fetch_errors(result):
     for line in result.stderr.splitlines():
@@ -166,12 +172,30 @@ def fetch_errors(result):
             print_red(line)
 
 
+def db_query(query):
+    result = subprocess.run(
+        [
+            f"{mysql_bin}mysql{exe}",
+            f"-h{host}",
+            f"-P{str(port)}",
+            f"-u{login}",
+            f"-p{password}",
+            database,
+            f"-e {query}",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    fetch_errors(result)
+    return result
+
+
 def fetch_credentials():
     global database, host, port, login, password
     credentials = {}
     # Grab mysql credentials
     filename = from_server_path("settings/default/network.lua")
-    if from_server_path("settings/network.lua"):
+    if os.path.exists(from_server_path("settings/network.lua")):
         filename = from_server_path("settings/network.lua")
     try:
         with open(filename) as f:
@@ -190,8 +214,9 @@ def fetch_credentials():
         port = os.getenv("XI_NETWORK_SQL_PORT") or int(credentials["SQL_PORT"])
         login = os.getenv("XI_NETWORK_SQL_LOGIN") or credentials["SQL_LOGIN"]
         password = os.getenv("XI_NETWORK_SQL_PASSWORD") or credentials["SQL_PASSWORD"]
-    except:  # lgtm [py/catch-base-exception]
+    except Exception as e:
         print_red("Error fetching credentials.\nCheck settings/network.lua.")
+        print(e)
         return False
     return True
 
@@ -201,8 +226,9 @@ def fetch_versions():
     current_client = release_version = release_client = None
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
-    except:  # lgtm [py/catch-base-exception]
+    except Exception as e:
         print_red("Unable to read current version hash.")
+        print(e)
     try:
         with open(from_server_path("settings/default/login.lua")) as f:
             while True:
@@ -212,8 +238,9 @@ def fetch_versions():
                 match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
                 if match:
                     release_client = match.group(1)
-    except:  # lgtm [py/catch-base-exception]
+    except Exception as e:
         print_red("Unable to read settings/default/login.lua.")
+        print(e)
     if os.path.exists(from_server_path("settings/login.lua")):
         try:
             with open(from_server_path("settings/login.lua")) as f:
@@ -224,8 +251,9 @@ def fetch_versions():
                     match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
                     if match:
                         current_client = match.group(1)
-        except:  # lgtm [py/catch-base-exception]
+        except Exception as e:
             print_red("Unable to read settings/login.lua")
+            print(e)
     if db_ver and release_version:
         fetch_files(True)
     else:
@@ -235,21 +263,24 @@ def fetch_versions():
 def fetch_configs():
     global mysql_bin, auto_backup, auto_update_client, db_ver
     try:
-        with open(from_dbtool_path("config.yaml")) as file:
-            configs = yaml.full_load(file)
-            for config in configs:
-                for key, value in config.items():
-                    if key == "mysql_bin":
-                        if value != "":
-                            mysql_bin = value
-                    if key == "auto_backup":
-                        auto_backup = int(value)
-                    if key == "auto_update_client":
-                        auto_update_client = bool(value)
-                    if key == "db_ver":
-                        db_ver = value
-    except:  # lgtm [py/catch-base-exception]
-        write_configs()
+        if os.path.exists(from_dbtool_path("config.yaml")):
+            with open(from_dbtool_path("config.yaml")) as file:
+                configs = yaml.full_load(file)
+                for config in configs:
+                    for key, value in config.items():
+                        if key == "mysql_bin":
+                            if value != "":
+                                mysql_bin = value
+                        if key == "auto_backup":
+                            auto_backup = int(value)
+                        if key == "auto_update_client":
+                            auto_update_client = bool(value)
+                        if key == "db_ver":
+                            db_ver = value
+        else:
+            write_configs()
+    except Exception as e:
+        print(e)
 
 
 def write_configs():
@@ -269,7 +300,7 @@ def fetch_module_files():
             if not line.startswith("#") and line.strip() and not line in ["\n", "\r\n"]:
                 line = from_server_path("modules/" + line.strip())
                 if pathlib.Path(line).is_dir():
-                    for filename in pathlib.Path(line).glob("**/*.sql"):
+                    for filename in sorted(pathlib.Path(line).glob("**/*.sql")):
                         import_files.append(str(filename).replace("\\", "/"))
                 else:
                     if line.endswith(".sql"):
@@ -309,8 +340,10 @@ def fetch_files(express=False):
             )
             if len(sql_diffs) > 0:
                 for diff in sql_diffs:
-                    import_files.append(from_server_path("sql/" + diff))
-                express_enabled = True
+                    if os.path.exists(from_server_path(diff.b_path)):
+                        import_files.append(from_server_path(diff.b_path))
+                if len(import_files) > 0:
+                    express_enabled = True
             else:
                 express_enabled = False
                 if (
@@ -322,25 +355,28 @@ def fetch_files(express=False):
                     > 0
                 ):
                     express_enabled = True
-        except:  # lgtm [py/catch-base-exception]
+        except Exception as e:
             print_red("Error checking diffs.\nCheck that hash is valid in config.yaml.")
+            print(e)
     else:
         for (_, _, filenames) in os.walk(from_server_path("sql/")):
-            for filename in filenames:
+            for filename in sorted(filenames):
                 import_files.append(from_server_path("sql/" + filename))
             break
     check_protected()
     backups.clear()
     for (_, _, filenames) in os.walk(from_server_path("sql/backups/")):
-        for file in filenames:
+        for file in sorted(filenames):
             if not ".gitignore" in file:
                 backups.append(from_server_path("sql/backups/" + file))
         break
     backups.sort()
     import_files.sort()
     try:
-        import_files.append(import_files.pop(import_files.index("triggers.sql")))
-    except:  # lgtm [py/catch-base-exception]
+        import_files.append(
+            import_files.pop(import_files.index(from_server_path("sql/triggers.sql")))
+        )
+    except Exception:
         pass
     fetch_module_files()
 
@@ -368,9 +404,10 @@ def write_version(silent=False):
             if update_client:
                 print_green("Updated client version!")
             fetch_versions()
-        except:  # lgtm [py/catch-base-exception]
+        except Exception as e:
             fileinput.close()
             print_red("Error writing version.")
+            print(e)
 
 
 def import_file(file):
@@ -382,20 +419,7 @@ def import_file(file):
         return
     print("Importing " + file)
     query = f"SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; SOURCE {file}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;"
-    result = subprocess.run(
-        [
-            f"{mysql_bin}mysql{exe}",
-            f"-h{host}",
-            f"-P{str(port)}",
-            f"-u{login}",
-            f"-p{password}",
-            database,
-            f"-e {query}",
-        ],
-        capture_output=True,
-        text=True,
-    )
-    fetch_errors(result)
+    _ = db_query(query)
 
 
 def connect():
@@ -697,39 +721,6 @@ def bad_selection():
     time.sleep(0.5)
 
 
-# fmt: off
-def menu():
-    print(
-        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o\n"
-        + colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + "LandSandBoat Database Management Tool" + colorama.Fore.RED + " |\n"
-        "| " + colorama.Style.RESET_ALL + str("Connected to " + database).center(37) + colorama.Fore.RED + " |"
-    )
-    if db_ver:
-        print(
-            colorama.Fore.RED + "| " + colorama.Style.RESET_ALL + str("#" + db_ver).center(37) + colorama.Fore.RED + " |"
-        )
-    print(
-        colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
-    )
-    if express_enabled:
-        print(
-            colorama.Fore.RED + "|" + colorama.Fore.GREEN + "e" + colorama.Style.RESET_ALL + ". Express Update " + str("(#" + release_version + ")").ljust(21) + colorama.Fore.RED + "|"
-        )
-    print(
-        colorama.Fore.RED +
-        "|" + colorama.Fore.GREEN + "1" + colorama.Style.RESET_ALL + str(". Update DB").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "2" + colorama.Style.RESET_ALL + str(". Check migrations").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "3" + colorama.Style.RESET_ALL + str(". Backup").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "4" + colorama.Style.RESET_ALL + str(". Restore/Import").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "r" + colorama.Style.RESET_ALL + str(". Reset DB").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "t" + colorama.Style.RESET_ALL + str(". Tasks").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "s" + colorama.Style.RESET_ALL + str(". Settings").ljust(38) + colorama.Fore.RED + "|\n"
-        "|" + colorama.Fore.GREEN + "q" + colorama.Style.RESET_ALL + str(". Quit").ljust(38) + colorama.Fore.RED + "|\n"
-        + colorama.Fore.GREEN + "o" + colorama.Fore.RED + "---------------------------------------" + colorama.Fore.GREEN + "o"
-    )
-# fmt: on
-
-
 def settings():
     fetch_configs()
     print_green("Current MySQL bin location: " + colorama.Style.RESET_ALL + mysql_bin)
@@ -754,29 +745,18 @@ def settings():
 
 def set_external_ip(ip_str):
     global mysql_bin, exe
-    query = f"UPDATE zone_settings SET zoneip = '{ip_str}';"
+    query = f"""
+    UPDATE zone_settings SET zoneip = '{ip_str}';
+    """
     print("Executing query:")
     print(query)
-    result = subprocess.run(
-        [
-            f"{mysql_bin}mysql{exe}",
-            f"-h{host}",
-            f"-P{str(port)}",
-            f"-u{login}",
-            f"-p{password}",
-            database,
-            f"-e {query}",
-        ],
-        capture_output=True,
-        text=True,
-    )
-    fetch_errors(result)
+    _ = db_query(query)
 
 
-def tasks():
+def set_external_ip_dialog():
+    import urllib.request
+
     if input("Make server public-facing? [y/N] ").lower() == "y":
-        import urllib.request
-
         external_ip = urllib.request.urlopen("https://ident.me").read().decode("utf8")
         print_green(f"Detected your public-facing IP as: {external_ip}")
         if input("Is this correct? [y/N] ").lower() == "y":
@@ -785,6 +765,238 @@ def tasks():
             external_ip = input("Please enter your public-facing IP: ")
             if len(external_ip.strip()) > 0:
                 set_external_ip(external_ip)
+
+
+def print_db_tables_by_size():
+    global mysql_bin, exe
+
+    query = """
+    SELECT table_name AS 'Table',
+    ROUND(((data_length + index_length) / 1024 / 1024), 2) AS 'Size (MB)'
+    FROM information_schema.TABLES
+    WHERE ROUND(((data_length + index_length) / 1024 / 1024), 2) > 1.0
+    ORDER BY (data_length + index_length) DESC;
+    """
+
+    print("Executing query:")
+    print(query)
+    result = db_query(query)
+    print(result.stdout)
+
+
+def offload_to_auction_house_history():
+    global mysql_bin, exe
+
+    if (
+        input(
+            "This feature is very slow, and runs the risk of wiping out some or all of your auction_house history.\n"
+            + RED
+            + "USE AT YOUR OWN RISK!\n"
+            + RESET
+            + "Do you wish to continue? [y/N] "
+        ).lower()
+        != "y"
+    ):
+        return
+
+    if not cur:
+        connect()
+
+    ah_before = db_query("SELECT COUNT(*) FROM auction_house;").stdout
+    ah_history_before = db_query("SELECT COUNT(*) FROM auction_house_history;").stdout
+
+    cur.execute("SELECT DISTINCT itemid FROM auction_house;")
+
+    items = cur.fetchall()
+    index = 0
+    for itemid in items:
+        if index % 500 == 0:
+            percent = (index / len(items)) * 100
+            print(
+                f"Offloading historical data auction_house data: {percent:.1f}% ({index}/{len(items)})"
+            )
+        index = index + 1
+
+        query = f"""
+        START TRANSACTION;
+        SET @itemid = {itemid[0]};
+
+        -- Insert into history table
+        INSERT INTO auction_house_history
+        SELECT * FROM auction_house
+        WHERE
+            itemid = @itemid AND
+            buyer_name IS NOT NULL AND -- Sold
+            id NOT IN (
+                SELECT id
+                FROM (
+                    -- Most recent 20 unsold listings for item @itemid
+                    SELECT id, itemid, buyer_name
+                    FROM auction_house
+                    WHERE
+                        itemid = @itemid AND
+                        buyer_name IS NOT NULL
+                    ORDER BY sell_date DESC
+                    LIMIT 20
+                ) listed
+            );
+
+        -- Delete from non-history (same query as above, just for deleting)
+        DELETE auction_house.*
+        FROM auction_house
+        WHERE
+            itemid = @itemid AND
+            buyer_name IS NOT NULL AND -- Sold
+            id NOT IN (
+                SELECT id
+                FROM (
+                    -- Most recent 20 unsold listings for item @itemid
+                    SELECT id, itemid, buyer_name
+                    FROM auction_house
+                    WHERE
+                        itemid = @itemid AND
+                        buyer_name IS NOT NULL
+                    ORDER BY sell_date DESC
+                    LIMIT 20
+                ) listed
+            );
+        COMMIT;
+        """
+        db_query(query)
+
+    print("Done!")
+
+    print("Number of rows in auction_house (before):")
+    print(ah_before)
+
+    print("Number of rows in auction_house_history (before):")
+    print(ah_history_before)
+
+    print("Number of rows in auction_house (after):")
+    print(db_query("SELECT COUNT(*) FROM auction_house;").stdout)
+
+    print("Number of rows in auction_house_history (after):")
+    print(db_query("SELECT COUNT(*) FROM auction_house_history;").stdout)
+
+
+def announce_menu():
+    from announce import send_server_message
+
+    message = input("What message would you like to send to the whole server?\n> ")
+    if (
+        input(
+            "Are you sure you want to send the this to the whole server? [y/N]"
+        ).lower()
+        == "y"
+    ):
+        send_server_message(message)
+
+
+# fmt: off
+def present_menu(title, contents):
+    # Determine width of entire menu, including multiline titles
+    # and menu items
+    length = 0
+    title_parts = title.split("\n")
+
+    for part in title_parts:
+        length = max(len(part), length)
+
+    for value in contents.values():
+        length = max(len(value[0]), length)
+
+    # Add some more padding to account for the manual styling of
+    # menu options and spacings
+    option_pad = 3
+    length = length + option_pad
+
+    LEFT  = "| "
+    RIGHT = " |"
+
+    # Present title
+    print(
+        GREEN + "o" + RED + "-" + "-" * length + "-" + GREEN + "o"
+    )
+    for part in title_parts:
+        print(
+            RED + LEFT + RESET + part.center(length) + RED + RIGHT
+        )
+    print(
+        GREEN + "o" + RED + "-" + "-" * length + "-" + GREEN + "o"
+    )
+
+    # Menu options
+    for key, value in contents.items():
+        description = value[0]
+        print(
+            RED + LEFT + GREEN + key + RESET + ". " + description + " " * (length - len(description) - option_pad) + RED + RIGHT
+        )
+
+    # Footer
+    print(colorama.Fore.GREEN + "o" + colorama.Fore.RED + "-" + "-" * length + "-" + colorama.Fore.GREEN + "o\n")
+
+    # Handle inputs
+    selection = input("> ").lower()
+    print(colorama.ansi.clear_screen())
+    contents.get(selection, ["", bad_selection])[1]()
+# fmt: on
+
+
+def configure_and_launch_multi_process_by_zonetype():
+    db_query(
+        f"""
+        UPDATE xidb.zone_settings SET zoneport = 54230 WHERE zonetype = 0;
+        UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zonetype = 1;
+        UPDATE xidb.zone_settings SET zoneport = 54232 WHERE zonetype = 2;
+        UPDATE xidb.zone_settings SET zoneport = 54233 WHERE zonetype = 3;
+        UPDATE xidb.zone_settings SET zoneport = 54234 WHERE zonetype = 4;
+        UPDATE xidb.zone_settings SET zoneport = 54235 WHERE zonetype = 5;
+        UPDATE xidb.zone_settings SET zoneport = 54236 WHERE zonetype = 6;
+        """
+    )
+
+    result = db_query(
+        f"""
+        SELECT DISTINCT zoneport from zone_settings ORDER BY zoneport ASC;
+        """
+    )
+
+    ports = result.stdout.split("\n")[1:-1]
+
+    executable = from_server_path(f"xi_map{exe}")
+
+    # fmt: off
+    for port in ports:
+        print(f"Launching {executable} --log log/map-server-{port}.log --ip 127.0.0.1 --port {port}")
+        subprocess.Popen(
+            [executable, "--log", f"log/map-server-{port}.log", "--ip", "127.0.0.1", "--port", port],
+            shell=True,
+            creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+            cwd=server_dir_path,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    # fmt: on
+
+
+def tasks_menu():
+    present_menu(
+        "Maintenance Tasks",
+        {
+            "1": ["Set zone IP addresses", set_external_ip_dialog],
+            "2": ["Server-wide announcement", announce_menu],
+            "3": ["Show table sizes (min 2MB)", print_db_tables_by_size],
+            # "4": [
+            #     "Offload historical auction data to auction_house_history",
+            #     offload_to_auction_house_history,
+            # ],
+            "c": [
+                "Configure and launch multi-process server (by zonetype, 7 processes)",
+                configure_and_launch_multi_process_by_zonetype,
+            ],
+            "q": ["Quit to main menu", NOOP],
+        },
+    )
 
 
 def main():
@@ -852,26 +1064,34 @@ def main():
         # Main loop
         print(colorama.ansi.clear_screen())
         connect()
-        actions = {
-            "1": update_db,
-            "2": run_all_migrations,
-            "3": backup_db,
-            "4": restore_backup,
-            "r": reset_db,
-            "t": tasks,
-            "s": settings,
-        }
         while cur:
-            menu()
-            selection = input("> ").lower()
-            print(colorama.ansi.clear_screen())
-            if "q" == selection:
-                close()
-            if "e" == selection and express_enabled:
-                express_update()
-                continue
-            use_tool = actions.get(selection, bad_selection)
-            use_tool()
+            title = (
+                "LandSandBoat Database Management Tool\n" + "Connected to " + database
+            )
+            if db_ver:
+                title = title + "\n" + str("#" + db_ver)
+
+            options = {
+                "1": ["Update DB", update_db],
+                "2": ["Check migrations", run_all_migrations],
+                "3": ["Backup", backup_db],
+                "4": ["Restore/Import", restore_backup],
+                "r": ["Reset DB", reset_db],
+                "t": ["Maintenance Tasks", tasks_menu],
+                "s": ["Settings", settings],
+                "q": ["Quit", close],
+            }
+
+            if express_enabled:
+                append = {
+                    "e": [
+                        "Express Update " + "(#" + release_version + ")",
+                        express_update,
+                    ],
+                }
+                options = {**append, **options}
+
+            present_menu(title, options)
     except KeyboardInterrupt:
         try:
             sys.exit(0)

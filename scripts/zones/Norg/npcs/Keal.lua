@@ -76,12 +76,15 @@ end
 entity.onTrigger = function(player, npc)
     local vault = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
-    local ironBox = player:hasKeyItem(xi.ki.SEALED_IRON_BOX)
 
-    if vault == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and mLvl >= 5 then
+    if
+        vault == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+        mLvl >= 5
+    then
         player:startEvent(36, xi.ki.SEALED_IRON_BOX) -- Start quest
     elseif vault == QUEST_ACCEPTED then
-        if (ironBox == true) then
+        if player:hasKeyItem(xi.ki.SEALED_IRON_BOX) then
             player:startEvent(38) -- Finish quest
         else
             player:startEvent(37, xi.ki.MAP_OF_SEA_SERPENT_GROTTO) -- Reminder/Directions Dialogue

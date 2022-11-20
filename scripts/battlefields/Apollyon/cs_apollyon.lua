@@ -101,7 +101,7 @@ end
 
 function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
     local group = boss:getLocalVar("supportGroup")
-    local offsets = group == 0 and supportOffsets or otherSupportOffsets
+    local offsets = group == 1 and supportOffsets or otherSupportOffsets
     local bossID = boss:getID()
 
     for _, offset in ipairs(offsets) do
@@ -116,7 +116,7 @@ function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
     local bossY = boss:getYPos()
     local bossZ = boss:getZPos()
 
-    offsets = group == 1 and supportOffsets or otherSupportOffsets
+    offsets = group == 0 and supportOffsets or otherSupportOffsets
     for _, offset in ipairs(offsets) do
         local support = GetMobByID(bossID + offset)
         support:setSpawn(bossX + math.random(-2, 2), bossY, bossZ + math.random(-2, 2))
@@ -250,6 +250,12 @@ content.groups =
             "Carnagechief_Jackbodokk",
             "NaQba_Chirurgeon",
             "Dee_Wapa_the_Desolator",
+        },
+
+        mobMods =
+        {
+            [xi.mobMod.SOUND_RANGE] = 10,
+            [xi.mobMod.DETECTION] = bit.bor(xi.detects.SIGHT, xi.detects.HEARING),
         },
 
         death = function(battlefield, mob, count)

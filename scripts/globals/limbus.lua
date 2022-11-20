@@ -27,40 +27,6 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
     local ID = zones[xi.zone.TEMENOS]
     switch (bfid): caseof
     {
-        -- Temenos: Western Tower
-        [1298] = function()
-            for i = 1, #ID.npc.TEMENOS_W_CRATE - 1 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.TEMENOS_W_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            GetNPCByID(ID.npc.TEMENOS_W_CRATE[7]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- Temenos: Northern Tower
-        [1299] = function()
-            for i = 1, #ID.npc.TEMENOS_N_CRATE-1 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.TEMENOS_N_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            GetNPCByID(ID.npc.TEMENOS_N_CRATE[7]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- Temenos: Eastern Tower
-        [1300] = function()
-            for i = 1, #ID.npc.TEMENOS_E_CRATE-1 do
-                for j = 0, 3 do
-                    GetNPCByID(ID.npc.TEMENOS_E_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            GetNPCByID(ID.npc.TEMENOS_E_CRATE[7]):setStatus(xi.status.DISAPPEAR)
-            GetNPCByID(ID.npc.TEMENOS_E_CRATE[7] + 1):setStatus(xi.status.DISAPPEAR)
-        end,
-
         -- Central Temenos: Basement
         [1301] = function()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[5]):setStatus(xi.status.DISAPPEAR)
@@ -212,173 +178,6 @@ function xi.limbus.extendTimeLimit(battlefield, minutes, zone, npc)
     end
 end
 
-function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
-    if mask < 8 then
-        local spawnMimic = math.random(0, 1) == 1
-
-        switch (mask): caseof
-        {
-            -- Spawn anything
-            [0] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    local random = math.random(0, 2)
-
-                    switch (random): caseof
-                    {
-                        -- Bronze
-                        [0] = function()
-                            GetNPCByID(npc):setModelId(960)
-                        end,
-
-                        -- Gold
-                        [1] = function()
-                            GetNPCByID(npc):setModelId(961)
-                        end,
-
-                        -- Blue
-                        [2] = function()
-                            GetNPCByID(npc):setModelId(962)
-                        end,
-                    }
-
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
-                end
-            end,
-
-            -- Spawn gold or blue
-            [1] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    local random = math.random(1, 2)
-                    switch (random): caseof
-                    {
-                        -- Gold
-                        [1] = function()
-                            GetNPCByID(npc):setModelId(961)
-                        end,
-
-                        -- Blue
-                        [2] = function()
-                            GetNPCByID(npc):setModelId(962)
-                        end,
-                    }
-
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
-                end
-            end,
-
-            -- Spawn bronze or blue
-            [2] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) --mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    local random = math.random(0, 1)
-                    if random == 1 then random = 2 end
-                    switch (random): caseof
-                    {
-                        [0] = function() GetNPCByID(npc):setModelId(960) end, -- Bronze
-                        [2] = function() GetNPCByID(npc):setModelId(962) end, -- Blue
-                    }
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
-                end
-            end,
-
-            -- Spawn blue
-            [3] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    GetNPCByID(npc):setModelId(962) -- Blue
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 4)
-                end
-            end,
-
-            -- Spawn bronze or gold
-            [4] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    local random = math.random(0, 1)
-
-                    switch (random): caseof
-                    {
-                        -- Bronze
-                        [0] = function()
-                            GetNPCByID(npc):setModelId(960)
-                        end,
-
-                        -- Gold
-                        [1] = function()
-                            GetNPCByID(npc):setModelId(961)
-                        end,
-                    }
-
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
-                end
-            end,
-
-            -- Spawn gold
-            [5] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    GetNPCByID(npc):setModelId(961) -- Gold
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 2)
-                end
-            end,
-
-            -- Spawn bronze
-            [6] = function()
-                if spawnMimic and canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                else
-                    GetNPCByID(npc):setModelId(960) -- Bronze
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 1)
-                end
-            end,
-
-            -- Spawn mimic
-            [7] = function()
-                if canMimic then
-                    GetNPCByID(npc):setModelId(961) -- Mimic
-                    GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, mask + 8)
-                end
-            end,
-        }
-    else
-        xi.limbus.spawnRandomCrate(npc, battlefield, var, mask - 8)
-        mask = battlefield:getLocalVar(var)
-        battlefield:setLocalVar(var, mask + 8)
-
-        return
-    end
-end
-
 function xi.limbus.showRecoverCrate(crateID)
     local crate = GetMobByID(crateID)
     crate:setAnimationSub(8)
@@ -395,10 +194,12 @@ end
 
 function xi.limbus.spawnFrom(mob, crateID)
     local crate = GetEntityByID(crateID)
-    crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-    crate:setStatus(xi.status.NORMAL)
-    crate:setUntargetable(false)
-    crate:setAnimationSub(8)
+    if crate:getLocalVar("opened") == 0 then
+        crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+        crate:setStatus(xi.status.NORMAL)
+        crate:setUntargetable(false)
+        crate:setAnimationSub(8)
+    end
 end
 
 function xi.limbus.spawnRecoverFrom(mob, crateID)
@@ -491,14 +292,17 @@ function Limbus:onBattlefieldInitialise(battlefield)
         for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
             local crate = GetEntityByID(crateID)
             xi.limbus.hideCrate(crate)
+            crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
             crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", utils.bind(self.handleOpenRecoverCrate, self))
         end
     end
 
     -- Setup Winning Loot Crate
-    local crate = GetEntityByID(ID.npc.LOOT_CRATE)
-    xi.limbus.hideCrate(crate)
-    crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
+    if ID.npc.LOOT_CRATE then
+        local crate = GetEntityByID(ID.npc.LOOT_CRATE)
+        xi.limbus.hideCrate(crate)
+        crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
+    end
 
     -- Setup Linked Crates (can only open one)
     if ID.LINKED_CRATES then
@@ -587,6 +391,10 @@ end
 
 function Limbus:openDoor(battlefield, floor)
     local door = GetNPCByID(self.ID.npc.PORTAL[floor])
+    if door:getAnimation() == xi.animation.OPEN_DOOR then
+        return
+    end
+
     local ID = zones[door:getZoneID()]
     local remaining = battlefield:getRemainingTime() / 60
 
@@ -598,7 +406,9 @@ function Limbus:openDoor(battlefield, floor)
 end
 
 function Limbus:closeDoors()
-    for _, doorID in ipairs(self.ID.npc.PORTAL) do
-        GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
+    if self.ID.npc.PORTAL then
+        for _, doorID in ipairs(self.ID.npc.PORTAL) do
+            GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
+        end
     end
 end

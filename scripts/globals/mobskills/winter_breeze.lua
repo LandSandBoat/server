@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 2)
 
-    if (DISPEL == xi.effect.NONE) then
+    if DISPEL == xi.effect.NONE then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else
         skill:setMsg(xi.msg.basic.SKILL_ERASE)

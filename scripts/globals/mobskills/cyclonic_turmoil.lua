@@ -23,17 +23,17 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel2 = target:dispelStatusEffect()
     local total = 0
 
-    if (dispel1 ~= xi.effect.NONE) then
+    if dispel1 ~= xi.effect.NONE then
         total = total + 1
     end
 
-    if (dispel2 ~= xi.effect.NONE) then
+    if dispel2 ~= xi.effect.NONE then
         total = total + 1
     end
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
 
-    if (total == 0) then
+    if total == 0 then
         return dmg
     else
         skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)

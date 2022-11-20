@@ -108,9 +108,9 @@ quest.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if quest:getVar(player, 'Prog') == 5 then
                         return quest:progressEvent(526)
                     end
