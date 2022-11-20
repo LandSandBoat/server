@@ -37,7 +37,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = dmg * xi.settings.main.DARK_POWER
 
-    if target:isUndead() then
+    if target:isUndead() or target:hasImmunity(xi.immunity.ASPIR) then
+        dmg = 0
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end
