@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(245) -- happy with sands of silence
         end
     else
-        player:startEvent(200)
+        -- No event text only
     end
 end
 

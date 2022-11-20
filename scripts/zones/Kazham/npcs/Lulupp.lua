@@ -111,7 +111,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(242) -- happy with rod
         end
     else
-        player:startEvent(197)  -- not sure why but this cs has no text
+        -- No event text only
     end
 end
 

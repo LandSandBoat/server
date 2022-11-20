@@ -70,7 +70,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(243) -- happy with workbench
         end
     else
-        player:startEvent(198)
+        -- No event text only
     end
 end
 

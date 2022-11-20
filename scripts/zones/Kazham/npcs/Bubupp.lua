@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(247) -- happy with giant fish bones
         end
     else
-        player:startEvent(202)
+        -- No event text only
     end
 end
 

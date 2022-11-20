@@ -11,4 +11,5 @@ return {
     ['Mourices']     = { event = 441 },
     ['Perih_Vashai'] = { event = 338 },
     ['Roberta']      = { event = 436 },
+    ['Cheh_Raihah']  = { event = 73 },
 }
