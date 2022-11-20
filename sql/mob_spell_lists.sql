@@ -1374,7 +1374,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Mycophile',99,220,1,255); -- poison (1~25
 INSERT INTO `mob_spell_lists` VALUES ('Mycophile',99,230,1,255); -- bio (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Mycophile',99,254,1,255); -- blind (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Mycophile',99,256,1,255); -- virus (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Mycophile',99,356,1,255); -- paralyga (1~255)
 
 -- Boreal_Hound (100)
 INSERT INTO `mob_spell_lists` VALUES ('Boreal_Hound',100,180,1,255); -- blizzaga_ii (1~255)
