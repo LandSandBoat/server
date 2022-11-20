@@ -41,4 +41,4 @@ We are active on our [Discord](https://discord.gg/SM2J2z8Cz6) and any discussion
 
 ## LICENSE
 
-LandSandBoat and AirSkyBoat is licensed under [GNU GPL v3](https://github.com/LandSandBoat/server/blob/base/LICENSE)
+LandSandBoat and AirSkyBoat is licensed under [GNU GPL v3](https://github.com/AirSkyBoat/AirSkyBoat/blob/staging/LICENSE)
