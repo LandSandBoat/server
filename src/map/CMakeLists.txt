@@ -193,7 +193,7 @@ target_include_directories(xi_map
 target_precompile_headers(xi_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
 
 if(TRACY_ENABLE)
-    target_link_libraries(xi_map PUBLIC tracy_client)
+    target_link_libraries(xi_map PUBLIC TracyClient)
 endif(TRACY_ENABLE)
 
 set_target_output_directory(xi_map)
