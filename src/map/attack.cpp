@@ -366,6 +366,11 @@ bool CAttack::CheckCounter()
         return false;
     }
 
+    if (m_victim->StatusEffectContainer->HasPreventActionEffect(true))
+    {
+        return false;
+    }
+
     if (!m_victim->PAI->IsEngaged())
     {
         m_isCountered = false;
