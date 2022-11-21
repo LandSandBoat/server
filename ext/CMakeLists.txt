@@ -37,16 +37,29 @@ if(TRACY_ENABLE)
     )
 
     # Download Win32 server executables
-    message(STATUS "Downloading Tracy client")
-    file(DOWNLOAD
-        https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/Tracy-${TRACY_VERSION}.7z
-        ${CMAKE_SOURCE_DIR}/tracy.tar.gz
-        TIMEOUT 60)
+    if (MSVC)
+        message(STATUS "Downloading Tracy client")
+        file(DOWNLOAD
+            https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/Tracy-${TRACY_VERSION}.7z
+            ${CMAKE_SOURCE_DIR}/tracy.tar.gz
+            TIMEOUT 60
+        )
         execute_process(COMMAND "${CMAKE_COMMAND}" -E
                 tar xvf "${CMAKE_SOURCE_DIR}/tracy.tar.gz"
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/)
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/
+        )
+    else() # UNIX
+        # TODO: Auto-build Tracy and capture executables on Linux
+        # sudo apt-get -y install libglfw3-dev libdbus-1-dev libcapstone-dev libtbb-dev libdebuginfod-dev libfreetype-dev
 
-    # TODO: Auto-build Tracy and capture executables on Linux
+        # execute_process(COMMAND "make"
+        #     WORKING_DIRECTORY ${tracy_SOURCE_DIR}/profiler/build/unix
+        # )
+
+        # execute_process(COMMAND "make"
+        #     WORKING_DIRECTORY ${tracy_SOURCE_DIR}/capture/build/unix
+        # )
+    endif()
 endif(TRACY_ENABLE)
 
 CPMAddPackage(
