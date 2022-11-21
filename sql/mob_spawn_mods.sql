@@ -236,9 +236,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16892073,55,180,1); -- IDLE_DESPAWN: 180
 -- Indich
 INSERT INTO `mob_spawn_mods` VALUES (16892074,55,180,1); -- IDLE_DESPAWN: 180
 
--- Vrtra
-INSERT INTO `mob_spawn_mods` VALUES (16896161,12,15,1); -- DRAW_IN: 15
-
 -- Ouryu
 INSERT INTO `mob_spawn_mods` VALUES (16900314,12,15,1); -- DRAW_IN: 15
 

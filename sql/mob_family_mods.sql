@@ -950,8 +950,9 @@ INSERT INTO `mob_family_mods` VALUES (377,36,40,1); -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (377,51,3,1);  -- ROAM_TURNS: 3
 
 -- Wyrm-Vrtra
-INSERT INTO `mob_family_mods` VALUES (391,31,5,1);  -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (391,36,55,1); -- ROAM_COOL: 55
+INSERT INTO `mob_family_mods` VALUES (391,31,5,1);   -- ROAM_DISTANCE: 5
+INSERT INTO `mob_family_mods` VALUES (391,36,55,1);  -- ROAM_COOL: 55
+INSERT INTO `mob_family_mods` VALUES (391,59,254,1); -- WEAPON_BONUS: 253
 
 -- Wyrm-Jormungand
 INSERT INTO `mob_family_mods` VALUES (392,31,5,1);  -- ROAM_DISTANCE: 5
