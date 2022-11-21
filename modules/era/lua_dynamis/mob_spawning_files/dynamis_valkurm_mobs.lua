@@ -463,82 +463,7 @@ xi.dynamis.mobList[zoneID][1].wave =
     16 , -- (016-Q) Adamantking Effigy
     17 , -- (017-Q) Adamantking Effigy
     18 , -- (018-Q) Adamantking Effigy
-    19   -- (019-Q) Adamantking Effigy
-}
-
-xi.dynamis.mobList[zoneID][2].wave =
-{
-    25 , -- (025-G) Goblin Replica
-    26 , -- (026-Y) Manifest Icon
-    27 , -- (027-Q) Adamantking Effigy
-    28 , -- (028-O) Serjeant Tombstone
-    29 , -- ( 029 ) Nightmare Manticore (×3)
-    30 , -- ( 030 ) Nightmare Hippogryph (×3)
-    31 , -- ( 031 ) Nightmare Sabotender (×3)
-    32 , -- ( 032 ) Nightmare Sheep (×3)
-    33 , -- (033-Y) Manifest Icon
-    34 , -- (034-Y) Manifest Icon
-    35 , -- (035-Y) Manifest Icon
-    36 , -- (036-Y) Manifest Icon
-    37 , -- (037-Y) Manifest Icon
-    38 , -- (038-G) Goblin Replica
-    39 , -- (039-G) Goblin Replica
-    40 , -- (040-G) Goblin Replica
-    41 , -- (041-G) Goblin Replica
-    42 , -- (042-G) Goblin Replica
-    43 , -- (043-O) Serjeant Tombstone
-    44 , -- (044-O) Serjeant Tombstone
-    45 , -- (045-O) Serjeant Tombstone
-    46 , -- (046-O) Serjeant Tombstone
-    47 , -- (047-O) Serjeant Tombstone
-    48 , -- (048-Q) Adamantking Effigy
-    49 , -- (049-Q) Adamantking Effigy
-    50 , -- (050-Q) Adamantking Effigy
-    51 , -- (051-Q) Adamantking Effigy
-    52 , -- (052-Q) Adamantking Effigy
-    110, -- ( 110 ) Nightmare Manticore (×3)
-    111, -- ( 111 ) Nightmare Manticore (×3)
-    112, -- ( 112 ) Nightmare Manticore (×3)
-    113, -- ( 113 ) Nightmare Manticore (×3)
-    114, -- ( 114 ) Nightmare Manticore (×3)
-    115, -- ( 115 ) Nightmare Manticore (×3)
-    116, -- ( 116 ) Nightmare Manticore (×3)
-    117, -- ( 117 ) Nightmare Manticore (×3)
-    118, -- ( 118 ) Nightmare Manticore (×3)
-    119, -- ( 119 ) Nightmare Manticore (×4)
-    120, -- ( 120 ) Nightmare Manticore (×3)
-    121, -- ( 121 ) Nightmare Manticore (×3)
-    122, -- ( 122 ) Nightmare Manticore (×3)
-    123, -- ( 123 ) Nightmare Manticore (×4)
-    124, -- ( 124 ) Nightmare Manticore (×4)
-    125, -- ( 125 ) Nightmare Manticore (×3)
-    126, -- ( 126 ) Nightmare Manticore (×3)
-    127, -- ( 127 ) Nightmare Manticore (×3)
-    128, -- ( 128 ) Nightmare Sabotender (×3)
-    129, -- ( 129 ) Nightmare Sabotender (×3)
-    87 , -- ( 087 ) Nightmare Sheep (×3)
-    88 , -- ( 088 ) Nightmare Sheep (×3)
-    89 , -- ( 089 ) Nightmare Sheep (×3)
-    90 , -- ( 090 ) Nightmare Sheep (×3)
-    91 , -- ( 091 ) Nightmare Sheep (×3)
-    92 , -- ( 092 ) Nightmare Sheep (×3)
-    93 , -- ( 093 ) Nightmare Sheep (×2)
-    94 , -- ( 094 ) Nightmare Sheep (×2)
-    95 , -- ( 095 ) Nightmare Sheep (×2)
-    96 , -- ( 096 ) Nightmare Sheep (×2)
-    97 , -- ( 097 ) Nightmare Sheep (×2)
-    98 , -- ( 098 ) Nightmare Sheep (×2)
-    99 , -- ( 099 ) Nightmare Sheep (×2)
-    100, -- ( 100 ) Nightmare Sheep (×2)
-    101, -- ( 101 ) Nightmare Sheep (×2)
-    102, -- ( 102 ) Nightmare Sheep (×2)
-    103, -- ( 103 ) Nightmare Sheep (×2)
-    104, -- ( 104 ) Nightmare Sheep (×2)
-    105, -- ( 105 ) Nightmare Sheep (×2)
-    106, -- ( 106 ) Nightmare Sheep (×2)
-    107, -- ( 107 ) Nightmare Sheep (×3)
-    108, -- ( 108 ) Nightmare Sheep (×3)
-    109, -- ( 109 ) Nightmare Sheep (×3)
+    19 , -- (019-Q) Adamantking Effigy
     59 , -- ( 059 ) Nightmare Hippogryph (×3)
     60 , -- ( 060 ) Nightmare Hippogryph (×3)
     61 , -- ( 061 ) Nightmare Hippogryph (×3)
@@ -572,7 +497,82 @@ xi.dynamis.mobList[zoneID][2].wave =
     83 , -- ( 083 ) Nightmare Sabotender (×3)
     84 , -- ( 084 ) Nightmare Hippogryph (×3)
     85 , -- ( 085 ) Nightmare Hippogryph (×3)
-    86   -- ( 086 ) Nightmare Hippogryph (×3)
+    86 , -- ( 086 ) Nightmare Hippogryph (×3)
+    87 , -- ( 087 ) Nightmare Sheep (×3)
+    88 , -- ( 088 ) Nightmare Sheep (×3)
+    89 , -- ( 089 ) Nightmare Sheep (×3)
+    90 , -- ( 090 ) Nightmare Sheep (×3)
+    91 , -- ( 091 ) Nightmare Sheep (×3)
+    92 , -- ( 092 ) Nightmare Sheep (×3)
+    93 , -- ( 093 ) Nightmare Sheep (×2)
+    94 , -- ( 094 ) Nightmare Sheep (×2)
+    95 , -- ( 095 ) Nightmare Sheep (×2)
+    96 , -- ( 096 ) Nightmare Sheep (×2)
+    97 , -- ( 097 ) Nightmare Sheep (×2)
+    98 , -- ( 098 ) Nightmare Sheep (×2)
+    99 , -- ( 099 ) Nightmare Sheep (×2)
+    100, -- ( 100 ) Nightmare Sheep (×2)
+    101, -- ( 101 ) Nightmare Sheep (×2)
+    102, -- ( 102 ) Nightmare Sheep (×2)
+    103, -- ( 103 ) Nightmare Sheep (×2)
+    104, -- ( 104 ) Nightmare Sheep (×2)
+    105, -- ( 105 ) Nightmare Sheep (×2)
+    106, -- ( 106 ) Nightmare Sheep (×2)
+    107, -- ( 107 ) Nightmare Sheep (×3)
+    108, -- ( 108 ) Nightmare Sheep (×3)
+    109, -- ( 109 ) Nightmare Sheep (×3)
+    110, -- ( 110 ) Nightmare Manticore (×3)
+    111, -- ( 111 ) Nightmare Manticore (×3)
+    112, -- ( 112 ) Nightmare Manticore (×3)
+    113, -- ( 113 ) Nightmare Manticore (×3)
+    114, -- ( 114 ) Nightmare Manticore (×3)
+    115, -- ( 115 ) Nightmare Manticore (×3)
+    116, -- ( 116 ) Nightmare Manticore (×3)
+    117, -- ( 117 ) Nightmare Manticore (×3)
+    118, -- ( 118 ) Nightmare Manticore (×3)
+    119, -- ( 119 ) Nightmare Manticore (×4)
+    120, -- ( 120 ) Nightmare Manticore (×3)
+    121, -- ( 121 ) Nightmare Manticore (×3)
+    122, -- ( 122 ) Nightmare Manticore (×3)
+    123, -- ( 123 ) Nightmare Manticore (×4)
+    124, -- ( 124 ) Nightmare Manticore (×4)
+    125, -- ( 125 ) Nightmare Manticore (×3)
+    126, -- ( 126 ) Nightmare Manticore (×3)
+    127, -- ( 127 ) Nightmare Manticore (×3)
+    128, -- ( 128 ) Nightmare Sabotender (×3)
+    129  -- ( 129 ) Nightmare Sabotender (×3)
+}
+
+xi.dynamis.mobList[zoneID][2].wave =
+{
+    25 , -- (025-G) Goblin Replica
+    26 , -- (026-Y) Manifest Icon
+    27 , -- (027-Q) Adamantking Effigy
+    28 , -- (028-O) Serjeant Tombstone
+    29 , -- ( 029 ) Nightmare Manticore (×3)
+    30 , -- ( 030 ) Nightmare Hippogryph (×3)
+    31 , -- ( 031 ) Nightmare Sabotender (×3)
+    32 , -- ( 032 ) Nightmare Sheep (×3)
+    33 , -- (033-Y) Manifest Icon
+    34 , -- (034-Y) Manifest Icon
+    35 , -- (035-Y) Manifest Icon
+    36 , -- (036-Y) Manifest Icon
+    37 , -- (037-Y) Manifest Icon
+    38 , -- (038-G) Goblin Replica
+    39 , -- (039-G) Goblin Replica
+    40 , -- (040-G) Goblin Replica
+    41 , -- (041-G) Goblin Replica
+    42 , -- (042-G) Goblin Replica
+    43 , -- (043-O) Serjeant Tombstone
+    44 , -- (044-O) Serjeant Tombstone
+    45 , -- (045-O) Serjeant Tombstone
+    46 , -- (046-O) Serjeant Tombstone
+    47 , -- (047-O) Serjeant Tombstone
+    48 , -- (048-Q) Adamantking Effigy
+    49 , -- (049-Q) Adamantking Effigy
+    50 , -- (050-Q) Adamantking Effigy
+    51 , -- (051-Q) Adamantking Effigy
+    52   -- (052-Q) Adamantking Effigy
 }
 
 ----------------------------------------------------------------------------------------------------
