@@ -35,27 +35,21 @@ public:
     bool                   PetSkill(uint16 targid, uint16 abilityid);
 
 protected:
-    bool  PetIsHealing();
-    void  TryIdleSpellCast();
-    void  SetSpiritSpellTables();
-    void  SetSMNCastTime();
-    int16 GetSMNSkillReduction();
-    int16 GetDayWeatherBonus();
+    bool PetIsHealing();
 
     virtual void Tick(time_point tick) override;
     virtual void HandleEnmity() override
     {
     }
-    virtual bool TryDeaggro() override;
     virtual void TryLink() override
     {
     }
     virtual bool Ability(uint16 targid, uint16 abilityid) override;
 
+    bool TryDeaggro() override;
+
 private:
     CPetEntity* const PPet;
-
-    bool m_Setup = false;
 };
 
 #endif // _AI_CONTROLLER_H
