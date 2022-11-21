@@ -1938,20 +1938,27 @@ xi.dynamis.statueOnFight = function(mob, target)
             end
             if mob:getLocalVar("reset") ~= 1 then
                 mob:setLocalVar("reset", 1)
-                mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
+                mob:addStatusEffect(xi.effect.STUN, 1, 0, 10)
                 mob:setUntargetable(true)
                 mob:setMagicCastingEnabled(false)
                 mob:setAutoAttackEnabled(false)
                 mob:setMobAbilityEnabled(false)
 
-                mob:timer(1000, function(mob) -- Allows stun to tick
-                    mob:setTP(0)
-                    mob:setMobAbilityEnabled(true)
-                    mob:delStatusEffectSilent(xi.effect.STUN) -- Remove stun so we can do skill.
-                    if mob:getAnimationSub() == 2 then
-                        mob:useMobAbility(1124) -- Use Recover HP
-                    elseif mob:getAnimationSub() == 3 then
-                        mob:useMobAbility(1125) -- Use Recover MP
+                mob:timer(1000, function(mobArg) -- Allows stun to tick
+                    mobArg:setTP(0)
+                    mobArg:setMobAbilityEnabled(true)
+                    mobArg:delStatusEffectSilent(xi.effect.STUN) -- Remove stun so we can do skill.
+                    if mobArg:getAnimationSub() == 2 then
+                        mobArg:useMobAbility(1124) -- Use Recover HP
+                    elseif mobArg:getAnimationSub() == 3 then
+                        mobArg:useMobAbility(1125) -- Use Recover MP
+                    end
+                end)
+
+                mob:timer(5000, function(mobArg)
+                    if mobArg:isAlive() then
+                        mobArg:setUnkillable(false)
+                        mobArg:setHP(0)
                     end
                 end)
             end
