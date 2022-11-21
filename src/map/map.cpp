@@ -86,6 +86,12 @@ void operator delete(void* ptr) noexcept
     TracyFree(ptr);
     free(ptr);
 }
+
+void operator delete(void* ptr, std::size_t count)
+{
+    TracyFree(ptr);
+    free(ptr);
+}
 #endif // TRACY_ENABLE
 
 const char* MAP_CONF_FILENAME = nullptr;
