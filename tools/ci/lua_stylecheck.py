@@ -179,6 +179,7 @@ def run_style_check():
         counter          = 0
         lines            = f.readlines()
         in_block_comment = False
+        num_lines        = len(lines)
 
         for line in lines:
             counter = counter + 1
@@ -204,6 +205,16 @@ def run_style_check():
             check_indentation(code_line)
             check_operator_padding(code_line)
             check_parentheses_padding(code_line)
+
+            if counter < num_lines and contains_word('end')(code_line):
+                current_indent = len(line) - len(line.lstrip(' '))
+                next_indent    = len(lines[counter]) - len(lines[counter].lstrip(' '))
+
+                if current_indent == next_indent and lines[counter].strip() != "":
+                    print(f"Newline required after end with code following on same level: {filename}:{counter}")
+                    print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                    print("")
+                    errcount += 1
 
             # Multiline conditionals should not have data in if, elseif, or then
             check_multiline_condition_format(code_line)
