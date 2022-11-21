@@ -62,7 +62,10 @@ entity.onSpawn = function(npc)
 end
 
 entity.onPath = function(npc)
-    if npc:getLocalVar("delivered") ~= 1 and npc:atPoint(xi.path.get(pathNodes, 39)) then
+    if
+        npc:getLocalVar("delivered") ~= 1 and
+        npc:atPoint(xi.path.get(pathNodes, 39))
+    then
         -- give package to Lusiane, wait 4 seconds, then continue
         local lus = GetNPCByID(ID.npc.LUSIANE)
         lus:showText(npc, ID.text.RAMINEL_DELIVERY)

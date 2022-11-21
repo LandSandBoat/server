@@ -21,7 +21,7 @@ m:addOverride("xi.globals.mobskills.regain_hp.onMobWeaponSkill", function(target
 
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- Dynamis Statue
         mob:setUntargetable(false)
-        mob:SetAutoAttackEnabled(true)
+        mob:setAutoAttackEnabled(true)
         mob:setUnkillable(false)
         mob:setHP(0)
     end
@@ -40,7 +40,7 @@ m:addOverride("xi.globals.mobskills.regain_mp.onMobWeaponSkill", function(target
 
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- Dynamis Statue
         mob:setUntargetable(false)
-        mob:SetAutoAttackEnabled(true)
+        mob:setAutoAttackEnabled(true)
         mob:setUnkillable(false)
         mob:setHP(0)
     end

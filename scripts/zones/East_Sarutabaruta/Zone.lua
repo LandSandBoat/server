@@ -17,8 +17,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
-        UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)
-        GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
+        xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_DECAPOD)
     end
 end
 
@@ -54,7 +53,7 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE116_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

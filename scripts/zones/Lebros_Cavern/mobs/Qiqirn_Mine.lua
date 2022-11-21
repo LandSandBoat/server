@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local chars = instance:getChars()
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 
     for _, players in pairs(chars) do
         players:messageSpecial(ID.text.MINE_COUNTDOWN, 10)

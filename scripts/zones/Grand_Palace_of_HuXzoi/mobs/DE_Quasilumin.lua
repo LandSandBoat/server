@@ -199,7 +199,7 @@ entity.onMobInitialize = function(mob)
     -- mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_DESPAWN, 1)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 entity.onMobRoam = function(mob)

@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, -16, 2, 32, 16, 4, 86) -- Palace entrance. Ends at back exit. Needs retail confirmaton for the back entrance.
+    zone:registerTriggerArea(1, -16, 2, 32, 16, 4, 86) -- Palace entrance. Ends at back exit. Needs retail confirmaton for the back entrance.
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -34,10 +34,10 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    local regionID = region:GetRegionID()
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaID = triggerArea:GetTriggerAreaID()
 
-    if regionID == 1 then
+    if triggerAreaID == 1 then
         if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN then
             if player:getCharVar("Mission[6][840]Status") == 8 then
                 if
@@ -60,7 +60,7 @@ zoneObject.onRegionEnter = function(player, region)
     end
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

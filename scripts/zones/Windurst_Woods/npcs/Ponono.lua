@@ -76,9 +76,17 @@ entity.onTrigger = function(player, npc)
 
     if moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 1 then
         player:startEvent(700)
-    elseif moralManifest == QUEST_COMPLETED or moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") >= 4 then
+    elseif
+        moralManifest == QUEST_COMPLETED or
+        moralManifest == QUEST_ACCEPTED and
+        player:getCharVar("moral") >= 4
+    then
         player:startEvent(704)
-    elseif player:getCharVar("moral") == 3 and player:getLocalVar("moralZone") == 0 and player:getCharVar("moralWait") <= os.time() then
+    elseif
+        player:getCharVar("moral") == 3 and
+        player:getLocalVar("moralZone") == 0 and
+        player:getCharVar("moralWait") <= os.time()
+    then
         player:startEvent(705)
     else
         player:startEvent(10011, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)

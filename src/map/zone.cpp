@@ -23,10 +23,10 @@
 // нужно разделить класс czone на базовый и наследников. уже нарисовались: Standard, Rezident, Instance и Dinamis
 // у каждой из указанных зон особое поведение
 
-#include "../common/logging.h"
-#include "../common/socket.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -80,18 +80,18 @@ int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
     return 0;
 }
 
-int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
+int32 zone_server_trigger_area(time_point tick, CTaskMgr::CTask* PTask)
 {
     CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
 
-    if ((tick - PZone->m_RegionCheckTime) < 800ms)
+    if ((tick - PZone->m_TriggerAreaCheckTime) < 800ms)
     {
         PZone->ZoneServer(tick, false);
     }
     else
     {
         PZone->ZoneServer(tick, true);
-        PZone->m_RegionCheckTime = tick;
+        PZone->m_TriggerAreaCheckTime = tick;
     }
     return 0;
 }
@@ -268,12 +268,19 @@ void CZone::SetBackgroundMusicNight(uint8 music)
     m_zoneMusic.m_songNight = music;
 }
 
-const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
+/**
+ * Queries for entities (mobs or npcs) which name match the given pattern.
+ *
+ * @param pattern The pattern used to match the entity name. We use % as wildcard for consistency
+ * with other methods that perform pattern matching.
+ * E.g: %anto% matches Shantotto and Canto-anto
+ */
+QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern)
 {
     TracyZoneScoped;
 
     // Use memoization since lookups are typically for the same mob names
-    auto result = m_queryByNameResults.find(name);
+    auto result = m_queryByNameResults.find(pattern);
     if (result != m_queryByNameResults.end())
     {
         return result->second;
@@ -285,7 +292,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (std::string((const char*)PNpc->GetName()) == name)
+        if (matches(std::string((const char*)PNpc->GetName()), pattern))
         {
             entities.push_back(PNpc);
         }
@@ -293,15 +300,15 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (std::string((const char*)PMob->GetName()) == name)
+        if (matches(std::string((const char*)PMob->GetName()), pattern))
         {
             entities.push_back(PMob);
         }
      });
     // clang-format on
 
-    m_queryByNameResults[name] = std::move(entities);
-    return m_queryByNameResults[name];
+    m_queryByNameResults[pattern] = std::move(entities);
+    return m_queryByNameResults[pattern];
 }
 
 uint32 CZone::GetLocalVar(const char* var)
@@ -551,15 +558,15 @@ void CZone::DeleteTRUST(CBaseEntity* PTrust)
 
 /************************************************************************
  *                                                                       *
- *  Добавляем в зону активную область                                    *
+ *  Add a trigger area to the zone                                       *
  *                                                                       *
  ************************************************************************/
 
-void CZone::InsertRegion(CRegion* Region)
+void CZone::InsertTriggerArea(CTriggerArea* triggerArea)
 {
-    if (Region != nullptr)
+    if (triggerArea != nullptr)
     {
-        m_regionList.push_back(Region);
+        m_triggerAreaList.emplace_back(triggerArea);
     }
 }
 
@@ -919,10 +926,10 @@ void CZone::WideScan(CCharEntity* PChar, uint16 radius)
  *                                                                       *
  ************************************************************************/
 
-void CZone::ZoneServer(time_point tick, bool check_regions)
+void CZone::ZoneServer(time_point tick, bool checkTriggerAreas)
 {
     TracyZoneScoped;
-    m_zoneEntities->ZoneServer(tick, check_regions);
+    m_zoneEntities->ZoneServer(tick, checkTriggerAreas);
 
     if (m_BattlefieldHandler != nullptr)
     {
@@ -1011,7 +1018,7 @@ void CZone::createZoneTimer()
     TracyZoneScoped;
     ZoneTimer =
         CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
-                                         m_regionList.empty() ? zone_server : zone_server_region,
+                                         m_triggerAreaList.empty() ? zone_server : zone_server_trigger_area,
                                          std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
 }
 
@@ -1020,10 +1027,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     TracyZoneScoped;
     // ищем свободный targid для входящего в зону персонажа
 
-    PChar->loc.zone         = this;
-    PChar->loc.zoning       = false;
-    PChar->loc.destination  = 0;
-    PChar->m_InsideRegionID = 0;
+    PChar->loc.zone              = this;
+    PChar->loc.zoning            = false;
+    PChar->loc.destination       = 0;
+    PChar->m_InsideTriggerAreaID = 0;
 
     if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
     {
@@ -1113,11 +1120,11 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 void CZone::CharZoneOut(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    for (regionList_t::const_iterator region = m_regionList.begin(); region != m_regionList.end(); ++region)
+    for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
     {
-        if ((*region)->GetRegionID() == PChar->m_InsideRegionID)
+        if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
         {
-            luautils::OnRegionLeave(PChar, *region);
+            luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
             break;
         }
     }
@@ -1229,32 +1236,33 @@ CZoneEntities* CZone::GetZoneEntities()
     return m_zoneEntities;
 }
 
-void CZone::CheckRegions(CCharEntity* PChar)
+void CZone::CheckTriggerAreas(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    uint32 RegionID = 0;
+    uint32 triggerAreaID = 0;
 
-    for (regionList_t::const_iterator region = m_regionList.begin(); region != m_regionList.end(); ++region)
+    for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
     {
-        if ((*region)->isPointInside(PChar->loc.p))
+        if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
         {
-            RegionID = (*region)->GetRegionID();
+            triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
 
-            if ((*region)->GetRegionID() != PChar->m_InsideRegionID)
+            if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
             {
-                luautils::OnRegionEnter(PChar, *region);
+                luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
             }
-            if (PChar->m_InsideRegionID == 0)
+
+            if (PChar->m_InsideTriggerAreaID == 0)
             {
                 break;
             }
         }
-        else if ((*region)->GetRegionID() == PChar->m_InsideRegionID)
+        else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
         {
-            luautils::OnRegionLeave(PChar, *region);
+            luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
         }
     }
-    PChar->m_InsideRegionID = RegionID;
+    PChar->m_InsideTriggerAreaID = triggerAreaID;
 }
 
 //==========================================================

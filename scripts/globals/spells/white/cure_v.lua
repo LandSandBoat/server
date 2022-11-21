@@ -74,7 +74,10 @@ spellObject.onSpellCast = function(caster, target, spell)
             basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
         end
         final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
-        if caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and target:hasStatusEffect(xi.effect.STONESKIN) == false then
+        if
+            caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and
+            not target:hasStatusEffect(xi.effect.STONESKIN)
+        then
             local solaceStoneskin = 0
             local equippedBody = caster:getEquipID(xi.slot.BODY)
             if equippedBody == 11186 then

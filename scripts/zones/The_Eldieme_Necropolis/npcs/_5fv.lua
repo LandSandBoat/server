@@ -13,7 +13,10 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
 
-    if npcUtil.tradeHasExactly(trade, xi.items.FLINT_STONE) and os.time() > timer then
+    if
+        npcUtil.tradeHasExactly(trade, xi.items.FLINT_STONE) and
+        os.time() > timer
+    then
         func.skullTrade(player, npc)
     elseif os.time() < timer then
         player:messageSpecial(ID.text.BRAZIER_COOLDOWN)

@@ -13,7 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE) then
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE)
+    then
         player:startEvent(1)
     end
 end

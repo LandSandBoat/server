@@ -960,6 +960,7 @@ INSERT INTO `mob_family_mods` VALUES (392,36,55,1); -- ROAM_COOL: 55
 -- Wyrm-Tiamat
 INSERT INTO `mob_family_mods` VALUES (393,31,5,1);  -- ROAM_DISTANCE: 5
 INSERT INTO `mob_family_mods` VALUES (393,36,55,1); -- ROAM_COOL: 55
+INSERT INTO `mob_family_mods` VALUES (393,59,254,1); -- WEAPON_BONUS: 254
 
 -- Humanoid-Hume
 INSERT INTO `mob_family_mods` VALUES (394,4,30,1);   -- SIGHT_RANGE: 30

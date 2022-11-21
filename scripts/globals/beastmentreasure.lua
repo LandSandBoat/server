@@ -215,7 +215,10 @@ end
 xi.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
     local zd = zoneData[player:getZoneID()]
 
-    if player:getCharVar(zd.statusvar) == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, zd.fetchitems) then
+    if
+        player:getCharVar(zd.statusvar) == QUEST_ACCEPTED and
+        npcUtil.tradeHasExactly(trade, zd.fetchitems)
+    then
         -- Assign a random dig site to the player
         player:setCharVar(zd.dsvar, math.random(1, 8))
 

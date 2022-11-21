@@ -163,8 +163,6 @@ std::string ip2str(uint32 ip);
 
 uint32 str2ip(const char* ip_str);
 
-#define CONVIP(ip) ((ip) >> 24) & 0xFF, ((ip) >> 16) & 0xFF, ((ip) >> 8) & 0xFF, ((ip) >> 0) & 0xFF
-
 uint16 ntows(uint16 netshort);
 
 /************************************************/

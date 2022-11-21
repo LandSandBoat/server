@@ -141,9 +141,9 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:checkDistance(target) >= 20 then
-        mob:SetMagicCastingEnabled(false)
+        mob:setMagicCastingEnabled(false)
     else
-        mob:SetMagicCastingEnabled(true)
+        mob:setMagicCastingEnabled(true)
     end
 end
 

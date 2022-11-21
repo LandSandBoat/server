@@ -6,7 +6,7 @@ local ID = require('scripts/zones/Aydeewa_Subterrane/IDs')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 378, -3, 338, 382, 3, 342)
+    zone:registerTriggerArea(1, 378, -3, 338, 382, 3, 342)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -23,10 +23,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

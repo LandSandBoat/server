@@ -118,7 +118,10 @@ quest.sections =
                                 return quest:messageSpecial(crawlersID.text.EQUIPMENT_NOT_PURIFIED) -- Purification incomplete.
                             end
                         else
-                            if player:hasKeyItem(xi.ki.CRAWLER_BLOOD) and player:hasKeyItem(xi.ki.OLD_BOOTS) then
+                            if
+                                player:hasKeyItem(xi.ki.CRAWLER_BLOOD) and
+                                player:hasKeyItem(xi.ki.OLD_BOOTS)
+                            then
                                 return quest:progressEvent(4) -- Loose key items. Start boot purification.
                             else
                                 return quest:messageSpecial(crawlersID.text.SOMEONE_HAS_BEEN_DIGGING_HERE)

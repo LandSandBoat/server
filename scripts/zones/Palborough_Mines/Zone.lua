@@ -11,6 +11,13 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.NOMHO_CRIMSONARMOR)
+
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.QUVHO_DEATHHURLER)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,7 +38,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

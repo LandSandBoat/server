@@ -54,9 +54,9 @@ quest.sections =
         {
             ['Mhasbaf'] = quest:event(834):oncePerZone(),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [7] = function(player, region)
+                [7] = function(player, triggerArea)
                     return quest:progressEvent(809)
                 end,
             },
@@ -149,9 +149,9 @@ quest.sections =
         {
             ['Mhasbaf'] = quest:event(834),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [8] = function(player, region)
+                [8] = function(player, triggerArea)
                     return quest:progressEvent(813)
                 end,
             },

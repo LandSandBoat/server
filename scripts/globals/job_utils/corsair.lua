@@ -59,9 +59,17 @@ local function phantombuffMultiple(caster)
 
     if phantomValue == 3 then
         phantomBuffMultiplier = 3
-    elseif phantomValue == 5 or phantomValue == 8 then
+    elseif
+        phantomValue == 5 or
+        phantomValue == 8
+    then
         phantomBuffMultiplier = 5
-    elseif phantomValue == 7 or phantomValue == 10 or phantomValue == 12 or phantomValue == 15 then
+    elseif
+        phantomValue == 7 or
+        phantomValue == 10 or
+        phantomValue == 12 or
+        phantomValue == 15
+    then
         phantomBuffMultiplier = 7
     end
 
@@ -72,7 +80,13 @@ end
 local function checkForJobBonus(caster, job)
     local jobBonus = 0
 
-    if job ~= xi.job.NONE and (caster:hasPartyJob(job) or math.random(0, 99) < caster:getMod(xi.mod.JOB_BONUS_CHANCE)) then
+    if
+        job ~= xi.job.NONE and
+        (
+            caster:hasPartyJob(job) or
+            math.random(0, 99) < caster:getMod(xi.mod.JOB_BONUS_CHANCE)
+        )
+    then
         jobBonus = 1
     end
 
@@ -122,7 +136,8 @@ end
 
 local function atMaxCorsairBusts(caster)
     local numBusts = caster:numBustEffects()
-    return (numBusts >= 2 and caster:getMainJob() == xi.job.COR) or (numBusts >= 1 and caster:getMainJob() ~= xi.job.COR)
+    return (numBusts >= 2 and caster:getMainJob() == xi.job.COR) or
+        (numBusts >= 1 and caster:getMainJob() ~= xi.job.COR)
 end
 
 local function corsairSetup(caster, ability, action, effect, job)
@@ -172,9 +187,15 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
     effectpower = effectpower + (phantomBase * phantombuffMultiple(caster))
 
     -- Check if COR Main or Sub
-    if caster:getMainJob() == xi.job.COR and caster:getMainLvl() < target:getMainLvl() then
+    if
+        caster:getMainJob() == xi.job.COR and
+        caster:getMainLvl() < target:getMainLvl()
+    then
         effectpower = effectpower * (caster:getMainLvl() / target:getMainLvl())
-    elseif caster:getSubJob() == xi.job.COR and caster:getSubLvl() < target:getMainLvl() then
+    elseif
+        caster:getSubJob() == xi.job.COR and
+        caster:getSubLvl() < target:getMainLvl()
+    then
         effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
     end
 

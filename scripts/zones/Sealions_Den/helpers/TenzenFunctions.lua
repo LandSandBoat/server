@@ -29,9 +29,9 @@ tenzenFunctions.wsSequence = function(mob)
         mob:setTP(0)
         mob:setMod(xi.mod.DELAY, 0)
         mob:setAnimationSub(0)
-        mob:SetMobSkillAttack(0)
-        mob:SetMobAbilityEnabled(false) -- we don't want tenzen to randomly use WS during this phase
-        mob:SetAutoAttackEnabled(false) -- no autoattacks while skillchaining
+        mob:setMobSkillAttack(0)
+        mob:setMobAbilityEnabled(false) -- we don't want tenzen to randomly use WS during this phase
+        mob:setAutoAttackEnabled(false) -- no autoattacks while skillchaining
         mob:useMobAbility(1394) -- Hanaikusa
         mob:setLocalVar("step", 2)
     elseif step == 2 then
@@ -58,8 +58,8 @@ tenzenFunctions.wsSequence = function(mob)
             mob:setLocalVar("step", 0)
             mob:setLocalVar("meikyo", 0) -- reset for next meikyo and allow tenzen to now swap to bow form
             mob:setLocalVar("skillchain", math.random(1, 100)) -- calculate next skillchain success chance
-            mob:SetMobAbilityEnabled(true)
-            mob:SetAutoAttackEnabled(true)
+            mob:setMobAbilityEnabled(true)
+            mob:setAutoAttackEnabled(true)
 
             if mob:getLocalVar("twohourtrigger") == 1 then
                 mob:setLocalVar("twohourtrigger", 2) -- prevent tenzen from using second meikyo while first one is active
@@ -87,7 +87,7 @@ tenzenFunctions.formSwap = function(mob)
         then
             mob:setAnimationSub(5) -- 5 lowered bow mode (1033 animation) 6 is raised bow mode (1034 animation)
             mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
-            mob:SetMobSkillAttack(1171)
+            mob:setMobSkillAttack(1171)
             mob:setLocalVar("changeTime", mob:getBattleTime())
 
             if mob:getAnimationSub() == 5 then -- need to sheath his great katana before pulling out bow
@@ -102,7 +102,7 @@ tenzenFunctions.formSwap = function(mob)
         then
             mob:setAnimationSub(0)
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
-            mob:SetMobSkillAttack(0)
+            mob:setMobSkillAttack(0)
             mob:setMod(xi.mod.DELAY, 0) -- attack slower back to great katana
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end

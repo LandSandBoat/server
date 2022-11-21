@@ -51,7 +51,7 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE108_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function( player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
@@ -72,9 +72,17 @@ zoneObject.onGameHour = function(zone)
         local vran = GetMobByID(ID.mob.BENDIGEIT_VRAN)
         local time = os.time()
 
-        if phase >= 90 and not haty:isSpawned() and time > haty:getLocalVar("cooldown") then
+        if
+            phase >= 90 and
+            not haty:isSpawned() and
+            time > haty:getLocalVar("cooldown")
+        then
             SpawnMob(ID.mob.HATY)
-        elseif phase <= 10 and not vran:isSpawned() and time > vran:getLocalVar("cooldown") then
+        elseif
+            phase <= 10 and
+            not vran:isSpawned() and
+            time > vran:getLocalVar("cooldown")
+        then
             SpawnMob(ID.mob.BENDIGEIT_VRAN)
         end
     end

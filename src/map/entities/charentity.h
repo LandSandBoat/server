@@ -22,9 +22,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CHARENTITY_H
 #define _CHARENTITY_H
 
-#include "../event_info.h"
-#include "../packets/char.h"
-#include "../packets/entity_update.h"
+#include "event_info.h"
+#include "packets/char.h"
+#include "packets/entity_update.h"
+
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
@@ -37,7 +38,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleentity.h"
 #include "petentity.h"
 
-#include "../utils/fishingutils.h"
+#include "utils/fishingutils.h"
 
 #define MAX_QUESTAREA    11
 #define MAX_QUESTID      256
@@ -348,7 +349,7 @@ public:
     uint8             m_Abilities[64];        // List of current abilities
     uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
     std::bitset<50>   m_LearnedWeaponskills;  // LearnableWeaponskills
-    uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
+    uint8             m_TraitList[18];        // List of active job traits in the form of a bit mask
     uint8             m_PetCommands[64];      // List of available pet commands
     uint8             m_WeaponSkills[32];
     questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
@@ -452,20 +453,21 @@ public:
     SpawnIDList_t SpawnTRUSTList; // list of visible trust
     SpawnIDList_t SpawnNPCList;   // list of visible npc's
 
-    void SetName(int8* name); // устанавливаем имя персонажа (имя ограничивается 15-ю символами)
+    void SetName(int8* name); // set the name of character, limtied to 15 characters
 
-    EntityID_t   TradePending;    // ID персонажа, предлагающего обмен
-    EntityID_t   InvitePending;   // ID персонажа, отправившего приглашение в группу
+    time_point   lastTradeInvite;
+    EntityID_t   TradePending;    // character ID offering trade
+    EntityID_t   InvitePending;   // character ID sending party invite
     EntityID_t   BazaarID;        // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
-    uint32     m_InsideRegionID;     // номер региона, в котором сейчас находится персонаж (??? может засунуть в m_event ???)
-    uint8      m_LevelRestriction;   // ограничение уровня персонажа
-    uint16     m_Costume;            // карнавальный костюм персонажа (модель)
-    uint16     m_Monstrosity;        // Monstrosity model ID
-    uint32     m_AHHistoryTimestamp; // Timestamp when last asked to view history
-    uint32     m_DeathTimestamp;     // Timestamp when death counter has been saved to database
-    time_point m_deathSyncTime;      // Timer used for sending an update packet at a regular interval while the character is dead
+    uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
+    uint8      m_LevelRestriction;    // ограничение уровня персонажа
+    uint16     m_Costume;             // карнавальный костюм персонажа (модель)
+    uint16     m_Monstrosity;         // Monstrosity model ID
+    uint32     m_AHHistoryTimestamp;  // Timestamp when last asked to view history
+    uint32     m_DeathTimestamp;      // Timestamp when death counter has been saved to database
+    time_point m_deathSyncTime;       // Timer used for sending an update packet at a regular interval while the character is dead
 
     uint8      m_hasTractor;      // checks if player has tractor already
     uint8      m_hasRaise;        // checks if player has raise already

@@ -40,7 +40,10 @@ g_mixins.rage = function(rageMob)
     end)
 
     rageMob:addListener("COMBAT_TICK", "RAGE_CTICK", function(mob)
-        if mob:getLocalVar("[rage]started") == 0 and os.time() > mob:getLocalVar("[rage]at") then
+        if
+            mob:getLocalVar("[rage]started") == 0 and
+            os.time() > mob:getLocalVar("[rage]at")
+        then
             mob:setLocalVar("[rage]started", 1)
 
             -- boost stats

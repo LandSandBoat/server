@@ -153,7 +153,7 @@ end
 -- All of this should be re-writen like player weapons skills with params.
 -- THIS IS ONLY A WORKAROUND
 
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, wSCdex, critperc)
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, wSCdex, critperc, attackType)
     local returninfo = { }
     local fStr = 0
     local levelDam = mob:getMainLvl() + 2 -- Base damage of mob
@@ -165,14 +165,20 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     local wSCmod = mob:getStat(xi.mod.DEX) * wSCdex
 
     --get dstr (bias to monsters, so no fSTR)
-    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED or attackType == xi.attackType.RANGED then
         fStr = xi.weaponskills.fSTR2(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     else
         fStr = xi.weaponskills.fSTR(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     end
 
-    -- Damage base
-    local base = math.floor(levelDam + fStr + wSCmod)
+    --apply wSC
+    local base = 0
+    if attackType == xi.attackType.RANGED then
+        base = math.floor(mob:getMobWeaponDmg(xi.slot.RANGED) + fStr + wSCmod)
+    else
+        base = math.floor(mob:getMobWeaponDmg(xi.slot.MAIN) + fStr + wSCmod)
+    end
+
     if base < 1 then
         base = 1
     end
@@ -579,7 +585,10 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     --Handle shadows depending on shadow behaviour / attackType
-    if shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
+    if
+        shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
+        shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    then --remove 'shadowbehav' shadows.
 
         dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
@@ -609,7 +618,10 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     if target:getMod(xi.mod.AUTO_ANALYZER) > 0 then
         local analyzerSkill = target:getLocalVar("analyzer_skill")
         local analyzerHits = target:getLocalVar("analyzer_hits")
-        if analyzerSkill == skill:getID() and target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits then
+        if
+            analyzerSkill == skill:getID() and
+            target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits
+        then
             -- Successfully mitigating damage at a fixed 40%
             dmg = dmg * 0.6
             analyzerHits = analyzerHits + 1

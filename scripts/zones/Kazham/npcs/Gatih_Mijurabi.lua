@@ -21,7 +21,10 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(195)
         end
-    elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_ACCEPTED and player:getCharVar("BathedInScent") == 0 then
+    elseif
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_ACCEPTED and
+        player:getCharVar("BathedInScent") == 0
+    then
         player:startEvent(193)
     else
         player:startEvent(196)

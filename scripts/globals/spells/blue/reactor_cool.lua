@@ -43,7 +43,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     -- Reactor Cool Will Overwrite Ice Spikes and Def Boost regardless of Power
-    if target:hasStatusEffect(typeEffectOne) or target:hasStatusEffect(typeEffectTwo) then
+    if
+        target:hasStatusEffect(typeEffectOne) or
+        target:hasStatusEffect(typeEffectTwo)
+    then
         target:delStatusEffectSilent(typeEffectOne)
         target:delStatusEffectSilent(typeEffectTwo)
     end

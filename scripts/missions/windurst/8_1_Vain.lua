@@ -165,7 +165,10 @@ mission.sections =
             onEventUpdate =
             {
                 [5] = function(player, csid, option, npc)
-                    if player:getPreviousZone() == xi.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == xi.zone.MHAURA then
+                    if
+                        player:getPreviousZone() == xi.zone.LABYRINTH_OF_ONZOZO or
+                        player:getPreviousZone() == xi.zone.MHAURA
+                    then
                         player:updateEvent(0, 0, 0, 0, 0, 7)
                     elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
                         player:updateEvent(0, 0, 0, 0, 0, 6)
@@ -194,7 +197,10 @@ mission.sections =
                     if missionStatus >= 2 then
                         if player:hasKeyItem(xi.ki.STAR_SEEKER) then
                             return mission:progressEvent(118, 0, xi.items.CURSE_WAND, xi.ki.STAR_SEEKER)
-                        elseif player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and missionStatus == 4 then
+                        elseif
+                            player:hasKeyItem(xi.ki.MAGIC_DRAINED_STAR_SEEKER) and
+                            missionStatus == 4
+                        then
                             return mission:progressEvent(121)
                         else
                             return mission:progressEvent(119, 0, xi.items.CURSE_WAND)
@@ -452,7 +458,10 @@ mission.sections =
                         player:updateEvent(0, 0, 0, 0, 0, 2)
                     elseif player:getPreviousZone() == xi.zone.MERIPHATAUD_MOUNTAINS then
                         player:updateEvent(0, 0, 0, 0, 0, 4)
-                    elseif player:getPreviousZone() == xi.zone.ROLANBERRY_FIELDS or player:getPreviousZone() == xi.zone.PORT_JEUNO then
+                    elseif
+                        player:getPreviousZone() == xi.zone.ROLANBERRY_FIELDS or
+                        player:getPreviousZone() == xi.zone.PORT_JEUNO
+                    then
                         player:updateEvent(0, 0, 0, 0, 0, 3)
                     end
                 end,
@@ -498,7 +507,10 @@ mission.sections =
             onEventUpdate =
             {
                 [37] = function(player, csid, option, npc)
-                    if player:getPreviousZone() == xi.zone.EAST_SARUTABARUTA or player:getPreviousZone() == xi.zone.BUBURIMU_PENINSULA then
+                    if
+                        player:getPreviousZone() == xi.zone.EAST_SARUTABARUTA or
+                        player:getPreviousZone() == xi.zone.BUBURIMU_PENINSULA
+                    then
                         player:updateEvent(0, 0, 0, 0, 0, 7)
                     elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
                         player:updateEvent(0, 0, 0, 0, 0, 6)

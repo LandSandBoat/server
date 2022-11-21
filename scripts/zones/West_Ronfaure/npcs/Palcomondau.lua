@@ -310,7 +310,10 @@ entity.onSpawn = function(npc)
 end
 
 entity.onPath = function(npc)
-    if npc:getLocalVar("reported") ~= 1 and npc:atPoint(xi.path.get(pathNodes, 45)) then
+    if
+        npc:getLocalVar("reported") ~= 1 and
+        npc:atPoint(xi.path.get(pathNodes, 45))
+    then
         GetNPCByID(npc:getID() + 3):showText(npc, ID.text.PALCOMONDAU_REPORT)
         npc:setLocalVar("reported", 1)
     elseif npc:atPoint(xi.path.last(pathNodes)) then

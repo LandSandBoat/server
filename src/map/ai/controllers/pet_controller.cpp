@@ -100,7 +100,7 @@ void CPetController::DoRoamTick(time_point tick)
 
     if (currentDistance > PetRoamDistance)
     {
-        if (currentDistance < 35.0f && PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        if (currentDistance < 35.0f && PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN))
         {
             PPet->PAI->PathFind->FollowPath(m_Tick);
         }

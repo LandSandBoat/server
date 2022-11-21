@@ -22,8 +22,11 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(117)
         end
-    elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_AVAILABLE then
-            player:startEvent(120)
+    elseif
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_AVAILABLE
+    then
+        player:startEvent(120)
     elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED then
         if player:getCharVar("FiresOfDiscProg") < 2 then
             player:startEvent(121)

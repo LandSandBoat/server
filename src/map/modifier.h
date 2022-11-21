@@ -480,8 +480,12 @@ enum class Mod
     WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
     WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
     WYVERN_LVL_BONUS           = 1043, // Wyvern: Lv.+ (Increases wyvern's base level above 99)
-    WYVERN_ATTRIBUTE_DA        = 1056, // TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
-    DRAGOON_BREATH_RECAST      = 1057, // TODO: Restoring/Smithing Breath Recast Reduction (seconds)
+    WYVERN_ATTRIBUTE_DA        = 1056, // Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    DRAGOON_BREATH_RECAST      = 1057, // Restoring/Smithing Breath Recast Reduction (seconds)
+    ENHANCE_DEEP_BREATHING     = 283,  // Add 5/256 to deep breathing bonus per merit level when calculating healing breath
+    UNCAPPED_WYVERN_BREATH     = 284,  // Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
+    ENHANCES_STRAFE            = 282,  // Strafe merit augment, +50 TP gained per merit level on breath use.
+    ENHANCES_SPIRIT_LINK       = 281,  // Adds erase/-na to Spirit Link
 
     // Summoner
     AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
@@ -969,7 +973,7 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 192 to 223
-    // 261 to 284
+    // 261 to 280
     //
     // SPARE = 1074, and onward
 };

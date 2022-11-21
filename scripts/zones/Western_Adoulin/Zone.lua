@@ -7,7 +7,7 @@ require('scripts/globals/quests')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 13, 0, 123.518, 28, 0, 173) -- Approaching Airship Docks
+    zone:registerTriggerArea(1, 13, 0, 123.518, 28, 0, 173) -- Approaching Airship Docks
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -34,7 +34,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

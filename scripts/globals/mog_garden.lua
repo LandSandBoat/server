@@ -27,7 +27,7 @@ xi.mog_garden.onZoneIn = function(player, prevZone)
     -- TODO: System to un-hide specific NPCs for specific players
 end
 
-xi.mog_garden.onRegionEnter = function(player, region)
+xi.mog_garden.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 xi.mog_garden.onEventUpdate = function(player, csid, option)

@@ -101,29 +101,47 @@ local function getSpellBonusAcc(caster, target, spell, params)
     local element = spell:getElement()
     local casterJob = caster:getMainJob()
 
-    if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
+    if
+        caster:hasStatusEffect(xi.effect.ALTRUISM) and
+        spellGroup == xi.magic.spellGroup.WHITE
+    then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
     end
 
-    if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
+    if
+        caster:hasStatusEffect(xi.effect.FOCALIZATION) and
+        spellGroup == xi.magic.spellGroup.BLACK
+    then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
     end
 
     -- Apply Divine Emblem to Flash
-    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and skill == xi.skill.DIVINE_MAGIC then
+    if
+        caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and
+        skill == xi.skill.DIVINE_MAGIC
+    then
         magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
     -- Apply Dark Seal to Dark Magic
     -- http://wiki.ffo.jp/html/3247.html
     -- Similar to Elemental Seal but only for Dark Magic
-    if caster:hasStatusEffect(xi.effect.DARK_SEAL) and skill == xi.skill.DARK_MAGIC then
+    if
+        caster:hasStatusEffect(xi.effect.DARK_SEAL) and
+        skill == xi.skill.DARK_MAGIC
+    then
         magicAccBonus = magicAccBonus + 256
     end
 
     -- Add acc for klimaform
     if element > 0 then
-        if caster:hasStatusEffect(xi.effect.KLIMAFORM) and (castersWeather == xi.magic.singleWeatherStrong[element] or castersWeather == xi.magic.doubleWeatherStrong[element]) then
+        if
+            caster:hasStatusEffect(xi.effect.KLIMAFORM) and
+            (
+                castersWeather == xi.magic.singleWeatherStrong[element] or
+                castersWeather == xi.magic.doubleWeatherStrong[element]
+            )
+        then
             magicAccBonus = magicAccBonus + 15
         end
     end
@@ -146,7 +164,10 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
         [xi.job.DRK] = function()
             -- Add MACC for Dark Seal
-            if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+            if
+                skill == xi.skill.DARK_MAGIC and
+                caster:hasStatusEffect(xi.effect.DARK_SEAL)
+            then
                 magicAccBonus = magicAccBonus + 256
             end
         end,
@@ -171,7 +192,10 @@ local function getSpellBonusAcc(caster, target, spell, params)
                 magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
             end
             -- RDM Job Point: During saboteur, Enfeebling MACC +2
-            if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            if
+                skill == xi.skill.ENFEEBLING_MAGIC and
+                caster:hasStatusEffect(xi.effect.SABOTEUR)
+            then
                 local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
                 magicAccBonus = magicAccBonus + (jpValue * 2)
             end
@@ -237,7 +261,10 @@ local function calculateMagicBurst(caster, spell, target, params)
     local skillchainburst = 1.0
     local modburst = 1.0
 
-    if spell:getSpellGroup() == 3 and not caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
+    if
+        spell:getSpellGroup() == 3 and
+        not caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+    then
         return burst
     end
 
@@ -578,7 +605,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         effectRes = effectRes + xi.magic.getEffectResistance(target, effect, false, caster)
     end
 
-    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, skillchainCount)
+    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount)
 
     return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount)
 end
@@ -770,6 +797,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     end
 
     if element ~= xi.magic.ele.NONE then
+        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
@@ -807,7 +835,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
         skillchainCount = 0
     end
 
-    if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
+    if target ~= nil and element ~= nil and element ~= xi.magic.ele.NONE and target:getObjType() == xi.objType.MOB then
         local eemTier = 1
         eemVal = target:getMod(xi.magic.eleEvaMult[element]) / 100
 
@@ -957,10 +985,6 @@ xi.magic.getEffectResistance = function(target, effect, returnBuild, caster)
 
     if returnBuild ~= nil and returnBuild ~= false then
         return buildres
-    end
-
-    if target:isMob() and target:isNM() and effectres ~= 0 then
-        xi.magic.tryBuildResistance(target, effectres, true, caster)
     end
 
     if effectres ~= 0 then
@@ -1429,7 +1453,11 @@ xi.magic.doElementalNuke = function(caster, spell, target, spellParams)
     local baseValue = 0
     local tierMultiplier = 0
 
-    if xi.settings.main.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
+    if
+        xi.settings.main.USE_OLD_MAGIC_DAMAGE and
+        spellParams.V ~= nil and
+        spellParams.M ~= nil
+    then
         baseValue = spellParams.V -- Base value
         tierMultiplier = spellParams.M -- Tier multiplier
         local inflectionPoint = spellParams.I -- Inflection point
@@ -1601,12 +1629,19 @@ xi.magic.calculateDuration = function(duration, magicSkill, spellGroup, caster, 
         useComposure = useComposure or (useComposure == nil and true)
 
         -- Composure
-        if useComposure and caster:hasStatusEffect(xi.effect.COMPOSURE) and caster:getID() == target:getID() then
+        if
+            useComposure and
+            caster:hasStatusEffect(xi.effect.COMPOSURE) and
+            caster:getID() == target:getID()
+        then
             duration = duration * 3
         end
 
         -- Perpetuance
-        if caster:hasStatusEffect(xi.effect.PERPETUANCE) and spellGroup == xi.magic.spellGroup.WHITE then
+        if
+            caster:hasStatusEffect(xi.effect.PERPETUANCE) and
+            spellGroup == xi.magic.spellGroup.WHITE
+        then
             duration  = duration * 2
         end
     elseif magicSkill == xi.skill.ENFEEBLING_MAGIC then -- Enfeebling Magic
@@ -1640,7 +1675,7 @@ end
 
 xi.magic.calculateBuildDuration = function(target, duration, effect, caster)
 
-    if target:isMob() then
+    if target:isMob() and target:isNM() then
         local buildRes = xi.magic.getEffectResistance(target, effect, true, caster)
 
         if target:getMod(buildRes) ~= nil then

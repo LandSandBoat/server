@@ -62,6 +62,7 @@ zones[xi.zone.WEST_RONFAURE] =
             [17187110] = 17187111, -- -262.780 -22.384 -253.873
         },
         MARAUDER_DVOGZOG      = 17187273,
+        AMANITA               = 17186927,
     },
     npc =
     {

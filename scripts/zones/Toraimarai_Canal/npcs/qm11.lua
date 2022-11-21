@@ -13,7 +13,11 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar("rootProblem") == 2 then
-        if not GetMobByID(ID.mob.MAGIC_SLUDGE):isSpawned() and player:getCharVar("rootProblemQ1") == 2 and player:getCharVar("rootProblemQ2") == 2 then
+        if
+            not GetMobByID(ID.mob.MAGIC_SLUDGE):isSpawned() and
+            player:getCharVar("rootProblemQ1") == 2 and
+            player:getCharVar("rootProblemQ2") == 2
+        then
             player:startEvent(48)
         end
     elseif player:getCharVar("rootProblem") == 3 then

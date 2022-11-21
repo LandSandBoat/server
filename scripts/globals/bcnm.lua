@@ -151,18 +151,6 @@ local battlefields =
     --  { 9, 1307,    0 },   -- Central 4th Floor II
     },
 
-    [xi.zone.APOLLYON] =
-    {
-        { 0, 1291,    0 },   -- SW Apollyon
-        { 1, 1290,    0 },   -- NW Apollyon
-        { 2, 1293,    0 },   -- SE Apollyon
-        { 3, 1292,    0 },   -- NE Apollyon
-    --  { 4, 1296,   -2 },   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-    --  { 5, 1294, 2127 },   -- CS Apollyon
-    --  { 6, 1295,    0 },   -- CS Apollyon II
-    --  { 7, 1297,    0 },   -- Central Apollyon II
-    },
-
     [xi.zone.ARRAPAGO_REEF] =
     {
     --  { 0,    ?,    0 },   -- Lamia Reprisal
@@ -562,6 +550,16 @@ local function checkReqs(player, npc, bfid, registrant)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
+    local function getPartyRace()
+        for _, v in pairs(player:getParty()) do
+            if v:getRace() ~= player:getRace() then
+                return false
+            end
+        end
+
+        return true
+    end
+
     -- Requirements to register a battlefield
     local registerReqs =
     {
@@ -698,6 +696,15 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 2
         end,
 
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+        end,
+
         [256] = function() -- ZM8: Return to Delkfutt's Tower
             return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
                 zilartStatus == 2
@@ -759,6 +766,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+        end,
+
         [420] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
@@ -776,6 +788,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+        end,
+
         [452] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
@@ -791,6 +808,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [482] = function() -- Quest: Trial-size Trial by Ice
             return mainJob == xi.job.SMN and mainLevel >= 20
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
         end,
 
         [484] = function() -- ASA4: Sugar-coated Directive
@@ -842,6 +864,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+        end,
+
         [547] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
@@ -859,6 +886,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+        end,
+
         [580] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
@@ -870,6 +902,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [609] = function() -- Quest: Trial-size Trial by Water
             return mainJob == xi.job.SMN and mainLevel >= 20
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+                not player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
         [611] = function() -- ASA4: Sugar-coated Directive
@@ -937,11 +974,13 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [739] = function() -- ENM: Pulling Your Strings
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+                player:getMainJob() < 17 -- ToAU+ jobs not fully implemented
         end,
 
         [740] = function() -- ENM: Automaton Assault
-            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)
+            return player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
+                getPartyRace()
         end,
 
         [768] = function() -- PM1-3: The Mothercrystals
@@ -1160,6 +1199,39 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_STORMS) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_FROST) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_GALES) and
+                player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+        end,
+
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return npc:getXPos() > -721 and npc:getXPos() < 719
         end,
@@ -1663,7 +1735,11 @@ local function findBattlefields(player, npc, itemId)
     end
 
     for k, v in pairs(zbfs) do
-        if v[3] == itemId and checkReqs(player, npc, v[2], true) and not player:battlefieldAtCapacity(v[2]) then
+        if
+            v[3] == itemId and
+            checkReqs(player, npc, v[2], true) and
+            not player:battlefieldAtCapacity(v[2])
+        then
             mask = bit.bor(mask, math.pow(2, v[1]))
         end
     end
@@ -1740,11 +1816,22 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
         return false
 
     -- Chips for limbus
-    elseif trade:getItemCount() == 3 and trade:hasItemQty(1907, 1) and trade:hasItemQty(1908, 1) and trade:hasItemQty(1986, 1) then
+    elseif
+        trade:getItemCount() == 3 and
+        trade:hasItemQty(1907, 1) and
+        trade:hasItemQty(1908, 1) and
+        trade:hasItemQty(1986, 1)
+    then
         itemId = -1
 
     -- Chips for limbus
-    elseif trade:getItemCount() == 4 and trade:hasItemQty(1909, 1) and trade:hasItemQty(1910, 1) and trade:hasItemQty(1987, 1) and trade:hasItemQty(1988, 1) then
+    elseif
+        trade:getItemCount() == 4 and
+        trade:hasItemQty(1909, 1) and
+        trade:hasItemQty(1910, 1) and
+        trade:hasItemQty(1987, 1) and
+        trade:hasItemQty(1988, 1)
+    then
         itemId = -2
 
     -- Orbs / Testimonies
@@ -1888,42 +1975,6 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
         switch (battlefieldId): caseof
         {
-            [1290] = function() -- NW_Apollyon
-                area = 2
-            end,
-
-            [1291] = function() -- SW_Apollyon
-                area = 1
-            end,
-
-            [1292] = function() -- NE_Apollyon
-                area = 4
-            end,
-
-            [1293] = function() -- SE_Apollyon
-                area = 3
-            end,
-
-            [1294] = function() -- CS_Apollyon
-                area = 6
-            end,
-
-            [1296] = function() -- Central_Apollyon
-                area = 5
-            end,
-
-            [1298] = function() -- Temenos_Western_Tower
-                area = 3
-            end,
-
-            [1299] = function() -- Temenos_Northern_Tower
-                area = 1
-            end,
-
-            [1300] = function() -- Temenos_Eastern_Tower
-                area = 2
-            end,
-
             [1301] = function() -- Central_Temenos_Basement
                 area = 8
             end,

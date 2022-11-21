@@ -232,7 +232,6 @@ int main(int argc, char** argv)
         duration next = std::chrono::milliseconds(200);
 
         // clang-format off
-        ShowInfo("Setting up main tick watchdog thread");
         auto watchdog = Watchdog(2000ms, [&]()
         {
             ShowCritical("Process main tick has taken 2000ms or more. Are you debugging or stuck in a loop?");

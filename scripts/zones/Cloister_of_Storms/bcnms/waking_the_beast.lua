@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Cloister_of_Storms/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -34,9 +35,8 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 then
-        player:addKeyItem(xi.ki.EYE_OF_STORMS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.EYE_OF_STORMS)
+    if csid == 32001 and player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) then
+        npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_STORMS)
     end
 end
 

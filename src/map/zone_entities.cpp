@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "zone_entities.h"
 
-#include "../common/utils.h"
+#include "common/utils.h"
 #include "enmity_container.h"
 #include "latent_effect_container.h"
 #include "mob_modifier.h"
@@ -291,7 +291,7 @@ void CZoneEntities::WeatherChange(WEATHER weather)
 
         PCurrentMob->PAI->EventHandler.triggerListener("WEATHER_CHANGE", CLuaBaseEntity(PCurrentMob), static_cast<int>(weather), element);
         // can't detect by scent in this weather
-        if (PCurrentMob->m_Detects & DETECT_SCENT)
+        if (PCurrentMob->getMobMod(MOBMOD_DETECTION) & DETECT_SCENT)
         {
             PCurrentMob->m_disableScent = (weather == WEATHER_RAIN || weather == WEATHER_SQUALL || weather == WEATHER_BLIZZARDS);
         }
@@ -1316,7 +1316,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
     PChar->pushPacket(new CWideScanPacket(WIDESCAN_END));
 }
 
-void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
+void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 {
     TracyZoneScoped;
     TracyZoneIString(m_zone->GetName());
@@ -1457,6 +1457,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
         }
         it++;
     }
+
     it = m_trustList.begin();
     while (it != m_trustList.end())
     {
@@ -1517,9 +1518,9 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             }
             PChar->PAI->Tick(tick);
             PChar->PTreasurePool->CheckItems(tick);
-            if (check_regions)
+            if (check_trigger_areas)
             {
-                m_zone->CheckRegions(PChar);
+                m_zone->CheckTriggerAreas(PChar);
             }
         }
     }

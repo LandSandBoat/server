@@ -45,11 +45,11 @@ end
 
 zoneObject.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-    end
         player:delStatusEffect(xi.effect.BATTLEFIELD)
+    end
 end
 
-zoneObject.onRegionEnter = function( player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

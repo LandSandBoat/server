@@ -226,7 +226,7 @@ CInstance* CInstanceLoader::LoadInstance()
 
             PMob->m_MobSkillList  = sql->GetUIntData(70);
             PMob->m_TrueDetection = sql->GetUIntData(71);
-            PMob->m_Detects       = sql->GetUIntData(72);
+            PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(72));
 
             PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(73));
 

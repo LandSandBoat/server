@@ -18,7 +18,10 @@ local entity = {}
 --    player:startEvent(112) -- repeat quest
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED or player:getCharVar("QuestAPotterPrefeRepeat_var") == 1 then
+    if
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED or
+        player:getCharVar("QuestAPotterPrefeRepeat_var") == 1
+    then
         if npcUtil.tradeHas(trade, 569) then
             player:startEvent(113) -- quest done!
         end
@@ -26,12 +29,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 5 then
+    if
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) > 5
+    then
         player:startEvent(111, 569) -- start quest A Potter's Preference
     elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED then
         player:startEvent(114, 569) -- get me dish_of_gusgen_clay  as soon as you can
     elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_COMPLETED then
-        if player:getCharVar("QuestAPotterPrefeCompDay_var") + 7 < VanadielDayOfTheYear() or player:getCharVar("QuestAPotterPrefeCompYear_var") < VanadielYear() then
+        if
+            player:getCharVar("QuestAPotterPrefeCompDay_var") + 7 < VanadielDayOfTheYear() or
+            player:getCharVar("QuestAPotterPrefeCompYear_var") < VanadielYear()
+        then
             -- seven days after copletition, allow to do the quest again
             player:startEvent(112) -- repeat quest
         else

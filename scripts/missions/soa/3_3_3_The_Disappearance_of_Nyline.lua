@@ -51,9 +51,9 @@ mission.sections =
 
         [xi.zone.FORET_DE_HENNETIEL] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(517)
                 end,
             },

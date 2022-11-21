@@ -21,7 +21,14 @@ entity.onTrade = function(player, npc, trade)
             else
                 player:startEvent(520)
             end
-        elseif offer == 941 or offer == 948 or offer == 949 or offer == 956 or offer == 957 or offer == 958 then
+        elseif
+            offer == 941 or
+            offer == 948 or
+            offer == 949 or
+            offer == 956 or
+            offer == 957 or
+            offer == 958
+        then
             player:startEvent(522) -- Brought wrong flowers.
         end
     end
@@ -32,7 +39,10 @@ entity.onTrigger = function(player, npc)
     local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local needToZone = player:needToZone()
 
-    if sayFlowers == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
+    if
+        sayFlowers == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+    then
         player:startEvent(514) -- Begin Say It with Flowers.
     elseif flowerProgress == 3 or flowerProgress == 1 then
         player:startEvent(515) -- Waiting for trade.

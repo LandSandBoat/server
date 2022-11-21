@@ -27,8 +27,8 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
 
     mob:setLocalVar("[depths]doAnimation", 0)
     mob:setLocalVar("[depths]castActivate", 0)

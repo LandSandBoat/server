@@ -356,7 +356,11 @@ instanceObject.onTrack = function(instance)
     if pathProgressMask > 0 and missionActive == 1 then
 -- Check for nearby mobs
         for _, enemys in pairs(mobs) do
-            if mob:checkDistance(enemys) < 12 and mob:getID() ~= enemys:getID() and enemys:isSpawned() then
+            if
+                mob:checkDistance(enemys) < 12 and
+                mob:getID() ~= enemys:getID() and
+                enemys:isSpawned()
+            then
                 if mobChatMessage == 0 then
                     mob:setLocalVar("runTimer", os.time() + math.random(20, 40))
                     mob:setLocalVar("mobChatMessage", 1)
@@ -393,7 +397,11 @@ instanceObject.onTrack = function(instance)
         end
 -- Check for nearby players
         for _, players in pairs(chars) do
-            if mob:checkDistance(players) < 5 and mob:isFacing(players) and players:isFacing(mob) then
+            if
+                mob:checkDistance(players) < 5 and
+                mob:isFacing(players) and
+                players:isFacing(mob)
+            then
                 rangeStop = true
             end
             if mob:checkDistance(players) < 4 then
@@ -495,12 +503,18 @@ instanceObject.onTrack = function(instance)
             end
 -- Pathing Control Conditions
             if moveStatus == 0 then
-                if mob:atPoint(pathNodes[0][#pathNodes[0]]) and bit.band(pathProgressMask, bit.lshift(1, 0)) == 0 then
+                if
+                    mob:atPoint(pathNodes[0][#pathNodes[0]]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 0)) == 0
+                then
                     mob:setLocalVar("pathLeg", 1)
                     mob:setLocalVar("pathPoint", 19)
                     mob:setLocalVar("pathProgressMask", 1)
 -- Top Room Option Conditions
-                elseif mob:atPoint(pathNodes[1][30]) and bit.band(pathProgressMask, bit.lshift(1, 1)) == 0 then
+                elseif
+                    mob:atPoint(pathNodes[1][30]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 1)) == 0
+                then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -511,7 +525,10 @@ instanceObject.onTrack = function(instance)
                         end)
                         mob:setLocalVar("lockToggle", 1)
                     end
-                elseif mob:atPoint(pathNodes[topRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 1)) == 0 then
+                elseif
+                    mob:atPoint(pathNodes[topRoomsOption][7]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 1)) == 0
+                then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -524,7 +541,10 @@ instanceObject.onTrack = function(instance)
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Middle Room Option Conditions
-                elseif mob:atPoint(pathNodes[1][34]) and bit.band(pathProgressMask, bit.lshift(1, 2)) == 0 then
+                elseif
+                    mob:atPoint(pathNodes[1][34]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 2)) == 0
+                then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -535,7 +555,10 @@ instanceObject.onTrack = function(instance)
                         end)
                         mob:setLocalVar("lockToggle", 1)
                     end
-                elseif mob:atPoint(pathNodes[middleRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 2)) == 0 then
+                elseif
+                    mob:atPoint(pathNodes[middleRoomsOption][7]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 2)) == 0
+                then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -548,7 +571,10 @@ instanceObject.onTrack = function(instance)
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Bottom Room Option Conditions
-                elseif mob:atPoint(pathNodes[1][38]) and bit.band(pathProgressMask, bit.lshift(1, 3)) == 0 then
+                elseif
+                    mob:atPoint(pathNodes[1][38]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 3)) == 0
+                then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
@@ -559,7 +585,10 @@ instanceObject.onTrack = function(instance)
                         end)
                         mob:setLocalVar("lockToggle", 1)
                     end
-                elseif mob:atPoint(pathNodes[bottomRoomsOption][7]) and bit.band(pathProgressMask, bit.lshift(1, 3)) == 0 then
+                elseif
+                    mob:atPoint(pathNodes[bottomRoomsOption][7]) and
+                    bit.band(pathProgressMask, bit.lshift(1, 3)) == 0
+                then
                     mob:setLocalVar("moveLock", 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)

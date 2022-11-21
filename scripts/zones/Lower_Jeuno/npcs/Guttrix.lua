@@ -53,7 +53,10 @@ entity.onTrigger = function(player, npc)
         if rseGear < 15 then
             if questStatus == QUEST_AVAILABLE then
                 player:startEvent(10016, rseLocation, rseRace)
-            elseif questStatus >= QUEST_ACCEPTED and player:hasKeyItem(xi.ki.MAGICAL_PATTERN) then
+            elseif
+                questStatus >= QUEST_ACCEPTED and
+                player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
+            then
                 player:startEvent(10018, rseGear)
             else
                 player:startEvent(10017, rseLocation, rseRace)

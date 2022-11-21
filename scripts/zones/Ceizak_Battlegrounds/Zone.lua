@@ -12,9 +12,9 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Ergon Locus area at K-10
-    zone:registerRegion(1, 357.819, 11, -250.201, 0, 0, 0)
+    zone:registerTriggerArea(1, 357.819, 11, -250.201, 0, 0, 0)
     -- Ergon Locus area at I-8
-    zone:registerRegion(2, 87.2, 8, 72.9, 0, 0, 0)
+    zone:registerTriggerArea(2, 87.2, 8, 72.9, 0, 0, 0)
 
     xi.reives.setupZone(zone)
 end
@@ -45,15 +45,15 @@ local function triggerUncannySensationMessage(player)
     end
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function(x) triggerUncannySensationMessage(player) end,
         [2] = function(x) triggerUncannySensationMessage(player) end,
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     player:setLocalVar("GEO_DWL_Locus_Area", 0)
 end
 

@@ -52,7 +52,10 @@ entity.onEventUpdate = function(player, csid, option, target)
 
     if party ~= nil then
         for i, v in pairs(party) do
-            if not v:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS and v:getCurrentAssault() == assaultid) then
+            if
+                not v:hasKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS and
+                v:getCurrentAssault() == assaultid)
+            then
                 player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                 player:instanceEntry(target, 1)
                 return

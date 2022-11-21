@@ -59,8 +59,8 @@ entity.onMobSpawn = function(mob)
             mob:setLocalVar("hitsRequired", math.random(1, 10))
             mob:setLocalVar("runControl", 1)
             mob:setLocalVar("currHits", 0)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setMagicCastingEnabled(false)
+            mob:setMobAbilityEnabled(false)
         end
     end)
 
@@ -100,8 +100,8 @@ entity.onMobFight = function(mob, target)
         mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 
         mob:timer(5000, function(mobArg)
-            mobArg:SetMagicCastingEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
         end)
     end
 end

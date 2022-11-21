@@ -570,7 +570,7 @@ namespace zoneutils
                     PMob->m_MobSkillList = sql->GetUIntData(73);
 
                     PMob->m_TrueDetection = sql->GetUIntData(74);
-                    PMob->m_Detects       = sql->GetUIntData(75);
+                    PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(75));
 
                     PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
 
@@ -604,8 +604,12 @@ namespace zoneutils
                 luautils::ApplyZoneMixins(PMob);
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();
-                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
+            });
 
+            // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
+            PZone->ForEachMob([](CMobEntity* PMob)
+            {
+                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
                 if (PMob->m_AllowRespawn)
                 {
                     PMob->Spawn();
@@ -736,6 +740,8 @@ namespace zoneutils
             ShowCritical("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
+
+        ShowInfo(fmt::format("Loading {} zones", zones.size()));
 
         for (auto zone : zones)
         {
@@ -1212,12 +1218,15 @@ namespace zoneutils
     {
         if (auto* PZone = GetZone(zoneId))
         {
-            if (PZone->GetIP() == 0 || PZone->GetPort() == 0)
+            if (PZone->GetPort() == 0)
             {
                 return false;
             }
+
+            return true;
         }
-        return true;
+
+        return false;
     }
 
     void AfterZoneIn(CBaseEntity* PEntity)

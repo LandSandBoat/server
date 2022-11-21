@@ -10,7 +10,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.ANTICAN_TAG) and npcUtil.popFromQM(player, npc, ID.mob.TRIBUNUS_VII_I) then
+    if
+        npcUtil.tradeHas(trade, xi.items.ANTICAN_TAG) and
+        npcUtil.popFromQM(player, npc, ID.mob.TRIBUNUS_VII_I)
+    then
+        -- Antican Tag
         player:confirmTrade()
     end
 end

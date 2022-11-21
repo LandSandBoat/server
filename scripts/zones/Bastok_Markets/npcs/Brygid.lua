@@ -78,7 +78,12 @@ entity.onTrigger = function(player, npc)
 
         player:startEvent(380, robeEquipped, getBody, getLegs, player:getMainJob())
 
-    elseif brygidReturns == QUEST_ACCEPTED and body == getBody and legs == getLegs and wantsSubligar == 0 then
+    elseif
+        brygidReturns == QUEST_ACCEPTED and
+        body == getBody and
+        legs == getLegs and
+        wantsSubligar == 0
+    then
         -- Have the right equips, proceed with quest
         player:startEvent(382)
 

@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
     mob:setMod(xi.mod.UDMGRANGE, -10001)
     mob:setMod(xi.mod.UDMGPHYS, -10001)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 entity.onMobEngaged = function(mob, target)

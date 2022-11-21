@@ -17,6 +17,11 @@ end
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+
+    -- NM Persistence
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.RAMBUKK)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -45,7 +50,7 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE101_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

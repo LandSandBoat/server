@@ -12,9 +12,13 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.LIGHT_ARTS) or player:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
+    if
+        player:hasStatusEffect(xi.effect.LIGHT_ARTS) or
+        player:hasStatusEffect(xi.effect.ADDENDUM_WHITE)
+    then
         return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
+
     return 0, 0
 end
 

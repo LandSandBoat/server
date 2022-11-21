@@ -582,7 +582,10 @@ xi.abyssea.visionsCruorProspectorOnTrigger = function(player, npc)
     local cruor = player:getCurrency("cruor")
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
-    if active == xi.extravaganza.campaign.SUMMER_NY or active == xi.extravaganza.campaign.BOTH then
+    if
+        active == xi.extravaganza.campaign.SUMMER_NY or
+        active == xi.extravaganza.campaign.BOTH
+    then
         cipher = 1
     end
 
@@ -1138,7 +1141,7 @@ xi.abyssea.searingWardTimer = function(player)
     end
 end
 
-xi.abyssea.onWardRegionLeave = function(player)
+xi.abyssea.onWardTriggerAreaLeave = function(player)
     local ID = zones[player:getZoneID()]
     local visitantEffect = player:getStatusEffect(xi.effect.VISITANT)
 
@@ -1148,7 +1151,7 @@ xi.abyssea.onWardRegionLeave = function(player)
     end
 end
 
-xi.abyssea.onWardRegionEnter = function(player)
+xi.abyssea.onWardTriggerAreaEnter = function(player)
     player:setLocalVar('tetherTimer', 0)
 end
 

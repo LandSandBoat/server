@@ -57,7 +57,7 @@ void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zm
     }
     catch (zmq::error_t& e)
     {
-        ShowError("Message: %s", e.what());
+        ShowError(fmt::format("Message: {}", e.what()));
     }
 }
 
@@ -158,15 +158,15 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         default:
         {
-            ShowDebug("Message: unknown type received: %d from %s:%hu", static_cast<uint8>(type), from_address, from_port);
+            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), from_address, from_port));
             break;
         }
     }
 
     if (ret != SQL_ERROR)
     {
-        ShowDebug("Message: Received message %s (%d) from %s:%hu",
-                  msgTypeToStr(type), static_cast<uint8>(type), from_address, from_port);
+        ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
+                              msgTypeToStr(type), static_cast<uint8>(type), from_address, from_port));
 
         while (zmqSql->NextRow() == SQL_SUCCESS)
         {
@@ -187,7 +187,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
             char target_address[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
-            ShowDebug("Message: -> rerouting to %s:%lu", target_address, port);
+            ShowDebug(fmt::format("Message: -> rerouting to {}:{}", target_address, port));
             ip |= (port << 32);
 
             if (type == MSG_CHAT_PARTY || type == MSG_PT_RELOAD || type == MSG_PT_DISBAND)
@@ -227,7 +227,7 @@ void message_server_listen(const bool& requestExit)
                 return;
             }
 
-            ShowError("Message: %s", e.what());
+            ShowError(fmt::format("Message: {}", e.what()));
             continue;
         }
 
@@ -262,7 +262,7 @@ void message_server_init(const bool& requestExit)
     }
     catch (zmq::error_t& err)
     {
-        ShowCritical("Unable to bind chat socket: %s", err.what());
+        ShowCritical(fmt::format("Unable to bind chat socket: {}", err.what()));
     }
 
     message_server_listen(requestExit);

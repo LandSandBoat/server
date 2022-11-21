@@ -91,7 +91,11 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
+                    if
+                        player:hasKeyItem(xi.ki.ANCIENT_SAN_DORIAN_BOOK) and
+                        missionStatus > 2 and
+                        missionStatus < 6
+                    then
                         return mission:progressEvent(49)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(50)
@@ -126,7 +130,10 @@ mission.sections =
                     then
                         return mission:messageSpecial(krtID.text.SENSE_SOMETHING_EVIL)
 
-                    elseif (missionStatus == 2 or missionStatus == 3) and player:getXPos() > -39.019 then
+                    elseif
+                        (missionStatus == 2 or missionStatus == 3) and
+                        player:getXPos() > -39.019
+                    then
                         return mission:progressEvent(6)
 
                     elseif missionStatus == 3 and player:getXPos() <= -39.019 then
@@ -200,7 +207,10 @@ mission.sections =
                 [6] = function(player, csid, option, npc)
                     -- Only set this status when they have not cancelled the CS.  Event Option is not
                     -- changed when 'No' is selected.
-                    if player:getMissionStatus(mission.areaId) == 2 and player:getXPos() <= -39.019  then
+                    if
+                        player:getMissionStatus(mission.areaId) == 2 and
+                        player:getXPos() <= -39.019
+                    then
                         player:setMissionStatus(mission.areaId, 3)
                     end
                 end,

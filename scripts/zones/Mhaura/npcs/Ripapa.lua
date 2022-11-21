@@ -26,13 +26,24 @@ entity.onTrigger = function(player, npc)
     -- Carbunlce Debacle
     if carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 3 and not player:hasItem(1172) then
+    elseif
+        carbuncleDebacle == QUEST_ACCEPTED and
+        carbuncleDebacleProgress == 3 and
+        not player:hasItem(1172)
+    then
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
-    elseif (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date")) then
+    elseif
+        (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
+        (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))
+    then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
-    elseif trialByLightning == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) and not hasWhisperOfStorms then
+    elseif
+        trialByLightning == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) and
+        not hasWhisperOfStorms
+    then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
     elseif trialByLightning == QUEST_ACCEPTED and not hasWhisperOfStorms then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)

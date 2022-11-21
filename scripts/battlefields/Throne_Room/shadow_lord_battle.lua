@@ -41,9 +41,9 @@ function content:onEventFinishBattlefield(player, csid, option)
     -- magic, auto attack, and abilities (all he does is case Implode by script)
     local mob = SpawnMob(phaseTwoId)
     mob:updateEnmity(player)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 end
 
 content.groups =

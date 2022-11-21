@@ -7,7 +7,7 @@ require('scripts/globals/conquest')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
+    zone:registerTriggerArea(1, 538, -2, -501,  542, 0, -497) -- to The Garden of Ru'hmet
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
@@ -29,14 +29,14 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
-    switch (region:GetRegionID()): caseof
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function (x) player:startEvent(100); end,
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

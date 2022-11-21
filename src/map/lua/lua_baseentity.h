@@ -177,7 +177,7 @@ public:
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
     bool   isInMogHouse();                                              // Check if entity inside a mog house
 
-    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
@@ -672,6 +672,7 @@ public:
     uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity, int8 accBonus = 0);                                                            // Returns the ranged hit rate for an attack.
     uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
     uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
+    uint16 getMobWeaponDmg(uint8 slot = 0);                                                                                                 // gets the Mob's current equipped weapons' DMG rating
     uint16 getWeaponDmgRank();                                                                                                              // gets the current equipped weapons' DMG rating for Rank calc
     uint16 getOffhandDmg();                                                                                                                 // gets the current equipped offhand's DMG rating (used in WS calcs)
     uint16 getOffhandDmgRank();                                                                                                             // gets the current equipped offhand's DMG rating for Rank calc
@@ -776,7 +777,7 @@ public:
 
     void instantiateMob(uint32 groupID);
 
-    bool hasTrait(uint8 traitID);
+    bool hasTrait(uint16 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
 
     void setAggressive(bool aggressive);
@@ -792,10 +793,10 @@ public:
     void  setDamage(uint16 damage);           // sets a mobs weapon damage
     bool  hasSpellList();                     // true if a spell list is assigned to the mob
     void  setSpellList(uint16 spellList);     // sets the spell list value
-    void  SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
-    void  SetMagicCastingEnabled(bool state); // halt/resumes casting magic
-    void  SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void  SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    void  setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void  setMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void  setMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void  setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
     bool  isMagicCastingEnabled();            // return a true/false value if mob is able to auto-cast
     bool  isAutoAttackEnabled();              // returns true if the mob can auto-attack
 

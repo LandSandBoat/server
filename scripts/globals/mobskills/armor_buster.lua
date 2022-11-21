@@ -14,10 +14,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local phase = mob:getLocalVar("battlePhase")
 
     if phase >= 3 then -- only proto-ultima has the var at a value other than 0. Note that the phase values range from 0-4 for the five phases.
-        if mob:getLocalVar("nuclearWaste") == 0 and mob:getLocalVar("citadelBuster") == 0 then
+        if
+            mob:getLocalVar("nuclearWaste") == 0 and
+            mob:getLocalVar("citadelBuster") == 0
+        then
             return 0
         end
     end
+
     return 1
 end
 

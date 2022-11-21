@@ -40,20 +40,19 @@ xi.eraShops.Charging_Chocobo =
 
 xi.eraShops.Zhikkom =
 {
+    16473,  5713, 1, -- Kukri
     16537, 31648, 1, -- Mythril Sword
     16545, 21535, 1, -- Broadsword
     16513, 11845, 1, -- Tuck
     16558, 62560, 1, -- Falchion
-    16473,  5713, 1, -- Kukri
     16536,  7286, 2, -- Iron Sword
     16552,  4163, 2, -- Scimitar
     16466,  2231, 2, -- Knife
     16465,   150, 3, -- Bronze Knife
-    16517,  9406, 3, -- Degens
-    16551,   713, 3, -- Saparas
-    16530,   618, 3, -- Xiphos
-    16565,  1711, 3, -- Spatha
-    16512,  3215, 3, -- Bilbo
+    16405,   106, 3, -- Cat Baghnakhs
+    16535,   246, 3, -- Bronze Sword
+    16517,  9406, 3, -- Degen
+    16551,   713, 3, -- Sapara
 }
 
 xi.eraShops.Peritrage =
@@ -107,15 +106,15 @@ xi.eraShops.Sororo =
     4636,   140, 2, -- Banish
     4646,  1165, 2, -- Banishga
     4661,  2097, 2, -- Blink
-    4608,    61, 3, -- Cure
+    4609,    61, 3, -- Cure
     4615,  1363, 3, -- Curaga
     4622,   180, 3, -- Poisona
     4623,   324, 3, -- Paralyna
     4624,   990, 3, -- Blindna
-    4606,    82, 3, -- Dia
+    4631,    82, 3, -- Dia
     4651,   219, 3, -- Protect
     4656,  1584, 3, -- Shell
-    4721, 29700, 3, -- Repose
+    -- 4721, 29700, 3, -- Repose (WoTG)
     4663,   368, 3, -- Aquaveil
 }
 
@@ -185,7 +184,7 @@ xi.eraShops.Tavourine =
     17060,  2386, 1,    -- Rod
     16640,   284, 2,    -- Bronze Axe
     16465,   147, 2,    -- Bronze Knife
-    17081,   621, 2,    -- Brass Rod
+    17059,    91, 2,    -- Bronze Rod
     16583,  2448, 2,    -- Claymore
     17035,  4363, 2,    -- Mace
     17081,   627, 3,    -- Brass Rod
@@ -707,7 +706,7 @@ local lookupTable =
     {"nation", "Northern_San_dOria", "Tavourine", xi.eraShops.Tavourine, xi.nation.SANDORIA, "TAVOURINE_SHOP_DIALOG", 1},
     {"nation", "Northern_San_dOria", "Pirvidiauce", xi.eraShops.Pirvidiauce, xi.nation.SANDORIA, "PIRVIDIAUCE_SHOP_DIALOG", 1},
     {"nation", "Port_San_dOria", "Coullave", xi.eraShops.Coullave, xi.nation.SANDORIA, "COULLAVE_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Ashene", xi.eraShops.Ashene, xi.nation.SANDORIA, "ASHENE_SHOP_DIALOG", 1},
+    {"nation", "Southern_San_dOria", "Ashene", xi.eraShops.Ashene, xi.nation.SANDORIA, "ASH_THADI_ENE_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Carautia", xi.eraShops.Carautia, xi.nation.SANDORIA, "CARAUTIA_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Ferdoulemiont", xi.eraShops.Ferdoulemiont, xi.nation.SANDORIA, "FERDOULEMIONT_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "BENAIGE_SHOP_DIALOG", 1},

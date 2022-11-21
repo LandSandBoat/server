@@ -1,4 +1,7 @@
+require("scripts/globals/items")
 require("scripts/globals/msg")
+require("scripts/globals/pathfind")
+require("scripts/globals/status")
 
 xi = xi or {}
 
@@ -601,7 +604,11 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
     -- Ensure that the traded item(s) are not worn out
     local contents = xi.battlefield.contentsByZone[zoneId]
     for _, content in ipairs(contents) do
-        if #content.requiredItems > 0 and content.requiredItems.wornMessage and npcUtil.tradeHas(trade, content.tradeItems) then
+        if
+            #content.requiredItems > 0 and
+            content.requiredItems.wornMessage and
+            npcUtil.tradeHas(trade, content.tradeItems)
+        then
             local itemId = content.requiredItems[1]
             -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
             local totalUses = xi.battlefield.itemUses[itemId] or 1
@@ -882,13 +889,19 @@ end
 
 function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
-    if status == xi.battlefield.status.LOCKED and battlefield:getLocalVar("statusRemoval") == 0 then
+    if
+        status == xi.battlefield.status.LOCKED and
+        battlefield:getLocalVar("statusRemoval") == 0
+    then
         battlefield:setLocalVar("statusRemoval", 1)
 
         for _, player in pairs(players) do
             local alliance = player:getAlliance()
             for _, member in pairs(alliance) do
-                if member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+                if
+                    member:hasStatusEffect(xi.effect.BATTLEFIELD) and
+                    not member:getBattlefield()
+                then
                     member:delStatusEffect(xi.effect.BATTLEFIELD)
                 end
             end
@@ -900,7 +913,10 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     player:setLocalVar("battlefieldID", battlefield:getID())
 
     local initiatorId, _ = battlefield:getInitiator()
-    if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
+    if
+        #self.requiredKeyItems > 0 and
+        (not self.requiredKeyItems.onlyInitiator or player:getID() == initiatorId)
+    then
 
         local items = {}
         for _, item in ipairs(self.requiredKeyItems) do
@@ -928,7 +944,11 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
         end
     end
 
-    if player:getID() == initiatorId and self.requiredItems.wearMessage and player:hasItem(self.requiredItems[1]) then
+    if
+        player:getID() == initiatorId and
+        self.requiredItems.wearMessage and
+        player:hasItem(self.requiredItems[1])
+    then
         local itemId = self.requiredItems[1]
         local uses = player:incrementItemWear(itemId)
         -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
@@ -1120,7 +1140,10 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
     end
 
     for _, content in ipairs(contents) do
-        if content:checkRequirements(player, npc, true, trade) and not player:battlefieldAtCapacity(content.battlefieldId) then
+        if
+            content:checkRequirements(player, npc, true, trade) and
+            not player:battlefieldAtCapacity(content.battlefieldId)
+        then
             result = utils.mask.setBit(result, content.index, true)
         end
     end
@@ -1216,6 +1239,51 @@ function BattlefieldMission:onEventFinishWin(player, csid, option)
     end
 end
 
+BattlefieldQuest = setmetatable({ }, { __index = Battlefield })
+BattlefieldQuest.__index = BattlefieldQuest
+BattlefieldQuest.__eq = function(m1, m2)
+    return m1.name == m2.name
+end
+
+BattlefieldQuest.isQuest = true
+
+-- Creates a new Limbus Battlefield interaction
+-- Data takes the additional following keys:
+--  - questArea: The quest area this battlefield is associated with (optional)
+--  - quest: The quest this battlefield is associated with (optional)
+--  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to false. (optional)
+function BattlefieldQuest:new(data)
+    local obj = Battlefield:new(data)
+    setmetatable(obj, self)
+    obj.questArea = data.questArea
+    obj.quest = data.quest
+    obj.canLoseExp = data.canLoseExp or false
+    return obj
+end
+
+function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
+    if not Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) then
+        return false
+    end
+
+    return player:getQuestStatus(self.questArea, self.quest) >= QUEST_ACCEPTED
+end
+
+function BattlefieldQuest:checkSkipCutscene(player)
+    return player:getQuestStatus(self.questArea, self.quest) == QUEST_COMPLETED
+end
+
+function BattlefieldQuest:onBattlefieldWin(player, battlefield)
+    local status = player:getQuestStatus(self.questArea, self.quest)
+    if status == QUEST_ACCEPTED then
+        player:setLocalVar("battlefieldWin", battlefield:getID())
+    end
+
+    local _, clearTime, partySize = battlefield:getRecord()
+    local canSkipCS = status ~= QUEST_ACCEPTED and 1 or 0
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+end
+
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local canLeave      = false
@@ -1249,13 +1317,19 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     end
 
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
-    if status == xi.battlefield.status.LOCKED and battlefield:getLocalVar("statusRemoval") == 0 then
+    if
+        status == xi.battlefield.status.LOCKED and
+        battlefield:getLocalVar("statusRemoval") == 0
+    then
         battlefield:setLocalVar("statusRemoval", 1)
 
         for _, player in pairs(players) do
             local alliance = player:getAlliance()
             for _, member in pairs(alliance) do
-                if member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+                if
+                    member:hasStatusEffect(xi.effect.BATTLEFIELD) and
+                    not member:getBattlefield()
+                then
                     member:delStatusEffect(xi.effect.BATTLEFIELD)
                 end
             end
@@ -1377,7 +1451,10 @@ end
 
 function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     players = players or battlefield:getPlayers()
-    if battlefield:getStatus() == xi.battlefield.status.WON and battlefield:getLocalVar("lootSeen") == 0 then
+    if
+        battlefield:getStatus() == xi.battlefield.status.WON and
+        battlefield:getLocalVar("lootSeen") == 0
+    then
         if npc then
             npc:entityAnimationPacket("open")
         end

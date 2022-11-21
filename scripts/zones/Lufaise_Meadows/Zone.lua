@@ -13,7 +13,7 @@ require('scripts/globals/helm')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 179, -26, 327, 219, -18, 347)
+    zone:registerTriggerArea(1, 179, -26, 327, 219, -18, 347)
 
     SetServerVariable("realPadfoot", math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do
@@ -46,10 +46,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

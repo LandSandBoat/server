@@ -12,7 +12,11 @@ local ID = require("scripts/zones/Rabao/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(1546, 1) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN then
+    if
+        trade:hasItemQty(1546, 1) and
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and
+        player:getMainJob() == xi.job.SMN
+    then
         player:startEvent(109, 0, 1546, 3, 20)
     end
 end
@@ -20,7 +24,13 @@ end
 entity.onTrigger = function(player, npc)
     local trialSizeWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
 
-    if player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and trialSizeWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2 then --Requires player to be Summoner at least lvl 20
+    if
+        player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN and
+        trialSizeWind == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2
+    then
+        --Requires player to be Summoner at least lvl 20
         player:startEvent(108, 0, 1546, 3, 20)     --mini tuning fork, zone, level
     elseif trialSizeWind == QUEST_ACCEPTED then
         local windFork = player:hasItem(1546)

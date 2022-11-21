@@ -19,7 +19,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(102)
     elseif player:getCharVar("WarLynxKilled") == 1 then
         player:startEvent(103)
-    elseif ttsStat == 2 and not GetMobByID(ID.mob.TIGRESS_STRIKES_WAR_LYNX):isSpawned() then
+    elseif
+        ttsStat == 2 and
+        not GetMobByID(ID.mob.TIGRESS_STRIKES_WAR_LYNX):isSpawned()
+    then
         SpawnMob(ID.mob.TIGRESS_STRIKES_WAR_LYNX):updateClaim(player)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

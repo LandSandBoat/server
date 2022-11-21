@@ -87,6 +87,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         },
 
         GAMBILOX_WANDERLING = 17211848,
+        BEDROCK_BARRY       = 17211666,
 
         VOIDWALKER =
         {
