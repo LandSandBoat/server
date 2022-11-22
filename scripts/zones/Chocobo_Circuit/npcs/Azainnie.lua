@@ -16,9 +16,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinsih = function(player, csid, option)
-    if csid == 328 and option == 1
+if
+        csid == 328 and
+        option == 1
     then
-        player:setpos(-330.2306,-5.000,-413.3920) -- exits to illsoire
+        player:setPos(-330.2306, -5.000, -413.3920) -- exits to illsoire
     end
 end
 

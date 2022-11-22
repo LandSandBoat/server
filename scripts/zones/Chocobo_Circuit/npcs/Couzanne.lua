@@ -16,9 +16,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinsih = function(player, csid, option)
-    if csid == 332 and option == 1
+if
+        csid == 332 and
+        option == 1
     then
-        player:setpos(-387.2634,-5.000,-490.0573) -- exits to Biorie
+        player:setPos(-387.2634, -5.000, -490.0573) -- exits to Biorie
     end
 end
 

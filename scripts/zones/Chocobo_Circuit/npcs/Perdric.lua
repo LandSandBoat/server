@@ -16,9 +16,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinsih = function(player, csid, option)
-    if csid == 330 and option == 1
+if
+        csid == 330 and
+        option == 1
     then
-        player:setpos(-387.1529,-5.000,-469.9266) -- exits to mulitrand
+        player:setPos(-387.1529, -5.000, -469.9266) -- exits to mulitrand
     end
 end
 
