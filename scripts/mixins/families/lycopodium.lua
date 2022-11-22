@@ -23,6 +23,7 @@ g_mixins.families.lycopodium = function(mob)
             if not lycopodium:isAlly() then
                 lycopodium:setLocalVar("[lycopodium]damaged", 0)
             end
+
             lycopodium:setAutoAttackEnabled(false)
             lycopodium:setMobAbilityEnabled(false)
         end

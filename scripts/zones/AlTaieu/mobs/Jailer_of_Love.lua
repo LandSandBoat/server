@@ -194,6 +194,7 @@ entity.onMobFight = function(mob, target)
                 end
             end)
         end
+
         mob:setLocalVar("SPAWNS", spawns + 1)
     end
 end
