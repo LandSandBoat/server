@@ -20,7 +20,7 @@ entity.onEventFinsih = function(player, csid, option)
         csid == 330 and
         option == 1
     then
-        player:setpos(-387.1529, -5.000, -469.9266) -- exits to mulitrand
+        player:setPos(-387.1529, -5.000, -469.9266) -- exits to mulitrand
     end
 end
 

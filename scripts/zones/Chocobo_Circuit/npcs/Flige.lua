@@ -20,7 +20,7 @@ entity.onEventFinsih = function(player, csid, option)
         csid == 329 and
         option == 1
     then
-        player:setpos(-252.5519, -5.000, -470.0900) -- exits to foulnepard
+        player:setPos(-252.5519, -5.000, -470.0900) -- exits to foulnepard
     end
 end
 
