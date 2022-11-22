@@ -466,7 +466,7 @@ REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1450,333); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1453,334); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "1211"; -- Goublefaupe
 REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1821,300); -- Attestation of Invulnerability
-REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,11211,300); -- Attestation of Righteousness
+REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1559,300); -- Attestation of Righteousness
 REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1558,300); -- Attestation of Glory
 REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1561,300); -- Attestation of Force
 REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1456,333); -- Hundred Byne

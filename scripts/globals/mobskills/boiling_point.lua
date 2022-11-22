@@ -21,3 +21,5 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 end
 
 return mobskillObject
+
+-- MDB -50, 2 minute base duration

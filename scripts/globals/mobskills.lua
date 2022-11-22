@@ -52,6 +52,7 @@ xi.mobskills.physicalTpBonus =
     ATK_VARIES  = 1,
     DMG_VARIES  = 2,
     CRIT_VARIES = 3,
+    DMG_FLAT    = 4,
 }
 
 xi.mobskills.magicalTpBonus =
@@ -60,7 +61,8 @@ xi.mobskills.magicalTpBonus =
     MACC_BONUS  = 1,
     MAB_BONUS   = 2,
     DMG_BONUS   = 3,
-    RANGED      = 4,
+    PDIF_BONUS  = 4,
+    RANGED      = 5,
 }
 -- Temp Fix
 -- local function getDexCritRate(source, target)
@@ -128,9 +130,9 @@ local function getBarSpellDefBonus(mob, target, spellElement)
         end
     end
 end
-xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
+xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, ftp100, ftp200, ftp300)
     -- this will eventually contian ranged attack code
-    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
+    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED, ftp100, ftp200, ftp300)
 end
 
 -- PHYSICAL MOVE FUNCTION
@@ -146,37 +148,37 @@ end
 -- if xi.mobskills.physicalTpBonus.ACC_VARIES -> three values are acc %s (1.0 is 100% acc, 0.8 is 80% acc, 1.2 is 120% acc)
 -- if xi.mobskills.physicalTpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
 -- if xi.mobskills.physicalTpBonus.DMG_VARIES -> three values are
--- Added wSCdex and critperc to function. This allows us to set crit rates for mobskills that are allowed to crit or have a set percentage
+-- Added critperc to function. This allows us to set crit rates for mobskills that are allowed to crit or have a set percentage
 -- This needs both tpeffect = CRIT_VARIES and critperc value
--- Note: wSC for mobs is ONLY DEX
 -- TODO: Remove mtp entirely for mobs. This should not be using mtp at all. dmgmob is the "ftp" of the mob for all TP ranges
 -- All of this should be re-writen like player weapons skills with params.
 -- THIS IS ONLY A WORKAROUND
 
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, wSCdex, critperc, attackType)
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, critperc)
     local returninfo = { }
     local fStr = 0
-    local levelDam = mob:getMainLvl() + 2 -- Base damage of mob
     local tp = mob:getTP()
 
-    if wSCdex == nil then
-        wSCdex = 0
-    end
-    local wSCmod = mob:getStat(xi.mod.DEX) * wSCdex
+    -- Leaving this in here in case Jimmayus info says otherwise
+    -- if wSCdex == nil then
+    --     wSCdex = 0
+    -- end
+    -- local wSCmod = mob:getStat(xi.mod.DEX) * wSCdex
 
     --get dstr (bias to monsters, so no fSTR)
-    if tpeffect == xi.mobskills.magicalTpBonus.RANGED or attackType == xi.attackType.RANGED then
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
         fStr = xi.weaponskills.fSTR2(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     else
         fStr = xi.weaponskills.fSTR(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     end
 
-    --apply wSC
     local base = 0
-    if attackType == xi.attackType.RANGED then
-        base = math.floor(mob:getMobWeaponDmg(xi.slot.RANGED) + fStr + wSCmod)
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        base = math.floor(mob:getMobWeaponDmg(xi.slot.RANGED) + fStr)
+    elseif tpeffect == xi.mobskills.physicalTpBonus.DMG_FLAT then
+        base = 100
     else
-        base = math.floor(mob:getMobWeaponDmg(xi.slot.MAIN) + fStr + wSCmod)
+        base = math.floor(mob:getMobWeaponDmg(xi.slot.MAIN) + fStr)
     end
 
     if base < 1 then
@@ -211,10 +213,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         mtp300 = 1.0
     end
 
-    if wSCdex == nil then
-        wSCdex = 0
-    end
-
     local ftpMult = xi.mobskills.ftP(tp, mtp000, mtp150, mtp300)
 
     hitdamage = hitdamage * ftpMult
@@ -243,7 +241,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     chance = xi.weaponskills.handleParry(mob, target, chance)
 
     -- first hit has a higher chance to land
-    local firstHitChance = hitrate + 0.5
+    local firstHitChance = hitrate
 
     firstHitChance = utils.clamp(firstHitChance, 0.25, 0.95)
 
@@ -367,6 +365,12 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     -- resistence is added last
     local finaldmg = damage * mab * dmgmod * ftpMult
+
+    if tpeffect == xi.mobskills.magicalTpBonus.PDIF_BONUS then
+        local mPdif = mob:getPDIF(target, false, 1, xi.slot.MAIN, 0, false)
+        finaldmg = damage * ftpMult * mab * mPdif
+    end
+
     magicDefense = xi.magic.getElementalDamageReduction(target, element)
 
     finaldmg = finaldmg * magicDefense
@@ -790,7 +794,7 @@ xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
 end
 
 -- Adds a status effect to a target
-xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subEffect, subPower)
+xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subEffect, subPower, noResist)
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         return xi.msg.basic.NONE
     end
@@ -803,6 +807,10 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
         local element = mob:getStatusEffectElement(typeEffect)
 
         local resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
+
+        if noResist ~= nil then
+            resist = 1
+        end
 
         if resist >= 0.25 then
             local totalDuration = utils.clamp(duration * resist, 1)

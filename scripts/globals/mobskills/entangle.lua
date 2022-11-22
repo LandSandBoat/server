@@ -22,8 +22,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:getName() == "Cernunnos" then
         local numhits = 3
         local accmod = 1
-        local dmgmod = 2.0
-        local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+        local dmgmod = 1.0
+        local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, 1, 1.25, 1.5)
         local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
         xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg)
@@ -37,7 +37,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
         local numhits = 3
         local accmod = 1
-        local dmgmod = 2.0
+        local dmgmod = 1.0
         local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
         local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
