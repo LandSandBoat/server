@@ -18,6 +18,7 @@ itemObject.onItemCheck = function(target)
     elseif not target:hasKeyItem(xi.ki.CHOCOBO_LICENSE) or target:hasEnmity() then
         return xi.msg.basic.ITEM_UNABLE_TO_USE -- Todo: Verify/correct message, order of message priority.
     end
+
     return 0
 end
 

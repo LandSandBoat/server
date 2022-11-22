@@ -71,9 +71,11 @@ entity.onTrigger = function(player, npc)
             if loafersQuestProgress == 4 then
                 counter = counter + 1
             end
+
             if pantsQuestProgress == 4 then
                 counter = counter + 1
             end
+
             if gownQuestProgress == 4 then
                 counter = counter + 1
             end

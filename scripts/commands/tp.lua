@@ -47,6 +47,7 @@ function onTrigger(player, tp, target)
         if pet and pet:isAlive() then
             pet:setTP(tp)
         end
+
         if targ:getID() ~= player:getID() then
             player:PrintToPlayer(string.format("Set %s's TP to %i.", targ:getName(), targ:getTP()))
         end

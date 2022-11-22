@@ -391,5 +391,6 @@ xi.rhapsodies.charactersAvailable = function(player)
             return false
         end
     end
+
     return true
 end

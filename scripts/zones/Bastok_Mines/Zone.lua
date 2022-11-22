@@ -25,6 +25,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1
         end
+
         player:setPos(-45, -0, 26, 213)
         player:setHomePoint()
     end

@@ -15,6 +15,7 @@ g_mixins.families.antlion_ambush_noaggro = function(antlionAmbushNoaggroMob)
         mob:setUntargetable(true)
         mob:setAnimationSub(0)
     end)
+
     antlionAmbushNoaggroMob:addListener("ENGAGE", "ANTLION_AMBUSH_NOAGGRO_ENGAGE", function(mob, target)
         mob:useMobAbility(278) -- Pit Ambush
     end)

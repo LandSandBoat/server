@@ -34,6 +34,7 @@ function Sequence:new(unparsedSequence)
             if id == nil then
                 id = entry.text
             end
+
             if entry.face then
                 newLast:face(entry.face)
             end
@@ -50,6 +51,7 @@ function Sequence:new(unparsedSequence)
             last = newLast
         end
     end
+
     last.__nextAction = { type = Action.Type.Release }
 
     obj.id = id
@@ -96,6 +98,7 @@ function Sequence:addNext(nextAction)
     if not self.id and nextAction.id then
         self.id = nextAction.id
     end
+
     if self.insertAt == nil then
         self.insertAt = nextAction
         self.insertAt.__nextAction = self.first
@@ -105,6 +108,7 @@ function Sequence:addNext(nextAction)
         self.insertAt.__nextAction = nextAction
         self.insertAt = nextAction
     end
+
     return self
 end
 

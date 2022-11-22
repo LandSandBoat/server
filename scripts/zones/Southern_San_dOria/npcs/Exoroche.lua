@@ -54,6 +54,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("UnderOathCS", 5)
     end
 end
+
 ------- used in expansions
 --    player:startEvent(946)  -- you want to hear of my father go talk to albieche
 --    player:startEvent(947) -- trainees spectacles

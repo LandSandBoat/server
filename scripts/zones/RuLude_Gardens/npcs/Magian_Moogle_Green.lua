@@ -61,6 +61,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIAN_LEARNERS_LOG)
             player:addKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
         end
+
         player:setCharVar("MetGreenMagianMog", 1)
     end
 end

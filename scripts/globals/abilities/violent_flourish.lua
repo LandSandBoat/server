@@ -67,6 +67,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     if isSneakValid and not player:isBehind(target) then
         isSneakValid = false
     end
+
     local pdif = generatePdif (cratio[1], cratio[2], true)
     local hitrate = getHitRate(player, target, true)
 

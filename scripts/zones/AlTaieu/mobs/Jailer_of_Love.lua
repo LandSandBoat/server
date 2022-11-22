@@ -76,6 +76,7 @@ entity.onMobFight = function(mob, target)
                 SpawnMob(phuaboDn[i]):updateEnmity(target)
             end
         end
+
         mob:setLocalVar("SPAWNS", spawns + 1)
     end
 end

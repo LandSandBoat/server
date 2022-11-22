@@ -14,6 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getMainLvl() < 70 then
         return 1
     end
+
     return 0
 end
 

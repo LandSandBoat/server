@@ -21,6 +21,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     then
         return 0, 0
     end
+
     return 216, 0 -- You do not have an appropriate ranged weapon equipped.
 end
 

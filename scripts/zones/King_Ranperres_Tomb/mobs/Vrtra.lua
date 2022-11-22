@@ -45,6 +45,7 @@ entity.onMobFight = function(mob, target)
                 break
             end
         end
+
         mob:setLocalVar("spawnTime", fifteenBlock + 4)
     end
 end

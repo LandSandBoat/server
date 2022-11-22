@@ -11,6 +11,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.OMERTA) then
         return 0
     end
+
     return -1
 end
 

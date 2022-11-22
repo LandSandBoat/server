@@ -37,6 +37,7 @@ xi.mix.ladybug.config = function(mob, params)
     if params.nightTime and type(params.nightTime) == "number" then
         mob:setLocalVar("[ladybug]nightTime", params.nightTime)
     end
+
     if params.morning and type(params.morning) == "number" then
         mob:setLocalVar("[ladybug]morning", params.morning)
     end

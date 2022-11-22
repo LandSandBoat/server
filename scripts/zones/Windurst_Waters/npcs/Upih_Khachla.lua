@@ -44,11 +44,13 @@ entity.onTrigger = function(player, npc)
         table.insert(stock, 3643)
         table.insert(stock, 3)
     end
+
     if rank == 3 then
         table.insert(stock, 1023) --Living Key
         table.insert(stock, 5520)
         table.insert(stock, 3)
     end
+
     xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end

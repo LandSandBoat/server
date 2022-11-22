@@ -60,9 +60,17 @@ function onTrigger(player, logId, questId, target)
     local status = targ:getQuestStatus(logId, questId)
     switch (status): caseof
     {
-        [0] = function (x) status = "AVAILABLE" end,
-        [1] = function (x) status = "ACCEPTED" end,
-        [2] = function (x) status = "COMPLETED" end,
+        [0] = function()
+            status = "AVAILABLE"
+        end,
+
+        [1] = function()
+            status = "ACCEPTED"
+        end,
+
+        [2] = function()
+            status = "COMPLETED"
+        end,
     }
 
     -- show quest status

@@ -15,6 +15,7 @@ function salvageUtil.onCellItemCheck(target, effect, value)
             return 0
         end
     end
+
     return 55
 end
 
@@ -44,5 +45,6 @@ function salvageUtil.onCellItemUse(target, effect, value, offset)
             pet:addStatusEffectEx(effect, effect, newpower, 0, duration)
         end
     end
+
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + offset)
 end

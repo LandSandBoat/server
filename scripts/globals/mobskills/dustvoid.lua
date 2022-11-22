@@ -24,6 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     for i = xi.slot.MAIN, xi.slot.BACK do
         target:unequipItem(i)
     end
+
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
     return dmg
 end

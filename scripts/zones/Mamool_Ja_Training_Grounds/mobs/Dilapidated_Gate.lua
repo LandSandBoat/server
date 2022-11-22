@@ -18,6 +18,7 @@ entity.onMobSpawn = function(mob)
         elseif skillId == 1736 or skillId == 1925 then --Axe Throw or Stave Toss
             target:setLocalVar("hits", target:getLocalVar("hits") + 4)
         end
+
         if target:getLocalVar("hits") >= 4 then
             target:setHP(0)
         end

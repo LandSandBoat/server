@@ -42,6 +42,7 @@ function onTrigger(player, npcId, noDepop)
             targ:setStatus(xi.status.DISAPPEAR)
             player:PrintToPlayer("Despawned the NPC because of an error.")
         end
+
         player:PrintToPlayer("NPC could not be moved to current pos - you are probably in the wrong zone.")
     end
 end

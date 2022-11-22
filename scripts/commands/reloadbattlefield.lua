@@ -49,6 +49,7 @@ function onTrigger(player, battlefieldName)
             InteractionGlobal.lookup:addContainer(container)
             player:PrintToPlayer(string.format("Battlefield '%s' at '%s' has been reloaded.", battlefieldName, filename))
         end
+
         return
     end
 

@@ -373,6 +373,7 @@ xi.instance.onEventUpdate = function(player, csid, option)
                     player:instanceEntry(npc, 1)
                     return false
                 end
+
                 -- Check everyone is in range
                 if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
                     player:messageText(npc, ID.text.MEMBER_TOO_FAR, false)
@@ -416,6 +417,7 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
             if v:getID() ~= player:getID() then
                 v:startEvent(unpack(lookupEntry[4]))
             end
+
             v:setInstance(instance)
             local npc = player:getEventTarget()
             if npc ~= nil then
@@ -440,9 +442,11 @@ xi.instance.onEventFinish = function(player, csid, option)
             for _, v in ipairs(player:getParty()) do
                 v:setPos(0, 0, 0, 0, instance:getZone():getID())
             end
+
             return true
         end
     end
+
     return false
 end
 
@@ -470,6 +474,7 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
                 player:messageSpecial(text.TIME_REMAINING_SECONDS, message)
             end
         end
+
         instance:setLastTimeUpdate(message)
     end
 end
@@ -498,10 +503,12 @@ xi.instance.updateInstanceTime = function(instance, elapsed, text)
                 break
             end
         end
+
         if wipe then
             for i, player in pairs(players) do
                 player:messageSpecial(text.PARTY_FALLEN, 3)
             end
+
             instance:setWipeTime(elapsed)
         end
     else
@@ -512,5 +519,6 @@ xi.instance.updateInstanceTime = function(instance, elapsed, text)
             end
         end
     end
+
     setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit, text)
 end

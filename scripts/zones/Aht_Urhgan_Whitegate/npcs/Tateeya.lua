@@ -24,6 +24,7 @@ entity.onTrade = function(player, npc, trade)
                 else
                     player:startEvent(652) --already unlocked event
                 end
+
                 break
             end
         end

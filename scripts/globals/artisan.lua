@@ -30,12 +30,16 @@ xi.artisan.moogleOnTrigger = function(player, npc)
     local menuMask = 0
     local sackSize = player:getContainerSize(xi.inv.MOGSACK)
     local mogVisited = (sackSize > 0 or player:getCharVar("[artisan]visited") > 0) and 1 or 0
-    if mogVisited == 0 then player:setCharVar("[artisan]visited", 1) end
+    if mogVisited == 0 then
+        player:setCharVar("[artisan]visited", 1)
+    end
+
     if sackSize > 0 then
         sackSize = sackSize + 1
     else
         menuMask = menuFlags.expand + menuFlags.aexpand
     end
+
     player:startEvent(csid, 0, 0, 0, sackSize, 0, 0, menuMask, mogVisited)
 end
 
@@ -63,13 +67,19 @@ xi.artisan.moogleOnUpdate = function(player, csid, option)
     elseif option == 3 then -- Client requests sack + scroll status
         local scrollAvail = player:getCharVar("[artisan]nextScroll") < getMidnight() and 1 or 0
         local sackSize = player:getContainerSize(xi.inv.MOGSACK)
-        if sackSize > 0 then sackSize = sackSize + 1 end
+        if sackSize > 0 then
+            sackSize = sackSize + 1
+        end
+
         player:updateEvent(0, 0, 0, sackSize, 0, 0, 0, scrollAvail)
 
     elseif option == 4 then -- Main dialogue
         local scrollAvail = player:getCharVar("[artisan]nextScroll") < getMidnight() and 1 or 0
         local sackSize = player:getContainerSize(xi.inv.MOGSACK)
-        if sackSize > 0 then sackSize = sackSize + 1 end
+        if sackSize > 0 then
+            sackSize = sackSize + 1
+        end
+
         player:updateEvent(0, 0, player:getGil(), sackSize, 0, 0, 0, scrollAvail)
     end
 end

@@ -84,6 +84,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
+
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         player:setCharVar("TrialByLightning_date", 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
@@ -116,6 +117,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
+
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar("TrialByLightning_date", getMidnight())

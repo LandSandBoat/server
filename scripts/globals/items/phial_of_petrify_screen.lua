@@ -11,6 +11,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.NEGATE_PETRIFY) then
         return 56
     end
+
     return 0
 end
 

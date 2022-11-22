@@ -18,6 +18,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.DEDICATION) then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return result
 end
 

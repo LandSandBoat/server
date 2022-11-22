@@ -78,9 +78,11 @@ local function addHandlers(secondLevel, lookupSecondLevel, checkFunc, container)
     if checkFunc then
         baseHandlerTable.check = checkFunc
     end
+
     if container then
         baseHandlerTable.container = container
     end
+
     local mt = { __index = baseHandlerTable }
 
     -- Loop through the given second level table, and add them to lookup as needed
@@ -152,6 +154,7 @@ function InteractionLookup:removeDefaultHandlers(zoneId)
     if self.data[zoneId] then
         removeHandlersMatching(self.data[zoneId], self.data[zoneId], function (entry) return entry.check == nil and entry.container == nil end)
     end
+
     self.zoneDefaults[zoneId] = false
 end
 
@@ -244,9 +247,10 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
     end
 
     local actions = { }
-    local varCache = interactionUtil.makeTableCache(function (varname)
+    local varCache = interactionUtil.makeTableCache(function(varname)
         return player:getVar(varname)
     end)
+
     local containerVarCache = interactionUtil.makeContainerVarCache(player)
     for _, entry in ipairs(secondLevelTable[secondLevelKey][thirdLevelKey]) do
         local checkArgs = { }
@@ -254,6 +258,7 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
             if entry.container.getCheckArgs then
                 checkArgs = entry.container:getCheckArgs(player)
             end
+
             checkArgs[#checkArgs + 1] = containerVarCache[entry.container]
             checkArgs[#checkArgs + 1] = varCache
         end
@@ -337,6 +342,7 @@ local function performNextAction(player, containerId, handlerId, actions, target
                 end
             end
         end
+
         if nextIndex > actionCount then
             nextIndex = 1
         end
@@ -356,6 +362,7 @@ local function performNextAction(player, containerId, handlerId, actions, target
     if didPerformAction and actionToPerform.secondaryPriority then
         player:setLocalVar(actionUtil.getActionVarName(containerId, handlerId, actionToPerform.id), actionToPerform.secondaryPriority)
     end
+
     return didPerformAction and returnValue
 end
 

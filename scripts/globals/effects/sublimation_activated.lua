@@ -17,6 +17,7 @@ effectObject.onEffectTick = function(target, effect)
     else
         level = target:getSubLvl()
     end
+
     local basemp = math.floor((level - 15) / 10)
     local bonus = target:getMod(xi.mod.SUBLIMATION_BONUS)
 

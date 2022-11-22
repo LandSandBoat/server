@@ -136,6 +136,7 @@ local function addLoot(t1, t2)
     for item, weight in pairs(t1) do
         newTable[item] = weight
     end
+
     -- Add in our new item
     newTable[newItem] = t2[newItem]
 
