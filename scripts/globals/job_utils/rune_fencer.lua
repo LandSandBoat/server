@@ -390,6 +390,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
         else
             ability:setMsg(xi.msg.basic.VALIANCE_GAIN_PARTY)
         end
+
         return
     end
 
