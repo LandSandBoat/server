@@ -282,15 +282,18 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
         if caster:hasStatusEffect(xi.effect.MANAFONT) then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MANAFONT_EFFECT) * 3
         end
+
         -- BLM Job Point: With Manawell mDMG +1
         if caster:hasStatusEffect(xi.effect.MANAWELL) then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MANAWELL_EFFECT)
             caster:delStatusEffectSilent(xi.effect.MANAWELL)
         end
+
         -- BLM Job Point: Magic Damage Bonus
         if caster:getMainJob() == xi.job.BLM then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MAGIC_DMG_BONUS)
         end
+
         -- NIN Job Point: Elemental Ninjutsu Effect
         if skillType == xi.skill.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2
@@ -975,6 +978,7 @@ xi.spells.damage.calculateNinSkillBonus = function(caster, target, spell, spellI
         else                         -- San nuke spell, also has ids 1 more than their corresponding Ni spell
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275) / 2)
         end
+
         ninSkillBonus = utils.clamp(ninSkillBonus / 100, 1, 2) -- bonus caps at +100%, and does not go negative
     end
 
@@ -1012,6 +1016,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, 
     if math.random(1, 100) < (target:getMod(xi.magic.absorbMod[spellElement]) + 1) then
         nukeAbsorbOrNullify = -1
     end
+
     -- Calculate chance for spell nullification.
     local nullifyChance = math.random(1, 100)
     if

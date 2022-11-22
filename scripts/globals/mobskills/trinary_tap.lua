@@ -20,6 +20,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     then
         return 0
     end
+
     return 1
 end
 
@@ -35,6 +36,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         if effect2 ~= 0 then
             count = count + 1
         end
+
         if effect3 ~= 0 then
             count = count + 1
         end
@@ -50,7 +52,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
         return dmg
     end
-
 end
 
 return mobskillObject

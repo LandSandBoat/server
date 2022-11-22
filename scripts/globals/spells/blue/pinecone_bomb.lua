@@ -19,7 +19,10 @@ require("scripts/globals/magic")
 local spellObject = {}
 
 local function inverseBellRand(min, max, weight)
-    if not weight then weight = 0.5 end
+    if not weight then
+        weight = 0.5
+    end
+
     local mid = math.floor((max - min) / 2)
     local rand = math.floor(mid * math.pow(math.random(), weight))
     if math.random() < 0.5 then
