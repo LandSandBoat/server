@@ -41,8 +41,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if damage > 0 and not target:hasStatusEffect(xi.effect.MAGIC_DEF_DOWN) then
         target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 0, 120)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

@@ -38,8 +38,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
 
-    end
+    return tpHits, extraHits, criticalHit, damage
+end
 
 return weaponskillObject
