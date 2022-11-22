@@ -2156,7 +2156,7 @@ xi.merit =
     ANCIENT_CIRCLE_RECAST       = meritCategory.DRG_1 + 0x00,
     JUMP_RECAST                 = meritCategory.DRG_1 + 0x02,
     HIGH_JUMP_RECAST            = meritCategory.DRG_1 + 0x04,
-    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x05,
+    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x06,
     SPIRIT_LINK_RECAST          = meritCategory.DRG_1 + 0x08,
 
     -- SMN 1
