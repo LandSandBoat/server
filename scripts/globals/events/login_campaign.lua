@@ -62,6 +62,7 @@ xi.events.loginCampaign.onGameIn = function(player)
         elseif loginPoints ~= 0 then
             player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, loginPoints)
         end
+
         player:setCharVar("LoginCampaignMonth", loginCampaignMonth)
         player:setCharVar("LoginCampaignYear", loginCampaignYear)
         loginCount = 0
@@ -87,6 +88,7 @@ xi.events.loginCampaign.onGameIn = function(player)
             player:addCurrency("login_points", 100)
             player:messageSpecial(ID.text.LOGIN_NUMBER, 0, loginCount, 100, player:getCurrency("login_points"))
         end
+
         player:setCharVar("LoginCampaignLoginNumber", loginCount)
     end
 end

@@ -35,6 +35,7 @@ effectObject.onEffectLose = function(target, effect)
     then
         target:messageSpecial(ID.text.MARK_OF_SEED_HAS_VANISHED)
     end
+
     target:setCharVar("SEED_AFTERGLOW_TIMER", 0)
     target:setCharVar("SEED_AFTERGLOW_MASK", 0)
     target:setCharVar("SEED_AFTERGLOW_INTENSITY", 0)

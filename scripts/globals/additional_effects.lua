@@ -145,6 +145,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
+
     --------------------------------------
 
     if addType == procType.DAMAGE then

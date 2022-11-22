@@ -92,6 +92,7 @@ local function hasOutpost(player, region)
             hasOP = region <= xi.region.ELSHIMOUPLANDS
         end
     end
+
     return hasOP
 end
 
@@ -133,6 +134,7 @@ local function getAllowedTeleports(player, nation)
     elseif xi.settings.main.UNLOCK_OUTPOST_WARPS == 1 then
         return 0x3FE0001F -- Allow all outposts except for Tulia and Tavnazia
     end
+
     for region = xi.region.RONFAURE, xi.region.TAVNAZIANARCH do
         if not xi.conquest.canTeleportToOutpost(player, region) then
             allowedTeleports = bit.bor(allowedTeleports, bit.lshift(1, region + 5)) -- Region bits start at 5th bit
@@ -196,6 +198,7 @@ local function areSuppliesRotten(player, npc, guardType)
         else
             player:showText(npc, text.CONQUEST - 1) -- "Hmm... These supplies you have brought us are too old to be of any use."
         end
+
         local ki = outposts[region].ki
 
         player:delKeyItem(ki)
@@ -906,6 +909,7 @@ local function getStock(player, guardNation, option)
             r = overseerInvNation[guardNation][option]
         end
     end
+
     return r
 end
 
@@ -976,6 +980,7 @@ xi.conquest.canTeleportToOutpost = function(player, region)
     then
         return false
     end
+
     return true
 end
 
@@ -1059,6 +1064,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                     player:addRankPoints(addPoints)
                     player:showText(npc, mOffset + 45) -- "We've awarded you rank points for the crystals you've donated."
                 end
+
                 player:confirmTrade()
                 tradeConfirmed = true
             end
@@ -1148,6 +1154,7 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     if guardNation == xi.nation.OTHER then
         guardNation = pNation
     end
+
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
@@ -1342,6 +1349,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
                     return
                 end
             end
+
             player:delCP(price)
         end
     end

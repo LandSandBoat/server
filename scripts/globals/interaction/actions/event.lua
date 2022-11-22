@@ -22,6 +22,7 @@ function Event:perform(player, targetEntity)
     else
         player:startEvent(self.id, unpack(self.options))
     end
+
     return self.returnValue
 end
 
