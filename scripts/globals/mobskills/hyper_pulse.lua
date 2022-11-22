@@ -14,6 +14,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if not target:isBehind(mob) then
         return 0
     end
+
     return 1
 end
 
@@ -29,4 +30,5 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     return dmg
 end
+
 return mobskillObject

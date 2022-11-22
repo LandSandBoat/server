@@ -32,6 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if info.hitslanded > 0 then
         target:addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return dmg
 end
 

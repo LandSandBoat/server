@@ -26,6 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:charm(target)
         mob:resetEnmity(target)
     end
+
     skill:setMsg(msg)
 
     return typeEffect

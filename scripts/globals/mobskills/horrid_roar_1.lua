@@ -15,6 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     elseif mob:getAnimationSub() == 1 then
         return 1
     end
+
     return 0
 end
 

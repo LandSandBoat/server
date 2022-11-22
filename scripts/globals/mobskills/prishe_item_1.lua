@@ -24,6 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:addTP(3000)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 9, false)
     end
+
     return 0
 end
 

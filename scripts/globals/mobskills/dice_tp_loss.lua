@@ -3,8 +3,6 @@
 --
 -- Description: TP reset
 -- Type: Physical (Blunt)
---
---
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -25,6 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:setTP(reset)
         skill:setMsg(xi.msg.basic.TP_REDUCED)
     end
+
     return reset
 end
 
