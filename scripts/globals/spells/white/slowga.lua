@@ -19,7 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Lowest ~7.3%
     -- Highest ~29.2%
     local power = utils.clamp(math.floor(dMND * 73 / 5) + 1825, 730, 2920)
-    power = xi.magic.calculatePotency(power, dMND, spell:getSkillType(), caster, target)
+    power = xi.magic.calculatePotency(power, dMND, caster, target)
 
     --Duration, including resistance
     local duration = xi.magic.calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
