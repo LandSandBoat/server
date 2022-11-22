@@ -554,6 +554,9 @@
         "typeindex": "cpp",
         "strstream": "cpp",
         "codecvt": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "*.ipp": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     },
 }

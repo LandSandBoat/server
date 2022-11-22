@@ -406,7 +406,9 @@ function Limbus:openDoor(battlefield, floor)
 end
 
 function Limbus:closeDoors()
-    for _, doorID in ipairs(self.ID.npc.PORTAL) do
-        GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
+    if self.ID.npc.PORTAL then
+        for _, doorID in ipairs(self.ID.npc.PORTAL) do
+            GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
+        end
     end
 end

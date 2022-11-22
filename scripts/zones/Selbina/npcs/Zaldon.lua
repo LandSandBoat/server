@@ -517,6 +517,12 @@ local function tradeFish(player, fishId)
         if roll <= sum then
             found = true
             player:setCharVar("insideBellyItemIdx", i)
+
+            -- NOTE: We confirm the trade now, and not at the end of the cutscene as normal
+            --     : because the cutscene gives away whether or not the trade was successful
+            --     : or not, and it's possible for players to cheese this trade by force-dc-ing.
+            player:confirmTrade()
+
             player:startEvent(166, 0, rewards[i].itemId)
             break
         end
@@ -548,7 +554,6 @@ local function giveReward(player, csid)
         end
 
         if traded then
-            player:confirmTrade()
             player:addGil(xi.settings.main.GIL_RATE * reward.gil)
             player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * reward.gil)
             player:setCharVar("insideBellyFishId", 0)

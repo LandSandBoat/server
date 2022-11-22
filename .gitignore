@@ -232,3 +232,8 @@ doxygen/
 # Docker (not supported)
 Dockerfile
 docker-compose*
+
+# dSYM folders for Mac OS debugging
+xi_map.dSYM
+xi_connect.dSYM
+xi_search.dSYM

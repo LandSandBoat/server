@@ -57,7 +57,7 @@ login_session_data_t* find_loginsd_byip(uint32 ip)
 
     if (multiple_ip_count > 1)
     {
-        ShowInfo("Detected %i instances from %s. Returning best account match.", multiple_ip_count, ip2str(ip));
+        ShowInfo(fmt::format("Detected {} instances from {}. Returning best account match.", multiple_ip_count, ip2str(ip)));
     }
 
     for (auto& i : login_sd_list)

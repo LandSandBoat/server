@@ -23,9 +23,12 @@
 #define _UTILS_H_
 #define _USE_MATH_DEFINES
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+
+#include <filesystem>
 #include <math.h>
+#include <set>
 
 constexpr size_t PacketNameLength = 16; // 15 + null terminator
 
@@ -100,6 +103,17 @@ bool definitelyGreaterThan(float a, float b);
 bool definitelyLessThan(float a, float b);
 
 void crash();
+
+template <typename T>
+std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
+{
+    std::set<std::filesystem::path> sorted_by_name;
+    for (auto& entry : T(path_name))
+    {
+        sorted_by_name.insert(entry.path());
+    }
+    return sorted_by_name;
+}
 
 class ScopeGuard
 {
