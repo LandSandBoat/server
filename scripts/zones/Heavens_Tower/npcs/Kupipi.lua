@@ -21,10 +21,12 @@ local trustMemory = function(player)
     if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS) then
         memories = memories + 2
     end
+
     -- 4 - nothing
     if player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) then
         memories = memories + 8
     end
+
     -- 16 - chocobo racing
     --  memories = memories + 16
     return memories

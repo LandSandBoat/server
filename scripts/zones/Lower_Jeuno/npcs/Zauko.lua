@@ -141,6 +141,7 @@ entity.onEventFinish = function(player, csid, option)
                 params.ki = xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
             end
         end
+
         npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE, params)
 
     elseif csid == 118 and option == 1 then
