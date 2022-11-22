@@ -35,6 +35,7 @@ function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val,
         else
             targ:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
         end
+
         player:PrintToPlayer(string.format("Gave player '%s' Item with ID of '%u' ", target, itemId))
     end
 end

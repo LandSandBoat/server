@@ -34,6 +34,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     else
         buffvalue = 1
     end
+
     target:delStatusEffect(xi.effect.STR_BOOST)
     target:delStatusEffect(xi.effect.DEX_BOOST)
     target:delStatusEffect(xi.effect.VIT_BOOST)

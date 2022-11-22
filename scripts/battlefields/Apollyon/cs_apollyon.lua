@@ -81,6 +81,7 @@ function content:onBattlefieldTick(battlefield, tick)
     else
         nextBoss = ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK
     end
+
     local boss = GetMobByID(nextBoss)
 
     battlefield:setLocalVar("AutoAggro", boss:getID())

@@ -26,6 +26,7 @@ function onTrigger(player, logId, target)
         error(player, "Invalid logID.")
         return
     end
+
     logName = logInfo.full_name
     logId = logInfo.mission_log
 

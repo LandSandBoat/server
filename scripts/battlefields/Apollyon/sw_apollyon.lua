@@ -37,6 +37,7 @@ function content:onBattlefieldRegister(player, battlefield)
     elseif race == xi.race.TARU_F then
         race = xi.race.TARU_M
     end
+
     battlefield:setLocalVar("initiatorRace", race)
 end
 
