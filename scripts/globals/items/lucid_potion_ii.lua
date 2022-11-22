@@ -12,6 +12,7 @@ itemObject.onItemCheck = function(target)
     if target:getHP() == target:getMaxHP() then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
+
     return 0
 end
 
