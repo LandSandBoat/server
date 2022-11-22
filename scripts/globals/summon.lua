@@ -160,6 +160,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         if missChance < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
         end
+
         numHitsProcessed = numHitsProcessed + 1
     end
 
@@ -294,6 +295,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
                 skill:setMsg(xi.msg.basic.ANTICIPATE)
                 return 0
             end
+
             target:delStatusEffect(xi.effect.THIRD_EYE)
         end
     end
@@ -380,5 +382,6 @@ xi.summon.avatarMiniFightCheck = function(caster)
             result = 40 -- Cannot use <spell> in this area.
         end
     end
+
     return result
 end

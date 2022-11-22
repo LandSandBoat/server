@@ -410,6 +410,7 @@ local function calculateDEXvsAGICritRate(attacker, target)
     else
         nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
     end
+
     return nativecrit
 end
 
@@ -909,6 +910,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
                 action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
             end
         end
+
         action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
@@ -919,6 +921,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         else
             action:messageID(defender:getID(), xi.msg.basic.EVADES)
         end
+
         action:reaction(defender:getID(), xi.reaction.EVADE)
     end
 
@@ -947,6 +950,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             action:param(defender:getID(), math.abs(finaldmg))
         end
     end
+
     local enmityEntity = wsResults.taChar or attacker
 
     if wsParams.overrideCE and wsParams.overrideVE then

@@ -90,6 +90,7 @@ entity.onMobFight = function(mob, target)
                     if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then
                         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                     end
+
                     mob:useMobAbility(1551)
                     mob:setLocalVar("MegaFlareQueue", 0)
                 end
@@ -110,6 +111,7 @@ entity.onMobFight = function(mob, target)
             if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
             end
+
             mob:useMobAbility(1552)
             mob:setLocalVar("GigaFlare", 1)
             mob:setLocalVar("MegaFlareQueue", 0)

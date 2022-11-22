@@ -534,8 +534,15 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
             npc:entityAnimationPacket("open")
             npc:setLocalVar("opened", 1)
             npc:setUntargetable(true)
-            npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
-            npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:resetLocalVars() npcvar:setAnimationSub(0) end)
+            npc:queue(10000, function(npcvar)
+                npcvar:entityAnimationPacket("kesu")
+            end)
+
+            npc:queue(12000, function(npcvar)
+                npcvar:setStatus(xi.status.DISAPPEAR)
+                npcvar:resetLocalVars()
+                npcvar:setAnimationSub(0)
+            end)
 
             break
         end
@@ -653,8 +660,15 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             npc:getLocalVar("itemAmount_2") == 0 and
             npc:getLocalVar("itemAmount_3") == 0
         then
-            npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
-            npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:setAnimationSub(0) npcvar:resetLocalVars() end)
+            npc:queue(10000, function(npcvar)
+                npcvar:entityAnimationPacket("kesu")
+            end)
+
+            npc:queue(12000, function(npcvar)
+                npcvar:setStatus(xi.status.DISAPPEAR)
+                npcvar:setAnimationSub(0)
+                npcvar:resetLocalVars()
+            end)
         end
     end
 end

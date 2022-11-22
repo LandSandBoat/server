@@ -85,7 +85,7 @@ local csReq = -- add checks to this table
         -- Not Implemented Below (ROV)
         [15] = function(player)
             return false
-        end,               
+        end,
 
         [16] = function(player)
             return false
