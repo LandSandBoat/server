@@ -5351,7 +5351,7 @@ INSERT INTO `item_basic` VALUES (5656,0,'coffeecake_muffin_+1','coff._muffin_+1'
 INSERT INTO `item_basic` VALUES (5657,0,'army_biscuit','army_biscuit',99,1548,56,0,30);
 INSERT INTO `item_basic` VALUES (5658,0,'dish_of_spaghetti_ortolana','ortolana',12,1548,56,0,274);
 INSERT INTO `item_basic` VALUES (5659,0,'dish_of_spaghetti_ortolana_+1','ortolana_+1',12,1548,56,0,342);
-INSERT INTO `item_basic` VALUES (5660,0,'stick_of_pepperoni','pepperoni',12,1548,52,0,1147);
+INSERT INTO `item_basic` VALUES (5660,0,'stick_of_pepperoni','pepperoni',12,1548,52,0,155);
 INSERT INTO `item_basic` VALUES (5661,0,'walnut','walnut',12,1548,59,0,312);
 INSERT INTO `item_basic` VALUES (5662,0,'dragon_fruit','dragon_fruit',12,1548,59,0,1738);
 INSERT INTO `item_basic` VALUES (5663,0,'plate_of_salmon_sushi','salmon_sushi',12,1548,53,0,523);

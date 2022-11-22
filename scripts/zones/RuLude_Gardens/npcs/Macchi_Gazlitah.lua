@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
         4726,  25600,    -- Enthunder II
         4727,  33000,    -- Enwater II
         4850, 150000,    -- Refresh II
-        ]]--
+        --]]
     }
 
     player:showText(npc, ID.text.MACCHI_GAZLITAH_SHOP_DIALOG1)
