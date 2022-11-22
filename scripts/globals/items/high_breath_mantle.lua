@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
             target:delStatusEffect(xi.effect.ENCHANTMENT)
         end
     end
+
     return 0
 end
 
