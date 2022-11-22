@@ -15,8 +15,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.FROST
-
     local powerFrost = mob:getMainLvl() / 5 * 0.6 + 6
     -- Agility debuff is -33 last for 60 seconds
     local powerAgi = 33

@@ -3,6 +3,7 @@
 --
 -- Description: Reduces magic defense in a fan-shaped area of effect.
 -- Type: Magical
+-- MDB -50, 2 minute base duration
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -16,10 +17,8 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MAGIC_DEF_DOWN
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 0, 180))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, 120))
     return typeEffect
 end
 
 return mobskillObject
-
--- MDB -50, 2 minute base duration
