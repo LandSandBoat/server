@@ -13,6 +13,7 @@ itemObject.onItemCheck = function(target)
     if effect ~= nil and effect:getSubType() == 14785 then
         target:delStatusEffect(xi.effect.DEFENSE_BOOST)
     end
+
     return 0
 end
 
