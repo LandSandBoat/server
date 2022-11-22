@@ -48,6 +48,7 @@ entity.onMobSpawn = function(mob)
         SetDropRate(2845, xi.items.DEED_OF_PLACIDITY, 0)
         SetDropRate(2845, xi.items.VICE_OF_ANTIPATHY, chance * 10) -- Vice of Antipathy
     end
+
     qm:setLocalVar("[SEA]IxAern_DropRate", 0)
 
     mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
@@ -108,6 +109,7 @@ entity.onMobDespawn = function(mob)
     else
         qm:setPos(460, 0, 540, 0) -- I-7
     end
+
     qm:updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 

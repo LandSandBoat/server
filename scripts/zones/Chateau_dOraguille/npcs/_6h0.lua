@@ -21,18 +21,22 @@ local function TrustMemory(player)
     if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER) then
         memories = memories + 2
     end
+
     -- 4 - IMMORTAL_SENTRIES
     if player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) then
         memories = memories + 4
     end
+
     -- 8 - UNDER_OATH
     if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH) then
         memories = memories + 8
     end
+
     -- 16 - FIT_FOR_A_PRINCE
     if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 16
     end
+
     -- 32 - Hero's Combat BCNM
     -- if (playervar for Hero's Combat) then
     --  memories = memories + 32
@@ -90,6 +94,7 @@ entity.onEventFinish = function(player, csid, option)
             if player:getMainJob() == xi.job.PLD then
                 player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
+
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
             player:addItem(14095)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14095) -- Gallant Leggings

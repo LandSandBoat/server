@@ -32,6 +32,7 @@ entity.onMobDespawn = function(mob)
             if v ~= mobId and GetMobByID(v):isSpawned() then
                 DespawnMob(v)
             end
+
             GetMobByID(v):setRespawnTime(respawn)
         end
 
