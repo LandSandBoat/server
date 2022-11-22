@@ -28,6 +28,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
     end
+
     if target:getMobMod(xi.mobMod.CHARMABLE) == 0 then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
@@ -66,6 +67,7 @@ abilityObject.onUseAbility = function(player, target, ability)
                     end
                 end
             end
+
             ability:setMsg(138) -- The x seems friendlier
             target:disengage()
         else

@@ -89,6 +89,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
                 else
                     daze = 2
                 end
+
                 target:addStatusEffect(xi.effect.WEAKENED_DAZE_5, 1, 0, duration + 30)
                 effect = 5
 
@@ -159,6 +160,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             if daze > 2 then
                 daze = 2
             end
+
             player:addStatusEffect(xi.effect.FINISHING_MOVE_3 + daze, 1, 0, 7200)
 
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
