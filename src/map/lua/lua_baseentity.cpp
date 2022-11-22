@@ -12846,26 +12846,6 @@ void CLuaBaseEntity::registerChocobo(uint32 value)
 }
 
 /************************************************************************
- *  Function: getCharmChance()
- *  Purpose : Returns decimal value of the chances of charming an Entity
- *  Example : player:getCharmChance(target, false)
- *  Notes   : Used for Guage and Maiden's Virelai
- ************************************************************************/
-
-float CLuaBaseEntity::getCharmChance(CLuaBaseEntity const* target, sol::object const& mods)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    auto* PCharmer = static_cast<CBattleEntity*>(m_PBaseEntity);
-    auto* PTarget  = static_cast<CBattleEntity*>(target->GetBaseEntity());
-
-    bool  includeCharmAffinityAndChanceMods = (mods != sol::lua_nil) ? mods.as<bool>() : true;
-    float charmChance                       = battleutils::GetCharmChance(PCharmer, PTarget, includeCharmAffinityAndChanceMods);
-
-    return charmChance;
-}
-
-/************************************************************************
  *  Function: charmPet()
  *  Purpose : Attempts to charm a pet
  *  Example : player:charmPet(target)
@@ -16026,7 +16006,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setPetName", CLuaBaseEntity::setPetName);
     SOL_REGISTER("registerChocobo", CLuaBaseEntity::registerChocobo);
 
-    SOL_REGISTER("getCharmChance", CLuaBaseEntity::getCharmChance);
     SOL_REGISTER("charmPet", CLuaBaseEntity::charmPet);
 
     SOL_REGISTER("petAttack", CLuaBaseEntity::petAttack);

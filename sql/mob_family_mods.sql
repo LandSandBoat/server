@@ -210,6 +210,12 @@ INSERT INTO `mob_family_mods` VALUES (61,52,20,1);   -- ROAM_RATE: 20
 -- Cerberus
 INSERT INTO `mob_family_mods` VALUES (62,36,50,1); -- ROAM_COOL: 50
 
+-- Slime-Clot
+INSERT INTO `mob_family_mods` VALUES (66,252,35,0); -- CHARMRES: 35
+
+-- Slime-GlutinousClot
+INSERT INTO `mob_family_mods` VALUES (67,252,35,0); -- CHARMRES: 35
+
 -- Cluster
 INSERT INTO `mob_family_mods` VALUES (68,36,40,1); -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (68,51,2,1);  -- ROAM_TURNS: 2
@@ -231,11 +237,12 @@ INSERT INTO `mob_family_mods` VALUES (71,36,55,1); -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (71,52,30,1); -- ROAM_RATE: 30
 
 -- Colibri
-INSERT INTO `mob_family_mods` VALUES (72,3,50,1);  -- MP_BASE: 50
-INSERT INTO `mob_family_mods` VALUES (72,29,10,0); -- MDEF: 10
-INSERT INTO `mob_family_mods` VALUES (72,51,2,1);  -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (72,52,30,1); -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (72,68,20,0); -- EVA: 20
+INSERT INTO `mob_family_mods` VALUES (72,3,50,1);   -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (72,29,10,0);  -- MDEF: 10
+INSERT INTO `mob_family_mods` VALUES (72,51,2,1);   -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (72,52,30,1);  -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (72,68,20,0);  -- EVA: 20
+INSERT INTO `mob_family_mods` VALUES (72,252,20,0); -- CHARMRES: 20
 
 -- Corse
 INSERT INTO `mob_family_mods` VALUES (74,36,50,1);   -- ROAM_COOL: 50
@@ -611,6 +618,9 @@ INSERT INTO `mob_family_mods` VALUES (193,3,40,1); -- MP_BASE: 40
 -- Phuabo
 INSERT INTO `mob_family_mods` VALUES (194,3,50,1); -- MP_BASE: 50
 
+-- Puk
+INSERT INTO `mob_family_mods` VALUES (198,252,20,0); -- CHARMRES: 20
+
 -- Qiqirn
 INSERT INTO `mob_family_mods` VALUES (199,10,12,1); -- SUBLINK: 12
 
@@ -658,11 +668,13 @@ INSERT INTO `mob_family_mods` VALUES (210,31,30,1);  -- ROAM_DISTANCE: 30
 INSERT INTO `mob_family_mods` VALUES (210,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (210,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (210,59,110,1); -- WEAPON_BONUS: 110
+INSERT INTO `mob_family_mods` VALUES (210,252,25,0); -- CHARMRES: 25
 
 -- Sabotender
-INSERT INTO `mob_family_mods` VALUES (212,10,7,1);  -- SUBLINK: 7
-INSERT INTO `mob_family_mods` VALUES (212,36,10,1); -- ROAM_COOL: 10
-INSERT INTO `mob_family_mods` VALUES (212,52,20,1); -- ROAM_RATE: 20
+INSERT INTO `mob_family_mods` VALUES (212,10,7,1);   -- SUBLINK: 7
+INSERT INTO `mob_family_mods` VALUES (212,36,10,1);  -- ROAM_COOL: 10
+INSERT INTO `mob_family_mods` VALUES (212,52,20,1);  -- ROAM_RATE: 20
+INSERT INTO `mob_family_mods` VALUES (212,252,20,0); -- CHARMRES: 20
 
 -- Sahagin
 INSERT INTO `mob_family_mods` VALUES (213,10,8,1);   -- SUBLINK: 8
@@ -853,15 +865,30 @@ INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256
 -- Scorpion-Kingv
 INSERT INTO `mob_family_mods` VALUES (274,23,256,1); -- IMMUNITY: 256
 
+-- Slime
+INSERT INTO `mob_family_mods` VALUES (228,252,35,0); -- CHARMRES: 35
+
+-- Slime
+INSERT INTO `mob_family_mods` VALUES (229,252,35,0); -- CHARMRES: 35
+
+-- Slime
+INSERT INTO `mob_family_mods` VALUES (230,252,35,0); -- CHARMRES: 35
+
 -- Mamool Ja
 INSERT INTO `mob_family_mods` VALUES (285,10,8,1);  -- SUBLINK: 8
 INSERT INTO `mob_family_mods` VALUES (285,68,10,0); -- EVA: 10
+
+-- Puk-Vulpangue
+INSERT INTO `mob_family_mods` VALUES (286,252,20,0); -- CHARMRES: 20
 
 -- Qiqirn-Cheese Hoarder
 INSERT INTO `mob_family_mods` VALUES (288,10,12,1); -- SUBLINK: 12
 
 -- Wamouracampa-Brassborer
 INSERT INTO `mob_family_mods` VALUES (289,10,6,1); -- SUBLINK: 6
+
+-- Slime-Claret
+INSERT INTO `mob_family_mods` VALUES (290,252,35,0); -- CHARMRES: 35
 
 -- Apkallu-Small
 INSERT INTO `mob_family_mods` VALUES (294,10,14,1); -- SUBLINK: 14
@@ -918,7 +945,8 @@ INSERT INTO `mob_family_mods` VALUES (359,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (359,254,25,0);  -- LULLABYRES: 25
 
 -- Sabotender-Florido
-INSERT INTO `mob_family_mods` VALUES (362,10,7,1); -- SUBLINK: 7
+INSERT INTO `mob_family_mods` VALUES (362,10,7,1);   -- SUBLINK: 7
+INSERT INTO `mob_family_mods` VALUES (362,252,20,0); -- CHARMRES: 20
 
 -- Doll-Faust
 INSERT INTO `mob_family_mods` VALUES (367,31,5,1);  -- ROAM_DISTANCE: 5
@@ -940,14 +968,16 @@ INSERT INTO `mob_family_mods` VALUES (371,59,125,1); -- WEAPON_BONUS: 125
 INSERT INTO `mob_family_mods` VALUES (372,36,15,1); -- ROAM_COOL: 15
 
 -- Raptor
-INSERT INTO `mob_family_mods` VALUES (376,31,30,1); -- ROAM_DISTANCE: 30
-INSERT INTO `mob_family_mods` VALUES (376,36,40,1); -- ROAM_COOL: 40
-INSERT INTO `mob_family_mods` VALUES (376,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (376,31,30,1);  -- ROAM_DISTANCE: 30
+INSERT INTO `mob_family_mods` VALUES (376,36,40,1);  -- ROAM_COOL: 40
+INSERT INTO `mob_family_mods` VALUES (376,51,3,1);   -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (376,252,25,0); -- CHARMRES: 25
 
 -- Raptor
-INSERT INTO `mob_family_mods` VALUES (377,31,30,1); -- ROAM_DISTANCE: 30
-INSERT INTO `mob_family_mods` VALUES (377,36,40,1); -- ROAM_COOL: 40
-INSERT INTO `mob_family_mods` VALUES (377,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (377,31,30,1);  -- ROAM_DISTANCE: 30
+INSERT INTO `mob_family_mods` VALUES (377,36,40,1);  -- ROAM_COOL: 40
+INSERT INTO `mob_family_mods` VALUES (377,51,3,1);   -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (377,252,25,0); -- CHARMRES: 25
 
 -- Wyrm-Vrtra
 INSERT INTO `mob_family_mods` VALUES (391,31,5,1);   -- ROAM_DISTANCE: 5
