@@ -38,6 +38,11 @@ namespace attackutils
             return result;
         }
 
+        if (PDefender->StatusEffectContainer->HasPreventActionEffect(true))
+        {
+            return result;
+        }
+
         if (physicalAttackType == PHYSICAL_ATTACK_TYPE::DAKEN)
         {
             return result;
@@ -357,6 +362,11 @@ namespace attackutils
      ************************************************************************/
     bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
+        if (PDefender->StatusEffectContainer->HasPreventActionEffect(true))
+        {
+            return false;
+        }
+
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
             return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));

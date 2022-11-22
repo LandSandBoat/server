@@ -49,6 +49,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/controllers/automaton_controller.h"
 #include "../ai/controllers/mob_controller.h"
 #include "../ai/controllers/pet_controller.h"
+#include "../ai/controllers/spirit_controller.h"
 #include "../ai/states/ability_state.h"
 
 #include "../mob_modifier.h"
@@ -1987,6 +1988,14 @@ namespace petutils
         else
         {
             PPet = new CPetEntity(petType);
+
+            if (PetID <= PETID_DARKSPIRIT)
+            {
+                PPet->PMaster = PMaster;
+                PPet->m_PetID = PetID;
+                PPet->PAI->SetController(std::make_unique<CSpiritController>(PPet));
+                ;
+            }
         }
 
         PPet->loc = PMaster->loc;

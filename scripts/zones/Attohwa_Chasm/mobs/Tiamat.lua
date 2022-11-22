@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.COUNTER, 10)
     mob:setMod(xi.mod.UFASTCAST, 50)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.DEF, 575)
+    mob:setMod(xi.mod.DEF, 514)
     mob:setMod(xi.mod.EVA, 450)
     mob:setMod(xi.mod.VIT, 19)
     mob:setMod(xi.mod.STR, 3)
@@ -115,7 +115,7 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- Don't lose TP from autos during flight
     if skill:getID() == 1278 then
-        mob:addTP(mob:getLocalVar("skill_tp") + 65)
+        mob:addTP(mob:getLocalVar("skill_tp") + 65) -- Needs to gain TP from flight auto attacks
         mob:setLocalVar("skill_tp", 0)
     elseif skill:getID() == 1282 then
         mob:addTP(mob:getLocalVar("skill_tp"))

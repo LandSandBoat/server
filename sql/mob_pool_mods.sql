@@ -235,6 +235,7 @@ INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1); -- MAGIC_COOL: 60
 
 -- Jormungand
 INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0); -- REGEN: 25
+INSERT INTO `mob_pool_mods` VALUES (2156,59,254,1); -- WEAPON_BONUS: 254
 
 -- Kaiser Behemoth S
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1); -- MP_BASE: 100
