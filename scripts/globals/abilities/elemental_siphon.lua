@@ -44,6 +44,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     elseif dayElement == xi.magic.dayWeak[spiritEle] then
         weatherDayBonus = weatherDayBonus - 0.1
     end
+
     -- Weather bonus/penalty
     if weather == xi.magic.singleWeatherStrong[spiritEle] then
         weatherDayBonus = weatherDayBonus + 0.1

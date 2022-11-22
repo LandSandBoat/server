@@ -44,6 +44,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
+
     local params = {}
     params.numHits = 1
     local ftp = 5

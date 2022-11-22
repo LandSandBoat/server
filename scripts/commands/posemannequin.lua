@@ -24,6 +24,7 @@ function onTrigger(player, race, pose, target)
     else
         target = player:getCursorTarget()
     end
+
     if not target or target:isNPC() then
         error(player, "No valid target found. place cursor on a non-npc object or specify a player name. ")
         return

@@ -37,10 +37,12 @@ function onTrigger(player, mobId, noDepop)
                 return
             end
         end
+
         if not targ:isSpawned() then
             SpawnMob(mobId, instance)
             player:PrintToPlayer("Mob state changed to: Spawned.")
         end
+
         targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
     else
         -- validate mobId
@@ -58,6 +60,7 @@ function onTrigger(player, mobId, noDepop)
                 return
             end
         end
+
         mobId = targ:getID()
 
         if not targ:isSpawned() then
@@ -72,6 +75,7 @@ function onTrigger(player, mobId, noDepop)
                 DespawnMob(mobId)
                 player:PrintToPlayer("Despawned the mob because of an error.")
             end
+
             player:PrintToPlayer("Mob could not be moved to current pos - you are probably in the wrong zone.")
         end
     end
