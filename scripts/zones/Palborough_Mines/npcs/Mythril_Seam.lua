@@ -15,11 +15,7 @@ entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, xi.items.PICKAXE) then -- pickaxe
         if player:getFreeSlotsCount() > 0 then
             if math.random() < 0.47 then
-                if player:getCharVar("rockracketeer_sold") == 5 then
-                    player:startEvent(51, 12, xi.items.SHARP_STONE) -- Sharp Stone
-                else
-                    player:startEvent(43, 12, 0, xi.items.CHUNK_OF_MINE_GRAVEL) -- Mine Gravel
-                end
+                player:startEvent(43, 12, 0, xi.items.CHUNK_OF_MINE_GRAVEL) -- Mine Gravel
             else
                 player:startEvent(47, 8, xi.items.SHARP_STONE) -- pickaxe breaks
             end
