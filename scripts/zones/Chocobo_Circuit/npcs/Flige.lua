@@ -16,11 +16,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinsih = function(player, csid, option)
-if
+    if
         csid == 329 and
         option == 1
     then
-        player:setPos(-252.5519, -5.000, -470.0900) -- exits to foulnepard
+        player:setpos(-252.5519, -5.000, -470.0900) -- exits to foulnepard
     end
 end
 
