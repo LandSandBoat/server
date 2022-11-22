@@ -76,6 +76,7 @@ instanceObject.onInstanceFailure = function(instance)
         if questProgVar == 4 then
             v:setCharVar("Quest[7][19]Prog", 7)
         end
+
         v:setPos(-385.602, 21.970, 456.359, 0, 90)
     end
 end
@@ -90,6 +91,7 @@ instanceObject.onInstanceComplete = function(instance)
         if questProgVar == 4 or questProgVar == 7 then
             v:setCharVar("Quest[7][19]Prog", 5)
         end
+
         v:startEvent(10000)
     end
 end

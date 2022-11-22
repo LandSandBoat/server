@@ -31,4 +31,5 @@ entity.onEventFinish = function(player, csid, option)
         end
     end
 end
+
 return entity

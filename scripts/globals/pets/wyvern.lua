@@ -135,11 +135,13 @@ entity.onMobSpawn = function(mob)
                 end
             end
         end)
+
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
             local threshold = 33
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 threshold = 50
             end
+
             doHealingBreath(player, threshold)
         end)
     elseif
@@ -157,6 +159,7 @@ entity.onMobSpawn = function(mob)
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 threshold = 33
             end
+
             doHealingBreath(player, threshold)
         end)
     end
