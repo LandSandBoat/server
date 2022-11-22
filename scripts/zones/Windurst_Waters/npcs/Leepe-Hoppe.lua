@@ -126,13 +126,13 @@ entity.onTrigger = function(player, npc)
             player:startEvent(850, 0, 13399, 1208, 1125, availRewards, 18165, 13572)
         elseif os.time() > player:getCharVar("MoonlitPath_date") then --24 hours have passed, flag a new fight
             player:startEvent(848, 0, 1125, 334)
+        else
+            player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
         end
     elseif tuningIn == QUEST_ACCEPTED then
         player:startEvent(885, 0, 1696, 1697, 1698) -- Reminder to bring Magicked Steel Ingot, Spruce Lumber, Extra-fine File
     elseif tuningOut == QUEST_ACCEPTED then
         player:startEvent(889) -- Reminder to go help Ildy in Kazham
-    elseif moonlitPath == QUEST_COMPLETED then
-        player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
     elseif turmoil == QUEST_ACCEPTED then
         player:startEvent(790, 0, xi.ki.RHINOSTERY_CERTIFICATE)
     end
