@@ -17,6 +17,7 @@ function xi.limbus.enter(player, entrance)
         [0] = function ()
             player:setPos(-668, 0.1, -666, 209, 38)  --  instance entrer -599 0 -600
         end, --  sortiezone -642, -4, -642, -637, 4, -637
+
         [1] = function ()
             player:setPos(643, 0.1, -600, 124, 38)  --  instance entrer 600 1 -600
         end, --  sortiezone  637, -4, -642, 642, 4, -637
@@ -402,6 +403,7 @@ function Limbus:openDoor(battlefield, floor)
         player:messageSpecial(ID.text.GATE_OPEN)
         player:messageSpecial(ID.text.TIME_LEFT, remaining)
     end
+
     door:setAnimation(xi.animation.OPEN_DOOR)
 end
 

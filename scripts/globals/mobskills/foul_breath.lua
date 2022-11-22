@@ -17,6 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getZoneID() == 5 then
         return 1
     end
+
     return 0
 end
 
