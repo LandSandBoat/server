@@ -119,7 +119,6 @@ m:addOverride("xi.shop.generalGuild", function(player, stock, guildSkillId)
                      943,     320,      xi.craftRank.RECRUIT,      -- Poison Dust
                      637,    1500,     xi.craftRank.INITIATE,      -- Slime Oil
                      928,     515,     xi.craftRank.INITIATE,      -- Bomb Ash
-                     921,     200,     xi.craftRank.INITIATE,      -- Ahriman Tears
                      933,    1200,       xi.craftRank.NOVICE,      -- Glass Fiber
                      947,    5000,       xi.craftRank.NOVICE,      -- Firesand
                     4171,     700,   xi.craftRank.APPRENTICE,      -- Vitriol
@@ -131,6 +130,7 @@ m:addOverride("xi.shop.generalGuild", function(player, stock, guildSkillId)
                      931,    5000,    xi.craftRank.CRAFTSMAN,      -- Cermet Chunk
                      944,    1035,    xi.craftRank.CRAFTSMAN,      -- Venom Dust
                     9257, 1126125,      xi.craftRank.AMATEUR       -- Azure Leaf
+                     -- 921,     200,     xi.craftRank.INITIATE,      -- Ahriman Tears
             },
             [xi.skill.BONECRAFT] =
             {
