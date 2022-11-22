@@ -1,24 +1,24 @@
 require("scripts/globals/mixins")
 
 -- If you subtract 790 from the modelId, you're left with a key into to this table :)
-local abilityIds =
+local avatarInfo =
 {
-    919, -- [modelId: 791] Carbuncle
-    839, -- [modelId: 792] Fenrir
-    913, -- [modelId: 793] Ifrit
-    914, -- [modelId: 794] Titan
-    915, -- [modelId: 795] Leviathan
-    916, -- [modelId: 796] Garuda
-    917, -- [modelId: 797] Shiva
-    918, -- [modelId: 798] Ramuh
+    { model = 791, ability = 919 }, -- Carbuncle
+    { model = 793, ability = 913 }, -- Ifrit
+    { model = 794, ability = 914 }, -- Titan
+    { model = 795, ability = 915 }, -- Leviathan
+    { model = 796, ability = 916 }, -- Garuda
+    { model = 797, ability = 917 }, -- Shiva
+    { model = 798, ability = 918 }, -- Ramuh
 }
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.avatar = function(avatarMob)
+    local avatarTable = avatarInfo[math.random(1, #avatarInfo)]
     avatarMob:addListener("SPAWN", "AVATAR_SPAWN", function(mob)
-        mob:setModelId(math.random(791, 798))
+        mob:setModelId(avatarTable.model)
         mob:hideName(false)
         mob:setUntargetable(true)
         mob:setUnkillable(true)
@@ -36,8 +36,7 @@ g_mixins.families.avatar = function(avatarMob)
 
     avatarMob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
         if mob:getLocalVar("[ASTRAL_FLOW]Performed") == 0 then
-            local modelId = mob:getModelId()
-            local abilityId = abilityIds[modelId - 790]
+            local abilityId = avatarTable.ability
             if abilityId ~= nil then
                 mob:useMobAbility(abilityId)
                 mob:setLocalVar("[ASTRAL_FLOW]Performed", 1)
