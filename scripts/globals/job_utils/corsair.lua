@@ -266,6 +266,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             else
                 roll = roll + 1
             end
+
             caster:delStatusEffect(xi.effect.SNAKE_EYE)
         else
             roll = roll + math.random(1, 6)
