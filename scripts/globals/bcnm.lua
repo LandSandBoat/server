@@ -1052,6 +1052,10 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MONARCH_BEARD)
         end,
 
+        [966] = function() -- ENM: Uninvited Guests
+            return player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
+        end,
+
         [992] = function() -- PM6-4: One to be Feared
             return promathiaMission == xi.mission.id.cop.ONE_TO_BE_FEARED and
                 player:getCharVar('Mission[6][638]Status') == 3
@@ -1310,6 +1314,10 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [965] = function() -- ENM: Beloved of Atlantes
             return player:hasKeyItem(xi.ki.MONARCH_BEARD)
+        end,
+
+        [966] = function() -- ENM: Uninvited Guests
+            return player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
         end,
 
         [928] = function() -- Quest: Ouryu Cometh
