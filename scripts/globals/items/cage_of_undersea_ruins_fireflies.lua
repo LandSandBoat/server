@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
     if target:getZoneID() == xi.zone.NYZUL_ISLE then
         return 0
     end
+
     return xi.msg.basic.ITEM_UNABLE_TO_USE_2
 end
 
