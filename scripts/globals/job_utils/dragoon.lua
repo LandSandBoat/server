@@ -354,7 +354,9 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local empathyTotal = player:getMerit(xi.merit.EMPATHY)
 
     -- Add wyvern levels to the tune of 200 per empathy merit
-    xi.job_utils.dragoon.addWyvernExp(player, 200 * empathyTotal)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.job_utils.dragoon.addWyvernExp(player, 200 * empathyTotal)
+    end
 
     if empathyTotal > 0 then
         local validEffects = {}
