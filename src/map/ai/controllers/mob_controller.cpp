@@ -198,26 +198,29 @@ void CMobController::TryLink()
         ((CMobEntity*)PMob->PPet)->PEnmityContainer->AddBaseEnmity(PTarget);
     }
 
-    // Handle monster linking if they are close enough
-    if (PMob->PParty != nullptr)
+    if (!PMob->PMaster)
     {
-        for (auto& member : PMob->PParty->members)
+        // Handle monster linking if they are close enough
+        if (PMob->PParty != nullptr)
         {
-            CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
-            if (!PPartyMember)
+            for (auto& member : PMob->PParty->members)
             {
-                continue;
-            }
-
-            if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
-            {
-                PPartyMember->PEnmityContainer->AddBaseEnmity(PTarget);
-
-                if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
+                CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
+                if (!PPartyMember)
                 {
-                    // force into attack action
-                    //#TODO
-                    PPartyMember->PAI->Engage(PTarget->targid);
+                    continue;
+                }
+
+                if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
+                {
+                    PPartyMember->PEnmityContainer->AddBaseEnmity(PTarget);
+
+                    if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
+                    {
+                        // force into attack action
+                        // #TODO
+                        PPartyMember->PAI->Engage(PTarget->targid);
+                    }
                 }
             }
         }
