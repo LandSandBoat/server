@@ -35,8 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = dmg * xi.settings.main.DARK_POWER
 
-    -- ID 2156: Jormungand
-    if target:isUndead() or target:getPool() == 2156 then
+    if target:isUndead() or target:hasImmunity(xi.immunity.ASPIR) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end
@@ -48,6 +47,19 @@ spellObject.onSpellCast = function(caster, target, spell)
         dmg = target:getMP()
         caster:addMP(dmg)
         target:delMP(dmg)
+    end
+
+    -- Messaging Fixes
+    local currMP = caster:getMP()
+    local maxMP  = caster:getMaxMP()
+
+    if caster:getMP() == caster:getMaxMP() then
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, 0) -- Drains 0 MP
+        return 0
+    elseif dmg + currMP > maxMP then
+        local mpRecovered = maxMP - currMP
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, mpRecovered)
+        return 0
     end
 
     return dmg

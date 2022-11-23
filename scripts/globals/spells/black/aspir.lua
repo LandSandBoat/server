@@ -37,7 +37,6 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = dmg * xi.settings.main.DARK_POWER
 
-    -- ID 2156: Jormungand
     if target:isUndead() or target:hasImmunity(xi.immunity.ASPIR) then
         dmg = 0
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
@@ -62,7 +61,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         return 0
     elseif dmg + currMP > maxMP then
         local mpRecovered = maxMP - currMP
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, mpRecovered) -- Drains 0 MP
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, mpRecovered)
         return 0
     end
 

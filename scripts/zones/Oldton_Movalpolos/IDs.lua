@@ -31,7 +31,6 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         MONSTER_APPEARED              = 7749, -- A monster has appeared!
         CHEST_UNLOCKED                = 7758, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL         = 8116, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-
     },
     mob =
     {
