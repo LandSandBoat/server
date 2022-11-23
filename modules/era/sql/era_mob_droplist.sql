@@ -13703,15 +13703,15 @@ INSERT INTO `mob_droplist` VALUES (1738,0,0,1000,1446,@RARE);   -- Lacquer Tree 
 INSERT INTO `mob_droplist` VALUES (1738,2,0,1000,920,0);        -- Malboro Vine (Steal)
 
 -- ZoneID: 173 - Morion Worm
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,640,500);       -- Chunk Of Copper Ore (50.0%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,640,500);       -- Chunk Of Copper Ore (50.0%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,640,500);       -- Chunk Of Copper Ore (50.0%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,641,@VCOMMON);  -- Chunk Of Tin Ore (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,641,@VCOMMON);  -- Chunk Of Tin Ore (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,643,@VCOMMON);  -- Chunk Of Iron Ore (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,18136,@COMMON); -- Morion Tathlum (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,645,@RARE);     -- Chunk Of Darksteel Ore (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1739,0,0,1000,645,@RARE);     -- Chunk Of Darksteel Ore (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1739,0,0,@ALWAYS,18136,@COMMON); -- Morion Tathlum         (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1739,1,1,@ALWAYS,640,650);       -- Chunk Of Copper Ore    (50.0%) (Group 1)
+INSERT INTO `mob_droplist` VALUES (1739,1,1,@ALWAYS,643,270);       -- Chunk Of Iron Ore      (27.0%) (Group 1)
+INSERT INTO `mob_droplist` VALUES (1739,1,1,@ALWAYS,645,80);        -- Chunk Of Darksteel Ore (8.0%)  (Group 1)
+INSERT INTO `mob_droplist` VALUES (1739,1,2,@ALWAYS,640,630);       -- Chunk Of Copper Ore    (63.0%) (Group 2)
+INSERT INTO `mob_droplist` VALUES (1739,1,2,@ALWAYS,641,210);       -- Chunk Of Tin Ore       (21.0%) (Group 2)
+INSERT INTO `mob_droplist` VALUES (1739,1,2,@ALWAYS,645,160);       -- Chunk Of Darksteel Ore (16.0%) (Group 2)
+INSERT INTO `mob_droplist` VALUES (1739,1,3,@ALWAYS,640,500);       -- Chunk Of Copper Ore    (50.0%) (Group 3)
+INSERT INTO `mob_droplist` VALUES (1739,1,3,@ALWAYS,641,500);       -- Chunk Of Tin Ore       (50.0%) (Group 3)
 
 -- ZoneID: 217 - Morose Marid
 INSERT INTO `mob_droplist` VALUES (1740,0,0,1000,2151,210);       -- Marid Hide (21.0%)
