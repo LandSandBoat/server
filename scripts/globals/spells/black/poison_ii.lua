@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Poison
+-- Spell: Poison II
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -13,14 +13,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-
-    local skill = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC)
-    local power = math.max(skill / 20, 4)
-    if skill > 400 then
-        power = math.floor(skill * 49 / 183 - 55) -- No cap can be reached yet
-    end
-    power = xi.magic.calculatePotency(power, spell:getSkillType(), caster, target)
-
+    local power = 10
     local duration = xi.magic.calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     local params = {}
