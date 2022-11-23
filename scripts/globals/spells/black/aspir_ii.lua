@@ -14,6 +14,8 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local dmg = 10 + 0.575 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
+    local mpDiff = caster:getMaxMP() - caster:getMP()
+
     --get resist multiplier (1x if no resist)
     local params = {}
     params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
@@ -49,12 +51,11 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delMP(dmg)
     end
 
-    -- Messaging Fixes
-    local mpDiff = caster:getMaxMP() - caster:getMP()
-
     spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, math.min(dmg, mpDiff))
 
-    return dmg
+    caster:addHP(dmg)
+
+    return math.min(dmg, mpDiff)
 end
 
 return spellObject
