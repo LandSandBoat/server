@@ -65,7 +65,6 @@ spellObject.onSpellCast = function(caster, target, spell)
         return 0
     elseif dmg + currHP > maxHP then
         spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, maxHP - currHP) -- Drains 0 HP
-        return 0
     end
 
     return dmg

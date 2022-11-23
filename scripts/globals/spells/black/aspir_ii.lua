@@ -59,7 +59,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     elseif dmg + currMP > maxMP then
         local mpRecovered = maxMP - currMP
         spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, mpRecovered)
-        return 0
     end
 
     return dmg
