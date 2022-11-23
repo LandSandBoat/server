@@ -333,7 +333,7 @@ namespace synthutils
                     chance = 0.0625; // 1/16
                     break;
                 case 0:
-                    chance = 0.018; // 1/64
+                    chance = 0.018;
                     break;
                 case -1:
                     chance = 0.0006;
