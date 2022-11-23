@@ -388,8 +388,11 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         end
     end
 
+    if xi.settings.main.ENABLE_ABYSSEA == 1 then
+        player:addTP(petTP / 2) -- add half wyvern tp to you
+    end
+
     wyvern:addStatusEffect(xi.effect.REGEN, regenAmount, 3, 90, 0, 0, 0) -- 90 seconds of regen
-    player:addTP(petTP / 2) -- add half wyvern tp to you
     wyvern:delTP(petTP / 2) -- remove half tp from wyvern
 
     local drainamount = (math.random(25, 35) / 100) * playerHP
