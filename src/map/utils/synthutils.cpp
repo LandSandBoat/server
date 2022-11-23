@@ -231,8 +231,8 @@ namespace synthutils
     uint8 calcSynthResult(CCharEntity* PChar)
     {
         uint8  result          = SYNTHESIS_SUCCESS; // We assume by default that we succed
-        int8   hqtier          = 3;    // Set base to T3
-        bool   canHQ           = true; // We assume by default that we can HQ
+        int8   hqtier          = 3;                 // Set base to T3
+        bool   canHQ           = true;              // We assume by default that we can HQ
         double success         = 0;
         double chance          = 0;
         double random          = xirand::GetRandomNumber(1.);
