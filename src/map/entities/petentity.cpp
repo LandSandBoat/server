@@ -213,7 +213,7 @@ void CPetEntity::Die()
     }
     else
     {
-        PAI->Internal_Die(0s);
+        PAI->Internal_Die(2500ms);
     }
 
     luautils::OnMobDeath(this, nullptr);
