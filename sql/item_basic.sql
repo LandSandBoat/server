@@ -14174,7 +14174,7 @@ INSERT INTO `item_basic` VALUES (16864,0,'brass_spear_+1','brass_spear_+1',1,208
 INSERT INTO `item_basic` VALUES (16865,0,'spear_+1','spear_+1',1,2080,8,0,2827);
 INSERT INTO `item_basic` VALUES (16866,0,'halberd_+1','halberd_+1',1,2080,8,0,1400);
 INSERT INTO `item_basic` VALUES (16867,0,'orc_piercer','orc_piercer',1,2052,8,0,275);
-INSERT INTO `item_basic` VALUES (16868,0,'heavy_halberd','heavy_halberd',1,2052,8,0,4431);
+INSERT INTO `item_basic` VALUES (16868,0,'heavy_halberd','heavy_halberd',1,2052,8,0,10560);
 INSERT INTO `item_basic` VALUES (16869,0,'thundercloud','thundercloud',1,2052,8,0,12487);
 INSERT INTO `item_basic` VALUES (16870,0,'envy_spear','envy_spear',1,34820,8,0,5562);
 INSERT INTO `item_basic` VALUES (16871,0,'kamayari','kamayari',1,2084,8,0,4161);
