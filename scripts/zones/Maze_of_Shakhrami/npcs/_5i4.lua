@@ -3,7 +3,7 @@
 -- Quest: Heaven Cent
 --  NPC: Chest
 -----------------------------------
-ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
+local ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
 -----------------------------------
 local entity = {}
 
