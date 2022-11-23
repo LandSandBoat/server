@@ -18,9 +18,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local dmgmod = 0
 
     if tp < 1500 then
-        dmgmod = math.floor((29/256) * (tp/100) + (928/256))
+        dmgmod = math.floor((22 / 256) * (tp / 100) + (384 / 256))
     else
-        dmgmod = math.floor(((29/256) * (1500/100)) + ((14/256) * ((tp-1500)/100)) + (928/256))
+        dmgmod = math.floor(((22 / 256) * (1500 / 100)) + ((9 / 256) * ((tp - 1500) / 100) + 384 / 256))
     end
 
     local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)
