@@ -231,7 +231,7 @@ namespace synthutils
     uint8 calcSynthResult(CCharEntity* PChar)
     {
         uint8  result          = SYNTHESIS_SUCCESS; // We assume by default that we succed
-        int8   hqtier          = 3;
+        int8   hqtier          = 3;    // Set base to T3
         bool   canHQ           = true; // We assume by default that we can HQ
         double success         = 0;
         double chance          = 0;
@@ -251,20 +251,20 @@ namespace synthutils
 
                 if (synthDiff > 0)
                 {
-                    hqtier = -1;
+                    hqtier = -1; // No tier
                     break;
                 }
                 else if (synthDiff > -11 && hqtier > 0) // 0-10 levels over recipe
                 {
-                    hqtier = 0;
+                    hqtier = 0; // T0
                 }
                 else if (synthDiff > -31 && hqtier > 1) // 11-30 levels over recipe
                 {
-                    hqtier = 1;
+                    hqtier = 1; // T1
                 }
                 else if (synthDiff > -51 && hqtier > 2) // 31-50 levels over recipe
                 {
-                    hqtier = 2;
+                    hqtier = 2; // T2
                 }
             }
         }
@@ -324,16 +324,16 @@ namespace synthutils
             switch (hqtier)
             {
                 case 3:
-                    chance = 0.500;
+                    chance = 0.500; // 1/2
                     break;
                 case 2:
-                    chance = 0.250;
+                    chance = 0.250; // 1/4
                     break;
                 case 1:
-                    chance = 0.066;
+                    chance = 0.0625; // 1/16
                     break;
                 case 0:
-                    chance = 0.018;
+                    chance = 0.018; // 1/64
                     break;
                 case -1:
                     chance = 0.0006;
@@ -474,24 +474,16 @@ namespace synthutils
 
             // Section 2: Skill up equations and penalties
             double skillUpChance         = 0;
-            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
+            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER"); // For servers who want increased crafting rates
             double coeff                 = 0.0;
 
-            if (charSkill < 400)
+            if (charSkill < 500) // 0-49
             {
-                skillUpChance = 0.5;
+                skillUpChance = 0.6;
             }
-            else if (charSkill < 600)
-            {
-                skillUpChance = 0.40;
-            }
-            else if (charSkill < 950)
+            else if (charSkill < 1000) // 50-60
             {
                 skillUpChance = 0.25;
-            }
-            else if (charSkill < 1000)
-            {
-                skillUpChance = 0.20;
             }
 
             switch (baseDiff)
@@ -532,7 +524,7 @@ namespace synthutils
             }
 
             skillUpChance *= coeff;
-            skillUpChance *= craftChanceMultiplier;
+            skillUpChance *= craftChanceMultiplier; // For servers who want increased crafting rates
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
             int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
@@ -546,12 +538,14 @@ namespace synthutils
                 penalty += 1;
             }
 
-            if (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL) // If synth breaks, lower skill up rate
-            {
-                penalty += 1;
-            }
+            // No proof this is a thing. Until proven otherwise removing.
+            // if (PChar->CraftContainer->getQuantity(0) == SYNTHESIS_FAIL) // If synth breaks, lower skill up rate
+            // {
+            //     penalty += 1;
+            // }
 
-            skillUpChance = skillUpChance / penalty; // Lower skill up chance if synth breaks
+            // https://www.bluegartr.com/threads/57123-Before-you-ask-a-stupid-crafting-question-read-this!?p=1987222&viewfull=1#post1987222
+            skillUpChance = skillUpChance / penalty; // Lower skill up chance if desyntth
 
             // Section 3: Calculate Skill Up and Skill Up Amount
             double random = xirand::GetRandomNumber(1.);
@@ -559,6 +553,20 @@ namespace synthutils
             if (random < skillUpChance) // If character skills up
             {
                 uint8 skillUpAmount = 1;
+                uint8 maxSkillUp    = 4; // Max skill is 0.4
+
+                if (charSkill >= 600)
+                {
+                    maxSkillUp = 1;
+                }
+                else if (baseDiff >= 6)
+                {
+                    maxSkillUp = 3;
+                }
+                else if (baseDiff >= 12)
+                {
+                    maxSkillUp = 4;
+                }
 
                 if (charSkill < 600) // No skill ups over 0.1 happen over level 60 normally, without some sort of buff to it.
                 {
@@ -578,33 +586,26 @@ namespace synthutils
                     {
                         satier = 3;
                     }
-                    else if ((baseDiff >= 8) && (baseDiff < 10))
+                    else if (baseDiff >= 8)
                     {
                         satier = 4;
                     }
-                    else if (baseDiff >= 10)
-                    {
-                        satier = 5;
-                    }
 
-                    for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
+                    for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.4) or break. The lower the satier, the more likely it will break
                     {
                         switch (satier)
                         {
-                            case 5:
-                                chance = 0.900;
-                                break;
                             case 4:
-                                chance = 0.700;
+                                chance = 0.600;
                                 break;
                             case 3:
-                                chance = 0.500;
+                                chance = 0.350;
                                 break;
                             case 2:
-                                chance = 0.300;
+                                chance = 0.250;
                                 break;
                             case 1:
-                                chance = 0.200;
+                                chance = 0.150;
                                 break;
                             default:
                                 chance = 0.000;
@@ -621,6 +622,12 @@ namespace synthutils
                         skillUpAmount++;
                         satier--;
                     }
+                }
+
+                // Sets max skill up amount - needs to be before character current cap
+                if (skillUpAmount > maxSkillUp)
+                {
+                    skillUpAmount = maxSkillUp;
                 }
 
                 // Do skill amount multiplier
