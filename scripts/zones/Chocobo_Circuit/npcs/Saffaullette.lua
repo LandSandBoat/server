@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Saffaullette
--- !pos -252.2906 -5.0000 -490.7443
+-- !pos -252.2906 -5.0000 -490.7443 70
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
@@ -12,27 +11,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(265)
+    local freePass = player:hasKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
+    player:startEvent(265, freePass and 1 or 0, 4)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-end
-
-entity.onEventFinsih = function(player, csid, option)
-    if 
-        csid == 265 and 
-        option == 1 and 
-        player:hasKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS) then 
-            player:setpos(-116.2652, -14.500, -125.3634, 0)
-    elseif csid == 265 and 
-        option == 1 then
-            player:delGil(50) and 
-            player:setpos(-116.2652, -14.500, -125.3634, 0)
+    local freePass = player:hasKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
+    if freePass or player:delGil(50) then
+        player:updateEvent(0)
+        if freePass then
+            player:delKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
+        end
     end
 end
 
-return entity
+entity.onEventFinsih = function(player, csid, option)
+end
 
---player:addgil
---CHOCOBO_CIRCUIT_GRANDSTAND_PASS          = 908
--- !addkeyitem 908 Tom_Neverwinter
+return entity

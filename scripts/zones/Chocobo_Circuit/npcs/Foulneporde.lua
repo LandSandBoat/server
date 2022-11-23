@@ -11,17 +11,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(263, 0, 3)
+    local freePass = player:hasKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
+    player:startEvent(263, freePass and 1 or 0, 2)
 end
 
 entity.onEventUpdate = function(player, csid, option)
     local freePass = player:hasKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
-    if freePass or player:getGil() >= 50 then
+    if freePass or player:delGil(50) then
         player:updateEvent(0)
         if freePass then
             player:delKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
-        else
-            player:delGil(50)
         end
     end
 end
