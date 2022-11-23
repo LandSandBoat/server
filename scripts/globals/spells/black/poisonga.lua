@@ -19,6 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if skill > 400 then
         power = math.min((skill - 225) / 5, 55) -- Cap is 55 hp/tick
     end
+
     power = calculatePotency(power, spell:getSkillType(), caster, target)
 
     local duration = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)

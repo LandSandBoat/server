@@ -23,6 +23,7 @@ entity.onMobEngaged = function(mob, target)
         mob:setMod(xi.mod.IMPACT_SDT, 300)
         mob:setMod(xi.mod.HTH_SDT, 300)
     end
+
     GetMobByID(ID.mob.TEMENOS_C_MOB[3]):updateEnmity(target)
     GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 1):updateEnmity(target)
 end

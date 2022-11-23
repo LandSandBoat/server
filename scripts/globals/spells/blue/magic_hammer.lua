@@ -62,6 +62,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             if target:getMP() < dmg then
                 dmg = target:getMP()
             end
+
             caster:addMP(dmg)
         else
             return 0

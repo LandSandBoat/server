@@ -18,6 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     end
 end
+
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SILENCE
     local power = 1
@@ -31,6 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if info.hitslanded > 0 then
         target:addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return dmg
 end
 

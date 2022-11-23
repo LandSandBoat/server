@@ -44,10 +44,12 @@ entity.onTrigger = function(player, npc)
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ACHIEVING_TRUE_POWER) then
         bastokQuests = bastokQuests - 128   -- Achieving True Power
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS) then
         bastokQuests = bastokQuests - 512   -- Too Many Chefs
 
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_PROPER_BURIAL) then
         bastokQuests = bastokQuests - 1024  -- A Proper Burial (pt.1)
         bastokQuests = bastokQuests - 2048  -- A Proper Burial (pt.2)
@@ -62,22 +64,27 @@ entity.onTrigger = function(player, npc)
     if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) then
         otherQuests = otherQuests - 2      -- Beat Around the Bushin
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER) then
         otherQuests = otherQuests - 4      -- Confessions of a Bellmaker
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PICTURE_PERFECT) then
         otherQuests = otherQuests - 8      -- Picture Perfect (pt.1)
         otherQuests = otherQuests - 16     -- Picture Perfect (pt.2)
         otherQuests = otherQuests - 32     -- Picture Perfect (pt.3)
         otherQuests = otherQuests - 64     -- Picture Perfect (pt.4)
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) then
         otherQuests = otherQuests - 128    -- No Strings Attached
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES) then
         otherQuests = otherQuests - 256    -- Puppetmaster Blues (pt.1)
         otherQuests = otherQuests - 512    -- Puppetmaster Blues (pt.2)
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN) then
         otherQuests = otherQuests - 1024   -- Comeback Queen
     end
@@ -90,9 +97,11 @@ entity.onTrigger = function(player, npc)
     if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DRAFTED_BY_THE_DUCHY) then
         otherQuests = otherQuests - 8192   -- Drafted by the Duchy
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BATTLE_ON_A_NEW_FRONT) then
         otherQuests = otherQuests - 16384  -- Battle on a New Front
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.VOIDWALKER_OP_126) then
         otherQuests = otherQuests - 32768  -- VW Op. #126: Qufim Incursion
     end

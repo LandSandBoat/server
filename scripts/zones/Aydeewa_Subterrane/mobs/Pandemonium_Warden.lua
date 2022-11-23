@@ -80,6 +80,7 @@ local function handlePet(mob, newPet, oldPet, target, modelId)
     if oldPet:isSpawned() then
         DespawnMob(oldPet:getID())
     end
+
     newPet:setModelId(modelId)
     newPet:spawn()
     newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
@@ -167,6 +168,7 @@ entity.onMobFight = function(mob, target)
                 end
             end
         end
+
         DespawnMob(ID.mob.PANDEMONIUM_WARDEN)
     end
 end

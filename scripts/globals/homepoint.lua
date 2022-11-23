@@ -201,7 +201,6 @@ xi.homepoint.onTrigger = function(player, csid, index)
 end
 
 xi.homepoint.onEventUpdate = function(player, csid, option)
-
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
 
@@ -223,6 +222,7 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
                         for y = x, 8 do
                             favs[y] = favs[y + 1]
                         end
+
                         favs[9] = -1
                         break
                     end

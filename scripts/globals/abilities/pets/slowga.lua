@@ -23,6 +23,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
+
     return xi.effect.SLOW
 end
 

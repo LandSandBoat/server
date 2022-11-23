@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
         result = 243
     end
+
     return result
 end
 

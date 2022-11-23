@@ -18,14 +18,17 @@ local trustMemory = function(player)
     if player:hasKeyItem(xi.ki.BALLISTA_LICENSE) then
         memories = memories + 2
     end
+
     -- 4 - Chocobo racing
     --  memories = memories + 4
     if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) then
         memories = memories + 8
     end
+
     if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BLOOD_OF_HEROES) then
         memories = memories + 16
     end
+
     return memories
 end
 

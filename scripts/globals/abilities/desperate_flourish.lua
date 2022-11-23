@@ -67,6 +67,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         else
             ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
+
         ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
         action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
         action:speceffect(target:getID(), 2)

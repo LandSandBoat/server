@@ -68,6 +68,7 @@ zoneObject.onEventFinish = function(player, csid, option)
         else
             player:setPos(-51, -48, -40, 246, 157)
         end
+
         player:setCharVar("option", 0)
     elseif csid == 4 and (option == 0 or option >= 3) then
         player:setCharVar("option", 0)

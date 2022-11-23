@@ -56,6 +56,7 @@ entity.onMobFight = function(mob, target)
     else
         mob:setLocalVar("cooldown", 70)
     end
+
     if mob:getLocalVar("cooldown") > 0 then
         mob:setLocalVar("cooldown", mob:getLocalVar("cooldown") - 1)
     end

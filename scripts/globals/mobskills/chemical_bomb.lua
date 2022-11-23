@@ -40,4 +40,5 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- This likely doesn't behave like retail.
     return typeEffectTwo
 end
+
 return mobskillObject

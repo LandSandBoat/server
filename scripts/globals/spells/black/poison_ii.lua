@@ -19,6 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if skill > 400 then
         power = math.floor(skill * 49 / 183 - 55) -- No cap can be reached yet
     end
+
     power = calculatePotency(power, spell:getSkillType(), caster, target)
 
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)

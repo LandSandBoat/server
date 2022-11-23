@@ -13,16 +13,19 @@ effectObject.onEffectGain = function(target, effect)
         target:addPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 35))
         target:addPetMod(xi.mod.REGEN, (effectregen[rollnum] + 14))
     end
+
     if effect:getPower() > 49 and effect:getPower() < 69 then
         local rollnum = effect:getPower() - 50
         target:addPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 25))
         target:addPetMod(xi.mod.REGEN, (effectregen[rollnum] + 10))
     end
+
     if effect:getPower() > 29 and effect:getPower() < 49 then
         local rollnum = effect:getPower() - 30
         target:addPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 15))
         target:addPetMod(xi.mod.REGEN, (effectregen[rollnum] + 6))
     end
+
     if effect:getPower() < 19 then
         local rollnum = effect:getPower()
         target:addPetMod(xi.mod.REGAIN, effectregain[rollnum])
@@ -41,16 +44,19 @@ effectObject.onEffectLose = function(target, effect)
         target:delPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 35))
         target:delPetMod(xi.mod.REGEN, (effectregen[rollnum] + 14))
     end
+
     if effect:getPower() > 49 and effect:getPower() < 69 then
         local rollnum = effect:getPower() - 50
         target:delPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 25))
         target:delPetMod(xi.mod.REGEN, (effectregen[rollnum] + 10))
     end
+
     if effect:getPower() > 29 and effect:getPower() < 49 then
         local rollnum = effect:getPower() - 30
         target:delPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 15))
         target:delPetMod(xi.mod.REGEN, (effectregen[rollnum] + 6))
     end
+
     if effect:getPower() < 19 then
         local rollnum = effect:getPower()
         target:delPetMod(xi.mod.REGAIN, effectregain[rollnum])

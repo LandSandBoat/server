@@ -23,6 +23,7 @@ attachmentObject.onEquip = function(automaton)
                     pet:delMod(xi.mod.RATTP, 39)
                 end
             end
+
             pet:setLocalVar("attuner", 0)
         end
 
@@ -44,6 +45,7 @@ attachmentObject.onEquip = function(automaton)
             end
         end
     end)
+
     automaton:addListener("DISENGAGE", "AUTO_ATTUNER_DISENGAGE", function(pet)
         if pet:getLocalVar("attuner") > 0 then
             local master = pet:getMaster()
@@ -61,6 +63,7 @@ attachmentObject.onEquip = function(automaton)
                     pet:delMod(xi.mod.RATTP, 39)
                 end
             end
+
             pet:setLocalVar("attuner", 0)
         end
     end)

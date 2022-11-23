@@ -28,6 +28,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         if mp + currmp > maxmp then
             mp = maxmp - currmp
         end
+
         player:addMP(mp)
         player:delStatusEffectSilent(xi.effect.SUBLIMATION_COMPLETE)
         ability:setMsg(xi.msg.basic.JA_RECOVERS_MP)
@@ -38,6 +39,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         if mp + currmp > maxmp then
             mp = maxmp - currmp
         end
+
         player:addMP(mp)
         player:delStatusEffectSilent(xi.effect.SUBLIMATION_ACTIVATED)
         ability:setMsg(xi.msg.basic.JA_RECOVERS_MP)

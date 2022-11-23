@@ -29,6 +29,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(139)
         end
     end
+
     return 1
 end
 

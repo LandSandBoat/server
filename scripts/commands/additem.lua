@@ -58,6 +58,7 @@ function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, a
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, itemToGet)
         end
+
         return
     end
 

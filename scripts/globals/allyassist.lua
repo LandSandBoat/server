@@ -54,6 +54,7 @@ xi.ally =
                 for _, ally in ipairs(allies) do
                     ally:engage(assistTarget)
                 end
+
                 return
             end
         end
