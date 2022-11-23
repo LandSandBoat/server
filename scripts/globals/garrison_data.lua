@@ -22,20 +22,36 @@ xi.garrison.allyNames =
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
 xi.garrison.allyLooks =
 {
-    --level 20 garrison looks
+    -- Level 20 garrison looks
+    -- The looks that have not been obtained from captures are commented
+    -- with the npc that they are taken from
+    -- Obtain new looks by finding a good looking npc and running the query:
+    -- Select name, npcid, CONCAT("0x", HEX(look)) FROM npc_list WHERE name LIKE "Shato%"
+    -- TODO: Get proper captures and remove any npcs that have a name associated to them
+    -- https://github.com/AirSkyBoat/AirSkyBoat/issues/1636
     [20] =
     {
         {
             "0x01000C030010262000303A403A5008611B700000",
-            "0x01000A040010262019303A40195008611C700000"
+            "0x01000A040010262019303A40195008611C700000",
+            -- Fouagine
+            "0x010004041C106E20833080406850836083700000",
         },
         {
-            804,
-            805
+            -- Pavel
+            "0x0100040100100520163005400550B86000700000",
+            -- Caliburn
+            "0x0100000100100620063006400650006000700000",
+            -- Fariel
+            "0x0100030100100520163005400550B86000700000",
         },
         {
-            804,
-            805
+            -- Puo_Rhen
+            "0x0000E90000000000000000000000000000000000",
+            -- Sheia_Pohrichamaha
+            "0x0000EA0000000000000000000000000000000000",
+            -- Mokyokyo
+            "0x0100180618101820183018401850006000700000",
         },
     },
     --level 30 garrison looks
@@ -48,18 +64,29 @@ xi.garrison.allyLooks =
             "0x01000E0400101520003015401550006000700000"
         },
         {
-            804,
-            805
+            -- Ferocious_Artisan
+            "0x0100010814102720173015401550006000700000",
+            -- Suzel
+            "0x01000E020F100720003003400750006000700000",
+            -- Guda (16883811)
+            "0x010003011C100E20083068401F50626000700000"
         },
         {
-            804,
-            805
+            -- Shatoto
+            "0x0100040600100120013001400150006000700000",
+            -- Harara_WW
+            "0x0100030601100120013001400150016001700000",
+            -- AMAN_Reclaimer (17764605)
+            "0x0100040777106720683066406850006000700000",
+            -- Naih_Arihmepp
+            "0x0100020700100220023002400250006000700000",
         },
     },
     --level 40 garrison looks
     [40] =
     {
-        {
+        {   -- Ironclad_Gorilla
+            "0x010009081C108A2008308A40085019611D700000",
             "0x01000E04191019201930194019506B601C700000",
             "0x01000903191019201930194019506B601C700000"
         },
@@ -70,20 +97,32 @@ xi.garrison.allyLooks =
             "0x0100040105102420053005400550BB6000700000"
         },
         {
-            804,
-            805
+            -- Voidwatch officer (17752374)
+            "0x01000C05141019200C3002400250006000700000",
+            -- Taraihi-Perunhi
+            "0x0100000500100220023002400250006000700000",
+            -- Wetata
+            "0x01000306461118205230B8408550006000700000"
         },
     },
     --level 50 garrison looks
     [50] =
     {
         {
-            804,
-            805
+            -- Ferchinne
+            "0x01000A041C103C206C306C406C503C6000700000",
+            -- Parelbriaux
+            "0x01000D0323108A20803088408050056100700000",
+            -- Petva
+            "0x01000101141019200C3002400250056000700000",
         },
         {
-            804,
-            805
+            -- Masis (16883819)
+            "0x01000C011C1073208330804068504E6000700000",
+            -- Ironclad_Gorilla
+            "0x010009081C108A2008308A40085019611D700000",
+            -- Iron Eater (17748016)
+            "0x01000D0801101620053019400C505C6000700000",
         },
         {
             "0x0100020600106320633063406350056122700000",
@@ -96,15 +135,23 @@ xi.garrison.allyLooks =
     [75] =
     {
         {
-            804,
-            805
+            -- Morangeart
+            "0x010009031A10812088303C408850CF6000700000",
+            -- Quelveuiat
+            "0x01000E0388108820883088408850186100700000",
+            -- Jaucribaix
+            "0x01000F0304102220093009400950006000700000",
         },
         {
-            "0x010002071C1070201C301C401C50C46000700000"
+            "0x010002071C1070201C301C401C50C46000700000",
+            -- Merol
+            "0x010008021C106A20733073406850006000700000",
         },
         {
-            804,
-            805
+            -- Fhelm_Jobeizat (17764603)
+            "0x010003071310222064306E406450006000700000",
+            -- Shivivi
+            "0x0100080604102320093009400C50006000700000",
         },
     },
 }
