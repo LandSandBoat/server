@@ -538,7 +538,12 @@ namespace mobutils
         PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank)); // Base Evasion for all mobs
         PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank)); // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
         PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank)); // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::PARRY, GetBase(PMob, 3));           // Base Parry for all mobs is Rank C
+
+        // Only mobs in dynamis can parry
+        if (((PMob->getZone() >= 39) && (PMob->getZone() <= 42)) || (PMob->getZone() == 134) || (PMob->getZone() == 135) || (PMob->getZone() >= 185 && PMob->getZone() <= 188))
+        {
+            PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
+        }
 
         // natural magic evasion
         PMob->addModifier(Mod::MEVA, GetMagicEvasion(PMob));
