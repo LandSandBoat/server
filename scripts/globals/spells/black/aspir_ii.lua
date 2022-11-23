@@ -35,7 +35,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = dmg * xi.settings.main.DARK_POWER
 
-    if target:isUndead() then
+    -- ID 2156: Jormungand
+    if target:isUndead() or target:getPool() == 2156 then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end

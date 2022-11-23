@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             target:delStatusEffectSilent(xi.effect.SLEEP_I)
             target:delStatusEffectSilent(xi.effect.POISON)
             local dotdmg = 50
-            if not (target:hasImmunity(1) or hasSleepEffects(target)) and target:addStatusEffect(effect, 1, 0, duration, 25, 25, 1) then -- subid/subpower for poison detection on wakup function
+            if not (target:hasImmunity(xi.immunity.SLEEP) or hasSleepEffects(target)) and target:addStatusEffect(effect, 1, 0, duration, 25, 25, 1) then -- subid/subpower for poison detection on wakup function
                 target:addStatusEffect(xi.effect.POISON, dotdmg, 3, duration, 0, 15, 2)
                 skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
             else
