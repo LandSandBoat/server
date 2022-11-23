@@ -22,11 +22,16 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         CONQUEST_BASE                 = 7060, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7579, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7710, -- Mining is possible here if you have <item>.
+        BRAKOBRIK_1                   = 7717, --  Stupid people. You don't getting what I'm saying.
+        BRAKOBRIK_2                   = 7722, -- Killing bombs. Bringing *item*
+        BRAKOBRIK_3                   = 7727, -- Good, good. You being smart. Very, very clever.
+        BRAKOBRIK_4                   = 7730, -- When Brakobrik realizes that you already possess the item he is trying to give you, he refuses to give you another one.
         RAKOROK_DIALOGUE              = 7734, -- Nsy pipul. Gattohre! I bisynw!
         ALTANA_DIE                    = 7736, -- Aaaltaaanaaa...Diiieee!!!
         MONSTER_APPEARED              = 7749, -- A monster has appeared!
         CHEST_UNLOCKED                = 7758, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL         = 8116, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
     },
     mob =
     {

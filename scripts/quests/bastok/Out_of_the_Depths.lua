@@ -14,7 +14,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Bastok_Markets/IDs')
+local ID = require('scripts/zones/Bastok_Markets/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
 
@@ -124,9 +124,9 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(2)
                     elseif quest:getVar(player, 'Prog') >= 7 then
-                        npc:messageText(npc, 7714)
+                        player:showText(npc, ID.text.BRAKOBRIK_1)
                     else
-                        player:messageSpecial(7719, 0, 1669)
+                        player:showText(npc, ID.text.BRAKOBRIK_2, 0, 1669)
                     end
                 end,
 
@@ -187,11 +187,11 @@ quest.sections =
                     elseif option == 0 and quest:getVar(player, 'Prog') >= 6 then
                         player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.OLD_NAMETAG)
-                        npc:messageText(player, 7724)
-                        quest:setVar(player, 'Prog', 7)
+                        player:showText(npc, ID.text.BRAKOBRIK_3)
+                        quest:setVar(npc, 'Prog', 7)
                     elseif option == 0 then
                         player:tradeComplete()
-                        npc:messageText(player, 7727)
+                        player:showText(npc, ID.text.BRAKOBRIK_4)
                     end
                 end,
             },
