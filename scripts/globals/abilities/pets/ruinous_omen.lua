@@ -63,6 +63,7 @@ abilityobject.onPetAbility = function(target, pet, skill)
     -- Clamp the HPP reduction to the min/max HP values
     damage = utils.clamp(damage, damageMin, damageMax)
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.DARK)
+    target:updateEnmityFromDamage(pet, damage)
 
     -- Reset master MP
     pet:getMaster():setMP(0)
