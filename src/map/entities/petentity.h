@@ -66,7 +66,6 @@ public:
     virtual void FadeOut() override;
     virtual void Die() override;
     virtual void Spawn() override;
-    bool         shouldPersistThroughZone();     // if true, zoning should not cause a currently active pet to despawn
     bool         shouldDespawn(time_point tick); // if true, the pet should despawn at this point in time
     void         loadPetZoningInfo();            // loads info from previous zone (hp / mp / tp / spawn time). This MUST be called after Spawn()
     virtual void OnAbility(CAbilityState&, action_t&) override;

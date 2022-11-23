@@ -2630,11 +2630,6 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
-            if (PChar->PPet != nullptr)
-            {
-                PChar->setPetZoningInfo();
-            }
-
             PChar->loc.destination = zoneid;
             PChar->status          = STATUS_TYPE::DISAPPEAR;
             PChar->loc.boundary    = 0;

@@ -704,11 +704,11 @@ namespace charutils
                 PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(sql->GetUIntData(10));
                 PChar->petZoningInfo.petLevel     = sql->GetUIntData(13);
                 PChar->petZoningInfo.respawnPet   = true;
-                PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jug-pet-spawn-time");
-                PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jug-duration-seconds");
+                PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jugpet-spawn-time");
+                PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jugpet-duration-seconds");
 
                 // clear the charvars used for jug state
-                PChar->clearCharVarsWithPrefix("jug-");
+                PChar->clearCharVarsWithPrefix("jugpet-");
             }
         }
 
@@ -5069,8 +5069,8 @@ namespace charutils
 
         // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
         // we use charvars for jug specific things
-        PChar->setCharVar("jug-pet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
-        PChar->setCharVar("jug-duration-seconds", PChar->petZoningInfo.jugDuration);
+        PChar->setCharVar("jugpet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
+        PChar->setCharVar("jugpet-duration-seconds", PChar->petZoningInfo.jugDuration);
     }
 
     /************************************************************************
@@ -6101,6 +6101,15 @@ namespace charutils
         else
         {
             SaveCharPosition(PChar);
+        }
+
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
+        else
+        {
+            PChar->resetPetZoningInfo();
         }
 
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
