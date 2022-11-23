@@ -1038,19 +1038,19 @@ xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-local function fTPMob(tp, ftp1, ftp2, ftp3)
-    if (tp < 1000) then
-        tp = 1000
-    end
+-- local function fTPMob(tp, ftp1, ftp2, ftp3)
+--     if (tp < 1000) then
+--         tp = 1000
+--     end
 
-    if (tp >= 1000 and tp < 1500) then
-        return ftp1 + ( ((ftp2 - ftp1 ) / 500) * (tp - 1000) )
-    elseif (tp >= 1500 and tp <= 3000) then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500) )
-    end
-    return 1 -- no ftp mod
-end
+--     if (tp >= 1000 and tp < 1500) then
+--         return ftp1 + ( ((ftp2 - ftp1 ) / 500) * (tp - 1000) )
+--     elseif (tp >= 1500 and tp <= 3000) then
+--         -- generate a straight line between ftp2 and ftp3 and find point @ tp
+--         return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500) )
+--     end
+--     return 1 -- no ftp mod
+-- end
 
 xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignore1, ignore2, ignore3)
     if tp >= 1000 and tp < 2000 then
@@ -1074,7 +1074,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local atkmulti = 0
 
     if params.atk150 ~= nil then -- Use mob fTP
-        atkmulti = fTPMob(tp, params.atk000, params.atk150, params.atk300)
+        atkmulti = 1 -- Temp fix in prep for re-write. Always set multi to 1.
     else -- Use player fTP
         atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
     end

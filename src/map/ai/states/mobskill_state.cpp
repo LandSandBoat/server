@@ -74,7 +74,6 @@ CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
-    SpendCost();
 }
 
 CMobSkill* CMobSkillState::GetSkill()
@@ -113,6 +112,7 @@ bool CMobSkillState::Update(time_point tick)
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         auto delay   = std::chrono::milliseconds(m_PSkill->getAnimationTime());
         m_finishTime = tick + delay;
+        SpendCost();
         Complete();
     }
     if (IsCompleted() && tick > m_finishTime)

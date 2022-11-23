@@ -6,6 +6,7 @@
 -- Utsusemi/Blink absorb: Ignores shadows.
 -- Range: Melee?
 -- Notes: Very potent paralysis xi.effect. Is NOT a Gaze Attack, unlike Chaotic Eye.
+-- TODO: Blaster is a 70% paralyze chance with a 15-60 second duration.
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")

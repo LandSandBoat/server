@@ -15,7 +15,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 2.2
+    local dmgmod = 1
     local power = math.ceil(mob:getMainLvl() / 5)
     local poisonPower
 
