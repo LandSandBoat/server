@@ -66,17 +66,6 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     caster:addHP(dmg)
 
-    -- Messaging Fixes
-    local currHP = caster:getHP()
-    local maxHP  = caster:getMaxHP()
-
-    if caster:getHP() == caster:getMaxHP() then
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, 0) -- Drains 0 HP
-        return 0
-    elseif dmg + currHP > maxHP then
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, maxHP - currHP) -- Drains 0 HP
-    end
-
     return dmg
 end
 

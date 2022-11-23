@@ -17,6 +17,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 10 + (1.035 * caster:getSkillLevel(xi.skill.DARK_MAGIC))
+    local hpDiff = caster:getMaxHP() - caster:getHP()
 
     if dmg > (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 20) then
         dmg = (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 20)
@@ -54,20 +55,11 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
+    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, math.min(dmg, hpDiff))
+
     caster:addHP(dmg)
 
-    -- Messaging Fixes
-    local currHP = caster:getHP()
-    local maxHP  = caster:getMaxHP()
-
-    if caster:getHP() == caster:getMaxHP() then
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, 0) -- Drains 0 HP
-        return 0
-    elseif dmg + currHP > maxHP then
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, maxHP - currHP) -- Drains 0 HP
-    end
-
-    return dmg
+    return math.min(dmg, hpDiff)
 
 end
 

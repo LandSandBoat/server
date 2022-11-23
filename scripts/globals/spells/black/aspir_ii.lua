@@ -50,16 +50,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     -- Messaging Fixes
-    local currMP = caster:getMP()
-    local maxMP  = caster:getMaxMP()
+    local mpDiff = caster:getMaxMP() - caster:getMP()
 
-    if caster:getMP() == caster:getMaxMP() then
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, 0) -- Drains 0 MP
-        return 0
-    elseif dmg + currMP > maxMP then
-        local mpRecovered = maxMP - currMP
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP, mpRecovered)
-    end
+    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, math.min(dmg, mpDiff))
 
     return dmg
 end
