@@ -41,7 +41,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    if target:isUndead() or target:hasImmunity(xi.immunity.DRAIN) then
+    if target:isUndead()
+        -- or target:hasImmunity(xi.immunity.DRAIN)
+    then
         dmg = 0
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
@@ -55,6 +57,18 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     caster:addHP(dmg)
+
+    -- Messaging Fixes
+    local currHP = caster:getHP()
+    local maxHP  = caster:getMaxHP()
+
+    if caster:getHP() == caster:getMaxHP() then
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, 0) -- Drains 0 HP
+        return 0
+    elseif dmg + currHP > maxHP then
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, maxHP - currHP) -- Drains 0 HP
+        return 0
+    end
 
     return dmg
 
