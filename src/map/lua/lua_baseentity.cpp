@@ -2162,16 +2162,19 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
-    auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    auto* const PTarget = dynamic_cast<CCharEntity*>(target->GetBaseEntity());
-
-    if (PChar && PTarget)
+    if (target)
     {
-        const auto emoteID   = static_cast<Emote>(emID);
-        const auto emoteMode = static_cast<EmoteMode>(emMode);
+        auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        auto* const PTarget = target->GetBaseEntity();
 
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
-                                    new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+        if (PChar && PTarget)
+        {
+            const auto emoteID   = static_cast<Emote>(emID);
+            const auto emoteMode = static_cast<EmoteMode>(emMode);
+
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
+                                        new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+        }
     }
 }
 
