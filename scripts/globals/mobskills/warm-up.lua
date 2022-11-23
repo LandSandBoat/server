@@ -32,7 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:hasStatusEffect(xi.effect.ACCURACY_BOOST) then
         skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, 180))
         effectID = xi.effect.EVASION_BOOST
-    elseif mob:hasStatusEffect(xi.effect.ACCURACY_BOOST) then
+    elseif mob:hasStatusEffect(xi.effect.EVASION_BOOST) then
         skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ACCURACY_BOOST, power, 0, 180))
         effectID = xi.effect.ACCURACY_BOOST
     else

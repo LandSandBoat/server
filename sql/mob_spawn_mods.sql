@@ -62,9 +62,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16793860,55,180,1); -- IDLE_DESPAWN: 180
 -- Shen'S Filtrate
 INSERT INTO `mob_spawn_mods` VALUES (16793861,55,180,1); -- IDLE_DESPAWN: 180
 
--- Jormungand
-INSERT INTO `mob_spawn_mods` VALUES (16797969,12,15,1); -- DRAW_IN: 15
-
 -- Geush Urvan
 -- Values taken from wiki (http://ffxiclopedia.wikia.com/wiki/Geush_Urvan)
 INSERT INTO `mob_spawn_mods` VALUES (16798078,1,20000,1);
@@ -235,9 +232,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16892073,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Indich
 INSERT INTO `mob_spawn_mods` VALUES (16892074,55,180,1); -- IDLE_DESPAWN: 180
-
--- Vrtra
-INSERT INTO `mob_spawn_mods` VALUES (16896161,12,15,1); -- DRAW_IN: 15
 
 -- Ouryu
 INSERT INTO `mob_spawn_mods` VALUES (16900314,12,15,1); -- DRAW_IN: 15
