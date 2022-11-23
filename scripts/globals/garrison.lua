@@ -114,9 +114,8 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
         rotation = rot,
         look = look,
 
-        -- TODO: Make relevant group and pool entries for NPCs
-        groupId = 35,
-        groupZoneId = xi.zone.NORTH_GUSTABERG,
+        groupId = 1,
+        groupZoneId = xi.zone.GM_HOME,
 
         releaseIdOnDisappear = true,
         specialSpawnAnimation = true,
