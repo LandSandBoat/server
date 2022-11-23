@@ -695,6 +695,8 @@ uint16 CBattleEntity::CHR()
 uint16 CBattleEntity::ATT(uint16 slot)
 {
     TracyZoneScoped;
+    XI_DEBUG_BREAK_IF(slot >= sizeof(m_Weapons) / sizeof(CItemEquipment*));
+
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
