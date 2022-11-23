@@ -9,7 +9,7 @@ require("scripts/globals/magic")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)

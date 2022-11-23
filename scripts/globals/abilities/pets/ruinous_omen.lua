@@ -22,7 +22,7 @@ abilityobject.onAbilityCheck = function(player, target, ability)
         return 87, 0
     end
 
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityobject.onPetAbility = function(target, pet, skill)
