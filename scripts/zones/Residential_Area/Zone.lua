@@ -13,7 +13,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if player:getCharVar("newMog") == 0 then
         cs = 30000
-        player:setCharVar("newMob", 1)
+        player:setCharVar("newMog", 1)
     end
 
     player:eraseStatusEffect(true)

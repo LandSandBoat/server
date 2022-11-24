@@ -54,11 +54,10 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
         player:startEvent(700)
     else
-        player:setPos(-33.5104, -8.1500, 27.7711, 0)
-        player:setLocalVar('[AIRSHIP]Paid', 0)
+        player:setPos(-37.55, -8, 27.96, 126)
     end
 end
 
@@ -70,8 +69,6 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 700 then
         player:setPos(0, 0, 0, 0, 223)
-    elseif csid == 518 and option == 0 then
-        player:setLocalVar('[AIRSHIP]Paid', 0)
     end
 end
 

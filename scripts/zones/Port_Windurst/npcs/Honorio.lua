@@ -28,7 +28,6 @@ entity.onEventFinish = function(player, csid, option)
 
         if xPos >= 222 and xPos <= 225 then
             player:delGil(200)
-            player:setLocalVar('[AIRSHIP]Paid', 1)
         end
     end
 end
