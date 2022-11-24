@@ -24,8 +24,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            not player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED
+            return status == QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -36,7 +35,7 @@ quest.sections =
                     if player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 then
                         return quest:progressEvent(483)
                     else
-                        return quest:progressEvent(463, 0, 4565, 572)
+                        return quest:progressEvent(463, 0, 4565, xi.items.BAG_OF_HERB_SEEDS)
                     end
                 end,
             },
@@ -45,11 +44,10 @@ quest.sections =
             {
                 [463] = function(player, csid, option, npc)
                     if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 572)
+                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.BAG_OF_HERB_SEEDS)
                     else
                         if option == 3 then
-                            player:addItem(572)
-                            player:messageSpecial(ID.text.ITEM_OBTAINED, 572)
+                            npcUtil.giveItem(player, xi.items.BAG_OF_HERB_SEEDS)
                             quest:begin(player)
                         end
                     end
@@ -71,7 +69,7 @@ quest.sections =
                     local rand = math.random()
 
                     if rand > 0.5 then
-                        return quest:progressEvent(464, 0, 4565, 572)
+                        return quest:progressEvent(464, 0, 4565, xi.items.BAG_OF_HERB_SEEDS)
                     else
                         return quest:progressEvent(476)
                     end
@@ -97,8 +95,8 @@ quest.sections =
                         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
                     else
                         player:addGil(500)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*500)
-                        player:addItem(xi.items.STATIONERY_SET)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 500)
+                        npcUtil.giveItem(player, xi.items.STATIONERY_SET)
                         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STATIONERY_SET)
                     end
                 end,
@@ -131,7 +129,7 @@ quest.sections =
                     local rand = math.random()
 
                     if rand > 0.5 then
-                        return quest:progressEvent(464, 0, 4565, 572)
+                        return quest:progressEvent(464, 0, 4565, xi.items.BAG_OF_HERB_SEEDS)
                     else
                         player:startEvent(476)
                     end
@@ -157,9 +155,8 @@ quest.sections =
                         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
                     else
                         player:addGil(500)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*500)
-                        player:addItem(xi.items.STATIONERY_SET)
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STATIONERY_SET)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 500)
+                        npcUtil.giveItem(player, xi.items.STATIONERY_SET)
                     end
                 end,
 
@@ -170,9 +167,8 @@ quest.sections =
                         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
                     else
                         player:addGil(500)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*500)
-                        player:addItem(xi.items.STATIONERY_SET)
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STATIONERY_SET)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 500)
+                        npcUtil.giveItem(player, xi.items.STATIONERY_SET)
                     end
                 end,
             },
