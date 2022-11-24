@@ -553,11 +553,10 @@ namespace synthutils
             if (random < skillUpChance) // If character skills up
             {
                 uint8 skillUpAmount = 1;
-                uint8 maxSkillUp = 1; // Max skill is 0.1 for over 60
+                uint8 maxSkillUp    = 1; // Max skill is 0.1 for over 60
 
                 if (charSkill < 600) // No skill ups over 0.1 happen over level 60 normally, without some sort of buff to it.
                 {
-
                     if (baseDiff < 6)
                     {
                         maxSkillUp = 2;
