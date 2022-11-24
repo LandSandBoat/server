@@ -21,7 +21,6 @@ itemObject.onItemEquip = function(player, item)
                     amount > mobArg:getHP()
                 then
                     playerArg:incrementCharVar("ChaosbringerKills", 1)
-                    print(player:getCharVar("ChaosbringerKills"))
                 end
             end)
         end
