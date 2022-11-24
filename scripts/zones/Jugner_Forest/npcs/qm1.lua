@@ -4,7 +4,7 @@
 -- Involved in Quest: A Timely Visit
 -- !pos -310 0 407
 -----------------------------------
-ID = require('scripts/zones/Jugner_Forest/IDs')
+local ID = require('scripts/zones/Jugner_Forest/IDs')
 -----------------------------------
 local entity = {}
 

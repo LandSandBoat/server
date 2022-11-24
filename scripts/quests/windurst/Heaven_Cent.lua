@@ -9,7 +9,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 -----------------------------------
-ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
+local ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HEAVEN_CENT)

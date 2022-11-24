@@ -8,7 +8,7 @@ require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Windurst_Waters/IDs')
+local ID = require('scripts/zones/Windurst_Waters/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)

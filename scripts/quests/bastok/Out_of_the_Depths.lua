@@ -14,7 +14,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Bastok_Markets/IDs')
+local ID = require('scripts/zones/Bastok_Markets/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
 
