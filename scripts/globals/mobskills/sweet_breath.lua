@@ -2,7 +2,7 @@
 -- Sweet Breath
 --
 -- Description: Deals water damage to enemies within a fan-shaped area originating from the caster.
--- Type: Magical Water (Element)
+-- Type: Magical Water (DARK)
 --
 -----------------------------------
 require("scripts/globals/mobskills")
@@ -15,8 +15,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.125, 3, xi.magic.ele.WATER, 500)
-    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local dmgmod = 1
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, 1, 1.25, 1.5)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
 

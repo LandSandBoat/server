@@ -1652,29 +1652,26 @@ namespace battleutils
         int16 x = 1;
         if (delay <= 180)
         {
-            x = (int16)(61 + ((delay - 180) * 63.f) / 360);
+            x = (int16)(5.0 + ((delay - 180) * 1.5f) / 180);
         }
-        else if (delay <= 540)
+        else if (delay <= 450)
         {
-            x = (int16)(61 + ((delay - 180) * 88.f) / 360);
+            x = (int16)(5.0 + ((delay - 180) * 6.5f) / 270);
         }
-        else if (delay <= 630)
+        else if (delay <= 480)
         {
-            x = (int16)(149 + ((delay - 540) * 20.f) / 360);
+            x = (int16)(11.5 + ((delay - 450) * 1.5f) / 30);
         }
-        else if (delay <= 720)
+        else if (delay <= 530)
         {
-            x = (int16)(154 + ((delay - 630) * 28.f) / 360);
-        }
-        else if (delay <= 900)
-        {
-            x = (int16)(161 + ((delay - 720) * 24.f) / 360);
+            x = (int16)(13.0 + ((delay - 480) * 1.5f) / 50);
         }
         else
         {
-            x = (int16)(173 + ((delay - 900) * 28.f) / 360);
+            x = (int16)(14.5 + ((delay - 530) * 3.5f) / 470);
         }
-        return x;
+
+        return x * 10;
     }
 
     bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)

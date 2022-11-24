@@ -1119,7 +1119,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Lumber_Jack',56,192,1,255); -- stonega_iv
 INSERT INTO `mob_spell_lists` VALUES ('Lumber_Jack',56,255,1,255); -- break (1~255)
 
 -- Vrtra (57)
-INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,233,1,255); -- bio_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,232,1,255); -- bio_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,274,1,255); -- sleepga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,360,1,255); -- dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Vrtra',57,361,1,255); -- blindga (1~255)
@@ -5025,9 +5025,6 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spi
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,274,1,255); -- Sleepga II
-INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,356,1,255); -- Paralyga
-INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,366,1,255); -- Graviga
 
 -- Princess Jelly (493)
 INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 235, 1, 255); -- burn (1~255)
@@ -5153,6 +5150,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,108,1,255);  -- Regen 
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,231,1,255);  -- Bio II (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,250,1,255);  -- Ice Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,254,1,255);  -- Blind (1~255)
+
+-- Cemetery Cherry (508)
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',508,274,1,255); -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',508,356,1,255); -- Paralyga
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',508,366,1,255); -- Graviga
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

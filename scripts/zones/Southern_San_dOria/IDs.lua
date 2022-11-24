@@ -58,6 +58,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         LUSIANE_SHOP_DIALOG            = 7976,  -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7977,  -- Welcome, customer. Please have a look.
         ASH_THADI_ENE_SHOP_DIALOG      = 7998,  -- Welcome to Helbort's Blades!
+        NOTHING_TO_REPORT              = 8016,  -- Nothing to report!
         UNLOCK_PALADIN                 = 8025,  -- You can now become a paladin!
         AMAURA_DIALOG_COMEBACK         = 8032,  -- Come back when ye've got it all. I'll make a draught to cure the wickedest of colds, I will.
         AMAURA_DIALOG_DELIVER          = 8035,  -- Take that medicine over quick as you can now, dearie. Wouldn't want it to go bad.

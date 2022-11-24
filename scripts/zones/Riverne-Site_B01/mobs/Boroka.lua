@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Riverne - Site B01
 --   NM: Boroka
+-- !pos -365.921 -31.255 486.367 29
 -----------------------------------
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -13,7 +15,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = xi.jsa.SOUL_VOICE, cooldown = 120, hpp = math.random(85, 95) }, -- Can use Soul Voice multiple times
+            { id = xi.jsa.SOUL_VOICE, cooldown = 120, hpp = 100 }, -- Can use Soul Voice multiple times
         },
     })
 end
@@ -22,7 +24,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- Always follows up any TP move with Hoof Volley
     local skillId = skill:getID()
 
-    if skillId ~= 1330 then
+    if skillId ~= 696 and skillId ~= 1330 then
         mob:useMobAbility(1330)
     end
 end

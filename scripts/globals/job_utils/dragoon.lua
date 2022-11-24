@@ -354,7 +354,9 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local empathyTotal = player:getMerit(xi.merit.EMPATHY)
 
     -- Add wyvern levels to the tune of 200 per empathy merit
-    xi.job_utils.dragoon.addWyvernExp(player, 200 * empathyTotal)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.job_utils.dragoon.addWyvernExp(player, 200 * empathyTotal)
+    end
 
     if empathyTotal > 0 then
         local validEffects = {}
@@ -388,8 +390,11 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         end
     end
 
+    if xi.settings.main.ENABLE_ABYSSEA == 1 then
+        player:addTP(petTP / 2) -- add half wyvern tp to you
+    end
+
     wyvern:addStatusEffect(xi.effect.REGEN, regenAmount, 3, 90, 0, 0, 0) -- 90 seconds of regen
-    player:addTP(petTP / 2) -- add half wyvern tp to you
     wyvern:delTP(petTP / 2) -- remove half tp from wyvern
 
     local drainamount = (math.random(25, 35) / 100) * playerHP

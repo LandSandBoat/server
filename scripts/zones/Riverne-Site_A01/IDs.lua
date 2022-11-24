@@ -44,6 +44,12 @@ zones[xi.zone.RIVERNE_SITE_A01] =
             16900317,
             16900318,
         },
+        HELIODROMOS =
+        {
+            16900110,
+            16900111,
+            16900112,
+        },
         HELIODROMOS_PH_OFFSET    = 16900107,
         HELIODROMOS_OFFSET       = 16900110,
         CARMINE_DOBSONFLY_OFFSET = 16900230,

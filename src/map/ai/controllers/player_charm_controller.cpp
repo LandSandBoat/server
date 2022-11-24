@@ -35,12 +35,19 @@ CPlayerCharmController::CPlayerCharmController(CCharEntity* PChar)
 
 CPlayerCharmController::~CPlayerCharmController()
 {
-    if (POwner->PAI->IsEngaged())
-    {
-        POwner->PAI->Internal_Disengage();
-    }
-    POwner->PAI->PathFind.reset();
     POwner->allegiance = ALLEGIANCE_TYPE::PLAYER;
+
+    // If the player is zoning (teleport from party)
+    // or dc's while charmed, PAI will be null
+    if (POwner->PAI != nullptr)
+    {
+        if (POwner->PAI->IsEngaged())
+        {
+            POwner->PAI->Internal_Disengage();
+        }
+
+        POwner->PAI->PathFind.reset();
+    }
 }
 
 void CPlayerCharmController::Tick(time_point tick)

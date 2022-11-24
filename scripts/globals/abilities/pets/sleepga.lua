@@ -11,7 +11,7 @@ require("scripts/globals/summon")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
@@ -24,7 +24,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         return xi.effect.SLEEP_I
     end
     duration = duration * resm
-    if target:hasImmunity(1) or hasSleepEffects(target) then
+    if target:hasImmunity(xi.immunity.SLEEP) or hasSleepEffects(target) then
         --No effect
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else

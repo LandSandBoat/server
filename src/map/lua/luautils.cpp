@@ -186,6 +186,7 @@ namespace luautils
         lua.set_function("GetContainerFilenamesList", &luautils::GetContainerFilenamesList);
         lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
         lua.set_function("GetItemIDByName", &luautils::GetItemIDByName);
+        lua.set_function("GetItemNameByID", &luautils::GetItemNameByID);
         lua.set_function("SendLuaFuncStringToZone", &luautils::SendLuaFuncStringToZone);
 
         // This binding specifically exists to forcefully crash the server.
@@ -5310,6 +5311,20 @@ namespace luautils
         }
 
         return id;
+    }
+
+    std::string GetItemNameByID(uint16 const& id)
+    {
+        std::string name  = "";
+        const char* Query = "SELECT name FROM item_basic WHERE itemid = %d;";
+        int32       ret   = sql->Query(Query, id);
+
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            name = sql->GetStringData(0);
+        }
+
+        return name;
     }
 
 }; // namespace luautils
