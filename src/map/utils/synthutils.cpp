@@ -481,7 +481,7 @@ namespace synthutils
             {
                 skillUpChance = 0.6;
             }
-            else if (charSkill < 1000) // 50-60
+            else if (charSkill < 1000) // 50-99.9
             {
                 skillUpChance = 0.25;
             }
@@ -553,23 +553,24 @@ namespace synthutils
             if (random < skillUpChance) // If character skills up
             {
                 uint8 skillUpAmount = 1;
-                uint8 maxSkillUp    = 4; // Max skill is 0.4
-
-                if (charSkill >= 600)
-                {
-                    maxSkillUp = 1;
-                }
-                else if (baseDiff >= 6)
-                {
-                    maxSkillUp = 3;
-                }
-                else if (baseDiff >= 12)
-                {
-                    maxSkillUp = 4;
-                }
+                uint8 maxSkillUp = 1; // Max skill is 0.1 for over 60
 
                 if (charSkill < 600) // No skill ups over 0.1 happen over level 60 normally, without some sort of buff to it.
                 {
+
+                    if (baseDiff < 6)
+                    {
+                        maxSkillUp = 2;
+                    }
+                    else if (baseDiff < 12)
+                    {
+                        maxSkillUp = 3;
+                    }
+                    else if (baseDiff >= 12)
+                    {
+                        maxSkillUp = 4;
+                    }
+
                     uint8  satier = 0;
                     double chance = 0;
 
