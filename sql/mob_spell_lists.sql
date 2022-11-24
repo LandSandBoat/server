@@ -5154,6 +5154,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,231,1,255);  -- Bio II
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,250,1,255);  -- Ice Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',507,254,1,255);  -- Blind (1~255)
 
+-- Gargoyle (Physical Immunity) (509)
+INSERT INTO `mob_spell_lists` VALUES ('Gargoyle_Phys',509,251,1,255); -- Shock Spikes (1~255)
+-- Gargoyle (Magic Immunity) (510)
+INSERT INTO `mob_spell_lists` VALUES ('Gargoyle_Magic',510,59,1,255); -- Silence (1~255)
+
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis
 
