@@ -77,8 +77,7 @@ quest.sections =
             {
                 [135] = function(player, csid, option, npc)
                     player:confirmTrade()
-
-                    npcUtil.giveKeyItem(xi.ki.STEAMING_SHEEP_INVITATION)
+                    npcUtil.giveKeyItem(player, xi.ki.STEAMING_SHEEP_INVITATION)
                 end,
 
                 [136] = function(player, csid, option, npc)
