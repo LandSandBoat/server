@@ -173,7 +173,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     pet:wakeUp()
 
     -- Apply regen xi.effect.
-    if xi.settings.main.ENABLE_ABYSSEA == 1 then
+    if xi.settings.main.ENABLE_COP == 1 then
         pet:delStatusEffect(xi.effect.REGEN)
         pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
     end
