@@ -53,8 +53,6 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, math.min(dmg, mpDiff))
 
-    caster:addHP(dmg)
-
     return math.min(dmg, mpDiff)
 end
 
