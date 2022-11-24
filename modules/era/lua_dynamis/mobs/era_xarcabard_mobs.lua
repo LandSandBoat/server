@@ -621,7 +621,7 @@ xi.dynamis.onFightSatellite = function(mob, target)
         mob:setAnimationSub(mob:getLocalVar("animSub"))
     end
 
-    if not GetMobByID(mob:getLocalVar("ParentID")) then -- Despawn if Animated Parent Dies
+    if not GetMobByID(mob:getLocalVar("ParentID")) or GetMobByID(mob:getLocalVar("ParentID")):getHP() == 0 then -- Despawn if Animated Parent Dies
         DespawnMob(mob:getID())
     end
 end

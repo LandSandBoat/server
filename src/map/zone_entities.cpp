@@ -1354,14 +1354,14 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
         if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath) // Only Affects Dynamic Mobs
         {
-            if (PEntity->PPet != nullptr) // If I have a pet when I despawn, I need to replace my entity on the pet with the pet's entity. (This pseudo-detaches the pet)
+            if (PEntity->PPet != nullptr)
             {
-                PEntity->PPet->PMaster = PEntity->PPet;
+                PEntity->PPet->PMaster = nullptr;
             }
 
             if (PEntity->PMaster != nullptr)
             {
-                PEntity->PMaster->PPet = PEntity->PMaster;
+                PEntity->PMaster->PPet = nullptr;
             }
 
             for (auto PMobIt : m_mobList)

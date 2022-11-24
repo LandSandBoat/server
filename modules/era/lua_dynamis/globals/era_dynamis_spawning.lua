@@ -374,6 +374,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 onMobDeath = function(mobArg, player, optParams)
                     xi.dynamis.mobOnDeath(mobArg)
                 end,
+                onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
                 releaseIdOnDeath = true,
                 specialSpawnAnimation = oMob ~= nil,
                 mixins =
@@ -557,6 +558,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         onMobDeath = function(mob, player, optParams)
             xi.dynamis.mobOnDeath(mob)
         end,
+        onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
         specialSpawnAnimation = oMob ~= nil,
         mixins = mobFunctions[mobMobType]["mixins"],
@@ -1148,6 +1150,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobWeaponSkillPrepare= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkillPrepare"][1],
         onMobWeaponSkill= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkill"][1],
         onMobDeath= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobDeath"][1],
+        onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
         specialSpawnAnimation = oMob ~= nil,
         mixins = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
@@ -1492,6 +1495,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         onMobSpawn = function(mob) xi.dynamis.setPetStats(mob) end,
         onMobFight = petFunctions[mobJob][functionLookup]["onMobFight"],
         onMobDeath = function(mob, player, optParams) xi.dynamis.onPetDeath(mob) end,
+        onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
         specialSpawnAnimation = oMob ~= nil,
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
@@ -1908,6 +1912,12 @@ xi.dynamis.mobOnDeath = function(mob, player, optParams)
 
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), 0)
     zone:setLocalVar(string.format("%s", mobIndex), 0)
+end
+
+xi.dynamis.mobOnDespawn = function(mob)
+    local zone = mob:getZone()
+    zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), 0)
+    zone:setLocalVar(string.format("%s", mob:getID()), 0)
 end
 
 m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)
