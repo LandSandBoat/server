@@ -541,9 +541,9 @@ public:
     void skipEvent();
     void setLocked(bool locked);
 
-    void SetMoghancement(uint16 moghancementID);
-    bool hasMoghancement(uint16 moghancementID) const;
     void UpdateMoghancement();
+    bool hasMoghancement(uint16 moghancementID) const;
+    void SetMoghancement(uint16 moghancementID);
 
     /* State callbacks */
     virtual bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
@@ -577,6 +577,7 @@ public:
     ~CCharEntity();
 
 protected:
+    void changeMoghancement(uint16 moghancementID, bool isAdding);
     bool IsMobOwner(CBattleEntity* PTarget);
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
