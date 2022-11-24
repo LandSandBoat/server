@@ -458,38 +458,38 @@ REPLACE INTO `mob_droplist` VALUES (265,0,0,1000,1449,100); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (265,2,0,1000,1449,150); -- Whiteshell (Steal)
 REPLACE INTO `mob_droplist` VALUES (265,0,0,1000,1450,50); -- Jadeshell
 DELETE FROM `mob_droplist` WHERE dropid = "559"; -- Dagourmarche
-REPLACE INTO `mob_droplist` VALUES (559,0,0,1000,1560,300); -- Attestation of Bravery
-REPLACE INTO `mob_droplist` VALUES (559,0,0,1000,1563,300); -- Attestation of Fortitude
-REPLACE INTO `mob_droplist` VALUES (559,0,0,1000,1567,300); -- Attestation of Virtue
+REPLACE INTO `mob_droplist` VALUES (559,1,1,300,1560,100); -- Attestation of Bravery
+REPLACE INTO `mob_droplist` VALUES (559,1,1,300,1563,100); -- Attestation of Fortitude
+REPLACE INTO `mob_droplist` VALUES (559,1,1,300,1567,100); -- Attestation of Virtue
 REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1456,333); -- Hundred Byne
 REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1450,333); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1453,334); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "1211"; -- Goublefaupe
 REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1821,300); -- Attestation of Invulnerability
-REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1559,300); -- Attestation of Righteousness
-REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1558,300); -- Attestation of Glory
-REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1561,300); -- Attestation of Force
+REPLACE INTO `mob_droplist` VALUES (1211,1,1,300,1559,100); -- Attestation of Righteousness
+REPLACE INTO `mob_droplist` VALUES (1211,1,1,300,1558,100); -- Attestation of Glory
+REPLACE INTO `mob_droplist` VALUES (1211,1,1,300,1561,100); -- Attestation of Force
 REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1456,333); -- Hundred Byne
 REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1450,333); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1453,334); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "1672"; -- Mildaunegeux
-REPLACE INTO `mob_droplist` VALUES (1672,0,0,1000,1570,300); -- Attestation of Accuracy
-REPLACE INTO `mob_droplist` VALUES (1672,0,0,1000,1564,300); -- Attestation of Legerity
-REPLACE INTO `mob_droplist` VALUES (1672,0,0,1000,1556,300); -- Attestation of Might
+REPLACE INTO `mob_droplist` VALUES (1672,1,1,300,1570,100); -- Attestation of Accuracy
+REPLACE INTO `mob_droplist` VALUES (1672,1,1,300,1564,100); -- Attestation of Legerity
+REPLACE INTO `mob_droplist` VALUES (1672,1,1,300,1556,100); -- Attestation of Might
 REPLACE INTO `mob_droplist` VALUES (1672,1,3,50,1456,333); -- Hundred Byne
 REPLACE INTO `mob_droplist` VALUES (1672,1,3,50,1450,333); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (1672,1,3,50,1453,334); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "2066"; -- Quiebitiel
-REPLACE INTO `mob_droplist` VALUES (2066,0,0,1000,1557,300); -- Attestation of Celerity
-REPLACE INTO `mob_droplist` VALUES (2066,0,0,1000,1566,300); -- Attestation of Sacrifice
-REPLACE INTO `mob_droplist` VALUES (2066,0,0,1000,1569,300); -- Attestation of Harmony
+REPLACE INTO `mob_droplist` VALUES (2066,1,1,300,1557,100); -- Attestation of Celerity
+REPLACE INTO `mob_droplist` VALUES (2066,1,1,300,1566,100); -- Attestation of Sacrifice
+REPLACE INTO `mob_droplist` VALUES (2066,1,1,300,1569,100); -- Attestation of Harmony
 REPLACE INTO `mob_droplist` VALUES (2066,1,3,50,1456,333); -- Hundred Byne
 REPLACE INTO `mob_droplist` VALUES (2066,1,3,50,1450,333); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (2066,1,3,50,1453,334); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "2574"; -- Velosareon
-REPLACE INTO `mob_droplist` VALUES (2574,0,0,1000,1562,300); -- Attestation of Vigor
-REPLACE INTO `mob_droplist` VALUES (2574,0,0,1000,1565,300); -- Attestation of Decisiveness
-REPLACE INTO `mob_droplist` VALUES (2574,0,0,1000,1568,300); -- Attestation of Transcendence
+REPLACE INTO `mob_droplist` VALUES (2574,1,1,300,1562,100); -- Attestation of Vigor
+REPLACE INTO `mob_droplist` VALUES (2574,1,1,300,1565,100); -- Attestation of Decisiveness
+REPLACE INTO `mob_droplist` VALUES (2574,1,1,300,1568,100); -- Attestation of Transcendence
 REPLACE INTO `mob_droplist` VALUES (2574,1,3,50,1456,333); -- Hundred Byne
 REPLACE INTO `mob_droplist` VALUES (2574,1,3,50,1450,333); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (2574,1,3,50,1453,334); -- Montiont Silverpiece
@@ -2017,7 +2017,6 @@ REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,239,16,255);
 REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,240,27,255);
 REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,245,12,255);
 REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,247,25,82);
-REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,248,83,255);
 REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,249,10,255);
 REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,252,45,255);
 REPLACE INTO `mob_spell_lists` VALUES ('Era_Beastmen_BLM',5000,253,20,40);
@@ -2236,7 +2235,7 @@ REPLACE INTO mob_groups (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `
 -- --------------------------------------------------------------------
 --                     Zone Misc Modifications                      --
 -- --------------------------------------------------------------------
-UPDATE zone_settings SET misc = misc | 256 WHERE name LIKE "Dynamis%" AND name NOT LIKE "Dyanamis_%_[D]";
-UPDATE zone_settings SET misc = misc & ~8 WHERE name = "Dynamis-San_dOria" OR name = "Dynamis-Windurst" OR name = "Dynamis-Bastok" OR name = "Dynamis-Jeuno";
+UPDATE zone_settings SET misc = 408 WHERE name LIKE "Dynamis%" AND name NOT LIKE "Dyanamis_%_[D]";
+UPDATE zone_settings SET misc = misc & ~8 WHERE name = "Dynamis-San_dOria" OR name = "Dynamis-Windurst" OR name = "Dynamis-Bastok" OR name = "Dynamis-Jeuno" OR name = "Dynamis-Tavnazia";
 
 UNLOCK TABLES;

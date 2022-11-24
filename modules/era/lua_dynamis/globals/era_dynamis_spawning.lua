@@ -426,13 +426,13 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 11 }, -- Vanguard Eye (VEye)
-            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 1144, 5000, 11 }, -- Prototype Eye (PEye)
+            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 4 }, -- Vanguard Eye (VEye)
+            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 1144, 5000, 4 }, -- Prototype Eye (PEye)
             ["Goblin Statue"] = { "Goblin Statue" , 158, 134, 1144, 1, 92 }, -- Goblin Statue (GStat)
             ["Goblin Replica"] = { "Goblin Replica" , 157, 134, 1144, 1, 92 }, -- Goblin Statue (GRStat)
             ["Statue Prototype"] = { "Stat. Prototype" , 36, 42, 1144, 1, 92 }, -- Goblin Statue (GPStat)
             ["Serjeant Tombstone"] = { "Serj. Tombstone" , 89, 134, 2201, 5000, 93 }, -- Orc Statue (OStat)
-            ["Warchief Tombstone"] = { "War. Tombstone" , 90, 134, 2201, 50, 93 }, -- Orc Statue (OWStat)
+            ["Warchief Tombstone"] = { "War. Tombstone" , 90, 134, 2201, 5000, 93 }, -- Orc Statue (OWStat)
             ["Tombstone Prototype"] = { "Tomb. Prototype" , 20, 42, 2201, 5000, 93 }, -- Orc Statue (TPStat)
             ["Adamantking Effigy"] = { "Adamantking Eff" , 55, 134, 20, 0, 94 }, -- Quadav Statue (QStat)
             ["Adamantking Image"] = { "Adamantking Img" , 56, 134, 20, 0, 94 }, -- Quadav Statue (QIStat)
@@ -768,7 +768,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Count Raum"] = { "C.Raum", 42, 135, 519, 0, 358, "Beastmen" }, --  Raum (THF)
         ["Marquis Nebiros"] = { "M.Nebiros", 67, 135, 1629, 0, 358, "Beastmen" }, -- Nebi (SMN)
         ["Marquis Sabnak"] = { "M.Sabnak", 49, 135, 1631, 4, 358, "Beastmen" }, -- Sabn (PLD)
-        ["Count Vine"] = { "C.Vine", 62, 135, 528, 0, 358, "Beastmen" }, -- Vine (SAM)
+        ["Count Vine"] = { "C.Vine", 62, 135, 520, 0, 358, "Beastmen" }, -- Vine (SAM)
         ["King Zagan"] = { "K.Zagan", 60, 135, 1452, 0, 358, "Beastmen" }, -- Zaga (DRG)
         ["Marquis Cimeries"] = { "M.Cimeries", 56, 135, 1625, 0, 358, "Beastmen" }, -- Cime (RNG)
         -- Hydra
