@@ -142,8 +142,7 @@ quest.sections =
                             return quest:progressEvent(47)
 
                         -- Do not reveal correct coin if player has seen correct coin from this chest.
-                        elseif quest:getVar(player, 'firstCoin') == 0
-                        then
+                        elseif quest:getVar(player, 'firstCoin') == 0 then
                             player:messageSpecial(correct[math.random(1, 4)])
                             quest:setVar(player, 'firstCoin', 1)
                             return quest:progressEvent(46)
