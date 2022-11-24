@@ -762,7 +762,11 @@ function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam,
         dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
         -- dealt zero damage, so shadows took hit
-        if dmg == 0 then
+        if
+            (target:hasStatusEffect(xi.effect.COPY_IMAGE) or
+            target:hasStatusEffect(xi.effect.BLINK)) and
+            dmg == 0
+        then
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
             return shadowbehav
         end

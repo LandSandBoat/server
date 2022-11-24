@@ -9,7 +9,7 @@ require("scripts/globals/magic")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
@@ -18,9 +18,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local dmgmod = 0
 
     if tp < 1500 then
-        dmgmod = math.floor((29/256) * (tp/100) + (928/256))
+        dmgmod = math.floor((29 / 256) * (tp / 100) + (928 / 256))
     else
-        dmgmod = math.floor(((29/256) * (1500/100)) + ((14/256) * ((tp-1500)/100)) + (928/256))
+        dmgmod = math.floor(((29 / 256) * (1500 / 100)) + ((9 / 256) * ((tp - 1500) / 100) + 928 / 256))
     end
 
     local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)

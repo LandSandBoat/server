@@ -9,7 +9,7 @@ require("scripts/globals/magic")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
@@ -17,7 +17,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local tp     = pet:getTP() / 10
     local master = pet:getMaster()
     local merits = 0
-    local dmgmod = (((45/256) * (tp/100)) + (1370/256))
+    local dmgmod = (((45 / 256) * (tp / 100)) + (1370 / 256))
     if master ~= nil and master:isPC() then
         merits = master:getMerit(xi.merit.GRANDFALL)
     end

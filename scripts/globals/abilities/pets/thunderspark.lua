@@ -10,7 +10,7 @@ require("scripts/globals/mobskills")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
@@ -19,9 +19,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local dmgmod = 0
 
     if tp < 1500 then
-        dmgmod = math.floor((21/256) * (tp/100) + (640/256))
+        dmgmod = math.floor((21 / 256) * (tp / 100) + (640 / 256))
     else
-        dmgmod = math.floor(((21/256) * (1500/100)) + ((5/256) * ((tp-1500)/100) + 640/256))
+        dmgmod = math.floor(((21 / 256) * (1500 / 100)) + ((5 / 256) * ((tp - 1500) / 100) + 640 / 256))
     end
 
     local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)

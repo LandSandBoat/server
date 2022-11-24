@@ -1842,23 +1842,23 @@ xi.mod =
 
 xi.immunity =
 {
-    NONE        = 0x00,
-    SLEEP       = 0x01,
-    GRAVITY     = 0x02,
-    BIND        = 0x04,
-    STUN        = 0x08,
-    SILENCE     = 0x10,   -- 16
-    PARALYZE    = 0x20,   -- 32
-    BLIND       = 0x40,   -- 64
-    SLOW        = 0x80,   -- 128
-    POISON      = 0x100,  -- 256
-    ELEGY       = 0x200,  -- 512
-    REQUIEM     = 0x400,  -- 1024
-    LIGHT_SLEEP = 0x800,  -- 2048
-    DARK_SLEEP  = 0x1000, -- 4096
-    ASPIR       = 0x2000, -- 8192
-    TERROR      = 0x4000, -- 16384
-    DISPEL      = 0x8000, -- 32768
+    NONE        = 0,
+    SLEEP       = 1,
+    GRAVITY     = 2,
+    BIND        = 4,
+    STUN        = 8,
+    SILENCE     = 16,
+    PARALYZE    = 32,
+    BLIND       = 64,
+    SLOW        = 128,
+    POISON      = 256,
+    ELEGY       = 512,
+    REQUIEM     = 1024,
+    LIGHT_SLEEP = 2048,
+    DARK_SLEEP  = 4096,
+    ASPIR       = 8192,
+    TERROR      = 16384,
+    DISPEL      = 32768,
 }
 
 xi.latent =
@@ -2156,7 +2156,7 @@ xi.merit =
     ANCIENT_CIRCLE_RECAST       = meritCategory.DRG_1 + 0x00,
     JUMP_RECAST                 = meritCategory.DRG_1 + 0x02,
     HIGH_JUMP_RECAST            = meritCategory.DRG_1 + 0x04,
-    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x05,
+    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x06,
     SPIRIT_LINK_RECAST          = meritCategory.DRG_1 + 0x08,
 
     -- SMN 1
