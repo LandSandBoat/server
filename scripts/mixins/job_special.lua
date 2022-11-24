@@ -327,7 +327,7 @@ g_mixins.job_special = function(jobSpecialMob)
                 end
             end
 
-            if (mob:isInDynamis() and mob:getMainJob() == xi.job.BST) and ((mob:getPet():getID() == mob:getID()) or not mob:hasPet()) then
+            if mob:isInDynamis() and mob:getMainJob() == xi.job.BST and not mob:hasPet() then
                 ability = 710 -- Charm
             end
 
