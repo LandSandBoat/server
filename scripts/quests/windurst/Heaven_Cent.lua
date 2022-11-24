@@ -138,13 +138,13 @@ quest.sections =
                     -- Only allow if player doesn't have coin
                     if not player:hasItem(xi.items.SHELLING_PIECE) then
                         if rand > 0.2 then
-                            player:messageSpecial(incorrect[math.random(1,4)])
+                            player:messageSpecial(incorrect[math.random(1, 4)])
                             return quest:progressEvent(47)
 
                         -- Do not reveal correct coin if player has seen correct coin from this chest.
                         elseif quest:getVar(player, 'firstCoin') == 0
                         then
-                            player:messageSpecial(correct[math.random(1,4)])
+                            player:messageSpecial(correct[math.random(1, 4)])
                             quest:setVar(player, 'firstCoin', 1)
                             return quest:progressEvent(46)
                         end
@@ -161,12 +161,12 @@ quest.sections =
                     -- Only allow if player doesn't have coin
                     if not player:hasItem(xi.items.SHELLING_PIECE) then
                         if rand > 0.2 then
-                            player:messageSpecial(incorrect[math.random(1,4)])
+                            player:messageSpecial(incorrect[math.random(1, 4)])
                             return quest:progressEvent(49)
 
                         -- Do not reveal correct coin if player has seen correct coin from this chest.
                         elseif quest:getVar(player, 'secondCoin') == 0 then
-                            player:messageSpecial(correct[math.random(1,4)])
+                            player:messageSpecial(correct[math.random(1, 4)])
                             quest:setVar(player, 'secondCoin', 1)
                             return quest:progressEvent(48)
                         end
@@ -183,12 +183,12 @@ quest.sections =
                     -- Only allow if player doesn't have coin
                     if not player:hasItem(xi.items.SHELLING_PIECE) then
                         if rand > 0.2 then
-                            player:messageSpecial(incorrect[math.random(1,4)])
+                            player:messageSpecial(incorrect[math.random(1, 4)])
                             return quest:progressEvent(51)
 
                         -- Do not reveal correct coin if player has seen correct coin from this chest.
                         elseif quest:getVar(player, 'thirdCoin') == 0 then
-                            player:messageSpecial(correct[math.random(1,4)])
+                            player:messageSpecial(correct[math.random(1, 4)])
                             quest:setVar(player, 'thirdCoin', 1)
                             return quest:progressEvent(50)
                         end
