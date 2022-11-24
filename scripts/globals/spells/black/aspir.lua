@@ -16,6 +16,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 5 + 0.375 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
+    local mpDiff = caster:getMaxMP() - caster:getMP()
+
     --get resist multiplier (1x if no resist)
     local params = {}
     params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
@@ -52,7 +54,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delMP(dmg)
     end
 
-    return dmg
+    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP, math.min(dmg, mpDiff))
+
+    return math.min(dmg, mpDiff)
 end
 
 return spellObject
