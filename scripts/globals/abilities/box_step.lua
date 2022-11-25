@@ -13,13 +13,7 @@ require("scripts/globals/weaponskills")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    elseif player:getTP() < 100 then
-        return xi.msg.basic.NOT_ENOUGH_TP, 0
-    end
-
-    return 0, 0
+    return xi.dancer.stepAbilityCheck(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
