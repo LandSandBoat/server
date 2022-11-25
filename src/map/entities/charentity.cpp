@@ -1598,6 +1598,16 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
+        // Revert WotG job buffs
+        if (!luautils::IsContentEnabled("WOTG"))
+        {
+            // Reward
+            if (PAbility->getID() == 78)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), (uint16)(action.recast * 2.f));
+            }
+        }
+
         pushPacket(new CCharRecastPacket(this));
 
         //#TODO: refactor
