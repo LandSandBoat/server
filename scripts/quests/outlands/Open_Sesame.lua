@@ -32,7 +32,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_AVAILABLE and
+            xi.settings.main.ENABLE_ABYSSEA == 1
         end,
 
         [xi.zone.EASTERN_ALTEPA_DESERT] =
