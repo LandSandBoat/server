@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.ULIPEHKOWA_SHOP_DIALOG)
-    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
         xi.shop.nation(player, stock, xi.nation.WINDURST)
     end
 end

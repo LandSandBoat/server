@@ -5899,7 +5899,7 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             break;
         case NFLAG_MENTOR:
             // /mentor [on|off]
-            if (data.ref<uint8>(0x10) == 1)
+            if (data.ref<uint8>(0x10) == 1 && PChar->m_mentorUnlocked)
             {
                 PChar->menuConfigFlags.flags |= NFLAG_MENTOR;
             }
