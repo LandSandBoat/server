@@ -39,13 +39,12 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 3 then
-                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+                        local needsHalverTrust =
+                            (not player:hasSpell(972) and
+                            not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and
+                            xi.settings.main.ENABLE_ROV == 1
 
-                        if xi.settings.main.ENABLE_ROV == 1 then
-                            return mission:progressEvent(502, { [7] = needsHalverTrust })
-                        else
-                            return mission:progressEvent(502)
-                        end
+                        return mission:progressEvent(502, { [7] = needsHalverTrust })
                     else
                         return mission:messageText(chateauID.text.HALVER_OFFSET + 279)
                     end
