@@ -324,8 +324,7 @@ int32 do_init(int32 argc, char** argv)
             return;
         }
 
-        // TODO: Replace all usages of int8* with const char* or std::string.
-        auto* name  = (int8*)inputs[1].c_str();
+        auto  name  = inputs[1];
         auto* PChar = zoneutils::GetCharByName(name);
         if (!PChar)
         {
@@ -340,7 +339,7 @@ int32 do_init(int32 argc, char** argv)
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level).c_str(), ""));
+            fmt::format("You have been set to GM level {}.", level), ""));
 
     });
 
@@ -716,7 +715,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
     CCharEntity* PChar = map_session_data->PChar;
 
-    TracyZoneIString(PChar->GetName());
+    TracyZoneString(PChar->GetName());
 
     uint16 SmallPD_Size = 0;
     uint16 SmallPD_Type = 0;

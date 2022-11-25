@@ -37,7 +37,7 @@ namespace sol
 class CCommandHandler
 {
 public:
-    static int32 call(sol::state& lua, CCharEntity* PChar, const int8* commandline);
+    static int32 call(sol::state& lua, CCharEntity* PChar, const std::string& commandline);
     static void  registerCommand(std::string const& commandName, std::string const& path);
 };
 

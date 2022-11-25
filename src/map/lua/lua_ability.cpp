@@ -62,10 +62,9 @@ uint16 CLuaAbility::getRange()
     return static_cast<uint16>(m_PLuaAbility->getRange());
 }
 
-const char* CLuaAbility::getName()
+const std::string& CLuaAbility::getName()
 {
-    // TODO: C-Style cast is bad
-    return (const char*)m_PLuaAbility->getName();
+    return m_PLuaAbility->getName();
 }
 
 uint16 CLuaAbility::getAnimation()

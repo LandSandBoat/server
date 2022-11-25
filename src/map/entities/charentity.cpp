@@ -301,7 +301,7 @@ void CCharEntity::clearPacketList()
 void CCharEntity::pushPacket(CBasicPacket* packet)
 {
     TracyZoneScoped;
-    TracyZoneIString(GetName());
+    TracyZoneString(GetName());
     TracyZoneHex16(packet->getType());
 
     moduleutils::OnPushPacket(packet);
@@ -561,9 +561,14 @@ int8 CCharEntity::getShieldSize()
     return PItem->getShieldSize();
 }
 
-void CCharEntity::SetName(int8* name)
+void CCharEntity::SetName(const std::string& name)
 {
-    this->name.insert(0, (const char*)name, std::min<size_t>(strlen((const char*)name), PacketNameLength));
+    this->name = name;
+
+    if (this->name.size() > PacketNameLength)
+    {
+        this->name.resize(PacketNameLength); // Enforce max name limit
+    }
 }
 
 int16 CCharEntity::addTP(int16 tp)

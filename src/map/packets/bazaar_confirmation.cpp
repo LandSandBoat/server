@@ -37,7 +37,7 @@ CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, uint8 S
     ref<uint8>(0x08)  = Quantity;
     ref<uint8>(0x20)  = SlotID;
 
-    memcpy(data + (0x10), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x10), PChar->GetName().c_str(), PChar->GetName().size());
 }
 
 CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, CItem* PItem)
@@ -51,5 +51,5 @@ CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, CItem* 
         ref<uint16>(0x08) = PItem->getID();
     }
 
-    memcpy(data + (0x0A), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x0A), PChar->GetName().c_str(), PChar->GetName().size());
 }

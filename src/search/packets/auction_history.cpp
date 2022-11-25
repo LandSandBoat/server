@@ -44,8 +44,8 @@ void CAHHistoryPacket::AddItem(ahHistory* item)
         ref<uint32>(m_PData, (0x20 + 40 * m_count) + 0x00) = item->Price;
         ref<uint32>(m_PData, (0x20 + 40 * m_count) + 0x04) = item->Data;
 
-        memcpy(m_PData + 0x20 + 40 * m_count + 0x08, item->Name1, 15);
-        memcpy(m_PData + 0x20 + 40 * m_count + 0x18, item->Name2, 15);
+        memcpy(m_PData + 0x20 + 40 * m_count + 0x08, item->Name1.c_str(), 15);
+        memcpy(m_PData + 0x20 + 40 * m_count + 0x18, item->Name2.c_str(), 15);
 
         ref<uint16>(m_PData, (0x08)) = 0x20 + 40 * ++m_count;
     }

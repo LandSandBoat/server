@@ -216,10 +216,8 @@ namespace gambits
                 {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
-                        auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                        std::transform(name.begin(), name.end(), name.begin(),
-                        [](unsigned char c) { return std::tolower(c); });
-                        if (name == "curilla")
+                        auto name = PMember->GetName();
+                        if (strcmpi(name.c_str(), "curilla") == 0)
                         {
                             result = true;
                         }
@@ -381,10 +379,8 @@ namespace gambits
                     {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
-                            auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                            std::transform(name.begin(), name.end(), name.begin(),
-                                           [](unsigned char c) { return std::tolower(c); });
-                            if (name == "curilla")
+                            auto name = PMember->GetName();
+                            if (strcmpi(name.c_str(), "curilla") == 0)
                             {
                                 target = PMember;
                             }

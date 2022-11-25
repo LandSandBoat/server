@@ -54,7 +54,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), (const char*)sql->GetData(1)));
+                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
             }
         }
         XI_DEBUG_BREAK_IF(g_PGuildShopList.size() != 0);

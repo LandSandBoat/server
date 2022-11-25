@@ -131,7 +131,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;
 
-    memcpy(data + (0x84), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x84), PChar->GetName().c_str(), PChar->GetName().size());
 
     ref<uint8>(0x0B) = PChar->loc.p.rotation;
     ref<float>(0x0C) = PChar->loc.p.x;

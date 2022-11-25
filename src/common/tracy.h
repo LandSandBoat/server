@@ -14,7 +14,6 @@
 #define TracyZoneScopedC(c)     ZoneScopedC(c)
 #define TracyZoneString(str)    ZoneText(str.c_str(), str.size())
 #define TracyZoneCString(cstr)  ZoneText(cstr, std::strlen(cstr))
-#define TracyZoneIString(istr)  TracyZoneCString(reinterpret_cast<const char*>(istr))
 #define TracyMessageStr(str)    TracyMessage(str.c_str(), str.size())
 #define TracySetThreadName(str) tracy::SetThreadName(str);
 
