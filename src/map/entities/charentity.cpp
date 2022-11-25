@@ -929,7 +929,8 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         return false;
     }
 
-    float dist = distance(loc.p, PTarget->loc.p);
+    float dist    = distance(loc.p, PTarget->loc.p);
+    float distNoY = distance(loc.p, PTarget->loc.p, true);
 
     if (!IsMobOwner(PTarget))
     {
@@ -949,7 +950,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
     }
-    else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
+    else if (distNoY > GetMeleeRange() || abs(loc.p.y - PTarget->loc.p.y) > 3)
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
         return false;
