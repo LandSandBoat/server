@@ -6,10 +6,7 @@
 -- Duration: 00:01:00
 -- Cost: 100TP
 -----------------------------------
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require('scripts/globals/job_utils/dancer')
 -----------------------------------
 local abilityObject = {}
 
