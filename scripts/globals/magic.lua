@@ -1712,8 +1712,6 @@ end
 xi.magic.doAbsorbSpell = function(caster, target, spell, params)
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     local isAbsorbTp = params.msg == xi.msg.basic.MAGIC_ABSORB_TP
-    print(params.effect)
-    print(params.bonusEffect)
     local spellTable =
     {
         [true] =

@@ -876,3 +876,12 @@ end
 function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
 end
+
+-- Returns inline value  boolean      any     any
+function utils.ternary(conditional, trueVal, falseVal)
+    if conditional then
+        return trueVal
+    end
+
+    return falseVal
+end

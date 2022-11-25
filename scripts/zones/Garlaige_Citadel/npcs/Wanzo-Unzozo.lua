@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 -----------------------------------
-ID = require('scripts/zones/Garlaige_Citadel/IDs')
+local ID = require('scripts/zones/Garlaige_Citadel/IDs')
 -----------------------------------
 local entity = {}
 

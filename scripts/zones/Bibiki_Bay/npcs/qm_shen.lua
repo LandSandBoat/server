@@ -13,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHasExactly(trade, xi.items.SHRIMP_LANTERN) and
-        npcUtil.popFromQM(player, npc, ID.mob.SHEN, { hide = 900 }) -- 15 minutes
+        npcUtil.popFromQM(player, npc, ID.mob.SHEN)
     then
         player:confirmTrade()
         player:messageSpecial(ID.text.SHEN_SPAWN)

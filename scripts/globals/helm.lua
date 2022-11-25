@@ -1577,3 +1577,18 @@ xi.helm.onTrigger = function(player, helmType)
     local info = helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)
 end
+
+xi.helm.movePoint = function(target, zoneId, helmType)
+    local info = helmInfo[helmType]
+    movePoint(target, zoneId, info)
+end
+
+xi.helm.doesToolBreak = function(player, helmType)
+    local info = helmInfo[helmType]
+    return doesToolBreak(player, info) and 1 or 0
+end
+
+xi.helm.pickItem = function(player, helmType)
+    local info = helmInfo[helmType]
+    return pickItem(player, info)
+end

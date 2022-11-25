@@ -9,7 +9,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getNation() == 0 then
-        player:startEvent(595)
+        player:startEvent(838)
     else
         player:startEvent(598)
     end

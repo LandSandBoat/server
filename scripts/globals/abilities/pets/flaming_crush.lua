@@ -10,7 +10,7 @@ require("scripts/globals/mobskills")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)

@@ -927,6 +927,12 @@ void CMobController::DoRoamTick(time_point tick)
         PMob->m_OwnerID.clean();
     }
 
+    if (m_Tick >= m_ResetTick + 10s && PMob->health.tp > 0)
+    {
+        PMob->health.tp -= 100;
+        m_ResetTick = m_Tick;
+    }
+
     // skip roaming if waiting
     if (m_Tick >= m_WaitTime)
     {

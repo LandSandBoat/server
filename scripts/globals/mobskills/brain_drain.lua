@@ -16,7 +16,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 1
     local accmod = 1
-    local dmgmod = 2
+    local dmgmod = 1
     if mob:getTP() >= 2000 then
         dmgmod = 2.5
     elseif mob:getTP() == 3000 then

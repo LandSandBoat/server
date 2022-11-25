@@ -19,10 +19,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1658) then
+    if npcUtil.tradeHas(trade, xi.items.SEALION_CREST_KEY) then
         local smallKeyhole = GetNPCByID(ID.npc.SMALL_KEYHOLE)
         if smallKeyhole:getLocalVar("canTradeSecondKey") == 1 then
             GetNPCByID(npc:getID() - 2):openDoor(15)
+            GetNPCByID(npc:getID() - 1):openDoor(15)
             smallKeyhole:setLocalVar("canTradeSecondKey", 0)
         else
             player:messageSpecial(ID.text.CANNOT_TRADE_NOW)

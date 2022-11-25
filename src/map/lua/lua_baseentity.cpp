@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -2455,7 +2455,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
         PNpc->name[8]                  = 8;
     }
 
-    PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT);
+    PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }
 
 /************************************************************************
@@ -10573,17 +10573,9 @@ void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
     // clang-format off
     auto* PCurer = [&]() -> CBattleEntity*
     {
-        if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST)
+        if (m_PBaseEntity->objtype == TYPE_PC || m_PBaseEntity->objtype == TYPE_TRUST || m_PBaseEntity->objtype == TYPE_PET)
         {
             return static_cast<CBattleEntity*>(m_PBaseEntity);
-        }
-        else if (m_PBaseEntity->objtype == TYPE_PET && static_cast<CPetEntity*>(m_PBaseEntity)->getPetType() != PET_TYPE::AUTOMATON)
-        {
-            auto* PMaster = static_cast<CPetEntity*>(m_PBaseEntity)->PMaster;
-            if (PMaster->objtype == TYPE_PC)
-            {
-                return static_cast<CCharEntity*>(PMaster);
-            }
         }
         return nullptr;
     }();

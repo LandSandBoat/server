@@ -14,7 +14,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Bastok_Markets/IDs')
+local ID = require('scripts/zones/Bastok_Markets/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
 
@@ -90,27 +90,27 @@ quest.sections =
                 [309] = function(player, csid, option, npc)
                     if option == 1 then
                         player:addGil(100)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*100)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 100)
                         player:delKeyItem(xi.ki.DUSTY_TOME)
-                        quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
+                        quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 2 then
                         player:addGil(200)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*200)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 200)
                         player:delKeyItem(xi.ki.POINTED_JUG)
-                        quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
+                        quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 3 then
                         player:addGil(300)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*300)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 300)
                         player:delKeyItem(xi.ki.CRACKED_CLUB)
-                        quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
+                        quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 4 then
                         player:addGil(400)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*400)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 400)
                         player:delKeyItem(xi.ki.PEELING_HAIRPIN)
-                        quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
+                        quest:setVar(player, 'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 5 then
                         player:delKeyItem(xi.ki.OLD_NAMETAG)
-                        quest:setVar(player,'Prog', 8)
+                        quest:setVar(player, 'Prog', 8)
                     end
                 end,
             },
@@ -124,9 +124,9 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(2)
                     elseif quest:getVar(player, 'Prog') >= 7 then
-                        npc:messageText(npc, 7714)
+                        player:showText(npc, ID.text.BRAKOBRIK_1)
                     else
-                        player:messageSpecial(7719, 0, 1669)
+                        player:showText(npc, ID.text.BRAKOBRIK_2, 0, 1669)
                     end
                 end,
 
@@ -187,11 +187,11 @@ quest.sections =
                     elseif option == 0 and quest:getVar(player, 'Prog') >= 6 then
                         player:tradeComplete()
                         npcUtil.giveKeyItem(player, xi.ki.OLD_NAMETAG)
-                        npc:messageText(player, 7724)
-                        quest:setVar(player, 'Prog', 7)
+                        player:showText(npc, ID.text.BRAKOBRIK_3)
+                        quest:setVar(npc, 'Prog', 7)
                     elseif option == 0 then
                         player:tradeComplete()
-                        npc:messageText(player, 7727)
+                        player:showText(npc, ID.text.BRAKOBRIK_4)
                     end
                 end,
             },

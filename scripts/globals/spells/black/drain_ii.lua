@@ -41,7 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    if target:isUndead() or target:hasImmunity(xi.immunity.DRAIN) then
+    if target:isUndead() then
         dmg = 0
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg

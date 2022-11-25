@@ -32,6 +32,12 @@ entity.onMobRoam = function(mob)
     end
 end
 
+entity.onMobEngaged = function(mob, target)
+    for i = 1, 3 do
+        GetMobByID(ID.mob.HELIODROMOS[i]):updateEnmity(target)
+    end
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     -- one of the heliodromos was killed. set a 10 minute despawn timer before the others despawn
     if optParams.isKiller and GetServerVariable("Heliodromos_Despawn") == 0 then

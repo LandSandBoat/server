@@ -16,16 +16,16 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(4, -213, -1, 212, -211, 1, 215)
 
     -- Banishing Gate #2
-    zone:registerTriggerArea(10,  -51, -1,  82,  -49, 1,  84)
-    zone:registerTriggerArea(11, -151, -1,  82, -149, 1,  84)
-    zone:registerTriggerArea(12,  -51, -1, 115,  -49, 1, 117)
-    zone:registerTriggerArea(13, -151, -1, 115, -149, 1, 117)
+    zone:registerTriggerArea(10,  -49, -1,  82,  -49, 1,  84.2)
+    zone:registerTriggerArea(11, -151, -1,  82, -149, 1,  84.2)
+    zone:registerTriggerArea(12,  -49, -1, 115,  -49, 1, 117.2)
+    zone:registerTriggerArea(13, -151, -1, 115, -149, 1, 117.2)
 
     -- Banishing Gate #3
-    zone:registerTriggerArea(19, -190, -1, 355, -188, 1, 357)
-    zone:registerTriggerArea(20, -130, -1, 355, -128, 1, 357)
-    zone:registerTriggerArea(21, -190, -1, 322, -188, 1, 324)
-    zone:registerTriggerArea(22, -130, -1, 322, -128, 1, 324)
+    zone:registerTriggerArea(19, -190.2, -1, 355, -188, 1, 357.2)
+    zone:registerTriggerArea(20, -130.2, -1, 355, -128, 1, 357.2)
+    zone:registerTriggerArea(21, -190.2, -1, 322, -188, 1, 324.2)
+    zone:registerTriggerArea(22, -130.2, -1, 322, -128, 1, 324.2)
 
     UpdateNMSpawnPoint(ID.mob.OLD_TWO_WINGS)
     GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))
