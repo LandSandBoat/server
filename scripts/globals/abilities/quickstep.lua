@@ -14,17 +14,7 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        if player:hasStatusEffect(xi.effect.TRANCE) then
-            return 0, 0
-        elseif player:getTP() < 100 then
-            return xi.msg.basic.NOT_ENOUGH_TP, 0
-        else
-            return 0, 0
-        end
-    end
+    return xi.dancer.stepAbilityCheck(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
