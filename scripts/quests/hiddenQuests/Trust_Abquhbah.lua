@@ -18,7 +18,8 @@ quest.sections =
             return not player:hasSpell(982) and
                 not player:findItem(xi.items.CIPHER_OF_ABQUHBAHS_ALTER_EGO) and
                 player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) and
-                player:getCurrentMission(xi.mission.log_id.ROV) >= xi.mission.id.rov.EVER_FORWARD
+                player:getCurrentMission(xi.mission.log_id.ROV) >= xi.mission.id.rov.EVER_FORWARD and
+                xi.settings.main.ENABLE_ROV == 1
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
