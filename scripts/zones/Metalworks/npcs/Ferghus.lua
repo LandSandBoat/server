@@ -15,7 +15,11 @@ entity.onTrigger = function(player, npc)
     local tooManyChefs = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
     local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
 
-    if tooManyChefs == QUEST_AVAILABLE and pFame >= 5 then
+    if
+        xi.settings.main.ENABLE_WOTG == 1 and
+        tooManyChefs == QUEST_AVAILABLE and
+        pFame >= 5
+    then
         player:startEvent(946) -- Start Quest "Too Many Chefs"
     elseif player:getCharVar("TOO_MANY_CHEFS") == 4 then -- after trade to Leonhardt
         player:startEvent(947)

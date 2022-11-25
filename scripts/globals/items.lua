@@ -126,6 +126,7 @@ xi.items =
     SKIN_OF_WELL_WATER              = 567,
     CLAY_TABLET                     = 570,
     LUMP_OF_SELBINA_CLAY            = 571,
+    BAG_OF_HERB_SEEDS               = 572,
     SIRENS_TEAR                     = 576,
     EAGLE_BUTTON                    = 578,
     GILT_GLASSES                    = 579,
