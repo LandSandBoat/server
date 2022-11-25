@@ -2949,7 +2949,7 @@ namespace charutils
             }
             uint16 MaxMSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
             uint16 MaxSSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
-            uint16 skillBonus = 0;
+            int16  skillBonus = 0;
 
             // apply arts bonuses
             if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
@@ -3042,7 +3042,7 @@ namespace charutils
             if (MaxMSkill != 0)
             {
                 auto cap{ PChar->RealSkills.skill[i] / 10 >= MaxMSkill };
-                PChar->WorkingSkills.skill[i] = std::max(0, cap ? skillBonus + MaxMSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
+                PChar->WorkingSkills.skill[i] = std::max<uint16>(0, cap ? skillBonus + MaxMSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
                 if (cap)
                 {
                     PChar->WorkingSkills.skill[i] |= 0x8000;
@@ -3051,7 +3051,7 @@ namespace charutils
             else if (MaxSSkill != 0)
             {
                 auto cap{ PChar->RealSkills.skill[i] / 10 >= MaxSSkill };
-                PChar->WorkingSkills.skill[i] = std::max(0, cap ? skillBonus + MaxSSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
+                PChar->WorkingSkills.skill[i] = std::max<uint16>(0, cap ? skillBonus + MaxSSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
                 if (cap)
                 {
                     PChar->WorkingSkills.skill[i] |= 0x8000;
