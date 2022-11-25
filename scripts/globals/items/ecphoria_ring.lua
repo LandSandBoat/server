@@ -13,11 +13,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-
     if target:hasStatusEffect(xi.effect.AMNESIA) then
         target:delStatusEffect(xi.effect.AMNESIA)
     end
-
 end
 
 return itemObject
