@@ -16,7 +16,7 @@ local params =
     prerequisite       = xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III,
     message            = lowerJeunoID.text.INVENTORY_INCREASED,
     startInventorySize = 45,
-    fame               = 1,
+    fame               = 5,
     tradeStew          = xi.items.BOWL_OF_GOBLIN_STEW_880,
 
     tradeItems =
