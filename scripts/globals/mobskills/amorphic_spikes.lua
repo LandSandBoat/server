@@ -1,15 +1,13 @@
 -----------------------------------
---  Amorphic Spikes
+-- Amorphic Spikes
 --
---  Description: Delivers a fivefold attack. Damage varies with TP.
---  Type: Physical
---  Utsusemi/Blink absorb: 5 shadows
---  Range: Unknown
---  Notes:
+-- Description: Delivers a fivefold attack. Damage varies with TP.
+-- Type: Physical
+-- Utsusemi/Blink absorb: 5 shadows
+-- Range: Unknown
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
+require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -24,6 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, .6, .85, 1.1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+
     return dmg
 end
 

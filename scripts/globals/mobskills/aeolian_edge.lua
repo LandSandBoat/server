@@ -2,9 +2,8 @@
 -- Aeolian Edge
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 require("scripts/globals/msg")
-require("scripts/globals/settings")
+require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -21,6 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
     return dmg
 end
 

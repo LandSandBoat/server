@@ -5,9 +5,8 @@
 --  Type: Physical
 --  Notes: zeid and shadows of rage move
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
+require("scripts/globals/status")
 ---------------------------------------------1
 local mobskillObject = {}
 
@@ -16,7 +15,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 1
     local accmod = 2
     local dmgmod = 1
@@ -27,7 +25,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
 
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 4)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+
     return dmg
 end
 
