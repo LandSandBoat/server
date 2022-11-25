@@ -34,14 +34,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.ASTRAL_FLOW
     local pet = mob:getPet()
 
     skill:setMsg(xi.msg.basic.USES)
 
     -- no effect if pet is inactive
     if petInactive(pet) then
-        return typeEffect
+        return xi.effect.ASTRAL_FLOW
     end
 
     -- Find proper pet skill
@@ -63,7 +62,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     pet:useMobAbility(skillId)
 
-    return typeEffect
+    return xi.effect.ASTRAL_FLOW
 end
 
 return mobskillObject
