@@ -27,12 +27,11 @@
 #include "basic.h"
 
 class CCharEntity;
-struct EventInfo;
 
 class CZoneInPacket : public CBasicPacket
 {
 public:
-    CZoneInPacket(CCharEntity* PChar, const EventInfo*);
+    CZoneInPacket(CCharEntity* PChar, int16);
 };
 
 #endif

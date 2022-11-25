@@ -62,7 +62,6 @@ struct EventInfo : EventPrep
     EVENT_TYPE         type = NORMAL;
     std::vector<int32> cutsceneOptions;
     uint16             interruptText = 0;
-    uint32             eventFlags    = 0;
 
     bool hasCutsceneOption(int32 _option)
     {
@@ -77,8 +76,7 @@ struct EventInfo : EventPrep
         cutsceneOptions.clear();
         params.clear();
         strings.clear();
-        textTable  = -1;
-        eventFlags = 0;
+        textTable = -1;
     }
 };
 

@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Windurst_Waters/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
@@ -18,12 +17,12 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = { -1 }
+    local cs = -1
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = { 531, -1, xi.cutscenes.params.NO_OTHER_ENTITY }
+            cs = 531
         end
         player:setPos(-40, -5, 80, 64)
         player:setHomePoint()

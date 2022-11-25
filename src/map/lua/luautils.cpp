@@ -1821,9 +1821,8 @@ namespace luautils
         {
             auto resultTable = result.get<sol::table>();
 
-            PChar->currentEvent->eventId    = resultTable.get_or(1, -1);
-            PChar->currentEvent->textTable  = resultTable.get_or(2, -1);
-            PChar->currentEvent->eventFlags = resultTable.get_or(3, 0);
+            PChar->currentEvent->eventId   = resultTable.get_or(1, -1);
+            PChar->currentEvent->textTable = resultTable.get_or(2, -1);
         }
         else if (result.get_type() == sol::type::number)
         {
