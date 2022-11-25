@@ -274,11 +274,13 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     {
         PNpc->namevis     = table.get_or<uint8>("namevis", 0);
         PNpc->status      = STATUS_TYPE::NORMAL;
-        PNpc->m_flags     = 0;
         PNpc->name_prefix = 32;
 
         // TODO: Does this even work?
         PNpc->widescan = table.get_or<uint8>("widescan", 1);
+
+        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
+        PNpc->m_flags = flags == 0 ? PNpc->m_flags : flags;
 
         // Ensure that the npc is triggerable if onTrigger is passed in
         auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
@@ -316,6 +318,9 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->m_isAggroable           = table["isAggroable"].get_or(false);
 
         PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
+
+        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
+        PMob->m_flags = flags == 0 ? PMob->m_flags : flags;
 
         // Ensure mobs get a function for onMobDeath
         auto onMobDeath = table["onMobDeath"].get<sol::function>();
