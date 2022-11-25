@@ -362,7 +362,7 @@ INSERT INTO `traits` VALUES (53,'resist petrify',5,30,2,246,15,NULL,0);
 INSERT INTO `traits` VALUES (53,'resist petrify',5,50,3,246,20,NULL,0);
 INSERT INTO `traits` VALUES (53,'resist petrify',5,70,4,246,25,NULL,0);
 INSERT INTO `traits` VALUES (53,'resist petrify',5,81,5,246,30,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (54,'resist virus',1,5,1,245,10,NULL,0);
+INSERT INTO `traits` VALUES (54,'resist virus',1,15,1,245,10,NULL,0);
 INSERT INTO `traits` VALUES (54,'resist virus',1,35,2,245,15,NULL,0);
 INSERT INTO `traits` VALUES (54,'resist virus',1,55,3,245,20,NULL,0);
 INSERT INTO `traits` VALUES (54,'resist virus',1,70,4,245,25,NULL,0);
