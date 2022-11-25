@@ -1,3 +1,4 @@
+-----------------------------------
 -- Contains all common weaponskill calculations including but not limited to:
 -- fSTR
 -- Alpha
@@ -8,6 +9,7 @@
 -- applications of accuracy mods ('Accuracy varies with TP.')
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
+-----------------------------------
 require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
