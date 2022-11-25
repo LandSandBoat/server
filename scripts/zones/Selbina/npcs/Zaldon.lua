@@ -561,6 +561,7 @@ local function giveReward(player, csid)
             if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
                 player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
             end
+
             if reward.title ~= nil then
                 player:addTitle(reward.title)
             end

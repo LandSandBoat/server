@@ -9,6 +9,7 @@ effectObject.onEffectGain = function(target, effect)
     if (target:getStat(xi.mod.CHR) - effect:getPower()) < 0 then
         effect:setPower(target:getStat(xi.mod.CHR))
     end
+
     target:addMod(xi.mod.CHR, -effect:getPower())
 end
 

@@ -40,6 +40,7 @@ g_mixins.warriors_path_taru = function(mob)
                         break
                     end
                 end
+
                 mob:setLocalVar("changetime", mob:getBattleTime())
             elseif makki == 1 then
                 mob:showText(mob, ID.text.MAKKI_CHEBUKKI_OFFSET + randOffset)
@@ -49,6 +50,7 @@ g_mixins.warriors_path_taru = function(mob)
                         break
                     end
                 end
+
                 mob:setLocalVar("changetime", mob:getBattleTime())
             elseif kukki == 1 then
                 mob:showText(mob, ID.text.KUKKI_CHEBUKKI_OFFSET + randOffset)
@@ -58,6 +60,7 @@ g_mixins.warriors_path_taru = function(mob)
                         break
                     end
                 end
+
                 mob:setLocalVar("changetime", mob:getBattleTime())
             end
         end

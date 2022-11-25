@@ -26,6 +26,7 @@ spellObject.onMobSpawn = function(mob)
     else
         xi.trust.message(mob, xi.trust.message_offset.SPAWN)
     end
+
     -- Unity ranking high : xi.trust.message(mob, xi.trust.message_offset.TEAMWORK_1)
 
     -- TODO: Nott weaponskill needs implemented and logic added here for Apururu to use at 50% MP at level 50.

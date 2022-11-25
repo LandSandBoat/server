@@ -2162,16 +2162,19 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
-    auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    auto* const PTarget = dynamic_cast<CCharEntity*>(target->GetBaseEntity());
-
-    if (PChar && PTarget)
+    if (target)
     {
-        const auto emoteID   = static_cast<Emote>(emID);
-        const auto emoteMode = static_cast<EmoteMode>(emMode);
+        auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        auto* const PTarget = target->GetBaseEntity();
 
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
-                                    new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+        if (PChar && PTarget)
+        {
+            const auto emoteID   = static_cast<Emote>(emID);
+            const auto emoteMode = static_cast<EmoteMode>(emMode);
+
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
+                                        new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+        }
     }
 }
 
@@ -2624,11 +2627,6 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             if (zoneid >= MAX_ZONEID)
             {
                 return;
-            }
-
-            if (PChar->PPet != nullptr)
-            {
-                PChar->setPetZoningInfo();
             }
 
             PChar->loc.destination = zoneid;
@@ -13813,8 +13811,9 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
 /************************************************************************
  *  Function: useJobAbility()
  *  Purpose : Instruct a Mob to use a specified Job Ability
- *  Example : wyvern:useJobAbility(636, wyvern) -- Specifying pet to use
- *  Notes   : Inserts directly into queue stack with 0ms delay
+ *  Example : wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern) -- Specifying pet to use
+ *  Notes   : Inserts directly into queue stack with 0ms delay,
+ *  and checks queue for immediate use.
  ************************************************************************/
 
 void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
@@ -13842,6 +13841,9 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
         }
     }));
     // clang-format on
+
+    // Check queue immediately in case of 0 ms delay abilities
+    m_PBaseEntity->PAI->checkQueueImmediately();
 }
 
 /************************************************************************

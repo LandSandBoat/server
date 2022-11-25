@@ -40,6 +40,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         magAttBoost = 1
         attBoost = 15
     end
+
     caster:addStatusEffect(xi.effect.ATTACK_BOOST, attBoost, 0, duration)
     caster:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, magAttBoost, 0, duration)
 
@@ -63,6 +64,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if final > diff then
         final = diff
     end
+
     target:addHP(final)
     caster:updateEnmityFromCure(target, final)
     return final

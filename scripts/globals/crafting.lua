@@ -27,19 +27,21 @@ xi.crafting.guild =
 }
 
 -----------------------------------
--- Table for Test Item
+-- Table for Test Items
 -----------------------------------
-
-local testItem_Alchemy =      {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 }
-local testItem_Bonecraft =    { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 }
-local testItem_Clothcraft =   { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 }
-local testItem_Cooking =      {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 }
-local testItem_Fishing =      {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 }
-local testItem_Goldsmithing = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 }
-local testItem_Leathercraft = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 }
-local testItem_Smithing =     { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 }
-local testItem_Woodworking =  {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 }
--- local testItem_Synergy =      {}
+local testItemsByNPC =
+{
+    ["Abd-al-Raziq"]   = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
+    ["Peshi_Yohnts"]   = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
+    ["Ponono"]         = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
+    ["Piketo-Puketo"]  = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
+    ["Thubu_Parohren"] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
+    ["Reinberta"]      = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
+    ["Faulpie"]        = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
+    ["Mevreauche"]     = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    ["Ghemp"]          = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    ["Cheupirudaux"]   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
+}
 
 local hqCrystals =
 {
@@ -120,24 +122,9 @@ end
 -----------------------------------
 
 xi.crafting.getTestItem = function(player, npc, craftID)
-    local testItemList = {}
     local nextRank  = player:getSkillRank(craftID) + 1
 
-    switch (npc:getName()): caseof
-    {
-        ["Abd-al-Raziq"]   = function (x) testItemList = testItem_Alchemy end,
-        ["Peshi_Yohnts"]   = function (x) testItemList = testItem_Bonecraft end,
-        ["Ponono"]         = function (x) testItemList = testItem_Clothcraft end,
-        ["Piketo-Puketo"]  = function (x) testItemList = testItem_Cooking end,
-        ["Thubu_Parohren"] = function (x) testItemList = testItem_Fishing end,
-        ["Reinberta"]      = function (x) testItemList = testItem_Goldsmithing end,
-        ["Faulpie"]        = function (x) testItemList = testItem_Leathercraft end,
-        ["Mevreauche"]     = function (x) testItemList = testItem_Smithing end,
-        ["Ghemp"]          = function (x) testItemList = testItem_Smithing end,
-        ["Cheupirudaux"]   = function (x) testItemList = testItem_Woodworking end,
-    }
-
-    return testItemList[nextRank]
+    return testItemsByNPC[npc:getName()][nextRank]
 end
 
 -----------------------------------
@@ -312,6 +299,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
                         delivered = delivered + 1
                     end
                 end
+
                 if delivered == 0 then
                     player:messageSpecial(text.ITEM_CANNOT_BE_OBTAINED, i.id)
                 end
@@ -354,6 +342,7 @@ xi.crafting.unionRepresentativeTrade = function(player, npc, trade, csid, guildI
                     trade:confirmSlot(i, items)
                 end
             end
+
             if totalPoints > 0 then
                 player:confirmTrade()
                 player:startEvent(csid, totalPoints)

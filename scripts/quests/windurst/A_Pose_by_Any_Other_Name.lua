@@ -86,6 +86,7 @@ quest.sections =
                 [87] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
+
                 [90] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -147,6 +148,7 @@ quest.sections =
                 [96] = function(player, csid, option, npc) -- Quest completed
                     quest:complete(player)
                 end,
+
                 [102] = function(player, csid, option, npc) -- Quest failed.
                     player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
                     quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.

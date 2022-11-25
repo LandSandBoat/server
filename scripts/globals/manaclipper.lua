@@ -155,6 +155,7 @@ xi.manaclipper.onTransportEvent = function(player, transport)
             else
                 player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET, uses - 1)
             end
+
             player:setCharVar("Manaclipper_Ticket", uses - 1)
             player:startEvent(14)
         else

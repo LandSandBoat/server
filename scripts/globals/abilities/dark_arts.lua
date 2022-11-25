@@ -18,6 +18,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     then
         return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
+
     return 0, 0
 end
 

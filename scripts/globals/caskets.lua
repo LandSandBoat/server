@@ -144,6 +144,7 @@ local function getCasketID(mob)
     if #caskets == 0 then
         return 0
     end
+
     -- Get the ID of the first entry and use that as our base ID to offset against
     local baseChestId = caskets[1]:getID()
     local chestId     = 0
@@ -297,6 +298,7 @@ local function multipleItemCheck(itemId)
             return true
         end
     end
+
     return false
 end
 
@@ -446,12 +448,14 @@ local function getDrops(npc, dropType, zoneId)
                     break
                 end
             end
+
             if temp == 0 or temp == nil then
                 temps[i] = 4112 -- default to potion
             else
                 temps[i] = temp
             end
         end
+
         setTempItems(npc, temps[1], temps[2], temps[3])
     -----------------------------------
     -- Item drops
@@ -490,6 +494,7 @@ local function getDrops(npc, dropType, zoneId)
                     break
                 end
             end
+
             if item == 0 or item == nil then
                 items[i] = 4112 -- default to potion
             else
@@ -781,10 +786,12 @@ xi.caskets.onTrade = function(player, npc, trade)
                     lowNum  = 80 + math.random(1, 9)
                     highNum = 99
                 end
+
                 player:messageSpecial(baseMessage + casketInfo.messageOffset.COMBINATION_GREATER_LESS, lowNum, highNum, 0, 0)
             else
                 player:messageSpecial(baseMessage + casketInfo.messageOffset.UNABLE_TO_GET_HINT, 0, 0, 0, 0)
             end
+
             player:confirmTrade()
         end
     end

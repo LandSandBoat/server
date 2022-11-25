@@ -26,14 +26,17 @@ function onTrigger(player, mobId, despawntime, respawntime)
             error(player, "You must provide a mob ID.")
             return
         end
+
         if GetMobByID(mobId, instance) == nil then
             error(player, "Invalid mobID")
             return
         end
+
         if GetMobByID(mobId, instance):isSpawned() then
             error(player, "Mob is already spawned")
             return
         end
+
         SpawnMob(mobId, instance)
         player:PrintToPlayer(string.format("Spawned %s %s in %s.", GetMobByID(mobId, instance):getName(), mobId, instance))
     else
@@ -42,6 +45,7 @@ function onTrigger(player, mobId, despawntime, respawntime)
             error(player, "You must provide a mob ID.")
             return
         end
+
         local targ = GetMobByID(mobId)
         if targ == nil then
             error(player, "Invalid mob ID.")

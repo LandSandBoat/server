@@ -37,7 +37,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if target:hasStatusEffect(xi.effect.ELEMENTALRES_DOWN) then
         target:delStatusEffectSilent(xi.effect.ELEMENTALRES_DOWN)
     end
+
     mob:setLocalVar("nuclearWaste", 0)
     return dmg
 end
+
 return mobskillObject

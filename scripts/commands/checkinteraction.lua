@@ -39,6 +39,7 @@ local function handlerToString(handler, player, containerVarCache, varCache)
             if handler.container.getCheckArgs then
                 checkArgs = handler.container:getCheckArgs(player)
             end
+
             checkArgs[#checkArgs + 1] = containerVarCache[handler.container]
             checkArgs[#checkArgs + 1] = varCache
         end
@@ -85,6 +86,7 @@ function onTrigger(player, handlerName)
     local varCache = interactionUtil.makeTableCache(function (varname)
         return player:getVar(varname)
     end)
+
     local containerVarCache = interactionUtil.makeContainerVarCache(player)
 
     local function gatherHandlers(category)
@@ -94,6 +96,7 @@ function onTrigger(player, handlerName)
                 table.insert(handlers, handlerToString(handlerData[category][i], player, containerVarCache, varCache))
             end
         end
+
         return handlers
     end
 

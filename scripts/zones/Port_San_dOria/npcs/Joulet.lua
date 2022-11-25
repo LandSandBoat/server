@@ -47,6 +47,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(306)
         end
     end
+
     npc:setAnimation(0)
 end
 

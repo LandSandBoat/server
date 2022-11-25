@@ -97,6 +97,7 @@ xi.mystery.onTrade = function (player, npc, trade, events)
                 player:startEvent(events.FULL_INV, tradeID, keyToDial[tradeID])
                 return false
             end
+
             player:setLocalVar("gobbieBoxKey", tradeID)
             player:startEvent(events.KEY_TRADE, tradeID, keyToDial[tradeID])
         else -- trade for points
@@ -150,15 +151,23 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
             player:setLocalVar("gobbieBoxKey", 0)
             switch (keyToDial[keyID]): caseof
             {
-                [6] = function() itemID = SelectDailyItem(player, 6) end,  -- special dial
+                [6] = function()
+                    itemID = SelectDailyItem(player, 6)
+                end,  -- special dial
+
                 [9] = function() -- abjuration
                     itemID = abjurationItems[math.random(1, #abjurationItems)]
                     if player:hasItem(itemID) then
                         itemID = gobbieJunk[math.random(1, #gobbieJunk)]
                     end
                 end,
-                [10] = function() itemID = fortuneItems[math.random(1, #fortuneItems)] end, -- fortune
+
+                [10] = function()
+                    itemID = fortuneItems[math.random(1, #fortuneItems)]
+                end, -- fortune
+
             --  [??] = function()  end, -- furnishing
+
                 [13] = function()-- anniversary
                     if math.random(1, 100) == 1 then -- 1% chance for ANV exclusive item?
                         itemID = anniversaryItems[math.random(1, #anniversaryItems)]
@@ -167,6 +176,7 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
                     end
                 end
             }
+
             player:setCharVar("gobbieBoxHoldingItem", itemID)
             player:tradeComplete()
             player:updateEvent(itemID, keyToDial[keyID], 3)
@@ -174,6 +184,7 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
             if holdingItem > 0 and npcUtil.giveItem(player, holdingItem) then
                 player:setCharVar("gobbieBoxHoldingItem", 0)
             end
+
             player:updateEvent(itemID, 0)
         end
     elseif csid == event.DEFAULT then
@@ -185,10 +196,12 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
             local dial_used = false
             local dial_cost = costs[dial]
             local dial_mask = false
+
             if dial >= 6 then
                 dial_mask = dial - 6
                 dial_used = utils.mask.getBit(gobbieBoxUsed, dial_mask)
             end
+
             switch (option_type): caseof
             {
                 [1] = function()
@@ -201,21 +214,25 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
                         if dial_mask then
                             player:setCharVar("gobbieBoxUsed", utils.mask.setBit(gobbieBoxUsed, dial_mask, true))
                         end
+
                         player:updateEvent(itemID, dial, 0)
                     else
                         player:updateEvent(1, dial, 1) -- not enough points
                     end
                 end,
+
                 [2] = function()
                     if player:getFreeSlotsCount() == 0 then
                         player:updateEvent(holdingItem, 0, 0, 1) -- inventory full, exit event
                         player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic "Cannot obtain the item."
                     end
                 end,
+
                 [5] = function()
                     if holdingItem > 0 and npcUtil.giveItem(player, holdingItem) then
                         player:setCharVar("gobbieBoxHoldingItem", 0)
                     end
+
                     player:updateEvent(specialDialUsed, adoulinDialUsed, pictlogicaDialUsed, wantedDialUsed, 0, 0, hideOptionFlags, dailyTallyPoints)
                 end,
             }

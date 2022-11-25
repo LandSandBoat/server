@@ -481,7 +481,7 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
         id += 0x100;
     }
 
-    m_zone->GetZoneEntities()->dynamicTargIds.insert(targid);
+    dynamicTargIds.insert(targid);
 
     PEntity->targid   = targid;
     PEntity->id       = id;
@@ -1363,7 +1363,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
             it->second = nullptr;
             m_mobList.erase(it++);
-            dynamicTargIds.erase(PMob->targid);
+            dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
             delete PMob;
             continue;
         }
@@ -1427,7 +1427,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                     delete it->second;
                     it->second = nullptr;
                 }
-                dynamicTargIds.erase(it->first);
+                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+
                 m_petList.erase(it++);
                 continue;
             }
@@ -1472,7 +1473,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
                 delete it->second;
                 it->second = nullptr;
-                dynamicTargIds.erase(it->first);
+                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+
                 m_trustList.erase(it++);
                 continue;
             }

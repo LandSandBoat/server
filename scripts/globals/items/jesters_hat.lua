@@ -17,6 +17,7 @@ itemObject.onItemUse = function(target)
     if hpHeal > dif then
         hpHeal = dif
     end
+
     target:addHP(hpHeal)
     target:updateEnmityFromCure(target, hpHeal)
     target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)

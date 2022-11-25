@@ -14,6 +14,7 @@ entity.onTrigger = function(player, npc)
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) then
         player:startEvent(112)
     end
+
     return 1
 end
 

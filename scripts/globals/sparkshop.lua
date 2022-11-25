@@ -700,6 +700,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
         end
+
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     elseif category == 30 then
         local copperVouchersStored = player:getCurrency("aman_vouchers")
@@ -714,6 +715,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
         end
+
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     end
 end

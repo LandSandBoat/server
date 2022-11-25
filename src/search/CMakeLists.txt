@@ -24,6 +24,10 @@ if(WIN32)
     set_target_properties(xi_search PROPERTIES OUTPUT_NAME xi_search)
 endif()
 
+if (APPLE)
+    disable_lto(xi_connect)
+endif()
+
 target_compile_definitions(
     xi_search
     PUBLIC

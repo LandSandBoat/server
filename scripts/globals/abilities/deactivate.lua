@@ -20,6 +20,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     if pet:getHP() == pet:getMaxHP() then
         player:resetRecast(xi.recast.ABILITY, 205) -- activate
     end
+
     target:despawnPet()
 end
 

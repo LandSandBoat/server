@@ -43,14 +43,17 @@ local beginCardianFight = function(player, npc)
         player:delKeyItem(xi.ki.ORB_OF_SWORDS)
         -- TODO: Remove slashing damage immunity
     end
+
     if player:hasKeyItem(xi.ki.ORB_OF_CUPS) then
         player:delKeyItem(xi.ki.ORB_OF_CUPS)
         -- TODO: Remove piercing damage immunity
     end
+
     if player:hasKeyItem(xi.ki.ORB_OF_BATONS) then
         player:delKeyItem(xi.ki.ORB_OF_BATONS)
         -- TODO: Remove blunt damage immunity
     end
+
     if player:hasKeyItem(xi.ki.ORB_OF_COINS) then
         player:delKeyItem(xi.ki.ORB_OF_COINS)
         -- TODO: Remove magic damage immunity

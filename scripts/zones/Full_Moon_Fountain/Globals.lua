@@ -55,6 +55,7 @@ global.phaseEventFinish = function(player, csid)
                 ajido:setSpawn(unpack(phaseInfo[inst].ajidoPos))
                 ajido:spawn()
             end
+
             player:setPos(unpack(phaseInfo[inst].playerPos))
         end
     end

@@ -39,6 +39,7 @@ xi.assault.hasOrders = function(player)
             return true
         end
     end
+
     return false
 end
 
@@ -169,6 +170,7 @@ xi.assault.runeReleaseFinish = function(player, csid, option)
                 if entity:getCharVar("Assault_Armband") == 1 then
                     points = points * 1.1
                 end
+
                 if entity:hasCompletedAssault(assaultID) then
                     points = math.floor(points)
                     entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 1)
@@ -180,6 +182,7 @@ xi.assault.runeReleaseFinish = function(player, csid, option)
                     entity:addAssaultPoint(pointsArea, points)
                     entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 end
+
                 entity:setVar("AssaultComplete", 1)
                 entity:startEvent(102)
             end
@@ -201,6 +204,7 @@ xi.assault.adjustMobLevel = function(mob)
         elseif levelCap == 50 then
             reducedLevel = 25
         end
+
         entity:setMobLevel(entity:getMainLvl() - reducedLevel)
     end
 end

@@ -26,6 +26,7 @@ entity.onMobRoam = function(mob)
             mob:messageText(mob, ID.text.PRISHE_TEXT + 1)
             promathia = promathia + 1
         end
+
         mob:setLocalVar("ready", promathia)
         mob:setLocalVar("wait", 0)
     elseif ready > 0 then
@@ -54,6 +55,7 @@ entity.onMobFight = function(mob, target)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 7)
         mob:setLocalVar("Bene", 1)
     end
+
     -- mob:setStatus(0)
 end
 

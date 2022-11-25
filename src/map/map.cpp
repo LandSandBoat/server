@@ -86,6 +86,12 @@ void operator delete(void* ptr) noexcept
     TracyFree(ptr);
     free(ptr);
 }
+
+void operator delete(void* ptr, std::size_t count)
+{
+    TracyFree(ptr);
+    free(ptr);
+}
 #endif // TRACY_ENABLE
 
 const char* MAP_CONF_FILENAME = nullptr;
@@ -103,7 +109,7 @@ map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
+std::unique_ptr<SqlConnection> sql;
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
@@ -985,8 +991,8 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 
 /************************************************************************
  *                                                                       *
- *  Timer function that clenup all timed out players                     *
- *                                                                       *
+ *  Timer function that cleans up all timed out players                  *
+ *  and removes stale dynamic targIDs after some time                    *
  ************************************************************************/
 
 int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
@@ -1090,6 +1096,28 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
         }
         ++it;
     }
+
+    // clang-format off
+    zoneutils::ForEachZone([](CZone* PZone)
+    {
+        auto& staledynamicTargIds = PZone->GetZoneEntities()->dynamicTargIdsToDelete;
+
+        auto it = staledynamicTargIds.begin();
+        while(it != staledynamicTargIds.end())
+        {
+            // Erase dynamic targid if it's stale enough
+            if ((server_clock::now() - it->second) > 60s)
+            {
+                PZone->GetZoneEntities()->dynamicTargIds.erase(it->first);
+                it = staledynamicTargIds.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+    });
+    // clang-format on
     return 0;
 }
 

@@ -29,6 +29,7 @@ effectObject.onEffectLose = function(target, effect)
     if boostACC_effect_size > 0 then
         target:delMod(xi.mod.ACC, effect:getPower())
     end
+
     if effect:getSubPower() > 0 then
         target:delMod(xi.mod.RACC, effect:getSubPower())
     end

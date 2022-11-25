@@ -57,81 +57,106 @@ zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("2pb1")
 end
 
+-- TODO: Table teleporter events keyed by triggerArea and perform a direct
+-- lookup.
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)
+        [1] = function(x)
             player:startEvent(204)
         end,
-        [2] = function (x)
+
+        [2] = function(x)
             player:startEvent(205)
         end,
-        [3] = function (x)
+
+        [3] = function(x)
             player:startEvent(201)
         end,
-        [4] = function (x)
+
+        [4] = function(x)
             player:startEvent(203)
         end,
-        [5] = function (x)
+
+        [5] = function(x)
             player:startEvent(202)
         end,
-        [6] = function (x)
+
+        [6] = function(x)
             player:startEvent(206)
         end,
-        [7] = function (x)
+
+        [7] = function(x)
             player:startEvent(211)
         end,
-        [8] = function (x)
+
+        [8] = function(x)
             player:startEvent(200)
         end,
-        [9] = function (x)
+
+        [9] = function(x)
             player:startEvent(201)
         end,
-        [10] = function (x)
+
+        [10] = function(x)
             player:startEvent(213)
         end,
-        [11] = function (x)
+
+        [11] = function(x)
             player:startEvent(218)
         end,
-        [12] = function (x)
+
+        [12] = function(x)
             player:startEvent(221)
         end,
-        [13] = function (x)
+
+        [13] = function(x)
             player:startEvent(219)
         end,
-        [14] = function (x)
+
+        [14] = function(x)
             player:startEvent(220)
         end,
-        [15] = function (x)
+
+        [15] = function(x)
             player:startEvent(207)
         end,
-        [16] = function (x)
+
+        [16] = function(x)
             player:startEvent(208)
         end,
-        [17] = function (x)
+
+        [17] = function(x)
             player:startEvent(214)
         end,
-        [18] = function (x)
+
+        [18] = function(x)
             player:startEvent(207)
         end,
-        [19] = function (x)
+
+        [19] = function(x)
             player:startEvent(202)
         end,
-        [20] = function (x)
+
+        [20] = function(x)
             player:startEvent(207)
         end,
-        [21] = function (x)
+
+        [21] = function(x)
             player:startEvent(207)
         end,
-        [22] = function (x)
+
+        [22] = function(x)
             player:startEvent(210)
         end,
-        [24] = function (x)
+
+        [24] = function(x)
             if player:getCharVar("TransformationsProgress") == 2 then
                 player:startEvent(2)
             end
         end,
-        [25] = function (x)
+
+        [25] = function(x)
             if player:getCharVar("TransformationsProgress") == 3 then
                 player:startEvent(3)
             end

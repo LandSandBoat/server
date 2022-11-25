@@ -111,6 +111,7 @@ quest.sections =
                     npcUtil.giveKeyItem(player, xi.ki.POT_OF_TSETSEROONS_STEW)
                     quest:setVar(player, 'Prog', 3)
                 end,
+
                 [20] = function(player, csid, option, npc)
                     if player:hasKeyItem(xi.ki.MAP_OF_AYDEEWA_SUBTERRANE) then
                         if npcUtil.giveItem(player, xi.items.IMPERIAL_BRONZE_PIECE) then

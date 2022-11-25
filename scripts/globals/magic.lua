@@ -219,6 +219,7 @@ local function isHelixSpell(spell)
     if id >= 278 and id <= 285 then
         return true
     end
+
     return false
 end
 
@@ -302,6 +303,7 @@ local function doNuke(caster, target, spell, params)
             dmg = dmg + (caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
             dmg = dmg * ninSkillBonus / 100
         end
+
         -- boost with Futae
         if caster:hasStatusEffect(xi.effect.FUTAE) then
             dmg = dmg + (caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5)
@@ -425,6 +427,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
                 dayWeatherBonus = dayWeatherBonus + 0.10
             end
         end
+
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
@@ -438,6 +441,7 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
                 dayWeatherBonus = dayWeatherBonus + 0.10
             end
         end
+
         if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.25
         end
@@ -718,6 +722,7 @@ function handleAfflatusMisery(caster, spell, dmg)
         --Afflatus Mod is Used Up
         caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
     end
+
     return dmg
 end
 
@@ -813,6 +818,7 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     else
         target:takeDamage(dmg, caster, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + ele)
     end
+
     -- Not updating enmity from damage, as this is primarily used for additional effects (which don't generate emnity)
     --  in the case that updating enmity is needed, do it manually after calling this
     -- target:updateEnmityFromDamage(caster, dmg)
@@ -824,9 +830,11 @@ function adjustForTarget(target, dmg, ele)
     if dmg > 0 and math.random(0, 99) < target:getMod(xi.magic.absorbMod[ele]) then
         return -dmg
     end
+
     if math.random(0, 99) < target:getMod(nullMod[ele]) then
         return 0
     end
+
     --Moved non element specific absorb and null mod checks to core
     --TODO: update all lua calls to magicDmgTaken with appropriate element and remove this function
     return dmg
@@ -1045,6 +1053,7 @@ function getElementalDebuffDOT(INT)
     else
         DOT = 5
     end
+
     return DOT
 end
 
@@ -1270,6 +1279,7 @@ function doNinjutsuNuke(caster, target, spell, params)
     if caster:hasStatusEffect(xi.effect.INNIN) and caster:isBehind(target, 23) then -- Innin mag atk bonus from behind, guesstimating angle at 23 degrees
         mabBonus = mabBonus + caster:getStatusEffect(xi.effect.INNIN):getPower()
     end
+
     params.skillType = xi.skill.NINJUTSU
     params.attribute = xi.mod.INT
     params.bonusmab = mabBonus

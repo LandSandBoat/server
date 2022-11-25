@@ -38,8 +38,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local duration = (30 + (tp / 1000 * 30)) * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0)
         target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject
