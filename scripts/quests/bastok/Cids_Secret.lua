@@ -100,7 +100,7 @@ quest.sections =
                 [133] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    npcUtil.giveKeyItem(xi.ki.UNFINISHED_LETTER)
+                    npcUtil.giveKeyItem(player, xi.ki.UNFINISHED_LETTER)
                 end,
             },
         },
