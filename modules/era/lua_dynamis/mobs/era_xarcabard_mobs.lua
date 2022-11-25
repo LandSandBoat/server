@@ -255,6 +255,12 @@ xi.dynamis.onFightYing = function(mob, target)
             spawnDwagons(mob, target)
         end
     end
+
+    if zone:getLocalVar("179") ~= 0 then
+        if not GetMobByID(zone:getLocalVar("179")) or GetMobByID(zone:getLocalVar("179")):getHP() == 0 then
+            DespawnMob(mob:getID())
+        end
+    end
 end
 
 xi.dynamis.onFightYang = function(mob, target)
@@ -266,6 +272,12 @@ xi.dynamis.onFightYang = function(mob, target)
         mob:setLocalVar("Spawning", os.time() + 5)
         if dwagonVars[2] == 1 and os.time() > yingToD + 30 then
             spawnDwagons(mob, target)
+        end
+    end
+
+    if zone:getLocalVar("179") ~= 0 then
+        if not GetMobByID(zone:getLocalVar("179")) or GetMobByID(zone:getLocalVar("179")):getHP() == 0 then
+            DespawnMob(mob:getID())
         end
     end
 end
@@ -571,8 +583,8 @@ xi.dynamis.onSpawnAnimated = function(mob)
 end
 
 xi.dynamis.onEngagedAnimated = function(mob, target)
-    mob:setLocalVar("castTime", os.time() + math.random(0, 3))
     mob:setLocalVar("changeTime", os.time() + math.random(20, 30))
+    mob:setLocalVar("castTime", os.time() + math.random(8, 10))
 end
 
 xi.dynamis.onFightAnimated = function(mob, target)
@@ -584,6 +596,7 @@ xi.dynamis.onFightAnimated = function(mob, target)
     end
 
     if mob:getLocalVar("changeTime") <= os.time() then
+        mob:addMP(200)
         mob:castSpell(xi.magic.spell.WARP, chosenTarget)
         mob:setLocalVar("changeTime", os.time() + math.random(10, 15))
     end
@@ -598,7 +611,7 @@ xi.dynamis.onFightAnimated = function(mob, target)
                         chosenTarget = target
                     end
                     mob:castSpell(data[1], chosenTarget)
-                    mob:setLocalVar("castTime", os.time() + math.random(5, 10))
+                    mob:setLocalVar("castTime", os.time() + math.random(18, 25))
                     break
                 end
             end
@@ -615,13 +628,16 @@ xi.dynamis.onSpawnSatellite = function(mob)
     end)
 end
 
+xi.dynamis.onEngageSatellite = function(mob, target)
+end
+
 xi.dynamis.onFightSatellite = function(mob, target)
     if mob:getLocalVar("animSwap") == 0 then
         mob:setLocalVar("animSwap", 1)
         mob:setAnimationSub(mob:getLocalVar("animSub"))
     end
 
-    if not GetMobByID(mob:getLocalVar("ParentID")) then -- Despawn if Animated Parent Dies
+    if not GetMobByID(mob:getLocalVar("ParentID")) or GetMobByID(mob:getLocalVar("ParentID")):getHP() == 0 then -- Despawn if Animated Parent Dies
         DespawnMob(mob:getID())
     end
 end

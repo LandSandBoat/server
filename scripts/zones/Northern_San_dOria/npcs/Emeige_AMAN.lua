@@ -9,24 +9,34 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local var = 0
     if not player:getMentor() then
+        player:addStatusEffectEx(xi.effect.STUN, xi.effect.STUN, 1, 0, 99999, 0, 0, 1, xi.effectFlag.ON_ZONE, true)
         if player:getMainLvl() >= 30 and player:getPlaytime() >= 648000 then
-            var = 1
+            player:PrintToPlayer("Greetings adventurer! I'm with the Adventurers' Mutual Aid Network (AMAN) and am now taking applications for new mentors.", xi.msg.channel.SAY, npc:getPacketName())
+            player:timer(1000, function(playerArg) playerArg:PrintToPlayer("Congratulations! You are qualified to be a mentor!", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(2500, function(playerArg) playerArg:PrintToPlayer("Please note that registering and serving as a mentor, as well as utilizing the services of the Mentor Program, are done at the player's own discretion.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(4000, function(playerArg) playerArg:PrintToPlayer("Horizon is not responsible for actions or comments of any mentors. No benefits are provided to those who choose to participate in the Mentor Program.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(5500, function(playerArg) playerArg:PrintToPlayer("You are now a registered mentor.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(7000, function(playerArg) playerArg:PrintToPlayer("You can enable \"Mentor Status\" by using the command /mentor on. You can disable the status by using /mentor off.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(8500, function(playerArg) playerArg:PrintToPlayer("Mentor status can also be switched on and off in the \"Config\" menu found within the \"Help Desk.\"", xi.msg.channel.SAY, npc:getPacketName()) playerArg:delStatusEffectSilent(xi.effect.STUN) end)
+            player:setMentor(true)
+        else
+            player:PrintToPlayer("Greetings adventurer! I'm with the Adventurers' Mutual Aid Network (AMAN) and am now taking applications for new mentors.", xi.msg.channel.SAY, npc:getPacketName())
+            player:timer(1000, function(playerArg) playerArg:PrintToPlayer("What is a mentor, you ask? Well, a mentor is an experienced adventurer who is willing to offer their time to help out their less traveled companions.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(2500, function(playerArg) playerArg:PrintToPlayer("To become a mentor, you must have attained level 30 and have accumplated more than 180 hours of play time.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(4000, function(playerArg) playerArg:PrintToPlayer("Please note that registering and serving as a mentor, as well as utilizing the services of the Mentor Program, are done at the player's own discretion.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(5500, function(playerArg) playerArg:PrintToPlayer("Horizon is not responsible for actions or comments of any mentors. No benefits are provided to those who choose to participate in the Mentor Program.", xi.msg.channel.SAY, npc:getPacketName()) end)
+            player:timer(7000, function(playerArg) playerArg:PrintToPlayer("Once you have met the requirements to become a mentor, please speak with me again.", xi.msg.channel.SAY, npc:getPacketName()) playerArg:delStatusEffectSilent(xi.effect.STUN) end)
         end
     elseif player:getMentor() then
-        var = 2
+        player:startEvent(826, 10)
     end
-    player:startEvent(739, var)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 739 and option == 0 then
-        player:setMentor(true)
-    end
 end
 
 return entity

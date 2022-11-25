@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.GHEMISENTERILO_SHOP_DIALOG)
-    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
         xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
     end
 end

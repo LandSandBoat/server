@@ -61,9 +61,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TRADERS_SACK) then
-                        return mission:progressEvent(81)
+                        return quest:progressEvent(81)
                     else
-                        return mission:event(83)
+                        return quest:event(83)
                     end
                 end,
             },

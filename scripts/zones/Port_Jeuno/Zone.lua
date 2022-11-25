@@ -60,34 +60,30 @@ end
 zoneObject.onTransportEvent = function(player, transport)
     if transport == 223 then -- San d'Oria Airship
         player:startEvent(10010)
-        if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
             player:startEvent(10002)
         else
-            player:setPos(-77.0152, 8.0021, 40.8033, 195)
-            player:setLocalVar('[AIRSHIP]Paid', 0)
+            player:setPos(-76.92, 7.99, 35.62, 64)
         end
     elseif transport == 224 then -- Bastok Airship
         player:startEvent(10012)
-        if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
             player:startEvent(10002)
         else
-            player:setPos(-60.9037, 8.0007, -41.2909, 64)
-            player:setLocalVar('[AIRSHIP]Paid', 0)
+            player:setPos(-61.1, 7.99, -36.26, 192)
         end
     elseif transport == 225 then -- Windurst Airship
-        if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
             player:startEvent(10011)
         else
-            player:setPos(2.9721, 8.0018, -40.1178, 65)
-            player:setLocalVar('[AIRSHIP]Paid', 0)
+            player:setPos(3.06, 7.99, -36.21, 192)
         end
     elseif transport == 226 then -- Kazham Airship
         player:startEvent(10013)
-        if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM) then
             player:startEvent(10002)
         else
-            player:setPos(-12.9056, 8.0015, 40.2401, 191)
-            player:setLocalVar('[AIRSHIP]Paid', 0)
+            player:setPos(-12.92, 7.99, 36.17, 64)
         end
     end
 end
@@ -98,24 +94,12 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10010 then
         player:setPos(0, 0, 0, 0, 223)
-        player:setLocalVar('[AIRSHIP]Paid', 1)
     elseif csid == 10011 then
         player:setPos(0, 0, 0, 0, 225)
-        player:setLocalVar('[AIRSHIP]Paid', 1)
     elseif csid == 10012 then
         player:setPos(0, 0, 0, 0, 224)
-        player:setLocalVar('[AIRSHIP]Paid', 1)
     elseif csid == 10013 then
         player:setPos(0, 0, 0, 0, 226)
-        player:setLocalVar('[AIRSHIP]Paid', 1)
-    elseif csid == 54 and option == 0 then
-        player:setLocalVar('[AIRSHIP]Paid', 0)
-    elseif csid == 53 and option == 0 then
-        player:setLocalVar('[AIRSHIP]Paid', 0)
-    elseif csid == 52 and option == 0 then
-        player:setLocalVar('[AIRSHIP]Paid', 0)
-    elseif csid == 55 and option == 0 then
-        player:setLocalVar('[AIRSHIP]Paid', 0)
     end
 end
 

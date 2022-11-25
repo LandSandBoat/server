@@ -54,7 +54,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_AVAILABLE and
         (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS or
-         player:getCharVar("Mission[6][118]Option") > 0)
+         player:getCharVar("Mission[6][128]Option") > 0)
     then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
         player:startEvent(113)

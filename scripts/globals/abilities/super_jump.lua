@@ -2,7 +2,7 @@
 -- Ability: Super Jump
 -- Performs a super jump.
 -- Obtained: Dragoon Level 50
--- Recast Time: 3:00
+-- Recast Time: 3:00 (5:00 pre-ToAU)
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/job_utils/dragoon")

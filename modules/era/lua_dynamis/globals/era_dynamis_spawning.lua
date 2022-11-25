@@ -122,169 +122,169 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         {
             [xi.zone.DYNAMIS_BEAUCEDINE] = -- Spawn Hydras (Done)
             {
-                [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-                [2]  = { "H. Monk", 160, 134, 0, 359 }, -- HMNK
-                [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
-                [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
-                [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-                [6]  = { "H. Thief", 165, 134, 0, 359 }, -- HTHF
-                [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
-                [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
-                [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
-                [10] = { "H. Bard", 170, 134, 6, 359 }, -- HBRD
-                [11] = { "H. Ranger", 171, 134, 0, 359 }, -- HRNG
-                [12] = { "H. Samurai", 172, 134, 0, 359 }, -- HSAM
-                [13] = { "H. Ninja", 173, 134, 7, 359 }, -- HNIN
-                [14] = { "H. Dragoon", 174, 134, 0, 359 }, -- HDRG
-                [15] = { "H. Summoner", 176, 134, 0, 359 }, -- HSMN
+                [1]  = { "H. Warrior",     159, 134, 0,    359, 1155 }, -- HWAR
+                [2]  = { "H. Monk",        160, 134, 0,    359, 1155 }, -- HMNK
+                [3]  = { "H. White Mage",  161, 134, 1,    359, 1155 }, -- HWHM
+                [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155 }, -- HBLM
+                [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155 }, -- HRDM
+                [6]  = { "H. Thief",       165, 134, 0,    359, 1155 }, -- HTHF
+                [7]  = { "H. Paladin",     166, 134, 4,    359, 1155 }, -- HPLD
+                [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155 }, -- HDRK
+                [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155 }, -- HBST
+                [10] = { "H. Bard",        170, 134, 6,    359, 1155 }, -- HBRD
+                [11] = { "H. Ranger",      171, 134, 0,    359, 1155 }, -- HRNG
+                [12] = { "H. Samurai",     172, 134, 0,    359, 1155 }, -- HSAM
+                [13] = { "H. Ninja",       173, 134, 7,    359, 1155 }, -- HNIN
+                [14] = { "H. Dragoon",     174, 134, 0,    359, 1155 }, -- HDRG
+                [15] = { "H. Summoner",    176, 134, 0,    359, 1155 }, -- HSMN
             },
             [xi.zone.DYNAMIS_XARCABARD] = -- Spawn Kindred (Done)
             {
-                [1]  = { "K. Warrior", 32, 135, 0, 358 }, -- KWAR
-                [2]  = { "K. Monk", 33, 135, 0, 358 }, -- KMNK
-                [3]  = { "K. White Mage", 29, 135, 1, 358 }, -- KWHM
-                [4]  = { "K. Black Mage", 30, 135, 5000, 358 }, -- KBLM
-                [5]  = { "K. Red Mage", 31, 135, 3, 358 }, -- KRDM
-                [6]  = { "K. Thief", 34, 135, 0, 358 }, -- KTHF
-                [7]  = { "K. Paladin", 15, 135, 4, 358 }, -- KPLD
-                [8]  = { "K. Dark Knight", 16, 135, 5, 358 }, -- KDRK
-                [9]  = { "K. Beastmaster", 17, 135, 0, 358 }, -- KBST
-                [10] = { "K. Bard", 20, 135, 6, 358 }, -- KBRD
-                [11] = { "K. Ranger", 19, 135, 0, 358 }, -- KRNG
-                [12] = { "K. Samurai", 22, 135, 0, 358 }, -- KSAM
-                [13] = { "K. Ninja", 23, 135, 7, 358 }, -- KNIN
-                [14] = { "K. Dragoon", 27, 135, 0, 358 }, -- KDRG
-                [15] = { "K. Summoner", 24, 135, 0, 358 }, -- KSMN
+                [1]  = { "K. Warrior",     32, 135, 0,    358, 131 }, -- KWAR
+                [2]  = { "K. Monk",        33, 135, 0,    358, 131 }, -- KMNK
+                [3]  = { "K. White Mage",  29, 135, 1,    358, 131 }, -- KWHM
+                [4]  = { "K. Black Mage",  30, 135, 5000, 358, 131 }, -- KBLM
+                [5]  = { "K. Red Mage",    31, 135, 3,    358, 131 }, -- KRDM
+                [6]  = { "K. Thief",       34, 135, 0,    358, 131 }, -- KTHF
+                [7]  = { "K. Paladin",     15, 135, 4,    358, 131 }, -- KPLD
+                [8]  = { "K. Dark Knight", 16, 135, 5,    358, 131 }, -- KDRK
+                [9]  = { "K. Beastmaster", 17, 135, 0,    358, 131 }, -- KBST
+                [10] = { "K. Bard",        20, 135, 6,    358, 131 }, -- KBRD
+                [11] = { "K. Ranger",      19, 135, 0,    358, 131 }, -- KRNG
+                [12] = { "K. Samurai",     22, 135, 0,    358, 131 }, -- KSAM
+                [13] = { "K. Ninja",       23, 135, 7,    358, 131 }, -- KNIN
+                [14] = { "K. Dragoon",     27, 135, 0,    358, 131 }, -- KDRG
+                [15] = { "K. Summoner",    24, 135, 0,    358, 131 }, -- KSMN
             },
             [xi.zone.DYNAMIS_TAVNAZIA] = -- Spawn Kindred and Hydra
             {
                 [2] = -- Floor 2 Spawn Hydras (Done)
                 {
-                    [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-                    [2]  = { "H. Monk", 160, 134, 0, 359 }, -- HMNK
-                    [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
-                    [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
-                    [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-                    [6]  = { "H. Thief", 165, 134, 0, 359 }, -- HTHF
-                    [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
-                    [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
-                    [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
-                    [10] = { "H. Bard", 170, 134, 6, 359 }, -- HBRD
-                    [11] = { "H. Ranger", 171, 134, 0, 359 }, -- HRNG
-                    [12] = { "H. Samurai", 172, 134, 0, 359 }, -- HSAM
-                    [13] = { "H. Ninja", 173, 134, 7, 359 }, -- HNIN
-                    [14] = { "H. Dragoon", 174, 134, 0, 359 }, -- HDRG
-                    [15] = { "H. Summoner", 176, 134, 0, 359 }, -- HSMN
+                    [1]  = { "H. Warrior",     159, 134, 0,    359, 1155 }, -- HWAR
+                    [2]  = { "H. Monk",        160, 134, 0,    359, 1155 }, -- HMNK
+                    [3]  = { "H. White Mage",  161, 134, 1,    359, 1155 }, -- HWHM
+                    [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155 }, -- HBLM
+                    [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155 }, -- HRDM
+                    [6]  = { "H. Thief",       165, 134, 0,    359, 1155 }, -- HTHF
+                    [7]  = { "H. Paladin",     166, 134, 4,    359, 1155 }, -- HPLD
+                    [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155 }, -- HDRK
+                    [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155 }, -- HBST
+                    [10] = { "H. Bard",        170, 134, 6,    359, 1155 }, -- HBRD
+                    [11] = { "H. Ranger",      171, 134, 0,    359, 1155 }, -- HRNG
+                    [12] = { "H. Samurai",     172, 134, 0,    359, 1155 }, -- HSAM
+                    [13] = { "H. Ninja",       173, 134, 7,    359, 1155 }, -- HNIN
+                    [14] = { "H. Dragoon",     174, 134, 0,    359, 1155 }, -- HDRG
+                    [15] = { "H. Summoner",    176, 134, 0,    359, 1155 }, -- HSMN
                 },
                 [3] = -- Floor 3 Spawn Kindred (Done)
                 {
-                    [1]  = { "K. Warrior", 32, 135, 0, 358 }, -- KWAR
-                    [2]  = { "K. Monk", 33, 135, 0, 358 }, -- KMNK
-                    [3]  = { "K. White Mage", 29, 135, 1, 358 }, -- KWHM
-                    [4]  = { "K. Black Mage", 30, 135, 5000, 358 }, -- KBLM
-                    [5]  = { "K. Red Mage", 31, 135, 3, 358 }, -- KRDM
-                    [6]  = { "K. Thief", 34, 135, 0, 358 }, -- KTHF
-                    [7]  = { "K. Paladin", 15, 135, 4, 358 }, -- KPLD
-                    [8]  = { "K. Dark Knight", 16, 135, 5, 358 }, -- KDRK
-                    [9]  = { "K. Beastmaster", 17, 135, 0, 358 }, -- KBST
-                    [10] = { "K. Bard", 20, 135, 6, 358 }, -- KBRD
-                    [11] = { "K. Ranger", 19, 135, 0, 358 }, -- KRNG
-                    [12] = { "K. Samurai", 22, 135, 0, 358 }, -- KSAM
-                    [13] = { "K. Ninja", 23, 135, 7, 358 }, -- KNIN
-                    [14] = { "K. Dragoon", 27, 135, 0, 358 }, -- KDRG
-                    [15] = { "K. Summoner", 24, 135, 0, 358 }, -- KSMN
+                    [1]  = { "K. Warrior",     32, 135, 0,    358, 131 }, -- KWAR
+                    [2]  = { "K. Monk",        33, 135, 0,    358, 131 }, -- KMNK
+                    [3]  = { "K. White Mage",  29, 135, 1,    358, 131 }, -- KWHM
+                    [4]  = { "K. Black Mage",  30, 135, 5000, 358, 131 }, -- KBLM
+                    [5]  = { "K. Red Mage",    31, 135, 3,    358, 131 }, -- KRDM
+                    [6]  = { "K. Thief",       34, 135, 0,    358, 131 }, -- KTHF
+                    [7]  = { "K. Paladin",     15, 135, 4,    358, 131 }, -- KPLD
+                    [8]  = { "K. Dark Knight", 16, 135, 5,    358, 131 }, -- KDRK
+                    [9]  = { "K. Beastmaster", 17, 135, 0,    358, 131 }, -- KBST
+                    [10] = { "K. Bard",        20, 135, 6,    358, 131 }, -- KBRD
+                    [11] = { "K. Ranger",      19, 135, 0,    358, 131 }, -- KRNG
+                    [12] = { "K. Samurai",     22, 135, 0,    358, 131 }, -- KSAM
+                    [13] = { "K. Ninja",       23, 135, 7,    358, 131 }, -- KNIN
+                    [14] = { "K. Dragoon",     27, 135, 0,    358, 131 }, -- KDRG
+                    [15] = { "K. Summoner",    24, 135, 0,    358, 131 }, -- KSMN
                 },
             },
         },
         [92] = -- Goblin Replica
         {
-            [1]  = { "V. Smithy", 125, 134, 0, 327 }, -- GWAR
-            [2]  = { "V. Pitfighter", 126, 134, 0, 327 }, -- GMNK
-            [3]  = { "V. Alchemist", 141, 134, 1, 327 }, -- GWHM
-            [4]  = { "V. Shaman", 127, 134, 5000, 327 }, -- GBLM
-            [5]  = { "V. Enchanter", 128, 134, 3, 327 }, -- GRDM
-            [6]  = { "V. Welldigger", 132, 134, 0, 327 }, -- GTHF
-            [7]  = { "V. Armorer", 133, 134, 4, 327 }, -- GPLD
-            [8]  = { "V. Tinkerer", 147, 134, 5, 327 }, -- GDRK
-            [9]  = { "V. Pathfinder", 129, 134, 0, 327 }, -- GBST
-            [10] = { "V. Maestro", 131, 134, 6, 327 }, -- GBRD
-            [11] = { "V. Ambusher", 134, 134, 0, 327 }, -- GRNG
-            [12] = { "V. Ronin", 137, 134, 0, 327 }, -- GSAM
-            [13] = { "V. Hitman", 138, 134, 7, 327 }, -- GNIN
-            [14] = { "V. Dragontamer", 140, 134, 0, 327 }, -- GDRG
-            [15] = { "V. Necromancer", 135, 134, 0, 327 }, -- GSMN
+            [1]  = { "V. Smithy",      125, 134, 0,    327, 131 }, -- GWAR
+            [2]  = { "V. Pitfighter",  126, 134, 0,    327, 131 }, -- GMNK
+            [3]  = { "V. Alchemist",   141, 134, 1,    327, 131 }, -- GWHM
+            [4]  = { "V. Shaman",      127, 134, 5000, 327, 131 }, -- GBLM
+            [5]  = { "V. Enchanter",   128, 134, 3,    327, 131 }, -- GRDM
+            [6]  = { "V. Welldigger",  132, 134, 0,    327, 131 }, -- GTHF
+            [7]  = { "V. Armorer",     133, 134, 4,    327, 131 }, -- GPLD
+            [8]  = { "V. Tinkerer",    147, 134, 5,    327, 131 }, -- GDRK
+            [9]  = { "V. Pathfinder",  129, 134, 0,    327, 131 }, -- GBST
+            [10] = { "V. Maestro",     131, 134, 6,    327, 131 }, -- GBRD
+            [11] = { "V. Ambusher",    134, 134, 0,    327, 131 }, -- GRNG
+            [12] = { "V. Ronin",       137, 134, 0,    327, 131 }, -- GSAM
+            [13] = { "V. Hitman",      138, 134, 7,    327, 131 }, -- GNIN
+            [14] = { "V. Dragontamer", 140, 134, 0,    327, 131 }, -- GDRG
+            [15] = { "V. Necromancer", 135, 134, 0,    327, 131 }, -- GSMN
         },
         [93] = -- Orc Statue
         {
-            [1]  = { "V. Footsoldier", 59, 134, 0, 334 }, -- OWAR
-            [2]  = { "V. Grappler", 64, 134, 0, 334 }, -- OMNK
-            [3]  = { "V. Amputator", 67, 134, 1, 334 }, -- OWHM
-            [4]  = { "V. Mesmerizer", 75, 134, 5000, 334 }, -- OBLM
-            [5]  = { "V. Vexer", 61, 134, 3, 334 }, -- ORDM
-            [6]  = { "V. Pillager", 78, 134, 0, 334 }, -- OTHF
-            [7]  = { "V. Trooper", 57, 134, 4, 334 }, -- OPLD
-            [8]  = { "V. Neckchopper", 58, 134, 5, 334 }, -- ODRK
-            [9]  = { "V. Hawker", 76, 134, 0, 334 }, -- OBST
-            [10] = { "V. Bugler", 81, 134, 6, 334 }, -- OBRD
-            [11] = { "V. Predator", 70, 134, 0, 334 }, -- ORNG
-            [12] = { "V. Gutslasher", 66, 134, 0, 334 }, -- OSAM
-            [13] = { "V. Backstabber", 62, 134, 7, 334 }, -- ONIN
-            [14] = { "V. Impaler", 69, 134, 0, 334 }, -- ODRG
-            [15] = { "V. Dollmaster", 72, 134, 0, 334 }, -- OSMN
+            [1]  = { "V. Footsoldier", 59, 134, 0,    334, 131 }, -- OWAR
+            [2]  = { "V. Grappler",    64, 134, 0,    334, 131 }, -- OMNK
+            [3]  = { "V. Amputator",   67, 134, 1,    334, 131 }, -- OWHM
+            [4]  = { "V. Mesmerizer",  75, 134, 5000, 334, 131 }, -- OBLM
+            [5]  = { "V. Vexer",       61, 134, 3,    334, 131 }, -- ORDM
+            [6]  = { "V. Pillager",    78, 134, 0,    334, 131 }, -- OTHF
+            [7]  = { "V. Trooper",     57, 134, 4,    334, 131 }, -- OPLD
+            [8]  = { "V. Neckchopper", 58, 134, 5,    334, 131 }, -- ODRK
+            [9]  = { "V. Hawker",      76, 134, 0,    334, 131 }, -- OBST
+            [10] = { "V. Bugler",      81, 134, 6,    334, 131 }, -- OBRD
+            [11] = { "V. Predator",    70, 134, 0,    334, 131 }, -- ORNG
+            [12] = { "V. Gutslasher",  66, 134, 0,    334, 131 }, -- OSAM
+            [13] = { "V. Backstabber", 62, 134, 7,    334, 131 }, -- ONIN
+            [14] = { "V. Impaler",     69, 134, 0,    334, 131 }, -- ODRG
+            [15] = { "V. Dollmaster",  72, 134, 0,    334, 131 }, -- OSMN
         },
         [94] = -- Quadav Statue (Done)
         {
-            [1]  = { "V. Vindicator", 19, 134, 0, 337 }, -- QWAR
-            [2]  = { "V. Militant", 25, 134, 0, 337 }, -- QMNK
-            [3]  = { "V. Constable", 29, 134, 1, 337 }, -- QWHM
-            [4]  = { "V. Thaumaturge", 42, 134, 5000, 337 }, -- QBLM
-            [5]  = { "V. Protector", 20, 134, 3, 337 }, -- QRDM
-            [6]  = { "V. Purloiner", 33, 134, 0, 337 }, -- QTHF
-            [7]  = { "V. Defender", 30, 134, 4, 337 }, -- QPLD
-            [8]  = { "V. Vigilante", 38, 134, 5, 337 }, -- QDRK
-            [9]  = { "V. Beasttender", 21, 134, 0, 337 }, -- QBST
-            [10] = { "V. Minstrel", 23, 134, 6, 337 }, -- QBRD
-            [11] = { "V. Mason", 34, 134, 0, 337 }, -- QRNG
-            [12] = { "V. Hatamoto", 31, 134, 0, 337 }, -- QSAM
-            [13] = { "V. Kusa", 32, 134, 7, 337 }, -- QNIN
-            [14] = { "V. Drakekeeper", 26, 134, 0, 337 }, -- QDRG
-            [15] = { "V. Undertaker", 35, 134, 0, 337 }, -- QSMN
+            [1]  = { "V. Vindicator",  19, 134, 0,    337, 131 }, -- QWAR
+            [2]  = { "V. Militant",    25, 134, 0,    337, 131 }, -- QMNK
+            [3]  = { "V. Constable",   29, 134, 1,    337, 131 }, -- QWHM
+            [4]  = { "V. Thaumaturge", 42, 134, 5000, 337, 131 }, -- QBLM
+            [5]  = { "V. Protector",   20, 134, 3,    337, 131 }, -- QRDM
+            [6]  = { "V. Purloiner",   33, 134, 0,    337, 131 }, -- QTHF
+            [7]  = { "V. Defender",    30, 134, 4,    337, 131 }, -- QPLD
+            [8]  = { "V. Vigilante",   38, 134, 5,    337, 131 }, -- QDRK
+            [9]  = { "V. Beasttender", 21, 134, 0,    337, 131 }, -- QBST
+            [10] = { "V. Minstrel",    23, 134, 6,    337, 131 }, -- QBRD
+            [11] = { "V. Mason",       34, 134, 0,    337, 131 }, -- QRNG
+            [12] = { "V. Hatamoto",    31, 134, 0,    337, 131 }, -- QSAM
+            [13] = { "V. Kusa",        32, 134, 7,    337, 131 }, -- QNIN
+            [14] = { "V. Drakekeeper", 26, 134, 0,    337, 131 }, -- QDRG
+            [15] = { "V. Undertaker",  35, 134, 0,    337, 131 }, -- QSMN
         },
         [95] = -- Yagudo Statue
         {
-            [1]  = { "V. Skirmisher", 93, 134, 0, 360 }, -- YWAR
-            [2]  = { "V. Sentinel", 91, 134, 0, 360 }, -- YMNK
-            [3]  = { "V. Priest", 101, 134, 1, 360 }, -- YWHM
-            [4]  = { "V. Prelate", 105, 134, 5000, 360 }, -- YBLM
-            [5]  = { "V. Visionary", 95, 134, 3, 360 }, -- YRDM
-            [6]  = { "V. Liberator", 96, 134, 0, 360 }, -- YTHF
-            [7]  = { "V. Exemplar", 98, 134, 4, 360 }, -- YPLD
-            [8]  = { "V. Inciter", 103, 134, 5, 360 }, -- YDRK
-            [9]  = { "V. Ogresoother", 99, 134, 0, 360 }, -- YBST
-            [10] = { "V. Chanter", 104, 134, 6, 360 }, -- YBRD
-            [11] = { "V. Salvager", 111, 134, 0, 360 }, -- YRNG
-            [12] = { "V. Persecutor", 118, 134, 0, 360 }, -- YSAM
-            [13] = { "V. Assassin", 92, 134, 7, 360 }, -- YNIN
-            [14] = { "V. Partisan", 108, 134, 0, 360 }, -- YDRG
-            [15] = { "V. Oracle", 112, 134, 0, 360 }, -- YSMN
+            [1]  = { "V. Skirmisher", 93, 134, 0,     360, 131 }, -- YWAR
+            [2]  = { "V. Sentinel",   91, 134, 0,     360, 131 }, -- YMNK
+            [3]  = { "V. Priest",     101, 134, 1,    360, 131 }, -- YWHM
+            [4]  = { "V. Prelate",    105, 134, 5000, 360, 131 }, -- YBLM
+            [5]  = { "V. Visionary",  95, 134, 3,     360, 131 }, -- YRDM
+            [6]  = { "V. Liberator",  96, 134, 0,     360, 131 }, -- YTHF
+            [7]  = { "V. Exemplar",   98, 134, 4,     360, 131 }, -- YPLD
+            [8]  = { "V. Inciter",    103, 134, 5,    360, 131 }, -- YDRK
+            [9]  = { "V. Ogresoother",99, 134, 0,     360, 131 }, -- YBST
+            [10] = { "V. Chanter",    104, 134, 6,    360, 131 }, -- YBRD
+            [11] = { "V. Salvager",   111, 134, 0,    360, 131 }, -- YRNG
+            [12] = { "V. Persecutor", 118, 134, 0,    360, 131 }, -- YSAM
+            [13] = { "V. Assassin",   92, 134, 7,     360, 131 }, -- YNIN
+            [14] = { "V. Partisan",   108, 134, 0,    360, 131 }, -- YDRG
+            [15] = { "V. Oracle",     112, 134, 0,    360, 131 }, -- YSMN
         },
         [359] = -- Hydra NM
         {
-            [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-            [2]  = { "H. Monk", 163, 134, 0, 359 }, -- HMNK
-            [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
-            [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
-            [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-            [6]  = { "H. Thief", 160, 134, 0, 359 }, -- HTHF
-            [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
-            [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
-            [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
-            [10] = { "H. Bard", 170, 134, 6, 359 }, -- HBRD
-            [11] = { "H. Ranger", 171, 134, 0, 359 }, -- HRNG
-            [12] = { "H. Samurai", 172, 134, 0, 359 }, -- HSAM
-            [13] = { "H. Ninja", 173, 134, 7, 359 }, -- HNIN
-            [14] = { "H. Dragoon", 174, 134, 0, 359 }, -- HDRG
-            [15] = { "H. Summoner", 176, 134, 0, 359 }, -- HSMN
+            [1]  = { "H. Warrior",     159, 134, 0,    359, 131 }, -- HWAR
+            [2]  = { "H. Monk",        163, 134, 0,    359, 131 }, -- HMNK
+            [3]  = { "H. White Mage",  161, 134, 1,    359, 131 }, -- HWHM
+            [4]  = { "H. Black Mage",  164, 134, 5000, 359, 131 }, -- HBLM
+            [5]  = { "H. Red Mage",    162, 134, 3,    359, 131 }, -- HRDM
+            [6]  = { "H. Thief",       160, 134, 0,    359, 131 }, -- HTHF
+            [7]  = { "H. Paladin",     166, 134, 4,    359, 131 }, -- HPLD
+            [8]  = { "H. Dark Knight", 167, 134, 5,    359, 131 }, -- HDRK
+            [9]  = { "H. Beastmaster", 168, 134, 0,    359, 131 }, -- HBST
+            [10] = { "H. Bard",        170, 134, 6,    359, 131 }, -- HBRD
+            [11] = { "H. Ranger",      171, 134, 0,    359, 131 }, -- HRNG
+            [12] = { "H. Samurai",     172, 134, 0,    359, 131 }, -- HSAM
+            [13] = { "H. Ninja",       173, 134, 7,    359, 131 }, -- HNIN
+            [14] = { "H. Dragoon",     174, 134, 0,    359, 131 }, -- HDRG
+            [15] = { "H. Summoner",    176, 134, 0,    359, 131 }, -- HSMN
         },
         ["Drops"] =
         {
@@ -374,8 +374,10 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 onMobDeath = function(mobArg, player, optParams)
                     xi.dynamis.mobOnDeath(mobArg)
                 end,
+                onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
                 releaseIdOnDeath = true,
                 specialSpawnAnimation = oMob ~= nil,
+                entityFlags = nameObj[job][6],
                 mixins =
                 {
                     require("scripts/mixins/job_special"),
@@ -425,13 +427,13 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 11 }, -- Vanguard Eye (VEye)
-            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 1144, 5000, 11 }, -- Prototype Eye (PEye)
+            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 4 }, -- Vanguard Eye (VEye)
+            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 1144, 5000, 4 }, -- Prototype Eye (PEye)
             ["Goblin Statue"] = { "Goblin Statue" , 158, 134, 1144, 1, 92 }, -- Goblin Statue (GStat)
             ["Goblin Replica"] = { "Goblin Replica" , 157, 134, 1144, 1, 92 }, -- Goblin Statue (GRStat)
             ["Statue Prototype"] = { "Stat. Prototype" , 36, 42, 1144, 1, 92 }, -- Goblin Statue (GPStat)
             ["Serjeant Tombstone"] = { "Serj. Tombstone" , 89, 134, 2201, 5000, 93 }, -- Orc Statue (OStat)
-            ["Warchief Tombstone"] = { "War. Tombstone" , 90, 134, 2201, 50, 93 }, -- Orc Statue (OWStat)
+            ["Warchief Tombstone"] = { "War. Tombstone" , 90, 134, 2201, 5000, 93 }, -- Orc Statue (OWStat)
             ["Tombstone Prototype"] = { "Tomb. Prototype" , 20, 42, 2201, 5000, 93 }, -- Orc Statue (TPStat)
             ["Adamantking Effigy"] = { "Adamantking Eff" , 55, 134, 20, 0, 94 }, -- Quadav Statue (QStat)
             ["Adamantking Image"] = { "Adamantking Img" , 56, 134, 20, 0, 94 }, -- Quadav Statue (QIStat)
@@ -541,6 +543,28 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["mixins"] = {  }
         },
     }
+    local dropLists =
+    {
+        [xi.zone.DYNAMIS_XARCABARD] =
+        {
+            [4]  = 6000, -- Eye
+            [92] = 6000, -- Goblin
+            [93] = 6001, -- Orc
+            [94] = 6002, -- Quadav
+            [95] = 6003, -- Yagudo
+        },
+        [xi.zone.DYNAMIS_BEAUCEDINE] =
+        {
+            [4]  = 6000, -- Eye
+            [92] = 6000, -- Goblin
+            [93] = 6001, -- Orc
+            [94] = 6002, -- Quadav
+            [95] = 6003, -- Yagudo
+        },
+    }
+
+    local dropList = nonStandardLookup[mobMobType][mobName][4]
+
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         name = nonStandardLookup[mobMobType][mobName][1],
@@ -557,6 +581,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         onMobDeath = function(mob, player, optParams)
             xi.dynamis.mobOnDeath(mob)
         end,
+        onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
         specialSpawnAnimation = oMob ~= nil,
         mixins = mobFunctions[mobMobType]["mixins"],
@@ -565,17 +590,26 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     mob:spawn()
     mob:getZone():setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
-    mob:setDropID(nonStandardLookup[mobMobType][mobName][4])
+
+    if dropLists[zoneID] and dropLists[zoneID][mob:getFamily()] then
+        dropList = dropLists[zoneID][mob:getFamily()]
+    end
+
+    mob:setDropID(dropList)
+
     if nonStandardLookup[mobMobType][mobName][5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(nonStandardLookup[mobMobType][mobName][5])
     end
+
     if nonStandardLookup[mobMobType][mobName][6] ~= nil then -- If SkillList ~= nil set SkillList
         mob:setMobMod(xi.mobMod.SKILL_LIST, nonStandardLookup[mobMobType][mobName][6])
     end
+
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
         zone:setLocalVar(string.format("%s", xi.dynamis.mobList[zoneID][mobIndex].info[5]), 0)
         mob:setLocalVar("hasMobVar", 1)
     end
+
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
         if forceLink == true then mob:updateEnmity(oMob:getTarget()) end
@@ -583,11 +617,12 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
 end
 
 xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, target, oMob, mainDynaLord)
-    local zone = GetZone(zoneID)
-    local xPos = 0
-    local yPos = 0
-    local zPos = 0
-    local rPos = 0
+    local zone  = GetZone(zoneID)
+    local xPos  = 0
+    local yPos  = 0
+    local zPos  = 0
+    local rPos  = 0
+    local flags = 0
     if mobIndex == nil then
         return
     end
@@ -766,7 +801,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Count Raum"] = { "C.Raum", 42, 135, 519, 0, 358, "Beastmen" }, --  Raum (THF)
         ["Marquis Nebiros"] = { "M.Nebiros", 67, 135, 1629, 0, 358, "Beastmen" }, -- Nebi (SMN)
         ["Marquis Sabnak"] = { "M.Sabnak", 49, 135, 1631, 4, 358, "Beastmen" }, -- Sabn (PLD)
-        ["Count Vine"] = { "C.Vine", 62, 135, 528, 0, 358, "Beastmen" }, -- Vine (SAM)
+        ["Count Vine"] = { "C.Vine", 62, 135, 520, 0, 358, "Beastmen" }, -- Vine (SAM)
         ["King Zagan"] = { "K.Zagan", 60, 135, 1452, 0, 358, "Beastmen" }, -- Zaga (DRG)
         ["Marquis Cimeries"] = { "M.Cimeries", 56, 135, 1625, 0, 358, "Beastmen" }, -- Cime (RNG)
         -- Hydra
@@ -802,27 +837,27 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Animated Gun"] = { "A.Gun", 12, 135, 98, 0, 18, "Animated Weapon" }, -- AGun
         ["Animated Horn"] = { "A.Horn", 13, 135, 100, 0, 16, "Animated Weapon" }, -- AHor
         ["Animated Shield"] = { "A.Shield", 14, 135, 106, 0, 21, "Animated Weapon" }, -- AShi
-        ["Satellite Hammer"] = { "S.Hammer", 81, 135, 0, 0, 9, "Satellite Weapon" }, -- SHam
-        ["Satellite Staff"] = { "S.Staff", 87, 135, 0, 0, 23, "Satellite Weapon" }, -- SSta
-        ["Satellite Longsword"] = { "S.Longsword", 84, 135, 0, 0, 24, "Satellite Weapon" }, -- SLon
-        ["Satellite Tabar"] = { "S.Tabar", 88, 135, 0, 0, 8, "Satellite Weapon" }, -- STab
-        ["Satellite Great Axe"] = { "S.Great Axe", 80, 135, 0, 0, 12, "Satellite Weapon" }, -- SGre
-        ["Satellite Claymore"] = { "S.Claymore", 78, 135, 0, 0, 14, "Satellite Weapon" }, -- SCla
-        ["Satellite Spear"] = { "S.Spear", 86, 135, 0, 0, 19, "Satellite Weapon" }, -- SSpe
-        ["Satellite Scythe"] = { "S.Scythe", 85, 135, 0, 0, 20, "Satellite Weapon" }, -- SScy
-        ["Satellite Kunai"] = { "S.Kunai", 83, 135, 0, 0, 17, "Satellite Weapon" }, -- SKun
-        ["Satellite Tachi"] = { "S.Tachi", 89, 135, 0, 0, 13, "Satellite Weapon" }, -- STac
-        ["Satellite Dagger"] = { "S.Dagger", 79, 135, 0, 0, 11, "Satellite Weapon" }, -- SDag
-        ["Satellite Knuckles"] = { "S.Knuckles", 82, 135, 0, 0, 15, "Satellite Weapon" }, -- SKnu
-        ["Satellite Longbow"] = { "S.Longbow", 11, 135, 0, 0, 7, "Satellite Weapon" }, -- Slon
-        ["Satellite Gun"] = { "S.Gun", 12, 135, 0, 0, 18, "Satellite Weapon" }, -- SGun
-        ["Satellite Horn"] = { "S.Horn", 13, 135, 0, 0, 16, "Satellite Weapon" }, -- SHor
-        ["Satellite Shield"] = { "S.Shield", 14, 135, 0, 0, 21, "Satellite Weapon" }, -- SShi
-        ["Ying"] = { "Ying", 2, 135, 0, 0, 87, "Ying" }, -- Ying
-        ["Yang"] = { "Yang", 3, 135, 0, 0, 87, "Yang" }, -- Yang
-        ["Dynamis Lord"] = { "Dynamis Lord", 1, 135, 730, 86, 361, "Dynamis Lord" }, -- DL
+        ["Satellite Hammer"] = { "S.Hammer", 81, 135, 0, 0, 9, "Satellite Weapon", 5251 }, -- SHam
+        ["Satellite Staff"] = { "S.Staff", 87, 135, 0, 0, 23, "Satellite Weapon", 5251 }, -- SSta
+        ["Satellite Longsword"] = { "S.Longsword", 84, 135, 0, 0, 24, "Satellite Weapon", 5763 }, -- SLon
+        ["Satellite Tabar"] = { "S.Tabar", 88, 135, 0, 0, 8, "Satellite Weapon", 5251 }, -- STab
+        ["Satellite Great Axe"] = { "S.Great Axe", 80, 135, 0, 0, 12, "Satellite Weapon", 5763 }, -- SGre
+        ["Satellite Claymore"] = { "S.Claymore", 78, 135, 0, 0, 14, "Satellite Weapon", 5763 }, -- SCla
+        ["Satellite Spear"] = { "S.Spear", 86, 135, 0, 0, 19, "Satellite Weapon", 5251 }, -- SSpe
+        ["Satellite Scythe"] = { "S.Scythe", 85, 135, 0, 0, 20, "Satellite Weapon", 5763 }, -- SScy
+        ["Satellite Kunai"] = { "S.Kunai", 83, 135, 0, 0, 17, "Satellite Weapon", 5251 }, -- SKun
+        ["Satellite Tachi"] = { "S.Tachi", 89, 135, 0, 0, 13, "Satellite Weapon", 5251 }, -- STac
+        ["Satellite Dagger"] = { "S.Dagger", 79, 135, 0, 0, 11, "Satellite Weapon", 5763 }, -- SDag
+        ["Satellite Knuckles"] = { "S.Knuckles", 82, 135, 0, 0, 15, "Satellite Weapon", 5251 }, -- SKnu
+        ["Satellite Longbow"] = { "S.Longbow", 11, 135, 0, 0, 7, "Satellite Weapon", 5251 }, -- Slon
+        ["Satellite Gun"] = { "S.Gun", 12, 135, 0, 0, 18, "Satellite Weapon", 5251 }, -- SGun
+        ["Satellite Horn"] = { "S.Horn", 13, 135, 0, 0, 16, "Satellite Weapon", 5763 }, -- SHor
+        ["Satellite Shield"] = { "S.Shield", 14, 135, 0, 0, 21, "Satellite Weapon", 5251 }, -- SShi
+        ["Ying"] = { "Ying", 2, 135, 0, 0, 87, "Ying", 159 }, -- Ying
+        ["Yang"] = { "Yang", 3, 135, 0, 0, 87, "Yang", 159 }, -- Yang
+        ["Dynamis Lord"] = { "Dynamis Lord", 1, 135, 730, 86, 361, "Dynamis Lord", 135 }, -- DL
         -- Dynamis - Beaucedine Non-Beastmen
-        ["Angra Mainyu"] = { "Angra Mainyu", 1, 134, 0, 5000, 4, "Angra Mainyu" }, -- Angr
+        ["Angra Mainyu"] = { "Angra Mainyu", 1, 134, 3207, 5000, 4, "Angra Mainyu" }, -- Angr
         ["Fire Pukis"] = { "Fire Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- FPuk
         ["Wind Pukis"] = { "Wind Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- WPuk
         ["Petro Pukis"] = { "Petro Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- PPuk
@@ -1085,7 +1120,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Satellite Weapon"] =
         {
             ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnSatellite(mob) end },
-            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.onEngageSatellite(mob, target) end },
             ["onMobFight"] = { function(mob, target) xi.dynamis.onFightSatellite(mob, target) end },
             ["onMobRoam"] = { function(mob) xi.dynamis.onMobRoamXarc(mob) end },
             ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
@@ -1131,6 +1166,11 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["mixins"] = {   },
         },
     }
+
+    if xi.dynamis.nmInfoLookup[mobName][8] then
+        flags = xi.dynamis.nmInfoLookup[mobName][8]
+    end
+
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         name = xi.dynamis.nmInfoLookup[mobName][1],
@@ -1148,8 +1188,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobWeaponSkillPrepare= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkillPrepare"][1],
         onMobWeaponSkill= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkill"][1],
         onMobDeath= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobDeath"][1],
+        onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
         specialSpawnAnimation = oMob ~= nil,
+        entityFlags = flags,
         mixins = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
     })
     if oMob ~= nil then
@@ -1492,6 +1534,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         onMobSpawn = function(mob) xi.dynamis.setPetStats(mob) end,
         onMobFight = petFunctions[mobJob][functionLookup]["onMobFight"],
         onMobDeath = function(mob, player, optParams) xi.dynamis.onPetDeath(mob) end,
+        onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
         specialSpawnAnimation = oMob ~= nil,
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
@@ -1897,17 +1940,16 @@ xi.dynamis.mobOnDeath = function(mob, player, optParams)
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
-        if player and mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
-            if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
-                player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
-            elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
-                player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
-            end
-        end
     end
 
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), 0)
     zone:setLocalVar(string.format("%s", mobIndex), 0)
+end
+
+xi.dynamis.mobOnDespawn = function(mob)
+    local zone = mob:getZone()
+    zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), 0)
+    zone:setLocalVar(string.format("%s", mob:getID()), 0)
 end
 
 m:addOverride("xi.dynamis.megaBossOnDeath", function(mob, player)

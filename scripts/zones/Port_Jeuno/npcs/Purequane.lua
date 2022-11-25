@@ -34,7 +34,6 @@ entity.onEventFinish = function(player, csid, option)
 
         if zPos >= 58 and zPos <= 61 then
             player:delGil(200)
-            player:setLocalVar('[AIRSHIP]Paid', 1)
         end
     end
 end

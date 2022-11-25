@@ -1056,6 +1056,11 @@ void CBattleEntity::addModifier(Mod type, int16 amount)
         m_MSNonItemValues.push_back(amount);
         m_modStat[type] = CalculateMSFromSources();
     }
+    else if ((type >= Mod::STR && type <= Mod::CHR) ||
+             (type >= Mod::HTH && type <= Mod::ANTIHQ_COOK))
+    {
+        m_modStat[type] = std::clamp(m_modStat[type] + amount, 0, 65355);
+    }
     else
     {
         m_modStat[type] += amount;
