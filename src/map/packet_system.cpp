@@ -391,7 +391,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         PChar->pushPacket(new CDownloadingDataPacket());
-        PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
+        PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent));
         PChar->pushPacket(new CZoneVisitedPacket(PChar));
     }
 }
