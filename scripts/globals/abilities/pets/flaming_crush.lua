@@ -1,5 +1,5 @@
 -----------------------------------
--- Flaming Crush M=10, 2, 2? (STILL don't know)
+-- Flaming Crush
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -21,6 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
+    params.melee = true
 
     local paramsEle = {}
     paramsEle.ftp000 = 6 paramsEle.ftp150 = 6 paramsEle.ftp300 = 6
