@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
     params.melee = false
 
-    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params, tp)
+    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params)
 
     local effectParams = {}
     effectParams.element = xi.magic.ele.EARTH

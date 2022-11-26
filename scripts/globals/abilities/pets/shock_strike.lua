@@ -22,7 +22,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 2.0 params.atk200 = 2.0 params.atk300 = 2.0
 
-    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params, tp)
+    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params)
 
     local effectParams = {}
     effectParams.element = xi.magic.ele.LIGHTNING

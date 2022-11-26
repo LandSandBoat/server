@@ -31,9 +31,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
     paramsEle.ignoreStateLock = true
 
     -- Do physical damage
-    local damagePhys = xi.summon.avatarPhysicalMove(pet, target, skill, params, tp)
+    local damagePhys = xi.summon.avatarPhysicalMove(pet, target, skill, params)
     -- Do magical damage
-    local damageEle = xi.summon.avatarMagicSkill(pet, target, skill, paramsEle, tp)
+    local damageEle = xi.summon.avatarMagicSkill(pet, target, skill, paramsEle)
 
     local totaldamagePhys = xi.summon.avatarFinalAdjustments(damagePhys.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, damagePhys.hitslanded)
     local totaldamageEle = xi.summon.avatarFinalAdjustments(damageEle.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)

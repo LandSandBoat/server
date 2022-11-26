@@ -430,7 +430,6 @@ xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
     calcParams.tp = avatar:getTP() + wsParams.tpBonus
     calcParams.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
 
-
     -- -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
     -- if not shadowAbsorb(target) then
     -- Begin Checks for bonus wsc bonuses. See the following for details:

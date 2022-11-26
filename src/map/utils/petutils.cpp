@@ -862,18 +862,17 @@ namespace petutils
 
     void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-
         // Bonus HP Calculation
         // bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
         // if (PPet->m_PetID == PETID_ODIN || PPet->m_PetID == PETID_ALEXANDER)
         // {
         //     bonusStat += 6800;
         // }
-
+s
         // follows monster formulas but jugs have no subjob
-        JOBTYPE   mJob     = PPet->GetMJob();
-        JOBTYPE   sJob     = PPet->GetSJob();
-        uint8     mLvl     = PPet->GetMLevel();
+        JOBTYPE   mJob = PPet->GetMJob();
+        JOBTYPE   sJob = PPet->GetSJob();
+        uint8     mLvl = PPet->GetMLevel();
 
         uint8 grade;
         uint8 gradesj;
