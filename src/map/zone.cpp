@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -223,9 +223,9 @@ uint32 CZone::GetWeatherChangeTime() const
     return m_WeatherChangeTime;
 }
 
-const int8* CZone::GetName()
+const std::string& CZone::GetName()
 {
-    return (const int8*)m_zoneName.c_str();
+    return m_zoneName;
 }
 
 uint8 CZone::GetSoloBattleMusic() const
@@ -292,7 +292,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (matches(std::string((const char*)PNpc->GetName()), pattern))
+        if (matches(PNpc->GetName(), pattern))
         {
             entities.push_back(PNpc);
         }
@@ -300,7 +300,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (matches(std::string((const char*)PMob->GetName()), pattern))
+        if (matches(PMob->GetName(), pattern))
         {
             entities.push_back(PMob);
         }
@@ -492,7 +492,7 @@ void CZone::LoadNavMesh()
 
     char file[255];
     memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName());
+    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName().c_str());
 
     if (!m_navMesh->load(file))
     {
@@ -873,7 +873,7 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-CCharEntity* CZone::GetCharByName(int8* name)
+CCharEntity* CZone::GetCharByName(std::string name)
 {
     return m_zoneEntities->GetCharByName(name);
 }

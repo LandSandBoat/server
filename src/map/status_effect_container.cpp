@@ -1503,7 +1503,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         if (Ptem != nullptr)
         {
             name.insert(0, "globals/items/");
-            name.insert(name.size(), (const char*)Ptem->getName());
+            name.insert(name.size(), Ptem->getName());
         }
     }
 

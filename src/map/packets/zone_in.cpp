@@ -21,13 +21,13 @@
 
 #include "common/socket.h"
 
-#include "zone_in.h"
-#include "map/zone.h"
 #include "../entities/charentity.h"
 #include "../instance.h"
 #include "../status_effect_container.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
+#include "map/zone.h"
+#include "zone_in.h"
 
 /************************************************************************
  *                                                                       *
@@ -114,7 +114,7 @@ uint8 GetMogHouseFlag(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
+CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 {
     this->setType(0x0A);
     this->setSize(0x104);
@@ -131,7 +131,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;
 
-    memcpy(data + (0x84), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x84), PChar->GetName().c_str(), PChar->GetName().size());
 
     ref<uint8>(0x0B) = PChar->loc.p.rotation;
     ref<float>(0x0C) = PChar->loc.p.x;
@@ -151,8 +151,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint8>(0x21) = PChar->GetGender() * 128 + (1 << PChar->look.size);
 
     // Zone Animation for Transports
-    ref<uint8>(0x27) = PChar->loc.zone->GetZoneDirection();
-    ref<uint8>(0x2A) = PChar->loc.zone->GetZoneAnimation();
+    ref<uint8>(0x27)  = PChar->loc.zone->GetZoneDirection();
+    ref<uint8>(0x2A)  = PChar->loc.zone->GetZoneAnimation();
     ref<uint32>(0x78) = PChar->loc.zone->GetZoneAnimStartTime();
     ref<uint16>(0x7C) = PChar->loc.zone->GetZoneAnimLength();
 
@@ -186,6 +186,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     // ref<uint32>(0x6C) = PChar->loc.zone->GetWeather();
     // ref<uint32>(0x70) = PChar->loc.zone->GetWeatherChangeTime();
 
+    auto csid = currentEvent->eventId;
     if (csid != -1)
     {
         // ref<uint8>(data,(0x1F)) = 4;                             // предположительно animation
@@ -193,7 +194,10 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
 
         ref<uint16>(0x40) = PChar->currentEvent->textTable == -1 ? PChar->getZone() : PChar->currentEvent->textTable;
         ref<uint16>(0x62) = PChar->getZone();
-        ref<uint16>(0x64) = csid;
+        ref<uint16>(0x64) = currentEvent->eventId;
+
+        // Note that only the first 16 bits are supported by this packet type.
+        ref<uint16>(0x66) = currentEvent->eventFlags & 0xFFFF;
     }
 
     ref<uint16>(0x30) = PChar->getZone();

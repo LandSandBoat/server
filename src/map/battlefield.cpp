@@ -527,6 +527,12 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
         }
 
+        // Release charmed pet when master leaves battlefield
+        if (PChar->PPet && PChar->PPet->isCharmed)
+        {
+            petutils::DetachPet(PChar);
+        }
+
         m_Zone->updateCharLevelRestriction(PChar);
 
         if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
@@ -558,16 +564,11 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         charutils::SendClearTimerPacket(PChar);
 
         // Remove the player's pet as well
-        if (auto* PPet = dynamic_cast<CPetEntity*>(PChar->PPet))
+        if (PChar->PPet)
         {
-            // Player timed out with a battlefield mob as a pet
-            if (PPet->objtype == TYPE_MOB)
-            {
-                petutils::DespawnPet(PPet);
-            }
-            PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-            PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-            ClearEnmityForEntity(PPet);
+            PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            ClearEnmityForEntity(PChar->PPet);
         }
     }
     else

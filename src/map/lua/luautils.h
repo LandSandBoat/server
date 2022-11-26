@@ -30,10 +30,6 @@
 #include "common/lua.h"
 extern sol::state lua;
 
-#ifdef TRACY_ENABLE
-#include "TracyLua.hpp"
-#endif
-
 // Sol compilation definitions are in the base CMakeLists file
 // SOL_ALL_SAFETIES_ON = 1
 // SOL_NO_CHECK_NUMBER_PRECISION = 1

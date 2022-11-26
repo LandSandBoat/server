@@ -63,7 +63,7 @@ quest.sections =
             onEventFinish =
             {
                 [104] = function(player, csid, option, npc)
-                    player:tradeComplete()
+                    player:confirmTrade()
                     quest:complete(player)
                 end,
             },
