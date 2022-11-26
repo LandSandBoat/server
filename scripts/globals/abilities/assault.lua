@@ -4,7 +4,6 @@
 -- Obtained: Summoner Level 1
 -- Recast Time: 10 sec
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
