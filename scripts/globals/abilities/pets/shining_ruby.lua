@@ -14,11 +14,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-
     target:delStatusEffect(xi.effect.SHINING_RUBY)
-    target:addStatusEffect(xi.effect.SHINING_RUBY, 1, 0, duration)
+    target:addStatusEffect(xi.effect.SHINING_RUBY, 1, 0, 180)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     return xi.effect.SHINING_RUBY
 end

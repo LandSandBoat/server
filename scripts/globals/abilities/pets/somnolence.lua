@@ -13,27 +13,32 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local dmg = 10 + pet:getMainLvl() * 2
-    local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, 0, xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.DARK)
-    local duration = 120
+    local params = {}
+    params.ftp000 = 2 params.ftp150 = 2.5    params.ftp300 = 2.75
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.element = xi.magic.ele.DARK
+    params.includemab = true
+    params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
+    params.ignoreStateLock = true
 
-    dmg = dmg * resist
-    dmg = xi.mobskills.mobAddBonuses(pet, target, dmg, xi.magic.ele.DARK)
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params, tp)
 
-    -- TODO: spell is nil here
-    --dmg = xi.magic.finalMagicAdjustments(pet, target, spell, dmg)
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.DARK
+    effectParams.effect = xi.effect.WEIGHT
+    effectParams.duration = 60
+    effectParams.power = 26
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
-    if resist < 0.15 then  --the gravity effect from this ability is more likely to land than Tail Whip
-        resist = 0
+    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.DARK)
+
+    if totaldamage > 0 then
+        xi.magic.applyAbilityResistance(pet, target, effectParams)
     end
 
-    duration = duration * resist
-
-    if duration > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
-        target:addStatusEffect(xi.effect.WEIGHT, 50, 0, duration)
-    end
-
-    return dmg
+    return totaldamage
 end
 
 return abilityObject

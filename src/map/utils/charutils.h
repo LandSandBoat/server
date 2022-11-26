@@ -40,14 +40,14 @@ class CAbility;
 enum class EMobDifficulty : uint8
 {
     TooWeak = 0,
-    IncrediblyEasyPrey,
-    EasyPrey,
-    DecentChallenge,
-    EvenMatch,
-    Tough,
-    VeryTough,
-    IncrediblyTough,
-    MAX
+    IncrediblyEasyPrey, // 1
+    EasyPrey,           // 2
+    DecentChallenge,    // 3
+    EvenMatch,          // 4
+    Tough,              // 5
+    VeryTough,          // 6
+    IncrediblyTough,    // 7
+    MAX                 // 8
 };
 
 // Capacity Bonuses applied based on RoE Completion

@@ -12,25 +12,22 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
-    local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local tp = pet:getTP()
-    local dmgmod = 0
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local params = {}
+    params.ftp000 = 3.75 params.ftp150 = 4 params.ftp300 = 4.25
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.3 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.element = xi.magic.ele.LIGHT
+    params.includemab = true
+    params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
+    params.ignoreStateLock = true
 
-    if tp < 1500 then
-        dmgmod = math.floor((8 / 256) * (tp / 100) + (896 / 256))
-    else
-        dmgmod = math.floor(((8 / 256) * (1500 / 100)) + ((4 / 256) * ((tp - 1500) / 100) + 896 / 256))
-    end
+    -- TODO: Need to increase ftp a little (roughly 5%)
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params, tp)
 
-    local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dint * 1.5)
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHT)
-    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
 
-    target:updateEnmityFromDamage(pet, damage)
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
-    return damage
+    return totaldamage
 end
 
 return abilityObject

@@ -18,19 +18,22 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill, master)
-    local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local params = {}
+    params.ftp000 = 9 params.ftp150 = 9 params.ftp300 = 9
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.3 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.element = xi.magic.ele.LIGHTNING
+    params.includemab = true
+    params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
+    params.ignoreStateLock = true
 
-    local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHTNING, 9, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHTNING)
-    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, 1)
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params, tp)
 
-    master:setMP(0)
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)
-    target:updateEnmityFromDamage(pet, damage)
+    summoner:setMP(0)
+    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)
 
-    return damage
+    return totaldamage
 end
 
 return abilityObject

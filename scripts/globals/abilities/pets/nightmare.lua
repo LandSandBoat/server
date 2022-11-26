@@ -1,13 +1,15 @@
------------------------------------
--- Sleepga
------------------------------------
+---------------------------------------------
+-- Nightmare
+-- AOE Sleep with Bio dot
+---------------------------------------------
 require("scripts/globals/mobskills")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/spell_data")
 require("scripts/globals/summon")
------------------------------------
+---------------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -15,26 +17,29 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local bonusTime = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 3, 0, 90)-- 3 seconds / skill | Duration is capped at 180 total
-    local duration = 90 + bonusTime
+    local typeEffect = xi.effect.SLEEP_I
+    local power = 20
+    local tick = 3
+    local subEffect = xi.effect.BIO
+    local subPower = 2 -- 2 HP/tick drain
+
+    local skillOverCap = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 2, 0, 120)-- 2 seconds / skill | Duration is capped at 180 total
+    local duration = 60 + skillOverCap -- Unresisted, 20 ticks at 21 hp/tick = 420hp per target
     local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local bonus = xi.summon.getSummoningSkillOverCap(pet)
     local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.ele.DARK)
     if resm < 0.5 then
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I
     end
     duration = duration * resm
-    if target:hasImmunity(xi.immunity.SLEEP) or hasSleepEffects(target) then
+    if target:hasImmunity(1) or hasSleepEffects(target) then
         --No effect
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else
-        skill:setMsg(xi.msg.basic.SKILL_ENFEEB)
-
-        target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration)
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(pet, target, typeEffect, power, tick, duration, subEffect, subPower))
     end
 
-    return xi.effect.SLEEP_I
+    return typeEffect
 end
 
 return abilityObject

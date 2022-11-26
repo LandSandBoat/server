@@ -218,7 +218,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     hitdamage = hitdamage * ftpMult
 
     -- Set everything to 1 because the FTP for mobs iis not supposed to be for attack only.
-    -- TODO: Remove remoev thie from cMeleeRatio completly. Setting to 1 so the attack multiplier is always 1.
+    -- TODO: Apply attack modifiers to certain mobskills with params
     local params = { atk000 = 1, atk150 = 1, atk300 = 1 }
     -- Getting PDIF
     local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.main)
@@ -241,9 +241,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     chance = xi.weaponskills.handleParry(mob, target, chance)
 
     -- first hit has a higher chance to land
-    local firstHitChance = hitrate
+    local firstHitChance = hitrate + 0.5
 
-    firstHitChance = utils.clamp(firstHitChance, 0.25, 0.95)
+    firstHitChance = utils.clamp(firstHitChance, 0.20, 0.95)
 
     if chance <= firstHitChance then -- it hit
         local isCrit = math.random() < critRate
@@ -540,11 +540,6 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
         return 0
-    end
-
-    -- Handle Phalanx
-    if damage > 0 then
-        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- Handle Stoneskin
