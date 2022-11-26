@@ -520,3 +520,21 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
     return 0, 0, 0
 end
+
+-----------------------------------
+-- mob difficulty enums for checkDifficulty()
+-----------------------------------
+
+xi.mob.difficulty =
+{
+    TOO_WEAK             = 0,
+    INCREDIBLY_EASY_PREY = 1,
+    EASY_PREY            = 2,
+    DECENT_CHALLENGE     = 3,
+    EVENMATCH            = 4,
+    TOUGH                = 5,
+    VERYTOUGH            = 6,
+    INCREDIBLYTOUGH      = 7,
+    MAX                  = 8,
+}
+xi.mob.diff = xi.mob.difficulty

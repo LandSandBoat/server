@@ -9150,15 +9150,15 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
  ************************************************************************/
 uint8 CLuaBaseEntity::checkDifficulty(CLuaBaseEntity* PLuaBaseEntity)
 {
-    CMobEntity*  PMob  = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
-    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    CMobEntity*  PMob  = dynamic_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
+    CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     if (PChar && PMob)
     {
         return (uint8)charutils::CheckMob((PChar->GetMLevel()), (PMob->GetMLevel()));
     }
 
-    ShowError("lua::checkDifficulty value is not valid");
+    ShowError("CLuaBaseEntity::checkDifficulty value is not valid");
     return 0;
 }
 
