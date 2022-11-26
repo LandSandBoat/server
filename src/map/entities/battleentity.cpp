@@ -692,9 +692,11 @@ uint16 CBattleEntity::CHR()
     return std::clamp(stats.CHR + m_modStat[Mod::CHR], 0, 999);
 }
 
-uint16 CBattleEntity::ATT(uint16 slot)
+uint16 CBattleEntity::ATT(uint16 slot, bool ignoreWeaponMods)
 {
     TracyZoneScoped;
+    XI_DEBUG_BREAK_IF(slot >= sizeof(m_Weapons) / sizeof(CItemEquipment*));
+
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
@@ -718,9 +720,12 @@ uint16 CBattleEntity::ATT(uint16 slot)
         {
             ATT += GetSkill(weapon->getSkillType()) + weapon->getILvlSkill();
 
-            if (weapon->getModifier(Mod::ATT_SLOT) > 0)
+            if (!ignoreWeaponMods)
             {
-                ATT += weapon->getModifier(Mod::ATT_SLOT);
+                if (weapon->getModifier(Mod::ATT_SLOT) > 0)
+                {
+                    ATT += weapon->getModifier(Mod::ATT_SLOT);
+                }
             }
 
             // Smite applies when using 2H or H2H weapons
