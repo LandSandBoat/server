@@ -177,3 +177,28 @@ xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability)
 
     return addedMoves
 end
+
+xi.job_utils.dancer.checkReverseFlourishAbility = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+        return 0, 0
+    else
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
+    end
+end
+
+xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability)
+    local reverseFlourishBonus = player:getJobPointLevel(xi.jp.FLOURISH_II_EFFECT)
+    local numMerits            = player:getMerit(xi.merit.REVERSE_FLOURISH_EFFECT)
+    local gearMod              = player:getMod(xi.mod.REVERSE_FLOURISH_EFFECT)
+    local numMoves             = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+    local tpGained             = 0
+
+
+    local usedMoves = math.min(numMoves, 5)
+    tpGained = (95 + reverseFlourishBonus) * usedMoves + (5 + gearMod) * usedMoves ^ 2 + 30 * numMerits
+
+    player:addTP(tpGained)
+    setFinishingMoves(player, numMoves - usedMoves)
+
+    return tpGained
+end
