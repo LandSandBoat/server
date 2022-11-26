@@ -178,6 +178,7 @@ xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability)
     return addedMoves
 end
 
+-- TODO: Create generic function for all flourish checks
 xi.job_utils.dancer.checkReverseFlourishAbility = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return 0, 0
@@ -193,7 +194,6 @@ xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability
     local numMoves             = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
     local tpGained             = 0
 
-
     local usedMoves = math.min(numMoves, 5)
     tpGained = (95 + reverseFlourishBonus) * usedMoves + (5 + gearMod) * usedMoves ^ 2 + 30 * numMerits
 
@@ -201,4 +201,22 @@ xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability
     setFinishingMoves(player, numMoves - usedMoves)
 
     return tpGained
+end
+
+xi.job_utils.dancer.checkAnimatedFlourishAbility(player, target, ability)
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+        return 0, 0
+    else
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
+    end
+end
+
+xi.job_utils.dancer.useAnimatedFlourishAbility(player, target, ability)
+    local jpBonusVE = player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT) * 10
+    local numMoves  = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+    local veGranted = numMoves >= 2 and 1500 or 1000
+    local usedMoves = numMoves >= 2 and 2 or 1
+
+    target:addEnmity(player, 0, veGranted + jpBonusVE)
+    setFinishingMoves(player, numMoves - usedMoves)
 end
