@@ -5,9 +5,8 @@
 -- TP Required: 35%
 -- Recast Time: 00:08
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -49,8 +48,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     --Grabbing variables.
-    local vit = target:getStat(xi.mod.VIT)
-    local chr = player:getStat(xi.mod.CHR)
+    local vit  = target:getStat(xi.mod.VIT)
+    local chr  = player:getStat(xi.mod.CHR)
     local mjob = player:getMainJob() --19 for DNC main.
     local sjob = player:getSubJob()
     local cure = 0
