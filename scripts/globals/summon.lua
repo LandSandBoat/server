@@ -417,7 +417,7 @@ end
 
 xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
     -- Formula: ((Lvl+2 + WSC) x fTP + dstat) x Magic Burst bonus x resist x day/ weather bonus x  MAB/MDB x mdt
-    returninfo = {}
+    local returninfo = {}
 
     if wsParams.tpBonus == nil then
         wsParams.tpBonus = 0
@@ -465,9 +465,7 @@ xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
     dmg = target:magicDmgTaken(dmg, wsParams.element) -- Take damage
 
     if dmg < 0 then
-        calcParams.finalDmg = dmg
-
-        dmg = xi.weaponskills.takeWeaponskillDamage(target, avatar, wsParams, primaryMsg, attack, calcParams, action)
+        dmg = 0
         return dmg
     end
 

@@ -22,9 +22,9 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.ignoreStateLock = true
 
     -- TODO: Need to increase ftp a little (roughly 5%)
-    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params, tp)
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
-    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
 
     return totaldamage

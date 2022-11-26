@@ -20,7 +20,7 @@ abilityObject.onPetAbility = function(target, pet, petskill)
     xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
 
     local damage = xi.summon.avatarPhysicalMove(pet, target, petskill, numhits, accmod, dmgmod, 0, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1, 1)
-    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, numhits)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, numhits)
 
     xi.job_utils.summoner.calculateTPReturn(pet, target, totaldamage, damage.hitslanded)
 

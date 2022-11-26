@@ -24,7 +24,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params, tp)
 
-    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, damage.hitslanded)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, damage.hitslanded)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
     local effectParams = {}

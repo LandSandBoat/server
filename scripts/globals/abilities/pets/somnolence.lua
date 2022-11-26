@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
     params.ignoreStateLock = true
 
-    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params, tp)
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
     local effectParams = {}
     effectParams.element = xi.magic.ele.DARK
@@ -31,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     effectParams.tick = 0
     effectParams.maccBonus = 0
 
-    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.DARK)
 
     if totaldamage > 0 then

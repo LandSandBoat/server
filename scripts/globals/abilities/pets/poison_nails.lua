@@ -31,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     effectParams.tick = 3
     effectParams.maccBonus = 0
 
-    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, damage.hitslanded)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, damage.hitslanded)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
     if totaldamage > 0 then
