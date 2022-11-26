@@ -222,7 +222,6 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
             end
 
             finaldmg = xi.summon.avatarHitDmg(baseDmg, calcParams.fSTR, pDif, avatar, target, ftp, wsMods)
-            -- finaldmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
 
             numHitsProcessed = 1
         end
