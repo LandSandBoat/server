@@ -203,6 +203,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
+        if defender:isUndead() then
+            return 0
+        end
+
         if damage > defender:getHP() then
             damage = defender:getHP()
         end
