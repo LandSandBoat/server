@@ -13,6 +13,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
+    local bonusTime = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 3, 0, 90)-- 3 seconds / skill | Duration is capped at 180 total
+    local duration = 90 + bonusTime
     --randomly give str/dex/vit/agi/int/mnd/chr (+12)
     local effect = math.random()
     local effectid = xi.effect.STR_BOOST
@@ -32,7 +34,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         effectid = xi.effect.CHR_BOOST
     end
 
-    target:addStatusEffect(effectid, math.random(12, 14), 0, 90)
+    target:addStatusEffect(effectid, math.random(12, 14), 0, duration)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     return effectid
 end

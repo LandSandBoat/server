@@ -24,8 +24,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local tpbonus = xi.mobskills.magicalTpBonus.NO_EFFECT
 
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, element, dmgmod, tpbonus, shadows, ignoreres)
-    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, dmgtype, 1)
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, dmgtype)
+    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.BREATH, dmgtype, 1)
+    target:takeDamage(damage, pet, xi.attackType.BREATH, dmgtype)
     target:updateEnmityFromDamage(pet, damage)
 
     return damage

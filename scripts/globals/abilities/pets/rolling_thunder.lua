@@ -13,9 +13,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 120 + bonusTime
-
+    local skillOverCap = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 2, 0, 120)-- 2 seconds / skill | Duration is capped at 180 total
+    local duration = 60 + skillOverCap
     local magicskill = utils.getSkillLvl(1, target:getMainLvl())
 
     local potency = 3 + ((6 * magicskill) / 100)

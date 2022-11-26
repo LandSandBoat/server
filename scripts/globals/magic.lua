@@ -687,10 +687,12 @@ xi.magic.applyAbilityResistance = function(player, target, params)
     local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus, skillchainCount)
     local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount)
 
-    if resist < 0.5 then
-        resist = 0
-    elseif resist < 1 then
-        resist = 0.5
+    if not params.ignoreStateLock then
+        if resist < 0.5 then
+            resist = 0
+        elseif resist < 1 then
+            resist = 0.5
+        end
     end
 
     if

@@ -515,6 +515,8 @@ public:
 
     bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
+    uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity); // Checks difficulty of the mob
+
     // Instances
     auto getInstance() -> std::optional<CLuaInstance>;
     void setInstance(CLuaInstance* PLuaInstance);

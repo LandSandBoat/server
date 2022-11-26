@@ -14,8 +14,8 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
+    local bonusTime = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 3, 0, 90)-- 3 seconds / skill | Duration is capped at 180 total
+    local duration = 90 + bonusTime
 
     target:delStatusEffect(xi.effect.SHOCK_SPIKES)
     target:addStatusEffect(xi.effect.SHOCK_SPIKES, 15, 0, duration)
