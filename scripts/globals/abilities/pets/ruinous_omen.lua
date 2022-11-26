@@ -52,7 +52,7 @@ abilityobject.onPetAbility = function(target, pet, skill, summoner)
     params.omen = damage
     params.ignoreStateLock = true
 
-    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
+    damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
     summoner:setMP(0)
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
