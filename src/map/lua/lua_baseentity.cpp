@@ -9158,7 +9158,7 @@ uint8 CLuaBaseEntity::checkDifficulty(CLuaBaseEntity* PLuaBaseEntity)
         return (uint8)charutils::CheckMob((PChar->GetMLevel()), (PMob->GetMLevel()));
     }
 
-    ShowError("CLuaBaseEntity::checkDifficulty value is not valid");
+    ShowError("Value is not valid");
     return 0;
 }
 
