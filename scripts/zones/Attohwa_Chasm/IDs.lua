@@ -47,6 +47,7 @@ zones[xi.zone.ATTOHWA_CHASM] =
         TIAMAT              = 16806227,
         FEELER_ANTLION      = 16806242,
         XOLOTL              = 16806215,
+        SEKHMET             = 16805962,
     },
     npc =
     {

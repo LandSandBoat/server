@@ -10,8 +10,9 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.YAGUDO_AVATAR)
-    GetMobByID(ID.mob.YAGUDO_AVATAR):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TZEE_XICU_THE_MANIFEST)
+    xi.mob.nmTODPersistCache(zone, ID.mob.YAGUDO_AVATAR)
 
     oztrojaGlobal.pickNewCombo() -- update combination for brass door on floor 2
     oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4

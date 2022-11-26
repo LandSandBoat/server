@@ -22,7 +22,11 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(3600, 43200)) -- 1 to 12 hours
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersist(mob, math.random(3600, 43200)) -- 1 to 12 hours
+    else
+        xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
+    end
 end
 
 return entity

@@ -54,8 +54,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
+    xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
     DespawnMob(ID.mob.COO_KEJA_THE_UNSEEN + 1)
     DespawnMob(ID.mob.COO_KEJA_THE_UNSEEN + 2)
 end

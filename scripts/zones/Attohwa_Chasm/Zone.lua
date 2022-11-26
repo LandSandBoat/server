@@ -46,8 +46,11 @@ zoneObject.onInitialize = function(zone)
     GetNPCByID(ID.npc.PARRA_MIASMA[3]):addPeriodicTrigger(0, 3, 0)
     GetNPCByID(ID.npc.PARRA_MIASMA[4]):addPeriodicTrigger(0, 3, 0)
 
-    UpdateNMSpawnPoint(ID.mob.TIAMAT)
-    GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TIAMAT)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.SEKHMET)
+    end
 
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
