@@ -365,7 +365,9 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
                 elseif option == 429 then -- Tyger
                     keyitem1 = xi.ki.TAUPE_COLORED_SEAL keyitem2 = xi.ki.FALLOW_COLORED_SEAL keyitem3 = xi.ki.SIENNA_COLORED_SEAL
                 else
-                    keyitem1 = seals[option - 402] keyitem2 = nil keyitem3 = nil
+                    if tier > 1 then -- If it's tier 2 or above
+                        keyitem1 = seals[option - 402] keyitem2 = nil keyitem3 = nil -- select they key item that needs to be deleted to buy the pop
+                    end
                 end
                 if cost > zeni then
                     player:updateEvent(2, cost, item, keyitem1,keyitem2,keyitem3) -- you don't have enough zeni.
