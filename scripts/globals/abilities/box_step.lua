@@ -6,25 +6,20 @@
 -- Recast Time: 00:05
 -- Duration: First Step lasts 1 minute, each following Step extends its current duration by 30 seconds.
 -----------------------------------
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        if player:hasStatusEffect(xi.effect.TRANCE) then
-            return 0, 0
-        elseif player:getTP() < 100 then
-            return xi.msg.basic.NOT_ENOUGH_TP, 0
-        else
-            return 0, 0
-        end
+    elseif player:getTP() < 100 then
+        return xi.msg.basic.NOT_ENOUGH_TP, 0
     end
+
+    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
@@ -33,11 +28,11 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         player:delTP(100)
     end
 
-    local hit = 2
+    local hit    = 2
     local effect = 1
 
     if math.random() <= getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
-        hit = 6
+        hit        = 6
         local mjob = player:getMainJob()
         local daze = 1
 
@@ -45,32 +40,35 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             if target:hasStatusEffect(xi.effect.SLUGGISH_DAZE_1) then
                 local duration = target:getStatusEffect(xi.effect.SLUGGISH_DAZE_1):getDuration()
                 target:delStatusEffectSilent(xi.effect.SLUGGISH_DAZE_1)
+
                 if player:hasStatusEffect(xi.effect.PRESTO) then
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_3, 1, 0, duration + 30)
-                    daze = 3
+                    daze   = 3
                     effect = 3
                 else
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_2, 1, 0, duration + 30)
-                    daze = 2
+                    daze   = 2
                     effect = 2
                 end
 
             elseif target:hasStatusEffect(xi.effect.SLUGGISH_DAZE_2) then
                 local duration = target:getStatusEffect(xi.effect.SLUGGISH_DAZE_2):getDuration()
                 target:delStatusEffectSilent(xi.effect.SLUGGISH_DAZE_2)
+
                 if player:hasStatusEffect(xi.effect.PRESTO) then
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_4, 1, 0, duration + 30)
-                    daze = 3
+                    daze   = 3
                     effect = 4
                 else
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_3, 1, 0, duration + 30)
-                    daze = 2
+                    daze   = 2
                     effect = 3
                 end
 
             elseif target:hasStatusEffect(xi.effect.SLUGGISH_DAZE_3) then
                 local duration = target:getStatusEffect(xi.effect.SLUGGISH_DAZE_3):getDuration()
                 target:delStatusEffectSilent(xi.effect.SLUGGISH_DAZE_3)
+
                 if player:hasStatusEffect(xi.effect.PRESTO) then
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_5, 1, 0, duration + 30)
                     daze = 3
@@ -84,6 +82,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             elseif target:hasStatusEffect(xi.effect.SLUGGISH_DAZE_4) then
                 local duration = target:getStatusEffect(xi.effect.SLUGGISH_DAZE_4):getDuration()
                 target:delStatusEffectSilent(xi.effect.SLUGGISH_DAZE_4)
+
                 if player:hasStatusEffect(xi.effect.PRESTO) then
                     daze = 3
                 else
@@ -97,17 +96,17 @@ abilityObject.onUseAbility = function(player, target, ability, action)
                 local duration = target:getStatusEffect(xi.effect.SLUGGISH_DAZE_5):getDuration()
                 target:delStatusEffectSilent(xi.effect.SLUGGISH_DAZE_5)
                 target:addStatusEffect(xi.effect.SLUGGISH_DAZE_5, 1, 0, duration + 30)
-                daze = 1
+                daze   = 1
                 effect = 5
 
             else
                 if player:hasStatusEffect(xi.effect.PRESTO) then
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_2, 1, 0, 60)
-                    daze = 3
+                    daze   = 3
                     effect = 2
                 else
                     target:addStatusEffect(xi.effect.SLUGGISH_DAZE_1, 1, 0, 60)
-                    daze = 2
+                    daze   = 2
                     effect = 1
                 end
             end
@@ -157,6 +156,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
+
             if daze > 2 then
                 daze = 2
             end
@@ -167,7 +167,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
             player:addStatusEffect(xi.effect.FINISHING_MOVE_5, 1, 0, 7200)
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
-
+            -- Empty
         else
             player:addStatusEffect(xi.effect.FINISHING_MOVE_1 - 1 + daze, 1, 0, 7200)
         end
@@ -178,8 +178,8 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     action:setAnimation(target:getID(), getStepAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
     action:speceffect(target:getID(), hit)
-    return effect
 
+    return effect
 end
 
 return abilityObject

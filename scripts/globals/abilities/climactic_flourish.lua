@@ -6,26 +6,23 @@
 -- Duration: 00:01:00
 -- Cost: 1-5 Finishing Move charges
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+    if
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)
+    then
         return 0, 0
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
-        return 0, 0
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
-        return 0, 0
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
-        return 0, 0
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
-        return 0, 0
-    else
-        return xi.msg.basic.NO_FINISHINGMOVES, 0
     end
+
+    return xi.msg.basic.NO_FINISHINGMOVES, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)

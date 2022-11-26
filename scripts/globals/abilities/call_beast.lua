@@ -5,8 +5,8 @@
 -- Recast Time: 5:00
 -- Duration: Dependent on jug pet used.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -17,9 +17,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_JUG_PET_ITEM, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
-    else
-        return 0, 0
     end
+
+    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
