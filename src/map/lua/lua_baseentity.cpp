@@ -9143,6 +9143,26 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
 }
 
 /************************************************************************
+ *  Function: checkDifficulty()
+ *  Purpose : Checks the mobs difficulty
+ *  Example : local difficulty = player:checkDifficulty(mob)
+ *  Notes   : Returns a value based on the enum EMobDifficulty
+ ************************************************************************/
+uint8 CLuaBaseEntity::checkDifficulty(CLuaBaseEntity* PLuaBaseEntity)
+{
+    CMobEntity*  PMob  = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (PChar && PMob)
+    {
+        return (uint8)charutils::CheckMob((PChar->GetMLevel()), (PMob->GetMLevel()));
+    }
+
+    ShowError("lua::checkDifficulty value is not valid");
+    return 0;
+}
+
+/************************************************************************
  *  Function: getInstance()
  *  Purpose : Get the instance object that the Entity is part of
  *  Example : local instance = door:getInstance()
@@ -15124,6 +15144,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkSoloPartyAlliance", CLuaBaseEntity::checkSoloPartyAlliance);
 
     SOL_REGISTER("checkKillCredit", CLuaBaseEntity::checkKillCredit);
+
+    SOL_REGISTER("checkDifficulty", CLuaBaseEntity::checkDifficulty);
 
     // Instances
     SOL_REGISTER("getInstance", CLuaBaseEntity::getInstance);
