@@ -80,9 +80,10 @@ end
 
 -- TODO: This might be able to become generic
 xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, stepEffect, missId, hitId)
-    local hitType        = missId
-    local debuffStacks   = 1
-    local debuffDuration = 60
+    local hitType          = missId
+    local stepDurationGift = player:getJobPointLevel(xi.jp.STEP_DURATION)
+    local debuffStacks     = 1
+    local debuffDuration   = 60 + stepDurationGift
 
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
@@ -106,7 +107,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
             end
 
             debuffStacks   = math.min(debuffStacks, 10)
-            debuffDuration = math.min(debuffEffect:getDuration() + 30, 120)
+            debuffDuration = math.min(debuffEffect:getDuration() + 30 + stepDurationGift, 120 + stepDurationGift)
 
             target:delStatusEffectSilent(stepEffect)
         end
@@ -148,4 +149,31 @@ end
 
 xi.job_utils.dancer.usePrestoAbility = function(player, target, ability)
     target:addStatusEffect(xi.effect.PRESTO, 19, 1, 30)
+end
+
+xi.job_utils.dancer.checkNoFootRiseAbility = function(player, target, ability)
+    local fmEffect = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
+
+    if
+        fmEffect and
+        fmEffect:getPower() >= getMaxFinishingMoves(player)
+    then
+        return 561, 0
+    else
+        return 0, 0
+    end
+end
+
+xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability)
+    local addedMoves = player:getMerit(xi.merit.NO_FOOT_RISE)
+    local fmEffect   = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
+
+    if fmEffect then
+        addedMoves = addedMoves + fmEffect:getPower()
+    end
+
+    addedMoves = math.min(addedMoves, getMaxFinishingMoves(player))
+    setFinishingMoves(player, addedMoves)
+
+    return addedMoves
 end
