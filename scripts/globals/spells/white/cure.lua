@@ -69,7 +69,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         else
             basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
         end
+
         final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
+
         if
             caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and
             not target:hasStatusEffect(xi.effect.STONESKIN)
@@ -135,7 +137,9 @@ spellObject.onSpellCast = function(caster, target, spell)
             else
                 basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
             end
+
             final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
+
             local diff = (target:getMaxHP() - target:getHP())
             if final > diff then
                 final = diff

@@ -60,8 +60,8 @@ bool CLinkshellListPacket::AddPlayer(SearchEntity* PPlayer)
 
     m_offset = packBitsLE(m_data, SEARCH_NAME, m_offset, 5);
 
-    m_offset    = packBitsLE(m_data, strlen((const char*)PPlayer->name), m_offset, 4);
-    auto length = strlen((const char*)PPlayer->name);
+    auto length = std::min(PPlayer->name.size(), size_t(15));
+    m_offset    = packBitsLE(m_data, length, m_offset, 4);
 
     for (std::size_t c = 0; c < length; ++c)
     {
@@ -134,10 +134,10 @@ bool CLinkshellListPacket::AddPlayer(SearchEntity* PPlayer)
 }
 
 /************************************************************************
-*                                                                       *
-*  Set the packet as final in the results                               *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Set the packet as final in the results                               *
+ *                                                                       *
+ ************************************************************************/
 
 void CLinkshellListPacket::SetFinal()
 {

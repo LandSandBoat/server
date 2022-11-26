@@ -857,6 +857,7 @@ EventInfo* CLuaBaseEntity::ParseEvent(int32 EventID, sol::variadic_args va, Even
         // Parse out other misc. possible arguments for events.
         eventToStart->textTable     = table.get_or<int16>("text_table", -1);
         eventToStart->interruptText = table.get_or<int16>("interrupt_text", 0);
+        eventToStart->eventFlags    = table.get_or<uint32>("flags", 0);
 
         sol::object csOption = table["cs_option"];
         if (csOption.is<int32>())
@@ -2168,16 +2169,19 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
-    auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    auto* const PTarget = dynamic_cast<CCharEntity*>(target->GetBaseEntity());
-
-    if (PChar && PTarget)
+    if (target)
     {
-        const auto emoteID   = static_cast<Emote>(emID);
-        const auto emoteMode = static_cast<EmoteMode>(emMode);
+        auto* const PChar   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        auto* const PTarget = target->GetBaseEntity();
 
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
-                                    new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+        if (PChar && PTarget)
+        {
+            const auto emoteID   = static_cast<Emote>(emID);
+            const auto emoteMode = static_cast<EmoteMode>(emMode);
+
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
+                                        new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+        }
     }
 }
 
@@ -2342,12 +2346,11 @@ uint16 CLuaBaseEntity::getZoneID()
  *  Notes   : Highly useful for the above example
  ************************************************************************/
 
-auto CLuaBaseEntity::getZoneName() -> const char*
+auto CLuaBaseEntity::getZoneName() -> const std::string&
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone == nullptr);
 
-    // TODO: Fix c-style cast
-    return (const char*)m_PBaseEntity->loc.zone->GetName();
+    return m_PBaseEntity->loc.zone->GetName();
 }
 
 /************************************************************************
@@ -2642,11 +2645,6 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             if (zoneid >= MAX_ZONEID)
             {
                 return;
-            }
-
-            if (PChar->PPet != nullptr)
-            {
-                PChar->setPetZoningInfo();
             }
 
             PChar->loc.destination = zoneid;
@@ -3419,10 +3417,10 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
 
                 if (!signature.empty())
                 {
-                    int8 encoded[SignatureStringLength];
+                    char encoded[SignatureStringLength];
 
                     memset(&encoded, 0, sizeof(encoded));
-                    PItem->setSignature(EncodeStringSignature((int8*)signature.c_str(), encoded));
+                    PItem->setSignature(EncodeStringSignature(signature, encoded));
                 }
 
                 sol::object appraisalObj = table["appraisal"];
@@ -3881,7 +3879,7 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
 {
     bool found = false;
 
-    int32 ret = sql->Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname.c_str());
+    int32 ret = sql->Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname);
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
         uint8 broken = sql->GetUIntData(0);
@@ -3899,11 +3897,7 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
             PLinkshell = linkshell::LoadLinkshell(lsid);
         }
 
-        int8 EncodedName[LinkshellStringLength];
-
-        memset(&EncodedName, 0, sizeof(EncodedName));
-        EncodeStringLinkshell((int8*)lsname.c_str(), EncodedName);
-        PLinkshell->BreakLinkshell(EncodedName, true);
+        PLinkshell->BreakLinkshell();
         linkshell::UnloadLinkshell(lsid);
         found = true;
     }
@@ -3930,10 +3924,10 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             // build linkpearl
-            int8 EncodedString[LinkshellStringLength];
+            char EncodedString[LinkshellStringLength];
 
             memset(&EncodedString, 0, sizeof(EncodedString));
-            EncodeStringLinkshell((int8*)lsname.c_str(), EncodedString);
+            EncodeStringLinkshell(lsname, EncodedString);
             ((CItem*)PItemLinkPearl)->setSignature(EncodedString);
             PItemLinkPearl->SetLSID(sql->GetUIntData(0));
             PItemLinkPearl->SetLSColor(sql->GetIntData(1));
@@ -4321,7 +4315,7 @@ std::optional<CLuaItem> CLuaBaseEntity::getStorageItem(uint8 container, uint8 sl
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", (const char*)m_PBaseEntity->GetName());
+        ShowWarning("%s is trying to access their inventory, but is not TYPE_PC, so doesn't have one!", m_PBaseEntity->GetName());
         return std::nullopt;
     }
 
@@ -12774,7 +12768,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getMaster()
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getPetName() -> const char*
+auto CLuaBaseEntity::getPetName() -> const std::string
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -12782,10 +12776,10 @@ auto CLuaBaseEntity::getPetName() -> const char*
 
     if (PBattle->PPet)
     {
-        return PBattle->PPet->name.c_str();
+        return PBattle->PPet->name;
     }
 
-    return 0; // Check this!
+    return ""; // Check this!
 }
 
 /************************************************************************
@@ -13009,7 +13003,7 @@ bool CLuaBaseEntity::hasAttachment(uint16 itemID)
  *  Notes   :
  ************************************************************************/
 
-auto CLuaBaseEntity::getAutomatonName() -> const char*
+auto CLuaBaseEntity::getAutomatonName() -> std::string
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     const char* Query = "SELECT name FROM "
@@ -13020,10 +13014,10 @@ auto CLuaBaseEntity::getAutomatonName() -> const char*
 
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
-        return (const char*)sql->GetData(0); // TODO: Fix c-style cast
+        return sql->GetStringData(0);
     }
 
-    return 0; // TODO: Verify this case
+    return ""; // TODO: Verify this case
 }
 
 /************************************************************************
@@ -14288,8 +14282,9 @@ void CLuaBaseEntity::castSpell(sol::object const& spell, sol::object entity)
 /************************************************************************
  *  Function: useJobAbility()
  *  Purpose : Instruct a Mob to use a specified Job Ability
- *  Example : wyvern:useJobAbility(636, wyvern) -- Specifying pet to use
- *  Notes   : Inserts directly into queue stack with 0ms delay
+ *  Example : wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern) -- Specifying pet to use
+ *  Notes   : Inserts directly into queue stack with 0ms delay,
+ *  and checks queue for immediate use.
  ************************************************************************/
 
 void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
@@ -14317,6 +14312,9 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
         }
     }));
     // clang-format on
+
+    // Check queue immediately in case of 0 ms delay abilities
+    m_PBaseEntity->PAI->checkQueueImmediately();
 }
 
 /************************************************************************

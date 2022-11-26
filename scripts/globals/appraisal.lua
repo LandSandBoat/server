@@ -1514,6 +1514,7 @@ xi.appraisal.appraiseItem = function(player, npc, trade, gil, appraisalCsid)
                 if appraisedItem ~= 0 then
                     player:startEvent(appraisalCsid, 1, appraisedItem)
                     player:setLocalVar("Appraisal", appraisedItem) -- anticheat
+                    player:confirmTrade()
                 end
 
                 break
@@ -1551,7 +1552,6 @@ end
 xi.appraisal.appraisalOnEventFinish = function(player, csid, option, gil, appraisalCsid, npc)
     if csid == appraisalCsid then
         local appraisedItem = player:getLocalVar("Appraisal")
-        player:confirmTrade()
         player:addTreasure(appraisedItem, npc)
         player:delGil(gil)
         player:setLocalVar("Appraisal", 0)

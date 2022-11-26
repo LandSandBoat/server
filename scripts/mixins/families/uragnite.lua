@@ -82,6 +82,7 @@ xi.mix.uragnite.config = function(mob, params)
     if params.noShellSkillList and type(params.noShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]noShellSkillList", params.noShellSkillList)
     end
+
     if params.timeInShellMin and type(params.timeInShellMin) == "number" then
         mob:setLocalVar("[uragnite]timeInShellMin", params.timeInShellMin)
     end

@@ -117,7 +117,11 @@ void CTrustEntity::Spawn()
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 {
     auto* PAbility = state.GetAbility();
-    auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget  = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    if (!PTarget)
+    {
+        return;
+    }
 
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
@@ -219,7 +223,11 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
 
 void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    if (!PTarget)
+    {
+        return;
+    }
 
     int32 damage      = 0;
     int32 totalDamage = 0;
@@ -518,7 +526,11 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();
-    auto* PBattleTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PBattleTarget = dynamic_cast<CBattleEntity*>(state.GetTarget());
+    if (!PBattleTarget)
+    {
+        return;
+    }
 
     int16 tp = state.GetSpentTP();
     tp       = battleutils::CalculateWeaponSkillTP(this, PWeaponSkill, tp);

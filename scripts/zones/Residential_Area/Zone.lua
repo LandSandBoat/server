@@ -16,7 +16,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setCharVar("newMog", 1)
     end
 
-    player:eraseStatusEffect(true)
+    player:eraseAllStatusEffect()
     player:setPos(0, 0, 0, 192)
 
     return cs

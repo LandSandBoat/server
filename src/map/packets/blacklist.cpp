@@ -24,7 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../entities/charentity.h"
 #include "blacklist.h"
 
-CBlacklistPacket::CBlacklistPacket(uint32 accid, const int8* targetName, int8 action)
+CBlacklistPacket::CBlacklistPacket(uint32 accid, const std::string& targetName, int8 action)
 {
     this->setType(0x42);
     this->setSize(0x1C);
@@ -35,7 +35,7 @@ CBlacklistPacket::CBlacklistPacket(uint32 accid, const int8* targetName, int8 ac
         case 0x01: // Removed successfully..
             ref<uint32>(0x04) = accid;
             ref<uint8>(0x18)  = action;
-            memcpy(data + 0x08, targetName, strlen((const char*)targetName));
+            memcpy(data + 0x08, targetName.c_str(), targetName.size());
             break;
 
         case 0x02: // Command error..

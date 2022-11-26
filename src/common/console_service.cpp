@@ -57,7 +57,7 @@ bool getLine(std::string& line)
         return false;
     }
 #if defined(_WIN32)
-    auto keyCharacter = static_cast<char>(getchar());
+    auto keyCharacter = static_cast<unsigned char>(getchar());
     if (keyCharacter == '\r')
     {
         fmt::print("\n"); // Windows needs \r\n for newlines in the console, but the enter key is only \r.
