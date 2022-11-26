@@ -12,9 +12,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
-    local bonusTime = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 3, 0, 90)-- 3 seconds / skill | Duration is capped at 180 total
-    local duration = 90 + bonusTime
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
     --randomly give str/dex/vit/agi/int/mnd/chr (+12)
     local effect = math.random()
     local effectid = xi.effect.STR_BOOST
@@ -34,7 +32,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
         effectid = xi.effect.CHR_BOOST
     end
 
-    target:addStatusEffect(effectid, math.random(12, 14), 0, duration)
+    local duration = math.min(90 + xi.summon.getSummoningSkillOverCap(pet) * 3, 180)
+    local power = 3 + math.floor(summoner:getJobLevel(xi.job.SMN) / 5)
+    target:addStatusEffect(effectid, power, 10, duration)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     return effectid
 end

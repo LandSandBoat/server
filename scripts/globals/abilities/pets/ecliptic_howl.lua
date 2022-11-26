@@ -14,9 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-
+    local duration = 180
     local moon = VanadielMoonPhase()
     local buffvalue = 0
     if moon > 90 then
