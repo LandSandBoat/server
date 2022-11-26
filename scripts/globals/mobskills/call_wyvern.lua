@@ -27,10 +27,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             end
 
             for i = 5, 1, -1 do
-                xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
+                xi.dynamis.spawnDynamicPet(mob:getTarget(), mob, xi.job.DRG)
             end
         else
-            xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
+            xi.dynamis.spawnDynamicPet(mob:getTarget(), mob, xi.job.DRG)
         end
     else
         mob:spawnPet()

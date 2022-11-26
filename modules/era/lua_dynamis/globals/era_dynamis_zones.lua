@@ -139,7 +139,7 @@ for _, zoneID in pairs(dynamisZones) do
     if zoneID[3] >= 7 then
         m:addOverride(string.format("xi.zones.%s.npcs.qm0.onTrigger", zoneID[2]),
         function(player, npc)
-            xi.dynamis.sjQMOnTrigger(player, npc)
+            xi.dynamis.sjQMOnTrigger(npc)
         end)
     end
 end
