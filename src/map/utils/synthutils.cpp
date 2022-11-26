@@ -475,8 +475,8 @@ namespace synthutils
             // Section 2: Skill up equations and penalties
             double skillUpChance         = 0;
             double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER"); // For servers who want increased crafting rates
-            double coeff                 = 0.0;
 
+            // There is no proof or data that supports there being a difference in skilups for the gap difference
             if (charSkill < 500) // 0-49
             {
                 skillUpChance = 0.6;
@@ -486,44 +486,6 @@ namespace synthutils
                 skillUpChance = 0.25;
             }
 
-            switch (baseDiff)
-            {
-                case 1:
-                    coeff = 0.78;
-                    break;
-                case 2:
-                    coeff = 0.87;
-                    break;
-                case 3:
-                    coeff = 0.97;
-                    break;
-                case 4:
-                    coeff = 1.05;
-                    break;
-                case 5:
-                    coeff = 1.10;
-                    break;
-                case 6:
-                    coeff = 1.18;
-                    break;
-                case 7:
-                    coeff = 1.20;
-                    break;
-                case 8:
-                    coeff = 1.22;
-                    break;
-                case 9:
-                    coeff = 1.24;
-                    break;
-                case 10:
-                    coeff = 1.26;
-                    break;
-                default:
-                    coeff = 0.78;
-                    break;
-            }
-
-            skillUpChance *= coeff;
             skillUpChance *= craftChanceMultiplier; // For servers who want increased crafting rates
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
