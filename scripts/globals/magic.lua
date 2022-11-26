@@ -628,14 +628,25 @@ xi.magic.applyResistanceAddEffect = function(player, target, element, effect, bo
 
     local _, skillchainCount = xi.magic.FormMagicBurst(element, target)
 
-    local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus, skillchainCount)
-    local resist = xi.magic.getMagicResist(p, target, element, skillchainCount)
+    local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus, 0, skillchainCount)
+    local resist = xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount)
 
     if resist < 0.5 then
         resist = 0
     elseif resist < 1 then
         resist = 0.5
     end
+
+    return resist
+end
+
+xi.magic.applySkillchainResistance = function(player, target, element)
+    if not element then
+        element = xi.magic.ele.NONE
+    end
+
+    local p = xi.magic.getMagicHitRate(player, target, nil, element, 0, 0, 0, 0)
+    local resist = xi.magic.getMagicResist(p, target, element, 0, 0)
 
     return resist
 end
@@ -784,10 +795,10 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
         else
             magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc + caster:getMod(xi.mod.MACC)
         end
-    elseif caster:isPC() and skillType and caster:getEquippedItem(xi.slot.MAIN) ~= nil then
-        magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPC() and skillType and skillType <= xi.skill.STAFF then
         magicacc = dStatAcc + caster:getSkillLevel(skillType) + caster:getMod(xi.mod.MACC)
+    elseif caster:isPC() and not skillType and caster:getEquippedItem(xi.slot.MAIN) ~= nil then
+        magicacc = dStatAcc + caster:getSkillLevel(caster:getEquippedItem(xi.slot.MAIN):getSkillType()) + caster:getMod(xi.mod.MACC)
     elseif caster:isMob() and skillType == nil then
         magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl()) + caster:getMod(xi.mod.MACC)
     elseif caster:isPet() and skillType == nil then

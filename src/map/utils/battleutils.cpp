@@ -4061,6 +4061,121 @@ namespace battleutils
         return PDefender->getMod(defMod);
     }
 
+    ELEMENT GetSkillChainAppliedElement(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender)
+    {
+        static const Mod resistances[][4] = {
+            { Mod::NONE, Mod::NONE, Mod::NONE, Mod::NONE },        // SC_NONE
+            { Mod::LIGHT_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_TRANSFIXION
+            { Mod::DARK_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_COMPRESSION
+            { Mod::FIRE_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_LIQUEFACTION
+            { Mod::EARTH_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_SCISSION
+            { Mod::WATER_SDT, Mod::NONE, Mod::NONE, Mod::NONE },   // SC_REVERBERATION
+            { Mod::WIND_SDT, Mod::NONE, Mod::NONE, Mod::NONE },    // SC_DETONATION
+            { Mod::ICE_SDT, Mod::NONE, Mod::NONE, Mod::NONE },     // SC_INDURATION
+            { Mod::THUNDER_SDT, Mod::NONE, Mod::NONE, Mod::NONE }, // SC_IMPACTION
+
+            { Mod::EARTH_SDT, Mod::DARK_SDT, Mod::NONE, Mod::NONE },   // SC_GRAVITATION
+            { Mod::ICE_SDT, Mod::WATER_SDT, Mod::NONE, Mod::NONE },    // SC_DISTORTION
+            { Mod::FIRE_SDT, Mod::LIGHT_SDT, Mod::NONE, Mod::NONE },   // SC_FUSION
+            { Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::NONE, Mod::NONE }, // SC_FRAGMENTATION
+
+            { Mod::FIRE_SDT, Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::LIGHT_SDT }, // SC_LIGHT
+            { Mod::ICE_SDT, Mod::EARTH_SDT, Mod::WATER_SDT, Mod::DARK_SDT },    // SC_DARKNESS
+            { Mod::FIRE_SDT, Mod::WIND_SDT, Mod::THUNDER_SDT, Mod::LIGHT_SDT }, // SC_LIGHT
+            { Mod::ICE_SDT, Mod::EARTH_SDT, Mod::WATER_SDT, Mod::DARK_SDT },    // SC_DARKNESS_II
+        };
+
+        Mod defMod = Mod::NONE;
+
+        switch (element)
+        {
+            // Level 1 skill chains
+            case SC_LIQUEFACTION:
+            case SC_IMPACTION:
+            case SC_DETONATION:
+            case SC_SCISSION:
+            case SC_REVERBERATION:
+            case SC_INDURATION:
+            case SC_COMPRESSION:
+            case SC_TRANSFIXION:
+                defMod = resistances[element][0];
+                break;
+
+                // Level 2 skill chains
+            case SC_FUSION:
+            case SC_FRAGMENTATION:
+            case SC_GRAVITATION:
+            case SC_DISTORTION:
+                if (PDefender->getMod(resistances[element][0]) < PDefender->getMod(resistances[element][1]))
+                {
+                    defMod = resistances[element][0];
+                }
+                else
+                {
+                    defMod = resistances[element][1];
+                }
+                break;
+
+                // Level 3 & 4 skill chains
+            case SC_LIGHT:
+            case SC_LIGHT_II:
+            case SC_DARKNESS:
+            case SC_DARKNESS_II:
+                if (PDefender->getMod(resistances[element][0]) < PDefender->getMod(resistances[element][1]))
+                {
+                    defMod = resistances[element][0];
+                }
+                else
+                {
+                    defMod = resistances[element][1];
+                }
+                if (PDefender->getMod(resistances[element][2]) < PDefender->getMod(defMod))
+                {
+                    defMod = resistances[element][2];
+                }
+                if (PDefender->getMod(resistances[element][3]) < PDefender->getMod(defMod))
+                {
+                    defMod = resistances[element][3];
+                }
+                break;
+
+            default:
+                XI_DEBUG_BREAK_IF(true);
+                break;
+        }
+
+        switch (defMod)
+        {
+            case Mod::FIRE_SDT:
+                return ELEMENT_FIRE;
+                break;
+            case Mod::ICE_SDT:
+                return ELEMENT_ICE;
+                break;
+            case Mod::WIND_SDT:
+                return ELEMENT_WIND;
+                break;
+            case Mod::EARTH_SDT:
+                return ELEMENT_EARTH;
+                break;
+            case Mod::THUNDER_SDT:
+                return ELEMENT_THUNDER;
+                break;
+            case Mod::WATER_SDT:
+                return ELEMENT_WATER;
+                break;
+            case Mod::LIGHT_SDT:
+                return ELEMENT_LIGHT;
+                break;
+            case Mod::DARK_SDT:
+                return ELEMENT_DARK;
+                break;
+            default:
+                return ELEMENT_NONE;
+                break;
+        }
+    };
+
     std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain)
     {
         static const std::unordered_map<SKILLCHAIN_ELEMENT, std::vector<ELEMENT>> resonanceToElement = {
@@ -4108,8 +4223,7 @@ namespace battleutils
         SKILLCHAIN_ELEMENT skillchain = (SKILLCHAIN_ELEMENT)PEffect->GetPower();
         uint16             chainLevel = PEffect->GetTier();
         uint16             chainCount = PEffect->GetSubPower();
-        ELEMENT            appliedEle = ELEMENT_NONE;
-        int16              resistance = GetSkillchainMinimumResistance(skillchain, PDefender, &appliedEle);
+        ELEMENT            appliedEle = GetSkillChainAppliedElement(skillchain, PDefender);
 
         XI_DEBUG_BREAK_IF(chainLevel <= 0 || chainLevel > 4 || chainCount <= 0 || chainCount > 5);
 
@@ -4128,8 +4242,19 @@ namespace battleutils
         {
             damage = (int32)(damage * (1.f + PChar->PMeritPoints->GetMeritValue(MERIT_INNIN_EFFECT, PChar) / 100.f));
         }
-        damage = damage * (10000 - resistance) / 10000;
+
+        auto applySkillchainResistance = lua["xi"]["magic"]["applySkillchainResistance"];
+        auto resist                    = applySkillchainResistance(CLuaBaseEntity(PAttacker), CLuaBaseEntity(PDefender), static_cast<uint16>(appliedEle));
+
+        if (!resist.valid())
+        {
+            sol::error err = resist;
+            ShowError("battleutils::TakeSkillchainDamage: %s", err.what());
+        }
+
+        damage = std::floor(damage * (float)resist);
         damage = MagicDmgTaken(PDefender, damage, appliedEle);
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -4137,6 +4262,7 @@ namespace battleutils
             damage = HandleStoneskin(PDefender, damage);
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
+
         damage = std::clamp(damage, -99999, 99999);
 
         // When set mob will only take 0 or 1 damage

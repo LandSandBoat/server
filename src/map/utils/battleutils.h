@@ -133,6 +133,7 @@ namespace battleutils
     uint8                GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain);
     uint8                GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain);
     int16                GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT* appliedEle);
+    ELEMENT              GetSkillChainAppliedElement(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender);
     std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
 
     bool IsParalyzed(CBattleEntity* PAttacker);
