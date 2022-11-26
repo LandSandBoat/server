@@ -1,8 +1,6 @@
-
 ---------------------------------------------
 -- Avatars Favor - Ability
 ---------------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
 local abilityObject = {}
