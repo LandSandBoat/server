@@ -1,6 +1,8 @@
 -----------------------------------
 -- Dancer Job Utilities
 -----------------------------------
+require('scripts/globals/jobpoints')
+require('scripts/globals/magic')
 require('scripts/globals/msg')
 require('scripts/globals/status')
 require('scripts/globals/weaponskills')
@@ -78,7 +80,6 @@ xi.job_utils.dancer.stepAbilityCheck = function(player, target, ability)
     end
 end
 
--- TODO: This might be able to become generic
 xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, stepEffect, missId, hitId)
     local hitType          = missId
     local stepDurationGift = player:getJobPointLevel(xi.jp.STEP_DURATION)
@@ -178,7 +179,6 @@ xi.job_utils.dancer.useNoFootRiseAbility = function(player, target, ability)
     return addedMoves
 end
 
--- TODO: Create generic function for all flourish checks
 xi.job_utils.dancer.checkReverseFlourishAbility = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return 0, 0
@@ -203,7 +203,7 @@ xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability
     return tpGained
 end
 
-xi.job_utils.dancer.checkAnimatedFlourishAbility(player, target, ability)
+xi.job_utils.dancer.checkAnimatedFlourishAbility = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return 0, 0
     else
@@ -211,7 +211,7 @@ xi.job_utils.dancer.checkAnimatedFlourishAbility(player, target, ability)
     end
 end
 
-xi.job_utils.dancer.useAnimatedFlourishAbility(player, target, ability)
+xi.job_utils.dancer.useAnimatedFlourishAbility = function(player, target, ability)
     local jpBonusVE = player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT) * 10
     local numMoves  = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
     local veGranted = numMoves >= 2 and 1500 or 1000
@@ -219,4 +219,61 @@ xi.job_utils.dancer.useAnimatedFlourishAbility(player, target, ability)
 
     target:addEnmity(player, 0, veGranted + jpBonusVE)
     setFinishingMoves(player, numMoves - usedMoves)
+end
+
+xi.job_utils.dancer.checkDesperateFlourishAbility = function(player, target, ability)
+    if player:getAnimation() ~= 1 then
+        return xi.msg.basic.REQUIRES_COMBAT, 0
+    else
+        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+            return 0, 0
+        else
+            return xi.msg.basic.NO_FINISHINGMOVES, 0
+        end
+    end
+end
+
+xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, ability)
+    local isSneakValid = player:hasStatusEffect(xi.effect.SNEAK_ATTACK)
+    local numMoves     = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
+    setFinishingMoves(player, numMoves - 1)
+
+    if
+        isSneakValid and
+        not player:isBehind(target)
+    then
+        isSneakValid = false
+    end
+
+    if
+        math.random() <= getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
+        isSneakValid
+    then
+        local spell  = GetSpell(xi.magic.spell.GRAVITY)
+        local params =
+        {
+            diff      = 0
+            skillType = player:getWeaponSkillType(xi.slot.MAIN)
+            bonus     = 50 - target:getMod(xi.mod.GRAVITYRES)
+        }
+
+        local resistRate = applyResistance(player, target, spell, params)
+        if resistRate > 0.25 then
+            target:delStatusEffectSilent(xi.effect.WEIGHT)
+            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resistRate)
+        else
+            ability:setMsg(xi.msg.basic.JA_DAMAGE)
+        end
+
+        ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
+        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+        action:speceffect(target:getID(), 2)
+
+        return xi.effect.WEIGHT
+    else
+        ability:setMsg(xi.msg.basic.JA_MISS)
+
+        return 0
+    end
 end
