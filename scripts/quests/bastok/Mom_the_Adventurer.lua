@@ -36,7 +36,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status ~= QUEST_ACCEPTED and
+                not player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) ~= QUEST_ACCEPTED and
                 vars.Prog == 0
         end,
 
