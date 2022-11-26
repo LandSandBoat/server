@@ -5156,6 +5156,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',508,274,1,255); -- Sleep
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',508,356,1,255); -- Paralyga
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',508,366,1,255); -- Graviga
 
+-- Gargoyle Magic (509)
+INSERT INTO `mob_spell_lists` VALUES ('Gargoyle_Magic',509,59,1,255); -- Silence (1~255)
+-- Gargoyle Physical (510)
+INSERT INTO `mob_spell_lists` VALUES ('Gargoyle_Phys',510,251,1,255); -- Shock Spikes (1~255)
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis
 
