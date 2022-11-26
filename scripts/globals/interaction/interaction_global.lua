@@ -46,6 +46,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
         containers[i] = utils.prequire(containerFiles[i])
         containers[i].filename = containerFiles[i]
     end
+
     InteractionGlobal.lookup:addContainers(containers, zoneIds)
 end
 

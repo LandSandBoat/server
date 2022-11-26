@@ -51,6 +51,7 @@ function onTrigger(player)
         if math.random(0, 1) == 1 then
             randomChange = randomChange * -1
         end
+
         local c = a + b + randomChange
 
         return
@@ -77,6 +78,7 @@ function onTrigger(player)
         onStart = function(playerArg)
             playerArg:setLocalVar("CAPTCHA", 1)
         end,
+
         options = options,
         onCancelled = function(playerArg)
             playerArg:PrintToPlayer("AFK Check failed!", xi.msg.channel.NS_SAY)

@@ -25,6 +25,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:setTP(reset)
         skill:setMsg(xi.msg.basic.TP_REDUCED)
     end
+
     return reset
 end
 

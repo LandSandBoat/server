@@ -27,6 +27,7 @@ function isHalloweenEnabled()
             option = 4
         end
     end
+
     return option
 end
 
@@ -55,6 +56,7 @@ local function halloweenItemsCheck(player)
             elseif mainHand == trickStaff2 and not player:hasItem(17588) then
                 reward = 17588 -- Treat Staff II
             end
+
             return reward
         end
     end

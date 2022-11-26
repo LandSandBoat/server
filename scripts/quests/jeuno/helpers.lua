@@ -89,6 +89,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                             return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
                         end
                     end,
+
                     onTrigger = function(player, npc)
                         return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
                     end,

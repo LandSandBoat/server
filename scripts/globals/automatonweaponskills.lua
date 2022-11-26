@@ -22,6 +22,7 @@ local function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
         hitrate = utils.clamp(hitrate, 0.2, 0.95)
     end
+
     return hitrate
 end
 
@@ -169,6 +170,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     if wsParams.ignoresDef ~= nil and wsParams.ignoresDef then
         ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
+
     local cratio, ccritratio = getMeleeCRatio(attacker, target, wsParams, ignoredDef)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
@@ -260,6 +262,7 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
     if wsParams.ignoresDef ~= nil and wsParams.ignoresDef then
         ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
+
     local cratio, ccritratio = getRangedCRatio(attacker, target, wsParams, ignoredDef)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage

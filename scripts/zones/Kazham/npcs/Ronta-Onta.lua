@@ -69,6 +69,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end
+
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         player:setCharVar("TrialByFire_date", 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
@@ -97,6 +98,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
+
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_FIRE)
             player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
             player:setCharVar("TrialByFire_date", getMidnight())

@@ -40,6 +40,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
+
     return typeEffect
     ]]
 end

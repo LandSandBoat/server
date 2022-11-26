@@ -20,6 +20,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if skill > 500 then
         skill = 500
     end
+
     if dINT > 300 then
         dINT = 300
     end

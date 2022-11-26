@@ -17,6 +17,7 @@ abilityObject.onUseAbility = function(pet, target, skill, action)
     else
         skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
+
     return xi.effect.POISON
 end
 

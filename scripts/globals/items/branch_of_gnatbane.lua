@@ -16,6 +16,7 @@ itemObject.onItemCheck = function(target)
     then
         return xi.msg.basic.IS_FULL
     end
+
     return 0
 end
 

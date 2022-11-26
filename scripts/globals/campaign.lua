@@ -86,15 +86,18 @@ PAST_WINDURST = 7
 
 xi.campaign.getMedalRank = function(player)
     local rank = 0
+    -- TODO: Use xi.ki enum in this table
     local medals =
     {
         924, 925, 926, 927, 928, 929, 930,
         931, 932, 933, 934, 935, 936, 937,
         938, 939, 940, 941, 942, 943
     }
-    while (player:hasKeyItem(medals[rank + 1]) == true) do
+
+    while player:hasKeyItem(medals[rank + 1]) do
         rank = rank + 1
     end
+
     return rank
 end
 

@@ -13,6 +13,7 @@ itemObject.onItemCheck = function(target)
     if effect ~= nil and effect:getSubType() == 14680 then
         target:delStatusEffect(xi.effect.ENMITY_DOWN)
     end
+
     return 0
 end
 

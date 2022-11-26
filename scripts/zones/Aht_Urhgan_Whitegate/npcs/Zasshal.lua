@@ -89,6 +89,7 @@ entity.onEventFinish = function(player, csid, option)
             player:delCurrency("ILRUSI_ASSAULT_POINT", 500)
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)
         end
+
         player:setLocalVar("SalvageValid", 0)
         player:setCharVar("LAST_PERMIT", currentday)
     end

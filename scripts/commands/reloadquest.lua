@@ -39,6 +39,7 @@ function onTrigger(player, questName)
     if questName == nil then
         error(player, "Unable to reload quest.")
     end
+
     for _, area in ipairs(folders) do
         local filename = table.concat({ "scripts/quests/", area, "/", questName })
         if fileExists(filename .. ".lua") then
@@ -55,6 +56,7 @@ function onTrigger(player, questName)
                 InteractionGlobal.lookup:addContainer(res)
                 player:PrintToPlayer(string.format("Quest '%s' at '%s' has been reloaded.", questName, filename))
             end
+
             return
         end
     end

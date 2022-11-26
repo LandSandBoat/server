@@ -20,6 +20,7 @@ function onTrigger(player, lsname, target)
         error(player, "You must enter a linkshell name.")
         return
     end
+
     local targ
     if target == nil then
         targ = player
@@ -30,6 +31,7 @@ function onTrigger(player, lsname, target)
             return
         end
     end
+
     if targ:addLinkpearl(lsname, false) then
         player:PrintToPlayer("Linkpearl created for \""..lsname.."\"!")
     else

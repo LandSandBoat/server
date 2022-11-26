@@ -46,7 +46,9 @@ function onTrigger(player, target)
             silent = false
             sendUpdate = true
         end
+
         targ:addSpell(validSpells[i], silent, save, sendUpdate)
     end
+
     player:PrintToPlayer(string.format("%s now has all trusts.", targ:getName()))
 end

@@ -28,6 +28,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             mob:delStatusEffect(effect)
         end
     end
+
     skill:setMsg(xi.msg.basic.NONE)
 end
 

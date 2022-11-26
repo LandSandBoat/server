@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
     if target:hasKeyItem(keyItemId) then
         return xi.msg.basic.ALREADY_HAVE_KEY_ITEM, 0, keyItemId
     end
+
     return 0
 end
 

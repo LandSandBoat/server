@@ -66,6 +66,7 @@ entity.onEventFinish = function(player, csid, option)
             if player:getCampaignAllegiance() == 1 and adj ~= nil then
                 price = adj
             end
+
             if player:getFreeSlotsCount() >= 1 then
                 player:delCurrency("allied_notes", price)
                 player:addItem(item)

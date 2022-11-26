@@ -23,6 +23,7 @@ itemObject.onItemUse = function(target)
     if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
         bonus = 39 -- (1/256 bonus buff per tier)
     end
+
     power = power + (bonus * tier)
     if
         target:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 12406, 0, tier)

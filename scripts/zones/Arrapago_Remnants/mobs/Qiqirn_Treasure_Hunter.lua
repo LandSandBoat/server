@@ -53,8 +53,13 @@ entity.onMobFight = function(mob, target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:setLocalVar("popTime", os.time())
             mobPet:setStatus(xi.status.MOB)
-            mobPet:timer(1000, function(mobArg) mobArg:useMobAbility(1838) end)
-            mobPet:timer(4000, function(mobArg) mobArg:setStatus(xi.status.DISAPPEAR) end)
+            mobPet:timer(1000, function(mobArg)
+                mobArg:useMobAbility(1838)
+            end)
+
+            mobPet:timer(4000, function(mobArg)
+                mobArg:setStatus(xi.status.DISAPPEAR)
+            end)
         end
     end
 end
