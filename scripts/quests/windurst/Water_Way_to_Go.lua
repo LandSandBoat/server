@@ -18,7 +18,6 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY
 
 quest.reward =
 {
-    gil  = 900,
     fame = 40,
     fameArea = xi.quest.fame_area.WINDURST,
 }
@@ -107,9 +106,11 @@ quest.sections =
 
                 [355] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        -- Note: Message display for gil reward is handled by the event
                         player:setLocalVar('Quest[2][17]mustZone', 1)
                         quest:setMustZone(player)
+                        player:confirmTrade()
+                        player:addGil(900)
                     end
                 end,
             },
@@ -172,11 +173,11 @@ quest.sections =
                 end,
 
                 [355] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:confirmTrade()
-                        quest:setMustZone(player)
-                        quest:setVar(player, "waterRepeat", 0)
-                    end
+                    -- Note: Message display for gil reward is handled by the event
+                    quest:setVar(player, "waterRepeat", 0)
+                    quest:setMustZone(player)
+                    player:confirmTrade()
+                    player:addGil(900)
                 end,
             },
         },
