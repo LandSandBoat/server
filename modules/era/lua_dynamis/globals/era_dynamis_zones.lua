@@ -238,9 +238,13 @@ for _, npcEntry in pairs(hourglassVendors) do
     m:addOverride(string.format("xi.zones.%s.npcs.%s.onEventFinish", npcEntry[1], npcEntry[2]), function(player, csid, option)
         local eventId = npcEntry[5]
         if csid == eventId + 4 then -- Bought hourglass
-            player:tradeComplete()
-            player:addItem(4236)
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, 4236)
+            if player:getFreeSlotsCount() == 0 then
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, 4236)
+            else
+                player:tradeComplete()
+                player:addItem(4236)
+                player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, 4236)
+            end
         elseif csid == eventId + 5 then -- Currency conversion to Singles
             if player:getFreeSlotsCount() == 0 then
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, npcEntry[3][2])
