@@ -25,8 +25,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 5 -- To be confirmed, but only way to see default interaction.
+            return status == QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

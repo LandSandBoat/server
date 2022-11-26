@@ -1588,6 +1588,26 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
         }
 
+        // Revert ToAU job buffs
+        if (!luautils::IsContentEnabled("TOAU"))
+        {
+            // Super Jump
+            if (PAbility->getID() == 68)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), (uint16)(action.recast * (5.f / 3.f)));
+            }
+        }
+
+        // Revert WotG job buffs
+        if (!luautils::IsContentEnabled("WOTG"))
+        {
+            // Reward
+            if (PAbility->getID() == 78)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), (uint16)(action.recast * 2.f));
+            }
+        }
+
         pushPacket(new CCharRecastPacket(this));
 
         //#TODO: refactor

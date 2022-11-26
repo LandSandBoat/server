@@ -14,7 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    npcUtil.giveItem(player, xi.items.TREMORSTONE)
+    if xi.settings.main.ENABLE_ABYSSEA == 1 then
+        npcUtil.giveItem(player, xi.items.TREMORSTONE)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

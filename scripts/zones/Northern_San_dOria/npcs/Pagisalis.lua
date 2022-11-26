@@ -14,22 +14,21 @@ entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED then
         if trade:hasItemQty(913, 2) and trade:getItemCount() == 2 then -- Trade Lump of Beeswax
             player:startEvent(563)
+        else
+            player:startEvent(564)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local undyingFlames = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
 
-    if sanFame >= 2 and undyingFlames == QUEST_AVAILABLE then
+    if undyingFlames == QUEST_AVAILABLE then
         player:startEvent(562)
     elseif undyingFlames == QUEST_ACCEPTED then
         player:startEvent(565)
     elseif undyingFlames == QUEST_COMPLETED then
         player:startEvent(566)
-    else
-        player:startEvent(564)
     end
 end
 

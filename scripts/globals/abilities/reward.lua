@@ -62,44 +62,62 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     switch (rangeObj) : caseof {
         [17016] = function (x) -- pet food alpha biscuit
-            minimumHealing = 50
+            minimumHealing = 20
+            if xi.settings.main.ENABLE_ABYSSEA == 1 then
+                minimumHealing = 50
+            end
             regenAmount = 1
-            totalHealing = math.floor(minimumHealing + 2 * (playerMnd-10))
+            totalHealing = math.floor(minimumHealing + 2 * (playerMnd - 10))
             end,
         [17017] = function (x) -- pet food beta biscuit
-            minimumHealing = 180
+            minimumHealing = 50
+            if xi.settings.main.ENABLE_ABYSSEA == 1 then
+                minimumHealing = 180
+            end
             regenAmount = 3
-            totalHealing = math.floor(minimumHealing + 1 * (playerMnd-33))
+            totalHealing = math.floor(minimumHealing + 1 * (playerMnd - 33))
             end,
         [17018] = function (x) -- pet food gamma biscuit
-            minimumHealing = 300
+            minimumHealing = 100
+            if xi.settings.main.ENABLE_ABYSSEA == 1 then
+                minimumHealing = 300
+            end
             regenAmount = 5
-            totalHealing = math.floor(minimumHealing + 1 * (playerMnd-35)) -- TO BE VERIFIED.
+            totalHealing = math.floor(minimumHealing + 1 * (playerMnd - 35)) -- TO BE VERIFIED.
             end,
         [17019] = function (x) -- pet food delta biscuit
-            minimumHealing = 530
+            minimumHealing = 150
+            if xi.settings.main.ENABLE_ABYSSEA == 1 then
+                minimumHealing = 530
+            end
             regenAmount = 8
-            totalHealing = math.floor(minimumHealing + 2 * (playerMnd-40)) -- TO BE VERIFIED.
+            totalHealing = math.floor(minimumHealing + 2 * (playerMnd - 40)) -- TO BE VERIFIED.
             end,
         [17020] = function (x) -- pet food epsilon biscuit
-            minimumHealing = 750
+            minimumHealing = 300
+            if xi.settings.main.ENABLE_ABYSSEA == 1 then
+                minimumHealing = 750
+            end
             regenAmount = 11
-            totalHealing = math.floor(minimumHealing + 2 * (playerMnd-45))
+            totalHealing = math.floor(minimumHealing + 2 * (playerMnd - 45))
             end,
         [17021] = function (x) -- pet food zeta biscuit
-            minimumHealing = 900
+            minimumHealing = 350
+            if xi.settings.main.ENABLE_ABYSSEA == 1 then
+                minimumHealing = 900
+            end
             regenAmount = 14
-            totalHealing = math.floor(minimumHealing + 3 * (playerMnd-45))
+            totalHealing = math.floor(minimumHealing + 3 * (playerMnd - 45))
             end,
         [17022] = function (x) -- pet food eta biscuit
             minimumHealing = 1200
             regenAmount = 17
-            totalHealing = math.floor(minimumHealing + 4 * (playerMnd-50))
+            totalHealing = math.floor(minimumHealing + 4 * (playerMnd - 50))
             end,
         [17023] = function (x) -- pet food theta biscuit
             minimumHealing = 1600
             regenAmount = 20
-            totalHealing = math.floor(minimumHealing + 4 * (playerMnd-55))
+            totalHealing = math.floor(minimumHealing + 4 * (playerMnd - 55))
             end,
     }
 
@@ -155,9 +173,11 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     pet:wakeUp()
 
     -- Apply regen xi.effect.
+    if xi.settings.main.ENABLE_COP == 1 then
+        pet:delStatusEffect(xi.effect.REGEN)
+        pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
+    end
 
-    pet:delStatusEffect(xi.effect.REGEN)
-    pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
     player:removeAmmo()
 
     pet:updateEnmityFromCure(pet, totalHealing)
