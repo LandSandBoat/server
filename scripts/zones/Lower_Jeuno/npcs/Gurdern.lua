@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Gurdern
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")

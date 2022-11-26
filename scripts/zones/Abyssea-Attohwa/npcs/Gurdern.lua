@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Attohwa
 --  NPC: Gurdern
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

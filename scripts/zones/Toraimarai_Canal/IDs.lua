@@ -47,8 +47,9 @@ zones[xi.zone.TORAIMARAI_CANAL] =
             [17469630] = 17469632,
             [17469631] = 17469632,
         },
-        MAGIC_SLUDGE      = 17469516,
         HINGE_OILS_OFFSET = 17469666,
+        MAGIC_SLUDGE      = 17469516,
+        ONI_CARCASS       = 17469587,
         MIMIC             = 17469761,
     },
     npc =

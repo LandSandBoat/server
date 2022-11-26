@@ -19,11 +19,15 @@ end
 
 entity.onTrigger = function(player, npc)
     local beautyAndTheGalka = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+    local shadyBusiness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 
-    if beautyAndTheGalka == QUEST_ACCEPTED or player:getCharVar("BeautyAndTheGalkaDenied") >= 1 then
+    if
+        beautyAndTheGalka == QUEST_ACCEPTED or
+        player:getCharVar("BeautyAndTheGalkaDenied") >= 1
+    then
         player:startEvent(4)
-    else
-        player:startEvent(2)
+    elseif shadyBusiness == QUEST_COMPLETED then
+        player:startEvent(90)
     end
 end
 

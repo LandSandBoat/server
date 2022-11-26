@@ -75,7 +75,7 @@ entity.onMobFight = function(mob, target)
         -- Ability count reaches zero - take a breath
         mob:setLocalVar("pause", 0)
         mob:setLocalVar("startTriple", 1) -- Allow for another triple attack after cooldown
-        mob:SetAutoAttackEnabled(false)
+        mob:setAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 
         -- Send the message out, but give it a second unutil after the final JA lands
@@ -85,7 +85,7 @@ entity.onMobFight = function(mob, target)
 
         -- Random timer of 8-12 seconds to return to normal and reset hate on last target
         mob:timer(math.random(8000, 12000), function(m)
-            m:SetAutoAttackEnabled(true)
+            m:setAutoAttackEnabled(true)
             m:setMobMod(xi.mobMod.NO_MOVE, 0)
             m:resetEnmity(target)
         end)

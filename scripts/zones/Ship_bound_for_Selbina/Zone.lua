@@ -21,6 +21,15 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         local position = math.random(-2, 2) + 0.150
         player:setPos(position, -2.100, 3.250, 64)
+    end
+
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        local position = math.random(-2, 2) + 0.150
+        player:setPos(position, -2.100, 3.250, 64)
         if
             player:getGMLevel() == 0 and
             GetZone(zoneID):getLocalVar('stateSet') == 0

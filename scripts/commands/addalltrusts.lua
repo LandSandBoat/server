@@ -27,11 +27,11 @@ function onTrigger(player, target)
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
@@ -46,7 +46,9 @@ function onTrigger(player, target)
             silent = false
             sendUpdate = true
         end
+
         targ:addSpell(validSpells[i], silent, save, sendUpdate)
     end
+
     player:PrintToPlayer(string.format("%s now has all trusts.", targ:getName()))
 end

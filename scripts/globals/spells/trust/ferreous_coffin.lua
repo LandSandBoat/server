@@ -51,9 +51,10 @@ spellObject.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "FERREOUS_COFFIN_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 170 then -- Randgrith
         -- Return to the dust whence you came! Randgrith!!!
-            if math.random(100) <= 66 then
+            if math.random(1, 100) <= 66 then
                 xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
             end
+
             mob:addStatusEffect(xi.effect.ACCURACY_BOOST, 20, 0, 20) -- Cheat in Relic AM ACC
             -- TODO: Expand Relic (Mjollnir) Handling (Occ. Double Damage, etc)
         end

@@ -14,7 +14,7 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
+    zone:registerTriggerArea(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
     xi.chocobo.initZone(zone)
 end
 
@@ -50,7 +50,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onGameHour = function(zone)
@@ -60,7 +60,7 @@ zoneObject.onGameHour = function(zone)
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
     if vanadielHour == 7 then
-        for i=0, 11 do
+        for i = 0, 11 do
             local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
             lamp:setAnimation(xi.anim.CLOSE_DOOR)
         end

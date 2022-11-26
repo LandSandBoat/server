@@ -26,14 +26,19 @@ entity.onMobFight = function(mob, target)
     local shadow1 = GetMobByID(zeid + 1)
     local shadow2 = GetMobByID(zeid + 2)
 
-    if mob:getHPP() <= 77 and mob:getTP() >= 1000 and shadow1:isDead() and shadow2:isDead() then
+    if
+        mob:getHPP() <= 77 and
+        mob:getTP() >= 1000 and
+        shadow1:isDead() and
+        shadow2:isDead()
+    then
         mob:useMobAbility(984)
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    DespawnMob(mob:getID()+1)
-    DespawnMob(mob:getID()+2)
+    DespawnMob(mob:getID() + 1)
+    DespawnMob(mob:getID() + 2)
 end
 
 return entity

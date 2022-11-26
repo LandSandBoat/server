@@ -32,7 +32,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MACC, power)
     mob:addMod(xi.mod.HASTE_MAGIC, 1000) -- 10% Haste (Magic)
 
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 spellObject.onMobDespawn = function(mob)

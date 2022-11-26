@@ -25,7 +25,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     local mobhp = mob:getHPP()
 
-    if (skillList == 54 and mobhp < 26) or (skillList == 727 and mob:getAnimationSub() == 1) then
+    if
+        (skillList == 54 and mobhp < 26) or
+        (skillList == 727 and mob:getAnimationSub() == 1)
+    then
         return 0
     else
         return 1
@@ -35,7 +38,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local drained = 0
 
-    for i = 1,7 do
+    for i = 1, 7 do
         if math.random(0, 100) < 40 then
             skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, attributesDown[i], 10, 3, 60))
             drained = drained + 1

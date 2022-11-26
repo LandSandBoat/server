@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Southern San dOria
 --  NPC: Anxaberoute
--- Type: Standard Info NPC
 -- !pos 108.892 0.000 -49.038 230
 -----------------------------------
 local entity = {}

@@ -9,35 +9,35 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-  if(mob:getFamily() == 91) then
-    local mobSkin = mob:getModelId()
+    if mob:getFamily() == 91 then
+        local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1839) then
-        return 0
-    else
-        return 1
+        if mobSkin == 1839 then
+            return 0
+        else
+            return 1
+        end
     end
-  end
 
-  if(mob:getFamily() == 316) then
-    local mobSkin = mob:getModelId()
+    if mob:getFamily() == 316 then
+        local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1840) then
-        return 0
-    else
-        return 1
+        if mobSkin == 1840 then
+            return 0
+        else
+            return 1
+        end
     end
-  end
 
-  return 0
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 10
-    local dmgmod = 4.0
+    local dmgmod = 1.0
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded*math.random(2, 3))
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded * math.random(2, 3))
     local typeEffect = xi.effect.WEIGHT
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 60)

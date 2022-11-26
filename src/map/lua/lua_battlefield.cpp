@@ -342,23 +342,30 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         {
             uint32 stride = uint32(entityIds.size()) / m_PLuaBattlefield->GetZone()->m_BattlefieldHandler->MaxBattlefieldAreas();
 
-            // Look to see if there's an Armoury Crate after the last monster in the first area. If so then we need to increase the stride.
+            // Look to see if there's an Armoury Crate within the group of monsters
             static const std::string ARMOURY_CRATE = "Armoury_Crate";
 
-            uint32       potentialCrateId = lowestId + stride;
-            CBaseEntity* entity           = zoneutils::GetEntity(potentialCrateId, TYPE_NPC);
-            bool         hasArmouryCrate  = entity != nullptr && entity->name == ARMOURY_CRATE;
-            if (hasArmouryCrate)
+            uint32 armouryCrateOffset = 0;
+            uint32 potentialCrateId   = lowestId + stride;
+            while (potentialCrateId >= lowestId)
             {
-                ++stride;
+                CBaseEntity* entity = zoneutils::GetEntity(potentialCrateId, TYPE_NPC);
+                if (entity != nullptr && entity->name == ARMOURY_CRATE)
+                {
+                    armouryCrateOffset = potentialCrateId - lowestId;
+                    // If an Armoury Crate is in the battlefield we need to account for it in the stride
+                    ++stride;
+                    break;
+                }
+                --potentialCrateId;
             }
 
             uint32 offset = stride * (m_PLuaBattlefield->GetArea() - 1);
             lowestId += offset;
             highestId = lowestId + stride - 1;
-            if (hasArmouryCrate)
+            if (armouryCrateOffset != 0)
             {
-                m_PLuaBattlefield->setArmouryCrate(highestId);
+                m_PLuaBattlefield->setArmouryCrate(lowestId + armouryCrateOffset);
             }
         }
     }
@@ -372,6 +379,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
     std::set<uint32> entities;
     std::set<uint32> spawnedEntities;
 
+    std::vector<BattlefieldGroup> battlefieldGroups;
     for (auto entry : groups)
     {
         sol::table groupData = entry.second.as<sol::table>();
@@ -410,11 +418,14 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (uint32 mobid : mobIds)
                 {
                     CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
-                    groupEntities.push_back(entity);
-                    if (entities.find(entity->id) == entities.end())
+                    if (entity != nullptr)
                     {
-                        m_PLuaBattlefield->InsertEntity(entity, true);
-                        entities.insert(entity->id);
+                        groupEntities.push_back(entity);
+                        if (entities.find(entity->id) == entities.end())
+                        {
+                            m_PLuaBattlefield->InsertEntity(entity, true);
+                            entities.insert(entity->id);
+                        }
                     }
                 }
             };
@@ -437,36 +448,20 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         BattlefieldGroup group;
         for (CBaseEntity* entity : groupEntities)
         {
+            auto PMob = dynamic_cast<CMobEntity*>(entity);
+            XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+            // Restore modifiers here since we save the modifiers below but don't want any previous modifiers persisting
+            PMob->restoreModifiers();
+            PMob->restoreMobModifiers();
+
             group.mobIds.push_back(entity->id);
         }
 
         group.deathCallback       = groupData.get<sol::function>("death");
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
-
-        bool spawned = groupData.get_or("spawned", true);
-        if (spawned)
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
-                {
-                    entity->Spawn();
-                    spawnedEntities.insert(entity->id);
-                }
-            }
-        }
-
-        auto setup = groupData.get<sol::function>("setup");
-        if (setup.valid())
-        {
-            auto mobs = lua.create_table();
-            for (CBaseEntity* entity : groupEntities)
-            {
-                mobs.add(CLuaBaseEntity(entity));
-            }
-            setup(this, mobs);
-        }
+        group.setupCallback       = groupData.get<sol::function>("setup");
 
         bool isParty = groupData.get_or("isParty", false);
         if (isParty)
@@ -531,8 +526,8 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (auto modifier : mods.get<sol::table>())
                 {
                     PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
-                    PMob->saveModifiers();
                 }
+                PMob->saveModifiers();
             }
         }
 
@@ -546,21 +541,86 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (auto modifier : mobMods.get<sol::table>())
                 {
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
-                    PMob->saveMobModifiers();
                 }
+                PMob->saveMobModifiers();
             }
         }
 
-        m_PLuaBattlefield->addGroup(std::move(group));
+        auto initialize = groupData.get<sol::function>("initialize");
+        if (initialize.valid())
+        {
+            auto mobs = lua.create_table();
+            for (CBaseEntity* entity : groupEntities)
+            {
+                mobs.add(CLuaBaseEntity(entity));
+            }
+
+            initialize(this, mobs);
+
+            // Save modifiers after initialize all mobs
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                PMob->saveModifiers();
+                PMob->saveMobModifiers();
+            }
+        }
+
+        bool spawned = groupData.get_or("spawned", true);
+        if (spawned)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                spawnedEntities.insert(entity->id);
+            }
+        }
+
+        battlefieldGroups.push_back(std::move(group));
+    }
+
+    // Spawn entities after all groups have been setup.
+    // This prevents wiping modifiers set in spawn in subsequent groups that repeat the same mobs.
+    for (uint32 entityID : spawnedEntities)
+    {
+        CBaseEntity* entity = zoneutils::GetEntity(entityID, TYPE_MOB);
+        if (entity != nullptr)
+        {
+            entity->Spawn();
+        }
+    }
+
+    // Finalize setting up groups now that they've been spawned
+    for (auto& group : battlefieldGroups)
+    {
+        if (group.setupCallback.valid())
+        {
+            auto mobs = lua.create_table();
+            for (uint32 entityID : group.mobIds)
+            {
+                CBaseEntity* entity = zoneutils::GetEntity(entityID, TYPE_MOB);
+                mobs.add(CLuaBaseEntity(entity));
+            }
+            auto result = group.setupCallback(this, mobs);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("Error in battlefield %s group.setup: %s", m_PLuaBattlefield->GetName(), err.what());
+            }
+        }
+
+        m_PLuaBattlefield->addGroup(group);
     }
 
     if (m_PLuaBattlefield->GetArmouryCrate() != 0)
     {
-        CNpcEntity* entity = static_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC));
-        m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
-        entity->SetUntargetable(true);
-        entity->ResetLocalVars();
-        entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
+        if (auto* entity = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC)))
+        {
+            m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
+            entity->SetUntargetable(true);
+            entity->ResetLocalVars();
+            entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
+        }
     }
 }
 

@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 -----------------------------------------
 local itemObject = {}
 
-itemObject.onItemCheck= function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
     local id = target:getID()
     local checkID = true
@@ -34,6 +34,16 @@ itemObject.onItemUse = function(target, player)
     local salt = target:getLocalVar("salty")
 
     player:messageText(player, ID.text.BEGINS_TO_MELT)
+    target:timer(7140, function(mob)
+        if mob:isAlive() then
+            player:messageText(player, ID.text.LARGE_STEAM)
+        end
+    end)
+    target:timer(21000, function(mob)
+        if mob:isAlive() then
+            player:messageText(player, ID.text.SHOOK_SALT)
+        end
+    end)
 
     if salt == 0 then -- random time until shaken off
         target:setLocalVar("delayed", os.time() + 20)

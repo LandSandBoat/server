@@ -44,12 +44,15 @@ entity.onTrigger = function(player, npc)
 
     -- Type 3 in Nyzul.lua global
     elseif lampObjective == xi.nyzul.lampsObjective.ORDER then
-        if bit.band(lampRegister, bit.lshift(1,lampOrder)) == 0 then
+        if bit.band(lampRegister, bit.lshift(1, lampOrder)) == 0 then
             player:messageSpecial(ID.text.LAMP_ORDER)
             player:startOptionalCutscene(3, { [0] = 6, cs_option = { 1, 2 } })
         elseif npc:getAnimationSub() == 3 then
             player:messageSpecial(ID.text.LAMP_NOT_ALL_ACTIVE)
-        elseif instance:getLocalVar("procedureTime") > 0 and instance:getLocalVar("procedureTime") < os.time() then
+        elseif
+            instance:getLocalVar("procedureTime") > 0 and
+            instance:getLocalVar("procedureTime") < os.time()
+        then
             player:messageSpecial(ID.text.CONFIRMING_PROCEDURE)
         else
             player:messageSpecial(ID.text.LAMP_CANNOT_ACTIVATE)
@@ -63,7 +66,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     local instance      = npc:getInstance()
     local lampObjective = instance:getLocalVar("[Lamps]Objective")
-    local lampCount     = instance:getLocalVar("[Lamp]count") +1
+    local lampCount     = instance:getLocalVar("[Lamp]count") + 1
     local pressCount    = instance:getLocalVar("[Lamp]pressCount")
     local lampOrder     = npc:getLocalVar("[Lamp]order")
     local lampRegister  = instance:getLocalVar("[Lamps]lampRegister")
@@ -178,7 +181,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             -- Finish.
-            if winCondition == true then
+            if winCondition then
                 instance:setLocalVar("procedureTime", os.time() + 6)
                 npc:timer(6000, function(npcLamp)
                     instance:setLocalVar("lampsCorrect", 0)

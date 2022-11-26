@@ -28,12 +28,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.effect = xi.effect.VIT_DOWN
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local duration = 60 * resist
     local power = 5
 
-    if (resist > 0.5) then -- Do it!
-        if (target:addStatusEffect(params.effect, power, 0, duration)) then
+    if resist > 0.5 then -- Do it!
+        if target:addStatusEffect(params.effect, power, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

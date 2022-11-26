@@ -31,8 +31,16 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        if
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or
+            prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES
+        then
             local ship = GetNPCByID(ID.npc.SHIP)
 
             ship:setAnimBegin(VanadielTime())
@@ -55,15 +63,20 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if transport == 47 or transport == 46 then
-        if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
-            player:setPos(8.200, -1.363, 3.445, 192)
-            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+    if player:getLocalVar('[BOAT]Paid') == 1 then
+        if transport == 47 or transport == 46 then
+            if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
+                player:setPos(8.200, -1.363, 3.445, 192)
+                player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+            else
+                player:startEvent(200)
+            end
         else
             player:startEvent(200)
         end
     else
-        player:startEvent(200)
+        player:setPos(48.1156, -8.0000, 40.8011, 66)
+        player:setLocalVar('[BOAT]Paid', 0)
     end
 end
 
@@ -85,6 +98,11 @@ zoneObject.onEventFinish = function(player, csid, option)
         else
             player:setPos(8, -1, 5, 62, 249) -- Something went wrong, dump them on the dock for safety.
         end
+    elseif csid == 220 and option == 0 then
+        player:setLocalVar('[BOAT]Paid', 0)
+
+    elseif csid == 202 then
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 

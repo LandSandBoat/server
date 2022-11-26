@@ -27,7 +27,9 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.ULIPEHKOWA_SHOP_DIALOG)
-    xi.shop.nation(player, stock, xi.nation.WINDURST)
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+        xi.shop.nation(player, stock, xi.nation.WINDURST)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -20,12 +20,10 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
-    if (target:getMainLvl()%5 == 0) then
-
+    if target:getMainLvl() % 5 == 0 then
         local power = math.random(2, 30)
 
         skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, power))
-
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     end

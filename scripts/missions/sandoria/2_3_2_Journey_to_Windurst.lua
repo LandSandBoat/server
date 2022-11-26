@@ -57,9 +57,15 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        local needsSemihTrust = (not player:hasSpell(940) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
-
-                        return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA, 0, 0, needsSemihTrust)
+                        if
+                            not player:hasSpell(940) and
+                            not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO) and
+                            xi.settings.main.ENABLE_ROV == 1
+                        then
+                            return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA, 0, 0, 1)
+                        else
+                            return mission:progressEvent(238)
+                        end
                     elseif missionStatus == 5 then
                         return mission:event(240)
                     elseif missionStatus == 6 then

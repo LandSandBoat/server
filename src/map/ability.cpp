@@ -198,15 +198,14 @@ void CAbility::setAddType(uint16 addType)
     m_addType = addType;
 }
 
-const int8* CAbility::getName()
+const std::string& CAbility::getName()
 {
-    return (const int8*)m_name.c_str();
+    return m_name;
 }
 
-void CAbility::setName(int8* name)
+void CAbility::setName(const std::string& name)
 {
-    m_name.clear();
-    m_name.insert(0, (const char*)name);
+    m_name = name;
 }
 
 uint16 CAbility::getRecastId() const
@@ -259,6 +258,8 @@ uint16 CAbility::getAoEMsg() const
 {
     switch (m_message)
     {
+        case 150: // Ancient Circle
+            return m_message + 1;
         case 185:
             return 264;
         case 186:
@@ -382,13 +383,13 @@ namespace ability
                 CAbility* PAbility = new CAbility(sql->GetIntData(0));
 
                 PAbility->setMobSkillID(sql->GetIntData(1));
-                PAbility->setName(sql->GetData(2));
+                PAbility->setName(sql->GetStringData(2));
                 PAbility->setJob((JOBTYPE)sql->GetIntData(3));
                 PAbility->setLevel(sql->GetIntData(4));
                 PAbility->setValidTarget(sql->GetIntData(5));
                 PAbility->setRecastTime(sql->GetIntData(6));
                 PAbility->setMessage(sql->GetIntData(7));
-                // PAbility->setMessage(Sql_GetIntData(SqlHandle,8));
+                // Unused - message2
                 PAbility->setAnimationID(sql->GetIntData(9));
                 PAbility->setAnimationTime(std::chrono::milliseconds(sql->GetIntData(10)));
                 PAbility->setCastTime(std::chrono::milliseconds(sql->GetIntData(11)));

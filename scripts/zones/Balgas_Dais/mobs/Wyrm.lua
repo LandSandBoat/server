@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_IGNORE_STATIONARY, 1)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
     mob:setTP(3000) -- opens fight with a skill
     mob:setLocalVar("state", 0)
@@ -48,7 +48,7 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(1)
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(1146)
+            mob:setMobSkillAttack(1146)
         else
             mob:pathTo(spawn.x , spawn.y, spawn.z)
         end
@@ -75,16 +75,13 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(2)
             grounded(mob)
             mob:delStatusEffect(xi.effect.ALL_MISS)
-            mob:SetMobSkillAttack(0)
+            mob:setMobSkillAttack(0)
         end
     end
 
     -- Wakeup from sleep immediately if flying
-    if mob:getAnimationSub() == 1 and
-       (mob:hasStatusEffect(xi.effect.SLEEP_I) or
-       mob:hasStatusEffect(xi.effect.SLEEP_II) or
-       mob:hasStatusEffect(xi.effect.LULLABY)) then
-        mob:wakeUp()
+    if mob:getAnimationSub() == 1 and hasSleepEffects(mob) then
+        removeSleepEffects(mob)
     end
 end
 

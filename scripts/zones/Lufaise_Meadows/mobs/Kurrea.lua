@@ -34,8 +34,8 @@ entity.onMobFight = function(mob, target)
     local moving = mob:getLocalVar("moving")
 
     if os.time() > runAway and moving == 0 then
-        mob:SetMagicCastingEnabled(false)
-        mob:SetMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+        mob:setMobAbilityEnabled(false)
         mob:setLocalVar("moving", 1)
         mob:pathTo(spawn.x, spawn.y, spawn.z)
     elseif os.time() > runAway and moving == 1 and
@@ -49,8 +49,8 @@ entity.onMobFight = function(mob, target)
         mob:timer(4000, function(mobArg)
             mobArg:setLocalVar("moving", 0)
             mobArg:setSpeed(40)
-            mobArg:SetMagicCastingEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
             mobArg:setLocalVar("runAway", os.time() + math.random(20, 30))
             local chooseBuff = math.random(1, 9)
             for k,v in pairs(buffs) do

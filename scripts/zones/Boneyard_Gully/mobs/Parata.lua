@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MDEF, 50)
 end
 
-entity.onMobFight = function(mob,target)
+entity.onMobFight = function(mob, target)
     local hpp   = mob:getHPP()
     local bfID  = mob:getBattlefield():getArea()
     local adds  = mob:getLocalVar("adds")

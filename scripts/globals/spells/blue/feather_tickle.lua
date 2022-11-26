@@ -27,10 +27,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local power = 3000 * resist
 
-    if (target:getTP() == 0) then
+    if target:getTP() == 0 then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
         target:delTP(power)

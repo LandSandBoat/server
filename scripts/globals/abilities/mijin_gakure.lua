@@ -29,6 +29,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         player:delStatusEffect(xi.effect.WEAKNESS)
     end
 
+    dmg = utils.rampart(target, dmg)
     dmg = utils.stoneskin(target, dmg)
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
 

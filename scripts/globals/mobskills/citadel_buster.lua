@@ -49,9 +49,9 @@ executeCitadelBusterState = function(mob)
     else
         mob:setLocalVar("citadelBuster", 0)
         mob:setLocalVar("citadelBusterState", 0)
-        mob:SetMagicCastingEnabled(true)
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMobAbilityEnabled(true)
+        mob:setMagicCastingEnabled(true)
+        mob:setAutoAttackEnabled(true)
+        mob:setMobAbilityEnabled(true)
         mob:setMobMod(xi.mobMod.DRAW_IN, 0)
         return
     end
@@ -63,13 +63,13 @@ executeCitadelBusterState = function(mob)
     end)
 end
 
-mobskillObject.onMobSkillCheck = function(target,mob,skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local phase = mob:getLocalVar("battlePhase")
     if phase == 4 then
         mob:setLocalVar("citadelBuster", 1)
-        mob:SetMobAbilityEnabled(false)
-        mob:SetMagicCastingEnabled(false)
-        mob:SetAutoAttackEnabled(false)
+        mob:setMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+        mob:setAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 
         executeCitadelBusterState(mob)
@@ -91,7 +91,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     local damage = basedmg / (1 + (target:getMod(xi.mod.MDEF) / 100))
-    local dmg = xi.mobskills.mobFinalAdjustments(damage,mob,skill,target, xi.attackType.MAGICAL, xi.damageType.LIGHT,xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     mob:resetEnmity(target)

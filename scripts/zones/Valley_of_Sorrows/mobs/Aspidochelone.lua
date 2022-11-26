@@ -11,9 +11,9 @@ local entity = {}
 
 local intoShell = function(mob)
     mob:setAnimationSub(1)
-    mob:SetMobAbilityEnabled(false)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(true)
     mob:setMod(xi.mod.REGEN, 200)
     mob:setMod(xi.mod.UDMGRANGE, -9500)
     mob:setMod(xi.mod.UDMGPHYS, -9500)
@@ -24,9 +24,9 @@ end
 local outOfShell = function(mob)
     mob:setTP(3000) -- Immediately TPs coming out of shell
     mob:setAnimationSub(2)
-    mob:SetMobAbilityEnabled(true)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(false)
     mob:setMod(xi.mod.REGEN, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGPHYS, 0)
@@ -39,9 +39,9 @@ entity.onMobSpawn = function(mob)
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:SetMobAbilityEnabled(true)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(false) -- will not cast until it goes into shell
+    mob:setMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(false) -- will not cast until it goes into shell
     mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)

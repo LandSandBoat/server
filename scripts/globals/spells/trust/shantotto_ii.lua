@@ -37,7 +37,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ACC, 1000)
 
     -- Shantotto II attack type is suposed to be "typeless physical, like requiescat WS."
-    mob:SetMobSkillAttack(1163)
+    mob:setMobSkillAttack(1163)
 
     -- TODO: Her regular attacks have a big range (distance from mob, not AoE)
 
@@ -52,7 +52,7 @@ spellObject.onMobSpawn = function(mob)
 
     -- Spellcast (occasionally)
     mob:addListener("MAGIC_USE", "SHANTOTTO_II_MAGIC", function(mobArg, target, spell, action)
-        if math.random(100) <= 33 then
+        if math.random(1, 100) <= 33 then
             -- Ohohohohoho!
             xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_2)
         end

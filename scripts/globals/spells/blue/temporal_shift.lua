@@ -32,11 +32,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = xi.effect.STUN
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     local duration = 5 * resist
 
-    if (resist > 0.0625) then -- Do it!
-        if (target:addStatusEffect(typeEffect, 2, 0, duration)) then
+    if resist > 0.0625 then -- Do it!
+        if target:addStatusEffect(typeEffect, 2, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

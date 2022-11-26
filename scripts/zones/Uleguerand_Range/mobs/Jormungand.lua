@@ -1,67 +1,160 @@
 -----------------------------------
 -- Area: Uleguerand Range
---  HNM: Jormungand
+--  Mob: Jormungand
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-require("scripts/globals/status")
-require("scripts/globals/titles")
+-- TODO: Draw in should draw in to slightly in front of where Tiamat is facing
+
+entity.onMobInitialize = function(mob)
+    mob:setCarefulPathing(true)
+end
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
-    mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+
+    mob:setMod(xi.mod.UFASTCAST, 99)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.ATT, 398)
+    mob:setMod(xi.mod.DEF, 445)
+    mob:setMod(xi.mod.EVA, 115)
+    mob:setMod(xi.mod.DARK_MEVA, 70)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+
+    mob:addListener("TAKE_DAMAGE", "JORM_TAKE_DAMAGE", function(defender, amount, attacker, attackType, damageType)
+        local damageTaken = defender:getLocalVar("damageTaken") + amount
+        if damageTaken > 10000 then
+            if defender:getAnimationSub() == 1 and defender:canUseAbilities() then
+                defender:useMobAbility(1292)
+                defender:setLocalVar("damageTaken", 0)
+            elseif defender:getAnimationSub() == 2 and not defender:hasStatusEffect(xi.effect.BLOOD_WEAPON) and defender:canUseAbilities() then
+                defender:setAnimationSub(1)
+                defender:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+                defender:setMobSkillAttack(732)
+                defender:setLocalVar("damageTaken", 0)
+            end
+            defender:setLocalVar("changeHP", defender:getHP() / 1000)
+        end
+    end)
+
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("changeTime", os.time() + 30)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) == false and mob:actionQueueEmpty() == true) then
+    -- Gains a large magic attack boost when health is under 25%
+    if mob:getHPP() < 30 and mob:getMod(xi.mod.MATT) <= 69 then
+        mob:setMod(xi.mod.MATT, 70)
+    end
+
+    -- Handle flight and ground timer
+    if not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and mob:canUseAbilities() then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
 
-        if (twohourTime == 0) then
-            twohourTime = math.random(8, 14)
-            mob:setLocalVar("twohourTime", twohourTime)
-        end
-
-        if (mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime) then
+        if mob:getAnimationSub() == 2 and os.time() > twohourTime and mob:getHP() <= 85 then
             mob:useMobAbility(695)
-            mob:setLocalVar("twohourTime", (mob:getBattleTime()/15)+20)
-        elseif (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60) then
+            twohourTime = os.time() + 300
+            mob:setLocalVar("twohourTime", twohourTime)
+        elseif mob:getAnimationSub() == 0 and os.time() > changeTime then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(732)
-            -- and record the time this phase was started
-            mob:setLocalVar("changeTime", mob:getBattleTime())
-        -- subanimation 1 is flight, so check if he should land
-        elseif (mob:getAnimationSub() == 1 and
-                mob:getBattleTime() - changeTime > 30) then
-            mob:useMobAbility(1292)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
-        -- subanimation 2 is grounded mode, so check if he should take off
-        elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 60) then
+            mob:setBehaviour(0)
+            mob:setMobSkillAttack(732)
+            mob:setLocalVar("changeTime", os.time() + 30)
+        -- subanimation 1 is flight, so check if she should land
+        elseif mob:getAnimationSub() == 1 and os.time() > changeTime then
+            mob:useMobAbility(1282)
+            mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+            mob:setLocalVar("changeTime", os.time() + 60)
+        -- subanimation 2 is grounded mode, so check if she should take off
+        elseif mob:getAnimationSub() == 2 and os.time() > changeTime then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(732)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setBehaviour(0)
+            mob:setMobSkillAttack(732)
+            mob:setLocalVar("changeTime", os.time() + 30)
         end
+    end
+
+    -- Jorm draws in from set boundaries leaving her spawn area
+    local drawInWait = mob:getLocalVar("DrawInWait")
+
+    if (target:getXPos() < -105 and target:getXPos() > -215 and target:getZPos() > 195) and os.time() > drawInWait then  -- South Draw In
+        local rot = target:getRotPos()
+        target:setPos(-201.86, -175.66, 189.32, rot)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    elseif (target:getXPos() > -250 and target:getXPos() < -212 and target:getZPos() < 55) and os.time() > drawInWait then  -- South Draw In
+        local rot = target:getRotPos()
+        target:setPos(-235.62, -175.17, 62.67, rot)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    elseif (target:getXPos() > -160 and target:getZPos() > 105 and target:getZPos() < 130) and os.time() > drawInWait then  -- East Draw In
+        local rot = target:getRotPos()
+        target:setPos(-166.02, -175.89, 119.38, rot)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    end
+
+    -- Jorm uses Horrid Roar 3x or Spike Flails if target is behind her
+    local roarCount = mob:getLocalVar("roarCount")
+    if roarCount > 0 and mob:canUseAbilities() then
+        if not target:isBehind(mob, 96) then
+            mob:useMobAbility(1286)
+        else
+            mob:useMobAbility(1290)
+        end
+        mob:setLocalVar("roarCount", roarCount - 1)
+    end
+end
+
+entity.onMobWeaponSkillPrepare = function(mob, target)
+    if mob:getAnimationSub() == 1 then
+        mob:setLocalVar("skill_tp", mob:getTP())
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if (skill:getID() == 1296 and mob:getHPP() <= 30) then
-        local roarCounter = mob:getLocalVar("roarCounter")
-
-        roarCounter = roarCounter +1
-        mob:setLocalVar("roarCounter", roarCounter)
-
-        if (roarCounter > 2) then
-            mob:setLocalVar("roarCounter", 0)
-        else
-            mob:useMobAbility(1296)
-        end
+    -- Don't lose TP from autos during flight
+    if skill:getID() == 1288 then
+        mob:addTP(mob:getLocalVar("skill_tp") + 65) -- Needs to gain TP from flight auto attacks
+        mob:setLocalVar("skill_tp", 0)
+    elseif skill:getID() == 1292 then
+        mob:addTP(mob:getLocalVar("skill_tp"))
+        mob:setLocalVar("skill_tp", 0)
     end
+
+    -- Below 25% Jorm can Horrid Roar 3x
+    local roarCount = mob:getLocalVar("roarCount")
+    if
+        mob:getHPP() < 30 and
+        skill:getID() == 1296 and
+        roarCount == 0
+    then
+        mob:setLocalVar("roarCount", 2)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    -- Reset Jorm back to the ground on wipe
+    if mob:getAnimationSub() == 1 then
+        mob:setAnimationSub(0)
+        mob:delStatusEffect(xi.effect.ALL_MISS)
+        mob:setMobSkillAttack(0)
+        mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    end
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, { chance = 20, power = 100 })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -69,7 +162,8 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
+    UpdateNMSpawnPoint(mob:getID())
+    mob:setRespawnTime(math.random(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end
 
 return entity

@@ -13,7 +13,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Jugner_Forest/IDs')
+local ID = require('scripts/zones/Jugner_Forest/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)

@@ -9,35 +9,28 @@ require("scripts/globals/magic")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local params = {}
+    params.ftp000 = 5.375 params.ftp150 = 8 params.ftp300 = 10.7
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.3 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.element = xi.magic.ele.WIND
+    params.includemab = true
+    params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
+    params.ignoreStateLock = true
 
-    local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
-    local tp     = pet:getTP() / 10
-    local master = pet:getMaster()
-    local merits = 0
-    local dmgmod = (((45/256) * (tp/100)) + (1370/256))
-
-    if master ~= nil and master:isPC() then
-        merits = master:getMerit(xi.merit.WIND_BLADE)
+    if summoner ~= nil and summoner:isPC() then
+        params.tpBonus = summoner:getMerit(xi.merit.WIND_BLAST) -- This was changed to 400 tp/point in 2007. Original value was 320 tp/point
     end
 
-    tp = tp + (merits - 40)
-    if tp > 300 then
-        tp = 300
-    end
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
-    local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.WIND)
-    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, 1)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)
-    target:updateEnmityFromDamage(pet, damage)
-
-    return damage
+    return totaldamage
 end
 
 return abilityObject

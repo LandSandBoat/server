@@ -14,14 +14,14 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- not used in Uleguerand_Range
-    if (mob:getZoneID() == 5) then
+    if mob:getZoneID() == 5 then
         return 1
     end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local typeEffect = xi.effect.STUN
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 7)

@@ -88,20 +88,21 @@ namespace puppetutils
                         tempEquip.Attachments[i] = 0;
                     }
 
-                    int16 elemCapacityBonus = 0 + PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
-
                     for (int i = 0; i < 6; i++)
                     {
-                        PChar->PAutomaton->setElementMax(i, 5 + elemCapacityBonus);
+                        PChar->PAutomaton->setElementMax(i, 5);
                     }
-                    PChar->PAutomaton->setElementMax(6, 3 + elemCapacityBonus);
-                    PChar->PAutomaton->setElementMax(7, 3 + elemCapacityBonus);
+                    PChar->PAutomaton->setElementMax(6, 3);
+                    PChar->PAutomaton->setElementMax(7, 3);
 
                     for (int i = 0; i < 8; i++)
                     {
                         PChar->PAutomaton->m_ElementEquip[i] = 0;
                     }
                 }
+
+                // Add the elemental bonus before we set the head and frame
+                PChar->PAutomaton->setElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
 
                 setHead(PChar, tempEquip.Head);
                 setFrame(PChar, tempEquip.Frame);

@@ -125,6 +125,7 @@ struct BattlefieldGroup
     sol::function       deathCallback;
     sol::function       randomDeathCallback;
     sol::function       allDeathCallback;
+    sol::function       setupCallback;
     uint8               deathCount  = 0;
     uint32              randomMobId = 0;
 };
@@ -161,6 +162,7 @@ public:
     bool CheckInProgress();
     bool IsOccupied() const;
     bool isInteraction() const;
+    bool isEntered(CCharEntity* PChar) const;
 
     void ForEachPlayer(const std::function<void(CCharEntity*)>& func);
     void ForEachEnemy(const std::function<void(CMobEntity*)>& func);
@@ -202,7 +204,9 @@ public:
     void addGroup(BattlefieldGroup group);
     void handleDeath(CBaseEntity* PEntity);
 
-    uint8                         m_isMission;
+    uint8 m_isMission;
+    bool  m_showTimer = true;
+
     std::set<uint32>              m_RegisteredPlayers;
     std::set<uint32>              m_EnteredPlayers;
     std::vector<CNpcEntity*>      m_NpcList;

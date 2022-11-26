@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Ritoto
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

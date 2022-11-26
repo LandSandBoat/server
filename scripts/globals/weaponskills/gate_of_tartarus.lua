@@ -27,23 +27,25 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.6
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.chr_wsc = 0.8
-    end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.WATER
+    effectParams.effect = xi.effect.ATTACK_DOWN
+    effectParams.skillType = xi.skill.STAFF
+    effectParams.duration = tp / 1000 * 3
+    effectParams.power = 20
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
-            local duration = tp / 1000 * 3 * applyResistanceAddEffectWS(player, target, xi.magic.ele.WATER, 0)
-            target:addStatusEffect(xi.effect.ATTACK_DOWN, 20, 0, duration)
-        end
+        xi.magic.applyAbilityResistance(player, target, effectParams)
     end
 
     return tpHits, extraHits, criticalHit, damage

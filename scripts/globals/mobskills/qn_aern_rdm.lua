@@ -10,7 +10,7 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() == 3269 and mob:getHPP() <= 70) then
+    if mob:getPool() == 3269 and mob:getHPP() <= 70 then
         return 0
     else
         return 1

@@ -17,7 +17,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getName() == "Cernunnos" or mob:getPool() == 671 or mob:getPool() == 1346 then
+    if
+        mob:getName() == "Cernunnos" or
+        mob:getPool() == 671 or
+        mob:getPool() == 1346
+    then
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 3, 120)
 
         local count = target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
@@ -30,7 +34,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         return count
     else
         local dmgmod = 1
-        local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*math.random(4, 5), xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+        local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, 1, 1.25, 1.5)
         local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
         target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
         return dmg

@@ -16,8 +16,8 @@ local teleport = function(mob, hideDuration) --special move to new target option
     mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
     mob:hideName(true)
     mob:setUntargetable(true)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
     mob:setStatus(xi.status.INVISIBLE)
 
     hideDuration = hideDuration or 500
@@ -29,8 +29,8 @@ local teleport = function(mob, hideDuration) --special move to new target option
     mob:timer(hideDuration, function(mobArg)
         mobArg:hideName(false)
         mobArg:setUntargetable(false)
-        mobArg:SetAutoAttackEnabled(true)
-        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setAutoAttackEnabled(true)
+        mobArg:setMobAbilityEnabled(true)
 
         if mobArg:isDead() then
             return

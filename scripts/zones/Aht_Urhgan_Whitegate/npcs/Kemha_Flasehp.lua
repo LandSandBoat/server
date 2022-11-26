@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 
     if guildMember == 1 then
         if npcUtil.tradeHas(trade, 2184) then
-            if player:hasStatusEffect(xi.effect.FISHING_IMAGERY) == false then
+            if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
                 player:confirmTrade()
                 player:startEvent(643, 8, 0, 0, 0, 188, 0, 6, 0)
             else
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     -- local skillLevel = player:getSkillLevel(xi.skill.FISHING)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(xi.effect.FISHING_IMAGERY) == false then
+        if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
             player:startEvent(642, 8, 0, 0, 511, 1, 0, 0, 2184)
         else
             player:startEvent(642, 8, 0, 0, 511, 1, 19267, 0, 2184)

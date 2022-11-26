@@ -17,8 +17,8 @@ local content = BattlefieldMission:new({
     levelCap      = 50,
     timeLimit     = utils.minutes(30),
     index         = 0,
-    entryNpc      = "Throne_Room",
-    exitNpc       = "Throne_Room_Exit",
+    entryNpc      = "_4l1",
+    exitNpcs      = { "_4l2", "_4l3", "_4l4" },
 
     mission               = xi.mission.id.nation.SHADOW_LORD,
     requiredMissionStatus = 3,
@@ -41,9 +41,9 @@ function content:onEventFinishBattlefield(player, csid, option)
     -- magic, auto attack, and abilities (all he does is case Implode by script)
     local mob = SpawnMob(phaseTwoId)
     mob:updateEnmity(player)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 end
 
 content.groups =

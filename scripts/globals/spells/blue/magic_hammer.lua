@@ -34,7 +34,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local dmg = 0
     local multi = 1.5
 
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
     end
 
@@ -53,15 +53,16 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.30
     params.chr_wsc = 0.0
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
     else
         dmg = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
         dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
-        if (target:getMP() > 0) then
-            if (target:getMP() < dmg) then
+        if target:getMP() > 0 then
+            if target:getMP() < dmg then
                 dmg = target:getMP()
             end
+
             caster:addMP(dmg)
         else
             return 0

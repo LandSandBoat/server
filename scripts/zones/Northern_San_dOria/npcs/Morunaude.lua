@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Morunaude
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

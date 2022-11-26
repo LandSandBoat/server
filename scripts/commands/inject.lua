@@ -16,11 +16,11 @@ end
 
 function onTrigger(player, packet)
     -- validate packet
-    if (packet == nil) then
+    if packet == nil then
         error(player, "You must enter a packet file name.")
         return
     end
 
     -- inject packet
-    player:injectPacket( packet )
+    player:injectPacket(packet)
 end

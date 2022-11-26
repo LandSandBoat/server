@@ -13,7 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if os.time() - player:getCharVar("SquiresTestII") <= 60 and not player:hasKeyItem(xi.ki.STALACTITE_DEW) then
+    if
+        os.time() - player:getCharVar("SquiresTestII") <= 60 and
+        not player:hasKeyItem(xi.ki.STALACTITE_DEW)
+    then
         player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_II)
         player:addKeyItem(xi.ki.STALACTITE_DEW)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STALACTITE_DEW)

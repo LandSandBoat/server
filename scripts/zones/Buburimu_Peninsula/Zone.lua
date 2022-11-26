@@ -32,8 +32,12 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos( -276.529, 16.403, -324.519, 14)
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        player:setPos(-276.529, 16.403, -324.519, 14)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -62,33 +66,35 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE118_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onGameHour = function(zone)
-    local hour = VanadielHour()
-    local nmBackoo = GetMobByID(ID.mob.BACKOO)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        local hour = VanadielHour()
+        local nmBackoo = GetMobByID(ID.mob.BACKOO)
 
-    if hour == 6 then -- backoo time-of-day pop condition open
-        DisallowRespawn(ID.mob.BACKOO, false)
-        if nmBackoo:getRespawnTime() == 0 then
-            nmBackoo:setRespawnTime(1)
-        end
-    elseif hour == 16 then -- backoo despawns
-        DisallowRespawn(ID.mob.BACKOO, true)
-        if nmBackoo:isSpawned() then
-            nmBackoo:spawn(1)
+        if hour == 6 then -- backoo time-of-day pop condition open
+            DisallowRespawn(ID.mob.BACKOO, false)
+            if nmBackoo:getRespawnTime() == 0 then
+                nmBackoo:setRespawnTime(1)
+            end
+        elseif hour == 16 then -- backoo despawns
+            DisallowRespawn(ID.mob.BACKOO, true)
+            if nmBackoo:isSpawned() then
+                nmBackoo:spawn(1)
+            end
         end
     end
 end
 
-zoneObject.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zoneObject.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

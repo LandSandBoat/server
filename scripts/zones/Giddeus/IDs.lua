@@ -49,6 +49,7 @@ zones[xi.zone.GIDDEUS] =
         {
             [17371577] = 17371578, -- -23.973 0.459 -399.155
         },
+        QUU_XIJO_THE_ILLUSORY     = 17371399,
         VAA_HUJA_THE_ERUDITE      = 17371579,
     },
     npc =

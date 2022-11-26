@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    return xi.job_utils.paladin.useShieldBash(playuer, target, ability)
+    return xi.job_utils.paladin.useShieldBash(player, target, ability)
 end
 
 return abilityObject

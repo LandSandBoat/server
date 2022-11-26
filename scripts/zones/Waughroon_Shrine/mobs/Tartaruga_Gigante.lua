@@ -25,9 +25,9 @@ local intoShell = function(mob)
         end
     end
     mob:setAnimationSub(1)
-    mob:SetMobAbilityEnabled(false)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(true)
     mob:setMod(xi.mod.REGEN, 400)
     mob:setMod(xi.mod.UDMGRANGE, -9500)
     mob:setMod(xi.mod.UDMGPHYS, -9500)
@@ -38,9 +38,9 @@ end
 local outOfShell = function(mob)
     mob:setTP(3000)
     mob:setAnimationSub(2)
-    mob:SetMobAbilityEnabled(true)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(false)
     mob:setMod(xi.mod.REGEN, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGPHYS, 0)
@@ -51,9 +51,9 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
-    mob:SetMobAbilityEnabled(true)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(false) -- will not cast until it goes into shell
+    mob:setMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(false) -- will not cast until it goes into shell
     mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 13)

@@ -22,12 +22,14 @@ entity.onTrigger = function(player, npc)
         632,   109,    -- Kukuru Bean
         5187,  156,    -- Elshimo Coconut
         5604,  154,    -- Elshimo Pachira Fruit
-        2869, 9100,    -- Kazham Waystone
+        -- 2869, 9100,    -- Kazham Waystone (SOA)
         731,  2877,    -- Aquilaria Log
     }
 
     player:showText(npc, ID.text.GHEMISENTERILO_SHOP_DIALOG)
-    xi.shop.general(player, stock)
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

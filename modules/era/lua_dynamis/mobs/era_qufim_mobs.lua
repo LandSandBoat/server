@@ -65,7 +65,7 @@ end
 
 xi.dynamis.onFightAntaeus = function(mob, target)
     local zone = mob:getZone()
-    for _, buffTable in pairs(xi.dynamis.buffsAntaeus) do
+    for var, buffTable in pairs(xi.dynamis.buffsAntaeus) do
         if zone:getLocalVar(buffTable[4]) == 1 then
             if buffTable[1][1] ~= nil then
                 mob:setMod(buffTable[1][1], buffTable[3])

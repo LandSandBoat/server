@@ -14,9 +14,16 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-0.011, -1.848, -176.133, 192)
-    elseif player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS and prevZone == xi.zone.ROMAEVE then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS and
+        prevZone == xi.zone.ROMAEVE
+    then
         cs = 5
     end
 
@@ -27,7 +34,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

@@ -10,7 +10,11 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("rockracketeer_sold") == 5 and npcUtil.tradeHas(trade, 598) then -- Sharp Stone
+    if
+        player:getCharVar("rockracketeer_sold") == 5 and
+        npcUtil.tradeHas(trade, 598)
+    then
+        -- Sharp Stone
         player:startEvent(102, 2100)
     end
 end
@@ -37,7 +41,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("rockracketeer_sold", 4)
     elseif csid == 101 then
         player:setCharVar("rockracketeer_sold", 5)
-    elseif csid == 102 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER, { gil=2100, var="rockracketeer_sold" }) then
+    elseif
+        csid == 102 and
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER, { gil = 2100, var = "rockracketeer_sold" })
+    then
         player:confirmTrade()
     end
 end

@@ -70,6 +70,7 @@ global_objects=(
     Event
     Battlefield
     BattlefieldMission
+    BattlefieldQuest
     Limbus
 
     removeSleepEffects
@@ -79,25 +80,6 @@ global_objects=(
     QUEST_COMPLETED
 
     onBattlefieldHandlerInitialise
-
-    doAutoPhysicalWeaponskill
-    doAutoRangedWeaponskill
-    doPhysicalWeaponskill
-    doRangedWeaponskill
-    doMagicWeaponskill
-    doesElementMatchWeaponskill
-    applyResistanceAddEffect
-    takeWeaponskillDamage
-
-    fTP
-    fSTR
-    fSTR2
-    calculateRawWSDmg
-    calculatedIgnoredDef
-    cMeleeRatio
-    generatePdif
-    getMeleeDmg
-    handleWSGorgetBelt
 
     getRecommendedAssaultLevel
 
@@ -122,53 +104,14 @@ global_objects=(
 
     salvageUtil
 
-    addBonuses
-    addBonusesAbility
-    applyBarspell
-    applyBarstatus
-    applyResistance
-    applyResistanceAbility
-    applyResistanceEffect
-    adjustForTarget
-    calculateDuration
-    calculateDurationForLvl
-    calculateMagicDamage
-    calculatePotency
-    canOverwrite
-    dayWeatherBonus
-    doBoostGain
-    doDivineBanishNuke
-    doDivineNuke
-    doElementalNuke
-    doEnspell
-    doNinjutsuNuke
-    finalMagicAdjustments
-    finalMagicNonSpellAdjustments
-    getBaseCure
-    getCurePower
-    getCurePowerOld
-    getCureFinal
-    getBaseCureOld
-    getEffectResistance
-    getElementalDamageReduction
-    getElementalDebuffDOT
     getFlourishAnimation
-    getHelixDuration
-    getHitRate
-    getMagicHitRate
-    getMagicResist
     getStepAnimation
-    getElementalDebuffStatDownFromDOT
-    handleAfflatusMisery
-    handleNinjutsuDebuff
-    handleThrenody
     hasSleepEffects
-    isValidHealTarget
     skillchainCount
     takeAbilityDamage
 
-    FormMagicBurst
-    MobFormMagicBurst
+    doAutoRangedWeaponskill
+    doAutoPhysicalWeaponskill
 
     AbilityFinalAdjustments
 
@@ -241,6 +184,9 @@ python3 << EOF
 import glob
 import re
 
+def contains_word(word):
+    return re.compile(r'\b({0})\b'.format(word)).search
+
 def check_for_underscores(str):
     if "local " in str and " =" in str:
         str = str.split(" =", 1)[0]
@@ -259,8 +205,18 @@ def check_tables_in_file(name):
     with open(name, 'r+') as f:
         counter = 0
         lines = f.readlines()
+        in_block_comment = False
         for line in lines:
             counter = counter + 1
+
+            if "--[[" in line:
+                in_block_comment = True
+
+            if "]]--" in line:
+                in_block_comment = False
+
+            if in_block_comment:
+                continue
 
             # [ ]{0,} : Any number of spaces
             # =       : = character
@@ -318,6 +274,48 @@ def check_tables_in_file(name):
                 print(f"{lines[counter - 1].strip()}                              <-- HERE")
                 print("")
                 errcount += 1
+
+            # ,[^ \n] : Any comma that does not have space or newline following
+            for match in re.finditer(",[^ \n]", line):
+                print(f"Multiple parameters used without an appropriate following space or newline: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
+            for match in re.finditer(".*\;$", line):
+                print(f"Semicolon detected at end of line: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # [^ =~\<\>][\=\+\*\~\/]|[\=\+\*\/][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
+            stripped_line = re.sub("--.*?(\r\n?|\n)", "", line)        # Strip to end of line if it begins with '--'
+            stripped_line = re.sub("\".*?\"|'.*?'", "", stripped_line) # Ignore data in quotes
+            for match in re.finditer("[^ =~\<\>][\=\+\*\~\/]|[\=\+\*\/][^ =\n]", stripped_line):
+                print(f"Operator or comparator without padding detected at end of line: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # Multiline conditionals should not have data in if, elseif, or then
+            stripped_line = re.sub("--.*?(\r\n?|\n)", "", line)        # Strip to end of line if it begins with '--'
+            stripped_line = re.sub("\".*?\"|'.*?'", "", stripped_line) # Ignore data in quotes
+            if contains_word('if')(stripped_line) or contains_word('elseif')(stripped_line):
+                condition_start = stripped_line.replace('elseif','').replace('if','').strip()
+                if not 'then' in condition_start and condition_start != '':
+                    print(f"Invalid multiline conditional format: {name}:{counter}")
+                    print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                    print("")
+                    errcount += 1
+
+            if contains_word('then')(stripped_line):
+                condition_end = stripped_line.replace('then','').strip()
+                if not 'if' in condition_end and condition_end != '':
+                    print(f"Invalid multiline conditional format: {name}:{counter}")
+                    print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                    print("")
+                    errcount += 1
 
         # If you want to modify the files during the checks, write your changed lines to the appropriate
         # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.

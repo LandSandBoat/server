@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:sendGuild(60425, 8, 23, 5)) then
+    if player:sendGuild(60425, 8, 23, 5) then
         player:showText(npc, ID.text.WAHRAGA_SHOP_DIALOG)
     end
 end

@@ -28,7 +28,11 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:ChangeMusic(1, 239)
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
             cs = 10018
             player:setPos(-87.000, 12.000, 116.000, 128)
@@ -46,7 +50,6 @@ zoneObject.onZoneIn = function(player, prevZone)
             player:setPos(-192.5 , -5, position, 0)
         end
     end
-
     return cs
 end
 
@@ -55,14 +58,33 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if transport == 223 then
+    if transport == 223 then -- San d'Oria Airship
         player:startEvent(10010)
-    elseif transport == 224 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:startEvent(10002)
+        else
+            player:setPos(-76.92, 7.99, 35.62, 64)
+        end
+    elseif transport == 224 then -- Bastok Airship
         player:startEvent(10012)
-    elseif transport == 225 then
-        player:startEvent(10011)
-    elseif transport == 226 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:startEvent(10002)
+        else
+            player:setPos(-61.1, 7.99, -36.26, 192)
+        end
+    elseif transport == 225 then -- Windurst Airship
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:startEvent(10011)
+        else
+            player:setPos(3.06, 7.99, -36.21, 192)
+        end
+    elseif transport == 226 then -- Kazham Airship
         player:startEvent(10013)
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM) then
+            player:startEvent(10002)
+        else
+            player:setPos(-12.92, 7.99, 36.17, 64)
+        end
     end
 end
 

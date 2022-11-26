@@ -10,10 +10,14 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 30)
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
 end
 
 entity.onMobRoam = function(mob)
-    local promathia = ID.mob.PROMATHIA_OFFSET + (mob:getBattlefield():getArea() - 1) * 2
+    local promathia = ID.mob.PROMATHIA_OFFSET + mob:getBattlefield():getArea()
+    if not GetMobByID(promathia):isAlive() then
+        promathia = promathia + 1
+    end
     local wait = mob:getLocalVar("wait")
     local ready = mob:getLocalVar("ready")
 
@@ -26,6 +30,7 @@ entity.onMobRoam = function(mob)
             mob:messageText(mob, ID.text.PRISHE_TEXT + 1)
             promathia = promathia + 1
         end
+
         mob:setLocalVar("ready", promathia)
         mob:setLocalVar("wait", 0)
     elseif ready > 0 then
@@ -36,12 +41,15 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:useMobAbility(1487)
     mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
+    mob:timer(4000, function(prishe)
+        prishe:useMobAbility(1487)
+    end)
 end
 
 entity.onMobFight = function(mob, target)
     if mob:getLocalVar("Raise") == 1 then
+        mob:setAnimationSub(1)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 3)
         mob:setLocalVar("Raise", 0)
         mob:stun(3000)
@@ -54,7 +62,6 @@ entity.onMobFight = function(mob, target)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 7)
         mob:setLocalVar("Bene", 1)
     end
-    -- mob:setStatus(0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

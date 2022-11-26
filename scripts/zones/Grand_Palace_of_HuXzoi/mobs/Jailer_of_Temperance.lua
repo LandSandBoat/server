@@ -10,17 +10,12 @@ require("scripts/globals/magic")
 local entity = {}
 
 local chargeOptic = function(mob)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
-    if mob:getLocalVar("opticInduration") == 1 then
-        mob:setLocalVar("opticInduration", 0)
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMobAbilityEnabled(true)
-        mob:timer(3000, function(mobArg)
-            mobArg:useMobAbility(1465) -- JoT will use another Optic Induration shortly after using the first one.
-        end)
-    end
+    mob:timer(3000, function(mobArg)
+        mobArg:useMobAbility(1465) -- JoT will use another Optic Induration shortly after using the first one.
+    end)
 end
 
 entity.onMobSpawn = function(mob)
@@ -48,8 +43,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
     mob:setMod(xi.mod.DMGMAGIC, -10000)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -63,7 +58,10 @@ entity.onMobFight = function(mob)
     local isBusy = false
 
     -- If we're in a pot form, but going to change to either Rings/Poles
-    if ((mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and mob:getBattleTime() - changeTime > randomTime) then
+    if
+        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 1) and
+        mob:getBattleTime() - changeTime > randomTime
+    then
         local aniChange = math.random(2, 3)
         mob:setAnimationSub(aniChange)
 
@@ -71,7 +69,8 @@ entity.onMobFight = function(mob)
         if
             act == xi.act.MOBABILITY_START or
             act == xi.act.MOBABILITY_USING or
-            act == xi.act.MOBABILITY_FINISH
+            act == xi.act.MOBABILITY_FINISH or
+            mob:getLocalVar("opticCounter") == 1
         then
             isBusy = true -- we don't want to change forms while charging optic induration
         end
@@ -153,13 +152,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skillID == 1465 then -- On Optic Induration Do this
         local opticCounter = mob:getLocalVar("opticCounter")
 
-        opticCounter = opticCounter +1
-        mob:setLocalVar("opticCounter", opticCounter)
-
-        if opticCounter > 0 then
-            mob:setLocalVar("opticCounter", 0)
-            mob:setLocalVar("opticInduration", 1)
+        if opticCounter == 0 then
+            mob:setLocalVar("opticCounter", 1)
             chargeOptic(mob)
+        else
+            mob:setLocalVar("opticCounter", 0)
+            mob:setAutoAttackEnabled(true)
+            mob:setMobAbilityEnabled(true)
         end
     end
 end

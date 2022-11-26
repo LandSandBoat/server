@@ -34,6 +34,7 @@ zones[xi.zone.KAZHAM] =
         NUHCELODENKI_SHOP_DIALOG      = 10057, -- When you die, you can't take anything with you, but what fun is life if you don't have anything to live it up with?
         KHIFORYUHKOWA_SHOP_DIALOG     = 10058, -- Sometimes a strrrange Hume comes from the south to buy stuff. I wonder what he's doing down there...
         TAHNPOSBEI_SHOP_DIALOG        = 10059, -- You don't want to get whipped by those Tonberries, do you? Well, have I got the equipment forrr you!
+        OPOOPO_DIALOG                 = 10387, -- Opo-opo!
         IFRIT_UNLOCKED                = 10528, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
         NOMAD_MOOGLE_DIALOG           = 10596, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
         MAMERIE_SHOP_DIALOG           = 10620, -- Is there something you require?

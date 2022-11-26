@@ -16,7 +16,7 @@ local params =
     prerequisite       = nil,
     message            = lowerJeunoID.text.INVENTORY_INCREASED,
     startInventorySize = 30,
-    fame               = 1,
+    fame               = 2,
     tradeStew          = xi.items.BOWL_OF_GOBLIN_STEW_880,
 
     tradeItems =

@@ -61,6 +61,33 @@ xi.job =
 }
 xi.MAX_JOB_TYPE = 23
 
+xi.jobNames =
+{
+    [ 0] = { "NONE", "None" },
+    [ 1] = { "WAR", "Warrior" },
+    [ 2] = { "MNK", "Monk" },
+    [ 3] = { "WHM", "White Mage" },
+    [ 4] = { "BLM", "Black Mage" },
+    [ 5] = { "RDM", "Red Mage" },
+    [ 6] = { "THF", "Thief" },
+    [ 7] = { "PLD", "Paladin" },
+    [ 8] = { "DRK", "Dark Knight" },
+    [ 9] = { "BST", "Beastmaster" },
+    [10] = { "BRD", "Bard" },
+    [11] = { "RNG", "Ranger" },
+    [12] = { "SAM", "Samurai" },
+    [13] = { "NIN", "Ninja" },
+    [14] = { "DRG", "Dragoon" },
+    [15] = { "SMN", "Summoner" },
+    [16] = { "BLU", "Blue Mage" },
+    [17] = { "COR", "Corsair" },
+    [18] = { "PUP", "Puppermaster" },
+    [19] = { "DNC", "Dancer" },
+    [20] = { "SCH", "Scholar" },
+    [21] = { "GEO", "Geomancer" },
+    [22] = { "RUN", "Rune Fencer" },
+}
+
 -----------------------------------
 -- Race IDs
 -----------------------------------
@@ -113,8 +140,9 @@ xi.subEffect =
     DISPEL              = 8,   -- Verified with video of Lockheart Greatsword proc.
     SLEEP               = 9,   -- 110010       19
     POISON              = 10,  -- 1-01010      21
-    PARALYSIS           = 11,
-    AMNESIA             = 11,  -- Verified uses same animation as para
+    ADDLE               = 11,  -- Verified shared group 1
+    AMNESIA             = 11,  -- Verified shared group 1
+    PARALYSIS           = 11,  -- Verified shared group 1
     BLIND               = 12,  -- 1-00110      25
     SILENCE             = 13,
     PETRIFY             = 14,
@@ -122,13 +150,14 @@ xi.subEffect =
     STUN                = 16,
     CURSE               = 17,
     DEFENSE_DOWN        = 18,  -- 1-01001      37
-    EVASION_DOWN        = 18,  -- Same subeffect as DEFENSE_DOWN
-    ATTACK_DOWN         = 18,  -- Same subeffect as DEFENSE_DOWN
+    EVASION_DOWN        = 18,  -- Verified shared group 2
+    ATTACK_DOWN         = 18,  -- Verified shared group 2
+    SLOW                = 18,  -- Verified shared group 2
     DEATH               = 19,
     SHIELD              = 20,
     HP_DRAIN            = 21,  -- 1-10101      43
-    MP_DRAIN            = 22,  -- This is correct animation
-    TP_DRAIN            = 22,  -- Verified this should look exactly like Aspir Samba.
+    MP_DRAIN            = 22,  -- Verified shared group 3
+    TP_DRAIN            = 22,  -- Verified shared group 3
     HASTE               = 23,
     -- There are no additional attack effect animations beyond 23. Some effects share subeffect/animations.
 
@@ -841,6 +870,14 @@ xi.effect =
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    FIRE_EEM_MOD             = 900,
+    ICE_EEM_MOD              = 901,
+    WIND_EEM_MOD             = 902,
+    EARTH_EEM_MOD            = 903,
+    THUNDER_EEM_MOD          = 904,
+    WATER_EEM_MOD            = 905,
+    LIGHT_EEM_MOD            = 906,
+    DARK_EEM_MOD             = 907,
     -- PLACEHOLDER           = 806, -- Description
     -- 806-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
@@ -1255,6 +1292,13 @@ xi.mod =
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
 
+    -- Dark Knight
+    ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
 
@@ -1330,9 +1374,15 @@ xi.mod =
     STEALTH                         = 358,
     RAPID_SHOT                      = 359,
     CHARM_TIME                      = 360,
-    JUMP_TP_BONUS                   = 361,
-    JUMP_ATT_BONUS                  = 362,
-    HIGH_JUMP_ENMITY_REDUCTION      = 363,
+    JUMP_TP_BONUS                   = 361, -- bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS            = 285, -- bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS                  = 362, -- ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS      = 286, -- ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS                  = 936, -- accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK              = 888, -- DA% bonus for all jumps
+    HIGH_JUMP_ENMITY_REDUCTION      = 363, -- for gear that reduces more enmity from high jump
+    ENHANCES_STRAFE                 = 282, -- Strafe merit augment, +50 TP gained per merit level on breath use.
+    ENHANCES_SPIRIT_LINK            = 281, -- Adds erase/-na to Spirit Link
     REWARD_HP_BONUS                 = 364,
     SNAP_SHOT                       = 365,
 
@@ -1382,6 +1432,7 @@ xi.mod =
     SUBLIMATION_BONUS               = 401,
     GRIMOIRE_SPELLCASTING           = 489, -- "Grimoire: Reduces spellcasting time" bonus
     WYVERN_BREATH                   = 402,
+    UNCAPPED_WYVERN_BREATH          = 284, -- Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
     REGEN_DOWN                      = 404, -- poison
     REFRESH_DOWN                    = 405, -- plague, reduce mp
     REGAIN_DOWN                     = 406, -- plague, reduce tp
@@ -1575,6 +1626,7 @@ xi.mod =
     RAPTURE_AMOUNT                  = 568, -- Bonus amount added to Rapture effect
     EBULLIENCE_AMOUNT               = 569, -- Bonus amount added to Ebullience effect
     WYVERN_EFFECTIVE_BREATH         = 829, -- Increases the threshold for triggering healing breath
+    ENHANCE_DEEP_BREATHING          = 283, -- Add 5/256 to deep breathing bonus per merit level when calculating healing breath
     AQUAVEIL_COUNT                  = 832, -- Modifies the amount of hits that Aquaveil absorbs before being removed
     SONG_RECAST_DELAY               = 833, -- Reduces song recast time in seconds.
     ENH_MAGIC_DURATION              = 890, -- Enhancing Magic Duration increase %
@@ -1617,7 +1669,7 @@ xi.mod =
     AUGMENTS_AURA_STEAL             = 889, -- 20% chance of 2 effects to be dispelled or stolen per merit level
     AUGMENTS_CONSPIRATOR            = 912, -- Applies Conspirator benefits to player at the top of the hate list
     JUG_LEVEL_RANGE                 = 564, -- Decreases the level range of spawned jug pets. Maxes out at 2.
-    FORCE_JUMP_CRIT                 = 828, -- Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT                 = 828, -- Force critical hit for all jumps
     QUICK_DRAW_DMG_PERCENT          = 834, -- Percentage increase to QD damage
 
     -- Crafting food effects
@@ -1739,8 +1791,8 @@ xi.mod =
     TRUE_SHOT_EFFECT        = 1053, -- TODO: True Shot Ranged Damage increase (percent)
     DEAD_AIM_EFFECT         = 1054, -- TODO: Dead Aim Critical Damage increase (percent)
     THIRD_EYE_BONUS         = 1055, -- TODO: Bonus Third Eye Evasions (count)
-    WYVERN_ATTRIBUTE_DA     = 1056, -- TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
-    DRAGOON_BREATH_RECAST   = 1057, -- TODO: Restoring/Smithing Breath Recast Reduction (seconds)
+    WYVERN_ATTRIBUTE_DA     = 1056, -- Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    DRAGOON_BREATH_RECAST   = 1057, -- Restoring/Smithing Breath Recast Reduction (seconds)
     BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
     QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
@@ -1776,6 +1828,9 @@ xi.mod =
     LIGHT_EEM                     = 1164, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     DARK_EEM                      = 1165, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     TAME_SUCCESS_RATE             = 1166, -- Tame Success Rate +
+    RAMPART_MAGIC_SHIELD          = 1167, -- Rampart Magic Shield
+    CRITHITRATE_SLOT              = 1168, -- CRITHITRATE for slot
+    ATT_SLOT                      = 1169, -- ATT for slot
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
@@ -1787,23 +1842,23 @@ xi.mod =
 
 xi.immunity =
 {
-    NONE        = 0x00,
-    SLEEP       = 0x01,
-    GRAVITY     = 0x02,
-    BIND        = 0x04,
-    STUN        = 0x08,
-    SILENCE     = 0x10,   -- 16
-    PARALYZE    = 0x20,   -- 32
-    BLIND       = 0x40,   -- 64
-    SLOW        = 0x80,   -- 128
-    POISON      = 0x100,  -- 256
-    ELEGY       = 0x200,  -- 512
-    REQUIEM     = 0x400,  -- 1024
-    LIGHT_SLEEP = 0x800,  -- 2048
-    DARK_SLEEP  = 0x1000, -- 4096
-    ASPIR       = 0x2000, -- 8192
-    TERROR      = 0x4000, -- 16384
-    DISPEL      = 0x8000, -- 32768
+    NONE        = 0,
+    SLEEP       = 1,
+    GRAVITY     = 2,
+    BIND        = 4,
+    STUN        = 8,
+    SILENCE     = 16,
+    PARALYZE    = 32,
+    BLIND       = 64,
+    SLOW        = 128,
+    POISON      = 256,
+    ELEGY       = 512,
+    REQUIEM     = 1024,
+    LIGHT_SLEEP = 2048,
+    DARK_SLEEP  = 4096,
+    ASPIR       = 8192,
+    TERROR      = 16384,
+    DISPEL      = 32768,
 }
 
 xi.latent =
@@ -2101,7 +2156,7 @@ xi.merit =
     ANCIENT_CIRCLE_RECAST       = meritCategory.DRG_1 + 0x00,
     JUMP_RECAST                 = meritCategory.DRG_1 + 0x02,
     HIGH_JUMP_RECAST            = meritCategory.DRG_1 + 0x04,
-    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x05,
+    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x06,
     SPIRIT_LINK_RECAST          = meritCategory.DRG_1 + 0x08,
 
     -- SMN 1
@@ -2473,7 +2528,7 @@ xi.auraTarget =
 {
     ALLIES  = 0,
     ENEMIES = 1,
-};
+}
 
 -----------------------------------
 -- MOBMODs
@@ -2499,10 +2554,10 @@ xi.mobMod =
     SEVERE_SPELL_CHANCE = 13, -- % chance to use a severe spell like death or impact
     SKILL_LIST          = 14, -- uses given mob skill list
     MUG_GIL             = 15, -- amount gil carried for mugging
-    -- 16 Available for use
+    DETECTION           = 16, -- Overrides mob family's detection method. In order to set to override to none an unused bit must be set such as DETECT_NONE1.
     NO_DESPAWN          = 17, -- do not despawn when too far from spawn. Gob Diggers have this.
     VAR                 = 18, -- temp var for whatever. Gets cleared on spawn
-    -- 19 Available for use
+    CAN_SHIELD_BLOCK    = 19, -- toggle shield use for mobs without physical shields (trusts)
     TP_USE_CHANCE       = 20, -- % chance to use tp
     PET_SPELL_LIST      = 21, -- set pet spell list
     NA_CHANCE           = 22, -- % chance to cast -na
@@ -2555,6 +2610,7 @@ xi.mobMod =
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
+    MAGIC_RANGE         = 72, -- magic aggro range
 
     -- ASB Mod Start
     DRAW_IN_INCLUDE_PARTY     = 100, -- This will cause the mob's draw-in to also affect all party and alliance members
@@ -2671,7 +2727,7 @@ xi.jobSpecialAbility =
     -- TRANCE               = 2710,
     -- ELEMENTAL_SFORZO     = 3265,
     -- ELEMENTAL_SFORZO     = 3479,
-     BOLSTER              = 3482,
+    BOLSTER              = 3482,
 }
 xi.jsa = xi.jobSpecialAbility
 
@@ -2874,6 +2930,24 @@ xi.behavior =
 }
 
 -----------------------------------
+-- Detects bits
+-----------------------------------
+
+xi.detects =
+{
+    NONE        = 0x000,
+    SIGHT       = 0x001,
+    HEARING     = 0x002,
+    LOWHP       = 0x004,
+    NONE1       = 0x008,
+    NONE2       = 0x010,
+    MAGIC       = 0x020,
+    WEAPONSKILL = 0x040,
+    JOBABILITY  = 0x080,
+    SCENT       = 0x100,
+}
+
+-----------------------------------
 -- Roam flags
 -----------------------------------
 
@@ -2930,7 +3004,7 @@ xi.animation =
 {
     NONE                    = 0,
     ATTACK                  = 1,
-    -- Death 2              = 2,
+    DESPAWN                 = 2,
     DEATH                   = 3,
     CHOCOBO                 = 5,
     FISHING                 = 6,
@@ -3008,8 +3082,10 @@ xi.mount =
     RED_RAPTOR     = 31,
     IRON_GIANT     = 32,
     BYAKKO         = 33,
+    NOBLE_CHOCOBO  = 34, -- NOTE: This is currently blank, probably needs additional packets sent
+    IXION          = 35,
     --
-    MOUNT_MAX      = 34,
+    MOUNT_MAX      = 36,
 }
 
 -----------------------------------
@@ -3125,7 +3201,7 @@ xi.pathflag =
     REVERSE  = 0x04, -- reverse the path
     SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
     SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
-};
+}
 
 -- Check Lua item with:
 -- local isEx = bit.band(item:getFlag(), xi.itemFlag.EX) ~= 0

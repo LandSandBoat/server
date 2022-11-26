@@ -9,20 +9,25 @@ require("scripts/globals/summon")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 3.5
+    local ftpbase = 512 / 256
+    local params = {}
+    params.numHits = 1
+    params.ftp000 = ftpbase params.ftp150 = ftpbase params.ftp300 = ftpbase
+    params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.2 params.chr_wsc = 0.0
+    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
+    params.atk100 = 2.0 params.atk200 = 2.0 params.atk300 = 2.0
 
-    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params)
 
-    target:takeDamage(damage, pet, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, damage.hitslanded)
+    target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
-    return damage
+    return totaldamage
 end
 
 return abilityObject

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Teteroon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

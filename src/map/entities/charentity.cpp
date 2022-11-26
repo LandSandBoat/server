@@ -25,71 +25,72 @@
 
 #include <cstring>
 
-#include "../packets/action.h"
-#include "../packets/basic.h"
-#include "../packets/char.h"
-#include "../packets/char_appearance.h"
-#include "../packets/char_health.h"
-#include "../packets/char_recast.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/event.h"
-#include "../packets/event_string.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/key_items.h"
-#include "../packets/lock_on.h"
-#include "../packets/menu_raisetractor.h"
-#include "../packets/message_special.h"
-#include "../packets/message_system.h"
-#include "../packets/message_text.h"
-#include "../packets/release.h"
+#include "packets/action.h"
+#include "packets/basic.h"
+#include "packets/char.h"
+#include "packets/char_appearance.h"
+#include "packets/char_health.h"
+#include "packets/char_recast.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/event.h"
+#include "packets/event_string.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/key_items.h"
+#include "packets/lock_on.h"
+#include "packets/menu_raisetractor.h"
+#include "packets/message_special.h"
+#include "packets/message_system.h"
+#include "packets/message_text.h"
+#include "packets/release.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/player_controller.h"
-#include "../ai/helpers/targetfind.h"
-#include "../ai/states/ability_state.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/death_state.h"
-#include "../ai/states/item_state.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/raise_state.h"
-#include "../ai/states/range_state.h"
-#include "../ai/states/weaponskill_state.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/player_controller.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/death_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/item_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/raise_state.h"
+#include "ai/states/range_state.h"
+#include "ai/states/weaponskill_state.h"
 
-#include "../ability.h"
-#include "../attack.h"
-#include "../battlefield.h"
-#include "../char_recast_container.h"
-#include "../conquest_system.h"
-#include "../enmity_container.h"
-#include "../item_container.h"
-#include "../items/item_furnishing.h"
-#include "../items/item_usable.h"
-#include "../items/item_weapon.h"
-#include "../job_points.h"
-#include "../latent_effect_container.h"
-#include "../mobskill.h"
-#include "../modifier.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/status_effects.h"
-#include "../petskill.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trade_container.h"
-#include "../treasure_pool.h"
-#include "../universal_container.h"
-#include "../utils/attackutils.h"
-#include "../utils/battleutils.h"
-#include "../utils/charutils.h"
-#include "../utils/gardenutils.h"
-#include "../utils/moduleutils.h"
-#include "../utils/petutils.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "attack.h"
 #include "automatonentity.h"
+#include "battlefield.h"
+#include "char_recast_container.h"
 #include "charentity.h"
+#include "conquest_system.h"
+#include "enmity_container.h"
+#include "item_container.h"
+#include "items/item_furnishing.h"
+#include "items/item_usable.h"
+#include "items/item_weapon.h"
+#include "job_points.h"
+#include "latent_effect_container.h"
 #include "mobentity.h"
+#include "mobskill.h"
+#include "modifier.h"
+#include "packets/char_job_extra.h"
+#include "packets/status_effects.h"
+#include "petskill.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trade_container.h"
+#include "treasure_pool.h"
 #include "trustentity.h"
+#include "universal_container.h"
+#include "utils/attackutils.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "utils/gardenutils.h"
+#include "utils/moduleutils.h"
+#include "utils/petutils.h"
+#include "weapon_skill.h"
 
 CCharEntity::CCharEntity()
 {
@@ -173,18 +174,18 @@ CCharEntity::CCharEntity()
     m_mkeCurrent = 0;
     m_asaCurrent = 0;
 
-    m_Costume            = 0;
-    m_Monstrosity        = 0;
-    m_hasTractor         = 0;
-    m_hasRaise           = 0;
-    m_weaknessLvl        = 0;
-    m_hasArise           = false;
-    m_hasAutoTarget      = 1;
-    m_InsideRegionID     = 0;
-    m_LevelRestriction   = 0;
-    m_lastBcnmTimePrompt = 0;
-    m_AHHistoryTimestamp = 0;
-    m_DeathTimestamp     = 0;
+    m_Costume             = 0;
+    m_Monstrosity         = 0;
+    m_hasTractor          = 0;
+    m_hasRaise            = 0;
+    m_weaknessLvl         = 0;
+    m_hasArise            = false;
+    m_hasAutoTarget       = 1;
+    m_InsideTriggerAreaID = 0;
+    m_LevelRestriction    = 0;
+    m_lastBcnmTimePrompt  = 0;
+    m_AHHistoryTimestamp  = 0;
+    m_DeathTimestamp      = 0;
 
     m_EquipFlag         = 0;
     m_EquipBlock        = 0;
@@ -201,6 +202,8 @@ CCharEntity::CCharEntity()
     m_isBlockingAid = false;
 
     BazaarID.clean();
+
+    lastTradeInvite = {};
     TradePending.clean();
     InvitePending.clean();
 
@@ -215,12 +218,8 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    petZoningInfo.respawnPet = false;
-    petZoningInfo.petID      = 0;
-    petZoningInfo.petType    = PET_TYPE::AVATAR; // dummy data, the bool tells us to respawn if required
-    petZoningInfo.petHP      = 0;
-    petZoningInfo.petMP      = 0;
-    petZoningInfo.petTP      = 0;
+    resetPetZoningInfo();
+    petZoningInfo.petID = 0;
 
     m_PlayTime    = 0;
     m_SaveTime    = 0;
@@ -305,7 +304,7 @@ void CCharEntity::clearPacketList()
 void CCharEntity::pushPacket(CBasicPacket* packet)
 {
     TracyZoneScoped;
-    TracyZoneIString(GetName());
+    TracyZoneString(GetName());
     TracyZoneHex16(packet->getType());
 
     moduleutils::OnPushPacket(packet);
@@ -417,39 +416,81 @@ bool CCharEntity::isNewPlayer() const
 
 void CCharEntity::setPetZoningInfo()
 {
-    if (PPet->objtype == TYPE_PET)
+    if (PPet == nullptr || PPet->objtype != TYPE_PET)
     {
-        switch (((CPetEntity*)PPet)->getPetType())
-        {
-            case PET_TYPE::JUG_PET:
-                if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
-                {
-                    break;
-                }
-                [[fallthrough]];
-            case PET_TYPE::AVATAR:
-            case PET_TYPE::AUTOMATON:
-            case PET_TYPE::WYVERN:
-                petZoningInfo.petHP   = PPet->health.hp;
-                petZoningInfo.petTP   = PPet->health.tp;
-                petZoningInfo.petMP   = PPet->health.mp;
-                petZoningInfo.petType = ((CPetEntity*)PPet)->getPetType();
-                break;
-            default:
-                break;
-        }
+        return;
     }
+
+    auto PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+    if (PPetEntity == nullptr)
+    {
+        return;
+    }
+
+    switch (PPetEntity->getPetType())
+    {
+        case PET_TYPE::JUG_PET:
+            if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+            {
+                break;
+            }
+            petZoningInfo.jugSpawnTime = PPetEntity->getJugSpawnTime();
+            petZoningInfo.jugDuration  = PPetEntity->getJugDuration();
+            [[fallthrough]];
+        case PET_TYPE::AVATAR:
+        case PET_TYPE::AUTOMATON:
+        case PET_TYPE::WYVERN:
+            petZoningInfo.petLevel = PPetEntity->getSpawnLevel();
+            petZoningInfo.petHP    = PPet->health.hp;
+            petZoningInfo.petTP    = PPet->health.tp;
+            petZoningInfo.petMP    = PPet->health.mp;
+            petZoningInfo.petType  = PPetEntity->getPetType();
+            break;
+        default:
+            break;
+    }
+
+    petZoningInfo.respawnPet = true;
 }
 
 void CCharEntity::resetPetZoningInfo()
 {
     // reset the petZoning info
-    petZoningInfo.petHP      = 0;
-    petZoningInfo.petTP      = 0;
-    petZoningInfo.petMP      = 0;
-    petZoningInfo.respawnPet = false;
-    petZoningInfo.petType    = PET_TYPE::AVATAR;
+    petZoningInfo.petLevel     = 0;
+    petZoningInfo.petHP        = 0;
+    petZoningInfo.petTP        = 0;
+    petZoningInfo.petMP        = 0;
+    petZoningInfo.respawnPet   = false;
+    petZoningInfo.petType      = PET_TYPE::AVATAR;
+    petZoningInfo.jugSpawnTime = 0;
+    petZoningInfo.jugDuration  = 0;
 }
+
+bool CCharEntity::shouldPetPersistThroughZoning()
+{
+    PET_TYPE petType;
+    auto     PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+
+    if (PPetEntity == nullptr && !petZoningInfo.respawnPet)
+    {
+        return false;
+    }
+
+    if (PPetEntity != nullptr)
+    {
+        petType = PPetEntity->getPetType();
+    }
+    else // petZoningInfo.respawnPet == true
+    {
+        petType = petZoningInfo.petType;
+    }
+
+    return petType == PET_TYPE::WYVERN ||
+           petType == PET_TYPE::AVATAR ||
+           petType == PET_TYPE::AUTOMATON ||
+           (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
+}
+
 /************************************************************************
  *
  * Return the container with the specified ID.If the ID goes beyond, then *
@@ -523,9 +564,14 @@ int8 CCharEntity::getShieldSize()
     return PItem->getShieldSize();
 }
 
-void CCharEntity::SetName(int8* name)
+void CCharEntity::SetName(const std::string& name)
 {
-    this->name.insert(0, (const char*)name, std::min<size_t>(strlen((const char*)name), PacketNameLength));
+    this->name = name;
+
+    if (this->name.size() > PacketNameLength)
+    {
+        this->name.resize(PacketNameLength); // Enforce max name limit
+    }
 }
 
 int16 CCharEntity::addTP(int16 tp)
@@ -908,7 +954,14 @@ void CCharEntity::OnDisengage(CAttackState& state)
 bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
     TracyZoneScoped;
-    float dist = distance(loc.p, PTarget->loc.p);
+
+    if (PTarget->PAI->IsUntargetable())
+    {
+        return false;
+    }
+
+    float dist    = distance(loc.p, PTarget->loc.p);
+    float distNoY = distance(loc.p, PTarget->loc.p, true);
 
     if (!IsMobOwner(PTarget))
     {
@@ -928,7 +981,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
     }
-    else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
+    else if (distNoY > GetMeleeRange() || abs(loc.p.y - PTarget->loc.p.y) > 3)
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
         return false;
@@ -942,8 +995,6 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     controller->setLastAttackTime(server_clock::now());
     auto ret = CBattleEntity::OnAttack(state, action);
-
-    // auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
     return ret;
 }
@@ -1020,14 +1071,14 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     }
 }
 
-void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg)
+void CCharEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
 {
     TracyZoneScoped;
-    CBattleEntity::OnCastInterrupted(state, action, msg);
+    CBattleEntity::OnCastInterrupted(state, action, msg, blockedCast);
 
     auto* message = state.GetErrorMsg();
 
-    if (message)
+    if (message && action.actiontype != ACTION_MAGIC_INTERRUPT) // Interrupt is handled elsewhere
     {
         pushPacket(message);
     }
@@ -1057,7 +1108,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         }
 
         PAI->TargetFind->reset();
-        //#TODO: revise parameters
+        // #TODO: revise parameters
         if (PWeaponSkill->isAoE())
         {
             PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10);
@@ -1065,6 +1116,25 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         else
         {
             PAI->TargetFind->findSingleTarget(PBattleTarget);
+        }
+
+        // Assumed, it's very difficult to produce this due to WS being nearly instant
+        // TODO: attempt to verify.
+        if (PAI->TargetFind->m_targets.size() == 0)
+        {
+            // No targets, perhaps something like Super Jump or otherwise untargetable
+            action.actiontype         = ACTION_MAGIC_FINISH;
+            action.actionid           = 28787; // Some hardcoded magic for interrupts
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+
+            actionTarget.animation = 0x1FC; // Assumed, but not verified.
+            actionTarget.messageID = 0;
+            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
+
+            return;
         }
 
         for (auto&& PTarget : PAI->TargetFind->m_targets)
@@ -1211,7 +1281,17 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         pushPacket(new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
         return;
     }
-    auto*                         PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+    PAI->TargetFind->reset();
+    PAI->TargetFind->findSingleTarget(PTarget);
+
+    // Check if target is untargetable
+    if (PAI->TargetFind->m_targets.size() == 0)
+    {
+        return;
+    }
+
     std::unique_ptr<CBasicPacket> errMsg;
     if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
     {
@@ -1234,6 +1314,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
                 return;
             }
+        }
+
+        if (battleutils::IsParalyzed(this))
+        {
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+            return;
         }
 
         // get any available merit recast reduction
@@ -1426,7 +1512,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
             }
         }
-        //#TODO: make this generic enough to not require an if
+        // #TODO: make this generic enough to not require an if
         else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
@@ -1462,9 +1548,11 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
                 if (value < 0)
                 {
-                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
                     actionTarget.param     = -actionTarget.param;
                 }
+
+                prevMsg = actionTarget.messageID;
 
                 state.ApplyEnmity();
             }
@@ -1532,14 +1620,34 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
         }
 
+        // Revert ToAU job buffs
+        if (!luautils::IsContentEnabled("TOAU"))
+        {
+            // Super Jump
+            if (PAbility->getID() == 68)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), (uint16)(action.recast * (5.f / 3.f)));
+            }
+        }
+
+        // Revert WotG job buffs
+        if (!luautils::IsContentEnabled("WOTG"))
+        {
+            // Reward
+            if (PAbility->getID() == 78)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), (uint16)(action.recast * 2.f));
+            }
+        }
+
         pushPacket(new CCharRecastPacket(this));
 
-        //#TODO: refactor
-        // if (this->getMijinGakure())
+        // #TODO: refactor
+        //  if (this->getMijinGakure())
         //{
-        //    m_ActionType = ACTION_FALL;
-        //    ActionFall();
-        //}
+        //     m_ActionType = ACTION_FALL;
+        //     ActionFall();
+        // }
     }
     else if (errMsg)
     {
@@ -1835,12 +1943,12 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return false;
     }
 
-    if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
+    if (PBattleTarget->isInDynamis())
     {
         return true;
     }
 
-    if (PBattleTarget->isInDynamis())
+    if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
     {
         return true;
     }
@@ -2150,7 +2258,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+        if (PPet->objtype == TYPE_MOB)
         {
             petutils::DetachPet(this);
         }
@@ -2409,215 +2517,224 @@ void CCharEntity::UpdateMoghancement()
 
 void CCharEntity::SetMoghancement(uint16 moghancementID)
 {
-    TracyZoneScoped;
+    // Remove the previous Moghancement first
+    changeMoghancement(m_moghancementID, false);
+    changeMoghancement(moghancementID, true);
     m_moghancementID = moghancementID;
+}
 
-    // Apply the moghancement
-    if (m_moghancementID != 0)
+void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
+{
+    TracyZoneScoped;
+    if (moghancementID == 0)
     {
-        switch (m_moghancementID)
-        {
-            case MOGHANCEMENT_FIRE:
-                addModifier(Mod::SYNTH_FAIL_RATE_FIRE, 5);
-                break;
-            case MOGHANCEMENT_ICE:
-                addModifier(Mod::SYNTH_FAIL_RATE_ICE, 5);
-                break;
-            case MOGHANCEMENT_WIND:
-                addModifier(Mod::SYNTH_FAIL_RATE_WIND, 5);
-                break;
-            case MOGHANCEMENT_EARTH:
-                addModifier(Mod::SYNTH_FAIL_RATE_EARTH, 5);
-                break;
-            case MOGHANCEMENT_LIGHTNING:
-                addModifier(Mod::SYNTH_FAIL_RATE_LIGHTNING, 5);
-                break;
-            case MOGHANCEMENT_WATER:
-                addModifier(Mod::SYNTH_FAIL_RATE_WATER, 5);
-                break;
-            case MOGHANCEMENT_LIGHT:
-                addModifier(Mod::SYNTH_FAIL_RATE_LIGHT, 5);
-                break;
-            case MOGHANCEMENT_DARK:
-                addModifier(Mod::SYNTH_FAIL_RATE_DARK, 5);
-                break;
+        return;
+    }
 
-            case MOGHANCEMENT_FISHING:
-                addModifier(Mod::FISH, 1);
-                break;
-            case MOGHANCEMENT_WOODWORKING:
-                addModifier(Mod::WOOD, 1);
-                break;
-            case MOGHANCEMENT_SMITHING:
-                addModifier(Mod::SMITH, 1);
-                break;
-            case MOGHANCEMENT_GOLDSMITHING:
-                addModifier(Mod::GOLDSMITH, 1);
-                break;
-            case MOGHANCEMENT_CLOTHCRAFT:
-                addModifier(Mod::CLOTH, 1);
-                break;
-            case MOGHANCEMENT_LEATHERCRAFT:
-                addModifier(Mod::LEATHER, 1);
-                break;
-            case MOGHANCEMENT_BONECRAFT:
-                addModifier(Mod::BONE, 1);
-                break;
-            case MOGHANCEMENT_ALCHEMY:
-                addModifier(Mod::ALCHEMY, 1);
-                break;
-            case MOGHANCEMENT_COOKING:
-                addModifier(Mod::COOK, 1);
-                break;
+    // Apply the Moghancement
+    int16 multiplier = isAdding ? 1 : -1;
+    switch (moghancementID)
+    {
+        case MOGHANCEMENT_FIRE:
+            addModifier(Mod::SYNTH_FAIL_RATE_FIRE, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_ICE:
+            addModifier(Mod::SYNTH_FAIL_RATE_ICE, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_WIND:
+            addModifier(Mod::SYNTH_FAIL_RATE_WIND, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_EARTH:
+            addModifier(Mod::SYNTH_FAIL_RATE_EARTH, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_LIGHTNING:
+            addModifier(Mod::SYNTH_FAIL_RATE_LIGHTNING, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_WATER:
+            addModifier(Mod::SYNTH_FAIL_RATE_WATER, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_LIGHT:
+            addModifier(Mod::SYNTH_FAIL_RATE_LIGHT, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_DARK:
+            addModifier(Mod::SYNTH_FAIL_RATE_DARK, 5 * multiplier);
+            break;
 
-            case MOGLIFICATION_FISHING:
-                addModifier(Mod::FISH, 1);
-                // TODO: "makes it slightly easier to reel in your catch"
-                break;
-            case MOGLIFICATION_WOODWORKING:
-                addModifier(Mod::WOOD, 1);
-                break;
-            case MOGLIFICATION_SMITHING:
-                addModifier(Mod::SMITH, 1);
-                break;
-            case MOGLIFICATION_GOLDSMITHING:
-                addModifier(Mod::GOLDSMITH, 1);
-                break;
-            case MOGLIFICATION_CLOTHCRAFT:
-                addModifier(Mod::CLOTH, 1);
-                break;
-            case MOGLIFICATION_LEATHERCRAFT:
-                addModifier(Mod::LEATHER, 1);
-                break;
-            case MOGLIFICATION_BONECRAFT:
-                addModifier(Mod::BONE, 1);
-                break;
-            case MOGLIFICATION_ALCHEMY:
-                addModifier(Mod::ALCHEMY, 1);
-                break;
-            case MOGLIFICATION_COOKING:
-                addModifier(Mod::COOK, 1);
-                break;
+        case MOGHANCEMENT_FISHING:
+            addModifier(Mod::FISH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_WOODWORKING:
+            addModifier(Mod::WOOD, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_SMITHING:
+            addModifier(Mod::SMITH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_GOLDSMITHING:
+            addModifier(Mod::GOLDSMITH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_CLOTHCRAFT:
+            addModifier(Mod::CLOTH, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_LEATHERCRAFT:
+            addModifier(Mod::LEATHER, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_BONECRAFT:
+            addModifier(Mod::BONE, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_ALCHEMY:
+            addModifier(Mod::ALCHEMY, 1 * multiplier);
+            break;
+        case MOGHANCEMENT_COOKING:
+            addModifier(Mod::COOK, 1 * multiplier);
+            break;
 
-            case MEGA_MOGLIFICATION_FISHING:
-                addModifier(Mod::FISH, 5);
-                break;
-            case MEGA_MOGLIFICATION_WOODWORKING:
-                addModifier(Mod::WOOD, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_WOOD, 5);
-                break;
-            case MEGA_MOGLIFICATION_SMITHING:
-                addModifier(Mod::SMITH, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_SMITH, 5);
-                break;
-            case MEGA_MOGLIFICATION_GOLDSMITHING:
-                addModifier(Mod::GOLDSMITH, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_GOLDSMITH, 5);
-                break;
-            case MEGA_MOGLIFICATION_CLOTHCRAFT:
-                addModifier(Mod::CLOTH, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_CLOTH, 5);
-                break;
-            case MEGA_MOGLIFICATION_LEATHERCRAFT:
-                addModifier(Mod::LEATHER, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_LEATHER, 5);
-                break;
-            case MEGA_MOGLIFICATION_BONECRAFT:
-                addModifier(Mod::BONE, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_BONE, 5);
-                break;
-            case MEGA_MOGLIFICATION_ALCHEMY:
-                addModifier(Mod::ALCHEMY, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_ALCHEMY, 5);
-                break;
-            case MEGA_MOGLIFICATION_COOKING:
-                addModifier(Mod::COOK, 5);
-                addModifier(Mod::SYNTH_FAIL_RATE_COOK, 5);
-                break;
+        case MOGLIFICATION_FISHING:
+            addModifier(Mod::FISH, 1 * multiplier);
+            // TODO: "makes it slightly easier to reel in your catch"
+            break;
+        case MOGLIFICATION_WOODWORKING:
+            addModifier(Mod::WOOD, 1 * multiplier);
+            break;
+        case MOGLIFICATION_SMITHING:
+            addModifier(Mod::SMITH, 1 * multiplier);
+            break;
+        case MOGLIFICATION_GOLDSMITHING:
+            addModifier(Mod::GOLDSMITH, 1 * multiplier);
+            break;
+        case MOGLIFICATION_CLOTHCRAFT:
+            addModifier(Mod::CLOTH, 1 * multiplier);
+            break;
+        case MOGLIFICATION_LEATHERCRAFT:
+            addModifier(Mod::LEATHER, 1 * multiplier);
+            break;
+        case MOGLIFICATION_BONECRAFT:
+            addModifier(Mod::BONE, 1 * multiplier);
+            break;
+        case MOGLIFICATION_ALCHEMY:
+            addModifier(Mod::ALCHEMY, 1 * multiplier);
+            break;
+        case MOGLIFICATION_COOKING:
+            addModifier(Mod::COOK, 1 * multiplier);
+            break;
 
-            case MOGHANCEMENT_EXPERIENCE:
-                addModifier(Mod::EXPERIENCE_RETAINED, 5);
-                break;
-            case MOGHANCEMENT_GARDENING:
-                addModifier(Mod::GARDENING_WILT_BONUS, 36);
-                break;
-            case MOGHANCEMENT_DESYNTHESIS:
-                addModifier(Mod::DESYNTH_SUCCESS, 2);
-                break;
-            case MOGHANCEMENT_CONQUEST:
-                addModifier(Mod::CONQUEST_BONUS, 6);
-                break;
-            case MOGHANCEMENT_REGION:
-                addModifier(Mod::CONQUEST_REGION_BONUS, 10);
-                break;
-            case MOGHANCEMENT_FISHING_ITEM:
-                // TODO: Increases the chances of finding items when fishing
-                break;
-            case MOGHANCEMENT_SANDORIA_CONQUEST:
-                if (profile.nation == 0)
-                {
-                    addModifier(Mod::CONQUEST_BONUS, 6);
-                }
-                break;
-            case MOGHANCEMENT_BASTOK_CONQUEST:
-                if (profile.nation == 1)
-                {
-                    addModifier(Mod::CONQUEST_BONUS, 6);
-                }
-                break;
-            case MOGHANCEMENT_WINDURST_CONQUEST:
-                if (profile.nation == 2)
-                {
-                    addModifier(Mod::CONQUEST_BONUS, 6);
-                }
-                break;
-            case MOGHANCEMENT_MONEY:
-                addModifier(Mod::GILFINDER, 10);
-                break;
-            case MOGHANCEMENT_CAMPAIGN:
-                addModifier(Mod::CAMPAIGN_BONUS, 5);
-                break;
-            case MOGHANCEMENT_MONEY_II:
-                addModifier(Mod::GILFINDER, 15);
-                break;
-            case MOGHANCEMENT_SKILL_GAINS:
-                // NOTE: Exact value is unknown but considering this only granted by a newish item it makes sense SE made it fairly strong
-                addModifier(Mod::COMBAT_SKILLUP_RATE, 25);
-                addModifier(Mod::MAGIC_SKILLUP_RATE, 25);
-                break;
-            case MOGHANCEMENT_BOUNTY:
-                addModifier(Mod::EXP_BONUS, 10);
-                addModifier(Mod::CAPACITY_BONUS, 10);
-                break;
-            case MOGLIFICATION_EXPERIENCE_BOOST:
-                addModifier(Mod::EXP_BONUS, 15);
-                break;
-            case MOGLIFICATION_CAPACITY_BOOST:
-                addModifier(Mod::CAPACITY_BONUS, 15);
-                break;
+        case MEGA_MOGLIFICATION_FISHING:
+            addModifier(Mod::FISH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_WOODWORKING:
+            addModifier(Mod::WOOD, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_WOOD, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_SMITHING:
+            addModifier(Mod::SMITH, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_SMITH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_GOLDSMITHING:
+            addModifier(Mod::GOLDSMITH, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_GOLDSMITH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_CLOTHCRAFT:
+            addModifier(Mod::CLOTH, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_CLOTH, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_LEATHERCRAFT:
+            addModifier(Mod::LEATHER, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_LEATHER, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_BONECRAFT:
+            addModifier(Mod::BONE, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_BONE, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_ALCHEMY:
+            addModifier(Mod::ALCHEMY, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_ALCHEMY, 5 * multiplier);
+            break;
+        case MEGA_MOGLIFICATION_COOKING:
+            addModifier(Mod::COOK, 5 * multiplier);
+            addModifier(Mod::SYNTH_FAIL_RATE_COOK, 5 * multiplier);
+            break;
 
-            // NOTE: Exact values for resistances is unknown
-            case MOGLIFICATION_RESIST_POISON:
-                addModifier(Mod::POISONRES, 20);
-                break;
-            case MOGLIFICATION_RESIST_PARALYSIS:
-                addModifier(Mod::SILENCERES, 20);
-                break;
-            case MOGLIFICATION_RESIST_SILENCE:
-                addModifier(Mod::SILENCERES, 20);
-                break;
-            case MOGLIFICATION_RESIST_PETRIFICATION:
-                addModifier(Mod::PETRIFYRES, 20);
-                break;
-            case MOGLIFICATION_RESIST_VIRUS:
-                addModifier(Mod::VIRUSRES, 20);
-                break;
-            case MOGLIFICATION_RESIST_CURSE:
-                addModifier(Mod::CURSERES, 20);
-                break;
-            default:
-                break;
-        }
+        case MOGHANCEMENT_EXPERIENCE:
+            addModifier(Mod::EXPERIENCE_RETAINED, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_GARDENING:
+            addModifier(Mod::GARDENING_WILT_BONUS, 36 * multiplier);
+            break;
+        case MOGHANCEMENT_DESYNTHESIS:
+            addModifier(Mod::DESYNTH_SUCCESS, 2 * multiplier);
+            break;
+        case MOGHANCEMENT_CONQUEST:
+            addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            break;
+        case MOGHANCEMENT_REGION:
+            addModifier(Mod::CONQUEST_REGION_BONUS, 10 * multiplier);
+            break;
+        case MOGHANCEMENT_FISHING_ITEM:
+            // TODO: Increases the chances of finding items when fishing
+            break;
+        case MOGHANCEMENT_SANDORIA_CONQUEST:
+            if (profile.nation == 0)
+            {
+                addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            }
+            break;
+        case MOGHANCEMENT_BASTOK_CONQUEST:
+            if (profile.nation == 1)
+            {
+                addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            }
+            break;
+        case MOGHANCEMENT_WINDURST_CONQUEST:
+            if (profile.nation == 2)
+            {
+                addModifier(Mod::CONQUEST_BONUS, 6 * multiplier);
+            }
+            break;
+        case MOGHANCEMENT_MONEY:
+            addModifier(Mod::GILFINDER, 10 * multiplier);
+            break;
+        case MOGHANCEMENT_CAMPAIGN:
+            addModifier(Mod::CAMPAIGN_BONUS, 5 * multiplier);
+            break;
+        case MOGHANCEMENT_MONEY_II:
+            addModifier(Mod::GILFINDER, 15 * multiplier);
+            break;
+        case MOGHANCEMENT_SKILL_GAINS:
+            // NOTE: Exact value is unknown but considering this only granted by a newish item it makes sense SE made it fairly strong
+            addModifier(Mod::COMBAT_SKILLUP_RATE, 25 * multiplier);
+            addModifier(Mod::MAGIC_SKILLUP_RATE, 25 * multiplier);
+            break;
+        case MOGHANCEMENT_BOUNTY:
+            addModifier(Mod::EXP_BONUS, 10 * multiplier);
+            addModifier(Mod::CAPACITY_BONUS, 10 * multiplier);
+            break;
+        case MOGLIFICATION_EXPERIENCE_BOOST:
+            addModifier(Mod::EXP_BONUS, 15 * multiplier);
+            break;
+        case MOGLIFICATION_CAPACITY_BOOST:
+            addModifier(Mod::CAPACITY_BONUS, 15 * multiplier);
+            break;
+
+        // NOTE: Exact values for resistances is unknown
+        case MOGLIFICATION_RESIST_POISON:
+            addModifier(Mod::POISONRES, 20 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_PARALYSIS:
+            addModifier(Mod::SILENCERES, 20 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_SILENCE:
+            addModifier(Mod::SILENCERES, 20 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_PETRIFICATION:
+            addModifier(Mod::PETRIFYRES, 20 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_VIRUS:
+            addModifier(Mod::VIRUSRES, 20 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_CURSE:
+            addModifier(Mod::CURSERES, 20 * multiplier);
+            break;
+        default:
+            break;
     }
 }
 

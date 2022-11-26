@@ -14,7 +14,7 @@ end
 
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local chance = 90
-    local damage = (automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)/2) * (1 + automaton:getMod(xi.mod.SHIELD_BASH)/100)
+    local damage = (automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE) / 2) * (1 + automaton:getMod(xi.mod.SHIELD_BASH) / 100)
 
     damage = math.floor(damage)
 
@@ -34,19 +34,21 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         elseif slowPower == 25 then
             duration = math.random(70, 75)
         end
+
         target:addStatusEffect(xi.effect.SLOW, slowPower * 100, 0, duration)
     end
 
     -- randomize damage
-    local ratio = automaton:getStat(xi.mod.ATT)/target:getStat(xi.mod.DEF)
+    local ratio = automaton:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
     if ratio > 1.3 then
         ratio = 1.3
     end
+
     if ratio < 0.2 then
         ratio = 0.2
     end
 
-    local pdif = math.random(ratio*0.8*1000, ratio*1.2*1000)
+    local pdif = math.random(ratio * 0.8 * 1000, ratio * 1.2 * 1000)
 
     damage = damage * (pdif / 1000)
 

@@ -73,7 +73,7 @@ quest.sections =
         onEventFinish =
         {
             [3007] = function(player, csid, option, npc)
-                if mission:complete(player) then
+                if quest:complete(player) then
                     xi.quest.setMustZone(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
                     xi.quest.setVar(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS, 'Timer', VanadielUniqueDay() + 1)
                 end

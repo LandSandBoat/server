@@ -23,7 +23,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-381.747, -31.068, -788.092, 211)
     end
 
@@ -38,13 +42,16 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onGameHour = function(zone)
     -- Silk Caterpillar should spawn every 6 hours from 03:00
     -- this is approximately when the Jeuno-Bastok airship is flying overhead towards Jeuno.
-    if VanadielHour() % 6 == 3 and not GetMobByID(ID.mob.SILK_CATERPILLAR):isSpawned() then
+    if
+        VanadielHour() % 6 == 3 and
+        not GetMobByID(ID.mob.SILK_CATERPILLAR):isSpawned()
+    then
         -- Despawn set to 210 seconds (3.5 minutes, approx when the Jeuno-Bastok airship is flying back over to Bastok).
         SpawnMob(ID.mob.SILK_CATERPILLAR, 210)
     end

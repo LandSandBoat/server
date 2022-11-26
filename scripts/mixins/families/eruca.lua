@@ -47,6 +47,7 @@ xi.mix.eruca.config = function(mob, params)
     if params.sleepHour and type(params.sleepHour) == "number" then
         mob:setLocalVar("[eruca]sleepHour", params.sleepHour)
     end
+
     if params.wakeHour and type(params.wakeHour) == "number" then
         mob:setLocalVar("[eruca]wakeHour", params.wakeHour)
     end
@@ -64,7 +65,11 @@ g_mixins.families.eruca = function(erucaMob)
         local sleepHour = mob:getLocalVar("[eruca]sleepHour")
         local subAnimation = mob:getAnimationSub()
 
-        if subAnimation == 0 and (currentHour >= sleepHour or currentHour < mob:getLocalVar("[eruca]wakeHour")) and not mob:isEngaged() then
+        if
+            subAnimation == 0 and
+            (currentHour >= sleepHour or currentHour < mob:getLocalVar("[eruca]wakeHour")) and
+            not mob:isEngaged()
+        then
             local resleepTime = mob:getLocalVar("ResleepTime")
 
             if resleepTime ~= 0 and mob:checkDistance(mob:getSpawnPos()) > 25 then
@@ -72,12 +77,23 @@ g_mixins.families.eruca = function(erucaMob)
             elseif resleepTime <= os.time() then -- No timer was set (normal behavior) OR crawler has been back home for 2 minutes since disengaged
                 bedTime(mob)
             end
-        elseif subAnimation == 1 and currentHour < sleepHour and currentHour >= mob:getLocalVar("[eruca]wakeHour") then
+        elseif
+            subAnimation == 1 and
+            currentHour < sleepHour and
+            currentHour >= mob:getLocalVar("[eruca]wakeHour")
+        then
             wakeUp(mob)
         end
-        if VanadielDayElement() == xi.magic.ele.FIRE and mob:getMod(xi.mod.REGAIN) == 0 then
+
+        if
+            VanadielDayElement() == xi.magic.ele.FIRE and
+            mob:getMod(xi.mod.REGAIN) == 0
+        then
             mob:setMod(xi.mod.REGAIN, 30)
-        elseif VanadielDayElement() ~= xi.magic.ele.FIRE and mob:getMod(xi.mod.REGAIN) ~= 0 then
+        elseif
+            VanadielDayElement() ~= xi.magic.ele.FIRE and
+            mob:getMod(xi.mod.REGAIN) ~= 0
+        then
             mob:setMod(xi.mod.REGAIN, 0)
         end
     end)

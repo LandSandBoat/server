@@ -38,7 +38,7 @@ function quest.unlockingMyth.onTrade(player, npc, trade)
                 elseif wsPoints <= 8000 then
                     player:startEvent(10093)
                 elseif wsPoints >= 16000 then
-                     player:startEvent(10088, jobID)
+                    player:startEvent(10088, jobID)
                 end
             end
 
@@ -119,31 +119,31 @@ end
 Floor     Point
 100     250
 
-80-99 : 500+20(99-x)
+80-99 : 500 + 20(99 - x)
 95     580
 90     680
 85     780
 80     880
 
-60-79 : 1000+40(79-x)
+60-79 : 1000 + 40(79 - x)
 75     1160
 70     1360
 65     1560
 60     1760
 
-40-59 : 2000+80(59-x)
+40-59 : 2000 + 80(59 - x)
 55     2320
 50     2720
 45     3120
 40     3520
 
-20-39 : 4000+160(39-x)
+20-39 : 4000 + 160(39 - x)
 35     4640
 30     5440
 25     6240
 20     7040
 
-01-19 : 8000+320*(19-x)
+01-19 : 8000 + 320 * (19 - x)
 15     9280
 10     10880
 5     12480

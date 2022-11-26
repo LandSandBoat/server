@@ -93,22 +93,22 @@ xi.dynamis.onSpawnDynaLord = function(mob)
             if move >= 1131 and move < 1134 then
                 mobAr:queue(0, function(mobArg)
                     mobArg:setLocalVar("ws", 0)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                     mobArg:useMobAbility(move)
                 end)
             else
                 mobAr:queue(0, function(mobArg)
                     mobArg:setLocalVar("ws", 0)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                     mobArg:useMobAbility(move, mobArg:getTarget())
                 end)
             end
         else
             if mobAr:getID() == mobAr:getZone():getLocalVar("179") then
                 mobAr:getZone():setLocalVar("DL_HP", mobAr:getHP())
-                mobAr:SetMagicCastingEnabled(true)
-                mobAr:SetMobAbilityEnabled(true)
-                mobAr:SetAutoAttackEnabled(true)
+                mobAr:setMagicCastingEnabled(true)
+                mobAr:setMobAbilityEnabled(true)
+                mobAr:setAutoAttackEnabled(true)
             end
         end
 
@@ -163,8 +163,8 @@ xi.dynamis.onEngagedDynaLord = function(mob, target)
     local zone = mob:getZone()
     local mainLord = zone:getLocalVar("179")
     if mob:getLocalVar("Clone") == 1 then
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMagicCastingEnabled(false)
+        mob:setAutoAttackEnabled(false)
+        mob:setMagicCastingEnabled(false)
         mob:setHP(zone:getLocalVar("DL_HP"))
         mob:setLocalVar("ws", 1)
     else
@@ -180,9 +180,9 @@ xi.dynamis.onFightDynaLord = function(mob, target)
     local teraTime = zone:getLocalVar("teraTime")
 
     if mob:getID() ~= mainLord then
-        mob:SetMagicCastingEnabled(false)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+        mob:setAutoAttackEnabled(false)
+        mob:setMobAbilityEnabled(false)
         mob:setDropID(0)
     end
 
@@ -190,9 +190,9 @@ xi.dynamis.onFightDynaLord = function(mob, target)
         if os.time() > teraTime and mob:getID() == mainLord and mob:getLocalVar("cloneSpawn") <= os.time() then
             mob:setLocalVar("cloneSpawn", os.time() + 5)
             mob:entityAnimationPacket("casm")
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setAutoAttackEnabled(false)
+            mob:setMagicCastingEnabled(false)
+            mob:setMobAbilityEnabled(false)
             mob:timer(3000, function(mobArg, targetArg)
                 spawnClones(mobArg, targetArg)
                 local cloneMoves = {1131, 1133, 1134}
@@ -200,23 +200,23 @@ xi.dynamis.onFightDynaLord = function(mob, target)
                 mobArg:setLocalVar("ws", 1)
                 zone:setLocalVar("teraTime", os.time() + math.random(90,120))
                 mobArg:entityAnimationPacket("shsm")
-                mobArg:SetMobAbilityEnabled(true)
+                mobArg:setMobAbilityEnabled(true)
             end)
         end
 
         if zone:getLocalVar("ying_killed") == 1 and zone:getLocalVar("yang_killed") == 1 and zone:getLocalVar("dwagonSpawn") <= os.time() then
             zone:setLocalVar("dwagonSpawn", os.time() + 5)
             if zone:getLocalVar("dwagonLastPop") <= os.time() then -- Spawn Ying and Yang
-                mob:SetAutoAttackEnabled(false)
-                mob:SetMagicCastingEnabled(false)
-                mob:SetMobAbilityEnabled(false)
+                mob:setAutoAttackEnabled(false)
+                mob:setMagicCastingEnabled(false)
+                mob:setMobAbilityEnabled(false)
                 mob:entityAnimationPacket("casm")
                 mob:timer(3000, function (mobArg, targetArg)
                     spawnDwagons(mobArg, targetArg)
                     mobArg:entityAnimationPacket("shsm")
-                    mobArg:SetAutoAttackEnabled(true)
-                    mobArg:SetMagicCastingEnabled(true)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setAutoAttackEnabled(true)
+                    mobArg:setMagicCastingEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                     if mobArg:getLocalVar("initialSpawnDialog") ~= 1 and mobArg:getID() == mainLord then
                         mobArg:showText(mob, lordText + 7)
                         mobArg:setLocalVar("initialSpawnDialog", 1)
@@ -255,6 +255,12 @@ xi.dynamis.onFightYing = function(mob, target)
             spawnDwagons(mob, target)
         end
     end
+
+    if zone:getLocalVar("179") ~= 0 then
+        if not GetMobByID(zone:getLocalVar("179")) or GetMobByID(zone:getLocalVar("179")):getHP() == 0 then
+            DespawnMob(mob:getID())
+        end
+    end
 end
 
 xi.dynamis.onFightYang = function(mob, target)
@@ -266,6 +272,12 @@ xi.dynamis.onFightYang = function(mob, target)
         mob:setLocalVar("Spawning", os.time() + 5)
         if dwagonVars[2] == 1 and os.time() > yingToD + 30 then
             spawnDwagons(mob, target)
+        end
+    end
+
+    if zone:getLocalVar("179") ~= 0 then
+        if not GetMobByID(zone:getLocalVar("179")) or GetMobByID(zone:getLocalVar("179")):getHP() == 0 then
+            DespawnMob(mob:getID())
         end
     end
 end
@@ -571,8 +583,8 @@ xi.dynamis.onSpawnAnimated = function(mob)
 end
 
 xi.dynamis.onEngagedAnimated = function(mob, target)
-    mob:setLocalVar("castTime", os.time() + math.random(0, 3))
     mob:setLocalVar("changeTime", os.time() + math.random(20, 30))
+    mob:setLocalVar("castTime", os.time() + math.random(8, 10))
 end
 
 xi.dynamis.onFightAnimated = function(mob, target)
@@ -584,6 +596,7 @@ xi.dynamis.onFightAnimated = function(mob, target)
     end
 
     if mob:getLocalVar("changeTime") <= os.time() then
+        mob:addMP(200)
         mob:castSpell(xi.magic.spell.WARP, chosenTarget)
         mob:setLocalVar("changeTime", os.time() + math.random(10, 15))
     end
@@ -598,7 +611,7 @@ xi.dynamis.onFightAnimated = function(mob, target)
                         chosenTarget = target
                     end
                     mob:castSpell(data[1], chosenTarget)
-                    mob:setLocalVar("castTime", os.time() + math.random(5, 10))
+                    mob:setLocalVar("castTime", os.time() + math.random(18, 25))
                     break
                 end
             end
@@ -615,13 +628,16 @@ xi.dynamis.onSpawnSatellite = function(mob)
     end)
 end
 
+xi.dynamis.onEngageSatellite = function(mob, target)
+end
+
 xi.dynamis.onFightSatellite = function(mob, target)
     if mob:getLocalVar("animSwap") == 0 then
         mob:setLocalVar("animSwap", 1)
         mob:setAnimationSub(mob:getLocalVar("animSub"))
     end
 
-    if not GetMobByID(mob:getLocalVar("ParentID")) then -- Despawn if Animated Parent Dies
+    if not GetMobByID(mob:getLocalVar("ParentID")) or GetMobByID(mob:getLocalVar("ParentID")):getHP() == 0 then -- Despawn if Animated Parent Dies
         DespawnMob(mob:getID())
     end
 end

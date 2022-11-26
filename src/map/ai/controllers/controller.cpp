@@ -92,7 +92,7 @@ bool CController::IsAutoAttackEnabled() const
     return m_AutoAttackEnabled;
 }
 
-void CController::SetAutoAttackEnabled(bool enabled)
+void CController::setAutoAttackEnabled(bool enabled)
 {
     m_AutoAttackEnabled = enabled;
 }
@@ -112,7 +112,7 @@ bool CController::IsMagicCastingEnabled() const
     return m_MagicCastingEnabled;
 }
 
-void CController::SetMagicCastingEnabled(bool enabled)
+void CController::setMagicCastingEnabled(bool enabled)
 {
     m_MagicCastingEnabled = enabled;
 }

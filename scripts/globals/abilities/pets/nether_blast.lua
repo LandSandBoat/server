@@ -11,12 +11,12 @@ require("scripts/globals/summon")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local damage = pet:getMainLvl() + 10 -- https://ffxiclopedia.fandom.com/wiki/Nether_Blast | http://wiki.ffo.jp/html/4045.html
-    local dmgmod = 5
+    local damage = (5 * pet:getMainLvl()) + 10 -- https://ffxiclopedia.fandom.com/wiki/Nether_Blast | http://wiki.ffo.jp/html/4045.html
+    local dmgmod = 1
     local ignoreres = true
     local element = xi.magic.ele.DARK
     local dmgtype = xi.damageType.DARK
@@ -24,10 +24,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local tpbonus = xi.mobskills.magicalTpBonus.NO_EFFECT
 
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, element, dmgmod, tpbonus, shadows, ignoreres)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, element, ignoreres)
-    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, dmgtype, 1)
-
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, dmgtype)
+    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.BREATH, dmgtype, 1)
+    target:takeDamage(damage, pet, xi.attackType.BREATH, dmgtype)
     target:updateEnmityFromDamage(pet, damage)
 
     return damage

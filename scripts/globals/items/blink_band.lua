@@ -17,7 +17,10 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if (target:hasStatusEffect(xi.effect.COPY_IMAGE) or target:hasStatusEffect(xi.effect.THIRD_EYE)) then
+    if
+        target:hasStatusEffect(xi.effect.COPY_IMAGE) or
+        target:hasStatusEffect(xi.effect.THIRD_EYE)
+    then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
         target:addStatusEffect(xi.effect.BLINK, 3, 0, 300, 15170)

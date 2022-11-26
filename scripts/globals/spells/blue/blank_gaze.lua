@@ -29,14 +29,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local effect = xi.effect.NONE
 
-    if (resist > 0.0625) then
-        if (target:isFacing(caster)) then
+    if resist > 0.0625 then
+        if target:isFacing(caster) then
             spell:setMsg(xi.msg.basic.MAGIC_ERASE)
             effect = target:dispelStatusEffect()
-            if (effect == xi.effect.NONE) then
+            if effect == xi.effect.NONE then
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
         else

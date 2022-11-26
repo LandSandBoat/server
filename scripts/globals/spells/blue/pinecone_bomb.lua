@@ -19,7 +19,10 @@ require("scripts/globals/magic")
 local spellObject = {}
 
 local function inverseBellRand(min, max, weight)
-    if not weight then weight = 0.5 end
+    if not weight then
+        weight = 0.5
+    end
+
     local mid = math.floor((max - min) / 2)
     local rand = math.floor(mid * math.pow(math.random(), weight))
     if math.random() < 0.5 then
@@ -29,11 +32,11 @@ local function inverseBellRand(min, max, weight)
     end
 end
 
-spellObject.onMagicCastingCheck = function(caster,target,spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster,target,spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
@@ -59,7 +62,7 @@ spellObject.onSpellCast = function(caster,target,spell)
 
     -- After damage is applied (which would have woken the target up from a
     -- preexisting sleep, if necesesary), apply the sleep effect for this spell.
-    if (damage > 0) then
+    if damage > 0 then
         local duration = inverseBellRand(15, 60, 0.3)
         target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, duration)
     end

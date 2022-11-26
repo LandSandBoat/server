@@ -50,6 +50,7 @@ end
 local ebonOnEventFinish = function(player, csid, option)
     if option == 1 then
         mission:setVar(player, 'Status', 3)
+        player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:addKeyItem(ebonData[player:getRace()][4])
         return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, ebonData[player:getRace()][4])
     end
@@ -182,7 +183,6 @@ mission.sections =
                 end,
 
                 [202] = function(player, csid, option)
-                    player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL) -- Should be added on first interaction per BG-Wiki.
                     mission:setVar(player, 'Status', 2)
                 end,
 

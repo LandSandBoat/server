@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Bibiki_Bay
 -----------------------------------
-require("scripts/globals/zone")
+require('scripts/globals/zone')
 -----------------------------------
 
 zones = zones or {}
@@ -72,8 +72,8 @@ zones[xi.zone.BIBIKI_BAY] =
             16793714,
             16793715,
         },
-        DALHAM = 16793858,
-        SHEN   = 16793859,
+        DALHAM = 16793928,
+        SHEN   = 16793929,
     },
     npc =
     {

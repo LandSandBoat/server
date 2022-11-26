@@ -240,11 +240,9 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
-    // ShowDebug("start pos %f %f %f", spos[0], spos[1], spos[2]);
 
     float epos[3];
     CNavMesh::ToDetourPos(&end, epos);
-    // ShowDebug("end pos %f %f %f", epos[0], epos[1], epos[2]);
 
     dtQueryFilter filter;
     filter.setIncludeFlags(0xffff);
@@ -604,7 +602,6 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
             // if we are within verticalLimitTrunc of a point, that's our closest.
             if (startHeight != endHeight)
             {
-                // ShowInfo("Different Floors");
                 return false;
             }
         }

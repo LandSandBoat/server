@@ -14,7 +14,6 @@ include(Platform)
 include(StandardProjectSettings)
 include(CompilerWarnings)
 include(Sanitizers)
-include(Tracy)
 include(Valgrind)
 include(Git)
 
@@ -72,5 +71,9 @@ add_subdirectory(ext)
 
 include(ClangTidy)
 include(Fuzzing)
+
+message(STATUS "Configuring src/common/version.cpp")
+configure_file(${CMAKE_SOURCE_DIR}/src/common/version.cpp.in
+               ${CMAKE_SOURCE_DIR}/src/common/version.cpp)
 
 add_subdirectory(src)

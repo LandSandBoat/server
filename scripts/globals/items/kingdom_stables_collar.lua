@@ -10,9 +10,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if not target:isZoneVisited(230) then
+    if not target:hasVisitedZone(230) then
         result = 56
     end
+
     return result
 end
 

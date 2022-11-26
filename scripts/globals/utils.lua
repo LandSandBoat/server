@@ -33,6 +33,7 @@ local function mergen(...)
             res[res.n] = t[j]
         end
     end
+
     return res
 end
 
@@ -41,6 +42,22 @@ function utils.bind(func, ...)
     return function(...)
         return func(unpackn(mergen(args, packn(...))))
     end
+end
+
+-- Creates a slice of an input table and returns a new table
+function utils.slice(inputTable, first, last, step)
+    local slicedTable = {}
+    first = first or 1
+    last = last or #inputTable
+    step = step or 1
+    local position = 1
+
+    for i = first, last, step do
+        slicedTable[position] = inputTable[i]
+        position = position + 1
+    end
+
+    return slicedTable
 end
 
 -- Shuffles a table and returns a new table containing the randomized result.
@@ -54,6 +71,7 @@ function utils.shuffle(inputTable)
 
     return shuffledTable
 end
+
 utils.append = nil
 
 -- Recursively appends the input table into the provided base table.
@@ -67,6 +85,7 @@ function utils.append(base, input)
             base[k] = v
         end
     end
+
     return base
 end
 
@@ -125,13 +144,138 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     return resultTable
 end
 
+function utils.chance(likelihood)
+    return math.random(100) <= likelihood
+end
+
 function utils.clamp(input, min_val, max_val)
     if min_val ~= nil and input < min_val then
         input = min_val
     elseif max_val ~= nil and input > max_val then
         input = max_val
     end
+
     return input
+end
+
+--  Returns a table containing all the elements in the specified range.
+--  Source: https://github.com/mebens/range
+function utils.range(from, to, step)
+    local t = {}
+    local argType = type(from)
+    step = step or 1
+
+    if argType == "number" then
+        for i = from, to, step do t[#t + 1] = i end
+    elseif argType == "string" then
+        local e = string.byte(to)
+        for i = string.byte(from), e, step do t[#t + 1] = string.char(i) end
+    elseif argType == "table" then
+        local metaNext = getmetatable(from).__next
+
+        if metaNext then
+            local i = from
+
+            while i < to do
+                t[#t + 1] = i
+                i = metaNext(i, step)
+            end
+
+            t[#t + 1] = to
+        end
+    end
+
+    return t
+end
+
+-----------------------------------
+--
+-- Functional
+--
+-- Functional methods provide a means to simplify logic that consists in
+-- simple operations when iterating a table.
+-- In general, they can make code much more concise and readable, but they
+-- can also end up making it a cluttered mess, so use your judgement
+-- when deciding if you want to use these methods
+-----------------------------------
+
+-- Given a table and a mapping function, returns a new table created by
+-- applying the given mapping function to the given table elements
+function utils.map(tbl, func)
+    local t = {}
+    for k, v in pairs(tbl) do
+        t[k] = func(k, v)
+    end
+    return t
+end
+
+-- Given a table and a filter function, returns a new table composed of the
+-- elements that pass the given filter.
+-- e.g: utils.filter({ "a", "b", "c", "d" }, function(k, v) return v >= "c" end)  --> { "c", "d }
+function utils.filter(tbl, func)
+    local out = {}
+
+    for k, v in pairs(tbl) do
+        if func(k, v) then
+            out[k] = v
+        end
+    end
+
+    return out
+end
+
+-- Given a table and a filter function, returns a new table composed of the
+-- elements that pass the given filter.
+-- Unlike utils.filter, this method will return an iterable table.
+-- e.g utils.filterArray({ "a", "b", "c", "d" }, function(k, v) return v >= "c" end)  --> { 1 => "c", 2 => "d" }
+function utils.filterArray(tbl, func)
+    local out = {}
+
+    for k, v in pairs(tbl) do
+        if func(k, v) then
+            table.insert(out, v)
+        end
+    end
+
+    return out
+end
+
+-- Returns true if any member of the given table passes the given
+-- predicate function
+function utils.any(tbl, predicate)
+    for k, v in pairs(tbl) do
+        if predicate(k, v) then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Returns the sum of applying the given function to each element of the given table
+-- e.g: utils.sum({ 1, 2, 3 }, function(k, v) return v end)  --> 6
+function utils.sum(tbl, func)
+    local sum = 0
+
+    for k, v in pairs(tbl) do
+        sum = sum + func(k, v)
+    end
+
+    return sum
+end
+
+-- To be used with utils.sum.
+-- Used to count the number of times an element in a table
+-- matches the given predicate
+-- e.g: utils.sum({ "a, "a", "b" }, utils.counter(function (k, v) return v == "a" end)) --> 2
+function utils.counter(predicate)
+    return function (k, v)
+        if predicate(k, v) then
+            return 1
+        else
+            return 0
+        end
+    end
 end
 
 -- returns unabsorbed damage
@@ -147,6 +291,23 @@ function utils.stoneskin(target, dmg)
                 target:delStatusEffect(xi.effect.STONESKIN)
                 target:setMod(xi.mod.STONESKIN, 0)
                 return dmg - skin
+            end
+        end
+    end
+
+    return dmg
+end
+
+function utils.rampart(target, dmg)
+    if dmg > 0 then
+        local shield = target:getMod(xi.mod.RAMPART_MAGIC_SHIELD)
+        if shield > 0 then
+            if shield > dmg then -- absorbs damage
+                target:delMod(xi.mod.RAMPART_MAGIC_SHIELD, dmg)
+                return 0
+            else -- absorbs some damage
+                target:setMod(xi.mod.RAMPART_MAGIC_SHIELD, 0)
+                return dmg - shield
             end
         end
     end
@@ -232,7 +393,7 @@ function utils.takeShadows(target, mob, dmg, shadowbehav)
             target:addEnmity(mob, -25 * shadowbehav, 0)
         end
 
-        target:setMod(shadowType, shadowsLeft);
+        target:setMod(shadowType, shadowsLeft)
 
         if shadowsLeft <= 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
@@ -289,7 +450,7 @@ function utils.thirdeye(target)
 
     if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
         --anticipated!
-        if seigan == nil or prevAnt == 6 or math.random()*100 > 100-(prevAnt+1)*15 then
+        if seigan == nil or prevAnt == 6 or math.random() * 100 > 100 - (prevAnt + 1) * 15 then
             target:delStatusEffect(xi.effect.THIRD_EYE)
         else
             teye:setPower(prevAnt + 1)
@@ -347,51 +508,64 @@ function utils.getSkillLvl(rank, level)
 end
 
 function utils.getMobSkillLvl(rank, level)
-     if level > 50 then
-         if rank == 1 then
-             return 153 + (level - 50) * 5
-         end
-         if rank == 2 then
-             return 147 + (level - 50) *4.9
-         end
-         if rank == 3 then
-             return 136 + (level - 50) * 4.8
-         end
-         if rank == 4 then
-             return 126 + (level - 50) * 4.7
-         end
-         if rank == 5 then
-             return 116 + (level - 50) * 4.5
-         end
-         if rank == 6 then
-             return 106 + (level - 50) * 4.4
-         end
-         if rank == 7 then
-             return 96 + (level - 50) * 4.3
-         end
-     end
+    if level > 50 then
+        if rank == 1 then
+            return 153 + (level - 50) * 5
+        end
 
-     if rank == 1 then
-         return 6 + (level - 1) * 3
-     end
-     if rank == 2 then
-         return 5 + (level - 1) * 2.9
-     end
-     if rank == 3 then
-         return 5 + (level - 1) * 2.8
-     end
-     if rank == 4 then
-         return 4 + (level - 1) * 2.7
-     end
-     if rank == 5 then
-         return 4 + (level - 1) * 2.5
-     end
-     if rank == 6 then
-         return 3 + (level - 1) * 2.4
-     end
-     if rank == 7 then
-         return 3 + (level - 1) * 2.3
-     end
+        if rank == 2 then
+            return 147 + (level - 50) * 4.9
+        end
+
+        if rank == 3 then
+            return 136 + (level - 50) * 4.8
+        end
+
+        if rank == 4 then
+            return 126 + (level - 50) * 4.7
+        end
+
+        if rank == 5 then
+            return 116 + (level - 50) * 4.5
+        end
+
+        if rank == 6 then
+            return 106 + (level - 50) * 4.4
+        end
+
+        if rank == 7 then
+            return 96 + (level - 50) * 4.3
+        end
+    end
+
+    if rank == 1 then
+        return 6 + (level - 1) * 3
+    end
+
+    if rank == 2 then
+        return 5 + (level - 1) * 2.9
+    end
+
+    if rank == 3 then
+        return 5 + (level - 1) * 2.8
+    end
+
+    if rank == 4 then
+        return 4 + (level - 1) * 2.7
+    end
+
+    if rank == 5 then
+        return 4 + (level - 1) * 2.5
+    end
+
+    if rank == 6 then
+        return 3 + (level - 1) * 2.4
+    end
+
+    if rank == 7 then
+        return 3 + (level - 1) * 2.3
+    end
+
     return 0
 end
 
@@ -532,7 +706,7 @@ function utils.randomEntryIdx(t)
     local keys = {}
 
     for key, _ in pairs(t) do
-        keys[#keys+1] = key
+        keys[#keys + 1] = key
     end
 
     local index = keys[math.random(1, #keys)]
@@ -563,7 +737,10 @@ end
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)
-    local _ = string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(s, pattern, function(c)
+        fields[#fields + 1] = c
+    end)
+
     return fields
 end
 
@@ -600,9 +777,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     mob:entityAnimationPacket(disAnim)
     mob:hideName(true)
     mob:setUntargetable(true)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
     mob:setPos(pos, 0)
     mob:setSpeed(0)
 
@@ -610,9 +787,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         mobArg:setPos(pos, 0)
         mobArg:hideName(false)
         mobArg:setUntargetable(false)
-        mobArg:SetAutoAttackEnabled(true)
-        mobArg:SetMagicCastingEnabled(true)
-        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setAutoAttackEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
+        mobArg:setMobAbilityEnabled(true)
         mobArg:setSpeed(mobSpeed)
         mobArg:entityAnimationPacket(reapAnim)
 
@@ -699,7 +876,10 @@ end
 
 function utils.getAngleDifference(a, b)
     local diff = math.abs(b - a)
-    if diff > math.pi then diff = 2 * math.pi - diff end
+    if diff > math.pi then
+        diff = 2 * math.pi - diff
+    end
+
     return diff
 end
 
@@ -717,4 +897,13 @@ end
 
 function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
+end
+
+-- Returns inline value  boolean      any     any
+function utils.ternary(conditional, trueVal, falseVal)
+    if conditional then
+        return trueVal
+    end
+
+    return falseVal
 end

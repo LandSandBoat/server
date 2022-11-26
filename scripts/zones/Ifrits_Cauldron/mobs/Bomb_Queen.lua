@@ -32,12 +32,14 @@ entity.onMobFight = function(mob, target)
                 break
             end
         end
+
         if canSpawnPet then
             mob:entityAnimationPacket("casm")
             mob:timer(5000, function(bombQueen)
                 if bombQueen:isDead() then
                     return
                 end
+
                 bombQueen:entityAnimationPacket("shsm")
                 local bombQueenId = mob:getID()
 

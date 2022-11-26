@@ -15,8 +15,8 @@ xi.settings.main =
     SERVER_NAME = "Nameless",
 
     SERVER_MESSAGE =
-        "Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n" ..
-        "Thank you, and we hope you enjoy sailing the sands!",
+        "Please visit https://github.com/AirSkyBoat/AirSkyBoat for the latest information on the project.\n" ..
+        "Thank you, and we hope you enjoy soaring through the skies.",
 
     -- Setting to lock content more accurately to the expansions defined below.
     -- This generally results in a more accurate presentation of your selected expansions,
@@ -165,12 +165,14 @@ xi.settings.main =
     NM_LOTTERY_COOLDOWN = 1.0,
 
 	-- GARRISON SETTINGS
-    GARRISON_LOCKOUT             = 1800, -- Time in seconds before a new garrison can be started (default: 1800)
-    GARRISON_TIME_LIMIT          = 1800, -- Time in seconds before lose ongoing garrison (default: 1800)
-    GARRISON_ONCE_PER_WEEK       = 0,    -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
-    GARRISON_PARTY_LIMIT         = 18,   -- Set to max party members you want to do garrison (default: 18).
-    GARRISON_NATION_BYPASS       = 0,    -- Set to 1 to bypass the nation requirement.
-    GARRISON_RANK                = 2,    -- Set to minumum Nation Rank to start Garrison (default: 2).
+    ENABLE_GARRISON              = false,  -- If true, enables garrison functionality
+    DEBUG_GARRISON               = false,  -- If true, garrison will print out debug messages in logs as well as players as smes.
+    GARRISON_LOCKOUT             = 1800,   -- Time in seconds before a new garrison can be started (default: 1800)
+    GARRISON_TIME_LIMIT          = 1800,   -- Time in seconds before lose ongoing garrison (default: 1800)
+    GARRISON_ONCE_PER_WEEK       = false,  -- Set to false to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_PARTY_LIMIT         = 18,     -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS       = false,  -- Set to true to bypass the nation requirement.
+    GARRISON_RANK                = 2,      -- Set to minumum Nation Rank to start Garrison (default: 2).
 
     -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME     = 72,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
@@ -221,10 +223,12 @@ xi.settings.main =
     -- Chocobo digging
     DIG_RATE                     = 85, -- % chance to receive an item from chocbo digging during favorable weather.  Set between 0 and 100.
     DIG_FATIGUE                  = 100,  -- Set max amount of items a player can dig every 24 hours. Set to 0 to disable.
-    DIG_ZONE_LIMIT               = 120,  -- Set max amount of items that can be dug from a specific zone every Vana'Diel Day. Set to 0 to disable.
+    DIG_ZONE_LIMIT               = 60,  -- Set max amount of items that can be dug from a specific zone every Vana'Diel Day. Set to 0 to disable.
     DIG_GRANT_BURROW             = 0,
     DIG_GRANT_BORE               = 0,
     DIG_DISTANCE_REQ             = 0, -- Sets the distance squared in yalms of how far a player has to move.
+    DIG_FATIGUE_SKILL_UP         = false, -- Allows for skilling up while at fatigue.
+    DIG_ABUNDANCE_BONUS          = 0,     -- Increase chance of digging up an item (450  = item digup chance +45)
 
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
@@ -237,9 +241,12 @@ xi.settings.main =
     DIG_ABUNDANCE_BONUS          = 0,     -- Increase chance of digging up an item (450  = item digup chance +45)
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
     ENM_COOLDOWN                 = 120,  -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
-    FORCE_SPAWN_QM_RESET_TIME    = 300,  -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
+    FORCE_SPAWN_QM_RESET_TIME    = 900,  -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     GOBBIE_BOX_MIN_AGE           = 45,   -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
 
     -- Synergy
     ENABLE_SYNERGY = 0, -- Default to off as Synergy is not coded
+
+    -- NM Persistence
+    NM_PERSISTENCE = 1, -- When set to 1, timed NM spawns will be persistent through server crashing
 }

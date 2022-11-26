@@ -24,10 +24,12 @@ context = zmq.Context()
 sock = context.socket(zmq.DEALER)
 sock.connect("tcp://127.0.0.1:54003")
 
+
 def print_help():
     print("You must provide a message to send.")
     print("Example:")
-    print("python3 .\\announce.py \"Here is a message from python!\"")
+    print('python3 .\\announce.py "Here is a message from python!"')
+
 
 def build_chat_packet(msg_type, gm_flag, zone, sender, msg):
     buff_size = min(236, MESSAGE_OFFSET + len(msg))
@@ -46,19 +48,21 @@ def build_chat_packet(msg_type, gm_flag, zone, sender, msg):
 
     buffer[6] = zone
 
-    struct.pack_into('{}s'.format(len(sender)), buffer, 0x08, bytes(sender, "utf-8"))
-    struct.pack_into('{}s'.format(len(msg)), buffer, MESSAGE_OFFSET, bytes(msg, "utf-8"))
+    struct.pack_into("{}s".format(len(sender)), buffer, 0x08, bytes(sender, "utf-8"))
+    struct.pack_into(
+        "{}s".format(len(msg)), buffer, MESSAGE_OFFSET, bytes(msg, "utf-8")
+    )
 
     return buffer
+
 
 def send_server_message(msg):
     print(f"Sending '{msg}'")
     buffer = build_chat_packet(MSG_CHAT_SERVMES, 1, 0, "", msg)
-    sock.send_multipart([
-        struct.pack("!B", MSG_CHAT_SERVMES),
-        b"\0",
-        buffer
-    ], zmq.NOBLOCK)
+    sock.send_multipart(
+        [struct.pack("!B", MSG_CHAT_SERVMES), b"\0", buffer], zmq.NOBLOCK
+    )
+
 
 def main():
     if len(sys.argv) < 2:
@@ -66,6 +70,7 @@ def main():
         return
 
     send_server_message(sys.argv[1])
+
 
 if __name__ == "__main__":
     main()

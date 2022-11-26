@@ -14,7 +14,7 @@ local misareauxGlobal =
     ziphiusHandleQM = function()
         local vHour = VanadielHour()
         if vHour >= 7 and vHour < 22 then -- Despawn traps for Ziphius
-            for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE+5 do
+            for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE + 5 do
                 GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 GetNPCByID(i):resetLocalVars()
             end
@@ -23,17 +23,19 @@ local misareauxGlobal =
             if random:getStatus() == xi.status.DISAPPEAR then
                 random:setLocalVar("[Ziphius]Spawn", 1)
             end
-            for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE+5 do
+
+            for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE + 5 do
                 GetNPCByID(i):setStatus(xi.status.NORMAL)
             end
         elseif vHour == 4 then -- Despawn non-baited traps
-            for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE+5 do
+            for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE + 5 do
                 if GetNPCByID(i):getLocalVar("[Ziphius]Baited") == 0 then
                     GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 end
             end
         end
     end,
+
     -----------------------------------
     -- Trade function for Ziphius NM QMs
     -----------------------------------
@@ -46,6 +48,7 @@ local misareauxGlobal =
             player:messageSpecial(ID.text.PUT_IN_TRAP, 16994)
         end
     end,
+
     -----------------------------------
     -- Spawn function for Ziphius NM QMs
     -----------------------------------

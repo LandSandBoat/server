@@ -11,9 +11,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasKeyItem(xi.ki.HOLLA_GATE_CRYSTAL) == false) then
+    if not target:hasKeyItem(xi.ki.HOLLA_GATE_CRYSTAL) then
         result = 445
     end
+
     return result
 end
 

@@ -66,6 +66,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
         KORROLOKA_LEECH_II  = 17486188,
         KORROLOKA_LEECH_III = 17486189,
         MORION_WORM         = 17486190,
+        THOON               = 17486171,
     },
     npc =
     {

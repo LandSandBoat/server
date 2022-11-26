@@ -12,7 +12,10 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.AHRIMAN_LENS) then
+    if
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and
+        npcUtil.tradeHas(trade, xi.items.AHRIMAN_LENS)
+    then
         if player:getCharVar("QuestYourCrystalBall_prog") > os.time() then
             player:messageSpecial(ID.text.CANNOT_SUBMERGE)
         else

@@ -26,26 +26,32 @@ local trustMemory = function(player)
     if player:getNation() == xi.nation.WINDURST then
         memories = memories + 2
     end
+
     -- 4 - ROCK_RACKETEER
     if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) then
         memories = memories + 4
     end
+
     -- 8 - HITTING_THE_MARQUISATE
     if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE) then
         memories = memories + 8
     end
+
     -- 16 - CRYING_OVER_ONIONS
     if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) then
         memories = memories + 16
     end
+
     -- 32 - hasItem(286) Nanaa Mihgo statue
     if player:hasItem(xi.items.NANAA_MIHGO_STATUE) then
         memories = memories + 32
     end
+
     -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
     if player:hasCompletedMission(xi.mission.log_id.AMK, xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
         memories = memories + 64
     end
+
     return memories
 end
 
@@ -81,14 +87,16 @@ entity.onTrigger = function(player, npc)
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar("TrustDialogue") == 0
     then
-        local trustFlag = (player:getRank(player:getNation()) >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+        local trustFlag = (player:getRank(player:getNation()) >= 3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
 
         player:setLocalVar("TrustDialogue", 1)
 
         player:startEvent(865, 0, 0, 0, trustMemory(player), 0, 0, 0, trustFlag)
 
     -- ROCK RACKETEER (Mihgo's Amigo follow-up)
-    elseif mihgosAmigo == QUEST_COMPLETED and rockRacketeer == QUEST_AVAILABLE and
+    elseif
+        mihgosAmigo == QUEST_COMPLETED and
+        rockRacketeer == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         if player:needToZone() then

@@ -19,7 +19,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP then
             cs = 10002
         end
@@ -32,6 +36,11 @@ end
 
 zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(10000)
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) then
+        player:startEvent(10000)
+    else
+        player:setPos(-17.8247, -4.0000, -17.6277, 191.000)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

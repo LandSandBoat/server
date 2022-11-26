@@ -17,16 +17,16 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
     end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     -- try to drain buff
     local effect = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
     local dmg = 0
 
-    if (effect ~= 0) then
+    if effect ~= 0 then
         skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
         return 1
     else

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Kabihyam
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -26,9 +26,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     local multi = 1.625
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 2.0
     end
+
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
     params.multiplier = multi

@@ -103,7 +103,7 @@ entity.onMobFight = function(mob, target)
 
         -- Shik X is last alive
         else
-                mob:messageText(mob, dialogue[math.random(1,3)])
+                mob:messageText(mob, dialogue[math.random(1, 3)])
                 mob:setMobMod(xi.mobMod.SKILL_LIST, 1165)
         end
     end
@@ -111,9 +111,9 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     mob:messageText(mob, ID.text.AT_MY_BEST)
-     -- Reset controls so thatremaining shiks don't get locked from weaponskilling
-     GetMobByID(mob:getID()-1):setLocalVar("control", 0)
-     GetMobByID(mob:getID()-2):setLocalVar("control", 0)
+    -- Reset controls so thatremaining shiks don't get locked from weaponskilling
+    GetMobByID(mob:getID()-1):setLocalVar("control", 0)
+    GetMobByID(mob:getID()-2):setLocalVar("control", 0)
 end
 
 return entity

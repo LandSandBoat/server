@@ -140,8 +140,10 @@ enum MOUNTTYPE : uint8
     MOUNT_RED_RAPTOR     = 31,
     MOUNT_IRON_GIANT     = 32,
     MOUNT_BYAKKO         = 33,
+    MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This is currently blank, probably needs additional packets sent
+    MOUNT_IXION          = 35,
     //
-    MOUNT_MAX = 34,
+    MOUNT_MAX = 36,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -163,8 +165,8 @@ enum UPDATETYPE : uint8
     UPDATE_HP       = 0x04,
     UPDATE_COMBAT   = 0x07,
     UPDATE_NAME     = 0x08,
-    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_MOB  = 0x0F,
+    UPDATE_LOOK     = 0x10,
     UPDATE_ALL_CHAR = 0x1F,
     UPDATE_DESPAWN  = 0x20,
 };
@@ -226,12 +228,12 @@ struct location_t
     uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
 
     location_t()
+    : destination(0)
+    , zone(nullptr)
+    , prevzone(0)
+    , zoning(false)
+    , boundary(0)
     {
-        destination = 0;
-        zone        = nullptr;
-        prevzone    = 0;
-        zoning      = false;
-        boundary    = 0;
     }
 };
 
@@ -254,8 +256,8 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const int8* GetName();       // Internal name of entity
-    virtual const int8* GetPacketName(); // Name of entity sent to the client
+    virtual const std::string& GetName();       // Internal name of entity
+    virtual const std::string& GetPacketName(); // Name of entity sent to the client
 
     uint16 getZone() const; // Current zone
     float  GetXPos() const; // Position of co-ordinate X

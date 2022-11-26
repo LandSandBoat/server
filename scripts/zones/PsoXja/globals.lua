@@ -24,6 +24,7 @@ psoXjaGlobal.attemptPickLock = function(player, npc, correctSideOfDoor)
                 npc:messageName(ID.text.DISCOVER_DISARM_SUCCESS, player)
                 npc:openDoor(30)
             end
+
             player:tradeComplete()
         end
     end

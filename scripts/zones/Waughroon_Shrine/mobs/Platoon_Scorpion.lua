@@ -14,10 +14,10 @@ entity.onMobSpawn = function(mob)
 
     mob:addListener("WEAPONSKILL_STATE_EXIT", "SCORPION_MIMIC_STOP", function(mobArg, skillID)
         local bf = mobArg:getBattlefield():getArea()
-        mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 0)
+        mobArg:getZone():setLocalVar(string.format("mimicControl_%s", bf), 0)
         mob:setLocalVar("mimicTimer", os.time() + 7)
 
-        if mobArg:getZone():getLocalVar(string.format("mimicControl_%s",bf)) ~= 1 then
+        if mobArg:getZone():getLocalVar(string.format("mimicControl_%s", bf)) ~= 1 then
             for _, allyID in pairs(ID.operationDesertSwarm[bf]) do
                 local mimic = GetMobByID(allyID)
 
@@ -28,9 +28,9 @@ entity.onMobSpawn = function(mob)
                     mobArg:checkDistance(mimic) < 15 and not
                     (mimic:hasStatusEffect(xi.effect.SLEEP_I) or mimic:hasStatusEffect(xi.effect.SLEEP_II))
                 then
-                    mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 1)
+                    mobArg:getZone():setLocalVar(string.format("mimicControl_%s", bf), 1)
                     mobArg:timer(5000, function(mimicArg)
-                        mimic:addTP(1000)
+                        mimicArg:addTP(1000)
                     end)
                 end
             end
@@ -38,15 +38,15 @@ entity.onMobSpawn = function(mob)
 
         -- Scorpions are bound for 10 secounds
         if math.random() <= 0.25 and skillID == 355 then
-            mobArg:showText(mob,ID.text.SCORPION_IS_BOUND)
-            mobArg:addStatusEffect(xi.effect.BIND,1,0,10)
+            mobArg:showText(mob, ID.text.SCORPION_IS_BOUND)
+            mobArg:addStatusEffect(xi.effect.BIND, 1, 0, 10)
 
         -- Scorpions can still move around, but will not auto attack
-        elseif math.random() <= 0.25 and skillID == 355 then
-            mobArg:showText(mob,ID.text.SCORPION_NO_ENERGY)
-            mobArg:SetAutoAttackEnabled(false)
+        elseif math.random() <= 0.25 and skillID == 354 then
+            mobArg:showText(mob, ID.text.SCORPION_NO_ENERGY)
+            mobArg:setAutoAttackEnabled(false)
             mobArg:timer(1000 * math.random(25, 30), function(mobArg1)
-                mobArg1:SetAutoAttackEnabled(true)
+                mobArg1:setAutoAttackEnabled(true)
             end)
         end
 

@@ -11,20 +11,22 @@ require("scripts/globals/summon")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local duration = 90
+    local bonusTime = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 3, 0, 90)-- 3 seconds / skill | Duration is capped at 180 total
+    local duration = 90 + bonusTime
     local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local bonus = xi.summon.getSummoningSkillOverCap(pet)
-    local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.element.ICE)
-    if (resm < 0.5) then
+    local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.ele.DARK)
+    if resm < 0.5 then
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I
     end
+
     duration = duration * resm
-    if (target:hasImmunity(1) or hasSleepEffects(target)) then
+    if target:hasImmunity(xi.immunity.SLEEP) or hasSleepEffects(target) then
         --No effect
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else

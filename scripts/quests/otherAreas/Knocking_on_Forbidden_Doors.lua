@@ -167,12 +167,12 @@ quest.sections =
                 onTrigger = function(player, csid, option, npc)
                     if quest:getVar(player, 'Prog') == 5 then
                         return quest:progressEvent(321, { [0] = 704,
-                                                          [1] = xi.mannequin.getMannequins(player),
-                                                          [2] = xi.mannequin.cost.PURCHASE,
-                                                          [3] = xi.mannequin.cost.TRADE,
-                                                          [4] = xi.mannequin.cost.POSE,
-                                                          [5] = player:getGil(),
-                                                          [6] = xi.ki.BETTER_HUMES_AND_MANNEQUINS })
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = xi.mannequin.cost.PURCHASE,
+                            [3] = xi.mannequin.cost.TRADE,
+                            [4] = xi.mannequin.cost.POSE,
+                            [5] = player:getGil(),
+                            [6] = xi.ki.BETTER_HUMES_AND_MANNEQUINS })
                     end
                 end,
             },
@@ -200,11 +200,11 @@ quest.sections =
             {
                 onTrigger = function(player, csid, option, npc)
                     return quest:event(321, { [1] = xi.mannequin.getMannequins(player),
-                                              [2] = xi.mannequin.cost.PURCHASE,
-                                              [3] = xi.mannequin.cost.TRADE,
-                                              [4] = xi.mannequin.cost.POSE,
-                                              [5] = player:getGil(),
-                                              })
+                        [2] = xi.mannequin.cost.PURCHASE,
+                        [3] = xi.mannequin.cost.TRADE,
+                        [4] = xi.mannequin.cost.POSE,
+                        [5] = player:getGil(),
+                        })
                 end,
 
                 onTrade = function(player, npc, trade)
@@ -219,11 +219,11 @@ quest.sections =
 
                     if tradedMannequin then
                         return quest:progressEvent(319, { [0] = 2,
-                                                          [1] = xi.mannequin.getMannequins(player), -- Player Mannequin List
-                                                          [2] = xi.mannequin.cost.PURCHASE,
-                                                          [3] = xi.mannequin.cost.TRADE,
-                                                          [4] = 1, -- Leaving this out gives a "It's still in pretty good condition" message
-                                                          })
+                            [1] = xi.mannequin.getMannequins(player), -- Player Mannequin List
+                            [2] = xi.mannequin.cost.PURCHASE,
+                            [3] = xi.mannequin.cost.TRADE,
+                            [4] = 1, -- Leaving this out gives a "It's still in pretty good condition" message
+                            })
                     end
                 end,
             },
@@ -237,21 +237,22 @@ quest.sections =
                         if player:getGil() >= xi.mannequin.cost.PURCHASE then
                             richEnough = 1
                         end
-                        player:updateEvent( { [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
-                                              [1] = xi.mannequin.getMannequins(player),
-                                              [2] = option,
-                                              })
+
+                        player:updateEvent({ [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = option,
+                        })
                     elseif
                         option >= 11 and
                         option <= 18
                     then
                         -- Pose a mannequin
                         local race = option - 10 -- From 1 to 8, for consistency in lua
-                        player:updateEvent( { [0] = 1,
-                                              [1] = xi.mannequin.getMannequins(player),
-                                              [2] = option,
-                                              [3] = xi.mannequin.getMannequinPose(player, race),
-                                              })
+                        player:updateEvent({ [0] = 1,
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = option,
+                            [3] = xi.mannequin.getMannequinPose(player, race),
+                        })
                     end
                 end,
             },

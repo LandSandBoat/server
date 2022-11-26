@@ -97,8 +97,8 @@ xi.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
     end
 end
 
-xi.manaclipper.aboard = function(player, regionId, isAboard)
-    player:setCharVar("[manaclipper]aboard", isAboard and regionId or 0)
+xi.manaclipper.aboard = function(player, triggerArea, isAboard)
+    player:setCharVar("[manaclipper]aboard", isAboard and triggerArea or 0)
 end
 
 xi.manaclipper.onZoneIn = function(player)
@@ -141,7 +141,7 @@ xi.manaclipper.onTransportEvent = function(player, transport)
     local ID = zones[player:getZoneID()]
     local aboard = player:getCharVar("[manaclipper]aboard")
 
-    -- leaving Sunset Docks. must be standing in region 1. must have a ticket.
+    -- leaving Sunset Docks. must be standing in trigger area 1. must have a ticket.
     if aboard == 1 then
         if player:hasKeyItem(xi.ki.MANACLIPPER_TICKET) then
             player:delKeyItem(xi.ki.MANACLIPPER_TICKET)
@@ -155,6 +155,7 @@ xi.manaclipper.onTransportEvent = function(player, transport)
             else
                 player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.MANACLIPPER_MULTI_TICKET, uses - 1)
             end
+
             player:setCharVar("Manaclipper_Ticket", uses - 1)
             player:startEvent(14)
         else
@@ -162,7 +163,7 @@ xi.manaclipper.onTransportEvent = function(player, transport)
             player:setPos(489, -3, 713, 200) -- kicked off Manaclipper, returned to Sunset Docks
         end
 
-    -- leaving Purgonorgo Isle. must be standing in region 2. no ticket required.
+    -- leaving Purgonorgo Isle. must be standing in trigger area 2. no ticket required.
     elseif aboard == 2 then
         player:startEvent(16)
     end

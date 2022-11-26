@@ -11,7 +11,14 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 and (mob:getMainJob() == xi.job.COR or mob:getMainJob() == xi.job.BRD or mob:getMainJob() == xi.job.RDM) then
+    if
+        mob:getAnimationSub() == 0 and
+        (
+            mob:getMainJob() == xi.job.COR or
+            mob:getMainJob() == xi.job.BRD or
+            mob:getMainJob() == xi.job.RDM
+        )
+    then
         return 0
     else
         return 1
@@ -21,7 +28,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = math.random(2, 3)
     local accmod = 1
-    local dmgmod = 1.5
+    local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCE, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)

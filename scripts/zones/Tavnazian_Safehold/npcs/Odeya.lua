@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Odeya
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

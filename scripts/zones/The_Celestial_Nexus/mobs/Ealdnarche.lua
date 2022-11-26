@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
     mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
@@ -29,9 +29,9 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:getBattleTime() % 9 <= 2) then
-        local orbitalOne = GetMobByID(mob:getID()+3)
-        local orbitalTwo = GetMobByID(mob:getID()+4)
+    if mob:getBattleTime() % 9 <= 2 then
+        local orbitalOne = GetMobByID(mob:getID() + 3)
+        local orbitalTwo = GetMobByID(mob:getID() + 4)
 
         if not orbitalOne:isSpawned() then
             orbitalOne:setPos(mob:getPos())
@@ -46,9 +46,9 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    DespawnMob(mob:getID()+1)
-    DespawnMob(mob:getID()+3)
-    DespawnMob(mob:getID()+4)
+    DespawnMob(mob:getID() + 1)
+    DespawnMob(mob:getID() + 3)
+    DespawnMob(mob:getID() + 4)
     local battlefield = player:getBattlefield()
     player:startEvent(32004, battlefield:getArea())
 end
@@ -57,9 +57,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, target)
-    if (csid == 32004) then
+    if csid == 32004 then
         DespawnMob(target:getID())
-        local mob = SpawnMob(target:getID()+2)
+        local mob = SpawnMob(target:getID() + 2)
         mob:updateEnmity(player)
         --the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
         mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)

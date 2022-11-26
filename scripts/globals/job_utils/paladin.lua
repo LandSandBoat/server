@@ -77,7 +77,7 @@ end
 
 xi.job_utils.paladin.useCover = function(player, target, ability)
     local baseDuration = 15
-    local bonusTime    = utils.clamp(math.floor((player:getStat(xi.mod.VIT) + player:getStat(xi.mod.MND) - target:getStat(xi.mod.VIT) * 2) / 4), 0, 15)
+    local bonusTime    = 0
     local jpValue      = player:getJobPointLevel(xi.jp.COVER_DURATION)
     local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION) + jpValue
 
@@ -160,16 +160,16 @@ xi.job_utils.paladin.useRampart = function(player, target, ability)
 end
 
 xi.job_utils.paladin.useSentinel = function(player, target, ability)
-   -- Whether feet have to be equipped before using ability, or if they can be swapped in
-   -- is disputed.  Source used: http://wiki.bluegartr.com/bg/Sentinel
+    -- Whether feet have to be equipped before using ability, or if they can be swapped in
+    -- is disputed.  Source used: http://wiki.bluegartr.com/bg/Sentinel
     local power       = (90 + player:getMod(xi.mod.SENTINEL_EFFECT)) * 100
     local guardian    = player:getMerit(xi.merit.GUARDIAN)
     local enhGuardian = player:getMod(xi.mod.ENHANCES_GUARDIAN) * (guardian / 19)
     local jpValue     = player:getJobPointLevel(xi.jp.SENTINEL_EFFECT)
     local duration    = 30 + enhGuardian
 
-   -- Sent as positive power because UINTs, man.
-   player:addStatusEffect(xi.effect.SENTINEL, power, 3, duration, 0, guardian + jpValue)
+    -- Sent as positive power because UINTs, man.
+    player:addStatusEffect(xi.effect.SENTINEL, power, 3, duration, 0, guardian + jpValue)
 end
 
 xi.job_utils.paladin.useSepulcher = function(player, target, ability)
@@ -211,12 +211,12 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     -- Calculate stun proc chance
     chance = chance + (player:getMainLvl() - target:getMainLvl()) * 5
 
-    if math.random()*100 < chance then
+    if math.random() * 100 < chance then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
     -- Randomize damage
-    local ratio = player:getStat(xi.mod.ATT)/target:getStat(xi.mod.DEF)
+    local ratio = player:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
 
     if ratio > 1.3 then
         ratio = 1.3

@@ -47,6 +47,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
+#include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
 #include <chrono>
@@ -284,6 +285,10 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
     }
+    else
+    {
+        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+    }
 
     // Check if we should remove SJ, whether or not there is a lv cap.
     if (!(m_Rules & BCRULES::RULES_ALLOW_SUBJOBS))
@@ -300,6 +305,11 @@ bool CBattlefield::IsOccupied() const
 bool CBattlefield::isInteraction() const
 {
     return m_isInteraction;
+}
+
+bool CBattlefield::isEntered(CCharEntity* PChar) const
+{
+    return m_EnteredPlayers.find(PChar->id) != m_EnteredPlayers.end();
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -326,12 +336,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                // Show timer except in Temenos and Apollyon
-                if (this->GetZoneID() != 37 && this->GetZoneID() != 38)
+
+                if (m_showTimer)
                 {
                     charutils::SendTimerPacket(PChar, GetRemainingTime());
                 }
-                charutils::SendTimerPacket(PChar, GetRemainingTime());
 
                 // Try to add the player's pet in case they have one that can
                 if (PChar->PPet != nullptr)
@@ -517,9 +526,18 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         {
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SJ_RESTRICTION);
         }
-        if (m_LevelCap)
+
+        // Release charmed pet when master leaves battlefield
+        if (PChar->PPet && PChar->PPet->isCharmed)
         {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            petutils::DetachPet(PChar);
+        }
+
+        m_Zone->updateCharLevelRestriction(PChar);
+
+        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+        {
+            PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->SetSubPower(0);
         }
 
         if (PChar->isDead())
@@ -584,21 +602,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             // allies targid >= 0x700
             if (PEntity->targid >= 0x700)
             {
-                if (auto* PPetEntity = dynamic_cast<CPetEntity*>(PEntity))
-                {
-                    if (PPetEntity->PMaster && PPetEntity->PMaster->objtype == TYPE_PC &&
-                        (PPetEntity->getPetType() == PET_TYPE::WYVERN ||
-                         PPetEntity->getPetType() == PET_TYPE::AUTOMATON))
-                    {
-                        return found;
-                    }
-
-                    if (PPetEntity->isAlive() && PPetEntity->PAI->IsSpawned())
-                    {
-                        PPetEntity->Die();
-                    }
-                }
-
                 if (auto* PMobEntity = dynamic_cast<CMobEntity*>(PEntity))
                 {
                     if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
@@ -606,9 +609,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                         m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                     }
                 }
-
-                PEntity->status = STATUS_TYPE::DISAPPEAR;
-                return found;
             }
             else
             {
@@ -746,8 +746,22 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             RemoveEntity(PChar, leavecode);
+        }
+    }
+
+    // Remove all registered players as long as they're in the zone
+    for (auto id : m_RegisteredPlayers)
+    {
+        auto* PChar = GetZone()->GetCharByID(id);
+        if (PChar)
+        {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            m_Zone->updateCharLevelRestriction(PChar);
+
+            if (PChar->PPet)
+            {
+                PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            }
         }
     }
 
@@ -945,7 +959,12 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
                 if (group.deathCallback.valid())
                 {
-                    group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), group.deathCount);
+                    auto result = group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), group.deathCount);
+                    if (!result.valid())
+                    {
+                        sol::error err = result;
+                        ShowError("Error in battlefield %s group.death: %s", this->GetName(), err.what());
+                    }
                 }
 
                 if (group.allDeathCallback.valid() && group.deathCount >= group.mobIds.size())
@@ -963,13 +982,23 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
                     if (deathCount == group.mobIds.size())
                     {
-                        group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                        auto result = group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                        if (!result.valid())
+                        {
+                            sol::error err = result;
+                            ShowError("Error in battlefield %s group.allDeath: %s", this->GetName(), err.what());
+                        }
                     }
                 }
 
                 if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
                 {
-                    group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                    auto result = group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
+                    if (!result.valid())
+                    {
+                        sol::error err = result;
+                        ShowError("Error in battlefield %s group.randomDeath: %s", this->GetName(), err.what());
+                    }
                 }
                 break;
             }

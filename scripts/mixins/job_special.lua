@@ -250,11 +250,18 @@ local abilitiesReady = function(mob)
     local now = os.time()
     local readyTime = mob:getLocalVar("[jobSpecial]readyInitial")
 
-    if readyTime > 0 and now > readyTime and now > mob:getLocalVar("[jobSpecial]cooldown") then
+    if
+        readyTime > 0 and
+        now > readyTime and
+        now > mob:getLocalVar("[jobSpecial]cooldown")
+    then
         local numAbilities = mob:getLocalVar("[jobSpecial]numAbilities")
 
         for i = 1, numAbilities do
-            if now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)  then
+            if
+                now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and
+                mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)
+            then
                 table.insert(abilities, i)
             end
         end
@@ -320,8 +327,8 @@ g_mixins.job_special = function(jobSpecialMob)
                 end
             end
 
-            if mob:isInDynamis() and ((mob:getPet():getID() == mob:getID()) or not mob:hasPet()) then
-                ability = 710
+            if mob:isInDynamis() and mob:getMainJob() == xi.job.BST and not mob:hasPet() then
+                ability = 710 -- Charm
             end
 
             mob:useMobAbility(ability)

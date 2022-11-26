@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Masis
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

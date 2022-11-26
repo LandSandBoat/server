@@ -66,10 +66,17 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
         ref<uint8>(0x38) |= 0x08; // New player ?
     }
 
-    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // + model sizing : 0x02 - 0; 0x08 - 1; 0x10 - 2;
+    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size << 3);
     ref<uint8>(0x2C) = PChar->GetSpeed();
     ref<uint16>(0x2E) |= PChar->speedsub << 1; // Not sure about this, it was a work around when we set speedsub incorrectly..
     ref<uint8>(0x30) = PChar->isInEvent() ? (uint8)ANIMATION_EVENT : PChar->animation;
+
+    if (false /*Replace false with test that says "This PChar is in a zone with zone-wide alliances, e.g. Old-Style Dynamis, Einherjar(?), etc."*/)
+    {
+        // Enable the full-size treasure menu + other things for Old-Style Dynamis.
+        // All claimed mobs show up as red, not purple, etc.
+        ref<uint8>(0x29) |= 0x02;
+    }
 
     CItemLinkshell* linkshell = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
 

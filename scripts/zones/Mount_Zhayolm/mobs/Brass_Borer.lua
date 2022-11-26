@@ -47,10 +47,16 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
 
-    if mob:getHPP() < mob:getLocalVar("defUp") and mob:getLocalVar("usedMainSpec") <= mob:getLocalVar("DEF") then
+    if
+        mob:getHPP() < mob:getLocalVar("defUp") and
+        mob:getLocalVar("usedMainSpec") <= mob:getLocalVar("DEF")
+    then
         mob:useMobAbility(1815)
-        mob:setLocalVar("usedMainSpec", mob:getLocalVar("usedMainSpec") +1)
-    elseif mob:getLocalVar("usedMainSpec") >= 5 and mob:getLocalVar("Cannonball") == 0 then
+        mob:setLocalVar("usedMainSpec", mob:getLocalVar("usedMainSpec") + 1)
+    elseif
+        mob:getLocalVar("usedMainSpec") >= 5 and
+        mob:getLocalVar("Cannonball") == 0
+    then
         mob:useMobAbility(1818)
         mob:setLocalVar("Cannonball", 1)
     end

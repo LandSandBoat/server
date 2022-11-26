@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            { id = 893, hpp = math.random(30,55) }, -- uses Judgment Bolt once while near 50% HPP.
+            { id = 893, hpp = math.random(30, 55) }, -- uses Judgment Bolt once while near 50% HPP.
         },
     })
 end

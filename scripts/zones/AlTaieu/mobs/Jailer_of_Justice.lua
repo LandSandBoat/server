@@ -10,16 +10,16 @@ local entity = {}
 
 local spawnXzomit = function(mob, xzomit)
     mob:entityAnimationPacket("casm")
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
     local x = mob:getXPos()
     local y = mob:getYPos()
     local z = mob:getZPos()
     mob:timer(3000, function(mobArg)
         if mob:isAlive() then
             mobArg:entityAnimationPacket("shsm")
-            mobArg:SetAutoAttackEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setAutoAttackEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
             GetMobByID(xzomit):setSpawn(x + math.random(1, 2), y, z + math.random(1, 2))
             SpawnMob(xzomit, 300):updateEnmity(mobArg:getTarget())
         end
@@ -29,8 +29,8 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("familiarTrigger", math.random(40, 60))
     mob:setLocalVar("canCharm", os.time() + 240)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
 end
 
 entity.onMobFight = function(mob, target)
@@ -53,9 +53,9 @@ entity.onMobFight = function(mob, target)
                     not GetMobByID(xzomit):isSpawned() and
                     mob:canUseAbilities() == true
                 then
-                    spawnXzomit(mob, xzomit)
                     mob:setLocalVar("lastPetPop", os.time())
                     alreadyPopped = true
+                    spawnXzomit(mob, xzomit)
                 end
             end
         end

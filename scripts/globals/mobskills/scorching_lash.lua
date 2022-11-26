@@ -14,17 +14,17 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-  if(mob:getFamily() == 316) then
-    local mobSkin = mob:getModelId()
+    if mob:getFamily() == 316 then
+        local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1793) then
-        return 0
-    else
-        return 1
+        if mobSkin == 1793 then
+            return 0
+        else
+            return 1
+        end
     end
-  end
 
-    if (target:isBehind(mob, 48) == false) then
+    if not target:isBehind(mob, 48) then
         return 1
     else
         return 0
@@ -34,7 +34,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
-    local dmgmod = 1.3
+    local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)

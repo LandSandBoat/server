@@ -269,7 +269,7 @@ xi.atma.onEffectLose = function(target, effect)
     end
 end
 
-xi.atma.onTrigger = function(player,npc)
+xi.atma.onTrigger = function(player, npc)
     local atmaMask   = getAtmaMask(player)
     local activeAtma = { 0, 0, 0 }
     local menuParams = 0x1000000
@@ -309,11 +309,11 @@ xi.atma.onTrigger = function(player,npc)
     player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
 end
 
-xi.atma.onEventUpdate = function(player,csid,option)
-    player:updateEvent(0,0)
+xi.atma.onEventUpdate = function(player, csid, option, npc)
+    player:updateEvent(0, 0)
 end
 
-xi.atma.onEventFinish = function(player,csid,option)
+xi.atma.onEventFinish = function(player, csid, option, npc)
     if option < 0x40000000 then
         if option % 0x10000 == 1 then
             local selection = (option - 1) / 0x10000

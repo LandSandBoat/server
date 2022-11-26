@@ -86,7 +86,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint32>(0x50) = PChar->m_unlockedAttachments.attachments[6];
         ref<uint32>(0x54) = PChar->m_unlockedAttachments.attachments[7];
 
-        memcpy(data + (0x58), PChar->PAutomaton->GetName(), PChar->PAutomaton->name.size());
+        memcpy(data + (0x58), PChar->PAutomaton->GetName().c_str(), PChar->PAutomaton->GetName().size());
 
         ref<uint16>(0x68) = PChar->PAutomaton->health.hp == 0 ? PChar->PAutomaton->GetMaxHP() : PChar->PAutomaton->health.hp;
         ref<uint16>(0x6A) = PChar->PAutomaton->GetMaxHP();
@@ -125,6 +125,6 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x98) = PChar->PAutomaton->stats.CHR;
         ref<uint16>(0x9A) = PChar->PAutomaton->getMod(Mod::CHR);
 
-        ref<uint8>(0x9C) = 0; // extra elemental capacity from gifts
+        ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
     }
 }

@@ -79,10 +79,19 @@ xi.job_utils.white_mage.useAsylum = function(player, target, ability)
 end
 
 xi.job_utils.white_mage.useBenediction = function(player, target, ability)
-    -- To Do: Benediction can remove Charm only while in Assault Mission Lamia No.13
-    for i, effect in ipairs(removables) do
-        if target:hasStatusEffect(effect) then
-            target:delStatusEffect(effect)
+    -- Benediction removing status ailments added in ToAU
+    if xi.settings.main.ENABLE_TOAU == 1 then
+        -- To Do: Benediction can remove Charm only while in Assault Mission Lamia No.13
+        for i, effect in ipairs(removables) do
+            if target:hasStatusEffect(effect) then
+                target:delStatusEffect(effect)
+            end
+        end
+
+        local power = 33 -- chance to remove Doom. Basing off of Holy Water?
+
+        if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
+            target:delStatusEffect(xi.effect.DOOM)
         end
     end
 
@@ -92,12 +101,6 @@ xi.job_utils.white_mage.useBenediction = function(player, target, ability)
 
     if heal > maxHeal then
         heal = maxHeal
-    end
-
-    local power = 33 --chance to remove Doom. Basing off of Holy Water?
-
-    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
-        target:delStatusEffect(xi.effect.DOOM)
     end
 
     player:updateEnmityFromCure(target, heal)

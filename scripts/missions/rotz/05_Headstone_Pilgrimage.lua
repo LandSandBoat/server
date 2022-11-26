@@ -96,8 +96,8 @@ mission.sections =
                     if option == 1 then
                         player:messageSpecial(behemothsDominionID.text.AIR_AROUND_YOU_CHANGED)
 
-                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
                         SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON)
+                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
                     end
                 end,
 
@@ -320,6 +320,8 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.FIRE_FRAGMENT) then
                         player:messageName(yuhtungaJungleID.text.ALREADY_OBTAINED_FRAG, nil, xi.ki.FIRE_FRAGMENT)
+
+                        return mission:noAction()
                     elseif os.time() >= npc:getLocalVar('cooldown') then
                         if
                             not GetMobByID(yuhtungaJungleID.mob.TIPHA):isSpawned() and
@@ -327,7 +329,7 @@ mission.sections =
                         then
                             return mission:progressEvent(200, xi.ki.FIRE_FRAGMENT)
                         else
-                            player:messageSpecial(yuhtungaJungleID.text.SOMETHING_BETTER)
+                            return mission:messageSpecial(yuhtungaJungleID.text.SOMETHING_BETTER)
                         end
                     else
                         return mission:progressEvent(201, xi.ki.FIRE_FRAGMENT)
@@ -342,7 +344,7 @@ mission.sections =
                         player:messageSpecial(yuhtungaJungleID.text.THE_OPO_OPOS_ATTACK)
 
                         SpawnMob(yuhtungaJungleID.mob.TIPHA):updateClaim(player)
-                        SpawnMob(yuhtungaJungleID.mob.CARTHI):updateClaim(player)
+                        SpawnMob(yuhtungaJungleID.mob.CARTHI)
                     end
                 end,
 

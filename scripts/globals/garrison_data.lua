@@ -8,167 +8,122 @@ xi = xi or {}
 xi.garrison = xi.garrison or {}
 
 -- Name is Determined by Nation and LevelCap
-xi.garrison.names =
+-- Names in order of xi.nation values (sandoria, bastok, windurst)
+xi.garrison.allyNames =
 {
-    --level 20 garrison names
-    [20] =
-    {
-        [0] =
-        {
-            npcName = "Patrician"
-        },
-        [1] =
-        {
-            npcName = "Recruit"
-        },
-        [2] =
-        {
-            npcName = "Candidate"
-        },
-    },
-    --level 30 garrison names
-    [30] =
-    {
-        [0] =
-        {
-            npcName = "Trader"
-        },
-        [1] =
-        {
-            npcName = "Mariner"
-        },
-        [2] =
-        {
-            npcName = "Scholar"
-        },
-    },
-    --level 40 garrison names
-    [40] =
-    {
-        [0] =
-        {
-            npcName = "TempleKnight"
-        },
-        [1] =
-        {
-            npcName = "GoldMusketeer"
-        },
-        [2] =
-        {
-            npcName = "UNKNOWN"
-        },
-    },
-    --level 50 garrison names
-    [50] =
-    {
-        [0] =
-        {
-            npcName = "RoyalGuard"
-        },
-        [1] =
-        {
-            npcName = "GoldMusketeer"
-        },
-        [2] =
-        {
-            npcName = "Patriarch"
-        },
-    },
-    --level 99 garrison names
-    [75] =
-    {
-        [0] =
-        {
-            npcName = "MilitaryAttache"
-        },
-        [1] =
-        {
-            npcName = "MilitaryAttache"
-        },
-        [2] =
-        {
-            npcName = "MilitaryAttache"
-        },
-    },
+    [20] = { "Patrician", "Recruit", "Candidate" },
+    [30] = { "Trader", "Mariner", "Scholar" },
+    -- TODO: Capture Windy npc. Shouldn't be TempleKnight.
+    [40] = { "TempleKnight", "GoldMusketeer", "TempleKnight" },
+    [50] = { "RoyalGuard", "GoldMusketeer", "Patriarch" },
+    [75] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
+
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
-xi.garrison.looks =
+xi.garrison.allyLooks =
 {
-    --level 20 garrison looks
+    -- Level 20 garrison looks
+    -- The looks that have not been obtained from captures are commented
+    -- with the npc that they are taken from
+    -- Obtain new looks by finding a good looking npc and running the query:
+    -- Select name, npcid, CONCAT("0x", HEX(look)) FROM npc_list WHERE name LIKE "Shato%"
+    -- TODO: Get proper captures and remove any npcs that have a name associated to them
+    -- https://github.com/AirSkyBoat/AirSkyBoat/issues/1636
     [20] =
     {
-        [0] =
         {
             "0x01000C030010262000303A403A5008611B700000",
-            "0x01000A040010262019303A40195008611C700000"
+            "0x01000A040010262019303A40195008611C700000",
+            -- Fouagine
+            "0x010004041C106E20833080406850836083700000",
         },
-        [1] =
         {
-            804,
-            805
+            -- Pavel
+            "0x0100040100100520163005400550B86000700000",
+            -- Caliburn
+            "0x0100000100100620063006400650006000700000",
+            -- Fariel
+            "0x0100030100100520163005400550B86000700000",
         },
-        [2] =
         {
-            804,
-            805
+            -- Puo_Rhen
+            "0x0000E90000000000000000000000000000000000",
+            -- Sheia_Pohrichamaha
+            "0x0000EA0000000000000000000000000000000000",
+            -- Mokyokyo
+            "0x0100180618101820183018401850006000700000",
         },
     },
     --level 30 garrison looks
     [30] =
     {
-        [0] =
         {
             "0x010006030010762076303A400650736000700000",
             "0x01000F0300101520153015401550006000700000",
             "0x010009040010762076303A400650736000700000",
             "0x01000E0400101520003015401550006000700000"
         },
-        [1] =
         {
-            804,
-            805
+            -- Ferocious_Artisan
+            "0x0100010814102720173015401550006000700000",
+            -- Suzel
+            "0x01000E020F100720003003400750006000700000",
+            -- Guda (16883811)
+            "0x010003011C100E20083068401F50626000700000"
         },
-        [2] =
         {
-            804,
-            805
+            -- Shatoto
+            "0x0100040600100120013001400150006000700000",
+            -- Harara_WW
+            "0x0100030601100120013001400150016001700000",
+            -- AMAN_Reclaimer (17764605)
+            "0x0100040777106720683066406850006000700000",
+            -- Naih_Arihmepp
+            "0x0100020700100220023002400250006000700000",
         },
     },
     --level 40 garrison looks
     [40] =
     {
-        [0] =
-        {
+        {   -- Ironclad_Gorilla
+            "0x010009081C108A2008308A40085019611D700000",
             "0x01000E04191019201930194019506B601C700000",
             "0x01000903191019201930194019506B601C700000"
         },
-        [1] =
         {
             "0x0100020260102420603060406050B56000700000",
             "0x010008083D1024203D3010401050756075700000",
             "0x01000008371024203730374037506F6018700000",
             "0x0100040105102420053005400550BB6000700000"
         },
-        [2] =
         {
-            804,
-            805
+            -- Voidwatch officer (17752374)
+            "0x01000C05141019200C3002400250006000700000",
+            -- Taraihi-Perunhi
+            "0x0100000500100220023002400250006000700000",
+            -- Wetata
+            "0x01000306461118205230B8408550006000700000"
         },
     },
     --level 50 garrison looks
     [50] =
     {
-        [0] =
         {
-            804,
-            805
+            -- Ferchinne
+            "0x01000A041C103C206C306C406C503C6000700000",
+            -- Parelbriaux
+            "0x01000D0323108A20803088408050056100700000",
+            -- Petva
+            "0x01000101141019200C3002400250056000700000",
         },
-        [1] =
         {
-            804,
-            805
+            -- Masis (16883819)
+            "0x01000C011C1073208330804068504E6000700000",
+            -- Ironclad_Gorilla
+            "0x010009081C108A2008308A40085019611D700000",
+            -- Iron Eater (17748016)
+            "0x01000D0801101620053019400C505C6000700000",
         },
-        [2] =
         {
             "0x0100020600106320633063406350056122700000",
             "0x010004067C102D20193019401950506100700000",
@@ -176,24 +131,31 @@ xi.garrison.looks =
         },
     },
     --level 75 garrison looks
+    --TODO: Era Module
     [75] =
     {
-        [0] =
         {
-            804,
-            805
+            -- Morangeart
+            "0x010009031A10812088303C408850CF6000700000",
+            -- Quelveuiat
+            "0x01000E0388108820883088408850186100700000",
+            -- Jaucribaix
+            "0x01000F0304102220093009400950006000700000",
         },
-        [1] =
         {
-            "0x010002071C1070201C301C401C50C46000700000"
+            "0x010002071C1070201C301C401C50C46000700000",
+            -- Merol
+            "0x010008021C106A20733073406850006000700000",
         },
-        [2] =
         {
-            804,
-            805
+            -- Fhelm_Jobeizat (17764603)
+            "0x010003071310222064306E406450006000700000",
+            -- Shivivi
+            "0x0100080604102320093009400C50006000700000",
         },
     },
 }
+
 -- Loot is determined by LevelCap
 xi.garrison.loot =
 {
@@ -247,6 +209,7 @@ xi.garrison.loot =
         { itemid = xi.items.ACCURATE_EARRING, droprate = 350 },
     },
     --level 75 garrison loot
+    --TODO: 75 era module
     [75] =
     {
         { itemid = xi.items.MIRATETES_MEMOIRS, droprate = 1000 },
@@ -265,18 +228,35 @@ xi.garrison.loot =
         { itemid = xi.items.MIGHTY_SWORD, droprate = 350 },
     },
 }
+
+-- Defines the structure of each wave and the wave count
+-- groupsPerWave: How many groups of mobs spawn for each wave.
+-- mobsPerGroup: How many mobs spawn per group. Each wave consists of different
+-- 'mini waves', which are separated from each other by a certain interval of time.
+-- delayBetweenGroups: How many seconds before each group spawns.
+-- After all groups in a wave are killed, the wave ends and after delayBetweenGroups,
+-- the next wave begins.
+-- Constraints: A wave can only spawn 8 mobs at a time at most. This is due to the assumption
+-- That the boss is always 8 IDs after the mobs spawning in each wave.
+-- e.g:
+-- Wave 2 contains 2 groups. Each group has 2 mobs and 15 second between group.
+-- 2 mobs will spawn initially, then 15 seconds later 2 new mobs will spawn.
+xi.garrison.waves =
+{
+    -- The last wave is a special case. It's 4 groups + Boss
+    groupsPerWave = { 1, 2, 3, 4 },
+    mobsPerGroup = 2,
+    delayBetweenGroups = 15
+}
+
 --Zone Data
-xi.garrison.data =
+xi.garrison.zoneData =
 {
     [xi.zone.WEST_RONFAURE] =
     {
         itemReq = xi.items.RED_CRYPTEX,
         textRegion = 0,
         levelCap = 20,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Orcish_Fighterchief",
         xPos = -436,
         yPos = -20,
@@ -288,52 +268,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-            [1] =
-            {
-                4, -- Orcish Fighter
-                3  -- Orcish Fighter
-            },
-            [2] =
-            {
-                4, -- Orcish Fighter
-                3, -- Orcish Fighter
-                2, -- Orcish Chasseur
-                1  -- Orcish Chasseur
-            },
-            [3] =
-            {
-                6, -- Orcish Serjeant
-                5, -- Orcish Serjeant
-                4, -- Orcish Fighter
-                3, -- Orcish Fighter
-                2, -- Orcish Chasseur
-                1  -- Orcish Chasseur
-            },
-            [4] =
-            {
-                8, -- Orcish_Cursemaker
-                7, -- Orcish_Cursemaker
-                6, -- Orcish Serjeant
-                5, -- Orcish Serjeant
-                4, -- Orcish Fighter
-                3, -- Orcish Fighter
-                2, -- Orcish Chasseur
-                1  -- Orcish Chasseur
-            },
-        },
     },
     [xi.zone.NORTH_GUSTABERG] =
     {
         itemReq = xi.items.DARKSTEEL_ENGRAVING,
         textRegion = 1,
         levelCap = 20,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Lead_Quadav",
         xPos = -580, --needs adjusting
         yPos = 40,
@@ -345,53 +285,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 106,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.WEST_SARUTABARUTA] =
     {
         itemReq = xi.items.SEVEN_KNOT_QUIPU,
         textRegion = 2,
         levelCap = 20,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Yagudo_Condottiere",
         xPos = -20, -- needs adjusting
         yPos = -12,
@@ -403,53 +302,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 115,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.VALKURM_DUNES] =
     {
         itemReq = xi.items.GALKA_FANG_SACK,
         textRegion = 3,
         levelCap = 30,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Goblin_Swindler",
         xPos = 141, -- needs adjusting
         yPos = -8,
@@ -461,53 +319,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 32,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.JUGNER_FOREST] =
     {
         itemReq = xi.items.JADE_CRYPTEX,
         textRegion = 4,
         levelCap = 30,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Orcish_Colonel",
         xPos = 54, -- needs adjusting
         yPos = 1,
@@ -519,53 +336,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 210,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.PASHHOW_MARSHLANDS] =
     {
         itemReq = xi.items.SILVER_ENGRAVING,
         textRegion = 5,
         levelCap = 30,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Cobalt_Quadav",
         xPos = 458, -- needs adjusting
         yPos = 24,
@@ -577,53 +353,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 130,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.BUBURIMU_PENINSULA] =
     {
         itemReq = xi.items.MITHRA_FANG_SACK,
         textRegion = 6,
         levelCap = 30,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Goblin_Guide",
         xPos = -485, -- needs adjusting
         yPos = -29,
@@ -635,53 +370,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -4,
         rot = 0,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
         itemReq = xi.items.THIRTEEN_KNOT_QUIPU,
         textRegion = 7,
         levelCap = 30,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Yagudo_Missionary",
         xPos = -299, -- needs adjusting
         yPos = 17,
@@ -693,53 +387,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 30,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.QUFIM_ISLAND] =
     {
         itemReq = xi.items.RAM_LEATHER_MISSIVE,
         textRegion = 10,
         levelCap = 30,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Hunting_Chief",
         xPos = -247, -- needs adjusting
         yPos = -19,
@@ -751,53 +404,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -4,
         rot = 0,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.BEAUCEDINE_GLACIER] =
     {
         itemReq = xi.items.TIGER_LEATHER_MISSIVE,
         textRegion = 8,
         levelCap = 40,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Gigas_Overseer",
         xPos = -25, -- needs adjusting
         yPos = -60,
@@ -809,53 +421,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = -2,
         rot = 220,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
         itemReq = xi.items.HOUND_FANG_SACK,
         textRegion = 11,
         levelCap = 40,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Goblin_Doyen",
         xPos = -43,
         yPos = 1,
@@ -867,52 +438,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 180,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-            [1] =
-            {
-                8, -- Goblin Enchanter
-                7  -- Goblin Enchanter
-            },
-            [2] =
-            {
-                8, -- Goblin Enchanter
-                7, -- Goblin Enchanter
-                6, -- Goblin Poacher
-                5  -- Goblin Poacher
-            },
-            [3] =
-            {
-                8, -- Goblin Enchanter
-                7, -- Goblin Enchanter
-                6, -- Goblin Poacher
-                5, -- Goblin Poacher
-                4, -- Goblin Bouncer
-                3  -- Goblin Bouncer
-            },
-            [4] =
-            {
-                8, -- Goblin Enchanter
-                7, -- Goblin Enchanter
-                6, -- Goblin Poacher
-                5, -- Goblin Poacher
-                4, -- Goblin Bouncer
-                3, -- Goblin Bouncer
-                2, -- Goblin Reaper
-                1  -- Goblin Reaper
-            },
-        },
     },
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
         itemReq = xi.items.SHEEP_LEATHER_MISSIVE,
         textRegion = 14,
         levelCap = 40,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Sahagin_Patriarch",
         xPos = -248,
         yPos = 1,
@@ -924,53 +455,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 180,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.XARCABARD] =
     {
         itemReq = xi.items.BEHEMOTH_LEATHER_MISSIVE,
         textRegion = 9,
         levelCap = 50,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Demon_Aristocrat",
         xPos = 216, -- needs adjusting
         yPos = -22,
@@ -982,53 +472,12 @@ xi.garrison.data =
         xThirdLine = 0,
         zThirdLine = 4,
         rot = 90,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.EASTERN_ALTEPA_DESERT] =
     {
         itemReq = xi.items.DHALMEL_LEATHER_MISSIVE,
         textRegion = 12,
         levelCap = 50,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Centurio_XIII-V",
         xPos = -245,
         yPos = -9,
@@ -1040,53 +489,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
-            [1] =
-            {
-                8,
-                7
-            },
-            [2] =
-            {
-                8,
-                7,
-                6,
-                5
-            },
-            [3] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
-            },
-            [4] =
-            {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
-            },
-        },
     },
     [xi.zone.YHOATOR_JUNGLE] =
     {
         itemReq = xi.items.COEURL_LEATHER_MISSIVE,
         textRegion = 15,
         levelCap = 50,
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Tonberry_Decimator",
         xPos = 214,
         yPos = 1,
@@ -1098,52 +506,12 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = -2,
         rot = 0,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-            [1] =
-            {
-                8, -- Tonberry Creeper
-                7  -- Tonberry Creeper
-            },
-            [2] =
-            {
-                8, -- Tonberry Creeper
-                7, -- Tonberry Creeper
-                6, -- Tonberry Hexer
-                5  -- Tonberry Hexer
-            },
-            [3] =
-            {
-                8, -- Tonberry Creeper
-                7, -- Tonberry Creeper
-                6, -- Tonberry Hexer
-                5, -- Tonberry Hexer
-                4, -- Tonberry Creeper
-                3  -- Tonberry Creeper
-            },
-            [4] =
-            {
-                8, -- Tonberry Creeper
-                7, -- Tonberry Creeper
-                6, -- Tonberry Hexer
-                5, -- Tonberry Hexer
-                4, -- Tonberry Creeper
-                3, -- Tonberry Creeper
-                2, -- Tonberry Hexer
-                1  -- Tonberry Hexer
-            },
-        },
     },
     [xi.zone.CAPE_TERIGGAN] =
     {
         itemReq = xi.items.BUNNY_FANG_SACK,
         textRegion = 13,
         levelCap = 75, -- 75 Mobs/NPCs Is uncapped
-        npcs =
-        {
-        -- empty filled with dynamic entries
-        },
         mobBoss = "Goblin_Boss",
         xPos = -174,
         yPos = 8,
@@ -1155,41 +523,5 @@ xi.garrison.data =
         xThirdLine = 4,
         zThirdLine = 0,
         rot = 0,
-        waveOrder =
-        {
-        -- # Represents the negative offset from boss to spawn
-            [1] =
-            {
-                8, -- Goblin Pirate
-                7  -- Goblin Pirate
-            },
-            [2] =
-            {
-                8, -- Goblin Pirate
-                7, -- Goblin Pirate
-                6, -- Goblin Duelist
-                5  -- Goblin Duelist
-            },
-            [3] =
-            {
-                8, -- Goblin Pirate
-                7, -- Goblin Pirate
-                6, -- Goblin Duelist
-                5, -- Goblin Duelist
-                4, -- Goblin Doctor
-                3  -- Goblin Doctor
-            },
-            [4] =
-            {
-                8, -- Goblin Pirate
-                7, -- Goblin Pirate
-                6, -- Goblin Duelist
-                5, -- Goblin Duelist
-                4, -- Goblin Doctor
-                3, -- Goblin Doctor
-                2, -- Goblin Professor
-                1  -- Goblin Professor
-            },
-        },
     },
 }

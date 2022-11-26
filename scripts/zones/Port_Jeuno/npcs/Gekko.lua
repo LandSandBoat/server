@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     {
         4150,  2387,    -- Eye Drops
         4148,   290,    -- Antidote
-        4151,   367,    -- Echo Drops
+        4151,   736,    -- Echo Drops
         4112,   837,    -- Potion
         4128,  4445,    -- Ether
         4365,   120,    -- Rolanberry

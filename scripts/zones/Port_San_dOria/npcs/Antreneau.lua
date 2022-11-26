@@ -21,7 +21,13 @@ entity.onTrigger = function(player, npc)
     local diaryPage = player:getCharVar("DiaryPage")
     local fameLevel = player:getFameLevel(xi.quest.fame_area.SANDORIA)
 
-    if player:getCharVar("Quest[0][100]Option") == 0 and aTasteForMeat == QUEST_COMPLETED and fameLevel >= 8 and medicineWoman == QUEST_COMPLETED and diaryPage >= 4 then
+    if
+        player:getCharVar("Quest[0][100]Option") == 0 and
+        aTasteForMeat == QUEST_COMPLETED and
+        fameLevel >= 8 and
+        medicineWoman == QUEST_COMPLETED and
+        diaryPage >= 4
+    then
         local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
         if overTheHillsAndFarAway == QUEST_AVAILABLE then

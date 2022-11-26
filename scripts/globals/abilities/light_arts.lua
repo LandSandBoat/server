@@ -12,9 +12,13 @@ require("scripts/globals/msg")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.LIGHT_ARTS) or player:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
+    if
+        player:hasStatusEffect(xi.effect.LIGHT_ARTS) or
+        player:hasStatusEffect(xi.effect.ADDENDUM_WHITE)
+    then
         return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
+
     return 0, 0
 end
 
@@ -31,7 +35,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     local effectbonus = player:getMod(xi.mod.LIGHT_ARTS_EFFECT)
     local regenbonus = 0
-    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
+    if player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20 then
         regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10)
     end
 

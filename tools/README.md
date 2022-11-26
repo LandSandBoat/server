@@ -9,7 +9,7 @@ Tools
 `python dbtool.py update full` - performs a full update with backup and migrations  
 `python dbtool.py migrate` - checks and performs any needed migrations
 
-This tool creates or connects to the database defined in `../conf/map.conf`. It 
+This tool creates or connects to the database defined in `../settings/network.lua`. It 
 allows the user to backup or restore the database, import any `custom.sql` 
 stored in `../sql/backups/`, and import the latest SQL files provided by LandSandBoat 
 Development. This tool also handles data migrations for character data.
@@ -32,6 +32,12 @@ This tool is used to distribute the following items:
 - Destrier Beret  
 - Chocobo Shirt  
 
+## Announce
+`python announce.py "<your message>"`
+
+Sends `<your message>` to every character, in every zone, on every map process.  
+
+
 
 Setup
 ========================
@@ -46,11 +52,14 @@ Download the latest version from the website or check your package manager.
 ## Installing Dependencies
 `pip install -r requirements.txt`
 
-**MySQL Connector/Python** - MySQL Connector/Python is required to interact with the database.  
+**MariaDB** - MariaDB is required to interact with the database.  
 **GitPython** - GitPython is required to compare database versions.  
 **PyYAML** - PyYAML is required to read/write settings.  
 **Colorama** - Colorama is required to make colored terminal text.  
+**zmq** - ZeroMQ is required for sending messages to the server.  
+**Pylint** - Pylint is a static code analyser.  
+**Black** - Black is a Python code formatter.  
 
 ## Other
-`./install-systemd-service.sh` - Installs a systemd service for running the servers.  
-`./wait_for_db_then_launch.sh` - Used for Docker and CI.  
+`./install-systemd-service.sh` - Installs a systemd service for running the servers on Linux.  
+`./run_clang_format.sh` - Formats C++ code. Run from repo root.  

@@ -19,4 +19,8 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 173)
 end
 
+entity.onMobDespawn = function(mob)
+    xi.mob.nmTODPersist(mob, 3600) -- 1 hour
+end
+
 return entity

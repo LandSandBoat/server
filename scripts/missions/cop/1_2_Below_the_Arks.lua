@@ -31,7 +31,7 @@ local cermetGateOnTrigger = function(player, npc)
 end
 
 local shatteredTelepointOnTrigger = function(player, npc)
-    if mission:getVar(player, 'Status') == 1 then
+    if mission:getVar(player, 'Status') >= 1 then
         return xi.cop.helpers.shatteredTelepointOnTrigger(mission, player, npc)
     end
 end
@@ -77,7 +77,7 @@ mission.sections =
             ['High_Wind'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 1 then
+                    if mission:getVar(player, 'Status') >= 1 then
                         return mission:event(33)
                     end
                 end,
@@ -86,7 +86,7 @@ mission.sections =
             ['Rainhard'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 1 then
+                    if mission:getVar(player, 'Status') >= 1 then
                         return mission:event(34)
                     end
                 end,
@@ -116,11 +116,21 @@ mission.sections =
         {
             ['Shattered_Telepoint'] =
             {
-                onTrigger = shatteredTelepointOnTrigger,
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(3)
+                    else
+                        return shatteredTelepointOnTrigger(player, npc)
+                    end
+                end,
             },
 
             onEventFinish =
             {
+                [3] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Status', 2)
+                end,
+
                 [913] = xi.cop.helpers.shatteredTelepointEntry,
                 [918] = shatteredTelepointSealMemory,
             },
@@ -130,11 +140,21 @@ mission.sections =
         {
             ['Shattered_Telepoint'] =
             {
-                onTrigger = shatteredTelepointOnTrigger,
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(14)
+                    else
+                        return shatteredTelepointOnTrigger(player, npc)
+                    end
+                end,
             },
 
             onEventFinish =
             {
+                [14] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Status', 2)
+                end,
+
                 [202] = xi.cop.helpers.shatteredTelepointEntry,
                 [212] = shatteredTelepointSealMemory,
             },
@@ -144,11 +164,21 @@ mission.sections =
         {
             ['Shattered_Telepoint'] =
             {
-                onTrigger = shatteredTelepointOnTrigger,
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        return mission:event(41)
+                    else
+                        return shatteredTelepointOnTrigger(player, npc)
+                    end
+                end,
             },
 
             onEventFinish =
             {
+                [41] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Status', 2)
+                end,
+
                 [913] = xi.cop.helpers.shatteredTelepointEntry,
                 [918] = shatteredTelepointSealMemory,
             },

@@ -13,6 +13,7 @@ entity.onMobFight = function(mob, target)
     if mob:getLocalVar("warp") == 2 and wait < os.time() then
         mob:getBattlefield():lose()
     end
+
     if mob:getHPP() <= 50 and mob:getLocalVar("powerup") == 0 then
         target:showText(mob, ID.text.KARABABA_ENOUGH)
         target:showText(mob, ID.text.KARABABA_ROUGH)
@@ -31,7 +32,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     if warp == 1 then
         mob:showText(mob, ID.text.KARABABA_QUIT)
         mob:setLocalVar("warp", 2)
-        mob:setLocalVar("wait", os.time()+8)
+        mob:setLocalVar("wait", os.time() + 8)
         return 261
     elseif rnd == 1 then
         mob:showText(mob, ID.text.KARABARA_FIRE)

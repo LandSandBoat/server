@@ -15,6 +15,7 @@ local carpentersLandingGlobal =
     herculesTreeOnGameHour = function()
         local hour = VanadielHour()
         local stat = xi.status.NORMAL
+
         if hour >= 7 and hour < 22 then
             stat = xi.status.DISAPPEAR
         else
@@ -54,8 +55,8 @@ local carpentersLandingGlobal =
         ..............................................................................................]]
     herculesTreeOnTrigger = function(player, npc)
         local msgOffset = ID.text.HERCULES_TREE_NOTHING_YET
-        local honey = npc:getLocalVar("honey")
-        local hour = VanadielHour()
+        local honey     = npc:getLocalVar("honey")
+        local hour      = VanadielHour()
 
         if npc:getLocalVar("honey") == 0 then
             player:messageSpecial(msgOffset + 2) -- "You smell something sweet."
@@ -66,7 +67,7 @@ local carpentersLandingGlobal =
                 local mob = GetMobByID(ID.mob.HERCULES_BEETLE)
                 if
                     honey == 1 and
-                    math.random(100) <= 20 and
+                    math.random(1, 100) <= 20 and
                     mob:getLocalVar("hasSpawned") == 0 and
                     npcUtil.popFromQM(player, npc, ID.mob.HERCULES_BEETLE, { radius = 5, hide = 0 })
                 then

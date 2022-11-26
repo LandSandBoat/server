@@ -25,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.SINGING
     params.bonus = 0
     params.effect = xi.effect.ELEGY
-    local resm = applyResistanceEffect(caster, target, spell, params)
+    local resm = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
@@ -38,6 +38,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         elseif caster:hasStatusEffect(xi.effect.MARCATO) then
             power = power * 1.5
         end
+
         caster:delStatusEffect(xi.effect.MARCATO)
 
         duration = duration * (iBoost * 0.1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100 + 1)
@@ -51,7 +52,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         -- Ensure the reduction is capped at 50%
         power = utils.clamp(power, 0, 5000)
 
-        duration = calculateBuildDuration(target, duration, params.effect, caster)
+        duration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if duration == 0 then
             spell:setMsg(xi.msg.basic.NONE)

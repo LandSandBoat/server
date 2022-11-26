@@ -19,7 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:isUndead() or
         target:hasStatusEffect(xi.effect.MAGIC_SHIELD) or
         -- Todo: DeathRes has no place in the resistance functions so far..
-        target:getMod(xi.mod.DEATHRES) > math.random(100)
+        math.random(1, 100) <= target:getMod(xi.mod.DEATHRES)
     then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return 0

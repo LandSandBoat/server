@@ -45,7 +45,13 @@ quest.sections =
             onEventFinish =
             {
                 [43] = function(player, csid, option, npc)
-                    if option == 1 and (player:hasItem(xi.items.SAPARA_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SAPARA_OF_TRIALS)) then
+                    if
+                        option == 1 and
+                        (
+                            player:hasItem(xi.items.SAPARA_OF_TRIALS) or
+                            npcUtil.giveItem(player, xi.items.SAPARA_OF_TRIALS)
+                        )
+                    then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end

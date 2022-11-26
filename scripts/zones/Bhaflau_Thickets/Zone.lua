@@ -24,7 +24,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-100, -13.5, -479.514, 60)
     end
 
@@ -44,7 +48,7 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE52_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, region)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

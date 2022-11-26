@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Attohwa
 --  NPC: Navisse
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

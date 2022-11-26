@@ -25,7 +25,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(10) -- To Riv Site B
         end
     -- TODO: Do we really want to only check X values here?
-    elseif ((xPos > -524.521 and xPos < -512.521) or (xPos > 75.524 and xPos < 87.524) or (xPos > 675.271 and xPos < 687.271)) then
+    elseif
+        (xPos > -524.521 and xPos < -512.521) or
+        (xPos > 75.524 and xPos < 87.524) or
+        (xPos > 675.271 and xPos < 687.271)
+    then
         player:startEvent(32003)  -- leave the battlefield
     elseif xPos > -25.684 and xPos < -13.684 then -- post-battlefield exit
         player:startEvent(7)

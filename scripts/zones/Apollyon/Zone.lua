@@ -9,33 +9,33 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetServerVariable("[Central_Apollyon]Time", 0)
+    SetServerVariable("[CENTRAL_APOLLYON]Time", 0)
     SetServerVariable("[CS_Apollyon]Time", 0)
     SetServerVariable("[NE_Apollyon]Time", 0)
     SetServerVariable("[NW_Apollyon]Time", 0)
     SetServerVariable("[SE_APOLLYON]Time", 0)
     SetServerVariable("[SW_APOLLYON]Time", 0)
 
-    zone:registerRegion(1,  637, -4, -642,  642, 4, -637) -- SE Apollyon NE exit
-    zone:registerRegion(2, -642, -4, -642, -637, 4, -637) -- APOLLYON_NW_SW exit
+    zone:registerTriggerArea(1,  637, -4, -642,  642, 4, -637) -- SE Apollyon NE exit
+    zone:registerTriggerArea(2, -642, -4, -642, -637, 4, -637) -- APOLLYON_NW_SW exit
 
-    zone:registerRegion(20, 396, -4, -522, 403, 4, -516) -- appolyon SE telporter floor 1 to floor 2
-    zone:registerRegion(21, 116, -4, -443, 123, 4, -436) -- appolyon SE telporter floor 2 to floor 3
-    zone:registerRegion(22, 276, -4, -283, 283, 4, -276) -- appolyon SE telporter floor 3 to floor 4
+    zone:registerTriggerArea(20, 396, -4, -522, 403, 4, -516) -- Apollyon SE telporter floor 1 to floor 2
+    zone:registerTriggerArea(21, 116, -4, -443, 123, 4, -436) -- Apollyon SE telporter floor 2 to floor 3
+    zone:registerTriggerArea(22, 276, -4, -283, 283, 4, -276) -- Apollyon SE telporter floor 3 to floor 4
 
-    zone:registerRegion(24, 396, -4,  76, 403, 4,  83) -- appolyon NE telporter floor 1 to floor 2
-    zone:registerRegion(25, 276, -4, 356, 283, 4, 363) -- appolyon NE telporter floor 2 to floor 3
-    zone:registerRegion(26, 236, -4, 517, 243, 4, 523) -- appolyon NE telporter floor 3 to floor 4
-    zone:registerRegion(27, 517, -4, 637, 523, 4, 643) -- appolyon NE telporter floor 4 to floor 5
+    zone:registerTriggerArea(24, 396, -4,  76, 403, 4,  83) -- Apollyon NE telporter floor 1 to floor 2
+    zone:registerTriggerArea(25, 276, -4, 356, 283, 4, 363) -- Apollyon NE telporter floor 2 to floor 3
+    zone:registerTriggerArea(26, 236, -4, 517, 243, 4, 523) -- Apollyon NE telporter floor 3 to floor 4
+    zone:registerTriggerArea(27, 517, -4, 637, 523, 4, 643) -- Apollyon NE telporter floor 4 to floor 5
 
-    zone:registerRegion(29, -403, -4, -523, -396, 4, -516) -- appolyon SW telporter floor 1 to floor 2
-    zone:registerRegion(30, -123, -4, -443, -116, 4, -436) -- appolyon SW telporter floor 2 to floor 3
-    zone:registerRegion(31, -283, -4, -283, -276, 4, -276) -- appolyon SW telporter floor 3 to floor 4
+    zone:registerTriggerArea(29, -403, -4, -523, -396, 4, -516) -- Apollyon SW telporter floor 1 to floor 2
+    zone:registerTriggerArea(30, -123, -4, -443, -116, 4, -436) -- Apollyon SW telporter floor 2 to floor 3
+    zone:registerTriggerArea(31, -283, -4, -283, -276, 4, -276) -- Apollyon SW telporter floor 3 to floor 4
 
-    zone:registerRegion(33, -403, -4,  76, -396, 4,  83) -- appolyon NW telporter floor 1 to floor 2
-    zone:registerRegion(34, -283, -4, 356, -276, 4, 363) -- appolyon NW telporter floor 2 to floor 3
-    zone:registerRegion(35, -243, -4, 516, -236, 4, 523) -- appolyon NW telporter floor 3 to floor 4
-    zone:registerRegion(36, -523, -4, 636, -516, 4, 643) -- appolyon NW telporter floor 4 to floor 5
+    zone:registerTriggerArea(33, -403, -4,  76, -396, 4,  83) -- Apollyon NW telporter floor 1 to floor 2
+    zone:registerTriggerArea(34, -283, -4, 356, -276, 4, 363) -- Apollyon NW telporter floor 2 to floor 3
+    zone:registerTriggerArea(35, -243, -4, 516, -236, 4, 523) -- Apollyon NW telporter floor 3 to floor 4
+    zone:registerTriggerArea(36, -523, -4, 636, -516, 4, 643) -- Apollyon NW telporter floor 4 to floor 5
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
@@ -56,10 +56,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onRegionEnter = function(player,region)
-    local regionID = region:GetRegionID()
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    local triggerAreaID = triggerArea:GetTriggerAreaID()
 
-    switch (regionID): caseof
+    switch (triggerAreaID): caseof
     {
         -- Apollyon: SE_NE exit
         [1] = function ()
@@ -92,69 +92,69 @@ zoneObject.onRegionEnter = function(player,region)
 
         -- Apollyon: NE Teleporters
         [24] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NE_APOLLYON.npc.PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(214)
             end
         end,
 
         [25] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NE_APOLLYON.npc.PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(212)
             end
         end,
 
         [26] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NE_APOLLYON.npc.PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(210)
             end
         end,
 
         [27] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NE_APOLLYON.npc.PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(215)
             end
         end,
 
         -- Apollyon: SW Teleporters
         [29] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.SW_APOLLYON.npc.PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(208)
             end
         end,
 
         [30] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.SW_APOLLYON.npc.PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(209)
             end
         end,
 
         [31] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.SW_APOLLYON.npc.PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(207)
             end
         end,
 
         -- Apollyon: NW Teleporters
         [33] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NW_APOLLYON.npc.PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(205)
             end
         end,
 
         [34] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NW_APOLLYON.npc.PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(203)
             end
         end,
 
         [35] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NW_APOLLYON.npc.PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(201)
             end
         end,
 
         [36] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.NW_APOLLYON.npc.PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(200)
             end
         end,
@@ -162,10 +162,10 @@ zoneObject.onRegionEnter = function(player,region)
     }
 end
 
-zoneObject.onRegionLeave = function(player, region)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player,csid,option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 200 and csid <= 219 then
         for _, entry in pairs(player:getNotorietyList()) do
             entry:clearEnmity(player) -- reset hate on player after teleporting
@@ -173,7 +173,7 @@ zoneObject.onEventUpdate = function(player,csid,option)
     end
 end
 
-zoneObject.onEventFinish = function(player,csid,option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 100 and option == 1 then
         player:setPos(557, -1, 441, 128, 33) -- Apollyon: SE_NE exit
     elseif csid == 101 and option == 1 then

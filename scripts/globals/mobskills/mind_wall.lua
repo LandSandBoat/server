@@ -24,9 +24,10 @@ local magicType =
 }
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 3) then
+    if mob:getAnimationSub() == 3 then
         return 0
     end
+
     return 1
 end
 

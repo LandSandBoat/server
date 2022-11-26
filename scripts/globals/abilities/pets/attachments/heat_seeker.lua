@@ -9,6 +9,7 @@ attachmentObject.onEquip = function(automaton)
     automaton:addListener("ENGAGE", "AUTO_HEAT_SEEKER_ENGAGE", function(pet, target)
         pet:setLocalVar("heatseekertick", VanadielTime())
     end)
+
     automaton:addListener("AUTOMATON_AI_TICK", "AUTO_HEAT_SEEKER_TICK", function(pet, target)
         if pet:getLocalVar("heatseekertick") > 0 then
             local master = pet:getMaster()
@@ -23,6 +24,7 @@ attachmentObject.onEquip = function(automaton)
                 if (amount + prevamount) > 30 then
                     amount = 30 - prevamount
                 end
+
                 if amount ~= 0 then
                     pet:addMod(xi.mod.ACC, amount)
                 end
@@ -31,21 +33,26 @@ attachmentObject.onEquip = function(automaton)
                 if (amount + prevamount) < 0 then
                     amount = -prevamount
                 end
+
                 if amount ~= 0 then
                     pet:delMod(xi.mod.ACC, -amount)
                 end
             end
+
             if amount ~= 0 then
                 pet:setLocalVar("heatseeker", prevamount + amount)
             end
+
             pet:setLocalVar("heatseekertick", tick)
         end
     end)
+
     automaton:addListener("DISENGAGE", "AUTO_HEAT_SEEKER_DISENGAGE", function(pet)
         if pet:getLocalVar("heatseeker") > 0 then
             pet:delMod(xi.mod.ACC, pet:getLocalVar("heatseeker"))
             pet:setLocalVar("heatseeker", 0)
         end
+
         pet:setLocalVar("heatseekertick", 0)
     end)
 end

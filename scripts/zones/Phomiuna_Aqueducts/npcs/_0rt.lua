@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     local doorOffset = npc:getID()
 
-    player:messageSpecial(ID.text.LAMP_OFFSET+1) -- Earth lamp
+    player:messageSpecial(ID.text.LAMP_OFFSET + 1) -- Earth lamp
     npc:openDoor(7) -- Lamp animation
 
     local day = VanadielDayOfTheWeek()

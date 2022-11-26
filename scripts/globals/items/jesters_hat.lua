@@ -14,9 +14,10 @@ end
 itemObject.onItemUse = function(target)
     local hpHeal = 90
     local dif = target:getMaxHP() - target:getHP()
-    if (hpHeal > dif) then
+    if hpHeal > dif then
         hpHeal = dif
     end
+
     target:addHP(hpHeal)
     target:updateEnmityFromCure(target, hpHeal)
     target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)

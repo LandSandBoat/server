@@ -42,6 +42,7 @@ local function pickSetPoint(instance)
         for i = xi.nyzul.objective.ELIMINATE_ENEMY_LEADER, xi.nyzul.objective.ELIMINATE_ALL_ENEMIES do
             table.insert(objective, i)
         end
+
         -- Only remove objectives if not the staging room or free floor
         if instance:getStage() ~= 0 and instance:getStage() ~= 6 then
             table.remove(objective, instance:getStage())
@@ -362,7 +363,10 @@ local function pickMobs(instance)
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                     instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and instance:getLocalVar("Nyzul_Specified_Enemy") == 0 then
+                elseif
+                    instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
+                    instance:getLocalVar("Nyzul_Specified_Enemy") == 0
+                then
                     instance:setLocalVar("Nyzul_Specified_Enemy", enemy)
                 end
 

@@ -17,7 +17,7 @@ xi.jeuno.helpers = xi.jeuno.helpers or {}
 -- The params parameter stores the tunable information needed to perform the proper quest in the chain.
 xi.jeuno.helpers.GobbiebagQuest = {}
 
-setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest } )
+setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest })
 xi.jeuno.helpers.GobbiebagQuest.__index = xi.jeuno.helpers.GobbiebagQuest
 
 function xi.jeuno.helpers.GobbiebagQuest:new(params)
@@ -80,7 +80,8 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                 ['Bluffnix'] =
                 {
                     onTrade = function(player, npc, trade)
-                        if  npcUtil.tradeHasExactly(trade, params.tradeItems) or
+                        if
+                            npcUtil.tradeHasExactly(trade, params.tradeItems) or
                             npcUtil.tradeHasExactly(trade, params.tradeStew)
                         then
                             return quest:progressEvent(73, getCompleteDiaglogueId(player))
@@ -88,6 +89,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                             return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
                         end
                     end,
+
                     onTrigger = function(player, npc)
                         return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
                     end,

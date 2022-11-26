@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2574) and npcUtil.popFromQM(player, npc, ID.mob.ARMED_GEARS) then -- Trade Ferrite
+    if
+        npcUtil.tradeHas(trade, 2574) and
+        npcUtil.popFromQM(player, npc, ID.mob.ARMED_GEARS)
+    then
+        -- Trade Ferrite
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

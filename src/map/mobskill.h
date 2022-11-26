@@ -95,8 +95,8 @@ public:
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
 
-    const int8* getName() const;
-    void        setName(int8* name);
+    const std::string& getName();
+    void               setName(const std::string& name);
 
     uint8 m_Aoe; // не используется
 

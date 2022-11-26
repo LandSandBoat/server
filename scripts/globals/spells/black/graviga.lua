@@ -12,7 +12,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     -- Pull base stats.
     -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local power = 50 -- 50% reduction
@@ -25,14 +24,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.WEIGHT
-    duration = duration * applyResistanceEffect(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (duration >= 30) then --Do it!
-        duration = calculateBuildDuration(target, duration, params.effect, caster)
+    if duration >= 30 then --Do it!
+        duration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if duration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
-        elseif (target:addStatusEffect(xi.effect.WEIGHT, power, 0, duration)) then
+        elseif target:addStatusEffect(xi.effect.WEIGHT, power, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

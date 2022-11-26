@@ -27,7 +27,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getMainLvl() >= 20 and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE then
+    if
+        player:getMainLvl() >= 20 and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE
+    then
         player:startEvent(50, 4365) -- Start quest "Cargo"
     elseif player:getMainLvl() < 20 then
         player:startEvent(53) -- Dialog for low level or low fame

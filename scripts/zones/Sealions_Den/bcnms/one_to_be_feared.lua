@@ -19,6 +19,8 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
+    player:setCharVar("Mission[6][638]Status", 3)
+    player:startEvent(31)
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)

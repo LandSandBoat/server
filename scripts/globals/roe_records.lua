@@ -101,6 +101,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getMainLvl() >= self.reqs.mJobLvl and true or false
             end,
+
             flags = set { "retro" },
             reqs = { mJobLvl = 99 },
             reward =
@@ -116,6 +117,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 2000 },
             reward =
@@ -131,6 +133,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 4000 },
             reward =
@@ -146,6 +149,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 6000 },
             reward =
@@ -161,6 +165,7 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 return player:getAverageItemLevel() >= self.reqs.hasItemLevel and true or false
             end,
+
             trigger = triggers.talkToRoeNpc,
             reqs = { hasItemLevel = 117 },
             reward =
@@ -320,11 +325,10 @@ function getRoeRecords(triggers)
             trigger = triggers.questComplete,
             flags = set { "retro" },
             check = function(self, player, params)
-                return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) ==
-                    QUEST_COMPLETED or
-                    player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ==
-                    QUEST_COMPLETED
+                return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == QUEST_COMPLETED or
+                    player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == QUEST_COMPLETED
             end,
+
             reward = { sparks = 100, xp = 500 },
         },
 
@@ -2364,6 +2368,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2380,6 +2385,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2396,6 +2402,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2412,6 +2419,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.heal
                     return true
                 end
+
                 return false
             end
         },
@@ -2428,6 +2436,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.heal
                     return true
                 end
+
                 return false
             end
         },
@@ -2444,6 +2453,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.heal
                     return true
                 end
+
                 return false
             end
         },
@@ -2460,6 +2470,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2476,6 +2487,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -2492,6 +2504,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.dmg
                     return true
                 end
+
                 return false
             end
         },
@@ -4980,13 +4993,13 @@ function getRoeRecords(triggers)
         },
 
         [886] =
-       { -- Conflict: Escha - Zi'Tah II
-           trigger = triggers.mobKill,
-           goal = 10,
-           reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
-           flags = set { "repeat" },
-           reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
-       },
+        { -- Conflict: Escha - Zi'Tah II
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
 
         [887] =
         { -- Conflict: Escha - Zi'Tah III
@@ -5172,7 +5185,7 @@ function getRoeRecords(triggers)
         },
 
         [948] =
-       { -- Conflict: Reisenjima VI
+        { -- Conflict: Reisenjima VI
             trigger = triggers.mobKill,
             goal = 10,
             reqs = { mobName = set { "Devouring_Mosquito" }, zone = set { 291 } },
@@ -5195,7 +5208,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Quarrelsome_Hippogryph" }, zone = set { 291 } },
             flags = set { "repeat" },
-           reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
         [951] =
@@ -5210,7 +5223,7 @@ function getRoeRecords(triggers)
         [952] =
         { -- Conflict: Reisenjima X
             trigger = triggers.mobKill,
-           goal = 10,
+            goal = 10,
             reqs = { mobName = set { "Glowering_Ladybug" }, zone = set { 291 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
@@ -8869,6 +8882,7 @@ function getRoeRecords(triggers)
                     params.progress = params.progress + params.exp
                     return true
                 end
+
                 return false
             end,
         },

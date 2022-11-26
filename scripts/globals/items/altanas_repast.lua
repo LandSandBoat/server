@@ -30,15 +30,22 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
 itemObject.onItemUse = function(target)
     target:forMembersInRange(30, function(member)
-        if not member:hasStatusEffect(xi.effect.FOOD) and not member:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        if
+            not member:hasStatusEffect(xi.effect.FOOD) and
+            not member:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+        then
             member:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 6538)
         end
     end)

@@ -18,26 +18,27 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local divisor = 1
     local constant = 20
-    local power = getCurePowerOld(caster)
-    if (power > 170) then
+    local power = xi.magic.getCurePowerOld(caster)
+    if power > 170 then
         divisor = 35.6666
         constant = 87.62
-    elseif (power > 110) then
+    elseif power > 110 then
         divisor =  2
         constant = 47.5
     end
 
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, false)
+    local final = xi.magic.getCureFinal(caster, spell, xi.magic.getBaseCureOld(power, divisor, constant), minCure, false)
 
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
     --Applying server mods
     final = final * xi.settings.main.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
-    if (final > diff) then
+    if final > diff then
         final = diff
     end
+
     target:addHP(final)
 
     target:wakeUp()
@@ -45,8 +46,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
-    if (mpBonusPercent > 0) then
+    local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
+    if mpBonusPercent > 0 then
         caster:addMP(mpBonusPercent)
     end
 

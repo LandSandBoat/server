@@ -67,7 +67,7 @@ entity.onMobFight = function(mob, target)
 
     -- Regens 1% of his HP a tick with Blaze Spikes on
     if mob:hasStatusEffect(xi.effect.BLAZE_SPIKES) then
-        mob:setMod(xi.mod.REGEN, math.floor(mob:getMaxHP()/100))
+        mob:setMod(xi.mod.REGEN, math.floor(mob:getMaxHP() / 100))
     else
         if mob:getMod(xi.mod.REGEN) > 0 then
             mob:setMod(xi.mod.REGEN, 0)

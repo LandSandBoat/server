@@ -1,6 +1,7 @@
 -----------------------------------
 -- Scissor Guard
 -- Enhances defense 100%.
+-- Power: Base defense (i.e. defense bonus defense excluded) * 2
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -14,7 +15,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_BOOST
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 100, 0, 60))
+    local power = mob:getStat(xi.mod.DEF)
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, 60))
     return typeEffect
 end
 

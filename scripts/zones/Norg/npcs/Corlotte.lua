@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Corlotte
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

@@ -26,9 +26,9 @@ mission.sections =
 
         [xi.zone.CIRDAS_CAVERNS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(12)
                 end,
             },

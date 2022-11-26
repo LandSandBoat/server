@@ -10,16 +10,17 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if (effect ~= nil) then
-        if (effect:getSubType() == 15486) then
+    if effect ~= nil then
+        if effect:getSubType() == 15486 then
             target:delStatusEffect(xi.effect.ENCHANTMENT)
         end
     end
+
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    if (target:hasStatusEffect(xi.effect.ENCHANTMENT) == true) then
+    if target:hasStatusEffect(xi.effect.ENCHANTMENT) then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
         target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15486)
     else

@@ -11,13 +11,18 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    player:eraseStatusEffect(true)
+    if player:getCharVar("newMog") == 0 then
+        cs = 30000
+        player:setCharVar("newMog", 1)
+    end
+
+    player:eraseAllStatusEffect()
     player:setPos(0, 0, 0, 192)
 
     return cs
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)

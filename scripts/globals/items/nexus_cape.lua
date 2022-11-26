@@ -16,7 +16,7 @@ itemObject.onItemCheck = function(target)
     -- (currently fails in cross map server situations)
     if leader ~= nil and not leader:isInMogHouse() then
         -- Don't try to teleport to self!
-        if (target:getID() ~= leader:getID()) then
+        if target:getID() ~= leader:getID() then
             local leaderZone = leader:getZoneID()
 
             -- Locations with "**" in comment:
@@ -123,7 +123,7 @@ itemObject.onItemCheck = function(target)
             }
             -- Make sure we can actually tele to that zone..
             for _, validZone in ipairs(validZoneList) do
-                if validZone == leaderZone and target:isZoneVisited(validZone) then
+                if validZone == leaderZone and target:hasVisitedZone(validZone) then
                     result = 0
                 end
             end

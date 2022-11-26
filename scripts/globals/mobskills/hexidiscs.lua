@@ -18,7 +18,7 @@ local mobskillObject = {}
 -- if not in Ball form, then ignore.
 -----------------------------------
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() ~=0) then
+    if mob:getAnimationSub() ~= 0 then
         return 1
     else
         return 0

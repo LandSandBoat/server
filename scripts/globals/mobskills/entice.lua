@@ -8,10 +8,11 @@ require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
-mobskillObject.onMobSkillCheck = function(target,mob,skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
         return 0
     end
+
     return 1
 end
 
@@ -28,6 +29,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end
+
     skill:setMsg(msg)
 
     return typeEffect

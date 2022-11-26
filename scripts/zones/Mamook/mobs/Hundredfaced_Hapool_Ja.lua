@@ -20,16 +20,19 @@ entity.onMobSpawn = function(mob)
         if spellId == xi.magic.spell.UTSUSEMI_ICHI then
             for clone = hundredfacedHapoolJa + 1, hundredfacedHapoolJa + 3 do
                 if not GetMobByID(clone):isSpawned() then
-                    GetMobByID(clone):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
+                    GetMobByID(clone):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
                     SpawnMob(clone):updateEnmity(hateTarget)
                 end
             end
 
         -- Utsusemi: Ni/San (4 clones)
-        elseif spellId == xi.magic.spell.UTSUSEMI_NI or spellId == xi.magic.spell.UTSUSEMI_SAN then
+        elseif
+            spellId == xi.magic.spell.UTSUSEMI_NI or
+            spellId == xi.magic.spell.UTSUSEMI_SAN
+        then
             for clone = hundredfacedHapoolJa + 1, hundredfacedHapoolJa + 4 do
                 if not GetMobByID(clone):isSpawned() then
-                    GetMobByID(clone):setSpawn(mob:getXPos()+math.random(1, 5), mob:getYPos(), mob:getZPos()+math.random(1, 5))
+                    GetMobByID(clone):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
                     SpawnMob(clone):updateEnmity(hateTarget)
                 end
             end

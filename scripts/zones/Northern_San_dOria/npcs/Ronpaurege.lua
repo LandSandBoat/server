@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Ronpaurege
--- Type: Standard Info NPC
 -- !pos 65.739 -0.199 74.275 231
 -----------------------------------
 local entity = {}

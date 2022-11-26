@@ -14,6 +14,7 @@ itemObject.onItemCheck = function(target)
     if target:getZoneID() == xi.zone.LEBROS_CAVERN then
         return 0
     end
+
     return xi.msg.basic.ITEM_UNABLE_TO_USE_2
 end
 
@@ -22,7 +23,7 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onItemDrop = function(target, item)
-   target:addTempItem(xi.items.CAGE_OF_ZHAYOLM_FIREFLIES)
+    target:addTempItem(xi.items.CAGE_OF_ZHAYOLM_FIREFLIES)
 end
 
 return itemObject

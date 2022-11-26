@@ -13,6 +13,7 @@ battlefieldObject.onBattlefieldTick = function(battlefield, tick)
         battlefield:lose()
         return
     end
+
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
@@ -20,6 +21,8 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
+    player:setCharVar("Mission[6][748]Status", 1)
+    player:startEvent(32)
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
@@ -36,6 +39,9 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
 end
 
 battlefieldObject.onEventUpdate = function(player, csid, option)
+    if csid == 32 then
+        player:updateEvent(32, 0, 0, 0, 0, 0, 0, 0)
+    end
 end
 
 battlefieldObject.onEventFinish = function(player, csid, option)

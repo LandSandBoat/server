@@ -14,35 +14,38 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    if (wonderingstatus == 1 and trade:hasItemQty(718, 1) == true and trade:getItemCount() == 1 and player:getCharVar("QuestWonderingMin_var") == 1) then
+    if
+        wonderingstatus == 1 and
+        trade:hasItemQty(718, 1) and
+        trade:getItemCount() == 1 and
+        player:getCharVar("QuestWonderingMin_var") == 1
+    then
         player:startEvent(638)                 -- WONDERING_MINSTREL: Quest Finish
     end
 end
 
 entity.onTrigger = function(player, npc)
-
-            --        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-
+    -- player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
-    if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then
+    if wonderingstatus == QUEST_AVAILABLE and fame >= 5 then
         local rand = math.random(1, 2)
-        if (rand == 1) then
+        if rand == 1 then
             player:startEvent(633)          -- WONDERING_MINSTREL: Before Quest
         else
             player:startEvent(634)          -- WONDERING_MINSTREL: Quest Start
         end
-    elseif (wonderingstatus == QUEST_ACCEPTED) then
+    elseif wonderingstatus == QUEST_ACCEPTED then
         player:startEvent(635)                 -- WONDERING_MINSTREL: During Quest
-    elseif (wonderingstatus == QUEST_COMPLETED and player:needToZone()) then
+    elseif wonderingstatus == QUEST_COMPLETED and player:needToZone() then
         player:startEvent(639)                 -- WONDERING_MINSTREL: After Quest
     else
         local hour = VanadielHour()
-        if (hour >= 18 or hour <= 6) then
+        if hour >= 18 or hour <= 6 then
             player:startEvent(611)             -- Singing 1 (daytime < 6 or daytime >= 18)
         else
             local rand = math.random(1, 2)
-            if (rand == 1) then
+            if rand == 1 then
                 player:startEvent(610)          -- Standard Conversation 1 (daytime)
             else
                 player:startEvent(615)             -- Standard Conversation 2 (daytime)
@@ -55,10 +58,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 634) then    -- WONDERING_MINSTREL: Quest Start
+    if csid == 634 then    -- WONDERING_MINSTREL: Quest Start
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    elseif (csid == 638) then  -- WONDERING_MINSTREL: Quest Finish
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 638 then  -- WONDERING_MINSTREL: Quest Finish
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)
         else
             player:tradeComplete()

@@ -44,9 +44,15 @@ entity.onMobFight = function(mob, target)
     local isBusy = false
     local act = mob:getCurrentAction()
 
-    -- isBusy is set to true if Bahamut is in any stage of using a mobskill or casting a spell
-    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
-        isBusy = true
+    if
+        act == xi.act.MOBABILITY_START or
+        act == xi.act.MOBABILITY_USING or
+        act == xi.act.MOBABILITY_FINISH or
+        act == xi.act.MAGIC_START or
+        act == xi.act.MAGIC_CASTING or
+        act == xi.act.MAGIC_START
+    then
+        isBusy = true -- is set to true if Bahamut is in any stage of using a mobskill or casting a spell
     end
 
     -- if Megaflare hasn't been set to be used this many times, increase the queue of Megaflares. This will allow it to use multiple Megaflares in a row if the HP is decreased quickly enough.
@@ -59,12 +65,11 @@ entity.onMobFight = function(mob, target)
     end
 
     -- The last check prevents multiple Mega/Gigaflares from being called at the same time.
-    if mob:actionQueueEmpty() == true and not isBusy then
+    if mob:actionQueueEmpty() and not isBusy then
         if megaFlareQueue > 0 then
-            -- disable all other actions until Megaflare is used successfully
-            mob:SetMobAbilityEnabled(false)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetAutoAttackEnabled(false)
+            mob:setMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
+            mob:setMagicCastingEnabled(false)
+            mob:setAutoAttackEnabled(false)
 
             -- If there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
             if flareWait == 0 and tauntShown == 0 then
@@ -85,13 +90,18 @@ entity.onMobFight = function(mob, target)
                     if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then
                         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                     end
+
                     mob:useMobAbility(1551)
                     mob:setLocalVar("MegaFlareQueue", 0)
                 end
             end
 
         -- All of the scripted Megaflares are to happen before Gigaflare.
-        elseif megaFlareQueue == 0 and mobHPP < 10 and gigaFlare < 1 and mob:checkDistance(target) <= 15 then
+        elseif
+            megaFlareQueue == 0 and
+            mobHPP < 10 and gigaFlare < 1 and
+            mob:checkDistance(target) <= 15
+        then
             -- again, taunt won't show again until the move is successfully used.
             if tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
@@ -101,6 +111,7 @@ entity.onMobFight = function(mob, target)
             if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
             end
+
             mob:useMobAbility(1552)
             mob:setLocalVar("GigaFlare", 1)
             mob:setLocalVar("MegaFlareQueue", 0)

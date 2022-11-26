@@ -15,9 +15,13 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
@@ -28,7 +32,7 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    if (power == 1) then
+    if power == 1 then
         target:addMod(xi.mod.AGI, 13)
         target:addMod(xi.mod.VIT, -5)
     else
@@ -42,7 +46,7 @@ end
 -----------------------------------
 itemObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
-    if (power == 1) then
+    if power == 1 then
         target:delMod(xi.mod.AGI, 13)
         target:delMod(xi.mod.VIT, -5)
     else

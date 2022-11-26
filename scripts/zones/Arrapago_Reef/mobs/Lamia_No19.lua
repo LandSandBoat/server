@@ -8,8 +8,8 @@ local entity = {}
 
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
-    SpawnMob(mobId+1):updateEnmity(target)
-    SpawnMob(mobId+2):updateEnmity(target)
+    SpawnMob(mobId + 1):updateEnmity(target)
+    SpawnMob(mobId + 2):updateEnmity(target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

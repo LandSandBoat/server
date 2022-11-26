@@ -22,18 +22,28 @@ zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zoneObject.onZoneIn = function( player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-374.008, -23.712, 63.289, 213)
     end
 
     if quests.rainbow.onZoneIn(player) then
         cs = 48
-    elseif player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.WINDURST_WATERS then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and
+        prevZone == xi.zone.WINDURST_WATERS
+    then
         cs = 62
-    elseif player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.PORT_WINDURST then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and
+        prevZone == xi.zone.PORT_WINDURST
+    then
         cs = 63
     end
 
@@ -54,10 +64,10 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE115_ITEMS", 0)
 end
 
-zoneObject.onRegionEnter = function( player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 48 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 62 or csid == 63 then
@@ -65,7 +75,7 @@ zoneObject.onEventUpdate = function( player, csid, option)
     end
 end
 
-zoneObject.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 62 or csid == 63 then
         player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
         player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)

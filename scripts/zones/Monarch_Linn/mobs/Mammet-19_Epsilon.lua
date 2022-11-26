@@ -35,7 +35,7 @@ local tpMoves =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)
@@ -52,23 +52,26 @@ entity.onMobFight = function(mob, target)
         switch (rand): caseof
         {
             [forms.UNARMED] = function()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:setDelay(2400)
                 mob:setDamage(40)
             end,
+
             [forms.SWORD] = function()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:setDelay(1500)
                 mob:setDamage(40)
             end,
+
             [forms.POLEARM] = function()
-                mob:SetMagicCastingEnabled(false)
+                mob:setMagicCastingEnabled(false)
                 mob:setDelay(3250)
                 mob:setDamage(75)
             end,
+
             [forms.STAFF] = function()
                 mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
-                mob:SetMagicCastingEnabled(true)
+                mob:setMagicCastingEnabled(true)
                 mob:setDelay(3700)
                 mob:setDamage(40)
             end,
@@ -81,19 +84,22 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     switch (mob:getAnimationSub()): caseof
     {
         [forms.UNARMED] = function()
-            local wsChoice = math.random(1,2)
+            local wsChoice = math.random(1, 2)
             return tpMoves[forms.UNARMED][wsChoice]
         end,
+
         [forms.SWORD] = function()
-            local wsChoice = math.random(1,3)
+            local wsChoice = math.random(1, 3)
             return tpMoves[forms.SWORD][wsChoice]
         end,
+
         [forms.POLEARM] = function()
-            local wsChoice = math.random(1,3)
+            local wsChoice = math.random(1, 3)
             return tpMoves[forms.POLEARM][wsChoice]
         end,
+
         [forms.STAFF] = function()
-            local wsChoice = math.random(1,2)
+            local wsChoice = math.random(1, 2)
             return tpMoves[forms.STAFF][wsChoice]
         end,
     }

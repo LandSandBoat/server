@@ -12,14 +12,14 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 1) then
+    if mob:getAnimationSub() == 1 then
         return 0
     end
+
     return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 5
     local accmod = 1
     local dmgmod = 1

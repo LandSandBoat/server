@@ -30,12 +30,15 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     -- Dances with Luopans
-    if target:getLocalVar("GEO_DWL_Locus_Area") == 1 and target:getCharVar("GEO_DWL_Luopan") == 0 then
+    if
+        target:getLocalVar("GEO_DWL_Locus_Area") == 1 and
+        target:getCharVar("GEO_DWL_Luopan") == 0
+    then
         local ID = zones[target:getZoneID()]
         target:messageSpecial(ID.text.ENERGIES_COURSE)
 
         local maxWaitTime = 480  -- Max wait of 8 minutes
-        local secondsPerTick = xi.settings.main.map.HEALING_TICK_DELAY;
+        local secondsPerTick = xi.settings.main.map.HEALING_TICK_DELAY
         local minWaitTime = math.min(3 * secondsPerTick, maxWaitTime)
         local waitTimeInSeconds = math.random(minWaitTime, maxWaitTime)
         target:setLocalVar("GEO_DWL_Resting", os.time() + waitTimeInSeconds)
@@ -60,9 +63,16 @@ effectObject.onEffectTick = function(target, effect)
 
     if healtime > 2 then
         -- curse II also known as "zombie"
-        if not(target:hasStatusEffect(xi.effect.DISEASE)) and target:hasStatusEffect(xi.effect.PLAGUE) == false and target:hasStatusEffect(xi.effect.CURSE_II) == false then
+        if
+            not target:hasStatusEffect(xi.effect.DISEASE) and
+            not target:hasStatusEffect(xi.effect.PLAGUE) and
+            not target:hasStatusEffect(xi.effect.CURSE_II)
+        then
             local healHP = 0
-            if target:getContinentID() == 1 and target:hasStatusEffect(xi.effect.SIGNET) then
+            if
+                target:getContinentID() == 1 and
+                target:hasStatusEffect(xi.effect.SIGNET)
+            then
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)
             elseif target:getMaster() ~= nil then -- Beastmaster's Stay ability
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (2.5 + math.floor(target:getMaxHP() / 100)) + target:getMod(xi.mod.HPHEAL)

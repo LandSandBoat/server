@@ -11,8 +11,8 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Cotton Pouch
-    if (trade:hasItemQty(1779, 1) and trade:getItemCount() == 1) then
-        if (player:getFreeSlotsCount() == 0) then
+    if trade:hasItemQty(1779, 1) and trade:getItemCount() == 1 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1780) -- Chamnaet Ice
         else
             player:tradeComplete()

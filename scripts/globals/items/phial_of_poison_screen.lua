@@ -8,9 +8,10 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if (target:hasStatusEffect(xi.effect.NEGATE_POISON)) then
+    if target:hasStatusEffect(xi.effect.NEGATE_POISON) then
         return 56
     end
+
     return 0
 end
 

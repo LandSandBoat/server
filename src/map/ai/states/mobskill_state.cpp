@@ -74,7 +74,6 @@ CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
-    SpendCost();
 }
 
 CMobSkill* CMobSkillState::GetSkill()
@@ -91,8 +90,16 @@ void CMobSkillState::SpendCost()
     }
     else if (!m_PSkill->isTpFreeSkill())
     {
-        m_spentTP            = m_PEntity->health.tp;
-        m_PEntity->health.tp = 0;
+        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))
+        {
+            m_spentTP = m_PEntity->addTP(-1000);
+            m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
+        }
+        else
+        {
+            m_spentTP            = m_PEntity->health.tp;
+            m_PEntity->health.tp = 0;
+        }
     }
 }
 
@@ -105,6 +112,7 @@ bool CMobSkillState::Update(time_point tick)
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         auto delay   = std::chrono::milliseconds(m_PSkill->getAnimationTime());
         m_finishTime = tick + delay;
+        SpendCost();
         Complete();
     }
     if (IsCompleted() && tick > m_finishTime)
@@ -140,12 +148,14 @@ void CMobSkillState::Cleanup(time_point tick)
         action_t action;
         action.id         = m_PEntity->id;
         action.actiontype = ACTION_MOBABILITY_INTERRUPT;
+        action.actionid   = 28787;
 
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = m_PEntity->id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = m_PSkill->getID();
+        actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
+        actionTarget.reaction        = REACTION::HIT;
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }

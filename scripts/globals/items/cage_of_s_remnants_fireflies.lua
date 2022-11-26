@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
     if target:getZoneID() == xi.zone.SILVER_SEA_REMNANTS then
         return 0
     end
+
     return xi.msg.basic.ITEM_UNABLE_TO_USE_2
 end
 
@@ -23,7 +24,7 @@ itemObject.onItemUse = function(target)
 end
 
 itemObject.onItemDrop = function(target, item)
-   target:addTempItem(xi.items.CAGE_OF_S_REMNANTS_FIREFLIES)
+    target:addTempItem(xi.items.CAGE_OF_S_REMNANTS_FIREFLIES)
 end
 
 return itemObject

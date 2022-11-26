@@ -10,24 +10,25 @@ local nsandyID = require('scripts/zones/Northern_San_dOria/IDs')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:getItemCount() == 2) then
+    if trade:getItemCount() == 2 then
         local item = 0
         local reward = 0
         local abjurList = xi.abjurations
         for i = 1, #abjurList, 5 do
-            if (trade:hasItemQty(abjurList[i], 1)) then
-                if (trade:hasItemQty(abjurList[i + 1], 1)) then
+            if trade:hasItemQty(abjurList[i], 1) then
+                if trade:hasItemQty(abjurList[i + 1], 1) then
                     item = abjurList[i + 1]
                     reward = abjurList[i + 3]
-                elseif (trade:hasItemQty(abjurList[i + 2], 1)) then
+                elseif trade:hasItemQty(abjurList[i + 2], 1) then
                     item = abjurList[i + 2]
                     reward = abjurList[i + 4]
                 end
+
                 break
             end
         end
 
-        if (reward ~= 0) then
+        if reward ~= 0 then
             --Trade pair for a nice reward.
             player:startEvent(720, item, reward)
             player:setCharVar("reward", reward)
@@ -43,9 +44,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 720) then
+    if csid == 720 then
         local reward = player:getCharVar("reward")
-        if (reward ~= 0) then
+        if reward ~= 0 then
             player:tradeComplete()
             player:addItem(reward)
             player:setCharVar("reward", 0)

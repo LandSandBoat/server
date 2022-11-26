@@ -32,18 +32,21 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration = 120
     local returnEffect = typeEffectOne
 
-    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
+    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
-        if (diffMerit > 0) then
-            duration = duration + (duration/100)* diffMerit
+        if diffMerit > 0 then
+            duration = duration + (duration / 100) * diffMerit
         end
 
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
     -- Reactor Cool Will Overwrite Ice Spikes and Def Boost regardless of Power
-    if target:hasStatusEffect(typeEffectOne) or target:hasStatusEffect(typeEffectTwo) then
+    if
+        target:hasStatusEffect(typeEffectOne) or
+        target:hasStatusEffect(typeEffectTwo)
+    then
         target:delStatusEffectSilent(typeEffectOne)
         target:delStatusEffectSilent(typeEffectTwo)
     end

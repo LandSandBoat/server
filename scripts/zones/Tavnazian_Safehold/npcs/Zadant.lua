@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Zadant
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

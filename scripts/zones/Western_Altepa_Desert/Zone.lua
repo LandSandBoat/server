@@ -33,7 +33,11 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-19.901, 13.607, 440.058, 78)
     end
 
@@ -53,7 +57,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zoneObject.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -73,7 +77,7 @@ zoneObject.onZoneWeatherChange = function(weather)
             (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
         then
             DisallowRespawn(dahu:getID(), false)
-            dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
+            dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after earth weather starts
         end
     end
 

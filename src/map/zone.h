@@ -22,9 +22,9 @@
 #ifndef _CZONE_H
 #define _CZONE_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
-#include "../common/taskmgr.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+#include "common/taskmgr.h"
 
 #include <list>
 #include <map>
@@ -32,7 +32,7 @@
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
-#include "region.h"
+#include "trigger_area.h"
 #include "vana_time.h"
 
 #include "navmesh.h"
@@ -504,8 +504,8 @@ class CTrustEntity;
 class CTreasurePool;
 class CZoneEntities;
 
-typedef std::list<CRegion*>    regionList_t;
-typedef std::list<zoneLine_t*> zoneLineList_t;
+typedef std::list<CTriggerArea*> triggerAreaList_t;
+typedef std::list<zoneLine_t*>   zoneLineList_t;
 
 typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 
@@ -518,17 +518,18 @@ int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 class CZone
 {
 public:
-    ZONEID         GetID();
-    ZONE_TYPE      GetType();
-    REGION_TYPE    GetRegionID();
-    CONTINENT_TYPE GetContinentID();
-    uint32         GetIP() const;
-    uint16         GetPort() const;
-    uint16         GetTax() const;
-    WEATHER        GetWeather();
-    uint32         GetWeatherChangeTime() const;
-    const int8*    GetName();
-    zoneLine_t*    GetZoneLine(uint32 zoneLineID);
+    ZONEID             GetID();
+    ZONE_TYPE          GetType();
+    REGION_TYPE        GetRegionID();
+    CONTINENT_TYPE     GetContinentID();
+    uint8              getLevelRestriction();
+    uint32             GetIP() const;
+    uint16             GetPort() const;
+    uint16             GetTax() const;
+    WEATHER            GetWeather();
+    uint32             GetWeatherChangeTime() const;
+    const std::string& GetName();
+    zoneLine_t*        GetZoneLine(uint32 zoneLineID);
 
     uint8 GetSoloBattleMusic() const;
     uint8 GetPartyBattleMusic() const;
@@ -540,13 +541,13 @@ public:
     void SetBackgroundMusicDay(uint8 music);
     void SetBackgroundMusicNight(uint8 music);
 
-    const QueryByNameResult_t& queryEntitiesByName(std::string const& name);
+    auto queryEntitiesByName(std::string const& pattern) -> QueryByNameResult_t const&;
 
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
+    virtual CCharEntity* GetCharByName(std::string name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
 
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
@@ -579,10 +580,11 @@ public:
     virtual void DeletePET(CBaseEntity* PPet); // derefs the pet's ID from this zone
     virtual void DeleteTRUST(CBaseEntity* PTrust);
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity);         // ищем группу для монстра
-    virtual void TransportDepart(uint16 boundary, uint16 zone); // транспотр отправляется, необходимо собрать пассажиров
+    virtual void FindPartyForMob(CBaseEntity* PEntity);          // ищем группу для монстра
+    virtual void TransportDepart(uint16 boundary, uint16 zone);  // транспотр отправляется, необходимо собрать пассажиров
+    virtual void updateCharLevelRestriction(CCharEntity* PChar); // Removes the character's level restriction. If the zone has a level restriction it applies the zone's after removing it.
 
-    void InsertRegion(CRegion* Region); // добавляем в зону активную область
+    void InsertTriggerArea(CTriggerArea* triggerArea); // добавляем в зону активную область
 
     virtual void TOTDChange(TIMETYPE TOTD);
     virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*);
@@ -593,11 +595,11 @@ public:
     bool           IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
-    time_point      m_RegionCheckTime; // время последней проверки регионов
-    weatherVector_t m_WeatherVector;   // вероятность появления каждого типа погоды
+    time_point      m_TriggerAreaCheckTime;
+    weatherVector_t m_WeatherVector; // the probability of each weather type
 
-    virtual void ZoneServer(time_point tick, bool check_regions);
-    void         CheckRegions(CCharEntity* PChar);
+    virtual void ZoneServer(time_point tick, bool checkTriggerAreas);
+    void         CheckTriggerAreas(CCharEntity* PChar);
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> func);
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func);
@@ -609,7 +611,7 @@ public:
 
     bool HasReducedVerticalAggro();
 
-    CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID);
+    CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
 
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
@@ -634,10 +636,11 @@ private:
     ZONE_TYPE      m_zoneType;
     REGION_TYPE    m_regionID;    // ID области
     CONTINENT_TYPE m_continentID; // ID континента
-    std::string    m_zoneName;    // имя зоны
-    uint16         m_zonePort;    // порт зоны
-    uint32         m_zoneIP;      // IP зоны
-    bool           m_useNavMesh;  // Use navmesh for roaming, chasing
+    uint8          m_levelRestriction;
+    std::string    m_zoneName;   // имя зоны
+    uint16         m_zonePort;   // порт зоны
+    uint32         m_zoneIP;     // IP зоны
+    bool           m_useNavMesh; // Use navmesh for roaming, chasing
 
     WEATHER m_Weather;
     uint32  m_WeatherChangeTime;
@@ -651,8 +654,8 @@ private:
 
     std::unordered_map<std::string, uint32> m_LocalVars;
 
-    regionList_t   m_regionList;   // список активных областей зоны
-    zoneLineList_t m_zoneLineList; // список всех доступных zonelines для зоны
+    triggerAreaList_t m_triggerAreaList;
+    zoneLineList_t    m_zoneLineList;
 
     void LoadZoneLines();    // список zonelines (можно было бы заменить этот метод методом InsertZoneLine)
     void LoadZoneWeather();  // погода

@@ -23,21 +23,21 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
             helmType == xi.helm.type.MINING and
             not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
             xi.expansionRegion.ORIGINAL_ROTZ[regionId] and
-            math.random(100) <= amkChance
+            math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
         elseif
             helmType == xi.helm.type.LOGGING and
             not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
             xi.expansionRegion.ORIGINAL_ROTZ[regionId] and
-            math.random(100) <= amkChance
+            math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
         elseif
             helmType == xi.helm.type.HARVESTING and
             not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
             xi.expansionRegion.ORIGINAL_ROTZ[regionId] and
-            math.random(100) <= amkChance
+            math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)
         end
@@ -79,6 +79,7 @@ xi.amk.helpers.getDiggingZone = function(player)
         diggingZone = math.random(1, 12)
         player:setCharVar('AMK6_DIGGING_ZONE', diggingZone)
     end
+
     return diggingZone
 end
 

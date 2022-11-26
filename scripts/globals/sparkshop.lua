@@ -619,7 +619,7 @@ function xi.sparkshop.onTrigger(player, npc, event)
     player:startEvent(event, 0, sparks, vouchers, naakual, cipher, remainingLimit)
 end
 
-function xi.sparkshop.onEventUpdate(player,csid,option)
+function xi.sparkshop.onEventUpdate(player, csid, option, npc)
     local sparks = player:getCurrency("spark_of_eminence")
     local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
@@ -643,7 +643,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         local cost = item.cost * qty
 
         -- makes sure player has room for three stacks of tomes
-        if (qty > 12 and qty < 99) and player:getFreeSlotsCount() < 3 then
+        if qty > 12 and qty < 99 and player:getFreeSlotsCount() < 3 then
             player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, item.id)
             player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
             return
@@ -700,6 +700,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
         end
+
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     elseif category == 30 then
         local copperVouchersStored = player:getCurrency("aman_vouchers")
@@ -714,6 +715,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, 8711)
         end
+
         player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     end
 end

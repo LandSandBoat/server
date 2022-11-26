@@ -28,14 +28,14 @@ end
 entity.onEventUpdate = function(player, csid, option)
     local time = 0
     switch (option): caseof {
-        [1] = function() time = GetServerVariable("[Temenos_Northern_Tower]Time") end, -- Northern Tower
-        [2] = function() time = GetServerVariable("[Temenos_Eastern_Tower]Time") end, -- Eastern Tower
-        [3] = function() time = GetServerVariable("[Temenos_Western_Tower]Time") end, -- Western Tower
-        [4] = function() time = GetServerVariable("[Central_Temenos_4th_Floor]Time") end, -- Central 4th
-        [5] = function() time = GetServerVariable("[Central_Temenos_3rd_Floor]Time") end, -- Central 3rd
-        [6] = function() time = GetServerVariable("[Central_Temenos_2nd_Floor]Time") end, -- Central 2nd
-        [7] = function() time = GetServerVariable("[Central_Temenos_1st_Floor]Time") end, -- Central 1st
-        [8] = function() time = GetServerVariable("[Central_Temenos_Basement]Time") end, -- Central Basement
+        [1] = function() time = GetServerVariable("[TEMENOS_NORTHERN_TOWER]Time") end,
+        [2] = function() time = GetServerVariable("[TEMENOS_EASTERN_TOWER]Time") end,
+        [3] = function() time = GetServerVariable("[TEMENOS_WESTERN_TOWER]Time") end,
+        [4] = function() time = GetServerVariable("[CENTRAL_TEMENOS_4TH_FLOOR]Time") end,
+        [5] = function() time = GetServerVariable("[CENTRAL_TEMENOS_3RD_FLOOR]Time") end,
+        [6] = function() time = GetServerVariable("[CENTRAL_TEMENOS_2ND_FLOOR]Time") end,
+        [7] = function() time = GetServerVariable("[CENTRAL_TEMENOS_1ST_FLOOR]Time") end,
+        [8] = function() time = GetServerVariable("[CENTRAL_TEMENOS_BASEMENT]Time") end,
     }
     player:updateEvent(0, time, 0, 0, 0, 0, 0, 0)
 end

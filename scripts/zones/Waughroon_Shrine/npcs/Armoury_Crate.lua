@@ -673,10 +673,10 @@ local loot =
 
         {
             { itemid = 17624, droprate = 504 }, -- Anubiss Knife
-            { itemid = 19027, droprate =  86 }, -- Claymore Grip
             { itemid = 747,   droprate =  22 }, -- Orichalcum Ingot
-            { itemid = 19025, droprate = 146 }, -- Pole Grip
-            { itemid = 19024, droprate = 220 }, -- Sword Strap
+            { itemid = xi.items.CLAYMORE_GRIP, droprate =  86 },
+            { itemid = xi.items.POLE_GRIP,     droprate = 146 },
+            { itemid = xi.items.SWORD_STRAP,   droprate = 220 },
         },
 
         {
@@ -732,11 +732,11 @@ local loot =
         },
 
         {
-            { itemid = 19027, droprate = 144 }, -- Claymore Grip
             { itemid =   658, droprate = 275 }, -- Damascus Ingot
             { itemid =   843, droprate = 275 }, -- Giant Bird Plume
-            { itemid = 19025, droprate = 203 }, -- Pole Grip
-            { itemid = 19026, droprate = 116 }, -- Spear Strap
+            { itemid = xi.items.CLAYMORE_GRIP, droprate = 144 },
+            { itemid = xi.items.POLE_GRIP,     droprate = 203 },
+            { itemid = xi.items.SPEAR_STRAP,   droprate = 116 },
         },
 
         {

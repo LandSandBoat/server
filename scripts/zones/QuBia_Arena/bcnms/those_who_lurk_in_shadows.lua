@@ -23,6 +23,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if player:hasKeyItem(xi.ki.MARK_OF_SEED) then
         player:delKeyItem(xi.ki.MARK_OF_SEED)
     end
+
     if leavecode == xi.battlefield.leaveCode.WON then
         player:addExp(700)
         local _, clearTime, partySize = battlefield:getRecord()
@@ -42,7 +43,11 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
             player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.REMEMBER_ME_IN_YOUR_DREAMS)
         end
-        if not player:hasKeyItem(xi.ki.IVORY_KEY) and player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III then
+
+        if
+            not player:hasKeyItem(xi.ki.IVORY_KEY) and
+            player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
+        then
             player:setCharVar("LastIvoryKey", getMidnight())
             player:addKeyItem(xi.ki.IVORY_KEY)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)

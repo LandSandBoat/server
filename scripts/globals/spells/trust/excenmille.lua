@@ -19,7 +19,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local sandoriaFirstTrust = caster:getCharVar("SandoriaFirstTrust")
     local zone = caster:getZoneID()
 
-    if sandoriaFirstTrust == 1 and (zone == xi.zone.WEST_RONFAURE or zone == xi.zone.EAST_RONFAURE) then
+    if
+        sandoriaFirstTrust == 1 and
+        (zone == xi.zone.WEST_RONFAURE or zone == xi.zone.EAST_RONFAURE)
+    then
         caster:setCharVar("SandoriaFirstTrust", 2)
     end
 

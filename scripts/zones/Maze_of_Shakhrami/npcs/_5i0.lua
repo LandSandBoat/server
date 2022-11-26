@@ -4,7 +4,7 @@
 --  NPC: Iron Door (Spawn Lost Soul) (Enter chest room)
 -- !pos 247.735 18.499 -142.267 198
 -----------------------------------
-ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
+local ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
 -----------------------------------
 local entity = {}
 

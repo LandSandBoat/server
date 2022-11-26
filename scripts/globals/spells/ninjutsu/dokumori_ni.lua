@@ -21,18 +21,18 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
-    duration = duration * applyResistance(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistance(caster, target, spell, params)
     local power = 10
 
     --Calculates resist chanve from Reist Blind
-    if (target:hasStatusEffect(effect)) then
+    if target:hasStatusEffect(effect) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         return effect
     end
 
-    if (math.random(0, 100) >= target:getMod(xi.mod.POISONRES)) then
-        if (duration >= 60) then
-            if (target:addStatusEffect(effect, power, 3, duration)) then
+    if math.random(0, 100) >= target:getMod(xi.mod.POISONRES) then
+        if duration >= 60 then
+            if target:addStatusEffect(effect, power, 3, duration) then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
@@ -43,6 +43,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
+
     return effect
 end
 

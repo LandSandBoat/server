@@ -47,10 +47,16 @@ mission.sections =
             ['Fire_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and mission:getVar(player, 'Ifrit') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        mission:getVar(player, 'Ifrit') == 0
+                    then
                         mission:setVar(player, 'Ifrit', 1)
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and player:getLocalVar('battlefieldWin') == 547 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 547
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -72,10 +78,16 @@ mission.sections =
             ['Ice_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and mission:getVar(player, 'Shiva') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        mission:getVar(player, 'Shiva') == 0
+                    then
                         mission:setVar(player, 'Shiva', 1)
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and player:getLocalVar('battlefieldWin') == 484 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 484
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -97,10 +109,16 @@ mission.sections =
             ['Wind_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and mission:getVar(player, 'Garuda') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        mission:getVar(player, 'Garuda') == 0
+                    then
                         mission:setVar(player, 'Garuda', 1)
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and player:getLocalVar('battlefieldWin') == 420 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 420
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -122,10 +140,16 @@ mission.sections =
             ['Lightning_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and mission:getVar(player, 'Ramuh') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        mission:getVar(player, 'Ramuh') == 0
+                    then
                         mission:setVar(player, 'Ramuh', 1)
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and player:getLocalVar('battlefieldWin') == 452 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 452
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -147,10 +171,16 @@ mission.sections =
             ['Water_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and mission:getVar(player, 'Leviathan') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        mission:getVar(player, 'Leviathan') == 0
+                    then
                         mission:setVar(player, 'Leviathan', 1)
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and player:getLocalVar('battlefieldWin') == 611 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 611
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -172,10 +202,16 @@ mission.sections =
             ['Earth_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and mission:getVar(player, 'Titan') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        mission:getVar(player, 'Titan') == 0
+                    then
                         mission:setVar(player, 'Titan', 1)
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and player:getLocalVar('battlefieldWin') == 580 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 580
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -274,10 +310,16 @@ mission.sections =
             ['Fire_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and mission:getVar(player, 'Ifrit') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        mission:getVar(player, 'Ifrit') == 0
+                    then
                         mission:setVar(player, 'Ifrit', 1)
                         return mission:messageSpecial(flamesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_SCARLET_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and player:getLocalVar('battlefieldWin') == 547 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 547
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -299,10 +341,16 @@ mission.sections =
             ['Ice_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and mission:getVar(player, 'Shiva') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        mission:getVar(player, 'Shiva') == 0
+                    then
                         mission:setVar(player, 'Shiva', 1)
                         return mission:messageSpecial(frostID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AZURE_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and player:getLocalVar('battlefieldWin') == 484 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 484
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -324,10 +372,16 @@ mission.sections =
             ['Wind_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and mission:getVar(player, 'Garuda') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        mission:getVar(player, 'Garuda') == 0
+                    then
                         mission:setVar(player, 'Garuda', 1)
                         return mission:messageSpecial(galesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_EMERALD_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and player:getLocalVar('battlefieldWin') == 420 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 420
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -349,10 +403,16 @@ mission.sections =
             ['Lightning_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and mission:getVar(player, 'Ramuh') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        mission:getVar(player, 'Ramuh') == 0
+                    then
                         mission:setVar(player, 'Ramuh', 1)
                         return mission:messageSpecial(stormsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_VIOLET_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and player:getLocalVar('battlefieldWin') == 452 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 452
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -374,10 +434,16 @@ mission.sections =
             ['Water_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and mission:getVar(player, 'Leviathan') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        mission:getVar(player, 'Leviathan') == 0
+                    then
                         mission:setVar(player, 'Leviathan', 1)
                         return mission:messageSpecial(tidesID.text.POWER_STYMIES, xi.keyItem.DOMINAS_CERULEAN_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and player:getLocalVar('battlefieldWin') == 611 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 611
+                    then
                         return mission:progressEvent(2)
                     end
                 end,
@@ -399,10 +465,16 @@ mission.sections =
             ['Earth_Protocrystal'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and mission:getVar(player, 'Titan') == 0 then
+                    if
+                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        mission:getVar(player, 'Titan') == 0
+                    then
                         mission:setVar(player, 'Titan', 1)
                         return mission:messageSpecial(tremorsID.text.POWER_STYMIES, xi.keyItem.DOMINAS_AMBER_SEAL)
-                    elseif player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and player:getLocalVar('battlefieldWin') == 580 then
+                    elseif
+                        player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL) and
+                        player:getLocalVar('battlefieldWin') == 580
+                    then
                         return mission:progressEvent(2)
                     end
                 end,

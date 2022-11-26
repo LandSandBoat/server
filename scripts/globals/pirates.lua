@@ -59,12 +59,12 @@ xi.pirates.reset = function(ID)
 end
 
 xi.pirates.spawnMob = function(mobId)
-    local x = math.random(-4,4)
+    local x = math.random(-4, 4)
     local y = -7.263
-    local z = math.random(10,22)
-    local rot = math.random(0,255)
+    local z = math.random(10, 22)
+    local rot = math.random(0, 255)
     local mob = GetMobByID(mobId)
-    mob:setSpawn(x,y,z,rot)
+    mob:setSpawn(x, y, z, rot)
     mob:spawn()
 end
 
@@ -92,7 +92,7 @@ xi.pirates.spawnMobs = function(ID)
             if
                 nm:getLocalVar("killed") == 0 and
                 ship:getLocalVar('HQ') == 1 and
-                math.random(0,100) > 30
+                math.random(0, 100) > 30
             then
                 xi.pirates.spawnMob(ID.mob.CROSSBONES + 5)
             else
@@ -144,12 +144,12 @@ xi.pirates.summonAnimations = function(ID, firstcast)
             npc:setLocalVar("summoning", 1)
             local startTime = 0
             if not firstcast then
-                startTime = 2000 + math.random(2000,3000)
+                startTime = 2000 + math.random(2000, 3000)
             end
             npc:timer(startTime, function(npcArg)
                 if npcArg:getLocalVar("castmode") == 1 then
                     npcArg:entityAnimationPacket("casm")
-                    local randomSummonTime = 2000 + math.random(0,2000)
+                    local randomSummonTime = 2000 + math.random(0, 2000)
                     npcArg:timer(randomSummonTime, function(npcArg2)
                         npcArg2:entityAnimationPacket("shsm")
                         npcArg2:setLocalVar("summoning", 0)
@@ -196,13 +196,13 @@ xi.pirates.update = function(ID, zone, tripTime)
                         npc:setPos(xi.path.first(pirate.enter_path))
                         npc:setStatus(xi.status.NORMAL)
                         local point = xi.path.last(pirate.enter_path)
-                        npc:pathTo(point.x, point.y, point.z)
+                        npc:pathTo(point[1], point[2], point[3])
                         npc:sendUpdateToZoneCharsInRange(2000)
-                    elseif ship:getLocalVar('HQ') == 0 and piratePos ~=4 then
+                    elseif ship:getLocalVar('HQ') == 0 and piratePos ~= 4 then
                         npc:setPos(xi.path.first(pirate.enter_path))
                         npc:setStatus(xi.status.NORMAL)
                         local point = xi.path.last(pirate.enter_path)
-                        npc:pathTo(point.x, point.y, point.z)
+                        npc:pathTo(point[1], point[2], point[3])
                         npc:sendUpdateToZoneCharsInRange(2000)
                     end
                 end
@@ -222,7 +222,7 @@ xi.pirates.update = function(ID, zone, tripTime)
                 ship:setLocalVar("pirateStatus", xi.pirates.status.ATTACKING)
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
-                    npc:setLocalVar("castmode",1)
+                    npc:setLocalVar("castmode", 1)
                     npc:lookAt(pirate.look_at)
                     npc:sendUpdateToZoneCharsInRange(2000)
                 end
@@ -241,13 +241,13 @@ xi.pirates.update = function(ID, zone, tripTime)
                     local npc = GetNPCByID(k)
                     local piratePos = pirate.position
 
-                    npc:setLocalVar("castmode",0)
+                    npc:setLocalVar("castmode", 0)
                     if ship:getLocalVar('HQ') == 1 and piratePos ~= 2 then
                         npc:setPos(xi.path.first(pirate.enter_path))
                         npc:setStatus(xi.status.NORMAL)
                         npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
                         npc:sendUpdateToZoneCharsInRange(2000)
-                    elseif ship:getLocalVar('HQ') == 0 and piratePos ~=4 then
+                    elseif ship:getLocalVar('HQ') == 0 and piratePos ~= 4 then
                         npc:setPos(xi.path.first(pirate.enter_path))
                         npc:setStatus(xi.status.NORMAL)
                         npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])

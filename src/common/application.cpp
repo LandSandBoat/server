@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -60,6 +60,5 @@ void Application::Tick()
     while (m_IsRunning)
     {
         next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
-        // do_sockets(&rfd, next);
     }
 }

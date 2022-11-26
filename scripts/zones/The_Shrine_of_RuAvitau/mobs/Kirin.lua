@@ -9,7 +9,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function( mob )
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.DEF, 120)
@@ -24,27 +24,26 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.BINDRES, 35)
     mob:setMod(xi.mod.GRAVITYRES, 35)
     mob:setMod(xi.mob.REGEN, 50)
-    mob:setDamage(150)
     mob:setLocalVar("numAdds", 1)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMobAbilityEnabled(true)
-    mob:SetMagicCastingEnabled(false)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobEngaged = function(mob)
     mob:timer(2000, function(mobArg)
         mob:messageText(mob, ID.text.KIRIN_OFFSET)
-        mobArg:SetMagicCastingEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
     end)
 end
 
-entity.onMobFight = function( mob, target )
+entity.onMobFight = function(mob, target)
     -- spawn gods
     local numAdds = mob:getLocalVar("numAdds")
     if mob:getBattleTime() / 180 == numAdds then
         local godsRemaining = {}
         for i = 1, 4 do
-            if (mob:getLocalVar("add"..i) == 0) then
+            if mob:getLocalVar("add"..i) == 0 then
                 table.insert(godsRemaining, i)
             end
         end
@@ -54,9 +53,9 @@ entity.onMobFight = function( mob, target )
             mob:setLocalVar("summoning", 1)
             mob:entityAnimationPacket("casm")
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setAutoAttackEnabled(false)
+            mob:setMagicCastingEnabled(false)
+            mob:setMobAbilityEnabled(false)
 
             mob:timer(5000, function(mobArg)
                 if mobArg:isAlive() then
@@ -66,13 +65,13 @@ entity.onMobFight = function( mob, target )
                     if mobArg:getTarget() ~= nil then
                         god:updateEnmity(target)
                     end
-                    mob:setLocalVar("add"..g, 1)
-                    mob:setLocalVar("numAdds", numAdds + 1)
+                    mobArg:setLocalVar("add"..g, 1)
+                    mobArg:setLocalVar("numAdds", numAdds + 1)
                     mobArg:setLocalVar("summoning", 0)
                     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-                    mobArg:SetAutoAttackEnabled(true)
-                    mobArg:SetMagicCastingEnabled(true)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setAutoAttackEnabled(true)
+                    mobArg:setMagicCastingEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                 end
             end)
         end
@@ -92,14 +91,14 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle( xi.title.KIRIN_CAPTIVATOR )
-    mob:messageText(mob, ID.text.KIRIN_OFFSET + 1)
+    player:addTitle(xi.title.KIRIN_CAPTIVATOR)
+    player:showText(mob, ID.text.KIRIN_OFFSET + 1)
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         GetMobByID(i):setHP(0)
     end
 end
 
-entity.onMobDespawn = function( mob )
+entity.onMobDespawn = function(mob)
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end

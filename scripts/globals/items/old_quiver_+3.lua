@@ -12,11 +12,12 @@ itemObject.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     return result
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18184, math.random(99))
+    target:addItem(18184, math.random(10, 20))
 end
 
 return itemObject
