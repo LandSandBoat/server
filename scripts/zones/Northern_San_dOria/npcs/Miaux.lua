@@ -74,6 +74,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ChasingQuotas_Progress", 3)
     end
 end
+
 -- 11 Miaux : "<Sigh> Why must all craftsmen be so uptight?"
 -- 73 Miaux : "I wish to have a breastplate repaired... Y/N dialog
 -- 71 Miaux : "I...I hesitate to impose upon you again, but would it be possible for you to find

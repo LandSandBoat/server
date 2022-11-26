@@ -1336,6 +1336,7 @@ function xi.hunts.onEventFinish(player, csid, option)
         else
             player:addCurrency("scyld", scyldBounty)
         end
+
         player:messageSpecial(msg.HUNT_RECORDED)
         player:messageSpecial(msg.OBTAIN_SCYLDS, scyldBounty, player:getCurrency("scyld"))
     end

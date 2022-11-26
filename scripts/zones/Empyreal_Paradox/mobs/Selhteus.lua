@@ -22,6 +22,7 @@ entity.onMobFight = function(mob, target)
         local radians = (256 - targetPos.rot) * (math.pi / 128)
         mob:pathTo(targetPos.x + math.cos(radians) * 16, targetPos.y, targetPos.z + math.sin(radians) * 16)
     end
+
     local lanceTime = mob:getLocalVar("lanceTime")
     local lanceOut = mob:getLocalVar("lanceOut")
     local rejuv = mob:getLocalVar("rejuv")

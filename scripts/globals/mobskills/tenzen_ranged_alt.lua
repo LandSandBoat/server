@@ -31,6 +31,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if msg ~= xi.msg.basic.SHADOW_ABSORB then
         target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     end
+
     skill:setMsg(352) -- fixes incorrect messages on ranged attacks
     return dmg
 end

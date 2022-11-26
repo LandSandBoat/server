@@ -8,6 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getMainJob() == xi.job.MNK then
         return 0
     end
+
     return 1
 end
 

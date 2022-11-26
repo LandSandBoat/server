@@ -162,11 +162,13 @@ xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
     if hasLuopan(player) then
         return 0, 0
     end
+
     if ability == xi.jobAbility.LIFE_CYCLE then
         if player:getHP() <= 2 then
             return xi.msg.basic.UNABLE_TO_USE_JA
         end
     end
+
     return xi.msg.basic.REQUIRE_LUOPAN, 0
 end
 
@@ -329,6 +331,7 @@ xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
             return xi.msg.basic.EFFECT_ALREADY_ACTIVE
         end
     end
+
     return 0
 end
 

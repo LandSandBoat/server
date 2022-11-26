@@ -79,6 +79,7 @@ xi.amk.helpers.getDiggingZone = function(player)
         diggingZone = math.random(1, 12)
         player:setCharVar('AMK6_DIGGING_ZONE', diggingZone)
     end
+
     return diggingZone
 end
 

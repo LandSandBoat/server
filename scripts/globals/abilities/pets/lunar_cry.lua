@@ -32,6 +32,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     else
         buffvalue = 1
     end
+
     target:delStatusEffect(xi.effect.ACCURACY_DOWN)
     target:delStatusEffect(xi.effect.EVASION_DOWN)
     target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, skillOverCap + 60)

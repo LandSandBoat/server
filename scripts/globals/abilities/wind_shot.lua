@@ -55,6 +55,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         if threnody ~= nil and threnody:getSubPower() == xi.mod.EARTH_MEVA then
             table.insert(effects, threnody)
         end
+
         --TODO: Frightful Roar
         --[[local frightfulRoar = target:getStatusEffect(xi.effect.)
         if (frightfulRoar ~= nil) then

@@ -182,6 +182,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
                 power = math.floor(power + (singingLvl - skillCap) / divisor)
             end
         end
+
         -- NOTE: Ballad, Hymnus, Mazurka have constant base power.
     end
 

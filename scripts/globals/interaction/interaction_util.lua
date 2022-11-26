@@ -11,6 +11,7 @@ function interactionUtil.makeTableCache(getterFunc)
             if obj.cache[key] == nil then
                 obj.cache[key] = getterFunc(key)
             end
+
             return obj.cache[key]
         end
     }

@@ -59,6 +59,7 @@ local function BlueGetAlpha(level)
     elseif level <= 99 then
         alpha = 0.85
     end
+
     return alpha
 end
 
@@ -77,6 +78,7 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
     end
+
     ratio = ratio - levelcor
 
     -- apply caps
@@ -105,10 +107,12 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
     elseif ratio <= 2 and ratio > 0.833 then
         cratiomax = 1.2 * ratio
     end
+
     local cratio = {}
     if cratiomin < 0 then
         cratiomin = 0
     end
+
     cratio[1] = cratiomin
     cratio[2] = cratiomax
     return cratio
@@ -128,6 +132,7 @@ local function BluefTP(tp, ftp1, ftp2, ftp3)
     else
         print("blue fTP error: TP value is not between 0-3000!")
     end
+
     return 1 -- no ftp mod
 end
 
@@ -169,6 +174,7 @@ local function BlueGetHitRate(attacker, target, capHitRate)
     if acc > eva then
         hitdiff = (acc - eva) / 2
     end
+
     if eva > acc then
         hitdiff = (-1 * (eva - acc)) / 2
     end
@@ -181,10 +187,12 @@ local function BlueGetHitRate(attacker, target, capHitRate)
         if hitrate > 0.95 then
             hitrate = 0.95
         end
+
         if hitrate < 0.2 then
             hitrate = 0.2
         end
     end
+
     return hitrate
 end
 
@@ -407,6 +415,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
+
         dmg = utils.oneforall(target, dmg)
         dmg = utils.rampart(target, dmg)
     end

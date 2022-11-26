@@ -235,6 +235,7 @@ entity.onTrigger = function(player, npc)
     if not battlefield then
         return
     end
+
     local crateID = npc:getID()
     local xPos = npc:getXPos()
     local yPos = npc:getYPos()
@@ -249,16 +250,19 @@ entity.onTrigger = function(player, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
             end,
+
             [1304] = function() -- Temenos Central F2 Crate Handling
                 xi.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
             end,
+
             [1305] = function() -- Temenos Central F3 Crate Handling
                 xi.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
             end,
+
             [1306] = function() -- Temenos Central F4 Crate Handling
                 if crateID ~= ID.npc.TEMENOS_C_CRATE[4][1] then
                     local randmimic = math.random(1, 24)
@@ -280,6 +284,7 @@ entity.onTrigger = function(player, npc)
                     else
                         xi.limbus.handleLootRolls(battlefield, loot[bfid][2], nil, npc)
                     end
+
                     for i = ID.npc.TEMENOS_C_CRATE[4][1] + 2, ID.npc.TEMENOS_C_CRATE[4][1] + 20 do
                         if ID.npc.TEMENOS_C_CRATE[4][crateID] == ID.npc.TEMENOS_C_CRATE[4][i] then
                             if crateID ~= i then
@@ -300,6 +305,7 @@ entity.onTrigger = function(player, npc)
             npc:timer(15000, function(npcArg)
                 npcArg:entityAnimationPacket("kesu")
             end)
+
             npc:timer(16000, function(npcArg)
                 npcArg:setStatus(xi.status.DISAPPEAR)
                 npcArg:timer(500, function(mob)
@@ -315,4 +321,5 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 end
+
 return entity

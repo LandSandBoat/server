@@ -74,7 +74,11 @@ zoneObject.onGameDay = function()
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if triggerArea:GetTriggerAreaID() == 1 and player:getCharVar("UnderOathCS") == 7 then -- Quest: Under Oath - PLD AF3
+    if
+        triggerArea:GetTriggerAreaID() == 1 and
+        player:getCharVar("UnderOathCS") == 7
+    then
+        -- Quest: Under Oath - PLD AF3
         player:startEvent(14)
     end
 end

@@ -237,6 +237,7 @@ quest.sections =
                         if player:getGil() >= xi.mannequin.cost.PURCHASE then
                             richEnough = 1
                         end
+
                         player:updateEvent({ [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
                             [1] = xi.mannequin.getMannequins(player),
                             [2] = option,

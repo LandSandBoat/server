@@ -61,6 +61,7 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     if hpp <= 5 then
         hpMultiplier = 10
     end
+
     zeni = zeni * hpMultiplier
 
     -- In-Demand System Component

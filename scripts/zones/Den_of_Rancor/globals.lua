@@ -35,6 +35,7 @@ local denOfRancorGlobal =
                         lantern:closeDoor(1)
                         lantern:openDoor(30)
                     end
+
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 4):openDoor(30)
                 end
             end
@@ -66,6 +67,7 @@ local denOfRancorGlobal =
                         lantern:closeDoor(1)
                         lantern:openDoor(30)
                     end
+
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 8):openDoor(30)
                 end
             end
@@ -99,6 +101,7 @@ local denOfRancorGlobal =
                         lantern:closeDoor(1)
                         lantern:openDoor(30)
                     end
+
                     GetNPCByID(ID.npc.LANTERN_OFFSET + 11):openDoor(30)
                 end
             end

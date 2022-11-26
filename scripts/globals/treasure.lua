@@ -633,9 +633,15 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 1 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
+                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and
+                                VanadielRSELocation() == 1 and
+                                VanadielRSERace() == player:getRace() and
+                                not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
                         end,
-                        code = function(player) npcUtil.giveKeyItem(player, xi.ki.MAGICAL_PATTERN) end,
+
+                        code = function(player)
+                            npcUtil.giveKeyItem(player, xi.ki.MAGICAL_PATTERN)
+                        end,
                     },
                 },
                 points =
@@ -670,6 +676,7 @@ xi.treasure.treasureInfo =
                                 xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Time') == 0 and
                                 not player:hasKeyItem(xi.ki.CRAWLER_BLOOD)
                         end,
+
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.CRAWLER_BLOOD)
                         end,
@@ -704,9 +711,15 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 2 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
+                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and
+                                VanadielRSELocation() == 2 and
+                                VanadielRSERace() == player:getRace() and
+                                not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
                         end,
-                        code = function(player) npcUtil.giveKeyItem(player, xi.ki.MAGICAL_PATTERN) end,
+
+                        code = function(player)
+                            npcUtil.giveKeyItem(player, xi.ki.MAGICAL_PATTERN)
+                        end,
                     },
                 },
                 points =
@@ -1080,8 +1093,13 @@ xi.treasure.treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getCharVar("UnderOathCS") == 3 end,
-                        code = function(player) npcUtil.giveKeyItem(player, xi.ki.MIQUES_PAINTBRUSH) end,
+                        test = function(player)
+                            return player:getCharVar("UnderOathCS") == 3
+                        end,
+
+                        code = function(player)
+                            npcUtil.giveKeyItem(player, xi.ki.MIQUES_PAINTBRUSH)
+                        end,
                     },
                 },
                 points =
@@ -1424,6 +1442,7 @@ local function moveChest(npc, zoneId, chestType, mimicSpawned)
     if not mimicSpawned then
         npc:hideNPC(5)
     end
+
     npc:queue(3000, doMove(npc, unpack(point)))
 end
 
@@ -1589,6 +1608,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
             end
+
             return
         end
     end
@@ -1635,6 +1655,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     if info.item then
         sum = sum + info.item[1]
     end
+
     sum = sum * 1000
     local roll = math.random(0, sum) / 1000
 
@@ -1647,6 +1668,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
                 table.insert(membersInZone, partyMembers[i])
             end
         end
+
         local gilAmount = math.random(info.gil[2], info.gil[3])
         local gil = gilAmount / #membersInZone
         for i = 1, #membersInZone do
@@ -1671,6 +1693,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     else
         npc:setLocalVar("illusionCooldown", os.time() + math.random(xi.settings.main.COFFER_MIN_ILLUSION_TIME, xi.settings.main.COFFER_MAX_ILLUSION_TIME))
     end
+
     moveChest(npc, zoneId, chestType)
 end
 

@@ -289,6 +289,7 @@ local function getBytePos(s, needle)
             return i
         end
     end
+
     return nil
 end
 
@@ -307,6 +308,7 @@ function onTrigger(player, bytes)
         error(player, "You must provide the name of a player to send and a destination.")
         return
     end
+
     bytes = string.sub(bytes, 6)
     local atpos = getBytePos(bytes, 253)
     local sppos = getBytePos(bytes, 32)
@@ -341,6 +343,7 @@ function onTrigger(player, bytes)
                 break
             end
         end
+
         if zone == nil then
             error(player, "Auto-translated phrase is not a zone.")
             return
@@ -354,6 +357,7 @@ function onTrigger(player, bytes)
                 error(player, "Invalid zone ID.")
                 return
             end
+
             for k, v in pairs(zone_list) do
                 if v[3] == zone then
                     x = v[4] or 0
@@ -372,6 +376,7 @@ function onTrigger(player, bytes)
                 error(player, string.format("Player named '%s' not found!", target))
                 return
             end
+
             x = dest:getXPos()
             y = dest:getYPos()
             z = dest:getZPos()

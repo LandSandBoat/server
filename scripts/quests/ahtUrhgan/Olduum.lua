@@ -30,6 +30,7 @@ quest.hasKeyItem = function(player)
             return true
         end
     end
+
     return false
 end
 
@@ -151,6 +152,7 @@ quest.sections =
                         if newRingCS > 1 then
                             newRingCS = 1
                         end
+
                         return quest:event(7, { [7] = newRingCS + 1 })
                     end
                 end,

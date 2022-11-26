@@ -19,6 +19,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if currentTime >= 6 and currentTime <= 18 then
         return 0
     end
+
     return 1
 end
 

@@ -40,6 +40,7 @@ local function getFestiveItems(player)
             table.insert(festiveItemsAvailable, stock[i])
         end
     end
+
     return festiveItemsAvailable
 end
 

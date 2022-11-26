@@ -22,6 +22,7 @@ function onTrigger(player, jobId, level)
         error(player, "You must enter a job short-name, e.g. WAR, or its equivalent numeric ID.")
         return
     end
+
     jobId = tonumber(jobId) or xi.job[string.upper(jobId)]
     if
         jobId == nil or

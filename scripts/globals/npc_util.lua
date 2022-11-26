@@ -43,9 +43,11 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     if not params then
         params = {}
     end
+
     if params.claim == nil or type(params.claim) ~= "boolean" then
         params.claim = true
     end
+
     if params.hide == nil or type(params.hide) ~= "number" then
         params.hide = xi.settings.main.FORCE_SPAWN_QM_RESET_TIME
     end
@@ -117,6 +119,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
                 GetNPCByID(m:getLocalVar("qm")):updateNPCHideTime(params.hide)
             end)
         end
+
         -- add in a spawn message if has one
         if params.message then
             player:messageSpecial(params.message)
@@ -141,6 +144,7 @@ local function doMove(x, y, z, r)
     if not r then
         r = 0
     end
+
     return function(entity)
         entity:setPos(x, y, z, r)
     end
@@ -150,11 +154,13 @@ function npcUtil.queueMove(npc, point, delay)
     if not delay then
         delay = 3000
     end
+
     if point.rot then
         point = { point.x, point.y, point.z, point.rot }
     elseif point.x then
         point = { point.x, point.y, point.z }
     end
+
     npc:queue(delay, doMove(unpack(point)))
 end
 
@@ -249,6 +255,7 @@ function npcUtil.giveItem(player, items, params)
             local messageId = params.fromTrade and (ID.text.ITEM_CANNOT_BE_OBTAINED + 4) or ID.text.ITEM_CANNOT_BE_OBTAINED
             player:messageSpecial(messageId, givenItems[1][1])
         end
+
         return false
     end
 
@@ -263,14 +270,17 @@ function npcUtil.giveItem(player, items, params)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
                 end
             end
+
             messagedItems[v[1]] = true
         elseif #givenItems == 1 then
             if not params.silent then
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
             end
+
             return false
         end
     end
+
     return true
 end
 
@@ -332,14 +342,17 @@ function npcUtil.giveTempItem(player, items, params)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
                 end
             end
+
             messagedItems[v[1]] = true
         elseif #givenItems == 1 then
             if not params.silent then
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
             end
+
             return false
         end
     end
+
     return true
 end
 
@@ -387,6 +400,7 @@ function npcUtil.giveCurrency(player, currency, amount)
     else
         player:addCurrency(currency, amount)
     end
+
     player:messageSpecial(message_id, amount)
 
     return true
@@ -422,6 +436,7 @@ function npcUtil.giveKeyItem(player, keyitems)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, v)
         end
     end
+
     return true
 end
 
@@ -469,6 +484,7 @@ function npcUtil.giveReward(player, params)
     if params["fame"] == nil then
         params["fame"] = 30
     end
+
     if
         params["fameArea"] ~= nil and
         params["fameArea"]["fame_area"] ~= nil and
@@ -502,6 +518,7 @@ function npcUtil.giveReward(player, params)
         elseif type(params["var"]) == "string" then
             table.insert(playerVarsToZero, params["var"])
         end
+
         for _, v in pairs(playerVarsToZero) do
             player:setCharVar(v, 0)
         end
@@ -590,6 +607,7 @@ function npcUtil.completeQuest(player, area, quest, params)
         elseif type(params["var"]) == "string" then
             table.insert(playerVarsToZero, params["var"])
         end
+
         for _, v in pairs(playerVarsToZero) do
             player:setCharVar(v, 0)
         end
@@ -766,6 +784,7 @@ function npcUtil.tradeHas(trade, items, exact)
                 print("ERROR: invalid value contained within items parameter given to npcUtil.tradeHas.")
                 itemIdNeeded = nil
             end
+
             if itemIdNeeded ~= nil then
                 neededItems[itemIdNeeded] = (neededItems[itemIdNeeded] == nil) and itemQtyNeeded or neededItems[itemIdNeeded] + itemQtyNeeded
             end
@@ -798,6 +817,7 @@ function npcUtil.tradeHas(trade, items, exact)
     for k, v in pairs(neededItems) do
         trade:confirmItem(k, v)
     end
+
     return true
 end
 
@@ -865,6 +885,7 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
     if func(npc) then
         return
     end
+
     npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
@@ -901,6 +922,7 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
                 nextAnimationDuration = anims[nextAnimationId].duration
             end
         end
+
         npcArg:setAnimation(nextAnimationId)
         npcUtil.fishingAnimation(npcArg, nextAnimationDuration, func)
     end)
@@ -915,6 +937,7 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     if func(npc) then
         return
     end
+
     npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
@@ -925,6 +948,7 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
         npcArg:timer(anims[magicType].duration, function(npcTimerArg)
             npcTimerArg:entityAnimationPacket(anims[magicType].stop)
         end)
+
         npcUtil.castingAnimation(npcArg, magicType, phaseDuration, func)
     end)
 end

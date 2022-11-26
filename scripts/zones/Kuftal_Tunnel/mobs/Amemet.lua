@@ -103,8 +103,10 @@ local pathFind =
                 end
             end
         end
+
         return pathNodes
     end,
+
     ['pathFind2'] = function(mob, reversePath)
         local pathNodes = {}
         mob:setLocalVar("mobPath", 3)
@@ -113,16 +115,20 @@ local pathFind =
         else
             pathNodes = pathA
         end
+
         return pathNodes
     end,
+
     ['pathFind3'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 1)
             pathNodes = pathStart
         end
+
         return pathNodes
     end,
+
     ['pathFind4'] = function(mob, reversePath)
         local pathNodes = {}
         mob:setLocalVar("mobPath", 3)
@@ -131,6 +137,7 @@ local pathFind =
         else
             pathNodes = pathB
         end
+
         return pathNodes
     end,
 }
@@ -183,6 +190,7 @@ entity.onPath = function(mob)
                     }
                 end
             end
+
             mob:pathThrough(pauses, xi.path.flag.COORDS)
             mob:setLocalVar("isPaused", 1)
         end

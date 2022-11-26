@@ -21,6 +21,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     elseif target:isBehind(mob, 96) then
         return 1
     end
+
     return 0
 end
 

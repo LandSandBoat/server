@@ -482,6 +482,7 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- us
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
+
     local mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
     dmg = math.floor(dmg * mab)
@@ -632,6 +633,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             target:setLocalVar("analyzer_skill", skill:getID())
             analyzerHits = 0
         end
+
         target:setLocalVar("analyzer_hits", analyzerHits)
     end
 
@@ -838,6 +840,7 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
     if target:isFacing(mob) and mob:isInfront(target) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
+
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 

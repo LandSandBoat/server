@@ -29,6 +29,7 @@ effectObject.onEffectGain = function(target, effect)
             end
         end
     end
+
     target:setStatDebilitation(power)
 end
 
@@ -46,6 +47,7 @@ effectObject.onEffectLose = function(target, effect)
             end
         end
     end
+
     target:setStatDebilitation(0)
 end
 

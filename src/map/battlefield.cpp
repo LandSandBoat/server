@@ -47,6 +47,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
+#include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
 #include <chrono>
@@ -557,11 +558,16 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         charutils::SendClearTimerPacket(PChar);
 
         // Remove the player's pet as well
-        if (PChar->PPet)
+        if (auto* PPet = dynamic_cast<CPetEntity*>(PChar->PPet))
         {
-            PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-            PChar->PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-            ClearEnmityForEntity(PChar->PPet);
+            // Player timed out with a battlefield mob as a pet
+            if (PPet->objtype == TYPE_MOB)
+            {
+                petutils::DespawnPet(PPet);
+            }
+            PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            ClearEnmityForEntity(PPet);
         }
     }
     else

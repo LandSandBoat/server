@@ -46,6 +46,7 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     if mob ~= nil then
         instanceObject.onTrack(instance)
     end
+
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
@@ -378,6 +379,7 @@ instanceObject.onTrack = function(instance)
                             elseif pathProgressMask == 1 then
                                 mob:setLocalVar("pathPoint", 30)
                             end
+
                             mob:setLocalVar("pathLeg", 1)
                             mob:showText(mob, ID.text.EXCALIACE_CRAB1)
                             mob:setSpeed(60)
@@ -404,9 +406,11 @@ instanceObject.onTrack = function(instance)
             then
                 rangeStop = true
             end
+
             if mob:checkDistance(players) < 4 then
                 rangeClose = true
             end
+
             if mob:checkDistance(players) < 10 and players:isFacing(mob) then -- check if at least 1 player is tailing the NPC
                 rangeFollow = true
             end
@@ -449,6 +453,7 @@ instanceObject.onTrack = function(instance)
                     mob:setLocalVar("constantMove", 1)
                 end
             end
+
             if rangeFollow then
                 mob:setLocalVar("runTimeCheck", os.time() + 10) --  wont run off if closer than 10 yalms
             elseif runTimeCheck <= os.time() then
@@ -491,6 +496,7 @@ instanceObject.onTrack = function(instance)
                                 mobArg:setLocalVar("moveLock", 1)
                                 mobArg:setLocalVar("lockToggle", 0)
                             end)
+
                             mob:setLocalVar("lockToggle", 1)
                         end
                     else
@@ -523,6 +529,7 @@ instanceObject.onTrack = function(instance)
                             mobArg:setLocalVar("moveLock", 1)
                             mobArg:setLocalVar("lockToggle", 0)
                         end)
+
                         mob:setLocalVar("lockToggle", 1)
                     end
                 elseif
@@ -538,6 +545,7 @@ instanceObject.onTrack = function(instance)
                             mobArg:setLocalVar("moveLock", 1)
                             mobArg:setLocalVar("lockToggle", 0)
                         end)
+
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Middle Room Option Conditions
@@ -553,6 +561,7 @@ instanceObject.onTrack = function(instance)
                             mobArg:setLocalVar("moveLock", 1)
                             mobArg:setLocalVar("lockToggle", 0)
                         end)
+
                         mob:setLocalVar("lockToggle", 1)
                     end
                 elseif
@@ -568,6 +577,7 @@ instanceObject.onTrack = function(instance)
                             mobArg:setLocalVar("moveLock", 1)
                             mobArg:setLocalVar("lockToggle", 0)
                         end)
+
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Bottom Room Option Conditions
@@ -583,6 +593,7 @@ instanceObject.onTrack = function(instance)
                             mobArg:setLocalVar("moveLock", 1)
                             mobArg:setLocalVar("lockToggle", 0)
                         end)
+
                         mob:setLocalVar("lockToggle", 1)
                     end
                 elseif
@@ -598,6 +609,7 @@ instanceObject.onTrack = function(instance)
                             mobArg:setLocalVar("moveLock", 1)
                             mobArg:setLocalVar("lockToggle", 0)
                         end)
+
                         mob:setLocalVar("lockToggle", 1)
                     end
 -- Lower Fork Option Conditions

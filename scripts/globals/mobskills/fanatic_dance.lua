@@ -18,6 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:isInDynamis() and mob:getLocalVar("MobIndex") ~= 0 then
         return 0
     end
+
     return 1
 end
 
@@ -34,6 +35,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end
+
     skill:setMsg(msg)
 
     return typeEffect

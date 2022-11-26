@@ -29,12 +29,14 @@ entity.onMobFight = function(mob, target)
             if phase == 2 then -- enable Holy II
                 mob:setMagicCastingEnabled(true)
             end
+
             if phase == 4 then -- add Regain in final phase
                 if not mob:hasStatusEffect(xi.effect.REGAIN) then
                     mob:addStatusEffect(xi.effect.REGAIN, 7, 3, 0)
                     mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
                 end
             end
+
             mob:setLocalVar("battlePhase", phase) -- incrementing the phase here instead of in the Dissipation skill because stunning it prevents use.
         end
     end
@@ -44,6 +46,7 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.TEMENOS_LIBERATOR)
     end
+
     if optParams.isKiller or optParams.noKiller then
         GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(xi.status.NORMAL)
     end
