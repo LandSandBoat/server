@@ -9,6 +9,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -10000)
     mob:setMod(xi.mod.UDMGBREATH, -10000)
+    mob:setMobMod(xi.mobMod.SPELL_LIST, 510)
     mob:setLocalVar("immunity", 1)
     mob:setLocalVar("timer", os.time() + 30)
 end
@@ -18,6 +19,7 @@ entity.onMobFight = function(mob)
     local immunity = mob:getLocalVar("immunity")
     if os.time() > timer and immunity == 1 then -- blue: Immune to phys damage
         mob:setLocalVar("twohour_tp", mob:getTP())
+        mob:setMobMod(xi.mobMod.SPELL_LIST, 509)
         mob:useMobAbility(624)
         mob:setMod(xi.mod.UDMGMAGIC, 0)
         mob:setMod(xi.mod.UDMGBREATH, 0)
@@ -27,6 +29,7 @@ entity.onMobFight = function(mob)
         mob:setLocalVar("timer", os.time() + 30)
     elseif os.time() > timer and immunity == 0 then -- yellow: Immune to magical damage
         mob:setLocalVar("twohour_tp", mob:getTP())
+        mob:setMobMod(xi.mobMod.SPELL_LIST, 510)
         mob:useMobAbility(625)
         mob:setMod(xi.mod.UDMGMAGIC, -10000)
         mob:setMod(xi.mod.UDMGBREATH, -10000)
