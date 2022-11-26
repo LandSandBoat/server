@@ -234,7 +234,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
             pDifCrit = pDifTable[2]
 
             -- Need to cap at 2 if it a too weak mob
-            if (avatar:checkTooWeak(target)) then
+            if avatar:checkDifficulty(target) == 0 then
                 pDif = utils.clamp(pDif, 0, 2)
                 pDifCrit = utils.clamp(pDifCrit, 0, 2)
             end

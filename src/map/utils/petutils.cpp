@@ -868,11 +868,11 @@ namespace petutils
         // {
         //     bonusStat += 6800;
         // }
-s
+
         // follows monster formulas but jugs have no subjob
-        JOBTYPE   mJob = PPet->GetMJob();
-        JOBTYPE   sJob = PPet->GetSJob();
-        uint8     mLvl = PPet->GetMLevel();
+        JOBTYPE mJob = PPet->GetMJob();
+        JOBTYPE sJob = PPet->GetSJob();
+        uint8   mLvl = PPet->GetMLevel();
 
         uint8 grade;
         uint8 gradesj;
