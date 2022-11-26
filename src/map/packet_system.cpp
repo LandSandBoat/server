@@ -1080,10 +1080,23 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 // PChar->PBattleAI->SetCurrentAction(ACTION_RAISE_MENU_SELECTION);
                 PChar->loc.p           = PChar->m_StartActionPos;
                 PChar->loc.destination = PChar->getZone();
-                PChar->status          = STATUS_TYPE::DISAPPEAR;
                 PChar->loc.boundary    = 0;
                 PChar->clearPacketList();
-                charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+
+                // This is a stopgap until we determine a better solution of how add the member
+                // back to the battlefield member list after the zone.
+                if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+                {
+                    PChar->status = STATUS_TYPE::INVISIBLE;
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CPositionPacket(PChar));
+                    PChar->updatemask |= UPDATE_POS;
+                    PChar->status = STATUS_TYPE::NORMAL;
+                }
+                else
+                {
+                    PChar->status = STATUS_TYPE::DISAPPEAR;
+                    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+                }
             }
 
             PChar->m_hasTractor = 0;
