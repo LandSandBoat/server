@@ -17,8 +17,8 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.MEWW_THE_TURTLERIDER)
-    GetMobByID(ID.mob.MEWW_THE_TURTLERIDER):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.MEWW_THE_TURTLERIDER)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
