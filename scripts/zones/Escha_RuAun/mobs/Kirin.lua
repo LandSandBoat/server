@@ -40,10 +40,12 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STUNRES, 100)
     mob:setMod(xi.mod.BINDRES, 10000)
     mob:setMod(xi.mod.GRAVITYRES, 10000)
-    mob:addMod(xi.mod.DEF, 100)
+    mob:setMod(xi.mod.DEF, 200)
+    mob:setMod(xi.mod.EVA, 200)
+    mob:setMod(xi.mod.MDEF, 200)
     mob:addMod(xi.mod.FASTCAST, 65)
     mob:setMod(xi.mod.MOVE, 50)
-    mob:addMod(xi.mod.ATT, 250)
+    mob:addMod(xi.mod.ATT, 150)
     mob:addMod(xi.mod.ACC, 100)
     mob:addMod(xi.mod.MACC, 250)
     mob:addMod(xi.mod.REFRESH, 25)
@@ -193,12 +195,12 @@ entity.onMobFight = function( mob, target )
     end
 
     if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 6) then
-        local pick2Hr = math.random(1, 6)
+        local pick2Hr = math.random(1, 5)
 
         if (GetServerVariable(cantUse2Hr[pick2Hr]) == 0) then
-            if (pick2Hr > 0 and pick2Hr < 5) then
+            if (pick2Hr > 0 and pick2Hr < 6) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
-            elseif (pick2Hr == 6) then
+            elseif (pick2Hr == 7) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
                 for i = 1, 3 do
                     local meikyoRandom = math.random(1, 100)
