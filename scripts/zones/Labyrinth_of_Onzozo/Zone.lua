@@ -8,8 +8,7 @@ require('scripts/globals/treasure')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.MYSTICMAKER_PROFBLIX)
-    GetMobByID(ID.mob.MYSTICMAKER_PROFBLIX):setRespawnTime(math.random(900, 10800))
+    xi.mob.nmTODPersistCache(zone, ID.mob.MYSTMAKER_PROFBLIX)
 
     xi.treasure.initZone(zone)
 end
