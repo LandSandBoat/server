@@ -188,6 +188,10 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     --work out hit rate for mobs
     local hitrate = xi.weaponskills.getHitRate(mob, target, 0, 0)
 
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        hitrate = xi.weaponskills.getRangedHitRate(mob, target, 0, 0)
+    end
+
     --work out the base damage for a single hit
     local hitdamage = base
 
@@ -219,9 +223,15 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     -- Set everything to 1 because the FTP for mobs iis not supposed to be for attack only.
     -- TODO: Apply attack modifiers to certain mobskills with params
-    local params = { atk000 = 1, atk150 = 1, atk300 = 1 }
+    local params       = { atk000 = 1, atk150 = 1, atk300 = 1 }
+    local paramsRanged = { atk100 = 1, atk200 = 1, atk300 = 1 }
     -- Getting PDIF
-    local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.main)
+    local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.MAIN)
+
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        pdifTable = xi.weaponskills.cRangedRatio(mob, target, paramsRanged, 0, mob:getTP())
+    end
+
     local pdif = pdifTable[1]
     local pdifcrit = pdifTable[2]
 
@@ -238,10 +248,17 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     end
 
     local chance = math.random()
-    chance = xi.weaponskills.handleParry(mob, target, chance)
+
+    if tpeffect ~= xi.mobskills.magicalTpBonus.RANGED then
+        chance = xi.weaponskills.handleParry(mob, target, chance)
+    end
 
     -- first hit has a higher chance to land
     local firstHitChance = hitrate + 0.5
+
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        firstHitChance = hitrate
+    end
 
     firstHitChance = utils.clamp(firstHitChance, 0.20, 0.95)
 

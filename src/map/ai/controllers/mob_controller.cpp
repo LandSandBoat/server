@@ -464,6 +464,7 @@ bool CMobController::TrySpecialSkill()
 
     if (luautils::OnMobSkillCheck(PAbilityTarget, PMob, PSpecialSkill) == 0)
     {
+        PMob->m_defaultAttack = PSpecialSkill->getID();
         return MobSkill(PAbilityTarget->targid, PSpecialSkill->getID());
     }
 
