@@ -10,6 +10,7 @@ return {
     ['Hae_Jakkya']   = { event = 41 },
     ['Kototo']       = { event = 410 },
     ['Mourices']     = { event = 441 },
+    ['Nanaa_Mihgo']  = { event = 76 },
     ['Perih_Vashai'] = { event = 338 },
     ['Roberta']      = { event = 436 },
     ['Sola_Jaab']    = { event = 109 },
