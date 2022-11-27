@@ -197,6 +197,11 @@ INSERT INTO `mob_groups` VALUES (49,3592,4,'Shens_Filtrate',0,128,0,2300,0,74,76
 INSERT INTO `mob_groups` VALUES (50,4669,4,'Bismarck',0,128,0,0,9999,95,98,0);
 INSERT INTO `mob_groups` VALUES (51,4733,4,'Primordial_Pugil',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (52,6810,4,'Intuila',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (53,4085,4,'Locus_Bight_Rarab',60,0,309,308300,0,135,137,0);
+INSERT INTO `mob_groups` VALUES (54,5136,4,'Locus_Camelopard',60,0,432,308300,0,135,137,0);
+INSERT INTO `mob_groups` VALUES (55,6172,4,'Locus_Hypnos_Eft',60,0,2379,308300,0,135,137,0);
+INSERT INTO `mob_groups` VALUES (56,7058,4,'Locus_Ghost_Crab',60,0,2931,308300,0,137,139,0);
+-- INSERT INTO `mob_groups` VALUES (57,6810,4,'Locus_Fiddler_Crab',0,0,0,0,0,139,139,0); -- Needs capture for Venom Shower and Mega Scissors
 
 -- ------------------------------------------------------------
 -- Uleguerand_Range (Zone 5)
