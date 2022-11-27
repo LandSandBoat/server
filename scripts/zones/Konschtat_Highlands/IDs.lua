@@ -82,9 +82,11 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
             [17219887] = 17219886, -- Steelfleece can't spawn if Rampaging is up
         },
 
-        FORGER         = 17219999,
-        HATY           = 17220000,
-        BENDIGEIT_VRAN = 17220001,
+        FORGER            = 17219999,
+        HATY              = 17220000,
+        BENDIGEIT_VRAN    = 17220001,
+        GHILLIE_DHU       = 17219619,
+        HIGHLANDER_LIZARD = 17219787,
 
         VOIDWALKER =
         {
