@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 25)
 
     -- May spawn in a party with two other Sahagin
-    if math.random(1,2) == 1 then
+    if math.random(1, 2) == 1 then
         GetMobByID(ID.mob.MEWW_THE_TURTLERIDER + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
         GetMobByID(ID.mob.MEWW_THE_TURTLERIDER + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.MEWW_THE_TURTLERIDER + 1)
