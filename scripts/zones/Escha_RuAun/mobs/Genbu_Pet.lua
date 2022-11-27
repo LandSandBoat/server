@@ -10,6 +10,9 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob, target)
+    mob:setMod(xi.mod.DEF, 200)
+    mob:setMod(xi.mod.EVA, 100)
+    mob:setMod(xi.mod.MDEF, 100)
     mob:setDropID(0)
 end
 
