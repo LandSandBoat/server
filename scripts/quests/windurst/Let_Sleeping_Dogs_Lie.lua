@@ -48,12 +48,12 @@ quest.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Mashuu-Ajuu'] = quest:progressEvent(483),
-            ['Akkeke'] = quest:progressEvent(484),
-            ['Kirara'] = quest:progressEvent(485),
-            ['Rukuku'] = quest:progressEvent(487),
-            ['Koko Lihzeh'] = quest:progressEvent(488),
-            ['Chomoro-Kyotoro'] = quest:progressEvent(489),
+            ['Mashuu-Ajuu'] = quest:event(483),
+            ['Akkeke'] = quest:event(484),
+            ['Kirara'] = quest:event(485),
+            ['Rukuku'] = quest:event(487),
+            ['Koko Lihzeh'] = quest:event(488),
+            ['Chomoro-Kyotoro'] = quest:event(489),
             ['Paku-Nakku'] =
             {
                 onTrigger = function(player, npc)
@@ -62,7 +62,7 @@ quest.sections =
                     elseif quest:getVar(player, 'Prog') == 3 then
                         return quest:progressEvent(499)
                     else
-                        return quest:progressEvent(482)
+                        return quest:event(482)
                     end
                 end,
             },
@@ -72,9 +72,9 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressEvent(495, 4155, 1102, 1, 50617851, 2729760, 0)
                     elseif quest:getVar(player, 'Prog') == 3 then
-                        return quest:progressEvent(496)
+                        return quest:event(496)
                     elseif quest:getVar(player, 'Prog') == 4 then
-                        return quest:progressEvent(497)
+                        return quest:event(497)
                     end
                 end,
             },
@@ -106,9 +106,9 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(319, 653392653, 4155, 1102, 1020) -- 0, 0, 0, 0)
                     elseif quest:getVar(player, 'Prog') == 2 then
-                        return quest:progressEvent(321, 653393447, 1102, 0, 0, 67108863, 41513848, 4095, 4)
+                        return quest:event(321, 653393447, 1102, 0, 0, 67108863, 41513848, 4095, 4)
                     else
-                        return quest:progressEvent(320, 653392653, 4155, 1102) -- 1020, 0, 0, 0, 0)
+                        return quest:event(320, 653392653, 4155, 1102) -- 1020, 0, 0, 0, 0)
                     end
                 end,
             },
@@ -133,7 +133,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND) ~= QUEST_ACCEPTED then
-                        quest:progressEvent(498)
+                        quest:event(498)
                     end
                 end,
             },
