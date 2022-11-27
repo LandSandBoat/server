@@ -26,7 +26,12 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local chocoboShirt = target:getEquipID(xi.slot.BODY) == 10293
+    local chocoboShirt
+    if target:getEquipID(xi.slot.BODY) == 10293 then
+        chocoboShirt = 1
+    else
+        chocoboShirt = 0
+    end
     target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
 end
 
