@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DMG, -5000)
 
     -- May spawn in a party with two other Orcs
-    if math.random(1,2) == 1 then
+    if math.random(1, 2) == 1 then
         GetMobByID(ID.mob.COO_KEJA_THE_UNSEEN + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
         GetMobByID(ID.mob.COO_KEJA_THE_UNSEEN + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.COO_KEJA_THE_UNSEEN + 1)
