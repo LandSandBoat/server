@@ -6,16 +6,15 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     local ranged = player:getStorageItem(0, 0, xi.slot.RANGED)
-    local ammo = player:getStorageItem(0, 0, xi.slot.AMMO)
+    local ammo   = player:getStorageItem(0, 0, xi.slot.AMMO)
 
     if ranged and ranged:isType(xi.itemType.WEAPON) then
         local skilltype = ranged:getSkillType()
@@ -46,14 +45,25 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     end
 
     local params = {}
+
     params.numHits = 1
-    local ftp = 5
-    params.ftp100 = ftp params.ftp200 = ftp params.ftp300 = ftp
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = true
-    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+
+    -- TP params.
+    params.ftp100  = 5 params.ftp200  = 5 params.ftp300  = 5
+    params.crit100 = 0 params.crit200 = 0 params.crit300 = 0
+    params.acc100  = 0 params.acc200  = 0 params.acc300  = 0
+    params.atk100  = 1 params.atk200  = 1 params.atk300  = 1
+
+    -- Stat params.
+    params.str_wsc = 0
+    params.dex_wsc = 0
+    params.vit_wsc = 0
+    params.agi_wsc = 0
+    params.int_wsc = 0
+    params.mnd_wsc = 0
+    params.chr_wsc = 0
+
+    params.canCrit    = true
     params.enmityMult = 0.5
 
     -- Job Point Bonus Damage
