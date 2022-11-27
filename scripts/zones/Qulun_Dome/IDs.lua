@@ -33,6 +33,7 @@ zones[xi.zone.QULUN_DOME] =
     mob =
     {
         DIAMOND_QUADAV             = 17383442,
+        ZADHA_ADAMANTKING          = 17383443,
         AFFABLE_ADAMANTKING_OFFSET = 17383444,
     },
     npc =

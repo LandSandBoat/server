@@ -7,8 +7,9 @@ require('scripts/globals/conquest')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.DIAMOND_QUADAV)
-    GetMobByID(ID.mob.DIAMOND_QUADAV):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.DIAMOND_QUADAV)
+    xi.mob.nmTODPersistCache(zone, ID.mob.ZADHA_ADAMANTKING)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

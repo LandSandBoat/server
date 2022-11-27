@@ -32,13 +32,13 @@ end
 
 entity.onMobDespawn = function(mob)
     -- reset hqnm system back to the nm placeholder
-    local nqId = mob:getID() - 1
+    local nqID = ID.mob.DIAMOND_QUADAV
+    local nqMob = GetMobByID(nqID)
     SetServerVariable("[POP]Za_Dha_Adamantking", os.time() + 259200) -- 3 days
     SetServerVariable("[PH]Za_Dha_Adamantking", 0)
     DisallowRespawn(mob:getID(), true)
-    DisallowRespawn(nqId, false)
-    UpdateNMSpawnPoint(nqId)
-    GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+    DisallowRespawn(nqID, false)
+    xi.mob.nmTODPersist(nqMob, math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity
