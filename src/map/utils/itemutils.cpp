@@ -369,7 +369,7 @@ namespace itemutils
 
                 if (PItem != nullptr)
                 {
-                    PItem->setName(sql->GetData(1));
+                    PItem->setName(sql->GetStringData(1));
                     PItem->setStackSize(sql->GetUIntData(2));
                     PItem->setFlag(sql->GetUIntData(3));
                     PItem->setAHCat(sql->GetUIntData(4));

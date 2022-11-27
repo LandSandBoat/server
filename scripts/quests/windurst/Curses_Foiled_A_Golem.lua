@@ -32,7 +32,7 @@ local feiyinMob =
     onMobDeath = function(mob, player, optParams)
         if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
             player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
-            npcUtil.giveKeyItem(xi.ki.SHANTOTTOS_EX_SPELL)
+            npcUtil.giveKeyItem(player, xi.ki.SHANTOTTOS_EX_SPELL)
         end
     end,
 }

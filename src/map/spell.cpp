@@ -92,15 +92,14 @@ void CSpell::setRecastTime(uint32 RecastTime)
     m_recastTime = RecastTime;
 }
 
-const int8* CSpell::getName()
+const std::string& CSpell::getName()
 {
-    return (const int8*)m_name.c_str();
+    return m_name;
 }
 
-void CSpell::setName(int8* name)
+void CSpell::setName(const std::string& name)
 {
-    m_name.clear();
-    m_name.insert(0, (const char*)name);
+    m_name = name;
 }
 
 SPELLGROUP CSpell::getSpellGroup()
@@ -402,7 +401,7 @@ void CSpell::setFlag(uint8 flag)
     m_flag = flag;
 }
 
-int8* CSpell::getContentTag()
+const std::string& CSpell::getContentTag()
 {
     return m_contentTag;
 }
@@ -412,7 +411,7 @@ float CSpell::getRange() const
     return m_range;
 }
 
-void CSpell::setContentTag(int8* contentTag)
+void CSpell::setContentTag(const std::string& contentTag)
 {
     m_contentTag = contentTag;
 }
@@ -453,7 +452,7 @@ namespace spell
                     PSpell = new CSpell(id);
                 }
 
-                PSpell->setName(sql->GetData(1));
+                PSpell->setName(sql->GetStringData(1));
                 PSpell->setJob(sql->GetData(2));
                 PSpell->setSpellGroup((SPELLGROUP)sql->GetIntData(3));
                 PSpell->setSpellFamily((SPELLFAMILY)sql->GetIntData(4));
@@ -474,9 +473,7 @@ namespace spell
                 PSpell->setCE(sql->GetIntData(19));
                 PSpell->setVE(sql->GetIntData(20));
                 PSpell->setRequirements(sql->GetIntData(21));
-
-                char* contentTag = (char*)sql->GetData(22);
-                PSpell->setContentTag((int8*)contentTag);
+                PSpell->setContentTag(sql->GetStringData(22));
 
                 PSpell->setRange(static_cast<float>(sql->GetIntData(23)) / 10);
 

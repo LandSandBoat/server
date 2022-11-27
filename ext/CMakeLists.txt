@@ -65,7 +65,7 @@ endif(TRACY_ENABLE)
 CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
-    GIT_TAG f5ea927f6b3beae2ac924ffde27f570bb9a7d294
+    GIT_TAG f901d9edb47d45a287ca44d5bab48540c1fcdcce
 ) # defines: argparse
 
 CPMAddPackage(

@@ -6,10 +6,9 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/pets")
 require("scripts/globals/msg")
+require("scripts/globals/pets")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -22,6 +21,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         local jpValue = player:getJobPointLevel(xi.jp.DEUS_EX_AUTOMATA_RECAST)
 
         ability:setRecast(ability:getRecast() - jpValue)
+
         return 0, 0
     end
 end
@@ -29,6 +29,7 @@ end
 abilityObject.onUseAbility = function(player, target, ability)
     xi.pet.spawnPet(player, xi.pet.id.AUTOMATON)
     local pet = player:getPet()
+
     if pet then
         local percent = math.floor((player:getMainLvl() / 3)) / 100
         pet:setHP(math.max(pet:getHP() * percent, 1))

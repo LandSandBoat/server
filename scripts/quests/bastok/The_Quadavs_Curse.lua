@@ -50,7 +50,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_BACKPLATE) then
-                        return mission:progressEvent(81)
+                        return quest:progressEvent(81)
                     end
                 end,
             },

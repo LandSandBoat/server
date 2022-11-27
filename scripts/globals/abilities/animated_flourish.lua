@@ -6,9 +6,8 @@
 -- Recast Time: 00:30
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -21,9 +20,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)
     then
         return 0, 0
-    else
-        return xi.msg.basic.NO_FINISHINGMOVES, 0
     end
+
+    return xi.msg.basic.NO_FINISHINGMOVES, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
@@ -37,6 +36,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
         target:addEnmity(player, 0, 1500 + jpBonusVE)
+
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
         player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)

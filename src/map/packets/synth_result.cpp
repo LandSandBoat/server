@@ -56,5 +56,5 @@ CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_M
         }
     }
 
-    memcpy(data + (0x1E), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x1E), PChar->GetName().c_str(), PChar->GetName().size());
 }

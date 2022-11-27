@@ -1737,7 +1737,7 @@ namespace automaton
 
                 autoAbilityList[id] = std::move(PAbility);
 
-                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetData(1));
+                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetStringData(1));
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
