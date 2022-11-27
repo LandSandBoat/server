@@ -10,7 +10,6 @@ local entity = {}
 
 entity.onMobInitialize = function( mob )
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobSpawn = function(mob)
@@ -29,10 +28,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function( mob, target )
-end
-
-entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

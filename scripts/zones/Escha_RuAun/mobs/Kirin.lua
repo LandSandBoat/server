@@ -51,11 +51,9 @@ entity.onMobSpawn = function(mob)
     mob:setDropID(0)
 
     mob:addListener("ATTACKED", "KIRIN_2HR_LISTENER", function(mob, target)
-        -- Get all players on the mob's enmity list
         local enmityList = mob:getEnmityList()
         local PlayerName = {}
 
-        -- Use the enmity list to create listeners for players using 2hr abilities
         for i, v in ipairs(enmityList) do
             PlayerName[i] = v.entity:getName()
 
@@ -131,7 +129,7 @@ entity.onMobFight = function( mob, target )
         GetMobByID(genbu):setSpawn(mob:getXPos() + 8, mob:getYPos(), mob:getZPos() + 1, mob:getRotPos())
         SpawnMob(genbu):updateEnmity(mob:getTarget())
         mob:setLocalVar("gods", 4) -- prevent repop
-        end
+    end
 
     mob:addListener("MAGIC_TAKE", "KIRIN_REFLECT", function(target, caster, spell)
     if
@@ -146,20 +144,20 @@ entity.onMobFight = function( mob, target )
     end)
 
     mob:addListener("COMBAT_TICK", "KIRIN_REFLECT_CTICK", function(mob)
-        local spellToMimic = mob:getLocalVar("[kirin]spellToMimic")
-        local castWindow = mob:getLocalVar("[kirin]castWindow")
-        local castTime = mob:getLocalVar("[kirin]castTime")
-        local osTime = os.time()
+    local spellToMimic = mob:getLocalVar("[kirin]spellToMimic")
+    local castWindow = mob:getLocalVar("[kirin]castWindow")
+    local castTime = mob:getLocalVar("[kirin]castTime")
+    local osTime = os.time()
 
-            if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(xi.effect.SILENCE) then
-                mob:castSpell(spellToMimic, target)
-                mob:setLocalVar("[kirin]spellToMimic", 0)
-                mob:setLocalVar("[kirin]castWindow", 0)
-                mob:setLocalVar("[kirin]castTime", 0)
-            elseif spellToMimic == 0 or osTime > castWindow then
-                mob:setLocalVar("[kirin]spellToMimic", 0)
-                mob:setLocalVar("[kirin]castWindow", 0)
-                mob:setLocalVar("[kirin]castTime", 0)
+        if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(xi.effect.SILENCE) then
+            mob:castSpell(spellToMimic, target)
+            mob:setLocalVar("[kirin]spellToMimic", 0)
+            mob:setLocalVar("[kirin]castWindow", 0)
+            mob:setLocalVar("[kirin]castTime", 0)
+        elseif spellToMimic == 0 or osTime > castWindow then
+            mob:setLocalVar("[kirin]spellToMimic", 0)
+            mob:setLocalVar("[kirin]castWindow", 0)
+            mob:setLocalVar("[kirin]castTime", 0)
         end
     end)
 
@@ -188,22 +186,21 @@ entity.onMobFight = function( mob, target )
         isBusy = true
     end
 
-    for i = 1, 7 do
+    for i = 1, 6 do
         if (GetServerVariable(cantUse2Hr[i]) == 1) then
             table.insert(twoHoursLocked, i)
         end
     end
 
-    -- Uses a 2hr every 45-90 seconds
-    if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 7) then
-        local pick2Hr = math.random(1, 7)
+    if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 6) then
+        local pick2Hr = math.random(1, 5)
 
         if (GetServerVariable(cantUse2Hr[pick2Hr]) == 0) then
-            if (pick2Hr > 0 and pick2Hr < 6) then
+            if (pick2Hr > 0 and pick2Hr < 5) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
-            elseif (pick2Hr == 7) then
+            elseif (pick2Hr == 6) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
-                for i = 1, 5 do
+                for i = 1, 2 do
                     local meikyoRandom = math.random(1, 100)
 
                     if (meikyoRandom < 50) then
@@ -217,33 +214,6 @@ entity.onMobFight = function( mob, target )
             SetServerVariable("KIRIN_2HR_USED", pick2Hr)
             SetServerVariable("KIRIN_2HR_USED_TIME", os.time())
             SetServerVariable("KIRIN_NEXT_2HR_TIME", os.time() + math.random(45, 90))
-        end
-    end
-
-    if (mob:getHPP() <= 60 and mob:getLocalVar("KIRIN_RAGE") == 1) then
-        mob:setLocalVar("KIRIN_RAGE", 1)
-
-        mob:setMod(xi.mod.DMG, mob:getMod(xi.mod.DMG) + 50)
-        mob:setMod(xi.mod.ATT, mob:getMod(xi.mod.ATT) + 150)
-        mob:setMod(xi.mod.ACC, mob:getMod(xi.mod.ACC) + 150)
-        mob:setMod(xi.mod.MACC, mob:getMod(xi.mod.MACC) +150)
-        mob:setMod(xi.mod.MEVA, mob:getMod(xi.mod.MEVA) + 50)
-        mob:setMod(xi.mod.DEF, mob:getMod(xi.mod.DEF) + 150)
-        mob:setMod(xi.mod.MATT, mob:getMod(xi.mod.MATT) + 25)
-    end
-
-    if mob:getLocalVar("KIRIN_RAGE") == 1 then
-        local resonance = mob:getStatusEffect(xi.effect.SKILLCHAIN)
-        if (resonance ~= nil and resonance:getTier() > 2) then
-            mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-            mob:weaknessTrigger(2)
-            mob:setMod(xi.mod.DMG, mob:getMod(xi.mod.DMG) - 250)
-            mob:setMod(xi.mod.ATT, 0)
-            mob:setMod(xi.mod.ACC, 0)
-            mob:setMod(xi.mod.MACC, 0)
-            mob:setMod(xi.mod.MEVA, 0)
-            mob:setMod(xi.mod.DEF, 0)
-            mob:setMod(xi.mod.MATT, 0)
         end
     end
 end
