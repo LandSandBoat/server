@@ -102,10 +102,12 @@ zones[xi.zone.QUICKSAND_CAVES] =
         TRIARIUS_IV_XIV       = 17629188,
         PRINCEPS_IV_XLV       = 17629189,
         MIMIC                 = 17629190,
+        NUSSKNACKER           = 17629403,
+        ANTICAN_CONSUL        = 17629641,
         ANCIENT_VESSEL        = 17629642,
         TRIBUNUS_VII_I        = 17629643,
+        PROCONSUL_XII         = 17629644,
         GIRTABLULU            = 17629645,
-        NUSSKNACKER           = 17629403,
     },
     npc =
     {

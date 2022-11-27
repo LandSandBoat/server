@@ -63,9 +63,8 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
     local respawn = 75600 -- 21h
-    mob:setRespawnTime(respawn)
+    xi.mob.nmTODPersist(mob, respawn)
     mob:setLocalVar("respawn", os.time() + respawn)
     DisallowRespawn(mob:getID(), true)
 end
