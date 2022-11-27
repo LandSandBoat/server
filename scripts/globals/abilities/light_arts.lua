@@ -5,9 +5,8 @@
 -- Recast Time: 1:00
 -- Duration: 2:00:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -34,7 +33,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     player:delStatusEffect(xi.effect.IMMANENCE)
 
     local effectbonus = player:getMod(xi.mod.LIGHT_ARTS_EFFECT)
-    local regenbonus = 0
+    local regenbonus  = 0
+
     if player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20 then
         regenbonus = 3 * math.floor((player:getMainLvl() - 10) / 10)
     end

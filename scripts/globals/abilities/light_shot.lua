@@ -40,11 +40,13 @@ abilityObject.onUseAbility = function(player, target, ability)
     local effects = {}
 
     local dia = target:getStatusEffect(xi.effect.DIA)
+
     if dia ~= nil then
         table.insert(effects, dia)
     end
 
     local threnody = target:getStatusEffect(xi.effect.THRENODY)
+
     if threnody ~= nil and threnody:getSubPower() == xi.mod.DARK_MEVA then
         table.insert(effects, threnody)
     end
@@ -64,6 +66,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         subpower = subpower * 1.5
         target:delStatusEffectSilent(effectId)
         target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
+
         local newEffect = target:getStatusEffect(effectId)
         newEffect:setStartTime(startTime)
     end
