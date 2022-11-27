@@ -44,9 +44,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Set Kruetzet's spawnpoint and respawn time (9-12 hours)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(32400, 43200))
+    xi.mob.nmTODPersist(mob, math.random(32400, 43200)) -- 9 to 12 hours
     mob:setLocalVar("cooldown", os.time() + mob:getRespawnTime() / 1000)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end

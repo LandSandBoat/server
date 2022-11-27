@@ -9,8 +9,8 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.GUIVRE)
-    GetMobByID(ID.mob.GUIVRE):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.GUIVRE)
 
     xi.treasure.initZone(zone)
 end
