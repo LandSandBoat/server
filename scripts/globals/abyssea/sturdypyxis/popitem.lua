@@ -46,6 +46,7 @@ local function GetLootTable(player, npc)
     for i = 1, maxItem do
         table.insert(loot, npc:getLocalVar("POPITEM" ..i))
     end
+
     return loot
 end
 
@@ -70,6 +71,7 @@ local function GiveItem(player, npc, itemnum)
             itemList[itemnum] = 0
         end
     end
+
     if xi.pyxis.isChestEmpty(itemList) then
         xi.pyxis.removeChest(player, npc, 0, 3)
     end

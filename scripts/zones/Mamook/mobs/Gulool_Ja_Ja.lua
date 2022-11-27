@@ -38,6 +38,7 @@ entity.onMobFight = function(mob, target)
             SpawnMob(ID.mob.GULOOL_JA_JA + 4):updateEnmity(target)
         end
     end
+
     for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
         local pet = GetMobByID(i)
         if pet:getCurrentAction() == xi.act.ROAMING then

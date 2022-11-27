@@ -31,7 +31,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local hasWeapons = (player:getEquipID(xi.slot.MAIN) ~= 0 or player:getEquipID(xi.slot.SUB) ~= 0) and 1 or 0
 
-                    return quest:progressEvent(26, 89, 23, 1756, 0, 0, 8323073, 0, hasWeapons)
+                    return mission:progressEvent(26, 89, 23, 1756, 0, 0, 8323073, 0, hasWeapons)
                 end,
             },
 

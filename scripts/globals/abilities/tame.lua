@@ -21,11 +21,13 @@ abilityObject.onUseAbility = function(player, target, ability)
         target:addEnmity(player, 1, 0)
         return 0
     end
+
     if target:getMobMod(xi.mobMod.CHARMABLE) == 0 then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         target:addEnmity(player, 1, 0)
         return 0
     end
+
     local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, xi.skill.NONE, player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)
@@ -47,6 +49,7 @@ abilityObject.onUseAbility = function(player, target, ability)
                     end
                 end
             end
+
             ability:setMsg(138) -- The x seems friendlier
             target:disengage()
         else

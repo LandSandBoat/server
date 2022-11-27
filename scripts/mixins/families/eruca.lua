@@ -47,6 +47,7 @@ xi.mix.eruca.config = function(mob, params)
     if params.sleepHour and type(params.sleepHour) == "number" then
         mob:setLocalVar("[eruca]sleepHour", params.sleepHour)
     end
+
     if params.wakeHour and type(params.wakeHour) == "number" then
         mob:setLocalVar("[eruca]wakeHour", params.wakeHour)
     end
@@ -83,6 +84,7 @@ g_mixins.families.eruca = function(erucaMob)
         then
             wakeUp(mob)
         end
+
         if
             VanadielDayElement() == xi.magic.ele.FIRE and
             mob:getMod(xi.mod.REGAIN) == 0

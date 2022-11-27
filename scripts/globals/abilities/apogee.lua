@@ -5,9 +5,8 @@
 -- Recast Time: 5 Minutes
 -- Duration: 1 Blood Pact or 60 seconds, whichever occurs first.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -15,6 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.APOGEE) then
         return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
+
     return 0, 0
 end
 

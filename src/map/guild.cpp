@@ -26,7 +26,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 
-CGuild::CGuild(uint8 id, const char* _pointsName)
+CGuild::CGuild(uint8 id, const std::string& _pointsName)
 {
     m_id = id;
 

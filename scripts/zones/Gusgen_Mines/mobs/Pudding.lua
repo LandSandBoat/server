@@ -29,6 +29,7 @@ entity.onMobDeath = function(mob, player, optParams)
                 bothDead = false
             end
         end
+
         if bothDead then
             player:setCharVar("EcoStatus", 102)
         end

@@ -39,6 +39,7 @@ entity.onEventFinish = function(player, csid, option)
         if csid == 125 then
             xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.DVUCCA)
         end
+
         xi.teleport.toChamberOfPassage(player)
     end
 end

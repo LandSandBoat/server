@@ -66,6 +66,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         end
+
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         player:setCharVar("TrialByEarth_date", 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
@@ -98,6 +99,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
+
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
             player:delKeyItem(xi.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
             player:setCharVar("TrialByEarth_date", getMidnight())

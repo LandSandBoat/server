@@ -69,6 +69,7 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("gunpodTime", now + utils.minutes(5))
             mob:useMobAbility(1532) -- Pod Ejection
         end
+
         return
     end
 

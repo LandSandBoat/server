@@ -82,6 +82,7 @@ local laTheineGlobal =
         if secondsHidden ~= nil and secondsHidden > 0 then
             fallenEgg:hideNPC(secondsHidden)
         end
+
         fallenEgg:setPos(newPosition.x, newPosition.y, newPosition.z)
     end
 }

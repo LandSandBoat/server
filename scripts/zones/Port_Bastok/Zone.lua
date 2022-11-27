@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Port_Bastok/IDs')
 require('scripts/globals/conquest')
+require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
@@ -19,12 +20,12 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
+    local cs = { -1 }
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = 1
+            cs = { 1, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
         end
 
         player:setPos(132, -8.5, -13, 179)
@@ -37,7 +38,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP then
-            cs = 73
+            cs = { 73 }
             player:setPos(-36.000, 7.000, -58.000, 194)
         else
             local position = math.random(1, 5) + 57

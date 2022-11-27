@@ -522,6 +522,7 @@ local getWeatherInZone = function(zoneId)
             Is the target zone on another executable?")
         return xi.weather.NONE
     end
+
     return zone:getWeather()
 end
 
@@ -542,6 +543,7 @@ local ageToStage = function(age)
             return entry[1]
         end
     end
+
     return stage.ADULT_4
 end
 
@@ -689,6 +691,7 @@ xi.chocoboRaising.initChocoboData = function(player)
             if current_event_cs_table then
                 cutEvent(condensed_events, current_start_day, current_end_day, current_event_cs_table)
             end
+
             -- Start a new span
             current_event_cs_table = entry[2]
             current_start_day = chocoState.report.day_start + idx - 1
@@ -737,6 +740,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
                     player:startEvent(rejectionCsid, 0)
                 end
             end
+
             return
         end
 
@@ -759,6 +763,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
                     for _ = 1, quantity do
                         table.insert(tradedItems, id)
                     end
+
                     trade:confirmItem(id, quantity)
                 end
             end
@@ -934,16 +939,20 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 if #chocoState.report.events > 0 then
                     hasReport = 0xFFFFFFFF
                 end
+
                 player:updateEvent(hasReport, 0, 0, 0, chocoState.stage, 0, 0, 0)
             end,
+
             -- ?
             [252] = function()
                 local hasReport = 0
                 if #chocoState.report.events > 0 then
                     hasReport = 0xFFFFFFFF
                 end
+
                 player:updateEvent(hasReport, 1, 1, 1, chocoState.stage, 1, 1, 1)
             end,
+
             -- Main menu (248 -> 214 -> 215)
             -- Update (248 -> 246 -> 244)
             [248] = function()
@@ -986,9 +995,11 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(248, report, #chocoState.csList, playMultipleCutscenes, chocoState.stage, 0, 0, exitFlag)
             end,
+
             [214] = function()
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [215] = function()
                 -- Define menu options
                 -- bit.lshift(0x01, 0): Ask about your chocobo's condition
@@ -1067,6 +1078,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(menuFlags, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [241] = function() -- Feed chocobo
                 -- Complete the trade here to prevent any cheesing
                 player:confirmTrade()
@@ -1103,6 +1115,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 -- Write to db
                 player:setChocoboRaisingInfo(chocoState)
             end,
+
             [244] = function() -- Present chocobo appearance
                 -- TODO: There is more information going on in here
 
@@ -1126,9 +1139,11 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(chocoState.colour, enlargedCrest, enlargedFeet, moreTailFeathers, chocoState.stage, 1, 0, 0)
             end,
+
             [46] = function() -- Ask about chocobo's condition (menu)
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [600] = function()
                 -- Get KI during another CS (determined randomly)
                 local ki = xi.ki.DIRTY_HANDKERCHIEF
@@ -1136,6 +1151,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 player:updateEvent(ki, 0, 0, 0, 0, getKi, 0, 0)
                 player:addKeyItem(ki)
             end,
+
             [251] = function() -- Ask about chocobo's condition (confirm)
                 -- Block all other information
                 --local blockFlag = bit.lshift(0x01, 31) -- Sorry, but you will have to do this later. I have something new to report.
@@ -1172,6 +1188,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(arg0, arg1, arg2, arg3, arg4, 0, 0, 0)
             end,
+
             [243] = function() -- Care for your chocobo (menu)
                 local watchOverChocobo = 0x01
                 local tellAStory = 0x02
@@ -1199,6 +1216,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(mask, chocoState.energy, 0, 0, 0, 0, 0, 0)
             end,
+
             [10994] = function() -- Go on a walk (Short) - Leisurely / Brisk
                 table.insert(chocoState.csList, cutscenes.TAKE_A_WALK)
 
@@ -1277,6 +1295,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(unpack(output))
             end,
+
             [11250] = function() -- Go on a walk (Regular) - Leisurely / Brisk
                 table.insert(chocoState.csList, cutscenes.TAKE_A_WALK)
 
@@ -1329,6 +1348,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(unpack(output))
             end,
+
             [11506] = function() -- Go on a walk (Long) - Leisurely / Brisk
                 table.insert(chocoState.csList, cutscenes.TAKE_A_WALK)
 
@@ -1381,6 +1401,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(unpack(output))
             end,
+
             [12530] = function() -- Watch over your your chocobo (confirm)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
                     0, 0, 0, 0, 0, 0, 0)
@@ -1419,6 +1440,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                     end
                 end
             end,
+
             [13042] = function() -- Tell a story
                 -- A chocobo must have a DSC of D (A bit deficient, 64-95) or
                 -- higher to have a chance at learning a skill from a story
@@ -1429,15 +1451,18 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(306, 0, 0xFFFFFF9C, 0, 5, 0, 0, 3)
             end,
+
             [13298] = function() -- Scold the chocobo
                 -- TODO: Only tested on Chick
                 player:updateEvent(307, 5931, 0, 0, 6, 0, 0, 2)
             end,
+
             [13554] = function() -- Compete with others
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
                     (4163), 67, 0, 0, 0, 0, 0)
                 player:updateEvent(820, 18017, 0, 72, 3, 254, 46, 1)
             end,
+
             [250] = function() -- Set Basic Care (menu)
                 local plan1Length = bit.rshift(bit.band(chocoState.care_plan, 0xF0000000), 28)
                 local plan1Type   = bit.rshift(bit.band(chocoState.care_plan, 0x0F000000), 24)
@@ -1458,26 +1483,33 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 player:updateEvent(250, planInfo, 0, 0, 0, 0, 0, menuMask)
             end,
+
             [254] = function() -- Set Basic Care plan 1
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [510] = function() -- Set Basic Care plan 2
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [766] = function() -- Set Basic Care plan 3
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [1022] = function() -- Set Basic Care plan 4
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [1056] = function() -- Unknown
                 print("ChocoboRaising: Unknown update: 1056")
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [1241] = function() -- Unknown
                 print("ChocoboRaising: Unknown update: 1241")
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [246] = function() -- Update CS
                 -- Generate final CS value from (location offset * 256) + cutscene offset
                 local csOffset = chocoState.csList[1]
@@ -1509,35 +1541,44 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
                     chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
             end,
+
             [256] = function() -- Brief report?
                 --
             end,
+
             [504] = function() -- Skip report
                 -- TODO: Do empty playout of report so that age and state are up-to-date
                 chocoState.last_update_age = chocoState.age
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
                 player:setChocoboRaisingInfo(chocoState)
             end,
+
             [221] = function() -- Buy your chocobo whistle
                 --
             end,
+
             [222] = function() -- Recieve your chocobo whistle
                 --
             end,
+
             [482] = function() -- DEBUG: Go forward 1 unit
                 -- TODO: Split stored age and time of creation so age can be manipulated
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
+
             [229] = function() -- DEBUG: Abilities print
                 player:updateEvent(1, packStats1(chocoState), packStats2(chocoState), 0, 0, 0, 0, 0)
             end,
+
             [232] = function() -- DEBUG: User work print
                 -- TODO: Should we be tracking all user interactions with the chocobo?
             end,
+
             [240] = function() -- Give up your chocobo
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
                 player:deleteRaisedChocobo()
             end,
+
             [40] = function() -- Retire your chocobo
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
                 player:deleteRaisedChocobo()
@@ -1567,6 +1608,7 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
             print("ERROR! onEventFinishVCSTrainer 'chocoState' is nil!")
             return
         end
+
         chocoState.last_update_age = chocoState.age
         player:setChocoboRaisingInfo(chocoState)
     end

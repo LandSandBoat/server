@@ -33,6 +33,7 @@ function onTrigger(player, amount, target)
         error(player, "Invalid amount of gil.")
         return
     end
+
     if amount > oldAmount then
         amount = oldAmount
     end

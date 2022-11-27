@@ -30,6 +30,7 @@ local getCrystalTotals = function(player)
     for _, v in pairs(crystalData) do
         params[v.eventparam] = bit.bor(params[v.eventparam], bit.lshift(player:getCurrency(v.name), v.offset))
     end
+
     return params
 end
 

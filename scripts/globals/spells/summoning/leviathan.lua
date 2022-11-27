@@ -18,6 +18,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     elseif caster:getObjType() == xi.objType.PC then
         return xi.summon.avatarMiniFightCheck(caster)
     end
+
     return 0
 end
 

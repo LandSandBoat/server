@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Bastok_Mines/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/conquest')
+require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
 require('scripts/globals/chocobo')
 require('scripts/globals/zone')
@@ -18,13 +19,14 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
+    local cs = { -1 }
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = 1
+            cs = { 1, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
         end
+
         player:setPos(-45, -0, 26, 213)
         player:setHomePoint()
     end

@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
         result = 239
     end
+
     return result
 end
 

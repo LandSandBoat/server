@@ -75,7 +75,7 @@ namespace blacklistutils
         while (sql->NextRow() == SQL_SUCCESS)
         {
             uint32      accid_target = sql->GetUIntData(0);
-            std::string targetName   = (const char*)(sql->GetData(1));
+            std::string targetName   = sql->GetStringData(1);
 
             blacklist.emplace_back(accid_target, targetName);
             currentCount++;

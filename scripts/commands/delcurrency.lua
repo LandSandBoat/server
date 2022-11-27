@@ -40,6 +40,7 @@ function onTrigger(player, currency, amount, target)
         error(player, "Invalid amount.")
         return
     end
+
     if amount > currentAmount then
         amount = currentAmount
     end

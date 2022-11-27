@@ -5,7 +5,6 @@
 -- Recast Time: 5:00
 -- Duration: Random
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}

@@ -109,3 +109,8 @@ function(set_target_output_directory target)
         RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_SOURCE_DIR}"
     )
 endfunction()
+
+function(disable_lto target)
+    target_compile_options(${target} PRIVATE -fno-lto)
+    target_link_options(${target} PRIVATE -fno-lto)
+endfunction()

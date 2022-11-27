@@ -3,9 +3,8 @@
 -- Description: Delivers an eightfold attack. Accuracy varies with TP.
 -- Type: Physical
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
+require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -14,16 +13,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getMainLvl() < 70 then
         return 1
     end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 8
-    local accmod = 1
-    local dmgmod = 0.8
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.H2H, info.hitslanded)
+    local accmod  = 1
+    local dmgmod  = 0.8
+    local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg     = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.H2H, info.hitslanded)
+
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.H2H)
+
     return dmg
 end
 

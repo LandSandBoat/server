@@ -127,6 +127,7 @@ local function getSpellJobPointCostForJob(job, spellID)
             return jobPointCost
         end
     end
+
     return -1
 end
 

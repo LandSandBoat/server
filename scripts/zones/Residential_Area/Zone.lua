@@ -11,7 +11,7 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    player:eraseStatusEffect(true)
+    player:eraseAllStatusEffect()
     player:setPos(0, 0, 0, 192)
 
     return cs

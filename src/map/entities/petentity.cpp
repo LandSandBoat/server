@@ -110,7 +110,7 @@ void CPetEntity::setJugDuration(int32 seconds)
     m_jugDuration = std::chrono::seconds(seconds);
 }
 
-std::string CPetEntity::GetScriptName()
+const std::string CPetEntity::GetScriptName()
 {
     switch (getPetType())
     {
@@ -213,7 +213,7 @@ void CPetEntity::Die()
     }
     else
     {
-        PAI->Internal_Die(0s);
+        PAI->Internal_Die(2500ms);
     }
 
     luautils::OnMobDeath(this, nullptr);
@@ -248,14 +248,6 @@ void CPetEntity::Spawn()
     luautils::OnMobSpawn(this);
 }
 
-bool CPetEntity::shouldPersistThroughZone()
-{
-    return getPetType() == PET_TYPE::WYVERN ||
-           getPetType() == PET_TYPE::AVATAR ||
-           getPetType() == PET_TYPE::AUTOMATON ||
-           (getPetType() == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
-}
-
 bool CPetEntity::shouldDespawn(time_point tick)
 {
     // This check was moved from the original call site when this method was added.
@@ -286,8 +278,12 @@ void CPetEntity::loadPetZoningInfo()
         health.tp = static_cast<uint16>(master->petZoningInfo.petTP);
         health.hp = master->petZoningInfo.petHP;
         health.mp = master->petZoningInfo.petMP;
-        setJugDuration(master->petZoningInfo.jugDuration);
-        setJugSpawnTime(master->petZoningInfo.jugSpawnTime);
+
+        if (m_PetType == PET_TYPE::JUG_PET)
+        {
+            setJugDuration(master->petZoningInfo.jugDuration);
+            setJugSpawnTime(master->petZoningInfo.jugSpawnTime);
+        }
     }
 }
 

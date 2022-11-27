@@ -59,6 +59,7 @@ g_mixins.families.hpemde = function(hpemdeMob)
         if mob:getHPP() == 100 then
             mob:setLocalVar("[hpemde]damaged", 0)
         end
+
         if mob:getAnimationSub() ~= 5 then
             dive(mob)
         end

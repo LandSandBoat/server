@@ -1,3 +1,4 @@
+-----------------------------------
 -- Contains all common weaponskill calculations including but not limited to:
 -- fSTR
 -- Alpha
@@ -8,6 +9,7 @@
 -- applications of accuracy mods ('Accuracy varies with TP.')
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
+-----------------------------------
 require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
@@ -15,6 +17,7 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+-----------------------------------
 
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
@@ -482,6 +485,7 @@ local function calculateDEXvsAGICritRate(attacker, target)
     else
         nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
     end
+
     return nativecrit
 end
 
@@ -583,6 +587,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
                         (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * calcParams.pdif) *
                         ((100 + (attacker:getMod(xi.mod.AUGMENTS_SA))) / 100)
         end
+
         if calcParams.trickApplicable then
             finaldmg = finaldmg +
                         (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100) * calcParams.pdif) *
@@ -673,6 +678,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     if wsParams.ignoresDef then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
+
     local cratio, ccritratio = cMeleeRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
@@ -937,6 +943,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
                 action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
             end
         end
+
         action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
@@ -947,6 +954,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         else
             action:messageID(defender:getID(), xi.msg.basic.EVADES)
         end
+
         action:reaction(defender:getID(), xi.reaction.EVADE)
     end
 
@@ -966,6 +974,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             action:param(defender:getID(), math.abs(finaldmg))
         end
     end
+
     local enmityEntity = wsResults.taChar or attacker
 
     if wsParams.overrideCE and wsParams.overrideVE then

@@ -2,6 +2,7 @@
 -- Zone: Bastok_Markets (235)
 -----------------------------------
 require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
 local ID = require('scripts/zones/Bastok_Markets/IDs')
@@ -13,13 +14,14 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
+    local cs = { -1 }
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = 0
+            cs = { 0, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
         end
+
         player:setPos(-280, -12, -91, 15)
         player:setHomePoint()
     end

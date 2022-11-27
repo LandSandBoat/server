@@ -41,6 +41,7 @@ spellObject.onMobSpawn = function(mob)
                 end
             end
         end
+
         -- Always set the boost, even if Uka wasn't found.
         -- This accounts for her being in the party and giving the boost
         -- and also if she dies and the boost goes away.
@@ -62,7 +63,7 @@ spellObject.onMobSpawn = function(mob)
     for i = 1, #healingJobs do
         local master  = mob:getMaster()
         if master:getMainJob() == healingJobs[i] then
-            mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
+            mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, ai.r.JA, 0, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
         end
     end
 

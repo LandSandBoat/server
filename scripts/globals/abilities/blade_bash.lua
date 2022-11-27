@@ -5,18 +5,17 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     if not player:isWeaponTwoHanded() then
         return xi.msg.basic.NEEDS_2H_WEAPON, 0
-    else
-        return 0, 0
     end
+
+    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
@@ -27,6 +26,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     -- Yes, even Blade Bash deals damage dependant of Dark Knight level
     local damage = 0
+
     if player:getMainJob() == xi.job.DRK then
         damage = math.floor(((player:getMainLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
     elseif player:getSubJob() == xi.job.DRK then

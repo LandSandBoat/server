@@ -969,9 +969,11 @@ local function getUpdateOpts(regimeType)
     for k, v in pairs(regimeInfo[regimeType].updateOptions) do
         out[k] = v
     end
+
     for k, v in pairs(regimeInfo[regimeType].sharedOptions) do
         out[k] = v
     end
+
     return out
 end
 
@@ -980,9 +982,11 @@ local function getFinishOpts(regimeType)
     for k, v in pairs(regimeInfo[regimeType].finishOptions) do
         out[k] = v
     end
+
     for k, v in pairs(regimeInfo[regimeType].sharedOptions) do
         out[k] = v
     end
+
     return out
 end
 
