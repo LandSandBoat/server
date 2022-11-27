@@ -579,7 +579,7 @@ enum class Mod
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
     SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENTCY           = 491, // Waltz Potentcy Bonus
+    WALTZ_POTENCY            = 491, // Waltz Potentcy Bonus
     JIG_DURATION             = 492, // Jig duration bonus in percents
     VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
     STEP_FINISH              = 494, // Bonus finishing moves from steps

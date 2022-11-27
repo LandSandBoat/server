@@ -220,9 +220,6 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
 
-    -- Delete statuses that may have been spent by the WS
-    attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
-
     -- Calculate reductions
     if not wsParams.formless then
         --finaldmg = target:physicalDmgTaken(finaldmg, attack.damageType)
