@@ -1114,7 +1114,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         {
             if (PChar->PParty->GetSyncTarget() == PChar || PChar->PParty->GetLeader() == PChar)
             {
-                PChar->PParty->SetSyncTarget(nullptr, 551);
+                PChar->PParty->SetSyncTarget("", 551);
             }
             if (PChar->PParty->GetSyncTarget() != nullptr)
             {
@@ -1128,7 +1128,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
                 }
                 if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
                 {
-                    PChar->PParty->SetSyncTarget(nullptr, 552);
+                    PChar->PParty->SetSyncTarget("", 552);
                 }
             }
         }
