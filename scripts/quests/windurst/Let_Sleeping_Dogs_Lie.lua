@@ -25,7 +25,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
             player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
-            not player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED
+            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) ~= QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
