@@ -5,15 +5,21 @@ require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 
+-- TODO: This should be crit evasion down, but is currently increasing
+-- enemy crit rate (Is this the same thing?)
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.CEVA, -5)
+    local effectPower = effect:getPower()
+
+    target:addMod(xi.mod.ENEMYCRITRATE, effectPower)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.CEVA, -5)
+    local effectPower = effect:getPower()
+
+    target:delMod(xi.mod.ENEMYCRITRATE, effectPower)
 end
 
 return effectObject
