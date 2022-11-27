@@ -193,14 +193,14 @@ entity.onMobFight = function( mob, target )
     end
 
     if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 6) then
-        local pick2Hr = math.random(1, 5)
+        local pick2Hr = math.random(1, 6)
 
         if (GetServerVariable(cantUse2Hr[pick2Hr]) == 0) then
             if (pick2Hr > 0 and pick2Hr < 5) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
             elseif (pick2Hr == 6) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
-                for i = 1, 2 do
+                for i = 1, 3 do
                     local meikyoRandom = math.random(1, 100)
 
                     if (meikyoRandom < 50) then
