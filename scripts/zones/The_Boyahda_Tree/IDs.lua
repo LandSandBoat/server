@@ -86,6 +86,7 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
         MIMIC                = 17404336,
         AGAS                 = 17404337,
         BEET_LEAFHOPPER      = 17404338,
+        ANCIENT_GOOBBUE      = 17093080,
     },
     npc =
     {
