@@ -6228,9 +6228,9 @@ INSERT INTO `nm_spawn_points` VALUES (17629301,0,624.000,-16.500,-775.000); -- S
 INSERT INTO `nm_spawn_points` VALUES (17629403,0,195,1,5); -- Nussknacker
 INSERT INTO `nm_spawn_points` VALUES (17629412,0,-77,-0.5,-56); -- Antican Magister
 INSERT INTO `nm_spawn_points` VALUES (17629421,0,-392,-0.2,692); -- Antican Proconsul
-INSERT INTO `nm_spawn_points` VALUES (17629421,0,-274,-0.2,683);
-INSERT INTO `nm_spawn_points` VALUES (17629421,0,-278,-0.2,800);
-INSERT INTO `nm_spawn_points` VALUES (17629421,0,-400,-0.2,800);
+INSERT INTO `nm_spawn_points` VALUES (17629421,1,-274,-0.2,683);
+INSERT INTO `nm_spawn_points` VALUES (17629421,2,-278,-0.2,800);
+INSERT INTO `nm_spawn_points` VALUES (17629421,3,-400,-0.2,800);
 INSERT INTO `nm_spawn_points` VALUES (17629430,0,-81,-0.5,-217); -- Diamond Daig
 INSERT INTO `nm_spawn_points` VALUES (17629483,0,-582,-0.5,-412); -- Antican Tribunus
 INSERT INTO `nm_spawn_points` VALUES (17629524,0,-815,-0.5,-340); -- Triarius X-XV
