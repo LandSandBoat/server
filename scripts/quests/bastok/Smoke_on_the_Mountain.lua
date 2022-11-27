@@ -59,8 +59,6 @@ quest.sections =
                 end,
             },
 
-            ['Offa'] = quest:event(222),
-
             onEventFinish =
             {
                 [429] = function(player, csid, option, npc)
@@ -75,6 +73,11 @@ quest.sections =
             },
         },
 
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Offa'] = quest:event(222),
+        },
+
         [xi.zone.SOUTH_GUSTABERG] =
         {
             ['qm2'] =
@@ -83,7 +86,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_GIANT_SHEEP_MEAT) then
                         if quest:getLocalVar(player, 'Timer') == 0 then
                             player:confirmTrade()
-                            quest:setLocalVar(player, 'Timer', os.time() + 60)
+                            quest:setLocalVar(player, 'Timer', os.time() + 3000)
 
                             return quest:messageSpecial(southGustabergID.text.FIRE_PUT, xi.items.SLICE_OF_GIANT_SHEEP_MEAT)
                         else
