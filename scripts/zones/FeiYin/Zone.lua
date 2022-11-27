@@ -12,8 +12,7 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.CAPRICIOUS_CASSIE)
-    GetMobByID(ID.mob.CAPRICIOUS_CASSIE):setRespawnTime(math.random(900, 10800))
+    xi.mob.nmTODPersistCache(zone, ID.mob.HUMBABA)
 
     xi.treasure.initZone(zone)
 end
