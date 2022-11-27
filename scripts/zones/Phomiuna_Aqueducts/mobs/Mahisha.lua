@@ -16,7 +16,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Respawn is shared with Eba, random to see which spawns
-    if math.random(1,2) == 1 then
+    if math.random(1, 2) == 1 then
         SetServerVariable("EBA_MAHISHA", 1) -- Respawn Mahisha
         xi.mob.nmTODPersist(mob, math.random(28800, 43200)) -- 8 to 12 hours
     else
