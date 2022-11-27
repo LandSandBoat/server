@@ -37,18 +37,16 @@ entity.onMobDespawn = function(mob)
     -- the quest version of this NM doesn't respawn or count toward hq nm
     if nqId == ID.mob.ORCISH_OVERLORD then
         local hqId        = mob:getID() + 1
-        local timeOfDeath = GetServerVariable("[POP]Overlord_Bakgodek")
-        local kills       = GetServerVariable("[PH]Overlord_Bakgodek")
+        local timeOfDeath          = GetServerVariable("[POP]Overlord_Bakgodek")
+        local kills                = GetServerVariable("[PH]Overlord_Bakgodek")
         local popNow      = math.random(1, 5) == 3 or kills > 6
 
         if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
-            UpdateNMSpawnPoint(hqId)
-            GetMobByID(hqId):setRespawnTime(math.random(75600, 86400))
+            xi.mob.nmTODPersist(GetMobByID(hqId), math.random(75600, 86400))
         else
-            UpdateNMSpawnPoint(nqId)
-            mob:setRespawnTime(math.random(75600, 86400))
+            xi.mob.nmTODPersist(GetMobByID(nqId), math.random(75600, 86400))
             SetServerVariable("[PH]Overlord_Bakgodek", kills + 1)
         end
     end

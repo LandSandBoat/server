@@ -15,8 +15,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
-        UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
-        GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
+        xi.mob.nmTODPersistCache(zone, ID.mob.TEMPEST_TIGON)
     end
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
