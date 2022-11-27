@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -4669,6 +4669,14 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
         m_PBaseEntity->SetModelId(modelId);
     }
     m_PBaseEntity->updatemask |= UPDATE_LOOK;
+}
+
+void CLuaBaseEntity::updateLook()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        m_PBaseEntity->updatemask |= UPDATE_LOOK;
+    }
 }
 
 /************************************************************************
@@ -15590,6 +15598,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
+    SOL_REGISTER("updateLook", CLuaBaseEntity::updateLook);
     SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
     SOL_REGISTER("getCostume2", CLuaBaseEntity::getCostume2);

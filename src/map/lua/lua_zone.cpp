@@ -317,7 +317,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
         PMob->m_isAggroable           = table["isAggroable"].get_or(false);
 
-        PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
+        PMob->spawnAnimation = table["specialSpawnAnimation"].get_or(false) ? SPAWN_ANIMATION::SPECIAL : SPAWN_ANIMATION::NORMAL;
 
         uint32 flags  = table.get_or<uint32>("entityFlags", 0);
         PMob->m_flags = flags == 0 ? PMob->m_flags : flags;
@@ -344,7 +344,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PEntity->look = stringToLook(lookStr);
     }
 
-    PEntity->updatemask |= UPDATE_ALL_CHAR | UPDATE_ALL_MOB | UPDATE_LOOK | UPDATE_STATUS | UPDATE_HP;
+    PEntity->updatemask |= UPDATE_ALL_CHAR;
 
     return CLuaBaseEntity(PEntity);
 }

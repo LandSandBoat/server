@@ -122,21 +122,21 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         {
             [xi.zone.DYNAMIS_BEAUCEDINE] = -- Spawn Hydras (Done)
             {
-                [1]  = { "H. Warrior",     159, 134, 0,    359, 1155 }, -- HWAR
-                [2]  = { "H. Monk",        160, 134, 0,    359, 1155 }, -- HMNK
-                [3]  = { "H. White Mage",  161, 134, 1,    359, 1155 }, -- HWHM
-                [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155 }, -- HBLM
-                [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155 }, -- HRDM
-                [6]  = { "H. Thief",       165, 134, 0,    359, 1155 }, -- HTHF
-                [7]  = { "H. Paladin",     166, 134, 4,    359, 1155 }, -- HPLD
-                [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155 }, -- HDRK
-                [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155 }, -- HBST
-                [10] = { "H. Bard",        170, 134, 6,    359, 1155 }, -- HBRD
-                [11] = { "H. Ranger",      171, 134, 0,    359, 1155 }, -- HRNG
-                [12] = { "H. Samurai",     172, 134, 0,    359, 1155 }, -- HSAM
-                [13] = { "H. Ninja",       173, 134, 7,    359, 1155 }, -- HNIN
-                [14] = { "H. Dragoon",     174, 134, 0,    359, 1155 }, -- HDRG
-                [15] = { "H. Summoner",    176, 134, 0,    359, 1155 }, -- HSMN
+                [1]  = { "H. Warrior",     159, 134, 0,    359, 1155, true }, -- HWAR
+                [2]  = { "H. Monk",        160, 134, 0,    359, 1155, true }, -- HMNK
+                [3]  = { "H. White Mage",  161, 134, 1,    359, 1155, true }, -- HWHM
+                [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155, true }, -- HBLM
+                [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155, true }, -- HRDM
+                [6]  = { "H. Thief",       165, 134, 0,    359, 1155, true }, -- HTHF
+                [7]  = { "H. Paladin",     166, 134, 4,    359, 1155, true }, -- HPLD
+                [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155, true }, -- HDRK
+                [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155, true }, -- HBST
+                [10] = { "H. Bard",        170, 134, 6,    359, 1155, true }, -- HBRD
+                [11] = { "H. Ranger",      171, 134, 0,    359, 1155, true }, -- HRNG
+                [12] = { "H. Samurai",     172, 134, 0,    359, 1155, true }, -- HSAM
+                [13] = { "H. Ninja",       173, 134, 7,    359, 1155, true }, -- HNIN
+                [14] = { "H. Dragoon",     174, 134, 0,    359, 1155, true }, -- HDRG
+                [15] = { "H. Summoner",    176, 134, 0,    359, 1155, true }, -- HSMN
             },
             [xi.zone.DYNAMIS_XARCABARD] = -- Spawn Kindred (Done)
             {
@@ -160,21 +160,21 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             {
                 [2] = -- Floor 2 Spawn Hydras (Done)
                 {
-                    [1]  = { "H. Warrior",     159, 134, 0,    359, 1155 }, -- HWAR
-                    [2]  = { "H. Monk",        160, 134, 0,    359, 1155 }, -- HMNK
-                    [3]  = { "H. White Mage",  161, 134, 1,    359, 1155 }, -- HWHM
-                    [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155 }, -- HBLM
-                    [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155 }, -- HRDM
-                    [6]  = { "H. Thief",       165, 134, 0,    359, 1155 }, -- HTHF
-                    [7]  = { "H. Paladin",     166, 134, 4,    359, 1155 }, -- HPLD
-                    [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155 }, -- HDRK
-                    [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155 }, -- HBST
-                    [10] = { "H. Bard",        170, 134, 6,    359, 1155 }, -- HBRD
-                    [11] = { "H. Ranger",      171, 134, 0,    359, 1155 }, -- HRNG
-                    [12] = { "H. Samurai",     172, 134, 0,    359, 1155 }, -- HSAM
-                    [13] = { "H. Ninja",       173, 134, 7,    359, 1155 }, -- HNIN
-                    [14] = { "H. Dragoon",     174, 134, 0,    359, 1155 }, -- HDRG
-                    [15] = { "H. Summoner",    176, 134, 0,    359, 1155 }, -- HSMN
+                    [1]  = { "H. Warrior",     159, 134, 0,    359, 1155, true }, -- HWAR
+                    [2]  = { "H. Monk",        160, 134, 0,    359, 1155, true }, -- HMNK
+                    [3]  = { "H. White Mage",  161, 134, 1,    359, 1155, true }, -- HWHM
+                    [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155, true }, -- HBLM
+                    [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155, true }, -- HRDM
+                    [6]  = { "H. Thief",       165, 134, 0,    359, 1155, true }, -- HTHF
+                    [7]  = { "H. Paladin",     166, 134, 4,    359, 1155, true }, -- HPLD
+                    [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155, true }, -- HDRK
+                    [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155, true }, -- HBST
+                    [10] = { "H. Bard",        170, 134, 6,    359, 1155, true }, -- HBRD
+                    [11] = { "H. Ranger",      171, 134, 0,    359, 1155, true }, -- HRNG
+                    [12] = { "H. Samurai",     172, 134, 0,    359, 1155, true }, -- HSAM
+                    [13] = { "H. Ninja",       173, 134, 7,    359, 1155, true }, -- HNIN
+                    [14] = { "H. Dragoon",     174, 134, 0,    359, 1155, true }, -- HDRG
+                    [15] = { "H. Summoner",    176, 134, 0,    359, 1155, true }, -- HSMN
                 },
                 [3] = -- Floor 3 Spawn Kindred (Done)
                 {
@@ -270,21 +270,21 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         },
         [359] = -- Hydra NM
         {
-            [1]  = { "H. Warrior",     159, 134, 0,    359, 1155 }, -- HWAR
-            [2]  = { "H. Monk",        160, 134, 0,    359, 1155 }, -- HMNK
-            [3]  = { "H. White Mage",  161, 134, 1,    359, 1155 }, -- HWHM
-            [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155 }, -- HBLM
-            [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155 }, -- HRDM
-            [6]  = { "H. Thief",       165, 134, 0,    359, 1155 }, -- HTHF
-            [7]  = { "H. Paladin",     166, 134, 4,    359, 1155 }, -- HPLD
-            [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155 }, -- HDRK
-            [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155 }, -- HBST
-            [10] = { "H. Bard",        170, 134, 6,    359, 1155 }, -- HBRD
-            [11] = { "H. Ranger",      171, 134, 0,    359, 1155 }, -- HRNG
-            [12] = { "H. Samurai",     172, 134, 0,    359, 1155 }, -- HSAM
-            [13] = { "H. Ninja",       173, 134, 7,    359, 1155 }, -- HNIN
-            [14] = { "H. Dragoon",     174, 134, 0,    359, 1155 }, -- HDRG
-            [15] = { "H. Summoner",    176, 134, 0,    359, 1155 }, -- HSMN
+            [1]  = { "H. Warrior",     159, 134, 0,    359, 1155, true }, -- HWAR
+            [2]  = { "H. Monk",        160, 134, 0,    359, 1155, true }, -- HMNK
+            [3]  = { "H. White Mage",  161, 134, 1,    359, 1155, true }, -- HWHM
+            [4]  = { "H. Black Mage",  164, 134, 5000, 359, 1155, true }, -- HBLM
+            [5]  = { "H. Red Mage",    162, 134, 3,    359, 1155, true }, -- HRDM
+            [6]  = { "H. Thief",       165, 134, 0,    359, 1155, true }, -- HTHF
+            [7]  = { "H. Paladin",     166, 134, 4,    359, 1155, true }, -- HPLD
+            [8]  = { "H. Dark Knight", 167, 134, 5,    359, 1155, true }, -- HDRK
+            [9]  = { "H. Beastmaster", 168, 134, 0,    359, 1155, true }, -- HBST
+            [10] = { "H. Bard",        170, 134, 6,    359, 1155, true }, -- HBRD
+            [11] = { "H. Ranger",      171, 134, 0,    359, 1155, true }, -- HRNG
+            [12] = { "H. Samurai",     172, 134, 0,    359, 1155, true }, -- HSAM
+            [13] = { "H. Ninja",       173, 134, 7,    359, 1155, true }, -- HNIN
+            [14] = { "H. Dragoon",     174, 134, 0,    359, 1155, true }, -- HDRG
+            [15] = { "H. Summoner",    176, 134, 0,    359, 1155, true }, -- HSMN
         },
         ["Drops"] =
         {
@@ -349,6 +349,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         local indexJob = 1
         local indexEndJob = number
         local nameObj = nil
+        local spawnAnim = oMob ~= nil
         if oMob:getFamily() == 4 then
             if oMob:getLocalVar("Floor") == 2 or oMob:getLocalVar("Floor") == 3 then
                 nameObj = normalMobLookup[mobFamily][mobZoneID][oMob:getLocalVar("Floor")]
@@ -358,6 +359,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         else
             nameObj = normalMobLookup[mobFamily]
         end
+
+        if nameObj[job][7] then -- Skip special spawn animation
+            spawnAnim = false
+        end
+
         while (indexJob <= indexEndJob) and (nameObj ~= nil) do
             local mobArg = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
@@ -376,7 +382,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 end,
                 onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
                 releaseIdOnDeath = true,
-                specialSpawnAnimation = oMob ~= nil,
+                specialSpawnAnimation = spawnAnim,
                 entityFlags = nameObj[job][6],
                 mixins =
                 {
@@ -385,6 +391,13 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             })
             mobArg:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
             mobArg:spawn()
+
+            if mobArg:getFamily() == 359 then
+                mobArg:timer(1600, function(mobArg)
+                    mobArg:updateLook()
+                end)
+            end
+
             if normalMobLookup["Drops"][mobArg:getZoneID()][mobArg:getFamily()][1] ~= nil then
                 mobArg:setDropID(normalMobLookup["Drops"][mobArg:getZoneID()][mobArg:getFamily()][1])
             end
