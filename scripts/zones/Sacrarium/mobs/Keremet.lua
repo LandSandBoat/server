@@ -20,9 +20,11 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    for i = mob:getID() + 1, mob:getID() + 12 do
-        if GetMobByID(i):isAlive() then
-            GetMobByID(i):setHP(0)
+    local mobID = mob:getID()
+    for i = mobID + 1, mobID + 12 do
+        local add = GetMobByID(i)
+        if add:isAlive() then
+            add:setHP(0)
         end
     end
 end

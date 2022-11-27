@@ -37,7 +37,7 @@ entity.onMobDespawn = function(mob)
         local respawnTime = math.random(75600, 86400)
         for i = ID.mob.CARMINE_DOBSONFLY_OFFSET, ID.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
             DisallowRespawn(i, false)
-            GetMobByID(i):setRespawnTime(respawnTime)
+            xi.mob.nmTODPersist(GetMobByID(i), respawnTime) -- 21 to 24 hours
         end
     -- else
     --    DisallowRespawn(mob:getID(), true)

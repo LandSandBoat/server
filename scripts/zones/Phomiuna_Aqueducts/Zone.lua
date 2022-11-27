@@ -8,16 +8,16 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- Mahisha and Eba share a respawn, random to see who spawns
-    if math.random(1,2) == 1 then -- Spawn Eba
-        DisallowRespawn(ID.mob.MAHISHA, true)
-        GetMobByID(ID.mob.EBA):setRespawnTime(math.random(300, 1200)) -- 5 to 20 minutes
-    else -- Spawn Mahisha
-        DisallowRespawn(ID.mob.EBA, true)
-        GetMobByID(ID.mob.MAHISHA):setRespawnTime(math.random(300, 1200)) -- 5 to 20 minutes
-    end
-
+    -- NM Persistence
     GetMobByID(ID.mob.TRES_DUENDES):setLocalVar("cooldown", os.time() + math.random(900, 1800))
+
+    -- Mahisha and Eba share a respawn, random to see who spawns
+    xi.mob.nmTODPersistCache(zone, ID.mob.TRES_DUENDES)
+    if GetServerVariable("EBA_MAHISHA") == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.MAHISHA)
+    else
+        xi.mob.nmTODPersistCache(zone, ID.mob.EBA)
+    end
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

@@ -9,6 +9,8 @@ require('scripts/globals/status')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BOROKA)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
