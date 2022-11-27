@@ -195,7 +195,7 @@ entity.onMobFight = function( mob, target )
     end
 
     if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 6) then
-        local pick2Hr = math.random(1, 5)
+        local pick2Hr = math.random(1, 7)
 
         if (GetServerVariable(cantUse2Hr[pick2Hr]) == 0) then
             if (pick2Hr > 0 and pick2Hr < 6) then
