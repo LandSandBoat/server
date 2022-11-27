@@ -12,6 +12,7 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.HUMBABA)
 
     xi.treasure.initZone(zone)
