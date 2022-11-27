@@ -9,19 +9,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(331)
+    player:startEvent(331, 4) --
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinsih = function(player, csid, option)
-    if
-        csid == 331 and
-        option == 1
-    then
-        player:setPos(-251.1373, -5.000, -489.9807) -- exits to saffa
-    end
 end
 
 return entity
