@@ -41,7 +41,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-
     -- 1st need to get the pet food is equipped in the range slot.
     local rangeObj         = player:getEquipID(xi.slot.AMMO)
     local minimumHealing   = 0

@@ -6,9 +6,7 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/settings")
 require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
 local abilityObject = {}
 
@@ -57,6 +55,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     else
         if target:isEngaged() then
             local enmitylist = target:getEnmityList()
+
             for _, enmity in ipairs(enmitylist) do
                 if enmity.active and enmity.entity:getID() ~= player:getID() then
                     ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
