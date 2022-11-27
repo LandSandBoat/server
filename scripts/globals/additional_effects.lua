@@ -173,14 +173,40 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         if addStatus and addStatus > 0 then
             local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
             local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
-            msgID        = xi.msg.basic.ADD_EFFECT_STATUS
+            local immunity = 0
+
+            local immunityTable =
+            {
+                { status = xi.effect.SLEEP_I,   immunity = xi.immunity.SLEEP    },
+                { status = xi.effect.WEIGHT,    immunity = xi.immunity.GRAVITY  },
+                { status = xi.effect.BIND,      immunity = xi.immunity.BIND     },
+                { status = xi.effect.STUN,      immunity = xi.immunity.STUN     },
+                { status = xi.effect.SILENCE,   immunity = xi.immunity.SILENCE  },
+                { status = xi.effect.PARALYSIS, immunity = xi.immunity.PARALYZE },
+                { status = xi.effect.BLINDNESS, immunity = xi.immunity.BLIND    },
+                { status = xi.effect.SLOW,      immunity = xi.immunity.SLOW     },
+                { status = xi.effect.POISON,    immunity = xi.immunity.POISON   },
+                { status = xi.effect.ELEGY,     immunity = xi.immunity.ELEGY    },
+                { status = xi.effect.REQUIEM,   immunity = xi.immunity.REQUIEM  },
+                { status = xi.effect.TERROR,    immunity = xi.immunity.TERROR   },
+            }
+
+            for _, statusTable in pairs(immunityTable) do
+                if statusTable.status == addStatus then
+                    immunity = statusTable.immunity
+                    break
+                end
+            end
+
             if
                 resist >= 0.5 and
-                duration * resist > 0
+                duration * resist > 0 and
+                not defender:hasImmunity(immunity)
             then
                 defender:addStatusEffect(addStatus, power, tick, duration * resist)
+                msgID    = xi.msg.basic.ADD_EFFECT_STATUS
+                msgParam = addStatus
             end
-            msgParam = addStatus
         end
 
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
@@ -251,9 +277,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         -- Resistance check should be in dispelStatusEffect() itself
         if dispel == xi.effect.NONE then
             return 0, 0, 0
-        else
+        elseif not defender:hasImmunity(xi.immunity.DISPEL) then
             msgID = xi.msg.basic.ADD_EFFECT_DISPEL
             msgParam = dispel
+        else
+            return 0, 0, 0
         end
 
     elseif addType == procType.ABSORB then
