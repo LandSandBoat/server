@@ -8,7 +8,7 @@ require('scripts/globals/treasure')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.mob.nmTODPersistCache(zone, ID.mob.MYSTMAKER_PROFBLIX)
+    xi.mob.nmTODPersistCache(zone, ID.mob.MYSTICMAKER_PROFBLIX)
 
     xi.treasure.initZone(zone)
 end
