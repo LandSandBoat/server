@@ -11,7 +11,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
     for i = ID.mob.CARMINE_DOBSONFLY_OFFSET, ID.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
-        xi.mob.nmTODPersistCache(zone, GetMobByID(i))
+        xi.mob.nmTODPersistCache(zone, i)
     end
 end
 
