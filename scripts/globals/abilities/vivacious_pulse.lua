@@ -5,7 +5,6 @@
 -- Recast Time: 1:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/rune_fencer")
 -----------------------------------
 local abilityObject = {}

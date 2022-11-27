@@ -29,7 +29,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-
     -- 1st need to get the pet food is equipped in the range slot.
     local rangeObj         = player:getEquipID(xi.slot.AMMO)
     local minimumHealing   = 0
@@ -75,7 +74,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         [17021] = function (x) -- pet food zeta biscuit
             minimumHealing = 900
             regenAmount    = 14
-            totalHealing   = math.floor(minimumHealing + 3 * (playerMnd- 4 5))
+            totalHealing   = math.floor(minimumHealing + 3 * (playerMnd - 45))
         end,
         [17022] = function (x) -- pet food eta biscuit
             minimumHealing = 1200
