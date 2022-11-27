@@ -586,12 +586,20 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             // allies targid >= 0x700
             if (PEntity->targid >= 0x700)
             {
+                // Disappear pets that do not belong to players
+                auto* PPetEntity = dynamic_cast<CPetEntity*>(PEntity);
+                if (PPetEntity && (!PPetEntity->PMaster || PPetEntity->PMaster->objtype != TYPE_PC))
+                {
+                    PEntity->status = STATUS_TYPE::DISAPPEAR;
+                }
+
                 if (auto* PMobEntity = dynamic_cast<CMobEntity*>(PEntity))
                 {
                     if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
                     {
                         m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                     }
+                    PEntity->status = STATUS_TYPE::DISAPPEAR;
                 }
             }
             else
