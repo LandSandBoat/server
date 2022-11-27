@@ -8,8 +8,11 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    xi.mob.nmTODPersistCache(zone, ID.mob.DIAMOND_QUADAV)
-    xi.mob.nmTODPersistCache(zone, ID.mob.ZADHA_ADAMANTKING)
+    if GetServerVariable("[PH]Za_Dha_Adamantking") == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.ZADHA_ADAMANTKING)
+    else
+        xi.mob.nmTODPersistCache(zone, ID.mob.DIAMOND_QUADAV)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
