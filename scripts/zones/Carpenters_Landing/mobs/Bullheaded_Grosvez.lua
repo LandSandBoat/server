@@ -80,14 +80,25 @@ entity.onMobFight = function(mob, target)
 
         -- Send the message out, but give it a second unutil after the final JA lands
         mob:timer(1500, function (m)
-            target:messageSpecial(ID.text.BULLHEADED_BREATH)
+            local targ = m:getTarget()
+            if targ ~= nil then
+                local zonePlayers = targ:getZone():getPlayers()
+                for _, zonePlayer in pairs(zonePlayers) do
+                    if zonePlayer:checkDistance(m) <= 30 then
+                        zonePlayer:messageSpecial(ID.text.BULLHEADED_BREATH)
+                    end
+                end
+            end
         end)
 
         -- Random timer of 8-12 seconds to return to normal and reset hate on last target
         mob:timer(math.random(8000, 12000), function(m)
+            local targ = m:getTarget()
+            if m ~= nil then
+                m:resetEnmity(targ)
+            end
             m:setAutoAttackEnabled(true)
             m:setMobMod(xi.mobMod.NO_MOVE, 0)
-            m:resetEnmity(target)
         end)
     end
 
