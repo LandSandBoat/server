@@ -14,12 +14,17 @@ entity.onMobInitialize = function( mob )
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SILENCERES, 999)
-    mob:setMod(xi.mod.STUNRES, 999)
-    mob:setMod(xi.mod.BINDRES, 999)
-    mob:setMod(xi.mod.GRAVITYRES, 999)
-    mob:addStatusEffect(xi.effect.REGEN, 40, 3, 0)
-
+    mob:setMod(xi.mod.SILENCERES, 10000)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.PETRIFYRES, 10000)
+    mob:setMod(xi.mod.BINDRES, 10000)
+    mob:setMod(xi.mod.CHARMRES, 10000)
+    mob:setMod(xi.mod.PARALYZERES, 10000)
+    mob:setMod(xi.mod.STUNRES, 10000)
+    mob:setMod(xi.mod.BINDRES, 10000)
+    mob:setMod(xi.mod.GRAVITYRES, 10000)
+    mob:addMod(xi.mod.MDEF, mob:getMod(xi.mod.MDEF) + 200)
+    mob:setDropID(3989)
     mob:setHP(mob:getMaxHP() / 2)
 end
 
