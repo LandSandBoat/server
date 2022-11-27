@@ -80,7 +80,7 @@ quest.sections =
                     player:confirmTrade()
 
                     if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
-                        player:addFame(xi.quest.fame_area.BASTOK, 67)
+                        player:addFame(xi.quest.fame_area.WINDURST, 67)
                     end
 
                     if quest:complete(player) then
