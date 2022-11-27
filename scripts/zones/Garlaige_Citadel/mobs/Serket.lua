@@ -21,12 +21,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    if xi.settings.main.ENABLE_ABYSSEA == 1 then
-        xi.mob.nmTODPersist(mob, math.random(3600, 43200)) -- 1 to 12 hours
-    else
-        xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
-    end
+    xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity
