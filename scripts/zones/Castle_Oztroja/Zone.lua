@@ -11,8 +11,11 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    xi.mob.nmTODPersistCache(zone, ID.mob.TZEE_XICU_THE_MANIFEST)
-    xi.mob.nmTODPersistCache(zone, ID.mob.YAGUDO_AVATAR)
+    if GetServerVariable("[PH]Tzee_Xicu_the_Manifest") == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.TZEE_XICU_THE_MANIFEST)
+    else
+        xi.mob.nmTODPersistCache(zone, ID.mob.YAGUDO_AVATAR)
+    end
 
     oztrojaGlobal.pickNewCombo() -- update combination for brass door on floor 2
     oztrojaGlobal.pickNewPassword() -- update password for trap door on floor 4
