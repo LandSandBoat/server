@@ -12,15 +12,15 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.UDMGPHYS,-5000)
-    mob:addMod(xi.mod.UDMGRANGE,-5000)
-    mob:addMod(xi.mod.UDMGMAGIC,-5000)
-    mob:addMod(xi.mod.UDMGBREATH,-5000)
+    mob:addMod(xi.mod.UDMGPHYS, -5000)
+    mob:addMod(xi.mod.UDMGRANGE, -5000)
+    mob:addMod(xi.mod.UDMGMAGIC, -5000)
+    mob:addMod(xi.mod.UDMGBREATH, -5000)
 
     -- May spawn in a party with two other Quadav
     if math.random(3) == 2 then
-        GetMobByID(ID.mob.BOWHO_GUARD1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.BOWHO_GUARD2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.BOWHO_GUARD1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.BOWHO_GUARD2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.BOWHO_GUARD1)
         SpawnMob(ID.mob.BOWHO_GUARD2)
     end
@@ -29,7 +29,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        GetMobByID(mobId+i):updateEnmity(target)
+        GetMobByID(mobId + i):updateEnmity(target)
     end
 end
 
@@ -60,8 +60,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
+    xi.mob.nmTODPersist(mob, math.random(84, 96) * 900) -- 21 to 24 hours in 15 minute windows
     DespawnMob(ID.mob.BOWHO_GUARD1)
     DespawnMob(ID.mob.BOWHO_GUARD2)
 end

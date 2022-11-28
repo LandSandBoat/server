@@ -16,8 +16,8 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.BOWHO_WARMONGER)
-    GetMobByID(ID.mob.BOWHO_WARMONGER):setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BOWHO_WARMONGER)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
