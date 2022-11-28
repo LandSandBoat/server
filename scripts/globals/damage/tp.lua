@@ -7,7 +7,7 @@ xi.damage.tp = {}
 -----------------------------------
 
 -- returns a single melee hit's TP return
-function xi.damage.tp.getSingleMeleeHitTPReturn(attacker, defender, isZanshin)
+xi.damage.tp.getSingleMeleeHitTPReturn = function(attacker, defender, isZanshin)
     isZanshin = isZanshin or false -- optional input, defaults to false.
 
     local delay        = attacker:getBaseDelay()
@@ -23,7 +23,7 @@ function xi.damage.tp.getSingleMeleeHitTPReturn(attacker, defender, isZanshin)
     return math.floor(tpReturn * storeTPModifier)
 end
 
-function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
+xi.damage.tp.getModifiedDelayAndCanZanshin = function(attacker, delay)
     local modifiedDelay = delay
     local canZanshin    = false
 
@@ -56,7 +56,7 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
 end
 
 -- returns a single melee hit's TP return
-function xi.damage.tp.getSingleRangedHitTPReturn(attacker, defender)
+xi.damage.tp.getSingleRangedHitTPReturn = function(attacker, defender)
     local delay = attacker:getBaseRangedDelay() -- there do not appear to be any delay modifiers for ranged attacks, snapshot does not seem to effect this
 
     if delay > 0 then
@@ -72,7 +72,7 @@ end
 -- Gainee is the target who is going to gain the TP.
 -- For instance, if a player attacks a mob, the mob uses the mob formula when gaining TP from the returned hit.
 -- This appears to be a measure to not buff mobs when players were buffed with the new TP gain formula.
-function xi.damage.tp.calculateTPReturn(gainee, delay)
+xi.damage.tp.calculateTPReturn = function(gainee, delay)
     if gainee and gainee:getObjType() ~= xi.objType.MOB then -- Pets and PCs have been observed to use this formula
         if delay <= 180 then
             return math.floor(61 + ((delay - 180) * 63 / 360))
@@ -103,7 +103,7 @@ function xi.damage.tp.calculateTPReturn(gainee, delay)
 end
 
 -- TODO: does Ikishoten factor into this as a bonus to baseTPGain if it procs on the hit? Needs verification.
-function xi.damage.tp.calculateTPGainOnPhysicalDamage(totalDamage, delay, attacker, defender)
+xi.damage.tp.calculateTPGainOnPhysicalDamage = function(totalDamage, delay, attacker, defender)
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     if totalDamage > 0 and defender and attacker then
         local attackOutput       = xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
@@ -136,7 +136,7 @@ function xi.damage.tp.calculateTPGainOnPhysicalDamage(totalDamage, delay, attack
     return 0
 end
 
-function xi.damage.tp.calculateTPGainOnMagicalDamage(totalDamage, attacker, defender)
+xi.damage.tp.calculateTPGainOnMagicalDamage = function(totalDamage, attacker, defender)
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     if totalDamage > 0 and defender and attacker then
         local dAGI               = attacker:getMod(xi.mod.AGI) - defender:getMod(xi.mod.AGI)
