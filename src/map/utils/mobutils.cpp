@@ -535,9 +535,11 @@ namespace mobutils
         }
 
         PMob->addModifier(Mod::DEF, GetDefense(PMob, PMob->defRank));
-        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank)); // Base Evasion for all mobs
-        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank)); // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank)); // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank));  // Base Evasion for all mobs
+        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));  // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));  // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
 
         // Only mobs in dynamis can parry
         if (PMob->isInDynamis())

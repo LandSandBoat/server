@@ -73,7 +73,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS) then
-                        return quest:keyItem(player, xi.ki.TATTERED_MISSION_ORDERS)
+                        return quest:keyItem(xi.ki.TATTERED_MISSION_ORDERS)
                     end
                 end,
             },

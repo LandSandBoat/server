@@ -1540,6 +1540,11 @@ namespace battleutils
 
             acc = std::max({ archery_acc, marksmanship_acc, throwing_acc });
         }
+        else
+        {
+            acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED, distance(PAttacker->loc.p, PDefender->loc.p));
+        }
+
         // Check for Yonin evasion bonus while in front of target
         if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
         {

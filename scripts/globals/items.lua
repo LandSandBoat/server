@@ -639,6 +639,7 @@ xi.items =
     MOLYBDENUM_INGOT                = 1711,
     SNOW_LILY                       = 1725,
     EGRET_FISHING_ROD               = 1726,
+    GARHADA_TEAK_LUMBER             = 1727,
     SHAKUDO_INGOT                   = 1738,
     SQUARE_OF_BALLON_CLOTH          = 1739,
     IOLITE                          = 1740,

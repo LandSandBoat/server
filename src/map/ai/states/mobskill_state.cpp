@@ -88,6 +88,15 @@ void CMobSkillState::SpendCost()
         m_spentTP            = 1000;
         m_PEntity->health.tp = (m_PEntity->health.tp > 1000 ? m_PEntity->health.tp - 1000 : 0);
     }
+    else if (m_PEntity->m_defaultAttack && m_PEntity->m_defaultAttack == m_PSkill->getID())
+    {
+        m_spentTP      = 0;
+        auto PAttacker = static_cast<CBattleEntity*>(m_PEntity);
+        auto baseTp    = battleutils::CalculateBaseTP((int16)(PAttacker->GetWeaponDelay(true) * 60.0f / 1000.0f / 1.f));
+
+        PAttacker->addTP(
+            (int16)(1.f * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP)))))));
+    }
     else if (!m_PSkill->isTpFreeSkill())
     {
         if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))

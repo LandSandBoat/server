@@ -2324,6 +2324,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,464); -- psychomancy
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,471); -- mind wall
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,487); -- transmorgification
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,540); -- tremorous tread
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 504, 605); -- aerial wheel
+-- INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 504, 606); -- shoulder attack
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 504, 607); -- slam dunk
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 504, 608); -- arm block
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 504, 609); -- battle dance
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 504, 790); -- shoulder slam
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,334);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,335);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,336);

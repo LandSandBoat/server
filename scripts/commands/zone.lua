@@ -350,11 +350,12 @@ function onTrigger(player, bytes)
         end
     end
 
-    -- Confirm that the zone is active
-    if not IsZoneActive(zone) then
-        error(player, "Zone currently disabled.")
-        return
-    end
+    -- commenting out until fixed
+    -- -- Confirm that the zone is active
+    -- if not IsZoneActive(zone) then
+    --     error(player, "Zone currently disabled.")
+    --     return
+    -- end
 
     -- send player to destination
     player:setPos(x, y, z, rot, zone)

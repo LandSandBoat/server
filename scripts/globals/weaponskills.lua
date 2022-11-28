@@ -229,7 +229,7 @@ xi.weaponskills.cRangedRatio = function(attacker, defender, params, ignoredDef, 
     return { pdif, pdifcrit }
 end
 
-local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, calcParams)
+xi.weaponskills.getRangedHitRate = function(attacker, target, capHitRate, bonus, wsParams, calcParams)
     local accVarryTP = 0
 
     if bonus == nil then
@@ -266,7 +266,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
         ratio = xi.weaponskills.cRangedRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp)
         pdif = ratio[1]
         pdifCrit =  ratio[2]
-        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
+        calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
     else
         if isSubAttack and calcParams.extraOffhandHit and calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND then
             ratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
