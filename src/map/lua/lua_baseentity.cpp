@@ -13459,6 +13459,12 @@ void CLuaBaseEntity::setSpellList(uint16 spellList)
 
 void CLuaBaseEntity::setAutoAttackEnabled(bool state)
 {
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("CLuaBaseEntity::setAutoAttackEnabled invalid entity (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
+
     m_PBaseEntity->PAI->GetController()->SetAutoAttackEnabled(state);
 }
 
@@ -13471,6 +13477,12 @@ void CLuaBaseEntity::setAutoAttackEnabled(bool state)
 
 void CLuaBaseEntity::setMagicCastingEnabled(bool state)
 {
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("CLuaBaseEntity::setMagicCastingEnabled invalid entity (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
+
     m_PBaseEntity->PAI->GetController()->SetMagicCastingEnabled(state);
 }
 
@@ -13483,6 +13495,12 @@ void CLuaBaseEntity::setMagicCastingEnabled(bool state)
 
 void CLuaBaseEntity::setMobAbilityEnabled(bool state)
 {
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("CLuaBaseEntity::setMobAbilityEnabled invalid entity (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
+
     m_PBaseEntity->PAI->GetController()->SetWeaponSkillEnabled(state);
 }
 
