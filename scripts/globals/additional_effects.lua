@@ -229,7 +229,8 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
-        if defender:isUndead() then
+        -- Upyri: ID 4105
+        if defender:isUndead() or defender:getPool() == 4105 then
             return 0
         end
 

@@ -9864,7 +9864,6 @@ INSERT INTO `mob_droplist` VALUES (1200,0,0,1000,959,@RARE);  -- Dahlia (Rare, 5
 -- ZoneID: 121 - Goobbue Gardener
 INSERT INTO `mob_droplist` VALUES (1201,0,0,1000,919,@VCOMMON);   -- Clump Of Boyahda Moss (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1201,0,0,1000,1237,@UNCOMMON); -- Bag Of Tree Cuttings (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1201,0,0,1000,1181,@SRARE);    -- Clump Of Goobbue Humus (Super Rare, .5%)
 
 -- ZoneID: 121 - Goobbue Parasite
 -- ZoneID: 212 - Labyrinth Leech
@@ -18385,8 +18384,6 @@ INSERT INTO `mob_droplist` VALUES (2331,0,0,1000,2505,60);  -- Heavy Quadav Back
 INSERT INTO `mob_droplist` VALUES (2332,0,0,1000,1697,@UNCOMMON); -- Piece Of Spruce Lumber (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2332,0,0,1000,1877,@UNCOMMON); -- Fomor Codex (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2332,0,0,1000,1620,@RARE);     -- Taurus Horn (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2332,2,0,1000,886,0);          -- Demon Skull (Steal)
-INSERT INTO `mob_droplist` VALUES (2332,2,0,1000,902,0);          -- Demon Horn (Steal)
 
 -- ZoneID:  28 - Stegotaur
 INSERT INTO `mob_droplist` VALUES (2333,0,0,1000,1877,@UNCOMMON); -- Fomor Codex (Uncommon, 10%)
