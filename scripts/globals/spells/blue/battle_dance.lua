@@ -25,11 +25,12 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
     params.scattr = SC_IMPACTION
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
     params.multiplier = 2.0
     params.tp150 = 2.0
@@ -43,13 +44,16 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if target:hasStatusEffect(xi.effect.DEX_DOWN) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    else
-        target:addStatusEffect(xi.effect.DEX_DOWN, 15, 0, 20)
+    -- Additional effect: DEX down (-15 for 20s) -- Should be longer and decrease in intensity over time, this is a compromise
+    if damage > 0 and not target:hasStatusEffect(xi.effect.DEX_DOWN) then
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            target:addStatusEffect(xi.effect.DEX_DOWN, 15, 0, 20)
+        end
     end
 
     return damage

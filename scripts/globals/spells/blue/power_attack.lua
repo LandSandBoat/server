@@ -24,17 +24,16 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_CRITICAL
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
     params.scattr = SC_REVERBERATION
     params.numhits = 1
     params.multiplier = 1.125
-    params.tp150 = 0.5
-    params.tp300 = 0.7
-    params.azuretp = 0.8
-    params.duppercap = 11 -- guesstimated crit %s for TP
+    params.tp150 = 1.125
+    params.tp300 = 1.125
+    params.azuretp = 1.125
+    params.duppercap = 11
     params.str_wsc = 0.0
     params.dex_wsc = 0.0
     params.vit_wsc = 0.3

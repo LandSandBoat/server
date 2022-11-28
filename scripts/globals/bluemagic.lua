@@ -192,6 +192,10 @@ local function BlueGetHitRate(attacker, target, capHitRate)
             hitrate = 0.2
         end
     end
+<<<<<<< refs/remotes/upstream/base
+=======
+    attacker:PrintToPlayer(string.format("Hitrate %s", hitrate))
+>>>>>>> Temp save
 
     return hitrate
 end
@@ -327,7 +331,6 @@ function BluePhysicalSpell(caster, target, spell, params)
 end
 
 -- Blue Magical type spells
-
 function BlueMagicalSpell(caster, target, spell, params, statMod)
     local D = caster:getMainLvl() + 2
 
@@ -462,7 +465,54 @@ function getBlueEffectDuration(caster, resist, effect)
         duration = math.random(60, 180) + resist * 15 -- 60- 180 -- Needs confirmation but capped max duration based on White Magic Spell Silence
     elseif effect == xi.effect.POISON then
         duration = math.random(20, 30) + resist * 9 -- 20-30 -- based on magic spell poison
+    else
+        duration = math.random(10,30) + resist * 8
     end
 
     return duration
 end
+
+--[[
+
++-------+
+| NOTES |
++-------+
+
+_____________
+GENERAL NOTES
+
+- Spell values (multiplier, TP, D, WSC, TP etc) are gotten from:
+    - https://www.bg-wiki.com/ffxi/Calculating_Blue_Magic_Damage
+    - https://ffxiclopedia.fandom.com/wiki/Calculating_Blue_Magic_Damage
+    - BG-wiki spell pages
+    - Blue Gartr threads with data
+    - When values were absent, spell values were decided based on Blue Gartr threads and Wiki page discussions.
+
+- Assumed INT as the main magic accuracy modifier for physical spells' additional effects (when no data was found).
+
+____________________
+SPELL-SPECIFIC NOTES
+
+- Head Butt, Frypan and Tail Slap Stun will overwrite other Stun. Blitzstrahl/Temporal Shift won't.
+
+---------------------------
+changes in blu_fixes branch
+---------------------------
+
+- Updated all spell scripts:
+    - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which would result in lower damage when used with CA.
+    - Updated WSC values.
+    - Updated additional effect values.
+        - All physical spells now need to hit before the AE can kick in.
+        - All physical spells with AE get a resistance check for the AE.
+        - Some spells had 0 duration.
+        - TODO: additional effect gained message.
+
+- Physical Blue Magic spell calculations changes:
+    -
+    - TODO: missed spells should not be 0 dmg, but there's currently no way to make spells "miss"
+
+
+* Further research was done, digging in BLU threads such as https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=5832112&viewfull=1#post5832112.
+
+]]

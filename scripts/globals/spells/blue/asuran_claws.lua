@@ -24,19 +24,20 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    -- Data from https://www.bg-wiki.com/ffxi/Asuran_Claws
+    -- D seems low, but the spell was never that great, so a low D is a good way of keeping overall damage down.
         params.tpmod = TPMOD_ACC
         params.attackType = xi.attackType.PHYSICAL
         params.damageType = xi.damageType.HTH
         params.scattr = SC_IMPACTION
         params.numhits = 6
-        params.multiplier = 1.0
-        params.tp150 = 1.05
-        params.tp300 = 1.1
-        params.azuretp = 1.2
+        params.multiplier = 0.625
+        params.tp150 = 0.625
+        params.tp300 = 0.625
+        params.azuretp = 0.625
         params.duppercap = 21
-        params.str_wsc = 0.3
-        params.dex_wsc = 0.0
+        params.str_wsc = 0.1
+        params.dex_wsc = 0.1
         params.vit_wsc = 0.0
         params.agi_wsc = 0.0
         params.int_wsc = 0.0
