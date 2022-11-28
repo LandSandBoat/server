@@ -11,10 +11,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SPECIAL_COOL, 30) -- Makki Chebukki uses ranged attack every 30 seconds
     mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
-    mob:addMod(xi.mod.UDMGPHYS, -100)
-    mob:addMod(xi.mod.UDMGMAGIC, -100)
-    mob:addMod(xi.mod.UDMGRANGE, -100)
-    mob:addMod(xi.mod.UDMGBREATH, -100)
+    mob:setMod(xi.mod.DMG, -10000)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setLocalVar("makki", 1)
 end
