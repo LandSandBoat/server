@@ -24,15 +24,12 @@ quest.sections = {}
 
 quest.sections[1] = {}
 quest.sections[1].check = function(player, status, vars)
-    local bedPlacedTime = quest:getVar(player, 'bedPlacedTime')
-
     return status == QUEST_AVAILABLE and
         xi.moghouse.isInMogHouseInHomeNation(player) and
         player:getFameLevel(player:getNation()) >= 3 and
         not quest:getMustZone(player) and
         quest:getLocalVar(player, 'questSeen') == 0 and
-        bedPlacedTime ~= 0 and
-        os.time() > bedPlacedTime + 60
+        os.time() > quest:getVar(player, 'bedPlacedTime')
 end
 
 local questAvailable =
@@ -99,7 +96,7 @@ local questAccepted =
         [30007] = function(player, csid, option, npc)
             player:confirmTrade()
             quest:setVar(player, 'Prog', 1)
-            quest:setVar(player, 'Timer', os.time() + 60)
+            quest:setVar(player, 'Timer', getMidnight())
         end,
 
         [30008] = function(player, csid, option, npc)
