@@ -876,6 +876,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     end
 
     calcParams.finalDmg = dmg
+    attack.damageType = xi.attackType.MAGICAL
 
     if dmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
@@ -931,7 +932,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     elseif attack.attackType == xi.attackType.RANGED then
         finaldmg = xi.damage.applyDamageTaken(defender, finaldmg, xi.attackType.RANGED)
     else
-        finaldmg = xi.damage.applyDamageTaken(defender, finaldmg, xi.attackType.PHYSICAL)
+        finaldmg = xi.damage.applyDamageTaken(defender, finaldmg, utils.ternary(attack.damageType ~= nil, attack.damageType, xi.attackType.PHYSICAL))
     end
 
     local targetTPMult = wsParams.targetTPMult or 1
