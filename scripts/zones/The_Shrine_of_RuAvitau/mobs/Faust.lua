@@ -36,7 +36,7 @@ entity.onMobRoam = function(mob)
             end
         end
     else
-        mob:pathTo(spawn.x,spawn.y,spawn.z)
+        mob:pathTo(spawn.x, spawn.y, spawn.z)
     end
 end
 
