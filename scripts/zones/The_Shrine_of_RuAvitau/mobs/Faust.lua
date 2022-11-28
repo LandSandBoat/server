@@ -21,13 +21,13 @@ end
 
 entity.onMobRoam = function(mob)
     local spawn = mob:getSpawnPos()
-    local distance = mob:checkDistance(spawn.x,spawn.y,spawn.z)
+    local distance = mob:checkDistance(spawn.x, spawn.y, spawn.z)
 
     -- Faust doesn't move from spawn point and rotates every 4-10 seconds
     if distance < 3 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         if os.time() > mob:getLocalVar("moveTime") then
-            local newTime = math.random(3,10)
+            local newTime = math.random(3, 10)
             mob:setLocalVar("moveTime", os.time() + newTime)
             if mob:getRotPos() == 255 then
                 mob:setRotation(191)
@@ -49,7 +49,7 @@ end
 
 entity.onMobDisengage = function(mob)
     local spawn = mob:getSpawnPos()
-    mob:pathTo(spawn.x,spawn.y,spawn.z)
+    mob:pathTo(spawn.x, spawn.y, spawn.z)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
