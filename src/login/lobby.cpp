@@ -331,7 +331,7 @@ int32 lobbydata_parse(int32 fd)
                     gmlevel  = (uint16)sql->GetUIntData(4);
 
                     // new char only (first login from char create)
-                    if (PrevZone == 0)
+                    if (sd->justCreatedNewChar)
                     {
                         key3[16] += 6;
                     }
@@ -749,6 +749,7 @@ int32 lobbyview_parse(int32 fd)
                     return -1;
                 }
 
+                sd->justCreatedNewChar = true;
                 ShowInfo(fmt::format("lobbyview_parse: char <{}> was successfully created", sd->charname));
                 /////////////////////////
                 LOBBY_ACTION_DONE(ReservePacket);

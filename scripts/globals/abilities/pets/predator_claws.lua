@@ -1,5 +1,5 @@
 -----------------------------------
--- Predator Claws M=10 subsequent hits M=2
+-- Predator Claws
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -12,18 +12,21 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local numhits = 3
-    local accmod = 1
-    local dmgmod = 10
-    local dmgmodsubsequent = 3
-    local wSC = (pet:getStat(xi.mod.DEX) * 0.30)
+    local params = {}
+    params.numHits = 3
+    params.ftp000 = 10 params.ftp150 = 10 params.ftp300 = 10
+    params.str_wsc = 0.0 params.dex_wsc = 0.3 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
+    params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
+    params.melee = true
 
-    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3, wSC)
-    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, numhits)
+    local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params)
 
-    target:takeDamage(damage, pet, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, damage.hitslanded)
+    target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
-    return damage
+    return totaldamage
 end
 
 return abilityObject

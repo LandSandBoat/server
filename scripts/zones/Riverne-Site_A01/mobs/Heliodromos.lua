@@ -23,12 +23,19 @@ entity.onMobRoam = function(mob)
                 DespawnMob(i)
             end
         end
+
         -- allow placeholders to respawn
         for i = ID.mob.HELIODROMOS_PH_OFFSET, ID.mob.HELIODROMOS_PH_OFFSET + 2 do
             local ph = GetMobByID(i)
             DisallowRespawn(i, false)
             ph:setRespawnTime(GetMobRespawnTime(ph:getID()))
         end
+    end
+end
+
+entity.onMobEngaged = function(mob, target)
+    for i = 1, 3 do
+        GetMobByID(ID.mob.HELIODROMOS[i]):updateEnmity(target)
     end
 end
 

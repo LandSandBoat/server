@@ -4,7 +4,7 @@ local tenzenFunctions = {}
 
 tenzenFunctions.firstMeikyo = function(mob)
     mob:setAnimationSub(0)
-    mob:useMobAbility(730)
+    mob:useMobAbility(730) -- meikyo_shisui
     mob:setLocalVar("meikyo", 1)
     mob:setLocalVar("step", 1)
     mob:setLocalVar("twohourtrigger", 1) -- prevent tenzen from using second meikyo while first one is active
@@ -12,7 +12,7 @@ tenzenFunctions.firstMeikyo = function(mob)
 end
 
 tenzenFunctions.secondMeikyo = function(mob)
-    mob:useMobAbility(730)
+    mob:useMobAbility(730) -- meikyo_shisui
     mob:setLocalVar("meikyo", 1)
     mob:setLocalVar("step", 1)
     mob:setLocalVar("twohourtrigger", 3)
@@ -21,7 +21,7 @@ end
 tenzenFunctions.wsSequence = function(mob)
     local step = mob:getLocalVar("step")
     local meikyo = mob:getLocalVar("meikyo")
-    local battlefield = mob:getBattlefield()
+
     if
         step == 1 and
         meikyo == 1
@@ -36,21 +36,21 @@ tenzenFunctions.wsSequence = function(mob)
         mob:setLocalVar("step", 2)
     elseif step == 2 then
         mob:timer(250, function(mobArg)
-            mob:useMobAbility(1390) -- Torimai
-            mob:setLocalVar("step", 3)
+            mobArg:useMobAbility(1390) -- Torimai
+            mobArg:setLocalVar("step", 3)
         end)
     elseif step == 3 then
         mob:timer(250, function(mobArg)
-            mob:useMobAbility(1391) -- Kazakiri
-            mob:setLocalVar("step", 4)
+            mobArg:useMobAbility(1391) -- Kazakiri
+            mobArg:setLocalVar("step", 4)
         end)
     elseif step == 4 then
         if mob:getLocalVar("skillchain") > 75 then -- 25% chance to trigger skillchain
             mob:timer(250, function(mobArg)
-                if mob:getLocalVar("skillchain") > 75 then
-                    mob:useMobAbility(1395) -- Tsukikage
-                    mob:setLocalVar("step", 5)
-                    battlefield:setLocalVar("fireworks", 1)
+                if mobArg:getLocalVar("skillchain") > 75 then
+                    mobArg:useMobAbility(1395) -- Tsukikage
+                    mobArg:setLocalVar("step", 5)
+                    mobArg:getBattlefield():setLocalVar("fireworks", 1)
                 end
             end)
         else
@@ -68,10 +68,10 @@ tenzenFunctions.wsSequence = function(mob)
     elseif step == 5 then
         mob:useMobAbility(1399) -- Cosmic Elucidation
         mob:setLocalVar("step", 6)
-        mob:timer(3000, function(mobArg, target)
-            battlefield:setLocalVar("gameover", battlefield:getRemainingTime()) -- initiate loss condition trigger & record the time remaining
-            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:showText(mob, ID.text.TENZEN_MSG_OFFSET + 1)
+        mob:timer(3000, function(mobArg)
+            mobArg:getBattlefield():setLocalVar("gameover", mobArg:getBattlefield():getRemainingTime()) -- initiate loss condition trigger & record the time remaining
+            mobArg:setMobMod(xi.mobMod.NO_MOVE, 1)
+            mobArg:showText(mobArg, ID.text.TENZEN_MSG_OFFSET + 1)
         end)
     end
 end
@@ -92,8 +92,8 @@ tenzenFunctions.formSwap = function(mob)
 
             if mob:getAnimationSub() == 5 then -- need to sheath his great katana before pulling out bow
                 mob:timer(1000, function(mobArg)
-                    mob:setMod(xi.mod.DELAY, 2400) -- attacks more frequently while bow is drawn
-                    mob:setAnimationSub(6)
+                    mobArg:setMod(xi.mod.DELAY, 2400) -- attacks more frequently while bow is drawn
+                    mobArg:setAnimationSub(6)
                 end)
             end
         elseif
@@ -111,6 +111,7 @@ end
 
 tenzenFunctions.riceBall = function(mob, target, busyState)
     local battlefield = mob:getBattlefield()
+
     if
         mob:actionQueueEmpty() and
         not busyState

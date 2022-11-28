@@ -10436,7 +10436,7 @@ INSERT INTO `item_basic` VALUES (13104,0,'royal_squires_collar','ryl.sqr._collar
 INSERT INTO `item_basic` VALUES (13105,0,'temple_knight_army_collar','t.k._army_collar',1,2052,22,0,2932);
 INSERT INTO `item_basic` VALUES (13106,0,'royal_guards_collar','ryl.grd._collar',1,2052,22,0,3400);
 INSERT INTO `item_basic` VALUES (13107,0,'royal_knight_army_collar','r.k._army_collar',1,2052,22,0,2932);
-INSERT INTO `item_basic` VALUES (13108,0,'coral_gorget','coral_gorget',1,2084,22,0,3283);
+INSERT INTO `item_basic` VALUES (13108,0,'coral_gorget','coral_gorget',1,2084,22,0,1591);
 INSERT INTO `item_basic` VALUES (13109,0,'harmonias_torque','harmonias_torque',1,2052,22,0,3459);
 INSERT INTO `item_basic` VALUES (13110,0,'beast_whistle','beast_whistle',1,2052,22,0,814);
 INSERT INTO `item_basic` VALUES (13111,0,'nodowa','nodowa',1,2084,22,0,2783);
@@ -10451,7 +10451,7 @@ INSERT INTO `item_basic` VALUES (13119,0,'tiger_stole','tiger_stole',1,2052,22,0
 INSERT INTO `item_basic` VALUES (13120,0,'clay_amulet','clay_amulet',1,2052,22,0,3200);
 INSERT INTO `item_basic` VALUES (13121,0,'beast_collar','beast_collar',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (13122,0,'miners_pendant','miners_pendant',1,63568,0,1,0);
-INSERT INTO `item_basic` VALUES (13123,0,'mermans_gorget','mermans_gorget',1,2080,22,0,3283);
+INSERT INTO `item_basic` VALUES (13123,0,'mermans_gorget','mermans_gorget',1,2080,22,0,1690);
 INSERT INTO `item_basic` VALUES (13124,0,'nodowa_+1','nodowa_+1',1,2080,22,0,3440);
 INSERT INTO `item_basic` VALUES (13125,0,'torque','torque',1,2084,22,0,2902);
 INSERT INTO `item_basic` VALUES (13126,0,'torque_+1','torque_+1',1,2080,22,0,4251);
@@ -14174,7 +14174,7 @@ INSERT INTO `item_basic` VALUES (16864,0,'brass_spear_+1','brass_spear_+1',1,208
 INSERT INTO `item_basic` VALUES (16865,0,'spear_+1','spear_+1',1,2080,8,0,2827);
 INSERT INTO `item_basic` VALUES (16866,0,'halberd_+1','halberd_+1',1,2080,8,0,1400);
 INSERT INTO `item_basic` VALUES (16867,0,'orc_piercer','orc_piercer',1,2052,8,0,275);
-INSERT INTO `item_basic` VALUES (16868,0,'heavy_halberd','heavy_halberd',1,2052,8,0,4431);
+INSERT INTO `item_basic` VALUES (16868,0,'heavy_halberd','heavy_halberd',1,2052,8,0,10560);
 INSERT INTO `item_basic` VALUES (16869,0,'thundercloud','thundercloud',1,2052,8,0,12487);
 INSERT INTO `item_basic` VALUES (16870,0,'envy_spear','envy_spear',1,34820,8,0,5562);
 INSERT INTO `item_basic` VALUES (16871,0,'kamayari','kamayari',1,2084,8,0,4161);

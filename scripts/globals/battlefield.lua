@@ -508,6 +508,7 @@ function Battlefield:register()
     else
         xi.battlefield.contentsByZone[self.zoneId] = { self }
     end
+
     return self
 end
 
@@ -598,6 +599,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
+
         return
     end
 
@@ -618,6 +620,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
                 end
+
                 return
             end
         end
@@ -679,6 +682,7 @@ function Battlefield.onEntryTrigger(player, npc)
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
+
         return
     end
 
@@ -801,6 +805,7 @@ function Battlefield:onEventFinishWin(player, csid, option)
     if self.title then
         player:addTitle(self.title)
     end
+
     if self.grantXP then
         player:addExp(self.grantXP)
     end
@@ -864,6 +869,7 @@ function Battlefield:onBattlefieldTick(battlefield, tick)
         for _, player in pairs(players) do
             player:messageSpecial(zones[player:getZoneID()].text.TIME_IN_THE_BATTLEFIELD_IS_UP)
         end
+
         battlefield:setStatus(xi.battlefield.status.LOST)
         isExiting = true
     end
@@ -928,6 +934,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
                         if not self.requiredKeyItems.keep then
                             player:delKeyItem(subitem)
                         end
+
                         table.insert(items, subitem)
                     end
                 end
@@ -935,6 +942,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
                 if not self.requiredKeyItems.keep then
                     player:delKeyItem(item)
                 end
+
                 table.insert(items, item)
             end
         end
@@ -1161,6 +1169,7 @@ function xi.battlefield.rejectLevelSyncedParty(player, npc)
             return true
         end
     end
+
     return false
 end
 

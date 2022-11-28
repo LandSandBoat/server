@@ -166,6 +166,9 @@ INSERT INTO `mob_pool_mods` VALUES (1178,163,-100,0); -- DMGMAGIC: -100
 -- Enkidu
 INSERT INTO `mob_pool_mods` VALUES (1234,4,4,1); -- SIGHT_RANGE: 4
 
+-- Eotyrannus
+INSERT INTO `mob_pool_mods` VALUES (1238,252,55,0); -- CHARMRES: 80 (+25)
+
 -- Exoplates
 INSERT INTO `mob_pool_mods` VALUES (1270,39,-1,1); -- SHARE_POS: -1
 
@@ -261,6 +264,9 @@ INSERT INTO `mob_pool_mods` VALUES (2271,64,15,0);  -- COMBAT_SKILLUP_RATE: 15
 INSERT INTO `mob_pool_mods` VALUES (2271,65,15,0);  -- MAGIC_SKILLUP_RATE: 15
 INSERT INTO `mob_pool_mods` VALUES (2271,165,15,0); -- CRITHITRATE: 15
 
+-- Korrigan
+INSERT INTO `mob_pool_mods` VALUES (2282,252,38,0); -- CHARMRES: 38
+
 -- Ladon
 INSERT INTO `mob_pool_mods` VALUES (2314,28,23,1); -- EXP_BONUS: 23
 
@@ -328,6 +334,9 @@ INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0); -- REGEN: 50
 -- Nunyunuwi
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0); -- REGEN: 100
 
+-- Old Opo-Opo
+INSERT INTO `mob_pool_mods` VALUES (2963,252,40,0); -- CHARMRES: 40
+
 -- Omega
 INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
@@ -345,7 +354,8 @@ INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1); -- SHARE_TARGET: 434
 INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50
 
 -- Polar Hare
-INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1);  -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (3168,252,40,0); -- CHARMRES: 20
 
 -- Promathia
 INSERT INTO `mob_pool_mods` VALUES (3205,1,250,0);  -- DEF: 250
@@ -473,7 +483,8 @@ INSERT INTO `mob_pool_mods` VALUES (4189,35,0,1);   -- STANDBACK_COOL: 0
 INSERT INTO `mob_pool_mods` VALUES (4189,244,15,0); -- SILENCERES: 15
 
 -- Variable Hare
-INSERT INTO `mob_pool_mods` VALUES (4204,28,10,1); -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (4204,28,10,1);  -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (4204,252,40,0); -- CHARMRES: 20
 
 -- Verglas Golem
 INSERT INTO `mob_pool_mods` VALUES (4222,4,4,1); -- SIGHT_RANGE: 4

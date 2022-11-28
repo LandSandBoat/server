@@ -35,6 +35,7 @@ entity.onMobFight = function(mob, target)
         if type(mercurialEffects[mercDamage][2]) == "function" then
             mercurialEffects[mercDamage][2](mob)
         end
+
         mob:setLocalVar("MERCURIAL_STRIKE_DAMAGE", 0)
     end
 

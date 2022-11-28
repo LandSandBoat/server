@@ -544,6 +544,11 @@ void CAIContainer::ClearActionQueue()
     ActionQueue.clearQueue();
 }
 
+void CAIContainer::checkQueueImmediately()
+{
+    ActionQueue.checkAction(server_clock::now());
+}
+
 bool CAIContainer::Internal_Despawn(bool instantDespawn)
 {
     if (!IsCurrentState<CDespawnState>() && !IsCurrentState<CRespawnState>())

@@ -49,6 +49,7 @@ xi.maws.addMaw = function(player, maw)
     if not player:hasTeleport(xi.teleport.type.PAST_MAW, maw.bit) then
         player:addTeleport(xi.teleport.type.PAST_MAW, maw.bit)
     end
+
     xi.maws.goToMaw(player, maw)
 end
 
@@ -62,6 +63,7 @@ xi.maws.gotoRandomMaw = function(player)
     else
         maw = xi.maws.pastMaws[xi.zone.SAUROMUGUE_CHAMPAIGN]
     end
+
     xi.maws.addMaw(player, maw)
 end
 

@@ -30,10 +30,6 @@
 #include "common/lua.h"
 extern sol::state lua;
 
-#ifdef TRACY_ENABLE
-#include "TracyLua.hpp"
-#endif
-
 // Sol compilation definitions are in the base CMakeLists file
 // SOL_ALL_SAFETIES_ON = 1
 // SOL_NO_CHECK_NUMBER_PRECISION = 1
@@ -349,8 +345,10 @@ namespace luautils
     bool HasCustomMenuContext(CCharEntity* PChar);
     void HandleCustomMenu(CCharEntity* PChar, std::string selection);
 
-    // Retrive the first itemId that matches a name
+    // Retrieve the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+    // Retrieve item name given an itemId
+    std::string GetItemNameByID(uint16 const& name);
 
     template <typename... Targs>
     int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)

@@ -34,4 +34,5 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.giveKeyItem(player, xi.ki.MAP_OF_PROMYVION_VAHZL)
     end
 end
+
 return entity

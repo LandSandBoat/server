@@ -36,7 +36,7 @@ local function checkMorbolKills(mob)
     return killed
 end
 
-xi.dynamis.valkQMSpawnCheck = function(mob, zone, zoneID)
+xi.dynamis.nightmareFlyCheck = function(mob, zone, zoneID)
     local sjNPC = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC)
     local req = 0
     for _, fly in pairs(flies) do
@@ -45,10 +45,8 @@ xi.dynamis.valkQMSpawnCheck = function(mob, zone, zoneID)
         end
     end
 
-    if req == 3 and sjNPC:getStatus() ~= xi.status.NORMAL then
-        local pos = mob:getPos()
-        sjNPC:setPos(pos.x,pos.y,pos.z,pos.rot) -- Set to death pos
-        sjNPC:setStatus(xi.status.NORMAL) -- Make visible
+    if req == 3 and zone:getLocalVar("SJUnlock") ~= 1 then
+        xi.dynamis.sjQMOnTrigger(sjNPC)
     end
 end
 

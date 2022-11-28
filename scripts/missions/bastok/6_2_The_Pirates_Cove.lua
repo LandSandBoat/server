@@ -171,7 +171,7 @@ mission.sections =
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         npcUtil.tradeHasExactly(trade, xi.items.CHUNK_OF_ADAMAN_ORE) and
-                        npcUtil.popFromQM(player, npc, { ifritsCauldronID.mob.PIRATES_COVE_NMS, ifritsCauldronID.mob.PIRATES_COVE_NMS + 1 }, { claim = false, hide = 900 })
+                        npcUtil.popFromQM(player, npc, { ifritsCauldronID.mob.PIRATES_COVE_NMS, ifritsCauldronID.mob.PIRATES_COVE_NMS + 1 }, { claim = false })
                     then
                         player:confirmTrade()
                         GetMobByID(ifritsCauldronID.mob.PIRATES_COVE_NMS):lookAt(player:getPos()) -- Salamander

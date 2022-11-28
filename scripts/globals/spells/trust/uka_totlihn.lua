@@ -42,6 +42,7 @@ spellObject.onMobSpawn = function(mob)
                 end
             end
         end
+
         -- Always set the boost, even if Mumor wasn't found.
         -- This accounts for her being in the party and giving the boost
         -- and also if she dies and the boost goes away.

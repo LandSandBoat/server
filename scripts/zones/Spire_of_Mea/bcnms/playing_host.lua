@@ -21,7 +21,7 @@ end
 
 battlefield_object.onBattlefieldEnter = function(player, battlefield)
     if player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS) then
-        player:delKeyItem(xi.ki.CENSER_OF_ANTIMUS)
+        player:delKeyItem(xi.ki.CENSER_OF_ANIMUS)
     end
 end
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Northern San d'Oria
+-- Area: Southern San d'Oria
 --  NPC: Taumila
 -- Starts and Finishes Quest: Tiger's Teeth (R)
 -- !pos -140 -5 -8 230
@@ -16,6 +16,8 @@ entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE then
         if trade:hasItemQty(884, 3) and trade:getItemCount() == 3 then
             player:startEvent(572)
+        else
+            player:startEvent(573)
         end
     end
 end
@@ -31,9 +33,9 @@ entity.onTrigger = function(player, npc)
     elseif tigersTeeth == QUEST_ACCEPTED then
         player:startEvent(575)
     elseif tigersTeeth == QUEST_COMPLETED then
-        player:startEvent(573)
-    else
         player:startEvent(571)
+    else
+        player:messageSpecial(ID.text.TAUMILA_DEFAULT)
     end
 end
 

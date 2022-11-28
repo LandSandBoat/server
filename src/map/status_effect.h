@@ -807,9 +807,8 @@ public:
     void addMod(Mod modType, int16 amount);
 
     void SetName(std::string name);
-    void SetName(const int8* name);
 
-    const int8* GetName();
+    const std::string& GetName();
 
     std::vector<CModifier> modList; // список модификаторов
     bool                   deleted{ false };

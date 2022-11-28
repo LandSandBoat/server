@@ -31,6 +31,7 @@ function onTrigger(player, target, rank)
         error(player, "Improper rank passed. Valid Values: 1 to 10")
         return
     end
+
     player:PrintToPlayer(string.format("You set %s's rank to %d", target, rank))
     targ:setRank(rank)
 end

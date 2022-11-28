@@ -762,7 +762,11 @@ function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam,
         dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
         -- dealt zero damage, so shadows took hit
-        if dmg == 0 then
+        if
+            (target:hasStatusEffect(xi.effect.COPY_IMAGE) or
+            target:hasStatusEffect(xi.effect.BLINK)) and
+            dmg == 0
+        then
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
             return shadowbehav
         end
@@ -824,6 +828,7 @@ function takeAbilityDamage(defender, attacker, params, primary, finaldmg, attack
             -- TODO: ability absorb messages (if there are any)
             -- action:messageID(defender:getID(), xi.msg.basic.WHATEVER)
         end
+
         action:param(defender:getID(), finaldmg)
     elseif shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
@@ -831,6 +836,7 @@ function takeAbilityDamage(defender, attacker, params, primary, finaldmg, attack
     else
         -- no abilities that use ability message can miss (the rest use ws messages)
     end
+
     local targetTPMult = params.targetTPMult or 1
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attackType, damageType, slot, primary, tpHitsLanded, (extraHitsLanded * 10) + bonusTP, targetTPMult)
     local enmityEntity = taChar or attacker

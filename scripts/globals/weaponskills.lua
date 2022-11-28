@@ -22,7 +22,7 @@ xi = xi or { }
 xi.weaponskills = xi.weaponskills or { }
 
 -- Obtains alpha, used for working out WSC on legacy servers
-local function getAlpha(level)
+xi.weaponskills.getAlpha = function(level)
     -- Retail has no alpha anymore as of 2014. Weaponskill functions
     -- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
     -- overwriting the results of this function if the server has it set
@@ -216,7 +216,7 @@ local function getMultiAttacks(attacker, target, numHits, wsParams)
     return numHits + bonusHits
 end
 
-local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
+xi.weaponskills.cRangedRatio = function(attacker, defender, params, ignoredDef, tp)
     local atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
 
     if ignoredDef == nil then
@@ -229,7 +229,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     return { pdif, pdifcrit }
 end
 
-local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams, calcParams)
+xi.weaponskills.getRangedHitRate = function(attacker, target, capHitRate, bonus, wsParams, calcParams)
     local accVarryTP = 0
 
     if bonus == nil then
@@ -263,10 +263,10 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
     end
 
     if isRanged then
-        ratio = cRangedRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp)
+        ratio = xi.weaponskills.cRangedRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp)
         pdif = ratio[1]
         pdifCrit =  ratio[2]
-        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
+        calcParams.hitRate = xi.weaponskills.getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
     else
         if isSubAttack and calcParams.extraOffhandHit and calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND then
             ratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
@@ -410,6 +410,7 @@ local function calculateDEXvsAGICritRate(attacker, target)
     else
         nativecrit = 0.15 -- caps only apply to base rate, not merits and mods
     end
+
     return nativecrit
 end
 
@@ -433,7 +434,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
-            calcParams.alpha = getAlpha(attacker:getMainLvl())
+            calcParams.alpha = xi.weaponskills.getAlpha(attacker:getMainLvl())
         end
     end
 
@@ -455,7 +456,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local mnd = math.floor(attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc)
     local chr = math.floor(attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc)
 
-    local wsMods = calcParams.fSTR + (math.floor(str + dex + vit + agi + int + mnd + chr) * calcParams.alpha)
+    local wsMods = calcParams.fSTR + math.floor(math.floor(str + dex + vit + agi + int + mnd + chr) * calcParams.alpha)
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
 
     if wsParams.hybridWS then
@@ -720,7 +721,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
 
-    local ratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
+    local ratio = xi.weaponskills.cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
     local pdif = ratio[1]
     local pdifCrit = ratio[2]
 
@@ -909,6 +910,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
                 action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
             end
         end
+
         action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
@@ -919,6 +921,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         else
             action:messageID(defender:getID(), xi.msg.basic.EVADES)
         end
+
         action:reaction(defender:getID(), xi.reaction.EVADE)
     end
 
@@ -947,6 +950,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             action:param(defender:getID(), math.abs(finaldmg))
         end
     end
+
     local enmityEntity = wsResults.taChar or attacker
 
     if wsParams.overrideCE and wsParams.overrideVE then
@@ -1038,19 +1042,19 @@ xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-local function fTPMob(tp, ftp1, ftp2, ftp3)
-    if (tp < 1000) then
-        tp = 1000
-    end
+-- local function fTPMob(tp, ftp1, ftp2, ftp3)
+--     if (tp < 1000) then
+--         tp = 1000
+--     end
 
-    if (tp >= 1000 and tp < 1500) then
-        return ftp1 + ( ((ftp2 - ftp1 ) / 500) * (tp - 1000) )
-    elseif (tp >= 1500 and tp <= 3000) then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500) )
-    end
-    return 1 -- no ftp mod
-end
+--     if (tp >= 1000 and tp < 1500) then
+--         return ftp1 + ( ((ftp2 - ftp1 ) / 500) * (tp - 1000) )
+--     elseif (tp >= 1500 and tp <= 3000) then
+--         -- generate a straight line between ftp2 and ftp3 and find point @ tp
+--         return ftp2 + ( ((ftp3 - ftp2) / 1500) * (tp - 1500) )
+--     end
+--     return 1 -- no ftp mod
+-- end
 
 xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignore1, ignore2, ignore3)
     if tp >= 1000 and tp < 2000 then
@@ -1074,8 +1078,8 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local atkmulti = 0
 
     if params.atk150 ~= nil then -- Use mob fTP
-        atkmulti = fTPMob(tp, params.atk000, params.atk150, params.atk300)
-    else -- Use player fTP
+        atkmulti = 1 -- Temp fix in prep for re-write. Always set multi to 1.
+    else -- Use player fTP to scale the attack modifier
         atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
     end
 

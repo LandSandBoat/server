@@ -100,6 +100,7 @@ oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option)
         end
     end
 end
+
 -----------------------------------
 -- Battle 3: Ultima
 -----------------------------------

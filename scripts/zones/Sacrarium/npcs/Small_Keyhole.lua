@@ -18,9 +18,12 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1659) then
+    if npcUtil.tradeHas(trade, xi.items.CORAL_CREST_KEY) then
         if npc:getLocalVar("canTradeSecondKey") == 0 then
             npc:setLocalVar("canTradeSecondKey", 1)
+            npc:setLocalVar("time", os.time())
+            -- Opens lock visually to indicate to other players when to trade next key
+            GetNPCByID(ID.npc.SMALL_KEYHOLE - 2):openDoor(9)
             player:startEvent(100)
         else
             player:messageSpecial(ID.text.CANNOT_TRADE_NOW)
@@ -33,9 +36,11 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        GetNPCByID(ID.npc.SMALL_KEYHOLE):setLocalVar("canTradeSecondKey", 0)
-        player:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, 1659)
-        player:confirmTrade()
+        player:timer(5000, function(playerArg)
+            GetNPCByID(ID.npc.SMALL_KEYHOLE):setLocalVar("canTradeSecondKey", 0)
+            playerArg:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, xi.items.CORAL_CREST_KEY)
+            playerArg:confirmTrade()
+        end)
     end
 end
 

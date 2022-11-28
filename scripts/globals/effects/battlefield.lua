@@ -24,6 +24,7 @@ effectObject.onEffectLose = function(target, effect)
         pet:delStatusEffect(xi.effect.BATTLEFIELD)
         pet:leaveBattlefield(1)
     end
+
     target:setLocalVar("[battlefield]area", 0)
 end
 

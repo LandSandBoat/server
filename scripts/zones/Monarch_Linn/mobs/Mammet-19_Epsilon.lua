@@ -56,16 +56,19 @@ entity.onMobFight = function(mob, target)
                 mob:setDelay(2400)
                 mob:setDamage(40)
             end,
+
             [forms.SWORD] = function()
                 mob:setMagicCastingEnabled(false)
                 mob:setDelay(1500)
                 mob:setDamage(40)
             end,
+
             [forms.POLEARM] = function()
                 mob:setMagicCastingEnabled(false)
                 mob:setDelay(3250)
                 mob:setDamage(75)
             end,
+
             [forms.STAFF] = function()
                 mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
                 mob:setMagicCastingEnabled(true)
@@ -84,14 +87,17 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
             local wsChoice = math.random(1, 2)
             return tpMoves[forms.UNARMED][wsChoice]
         end,
+
         [forms.SWORD] = function()
             local wsChoice = math.random(1, 3)
             return tpMoves[forms.SWORD][wsChoice]
         end,
+
         [forms.POLEARM] = function()
             local wsChoice = math.random(1, 3)
             return tpMoves[forms.POLEARM][wsChoice]
         end,
+
         [forms.STAFF] = function()
             local wsChoice = math.random(1, 2)
             return tpMoves[forms.STAFF][wsChoice]

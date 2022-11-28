@@ -74,7 +74,6 @@ CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
-    SpendCost();
 }
 
 CMobSkill* CMobSkillState::GetSkill()
@@ -88,6 +87,15 @@ void CMobSkillState::SpendCost()
     {
         m_spentTP            = 1000;
         m_PEntity->health.tp = (m_PEntity->health.tp > 1000 ? m_PEntity->health.tp - 1000 : 0);
+    }
+    else if (m_PEntity->m_defaultAttack && m_PEntity->m_defaultAttack == m_PSkill->getID())
+    {
+        m_spentTP      = 0;
+        auto PAttacker = static_cast<CBattleEntity*>(m_PEntity);
+        auto baseTp    = battleutils::CalculateBaseTP((int16)(PAttacker->GetWeaponDelay(true) * 60.0f / 1000.0f / 1.f));
+
+        PAttacker->addTP(
+            (int16)(1.f * (baseTp * (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP)))))));
     }
     else if (!m_PSkill->isTpFreeSkill())
     {
@@ -113,6 +121,7 @@ bool CMobSkillState::Update(time_point tick)
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         auto delay   = std::chrono::milliseconds(m_PSkill->getAnimationTime());
         m_finishTime = tick + delay;
+        SpendCost();
         Complete();
     }
     if (IsCompleted() && tick > m_finishTime)

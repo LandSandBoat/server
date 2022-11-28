@@ -133,7 +133,7 @@ namespace zoneutils
         }
     }
 
-    CCharEntity* GetCharByName(int8* name)
+    CCharEntity* GetCharByName(std::string name)
     {
         for (auto PZone : g_PZoneList)
         {

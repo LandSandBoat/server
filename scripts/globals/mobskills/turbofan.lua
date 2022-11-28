@@ -7,7 +7,6 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
-
 -----------------------------------
 local mobskillObject = {}
 
@@ -23,6 +22,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getLocalVar("nuclearWaste") == 1 then
         return 0
     end
+
     return 1
 end
 
@@ -38,7 +38,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if target:hasStatusEffect(xi.effect.ELEMENTALRES_DOWN) then
         target:delStatusEffectSilent(xi.effect.ELEMENTALRES_DOWN)
     end
+
     mob:setLocalVar("nuclearWaste", 0)
     return dmg
 end
+
 return mobskillObject

@@ -35,7 +35,8 @@ entity.onTrigger = function(player, npc)
     -- THE OLD MONUMENT
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_AVAILABLE and
-        level >= xi.settings.main.ADVANCED_JOB_LEVEL
+        level >= xi.settings.main.ADVANCED_JOB_LEVEL and
+        player:getCharVar("TheOldMonument_Event") == 0
     then
         player:startEvent(102)
 

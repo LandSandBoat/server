@@ -5,6 +5,7 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/magic")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -28,12 +29,13 @@ abilityObject.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
     end
+
     if target:getMobMod(xi.mobMod.CHARMABLE) == 0 then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
     end
     local tameBonus   = 0
-    local charmChance = player:getCharmChance(target, false)
+    local charmChance = xi.magic.getCharmChance(player, target, false)
 
     for chance, bonus in pairs(tameSort) do
         if charmChance > chance then
@@ -66,6 +68,7 @@ abilityObject.onUseAbility = function(player, target, ability)
                     end
                 end
             end
+
             ability:setMsg(138) -- The x seems friendlier
             target:disengage()
         else

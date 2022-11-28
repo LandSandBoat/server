@@ -149,9 +149,9 @@ ZONEID CLuaZone::getID()
     return m_pLuaZone->GetID();
 }
 
-std::string CLuaZone::getName()
+const std::string& CLuaZone::getName()
 {
-    return reinterpret_cast<const char*>(m_pLuaZone->GetName());
+    return m_pLuaZone->GetName();
 }
 
 REGION_TYPE CLuaZone::getRegionID()
@@ -245,7 +245,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     if (name.empty())
     {
         ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
-                    PEntity->name.c_str(), (const char*)m_pLuaZone->GetName());
+                    PEntity->GetName(), m_pLuaZone->GetName());
 
         // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
         name = PEntity->name;
@@ -259,7 +259,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     PEntity->isRenamed = true;
 
     auto typeKey    = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
-    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][(const char*)m_pLuaZone->GetName()][typeKey][lookupName];
+    auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][m_pLuaZone->GetName()][typeKey][lookupName];
 
     // Bind any functions that are passed in
     for (auto& [entryKey, entryValue] : table)
@@ -274,11 +274,13 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     {
         PNpc->namevis     = table.get_or<uint8>("namevis", 0);
         PNpc->status      = STATUS_TYPE::NORMAL;
-        PNpc->m_flags     = 0;
         PNpc->name_prefix = 32;
 
         // TODO: Does this even work?
         PNpc->widescan = table.get_or<uint8>("widescan", 1);
+
+        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
+        PNpc->m_flags = flags == 0 ? PNpc->m_flags : flags;
 
         // Ensure that the npc is triggerable if onTrigger is passed in
         auto onTrigger = table["onTrigger"].get_or<sol::function>(sol::lua_nil);
@@ -315,7 +317,10 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
         PMob->m_isAggroable           = table["isAggroable"].get_or(false);
 
-        PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
+        PMob->spawnAnimation = table["specialSpawnAnimation"].get_or(false) ? SPAWN_ANIMATION::SPECIAL : SPAWN_ANIMATION::NORMAL;
+
+        uint32 flags  = table.get_or<uint32>("entityFlags", 0);
+        PMob->m_flags = flags == 0 ? PMob->m_flags : flags;
 
         // Ensure mobs get a function for onMobDeath
         auto onMobDeath = table["onMobDeath"].get<sol::function>();

@@ -159,6 +159,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getLocalVar("state") == 3 then
             mob:useMobAbility(693) -- perfect dodge
         end
+
         mob:setLocalVar("canTwoHour", 1)
     end
 

@@ -14,6 +14,7 @@ itemObject.onItemCheck = function(target)
     if effect ~= nil and effect:getSubType() == 18067 then
         target:delStatusEffect(xi.effect.ACCURACY_BOOST)
     end
+
     return 0
 end
 

@@ -45,6 +45,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
             bonus = pMod * 0.75
         end
     end
+
     amount = amount + math.floor(bonus)
 
     if target:addStatusEffect(xi.effect.STONESKIN, amount, 0, duration, 0, 0, 4) then

@@ -862,129 +862,164 @@ namespace petutils
 
     void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        // Declaration of variables needed for calculation.
-        float raceStat  = 0; // final HP for level based on race.
-        float jobStat   = 0; // final number of HP for the level based on the main job.
-        float sJobStat  = 0; // final number of HP for the level based on the sub job.
-        int32 bonusStat = 0; // bonus number of HP that is added under certain conditions.
-
-        // Table Columns
-        int32 baseValueColumn   = 0; // Column number with base number HP
-        int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
-        int32 scaleOver30Column = 2; // Column number with modifier after level 30
-        int32 scaleOver60Column = 3; // Column number with modifier after level 60
-        int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
-
-        uint8 grade = 5;
-
-        uint8   mlvl = PPet->GetMLevel();
-        uint8   slvl = PPet->GetSLevel() / 2;
-        JOBTYPE mjob = PPet->GetMJob();
-        JOBTYPE sjob = PPet->GetSJob();
-
-        // Calculate level ranges from main job
-        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculation of the condition + 1HP each LVL after level 30
-        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
-        int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // The second calculation mode after level 60
-
-        // Calculate level ranges of sub job
-        int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
-        int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
-
-        // Calculate the bonus amount of HP
-        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // + 2hp at each level after 10
-        int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // + 2hp at each level between 50 to 60 level
-        int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
-
-        // Calculate raceStat jobStat bonusStat sJobStat
-        // Calculate by race
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
-
-        // Main job HP calculation
-        grade   = grade::GetJobGrade(mjob, 0);
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
-
-        // Sub job HP calculation
-        if (PPet->m_PetID != PETID_WYVERN)
-        {
-            grade    = grade::GetJobGrade(sjob, 0);
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
-                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
-        }
-
         // Bonus HP Calculation
-        bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
-        if (PPet->m_PetID == PETID_ODIN || PPet->m_PetID == PETID_ALEXANDER)
+        // bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
+        // if (PPet->m_PetID == PETID_ODIN || PPet->m_PetID == PETID_ALEXANDER)
+        // {
+        //     bonusStat += 6800;
+        // }
+
+        // follows monster formulas but jugs have no subjob
+        JOBTYPE mJob = PPet->GetMJob();
+        JOBTYPE sJob = PPet->GetSJob();
+        uint8   mLvl = PPet->GetMLevel();
+
+        uint8 grade;
+        uint8 gradesj;
+
+        uint32 mobHP = 1; // Set mob HP
+
+        uint32 baseMobHP = 0; // Define base mobs hp
+        uint32 sjHP      = 0; // Define base subjob hp
+
+        grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
+        gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
+
+        uint8 base     = 0; // Column for base hp
+        uint8 jobScale = 1; // Column for job scaling
+        uint8 scaleX   = 2; // Column for modifier scale
+
+        uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
+        uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
+        uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
+        uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
+        uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
+
+        uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
+        uint8 RBIbase  = 1;                        // Column for RBI base
+
+        uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
+
+        uint8 mLvlIf    = (PPet->GetMLevel() > 5 ? 1 : 0);
+        uint8 mLvlIf30  = (PPet->GetMLevel() > 30 ? 1 : 0);
+        uint8 raceScale = 6;
+        uint8 mLvlScale = 0;
+
+        if (mLvl > 0)
         {
-            bonusStat += 6800;
+            baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
         }
-        PPet->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat);
-        PPet->health.hp    = PPet->health.maxhp;
 
-        // MP race calculation.
-        raceStat = 0;
-        jobStat  = 0;
-        sJobStat = 0;
-        grade    = 5;
-
-        // If the main job does not have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
-
-        // For mainjob
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
-
-        // For subjob
-        if (PPet->m_PetID != PETID_WYVERN)
+        // 50+ = 1 hp sjstats
+        if (mLvl > 49)
         {
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
-                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
+            mLvlScale = std::floor(mLvl);
         }
-
-        PPet->health.maxmp = (int16)(raceStat + jobStat + sJobStat);
-        PPet->health.mp    = PPet->health.maxmp;
-
-        // Start of calculation of characteristics (STR to CHR)
-        uint8 counter = 0;
-        for (uint8 StatIndex = 2; StatIndex <= 8; ++StatIndex)
+        // 40-49 = 3/4 hp sjstats
+        else if (mLvl > 39)
         {
-            // calculation by race/family
-            grade    = 5; // Lower baseline stats for race (C? D?)
-            raceStat = floor(grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60);
-            if (mainLevelOver60 > 0)
-            {
-                raceStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-            }
-
-            // calculation by main job
-            grade = grade::GetJobGrade(mjob, StatIndex);
-            if (grade > 0)
-            {
-                jobStat = floor(grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60);
-                if (mainLevelOver60 > 0)
-                {
-                    jobStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-                }
-            }
-
-            // add subjob stats
-            if (slvl > 0)
-            {
-                grade    = grade::GetJobGrade(sjob, StatIndex);
-                sJobStat = floor((grade::GetStatScale(grade, 0) / 2) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1) / 2);
-            }
-            else
-            {
-                sJobStat = 0;
-            }
-
-            // Value output
-            ref<uint16>(&PPet->stats, counter) = (uint16)(raceStat + jobStat + (sJobStat / 2));
-            counter += 2;
+            mLvlScale = std::floor(mLvl * 0.75);
         }
+        // 31-39 = 1/2 hp sjstats
+        else if (mLvl > 30)
+        {
+            mLvlScale = std::floor(mLvl * 0.50);
+        }
+        // 25-30 = 1/4 hp sjstats
+        else if (mLvl > 24)
+        {
+            mLvlScale = std::floor(mLvl * 0.25);
+        }
+        // 1-24 = no hp sjstats
+        else
+        {
+            mLvlScale = 0;
+        }
+
+        sjHP = std::ceil((sjJobScale * (std::max((mLvlScale - 1), 0)) + (0.5 + 0.5 * sjScaleXHP) * (std::max(mLvlScale - 10, 0)) + std::max(mLvlScale - 30, 0) + std::max(mLvlScale - 50, 0) + std::max(mLvlScale - 70, 0)) / 2);
+
+        mobHP = baseMobHP + sjHP;
+
+        PPet->health.maxhp = (int16)(mobHP * PPet->HPscale);
+
+        switch (PPet->GetMJob())
+        {
+            case JOB_WHM:
+            case JOB_BLM:
+            case JOB_DRK:
+                PPet->health.maxmp = (int16)(15.2 * pow(mLvl, 1.1075) * PPet->MPscale);
+                break;
+            default:
+                break;
+        }
+
+        PPet->UpdateHealth();
+        PPet->health.tp = 0;
+        PPet->health.hp = PPet->GetMaxHP();
+        PPet->health.mp = PPet->GetMaxMP();
+
+        uint16 fSTR = GetBaseToRank(PPet->strRank, mLvl);
+        uint16 fDEX = GetBaseToRank(PPet->dexRank, mLvl);
+        uint16 fVIT = GetBaseToRank(PPet->vitRank, mLvl);
+        uint16 fAGI = GetBaseToRank(PPet->agiRank, mLvl);
+        uint16 fINT = GetBaseToRank(PPet->intRank, mLvl);
+        uint16 fMND = GetBaseToRank(PPet->mndRank, mLvl);
+        uint16 fCHR = GetBaseToRank(PPet->chrRank, mLvl);
+
+        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), mLvl);
+        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), mLvl);
+        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), mLvl);
+        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), mLvl);
+        uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), mLvl);
+        uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), mLvl);
+        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), mLvl);
+
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), PPet->GetSLevel());
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), PPet->GetSLevel());
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), PPet->GetSLevel());
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), PPet->GetSLevel());
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), PPet->GetSLevel());
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), PPet->GetSLevel());
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), PPet->GetSLevel());
+
+        if (mLvl >= 45)
+        {
+            sSTR /= 2;
+            sDEX /= 2;
+            sAGI /= 2;
+            sINT /= 2;
+            sMND /= 2;
+            sCHR /= 2;
+            sVIT /= 2;
+        }
+        else if (mLvl > 30)
+        {
+            sSTR /= 3;
+            sDEX /= 3;
+            sAGI /= 3;
+            sINT /= 3;
+            sMND /= 3;
+            sCHR /= 3;
+            sVIT /= 3;
+        }
+        else
+        {
+            sSTR /= 4;
+            sDEX /= 4;
+            sAGI /= 4;
+            sINT /= 4;
+            sMND /= 4;
+            sCHR /= 4;
+            sVIT /= 4;
+        }
+
+        PPet->stats.STR = fSTR + mSTR + sSTR;
+        PPet->stats.DEX = fDEX + mDEX + sDEX;
+        PPet->stats.VIT = fVIT + mVIT + sVIT;
+        PPet->stats.AGI = fAGI + mAGI + sAGI;
+        PPet->stats.INT = fINT + mINT + sINT;
+        PPet->stats.MND = fMND + mMND + sMND;
+        PPet->stats.CHR = fCHR + mCHR + sCHR;
 
         // SMN Job Gift Bonuses, DRG and PUP handled in their respective functions
         if (PMaster->GetMJob() == JOB_SMN)
@@ -1000,10 +1035,7 @@ namespace petutils
         }
 
         // Set damageType for Avatars
-        if (PPet->m_PetID == PETID_CAIT_SITH || PPet->m_PetID == PETID_FENRIR)
-            PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
-        else
-            PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
+        PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
     }
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
@@ -1048,22 +1080,22 @@ namespace petutils
 
         PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
 
-        if (mLvl >= 70)
-        {
-            PPet->setModifier(Mod::MATT, 32);
-        }
-        else if (mLvl >= 50)
-        {
-            PPet->setModifier(Mod::MATT, 28);
-        }
-        else if (mLvl >= 30)
-        {
-            PPet->setModifier(Mod::MATT, 24);
-        }
-        else if (mLvl >= 10)
-        {
-            PPet->setModifier(Mod::MATT, 20);
-        }
+        // if (mLvl >= 70)
+        // {
+        //     PPet->setModifier(Mod::MATT, 32);
+        // }
+        // else if (mLvl >= 50)
+        // {
+        //     PPet->setModifier(Mod::MATT, 28);
+        // }
+        // else if (mLvl >= 30)
+        // {
+        //     PPet->setModifier(Mod::MATT, 24);
+        // }
+        // else if (mLvl >= 10)
+        // {
+        //     PPet->setModifier(Mod::MATT, 20);
+        // }
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
 
         if (petID == PETID_FENRIR)
@@ -1084,32 +1116,22 @@ namespace petutils
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
 
+        PPet->setModifier(Mod::DEF, mobutils::GetDefense(PPet, PPet->defRank));
+        PPet->setModifier(Mod::EVA, mobutils::GetBase(PPet, PPet->evaRank));
+        PPet->setModifier(Mod::ATT, mobutils::GetBase(PPet, PPet->attRank));
+        PPet->setModifier(Mod::ACC, mobutils::GetBase(PPet, PPet->accRank));
+
         // Fenrir has been proven to have an additional 30% ATK
         if (petID == PETID_FENRIR)
         {
-            PPet->addModifier(Mod::ATT, 0.3 * battleutils::GetMaxSkill(PPet->attRank, PPet->GetMLevel()));
+            PPet->addModifier(Mod::ATT, 0.3 * mobutils::GetBase(PPet, PPet->attRank));
         }
 
         // Diabolos has been proven to have an additional 30% DEF
         if (petID == PETID_DIABOLOS)
         {
-            PPet->addModifier(Mod::DEF, 0.3 * battleutils::GetMaxSkill(PPet->defRank, PPet->GetMLevel()));
+            PPet->addModifier(Mod::DEF, 0.3 * mobutils::GetDefense(PPet, PPet->defRank));
         }
-
-        // Add stat modifiers
-        PPet->addModifier(Mod::EVA, battleutils::GetMaxSkill(PPet->evaRank, PPet->GetMLevel()));
-        PPet->addModifier(Mod::ATT, battleutils::GetMaxSkill(PPet->attRank, PPet->GetMLevel()));
-        PPet->addModifier(Mod::DEF, battleutils::GetMaxSkill(PPet->defRank, PPet->GetMLevel()));
-        PPet->addModifier(Mod::ACC, battleutils::GetMaxSkill(PPet->accRank, PPet->GetMLevel()));
-
-        // Likely OOE implementation of pet mods
-        // // Set B+ weapon skill (assumed capped for level derp)
-        // // attack is madly high for avatars (roughly x2)
-        // PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-        // PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-        // // Set E evasion and def
-        // PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-        // PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
 
         // cap all magic skills so they play nice with spell scripts
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)

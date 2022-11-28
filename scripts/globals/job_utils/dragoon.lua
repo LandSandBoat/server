@@ -125,6 +125,7 @@ local function performWSJump(player, target, action, params, abilityID)
         local flyHighJumpRecast = 10
         action:setRecast(flyHighJumpRecast)
     end
+
     return damage, totalHits
 end
 
@@ -137,6 +138,7 @@ local function cutEmpathyEffectTable(validEffects, i, maxCount)
             validEffects[delindex] = validEffects[delindex + 1]
             delindex = delindex + 1
         end
+
         validEffects[delindex + 1] = nil -- could be in the above loop, but unsure if Lua allows copying of nil?
         i = i - 1
     end
@@ -157,6 +159,7 @@ xi.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability,
         if ability:getID() == xi.jobAbility.SPIRIT_SURGE then
             ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
         end
+
         return 0, 0
     end
 end
@@ -354,7 +357,9 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local empathyTotal = player:getMerit(xi.merit.EMPATHY)
 
     -- Add wyvern levels to the tune of 200 per empathy merit
-    xi.job_utils.dragoon.addWyvernExp(player, 200 * empathyTotal)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.job_utils.dragoon.addWyvernExp(player, 200 * empathyTotal)
+    end
 
     if empathyTotal > 0 then
         local validEffects = {}
@@ -473,13 +478,14 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         playerArg:untargetableAndUnactionable(5000)
     end)
 
-    -- If the Dragoon's wyvern is out and alive, tell it to use Super Climb
+    -- If the Dragoon's wyvern is out, alive, and engaged, tell it to use Super Climb
     local wyvern = getWyvern(player)
     if
         wyvern ~= nil and
-        wyvern:getHP() > 0
+        wyvern:getHP() > 0 and
+        wyvern:isEngaged()
     then
-        wyvern:useJobAbility(652, wyvern)
+        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
     end
 end
 
@@ -586,7 +592,7 @@ end
 xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
     local healingBreathTable =
     {
-                                          -- { base, multiplier }
+        --                                   { base, multiplier }
         [xi.jobAbility.HEALING_BREATH]     = {  8, 35 },
         [xi.jobAbility.HEALING_BREATH_II]  = { 24, 48 },
         [xi.jobAbility.HEALING_BREATH_III] = { 42, 55 },
@@ -690,6 +696,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
         if magicBurst > 1 then
             action:messageID(target:getID(), xi.msg.basic.JA_MAGIC_BURST) -- Magic Burst! Target takes X points of damage
         end
+
         target:takeDamage(damage, wyvern, xi.attackType.BREATH, damageType)
     else
         -- absorb

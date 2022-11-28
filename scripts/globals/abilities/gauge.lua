@@ -5,6 +5,7 @@
 -- Recast Time: 0:30
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/magic")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -20,7 +21,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local charmChance = player:getCharmChance(target, false)
+    local charmChance = xi.magic.getCharmChance(player, target, false)
 
     if charmChance >= 75 then
         ability:setMsg(xi.msg.basic.SHOULD_BE_ABLE_CHARM)  -- The <player> should be able to charm <target>.

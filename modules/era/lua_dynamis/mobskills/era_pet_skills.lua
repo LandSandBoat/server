@@ -14,8 +14,25 @@ require("scripts/globals/msg")
 local m = Module:new("era_pet_skills")
 
 xi.dynamis.onFightApocDRG = function(mob, target)
-    local apoc = GetMobByID(mob:getZone():getLocalVar("Apocalyptic Beast"))
-    if os.time() >= apoc:getLocalVar("next2hrTime") then
+    if not mob:getMaster() or mob:getMaster():getHP() == 0 then
+        DespawnMob(mob:getID())
+    end
+
+    if mob:getMaster() and (os.time() >= mob:getMaster():getLocalVar("next2hrTime")) then
+        DespawnMob(mob:getID())
+    end
+end
+
+xi.dynamis.onRoamApocDRG = function(mob)
+    if not mob:getMaster() or mob:getMaster():getHP() == 0 then
+        DespawnMob(mob:getID())
+    end
+
+    if mob:getMaster() and mob:getMaster():getTarget() then
+        mob:updateEnmity(mob:getMaster():getTarget())
+    end
+
+    if mob:getMaster() and (os.time() >= mob:getMaster():getLocalVar("next2hrTime")) then
         DespawnMob(mob:getID())
     end
 end

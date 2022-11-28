@@ -39,5 +39,5 @@ CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PI
 
     ref<uint8>(0x0B) = InviteType;
 
-    memcpy(data + (0x0C), PInviter->GetName(), PInviter->name.size());
+    memcpy(data + (0x0C), PInviter->GetName().c_str(), PInviter->GetName().size());
 }

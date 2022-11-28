@@ -18,6 +18,7 @@ entity.onTrigger = function(player, npc)
     else
         timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
     end
+
     player:startEvent(232, timer, direction)
 end
 

@@ -7,6 +7,7 @@ return {
     ['Hakkuru-Rinkuru'] = { event = 224 },
     ['Josef']           = { event = 45 },
     ['Kohlo-Lakolo']    = { event = 361 },
+    ['Laughing_Lizard'] = { event = 618 },
     ['Melek']           = { event = 42 },
     ['Papo-Hopo']       = { event = 362 },
     ['Pichichi']        = { event = 364 },

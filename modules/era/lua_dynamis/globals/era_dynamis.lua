@@ -712,7 +712,7 @@ local function checkEntryReqs(player, zoneId)
     end
 
     if player:getMainLvl() <= dynamis_min_lvl or
-        (xi.dynamis.entryInfoEra[zoneId].csBit >= 7 and not player:hasCompletedMission(COP, xi.mission.id.cop.DARKNESS_NAMED))
+        (xi.dynamis.entryInfoEra[zoneId].csBit >= 7 and not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED))
     then
         return false
     end
@@ -1179,8 +1179,8 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
     end
 end)
 
-xi.dynamis.sjQMOnTrigger = function(player, npc)
-    local zone = player:getZone()
+xi.dynamis.sjQMOnTrigger = function(npc)
+    local zone = npc:getZone()
     local playersInZone = zone:getPlayers()
     for _, playerEntity in pairs(playersInZone) do
         if  playerEntity:hasStatusEffect(xi.effect.SJ_RESTRICTION) then -- Does player have SJ restriction?

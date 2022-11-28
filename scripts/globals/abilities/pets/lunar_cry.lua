@@ -15,6 +15,8 @@ end
 abilityObject.onPetAbility = function(target, pet, skill)
     local moon = VanadielMoonPhase()
     local buffvalue = 0
+    local skillOverCap = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 2, 0, 120)-- 2 seconds / skill | Duration is capped at 180 total
+
     if moon > 90 then
         buffvalue = 31
     elseif moon > 75 then
@@ -30,10 +32,11 @@ abilityObject.onPetAbility = function(target, pet, skill)
     else
         buffvalue = 1
     end
+
     target:delStatusEffect(xi.effect.ACCURACY_DOWN)
     target:delStatusEffect(xi.effect.EVASION_DOWN)
-    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
-    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, skillOverCap + 60)
+    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, skillOverCap + 60)
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end

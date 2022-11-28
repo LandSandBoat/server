@@ -347,7 +347,7 @@ xi.eraShops.TanikoManiko =
     16768,  309, 3, -- Bronze Zaghnal
     16832,   97, 3, -- Harpoon
     17152,   40, 3, -- Bone Axe
-    17319, 1610, 3, -- Bone Arrow
+    17319,    4, 3, -- Bone Arrow
 }
 
 xi.eraShops.GurunaMaguruna =

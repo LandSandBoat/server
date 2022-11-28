@@ -72,7 +72,7 @@ mission.sections =
                 end,
 
                 [25] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(xi.ki.AROMA_BUG)
+                    npcUtil.giveKeyItem(player, xi.ki.AROMA_BUG)
                 end,
             },
         },

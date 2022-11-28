@@ -18,8 +18,12 @@ abilityObject.onPetAbility = function(target, pet, skill)
     if target:getHP() + base > target:getMaxHP() then
         base = target:getMaxHP() - target:getHP() --cap it
     end
+
     skill:setMsg(xi.msg.basic.SELF_HEAL)
     target:addHP(base)
+
+    pet:updateEnmityFromCure(pet, base)
+
     return base
 end
 

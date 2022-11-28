@@ -459,6 +459,7 @@ local countKeyItems = function(player)
             count = count + 1
         end
     end
+
     return count
 end
 
@@ -468,6 +469,7 @@ local listToKeyItem = function(listID)
             return v[1]
         end
     end
+
     return nil
 end
 
@@ -486,6 +488,7 @@ local buildMask2 = function(player)
             mask = mask + bit.lshift(1, v[2])
         end
     end
+
     return mask
 end
 

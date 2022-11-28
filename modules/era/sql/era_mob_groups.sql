@@ -619,7 +619,7 @@ UPDATE mob_groups SET minLevel = 38, maxLevel = 40 WHERE name = "Gigass_Tiger"  
 -- Cape_Teriggan (Zone 113)
 -- ------------------------------------------------------------
 
-UPDATE mob_groups SET content_tag='WOTG' WHERE name='Killer_Johnny' AND groupid='20' AND zoneid='113';
+UPDATE mob_groups SET content_tag='WOTG' WHERE name='Killer_Jonny' AND groupid='20' AND zoneid='113';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Tegmine' AND groupid='23' AND zoneid='113';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Zmey_Gorynych' AND groupid='24' AND zoneid='113';
 

@@ -15,6 +15,12 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if
+        mob:isInDynamis() and
+        not mob:hasStatusEffect(xi.effect.SILENCE)
+    then
+        return 0
+    end
     -- can only used if not silenced
     if
         mob:getMainJob() == xi.job.BRD and

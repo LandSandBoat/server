@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status >= QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

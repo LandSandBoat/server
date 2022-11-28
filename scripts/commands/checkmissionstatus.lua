@@ -32,6 +32,7 @@ function onTrigger(player, target, logId, statusIndex)
     if logInfo == nil then
         logInfo = logIdHelpers.getMissionLogInfo(player:getNation())
     end
+
     logName = logInfo.full_name
     logId = logInfo.mission_log
 

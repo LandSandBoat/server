@@ -64,9 +64,11 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     local base = weaponDamage + fstr
     local cratio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 0, xi.slot.MAIN)
     local isSneakValid = player:hasStatusEffect(xi.effect.SNEAK_ATTACK)
+
     if isSneakValid and not player:isBehind(target) then
         isSneakValid = false
     end
+
     local pdif = cratio[1]
     local hitrate = xi.weaponskills.getHitRate(player, target, true)
 

@@ -33,6 +33,7 @@ local function mergen(...)
             res[res.n] = t[j]
         end
     end
+
     return res
 end
 
@@ -70,6 +71,7 @@ function utils.shuffle(inputTable)
 
     return shuffledTable
 end
+
 utils.append = nil
 
 -- Recursively appends the input table into the provided base table.
@@ -83,6 +85,7 @@ function utils.append(base, input)
             base[k] = v
         end
     end
+
     return base
 end
 
@@ -151,6 +154,7 @@ function utils.clamp(input, min_val, max_val)
     elseif max_val ~= nil and input > max_val then
         input = max_val
     end
+
     return input
 end
 
@@ -508,21 +512,27 @@ function utils.getMobSkillLvl(rank, level)
         if rank == 1 then
             return 153 + (level - 50) * 5
         end
+
         if rank == 2 then
             return 147 + (level - 50) * 4.9
         end
+
         if rank == 3 then
             return 136 + (level - 50) * 4.8
         end
+
         if rank == 4 then
             return 126 + (level - 50) * 4.7
         end
+
         if rank == 5 then
             return 116 + (level - 50) * 4.5
         end
+
         if rank == 6 then
             return 106 + (level - 50) * 4.4
         end
+
         if rank == 7 then
             return 96 + (level - 50) * 4.3
         end
@@ -531,21 +541,27 @@ function utils.getMobSkillLvl(rank, level)
     if rank == 1 then
         return 6 + (level - 1) * 3
     end
+
     if rank == 2 then
         return 5 + (level - 1) * 2.9
     end
+
     if rank == 3 then
         return 5 + (level - 1) * 2.8
     end
+
     if rank == 4 then
         return 4 + (level - 1) * 2.7
     end
+
     if rank == 5 then
         return 4 + (level - 1) * 2.5
     end
+
     if rank == 6 then
         return 3 + (level - 1) * 2.4
     end
+
     if rank == 7 then
         return 3 + (level - 1) * 2.3
     end
@@ -721,7 +737,10 @@ end
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)
-    local _ = string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(s, pattern, function(c)
+        fields[#fields + 1] = c
+    end)
+
     return fields
 end
 
@@ -857,7 +876,10 @@ end
 
 function utils.getAngleDifference(a, b)
     local diff = math.abs(b - a)
-    if diff > math.pi then diff = 2 * math.pi - diff end
+    if diff > math.pi then
+        diff = 2 * math.pi - diff
+    end
+
     return diff
 end
 
@@ -875,4 +897,13 @@ end
 
 function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
+end
+
+-- Returns inline value  boolean      any     any
+function utils.ternary(conditional, trueVal, falseVal)
+    if conditional then
+        return trueVal
+    end
+
+    return falseVal
 end

@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Port_San_dOria/IDs')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
+require('scripts/globals/cutscenes')
 require('scripts/globals/missions')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
@@ -15,12 +16,12 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
+    local cs = { -1 }
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = 500
+            cs = { 500, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
         end
 
         player:setPos(-104, -8, -128, 227)
@@ -33,7 +34,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
-            cs = 702
+            cs = { 702 }
             player:setPos(-1.000, 0.000, 44.000, 0)
         else
             player:setPos(80, -16, -135, 165)
@@ -54,11 +55,10 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+    if player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
         player:startEvent(700)
     else
-        player:setPos(-33.5104, -8.1500, 27.7711, 0)
-        player:setLocalVar('[AIRSHIP]Paid', 0)
+        player:setPos(-37.55, -8, 27.96, 126)
     end
 end
 
@@ -70,8 +70,6 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 700 then
         player:setPos(0, 0, 0, 0, 223)
-    elseif csid == 518 and option == 0 then
-        player:setLocalVar('[AIRSHIP]Paid', 0)
     end
 end
 

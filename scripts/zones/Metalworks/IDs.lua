@@ -50,6 +50,7 @@ zones[xi.zone.METALWORKS] =
         EXTENDED_MISSION_OFFSET       = 8609,  -- Go to Ore Street and talk to Medicine Eagle. He says he was there when the commotion started.
         STEEL_CYCLONE_LEARNED         = 9027,  -- You have learned the weapon skill Steel Cyclone!
         DETONATOR_LEARNED             = 9052,  -- You have learned the weapon skill Detonator!
+        CRYSTAL_PROPULSION_UNIT       = 9924,  -- Crystal propulsion unit... ......Hooded scientists.........
         TAKIYAH_CLOSED_DIALOG         = 9993,  -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
         TAKIYAH_OPEN_DIALOG           = 9994,  -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
         CELEBRATORY_GOODS             = 10841, -- An assortment of celebratory goods is available for purchase.

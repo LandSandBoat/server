@@ -35,6 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if final > diff then
         final = diff
     end
+
     caster:eraseStatusEffect()
     target:addHP(final)
     caster:updateEnmityFromCure(target, final)

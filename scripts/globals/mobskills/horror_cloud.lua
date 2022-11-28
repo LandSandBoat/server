@@ -19,8 +19,10 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SLOW
+    local noResist = 1
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1250, 0, 180))
+    -- 2 minute unresisted duration.
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1250, 0, 180, 0, 0, noResist))
 
     return typeEffect
 end

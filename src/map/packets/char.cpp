@@ -195,8 +195,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
 
             if (updatemask & UPDATE_NAME)
             {
-                std::string name = (const char*)PChar->GetName();
-                memcpy(data + (0x5A), name.c_str(), name.size());
+                memcpy(data + (0x5A), PChar->GetName().c_str(), PChar->GetName().size());
             }
         }
         break;

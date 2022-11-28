@@ -19,7 +19,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.EVASION_BOOST
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 20, 0, 120))
+    -- +40 Evasion
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 40, 0, 180))
 
     return typeEffect
 end

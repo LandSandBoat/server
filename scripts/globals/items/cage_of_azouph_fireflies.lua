@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
     if target:getZoneID() == xi.zone.LEUJAOAM_SANCTUM then
         return 0
     end
+
     return xi.msg.basic.ITEM_UNABLE_TO_USE_2
 end
 

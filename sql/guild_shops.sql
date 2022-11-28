@@ -184,7 +184,7 @@ INSERT INTO `guild_shops` VALUES (514,17026,4032,10590,20,0,15);     -- bone_cud
 INSERT INTO `guild_shops` VALUES (514,17062,16493,19859,20,0,15);    -- bone_rod
 INSERT INTO `guild_shops` VALUES (514,17257,19859,39568,20,0,7);     -- bandits_gun
 INSERT INTO `guild_shops` VALUES (514,17299,2419,2419,198,0,99);     -- astragalos
-INSERT INTO `guild_shops` VALUES (514,17319,3,21,8910,1782,3564);    -- bone_arrow
+INSERT INTO `guild_shops` VALUES (514,17319,3,21,8910,1782,3);       -- bone_arrow
 INSERT INTO `guild_shops` VALUES (514,17352,21645,47330,20,0,10);    -- horn
 INSERT INTO `guild_shops` VALUES (514,17610,22500,53100,20,0,15);    -- bone_knife
 INSERT INTO `guild_shops` VALUES (514,17612,34440,39606,20,0,10);    -- beetle_knife
