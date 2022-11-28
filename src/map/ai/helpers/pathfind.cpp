@@ -23,6 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../../common/utils.h"
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
+#include "../../mob_modifier.h"
 #include "../../zone.h"
 #include "../ai_container.h"
 #include "lua/luautils.h"
@@ -150,6 +151,59 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     m_distanceFromPoint = range;
 
     bool result = PathTo(point, pathFlags, false);
+
+    if (point.y - m_POwner->loc.p.y > 4) // Target is too low.
+    {
+        result = false;
+    }
+
+    if (m_POwner->objtype == TYPE_MOB) // Target is too high.
+    {
+        auto PMob = static_cast<CMobEntity*>(m_POwner);
+        if (point.y - m_POwner->loc.p.y < -4)
+        {
+            auto disengageMod = PMob->getMobMod(MOBMOD_DISENGAGE_NO_PATH);
+
+            if (PMob->isInDynamis() && PMob->m_pathFindDisengage >= 1)
+            {
+                result = false;
+            }
+            else if (PMob->m_pathFindDisengage >= (disengageMod > 0 ? disengageMod : 2)) // This is just to stop players from abusing the disengage. Adjustable via mobmod.
+            {
+                result = false; // Make me go up.
+            }
+            else if (PMob->PAI->IsEngaged())
+            {
+                PMob->m_pathFindDisengage += 1;
+                PMob->PAI->Disengage();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (point.y - m_POwner->loc.p.y > 4) // 4 Is generally a decent sized ledge.
+        {
+            if (PMob->isInDynamis() && PMob->PAI->IsEngaged()) // Ignore wallhack for dynamis.
+            {
+                PMob->PAI->Disengage();
+            }
+            else
+            {
+                result = false; // Make me fall down.
+            }
+        }
+        else if (point.y - m_POwner->loc.p.y > 1) // I'm probably stuck on a rock or something dumb.
+        {
+            result = false; // Make me go down.
+        }
+    }
+
+    if (!result) // If I failed to path successfully, then I should wallhack to reach my destination.
+    {
+        pathFlags |= PATHFLAG_WALLHACK;
+        PathTo(point, pathFlags, false);
+    }
 
     PrunePathWithin(range);
     return result;

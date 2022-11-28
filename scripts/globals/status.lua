@@ -2620,6 +2620,7 @@ xi.mobMod =
     DRAW_IN_IGNORE_STATIONARY = 104, -- Stationary mobs draw-in the moment they cannot attack you anymore (out of range). put this mobmod on stationary mobs that have draw-in but use ranged attacks instead of melee attacks so that they will ignore this behavior (i.e. KSNM99 Wyrm or ToAU Mission Alexander)
     ATTRACT_FAMILY_NM         = 105, -- NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
     LEDGE_AGGRO               = 106, -- Used to increase vertical aggro range
+    DISENGAGE_NO_PATH         = 107, -- Used to force a disengage when there is no vertical path to the target rather than despawn.
 }
 
 -----------------------------------
