@@ -382,13 +382,13 @@ end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
-xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff, bonusMagicAccuracy)
+xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff)
     local resist        = 1 -- The variable we want to calculate
     local casterJob     = caster:getMainJob()
     local casterWeather = caster:getWeather()
     local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
 
-    local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + bonusMagicAccuracy
+    local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
     local magicEva      = 0
     local magicHitRate  = 0
     local resMod        = 0 -- Some spells may possibly be non elemental.
@@ -426,9 +426,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     if spellElement ~= xi.magic.ele.NONE then
-        -- Mod set in database. Base 0 means not resistant nor weak.
-        resMod = target:getMod(xi.magic.resistMod[spellElement])
-
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
         local elementBonus  = caster:getMod(spellAcc[spellElement])
@@ -590,6 +587,11 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -- STEP 2: Get target magic evasion
     -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     -----------------------------------
+    if spellElement ~= xi.magic.ele.NONE then
+        -- Mod set in database. Base 0 means not resistant nor weak.
+        resMod = target:getMod(xi.magic.resistMod[spellElement])
+    end
+
     magicEva = target:getMod(xi.mod.MEVA) + resMod
 
     -----------------------------------
@@ -824,7 +826,10 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spell, spell
     end
 
     -- Ancient Magic I and II MAB
-    if spellId > 203 and spellId < 216 then -- If spell is Ancient Magic
+    if
+        spellId >= xi.magic.spell.FLARE and
+        spellId <= xi.magic.spell.FLOOD_II
+    then
         mab = mab + caster:getMerit(xi.merit.ANCIENT_MAGIC_ATK_BONUS)
     end
 
@@ -987,7 +992,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
     local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
-    local resist                      = xi.spells.damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff, 0)
+    local resist                      = xi.spells.damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff)
     local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target,  spell, spellElement)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
