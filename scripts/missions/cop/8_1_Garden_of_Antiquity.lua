@@ -13,6 +13,9 @@ require('scripts/globals/titles')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
+local altaieuID = require('scripts/zones/AlTaieu/IDs')
+local palaceID  = require('scripts/zones/Grand_Palace_of_HuXzoi/IDs')
+-----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
 
@@ -20,21 +23,26 @@ local antiquityVars =
 {
     -- [crystalOffset] = { thisFightDone, thisCsAcquired, otherCrystal, otherCrystal2, firstCsParam, secondCsParam1, secondCsParam2 }
     [0] = { 'SouthTower', 'SouthTowerCS', 1, 2, 0, 2, 1 }, -- !pos 0 -6.250 -736.912 33
-    [1] = { 'WestTower', 'WestTowerCS', 0, 2, 2, 1, 0 }, -- !pos -683.709 -6.250 -222.142 33
-    [2] = { 'EastTower', 'EastTowerCS', 0, 1, 1, 2, 0 }, -- !pos 683.718 -6.250 -222.167 33
+    [1] = { 'WestTower',  'WestTowerCS',  0, 2, 2, 1, 0 }, -- !pos -683.709 -6.250 -222.142 33
+    [2] = { 'EastTower',  'EastTowerCS',  0, 1, 1, 2, 0 }, -- !pos 683.718 -6.250 -222.167 33
 }
 
 local function rubiousCrystalOnTrigger(player, npc)
-    local zoneId = npc:getZoneID()
-    local crystalOffset = npc:getID() - zones[zoneId].npc.RUBIOUS_CRYSTAL_BASE
-    local ruaernOffset = zones[zoneId].mob.RUAERN_BASE + crystalOffset * 3
-    local cVar = antiquityVars[crystalOffset]
-    local thisFightDone = mission:getVar(player, cVar[1]) == 1
+    local crystalOffset  = npc:getID() - altaieuID.npc.RUBIOUS_CRYSTAL_BASE
+    local ruaernOffset   = altaieuID.mob.RUAERN_BASE + crystalOffset * 3
+    local cVar           = antiquityVars[crystalOffset]
+
+    -- check to see if all three aerns are killed for the tower
+    local thisFightDone  = mission:getVar(player, ruaernOffset) == 1 and
+                           mission:getVar(player, ruaernOffset + 1) == 1 and
+                           mission:getVar(player, ruaernOffset + 2) == 1
     local thisCsAcquired = mission:getVar(player, cVar[2]) == 1
+
     -- spawn ru'aerns
     if not thisFightDone and not thisCsAcquired then
         npcUtil.popFromQM(player, npc, { ruaernOffset, ruaernOffset + 1, ruaernOffset + 2 }, { hide = 0 } )
-        return mission:messageSpecial(zones[zoneId].text.OMINOUS_SHADOW)
+        return mission:messageSpecial(altaieuID.text.OMINOUS_SHADOW)
+
     -- post-fight CS
     elseif not thisCsAcquired then
         local otherTowerDone1 = mission:getVar(player, antiquityVars[cVar[3]][2]) == 1
@@ -48,14 +56,15 @@ local function rubiousCrystalOnTrigger(player, npc)
         else
             return mission:progressEvent(161, cVar[5]) -- first CS. param mentions current tower.
         end
+
     -- default dialog
     else
-        return mission:messageSpecial(zones[zoneId].text.NOTHING_OF_INTEREST)
+        return mission:messageSpecial(altaieuID.text.NOTHING_OF_INTEREST)
     end
 end
 
 local function rubiousCrystalOnEventFinish(player, csid, option)
-    local crystalOffset = player:getEventTarget():getID() - zones[player:getZoneID()].npc.RUBIOUS_CRYSTAL_BASE
+    local crystalOffset = player:getEventTarget():getID() - altaieuID.npc.RUBIOUS_CRYSTAL_BASE
     mission:setVar(player, antiquityVars[crystalOffset][2], 1)
 end
 
@@ -94,14 +103,14 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 2 then
-                        return mission:event(100)
+                        return mission:progressEvent(100)
                     elseif checkTowerCsVars(player) == 3 then
                         mission:setVar(player, 'Status', 2)
                         return mission:progressEvent(100)
                     elseif mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(164)
                     else
-                        return mission:messageSpecial(npc, zones[npc:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
+                        return mission:messageSpecial(altaieuID.text.IMPERVIOUS_FIELD_BLOCKS)
                     end
                 end,
             },
@@ -129,6 +138,15 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
                         return rubiousCrystalOnTrigger(player, npc)
+                    end
+                end,
+            },
+
+            ['Ruaern'] =
+            {
+                onMobDeath = function(mob, player, optParams)
+                    if mission:getVar(player, 'Status') == 1 then
+                        mission:setVar(player, mob:getID(), 1)
                     end
                 end,
             },
@@ -167,7 +185,7 @@ mission.sections =
                     if mission:getVar(player, 'Status') == 2 then
                         return mission:progressEvent(1)
                     else
-                        return mission:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
+                        return mission:messageSpecial(palaceID.text.PORTAL_DOES_NOT_RESPOND)
                     end
                 end,
             },
@@ -175,14 +193,14 @@ mission.sections =
             ['_iyb'] = -- East Particle Gate
             {
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(palaceID.text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
             ['_iyc'] = -- West Particle Gate
             {
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(palaceID.text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
@@ -190,7 +208,7 @@ mission.sections =
             {
                 [1] = function(player, csid, option)
                     if player:getFreeSlotsCount() == 0 then
-                        mission:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, xi.items.TAVNAZIAN_RING)
+                        mission:messageSpecial(palaceID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.TAVNAZIAN_RING)
                     else
                         mission:complete(player)
                     end
