@@ -39,6 +39,7 @@ CItemEquipment::CItemEquipment(uint16 id)
     m_equipSlotID   = 255;
     m_absorption    = 0;
     m_superiorLevel = 0;
+    m_race          = 255;
 }
 
 CItemEquipment::~CItemEquipment()
@@ -131,6 +132,16 @@ uint8 CItemEquipment::getSuperiorLevel()
 void CItemEquipment::setSuperiorLevel(uint8 level)
 {
     m_superiorLevel = level;
+}
+
+uint8 CItemEquipment::getRace()
+{
+    return m_race;
+}
+
+void CItemEquipment::setRace(uint8 race)
+{
+    m_race = race;
 }
 
 // percentage of damage blocked by shield

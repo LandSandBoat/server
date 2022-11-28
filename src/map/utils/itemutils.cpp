@@ -332,25 +332,26 @@ namespace itemutils
                             "a.slot,"       // 21
                             "a.rslot,"      // 22
                             "a.su_level,"   // 23
+                            "a.race,"       // 24
 
-                            "w.skill,"         // 24
-                            "w.subskill,"      // 25
-                            "w.ilvl_skill,"    // 26
-                            "w.ilvl_parry,"    // 27
-                            "w.ilvl_macc,"     // 28
-                            "w.delay,"         // 29
-                            "w.dmg,"           // 30
-                            "w.dmgType,"       // 31
-                            "w.hit,"           // 32
-                            "w.unlock_points," // 33
+                            "w.skill,"         // 25
+                            "w.subskill,"      // 26
+                            "w.ilvl_skill,"    // 27
+                            "w.ilvl_parry,"    // 28
+                            "w.ilvl_macc,"     // 29
+                            "w.delay,"         // 30
+                            "w.dmg,"           // 31
+                            "w.dmgType,"       // 32
+                            "w.hit,"           // 33
+                            "w.unlock_points," // 34
 
-                            "f.storage,"      // 34
-                            "f.moghancement," // 35
-                            "f.element,"      // 36
-                            "f.aura,"         // 37
+                            "f.storage,"      // 35
+                            "f.moghancement," // 36
+                            "f.element,"      // 37
+                            "f.aura,"         // 38
 
-                            "p.slot,"    // 38
-                            "p.element " // 39
+                            "p.slot,"    // 39
+                            "p.element " // 40
                             "FROM item_basic AS b "
                             "LEFT JOIN item_usable AS u USING (itemId) "
                             "LEFT JOIN item_equipment  AS a USING (itemId) "
@@ -395,8 +396,8 @@ namespace itemutils
                     }
                     if (PItem->isType(ITEM_PUPPET))
                     {
-                        ((CItemPuppet*)PItem)->setEquipSlot(sql->GetUIntData(38));
-                        ((CItemPuppet*)PItem)->setElementSlots(sql->GetUIntData(39));
+                        ((CItemPuppet*)PItem)->setEquipSlot(sql->GetUIntData(39));
+                        ((CItemPuppet*)PItem)->setElementSlots(sql->GetUIntData(40));
 
                         // If this is a PUP attachment, load the appropriate script as well
                         auto attachmentFile = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", PItem->getName());
@@ -414,6 +415,7 @@ namespace itemutils
                         ((CItemEquipment*)PItem)->setEquipSlotId(sql->GetUIntData(21));
                         ((CItemEquipment*)PItem)->setRemoveSlotId(sql->GetUIntData(22));
                         ((CItemEquipment*)PItem)->setSuperiorLevel(sql->GetUIntData(23));
+                        ((CItemEquipment*)PItem)->setRace(sql->GetUIntData(24));
 
                         if (((CItemEquipment*)PItem)->getValidTarget() != 0)
                         {
@@ -423,20 +425,20 @@ namespace itemutils
 
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        ((CItemWeapon*)PItem)->setSkillType(sql->GetUIntData(24));
-                        ((CItemWeapon*)PItem)->setSubSkillType(sql->GetUIntData(25));
-                        ((CItemWeapon*)PItem)->setILvlSkill(sql->GetUIntData(26));
-                        ((CItemWeapon*)PItem)->setILvlParry(sql->GetUIntData(27));
-                        ((CItemWeapon*)PItem)->setILvlMacc(sql->GetUIntData(28));
-                        ((CItemWeapon*)PItem)->setBaseDelay(sql->GetUIntData(29));
-                        ((CItemWeapon*)PItem)->setDelay((sql->GetIntData(29) * 1000) / 60);
-                        ((CItemWeapon*)PItem)->setDamage(sql->GetUIntData(30));
-                        ((CItemWeapon*)PItem)->setDmgType(static_cast<DAMAGE_TYPE>(sql->GetUIntData(31)));
-                        ((CItemWeapon*)PItem)->setMaxHit(sql->GetUIntData(32));
-                        ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(sql->GetUIntData(33));
+                        ((CItemWeapon*)PItem)->setSkillType(sql->GetUIntData(25));
+                        ((CItemWeapon*)PItem)->setSubSkillType(sql->GetUIntData(26));
+                        ((CItemWeapon*)PItem)->setILvlSkill(sql->GetUIntData(27));
+                        ((CItemWeapon*)PItem)->setILvlParry(sql->GetUIntData(28));
+                        ((CItemWeapon*)PItem)->setILvlMacc(sql->GetUIntData(29));
+                        ((CItemWeapon*)PItem)->setBaseDelay(sql->GetUIntData(30));
+                        ((CItemWeapon*)PItem)->setDelay((sql->GetIntData(30) * 1000) / 60);
+                        ((CItemWeapon*)PItem)->setDamage(sql->GetUIntData(31));
+                        ((CItemWeapon*)PItem)->setDmgType(static_cast<DAMAGE_TYPE>(sql->GetUIntData(32)));
+                        ((CItemWeapon*)PItem)->setMaxHit(sql->GetUIntData(33));
+                        ((CItemWeapon*)PItem)->setTotalUnlockPointsNeeded(sql->GetUIntData(34));
 
-                        int  dmg   = sql->GetUIntData(30);
-                        int  delay = sql->GetIntData(29);
+                        int  dmg   = sql->GetUIntData(31);
+                        int  delay = sql->GetIntData(30);
                         bool isH2H = ((CItemWeapon*)PItem)->getSkillType() == SKILL_HAND_TO_HAND;
 
                         if ((dmg > 0 || isH2H) && delay > 0) // avoid division by zero for items not yet implemented. Zero dmg h2h weapons don't actually have zero dmg for the purposes of DPS.
@@ -463,10 +465,10 @@ namespace itemutils
 
                     if (PItem->isType(ITEM_FURNISHING))
                     {
-                        ((CItemFurnishing*)PItem)->setStorage(sql->GetUIntData(34));
-                        ((CItemFurnishing*)PItem)->setMoghancement(sql->GetUIntData(35));
-                        ((CItemFurnishing*)PItem)->setElement(sql->GetUIntData(36));
-                        ((CItemFurnishing*)PItem)->setAura(sql->GetUIntData(37));
+                        ((CItemFurnishing*)PItem)->setStorage(sql->GetUIntData(35));
+                        ((CItemFurnishing*)PItem)->setMoghancement(sql->GetUIntData(36));
+                        ((CItemFurnishing*)PItem)->setElement(sql->GetUIntData(37));
+                        ((CItemFurnishing*)PItem)->setAura(sql->GetUIntData(38));
                     }
 
                     g_pItemList[PItem->getID()] = PItem;

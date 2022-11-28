@@ -4130,6 +4130,10 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
     {
         return false;
     }
+    if ((PItem->getRace() & (1 << (PChar->look.race - 1))) == 0)
+    {
+        return false;
+    }
     if (checkLevel && (PItem->getReqLvl() > PChar->GetMLevel()))
     {
         return false;

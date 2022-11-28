@@ -165,6 +165,11 @@ uint16 CLuaItem::getReqLvl()
     return static_cast<CItemEquipment*>(m_PLuaItem)->getReqLvl();
 }
 
+uint8 CLuaItem::getRace()
+{
+    return static_cast<CItemEquipment*>(m_PLuaItem)->getRace();
+}
+
 int16 CLuaItem::getMod(uint16 modID)
 {
     auto* PItem = static_cast<CItemEquipment*>(m_PLuaItem);
@@ -344,6 +349,7 @@ void CLuaItem::Register()
     SOL_REGISTER("getName", CLuaItem::getName);
     SOL_REGISTER("getILvl", CLuaItem::getILvl);
     SOL_REGISTER("getReqLvl", CLuaItem::getReqLvl);
+    SOL_REGISTER("getRace", CLuaItem::getRace);
     SOL_REGISTER("getMod", CLuaItem::getMod);
     SOL_REGISTER("addMod", CLuaItem::addMod);
     SOL_REGISTER("delMod", CLuaItem::delMod);
