@@ -32,7 +32,7 @@ entity.onMobFight = function(mob, target)
         shadow1:isDead() and
         shadow2:isDead()
     then
-        mob:useMobAbility(984)
+        mob:useMobAbility(1002)
     end
 end
 
