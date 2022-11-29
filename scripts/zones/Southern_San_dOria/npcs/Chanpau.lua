@@ -5,6 +5,7 @@
 -- !pos -152 -2 55 230
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/events/starlight_celebrations")
 -----------------------------------
 local entity = {}
 
@@ -12,6 +13,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 3)
+        return
+    end
+
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED then
         player:startEvent(629)
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED then

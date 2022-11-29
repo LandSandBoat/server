@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Lower_Jeuno/IDs')
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
+require('scripts/globals/events/starlight_celebrations')
 require('scripts/globals/conquest')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
@@ -15,6 +16,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
     xi.chocobo.initZone(zone)
 end
 

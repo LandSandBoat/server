@@ -11,6 +11,7 @@ zones[xi.zone.BASTOK_MARKETS] =
     text =
     {
         ITEM_CANNOT_BE_OBTAINED       = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        DEFAULT_CANNOT_BE_OBTAINED    = 6386,  -- You cannot obtain the item. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE    = 6388,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED                 = 6390,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6391,  -- Obtained <number> gil.
@@ -75,6 +76,14 @@ zones[xi.zone.BASTOK_MARKETS] =
         YOU_NOW_HAVE_AMT_CURRENCY     = 14256, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
         YOU_HAVE_JOINED_UNITY         = 14559, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
         HAVE_ALREADY_CHANGED_UNITY    = 14635, -- ou have already changed Unities. Please wait until the next tabulation period.
+        MERRYMAKER_TRADE              = 13964, -- Yum-yums for me? Gobbies remember...till our tummies go rumble-rumble again.
+        MERRYMAKER_BLECH              = 13967, -- Blech. What this yucky thing? It make me want upgut food. Take it away.
+        MERRYMAKER_TOY                = 13956, -- Happy toy, happy toy, where be me happy toy?
+        MERRYMAKER_TOY2               = 13957, -- Ev'ry girl, ev'ry boy, ev'rybody, happy toy! Me nose holes smell the joy, the joy from happy toy! Where cooould iiit beee?
+        MERRYMAKER_WAHH               = 15640, -- Waaah! It you! You give yum-yums for me tum-tum. Good [boy, girl]!
+        MERRYMAKER_GIVE               = 15641, -- Not for us, not for me? I give it back. Now you happy? Happy toy, happy toy, where be me happy toy?
+        MERRYMAKER_NO                 = 15642, -- No no no no no! Go away! Nose holes busy sniff for happy toy!
+        MERRYMAKER_FRIEND             = 15644, -- You have friend you do? We gobbies have friend too.
     },
     mob =
     {
@@ -87,6 +96,45 @@ zones[xi.zone.BASTOK_MARKETS] =
         {
             [17739805] = 45, -- Olwyn
         },
+        STARLIGHT_DECORATIONS =
+        {
+            [17740161] = 17740161,  -- Starlight Celebration Center Fountain
+            [17740162] = 17740162,  -- Starlight Celebration Planter
+            [17740163] = 17740163,  -- Starlight Celebration Planter
+            [17740164] = 17740164,  -- Starlight Celebration Planter
+            [17740165] = 17740165,  -- Starlight Celebration Planter
+            [17740166] = 17740166,  -- Starlight Celebration Planter
+            [17740167] = 17740167,  -- Starlight Celebration Planter
+            [17740168] = 17740168,  -- Starlight Celebration Planter
+            [17740169] = 17740169,  -- Starlight Celebration Planter
+            [17740170] = 17740170,  -- Starlight Celebration Planter
+            [17740171] = 17740171,  -- Starlight Celebration Planter
+            [17740172] = 17740172,  -- Starlight Celebration Planter
+            [17740173] = 17740173,  -- Starlight Celebration Planter
+            [17740174] = 17740174,  -- Starlight Celebration Planter
+            [17740175] = 17740175,  -- Starlight Celebration Planter
+            [17740176] = 17740176,  -- Starlight Celebration Planter
+            [17740177] = 17740177,  -- Starlight Celebration Planter
+            [17740178] = 17740178,  -- Starlight Celebration Planter
+            [17740179] = 17740179,  -- Starlight Celebration Planter
+            [17740180] = 17740180,  -- Starlight Celebration Planter
+            [17740181] = 17740181,  -- Starlight Celebration Planter
+            [17740182] = 17740182,  -- Starlight Celebration Planter
+            [17740183] = 17740183,  -- Starlight Celebration Planter
+            [17740184] = 17740184,  -- Token Moogle
+            [17740185] = 17740185,  -- Event Moogle
+            [17739906] = 17739906,  -- Goblin Merrymaker
+            [17739907] = 17739907,  -- Goblin Merrymaker
+            [17739908] = 17739908,  -- Goblin Merrymaker
+            [17739909] = 17739909,  -- Goblin Merrymaker
+            [17739910] = 17739910,  -- Goblin Merrymaker
+            [17739911] = 17739911,  -- Goblin Merrymaker
+            [17739912] = 17739912,  -- Goblin Merrymaker
+            [17739913] = 17739913,  -- Goblin Merrymaker
+            [17739914] = 17739914,  -- Goblin Merrymaker
+            [17739915] = 17739915,  -- Goblin Merrymaker
+        },
+
     },
 }
 

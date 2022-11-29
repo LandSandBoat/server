@@ -44,6 +44,20 @@ zones[xi.zone.WINDURST_WALLS] =
     },
     npc =
     {
+        STARLIGHT_DECORATIONS =
+        {
+            [17756387] = 17756387,  -- Starlight Celebration Tree
+            [17756388] = 17756388,  -- Starlight Celebration Tree
+            [17756389] = 17756389,  -- Starlight Celebration Tree
+            [17756390] = 17756390,  -- Starlight Celebration Tree
+            [17756391] = 17756391,  -- Starlight Celebration Tree
+            [17756392] = 17756392,  -- Starlight Celebration Tree
+            [17756393] = 17756393,  -- Starlight Celebration Tree
+            [17756394] = 17756394,  -- Starlight Celebration Tree
+            [17756395] = 17756395,  -- Starlight Celebration Tree
+            [17756396] = 17756396,  -- Starlight Celebration Tree
+            [17756397] = 17756397,  -- Starlight Celebration Tree
+        },
     },
 }
 

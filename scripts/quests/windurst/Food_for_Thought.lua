@@ -7,6 +7,7 @@
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -----------------------------------
 require('scripts/globals/interaction/quest')
+require("scripts/globals/events/starlight_celebrations")
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -68,6 +69,11 @@ quest.sections =
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
+                    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
+                        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2)
+
+                        return
+                    end
                     return quest:progressEvent(310)
                 end
             },

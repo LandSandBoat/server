@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Windurst_Waters/IDs')
 require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/events/starlight_celebrations')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
@@ -15,6 +16,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, 23, -12, -208, 31, -8, -197)
 
     applyHalloweenNpcCostumes(zone:getID())
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

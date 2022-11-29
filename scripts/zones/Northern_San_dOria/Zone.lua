@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Northern_San_dOria/IDs')
 require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/events/starlight_celebrations')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
@@ -22,6 +23,7 @@ zoneObject.onInitialize = function(zone)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
 
     applyHalloweenNpcCostumes(zone:getID())
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

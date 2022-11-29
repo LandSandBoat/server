@@ -78,6 +78,39 @@ zones[xi.zone.PORT_BASTOK] =
     },
     npc =
     {
+        STARLIGHT_DECORATIONS =
+        {
+            [17744128] = 17744128,  -- Starlight Celebration Fountain
+            [17744129] = 17744129,  -- Starlight Celebration Fountain
+            [17744130] = 17744130,  -- Starlight Celebration Planter
+            [17744131] = 17744131,  -- Starlight Celebration Planter
+            [17744132] = 17744132,  -- Starlight Celebration Planter
+            [17744133] = 17744133,  -- Starlight Celebration Planter
+            [17744134] = 17744134,  -- Starlight Celebration Planter
+            [17744135] = 17744135,  -- Starlight Celebration Planter
+            [17744136] = 17744136,  -- Starlight Celebration Planter
+            [17744137] = 17744137,  -- Starlight Celebration Planter
+            [17744138] = 17744138,  -- Starlight Celebration Planter
+            [17744139] = 17744139,  -- Starlight Celebration Planter
+            [17744140] = 17744140,  -- Starlight Celebration Planter
+            [17744141] = 17744141,  -- Starlight Celebration Planter
+            [17744142] = 17744142,  -- Starlight Celebration Planter
+            [17744143] = 17744143,  -- Starlight Celebration Planter
+            [17744144] = 17744144,  -- Starlight Celebration Planter
+            [17744145] = 17744145,  -- Starlight Celebration Planter
+            [17744146] = 17744146,  -- Starlight Celebration Planter
+            [17744147] = 17744147,  -- Starlight Celebration Planter
+            [17744148] = 17744148,  -- Starlight Celebration Planter
+            [17744149] = 17744149,  -- Starlight Celebration Planter
+            [17744150] = 17744150,  -- Starlight Celebration Planter
+            [17744151] = 17744151,  -- Starlight Celebration Planter
+            [17744152] = 17744152,  -- Starlight Celebration Planter
+            [17744153] = 17744153,  -- Starlight Celebration Planter
+            [17744154] = 17744154,  -- Starlight Celebration Planter
+            [17744155] = 17744155,  -- Starlight Celebration Planter
+            -- [17744156] = 17744156,  -- Klaas
+        },
+
     },
 }
 

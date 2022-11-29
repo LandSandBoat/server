@@ -19,13 +19,11 @@ zoneObject.onZoneIn = function(player, prevZone)
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
 
-    -- Retail start/end dates vary, set to Dec 5th through Jan 5th.
-    if
-        (month == 12 and day >= 5) or
-        (month == 1 and day <= 5)
-    then
+     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
+    if(month == 12 and day >= 5) or (month == 1 and day <= 5) then
         player:ChangeMusic(0, 239)
         player:ChangeMusic(1, 239)
+    -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
     if

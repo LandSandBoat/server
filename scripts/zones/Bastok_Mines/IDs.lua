@@ -11,6 +11,7 @@ zones[xi.zone.BASTOK_MINES] =
     text =
     {
         ITEM_CANNOT_BE_OBTAINED        = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        DEFAULT_CANNOT_BE_OBTAINED     = 6386,  -- You cannot obtain the item. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE     = 6388,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED                  = 6390,  -- Obtained: <item>.
         GIL_OBTAINED                   = 6391,  -- Obtained <number> gil.
@@ -88,6 +89,23 @@ zones[xi.zone.BASTOK_MINES] =
         CHOCOBO_FEEDING_ITEM           = 13921, -- #: %
         COMMON_SENSE_SURVIVAL          = 16026, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE        = 16625, -- There appears to be a tear in the fabric of space...
+        -- Starlight Celebration Dialog --
+        GIFT_THANK_YOU                 = 12264, -- Thank you! Thank you! Thank you!
+        ONLY_TWO_HANDS                 = 12267, -- Another present? Sorry, but I only have two hands, (Player Gender)≻[Mr./Ms.] Adventurer!
+        JOY_TO_CHILDREN                = 12271, -- You've brought joy to the children of Vana'diel!
+        BARRELS_JOY_TO_CHILDREN        = 12272, -- You've brought barrelfuls of joy to the children of Vana'diel!
+        STARLIGHT_CARD_1               = 12390, -- It's time once again for the Starlight Celebration!≺Prompt≻
+        STARLIGHT_CARD_2               = 15577, -- Kupo ho ho! Merry Starlight! As with past celebrations, we've prepared a veritable mountain of presents for all adventurers, kupo.≺Prompt≻
+        STARLIGHT_CARD_3               = 15607, -- We'd also appreciate your help in distributing cards, kupo. All you're required to do is deliver this card to the addressee. We're counting on you!≺Prompt≻
+        STARLIGHT_CARD_4               = 15603, -- If you happen to forget who the card's recipient is, just show it to me, kupo.≺Prompt≻
+        STARLIGHT_CARD_5               = 15602, -- You're truly a role model for all adventurers, kupo! Now then, we'd like you to take this card and give it to a ≺Multiple Choice (Parameter 0)≻[male Hume/female Hume/male Elvaan/female Elvaan/male Tarutaru/female Tarutaru/Mithra/Galka] adventurer.≺Prompt≻
+        STARLIGHT_CARD_6               = 15587, -- Happy delivering, kupo!≺Prompt≻
+        STARLIGHT_CARD_CHECK           = 15604, -- Let' see... This addressee of this card is a ≺Multiple Choice (Parameter 0)≻[male Hume/female Hume/male Elvaan/female Elvaan/male Tarutaru/female Tarutaru/Mithra/Galka] adventurer, kupo.≺Prompt≻
+        STARLIGHT_CARD_RED             = 12397, -- Oh, I just remembered! I think that the cards are all addressed to people who are wearing red...≺Prompt≻
+        STARLIGHT_CARD_WRONG           = 15605, -- Are you trying to pull a fast one, kupo!? This card isn't yours to give, nor is it addressed to you, so please take it back to where you found it.≺Prompt≻
+        STARLIGHT_CARD_CONFIRM         = 15593, -- Here's a little something for your kindness.≺Prompt≻
+        STARLIGHT_FAME_DIALOG          = 12414, -- ≺Multiple Choice (Parameter 1)≻[You haven't brought any happiness to the children!/You've done some good./You've done fairly well./You've made the children very happy!/You've brought lots of smiles!/You have the children bursting with glee!/The children love you!] ≺Multiple Choice (Parameter 1)≻[What a disappointment./You just need to give a little extra effort!/Keep it up!/You make a good smilebringer./Excellent work!/Stupendous job!/Even I think you're great!]≺Prompt≻
+        STARLIGHT_VENDOR_MOOGLE        = 14457, -- Welcome, kupo!
     },
     mob =
     {
@@ -101,6 +119,21 @@ zones[xi.zone.BASTOK_MINES] =
             [17735747] = 42, -- Aulavia
             [17735795] = 40, -- Proud Beard
             [17735818] = 44, -- Emaliveulaux
+        },
+        STARLIGHT_DECORATIONS =
+        {
+            [17735996] = 17735996,  -- Starlight Celebration Planter
+            [17735997] = 17735997,  -- Starlight Celebration Planter
+            [17735998] = 17735998,  -- Starlight Celebration Planter
+            [17735999] = 17735999,  -- Starlight Celebration Planter
+            [17736000] = 17736000,  -- Starlight Celebration Planter
+            [17736001] = 17736001,  -- Starlight Celebration Planter
+            [17735995] = 17735995,  -- Christina
+            [17736002] = 17736002,  -- Token Moogle
+            [17736003] = 17736003,  -- Event Moogle
+            [17736004] = 17736004,  -- Vendor Moogle
+            [17736005] = 17736005,  -- Vendor Moogle
+            [17735962] = 17735962,  -- Event Moogle Stall
         },
         LELEROON_BLUE_DOOR = 17735847,
         EXPLORER_MOOGLE    = 17735856,

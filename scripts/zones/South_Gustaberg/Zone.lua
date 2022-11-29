@@ -5,6 +5,8 @@ local ID = require('scripts/zones/South_Gustaberg/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/events/starlight_celebrations')
 -----------------------------------
 local zoneObject = {}
 
@@ -13,6 +15,9 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
+    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
+        xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    end
     -- NM Persistence
     if xi.settings.main.ENABLE_WOTG == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.TOCOCO)
@@ -43,6 +48,10 @@ end
 
 zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE107_ITEMS", 0)
+    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
+        local zone = 107
+        xi.events.starlightCelebration.resetSmileHelpers(zone)
+    end
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

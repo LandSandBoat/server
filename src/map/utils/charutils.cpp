@@ -463,8 +463,9 @@ namespace charutils
                    "fame_aby_altepa, "     // 15
                    "fame_aby_grauberg, "   // 16
                    "fame_aby_uleguerand, " // 17
-                   "fame_adoulin,"         // 18
-                   "unity_leader "         // 19
+                   "fame_adoulin, "        // 18
+                   "fame_holiday, "        // 19
+                   "unity_leader "         // 20
                    "FROM char_profile "
                    "WHERE charid = %u;";
 
@@ -493,7 +494,8 @@ namespace charutils
             PChar->profile.fame[12]     = (uint16)sql->GetIntData(16); // AbysseaGrauberg
             PChar->profile.fame[13]     = (uint16)sql->GetIntData(17); // AbysseaUleguerand
             PChar->profile.fame[14]     = (uint16)sql->GetIntData(18); // Adoulin
-            PChar->profile.unity_leader = (uint8)sql->GetUIntData(19);
+            PChar->profile.fame[15]     = (uint16)sql->GetIntData(19); // Special Events
+            PChar->profile.unity_leader = (uint8)sql->GetUIntData(20);
         }
 
         roeutils::onCharLoad(PChar);
@@ -5180,12 +5182,13 @@ namespace charutils
                             "fame_aby_altepa = %u,"
                             "fame_aby_grauberg = %u,"
                             "fame_aby_uleguerand = %u,"
-                            "fame_adoulin = %u "
+                            "fame_adoulin = %u,"
+                            "fame_holiday = %u "
                             "WHERE charid = %u;";
 
         sql->Query(Query, PChar->profile.fame[0], PChar->profile.fame[1], PChar->profile.fame[2], PChar->profile.fame[3], PChar->profile.fame[4],
                    PChar->profile.fame[5], PChar->profile.fame[6], PChar->profile.fame[7], PChar->profile.fame[8], PChar->profile.fame[9],
-                   PChar->profile.fame[10], PChar->profile.fame[11], PChar->profile.fame[12], PChar->profile.fame[13], PChar->profile.fame[14], PChar->id);
+                   PChar->profile.fame[10], PChar->profile.fame[11], PChar->profile.fame[12], PChar->profile.fame[13], PChar->profile.fame[14], PChar->profile.fame[15], PChar->id);
     }
 
     /************************************************************************

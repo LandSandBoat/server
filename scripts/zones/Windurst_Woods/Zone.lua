@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Windurst_Woods/IDs')
 require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/events/starlight_celebrations')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
@@ -13,6 +14,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     applyHalloweenNpcCostumes(zone:getID())
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end

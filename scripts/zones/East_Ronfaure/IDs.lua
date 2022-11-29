@@ -55,6 +55,12 @@ zones[xi.zone.EAST_RONFAURE] =
         VOIDWALKER_OBTAIN_KI          = 11069, -- Obtained key item: <keyitem>!
         LEARNS_SPELL                  = 11959, -- <name> learns <spell>!
         UNCANNY_SENSATION             = 11961, -- You are assaulted by an uncanny sensation.
+        SMILEBRINGER_START            = 11031, -- So, are you ready-steady? Beginner level training...GO! Come on, pump those legs like there's no tomorrow!
+        SMILEHELPER_IDLE              = 11059, -- This is a checkpointaru for the Smilebringer Boot camp. To learny-wearn more, please speak with the smile sergeant posted by the town entrance.
+        SMILEHELPER_CHECKPOINT_1      = 11053, -- Checkpoint <number> cleared, Elasped time: [minutes], [seconds]
+        SMILEHELPER_CHECKPOINT_2      = 11054, -- Checkpoint <number> cleared! You gain the effect of Flee. Elasped time: [minutes], [seconds]
+        SMILEHELPER_ALREADY_VISITED   = 11055, -- You have already cleared this checkpoint. Elapsed time: [minutes], [seconds]
+        SMILEHELPER_POINTS_CLEARED    = 11057, -- All checkpoints cleared! Please report back to the smile sergeant in charge.
     },
 
     mob =
@@ -118,6 +124,23 @@ zones[xi.zone.EAST_RONFAURE] =
             17191533,
             17191534,
             17191535,
+        },
+        STARLIGHT_DECORATIONS =
+        {
+            [17191562] = 17191562,  -- Stampeding Bison (Smilebringer Bootcamp Sergeant)
+        },
+        SMILE_HELPERS =
+        {
+            [17191563] = 17191563,  -- Smile Helper
+            [17191564] = 17191564,  -- Smile Helper
+            [17191565] = 17191565,  -- Smile Helper
+            [17191566] = 17191566,  -- Smile Helper
+            [17191567] = 17191567,  -- Smile Helper
+            [17191568] = 17191568,  -- Smile Helper
+            [17191569] = 17191569,  -- Smile Helper
+            [17191570] = 17191570,  -- Smile Helper
+            [17191571] = 17191571,  -- Smile Helper
+            [17191572] = 17191572,  -- Smile Helper
         },
     },
 }

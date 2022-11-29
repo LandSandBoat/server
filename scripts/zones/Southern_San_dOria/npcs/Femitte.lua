@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
+require("scripts/globals/events/starlight_celebrations")
 -----------------------------------
 local entity = {}
 
@@ -15,6 +16,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2)
+        return
+    end
+
     local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
     local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
     local wildcatSandy = player:getCharVar("WildcatSandy")

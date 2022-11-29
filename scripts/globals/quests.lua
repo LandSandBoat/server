@@ -68,6 +68,7 @@ xi.quest.fame_area =
     ABYSSEA_GRAUBERG   = 13,
     ABYSSEA_ULEGUERAND = 14,
     ADOULIN            = 15,
+    HOLIDAY            = 16, -- Holidays, Special Events
 }
 
 xi.quest.id =
