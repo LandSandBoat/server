@@ -120,7 +120,7 @@ quest.sections =
                     quest:setVar(player, 'Stage', os.time() + 300)
                     quest:setVar(player, 'Prog', requestedBody)
 
-                    return quest:progressEvent(92, 0, requestedBody)
+                    return quest:progressEvent(92, 0, requestedBody, requestedBody)
                 end,
             },
         },
@@ -142,7 +142,7 @@ quest.sections =
                         if player:getEquipID(xi.slot.BODY) == requestedBody then
                             return quest:progressEvent(96)
                         else
-                            return quest:progressEvent(93, 0, requestedBody)
+                            return quest:progressEvent(93, 0, requestedBody, requestedBody)
                         end
                     else -- Over time. Quest failed.
                         return quest:progressEvent(102)
