@@ -6,7 +6,9 @@ local ID = require('scripts/zones/Carpenters_Landing/IDs')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/helm')
-require("scripts/globals/barge")
+require('scripts/globals/barge')
+require('scripts/globals/zone')
+
 -----------------------------------
 local zoneObject = {}
 
@@ -15,10 +17,10 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    -- Barge Regions
-    zone:registerRegion(1, -300, -10, 499, -275, 10, 534) -- Barge at north landing
-    zone:registerRegion(2, 233, -10, -545, 260, 10, -513) -- Barge at south landing
-    zone:registerRegion(3, -121, -10, 56.2, -143, 10, 90) -- Barge as central landing
+    -- Barge Regions (100%)
+    zone:registerTriggerArea(1, -271, 38, 533, 0, 0, 0) -- Barge at north landing
+    zone:registerTriggerArea(2, 233, -15, -555, 270, 15, -500) -- Barge at south landing
+    zone:registerTriggerArea(3, -115, 28, 82, 0, 0, 0) -- Barge as central landing
 
     if xi.settings.main.ENABLE_WOTG == 1 then
         UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
@@ -64,11 +66,12 @@ zoneObject.onGameDay = function()
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    xi.barge.aboard(player, region:GetRegionID(), true)
+    xi.barge.aboard(player, triggerArea:GetTriggerAreaID(), true)
 end
 
-zoneObject.onRegionLeave = function(player, region)
-    xi.barge.aboard(player, region:GetRegionID(), false)
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+
+    xi.barge.aboard(player, triggerArea:GetTriggerAreaID(), false)
 end
 
 zoneObject.onTransportEvent = function(player, transport)

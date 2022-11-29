@@ -7,14 +7,9 @@ mixins = { require("scripts/mixins/job_special") }
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setAnimtationSub(1)
-    mob:hideName(false)
+    mob:setAnimationSub(1) -- Jumping Animation
     mob:setUntargetable(false)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(true)
-    mob:SetMobAbilityEnabled(true)
 end
-
 
 entity.onMobFight = function(mob)
 end

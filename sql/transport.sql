@@ -64,11 +64,11 @@ INSERT INTO `transport` VALUES(16, 'Manaclip_Bibiki-Purgonorgo', 16793983, 16793
 INSERT INTO `transport` VALUES(17, 'Manaclip_Purgonorgo-Bibiki', 16793983, 16793985, -392.000, 0.000, -364.000, 128, 0, 20, 21, 500, 720, 20, 40, 20, 3, 17);
 
 -- Phanauet Channel Barge
-INSERT INTO `transport` VALUES (20, 'Barge_South-Central-Emfea',      16785747, 16785755,  246.377, 0.000, -529.793, 192, 3, 18, 19, 0, 1440, 45, 85, 31, 1, 16); -- 3 hours 45 min (225)
-INSERT INTO `transport` VALUES (21, 'Barge_Central-South-Newtpool',   16785747, 16785756, -125.042, 0.000,   72.786, 160, 2, 20, 21, 0, 1440, 35, 75, 35, 1, 16); -- 3 hours 45 min (225)
-INSERT INTO `transport` VALUES (23, 'Barge_South-North',              16785747, 16785755,  246.377, 0.000, -529.793, 192, 3, 18, 19, 0, 1440, 35, 75, 35, 1, 16); -- 5 hours 50 min (350)
-INSERT INTO `transport` VALUES (25, 'Barge_North-Central',            16785747, 16785757, -291.355, 0.000,  516.868,  32, 1, 24, 25, 0, 1440, 34, 45, 35, 1, 16); -- 1 hour  50 min (110)
-INSERT INTO `transport` VALUES (26, 'Barge_Central-South-Newtpool-2', 16785747, 16785756, -125.042, 0.000,   72.786, 160, 2, 20, 21, 0, 1440, 34, 45, 35, 1, 16); -- 3 hours 45 min (225)
--- INSERT INTO `transport` VALUES (22, 'Barge_South-OOS',             16785747, 16785755,  246.377, 0.000, -529.793,  64, 0, 23, 23, 0, 1440, 33,  0,  0, 1, 16);
--- INSERT INTO `transport` VALUES (24, 'Barge_North-OOS',             16785747, 16785757, -291.355, 0.000,  516.868, 160, 0, 22, 22, 0, 1440, 33, 33,  0, 1, 16);
--- INSERT INTO `transport` VALUES (27, 'Barge_South-OOS-2',           16785747, 16785755,  246.377, 0.000, -529.793,  64, 0, 23, 23, 0, 1440, 33,  0,  0, 1, 16);
+INSERT INTO `transport` VALUES (20, 'Barge_South-Central-Emfea',      16785747, 16785755, 246.377,  0.000, -529.793, 192, 0, 18, 19,     5, 1440, 15, 35, 15, 1, 16); -- 3 hours 45 min (225)
+INSERT INTO `transport` VALUES (21, 'Barge_Central-South-Newtpool',   16785747, 16785756, -125.040, 0.000, 72.790,   160, 0, 20, 21,   267, 1440, 12, 30, 15, 1, 16); -- 3 hours 45 min (225)
+INSERT INTO `transport` VALUES (22, 'Barge_South-OOS',                16785747, 16785755,  246.377, 0.000, -529.793,  64, 0, 23, 0,   1402, 1440, 33,  0,  0, 1, 16);
+INSERT INTO `transport` VALUES (23, 'Barge_South-North',              16785747, 16785755, 246.377,  0.000, -529.793, 192, 0, 18, 19,   560, 1440, 15, 35, 15, 1, 16); -- 5 hours 50 min (350)
+INSERT INTO `transport` VALUES (24, 'Barge_North-OOS',                16785747, 16785757, -291.355, 0.000,  516.868, 160, 0, 22, 0,    925, 1440, 40,  0,  0, 1, 16);
+INSERT INTO `transport` VALUES (25, 'Barge_North-Central',            16785747, 16785757, -291.355, 0.000, 516.868,   32, 0, 24, 25,   993, 1440, 12, 40, 15, 1, 16); -- 1 hour  50 min (110)
+INSERT INTO `transport` VALUES (26, 'Barge_Central-South-Newtpool-2', 16785747, 16785756, -125.040, 0.000, 72.790,   160, 0, 20, 21,  1148, 1440, 12, 30, 15, 1, 16); -- 3 hours 45 min (225)
+INSERT INTO `transport` VALUES (27, 'Barge_South-OOS-2',              16785747, 16785755,  246.377, 0.000, -529.793,  64, 0, 23, 0,    512, 1440, 33,  0,  0, 1, 16);

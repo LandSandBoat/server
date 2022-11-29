@@ -1,38 +1,14 @@
 ------------------------------------
 -- Phanauet Channel
 -- https://ffxiclopedia.fandom.com/wiki/Phanauet_Channel
---
--- code modified from Manaclipper
---
 ------------------------------------
--- cut scenes
-------------------------------------
--- 10 - arrival parked boat
--- 11 - arrival fly in to dock, no boat
--- 12 - player on dock ?
--- 13 - player on dock ?
--- 14 - south landing departure on boat
--- 15 - south landing on dock
--- 16 - north landing departure on boat
--- 17 - north landing on dock
--- 18 - Chuaie - south landing
--- 19 - Ratoulle - central landing
--- 20 - Felourie - north landing
-
--- 33 - knocked out for no barge ticket - South
--- 34 - knocked out for no barge ticket - North
--- 42 - knocked out for no barge ticket - Central
-
--- 38 - central landing dock fly in
--- 39 - central landing player on dock
--- 40 - central landing departure on boat
--- 41 - central landing on dock
-
+-- Cut Scenes
 ------------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
+require("scripts/globals/npc_util")
+local ID = require('scripts/zones/Carpenters_Landing/IDs')
 ------------------------------------
-
 xi = xi or {}
 xi.barge = xi.barge or {}
 
@@ -50,69 +26,65 @@ local act =
 -- Barge Destinations
 local dest =
 {
-    NORTH_LANDING         = 0, -- North Landing via the main canal
-    SOUTH_LANDING         = 1, -- South Landing via the main canal
-    CENTRAL_LANDING       = 2, -- Central Landing via the main canal
+    SOUTH_LANDING         = 0, -- South Landing via the main canal
+    CENTRAL_LANDING       = 1, -- Central Landing via the main canal
+    NORTH_LANDING         = 2, -- North Landing via the main canal
     CENTRAL_LANDING_EMFEA = 3, -- Central Landing via Emfea Waterway
 }
 
 -- Locations for timekeeper NPCs
 xi.barge.location =
 {
-    NORTH_LANDING    = 0,
-    SOUTH_LANDING    = 1,
+    NORTH_LANDING    = 1,
     CENTRAL_LANDING  = 2,
-    BARGE            = 3,
+    SOUTH_LANDING    = 3,
+    BARGE            = 4,
 }
 
 local bargeSchedule =
 {
-    [xi.barge.location.NORTH_LANDING] =
+    [xi.barge.location.NORTH_LANDING] = -- 1
     {
-        { time =  960, act = act.ARRIVE_OOS, dest = dest.CENTRAL_LANDING }, -- 16:00 Arrive OOS (Confirmed)
-        { time =  970, act = act.DEPART_OOS, dest = dest.CENTRAL_LANDING }, -- 16:10 Depart OOS (Confirmed)
-        { time = 1005, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING }, -- 16:45 to Central (Confirmed)
-        { time = 1045, act = act.DEPART,     dest = dest.CENTRAL_LANDING }, -- 17:25 to Central (Confirmed)
+        { time =  965, act = act.ARRIVE_OOS, dest = dest.CENTRAL_LANDING }, -- 16:05 Arrive OOS
+        { time =  973, act = act.DEPART_OOS, dest = dest.CENTRAL_LANDING }, -- 16:12 Depart OOS
+        { time = 1005, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING }, -- 16:45 to Central
+        { time = 1045, act = act.DEPART,     dest = dest.CENTRAL_LANDING }, -- 17:25 to Central
+        { time = 2405, act = act.DEPART,     dest = dest.CENTRAL_LANDING }, -- 16:05 Need this to close the loop
+
     },
     [xi.barge.location.CENTRAL_LANDING] =
     {
-        { time =  275, act = act.ARRIVE, dest = dest.SOUTH_LANDING }, -- 04:35 from South Landing - EMFEA (confirmed)
-        { time =  310, act = act.DEPART, dest = dest.SOUTH_LANDING }, -- 05:10 to South Landing - Newtpool (Confirmed)
-        { time = 1155, act = act.ARRIVE, dest = dest.SOUTH_LANDING }, -- 19:15 from North Landing
+        { time =  280, act = act.ARRIVE, dest = dest.SOUTH_LANDING }, -- 04:40 from South Landing - EMFEA
+        { time =  310, act = act.DEPART, dest = dest.SOUTH_LANDING }, -- 05:10 to South Landing - Newtpool
+        { time = 1160, act = act.ARRIVE, dest = dest.SOUTH_LANDING }, -- 19:20 from North Landing
         { time = 1190, act = act.DEPART, dest = dest.SOUTH_LANDING }, -- 19:50 to South Landing - Newtpool PM
+        { time = 1720, act = act.ARRIVE, dest = dest.SOUTH_LANDING }, -- 04:40 Need this to close the loop
     },
     [xi.barge.location.SOUTH_LANDING] =
     {
-        { time =   15, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 from Central Landing - EMFEA (Confirmed)
-        { time =   50, act = act.DEPART,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:50 to Central Landing - EMFEA (Confirmed)
-        { time =  535, act = act.ARRIVE_OOS, dest = dest.NORTH_LANDING         }, -- 08:55 Arrive OOS (Confirmed)
-        { time =  545, act = act.DEPART_OOS, dest = dest.NORTH_LANDING         }, -- 09:05 Depart OOS (Confirmed)
-        { time =  575, act = act.ARRIVE,     dest = dest.NORTH_LANDING         }, -- 09:35 Arrive from North Landing (Confirmed)
-        { time =  610, act = act.DEPART,     dest = dest.NORTH_LANDING         }, -- 10:10 to North Landing - Main Canal (Confirmed)
-        { time = 1415, act = act.ARRIVE_OOS, dest = dest.CENTRAL_LANDING_EMFEA }, -- 23:35 Arrive OOS (Confirmed)
-        { time = 1425, act = act.DEPART_OOS, dest = dest.CENTRAL_LANDING_EMFEA }, -- 23:45 Depart OOS (Confirmed)
+        { time =   15, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 from Central Landing - EMFEA
+        { time =   50, act = act.DEPART,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 00:50 to Central Landing - EMFEA
+        { time =  540, act = act.ARRIVE_OOS, dest = dest.NORTH_LANDING         }, -- 09:00 Arrive OOS
+        { time =  547, act = act.DEPART_OOS, dest = dest.NORTH_LANDING         }, -- 09:07 Depart OOS
+        { time =  575, act = act.ARRIVE,     dest = dest.NORTH_LANDING         }, -- 09:35 Arrive from North Landing
+        { time =  610, act = act.DEPART,     dest = dest.NORTH_LANDING         }, -- 10:10 to North Landing - Main Canal
+        { time = 1420, act = act.ARRIVE_OOS, dest = dest.CENTRAL_LANDING_EMFEA }, -- 23:40 Arrive OOS
+        { time = 1427, act = act.DEPART_OOS, dest = dest.CENTRAL_LANDING_EMFEA }, -- 23:47 Depart OOS
+        { time = 1455, act = act.ARRIVE,     dest = dest.CENTRAL_LANDING_EMFEA }, -- 24:15 Need this to close the loop
+
     },
     [xi.barge.location.BARGE] =
     {
-        { time =   15, act = act.ARRIVE, route = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 South Landing
-        { time =  275, act = act.ARRIVE, route = dest.SOUTH_LANDING         }, -- 04:35 Central Landing
-        { time =  575, act = act.ARRIVE, route = dest.NORTH_LANDING         }, -- 09:35 South Landing
-        { time = 1005, act = act.ARRIVE, route = dest.CENTRAL_LANDING       }, -- 16:45 North Landing
-        { time = 1155, act = act.ARRIVE, route = dest.SOUTH_LANDING         }, -- 19:15 Central Landing
+        { time =   15, act = act.ARRIVE, route = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 Arrive at South Landing to Central Landing
+        { time =  280, act = act.ARRIVE, route = dest.SOUTH_LANDING         }, -- 04:40 Arrive at Central Landing to South Landing
+        { time =  575, act = act.ARRIVE, route = dest.NORTH_LANDING         }, -- 09:35 Arrive at South Landing to North Landing
+        { time = 1005, act = act.ARRIVE, route = dest.CENTRAL_LANDING       }, -- 16:45 Arrive at North Landing to Central Loading
+        { time = 1160, act = act.ARRIVE, route = dest.SOUTH_LANDING         }, -- 19:20 Arrive at Central Landing to South Landing
+        { time = 1455, act = act.ARRIVE, route = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 Need this to close the loop
     },
 }
 
-local bargeTable =
-{
-    -- [xi.ki.ticketki] = {ticketVar, locationVar, validRegion1, validRegion2, validRegion3, invalidRegion1, invalidRegion2, invalidRegion3}
-    [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
-    [xi.ki.BARGE_TICKET] =       { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
-}
-
 xi.barge.timekeeperOnTrigger = function(player, location, eventId)
-    if verbose then
-        printf("INFO: [%i] [%i] in xi.barge.timekeeperOnTrigger, location, eventID")
-    end
     local schedule = bargeSchedule[location]
 
     if schedule then
@@ -141,12 +113,19 @@ xi.barge.timekeeperOnTrigger = function(player, location, eventId)
     end
 end
 
-xi.barge.aboard = function(player, regionId, isAboard)
-    player:setCharVar("[barge]aboard", isAboard and regionId or 0)
+
+
+xi.barge.aboard = function(player, triggerArea, isAboard)
+    if verbose then
+        printf("INFO: player aboard set [%s] [%i] [%s] in xi.barge.aboard", player:getName(), triggerArea, tostring(isAboard))
+    end
+
+    player:setCharVar("[barge]aboard", isAboard and triggerArea or 0)
 end
 
 xi.barge.onZoneIn = function(player)
     local zoneId = player:getZoneID()
+    print("ON ZONE IN ")
 
     -- Zoning onto barge. set [barge]arrivalEventId based on schedule.
     if zoneId == xi.zone.PHANAUET_CHANNEL then
@@ -160,212 +139,130 @@ xi.barge.onZoneIn = function(player)
                 break
             end
         end
-
+        print(nextEvent)
         if nextEvent.route == dest.NORTH_LANDING then
             -- Arrival CS - 10 parked boat
             -- Arrival CS - 11 fly in to dock, no boat
             -- North landing departure CS - 16 on boat
             -- North landing CS 17 - player on dock - 13?
-            player:setCharVar("[barge]arrivalEventId", 11) --
-        elseif nextEvent.route == dest.CENTRAL_LANDING then
+            player:setCharVar("[barge]arrivalEventId", 11)
+        elseif nextEvent.route == dest.CENTRAL_LANDING or nextEvent.route == dest.CENTRAL_LANDING_EMFEA then
             -- CS38 dock fly in
             -- Central landing CS 39 - player on dock
             -- CS40 Central landing departure on boat
             -- CS41 Central landing on dock
-            player:setCharVar("[barge]arrivalEventId", 38) --
+            player:setCharVar("[barge]arrivalEventId", 38)
         elseif nextEvent.route == dest.SOUTH_LANDING then
             -- Arrival CS - 10 parked boat
             -- Arrival CS - 11 fly in to dock, no boat
             -- South landing departure CS - 14 on boat
             -- South landing CS 15 - player on dock - 12?
-            player:setCharVar("[barge]arrivalEventId", 10) --
+            player:setCharVar("[barge]arrivalEventId", 10)
         end
 
     -- zoning into carpenters landing. play the eventId stored in [barge]arrivalEventId.
     elseif zoneId == xi.zone.CARPENTERS_LANDING then
         local eventId = player:getCharVar("[barge]arrivalEventId")
-        player:setCharVar("[barge]arrivalEventId", 0)
+        -- player:setCharVar("[barge]arrivalEventId", 0)
 
         if eventId > 0 then
             return eventId
         else
-             player:setPos(669.917, -23.138, 911.655, 111)
+            player:setPos(6.509, -9.163, -819.333, 239)
             return -1
         end
+
+        player:setCharVar("[barge]arrivalEventId", 0)
+    end
+
+    if verbose then
+        printf("INFO: [%s] [%i] [%s] in xi.barge.onZoneIn", player:getName(), zoneId, player:getCharVar("[barge]arrivalEventId"))
     end
 end
 
 xi.barge.onTransportEvent = function(player, transport)
+    local bargeTable =
+    {
+        -- [xi.ki.ticketki] = {ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3}
+        [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+        [xi.ki.BARGE_TICKET] =       { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+    }
+
     local zoneID = zones[player:getZoneID()]
-    local region = player:getCurrentRegion()
-    local hasCS = 0
-
-    for ki, vars in pairs(bargeTable) do
-        -- if player:getGMLevel() >= 2 then
-        --     player:startEvent(vars[region + 2]) -- Succeed Event
-        --     hasCS = 1 -- Skip Failure Catch
-        --     break
-        if player:hasKeyItem(ki) then -- Multi-ticket and Single Ticket
-            local uses = player:getCharVar(vars[1])
-            if uses > 1 then -- Multi-ticket
-                player:messageSpecial(zoneID.text.LEFT_BILLET, 0, ki, uses - 1) -- Ticket Count -1 Message
-                player:setCharVar(vars[1], uses - 1) -- Set Char Var
-                player:startEvent(vars[region + 2]) -- Succeed Event
-                hasCS = 1 -- Skip Failure Catch
-                break
-            elseif uses == 1 then -- Multi Ticket (last use) and Single Ticket
-                player:messageSpecial(zoneID.text.END_BILLET, 0, ki) -- End of Ticket Msg
-                player:setCharVar(vars[1], 0) -- Reset Char Var Just In Case
-                player:delKeyItem(ki) -- Del KI
-                player:startEvent(vars[region + 2]) -- Succeed Event
-                hasCS = 1 -- Skip Failure Catch
-                break
-            end
-        end
-    end
-
-    if hasCS == 0 then -- Failure Catch
-        player:startEvent(bargeTable[region + 5]) -- Failure Event
-    end
-
-end
-
-xi.barge.onTransportEvent = function(player, transport)
-    local ID = zones[player:getZoneID()]
-    local aboard = player:getCharVar("[barge]aboard")
-    local canride = false
+    local aboard = player:getCharVar("[barge]aboard") -- returns triggerRegion
+    local canride = 0
 
     if aboard > 0 then
-        if player:hasKeyItem(xi.ki.ALLYOUCANRIDEPASS) then
-            -- GM only KI
-            canride = true
-        elseif player:hasKeyItem(xi.ki.BARGE_TICKET) then
-            player:delKeyItem(xi.ki.BARGE_TICKET)
-            canride = true
-        elseif player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
-            local uses = player:getCharVar("Barge_Ticket")
-
-            if uses == 1 then
-                player:messageSpecial(ID.text.END_BILLET, 0, xi.ki.BARGE_MULTI_TICKET)
-                player:delKeyItem(xi.ki.BARGE_MULTI_TICKET)
-            else
-                player:messageSpecial(ID.text.LEFT_BILLET, 0, xi.ki.BARGE_MULTI_TICKET, uses - 1)
+        for ki, vars in pairs(bargeTable) do
+            if player:hasKeyItem(ki) then -- Multi-ticket and Single Ticket
+                local uses = player:getCharVar(vars[1]) -- Number of tickets
+                if uses > 1 then -- Multi-ticket
+                    player:messageSpecial(zoneID.text.LEFT_BILLET, 0, ki, uses - 1) -- Ticket Count -1 Message
+                    player:setCharVar(vars[1], uses - 1) -- Set Char Var
+                    player:startEvent(vars[aboard + 2]) -- Succeed Event
+                    canride = 1 -- Skip Failure Catch
+                    break
+                elseif uses == 1 then -- Multi Ticket (last use) and Single Ticket
+                    player:messageSpecial(zoneID.text.END_BILLET, 0, ki) -- End of Ticket Msg
+                    player:setCharVar(vars[1], 0) -- Reset Char Var Just In Case
+                    player:delKeyItem(ki) -- Del KI
+                    player:startEvent(vars[aboard + 2]) -- Succeed Event
+                    canride = 1 -- Skip Failure Catch
+                    break
+                end
             end
-            player:setCharVar("Barge_Ticket", uses - 1)
-            canride = true
-        else
-            canride = false
+        end
+
+        if canride == 0 then -- Failure Catch
+            player:startEvent(vars[aboard + 5]) -- Failure Event
         end
     end
-
---[[    if verbose then
-        printf("INFO: [%s] [%s] [%s] [%s] in xi.barge.onTransportEvent", player:getName(), aboard, tostring(canride), player:getCharVar("Barge_Ticket"))
-    end]]
-
-    -- leaving North Landing. must be standing in region 1. must have a ticket.
-    if aboard == 1 then
-        if canride then
-            player:startEvent(16)
-        else
-            player:startEvent(34)
-        end
-        -- leaving South Landing. must be standing in region 2. must have a ticket.
-    elseif aboard == 2 then
-        if canride then
-            player:startEvent(14)
-        else
-            player:startEvent(33)
-        end
-        -- leaving Central Landing. must be standing in region 3. must have a ticket.
-    elseif aboard == 3 then
-        if canride then
-            player:startEvent(40)
-        else
-            player:startEvent(42)
-        end
-    end
-
 end
 
+-- Ticket Shops
 xi.barge.ticketshopOnTrigger = function(player, eventId)
-    local ticketInformation =
-    {
-        -- {ki, ki2, currentTicket, ticketVal, gil, maxTickets},
-        { xi.ki.BARGE_TICKET,        xi.ki.BARGE_MULTI_TICKET, "currentTicket", 3, player:getGil(), "Barge_Ticket" },
-        { xi.ki.BARGE_TICKET,        nil,                      "currentTicket", 1, player:getGil(), "Barge_Ticket" },
-        { xi.ki.BARGE_MULTI_TICKET,  nil,                      "currentTicket", 2, player:getGil(), "Barge_Ticket" },
-        { nil,                       nil,                      "currentTicket", 0, player:getGil(), "Barge_Ticket" },
-    }
-    for it, ticket in pairs(ticketInformation) do
-        if ticket[2] ~= nil and player:hasKeyItem(ticket[1]) and player:hasKeyItem(ticket[2]) then -- Has both KI
-            player:setLocalVar(ticket[3], ticket[4]) -- Set currentTicket
-        elseif player:hasKeyItem(ticket[1]) and it >= 2 then -- Has only 1 KI
-            player:setLocalVar(ticket[3], ticket[4]) -- Set currentTicket
-        end
-        -- Params (KI1, KI2, Price of KI1, Price of KI2, Multiticket #s left, Which tickets does player have)
-        if player:getLocalVar(ticket[3]) ~= 0 then -- Only executes if we set currentTicket
-            return player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar(ticket[6]), player:getLocalVar(ticket[3]), 0, 4095) -- Start event and stop the loop so we don't trigger more than 1 event.
-        elseif player:getLocalVar(ticket[3]) == 0 then -- If no ticket
-            return player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar(ticket[6]), player:getLocalVar(ticket[3]), 0, 4095) -- Start event and stop the loop if we do not have any KI.
-        end
-        -- print(player:getLocalVar("currentTicket"))
+    player:setCharVar("currentticket", 0) -- Set ticket to 0 in case something breaks
+
+    if (player:hasKeyItem(xi.ki.BARGE_TICKET)) and (player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)) then
+        player:setCharVar("currentticket", 3)
+    elseif  (player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)) then
+        player:setCharVar("currentticket", 2)
+    elseif (player:hasKeyItem(xi.ki.BARGE_TICKET)) then
+        player:setCharVar("currentticket", 1)
+    else
+        player:setCharVar("currentticket", 0)
     end
+
+    -- Params (KI1, KI2, Price of KI1, Price of KI2, Multiticket #s left, Which tickets does player have)
+    player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar("Barge_Ticket"), player:getCharVar("currentticket"), 0, 4095) -- Start event
 end
-
--- xi.barge.ticketshoponEventFinish = function(player, csid, option)
---     local currentticket = player:getLocalVar("currentticket")
---     local numberticket = player:getCharVar("Barge_Ticket")
-
---     if (csid == 31 or csid == 32 or csid == 43) then
-
---         if option==1 and currentticket == 1 then
---             player:messageSpecial(ID.text.HAVE_BILLET, xi.ki.BARGE_TICKET)
---         elseif option==1 and (player:getGil() >= 50) then
---             player:delGil(50)
---             player:addKeyItem(xi.ki.BARGE_TICKET)
---             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_TICKET)
---         elseif option==2 and (currentticket == 2 or currentticket == 3) and numberticket <= 9 then
---             player:delGil(300)
---             player:messageSpecial(ID.text.MTICKET_ADDED, xi.ki.BARGE_MULTI_TICKET, 10)
---             player:setCharVar("Barge_Ticket", 10)
---         elseif option==2 and player:getGil() >= 300 then
---             player:delGil(300)
---             player:addKeyItem(xi.ki.BARGE_MULTI_TICKET)
---             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_MULTI_TICKET)
---             player:setCharVar("Barge_Ticket", 10)
---         else
---             player:messageSpecial(ID.text.NO_GIL)
---         end
---     end
--- end
 
 xi.barge.ticketshoponEventFinish = function(player, csid, option)
-    local csInfo =
-    {
-        -- {csid1, csid2, csid3, option, message, ki, gil, cost, currentTicket, Barge_Ticket, maxTickets, ticketTrigger},
-        { 31, 32, 43, 1, ID.text.HAVE_BILLET     , xi.ki.BARGE_TICKET      , player:getGil(), nil, "currentTicket", "Barge_Ticket", nil, 0 },
-        { 31, 32, 43, 1, ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_TICKET      , player:getGil(), 50 , "currentTicket", "Barge_Ticket", nil, 0 },
-        { 31, 32, 43, 2, ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_MULTI_TICKET, player:getGil(), 300, "currentTicket", "Barge_Ticket", 10 , 0 },
-        { 31, 32, 43, 2, ID.text.MTICKET_ADDED   , xi.ki.BARGE_MULTI_TICKET, player:getGil(), 300, "currentTicket", "Barge_Ticket", 10 , 9 },
-    }
+    local currentticket = player:getCharVar("currentticket")
+    local numberticket = player:getCharVar("Barge_Ticket")
 
-    for _, cs in pairs(csInfo) do
-        if (csid == cs[1] or csid == cs[2] or csid == cs[3]) and option == cs[4] then -- Select correct CS and option
-            if cs[7] >= cs[8] and cs[9] ~= 1 and player:getCharVar(cs[10]) <= cs[12] then -- Does player meet requirements for 2 -> 4
-                player:delGil(cs[8]) -- Delete Gil
-                if cs[5] == ID.text.KEYITEM_OBTAINED then player:addKeyItem(cs[6]) end -- If KI added, add KI
-                if cs[11] ~= nil then player:setCharVar(cs[10], cs[11]) end -- Set max tickets if needed
-                return player:messageSpecial(cs[5], cs[6]) -- Provide appropriate message
-            elseif cs[9] == 1 then -- Cannot buy a ticket
-                return player:messageSpecial(cs[5], cs[6]) -- Provide appropriate message
-            elseif cs[7] <= cs [8] then
-                return player:messageSpecial(ID.text.NO_GIL)
-            end
-
+    -- Option 1: BARGE_TICKET
+    -- Option 2: MULTI_TICKET
+    if (csid == 31 or csid == 32 or csid == 43) then
+        if option == 1 and (currentticket == 1 or currentticket == 3) then -- If you have BARGE_TICKET
+            -- Event auto plays the correct message
+        elseif option == 1 and (player:getGil() >= 50) then
+            player:delGil(50)
+            player:addKeyItem(xi.ki.BARGE_TICKET)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_TICKET)
+        elseif option == 2 and (currentticket == 2 or currentticket == 3) and numberticket <= 9 then -- If you have multi ticket with less than 9
+            player:delGil(300)
+            player:messageSpecial(ID.text.MTICKET_ADDED, xi.ki.BARGE_MULTI_TICKET, 10)
+            player:setCharVar("Barge_Ticket", 10)
+        elseif option == 2 and player:getGil() >= 300 then
+            player:delGil(300)
+            player:addKeyItem(xi.ki.BARGE_MULTI_TICKET)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_MULTI_TICKET)
+            player:setCharVar("Barge_Ticket", 10)
+        else
+            -- Event auto plays the correct message
         end
-        -- return player:messageSpecial(ID.text.NO_GIL)
     end
-
 end
 
 xi.barge.onRouteStart = function(transportZone)

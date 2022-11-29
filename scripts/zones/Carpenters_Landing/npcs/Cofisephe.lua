@@ -8,13 +8,13 @@ local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/barge")
 -----------------------------------
 local entity = {}
-local eventid = 31
+local eventId = 31
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.barge.ticketshopOnTrigger(player, eventid)
+    xi.barge.ticketshopOnTrigger(player, eventId)
 end
 
 entity.onEventUpdate = function(player, csid, option)
