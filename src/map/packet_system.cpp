@@ -5863,17 +5863,27 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             break;
         case NFLAG_ANON:
+        {
             // /anon [on|off]
-            PChar->nameflags.flags ^= FLAG_ANON;
-            if (PChar->nameflags.flags & FLAG_ANON)
+            auto flags = PChar->nameflags.flags;
+            auto param = data.ref<uint8>(0x10);
+            if (param == 1)
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 175));
+                PChar->nameflags.flags |= FLAG_ANON;
+                PChar->menuConfigFlags.flags |= NFLAG_ANON;
             }
-            else
+            else if (param == 2)
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 176));
+                PChar->nameflags.flags &= ~FLAG_ANON;
+                PChar->menuConfigFlags.flags &= ~NFLAG_ANON;
+            }
+
+            if (flags != PChar->nameflags.flags)
+            {
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, param == 1 ? 175 : 176));
             }
             break;
+        }
         case NFLAG_AUTOTARGET:
             // /autotarget [on|off]
             if (data.ref<uint8>(0x10) == 1)
