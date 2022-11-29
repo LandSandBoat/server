@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: Grand Palace of Hu'Xzoi
 --  NPC: Cermet Portal (Security Gate)
+--   ID: 16916882
+--  !pos -500 -2.05 280
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 -----------------------------------
@@ -8,7 +10,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if player:getZPos() < 280 then
-        player:messageSpecial(ID.text.DOES_NOT_RESPOND)
+        player:messageSpecial(ID.text.PORTAL_DOES_NOT_RESPOND)
         return 1
     end
 
