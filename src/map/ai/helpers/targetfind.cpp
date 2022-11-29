@@ -458,6 +458,24 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         return false;
     }
 
+    if (PTarget->objtype == TYPE_MOB)
+    {
+        if (m_PBattleEntity &&
+            m_PBattleEntity->objtype == TYPE_PC &&
+            !static_cast<CCharEntity*>(m_PBattleEntity)->IsMobOwner(PTarget))
+        {
+            return false; // If character isn't allowed to attack don't count it.
+        }
+
+        if (m_PBattleEntity &&
+            m_PBattleEntity->PMaster &&
+            m_PBattleEntity->PMaster->objtype == TYPE_PC &&
+            !static_cast<CCharEntity*>(m_PBattleEntity->PMaster)->IsMobOwner(PTarget))
+        {
+            return false; // If pet's master isn't allowed to attack don't count it.
+        }
+    }
+
     // shouldn't add if target is charmed by the enemy
     if (PTarget->PMaster != nullptr)
     {
