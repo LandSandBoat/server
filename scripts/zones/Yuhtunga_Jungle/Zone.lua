@@ -20,7 +20,7 @@ zoneObject.onInitialize = function(zone)
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.MEWW_THE_TURTLERIDER)
     if xi.settings.main.ENABLE_WOTG == 1 then
-        xi.mob.nmTODPersistCache(zone, ID.mob.ID.mob.BAYAWAK)
+        xi.mob.nmTODPersistCache(zone, ID.mob.BAYAWAK)
     end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
