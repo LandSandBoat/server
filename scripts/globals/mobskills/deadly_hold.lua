@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = math.random(1.5, 3)
     local crit = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.CRIT_VARIES, 1, 1, 1, nil, crit)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.CRIT_VARIES, 1, 1, 1, crit)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
