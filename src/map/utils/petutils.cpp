@@ -1799,6 +1799,7 @@ namespace petutils
         else
         {
             PPet = new CPetEntity(petType);
+            PPet->saveModifiers();
         }
 
         PPet->loc = PMaster->loc;
