@@ -12481,7 +12481,7 @@ INSERT INTO `mob_groups` VALUES (4,2763,190,'Mouse_Bat',660,0,1748,0,0,3,6,0);
 INSERT INTO `mob_groups` VALUES (5,1744,190,'Goblin_Weaver',660,0,1187,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (6,3780,190,'Stone_Eater',660,0,2340,0,0,5,7,0);
 INSERT INTO `mob_groups` VALUES (7,1214,190,'Enchanted_Bones_blm',660,1,769,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (8,3739,190,'Spook',960,1,2840,0,0,11,13,0);
+INSERT INTO `mob_groups` VALUES (8,3739,190,'Spook',360,1,2840,0,0,11,13,0);
 INSERT INTO `mob_groups` VALUES (9,4349,190,'Wind_Bats',660,0,82,0,0,9,11,0);
 INSERT INTO `mob_groups` VALUES (10,1635,190,'Goblin_Ambusher',660,0,1019,0,0,12,16,0);
 INSERT INTO `mob_groups` VALUES (11,1738,190,'Goblin_Tinkerer',660,0,1175,0,0,12,16,0);
