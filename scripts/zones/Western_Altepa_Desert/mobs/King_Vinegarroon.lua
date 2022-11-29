@@ -63,9 +63,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobDespawn = function(mob)
-    local respawn = 75600
-    SetServerVariable("KING_V_RESPAWN", os.time() + respawn) -- 21 hours
-    xi.mob.nmTODPersist(mob, respawn)
+    xi.mob.nmTODPersist(mob, 75600) -- 21 hours
     DisallowRespawn(mob:getID(), true)
 end
 
