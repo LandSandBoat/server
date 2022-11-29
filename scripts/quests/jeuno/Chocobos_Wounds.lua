@@ -18,6 +18,16 @@ require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
+local function getCurrentTime()
+    -- Check if the day has changed
+    if xi.settings.main.ERA_CHOCOBOS_WOUNDS then
+       return VanadielUniqueDay()
+    end
+
+    -- Check if the hour has changed
+    return 24 * VanadielUniqueDay() + VanadielHour()
+end
+
 quest.reward =
 {
     fame = 30,
@@ -131,7 +141,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.BUNCH_OF_GYSAHL_GREENS) then
                         return quest:progressEvent(76)
                     elseif npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS) then
-                        if quest:getVar(player, 'Timer') <= os.time() then
+                        if getCurrentTime() > quest:getVar(player, 'Timer') then
                             return quest:progressEvent(chocoboFeedTrades[quest:getVar(player, 'Prog')])
                         else
                             return quest:progressEvent(73)
@@ -154,18 +164,18 @@ quest.sections =
             onEventFinish =
             {
                 [57] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 2)
                 end,
 
                 [58] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 3)
                 end,
 
                 [59] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 4)
 
                     return quest:event(99)
@@ -173,13 +183,13 @@ quest.sections =
 
                 [60] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 5)
                 end,
 
                 [63] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    quest:setVar(player, 'Timer', os.time() + 45)
+                    quest:setVar(player, 'Timer', getCurrentTime())
                     quest:setVar(player, 'Prog', 6)
                 end,
 
