@@ -19,6 +19,9 @@ end
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.MEWW_THE_TURTLERIDER)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.ID.mob.BAYAWAK)
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
@@ -81,7 +84,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     if xi.settings.main.ENABLE_WOTG == 1 then
         local bayawak = GetMobByID(ID.mob.BAYAWAK)
         if
-            not bayawak:isSpawned() and os.time() > bayawak:getLocalVar("cooldown") and
+            not bayawak:isSpawned() and os.time() > GetServerVariable("BAYAWAK_RESPAWN") and
             xi.settings.main.ENABLE_WOTG == 1 and
             (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
         then
