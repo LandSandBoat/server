@@ -918,7 +918,7 @@ INSERT INTO `item_latents` VALUES (14014,68,7,53,1);     -- EVA +7 in areas outs
 -- Praefectus's Gloves
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14015,10,2,53,1);     -- VIT +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (14015,68,5,53,1);     -- EVA +5 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (14015,108,5,53,1);    -- Evasion Skill +5 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (14015,110,5,53,1);    -- Parrying skill +5 in areas outside own nation's control
 
 -- -------------------------------------------------------
@@ -2078,10 +2078,22 @@ INSERT INTO `item_latents` VALUES (16792,25,7,59,19);    -- Goshisho's Scythe - 
 INSERT INTO `item_latents` VALUES (16793,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (16793,19,-10,47,0);
 INSERT INTO `item_latents` VALUES (16793,21,-10,47,0);
+
+-- -------------------------------------------------------
+-- Senior Gold Musketeer's Scythe
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (16799,25,7,70,1);    -- Citizens of Bastok: Accuracy +7
+
 INSERT INTO `item_latents` VALUES (16883,25,10,52,6);    -- Spear: Accuracy +10 in Water weather
 INSERT INTO `item_latents` VALUES (16892,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (16892,20,-10,47,0);
 INSERT INTO `item_latents` VALUES (16892,22,-10,47,0);
+
+-- -------------------------------------------------------
+-- Reserve Captain's Lance
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (16893,1,10,70,0);    -- Citizens of San d'Oria: Def +10
+
 INSERT INTO `item_latents` VALUES (16899,110,5,25,0);    -- Hototogisu,parry skill +5 song/roll active
 
 -- -------------------------------------------------------
@@ -2110,6 +2122,12 @@ INSERT INTO `item_latents` VALUES (16949,10,3,53,1);     -- VIT +3 in areas outs
 INSERT INTO `item_latents` VALUES (16952,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (16952,16,-10,47,0);
 INSERT INTO `item_latents` VALUES (16952,18,-10,47,0);
+
+-- -------------------------------------------------------
+-- Reserve Captain's Greatsword
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (16953,25,7,70,0);    -- Citizens of San d'Oria: Accuracy +7
+
 INSERT INTO `item_latents` VALUES (16968,165,7,59,3);    -- Kamewari - Vs. arcana: Critical hit rate +7%
 INSERT INTO `item_latents` VALUES (16969,165,5,59,9);    -- Onikiri - Vs. demons: Critical hit rate +5%
 
@@ -2208,6 +2226,17 @@ INSERT INTO `item_latents` VALUES (17456,2,-10,47,0);
 INSERT INTO `item_latents` VALUES (17456,5,-10,47,0);
 INSERT INTO `item_latents` VALUES (17456,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (17456,20,-10,47,0);
+
+-- -------------------------------------------------------
+-- Senior Gold Musketeer's Rod
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17457,71,7,70,1);    -- Citizens of Bastok: hMP +7
+
+-- -------------------------------------------------------
+-- Reserve Captain's Mace
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17458,71,7,70,0);    -- Citizens of San d'Oria: hMP +7
+
 INSERT INTO `item_latents` VALUES (17461,23,10,56,0);    -- Rune Rod +10 Atk.
 INSERT INTO `item_latents` VALUES (17461,112,6,56,0);    -- Rune Rod +6 Healing Magic Skill
 INSERT INTO `item_latents` VALUES (17461,369,-4,56,0);   -- Rune Rod -4MP/tic
@@ -2239,7 +2268,7 @@ INSERT INTO `item_latents` VALUES (17507,20,-10,47,0);
 -- -------------------------------------------------------
 -- Master Caster's baghnakhs
 -- -------------------------------------------------------
--- INSERT INTO `item_latents` VALUES (17508,23,10,?,?);  -- Citizens of Windurst: Attack+10
+INSERT INTO `item_latents` VALUES (17508,23,10,70,2);  -- Citizens of Windurst: Attack+10
 
 INSERT INTO `item_latents` VALUES (17509,165,6,47,0);    -- Destroyers Crit Rate +6% when broken (500 WS points)
 INSERT INTO `item_latents` VALUES (17509,287,13,47,0);   -- Destroyers DMG+13 when broken (500 WS points)
@@ -2247,6 +2276,11 @@ INSERT INTO `item_latents` VALUES (17527,2,-10,47,0);
 INSERT INTO `item_latents` VALUES (17527,5,-10,47,0);
 INSERT INTO `item_latents` VALUES (17527,15,-10,47,0);
 INSERT INTO `item_latents` VALUES (17527,21,-10,47,0);
+
+-- -------------------------------------------------------
+-- Master Caster's Pole
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17530,71,8,70,2);    -- Citizens of Windurst: hMP +8
 
 -- -------------------------------------------------------
 -- Ramuh's Staff
@@ -2286,6 +2320,12 @@ INSERT INTO `item_latents` VALUES (17599,315,25,52,8);   -- +25% drain/aspir pot
 
 INSERT INTO `item_latents` VALUES (17616,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17616,16,-10,47,0);
+
+-- -------------------------------------------------------
+-- Master Caster's Knife
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17617,1,10,70,2);    -- Citizens of Windurst: DEF +10
+
 INSERT INTO `item_latents` VALUES (17616,18,-10,47,0);
 
 -- -------------------------------------------------------
@@ -2313,6 +2353,12 @@ INSERT INTO `item_latents` VALUES (17649,25,12,26,1);    -- Nighttime: ACC +12
 INSERT INTO `item_latents` VALUES (17654,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17654,15,-10,47,0);
 INSERT INTO `item_latents` VALUES (17654,17,-10,47,0);
+
+-- -------------------------------------------------------
+-- Senior Gold Musketeer's Scimitar
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17655,1,10,70,1);    -- Citizens of Bastok: DEF +10
+
 INSERT INTO `item_latents` VALUES (17661,27,5,58,0);     -- Storm Scimitar Enmity +5 in Assault
 INSERT INTO `item_latents` VALUES (17661,287,4,58,0);    -- Storm Scimitar DMG+4 in Assault
 
@@ -2467,6 +2513,12 @@ INSERT INTO `item_latents` VALUES (17932,9,3,53,1);      -- DEX +3 in areas outs
 INSERT INTO `item_latents` VALUES (17933,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17933,17,-10,47,0);
 INSERT INTO `item_latents` VALUES (17933,19,-10,47,0);
+
+-- -------------------------------------------------------
+-- Reserve Captain's Pick
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17934,23,10,70,0);    -- Citizens of San d'Oria: Attack +10
+
 INSERT INTO `item_latents` VALUES (17941,17,15,31,0);    -- Mighty Pick [Element: Wind]+15 on Windsday
 INSERT INTO `item_latents` VALUES (17941,287,5,31,0);    -- Mighty Pick DMG+5 on Windsday
 INSERT INTO `item_latents` VALUES (17944,165,6,47,0);    -- Retributor Crit Rate +6% when broken (500 WS points)
@@ -2639,6 +2691,12 @@ INSERT INTO `item_latents` VALUES (18135,8,3,53,1);      -- STR +3 in areas outs
 INSERT INTO `item_latents` VALUES (18144,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (18144,17,-10,47,0);
 INSERT INTO `item_latents` VALUES (18144,19,-10,47,0);
+
+-- -------------------------------------------------------
+-- Master Caster's Bow
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18145,26,7,70,2);    -- Citizens of Windurst: Ranged Accuracy +7
+
 INSERT INTO `item_latents` VALUES (18146,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (18146,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (18146,20,-10,47,0);
@@ -2648,6 +2706,11 @@ INSERT INTO `item_latents` VALUES (18146,20,-10,47,0);
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (18165,2,30,26,0);     -- Daytime: HP+30
 INSERT INTO `item_latents` VALUES (18165,68,10,26,1);    -- Nighttime: Evasion+10
+
+-- -------------------------------------------------------
+-- Senior Gold Musketeer's Axe
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18196,23,10,70,1);    -- Citizens of Bastok: Attack +10
 
 INSERT INTO `item_latents` VALUES (18206,25,5,56,0);     -- Rune Chopper +5 Acc.
 INSERT INTO `item_latents` VALUES (18206,369,-3,56,0);   -- Rune Chopper -3MP/tic
