@@ -1,12 +1,13 @@
 require("scripts/globals/status")
 require("scripts/globals/utils")
-
+-----------------------------------
 xi = xi or {}
 xi.damage = xi.damage or {}
 xi.damage.tp = {}
+-----------------------------------
 
 -- returns a single melee hit's TP return
-xi.damage.tp.getSingleMeleeHitTPReturn = function (attacker, defender, isZanshin)
+xi.damage.tp.getSingleMeleeHitTPReturn = function(attacker, defender, isZanshin)
     isZanshin = isZanshin or false -- optional input, defaults to false.
 
     local delay        = attacker:getBaseDelay()
@@ -22,25 +23,23 @@ xi.damage.tp.getSingleMeleeHitTPReturn = function (attacker, defender, isZanshin
     return math.floor(tpReturn * storeTPModifier)
 end
 
-function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
-
+xi.damage.tp.getModifiedDelayAndCanZanshin = function(attacker, delay)
     local modifiedDelay = delay
-    local canZanshin = false
+    local canZanshin    = false
+
     -- DW/H2H delay is halved for the purposes of a single hit's TP return when applicable, see https://www.bg-wiki.com/ffxi/Tactical_Points
     if attacker:isDualWielding() then -- NOTE: this "isDualWielding" may trip on non-PCs even if they are "using h2h". If this is rectified in core in the future this should fall through correctly.
         modifiedDelay = (delay * (100 - attacker:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
     elseif attacker:isUsingH2H() then
-
         if attacker:getObjType() == xi.objType.PC then            -- handle h2h with > 1 swing only on PC
             if
                 attacker:getEquippedItem(xi.slot.SUB) ~= nil or   -- equipped shield = one swing
                 attacker:getSkillRank(xi.skill.HAND_TO_HAND) == 0 -- zero h2h rank skill = one swing
             then
-                modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)), 96) -- min delay of 96 total, -- https://www.bg-wiki.com/ffxi/Attack_Speed
-                canZanshin = true -- Zanshin can proc on an "unarmed" swing                  -- https://www.bg-wiki.com/ffxi/Zanshin
+                modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)), 96) -- min delay of 96 total, https://www.bg-wiki.com/ffxi/Attack_Speed
+                canZanshin    = true -- Zanshin can proc on an "unarmed" swing               -- https://www.bg-wiki.com/ffxi/Zanshin
             else
-                modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48) -- min delay of 96 total so 96/2 per fist, -- https://www.bg-wiki.com/ffxi/Attack_Speed
-
+                modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48) -- min delay of 96 total so 96/2 per fist, https://www.bg-wiki.com/ffxi/Attack_Speed
             end
         else
             -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one "fist". Perhaps they have a shield with no main weapon.
@@ -57,8 +56,7 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
 end
 
 -- returns a single melee hit's TP return
-xi.damage.tp.getSingleRangedHitTPReturn = function (attacker, defender)
-
+xi.damage.tp.getSingleRangedHitTPReturn = function(attacker, defender)
     local delay = attacker:getBaseRangedDelay() -- there do not appear to be any delay modifiers for ranged attacks, snapshot does not seem to effect this
 
     if delay > 0 then
@@ -75,7 +73,6 @@ end
 -- For instance, if a player attacks a mob, the mob uses the mob formula when gaining TP from the returned hit.
 -- This appears to be a measure to not buff mobs when players were buffed with the new TP gain formula.
 xi.damage.tp.calculateTPReturn = function(gainee, delay)
-
     if gainee and gainee:getObjType() ~= xi.objType.MOB then -- Pets and PCs have been observed to use this formula
         if delay <= 180 then
             return math.floor(61 + ((delay - 180) * 63 / 360))
@@ -106,8 +103,7 @@ xi.damage.tp.calculateTPReturn = function(gainee, delay)
 end
 
 -- TODO: does Ikishoten factor into this as a bonus to baseTPGain if it procs on the hit? Needs verification.
-xi.damage.tp.calculateTPGainOnPhysicalDamage = function (totalDamage, delay, attacker, defender)
-
+xi.damage.tp.calculateTPGainOnPhysicalDamage = function(totalDamage, delay, attacker, defender)
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     if totalDamage > 0 and defender and attacker then
         local attackOutput       = xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
@@ -140,8 +136,7 @@ xi.damage.tp.calculateTPGainOnPhysicalDamage = function (totalDamage, delay, att
     return 0
 end
 
-xi.damage.tp.calculateTPGainOnMagicalDamage = function (totalDamage, attacker, defender)
-
+xi.damage.tp.calculateTPGainOnMagicalDamage = function(totalDamage, attacker, defender)
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
     if totalDamage > 0 and defender and attacker then
         local dAGI               = attacker:getMod(xi.mod.AGI) - defender:getMod(xi.mod.AGI)
