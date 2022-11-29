@@ -44,9 +44,12 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
+    -- Allow fomor black mage to respawn
     local ph = mob:getID() - 1
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(924)
+
+    xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity
