@@ -19,7 +19,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player, eventId, csid, option)
+entity.onEventFinish = function(player, csid, option)
     xi.barge.ticketshoponEventFinish(player, csid, option)
 end
 

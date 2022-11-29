@@ -13,7 +13,7 @@ xi = xi or {}
 xi.barge = xi.barge or {}
 
 -- set true for debug output
-local verbose = false
+local verbose = true
 
 local act =
 {
@@ -35,10 +35,10 @@ local dest =
 -- Locations for timekeeper NPCs
 xi.barge.location =
 {
-    NORTH_LANDING    = 1,
-    CENTRAL_LANDING  = 2,
-    SOUTH_LANDING    = 3,
-    BARGE            = 4,
+    NORTH_LANDING   = 1,
+    CENTRAL_LANDING = 2,
+    SOUTH_LANDING   = 3,
+    BARGE           = 4,
 }
 
 local bargeSchedule =
@@ -113,8 +113,6 @@ xi.barge.timekeeperOnTrigger = function(player, location, eventId)
     end
 end
 
-
-
 xi.barge.aboard = function(player, triggerArea, isAboard)
     if verbose then
         printf("INFO: player aboard set [%s] [%i] [%s] in xi.barge.aboard", player:getName(), triggerArea, tostring(isAboard))
@@ -125,7 +123,6 @@ end
 
 xi.barge.onZoneIn = function(player)
     local zoneId = player:getZoneID()
-    print("ON ZONE IN ")
 
     -- Zoning onto barge. set [barge]arrivalEventId based on schedule.
     if zoneId == xi.zone.PHANAUET_CHANNEL then
@@ -139,7 +136,7 @@ xi.barge.onZoneIn = function(player)
                 break
             end
         end
-        print(nextEvent)
+
         if nextEvent.route == dest.NORTH_LANDING then
             -- Arrival CS - 10 parked boat
             -- Arrival CS - 11 fly in to dock, no boat
@@ -181,11 +178,11 @@ xi.barge.onZoneIn = function(player)
 end
 
 xi.barge.onTransportEvent = function(player, transport)
+    -- [xi.ki.ticketki] = {ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3}
     local bargeTable =
     {
-        -- [xi.ki.ticketki] = {ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3}
         [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
-        [xi.ki.BARGE_TICKET] =       { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+        [xi.ki.BARGE_TICKET]       = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
     }
 
     local zoneID = zones[player:getZoneID()]
@@ -268,7 +265,7 @@ end
 xi.barge.onRouteStart = function(transportZone)
     -- set stage with relevant npc's for the route and questlines
     if verbose then
-        printf("INFO: [%s] [%i] in xi.barge.onRouteStart", transportZone,VanadielHour() * 60 + VanadielMinute())
+        printf("INFO: [%s] [%i] in xi.barge.onRouteStart", transportZone, VanadielHour() * 60 + VanadielMinute())
     end
 end
 
@@ -276,7 +273,7 @@ xi.barge.onRouteEnd = function(transportZone)
     -- clean stage of relevant npc's for the route and questlines
     -- clean up any mobs
     if verbose then
-        printf("INFO: [%s] [%i] in xi.barge.onRouteEnd", transportZone,VanadielHour() * 60 + VanadielMinute())
+        printf("INFO: [%s] [%i] in xi.barge.onRouteEnd", transportZone, VanadielHour() * 60 + VanadielMinute())
     end
 end
 
@@ -285,6 +282,6 @@ xi.barge.onRouteUpdate = function(transportZone, tripTime)
     -- setup for pop window (ie. Stubborn Dredvodd)
     -- TODO: find the cut scene id for the Dredvodd pop
     if verbose then
-        printf("INFO: [%s] [%i] [%i] in xi.barge.onRouteUpdate", transportZone,VanadielHour() * 60 + VanadielMinute(), tripTime)
+        printf("INFO: [%s] [%i] [%i] in xi.barge.onRouteUpdate", transportZone, VanadielHour() * 60 + VanadielMinute(), tripTime)
     end
 end
