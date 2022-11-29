@@ -8,11 +8,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-
-    -- Set Duke_Haborym's spawnpoint and respawn time (21-24 hours)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(75600, 86400))
-
+    xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

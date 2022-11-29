@@ -10,8 +10,9 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.JORMUNGAND)
-    GetMobByID(ID.mob.JORMUNGAND):setRespawnTime(math.random(86400, 259200))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.MOUNTAIN_WORM)
+    xi.mob.nmTODPersistCache(zone, ID.mob.JORMUNGAND)
 
     -- ffxiclopedia's pages for Black Coney and White Coney say 7 and 5 Earth seconds respectively, in game it is very fast
     -- https://ffxiclopedia.fandom.com/wiki/Black_Coney

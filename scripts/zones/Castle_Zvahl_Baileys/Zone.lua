@@ -9,29 +9,23 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- Trigger Areas
     zone:registerTriggerArea(1, -90, 17, 45, -84, 19, 51)  -- map 4 NW porter
     zone:registerTriggerArea(1, 17, -90, 45, -85, 18, 51)  -- map 4 NW porter
     zone:registerTriggerArea(2, -90, 17, -10, -85, 18, -5)  -- map 4 SW porter
     zone:registerTriggerArea(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
     zone:registerTriggerArea(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
 
+    -- NM Persistence
     if xi.settings.main.ENABLE_WOTG == 1 then
-        UpdateNMSpawnPoint(ID.mob.LIKHO)
-        GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
+        xi.mob.nmTODPersistCache(zone, ID.mob.LIKHO)
     end
+    xi.mob.nmTODPersistCache(zone, ID.mob.MARQUIS_ALLOCEN)
+    xi.mob.nmTODPersistCache(zone, ID.mob.MARQUIS_AMON)
+    xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_HABORYM)
+    xi.mob.nmTODPersistCache(zone, ID.mob.GRAND_DUKE_BATYM)
 
-    UpdateNMSpawnPoint(ID.mob.MARQUIS_ALLOCEN)
-    GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.MARQUIS_AMON)
-    GetMobByID(ID.mob.MARQUIS_AMON):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.DUKE_HABORYM)
-    GetMobByID(ID.mob.DUKE_HABORYM):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.GRAND_DUKE_BATYM)
-    GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(900, 10800))
-
+    -- Treasure Initiation
     xi.treasure.initZone(zone)
 end
 
