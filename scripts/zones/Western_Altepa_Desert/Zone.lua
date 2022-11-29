@@ -17,6 +17,9 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.KING_VINEGARROON)
+
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
