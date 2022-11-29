@@ -485,7 +485,10 @@ GENERAL NOTES
     - https://www.bg-wiki.com/ffxi/Calculating_Blue_Magic_Damage
     - https://ffxiclopedia.fandom.com/wiki/Calculating_Blue_Magic_Damage
     - BG-wiki spell pages
-    - Blue Gartr threads with data
+    - Blue Gartr threads with data, such as
+        https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=5832112&viewfull=1#post5832112
+        https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=5437135&viewfull=1#post5437135
+        https://www.bluegartr.com/threads/107650-Random-Question-Thread-XXIV-Occupy-the-RQT?p=4906565&viewfull=1#post4906565
     - When values were absent, spell values were decided based on Blue Gartr threads and Wiki page discussions.
 
 - Assumed INT as the main magic accuracy modifier for physical spells' additional effects (when no data was found).
@@ -493,18 +496,20 @@ GENERAL NOTES
 ____________________
 SPELL-SPECIFIC NOTES
 
-- Head Butt, Frypan and Tail Slap Stun will overwrite other Stun. Blitzstrahl/Temporal Shift won't.
+- Head Butt, Frypan and Tail Slap Stun will overwrite existing Stun. Blitzstrahl/Temporal Shift won't.
 
 ---------------------------
 changes in blu_fixes branch
 ---------------------------
 
 - Updated all spell scripts:
-    - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which would result in lower damage when used with CA.
-    - Updated WSC values.
+    - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which doesnt't make sense.
+    - Updated WSC values, though most were correct.
     - Updated additional effect values.
         - All physical spells now need to hit before the AE can kick in.
-        - All physical spells with AE get a resistance check for the AE.
+        - All physical spells with an AE get a resistance check for the AE.
+        - Resistance now influences duration properly.
+        - Decaying effects now work, such as DEX and VIT down.
         - Some spells had 0 duration.
         - TODO: additional effect gained message.
 
@@ -512,7 +517,15 @@ changes in blu_fixes branch
     -
     - TODO: missed spells should not be 0 dmg, but there's currently no way to make spells "miss"
 
+- TODO
+    - Sneak Attack doesnt work with Blue spells, prolly TA also not.
+    - "... increases with TP" doesnt work
+    - Azure Lore is ehhhh implemented
+    - CA doesnt work on too many spells (for the TP - it does for the wsc)
+    - Add 75+ spells. I didn't bother personally since we're on a 75 server and I have no knowledge of these spells at all.
 
-* Further research was done, digging in BLU threads such as https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=5832112&viewfull=1#post5832112.
+- END RESULT
+    - Physical dmg: acc/att/modifiers
+    - Physical AE: acc/bluemagicskill/macc/INT
 
 ]]

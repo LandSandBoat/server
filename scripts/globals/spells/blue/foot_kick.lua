@@ -9,7 +9,7 @@
 -- Level: 1
 -- Casting Time: 0.5 seconds
 -- Recast Time: 6.5 seconds
--- Skillchain Property: Detonation (can open Scission or Gravitation)
+-- Skillchain Property: Detonation
 -- Combos: Lizard Killer
 -----------------------------------
 require("scripts/globals/bluemagic")

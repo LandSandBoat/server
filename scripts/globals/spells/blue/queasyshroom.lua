@@ -9,28 +9,25 @@
 -- Level: 8
 -- Casting Time: 2 seconds
 -- Recast Time: 15 seconds
--- Skillchain Element(s): Dark (can open Transfixion or Detonation can close Compression or Gravitation)
+-- Skillchain Element(s): Compression
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/magicburst")
 -----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-
     return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     local params = {}
     params.tpmod = TPMOD_CRITICAL
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
-    params.scattr = SC_DARKNESS
+    params.scattr = SC_COMPRESSION
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
@@ -50,7 +47,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    -- Added effect: Poison (3/tick for 1:30/3:00)
+    -- Added effect: Poison (3/tick for 90s/180s)
     if damage > 0 and not target:hasStatusEffect(xi.effect.POISON) then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then

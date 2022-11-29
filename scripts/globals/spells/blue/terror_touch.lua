@@ -10,7 +10,7 @@
 -- Casting Time: 3.25 seconds
 -- Recast Time: 21 seconds
 -- Duration: 60~ seconds
--- Skillchain Element(s): Dark (Primary) and Water (Secondary) - (can open Transfixion, Detonation, Impaction, or Induration can close Compression, Reverberation, or Gravitation)
+-- Skillchain Element(s): Compression/Reverberation
 -- Combos: Defense Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -26,11 +26,13 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ACC
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.HTH
     params.scattr = SC_COMPRESSION
+    params.scattr2 = SC_REVERBERATION
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
     params.multiplier = 1.5
     params.tp150 = 1.5
@@ -44,13 +46,16 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    else
-        target:addStatusEffect(xi.effect.ATTACK_DOWN, 15, 0, 20)
+    -- Additional effect: Attack down (-15% for 30s/60s)
+    if damage > 0 and not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            target:addStatusEffect(xi.effect.ATTACK_DOWN, 15, 0, 60 * resist)
+        end
     end
 
     return damage

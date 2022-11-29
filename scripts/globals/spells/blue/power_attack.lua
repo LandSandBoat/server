@@ -9,7 +9,7 @@
 -- Level: 4
 -- Casting Time: 0.5 seconds
 -- Recast Time: 7.25 seconds
--- Skillchain property: Reverberation (Can open Impaction or Induration)
+-- Skillchain property: Reverberation
 -- Combos: Plantoid Killer
 -----------------------------------
 require("scripts/globals/bluemagic")

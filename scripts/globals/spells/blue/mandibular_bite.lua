@@ -9,7 +9,7 @@
 -- Level: 44
 -- Casting Time: 0.5 seconds
 -- Recast Time: 19.25 seconds
--- Skillchain property(ies): Induration (can open Impaction, Compression, or Fragmentation)
+-- Skillchain property(ies): Induration
 -- Combos: Plantoid Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,17 +24,16 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ATTACK
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
     params.scattr = SC_INDURATION
     params.numhits = 1
     params.multiplier = 2.0
-    params.tp150 = 1.2
-    params.tp300 = 1.4
-    params.azuretp = 1.5
-    params.duppercap = 45 --guesstimated attack % bonuses
+    params.tp150 = 2.0
+    params.tp300 = 2.0
+    params.azuretp = 2.0
+    params.duppercap = 45
     params.str_wsc = 0.2
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0

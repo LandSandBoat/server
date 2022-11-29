@@ -9,7 +9,7 @@
 -- Level: 72
 -- Casting Time: 0.5 seconds
 -- Recast Time: 32.75 seconds
--- Skillchain Element(s): Distortion (can open/close Darkness with Gravitation WSs and spells)
+-- Skillchain Element(s): Distortion
 -- Combos: Accuracy Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,17 +24,18 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ACC
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.PIERCING
     params.scattr = SC_DISTORTION
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 5
     params.multiplier = 1.5
-    params.tp150 = 0.8
-    params.tp300 = 1.0
-    params.azuretp = 1.0
-    params.duppercap = 100 -- D upper >=69
+    params.tp150 = 1.5
+    params.tp300 = 1.5
+    params.azuretp = 1.5
+    params.duppercap = 100
     params.str_wsc = 0.2
     params.dex_wsc = 0.2
     params.vit_wsc = 0.0
@@ -42,14 +43,17 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    local poison = target:getStatusEffect(xi.effect.POISON)
-    local chance = math.random()
-    if chance < 0.95 and poison == nil then
-        local power = (caster:getMainLvl() / 5) + 3 -- from http://wiki.ffxiclopedia.org/wiki/Disseverment
-        target:addStatusEffect(xi.effect.POISON, power, 3, 180) -- for 180secs
+    -- Added effect: Poison ((level/5+3)/tick for 90s/180s)
+    if damage > 0 and not target:hasStatusEffect(xi.effect.POISON) then
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            local power = (caster:getMainLvl() / 5) + 3 -- from http://wiki.ffxiclopedia.org/wiki/Disseverment
+            target:addStatusEffect(xi.effect.POISON, power, 0, 180 * resist)
+        end
     end
 
     return damage

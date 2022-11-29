@@ -9,7 +9,7 @@
 -- Level: 63
 -- Casting Time: 0.5 seconds
 -- Recast Time: 26 seconds
--- Skillchain Element(s): Water (can open Impaction and Induration can close Reverberation and Fragmentation)
+-- Skillchain Element(s): Reverberation
 -- Combos: Rapid Shot
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,10 +24,9 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_CHANCE
     params.attackType = xi.attackType.PHYSICAL
-    params.damageType = xi.damageType.BLUNT
+    params.damageType = xi.damageType.HTH
     params.scattr = SC_REVERBERATION
     params.numhits = 1
     params.multiplier = 1.25
@@ -42,10 +41,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    -- Missing ENIMITY DOWN
+    -- Enmity Down amount is trivial, not worth implementing
+    -- Sources: https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=4845494&viewfull=1#post4845494 and https://www.bg-wiki.com/ffxi/Hydro_Shot
 
     return damage
 end

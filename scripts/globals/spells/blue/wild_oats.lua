@@ -9,7 +9,7 @@
 -- Level: 4
 -- Casting Time: 0.5 seconds
 -- Recast Time: 7.25 seconds
--- Skillchain Element(s): Light (can open Compression, Reverberation, or Distortion can close Transfixion)
+-- Skillchain Element(s): Transfixion
 -- Combos: Beast Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -48,11 +48,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    -- Additional effect: VIT down (-15 for 20s) -- Should be longer and decrease in intensity over time, this is a compromise
+    -- Additional effect: VIT down (-15 for 30s/60s. Effect decreases by 1 every 2s/4s)
     if damage > 0 and not target:hasStatusEffect(xi.effect.VIT_DOWN) then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.VIT_DOWN, 15, 0, 20)
+            target:addStatusEffect(xi.effect.VIT_DOWN, 15, 4 * resist, 60 * resist)
         end
     end
 

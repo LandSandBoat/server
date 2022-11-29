@@ -9,7 +9,7 @@
 -- Level: 12
 -- Casting Time: 0.5 seconds
 -- Recast Time: 10 seconds
--- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
+-- Skillchain Element(s): Impaction
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")

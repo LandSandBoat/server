@@ -9,7 +9,7 @@
 -- Level: 4
 -- Casting Time: 0.5 seconds
 -- Recast Time: 7.25 seconds
--- Skillchain property: Reverberation (can open Induration or Impaction)
+-- Skillchain property: Reverberation
 -- Combos: Beast Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -48,7 +48,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    -- Additional effect: Slow (15% for 1:30/3:00)
+    -- Additional effect: Slow (15% for 90s/180s)
     if damage > 0 and not target:hasStatusEffect(xi.effect.SLOW) then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
