@@ -17,9 +17,6 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    -- NM Persistence
-    xi.mob.nmTODPersistCache(zone, ID.mob.KING_VINEGARROON)
-
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
@@ -82,7 +79,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 
     local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
-    local kvre = kingV:getLocalVar("respawn")
+    local kvre = GetServerVariable("KING_V_RESPAWN")
     if not kingV:isSpawned() and os.time() > kvre and weather == xi.weather.DUST_STORM then
         -- 10% chance for KV pop at start of single earth weather
         local chance = math.random(1, 10)
