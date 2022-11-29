@@ -160,7 +160,7 @@ xi.barge.onZoneIn = function(player)
     -- zoning into carpenters landing. play the eventId stored in [barge]arrivalEventId.
     elseif zoneId == xi.zone.CARPENTERS_LANDING then
         local eventId = player:getCharVar("[barge]arrivalEventId")
-        -- player:setCharVar("[barge]arrivalEventId", 0)
+        player:setCharVar("[barge]arrivalEventId", 0)
 
         if eventId > 0 then
             return eventId
@@ -169,7 +169,6 @@ xi.barge.onZoneIn = function(player)
             return -1
         end
 
-        player:setCharVar("[barge]arrivalEventId", 0)
     end
 
     if verbose then
@@ -178,7 +177,7 @@ xi.barge.onZoneIn = function(player)
 end
 
 xi.barge.onTransportEvent = function(player, transport)
-    -- [xi.ki.ticketki] = {ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3}
+    -- [xi.ki.ticketki] = { ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3 }
     local bargeTable =
     {
         [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
@@ -211,7 +210,7 @@ xi.barge.onTransportEvent = function(player, transport)
         end
 
         if canride == 0 then -- Failure Catch
-            player:startEvent(vars[aboard + 5]) -- Failure Event
+            player:startEvent(bargeTable[aboard + 5]) -- Failure Event
         end
     end
 end
