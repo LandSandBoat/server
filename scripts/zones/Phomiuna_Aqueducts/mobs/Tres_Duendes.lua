@@ -47,7 +47,6 @@ entity.onMobDespawn = function(mob)
     local ph = mob:getID() - 1
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(924)
-    mob:setLocalVar("cooldown", os.time() + math.random(75600, 86400))
 end
 
 return entity
