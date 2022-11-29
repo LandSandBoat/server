@@ -23166,7 +23166,7 @@ INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,1445,@RARE);    -- Freyas Tear 
 INSERT INTO `mob_droplist` VALUES (2824,0,0,1000,644,@VCOMMON); -- Chunk Of Mythril Ore (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2824,0,0,1000,955,@RARE);    -- Golem Shard (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2824,0,0,1000,955,@RARE);    -- Golem Shard (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2824,0,0,1000,2388,@RARE);   -- Chunk Of Diorite (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2824,0,0,1000,2388,@SRARE);   -- Chunk Of Diorite (Super Rare, 0.5%)
 INSERT INTO `mob_droplist` VALUES (2824,0,0,1000,1132,@VRARE);  -- Square Of Raxa (Very Rare, 1%)
 
 -- ZoneID: 143 - Nighu Nestfender
