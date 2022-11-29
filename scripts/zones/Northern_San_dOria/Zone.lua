@@ -62,7 +62,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)  -- Chateau d'Oraguille access
+        [1] = function()  -- Chateau d'Oraguille access
             local pNation = player:getNation()
             local currentMission = player:getCurrentMission(pNation)
 

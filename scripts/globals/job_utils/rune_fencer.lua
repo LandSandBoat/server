@@ -326,7 +326,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectGain = function(target, effect)
 end
 
 -- tick values from https://www.bg-wiki.com/ffxi/Swordplay
-xi.job_utils.rune_fencer.onSwordplayEffectTick = function (target, effect)
+xi.job_utils.rune_fencer.onSwordplayEffectTick = function(target, effect)
     local power         = effect:getPower()
     local tickPower     = 3
     local jobPointBonus = target:getJobPointLevel(xi.jp.SWORDPLAY_EFFECT)
@@ -347,7 +347,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectTick = function (target, effect)
     end
 end
 
-xi.job_utils.rune_fencer.onSwordplayEffectLose = function (target, effect)
+xi.job_utils.rune_fencer.onSwordplayEffectLose = function(target, effect)
     local power    = effect:getPower()
     local subPower = effect:getSubPower()
 

@@ -62,12 +62,12 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerAreaID): caseof
     {
         -- Apollyon: SE_NE exit
-        [1] = function ()
+        [1] = function()
             player:startEvent(100)
         end,
 
         -- Apollyon: NW_SW exit
-        [2] = function ()
+        [2] = function()
             player:startEvent(101)
         end,
 

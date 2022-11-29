@@ -35,12 +35,12 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)
+        [1] = function()
             --player:setCharVar("porter_lock", 1)
             player:startEvent(0)
         end,
 
-        [2] = function (x)
+        [2] = function()
             --player:setCharVar("porter_lock", 1)
             player:startEvent(1)
         end,

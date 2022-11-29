@@ -640,7 +640,7 @@ end
 -----------------------------------
 -- Desc: Casket spawn checks, runs through all checks before spawning
 -----------------------------------
-xi.caskets.spawnCasket = function (player, mob, x, y, z, r)
+xi.caskets.spawnCasket = function(player, mob, x, y, z, r)
     local chestId    = getCasketID(mob)
     local npc        = GetNPCByID(chestId)
     local chestOwner = player:getLeaderID()
