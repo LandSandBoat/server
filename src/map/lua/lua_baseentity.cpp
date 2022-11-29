@@ -5755,7 +5755,11 @@ bool CLuaBaseEntity::hasTitle(uint16 titleID)
 
 void CLuaBaseEntity::addTitle(uint16 titleID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (!(m_PBaseEntity->objtype & TYPE_PC))
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -5774,7 +5778,11 @@ void CLuaBaseEntity::addTitle(uint16 titleID)
 
 void CLuaBaseEntity::setTitle(uint16 titleID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (!(m_PBaseEntity->objtype & TYPE_PC))
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     charutils::setTitle(PChar, titleID);
@@ -5788,7 +5796,11 @@ void CLuaBaseEntity::setTitle(uint16 titleID)
 
 void CLuaBaseEntity::delTitle(uint16 titleID)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (!(m_PBaseEntity->objtype & TYPE_PC))
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -13406,7 +13418,11 @@ bool CLuaBaseEntity::isAggroable()
 
 void CLuaBaseEntity::setDelay(uint16 delay)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
     static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDelay(delay);
@@ -13420,7 +13436,11 @@ void CLuaBaseEntity::setDelay(uint16 delay)
 
 void CLuaBaseEntity::setDamage(uint16 damage)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
     static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDamage(damage);
@@ -13434,7 +13454,11 @@ void CLuaBaseEntity::setDamage(uint16 damage)
 
 bool CLuaBaseEntity::hasSpellList()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return false;
+    }
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->SpellContainer->HasSpells();
 }
@@ -13448,7 +13472,11 @@ bool CLuaBaseEntity::hasSpellList()
 
 void CLuaBaseEntity::setSpellList(uint16 spellList)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET);
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     mobutils::SetSpellList(static_cast<CMobEntity*>(m_PBaseEntity), spellList);
 }
@@ -13464,7 +13492,7 @@ void CLuaBaseEntity::setAutoAttackEnabled(bool state)
 {
     if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
     {
-        ShowError("CLuaBaseEntity::setAutoAttackEnabled invalid entity (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
@@ -13482,7 +13510,7 @@ void CLuaBaseEntity::setMagicCastingEnabled(bool state)
 {
     if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
     {
-        ShowError("CLuaBaseEntity::setMagicCastingEnabled invalid entity (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
@@ -13500,7 +13528,7 @@ void CLuaBaseEntity::setMobAbilityEnabled(bool state)
 {
     if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
     {
-        ShowError("CLuaBaseEntity::setMobAbilityEnabled invalid entity (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
@@ -13516,7 +13544,11 @@ void CLuaBaseEntity::setMobAbilityEnabled(bool state)
 
 void CLuaBaseEntity::setMobSkillAttack(int16 listId)
 {
-    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST));
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
 
     static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, listId);
 }
@@ -13530,7 +13562,11 @@ void CLuaBaseEntity::setMobSkillAttack(int16 listId)
 
 int16 CLuaBaseEntity::getMobMod(uint16 mobModID)
 {
-    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST));
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
+    {
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return MOBMOD_NONE;
+    }
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->getMobMod(mobModID);
 }
@@ -13544,11 +13580,9 @@ int16 CLuaBaseEntity::getMobMod(uint16 mobModID)
 
 void CLuaBaseEntity::addMobMod(uint16 mobModID, int16 value)
 {
-    // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
     {
-        // this once broke on an entity (17532673) but it could not be found
-        ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
@@ -13564,13 +13598,9 @@ void CLuaBaseEntity::addMobMod(uint16 mobModID, int16 value)
 
 void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-
-    // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
     {
-        // this once broke on an entity (17532673) but it could not be found
-        ShowError("CLuaBaseEntity::setMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
@@ -13586,11 +13616,9 @@ void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
 
 void CLuaBaseEntity::delMobMod(uint16 mobModID, int16 value)
 {
-    // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
+    if (m_PBaseEntity->objtype & TYPE_NPC || m_PBaseEntity->objtype & TYPE_PC)
     {
-        // this once broke on an entity (17532673) but it could not be found
-        ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
+        ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
