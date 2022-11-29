@@ -110,14 +110,6 @@ end
 entity.onMobSpawn = function(mob)
     local master = mob:getMaster()
 
-    -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
-    -- innate -40% DT, which does not contribute to the -50% cap (this is a unique attribute to pets having a "higher" DT cap)
-    -- TODO: need "UDMG" modifier or equivalent
-    mob:addMod(xi.mod.DMG, -4000)
-
-    -- innate +40 subtle blow
-    mob:addMod(xi.mod.SUBTLE_BLOW, 40)
-
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
         mob:addJobTraits(master:getSubJob(), master:getSubLvl())
     end
@@ -181,7 +173,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player)
+local function removeWyvernLevels(mob)
     local master  = mob:getMaster()
     local numLvls = mob:getLocalVar("level_Ups")
 
@@ -197,12 +189,23 @@ entity.onMobDeath = function(mob, player)
         master:delMod(xi.mod.DOUBLE_ATTACK, wyvernBonusDA * numLvls)
         master:delMod(xi.mod.ALL_WSDMG_ALL_HITS, 2 * numLvls)
     end
+end
 
+entity.onMobDeath = function(mob, player)
+    removeWyvernLevels(mob)
+
+    local master  = mob:getMaster()
     master:removeListener("PET_WYVERN_WS")
     master:removeListener("PET_WYVERN_MAGIC")
     master:removeListener("PET_WYVERN_ENGAGE")
     master:removeListener("PET_WYVERN_DISENGAGE")
     master:removeListener("PET_WYVERN_EXP")
+end
+
+entity.onPetLevelRestriction = function(pet)
+    removeWyvernLevels(pet)
+    pet:setLocalVar("wyvern_exp", 0)
+    pet:setLocalVar("level_Ups", 0)
 end
 
 return entity

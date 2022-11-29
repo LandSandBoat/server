@@ -5687,6 +5687,9 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                         return PChar->m_LevelRestriction;
                 }
 
+                // Allow global pet script to handle the level restriction
+                luautils::OnPetLevelRestriction(PPet);
+
                 // Setup pet with master since traits, abilities and some status effects need to be reapplied
                 petutils::SetupPetWithMaster(PChar, PPet);
 
