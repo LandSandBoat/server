@@ -13,7 +13,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    xi.mob.nmTODPersistCache(zone, ID.mob.HUMBABA)
+    xi.mob.nmTODPersistCache(zone, ID.mob.CAPRICIOUS_CASSIE)
 
     xi.treasure.initZone(zone)
 end
