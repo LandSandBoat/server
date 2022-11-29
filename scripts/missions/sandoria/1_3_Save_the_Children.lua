@@ -67,7 +67,9 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == xi.mission.id.nation.NONE and
-                player:getNation() == mission.areaId
+                player:getNation() == mission.areaId and
+                player:hasCompletedMission(mission.areaId, mission.missionId - 1) and
+                not player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
