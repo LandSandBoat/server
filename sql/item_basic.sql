@@ -2105,7 +2105,7 @@ INSERT INTO `item_basic` VALUES (2212,0,'gunpowder_swathe','gpwdr._swathe',12,12
 INSERT INTO `item_basic` VALUES (2213,0,'handful_of_pine_nuts','pine_nuts',12,4,59,0,3);
 INSERT INTO `item_basic` VALUES (2214,0,'bag_of_imperial_rice','imperial_rice',12,4,59,0,15);
 INSERT INTO `item_basic` VALUES (2215,0,'bag_of_cornstarch','cornstarch',12,4,59,0,20);
-INSERT INTO `item_basic` VALUES (2216,0,'lamp_marimo','lamp_marimo',12,4,51,0,786);
+INSERT INTO `item_basic` VALUES (2216,0,'lamp_marimo','lamp_marimo',12,4,51,0,31);
 INSERT INTO `item_basic` VALUES (2217,0,'lightning_band','lightning_band',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (2218,0,'lamian_claw_key','lamian_claw_key',1,61524,0,1,0);
 INSERT INTO `item_basic` VALUES (2219,0,'lamian_fang_key','lamian_fang_key',1,61524,0,1,0);
