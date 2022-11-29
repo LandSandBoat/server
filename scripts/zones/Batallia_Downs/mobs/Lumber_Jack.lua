@@ -3,6 +3,7 @@
 --   NM: Lumber Jack
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
+local ID = require('scripts/zones/Batallia_Downs/IDs')
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
@@ -30,11 +31,11 @@ entity.onMobDespawn = function(mob)
     local lumberDeath = mob:getLocalVar("death")
 
     if lumberDeath then
-        -- Lumber Jack died, Set Weeping Willow's respawn time (21-24 hours)
-        GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
+        -- Lumber Jack died, Set Weeping Willow's proper respawn
+        xi.mob.nmTODPersist(ID.mob.WEEPING_WILLOW, math.random(75600, 86400)) -- 21 to 24 hours
     else
-        -- Lumber Jack idle despawned, set Weeping Willow to 30 min respawn
-        GetMobByID(mob:getID() -6):setRespawnTime(1800)
+        -- Lumber Jack idle despawned, set Weeping Willow quicker respawn
+        xi.mob.nmTODPersist(ID.mob.WEEPING_WILLOW, 1800) -- 30 minutes
     end
 end
 

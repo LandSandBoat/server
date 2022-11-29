@@ -77,6 +77,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
             17207702,
             17207703,
         },
+        WEEPING_WILLOW    = 17207302,
         AHTU              = 17207657,
         STURMTIGER        = 17207696,
         SUPARNA           = 17207697,
