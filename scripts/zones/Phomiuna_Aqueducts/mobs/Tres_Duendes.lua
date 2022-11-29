@@ -17,7 +17,7 @@ entity.onMobFight = function(mob, target)
     local form = mob:getAnimationSub()
     if os.time() > shiftTime and mob:canUseAbilities() then
         mob:setLocalVar("shiftTime", os.time() + 30)
-        local whichForm = math.random(1,2)
+        local whichForm = math.random(1, 2)
         if form == 1 and whichForm == 1 then -- Vertical Bats (100% Triple Attack)
             mob:setDamage(40)
             mob:setMod(xi.mod.DELAY, 0)
