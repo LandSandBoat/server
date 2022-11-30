@@ -12,13 +12,13 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.DMG,-5000)
+    mob:addMod(xi.mod.DMG, -5000)
     mob:setMod(xi.mod.REGEN, 25)
 
     -- May spawn in a party with two other Sahagin
-    if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.MEWW_THE_TURTLERIDER + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.MEWW_THE_TURTLERIDER + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+    if math.random(1, 2) == 1 then
+        GetMobByID(ID.mob.MEWW_THE_TURTLERIDER + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.MEWW_THE_TURTLERIDER + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.MEWW_THE_TURTLERIDER + 1)
         SpawnMob(ID.mob.MEWW_THE_TURTLERIDER + 2)
     end
@@ -27,7 +27,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId+i)
+        local guardID = GetMobByID(mobId + i)
         guardID:updateEnmity(target)
     end
 end
@@ -49,8 +49,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(75600 + math.random(0, 600)) -- 21 hours, 10 minute window
+    xi.mob.nmTODPersist(mob, math.random(126, 144) * 60) -- 21 to 24 hours, 10 minute windows
     DespawnMob(ID.mob.MEWW_THE_TURTLERIDER + 1)
     DespawnMob(ID.mob.MEWW_THE_TURTLERIDER + 2)
 end
