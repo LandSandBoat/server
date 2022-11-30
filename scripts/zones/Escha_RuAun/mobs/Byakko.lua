@@ -87,7 +87,6 @@ entity.onMobSpawn = function(mob ,target)
     mob:setMod(xi.mod.LIGHT_ABSORB, 200)
     mob:setMod(xi.mod.FASTCAST, 550)
     mob:addStatusEffect(xi.effect.REFRESH, 30, 3, 0)		
-    mob:setDropID(3991)
 end
 
 entity.onMobFight = function(mob, target)
