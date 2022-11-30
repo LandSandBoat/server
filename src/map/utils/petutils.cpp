@@ -924,9 +924,9 @@ namespace petutils
         PPet->health.hp    = PPet->health.maxhp;
 
         PPet->UpdateHealth();
-        PPet->health.tp = 0;
-        PPet->health.hp = PPet->GetMaxHP();
-        PPet->health.mp = PPet->GetMaxMP();
+        PPet->health.tp  = 0;
+        PPet->health.hp  = PPet->GetMaxHP();
+        PPet->health.mp  = PPet->GetMaxMP();
         uint32 racegrade = 4; // Race Grade D
 
         uint16 fSTR = GetBaseToRank(racegrade, mLvl);
