@@ -23784,13 +23784,13 @@ INSERT INTO `mob_droplist` VALUES (2856,0,0,1000,1875,300); -- Ancient Beastcoin
 -- ZoneID:  37 - Praetorian Guard Ccxx
 -- ZoneID:  37 - Praetorian Guard Cxlviii
 -- ZoneID:  37 - Praetorian Guard Lxxiii
--- ZoneID:  37 - Fire Elemental
--- ZoneID:  37 - Ice Elemental
--- ZoneID:  37 - Air Elemental
--- ZoneID:  37 - Earth Elemental
--- ZoneID:  37 - Thunder Elemental
--- ZoneID:  37 - Water Elemental
--- ZoneID:  37 - Dark Elemental
+-- ZoneID:  37 - Fire Elemental (Eastern)
+-- ZoneID:  37 - Ice Elemental (Eastern)
+-- ZoneID:  37 - Air Elemental (Eastern)
+-- ZoneID:  37 - Earth Elemental (Eastern)
+-- ZoneID:  37 - Thunder Elemental (Eastern)
+-- ZoneID:  37 - Water Elemental (Eastern)
+-- ZoneID:  37 - Dark Elemental (Eastern)
 -- ZoneID:  38 - Zlatorog
 -- ZoneID:  38 - Mountain Buffalo
 -- ZoneID:  38 - Thiazi
@@ -23910,7 +23910,6 @@ INSERT INTO `mob_droplist` VALUES (2862,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 -- ZoneID:  37 - Abyssdweller Jhabdebb
 -- ZoneID:  37 - Orichalcum Quadav
 -- ZoneID:  37 - Pee Qoho The Python
--- ZoneID:  37 - Light Elemental
 -- ZoneID:  38 - Kronprinz Behemoth
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
@@ -26816,6 +26815,29 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Fire Elemental
+-- ZoneID:  37 - Ice Elemental
+-- ZoneID:  37 - Air Elemental
+-- ZoneID:  37 - Earth Elemental
+-- ZoneID:  37 - Thunder Elemental
+-- ZoneID:  37 - Water Elemental
+-- ZoneID:  37 - Dark Elemental
+-- ZoneID:  37 - Mystic_Avatar
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Light Elemental
+-- ZoneID:  37 - Mystic_Avatar (Carbuncle)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
