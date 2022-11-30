@@ -49,7 +49,9 @@ zones[xi.zone.PALBOROUGH_MINES] =
             [17363256] = 17363258,
             [17363257] = 17363258,
         },
+        NOMHO_CRIMSONARMOR  = 17363305,
         NI_GHU_NESTFENDER   = 17363318,
+        QUVHO_DEATHHURLER   = 17363080,
     },
     npc =
     {

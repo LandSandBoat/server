@@ -1,32 +1,17 @@
 -----------------------------------
--- Area: Apollyon NE, Floor 1
---  Mob: Goobbue Harvester
+-- Area: Apollyon NE
+--   NM: Goobbue_Harvester
 -----------------------------------
-require("scripts/zones/Apollyon/bcnms/ne_apollyon_helper")
-require("scripts/globals/pathfind")
+require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-local flags = xi.path.flag.NONE
-local path =
-{
-    { 424.271, 0.000, 22.975 },
-    { 496.692, 0.000, 22.934 },
-}
-
-entity.onMobRoam = function(mob)
-    local pause = mob:getLocalVar("pause")
-
-    if pause < os.time() then
-        local point = (mob:getLocalVar("point") % 2) + 1
-        mob:setLocalVar("point", point)
-        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
-        mob:setLocalVar("pause", os.time() + 40)
-    end
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_ne.handleMobDeathFloorOne(mob, player, isKiller, noKiller)
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE)
 end
 
 return entity

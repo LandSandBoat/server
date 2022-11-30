@@ -59,14 +59,15 @@ local function BlueGetAlpha(level)
     elseif level <= 99 then
         alpha = 0.85
     end
+
     return alpha
 end
 
 local function BlueGetWsc(attacker, params)
     local wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
-         attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
+        attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
+        attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
+        attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
     return wsc
 end
 
@@ -77,6 +78,7 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
     end
+
     ratio = ratio - levelcor
 
     -- apply caps
@@ -105,10 +107,12 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
     elseif ratio <= 2 and ratio > 0.833 then
         cratiomax = 1.2 * ratio
     end
+
     local cratio = {}
     if cratiomin < 0 then
         cratiomin = 0
     end
+
     cratio[1] = cratiomin
     cratio[2] = cratiomax
     return cratio
@@ -121,13 +125,14 @@ end
 -- ftp3 - The TP 300% value
 local function BluefTP(tp, ftp1, ftp2, ftp3)
     if tp >= 0 and tp < 1500 then
-        return ftp1 + ( ((ftp2 - ftp1) / 100) * (tp / 10))
+        return ftp1 + (((ftp2 - ftp1) / 100) * (tp / 10))
     elseif tp >= 1500 and tp <= 3000 then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 100) * ((tp - 1500) / 10))
+        return ftp2 + (((ftp3 - ftp2) / 100) * ((tp - 1500) / 10))
     else
         print("blue fTP error: TP value is not between 0-3000!")
     end
+
     return 1 -- no ftp mod
 end
 
@@ -169,6 +174,7 @@ local function BlueGetHitRate(attacker, target, capHitRate)
     if acc > eva then
         hitdiff = (acc - eva) / 2
     end
+
     if eva > acc then
         hitdiff = (-1 * (eva - acc)) / 2
     end
@@ -181,10 +187,12 @@ local function BlueGetHitRate(attacker, target, capHitRate)
         if hitrate > 0.95 then
             hitrate = 0.95
         end
+
         if hitrate < 0.2 then
             hitrate = 0.2
         end
     end
+
     return hitrate
 end
 
@@ -244,8 +252,8 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- calculation below.
 
     local bonusWSC = 0
-    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
-       bonusWSC = 2
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
+        bonusWSC = 2
     end
 
     -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
@@ -294,7 +302,7 @@ function BluePhysicalSpell(caster, target, spell, params)
             -- TODO: Check for shadow absorbs.
 
             -- Generate a random pDIF between min and max
-            local pdif = math.random((cratio[1]*1000), (cratio[2]*1000))
+            local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif = pdif / 1000
 
             -- Apply it to our final D
@@ -329,7 +337,7 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
 
     local st = BlueGetWsc(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
 
-    if (caster:hasStatusEffect(xi.effect.BURST_AFFINITY)) then
+    if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
         st = st * 2
     end
 
@@ -370,9 +378,9 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
     local rparams = {}
     rparams.diff = dStat
     rparams.skillType = xi.skill.BLUE_MAGIC
-    magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
+    magicAttack = math.floor(magicAttack * xi.magic.applyResistance(caster, target, spell, rparams))
 
-    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
+    local dmg = math.floor(xi.magic.addBonuses(caster, spell, target, magicAttack))
 
     caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
 
@@ -407,7 +415,9 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
+
         dmg = utils.oneforall(target, dmg)
+        dmg = utils.rampart(target, dmg)
     end
 
     -- Handle Phalanx

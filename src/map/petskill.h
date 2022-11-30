@@ -82,8 +82,8 @@ public:
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
 
-    const std::string getName() const;
-    void              setName(const std::string& name);
+    const std::string& getName() const;
+    void               setName(const std::string& name);
 
 private:
     uint16      m_ID;

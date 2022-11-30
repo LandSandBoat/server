@@ -81,7 +81,11 @@ mission.sections =
                             player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
                         ) and 0 or 1
 
-                        return mission:progressEvent(239, 0, 0, 0, xi.nation.BASTOK, 0, hasTrustQuest, needsSemihTrust)
+                        if xi.settings.main.ENABLE_ROV == 1 then
+                            return mission:progressEvent(239, 0, 0, 0, xi.nation.BASTOK, 0, hasTrustQuest, needsSemihTrust)
+                        else
+                            return mission:progressEvent(239)
+                        end
                     elseif missionStatus == 5 then
                         return mission:event(240)
                     elseif missionStatus == 6 then

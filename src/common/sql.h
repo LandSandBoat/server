@@ -83,6 +83,9 @@ public:
     SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db);
     ~SqlConnection();
 
+    std::string GetClientVersion();
+    std::string GetServerVersion();
+
     /// Retrieves the timeout of the connection.
     ///
     /// @return SQL_SUCCESS or SQL_ERROR

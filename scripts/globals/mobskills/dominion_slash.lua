@@ -12,19 +12,18 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
-   -- TODO: Can skillchain?  Unknown property.
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    -- TODO: Can skillchain?  Unknown property.
 
     local numhits = 1
     local accmod = 1
-    local dmgmod = 3.25
+    local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_2)
 
@@ -33,7 +32,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Due to conflicting information, making the dispel resistable.  Correct/tweak if wrong.
     -- Dispel has no status effect or resistance gear, so 0s instead of nulls.
     local resist = xi.mobskills.applyPlayerResistance(mob, 0, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.magic.ele.LIGHT)
-    if (resist > 0.0625) then
+    if resist > 0.0625 then
         target:dispelStatusEffect()
     end
 
@@ -45,4 +44,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

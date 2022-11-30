@@ -62,6 +62,7 @@ xi.events.loginCampaign.onGameIn = function(player)
         elseif loginPoints ~= 0 then
             player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, loginPoints)
         end
+
         player:setCharVar("LoginCampaignMonth", loginCampaignMonth)
         player:setCharVar("LoginCampaignYear", loginCampaignYear)
         loginCount = 0
@@ -87,6 +88,7 @@ xi.events.loginCampaign.onGameIn = function(player)
             player:addCurrency("login_points", 100)
             player:messageSpecial(ID.text.LOGIN_NUMBER, 0, loginCount, 100, player:getCurrency("login_points"))
         end
+
         player:setCharVar("LoginCampaignLoginNumber", loginCount)
     end
 end
@@ -128,7 +130,7 @@ xi.events.loginCampaign.onTrigger = function(player, csid)
     local priceBit4 = bit.bor(priceShift[7], priceShift[8])
 
     -- Turning on bits in hideOptions will make choices disappear
-    for i=1, #priceShift do
+    for i = 1, #priceShift do
         if priceShift[i] == 0 then
             hideOptions = bit.bor(hideOptions, bit.lshift(1, i - 1))
         end

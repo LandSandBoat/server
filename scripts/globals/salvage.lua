@@ -15,6 +15,7 @@ function salvageUtil.onCellItemCheck(target, effect, value)
             return 0
         end
     end
+
     return 55
 end
 
@@ -26,15 +27,24 @@ function salvageUtil.onCellItemUse(target, effect, value, offset)
 
     target:delStatusEffectSilent(effect)
     if newpower > 0 then
-        local duration = math.floor(statusEffect:getTimeRemaining()/1000)
+        local duration = math.floor(statusEffect:getTimeRemaining() / 1000)
         target:addStatusEffectEx(effect, effect, newpower, 0, duration)
     end
-    if pet ~= nil and effect == xi.effect.DEBILITATION then
+
+    if
+        pet ~= nil and
+        (
+            effect == xi.effect.DEBILITATION or
+            effect == xi.effect.IMPAIRMENT or
+            effect == xi.effect.OMERTA
+        )
+    then
         pet:delStatusEffectSilent(effect)
         if newpower > 0 then
-            local duration = math.floor(statusEffect:getTimeRemaining()/1000)
+            local duration = math.floor(statusEffect:getTimeRemaining() / 1000)
             pet:addStatusEffectEx(effect, effect, newpower, 0, duration)
         end
     end
+
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + offset)
 end

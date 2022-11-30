@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -42,17 +42,17 @@ public:
 
     void RegisterChar(CCharEntity*);
 
-    uint16      GetID() const;
-    uint8       GetLevelCap() const;
-    const int8* GetName();
-    position_t  GetEntryLoc();                   // Get entry location
-    duration    GetTimeLimit();                  // Get instance time limit
-    duration    GetLastTimeUpdate();             // Get last time a "Time Remaining:" message was displayed
-    uint32      GetProgress() const;             // Tracks the progress through the current stage
-    uint32      GetStage() const;                // Tracks the progress through the instance (eg. floor #)
-    duration    GetWipeTime();                   // Get time wipe happened (elapsed since start)
-    duration    GetElapsedTime(time_point tick); // Get elapsed time so far
-    uint64_t    GetLocalVar(std::string const& name) const;
+    uint16             GetID() const;
+    uint8              GetLevelCap() const;
+    const std::string& GetName();
+    position_t         GetEntryLoc();                   // Get entry location
+    duration           GetTimeLimit();                  // Get instance time limit
+    duration           GetLastTimeUpdate();             // Get last time a "Time Remaining:" message was displayed
+    uint32             GetProgress() const;             // Tracks the progress through the current stage
+    uint32             GetStage() const;                // Tracks the progress through the instance (eg. floor #)
+    duration           GetWipeTime();                   // Get time wipe happened (elapsed since start)
+    duration           GetElapsedTime(time_point tick); // Get elapsed time so far
+    uint64_t           GetLocalVar(std::string const& name) const;
 
     void SetLevelCap(uint8 cap);
     void SetEntryLoc(float x, float y, float z, float rot); // Set entry location

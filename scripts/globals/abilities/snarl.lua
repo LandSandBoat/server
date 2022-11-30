@@ -10,13 +10,13 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getPet() == nil) then
+abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
-        if ((player:getPet() ~= nil) and (player:isJugPet())) then
+        if player:getPet():getTarget() ~= nil and player:isJugPet() then
             return 0, 0
         else
             return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
@@ -24,8 +24,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     player:transferEnmity(player:getPet(), 99, 11.5)
 end
 
-return ability_object
+return abilityObject

@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if
         player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) or
         player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) or
@@ -25,25 +25,25 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local tpGain = 0
     local stm = 0.5 + (0.1 * player:getMod(xi.mod.REVERSE_FLOURISH_EFFECT))
 
     local numMerits = player:getMerit(xi.merit.REVERSE_FLOURISH_EFFECT)
 
-    if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         tpGain = 9.5 * 1 + stm * 1 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         tpGain = 9.5 * 2 + stm * 2 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         tpGain = 9.5 * 3 + stm * 3 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
         tpGain = 9.5 * 4 + stm * 4 ^ 2 + numMerits
 
-    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
         tpGain = 9.5 * 5 + stm * 5 ^ 2 + numMerits
     end
 
@@ -59,4 +59,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return tpGain
 end
 
-return ability_object
+return abilityObject

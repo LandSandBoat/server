@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Nadee Periyaha
--- Standard Info NPC
 -- !pos -10.802 0.000 -1.198 50
 -----------------------------------
 local entity = {}

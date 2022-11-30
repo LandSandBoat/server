@@ -18,9 +18,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 5
     params.ftp100 = 0.6875 params.ftp200 = 0.6875 params.ftp300 = 0.6875
@@ -29,7 +29,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
@@ -39,9 +39,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Blade:_Shun
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

@@ -6,20 +6,21 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local zone = mob:getZoneID()
-    if (mob:isInDynamis() or zone == 5) then
+    if mob:isInDynamis() or zone == 5 then
         return 0
     end
+
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
-    local dmgmod = 1.2
+    local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 1.2, 1.5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     local typeEffect = xi.effect.STUN
@@ -30,4 +31,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

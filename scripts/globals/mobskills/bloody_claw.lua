@@ -11,16 +11,16 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
-    local dmgmod = 0.9
+    local dmgmod = 1
     local typeEffect = 136 + math.random(0, 6) -- 136 is xi.effect.STR_DOWN add 0 to 6 for all 7 of the possible attribute reductions
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
@@ -33,4 +33,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

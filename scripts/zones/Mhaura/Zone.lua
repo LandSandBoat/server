@@ -8,9 +8,9 @@ require('scripts/globals/missions')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     -- Script for Laughing Bison sign flip animations
     local timer = 1152 - ((os.time() - 1009810802)%1152)
 
@@ -24,15 +24,23 @@ zone_object.onGameHour = function(zone)
     SetServerVariable("Mhaura_Destination", math.random(1, 100))
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        if
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or
+            prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
+            prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES
+        then
             local ship = GetNPCByID(ID.npc.SHIP)
 
             ship:setAnimBegin(VanadielTime())
@@ -50,27 +58,32 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onTransportEvent = function(player, transport)
-    if transport == 47 or transport == 46 then
-        if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
-            player:setPos(8.200, -1.363, 3.445, 192)
-            player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+zoneObject.onTransportEvent = function(player, transport)
+    if player:getLocalVar('[BOAT]Paid') == 1 then
+        if transport == 47 or transport == 46 then
+            if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
+                player:setPos(8.200, -1.363, 3.445, 192)
+                player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
+            else
+                player:startEvent(200)
+            end
         else
             player:startEvent(200)
         end
     else
-        player:startEvent(200)
+        player:setPos(48.1156, -8.0000, 40.8011, 66)
+        player:setLocalVar('[BOAT]Paid', 0)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
 
@@ -85,7 +98,12 @@ zone_object.onEventFinish = function(player, csid, option)
         else
             player:setPos(8, -1, 5, 62, 249) -- Something went wrong, dump them on the dock for safety.
         end
+    elseif csid == 220 and option == 0 then
+        player:setLocalVar('[BOAT]Paid', 0)
+
+    elseif csid == 202 then
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 
-return zone_object
+return zoneObject

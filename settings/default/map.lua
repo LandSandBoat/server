@@ -29,8 +29,8 @@ xi.settings.map =
     -- Game settings
     -- --------------------------------
 
-    --  PacketGuard will block and report any packets that aren't in the allow-list for a
-    --  player's current state.
+    -- PacketGuard will block and report any packets that aren't in the allow-list for a
+    -- player's current state.
     PACKETGUARD_ENABLED = true,
 
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
@@ -53,12 +53,12 @@ xi.settings.map =
     EXP_LOSS_RATE           = 1.0,
     EXP_PARTY_GAP_PENALTIES = true,
 
-    --  Capacity Point Settings
+    -- Capacity Point Settings
     CAPACITY_RATE = 1.0,
 
     -- Determines Vana'diel time epoch (886/1/1 Firesday)
-    --  current timestamp - vanadiel_time_epoch = vana'diel time
-    --  0 defaults to SE epoch 1009810800 (JP midnight 1/1/2002)
+    -- current timestamp - vanadiel_time_epoch = vana'diel time
+    -- 0 defaults to SE epoch 1009810800 (JP midnight 1/1/2002)
     -- safe range is 1 - current timestamp
     VANADIEL_TIME_EPOCH = 0,
 
@@ -81,21 +81,21 @@ xi.settings.map =
     WS_POINTS_BASE = 1,
 
     -- Weaponskill points per skillchain element - whole numbers only, retail is 1
-    --  (tier 3 sc's have 4 elements, plus 1 for the ws itself, giving 5 points to the closer).
+    -- (tier 3 sc's have 4 elements, plus 1 for the ws itself, giving 5 points to the closer).
     WS_POINTS_SKILLCHAIN = 1,
 
     -- Enable/disable jobs other than BST and RNG having widescan
     ALL_JOBS_WIDESCAN = true,
 
     -- Modifier to apply to player speed. 0 is the retail accurate default. Negative numbers will reduce it.
-    SPEED_MOD = 0,
+    SPEED_MOD = -10,
 
     -- Modifier to apply to mount speed. 0 is the retail accurate default. Negative numbers will reduce it.
     -- Note retail treats the mounted speed as double what it actually is.
     MOUNT_SPEED_MOD = 0,
 
     -- Modifier to apply to agro'd monster speed. 0 is the retail accurate default. Negative numbers will reduce it.
-    MOB_SPEED_MOD = 0,
+    MOB_SPEED_MOD = -10,
 
     -- Allows you to manipulate the constant multiplier in the skill-up rate formulas, having a potent effect on skill-up rates.
     SKILLUP_CHANCE_MULTIPLIER = 1.0,
@@ -152,7 +152,7 @@ xi.settings.map =
     -- Sets the fraction of MP a subjob provides to the main job. Retail is half and this acts as a divisor so default is 2
     SJ_MP_DIVISOR = 2.0,
 
-    --  Modify ratio of subjob-to-mainjob
+    -- Modify ratio of subjob-to-mainjob
     -- 0            = no subjobs
     -- 1            = 1/2   (default, 75/37, 99/49)
     -- 2            = 2/3   (75/50, 99/66)
@@ -192,6 +192,9 @@ xi.settings.map =
     --  Allow mobs to walk back home instead of despawning
     MOB_NO_DESPAWN = true,
 
+    -- Adds extra time to mob despawn in seconds. Base time is 25s, so a setting of 5 here would be a total of 30 seconds.
+    MOB_ADDITIONAL_TIME_TO_DEAGGRO = 0,
+
     -- Allows parry, block, and guard to skill up regardless of the action occuring.
     -- This did not happen in previous eras
     PARRY_OLD_SKILLUP_STYLE = true,
@@ -211,6 +214,9 @@ xi.settings.map =
 
     -- Minimum time between uses of yell command (in seconds).
     YELL_COOLDOWN = 30,
+
+    -- Prevent players from sending tells to hidden GMs. You will still receive them from other GMs.
+    BLOCK_TELL_TO_HIDDEN_GM = false,
 
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
@@ -237,7 +243,7 @@ xi.settings.map =
     -- Set to 1 to completely disable auto-jailing offenders
     ANTICHEAT_JAIL_DISABLE = false,
 
-    --  Gobbie Mystery Box settings
+    -- Gobbie Mystery Box settings
     DAILY_TALLY_AMOUNT = 10,
     DAILY_TALLY_LIMIT  = 50000,
 

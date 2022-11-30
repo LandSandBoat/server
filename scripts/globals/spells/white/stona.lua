@@ -5,19 +5,20 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    if (target:delStatusEffect(xi.effect.PETRIFICATION)) then
+spellObject.onSpellCast = function(caster, target, spell)
+    if target:delStatusEffect(xi.effect.PETRIFICATION) then
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
+
     return xi.effect.PETRIFICATION
 end
 
-return spell_object
+return spellObject

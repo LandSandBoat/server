@@ -16,7 +16,11 @@ local poeticParchmentID = 634
 
 entity.onTrade = function(player, npc, trade)
     -- THE OLD MONUMENT (parchment)
-    if player:getCharVar("TheOldMonument_Event") == 3 and trade:hasItemQty(parchmentID, 1) and trade:getItemCount() == 1 then
+    if
+        player:getCharVar("TheOldMonument_Event") == 3 and
+        trade:hasItemQty(parchmentID, 1) and
+        trade:getItemCount() == 1
+    then
         player:startEvent(2)
     end
 end

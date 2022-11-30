@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Lacia
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

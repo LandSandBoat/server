@@ -4,14 +4,18 @@
 -----------------------------------
 require("scripts/globals/spells/enhancing_song")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+spellObject.onMagicCastingCheck = function(caster, target, spell)
+    if caster:getZone():getType() == xi.zoneType.DUNGEON then
+        return 1
+    else
+        return 0
+    end
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return xi.spells.enhancing.useEnhancingSong(caster, target, spell)
 end
 
-return spell_object
+return spellObject

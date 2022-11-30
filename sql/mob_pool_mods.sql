@@ -104,6 +104,7 @@ INSERT INTO `mob_pool_mods` VALUES (559,302,40,30); -- TATT
 INSERT INTO `mob_pool_mods` VALUES (592,3,100,1);  -- MP_BASE: 100
 INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);  -- EVA: 15
 INSERT INTO `mob_pool_mods` VALUES (592,302,45,0); -- TRIPLE_ATTACK: 45
+INSERT INTO `mob_pool_mods` VALUES (592,59,157,1); -- WEAPON_BONUS: 157
 
 -- Cargo Crab Colin
 INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
@@ -165,6 +166,9 @@ INSERT INTO `mob_pool_mods` VALUES (1178,163,-100,0); -- DMGMAGIC: -100
 -- Enkidu
 INSERT INTO `mob_pool_mods` VALUES (1234,4,4,1); -- SIGHT_RANGE: 4
 
+-- Eotyrannus
+INSERT INTO `mob_pool_mods` VALUES (1238,252,55,0); -- CHARMRES: 80 (+25)
+
 -- Exoplates
 INSERT INTO `mob_pool_mods` VALUES (1270,39,-1,1); -- SHARE_POS: -1
 
@@ -185,6 +189,7 @@ INSERT INTO `mob_pool_mods` VALUES (1461,4,4,1); -- SIGHT_RANGE: 4
 
 -- Genbu
 INSERT INTO `mob_pool_mods` VALUES (1491,3,100,1); -- MP_BASE: 100
+INSERT INTO `mob_pool_mods` VALUES (1491,59,130,1); -- WEAPON_BONUS: 130
 
 -- Goblin Digger Near
 INSERT INTO `mob_pool_mods` VALUES (1648,17,1,1);  -- NO_DESPAWN: 1
@@ -233,6 +238,7 @@ INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1); -- MAGIC_COOL: 60
 
 -- Jormungand
 INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0); -- REGEN: 25
+INSERT INTO `mob_pool_mods` VALUES (2156,59,254,1); -- WEAPON_BONUS: 254
 
 -- Kaiser Behemoth S
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1); -- MP_BASE: 100
@@ -251,11 +257,15 @@ INSERT INTO `mob_pool_mods` VALUES (2262,370,125,0); -- REGEN: 125
 -- Kirin
 INSERT INTO `mob_pool_mods` VALUES (2265,368,150,0); -- REGAIN: 150
 INSERT INTO `mob_pool_mods` VALUES (2265,370,50,0);  -- REGEN: 50
+INSERT INTO `mob_pool_mods` VALUES (2265,59,150,1); -- WEAPON_BONUS: 150
 
 -- Knight Crab
 INSERT INTO `mob_pool_mods` VALUES (2271,64,15,0);  -- COMBAT_SKILLUP_RATE: 15
 INSERT INTO `mob_pool_mods` VALUES (2271,65,15,0);  -- MAGIC_SKILLUP_RATE: 15
 INSERT INTO `mob_pool_mods` VALUES (2271,165,15,0); -- CRITHITRATE: 15
+
+-- Korrigan
+INSERT INTO `mob_pool_mods` VALUES (2282,252,38,0); -- CHARMRES: 38
 
 -- Ladon
 INSERT INTO `mob_pool_mods` VALUES (2314,28,23,1); -- EXP_BONUS: 23
@@ -324,6 +334,9 @@ INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0); -- REGEN: 50
 -- Nunyunuwi
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0); -- REGEN: 100
 
+-- Old Opo-Opo
+INSERT INTO `mob_pool_mods` VALUES (2963,252,40,0); -- CHARMRES: 40
+
 -- Omega
 INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
@@ -341,7 +354,8 @@ INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1); -- SHARE_TARGET: 434
 INSERT INTO `mob_pool_mods` VALUES (3129,370,50,0); -- REGEN: 50
 
 -- Polar Hare
-INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1);  -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (3168,252,40,0); -- CHARMRES: 20
 
 -- Promathia
 INSERT INTO `mob_pool_mods` VALUES (3205,1,250,0);  -- DEF: 250
@@ -384,6 +398,7 @@ INSERT INTO `mob_pool_mods` VALUES (3426,105,1,1); -- ATTRACT_FAMILY_NM: 1
 
 -- Seiryu
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
+INSERT INTO `mob_pool_mods` VALUES (3540,59,157,1); -- WEAPON_BONUS: 157
 
 -- Serket
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0); -- REGEN: 50
@@ -421,6 +436,7 @@ INSERT INTO `mob_pool_mods` VALUES (3796,21,97,1); -- PET_SPELL_LIST: 97
 
 -- Suzaku
 INSERT INTO `mob_pool_mods` VALUES (3816,3,100,1); -- MP_BASE: 100
+INSERT INTO `mob_pool_mods` VALUES (3816,59,157,1); -- WEAPON_BONUS: 157
 
 -- Swashstox Beadblinker
 INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
@@ -467,7 +483,8 @@ INSERT INTO `mob_pool_mods` VALUES (4189,35,0,1);   -- STANDBACK_COOL: 0
 INSERT INTO `mob_pool_mods` VALUES (4189,244,15,0); -- SILENCERES: 15
 
 -- Variable Hare
-INSERT INTO `mob_pool_mods` VALUES (4204,28,10,1); -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (4204,28,10,1);  -- EXP_BONUS: 10
+INSERT INTO `mob_pool_mods` VALUES (4204,252,40,0); -- CHARMRES: 20
 
 -- Verglas Golem
 INSERT INTO `mob_pool_mods` VALUES (4222,4,4,1); -- SIGHT_RANGE: 4
@@ -548,6 +565,9 @@ INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- MAGIC_COOL: 60
 INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);  -- SIGHT_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);  -- SOUND_RANGE: 15
 INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1); -- LINK_RADIUS: 30
+
+-- Kaiser Behemoth (Apollyon NW)
+INSERT INTO `mob_pool_mods` VALUES (6732,3,100,1); -- MP_BASE: 100
 
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;

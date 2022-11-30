@@ -17,9 +17,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
     -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
@@ -31,7 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     -- accuracy mods (ONLY USE FOR accURACY VARIES WITH TP) , should be the acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
@@ -42,7 +42,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
         local duration = tp / 1000 * 20 - 5
         if not target:hasStatusEffect(xi.effect.MAGIC_EVASION_DOWN) then
@@ -53,4 +53,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

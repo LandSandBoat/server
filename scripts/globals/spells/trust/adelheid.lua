@@ -9,14 +9,13 @@ require("scripts/globals/roe")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-
+spellObject.onSpellCast = function(caster, target, spell)
     -- Records of Eminence: Alter Ego: Adelheid
     if caster:getEminenceProgress(936) then
         xi.roe.onRecordTrigger(caster, 936)
@@ -25,7 +24,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.ADDENDUM_BLACK, ai.r.JA, ai.s.SPECIFIC, xi.ja.DARK_ARTS)
@@ -52,19 +51,19 @@ spell_object.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "ADELHEID_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3469 then -- Twirling Dervish
         -- You may want to cover your ears!
-            if math.random(100) <= 33 then
+            if math.random(1, 100) <= 33 then
                 xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
             end
         end
     end)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

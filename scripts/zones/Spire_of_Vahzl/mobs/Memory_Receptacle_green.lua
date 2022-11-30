@@ -46,8 +46,8 @@ local positions =
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
 
     -- Give orbs a random spawn location
     local battlefield = mob:getBattlefield()
@@ -92,7 +92,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Spawn mob from body and let main receptacle know you died
     local bfID = mob:getBattlefield():getArea()
     local pos = mob:getPos()

@@ -13,15 +13,15 @@ local entity = {}
 
 local pathNodes =
 {
-    { x = 880.16, y =  -99.81, z = -550.50},
-    { x = 860.09, y =  -99.74, z = -551.23},
-    { x = 834.92, y =  -99.55, z = -556.92},
-    { x = 830.51, y =  -99.81, z = -580.15},
-    { x = 839.36, y =  -99.47, z = -604.65},
-    { x = 859.37, y =  -99.67, z = -607.99},
-    { x = 859.37, y =  -99.67, z = -607.99},
-    { x = 892.04, y = -100.03, z = -580.07},
-    { x = 859.47, y =  -99.42, z = -579.54}
+    { x = 880.16, y =  -99.81, z = -550.50 },
+    { x = 860.09, y =  -99.74, z = -551.23 },
+    { x = 834.92, y =  -99.55, z = -556.92 },
+    { x = 830.51, y =  -99.81, z = -580.15 },
+    { x = 839.36, y =  -99.47, z = -604.65 },
+    { x = 859.37, y =  -99.67, z = -607.99 },
+    { x = 859.37, y =  -99.67, z = -607.99 },
+    { x = 892.04, y = -100.03, z = -580.07 },
+    { x = 859.47, y =  -99.42, z = -579.54 }
 }
 
 local slaveGlobes =
@@ -90,17 +90,17 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
     if mg:isEngaged() then
         mg:setLocalVar("summoning", 1)
         mg:entityAnimationPacket("casm")
-        mg:SetAutoAttackEnabled(false)
-        mg:SetMagicCastingEnabled(false)
-        mg:SetMobAbilityEnabled(false)
+        mg:setAutoAttackEnabled(false)
+        mg:setMagicCastingEnabled(false)
+        mg:setMobAbilityEnabled(false)
 
         mg:timer(3000, function(mob)
             if mob:isAlive() then
                 mob:entityAnimationPacket("shsm")
                 mob:setLocalVar("summoning", 0)
-                mob:SetAutoAttackEnabled(true)
-                mob:SetMagicCastingEnabled(true)
-                mob:SetMobAbilityEnabled(true)
+                mob:setAutoAttackEnabled(true)
+                mob:setMagicCastingEnabled(true)
+                mob:setMobAbilityEnabled(true)
                 slaveGlobe:spawn()
                 if mob:getTarget() ~= nil then
                     slaveGlobe:updateEnmity(mob:getTarget())
@@ -170,9 +170,9 @@ local handleSlaveGlobesRoam = function(mg, validSlavePositions)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(true)
-    mob:SetMobAbilityEnabled(true)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:setLocalVar("nextSlaveSpawnTime", os.time() + 30) -- spawn first 30s from now
     mob:setLocalVar("posNum", math.random(1, 9))
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -260,7 +260,7 @@ entity.onMobDisengage = function(mob)
     mob:setSpeed(20)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
 
     for _, slaveGlobeID in ipairs(slaveGlobes) do

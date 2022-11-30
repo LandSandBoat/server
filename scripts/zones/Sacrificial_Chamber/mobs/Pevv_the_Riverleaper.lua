@@ -19,7 +19,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     DespawnMob(mob:getID() + 2)
 end
 

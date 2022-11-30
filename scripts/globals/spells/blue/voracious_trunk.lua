@@ -15,14 +15,19 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local resist = applyResistanceAbility(caster, target, xi.magic.ele.WIND, 0, 0)
+spellObject.onSpellCast = function(caster, target, spell)
+    local params = {}
+    params.element = xi.magic.ele.WIND
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.maccBonus = 0
+
+    local resist = xi.magic.applyAbilityResistance(caster, target, params)
     local stealChance = math.random(1, 100)
     local stolen = 0
 
@@ -40,4 +45,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return stolen
 end
 
-return spell_object
+return spellObject

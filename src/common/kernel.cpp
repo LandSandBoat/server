@@ -29,6 +29,8 @@
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/version.h"
+#include "common/watchdog.h"
+
 #include <sstream>
 #if defined(__linux__) || defined(__APPLE__)
 #define BACKWARD_HAS_BFD 1
@@ -121,10 +123,12 @@ static void sig_proc(int sn)
         case SIGINT:
         case SIGTERM:
             gRunFlag = false;
+            gConsoleService->stop();
             break;
         case SIGABRT:
         case SIGSEGV:
         case SIGFPE:
+            gConsoleService->stop();
             dump_backtrace();
             do_abort();
 #ifdef _WIN32
@@ -227,10 +231,19 @@ int main(int argc, char** argv)
     { // Main runtime cycle
         duration next = std::chrono::milliseconds(200);
 
+        // clang-format off
+        auto watchdog = Watchdog(2000ms, [&]()
+        {
+            ShowCritical("Process main tick has taken 2000ms or more. Are you debugging or stuck in a loop?");
+            ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
+        });
+        // clang-format on
+
         while (gRunFlag)
         {
             next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
             do_sockets(&rfd, next);
+            watchdog.update();
         }
     }
 
@@ -238,8 +251,7 @@ int main(int argc, char** argv)
     // Re-enable Quick Edit Mode upon Exiting if it is still disabled
     SetConsoleMode(hInput, prev_mode);
 #endif // _WIN32
-
-    gConsoleService = nullptr;
+    gConsoleService->stop();
 
     do_final(EXIT_SUCCESS);
 }

@@ -26,6 +26,7 @@
 
 #include "../ai/ai_container.h"
 
+#include "../battlefield.h"
 #include "../campaign_system.h"
 #include "../conquest_system.h"
 #include "../entities/battleentity.h"
@@ -81,15 +82,10 @@ namespace zoneutils
                 if (!PZone.second->m_WeatherVector.empty())
                 {
                     PZone.second->SetWeather((WEATHER)PZone.second->m_WeatherVector.at(0).common);
-
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to %u", PZone.second->GetName(),
-                    // PZone.second->m_WeatherVector.at(0).m_common);
                 }
                 else
                 {
                     PZone.second->SetWeather(WEATHER_NONE); // If not weather data found, initialize with WEATHER_NONE
-
-                    // ShowDebug(CL_YELLOW"zonetuils::InitializeWeather: Static weather of %s updated to WEATHER_NONE", PZone.second->GetName());
                 }
             }
         }
@@ -119,8 +115,6 @@ namespace zoneutils
     {
         g_PTrigger->targid = TargID;
         g_PTrigger->id     = ((4096 + ZoneID) << 12) + TargID;
-
-        ShowWarning("Server need NPC <%u>", g_PTrigger->id);
         return g_PTrigger;
     }
 
@@ -139,7 +133,7 @@ namespace zoneutils
         }
     }
 
-    CCharEntity* GetCharByName(int8* name)
+    CCharEntity* GetCharByName(std::string name)
     {
         for (auto PZone : g_PZoneList)
         {
@@ -340,8 +334,9 @@ namespace zoneutils
         uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, mob_spawn_points.pos_rot, mob_spawn_points.pos_x, \
-        mob_spawn_points.pos_y, mob_spawn_points.pos_z, mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
+        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, \
+        mob_spawn_points.pos_rot, mob_spawn_points.pos_x, mob_spawn_points.pos_y, mob_spawn_points.pos_z, \
+        mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
         mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, \
         mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, \
         mob_pools.immunity, mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, mob_family_system.STR, \
@@ -356,10 +351,11 @@ namespace zoneutils
         mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, mob_groups.allegiance, mob_pools.namevis, mob_pools.aggro, \
         mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, mob_family_system.charmable, \
         mob_groups.content_tag, \
-        mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, mob_resistances.water_eem, \
-        mob_resistances.light_eem, mob_resistances.dark_eem \
+        mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+        INNER JOIN mob_ele_evasion ON mob_ele_evasion.ele_eva_id = mob_pools.ele_eva_id \
         INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
         INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
@@ -548,6 +544,12 @@ namespace zoneutils
                         PMob->setMobMod(MOBMOD_SPAWN_ANIMATIONSUB, PMob->animationsub);
                     }
 
+                    if (PMob->GetMJob() == JOB_PLD && PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
+                    {
+                        PMob->setMobMod(MOBMOD_CAN_SHIELD_BLOCK, 1);
+                        PMob->setModifier(Mod::SHIELDBLOCKRATE, 45);
+                    }
+
                     // Setup HP / MP Stat Percentage Boost
                     PMob->HPscale = sql->GetFloatData(64);
                     PMob->MPscale = sql->GetFloatData(65);
@@ -568,7 +570,7 @@ namespace zoneutils
                     PMob->m_MobSkillList = sql->GetUIntData(73);
 
                     PMob->m_TrueDetection = sql->GetUIntData(74);
-                    PMob->m_Detects       = sql->GetUIntData(75);
+                    PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(75));
 
                     PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
 
@@ -602,8 +604,12 @@ namespace zoneutils
                 luautils::ApplyZoneMixins(PMob);
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();
-                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
+            });
 
+            // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
+            PZone->ForEachMob([](CMobEntity* PMob)
+            {
+                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
                 if (PMob->m_AllowRespawn)
                 {
                     PMob->Spawn();
@@ -681,18 +687,20 @@ namespace zoneutils
 
     CZone* CreateZone(uint16 ZoneID)
     {
-        static const char* Query = "SELECT zonetype FROM zone_settings "
+        static const char* Query = "SELECT zonetype, restriction FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
         if (sql->Query(Query, ZoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            if (static_cast<ZONE_TYPE>(sql->GetUIntData(0)) == ZONE_TYPE::DUNGEON_INSTANCED)
+            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(sql->GetUIntData(0));
+            uint8     restriction = static_cast<uint8>(sql->GetUIntData(1));
+            if (zoneType == ZONE_TYPE::DUNGEON_INSTANCED)
             {
-                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
+                return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
             else
             {
-                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID));
+                return new CZone((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }
         }
         else
@@ -733,6 +741,8 @@ namespace zoneutils
             do_final(EXIT_FAILURE);
         }
 
+        ShowInfo(fmt::format("Loading {} zones", zones.size()));
+
         for (auto zone : zones)
         {
             g_PZoneList[zone] = CreateZone(zone);
@@ -744,6 +754,9 @@ namespace zoneutils
             // cppcheck-suppress stlFindInsert
             g_PZoneList[0] = CreateZone(0);
         }
+
+        // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
+        luautils::PopulateIDLookups();
 
         LoadNPCList();
         LoadMOBList();
@@ -1193,6 +1206,38 @@ namespace zoneutils
     bool IsResidentialArea(CCharEntity* PChar)
     {
         return PChar->m_moghouseID != 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Checks whether or not the zone is enabled                            *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsZoneActive(uint16 zoneId)
+    {
+        if (auto* PZone = GetZone(zoneId))
+        {
+            if (PZone->GetPort() == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    void AfterZoneIn(CBaseEntity* PEntity)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(PEntity);
+        if (PChar != nullptr && (PChar->PBattlefield == nullptr || !PChar->PBattlefield->isEntered(PChar)))
+        {
+            GetZone(PChar->getZone())->updateCharLevelRestriction(PChar);
+        }
+
+        luautils::AfterZoneIn(PChar);
     }
 
 }; // namespace zoneutils

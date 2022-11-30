@@ -8,19 +8,23 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local modAcc = player:getMerit(xi.merit.FERAL_HOWL)
     local feralHowlMod = player:getMod(xi.mod.FERAL_HOWL_DURATION)
     local duration = 10
 
-    if target:hasStatusEffect(xi.effect.TERROR) == true or target:hasStatusEffect(xi.effect.STUN) == true then -- effect already on, or target stunned, do nothing
-    -- reserved for miss based on target already having stun or terror effect active
+    if
+        target:hasStatusEffect(xi.effect.TERROR) or
+        target:hasStatusEffect(xi.effect.STUN)
+    then
+        -- effect already on, or target stunned, do nothing
+        -- reserved for miss based on target already having stun or terror effect active
     else
         -- Calculate duration.
         if feralHowlMod >= 1 then
@@ -51,7 +55,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
     -- Adjusting duration based on resistance.
     if resist >= 20 then
-        if (resist / 10) >= (duration) then
+        if resist / 10 >= duration then
             duration = (duration - math.random(1, (duration - 2)))
         else
             duration = (duration - math.random(1, (resist / 10)))
@@ -68,4 +72,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return xi.effect.TERROR
 end
 
-return ability_object
+return abilityObject

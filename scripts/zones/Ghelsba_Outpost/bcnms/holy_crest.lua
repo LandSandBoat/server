@@ -11,19 +11,19 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/pets")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) ~= QUEST_ACCEPTED) and 1 or 0
@@ -33,11 +33,15 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and option ~= 0 and player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY) then
+battlefieldObject.onEventFinish = function(player, csid, option)
+    if
+        csid == 32001 and
+        option ~= 0 and
+        player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+    then
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST, {
             title = xi.title.HEIR_TO_THE_HOLY_CREST,
             var = "TheHolyCrest_Event",
@@ -49,4 +53,4 @@ battlefield_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return battlefield_object
+return battlefieldObject

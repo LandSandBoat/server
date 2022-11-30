@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -48,6 +48,7 @@
 #include "../utils/itemutils.h"
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
+#include "../utils/zoneutils.h"
 #include "../weapon_skill.h"
 #include "common/timer.h"
 #include "common/utils.h"
@@ -117,8 +118,8 @@ CMobEntity::CMobEntity()
     m_neutral       = false;
     m_Aggro         = false;
     m_TrueDetection = false;
-    m_Detects       = DETECT_NONE;
     m_Link          = 0;
+    m_isAggroable   = false;
     m_battlefieldID = 0;
     m_bcnmID        = 0;
 
@@ -335,13 +336,10 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
         return false;
     }
 
-    // link only if I see him
-    if (m_Detects & DETECT_SIGHT)
+    // Link if can see mob
+    if (getMobMod(MOBMOD_DETECTION) & DETECT_SIGHT && !facing(loc.p, *pos, 64))
     {
-        if (!facing(loc.p, *pos, 64))
-        {
-            return false;
-        }
+        return false;
     }
 
     if (distance(loc.p, *pos) > getMobMod(MOBMOD_LINK_RADIUS))
@@ -533,10 +531,23 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     {
         return false;
     }
+
+    if (targetFlags & TARGET_PLAYER_PARTY)
+    {
+        if (!isDead())
+        {
+            if (allegiance == ALLEGIANCE_TYPE::MOB && PInitiator->allegiance == ALLEGIANCE_TYPE::MOB && allegiance == PInitiator->allegiance)
+            {
+                return true;
+            }
+        }
+    }
+
     if (CBattleEntity::ValidTarget(PInitiator, targetFlags))
     {
         return true;
     }
+
     if (targetFlags & TARGET_PLAYER_DEAD && (m_Behaviour & BEHAVIOUR_RAISABLE) && isDead())
     {
         return true;
@@ -562,28 +573,27 @@ void CMobEntity::Spawn()
 {
     TracyZoneScoped;
     CBattleEntity::Spawn();
-    m_giveExp      = true;
-    m_ExpPenalty   = 0;
-    m_HiPCLvl      = 0;
-    m_HiPartySize  = 0;
-    m_THLvl        = 0;
-    m_ItemStolen   = false;
-    m_DropItemTime = 1000;
-    animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
+    m_giveExp           = true;
+    m_ExpPenalty        = 0;
+    m_HiPCLvl           = 0;
+    m_HiPartySize       = 0;
+    m_THLvl             = 0;
+    m_ItemStolen        = false;
+    m_DropItemTime      = 1000;
+    m_pathFindDisengage = 0;
+    animationsub        = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);
 
     PEnmityContainer->Clear();
 
-    uint8 level = m_minLevel;
+    // The underlying function in GetRandomNumber doesn't accept uint8 as <T> so use uint32
+    // https://stackoverflow.com/questions/31460733/why-arent-stduniform-int-distributionuint8-t-and-stduniform-int-distri
+    uint8 level = static_cast<uint8>(xirand::GetRandomNumber<uint32>(m_minLevel, m_maxLevel + 1));
 
-    // Generate a random level between min and max level
-    if (m_maxLevel > m_minLevel)
-    {
-        level += xirand::GetRandomNumber(0, m_maxLevel - m_minLevel + 1);
-    }
-
+    TraitList.clear(); // Clear traits just in case from random levels. Traits are recalculated in mobutils::CalculateMobStat().
+                       // Note: Traits are NOT stored on DB load as of writing, so mobs won't gradually get stronger on respawn from restoreModifiers()
     SetMLevel(level);
-    SetSLevel(level); // calculated in function
+    SetSLevel(level); // subjob calculated in function as appropriate
 
     mobutils::CalculateMobStats(this);
     mobutils::GetAvailableSpells(this);
@@ -611,7 +621,14 @@ void CMobEntity::Spawn()
         }
     }
 
-    m_DespawnTimer = time_point::min();
+    if (getMobMod(MOBMOD_IDLE_DESPAWN))
+    {
+        this->SetDespawnTime(std::chrono::seconds(getMobMod(MOBMOD_IDLE_DESPAWN)));
+    }
+    else
+    {
+        m_DespawnTimer = time_point::min();
+    }
     luautils::OnMobSpawn(this);
 }
 
@@ -655,6 +672,11 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         findFlags |= FINDFLAGS_PET;
     }
 
+    if ((PSkill->getValidTargets() & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID)
+    {
+        findFlags |= FINDFLAGS_IGNORE_BATTLEID;
+    }
+
     action.id = id;
     if (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)
     {
@@ -677,7 +699,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
     action.actionid = PSkill->getID();
 
-    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
+    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance) && !this->StatusEffectContainer->HasStatusEffect(EFFECT_HYSTERIA))
     {
         if (PSkill->isAoE())
         {
@@ -730,17 +752,35 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             PAI->TargetFind->findSingleTarget(PTarget, findFlags);
         }
     }
+    else // Out of range
+    {
+        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
+        action.actionid           = 0;
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = PTarget->id;
 
-    uint16 targets = (uint16)PAI->TargetFind->m_targets.size();
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
+        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
+        actionTarget.speceffect      = SPECEFFECT::BLOOD;
+        return;
+    }
 
+    uint16 targets = static_cast<uint16>(PAI->TargetFind->m_targets.size());
+
+    // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
     {
         action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
+        action.actionid           = 28787; // Some hardcoded magic for interrupts
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = PSkill->getID();
+        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
+        actionTarget.messageID       = 0;
+        actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
+
         return;
     }
 
@@ -1296,11 +1336,11 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         }
     }
 
-    uint16 Pzone = PChar->getZone();
+    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetType();
+    bool      validZone = zoneType != ZONE_TYPE::BATTLEFIELD && zoneType != ZONE_TYPE::DYNAMIS;
 
-    bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
-
-    if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
+    // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
+    if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)
     {
         // check for seal drops
         /* MobLvl >= 1 = Beastmen Seals ID=1126

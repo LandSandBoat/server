@@ -1503,7 +1503,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         if (Ptem != nullptr)
         {
             name.insert(0, "globals/items/");
-            name.insert(name.size(), (const char*)Ptem->getName());
+            name.insert(name.size(), Ptem->getName());
         }
     }
 
@@ -1961,7 +1961,10 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             m_POwner->addMP(refresh);
         }
 
-        m_POwner->addTP(regain);
+        if (m_POwner->objtype != TYPE_MOB || m_POwner->PAI->IsEngaged())
+        {
+            m_POwner->addTP(regain);
+        }
 
         if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PET_TYPE::AUTOMATON)
         {
@@ -1970,8 +1973,13 @@ void CStatusEffectContainer::TickRegen(time_point tick)
     }
 }
 
-bool CStatusEffectContainer::HasPreventActionEffect()
+bool CStatusEffectContainer::HasPreventActionEffect(bool ignoreCharm)
 {
+    if (ignoreCharm)
+    {
+        return HasStatusEffect(
+            { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
+    }
     return HasStatusEffect(
         { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_CHARM, EFFECT_CHARM_II, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
 }
@@ -1980,7 +1988,7 @@ uint16 CStatusEffectContainer::GetLevelRestrictionEffect()
 {
     for (auto PEffect : m_StatusEffectSet)
     {
-        if (PEffect->GetFlag() & EFFECTFLAG_LEVEL_RESTRICTION)
+        if (PEffect->GetFlag() & EFFECTFLAG_ON_ZONE_PATHOS)
         {
             return PEffect->GetPower();
         }

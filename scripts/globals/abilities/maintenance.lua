@@ -10,7 +10,7 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
 local idStrengths =
 {
@@ -20,10 +20,13 @@ local idStrengths =
     [19185] = 4  -- Automaton Oil + 3
 }
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
+    elseif
+        not player:getPetID() or
+        not (player:getPetID() >= 69 and player:getPetID() <= 72)
+    then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
@@ -35,7 +38,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local id = player:getEquipID(xi.slot.AMMO)
     local pet = player:getPet()
 
@@ -72,4 +75,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return removed
 end
 
-return ability_object
+return abilityObject

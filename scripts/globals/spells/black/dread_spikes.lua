@@ -6,14 +6,19 @@ require("scripts/globals/msg")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local duration = calculateDuration(xi.settings.main.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+spellObject.onSpellCast = function(caster, target, spell)
+    local duration
+    if xi.settings.main.ENABLE_ROV == 1 then
+        duration = xi.magic.calculateDuration(xi.settings.main.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    else
+        duration = xi.magic.calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    end
     local typeEffect = xi.effect.DREAD_SPIKES
     local drainAmount = target:getMaxHP() / 2
 
@@ -28,4 +33,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return typeEffect
 end
 
-return spell_object
+return spellObject

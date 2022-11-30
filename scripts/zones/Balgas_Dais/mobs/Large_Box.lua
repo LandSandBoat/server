@@ -30,7 +30,7 @@ entity.onMobEngaged = function(mob, target)
         DespawnMob(mobId - 2)
         DespawnMob(mobId - 1)
 
-        if math.random(3) == 1 then
+        if math.random(1, 3) == 1 then
             DespawnMob(mobId)
             replaceWithCrate(mob)
         else
@@ -39,8 +39,8 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         replaceWithCrate(mob)
     end
 end

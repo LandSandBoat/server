@@ -4,7 +4,7 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
-mixins = {require("scripts/mixins/families/uragnite")}
+mixins = { require("scripts/mixins/families/uragnite") }
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.MDEF, 50)
 end
 
-entity.onMobFight = function(mob,target)
+entity.onMobFight = function(mob, target)
     local hpp   = mob:getHPP()
     local bfID  = mob:getBattlefield():getArea()
     local adds  = mob:getLocalVar("adds")
@@ -49,9 +49,9 @@ entity.onMobFight = function(mob,target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Adds die with parent
-    if isKiller then
+    if optParams.isKiller then
         local bfID = mob:getBattlefield():getArea()
         for _, petId in ipairs(ID.shellWeDance[bfID].BLADMALL_PET_IDS) do
             local pet = GetMobByID(petId)

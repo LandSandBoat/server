@@ -23,6 +23,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../../common/mmo.h"
 #include "../../../common/utils.h"
+#include "../../ai/ai_container.h"
+#include "../../ai/states/inactive_state.h"
 #include "../../alliance.h"
 #include "../../enmity_container.h"
 #include "../../entities/charentity.h"
@@ -415,22 +417,32 @@ validEntity will check if the given entity can be targeted in the AoE.
 */
 bool CTargetFind::validEntity(CBattleEntity* PTarget)
 {
+    // Check if entity is already in list
+    // TODO: Does it make sense to use a hashmap here instead?
     if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
     {
         return false;
     }
+
     if (!(m_findFlags & FINDFLAGS_DEAD) && PTarget->isDead())
     {
         return false;
     }
 
     if (m_PBattleEntity->StatusEffectContainer->GetConfrontationEffect() != PTarget->StatusEffectContainer->GetConfrontationEffect() ||
-        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance)
+        m_PBattleEntity->PBattlefield != PTarget->PBattlefield || m_PBattleEntity->PInstance != PTarget->PInstance ||
+        ((m_findFlags & FINDFLAGS_IGNORE_BATTLEID) == FINDFLAGS_NONE && m_PBattleEntity->getBattleID() != PTarget->getBattleID()))
     {
         return false;
     }
 
     if (m_PTarget == PTarget || PTarget->getZone() != m_zone || PTarget->GetUntargetable() || PTarget->status == STATUS_TYPE::INVISIBLE)
+    {
+        return false;
+    }
+
+    // Super Jump or otherwise untargetable
+    if (PTarget->PAI->IsUntargetable())
     {
         return false;
     }
@@ -444,6 +456,24 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     if (m_PTarget->allegiance != PTarget->allegiance)
     {
         return false;
+    }
+
+    if (PTarget->objtype == TYPE_MOB)
+    {
+        if (m_PBattleEntity &&
+            m_PBattleEntity->objtype == TYPE_PC &&
+            !static_cast<CCharEntity*>(m_PBattleEntity)->IsMobOwner(PTarget))
+        {
+            return false; // If character isn't allowed to attack don't count it.
+        }
+
+        if (m_PBattleEntity &&
+            m_PBattleEntity->PMaster &&
+            m_PBattleEntity->PMaster->objtype == TYPE_PC &&
+            !static_cast<CCharEntity*>(m_PBattleEntity->PMaster)->IsMobOwner(PTarget))
+        {
+            return false; // If pet's master isn't allowed to attack don't count it.
+        }
     }
 
     // shouldn't add if target is charmed by the enemy
@@ -526,8 +556,6 @@ bool CTargetFind::isWithinCone(position_t* pos)
     WPoint.y = (PPoint.x * m_CPoint.z - PPoint.z * m_CPoint.x) / m_scalar;
     WPoint.z = (PPoint.z * m_BPoint.x - PPoint.x * m_BPoint.z) / m_scalar;
 
-    // ShowDebug("A %f, B %f, C %f", WPoint.x, WPoint.y, WPoint.z);
-
     if (WPoint.x < 0 || WPoint.x > 1)
     {
         return false;
@@ -577,7 +605,9 @@ CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTa
         return m_PBattleEntity->PPet;
     }
 
-    if (PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
+    bool ignoreBattleId  = (validTargetFlags & TARGET_IGNORE_BATTLEID) == TARGET_IGNORE_BATTLEID;
+    bool hasSameBattleId = m_PBattleEntity->getBattleID() == PTarget->getBattleID();
+    if ((ignoreBattleId || hasSameBattleId) && PTarget->ValidTarget(m_PBattleEntity, validTargetFlags))
     {
         return PTarget;
     }

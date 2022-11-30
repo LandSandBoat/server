@@ -16,19 +16,20 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on https://www.bg-wiki.com/bg/Calculating_Blue_Magic_Damage
     local multi = 2.625
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 2.0
     end
+
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
     params.multiplier = multi
@@ -47,4 +48,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return damage
 end
 
-return spell_object
+return spellObject

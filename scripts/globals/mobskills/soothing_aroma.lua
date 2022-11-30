@@ -12,31 +12,33 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getHPP() > 50 and mob:getPool() == 3326) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getHPP() > 50 and mob:getPool() == 3326 then
         -- Raskovnik doesn't use this for the 1st half of its HP.
         return 1
     end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CHARM_I
 
-    if (not target:isPC()) then
+    if not target:isPC() then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return typeEffect
     end
 
     local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 0, 3, 150)
-    if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
+    if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end
+
     skill:setMsg(msg)
 
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

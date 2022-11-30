@@ -84,6 +84,31 @@ local outposts =
     [xi.region.TAVNAZIANARCH]   = { zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
 }
 
+-- Pre-ToAU outpost values
+if xi.settings.main.ENABLE_TOAU == 0 then
+    outposts[xi.region.RONFAURE].lvl        = 20
+    outposts[xi.region.ZULKHEIM].lvl        = 20
+    outposts[xi.region.NORVALLEN].lvl       = 25
+    outposts[xi.region.GUSTABERG].lvl       = 20
+    outposts[xi.region.DERFLAND].lvl        = 25
+    outposts[xi.region.SARUTABARUTA].lvl    = 20
+    outposts[xi.region.KOLSHUSHU].lvl       = 20
+    outposts[xi.region.ARAGONEU].lvl        = 25
+    outposts[xi.region.FAUREGANDI].lvl      = 35
+    outposts[xi.region.VALDEAUNIA].lvl      = 40
+    outposts[xi.region.QUFIMISLAND].lvl     = 25
+    outposts[xi.region.LITELOR].lvl         = 35
+    outposts[xi.region.KUZOTZ].lvl          = 40
+    outposts[xi.region.VOLLBOW].lvl         = 65
+    outposts[xi.region.ELSHIMOLOWLANDS].lvl = 35
+    outposts[xi.region.ELSHIMOUPLANDS].lvl  = 45
+    outposts[xi.region.TAVNAZIANARCH].lvl   = 25
+
+    for _, outpost in pairs(outposts) do
+        outpost.fee = outpost.lvl * 10
+    end
+end
+
 local function hasOutpost(player, region)
     local hasOP = player:hasTeleport(player:getNation(), region + 5)
     if not hasOP then
@@ -93,6 +118,7 @@ local function hasOutpost(player, region)
             hasOP = region <= xi.region.ELSHIMOUPLANDS
         end
     end
+
     return hasOP
 end
 
@@ -100,7 +126,10 @@ local function setHomepointFee(player, guardNation)
     local pNation = player:getNation()
     local fee = 0
 
-    if pNation ~= guardNation and not xi.conquest.areAllies(pNation, guardNation) then
+    if
+        pNation ~= guardNation and
+        not xi.conquest.areAllies(pNation, guardNation)
+    then
         local rank = player:getRank(player:getNation())
         if rank <= 5 then
             fee = 100 * math.pow(2, rank - 1)
@@ -131,6 +160,7 @@ local function getAllowedTeleports(player, nation)
     elseif xi.settings.main.UNLOCK_OUTPOST_WARPS == 1 then
         return 0x3FE0001F -- Allow all outposts except for Tulia and Tavnazia
     end
+
     for region = xi.region.RONFAURE, xi.region.TAVNAZIANARCH do
         if not xi.conquest.canTeleportToOutpost(player, region) then
             allowedTeleports = bit.bor(allowedTeleports, bit.lshift(1, region + 5)) -- Region bits start at 5th bit
@@ -161,7 +191,15 @@ local function suppliesAvailableBitmask(player, nation)
 
     if mask ~= -1 and mask ~= 0xFFFFFFFF then
         for i = 0, 18 do
-            if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)) then
+            if
+                GetRegionOwner(i) ~= nation or
+                i == 16 or
+                i == 17 or
+                (
+                    i == 18 and
+                    not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)
+                )
+            then
                 mask = mask + 2^(i + 5)
             end
         end
@@ -186,6 +224,7 @@ local function areSuppliesRotten(player, npc, guardType)
         else
             player:showText(npc, text.CONQUEST - 1) -- "Hmm... These supplies you have brought us are too old to be of any use."
         end
+
         local ki = outposts[region].ki
 
         player:delKeyItem(ki)
@@ -598,9 +637,10 @@ xi.conquest.toggleRegionalNPCs = function(zone)
             { GetNationRank(xi.nation.WINDURST), xi.zone.WINDURST_WOODS },
         }
 
-        table.sort(rankings, function (a, b) return a[1] > b[1] end)
+        table.sort(rankings, function (a, b) return a[1] < b[1] end)
 
         local firstPlaceZone = rankings[1][2]
+        local secondPlaceZone = rankings[2][2]
 
         if firstPlaceZone == zone:getID() then
             print("Making regional conquest NPCs available in: " .. zone:getName())
@@ -616,7 +656,11 @@ xi.conquest.toggleRegionalNPCs = function(zone)
 
                     -- If there is a clear winner, and not a tie,
                     -- show the NPCs
-                    if id == firstPlaceZone and not IsConquestAlliance() then
+                    if
+                        id == firstPlaceZone and
+                        not (IsConquestAlliance() or
+                        (firstPlaceZone == secondPlaceZone))
+                    then
                         entity:setStatus(xi.status.NORMAL)
                     end
                 end
@@ -891,6 +935,7 @@ local function getStock(player, guardNation, option)
             r = overseerInvNation[guardNation][option]
         end
     end
+
     return r
 end
 
@@ -909,7 +954,10 @@ local function canBuyExpRing(player, item)
     end
 
     -- one exp ring per conquest tally
-    if xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and player:getCharVar("CONQUEST_RING_RECHARGE") > os.time() then
+    if
+        xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and
+        player:getCharVar("CONQUEST_RING_RECHARGE") > os.time()
+    then
         player:messageSpecial(text.CONQUEST + 60, 0, 0, item)
         player:messageSpecial(text.CONQUEST + 50, 0, 0, item)
         return false
@@ -931,7 +979,9 @@ xi.conquest.guard =
 }
 
 xi.conquest.areAllies = function(nationA, nationB)
-    return IsConquestAlliance() and GetNationRank(nationA) > 1 and GetNationRank(nationB) > 1
+    return IsConquestAlliance() and
+        GetNationRank(nationA) > 1 and
+        GetNationRank(nationB) > 1
 end
 
 xi.conquest.outpostFee = function(player, region)
@@ -940,9 +990,14 @@ xi.conquest.outpostFee = function(player, region)
     end
 
     local fee = outposts[region].fee
-    if GetRegionOwner(region) == player:getNation() then
+    local regionOwner = GetRegionOwner(region)
+    if regionOwner == player:getNation() then
         return fee
     else
+        if xi.settings.main.ENABLE_TOAU == 0 then
+            -- Other nation control is 4x Beastmen is 5x
+            return fee * utils.ternary(regionOwner ~= 3, 4, 5)
+        end
         return fee * 3
     end
 end
@@ -956,6 +1011,7 @@ xi.conquest.canTeleportToOutpost = function(player, region)
     then
         return false
     end
+
     return true
 end
 
@@ -1033,12 +1089,13 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
             if addPoints > 0 and pRank ~= 1 and pRankPoints < 4000 then
                 if pRankPoints + addPoints >= 4000 then
                     player:setRankPoints(4000)
-                    player:addCP(pRankPoints + addPoints - 4000)
+                    player:addCP(math.min(pRankPoints + addPoints - 4000, 1000)) -- Overcap max set to 1000
                     player:showText(npc, mOffset + 44) -- "Your rank points are full. We've added the excess to your conquest points."
                 else
                     player:addRankPoints(addPoints)
                     player:showText(npc, mOffset + 45) -- "We've awarded you rank points for the crystals you've donated."
                 end
+
                 player:confirmTrade()
                 tradeConfirmed = true
             end
@@ -1046,7 +1103,10 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
         -- RECHARGE EXP RING
         if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
-            if xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or player:getCharVar("CONQUEST_RING_RECHARGE") < os.time() then
+            if
+                xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
+                player:getCharVar("CONQUEST_RING_RECHARGE") < os.time()
+            then
                 local ring = expRings[item]
 
                 if player:getCP() >= ring.cp then
@@ -1075,9 +1135,16 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     end
 
     -- SUPPLY RUNS
-    if pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
+    if
+        pNation == guardNation and
+        areSuppliesRotten(player, npc, guardType)
+    then
         -- do nothing else
-    elseif pNation == guardNation and guardType >= xi.conquest.guard.OUTPOST and canDeliverSupplies(player, guardNation, guardEvent, guardRegion) then
+    elseif
+        pNation == guardNation and
+        guardType >= xi.conquest.guard.OUTPOST and
+        canDeliverSupplies(player, guardNation, guardEvent, guardRegion)
+    then
         -- do nothing else
 
     -- JEUNO OVERSEERS
@@ -1118,6 +1185,7 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     if guardNation == xi.nation.OTHER then
         guardNation = pNation
     end
+
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
@@ -1136,14 +1204,26 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
             u2 = 1
         end
 
-        if option >= 32933 and option <= 32935 and player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+        if
+            option >= 32933 and
+            option <= 32935 and
+            player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+        then
             u2 = 0
         end
 
         local rankCheck = true
-        if guardNation ~= xi.nation.OTHER and guardNation ~= pNation and GetNationRank(guardNation) <= pRank then -- buy from other nation, must be higher ranked
+        if
+            guardNation ~= xi.nation.OTHER and
+            guardNation ~= pNation and
+            GetNationRank(guardNation) <= pRank
+        then -- buy from other nation, must be higher ranked
             rankCheck = false
-        elseif guardNation ~= xi.nation.OTHER and stock.place ~= nil and guardNation ~= pNation then -- buy from other nation, cannot buy items with nation rank requirement
+        elseif
+            guardNation ~= xi.nation.OTHER and
+            stock.place ~= nil and
+            guardNation ~= pNation
+        then -- buy from other nation, cannot buy items with nation rank requirement
             rankCheck = false
         elseif stock.place ~= nil and pRank > stock.place then -- buy from own nation, check nation rank
             rankCheck = false
@@ -1181,7 +1261,11 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
 
     -- validate price
     local price = stock.cp
-    if stock.rank ~= nil and player:getNation() ~= guardNation and guardNation ~= xi.nation.OTHER then
+    if
+        stock.rank ~= nil and
+        player:getNation() ~= guardNation and
+        guardNation ~= xi.nation.OTHER
+    then
         if price <= 8000 then
             price = price * 2
         else
@@ -1190,7 +1274,11 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
     end
 
     if player:getCP() < price then
-        if option <= 32933 and option >= 32935 and not player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+        if
+            option <= 32933 and
+            option >= 32935 and
+            not player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+        then
             player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
             return -1
         end
@@ -1212,7 +1300,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
     -- SIGNET
     if option == 1 then
-        local duration = (pRank + GetNationRank(pNation) + 3) * 3600
+        local duration = (pRank + GetNationRank(pNation)) * 3600
         player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
         player:addStatusEffect(xi.effect.SIGNET, 0, 0, duration)
         player:messageSpecial(mOffset + 1) -- "You've received your nation's Signet!"
@@ -1222,7 +1310,11 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         end
 
     -- BEGIN SUPPLY RUN
-    elseif option >= 65541 and option <= 65565 and guardType <= xi.conquest.guard.FOREIGN then
+    elseif
+        option >= 65541 and
+        option <= 65565 and
+        guardType <= xi.conquest.guard.FOREIGN
+    then
         local region = option - 65541
         local outpost = outposts[region]
         if outpost ~= nil then
@@ -1271,7 +1363,11 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         end
 
         -- validate exp rings
-        if option >= 32933 and option <= 32935 and not canBuyExpRing(player, stock.item) then
+        if
+            option >= 32933 and
+            option <= 32935 and
+            not canBuyExpRing(player, stock.item)
+        then
             return
         end
 
@@ -1284,6 +1380,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
                     return
                 end
             end
+
             player:delCP(price)
         end
     end
@@ -1346,9 +1443,15 @@ xi.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterE
     if csid == teleporterEvent then
         local region = option - 1073741829
         local fee = xi.conquest.outpostFee(player, region)
-        local cpFee = fee/10
+        local cpFee = fee / 10
 
-        player:updateEvent(player:getGil(), fee, 0, cpFee, player:getCP())
+        local cp = player:getCP()
+        -- Always report not enough CP if Abyssea is not enabled
+        if xi.settings.main.ENABLE_ABYSSEA == 0 then
+            cp = 0
+        end
+
+        player:updateEvent(player:getGil(), fee, 0, cpFee, cp)
     end
 end
 
@@ -1359,16 +1462,22 @@ xi.conquest.teleporterOnEventFinish = function(player, csid, option, teleporterE
             local region = option - 5
             local fee = xi.conquest.outpostFee(player, region)
 
-            if xi.conquest.canTeleportToOutpost(player, region) and player:delGil(fee) then
+            if
+                xi.conquest.canTeleportToOutpost(player, region) and
+                player:delGil(fee)
+            then
                 player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 1, 0, region)
             end
 
         -- TELEPORT WITH CP
         elseif option >= 1029 and option <= 1047 then
             local region = option - 1029
-            local cpFee = xi.conquest.outpostFee(player, region)/10
+            local cpFee = xi.conquest.outpostFee(player, region) / 10
 
-            if xi.conquest.canTeleportToOutpost(player, region) and player:getCP() >= cpFee then
+            if
+                xi.conquest.canTeleportToOutpost(player, region) and
+                player:getCP() >= cpFee
+            then
                 player:delCP(cpFee)
                 player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 1, 0, region)
             end

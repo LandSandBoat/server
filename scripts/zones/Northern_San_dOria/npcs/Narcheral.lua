@@ -14,42 +14,48 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(1096, 1) and trade:getItemCount() == 1) then -- Trade Tavnazia Pass
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED then
+        if trade:hasItemQty(1096, 1) and trade:getItemCount() == 1 then -- Trade Tavnazia Pass
             player:startEvent(690) -- Finish quest "Messenger from Beyond"
         end
-    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(1097, 1) and trade:hasItemQty(12995, 1) and trade:getItemCount() == 2) then -- Trade Yagudo Holy Water & Moccasins
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED then
+        if
+            trade:hasItemQty(1097, 1) and
+            trade:hasItemQty(12995, 1) and
+            trade:getItemCount() == 2
+        then
+            -- Trade Yagudo Holy Water & Moccasins
             player:startEvent(691) -- Finish quest "Prelude of Black and White"
         end
-    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(13842, 1) and trade:getItemCount() == 1) then -- Trade Tavnazian Mask
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED then
+        if trade:hasItemQty(13842, 1) and trade:getItemCount() == 1 then -- Trade Tavnazian Mask
             player:startEvent(692) -- Finish quest "Pieuje's Decision"
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-
     local messengerFromBeyond = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
 
     -- Checking levels and jobs for af quest
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
+    if
+        messengerFromBeyond == QUEST_AVAILABLE and
+        mJob == xi.job.WHM and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+    then
         player:startEvent(689) -- Start quest "Messenger from Beyond"
     else
         player:startEvent(688) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 689 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
     elseif csid == 690 then
@@ -85,7 +91,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
         end
     end
-
 end
 
 return entity

@@ -78,6 +78,20 @@ zones[xi.zone.LOWER_JEUNO] =
     },
     npc =
     {
+        STARLIGHT_DECORATIONS =
+        {
+            [17781000] = 17781000, -- Big Jeuno Festive Tree
+            [17781001] = 17781001, -- Jeuno Festive Tree
+            [17781002] = 17781002, -- Jeuno Festive Tree
+            [17781003] = 17781003, -- Jeuno Festive Tree
+            [17781004] = 17781004, -- Jeuno Festive Tree
+            [17781005] = 17781005, -- Jeuno Festive Tree
+            [17781006] = 17781006, -- Jeuno Festive Tree
+            [17781007] = 17781007, -- Jeuno Festive Tree
+            [17781008] = 17781008, -- Jeuno Festive Tree
+            [17781009] = 17781009, -- Jeuno Festive Tree
+            [17781010] = 17781009, -- Jeuno Festive Tree
+        },
         CHULULU           = 17780771,
         VHANA_EHGAKLYWHA  = 17780880,
         STREETLAMP_OFFSET = 17780881,

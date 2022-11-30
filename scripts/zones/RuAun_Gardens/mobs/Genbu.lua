@@ -11,25 +11,25 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.SILENCERES, 90)
-    mob:addMod(xi.mod.DEF, 190)
-    mob:addMod(xi.mod.VIT, 84)
+    mob:addMod(xi.mod.EVA, 39)
+    mob:addMod(xi.mod.DEF, 210)
+    mob:addMod(xi.mod.VIT, 78)
     mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.COUNTER, 25)
-    mob:setDamage(120)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
     mob:setLocalVar('defaultATT', mob:getMod(xi.mod.ATT))
 end
 
-entity.onMobSpawn = function(mob ,target)
+entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_GENBU):setAnimation(xi.anim.CLOSE_DOOR)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 5)
     mob:timer(5000, function(mobArg)
-        mobArg:SetMagicCastingEnabled(true)
+        mobArg:setMagicCastingEnabled(true)
     end)
 end
 
@@ -45,9 +45,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
-        mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 6)
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        player:showText(mob, ID.text.SKY_GOD_OFFSET + 6)
         GetNPCByID(ID.npc.PORTAL_TO_GENBU):setAnimation(xi.anim.OPEN_DOOR)
     end
 end

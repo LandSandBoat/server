@@ -73,6 +73,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 2)
                     player:needToZone(true)
                 end,
+
                 [9] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()

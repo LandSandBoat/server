@@ -43,7 +43,10 @@ xi.job_utils.red_mage.useConvert = function(player, target, ability)
 
     if playerMP > 0 then
         -- Murgleis sword augments Convert
-        if player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 and playerHP > player:getMaxHP() / 2 then
+        if
+            player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 and
+            playerHP > player:getMaxHP() / 2
+        then
             playerHP = playerHP * player:getMod(xi.mod.AUGMENTS_CONVERT)
         end
 

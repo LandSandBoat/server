@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Eburacon
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

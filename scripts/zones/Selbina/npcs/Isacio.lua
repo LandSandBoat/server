@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     elseif questStatus == QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
 
-        if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
+        if xi.settings.main.ENABLE_ROV == 1 and player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(117)
         elseif  IsacioElderMemVar == 1 then
             player:startEvent(114, 538)

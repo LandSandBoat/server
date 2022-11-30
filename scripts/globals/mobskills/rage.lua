@@ -11,22 +11,22 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local duration = 60
 
     if mob:isPet() then
-        local player = mob:getMaster();
+        local player = mob:getMaster()
         -- isJugPet is really hasJugPet.  Given an entity it returns true if that entity has a pet and the pet is a jug pet
         -- TODO - Rule of 3 counter = 1 - rename isJugPet to has, add isJugPet
-        if player~=nil and player:isJugPet() then
+        if player ~= nil and player:isJugPet() then
             local tp = skill:getTP()
-            duration = math.max(duration, duration* (tp/1000))
+            duration = math.max(duration, duration * (tp / 1000))
         end
     end
 
@@ -35,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

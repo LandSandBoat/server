@@ -16,7 +16,7 @@ xi.dynamis.onSpawnAngra = function(mob)
         between = 300,
         specials =
         {
-            {id = xi.jsa.CHAINSPELL, hpp = 25},
+            { id = xi.jsa.CHAINSPELL, hpp = 25},
         },
     })
 end
@@ -126,7 +126,7 @@ xi.dynamis.onSpawnDagour = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.ASTRAL_FLOW, hpp = 95},
+            { id = xi.jsa.ASTRAL_FLOW, hpp = 95},
         },
     })
 end
@@ -152,9 +152,9 @@ xi.dynamis.onSpawnGouble = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
-            {id = xi.jsa.INVINCIBLE, hpp = 95},
-            {id = xi.jsa.CHAINSPELL, hpp = 95},
+            { id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
+            { id = xi.jsa.INVINCIBLE, hpp = 95},
+            { id = xi.jsa.CHAINSPELL, hpp = 95},
         },
     })
 end
@@ -166,9 +166,9 @@ xi.dynamis.onSpawnMildaun = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.HUNDRED_FISTS, hpp = 95},
-            {id = xi.jsa.PERFECT_DODGE, hpp = 95},
-            {id = xi.jsa.MIJIN_GAKURE, hpp = 95},
+            { id = xi.jsa.HUNDRED_FISTS, hpp = 95},
+            { id = xi.jsa.PERFECT_DODGE, hpp = 95},
+            { id = xi.jsa.MIJIN_GAKURE, hpp = 95},
         },
     })
 end
@@ -180,9 +180,9 @@ xi.dynamis.onSpawnQuieb = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.BENEDICTION, hpp = 95},
-            {id = xi.jsa.MANAFONT, hpp = 95},
-            {id = xi.jsa.SOUL_VOICE, hpp = 95},
+            { id = xi.jsa.BENEDICTION, hpp = 95},
+            { id = xi.jsa.MANAFONT, hpp = 95},
+            { id = xi.jsa.SOUL_VOICE, hpp = 95},
         },
     })
 end
@@ -194,9 +194,9 @@ xi.dynamis.onSpawnVelosar = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.BLOOD_WEAPON, hpp = 95},
-            {id = xi.jsa.MEIKYO_SHISUI, hpp = 95},
-            {id = xi.jsa.EES_SHADE, hpp = 95},
+            { id = xi.jsa.BLOOD_WEAPON, hpp = 95},
+            { id = xi.jsa.MEIKYO_SHISUI, hpp = 95},
+            { id = xi.jsa.EES_SHADE, hpp = 95},
         },
     })
 end

@@ -130,14 +130,14 @@ quest.sections =
                         return quest:message(ID.text.FOUL_STENCH)
                     elseif quest:getVar(player, 'Prog') == 1 and not player:hasKeyItem(xi.ki.WHISPERING_CONCH) then
                         player:addKeyItem(xi.ki.WHISPERING_CONCH)
-                        return quest:message(ID.text.KEYITEM_OBTAINED)
+                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPERING_CONCH)
                     end
                 end,
             },
 
             ['Bloody_Coffin'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 0 then
                         quest:setVar(player, 'Prog', 1)
                     end

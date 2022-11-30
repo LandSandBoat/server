@@ -3,13 +3,14 @@
 --  Mob: Agonizer
 -- TODO: Verify cmbDelay
 -----------------------------------
-mixins = {require("scripts/mixins/families/empty_terroanima")}
+mixins = { require("scripts/mixins/families/empty_terroanima") }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMod(xi.mod.STORETP, 100)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
@@ -24,9 +25,6 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getTP() >= 2000 then
-        mob:useMobAbility()
-    end
     if mob:getHPP() < 20 then
         local nextMob = GetMobByID(mob:getID() + 6) --Cumulator aggros at <20%
         if not nextMob:isEngaged() then
@@ -35,7 +33,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

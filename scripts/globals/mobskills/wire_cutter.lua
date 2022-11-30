@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
-    if ((skillList == 729 and phase < 2) or (skillList == 728 and mobhp > 70)) then
+    if (skillList == 729 and phase < 2) or (skillList == 728 and mobhp > 70) then
         if mob:getLocalVar("nuclearWaste") == 0 then
             return 0
         end
@@ -27,14 +27,15 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 2
     local accmod = 1
-    local dmgmod = 3
+    local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end
-return mobskill_object
+
+return mobskillObject

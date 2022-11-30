@@ -16,13 +16,13 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_CRITICAL
@@ -45,9 +45,9 @@ spell_object.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-   local chance = math.random()
+    local chance = math.random()
 
-    if (damage > 0 and chance > 70) then
+    if damage > 0 and chance > 70 then
         local typeEffect = xi.effect.POISON
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 3, 0, getBlueEffectDuration(caster, 0, typeEffect))
@@ -56,4 +56,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return damage
 end
 
-return spell_object
+return spellObject

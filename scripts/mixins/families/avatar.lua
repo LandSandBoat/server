@@ -18,12 +18,12 @@ g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.avatar = function(avatarMob)
     avatarMob:addListener("SPAWN", "AVATAR_SPAWN", function(mob)
-        mob:setModelId(math.random(791, 798))
+        mob:setModelId(math.random(791, 798)) -- Carbuncle -> Ramuh
         mob:hideName(false)
         mob:setUntargetable(true)
         mob:setUnkillable(true)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMagicCastingEnabled(false)
+        mob:setAutoAttackEnabled(false)
+        mob:setMagicCastingEnabled(false)
 
         -- If something goes wrong, the avatar will clean itself up in 5s
         mob:timer(5000, function(mobArg)
@@ -35,10 +35,13 @@ g_mixins.families.avatar = function(avatarMob)
     end)
 
     avatarMob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
-        local modelId = mob:getModelId()
-        local abilityId = abilityIds[modelId - 790]
-        if abilityId ~= nil then
-            mob:useMobAbility(abilityId)
+        if mob:getLocalVar("[ASTRAL_FLOW]Performed") == 0 then
+            local modelId = mob:getModelId()
+            local abilityId = abilityIds[modelId - 790]
+            if abilityId ~= nil then
+                mob:useMobAbility(abilityId)
+                mob:setLocalVar("[ASTRAL_FLOW]Performed", 1)
+            end
         end
     end)
 

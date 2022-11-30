@@ -81,7 +81,7 @@ sharedObj.doRoyalPalaceArmorCheck = function(player)
     local hasLegArmor = player:getEquipID(xi.slot.LEGS)
     local hasFeetArmor = player:getEquipID(xi.slot.FEET)
 
-    if (hasHandArmor == 0 or hasLegArmor == 0 or hasFeetArmor == 0) then
+    if hasHandArmor == 0 or hasLegArmor == 0 or hasFeetArmor == 0 then
         check = false
     end
 

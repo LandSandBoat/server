@@ -8,27 +8,23 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (target:getCurrentRegion() == xi.region.TAVNAZIANARCH) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if target:getCurrentRegion() == xi.region.TAVNAZIANARCH then
         return 0
     end
 
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local potency = skill:getParam()
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    -- Formula is Max HP * 32/256
+    local potency = 1 / 8
 
-    if (potency == 0) then
-        potency = 12
-    end
-
-    potency = potency - math.random(0, potency/4)
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
+    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency)
 end
 
-return mobskill_object
+return mobskillObject

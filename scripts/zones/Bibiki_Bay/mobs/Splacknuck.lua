@@ -2,8 +2,8 @@
 -- Area: Bibiki Bay
 --   NM: Splacknuck
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
+require('scripts/globals/hunts')
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 267)
 end
 

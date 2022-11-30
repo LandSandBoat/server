@@ -87,6 +87,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         },
 
         GAMBILOX_WANDERLING = 17211848,
+        BEDROCK_BARRY       = 17211666,
 
         VOIDWALKER =
         {
@@ -124,12 +125,12 @@ zones[xi.zone.NORTH_GUSTABERG] =
     {
         [17211865] = -- Blobdingnag
         {
-            17211871,-- Septic Boils
-            17211870,-- Septic Boils
-            17211869,-- Septic Boils
-            17211868,-- Septic Boils
-            17211867,-- Septic Boils
-            17211866,-- Septic Boils
+            17211871, -- Septic Boils
+            17211870, -- Septic Boils
+            17211869, -- Septic Boils
+            17211868, -- Septic Boils
+            17211867, -- Septic Boils
+            17211866, -- Septic Boils
         },
     },
 

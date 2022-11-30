@@ -5,17 +5,16 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
+    local body = target:getEquipID(xi.slot.BODY)
 
-local body = target:getEquipID(xi.slot.BODY)
-
-    if (body == 11363) then
+    if body == 11363 then
         target:addSpell(503)
     else
         target:delSpell(503)
     end
 end
 
-return item_object
+return itemObject

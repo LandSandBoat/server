@@ -81,6 +81,24 @@ zones[xi.zone.PORT_WINDURST] =
     },
     npc =
     {
+        STARLIGHT_DECORATIONS =
+        {
+            [17760487] = 17760487,  -- Starlight Celebration Tree
+            [17760488] = 17760488,  -- Starlight Celebration Tree
+            [17760489] = 17760489,  -- Starlight Celebration Tree
+            [17760490] = 17760490,  -- Starlight Celebration Tree
+            [17760491] = 17760491,  -- Starlight Celebration Tree
+            [17760492] = 17760492,  -- Starlight Celebration Tree
+            [17760493] = 17760493,  -- Starlight Celebration Tree
+            [17760494] = 17760494,  -- Starlight Celebration Tree
+            [17760495] = 17760495,  -- Starlight Celebration Tree
+            [17760496] = 17760496,  -- Starlight Celebration Tree
+            [17760497] = 17760497,  -- Starlight Celebration Tree
+            [17760498] = 17760498,  -- Starlight Celebration Tree
+            [17760499] = 17760499,  -- Starlight Celebration Tree
+            [17760500] = 17760500,  -- Starlight Celebration Tree
+            [17760501] = 17760501,  -- Starlight Celebration Tree
+        },
         EXPLORER_MOOGLE = 17760450,
     },
 }

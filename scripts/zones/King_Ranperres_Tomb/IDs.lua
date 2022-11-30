@@ -54,10 +54,13 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
         CHERRY_SAPLING_OFFSET = 17555748,
         VRTRA                 = 17555763,
         ANKOU                 = 17555709,
+        CORRUPTED_YORGOS      = 17555770,
+        CORRUPTED_SOFFEIL     = 17555771,
+        CORRUPTED_ULBRIG      = 17555772,
     },
     npc =
     {
-        TREASURE_CHEST = 17555966,
+        TREASURE_CHEST = 17556014,
     },
 }
 

@@ -2,31 +2,25 @@
 -- Wild Carrot
 --
 -- Description: Restores HP.
---
+-- Healing value should be max HP * 104 / 1024
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local potency = skill:getParam()
-
-    if (potency == 0) then
-        potency = 13
-    end
-
-    potency = potency - math.random(0, potency/4)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local potency = 104 / 1024
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
+    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency)
 end
 
-return mobskill_object
+return mobskillObject

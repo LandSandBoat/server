@@ -11,8 +11,8 @@ mixins =
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         local elementalId = mob:getID() + 2
         if GetMobByID(elementalId):isSpawned() then
             DespawnMob(elementalId)

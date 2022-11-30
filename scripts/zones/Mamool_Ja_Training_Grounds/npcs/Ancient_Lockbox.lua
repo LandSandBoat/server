@@ -9,7 +9,7 @@ require("scripts/globals/items")
 
 local entity = {}
 
-entity.onTrigger = function(player,npc)
+entity.onTrigger = function(player, npc)
     local qItem =
     {
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
@@ -34,8 +34,8 @@ entity.onTrigger = function(player,npc)
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
             {
-                {itemid = xi.items.HI_POTION_P2, droprate = 900},
-                {itemid =    0, droprate = 100},
+                { itemid = xi.items.HI_POTION_P2, droprate = 900 },
+                { itemid =    0, droprate = 100 },
             },
 
             {

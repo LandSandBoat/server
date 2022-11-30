@@ -6,13 +6,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- list of effects to give in AoE
     local effects = { xi.effect.POISON, xi.effect.PARALYSIS, xi.effect.BLINDNESS, xi.effect.SILENCE,
         xi.effect.WEIGHT, xi.effect.SLOW, xi.effect.ADDLE, xi.effect.DIA, xi.effect.BIO, xi.effect.BURN,
@@ -28,7 +28,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             mob:delStatusEffect(effect)
         end
     end
+
     skill:setMsg(xi.msg.basic.NONE)
 end
 
-return mobskill_object
+return mobskillObject

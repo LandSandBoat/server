@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local tradeStatus = player:getCharVar('TateeyaTradeStatus')
     local automatonName = player:getAutomatonName()
     if tradeStatus == 1 then
-        for i=0, 7 do
+        for i = 0, 7 do
             local subid = trade:getItemSubId(i)
             if subid >= 0x2000 and subid < 0x2800 then
                 if player:unlockAttachment(subid) then
@@ -24,6 +24,7 @@ entity.onTrade = function(player, npc, trade)
                 else
                     player:startEvent(652) --already unlocked event
                 end
+
                 break
             end
         end

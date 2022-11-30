@@ -7,32 +7,32 @@ require("scripts/globals/assault")
 require("scripts/globals/instance")
 require("scripts/globals/items")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.registryRequirements = function(player)
+instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.MAMOOL_JA_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.IMPERIAL_AGENT_RESCUE and
-           player:getCharVar("assaultEntered") == 0 and
-           player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.IMPERIAL_AGENT_RESCUE and
+        player:getCharVar("assaultEntered") == 0 and
+        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:getMainLvl() > 50
 end
 
-instance_object.entryRequirements = function(player)
+instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.MAMOOL_JA_ASSAULT_ORDERS) and
-           player:getCurrentAssault() == xi.assault.mission.IMPERIAL_AGENT_RESCUE and
-           player:getCharVar("assaultEntered") == 0 and
-           player:getMainLvl() > 50
+        player:getCurrentAssault() == xi.assault.mission.IMPERIAL_AGENT_RESCUE and
+        player:getCharVar("assaultEntered") == 0 and
+        player:getMainLvl() > 50
 end
 
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.assault.onInstanceCreatedCallback(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     xi.assault.afterInstanceRegister(player, xi.items.CAGE_OF_BHAFLAU_FIREFLIES)
@@ -41,22 +41,22 @@ instance_object.afterInstanceRegister = function(player)
     instance:setProgress(math.random(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2))
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
     xi.assault.onInstanceFailure(instance)
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
     xi.assault.onInstanceComplete(instance, 9, 8)
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
 end
 
-return instance_object
+return instanceObject

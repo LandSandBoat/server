@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.WIND_ABSORB, 100)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 726, 2, xi.regime.type.GROUNDS)
 end
 

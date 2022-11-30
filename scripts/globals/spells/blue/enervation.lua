@@ -17,13 +17,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.DEFENSE_DOWN
     local typeEffectTwo = xi.effect.MAGIC_DEF_DOWN
     local params = {}
@@ -31,18 +31,22 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local duration = 30 * resist
     local returnEffect = typeEffectOne
 
-    if (resist >= 0.5) then
-        if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then -- the def/mag def down does not overwrite the same debuff from any other source
+    if resist >= 0.5 then
+        if
+            target:hasStatusEffect(typeEffectOne) and
+            target:hasStatusEffect(typeEffectTwo)
+        then
+            -- the def/mag def down does not overwrite the same debuff from any other source
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-        elseif (target:hasStatusEffect(typeEffectOne)) then
+        elseif target:hasStatusEffect(typeEffectOne) then
             target:addStatusEffect(typeEffectTwo, 8, 0, duration)
             returnEffect = typeEffectTwo
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        elseif (target:hasStatusEffect(typeEffectTwo)) then
+        elseif target:hasStatusEffect(typeEffectTwo) then
             target:addStatusEffect(typeEffectOne, 10, 0, duration)
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
@@ -55,4 +59,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return returnEffect
 end
 
-return spell_object
+return spellObject

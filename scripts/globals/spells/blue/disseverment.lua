@@ -16,13 +16,13 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ACC
@@ -47,12 +47,12 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     local poison = target:getStatusEffect(xi.effect.POISON)
     local chance = math.random()
-    if (chance < 0.95 and poison == nil) then
-        local power = (caster:getMainLvl()/5) + 3 -- from http://wiki.ffxiclopedia.org/wiki/Disseverment
+    if chance < 0.95 and poison == nil then
+        local power = (caster:getMainLvl() / 5) + 3 -- from http://wiki.ffxiclopedia.org/wiki/Disseverment
         target:addStatusEffect(xi.effect.POISON, power, 3, 180) -- for 180secs
     end
 
     return damage
 end
 
-return spell_object
+return spellObject

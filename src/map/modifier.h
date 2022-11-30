@@ -368,22 +368,35 @@ enum class Mod
     GILFINDER            = 897,  // Gilfinder, duh
 
     // Paladin
-    HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds
-    RAMPART_DURATION       = 92,  // Rampart duration in seconds
-    ABSORB_PHYSDMG_TO_MP   = 426, // Absorbs a percentage of physical damage taken to MP.
-    SHIELD_MASTERY_TP      = 485, // Shield mastery TP bonus when blocking with a shield
-    SENTINEL_EFFECT        = 837, // Sentinel effect in percents
-    SHIELD_DEF_BONUS       = 905, // Shield Defense Bonus
-    COVER_TO_MP            = 965, // Converts a successful cover's phsyical damage to MP
-    COVER_MAGIC_AND_RANGED = 966, // Redirects ranged and single target magic attacks to the cover ability user
-    COVER_DURATION         = 967, // Increases Cover Duration
+    HOLY_CIRCLE_DURATION   = 857,  // Holy Circle extended duration in seconds
+    RAMPART_DURATION       = 92,   // Rampart duration in seconds
+    ABSORB_PHYSDMG_TO_MP   = 426,  // Absorbs a percentage of physical damage taken to MP.
+    SHIELD_MASTERY_TP      = 485,  // Shield mastery TP bonus when blocking with a shield
+    SENTINEL_EFFECT        = 837,  // Sentinel effect in percents
+    SHIELD_DEF_BONUS       = 905,  // Shield Defense Bonus
+    COVER_TO_MP            = 965,  // Converts a successful cover's phsyical damage to MP
+    COVER_MAGIC_AND_RANGED = 966,  // Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION         = 967,  // Increases Cover Duration
+    ENHANCES_CHIVALRY      = 1061, // Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
+    ENHANCES_DIVINE_EMBLEM = 1062, // Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
+    ENHANCES_FEALTY        = 1063, // Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
+    ENHANCES_IRON_WILL     = 1064, // Enhances "Iron Will" effect (adds +3% Fast Cast per Iron Will merit to Rampart)
+    ENHANCES_GUARDIAN      = 1065, // Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
+    PALISADE_BLOCK_BONUS   = 1066, // Increases base block rate while under the effects of Palisade (additive, not multiplicative)
+    REPRISAL_BLOCK_BONUS   = 1067, // Increases block rate while under the effects of Reprisal (multiplicative, not additive)
+    REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
-    SOULEATER_EFFECT       = 96,  // Souleater power in percents
-    DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907, // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
+    ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
+    ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
+    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
+    DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -455,16 +468,24 @@ enum class Mod
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
-    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump (must be divided by 10)
-    JUMP_ATT_BONUS             = 362,  // ATT% bonus for jump + high jump
+    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump
+    JUMP_SPIRIT_TP_BONUS       = 285,  // bonus tp player receives when using jump for spirit jump only
+    JUMP_ATT_BONUS             = 362,  // ATT% bonus for all jumps
+    JUMP_SOUL_SPIRIT_ATT_BONUS = 286,  // ATT% bonus for Soul & Spirit jump only
+    JUMP_ACC_BONUS             = 936,  // accuracy bonus for all jumps
+    JUMP_DOUBLE_ATTACK         = 888,  // DA% bonus for all jumps
     HIGH_JUMP_ENMITY_REDUCTION = 363,  // for gear that reduces more enmity from high jump
-    FORCE_JUMP_CRIT            = 828,  // Critical hit rate bonus for jump and high jump
+    FORCE_JUMP_CRIT            = 828,  // Force critical hit for all jumps
     WYVERN_EFFECTIVE_BREATH    = 829,  // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
     WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
     WYVERN_LVL_BONUS           = 1043, // Wyvern: Lv.+ (Increases wyvern's base level above 99)
-    WYVERN_ATTRIBUTE_DA        = 1056, // TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
-    DRAGOON_BREATH_RECAST      = 1057, // TODO: Restoring/Smithing Breath Recast Reduction (seconds)
+    WYVERN_ATTRIBUTE_DA        = 1056, // Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    DRAGOON_BREATH_RECAST      = 1057, // Restoring/Smithing Breath Recast Reduction (seconds)
+    ENHANCE_DEEP_BREATHING     = 283,  // Add 5/256 to deep breathing bonus per merit level when calculating healing breath
+    UNCAPPED_WYVERN_BREATH     = 284,  // Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
+    ENHANCES_STRAFE            = 282,  // Strafe merit augment, +50 TP gained per merit level on breath use.
+    ENHANCES_SPIRIT_LINK       = 281,  // Adds erase/-na to Spirit Link
 
     // Summoner
     AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
@@ -613,7 +634,7 @@ enum class Mod
     SAVETP      = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
-    WYRMAL_ABJ_KILLER_EFFECT = 53,  // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
+    WYRMAL_ABJ_KILLER_EFFECT = 53, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
     // Rune Fencer
     INQUARTATA                  = 963,  // Increases parry rate by a flat %.
@@ -675,8 +696,14 @@ enum class Mod
     SNEAK_DURATION     = 946, // Additional duration in seconds
     INVISIBLE_DURATION = 947, // Additional duration in seconds
 
-    MAIN_DMG_RATING    = 366,  // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
-    SUB_DMG_RATING     = 367,  // adds damage rating to off hand weapon
+    DMG_RATING        = 287, // adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING   = 366, // adds damage rating to mainhand weapon
+    SUB_DMG_RATING    = 367, // adds damage rating to off hand weapon
+    RANGED_DMG_RATING = 376, // adds damage rating to ranged weapon
+    MAIN_DMG_RANK     = 377, // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK      = 378, // adds weapon rank to sub weapon
+    RANGED_DMG_RANK   = 379, // adds weapon rank to ranged weapon
+
     REGAIN             = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
     REGAIN_DOWN        = 406,  // plague, reduce tp
     REFRESH            = 369,  // auto refresh from equipment
@@ -687,10 +714,6 @@ enum class Mod
     CURE_POTENCY_II    = 260,  // % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD  = 375,  // % potency of received cure | healer's roll, some items have this
     CURE_POTENCY_BONUS = 1051, // TODO: Increases amount healed by Cure spells (fixed amount)
-    RANGED_DMG_RATING  = 376,  // adds damage rating to ranged weapon
-    MAIN_DMG_RANK      = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK       = 378,  // adds weapon rank to sub weapon
-    RANGED_DMG_RANK    = 379,  // adds weapon rank to ranged weapon
     DELAYP             = 380,  // delay addition percent (does not affect tp gain)
     RANGED_DELAYP      = 381,  // ranged delay addition percent (does not affect tp gain)
 
@@ -740,10 +763,11 @@ enum class Mod
     LIGHT_NULL = 473, //
     DARK_NULL  = 474, //
 
-    MAGIC_ABSORB     = 475, // Occasionally absorbs magic damage taken, in percents
-    MAGIC_NULL       = 476, // Occasionally annuls magic damage taken, in percents
-    PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
-    ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
+    MAGIC_ABSORB       = 475, // Occasionally absorbs magic damage taken, in percents
+    MAGIC_NULL         = 476, // Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE = 239, // Occasionally annuls ranged damage taken, in percents
+    PHYS_ABSORB        = 512, // Occasionally absorbs physical damage taken, in percents
+    ABSORB_DMG_TO_MP   = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
     ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
@@ -925,15 +949,18 @@ enum class Mod
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
     DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
 
-    FIRE_EEM          = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    ICE_EEM           = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WIND_EEM          = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    EARTH_EEM         = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    THUNDER_EEM       = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WATER_EEM         = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    LIGHT_EEM         = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    DARK_EEM          = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    TAME_SUCCESS_RATE = 1166, // Tame Success Rate +
+    FIRE_EEM             = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM              = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM             = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM            = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM          = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM            = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM            = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM             = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    TAME_SUCCESS_RATE    = 1166, // Tame Success Rate +
+    RAMPART_MAGIC_SHIELD = 1167, // Rampart Magic Shield
+    CRITHITRATE_SLOT     = 1168, // CRITHITRATE for slot
+    ATT_SLOT             = 1169, // ATT for slot
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
@@ -946,12 +973,9 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 192 to 223
-    // 239
-    // 261 to 287
-    // 888
-    // 936
+    // 261 to 280
     //
-    // SPARE = 1061, and onward
+    // SPARE = 1074, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
@@ -971,7 +995,7 @@ struct EnumClassHash
 class CModifier
 {
 public:
-    Mod   getModID();
+    Mod   getModID() const;
     int16 getModAmount() const;
 
     void setModAmount(int16 amount);
@@ -1000,7 +1024,7 @@ class CPetModifier : public CModifier
 {
 public:
     CPetModifier(Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType();
+    PetModType getPetModType() const;
 
 private:
     PetModType m_pettype{ PetModType::All };

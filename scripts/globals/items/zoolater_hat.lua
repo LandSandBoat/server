@@ -6,19 +6,19 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local pet = target:getPet()
-    if (pet) then
+    if pet then
         pet:addStatusEffect(xi.effect.REGAIN, 15, 3, 15)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 
-return item_object
+return itemObject

@@ -8,22 +8,25 @@ assignees:
 
 <!-- Remove space and place 'x' mark between square [] brackets or click the checkbox after saving to affirm the following points: -->
 <!-- (it should look like this: - [x] I have ...) -->
-- [x] I have paid attention to this example and will edit again if need be to not break the formatting, or I will be ignored
-- [ ] I have searched existing [issues](https://github.com/LandSandBoat/server/issues) to see if the issue has already been opened, and I have checked the commit log to see if the issue has been resolved since my server was last updated
-- [ ] I have read and understood the [Contributing Guide](https://github.com/LandSandBoat/server/blob/base/CONTRIBUTING.md)
+**_I affirm:_**
+- [x] I understand that if I do not agree to the following points by completing the checkboxes my issue will be ignored.
+- [ ] I have read and understood the [Contributing Guide](https://github.com/AirSkyBoat/AirSkyBoat/blob/staging/CONTRIBUTING.md) and the [Code of Conduct](https://github.com/AirSkyBoat/AirSkyBoat/blob/staging/CODE_OF_CONDUCT.md).
+- [ ] I have searched existing [issues](https://github.com/AirSkyBoat/AirSkyBoat/issues) to see if the issue has already been opened, and I have checked the commit log to see if the issue has been resolved since my server was last updated.
 
-## OS / platform the server is running (if known)
+## Overview Of Issue
 
-<!-- Windows10 / Unbuntu / Mac / ARM etc -->
+<!-- Add a description of the issue here -->
 
-## Branch affected by issue <!-- Change to the branch the issue exists on (if relevant) -->
-
-`base`
-
-## Steps to reproduce
+## If possible, provide steps to reproduce
 
 <!-- Add steps to reproduce here -->
-
-## Expected behavior
-
-<!-- Add expected behaviour here -->
+  
+## If participating in HorizonXI Bugsquasher Campaign, please provide your character name used during the HorizonXI Beta:
+  
+<!-- Add character name here -->
+  
+### If more than one player participated in discovering this bug, please also provide their beta character names:
+  
+<!-- Add other character names here -->
+  
+## Please provide any screenshots related to the reported bug by attaching them to this issue

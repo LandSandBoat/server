@@ -5,9 +5,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     if target:isMob() then -- Because Prishe in CoP mission
         return xi.msg.basic.CANNOT_ON_THAT_TARG
     end
@@ -15,13 +15,14 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     if target:getObjType() == xi.objType.PC then
         target:sendTractor(caster:getXPos(), caster:getYPos(), caster:getZPos(), target:getRotPos())
         spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
         return 1
     end
+
     return 0
 end
 
-return spell_object
+return spellObject

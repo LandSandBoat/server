@@ -12,18 +12,18 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local cap = 300
 
-     -- Bugbear Matman has stronger Flying Hip Press
+    -- Bugbear Matman has stronger Flying Hip Press
     if mob:getPool() == 562 then
-        cap = math.random(300,700)
+        cap = math.random(300, 700)
     end
 
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.333, 1.2, xi.magic.ele.WIND, cap)
@@ -33,4 +33,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

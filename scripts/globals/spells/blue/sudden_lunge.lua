@@ -16,13 +16,13 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
@@ -48,15 +48,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (resist > 0.25) then -- This line may need adjusting for retail accuracy.
+    if resist > 0.25 then -- This line may need adjusting for retail accuracy.
         target:addStatusEffect(xi.effect.STUN, 1, 0, 20 * resist) -- Wiki says duration of "up to" 20 second..
     end
 
     return damage
 end
 
-return spell_object
+return spellObject

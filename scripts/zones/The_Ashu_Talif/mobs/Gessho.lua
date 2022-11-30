@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     -- Gessho will engage by himself ~1min in if you stall too long.
     -- Give a little buffer for while the instance loads
     mob:timer(80000, function(m)
-        if(m:getLocalVar("ready") == 0 and not(m:getTarget())) then
+        if m:getLocalVar("ready") == 0 and not m:getTarget() then
             xi.ally.startAssist(m, xi.ally.ASSIST_RANDOM)
         end
     end)
@@ -63,7 +63,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:showText(mob, ID.text.SO_I_FALL)
 end
 

@@ -5,31 +5,35 @@ local ID = require('scripts/zones/Windurst_Waters_[S]/IDs')
 require('scripts/globals/chocobo')
 require('scripts/globals/extravaganza')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
     xi.extravaganza.shadowEraHide(ID.npc.SHUVO)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- MOG HOUSE EXIT
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(157 + math.random(1, 5), -5, -62, 192)
     end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

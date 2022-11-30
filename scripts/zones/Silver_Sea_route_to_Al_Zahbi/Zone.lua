@@ -3,31 +3,31 @@
 -----------------------------------
 local ID = require('scripts/zones/Silver_Sea_route_to_Al_Zahbi/IDs')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(1025)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 1025 then
         player:setPos(0, 0, 0, 0, 50)
     end
 end
 
-return zone_object
+return zoneObject

@@ -3,11 +3,13 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 137
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
+-----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
+require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
@@ -30,7 +32,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED
+                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -46,19 +48,25 @@ quest.sections =
             {
                 [10045] = function(player, csid, option, npc)
                     -- This options start quest.
-                    if option == 13 or option == 14 or option == 19 or option == 20 or option == 21 then
+                    if
+                        option == 13 or
+                        option == 14 or
+                        option == 19 or
+                        option == 20 or
+                        option == 21
+                    then
                         quest:begin(player)
                     end
 
                     -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated.
                     if option == 14 then
-                        player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
+                        player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
                     elseif option == 19 then
-                        player:setPos(-349.899, 104.213, -260.150, 0, 144) -- Waughrum Shrine
+                        player:setPos(-349.899, 104.213, -260.150, 0, xi.zone.WAUGHROON_SHRINE)
                     elseif option == 20 then
-                        player:setPos(299.316, -123.591, 353.760, 66, 146) -- Balga's Dais
+                        player:setPos(299.316, -123.591, 353.760, 66, xi.zone.BALGAS_DAIS)
                     elseif option == 21 then
-                        player:setPos(-225.146, -24.250, 20.057, 255, 206) -- Qu'bia Arena
+                        player:setPos(-225.146, -24.250, 20.057, 255, xi.zone.QUBIA_ARENA)
                     end
                 end,
             },
@@ -91,14 +99,14 @@ quest.sections =
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    if option == 16 then -- Horlais Peek
-                        player:setPos(-511.459, 159.004, -210.543, 10, 139)
-                    elseif option == 22 then -- Waughrum Shrine
-                        player:setPos(-349.899, 104.213, -260.150, 0, 144)
-                    elseif option == 23 then -- Balga's Dais
-                        player:setPos(299.316, -123.591, 353.760, 66, 146)
-                    elseif option == 24 then -- Qu'bia Arena
-                        player:setPos(-225.146, -24.250, 20.057, 255, 206)
+                    if option == 16 then
+                        player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
+                    elseif option == 22 then
+                        player:setPos(-349.899, 104.213, -260.150, 0, xi.zone.WAUGHROON_SHRINE)
+                    elseif option == 23 then
+                        player:setPos(299.316, -123.591, 353.760, 66, xi.zone.BALGAS_DAIS)
+                    elseif option == 24 then
+                        player:setPos(-225.146, -24.250, 20.057, 255, xi.zone.QUBIA_ARENA)
                     end
                 end,
             },
@@ -108,7 +116,8 @@ quest.sections =
     -- Section: Quest accepted. We failed BCNM.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0 and
+            return status == QUEST_ACCEPTED and
+                vars.Prog == 0 and
                 not player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
@@ -131,20 +140,34 @@ quest.sections =
                 end,
             },
 
+            onEventUpdate =
+            {
+                [10045] = function(player, csid, option, npc)
+                    if option == 9 then
+                        local numMerits = player:getMeritCount()
+
+                        if numMerits >= 1 then
+                            player:setMerits(numMerits - 1)
+                        end
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [10045] = function(player, csid, option, npc)
-                    player:setMerits(player:getMeritCount() - 1)
-                    npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
+                    if option ~= 0 then
+                        npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
+                    end
 
-                    if option == 17 then -- Horlais Peek
-                        player:setPos(-511.459, 159.004, -210.543, 10, 139)
-                    elseif option == 25 then -- Waughrum Shrine
-                        player:setPos(-349.899, 104.213, -260.150, 0, 144)
-                    elseif option == 26 then -- Balga's Dais
-                        player:setPos(299.316, -123.591, 353.760, 66, 146)
-                    elseif option == 27 then -- Qu'bia Arena
-                        player:setPos(-225.146, -24.250, 20.057, 255, 206)
+                    if option == 17 then
+                        player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
+                    elseif option == 25 then
+                        player:setPos(-349.899, 104.213, -260.150, 0, xi.zone.WAUGHROON_SHRINE)
+                    elseif option == 26 then
+                        player:setPos(299.316, -123.591, 353.760, 66, xi.zone.BALGAS_DAIS)
+                    elseif option == 27 then
+                        player:setPos(-225.146, -24.250, 20.057, 255, xi.zone.QUBIA_ARENA)
                     end
                 end,
 
@@ -152,14 +175,14 @@ quest.sections =
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
 
-                    if option == 16 then -- Horlais Peek
-                        player:setPos(-511.459, 159.004, -210.543, 10, 139)
-                    elseif option == 22 then -- Waughrum Shrine
-                        player:setPos(-349.899, 104.213, -260.150, 0, 144)
-                    elseif option == 23 then -- Balga's Dais
-                        player:setPos(299.316, -123.591, 353.760, 66, 146)
-                    elseif option == 24 then -- Qu'bia Arena
-                        player:setPos(-225.146, -24.250, 20.057, 255, 206)
+                    if option == 16 then
+                        player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
+                    elseif option == 22 then
+                        player:setPos(-349.899, 104.213, -260.150, 0, xi.zone.WAUGHROON_SHRINE)
+                    elseif option == 23 then
+                        player:setPos(299.316, -123.591, 353.760, 66, xi.zone.BALGAS_DAIS)
+                    elseif option == 24 then
+                        player:setPos(-225.146, -24.250, 20.057, 255, xi.zone.QUBIA_ARENA)
                     end
                 end,
             },
@@ -169,7 +192,8 @@ quest.sections =
     -- Section: Quest accepted. We beated the BCNM.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == QUEST_ACCEPTED and
+                vars.Prog == 1
         end,
 
         [xi.zone.RULUDE_GARDENS] =

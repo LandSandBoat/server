@@ -16,13 +16,13 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WIND
@@ -42,11 +42,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.3
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     local damage = BlueMagicalSpell(caster, target, spell, params, CHR_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (damage > 0 and resist > 0.0625) then
+    if damage > 0 and resist > 0.0625 then
         target:delStatusEffect(xi.effect.WEIGHT)
         target:addStatusEffect(xi.effect.WEIGHT, 4, 0, getBlueEffectDuration(caster, resist, xi.effect.WEIGHT))
     end
@@ -54,4 +54,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return damage
 end
 
-return spell_object
+return spellObject

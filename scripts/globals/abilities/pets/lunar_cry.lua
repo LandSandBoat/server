@@ -6,15 +6,17 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local moon = VanadielMoonPhase()
     local buffvalue = 0
+    local skillOverCap = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 2, 0, 120)-- 2 seconds / skill | Duration is capped at 180 total
+
     if moon > 90 then
         buffvalue = 31
     elseif moon > 75 then
@@ -30,12 +32,13 @@ ability_object.onPetAbility = function(target, pet, skill)
     else
         buffvalue = 1
     end
+
     target:delStatusEffect(xi.effect.ACCURACY_DOWN)
     target:delStatusEffect(xi.effect.EVASION_DOWN)
-    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
-    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, skillOverCap + 60)
+    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, skillOverCap + 60)
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 
-return ability_object
+return abilityObject

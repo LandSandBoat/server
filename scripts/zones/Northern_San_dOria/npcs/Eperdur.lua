@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Eperdur
--- Starts and Finishes Quest: Altana's Sorrow (finish), Acting in Good Faith (finish), Healing the Land,
+-- Starts and Finishes Quest: Acting in Good Faith (finish), Healing the Land,
 -- !pos 129 -6 96 231
 -----------------------------------
 require("scripts/globals/settings")
@@ -16,28 +16,47 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local altanaSorrow  = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
     local healingTheLand = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
     local sorceryOfTheNorth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
 
-    if altanaSorrow == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE) then
-        player:startEvent(679) -- Finish quest "Altana's Sorrow"
-    elseif healingTheLand == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and player:getMainLvl() >= 10 then
+    if
+        healingTheLand == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
+        player:getMainLvl() >= 10
+    then
         player:startEvent(681) -- Start quest "Healing the Land"
-    elseif healingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
+    elseif
+        healingTheLand == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+    then
         player:startEvent(682) -- During quest "Healing the Land"
-    elseif healingTheLand == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) == false then
+    elseif
+        healingTheLand == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING)
+    then
         player:startEvent(683) -- Finish quest "Healing the Land"
-    elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and player:needToZone() then
+    elseif
+        healingTheLand == QUEST_COMPLETED and
+        sorceryOfTheNorth == QUEST_AVAILABLE and
+        player:needToZone()
+    then
         player:startEvent(684) -- New standard dialog after "Healing the Land"
-    elseif healingTheLand == QUEST_COMPLETED and sorceryOfTheNorth == QUEST_AVAILABLE and player:needToZone() == false then
+    elseif
+        healingTheLand == QUEST_COMPLETED and
+        sorceryOfTheNorth == QUEST_AVAILABLE and
+        not player:needToZone()
+    then
         player:startEvent(685) -- Start quest "Sorcery of the North"
-    elseif sorceryOfTheNorth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) == false then
+    elseif
+        sorceryOfTheNorth == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+    then
         player:startEvent(686) -- During quest "Sorcery of the North"
-    elseif sorceryOfTheNorth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) then
+    elseif
+        sorceryOfTheNorth == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
+    then
         player:startEvent(687) -- Finish quest "Sorcery of the North"
-    else
-        player:startEvent(678) -- Standard dialog
     end
 end
 
@@ -45,18 +64,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 679 then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4731)
-        else
-            player:addTitle(xi.title.PILGRIM_TO_DEM)
-            player:delKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
-            player:addItem(4731)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4731) -- Scroll of Teleport-Dem
-            player:addFame(xi.quest.fame_area.BASTOK, 30)
-            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
-        end
-    elseif csid == 681 and option == 0 then
+    if csid == 681 and option == 0 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         player:addKeyItem(xi.ki.SEAL_OF_BANISHING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEAL_OF_BANISHING)

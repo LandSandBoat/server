@@ -11,21 +11,22 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local power = target:getMainLvl()/10 * 3.75 + 5
-    local duration = 60
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local power = 10
+    local tick = 3
+    local duration = 100
 
     local typeEffect = xi.effect.AGI_BOOST
 
-    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, power, 3, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, power, tick, duration))
 
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

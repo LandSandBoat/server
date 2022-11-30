@@ -5,27 +5,31 @@ local ID = require('scripts/zones/Pashhow_Marshlands_[S]/IDs')
 require('scripts/globals/chocobo')
 require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(547.841, 23.192, 696.323, 134)
     end
 
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS_OFFSET + 1) -- Indescript Markings (BOOTS)
 
     if npc then
@@ -46,10 +50,10 @@ zone_object.onZoneWeatherChange = function(weather)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

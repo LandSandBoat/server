@@ -5,13 +5,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     if target:getCurrentRegion() == xi.region.DYNAMIS then
         local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
         local remainingTimeLimit = effect:getTimeRemaining() / 1000
@@ -36,11 +36,13 @@ effect_object.onEffectTick = function(target, effect)
                 minutes = 1
                 time = time / 60
             end
+
             if time == 1 then
                 target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_1, time, minutes)
             else
                 target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_2, time, minutes)
             end
+
             target:setLocalVar("dynamis_lasttimeupdate", message)
         end
     else
@@ -48,7 +50,7 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delKeyItem(xi.ki.CRIMSON_GRANULES_OF_TIME)
     target:delKeyItem(xi.ki.AZURE_GRANULES_OF_TIME)
     target:delKeyItem(xi.ki.AMBER_GRANULES_OF_TIME)
@@ -63,4 +65,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

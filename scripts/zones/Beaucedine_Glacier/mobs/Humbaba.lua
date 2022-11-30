@@ -30,10 +30,10 @@ entity.onSpikesDamage = function(mob, target, damage)
     local params = {}
     params.bonusmab = 0
     params.includemab = false
-    dmg = addBonusesAbility(mob, xi.magic.ele.ICE, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, 0)
-    dmg = adjustForTarget(target, dmg, xi.magic.ele.ICE)
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.ICE, dmg)
+    dmg = xi.magic.addBonusesAbility(mob, xi.magic.ele.ICE, target, dmg, params)
+    dmg = dmg * xi.magic.applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, nil, 0)
+    dmg = xi.magic.adjustForTarget(target, dmg, xi.magic.ele.ICE)
+    dmg = xi.magic.finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.ICE, dmg)
 
     if dmg < 0 then
         dmg = 0
@@ -42,7 +42,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     return xi.subEffect.ICE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 314)
 end
 

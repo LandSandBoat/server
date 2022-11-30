@@ -19,12 +19,15 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
-    if GetMobByID(mob:getID() - 1):isDead() and GetMobByID(mob:getID() - 2):isDead() then
+    if
+        GetMobByID(mob:getID() - 1):isDead() and
+        GetMobByID(mob:getID() - 2):isDead()
+    then
         mob:getBattlefield():setLocalVar("phaseChange", 0)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -9,13 +9,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect1 = xi.effect.MAGIC_ATK_BOOST
     local typeEffect2 = xi.effect.MAGIC_DEF_BOOST
     local mabTotal = 10
@@ -24,6 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST) ~= nil then
         mabTotal = mabTotal:getPower() + 10
     end
+
     if mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST) ~= nil then
         mabTotal = mabTotal:getPower() + 10
     end
@@ -34,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect1
 end
 
-return mobskill_object
+return mobskillObject

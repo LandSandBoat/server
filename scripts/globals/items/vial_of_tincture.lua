@@ -5,21 +5,20 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
-
-    if (target:hasStatusEffect(xi.effect.PLAGUE) == true) then
+itemObject.onItemUse = function(target)
+    if target:hasStatusEffect(xi.effect.PLAGUE) then
         target:delStatusEffect(xi.effect.PLAGUE)
     end
 
-    if (target:hasStatusEffect(xi.effect.DISEASE) == true) then
+    if target:hasStatusEffect(xi.effect.DISEASE) then
         target:delStatusEffect(xi.effect.DISEASE)
     end
 end
 
-return item_object
+return itemObject

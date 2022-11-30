@@ -9,7 +9,7 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -396.179047, y = -20.642097, z = -68.915520 },
     { x = -395.230957, y = -20.758915, z = -68.394829 },
@@ -932,15 +932,18 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onPath = function(npc)
-    if npc:getLocalVar("reported") ~= 1 and npc:atPoint(xi.path.get(path, 288)) then
+    if
+        npc:getLocalVar("reported") ~= 1 and
+        npc:atPoint(xi.path.get(pathNodes, 288))
+    then
         GetNPCByID(npc:getID() + 4):showText(npc, ID.text.ZOVRIACE_REPORT)
         npc:setLocalVar("reported", 1)
-    elseif npc:atPoint(xi.path.last(path)) then
+    elseif npc:atPoint(xi.path.last(pathNodes)) then
         npc:setLocalVar("reported", 0)
     end
 end

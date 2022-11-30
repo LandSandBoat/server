@@ -22,14 +22,14 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-entity.onMobEngaged= function(mob, target)
+entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
     end

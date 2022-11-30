@@ -31,14 +31,14 @@ function onTrigger(player)
         rotation = player:getRotPos(),
 
         -- Fafnir's entry in mob_groups:
-        -- INSERT INTO `mob_groups` VALUES (5,1280,154,'Fafnir',0,128,805,70000,0,90,90,0);
-        --                       groupId ---^       ^--- groupZoneId
+        -- INSERT INTO `mob_groups` VALUES (5, 1280, 154, 'Fafnir', 0, 128, 805, 70000, 0, 90, 90, 0)
+        --                       groupId ---^        ^--- groupZoneId
         groupId = 5,
         groupZoneId = 154,
 
         -- You can provide an onMobDeath function if you want: if you don't
         -- add one, an empty one will be inserted for you behind the scenes.
-        onMobDeath = function(mob, playerArg, isKiller)
+        onMobDeath = function(mob, playerArg, optParams)
             -- Do stuff
         end,
 

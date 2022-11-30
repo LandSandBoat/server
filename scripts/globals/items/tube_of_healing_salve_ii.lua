@@ -6,20 +6,21 @@
 require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if not target:hasPet() then
         return xi.msg.basic.REQUIRES_A_PET
     end
+
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local pet = target:getPet()
     local totalHP = pet:getMaxHP()
     pet:addHP(totalHP)
     pet:messageBasic(xi.msg.basic.RECOVERS_HP, 0, totalHP)
 end
 
-return item_object
+return itemObject

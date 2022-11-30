@@ -25,8 +25,8 @@ entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.ORCISH_OVERLORD_ENGAGE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         mob:showText(mob, ID.text.ORCISH_OVERLORD_DEATH)
     end
 end
@@ -44,11 +44,9 @@ entity.onMobDespawn = function(mob)
         if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
-            UpdateNMSpawnPoint(hqId)
-            GetMobByID(hqId):setRespawnTime(math.random(75600, 86400))
+            xi.mob.nmTODPersist(GetMobByID(hqId), math.random(75600, 86400))
         else
-            UpdateNMSpawnPoint(nqId)
-            mob:setRespawnTime(math.random(75600, 86400))
+            xi.mob.nmTODPersist(GetMobByID(nqId), math.random(75600, 86400))
             SetServerVariable("[PH]Overlord_Bakgodek", kills + 1)
         end
     end

@@ -13,7 +13,7 @@ require("scripts/globals/trust")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     xi.trust.onTradeCipher(player, trade, 3503, 3552, 3553)
 end
 
@@ -22,7 +22,11 @@ entity.onTrigger = function(player, npc)
     local trustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
     local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
-    if player:getMainLvl() >= 5 and xi.settings.main.ENABLE_TRUST_QUESTS == 1 and trustSandoria == QUEST_AVAILABLE then
+    if
+        player:getMainLvl() >= 5 and
+        xi.settings.main.ENABLE_TRUST_QUESTS == 1 and
+        trustSandoria == QUEST_AVAILABLE
+    then
         if trustWindurst == QUEST_AVAILABLE and trustBastok == QUEST_AVAILABLE then
             player:startEvent(3500)
         elseif trustWindurst == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED then

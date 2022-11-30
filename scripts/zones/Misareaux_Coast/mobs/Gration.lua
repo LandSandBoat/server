@@ -3,7 +3,7 @@
 --   NM: Gration
 -----------------------------------
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -31,6 +31,9 @@ entity.onMobFight = function(mob, target)
             v.entity:addStatusEffectEx(xi.effect.INTIMIDATE, 0, 1, 0, 1)
         end
     end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

@@ -13,19 +13,19 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1793) then
+    if mobSkin == 1793 then
         return 0
     else
         return 1
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BURN
     local statmod = xi.mod.INT
     local element = mob:getStatusEffectElement(typeEffect)
@@ -33,7 +33,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local power = ((resist * 10) - 5) * math.random(1, 2) + 19 -- makes dot damage between 20 - 28, based off resistance and random variable.
     local dmgmod = 3
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*6, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 6, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
@@ -42,4 +42,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

@@ -12,7 +12,7 @@ local entity = {}
 
 local prerequisites =
 {
-    [xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
+    [xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH        },
     [xi.job.MNK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_FIRST_MEETING            },
     [xi.job.WHM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
     [xi.job.BLM] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.RECOLLECTIONS              },
@@ -55,7 +55,10 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
     then
         player:startEvent(155)
-    elseif player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and not player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
+    elseif
+        player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and
+        not player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
+    then
         player:startEvent(43)
     elseif player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
         player:startEvent(26)

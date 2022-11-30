@@ -43,7 +43,7 @@ entity.onMobSpawn = function(mob)
                     mobTimerArg:updateEnmity(new_target)
                 end
 
-                mobTimerArg:setLocalVar("RERAISES", reraises+1)
+                mobTimerArg:setLocalVar("RERAISES", reraises + 1)
             end)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type
@@ -114,7 +114,7 @@ entity.onMobFight = function(mob, target)
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
     if (hpTrigger > 0) then -- It'll be zero on his first "life"
         local usedAzure = mob:getLocalVar("usedAzureLore")
-        if (mob:getHPP() <= hpTrigger and usedAzure == 0) then
+        if mob:getHPP() <= hpTrigger and usedAzure == 0 then
             mob:setLocalVar("usedAzureLore", 1)
             mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
             mob:useMobAbility(xi.jsa.AZURE_LORE)
@@ -130,9 +130,9 @@ entity.onSpellPrecast = function(mob, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- If he's out of reraises, display text
-    if isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0 then
+    if optParams.isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0 then
         mob:showText(mob, ID.text.MIRACLE)
     end
 end

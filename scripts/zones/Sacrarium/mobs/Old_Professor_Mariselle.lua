@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    for i = opMariselle+1, opMariselle+2 do
+    for i = opMariselle + 1, opMariselle + 2 do
         local m = GetMobByID(i)
         if m:isSpawned() then
             m:updateEnmity(target)
@@ -50,9 +50,10 @@ entity.onMobFight = function(mob, target)
     end
 
     local teleTime = mob:getLocalVar('teleTime')
-    if mob:getBattleTime() - teleTime > 30 and
-       mob:getBattleTime() > 59 and
-       mob:actionQueueEmpty()
+    if
+        mob:getBattleTime() - teleTime > 30 and
+        mob:getBattleTime() > 59 and
+        mob:actionQueueEmpty()
     then
         local profLocation = mob:getLocalVar('spawnLocation')
         local randomPosition = math.random(1, 9)
@@ -75,7 +76,7 @@ entity.onMobDisengage = function(mob)
     mob:setLocalVar('teleTime', 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local opMariselle = mob:getID()
 
     for i = opMariselle + 1, opMariselle + 2 do
@@ -97,7 +98,7 @@ entity.onMobDespawn = function(mob)
     end
 
     -- Randomize Old Prof. Mariselle's spawn location
-    local nextSpawn = math.random(0,5)
+    local nextSpawn = math.random(0, 5)
     for i = 0, 5 do
         GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar('hasProfessorMariselle', (i == nextSpawn) and 1 or 0)
     end

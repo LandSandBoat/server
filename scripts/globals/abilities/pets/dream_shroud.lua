@@ -7,15 +7,14 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-ability_object.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local duration = 180
     local hour = VanadielHour()
     local buffvalue = 0
     buffvalue = math.abs(12 - hour) + 1
@@ -27,4 +26,4 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
     return 0
 end
 
-return ability_object
+return abilityObject

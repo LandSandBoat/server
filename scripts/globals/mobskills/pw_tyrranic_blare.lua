@@ -11,25 +11,25 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1863) then
+    if mobSkin == 1863 then
         return 0
     else
         return 1
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.8, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2.8, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.EARTH)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

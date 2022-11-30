@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(xi.status.DISAPPEAR)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local cellType = mob:getLocalVar("Cell")
     local numCells = mob:getLocalVar("Qnt") * 2
 

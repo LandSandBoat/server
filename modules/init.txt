@@ -66,4 +66,5 @@ era/sql_dynamis/
 renamer
 #-----------------------
 #		Custom
-#----------------------
+#-----------------------
+#custom/sql/starlight_celebrations.sql

@@ -12,12 +12,9 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
-    mob:addMod(xi.mod.UDMGPHYS, -100)
-    mob:addMod(xi.mod.UDMGMAGIC, -100)
-    mob:addMod(xi.mod.UDMGRANGE, -100)
-    mob:addMod(xi.mod.UDMGBREATH, -100)
+    mob:setMod(xi.mod.DMG, -10000)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
     mob:setLocalVar("kukki", 1)
 end
 
@@ -25,7 +22,7 @@ entity.onMobEngaged = function(mob, target)
     mob:entityAnimationPacket("ouen") -- each taru will use this animation at the start of the fight
     mob:setMobMod(xi.mobMod.NO_LINK, 0)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMagicCastingEnabled(true)
     mob:setAnimationSub(1)
 end
 
@@ -35,7 +32,7 @@ entity.onMobFight = function(mob, target)
     local changetime = mob:getLocalVar("changetime")
     if battlefield:getLocalVar("fireworks") == 1 then
         if battletime - changetime >= 3 then
-            mob:SetMagicCastingEnabled(false)
+            mob:setMagicCastingEnabled(false)
             mob:entityAnimationPacket("ffr2")
             mob:setAnimationSub(2)
             mob:setLocalVar("changetime", mob:getBattleTime())

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Attohwa
 --  NPC: Gabriele
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

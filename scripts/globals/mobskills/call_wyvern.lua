@@ -6,9 +6,9 @@ require("scripts/globals/msg")
 require("scripts/globals/mobskills")
 require("modules/era/lua_dynamis/globals/era_dynamis_spawning")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasPet() or mob:getPet() == nil then
         return 1
     end
@@ -16,7 +16,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:isInDynamis() then
         local mobInfo = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))]
 
@@ -27,10 +27,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             end
 
             for i = 5, 1, -1 do
-                xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
+                xi.dynamis.spawnDynamicPet(mob:getTarget(), mob, xi.job.DRG)
             end
         else
-            xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
+            xi.dynamis.spawnDynamicPet(mob:getTarget(), mob, xi.job.DRG)
         end
     else
         mob:spawnPet()
@@ -41,4 +41,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return 0
 end
 
-return mobskill_object
+return mobskillObject

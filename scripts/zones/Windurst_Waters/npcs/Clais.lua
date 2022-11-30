@@ -7,14 +7,21 @@
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/utils")
+require("scripts/globals/events/starlight_celebrations")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+        xi.events.starlightCelebration.onStarlightSmilebringersTrade(player, trade, npc)
+    end
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 3) then
+    if
+        player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
+        not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 3)
+    then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(57)
     else

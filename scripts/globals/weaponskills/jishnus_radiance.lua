@@ -16,9 +16,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
     params.ftp100 = 1.75 params.ftp200 = 1.75 params.ftp300 = 1.75
@@ -27,7 +27,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.chr_wsc = 0.0
     params.crit100 = 0.15 params.crit200 = 0.2 params.crit300 = 0.25
     params.canCrit = true
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     params.multiHitfTP = true
 
@@ -38,7 +38,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.RANGED, xi.aftermath.type.EMPYREAN)
 
-    local damage, criticalHit, tpHits, extraHits, shadowsAbsorbed = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
+    local damage, criticalHit, tpHits, extraHits, shadowsAbsorbed = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if shadowsAbsorbed + tpHits + extraHits == 3 then
         action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 8))
@@ -49,4 +49,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

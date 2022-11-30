@@ -5,11 +5,12 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/magic")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
 local tameSort =
 {
@@ -19,21 +20,22 @@ local tameSort =
     [1] = 2,
 }
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     if player:getPet() ~= nil then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
     end
+
     if target:getMobMod(xi.mobMod.CHARMABLE) == 0 then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
     end
     local tameBonus   = 0
-    local charmChance = player:getCharmChance(target, false)
+    local charmChance = xi.magic.getCharmChance(player, target, false)
 
     for chance, bonus in pairs(tameSort) do
         if charmChance > chance then
@@ -42,8 +44,12 @@ ability_object.onUseAbility = function(player, target, ability)
         end
     end
 
-    local params = {diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT) + player:getMod(xi.mod.TAME_SUCCESS_RATE)), skillType = nil, bonus = tameBonus, effect = xi.effect.NONE, element = xi.magic.element.NONE}
-    local resist = applyResistanceAbility(player, target, ability:getID(), params)
+    local params = {}
+    params.includemab = true
+    params.element = xi.magic.ele.NONE
+    params.maccBonus = tameBonus + player:getMod(xi.mod.TAME_SUCCESS_RATE)
+
+    local resist = xi.magic.applyAbilityResistance(player, target, params)
 
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)
@@ -62,6 +68,7 @@ ability_object.onUseAbility = function(player, target, ability)
                     end
                 end
             end
+
             ability:setMsg(138) -- The x seems friendlier
             target:disengage()
         else
@@ -71,4 +78,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

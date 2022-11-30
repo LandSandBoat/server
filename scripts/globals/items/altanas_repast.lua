@@ -26,25 +26,32 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:forMembersInRange(30, function(member)
-        if not member:hasStatusEffect(xi.effect.FOOD) and not member:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        if
+            not member:hasStatusEffect(xi.effect.FOOD) and
+            not member:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+        then
             member:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 6538)
         end
     end)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.STR, 10)
     target:addMod(xi.mod.DEX, 10)
     target:addMod(xi.mod.VIT, 10)
@@ -83,7 +90,7 @@ item_object.onEffectGain = function(target, effect)
     target:addPetMod(xi.mod.STORETP, 6)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.STR, 10)
     target:delMod(xi.mod.DEX, 10)
     target:delMod(xi.mod.VIT, 10)
@@ -122,4 +129,4 @@ item_object.onEffectLose = function(target, effect)
     target:delPetMod(xi.mod.STORETP, 6)
 end
 
-return item_object
+return itemObject

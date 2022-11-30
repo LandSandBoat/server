@@ -8,37 +8,37 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     {
-        {-588.6, -5.0, -458.5},
-        {-577.5,  0.0, -454.3},
-        {-559.6,  0.0, -470.4},
-        {-539.0,  1.0, -482.1},
-        {-540.6,  0.0, -451.0},
-        {-564.2,  3.5, -433.4},
-        {-547.5,  1.5, -418.2},
-        {-579.4,  1.0, -423.0},
+        { -588.6, -5.0, -458.5 },
+        { -577.5,  0.0, -454.3 },
+        { -559.6,  0.0, -470.4 },
+        { -539.0,  1.0, -482.1 },
+        { -540.6,  0.0, -451.0 },
+        { -564.2,  3.5, -433.4 },
+        { -547.5,  1.5, -418.2 },
+        { -579.4,  1.0, -423.0 },
     },
     {
-        {-28.2, -5.0, 101.2},
-        { -0.3,  0.3,  88.1},
-        { 22.0,  0.9,  77.7},
-        { 18.4,  0.3, 109.0},
-        { -2.2,  3.5, 125.7},
-        { 12.2,  1.4, 142.8},
-        {-17.4,  1.2, 137.5},
-        {-17.3,  0.0, 107.1},
+        { -28.2, -5.0, 101.2 },
+        {  -0.3,  0.3,  88.1 },
+        {  22.0,  0.9,  77.7 },
+        {  18.4,  0.3, 109.0 },
+        {  -2.2,  3.5, 125.7 },
+        {  12.2,  1.4, 142.8 },
+        { -17.4,  1.2, 137.5 },
+        { -17.3,  0.0, 107.1 },
     },
     {
-        {451.2, -4.8, 581.3},
-        {479.3,  0.3, 563.8},
-        {500.6,  0.9, 558.1},
-        {498.7,  0.1, 590.5},
-        {479.5,  3.5, 606.2},
-        {494.2,  1.2, 623.3},
-        {460.6,  1.0, 619.3},
-        {436.1, -0.1, 587.0},
+        { 451.2, -4.8, 581.3 },
+        { 479.3,  0.3, 563.8 },
+        { 500.6,  0.9, 558.1 },
+        { 498.7,  0.1, 590.5 },
+        { 479.5,  3.5, 606.2 },
+        { 494.2,  1.2, 623.3 },
+        { 460.6,  1.0, 619.3 },
+        { 436.1, -0.1, 587.0 },
     },
 }
 
@@ -56,19 +56,22 @@ entity.onMobSpawn = function(mob)
         end
 
         if mob:getLocalVar("currHits") >= mobArg:getLocalVar("hitsRequired") then
-            mob:setLocalVar("hitsRequired", math.random(1,10))
+            mob:setLocalVar("hitsRequired", math.random(1, 10))
             mob:setLocalVar("runControl", 1)
             mob:setLocalVar("currHits", 0)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setMagicCastingEnabled(false)
+            mob:setMobAbilityEnabled(false)
         end
     end)
+
+    entity.onMobRoam(mob)
+    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.REVERSE))
 end
 
 entity.onMobRoam = function(mob)
     local bfNum = mob:getBattlefield():getArea()
-    local point = math.random(1,8)
-    mob:pathTo(path[bfNum][point][1], path[bfNum][point][2], path[bfNum][point][3], xi.path.flag.SCRIPT)
+    local point = math.random(1, 8)
+    mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
@@ -91,19 +94,19 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getLocalVar("runControl") == 1 then
-        local point = math.random(1,8)
+        local point = math.random(1, 8)
         mob:setLocalVar("runControl", 0)
 
-        mob:pathTo(path[bfNum][point][1], path[bfNum][point][2], path[bfNum][point][3], xi.path.flag.SCRIPT)
+        mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 
         mob:timer(5000, function(mobArg)
-            mobArg:SetMagicCastingEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
         end)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -14,9 +14,11 @@ local function parseActionShorthand(actionDef)
         if actionDef.cutscene then
             event = event:cutscene()
         end
+
         if actionDef.progress then
             event = event:progress()
         end
+
         return event
     end
 
@@ -51,6 +53,7 @@ local function parseActionShorthand(actionDef)
     if info == nil then
         info = actionDef.door
     end
+
     if info ~= nil then
         -- Return -1 to open door, else 0
         return LambdaAction:new(function ()
@@ -83,7 +86,12 @@ function actionUtil.parseActionDef(actionDef)
         return actionDef
     end
 
-    if not actionDef or type(actionDef) ~= 'table' or actionDef.onTrigger or actionDef.onTrade then
+    if
+        not actionDef or
+        type(actionDef) ~= 'table' or
+        actionDef.onTrigger or
+        actionDef.onTrade
+    then
         return nil
     end
 
@@ -105,7 +113,8 @@ function actionUtil.parseActionDef(actionDef)
         if door == nil then
             door = actionDef.door
         end
-        if door == true then
+
+        if door then
             action:openDoor()
         end
     end

@@ -7,7 +7,7 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -17.930, y = -8.500, z = -93.215 },
     { x = -18.553, y = -7.713, z = -91.224 },
@@ -65,10 +65,10 @@ local path =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:pathThrough(path, xi.path.flag.PATROL)
+    mob:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 383)
 end
 

@@ -106,7 +106,7 @@ mission.sections =
                         -- This cutscene is blocking after the mission has been completed.  Check this
                         -- before allowing further gate guard interaction (Mission[0][20]Progress).  Required
                         -- final CS will set this to 0, and we should disallow on non-zero values
-                        mission:setVar(player, 'Progress', os.time() + 60)
+                        mission:setVar(player, 'Progress', getMidnight())
                         player:delKeyItem(xi.ki.DROPS_OF_AMNIO)
                     end
                 end,
@@ -146,7 +146,7 @@ mission.sections =
             -- the other target.
             ['Honor'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobValor = GetMobByID(quicksandCavesID.mob.HONOR)
 
                     if
@@ -160,7 +160,7 @@ mission.sections =
 
             ['Valor'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobHonor = GetMobByID(quicksandCavesID.mob.VALOR)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and

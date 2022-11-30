@@ -163,8 +163,6 @@ std::string ip2str(uint32 ip);
 
 uint32 str2ip(const char* ip_str);
 
-#define CONVIP(ip) ((ip) >> 24) & 0xFF, ((ip) >> 16) & 0xFF, ((ip) >> 8) & 0xFF, ((ip) >> 0) & 0xFF
-
 uint16 ntows(uint16 netshort);
 
 /************************************************/
@@ -290,7 +288,6 @@ void do_close_tcp(int32 fd);
 
 void flush_fifo(int32 fd);
 void flush_fifos(void);
-// void set_nonblocking(int32 fd, ulong yes);
 
 void set_defaultparse(ParseFunc defaultparse);
 

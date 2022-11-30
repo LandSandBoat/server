@@ -3,70 +3,100 @@
 --  Mob: Proto-Omega
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/titles")
 require("scripts/globals/mobs")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+local quadrupedForm = function(mob)
+    mob:setAnimationSub(1)
+    mob:setMod(xi.mod.MOVE, 100)
+    mob:setMod(xi.mod.ATTP, 100)
+    mob:setMod(xi.mod.UDMGPHYS, -9000)
+    mob:setMod(xi.mod.UDMGRANGE, -9000)
+    mob:setMod(xi.mod.UDMGMAGIC, -3000)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 727)
+end
+
+local bipedForm = function(mob)
+    mob:setAnimationSub(2)
+    mob:setMod(xi.mod.MOVE, 0)
+    mob:setMod(xi.mod.ATTP, 200)
+    mob:setMod(xi.mod.UDMGPHYS, -3000)
+    mob:setMod(xi.mod.UDMGRANGE, -3000)
+    mob:setMod(xi.mod.UDMGMAGIC, -9000)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 1188)
+end
+
+local finalForm = function(mob)
+    mob:setLocalVar("final", 1)
+    mob:setAnimationSub(2)
+    mob:setMod(xi.mod.ATTP, 250)
+    mob:setMod(xi.mod.UDMGPHYS, -5000)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
+    mob:setMod(xi.mod.REGAIN, 100)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 1189)
+end
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.COUNTER, 10) -- "Possesses a Counter trait"
-    mob:setMod(xi.mod.REGEN, 25)   -- "Posseses an Auto-Regen (low to moderate)"
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 25)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
+    mob:setMod(xi.mod.COUNTER, 10)
+    mob:setMod(xi.mod.REGAIN, 50)
+    mob:setMod(xi.mod.REGEN, 25)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:setMod(xi.mod.UDMGPHYS, -7500)
-    mob:setMod(xi.mod.UDMGRANGE, -7500)
-    mob:setMod(xi.mod.UDMGMAGIC, 0)
-    mob:setMod(xi.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
+    quadrupedForm(mob)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("formTime", os.time() + 120)
 end
 
 entity.onMobFight = function(mob, target)
-    local mobID       = mob:getID()
-    local formTime    = mob:getLocalVar("formWait")
-    local lifePercent = mob:getHPP()
-    local currentForm = mob:getLocalVar("form")
+    local now = os.time()
 
-    if lifePercent < 70 and currentForm < 1 then
-        currentForm = 1
-        mob:setLocalVar("form", currentForm)
-        formTime = os.time()
-        mob:setMod(xi.mod.UDMGPHYS, 0)
-        mob:setMod(xi.mod.UDMGRANGE, 0)
-        mob:setMod(xi.mod.UDMGMAGIC, -7500)
-        mob:setMod(xi.mod.MOVE, 0)
-    end
-
-    if currentForm == 1 then
-        if formTime < os.time() then
-            if mob:getAnimationSub() == 1 then
-                mob:setAnimationSub(2)
-                mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
-
-                if not GetMobByID(mobID + 1):isSpawned() and math.random(0, 1) == 1 then
-                    mob:useMobAbility(1532)
-                end
-            else
-                mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-                mob:setAnimationSub(1)
-            end
-
-            mob:setLocalVar("formWait", os.time() + 60)
+    -- If in Final form then do Pod Ejection every 5 minutes
+    if mob:getLocalVar("final") == 1 then
+        if
+            now >= mob:getLocalVar("gunpodTime") and
+            mob:getCurrentAction() == xi.act.ATTACK and
+            GetMobByID(mob:getID() + 1):getStatus() == xi.status.DISAPPEAR
+        then
+            mob:setLocalVar("gunpodTime", now + utils.minutes(5))
+            mob:useMobAbility(1532) -- Pod Ejection
         end
 
-        if lifePercent < 30 then
-            mob:setAnimationSub(2)
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
-            mob:setMod(xi.mod.UDMGPHYS, -5000)
-            mob:setMod(xi.mod.UDMGRANGE, -5000)
-            mob:setMod(xi.mod.UDMGMAGIC, -5000)
-            mob:setMod(xi.mod.MOVE, 100)
-            mob:addStatusEffect(xi.effect.REGAIN, 7, 3, 0) -- The final form has Regain,
-            mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
-            currentForm = 2
-            mob:setLocalVar("form", currentForm)
+        return
+    end
+
+    -- Convert into final form at 25% HP
+    if mob:getHPP() <= 25 then
+        finalForm(mob)
+        return
+    end
+
+    -- Swap between forms every 2 minutes
+    local form = mob:getLocalVar("formTime")
+    if now >= form and mob:getCurrentAction() == xi.act.ATTACK then
+        mob:setLocalVar("formTime", now + utils.minutes(2))
+        if mob:getAnimationSub() == 1 then
+            bipedForm(mob)
+
+            -- Wait for 4.5s while changing form and then do Pod Ejection
+            mob:wait(4500)
+            mob:timer(4500, function(mobArg)
+                if mob:isAlive() and mob:getLocalVar("initialGunpod") == 0 then
+                    mob:setLocalVar("initialGunpod", 1)
+                    mob:useMobAbility(1532) -- Pod Ejection
+                end
+            end)
+        else
+            quadrupedForm(mob)
+            mob:wait(4500)
         end
     end
 end
@@ -75,13 +105,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.APOLLYON_RAVAGER)
-    end
-
-    if isKiller or noKiller then
-        GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.NORMAL)
     end
 end
 

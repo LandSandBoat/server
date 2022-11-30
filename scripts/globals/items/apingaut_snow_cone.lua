@@ -12,21 +12,25 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6224)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.FOOD_MPP, 25)
     target:addMod(xi.mod.FOOD_MP_CAP, 105)
     target:addMod(xi.mod.INT, 6)
@@ -35,7 +39,7 @@ item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.LIZARD_KILLER, 6)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.FOOD_MPP, 25)
     target:delMod(xi.mod.FOOD_MP_CAP, 105)
     target:delMod(xi.mod.INT, 6)
@@ -44,4 +48,4 @@ item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.LIZARD_KILLER, 6)
 end
 
-return item_object
+return itemObject

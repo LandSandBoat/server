@@ -39,7 +39,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { power = math.random(10, 30) })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 204)
     -- I think he still counts for the FoV page? Most NM's do not though.
     xi.regime.checkRegime(player, mob, 81, 1, xi.regime.type.FIELDS)
@@ -47,8 +47,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
+    xi.mob.nmTODPersist(mob, math.random(3600, 4200)) -- 60~70 min repop.
 end
 
 return entity

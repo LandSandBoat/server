@@ -6,21 +6,18 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-ability_object.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 120 + bonusTime
-
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local duration = math.min(60 + xi.summon.getSummoningSkillOverCap(pet) * 2, 180)
     local magicskill = utils.getSkillLvl(1, target:getMainLvl())
-
-    local potency = 3 + ((6*magicskill)/100)
-    if (magicskill>200) then
-        potency = 5 + ((5*magicskill)/100)
+    local potency = 3 + ((6 * magicskill) / 100)
+    if magicskill > 200 then
+        potency = 5 + ((5 * magicskill) / 100)
     end
 
     local typeEffect = xi.effect.ENTHUNDER
@@ -30,4 +27,4 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
     return typeEffect
 end
 
-return ability_object
+return abilityObject

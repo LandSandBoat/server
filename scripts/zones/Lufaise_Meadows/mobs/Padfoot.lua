@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
@@ -32,6 +32,7 @@ entity.onMobDespawn = function(mob)
             if v ~= mobId and GetMobByID(v):isSpawned() then
                 DespawnMob(v)
             end
+
             GetMobByID(v):setRespawnTime(respawn)
         end
 

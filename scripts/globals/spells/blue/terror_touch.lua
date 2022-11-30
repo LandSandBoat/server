@@ -18,13 +18,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ACC
@@ -47,7 +47,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (target:hasStatusEffect(xi.effect.ATTACK_DOWN)) then
+    if target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
         target:addStatusEffect(xi.effect.ATTACK_DOWN, 15, 0, 20)
@@ -56,4 +56,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return damage
 end
 
-return spell_object
+return spellObject

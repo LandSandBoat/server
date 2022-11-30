@@ -7,8 +7,9 @@ import errno
 from .util import util
 from .packets import packets
 
+
 class HXIClient:
-    def __init__(self, username, password, server, slot=1, client_str=''):
+    def __init__(self, username, password, server, slot=1, client_str=""):
         # Args
         self.username = username
         self.password = password
@@ -16,8 +17,8 @@ class HXIClient:
         self.slot = slot
 
         # Read from version.conf default
-        if client_str == '':
-            with open('settings/default/login.lua') as f:
+        if client_str == "":
+            with open("settings/default/login.lua") as f:
                 settings_file = f.read()
                 client_str = re.search(r'CLIENT_VER = "(.*?)"', settings_file)[1]
 
@@ -45,9 +46,9 @@ class HXIClient:
         self.login_sock.close()
 
         if in_data[0] == 0x01:
-            print('Login successful')
+            print("Login successful")
             self.account_id = util.unpack_uint16(in_data, 1)
-            print('Account ID: ' + str(self.account_id))
+            print("Account ID: " + str(self.account_id))
 
             # Connect
             self.lobby_data_connect()
@@ -65,10 +66,12 @@ class HXIClient:
             self.map_login_to_zone()
             self.connected = True
         elif in_data[0] == 0x02:
-            print('Failed to login. Invalid username or password.')
+            print("Failed to login. Invalid username or password.")
             exit(-1)
         else:
-            print(f'Failed to login. Code: {in_data[0]})', )
+            print(
+                f"Failed to login. Code: {in_data[0]})",
+            )
             exit(-1)
 
     def logout(self):
@@ -78,27 +81,25 @@ class HXIClient:
 
     def login_connect(self):
         server_address = (self.server, 54231)
-        print('Starting up login connection on %s port %s' % server_address)
+        print("Starting up login connection on %s port %s" % server_address)
         self.login_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.login_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.login_sock.connect(server_address)
 
     def lobby_data_connect(self):
         server_address = (self.server, 54230)
-        print('Starting up lobby data connection on %s port %s' %
-              server_address)
+        print("Starting up lobby data connection on %s port %s" % server_address)
         self.lobbydata_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.lobbydata_sock.connect(server_address)
 
     def lobby_view_connect(self):
         server_address = (self.server, 54001)
-        print('Starting up lobby view connection on %s port %s' %
-              server_address)
+        print("Starting up lobby view connection on %s port %s" % server_address)
         self.lobbyview_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.lobbyview_sock.connect(server_address)
 
     def lobby_data_0xA1_0(self):
-        print('Sending lobby_data_0xA1 (0)')
+        print("Sending lobby_data_0xA1 (0)")
         try:
             data = bytearray(5)
             data[0] = 0xA1
@@ -108,7 +109,7 @@ class HXIClient:
             print(ex)
 
     def lobby_view_0x26(self):
-        print('Sending lobby_view_0x26')
+        print("Sending lobby_view_0x26")
         try:
             data = bytearray(152)
             data[8] = 0x26
@@ -118,17 +119,27 @@ class HXIClient:
             in_data = self.lobbyview_sock.recv(40)
 
             expansion_bitmask = util.unpack_uint32(in_data, 32)
-            print('Expansion bitmask: ' + str(bin(expansion_bitmask)) + ' (' +
-                  str(expansion_bitmask) + ')')
+            print(
+                "Expansion bitmask: "
+                + str(bin(expansion_bitmask))
+                + " ("
+                + str(expansion_bitmask)
+                + ")"
+            )
 
             feature_bitmask = util.unpack_uint16(in_data, 36)
-            print('Feature bitmask: ' + str(bin(feature_bitmask)) + ' (' +
-                  str(feature_bitmask) + ')')
+            print(
+                "Feature bitmask: "
+                + str(bin(feature_bitmask))
+                + " ("
+                + str(feature_bitmask)
+                + ")"
+            )
         except Exception as ex:
             print(ex)
 
     def lobby_view_0x1F(self):
-        print('Sending lobby_view_0x1F')
+        print("Sending lobby_view_0x1F")
         try:
             data = bytearray(44)
             data[8] = 0x1F
@@ -137,10 +148,10 @@ class HXIClient:
             print(ex)
 
     def lobby_data_0xA1_1(self):
-        print('Sending lobby_data_0xA1 (1)')
+        print("Sending lobby_data_0xA1 (1)")
         try:
             # Should send 9 bytes: A1 00 00 01 00 00 00 00 00
-            data = bytearray.fromhex('A10000010000000000')
+            data = bytearray.fromhex("A10000010000000000")
 
             # Sends: bytearray(b'\xa1\x00\x00\x01\x00\x00\x00\x00\x00')
             self.lobbydata_sock.sendall(data)
@@ -152,10 +163,10 @@ class HXIClient:
                 self.char_id = util.unpack_uint32(data, 36 + (self.slot * 140))
 
                 # TODO: This isn't good
-                self.char_name = data[44 + (self.slot * 140):44 +
-                                      (self.slot * 140) + 16].decode(
-                                          'utf-8', 'ignore')
-                self.char_name = re.sub(r'\d+', '', self.char_name)
+                self.char_name = data[
+                    44 + (self.slot * 140) : 44 + (self.slot * 140) + 16
+                ].decode("utf-8", "ignore")
+                self.char_name = re.sub(r"\d+", "", self.char_name)
 
                 # TODO: Parse the rest of the char data
 
@@ -168,7 +179,7 @@ class HXIClient:
         pass
 
     def lobby_view_0x07(self):
-        print('Sending lobby_view_0x07')
+        print("Sending lobby_view_0x07")
         try:
             data = bytearray(88)
             data[8] = 0x07
@@ -178,53 +189,53 @@ class HXIClient:
             print(ex)
 
     def lobby_data_0xA2(self):
-        print('Sending lobby_data_0xA2')
+        print("Sending lobby_data_0xA2")
         time.sleep(2)
+        # fmt: off
         data = bytearray([
             0xA2, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00
         ])
+        # fmt: on
 
         status_code = 0
         try:
             self.lobbydata_sock.sendall(data)
-            data = self.lobbyview_sock.recv(72) #0x48
+            data = self.lobbyview_sock.recv(72)  # 0x48
             if len(data) != 0x48:
-                raise Exception(f"Did not get back 72 bytes. Got {len(data)}. => {data}")
-            #status_code = util.unpack_uint16(data, 32)
-            #if status_code != 305 and status_code != 321:
-            #    raise Exception("Did not get acceptable status code")
+                raise Exception(
+                    f"Did not get back 72 bytes. Got {len(data)}. => {data}"
+                )
         except Exception as ex:
-            print(f'Error communicating lobby 0xA2 packet. Error: {status_code}')
+            print(f"Error communicating lobby 0xA2 packet. Error: {status_code}")
             print(ex)
             exit(-1)
 
         try:
-            self.zone_ip = util.int_to_ip(
-                socket.htonl(util.unpack_uint32(data, 0x38)))
+            self.zone_ip = util.int_to_ip(socket.htonl(util.unpack_uint32(data, 0x38)))
             self.zone_port = util.unpack_uint16(data, 0x3C)
             self.search_ip = util.int_to_ip(
-                socket.htonl(util.unpack_uint32(data, 0x40)))
+                socket.htonl(util.unpack_uint32(data, 0x40))
+            )
             self.search_port = util.unpack_uint16(data, 0x44)
         except Exception as ex:
-            print(f'Error unpacking gameserver handoff data.')
+            print(f"Error unpacking gameserver handoff data.")
             print(ex)
             exit(-1)
 
         self.map_server = (self.zone_ip, self.zone_port)
         self.search_server = (self.search_ip, self.search_port)
 
-        print(f'ZoneServ: {self.map_server}, SearchServ: {self.search_server}')
+        print(f"ZoneServ: {self.map_server}, SearchServ: {self.search_server}")
 
     def start_map_listener(self):
-        print('Starting listener to map server')
+        print("Starting listener to map server")
         self.map_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.map_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.map_sock.setblocking(False)
 
-        self.map_thread = threading.Thread(target=self.map_sock_listen,
-                                           args=())
+        self.map_thread = threading.Thread(target=self.map_sock_listen, args=())
         self.map_thread.daemon = True
         self.map_thread_listening = True
         self.map_thread.start()
@@ -245,10 +256,10 @@ class HXIClient:
                 self.parse_incoming_packet(data)
 
     def parse_incoming_packet(self, data):
-        #print(f'recv: {data.hex()}')
-        #server_packet_id = util.unpack_uint16(data, 0)
-        #client_packet_id = util.unpack_uint16(data, 2)
-        #packet_time = util.unpack_uint32(data, 8)
+        # print(f'recv: {data.hex()}')
+        # server_packet_id = util.unpack_uint16(data, 0)
+        # client_packet_id = util.unpack_uint16(data, 2)
+        # packet_time = util.unpack_uint32(data, 8)
 
         # De-blowfish
 
@@ -259,7 +270,7 @@ class HXIClient:
         pass
 
     def stop_map_listener(self):
-        print('Closing listener to map server')
+        print("Closing listener to map server")
         self.map_thread_listening = False
         self.map_thread.join()
 
@@ -268,10 +279,10 @@ class HXIClient:
         self.map_sock.sendto(packets.to_map_11(), self.map_server)
 
     def send_say(self, message):
-        print(f'Sending /say: {message}')
+        print(f"Sending /say: {message}")
         self.map_sock.sendto(packets.to_map_b5(message), self.map_server)
 
     def map_send_logout(self):
-        print('Sending map_send_logout')
+        print("Sending map_send_logout")
         self.map_sock.sendto(packets.to_map_e7(), self.map_server)
         self.map_sock.sendto(packets.to_map_0d(), self.map_server)

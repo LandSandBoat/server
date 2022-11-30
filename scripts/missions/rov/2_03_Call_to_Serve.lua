@@ -50,7 +50,7 @@ mission.sections =
                         mission:getVar(player, 'Retrieve') == 0
                     then
                         -- Note: Working with the assumption that there are four variable parameters for this mission,
-                        -- the following observations have been made.  The first parameter *does* have an impact on dialogue;
+                        -- the following observations have been made.  The first parameter *does* have an impact on dialogue
                         -- however, it was not observed in caps (A 1-value makes Prishe sound at best more vulnerable).  The
                         -- second parameter seems to align with having completed Darkness Named, which like previous events,
                         -- moves from a 0-value to 2.

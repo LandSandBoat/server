@@ -45,7 +45,13 @@ quest.sections =
             onEventFinish =
             {
                 [0] = function(player, csid, option, npc)
-                    if option == 1 and (player:hasItem(xi.items.SCYTHE_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SCYTHE_OF_TRIALS)) then
+                    if
+                        option == 1 and
+                        (
+                            player:hasItem(xi.items.SCYTHE_OF_TRIALS) or
+                            npcUtil.giveItem(player, xi.items.SCYTHE_OF_TRIALS)
+                        )
+                    then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -136,7 +142,7 @@ quest.sections =
 
             ['Mokumokuren'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
             },

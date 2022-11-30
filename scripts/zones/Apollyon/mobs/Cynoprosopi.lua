@@ -2,35 +2,34 @@
 -- Area: Apollyon NW, Floor 4
 --  Mob: Cynoprosopi
 -----------------------------------
-require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local flags = xi.path.flag.NONE
-local path =
+local points =
 {
-    { -553.732,  0.000, 599.452 },
-    { -606.096,  0.000, 567.105 },
-    { -577.405, -0.642, 541.362 },
-    { -543.441,  0.000, 523.866 }
+    { x = -570.761, y = -0.077, z = 522.718 },
+    { x = -557.464, y = -0.010, z = 532.079 },
+    { x = -604.171, y = 0.000, z = 527.726 },
+    { x = -612.802, y = 0.000, z = 554.650 },
+    { x = -578.924, y = 0.000, z = 593.825 },
+    { x = -572.767, y = -0.075, z = 529.470 },
+    { x = -555.445, y = 0.000, z = 599.520 },
+    { x = -585.530, y = -0.015, z = 591.889 },
+    { x = -570.498, y = -0.218, z = 551.888 },
+    { x = -610.567, y = 0.000, z = 563.445 },
+    { x = -600.917, y = 0.000, z = 532.658 },
+    { x = -585.872, y = -1.156, z = 546.421 },
+    { x = -557.603, y = 0.000, z = 589.217 },
+    { x = -557.340, y = 0.000, z = 638.387 },
+    { x = -565.772, y = 0.079, z = 610.667 },
+    { x = -558.003, y = 0.000, z = 609.510 },
 }
 
 entity.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
-        local point = math.random(#path)
-
-        while point == mob:getLocalVar("point") do
-            point = math.random(#path)
-        end
-
-        mob:setLocalVar("point", point)
-        mob:pathTo(path[point][1], path[point][2], path[point][3], flags)
+        xi.path.randomPath(mob, points, 10, 70)
     end
-end
-
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_nw.handleMobDeathFloorFourChest(mob, player, isKiller, noKiller)
 end
 
 return entity

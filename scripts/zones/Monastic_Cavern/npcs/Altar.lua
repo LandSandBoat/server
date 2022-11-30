@@ -16,8 +16,15 @@ end
 entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
-    if circleOfTime == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.STAR_RING1) and player:hasKeyItem(xi.ki.MOON_RING) then
-        if player:getCharVar("circleTime") == 7 and npcUtil.popFromQM(player, npc, ID.mob.BUGABOO, { hide = 0 }) then
+    if
+        circleOfTime == QUEST_ACCEPTED and
+        player:hasKeyItem(xi.ki.STAR_RING1) and
+        player:hasKeyItem(xi.ki.MOON_RING)
+    then
+        if
+            player:getCharVar("circleTime") == 7 and
+            npcUtil.popFromQM(player, npc, ID.mob.BUGABOO, { hide = 0 })
+        then
             -- no further action needed
         elseif player:getCharVar("circleTime") == 8 then
             player:startEvent(3)

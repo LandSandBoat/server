@@ -3,12 +3,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
         target:recalculateAbilitiesTable()
     end
+
     local bonus = effect:getPower()
     local helix = effect:getSubPower()
 
@@ -26,6 +27,7 @@ effect_object.onEffectGain = function(target, effect)
         target:addMod(xi.mod.HELIX_EFFECT, helix)
         target:addMod(xi.mod.HELIX_DURATION, 72)
     end
+
     if target:getObjType() ~= xi.objType.TRUST then
         target:recalculateSkillsTable()
     else -- account for trusts
@@ -39,13 +41,14 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
         target:recalculateAbilitiesTable()
     end
+
     local bonus = effect:getPower()
     local helix = effect:getSubPower()
 
@@ -63,6 +66,7 @@ effect_object.onEffectLose = function(target, effect)
         target:delMod(xi.mod.HELIX_EFFECT, helix)
         target:delMod(xi.mod.HELIX_DURATION, 72)
     end
+
     if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
         target:recalculateSkillsTable()
     else
@@ -76,4 +80,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

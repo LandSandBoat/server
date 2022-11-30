@@ -35,7 +35,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
@@ -44,10 +44,10 @@ entity.onMobDespawn = function(mob)
 
     -- localVars clear on death, so setting it on its partner
     ying:setLocalVar("YangToD", os.time())
-    if (dynaLord:getLocalVar("physImmune") == 0) then
+    if dynaLord:getLocalVar("physImmune") == 0 then
         dynaLord:setMod(xi.mod.UDMGPHYS, 0)
         dynaLord:setMod(xi.mod.UDMGRANGE, 0)
-        if (dynaLord:getLocalVar("magImmune") == 1) then -- other dragon is also dead
+        if dynaLord:getLocalVar("magImmune") == 1 then -- other dragon is also dead
             dynaLord:setLocalVar("physImmune", 2)
             dynaLord:setLocalVar("magImmune", 2)
         else

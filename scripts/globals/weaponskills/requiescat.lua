@@ -12,9 +12,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 5
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
@@ -23,7 +23,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
+    params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
     params.atk100 = 0.8 params.atk200 = 0.9 params.atk300 = 1.0
     -- TODO: Verify the params.formless check
     params.formless = true
@@ -33,9 +33,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.multiHitfTP = true
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

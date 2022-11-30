@@ -11,20 +11,19 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
-
-    if (currentForm == 2) then
-        return 0
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if target:isBehind(mob, 48) then
+        return 1
     end
-    return 1
+
+    return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.2, 1.25, xi.magic.ele.LIGHT, 1600)
-    local dis = ((mob:checkDistance(target)*2) / 20)
+    local dis = ((mob:checkDistance(target) * 2) / 20)
 
     dmgmod = dmgmod * dis
     dmgmod = utils.clamp(dmgmod, 50, 1600)
@@ -37,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

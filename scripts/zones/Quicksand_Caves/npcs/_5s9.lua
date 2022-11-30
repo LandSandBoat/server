@@ -14,8 +14,8 @@ end
 entity.onTrigger = function(player, npc)
     local difX = player:getXPos()-(-352)
     local difZ = player:getZPos()-(820)
-    local Distance = math.sqrt( math.pow(difX, 2) + math.pow(difZ, 2) )
-    if (Distance < 3) then
+    local Distance = math.sqrt(math.pow(difX, 2) + math.pow(difZ, 2))
+    if Distance < 3 then
         return -1
     end
 

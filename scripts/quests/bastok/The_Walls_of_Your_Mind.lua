@@ -46,7 +46,10 @@ quest.sections =
             onEventFinish =
             {
                 [286] = function(player, csid, option, npc)
-                    if player:hasItem(xi.items.KNUCKLES_OF_TRIALS) or npcUtil.giveItem(player, xi.items.KNUCKLES_OF_TRIALS) then
+                    if
+                        player:hasItem(xi.items.KNUCKLES_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.items.KNUCKLES_OF_TRIALS)
+                    then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -137,7 +140,7 @@ quest.sections =
 
             ['Bodach'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
             },

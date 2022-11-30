@@ -9,24 +9,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    -- skillList  54 = Omega
-    -- skillList 727 = Proto-Omega
-    -- skillList 728 = Ultima
-    -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-    local mobhp = mob:getHPP()
-
-    if ((skillList == 54 and mobhp < 26) or (skillList == 727 and mob:getAnimationSub() == 1)) then
-        return 0
-    else
-        return 1
-    end
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     local damage = currentHP * .90
     local typeEffect = xi.effect.BIND
@@ -36,4 +25,5 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
-return mobskill_object
+
+return mobskillObject

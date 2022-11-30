@@ -1,6 +1,7 @@
-mysql-connector-python == 8.0.28
+mariadb
 gitpython
 pylint
 pyyaml
 colorama
 zmq
+black

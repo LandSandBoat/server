@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE, {chance = 100, power = math.random(75, 125)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE, { chance = 100, power = math.random(75, 125) })
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -74,8 +74,8 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         for i = 1, 4 do
             if GetMobByID(mob:getID()+i):isAlive() then
                 GetMobByID(mob:getID()+i):setHP(0)

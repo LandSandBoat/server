@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
     elseif mob:getAnimationSub() ~= 0 then -- form check
@@ -21,15 +21,15 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
 
     -- TODO: The damage type should be based off of the Ghrah's element
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*math.random(7, 15), xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * math.random(7, 15), xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     mob:setHP(0)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

@@ -6,25 +6,31 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 45)
     local highest = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
-    local highestskill = 22
+    local highestskill = xi.skill.AUTOMATON_MELEE
     if automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED) > highest then
-        highestskill = 23
+        highestskill = xi.skill.AUTOMATON_RANGED
         highest = automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED)
     end
+
     if automaton:getSkillLevel(xi.skill.AUTOMATON_MAGIC) > highest then
-        highestskill = 24
+        highestskill = xi.skill.AUTOMATON_MAGIC
     end
 
-    local resist = applyResistanceAbility(automaton, target, 7, highestskill, 150)
+    local params = {}
+    params.element = xi.magic.ele.LIGHT
+    params.skillType = highestskill
+    params.maccBonus = 150
+
+    local resist = xi.magic.applyAbilityResistance(automaton, target, params)
     local duration = 12 * resist
 
     if resist > 0.0625 then
@@ -40,4 +46,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return xi.effect.FLASH
 end
 
-return ability_object
+return abilityObject

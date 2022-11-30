@@ -6,32 +6,27 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
-    local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
-    local tp = pet:getTP()
-    local dmgmod = 0
+abilityObject.onPetAbility = function(target, pet, skill)
+    local params = {}
+    params.ftp000 = 3.625 params.ftp150 = 5.31 params.ftp300 = 6.125
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.3 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.element = xi.magic.ele.ICE
+    params.includemab = true
+    params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
+    params.ignoreStateLock = true
 
-    if tp < 1500 then
-        dmgmod = math.floor((29/256) * (tp/100) + (928/256))
-    else
-        dmgmod = math.floor(((29/256) * (1500/100)) + ((14/256) * ((tp-1500)/100)) + (928/256))
-    end
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
-    local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.ICE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.ICE)
-    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, 1)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.ICE)
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.ICE)
-    target:updateEnmityFromDamage(pet, damage)
-
-    return damage
+    return totaldamage
 end
 
-return ability_object
+return abilityObject

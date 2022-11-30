@@ -29,19 +29,20 @@ function onTrigger(player, target)
 
     -- validate target
     local targ
-    if (target == nil) then
+    if target == nil then
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
+        if targ == nil then
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
     -- add maps
-    for _, v in ipairs( keyIds ) do
-        targ:addKeyItem( v )
+    for _, v in ipairs(keyIds) do
+        targ:addKeyItem(v)
     end
+
     player:PrintToPlayer(string.format("%s now has all maps.", targ:getName()))
 end

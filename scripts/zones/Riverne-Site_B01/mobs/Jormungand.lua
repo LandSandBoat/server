@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
@@ -38,7 +38,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(732)
+            mob:setMobSkillAttack(732)
             -- and record the time this phase was started
             mob:setLocalVar("changeTime", mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
@@ -49,7 +49,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:SetMobSkillAttack(732)
+            mob:setMobSkillAttack(732)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
     end
@@ -86,7 +86,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, {power = math.random(45, 90), chance = 10})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, { power = math.random(45, 90), chance = 10 })
 end
 
 return entity

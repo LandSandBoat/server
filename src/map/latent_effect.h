@@ -24,6 +24,8 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
+#include "./entities/battleentity.h"
+#include "./items/item_equipment.h"
 #include "modifier.h"
 
 enum class LATENT : uint16
@@ -67,7 +69,7 @@ enum class LATENT : uint16
     MOON_PHASE             = 37, // PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
     JOB_MULTIPLE           = 38, // PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
     JOB_MULTIPLE_AT_NIGHT  = 39, // PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
-    // 40 free to use
+    EQUIPPED_IN_SLOT       = 40, // When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
     // 41 free to use
     // 42 free to use
     WEAPON_DRAWN_HP_UNDER = 43, // PARAM: HP PERCENT
@@ -121,6 +123,7 @@ public:
     void SetSlot(uint8 slot);
     void SetModValue(Mod value);
     void SetModPower(int16 power);
+    bool ModOnItemOnly(Mod modID);
     bool Activate();
     bool Deactivate();
 
@@ -152,7 +155,8 @@ public:
     ~CLatentEffect();
 
 private:
-    CBattleEntity* m_POwner{ nullptr };
+    CBattleEntity*  m_POwner{ nullptr };
+    CItemEquipment* m_PItem{ nullptr }; // Item this latent is attached to.
 
     LATENT m_ConditionsID{ LATENT::HP_UNDER_PERCENT }; // condition type to be true
     uint16 m_ConditionsValue{ 0 };                     // condition parameter to be met

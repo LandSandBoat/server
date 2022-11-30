@@ -18,7 +18,6 @@ entity.onTrigger = function(player, npc)
         17389,   486, 1,    --Bamboo Fishing Rod
         17396,     3, 2,    --Little Worm
         17390,   212, 2,    --Yew Fishing Rod
-        13196, 10054, 3,    --Silver Belt
         17395,    10, 3,    --Lugworm
         17391,    64, 3,    --Willow Fishing Rod
         12600,   216, 3,    --Robe

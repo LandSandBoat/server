@@ -8,18 +8,19 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if not target:isZoneVisited(xi.zone.BASTOK_MINES) then
+    if not target:hasVisitedZone(xi.zone.BASTOK_MINES) then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.CHOCO_BASTOK, 0, 4)
 end
 
-return item_object
+return itemObject

@@ -8,27 +8,29 @@ require('scripts/globals/chocobo')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
 
-    -- Retail start/end dates vary, set to Dec 5th through Jan 5th.
-    if
-        (month == 12 and day >= 5) or
-        (month == 1 and day <= 5)
-    then
+     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
+    if(month == 12 and day >= 5) or (month == 1 and day <= 5) then
         player:ChangeMusic(0, 239)
         player:ChangeMusic(1, 239)
+    -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         if prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP then
             cs = 10018
             player:setPos(-87.000, 12.000, 116.000, 128)
@@ -46,30 +48,48 @@ zone_object.onZoneIn = function(player, prevZone)
             player:setPos(-192.5 , -5, position, 0)
         end
     end
-
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onTransportEvent = function(player, transport)
-    if transport == 223 then
+zoneObject.onTransportEvent = function(player, transport)
+    if transport == 223 then -- San d'Oria Airship
         player:startEvent(10010)
-    elseif transport == 224 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:startEvent(10002)
+        else
+            player:setPos(-76.92, 7.99, 35.62, 64)
+        end
+    elseif transport == 224 then -- Bastok Airship
         player:startEvent(10012)
-    elseif transport == 225 then
-        player:startEvent(10011)
-    elseif transport == 226 then
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:startEvent(10002)
+        else
+            player:setPos(-61.1, 7.99, -36.26, 192)
+        end
+    elseif transport == 225 then -- Windurst Airship
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
+            player:startEvent(10011)
+        else
+            player:setPos(3.06, 7.99, -36.21, 192)
+        end
+    elseif transport == 226 then -- Kazham Airship
         player:startEvent(10013)
+        if player:hasKeyItem(xi.keyItem.AIRSHIP_PASS_FOR_KAZHAM) then
+            player:startEvent(10002)
+        else
+            player:setPos(-12.92, 7.99, 36.17, 64)
+        end
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10010 then
         player:setPos(0, 0, 0, 0, 223)
     elseif csid == 10011 then
@@ -81,4 +101,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

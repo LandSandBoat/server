@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Frescheque
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
@@ -9,7 +8,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(151)
 end
 
 entity.onEventUpdate = function(player, csid, option)

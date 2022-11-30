@@ -12,7 +12,7 @@ entity.onTrigger = function(player, npc)
     local lever = npc:getID()
 
     npc:openDoor(2) -- Lever animation
-    if (GetNPCByID(lever - 6):getAnimation() == 9) then
+    if GetNPCByID(lever - 6):getAnimation() == 9 then
         GetNPCByID(lever - 7):setAnimation(9) --close door C
         GetNPCByID(lever - 6):setAnimation(8) --open door B
         GetNPCByID(lever - 5):setAnimation(9) --close door A

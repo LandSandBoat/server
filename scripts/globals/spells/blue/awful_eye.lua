@@ -17,17 +17,16 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-
-    if (target:hasStatusEffect(xi.effect.STR_DOWN)) then
+spellObject.onSpellCast = function(caster, target, spell)
+    if target:hasStatusEffect(xi.effect.STR_DOWN) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    elseif (target:isFacing(caster)) then
+    elseif target:isFacing(caster) then
         -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
@@ -35,12 +34,12 @@ spell_object.onSpellCast = function(caster, target, spell)
         params.skillType = xi.skill.BLUE_MAGIC
         params.bonus = 0
         params.effect = nil
-        local resist = applyResistance(caster, target, spell, params)
-        if (resist <= 0) then
+        local resist = xi.magic.applyResistance(caster, target, spell, params)
+        if resist <= 0 then
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ERASE)
-            target:addStatusEffect(xi.effect.STR_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT*resist, xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT*xi.settings.main.ABSORB_SPELL_TICK) -- target loses STR
+            target:addStatusEffect(xi.effect.STR_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT * resist, xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK) -- target loses STR
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
@@ -49,4 +48,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.STR_DOWN
 end
 
-return spell_object
+return spellObject

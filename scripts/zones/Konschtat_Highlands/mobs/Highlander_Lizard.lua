@@ -18,7 +18,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 206)
     -- I think he still counts the FoV pages? Most NM's do not though.
     xi.regime.checkRegime(player, mob, 20, 2, xi.regime.type.FIELDS)
@@ -27,8 +27,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(1200, 1800)) -- 20~30 min repop
+    xi.mob.nmTODPersist(mob, math.random(1200, 1800)) -- 20~30 min repop
 end
 
 return entity

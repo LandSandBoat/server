@@ -18,13 +18,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.SLOW
     -- local dINT = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
     local params = {}
@@ -33,7 +33,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = typeEffect
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     local duration = 90 * resist
     local power = 2500
 
@@ -50,4 +50,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return typeEffect
 end
 
-return spell_object
+return spellObject

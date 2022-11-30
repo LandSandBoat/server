@@ -142,6 +142,13 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                     ref<uint32>(0x34) = PChar->m_FieldChocobo;
                     ref<uint16>(0x44) = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED)->GetPower() << 4;
                 }
+
+                if (false /*Replace false with test that says "This PChar is in a zone with zone-wide alliances, e.g. Old-Style Dynamis, Einherjar(?), etc."*/)
+                {
+                    // Enable the full-size treasure menu + other things for Old-Style Dynamis.
+                    // All claimed mobs show up as red, not purple, etc.
+                    ref<uint8>(0x20) |= 0x08;
+                }
             }
 
             if (PChar->PPet != nullptr)
@@ -188,8 +195,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
 
             if (updatemask & UPDATE_NAME)
             {
-                std::string name = (const char*)PChar->GetName();
-                memcpy(data + (0x5A), name.c_str(), name.size());
+                memcpy(data + (0x5A), PChar->GetName().c_str(), PChar->GetName().size());
             }
         }
         break;

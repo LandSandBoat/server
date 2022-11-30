@@ -27,7 +27,7 @@ end
 entity.onMobRoam = function(mob)
     local ph = mob:getID()
     local nm = GetMobByID(ph + 1)
-    if (not nm:isSpawned() and os.time() > nm:getLocalVar("timeToGrow")) then
+    if not nm:isSpawned() and os.time() > nm:getLocalVar("timeToGrow") then
         local phIndex = mob:getLocalVar("phIndex")
         local p = mob:getPos()
         DisallowRespawn(ph, true)
@@ -41,12 +41,12 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
     local phIndex = mob:getLocalVar("phIndex")
-    if (phIndex ~= 0) then
+    if phIndex ~= 0 then
         mob:setLocalVar("phIndex", 0)
         DisallowRespawn(mob:getID(), true)
         DisallowRespawn(phIndex, false)

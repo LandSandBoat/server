@@ -7,19 +7,17 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-ability_object.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 60 + bonusTime
-
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local duration = math.min(30 + xi.summon.getSummoningSkillOverCap(pet), 180)
     target:addStatusEffect(xi.effect.WARCRY, 9, 0, duration)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     return xi.effect.WARCRY
 end
 
-return ability_object
+return abilityObject

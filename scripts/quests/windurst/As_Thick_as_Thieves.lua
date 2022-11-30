@@ -228,7 +228,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     -- NOTE: 'Prog' questVar is only used for the gambling phase of this quest.  All other tracking utilizes
                     -- key items obtained.
-                    local questProgress = quest:getVar(player ,'Prog')
+                    local questProgress = quest:getVar(player, 'Prog')
                     local rand1 = math.random(1, 999)
                     local rand2 = math.random(1, 999)
 
@@ -266,7 +266,7 @@ quest.sections =
         {
             ['Gambilox_Wanderling'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 4 then
                         quest:setVar(player, 'Prog', 5)
                     end

@@ -11,19 +11,21 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
+    elseif player:isExceedingElementalCapacity() then
+        return xi.msg.basic.AUTO_EXCEEDS_CAPACITY, 0
     else
         return 0, 0
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     xi.pet.spawnPet(player, xi.pet.id.AUTOMATON)
 
     local pet = player:getPet()
@@ -34,4 +36,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

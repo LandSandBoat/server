@@ -66,8 +66,8 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
             PAHHistory->Price = sql->GetUIntData(0);
             PAHHistory->Data  = sql->GetUIntData(1);
 
-            snprintf((char*)PAHHistory->Name1, 15, "%s", sql->GetData(2));
-            snprintf((char*)PAHHistory->Name2, 15, "%s", sql->GetData(3));
+            PAHHistory->Name1 = sql->GetStringData(2);
+            PAHHistory->Name2 = sql->GetStringData(3);
 
             HistoryList.push_back(PAHHistory);
         }
@@ -215,10 +215,9 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         int visibleResults = 0; // capped at first 20
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            SearchEntity* PPlayer = new SearchEntity;
-            memset(PPlayer, 0, sizeof(SearchEntity));
+            SearchEntity* PPlayer = new SearchEntity();
 
-            memcpy(PPlayer->name, sql->GetData(2), 15);
+            PPlayer->name = sql->GetStringData(2);
 
             PPlayer->id       = sql->GetUIntData(0);
             PPlayer->zone     = (uint16)sql->GetIntData(3);
@@ -275,6 +274,12 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             }
 
             PPlayer->flags2 = PPlayer->flags1;
+
+            // dont show anon in results if seraching by job, nation,  race, rank, lvl
+            if ((nameflag & FLAG_ANON) && (sr.jobid > 0 || sr.nation != 255 || sr.race != 255 || sr.minRank > 0 || sr.maxRank > 0 || sr.minlvl > 0 || sr.maxlvl > 0))
+            {
+                continue;
+            }
 
             // filter by job
             if (sr.jobid > 0 && sr.jobid != PPlayer->mjob)
@@ -346,7 +351,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             if (sr.nameLen > 0)
             {
                 std::string dbname;
-                dbname.insert(0, (char*)PPlayer->name);
+                dbname.insert(0, PPlayer->name);
 
                 // can't be this name, too long
                 if (sr.nameLen > dbname.length())
@@ -429,11 +434,9 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            SearchEntity* PPlayer = new SearchEntity;
-            memset(PPlayer, 0, sizeof(SearchEntity));
+            SearchEntity* PPlayer = new SearchEntity();
 
-            memcpy(PPlayer->name, sql->GetData(2), 15);
-
+            PPlayer->name        = sql->GetStringData(2);
             PPlayer->id          = sql->GetUIntData(0);
             PPlayer->zone        = (uint16)sql->GetIntData(3);
             PPlayer->nation      = (uint8)sql->GetIntData(4);
@@ -518,11 +521,9 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            SearchEntity* PPlayer = new SearchEntity;
-            memset(PPlayer, 0, sizeof(SearchEntity));
+            SearchEntity* PPlayer = new SearchEntity();
 
-            memcpy(PPlayer->name, sql->GetData(2), 15);
-
+            PPlayer->name           = sql->GetStringData(2);
             PPlayer->id             = sql->GetUIntData(0);
             PPlayer->zone           = (uint16)sql->GetIntData(3);
             PPlayer->nation         = (uint8)sql->GetIntData(4);
@@ -584,7 +585,7 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
         return std::string();
     }
 
-    return std::string((const char*)sql->GetData(0));
+    return sql->GetStringData(0);
 }
 
 struct ListingToExpire

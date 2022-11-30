@@ -107,10 +107,10 @@ quest.sections =
                 [355] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         -- Note: Message display for gil reward is handled by the event
-                        player:confirmTrade()
-                        player:addGil(900)
                         player:setLocalVar('Quest[2][17]mustZone', 1)
                         quest:setMustZone(player)
+                        player:confirmTrade()
+                        player:addGil(900)
                     end
                 end,
             },
@@ -174,10 +174,10 @@ quest.sections =
 
                 [355] = function(player, csid, option, npc)
                     -- Note: Message display for gil reward is handled by the event
+                    quest:setVar(player, "waterRepeat", 0)
+                    quest:setMustZone(player)
                     player:confirmTrade()
                     player:addGil(900)
-                    quest:setMustZone(player)
-                    quest:setVar(player, "waterRepeat", 0)
                 end,
             },
         },

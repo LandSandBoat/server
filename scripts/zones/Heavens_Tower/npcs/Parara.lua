@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heaven's Tower
 --  NPC: Parara
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

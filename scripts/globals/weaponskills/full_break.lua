@@ -19,37 +19,64 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
     params.str_wsc = 0.5 params.dex_wsc = 0.0 params.vit_wsc = 0.5 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    params.acc100 = 1 params.acc200 = 1 params.acc300 = 1
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
-    if (damage > 0) then
-        local duration = (tp/1000 * 30) + 60
-        if (target:hasStatusEffect(xi.effect.DEFENSE_DOWN) == false) then
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffectWS(player, target, xi.magic.ele.WIND, 0))
-        end
-        if (target:hasStatusEffect(xi.effect.ATTACK_DOWN) == false) then
-            target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffectWS(player, target, xi.magic.ele.WATER, 0))
-        end
-        if (target:hasStatusEffect(xi.effect.EVASION_DOWN) == false) then
-            target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffectWS(player, target, xi.magic.ele.ICE, 0))
-        end
-        if (target:hasStatusEffect(xi.effect.ACCURACY_DOWN) == false) then
-            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffectWS(player, target, xi.magic.ele.EARTH, 0))
-        end
+    local effectParams = {}
+    effectParams.element = xi.magic.ele.WIND
+    effectParams.effect = xi.effect.DEFENSE_DOWN
+    effectParams.skillType = xi.skill.GREAT_AXE
+    effectParams.duration = (tp / 1000 * 30) + 60
+    effectParams.power = 12.5
+    effectParams.tick = 0
+    effectParams.maccBonus = 0
+
+    local effectParams2 = {}
+    effectParams2.element = xi.magic.ele.WATER
+    effectParams2.effect = xi.effect.ATTACK_DOWN
+    effectParams2.skillType = xi.skill.GREAT_AXE
+    effectParams2.duration = (tp / 1000 * 30) + 60
+    effectParams2.power = 12.5
+    effectParams2.tick = 0
+    effectParams2.maccBonus = 0
+
+    local effectParams3 = {}
+    effectParams3.element = xi.magic.ele.ICE
+    effectParams3.effect = xi.effect.EVASION_DOWN
+    effectParams3.skillType = xi.skill.GREAT_AXE
+    effectParams3.duration = (tp / 1000 * 30) + 60
+    effectParams3.power = 20
+    effectParams3.tick = 0
+    effectParams3.maccBonus = 0
+
+    local effectParams4 = {}
+    effectParams4.element = xi.magic.ele.EARTH
+    effectParams4.effect = xi.effect.ACCURACY_DOWN
+    effectParams4.skillType = xi.skill.GREAT_AXE
+    effectParams4.duration = (tp / 1000 * 30) + 60
+    effectParams4.power = 20
+    effectParams4.tick = 0
+    effectParams4.maccBonus = 0
+
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    if damage > 0 then
+        xi.magic.applyAbilityResistance(player, target, effectParams)
+        xi.magic.applyAbilityResistance(player, target, effectParams2)
+        xi.magic.applyAbilityResistance(player, target, effectParams3)
+        xi.magic.applyAbilityResistance(player, target, effectParams4)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

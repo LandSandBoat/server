@@ -66,7 +66,7 @@ quest.sections =
 
             ['Arcane_Phantasm'] =
             {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVar(player, 'Prog', 4)
                     end
@@ -78,6 +78,7 @@ quest.sections =
                 [102] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
+
                 [103] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.keyItem.ORNAMENTED_SCROLL)

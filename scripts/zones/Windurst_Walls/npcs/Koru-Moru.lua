@@ -14,47 +14,27 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local qStarStruck = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
     local count = trade:getItemCount()
 
-    if trade:hasItemQty(544, 1) and count == 1 and trade:getGil() == 0 then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
-            if player:getCharVar("QuestMakingTheGrade_prog") == 1 then
-                player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
-            else
-                player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
-            end
-        end
-    elseif trade:hasItemQty(584, 1) and count == 1 and trade:getGil() == 0 then
-        player:startEvent(199)
-    elseif qStarStruck == QUEST_ACCEPTED and trade:hasItemQty(582, 1) and count == 1 and trade:getGil() == 0 then
-        player:startEvent(211)
-    elseif trade:hasItemQty(16511, 1) and count == 1 and trade:getGil() == 0 then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED then
-            player:startEvent(224) -- Complete quest!
-        else
-            player:startEvent(225) -- not the shell
-        end
-    elseif trade:hasItemQty(829, 1) and count == 1 and trade:getGil() == 0 then
+    if trade:hasItemQty(829, 1) and count == 1 and trade:getGil() == 0 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED then
             player:startEvent(349)
             player:tradeComplete()
             player:setCharVar("rootProblem", 2)
         end
     elseif trade:hasItemQty(17299, 4) and count == 4 and trade:getGil() == 0 then -- trade:getItemCount() is apparently checking total of all 8 slots combined. Could have sworn that wasn't how it worked before.
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") == 2 then
+        if
+            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
+            player:getCharVar("ClassReunionProgress") == 2
+        then
             player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local qStarStruck = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
-    local blastFromPast = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
-    local blastProg = player:getCharVar("BlastFromThePast_Prog")
     local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
     local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-    local thePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
     local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
     local classReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk1 = player:getCharVar("ClassReunion_TalkedToFupepe")
@@ -62,30 +42,13 @@ entity.onTrigger = function(player, npc)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    if blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and player:needToZone() == false then
-        player:startEvent(214)
-    elseif blastFromPast == QUEST_ACCEPTED and blastProg >= 2 then
-        player:startEvent(215)
-    elseif blastFromPast == QUEST_ACCEPTED then
-        player:startEvent(216)
-    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
-        local makingGradeProg = player:getCharVar("QuestMakingTheGrade_prog")
-        if makingGradeProg == 0 and player:hasItem(544) then
-            player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
-        elseif makingGradeProg == 1 then
-            player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
-        elseif makingGradeProg >= 2 then
-            player:startEvent(286) -- MAKING THE GRADE: Reminder to go away
-        else
-            player:startEvent(193)
-        end
-    elseif qStarStruck == QUEST_ACCEPTED then
-        player:startEvent(198)
-    elseif qStarStruck == QUEST_AVAILABLE and classReunion ~= QUEST_ACCEPTED and player:hasItem(584) then
-        player:startEvent(197)
     -----------------------------------
     -- Carbuncle Debacle
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 1 or carbuncleDebacleProgress == 2 then
+    if
+        carbuncleDebacle == QUEST_ACCEPTED and
+        carbuncleDebacleProgress == 1 or
+        carbuncleDebacleProgress == 2
+    then
         player:startEvent(416) -- go and see Ripapa
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 4 then
         player:startEvent(417) -- now go and see Agado-Pugado
@@ -93,7 +56,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(418) -- Uran-Mafran must be stopped
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 7 then
         player:startEvent(419) -- ending cs
-    elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED and carbuncleDebacle == QUEST_COMPLETED then
+    elseif
+        thePuppetMaster == QUEST_COMPLETED and
+        classReunion == QUEST_COMPLETED and
+        carbuncleDebacle == QUEST_COMPLETED
+    then
         player:startEvent(420) -- new cs after all 3 SMN AFs done
     -----------------------------------
     -- Class Reunion
@@ -101,27 +68,24 @@ entity.onTrigger = function(player, npc)
         player:startEvent(412, 0, 450, 17299, 0, 0, 0, 0, 0) -- bring Koru 4 astragaloi
     elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 2 then
         player:startEvent(414, 0, 0, 17299, 0, 0, 0, 0, 0) -- reminder to bring 4 astragaloi
-    elseif classReunion == QUEST_ACCEPTED and classReunionProgress >= 3 and (talk1 ~= 1 or talk2 ~= 1) then
+    elseif
+        classReunion == QUEST_ACCEPTED and
+        classReunionProgress >= 3 and
+        (talk1 ~= 1 or talk2 ~= 1)
+    then
         player:startEvent(408) -- reminder to visit the students
-    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 6 and talk1 == 1 and talk2 == 1 then
+    elseif
+        classReunion == QUEST_ACCEPTED and
+        classReunionProgress == 6 and
+        talk1 == 1 and
+        talk2 == 1
+    then
             player:startEvent(410) -- ending cs
     elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
-    -- The Puppet Master
-    elseif thePuppetMaster == QUEST_ACCEPTED and thePuppetMasterProgress == 4 then
-        player:startEvent(404) -- ending cs
-    elseif thePuppetMaster == QUEST_COMPLETED and classReunion ~= 2 then
-        player:startEvent(405) -- new cs after completed AF1
-    -----------------------------------
     elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then
         player:startEvent(348, 0, 829)
-    else
-        if qStarStruck == QUEST_COMPLETED then
-            player:startEvent(213)
-        else
-            player:startEvent(193)
-        end
     end
 end
 
@@ -129,47 +93,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 285 then  -- Giving him KI from Principle
-        player:tradeComplete()
-        player:addKeyItem(xi.ki.TATTERED_TEST_SHEET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TATTERED_TEST_SHEET)
-        player:setCharVar("QuestMakingTheGrade_prog", 2)
-    elseif csid == 211 then
-        player:tradeComplete()
-        player:addItem(12502)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 12502)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
-        player:needToZone(true)
-        player:addFame(xi.quest.fame_area.WINDURST, 20)
-    elseif csid == 199 then
-        player:tradeComplete()
-        player:messageSpecial(ID.text.GIL_OBTAINED, 50)
-        player:addGil(50)
-    elseif csid == 197 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
-    elseif csid == 214 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
-    elseif csid == 224 then
-        player:tradeComplete()
-        player:setCharVar("BlastFromThePast_Prog", 0)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
-        player:addItem(17030)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 17030)
-        player:addTitle(xi.title.FOSSILIZED_SEA_FARER)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
-        player:needToZone(true)
-    elseif csid == 404 then
-        if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(17532)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17532)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-            player:setCharVar("ThePuppetMasterProgress", 0)
-            player:needToZone(true)
-            player:addFame(xi.quest.fame_area.WINDURST, 20)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17532)
-        end
-    elseif csid == 412 then
+    if csid == 412 then
         player:delKeyItem(xi.ki.CARBUNCLES_TEAR)
         player:setCharVar("ClassReunionProgress", 2)
     elseif csid == 407 then

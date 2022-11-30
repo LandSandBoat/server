@@ -9,23 +9,23 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
-    if (mobSkin == 421) then
+    if mobSkin == 421 then
         return 0
     else
         return 1
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
 
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, 30))
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

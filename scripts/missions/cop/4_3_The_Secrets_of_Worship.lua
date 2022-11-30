@@ -32,6 +32,7 @@ local profQmOnTrigger = function(player, npc)
         for i = 1, 2 do
             GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE + i):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
         end
+
         npcUtil.popFromQM(player, npc, sacrariumID.mob.OLD_PROFESSOR_MARISELLE, { radius = 2, hide = 0 })
         return mission:messageSpecial(sacrariumID.text.EVIL_PRESENCE)
     elseif
@@ -152,7 +153,7 @@ mission.sections =
 
             ['Old_Professor_Mariselle'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 3 then
                         mission:setLocalVar(player, 'hasKilled', 1)
                     end

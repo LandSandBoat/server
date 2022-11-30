@@ -26,13 +26,13 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- also have small constant to account for 0 dark skill
     local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 165)
     -- get resist multiplier (1x if no resist)
@@ -41,27 +41,27 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     -- get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     -- add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = xi.magic.addBonuses(caster, spell, target, dmg)
     -- add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     -- add in final adjustments
 
-    if (dmg < 0) then
+    if dmg < 0 then
         dmg = 0
     end
 
     dmg = dmg * xi.settings.main.BLUE_POWER
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end
 
-    if (target:getMP() > dmg) then
+    if target:getMP() > dmg then
         caster:addMP(dmg)
         target:delMP(dmg)
     else
@@ -73,4 +73,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

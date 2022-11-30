@@ -9,14 +9,14 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
 
     local regenbonus = 0
     if player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20 then
@@ -36,9 +36,9 @@ ability_object.onUseAbility = function(player, target, ability)
     player:resetRecast(xi.recast.ABILITY, 228)
     player:resetRecast(xi.recast.ABILITY, 231)
     player:resetRecast(xi.recast.ABILITY, 232)
-    player:addStatusEffect(xi.effect.TABULA_RASA, math.floor(helixbonus*1.5), 0, 180, 0, math.floor(regenbonus*1.5))
+    player:addStatusEffect(xi.effect.TABULA_RASA, math.floor(helixbonus * 1.5), 0, 180, 0, math.floor(regenbonus * 1.5))
 
     return xi.effect.TABULA_RASA
 end
 
-return ability_object
+return abilityObject

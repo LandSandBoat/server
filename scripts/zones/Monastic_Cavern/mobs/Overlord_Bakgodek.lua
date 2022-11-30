@@ -24,9 +24,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 35, power = math.random(95, 135) })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.OVERLORD_OVERTHROWER)
-    if isKiller then
+    if optParams.isKiller then
         mob:showText(mob, ID.text.ORC_KING_DEATH)
     end
 end
@@ -38,8 +38,7 @@ entity.onMobDespawn = function(mob)
     SetServerVariable("[PH]Overlord_Bakgodek", 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)
-    UpdateNMSpawnPoint(nqId)
-    GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+    xi.mob.nmTODPersist(GetMobByID(nqId), math.random(75600, 86400))
 end
 
 return entity

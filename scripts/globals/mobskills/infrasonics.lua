@@ -6,18 +6,19 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.EVASION_DOWN
+    local evasion   = target:getStat(xi.mod.EVA) * 0.25
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, evasion, 0, 120))
 
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

@@ -38,6 +38,12 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         NO_COMBINATION                = 7581, -- You were unable to enter a combination.
         UNITY_WANTED_BATTLE_INTERACT  = 7643, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9942, -- New training regime registered!
+        SMILEBRINGER_START            = 11109, -- So, are you ready-steady? Beginner level training...GO! Come on, pump those legs like there's no tomorrow!
+        SMILEHELPER_IDLE              = 11137, -- This is a checkpointaru for the Smilebringer Boot camp. To learny-wearn more, please speak with the smile sergeant posted by the town entrance.
+        SMILEHELPER_CHECKPOINT_1      = 11131, -- Checkpoint <number> cleared, Elasped time: [minutes], [seconds]
+        SMILEHELPER_CHECKPOINT_2      = 11132, -- Checkpoint <number> cleared! You gain the effect of Flee. Elasped time: [minutes], [seconds]
+        SMILEHELPER_ALREADY_VISITED   = 11133, -- You have already cleared this checkpoint. Elapsed time: [minutes], [seconds]
+        SMILEHELPER_POINTS_CLEARED    = 11135, -- All checkpoints cleared! Please report back to the smile sergeant in charge.
     },
     mob =
     {
@@ -56,6 +62,23 @@ zones[xi.zone.EAST_SARUTABARUTA] =
     },
     npc =
     {
+        STARLIGHT_DECORATIONS =
+        {
+            [17253113] = 17253113,  -- Whispering Tortoise (Smilebringer Bootcamp Sergeant)
+        },
+        SMILE_HELPERS =
+        {
+            [17253114] = 17253114,  -- Smile Helper
+            [17253115] = 17253115,  -- Smile Helper
+            [17253116] = 17253116,  -- Smile Helper
+            [17253117] = 17253117,  -- Smile Helper
+            [17253118] = 17253114,  -- Smile Helper
+            [17253119] = 17253119,  -- Smile Helper
+            [17253120] = 17253120,  -- Smile Helper
+            [17253121] = 17253121,  -- Smile Helper
+            [17253122] = 17253122,  -- Smile Helper
+            [17253123] = 17253123,  -- Smile Helper
+        },
     },
 }
 

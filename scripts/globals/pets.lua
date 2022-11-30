@@ -3,6 +3,9 @@
 --  PETS ID
 --
 -----------------------------------
+require("scripts/globals/nyzul")
+require("scripts/globals/zone")
+
 xi = xi or {}
 xi.pet = xi.pet or {}
 
@@ -376,7 +379,7 @@ xi.pet.name =
     ROBIN         = 277,
     ROBBY         = 278,
     PORLO_MOPERLO = 279,
-    PAROKO_PURONKO= 280,
+    PAROKO_PURONKO = 280,
     PIPIMA        = 281,
     GAGAJA        = 282,
     MOBIL         = 283,
@@ -1226,15 +1229,25 @@ xi.pet.name =
 }
 
 function xi.pet.spawnPet(player, petID)
-    local effect = xi.effect.DEBILITATION
-
     player:spawnPet(petID)
 
-    if player:hasStatusEffect(effect) then
+    -- Nyzul Isle has Pathos set randomly on floors and is recorded as bits in a localvar of the instance
+    if player:getZoneID() == xi.zone.NYZUL_ISLE then
         local pet = player:getPet()
-        local statusEffect = player:getStatusEffect(effect)
-        local power = statusEffect:getPower()
-        local duration = math.floor(statusEffect:getTimeRemaining()/1000)
-        pet:addStatusEffectEx(effect, effect, power, 0, duration)
+        local instance = player:getInstance()
+        local floorPathos = instance:getLocalVar("floorPathos")
+
+        for i = 1, 29 do
+            if utils.mask.getBit(floorPathos, i) then
+                local pathos = xi.nyzul.pathos[i]
+                local effect = pathos.effect
+                local power = pathos.power
+
+                pet:addStatusEffectEx(effect, effect, power, 0, 0)
+                pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+            end
+        end
     end
 end

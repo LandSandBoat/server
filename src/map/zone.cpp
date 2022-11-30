@@ -23,10 +23,10 @@
 // нужно разделить класс czone на базовый и наследников. уже нарисовались: Standard, Rezident, Instance и Dinamis
 // у каждой из указанных зон особое поведение
 
-#include "../common/logging.h"
-#include "../common/socket.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <cstring>
 
@@ -80,18 +80,18 @@ int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
     return 0;
 }
 
-int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
+int32 zone_server_trigger_area(time_point tick, CTaskMgr::CTask* PTask)
 {
     CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
 
-    if ((tick - PZone->m_RegionCheckTime) < 800ms)
+    if ((tick - PZone->m_TriggerAreaCheckTime) < 800ms)
     {
         PZone->ZoneServer(tick, false);
     }
     else
     {
         PZone->ZoneServer(tick, true);
-        PZone->m_RegionCheckTime = tick;
+        PZone->m_TriggerAreaCheckTime = tick;
     }
     return 0;
 }
@@ -127,11 +127,12 @@ const uint16 CZone::ReducedVerticalAggroZones[] = {
  *                                                                       *
  ************************************************************************/
 
-CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
+CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
 , m_zoneType(ZONE_TYPE::NONE)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
+, m_levelRestriction(levelRestriction)
 {
     TracyZoneScoped;
     m_useNavMesh = false;
@@ -192,6 +193,11 @@ CONTINENT_TYPE CZone::GetContinentID()
     return m_continentID;
 }
 
+uint8 CZone::getLevelRestriction()
+{
+    return m_levelRestriction;
+}
+
 uint32 CZone::GetIP() const
 {
     return m_zoneIP;
@@ -217,9 +223,9 @@ uint32 CZone::GetWeatherChangeTime() const
     return m_WeatherChangeTime;
 }
 
-const int8* CZone::GetName()
+const std::string& CZone::GetName()
 {
-    return (const int8*)m_zoneName.c_str();
+    return m_zoneName;
 }
 
 uint8 CZone::GetSoloBattleMusic() const
@@ -262,12 +268,19 @@ void CZone::SetBackgroundMusicNight(uint8 music)
     m_zoneMusic.m_songNight = music;
 }
 
-const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
+/**
+ * Queries for entities (mobs or npcs) which name match the given pattern.
+ *
+ * @param pattern The pattern used to match the entity name. We use % as wildcard for consistency
+ * with other methods that perform pattern matching.
+ * E.g: %anto% matches Shantotto and Canto-anto
+ */
+QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern)
 {
     TracyZoneScoped;
 
     // Use memoization since lookups are typically for the same mob names
-    auto result = m_queryByNameResults.find(name);
+    auto result = m_queryByNameResults.find(pattern);
     if (result != m_queryByNameResults.end())
     {
         return result->second;
@@ -279,7 +292,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (std::string((const char*)PNpc->GetName()) == name)
+        if (matches(PNpc->GetName(), pattern))
         {
             entities.push_back(PNpc);
         }
@@ -287,15 +300,15 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (std::string((const char*)PMob->GetName()) == name)
+        if (matches(PMob->GetName(), pattern))
         {
             entities.push_back(PMob);
         }
      });
     // clang-format on
 
-    m_queryByNameResults[name] = std::move(entities);
-    return m_queryByNameResults[name];
+    m_queryByNameResults[pattern] = std::move(entities);
+    return m_queryByNameResults[pattern];
 }
 
 uint32 CZone::GetLocalVar(const char* var)
@@ -479,7 +492,7 @@ void CZone::LoadNavMesh()
 
     char file[255];
     memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName());
+    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName().c_str());
 
     if (!m_navMesh->load(file))
     {
@@ -545,15 +558,15 @@ void CZone::DeleteTRUST(CBaseEntity* PTrust)
 
 /************************************************************************
  *                                                                       *
- *  Добавляем в зону активную область                                    *
+ *  Add a trigger area to the zone                                       *
  *                                                                       *
  ************************************************************************/
 
-void CZone::InsertRegion(CRegion* Region)
+void CZone::InsertTriggerArea(CTriggerArea* triggerArea)
 {
-    if (Region != nullptr)
+    if (triggerArea != nullptr)
     {
-        m_regionList.push_back(Region);
+        m_triggerAreaList.emplace_back(triggerArea);
     }
 }
 
@@ -579,6 +592,26 @@ void CZone::FindPartyForMob(CBaseEntity* PEntity)
 void CZone::TransportDepart(uint16 boundary, uint16 zone)
 {
     m_zoneEntities->TransportDepart(boundary, zone);
+}
+
+void CZone::updateCharLevelRestriction(CCharEntity* PChar)
+{
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION))
+    {
+        // If the level restriction is already the same then no need to change it
+        CStatusEffect* statusEffect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_RESTRICTION);
+        if (statusEffect->GetPower() == m_levelRestriction)
+        {
+            return;
+        }
+
+        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+    }
+
+    if (m_levelRestriction != 0)
+    {
+        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, m_levelRestriction, 0, 0));
+    }
 }
 
 void CZone::SetWeather(WEATHER weather)
@@ -666,8 +699,6 @@ void CZone::UpdateWeather()
     SetWeather((WEATHER)Weather);
     luautils::OnZoneWeatherChange(GetID(), Weather);
 
-    // ShowDebug(CL_YELLOW"Zone::zone_update_weather: Weather of %s updated to %u", PZone->GetName(), Weather);
-
     CTaskMgr::getInstance()->AddTask(new CTaskMgr::CTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this,
                                                          CTaskMgr::TASK_ONCE, zone_update_weather));
 }
@@ -728,6 +759,8 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     {
         createZoneTimer();
     }
+
+    PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE_PATHOS, true);
 
     CharZoneIn(PChar);
 }
@@ -840,7 +873,7 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-CCharEntity* CZone::GetCharByName(int8* name)
+CCharEntity* CZone::GetCharByName(std::string name)
 {
     return m_zoneEntities->GetCharByName(name);
 }
@@ -893,10 +926,10 @@ void CZone::WideScan(CCharEntity* PChar, uint16 radius)
  *                                                                       *
  ************************************************************************/
 
-void CZone::ZoneServer(time_point tick, bool check_regions)
+void CZone::ZoneServer(time_point tick, bool checkTriggerAreas)
 {
     TracyZoneScoped;
-    m_zoneEntities->ZoneServer(tick, check_regions);
+    m_zoneEntities->ZoneServer(tick, checkTriggerAreas);
 
     if (m_BattlefieldHandler != nullptr)
     {
@@ -985,7 +1018,7 @@ void CZone::createZoneTimer()
     TracyZoneScoped;
     ZoneTimer =
         CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
-                                         m_regionList.empty() ? zone_server : zone_server_region,
+                                         m_triggerAreaList.empty() ? zone_server : zone_server_trigger_area,
                                          std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
 }
 
@@ -994,10 +1027,10 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     TracyZoneScoped;
     // ищем свободный targid для входящего в зону персонажа
 
-    PChar->loc.zone         = this;
-    PChar->loc.zoning       = false;
-    PChar->loc.destination  = 0;
-    PChar->m_InsideRegionID = 0;
+    PChar->loc.zone              = this;
+    PChar->loc.zoning            = false;
+    PChar->loc.destination       = 0;
+    PChar->m_InsideTriggerAreaID = 0;
 
     if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
     {
@@ -1039,15 +1072,47 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     if (m_BattlefieldHandler)
     {
-        if (auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true))
+        auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
+        if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            PBattlefield->InsertEntity(PChar, true);
+            bool isEntered = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1;
+            PBattlefield->InsertEntity(PChar, isEntered);
+        }
+        else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+        {
+            // Player is in a zone with a battlefield but they are not part of one.
+            if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1)
+            {
+                // If inside of the battlefield arena then kick them out
+                // Battlefield and level restriction effects will be removed once fully kicked.
+                m_BattlefieldHandler->addOrphanedPlayer(PChar);
+            }
+            else
+            {
+                // Is not inside of a battlefield arena so remove the battlefield effect
+                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+                updateCharLevelRestriction(PChar);
+                if (PChar->PPet)
+                {
+                    PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+                }
+            }
+        }
+    }
+    else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+    {
+        // Player is zoning into a zone that does not have a battlefield but the player has a confrontation effect - remove it
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+        if (PChar->PPet)
+        {
+            PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
         }
     }
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
+    charutils::ReadFishingHistory(PChar);
 
     moduleutils::OnCharZoneIn(PChar);
 }
@@ -1055,11 +1120,11 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 void CZone::CharZoneOut(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    for (regionList_t::const_iterator region = m_regionList.begin(); region != m_regionList.end(); ++region)
+    for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
     {
-        if ((*region)->GetRegionID() == PChar->m_InsideRegionID)
+        if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
         {
-            luautils::OnRegionLeave(PChar, *region);
+            luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
             break;
         }
     }
@@ -1157,6 +1222,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     }
 
     charutils::WriteHistory(PChar);
+    charutils::WriteFishingHistory(PChar);
 }
 
 bool CZone::IsZoneActive() const
@@ -1170,32 +1236,33 @@ CZoneEntities* CZone::GetZoneEntities()
     return m_zoneEntities;
 }
 
-void CZone::CheckRegions(CCharEntity* PChar)
+void CZone::CheckTriggerAreas(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    uint32 RegionID = 0;
+    uint32 triggerAreaID = 0;
 
-    for (regionList_t::const_iterator region = m_regionList.begin(); region != m_regionList.end(); ++region)
+    for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
     {
-        if ((*region)->isPointInside(PChar->loc.p))
+        if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
         {
-            RegionID = (*region)->GetRegionID();
+            triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
 
-            if ((*region)->GetRegionID() != PChar->m_InsideRegionID)
+            if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
             {
-                luautils::OnRegionEnter(PChar, *region);
+                luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
             }
-            if (PChar->m_InsideRegionID == 0)
+
+            if (PChar->m_InsideTriggerAreaID == 0)
             {
                 break;
             }
         }
-        else if ((*region)->GetRegionID() == PChar->m_InsideRegionID)
+        else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
         {
-            luautils::OnRegionLeave(PChar, *region);
+            luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
         }
     }
-    PChar->m_InsideRegionID = RegionID;
+    PChar->m_InsideTriggerAreaID = triggerAreaID;
 }
 
 //==========================================================

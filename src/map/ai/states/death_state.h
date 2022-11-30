@@ -49,10 +49,12 @@ public:
         return false;
     }
 
+    void allowSendRaise();
+
 private:
     CBattleEntity* const m_PEntity;
     duration             m_deathTime;
-    time_point           m_lastRaiseSent;
+    bool                 m_raiseSent = false;
     time_point           m_raiseTime;
 };
 

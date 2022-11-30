@@ -103,13 +103,15 @@ entity.onTrade = function(player, npc, trade)
                         player:messageSpecial(ID.text.NOKKHI_BAD_COUNT)
                         return
                     end
+
                     local stacks = itemQty / 99
                     carnationsNeeded = carnationsNeeded + stacks
-                    giveToPlayer[#giveToPlayer+1] = { v[2], stacks }
+                    giveToPlayer[#giveToPlayer + 1] = { v[2], stacks }
                     validSlot = true
                     break
                 end
             end
+
             if not validSlot then
                 player:messageSpecial(ID.text.NOKKHI_BAD_ITEM)
                 return
@@ -135,6 +137,7 @@ entity.onTrade = function(player, npc, trade)
         player:addItem(v[1], v[2])
         player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
     end
+
     player:tradeComplete()
 end
 

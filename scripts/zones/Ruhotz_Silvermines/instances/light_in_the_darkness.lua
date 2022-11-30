@@ -21,27 +21,27 @@ require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Ruhotz_Silvermines/IDs")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.registryRequirements = function(player)
+instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.MINE_SHAFT_KEY)
 end
 
-instance_object.entryRequirements = function(player)
+instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.MINE_SHAFT_KEY)
 end
 
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
     for i = 0, 9 do
         SpawnMob(ID.mob.SAPPHIRINE_QUADAV_OFFSET + i, instance)
     end
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     player:delKeyItem(xi.ki.MINE_SHAFT_KEY)
 
     local questStatus = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
@@ -55,7 +55,7 @@ instance_object.afterInstanceRegister = function(player)
     end
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     local deadCount = 0
     for i = 0, 9 do
         local mob = GetMobByID(ID.mob.SAPPHIRINE_QUADAV_OFFSET + i, instance)
@@ -69,29 +69,31 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     end
 end
 
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
         local questProgVar = v:getCharVar("Quest[7][19]Prog")
         if questProgVar == 4 then
             v:setCharVar("Quest[7][19]Prog", 7)
         end
+
         v:setPos(-385.602, 21.970, 456.359, 0, 90)
     end
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
         local questProgVar = v:getCharVar("Quest[7][19]Prog")
         if questProgVar == 4 or questProgVar == 7 then
             v:setCharVar("Quest[7][19]Prog", 5)
         end
+
         v:startEvent(10000)
     end
 end
 
-return instance_object
+return instanceObject

@@ -1,14 +1,15 @@
 -----------------------------------
 -- Bomb Toss - Suicide
 -- Throws a bomb at an enemy. Sometimes backfires.
+-- This needs to be set to do 1/3 of the mob's current HP.
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- notorious monsters shouldn't explode, nor dynamis
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or mob:isInDynamis() then
         return 1
@@ -17,11 +18,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local bombTossHPP = skill:getMobHPP() / 100
-    local power = math.random(12, 18)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*power*bombTossHPP, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local bombTossHPP = mob:getHP() * (1 / 3)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, bombTossHPP, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     mob:setHP(0)
@@ -29,4 +29,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

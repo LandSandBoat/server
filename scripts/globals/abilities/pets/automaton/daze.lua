@@ -6,14 +6,14 @@ require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.THUNDER_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local params =
     {
         numHits = 1,
@@ -45,7 +45,10 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
 
     if damage > 0 then
         local chance = 0.033 * skill:getTP()
-        if not target:hasStatusEffect(xi.effect.STUN) and chance >= math.random()*100 then
+        if
+            not target:hasStatusEffect(xi.effect.STUN) and
+            chance >= math.random() * 100
+        then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 4)
         end
     end
@@ -53,4 +56,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

@@ -5,25 +5,25 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
 
     -- Pull base stats.
-    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND)) --blind uses caster INT vs target MND
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND) --blind uses caster INT vs target MND
 
     -- Base power.  May need more research.
-    local power = math.floor(dINT * 9/40) + 23
+    local power = math.floor(dINT * 9 / 40) + 23
 
-    if (power < 5) then
+    if power < 5 then
         power = 5
     end
 
-    if (power > 50) then
+    if power > 50 then
         power = 50
     end
 
@@ -35,11 +35,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.BLINDNESS
-    duration = duration * applyResistanceEffect(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (duration >= 60) then --Do it!
+    if duration >= 60 then --Do it!
 
-        resduration = calculateBuildDuration(target, duration, params.effect, caster)
+        local resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
@@ -51,7 +51,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
+
     return xi.effect.BLINDNESS
 end
 
-return spell_object
+return spellObject

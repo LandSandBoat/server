@@ -146,7 +146,7 @@ quest.sections =
 
             ['Water_Leaper'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar('killed_wsnm', 1)
                 end,
             },

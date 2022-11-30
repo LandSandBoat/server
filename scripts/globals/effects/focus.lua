@@ -4,19 +4,19 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
-   local jpLevel = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
-   target:addMod(xi.mod.ACC, effect:getPower() + jpLevel)
+effectObject.onEffectGain = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
+    target:addMod(xi.mod.ACC, effect:getPower() + jpLevel)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
-   local jpLevel = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
-   target:delMod(xi.mod.ACC, effect:getPower() + jpLevel)
+effectObject.onEffectLose = function(target, effect)
+    local jpLevel = target:getJobPointLevel(xi.jp.FOCUS_EFFECT)
+    target:delMod(xi.mod.ACC, effect:getPower() + jpLevel)
 end
 
-return effect_object
+return effectObject

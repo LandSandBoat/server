@@ -8,7 +8,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -47, y = -4, z = -37 },
     { x = -49 },
@@ -49,7 +49,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
-    mob:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -60,7 +60,7 @@ entity.onMobDisengage = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 119, 2, xi.regime.type.FIELDS)
 end
 

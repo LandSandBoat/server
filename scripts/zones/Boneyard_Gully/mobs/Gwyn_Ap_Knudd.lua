@@ -13,7 +13,7 @@ entity.onMobEngaged = function(mob)
     mob:getBattlefield():setLocalVar("undeadControl", 1)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target, skill)
+entity.onMobWeaponSkillPrepare = function(mob, target)
     for i = 1, 3 do
         local undead = GetMobByID(mob:getID()+i)
         local ability = math.random(478, 479)
@@ -68,8 +68,8 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         for i = 1, 9 do
             local undead = GetMobByID(mob:getID()+i)
             undead:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NONE))

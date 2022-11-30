@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Letterare
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

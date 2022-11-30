@@ -154,7 +154,7 @@ mission.sections =
 
             ['Mokkurkalfi'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId) == 1 then
                         mission:setLocalVar(player, 'nmDefeated', 1)
                     end

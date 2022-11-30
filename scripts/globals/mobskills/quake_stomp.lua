@@ -11,22 +11,23 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-  if (mob:getFamily() == 91) then
-    local mobSkin = mob:getModelId()
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getFamily() == 91 then
+        local mobSkin = mob:getModelId()
 
-    if (mobSkin == 1680) then
-        return 0
-    else
-        return 1
+        if mobSkin == 1680 then
+            return 0
+        else
+            return 1
+        end
     end
-  end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 1
     local duration = 60
 
@@ -36,4 +37,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

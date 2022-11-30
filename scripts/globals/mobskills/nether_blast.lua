@@ -6,9 +6,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- Ranged attack only used when target is out of range
     if (mob:checkDistance(target) > 2) then
         return 0
@@ -17,12 +17,12 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = mob:getMainLvl() * 5 + 10 -- http://wiki.ffo.jp/html/4045.html
     local dmgmod = 1
     local ignoreres = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, dmg, xi.magic.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, ignoreres)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, dmg, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, ignoreres)
 
     dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
@@ -30,4 +30,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

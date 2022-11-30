@@ -9,23 +9,28 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getPet() == nil) then
+abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     end
 
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     local pet = player:getPet()
 
-    if (not pet:hasPreventActionEffect()) then
-        pet:addStatusEffectEx(xi.effect.HEALING, 0, 0, 10, 0)
+    if not pet:hasPreventActionEffect() then
+        local tick = 0
+        -- Pets gradually regaining HP out of combat added in ToAU.
+        if xi.settings.main.ENABLE_TOAU == 1 then
+            tick = 10
+        end
+        pet:addStatusEffectEx(xi.effect.HEALING, 0, 0, tick, 0)
         pet:setAnimation(0)
     end
 end
 
-return ability_object
+return abilityObject

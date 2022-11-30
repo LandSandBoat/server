@@ -24,21 +24,21 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
-                SpawnMob((m:getID() +1), instance)
+                SpawnMob((m:getID() + 1), instance)
             end)
         elseif not secondPet:isSpawned() then
             secondPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
-                SpawnMob((m:getID() +2), instance)
+                SpawnMob((m:getID() + 2), instance)
             end)
         elseif not thirdPet:isSpawned() then
             thirdPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
-                SpawnMob((m:getID() +3), instance)
+                SpawnMob((m:getID() + 3), instance)
             end)
         end
     end
@@ -56,7 +56,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

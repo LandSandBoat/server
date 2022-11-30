@@ -30,6 +30,9 @@ zones[xi.zone.PSOXJA] =
         DISCOVER_DISARM_FAIL          = 7253, -- <name> discovers a trap connected to the door, but fails to disarm it!
         DISCOVER_DISARM_SUCCESS       = 7254, -- <name> discovers a trap connected to the door and succeeds in disarming it!
         TRAP_ACTIVATED                = 7256, -- <name> examines the stone compartment. A trap connected to it has been activated!
+        TIGHTLY_LOCKED                = 7257, -- The stone compartment is tightly locked...
+        SHUT_TIGHTLY                  = 7259, -- The door is shut tightly.
+        PHOENIX_FADES                 = 7443, -- The <keyItem> fades into nothingness...
         CHEST_UNLOCKED                = 7474, -- You unlock the chest!
         BROKEN_KNIFE                  = 7482, -- A broken knife blade can be seen among the rubble...
         HOMEPOINT_SET                 = 7487, -- Home point set!
@@ -43,10 +46,27 @@ zones[xi.zone.PSOXJA] =
         GARGOYLE_OFFSET         = 16814081,
         NUNYUNUWI               = 16814361,
         GOLDEN_TONGUED_CULBERRY = 16814432,
+        BLUE_GARGOYLES          = 16814231,
+        GREEN_GARGOYLES         = 16814233,
     },
     npc =
     {
+        ROTATING_DOOR_OFFSET =
+        {
+            16814489,
+            16814490,
+            16814491,
+            16814492,
+            16814493,
+            16814494,
+            16814495,
+            16814496,
+            16814497,
+            16814498,
+        },
         STONE_DOOR_OFFSET          = 16814445, -- _090 in npc_list
+        BLUE_BRACELET_DOOR         = 16814499,
+        GREEN_BRACELET_DOOR        = 16814502,
         TREASURE_CHEST             = 16814557,
     },
 }

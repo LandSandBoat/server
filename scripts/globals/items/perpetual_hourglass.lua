@@ -8,9 +8,9 @@ require("scripts/globals/msg")
 require("scripts/globals/dynamis")
 -----------------------------------
 
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local targetZone = target:getZoneID()
     local zoneID = xi.dynamis.dynaInfoEra[targetZone].dynaZone
     local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zoneID))
@@ -29,7 +29,7 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local targetZone = target:getZoneID()
     local zoneID = xi.dynamis.dynaInfoEra[targetZone].dynaZone
     local zoneToken = GetServerVariable(string.format("[DYNA]Token_%s", zoneID))
@@ -38,4 +38,4 @@ item_object.onItemUse = function(target)
     target:duplicateHourglass(zoneID, zoneToken, zoneOriginalRegistrant) -- Duplicate the glass.
 end
 
-return item_object
+return itemObject

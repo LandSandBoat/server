@@ -8,13 +8,13 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local skillLvl = caster:getSkillLevel(xi.skill.DARK_MAGIC)
     local basedmg = skillLvl / 4
     local params = {}
@@ -27,23 +27,23 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.bonus = 1.0
 
     -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
+    local dmg = xi.magic.calculateMagicDamage(caster, target, spell, params)
     -- Softcaps at 62, should always do at least 1
     dmg = utils.clamp(dmg, 1, 62)
     -- Get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     -- Get the resisted damage
     dmg = dmg * resist
     -- Add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = xi.magic.addBonuses(caster, spell, target, dmg)
     -- Add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     -- Add in final adjustments including the actual damage dealt
-    local final = finalMagicAdjustments(caster, target, spell, dmg)
+    local final = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration
     local merits = caster:getMerit(xi.merit.BIO_III)
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = xi.magic.calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     -- Check for Dia
     local dia = target:getStatusEffect(xi.effect.DIA)
@@ -70,9 +70,9 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     -- Do it!
     if caster:isPC() then
-        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, merits, 0, 20, 3)
+        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, merits, 0, 15, 3)
     else
-        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 20, 3)
+        target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 15, 3)
     end
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
@@ -86,4 +86,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

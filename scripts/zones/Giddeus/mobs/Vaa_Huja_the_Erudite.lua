@@ -1,16 +1,21 @@
 -----------------------------------
 -- Area: Giddeus
 --   NM: Vaa Huja the Erudite
--- Involved in Quests: Dark Legacy
+-----------------------------------
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-    local darkLegacyCS = player:getCharVar("darkLegacyCS")
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.jsa.MANAFONT, chance = math.random(30,80) },
+        },
+    })
+end
 
-    if (darkLegacyCS == 3 or darkLegacyCS == 4) then
-        player:setCharVar("darkLegacyCS", 5)
-    end
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

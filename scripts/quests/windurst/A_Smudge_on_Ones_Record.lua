@@ -15,7 +15,6 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_
 
 quest.reward =
 {
-    xp = 2000,
     fame = 120,
     fameArea = xi.quest.fame_area.WINDURST,
     gil = 5000,

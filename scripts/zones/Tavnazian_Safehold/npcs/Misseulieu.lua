@@ -22,9 +22,9 @@ entity.onTrigger = function(player, npc)
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         stock =
         {
-            14317, 101055,  -- Barone Cosciales
-            15305, 630255,  -- Barone Gambieras
-            14848, 181905,  -- Barone Manopolas
+            14317, 4042200,  -- Barone Cosciales (Era Price)
+            15305, 25210200,  -- Barone Gambieras (Era Price)
+            14848, 7276200,  -- Barone Manopolas (Era Price)
             12577, 2485,    -- Brass Harness
             12985, 1625,    -- Holly Clogs
             15389, 8000000, -- Vir Subligar

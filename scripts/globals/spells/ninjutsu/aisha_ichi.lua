@@ -5,13 +5,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.ATTACK_DOWN
     -- Base Stats
     -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
@@ -22,19 +22,19 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
     params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     --Base power is 15 and is not affected by resistaces.
     local power = 15
 
     --Calculates Resist Chance
-    if (resist >= 0.125) then
+    if resist >= 0.125 then
         local duration = 120 * resist
 
-        if (duration >= 50) then
+        if duration >= 50 then
             -- Erases a weaker attack down and applies the stronger one
             local attackdown = target:getStatusEffect(effect)
-            if (attackdown ~= nil) then
-                if (attackdown:getPower() < power) then
+            if attackdown ~= nil then
+                if attackdown:getPower() < power then
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
@@ -56,4 +56,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return effect
 end
 
-return spell_object
+return spellObject

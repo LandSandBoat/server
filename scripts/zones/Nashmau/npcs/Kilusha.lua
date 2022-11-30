@@ -19,12 +19,15 @@ entity.onTrade = function(player, npc, trade)
         lampCost = 1000
     end
 
-    if npcUtil.tradeHasExactly(trade, { { "gil", lampCost } }) and player:getCharVar("EinherjarIntro") ~= 1 then
+    if
+        npcUtil.tradeHasExactly(trade, { { "gil", lampCost } }) and
+        player:getCharVar("EinherjarIntro") ~= 1
+    then
         if npcUtil.giveItem(player, xi.items.SMOLDERING_LAMP) then
             player:tradeComplete()
             player:startEvent(25)
         else
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SMOLDERING_LAMP)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SMOLDERING_LAMP)
         end
     end
 end
@@ -47,7 +50,10 @@ entity.onTrigger = function(player, npc)
 
     if player:getMainLvl() <= 59 or not toau then
         player:startEvent(22) -- worthless CS
-    elseif (player:getMainLvl() >= 60 or toau) and player:getCharVar("EinherjarIntro") == 1 then
+    elseif
+        (player:getMainLvl() >= 60 or toau) and
+        player:getCharVar("EinherjarIntro") == 1
+    then
         player:startEvent(23, lampCost, 856, 3, 616, 10, 172, 172, 0) -- Einherjar introduction
     else
         player:startEvent(24, lampCost, 856, 3, reentryTime, 10, 135, allowValkyrieBuying, ichor)
@@ -57,7 +63,7 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     if csid == 24 and option == 6 then -- about Entry Conditions
-        player:updateEvent(53,10,3,player:getLocalVar("reentryTime"),10,231,xi.items.SMOLDERING_LAMP,xi.items.GLOWING_LAMP)
+        player:updateEvent(53, 10, 3, player:getLocalVar("reentryTime"), 10, 231, xi.items.SMOLDERING_LAMP, xi.items.GLOWING_LAMP)
     end
 end
 
@@ -95,11 +101,14 @@ entity.onEventFinish = function(player, csid, option)
 
         local row = kilushaItems[option]
 
-        if player:getFreeSlotsCount() ~= 0 and player:getCurrency("therion_ichor") >= row.cost then
+        if
+            player:getFreeSlotsCount() ~= 0 and
+            player:getCurrency("therion_ichor") >= row.cost
+        then
             npcUtil.giveItem(player, row.item)
             player:delCurrency("therion_ichor", row.cost)
         else
-            player:messageSpecial( ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
         end
     end
 end

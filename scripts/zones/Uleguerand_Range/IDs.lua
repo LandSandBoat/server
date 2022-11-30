@@ -60,7 +60,7 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         MAIDEN_PH        = 16797808,
         SNOW_MAIDEN      = 16797809,
         FATHER_FROST     = 16797810,
-        MOUNTAIN_WORM_NM = 16798031,
+        MOUNTAIN_WORM    = 16798031,
     },
     npc =
     {

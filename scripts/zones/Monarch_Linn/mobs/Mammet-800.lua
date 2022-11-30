@@ -14,20 +14,20 @@ local changeForm = function(mob)
     end
 
     if newform == 0 then -- Hand Form, ~3s delay
-        mob:SetMagicCastingEnabled(false)
+        mob:setMagicCastingEnabled(false)
         mob:setDelay(3000)
         mob:setDamage(110)
     elseif newform == 1 then -- Sword Form, ~2s delay
-        mob:SetMagicCastingEnabled(false)
+        mob:setMagicCastingEnabled(false)
         mob:setDelay(2000)
         mob:setDamage(150)
     elseif newform == 2 then -- Polearm Form, ~3-3.5s delay
-        mob:SetMagicCastingEnabled(false)
+        mob:setMagicCastingEnabled(false)
         mob:setDelay(3500)
         mob:setDamage(175)
     elseif newform == 3 then -- Staff Form, ~4s delay, ~10 seconds between spell ends and next cast
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
-        mob:SetMagicCastingEnabled(true)
+        mob:setMagicCastingEnabled(true)
         mob:setDelay(4000)
         mob:setDamage(90)
     end
@@ -36,7 +36,7 @@ local changeForm = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:SetMagicCastingEnabled(false)
+    mob:setMagicCastingEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)

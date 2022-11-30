@@ -6,14 +6,14 @@ require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.WIND_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local params =
     {
         numHits = 2,
@@ -39,11 +39,11 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     if damage > 0 then
         local bonusduration = 1 + 0.00033 * (skill:getTP() - 1000)
         if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 15, 0, 90*bonusduration)
+            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 15, 0, 90 * bonusduration)
         end
     end
 
     return damage
 end
 
-return ability_object
+return abilityObject

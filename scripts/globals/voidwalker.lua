@@ -43,8 +43,10 @@ local function getCurrentKIsBitsFromPlayer(player)
         if player:hasKeyItem(keyitem) then
             currentBit = 1
         end
+
         results = results + bit.lshift(currentBit, i - 1)
     end
+
     return results
 end
 
@@ -55,14 +57,19 @@ local function getCurrentKIsFromPlayer(player)
             table.insert(results, keyitem)
         end
     end
+
     return results
 end
 
 local function getMobsFromAbyssites(zoneId, abyssites)
     local results = {}
     for i, keyitem in ipairs(abyssites) do
-        if zones[zoneId] and zones[zoneId].mob and zones[zoneId].mob.VOIDWALKER[keyitem] then
-            for _,mobId in ipairs(zones[zoneId].mob.VOIDWALKER[keyitem]) do
+        if
+            zones[zoneId] and
+            zones[zoneId].mob and
+            zones[zoneId].mob.VOIDWALKER[keyitem]
+        then
+            for _, mobId in ipairs(zones[zoneId].mob.VOIDWALKER[keyitem]) do
                 local mob = GetMobByID(mobId)
                 if mob:isAlive() and mob:getLocalVar("[VoidWalker]PopedBy") == 0 then
                     table.insert(results, { mobId = mobId, keyItem = keyitem })
@@ -70,6 +77,7 @@ local function getMobsFromAbyssites(zoneId, abyssites)
             end
         end
     end
+
     return results
 end
 
@@ -97,6 +105,7 @@ local function setRandomPos(zoneId, mobId)
     if not mob or not xi.voidwalker.pos[zoneId] then
         return
     end
+
     local pos = searchEmptyPos(zoneId)
 
     xi.voidwalker.pos[zoneId][pos].mobId = mobId
@@ -107,12 +116,16 @@ end
 
 local getNearestMob = function(player, mobs)
     local results = {}
-    for i,v in ipairs(mobs) do
+    for _, v in ipairs(mobs) do
         local mob = GetMobByID(v.mobId)
         local distance = player:checkDistance(mob)
-        table.insert(results, { mobId=v.mobId, keyItem=v.keyItem, distance=distance })
+        table.insert(results, { mobId = v.mobId, keyItem = v.keyItem, distance = distance })
     end
-    table.sort(results, function(a,b) return a.distance < b.distance end)
+
+    table.sort(results, function(a, b)
+        return a.distance < b.distance
+    end)
+
     if table.getn(results) > 0 then
         return results[1]
     else
@@ -131,6 +144,7 @@ local getDirection = function(player, mob, distance)
     if degree < 0 then
         degree = degree * -1
     end
+
     local minDegree = 20
     local maxDegree = 70
     if diffz >= 0 and degree >= maxDegree then
@@ -165,6 +179,7 @@ local function checkUpgrade(player, mob, nextKeyItem)
             if player:hasKeyItem(currentKeyItem) then
                 player:delKeyItem(currentKeyItem)
             end
+
             if nextKeyItem then
                 player:addKeyItem(nextKeyItem)
                 if currentKeyItem == xi.keyItem.CLEAR_ABYSSITE then
@@ -228,7 +243,7 @@ xi.voidwalker.zoneOnInit = function(zone)
     local voidwalkerMobs = zones[zoneId].mob.VOIDWALKER
 
     for ki, mobs in pairs(voidwalkerMobs) do
-        for _,mob in pairs(mobs) do
+        for _, mob in pairs(mobs) do
             setRandomPos(zoneId, mob)
         end
     end
@@ -258,7 +273,11 @@ local function doMobSkillEveryHPP(mob, every, start, mobskill, condition)
 end
 
 local function randomly(mob, chance, between, effect, skill)
-    if math.random(0,100) <= chance and not mob:hasStatusEffect(effect) and os.time() > (mob:getLocalVar("MOBSKILL_TIME") + between) then
+    if
+        math.random(0, 100) <= chance and
+        not mob:hasStatusEffect(effect) and
+        os.time() > (mob:getLocalVar("MOBSKILL_TIME") + between)
+    then
         mob:setLocalVar("MOBSKILL_USE", 1)
         mob:setLocalVar("MOBSKILL_TIME", os.time())
         mob:useMobAbility(skill)
@@ -314,7 +333,10 @@ local mixinByMobName =
 
     ['Jyeshtha'] = function(mob)
         randomly(mob, 30, 60, xi.jsa.MIGHTY_STRIKES, xi.jsa.MIGHTY_STRIKES)
-        if mob:getLocalVar("MOBSKILL_USE") == 1 and not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
+        if
+            mob:getLocalVar("MOBSKILL_USE") == 1 and
+            not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)
+        then
             mob:setLocalVar("MOBSKILL_USE", 0)
         end
     end,
@@ -333,7 +355,10 @@ local mixinByMobName =
 
     ['Erebus'] = function(mob)
         randomly(mob, 30, 60, xi.effect.BLOOD_WEAPON, xi.jsa.BLOOD_WEAPON)
-        if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
+        if
+            mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
+            not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)
+        then
             mob:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 30)
         end
     end,
@@ -376,7 +401,13 @@ xi.voidwalker.onMobFight = function(mob, target)
     local poptime = mob:getLocalVar("[VoidWalker]PopedAt")
     local now = os.time()
 
-    if mob:isSpawned() and (now > (poptime + 7200) or mob:checkDistance(target) > 25) then
+    if
+        mob:isSpawned() and
+        (
+            now > (poptime + 7200) or
+            mob:checkDistance(target) > 25
+        )
+    then
         local zoneTextTable = zones[mob:getZoneID()].text
 
         target:messageSpecial(zoneTextTable.VOIDWALKER_DESPAWN)
@@ -412,10 +443,10 @@ xi.voidwalker.onMobDespawn = function(mob)
     DespawnPet(mob)
 end
 
-xi.voidwalker.onMobDeath = function(mob, player, isKiller, keyItem)
+xi.voidwalker.onMobDeath = function(mob, player, optParams, keyItem)
     if player then
         local popkeyitem = mob:getLocalVar("[VoidWalker]PopedWith")
-        if isKiller then
+        if optParams.isKiller then
             local playerpoped = GetPlayerByID(mob:getLocalVar("[VoidWalker]PopedBy"))
             local alliance = player:getAlliance()
             local outOfParty = true
@@ -425,10 +456,12 @@ xi.voidwalker.onMobDeath = function(mob, player, isKiller, keyItem)
                     break
                 end
             end
+
             if outOfParty and not playerpoped:hasKeyItem(keyItem) then
                 checkUpgrade(playerpoped, mob, keyItem)
             end
         end
+
         if player:hasKeyItem(popkeyitem) and not player:hasKeyItem(keyItem) then
             checkUpgrade(player, mob, keyItem)
         end
@@ -447,7 +480,11 @@ xi.voidwalker.onHealing = function(player)
     local zoneTextTable = zones[zoneId].text
     local abyssites = getCurrentKIsFromPlayer(player)
 
-    if table.getn(abyssites) == 0 or not zones[zoneId].mob or not zones[zoneId].mob.VOIDWALKER then
+    if
+        table.getn(abyssites) == 0 or
+        not zones[zoneId].mob or
+        not zones[zoneId].mob.VOIDWALKER
+    then
         return
     end
 
@@ -461,13 +498,17 @@ xi.voidwalker.onHealing = function(player)
         mob:setLocalVar("[VoidWalker]PopedBy", player:getID())
         mob:setLocalVar("[VoidWalker]PopedWith", mobNearest.keyItem)
         mob:setLocalVar("[VoidWalker]PopedAt", os.time())
-        if mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and mobNearest.keyItem ~= xi.keyItem.COLORFUL_ABYSSITE then
+        if
+            mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and
+            mobNearest.keyItem ~= xi.keyItem.COLORFUL_ABYSSITE
+        then
             player:delKeyItem(mobNearest.keyItem)
             player:messageSpecial(zoneTextTable.VOIDWALKER_BREAK_KI, mobNearest.keyItem)
         else
             player:messageSpecial(zoneTextTable.VOIDWALKER_SPAWN_MOB)
             mob:hideHP(false)
         end
+
         mob:hideName(false)
         mob:setUntargetable(false)
         mob:setStatus(xi.status.MOB)

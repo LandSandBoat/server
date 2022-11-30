@@ -70,7 +70,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.WAR] =
         {
             modelID = 1209,
-            skillList = 1183,
+            skillList = 4033,
             ability = 1428, -- Warcry
             twoHour = 688, -- Mighty Strikes
             spellListID = 0,
@@ -79,7 +79,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.MNK] =
         {
             modelID = 1210,
-            skillList = 1184,
+            skillList = 4034,
             ability = 1429, -- Counterstance
             twoHour = 690, -- Hundred Fists
             spellListID = 0,
@@ -88,7 +88,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.WHM] =
         {
             modelID = 1214,
-            skillList = 1185,
+            skillList = 4035,
             ability = 0, -- None
             twoHour = 689, -- Benediction
             spellListID = 1,
@@ -97,7 +97,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.BLM] =
         {
             modelID = 1215,
-            skillList = 1185,
+            skillList = 4035,
             ability = 0, -- None
             twoHour = 691, -- Manafont
             spellListID = 2,
@@ -106,7 +106,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.RDM] =
         {
             modelID = 1216,
-            skillList = 1187,
+            skillList = 4037,
             ability = 0, -- None
             twoHour = 692, -- Chainspell
             spellListID = 3,
@@ -115,7 +115,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.THF] =
         {
             modelID = 1218,
-            skillList = 1188,
+            skillList = 4038,
             ability = 0, -- None
             twoHour = 693, -- Perfect Dodge
             spellListID = 0,
@@ -124,7 +124,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.PLD] =
         {
             modelID = 1219,
-            skillList = 1187,
+            skillList = 4037,
             ability = 1431, -- Shield Bash
             twoHour = 694, -- Incincible
             spellListID = 4,
@@ -133,7 +133,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.DRK] =
         {
             modelID = 1220,
-            skillList = 1189,
+            skillList = 4039,
             ability = 1432, -- Weapon Bash
             twoHour = 695, -- Blood Weapon
             spellListID = 5,
@@ -142,7 +142,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.BST] =
         {
             modelID = 1224,
-            skillList = 1183,
+            skillList = 4033,
             petModelID =
             {
                 328, -- Lizzard
@@ -165,7 +165,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.BRD] =
         {
             modelID = 1227,
-            skillList = 1188,
+            skillList = 4038,
             ability = 0, -- None
             twoHour = 696, -- Soul Voice
             spellListID = 6,
@@ -174,7 +174,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.RNG] =
         {
             modelID = 1228,
-            skillList = 1190,
+            skillList = 4040,
             ability = 1434, -- Barrage
             twoHr = 413, -- Eagle Eye Shot
             spellListID = 0,
@@ -183,7 +183,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.SAM] =
         {
             modelID = 1229,
-            skillList = 1191,
+            skillList = 4041,
             ability = 1436, -- Meditate
             twoHour = 730, -- Meikyo Shisui
             spellListID = 0,
@@ -192,7 +192,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.NIN] =
         {
             modelID = 1232,
-            skillList = 1192,
+            skillList = 4042,
             ability = 0, -- None
             twoHour = 731, -- Mjin Gakure
             spellListID = 7,
@@ -201,7 +201,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.DRG] =
         {
             modelID = 1234,
-            skillList = 1193,
+            skillList = 4043,
             ability = 1437, -- Jump
             twoHour = 732, -- Call Wyvern
             spellListID = 0,
@@ -210,7 +210,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.SMN] =
         {
             modelID = 1235,
-            skillList = 1186,
+            skillList = 4036,
             petModelID =
             {
                 793, -- Ifrit
@@ -240,7 +240,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.BLU] =
         {
             modelID = 1396,
-            skillList = 1187,
+            skillList = 4037,
             ability = 0, -- None
             spellListID = 8, -- TODO: Mimic player's set spells
             petID = 0,
@@ -248,7 +248,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.COR] =
         {
             modelID = 1397,
-            skillList = 1194,
+            skillList = 4044,
             ability = 0, -- TODO: Add rolls here
             spellListID = 0, -- ???
             petID = 0,
@@ -256,7 +256,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         [xi.job.PUP] =
         {
             modelID = 1398,
-            skillList = 1184,
+            skillList = 4034,
             petModelID =
             {
                 { 1983, xi.job.PLD }, -- Melee Automaton

@@ -68,6 +68,7 @@ mission.sections =
         check = function(player, currentMission)
             return currentMission == xi.mission.id.nation.NONE and
                 player:getNation() == mission.areaId and
+                player:hasCompletedMission(mission.areaId, mission.missionId - 1) and
                 not player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 
@@ -210,9 +211,9 @@ mission.sections =
         {
             ['Ohbiru-Dohbiru'] = mission:event(144),
 
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     return mission:progressEvent(146)
                 end,
             },

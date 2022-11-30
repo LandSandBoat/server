@@ -14,14 +14,14 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    mob:SetMobAbilityEnabled(false)
+    mob:setMobAbilityEnabled(false)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 519)
 end
 

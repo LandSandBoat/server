@@ -34,12 +34,13 @@ entity.onMobFight = function(mob, target)
             end
         end
     end
+
     if mob:getLocalVar("cooldown") > 0 then
         mob:setLocalVar("cooldown", mob:getLocalVar("cooldown") - 1)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     global.tryPhaseChange(player)
 end
 

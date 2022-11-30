@@ -12,27 +12,33 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if (target:getRace() ~= xi.race.GALKA) then
+    if target:getRace() ~= xi.race.GALKA then
         result = xi.msg.basic.CANNOT_EAT
     end
-    if (target:getMod(xi.mod.EAT_RAW_MEAT) == 1) then
+
+    if target:getMod(xi.mod.EAT_RAW_MEAT) == 1 then
         result = 0
     end
-    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5563)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.HP, 10)
     target:addMod(xi.mod.MP, -10)
     target:addMod(xi.mod.STR, 6)
@@ -40,7 +46,7 @@ item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEMON_KILLER, 10)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.HP, 10)
     target:delMod(xi.mod.MP, -10)
     target:delMod(xi.mod.STR, 6)
@@ -48,4 +54,4 @@ item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DEMON_KILLER, 10)
 end
 
-return item_object
+return itemObject

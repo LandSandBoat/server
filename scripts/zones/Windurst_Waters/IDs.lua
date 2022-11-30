@@ -12,6 +12,7 @@ zones[xi.zone.WINDURST_WATERS] =
     {
         CONQUEST_BASE                 = 0,     -- Tallying conquest results...
         ITEM_CANNOT_BE_OBTAINED       = 6543,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        DEFAULT_CANNOT_BE_OBTAINED    = 6545,  -- You cannot obtain the item. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6549,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6550,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6552,  -- Obtained key item: <keyitem>.
@@ -64,6 +65,32 @@ zones[xi.zone.WINDURST_WATERS] =
         PRESTAPIQ_OPEN_DIALOG         = 10677, -- Helgohelgo! Me's bhrink goodhys arll ja wayz fhrum hormtowne ovf Morvalporlis!
         NESSRUGETOMALL_SHOP_DIALOG    = 11481, -- Welcome to the Rarab Tail Hostelry.
         DIABOLOS_UNLOCKED             = 11910, -- You are now able to summon Diabolos!
+        -- Starlight Celebration Dialog --
+        GIFT_THANK_YOU             = 10696, -- Thank you! Thank you! Thank you!
+        GIFT_THANK_YOU_2           = 10697, -- Whoa! Thanks (Player Gender)>[sir, lady]
+        ONLY_TWO_HANDS             = 10699, -- Another present? Sorry, but I only have two hands, (Player Gender)≻[Mr./Ms.] Adventurer!
+        JOY_TO_CHILDREN            = 10703, -- You've brought joy to the children of Vana'diel!
+        BARRELS_JOY_TO_CHILDREN    = 10704, -- You've brought barrelfuls of joy to the children of Vana'diel!
+        STARLIGHT_CARD_1           = 10786, -- It's time once again for the Starlight Celebration!≺Prompt≻
+        STARLIGHT_CARD_2           = 15397, -- Kupo ho ho! Merry Starlight! As with past celebrations, we've prepared a veritable mountain of presents for all adventurers, kupo.≺Prompt≻
+        STARLIGHT_CARD_3           = 15427, -- We'd also appreciate your help in distributing cards, kupo. All you're required to do is deliver this card to the addressee. We're counting on you!≺Prompt≻
+        STARLIGHT_CARD_4           = 15423, -- If you happen to forget who the card's recipient is, just show it to me, kupo.≺Prompt≻
+        STARLIGHT_CARD_5           = 15422, -- You're truly a role model for all adventurers, kupo! Now then, we'd like you to take this card and give it to a ≺Multiple Choice (Parameter 0)≻[male Hume/female Hume/male Elvaan/female Elvaan/male Tarutaru/female Tarutaru/Mithra/Galka] adventurer.≺Prompt≻
+        STARLIGHT_CARD_6           = 15407, -- Happy delivering, kupo!≺Prompt≻
+        STARLIGHT_CARD_CHECK       = 15424, -- Let' see... This addressee of this card is a ≺Multiple Choice (Parameter 0)≻[male Hume/female Hume/male Elvaan/female Elvaan/male Tarutaru/female Tarutaru/Mithra/Galka] adventurer, kupo.≺Prompt≻
+        STARLIGHT_CARD_RED         = 10809, -- Oh, I just remembered! I think that the cards are all addressed to people who are wearing red...≺Prompt≻
+        STARLIGHT_CARD_WRONG       = 15425, -- Are you trying to pull a fast one, kupo!? This card isn't yours to give, nor is it addressed to you, so please take it back to where you found it.≺Prompt≻
+        STARLIGHT_CARD_CONFIRM     = 15413, -- Here's a little something for your kindness.≺Prompt≻
+        STARLIGHT_FAME_DIALOG      = 10826, -- ≺Multiple Choice (Parameter 1)≻[You haven't brought any happiness to the children!/You've done some good./You've done fairly well./You've made the children very happy!/You've brought lots of smiles!/You have the children bursting with glee!/The children love you!] ≺Multiple Choice (Parameter 1)≻[What a disappointment./You just need to give a little extra effort!/Keep it up!/You make a good smilebringer./Excellent work!/Stupendous job!/Even I think you're great!]≺Prompt≻
+        STARLIGHT_VENDOR_MOOGLE    = 11478, -- Come one, come all, kupo!
+        MERRYMAKER_TRADE           = 15645, -- Yum-yums for me? Gobbies remember...till our tummies go rumble-rumble again.
+        MERRYMAKER_BLECH           = 15649, -- Blech. What this yucky thing? It make me want to upgut food. Take it away.
+        MERRYMAKER_TOY             = 15637, -- Happy toy, happy toy, where be me happy toy?
+        MERRYMAKER_TOY2            = 15638, -- Ev'ry girl, ev'ry boy, ev'rybody, happy toy! Me nose holes smell the joy, the joy from happy toy! Where cooould iiit beee?
+        MERRYMAKER_WAHH            = 15640, -- Waaah! It you! You give yum-yums for me tum-tum. Good [boy, girl]!
+        MERRYMAKER_GIVE            = 15641, -- Not for us, not for me? I give it back. Now you happy? Happy toy, happy toy, where be me happy toy?
+        MERRYMAKER_NO              = 15642, -- No no no no no! Go away! Nose holes busy sniff for happy toy!
+        MERRYMAKER_FRIEND          = 15644, -- You have friend you do? We gobbies have friend too.
     },
 
     mob =
@@ -80,7 +107,46 @@ zones[xi.zone.WINDURST_WATERS] =
             [17752102] = 63, -- Maqu Molpih
             [17752103] = 62, -- Ahyeekih
         },
-
+        STARLIGHT_DECORATIONS =
+        {
+            [17752530] = 17752530,  -- Starlight Celebration Tree
+            [17752531] = 17752531,  -- Starlight Celebration Tree
+            [17752532] = 17752532,  -- Starlight Celebration Tree
+            [17752533] = 17752533,  -- Starlight Celebration Tree
+            [17752534] = 17752534,  -- Starlight Celebration Tree
+            [17752535] = 17752535,  -- Starlight Celebration Tree
+            [17752536] = 17752536,  -- Starlight Celebration Tree
+            [17752537] = 17752537,  -- Starlight Celebration Tree
+            [17752538] = 17752538,  -- Starlight Celebration Tree
+            [17752539] = 17752539,  -- Starlight Celebration Tree
+            [17752540] = 17752540,  -- Starlight Celebration Tree
+            [17752541] = 17752541,  -- Starlight Celebration Tree
+            [17752542] = 17752542,  -- Starlight Celebration Tree
+            [17752543] = 17752543,  -- Starlight Celebration Tree
+            [17752544] = 17752544,  -- Starlight Celebration Tree
+            [17752545] = 17752545,  -- Starlight Celebration Tree
+            [17752546] = 17752546,  -- Starlight Celebration Tree
+            [17752547] = 17752547,  -- Starlight Celebration Tree
+            [17752548] = 17752548,  -- Starlight Celebration Tree
+            [17752549] = 17752549,  -- Starlight Celebration Tree
+            [17752529] = 17752529,  -- Atagei-Portagei
+            [17752550] = 17752550,  -- Token Moogle
+            [17752551] = 17752551,  -- Event Moogle
+            [17752552] = 17752552,  -- Event Moogle
+            [17752560] = 17752560,  -- Vendor Moogle
+            [17752561] = 17752561,  -- Vendor Moogle
+            [17752563] = 17752563,  -- Event Moogle Stall
+            [17752302] = 17752302,  -- Goblin Merrymaker
+            [17752303] = 17752303,  -- Goblin Merrymaker
+            [17752304] = 17752304,  -- Goblin Merrymaker
+            [17752305] = 17752305,  -- Goblin Merrymaker
+            [17752306] = 17752306,  -- Goblin Merrymaker
+            [17752307] = 17752307,  -- Goblin Merrymaker
+            [17752308] = 17752308,  -- Goblin Merrymaker
+            [17752309] = 17752309,  -- Goblin Merrymaker
+            [17752310] = 17752310,  -- Goblin Merrymaker
+            [17752311] = 17752311,  -- Goblin Merrymaker
+        },
         LELEROON_GREEN_DOOR = 17752333,
     },
 }

@@ -6,9 +6,9 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if not target:getPet() then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
@@ -20,7 +20,7 @@ item_object.onItemCheck = function(target)
     end
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local wyvern = target:getPet()
     if wyvern then
         if wyvern:getStatusEffect(xi.effect.STONESKIN) then
@@ -30,4 +30,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

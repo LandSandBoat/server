@@ -5,16 +5,19 @@
 -- https://ffxiclopedia.wikia.com/wiki/Logging
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
 require("scripts/globals/settings")
+require("scripts/globals/spell_data")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
+require("scripts/globals/msg")
 -----------------------------------
 
 xi = xi or {}
@@ -37,13 +40,14 @@ local helmInfo =
 {
     [xi.helm.type.HARVESTING] =
     {
-        id = "HARVESTING",
-        animation = xi.emote.HARVESTING,
-        mod = xi.mod.HARVESTING_RESULT,
-        settingRate = xi.settings.main.HARVESTING_RATE,
+        id           = "HARVESTING",
+        animation    = xi.emote.HARVESTING,
+        mod          = xi.mod.HARVESTING_RESULT,
+        settingRate  = xi.settings.main.HARVESTING_RATE,
         settingBreak = xi.settings.main.HARVESTING_BREAK_CHANCE,
-        message = "HARVESTING_IS_POSSIBLE_HERE",
-        tool = 1020,
+        message      = "HARVESTING_IS_POSSIBLE_HERE",
+        tool         = 1020,
+
         zone =
         {
             [xi.zone.WAJAOM_WOODLANDS] =
@@ -347,13 +351,14 @@ local helmInfo =
 
     [xi.helm.type.EXCAVATION] =
     {
-        id = "EXCAVATION",
-        animation = xi.emote.EXCAVATION,
-        mod = nil,
-        settingRate = xi.settings.main.EXCAVATION_RATE,
+        id           = "EXCAVATION",
+        animation    = xi.emote.EXCAVATION,
+        mod          = nil,
+        settingRate  = xi.settings.main.EXCAVATION_RATE,
         settingBreak = xi.settings.main.EXCAVATION_BREAK_CHANCE,
-        message = "MINING_IS_POSSIBLE_HERE",
-        tool = 605,
+        message      = "MINING_IS_POSSIBLE_HERE",
+        tool         = 605,
+
         zone =
         {
             [xi.zone.ATTOHWA_CHASM] =
@@ -492,12 +497,13 @@ local helmInfo =
     [xi.helm.type.LOGGING] =
     {
         id = "LOGGING",
-        animation = xi.emote.LOGGING,
-        mod = xi.mod.LOGGING_RESULT,
-        settingRate = xi.settings.main.LOGGING_RATE,
+        animation    = xi.emote.LOGGING,
+        mod          = xi.mod.LOGGING_RESULT,
+        settingRate  = xi.settings.main.LOGGING_RATE,
         settingBreak = xi.settings.main.LOGGING_BREAK_CHANCE,
-        message = "LOGGING_IS_POSSIBLE_HERE",
-        tool = 1021,
+        message      = "LOGGING_IS_POSSIBLE_HERE",
+        tool         = 1021,
+
         zone =
         {
             [xi.zone.CARPENTERS_LANDING] =
@@ -945,13 +951,14 @@ local helmInfo =
 
     [xi.helm.type.MINING] =
     {
-        id = "MINING",
-        animation = xi.emote.EXCAVATION,
-        mod = xi.mod.MINING_RESULT,
-        settingRate = xi.settings.main.MINING_RATE,
+        id           = "MINING",
+        animation    = xi.emote.EXCAVATION,
+        mod          = xi.mod.MINING_RESULT,
+        settingRate  = xi.settings.main.MINING_RATE,
         settingBreak = xi.settings.main.MINING_BREAK_CHANCE,
-        message = "MINING_IS_POSSIBLE_HERE",
-        tool = 605,
+        message      = "MINING_IS_POSSIBLE_HERE",
+        tool         = 605,
+
         zone =
         {
             [xi.zone.OLDTON_MOVALPOLOS] =
@@ -1392,17 +1399,27 @@ local helmInfo =
 }
 
 -----------------------------------
--- colored rocks. do not change this order!
+-- colored rocks array
 -----------------------------------
 
-local rocks = { 769, 771, 770, 772, 773, 774, 776, 775 }
+local rocks =
+{
+    [xi.magic.element.FIRE   ] = xi.items.RED_ROCK,
+    [xi.magic.element.ICE    ] = xi.items.TRANSLUCENT_ROCK,
+    [xi.magic.element.WIND   ] = xi.items.GREEN_ROCK,
+    [xi.magic.element.EARTH  ] = xi.items.YELLOW_ROCK,
+    [xi.magic.element.THUNDER] = xi.items.PURPLE_ROCK,
+    [xi.magic.element.WATER  ] = xi.items.BLUE_ROCK,
+    [xi.magic.element.LIGHT  ] = xi.items.WHITE_ROCK,
+    [xi.magic.element.DARK   ] = xi.items.BLACK_ROCK,
+}
 
 -----------------------------------
 -- local functions
 -----------------------------------
 
 local function doesToolBreak(player, info)
-    local roll  = math.random(100)
+    local roll  = math.random(1, 100)
     local mod   = info.mod
 
     if mod then
@@ -1421,7 +1438,7 @@ local function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing
-    if math.random(100) > info.settingRate then
+    if math.random(1, 100) > info.settingRate then
         return 0
     end
 
@@ -1436,8 +1453,9 @@ local function pickItem(player, info)
 
     -- pick weighted result
     local item = 0
-    local pick = math.random(sum)
+    local pick = math.random(1, sum)
     sum = 0
+
     for i = 1, #drops do
         sum = sum + drops[i][1]
         if sum >= pick then
@@ -1448,7 +1466,7 @@ local function pickItem(player, info)
 
     -- if we picked a colored rock, change it to the day's element
     if item == 769 then
-        item = rocks[VanadielDayElement() + 1]
+        item = rocks[VanadielDayElement()]
     end
 
     return item
@@ -1462,7 +1480,8 @@ end
 
 local function movePoint(npc, zoneId, info)
     local points = info.zone[zoneId].points
-    local point = points[math.random(#points)]
+    local point  = points[math.random(1, #points)]
+
     npc:hideNPC(120)
     npc:queue(3000, doMove(npc, unpack(point)))
 end
@@ -1473,8 +1492,8 @@ end
 
 xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
-    local info = helmInfo[helmType]
-    local npcs = zones[zoneId].npc[info.id]
+    local info   = helmInfo[helmType]
+    local npcs   = zones[zoneId].npc[info.id]
 
     for _, npcId in ipairs(npcs) do
         local npc = GetNPCByID(npcId)
@@ -1486,8 +1505,9 @@ xi.helm.initZone = function(zone, helmType)
 end
 
 xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
-    local info = helmInfo[helmType]
+    local info   = helmInfo[helmType]
     local zoneId = player:getZoneID()
+    local lastTrade = player:getLocalVar("[HELM]Last_Trade")
 
     -- HELM should remove invisible
     player:delStatusEffect(xi.effect.INVISIBLE)
@@ -1498,48 +1518,54 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
 
-        if csid then
-            player:startEvent(csid, item, broke, full)
-        end
-
-        player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
-
-        -- WotG : The Price of Valor; Success does not award an item, but only KI.
-        if xi.wotg.helpers.helmTrade(player, helmType, broke) then
-            return
-        end
-
-        -- success! reward item and decrement number of remaining uses on the point
-        if item ~= 0 and full == 0 then
-            player:addItem(item)
-
-            local uses = (npc:getLocalVar("uses") - 1) % 4
-            npc:setLocalVar("uses", uses)
-            if uses == 0 then
-                movePoint(npc, zoneId, info)
+        if os.time() > lastTrade + 4 then
+            if csid then
+                player:startEvent(csid, item, broke, full)
             end
 
-            player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
-        end
+            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
-        -- quest stuff
-        if
-            helmType == xi.helm.type.HARVESTING and
-            player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
-            not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
-            broke ~= 1 and
-            zoneId == xi.zone.WAJAOM_WOODLANDS
-        then
-            npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
-        end
+            -- WotG : The Price of Valor; Success does not award an item, but only KI.
+            if xi.wotg.helpers.helmTrade(player, helmType, broke) then
+                return
+            end
 
-        -- AMK04
-        if xi.settings.main.ENABLE_AMK == 1 then
-            xi.amk.helpers.helmTrade(player, helmType, broke)
-        end
+            -- success! reward item and decrement number of remaining uses on the point
+            if item ~= 0 and full == 0 then
+                player:addItem(item)
 
-        if type(func) == "function" then
-            func(player)
+                local uses = (npc:getLocalVar("uses") - 1) % 4
+                npc:setLocalVar("uses", uses)
+                if uses == 0 then
+                    movePoint(npc, zoneId, info)
+                end
+
+                player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
+            end
+
+            -- quest stuff
+            if
+                helmType == xi.helm.type.HARVESTING and
+                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+                not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
+                broke ~= 1 and
+                zoneId == xi.zone.WAJAOM_WOODLANDS
+            then
+                npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
+            end
+
+            -- AMK04
+            if xi.settings.main.ENABLE_AMK == 1 then
+                xi.amk.helpers.helmTrade(player, helmType, broke)
+            end
+
+            if type(func) == "function" then
+                func(player)
+            end
+
+            player:setLocalVar("[HELM]Last_Trade", os.time())
+        else
+            player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
@@ -1550,4 +1576,19 @@ xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
     local info = helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)
+end
+
+xi.helm.movePoint = function(target, zoneId, helmType)
+    local info = helmInfo[helmType]
+    movePoint(target, zoneId, info)
+end
+
+xi.helm.doesToolBreak = function(player, helmType)
+    local info = helmInfo[helmType]
+    return doesToolBreak(player, info) and 1 or 0
+end
+
+xi.helm.pickItem = function(player, helmType)
+    local info = helmInfo[helmType]
+    return pickItem(player, info)
 end

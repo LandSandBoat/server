@@ -9,14 +9,14 @@ local entity = {}
 
 local drawInPos =
 {
-    {-280.20, -23.88,  -5.94},
-    {-272.08, -23.75,  -1.73},
-    {-276.90, -24.00,   2.09},
-    {-268.59, -23.96, -16.00},
-    {-285.57, -24.20,  -0.56},
-    {-282.16, -24.00,   1.95},
-    {-271.35, -23.66,  -5.46},
-    {-272.75, -23.55, -11.25},
+    { -280.20, -23.88,  -5.94 },
+    { -272.08, -23.75,  -1.73 },
+    { -276.90, -24.00,   2.09 },
+    { -268.59, -23.96, -16.00 },
+    { -285.57, -24.20,  -0.56 },
+    { -282.16, -24.00,   1.95 },
+    { -271.35, -23.66,  -5.46 },
+    { -272.75, -23.55, -11.25 },
 }
 
 entity.onMobFight = function(mob, target)
@@ -24,7 +24,7 @@ entity.onMobFight = function(mob, target)
     local headgrow = mob:getLocalVar("headgrow")
     local broken = mob:getAnimationSub()
 
-    if (headgrow < battletime and broken > 4) then
+    if headgrow < battletime and broken > 4 then
         mob:setAnimationSub(broken - 1)
         mob:setLocalVar("headgrow", battletime + 300)
     end
@@ -52,14 +52,14 @@ entity.onCriticalHit = function(mob)
     local headbreak = mob:getLocalVar("headbreak")
     local broken = mob:getAnimationSub()
 
-    if (rand <= 0.15 and battletime >= headbreak and broken < 6) then
+    if rand <= 0.15 and battletime >= headbreak and broken < 6 then
         mob:setAnimationSub(broken + 1)
         mob:setLocalVar("headgrow", battletime + math.random(120, 240))
         mob:setLocalVar("headbreak", battletime + 300)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.HYDRA_HEADHUNTER)
 end
 

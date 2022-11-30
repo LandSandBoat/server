@@ -6,13 +6,13 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration = 60
     -- local pCHR = caster:getStat(xi.mod.CHR)
     -- local mCHR = target:getStat(xi.mod.CHR)
@@ -23,7 +23,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.SINGING
     params.bonus = 0
     params.effect = xi.effect.LULLABY
-    local resm = applyResistanceEffect(caster, target, spell, params)
+    local resm = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
@@ -38,7 +38,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
         duration = duration * resm
 
-        duration = calculateBuildDuration(target, duration, params.effect, caster)
+        duration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if duration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
@@ -52,4 +52,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.LULLABY
 end
 
-return spell_object
+return spellObject

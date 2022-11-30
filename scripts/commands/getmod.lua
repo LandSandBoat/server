@@ -19,7 +19,7 @@ function onTrigger(player, id)
     -- invert xi.mod table
     local modNameByNum = {}
     for k, v in pairs(xi.mod) do
-        modNameByNum[v]=k
+        modNameByNum[v] = k
     end
 
     -- validate modID
@@ -35,6 +35,7 @@ function onTrigger(player, id)
         modId = xi.mod[id]
         modName = id
     end
+
     if modName == nil or modId == nil then
         error(player, "Invalid modID.")
         return

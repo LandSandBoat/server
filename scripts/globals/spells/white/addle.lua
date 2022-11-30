@@ -10,30 +10,30 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local dMND = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
 
     -- Spell casting increase
-    local power = calculatePotency(30, spell:getSkillType(), caster, target)
+    local power = xi.magic.calculatePotency(30, spell:getSkillType(), caster, target)
 
     -- Magic Accuracy reduction (not affected by enfeebling skill)
     local subPower = 20 + utils.clamp(math.floor(dMND / 5), 0, 20)
 
     --Duration, including resistance.
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = xi.magic.calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     local params = {}
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.ADDLE
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then -- Do it!
         if target:addStatusEffect(params.effect, power, 0, duration * resist, 0, subPower) then
@@ -48,4 +48,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return params.effect
 end
 
-return spell_object
+return spellObject

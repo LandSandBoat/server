@@ -7,9 +7,9 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/player")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
     if target:getSystem() ~= xi.ecosystem.EMPTY then -- Empty
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
@@ -20,9 +20,9 @@ item_object.onItemCheck = function(target, player)
     return result
 end
 
-item_object.onItemUse = function(target, player)
+itemObject.onItemUse = function(target, player)
     target:delStatusEffectSilent(xi.effect.INTIMIDATE)
-    target:addStatusEffect(xi.effect.INTIMIDATE, 100, 0, math.random(25,32))
+    target:addStatusEffect(xi.effect.INTIMIDATE, 100, 0, math.random(25, 32))
 end
 
-return item_object
+return itemObject

@@ -33,6 +33,7 @@
 #include "../../status_effect_container.h"
 #include "../../utils/battleutils.h"
 #include "../ai_container.h"
+#include "../states/inactive_state.h"
 
 CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags)
 : CState(PEntity, targid)
@@ -108,22 +109,34 @@ bool CMagicState::Update(time_point tick)
         if (!PTarget || m_errorMsg || !CanCastSpell(PTarget) ||
             (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)))
         {
-            m_interrupted = true;
+            m_PEntity->OnCastInterrupted(*this, action, msg, false);
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
         }
         else if (PTarget->objtype == TYPE_PC)
         {
             CCharEntity* PChar = dynamic_cast<CCharEntity*>(PTarget);
             if (PChar->m_Locked)
             {
-                m_interrupted = true;
+                m_PEntity->OnCastInterrupted(*this, action, msg, true);
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                Complete();
+                return false;
             }
 
             if (m_PSpell.get()->getSpellGroup() == SPELLGROUP_TRUST)
             {
                 if (!luautils::OnTrustSpellCastCheckBattlefieldTrusts(PChar))
                 {
-                    msg           = MSGBASIC_TRUST_NO_CAST_TRUST;
-                    m_interrupted = true;
+                    m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_TRUST_NO_CAST_TRUST, true);
+                    action.recast = 2; // seems hardcoded to 2
+                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                    Complete();
+                    return false;
                 }
             }
         }
@@ -139,23 +152,83 @@ bool CMagicState::Update(time_point tick)
 
             if (PChar->m_Locked)
             {
-                m_interrupted = true;
+                m_PEntity->OnCastInterrupted(*this, action, msg, true);
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                Complete();
+                return false;
             }
         }
-        else if (battleutils::IsParalyzed(m_PEntity))
+
+        // Super Jump or otherwise untargetable
+        if (PTarget->PAI->IsUntargetable())
         {
-            msg           = MSGBASIC_IS_PARALYZED;
-            m_interrupted = true;
+            m_PEntity->OnCastInterrupted(*this, action, msg, true);
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
+        }
+
+        if (battleutils::IsParalyzed(m_PEntity))
+        {
+            action_t interruptedAction;
+            m_PEntity->setActionInterrupted(interruptedAction, PTarget, MSGBASIC_IS_PARALYZED_2, static_cast<uint16>(m_PSpell->getID()));
+            interruptedAction.recast   = 2; // seems hardcoded to 2
+            interruptedAction.actionid = static_cast<uint16>(m_PSpell->getID());
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(interruptedAction));
+
+            // Yes, you're seeing this correctly.
+            // A paralyze/interrupt proc on *spells* actually sends two actions. One that contains the para/intimidate message
+            // And a second action to send the fourcc "stop casting" command.
+            // Spell interrupts when you're moving send a message + stop casting fourcc command and not two actions.
+            action.id         = m_PEntity->id;
+            action.spellgroup = m_PSpell->getSpellGroup();
+            action.recast     = 2;
+            action.actiontype = ACTION_MAGIC_INTERRUPT;
+
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = m_PEntity->id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.messageID       = 0;
+            actionTarget.animation       = 0;
+            actionTarget.param           = 0; // sometimes 1?
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
         }
         else if (battleutils::IsIntimidated(m_PEntity, PTarget))
         {
-            msg           = MSGBASIC_IS_INTIMIDATED;
-            m_interrupted = true;
+            action_t interruptedAction;
+            m_PEntity->setActionInterrupted(interruptedAction, PTarget, MSGBASIC_IS_INTIMIDATED, static_cast<uint16>(m_PSpell->getID()));
+            interruptedAction.recast   = 2; // seems hardcoded to 2
+            interruptedAction.actionid = static_cast<uint16>(m_PSpell->getID());
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(interruptedAction));
+
+            // See comment in above block for paralyze
+            action.id         = m_PEntity->id;
+            action.spellgroup = m_PSpell->getSpellGroup();
+            action.recast     = 2;
+            action.actiontype = ACTION_MAGIC_INTERRUPT;
+
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = m_PEntity->id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.messageID       = 0;
+            actionTarget.animation       = 0;
+            actionTarget.param           = 0; // sometimes 1?
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
         }
 
         if (m_interrupted)
         {
-            m_PEntity->OnCastInterrupted(*this, action, msg);
+            m_PEntity->OnCastInterrupted(*this, action, msg, false);
         }
         else
         {
@@ -186,7 +259,7 @@ void CMagicState::Cleanup(time_point tick)
     if (!IsCompleted())
     {
         action_t action;
-        m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_IS_INTERRUPTED);
+        m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_IS_INTERRUPTED, false);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
 }
@@ -215,10 +288,19 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_CANNOT_USE_IN_AREA);
         return false;
     }
-    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE, EFFECT_OMERTA }))
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE }))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_UNABLE_TO_CAST_SPELLS);
         return false;
+    }
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_OMERTA))
+    {
+        int16 power = m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_OMERTA)->GetPower();
+        if ((1 << (m_PSpell->getSpellGroup() - 1)) & power)
+        {
+            m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_UNABLE_TO_CAST_SPELLS);
+            return false;
+        }
     }
     if (!HasCost())
     {
@@ -336,18 +418,27 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     {
         m_PEntity->addModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_TRANQUILITY)->GetPower());
     }
+
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_EQUANIMITY) && m_PSpell->getSpellGroup() == SPELLGROUP_BLACK)
     {
         m_PEntity->addModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_EQUANIMITY)->GetPower());
     }
+
     if (m_PSpell->isNa())
     {
         m_PEntity->addModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
     }
+
     // Subtle Sorcery sets Cumulative Enmity of spells to 0
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SUBTLE_SORCERY))
     {
         ce = 0;
+    }
+
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_EMBLEM) && m_PSpell->getSkillType() == SKILL_DIVINE_MAGIC)
+    {
+        ve = ve * (1.0f + (m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_DIVINE_EMBLEM)->GetPower() / 100.0f));
+        ce = ce * (1.0f + (m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_DIVINE_EMBLEM)->GetPower() / 100.0f));
     }
 
     if (PTarget != nullptr)
@@ -383,22 +474,33 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TRANQUILITY) && m_PSpell->getSpellGroup() == SPELLGROUP_WHITE)
     {
         m_PEntity->delModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_TRANQUILITY)->GetPower());
+
         if (enmityApplied)
         {
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_TRANQUILITY);
         }
     }
+
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_EQUANIMITY) && m_PSpell->getSpellGroup() == SPELLGROUP_BLACK)
     {
         m_PEntity->delModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_EQUANIMITY)->GetPower());
+
         if (enmityApplied)
         {
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_EQUANIMITY);
         }
     }
+
     if (m_PSpell->isNa())
     {
         m_PEntity->delModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
+    }
+
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_EMBLEM) &&
+        m_PSpell->getSkillType() == SKILL_DIVINE_MAGIC &&
+        enmityApplied)
+    {
+        m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_DIVINE_EMBLEM);
     }
 }
 

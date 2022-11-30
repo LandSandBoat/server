@@ -40,14 +40,14 @@ class CAbility;
 enum class EMobDifficulty : uint8
 {
     TooWeak = 0,
-    IncrediblyEasyPrey,
-    EasyPrey,
-    DecentChallenge,
-    EvenMatch,
-    Tough,
-    VeryTough,
-    IncrediblyTough,
-    MAX
+    IncrediblyEasyPrey, // 1
+    EasyPrey,           // 2
+    DecentChallenge,    // 3
+    EvenMatch,          // 4
+    Tough,              // 5
+    VeryTough,          // 6
+    IncrediblyTough,    // 7
+    MAX                 // 8
 };
 
 // Capacity Bonuses applied based on RoE Completion
@@ -161,9 +161,9 @@ namespace charutils
     int32 addPetAbility(CCharEntity* PChar, uint16 AbilityID);
     int32 delPetAbility(CCharEntity* PChar, uint16 AbilityID);
 
-    int32 hasTrait(CCharEntity* PChar, uint8 TraitID); // check if pchar has trait by traitid and jobid
-    int32 addTrait(CCharEntity* PChar, uint8 TraitID); // add trait by traitid and jobid
-    int32 delTrait(CCharEntity* PChar, uint8 TraitID); // delete trait by traitid and jobid
+    int32 hasTrait(CCharEntity* PChar, uint16 TraitID); // check if pchar has trait by traitid and jobid
+    int32 addTrait(CCharEntity* PChar, uint16 TraitID); // add trait by traitid and jobid
+    int32 delTrait(CCharEntity* PChar, uint16 TraitID); // delete trait by traitid and jobid
 
     int32 addWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to add weapon skill
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
@@ -260,6 +260,9 @@ namespace charutils
 
     void ReadHistory(CCharEntity* PChar);
     void WriteHistory(CCharEntity* PChar);
+
+    void ReadFishingHistory(CCharEntity* PChar);
+    void WriteFishingHistory(CCharEntity* PChar);
 
     uint8 getMaxItemLevel(CCharEntity* PChar);
     uint8 getItemLevelDifference(CCharEntity* PChar);

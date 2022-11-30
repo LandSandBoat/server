@@ -22,7 +22,7 @@ namespace gambits
 {
     // Validate gambit before it's inserted into the gambit list
     // Check levels, etc.
-    void CGambitsContainer::AddGambit(const Gambit_t& gambit)
+    std::string CGambitsContainer::AddGambit(Gambit_t const& gambit)
     {
         TracyZoneScoped;
 
@@ -40,7 +40,23 @@ namespace gambits
         if (available)
         {
             gambits.push_back(gambit);
+            return gambit.identifier;
         }
+        return "";
+    }
+
+    void CGambitsContainer::RemoveGambit(std::string const& id)
+    {
+        gambits.erase(
+            std::remove_if(gambits.begin(), gambits.end(),
+                           [&id](Gambit_t const& gambit)
+                           { return gambit.identifier == id; }),
+            gambits.end());
+    }
+
+    void CGambitsContainer::RemoveAllGambits()
+    {
+        gambits.clear();
     }
 
     void CGambitsContainer::Tick(time_point tick)
@@ -200,10 +216,8 @@ namespace gambits
                 {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
-                        auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                        std::transform(name.begin(), name.end(), name.begin(),
-                        [](unsigned char c) { return std::tolower(c); });
-                        if (name == "curilla")
+                        auto name = PMember->GetName();
+                        if (strcmpi(name.c_str(), "curilla") == 0)
                         {
                             result = true;
                         }
@@ -365,10 +379,8 @@ namespace gambits
                     {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
-                            auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                            std::transform(name.begin(), name.end(), name.begin(),
-                                           [](unsigned char c) { return std::tolower(c); });
-                            if (name == "curilla")
+                            auto name = PMember->GetName();
+                            if (strcmpi(name.c_str(), "curilla") == 0)
                             {
                                 target = PMember;
                             }
@@ -509,7 +521,6 @@ namespace gambits
 
                     if (action.select == G_SELECT::HIGHEST_WALTZ)
                     {
-                        // bool canWaltz = false;
                         auto currentTP = POwner->health.tp;
 
                         // clang-format off
@@ -525,9 +536,8 @@ namespace gambits
 
                         for (ABILITY const& waltz : wlist)
                         {
-                            auto waltzLevel = ability::GetAbility(waltz)->getLevel();
-                            // auto abilityName = ability::GetAbility(waltz)->getName();
-                            uint16 tpCost = 0;
+                            auto   waltzLevel = ability::GetAbility(waltz)->getLevel();
+                            uint16 tpCost     = 0;
 
                             if (mLevel >= waltzLevel)
                             {
@@ -993,7 +1003,6 @@ namespace gambits
             }
             else // Mobskill
             {
-                // CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
                 if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
                 {
                     target = POwner;

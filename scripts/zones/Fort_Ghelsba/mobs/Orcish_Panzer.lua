@@ -6,8 +6,8 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (isKiller) then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         local mobId = mob:getID()
         local nq = GetMobByID(mobId + 1) -- Orcish Fighter
         local hq = GetMobByID(mobId + 2) -- Chariotbuster Byakzak
@@ -25,7 +25,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 minutes
+    xi.mob.nmTODPersist(mob, math.random(3600, 4200)) -- 60 to 70 minutes
 end
 
 return entity

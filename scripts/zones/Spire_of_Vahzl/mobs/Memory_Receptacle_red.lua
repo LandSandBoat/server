@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
     mob:setMod(xi.mod.UDMGRANGE, -10001)
     mob:setMod(xi.mod.UDMGPHYS, -10001)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -90,7 +90,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Despawn all other mobs
     for i = mob:getID() + 1, mob:getID() + 8 do
         DespawnMob(i)

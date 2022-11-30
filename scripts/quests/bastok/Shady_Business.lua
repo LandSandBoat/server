@@ -30,11 +30,11 @@ quest.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Talib'] = quest:progressEvent(90),
+            ['Talib'] = quest:progressEvent(2),
 
             onEventFinish =
             {
-                [90] = function(player, csid, option, npc)
+                [2] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
             },
@@ -51,7 +51,7 @@ quest.sections =
             ['Talib'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.ZINC_ORE, 4 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_ZINC_ORE, 4 } }) then
                         return quest:progressEvent(91)
                     end
                 end,

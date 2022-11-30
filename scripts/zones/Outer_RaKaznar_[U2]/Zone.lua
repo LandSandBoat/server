@@ -3,25 +3,25 @@
 -----------------------------------
 local ID = require('scripts/zones/Outer_RaKaznar_[U2]/IDs')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onInstanceZoneIn = function(player, instance)
+zoneObject.onInstanceZoneIn = function(player, instance)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onInstanceLoadFailed = function()
+zoneObject.onInstanceLoadFailed = function()
     return 72
 end
 
-return zone_object
+return zoneObject

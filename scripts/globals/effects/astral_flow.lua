@@ -4,9 +4,9 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:recalculateAbilitiesTable()
     if target:isPC() then
         local jpBonus = target:getJobPointLevel(xi.jp.ASTRAL_FLOW_EFFECT) * 5
@@ -22,10 +22,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:recalculateAbilitiesTable()
     if target:isPC() then
         local jpBonus = target:getJobPointLevel(xi.jp.ASTRAL_FLOW_EFFECT) * 5
@@ -41,4 +41,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

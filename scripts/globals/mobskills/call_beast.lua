@@ -4,9 +4,9 @@
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasPet() or mob:getPet() == nil then
         return 1
     end
@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:entityAnimationPacket("casm")
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
@@ -28,4 +28,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return 0
 end
 
-return mobskill_object
+return mobskillObject

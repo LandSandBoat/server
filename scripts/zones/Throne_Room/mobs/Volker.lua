@@ -33,11 +33,11 @@ entity.onMobRoam = function(mob)
     elseif ready > 0 then
         mob:addEnmity(GetMobByID(ready + bit.lshift(mob:getZoneID(), 12) + 0x1000000), 0, 1)
     else
-        mob:setLocalVar("wait", wait+3)
+        mob:setLocalVar("wait", wait + 3)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:getBattlefield():lose()
 end
 

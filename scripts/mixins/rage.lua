@@ -15,18 +15,18 @@ g_mixins = g_mixins or {}
 
 local rageBuffs =
 {
-    {xi.mod.ATT, 9},
-    {xi.mod.RATT, 9},
-    {xi.mod.ACC, 9},
-    {xi.mod.RACC, 9},
-    {xi.mod.MATT, 9},
-    {xi.mod.MDEF, 9},
-    {xi.mod.MACC, 9},
-    {xi.mod.MEVA, 9},
-    {xi.mod.WSACC, 9},
-    {xi.mod.EVA, 9},
-    {xi.mod.RDEF, 9},
-    {xi.mod.REVA, 9},
+    { xi.mod.ATT, 9 },
+    { xi.mod.RATT, 9 },
+    { xi.mod.ACC, 9 },
+    { xi.mod.RACC, 9 },
+    { xi.mod.MATT, 9 },
+    { xi.mod.MDEF, 9 },
+    { xi.mod.MACC, 9 },
+    { xi.mod.MEVA, 9 },
+    { xi.mod.WSACC, 9 },
+    { xi.mod.EVA, 9 },
+    { xi.mod.RDEF, 9 },
+    { xi.mod.REVA, 9 },
 }
 
 g_mixins.rage = function(rageMob)
@@ -40,7 +40,10 @@ g_mixins.rage = function(rageMob)
     end)
 
     rageMob:addListener("COMBAT_TICK", "RAGE_CTICK", function(mob)
-        if mob:getLocalVar("[rage]started") == 0 and os.time() > mob:getLocalVar("[rage]at") then
+        if
+            mob:getLocalVar("[rage]started") == 0 and
+            os.time() > mob:getLocalVar("[rage]at")
+        then
             mob:setLocalVar("[rage]started", 1)
 
             -- boost stats

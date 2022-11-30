@@ -11,37 +11,43 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldInitialise = function(battlefield)
+battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
     battlefield:setLocalVar("instantKick", 1)
-    local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2
+    local baseID = ID.mob.PROMATHIA_OFFSET + battlefield:getArea()
     local pos = GetMobByID(baseID):getSpawnPos()
 
     local prishe = battlefield:insertEntity(11, true, true)
     prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192)
     prishe:spawn()
+    prishe:setAllegiance(xi.allegiance.PLAYER)
+    prishe:setStatus(xi.status.NORMAL)
 
     local selhteus = battlefield:insertEntity(12, true, true)
     selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
     selhteus:spawn()
+    selhteus:setAllegiance(xi.allegiance.PLAYER)
+    selhteus:setStatus(xi.status.NORMAL)
 end
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
+    local promathia = GetMobByID(ID.mob.PROMATHIA_OFFSET + battlefield:getArea())
+    promathia:setLocalVar("spawner", player:getID())
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldDestroy = function(battlefield)
+battlefieldObject.onBattlefieldDestroy = function(battlefield)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         -- local name, clearTime, partySize = battlefield:getRecord()
         player:startEvent(6)
@@ -50,10 +56,10 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefield_object.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-battlefield_object.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option)
 end
 
-return battlefield_object
+return battlefieldObject

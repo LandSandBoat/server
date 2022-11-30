@@ -15,7 +15,8 @@ quest.sections =
         check = function(player, questVars, vars)
             return not player:hasSpell(1010) and
                 not player:findItem(xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) and
-                player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
+                player:hasCompletedMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO) and
+                xi.settings.main.ENABLE_ROV == 1
         end,
 
         [xi.zone.NORG] =

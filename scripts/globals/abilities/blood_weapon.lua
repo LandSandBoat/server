@@ -1,21 +1,20 @@
 -----------------------------------
 -- Ability: Blood Weapon
--- Causes all attacks to drain enemy's HP.
+-- Description: Causes all attacks to drain enemy's HP.
 -- Obtained: Dark Knight Level 1
--- Recast Time: 1:00:00
--- Duration: 0:00:30
+-- Recast Time: 01:00:00
+-- Duration: 00:00:30
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dark_knight")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+abilityObject.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.dark_knight.checkBloodWeapon(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.BLOOD_WEAPON, 1, 0, 30)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.dark_knight.useBloodWeapon(player, target, ability)
 end
 
-return ability_object
+return abilityObject

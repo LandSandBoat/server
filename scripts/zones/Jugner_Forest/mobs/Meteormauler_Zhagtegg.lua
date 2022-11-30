@@ -12,12 +12,12 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     local meteormauler = mob:getID()
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.DMG,-5000)
+    mob:addMod(xi.mod.DMG, -5000)
 
     -- May spawn in a party with two other Orcs
-    if math.random(3) == 2 then
-        GetMobByID(meteormauler + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(meteormauler + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+    if math.random(1, 3) == 2 then
+        GetMobByID(meteormauler + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
+        GetMobByID(meteormauler + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(meteormauler + 1)
         SpawnMob(meteormauler + 2)
     end
@@ -26,7 +26,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId+i)
+        local guardID = GetMobByID(mobId + i)
         guardID:updateEnmity(target)
     end
 end
@@ -43,7 +43,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

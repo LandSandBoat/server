@@ -162,7 +162,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, card)
         else
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
-            npcUtil.giveItem(player, {{card, 5}})
+            npcUtil.giveItem(player, { { card, 5 } })
             player:messageSpecial(ID.text.ITEM_OBTAINED, card)
         end
 
@@ -214,11 +214,13 @@ entity.onEventFinish = function(player, csid, option)
         player:setLocalVar("Cardstemp", 1)
 
     elseif csid == 10114 then
-        if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
-            gil = 600,
-            title = xi.title.CARD_COLLECTOR,
-            var = { "AllInTheCards_date" }
-        }) then
+        if
+            npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
+                gil = 600,
+                title = xi.title.CARD_COLLECTOR,
+                var = { "AllInTheCards_date" }
+            })
+        then
             player:confirmTrade()
         end
 

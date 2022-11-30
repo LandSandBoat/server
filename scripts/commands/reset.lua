@@ -22,8 +22,8 @@ function onTrigger(player, target)
         targ = player
     else
         targ = GetPlayerByName(target)
-        if (targ == nil) then
-            error(player, string.format( "Player named '%s' not found!", target ) )
+        if targ == nil then
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -31,7 +31,7 @@ function onTrigger(player, target)
     -- reset target recasts
     targ:resetRecasts()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer( string.format( "Reset %s's recast timers.", targ:getName() ) )
+        player:PrintToPlayer(string.format("Reset %s's recast timers.", targ:getName()))
     end
 
     -- Clear debilitating effects from player

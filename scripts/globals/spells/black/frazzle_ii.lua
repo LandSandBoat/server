@@ -6,13 +6,13 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local dMND = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
 
     -- Base evasion reduction is determend by enfeebling skill
@@ -23,16 +23,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- Min cap: 0 at 0 dMND
     -- Max cap: 10 at 50 dMND
     basePotency = basePotency + utils.clamp(math.floor(dMND / 5), 0, 10)
-    local power = calculatePotency(basePotency, spell:getSkillType(), caster, target)
+    local power = xi.magic.calculatePotency(basePotency, spell:getSkillType(), caster, target)
 
-    local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = xi.magic.calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     local params = {}
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.MAGIC_EVASION_DOWN
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then
         if target:addStatusEffect(params.effect, power, 0, duration * resist) then
@@ -47,4 +47,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return params.effect
 end
 
-return spell_object
+return spellObject

@@ -11,24 +11,33 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+    if
+        target:hasStatusEffect(xi.effect.FOOD) or
+        target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
+    then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
-    local chocoboShirt = target:getEquipID(xi.slot.BODY) == 10293
+itemObject.onItemUse = function(target)
+    local chocoboShirt
+    if target:getEquipID(xi.slot.BODY) == 10293 then
+        chocoboShirt = 1
+    else
+        chocoboShirt = 0
+    end
     target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    if (power == 1) then
+    if power == 1 then
         target:addMod(xi.mod.AGI, 13)
         target:addMod(xi.mod.VIT, -5)
     else
@@ -40,9 +49,9 @@ end
 -----------------------------------
 -- onEffectLose Action
 -----------------------------------
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
-    if (power == 1) then
+    if power == 1 then
         target:delMod(xi.mod.AGI, 13)
         target:delMod(xi.mod.VIT, -5)
     else
@@ -51,4 +60,4 @@ item_object.onEffectLose = function(target, effect)
     end
 end
 
-return item_object
+return itemObject

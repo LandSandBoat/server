@@ -1,25 +1,27 @@
 -----------------------------------
---
 -- Stave Toss (staff wielding Mamool Ja only!)
---
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- If animationSub is 1, mob has already lost the staff. If zero, still has staff.
-    if mob:getAnimationSub() == 0 and (mob:getMainJob() == xi.job.BLM or mob:getMainJob() == xi.job.WHM) then
+    if
+        mob:getAnimationSub() == 0 and
+        (mob:getMainJob() == xi.job.BLM or mob:getMainJob() == xi.job.WHM)
+    then
         return 0
     end
+
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 3
+    local dmgmod = 1
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
@@ -28,4 +30,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

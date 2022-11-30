@@ -27,7 +27,7 @@ entity.onMobEngaged = function(mob, target)
 
     local mobid = mob:getID()
 
-    for member = mobid-1, mobid+6 do
+    for member = mobid-1, mobid + 6 do
         local m = GetMobByID(member)
         if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
@@ -36,15 +36,13 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local charm = mob:getLocalVar("Charm")
-
-    if (charm == 0 and mob:getHPP() <  50) then
+    if mob:getLocalVar("Charm") == 0 and mob:getHPP() <  50 then
         mob:useMobAbility(710)
         mob:setLocalVar("Charm", 1)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

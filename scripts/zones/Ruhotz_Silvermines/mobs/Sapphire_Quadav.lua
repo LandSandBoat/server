@@ -8,7 +8,7 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = -1.388, y = 1.0, z = 34.81 },
     { x = -30.27, y = 0.437, z = 55.10 },
@@ -23,10 +23,10 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    mob:pathThrough(path, xi.path.flag.PATROL)
+    mob:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -47,6 +47,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         ASSAULT_FAILED                = 5666,  -- Your mission was not successful; however, the Empire recognizes your contribution and has awarded you Assault Points.
         AUTOMATON_RENAME              = 5843,  -- Your automaton has a new name.
         YOU_CAN_BECOME_PUP            = 5846,  -- You can now become a puppetmaster!
+        BESIEGED_OFFSET               = 6828,  -- Your Imperial Standing has increased!
         PAY_DIVINATION                = 8780,  -- ou pay 1000 gil for the divination.
         MEMBER_OF_SALAHEEMS_SENTINELS = 9258,  -- You are now a member of Salaheem's Sentinels.
         ACCESS_TO_A_MOG_LOCKER        = 9259,  -- ou now have access to a Mog Locker.

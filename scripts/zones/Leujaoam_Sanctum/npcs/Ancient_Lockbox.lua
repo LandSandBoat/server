@@ -38,12 +38,12 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.LEUJAOAM_CLEANSING] =
         {
             {
-                {itemid = xi.items.HI_POTION_P3, droprate = 1000},
+                { itemid = xi.items.HI_POTION_P3, droprate = 1000 },
             },
 
             {
-                {itemid = xi.items.HI_POTION_P3, droprate = 100},
-                {itemid = 0, droprate = 900},
+                { itemid = xi.items.HI_POTION_P3, droprate = 100 },
+                { itemid = 0, droprate = 900 },
             },
 
             {
@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.ORICHALCUM_SURVEY] =
         {
             {
-                {itemid = xi.items.HI_POTION_P3, droprate = 1000},
+                { itemid = xi.items.HI_POTION_P3, droprate = 1000 },
             },
 
             {

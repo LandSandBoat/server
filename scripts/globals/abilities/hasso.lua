@@ -10,9 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if not target:isWeaponTwoHanded() then
         return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
@@ -20,7 +20,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local strboost = 0
 
     if target:getMainJob() == xi.job.SAM then
@@ -36,4 +36,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

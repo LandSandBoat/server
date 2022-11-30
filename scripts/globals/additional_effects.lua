@@ -18,7 +18,6 @@ require("scripts/globals/utils") -- For clamping function
 require("scripts/globals/msg")
 require("scripts/globals/events/harvest_festivals")
 --------------------------------------
-
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
 
@@ -30,16 +29,17 @@ end
 xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damage)
     -- Copied from existing scripts.
     local bonus = 0
+
     if element == xi.magic.ele.LIGHT then
         bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
-            bonus = bonus + (bonus -40) /2;
+            bonus = bonus + (bonus - 40) / 2
             damage = damage + bonus
         end
     else
         bonus = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
         if bonus > 20 then
-            bonus = bonus + (bonus -20) /2;
+            bonus = bonus + (bonus -20) / 2
             damage = damage + bonus
         end
     end
@@ -65,11 +65,13 @@ xi.additionalEffect.statusAttack = function(addStatus, defender)
         [xi.effect.POISON]       = { tick = 3, strip = nil },
         [xi.effect.CHOKE]        = { tick = 3, strip = nil },
     }
+
     local effect = effectList[addStatus]
     if effect then
         if effect.strip then
             defender:delStatusEffect(effect.strip)
         end
+
         return effect.tick
     end
 
@@ -78,55 +80,71 @@ end
 
 xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     local params = {}
-    params.bonusmab = 0
+    params.bonusmab   = 0
     params.includemab = false
-    damage = addBonusesAbility(attacker, element, defender, damage, params)
-    damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
-    damage = adjustForTarget(defender, damage, element)
-    damage = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 
-    --[[
-    This should rightly be modified by resistance checks, and while those DO they are presently not perfect.
-    If you want to force some randomness, un-comment the line below to artificially force 20% variance.
-    ]]
-    -- damage = damage * (math.random(90, 110)/100)
+    damage = xi.magic.addBonusesAbility(attacker, element, defender, damage, params)
+    damage = damage * xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
+    damage = xi.magic.adjustForTarget(defender, damage, element)
+    damage = xi.magic.finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 
     return damage
 end
 
--- paralyze on hit, fire damage on hit, etc..
+-- paralyze on hit, fire damage on hit, etc.
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
+-- TODO: Reduce complexity in this function:
+-- - replace giant if/else chain with switch statement
+-- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
-    local addType = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
+    local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
-    local damage = item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
-    local chance = item:getMod(xi.mod.ITEM_ADDEFFECT_CHANCE)
-    local element = item:getMod(xi.mod.ITEM_ADDEFFECT_ELEMENT)
+    local damage    = item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
+    local chance    = item:getMod(xi.mod.ITEM_ADDEFFECT_CHANCE)
+    local element   = item:getMod(xi.mod.ITEM_ADDEFFECT_ELEMENT)
     local addStatus = item:getMod(xi.mod.ITEM_ADDEFFECT_STATUS)
-    local power = item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
-    local duration = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
-    local msgID = 0
-    local msgParam = 0
+    local power     = item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
+    local duration  = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
+    local msgID     = 0
+    local msgParam  = 0
+
     local procType =
     {
         -- These are arbitrary, make up new ones as needed.
-        DAMAGE = 1,
-        DEBUFF = 2,
-        HP_HEAL = 3,
-        MP_HEAL = 4,
-        HP_DRAIN = 5,
-        MP_DRAIN = 6,
-        TP_DRAIN = 7,
-        HPMPTP_DRAIN = 8,
-        DISPEL = 9,
+        DAMAGE        = 1,
+        DEBUFF        = 2,
+        HP_HEAL       = 3,
+        MP_HEAL       = 4,
+        HP_DRAIN      = 5,
+        MP_DRAIN      = 6,
+        TP_DRAIN      = 7,
+        HPMPTP_DRAIN  = 8,
+        DISPEL        = 9,
         ABSORB_STATUS = 10,
         SELF_BUFF = 11,
         DEATH = 12,
         BRIGAND = 13,
     }
 
+    if item:getID() == 18148 then
+        local dLvl = defender:getMainLvl() - attacker:getMainLvl()
+        if dLvl <= 0 then
+            chance = 99
+        elseif dLvl <= 5 then
+            chance = 99 - (1.5 * dLvl)
+        else
+            chance = 75 - (3 * (dLvl - 5))
+        end
+
+        if defender:isNM() then
+            chance = chance / 1.5
+        end
+    end
+
     -- If we're not going to proc, lets not execute all those checks!
-    if chance < math.random(100) then
-        return 0,0,0
+    if math.random(1, 100) > chance then
+        return 0, 0, 0
     end
 
     --------------------------------------
@@ -135,24 +153,60 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         if element then
             damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
         end
+
         chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
     end
+
     --------------------------------------
 
     if addType == procType.DAMAGE then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        msgID  = xi.msg.basic.ADD_EFFECT_DMG
+
         if damage < 0 then
             msgID = xi.msg.basic.ADD_EFFECT_HEAL
         end
+
         msgParam = damage
 
     elseif addType == procType.DEBUFF then
         if addStatus and addStatus > 0 then
-            local tick = xi.additionalEffect.statusAttack(addStatus, defender)
-            msgID = xi.msg.basic.ADD_EFFECT_STATUS
-            defender:addStatusEffect(addStatus, power, tick, duration)
-            msgParam = addStatus
+            local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
+            local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
+            local immunity = 0
+
+            local immunityTable =
+            {
+                { status = xi.effect.SLEEP_I,   immunity = xi.immunity.SLEEP    },
+                { status = xi.effect.WEIGHT,    immunity = xi.immunity.GRAVITY  },
+                { status = xi.effect.BIND,      immunity = xi.immunity.BIND     },
+                { status = xi.effect.STUN,      immunity = xi.immunity.STUN     },
+                { status = xi.effect.SILENCE,   immunity = xi.immunity.SILENCE  },
+                { status = xi.effect.PARALYSIS, immunity = xi.immunity.PARALYZE },
+                { status = xi.effect.BLINDNESS, immunity = xi.immunity.BLIND    },
+                { status = xi.effect.SLOW,      immunity = xi.immunity.SLOW     },
+                { status = xi.effect.POISON,    immunity = xi.immunity.POISON   },
+                { status = xi.effect.ELEGY,     immunity = xi.immunity.ELEGY    },
+                { status = xi.effect.REQUIEM,   immunity = xi.immunity.REQUIEM  },
+                { status = xi.effect.TERROR,    immunity = xi.immunity.TERROR   },
+            }
+
+            for _, statusTable in pairs(immunityTable) do
+                if statusTable.status == addStatus then
+                    immunity = statusTable.immunity
+                    break
+                end
+            end
+
+            if
+                resist >= 0.5 and
+                duration * resist > 0 and
+                not defender:hasImmunity(immunity)
+            then
+                defender:addStatusEffect(addStatus, power, tick, duration * resist)
+                msgID    = xi.msg.basic.ADD_EFFECT_STATUS
+                msgParam = addStatus
+            end
         end
 
     elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
@@ -169,33 +223,52 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         attacker:addMP(magicPoints)
         msgParam = magicPoints
 
-    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then
+    elseif
+        addType == procType.HP_DRAIN or
+        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1)
+    then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+
+        -- Upyri: ID 4105
+        if defender:isUndead() or defender:getPool() == 4105 then
+            return 0
+        end
+
         if damage > defender:getHP() then
             damage = defender:getHP()
         end
 
-        msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+        msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
         msgParam = damage
         defender:addHP(-damage)
         attacker:addHP(damage)
 
-    elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
+    elseif
+        addType == procType.MP_DRAIN or
+        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2)
+    then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+
         if damage > defender:getMP() then
             damage = defender:getMP()
         end
-        msgID = xi.msg.basic.ADD_EFFECT_MP_DRAIN
+
+        msgID    = xi.msg.basic.ADD_EFFECT_MP_DRAIN
         msgParam = damage
         defender:addMP(-damage)
         attacker:addMP(damage)
 
-    elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
+    elseif
+        addType == procType.TP_DRAIN or
+        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 3)
+    then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+
         if damage > defender:getTP() then
             damage = defender:getTP()
         end
-        msgID = xi.msg.basic.ADD_EFFECT_TP_DRAIN
+
+        msgID    = xi.msg.basic.ADD_EFFECT_TP_DRAIN
         msgParam = damage
         defender:addTP(-damage)
         attacker:addTP(damage)
@@ -205,38 +278,43 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         -- Resistance check should be in dispelStatusEffect() itself
         if dispel == xi.effect.NONE then
             return 0, 0, 0
-        else
+        elseif not defender:hasImmunity(xi.immunity.DISPEL) then
             msgID = xi.msg.basic.ADD_EFFECT_DISPEL
             msgParam = dispel
+        else
+            return 0, 0, 0
         end
 
     elseif addType == procType.ABSORB then
         -- Ripping off Aura Steal here
-        local resist = applyResistanceAddEffect(attacker, defender, element, 0)
+        local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
         if resist > 0.0625 then
             local stolen = attacker:stealStatusEffect(defender)
-            msgID = xi.msg.basic.STEAL_EFFECT
-            msgParam = stolen
+            msgID        = xi.msg.basic.STEAL_EFFECT
+            msgParam     = stolen
         end
 
     elseif addType == procType.SELF_BUFF then
         if addStatus == xi.effect.TELEPORT then -- WARP
             attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
-            msgID = xi.msg.basic.ADD_EFFECT_WARP
+            msgID    = xi.msg.basic.ADD_EFFECT_WARP
             msgParam = 0
         elseif addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
-            if attacker:hasStatusEffect(xi.effect.BLINK) or attacker:hasStatusEffect(xi.effect.UTSUSEMI) then
+            if
+                attacker:hasStatusEffect(xi.effect.BLINK) or
+                attacker:hasStatusEffect(xi.effect.UTSUSEMI)
+            then
                 return 0, 0, 0
             else
                 attacker:addStatusEffect(xi.effect.BLINK, power, 0, duration)
-                msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
+                msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
                 msgParam = xi.effect.BLINK
             end
         elseif addStatus == xi.effect.HASTE then
             attacker:addStatusEffect(xi.effect.HASTE, power, 0, duration, 0, 0)
             -- Todo: verify power/duration/tier/overwrite etc
-            msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
+            msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
         else
             print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
@@ -247,9 +325,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:isNM() or
             defender:isUndead() or
             -- Todo: DeathRes has no place in the resistance functions so far..
-            defender:getMod(xi.mod.DEATHRES) > math.random(100)
+            math.random(1, 100) > defender:getMod(xi.mod.DEATHRES) -- We are checking for a fail, not a success.
         then
-            return 0, 0, 0 -- NMs immune, so return out
+            return 0, 0, 0 -- NMs immune or roll failed so return out
         else
             msgID = xi.msg.basic.ADD_EFFECT_STATUS
             msgParam = xi.effect.KO
@@ -257,8 +335,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     elseif addType == procType.BRIGAND then
-        if defender:getPool() == 531 and
-        attacker:getEquipID(xi.slot.MAIN) == xi.items.BUCCANEERS_KNIFE then
+        if
+            defender:getPool() == 531 and
+            attacker:getEquipID(xi.slot.MAIN) == xi.items.BUCCANEERS_KNIFE
+        then
             defender:setMod(xi.mod.DMG, 0)
             defender:setLocalVar("killable", 1)
             defender:setUnkillable(false)

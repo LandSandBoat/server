@@ -15,17 +15,18 @@ require("scripts/globals/bluemagic")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local multi = 1.0
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 1.50
     end
+
     local params = {}
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
@@ -43,8 +44,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local resist = applyResistance(caster, target, spell, params)
-    if (resist > 0.0625) then
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
+    if resist > 0.0625 then
         target:dispelStatusEffect()
     end
 
@@ -54,4 +55,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return damage
 end
 
-return spell_object
+return spellObject

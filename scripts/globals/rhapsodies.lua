@@ -29,18 +29,18 @@ xi.rhapsodies.expansion =
 xi.rhapsodies.unavailability =
 {
     [xi.rhapsodies.character.PRISHE] = set{
-       xi.mission.id.cop.DARKNESS_NAMED,
-       xi.mission.id.cop.SLANDEROUS_UTTERINGS,
-       xi.mission.id.cop.DESIRES_OF_EMPTINESS,
-       xi.mission.id.cop.THREE_PATHS,
-       xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG,
-       xi.mission.id.cop.A_PLACE_TO_RETURN,
-       xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS,
-       xi.mission.id.cop.ONE_TO_BE_FEARED,
-       xi.mission.id.cop.THE_WARRIORS_PATH,
-       xi.mission.id.cop.GARDEN_OF_ANTIQUITY,
-       xi.mission.id.cop.WHEN_ANGELS_FALL,
-       xi.mission.id.cop.DAWN,
+        xi.mission.id.cop.DARKNESS_NAMED,
+        xi.mission.id.cop.SLANDEROUS_UTTERINGS,
+        xi.mission.id.cop.DESIRES_OF_EMPTINESS,
+        xi.mission.id.cop.THREE_PATHS,
+        xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG,
+        xi.mission.id.cop.A_PLACE_TO_RETURN,
+        xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS,
+        xi.mission.id.cop.ONE_TO_BE_FEARED,
+        xi.mission.id.cop.THE_WARRIORS_PATH,
+        xi.mission.id.cop.GARDEN_OF_ANTIQUITY,
+        xi.mission.id.cop.WHEN_ANGELS_FALL,
+        xi.mission.id.cop.DAWN,
     },
     [xi.rhapsodies.character.TENZEN] = set{
         xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING,
@@ -251,6 +251,11 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.CAIT_SITH,
     },
 
+    [xi.mission.id.rov.PAST_IMPERFECT] =
+    {
+        xi.rhapsodies.character.TENZEN,
+    },
+
     [xi.mission.id.rov.THE_CURSED_TEMPLE] =
     {
         xi.rhapsodies.character.TENZEN,
@@ -386,5 +391,6 @@ xi.rhapsodies.charactersAvailable = function(player)
             return false
         end
     end
+
     return true
 end

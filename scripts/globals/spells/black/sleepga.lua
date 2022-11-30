@@ -5,28 +5,29 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    local duration = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = xi.magic.calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     local params = {}
     params.diff = dINT
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.SLEEP_I
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if (caster:isMob()) then
-        if (caster:getPool() == 5310) then -- Amnaf (Flayer)
+    if caster:isMob() then
+        if caster:getPool() == 5310 then -- Amnaf (Flayer)
             caster:resetEnmity(target)
         end
+
         -- Todo: get rid of this whole block by handling it in the mob script
         -- this requires a multi target enmity without specifying a target (have to get hate list from mob)
         -- OR by altering onSpellPrecast to have a target param..
@@ -37,7 +38,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if resist >= 0.5 then
         local resduration = duration * resist
 
-        resduration = calculateBuildDuration(target, duration, params.effect, caster)
+        resduration = xi.magic.calculateBuildDuration(target, duration, params.effect, caster)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
@@ -53,4 +54,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return params.effect
 end
 
-return spell_object
+return spellObject

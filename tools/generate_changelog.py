@@ -13,11 +13,12 @@ def days_since_last_run():
     # Count back from today's date, until you encounter either the 1st or the 15th
     today = date.today()
     days = 1
-    last_date_day = (today - timedelta(days = days)).day
+    last_date_day = (today - timedelta(days=days)).day
     while last_date_day != 1 and last_date_day != 15:
         days = days + 1
-        last_date_day = (today - timedelta(days = days)).day
+        last_date_day = (today - timedelta(days=days)).day
     return days
+
 
 length_days = 14
 if len(sys.argv) >= 2:
@@ -29,22 +30,26 @@ if len(sys.argv) >= 2:
 print(f"Calculating changes for {length_days} days...")
 
 today = date.today()
-last_week = today - timedelta(days = length_days)
+last_week = today - timedelta(days=length_days)
 
-params = {"q" : f"user:LandSandBoat repo:server state:closed is:pr merged:>={str(last_week)}"}
+params = {
+    "q": f"user:LandSandBoat repo:server state:closed is:pr merged:>={str(last_week)}"
+}
 query_string = urllib.parse.urlencode(params)
 request = f"https://api.github.com/search/issues?page=1&per_page=100&{query_string}"
 response = reqs.get(request)
 data = json.loads(response.text)
 
 print(f"Writing to: changelog-{today}.md...")
-with open(f'changelog-{today}.md', 'w') as file:
+with open(f"changelog-{today}.md", "w") as file:
     file.write(f"## LandSandBoat Changelog ({today})\n")
     for raw_entry in enumerate(data["items"]):
         entry = raw_entry[1]
-        title = entry['title']
-        number = entry['number']
-        html_url = entry['html_url']
-        patch_url = entry["pull_request"]['patch_url']
-        username = entry['user']['login']
-        file.write(f"- {title.capitalize()} [[#{number}]({html_url}), [patch]({patch_url})] ({username})\n")
+        title = entry["title"]
+        number = entry["number"]
+        html_url = entry["html_url"]
+        patch_url = entry["pull_request"]["patch_url"]
+        username = entry["user"]["login"]
+        file.write(
+            f"- {title.capitalize()} [[#{number}]({html_url}), [patch]({patch_url})] ({username})\n"
+        )

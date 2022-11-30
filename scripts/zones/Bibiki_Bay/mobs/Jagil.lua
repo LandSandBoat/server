@@ -3,16 +3,22 @@
 --  Mob: Jagil
 -- Note: PH for Serra
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
-require("scripts/globals/mobs")
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.SERRA_PH, 10, 3600) -- 1 hour
+    -- PH is the 5th Jagil entry in the zone
+    local jagilId  = mob:getZone():queryEntitiesByName('Jagil')[5]:getID()
+    local serraId  = mob:getZone():queryEntitiesByName('Serra')[1]:getID()
+    local serra_ph =
+    {
+        [jagilId] = serraId, -- -348 0.001 -904
+    }
+    xi.mob.phOnDespawn(mob, serra_ph, 10, 3600) -- 1 hour
 end
 
 return entity

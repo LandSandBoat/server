@@ -3,7 +3,7 @@
 -- NM: King of Cups
 -- KSNM: Royale Ramble
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -28,7 +28,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

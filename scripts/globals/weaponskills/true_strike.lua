@@ -16,9 +16,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -26,15 +26,15 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.str_wsc = 0.5 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 1.0 params.crit200 = 1.0 params.crit300 = 1.0
     params.canCrit = true
-    params.acc100 = 0.5 params.acc200= 0.7 params.acc300= 1 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
+    params.acc100 = 0.5 params.acc200 = 0.7 params.acc300 = 1 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
     params.atk100 = 2; params.atk200 = 2; params.atk300 = 2
 
-    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 1.0
     end
 
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+    local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

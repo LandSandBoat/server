@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobEngaged = function(mob, target)
 
-    if (mob:getAnimationSub() == 3) then
+    if mob:getAnimationSub() == 3 then
         SetDropRate(106, 1581, 1000)
     else
         SetDropRate(106, 1581, 0)
@@ -23,11 +23,11 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:showText(mob, ID.text.ANIMATED_HORN_DIALOG+2)
+    mob:showText(mob, ID.text.ANIMATED_HORN_DIALOG + 2)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    player:showText(mob, ID.text.ANIMATED_HORN_DIALOG+1)
+entity.onMobDeath = function(mob, player, optParams)
+    player:showText(mob, ID.text.ANIMATED_HORN_DIALOG + 1)
 end
 
 return entity

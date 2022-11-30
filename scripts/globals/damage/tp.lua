@@ -31,9 +31,10 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
         modifiedDelay = (delay * (100 - attacker:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
     elseif attacker:isUsingH2H() then
 
-        if attacker:getObjType() == xi.objType.PC then             -- handle h2h with > 1 swing only on PC
-            if (attacker:getEquippedItem(xi.slot.SUB) ~= nil or    -- equipped shield = one swing
-                attacker:getSkillRank(xi.skill.HAND_TO_HAND) == 0) -- zero h2h rank skill = one swing
+        if attacker:getObjType() == xi.objType.PC then            -- handle h2h with > 1 swing only on PC
+            if
+                attacker:getEquippedItem(xi.slot.SUB) ~= nil or   -- equipped shield = one swing
+                attacker:getSkillRank(xi.skill.HAND_TO_HAND) == 0 -- zero h2h rank skill = one swing
             then
                 modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)), 96) -- min delay of 96 total, -- https://www.bg-wiki.com/ffxi/Attack_Speed
                 canZanshin = true -- Zanshin can proc on an "unarmed" swing                  -- https://www.bg-wiki.com/ffxi/Zanshin
@@ -45,7 +46,6 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
             -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one "fist". Perhaps they have a shield with no main weapon.
             -- elseif attacker:getAutoAttackHits() > 1
             modifiedDelay = math.max((delay - attacker:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48)
-            printf("%d",delay)
         end
     else -- single melee swing, either 1H or 2H
         canZanshin = true -- https://www.bg-wiki.com/ffxi/Zanshin
@@ -125,12 +125,15 @@ xi.damage.tp.calculateTPGainOnPhysicalDamage = function (totalDamage, delay, att
 
         -- mob vs mob (via charm) is observed to use the (base * 1/3) formula instead of (base + 30)
         -- (base + 30) formula appears to be intentional by SE to make mobs "more dangerous" when hit by players/pets
-        if defender:getObjType() == xi.objType.MOB and attacker:getObjType() ~= xi.objType.MOB then
+        if
+            defender:getObjType() == xi.objType.MOB and
+            attacker:getObjType() ~= xi.objType.MOB
+        then
             -- +30 sourced from http://wiki.ffo.jp/html/2621.html and tested in game
             return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
         else
             -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
-            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1/3))
+            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
         end
     end
 

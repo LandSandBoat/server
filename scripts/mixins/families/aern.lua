@@ -20,17 +20,19 @@ g_mixins.families.aern = function(aernMob)
                     reraises = 1
                 end
             end
+
             mob:setMobMod(xi.mobMod.NO_DROPS, 0) -- Drops on if Not reraising
             if curr_reraise < reraises then
                 mob:setMobMod(xi.mobMod.NO_DROPS, 1)  -- Drops off if reraising
                 local dropid = mob:getDropID()
-                local target = mob:getTarget()
+                local target = killer
                 if
                     target:isPet() and
                     not target:isAlive()
                 then
                     target = target:getMaster()
                 end
+
                 mob:timer(12000, function(mobArg)
                     mobArg:setHP(mob:getMaxHP())
                     mobArg:setDropID(dropid)
@@ -56,12 +58,14 @@ g_mixins.families.aern = function(aernMob)
                                 elseif i == partySize then --if all checks fail just disengage
                                     mobArg:disengage()
                                 end
+
                                 i = i + 1
                             end
                         else
                             mobArg:disengage()
                         end
                     end
+
                     mobArg:triggerListener("AERN_RERAISE", mobArg, curr_reraise + 1)
                 end)
             end

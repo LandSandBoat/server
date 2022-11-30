@@ -59,6 +59,7 @@ zones[xi.zone.GUSGEN_MINES] =
         PULVERIZED_PFEFFER  = 17580041,
         SMOTHERED_SCHMIDT   = 17580039,
         WOUNDED_WURFEL      = 17580043,
+        JUGGLER_HECATOMB    = 17092827,
     },
     npc =
     {

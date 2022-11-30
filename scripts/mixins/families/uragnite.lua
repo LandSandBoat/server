@@ -34,7 +34,7 @@ g_mixins.families = g_mixins.families or {}
 
 local function enterShell(mob)
     mob:setAnimationSub(1)
-    mob:SetAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(false)
     mob:setMod(xi.mod.UDMGPHYS, -9500)
     mob:setMod(xi.mod.UDMGRANGE, -9500)
     mob:setMod(xi.mod.UDMGMAGIC, -4000)
@@ -46,7 +46,7 @@ end
 
 local function exitShell(mob)
     mob:setAnimationSub(0)
-    mob:SetAutoAttackEnabled(true)
+    mob:setAutoAttackEnabled(true)
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
@@ -78,15 +78,19 @@ xi.mix.uragnite.config = function(mob, params)
     if params.inShellSkillList and type(params.inShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]inShellSkillList", params.inShellSkillList)
     end
+
     if params.noShellSkillList and type(params.noShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]noShellSkillList", params.noShellSkillList)
     end
+
     if params.timeInShellMin and type(params.timeInShellMin) == "number" then
         mob:setLocalVar("[uragnite]timeInShellMin", params.timeInShellMin)
     end
+
     if params.timeInShellMax and type(params.timeInShellMax) == "number" then
         mob:setLocalVar("[uragnite]timeInShellMax", params.timeInShellMax)
     end
+
     if params.inShellRegen and type(params.inShellRegen) == "number" then
         mob:setLocalVar("[uragnite]inShellRegen", params.inShellRegen)
     end

@@ -123,16 +123,20 @@ xi.msg.basic =
     USES_JA                = 100, -- The <player> uses ..
     USES                   = 101, -- The <entity> uses ..
     JA_RECOVERS_HP         = 102, -- The <player> uses .. <target> recovers .. HP.
+    JA_RECOVERS_HP_2       = 318, -- <user> uses ability. <target> recovers <amount> HP. -- Observed on healing breath.
     JA_DAMAGE              = 110, -- <user> uses <ability>. <target> takes <amount> damage.
     JA_REMOVE_EFFECT       = 123, -- <user> uses <ability>. <user> successfully removes <target>'s <status>.
     JA_ENFEEB_IS           = 127, -- <user> uses <ability>. <target> is <status>.
     JA_NO_EFFECT           = 156, -- <user> uses <ability>. No effect on <target>. (1 line msg)
     JA_MISS                = 158, -- <user> uses <ability>, but misses. (no name included)
     USES_JA_TAKE_DAMAGE    = 317, -- The <player> uses .. <target> takes .. points of damage.
+    JA_GAIN_EFFECT         = 266, -- <target> gains the effect of <ability>.
     JA_REMOVE_EFFECT_2     = 321, -- <user> uses <ability>. <target>'s <status> wears off.
     JA_NO_EFFECT_2         = 323, -- <user> uses <ability>. No effect on <target>. (2 line msg)
     JA_MISS_2              = 324, -- <user> uses <ability>, but misses <target>. (includes target name)
     JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
+    JA_ATK_ENHANCED        = 285, -- <target>'s attacks are enhanced.
+    JA_MAGIC_BURST         = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
 
     -- Misc Other
     DEFEATS_TARG           = 6,   -- The <player> defeats <target>.
@@ -202,6 +206,7 @@ xi.msg.basic =
     STATUS_INCREASED       = 562, -- The status parameters of <target> have increased.
     PET_CANNOT_DO_ACTION   = 574, -- <player>'s pet is currently unable to perform that action.
     PET_NOT_ENOUGH_TP      = 575, -- <player>'s pet does not have enough TP to perform that action.
+    SPIRIT_BOND            = 800, -- Spirit Bond Activates. <Player> takes <number> points of damage. -- Wyvern Spirit bond
 
     -- Food
     IS_FULL                 = 246,  -- <target> is full.
@@ -254,6 +259,7 @@ xi.msg.basic =
     RECOVERS_HP             = 24,   -- <target> recovers <number> HP.
     RECOVERS_MP             = 25,   -- <target> recovers <number> MP.
     RECOVERS_HP_AND_MP      = 26,   -- <target> recovers <number> HP and MP.
+    IS_PARALYZED_2          = 84,   -- <target> is paralyzed.
     IS_STATUS               = 203,  -- <target> is <status>.
     IS_NO_LONGER_STATUS     = 204,  -- <target> is no longer <status>.
     GAINS_EFFECT_OF_STATUS  = 205,  -- <target> gains the effect of <status>.
@@ -297,6 +303,7 @@ xi.msg.basic =
     COVER_FAILURE          = 312, -- The <player>'s attempt to cover has no effect.
 
     -- PUP
+    AUTO_EXCEEDS_CAPACITY  = 745, -- Your automaton exceeds one or more elemental capacity values and cannot be activated.
     AUTO_OVERLOAD_CHANCE   = 798, -- The <pet>'s overload chance is <number>%.
     AUTO_OVERLOADED        = 799, -- The <pet>'s overload chance is <number>%. The <pet> is overloaded!
     PROVOKE_SWITCH         = 418, -- The <actor> uses <action> on <target>. The <target> switches to <actor>!

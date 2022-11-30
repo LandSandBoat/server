@@ -11,22 +11,22 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
     end
+
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- try to drain buff
     local effect = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
     local dmg = 0
 
-    if (effect ~= 0) then
+    if effect ~= 0 then
         skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
         return 1
     else
@@ -40,4 +40,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

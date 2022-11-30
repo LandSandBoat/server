@@ -9,9 +9,9 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     if caster:isMob() and target:hasStatusEffect(xi.effect.STONESKIN) then
         return 1
     else
@@ -19,7 +19,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     end
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local pMod = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC) / 3 + caster:getStat(xi.mod.MND)
     local pAbs = 0
     local pEquipMods = caster:getMod(xi.mod.STONESKIN_BONUS_HP)
@@ -35,8 +35,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- pAbs = utils.clamp(1, xi.settings.main.STONESKIN_CAP) This just always sets it to 350, let's use the actual value, shall we?
     pAbs = utils.clamp(pAbs, 1, xi.settings.main.STONESKIN_CAP)
 
-    local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    duration = calculateDurationForLvl(duration, 28, target:getMainLvl())
+    local duration = xi.magic.calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    duration = xi.magic.calculateDurationForLvl(duration, 28, target:getMainLvl())
 
     local final = pAbs + pEquipMods
     if target:addStatusEffect(xi.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
@@ -48,4 +48,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.STONESKIN
 end
 
-return spell_object
+return spellObject

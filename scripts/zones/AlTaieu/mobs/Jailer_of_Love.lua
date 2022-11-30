@@ -51,15 +51,15 @@ end
 
 local spawnPets = function(mob, minionOffset)
     mob:entityAnimationPacket("casm")
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-    mob:SetMobAbilityEnabled(false)
+    mob:setAutoAttackEnabled(false)
+    mob:setMagicCastingEnabled(false)
+    mob:setMobAbilityEnabled(false)
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
             mobArg:entityAnimationPacket("shsm")
-            mobArg:SetAutoAttackEnabled(true)
-            mobArg:SetMagicCastingEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setAutoAttackEnabled(true)
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
             GetMobByID(minionOffset + 0):setSpawn(mobArg:getXPos() + 4, mobArg:getYPos(), mobArg:getZPos())
             GetMobByID(minionOffset + 1):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos() + 4)
             GetMobByID(minionOffset + 2):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos() - 4)
@@ -106,7 +106,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setBehaviour(2)
-    mob:SetMagicCastingEnabled(true)
+    mob:setMagicCastingEnabled(true)
 end
 
 entity.onMobSpawn = function(mob)
@@ -115,7 +115,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.ASTRAL_FLOW, hpp = math.random(45, 55)},
+            { id = xi.jsa.ASTRAL_FLOW, hpp = math.random(45, 55) },
         },
     })
 end
@@ -123,6 +123,7 @@ end
 entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)
+    mob:setMagicCastingEnabled(true)
     mob:setAnimationSub(2)
     mob:setLocalVar("elementAbsorb", os.time() + 120)
     mob:setLocalVar("pop_pets", os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
@@ -132,6 +133,8 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
+    mob:setAnimationSub(2)
+
     -- reduce regen after nine Xzomits and Hpemdes (total of both) groups are killed
     if
         mob:getLocalVar("JoL_Regen_Reduction") == 0 and
@@ -148,7 +151,7 @@ entity.onMobFight = function(mob, target)
         local abilities = { 307, 404, 603, 604, 624, 625, 626, 627 }
         local previousAbsorb = mob:getLocalVar("currentAbsorb")
         mob:setLocalVar("currentAbsorb", math.random(459, 466))
-        mob:setLocalVar("elementAbsorb", os.time() + 120)
+        mob:setLocalVar("elementAbsorb", os.time() + 60)
         mob:setLocalVar("twohour_tp", mob:getTP())
         mob:useMobAbility(abilities[math.random(#abilities)])
         mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])
@@ -178,19 +181,20 @@ entity.onMobFight = function(mob, target)
             spawnPets(mob, minionOffset)
         elseif spawns > 8 then
             mob:entityAnimationPacket("casm")
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetMobAbilityEnabled(false)
+            mob:setAutoAttackEnabled(false)
+            mob:setMagicCastingEnabled(false)
+            mob:setMobAbilityEnabled(false)
             mob:timer(3000, function(mobArg)
                 if mobArg:isAlive() then
                     mobArg:entityAnimationPacket("shsm")
-                    mobArg:SetAutoAttackEnabled(true)
-                    mobArg:SetMagicCastingEnabled(true)
-                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:setAutoAttackEnabled(true)
+                    mobArg:setMagicCastingEnabled(true)
+                    mobArg:setMobAbilityEnabled(true)
                     spawnSharks(mobArg)
                 end
             end)
         end
+
         mob:setLocalVar("SPAWNS", spawns + 1)
     end
 end
@@ -203,7 +207,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     for i = ID.mob.JAILER_OF_LOVE + 1, ID.mob.JAILER_OF_LOVE + 27 do
         local pet = GetMobByID(i)
         if pet:isSpawned() then
@@ -213,7 +217,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    if math.random(100) <= 25 then -- 25% chance to spawn Absolute Virtue
+    if math.random(1, 100) <= 25 then -- 25% chance to spawn Absolute Virtue
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
     end
 end

@@ -43,8 +43,7 @@ local clammingItems =
 }
 
 local function giveImprovedResults(player)
-
-    if (player:getMod(xi.mod.CLAMMING_IMPROVED_RESULTS) > 0) then
+    if player:getMod(xi.mod.CLAMMING_IMPROVED_RESULTS) > 0 then
         return 1
     end
 
@@ -52,8 +51,7 @@ local function giveImprovedResults(player)
 end
 
 local function giveReducedIncidents(player)
-
-    if (player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0) then
+    if player:getMod(xi.mod.CLAMMING_REDUCED_INCIDENTS) > 0 then
         return 0.05
     end
 
@@ -64,18 +62,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(xi.ki.CLAMMING_KIT)) then
+    if player:hasKeyItem(xi.ki.CLAMMING_KIT) then
         player:setLocalVar("ClammingPointID", npc:getID())
 
-        if (GetServerVariable("ClammingPoint_" .. npc:getID() .. "_InUse") == 1) then
+        if GetServerVariable("ClammingPoint_" .. npc:getID() .. "_InUse") == 1 then
             player:messageSpecial(ID.text.IT_LOOKS_LIKE_SOMEONE)
         else
-            if (player:getCharVar("ClammingKitBroken") > 0) then -- Broken bucket
+            if player:getCharVar("ClammingKitBroken") > 0 then -- Broken bucket
                 player:messageSpecial(ID.text.YOU_CANNOT_COLLECT)
             else
                 local delay = GetServerVariable("ClammingPoint_" .. npc:getID() .. "_Delay")
 
-                if ( delay > 0 and delay > os.time()) then -- player has to wait a little longer
+                if delay > 0 and delay > os.time() then -- player has to wait a little longer
                     player:messageSpecial(ID.text.IT_LOOKS_LIKE_SOMEONE)
                 else
                     SetServerVariable("ClammingPoint_" .. npc:getID() .. "_InUse", 1)
@@ -91,22 +89,24 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-
-    if (csid == 20) then
-        if (player:getCharVar("ClammingKitSize") == 200 and math.random() <= giveReducedIncidents(player)) then
+    if csid == 20 then
+        if
+            player:getCharVar("ClammingKitSize") == 200 and
+            math.random() <= giveReducedIncidents(player)
+        then
             player:setLocalVar("SomethingJumpedInBucket", 1)
         else
             local dropRate = math.random()
             local improvedResults = giveImprovedResults(player)
 
             for itemDrop = 3, #clammingItems, 4 do
-                if (dropRate <= clammingItems[itemDrop + improvedResults]) then
+                if dropRate <= clammingItems[itemDrop + improvedResults] then
 
                     player:setLocalVar("ClammedItem", clammingItems[itemDrop - 2])
                     player:incrementCharVar("ClammedItem_" .. clammingItems[itemDrop - 2], 1)
                     player:incrementCharVar("ClammingKitWeight", clammingItems[itemDrop - 1])
 
-                    if (player:getCharVar("ClammingKitWeight") > player:getCharVar("ClammingKitSize")) then -- Broken bucket
+                    if player:getCharVar("ClammingKitWeight") > player:getCharVar("ClammingKitSize") then -- Broken bucket
                         player:setCharVar("ClammingKitBroken", 1)
                     end
 
@@ -118,9 +118,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 20) then
-        if (player:getLocalVar("SomethingJumpedInBucket") > 0) then
+    if csid == 20 then
+        if player:getLocalVar("SomethingJumpedInBucket") > 0 then
             player:setLocalVar("SomethingJumpedInBucket", 0)
 
             player:messageSpecial(ID.text.SOMETHING_JUMPS_INTO)
@@ -133,8 +132,8 @@ entity.onEventFinish = function(player, csid, option)
         else
             local clammedItem = player:getLocalVar("ClammedItem")
 
-            if (clammedItem > 0) then
-                if (player:getCharVar("ClammingKitBroken") > 0) then --Broken bucket
+            if clammedItem > 0 then
+                if player:getCharVar("ClammingKitBroken") > 0 then --Broken bucket
                     player:messageSpecial(ID.text.THE_WEIGHT_IS_TOO_MUCH, clammedItem)
 
                     for item = 1, #clammingItems, 4 do -- Remove items from bucket

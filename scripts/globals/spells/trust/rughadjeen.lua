@@ -9,17 +9,17 @@
 -----------------------------------
 require("scripts/globals/trust")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.NASHMEIRA] = xi.trust.message_offset.TEAMWORK_1,
         [xi.magic.spell.GADALAR] = xi.trust.message_offset.TEAMWORK_2,
@@ -35,11 +35,11 @@ spell_object.onMobSpawn = function(mob)
     mob:addMod(xi.mod.TRIPLE_ATTACK, 3)
     -- TODO: Add en-fire effect from Algol
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SENTINEL,ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SENTINEL, ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.FLASH, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.DIVINE_EMBLEM,ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.DIVINE_EMBLEM, ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HOLY)
 
@@ -57,19 +57,19 @@ spell_object.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_USE", "RUGHADJEEN_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3237 then -- Victory Beacon
         -- Do not despair! The Goddess of Victory fights by our side!
-            if math.random(100) <= 33 then
+            if math.random(1, 100) <= 33 then
                 xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
             end
         end
     end)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

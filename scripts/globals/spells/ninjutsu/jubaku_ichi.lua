@@ -7,13 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.PARALYSIS
     -- Base Stats
     -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
@@ -23,17 +23,17 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.NINJUTSU
     params.bonus = 0
-    duration = duration * applyResistance(caster, target, spell, params)
+    duration = duration * xi.magic.applyResistance(caster, target, spell, params)
     --Paralyze base power is 20 and is not affected by resistaces.
     local power = 20
 
     --Calculates resist chanve from Reist Blind
-    if (math.random(0, 100) >= target:getMod(xi.mod.PARALYZERES)) then
-        if (duration >= 80) then
+    if math.random(0, 100) >= target:getMod(xi.mod.PARALYZERES) then
+        if duration >= 80 then
             -- Erases a weaker blind and applies the stronger one
             local paralysis = target:getStatusEffect(effect)
-            if (paralysis ~= nil) then
-                if (paralysis:getPower() < power) then
+            if paralysis ~= nil then
+                if paralysis:getPower() < power then
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
@@ -51,7 +51,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
+
     return effect
 end
 
-return spell_object
+return spellObject

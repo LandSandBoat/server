@@ -10,22 +10,33 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local job = mob:getMainJob()
-    if (job == xi.job.RDM or job == xi.job.THF or job == xi.job.PLD or job == xi.job.BST or job == xi.job.RNG or job == xi.job.BRD or job == xi.job.NIN or job == xi.job.COR) then
+
+    -- TODO: Table this
+    if
+        job == xi.job.RDM or
+        job == xi.job.THF or
+        job == xi.job.PLD or
+        job == xi.job.BST or
+        job == xi.job.RNG or
+        job == xi.job.BRD or
+        job == xi.job.NIN or
+        job == xi.job.COR
+    then
         return 0
     end
+
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 2.6
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
+    local dmgmod = 1
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.5, 1.75, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     local typeEffect = xi.effect.STUN
@@ -36,4 +47,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

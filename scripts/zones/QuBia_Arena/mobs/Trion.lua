@@ -43,11 +43,11 @@ entity.onMobRoam = function(mob)
             mob:setLocalVar("wait", 0)
         end
     else
-        mob:setLocalVar("wait", wait+3)
+        mob:setLocalVar("wait", wait + 3)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:getBattlefield():lose()
 end
 

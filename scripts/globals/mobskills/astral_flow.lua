@@ -6,26 +6,29 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("modules/era/lua_dynamis/globals/era_dynamis_spawning")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 xi = xi or {}
 xi.astralflow = xi.astralflow or {}
 xi.astralflow.avatarOffsets =
 {
     [17444883] = 3, -- Vermilion-eared Noberry
+    [17444890] = 3, -- Vermilion-eared Noberry
+    [17444897] = 3, -- Vermilion-eared Noberry
     [17453078] = 3, -- Duke Dantalian
     [17453085] = 3, -- Duke Dantalian
     [17453092] = 3, -- Duke Dantalian
     [17506670] = 5, -- Kirin
 }
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.USES)
     local mobID = mob:getID()
+    local pos = mob:getPos()
     local avatar = 0
 
     if mob:isInDynamis() then
@@ -49,7 +52,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         end
 
         if not GetMobByID(avatar):isSpawned() then
-            GetMobByID(avatar):setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1, mob:getRotPos())
+            GetMobByID(avatar):setSpawn(pos.x + 1, pos.y, pos.z + 1, pos.rot)
             SpawnMob(avatar):updateEnmity(mob:getTarget())
         end
     end
@@ -57,4 +60,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return xi.effect.ASTRAL_FLOW
 end
 
-return mobskill_object
+return mobskillObject

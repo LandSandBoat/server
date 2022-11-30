@@ -96,8 +96,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/petskill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/region.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/region.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe.h
     ${CMAKE_CURRENT_SOURCE_DIR}/spell.cpp
@@ -118,6 +116,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/transport.h
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/treasure_pool.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/trigger_area.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/trigger_area.h
     ${CMAKE_CURRENT_SOURCE_DIR}/unitychat.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/unitychat.h
     ${CMAKE_CURRENT_SOURCE_DIR}/universal_container.cpp
@@ -190,10 +190,14 @@ target_include_directories(xi_map
         ${module_include_dirs}
 )
 
-target_precompile_headers(xi_map PUBLIC pch.h)
+target_precompile_headers(xi_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
+
+if (APPLE)
+    disable_lto(xi_map)
+endif()
 
 if(TRACY_ENABLE)
-    target_link_libraries(xi_map PUBLIC tracy_client)
+    target_link_libraries(xi_map PUBLIC TracyClient)
 endif(TRACY_ENABLE)
 
 set_target_output_directory(xi_map)

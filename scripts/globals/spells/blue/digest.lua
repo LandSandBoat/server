@@ -16,13 +16,13 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
 
     local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     --get resist multiplier (1x if no resist)
@@ -31,25 +31,25 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.MND
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     --get the resisted damage
-    dmg = dmg*resist
+    dmg = dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = xi.magic.addBonuses(caster, spell, target, dmg)
     --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
+    dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
-    if (dmg < 0) then
+    if dmg < 0 then
         dmg = 0
     end
 
-    if (target:isUndead()) then
+    if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return dmg
     end
 
-    if (target:getHP() < dmg) then
+    if target:getHP() < dmg then
         dmg = target:getHP()
     end
 
@@ -61,4 +61,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

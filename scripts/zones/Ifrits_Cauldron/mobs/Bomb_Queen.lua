@@ -32,12 +32,14 @@ entity.onMobFight = function(mob, target)
                 break
             end
         end
+
         if canSpawnPet then
             mob:entityAnimationPacket("casm")
             mob:timer(5000, function(bombQueen)
                 if bombQueen:isDead() then
                     return
                 end
+
                 bombQueen:entityAnimationPacket("shsm")
                 local bombQueenId = mob:getID()
 
@@ -73,9 +75,9 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- pets die with queen
-    if isKiller then
+    if optParams.isKiller then
         local mobId = mob:getID()
         for i = mobId + 1, mobId + 5 do
             local pet = GetMobByID(i)

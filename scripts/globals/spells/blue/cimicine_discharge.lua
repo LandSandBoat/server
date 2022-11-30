@@ -18,13 +18,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- local pINT = caster:getStat(xi.mod.INT)
     -- local mINT = target:getStat(xi.mod.INT)
     -- local dINT = pINT - mINT
@@ -34,7 +34,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
 
     if resist < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) --resist message
@@ -49,4 +49,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.SLOW
 end
 
-return spell_object
+return spellObject

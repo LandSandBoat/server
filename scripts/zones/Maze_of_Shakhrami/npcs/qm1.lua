@@ -19,13 +19,17 @@ entity.onTrigger = function(player, npc)
         raceOffset = 1
     end
 
-    if VanadielRSELocation() == 2 and VanadielRSERace() == playerRace and not player:hasItem(18246 + playerRace - raceOffset) then
-
-        npcUtil.popFromQM(player, npc, ID.mob.AROMA_CRAWLER, { claim=true, hide=math.random(600, 1800), look=true, radius=1 })  -- ??? despawns and respawns 10-30 minutes after NM dies
+    if
+        VanadielRSELocation() == 2 and
+        VanadielRSERace() == playerRace and
+        not player:hasItem(18246 + playerRace - raceOffset)
+    then
+        npcUtil.popFromQM(player, npc, ID.mob.AROMA_CRAWLER, { claim = true, hide = math.random(600, 1800), look = true, radius = 1 })  -- ??? despawns and respawns 10-30 minutes after NM dies
 
         for i = 1, 7 do
             SetDropRate(172, 18246 + i, 0) -- zeros all satchet drop rates
         end
+
         SetDropRate(172, 18246 + playerRace - raceOffset, 130) -- adds 13% drop rate to specific week's race
 
         local newSpawn = math.random(1, 3) -- determine new spawn point for ???

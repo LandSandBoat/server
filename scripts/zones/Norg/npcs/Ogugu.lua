@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Norg
 --  NPC: Ogugu
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 

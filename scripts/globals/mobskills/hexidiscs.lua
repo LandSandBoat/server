@@ -11,21 +11,21 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 -----------------------------------
 -- onMobSkillCheck
 -- if not in Ball form, then ignore.
 -----------------------------------
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() ~=0) then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getAnimationSub() ~= 0 then
         return 1
     else
         return 0
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 6
     local accmod = 1
     local dmgmod = .7
@@ -35,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

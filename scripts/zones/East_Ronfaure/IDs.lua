@@ -28,6 +28,12 @@ zones[xi.zone.EAST_RONFAURE] =
         FIND_NOTHING                  = 7256,  -- You dig and you dig, but find nothing.
         RAYOCHINDOT_DIALOG            = 7421,  -- If you are outmatched, run to the city as quickly as you can.
         CROTEILLARD_DIALOG            = 7422,  -- Sorry, no chatting while I'm on duty.
+        NAME_IS_ANDELAIN              = 7423,  -- My name is Andelain. As part of my devotions, I come here each day to pray.
+        NO_MORE_NO_LESS               = 7424,  -- During this time, I may eat only three <ITEM_ID> a day for nourishment. No more, no less. And no other food may I eat.
+        THANKS_TO_GODDESS             = 7425,  -- Thanks be to the Goddess in her benevolence!
+        CANNOT_ACCEPT_THIS            = 7426,  -- I am currently undergoing devotions, and as such, am not allowed to take alms from those on the road. I am sorry, but I cannot accept this
+        GATES_OF_PARADISE             = 7427,  -- May the Gates of Paradise open to all....
+        ONLY_NEED_ONE                 = 7428,  -- I appreciate your offer, but I only need one <ITEM_ID>. Thank you for your kindness.
         CHEVAL_RIVER_WATER            = 7447,  -- You fill your waterskin with water from the river. You now have <item>.
         BLESSED_WATERSKIN             = 7466,  -- To get water, trade the waterskin you hold with the river.
         LOGGING_IS_POSSIBLE_HERE      = 7497,  -- Logging is possible here if you have <item>.
@@ -49,6 +55,12 @@ zones[xi.zone.EAST_RONFAURE] =
         VOIDWALKER_OBTAIN_KI          = 11069, -- Obtained key item: <keyitem>!
         LEARNS_SPELL                  = 11959, -- <name> learns <spell>!
         UNCANNY_SENSATION             = 11961, -- You are assaulted by an uncanny sensation.
+        SMILEBRINGER_START            = 11031, -- So, are you ready-steady? Beginner level training...GO! Come on, pump those legs like there's no tomorrow!
+        SMILEHELPER_IDLE              = 11059, -- This is a checkpointaru for the Smilebringer Boot camp. To learny-wearn more, please speak with the smile sergeant posted by the town entrance.
+        SMILEHELPER_CHECKPOINT_1      = 11053, -- Checkpoint <number> cleared, Elasped time: [minutes], [seconds]
+        SMILEHELPER_CHECKPOINT_2      = 11054, -- Checkpoint <number> cleared! You gain the effect of Flee. Elasped time: [minutes], [seconds]
+        SMILEHELPER_ALREADY_VISITED   = 11055, -- You have already cleared this checkpoint. Elapsed time: [minutes], [seconds]
+        SMILEHELPER_POINTS_CLEARED    = 11057, -- All checkpoints cleared! Please report back to the smile sergeant in charge.
     },
 
     mob =
@@ -98,7 +110,8 @@ zones[xi.zone.EAST_RONFAURE] =
             {
                 17191323  -- Yilbegan
             }
-        }
+        },
+        RAMBUKK = 17191044,
     },
 
     npc =
@@ -111,6 +124,23 @@ zones[xi.zone.EAST_RONFAURE] =
             17191533,
             17191534,
             17191535,
+        },
+        STARLIGHT_DECORATIONS =
+        {
+            [17191562] = 17191562,  -- Stampeding Bison (Smilebringer Bootcamp Sergeant)
+        },
+        SMILE_HELPERS =
+        {
+            [17191563] = 17191563,  -- Smile Helper
+            [17191564] = 17191564,  -- Smile Helper
+            [17191565] = 17191565,  -- Smile Helper
+            [17191566] = 17191566,  -- Smile Helper
+            [17191567] = 17191567,  -- Smile Helper
+            [17191568] = 17191568,  -- Smile Helper
+            [17191569] = 17191569,  -- Smile Helper
+            [17191570] = 17191570,  -- Smile Helper
+            [17191571] = 17191571,  -- Smile Helper
+            [17191572] = 17191572,  -- Smile Helper
         },
     },
 }

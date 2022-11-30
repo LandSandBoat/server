@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
+require("scripts/globals/events/starlight_celebrations")
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
@@ -59,6 +60,12 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
+                        if startedQuest ~= 0 then
+                            return xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+                        end
+                    end
                     local desiredBody = poseItems[player:getMainJob()]
                     local currentBody = player:getEquipID(xi.slot.BODY)
                     if currentBody ~= desiredBody then
@@ -86,6 +93,7 @@ quest.sections =
                 [87] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
+
                 [90] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
@@ -112,7 +120,7 @@ quest.sections =
                     quest:setVar(player, 'Stage', os.time() + 300)
                     quest:setVar(player, 'Prog', requestedBody)
 
-                    return quest:progressEvent(92, 0, requestedBody)
+                    return quest:progressEvent(92, 0, requestedBody, requestedBody)
                 end,
             },
         },
@@ -134,7 +142,7 @@ quest.sections =
                         if player:getEquipID(xi.slot.BODY) == requestedBody then
                             return quest:progressEvent(96)
                         else
-                            return quest:progressEvent(93, 0, requestedBody)
+                            return quest:progressEvent(93, 0, requestedBody, requestedBody)
                         end
                     else -- Over time. Quest failed.
                         return quest:progressEvent(102)
@@ -147,6 +155,7 @@ quest.sections =
                 [96] = function(player, csid, option, npc) -- Quest completed
                     quest:complete(player)
                 end,
+
                 [102] = function(player, csid, option, npc) -- Quest failed.
                     player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
                     quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.

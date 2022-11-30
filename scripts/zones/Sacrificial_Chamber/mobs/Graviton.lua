@@ -19,7 +19,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("everyonesRancorUsed") == 0 and mob:getHPP() <= mob:getLocalVar("everyonesRancorHPP") then
+    if
+        mob:getLocalVar("everyonesRancorUsed") == 0 and
+        mob:getHPP() <= mob:getLocalVar("everyonesRancorHPP")
+    then
         mob:setLocalVar("everyonesRancorUsed", 1)
         mob:useMobAbility(921)
     end
@@ -29,7 +32,7 @@ entity.onMobDisengage = function(mob, weather)
     mob:setLocalVar("everyonesRancorUsed", 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -27,7 +27,7 @@
 #include <numeric>
 #include <string>
 
-sol::state lua; // lgtm [cpp/short-global-name]
+sol::state lua;
 
 /**
  * @brief Load the bare minimum required to use Lua.
@@ -57,10 +57,6 @@ void lua_init()
     {
         result.get<sol::table>()["start"];
         ShowInfo("Started script debugger");
-    }
-    else
-    {
-        ShowInfo("Failed to start script debugger");
     }
 }
 

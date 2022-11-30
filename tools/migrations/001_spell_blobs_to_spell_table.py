@@ -1,14 +1,19 @@
 from migrations import utils
-import mysql.connector
+import mariadb
+
 
 def migration_name():
     return "Spell blobs to spell table"
+
 
 def check_preconditions(cur):
     cur.execute("SHOW TABLES LIKE 'char_spells';")
 
     if not cur.fetchone():
-        raise Exception("char_spells table does not exist. Please run sql/char_spells.sql")
+        raise Exception(
+            "char_spells table does not exist. Please run sql/char_spells.sql"
+        )
+
 
 def needs_to_run(cur):
     # ensure char_spells table is empty
@@ -25,6 +30,7 @@ def needs_to_run(cur):
         return False
 
     return True
+
 
 def migrate(cur, db):
 
@@ -47,9 +53,15 @@ def migrate(cur, db):
                 for bit in binary_spells:
                     if bit == "1":
                         if spellId >= spellLimit:
-                            print("Going over spell limit of %d, not adding %d" % (spellLimit, spellId))
+                            print(
+                                "Going over spell limit of %d, not adding %d"
+                                % (spellLimit, spellId)
+                            )
                         else:
-                            cur.execute("INSERT IGNORE INTO char_spells VALUES (%s, %s);", (charId, spellId))
+                            cur.execute(
+                                "INSERT IGNORE INTO char_spells VALUES (%s, %s);",
+                                (charId, spellId),
+                            )
                             # print("Added spell %d" % spellId)
 
                     spellId = spellId + 1
@@ -60,5 +72,5 @@ def migrate(cur, db):
                 print("Charid %d has no spells, skipping" % charId)
 
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

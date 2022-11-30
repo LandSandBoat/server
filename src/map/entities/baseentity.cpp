@@ -43,7 +43,7 @@ CBaseEntity::CBaseEntity()
     animation    = 0;
     animationsub = 0;
     speed        = 50 + settings::get<int8>("map.SPEED_MOD"); // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
-    speedsub     = 50;                                        // Retail does NOT adjust this when speed is adjusted.
+    speedsub     = 40;                                        // Retail does NOT adjust this when speed is adjusted.
     namevis      = 0;
     updatemask   = 0;
     PBattlefield = nullptr;
@@ -77,14 +77,14 @@ void CBaseEntity::FadeOut()
     updatemask |= UPDATE_HP;
 }
 
-const int8* CBaseEntity::GetName()
+const std::string& CBaseEntity::GetName()
 {
-    return (const int8*)name.c_str();
+    return name;
 }
 
-const int8* CBaseEntity::GetPacketName()
+const std::string& CBaseEntity::GetPacketName()
 {
-    return (const int8*)packetName.c_str();
+    return packetName;
 }
 
 uint16 CBaseEntity::getZone() const
@@ -202,5 +202,5 @@ uint16 CBaseEntity::GetModelId() const
 
 bool CBaseEntity::IsDynamicEntity() const
 {
-    return this->targid >= 0x800;
+    return this->targid >= 0x700;
 }

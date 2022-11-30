@@ -24,14 +24,14 @@ entity.onMobFight = function(mob, target)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
-                SpawnMob((m:getID() +1), instance)
+                SpawnMob((m:getID() + 1), instance)
             end)
         elseif not secondPet:isSpawned() then
             secondPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
             mob:timer(2500, function(m)
-                SpawnMob((m:getID() +2), instance)
+                SpawnMob((m:getID() + 2), instance)
             end)
         end
     end
@@ -45,11 +45,11 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
     if ID.mob[6].rampart1 == mob:getID() or ID.mob[6].rampart2 == mob:getID() then
         if instance:getStage() == 6 and instance:getProgress() >= 1 then
-            if isKiller then
+            if optParams.isKiller then
                 instance:setProgress(instance:getProgress() + 1)
             end
         end

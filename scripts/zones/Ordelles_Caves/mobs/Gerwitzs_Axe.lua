@@ -1,15 +1,22 @@
 -----------------------------------
 -- Area: Ordelles Caves
 --   NM: Gerwitz's Axe
--- Involved In Quest: Dark Puppet
 -- !pos -51 0.1 3 193
+-----------------------------------
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if player:getCharVar("darkPuppetCS") >= 2 then
-        player:setCharVar("darkPuppetCS", 3)
-    end
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.ACC, 1000) -- It should never miss
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

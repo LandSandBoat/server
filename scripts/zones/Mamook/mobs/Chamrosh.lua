@@ -27,19 +27,24 @@ entity.onMobFight = function(mob, target)
     local spell = mob:getLocalVar("COPY_SPELL")
     local changeTime = mob:getLocalVar("changeTime")
 
-    if spell > 0 and mob:hasStatusEffect(xi.effect.SILENCE) == false then
+    if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
         if delay >= 3 then
             mob:castSpell(spell)
             mob:setLocalVar("COPY_SPELL", 0)
             mob:setLocalVar("delay", 0)
         else
-            mob:setLocalVar("delay", delay+1)
+            mob:setLocalVar("delay", delay + 1)
         end
     end
-    if mob:getHPP() < mob:getLocalVar("useWise") and mob:getLocalVar("usedMainSpec") == 0 then
+
+    if
+        mob:getHPP() < mob:getLocalVar("useWise") and
+        mob:getLocalVar("usedMainSpec") == 0
+    then
         mob:useMobAbility(1702)
         mob:setLocalVar("usedMainSpec", 1)
     end
+
     if mob:getBattleTime() == changeTime then
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
@@ -54,7 +59,11 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMagicHit = function(caster, target, spell)
-    if spell:tookEffect() and target:getAnimationSub() == 1 and (caster:isPC() or caster:isPet()) then
+    if
+        spell:tookEffect() and
+        target:getAnimationSub() == 1 and
+        (caster:isPC() or caster:isPet())
+    then
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
     end
@@ -62,7 +71,7 @@ entity.onMagicHit = function(caster, target, spell)
     return 1
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -21,7 +21,10 @@ entity.onTrigger = function(player, npc)
     local npcid = npc:getID()
     local event = nil
 
-    if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.IMMORTAL_SENTRIES and not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE) then
+    if
+        player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.IMMORTAL_SENTRIES and
+        not player:hasKeyItem(xi.ki.SUPPLIES_PACKAGE)
+    then
         if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.NYZUL) then
             event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 117 or 118
         else
@@ -44,6 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         if csid == 121 or csid == 122 then
             xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.NYZUL)
         end
+
         xi.teleport.toChamberOfPassage(player)
     end
 end

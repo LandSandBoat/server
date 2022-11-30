@@ -118,7 +118,10 @@ mission.sections =
                     if missionStatus == 11 then
                         return mission:progressEvent(507)
                     elseif missionStatus == 0 then
-                        local needsHalverTrust = (not player:hasSpell(972) and not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and 1 or 0
+                        local needsHalverTrust =
+                            (not player:hasSpell(972) and
+                            not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and
+                            xi.settings.main.ENABLE_ROV == 1
 
                         return mission:progressEvent(505, { [7] = needsHalverTrust })
                     else
@@ -274,7 +277,10 @@ mission.sections =
                     -- Part II - Bastok > Windurst
                     elseif missionStatus == 6 then
                         return mission:progressEvent(462)
-                    elseif player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and missionStatus == 7 then
+                    elseif
+                        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST) and
+                        missionStatus == 7
+                    then
                         return mission:progressEvent(458) -- Head to Bastok
                     elseif missionStatus == 11 then
                         return mission:progressEvent(468)

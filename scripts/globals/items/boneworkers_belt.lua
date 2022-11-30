@@ -10,42 +10,27 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
-    local imagery =
-    {
-        xi.effect.FISHING_IMAGERY,
-        xi.effect.WOODWORKING_IMAGERY,
-        xi.effect.SMITHING_IMAGERY,
-        xi.effect.GOLDSMITHING_IMAGERY,
-        xi.effect.CLOTHCRAFT_IMAGERY,
-        xi.effect.LEATHERCRAFT_IMAGERY,
-        xi.effect.BONECRAFT_IMAGERY,
-        xi.effect.ALCHEMY_IMAGERY,
-        xi.effect.COOKING_IMAGERY
-    }
-
-    for _, effect in ipairs(imagery) do
-        if (target:hasStatusEffect(effect)) then
-            result = xi.msg.basic.ITEM_UNABLE_TO_USE
-        end
+    if target:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
+        result = 241
     end
 
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 120)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.BONE, 1)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.BONE, 1)
 end
 
-return item_object
+return itemObject

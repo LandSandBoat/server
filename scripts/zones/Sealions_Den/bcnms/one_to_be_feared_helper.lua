@@ -33,7 +33,7 @@ end
 -----------------------------------
 -- Battle 1: 5 Mammets
 -----------------------------------
-oneToBeFeared.handleMammetDeath = function(mob, player, isKiller)
+oneToBeFeared.handleMammetDeath = function(mob, player, optParams)
     -- Find mob offset for given battlefield instance
     local battlefield      = mob:getBattlefield()
     local mammetOffset     = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (battlefield:getArea() - 1))
@@ -48,48 +48,64 @@ oneToBeFeared.handleMammetDeath = function(mob, player, isKiller)
         end
     end
 
-    if mammetDeathCount == 5 and player:hasStatusEffect(xi.effect.BATTLEFIELD) and player:getLocalVar("[OTBF]MammetCS") == 0 then
-        player:setLocalVar("[OTBF]MammetCS", 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
-        player:startEvent(10)
+    if mammetDeathCount == 5 then
+        for _, member in pairs(battlefield:getPlayers()) do
+            if member:getLocalVar("[OTBF]MammetCS") == 0 then
+                member:setLocalVar("[OTBF]MammetCS", 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
+                member:startEvent(10)
+            end
+        end
     end
 end
 
 oneToBeFeared.handleMammetBattleEnding = function(player, csid, option)
-    if csid == 10 then
-        -- Players are healed in between fights, but their TP is set to 0
-        player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
-        healCharacter(player)
+    local battlefield = player:getBattlefield()
 
-        -- Move player to instance start. End battle 1.
-        player:setLocalVar("[OTBF]battleCompleted", 1)
-        returnToAirship(player)
+    for _, member in pairs(battlefield:getPlayers()) do
+        if csid == 10 and member:getLocalVar("[OTBF]battleCompleted") == 0 then
+            -- Players are healed in between fights, but their TP is set to 0
+            member:addTitle(xi.title.BRANDED_BY_LIGHTNING)
+            healCharacter(member)
+
+            -- Move player to instance start. End battle 1.
+            member:setLocalVar("[OTBF]battleCompleted", 1)
+            returnToAirship(member)
+        end
     end
 end
 
 -----------------------------------
 -- Battle 2: Omega
 -----------------------------------
-oneToBeFeared.handleOmegaDeath = function(mob, player, isKiller)
-    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        player:startEvent(11)
+oneToBeFeared.handleOmegaDeath = function(mob, player, optParams)
+    local battlefield = mob:getBattlefield()
+
+    for _, member in pairs(battlefield:getPlayers()) do
+        member:startEvent(11)
     end
 end
 
 oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option)
-    if csid == 11 then
-        -- Players are healed in between fights, but their TP is set to 0.
-        player:addTitle(xi.title.OMEGA_OSTRACIZER)
-        healCharacter(player)
+    local battlefield = player:getBattlefield()
 
-        -- Move player to instance start. End battle 2.
-        player:setLocalVar("[OTBF]battleCompleted", 2)
-        returnToAirship(player)
+    for _, member in pairs(battlefield:getPlayers()) do
+        if csid == 11 and member:getLocalVar("[OTBF]battleCompleted") == 1 then
+            -- Players are healed in between fights, but their TP is set to 0.
+            member:addTitle(xi.title.OMEGA_OSTRACIZER)
+            healCharacter(member)
+
+            -- Move player to instance start. End battle 2.
+            member:setLocalVar("[OTBF]battleCompleted", 2)
+            returnToAirship(member)
+        end
     end
 end
+
 -----------------------------------
 -- Battle 3: Ultima
 -----------------------------------
-oneToBeFeared.handleUltimaDeath = function(mob, player, isKiller)
+oneToBeFeared.handleUltimaDeath = function(mob, player, optParams)
+    mob:getBattlefield():win()
     player:addTitle(xi.title.ULTIMA_UNDERTAKER)
     player:setLocalVar("[OTBF]battleCompleted", 0)
 end

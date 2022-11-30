@@ -9,14 +9,14 @@ local entity = {}
 
 local drawInPos =
 {
-    {330.00, -23.91, -89.09},
-    {330.15, -24.00, -80.97},
-    {323.57, -24.00, -80.17},
-    {325.03, -24.00, -84.18},
-    {321.71, -23.99, -87.13},
-    {315.91, -24.14, -87.18},
-    {315.18, -23.96, -80.03},
-    {317.55, -23.95, -83.00},
+    { 330.00, -23.91, -89.09 },
+    { 330.15, -24.00, -80.97 },
+    { 323.57, -24.00, -80.17 },
+    { 325.03, -24.00, -84.18 },
+    { 321.71, -23.99, -87.13 },
+    { 315.91, -24.14, -87.18 },
+    { 315.18, -23.96, -80.03 },
+    { 317.55, -23.95, -83.00 },
 }
 
 entity.onMobSpawn = function(mob)
@@ -48,7 +48,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.CERBERUS_MUZZLER)
 end
 

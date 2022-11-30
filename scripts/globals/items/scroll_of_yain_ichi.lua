@@ -3,14 +3,14 @@
 -- Scroll of Yain: Ichi
 -- Teaches the ninjutsu Yain: Ichi
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(506)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(506)
 end
 
-return item_object
+return itemObject

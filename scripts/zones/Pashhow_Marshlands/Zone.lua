@@ -9,24 +9,28 @@ require('scripts/globals/missions')
 require('scripts/globals/zone')
 require('scripts/missions/amk/helpers')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onChocoboDig = function(player, precheck)
+zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
-zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.BOWHO_WARMONGER)
-    GetMobByID(ID.mob.BOWHO_WARMONGER):setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
+zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BOWHO_WARMONGER)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(547.841, 23.192, 696.323, 136)
     end
 
@@ -42,33 +46,33 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onZoneOut = function(player)
+zoneObject.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
     end
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onGameDay = function()
+zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE109_ITEMS", 0)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 13 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function( player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
         DisallowRespawn(ID.mob.TOXIC_TAMLYN, false)
         if os.time() > GetServerVariable("TamlynRespawn") then
@@ -79,4 +83,4 @@ zone_object.onZoneWeatherChange = function(weather)
     end
 end
 
-return zone_object
+return zoneObject

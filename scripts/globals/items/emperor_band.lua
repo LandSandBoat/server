@@ -11,17 +11,18 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/item_utils")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(xi.effect.DEDICATION) then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect    = xi.effect.DEDICATION
     local power     = 50
     local duration  = 43200
@@ -30,4 +31,4 @@ item_object.onItemUse = function(target)
     xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
 end
 
-return item_object
+return itemObject

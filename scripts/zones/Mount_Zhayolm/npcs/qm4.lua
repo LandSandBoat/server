@@ -9,7 +9,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2585) and npcUtil.popFromQM(player, npc, ID.mob.KHROMASOUL_BHURBORLOR, { hide = 0 }) then -- Trade Vinegar Pie
+    if
+        npcUtil.tradeHas(trade, 2585) and
+        npcUtil.popFromQM(player, npc, ID.mob.KHROMASOUL_BHURBORLOR, { hide = 0 })
+    then
+        -- Trade Vinegar Pie
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

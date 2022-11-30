@@ -170,14 +170,14 @@ public:
 
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
-    auto   getZoneName() -> const char*;                                // Get Entity zone name
-    bool   isZoneVisited(uint16 zone);                                  // true если указанная зона посещалась персонажем ранее
+    auto   getZoneName() -> const std::string&;                         // Get Entity zone name
+    bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region
     uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
     bool   isInMogHouse();                                              // Check if entity inside a mog house
 
-    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
@@ -214,8 +214,8 @@ public:
     bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
-    bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))
-    void   createWornItem(uint16 itemID);                                                   // Update this item in worn item (player:createWornItem(itemid))
+    uint8  getWornUses(uint16 itemID);                                                      // Check if the item is already worn
+    uint8  incrementItemWear(uint16 itemID);                                                // Increment the item's worn value and returns it
     auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
 
     void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
@@ -265,6 +265,7 @@ public:
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
+    void   updateLook();
     void   restoreNpcLook();
     void   setCostume(uint16 costume);
     uint16 getCostume();
@@ -435,6 +436,7 @@ public:
     void  delHP(int32 delAmt);             // Subtract hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
                      sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
+    bool  checkThirdEye(CLuaBaseEntity* PLuaDefender);
     void  hideHP(bool value);
     int32 getDeathType();            // Returns Death Type for Abyssea
     void  setDeathType(int32 value); // Sets Death Type for Abyssea
@@ -514,6 +516,8 @@ public:
 
     bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
+    uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity); // Checks difficulty of the mob
+
     // Instances
     auto getInstance() -> std::optional<CLuaInstance>;
     void setInstance(CLuaInstance* PLuaInstance);
@@ -525,13 +529,13 @@ public:
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getTargID()
 
     // Battlefields
-    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
-    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
-    bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
-    bool  enterBattlefield(sol::object const& area);                                                      // enter a battlefield entity is registered with
-    bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
-    bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
+    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                                                      // returns CBattlefield* or nullptr if not available
+    int32 getBattlefieldID();                                                                                                      // returns entity->PBattlefield->GetID() or -1 if not available
+    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
+    bool  battlefieldAtCapacity(int battlefieldID);                                                                                // 1 if this battlefield is full
+    bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
+    bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
+    bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -564,6 +568,9 @@ public:
     bool canChangeState();
 
     void wakeUp(); // wakes target if necessary
+
+    void   setBattleID(uint16 battleID);
+    uint16 getBattleID();
 
     void recalculateStats();
     bool checkImbuedItems();
@@ -660,14 +667,15 @@ public:
     bool   isWeaponTwoHanded();
     int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1);                                                      // gets the damage of a single hit vs the specified mob
     float  getPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded); // Gets PDIF for an attack.
-    float  getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, uint16 ignoredDef);                                               // Gets PDIF for an attack.
+    float  getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical = false, float atkMulti = 1, uint16 ignoredDef = 0);               // Gets PDIF for an attack.
     uint8  getGuardRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the guard rate for an attack.
     uint8  getBlockRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the block rate for an attack.
     uint8  getParryRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the parry rate for an attack.
-    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                     // Returns the hit rate for an attack.
-    uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                               // Returns the ranged hit rate for an attack.
+    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum = 0, int8 accBonus = 0);                                             // Returns the hit rate for an attack. Defaults to main weapon.
+    uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity, int8 accBonus = 0);                                                            // Returns the ranged hit rate for an attack.
     uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
     uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
+    uint16 getMobWeaponDmg(uint8 slot = 0);                                                                                                 // gets the Mob's current equipped weapons' DMG rating
     uint16 getWeaponDmgRank();                                                                                                              // gets the current equipped weapons' DMG rating for Rank calc
     uint16 getOffhandDmg();                                                                                                                 // gets the current equipped offhand's DMG rating (used in WS calcs)
     uint16 getOffhandDmgRank();                                                                                                             // gets the current equipped offhand's DMG rating for Rank calc
@@ -697,8 +705,9 @@ public:
     void   clearTrusts();
     uint32 getTrustID();
     void   trustPartyMessage(uint32 message_id);
-    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
-    int32  addFullGambit(lua_State*);
+    auto   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry) -> std::string;
+    void   removeSimpleGambit(std::string const& id);
+    void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
@@ -711,12 +720,11 @@ public:
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
 
-    auto getPetName() -> const char*;
+    auto getPetName() -> const std::string;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
     void registerChocobo(uint32 value);
 
-    float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
-    void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)
+    void charmPet(CLuaBaseEntity const* target); // Charms Pet (Beastmaster ability only)
 
     void petAttack(CLuaBaseEntity* PEntity); // Despawns Pet
     void petAbility(uint16 abilityID);       // Function exists, but is not implemented.  Warning will be displayed.
@@ -728,7 +736,7 @@ public:
     void delPetMod(uint16 modID, int16 amount);
 
     bool  hasAttachment(uint16 itemID);
-    auto  getAutomatonName() -> const char*;
+    auto  getAutomatonName() -> std::string;
     uint8 getAutomatonFrame();
     uint8 getAutomatonHead();
     bool  unlockAttachment(uint16 itemID);
@@ -737,6 +745,7 @@ public:
     void  removeAllManeuvers();
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
+    bool  isExceedingElementalCapacity();
 
     auto   getAllRuneEffects() -> sol::table;
     uint8  getActiveRuneCount();
@@ -770,7 +779,7 @@ public:
 
     void instantiateMob(uint32 groupID);
 
-    bool hasTrait(uint8 traitID);
+    bool hasTrait(uint16 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
 
     void setAggressive(bool aggressive);
@@ -778,16 +787,18 @@ public:
     void setUnkillable(bool unkillable);
     void setUntargetable(bool untargetable);
     bool getUntargetable();
+    void setIsAggroable(bool isAggroable);
+    bool isAggroable();
 
     void  setDelay(uint16 delay);             // sets a mobs weapon delay
     int16 getDelay();                         // return the delay value
     void  setDamage(uint16 damage);           // sets a mobs weapon damage
     bool  hasSpellList();                     // true if a spell list is assigned to the mob
     void  setSpellList(uint16 spellList);     // sets the spell list value
-    void  SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
-    void  SetMagicCastingEnabled(bool state); // halt/resumes casting magic
-    void  SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void  SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    void  setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void  setMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void  setMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void  setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
     bool  isMagicCastingEnabled();            // return a true/false value if mob is able to auto-cast
     bool  isAutoAttackEnabled();              // returns true if the mob can auto-attack
 
@@ -820,6 +831,7 @@ public:
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
+    void untargetableAndUnactionable(uint32 milliseconds);
 
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
@@ -841,6 +853,13 @@ public:
 
     uint32 getHistory(uint8 index);
 
+    auto getFishingStats() -> sol::table;
+    auto getFishingCatches() -> sol::table;
+    void setFishCaught(uint32 fishId, bool isCaught);
+    bool hasCaughtFish(uint32 fishId);
+    void clearFishCaught();
+    void clearFishHistory();
+
     void setAnimPath(uint8);
     void setAnimStart(bool);
     void setAnimBegin(uint32);
@@ -852,6 +871,9 @@ public:
     bool clearSession(std::string const& playerName);
     void sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
     void clearActionQueue();
+
+    uint8 getMannequinPose(uint16 itemID);
+    void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
 
     static void Register();
 };

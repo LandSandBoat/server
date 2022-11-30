@@ -29,6 +29,7 @@ zones[xi.zone.FORT_GHELSBA] =
         {
             [17354823] = 17354828,
         },
+        KEGPAUNCH_DOSHGNOSH = 17354922,
         ORCISH_PANZER = 17354894,
     },
     npc =

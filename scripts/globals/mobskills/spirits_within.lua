@@ -12,18 +12,14 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() ~= 4249) then
-        mob:messageBasic(xi.msg.basic.READIES_WS, 0, 39)
-    end
-
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    if (mob:getPool() == 4249) then -- Volker@Throne_Room only
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    if mob:getPool() == 4249 then -- Volker@Throne_Room only
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
@@ -41,13 +37,14 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Handling phalanx
     dmg = dmg - target:getMod(xi.mod.PHALANX)
 
-    if (dmg < 0) then
+    if dmg < 0 then
         return 0
     end
 
+    dmg = utils.rampart(target, dmg)
     dmg = utils.stoneskin(target, dmg)
 
-    if (dmg > 0) then
+    if dmg > 0 then
         target:wakeUp()
         target:updateEnmityFromDamage(mob, dmg)
     end
@@ -56,4 +53,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

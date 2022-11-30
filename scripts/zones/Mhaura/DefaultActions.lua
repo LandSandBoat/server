@@ -1,7 +1,7 @@
 local ID = require("scripts/zones/Mhaura/IDs")
 
 return {
-    ['Haigan']        = { event = 10002 },
+    ['Hagain']        = { event = 10002 },
     ['Kotan-Purutan'] = { event = 140 },
     ['Numi_Adaligo']  = { event = 50 },
     ['Phoochuchu']    = { event = 300 },
@@ -10,4 +10,5 @@ return {
     ['Tonasav']       = { event = 372 },
     ['Zexu']          = { event = 121 },
     ['Blandine']      = { event = 122 },
+    ['Katsunaga']     = { event = 190 },
 }

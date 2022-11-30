@@ -11,7 +11,7 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local path =
+local pathNodes =
 {
     { x = 59.698738, y = -6.282220, z = -0.842413 },
     { x = 60.732185, z = -1.238357 },
@@ -56,20 +56,25 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+    npc:setPos(xi.path.first(pathNodes))
+    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local DampScroll = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+    local dampScroll = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     local mLvl = player:getMainLvl()
 
-    if DampScroll == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true then
+    if
+        dampScroll == QUEST_AVAILABLE and
+        player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+        mLvl >= 10 and
+        player:hasItem(1210)
+    then
         player:startEvent(31, 1210) -- Start the quest
-    elseif DampScroll == QUEST_ACCEPTED then
+    elseif dampScroll == QUEST_ACCEPTED then
         player:startEvent(32) -- Reminder Dialogue
     else
         player:startEvent(85)

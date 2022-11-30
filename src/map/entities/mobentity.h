@@ -222,8 +222,8 @@ public:
     uint8     m_Type; // mob type
     bool      m_Aggro;
     bool      m_TrueDetection; // Has true sight or sound
-    uint16    m_Detects;       // mobs detection methods, sight, sound, etc
     uint8     m_Link;          // link with mobs of it's family
+    bool      m_isAggroable;   // Can be aggroed by other monsters when in the player allegiance
     uint16    m_Behaviour;     // mob behaviour
     SPAWNTYPE m_SpawnType;     // condition for mob to spawn
 
@@ -255,6 +255,10 @@ public:
     uint8 m_unk1; // (entity_update 0x25)
     uint8 m_unk2; // (entity_update 0x26)
 
+    uint16 m_pathFindDisengage;
+
+    uint16 m_defaultAttack;
+
     bool m_CallForHelpBlocked;
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
@@ -263,10 +267,9 @@ public:
 
     bool m_IsClaimable;
 
-    bool m_bReleaseTargIDOnDeath = false;
-
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };
+    static constexpr float magic_range{ 20.f };
 
 protected:
     void  DistributeRewards();

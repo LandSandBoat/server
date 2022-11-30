@@ -8,15 +8,15 @@ local entity = {}
 
 local buffs = -- Buff, potency, messageID
 {
-    {                    "Cure",  25,    ID.text.KURREA_CURE},
-    {           xi.effect.HASTE,  25, ID.text.KURREA_MUSCLES},
-    { xi.effect.PHYSICAL_SHIELD,   1,    ID.text.KURREA_AURA},
-    { xi.effect.MAGIC_ATK_BOOST, 100,    ID.text.KURREA_EYES},
-    {   xi.effect.DEFENSE_BOOST, 100,   ID.text.KURREA_RIGID},
-    {    xi.effect.ATTACK_BOOST, 100,    ID.text.KURREA_VEIN},
-    {    xi.effect.MAGIC_SHIELD,   1,   ID.text.KURREA_SHINE},
-    {   xi.effect.EVASION_BOOST, 100,    ID.text.KURREA_WIND},
-    {    xi.effect.DEFENSE_DOWN, 100,   ID.text.KURREA_GREEN},
+    {                    "Cure",  25,    ID.text.KURREA_CURE },
+    {           xi.effect.HASTE,  25, ID.text.KURREA_MUSCLES },
+    { xi.effect.PHYSICAL_SHIELD,   1,    ID.text.KURREA_AURA },
+    { xi.effect.MAGIC_ATK_BOOST, 100,    ID.text.KURREA_EYES },
+    {   xi.effect.DEFENSE_BOOST, 100,   ID.text.KURREA_RIGID },
+    {    xi.effect.ATTACK_BOOST, 100,    ID.text.KURREA_VEIN },
+    {    xi.effect.MAGIC_SHIELD,   1,   ID.text.KURREA_SHINE },
+    {   xi.effect.EVASION_BOOST, 100,    ID.text.KURREA_WIND },
+    {    xi.effect.DEFENSE_DOWN, 100,   ID.text.KURREA_GREEN },
 }
 
 entity.onMobSpawn = function(mob)
@@ -34,8 +34,8 @@ entity.onMobFight = function(mob, target)
     local moving = mob:getLocalVar("moving")
 
     if os.time() > runAway and moving == 0 then
-        mob:SetMagicCastingEnabled(false)
-        mob:SetMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+        mob:setMobAbilityEnabled(false)
         mob:setLocalVar("moving", 1)
         mob:pathTo(spawn.x, spawn.y, spawn.z)
     elseif os.time() > runAway and moving == 1 and
@@ -49,8 +49,8 @@ entity.onMobFight = function(mob, target)
         mob:timer(4000, function(mobArg)
             mobArg:setLocalVar("moving", 0)
             mobArg:setSpeed(40)
-            mobArg:SetMagicCastingEnabled(true)
-            mobArg:SetMobAbilityEnabled(true)
+            mobArg:setMagicCastingEnabled(true)
+            mobArg:setMobAbilityEnabled(true)
             mobArg:setLocalVar("runAway", os.time() + math.random(20, 30))
             local chooseBuff = math.random(1, 9)
             for k,v in pairs(buffs) do
@@ -75,7 +75,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

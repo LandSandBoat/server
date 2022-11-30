@@ -6,9 +6,9 @@ require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         UpdateNMSpawnPoint(ID.mob.HUMBABA)
         GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
@@ -18,14 +18,18 @@ zone_object.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if prevZone == xi.zone.DYNAMIS_BEAUCEDINE then -- warp player to a correct position after dynamis
         player:setPos(-284.751, -39.923, -422.948, 235)
     end
 
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         player:setPos(-247.911, -82.165, 260.207, 248)
     end
 
@@ -36,29 +40,29 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onZoneOut = function(player)
+zoneObject.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
     end
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 114 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local mirrorPond = GetNPCByID(ID.npc.MIRROR_POND_J8) -- Quest: Love And Ice
 
     if weather ~= xi.weather.SNOW and weather ~= xi.weather.BLIZZARDS then
@@ -68,4 +72,4 @@ zone_object.onZoneWeatherChange = function(weather)
     end
 end
 
-return zone_object
+return zoneObject

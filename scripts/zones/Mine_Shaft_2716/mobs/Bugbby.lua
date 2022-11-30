@@ -41,6 +41,7 @@ entity.onMobFight = function(mob, target)
                 table.insert(activeMoblins, v)
             end
         end
+
         if #activeMoblins > 0 then
             local randMoblin = GetMobByID(activeMoblins[math.random(#activeMoblins)]) -- choose random moblin from activeMoblins
             mob:disengage()
@@ -50,7 +51,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

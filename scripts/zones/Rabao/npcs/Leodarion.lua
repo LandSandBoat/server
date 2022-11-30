@@ -15,36 +15,42 @@ local ID = require("scripts/zones/Rabao/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 2) then
-        if (trade:hasItemQty(17098, 1) and trade:getItemCount() == 1) then -- Trade Oak Pole
+    if
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and
+        player:getCharVar("illTakeTheBigBoxCS") == 2
+    then
+        if trade:hasItemQty(17098, 1) and trade:getItemCount() == 1 then -- Trade Oak Pole
             player:startEvent(92)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED) then
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED then
         local illTakeTheBigBoxCS = player:getCharVar("illTakeTheBigBoxCS")
 
-        if (illTakeTheBigBoxCS == 1) then
+        if illTakeTheBigBoxCS == 1 then
             player:startEvent(90)
-        elseif (illTakeTheBigBoxCS == 2) then
+        elseif illTakeTheBigBoxCS == 2 then
             player:startEvent(91)
-        elseif (illTakeTheBigBoxCS == 3 and VanadielDayOfTheYear() == player:getCharVar("illTakeTheBigBox_Timer")) then
+        elseif
+            illTakeTheBigBoxCS == 3 and
+            VanadielDayOfTheYear() == player:getCharVar("illTakeTheBigBox_Timer")
+        then
             player:startEvent(93)
-        elseif (illTakeTheBigBoxCS == 3) then
+        elseif illTakeTheBigBoxCS == 3 then
             player:startEvent(94)
-        elseif (illTakeTheBigBoxCS == 4) then
+        elseif illTakeTheBigBoxCS == 4 then
             player:startEvent(95)
         end
-    elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED) then
+    elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED then
         local trueWillCS = player:getCharVar("trueWillCS")
 
-        if (trueWillCS == 1) then
+        if trueWillCS == 1 then
             player:startEvent(97)
-        elseif (trueWillCS == 2 and player:hasKeyItem(xi.ki.LARGE_TRICK_BOX) == false) then
+        elseif trueWillCS == 2 and not player:hasKeyItem(xi.ki.LARGE_TRICK_BOX) then
             player:startEvent(98)
-        elseif (player:hasKeyItem(xi.ki.LARGE_TRICK_BOX)) then
+        elseif player:hasKeyItem(xi.ki.LARGE_TRICK_BOX) then
             player:startEvent(99)
         end
     else
@@ -56,22 +62,23 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 90) then
+    if csid == 90 then
         player:setCharVar("illTakeTheBigBoxCS", 2)
-    elseif (csid == 92) then
+    elseif csid == 92 then
         player:tradeComplete()
         player:setCharVar("illTakeTheBigBox_Timer", VanadielDayOfTheYear())
         player:setCharVar("illTakeTheBigBoxCS", 3)
-    elseif (csid == 94) then
+    elseif csid == 94 then
         player:setCharVar("illTakeTheBigBox_Timer", 0)
         player:setCharVar("illTakeTheBigBoxCS", 4)
         player:addKeyItem(xi.ki.SEANCE_STAFF)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEANCE_STAFF)
-    elseif (csid == 97) then
+    elseif csid == 97 then
         player:delKeyItem(xi.ki.OLD_TRICK_BOX)
         player:setCharVar("trueWillCS", 2)
-    elseif (csid == 99) then
-        if npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL, {
+    elseif csid == 99 then
+        if
+            npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL, {
                 item = 13782, -- Ninja Chainmail
                 fameArea = xi.quest.fame_area.NORG,
                 title = xi.title.PARAGON_OF_NINJA_EXCELLENCE,

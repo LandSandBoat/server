@@ -7,9 +7,9 @@
 -----------------------------------
 require("scripts/globals/job_utils/red_mage")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getMP() > 0 then
         return 0, 0
     else
@@ -17,8 +17,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     xi.job_utils.red_mage.useConvert(player, target, ability)
 end
 
-return ability_object
+return abilityObject

@@ -84,7 +84,7 @@ namespace logging
 
         spdlog::set_level(spdlog::level::debug);
 
-        spdlog::enable_backtrace(10);
+        spdlog::enable_backtrace(16);
     }
 
     void ShutDown()

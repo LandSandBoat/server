@@ -197,6 +197,7 @@ mission.sections =
                         for i = 0, 2 do
                             SpawnMob(kuftalID.mob.TALEKEEPER_OFFSET + i)
                         end
+
                         return mission:messageSpecial(kuftalID.text.EVIL)
                     elseif
                         player:getMissionStatus(player:getNation()) == 3 and
@@ -209,7 +210,7 @@ mission.sections =
 
             ['Dervos_Ghost'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isGhostsAlive()
@@ -221,7 +222,7 @@ mission.sections =
 
             ['Gizerls_Ghost'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isGhostsAlive()
@@ -233,7 +234,7 @@ mission.sections =
 
             ['Gordovs_Ghost'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isGhostsAlive()

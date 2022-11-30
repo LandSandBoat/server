@@ -168,7 +168,7 @@ mission.sections =
 
             ['Centurio_IV-VII'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
                         (GetMobByID(quicksandID.mob.TRIARIUS_IV_XIV):isDead() or not GetMobByID(quicksandID.mob.TRIARIUS_IV_XIV):isSpawned()) and
@@ -181,7 +181,7 @@ mission.sections =
 
             ['Princeps_IV-XLV'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
                         (GetMobByID(quicksandID.mob.CENTURIO_IV_VII):isDead() or not GetMobByID(quicksandID.mob.CENTURIO_IV_VII):isSpawned()) and
@@ -194,7 +194,7 @@ mission.sections =
 
             ['Triarius_IV-XIV'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
                         (GetMobByID(quicksandID.mob.CENTURIO_IV_VII):isDead() or not GetMobByID(quicksandID.mob.CENTURIO_IV_VII):isSpawned()) and

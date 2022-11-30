@@ -10,19 +10,22 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
+    elseif
+        not player:getPetID() or
+        not (player:getPetID() >= 69 and player:getPetID() <= 72)
+    then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         return 0, 0
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
     if pet then
         local enmitylist = target:getEnmityList()
@@ -36,7 +39,7 @@ ability_object.onUseAbility = function(player, target, ability)
         end
 
         if playerfound and petfound then
-            local bonus = (player:getMerit(xi.merit.VENTRILOQUY)-5)/100
+            local bonus = (player:getMerit(xi.merit.VENTRILOQUY)-5) / 100
 
             local playerCE = target:getCE(player)
             local playerVE = target:getVE(player)
@@ -45,7 +48,13 @@ ability_object.onUseAbility = function(player, target, ability)
 
             local playerEnmityBonus = 1
             local petEnmityBonus = 1
-            if target:getTarget():getTargID() == player:getTargID() or ((playerCE + playerVE) >= (petCE + petVE) and target:getTarget():getTargID() ~= pet:getTargID()) then
+            if
+                target:getTarget():getTargID() == player:getTargID() or
+                (
+                    (playerCE + playerVE) >= (petCE + petVE) and
+                    target:getTarget():getTargID() ~= pet:getTargID()
+                )
+            then
                 playerEnmityBonus = playerEnmityBonus + bonus
                 petEnmityBonus = petEnmityBonus - bonus
             else
@@ -61,4 +70,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

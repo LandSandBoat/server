@@ -7,9 +7,9 @@ local entity = {}
 
 local shroomAbilities =
 {
-    {310, 0}, -- queasyshroom
-    {311, 1}, -- numbshroom
-    {312, 2}, -- shakeshroom
+    { 310, 0 }, -- queasyshroom
+    { 311, 1 }, -- numbshroom
+    { 312, 2 }, -- shakeshroom
 }
 
 entity.onMobSpawn = function(mob)
@@ -48,7 +48,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

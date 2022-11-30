@@ -7,16 +7,14 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
-    local duration = 180 + bonusTime
-
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local duration = 180
     local moon = VanadielMoonPhase()
     local buffvalue = 0
     if moon > 90 then
@@ -34,6 +32,7 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
     else
         buffvalue = 1
     end
+
     target:delStatusEffect(xi.effect.ACCURACY_BOOST)
     target:delStatusEffect(xi.effect.EVASION_BOOST)
     target:addStatusEffect(xi.effect.ACCURACY_BOOST, buffvalue, 0, duration)
@@ -42,4 +41,4 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
     return 0
 end
 
-return ability_object
+return abilityObject

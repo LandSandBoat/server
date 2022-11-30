@@ -11,9 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getAnimationSub() == 5 then
         return 0
     else
@@ -21,12 +21,12 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits   = 1
     local accmod    = 1
-    local dmgmod    = 1.75
+    local dmgmod    = 1
     local offcratio = mob:getStat(xi.mod.DEF)
-    local info      = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.75, 2.125, 2.75, offcratio)
+    local info      = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 2, 2.25, 2.5, offcratio)
     local dmg       = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
@@ -34,4 +34,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

@@ -11,10 +11,10 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if (player:getAnimation() ~= 1) then
+abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
         if player:hasStatusEffect(xi.effect.TRANCE) then
@@ -27,7 +27,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(100)
@@ -36,7 +36,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local hit = 2
     local effect = 1
 
-    if math.random() <= getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
+    if math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
         hit = 6
         local mjob = player:getMainJob()
         local daze = 1
@@ -84,11 +84,12 @@ ability_object.onUseAbility = function(player, target, ability, action)
             elseif target:hasStatusEffect(xi.effect.BEWILDERED_DAZE_4) then
                 local duration = target:getStatusEffect(xi.effect.BEWILDERED_DAZE_4):getDuration()
                 target:delStatusEffectSilent(xi.effect.BEWILDERED_DAZE_4)
-                if (player:hasStatusEffect(xi.effect.PRESTO)) then
+                if player:hasStatusEffect(xi.effect.PRESTO) then
                     daze = 3
                 else
                     daze = 2
                 end
+
                 target:addStatusEffect(xi.effect.BEWILDERED_DAZE_5, 1, 0, duration + 30)
                 effect = 5
 
@@ -156,9 +157,10 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
             player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
-            if (daze > 2) then
+            if daze > 2 then
                 daze = 2
             end
+
             player:addStatusEffect(xi.effect.FINISHING_MOVE_3 + daze, 1, 0, 7200)
 
         elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
@@ -180,4 +182,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
 end
 
-return ability_object
+return abilityObject

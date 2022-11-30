@@ -6,18 +6,18 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
-    if (hasSleepEffects(target)) then
+itemObject.onItemUse = function(target)
+    if hasSleepEffects(target) then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
         target:addStatusEffect(xi.effect.SLEEP_I, 0, 0, 30)
     end
 end
 
-return item_object
+return itemObject

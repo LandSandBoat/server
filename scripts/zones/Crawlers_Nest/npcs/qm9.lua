@@ -14,8 +14,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM) == QUEST_ACCEPTED and VanadielDayOfTheYear() ~= player:getCharVar("DreadbugNM_Day") then
-        if os.time() > player:getCharVar("DreadbugNM_Timer") + 30 and npcUtil.popFromQM(player, npc, ID.mob.DREADBUG, { claim=true, hide=0 }) then
+    if
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM) == QUEST_ACCEPTED and
+        VanadielDayOfTheYear() ~= player:getCharVar("DreadbugNM_Day")
+    then
+        if
+            os.time() > player:getCharVar("DreadbugNM_Timer") + 30 and
+            npcUtil.popFromQM(player, npc, ID.mob.DREADBUG, { claim = true, hide = 0 })
+        then
             player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
             player:setCharVar("DreadbugNM_Timer", os.time() + 180)
             player:setCharVar("DreadbugNM_Day", VanadielDayOfTheYear())
