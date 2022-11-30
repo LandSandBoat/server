@@ -57,7 +57,7 @@ xi.summon.getAvatardINT = function(avatarInt, targetInt, avatar)
     local dINT = math.floor(avatarInt - targetInt)
 
     if dINT >= 0 then
-        dINT = dINT * 1.5
+        dINT = math.floor(dINT * 1.5)
     end
     -- There is no upper limit of dstat, but there is a lower limit of -65
     return utils.clamp(dINT, -65, 100)
@@ -181,9 +181,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
 
         local wsMods = math.floor(math.floor(str + dex + vit + agi + int + mnd + chr) * calcParams.alpha) -- This calculates WSC, must floor twice in and then out
         local baseDmg = math.floor(10 + 0.5 * avatar:getMainLvl()) -- This calculates base damage of avatars
+
         -- If Carbuncle
-        if avatar:getModelId() == 791 then
-            baseDmg = 3 + 0.5 * avatar:getMainLvl()
+        if avatar:getModelId() == 16 then
+            baseDmg = math.floor(3 + 0.5 * avatar:getMainLvl())
         end
 
         -- -- Calculating with the known era pdif ratio for weaponskills.
@@ -202,12 +203,6 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
 
         local pDif = pDifTable[1]
         local pDifCrit = pDifTable[2]
-
-        -- Need to cap at 2 if it a too weak mob
-        if avatar:checkDifficulty(target) == 0 then
-            pDif = utils.clamp(pDif, 0, 2)
-            pDifCrit = utils.clamp(pDifCrit, 0, 2)
-        end
 
         --Everything past this point is randomly computed per hit
         numHitsProcessed = 0
@@ -232,12 +227,6 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
             pDifTable = xi.weaponskills.cMeleeRatio(avatar, target, wsParams, 0, calcParams.tp, xi.slot.MAIN)
             pDif = pDifTable[1]
             pDifCrit = pDifTable[2]
-
-            -- Need to cap at 2 if it a too weak mob
-            if avatar:checkDifficulty(target) == 0 then
-                pDif = utils.clamp(pDif, 0, 2)
-                pDifCrit = utils.clamp(pDifCrit, 0, 2)
-            end
 
             if isCrit then
                 pDif = pDifCrit
