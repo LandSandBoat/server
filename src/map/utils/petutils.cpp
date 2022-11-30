@@ -873,7 +873,6 @@ namespace petutils
         int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
         int32 scaleOver30Column = 2; // Column number with modifier after level 30
         int32 scaleOver60Column = 3; // Column number with modifier after level 60
-        // int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
 
         uint8 grade = 5; // Grade for HP
 
@@ -894,7 +893,6 @@ namespace petutils
         // Calculate the bonus amount of HP
         int32 mainLevelOver10           = (mLvl < 10 ? 0 : mLvl - 10);  // + 2hp at each level after 10
         int32 mainLevelOver50andUnder60 = std::clamp(mLvl - 50, 0, 10); // + 2hp at each level between 50 to 60 level
-        // int32 mainLevelOver60           = (mLvl < 60 ? 0 : mLvl - 60);
 
         // Calculate raceStat jobStat bonusStat sJobStat
         // Calculate by race
@@ -1030,7 +1028,7 @@ namespace petutils
                 mLvl += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS);
             }
             PPet->SetMLevel(mLvl);
-            PPet->SetSLevel(mLvl / 2);
+            PPet->SetSLevel(mLvl); // Avatars always have the same level subjob as their main
         }
         else if (PMaster->GetSJob() == JOB_SMN)
         {
@@ -1051,22 +1049,6 @@ namespace petutils
 
         PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
 
-        // if (mLvl >= 70)
-        // {
-        //     PPet->setModifier(Mod::MATT, 32);
-        // }
-        // else if (mLvl >= 50)
-        // {
-        //     PPet->setModifier(Mod::MATT, 28);
-        // }
-        // else if (mLvl >= 30)
-        // {
-        //     PPet->setModifier(Mod::MATT, 24);
-        // }
-        // else if (mLvl >= 10)
-        // {
-        //     PPet->setModifier(Mod::MATT, 20);
-        // }
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
 
         if (petID == PETID_FENRIR)
