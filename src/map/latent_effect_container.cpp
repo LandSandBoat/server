@@ -1145,6 +1145,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
             break;
+        case LATENT::CITIZEN_OF_NATION:
+            expression = m_POwner->profile.nation == latentEffect.GetConditionsValue();
+            break;
         default:
             latentFound = false;
             ShowWarning("Latent ID %d unhandled in ProcessLatentEffect", static_cast<uint16>(latentEffect.GetConditionsID()));
