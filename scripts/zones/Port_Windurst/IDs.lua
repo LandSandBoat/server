@@ -50,6 +50,7 @@ zones[xi.zone.PORT_WINDURST] =
         HOMEPOINT_SET                   = 11073, -- Home point set!
         YOU_ACCEPT_THE_MISSION          = 11166, -- You have accepted the mission.
         KHEL_PAHLHAMA_SHOP_DIALOG       = 11212, -- These magic shells are full of mysteries...
+        MAP_MARKER_TUTORIAL             = 11405, -- The map will open when you select Map from the main menu. Choose Markers and scroll to the right to check the location.
         MOG_LOCKER_OFFSET               = 11490, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         FISHING_MESSAGE_OFFSET          = 11588, -- You can't fish here.
         FISHING_SUPPORT                 = 11692, -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
