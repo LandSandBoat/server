@@ -46,7 +46,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob)
-    mob:setLocalVar("timer", os.time() + math.random(12,20))
+    mob:setLocalVar("timer", os.time() + math.random(12, 20))
 end
 
 entity.onMobFight = function(mob, target)
@@ -66,7 +66,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getLocalVar("dollAlive") == 1 and not GetMobByID(id):isSpawned() then
-        mob:setLocalVar("timer", os.time() + math.random(1,2))
+        mob:setLocalVar("timer", os.time() + math.random(1, 2))
         mob:setLocalVar("dollAlive", 0)
         mob:setLocalVar("currDoll", mob:getLocalVar("currDoll") + 1)
     end
