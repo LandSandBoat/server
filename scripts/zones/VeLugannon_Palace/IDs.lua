@@ -36,6 +36,7 @@ zones[xi.zone.VELUGANNON_PALACE] =
         MIMIC                   = 17502567,
         BRIGANDISH_BLADE        = 17502568,
         STEAM_CLEANER           = 17502569,
+        ZIPACNA                 = 17502570,
         SC_DETECTORS            =
         {
             DET1 = 17502545, -- Seiryu North Basement (1-2)

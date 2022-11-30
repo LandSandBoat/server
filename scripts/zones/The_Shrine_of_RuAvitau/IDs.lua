@@ -33,10 +33,11 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
     },
     mob =
     {
+        FAUST            = 17506370,
+        MOTHER_GLOBE     = 17506396,
         ULLIKUMMI        = 17506418,
         OLLAS_OFFSET     = 17506667,
         KIRIN            = 17506670,
-        MOTHER_GLOBE     = 17506396,
     },
     npc =
     {

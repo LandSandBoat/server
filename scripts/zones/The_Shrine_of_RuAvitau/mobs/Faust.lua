@@ -21,13 +21,13 @@ end
 
 entity.onMobRoam = function(mob)
     local spawn = mob:getSpawnPos()
-    local distance = mob:checkDistance(spawn.x,spawn.y,spawn.z)
+    local distance = mob:checkDistance(spawn.x, spawn.y, spawn.z)
 
     -- Faust doesn't move from spawn point and rotates every 4-10 seconds
     if distance < 3 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
         if os.time() > mob:getLocalVar("moveTime") then
-            local newTime = math.random(3,10)
+            local newTime = math.random(3, 10)
             mob:setLocalVar("moveTime", os.time() + newTime)
             if mob:getRotPos() == 255 then
                 mob:setRotation(191)
@@ -36,7 +36,7 @@ entity.onMobRoam = function(mob)
             end
         end
     else
-        mob:pathTo(spawn.x,spawn.y,spawn.z)
+        mob:pathTo(spawn.x, spawn.y, spawn.z)
     end
 end
 
@@ -49,14 +49,14 @@ end
 
 entity.onMobDisengage = function(mob)
     local spawn = mob:getSpawnPos()
-    mob:pathTo(spawn.x,spawn.y,spawn.z)
+    mob:pathTo(spawn.x, spawn.y, spawn.z)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
+    xi.mob.nmTODPersist(mob, math.random(10800, 21600)) -- 3 to 6 hrs
 end
 
 return entity

@@ -17,7 +17,7 @@ entity.onMobFight = function(mob, target)
     local form = mob:getAnimationSub()
     if os.time() > shiftTime and mob:canUseAbilities() then
         mob:setLocalVar("shiftTime", os.time() + 30)
-        local whichForm = math.random(1,2)
+        local whichForm = math.random(1, 2)
         if form == 1 and whichForm == 1 then -- Vertical Bats (100% Triple Attack)
             mob:setDamage(40)
             mob:setMod(xi.mod.DELAY, 0)
@@ -44,10 +44,12 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
+    -- Allow fomor black mage to respawn
     local ph = mob:getID() - 1
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(924)
-    mob:setLocalVar("cooldown", os.time() + math.random(75600, 86400))
+
+    xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity
