@@ -68,6 +68,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
             [17395953] = 17395954, -- -32.302 -16.250 -139.169
         },
         YAGUDO_AVATAR              = 17396134,
+        TZEE_XICU_THE_MANIFEST     = 17396137,
         HUU_XALMO_THE_SAVAGE       = 17396140,
         MIMIC                      = 17396144,
     },

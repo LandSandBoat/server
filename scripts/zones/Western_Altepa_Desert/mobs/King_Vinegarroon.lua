@@ -49,7 +49,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
     -- Every time KV performs a TP move, he will draw in either his target or the entire alliance randomly
     if (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and os.time() > drawInWait then
-        local chance = math.random(1,2)
+        local chance = math.random(1, 2)
         if chance == 1 then
             mob:triggerDrawIn(mob, true, 1, 35, target)
         else
@@ -57,16 +57,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         end
 
         -- KV always does an AOE TP move followed by a single target TP move
-        mob:useMobAbility(({ 353,350,720 })[math.random(1,3)])
+        mob:useMobAbility(({ 353, 350, 720 })[math.random(1, 3)])
         mob:setLocalVar("DrawInWait", os.time() + 2)
     end
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    local respawn = 75600 -- 21h
-    mob:setRespawnTime(respawn)
-    mob:setLocalVar("respawn", os.time() + respawn)
+    xi.mob.nmTODPersist(mob, 75600) -- 21 hours
     DisallowRespawn(mob:getID(), true)
 end
 
@@ -77,12 +74,12 @@ entity.onMobFight = function(mob, target)
 
     if target:getZPos() > -540 and os.time() > drawInWait then -- Northern Draw In
         local rot = target:getRotPos()
-        target:setPos(target:getXPos(),target:getYPos(),-542,rot)
+        target:setPos(target:getXPos(), target:getYPos(), -542, rot)
         mob:messageBasic(232, 0, 0, target)
         mob:setLocalVar("DrawInWait", os.time() + 2)
     elseif target:getXPos() < -350 and os.time() > drawInWait then  -- Southern Draw In
         local rot = target:getRotPos()
-        target:setPos(-348,target:getYPos(),target:getZPos(),rot)
+        target:setPos(-348, target:getYPos(), target:getZPos(), rot)
         mob:messageBasic(232, 0, 0, target)
         mob:setLocalVar("DrawInWait", os.time() + 2)
     end
