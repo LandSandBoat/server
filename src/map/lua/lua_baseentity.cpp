@@ -11665,7 +11665,10 @@ uint16 CLuaBaseEntity::getStat(uint16 statId)
         case Mod::EVA:
             value = PEntity->EVA();
             break;
-        // TODO: support getStat for ACC/RACC/RATT
+        case Mod::ACC:
+            value = PEntity->ACC(0, 0);
+            break;
+        // TODO: support getStat for RACC/RATT
         default:
             // We should probably show a warning here
             break;
