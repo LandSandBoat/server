@@ -249,7 +249,7 @@ content.paths =
 content.groups =
 {
     {
-        mobs = { "Armoury_Crate_Eastern" },
+        mobs = { "Armoury_Crate_E" },
         setup = function(battlefield, crates)
             for _, crate in ipairs(crates) do
                 crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
@@ -260,13 +260,13 @@ content.groups =
     {
         mobs =
         {
-            "Fire_Elemental",
-            "Ice_Elemental",
-            "Air_Elemental",
-            "Earth_Elemental",
-            "Thunder_Elemental",
-            "Water_Elemental",
-            "Dark_Elemental",
+            "Fire_Elemental_E",
+            "Ice_Elemental_E",
+            "Air_Elemental_E",
+            "Earth_Elemental_E",
+            "Thunder_Elemental_E",
+            "Water_Elemental_E",
+            "Dark_Elemental_E",
         },
 
         -- NOTE: Elementals take double physical damage because their family resistance is 25% so it totals to 50% resistance
@@ -287,73 +287,73 @@ content.groups =
     },
 
     {
-        mobs = { "Fire_Elemental" },
+        mobs = { "Fire_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 1),
     },
 
     {
-        mobs = { "Mystic_Avatar_Ifrit" },
+        mobs = { "Mystic_Avatar_Ifrit_E" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 1, 4),
     },
 
     {
-        mobs = { "Ice_Elemental" },
+        mobs = { "Ice_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 2),
     },
 
     {
-        mobs = { "Mystic_Avatar_Shiva" },
+        mobs = { "Mystic_Avatar_Shiva_E" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 2, 4),
     },
 
     {
-        mobs = { "Air_Elemental" },
+        mobs = { "Air_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 3),
     },
 
     {
-        mobs = { "Mystic_Avatar_Garuda" },
+        mobs = { "Mystic_Avatar_Garuda_E" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 3, 4),
     },
 
     {
-        mobs = { "Earth_Elemental" },
+        mobs = { "Earth_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 4),
     },
 
     {
-        mobs = { "Mystic_Avatar_Titan" },
+        mobs = { "Mystic_Avatar_Titan_E" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 4, 4),
     },
 
     {
-        mobs = { "Thunder_Elemental" },
+        mobs = { "Thunder_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 5),
     },
 
     {
-        mobs = { "Mystic_Avatar_Ramuh" },
+        mobs = { "Mystic_Avatar_Ramuh_E" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 5, 4),
     },
 
     {
-        mobs = { "Water_Elemental" },
+        mobs = { "Water_Elemental_E" },
         death = utils.bind(content.handleMobDeath, 6),
     },
 
     {
-        mobs = { "Mystic_Avatar_Leviathan" },
+        mobs = { "Mystic_Avatar_LeviathanE" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 6, 4),
     },
 
     {
-        mobs = { "Dark_Elemental" },
+        mobs = { "Dark_Elemental_E" },
         allDeath = function(battlefield, mob)
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[7]))
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[7] + 1))
@@ -361,7 +361,7 @@ content.groups =
     },
 
     {
-        mobs = { "Mystic_Avatar_Fenrir" },
+        mobs = { "Mystic_Avatar_Fenrir_E" },
         spawned = false,
         death = utils.bind(unlockFloorCrates, 7, 2),
     },
