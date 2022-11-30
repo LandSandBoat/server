@@ -24,8 +24,8 @@ zones[xi.zone.PHANAUET_CHANNEL] =
     },
     mob =
     {
-        VODYANOI = 16781326,
-        STUBBORN_DREDVODD = 16781327
+        VODYANOI          = 16781326,
+        STUBBORN_DREDVODD = 16781327,
     },
     npc =
     {

@@ -9,6 +9,7 @@ require('scripts/globals/barge')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.mob.nmTODPersistCache(zone, ID.mob.STUBBORN_DREDVODD)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
