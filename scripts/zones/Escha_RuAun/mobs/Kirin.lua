@@ -110,7 +110,7 @@ entity.onMobFight = function( mob, target )
     local kouryu = 17961577
 
     if mob:getHPP() < 50 then
-        DespawnMob(mob:getID())
+        mob:setHP(0)
         GetMobByID(kouryu):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos() + 1, mob:getRotPos())
         SpawnMob(kouryu):updateClaim(mob:getTarget())
     end
