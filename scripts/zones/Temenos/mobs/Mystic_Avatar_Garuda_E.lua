@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Central Temenos 2nd Floor
---  Mob: Mystic Avatar (Ifrit)
+-- Area: Temenos Eastern Tower
+--  Mob: Mystic Avatar (Garuda)
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
         delay = math.random(45, 90),
         specials =
         {
-            { id = 848, hpp = math.random(30, 55) }, -- uses Inferno once while near 50% HPP.
+            { id = 875, hpp = math.random(30, 55) }, -- uses Aerial Blast once while near 50% HPP.
         },
     })
 end

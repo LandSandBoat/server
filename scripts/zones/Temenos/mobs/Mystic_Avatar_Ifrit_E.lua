@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Central Temenos 2nd Floor
+-- Area: Temenos Eastern Tower
 --  Mob: Mystic Avatar (Ifrit)
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }

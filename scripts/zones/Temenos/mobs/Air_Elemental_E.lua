@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Central Temenos 2nd Floor
---  Mob: Ice Elemental
+-- Area: Temenos Eastern Tower
+--  Mob: Air Elemental
 -----------------------------------
 require("scripts/globals/mobs")
 require("scripts/globals/status")
@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SILENCE)
 end
 
 return entity

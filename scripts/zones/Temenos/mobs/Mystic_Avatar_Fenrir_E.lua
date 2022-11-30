@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Central Temenos 2nd Floor
---  Mob: Mystic Avatar (Ifrit)
+-- Area: Temenos Eastern Tower
+--  Mob: Mystic Avatar (Fenrir)
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
         delay = math.random(45, 90),
         specials =
         {
-            { id = 848, hpp = math.random(30, 55) }, -- uses Inferno once while near 50% HPP.
+            { id = 838, hpp = math.random(15, 55) }, -- uses Howling Moon once while near 50% HPP.
         },
     })
 end

@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Temenos Eastern Temenos
---  Mob: Mystic Avatar (Fenrir)
+-- Area: Temenos Eastern Tower
+--  Mob: Mystic Avatar (Leviathan)
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
         delay = math.random(45, 90),
         specials =
         {
-            { id = 838, hpp = math.random(15, 55) }, -- uses Howling Moon once while near 50% HPP.
+            { id = 866, hpp = math.random(30, 55) }, -- uses Tidal Wave once while near 50% HPP.
         },
     })
 end

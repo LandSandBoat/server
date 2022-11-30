@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Central Temenos 2nd Floor
+-- Area: Temenos Eastern Tower
 --  Mob: Ice Elemental
 -----------------------------------
 require("scripts/globals/mobs")
