@@ -878,7 +878,7 @@ namespace petutils
         uint8 grade = 5; // Grade for HP
 
         uint8   mLvl = PPet->GetMLevel();
-        uint8   slvl = PPet->GetSLevel();
+        uint8   sLvl = PPet->GetSLevel();
         JOBTYPE mjob = PPet->GetMJob();
         JOBTYPE sjob = PPet->GetSJob();
 
@@ -888,8 +888,8 @@ namespace petutils
         int32 mainLevelOver60To75 = std::clamp(mLvl - 60, 0, 15); // The second calculation mode after level 60
 
         // Calculate level ranges of sub job
-        int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
-        int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
+        int32 subLevelOver10 = std::clamp(sLvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
+        int32 subLevelOver30 = (sLvl < 30 ? 0 : sLvl - 30);  // + 1HP for each level after 30
 
         // Calculate the bonus amount of HP
         int32 mainLevelOver10           = (mLvl < 10 ? 0 : mLvl - 10);  // + 2hp at each level after 10
@@ -910,7 +910,7 @@ namespace petutils
         if (PPet->m_PetID != PETID_WYVERN)
         {
             grade    = grade::GetJobGrade(sjob, 0);
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
+            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (sLvl - 1)) +
                        (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
         }
 
@@ -923,30 +923,19 @@ namespace petutils
         PPet->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat);
         PPet->health.hp    = PPet->health.maxhp;
 
-        switch (PPet->GetMJob())
-        {
-            case JOB_WHM:
-            case JOB_BLM:
-            case JOB_DRK:
-                PPet->health.maxmp = (int16)(15.2 * pow(mLvl, 1.1075) * PPet->MPscale);
-                break;
-            default:
-                break;
-        }
-
         PPet->UpdateHealth();
         PPet->health.tp = 0;
         PPet->health.hp = PPet->GetMaxHP();
         PPet->health.mp = PPet->GetMaxMP();
-        // uint32 racegrade = 4; // Race Grade D
+        uint32 racegrade = 4; // Race Grade D
 
-        uint16 fSTR = GetBaseToRank(PPet->strRank, mLvl);
-        uint16 fDEX = GetBaseToRank(PPet->dexRank, mLvl);
-        uint16 fVIT = GetBaseToRank(PPet->vitRank, mLvl);
-        uint16 fAGI = GetBaseToRank(PPet->agiRank, mLvl);
-        uint16 fINT = GetBaseToRank(PPet->intRank, mLvl);
-        uint16 fMND = GetBaseToRank(PPet->mndRank, mLvl);
-        uint16 fCHR = GetBaseToRank(PPet->chrRank, mLvl);
+        uint16 fSTR = GetBaseToRank(racegrade, mLvl);
+        uint16 fDEX = GetBaseToRank(racegrade, mLvl);
+        uint16 fVIT = GetBaseToRank(racegrade, mLvl);
+        uint16 fAGI = GetBaseToRank(racegrade, mLvl);
+        uint16 fINT = GetBaseToRank(racegrade, mLvl);
+        uint16 fMND = GetBaseToRank(racegrade, mLvl);
+        uint16 fCHR = GetBaseToRank(racegrade, mLvl);
 
         uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), mLvl);
         uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), mLvl);
@@ -956,13 +945,13 @@ namespace petutils
         uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), mLvl);
         uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), PPet->GetSLevel());
-        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), PPet->GetSLevel());
-        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), PPet->GetSLevel());
-        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), PPet->GetSLevel());
-        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), PPet->GetSLevel());
-        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), PPet->GetSLevel());
-        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), PPet->GetSLevel());
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), sLvl);
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), sLvl);
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), sLvl);
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), sLvl);
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), sLvl);
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), sLvl);
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), sLvl);
 
         if (mLvl >= 45)
         {
@@ -1018,139 +1007,6 @@ namespace petutils
 
         // Set damageType for Avatars and Wyvern
         PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
-    }
-
-    void LoadWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet) // Wyvern stats use player HP formula but mob stats with a statc rank of 4
-    {
-        // Declaration of variables needed for calculation.
-        float raceStat  = 0; // final HP for level based on race.
-        float jobStat   = 0; // final number of HP for the level based on the main job.
-        float sJobStat  = 0; // final number of HP for the level based on the sub job.
-        int32 bonusStat = 0; // bonus number of HP that is added under certain conditions.
-
-        // Table Columns
-        int32 baseValueColumn   = 0; // Column number with base number HP
-        int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
-        int32 scaleOver30Column = 2; // Column number with modifier after level 30
-        int32 scaleOver60Column = 3; // Column number with modifier after level 60
-        // int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
-
-        uint8 grade = 5;
-
-        uint8   mLvl = PPet->GetMLevel();
-        uint8   slvl = PPet->GetSLevel();
-        JOBTYPE mjob = PPet->GetMJob();
-        JOBTYPE sjob = PPet->GetSJob();
-
-        // Calculate level ranges from main job
-        int32 mainLevelOver30     = std::clamp(mLvl - 30, 0, 30); // Calculation of the condition + 1HP each LVL after level 30
-        int32 mainLevelUpTo60     = (mLvl < 60 ? mLvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
-        int32 mainLevelOver60To75 = std::clamp(mLvl - 60, 0, 15); // The second calculation mode after level 60
-
-        // Calculate level ranges of sub job
-        int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
-        int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
-
-        // Calculate the bonus amount of HP
-        int32 mainLevelOver10           = (mLvl < 10 ? 0 : mLvl - 10);  // + 2hp at each level after 10
-        int32 mainLevelOver50andUnder60 = std::clamp(mLvl - 50, 0, 10); // + 2hp at each level between 50 to 60 level
-        // int32 mainLevelOver60           = (mLvl < 60 ? 0 : mLvl - 60);
-
-        // Calculate raceStat jobStat bonusStat sJobStat
-        // Calculate by race
-        raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
-
-        // Main job HP calculation
-        grade   = grade::GetJobGrade(mjob, 0);
-        jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
-
-        // Sub job HP calculation
-        if (PPet->m_PetID != PETID_WYVERN)
-        {
-            grade    = grade::GetJobGrade(sjob, 0);
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
-                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
-        }
-
-        // Bonus HP Calculation
-        bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
-        if (PPet->m_PetID == PETID_ODIN || PPet->m_PetID == PETID_ALEXANDER)
-        {
-            bonusStat += 6800;
-        }
-        PPet->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat);
-        PPet->health.hp    = PPet->health.maxhp;
-
-        PPet->UpdateHealth();
-        PPet->health.tp = 0;
-        PPet->health.hp = PPet->GetMaxHP();
-        PPet->health.mp = PPet->GetMaxMP();
-        uint32 racegrade = 4; // Race Grade D
-
-        uint16 fSTR = GetBaseToRank(racegrade, mLvl);
-        uint16 fDEX = GetBaseToRank(racegrade, mLvl);
-        uint16 fVIT = GetBaseToRank(racegrade, mLvl);
-        uint16 fAGI = GetBaseToRank(racegrade, mLvl);
-        uint16 fINT = GetBaseToRank(racegrade, mLvl);
-        uint16 fMND = GetBaseToRank(racegrade, mLvl);
-        uint16 fCHR = GetBaseToRank(racegrade, mLvl);
-
-        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 2), mLvl);
-        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 3), mLvl);
-        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 4), mLvl);
-        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 5), mLvl);
-        uint16 mINT = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 6), mLvl);
-        uint16 mMND = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 7), mLvl);
-        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetMJob(), 8), mLvl);
-
-        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 2), slvl);
-        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 3), slvl);
-        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 4), slvl);
-        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 5), slvl);
-        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 6), slvl);
-        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 7), slvl);
-        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PPet->GetSJob(), 8), slvl);
-
-        if (mLvl >= 45)
-        {
-            sSTR /= 2;
-            sDEX /= 2;
-            sAGI /= 2;
-            sINT /= 2;
-            sMND /= 2;
-            sCHR /= 2;
-            sVIT /= 2;
-        }
-        else if (mLvl > 30)
-        {
-            sSTR /= 3;
-            sDEX /= 3;
-            sAGI /= 3;
-            sINT /= 3;
-            sMND /= 3;
-            sCHR /= 3;
-            sVIT /= 3;
-        }
-        else
-        {
-            sSTR /= 4;
-            sDEX /= 4;
-            sAGI /= 4;
-            sINT /= 4;
-            sMND /= 4;
-            sCHR /= 4;
-            sVIT /= 4;
-        }
-
-        PPet->stats.STR = fSTR + mSTR + sSTR;
-        PPet->stats.DEX = fDEX + mDEX + sDEX;
-        PPet->stats.VIT = fVIT + mVIT + sVIT;
-        PPet->stats.AGI = fAGI + mAGI + sAGI;
-        PPet->stats.INT = fINT + mINT + sINT;
-        PPet->stats.MND = fMND + mMND + sMND;
-        PPet->stats.CHR = fCHR + mCHR + sCHR;
     }
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
