@@ -38,37 +38,23 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+local teleportEventsByArea =
+{
+    [1] = 0, -- Teleports player to far NE corner
+    [2] = 2, -- Teleports player to ??
+    [3] = 1, -- Teleports player to far SE corner
+    [4] = 1, -- Teleports player to far SE corner
+    [5] = 5, -- Teleports player to H-7 on map 4 (south or north part, randomly)
+    [6] = 6, -- Teleports player to position "A" on map 2
+    [7] = 7, -- Teleports player to position G-8 on map 2
+}
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
-    {
-        [1] = function (x)
-            player:startCutscene(0) -- ports player to far NE corner
-        end,
+    local areaId = triggerArea:GetTriggerAreaID()
 
-        [2] = function (x)
-            player:startCutscene(2) -- ports player to
-        end,
-
-        [3] = function (x)
-            player:startCutscene(1) -- ports player to far SE corner
-        end,
-
-        [4] = function (x)
-            player:startCutscene(1) -- ports player to far SE corner
-        end,
-
-        [5] = function (x)
-            player:startCutscene(5) -- ports player to H-7 on map 4 (south or north part, randomly)
-        end,
-
-        [6] = function (x)
-            player:startCutscene(6) -- ports player to position "A" on map 2
-        end,
-
-        [7] = function (x)
-            player:startCutscene(7) -- ports player to position G-8 on map 2
-        end,
-    }
+    if teleportEventsByArea[areaId] then
+        player:startCutscene(teleportEventsByArea[areaId])
+    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)

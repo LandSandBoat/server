@@ -181,7 +181,7 @@ local poolIDToMessagePageOffset =
 }
 
 -- TODO: handle Dynamis Divergence, Omen, etc that are not "battlefields" but have a trust upper limit.
-xi.trust.checkBattlefieldTrustCount = function (caster)
+xi.trust.checkBattlefieldTrustCount = function(caster)
     local battlefield = caster:getBattlefield()
     if battlefield then
         local participants     = battlefield:getPlayersAndTrusts()

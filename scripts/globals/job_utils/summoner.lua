@@ -116,7 +116,7 @@ xi.job_utils.summoner.onUseBloodPact = function(player, pet, target, petskill)
 end
 
 -- to be removed once damage is overhauled
-xi.job_utils.summoner.calculateTPReturn = function (avatar, target, damage, numHits)
+xi.job_utils.summoner.calculateTPReturn = function(avatar, target, damage, numHits)
     if damage ~= 0 and numHits > 0 then -- absorbed hits still give TP, though we can't know how many hits actually connected in the current avatar damage formulas
         local tpReturn = xi.damage.tp.getSingleMeleeHitTPReturn(avatar, target)
         tpReturn = tpReturn + 10 * (numHits - 1) -- extra hits give 10 TP each

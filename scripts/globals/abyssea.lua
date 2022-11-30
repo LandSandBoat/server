@@ -592,7 +592,7 @@ xi.abyssea.visionsCruorProspectorOnTrigger = function(player, npc)
     player:startEvent(2002, cruor, demilune, 0, 0, cipher)
 end
 
-xi.abyssea.visionsCruorProspectorOnEventFinish = function (player, csid, option, prospectorItems)
+xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, prospectorItems)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
     local cruorTotal = player:getCurrency("cruor")
