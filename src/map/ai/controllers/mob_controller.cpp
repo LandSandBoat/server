@@ -558,6 +558,17 @@ bool CMobController::CanCastSpells()
         }
     }
 
+    // Charmed BST pets don't passively cast spells
+    if (PMob->isCharmed && PMob->PMaster != nullptr && PMob->PMaster->objtype == TYPE_PC)
+    {
+        // Can cast spells if BST uses Sic while mob has less than 1000TP
+        if (PMob->GetLocalVar("Sic") != 1)
+        {
+            return false;
+        }
+        PMob->SetLocalVar("Sic", 0);
+    }
+
     return IsMagicCastingEnabled();
 }
 
