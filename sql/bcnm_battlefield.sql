@@ -460,17 +460,20 @@ INSERT INTO `bcnm_battlefield` VALUES (99,1,17375239,3); -- saintly_invitation
 INSERT INTO `bcnm_battlefield` VALUES (99,1,17375240,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,1,17375241,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,1,17375242,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,1,17375243,0);
+INSERT INTO `bcnm_battlefield` VALUES (99,1,17375243,1);
+INSERT INTO `bcnm_battlefield` VALUES (99,1,17375244,1);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375245,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375246,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375247,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375248,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375249,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,3,17375251,3);
+INSERT INTO `bcnm_battlefield` VALUES (99,2,17375250,1);
+INSERT INTO `bcnm_battlefield` VALUES (99,2,17375251,1);
 INSERT INTO `bcnm_battlefield` VALUES (99,3,17375252,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,3,17375253,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,3,17375254,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,3,17375255,3);
+INSERT INTO `bcnm_battlefield` VALUES (99,3,17375255,1);
+INSERT INTO `bcnm_battlefield` VALUES (99,3,17375256,1);
 INSERT INTO `bcnm_battlefield` VALUES (100,1,17375353,3); -- treasures_and_tribulations
 INSERT INTO `bcnm_battlefield` VALUES (100,1,17375354,3);
 INSERT INTO `bcnm_battlefield` VALUES (100,1,17375355,3);

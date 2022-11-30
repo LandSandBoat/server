@@ -3735,7 +3735,11 @@ INSERT INTO `mob_droplist` VALUES (398,0,0,1000,1236,@ALWAYS);    -- Bag Of Cact
 INSERT INTO `mob_droplist` VALUES (398,0,0,1000,1817,@UNCOMMON);  -- Cactus Arm (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (398,0,0,1000,14128,@RARE);     -- Kung Fu Shoes (Rare, 5%)
 
--- ID 399 available
+-- ZoneID: 153 Old Goobbue
+INSERT INTO `mob_droplist` VALUES (399,0,0,1000,919,@VCOMMON);  -- Clump Of Boyahda Moss (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (399,0,0,1000,1052,@RARE);    -- Boyahda Coffer Key (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (399,0,0,1000,1181,@RARE);    -- Clump Of Goobbue Humus (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (399,0,0,1000,1237,@COMMON);  -- Bag Of Tree Cuttings (Common, 15%)
 
 -- ZoneID:   9 - Camazotz
 INSERT INTO `mob_droplist` VALUES (400,0,0,1000,1782,320);      -- Florid Stone (32.0%)

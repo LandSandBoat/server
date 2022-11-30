@@ -593,7 +593,7 @@ local loot =
     [80] =
     {
         {
-            { itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 1000 },
+            { itemid = xi.items.ADAMAN_INGOT, droprate = 1000 },
         },
         {
             { itemid = xi.items.AHRIMAN_LENS, droprate = 250 },

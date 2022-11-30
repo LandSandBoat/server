@@ -7,9 +7,15 @@ local entity = {}
 
 local function immunity(mob, id)
     if GetMobByID(id):isSpawned() then
-        mob:setMod(xi.mod.DMG, -10000)
+        mob:setMod(xi.mod.UDMGPHYS,   -10000)
+        mob:setMod(xi.mod.UDMGMAGIC,  -10000)
+        mob:setMod(xi.mod.UDMGRANGE,  -10000)
+        mob:setMod(xi.mod.UDMGBREATH, -10000)
     else
-        mob:setMod(xi.mod.DMG, 0)
+        mob:setMod(xi.mod.UDMGPHYS,   0)
+        mob:setMod(xi.mod.UDMGMAGIC,  0)
+        mob:setMod(xi.mod.UDMGRANGE,  0)
+        mob:setMod(xi.mod.UDMGBREATH, 0)
     end
 end
 

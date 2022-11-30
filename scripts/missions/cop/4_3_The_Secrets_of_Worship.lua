@@ -26,6 +26,7 @@ local profQmOnTrigger = function(player, npc)
     if
         missionStatus == 3 and
         not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and
+        mission:getVar("hasKilled") == 0 and
         isSpawnPoint
     then
         GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)
@@ -155,7 +156,7 @@ mission.sections =
             {
                 onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 3 then
-                        mission:setLocalVar(player, 'hasKilled', 1)
+                        mission:setVar(player, 'hasKilled', 1)
                     end
                 end,
             },
