@@ -31,6 +31,10 @@ entity.onMobFight = function( mob, target )
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    for _, partyMember in pairs(player:getAlliance()) do
+        partyMember:addKeyItem(xi.keyItem.KIRINS_FERVOR)
+        partyMember:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.KIRINS_FERVOR)
+    end
 end
 
 entity.onMobDespawn = function( mob )

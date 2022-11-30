@@ -239,11 +239,6 @@ entity.onMobDeath = function(mob, player)
     for i = 17961580, 17961580 + 9 do
         DespawnMob(i)
     end
-
-    for _, partyMember in pairs(player:getAlliance()) do
-        partyMember:addKeyItem(xi.keyItem.KIRINS_FERVOR)
-        partyMember:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.KIRINS_FERVOR)
-    end
 end
 
 entity.onMobDespawn = function( mob )
