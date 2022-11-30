@@ -77,6 +77,7 @@ zones[xi.zone.FEIYIN] =
         MISER_MURPHY        = 17612849,
         DABOTZS_GHOST       = 17613128,
         CAPRICIOUS_CASSIE   = 17613129,
+        HUMBABA             = 17232094,
     },
     npc =
     {
