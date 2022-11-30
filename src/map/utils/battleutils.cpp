@@ -2963,7 +2963,12 @@ namespace battleutils
             {
                 if (attackerLvl > defenderLvl)
                 {
-                    cRatio = cRatio + correction; // Match other format
+                    cRatio = cRatio + correction; // Sets level correction for all mobs and pets
+
+                    if ((attackerType == TYPE_PET) && (charutils::CheckMob(attackerLvl, defenderLvl) == EMobDifficulty::TooWeak)) // Checks if the mob is too weak and if its a pet
+                    {
+                        cRatio = std::clamp(cRatio, 0.f, 2.f);
+                    }
                 }
             }
         }
