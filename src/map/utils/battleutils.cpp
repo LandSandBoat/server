@@ -3524,23 +3524,6 @@ namespace battleutils
             num += 1;
         }
 
-        // hasso occasionally triggers Zanshin after landing a normal attack, only active while Samurai is set as Main
-        if (PEntity->GetMJob() == JOB_SAM)
-        {
-            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO))
-            {
-                uint16 zanshin = PEntity->getMod(Mod::ZANSHIN);
-                if (PEntity->objtype == TYPE_PC)
-                {
-                    zanshin += ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_ZASHIN_ATTACK_RATE, (CCharEntity*)PEntity);
-                }
-
-                if (xirand::GetRandomNumber(100) < (zanshin / 4))
-                {
-                    num++;
-                }
-            }
-        }
         return std::min<uint8>(num, 8);
     }
 
