@@ -711,6 +711,7 @@ local lookupTable =
     {"nation", "Southern_San_dOria", "Ferdoulemiont", xi.eraShops.Ferdoulemiont, xi.nation.SANDORIA, "FERDOULEMIONT_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "BENAIGE_SHOP_DIALOG", 1},
     {"nation", "Southern_San_dOria", "Ostalie", xi.eraShops.Ostalie, xi.nation.SANDORIA, "OSTALIE_SHOP_DIALOG", 1},
+    {"standard", "Southern_San_dOria", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1},
 
     -- Windurst
     {"nation", "Port_Windurst", "Hohbiba-Mubiba", xi.eraShops.HohbibaMubiba, xi.nation.WINDURST, "HOHBIBAMUBIBA_SHOP_DIALOG", 1},
