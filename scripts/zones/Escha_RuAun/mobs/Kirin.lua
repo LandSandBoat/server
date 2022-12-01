@@ -232,7 +232,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if (mob:getBattleTime() >= 30 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 7) then
+    if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 7) then
         local pick2Hr = math.random(1, 7)
         if (GetServerVariable(cantUse2Hr[pick2Hr]) == 0) then
             if (pick2Hr > 0 and pick2Hr < 6) then
@@ -251,7 +251,7 @@ entity.onMobFight = function(mob, target)
 
             SetServerVariable("KIRIN_2HR_USED", pick2Hr)
             SetServerVariable("KIRIN_2HR_USED_TIME", os.time())
-            SetServerVariable("KIRIN_NEXT_2HR_TIME", os.time() + math.random(45, 90))
+            SetServerVariable("KIRIN_NEXT_2HR_TIME", os.time() + math.random(60, 90))
         end
     end
 end
