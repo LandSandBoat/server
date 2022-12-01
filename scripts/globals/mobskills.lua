@@ -514,7 +514,7 @@ end
 -- Equation: (HP * percent) + (LVL / base)
 -- cap is optional, defines a maximum damage
 xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
-    local damage = (mob:getHP() * percent) + (mob:getMainLvl() / base)
+    local damage = mob:getHP() * percent
 
     if cap == nil then
         -- cap max damage
