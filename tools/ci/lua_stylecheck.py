@@ -140,6 +140,29 @@ def check_parentheses_padding(line):
         if not line.lstrip(' ')[0] == '(' and not line.lstrip(' ')[0] == ')': # Ignore large blocks ending or opening
             show_error("No excess whitespace inside of parentheses or solely for alignment.")
 
+def check_newline_after_end(line):
+    """An empty newline is required after end if the code on the following line is at the same indentation level.
+
+    See: TBD
+    """
+    num_lines = len(lines)
+
+    if counter < num_lines and contains_word('end')(line):
+        current_indent = len(line) - len(line.lstrip(' '))
+        next_indent    = len(lines[counter]) - len(lines[counter].lstrip(' '))
+
+        if current_indent == next_indent and lines[counter].strip() != "":
+            show_error("Newline required after end with code following on same level")
+
+def check_no_newline_after_function_decl(line):
+    """Function declarations should not have an empty newline following them.
+
+    See: TBD
+    """
+
+    if 'function' in line and lines[counter].strip() == '':
+        show_error("No newlines after function declaration")
+
 def check_multiline_condition_format(line):
     """Multi-line conditional blocks should contain if/elseif and then on their own lines,
     with conditions indented between them.
@@ -158,8 +181,8 @@ def check_multiline_condition_format(line):
         if not 'if' in condition_end and condition_end != '':
             show_error("Invalid multiline conditional format")
 
+
 ### TODO:
-# No empty newline after function declarations
 # No empty newline before end
 # If condition has == QUEST_COMPLETED, prefer hasCompletedQuest
 # If contains trade:getItemCount, prefer npcUtil function
@@ -167,7 +190,6 @@ def check_multiline_condition_format(line):
 # Parentheses must have and|or in conditions
 # Only 1 space before and after comparators
 # No empty in-line comments
-# Newline required after End if in the same column
 
 def run_style_check():
     global counter
@@ -179,7 +201,6 @@ def run_style_check():
         counter          = 0
         lines            = f.readlines()
         in_block_comment = False
-        num_lines        = len(lines)
 
         for line in lines:
             counter = counter + 1
@@ -205,16 +226,8 @@ def run_style_check():
             check_indentation(code_line)
             check_operator_padding(code_line)
             check_parentheses_padding(code_line)
-
-            if counter < num_lines and contains_word('end')(code_line):
-                current_indent = len(line) - len(line.lstrip(' '))
-                next_indent    = len(lines[counter]) - len(lines[counter].lstrip(' '))
-
-                if current_indent == next_indent and lines[counter].strip() != "":
-                    print(f"Newline required after end with code following on same level: {filename}:{counter}")
-                    print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                    print("")
-                    errcount += 1
+            check_newline_after_end(code_line)
+            check_no_newline_after_function_decl(code_line)
 
             # Multiline conditionals should not have data in if, elseif, or then
             check_multiline_condition_format(code_line)
