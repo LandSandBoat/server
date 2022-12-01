@@ -3,12 +3,11 @@
 -- NM: Kirin
 -- !spawnmob 17961571
 -----------------------------------
+local ID = require("scripts/zones/Escha_RuAun/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
 require("scripts/globals/titles")
 -----------------------------------
-local ID = require("scripts/zones/Escha_RuAun/IDs")
-
 local entity = {}
 
 local byakko = 17961580
@@ -16,15 +15,45 @@ local genbu  = 17961583
 local seiryu = 17961586
 local suzaku = 17961589
 
--- pet gods
-local pets = {byakko, genbu, seiryu, suzaku}
+local pets =
+{
+    byakko,
+    genbu,
+    seiryu,
+    suzaku
+}
 
-local kirinTwoHours = {688, 690, 693, 694, 695, 735, 730}
+local kirinTwoHours =
+{
+    688,
+    690,
+    693,
+    694,
+    695,
+    735,
+    730
+}
 
-local playerTwoHours = {16, 17, 21, 22, 23, 27}
+local playerTwoHours =
+{
+    16,
+    17,
+    21,
+    22,
+    23,
+    27
+}
 
-local cantUse2Hr = {"KIRIN_CANT_USE_MIGHTY_STRIKES", "KIRIN_CANT_USE_HUNDRED_FISTS", "KIRIN_CANT_USE_PERFECT_DODGE",
-                    "KIRIN_CANT_USE_INVINCIBLE", "KIRIN_CANT_USE_BLOOD_WEAPON", "KIRIN_CANT_USE_EES", "KIRIN_CANT_USE_MEIKYO",}
+local cantUse2Hr =
+{
+    "KIRIN_CANT_USE_MIGHTY_STRIKES",
+    "KIRIN_CANT_USE_HUNDRED_FISTS",
+    "KIRIN_CANT_USE_PERFECT_DODGE",
+    "KIRIN_CANT_USE_INVINCIBLE",
+    "KIRIN_CANT_USE_BLOOD_WEAPON",
+    "KIRIN_CANT_USE_EES",
+    "KIRIN_CANT_USE_MEIKYO",
+}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
@@ -56,21 +85,20 @@ entity.onMobSpawn = function(mob)
 
     mob:addListener("ATTACKED", "KIRIN_2HR_LISTENER", function(mobArg, targetArg)
         local enmityList = mobArg:getEnmityList()
-        local PlayerName = {}
+        local playerName = {}
 
         for i, v in ipairs(enmityList) do
-            PlayerName[i] = v.entity:getName()
+            playerName[i] = v.entity:getName()
 
             if (v.entity:getLocalVar("KIRIN_Listener") == 0 or v.entity:getLocalVar("KIRIN_Listener") == nil) then
                 v.entity:addListener("ABILITY_STATE_EXIT", "PLAYER_USE_2HRS", function(playerArg, abilityArg)
                     local abilityID = abilityArg:getID()
-                    local abilityRecast = abilityArg:getRecast()
                     local kirinUsedTwoHour = GetServerVariable("KIRIN_2HR_USED")
                     local kirinTwoHourTime = GetServerVariable("KIRIN_2HR_USED_TIME")
 
-                    for v = 1, 6 do
-                        if (abilityID == playerTwoHours[v] and playerArg:hasRecast(xi.recast.ABILITY, 0) and kirinUsedTwoHour == v and os.time() - kirinTwoHourTime <= 15) then
-                            SetServerVariable(cantUse2Hr[v], 1)
+                    for n = 1, 6 do
+                        if (abilityID == playerTwoHours[n] and playerArg:hasRecast(xi.recast.ABILITY, 0) and kirinUsedTwoHour == v and os.time() - kirinTwoHourTime <= 15) then
+                            SetServerVariable(cantUse2Hr[n], 1)
 
                             if (abilityID == 16 and mobArg:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
                                 mobArg:weaknessTrigger(3)
@@ -108,7 +136,8 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobFight = function(mob,target)
+entity.onMobFight = function(mob, target)
+
     local kouryu = 17961577
 
     if mob:getHPP() < 50 then
@@ -185,12 +214,8 @@ entity.onMobFight = function(mob,target)
     local twoHoursLocked = {}
     local next2HrTime = GetServerVariable("KIRIN_NEXT_2HR_TIME")
 
-    if act == xi.act.MOBABILITY_START or
-    act == xi.act.MOBABILITY_USING or
-    act == xi.act.MOBABILITY_FINISH or
-    act == xi.act.MAGIC_START or
-    act == xi.act.MAGIC_CASTING or
-    act == xi.act.MAGIC_START then
+    if (act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or
+    act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START) then
         isBusy = true
     end
 
