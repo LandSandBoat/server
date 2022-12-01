@@ -5,8 +5,6 @@ require('scripts/globals/status')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
-local ID = require('scripts/zones/Batallia_Downs/IDs')
------------------------------------
 
 --[[
 Debugging:
@@ -65,6 +63,7 @@ xi.full_speed_ahead.tick = function(player, effect)
     player:setLocalVar("FSA_Motivation", player:getLocalVar("FSA_Motivation") - xi.full_speed_ahead.motivation_decay + effect:getPower())
     player:setLocalVar("FSA_Pep", player:getLocalVar("FSA_Pep") + xi.full_speed_ahead.pep_growth + effect:getPower())
 
+    local ID = zones[xi.zone.BATALLIA_DOWNS]
     local timeLeft = player:getLocalVar("FSA_Time") - os.time()
     local motivation = player:getLocalVar("FSA_Motivation")
     local pep = player:getLocalVar("FSA_Pep")
@@ -92,6 +91,7 @@ xi.full_speed_ahead.tick = function(player, effect)
 end
 
 xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
+    local ID = zones[xi.zone.BATALLIA_DOWNS]
     local food_byte = player:getLocalVar("FSA_Food")
     local food_count = player:getLocalVar("FSA_FoodCount")
     local motivation = player:getLocalVar("FSA_Motivation")
@@ -119,6 +119,7 @@ xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
 end
 
 xi.full_speed_ahead.onCheer = function(player)
+    local ID = zones[xi.zone.BATALLIA_DOWNS]
     local timeLeft = player:getLocalVar("FSA_Time") - os.time()
     local motivation = player:getLocalVar("FSA_Motivation")
     local pep = player:getLocalVar("FSA_Pep")
