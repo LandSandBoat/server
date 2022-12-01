@@ -740,7 +740,9 @@ end
         { 640, { "gil", 200 } } -- copper ore x1, gil x200
 --]]
 function npcUtil.tradeHas(trade, items, exact)
-    if type(exact) ~= "boolean" then exact = false end
+    if type(exact) ~= "boolean" then
+        exact = false
+    end
 
     -- create table of traded items, with key/val of itemId/itemQty
     local tradedItems = {}
