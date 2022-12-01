@@ -206,6 +206,26 @@ uint8 CBattleEntity::GetHPP() const
     return hpp;
 }
 
+uint8 CBattleEntity::GetHPPIgnoreConvert()
+{
+    TracyZoneScoped;
+    // essentially undo the effect of convert gear to get a "max" HP
+    // this is useful for specific latents that check against max hp without convert gear (e.g., sorc. ring)
+    int32 dif = (getMod(Mod::CONVMPTOHP) - getMod(Mod::CONVHPTOMP));
+    int32 modHP = std::max(1, ((health.maxhp) * (100 + getMod(Mod::HPP)) / 100) +
+                                  std::min<int16>((health.maxhp * m_modStat[Mod::FOOD_HPP] / 100), m_modStat[Mod::FOOD_HP_CAP]) + getMod(Mod::HP));
+    dif = std::clamp(dif, -(modHP - 1), 9999);
+
+    uint8 hpp = (uint8)floor(((float)health.hp / (float)(GetMaxHP() - dif)) * 100);
+    // handle the edge case where a floor would show a mob with 1/1000 hp as 0
+    if (hpp == 0 && health.hp > 0)
+    {
+        hpp = 1;
+    }
+
+    return hpp;
+}
+
 int32 CBattleEntity::GetMaxHP() const
 {
     return health.modhp;
