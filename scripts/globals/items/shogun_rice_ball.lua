@@ -38,7 +38,6 @@ itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEX, 4)
     target:addMod(xi.mod.VIT, 4)
     target:addMod(xi.mod.CHR, 4)
-
 end
 
 itemObject.onEffectLose = function(target, effect)

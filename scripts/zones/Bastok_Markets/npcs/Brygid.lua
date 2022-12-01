@@ -99,7 +99,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(385, 0, 14400 + wantsSubligar, 15374 + wantsSubligar)
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

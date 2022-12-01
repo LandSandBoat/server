@@ -40,7 +40,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     --add in final adjustments
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
     return dmg
-
 end
 
 return spellObject

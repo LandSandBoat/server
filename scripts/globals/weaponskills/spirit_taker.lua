@@ -29,7 +29,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     player:addMP(damage)
     return tpHits, extraHits, criticalHit, damage
-
 end
 
 return weaponskillObject

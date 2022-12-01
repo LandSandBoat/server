@@ -47,7 +47,6 @@ entity.onTrigger = function(player, npc)
 
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS) then
         bastokQuests = bastokQuests - 512   -- Too Many Chefs
-
     end
 
     if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_PROPER_BURIAL) then

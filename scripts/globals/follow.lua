@@ -100,7 +100,9 @@ end
 function xi.follow.clearFollowers(leader)
     local leaderId = leader:getID()
 
-    if not leaderToFollowersMap[leaderId] then return end
+    if not leaderToFollowersMap[leaderId] then
+        return
+    end
 
     for _, follower in ipairs(leaderToFollowersMap[leaderId]) do
         local followerId = follower:getID()
@@ -174,7 +176,9 @@ function onMobRoamAction(follower)
         return
     end
 
-    if follower:isFollowingPath() then return end
+    if follower:isFollowingPath() then
+        return
+    end
 
     local options = followerOptions[followerId]
     local leaderPos = leader:getPos()

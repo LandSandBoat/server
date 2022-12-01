@@ -36,7 +36,9 @@ end
 entity.onMobEngaged = function(mob, target)
     local followers = xi.follow.getFollowers(mob)
 
-    if not followers then return end
+    if not followers then
+        return
+    end
 
     for _, follower in ipairs(followers) do
         if follower:isSpawned() and not follower:isEngaged() then

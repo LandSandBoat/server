@@ -431,7 +431,6 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             elseif member:getID() == player:getID() then    -- caster has Vallation, set no effect message.
                 ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
             end
-
         end
     else -- apply effects to target (Vallation)
         if target:hasStatusEffect(xi.effect.LIEMENT) then -- no effect if Liement is up

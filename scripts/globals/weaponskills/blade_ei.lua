@@ -32,7 +32,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, false, damage
-
 end
 
 return weaponskillObject

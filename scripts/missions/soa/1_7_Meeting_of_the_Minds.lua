@@ -39,7 +39,6 @@ mission.sections =
                     else
                         return mission:progressEvent(1501) -- 257, 2 seem to be consistent parameters (first 2), could be animation, Ploh extends a hand
                     end
-
                 end,
             },
 

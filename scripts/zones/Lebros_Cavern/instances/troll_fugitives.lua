@@ -21,7 +21,6 @@ instanceObject.onInstanceCreated = function(instance)
     local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
     rune:setPos(-376.272, -9.893, 89.189, 0)
     box:setPos(-384.097, -10, 84.954, 49)
-
 end
 
 instanceObject.onInstanceCreatedCallback = function(player, instance)
@@ -61,7 +60,6 @@ instanceObject.onInstanceComplete = function(instance)
     local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
     rune:setStatus(xi.status.NORMAL)
     box:setStatus(xi.status.NORMAL)
-
 end
 
 instanceObject.onEventUpdate = function(player, csid, option)

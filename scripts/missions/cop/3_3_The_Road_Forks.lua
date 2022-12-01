@@ -70,7 +70,9 @@ jewelTimer = function(player)
             mission:setLocalVar(player, 'Option', messageOffset + 1)
         end
 
-        player:timer(3 * 1000, function() jewelTimer(player) end)
+        player:timer(3 * 1000, function()
+            jewelTimer(player)
+        end)
     end
 end
 

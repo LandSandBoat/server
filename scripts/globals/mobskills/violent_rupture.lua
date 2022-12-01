@@ -29,7 +29,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
     return dmg
-
 end
 
 return mobskillObject

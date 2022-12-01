@@ -25,7 +25,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
     return dmg
-
 end
 
 return mobskillObject

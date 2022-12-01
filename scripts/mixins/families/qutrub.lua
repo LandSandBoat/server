@@ -53,9 +53,7 @@ g_mixins.families.qutrub = function(qutrubMob)
                 mob:setLocalVar("swapTime", 0)
             end
         end
-
     end)
-
 end
 
 return g_mixins.families.qutrub

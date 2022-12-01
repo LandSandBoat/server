@@ -80,7 +80,6 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
             SpawnMob(ID.mob[6].qiqirn_mine_2, instance)
         end
     end
-
 end
 
 instanceObject.onEventUpdate = function(player, csid, option)

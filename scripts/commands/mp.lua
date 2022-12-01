@@ -49,5 +49,4 @@ function onTrigger(player, mp, target)
     else
         player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
     end
-
 end

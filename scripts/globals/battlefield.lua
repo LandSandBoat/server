@@ -456,7 +456,6 @@ function Battlefield:register()
                     end
                 end
             end
-
         end
     end
 
@@ -1214,7 +1213,6 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
     local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
     return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or (current == self.mission and status >= self.requiredMissionStatus))) or
         (current == self.mission and status == self.requiredMissionStatus)
-
 end
 
 function BattlefieldMission:checkSkipCutscene(player)

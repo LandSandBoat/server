@@ -62,7 +62,6 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 
         instance:complete()
     end
-
 end
 
 instanceObject.onInstanceComplete = function(instance)

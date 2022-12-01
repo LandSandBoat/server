@@ -39,7 +39,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     return xi.effect.BIND
-
 end
 
 return spellObject

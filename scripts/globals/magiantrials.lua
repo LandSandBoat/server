@@ -325,7 +325,6 @@ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
         local trialBits = getTrialsBits(player, trials)
         player:updateEvent(trialBits[1], trialBits[2], trialBits[3], trialBits[4], trialBits[5], nbTrialsPlayer, places, 0)
     end
-
 end
 
 xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
