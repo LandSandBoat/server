@@ -85,9 +85,9 @@ entity.onMobSpawn = function(mob)
 
     mob:addListener("ATTACKED", "KIRIN_2HR_LISTENER", function(mobArg, targetArg)
         local enmityList = mobArg:getEnmityList()
-        local playerName = {}
 
         for i, v in ipairs(enmityList) do
+            local playerName = {}
             playerName[i] = v.entity:getName()
 
             if (v.entity:getLocalVar("KIRIN_Listener") == 0 or v.entity:getLocalVar("KIRIN_Listener") == nil) then
@@ -214,8 +214,15 @@ entity.onMobFight = function(mob, target)
     local twoHoursLocked = {}
     local next2HrTime = GetServerVariable("KIRIN_NEXT_2HR_TIME")
 
-    if (act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or
-    act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START) then
+    if act == xi.act.MOBABILITY_START then
+        isBusy = true
+    elseif act == xi.act.MOBABILITY_USING then
+        isBusy = true
+    elseif act == xi.act.MOBABILITY_FINISH then
+        isBusy = true
+    elseif act == xi.act.MAGIC_START then
+        isBusy = true
+    elseif act == xi.act.MAGIC_CASTING then
         isBusy = true
     end
 

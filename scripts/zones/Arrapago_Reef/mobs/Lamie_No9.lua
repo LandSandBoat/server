@@ -41,11 +41,11 @@ entity.onMobFight = function(mob, target)
         SpawnMob(lamiasAvatar):updateEnmity(target)
     end
 
-    if mob:getHPP() < 60 and mob:getLocalVar("astralFlow") == 0 then
+    if mob:getHPP() < 80 and mob:getLocalVar("astralFlow") == 0 then
         mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
         mob:useMobAbility(734)
         pet:useMobAbility(915)
-    elseif mob:getHPP() < 40 and mob:getLocalVar("astralFlow") == 1 then
+    elseif mob:getHPP() < 60 and mob:getLocalVar("astralFlow") == 1 then
         mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
         mob:useMobAbility(734)
         pet:useMobAbility(915)
