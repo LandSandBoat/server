@@ -21,7 +21,6 @@ def show_error(error_string):
     global errcount
 
     print(f"{error_string}: {filename}:{counter}")
-    print("")
     print(f"{lines[counter - 1].strip()}                              <-- HERE")
     print("")
 
@@ -163,6 +162,15 @@ def check_no_newline_after_function_decl(line):
     if 'function' in line and lines[counter].strip() == '':
         show_error("No newlines after function declaration")
 
+def check_no_newline_before_end(line):
+    """`end` should not have a newline preceding it.
+
+    See: TBD
+    """
+
+    if contains_word('end')(line) and lines[counter - 2].strip() == '':
+        show_error("No newlines before end statement")
+
 def check_multiline_condition_format(line):
     """Multi-line conditional blocks should contain if/elseif and then on their own lines,
     with conditions indented between them.
@@ -183,7 +191,6 @@ def check_multiline_condition_format(line):
 
 
 ### TODO:
-# No empty newline before end
 # If condition has == QUEST_COMPLETED, prefer hasCompletedQuest
 # If contains trade:getItemCount, prefer npcUtil function
 # No useless parens (paren without and|or in entire section)
@@ -228,6 +235,7 @@ def run_style_check():
             check_parentheses_padding(code_line)
             check_newline_after_end(code_line)
             check_no_newline_after_function_decl(code_line)
+            check_no_newline_before_end(code_line)
 
             # Multiline conditionals should not have data in if, elseif, or then
             check_multiline_condition_format(code_line)
