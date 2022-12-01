@@ -49,6 +49,7 @@ entity.onMobRoam = function(mob)
                 mAnimation:setUntargetable(false)
             end)
         end)
+
         mob:setLocalVar("jump", 1)
     end
 end

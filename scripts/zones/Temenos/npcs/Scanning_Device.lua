@@ -25,19 +25,20 @@ entity.onTrigger = function(player, npc)
     player:startEvent(121, 15)
 end
 
+local timeVarNames =
+{
+    [1] = "[TEMENOS_NORTHERN_TOWER]Time",
+    [2] = "[TEMENOS_EASTERN_TOWER]Time",
+    [3] = "[TEMENOS_WESTERN_TOWER]Time",
+    [4] = "[CENTRAL_TEMENOS_4TH_FLOOR]Time",
+    [5] = "[CENTRAL_TEMENOS_3RD_FLOOR]Time",
+    [6] = "[CENTRAL_TEMENOS_2ND_FLOOR]Time",
+    [7] = "[CENTRAL_TEMENOS_1ST_FLOOR]Time",
+    [8] = "[CENTRAL_TEMENOS_BASEMENT]Time",
+}
+
 entity.onEventUpdate = function(player, csid, option)
-    local time = 0
-    switch (option): caseof {
-        [1] = function() time = GetServerVariable("[TEMENOS_NORTHERN_TOWER]Time") end,
-        [2] = function() time = GetServerVariable("[TEMENOS_EASTERN_TOWER]Time") end,
-        [3] = function() time = GetServerVariable("[TEMENOS_WESTERN_TOWER]Time") end,
-        [4] = function() time = GetServerVariable("[CENTRAL_TEMENOS_4TH_FLOOR]Time") end,
-        [5] = function() time = GetServerVariable("[CENTRAL_TEMENOS_3RD_FLOOR]Time") end,
-        [6] = function() time = GetServerVariable("[CENTRAL_TEMENOS_2ND_FLOOR]Time") end,
-        [7] = function() time = GetServerVariable("[CENTRAL_TEMENOS_1ST_FLOOR]Time") end,
-        [8] = function() time = GetServerVariable("[CENTRAL_TEMENOS_BASEMENT]Time") end,
-    }
-    player:updateEvent(0, time, 0, 0, 0, 0, 0, 0)
+    player:updateEvent(0, GetServerVariable(timeVarNames[option]), 0, 0, 0, 0, 0, 0)
 end
 
 entity.onEventFinish = function(player, csid, option)

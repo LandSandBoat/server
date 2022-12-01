@@ -49,7 +49,7 @@ quest.sections =
                         xi.cutscenes.params.UNKNOWN_2
                     )
 
-                    player:startEvent(7, { flags = cutsceneFlags } )
+                    player:startEvent(7, { flags = cutsceneFlags })
                 end,
 
                 [7] = function(player, csid, option, npc)

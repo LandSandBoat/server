@@ -39,4 +39,5 @@ end
 entity.onEventFinish = function(player, csid, option)
     xi.mystery.onEventFinish(player, csid, option, events)
 end
+
 return entity

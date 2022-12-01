@@ -89,6 +89,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:tradeComplete()
         end
+
         npcUtil.giveKeyItem(player, rewardKI)
     end
 end

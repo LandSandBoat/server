@@ -38,6 +38,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         then
             player:setCharVar("PromathiaStatus", 5)
         end
+
         player:setPos(420, 0, 445, 192)
     end
 end
