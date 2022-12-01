@@ -60,7 +60,6 @@ local function parseActionShorthand(actionDef)
             return info and -1 or 0
         end, Action.Priority.Default)
     end
-
 end
 
 -- Parses out short-hand ways of writing quest actions, in order to avoid having to make function declarations for each simple interaction.

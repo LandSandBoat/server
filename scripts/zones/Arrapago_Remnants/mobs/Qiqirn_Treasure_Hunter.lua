@@ -21,12 +21,9 @@ entity.onMobRoamAction = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    -- local target = mob:getTarget()
-
     if target:isPC() or target:isPet() then
         mob:setLocalVar("runTime", os.time())
     end
-
 end
 
 entity.onMobFight = function(mob, target)

@@ -83,7 +83,6 @@ entity.onTrigger = function(player, npc)
     -- DEFAULT
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-
     end
 end
 

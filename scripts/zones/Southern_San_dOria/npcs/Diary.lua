@@ -39,7 +39,6 @@ entity.onTrigger = function(player, npc)
     --elseif diaryPage >= 4 then
     --    player:startEvent(723)        -- read last page
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

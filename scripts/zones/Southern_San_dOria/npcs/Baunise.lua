@@ -22,7 +22,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, 7817)-- nothing to report
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

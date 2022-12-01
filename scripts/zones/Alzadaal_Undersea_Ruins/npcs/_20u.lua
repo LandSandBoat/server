@@ -59,7 +59,6 @@ entity.onEventUpdate = function(player, csid, option, target)
     end
 
     player:createInstance(instanceid)
-
 end
 
 entity.onEventFinish = function(player, csid, option, target)

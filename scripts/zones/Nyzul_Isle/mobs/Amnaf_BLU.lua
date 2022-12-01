@@ -71,7 +71,6 @@ entity.onMobEngaged = function(mob, target)
         gear:updateEnmity(target)
         gear:setLocalVar("Form2Gears", 1)
     end
-
 end
 
 entity.onMobFight = function(mob, target)

@@ -66,7 +66,6 @@ g_mixins.families.colibri_mimic = function(colibriMob)
             mob:setAnimationSub(0)
         end
     end)
-
 end
 
 return g_mixins.families.colibri_mimic

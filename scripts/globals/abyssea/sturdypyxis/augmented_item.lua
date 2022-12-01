@@ -632,7 +632,6 @@ xi.pyxis.augItem.setAugmentItems = function(npc, tier)
         npc:setLocalVar("ITEM2ID", item2)
         GetAugment(chest, item2, 2)
     end
-
 end
 
 xi.pyxis.augItem.updateEvent = function(player, npc)

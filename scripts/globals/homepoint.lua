@@ -169,7 +169,6 @@ local function goToHP(player, choice, index)
         player:delGil(getCost(origin, index, hasKI))
         player:setPos(unpack(homepointData[index].dest))
     end
-
 end
 
 xi.homepoint.onTrigger = function(player, csid, index)
@@ -196,7 +195,6 @@ xi.homepoint.onTrigger = function(player, csid, index)
     player:setLocalVar("originIndex", index)
     local g1, g2, g3, g4 = unpack(player:getTeleportTable(travelType))
     player:startEvent(csid, 1, g1, g2, g3, g4, player:getGil(), 4095, params)
-
 end
 
 xi.homepoint.onEventUpdate = function(player, csid, option)
@@ -234,7 +232,6 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
             end
 
             player:setTeleportMenu(travelType, favs)
-
         end
 
         for x = 1, 3 do -- Condense arrays for event params
@@ -266,5 +263,4 @@ xi.homepoint.onEventFinish = function(player, csid, option, event)
             goToHP(player, choice, bit.rshift(option, 16))
         end
     end
-
 end

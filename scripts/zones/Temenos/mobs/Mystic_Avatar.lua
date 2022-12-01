@@ -41,7 +41,6 @@ entity.onMobDeath = function(mob, player, optParams)
                 SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 9 + partner_offset)
             end
         end
-
     end
 end
 

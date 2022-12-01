@@ -94,7 +94,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     return damage
-
 end
 
 return spellObject

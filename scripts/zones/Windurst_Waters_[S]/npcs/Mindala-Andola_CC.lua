@@ -38,7 +38,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(13, allegiance, notes, freelances, cipher, medalRank, bonusEffects, timeStamp, 0)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

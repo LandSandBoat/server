@@ -45,7 +45,6 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(50, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -92,7 +91,6 @@ entity.onTrigger = function(player, npc)
     -- default dialog including option to drop membership card
     else
         player:startEvent(118, hasMembershipCard)
-
     end
 end
 

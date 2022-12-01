@@ -43,7 +43,6 @@ g_mixins.atori_tutori_qm = function(atoriMob)
             mob:showText(mob, ID.text.WHATS_THE_MATTARU)
         end
     end)
-
 end
 
 return g_mixins.atori_tutori_qm

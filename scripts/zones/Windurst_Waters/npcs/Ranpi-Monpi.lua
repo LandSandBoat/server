@@ -25,7 +25,6 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(555, 0, 4373) -- incorrect or not enough, play reminder dialog
         end
-
     end
 end
 

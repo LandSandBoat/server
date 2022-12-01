@@ -582,9 +582,13 @@ xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
     if invalid then return end
 
     local aftermath = xi.aftermath.effects[id]
-    if not aftermath then return end
+    if not aftermath then
+        return
+    end
 
-    if not xi.aftermath.canOverwrite(player, tp, id, aftermathType) then return end
+    if not xi.aftermath.canOverwrite(player, tp, id, aftermathType) then
+        return
+    end
 
     player:delStatusEffect(xi.effect.AFTERMATH)
     switch (aftermathType) : caseof

@@ -115,7 +115,6 @@ mission.sections =
                         handlePackage(player)
                         player:messageSpecial(bhaflauID.text.HAND_OVER_TO_IMMORTAL, xi.ki.SUPPLIES_PACKAGE)
                         player:messageSpecial(bhaflauID.text.YOUR_IMPERIAL_STANDING)
-
                     end
                 end,
             },

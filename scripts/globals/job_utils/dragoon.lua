@@ -414,7 +414,6 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
                 local effect = player:getStatusEffect(xi.effect.STONESKIN)
                 effect:setPower(effect:getPower() - drainamount) -- fixes the status effect so when it ends it uses the new power instead of old
                 player:delMod(xi.mod.STONESKIN, drainamount) -- removes the amount from the mod
-
             end
         else
             player:delStatusEffect(xi.effect.STONESKIN)

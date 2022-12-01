@@ -27,7 +27,6 @@ entity.onTrigger = function(player, npc)
             GetNPCByID(doorOffset-9):openDoor(15) -- Door _0rk
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

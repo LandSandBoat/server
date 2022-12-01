@@ -399,7 +399,6 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 end
 
                 finaldmg = finaldmg + magicdmg
-
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1

@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(633)
     else
         player:showText(npc, 7817) -- nothing to report
-
     end
 end
 

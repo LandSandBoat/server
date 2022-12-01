@@ -15,7 +15,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_DAGGER_DIALOG)
-
 end
 
 entity.onMobFight = function(mob, target)
