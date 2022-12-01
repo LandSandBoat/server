@@ -35,6 +35,7 @@ local function removeTentacle(mob, tentacles)
         mob:messageText(mob, ID.text.ALL_TENTACLES_WOUNDED, false)
         mob:setMobSkillAttack(704) -- replace melee attack with special Ink Jet attack
     end
+
     mob:addMod(xi.mod.ATT, 50)
     mob:addMod(xi.mod.REGAIN, 50)
     mob:addMod(xi.mod.BINDRES, 10)

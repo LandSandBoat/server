@@ -69,6 +69,7 @@ local eldiemeGlobal =
                 for skull = 1, 7 do
                     SpawnMob(ID.mob.SKULL_OFFSET + skull)
                 end
+
                 break
             elseif tradeCount == i and os.time() < tradeWindow and os.time() > active then -- Candle trades 2 through 6
                 GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", i + 1)

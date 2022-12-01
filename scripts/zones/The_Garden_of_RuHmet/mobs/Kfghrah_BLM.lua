@@ -26,6 +26,7 @@ entity.onMobRoam = function(mob)
         if roamForm == 1 then
             roamForm = 0 -- We don't want form 1 as that's humanoid - make it 0 for ball
         end
+
         mob:setAnimationSub(roamForm)
         mob:setLocalVar("roamTime", os.time())
     end
@@ -40,6 +41,7 @@ entity.onMobFight = function(mob, target)
         if battleForm == 1 then
             battleForm = 0
         end
+
         mob:setAnimationSub(battleForm)
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end

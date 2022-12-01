@@ -86,6 +86,7 @@ entity.onMobFight = function(mob, target)
         if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- disable no turning for the forced mobskills upon head growth
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
+
         -- These need to be listed in reverse order as forced moves are added to the top of the queue.
         mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
@@ -107,6 +108,7 @@ entity.onMobFight = function(mob, target)
         if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- disable no turning for the forced mobskills upon head growth
             mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
+
         -- Reverse order, same deal.
         mob:useMobAbility(1828) -- Pyric Blast
         mob:useMobAbility(1830) -- Polar Blast
@@ -135,6 +137,7 @@ entity.onCriticalHit = function(mob)
     else
         critNum = critNum + 1
     end
+
     mob:setLocalVar("crits", critNum)
 end
 
