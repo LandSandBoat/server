@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 require("scripts/globals/battlefield")
+require("scripts/globals/npc_util")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -43,8 +44,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) then
             player:delKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
-            player:addKeyItem(xi.ki.WHISPER_OF_DREAMS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_DREAMS)
+            npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_DREAMS)
         end
         player:addTitle(xi.title.HEIR_TO_THE_REALM_OF_DREAMS)
     end
