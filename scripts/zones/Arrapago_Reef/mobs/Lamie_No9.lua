@@ -41,11 +41,22 @@ entity.onMobFight = function(mob, target)
         SpawnMob(lamiasAvatar):updateEnmity(target)
     end
 
-    if (mob:getHPP() < 80 and mob:getLocalVar("astralFlow") == 0 or mob:getHPP() < 60 and mob:getLocalVar("astralFlow") == 1 or
-        mob:getHPP() < 40 and mob:getLocalVar("astralFlow") == 2 or mob:getHPP() < 20 and mob:getLocalVar("astralFlow") == 3) then
-       mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
-       mob:useMobAbility(734)
-       pet:useMobAbility(915)
+    if mob:getHPP() < 60 and mob:getLocalVar("astralFlow") == 0 then
+        mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
+        mob:useMobAbility(734)
+        pet:useMobAbility(915)
+    elseif mob:getHPP() < 40 and mob:getLocalVar("astralFlow") == 1 then
+        mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
+        mob:useMobAbility(734)
+        pet:useMobAbility(915)
+    elseif mob:getHPP() < 40 and mob:getLocalVar("astralFlow") == 2 then
+        mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
+        mob:useMobAbility(734)
+        pet:useMobAbility(915)
+    elseif mob:getHPP() < 20 and mob:getLocalVar("astralFlow") == 3 then
+        mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
+        mob:useMobAbility(734)
+        pet:useMobAbility(915)
     end
 
     mob:addListener("WEAPONSKILL_USE", "LAMIIE_MOBSKILL_USE", function(mobArg, targetArg, skillid)
