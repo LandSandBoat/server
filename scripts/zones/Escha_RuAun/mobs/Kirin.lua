@@ -20,11 +20,13 @@ local suzaku = 17961589
 local pets = {byakko, genbu, seiryu, suzaku}
 
 local kirinTwoHours = {688, 690, 693, 694, 695, 735, 730}
+
 local playerTwoHours = {16, 17, 21, 22, 23, 27}
+
 local cantUse2Hr = {"KIRIN_CANT_USE_MIGHTY_STRIKES", "KIRIN_CANT_USE_HUNDRED_FISTS", "KIRIN_CANT_USE_PERFECT_DODGE",
                     "KIRIN_CANT_USE_INVINCIBLE", "KIRIN_CANT_USE_BLOOD_WEAPON", "KIRIN_CANT_USE_EES", "KIRIN_CANT_USE_MEIKYO",}
 
-entity.onMobInitialize = function( mob )
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
@@ -52,48 +54,48 @@ entity.onMobSpawn = function(mob)
     mob:setUntargetable(false)
     mob:setDropID(0)
 
-    mob:addListener("ATTACKED", "KIRIN_2HR_LISTENER", function(mob, target)
-        local enmityList = mob:getEnmityList()
+    mob:addListener("ATTACKED", "KIRIN_2HR_LISTENER", function(mobArg, targetArg)
+        local enmityList = mobArg:getEnmityList()
         local PlayerName = {}
 
         for i, v in ipairs(enmityList) do
             PlayerName[i] = v.entity:getName()
 
             if (v.entity:getLocalVar("KIRIN_Listener") == 0 or v.entity:getLocalVar("KIRIN_Listener") == nil) then
-                v.entity:addListener("ABILITY_STATE_EXIT", "PLAYER_USE_2HRS", function(player, ability)
-                    local abilityID = ability:getID()
-                    local abilityRecast = ability:getRecast()
+                v.entity:addListener("ABILITY_STATE_EXIT", "PLAYER_USE_2HRS", function(playerArg, abilityArg)
+                    local abilityID = abilityArg:getID()
+                    local abilityRecast = abilityArg:getRecast()
                     local kirinUsedTwoHour = GetServerVariable("KIRIN_2HR_USED")
                     local kirinTwoHourTime = GetServerVariable("KIRIN_2HR_USED_TIME")
 
                     for v = 1, 6 do
-                        if (abilityID == playerTwoHours[v] and player:hasRecast(xi.recast.ABILITY, 0) and kirinUsedTwoHour == v and os.time() - kirinTwoHourTime <= 15) then
+                        if (abilityID == playerTwoHours[v] and playerArg:hasRecast(xi.recast.ABILITY, 0) and kirinUsedTwoHour == v and os.time() - kirinTwoHourTime <= 15) then
                             SetServerVariable(cantUse2Hr[v], 1)
 
-                            if (abilityID == 16 and mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
-                                mob:weaknessTrigger(3)
-                                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-                                mob:delStatusEffect(xi.effect.MIGHTY_STRIKES)
-                            elseif (abilityID == 17 and mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)) then
-                                mob:weaknessTrigger(3)
-                                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-                                mob:delStatusEffect(xi.effect.HUNDRED_FISTS)
-                            elseif (abilityID == 21 and mob:hasStatusEffect(xi.effect.PERFECT_DODGE)) then
-                                mob:weaknessTrigger(3)
-                                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-                                mob:delStatusEffect(xi.effect.PERFECT_DODGE)
-                            elseif (abilityID == 22 and mob:hasStatusEffect(xi.effect.INVINCIBLE)) then
-                                mob:weaknessTrigger(3)
-                                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-                                mob:delStatusEffect(xi.effect.INVINCIBLE)
-                            elseif (abilityID == 23 and mob:hasStatusEffect(xi.effect.BLOOD_WEAPON)) then
-                                mob:weaknessTrigger(3)
-                                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-                                mob:delStatusEffect(xi.effect.BLOOD_WEAPON)
-                            elseif (abilityID == 27 and mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI)) then
-                                mob:weaknessTrigger(3)
-                                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
-                                mob:delStatusEffect(xi.effect.MEIKYO_SHISUI)
+                            if (abilityID == 16 and mobArg:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
+                                mobArg:weaknessTrigger(3)
+                                mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
+                                mobArg:delStatusEffect(xi.effect.MIGHTY_STRIKES)
+                            elseif (abilityID == 17 and mobArg:hasStatusEffect(xi.effect.HUNDRED_FISTS)) then
+                                mobArg:weaknessTrigger(3)
+                                mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
+                                mobArg:delStatusEffect(xi.effect.HUNDRED_FISTS)
+                            elseif (abilityID == 21 and mobArg:hasStatusEffect(xi.effect.PERFECT_DODGE)) then
+                                mobArg:weaknessTrigger(3)
+                                mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
+                                mobArg:delStatusEffect(xi.effect.PERFECT_DODGE)
+                            elseif (abilityID == 22 and mobArg:hasStatusEffect(xi.effect.INVINCIBLE)) then
+                                mobArg:weaknessTrigger(3)
+                                mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
+                                mobArg:delStatusEffect(xi.effect.INVINCIBLE)
+                            elseif (abilityID == 23 and mobArg:hasStatusEffect(xi.effect.BLOOD_WEAPON)) then
+                                mobArg:weaknessTrigger(3)
+                                mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
+                                mobArg:delStatusEffect(xi.effect.BLOOD_WEAPON)
+                            elseif (abilityID == 27 and mobArg:hasStatusEffect(xi.effect.MEIKYO_SHISUI)) then
+                                mobArg:weaknessTrigger(3)
+                                mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
+                                mobArg:delStatusEffect(xi.effect.MEIKYO_SHISUI)
 
                             end
                         end
@@ -106,7 +108,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobFight = function( mob, target )
+entity.onMobFight = function(mob,target)
     local kouryu = 17961577
 
     if mob:getHPP() < 50 then
@@ -133,40 +135,40 @@ entity.onMobFight = function( mob, target )
         mob:setLocalVar("gods", 4) -- prevent repop
     end
 
-    mob:addListener("MAGIC_TAKE", "KIRIN_REFLECT", function(target, caster, spell)
+    mob:addListener("MAGIC_TAKE", "KIRIN_REFLECT", function(targetArg1, caster, spell)
     if
         spell:tookEffect() and
         (caster:isPC() or caster:isPet()) and
-        (spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE or target:getLocalVar("[kirim]reflect_blue_magic") == 1)
+        (spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE or targetArg1:getLocalVar("[kirim]reflect_blue_magic") == 1)
     then
-        target:setLocalVar("[kirin]spellToMimic", spell:getID())
-        target:setLocalVar("[kirin]castWindow", os.time() + 30)
-        target:setLocalVar("[kirin]castTime", os.time() + 6)
+        targetArg1:setLocalVar("[kirin]spellToMimic", spell:getID())
+        targetArg1:setLocalVar("[kirin]castWindow", os.time() + 30)
+        targetArg1:setLocalVar("[kirin]castTime", os.time() + 6)
     end
     end)
 
-    mob:addListener("COMBAT_TICK", "KIRIN_REFLECT_CTICK", function(mob)
-    local spellToMimic = mob:getLocalVar("[kirin]spellToMimic")
-    local castWindow = mob:getLocalVar("[kirin]castWindow")
-    local castTime = mob:getLocalVar("[kirin]castTime")
+    mob:addListener("COMBAT_TICK", "KIRIN_REFLECT_CTICK", function(kirin)
+    local spellToMimic = kirin:getLocalVar("[kirin]spellToMimic")
+    local castWindow = kirin:getLocalVar("[kirin]castWindow")
+    local castTime = kirin:getLocalVar("[kirin]castTime")
     local osTime = os.time()
 
-        if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not mob:hasStatusEffect(xi.effect.SILENCE) then
-            mob:castSpell(spellToMimic, target)
-            mob:setLocalVar("[kirin]spellToMimic", 0)
-            mob:setLocalVar("[kirin]castWindow", 0)
-            mob:setLocalVar("[kirin]castTime", 0)
+        if spellToMimic > 0 and osTime > castTime and castWindow > osTime and not kirin:hasStatusEffect(xi.effect.SILENCE) then
+            kirin:castSpell(spellToMimic, target)
+            kirin:setLocalVar("[kirin]spellToMimic", 0)
+            kirin:setLocalVar("[kirin]castWindow", 0)
+            kirin:setLocalVar("[kirin]castTime", 0)
         elseif spellToMimic == 0 or osTime > castWindow then
-            mob:setLocalVar("[kirin]spellToMimic", 0)
-            mob:setLocalVar("[kirin]castWindow", 0)
-            mob:setLocalVar("[kirin]castTime", 0)
+            kirin:setLocalVar("[kirin]spellToMimic", 0)
+            kirin:setLocalVar("[kirin]castWindow", 0)
+            kirin:setLocalVar("[kirin]castTime", 0)
         end
     end)
 
-    mob:addListener("DISENGAGE", "KIRIN_DISENGAGE", function(mob)
-        mob:setLocalVar("[kirin]spellToMimic", 0)
-        mob:setLocalVar("[kirin]castWindow", 0)
-        mob:setLocalVar("[kirin]castTime", 0)
+    mob:addListener("DISENGAGE", "KIRIN_DISENGAGE", function(kirinArg)
+        kirinArg:setLocalVar("[kirin]spellToMimic", 0)
+        kirinArg:setLocalVar("[kirin]castWindow", 0)
+        kirinArg:setLocalVar("[kirin]castTime", 0)
     end)
 
     for i = 1, 4 do
@@ -183,8 +185,12 @@ entity.onMobFight = function( mob, target )
     local twoHoursLocked = {}
     local next2HrTime = GetServerVariable("KIRIN_NEXT_2HR_TIME")
 
-    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START
-       or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
+    if act == xi.act.MOBABILITY_START or
+    act == xi.act.MOBABILITY_USING or
+    act == xi.act.MOBABILITY_FINISH or
+    act == xi.act.MAGIC_START or
+    act == xi.act.MAGIC_CASTING or
+    act == xi.act.MAGIC_START then
         isBusy = true
     end
 

@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DEF, 80)
 end
 
-entity.onMobFight = function(mob, target)
+entity.onMobFight = function(mob,target)
     local pet        = GetMobByID(lamiasAvatar)
     local petRespawn = GetMobByID(lamiasAvatar):getLocalVar("respawn")
 
@@ -41,23 +41,20 @@ entity.onMobFight = function(mob, target)
         SpawnMob(lamiasAvatar):updateEnmity(target)
     end
 
-    if (mob:getHPP() < 80 and mob:getLocalVar("astralFlow") == 0 ) or
-       (mob:getHPP() < 60 and mob:getLocalVar("astralFlow") == 1 ) or
-       (mob:getHPP() < 40 and mob:getLocalVar("astralFlow") == 2 ) or
-       (mob:getHPP() < 20 and mob:getLocalVar("astralFlow") == 3 )
-    then
-        mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
-        mob:useMobAbility(734)
-        pet:useMobAbility(915)
+    if mob:getHPP() < 80 and mob:getLocalVar("astralFlow") == 0 or
+       mob:getHPP() < 60 and mob:getLocalVar("astralFlow") == 1 or
+       mob:getHPP() < 40 and mob:getLocalVar("astralFlow") == 2 or
+       mob:getHPP() < 20 and mob:getLocalVar("astralFlow") == 3 then
+       mob:setLocalVar("astralFlow", mob:getLocalVar("astralFlow") + 1)
+       mob:useMobAbility(734)
+       pet:useMobAbility(915)
     end
 
-    mob:addListener("WEAPONSKILL_USE", "LAMIIE_MOBSKILL_USE", function(mob, target, skillid)
-        if pet:isSpawned() and
-            skillid ~= 734
-        then
+    mob:addListener("WEAPONSKILL_USE", "LAMIIE_MOBSKILL_USE", function(mobArg, targetArg, skillid)
+        if pet:isSpawned() and skillid ~= 734 then
             pet:setTP(3000)
             pet:disengage()
-            pet:resetEnmity(target)
+            pet:resetEnmity(targetArg)
             pet:updateEnmity(mob:getTarget())
         end
     end)
@@ -72,7 +69,7 @@ entity.onMobRoam = function(mob)
         mob:updateEnmity(pet:getTarget())
     elseif not pet:isSpawned() and os.time() > petRespawn then
         pet:setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-        SpawnMob(lamiasAvatar):setAnimation(1)
+        SpawnMob(lamiasAvatar)
         pet:setLocalVar("respawn", respawnTime)
     end
 end
