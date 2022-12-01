@@ -1212,7 +1212,9 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
     local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
-    return current == self.mission and status == self.requiredMissionStatus
+    return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or (current == self.mission and status >= self.requiredMissionStatus))) or
+        (current == self.mission and status == self.requiredMissionStatus)
+
 end
 
 function BattlefieldMission:checkSkipCutscene(player)

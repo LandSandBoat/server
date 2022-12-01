@@ -42,7 +42,6 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instanceObject.onInstanceFailure = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do

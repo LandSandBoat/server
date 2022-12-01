@@ -139,14 +139,17 @@ xi.player.charCreate = function(player)
         player:setGil(xi.settings.main.START_GIL)
     end
 
-    player:addItem(536) -- adventurer coupon
+    if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Add coupon that would normally be added in cutscene.
+        player:addItem(xi.items.ADVENTURERS_COUPON)
+    end
+
     player:addTitle(xi.title.NEW_ADVENTURER)
     player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
-    player:setCharVar("spokeKindlix", 1) -- Kindlix introduction
-    player:setCharVar("spokePyropox", 1) -- Pyropox introduction
-    player:setCharVar("TutorialProgress", 1) -- Has not started tutorial
-    player:setCharVar("EinherjarIntro", 1) -- Has not seen Einherjar intro
-    player:setNewPlayer(true) -- apply new player flag
+    player:setCharVar("spokeKindlix", 1)                -- Kindlix introduction
+    player:setCharVar("spokePyropox", 1)                -- Pyropox introduction
+    player:setCharVar("TutorialProgress", 1)            -- Has not started tutorial
+    player:setCharVar("EinherjarIntro", 1)              -- Has not seen Einherjar intro
+    player:setNewPlayer(true)                           -- apply new player flag
 end
 
 -- called by core after a player logs into the server or zones

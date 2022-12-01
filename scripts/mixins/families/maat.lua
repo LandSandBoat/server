@@ -4,7 +4,6 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.maat = function(maatMob)
-
     maatMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         if mob:getMainJob() == xi.job.NIN then
             mob:setLocalVar("specialThreshold", 40)

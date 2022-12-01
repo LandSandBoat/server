@@ -46,7 +46,7 @@ spellObject.onMobSpawn = function(mob)
         -- Always set the boost, even if Mumor wasn't found.
         -- This accounts for her being in the party and giving the boost
         -- and also if she dies and the boost goes away.
-        mobArg:setMod(xi.mod.WALTZ_POTENTCY, waltzPotencyBoost)
+        mobArg:setMod(xi.mod.WALTZ_POTENCY, waltzPotencyBoost)
     end)
 
     for i = 1, #healingJobs do

@@ -116,6 +116,7 @@ entity.onEventFinish = function(player, csid, option)
                     player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
                     player:delKeyItem(xi.ki.MOONLIGHT_ORE)
                 end
+
                 player:setCharVar("DivineMight", 0)
                 player:setCharVar("DM_Earring", reward)
             else

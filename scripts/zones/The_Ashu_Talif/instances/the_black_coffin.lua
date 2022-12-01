@@ -59,6 +59,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         if ally:isAlive() then
             ally:setLocalVar("ready", 2)
         end
+
         instance:complete()
     end
 

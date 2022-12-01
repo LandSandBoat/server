@@ -4,7 +4,6 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.imp = function(impMob)
-
     -- 20% chance to break horn on critical hit
     -- Reacquires horn in stages of 30, 35, 40, 45, and a very rare 60 seconds
     impMob:addListener("CRITICAL_TAKE", "IMP_CRITICAL_TAKE", function(mob)
@@ -29,7 +28,6 @@ g_mixins.families.imp = function(impMob)
             end
         end
     end)
-
 end
 
 return g_mixins.families.imp

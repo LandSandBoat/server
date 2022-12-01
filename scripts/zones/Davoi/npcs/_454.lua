@@ -7,7 +7,6 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onSpawn = function(npc)
-
     local elevator =
     {
         id = xi.elevator.DAVOI_LIFT,

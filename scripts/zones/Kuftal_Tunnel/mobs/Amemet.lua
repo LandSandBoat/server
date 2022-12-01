@@ -204,7 +204,7 @@ entity.onMobFight = function(mob)
     end
 end
 
-entity.onMobDisengage = function (mob)
+entity.onMobDisengage = function(mob)
     mob:setMod(xi.mod.REGAIN, 0)
 end
 

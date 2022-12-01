@@ -134,15 +134,19 @@ zones[xi.zone.NYZUL_ISLE] =
 
     mob =
     {
-        [51] =
+        [51] = -- Nyzul Isle Investigation
         {
-            ARCHAIC_RAMPART1 = 17092629,
-            ARCHAIC_RAMPART2 = 17092630,
-            DAHAK            = 17092823,
-            BAT_EYE          = 17092824,
-            TAISAIJIN        = 17092913,
-            ADAMANTOISE      = 17092999,
-            CERBERUS         = 17093004,
+            ARCHAIC_RAMPART1    = 17092629,
+            ARCHAIC_RAMPART2    = 17092630,
+            OFFSET_REGULAR      = 17092631, -- Greatclaw
+            DAHAK               = 17092823,
+            OFFSET_NM           = 17092824, -- Bat Eye
+            TAISAIJIN           = 17092913,
+            OFFSET_GEARS        = 17092916, -- Gear
+            MOKKE               = 17092944,
+            LONG_HORNED_CHARIOT = 17092968,
+            OFFSET_SPECIFIED    = 17092969, -- Heraldic Imp
+            ADAMANTOISE         = 17092999,
         },
 
         -- Path of Darkness

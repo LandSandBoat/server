@@ -15,7 +15,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     ----- Save The Clock Tower Quest -----
     if
         trade:hasItemQty(555, 1) and

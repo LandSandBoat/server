@@ -74,6 +74,7 @@ entity.onMobDespawn = function(mob)
         elseif offset >= 12 and offset <= 15 then
             GetMobByID(ID.mob.IXAERN_DRG):setSpawn(-319, 5, -520, 156) -- Bottom Right
         end
+
         SpawnMob(ID.mob.IXAERN_DRG)
         SetServerVariable("[SEA]IxAernDRG_PH", 0) -- Clear the variable because it is spawned!
     end

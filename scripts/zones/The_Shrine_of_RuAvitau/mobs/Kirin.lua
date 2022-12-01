@@ -34,6 +34,7 @@ entity.onMobFight = function(mob, target)
                 table.insert(godsRemaining, i)
             end
         end
+
         if #godsRemaining > 0 then
             local g   = godsRemaining[math.random(1, #godsRemaining)]
             local god = SpawnMob(ID.mob.KIRIN + g)

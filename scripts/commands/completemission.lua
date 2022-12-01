@@ -18,7 +18,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, logId, missionId, target)
-
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)

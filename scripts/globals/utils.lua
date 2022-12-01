@@ -598,7 +598,6 @@ function utils.splitStr(s, sep)
 end
 
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
-
     --TODO Table of animations that are used for teleports for reference
 
     if hideDuration == nil then

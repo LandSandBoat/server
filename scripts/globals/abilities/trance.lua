@@ -6,13 +6,13 @@
 -- Duration: 1:00
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+
     return 0, 0
 end
 

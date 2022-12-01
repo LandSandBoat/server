@@ -105,6 +105,7 @@ entity.onEventFinish = function(player, csid, option)
         else
             gil_obtained = 19716 * xi.settings.main.GIL_RATE
         end
+
         player:addGil(gil_obtained)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil_obtained)
         player:setCharVar("ATWTTB_Can_Trade_Gruel", 0)

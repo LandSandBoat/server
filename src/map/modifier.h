@@ -579,7 +579,7 @@ enum class Mod
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
     SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENTCY           = 491, // Waltz Potentcy Bonus
+    WALTZ_POTENCY            = 491, // Waltz Potency Bonus
     JIG_DURATION             = 492, // Jig duration bonus in percents
     VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
     STEP_FINISH              = 494, // Bonus finishing moves from steps
@@ -925,6 +925,8 @@ enum class Mod
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -938,7 +940,7 @@ enum class Mod
     // 192 to 223
     // 261 to 280
     //
-    // SPARE = 1074, and onward
+    // SPARE = 1075, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

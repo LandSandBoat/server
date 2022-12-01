@@ -32,7 +32,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, target)
-
     local assaultid = player:getCurrentAssault()
 
     local cap = bit.band(option, 0x03)
@@ -68,7 +67,6 @@ entity.onEventUpdate = function(player, csid, option, target)
     end
 
     player:createInstance(player:getCurrentAssault())
-
 end
 
 entity.onEventFinish = function(player, csid, option, target)

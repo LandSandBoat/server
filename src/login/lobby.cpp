@@ -1049,5 +1049,13 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
         return -1;
     }
 
+    if (settings::get<bool>("main.NEW_CHARACTER_CUTSCENE"))
+    {
+        Query = "INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u);";
+        if (sql->Query(Query, charid, "HQuest[newCharacterCS]notSeen", 1) == SQL_ERROR)
+        {
+            return -1;
+        }
+    }
     return 0;
 }

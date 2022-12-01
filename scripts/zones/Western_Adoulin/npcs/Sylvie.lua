@@ -73,6 +73,7 @@ entity.onEventUpdate = function(player, csid, option)
             player:setLocalVar("Sylvie_Matre_Bell", option)
             eventUpdateParam = 1
         end
+
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, eventUpdateParam)
     end
 end

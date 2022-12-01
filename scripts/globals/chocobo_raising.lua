@@ -633,10 +633,21 @@ xi.chocoboRaising.initChocoboData = function(player)
     local plan4Type   = bit.rshift(bit.band(chocoState.care_plan, 0x0000000F),  0)
 
     local possibleCarePlanFuture = {}
-    for _ = 1, plan1Length do table.insert(possibleCarePlanFuture, plan1Type) end
-    for _ = 1, plan2Length do table.insert(possibleCarePlanFuture, plan2Type) end
-    for _ = 1, plan3Length do table.insert(possibleCarePlanFuture, plan3Type) end
-    for _ = 1, plan4Length do table.insert(possibleCarePlanFuture, plan4Type) end
+    for _ = 1, plan1Length do
+        table.insert(possibleCarePlanFuture, plan1Type)
+    end
+
+    for _ = 1, plan2Length do
+        table.insert(possibleCarePlanFuture, plan2Type)
+    end
+
+    for _ = 1, plan3Length do
+        table.insert(possibleCarePlanFuture, plan3Type)
+    end
+
+    for _ = 1, plan4Length do
+        table.insert(possibleCarePlanFuture, plan4Type)
+    end
 
     for idx = 1, reportLength do
         local possibleCarePlanEvent = possibleCarePlanFuture[idx]

@@ -71,9 +71,9 @@ end
 --        handler = <action definition or function to run>,
 --      }
 local function addHandlers(secondLevel, lookupSecondLevel, checkFunc, container)
-
     -- Use base table that all the handlers will reuse, to avoid creating many
     -- very similar objects in the lookup table
+
     local baseHandlerTable = {}
     if checkFunc then
         baseHandlerTable.check = checkFunc

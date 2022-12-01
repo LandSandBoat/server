@@ -43,12 +43,12 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)
+        [1] = function()
             player:setCharVar("option", 1)
             player:startEvent(4)
         end,
 
-        [2] = function (x)
+        [2] = function()
             player:setCharVar("option", 2)
             player:startEvent(4)
         end,

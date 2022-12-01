@@ -19,7 +19,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local currentHP = target:getHP()
     -- remove all by 5%
     local damage = 0
