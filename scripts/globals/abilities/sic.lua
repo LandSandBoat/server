@@ -32,6 +32,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         if mob:getTP() >= 1000 then
             mob:useMobAbility()
         elseif mob:hasSpellList() then
+            mob:setLocalVar("Sic", 1)
             mob:castSpell()
         else
             mob:queue(0, doSic)
