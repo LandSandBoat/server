@@ -611,9 +611,14 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 {
                     if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
                     {
+                        if (PMobEntity->isAlive() && PMobEntity->PAI->IsSpawned())
+                        {
+                            PEntity->status = STATUS_TYPE::DISAPPEAR;
+                            PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_NONE);
+                        }
+
                         m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                     }
-                    PEntity->status = STATUS_TYPE::DISAPPEAR;
                 }
             }
             else
@@ -763,6 +768,16 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         {
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
             m_Zone->updateCharLevelRestriction(PChar);
+
+            // Remove allies from player's spawn list
+            for (auto* ally : tempAllies)
+            {
+                SpawnIDList_t::iterator MOB = PChar->SpawnMOBList.find(ally->id);
+                if (MOB != PChar->SpawnMOBList.end())
+                {
+                    PChar->SpawnMOBList.erase(MOB);
+                }
+            }
 
             if (PChar->PPet)
             {
