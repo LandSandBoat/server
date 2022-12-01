@@ -124,7 +124,9 @@ function xi.follow.stopFollowing(follower)
 end
 
 local function getAveragePos(mobsPos)
-    if #mobsPos == 0 then return nil end
+    if #mobsPos == 0 then
+        return nil
+    end
 
     local count = #mobsPos
     local x = 0
@@ -228,7 +230,9 @@ end
 
 function xi.follow.getFollowers(leader)
     local followers = leaderToFollowersMap[leader:getID()]
-    if not followers or #followers == 0 then return end
+    if not followers or #followers == 0 then
+        return
+    end
 
     local clone = {}
     for _, follower in ipairs(followers) do

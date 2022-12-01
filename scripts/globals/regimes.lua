@@ -955,10 +955,14 @@ end
 
 local function getPageByNum(regimeType, zoneId, pageNum)
     local info = regimeInfo[regimeType]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.zone[zoneId]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.page
     return info[pageNum]

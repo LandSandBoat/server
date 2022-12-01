@@ -35,7 +35,9 @@ end
 local function parseParams(player)
     local paramTrials = {}
     for _, v in pairs(getPlayerTrials(player)) do
-        if v.trial > 0 then table.insert(paramTrials, v.trial) end
+        if v.trial > 0 then
+            table.insert(paramTrials, v.trial)
+        end
     end
 
     local params = { 0, 0, 0, 0, 0 }

@@ -55,7 +55,12 @@ end
 -- Do the following and linking for the babies.
 entity.onMobRoamAction = function(mob)
     local leader = xi.follow.getFollowTarget(mob)
-    if not leader or not leader:isSpawned() then return end
+    if
+        not leader or
+        not leader:isSpawned()
+    then
+        return
+    end
 
     if leader:isEngaged() then
         local leaderTarget = leader:getTarget()

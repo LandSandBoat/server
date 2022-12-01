@@ -32,7 +32,9 @@ attachmentObject.onEquip = function(pet)
 
             local function checkEffects(entity)
                 for _, status in pairs(removable) do
-                    if entity:hasStatusEffect(status) then return true end
+                    if entity:hasStatusEffect(status) then
+                        return true
+                    end
                 end
 
                 return false

@@ -40,7 +40,9 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function(x) triggerUncannySensationMessage(player) end,
+        [1] = function(x)
+            triggerUncannySensationMessage(player)
+        end,
     }
 end
 

@@ -49,13 +49,17 @@ xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
             diff = math.max(diff - hqQty * 12, 0)
 
             -- Confirm the clusters in the trade
-            if hqQty > 0 then trade:confirmItem(v.cluster, hqQty) end
+            if hqQty > 0 then
+                trade:confirmItem(v.cluster, hqQty)
+            end
 
             -- Count normal crystals and and subtract any that won't fit
             local qty = math.min(trade:getItemQty(v.crystal), diff)
 
             -- Confirm the crystals in the trade
-            if qty > 0 then trade:confirmItem(v.crystal, qty) end
+            if qty > 0 then
+                trade:confirmItem(v.crystal, qty)
+            end
 
             -- Calculate the params
             params[v.tradeparam] = bit.bor(hqQty, bit.lshift(qty, 16))
