@@ -189,6 +189,15 @@ def check_no_single_line_conditions(line):
     if contains_word('if')(line) and contains_word('end')(line):
         show_error("Condition begins and ends on a single line")
 
+def check_no_function_decl_padding(line):
+    """No padding should occur between function keyword and opening parenthesis.
+
+    See: TBD
+    """
+
+    if re.search("function\s{1,}\(", line):
+        show_error("Padding detected between function and opening parenthesis")
+
 def check_multiline_condition_format(line):
     """Multi-line conditional blocks should contain if/elseif and then on their own lines,
     with conditions indented between them.
@@ -256,6 +265,7 @@ def run_style_check():
             check_newline_after_end(code_line)
             check_no_newline_after_function_decl(code_line)
             check_no_newline_before_end(code_line)
+            check_no_function_decl_padding(code_line)
 
             # Multiline conditionals should not have data in if, elseif, or then
             check_multiline_condition_format(code_line)
