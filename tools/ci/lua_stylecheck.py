@@ -171,6 +171,24 @@ def check_no_newline_before_end(line):
     if contains_word('end')(line) and lines[counter - 2].strip() == '':
         show_error("No newlines before end statement")
 
+def check_no_single_line_functions(line):
+    """Functions should not begin and end on a single line.
+
+    See: TBD
+    """
+
+    if contains_word('function')(line) and contains_word('end')(line):
+        show_error("Function begins and ends on same line")
+
+def check_no_single_line_conditions(line):
+    """Conditions should not begin and end on a single line.
+
+    See: TBD
+    """
+
+    if contains_word('if')(line) and contains_word('end')(line):
+        show_error("Condition begins and ends on a single line")
+
 def check_multiline_condition_format(line):
     """Multi-line conditional blocks should contain if/elseif and then on their own lines,
     with conditions indented between them.
@@ -233,6 +251,8 @@ def run_style_check():
             check_indentation(code_line)
             check_operator_padding(code_line)
             check_parentheses_padding(code_line)
+            check_no_single_line_functions(code_line)
+            check_no_single_line_conditions(code_line)
             check_newline_after_end(code_line)
             check_no_newline_after_function_decl(code_line)
             check_no_newline_before_end(code_line)
