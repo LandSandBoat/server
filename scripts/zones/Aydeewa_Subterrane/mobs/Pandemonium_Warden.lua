@@ -27,7 +27,6 @@ local avatarAbilities = {  917,   918,   914,   913,   915,   916,   839,   919 
 local avatarSkins =     {   22,    23,    19,    18,    20,    21,    17,    16 }
 
 entity.onMobSpawn = function(mob)
-
     mob:setMod(xi.mod.DEF, 450)
     mob:setMod(xi.mod.MEVA, 380)
     mob:setMod(xi.mod.MDEF, 50)
@@ -88,7 +87,6 @@ local function handlePet(mob, newPet, oldPet, target, modelId)
 end
 
 entity.onMobFight = function(mob, target)
-
     -- Init Vars
     local mobHPP = mob:getHPP()
     local depopTime = mob:getLocalVar("PWDespawnTime")
@@ -174,7 +172,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-
     player:addTitle(xi.title.PANDEMONIUM_QUELLER)
 
     -- Despawn pets

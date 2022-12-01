@@ -41,7 +41,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     target:addHP()
 
-    pet:timer(200, function(mobArg) mobArg:setHP(0) end)
+    pet:timer(200, function(mobArg)
+        mobArg:setHP(0)
+    end)
 
     return hpRestore
 end

@@ -14,7 +14,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     local changeTime = mob:getLocalVar("changeTime")
     local element = mob:getLocalVar("element")
 

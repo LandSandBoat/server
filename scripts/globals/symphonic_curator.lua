@@ -14,7 +14,6 @@ xi = xi or {}
 xi.symphonic_curator = xi.symphonic_curator or {}
 
 xi.symphonic_curator.onTrigger = function(player, npc)
-
     -- The first time you click, you'll always already be listening to Mog House
     if player:getLocalVar("Symphonic_Curator_Music") == 0 then
         player:setLocalVar("Symphonic_Curator_Music", 126)

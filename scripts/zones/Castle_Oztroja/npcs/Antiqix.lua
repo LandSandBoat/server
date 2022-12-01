@@ -143,7 +143,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     -- bought prismatic hourglass
     if csid == 54 then
         player:tradeComplete()

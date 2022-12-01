@@ -13,7 +13,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local pantsQuestProgress = player:getCharVar("AF_SCH_PANTS")
 
     player:delStatusEffect(xi.effect.SNEAK)

@@ -11,7 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local doorOffset = npc:getID()
 
     player:messageSpecial(ID.text.LAMP_OFFSET + 1) -- Earth lamp

@@ -13,7 +13,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
     target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
     target:dispelStatusEffect(xi.effectFlag.DISPELABLE)

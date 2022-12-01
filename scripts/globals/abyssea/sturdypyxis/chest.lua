@@ -113,7 +113,6 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
 end
 
 xi.pyxis.getDrops = function(npc, dropType, tier)
-
     if npc:getLocalVar("ITEMS_SET") == 1 then -- sets this to 1 so can get items once when triggered
         return
     end

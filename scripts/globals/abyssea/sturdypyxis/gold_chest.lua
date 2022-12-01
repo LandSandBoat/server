@@ -75,7 +75,6 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
                 end,
 
                 [3] = function()
-
                     local hints = {}
                     if digit == 0 then
                         hints =

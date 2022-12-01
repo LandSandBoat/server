@@ -14,7 +14,6 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.rage = function(rageMob)
-
     rageMob:addListener("SPAWN", "RAGE_SPAWN", function(mob)
         mob:setLocalVar("[rage]timer", 1200) -- 20 minutes
     end)

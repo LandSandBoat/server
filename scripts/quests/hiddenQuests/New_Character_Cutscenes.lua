@@ -175,7 +175,6 @@ quest.sections =
             onEventFinish =
             {
                 [503] = function(player, csid, option, npc)
-
                     local ID = zones[player:getZoneID()]
                     player:messageText(player, ID.text.MAP_MARKER_TUTORIAL)
                     -- If you don't get the coupon, tough luck. Retail doesn't give you a chance to get it again.

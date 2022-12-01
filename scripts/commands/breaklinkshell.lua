@@ -15,7 +15,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, target)
-
     -- validate target
     if not target then
         error(player, "You must enter a linkshell name.")

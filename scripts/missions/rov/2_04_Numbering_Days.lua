@@ -31,7 +31,6 @@ mission.sections =
             ['_6s1'] =
             {
                 onTrigger = function(player, npc)
-
                     -- Note: While the second and third parameters change based on below observations, they
                     -- do not appear to have an impact on the event.  The first parameter with a value of 0
                     -- has Prishe ready to fight the masked man, and with a value of 1, she appears very calm

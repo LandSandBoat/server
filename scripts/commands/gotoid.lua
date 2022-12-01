@@ -16,7 +16,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, target)
-
     -- validate npc
     if not target or target == 0 then
         error(player, "You must enter a mob or NPC ID.")

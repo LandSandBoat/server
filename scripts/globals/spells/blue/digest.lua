@@ -23,7 +23,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     --get resist multiplier (1x if no resist)
     local params = {}

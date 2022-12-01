@@ -86,7 +86,6 @@ quest.sections =
             onEventFinish =
             {
                 [88] = function(player, csid, option, npc)
-
                     if option == 1 then -- Accept quest option.
                         quest:begin(player)
                     else
