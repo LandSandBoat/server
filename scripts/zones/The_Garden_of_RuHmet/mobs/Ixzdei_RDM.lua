@@ -63,7 +63,6 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar("changeTime")
 

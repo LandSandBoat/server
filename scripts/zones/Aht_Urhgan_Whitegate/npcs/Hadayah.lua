@@ -32,7 +32,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 638 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 7, 1)
         player:addStatusEffect(xi.effect.ALCHEMY_IMAGERY, 1, 0, 120)

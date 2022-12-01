@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
 
     player:delStatusEffect(xi.effect.SNEAK)

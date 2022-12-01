@@ -17,7 +17,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 2.0 params.ftp200 = 2.0 params.ftp300 = 2.0

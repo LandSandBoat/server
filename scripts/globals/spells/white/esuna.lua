@@ -12,7 +12,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     if caster:getID() == target:getID() then -- much of this should only run once per cast, otherwise it would only delete the debuffs from the caster.
 
         local statusNum = -1

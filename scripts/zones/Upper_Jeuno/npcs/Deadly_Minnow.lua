@@ -14,7 +14,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if player:getCharVar("BorghertzHandsFirstTime") == 1 then
         player:startEvent(24)
     else

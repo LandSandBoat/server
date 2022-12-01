@@ -44,7 +44,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 232 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 2, 1)
         player:addStatusEffect(xi.effect.SMITHING_IMAGERY, 1, 0, 120)

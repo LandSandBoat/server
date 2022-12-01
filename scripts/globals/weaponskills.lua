@@ -671,7 +671,6 @@ end
 -- Sets up the necessary calcParams for a melee WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
 function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
@@ -750,7 +749,6 @@ end
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
 function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
@@ -819,7 +817,6 @@ end
 --         ele (xi.magic.ele.FIRE), skill (xi.skill.STAFF)
 
 function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local attack =
     {

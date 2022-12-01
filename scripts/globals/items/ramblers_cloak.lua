@@ -10,7 +10,6 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-
 end
 
 return itemObject

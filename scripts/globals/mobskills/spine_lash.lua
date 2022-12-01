@@ -14,7 +14,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local typeEffect = xi.effect.PLAGUE
 
     local numhits = 1

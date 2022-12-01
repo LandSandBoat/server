@@ -43,7 +43,6 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instanceObject.onInstanceFailure = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -56,7 +55,6 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instanceObject.onInstanceComplete = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do

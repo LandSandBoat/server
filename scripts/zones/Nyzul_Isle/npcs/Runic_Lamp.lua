@@ -76,7 +76,10 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 and option == 1 then
         if lampObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
             npc:setAnimationSub(1)
-            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(lamp) lamp:setAnimationSub(0) lamp:setLocalVar("[Lamp]Wait", os.time() + 30) end)
+            npc:timer(xi.settings.ACTIVATE_LAMP_TIME, function(lamp)
+                lamp:setAnimationSub(0)
+                lamp:setLocalVar("[Lamp]Wait", os.time() + 30)
+            end)
 
             if
                 instance:getEntity(bit.band(ID.npc.RUNIC_LAMP_1, 0xFFF), xi.objType.NPC):getAnimationSub() == 1 and

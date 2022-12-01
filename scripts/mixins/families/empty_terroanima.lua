@@ -31,7 +31,6 @@ local function doTerrorRun(mob)
 end
 
 g_mixins.families.empty_terroanima = function(emptyMob)
-
     emptyMob:addListener("ROAM_TICK", "EMPTY_TERROANIMA_RTICK", function(mob)
         doTerrorRun(mob)
     end)

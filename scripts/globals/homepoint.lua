@@ -158,7 +158,6 @@ local function getCost(from, to, key)
 end
 
 local function goToHP(player, choice, index)
-
     local origin = player:getLocalVar("originIndex")
     local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
@@ -251,7 +250,6 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
 end
 
 xi.homepoint.onEventFinish = function(player, csid, option, event)
-
     if csid == event then
         local choice = bit.band(option, 0xFF)
         if choice == selection.SET_HOMEPOINT then

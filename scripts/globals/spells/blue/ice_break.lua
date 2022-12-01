@@ -23,7 +23,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     local params = {}
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT

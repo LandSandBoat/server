@@ -220,7 +220,6 @@ end
 -- Similar to xi.follow.follow(), except the followers will fan out evenly around the target.
 -- If requiredAngle is provided, that angle (relative to the target's facing) will be kept by one of the followers.
 function xi.follow.bodyguard(mob, target, followDistance, requiredAngle, pathingFlags)
-
 end
 
 function xi.follow.getFollowers(leader)

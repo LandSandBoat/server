@@ -34,7 +34,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 
-    pet:timer(200, function(mobArg) mobArg:setHP(0) end)
+    pet:timer(200, function(mobArg)
+        mobArg:setHP(0)
+    end)
 
     return dmg
 end
