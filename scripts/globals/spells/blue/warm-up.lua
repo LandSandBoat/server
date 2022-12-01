@@ -30,6 +30,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = 10
     local duration = 180
     local returnEffect = typeEffectOne
+    local params = {}
+    params.ecosystem = xi.ecosystem.BEASTMEN
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

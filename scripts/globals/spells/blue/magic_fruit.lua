@@ -30,6 +30,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local power = getCurePowerOld(caster)
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
     local diff = target:getMaxHP() - target:getHP()
+    local params = {}
+    params.ecosystem = xi.ecosystem.BEAST
 
     if power > 559 then
         divisor = 2.8333

@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.AMORPH
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.EARTH
     params.multiplier = 1.0

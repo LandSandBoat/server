@@ -25,6 +25,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    local params = {}
+    params.ecosystem = xi.ecosystem.AMORPH
     local typeEffectOne = xi.effect.MAGIC_ATK_BOOST
     local typeEffectTwo = xi.effect.MAGIC_DEF_BOOST
     local power = 10

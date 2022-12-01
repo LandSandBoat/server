@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.SHOCK_SPIKES
     local power = 5
     local duration = 60
+    local params = {}
+    params.ecosystem = xi.ecosystem.LUMINIAN
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

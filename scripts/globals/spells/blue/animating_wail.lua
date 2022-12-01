@@ -26,6 +26,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.HASTE
     local power = 1500 -- 15%
     local duration = 300
+    params = {}
+    params.ecosystem = xi.ecosystem.UNDEAD
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

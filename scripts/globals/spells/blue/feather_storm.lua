@@ -9,7 +9,7 @@
 -- Level: 12
 -- Casting Time: 0.5 seconds
 -- Recast Time: 10 seconds
--- Skillchain Element(s): Light (can open Compression, Reverberation, or Distortion can close Transfixion)
+-- Skillchain Element(s): Transfixion
 -- Combos: Rapid Shot
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,33 +24,36 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.tpmod = TPMOD_CRITICAL
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
-    params.scattr = SC_LIGHT
+    params.scattr = SC_TRANSFIXION
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
-    params.multiplier = 1.25
-    params.tp150 = 1.25
-    params.tp300 = 1.25
-    params.azuretp = 1.25
+    params.multiplier = 2
+    params.tp150 = 2
+    params.tp300 = 2
+    params.azuretp = 2
     params.duppercap = 17
     params.str_wsc = 0.0
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0
-    params.agi_wsc = 0.30
+    params.agi_wsc = 0.3
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    local chance = math.random()
-
-    if damage > 0 and chance > 70 then
-        local typeEffect = xi.effect.POISON
-        target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 3, 0, getBlueEffectDuration(caster, 0, typeEffect))
+    -- Added effect: Poison (1/tick for 90s/180s)
+    if damage > 0 and not target:hasStatusEffect(xi.effect.POISON) then
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            target:addStatusEffect(xi.effect.POISON, 1, 0, 180 * resist)
+        end
     end
 
     return damage

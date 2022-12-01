@@ -24,13 +24,13 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.ARCANA
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WIND
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    -- This data should match information on https://www.bg-wiki.com/bg/Calculating_Blue_Magic_Damage
     params.multiplier = 2.0
     params.tMultiplier = 1.0
     params.duppercap = 56

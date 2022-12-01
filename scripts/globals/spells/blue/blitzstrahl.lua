@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.ARCANA
     params.attackType = xi.damageType.MAGICAL
     params.damageType = xi.damageType.LIGHTNING
     params.multiplier = 1.5625

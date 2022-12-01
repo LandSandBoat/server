@@ -2,7 +2,7 @@
 -- Spell: Radiant Breath
 -- Deals light damage to enemies within a fan-shaped area of effect originating from the caster. Additional effect: Slow and Silence.
 -- Spell cost: 116 MP
--- Monster Type: Wyverns
+-- Monster Type: Dragons
 -- Spell Type: Magical (Light)
 -- Blue Magic Points: 4
 -- Stat Bonus: CHR+1, HP+5
@@ -29,7 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.DRAGON
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.LIGHT
     params.multiplier = multi

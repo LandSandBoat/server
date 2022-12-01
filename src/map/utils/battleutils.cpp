@@ -3573,8 +3573,8 @@ namespace battleutils
             case ECOSYSTEM::LUMINION:
                 KillerEffect = PDefender->getMod(Mod::LUMINION_KILLER);
                 break;
-            case ECOSYSTEM::LUMORIAN:
-                KillerEffect = PDefender->getMod(Mod::LUMORIAN_KILLER);
+            case ECOSYSTEM::LUMINIAN:
+                KillerEffect = PDefender->getMod(Mod::LUMINIAN_KILLER);
                 break;
             case ECOSYSTEM::PLANTOID:
                 KillerEffect = PDefender->getMod(Mod::PLANTOID_KILLER);

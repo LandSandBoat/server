@@ -27,6 +27,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.ATTACK_BOOST
     local power = 15
     local duration = 90
+    local params = {}
+    params.ecosystem = xi.ecosystem.DEMON
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

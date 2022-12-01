@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local duration = 300
     local playerHP = caster:getLocalVar("self-destruct_hp")
     local damage = playerHP - 1
+    local params = {}
+    params.ecosystem = xi.ecosystem.ARCANA
 
     if damage > 0 then
         target:takeSpellDamage(caster, spell, playerHP, xi.attackType.MAGICAL, xi.damageType.FIRE)

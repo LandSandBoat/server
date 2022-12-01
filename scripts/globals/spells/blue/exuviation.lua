@@ -29,6 +29,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local divisor = 0.6666
     local constant = -45
     local power = getCurePowerOld(caster)
+    local params = {}
+    params.ecosystem = xi.ecosystem.VERMIN
 
     if power > 459 then
         divisor = 1.5

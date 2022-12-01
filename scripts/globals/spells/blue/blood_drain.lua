@@ -2,7 +2,7 @@
 -- Spell: Blood Drain
 -- Steals an enemy's HP. Ineffective against undead
 -- Spell cost: 10 MP
--- Monster Type: Giant Bats
+-- Monster Type: Birds
 -- Spell Type: Magical (Dark)
 -- Blue Magic Points: 2
 -- Stat Bonus: HP-5, MP+5
@@ -27,6 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local dmg = 1 + (0.705 * caster:getSkillLevel(xi.skill.BLUE_MAGIC))
     local params = {}
+    params.ecosystem = xi.ecosystem.BIRD
     params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
     params.attribute = xi.mod.MND
     params.skillType = xi.skill.BLUE_MAGIC

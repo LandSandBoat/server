@@ -24,6 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.VERMIN
     params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
@@ -41,7 +42,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    params.offcratiomod = caster:getStat(xi.mod.DEF) -- Cannonball uses Defense as its main modifier instead of Attack
+    params.offcratiomod = caster:getStat(xi.mod.DEF) -- Cannonball uses Defense as its main modifier
 
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)

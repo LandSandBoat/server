@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.DEFENSE_DOWN
     local typeEffectTwo = xi.effect.MAGIC_DEF_DOWN
     local params = {}
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

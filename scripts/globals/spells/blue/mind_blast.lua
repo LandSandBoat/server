@@ -24,6 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.DEMON
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHTNING
     params.diff = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)

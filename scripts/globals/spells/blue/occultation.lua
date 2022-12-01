@@ -2,7 +2,7 @@
 -- Spell: Occultation
 -- Creates shadow images that each absorb a single attack directed at you
 -- Spell cost: 138 MP
--- Monster Type: Seethers
+-- Monster Type: Empty
 -- Spell Type: Magical (Wind)
 -- Blue Magic Points: 3
 -- Stat Bonus: VIT+3 CHR-2
@@ -26,6 +26,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local skill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power = skill / 50
     local duration = 300
+    local params = {}
+    params.ecosystem = xi.ecosystem.EMPTY
 
     -- 400 skill = 8 shadows, 450 = 9 shadows, so I am assuming every 50 skill is a shadow.
     -- Also assuming minimum of 2 shadows.

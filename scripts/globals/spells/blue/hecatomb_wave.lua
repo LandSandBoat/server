@@ -24,6 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.DEMON
 
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
@@ -31,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.bonus = 1.0
 
     local resist = applyResistance(caster, target, spell, params)
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.WIND
     params.multiplier = 1.375

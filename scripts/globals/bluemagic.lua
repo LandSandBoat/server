@@ -17,52 +17,23 @@ MND_BASED = 3
 -- Utility functions below
 -----------------------------------
 
--- obtains alpha, used for working out WSC
+-- Get alpha (level-dependent multiplier on WSC)
 local function BlueGetAlpha(level)
-    local alpha = 1.00
-    if level <= 5 then
-        alpha = 1.00
-    elseif level <= 11 then
-        alpha = 0.99
-    elseif level <= 17 then
-        alpha = 0.98
-    elseif level <= 23 then
-        alpha = 0.97
-    elseif level <= 29 then
-        alpha = 0.96
-    elseif level <= 35 then
-        alpha = 0.95
-    elseif level <= 41 then
-        alpha = 0.94
-    elseif level <= 47 then
-        alpha = 0.93
-    elseif level <= 53 then
-        alpha = 0.92
-    elseif level <= 59 then
-        alpha = 0.91
-    elseif level <= 61 then
-        alpha = 0.90
-    elseif level <= 63 then
-        alpha = 0.89
-    elseif level <= 65 then
-        alpha = 0.88
-    elseif level <= 67 then
-        alpha = 0.87
-    elseif level <= 69 then
-        alpha = 0.86
-    elseif level <= 71 then
-        alpha = 0.85
-    elseif level <= 73 then
-        alpha = 0.84
+    if level < 61 then
+        return math.ceil(100 - (level / 6)) / 100
     elseif level <= 75 then
-        alpha = 0.83
+        return math.ceil(100 - (level - 40) / 2) / 100
     elseif level <= 99 then
-        alpha = 0.85
+        return 0.83
     end
+<<<<<<< refs/remotes/upstream/base
 
     return alpha
+=======
+>>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 end
 
+-- Get WSC
 local function BlueGetWsc(attacker, params)
     local wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
@@ -71,9 +42,10 @@ local function BlueGetWsc(attacker, params)
     return wsc
 end
 
--- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
+-- Get cRatio
 local function BluecRatio(ratio, atk_lvl, def_lvl)
-    -- Level penalty
+
+    -- Apply level penalty
     local levelcor = 0
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
@@ -81,14 +53,10 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
 
     ratio = ratio - levelcor
 
-    -- apply caps
-    if ratio < 0 then
-        ratio = 0
-    elseif ratio > 2 then
-        ratio = 2
-    end
+    -- Clamp
+    ratio = utils.clamp(ratio,0,2)
 
-    -- Obtaining cRatio_MIN
+    -- Obtain cRatiomin
     local cratiomin = 0
     if ratio < 1.25 then
         cratiomin = 1.2 * ratio - 0.5
@@ -98,7 +66,7 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
         cratiomin = 1.2 * ratio - 0.8
     end
 
-    -- Obtaining cRatio_MAX
+    -- Obtain cRatiomax
     local cratiomax = 0
     if ratio < 0.5 then
         cratiomax = 0.4 + 1.2 * ratio
@@ -113,29 +81,34 @@ local function BluecRatio(ratio, atk_lvl, def_lvl)
         cratiomin = 0
     end
 
+<<<<<<< refs/remotes/upstream/base
+=======
+    -- Return data
+>>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
     cratio[1] = cratiomin
     cratio[2] = cratiomax
     return cratio
+
 end
 
--- Gets the fTP multiplier by applying 2 straight lines between ftp1-ftp2 and ftp2-ftp3
--- tp - The current TP
--- ftp1 - The TP 0% value
--- ftp2 - The TP 150% value
--- ftp3 - The TP 300% value
-local function BluefTP(tp, ftp1, ftp2, ftp3)
+-- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
+local function BluefTP(tp, ftp0, ftp1500, ftp3000)
+    tp = utils.clamp(tp,0,3000)
     if tp >= 0 and tp < 1500 then
-        return ftp1 + (((ftp2 - ftp1) / 100) * (tp / 10))
-    elseif tp >= 1500 and tp <= 3000 then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + (((ftp3 - ftp2) / 100) * ((tp - 1500) / 10))
-    else
-        print("blue fTP error: TP value is not between 0-3000!")
+        return ftp0 + ((ftp1500 - ftp0) * (tp / 1500))
+    elseif tp >= 1500 then
+        return ftp1500 + ((ftp3000 - ftp1500) * ((tp - 1500) / 1500))
+    else -- unreachable
+        return 1
     end
+<<<<<<< refs/remotes/upstream/base
 
     return 1 -- no ftp mod
+=======
+>>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 end
 
+-- Get fSTR
 local function BluefSTR(dSTR)
     local fSTR2 = nil
     if dSTR >= 12 then
@@ -155,14 +128,16 @@ local function BluefSTR(dSTR)
     else
         fSTR2 = (dSTR + 13) / 2
     end
-
     return fSTR2
 end
 
-local function BlueGetHitRate(attacker, target, capHitRate)
-    local acc = attacker:getACC()
+-- Get hitrate
+local function BlueGetHitRate(attacker, target)
+    local acc = attacker:getACC() + 2 * attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
     local eva = target:getEVA()
+    acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
 
+<<<<<<< refs/remotes/upstream/base
     if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
         acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
     elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
@@ -180,8 +155,13 @@ local function BlueGetHitRate(attacker, target, capHitRate)
     end
 
     hitrate = hitrate + hitdiff
+=======
+    local hitrate = 75 + (acc - eva) / 2
+>>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
     hitrate = hitrate / 100
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
+<<<<<<< refs/remotes/upstream/base
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
         if hitrate > 0.95 then
@@ -196,106 +176,117 @@ local function BlueGetHitRate(attacker, target, capHitRate)
 =======
     attacker:PrintToPlayer(string.format("Hitrate %s", hitrate))
 >>>>>>> Temp save
+=======
+    --attacker:PrintToPlayer(string.format("Hitrate %s", hitrate))
+>>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 
     return hitrate
 end
 
--- Get the damage for a blue magic physical spell.
--- caster - The entity casting the spell.
--- target - The target of the spell.
--- spell - The blue magic spell itself.
--- params - The parameters for the spell. Broken down into:
---      .tpmod - The TP modifier for the spell (e.g. damage varies, critical varies with TP, etc). Should be a TPMOD_xxx enum.
---      .numHits - The number of hits in the spell.
---      .multiplier - The base multiplier for the spell (not under Chain Affinity) - Every spell must specify this. (equivalent to TP 0%)
---      .tp150 - The TP modifier @ 150% TP (damage multiplier, crit chance, etc. 1.0 = 100%, 2.0 = 200% NOT 100=100%).
---               This value is interpreted as crit chance or dmg multiplier depending on the TP modifier (tpmod).
---      .tp300 - The TP modifier @ 300% TP (damage multiplier, crit chance, etc. 1.0 = 100%, 2.0 = 200% NOT 100=100%)
---               This value is interpreted as crit chance or dmg multiplier depending on the TP modifier (tpmod).
---      .azuretp - The TP modifier under Azure Lore (damage multiplier, crit chance, etc. 1.0 = 100%, 2.0 = 200% NOT 100=100%)
---                  This value is interpreted as crit chance or dmg multiplier depending on the TP modifier (tpmod).
---      .duppercap - The upper cap for D for this spell.
---      .str_wsc - The decimal % value for STR % (e.g. STR 20% becomes 0.2)
---      .dex_wsc - Same as above.
---      .vit_wsc - Same as above.
---      .int_wsc - Same as above.
---      .mnd_wsc - Same as above.
---      .chr_wsc - Same as above.
---      .agi_wsc - Same as above.
+function BlueGetCorrelation(spellEcosystem, monsterEcosystem, merits)
+    local effect = 0
+    local weak = {
+        [xi.ecosystem.BEAST] = xi.ecosystem.PLANTOID,
+        [xi.ecosystem.LIZARD] = xi.ecosystem.BEAST,
+        [xi.ecosystem.VERMIN] = xi.ecosystem.LIZARD,
+        [xi.ecosystem.PLANTOID] = xi.ecosystem.VERMIN,
+        [xi.ecosystem.BIRD] = xi.ecosystem.AMORPH,
+        [xi.ecosystem.AQUAN] = xi.ecosystem.BIRD,
+        [xi.ecosystem.AMORPH] = xi.ecosystem.AQUAN,
+    }
+    local strong = {
+        [xi.ecosystem.BEAST] = xi.ecosystem.LIZARD,
+        [xi.ecosystem.LIZARD] = xi.ecosystem.VERMIN,
+        [xi.ecosystem.VERMIN] = xi.ecosystem.PLANTOID,
+        [xi.ecosystem.PLANTOID] = xi.ecosystem.BEAST,
+        [xi.ecosystem.BIRD] = xi.ecosystem.AQUAN,
+        [xi.ecosystem.AQUAN] = xi.ecosystem.AMORPH,
+        [xi.ecosystem.AMORPH] = xi.ecosystem.BIRD,
+        [xi.ecosystem.UNDEAD] = xi.ecosystem.ARCANA,
+        [xi.ecosystem.ARCANA] = xi.ecosystem.UNDEAD,
+        [xi.ecosystem.DEMON] = xi.ecosystem.DRAGON,
+        [xi.ecosystem.DRAGON] = xi.ecosystem.DEMON,
+        [xi.ecosystem.LUMINIAN] = xi.ecosystem.LUMINION,
+        [xi.ecosystem.LUMINION] = xi.ecosystem.LUMINIAN,
+    }
+    if weak[spellEcosystem] == monsterEcosystem then
+        effect = -0.25
+    elseif strong[spellEcosystem] == monsterEcosystem then
+        effect = 0.25 + 0.01 * merits
+    end
+    return effect
+end
+
+-- Get the damage for a physical Blue Magic spell
 function BluePhysicalSpell(caster, target, spell, params)
-    -- store related values
-    local magicskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC) -- skill + merits + equip bonuses
+
     -- TODO: Under Chain affinity?
     -- TODO: Under Efflux?
-    -- TODO: Merits.
     -- TODO: Under Azure Lore.
 
-    -----------------------------------
-    -- Calculate the final D value
-    -----------------------------------
-    -- worked out from http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    -- Final D value ??= floor(D+fSTR+WSC) * Multiplier
+    -----------------------
+    -- Get final D value --
+    -----------------------
 
-    local D = math.floor(magicskill * 0.11) * 2 + 3
-    -- cap D
-    if D > params.duppercap then
-        D = params.duppercap
-    end
+    -- Initial D value
+    local initialD = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11) * 2 + 3
+    initialD = utils.clamp(initialD,0,params.duppercap)
 
+    -- fSTR
     local fStr = BluefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
     if fStr > 22 then
-        fStr = 22 -- TODO: Smite of Rage doesn't have this cap applied.
+        if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
+            fStr = 22
+        end
     end
 
-    local wsc = BlueGetWsc(caster, params)
-
-    local multiplier = params.multiplier
-
-    -- Process chance for Bonus WSC from AF3 Set. BLU AF3 set triples the base
-    -- WSC when it procs and can stack with Chain Affinity. See Final bonus WSC
-    -- calculation below.
-
+    -- Multiplier, bonus WSC
+    local multiplier = 1
     local bonusWSC = 0
+
+    -- BLU AF3 bonus (triples the base WSC when it procs)
     if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
         bonusWSC = 2
     end
 
-    -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
-    local chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
-    if chainAffinity ~= nil then
-        -- Calculate the total TP available for the fTP multiplier.
-        local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT)
-        if tp > 3000 then
-            tp = 3000
-        end
-
-        multiplier = BluefTP(tp, multiplier, params.tp150, params.tp300)
-        bonusWSC = bonusWSC + 1 -- Chain Affinity Doubles the Base WSC.
+    -- Chain Affinity -- TODO: add "Damage/Accuracy/Critical Hit Chance varies with TP"
+    if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        local tp = caster:getTP() + 100 * caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
+        tp = utils.clamp(tp,0,3000)
+        multiplier = BluefTP(tp, params.multiplier, params.tp150, params.tp300)
+        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
 
-    -- Calculate final WSC bonuses
-    wsc = wsc + (wsc * bonusWSC)
+    -- WSC
+    local wsc = BlueGetWsc(caster, params)
+    wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
 
-    -- See BG Wiki for reference. Chain Affinity will double the WSC. BLU AF3 set will
-    -- Triple the WSC when the set bonus procs. The AF3 set bonus stacks with Chain
-    -- Affinity for a maximum total of 4x WSC.
+    -- Monster correlation -- TODO: add Monster Correlation effect to Magus Keffiyeh and reference that effect here (adds another 0.02)
+    local correlationMultiplier = BlueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
-    -- TODO: Modify multiplier to account for family bonus/penalty
-    local finalD = math.floor(D + fStr + wsc) * multiplier
+    -- Azure Lore
+    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
+        multiplier = params.azuretp
+    end
 
-    -----------------------------------
-    -- Get the possible pDIF range and hit rate
-    -----------------------------------
-    if params.offcratiomod == nil then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
+    -- Final D
+    local finalD = math.floor(initialD + fStr + wsc)
+
+    ----------------------------------------------
+    -- Get the possible pDIF range and hit rate --
+    ----------------------------------------------
+
+    if params.offcratiomod == nil then -- For all spells except Cannonball, which uses a DEF mod
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
 
     local cratio = BluecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = BlueGetHitRate(caster, target, true)
+    local hitrate = BlueGetHitRate(caster, target)
 
-    -----------------------------------
-    -- Perform the attacks
-    -----------------------------------
+    -------------------------
+    -- Perform the attacks --
+    -------------------------
+
     local hitsdone = 0
     local hitslanded = 0
     local finaldmg = 0
@@ -303,17 +294,17 @@ function BluePhysicalSpell(caster, target, spell, params)
     while hitsdone < params.numhits do
         local chance = math.random()
         if chance <= hitrate then -- it hit
-            -- TODO: Check for shadow absorbs.
+            -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
             -- Generate a random pDIF between min and max
             local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif = pdif / 1000
 
             -- Apply it to our final D
-            if hitsdone == 0 then -- only the first hit benefits from multiplier
-                finaldmg = finaldmg + (finalD * pdif)
+            if hitsdone == 0 then
+                finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif) -- first hit gets full multiplier
             else
-                finaldmg = finaldmg + ((math.floor(D + fStr + wsc)) * pdif) -- same as finalD but without multiplier (it should be 1.0)
+                finaldmg = finaldmg + (finalD * (1 + correlationMultiplier) * pdif)
             end
 
             hitslanded = hitslanded + 1
@@ -438,6 +429,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
 end
 
 -- Function to stagger duration of effects by using the resistance to change the value
+-- Intend to render this obsolete, do a find once you've gone through all spells
 function getBlueEffectDuration(caster, resist, effect)
     local duration = 0
 
@@ -502,30 +494,46 @@ SPELL-SPECIFIC NOTES
 changes in blu_fixes branch
 ---------------------------
 
-- Updated all spell scripts:
+- Individual spell changes
     - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which doesnt't make sense.
     - Updated WSC values, though most were correct.
-    - Updated additional effect values.
+    - Added spell ecosystem.
+    - Updated added effect values.
         - All physical spells now need to hit before the AE can kick in.
         - All physical spells with an AE get a resistance check for the AE.
         - Resistance now influences duration properly.
         - Decaying effects now work, such as DEX and VIT down.
         - Some spells had 0 duration.
-        - TODO: additional effect gained message.
 
-- Physical Blue Magic spell calculations changes:
-    -
-    - TODO: missed spells should not be 0 dmg, but there's currently no way to make spells "miss"
+- Physical Blue Magic spell changes:
+    - Simplified some functions.
+    - Added Physical Potency merits effect.
+    - Added monster correlation effects, including merits.
+    - Added Azure Lore effect on multiplier.
 
-- TODO
-    - Sneak Attack doesnt work with Blue spells, prolly TA also not.
-    - "... increases with TP" doesnt work
-    - Azure Lore is ehhhh implemented
-    - CA doesnt work on too many spells (for the TP - it does for the wsc)
+- General BLU changes:
+    - Azure Lore will now allow Physical spells to always skillchain, and Magical spells to always magic burst.
+
+- General changes:
+    - Changed all (wrongly named) LUMORIAN and LUMORIAN_KILLER to LUMINIAN and LUMINIAN_KILLER
+
+- TODOs
+    - "Damage/Accuracy/Critical Hit Rate/Effect Duration varies with TP" is not implemented
+    - Missed physical spells should not be 0 dmg, but there's currently no way to make spells "miss"
+    - Sneak Attack / Trick Attack in combination with spells doesn't work atm
     - Add 75+ spells. I didn't bother personally since we're on a 75 server and I have no knowledge of these spells at all.
 
 - END RESULT
     - Physical dmg: acc/att/modifiers
     - Physical AE: acc/bluemagicskill/macc/INT
+    - Physical Potency = +2 acc per merit
+    - Correlation = multiplier +- 0.25
+    - Correlation = multiplier +0.01 per merit (only for strengths, not weaknesses)
+
+
+CLEANUP*********************
+
+- Getstats, put back
+- Magic, remove prints
 
 ]]

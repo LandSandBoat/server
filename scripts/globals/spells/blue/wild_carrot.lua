@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local divisor = 1
     local constant = 60
     local power = getCurePowerOld(caster)
+    local params = {}
+    params.ecosystem = xi.ecosystem.BEAST
 
     if power > 299 then
         divisor = 15.6666

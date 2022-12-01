@@ -25,7 +25,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.BLINDNESS
-    -- local dINT = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
+    params.ecosystem = xi.ecosystem.BEASTMEN
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT

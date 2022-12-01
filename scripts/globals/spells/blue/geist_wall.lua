@@ -25,6 +25,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.LIZARD
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     local resist = applyResistance(caster, target, spell, params)

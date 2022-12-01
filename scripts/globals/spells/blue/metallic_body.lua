@@ -29,6 +29,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local blueskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power = (blueskill / 3) + (caster:getMainLvl() / 3) + 10
     local duration = 300
+    local params = {}
+    params.ecosystem = xi.ecosystem.AQUAN
 
     if power > 150 then
         power = 150

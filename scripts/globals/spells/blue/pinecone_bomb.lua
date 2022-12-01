@@ -9,7 +9,7 @@
 -- Level: 36
 -- Casting Time: 2.5 seconds
 -- Recast Time: 26.5 seconds
--- Skillchain Element(s): Fire (can open Scission or Fusion and can close Liquefaction)
+-- Skillchain Element(s): Liquefaction
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -18,6 +18,7 @@ require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
 
+<<<<<<< refs/remotes/upstream/base
 local function inverseBellRand(min, max, weight)
     if not weight then
         weight = 0.5
@@ -32,27 +33,31 @@ local function inverseBellRand(min, max, weight)
     end
 end
 
+=======
+>>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.PLANTOID
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
     params.scattr = SC_LIQUEFACTION
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
     params.multiplier = 2.25
     params.tp150 = 2.25
     params.tp300 = 2.25
     params.azuretp = 2.25
     params.duppercap = 37
-    params.str_wsc = 0.20
+    params.str_wsc = 0.2
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0
-    params.agi_wsc = 0.20
+    params.agi_wsc = 0.2
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
@@ -60,11 +65,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    -- After damage is applied (which would have woken the target up from a
-    -- preexisting sleep, if necesesary), apply the sleep effect for this spell.
+    -- Added effect: Sleep (30s/60s)
     if damage > 0 then
-        local duration = inverseBellRand(15, 60, 0.3)
-        target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, duration)
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 60 * resist)
+        end
     end
 
     return damage

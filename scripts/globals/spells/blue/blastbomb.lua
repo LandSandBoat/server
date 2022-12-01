@@ -24,6 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.FIRE
     params.multiplier = 1.375

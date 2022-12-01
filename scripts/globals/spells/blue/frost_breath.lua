@@ -25,6 +25,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local multi = 2.08
     local params = {}
+    params.ecosystem = xi.ecosystem.LIZARD
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

@@ -29,6 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     elseif target:isFacing(caster) then
         -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
+        params.ecosystem = xi.ecosystem.LIZARD
         params.diff = nil
         params.attribute = xi.mod.INT
         params.skillType = xi.skill.BLUE_MAGIC

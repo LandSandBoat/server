@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.EVASION_BOOST
     local power = 10
     local duration = 30
+    params = {}
+    params.ecosystem = xi.ecosystem.BIRD
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

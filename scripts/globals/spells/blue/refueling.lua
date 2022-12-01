@@ -26,6 +26,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.HASTE
     local power = 1000 -- 10%
     local duration = 300
+    local params = {}
+    params.ecosystem = xi.ecosystem.ARCANA
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

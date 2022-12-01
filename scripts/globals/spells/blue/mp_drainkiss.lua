@@ -37,6 +37,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 165)
     -- get resist multiplier (1x if no resist)
     local params = {}
+    params.ecosystem = xi.ecosystem.AMORPH
     params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

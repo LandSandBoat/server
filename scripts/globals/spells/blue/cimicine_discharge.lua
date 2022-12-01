@@ -25,10 +25,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- local pINT = caster:getStat(xi.mod.INT)
-    -- local mINT = target:getStat(xi.mod.INT)
-    -- local dINT = pINT - mINT
     local params = {}
+    params.ecosystem = xi.ecosystem.VERMIN
     params.diff = nil
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

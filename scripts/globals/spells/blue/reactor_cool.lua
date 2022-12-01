@@ -31,6 +31,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local powerTwo = 5
     local duration = 120
     local returnEffect = typeEffectOne
+    local params = {}
+    params.ecosystem = xi.ecosystem.LUMINION
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

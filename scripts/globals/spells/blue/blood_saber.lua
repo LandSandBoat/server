@@ -27,6 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local dmg = 1 + (0.709 * caster:getSkillLevel(xi.skill.BLUE_MAGIC))
     local params = {}
+    params.ecosystem = xi.ecosystem.UNDEAD
     params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
     params.attribute = xi.mod.MND
     params.skillType = xi.skill.BLUE_MAGIC

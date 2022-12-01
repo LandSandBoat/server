@@ -27,6 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.FLASH
     local params = {}
+    params.ecosystem = xi.ecosystem.LUMINION
     params.diff = nil
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

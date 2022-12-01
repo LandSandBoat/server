@@ -287,7 +287,7 @@ enum class Mod
     DEMON_KILLER    = 234, // Enhances "Demon Killer" effect
     EMPTY_KILLER    = 235, // Enhances "Empty Killer" effect
     HUMANOID_KILLER = 236, // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
+    LUMINIAN_KILLER = 237, // Enhances "Luminian Killer" effect
     LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
 
     // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear

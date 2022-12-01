@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.REGEN
     local power = 25
     local duration = 90
+    local params = {}
+    params.ecosystem = xi.ecosystem.AQUAN
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

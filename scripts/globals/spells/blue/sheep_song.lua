@@ -25,8 +25,8 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.SLEEP_I
-    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local params = {}
+    params.ecosystem = xi.ecosystem.BEAST
     params.diff = nil
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

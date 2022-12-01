@@ -26,6 +26,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.BLINK
     local power = 4
     local duration = 300
+    local params = {}
+    params.ecosystem = xi.ecosystem.DRAGON
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)

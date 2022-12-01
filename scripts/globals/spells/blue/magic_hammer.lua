@@ -39,7 +39,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHT
     params.multiplier = multi

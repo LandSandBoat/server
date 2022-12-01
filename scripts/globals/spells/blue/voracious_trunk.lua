@@ -25,6 +25,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = applyResistanceAbility(caster, target, xi.magic.ele.WIND, 0, 0)
     local stealChance = math.random(1, 100)
     local stolen = 0
+    local params = {}
+    params.ecosystem = xi.ecosystem.BEAST
 
     if resist > 0.0625 and stealChance < 90 then
         stolen = caster:stealStatusEffect(target)

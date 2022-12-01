@@ -2,7 +2,7 @@
 -- Spell: Poison Breath
 -- Deals water damage to enemies within a fan-shaped area originating from the caster. Additional effect: Poison
 -- Spell cost: 22 MP
--- Monster Type: Hound
+-- Monster Type: Undead
 -- Spell Type: Magical (Water)
 -- Blue Magic Points: 1
 -- Stat Bonus: MND+1
@@ -27,6 +27,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
+    params.ecosystem = xi.ecosystem.UNDEAD
     local multi = 1.08
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
