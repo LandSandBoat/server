@@ -593,7 +593,6 @@ public:
     uint8 GetDeathType();
 
     uint8 GetHPP() const;   // количество hp в процентах
-    uint8 GetHPPIgnoreConvert(); // HP percentage, ignoring the effect of convert gear
     int32 GetMaxHP() const; // максимальное количество hp
     uint8 GetMPP() const;   // количество mp в процентах
     int32 GetMaxMP() const; // максимальное количество mp
