@@ -1360,7 +1360,7 @@ INSERT INTO `guild_shops` VALUES
     (60432, 5237, 369, 500, 64, 24, 24), -- bundle of shirataki
     (60432, 1471, 316, 416, 120, 24, 24), -- sticky rice
     (60432, 1554, 431, 512, 64, 24, 24), -- onz of turmeric
-
+    (60432, 1415, 55147, 55147, 165, 33, 65), -- pot of urushi
     -- Akamafula (Lower_Jeuno)
     (60417, 16896, 517, 592, 20, 10, 20), -- kunai
     (60417, 16900, 1404, 1608, 20, 7, 15), -- wakizashi
@@ -1498,6 +1498,7 @@ INSERT INTO `guild_shops` VALUES
     (60424, 5164, 1945, 2854, 255, 48, 100), -- jar of ground wasabi
     (60424, 1652, 233, 250, 255, 48, 100), -- bottle of rice vinegar
     (60424, 5235, 1284, 1350, 255, 48, 100), -- head of napa
+    (60424, 1415, 55147, 55147, 165, 33, 65), -- pot of urushi
     -- Tsutsuroon (Nashmau)
     (60431, 16896, 517, 592, 20, 10, 20), -- kunai
     (60431, 16917, 4226, 4226, 20, 7, 15), -- suzume
