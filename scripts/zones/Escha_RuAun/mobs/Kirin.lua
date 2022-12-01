@@ -62,6 +62,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.LIGHT_MEVA, 65)
+    mob:setMod(xi.mod.LULLABYRES, 9999)
     mob:setMod(xi.mod.SILENCERES, 10000)
     mob:setMod(xi.mod.SLEEPRES, 10000)
     mob:setMod(xi.mod.PETRIFYRES, 10000)
@@ -96,10 +97,9 @@ entity.onMobSpawn = function(mob)
                     local kirinUsedTwoHour = GetServerVariable("KIRIN_2HR_USED")
                     local kirinTwoHourTime = GetServerVariable("KIRIN_2HR_USED_TIME")
 
-                    for n = 1, 6 do
+                    for n = 1, 7 do
                         if (abilityID == playerTwoHours[n] and playerArg:hasRecast(xi.recast.ABILITY, 0) and kirinUsedTwoHour == v and os.time() - kirinTwoHourTime <= 15) then
                             SetServerVariable(cantUse2Hr[n], 1)
-
                             if (abilityID == 16 and mobArg:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
                                 mobArg:weaknessTrigger(3)
                                 mobArg:addStatusEffect(xi.effect.TERROR, 0, 0, 15)
@@ -226,15 +226,14 @@ entity.onMobFight = function(mob, target)
         isBusy = true
     end
 
-    for i = 1, 6 do
+    for i = 1, 7 do
         if (GetServerVariable(cantUse2Hr[i]) == 1) then
             table.insert(twoHoursLocked, i)
         end
     end
 
-    if (mob:getBattleTime() >= 90 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 6) then
+    if (mob:getBattleTime() >= 30 and os.time() >= next2HrTime and isBusy == false and #twoHoursLocked ~= 7) then
         local pick2Hr = math.random(1, 7)
-
         if (GetServerVariable(cantUse2Hr[pick2Hr]) == 0) then
             if (pick2Hr > 0 and pick2Hr < 6) then
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
@@ -242,7 +241,6 @@ entity.onMobFight = function(mob, target)
                 mob:useMobAbility(kirinTwoHours[pick2Hr])
                 for i = 1, 3 do
                     local meikyoRandom = math.random(1, 100)
-
                     if (meikyoRandom < 50) then
                         mob:useMobAbility(797) -- Deadly Hold
                     else
