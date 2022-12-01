@@ -50,6 +50,7 @@ quest.sections =
             ['Kerutoto'] =
             {
                 onTrigger = function(player, npc)
+                    -- TODO: Options still appear even if player has the item or spell
                     if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
                         local availRewards = 0
                             + (player:hasItem(xi.items.DIABOLOSS_POLE) and 1 or 0)    -- Diabolos's Pole
