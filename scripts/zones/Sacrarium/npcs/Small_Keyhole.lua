@@ -5,6 +5,10 @@
 -- NOTE:
 --   Old event call 100 ran too fast,
 --   used messages instead
+-- TODO:
+--   Original event 100 plays out in 5 seconds
+--   would need a DAT edit to prolong it.
+--   The fixes made are largely temporary
 -----------------------------------
 local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
@@ -26,7 +30,9 @@ entity.onTrade = function(player, npc, trade)
             npc:setLocalVar("canTradeSecondKey", 1)
             -- Opens lock visually to indicate to other players when to trade next key
             GetNPCByID(ID.npc.SMALL_KEYHOLE - 2):openDoor(18)
-            local speed = player:getSpeed()
+            npc:setLocalVar("speed", player:getSpeed())
+            npc:setLocalVar("playerID", player:getID())
+            -- Lock player from moving
             player:setSpeed(0)
             --player:startEvent(100)
 
@@ -38,7 +44,7 @@ entity.onTrade = function(player, npc, trade)
                     playerArg1:timer(5000, function(playerArg2)
                         playerArg2:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, xi.items.CORAL_CREST_KEY)
                         npc:setLocalVar("canTradeSecondKey", 0)
-                        player:setSpeed(speed)
+                        player:setSpeed(npc:getLocalVar("speed"))
                         playerArg2:confirmTrade()
                     end)
                 end)
