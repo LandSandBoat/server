@@ -7149,7 +7149,11 @@ INSERT INTO `mob_pools` VALUES (20012,'Land_Worm_KT','Land_Worm_KT',258,0x0000A8
 -- Beadeaux Pugil
 INSERT INTO `mob_pools` VALUES (20013,'Land_Pugil_BE','Land_Pugil_BE',197,0x00005C0100000000000000000000000000000000,1,1,7,240,100,0,1,0,0,0,0,0,291,131,0,0,0,0,0,197,197);
 
--- End of Ambuscade section
+-- Adding groups that were deleted from Locus Mobs introduction
+INSERT INTO `mob_pools` VALUES (20014,'Lemures','Lemures',121,0x0000700100000000000000000000000000000000,4,4,12,240,100,0,1,0,0,0,0,0,396,133,0,0,28,0,0,121,121);
+INSERT INTO `mob_pools` VALUES (20015,'Thousand_Eyes_KRT','Thousand_Eyes_KRT',139,0x0000800100000000000000000000000000000000,4,4,12,280,100,0,1,0,0,0,0,0,112,133,0,0,10,0,0,139,139);
+
+-- End of AirSkyBoat section
 -- ------------------------------------------------------------
 
 -- ------------------------------------------------------------
