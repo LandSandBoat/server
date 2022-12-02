@@ -21,7 +21,6 @@ entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, xi.items.CORAL_CREST_KEY) then
         if npc:getLocalVar("canTradeSecondKey") == 0 then
             npc:setLocalVar("canTradeSecondKey", 1)
-            npc:setLocalVar("time", os.time())
             -- Opens lock visually to indicate to other players when to trade next key
             GetNPCByID(ID.npc.SMALL_KEYHOLE - 2):openDoor(9)
             player:startEvent(100)
