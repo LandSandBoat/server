@@ -113,7 +113,7 @@ bool CRangeState::Update(time_point tick)
 
         CanUseRangedAttack(PTarget);
 
-        if (m_startPos.x != m_PEntity->loc.p.x || m_startPos.y != m_PEntity->loc.p.y)
+        if (HasMoved())
         {
             m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_MOVE_AND_INTERRUPT);
         }
@@ -250,4 +250,11 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
     }
 
     return true;
+}
+
+bool CRangeState::HasMoved()
+{
+    return floorf(m_startPos.x * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.x * 10 + 0.5f) / 10 ||
+           floorf(m_startPos.y * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.y * 10 + 0.5f) / 10 ||
+           floorf(m_startPos.z * 10 + 0.5f) / 10 != floorf(m_PEntity->loc.p.z * 10 + 0.5f) / 10;
 }
