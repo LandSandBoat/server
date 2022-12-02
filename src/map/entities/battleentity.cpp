@@ -206,6 +206,20 @@ uint8 CBattleEntity::GetHPP() const
     return hpp;
 }
 
+uint8 CBattleEntity::GetHPPNoPercentOrConvert()
+{
+    TracyZoneScoped;
+    // recalculate max HP using only raw HP mods; no convert or HPP, regardless of source, apply
+    int32 modHP = std::max(1, health.maxhp + getMod(Mod::HP));
+    ShowError(fmt::format("maxhp: {} modhp {}", health.maxhp, getMod(Mod::HP)));
+
+    uint8 hpp = (uint8)floor(((float)health.hp / (float)modHP) * 100);
+
+    // it may be possible that with convert gear, this hpp would be > 100, so clamp it
+    // this also handles the case where floor() returns 0 with 1/1000 hp
+    return health.hp <= 0 ? 0 : std::clamp<uint8>(hpp, 1, 100);
+}
+
 int32 CBattleEntity::GetMaxHP() const
 {
     return health.modhp;
