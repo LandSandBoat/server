@@ -1131,12 +1131,6 @@ namespace petutils
 
     void CalculateWyvernStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        // set the wyvern job based on master's SJ
-        if (PMaster->GetSJob() != JOB_NON)
-        {
-            PPet->SetSJob(PMaster->GetSJob());
-        }
-
         PPet->SetMJob(JOB_DRG);
         // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
         uint8 mLvl = PMaster->GetMLevel();
