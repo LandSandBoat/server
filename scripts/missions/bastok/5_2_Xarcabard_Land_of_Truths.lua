@@ -170,9 +170,23 @@ mission.sections =
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
                     player:setMissionStatus(mission.areaId, 4)
                     player:setPos(378, -12, -20, 125, 161)
+                end,
+            },
+        },
+
+        [xi.zone.CASTLE_ZVAHL_BAILEYS] =
+        {
+            afterZoneIn =
+            {
+                function(player)
+                    if
+                        player:getMissionStatus(mission.areaId) == 4 and
+                        not player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)
+                    then
+                        npcUtil.giveKeyItem(player, xi.ki.SHADOW_FRAGMENT)
+                    end
                 end,
             },
         },
