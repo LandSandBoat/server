@@ -43,8 +43,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 0.0
     params.ignorefstrcap = true -- Grand Slam doesn't have an fSTR cap
 
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    local damage = blueDoPhysicalSpell(caster, target, spell, params)
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     return damage
 end

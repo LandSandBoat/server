@@ -41,12 +41,16 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
+    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
     if caster:isBehind(target, 15) then -- guesstimating the angle at 15 degrees here
         damage = math.floor(damage * 1.25)
     end
+<<<<<<< refs/remotes/upstream/base
 
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+=======
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
+>>>>>>> Renamed BLU functions, added drain function (yet to rewire), used existing systemStrength table
 
     --TODO: Knockback? Where does that get handled? How much knockback does it have?
 

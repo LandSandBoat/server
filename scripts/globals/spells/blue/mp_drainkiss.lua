@@ -33,27 +33,20 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- also have small constant to account for 0 dark skill
-    local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 165)
-    -- get resist multiplier (1x if no resist)
     local params = {}
     params.ecosystem = xi.ecosystem.AMORPH
-    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    params.attackType = xi.attackType.MAGICAL
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
-    -- get the resisted damage
-    dmg = dmg * resist
-    -- add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    -- add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-    -- add in final adjustments
 
-    if dmg < 0 then
-        dmg = 0
-    end
+    local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 165)
+    local resist = applyResistance(caster, target, spell, params)
+    dmg = dmg * resist
+    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+
+    if dmg < 0 then dmg = 0 end
 
     dmg = dmg * xi.settings.main.BLUE_POWER
 

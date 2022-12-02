@@ -42,8 +42,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
     local resist = applyResistance(caster, target, spell, params)
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     if damage > 0 and resist > 0.0625 then
         local typeEffect = xi.effect.BIND

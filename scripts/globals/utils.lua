@@ -443,10 +443,7 @@ local systemStrengthTable =
     [xi.eco.LUMINION] = { [xi.eco.LUMINIAN] = 1, },
 }
 
-function utils.getSystemStrengthBonus(attacker, defender)
-    local attackerSystem = attacker:getSystem()
-    local defenderSystem = defender:getSystem()
-
+function utils.getSystemStrengthBonus(attackerSystem, defenderSystem)
     for k, v in pairs(systemStrengthTable) do
         if k == attackerSystem then
             for defId, weakValue in pairs(systemStrengthTable[k]) do

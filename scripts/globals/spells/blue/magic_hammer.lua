@@ -50,14 +50,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.vit_wsc = 0.0
     params.agi_wsc = 0.0
     params.int_wsc = 0.0
-    params.mnd_wsc = 0.30
+    params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
 
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
     else
-        dmg = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
-        dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
+        dmg = blueDoMagicalSpell(caster, target, spell, params, MND_BASED)
+        dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
         if target:getMP() > 0 then
             if target:getMP() < dmg then
                 dmg = target:getMP()

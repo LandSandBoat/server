@@ -23,26 +23,28 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+<<<<<<< refs/remotes/upstream/base
     local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
+=======
+
+
+>>>>>>> Renamed BLU functions, added drain function (yet to rewire), used existing systemStrength table
     --get resist multiplier (1x if no resist)
     local params = {}
     params.ecosystem = xi.ecosystem.AMORPH
-    params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
-    params.attribute = xi.mod.MND
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.DARK
+    params.diff = 0 -- no stat increases magic accuracy
     params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
-    --get the resisted damage
-    dmg = dmg * resist
-    --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg)
-    --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-    --add in final adjustments
+    params.dmgMultiplier = 5
 
-    if dmg < 0 then
-        dmg = 0
-    end
+    local dmg = 5 * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
+    local resist = applyResistance(caster, target, spell, params)
+    dmg = dmg * resist
+    dmg = addBonuses(caster, spell, target, dmg)
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+
+    if dmg < 0 then dmg = 0 end
 
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
@@ -53,9 +55,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         dmg = target:getHP()
     end
 
-    params.attackType = xi.attackType.MAGICAL
-    params.damageType = xi.damageType.DARK
-    dmg = BlueFinalAdjustments(caster, target, spell, dmg, params)
+
+    dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
     caster:addHP(dmg)
 
     return dmg

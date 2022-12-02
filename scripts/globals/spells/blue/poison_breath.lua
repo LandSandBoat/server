@@ -54,7 +54,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local casterHP = caster:getHP()
     local casterLvl = caster:getMainLvl()
     local damage = (casterHP / 10) + (casterLvl / 1.25)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     if damage > 0 and resist > 0.3 then
         local typeEffect = xi.effect.POISON

@@ -46,8 +46,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    local damage = blueDoPhysicalSpell(caster, target, spell, params)
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     -- Additional effect: Accuracy down (-15 for 30s/60s)
     if damage > 0 and not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then

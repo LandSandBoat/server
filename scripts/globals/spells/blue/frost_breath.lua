@@ -44,8 +44,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
-    local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    local damage = blueDoMagicalSpell(caster, target, spell, params, MND_BASED)
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50

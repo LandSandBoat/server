@@ -50,8 +50,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:dispelStatusEffect()
     end
 
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     return damage
 end
