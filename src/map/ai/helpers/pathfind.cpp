@@ -152,23 +152,20 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
 
     bool result = PathTo(point, pathFlags, false);
 
-    if (point.y - m_POwner->loc.p.y > 4) // Target is too low.
-    {
-        result = false;
-    }
-
-    if (m_POwner->objtype == TYPE_MOB) // Target is too high.
+    if (m_POwner->objtype == TYPE_MOB && !m_POwner->loc.zone->m_updatedNavmesh) // Target is too high.
     {
         auto PMob = static_cast<CMobEntity*>(m_POwner);
-        if (point.y - m_POwner->loc.p.y < -4)
+
+        if (point.y - m_POwner->loc.p.y < -6 && !PMob->PAI->IsRoaming()) // Target is over 6 yalms above me, I should process disengage if needed.
         {
             auto disengageMod = PMob->getMobMod(MOBMOD_DISENGAGE_NO_PATH);
 
-            if (PMob->isInDynamis() && PMob->m_pathFindDisengage >= 1)
+            if (PMob->m_pathFindDisengage >= 1)
             {
                 result = false;
             }
-            else if (PMob->m_pathFindDisengage >= (disengageMod > 0 ? disengageMod : 2)) // This is just to stop players from abusing the disengage. Adjustable via mobmod.
+            else if ((PMob->m_pathFindDisengage >= (disengageMod > 0 ? disengageMod : 2)) ||
+                     (PMob->health.hp != PMob->health.maxhp && !PMob->PAI->IsRoaming())) // This is just to stop players from abusing the disengage. Adjustable via mobmod.
             {
                 result = false; // Make me go up.
             }
@@ -179,23 +176,24 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
             }
             else
             {
-                return false;
+                result = false;
             }
         }
-        else if (point.y - m_POwner->loc.p.y > 4) // 4 Is generally a decent sized ledge.
+        else // I'm probably stuck on a rock or something dumb.
         {
-            if (PMob->isInDynamis() && PMob->PAI->IsEngaged()) // Ignore wallhack for dynamis.
-            {
-                PMob->PAI->Disengage();
-            }
-            else
-            {
-                result = false; // Make me fall down.
-            }
+            result = false; // Make me go down or up.
         }
-        else if (point.y - m_POwner->loc.p.y > 1) // I'm probably stuck on a rock or something dumb.
+    }
+
+    if (m_POwner->objtype == TYPE_MOB &&
+        m_POwner->loc.zone->m_updatedNavmesh)
+    {
+        auto PEntity = dynamic_cast<CBattleEntity*>(m_POwner)->GetBattleTarget();
+
+        if (PEntity)
         {
-            result = false; // Make me go down.
+            result           = abs(m_POwner->loc.p.y - PEntity->loc.p.y) < m_POwner->loc.zone->m_navMesh->GetVerticalLimit() ? ValidPosition(PEntity->loc.p) : true;
+            m_carefulPathing = result ? true : false;
         }
     }
 
@@ -205,7 +203,6 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
         PathTo(point, pathFlags, false);
     }
 
-    PrunePathWithin(range);
     return result;
 }
 
@@ -348,9 +345,9 @@ void CPathFind::FollowPath(time_point tick)
 
     pathpoint_t targetPoint = m_points[m_currentPoint];
 
-    if (isNavMeshEnabled() && m_carefulPathing)
+    if ((isNavMeshEnabled() && m_carefulPathing) || (isNavMeshEnabled() && m_POwner->loc.zone->m_zoneCarefulPathing))
     {
-        m_POwner->loc.zone->m_navMesh->snapToValidPosition(m_POwner->loc.p);
+        m_POwner->loc.zone->m_navMesh->snapToValidPosition(m_POwner->loc.p, targetPoint.position.y, false);
     }
 
     if (m_maxDistance && m_distanceMoved >= m_maxDistance)

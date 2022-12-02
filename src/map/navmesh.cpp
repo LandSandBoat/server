@@ -38,7 +38,7 @@ constexpr int8  CNavMesh::ERROR_NEARESTPOLY;
 constexpr float smallPolyPickExt[3]  = { 0.5f, 1.0f, 0.5f };
 constexpr float polyPickExt[3]       = { 5.0f, 10.0f, 5.0f };
 constexpr float skinnyPolyPickExt[3] = { 0.01f, 10.0f, 0.01f };
-constexpr float verticalLimit        = 5.0f;
+constexpr float verticalLimit        = 0.25f;
 
 void CNavMesh::ToFFXIPos(const position_t* pos, float* out)
 {
@@ -188,6 +188,11 @@ void CNavMesh::reload()
 void CNavMesh::unload()
 {
     m_navMesh.reset();
+}
+
+float CNavMesh::GetVerticalLimit()
+{
+    return verticalLimit;
 }
 
 void CNavMesh::outputError(uint32 status)
@@ -509,11 +514,11 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     return true;
 }
 
-void CNavMesh::snapToValidPosition(position_t& position)
+void CNavMesh::snapToValidPosition(position_t& position, float targetY, bool force)
 {
     TracyZoneScoped;
 
-    if (!m_navMesh)
+    if (!m_navMesh || !targetY || (!force && abs(position.y - targetY) < 0.1f))
     {
         return;
     }
@@ -570,7 +575,13 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
         int       polyCount = -1;
         dtStatus  status    = m_navMeshQuery.queryPolygons(epos, skinnyPolyPickExt, &filter, polys, &polyCount, 16);
 
-        if (dtStatusFailed(status) || polyCount <= 0)
+        if (polyCount <= 0)
+        {
+            // Couldn't find path.
+            return false;
+        }
+
+        if (dtStatusFailed(status))
         {
             ShowError("CNavMesh::Bad vertical polygon query (%f, %f, %f) (%u)", epos[0], epos[1], epos[2], m_zoneID);
             outputError(status);
@@ -578,7 +589,6 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
         }
 
         // Collect the heights of queried polygons
-        uint8           verticalLimitTrunc = static_cast<uint8>(verticalLimit);
         float           height;
         std::set<uint8> heights;
         for (int i = 0; i < polyCount; i++)
@@ -587,16 +597,15 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
             if (!dtStatusFailed(status))
             {
                 // Truncate the height and round to nearest multiple of verticalLimitTrunc for easier de-duping
-                uint8 rounded = static_cast<uint8>(height) + abs((static_cast<uint8>(height) % verticalLimitTrunc) - verticalLimitTrunc);
-                heights.insert(rounded);
+                heights.insert((uint8)i);
             }
         }
 
         // Multiple floors detected, we need to disambiguate
         if (heights.size() > 1)
         {
-            auto startHeight = static_cast<uint8>(spos[1]) + abs((static_cast<uint8>(spos[1]) % verticalLimitTrunc) - verticalLimitTrunc);
-            auto endHeight   = static_cast<uint8>(epos[1]) + abs((static_cast<uint8>(epos[1]) % verticalLimitTrunc) - verticalLimitTrunc);
+            float startHeight = spos[1] + abs(std::fmod(spos[1], verticalLimit) - verticalLimit);
+            float endHeight   = epos[1] + abs(std::fmod(epos[1], verticalLimit) - verticalLimit);
 
             // Since we've already truncated and rounded to nearest multiples of verticalLimitTrunc,
             // if we are within verticalLimitTrunc of a point, that's our closest.
@@ -643,6 +652,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     // the results.
     if (!onSameFloor(start, spos, end, epos, filter))
     {
+        // Couldn't find path or not on same floor.
         return false;
     }
 

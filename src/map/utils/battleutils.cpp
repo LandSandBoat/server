@@ -5395,7 +5395,10 @@ namespace battleutils
         damage       = (int32)(damage * resist);
 
         resist = 1.0f + PDefender->getMod(Mod::DMGBREATH) / 10000.f + PDefender->getMod(Mod::DMG) / 10000.f;
-        resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
+        resist = std::max(resist, 0.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
+
+        resist += PDefender->getMod(Mod::UDMG) + PDefender->getMod(Mod::UDMGBREATH) / 10000.f;
+        resist = std::max(resist, 0.f);
         damage = (int32)(damage * resist);
 
         if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE))
@@ -5445,6 +5448,9 @@ namespace battleutils
 
         resist += PDefender->getMod(Mod::DMGMAGIC_II) / 10000.f;
         resist = std::max(resist, 0.125f); // Total cap with MDT-% II included is 87.5%
+
+        resist += PDefender->getMod(Mod::UDMG) + PDefender->getMod(Mod::UDMGMAGIC) / 10000.f;
+        resist = std::max(resist, 0.f);
         damage = (int32)(damage * resist);
 
         if (damage > 0 && PDefender->objtype == TYPE_PET && PDefender->getMod(Mod::AUTO_STEAM_JACKET) > 1)
@@ -5492,6 +5498,10 @@ namespace battleutils
         resist = 1.f + PDefender->getMod(Mod::DMGPHYS) / 10000.f + PDefender->getMod(Mod::DMG) / 10000.f;
         resist = std::max(resist, 0.5f);                        // PDT caps at -50%
         resist += PDefender->getMod(Mod::DMGPHYS_II) / 10000.f; // Add Burtgang reduction after 50% cap. Extends cap to -68%
+        resist = std::max(resist, 0.32f);                       // Total cap with MDT-% II included is 87.5%
+
+        resist += PDefender->getMod(Mod::UDMG) + PDefender->getMod(Mod::UDMGPHYS) / 10000.f;
+        resist = std::max(resist, 0.f);
         damage = (int32)(damage * resist);
 
         if (damage > 0 && PDefender->objtype == TYPE_PET && PDefender->getMod(Mod::AUTO_STEAM_JACKET) > 0)
@@ -5538,6 +5548,9 @@ namespace battleutils
 
         resist = 1.0f + PDefender->getMod(Mod::DMGRANGE) / 10000.f + PDefender->getMod(Mod::DMG) / 10000.f;
         resist = std::max(resist, 0.5f);
+
+        resist += PDefender->getMod(Mod::UDMG) + PDefender->getMod(Mod::UDMGRANGE) / 10000.f;
+        resist = std::max(resist, 0.f);
         damage = (int32)(damage * resist);
 
         if (damage > 0 && PDefender->objtype == TYPE_PET && PDefender->getMod(Mod::AUTO_STEAM_JACKET) > 0)
@@ -6080,7 +6093,7 @@ namespace battleutils
         // Snap nearEntity to a guaranteed valid position
         if (PMob->loc.zone->m_navMesh)
         {
-            PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+            PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity, pos.y, true);
         }
 
         // Move the target a little higher, just in case

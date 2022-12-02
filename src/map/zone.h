@@ -617,7 +617,9 @@ public:
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
     CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
-    CNavMesh* m_navMesh; // zones navmesh for finding paths
+    CNavMesh* m_navMesh;            // zones navmesh for finding paths
+    bool      m_updatedNavmesh;     // Flag to turn off special path code.
+    bool      m_zoneCarefulPathing; // Zonewide careful pathing, should only be used with updated meshes.
 
     time_point m_LoadedAt; // time zone was loaded
 

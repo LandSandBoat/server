@@ -144,6 +144,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
     m_Weather            = WEATHER_NONE;
     m_WeatherChangeTime  = 0;
     m_navMesh            = nullptr;
+    m_updatedNavmesh     = false;
+    m_zoneCarefulPathing = false;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
 
@@ -441,6 +443,8 @@ void CZone::LoadZoneSettings()
                                "zone.tax,"
                                "zone.misc,"
                                "zone.zonetype,"
+                               "zone.updatedmesh,"
+                               "zone.forcecarefulpathing,"
                                "bcnm.name "
                                "FROM zone_settings AS zone "
                                "LEFT JOIN bcnm_info AS bcnm "
@@ -460,10 +464,12 @@ void CZone::LoadZoneSettings()
         m_zoneMusic.m_bSongM    = (uint8)sql->GetUIntData(6);           // party battle music
         m_tax                   = (uint16)(sql->GetFloatData(7) * 100); // tax for bazaar
         m_miscMask              = (uint16)sql->GetUIntData(8);
+        m_updatedNavmesh        = (bool)sql->GetIntData(10);
+        m_zoneCarefulPathing    = (bool)sql->GetIntData(11);
 
         m_zoneType = static_cast<ZONE_TYPE>(sql->GetUIntData(9));
 
-        if (sql->GetData(10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
+        if (sql->GetData(12) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
