@@ -116,7 +116,10 @@ xi.moghouse.moogleTrigger = function(player, npc)
                 local earnedReward = player:getCharVar("[StarlightMisc]DreamHatHQ")
                 local currentDay = VanadielUniqueDay()
                 local currentTime = os.time()
-                local currentMidnight = getVanaMidnight(placedDay)
+                local currentMidnight = JstMidnight()
+
+                print(tostring(currentTime))
+                print(tostring(currentMidnight))
 
                 if (treePlaced ~= 0 and earnedReward ~= 1) then
                     local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
@@ -125,7 +128,7 @@ xi.moghouse.moogleTrigger = function(player, npc)
                     local jeunoanTree = player:getCharVar("[StarlightMisc]JeunoanTree")
                     local holidayFame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
 
-                    if (placedDay < currentDay and currentTime > currentMidnight) then
+                    if (placedDay < currentDay) then
                         if holidayFame == 9 then
                             if sandOrianTree == 1 then
                                 player:startEvent(30017, 0, 0, 0, 86)
