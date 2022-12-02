@@ -593,10 +593,10 @@ xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
     local healingBreathTable =
     {
         --                                   { base, multiplier }
-        [xi.jobAbility.HEALING_BREATH]     = {  8, 35 },
-        [xi.jobAbility.HEALING_BREATH_II]  = { 24, 48 },
-        [xi.jobAbility.HEALING_BREATH_III] = { 42, 55 },
-        [xi.jobAbility.HEALING_BREATH_IV]  = { 60, 63 },
+        [xi.jobAbility.HEALING_BREATH]     = {  8, 25 },
+        [xi.jobAbility.HEALING_BREATH_II]  = { 24, 38 },
+        [xi.jobAbility.HEALING_BREATH_III] = { 42, 45 },
+        [xi.jobAbility.HEALING_BREATH_IV]  = { 60, 53 },
     }
 
     local master = wyvern:getMaster()
@@ -620,7 +620,7 @@ xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
     local baseMultiplier = healingBreathTable[skill:getID()][2]
 
     -- gear cap of 64/256 in multiplier
-    local multiplier = (baseMultiplier + math.min(gear, 64) + math.floor(deepMult)) / 256
+    local multiplier = (baseMultiplier + math.min(gear, 64) + math.floor(deepMult) + (math.floor(wyvern:getTP() / 200) / 1.165)) / 256
     local curePower = math.floor(wyvern:getMaxHP() * multiplier) + base + jobPointBonus * breathAugmentsBonus
     local totalHPRestored = target:addHP(curePower)
 
