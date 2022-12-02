@@ -115,11 +115,6 @@ xi.moghouse.moogleTrigger = function(player, npc)
                 local placedDay = player:getCharVar("[StarlightMisc]TreeTimePlaced")
                 local earnedReward = player:getCharVar("[StarlightMisc]DreamHatHQ")
                 local currentDay = VanadielUniqueDay()
-                local currentTime = os.time()
-                local currentMidnight = JstMidnight()
-
-                print(tostring(currentTime))
-                print(tostring(currentMidnight))
 
                 if (treePlaced ~= 0 and earnedReward ~= 1) then
                     local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
