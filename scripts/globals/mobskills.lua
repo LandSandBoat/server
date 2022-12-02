@@ -294,7 +294,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     returninfo.hitslanded = hitslanded
 
     return returninfo
-
 end
 
 -- MAGICAL MOVE
@@ -368,7 +367,6 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     returninfo.dmg = finaldmg
 
     return returninfo
-
 end
 
 -- effect = xi.effect.WHATEVER if enfeeble

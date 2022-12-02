@@ -81,7 +81,6 @@ g_mixins.maat = function(maatMob)
             mob:showText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
             mob:getBattlefield():win()
         end
-
     end)
 
     maatMob:addListener("ITEM_STOLEN", "MAAT_ITEM_STOLEN", function(mob, player, itemId)
@@ -112,7 +111,6 @@ g_mixins.maat = function(maatMob)
             mob:messageText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)
         end
     end)
-
 end
 
 return g_mixins.maat

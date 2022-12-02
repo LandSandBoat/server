@@ -218,9 +218,7 @@ function onHalloweenTrade(player, trade, npc)
 
                         elseif zi == 16 then
                             player:messageSpecial(ID.text.THANK_YOU_TREAT)
-
                         end
-
                     end
                 else
                     player:messageSpecial(ID.text.THANK_YOU)

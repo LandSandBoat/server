@@ -24,7 +24,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(totaldamage, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
     return totaldamage
-
 end
 
 return mobskillObject

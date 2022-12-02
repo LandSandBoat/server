@@ -41,7 +41,6 @@ entity.onTrade = function(player, npc, trade)
                 GetMobByID(ID.mob.IXAERN_MNK + 2):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos() + 4)
                 SpawnMob(ID.mob.IXAERN_MNK + 2):updateClaim(player)
             end
-
         end
     end
 end

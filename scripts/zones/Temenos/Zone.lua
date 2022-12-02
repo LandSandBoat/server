@@ -51,7 +51,6 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(24,  -20.000, 5, -544.000, 0, 0, 0) -- F2 -> Entrance
     zone:registerTriggerArea(25, -264.000, 5, -500.000, 0, 0, 0) -- F3 -> Entrance
     zone:registerTriggerArea(26, -580.000, 5, -584.000, 0, 0, 0) -- F4 -> Entrance
-
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

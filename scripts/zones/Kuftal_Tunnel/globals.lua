@@ -32,7 +32,9 @@ movePhantomWormQM = function()
     }
 
     npc:setPos(unpack(phantomQmPoints[math.random(1, 16)]))
-    npc:timer(5000, function() movePhantomWormQM() end)
+    npc:timer(5000, function()
+        movePhantomWormQM()
+    end)
 end
 
 kuftalGlobal.movePhantomWormQM = movePhantomWormQM

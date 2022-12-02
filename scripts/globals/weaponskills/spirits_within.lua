@@ -76,7 +76,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     damage = takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
-
 end
 
 return weaponskillObject

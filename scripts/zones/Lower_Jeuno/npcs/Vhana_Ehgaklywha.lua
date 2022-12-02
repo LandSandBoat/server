@@ -23,7 +23,6 @@ end
 
 entity.onPath = function(npc)
     if npc:isFollowingPath() then
-
         -- if vasha reaches the end node, halt and disappear her.
         -- do this at node 48 instead of 49 because isFollowingPath will be false by 49.
         -- if we remove the isFollowingPath check, this code runs every second forever.
@@ -47,7 +46,6 @@ entity.onPath = function(npc)
                     break
                 end
             end
-
         end
     end
 end

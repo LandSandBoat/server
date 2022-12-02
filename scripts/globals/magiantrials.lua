@@ -35,7 +35,9 @@ end
 local function parseParams(player)
     local paramTrials = {}
     for _, v in pairs(getPlayerTrials(player)) do
-        if v.trial > 0 then table.insert(paramTrials, v.trial) end
+        if v.trial > 0 then
+            table.insert(paramTrials, v.trial)
+        end
     end
 
     local params = { 0, 0, 0, 0, 0 }
@@ -325,7 +327,6 @@ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
         local trialBits = getTrialsBits(player, trials)
         player:updateEvent(trialBits[1], trialBits[2], trialBits[3], trialBits[4], trialBits[5], nbTrialsPlayer, places, 0)
     end
-
 end
 
 xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)

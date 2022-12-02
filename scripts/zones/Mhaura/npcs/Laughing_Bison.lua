@@ -30,7 +30,6 @@ entity.onTrigger = function(player, npc)
     end
 
     player:startEvent(333, timer, direction, 0, destination) -- timer arriving/departing ??? destination
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

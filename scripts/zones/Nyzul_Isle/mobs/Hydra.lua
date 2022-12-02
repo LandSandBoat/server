@@ -50,7 +50,6 @@ entity.onMobFight = function(mob, target)
         mob:setTP(3000)
         handleRegen(mob, broken - 1)
     end
-
 end
 
 entity.onCriticalHit = function(mob)

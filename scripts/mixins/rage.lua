@@ -54,7 +54,6 @@ g_mixins.rage = function(rageMob)
             -- TODO: ATT, DEF, MACC, MATT, EVA, attack speed all decrease
         end
     end)
-
 end
 
 return g_mixins.rage

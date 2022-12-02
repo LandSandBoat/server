@@ -22,7 +22,6 @@ entity.onTrade = function(player, npc, trade)
     else
         xi.helm.onTrade(player, npc, trade, xi.helm.type.EXCAVATION, 60)
     end
-
 end
 
 entity.onTrigger = function(player, npc)

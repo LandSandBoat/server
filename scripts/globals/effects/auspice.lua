@@ -41,7 +41,6 @@ effectObject.onEffectLose = function(target, effect)
         target:setMod(xi.mod.ENSPELL_DMG, 0)
         target:setMod(xi.mod.ENSPELL, 0)
     end
-
 end
 
 return effectObject

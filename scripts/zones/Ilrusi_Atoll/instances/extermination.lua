@@ -61,7 +61,6 @@ instanceObject.onInstanceComplete = function(instance)
 
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(xi.status.NORMAL)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(xi.status.NORMAL)
-
 end
 
 instanceObject.onEventUpdate = function(player, csid, option)

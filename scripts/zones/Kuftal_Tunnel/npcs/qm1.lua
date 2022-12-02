@@ -11,7 +11,9 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npc:timer(5000, function() kuftalGlobal.movePhantomWormQM() end)
+    npc:timer(5000, function()
+        kuftalGlobal.movePhantomWormQM()
+    end)
 end
 
 entity.onTrade = function(player, npc, trade)

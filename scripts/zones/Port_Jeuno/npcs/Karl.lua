@@ -44,7 +44,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(58) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

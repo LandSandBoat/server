@@ -30,7 +30,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, ID.text.FAURBELLANT_1)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

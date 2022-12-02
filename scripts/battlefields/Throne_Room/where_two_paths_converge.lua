@@ -33,6 +33,7 @@ function content:onEventFinishBattlefield(player, csid, option)
         [2] = { -762.949 , -407, -478.991, 127 },
         [3] = { -1082.787, -647, -718.976, 127 },
     }
+
     local volkerCoords =
     {
         [1] = { -450     , -167, -239    , 125 },
@@ -74,7 +75,6 @@ content.groups =
                             player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
                             DespawnMob(zeid:getID())
                         end
-
                     end
                 end)
             end

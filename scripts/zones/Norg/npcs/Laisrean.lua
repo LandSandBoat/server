@@ -54,7 +54,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
         end
     end
-
 end
 
 return entity

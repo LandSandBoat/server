@@ -100,7 +100,9 @@ end
 function xi.follow.clearFollowers(leader)
     local leaderId = leader:getID()
 
-    if not leaderToFollowersMap[leaderId] then return end
+    if not leaderToFollowersMap[leaderId] then
+        return
+    end
 
     for _, follower in ipairs(leaderToFollowersMap[leaderId]) do
         local followerId = follower:getID()
@@ -122,7 +124,9 @@ function xi.follow.stopFollowing(follower)
 end
 
 local function getAveragePos(mobsPos)
-    if #mobsPos == 0 then return nil end
+    if #mobsPos == 0 then
+        return nil
+    end
 
     local count = #mobsPos
     local x = 0
@@ -174,7 +178,9 @@ function onMobRoamAction(follower)
         return
     end
 
-    if follower:isFollowingPath() then return end
+    if follower:isFollowingPath() then
+        return
+    end
 
     local options = followerOptions[followerId]
     local leaderPos = leader:getPos()
@@ -224,7 +230,9 @@ end
 
 function xi.follow.getFollowers(leader)
     local followers = leaderToFollowersMap[leader:getID()]
-    if not followers or #followers == 0 then return end
+    if not followers or #followers == 0 then
+        return
+    end
 
     local clone = {}
     for _, follower in ipairs(followers) do

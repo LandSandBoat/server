@@ -61,7 +61,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     return xi.effect.FROST
-
 end
 
 return spellObject

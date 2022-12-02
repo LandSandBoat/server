@@ -72,7 +72,6 @@ entity.onEventFinish = function(player, csid, option, target)
         mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)
         mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 40)
     end
-
 end
 
 return entity

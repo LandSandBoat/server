@@ -76,7 +76,6 @@ entity.onEventFinish = function(player, csid, option, target)
             v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
         end
     end
-
 end
 
 return entity

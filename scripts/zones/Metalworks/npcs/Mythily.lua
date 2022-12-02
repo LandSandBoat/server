@@ -64,7 +64,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setGil(player:getGil() - cost)
         player:setRankPoints(0)
     end
-
 end
 
 return entity

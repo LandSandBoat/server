@@ -60,7 +60,6 @@ entity.onEventFinish = function(player, csid, option)
             player:delSeals(dellseals, out_seal)
             player:addSeals(addnum, in_seal)
         end
-
     end
 end
 

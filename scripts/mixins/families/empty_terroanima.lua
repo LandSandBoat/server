@@ -42,7 +42,6 @@ g_mixins.families.empty_terroanima = function(emptyMob)
     emptyMob:addListener("DEATH", "EMPTY_TERROANIMA_DEATH", function(mob)
         mob:setRoamFlags(0)
     end)
-
 end
 
 return g_mixins.families.empty_terroanima

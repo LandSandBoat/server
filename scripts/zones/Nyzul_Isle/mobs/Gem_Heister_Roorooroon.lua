@@ -58,10 +58,14 @@ local function dropBomb(mob)
 
     if target ~= nil then
         bombMob:updateEnmity(target)
-        bombMob:timer(1000, function(bomb) bomb:useMobAbility(1838) end)
+        bombMob:timer(1000, function(bomb)
+            bomb:useMobAbility(1838)
+        end)
     end
 
-    bombMob:timer(4500, function(bomb) bomb:setStatus(xi.status.DISAPPEAR) end)
+    bombMob:timer(4500, function(bomb)
+        bomb:setStatus(xi.status.DISAPPEAR)
+    end)
 end
 
 entity.onMobSpawn = function(mob)
