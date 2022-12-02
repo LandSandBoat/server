@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `transport` (
   `anim_arrive` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `time_offset` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `time_interval` smallint(5) unsigned NOT NULL DEFAULT '0', -- Duration of ferry ride
+  `time_interval` smallint(5) unsigned NOT NULL DEFAULT '0',
   `time_anim_arrive` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `time_waiting` smallint(5) unsigned NOT NULL DEFAULT '0',
   `time_anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
