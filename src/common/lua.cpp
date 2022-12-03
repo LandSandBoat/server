@@ -36,8 +36,6 @@ void lua_init()
 {
     TracyZoneScoped;
 
-    ShowInfo("lua initialising");
-
     lua.open_libraries();
 
     // Globally require bit library

@@ -57,8 +57,6 @@ namespace settings
      */
     void init()
     {
-        ShowInfo("Loading settings files");
-
         // Load defaults
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./settings/default/"))
         {
@@ -219,6 +217,8 @@ namespace settings
             auto inner                          = to_upper(parts[1]);
             lua["xi"]["settings"][outer][inner] = value;
         }
+
+        logging::SetPattern(get<std::string>("logging.PATTERN"));
 
         // Test to ensure requires aren't trampling changes, and that the user's settings aren't reverting
         // to the defaults:

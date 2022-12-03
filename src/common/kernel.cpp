@@ -57,12 +57,6 @@
 
 std::atomic<bool> gRunFlag = true;
 
-int    arg_c = 0;
-char** arg_v = nullptr;
-
-char* SERVER_NAME = nullptr;
-char  SERVER_TYPE = XI_SERVER_NONE;
-
 std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
 
 // This must be manually created
@@ -202,20 +196,8 @@ int main(int argc, char** argv)
     SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prev_mode & ~ENABLE_QUICK_EDIT_MODE));
 #endif // _WIN32
 
-    { // initialize program arguments
-        char* p1 = SERVER_NAME = argv[0];
-        char* p2               = p1;
-        while ((p1 = strchr(p2, '/')) != nullptr || (p1 = strchr(p2, '\\')) != nullptr)
-        {
-            SERVER_NAME = ++p1;
-            p2          = p1;
-        }
-        arg_c = argc;
-        arg_v = argv;
-    }
-
     log_init(argc, argv);
-    set_server_type();
+    set_socket_type();
     usercheck();
     signals_init();
     timer_init();
