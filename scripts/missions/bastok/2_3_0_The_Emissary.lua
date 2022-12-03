@@ -113,13 +113,13 @@ mission.sections =
                         not player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) and
                         player:getMissionStatus(mission.areaId) == 0
                     then
-                        local isFirst2_3 =
+                        local isFirst23 =
                         (
                             not player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD) and
                             not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)
                         ) and 1 or 0
 
-                        return mission:progressEvent(713, 0, 0, 0, 0, 0, 0, 0, isFirst2_3) -- Contains variation for Lion mention.
+                        return mission:progressEvent(713, 0, 0, 0, 0, 0, 0, 0, isFirst23) -- Contains variation for Lion mention.
                     else
                         return mission:messageText(metalworksID.text.GOOD_LUCK)
                     end

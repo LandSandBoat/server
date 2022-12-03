@@ -8,7 +8,7 @@ local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    local IxAernDRG_PH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH
+    local IxAernDRGPH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH
 
     -- Pick the Ix'Aern (DRG) PH if the server doesn't have one, and the if the actual PH/NM isn't up. Then, set it.
     if
@@ -17,8 +17,8 @@ entity.onMobSpawn = function(mob)
     then
         -- This should be cleared when the mob is killed.
         local groups = ID.mob.AWAERN_DRG_GROUPS
-        IxAernDRG_PH = groups[math.random(1, #groups)] + math.random(0, 2) -- The 4th mobid in each group is a pet. F that son
-        SetServerVariable("[SEA]IxAernDRG_PH", IxAernDRG_PH)
+        IxAernDRGPH = groups[math.random(1, #groups)] + math.random(0, 2) -- The 4th mobid in each group is a pet. F that son
+        SetServerVariable("[SEA]IxAernDRG_PH", IxAernDRGPH)
     end
 end
 
@@ -58,10 +58,10 @@ entity.onMobDespawn = function(mob)
     local currentMobID = mob:getID()
 
     -- Ix'Aern (DRG) Placeholder mobs
-    local IxAernDRG_PH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH.
+    local IxAernDRGPH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH.
 
     -- If the mob killed was the randomized PH, then Ix'Aern (DRG) in the specific spot, unclaimed and not aggroed.
-    if IxAernDRG_PH == currentMobID then
+    if IxAernDRGPH == currentMobID then
         -- Select spawn location based on ID
         local offset = currentMobID - ID.mob.AWAERN_DRG_GROUPS[1]
         if offset >= 0 and offset <= 3 then

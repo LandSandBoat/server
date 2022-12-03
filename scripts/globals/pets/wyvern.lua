@@ -43,7 +43,7 @@ local wyvernTypes =
 }
 
 local function doHealingBreath(player, threshold)
-    local breath_heal_range = 14
+    local breathHealRange = 14
 
     local healingbreath = xi.jobAbility.HEALING_BREATH
 
@@ -57,7 +57,7 @@ local function doHealingBreath(player, threshold)
 
     -- zone ID check? is this some strange master zoning but pet hasn't despawned in the other zone check?
     local function inBreathRange(target)
-        return player:getPet():getZoneID() == target:getZoneID() and player:getPet():checkDistance(target) <= breath_heal_range
+        return player:getPet():getZoneID() == target:getZoneID() and player:getPet():checkDistance(target) <= breathHealRange
     end
 
     if

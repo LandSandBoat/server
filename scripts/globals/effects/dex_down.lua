@@ -15,17 +15,17 @@ end
 
 effectObject.onEffectTick = function(target, effect)
     -- the effect restore dexterity of 1 every 3 ticks.
-    local downDEX_effect_size = effect:getPower()
-    if downDEX_effect_size > 0 then
-        effect:setPower(downDEX_effect_size - 1)
+    local downDEXEffectSize = effect:getPower()
+    if downDEXEffectSize > 0 then
+        effect:setPower(downDEXEffectSize - 1)
         target:delMod(xi.mod.DEX, -1)
     end
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local downDEX_effect_size = effect:getPower()
-    if downDEX_effect_size > 0 then
-        target:delMod(xi.mod.DEX, -downDEX_effect_size)
+    local downDEXEffectSize = effect:getPower()
+    if downDEXEffectSize > 0 then
+        target:delMod(xi.mod.DEX, -downDEXEffectSize)
     end
 end
 
