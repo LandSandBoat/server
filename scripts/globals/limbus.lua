@@ -33,11 +33,6 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[5]):setStatus(xi.status.DISAPPEAR)
         end,
 
-        -- Central Temenos: 3rd Floor
-        [1305] = function()
-            GetNPCByID(ID.npc.TEMENOS_C_CRATE[3]):setStatus(xi.status.DISAPPEAR)
-        end,
-
         -- Central Temenos: 4th Floor
         [1306] = function()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(xi.status.DISAPPEAR)
