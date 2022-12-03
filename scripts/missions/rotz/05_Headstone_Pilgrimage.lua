@@ -90,6 +90,15 @@ mission.sections =
                 end,
             },
 
+            ['Ancient_Weapon'] =
+            {
+                onMobDeath = function(mob, player, optParams)
+                    if optParams.isKiller then
+                        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
@@ -333,6 +342,15 @@ mission.sections =
                         end
                     else
                         return mission:progressEvent(201, xi.ki.FIRE_FRAGMENT)
+                    end
+                end,
+            },
+
+            ['Tipha'] =
+            {
+                onMobDeath = function(mob, player, optParams)
+                    if optParams.isKiller and GetMobByID(ID.mob.CARTHI):isDead() then
+                        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
                     end
                 end,
             },

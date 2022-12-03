@@ -939,9 +939,31 @@ void CMobController::DoRoamTick(time_point tick)
         PMob->m_OwnerID.clean();
     }
 
-    if (m_Tick >= m_ResetTick + 10s && PMob->health.tp > 0)
+    if (m_Tick >= m_ResetTick + 10s && (PMob->health.tp > 0 || PMob->CanRest()))
     {
-        PMob->health.tp -= 100;
+        if (PMob->health.tp > 0)
+        {
+            PMob->health.tp -= 100;
+        }
+        // can't rest with poison or disease
+        if (PMob->getMobMod(MOBMOD_NO_REST) == 0)
+        {
+            // recover 10% health
+            if (PMob->Rest(0.1f))
+            {
+                // health updated
+                PMob->updatemask |= UPDATE_HP;
+            }
+            if (PMob->GetHPP() == 100)
+            {
+                // at max health undirty exp
+                PMob->m_HiPCLvl     = 0;
+                PMob->m_HiPartySize = 0;
+                PMob->m_giveExp     = true;
+                PMob->m_ExpPenalty  = 0;
+                PMob->m_UsedSkillIds.clear();
+            }
+        }
         m_ResetTick = m_Tick;
     }
 
@@ -962,33 +984,6 @@ void CMobController::DoRoamTick(time_point tick)
         }
         else if (m_Tick >= m_LastActionTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)))
         {
-            // lets buff up or move around
-            if (PMob->GetCallForHelpFlag())
-            {
-                PMob->SetCallForHelpFlag(false);
-            }
-
-            // can't rest with poison or disease
-            if (PMob->CanRest() && PMob->getMobMod(MOBMOD_NO_REST) == 0)
-            {
-                // recover 10% health
-                if (PMob->Rest(0.1f))
-                {
-                    // health updated
-                    PMob->updatemask |= UPDATE_HP;
-                }
-
-                if (PMob->GetHPP() == 100)
-                {
-                    // at max health undirty exp
-                    PMob->m_HiPCLvl     = 0;
-                    PMob->m_HiPartySize = 0;
-                    PMob->m_giveExp     = true;
-                    PMob->m_ExpPenalty  = 0;
-                    PMob->m_UsedSkillIds.clear();
-                }
-            }
-
             // if I just disengaged check if I should despawn
             if (!PMob->getMobMod(MOBMOD_DONT_ROAM_HOME) && PMob->IsFarFromHome())
             {

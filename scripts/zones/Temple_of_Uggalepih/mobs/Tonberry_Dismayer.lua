@@ -4,7 +4,8 @@
 -- Note: PH for Tonberry Kinq
 -----------------------------------
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require("scripts/mixins/families/tonberry"),
+    require("scripts/mixins/prelate_door"), }
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

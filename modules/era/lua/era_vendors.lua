@@ -723,13 +723,13 @@ local lookupTable =
     {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
 
     -- Jeuno
-    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, NULL, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, NULL, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, NULL, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, NULL, "VIETTES_SHOP_DIALOG", 1},
-    {"standard", "Upper_Jeuno", "Coumuna", xi.eraShops.Coumuna, NULL, "VIETTES_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, nil, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, nil, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, nil, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, nil, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, nil, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, nil, "VIETTES_SHOP_DIALOG", 1},
+    {"standard", "Upper_Jeuno", "Coumuna", xi.eraShops.Coumuna, nil, "VIETTES_SHOP_DIALOG", 1},
     {"standard", "Upper_Jeuno", "Areebah", xi.eraShops.Areebah, xi.quest.fame_area.JEUNO, "MP_SHOP_DIALOG", 1},
     {"standard", "RuLude_Gardens", "Dabih_Jajalioh", xi.eraShops.DabihJajalioh, xi.quest.fame_area.JEUNO, "DABIHJAJALIOH_SHOP_DIALOG", 1},
     {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
@@ -742,7 +742,7 @@ local lookupTable =
     -- Norg
     {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
     -- Rabao
-    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, NULL, "BRAVEOX_SHOP_DIALOG", 1},
+    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, nil, "BRAVEOX_SHOP_DIALOG", 1},
     -- Nashmau
     {"nofame", "Nashmau", "Mamaroon", xi.eraShops.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
     {"nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},

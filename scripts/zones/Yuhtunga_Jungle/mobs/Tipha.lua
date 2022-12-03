@@ -11,9 +11,6 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if optParams.isKiller and GetMobByID(ID.mob.CARTHI):isDead() then
-        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
-    end
 end
 
 return entity

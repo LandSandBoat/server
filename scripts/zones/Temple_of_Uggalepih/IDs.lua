@@ -89,6 +89,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         PLONGEUR_MONBERRY    = 17428933,
         BOOK_OFFSET          = 17428973,
         TEMPLE_GUARDIAN_DOOR = 17428978,
+        PRELATE_DOOR         = 17428986,
         DOOR_TO_RANCOR       = 17428989,
         TREASURE_COFFER      = 17429007,
     },
