@@ -39,8 +39,9 @@ entity.onMobFight = function(mob, target)
             tuchulcha:disengage()
             tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
             tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
-            local pos_index = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
-            local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
+            local posIndex = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
+            local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
+
             tuchulcha:setPos(coords)
             local players = tuchulcha:getBattlefield():getPlayers()
             for _, char in pairs(players) do

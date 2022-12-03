@@ -11,16 +11,16 @@ end
 
 effectObject.onEffectTick = function(target, effect)
     -- the effect restore accuracy of 1 every 3 ticks.
-    local downACC_effect_size = effect:getPower()
-    if downACC_effect_size > 0 then
-        effect:setPower(downACC_effect_size - 1)
+    local downACCEffectSize = effect:getPower()
+    if downACCEffectSize > 0 then
+        effect:setPower(downACCEffectSize - 1)
         target:delMod(xi.mod.ACC, -1)
     end
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local downACC_effect_size = effect:getPower()
-    if downACC_effect_size > 0 then
+    local downACCEffectSize = effect:getPower()
+    if downACCEffectSize > 0 then
         target:delMod(xi.mod.ACC, -effect:getPower())
     end
 end

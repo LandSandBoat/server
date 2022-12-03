@@ -51,10 +51,10 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local eald_narche = GetMobByID(mob:getID() - 1)
-    eald_narche:delStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
-    eald_narche:delStatusEffect(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
-    eald_narche:delStatusEffect(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+    local ealdnarche = GetMobByID(mob:getID() - 1)
+    ealdnarche:delStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
+    ealdnarche:delStatusEffect(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
+    ealdnarche:delStatusEffect(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option)

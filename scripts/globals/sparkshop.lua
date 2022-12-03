@@ -627,11 +627,11 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
     local selection = bit.rshift(option, 16)
 
     local qty = 1
-    local requested_qty = bit.band(bit.rshift(option, 10), 0x3F)
+    local requestedQty = bit.band(bit.rshift(option, 10), 0x3F)
 
     -- only skillup books and currencies can have qty > 1 aside from special cases such as ammo or shurikens
     if category == 2 or category == 20 or category == 30 then
-        qty = requested_qty
+        qty = requestedQty
     end
 
     -- There are three specific cases for Sparks rewards currently implemented:

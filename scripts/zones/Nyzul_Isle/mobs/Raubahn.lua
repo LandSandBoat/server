@@ -38,11 +38,11 @@ entity.onMobSpawn = function(mob)
                 mobTimerArg:setAnimationSub(3)
                 mobTimerArg:resetAI()
                 mobTimerArg:stun(3000)
-                local new_target = mobTimerArg:getEntity(targetid)
+                local newTarget = mobTimerArg:getEntity(targetid)
 
-                if new_target and mobTimerArg:checkDistance(new_target) < 40 then
-                    mobTimerArg:updateClaim(new_target)
-                    mobTimerArg:updateEnmity(new_target)
+                if newTarget and mobTimerArg:checkDistance(newTarget) < 40 then
+                    mobTimerArg:updateClaim(newTarget)
+                    mobTimerArg:updateEnmity(newTarget)
                 end
 
                 mobTimerArg:setLocalVar("RERAISES", reraises + 1)

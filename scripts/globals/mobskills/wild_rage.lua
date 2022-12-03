@@ -28,11 +28,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     if mob:getPool() == platoonScorpionPoolID then
         -- should not have to verify because platoon scorps only in battlefield
-        local num_scorps_dead = mob:getBattlefield():getLocalVar("[ODS]NumScorpsDead")
+        local numScorpsDead = mob:getBattlefield():getLocalVar("[ODS]NumScorpsDead")
 
         -- Increase the strength of Wild Rage as scorps in the BC die
         -- https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
-        info.dmg = info.dmg * (1 + wildRageDamageIncrease * num_scorps_dead)
+        info.dmg = info.dmg * (1 + wildRageDamageIncrease * numScorpsDead)
     end
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)

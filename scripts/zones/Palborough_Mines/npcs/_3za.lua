@@ -10,13 +10,13 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local gravelQty = trade:getItemQty(597) -- Mine Gravel
-    local already_in = player:getCharVar("refiner_input")
+    local alreadyIn = player:getCharVar("refiner_input")
 
-    if already_in + gravelQty > 10 then
+    if alreadyIn + gravelQty > 10 then
         player:startEvent(20)
     elseif trade:getItemCount() == gravelQty then
         player:tradeComplete()
-        player:setCharVar("refiner_input", already_in + gravelQty)
+        player:setCharVar("refiner_input", alreadyIn + gravelQty)
         player:startEvent(19, 597, gravelQty)
     else
         player:startEvent(21)

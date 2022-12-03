@@ -32,9 +32,9 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         if duration >= 50 then
             -- Erases a weaker inhibit tp and applies the stronger one
-            local inhibit_tp = target:getStatusEffect(effect)
-            if inhibit_tp ~= nil then
-                if inhibit_tp:getPower() < power then
+            local inhibitTP = target:getStatusEffect(effect)
+            if inhibitTP ~= nil then
+                if inhibitTP:getPower() < power then
                     target:delStatusEffect(effect)
                     target:addStatusEffect(effect, power, 0, duration)
                     spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
