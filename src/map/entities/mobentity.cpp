@@ -1654,7 +1654,20 @@ bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
                 attack_range = (uint8)skill->getDistance();
             }
         }
-        return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > attack_range || !PAI->GetController()->IsAutoAttackEnabled());
+
+        if ((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > attack_range)
+        {
+            m_pathFindDisengage += 1;
+            return false;
+        }
+        else if (!PAI->GetController()->IsAutoAttackEnabled())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     else
     {

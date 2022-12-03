@@ -961,6 +961,7 @@ enum class Mod
     RAMPART_MAGIC_SHIELD = 1167, // Rampart Magic Shield
     CRITHITRATE_SLOT     = 1168, // CRITHITRATE for slot
     ATT_SLOT             = 1169, // ATT for slot
+    UDMG                 = 1170, // Uncapped dmg taken (all types)
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
