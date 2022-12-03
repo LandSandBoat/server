@@ -90,18 +90,10 @@ def check_variable_names(line):
     for match in re.finditer("local (?=[^(ID)])(?=[A-Z]){1,}", line):
         show_error("Capitalised local name")
 
-    # local : 'local ' (with a space)
-    # .*    : Any number of any character
-    # _     : Underscore
-    # .*    : Any number of any character
-    #  =    : ' =' (variable assignment)
-
     if "local " in line and " =" in line:
         line = line.split(" =", 1)[0]
-        result = re.search("local (.*) =", line)
-        if result:
-            line = result.group(1)
-            line = line.strip()
+        line = line.replace('local','').strip()
+        if line != '':
             for part in line.split(','):
                 part = part.strip()
                 if len(part) > 1 and '_' in part:
@@ -218,23 +210,28 @@ def check_multiline_condition_format(line):
 
 
 ### TODO:
-# If condition has == QUEST_COMPLETED, prefer hasCompletedQuest
 # If contains trade:getItemCount, prefer npcUtil function
 # No useless parens (paren without and|or in entire section)
 # Parentheses must have and|or in conditions
 # Only 1 space before and after comparators
 # No empty in-line comments
 
-def run_style_check():
+def run_style_check(fileTarget = None):
     global counter
     global lines
     global errcount
+    global filename
+
+    if fileTarget:
+        filename = fileTarget
 
     errcount = 0
     with open(filename, 'r') as f:
-        counter          = 0
-        lines            = f.readlines()
-        in_block_comment = False
+        counter             = 0
+        lines               = f.readlines()
+        in_block_comment    = False
+        in_condition        = False
+        multiline_condition = ""
 
         for line in lines:
             counter = counter + 1
@@ -300,6 +297,21 @@ def run_style_check():
                         print("")
                         errcount += 1
 
+                # Multiline conditions
+                else:
+                    in_condition = True
+
+            if in_condition:
+                multiline_condition += code_line
+
+                # Do single line rules for condition here
+
+                if contains_word('then')(code_line):
+                    # Do final check for completed condition here (mirror single line)
+
+                    in_condition        = False
+                    multiline_condition = ""
+
         # If you want to modify the files during the checks, write your changed lines to the appropriate
         # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
         #
@@ -314,6 +326,8 @@ total_errors = 0
 if target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
         total_errors += run_style_check()
+elif target == 'test':
+    run_style_check('./tools/ci/tests/stylecheck.lua')
 else:
     run_style_check(target)
 
