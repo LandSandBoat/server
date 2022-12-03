@@ -109,8 +109,6 @@ mission.sections =
                         return mission:progressEvent(100)
                     elseif mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(164)
-                    else
-                        return mission:messageSpecial(altaieuID.text.IMPERVIOUS_FIELD_BLOCKS)
                     end
                 end,
             },

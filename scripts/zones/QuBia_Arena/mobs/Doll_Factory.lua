@@ -7,9 +7,15 @@ local entity = {}
 
 local function immunity(mob, id)
     if GetMobByID(id):isSpawned() then
-        mob:setMod(xi.mod.DMG, -10000)
+        mob:setMod(xi.mod.UDMGPHYS,   -10000)
+        mob:setMod(xi.mod.UDMGMAGIC,  -10000)
+        mob:setMod(xi.mod.UDMGRANGE,  -10000)
+        mob:setMod(xi.mod.UDMGBREATH, -10000)
     else
-        mob:setMod(xi.mod.DMG, 0)
+        mob:setMod(xi.mod.UDMGPHYS,   0)
+        mob:setMod(xi.mod.UDMGMAGIC,  0)
+        mob:setMod(xi.mod.UDMGRANGE,  0)
+        mob:setMod(xi.mod.UDMGBREATH, 0)
     end
 end
 
@@ -40,7 +46,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob)
-    mob:setLocalVar("timer", os.time() + math.random(12,20))
+    mob:setLocalVar("timer", os.time() + math.random(12, 20))
 end
 
 entity.onMobFight = function(mob, target)
@@ -60,7 +66,7 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getLocalVar("dollAlive") == 1 and not GetMobByID(id):isSpawned() then
-        mob:setLocalVar("timer", os.time() + math.random(1,2))
+        mob:setLocalVar("timer", os.time() + math.random(1, 2))
         mob:setLocalVar("dollAlive", 0)
         mob:setLocalVar("currDoll", mob:getLocalVar("currDoll") + 1)
     end

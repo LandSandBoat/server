@@ -11,7 +11,11 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if target:getCurrentRegion() == xi.region.TAVNAZIANARCH then
+    -- TODO: Make separate mob skill list for CoP Hecteyes
+    if
+        target:getCurrentRegion() == xi.region.TAVNAZIANARCH or
+        mob:getPool() == 3693 -- Sobbing Eyes
+    then
         return 0
     end
 
