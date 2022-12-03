@@ -18,7 +18,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
     else
-        local playerLevel = player:getMainLvl();
+        local playerLevel = player:getMainLvl()
         local petId = player:getWeaponSubSkillType(xi.slot.AMMO)
         local petLevels = {}
         petLevels[21] = 23 -- SHEEP FAMILIAR
@@ -52,8 +52,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         if playerLevel < petLevels[petId] then return xi.msg.basic.NO_JUG_PET_ITEM, 0 end
         return 0, 0
     end
-
-    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)

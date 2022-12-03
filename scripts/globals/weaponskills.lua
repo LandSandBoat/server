@@ -1193,6 +1193,16 @@ xi.weaponskills.fSTR2 = function(atk_str, def_vit, weapon_rank)
     return fSTR2
 end
 
+xi.weaponskills.generatePdif = function(cratiomin, cratiomax, melee)
+    local pdif = math.random(cratiomin * 1000, cratiomax * 1000) / 1000
+
+    if melee then
+        pdif = pdif * (math.random(100, 105) / 100)
+    end
+
+    return pdif
+end
+
 xi.weaponskills.getStepAnimation = function(skill)
     if skill <= 1 then
         return 15

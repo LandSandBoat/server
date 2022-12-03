@@ -22,8 +22,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     elseif pet:getLocalVar("ReceivedFamiliar") == 1 then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
-    else
-        return 0, 0
     end
 
     pet:setLocalVar("ReceivedFamiliar", 1)
