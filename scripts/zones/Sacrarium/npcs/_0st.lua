@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     if player:getZPos() < 50 then
         npc:openDoor()
-        GetNPCByID(16892140):openDoor()
+        GetNPCByID(npc:getID() + 1):openDoor()
     else
         player:messageSpecial(ID.text.CANNOT_OPEN_SIDE)
     end
