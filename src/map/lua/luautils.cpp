@@ -4642,6 +4642,58 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     *  Called on Server Start                                               *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnServerStart()
+    {
+        TracyZoneScoped;
+
+        auto onServerStart = lua["xi"]["server"]["onServerStart"];
+        if (!onServerStart.valid())
+        {
+            ShowWarning("luautils::onServerStart");
+            return;
+        }
+
+        auto result = onServerStart();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onServerStart: %s", err.what());
+            return;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Called on JST Midnight                                               *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnJSTMidnight()
+    {
+        TracyZoneScoped;
+
+        auto onJSTMidnight = lua["xi"]["server"]["onJSTMidnight"];
+        if (!onJSTMidnight.valid())
+        {
+            ShowWarning("luautils::onJSTMidnight");
+            return;
+        }
+
+        auto result = onJSTMidnight();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onJSTMidnight: %s", err.what());
+            return;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Called on TimeServer Tick (every 2400ms)                             *
      *                                                                       *
      ************************************************************************/

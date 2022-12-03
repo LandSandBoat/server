@@ -214,6 +214,8 @@ namespace luautils
     void  OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
 
+    void OnServerStart();
+    void OnJSTMidnight();
     void OnTimeServerTick();
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                                // triggered when user targets npc and clicks action button
