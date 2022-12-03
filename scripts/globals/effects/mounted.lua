@@ -11,10 +11,10 @@ effectObject.onEffectGain = function(target, effect)
     -- TODO: This isn't quite right. The IDs we use for mounts vs what we use for power etc.
     -- seem to be off-by-one.
     if effect:getPower() < 2 then
-        target:ChangeMusic(4, 212)
+        target:changeMusic(4, 212)
         target:setAnimation(xi.anim.CHOCOBO)
     else
-        target:ChangeMusic(4, 84)
+        target:changeMusic(4, 84)
         target:setAnimation(xi.anim.MOUNT)
     end
 end
