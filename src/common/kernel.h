@@ -26,17 +26,11 @@
 #include "console_service.h"
 #include "settings.h"
 
-extern int    arg_c;
-extern char** arg_v;
-
 extern std::atomic<bool> gRunFlag;
-
-extern char* SERVER_NAME;
-extern char  SERVER_TYPE;
 
 extern void  log_init(int, char**);
 extern int32 do_init(int32, char**);
-extern void  set_server_type(void);
+extern void  set_socket_type(void);
 extern void  do_abort(void);
 extern void  do_final(int);
 
