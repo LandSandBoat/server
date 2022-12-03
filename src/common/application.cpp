@@ -28,7 +28,7 @@
 #include <windows.h>
 #endif
 
-Application::Application(std::string const& serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
+Application::Application(std::string serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
 : m_ServerName(serverName)
 , m_IsRunning(true)
 , gArgParser(std::move(pArgParser))
