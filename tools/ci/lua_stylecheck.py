@@ -1,335 +1,336 @@
+# ===========================================================================
+#
+#  Copyright (c) 2022 LandSandBoat Dev Teams
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see http://www.gnu.org/licenses/
+#
+# ===========================================================================
+
 import glob
 import re
 import regex
 import sys
 
-# Global Variables
-# TODO: Make this more elegant, but allow not having to pass this between all functions
-lines        = []
-counter      = 0
-filename     = ""
-total_errors = 0
-errcount     = 0
-
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
-def show_error(error_string):
-    global lines
-    global counter
-    global filename
-    global errcount
+class LuaStyleCheck:
+    def __init__(self, input_file):
+        self.filename = input_file
+        self.run_style_check()
 
-    print(f"{error_string}: {filename}:{counter}")
-    print(f"{lines[counter - 1].strip()}                              <-- HERE")
-    print("")
+    def error(self, error_string):
+        """Displays error_string along with filename and line.  Increments errcount for the class."""
 
-    errcount += 1
+        print(f"{error_string}: {self.filename}:{self.counter}")
+        print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+        print("")
 
-def check_table_formatting(line):
-    """Check for proper table styling:
-    Multi-line tables should use Allman braces, and all braces should be have at least one space or newline
-    prior to any nested table definition.
+        self.errcount += 1
 
-    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#allman-braces
-    """
-    # [ ]{0,} : Any number of spaces
-    # =       : = character
-    # [ ]{0,} : Any number of spaces
-    # \{      : { character
-    # [ ]{0,} : Any number of spaces
-    # \n      : newline character
+    def check_table_formatting(self, line):
+        """Check for proper table styling:
+        Multi-line tables should use Allman braces, and all braces should be have at least one space or newline
+        prior to any nested table definition.
 
-    for _ in re.finditer("[ ]{0,}=[ ]{0,}\{[ ]{0,}\n", line):
-        show_error("Incorrectly defined table")
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#allman-braces
+        """
+        # [ ]{0,} : Any number of spaces
+        # =       : = character
+        # [ ]{0,} : Any number of spaces
+        # \{      : { character
+        # [ ]{0,} : Any number of spaces
+        # \n      : newline character
 
-    # \{         : Opening curly brace
-    # [^ ^\n^\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
+        for _ in re.finditer("[ ]{0,}=[ ]{0,}\{[ ]{0,}\n", line):
+            self.error("Incorrectly defined table")
 
-    for _ in re.finditer("\{[^ ^\n^\}]", line):
-        show_error("Table opened without an appropriate following space or newline")
+        # \{         : Opening curly brace
+        # [^ ^\n^\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
 
-    # [^ ^\n^\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
-    # \}         : Closing curly brace
+        for _ in re.finditer("\{[^ ^\n^\}]", line):
+            self.error("Table opened without an appropriate following space or newline")
 
-    for _ in re.finditer("[^ ^\n^\{]\}", line):
-        show_error("Table closed without an appropriate preceding space or newline")
+        # [^ ^\n^\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
+        # \}         : Closing curly brace
 
-def check_parameter_padding(line):
-    """Require padding between all parameters
-    All function parameters and tabled data should contain at least one space following every
-    comma.
+        for _ in re.finditer("[^ ^\n^\{]\}", line):
+            self.error("Table closed without an appropriate preceding space or newline")
 
-    See: TBD
-    """
-    # ,[^ \n] : Any comma that does not have space or newline following
+    def check_parameter_padding(self, line):
+        """Require padding between all parameters
+        All function parameters and tabled data should contain at least one space following every
+        comma.
 
-    for _ in re.finditer(",[^ \n]", line):
-        show_error("Multiple parameters used without an appropriate following space or newline")
+        See: TBD
+        """
+        # ,[^ \n] : Any comma that does not have space or newline following
 
-def check_semicolon(line):
-    """No semi-colons should be used in Lua scripts.
+        for _ in re.finditer(",[^ \n]", line):
+            self.error("Multiple parameters used without an appropriate following space or newline")
 
-    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
-    """
-    # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
+    def check_semicolon(self, line):
+        """No semi-colons should be used in Lua scripts.
 
-    for _ in re.finditer(".*\;$", line):
-        show_error("Semicolon detected at end of line")
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
+        """
+        # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
 
-def check_variable_names(line):
-    """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
+        for _ in re.finditer(".*\;$", line):
+            self.error("Semicolon detected at end of line")
 
-    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#naming-and-misc
-    """
-    # local     : 'local ' (with a space)
-    # (?=       : Positive lookahead
-    # [^(ID)])  : A token that is NOT 'ID'
-    # (?=[A-Z]) : A token that starts with a capital letter
+    def check_variable_names(self, line):
+        """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
 
-    for match in re.finditer("local (?=[^(ID)])(?=[A-Z]){1,}", line):
-        show_error("Capitalised local name")
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#naming-and-misc
+        """
+        # local     : 'local ' (with a space)
+        # (?=       : Positive lookahead
+        # [^(ID)])  : A token that is NOT 'ID'
+        # (?=[A-Z]) : A token that starts with a capital letter
 
-    if "local " in line and " =" in line:
-        line = line.split(" =", 1)[0]
-        line = line.replace('local','').strip()
-        if line != '':
-            for part in line.split(','):
-                part = part.strip()
-                if len(part) > 1 and '_' in part:
-                    show_error("Underscore in variable name")
+        for match in re.finditer("local (?=[^(ID)])(?=[A-Z]){1,}", line):
+            self.error("Capitalised local name")
 
-# Require four-space intervals for indents
-def check_indentation(line):
-    """Indentation should be multiples of four spaces.
+        if "local " in line and " =" in line:
+            line = line.split(" =", 1)[0]
+            line = line.replace('local','').strip()
+            if line != '':
+                for part in line.split(','):
+                    part = part.strip()
+                    if len(part) > 1 and '_' in part:
+                        self.error("Underscore in variable name")
 
-    See: TBD
-    """
-    if (len(line) - len(line.lstrip(' '))) % 4 != 0:
-        show_error("Indentation must be multiples of 4 spaces")
+    def check_indentation(self, line):
+        """Indentation should be multiples of four spaces.
 
-def check_operator_padding(line):
-    """All operators and comparators (>, <, >=, <=, ==, +, *, ~=, /, etc) should contain one space before and
-    after their usage.
+        See: TBD
+        """
+        if (len(line) - len(line.lstrip(' '))) % 4 != 0:
+            self.error("Indentation must be multiples of 4 spaces")
 
-    See: TBD
-    """
-    # [^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
+    def check_operator_padding(self, line):
+        """All operators and comparators (>, <, >=, <=, ==, +, *, ~=, /, etc) should contain one space before and
+        after their usage.
 
-    stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
-    for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", stripped_line):
-        show_error("Operator or comparator without padding detected at end of line")
+        See: TBD
+        """
+        # [^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
 
-def check_parentheses_padding(line):
-    """Parentheses should have padding prior to opening and after closing, but must not contain padding after
-    the open parenthesis, or prior to closing.
+        stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
+        for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", stripped_line):
+            self.error("Operator or comparator without padding detected at end of line")
 
-    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-excess-whitespace-inside-of-parentheses-or-solely-for-alignment
-    """
+    def check_parentheses_padding(self, line):
+        """Parentheses should have padding prior to opening and after closing, but must not contain padding after
+        the open parenthesis, or prior to closing.
 
-    if len(re.findall("\([ ]| [\)]", line)) > 0:
-        if not line.lstrip(' ')[0] == '(' and not line.lstrip(' ')[0] == ')': # Ignore large blocks ending or opening
-            show_error("No excess whitespace inside of parentheses or solely for alignment.")
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-excess-whitespace-inside-of-parentheses-or-solely-for-alignment
+        """
 
-def check_newline_after_end(line):
-    """An empty newline is required after end if the code on the following line is at the same indentation level.
+        if len(re.findall("\([ ]| [\)]", line)) > 0:
+            if not line.lstrip(' ')[0] == '(' and not line.lstrip(' ')[0] == ')': # Ignore large blocks ending or opening
+                self.error("No excess whitespace inside of parentheses or solely for alignment.")
 
-    See: TBD
-    """
-    num_lines = len(lines)
+    def check_newline_after_end(self, line):
+        """An empty newline is required after end if the code on the following line is at the same indentation level.
 
-    if counter < num_lines and contains_word('end')(line):
-        current_indent = len(line) - len(line.lstrip(' '))
-        next_indent    = len(lines[counter]) - len(lines[counter].lstrip(' '))
+        See: TBD
+        """
+        num_lines = len(self.lines)
 
-        if current_indent == next_indent and lines[counter].strip() != "":
-            show_error("Newline required after end with code following on same level")
+        if self.counter < num_lines and contains_word('end')(line):
+            current_indent = len(line) - len(line.lstrip(' '))
+            next_indent    = len(self.lines[self.counter]) - len(self.lines[self.counter].lstrip(' '))
 
-def check_no_newline_after_function_decl(line):
-    """Function declarations should not have an empty newline following them.
+            if current_indent == next_indent and self.lines[self.counter].strip() != "":
+                self.error("Newline required after end with code following on same level")
 
-    See: TBD
-    """
+    def check_no_newline_after_function_decl(self, line):
+        """Function declarations should not have an empty newline following them.
 
-    if 'function' in line and lines[counter].strip() == '':
-        show_error("No newlines after function declaration")
+        See: TBD
+        """
 
-def check_no_newline_before_end(line):
-    """`end` should not have a newline preceding it.
+        if 'function' in line and self.lines[self.counter].strip() == '':
+            self.error("No newlines after function declaration")
 
-    See: TBD
-    """
+    def check_no_newline_before_end(self, line):
+        """`end` should not have a newline preceding it.
 
-    if contains_word('end')(line) and lines[counter - 2].strip() == '':
-        show_error("No newlines before end statement")
+        See: TBD
+        """
 
-def check_no_single_line_functions(line):
-    """Functions should not begin and end on a single line.
+        if contains_word('end')(line) and self.lines[self.counter - 2].strip() == '':
+            self.error("No newlines before end statement")
 
-    See: TBD
-    """
+    def check_no_single_line_functions(self, line):
+        """Functions should not begin and end on a single line.
 
-    if contains_word('function')(line) and contains_word('end')(line):
-        show_error("Function begins and ends on same line")
+        See: TBD
+        """
 
-def check_no_single_line_conditions(line):
-    """Conditions should not begin and end on a single line.
+        if contains_word('function')(line) and contains_word('end')(line):
+            self.error("Function begins and ends on same line")
 
-    See: TBD
-    """
+    def check_no_single_line_conditions(self, line):
+        """Conditions should not begin and end on a single line.
 
-    if contains_word('if')(line) and contains_word('end')(line):
-        show_error("Condition begins and ends on a single line")
+        See: TBD
+        """
 
-def check_no_function_decl_padding(line):
-    """No padding should occur between function keyword and opening parenthesis.
+        if contains_word('if')(line) and contains_word('end')(line):
+            self.error("Condition begins and ends on a single line")
 
-    See: TBD
-    """
+    def check_no_function_decl_padding(self, line):
+        """No padding should occur between function keyword and opening parenthesis.
 
-    if re.search("function\s{1,}\(", line):
-        show_error("Padding detected between function and opening parenthesis")
+        See: TBD
+        """
 
-def check_multiline_condition_format(line):
-    """Multi-line conditional blocks should contain if/elseif and then on their own lines,
-    with conditions indented between them.
+        if re.search("function\s{1,}\(", line):
+            self.error("Padding detected between function and opening parenthesis")
 
-    See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#formatting-conditional-blocks
-    """
+    def check_multiline_condition_format(self, line):
+        """Multi-line conditional blocks should contain if/elseif and then on their own lines,
+        with conditions indented between them.
 
-    stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
-    if contains_word('if')(stripped_line) or contains_word('elseif')(stripped_line):
-        condition_start = stripped_line.replace('elseif','').replace('if','').strip()
-        if not 'then' in condition_start and condition_start != '':
-            show_error("Invalid multiline conditional format")
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#formatting-conditional-blocks
+        """
 
-    if contains_word('then')(stripped_line):
-        condition_end = stripped_line.replace('then','').strip()
-        if not 'if' in condition_end and condition_end != '':
-            show_error("Invalid multiline conditional format")
+        stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
+        if contains_word('if')(stripped_line) or contains_word('elseif')(stripped_line):
+            condition_start = stripped_line.replace('elseif','').replace('if','').strip()
+            if not 'then' in condition_start and condition_start != '':
+                self.error("Invalid multiline conditional format")
+
+        if contains_word('then')(stripped_line):
+            condition_end = stripped_line.replace('then','').strip()
+            if not 'if' in condition_end and condition_end != '':
+                self.error("Invalid multiline conditional format")
+
+    def run_style_check(self):
+        if self.filename == None:
+            print("ERROR: No filename provided to LuaStyleCheck class.")
+            return 0
+
+        with open(self.filename, 'r') as f:
+            self.lines          = f.readlines()
+            in_block_comment    = False
+            in_condition        = False
+            full_condition      = ""
+            next_indent_level   = 0
+
+            for line in self.lines:
+                self.counter = self.counter + 1
+
+                # Ignore Block Comments
+                if "--[[" in line:
+                    in_block_comment = True
+
+                if "]]" in line:
+                    in_block_comment = False
+
+                if in_block_comment:
+                    continue
+
+                # Remove in-line comments
+                code_line = re.sub("--.*?(\r\n?|\n)", "", line)
+
+                # Checks that apply to all lines
+                self.check_table_formatting(code_line)
+                self.check_parameter_padding(code_line)
+                self.check_variable_names(code_line)
+                self.check_semicolon(code_line)
+                self.check_indentation(code_line)
+                self.check_operator_padding(code_line)
+                self.check_parentheses_padding(code_line)
+                self.check_no_single_line_functions(code_line)
+                self.check_no_single_line_conditions(code_line)
+                self.check_newline_after_end(code_line)
+                self.check_no_newline_after_function_decl(code_line)
+                self.check_no_newline_before_end(code_line)
+                self.check_no_function_decl_padding(code_line)
+
+                # Multiline conditionals should not have data in if, elseif, or then
+                self.check_multiline_condition_format(code_line)
+
+                # Condition blocks/lines should not have outer parentheses
+                # Find all strings contained in parentheses: \((([^\)\(]+)|(?R))*+\)
+                # If nothing is left on the line after removing, then the string breaks rules
+                # TODO: If we have a string inside parentheses, make sure it has and/or in the string
+
+                if contains_word('if')(code_line) or contains_word('elseif')(code_line) or in_condition:
+                    full_condition += code_line
+
+                    if contains_word('then')(code_line):
+                        condition_str = full_condition.replace('elseif','').replace('if','').replace('then','').strip()
+                        paren_regex = regex.compile("\((([^\)\(]+)|(?R))*+\)", re.S)
+                        removed_paren_str = regex.sub(paren_regex, "", condition_str)
+
+                        if removed_paren_str == "":
+                            self.error("Outer parentheses should be removed in condition")
+
+                        if len(re.findall("== true|== false|~= true|~= false", condition_str)) > 0:
+                            self.error("Boolean with explicit value check")
+
+                        if not in_condition and len(re.findall(" and | or ", condition_str)) > 0 and len(condition_str) > 72:
+                            self.error("Multiline conditional format required")
+
+                        in_condition   = False
+                        full_condition = ""
+
+                    # Multiline conditions
+                    else:
+                        in_condition = True
+
+                    # Do single line rules for condition here
+                    if code_line.startswith('and') or code_line.startswith('or'):
+                        self.error('Multiline conditions should not start with and|or')
+
+                    if code_line.endswith('not'):
+                        self.error('Multiline conditions should not end with not')
+                
+
+            # If you want to modify the files during the checks, write your changed lines to the appropriate
+            # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
+            #
+            # f.seek(0)
+            # f.writelines(lines)
+
+    lines        = []
+    counter      = 0
+    filename     = ""
+    errcount     = 0
 
 
 ### TODO:
-# If contains trade:getItemCount, prefer npcUtil function
 # No useless parens (paren without and|or in entire section)
 # Parentheses must have and|or in conditions
 # Only 1 space before and after comparators
 # No empty in-line comments
-
-def run_style_check(fileTarget = None):
-    global counter
-    global lines
-    global errcount
-    global filename
-
-    if fileTarget:
-        filename = fileTarget
-
-    errcount = 0
-    with open(filename, 'r') as f:
-        counter             = 0
-        lines               = f.readlines()
-        in_block_comment    = False
-        in_condition        = False
-        multiline_condition = ""
-
-        for line in lines:
-            counter = counter + 1
-
-            # Ignore Block Comments
-            if "--[[" in line:
-                in_block_comment = True
-
-            if "]]" in line:
-                in_block_comment = False
-
-            if in_block_comment:
-                continue
-
-            # Remove in-line comments
-            code_line = re.sub("--.*?(\r\n?|\n)", "", line)
-
-            # Checks that apply to all lines
-            check_table_formatting(code_line)
-            check_parameter_padding(code_line)
-            check_variable_names(code_line)
-            check_semicolon(code_line)
-            check_indentation(code_line)
-            check_operator_padding(code_line)
-            check_parentheses_padding(code_line)
-            check_no_single_line_functions(code_line)
-            check_no_single_line_conditions(code_line)
-            check_newline_after_end(code_line)
-            check_no_newline_after_function_decl(code_line)
-            check_no_newline_before_end(code_line)
-            check_no_function_decl_padding(code_line)
-
-            # Multiline conditionals should not have data in if, elseif, or then
-            check_multiline_condition_format(code_line)
-
-            # Condition blocks/lines should not have outer parentheses
-            # Find all strings contained in parentheses: \((([^\)\(]+)|(?R))*+\)
-            # If nothing is left on the line after removing, then the string breaks rules
-            # TODO: If we have a string inside parentheses, make sure it has and/or in the string
-
-            if contains_word('if')(code_line) or contains_word('elseif')(code_line):
-                # Single line conditions TODO: Slice between if and then; malformed are ignored currently
-                if contains_word('then')(code_line):
-                    condition_str = code_line.replace('elseif','').replace('if','').replace('then','').strip()
-                    paren_regex = regex.compile("\((([^\)\(]+)|(?R))*+\)", re.S)
-                    removed_paren_str = regex.sub(paren_regex, "", condition_str)
-
-                    if removed_paren_str == "":
-                        print(f"Outer parentheses should be removed in condition: {filename}:{counter}")
-                        print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                        print("")
-                        errcount += 1
-
-                    if len(re.findall(" and | or ", condition_str)) > 0 and len(condition_str) > 72:
-                        print(f"Multiline conditional format required: {filename}:{counter}")
-                        print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                        print("")
-                        errcount += 1
-
-                    if len(re.findall("== true|== false|~= true|~= false", condition_str)) > 0:
-                        print(f"Boolean with explicit value check: {filename}:{counter}")
-                        print(f"{lines[counter - 1].strip()}                              <-- HERE")
-                        print("")
-                        errcount += 1
-
-                # Multiline conditions
-                else:
-                    in_condition = True
-
-            if in_condition:
-                multiline_condition += code_line
-
-                # Do single line rules for condition here
-
-                if contains_word('then')(code_line):
-                    # Do final check for completed condition here (mirror single line)
-
-                    in_condition        = False
-                    multiline_condition = ""
-
-        # If you want to modify the files during the checks, write your changed lines to the appropriate
-        # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
-        #
-        # f.seek(0)
-        # f.writelines(lines)
-
-        return errcount
 
 target = sys.argv[1]
 
 total_errors = 0
 if target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
-        total_errors += run_style_check()
+        total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
-    run_style_check('./tools/ci/tests/stylecheck.lua')
+    total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua').errcount
 else:
-    run_style_check(target)
+    total_errors = LuaStyleCheck(target).errcount
 
 if total_errors > 0:
-    print("Lua styling errors: " + str(total_errors))
+    print(f"Lua styling errors: {total_errors}")
