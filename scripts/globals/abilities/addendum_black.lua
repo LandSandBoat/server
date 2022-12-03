@@ -13,9 +13,8 @@
 -- 70      |4       |1:00 minute
 -- 90      |5       |48 seconds
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -33,7 +32,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     player:delStatusEffectSilent(xi.effect.DARK_ARTS)
 
     local effectbonus = player:getMod(xi.mod.DARK_ARTS_EFFECT)
-    local helixbonus = 0
+    local helixbonus  = 0
+
     if player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20 then
         helixbonus = math.floor(player:getMainLvl() / 4)
     end

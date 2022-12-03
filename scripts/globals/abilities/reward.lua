@@ -5,15 +5,15 @@
 -- Recast Time: 1:30
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/pets")
 require("scripts/globals/msg")
+require("scripts/globals/pets")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     local pet = player:getPet()
+
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB then
@@ -41,20 +41,17 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
-
     -- 1st need to get the pet food is equipped in the range slot.
-    local rangeObj = player:getEquipID(xi.slot.AMMO)
-
-    local minimumHealing = 0
-    local totalHealing = 0
-    local playerMnd = player:getStat(xi.mod.MND)
+    local rangeObj         = player:getEquipID(xi.slot.AMMO)
+    local minimumHealing   = 0
+    local totalHealing     = 0
+    local playerMnd        = player:getStat(xi.mod.MND)
     local rewardHealingMod = player:getMod(xi.mod.REWARD_HP_BONUS)
-    local regenAmount = 1 -- 1 is the minimum.
-    local regenTime = 180 -- 3 minutes
-
-    local pet = player:getPet()
-    local petCurrentHP = pet:getHP()
-    local petMaxHP = pet:getMaxHP()
+    local regenAmount      = 1 -- 1 is the minimum.
+    local regenTime        = 180 -- 3 minutes
+    local pet              = player:getPet()
+    local petCurrentHP     = pet:getHP()
+    local petMaxHP         = pet:getMaxHP()
 
     -- Need to start to calculate the HP to restore to the pet.
     -- Please note that I used this as base for the calculations:
@@ -63,62 +60,44 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     switch (rangeObj) : caseof {
         [17016] = function (x) -- pet food alpha biscuit
             minimumHealing = 20
-            if xi.settings.main.ENABLE_ABYSSEA == 1 then
-                minimumHealing = 50
-            end
-            regenAmount = 1
-            totalHealing = math.floor(minimumHealing + 2 * (playerMnd - 10))
-            end,
+            regenAmount    = 1
+            totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 10))
+        end,
         [17017] = function (x) -- pet food beta biscuit
             minimumHealing = 50
-            if xi.settings.main.ENABLE_ABYSSEA == 1 then
-                minimumHealing = 180
-            end
-            regenAmount = 3
-            totalHealing = math.floor(minimumHealing + 1 * (playerMnd - 33))
-            end,
+            regenAmount    = 3
+            totalHealing   = math.floor(minimumHealing + 1 * (playerMnd - 33))
+        end,
         [17018] = function (x) -- pet food gamma biscuit
             minimumHealing = 100
-            if xi.settings.main.ENABLE_ABYSSEA == 1 then
-                minimumHealing = 300
-            end
-            regenAmount = 5
-            totalHealing = math.floor(minimumHealing + 1 * (playerMnd - 35)) -- TO BE VERIFIED.
-            end,
+            regenAmount    = 5
+            totalHealing   = math.floor(minimumHealing + 1 * (playerMnd - 35)) -- TO BE VERIFIED.
+        end,
         [17019] = function (x) -- pet food delta biscuit
             minimumHealing = 150
-            if xi.settings.main.ENABLE_ABYSSEA == 1 then
-                minimumHealing = 530
-            end
-            regenAmount = 8
-            totalHealing = math.floor(minimumHealing + 2 * (playerMnd - 40)) -- TO BE VERIFIED.
-            end,
+            regenAmount    = 8
+            totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 40)) -- TO BE VERIFIED.
+        end,
         [17020] = function (x) -- pet food epsilon biscuit
             minimumHealing = 300
-            if xi.settings.main.ENABLE_ABYSSEA == 1 then
-                minimumHealing = 750
-            end
-            regenAmount = 11
-            totalHealing = math.floor(minimumHealing + 2 * (playerMnd - 45))
-            end,
+            regenAmount    = 11
+            totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 45))
+        end,
         [17021] = function (x) -- pet food zeta biscuit
             minimumHealing = 350
-            if xi.settings.main.ENABLE_ABYSSEA == 1 then
-                minimumHealing = 900
-            end
-            regenAmount = 14
-            totalHealing = math.floor(minimumHealing + 3 * (playerMnd - 45))
-            end,
+            regenAmount    = 14
+            totalHealing   = math.floor(minimumHealing + 3 * (playerMnd - 45))
+        end,
         [17022] = function (x) -- pet food eta biscuit
             minimumHealing = 1200
-            regenAmount = 17
-            totalHealing = math.floor(minimumHealing + 4 * (playerMnd - 50))
-            end,
+            regenAmount    = 17
+            totalHealing   = math.floor(minimumHealing + 4 * (playerMnd - 50))
+        end,
         [17023] = function (x) -- pet food theta biscuit
             minimumHealing = 1600
-            regenAmount = 20
-            totalHealing = math.floor(minimumHealing + 4 * (playerMnd - 55))
-            end,
+            regenAmount    = 20
+            totalHealing   = math.floor(minimumHealing + 4 * (playerMnd - 55))
+        end,
     }
 
     -- Now calculating the bonus based on gear.
@@ -130,7 +109,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             pet:delStatusEffect(xi.effect.PARALYSIS)
             pet:delStatusEffect(xi.effect.POISON)
             pet:delStatusEffect(xi.effect.BLINDNESS)
-            end,
+        end,
         [14481] = function (x) -- beast jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
@@ -139,13 +118,13 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             pet:delStatusEffect(xi.effect.WEIGHT)
             pet:delStatusEffect(xi.effect.SLOW)
             pet:delStatusEffect(xi.effect.SILENCE)
-            end,
+        end,
         [15095] = function (x) -- monster jackcoat
             -- This will remove Weight, Slow and Silence from the pet.
             pet:delStatusEffect(xi.effect.WEIGHT)
             pet:delStatusEffect(xi.effect.SLOW)
             pet:delStatusEffect(xi.effect.SILENCE)
-            end,
+        end,
         [14508] = function (x) -- monster jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
@@ -154,7 +133,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             pet:delStatusEffect(xi.effect.WEIGHT)
             pet:delStatusEffect(xi.effect.SLOW)
             pet:delStatusEffect(xi.effect.SILENCE)
-            end,
+        end,
     }
 
     -- Adding bonus to the total to heal.

@@ -13,10 +13,9 @@
 -- Tough            |1.5 Minutes
 -- Very Tough       |1-20 seconds
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/pets")
 require("scripts/globals/msg")
+require("scripts/globals/pets")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -25,9 +24,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif target:getMaster() ~= nil and target:getMaster():isPC() then
         return xi.msg.basic.THAT_SOMEONES_PET, 0
-    else
-        return 0, 0
     end
+
+    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)

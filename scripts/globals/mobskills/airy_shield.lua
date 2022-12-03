@@ -7,7 +7,6 @@
 -- Range: Self
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
@@ -17,11 +16,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.ARROW_SHIELD
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ARROW_SHIELD, 1, 0, 60))
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, 60))
-
-    return typeEffect
+    return xi.effect.ARROW_SHIELD
 end
 
 return mobskillObject

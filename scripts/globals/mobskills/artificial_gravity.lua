@@ -3,8 +3,8 @@
 -- Always single gear
 -- Damage plaus Weight effect
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
+require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -20,6 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 15, 0, 60)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
+
     return dmg
 end
 

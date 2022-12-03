@@ -39,7 +39,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local id = player:getEquipID(xi.slot.AMMO)
+    local id  = player:getEquipID(xi.slot.AMMO)
     local pet = player:getPet()
 
     local function removeStatus()
@@ -62,12 +62,15 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     local toremove = idStrengths[id] or 1
-    local removed = 0
+    local removed  = 0
 
     repeat
-        if not removeStatus() then break end
+        if not removeStatus() then
+            break
+        end
+
         toremove = toremove - 1
-        removed = removed + 1
+        removed  = removed + 1
     until (toremove <= 0)
 
     player:removeAmmo()

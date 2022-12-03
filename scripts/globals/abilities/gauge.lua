@@ -5,19 +5,17 @@
 -- Recast Time: 0:30
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
-    else
-        return 0, 0
     end
+
+    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)

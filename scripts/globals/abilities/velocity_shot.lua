@@ -5,7 +5,6 @@
 -- Recast Time: 5:00 minutes
 -- Duration: 2 hours
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}

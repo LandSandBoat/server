@@ -5,8 +5,8 @@
 -- Recast Time: 5:00
 -- Duration: Dependent on jug pet used.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -18,7 +18,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
     else
-        local playerLevel = player:getMainLvl();
+        local playerLevel = player:getMainLvl()
         local petId = player:getWeaponSubSkillType(xi.slot.AMMO)
         local petLevels = {}
         petLevels[21] = 23 -- SHEEP FAMILIAR

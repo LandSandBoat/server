@@ -5,9 +5,8 @@
 -- Recast Time: 10:00
 -- Duration: 1:00, or until the next blue magic spell is cast.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

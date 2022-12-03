@@ -1,3 +1,4 @@
+-----------------------------------
 -- Contains all common weaponskill calculations including but not limited to:
 -- fSTR
 -- Alpha
@@ -8,6 +9,7 @@
 -- applications of accuracy mods ('Accuracy varies with TP.')
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
+-----------------------------------
 require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
@@ -1189,6 +1191,16 @@ xi.weaponskills.fSTR2 = function(atk_str, def_vit, weapon_rank)
     fSTR2 = utils.clamp(fSTR2, lower_cap, (weapon_rank + 8) * 2)
 
     return fSTR2
+end
+
+xi.weaponskills.generatePdif = function(cratiomin, cratiomax, melee)
+    local pdif = math.random(cratiomin * 1000, cratiomax * 1000) / 1000
+
+    if melee then
+        pdif = pdif * (math.random(100, 105) / 100)
+    end
+
+    return pdif
 end
 
 xi.weaponskills.getStepAnimation = function(skill)

@@ -30,18 +30,17 @@ end
 abilityObject.onUseAbility = function(player, target, ability, action)
     local params = {}
     params.includemab = true
-    params.element   = xi.magic.ele.FIRE
-    params.skillType = xi.skill.NONE
-    params.maccBonus = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
 
     local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
-    dmg = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
-    dmg  = xi.magic.addBonusesAbility(player, xi.magic.ele.FIRE, target, dmg, params)
-    dmg = dmg * xi.magic.applyAbilityResistance(player, target, params)
-    dmg = xi.magic.adjustForTarget(target, dmg, xi.magic.ele.FIRE)
+    dmg       = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
+    dmg       = xi.magic.addBonusesAbility(player, xi.magic.ele.FIRE, target, dmg, params)
+
+    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+    dmg            = dmg * xi.magic.applyAbilityResistance(player, target, xi.magic.ele.FIRE, xi.skill.NONE, bonusAcc)
+    dmg            = xi.magic.adjustForTarget(target, dmg, xi.magic.ele.FIRE)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
-    dmg = takeAbilityDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
+    dmg                 = takeAbilityDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
 
     if dmg > 0 then
         local effects = {}
@@ -66,9 +65,11 @@ abilityObject.onUseAbility = function(player, target, ability, action)
             local tier      = effect:getTier()
             local effectId  = effect:getType()
             local subId     = effect:getSubType()
+
             power = power * 1.2
             target:delStatusEffectSilent(effectId)
             target:addStatusEffect(effectId, power, tick, duration, subId, subpower, tier)
+
             local newEffect = target:getStatusEffect(effectId)
             newEffect:setStartTime(startTime)
         end
@@ -77,6 +78,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     local _ = player:delItem(2176, 1) or player:delItem(2974, 1)
 
     target:updateClaim(player)
+
     return dmg
 end
 

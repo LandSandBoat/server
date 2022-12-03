@@ -3,7 +3,6 @@
 -- Causes Terror, which causes the victim to be stunned for the duration of the effect, this can not be removed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
@@ -24,18 +23,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.TERROR
-    local power = 30
-    -- Three minutes is WAY too long, especially on Wyrms. Reduced to Wiki's definition of 'long time'. Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
-    local duration
+    local power    = 30
+    local duration = 30 --  Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
+
     if skill:isAoE() then
         duration = math.random(10, 18)
     else
         duration = 10 + math.random(0, 40)
     end
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, power, 0, duration))
+
+    return xi.effect.TERROR
 end
 
 return mobskillObject
