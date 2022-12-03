@@ -106,7 +106,7 @@ mission.sections =
                         player:messageSpecial(behemothsDominionID.text.AIR_AROUND_YOU_CHANGED)
 
                         SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON)
-                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON):updateClaim(player)
+                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
                     end
                 end,
 
