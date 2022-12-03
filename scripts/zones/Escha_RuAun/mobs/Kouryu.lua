@@ -3,12 +3,13 @@
 --   NM: Kouryu
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/titles")
+require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
+require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function( mob )
+entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -27,17 +28,14 @@ entity.onMobSpawn = function(mob)
     mob:setHP(mob:getMaxHP() / 2)
 end
 
-entity.onMobFight = function( mob, target )
+entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    for _, partyMember in pairs(player:getAlliance()) do
-        partyMember:addKeyItem(xi.keyItem.KIRINS_FERVOR)
-        partyMember:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.KIRINS_FERVOR)
-    end
+entity.onMobDeath = function(mob, player, optParams)
+    npcUtil.giveKeyItem(player, xi.ki.KIRINS_FERVOR)
 end
 
-entity.onMobDespawn = function( mob )
+entity.onMobDespawn = function(mob)
 end
 
 return entity

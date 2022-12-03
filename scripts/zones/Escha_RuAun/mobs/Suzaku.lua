@@ -48,6 +48,7 @@ end
 
 entity.onMobFight = function(mob, target, spellId) -- This function is fired every 400 ms.
     local currentTime = os.time()
+    local totalAdds = mob:getLocalVar("totalAdds")
 
     -- Pet logic here
     local spawnTime = 30 -- Spawn dynamic entity every interval of seconds
@@ -70,13 +71,13 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
 
     -- DEBUG
     -- print(string.format("spawnTime: %s fifteenBlock: %s", spawnTime, fifteenBlock))
-    
+
     -- check to see if we can use blood weapon
     if fifteenBlock > twoHourTime then
         mob:useMobAbility(695) -- blood weapon
         mob:setLocalVar("twoHourTime", fifteenBlock + math.random(4, 6))
     end
-    
+
     if currentTime > nextPet then
         -- Variable Work for next pet cooldown.
         nextPet = currentTime + spawnTime
@@ -108,14 +109,15 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
             end,
 
             onMobSpawn = function(mob)
+                local suzaku = GetMobByID(17961568)
 			    mob:setMod(xi.mod.SLEEPRES, 9999)
                 mob:setMod(xi.mod.LULLABYRES, 9999)
-                numAdds = numAdds + 1
+                suzaku:setLocalVar("totalAdds", totalAdds + 1)
                 mob:timer(25000, function(mobArg)
                     mob:useMobAbility(511) -- self-destruct
                 end)
             end,
-            
+
             onMobFight = function(mob, target)
                 local suzaku = GetMobByID(17961568)
 
@@ -125,18 +127,18 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
             end,
 
             releaseIdOnDeath = true,
-        
+
             -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
             mixins =
             {
                 require("scripts/mixins/rage"),
                 require("scripts/mixins/job_special"),
             },
-        
+
             -- The "whooshy" special animation that plays when Trusts or Dynamis mobs spawn
             specialSpawnAnimation = true,
         })
-        
+
         -- Use the minion object as you normally would
         minion:setSpawn(randomPlayer:getXPos(), randomPlayer:getYPos(), randomPlayer:getZPos(), randomPlayer:getRotPos())
         minion:setDropID(0) -- No loot!
@@ -144,7 +146,7 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
         minion:updateClaim(randomPlayer)
     end
 
-    mob:setMod(xi.mod.MAIN_DMG_RATING, 55 * numAdds)
+    mob:setMod(xi.mod.MAIN_DMG_RATING, 55 * totalAdds)
     -- print(string.format("main dmg rating %s", 50 * numAdds))
 end
 
@@ -153,16 +155,20 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    mob:resetLocalVars()
+
     for _, add in ipairs(addIds) do
         DespawnMob(add)
     end
 end
 
 entity.onMobDespawn = function(mob)
+    mob:resetLocalVars()
+
 	for _, despawnMob in ipairs(despawnMobTable) do
 	    SpawnMob(despawnMob)
     end
-    
+
     GetNPCByID(ID.npc.QM_SUZAKU):setStatus(xi.status.NORMAL)
 end
 
