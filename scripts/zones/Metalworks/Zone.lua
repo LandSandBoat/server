@@ -26,8 +26,8 @@ end
 
 zoneObject.afterZoneIn = function(player)
     if player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK) then
-        player:ChangeMusic(0, 161)   --  Despair
-        player:ChangeMusic(1, 161)   --  Despair
+        player:changeMusic(0, 161)   --  Despair
+        player:changeMusic(1, 161)   --  Despair
     end
 end
 
