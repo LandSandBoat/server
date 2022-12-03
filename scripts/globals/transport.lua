@@ -11,18 +11,18 @@ xi.transport = xi.transport or {}
 xi.transport.message =
 {
     NEARING = 0,
-    DOCKING = 1
+    DOCKING = 1,
 }
 
 xi.transport.epochOffset =
 {
     NEARING = 265,
-    DOCKING = 290
+    DOCKING = 290,
 }
 
 xi.transport.messageTime =
 {
-    SILVER_SEA = 480
+    SILVER_SEA = 480,
 }
 
 xi.transport.trigger =

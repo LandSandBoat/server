@@ -1,27 +1,25 @@
 -----------------------------------
 -- Area: Carpenters' Landing
---  NPC: Felourie
--- Type: Phanauet Channel Barge Timekeeper
--- !pos -300.134 -2.999 505.016 2
+--  NPC: Echanie
+-- Type: Standard NPC
+-- !pos -148.3136 -2.9521 46.4020 128
 -----------------------------------
 require("scripts/globals/barge")
 -----------------------------------
 local entity = {}
 
-local eventId = 20
-local location = xi.barge.location.NORTH_LANDING
-
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.barge.timekeeperOnTrigger(player, location, eventId)
+    xi.barge.ticketshopOnTrigger(player, 43)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.barge.ticketshopOnEventFinish(player, csid, option)
 end
 
 return entity

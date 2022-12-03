@@ -42,6 +42,12 @@ zones[xi.zone.CARPENTERS_LANDING] =
         HERCULES_TREE_NOTHING_YET     = 7503, -- There is nothing here yet. Check again in the morning.
         UNITY_WANTED_BATTLE_INTERACT  = 7546, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 7568, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        NO_GIL                        = 7436, -- I'm sorry You don't have enough gil to purchase a ticket!
+        NO_BILLET                     = 7440, -- You were refused passage for failing to present <item>!
+        HAVE_BILLET                   = 7445, -- You cannot buy more than one <ticket>. Use the one you currently have to ride the next ship.
+        LEFT_BILLET                   = 7449, -- You use your <item>. (<number> trip[/s] remaining)
+        END_BILLET                    = 7450, -- You use up your <item>.
+        MTICKET_ADDED                 = 7451, -- 10 tickets were added to your "barge multi-ticket"
     },
     mob =
     {

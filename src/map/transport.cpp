@@ -442,6 +442,31 @@ void CTransportHandler::TransportTimer()
                             break;
                     }
                 }
+                else if (zoneId == ZONE_PHANAUET_CHANNEL)
+                {
+                    uint32 hour = CVanaTime::getInstance()->getHour();
+                    switch (hour)
+                    {
+                        case 5:
+                            [[fallthrough]];
+                        case 20:
+                            zoneIterator->voyageZone->SetZoneAnimation(0);
+                            zoneIterator->voyageZone->SetZoneAnimLength(540);
+                            break;
+                        case 10:
+                            zoneIterator->voyageZone->SetZoneAnimation(16);
+                            zoneIterator->voyageZone->SetZoneAnimLength(840);
+                            break;
+                        case 17:
+                            zoneIterator->voyageZone->SetZoneAnimation(24);
+                            zoneIterator->voyageZone->SetZoneAnimLength(270);
+                            break;
+                        case 0:
+                            zoneIterator->voyageZone->SetZoneAnimation(8);
+                            zoneIterator->voyageZone->SetZoneAnimLength(540);
+                            break;
+                    }
+                }
             }
         }
         else if (zoneIterator->state == STATE_TRANSPORTZONE_DOCKED)

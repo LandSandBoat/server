@@ -43,6 +43,7 @@ zones[xi.zone.BIBIKI_BAY] =
         HAVE_BILLET                   = 7497, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
         LEFT_BILLET                   = 7502, -- You use your <item>. (<number> trip[/s] remaining)
         END_BILLET                    = 7503, -- You use up your <item>.
+        MTICKET_ADDED                 = 7504, -- Ticket # was/were added to your xxxx
         NOTHING_LEFT_INTEREST         = 7620, -- There is nothing left of interest here.
         SHEN_QM                       = 7621, -- Innumerable shrimp shells are floating in the water here.
         SHEN_SPAWN                    = 7622, -- The <item> begins skimming quietly across the surface of the water. What's this!? An enormous creature is chasing after it from below!!!
