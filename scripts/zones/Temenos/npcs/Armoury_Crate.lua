@@ -43,53 +43,6 @@ local loot =
         },
     },
 
-    -- central temenos floor 3
-    [1305] =
-    {
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 },
-        },
-
-        {
-            { itemid = 1934, droprate =  53 },
-            { itemid = 1940, droprate = 132 },
-            { itemid = 1954, droprate = 105 },
-            { itemid = 1932, droprate = 211 },
-            { itemid = 1956, droprate = 211 },
-            { itemid = 1930, droprate = 100 },
-            { itemid = 2658, droprate = 211 },
-            { itemid = 2716, droprate = 105 },
-        },
-
-        {
-            { itemid = 1907, droprate = 1000 },
-        },
-    },
-
     -- central temenos floor 4
     [1306] =
     {
@@ -200,12 +153,6 @@ entity.onTrigger = function(player, npc)
         switch (bfid): caseof
         {
             [1301] = function() -- Temenos Central Basement Crate Handling
-                xi.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
-                battlefield:setLocalVar("cutsceneTimer", 10)
-                battlefield:setLocalVar("lootSeen", 1)
-            end,
-
-            [1305] = function() -- Temenos Central F3 Crate Handling
                 xi.limbus.handleLootRolls(battlefield, loot[bfid], nil, npc)
                 battlefield:setLocalVar("cutsceneTimer", 10)
                 battlefield:setLocalVar("lootSeen", 1)
