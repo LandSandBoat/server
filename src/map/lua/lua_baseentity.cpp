@@ -11556,6 +11556,17 @@ void CLuaBaseEntity::charm(CLuaBaseEntity const* target)
 }
 
 /************************************************************************
+ *  Function: charmDuration()
+ *  Purpose : Charms an entity target for a duration
+ *  Example : mob:charm(target, duration)
+ ************************************************************************/
+
+void CLuaBaseEntity::charmDuration(CLuaBaseEntity const* target, uint32 duration)
+{
+    battleutils::applyCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()), std::chrono::seconds(duration));
+}
+
+/************************************************************************
  *  Function: uncharm()
  *  Purpose : Removes charm from an entity
  *  Example : target:uncharm()
@@ -15987,6 +15998,7 @@ void CLuaBaseEntity::Register()
 
     // BST
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
+    SOL_REGISTER("charmDuration", CLuaBaseEntity::charmDuration);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
 
     // PUP

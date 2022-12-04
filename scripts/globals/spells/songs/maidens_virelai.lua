@@ -48,7 +48,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:addStatusEffect(xi.effect.CHARM_I, 0, 0, duration)
             caster:charm(target)
         else
-            caster:charmPet(target)
+            caster:charmDuration(target, duration)
         end
     else
         -- Resist
