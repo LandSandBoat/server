@@ -22,6 +22,16 @@ end
 entity.onMobFight = function(mob, target)
     local battletime = mob:getBattleTime()
     local twohourTime = mob:getLocalVar("twohourTime")
+    local drawInTableNortheast =
+    {
+        condition1 = target:getXPos() > 95 and target:getZPos() > 56,
+        position   = { 94.2809, 6.6438, 54.0863, target:getRotPos() },
+    }
+    local drawInTableWest =
+    {
+        condition1 = target:getXPos() < 60 and target:getZPos() < 23,
+        position   = { 65.5966, 7.7105, 26.2332, target:getRotPos() },
+    }
 
     if twohourTime == 0 then
         mob:setLocalVar("twohourTime", math.random(30, 90))
@@ -31,6 +41,9 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(1053) -- Legitimately captured super_buff ID
         mob:setLocalVar("twohourTime", battletime + math.random(60, 120))
     end
+
+    utils.arenaDrawIn(mob, target, drawInTableNortheast)
+    utils.arenaDrawIn(mob, target, drawInTableWest)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

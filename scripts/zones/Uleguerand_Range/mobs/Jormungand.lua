@@ -49,6 +49,22 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
+    local drawInTableNorth =
+    {
+        condition1 = target:getXPos() < -105 and target:getXPos() > -215 and target:getZPos() > 195,
+        position   = { -201.86, -175.66, 189.32, target:getRotPos() },
+    }
+    local drawInTableSouth =
+    {
+        condition1 = target:getXPos() > -250 and target:getXPos() < -212 and target:getZPos() < 55,
+        position   = { -235.62, -175.17, 62.67, target:getRotPos() },
+    }
+    local drawInTableEast =
+    {
+        condition1 = target:getXPos() > -160 and target:getZPos() > 105 and target:getZPos() < 130,
+        position   = { -166.02, -175.89, 119.38, target:getRotPos() },
+    }
+
     -- Gains a large magic attack boost when health is under 25%
     if mob:getHPP() < 30 and mob:getMod(xi.mod.MATT) <= 69 then
         mob:setMod(xi.mod.MATT, 70)
@@ -85,24 +101,9 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Jorm draws in from set boundaries leaving her spawn area
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if (target:getXPos() < -105 and target:getXPos() > -215 and target:getZPos() > 195) and os.time() > drawInWait then  -- South Draw In
-        local rot = target:getRotPos()
-        target:setPos(-201.86, -175.66, 189.32, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getXPos() > -250 and target:getXPos() < -212 and target:getZPos() < 55) and os.time() > drawInWait then  -- South Draw In
-        local rot = target:getRotPos()
-        target:setPos(-235.62, -175.17, 62.67, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getXPos() > -160 and target:getZPos() > 105 and target:getZPos() < 130) and os.time() > drawInWait then  -- East Draw In
-        local rot = target:getRotPos()
-        target:setPos(-166.02, -175.89, 119.38, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
+    utils.arenaDrawIn(mob, target, drawInTableNorth)
+    utils.arenaDrawIn(mob, target, drawInTableSouth)
+    utils.arenaDrawIn(mob, target, drawInTableEast)
 
     -- Jorm uses Horrid Roar 3x or Spike Flails if target is behind her
     local roarCount = mob:getLocalVar("roarCount")

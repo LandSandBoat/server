@@ -51,6 +51,17 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
+    local drawInTableNorth =
+    {
+        condition1 = target:getXPos() < -515 and target:getZPos() > 8,
+        position   = { -530.642, -4.013, 6.262, target:getRotPos() },
+    }
+    local drawInTableEast =
+    {
+        condition1 = target:getXPos() > -480 and target:getZPos() > -50,
+        position   = { -481.179, -4, -41.92, target:getRotPos() },
+    }
+
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
     if mob:getHPP() < 25 and mob:getMod(xi.mod.ATT) <= 800 then
         mob:setMod(xi.mod.ATT, 1200)
@@ -91,19 +102,8 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Tiamat draws in from set boundaries leaving her spawn area
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if (target:getXPos() < -515 and target:getZPos() > 8) and os.time() > drawInWait then -- North Draw In
-        local rot = target:getRotPos()
-        target:setPos(-530.642, -4.013, 6.262, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getXPos() > -480 and target:getZPos() > -50) and os.time() > drawInWait then  -- East Draw In
-        local rot = target:getRotPos()
-        target:setPos(-481.179, -4, -41.92, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
+    utils.arenaDrawIn(mob, target, drawInTableNorth)
+    utils.arenaDrawIn(mob, target, drawInTableEast)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
