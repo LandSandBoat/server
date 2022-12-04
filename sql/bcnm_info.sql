@@ -115,7 +115,7 @@ INSERT INTO `bcnm_info` VALUES (129,163,'jungle_boogymen','nobody',0,1800,1800,6
 INSERT INTO `bcnm_info` VALUES (130,163,'amphibian_assault','nobody',0,1800,1800,60,6,130,15,0);
 INSERT INTO `bcnm_info` VALUES (131,163,'project_shantottofication','nobody',0,1800,1800,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (132,163,'whom_wilt_thou_call','nobody',0,1800,1800,0,6,132,15,0);
-INSERT INTO `bcnm_info` VALUES (160,165,'shadow_lord_battle','nobody',0,1800,1800,50,6,0,5,1);
+INSERT INTO `bcnm_info` VALUES (160,165,'shadow_lord_battle','nobody',0,1800,1800,75,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (161,165,'where_two_paths_converge','nobody',0,1800,1800,75,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (162,165,'kindred_spirits','nobody',0,1800,1800,60,6,162,15,0);
 INSERT INTO `bcnm_info` VALUES (163,165,'survival_of_the_wisest','nobody',0,600,600,99,1,0,6,0);
