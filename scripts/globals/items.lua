@@ -304,6 +304,7 @@ xi.items =
     RAM_HORN                        = 895,
     CHICKEN_BONE                    = 898,
     DEMON_HORN                      = 902,
+    STARMITE_SHELL                  = 906,
     LUMBERING_HORN                  = 910,
     RAMPAGING_HORN                  = 911,
     BEEHIVE_CHIP                    = 912,

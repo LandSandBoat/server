@@ -134,7 +134,6 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    print(quest:getVar(player, "waterRepeat"))
                     if
                         not player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM) ~= QUEST_ACCEPTED and
                         quest:getVar(player, "waterRepeat") == 0
