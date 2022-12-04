@@ -77,12 +77,12 @@ UPDATE mob_groups set minLevel = 77, maxLevel = 79 WHERE name = "Hobgoblin_Physi
 UPDATE mob_groups set minLevel = 77, maxLevel = 79 WHERE name = "Hobgoblin_Alastor" and zoneid = 4;
 UPDATE mob_groups set minLevel = 80, maxLevel = 80 WHERE name = "Hobgoblin_Angler" and zoneid = 4;
 
--- Locus Mobs (This update from LSB was merged but not taken. (If it is ever taken we need to uncomment this)
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Bight_Rarab' AND groupid='53' AND zoneid='4';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Camelopard' AND groupid='54' AND zoneid='4';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Hypnos_Eft' AND groupid='55' AND zoneid='4';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Ghost_Crab' AND groupid='56' AND zoneid='4';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Fiddler_Crab' AND groupid='57' AND zoneid='4';
+-- Locus Mobs
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Bight_Rarab' AND groupid='53' AND zoneid='4';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Camelopard' AND groupid='54' AND zoneid='4';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Hypnos_Eft' AND groupid='55' AND zoneid='4';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Ghost_Crab' AND groupid='56' AND zoneid='4';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Fiddler_Crab' AND groupid='57' AND zoneid='4';
 
 -- ------------------------------------------------------------
 -- Uleguerand_Range (Zone 5)
@@ -1040,16 +1040,16 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 (65,1898,190,'Hati',960,0,1278,0,0,77,79,0),            -- These are in prep for complete zone revamps
 (66,20014,190,'Lemures',960,0,1506,0,0,80,80,0);        -- These are in prep for complete zone revamps
 
--- Locus Mobs (This update from LSB was merged but not taken. (If it is ever taken we need to uncomment this)
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Tomb_Worm' AND groupid='26' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Dire_Bat' AND groupid='27' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Cutlass_Scorpion' AND groupid='28' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Thousand_Eyes' AND groupid='29' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Lemures' AND groupid='33' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Armet_Beetle' AND groupid='36' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Hati' AND groupid='48' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Spartoi_Sorcerer' AND groupid='49' AND zoneid='190';
--- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Spartoi_Warrior' AND groupid='50' AND zoneid='190';
+-- Locus Mobs
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Tomb_Worm' AND groupid='26' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Dire_Bat' AND groupid='27' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Cutlass_Scorpion' AND groupid='28' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Thousand_Eyes' AND groupid='29' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Lemures' AND groupid='33' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Armet_Beetle' AND groupid='36' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Hati' AND groupid='48' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Spartoi_Sorcerer' AND groupid='50' AND zoneid='190';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Spartoi_Warrior' AND groupid='49' AND zoneid='190';
 
 -- ------------------------------------------------------------
 -- Dangruf_Wadi (Zone 191)
