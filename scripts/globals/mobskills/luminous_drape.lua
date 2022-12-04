@@ -27,7 +27,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         return typeEffect
     end
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
+    local charmDuration = 60
+    if mob:getName() == "Jailer_of_Love" then
+        charmDuration = 10
+    end
+
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, charmDuration)
+
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
         mob:resetEnmity(target)
