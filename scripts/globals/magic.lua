@@ -912,8 +912,7 @@ function addBonuses(caster, spell, target, dmg, params)
             mab = mab + caster:getMerit(xi.merit.NIN_MAGIC_BONUS)
         end
 
-        local mab_crit = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
-        if math.random(1, 100) < mab_crit then
+        if math.random(1, 100) < caster:getMod(xi.mod.MAGIC_CRITHITRATE) then
             mab = mab + (10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE))
         end
 
@@ -1052,9 +1051,7 @@ function getElementalDebuffDOT(INT)
 end
 
 function getElementalDebuffStatDownFromDOT(dot)
-    local stat_down = 0
-    stat_down = (dot - 1) * 2 + 5
-    return stat_down
+    return (dot - 1) * 2 + 5
 end
 
 function getHelixDuration(caster)

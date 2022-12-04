@@ -1356,6 +1356,10 @@ namespace charutils
 
     bool HasItem(CCharEntity* PChar, uint16 ItemID)
     {
+        if (ItemID == 0)
+        {
+            return false;
+        }
         for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
         {
             if (PChar->getStorage(LocID)->SearchItem(ItemID) != ERROR_SLOTID)
@@ -1548,7 +1552,7 @@ namespace charutils
     {
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItem(ItemID)->getName(), ItemID, quantity);
+            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
@@ -2112,8 +2116,23 @@ namespace charutils
 
     bool hasValidStyle(CCharEntity* PChar, CItemEquipment* PItem, CItemEquipment* AItem)
     {
-        return (PItem != nullptr && AItem != nullptr && (((CItemWeapon*)AItem)->getSkillType() == ((CItemWeapon*)PItem)->getSkillType()) &&
-                HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem));
+        if (AItem && PItem)
+        {
+            // Shield special case
+            if (AItem->IsShield() && PItem->IsShield())
+            {
+                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+            }
+
+            CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PItem);
+            CItemWeapon* AWeapon = dynamic_cast<CItemWeapon*>(AItem);
+
+            if (PWeapon && AWeapon && PWeapon->getSkillType() == AWeapon->getSkillType())
+            {
+                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+            }
+        }
+        return false;
     }
 
     void SetStyleLock(CCharEntity* PChar, bool isStyleLocked)
@@ -2142,15 +2161,19 @@ namespace charutils
         PChar->setStyleLocked(isStyleLocked);
     }
 
-    void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemWeapon* PItem)
+    void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem)
     {
         if (!PChar->getStyleLocked())
         {
             return;
         }
 
-        auto* appearance      = (CItemEquipment*)itemutils::GetItem(PChar->styleItems[equipSlotID]);
-        auto  appearanceModel = (appearance == nullptr) ? 0 : appearance->getModelId();
+        CItemEquipment* appearance      = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(PChar->styleItems[equipSlotID]));
+        uint16          appearanceModel = 0;
+        if (appearance)
+        {
+            appearanceModel = appearance->getModelId();
+        }
 
         switch (equipSlotID)
         {
@@ -2170,19 +2193,23 @@ namespace charutils
                 }
                 else
                 {
-                    switch (PItem->getSkillType())
+                    CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PItem);
+                    if (PWeapon)
                     {
-                        case SKILL_HAND_TO_HAND:
-                            PChar->mainlook.sub = appearanceModel + 0x1000;
-                            break;
-                        case SKILL_GREAT_SWORD:
-                        case SKILL_GREAT_AXE:
-                        case SKILL_SCYTHE:
-                        case SKILL_POLEARM:
-                        case SKILL_GREAT_KATANA:
-                        case SKILL_STAFF:
-                            PChar->mainlook.sub = PChar->look.sub;
-                            break;
+                        switch (PWeapon->getSkillType())
+                        {
+                            case SKILL_HAND_TO_HAND:
+                                PChar->mainlook.sub = appearanceModel + 0x1000;
+                                break;
+                            case SKILL_GREAT_SWORD:
+                            case SKILL_GREAT_AXE:
+                            case SKILL_SCYTHE:
+                            case SKILL_POLEARM:
+                            case SKILL_GREAT_KATANA:
+                            case SKILL_STAFF:
+                                PChar->mainlook.sub = PChar->look.sub;
+                                break;
+                        }
                     }
                 }
                 break;
@@ -2197,8 +2224,17 @@ namespace charutils
                 }
                 break;
             case SLOT_RANGED:
-            case SLOT_AMMO:
-                // Appears as though these aren't implemented by SE.
+                if (hasValidStyle(PChar, PItem, appearance))
+                {
+                    PChar->mainlook.ranged = appearanceModel;
+                }
+                else
+                {
+                    PChar->mainlook.ranged = PChar->look.ranged;
+                }
+
+                break;
+            default:
                 break;
         }
     }
@@ -2210,9 +2246,14 @@ namespace charutils
             return;
         }
 
-        auto  itemID          = PChar->styleItems[equipSlotID];
-        auto* appearance      = (CItemEquipment*)itemutils::GetItem(itemID);
-        auto  appearanceModel = (appearance == nullptr || !HasItem(PChar, itemID)) ? 0 : appearance->getModelId();
+        uint16          itemID          = PChar->styleItems[equipSlotID];
+        CItemEquipment* appearance      = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(itemID));
+        uint16          appearanceModel = 0;
+
+        if (appearance && HasItem(PChar, itemID))
+        {
+            appearanceModel = appearance->getModelId();
+        }
 
         if (!canEquipItemOnAnyJob(PChar, appearance))
         {

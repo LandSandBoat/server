@@ -14,7 +14,7 @@ cmdprops =
 -- desc: List of zones with their auto-translated group and message id.
 -- note: The format is as follows: groupId, messageId, zoneId
 -----------------------------------
-local zone_list =
+local zoneList =
 {
     { 0x14, 0xA9, 1 }, -- Phanauet Channel
     { 0x14, 0xAA, 2 }, -- Carpenters' Landing
@@ -315,7 +315,7 @@ function onTrigger(player, bytes)
         -- destination is an auto-translate phrase
         local groupId = string.byte(bytes, atpos + 3)
         local messageId = string.byte(bytes, atpos + 4)
-        for k, v in pairs(zone_list) do
+        for k, v in pairs(zoneList) do
             if v[1] == groupId and v[2] == messageId then
                 x = v[4] or 0
                 y = v[5] or 0
@@ -338,7 +338,7 @@ function onTrigger(player, bytes)
             return
         end
 
-        for k, v in pairs(zone_list) do
+        for k, v in pairs(zoneList) do
             if v[3] == zone then
                 x = v[4] or 0
                 y = v[5] or 0

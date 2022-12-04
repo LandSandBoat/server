@@ -624,8 +624,8 @@ xi.nyzul.tempBoxPickItems = function(npc)
 
     local random       = math.random(1, #tempBoxItems)
     local item         = tempBoxItems[random]
-    local item2_random = math.random(1, 10)
-    local item3_random = math.random(1, 10)
+    local item2Random = math.random(1, 10)
+    local item3Random = math.random(1, 10)
 
     if npc:getLocalVar("itemID_1") == 0 then
         npc:setLocalVar("itemID_1", item.itemID)
@@ -633,7 +633,7 @@ xi.nyzul.tempBoxPickItems = function(npc)
         table.remove(tempBoxItems, random)
     end
 
-    if item2_random > 4 then
+    if item2Random > 4 then
         random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
@@ -642,7 +642,7 @@ xi.nyzul.tempBoxPickItems = function(npc)
         table.remove(tempBoxItems, random)
     end
 
-    if item2_random > 4 and item3_random > 8 then
+    if item2Random > 4 and item3Random > 8 then
         random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
@@ -656,30 +656,30 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
     local ID = require("scripts/zones/"..player:getZoneName().."/IDs")
 
     if csid == 2 then
-        local item_1 = npc:getLocalVar("itemID_1")
-        local item_2 = npc:getLocalVar("itemID_2")
-        local item_3 = npc:getLocalVar("itemID_3")
+        local item1 = npc:getLocalVar("itemID_1")
+        local item2 = npc:getLocalVar("itemID_2")
+        local item3 = npc:getLocalVar("itemID_3")
 
-        if option == 1 and item_1 > 0 and npc:getLocalVar("itemAmount_1") > 0 then
-            if not player:hasItem(item_1, xi.inventoryLocation.TEMPITEMS) then
-                player:addTempItem(item_1)
-                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item_1)
+        if option == 1 and item1 > 0 and npc:getLocalVar("itemAmount_1") > 0 then
+            if not player:hasItem(item1, xi.inventoryLocation.TEMPITEMS) then
+                player:addTempItem(item1)
+                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item1)
                 npc:setLocalVar("itemAmount_1", npc:getLocalVar("itemAmount_1") - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
-        elseif option == 2 and item_2 > 0 and npc:getLocalVar("itemAmount_2") > 0 then
-            if not player:hasItem(item_2, xi.inventoryLocation.TEMPITEMS) then
-                player:addTempItem(item_2)
-                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item_2)
+        elseif option == 2 and item2 > 0 and npc:getLocalVar("itemAmount_2") > 0 then
+            if not player:hasItem(item2, xi.inventoryLocation.TEMPITEMS) then
+                player:addTempItem(item2)
+                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item2)
                 npc:setLocalVar("itemAmount_2", npc:getLocalVar("itemAmount_2") - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
-        elseif option == 3 and item_3 > 0 and npc:getLocalVar("itemAmount_3") > 0 then
-            if not player:hasItem(item_3, xi.inventoryLocation.TEMPITEMS) then
-                player:addTempItem(item_3)
-                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item_3)
+        elseif option == 3 and item3 > 0 and npc:getLocalVar("itemAmount_3") > 0 then
+            if not player:hasItem(item3, xi.inventoryLocation.TEMPITEMS) then
+                player:addTempItem(item3)
+                player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item3)
                 npc:setLocalVar("itemAmount_3", npc:getLocalVar("itemAmount_3") - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
@@ -1032,8 +1032,8 @@ xi.nyzul.addPenalty = function(mob)
 end
 
 xi.nyzul.getTokenPenalty = function(instance)
-    local floor_penalities = instance:getLocalVar("tokenPenalty")
-    local rate             = getTokenRate(instance)
+    local floorPenalities = instance:getLocalVar("tokenPenalty")
+    local rate            = getTokenRate(instance)
 
-    return math.floor(117 * rate) * floor_penalities
+    return math.floor(117 * rate) * floorPenalities
 end

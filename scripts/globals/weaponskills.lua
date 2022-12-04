@@ -1237,35 +1237,35 @@ local function calculateRawFstr(dSTR, divisor)
 end
 
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
-function fSTR(atk_str, def_vit, weapon_rank)
-    local dSTR = atk_str - def_vit
+function fSTR(atkStr, defVit, weaponRank)
+    local dSTR = atkStr - defVit
     local fSTR = calculateRawFstr(dSTR, 4)
 
     -- Apply fSTR caps.
-    local lower_cap = weapon_rank * -1
-    if weapon_rank == 0 then
-        lower_cap = -1
+    local lowerCap = weaponRank * -1
+    if weaponRank == 0 then
+        lowerCap = -1
     end
 
-    fSTR = utils.clamp(fSTR, lower_cap, weapon_rank + 8)
+    fSTR = utils.clamp(fSTR, lowerCap, weaponRank + 8)
 
     return fSTR
 end
 
 -- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
-function fSTR2(atk_str, def_vit, weapon_rank)
-    local dSTR = atk_str - def_vit
+function fSTR2(atkStr, defVit, weaponRank)
+    local dSTR = atkStr - defVit
     local fSTR2 = calculateRawFstr(dSTR, 2)
 
     -- Apply fSTR2 caps.
-    local lower_cap = weapon_rank * -2
-    if weapon_rank == 0 then
-        lower_cap = -2
-    elseif weapon_rank == 1 then
-        lower_cap = -3
+    local lowerCap = weaponRank * -2
+    if weaponRank == 0 then
+        lowerCap = -2
+    elseif weaponRank == 1 then
+        lowerCap = -3
     end
 
-    fSTR2 = utils.clamp(fSTR2, lower_cap, (weapon_rank + 8) * 2)
+    fSTR2 = utils.clamp(fSTR2, lowerCap, (weaponRank + 8) * 2)
 
     return fSTR2
 end

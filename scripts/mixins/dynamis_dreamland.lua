@@ -52,7 +52,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
 
     dynamisDreamlandMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
         local currency = target:getLocalVar("dynamis_currency")
-        local vana_hour = VanadielHour()
+        local vanaHour = VanadielHour()
 
         if
             math.random(0, 99) < 8 and
@@ -60,8 +60,8 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
             (
                 currency == 0 or
                 (
-                    vana_hour >= proctimes.Magic[currency][1] and
-                    vana_hour < proctimes.Magic[currency][2]
+                    vanaHour >= proctimes.Magic[currency][1] and
+                    vanaHour < proctimes.Magic[currency][2]
                 )
             )
         then
@@ -71,7 +71,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
 
     dynamisDreamlandMob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
         local currency = target:getLocalVar("dynamis_currency")
-        local vana_hour = VanadielHour()
+        local vanaHour = VanadielHour()
 
         if
             math.random(0, 99) < 25 and
@@ -79,8 +79,8 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
             (
                 currency == 0 or
                 (
-                    vana_hour >= proctimes.WS[currency][1] and
-                    vana_hour < proctimes.WS[currency][2]
+                    vanaHour >= proctimes.WS[currency][1] and
+                    vanaHour < proctimes.WS[currency][2]
                 )
             )
         then
@@ -90,7 +90,7 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
 
     dynamisDreamlandMob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(target, user, ability, action)
         local currency = target:getLocalVar("dynamis_currency")
-        local vana_hour = VanadielHour()
+        local vanaHour = VanadielHour()
 
         if
             math.random(0, 99) < 20 and
@@ -98,8 +98,8 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
             (
                 currency == 0 or
                 (
-                    vana_hour >= proctimes.JA[currency][1] and
-                    vana_hour < proctimes.JA[currency][2]
+                    vanaHour >= proctimes.JA[currency][1] and
+                    vanaHour < proctimes.JA[currency][2]
                 )
             )
         then

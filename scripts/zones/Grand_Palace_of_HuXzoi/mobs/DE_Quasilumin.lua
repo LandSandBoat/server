@@ -187,9 +187,9 @@ entity.shouldMove = function(mob, progress)
 end
 
 entity.closeDoor = function(mob)
-    local opened_door = mob:getLocalVar("opened_door")
-    if opened_door ~= 0 then
-        local npc = GetNPCByID(opened_door)
+    local openedDoor = mob:getLocalVar("opened_door")
+    if openedDoor ~= 0 then
+        local npc = GetNPCByID(openedDoor)
         npc:setAnimation(xi.animation.CLOSE_DOOR)
         mob:setLocalVar("opened_door", 0)
     end
@@ -226,9 +226,9 @@ entity.onMobRoam = function(mob)
         return
     end
 
-    local opened_door = mob:getLocalVar("opened_door")
-    if opened_door ~= 0 then
-        local npc = GetNPCByID(opened_door)
+    local openedDoor = mob:getLocalVar("opened_door")
+    if openedDoor ~= 0 then
+        local npc = GetNPCByID(openedDoor)
         if mob:checkDistance(npc) > 15 then
             npc:setAnimation(xi.animation.CLOSE_DOOR)
             mob:setLocalVar("opened_door", 0)
@@ -239,7 +239,7 @@ entity.onMobRoam = function(mob)
 
     for _, doorID in ipairs(escort.doors) do
         local npc = GetNPCByID(doorID)
-        if doorID ~= opened_door and  mob:checkDistance(npc) <= 8 then
+        if doorID ~= openedDoor and  mob:checkDistance(npc) <= 8 then
             npc:setAnimation(xi.animation.OPEN_DOOR)
             mob:setLocalVar("opened_door", doorID)
         end
