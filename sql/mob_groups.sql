@@ -11260,8 +11260,8 @@ INSERT INTO `mob_groups` VALUES (127,5146,164,'Laidly_Laurence',0,128,0,0,9999,9
 -- Throne_Room (Zone 165)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,3579,165,'Shadow_Lord_1',0,128,0,10000,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2,4593,165,'Shadow_Lord_2',0,128,0,4000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,3579,165,'Shadow_Lord_1',0,128,0,10000,10000,60,60,0);
+INSERT INTO `mob_groups` VALUES (2,4593,165,'Shadow_Lord_2',0,128,0,4000,4000,60,60,0);
 INSERT INTO `mob_groups` VALUES (3,4498,165,'Zeid',0,128,0,0,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (4,4498,165,'Zeid',0,128,0,0,0,75,78,0);
 INSERT INTO `mob_groups` VALUES (5,3580,165,'Shadow_of_Rage',0,128,0,500,0,75,75,0);
