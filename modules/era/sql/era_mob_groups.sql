@@ -1028,7 +1028,6 @@ UPDATE mob_groups SET content_tag='WOTG' WHERE name='Gwyllgi' AND groupid='17' A
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Ankou' AND groupid='21' AND zoneid='190';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Barbastelle' AND groupid='22' AND zoneid='190';
 
-UPDATE mob_groups SET minLevel = 80, maxLevel = 80 WHERE name = "Lemures"  and zoneid = 190;
 UPDATE mob_groups SET spawntype = 0 WHERE name = "Nachzehrer_war"  and zoneid = 190;
 UPDATE mob_groups SET spawntype = 0 WHERE name = "Nachzehrer_blm"  and zoneid = 190;
 
@@ -1039,7 +1038,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 (63,244,190,'Armet_Beetle',660,0,169,0,0,64,66,0),      -- These are in prep for complete zone revamps
 (64,20015,190,'Thousand_Eyes',960,0,2402,0,0,60,62,0),  -- These are in prep for complete zone revamps
 (65,1898,190,'Hati',960,0,1278,0,0,77,79,0),            -- These are in prep for complete zone revamps
-(66,20014,190,'Lemures',960,0,1506,0,0,80,82,0);        -- These are in prep for complete zone revamps
+(66,20014,190,'Lemures',960,0,1506,0,0,80,80,0);        -- These are in prep for complete zone revamps
 
 -- Locus Mobs (This update from LSB was merged but not taken. (If it is ever taken we need to uncomment this)
 -- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Tomb_Worm' AND groupid='26' AND zoneid='190';
