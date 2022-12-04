@@ -120,7 +120,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
         groupId = groupId,
         groupZoneId = xi.zone.GM_HOME,
 
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
         specialSpawnAnimation = true,
     })
 

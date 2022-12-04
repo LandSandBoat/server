@@ -44,7 +44,7 @@ function onTrigger(player)
 
         -- If set to true, the internal id assigned to this mob will be released for other dynamic entities to use
         -- after this mob has died. Defaults to false.
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
 
         -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
         mixins =

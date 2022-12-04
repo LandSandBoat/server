@@ -778,8 +778,6 @@ public:
     time_point      LastAttacked;
     battlehistory_t BattleHistory; // Stores info related to most recent combat actions taken towards this entity.
 
-    bool m_bReleaseTargIDOnDisappear = false;
-
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;
     std::unique_ptr<CNotorietyContainer>    PNotorietyContainer;
