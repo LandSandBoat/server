@@ -6035,7 +6035,7 @@ namespace charutils
         if (strcmp(type, "unity_accolades") == 0 && amount > 0)
         {
             float       evalPoints   = static_cast<float>(amount) / 1000;
-            const char* rankingQuery = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d;";
+            const char* rankingQuery = "UPDATE unity_system SET points_current = points_current+(%f) WHERE leader=%d;";
 
             AddPoints(PChar, "current_accolades", amount, std::numeric_limits<int32>::max()); // Do not cap current_accolades
             sql->Query(rankingQuery, evalPoints, PChar->profile.unity_leader);
