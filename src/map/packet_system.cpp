@@ -3858,7 +3858,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 // Ensure the destination exists
                 CZone* PDestination = zoneutils::GetZone(PZoneLine->m_toZone);
-                if (PChar->isMounted() && PDestination && !PDestination->CanUseMisc(MISC_MOUNT))
+                if (settings::get<bool>("main.ERA_CHOCOBO_ZONE_DISMOUNT") && PChar->isMounted() && PDestination && !PDestination->CanUseMisc(MISC_MOUNT))
                 {
                     PChar->loc.p.rotation += 128;
 
