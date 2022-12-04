@@ -3,6 +3,8 @@
 --  NPC: Ebon Door
 -- !pos -103.959 -26 -416.869 98
 -----------------------------------
+require("scripts/globals/zone")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
