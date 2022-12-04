@@ -4296,7 +4296,7 @@ function getRoeRecords(triggers)
         },
 
         [408] =
-        { -- Conflict: Cape Terrigan
+        { -- Conflict: Cape Teriggan
             trigger = triggers.mobKill,
             goal = 10,
             reqs = { zone = set { 113 } },

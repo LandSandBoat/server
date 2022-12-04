@@ -1,7 +1,7 @@
 -- Horizon Mob Spawn Point Tables
 -- Requires the mob_spawn_points table to already exist
 
--- ZONE 113 - Cape Terrigan
+-- ZONE 113 - Cape Teriggan
 
 REPLACE INTO `mob_spawn_points` (`mobid`, `spawnset`, `mobname`, `polutils_name`, `groupid`, `pos_x`, `pos_y`, `pos_z`, `pos_rot`) VALUES
     (17240065, 0 , 'Razorjaw_Pugil',           'Razorjaw Pugil',           1,   1,         1,         1,         0  ),
