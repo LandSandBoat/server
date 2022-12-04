@@ -5,6 +5,7 @@
 -- !pos 3 9 -76 243
 -----------------------------------
 require("scripts/globals/keyitems")
+require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
