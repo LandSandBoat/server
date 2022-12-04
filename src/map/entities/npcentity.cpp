@@ -104,7 +104,7 @@ bool CNpcEntity::isWideScannable()
 void CNpcEntity::PostTick()
 {
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
-    if (loc.zone && updatemask && now > m_nextUpdateTimer)
+    if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR && now > m_nextUpdateTimer)
     {
         m_nextUpdateTimer = now + 250ms;
         loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);

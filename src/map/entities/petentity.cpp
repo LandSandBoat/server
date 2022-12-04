@@ -48,13 +48,13 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_jugSpawnTime(time_point::min())
 , m_jugDuration(duration::min())
 {
-    objtype                 = TYPE_PET;
-    m_EcoSystem             = ECOSYSTEM::UNCLASSIFIED;
-    allegiance              = ALLEGIANCE_TYPE::PLAYER;
-    m_MobSkillList          = 0;
-    m_IsClaimable           = false;
-    m_bReleaseTargIDOnDeath = true;
-    spawnAnimation          = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
+    objtype                     = TYPE_PET;
+    m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
+    allegiance                  = ALLEGIANCE_TYPE::PLAYER;
+    m_MobSkillList              = 0;
+    m_IsClaimable               = false;
+    m_bReleaseTargIDOnDisappear = true;
+    spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
