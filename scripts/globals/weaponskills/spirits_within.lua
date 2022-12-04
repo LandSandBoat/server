@@ -19,7 +19,6 @@ require("scripts/globals/utils")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local attack =
     {
         ['type'] = xi.attackType.BREATH,
@@ -77,7 +76,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     damage = xi.weaponskills.takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
-
 end
 
 return weaponskillObject

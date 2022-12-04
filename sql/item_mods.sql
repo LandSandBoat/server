@@ -6297,7 +6297,8 @@ INSERT INTO `item_mods` VALUES (11323,1,2); -- DEF: 2
 INSERT INTO `item_mods` VALUES (11324,1,2); -- DEF: 2
 
 -- Blue Racing Silks
-INSERT INTO `item_mods` VALUES (11325,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (11325,1,2);     -- DEF: 2
+INSERT INTO `item_mods` VALUES (11325,1074,50); -- DIG_BYPASS_FATIGUE: 50
 
 -- Red Racing Silks
 INSERT INTO `item_mods` VALUES (11326,1,2); -- DEF: 2

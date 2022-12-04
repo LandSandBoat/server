@@ -36,7 +36,6 @@ abilityObject.onUseAbility = function(player, target, ability)
         else
             mob:queue(0, doSic)
         end
-
     end
 
     player:getPet():queue(0, doSic)

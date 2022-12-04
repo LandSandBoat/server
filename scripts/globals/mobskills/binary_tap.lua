@@ -18,7 +18,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     -- try to drain buff
     local effectFirst = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
     local effectSecond = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
@@ -42,7 +41,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
         return dmg
     end
-
 end
 
 return mobskillObject

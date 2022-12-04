@@ -220,7 +220,7 @@ xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
 
     -- Spirit Surge increases dragoon's MAX HP increases by 25% of wyvern MaxHP
     -- bg wiki says 25% ffxiclopedia says 15%, going with 25 for now
-    local mhp_boost = target:getPet():getMaxHP() * 0.25
+    local maxHPBoost = target:getPet():getMaxHP() * 0.25
 
     -- Dragoon gets all of wyverns TP when using Spirit Surge
     target:addTP(petTP)
@@ -236,7 +236,7 @@ xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
     target:resetRecast(xi.recast.ABILITY, 159) -- High Jump
     target:resetRecast(xi.recast.ABILITY, 160) -- Super Jump
 
-    target:addStatusEffect(xi.effect.SPIRIT_SURGE, mhp_boost, 0, duration, 0, strBoost)
+    target:addStatusEffect(xi.effect.SPIRIT_SURGE, maxHPBoost, 0, duration, 0, strBoost)
 end
 
 xi.job_utils.dragoon.useCallWyvern = function(player, target, ability)
@@ -419,7 +419,6 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
                 local effect = player:getStatusEffect(xi.effect.STONESKIN)
                 effect:setPower(effect:getPower() - drainamount) -- fixes the status effect so when it ends it uses the new power instead of old
                 player:delMod(xi.mod.STONESKIN, drainamount) -- removes the amount from the mod
-
             end
         else
             player:delStatusEffect(xi.effect.STONESKIN)
@@ -765,7 +764,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     local wyvern = player:getPet()
 
     local healingbreath = xi.jobAbility.HEALING_BREATH
-    local breath_heal_range = 14
+    local breathHealRange = 14
 
     if player:getMainLvl() >= 80 then
         healingbreath = xi.jobAbility.HEALING_BREATH_IV
@@ -776,7 +775,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     end
 
     local function inBreathRange(target)
-        return wyvern:checkDistance(target) <= breath_heal_range
+        return wyvern:checkDistance(target) <= breathHealRange
     end
 
     local highestHPDiff = -1

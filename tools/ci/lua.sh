@@ -98,9 +98,6 @@ global_objects=(
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade
-    HALLOWEEN_2008
-    HALLOWEEN_2009
-    HALLOWEEN_2010
 
     salvageUtil
 

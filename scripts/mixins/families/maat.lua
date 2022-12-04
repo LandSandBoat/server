@@ -4,7 +4,6 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.maat = function(maatMob)
-
     maatMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         if mob:getMainJob() == xi.job.NIN then
             mob:setLocalVar("specialThreshold", 40)
@@ -82,7 +81,6 @@ g_mixins.maat = function(maatMob)
             mob:showText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
             mob:getBattlefield():win()
         end
-
     end)
 
     maatMob:addListener("ITEM_STOLEN", "MAAT_ITEM_STOLEN", function(mob, player, itemId)
@@ -113,7 +111,6 @@ g_mixins.maat = function(maatMob)
             mob:messageText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)
         end
     end)
-
 end
 
 return g_mixins.maat

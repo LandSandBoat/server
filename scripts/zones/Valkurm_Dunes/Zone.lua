@@ -92,6 +92,7 @@ zoneObject.onGameHour = function(zone)
         if VanadielHour() == 5 then
             qm2:setStatus(xi.status.DISAPPEAR)
         end
+
         if VanadielHour() == 18 then
             qm2:setStatus(xi.status.NORMAL)
         end

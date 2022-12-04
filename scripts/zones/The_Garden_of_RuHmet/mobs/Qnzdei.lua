@@ -65,6 +65,7 @@ entity.onPath = function(mob)
         if mob:getLocalVar("reversed") == 1 then
             speed = -speed
         end
+
         mob:setPos(spawnPos.x, spawnPos.y, spawnPos.z, mob:getRotPos() + speed)
     end
 end

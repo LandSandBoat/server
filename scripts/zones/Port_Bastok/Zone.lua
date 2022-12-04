@@ -24,16 +24,6 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = { -1 }
 
-    -- FIRST LOGIN (START CS)
-    if player:getPlaytime(false) == 0 then
-        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = { 1, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
-        end
-
-        player:setPos(132, -8.5, -13, 179)
-        player:setHomePoint()
-    end
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
@@ -69,9 +59,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 1 then
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 71 then
+    if csid == 71 then
         player:setPos(0, 0, 0, 0, 224)
     end
 end

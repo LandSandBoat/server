@@ -275,9 +275,9 @@ end
 ---------------------------------------------------------------- --]]
 
 g_mixins.job_special = function(jobSpecialMob)
-
-    -- at spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
+    -- At spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
+
     jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         local ability = nil
         local mJob = mob:getMainJob()

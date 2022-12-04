@@ -15,7 +15,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, recordID, target)
-
     -- validate logId
     if recordID == nil then
         error(player, "Invalid recordID.")

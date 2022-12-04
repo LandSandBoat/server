@@ -29,6 +29,7 @@ zones[xi.zone.BASTOK_MINES] =
         CONQUEST_BASE                  = 6592,  -- Tallying conquest results...
         MARIADOK_DIALOG                = 6751,  -- Your fate rides on the changing winds of Vana'diel. I can give you insight on the local weather.
         MOG_LOCKER_OFFSET              = 6864,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
+        MAP_MARKER_TUTORIAL            = 7062,  -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
         ALCHEMY_SUPPORT                = 7069,  -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
         HEMEWMEW_DIALOG                = 7076,  -- Hello, [sir/ma'am]. I have been appointed by the Guildworkers' Union to manage the trading of manufactured crafts and the exchange of guild points.
         GUILD_TERMINATE_CONTRACT       = 7083,  -- You have terminated your trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild and formed a new one with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.

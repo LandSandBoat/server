@@ -563,13 +563,26 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         }
         charutils::SendClearTimerPacket(PChar);
 
+        // Remove enmity from character and their pet with all mobs
+        auto func = [&](auto mob)
+        {
+            // Only remove enmity from pet if it is not charmed
+            if (PChar->PPet)
+            {
+                mob->PEnmityContainer->Clear(PChar->PPet->id);
+            }
+            mob->PEnmityContainer->Clear(PChar->id);
+        };
+
         // Remove the player's pet as well
         if (PChar->PPet)
         {
             PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
             PChar->PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-            ClearEnmityForEntity(PChar->PPet);
         }
+
+        ForEachRequiredEnemy(func);
+        ForEachAdditionalEnemy(func);
     }
     else
     {
@@ -602,10 +615,23 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             // allies targid >= 0x700
             if (PEntity->targid >= 0x700)
             {
+                // Disappear pets that do not belong to players
+                auto* PPetEntity = dynamic_cast<CPetEntity*>(PEntity);
+                if (PPetEntity && (!PPetEntity->PMaster || PPetEntity->PMaster->objtype != TYPE_PC))
+                {
+                    PEntity->status = STATUS_TYPE::DISAPPEAR;
+                }
+
                 if (auto* PMobEntity = dynamic_cast<CMobEntity*>(PEntity))
                 {
                     if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
                     {
+                        if (PMobEntity->isAlive() && PMobEntity->PAI->IsSpawned())
+                        {
+                            PEntity->status = STATUS_TYPE::DISAPPEAR;
+                            PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_NONE);
+                        }
+
                         m_AllyList.erase(std::remove_if(m_AllyList.begin(), m_AllyList.end(), check), m_AllyList.end());
                     }
                 }
@@ -624,15 +650,15 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 m_RequiredEnemyList.erase(std::remove_if(m_RequiredEnemyList.begin(), m_RequiredEnemyList.end(), checkEnemy), m_RequiredEnemyList.end());
                 m_AdditionalEnemyList.erase(std::remove_if(m_AdditionalEnemyList.begin(), m_AdditionalEnemyList.end(), checkEnemy), m_AdditionalEnemyList.end());
             }
+
+            // Clear the mob's enmity
+            auto* PMob = dynamic_cast<CMobEntity*>(PEntity);
+            if (PMob)
+            {
+                PMob->PEnmityContainer->Clear();
+            }
         }
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
-    }
-
-    // Remove enmity from valid battle entities
-    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PEntity);
-    if (PBattleEntity)
-    {
-        ClearEnmityForEntity(PBattleEntity);
     }
 
     PEntity->PBattlefield = nullptr;
@@ -758,6 +784,16 @@ bool CBattlefield::Cleanup(time_point time, bool force)
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
             m_Zone->updateCharLevelRestriction(PChar);
 
+            // Remove allies from player's spawn list
+            for (auto* ally : tempAllies)
+            {
+                SpawnIDList_t::iterator MOB = PChar->SpawnMOBList.find(ally->id);
+                if (MOB != PChar->SpawnMOBList.end())
+                {
+                    PChar->SpawnMOBList.erase(MOB);
+                }
+            }
+
             if (PChar->PPet)
             {
                 PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
@@ -845,26 +881,6 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
     }
     SetLocalVar("lootSpawned", 1);
     return InsertEntity(PEntity, true);
-}
-
-void CBattlefield::ClearEnmityForEntity(CBattleEntity* PEntity)
-{
-    if (!PEntity)
-    {
-        return;
-    }
-
-    auto func = [&](auto mob)
-    {
-        if (PEntity->PPet)
-        {
-            mob->PEnmityContainer->Clear(PEntity->PPet->id);
-        }
-        mob->PEnmityContainer->Clear(PEntity->id);
-    };
-
-    ForEachRequiredEnemy(func);
-    ForEachAdditionalEnemy(func);
 }
 
 bool CBattlefield::CheckInProgress()

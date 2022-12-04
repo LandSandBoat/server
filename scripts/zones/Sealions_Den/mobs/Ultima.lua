@@ -46,7 +46,6 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
             return abilities[2]
         end
     end
-
 end
 
 entity.onMobFight = function(mob, target)

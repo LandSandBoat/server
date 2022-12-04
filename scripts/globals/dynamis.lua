@@ -106,7 +106,9 @@ local entryInfo =
         beatVar  = "DynaXarcabard_Win",
         beatKI   = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = { 569.312, -0.098, -270.158, 90, 135 },
-        reqs     = function(player) return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA) end,
+        reqs     = function(player)
+            return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA)
+        end,
     },
 
     -- TODO: Make absolutely sure that winning Xarcabard does NOT allow early access to dreamlands BEFORE CoP 3-5
@@ -584,8 +586,8 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
             local effect = player:getStatusEffect(xi.effect.DYNAMIS)
             if effect and not player:hasKeyItem(te.ki) then
                 npcUtil.giveKeyItem(player, te.ki)
-                local old_duration = effect:getDuration()
-                effect:setDuration((old_duration + (te.minutes * 60)) * 1000)
+                local oldDuration = effect:getDuration()
+                effect:setDuration((oldDuration + (te.minutes * 60)) * 1000)
                 player:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
                 player:messageSpecial(ID.text.DYNAMIS_TIME_EXTEND, te.minutes)
             end

@@ -81,6 +81,7 @@ zones[xi.zone.PORT_SAN_DORIA] =
         FRAGMENTS_MELD                 = 11515, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         OBTAINED_NUM_KEYITEMS          = 11540, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                 = 11542, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
+        MAP_MARKER_TUTORIAL            = 11890, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
     },
     mob =
     {

@@ -19,7 +19,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, base, 0, 180))
 
     return xi.effect.STONESKIN
-
 end
 
 return mobskillObject

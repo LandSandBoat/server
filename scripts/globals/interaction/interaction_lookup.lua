@@ -71,9 +71,9 @@ end
 --        handler = <action definition or function to run>,
 --      }
 local function addHandlers(secondLevel, lookupSecondLevel, checkFunc, container)
-
     -- Use base table that all the handlers will reuse, to avoid creating many
     -- very similar objects in the lookup table
+
     local baseHandlerTable = {}
     if checkFunc then
         baseHandlerTable.check = checkFunc
@@ -152,7 +152,9 @@ end
 -- Remove default handlers for a given zone
 function InteractionLookup:removeDefaultHandlers(zoneId)
     if self.data[zoneId] then
-        removeHandlersMatching(self.data[zoneId], self.data[zoneId], function (entry) return entry.check == nil and entry.container == nil end)
+        removeHandlersMatching(self.data[zoneId], self.data[zoneId], function(entry)
+            return entry.check == nil and entry.container == nil
+        end)
     end
 
     self.zoneDefaults[zoneId] = false
@@ -205,7 +207,9 @@ function InteractionLookup:removeContainer(container)
     for _, section in ipairs(container.sections) do
         for zoneid, secondLevel in pairs(section) do
             if zoneid ~= "check" and self.data[zoneid] then
-                removeHandlersMatching(secondLevel, self.data[zoneid], function (entry) return entry.container == container end)
+                removeHandlersMatching(secondLevel, self.data[zoneid], function(entry)
+                    return entry.container == container
+                end)
             end
         end
     end

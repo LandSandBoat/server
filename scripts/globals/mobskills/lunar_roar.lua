@@ -36,7 +36,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     return num
-
 end
 
 return mobskillObject

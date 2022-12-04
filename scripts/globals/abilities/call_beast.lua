@@ -50,8 +50,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         petLevels[47] = 75 -- AMIGO SABOTENDER
 
         if playerLevel < petLevels[petId] then return xi.msg.basic.NO_JUG_PET_ITEM, 0 end
-        return 0, 0
     end
+
+    return 0, 0
 end
 
 abilityObject.onUseAbility = function(player, target, ability)

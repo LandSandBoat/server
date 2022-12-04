@@ -28,16 +28,16 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     local bagIncrease = 5
 
     -- If quest is available or accepted, the correct dialogue ID is the expected pre quest inventory size offset by 1
-    local getPendingDialogueId = function (player)
+    local getPendingDialogueId = function(player)
         return (player:getContainerSize(xi.inv.INVENTORY) + 1)
     end
 
     -- If quest is completed, the correct dialogue ID is the expected post quest inventory size offset by 1
-    local getCompleteDiaglogueId = function (player)
+    local getCompleteDiaglogueId = function(player)
         return (player:getContainerSize(xi.inv.INVENTORY) + bagIncrease + 1)
     end
 
-    local getReqsMet = function (player)
+    local getReqsMet = function(player)
         return  player:getFameLevel(xi.quest.fame_area.JEUNO) >= params.fame and
                 player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
                 (params.prerequisite == nil or player:hasCompletedQuest(xi.quest.log_id.JEUNO, params.prerequisite))

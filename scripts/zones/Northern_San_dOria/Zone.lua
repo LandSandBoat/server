@@ -29,16 +29,7 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = { -1 }
 
-    -- FIRST LOGIN (START CS)
-    if player:getPlaytime(false) == 0 then
-        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = { 535, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
-        end
-
-        player:setPos(0, 0, -11, 191)
-        player:setHomePoint()
-    -- RDM AF3 CS
-    elseif
+    if
         player:getCharVar("peaceForTheSpiritCS") == 5 and
         player:getFreeSlotsCount() >= 1
     then
@@ -64,7 +55,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)  -- Chateau d'Oraguille access
+        [1] = function()  -- Chateau d'Oraguille access
             local pNation = player:getNation()
             local currentMission = player:getCurrentMission(pNation)
 
@@ -91,9 +82,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 535 then
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
-    elseif csid == 569 then
+    if csid == 569 then
         player:setPos(0, 0, -13, 192, 233)
     elseif
         csid == 49 and

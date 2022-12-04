@@ -23,6 +23,7 @@ entity.onMobFight = function(mob)
         else
             mob:setAnimationSub(2)
         end
+
         mob:setLocalVar("changeTime", mob:getBattleTime())
 
         -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
@@ -36,6 +37,7 @@ entity.onMobFight = function(mob)
             for n = 1, #xi.magic.resistMod, 1 do
                 mob:setMod(xi.magic.resistMod[n], 2000)
             end
+
             for n = 1, #xi.magic.specificDmgTakenMod, 1 do
                 mob:setMod(xi.magic.specificDmgTakenMod[n], -10000)
             end
@@ -47,6 +49,7 @@ entity.onMobFight = function(mob)
             for n = 1, #xi.magic.resistMod, 1 do
                 mob:setMod(xi.magic.resistMod[n], 1000)
             end
+
             for n = 1, #xi.magic.specificDmgTakenMod, 1 do
                 mob:setMod(xi.magic.specificDmgTakenMod[n], 10000)
             end

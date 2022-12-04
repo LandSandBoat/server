@@ -46,6 +46,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
             npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_DREAMS)
         end
+
         player:addTitle(xi.title.HEIR_TO_THE_REALM_OF_DREAMS)
     end
 end

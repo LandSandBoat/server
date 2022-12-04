@@ -16,13 +16,13 @@ end
 
 -- TODO: Fix onSpikesDamage bug causing spikes to apply damage twice. Commented out until it is resolved.
 -- entity.onSpikesDamage = function(mob, target, damage)
---     local INT_diff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+--     local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
---     if INT_diff > 20 then
---         INT_diff = 20 + (INT_diff - 20) * 0.5 -- INT above 20 is half as effective.
+--     if intDiff > 20 then
+--         intDiff = 20 + (intDiff - 20) * 0.5 -- INT above 20 is half as effective.
 --     end
 
---     local dmg = (damage + INT_diff) * 1.3 -- INT adjustment and base damage averaged together.
+--     local dmg = (damage + intDiff) * 1.3 -- INT adjustment and base damage averaged together.
 --     local params = {}
 --     params.bonusmab = 0
 --     params.includemab = false

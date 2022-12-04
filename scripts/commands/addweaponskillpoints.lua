@@ -16,7 +16,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, slot, points, target)
-
     -- validate slot
     if slot < xi.slot.MAIN or slot > xi.slot.RANGED then
         error(player, "Slot out of range.")

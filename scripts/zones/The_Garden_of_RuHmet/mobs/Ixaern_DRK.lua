@@ -26,6 +26,7 @@ entity.onMobInitialize = function(IxAernDrkMob)
             then
                 target = target:getMaster()
             end
+
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mobArg)
                 mobArg:setHP(mob:getMaxHP())
@@ -51,12 +52,14 @@ entity.onMobInitialize = function(IxAernDrkMob)
                             elseif i == partySize then --if all checks fail just disengage
                                 mobArg:disengage()
                             end
+
                             i = i + 1
                         end
                     else
                         mobArg:disengage()
                     end
                 end
+
                 mobArg:triggerListener("AERN_RERAISE", mobArg, timesReraised)
             end)
         else

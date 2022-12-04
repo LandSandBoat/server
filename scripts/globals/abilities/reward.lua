@@ -57,6 +57,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     -- Please note that I used this as base for the calculations:
     -- http://wiki.ffxiclopedia.org/wiki/Reward
 
+    -- TODO: Create lookup table for these switches
     switch (rangeObj) : caseof {
         [17016] = function (x) -- pet food alpha biscuit
             minimumHealing = 20
@@ -101,10 +102,8 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     }
 
     -- Now calculating the bonus based on gear.
-    local body = player:getEquipID(xi.slot.BODY)
-
-    switch (body) : caseof {
-        [12646] = function (x) -- beast jackcoat
+    switch (player:getEquipID(xi.slot.BODY)) : caseof {
+        [12646] = function() -- beast jackcoat
             -- This will remove Paralyze, Poison and Blind from the pet.
             pet:delStatusEffect(xi.effect.PARALYSIS)
             pet:delStatusEffect(xi.effect.POISON)

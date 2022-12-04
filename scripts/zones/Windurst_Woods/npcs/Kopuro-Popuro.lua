@@ -41,7 +41,6 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(656, 0, 889, 939) -- Incorrect or not enough items
         end
-
     end
 end
 

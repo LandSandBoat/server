@@ -28,7 +28,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(totaldamage, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
     return totaldamage
-
 end
 
 return mobskillObject

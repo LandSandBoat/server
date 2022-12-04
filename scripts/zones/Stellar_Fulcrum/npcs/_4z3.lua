@@ -30,7 +30,6 @@ entity.onEventFinish = function(player, csid, option)
         player:delStatusEffect(xi.effect.BATTLEFIELD)
         player:setCharVar(tostring(pZone) .. "_Runaway", 0)
     end
-
 end
 
 return entity

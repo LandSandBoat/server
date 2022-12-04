@@ -579,7 +579,7 @@ enum class Mod
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
     SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENCY            = 491, // Waltz Potentcy Bonus
+    WALTZ_POTENCY            = 491, // Waltz Potency Bonus
     JIG_DURATION             = 492, // Jig duration bonus in percents
     VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
     STEP_FINISH              = 494, // Bonus finishing moves from steps
@@ -976,7 +976,7 @@ enum class Mod
     // 192 to 223
     // 261 to 280
     //
-    // SPARE = 1074, and onward
+    // SPARE = 1075, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

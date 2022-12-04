@@ -118,7 +118,6 @@ local jobPointSpellGiftMap =
 }
 
 local function getSpellJobPointCostForJob(job, spellID)
-
     local jobGiftMap = jobPointSpellGiftMap[job]
     if jobGiftMap then
         local jobPointCost = jobGiftMap[spellID]
@@ -135,7 +134,6 @@ end
 -- return false falls back to default behavior of checking main/sub job levels for cast availability
 -- note: this only affects whether or not you are able to cast a spell in general, MP costs (if any) are still required.
 xi.spells.canUseSpellOverride = function(player, spell)
-
     local job            = player:getMainJob()
     local spellID        = spell:getID()
     local jobPointsSpent = player:getSpentJobPoints()

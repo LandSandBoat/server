@@ -54,6 +54,7 @@ entity.onMobFight = function(mob, target)
             local pos_index = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
             local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
             tuchulcha:setSpawn(coords[1],coords[2],coords[3],0)
+
             tuchulcha:setPos(coords)
             local players = tuchulcha:getBattlefield():getPlayers()
             for _, char in pairs(players) do

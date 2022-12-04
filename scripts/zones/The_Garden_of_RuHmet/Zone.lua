@@ -124,72 +124,68 @@ zoneObject.onZoneIn = function(player, prevZone)
     player:setCharVar("Ru-Hmet-TP", 0)
 end
 
+local teleportEventsByArea =
+{
+    [ 3] = 103,
+    [ 4] = 150, -- Hume Floor 0 to Floor 1
+    [ 5] = 158, -- Hume Floor 1 to Floor 0
+    [ 6] = 159, -- Hume Floor 1 to Floor 2
+    [ 7] = 169, -- Hume Floor 2 to Floor 1
+    [ 8] = 168, -- Hume Floor 2 to Floor 3
+    [ 9] = 178, -- Hume Floor 3 to Floor 2
+    [10] = 151, -- Elvaan Floor 0 to Floor 1
+    [11] = 160, -- Elvaan Floor 1 to Floor 0
+    [12] = 161, -- Elvaan Floor 1 to Floor 2
+    [13] = 171, -- Elvaan Floor 2 to Floor 1
+    [14] = 170, -- Elvaan Floor 2 to Floor 3
+    [15] = 179, -- Elvaan Floor 3 to Floor 2
+    [16] = 152, -- Galka Floor 0 to Floor 1
+    [17] = 162, -- Galka Floor 1 to Floor 0
+    [18] = 163, -- Galka Floor 1 to Floor 2
+    [19] = 173, -- Galka Floor 2 to Floor 1
+    [20] = 172, -- Galka Floor 2 to Floor 3
+    [21] = 180, -- Galka Floor 3 to Floor 2
+    [22] = 153, -- Taru Floor 0 to Floor 1
+    [23] = 164, -- Taru Floor 1 to Floor 0
+    [24] = 165, -- Taru Floor 1 to Floor 2
+    [25] = 175, -- Taru Floor 2 to Floor 1
+    [26] = 174, -- Taru Floor 2 to Floor 3
+    [27] = 181, -- Taru Floor 3 to Floor 2
+    [28] = 154, -- Mithra Floor 0 to Floor 1
+    [29] = 166, -- Mithra Floor 1 to Floor 0
+    [30] = 167, -- Mithra Floor 1 to Floor 2
+    [31] = 177, -- Mithra Floor 2 to Floor 1
+    [32] = 176, -- Mithra Floor 2 to Floor 3
+    [33] = 182, -- Mithra Floor 3 to Floor 2
+}
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if player:getCharVar("Ru-Hmet-TP") == 0 and player:getAnimation() == 0 then
-        switch (triggerArea:GetTriggerAreaID()): caseof
-        {
-            [1] = function (x)
-                if
-                    player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN or
-                    player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
-                    player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
-                then
-                    player:startEvent(101)
-                else
-                    player:startEvent(155)
-                end
-            end, --101
+        local areaId = triggerArea:GetTriggerAreaID()
 
-            [2] = function (x)
-                if
-                    player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
-                    player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)
-                then
-                    player:startEvent(156)
-                else
-                    player:startEvent(183)
-                end
-            end, --102
-
-            [3] = function (x)
-                player:startEvent(103)
-            end, --103
-
-            [4] = function (x) player:startEvent(150); end, --hume niv 0  150 vers niv 1
-            [5] = function (x) player:startEvent(158); end, --hume niv 1  158 vers niv 0
-            [6] = function (x) player:startEvent(159); end, --hume niv 1  159 vers niv 2
-            [7] = function (x) player:startEvent(169); end, --hume niv 2  169 vers niv 1
-            [8] = function (x) player:startEvent(168); end, --hume niv 2  168 vers niv 3
-            [9] = function (x) player:startEvent(178); end, --hume niv 3  178 vers niv 2
-
-            [10] = function (x) player:startEvent(151); end, --elvaan niv 0 151 vers niv 1
-            [11] = function (x) player:startEvent(160); end, --elvaan niv 1 160 vers niv 0
-            [12] = function (x) player:startEvent(161); end, --elvaan niv 1 161 vers niv 2
-            [13] = function (x) player:startEvent(171); end, --elvaan niv 2 171 vers niv 1
-            [14] = function (x) player:startEvent(170); end, --elvaan niv 2 170 vers niv 3
-            [15] = function (x) player:startEvent(179); end, --elvaan niv 3 179 vers niv 2
-
-            [16] = function (x) player:startEvent(152); end, --galka niv 0 152 vers niv 1
-            [17] = function (x) player:startEvent(162); end, --galka niv 1 162 vers niv 0
-            [18] = function (x) player:startEvent(163); end, --galka niv 1 163 vers niv 2
-            [19] = function (x) player:startEvent(173); end, --galka niv 2 173 vers niv 1
-            [20] = function (x) player:startEvent(172); end, --galka niv 2 172 vers niv 3
-            [21] = function (x) player:startEvent(180); end, --galka niv 3 180 vers niv 2
-
-            [22] = function (x) player:startEvent(153); end, --taru niv 0 153 vers niv 1
-            [23] = function (x) player:startEvent(164); end, --taru niv 1 164 vers niv 0
-            [24] = function (x) player:startEvent(165); end, --taru niv 1 165 vers niv 2
-            [25] = function (x) player:startEvent(175); end, --taru niv 2 175 vers niv 1
-            [26] = function (x) player:startEvent(174); end, --taru niv 2 174 vers niv 3
-            [27] = function (x) player:startEvent(181); end, --taru niv 3 181 vers niv 2
-
-            [28] = function (x) player:startEvent(154); end, --mithra niv 0 154 vers niv 1
-            [29] = function (x) player:startEvent(166); end, --mithra niv 1 166 vers niv 0
-            [30] = function (x) player:startEvent(167); end, --mithra niv 1 167 vers niv 2
-            [31] = function (x) player:startEvent(177); end, --mithra niv 2 177 vers niv 1
-            [32] = function (x) player:startEvent(176); end, --mithra niv 2 176 vers niv 3
-            [33] = function (x) player:startEvent(182); end, --mithra niv 3 182 vers niv 2
-        }
+        if areaId == 1 then
+            if
+                areaId == 1 and
+                (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN or
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
+            then
+                player:startEvent(101)
+            else
+                player:startEvent(155)
+            end
+        elseif areaId == 2 then
+            if
+                player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
+                player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)
+            then
+                player:startEvent(156)
+            else
+                player:startEvent(183)
+            end
+        elseif teleportEventsByArea[areaId] then
+            player:startEvent(teleportEventsByArea[areaId])
+        end
     end
 end
 

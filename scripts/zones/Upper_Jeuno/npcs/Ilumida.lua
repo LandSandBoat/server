@@ -20,9 +20,9 @@ entity.onTrigger = function(player, npc)
 
     --this variable implicitly stores: JFame >= 7 and ACandlelightVigil == QUEST_COMPLETED and RubbishDay == QUEST_COMPLETED and
     --NeverToReturn == QUEST_COMPLETED and SearchingForTheRightWords == QUEST_AVAILABLE and prereq CS complete
-    local searchingForWords_prereq = player:getCharVar("QuestSearchRightWords_prereq")
+    local searchingForWordsPrereq = player:getCharVar("QuestSearchRightWords_prereq")
 
-    if searchingForWords_prereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
+    if searchingForWordsPrereq == 1 then --has player completed prerequisite cutscene with Kurou-Morou?
         player:startEvent(197) --SearchingForTheRightWords intro CS
 
     elseif player:getCharVar("QuestSearchRightWords_denied") == 1 then

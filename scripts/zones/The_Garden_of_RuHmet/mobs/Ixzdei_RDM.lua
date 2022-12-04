@@ -33,9 +33,15 @@ entity.onMobEngaged = function(mob, target)
     -- each pot steps off the pedastal after casting initial spell and engaging target
     switch (mobId): caseof
     {
-        [ID.mob.IXZDEI_BASE] = function() mob:pathTo(422.085, 0.000, 426.928) end,
-        [ID.mob.IXZDEI_BASE + 1] = function() mob:pathTo(417.964, 0.000, 426.938) end,
+        [ID.mob.IXZDEI_BASE] = function()
+            mob:pathTo(422.085, 0.000, 426.928)
+        end,
+
+        [ID.mob.IXZDEI_BASE + 1] = function()
+            mob:pathTo(417.964, 0.000, 426.938)
+        end,
     }
+
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setLocalVar("changeTime", 0)
 
@@ -98,6 +104,7 @@ entity.onMobFight = function(mob, target)
                     end)
                 end
             end,
+
             [ID.mob.IXZDEI_BASE + 1] = function()
                 local spawnPos = zdeiTwo:getSpawnPos()
                 mob:setMagicCastingEnabled(false)

@@ -253,15 +253,15 @@ end
 
 xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
     if caster:getID() == target:getID() then -- the COR handles all the calculations
-        local du_effect = caster:getStatusEffect(xi.effect.DOUBLE_UP_CHANCE)
-        local prev_roll = caster:getStatusEffect(du_effect:getSubPower())
-        local roll = prev_roll:getSubPower()
-        local job = du_effect:getTier()
+        local duEffect = caster:getStatusEffect(xi.effect.DOUBLE_UP_CHANCE)
+        local prevRoll = caster:getStatusEffect(duEffect:getSubPower())
+        local roll     = prevRoll:getSubPower()
+        local job      = duEffect:getTier()
 
-        caster:setLocalVar("corsairActiveRoll", du_effect:getSubType())
-        local snake_eye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
-        if snake_eye then
-            if prev_roll:getPower() >= 5 and math.random(100) < snake_eye:getPower() then
+        caster:setLocalVar("corsairActiveRoll", duEffect:getSubType())
+        local snakeEye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
+        if snakeEye then
+            if prevRoll:getPower() >= 5 and math.random(100) < snakeEye:getPower() then
                 roll = 11
             else
                 roll = roll + 1
@@ -282,23 +282,23 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         end
 
         caster:setLocalVar("corsairRollTotal", roll)
-        action:speceffect(caster:getID(), roll - prev_roll:getSubPower())
+        action:speceffect(caster:getID(), roll - prevRoll:getSubPower())
         checkForJobBonus(caster, job)
     end
 
-    local total = caster:getLocalVar("corsairRollTotal")
-    local activeRoll = caster:getLocalVar("corsairActiveRoll")
-    local prev_ability = GetAbility(activeRoll)
+    local total       = caster:getLocalVar("corsairRollTotal")
+    local activeRoll  = caster:getLocalVar("corsairActiveRoll")
+    local prevAbility = GetAbility(activeRoll)
 
-    if prev_ability then -- Apply rolls to target(s), including the COR
-        action:actionID(prev_ability:getID())
+    if prevAbility then -- Apply rolls to target(s), including the COR
+        action:actionID(prevAbility:getID())
 
-        total = applyRoll(caster, target, prev_ability, action, total, true, ability)
+        total = applyRoll(caster, target, prevAbility, action, total, true, ability)
 
         if total > 11 then
             action:setAnimation(target:getID(), 98) -- 98 is bust anim for all rolls
         else
-            action:setAnimation(target:getID(), prev_ability:getAnimation())
+            action:setAnimation(target:getID(), prevAbility:getAnimation())
         end
 
         return total

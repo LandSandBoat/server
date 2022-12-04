@@ -3390,7 +3390,7 @@ void SmallPacket0x052(map_session_data_t* const PSession, CCharEntity* const PCh
     // in this list the slot of whats being updated is old value, replace with new in 116
     // Should Push 0x116 (size 68) in responce
     // 0x04 is start, contains 16 4 byte parts repersently each slot in order
-    PChar->pushPacket(new CAddtoEquipSet(data));
+    PChar->pushPacket(new CAddtoEquipSet(PChar, data));
 }
 
 /************************************************************************
@@ -3422,42 +3422,70 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         charutils::SetStyleLock(PChar, true);
 
-        for (int i = 0x08; i < 0x08 + (0x08 * count); i += 0x08)
+        // Build new lockstyle
+        for (int i = 0; i < count; i++)
         {
-            uint8  equipSlotId = data.ref<uint8>(i + 0x01);
-            uint16 itemId      = data.ref<uint16>(i + 0x04);
+            uint8  equipSlotId = data.ref<uint8>(0x09 + 0x08 * i);
+            uint16 itemId      = data.ref<uint16>(0x0C + 0x08 * i);
 
-            if (equipSlotId > SLOT_BACK || equipSlotId == SLOT_RANGED || equipSlotId == SLOT_AMMO)
+            // Skip non-visible items
+            // Skip non-visible items
+            if (equipSlotId > SLOT_FEET)
             {
                 continue;
             }
 
-            auto* PItem = itemutils::GetItem(itemId);
+            CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(itemId));
             if (PItem == nullptr || !(PItem->isType(ITEM_WEAPON) || PItem->isType(ITEM_EQUIPMENT)))
             {
                 itemId = 0;
             }
-            else if (!(((CItemEquipment*)PItem)->getEquipSlotId() & (1 << equipSlotId)))
+            else if ((PItem->getEquipSlotId() & (1 << equipSlotId)) == 0) // item doesnt fit in slot
             {
                 itemId = 0;
             }
 
             PChar->styleItems[equipSlotId] = itemId;
+        }
 
-            switch (equipSlotId)
+        // Check if we need to remove conflicting slots. Essentially, packet injection shenanigan detector.
+        for (int i = 0; i < 10; i++)
+        {
+            CItemEquipment* PItemEquipment = dynamic_cast<CItemEquipment*>(itemutils::GetItemPointer(PChar->styleItems[i]));
+
+            if (PItemEquipment)
+            {
+                auto removeSlotID = PItemEquipment->getRemoveSlotId();
+
+                for (uint8 x = 0; x < sizeof(removeSlotID) * 8; ++x)
+                {
+                    if (removeSlotID & (1 << x))
+                    {
+                        PChar->styleItems[x] = 0;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            // variable initialized here due to case/switch optimization throwing warnings inside the case
+            CItemEquipment* PItem = PChar->getEquip((SLOTTYPE)i);
+
+            switch (i)
             {
                 case SLOT_MAIN:
                 case SLOT_SUB:
                 case SLOT_RANGED:
                 case SLOT_AMMO:
-                    charutils::UpdateWeaponStyle(PChar, equipSlotId, (CItemWeapon*)PChar->getEquip((SLOTTYPE)equipSlotId));
+                    charutils::UpdateWeaponStyle(PChar, i, PItem);
                     break;
                 case SLOT_HEAD:
                 case SLOT_BODY:
                 case SLOT_HANDS:
                 case SLOT_LEGS:
                 case SLOT_FEET:
-                    charutils::UpdateArmorStyle(PChar, equipSlotId);
+                    charutils::UpdateArmorStyle(PChar, i);
                     break;
             }
         }

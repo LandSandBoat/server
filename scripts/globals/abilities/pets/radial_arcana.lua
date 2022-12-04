@@ -36,7 +36,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     target:addMP(mpRestore)
 
-    pet:timer(200, function(mobArg) mobArg:setHP(0) end)
+    pet:timer(200, function(mobArg)
+        mobArg:setHP(0)
+    end)
 
     return mpRestore
 end

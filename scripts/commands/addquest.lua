@@ -18,7 +18,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, logId, questId, target)
-
     -- validate logId
     local questLog = logIdHelpers.getQuestLogInfo(logId)
     if questLog == nil then

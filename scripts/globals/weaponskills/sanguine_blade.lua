@@ -21,7 +21,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local drain = 0
 
     if tp >= 1000 and tp <= 1999 then

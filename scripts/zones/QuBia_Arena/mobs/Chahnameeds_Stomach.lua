@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobFight = function (mob, target)
+entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
     local pos = mob:getPos()
 

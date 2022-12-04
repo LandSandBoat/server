@@ -31,15 +31,11 @@ zoneObject.onInitialize = function(zone)
     xi.mob.nmTODPersistCache(zone, ID.mob.WEEPING_WILLOW)
 
     -- Prepare everything for Full Speed Ahead!
-    local syrillia   = zone:queryEntitiesByName("Syrillia")[1]
-    local syrilliaID = syrillia:getID()
-
-    ID.npc.SYRILLIA         = syrilliaID
-    ID.npc.BLUE_BEAM_BASE   = syrilliaID + 1
-    ID.npc.RAPTOR_FOOD_BASE = syrilliaID + 9
+    zones[xi.zone.BATALLIA_DOWNS].npc.BLUE_BEAM_BASE   = ID.npc.SYRILLIA + 1
+    zones[xi.zone.BATALLIA_DOWNS].npc.RAPTOR_FOOD_BASE = ID.npc.SYRILLIA + 9
 
     for i = 0, 7 do
-        registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
+        registerRegionAroundNPC(zone, zones[xi.zone.BATALLIA_DOWNS].npc.RAPTOR_FOOD_BASE + i, i + 1)
     end
 
     registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)

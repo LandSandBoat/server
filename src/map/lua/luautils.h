@@ -263,6 +263,8 @@ namespace luautils
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
 
+    int32 OnPetLevelRestriction(CBaseEntity* PMob); // Triggers onPetLevelRestriction in global pet script
+
     int32 OnPath(CBaseEntity* PEntity);         // triggers when an entity is on a pathfind point
     int32 OnPathPoint(CBaseEntity* PEntity);    // triggers when an entity stops on a path point and has finished waiting at it
     int32 OnPathComplete(CBaseEntity* PEntity); // triggers when an entity finishes its pathing

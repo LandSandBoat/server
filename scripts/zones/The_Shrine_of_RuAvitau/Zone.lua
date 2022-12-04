@@ -61,70 +61,31 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
+local teleportEventsByArea =
+{
+    [ 1] = 17, -- To F
+    [ 2] = 16, -- To E
+    [ 3] =  5, -- To L (Kirin)
+    [ 4] =  4, -- To G
+    [ 5] =  1, -- To J
+    [ 6] =  3, -- To H
+    [ 7] =  7, -- To I
+    [ 8] =  6, -- To K
+    [ 9] = 10, -- To L'
+    [10] = 11,
+    [11] =  8,
+    [12] = 15, -- To D
+    [13] = 14, -- To P
+    [14] = 13, -- To M
+    [15] = 12, -- To C
+}
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
-    {
-        [1] = function (x)
-            player:startOptionalCutscene(17) --> F
-        end,
+    local areaId = triggerArea:GetTriggerAreaID()
 
-        [2] = function (x)
-            player:startOptionalCutscene(16) --> E
-        end,
-
-        [3] = function (x)
-            player:startOptionalCutscene(5) --> L --> Kirin !
-        end,
-
-        [4] = function (x)
-            player:startOptionalCutscene(4) --> G
-        end,
-
-        [5] = function (x)
-            player:startOptionalCutscene(1) --> J
-        end,
-
-        [6] = function (x)
-            player:startOptionalCutscene(3) --> H
-        end,
-
-        [7] = function (x)
-            player:startOptionalCutscene(7) --> I
-        end,
-
-        [8] = function (x)
-            player:startOptionalCutscene(6) --> K
-        end,
-
-        [9] = function (x)
-            player:startOptionalCutscene(10) --> L'
-        end,
-
-        [10] = function (x)
-            player:startOptionalCutscene(11)
-        end,
-
-        [11] = function (x)
-            player:startOptionalCutscene(8)
-        end,
-
-        [12] = function (x)
-            player:startOptionalCutscene(15) --> D
-        end,
-
-        [13] = function (x)
-            player:startOptionalCutscene(14) --> P
-        end,
-
-        [14] = function (x)
-            player:startOptionalCutscene(13) --> M
-        end,
-
-        [15] = function (x)
-            player:startOptionalCutscene(12) --> C
-        end,
-    }
-
+    if teleportEventsByArea[areaId] then
+        player:startOptionalCutscene(teleportEventsByArea[areaId])
+    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)

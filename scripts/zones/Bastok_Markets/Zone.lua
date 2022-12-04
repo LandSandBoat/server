@@ -16,18 +16,6 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = { -1 }
-
-    -- FIRST LOGIN (START CS)
-    if player:getPlaytime(false) == 0 then
-        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = { 0, -1, xi.cutscenes.params.NO_OTHER_ENTITY } -- (cs, textTable, Flags)
-        end
-
-        player:setPos(-280, -12, -91, 15)
-        player:setHomePoint()
-    end
-
     -- MOG HOUSE EXIT
     if
         player:getXPos() == 0 and
@@ -37,8 +25,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         local position = math.random(1, 5) - 33
         player:setPos(-177, -8, position, 127)
     end
-
-    return cs
 end
 
 zoneObject.onConquestUpdate = function(zone,  updatetype)
@@ -60,9 +46,6 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 0 then
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    end
 end
 
 return zoneObject

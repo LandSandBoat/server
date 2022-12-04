@@ -17,7 +17,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, titleId, target)
-
     -- validate titleId
     if titleId == nil then
         error(player, "You must supply a title ID.")

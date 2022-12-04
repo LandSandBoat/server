@@ -246,27 +246,27 @@ xi.job_utils.geomancer.bolster = function(player, target, ability)
 end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
-    local hpp_remaining = target:getHPP()
-    local mp_cost       = target:getLocalVar("MP_COST")
-    local fc_merit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
-    local cr_merit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
-    local fc_mod        = player:getMod(xi.mod.FULL_CIRCLE)
-    local cr_mod        = player:getMod(xi.mod.CURATIVE_RECANTATION)
-    local mp_multiplier = 0.5 + (fc_merit / 10) + (fc_mod / 10)
-    local hp_multiplier = 0.5 + (0.7 * cr_merit) + (cr_mod / 10)
-    local mp_returned   = 0
-    local hp_returned   = 0
+    local hppRemaining = target:getHPP()
+    local mpCost       = target:getLocalVar("MP_COST")
+    local fcMerit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
+    local crMerit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
+    local fcMod        = player:getMod(xi.mod.FULL_CIRCLE)
+    local crMod        = player:getMod(xi.mod.CURATIVE_RECANTATION)
+    local mpMultiplier = 0.5 + (fcMerit / 10) + (fcMod / 10)
+    local hpMultiplier = 0.5 + (0.7 * crMerit) + (crMod / 10)
+    local mpReturned   = 0
+    local hpReturned   = 0
 
     -- calculate final mp value
-    mp_returned = math.floor(mp_multiplier * mp_cost * (hpp_remaining / 100))
+    mpReturned = math.floor(mpMultiplier * mpCost * (hppRemaining / 100))
 
-    if cr_merit > 0 then
+    if crMerit > 0 then
         -- calculate final hp value
-        hp_returned = math.floor(hp_multiplier * mp_cost * (hpp_remaining / 100))
-        player:restoreHP(hp_returned)
+        hpReturned = math.floor(hpMultiplier * mpCost * (hppRemaining / 100))
+        player:restoreHP(hpReturned)
     end
 
-    player:restoreMP(mp_returned)
+    player:restoreMP(mpReturned)
     player:despawnPet()
 end
 

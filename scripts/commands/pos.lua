@@ -81,5 +81,4 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5)
             player:PrintToPlayer(string.format("Moved %s to (%.4f, %.4f, %.4f) in zone %i.", targ:getName(), x, y, z, zoneId))
         end
     end
-
 end

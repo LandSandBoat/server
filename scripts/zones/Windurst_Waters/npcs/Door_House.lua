@@ -32,7 +32,6 @@ entity.onTrade = function(player, npc, trade)
             trade:hasItemQty(2186, 4)
         then
             player:startEvent(946) -- accepts mythril pieces, now wait for next vana'diel day
-
         end
     end
 end

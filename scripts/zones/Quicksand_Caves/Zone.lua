@@ -80,23 +80,23 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if triggerAreaID >= 30 then
         switch (triggerAreaID): caseof
         {
-            [30] = function (x)
+            [30] = function()
                 player:setPos(496, -6, -816)
             end,
 
-            [31] = function (x)
+            [31] = function()
                 player:setPos(816, -6, -743)
             end,
 
-            [32] = function (x)
+            [32] = function()
                 player:setPos(216, 9, -16)
             end,
 
-            [33] = function (x)
+            [33] = function()
                 player:setPos(-296, 9, 416)
             end,
 
-            [34] = function (x)
+            [34] = function()
                 player:setPos(-136, 9, -176)
             end,
         }

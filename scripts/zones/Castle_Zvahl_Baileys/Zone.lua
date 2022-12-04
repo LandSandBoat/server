@@ -47,25 +47,20 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+local teleportEventsByArea =
+{
+    [1] = 3, -- Teleports player to NW room of map 3
+    [2] = 2, -- Teleports player to SW room of map 3
+    [3] = 1, -- Teleports player to SE room of map 3
+    [4] = 0, -- Teleports player to NE room of map 3
+}
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
-    {
-        [1] = function (x)
-            player:startEvent(3) -- ports player to NW room of map 3
-        end,
+    local areaId = triggerArea:GetTriggerAreaID()
 
-        [2] = function (x)
-            player:startEvent(2) -- ports player to SW room of map 3
-        end,
-
-        [3] = function (x)
-            player:startEvent(1) -- ports player to SE room of map 3
-        end,
-
-        [4] = function (x)
-            player:startEvent(0) -- ports player to NE room of map 3
-        end,
-    }
+    if teleportEventsByArea[areaId] then
+        player:startEvent(teleportEventsByArea[areaId])
+    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)

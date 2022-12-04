@@ -129,14 +129,12 @@ local setupTimeCrate = function(crateID, floor, crateOffset, count)
     crate:setModelId(962)
     crate:removeListener("TRIGGER_LOCKED_CRATE")
     crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
-
         npcUtil.openCrate(crate, function()
             despawnFloorMobs(crateOffset, count)
             despawnFloorCrates(crateOffset, count)
             content:openDoor(player:getBattlefield(), floor)
             content:extendTimeLimit(zones[content.zoneId], player:getBattlefield())
         end)
-
     end)
 end
 
@@ -146,7 +144,6 @@ local setupRecoverCrate = function(crateID, floor, crateOffset, count)
     crate:setModelId(960)
     crate:removeListener("TRIGGER_LOCKED_CRATE")
     crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
-
         npcUtil.openCrate(crate, function()
             despawnFloorMobs(crateOffset, count)
             despawnFloorCrates(crateOffset, count)
@@ -154,7 +151,6 @@ local setupRecoverCrate = function(crateID, floor, crateOffset, count)
             -- Use wz_recover_all to heal players
             crate:useMobAbility(1531, player)
         end)
-
     end)
 end
 

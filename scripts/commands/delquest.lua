@@ -54,5 +54,4 @@ function onTrigger(player, logId, questId, target)
     -- add quest
     targ:delQuest(logId, questId)
     player:PrintToPlayer(string.format("Deleted %s quest %i from %s.", logName, questId, targ:getName()))
-
 end
