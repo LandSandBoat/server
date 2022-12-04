@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local freePass = player:hasKeyItem(xi.ki.CHOCOBO_CIRCUIT_GRANDSTAND_PASS)
-    player:startEvent(266, freePass and 1 or 0, 5)
+    player:startEvent(266, freePass and 1 or 0, 5) --Couzanne
 end
 
 entity.onEventUpdate = function(player, csid, option)

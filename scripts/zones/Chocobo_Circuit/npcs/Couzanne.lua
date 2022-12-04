@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(332, 5) --
+    player:startEvent(332, 5) --Boirie
 end
 
 entity.onEventUpdate = function(player, csid, option)

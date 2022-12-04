@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(330, 3) --illsorie
+    player:startEvent(330, 3) --Mulaitrand
 end
 
 entity.onEventUpdate = function(player, csid, option)
