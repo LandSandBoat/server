@@ -1160,7 +1160,7 @@ local function calculateRawfSTR(dSTR, divisor)
 end
 
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
-xi.weaponskills.fSTR = function(atk_str, def_vit, weapon_rank)
+xi.weaponskills.fSTR = function(atk_str, def_vit, weaponRank)
     local dSTR = atk_str - def_vit
     local fSTR = calculateRawfSTR(dSTR, 4)
 
@@ -1176,7 +1176,7 @@ xi.weaponskills.fSTR = function(atk_str, def_vit, weapon_rank)
 end
 
 -- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
-xi.weaponskills.fSTR2 = function(atk_str, def_vit, weapon_rank)
+xi.weaponskills.fSTR2 = function(atk_str, def_vit, weaponRank)
     local dSTR = atk_str - def_vit
     local fSTR2 = calculateRawfSTR(dSTR, 2)
 
