@@ -28,6 +28,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = xi.effect.PARALYSIS
+    params.tier = 1
+
+    if not xi.magic.hasEffect(caster, target, spell, params) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return params.effect
+    end
+
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then -- There are no quarter or less hits, if target resists more than .5 spell is resisted completely
@@ -37,7 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         if resduration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
-        elseif target:addStatusEffect(params.effect, potency, 0, duration * resist) then
+        elseif target:addStatusEffect(params.effect, potency, 0, duration * resist, 0, params.tier) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             -- no effect
