@@ -6,14 +6,17 @@ require("scripts/globals/settings")
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.starlightCelebration = xi.events.starlightCelebration or {}
-xi.events.starlightCelebration.treeEntities = xi.events.starlightCelebration.treeEntities or {}
+xi.events.starlightCelebration.data = xi.events.starlightCelebration.data or {}
+xi.events.starlightCelebration.entities = xi.events.starlightCelebration.entities or {}
 
 local event = SeasonalEvent:new("StarlightCelebration")
 
-event:setEnableCheck(function()
+xi.events.starlightCelebration.enabledCheck = function()
     local month = tonumber(os.date("%m"))
     return month == 12
-end)
+end
+
+event:setEnableCheck(xi.events.starlightCelebration.enabledCheck)
 
 local musicZones =
 {
@@ -46,9 +49,9 @@ xi.events.starlightCelebration.setMusic = function(musicId)
     end
 end
 
-local verticalOffset = 1.0
+local verticalOffset = 1.75
 
-xi.events.starlightCelebration.treeData =
+xi.events.starlightCelebration.data =
 {
     [xi.zone.SOUTHERN_SAN_DORIA] =
     {
@@ -241,16 +244,16 @@ xi.events.starlightCelebration.treeData =
     },
 }
 
-xi.events.starlightCelebration.generateTreeEntities = function()
-    for zoneId, treeData in pairs(xi.events.starlightCelebration.treeData) do
+xi.events.starlightCelebration.generateEntities = function()
+    for zoneId, data in pairs(xi.events.starlightCelebration.data) do
         local zone = GetZone(zoneId)
         if zone then
-            for _, treeEntry in pairs(treeData) do
-                local rot  = treeEntry[1]
-                local x    = treeEntry[2]
-                local y    = treeEntry[3]
-                local z    = treeEntry[4]
-                local look = treeEntry[5]
+            for _, entry in pairs(data) do
+                local rot  = entry[1]
+                local x    = entry[2]
+                local y    = entry[3]
+                local z    = entry[4]
+                local look = entry[5]
 
                 local npc = zone:insertDynamicEntity({
                     objtype = xi.objType.NPC,
@@ -266,42 +269,44 @@ xi.events.starlightCelebration.generateTreeEntities = function()
                     releaseIdOnDisappear = true,
                 })
 
-                table.insert(xi.events.starlightCelebration.treeEntities, npc:getID())
+                table.insert(xi.events.starlightCelebration.entities, npc:getID())
             end
         end
     end
 end
 
-xi.events.starlightCelebration.showTrees = function(enabled)
-    if enabled and #xi.events.starlightCelebration.treeEntities == 0 then
-        xi.events.starlightCelebration.generateTreeEntities()
+xi.events.starlightCelebration.showEntities = function(enabled)
+    if enabled and #xi.events.starlightCelebration.entities == 0 then
+        xi.events.starlightCelebration.generateEntities()
     end
 
-    for _, entityID in pairs(xi.events.starlightCelebration.treeEntities) do
+    for _, entityID in pairs(xi.events.starlightCelebration.entities) do
         local entity = GetNPCByID(entityID)
         if entity then
-            print(entity:getZone():getName(), entity)
             if enabled then
                 entity:setStatus(xi.status.NORMAL)
             else
-                entity:setStatus(xi.status.INVISIBLE) -- TODO: Why doesn't DISAPPEAR work here?
+                -- TODO: Why doesn't DISAPPEAR work here?
+                -- entity:setStatus(xi.status.DISAPPEAR)
+
+                entity:setStatus(xi.status.INVISIBLE)
             end
         end
     end
 
     if not enabled then
-        xi.events.starlightCelebration.treeEntities = {}
+        xi.events.starlightCelebration.entities = {}
     end
 end
 
 event:setStartFunction(function()
     xi.events.starlightCelebration.setMusic(starlightCelebrationMusic)
-    xi.events.starlightCelebration.showTrees(true)
+    xi.events.starlightCelebration.showEntities(true)
 end)
 
 event:setEndFunction(function()
     xi.events.starlightCelebration.setMusic(grandDuchyOfJeunoMusic)
-    xi.events.starlightCelebration.showTrees(false)
+    xi.events.starlightCelebration.showEntities(false)
 end)
 
 return event
