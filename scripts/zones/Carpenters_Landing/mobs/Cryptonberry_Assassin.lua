@@ -8,6 +8,13 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
+local cryptonberrySpecials =
+{
+    [xi.job.SMN] = xi.jsa.ASTRAL_FLOW,
+    [xi.job.BLM] = xi.jsa.MANAFONT,
+    [xi.job.THF] = xi.jsa.PERFECT_DODGE,
+}
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
@@ -17,7 +24,7 @@ entity.onMobSpawn = function(mob)
         specials =
         {
             {
-                id = xi.jsa.MIJIN_GAKURE,
+                id = cryptonberrySpecials[mob:getMainJob()],
                 begCode = function(mobArg)
                     mobArg:messageText(mobArg, ID.text.CRYPTONBERRY_ASSASSIN_2HR)
                 end,
