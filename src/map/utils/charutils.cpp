@@ -6028,7 +6028,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE char_points SET %s = GREATEST(LEAST(%s+%d, %d), 0) WHERE charid = %u;";
+        const char* Query = "UPDATE char_points SET %s = GREATEST(LEAST(%s+(%d), %d), 0) WHERE charid = %u;";
 
         sql->Query(Query, type, type, amount, max, PChar->id);
 
