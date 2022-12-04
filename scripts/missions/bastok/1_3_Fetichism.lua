@@ -64,8 +64,7 @@ mission.sections =
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == xi.mission.id.nation.NONE and
                 player:getNation() == mission.areaId and
-                player:hasCompletedMission(mission.areaId, mission.missionId - 1) and
-                not player:hasCompletedMission(mission.areaId, mission.missionId)
+                player:hasCompletedMission(mission.areaId, mission.missionId - 1)
         end,
 
         [xi.zone.BASTOK_MARKETS] =
