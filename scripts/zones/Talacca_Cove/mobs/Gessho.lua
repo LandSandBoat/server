@@ -12,7 +12,9 @@ entity.onMobFight = function(mob, target)
 
         if chance == 50 then
             local clones = math.random(1, 6)
-            for i = 1, clones, 1 do SpawnMob(mob:getID() + i) end
+            for i = 1, clones, 1 do
+                SpawnMob(mob:getID() + i)
+            end
         end
 
         if mob:getHPP() <= 15 then

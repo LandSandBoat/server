@@ -27,10 +27,10 @@ function onTrigger(player)
     end
 
     player:PrintToPlayer(string.format("MainJob(jID: %s) LV: %i / SubJob(jID: %s) LV: %i ",
-    target:getMainJob(), target:getMainLvl(), target:getSubJob(), target:getSubLvl()), xi.msg.channel.SYSTEM_3)
+        target:getMainJob(), target:getMainLvl(), target:getSubJob(), target:getSubLvl()), xi.msg.channel.SYSTEM_3)
 
     player:PrintToPlayer(string.format("HP: %i/%i  MP: %i/%i (current/max) ",
-    target:getHP(), target:getMaxHP(), target:getMP(), target:getMaxMP()), xi.msg.channel.SYSTEM_3)
+        target:getHP(), target:getMaxHP(), target:getMP(), target:getMaxMP()), xi.msg.channel.SYSTEM_3)
 
     player:PrintToPlayer(string.format("Total STR: %i ", target:getStat(xi.mod.STR)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Total DEX: %i ", target:getStat(xi.mod.DEX)), xi.msg.channel.SYSTEM_3)
