@@ -1115,9 +1115,9 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
             multi = 1.20f + (0.30f * (m_THLvl - 1));
             return multi;
         }
-        else if (m_THLvl < 4)
+        else if (m_THLvl < 5)
         {
-            multi = 1.50f + (0.15f * (m_THLvl - 1));
+            multi = 1.50f + (0.15f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 8)
@@ -1155,7 +1155,7 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else
         {
-            multi = 2.66f + (0.16f * (m_THLvl - 2));
+            multi = 2.66f + (0.17f * (m_THLvl - 2));
             return multi;
         }
     }
@@ -1173,7 +1173,7 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else if (m_THLvl < 5)
         {
-            multi = 2.34f + (0.16f * (m_THLvl - 2));
+            multi = 2.66f + (0.16f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 6)
