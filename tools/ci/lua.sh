@@ -101,10 +101,6 @@ global_objects=(
     getMeleeDmg
     handleWSGorgetBelt
 
-    getRecommendedAssaultLevel
-
-    PATHFLAG_WALLHACK
-
     RoeParseTimed
     getRoeRecords
     RoeParseRecords
@@ -118,8 +114,6 @@ global_objects=(
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade
-
-    salvageUtil
 
     addBonuses
     addBonusesAbility
