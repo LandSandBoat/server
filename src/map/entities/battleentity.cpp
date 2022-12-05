@@ -617,13 +617,14 @@ int32 CBattleEntity::addMP(int32 mp)
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
                                 DAMAGE_TYPE damageType /* = DAMAGE_NONE*/)
 {
+    TracyZoneScoped;
+
     if (this->GetLocalVar("DAMAGE_NULL") == 1)
     {
         amount %= 2;
         this->SetLocalVar("DAMAGE_DEALT", amount);
     }
 
-    TracyZoneScoped;
     PLastAttacker                             = attacker;
     this->BattleHistory.lastHitTaken_atkType  = attackType;
     std::optional<CLuaBaseEntity> optAttacker = attacker ? std::optional<CLuaBaseEntity>(CLuaBaseEntity(attacker)) : std::nullopt;
@@ -635,6 +636,13 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
         if (amount > 0)
         {
             roeutils::event(ROE_EVENT::ROE_DMGTAKEN, static_cast<CCharEntity*>(this), RoeDatagram("dmg", amount));
+
+            auto PChar = static_cast<CCharEntity*>(this);
+
+            if (PChar && PChar->isInEvent() && PChar->currentEvent->type == EVENT_TYPE::MENU)
+            {
+                charutils::releaseEvent(PChar, false);
+            }
         }
     }
     else if (PLastAttacker && PLastAttacker->objtype == TYPE_PC)
