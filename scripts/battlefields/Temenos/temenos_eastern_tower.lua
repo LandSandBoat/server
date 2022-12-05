@@ -185,7 +185,7 @@ end
 content.paths =
 {
     [ID.TEMENOS_EASTERN_TOWER.mob.ICE_ELEMENTAL] =
-        {
+    {
         { x = 200.000, y = -161.000, z = 190.000, wait = 5000 },
         { x = 200.000, y = -161.000, z = 198.000, wait = 5000 },
     },
@@ -370,262 +370,262 @@ content.groups =
 content.loot =
 {
     [1] =
+    {
         {
-            {
-                quantity = 5,
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                quantity = 2,
-                { itemid =    0, droprate = 1000 },
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1944, droprate =  65 },
-                { itemid = 1936, droprate =  97 },
-                { itemid = 1946, droprate =  40 },
-                { itemid = 1942, droprate =  95 },
-                { itemid = 2660, droprate = 194 },
-                { itemid = 2714, droprate =  32 },
-                { itemid = 1950, droprate = 161 },
-            },
+            quantity = 5,
+            { itemid = 1875, droprate = 1000 },
         },
 
-        [2] =
         {
-            {
-                quantity = 5,
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                quantity = 3,
-                { itemid =    0, droprate = 1000 },
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1936, droprate = 367 },
-                { itemid = 1952, droprate =  70 },
-                { itemid = 1950, droprate =  40 },
-                { itemid = 1942, droprate = 333 },
-                { itemid = 1958, droprate =  20 },
-                { itemid = 1956, droprate = 106 },
-                { itemid = 1938, droprate =  33 },
-                { itemid = 1944, droprate =  76 },
-                { itemid = 1948, droprate =  95 },
-                { itemid = 2658, droprate =  67 },
-                { itemid = 1946, droprate = 133 },
-            },
-
-            {
-                { itemid =    0, droprate = 350 },
-                { itemid = 1936, droprate = 367 },
-                { itemid = 1952, droprate =  70 },
-                { itemid = 1950, droprate =  40 },
-                { itemid = 1942, droprate = 333 },
-                { itemid = 1958, droprate =  20 },
-                { itemid = 1956, droprate = 106 },
-                { itemid = 1938, droprate =  33 },
-                { itemid = 1944, droprate =  76 },
-                { itemid = 1948, droprate =  95 },
-                { itemid = 2658, droprate =  67 },
-                { itemid = 1946, droprate = 133 },
-            },
+            quantity = 2,
+            { itemid =    0, droprate = 1000 },
+            { itemid = 1875, droprate = 1000 },
         },
 
-        [3] =
         {
-            {
-                quantity = 5,
-                { itemid = 1875, droprate = 1000 },
-            },
+            { itemid = 1944, droprate =  65 },
+            { itemid = 1936, droprate =  97 },
+            { itemid = 1946, droprate =  40 },
+            { itemid = 1942, droprate =  95 },
+            { itemid = 2660, droprate = 194 },
+            { itemid = 2714, droprate =  32 },
+            { itemid = 1950, droprate = 161 },
+        },
+    },
 
-            {
-                quantity = 3,
-                { itemid =    0, droprate = 1000 },
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1942, droprate = 625 },
-                { itemid = 1944, droprate = 102 },
-                { itemid = 1950, droprate =  42 },
-                { itemid = 1952, droprate =  83 },
-                { itemid = 1946, droprate =  50 },
-                { itemid = 1940, droprate =  83 },
-                { itemid = 1936, droprate =  70 },
-                { itemid = 1938, droprate =  42 },
-                { itemid = 1948, droprate =  42 },
-                { itemid = 2660, droprate = 292 },
-            },
-
-            {
-                { itemid =    0, droprate = 300 },
-                { itemid = 1942, droprate = 625 },
-                { itemid = 1944, droprate = 102 },
-                { itemid = 1950, droprate =  42 },
-                { itemid = 1952, droprate =  83 },
-                { itemid = 1946, droprate =  50 },
-                { itemid = 1940, droprate =  83 },
-                { itemid = 1936, droprate =  70 },
-                { itemid = 1938, droprate =  42 },
-                { itemid = 1948, droprate =  42 },
-                { itemid = 2660, droprate = 292 },
-            },
+    [2] =
+    {
+        {
+            quantity = 5,
+            { itemid = 1875, droprate = 1000 },
         },
 
-        [4] =
         {
-            {
-                quantity = 6,
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                quantity = 2,
-                { itemid =    0, droprate = 1000 },
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1950, droprate = 417 },
-                { itemid = 1956, droprate =  75 },
-                { itemid = 1944, droprate = 208 },
-                { itemid = 1940, droprate = 167 },
-                { itemid = 1946, droprate =  62 },
-                { itemid = 1936, droprate =  69 },
-                { itemid = 2660, droprate = 208 },
-                { itemid = 1952, droprate =  42 },
-                { itemid = 2658, droprate =  83 },
-            },
-
-            {
-                { itemid =    0, droprate = 400 },
-                { itemid = 1950, droprate = 417 },
-                { itemid = 1956, droprate =  75 },
-                { itemid = 1944, droprate = 208 },
-                { itemid = 1940, droprate = 167 },
-                { itemid = 1946, droprate =  62 },
-                { itemid = 1936, droprate =  69 },
-                { itemid = 2660, droprate = 208 },
-                { itemid = 1952, droprate =  42 },
-                { itemid = 2658, droprate =  83 },
-            },
+            quantity = 3,
+            { itemid =    0, droprate = 1000 },
+            { itemid = 1875, droprate = 1000 },
         },
 
-        [5] =
         {
-            {
-                quantity = 6,
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid =    0, droprate = 1000 },
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1944, droprate = 208 },
-                { itemid = 1938, droprate =  42 },
-                { itemid = 1946, droprate =  36 },
-                { itemid = 1940, droprate =  83 },
-                { itemid = 1942, droprate =  20 },
-                { itemid = 1952, droprate =  94 },
-                { itemid = 1956, droprate =  42 },
-                { itemid = 1936, droprate =  49 },
-                { itemid = 1950, droprate = 167 },
-                { itemid = 2714, droprate = 458 },
-            },
-
-            {
-                { itemid =    0, droprate = 200 },
-                { itemid = 1944, droprate = 208 },
-                { itemid = 1938, droprate =  42 },
-                { itemid = 1946, droprate =  36 },
-                { itemid = 1940, droprate =  83 },
-                { itemid = 1942, droprate =  20 },
-                { itemid = 1952, droprate =  94 },
-                { itemid = 1956, droprate =  42 },
-                { itemid = 1936, droprate =  49 },
-                { itemid = 1950, droprate = 167 },
-                { itemid = 2714, droprate = 458 },
-            },
+            { itemid = 1936, droprate = 367 },
+            { itemid = 1952, droprate =  70 },
+            { itemid = 1950, droprate =  40 },
+            { itemid = 1942, droprate = 333 },
+            { itemid = 1958, droprate =  20 },
+            { itemid = 1956, droprate = 106 },
+            { itemid = 1938, droprate =  33 },
+            { itemid = 1944, droprate =  76 },
+            { itemid = 1948, droprate =  95 },
+            { itemid = 2658, droprate =  67 },
+            { itemid = 1946, droprate = 133 },
         },
 
-        [6] =
         {
-            {
-                quantity = 6,
-                { itemid = 1875, droprate = 1000 },
-            },
+            { itemid =    0, droprate = 350 },
+            { itemid = 1936, droprate = 367 },
+            { itemid = 1952, droprate =  70 },
+            { itemid = 1950, droprate =  40 },
+            { itemid = 1942, droprate = 333 },
+            { itemid = 1958, droprate =  20 },
+            { itemid = 1956, droprate = 106 },
+            { itemid = 1938, droprate =  33 },
+            { itemid = 1944, droprate =  76 },
+            { itemid = 1948, droprate =  95 },
+            { itemid = 2658, droprate =  67 },
+            { itemid = 1946, droprate = 133 },
+        },
+    },
 
-            {
-                { itemid =    0, droprate = 1000 },
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1942, droprate =  68 },
-                { itemid = 1948, droprate =  74 },
-                { itemid = 1936, droprate = 259 },
-                { itemid = 1940, droprate =  74 },
-                { itemid = 1956, droprate =  74 },
-                { itemid = 1950, droprate =  62 },
-                { itemid = 2656, droprate = 150 },
-                { itemid = 1938, droprate =  76 },
-                { itemid = 1952, droprate =  53 },
-                { itemid = 2658, droprate = 111 },
-                { itemid = 2714, droprate = 370 },
-                { itemid = 1946, droprate = 333 },
-            },
-
-            {
-                { itemid =    0, droprate = 300 },
-                { itemid = 1942, droprate =  68 },
-                { itemid = 1948, droprate =  74 },
-                { itemid = 1936, droprate = 259 },
-                { itemid = 1940, droprate =  74 },
-                { itemid = 1956, droprate =  74 },
-                { itemid = 1950, droprate =  62 },
-                { itemid = 2656, droprate = 150 },
-                { itemid = 1938, droprate =  76 },
-                { itemid = 1952, droprate =  53 },
-                { itemid = 2658, droprate = 111 },
-                { itemid = 2714, droprate = 370 },
-                { itemid = 1946, droprate = 333 },
-            },
+    [3] =
+    {
+        {
+            quantity = 5,
+            { itemid = 1875, droprate = 1000 },
         },
 
-        [7] =
         {
-            {
-                quantity = 7,
-                { itemid = 1875, droprate = 1000 },
-            },
-
-            {
-                { itemid = 1942, droprate =  38 },
-                { itemid = 1950, droprate =  67 },
-                { itemid = 1944, droprate = 100 },
-                { itemid = 1936, droprate = 233 },
-                { itemid = 1946, droprate =  80 },
-                { itemid = 2660, droprate = 333 },
-                { itemid = 2714, droprate =  67 },
-            },
-
-            {
-                { itemid = 1905, droprate = 1000 },
-            },
-
-            {
-                { itemid =    0, droprate = 100 },
-                { itemid = 2127, droprate =  55 },
-            },
+            quantity = 3,
+            { itemid =    0, droprate = 1000 },
+            { itemid = 1875, droprate = 1000 },
         },
+
+        {
+            { itemid = 1942, droprate = 625 },
+            { itemid = 1944, droprate = 102 },
+            { itemid = 1950, droprate =  42 },
+            { itemid = 1952, droprate =  83 },
+            { itemid = 1946, droprate =  50 },
+            { itemid = 1940, droprate =  83 },
+            { itemid = 1936, droprate =  70 },
+            { itemid = 1938, droprate =  42 },
+            { itemid = 1948, droprate =  42 },
+            { itemid = 2660, droprate = 292 },
+        },
+
+        {
+            { itemid =    0, droprate = 300 },
+            { itemid = 1942, droprate = 625 },
+            { itemid = 1944, droprate = 102 },
+            { itemid = 1950, droprate =  42 },
+            { itemid = 1952, droprate =  83 },
+            { itemid = 1946, droprate =  50 },
+            { itemid = 1940, droprate =  83 },
+            { itemid = 1936, droprate =  70 },
+            { itemid = 1938, droprate =  42 },
+            { itemid = 1948, droprate =  42 },
+            { itemid = 2660, droprate = 292 },
+        },
+    },
+
+    [4] =
+    {
+        {
+            quantity = 6,
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            quantity = 2,
+            { itemid =    0, droprate = 1000 },
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            { itemid = 1950, droprate = 417 },
+            { itemid = 1956, droprate =  75 },
+            { itemid = 1944, droprate = 208 },
+            { itemid = 1940, droprate = 167 },
+            { itemid = 1946, droprate =  62 },
+            { itemid = 1936, droprate =  69 },
+            { itemid = 2660, droprate = 208 },
+            { itemid = 1952, droprate =  42 },
+            { itemid = 2658, droprate =  83 },
+        },
+
+        {
+            { itemid =    0, droprate = 400 },
+            { itemid = 1950, droprate = 417 },
+            { itemid = 1956, droprate =  75 },
+            { itemid = 1944, droprate = 208 },
+            { itemid = 1940, droprate = 167 },
+            { itemid = 1946, droprate =  62 },
+            { itemid = 1936, droprate =  69 },
+            { itemid = 2660, droprate = 208 },
+            { itemid = 1952, droprate =  42 },
+            { itemid = 2658, droprate =  83 },
+        },
+    },
+
+    [5] =
+    {
+        {
+            quantity = 6,
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            { itemid =    0, droprate = 1000 },
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            { itemid = 1944, droprate = 208 },
+            { itemid = 1938, droprate =  42 },
+            { itemid = 1946, droprate =  36 },
+            { itemid = 1940, droprate =  83 },
+            { itemid = 1942, droprate =  20 },
+            { itemid = 1952, droprate =  94 },
+            { itemid = 1956, droprate =  42 },
+            { itemid = 1936, droprate =  49 },
+            { itemid = 1950, droprate = 167 },
+            { itemid = 2714, droprate = 458 },
+        },
+
+        {
+            { itemid =    0, droprate = 200 },
+            { itemid = 1944, droprate = 208 },
+            { itemid = 1938, droprate =  42 },
+            { itemid = 1946, droprate =  36 },
+            { itemid = 1940, droprate =  83 },
+            { itemid = 1942, droprate =  20 },
+            { itemid = 1952, droprate =  94 },
+            { itemid = 1956, droprate =  42 },
+            { itemid = 1936, droprate =  49 },
+            { itemid = 1950, droprate = 167 },
+            { itemid = 2714, droprate = 458 },
+        },
+    },
+
+    [6] =
+    {
+        {
+            quantity = 6,
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            { itemid =    0, droprate = 1000 },
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            { itemid = 1942, droprate =  68 },
+            { itemid = 1948, droprate =  74 },
+            { itemid = 1936, droprate = 259 },
+            { itemid = 1940, droprate =  74 },
+            { itemid = 1956, droprate =  74 },
+            { itemid = 1950, droprate =  62 },
+            { itemid = 2656, droprate = 150 },
+            { itemid = 1938, droprate =  76 },
+            { itemid = 1952, droprate =  53 },
+            { itemid = 2658, droprate = 111 },
+            { itemid = 2714, droprate = 370 },
+            { itemid = 1946, droprate = 333 },
+        },
+
+        {
+            { itemid =    0, droprate = 300 },
+            { itemid = 1942, droprate =  68 },
+            { itemid = 1948, droprate =  74 },
+            { itemid = 1936, droprate = 259 },
+            { itemid = 1940, droprate =  74 },
+            { itemid = 1956, droprate =  74 },
+            { itemid = 1950, droprate =  62 },
+            { itemid = 2656, droprate = 150 },
+            { itemid = 1938, droprate =  76 },
+            { itemid = 1952, droprate =  53 },
+            { itemid = 2658, droprate = 111 },
+            { itemid = 2714, droprate = 370 },
+            { itemid = 1946, droprate = 333 },
+        },
+    },
+
+    [7] =
+    {
+        {
+            quantity = 7,
+            { itemid = 1875, droprate = 1000 },
+        },
+
+        {
+            { itemid = 1942, droprate =  38 },
+            { itemid = 1950, droprate =  67 },
+            { itemid = 1944, droprate = 100 },
+            { itemid = 1936, droprate = 233 },
+            { itemid = 1946, droprate =  80 },
+            { itemid = 2660, droprate = 333 },
+            { itemid = 2714, droprate =  67 },
+        },
+
+        {
+            { itemid = 1905, droprate = 1000 },
+        },
+
+        {
+            { itemid =    0, droprate = 100 },
+            { itemid = 2127, droprate =  55 },
+        },
+    },
 }
 
 return content:register()
