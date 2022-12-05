@@ -592,7 +592,7 @@ public:
     void  SetDeathType(uint8 type);
     uint8 GetDeathType();
 
-    uint8 GetHPP() const;   // количество hp в процентах
+    uint8 GetHPP() const; // количество hp в процентах
     uint8 GetHPPNoPercentOrConvert();
     int32 GetMaxHP() const; // максимальное количество hp
     uint8 GetMPP() const;   // количество mp в процентах
