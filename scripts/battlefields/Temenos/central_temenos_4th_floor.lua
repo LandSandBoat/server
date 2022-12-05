@@ -48,7 +48,9 @@ function content:onBattlefieldInitialise(battlefield)
         for j = 1, group.count do
             local crateID = group.offset + j - 1
             local crate = GetEntityByID(crateID)
-            xi.limbus.hideCrate(crate)
+            crate:setStatus(xi.status.NORMAL)
+            crate:setUntargetable(false)
+            crate:setAnimationSub(8)
             crate:setModelId(961)
 
             crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
@@ -60,7 +62,7 @@ function content:onBattlefieldInitialise(battlefield)
                     else
                         -- Spawn a random mob from the corresponding mob group
                         local mobGroup = ID.CENTRAL_TEMENOS_4TH_FLOOR.mob.GROUPS[index]
-                        local mobID = mobGroup.offset + math.random(0, mobGroup.count)
+                        local mobID = mobGroup.offset + math.random(0, mobGroup.count - 1)
                         local mob = GetMobByID(mobID)
                         mob:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
                         mob:spawn()
@@ -117,13 +119,14 @@ content.groups =
             "Koo_Buzu_the_Theomanic",
         },
 
+        spawned = false,
         mixins = { require("scripts/mixins/job_special") }
     },
 
     {
         mobs = { "Proto-Ultima" },
         setup = function(battlefield, mobs)
-            local ultima = mobs[0]
+            local ultima = mobs[1]
             -- Despawn all crates when Proto-Ultima is engaged
             ultima:addListener("ENGAGE", "ULTIMA_ENGAGED", function(mob, target)
                 for _, group in ipairs(ID.CENTRAL_TEMENOS_4TH_FLOOR.npc.GROUPS) do
