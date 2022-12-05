@@ -107,7 +107,7 @@ void CLatentEffectContainer::CheckLatentsHP()
             case LATENT::HP_UNDER_PERCENT:
             case LATENT::HP_OVER_PERCENT:
             case LATENT::HP_UNDER_TP_UNDER_100:
-            case LATENT::HP_BASEU_TP_UNDER_100:
+            case LATENT::HP_BASE_UNDER_TP_UNDER_100:
             case LATENT::HP_OVER_TP_UNDER_100:
             case LATENT::SANCTION_REGEN_BONUS:
             case LATENT::SIGIL_REGEN_BONUS:
@@ -135,7 +135,7 @@ void CLatentEffectContainer::CheckLatentsTP()
             case LATENT::TP_UNDER:
             case LATENT::TP_OVER:
             case LATENT::HP_UNDER_TP_UNDER_100:
-            case LATENT::HP_BASEU_TP_UNDER_100:
+            case LATENT::HP_BASE_UNDER_TP_UNDER_100:
             case LATENT::HP_OVER_TP_UNDER_100:
             case LATENT::SANCTION_REFRESH_BONUS:
             case LATENT::SIGIL_REFRESH_BONUS:
@@ -691,7 +691,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::HP_UNDER_TP_UNDER_100:
             expression = m_POwner->GetHPP() <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
-        case LATENT::HP_BASEU_TP_UNDER_100:
+        case LATENT::HP_BASE_UNDER_TP_UNDER_100:
             expression = m_POwner->GetHPPNoPercentOrConvert() <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
         case LATENT::HP_OVER_TP_UNDER_100:
