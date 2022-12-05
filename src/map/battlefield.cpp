@@ -527,7 +527,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         m_Zone->updateCharLevelRestriction(PChar);
 
-        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+        if (leavecode == BATTLEFIELD_LEAVE_CODE_EXIT && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
             PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->SetSubPower(0);
         }
