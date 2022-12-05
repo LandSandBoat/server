@@ -4,10 +4,11 @@
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
-salvageUtil = {}
+xi = xi or {}
+xi.salvage = xi.salvage or {}
 -----------------------------------
 
-function salvageUtil.onCellItemCheck(target, effect, value)
+xi.salvage.onCellItemCheck = function(target, effect, value)
     local statusEffect = target:getStatusEffect(effect)
     if statusEffect then
         local power = statusEffect:getPower()
@@ -19,7 +20,7 @@ function salvageUtil.onCellItemCheck(target, effect, value)
     return 55
 end
 
-function salvageUtil.onCellItemUse(target, effect, value, offset)
+xi.salvage.onCellItemUse = function(target, effect, value, offset)
     local statusEffect = target:getStatusEffect(effect)
     local power = statusEffect:getPower()
     local newpower = bit.band(power, bit.bnot(value))
