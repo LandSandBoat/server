@@ -19,7 +19,10 @@ function SeasonalEvent:new(id)
     setmetatable(obj, self)
     obj.id = id
     obj.isEnabled = false
-    obj.enableCheck = function() return false end
+    obj.enableCheck = function()
+        return false
+    end
+
     obj.startFunc = {}
     obj.endFunc = {}
     return obj
@@ -46,6 +49,7 @@ function SeasonalEvent:checkStarting()
         print("Starting Seasonal Event: " .. self.id)
         self:startFunc()
     end
+
     return self
 end
 
@@ -55,6 +59,7 @@ function SeasonalEvent:checkEnding()
         print("Ending Seasonal Event: " .. self.id)
         self:endFunc()
     end
+
     return self
 end
 
