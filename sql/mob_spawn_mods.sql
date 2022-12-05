@@ -339,6 +339,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16912847,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Jailer Of Love
 INSERT INTO `mob_spawn_mods` VALUES (16912848,55,300,1); -- IDLE_DESPAWN: 300
+INSERT INTO `mob_spawn_mods` VALUES (16912848,12,15,1);  -- DRAW_IN: 15
 
 -- Ix'Ghrah
 INSERT INTO `mob_spawn_mods` VALUES (16916813,55,180,1); -- IDLE_DESPAWN: 180
