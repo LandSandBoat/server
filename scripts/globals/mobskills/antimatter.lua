@@ -10,24 +10,7 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- skillList  54 = Omega
-    -- skillList 727 = Proto-Omega
-    -- skillList 728 = Ultima
-    -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-    local mobhp     = mob:getHPP()
-    local phase     = mob:getLocalVar("battlePhase")
-
-    if
-        (skillList == 729 and phase < 4) or
-        (skillList == 728 and mobhp < 20)
-    then
-        if mob:getLocalVar("nuclearWaste") == 0 then
-            return 0
-        end
-    end
-
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
