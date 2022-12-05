@@ -171,9 +171,6 @@ global_objects=(
 
     AbilityFinalAdjustments
 
-    MOBSKILL_MAGICAL
-    MOBSKILL_PHYSICAL
-
     TPMOD_NONE
     TPMOD_CHANCE
     TPMOD_CRITICAL
