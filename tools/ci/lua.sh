@@ -81,9 +81,24 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
 
-    getRecommendedAssaultLevel
+    doAutoPhysicalWeaponskill
+    doAutoRangedWeaponskill
+    doPhysicalWeaponskill
+    doRangedWeaponskill
+    doMagicWeaponskill
+    doesElementMatchWeaponskill
+    applyResistanceAddEffect
+    takeWeaponskillDamage
 
-    PATHFLAG_WALLHACK
+    fTP
+    fSTR
+    fSTR2
+    calculateRawWSDmg
+    calculatedIgnoredDef
+    cMeleeRatio
+    generatePdif
+    getMeleeDmg
+    handleWSGorgetBelt
 
     RoeParseTimed
     getRoeRecords
@@ -99,8 +114,36 @@ global_objects=(
     isHalloweenEnabled
     onHalloweenTrade
 
-    salvageUtil
-
+    addBonuses
+    addBonusesAbility
+    applyBarspell
+    applyBarstatus
+    applyResistance
+    applyResistanceAbility
+    applyResistanceEffect
+    adjustForTarget
+    calculateDuration
+    calculateDurationForLvl
+    calculateMagicDamage
+    calculatePotency
+    canOverwrite
+    dayWeatherBonus
+    doBoostGain
+    doDivineBanishNuke
+    doDivineNuke
+    doElementalNuke
+    doEnspell
+    doNinjutsuNuke
+    finalMagicAdjustments
+    finalMagicNonSpellAdjustments
+    getBaseCure
+    getCurePower
+    getCurePowerOld
+    getCureFinal
+    getBaseCureOld
+    getEffectResistance
+    getElementalDamageReduction
+    getElementalDebuffDOT
     getFlourishAnimation
     getStepAnimation
     hasSleepEffects
