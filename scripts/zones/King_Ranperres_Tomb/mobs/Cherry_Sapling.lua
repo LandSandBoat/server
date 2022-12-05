@@ -22,7 +22,7 @@ entity.onMobDeath = function(mob, player, optParams)
     end
 
     if allSaplingsDead then
-        SpawnMob(ID.mob.CHERRY_SAPLING_OFFSET + 10) -- Cemetery Cherry
+        SpawnMob(ID.mob.CHERRY_SAPLING_OFFSET + 6) -- Cemetery Cherry
     end
 end
 
