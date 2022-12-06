@@ -796,6 +796,7 @@ function Battlefield.redirectEventCall(eventName, player, csid, option)
 end
 
 function Battlefield:onEventFinishEnter(player, csid, option)
+    player:setEnteredBattlefield(true)
     player:setLocalVar("[battlefield]area", 0)
     self:setLocalVar(player, "CS", 1)
 end
@@ -892,13 +893,14 @@ end
 function Battlefield:onBattlefieldRegister(player, battlefield)
 end
 
-function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
+function Battlefield:onBattlefieldStatusChange(battlefield, status)
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
     if
         status == xi.battlefield.status.LOCKED and
         battlefield:getLocalVar("statusRemoval") == 0
     then
         battlefield:setLocalVar("statusRemoval", 1)
+        local players = battlefield:getPlayers()
 
         for _, player in pairs(players) do
             local alliance = player:getAlliance()
@@ -981,11 +983,6 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
-
-    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        status:setSubPower(1)
-    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -996,9 +993,6 @@ function Battlefield:onBattlefieldLeave(player, battlefield, leavecode)
         self:onBattlefieldWin(player, battlefield)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         self:onBattlefieldLoss(player, battlefield)
-    elseif player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        status:setSubPower(0)
     end
 end
 
