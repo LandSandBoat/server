@@ -224,6 +224,8 @@ function xi.events.starlightCelebration.tokenMoogleOnFinish(player, id, csid, op
                 {
                     5552,   -- Black Pudding
                     18863,  -- Dream Bell
+                    10382,  -- Dream Mittens
+                    10383,  -- Dream Mittens +1
                     5542,   -- Gateau Aux Fraises
                     5616,   -- Lebkuchen House
                     5622,   -- Candy Cane

@@ -1,17 +1,17 @@
 -----------------------------------
--- Area: Rabao
---  NPC: Mileon
+-- Area: Norg
+--  NPC: Repat
 -- Type: Lucky Roll Gambler
--- !pos 26.080 8.201 65.297 247
+-- !pos -15.29 1.09 146.00 252
 -----------------------------------
-local ID = require("scripts/zones/Rabao/IDs")
+local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npc:setLocalVar("[LuckyRoll]Rabao", math.random (150, 250)) -- ~observed range from retail
+    npc:setLocalVar("[LuckyRoll]Norg", math.random (150, 250)) -- ~observed range from retail
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -20,10 +20,10 @@ end
 entity.onTrigger = function(player, npc)
     local gil = player:getGil()
     local playCheck = player:getCharVar("[LuckyRoll]Played")
-    local winCheck = npc:getLocalVar("[LuckyRoll]RabaoLastWon")
+    local winCheck = npc:getLocalVar("[LuckyRoll]NorgLastWon")
 
     if playCheck ~= vanaDay() and winCheck ~= vanaDay() then
-        player:startEvent(100, gil)
+        player:startEvent(174, gil)
     else
         player:showText(npc, ID.text.LUCKY_ROLL_GAMEOVER)
     end
@@ -31,22 +31,22 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    if csid == 100 and option == 0 then
+    if csid == 174 and option == 0 then
 
-        local npc = GetNPCByID(ID.npc.MILEON)
-        local currentTotal = npc:getLocalVar("[LuckyRoll]Rabao")
+        local npc = GetNPCByID(ID.npc.REPAT)
+        local currentTotal = npc:getLocalVar("[LuckyRoll]Norg")
         local roll = math.random(1, 1)
         local newTotal = currentTotal + roll
 
         player:updateEvent(4, roll, 0, newTotal)
-        npc:setLocalVar("[LuckyRoll]Rabao", newTotal)
+        npc:setLocalVar("[LuckyRoll]Norg", newTotal)
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 100 and option == 0 then
-        local npc = GetNPCByID(ID.npc.MILEON)
-        local newTotal = npc:getLocalVar("[LuckyRoll]Rabao")
+    if csid == 174 and option == 0 then
+        local npc = GetNPCByID(ID.npc.REPAT)
+        local newTotal = npc:getLocalVar("[LuckyRoll]Norg")
 
         if newTotal >= 400 then
 
@@ -58,8 +58,8 @@ entity.onEventFinish = function(player, csid, option)
                 npcUtil.giveItem(player, math.random(769, 776))
             end
 
-            npc:setLocalVar("[LuckyRoll]Rabao", math.random(150, 250))
-            npc:setLocalVar("[LuckyRoll]RabaoLastWon", VanadielUniqueDay())
+            npc:setLocalVar("[LuckyRoll]Norg", math.random(150, 250))  -- observed range from retail
+            npc:setLocalVar("[LuckyRoll]NorgLastWon", VanadielUniqueDay())
             player:addGil(10000)
         end
 
