@@ -537,7 +537,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         if (leavecode == BATTLEFIELD_LEAVE_CODE_EXIT && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->SetSubPower(0);
+            setPlayerEntered(PChar, false);
         }
 
         if (PChar->isDead())
@@ -1020,4 +1020,25 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
             }
         }
     }
+}
+
+void CBattlefield::setPlayerEntered(CCharEntity* PChar, bool entered)
+{
+    CStatusEffect* effect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+    effect->SetTier(entered ? 1 : 0);
+}
+
+bool CBattlefield::hasPlayerEntered(CCharEntity* PChar)
+{
+    if (!PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+    {
+        return false;
+    }
+
+    return PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetTier() == 1;
+}
+
+uint16 CBattlefield::getBattlefieldArea(CCharEntity* PChar)
+{
+    return PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower();
 }

@@ -538,6 +538,8 @@ public:
     bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
     bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
     bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
+    void  setEnteredBattlefield(bool entered);                                                                                     // Sets if the player has entered into a battlefield or not
+    bool  hasEnteredBattlefield();                                                                                                 // If the player has entered into a battlefield return true else false
 
     // Battle Utilities
     bool isAlive();

@@ -9747,6 +9747,39 @@ bool CLuaBaseEntity::isInDynamis()
 }
 
 /************************************************************************
+ *  Function: setEnteredBattlefield()
+ *  Purpose : Sets if the player has entered the battlefield or not
+ *  Example : player:setEnteredBattlefield(true)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setEnteredBattlefield(bool entered)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+    {
+        CBattlefield::setPlayerEntered(PChar, entered);
+    }
+}
+
+/************************************************************************
+ *  Function: hasEnteredBattlefield()
+ *  Purpose : Checks if the player has entered the battlefield or not
+ *  Example : if player:hasEnteredBattlefield() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEnteredBattlefield()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return CBattlefield::hasPlayerEntered(PChar);
+}
+
+/************************************************************************
  *  Function: isAlive()
  *  Purpose : Returns true if an Entity is alive
  *  Example : if mob:isAlive() then
@@ -15967,6 +16000,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("enterBattlefield", CLuaBaseEntity::enterBattlefield);
     SOL_REGISTER("leaveBattlefield", CLuaBaseEntity::leaveBattlefield);
     SOL_REGISTER("isInDynamis", CLuaBaseEntity::isInDynamis);
+    SOL_REGISTER("setEnteredBattlefield", CLuaBaseEntity::setEnteredBattlefield);
+    SOL_REGISTER("hasEnteredBattlefield", CLuaBaseEntity::hasEnteredBattlefield);
 
     // Battle Utilities
     SOL_REGISTER("isAlive", CLuaBaseEntity::isAlive);
