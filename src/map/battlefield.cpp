@@ -529,7 +529,14 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         if (leavecode == BATTLEFIELD_LEAVE_CODE_EXIT && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            setPlayerEntered(PChar, false);
+            if (GetStatus() == BATTLEFIELD_STATUS_LOCKED)
+            {
+                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            }
+            else
+            {
+                setPlayerEntered(PChar, false);
+            }
         }
 
         if (PChar->isDead())
