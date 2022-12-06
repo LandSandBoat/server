@@ -26,16 +26,19 @@ def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
 class LuaStyleCheck:
-    def __init__(self, input_file):
+    def __init__(self, input_file, show_errors = True):
         self.filename = input_file
+        self.show_errors = show_errors
+
         self.run_style_check()
 
     def error(self, error_string):
         """Displays error_string along with filename and line.  Increments errcount for the class."""
 
-        print(f"{error_string}: {self.filename}:{self.counter}")
-        print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
-        print("")
+        if self.show_errors:
+            print(f"{error_string}: {self.filename}:{self.counter}")
+            print(f"{self.lines[self.counter - 1].strip()}                              <-- HERE")
+            print("")
 
         self.errcount += 1
 
@@ -246,7 +249,7 @@ class LuaStyleCheck:
                     continue
 
                 # Remove in-line comments
-                code_line = re.sub("--.*?(\r\n?|\n)", "", line)
+                code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line)
 
                 # Checks that apply to all lines
                 self.check_table_formatting(code_line)
@@ -295,11 +298,13 @@ class LuaStyleCheck:
                     else:
                         in_condition = True
 
-                    # Do single line rules for condition here
-                    if code_line.startswith('and') or code_line.startswith('or'):
+                    # Do single line rules for condition here, space in string check is intentional to allow
+                    # and|or on its own line in some cases.
+                    stripped_line = code_line.strip()
+                    if stripped_line.startswith('and ') or stripped_line.startswith('or '):
                         self.error('Multiline conditions should not start with and|or')
 
-                    if code_line.endswith('not'):
+                    if stripped_line.endswith('not'):
                         self.error('Multiline conditions should not end with not')
                 
 
@@ -309,6 +314,7 @@ class LuaStyleCheck:
             # f.seek(0)
             # f.writelines(lines)
 
+    show_errors  = True
     lines        = []
     counter      = 0
     filename     = ""
@@ -323,14 +329,20 @@ class LuaStyleCheck:
 
 target = sys.argv[1]
 
-total_errors = 0
+total_errors    = 0
+expected_errors = 0
+
 if target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
-    total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua').errcount
+    total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
+    expected_errors = 38
 else:
     total_errors = LuaStyleCheck(target).errcount
 
-if total_errors > 0:
-    print(f"Lua styling errors: {total_errors}")
+if total_errors != expected_errors:
+    if target != 'test':
+        print(f"Lua styling errors: {total_errors}")
+    else:
+        print(f"Stylecheck Unit tests failed! Expected {expected_errors} errors and found {total_errors}.")
