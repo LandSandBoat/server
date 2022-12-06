@@ -28,6 +28,11 @@ entity.onMobFight = function(mob, target)
     local spawnTime = mob:getLocalVar("spawnTime")
     local twohourTime = mob:getLocalVar("twohourTime")
     local fifteenBlock = mob:getBattleTime() / 15
+    local drawInTableRoom =
+    {
+        condition1 = target:getXPos() < 180 and target:getZPos() > -305 and target:getZPos() < -290,
+        position = { 180.79, 7.5, -299.96, target:getRotPos() },
+    }
 
     if twohourTime == 0 then
         twohourTime = math.random(4, 6)
@@ -79,14 +84,7 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Vrtra draws in if you attempt to leave the room
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if (target:getXPos() < 180 and target:getZPos() > -305 and target:getZPos() < -290) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        target:setPos(180.79, 7.5, -299.96, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
+    utils.arenaDrawIn(mob, target, drawInTableRoom)
 end
 
 entity.onMobDisengage = function(mob, weather)

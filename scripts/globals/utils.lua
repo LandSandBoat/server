@@ -906,3 +906,21 @@ function utils.ternary(conditional, trueVal, falseVal)
 
     return falseVal
 end
+
+function utils.arenaDrawIn(mob, target, table)
+    local nextDrawIn = target:getLocalVar("[Draw-In]WaitTime")
+    local condition1 = utils.ternary(table.condition1 ~= nil, table.condition1, false)
+    local condition2 = utils.ternary(table.condition2 ~= nil, table.condition2, false)
+    local condition3 = utils.ternary(table.condition3 ~= nil, table.condition3, false)
+    local condition4 = utils.ternary(table.condition4 ~= nil, table.condition4, false)
+    local position   = utils.ternary(table.position ~= nil, table.position, { mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos() })
+
+    if
+        (condition1 or condition2 or condition3 or condition4) and
+        (os.time() > nextDrawIn)
+    then
+        target:setPos(position[1], position[2], position[3], utils.ternary(position[4] ~= nil, position[4], 0))
+        mob:messageBasic(232, 0, 0, target)
+        target:setLocalVar("[Draw-In]WaitTime", os.time() + 1)
+    end
+end

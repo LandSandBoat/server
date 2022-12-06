@@ -213,8 +213,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(64800, 86400)) -- 18 to 24 hours
+    xi.mob.nmTODPersist(mob, math.random(64800, 86400)) -- 18 to 24 hours
 end
 
 return entity

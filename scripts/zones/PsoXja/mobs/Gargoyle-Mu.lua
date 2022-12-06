@@ -9,6 +9,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGPHYS, -10000)
     mob:setMod(xi.mod.UDMGRANGE, -10000)
+    mob.setMod(xi.mobMod.DETECTION, bit.bor(xi.detects.SIGHT, xi.detects.MAGIC, xi.detects.SCENT))
     mob:setMobMod(xi.mobMod.SPELL_LIST, 509)
     mob:setLocalVar("timer", os.time() + 30)
 end

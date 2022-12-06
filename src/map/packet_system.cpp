@@ -692,6 +692,14 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->PWideScanTarget = nullptr;
             }
         }
+
+        if (std::chrono::system_clock::now() > PChar->m_nextDataSave)
+        {
+            charutils::SaveCharStats(PChar);
+            charutils::SaveCharPosition(PChar);
+            PChar->StatusEffectContainer->SaveStatusEffects();
+            PChar->m_nextDataSave = std::chrono::system_clock::now() + std::chrono::seconds(settings::get<uint16>("main.PLAYER_DATA_SAVE") > 0 ? settings::get<uint16>("main.PLAYER_DATA_SAVE") : 120);
+        }
     }
 }
 
@@ -3850,7 +3858,17 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 // Ensure the destination exists
                 CZone* PDestination = zoneutils::GetZone(PZoneLine->m_toZone);
-                if (PDestination && PDestination->GetIP() == 0)
+                if (settings::get<bool>("main.ERA_CHOCOBO_ZONE_DISMOUNT") && PChar->isMounted() && PDestination && !PDestination->CanUseMisc(MISC_MOUNT))
+                {
+                    PChar->loc.p.rotation += 128;
+
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 2));
+                    PChar->pushPacket(new CCSPositionPacket(PChar));
+
+                    PChar->status = STATUS_TYPE::NORMAL;
+                    return;
+                }
+                else if (PDestination && PDestination->GetIP() == 0)
                 {
                     ShowDebug("SmallPacket0x5E: Zone %u closed to chars", PZoneLine->m_toZone);
 

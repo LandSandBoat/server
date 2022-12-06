@@ -339,6 +339,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16912847,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Jailer Of Love
 INSERT INTO `mob_spawn_mods` VALUES (16912848,55,300,1); -- IDLE_DESPAWN: 300
+INSERT INTO `mob_spawn_mods` VALUES (16912848,12,15,1);  -- DRAW_IN: 15
 
 -- Ix'Ghrah
 INSERT INTO `mob_spawn_mods` VALUES (16916813,55,180,1); -- IDLE_DESPAWN: 180
@@ -1816,6 +1817,12 @@ INSERT INTO `mob_spawn_mods` VALUES (17461307,15,3500,1);
 INSERT INTO `mob_spawn_mods` VALUES (17649784,1,12000,1); -- min gil 12000
 INSERT INTO `mob_spawn_mods` VALUES (17649784,2,20000,1); -- max gil 30000
 INSERT INTO `mob_spawn_mods` VALUES (17649784,15,4800,1); -- mug gil 4800
+
+-- Gargoyle-Iota, Gargoyle-Kappa, Gargoyle-Lambda, Gargoyle-Mu
+INSERT INTO `mob_spawn_mods` VALUES (16814231,55,180,1); -- IDLE_DESPAWN: 180
+INSERT INTO `mob_spawn_mods` VALUES (16814232,55,180,1); -- IDLE_DESPAWN: 180
+INSERT INTO `mob_spawn_mods` VALUES (16814233,55,180,1); -- IDLE_DESPAWN: 180
+INSERT INTO `mob_spawn_mods` VALUES (16814234,55,180,1); -- IDLE_DESPAWN: 180
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

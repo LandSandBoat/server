@@ -4,6 +4,8 @@
 -- Type: Standard NPC
 -- !pos -63.224 -0.749 -33.424 241
 -----------------------------------
+require("scripts/globals/zone")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

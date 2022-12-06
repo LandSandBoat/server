@@ -561,6 +561,17 @@ xi.magic.applyResistance = function(caster, target, spell, params)
     return xi.magic.applyResistanceEffect(caster, target, spell, params)
 end
 
+xi.magic.differentEffect = function(caster, target, spell, params)
+    if
+        target:hasStatusEffect(params.effect) and
+        utils.ternary(target:getStatusEffect(params.effect):getSubPower() > 0, target:getStatusEffect(params.effect):getSubPower(), 3) >= params.tier
+    then
+        return false
+    end
+
+    return true
+end
+
 -- USED FOR Status Effect Enfeebs (blind, slow, para, etc.)
 -- Output:
 -- The factor to multiply down duration (1/2 1/4 1/8 1/16)

@@ -416,7 +416,7 @@ INSERT INTO `mob_family_system` VALUES (363,'Automaton_Harlequin',10,'Automaton'
 INSERT INTO `mob_family_system` VALUES (364,'Automaton_Valoredge',10,'Automaton',0,'Unclassified',0,40,155,0,6,5,6,4,4,5,5,1,1,1,1,0,2,0);
 INSERT INTO `mob_family_system` VALUES (365,'Automaton_Sharpshot',10,'Automaton',0,'Unclassified',0,40,115,0,4,5,4,6,5,5,6,1,1,1,1,0,2,0);
 INSERT INTO `mob_family_system` VALUES (366,'Automaton_Stormwaker',10,'Automaton',0,'Unclassified',0,40,90,110,5,5,5,4,5,6,5,1,1,1,1,0,2,0);
-INSERT INTO `mob_family_system` VALUES (367,'Doll-Faust',53,'Doll',3,'Arcana',1,80,108,90,1,3,3,5,6,6,5,1,3,1,3,2,33,0);
+INSERT INTO `mob_family_system` VALUES (367,'Doll-Faust',53,'Doll',3,'Arcana',1,80,108,90,1,3,3,5,6,6,5,1,3,1,3,2,289,0);
 INSERT INTO `mob_family_system` VALUES (368,'Doll-Despot',53,'Doll',3,'Arcana',1,45,108,90,1,3,3,5,6,6,5,1,3,1,3,2,33,0);
 INSERT INTO `mob_family_system` VALUES (369,'Leech',95,'Leech',1,'Amorph',1,40,90,90,4,4,5,4,3,4,4,1,3,1,3,6,258,1);
 INSERT INTO `mob_family_system` VALUES (371,'Marid',101,'Marid',6,'Beast',2,40,150,90,3,5,1,6,3,3,4,1,3,1,3,4,257,0);

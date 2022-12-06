@@ -58,6 +58,9 @@ xi.settings.main =
     CAP_CURRENCY_SPARKS    = 99999,
     CAP_CURRENCY_VALOR     = 50000,
 
+    -- Player Data Sync/Save
+    PLAYER_DATA_SAVE = 120, -- Default time period to save player position, stats, and status effects in seconds.
+
     -- PL EXP Nerf
     PL_PENALTY = 0,
 
@@ -231,9 +234,9 @@ xi.settings.main =
     DIG_GRANT_BORE               = 0,
     DIG_DISTANCE_REQ             = 0, -- Sets the distance squared in yalms of how far a player has to move.
     DIG_FATIGUE_SKILL_UP         = false, -- Allows for skilling up while at fatigue.
-    DIG_ABUNDANCE_BONUS          = 0,     -- Increase chance of digging up an item (450  = item digup chance +45)
 
     -- MISC
+    ERA_CHOCOBO_ZONE_DISMOUNT    = true, -- If true, forces players to dismount a chocobo before entering a city or dungeon.
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.
     ENABLE_COP_ZONE_CAP          = 1,    -- Enable or disable lvl cap
@@ -246,6 +249,7 @@ xi.settings.main =
     ENM_COOLDOWN                 = 120,  -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
     FORCE_SPAWN_QM_RESET_TIME    = 900,  -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     GOBBIE_BOX_MIN_AGE           = 45,   -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
+    MAP_VENDORS_ALL_MAPS         = false, -- If true, all map vendors can sell all vendorable maps
 
     -- Synergy
     ENABLE_SYNERGY = 0, -- Default to off as Synergy is not coded

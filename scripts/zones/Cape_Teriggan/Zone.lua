@@ -11,12 +11,8 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    local kreutzet = GetMobByID(ID.mob.KREUTZET)
-
-    UpdateNMSpawnPoint(ID.mob.KREUTZET)
-    kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
-    kreutzet:setLocalVar("cooldown", os.time() + kreutzet:getRespawnTime() / 1000)
-    DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.KREUTZET)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
@@ -66,7 +62,7 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     if
         not kreutzet:isSpawned() and
-        os.time() > kreutzet:getLocalVar("cooldown") and
+        os.time() > GetServerVariable("[SPAWN]17093082") and
         (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
         DisallowRespawn(kreutzet:getID(), false)

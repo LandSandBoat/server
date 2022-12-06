@@ -45,10 +45,10 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    local nextDrawIn = mob:getLocalVar("[Draw-In]WaitTime")
 
     -- Every time KV performs a TP move, he will draw in either his target or the entire alliance randomly
-    if (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and os.time() > drawInWait then
+    if (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and os.time() > nextDrawIn then
         local chance = math.random(1, 2)
         if chance == 1 then
             mob:triggerDrawIn(mob, true, 1, 35, target)
@@ -58,7 +58,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
         -- KV always does an AOE TP move followed by a single target TP move
         mob:useMobAbility(({ 353, 350, 720 })[math.random(1, 3)])
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar("[Draw-In]WaitTime", os.time() + 1)
     end
 end
 
@@ -68,21 +68,20 @@ entity.onMobDespawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
+    local drawInTableNorth =
+    {
+        condition1 = target:getZPos() > -540,
+        position   = { target:getXPos(), target:getYPos(), -542, target:getRotPos() },
+    }
+    local drawInTableSouth =
+    {
+        condition1 = target:getXPos() < -350,
+        position   = { -348, target:getYPos(), target:getZPos(), target:getRotPos() },
+    }
+
     updateRegen(mob)
-
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if target:getZPos() > -540 and os.time() > drawInWait then -- Northern Draw In
-        local rot = target:getRotPos()
-        target:setPos(target:getXPos(), target:getYPos(), -542, rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif target:getXPos() < -350 and os.time() > drawInWait then  -- Southern Draw In
-        local rot = target:getRotPos()
-        target:setPos(-348, target:getYPos(), target:getZPos(), rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
+    utils.arenaDrawIn(mob, target, drawInTableNorth)
+    utils.arenaDrawIn(mob, target, drawInTableSouth)
 end
 
 entity.onMobRoam = function(mob)

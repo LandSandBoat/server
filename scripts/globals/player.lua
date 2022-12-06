@@ -187,7 +187,8 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- This is for migration safety only, and should be removed at a later date
     if
         player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) and
-        player:getTraverserEpoch() == 0
+        player:getTraverserEpoch() == 0 and
+        xi.settings.main.ENABLE_ABYSSEA == 1
     then
         player:setTraverserEpoch()
     end

@@ -4,6 +4,8 @@
 -- Involved in Missions 2-3
 -- !pos 36 -2 -2 231
 -----------------------------------
+require("scripts/globals/zone")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

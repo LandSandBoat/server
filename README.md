@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="256" height="256" src="res/lsb_ASB_logo_circle.png">
+    <img width="256" height="256" src="res/ASB_logo_circle.png">
     <h1 align="center">LandSandBoat</h1>
 </p>
 

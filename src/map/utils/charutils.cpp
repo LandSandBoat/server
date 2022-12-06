@@ -6414,6 +6414,11 @@ namespace charutils
         {
             PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
         }
+
+        if (type == charutils::GetConquestPointsName(PChar).c_str())
+        {
+            PChar->pushPacket(new CConquestPacket(PChar));
+        }
     }
 
     void SetPoints(CCharEntity* PChar, const char* type, int32 amount)
@@ -6869,7 +6874,10 @@ namespace charutils
             }
         }
 
-        return floor((std::time(nullptr) - traverserEpoch) / (stoneWaitHours * 3600)) - traverserClaimed;
+        uint32 traverserStones = floor((std::time(nullptr) - traverserEpoch) / (stoneWaitHours * 3600)) - traverserClaimed;
+        traverserStones        = settings::get<uint8>("main.ENABLE_ABYSSEA") == 1 ? traverserStones : 0;
+
+        return traverserStones;
     }
 
     void ReadHistory(CCharEntity* PChar)

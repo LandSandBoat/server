@@ -1115,9 +1115,9 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
             multi = 1.20f + (0.30f * (m_THLvl - 1));
             return multi;
         }
-        else if (m_THLvl < 4)
+        else if (m_THLvl < 5)
         {
-            multi = 1.50f + (0.15f * (m_THLvl - 1));
+            multi = 1.50f + (0.15f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 8)
@@ -1155,7 +1155,7 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else
         {
-            multi = 2.66f + (0.16f * (m_THLvl - 2));
+            multi = 2.66f + (0.17f * (m_THLvl - 2));
             return multi;
         }
     }
@@ -1173,7 +1173,7 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else if (m_THLvl < 5)
         {
-            multi = 2.34f + (0.16f * (m_THLvl - 2));
+            multi = 2.66f + (0.16f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 6)
@@ -1296,7 +1296,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             {
                 // Determine if this group should drop an item and determine bonus
                 float bonus = ApplyTH(m_THLvl, group.GroupRate);
-                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < std::round(group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus))
                 {
                     // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                     // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
@@ -1324,7 +1324,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
                 float bonus = ApplyTH(m_THLvl, item.DropRate);
-                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < std::round(item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus))
                 {
                     if (AddItemToPool(item.ItemID, ++dropCount))
                     {
