@@ -37,6 +37,7 @@ entity.onTrade = function(player, npc, trade)
     then
         local maxRoll = tradeGil / 200
         local diceRoll = math.random(2, 100)
+        player:confirmTrade() -- Confirming trade here prevents exploiting this system
         player:startEvent(55, tradeGil, maxRoll, diceRoll, mineShaftWarpCost)
 
     elseif
@@ -80,10 +81,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 55 and option == 1 then
         player:setCharVar("[ENM]GateDial", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600))
         npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
-        player:confirmTrade()
-
-    elseif csid == 55 and option == 0 then
-        player:confirmTrade()
 
     elseif csid == 56 and option == 1 then
             player:delKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)

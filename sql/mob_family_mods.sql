@@ -398,7 +398,6 @@ INSERT INTO `mob_family_mods` VALUES (116,52,30,1); -- ROAM_RATE: 30
 -- Ghost
 INSERT INTO `mob_family_mods` VALUES (121,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (121,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (121,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (121,242,20,0);  -- PARALYZERES: 20
 
 -- Ghrah
@@ -725,6 +724,7 @@ INSERT INTO `mob_family_mods` VALUES (226,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (227,36,65,1);   -- ROAM_COOL: 65
 INSERT INTO `mob_family_mods` VALUES (227,51,5,1);    -- ROAM_TURNS: 5
 INSERT INTO `mob_family_mods` VALUES (227,52,30,1);   -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (227,240,100,0); -- SLEEPRES: 100
 
 -- Snoll
 INSERT INTO `mob_family_mods` VALUES (232,36,40,1); -- ROAM_COOL: 40
