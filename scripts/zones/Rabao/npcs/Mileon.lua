@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     local playCheck = player:getCharVar("[LuckyRoll]Played")
     local winCheck = npc:getLocalVar("[LuckyRoll]RabaoLastWon")
 
-    if playCheck ~= vanaDay() and winCheck ~= vanaDay() then
+    if playCheck ~= VanadielUniqueDay() and winCheck ~= VanadielUniqueDay() then
         player:startEvent(100, gil)
     else
         player:showText(npc, ID.text.LUCKY_ROLL_GAMEOVER)
@@ -35,7 +35,7 @@ entity.onEventUpdate = function(player, csid, option)
 
         local npc = GetNPCByID(ID.npc.MILEON)
         local currentTotal = npc:getLocalVar("[LuckyRoll]Rabao")
-        local roll = math.random(1, 1)
+        local roll = math.random(1, 6)
         local newTotal = currentTotal + roll
 
         player:updateEvent(4, roll, 0, newTotal)
