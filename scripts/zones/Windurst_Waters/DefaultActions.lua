@@ -28,6 +28,4 @@ return {
     ['Serukoko']        = { event = 373   },
     ['Sohdede']         = { event = 374   },
     ['Tauwawa']         = { event = 424   },
-
-
 }
