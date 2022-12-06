@@ -133,7 +133,7 @@ end
 
 -- Get hitrate
 local function blueGetHitrate(attacker, target)
-    local acc = attacker:getACC() + 2 * attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
+    local acc = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
     local eva = target:getEVA()
     acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
 
@@ -191,7 +191,7 @@ function blueGetCorrelation(spellEcosystem, monsterEcosystem, merits)
     local effect = utils.getSystemStrengthBonus(spellEcosystem, monsterEcosystem)
     effect = effect * 0.25
     if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
-        effect = effect + 0.01 * merits
+        effect = effect + 0.001 * merits
     end
     return effect
 end
@@ -226,7 +226,7 @@ function blueDoPhysicalSpell(caster, target, spell, params)
 
     -- Chain Affinity -- TODO: add "Damage/Accuracy/Critical Hit Chance varies with TP"
     if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        local tp = caster:getTP() + 100 * caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
+        local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
         tp = utils.clamp(tp,0,3000)
         multiplier = blueGetfTP(tp, params.multiplier, params.tp150, params.tp300)
         bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
@@ -275,7 +275,7 @@ function blueDoPhysicalSpell(caster, target, spell, params)
             local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif = pdif / 1000
 
-            -- Apply it to our final D
+            -- Add it to our final damage
             if hitsdone == 0 then
                 finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif) -- first hit gets full multiplier
             else
@@ -357,34 +357,38 @@ function blueDoMagicalSpell(caster, target, spell, params, statMod)
 end
 
 -- Get the damage for a HP draining magical Blue Magic spell
-function blueDoHPDrainSpell(caster, target, spell, params, mpDrain)
+function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
 
-    -- determine damage
+    -- determine base damage
     local dmg = params.dmgMultiplier * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
+    if softCap > 0 then dmg = utils.clamp(dmg,0,softCap) end
     local resist = applyResistance(caster, target, spell, params)
     dmg = dmg * resist
     dmg = addBonuses(caster, spell, target, dmg)
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
-    -- checks
+    -- limit damage
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        return dmg
     else
-        if dmg < 0 then
-            dmg = 0
-        elseif target:getHP() < dmg then
-            dmg = target:getHP()
+        -- only drain what the mob has
+        if mpDrain then
+            dmg = dmg * xi.settings.main.BLUE_POWER
+            dmg = utils.clamp(dmg,0,target:getMP())
+            target:delMP(dmg)
+            caster:addMP(dmg)
+        else
+            dmg = utils.clamp(dmg,0,target:getHP())
+            dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
+            caster:addHP(dmg)
         end
     end
 
-    -- apply damage
-    dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
-    caster:addHP(dmg)
+    return dmg
 
 end
 
--- Finalize HP damage after spells
+-- Finalize HP damage after a spell
 function blueFinalizeDamage(caster, target, spell, dmg, params)
 
     if dmg < 0 then dmg = 0 end
@@ -392,7 +396,7 @@ function blueFinalizeDamage(caster, target, spell, dmg, params)
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
 
-    -- handle One For All, Liement
+    -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
         local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
@@ -416,6 +420,20 @@ function blueFinalizeDamage(caster, target, spell, dmg, params)
     target:handleAfflatusMiseryDamage(dmg)
 
     return dmg
+end
+
+-- Get the duration of an enhancing Blue Magic spell
+function blueGetDurationWithDiffusion(caster, duration)
+
+    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
+        local merits = caster:getMerit(xi.merit.DIFFUSION)
+        if merits > 0 then -- each merit after the first increases duration by 5%
+            duration = duration + (duration / 100) * (merits - 5)
+        end
+        caster:delStatusEffect(xi.effect.DIFFUSION)
+    end
+
+    return duration
 end
 
 -- Function to stagger duration of effects by using the resistance to change the value
@@ -488,11 +506,11 @@ changes in blu_fixes branch
     - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which doesnt't make sense.
     - Updated WSC values, though most were correct.
     - Added spell ecosystem.
-    - Updated added effect values.
+    - Status/added effect changes:
         - All physical spells now need to hit before the AE can kick in.
         - All physical spells with an AE get a resistance check for the AE.
         - Resistance now influences duration properly.
-        - Decaying effects now work, such as DEX and VIT down.
+        - Effects that decay over time now work, such as Wild Oats (VIT down) and Saline Coat (Magic Defense Boost).
         - Some spells had 0 duration.
 
 - Physical Blue Magic spell changes:
@@ -500,6 +518,11 @@ changes in blu_fixes branch
     - Added Physical Potency merits effect.
     - Added monster correlation effects, including merits.
     - Added Azure Lore effect on multiplier.
+
+- Enhancing Blue Magic spell changes:
+    - Consolidated Diffusion's effect on duration into one function.
+
+- Consolidated drain spells into one function.
 
 - General BLU changes:
     - Azure Lore will now allow Physical spells to always skillchain, and Magical spells to always magic burst.
@@ -518,7 +541,7 @@ changes in blu_fixes branch
     - Physical AE: acc/bluemagicskill/macc/INT
     - Physical Potency = +2 acc per merit
     - Correlation = multiplier +- 0.25
-    - Correlation = multiplier +0.01 per merit (only for strengths, not weaknesses)
+    - Correlation = multiplier +0.004 per merit (only for strengths, not weaknesses)
     - Azure Lore allows for continuous chaining and bursting
 
 

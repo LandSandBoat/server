@@ -12,9 +12,10 @@
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: None
 -----------------------------------
-require("scripts/globals/magic")
+require("scripts/globals/bluemagic")
+require("scripts/globals/settings")
 require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
 
@@ -24,12 +25,15 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
 <<<<<<< refs/remotes/upstream/base
+<<<<<<< refs/remotes/upstream/base
     local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
 =======
 
 
 >>>>>>> Renamed BLU functions, added drain function (yet to rewire), used existing systemStrength table
     --get resist multiplier (1x if no resist)
+=======
+>>>>>>> Drain spells, enhancing spells, merit fixes
     local params = {}
     params.ecosystem = xi.ecosystem.AMORPH
     params.attackType = xi.attackType.MAGICAL
@@ -38,28 +42,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.dmgMultiplier = 5
 
-    local dmg = 5 * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
-    local resist = applyResistance(caster, target, spell, params)
-    dmg = dmg * resist
-    dmg = addBonuses(caster, spell, target, dmg)
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-
-    if dmg < 0 then dmg = 0 end
-
-    if target:isUndead() then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        return dmg
-    end
-
-    if target:getHP() < dmg then
-        dmg = target:getHP()
-    end
-
-
-    dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
-    caster:addHP(dmg)
-
-    return dmg
+    return blueDoDrainSpell(caster, target, spell, params, 0, false)
 end
 
 return spellObject
