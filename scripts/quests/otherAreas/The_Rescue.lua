@@ -20,8 +20,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_
 
 quest.reward =
 {
-    exp      = 2000,
-    gil      = 5000,
+    gil      = 3000,
     fameArea = xi.quest.fame_area.SELBINA_RABAO,
     keyItem  = xi.ki.MAP_OF_THE_RANGUEMONT_PASS,
     title    = xi.title.HONORARY_CITIZEN_OF_SELBINA,
