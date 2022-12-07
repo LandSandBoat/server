@@ -12,7 +12,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
-    mob:setMod(xi.mod.DMGMAGIC,-3500)
+    mob:setMod(xi.mod.DMGMAGIC, -3500)
     mob:setMod(xi.mod.DEF, 4120)
     mob:setMod(xi.mod.ATT, 493)
 

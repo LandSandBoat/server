@@ -7,7 +7,6 @@ require("scripts/globals/status")
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    local power = effect:getPower()
     target:addMod(xi.mod.DMGMAGIC, -500)
     target:addMod(xi.mod.DMGPHYS, -5000)
     target:addMod(xi.mod.DMGRANGE, -5000)
@@ -20,7 +19,6 @@ effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local power = effect:getPower()
     target:delMod(xi.mod.DMGMAGIC, -500)
     target:delMod(xi.mod.DMGPHYS, -5000)
     target:delMod(xi.mod.DMGRANGE, -5000)
