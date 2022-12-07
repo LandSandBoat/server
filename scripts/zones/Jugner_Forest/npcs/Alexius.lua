@@ -17,6 +17,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(5)
     elseif player:getCharVar("sinHunting") == 3 then
         player:startEvent(10)
+    else
+        player:showText(npc, ID.text.ALEXIUS_DEFAULT)
     end
 end
 

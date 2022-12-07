@@ -34,9 +34,11 @@ zones[xi.zone.WEST_RONFAURE] =
         AAVELEON_HEALED               = 7350,  -- My wounds are healed, thanks to you!
         PICKPOCKET_AAVELEON           = 7376,  -- A pickpocket, out here? Phew, my wallet is safe.
         PALCOMONDAU_REPORT            = 7388,  -- Scout reporting! All is quiet on the road to Ghelsba!
-        PALCOMONDAU_DIALOG            = 7389,  -- Let me be! I must patrol the road to Ghelsba.
+        PALCOMONDAU_ENROUTE           = 7389,  -- Let me be! I must patrol the road to Ghelsba.
+        PALCOMONDAU_RETURN            = 7390,  -- I bring word of Ghelsba to the Westgate. Out of my way!
         ZOVRIACE_REPORT               = 7391,  -- Scout reporting! All is quiet on the roads to La Theine!
-        ZOVRIACE_DIALOG               = 7393,  -- Let me be! I return to Southgate with word on La Theine.
+        ZOVRIACE_ENROUTE              = 7392,  -- I must scout the roads to La Theine for signs of the enemy. Let me pass!
+        ZOVRIACE_RETURN               = 7393,  -- Let me be! I return to Southgate with word on La Theine.
         PICKPOCKET_PALCOMONDAU        = 7394,  -- A pickpocket? No, I haven't seen anyone matching that description. I've only seen Aaveleon, and a rather brusque woman.
         PICKPOCKET_ZOVRIACE           = 7395,  -- A pickpocket, out here? Can't say I've seen anyone like that. I'll keep my eyes peeled.
         DISMAYED_CUSTOMER             = 7419,  -- You find some worthless scraps of paper.
@@ -50,6 +52,12 @@ zones[xi.zone.WEST_RONFAURE] =
         NO_COMBINATION                = 8078,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10444, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12445, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        AAVELEON_DEFAULT              = 7351,  -- Many orcs are nearby. They prey upon the weak, so do not venture far...unless you can handle them.
+        COLMAIE_DEFAULT               = 7342,  -- Orcish scouts lurk in the shadows. Consider yourself warned!
+        DIADONOUR_DEFAULT             = 7396,  -- Our people often fall prey to roving Orcs nearby. Take care out there!
+        RAMAUFONT_DEFAULT             = 7399,  -- Nothing to report.
+        LAETTE_DEFAULT                = 7401,  -- This watchtower was built to strengthen Ranperre Gate. You can look around, but stay out of our way.
+        CHATARRE_DEFAULT              = 7402,  -- Ghelsba and its Orcish camps lie at the foot of mountains yonder. We must be vigilant! They could attack at any time.
     },
     mob =
     {

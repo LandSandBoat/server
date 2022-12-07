@@ -154,7 +154,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
     if (CanChangeState())
     {
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
-        if (PathFind)
+        if (PathFind && PEntity->GetLocalVar("keepPathingOnTrigger") != 0)
         {
             PEntity->SetLocalVar("pauseNPCPathing", 1);
         }

@@ -28,6 +28,7 @@ zones[xi.zone.JUGNER_FOREST] =
         DIG_THROW_AWAY                = 7728,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7730,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7796,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
+        ALEXIUS_DEFAULT               = 7896,  -- An adventurer, are you? Well, welcome to Lake Mechieume.
         LOGGING_IS_POSSIBLE_HERE      = 7908,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI          = 7915,  -- Obtained key item: <keyitem>!
         DUG_UP                        = 8019,  -- Something was dug up here...
