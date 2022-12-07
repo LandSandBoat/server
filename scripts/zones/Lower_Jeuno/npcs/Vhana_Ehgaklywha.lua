@@ -27,7 +27,7 @@ entity.onPath = function(npc)
                 local lampId = ID.npc.STREETLAMP_OFFSET + (12 - path)
                 GetNPCByID(lampId):setAnimation(xi.anim.OPEN_DOOR)
                 npc:setLocalVar("path", path + 1)
-                npc:pathThrough(newPath, xi.path.flag.COORDS)
+                npc:pathThrough(newPath, bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
             else
                 npc:clearPath()
                 npc:setLocalVar("path", 1)
