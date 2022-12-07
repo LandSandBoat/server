@@ -112,6 +112,9 @@ end
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, 260)
     mob:setMod(xi.mod.DMGMAGIC, -5000) -- starts the fight with -50% magic damage taken, reduced to 25% after regen is taken off.
+    mob:setMod(xi.mod.ATT, 452)
+    mob:setMod(xi.mod.DEF, 620)
+    mob:setMod(xi.mod.EVA, 328)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {

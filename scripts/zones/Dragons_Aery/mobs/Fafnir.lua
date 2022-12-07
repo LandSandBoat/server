@@ -14,6 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+    mob:setMod(xi.mod.ATT, 489)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)

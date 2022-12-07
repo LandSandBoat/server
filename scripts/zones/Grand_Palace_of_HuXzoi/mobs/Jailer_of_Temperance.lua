@@ -45,6 +45,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DMGMAGIC, -10000)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
+    mob:setMod(xi.mod.ATT, 553)
+    mob:setMod(xi.mod.DEF, 514)
+    mob:setMod(xi.mod.EVA, 335)
 end
 
 entity.onMobEngaged = function(mob, target)

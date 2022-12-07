@@ -1,5 +1,6 @@
 -----------------------------------
 -- xi.effect.SUPER_BUFF
+-- This is only used for Nidhogg
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -7,10 +8,10 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    target:addMod(xi.mod.ATTP, power)
-    target:addMod(xi.mod.DEFP, power)
-    target:addMod(xi.mod.MATT, power)
-    target:addMod(xi.mod.MEVA, power)
+    target:addMod(xi.mod.DMGMAGIC, -500)
+    target:addMod(xi.mod.DMGPHYS, -5000)
+    target:addMod(xi.mod.DMGRANGE, -5000)
+    target:addMod(xi.mod.EVA, 378)
     -- The following only applies to Nidhogg.  If this buff is to be used anywhere else, a check on mob name (NOT ID) would be a good choice
     target:setAnimationSub(2)
 end
@@ -20,10 +21,10 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
-    target:delMod(xi.mod.ATTP, power)
-    target:delMod(xi.mod.DEFP, power)
-    target:delMod(xi.mod.MATT, power)
-    target:delMod(xi.mod.MEVA, power)
+    target:delMod(xi.mod.DMGMAGIC, -500)
+    target:delMod(xi.mod.DMGPHYS, -5000)
+    target:delMod(xi.mod.DMGRANGE, -5000)
+    target:delMod(xi.mod.EVA, 378)
     target:setAnimationSub(0)
 end
 
