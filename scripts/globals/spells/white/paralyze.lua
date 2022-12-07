@@ -30,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.PARALYSIS
     params.tier = 1
 
-    if not xi.magic.hasEffect(caster, target, spell, params) then
+    if not xi.magic.differentEffect(caster, target, spell, params) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return params.effect
     end
