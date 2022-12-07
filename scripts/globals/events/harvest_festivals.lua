@@ -243,7 +243,7 @@ function applyHalloweenNpcCostumes(zoneid)
             for id, skin in pairs(skins) do
                 local npc = GetNPCByID(id)
                 if npc then
-                    npc:setCostume(skin)
+                    npc:setModelId(skin)
                 end
             end
         end
