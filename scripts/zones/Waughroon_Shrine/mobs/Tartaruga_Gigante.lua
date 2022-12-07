@@ -82,12 +82,12 @@ entity.onMobFight = function(mob, target)
 
     if -- In shell
         mob:getAnimationSub() == 1 and
-        (os.time() > mob:getLocalVar("changeTime") or mob:getHPP(mob) == 100)
+        (os.time() > mob:getLocalVar("changeTime") or mob:getHPP() == 100)
     then
         outOfShell(mob)
     end
 
-    if mob:getHP(mob) <= changeHP then
+    if mob:getHP() <= changeHP then
         if (mob:getAnimationSub() == 1) then -- In shell
             mob:setLocalVar("dmgToChange", mob:getHP() - 2000)
             outOfShell(mob)
