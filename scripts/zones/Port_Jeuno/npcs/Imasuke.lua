@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -16,8 +17,7 @@ entity.onTrade = function(player, npc, trade)
     -- THE ANTIQUE COLLECTOR (kaiser sword)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR) == QUEST_ACCEPTED and
-        trade:hasItemQty(16631, 1) and
-        trade:getItemCount() == 1
+        npcUtil.tradeHasExactly(trade, xi.items.KAISER_SWORD)
     then
         player:startEvent(15) -- End quest
     end
@@ -66,20 +66,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 13 and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
     elseif csid == 15 then
-        player:addTitle(xi.title.TRADER_OF_ANTIQUITIES)
-        if not player:hasKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER) then
-            player:addKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_DELKFUTTS_TOWER)
-        else
-            player:addGil(2000 * xi.settings.main.GIL_RATE)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.main.GIL_RATE)
-            player:addExp(2000 * xi.settings.main.EXP_RATE)
-        end
-
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
-        player:tradeComplete()
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
-
+        player:confirmTrade()
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR, { ki = xi.ki.MAP_OF_DELKFUTTS_TOWER, title = xi.title.TRADER_OF_ANTIQUITIES, fameArea = xi.quest.fame_area.JEUNO, fame = 30 })
     -- CIRCLE OF TIME
     elseif csid == 29 and option == 1 then
         player:setCharVar("circleTime", 3)
