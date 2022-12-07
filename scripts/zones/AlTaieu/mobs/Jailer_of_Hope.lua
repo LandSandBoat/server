@@ -17,6 +17,9 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(5)
     mob:hideName(true)
     mob:setUntargetable(true)
+    mob:setMod(xi.mod.ATT, 540)
+    mob:setMod(xi.mod.DEF, 520)
+    mob:setMod(xi.mod.EVA, 323)
 
     xi.mix.jobSpecial.config(mob, {
         specials =
