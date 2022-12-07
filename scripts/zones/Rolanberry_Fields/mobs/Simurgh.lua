@@ -21,12 +21,11 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    -- Draws in random party member every 20 seconds
+    -- Draws in targeted member every 8 to 20 seconds
     local drawInTime = mob:getLocalVar("drawInTime")
-    local party = target:getParty()
 
     if os.time() > drawInTime then
-        mob:triggerDrawIn(mob, false, 1, 35, v)
+        mob:triggerDrawIn(mob, false, 1, 35, target)
         mob:setLocalVar("drawInTime", os.time() + math.random(8, 20))
     end
 end
