@@ -1654,29 +1654,29 @@ namespace battleutils
 
     int16 CalculateBaseTP(int delay)
     {
-        int16 x = 1;
+        float x = 1.0f;
         if (delay <= 180)
         {
-            x = (int16)(5.0 + ((delay - 180) * 1.5f) / 180);
+            x = 5.0f + ((delay - 180) * 1.5f) / 180.f;
         }
         else if (delay <= 450)
         {
-            x = (int16)(5.0 + ((delay - 180) * 6.5f) / 270);
+            x = 5.0f + ((delay - 180) * 6.5f) / 270.f;
         }
         else if (delay <= 480)
         {
-            x = (int16)(11.5 + ((delay - 450) * 1.5f) / 30);
+            x = 11.5f + ((delay - 450) * 1.5f) / 30.f;
         }
         else if (delay <= 530)
         {
-            x = (int16)(13.0 + ((delay - 480) * 1.5f) / 50);
+            x = 13.0f + ((delay - 480) * 1.5f) / 50.f;
         }
         else
         {
-            x = (int16)(14.5 + ((delay - 530) * 3.5f) / 470);
+            x = 14.5f + ((delay - 530) * 3.5f) / 470.f;
         }
 
-        return x * 10;
+        return (int16)(x * 10.0f);
     }
 
     bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)
