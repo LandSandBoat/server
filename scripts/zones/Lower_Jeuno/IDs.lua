@@ -72,6 +72,7 @@ zones[xi.zone.LOWER_JEUNO] =
         ARTIFACT_HAS_BEEN_CHARGED     = 10367, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
         ARTIFACT_TERMINAL_VOLUME      = 10368, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER        = 10369, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
+        VHANA_DEFAULT                 = 7258,  -- Sorry, I'm busy.
     },
     mob =
     {

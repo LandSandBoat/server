@@ -90,11 +90,13 @@ zoneObject.onGameHour = function(zone)
     elseif vanadielHour == 1 then
         if playerOnQuestId == 0 then
             local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
+            local startPath = lowerJeunoGlobal.lampPath[1]
             npc:clearPath()
             npc:setStatus(0)
+            npc:setLocalVar("path", 1)
             npc:initNpcAi()
-            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
-            npc:pathThrough(lowerJeunoGlobal.lampPath, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
+            npc:setPos(xi.path.first(startPath))
+            npc:pathThrough(startPath, bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
         end
     end
 end

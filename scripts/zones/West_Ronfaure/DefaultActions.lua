@@ -1,15 +1,18 @@
 local ID = require("scripts/zones/West_Ronfaure/IDs")
 
 return {
-    ['Aaveleon']    = { event = 101 }, -- "Ow! Ouch! Gah... If only I'd remembered that ointment!"
+    ['Aaveleon']    = { text = ID.text.AAVELEON_DEFAULT },
     ['Adalefont']   = { text = ID.text.ADALEFONT_DIALOG },
-    ['Colmaie']     = { text = ID.text.COLMAIE_DIALOG },
+    ['Cerite']      = { event = 50 },
+    ['Chatarre']    = { text = ID.text.CHATARRE_DEFAULT },
+    ['Colmaie']     = { text = ID.text.COLMAIE_DEFAULT },
+    ['Diadonour']   = { text = ID.text.DIADONOUR_DEFAULT },
     ['Gachemage']   = { text = ID.text.GACHEMAGE_DIALOG },
+    ['Laette']      = { text = ID.text.LAETTE_DEFAULT },
     ['Laillera']    = { text = ID.text.LAILLERA_DIALOG },
-    ['Palcomondau'] = { text = ID.text.PALCOMONDAU_DIALOG },
     ['Phairet']     = { event = 117 },
     ['qm1']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
     ['qm2']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
     ['qm3']         = { messageSpecial = ID.text.DISMAYED_CUSTOMER },
-    ['Zovriace']    = { text = ID.text.ZOVRIACE_DIALOG },
+    ['Ramaufont']   = { text = ID.text.RAMAUFONT_DEFAULT },
 }
