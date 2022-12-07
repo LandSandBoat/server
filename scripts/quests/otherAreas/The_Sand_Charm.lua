@@ -97,13 +97,7 @@ quest.sections =
             onEventFinish =
             {
                 [127] = function(player, csid, option, npc)
-                    if player:hasKeyItem(xi.keyItem.MAP_OF_BOSTAUNIEUX_OUBLIETTE) then
-                        player:addExp(2000)
-                        npcUtil.giveCurrency(player, 'gil', 2000)
-                    else
-                        npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_BOSTAUNIEUX_OUBLIETTE)
-                    end
-
+                    npcUtil.giveKeyItem(player, xi.keyItem.MAP_OF_BOSTAUNIEUX_OUBLIETTE)
                     player:setCharVar("blandineThanks", 1)
                     player:tradeComplete()
                     quest:complete(player)

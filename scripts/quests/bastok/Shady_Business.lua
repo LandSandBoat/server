@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINES
 
 quest.reward =
 {
-    fame     = 80,
+    fame     = 9,
     fameArea = xi.quest.fame_area.NORG,
     gil      = 350,
 }
