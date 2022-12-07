@@ -14,8 +14,6 @@ end
 
 entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
-    mob:addMod(xi.mod.SLEEPRES, 50)
-    mob:addMod(xi.mod.LULLABYRES, 50)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -10,7 +10,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(46)
+    -- Quest not implemented (A Moral Manifest?)
+    -- player:startEvent(46)
 end
 
 entity.onEventUpdate = function(player, csid, option)

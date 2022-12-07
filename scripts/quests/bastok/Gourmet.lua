@@ -62,7 +62,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= QUEST_ACCEPTED and
+            not quest:getMustZone(player)
         end,
 
         [xi.zone.BASTOK_MARKETS] =

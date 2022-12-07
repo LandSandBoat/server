@@ -12,9 +12,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         (npcUtil.tradeHas(trade, 4514) or npcUtil.tradeHas(trade, 5793)) and
-        npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 }) and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) >= QUEST_ACCEPTED
     then
+        npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
         player:confirmTrade()
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
