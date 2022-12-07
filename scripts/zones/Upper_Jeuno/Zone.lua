@@ -32,6 +32,8 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(46.2, -5, -78, 172)
     end
 
+    xi.moghouse.exitJobChange(player, prevZone)
+
     return cs
 end
 
@@ -46,6 +48,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
+    xi.moghouse.exitJobChangeFinish(player, csid, option)
 end
 
 return zoneObject

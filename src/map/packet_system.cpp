@@ -3857,8 +3857,27 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             else
             {
                 // Ensure the destination exists
-                CZone* PDestination = zoneutils::GetZone(PZoneLine->m_toZone);
-                if (settings::get<bool>("main.ERA_CHOCOBO_ZONE_DISMOUNT") && PChar->isMounted() && PDestination && !PDestination->CanUseMisc(MISC_MOUNT))
+                // clang-format off
+                CZone*  PDestination   = zoneutils::GetZone(PZoneLine->m_toZone);
+                ZONEID  CharZone       = (ZONEID)PChar->getZone();
+                bool    IsInHomeNation = PChar->profile.nation == NATION_BASTOK ? CharZone >= ZONE_BASTOK_MINES && CharZone <= ZONE_PORT_BASTOK : false ||
+                                          PChar->profile.nation == NATION_WINDURST ? CharZone >= ZONE_WINDURST_WATERS && CharZone <= ZONE_WINDURST_WOODS : false ||
+                                           PChar->profile.nation == NATION_SANDORIA ? CharZone >= ZONE_SOUTHERN_SANDORIA && CharZone <= ZONE_PORT_SANDORIA : false;
+                bool    IsRentedCity   = PChar->getCharVar("[Moghouse]Rent-a-room") == static_cast<int32>(zoneutils::GetZone(CharZone)->GetRegionID());
+                bool    RentExempt     = (CharZone >= ZONE_SOUTHERN_SAN_DORIA_S && CharZone <= ZONE_WINDURST_WATERS_S) ||
+                                          (CharZone >= ZONE_WESTERN_ADOULIN && CharZone <= ZONE_EASTERN_ADOULIN);
+                // clang-format on
+
+                if ((PDestination->GetType() == ZONE_TYPE::CITY && (uint16)PDestination->GetID() == 0 && !RentExempt) &&
+                    (settings::get<bool>("map.RENT_A_ROOM") && settings::get<bool>("map.ERA_RENT_A_ROOM") ? !IsRentedCity : !IsInHomeNation && !IsRentedCity))
+                {
+                    PChar->loc.p.rotation += 128;
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 2));
+                    PChar->pushPacket(new CCSPositionPacket(PChar));
+                    PChar->status = STATUS_TYPE::NORMAL;
+                    return;
+                }
+                else if (settings::get<bool>("main.ERA_CHOCOBO_ZONE_DISMOUNT") && PChar->isMounted() && PDestination && !PDestination->CanUseMisc(MISC_MOUNT))
                 {
                     PChar->loc.p.rotation += 128;
 
@@ -7129,6 +7148,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         charutils::SaveCharStats(PChar);
 
+        PChar->setVolatileCharVar("[Moghouse]Exit_Job_Change", 1);
         PChar->pushPacket(new CCharJobsPacket(PChar));
         PChar->pushPacket(new CCharUpdatePacket(PChar));
         PChar->pushPacket(new CCharStatsPacket(PChar));

@@ -199,6 +199,7 @@ public:
     void   setTeleportMenu(uint16 type, sol::object const& teleportObj); // Set favorites or menu layout preferences for homepoints or survival guides
     auto   getTeleportMenu(uint8 type) -> sol::table;                    // Get favorites and menu layout preferences
     void   setHomePoint();                                               // Sets character's homepoint
+    bool   isCurrentHomepoint();                                         // Checks to a character's homepoint vs their current position.
 
     void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
 
