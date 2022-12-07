@@ -10,7 +10,7 @@ require("scripts/globals/pathfind")
 
 local entity = {}
 
-pathNodes =
+local pathNodes =
 {
     { x = -135.297, y = -61.920, z = 270.550, wait = 1500 },
     { x = -148.493, y = -60.000, z = 256.440 },
