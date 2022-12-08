@@ -52,7 +52,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     if damage > 0 then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
-            target:delStatusEffectSilent(xi.effect.STUN)
             target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist)
         end
     end

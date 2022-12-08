@@ -383,43 +383,57 @@ function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
 
 end
 
-function blueDoBreathSpell(caster, target, spell, params)
+-- Get the damage and resistance for a breath Blue Magic spell
+function blueDoBreathSpell(caster, target, spell, params, isConal)
 
-
-    -- how is conal (in DB) handled? I feel it interferes with what I've set up here. what is the cone angle?
-
+    local results = {}
+    results[1] = 0 -- damage
+    results[2] = 0 -- resistance (used in spell to determine added effect resistance)
 
     -- Initial damage
-    local dmg = (caster:getHP() / params.hpMod) + (caster:getMainLvl() / params.lvlMod)
+    local dmg = (caster:getHP() / params.hpMod)
+    if params.lvlMod > 0 then dmg = dmg + (caster:getMainLvl() / params.lvlMod) end
 
-    -- Conal check (90° cone)
-    local isInCone = 0
-    if target:isInfront(caster,64) then isInCone = 1 end
-    dmg = dmg * isInCone
+    -- Conal breath spells get reduced damage (or no damage) further away from centerline
+    if isConal then
 
-    -- Less damage when the target is more to the side of the caster
-    local angle = caster:getFacingAngle(target)
-    local angleDmgMultiplier = (100 - (3 * math.max(math.abs(angle) - 16, 0))) / 100
-        -- 100% damage when inside a cone in front (45° cone, 32/256)
-        -- 50% damage when monster is to your side (90° cone, 64/256)
-        -- linear function: from 22° to 45° > 100% to 50% dmg
-        -- caster:PrintToPlayer(string.format("angle " .. angle * 1.4117 .. "   mult " .. angleDmgMultiplier))
-    dmg = dmg * angleDmgMultiplier
+        -- Conal check (90° cone)
+        local isInCone = 0
+        if target:isInfront(caster,64) then isInCone = 1 end
+        dmg = dmg * isInCone
+
+        -- Less damage when the target is more to the side of the caster
+        local angle = caster:getFacingAngle(target)
+        local angleDmgMultiplier = (100 - (3 * math.max(math.abs(angle) - 16, 0))) / 100
+            -- 100% damage when inside a cone in front (45° cone, 32/256)
+            -- 50% damage when monster is to your side (90° cone, 64/256)
+            -- linear function: from 22° to 45° > 100% to 50% dmg
+            -- caster:PrintToPlayer(string.format("angle " .. angle * 1.4117 .. "   mult " .. angleDmgMultiplier))
+        dmg = dmg * angleDmgMultiplier
+
+    end
 
     -- Monster correlation
     local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
     dmg = dmg * (1 + correlationMultiplier)
 
+    -- Monster elemental adjustments
+    local mobEleAdjustments = getElementalDamageReduction(target, spell:getElement())
+    dmg = dmg * mobEleAdjustments
+
     -- Modifiers
     dmg = dmg * (1 + (caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
 
     -- Resistance
-    dmg = math.floor(dmg * applyResistance(caster, target, spell, params))
+    local resistance = applyResistance(caster, target, spell, params)
+    dmg = math.floor(dmg * resistance)
 
     -- Final damage
     dmg = target:breathDmgTaken(dmg)
 
-    return dmg
+    results[1] = dmg
+    results[2] = resistance
+    return results
 
 end
 
@@ -561,6 +575,9 @@ changes in blu_fixes branch
     - Corrected breath spells to do breath damage, not magic damage.
     - You have to be in front of the monster to do breath damage.
     - Added an angle damage multiplier that lowers damage when monster is more to your side than in front.
+    - Damage is influenced by a monster's elemental resistance, but not by mab/mdb or weather/day bonuses.
+    - Damage is influences by monster correlation.
+    - The resist rate is calculated once and affects both damage and added effect hit rate / duration.
 
 - Drain Blue Magic spell changes:
     - Consolidated drain spells into one function.
@@ -585,11 +602,11 @@ changes in blu_fixes branch
 
 - END RESULT
     - Physical
-        - dmg: acc/att/modifiers
-        - AE macc: acc/bluemagicskill/macc/INT
+        - dmg: acc / att / STR / stat modifiers
+        - AE macc: acc / macc / blue magic skill / INT
     - Breath
-        - dmg: HP/level
-        - macc: macc/bluemagicskill
+        - dmg: HP / level / elemental resistance (dmg is not influenced by mab/mdb or weather/day bonuses)
+        - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc for breaths)
     - Correlation = multiplier +- 0.25 (breath multiplier = 1)
     - Azure Lore allows for continuous chaining and bursting
     - Merits

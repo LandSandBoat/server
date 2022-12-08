@@ -50,7 +50,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     -- Additional effect: Accuracy down (-15 for 30s/60s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
+    if damage > 0 then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 15, 0, 60 * resist)

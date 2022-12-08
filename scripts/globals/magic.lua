@@ -578,7 +578,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     local mhr = 0
     local levelDiff = utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
     mhr = utils.clamp(70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus,5,95)
-    -- if caster:isPC() then caster:PrintToPlayer(string.format("Macc %s   Meva %s   MHR %s",magicacc,magiceva,mhr)) end
+    if caster:isPC() then caster:PrintToPlayer(string.format("Macc %s   Meva %s   MHR %s",magicacc,magiceva,mhr)) end
 
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
 

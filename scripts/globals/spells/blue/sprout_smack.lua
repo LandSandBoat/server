@@ -50,7 +50,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     -- Additional effect: Slow (15% for 90s/180s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.SLOW) then
+    if damage > 0 then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
             target:addStatusEffect(xi.effect.SLOW, 1500, 0, 180 * resist)

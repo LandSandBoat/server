@@ -49,10 +49,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     -- Added effect: Poison ((level/5+3)/tick for 90s/180s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.POISON) then
+    if damage > 0 then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
-            local power = (caster:getMainLvl() / 5) + 3 -- from http://wiki.ffxiclopedia.org/wiki/Disseverment
+            local power = (caster:getMainLvl() / 5) + 3
             target:addStatusEffect(xi.effect.POISON, power, 0, 180 * resist)
         end
     end

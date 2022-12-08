@@ -11,9 +11,6 @@
 -- Recast Time: 19.5 seconds
 -- Magic Bursts on: Reverberation, Distortion, and Darkness
 -- Combos: Clear Mind
--- Damage formula is (Current HP)/10 + (Blue Mage level)/1.25
--- Gains a 25% damage boost when used against Arcana monsters.
--- Poison effect is 4/tick
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
@@ -35,15 +32,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.hpMod = 10
     params.lvlMod = 1.25
 
-    local damage = blueDoBreathSpell(caster, target, spell, params)
-    -- damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    local results = blueDoBreathSpell(caster, target, spell, params, true)
+    local damage = results[1]
+    local resist = results[2]
+    damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     -- Added effect: Poison (4/tick for 30s/60s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.POISON) then
-        local resist = applyResistanceEffect(caster, target, spell, params)
-        if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.POISON, 4, 0, 60 * resist)
-        end
+    if resist >= 0.5 then
+        target:addStatusEffect(xi.effect.POISON, 4, 0, 60 * resist)
     end
 
     return damage

@@ -51,7 +51,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     -- Additional effect: Defense down (-8% for 60s/120s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
+    if damage > 0 then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 8, 0, 120 * resist)
