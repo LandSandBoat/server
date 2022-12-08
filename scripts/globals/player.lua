@@ -159,6 +159,10 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         if firstLogin then
             xi.player.charCreate(player)
         end
+
+        if player:getCharVar("[Moghouse]Rent-a-room") == 0 then
+            player:setCharVar("[Moghouse]Rent-a-room", xi.moghouse.nationRegionBits[player:getNation()])
+        end
     else
         -- things checked ONLY during zone in go here
         if

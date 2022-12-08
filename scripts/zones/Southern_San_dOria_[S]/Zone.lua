@@ -40,6 +40,8 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(161, -2, 161, 94)
     end
 
+    xi.moghouse.exitJobChange(player, prevZone)
+
     return cs
 end
 
@@ -55,6 +57,8 @@ zoneObject.onEventFinish = function(player, csid, option)
     elseif csid == 65 then
         player:setCharVar("DownwardHelix", 1)
     end
+
+    xi.moghouse.exitJobChangeFinish(player, csid, option)
 end
 
 return zoneObject

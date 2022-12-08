@@ -27,6 +27,8 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(position, 10, -73, 192)
     end
 
+    xi.moghouse.exitJobChange(player, prevZone)
+
     return cs
 end
 
@@ -80,6 +82,8 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:setLocalVar("Quest[3][89]mustZone", 1)
         player:setCharVar("Quest[3][89]Wait", getVanaMidnight())
     end
+
+    xi.moghouse.exitJobChangeFinish(player, csid, option)
 end
 
 return zoneObject
