@@ -669,6 +669,8 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
         this->SetLocalVar("weaponskillHit", 0);
     }
 
+    // if attack has master, if it has a master -> if its a PC and the enmity containter holds the mob
+
     return addHP(-amount);
 }
 
@@ -965,10 +967,19 @@ uint16 CBattleEntity::EVA()
 {
     int16 evasion = GetSkill(SKILL_EVASION);
 
+    // This check is for Players Only
     if (evasion > 200)
     { // Evasion skill is 0.9 evasion post-200
         evasion = (int16)(200 + (evasion - 200) * 0.9);
     }
+
+    // Mobs do not have SKILL_EVASION. Their stats are set in the mobutils.cpp. This will correctly set their evasion
+    if (this->objtype == TYPE_MOB || this->objtype == TYPE_PET)
+    {
+        int16 evasionMob = (200 + (m_modStat[Mod::EVA] - 200) * 0.9);
+        return std::max(0, (evasionMob + AGI() / 2));
+    }
+
     return std::max(0, (m_modStat[Mod::EVA] + evasion + AGI() / 2));
 }
 

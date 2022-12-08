@@ -14,7 +14,8 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 90)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
     mob:setMod(xi.mod.MDEF, 20)
-    mob:addMod(xi.mod.EVA, 50)
+    mob:setMod(xi.mod.EVA, 315)
+    mob:setMod(xi.mod.ATT, 256)
 
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)

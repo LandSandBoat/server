@@ -10,13 +10,20 @@ require("scripts/globals/utils")
 local entity = {}
 
 -- Removes any possible debuff when it goes into shell and we have no function that exists for this
-local removables = { xi.effect.FLASH, xi.effect.BLINDNESS, xi.effect.MAX_HP_DOWN, xi.effect.MAX_MP_DOWN, xi.effect.PARALYSIS, xi.effect.POISON,
-                    xi.effect.CURSE_I, xi.effect.CURSE_II, xi.effect.DISEASE, xi.effect.PLAGUE, xi.effect.WEIGHT, xi.effect.BIND,
-                    xi.effect.BIO, xi.effect.DIA, xi.effect.BURN, xi.effect.FROST, xi.effect.CHOKE, xi.effect.RASP, xi.effect.SHOCK, xi.effect.DROWN,
-                    xi.effect.STR_DOWN, xi.effect.DEX_DOWN, xi.effect.VIT_DOWN, xi.effect.AGI_DOWN, xi.effect.INT_DOWN, xi.effect.MND_DOWN,
-                    xi.effect.CHR_DOWN, xi.effect.ADDLE, xi.effect.SLOW, xi.effect.HELIX, xi.effect.ACCURACY_DOWN, xi.effect.ATTACK_DOWN,
-                    xi.effect.EVASION_DOWN, xi.effect.DEFENSE_DOWN, xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN, xi.effect.MAGIC_EVASION_DOWN,
-                    xi.effect.MAGIC_DEF_DOWN, xi.effect.MAX_TP_DOWN, xi.effect.SILENCE }
+local removables =
+{
+    xi.effect.FLASH,              xi.effect.BLINDNESS,      xi.effect.MAX_HP_DOWN,    xi.effect.MAX_MP_DOWN,
+    xi.effect.PARALYSIS,          xi.effect.POISON,         xi.effect.CURSE_I,        xi.effect.CURSE_II,
+    xi.effect.DISEASE,            xi.effect.PLAGUE,         xi.effect.WEIGHT,         xi.effect.BIND,
+    xi.effect.BIO,                xi.effect.DIA,            xi.effect.BURN,           xi.effect.FROST,
+    xi.effect.CHOKE,              xi.effect.RASP,           xi.effect.SHOCK,          xi.effect.DROWN,
+    xi.effect.STR_DOWN,           xi.effect.DEX_DOWN,       xi.effect.VIT_DOWN,       xi.effect.AGI_DOWN,
+    xi.effect.INT_DOWN,           xi.effect.MND_DOWN,       xi.effect.CHR_DOWN,       xi.effect.ADDLE,
+    xi.effect.SLOW,               xi.effect.HELIX,          xi.effect.ACCURACY_DOWN,  xi.effect.ATTACK_DOWN,
+    xi.effect.EVASION_DOWN,       xi.effect.DEFENSE_DOWN,   xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN,
+    xi.effect.MAGIC_EVASION_DOWN, xi.effect.MAGIC_DEF_DOWN, xi.effect.MAX_TP_DOWN,    xi.effect.SILENCE,
+    xi.effect.PETRIFICATION
+}
 
 local intoShell = function(mob)
     for _, effect in ipairs(removables) do
@@ -33,6 +40,7 @@ local intoShell = function(mob)
     mob:setMod(xi.mod.UDMGPHYS, -9500)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setLocalVar("changeTime", os.time() + 90)
 end
 
 local outOfShell = function(mob)
@@ -61,46 +69,32 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
     mob:setMod(xi.mod.DMGMAGIC, -3000)
     mob:setMod(xi.mod.CURSERES, 100)
-    local changeHP = mob:getHP() - 2000 -- 5% of Max HP
-    mob:setLocalVar("changeHP", changeHP)
-    mob:setLocalVar("DamageTaken", 0)
+    mob:setMod(xi.mod.DEF, 702)
+    mob:setMod(xi.mod.ATT, 446)
+    mob:setMod(xi.mod.EVA, 325)
 
-    -- Forced out of shell after taking 4000 total damage
-    mob:addListener("TAKE_DAMAGE", "TARTARUGA_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
-        local damageTaken = mobArg:getLocalVar("DamageTaken")
-        local waitTime = mobArg:getLocalVar("waitTime")
-        damageTaken = damageTaken + amount
-
-        if damageTaken > 4000 then
-            if mobArg:getAnimationSub() == 1 and os.time() > waitTime then
-                mobArg:setAnimationSub(2)
-                local changeDamage = (mobArg:getHP() - amount) - 2000
-                mobArg:setLocalVar("changeHP", changeDamage)
-                mobArg:setLocalVar("waitTime", os.time() + 2)
-                outOfShell(mobArg)
-            end
-        elseif os.time() > waitTime then
-            mobArg:setLocalVar("DamageTaken", damageTaken)
-        end
-    end)
+    mob:setLocalVar("dmgToChange", mob:getHP() - 2000) -- 5% HP
+    mob:setAnimationSub(2)
 end
 
 entity.onMobFight = function(mob, target)
-    local changeHP = mob:getLocalVar("changeHP")
-    local waitTime = mob:getLocalVar("waitTime")
+    local changeHP = mob:getLocalVar("dmgToChange")
 
-    if mob:getHP() <= changeHP and (mob:getAnimationSub() == 2 or mob:getAnimationSub() == 0) and os.time() > waitTime then
-        mob:setLocalVar("DamageTaken", 0)
-        mob:setAnimationSub(1)
-        mob:setLocalVar("waitTime", os.time() + 2)
-        intoShell(mob)
-    elseif mob:getHPP() == 100 and mob:getAnimationSub() == 1 and os.time() > waitTime then
-        mob:setLocalVar("DamageTaken", 0)
-        mob:setAnimationSub(2)
-        changeHP = mob:getHP() - 2000
-        mob:setLocalVar("changeHP", changeHP)
-        mob:setLocalVar("waitTime", os.time() + 2)
+    if -- In shell
+        mob:getAnimationSub() == 1 and
+        (os.time() > mob:getLocalVar("changeTime") or mob:getHPP() == 100)
+    then
         outOfShell(mob)
+    end
+
+    if mob:getHP() <= changeHP then
+        if (mob:getAnimationSub() == 1) then -- In shell
+            mob:setLocalVar("dmgToChange", mob:getHP() - 2000)
+            outOfShell(mob)
+        elseif (mob:getAnimationSub() == 2) then -- Out of shell
+            intoShell(mob)
+            mob:setLocalVar("dmgToChange", mob:getHP() - 2000)
+        end
     end
 end
 

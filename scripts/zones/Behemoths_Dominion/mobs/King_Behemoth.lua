@@ -19,9 +19,9 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setMod(xi.mod.MDEF, 20)
-    mob:addMod(xi.mod.ATT, 150)
-    mob:addMod(xi.mod.DEF, 200)
-    mob:addMod(xi.mod.EVA, 110)
+    mob:setMod(xi.mod.ATT, 516)
+    mob:setMod(xi.mod.DEF, 500)
+    mob:setMod(xi.mod.EVA, 400)
     mob:addMod(xi.mod.GRAVITYRESBUILD, 30)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
     mob:setLocalVar("delay", os.time())

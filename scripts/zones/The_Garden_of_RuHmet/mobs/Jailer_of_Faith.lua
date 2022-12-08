@@ -85,7 +85,9 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(2)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, 0)
     mob:setMod(xi.mod.FASTCAST, 30) -- taken from timing of spells from multiple captures
-    mob:setMod(xi.mod.DEF, 450)
+    mob:setMod(xi.mod.ATT, 450)
+    mob:setMod(xi.mod.DEF, 409)
+    mob:setMod(xi.mod.EVA, 325)
 end
 
 entity.onMobFight = function(mob)

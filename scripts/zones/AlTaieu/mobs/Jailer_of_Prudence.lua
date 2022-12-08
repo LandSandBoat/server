@@ -74,6 +74,9 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:setMod(xi.mod.REGEN, 10)
+    mob:setMod(xi.mod.ATT, 332)
+    mob:setMod(xi.mod.DEF, 415)
+    mob:setMod(xi.mod.EVA, 413)
 end
 
 entity.onMobFight = function(mob)
