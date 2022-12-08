@@ -399,7 +399,7 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
-    dayWeatherBonus = 1.00
+    local dayWeatherBonus = 1.00
 
     if caster:getWeather() == xi.magic.singleWeatherStrong[ele] then
         if math.random() < 0.33 then

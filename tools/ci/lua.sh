@@ -117,8 +117,6 @@ global_objects=(
 
     addBonuses
     addBonusesAbility
-    applyBarspell
-    applyBarstatus
     applyResistance
     applyResistanceAbility
     applyResistanceEffect
@@ -128,13 +126,7 @@ global_objects=(
     calculateMagicDamage
     calculatePotency
     canOverwrite
-    dayWeatherBonus
-    doBoostGain
-    doDivineBanishNuke
-    doDivineNuke
-    doElementalNuke
     doEnspell
-    doNinjutsuNuke
     finalMagicAdjustments
     finalMagicNonSpellAdjustments
     getBaseCure
@@ -157,7 +149,6 @@ global_objects=(
     handleThrenody
     hasSleepEffects
     isValidHealTarget
-    skillchainCount
     takeAbilityDamage
 
     FormMagicBurst
