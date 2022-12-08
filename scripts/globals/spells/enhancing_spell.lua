@@ -209,15 +209,7 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         (spellEffect >= xi.effect.BARSLEEP and
         spellEffect <= xi.effect.BARVIRUS)
     then
-        -- Works the same as Bar-Element spells. This is only out of 100
-        if skillLevel > 300 then
-            basePower = (25 + math.floor(skillLevel / 4)) / 10 -- 15 at 500
-        else
-            basePower = (40 + math.floor(skillLevel / 5)) / 10 -- 10 at 300
-        end
-
-        basePower = utils.clamp(basePower, 4, 15) -- Max is 15 and min is 4 a skill 0.
-
+        basePower = 20
     -- Boost-Stat / Gain-Stat
     elseif
         spellEffect >= xi.effect.STR_BOOST and

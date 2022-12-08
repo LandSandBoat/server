@@ -395,7 +395,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
 
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + bonusMagicAccuracy
-    local magicHitRate  = 0
     local resMod        = 0 -- Some spells may possibly be non elemental.
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
@@ -442,9 +441,8 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
 
             target:addStatusEffectEx(effect, xi.effect.NONE, currentPower + 1, 0, 10, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true)
         end
-        -- Mod set in database. Base 0 means not resistant nor weak.
-        resMod = target:getMod(xi.magic.resistMod[spellElement])
 
+        -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
@@ -509,7 +507,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     if caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) then
-        magicAcc = magicAcc + 100
+        magicAcc = magicAcc + 256
     end
 
     -- Add acc for skillchains
@@ -623,84 +621,12 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -- STEP 3: Get Magic Hit Rate
     -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
     -----------------------------------
-    local magicAccDiff = magicAcc - magiceva
-
-    if magicAccDiff < 0 then
-        magicHitRate = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)
-    else
-        magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
-    end
+    local magicHitRate = xi.magic.calculateMagicHitRate(magicAcc, magiceva, target, element, skillchainCount)
 
     -----------------------------------
     -- STEP 4: Get Resist Tier
     -----------------------------------
-    local eemVal = 1
-
-    if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
-        local eemTier = 1
-        eemVal = target:getMod(xi.magic.eleEvaMult[element]) / 100
-        for _, eemTable in pairs(xi.magic.eemTiers) do -- Finds the highest tier for the resist.
-            if eemVal >= eemTable.eem then
-                eemTier = utils.clamp(eemTable.tier, 1, 15)
-                break
-            end
-        end
-
-        if skillchainCount > 0 then
-            eemTier = eemTier + 1
-        end
-
-        if target:hasStatusEffect(xi.magic.eemStatus[element]) then
-            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), 1, 15)
-        end
-
-        eemVal = xi.magic.eem[eemTier]
-    end
-
-    local eighthTrigger = false
-    local quarterTrigger = false
-
-    if element and element ~= xi.magic.ele.NONE then
-        resMod = target:getMod(xi.magic.resistMod[element])
-    end
-
-    local resTriggerPoints =
-    {
-        resMod > 101,
-        resMod >= 0,
-    }
-
-    if resTriggerPoints[1] then
-        eighthTrigger = true
-    end
-
-    if resTriggerPoints[2] then
-        quarterTrigger = true
-    end
-
-    local p = utils.clamp(((magicHitRate * eemVal) / 100), 0.05, 0.95) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
-    local resistVal = 1
-
-    -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half      = (1 - p)
-    local quart     = ((1 - p)^2)
-    local eighth    = ((1 - p)^3)
-    local resvar    = math.random()
-
-    -- Determine final resist based on which thresholds have been crossed.
-    if resvar <= eighth and eighthTrigger then
-        resistVal = 0.125
-    elseif resvar <= quart and quarterTrigger then
-        resistVal = 0.25
-    elseif resvar <= half then
-        resistVal = 0.5
-    else
-        resistVal = 1.0
-    end
-
-    if eemVal <= 0.5 then
-        resistVal = resistVal / 2
-    end
+    local resistVal = xi.magic.getMagicResist(magicHitRate, target, element, 0, skillchainCount, nil, caster)
 
     return resistVal
 end
