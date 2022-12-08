@@ -203,6 +203,11 @@ public:
     void addGroup(BattlefieldGroup group);
     void handleDeath(CBaseEntity* PEntity);
 
+    static void setPlayerEntered(CCharEntity* PChar, bool entered);
+    static bool hasPlayerEntered(CCharEntity* PChar);
+
+    static uint16 getBattlefieldArea(CCharEntity* PChar);
+
     uint8 m_isMission;
     bool  m_showTimer = true;
 
