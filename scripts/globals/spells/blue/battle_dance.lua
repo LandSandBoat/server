@@ -49,11 +49,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = blueDoPhysicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
-    -- Additional effect: DEX down (-15 for 30s/60s. Effect decreases by 1 every 2s/4s)
+    -- Additional effect: DEX down (-9 for 60s. Effect decreases by 1 every 6s)
     if damage > 0 and not target:hasStatusEffect(xi.effect.DEX_DOWN) then
         local resist = applyResistanceEffect(caster, target, spell, params)
         if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.DEX_DOWN, 15, 4 * resist, 60 * resist)
+            target:addStatusEffect(xi.effect.DEX_DOWN, 9, 6, 60)
         end
     end
 

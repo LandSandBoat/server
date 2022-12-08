@@ -1419,7 +1419,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         // TODO: actual radius calculation
         float radius = spell::GetSpellRadius(PSpell, this);
 
-        PAI->TargetFind->findWithinCone(PActionTarget, radius, 45, flags);
+        PAI->TargetFind->findWithinCone(PActionTarget, radius, 90, flags);
     }
     else
     {

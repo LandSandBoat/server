@@ -956,6 +956,8 @@ enum class Mod
 
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
 
+    BREATH_DMG_DEALT        = 3033, // Breath damage dealt
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

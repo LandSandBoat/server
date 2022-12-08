@@ -1,5 +1,8 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
+require("scripts/globals/mobskills")
+require("scripts/globals/settings")
+require("scripts/globals/status")
 
 -- The TP modifier
 TPMOD_NONE = 0
@@ -236,7 +239,7 @@ function blueDoPhysicalSpell(caster, target, spell, params)
     local wsc = blueGetWSC(caster, params)
     wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
 
-    -- Monster correlation -- TODO: add Monster Correlation effect to Magus Keffiyeh and reference that effect here (adds another 0.02)
+    -- Monster correlation
     local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Azure Lore
@@ -298,6 +301,9 @@ end
 
 -- Get the damage for a magical Blue Magic spell
 function blueDoMagicalSpell(caster, target, spell, params, statMod)
+
+    -- how do mobs weak to element get more dmg from that? (getElementalDamageReduction in addBonuses, DONE)
+
     local D = caster:getMainLvl() + 2
 
     if D > params.duppercap then
@@ -308,19 +314,6 @@ function blueDoMagicalSpell(caster, target, spell, params, statMod)
 
     if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
         st = st * 2
-    end
-
-    local convergenceBonus = 1.0
-    if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
-        local convergenceEffect = caster:getStatusEffect(xi.effect.CONVERGENCE)
-        local convLvl = convergenceEffect:getPower()
-        if convLvl == 1 then
-            convergenceBonus = 1.05
-        elseif convLvl == 2 then
-            convergenceBonus = 1.1
-        elseif convLvl == 3 then
-            convergenceBonus = 1.15
-        end
     end
 
     local statBonus = 0
@@ -336,7 +329,7 @@ function blueDoMagicalSpell(caster, target, spell, params, statMod)
         statBonus = dStat * params.tMultiplier
     end
 
-    D = ((D + st) * params.multiplier * convergenceBonus) + statBonus
+    D = ((D + st) * params.multiplier) + statBonus
 
     -- At this point according to wiki we apply standard magic attack calculations
 
@@ -349,9 +342,11 @@ function blueDoMagicalSpell(caster, target, spell, params, statMod)
     rparams.skillType = xi.skill.BLUE_MAGIC
     magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
 
-    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
+    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack)) -- mab/mdb/weather/day
 
     caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
+
+
 
     return dmg
 end
@@ -383,6 +378,46 @@ function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
             caster:addHP(dmg)
         end
     end
+
+    return dmg
+
+end
+
+function blueDoBreathSpell(caster, target, spell, params)
+
+
+    -- how is conal (in DB) handled? I feel it interferes with what I've set up here. what is the cone angle?
+
+
+    -- Initial damage
+    local dmg = (caster:getHP() / params.hpMod) + (caster:getMainLvl() / params.lvlMod)
+
+    -- Conal check (90° cone)
+    local isInCone = 0
+    if target:isInfront(caster,64) then isInCone = 1 end
+    dmg = dmg * isInCone
+
+    -- Less damage when the target is more to the side of the caster
+    local angle = caster:getFacingAngle(target)
+    local angleDmgMultiplier = (100 - (3 * math.max(math.abs(angle) - 16, 0))) / 100
+        -- 100% damage when inside a cone in front (45° cone, 32/256)
+        -- 50% damage when monster is to your side (90° cone, 64/256)
+        -- linear function: from 22° to 45° > 100% to 50% dmg
+        -- caster:PrintToPlayer(string.format("angle " .. angle * 1.4117 .. "   mult " .. angleDmgMultiplier))
+    dmg = dmg * angleDmgMultiplier
+
+    -- Monster correlation
+    local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    dmg = dmg * (1 + correlationMultiplier)
+
+    -- Modifiers
+    dmg = dmg * (1 + (caster:getMod(xi.mod.BREATH_DMG_DEALT) / 100))
+
+    -- Resistance
+    dmg = math.floor(dmg * applyResistance(caster, target, spell, params))
+
+    -- Final damage
+    dmg = target:breathDmgTaken(dmg)
 
     return dmg
 
@@ -502,7 +537,7 @@ SPELL-SPECIFIC NOTES
 changes in blu_fixes branch
 ---------------------------
 
-- Individual spell changes
+- Individual spell changes:
     - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which doesnt't make sense.
     - Updated WSC values, though most were correct.
     - Added spell ecosystem.
@@ -522,32 +557,50 @@ changes in blu_fixes branch
 - Enhancing Blue Magic spell changes:
     - Consolidated Diffusion's effect on duration into one function.
 
-- Consolidated drain spells into one function.
+- Breath Blue Magic spell changes:
+    - Corrected breath spells to do breath damage, not magic damage.
+    - You have to be in front of the monster to do breath damage.
+    - Added an angle damage multiplier that lowers damage when monster is more to your side than in front.
 
-- General BLU changes:
-    - Azure Lore will now allow Physical spells to always skillchain, and Magical spells to always magic burst.
+- Drain Blue Magic spell changes:
+    - Consolidated drain spells into one function.
 
 - General changes:
-    - Changed all (wrongly named) LUMORIAN and LUMORIAN_KILLER to LUMINIAN and LUMINIAN_KILLER
+    - Azure Lore will now allow Physical spells to always skillchain, and Magical spells to always magic burst.
+    - Changed all (wrongly named) LUMORIAN and LUMORIAN_KILLER to LUMINIAN and LUMINIAN_KILLER.
+    - Added BREATH_DMG_DEALT mod.
+    - Updated Mirage Keffiyeh/Mirage Keffiyeh +1/Saurian Helm to have BREATH_DMG_DEALT +10 mods.
 
-- TODOs
-    - "Damage/Accuracy/Critical Hit Rate/Effect Duration varies with TP" is not implemented
-    - Missed physical spells should not be 0 dmg, but there's currently no way to make spells "miss"
-    - Sneak Attack / Trick Attack in combination with spells doesn't work atm
+- TODOs:
+    - Cannot magic burst Breath spells. (bursting Breath spells only affects accuracy, not damage)
+        - Burst Affinity doesn't work with Breath spells.
+    - Conal calculations on additional targets (not the main target) for Breath spells get a reduced range due to checking a triangle and not a half-circle.
+        (see targetfind.cpp > findWithinCone, I didnt dare touch these calculations)
+    - Convergence effect isn't coded.
+    - "Damage/Accuracy/Critical Hit Rate/Effect Duration varies with TP" is not implemented.
+    - Missed physical spells should not be 0 dmg, but there's currently no way to make spells "miss".
+    - Sneak Attack / Trick Attack in combination with spells doesn't work, but it should (but not for all spells).
     - Add 75+ spells. I didn't bother personally since we're on a 75 server and I have no knowledge of these spells at all.
+    - Add Monster Correlation effect to Magus Keffiyeh (adds another 0.02).
 
 - END RESULT
-    - Physical dmg: acc/att/modifiers
-    - Physical AE: acc/bluemagicskill/macc/INT
-    - Physical Potency = +2 acc per merit
-    - Correlation = multiplier +- 0.25
-    - Correlation = multiplier +0.004 per merit (only for strengths, not weaknesses)
+    - Physical
+        - dmg: acc/att/modifiers
+        - AE macc: acc/bluemagicskill/macc/INT
+    - Breath
+        - dmg: HP/level
+        - macc: macc/bluemagicskill
+    - Correlation = multiplier +- 0.25 (breath multiplier = 1)
     - Azure Lore allows for continuous chaining and bursting
+    - Merits
+        - Physical Potency = +2 acc per merit
+        - Correlation = +0.004 per merit (only for strengths, not weaknesses)
 
 
 CLEANUP*********************
 
 - Getstats, put back
 - Magic, remove prints
+- Remove defmode, although it might come in
 
 ]]
