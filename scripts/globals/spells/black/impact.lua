@@ -64,9 +64,6 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:addStatusEffect(xi.effect.CHR_DOWN, chrLoss, 0, duration)
     end
 
-    -- Diverting use of xi.magic.doElementalNuke till spellParams is implemented for this spell
-    -- local dmg = xi.magic.doElementalNuke(caster, target, spell, params)
-
     -- Calculate raw damage
     local dmg = xi.magic.calculateMagicDamage(caster, target, spell, params)
     -- Get the resisted damage
