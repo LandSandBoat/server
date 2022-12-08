@@ -1,6 +1,6 @@
 -----------------------------------
 -- xi.effect.SUPER_BUFF
--- This is only used for Nidhogg
+-- This is only used for Nidhogg, nothing else
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
