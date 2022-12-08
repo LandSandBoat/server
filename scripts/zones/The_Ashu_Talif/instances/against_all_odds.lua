@@ -59,6 +59,7 @@ instanceObject.onInstanceComplete = function(instance)
             v:setCharVar("AgainstAllOdds", 3)
             v:setCharVar("AgainstAllOddsTimer", 0)
         end
+
         v:startEvent(102)
     end
 end

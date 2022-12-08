@@ -118,10 +118,14 @@ quests.i_can_hear_a_rainbow.onZoneIn = function(player)
 
         -- get data for basic weather (e.g. downgrade GALES to WIND)
         local zone = player:getZone(true)
-        if not zone then return false end
+        if not zone then
+            return false
+        end
 
         local weather = zone:getWeather()
-        if not weather then return false end
+        if not weather then
+            return false
+        end
 
         local baseWeather = (weather % 2 == 0) and weather or weather - 1
         local data = rubyData[baseWeather]

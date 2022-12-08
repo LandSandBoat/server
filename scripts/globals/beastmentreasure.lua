@@ -144,15 +144,15 @@ local function addLoot(t1, t2)
 end
 
 -- Generate weighted loot tables now (on server init) so it doesn't have to be done at runtime
-local w_rocksgems   = convertToWeighted(sharedLoot.rocksgems)
-local w_seedsracial =
+local wRocksGems   = convertToWeighted(sharedLoot.rocksgems)
+local wSeedsRacial =
 {
     [xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[xi.zone.YUHTUNGA_JUNGLE].loot.racial)),
     [xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[xi.zone.YHOATOR_JUNGLE].loot.racial)),
     [xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[xi.zone.WESTERN_ALTEPA_DESERT].loot.racial))
 }
-local w_coins       = convertToWeighted(sharedLoot.coins)
-local w_sealsunique =
+local wCoins       = convertToWeighted(sharedLoot.coins)
+local wSealsUnique =
 {
     [xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[xi.zone.YUHTUNGA_JUNGLE].loot.unique)),
     [xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[xi.zone.YHOATOR_JUNGLE].loot.unique)),
@@ -303,13 +303,13 @@ xi.beastmentreasure.handleQmOnEventFinish = function(player, csid)
     if csid == 105 then
         -- Successfully excavating a dig site rewards 4000 gil plus the following items:
         -- First reward is 1 item from the rocks and gems pool
-        local item1 = weightedRandomSelect(w_rocksgems)
+        local item1 = weightedRandomSelect(wRocksGems)
         -- Second reward is 1 item from a pool containing seeds and the zone's "racial" junk
-        local item2 = weightedRandomSelect(w_seedsracial[zoneid])
+        local item2 = weightedRandomSelect(wSeedsRacial[zoneid])
         -- Third reward is a silver, gold, or mythril beastcoin
-        local item3 = weightedRandomSelect(w_coins)
+        local item3 = weightedRandomSelect(wCoins)
         -- Final reward is a seal or the region's exclusive item
-        local item4 = weightedRandomSelect(w_sealsunique[zoneid])
+        local item4 = weightedRandomSelect(wSealsUnique[zoneid])
         -- Distribute rewards
         player:confirmTrade()
         player:addGil(4000)

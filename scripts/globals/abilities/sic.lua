@@ -5,9 +5,8 @@
 -- Recast Time: 2 minutes
 -- Duration: N/A
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -36,7 +35,6 @@ abilityObject.onUseAbility = function(player, target, ability)
         else
             mob:queue(0, doSic)
         end
-
     end
 
     player:getPet():queue(0, doSic)

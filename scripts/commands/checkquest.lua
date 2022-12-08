@@ -25,7 +25,6 @@ local questStatusString =
 }
 
 function onTrigger(player, logId, questId, target)
-
     -- validate logId
     local questLog = logIdHelpers.getQuestLogInfo(logId)
 

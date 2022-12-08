@@ -72,6 +72,7 @@ global_objects=(
     BattlefieldMission
     BattlefieldQuest
     Limbus
+    SeasonalEvent
 
     removeSleepEffects
 
@@ -100,10 +101,6 @@ global_objects=(
     getMeleeDmg
     handleWSGorgetBelt
 
-    getRecommendedAssaultLevel
-
-    PATHFLAG_WALLHACK
-
     RoeParseTimed
     getRoeRecords
     RoeParseRecords
@@ -117,11 +114,6 @@ global_objects=(
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade
-    HALLOWEEN_2008
-    HALLOWEEN_2009
-    HALLOWEEN_2010
-
-    salvageUtil
 
     addBonuses
     addBonusesAbility
@@ -173,9 +165,6 @@ global_objects=(
 
     AbilityFinalAdjustments
 
-    MOBSKILL_MAGICAL
-    MOBSKILL_PHYSICAL
-
     TPMOD_NONE
     TPMOD_CHANCE
     TPMOD_CRITICAL
@@ -207,13 +196,6 @@ global_objects=(
     BlueMagicalSpell
     BlueFinalAdjustments
     getBlueEffectDuration
-
-    LEUJAOAM_ASSAULT_POINT
-    MAMOOL_ASSAULT_POINT
-    LEBROS_ASSAULT_POINT
-    PERIQIA_ASSAULT_POINT
-    ILRUSI_ASSAULT_POINT
-    NYZUL_ISLE_ASSAULT_POINT
 
     ForceCrash
     BuildString

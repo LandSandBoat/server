@@ -8,7 +8,6 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-
     if mob:getAnimationSub() == 3 then
         SetDropRate(103, 1572, 1000)
     else
@@ -16,7 +15,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_DAGGER_DIALOG)
-
 end
 
 entity.onMobFight = function(mob, target)

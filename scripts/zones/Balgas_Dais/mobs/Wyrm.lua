@@ -35,7 +35,6 @@ local function notBusy(mob)
 end
 
 entity.onMobFight = function(mob, target)
-
     -- Return to ground at 33% HP
     if
         mob:getAnimationSub() == 1 and -- is flying

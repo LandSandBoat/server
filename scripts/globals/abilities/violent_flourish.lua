@@ -6,12 +6,7 @@
 -- Recast Time: 0:20
 -- Duration: ??
 -----------------------------------
-require("scripts/globals/jobpoints")
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/magic")
-require("scripts/globals/msg")
+require('scripts/globals/job_utils/dancer')
 -----------------------------------
 local abilityObject = {}
 

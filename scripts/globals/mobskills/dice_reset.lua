@@ -18,7 +18,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     target:resetRecasts()
 
     skill:setMsg(xi.msg.basic.ABILITIES_RECHARGED)

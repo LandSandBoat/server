@@ -592,7 +592,7 @@ xi.abyssea.visionsCruorProspectorOnTrigger = function(player, npc)
     player:startEvent(2002, cruor, demilune, 0, 0, cipher)
 end
 
-xi.abyssea.visionsCruorProspectorOnEventFinish = function (player, csid, option, prospectorItems)
+xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, prospectorItems)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
     local cruorTotal = player:getCurrency("cruor")
@@ -1139,7 +1139,9 @@ xi.abyssea.searingWardTimer = function(player)
         end
 
         player:setLocalVar('tetherTimer', tetherTimer - 1)
-        player:timer(1500, function() xi.abyssea.searingWardTimer(player) end)
+        player:timer(1500, function()
+            xi.abyssea.searingWardTimer(player)
+        end)
     elseif tetherTimer == 1 then
         player:setLocalVar('tetherTimer', 0)
         player:messageSpecial(ID.text.RETURNING_TO_WARD)

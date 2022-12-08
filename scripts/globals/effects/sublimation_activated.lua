@@ -62,7 +62,6 @@ effectObject.onEffectTick = function(target, effect)
     else
         effect:setPower(store)
     end
-
 end
 
 effectObject.onEffectLose = function(target, effect)

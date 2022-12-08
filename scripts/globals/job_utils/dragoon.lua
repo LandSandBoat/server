@@ -220,7 +220,7 @@ xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
 
     -- Spirit Surge increases dragoon's MAX HP increases by 25% of wyvern MaxHP
     -- bg wiki says 25% ffxiclopedia says 15%, going with 25 for now
-    local mhp_boost = target:getPet():getMaxHP() * 0.25
+    local maxHPBoost = target:getPet():getMaxHP() * 0.25
 
     -- Dragoon gets all of wyverns TP when using Spirit Surge
     target:addTP(petTP)
@@ -236,7 +236,7 @@ xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
     target:resetRecast(xi.recast.ABILITY, 159) -- High Jump
     target:resetRecast(xi.recast.ABILITY, 160) -- Super Jump
 
-    target:addStatusEffect(xi.effect.SPIRIT_SURGE, mhp_boost, 0, duration, 0, strBoost)
+    target:addStatusEffect(xi.effect.SPIRIT_SURGE, maxHPBoost, 0, duration, 0, strBoost)
 end
 
 xi.job_utils.dragoon.useCallWyvern = function(player, target, ability)
@@ -414,7 +414,6 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
                 local effect = player:getStatusEffect(xi.effect.STONESKIN)
                 effect:setPower(effect:getPower() - drainamount) -- fixes the status effect so when it ends it uses the new power instead of old
                 player:delMod(xi.mod.STONESKIN, drainamount) -- removes the amount from the mod
-
             end
         else
             player:delStatusEffect(xi.effect.STONESKIN)
@@ -758,7 +757,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     local wyvern = player:getPet()
 
     local healingbreath = xi.jobAbility.HEALING_BREATH
-    local breath_heal_range = 14
+    local breathHealRange = 14
 
     if player:getMainLvl() >= 80 then
         healingbreath = xi.jobAbility.HEALING_BREATH_IV
@@ -769,7 +768,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
     end
 
     local function inBreathRange(target)
-        return wyvern:checkDistance(target) <= breath_heal_range
+        return wyvern:checkDistance(target) <= breathHealRange
     end
 
     local highestHPDiff = -1
@@ -806,18 +805,18 @@ xi.job_utils.dragoon.useSmitingBreath = function(player, target, ability, action
 end
 
 xi.job_utils.dragoon.addWyvernExp = function(player, exp)
-    local wyvern   = player:getPet()
-    local prev_exp = wyvern:getLocalVar("wyvern_exp")
+    local wyvern      = player:getPet()
+    local prevExp     = wyvern:getLocalVar("wyvern_exp")
     local numLevelUps = 0
 
-    if prev_exp < 1000 then
+    if prevExp < 1000 then
         -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
         local currentExp = exp
-        if prev_exp + currentExp > 1000 then
-            currentExp = 1000 - prev_exp
+        if prevExp + currentExp > 1000 then
+            currentExp = 1000 - prevExp
         end
 
-        numLevelUps = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
+        numLevelUps = math.floor((prevExp + currentExp) / 200) - math.floor(prevExp / 200)
 
         if numLevelUps ~= 0 then
             local wyvernAttributeIncreaseEffectJP = player:getJobPointLevel(xi.jp.WYVERN_ATTR_BONUS)
@@ -841,7 +840,7 @@ xi.job_utils.dragoon.addWyvernExp = function(player, exp)
             player:addMod(xi.mod.ALL_WSDMG_ALL_HITS, 2 * numLevelUps)
         end
 
-        wyvern:setLocalVar("wyvern_exp", prev_exp + exp)
+        wyvern:setLocalVar("wyvern_exp", prevExp + exp)
         wyvern:setLocalVar("level_Ups", wyvern:getLocalVar("level_Ups") + numLevelUps)
     end
 

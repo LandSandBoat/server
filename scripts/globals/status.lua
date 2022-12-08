@@ -1249,7 +1249,7 @@ xi.mod =
     BUST                            = 332,
     FINISHING_MOVES                 = 333,
     SAMBA_DURATION                  = 490, -- Samba duration bonus
-    WALTZ_POTENCY                   = 491, -- Waltz Potentcy Bonus
+    WALTZ_POTENCY                   = 491, -- Waltz Potency Bonus
     JIG_DURATION                    = 492, -- Jig duration bonus in percents
     VFLOURISH_MACC                  = 493, -- Violent Flourish accuracy bonus
     STEP_FINISH                     = 494, -- Bonus finishing moves from steps
@@ -1786,6 +1786,8 @@ xi.mod =
     BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
     QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
+
+    DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

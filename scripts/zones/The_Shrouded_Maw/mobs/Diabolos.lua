@@ -45,6 +45,7 @@ entity.onMobFight = function(mob, target)
                         tileArg:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens
                     end)
                 end
+
                 break
             end
         end

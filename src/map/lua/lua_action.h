@@ -50,6 +50,8 @@ public:
     void   messageID(uint32 actionTargetID, uint16 messageID);
     auto   getAnimation(uint32 actionTargetID) -> std::optional<uint16>;
     void   setAnimation(uint32 actionTargetID, uint16 animation);
+    auto   getCategory() -> uint8;
+    void   setCategory(uint8 category);
     void   speceffect(uint32 actionTargetID, uint8 speceffect);
     void   reaction(uint32 actionTargetID, uint8 reaction);
     void   modifier(uint32 actionTargetID, uint8 modifier);

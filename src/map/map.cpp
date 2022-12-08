@@ -301,6 +301,8 @@ int32 do_init(int32 argc, char** argv)
 
     moduleutils::OnInit();
 
+    luautils::OnServerStart();
+
     moduleutils::ReportLuaModuleUsage();
 
     ShowInfo("The map-server is ready to work!");
@@ -417,13 +419,12 @@ void do_abort()
 
 /************************************************************************
  *                                                                       *
- *  set_server_type                                                      *
+ *  set_socket_type                                                      *
  *                                                                       *
  ************************************************************************/
 
-void set_server_type()
+void set_socket_type()
 {
-    SERVER_TYPE = XI_SERVER_MAP;
     SOCKET_TYPE = socket_type::UDP;
 }
 

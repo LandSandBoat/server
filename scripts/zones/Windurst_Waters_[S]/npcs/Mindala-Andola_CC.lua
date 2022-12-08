@@ -38,7 +38,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(13, allegiance, notes, freelances, cipher, medalRank, bonusEffects, timeStamp, 0)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -66,6 +65,7 @@ entity.onEventFinish = function(player, csid, option)
             if player:getCampaignAllegiance() == 3 and adj ~= nil then
                 price = adj
             end
+
             if player:getFreeSlotsCount() >= 1 then
                 player:delCurrency("allied_notes", price)
                 player:addItem(item)

@@ -29,8 +29,8 @@ zoneObject.onZoneIn = function(player, prevZone)
         (month == 12 and day >= 5) or
         (month == 1 and day <= 5)
     then
-        player:ChangeMusic(0, 239)
-        player:ChangeMusic(1, 239)
+        player:changeMusic(0, 239)
+        player:changeMusic(1, 239)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
     end
 
@@ -95,7 +95,6 @@ zoneObject.onGameHour = function(zone)
             npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
             npc:pathThrough(lowerJeunoGlobal.lampPath, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
         end
-
     end
 end
 

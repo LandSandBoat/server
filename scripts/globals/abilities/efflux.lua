@@ -5,7 +5,6 @@
 -- Recast Time: 00:03:00
 -- Duration: 00:01:00 or first blue magic cast
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}

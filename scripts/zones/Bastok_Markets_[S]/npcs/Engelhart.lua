@@ -46,7 +46,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(104)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

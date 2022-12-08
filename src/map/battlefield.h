@@ -189,7 +189,6 @@ public:
     void setArmouryCrate(uint32 entityId);
 
     void         ApplyLevelRestrictions(CCharEntity* PChar) const;
-    void         ClearEnmityForEntity(CBattleEntity* PEntity);
     bool         InsertEntity(CBaseEntity* PEntity, bool inBattlefield = false, BATTLEFIELDMOBCONDITION conditions = CONDITION_NONE, bool ally = false);
     CBaseEntity* GetEntity(CBaseEntity* PEntity);
     bool         IsRegistered(CCharEntity* PChar);

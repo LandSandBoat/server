@@ -10,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
 

@@ -72,7 +72,6 @@ entity.onTrigger = function(player, npc)
 
     else
         player:messageSpecial(ID.text.MERTAIRE_DEFAULT)
-
     end
 end
 

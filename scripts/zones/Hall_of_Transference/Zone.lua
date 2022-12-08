@@ -37,27 +37,27 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x) -- Holla
+        [1] = function() -- Holla
             player:setCharVar("option", 1)
             player:startEvent(103)
         end,
 
-        [2] = function (x) -- Mea
+        [2] = function() -- Mea
             player:setCharVar("option", 1)
             player:startEvent(104)
         end,
 
-        [3] = function (x) -- Dem
+        [3] = function() -- Dem
             player:setCharVar("option", 1)
             player:startEvent(105)
         end,
 
-        [4] = function (x)
+        [4] = function()
             player:setCharVar("option", 2)
             player:startEvent(103)
         end,
 
-        [5] = function (x)
+        [5] = function()
             if player:getCharVar("MeaChipRegistration") == 1 then
                 if
                     math.random(1, 100) <= 95 or
@@ -73,7 +73,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             end
         end,
 
-        [6] = function (x)
+        [6] = function()
             if player:getCharVar("HollaChipRegistration") == 1 then
                 if
                     math.random(1, 100) <= 95 or
@@ -89,7 +89,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             end
         end,
 
-        [7] = function (x)
+        [7] = function()
             if player:getCharVar("DemChipRegistration") == 1 then
                 if
                     math.random(1, 100) <= 95 or

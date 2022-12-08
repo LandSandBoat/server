@@ -9,11 +9,11 @@ require("scripts/globals/salvage")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return salvageUtil.onCellItemCheck(target, xi.effect.ENCUMBRANCE_I, 0x0040)
+    return xi.salvage.onCellItemCheck(target, xi.effect.ENCUMBRANCE_I, 0x0040)
 end
 
 itemObject.onItemUse = function(target)
-    return salvageUtil.onCellItemUse(target, xi.effect.ENCUMBRANCE_I, 0x0040, 3)
+    return xi.salvage.onCellItemUse(target, xi.effect.ENCUMBRANCE_I, 0x0040, 3)
 end
 
 return itemObject

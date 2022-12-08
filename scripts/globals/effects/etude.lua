@@ -12,9 +12,9 @@ end
 
 effectObject.onEffectTick = function(target, effect)
     -- the effect loses modifier of 1 every 10 ticks.
-    local song_effect_size = effect:getPower()
+    local songEffectSize = effect:getPower()
     if effect:getTier() == 2 and effect:getPower() > 0 then
-        effect:setPower(song_effect_size -1)
+        effect:setPower(songEffectSize -1)
         target:delMod(effect:getSubPower(), 1)
     end
 end

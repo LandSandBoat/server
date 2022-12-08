@@ -6,10 +6,9 @@
 -- Recast Time: 0:30
 -- Duration: 0:05
 -----------------------------------
-require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
+require("scripts/globals/weaponskills")
 -----------------------------------
 local abilityObject = {}
 
@@ -52,6 +51,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
     action:speceffect(target:getID(), 1)
+
     return 0
 end
 

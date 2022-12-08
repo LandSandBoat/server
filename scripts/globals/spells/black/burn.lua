@@ -62,7 +62,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     return xi.effect.BURN
-
 end
 
 return spellObject

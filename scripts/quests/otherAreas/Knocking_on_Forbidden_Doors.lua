@@ -140,11 +140,11 @@ quest.sections =
 
             onEventFinish =
             {
-                [556] = function (player, csid, option, npc)
+                [556] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
 
-                [557] = function (player, csid, option, npc)
+                [557] = function(player, csid, option, npc)
                     if
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.popFromQM(player, npc, ID.mob.ALSHA, { claim = true, hide = 0 })

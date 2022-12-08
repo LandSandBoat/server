@@ -172,9 +172,8 @@ void do_abort()
     do_final(EXIT_FAILURE);
 }
 
-void set_server_type()
+void set_socket_type()
 {
-    SERVER_TYPE = XI_SERVER_LOGIN;
     SOCKET_TYPE = socket_type::TCP;
 }
 

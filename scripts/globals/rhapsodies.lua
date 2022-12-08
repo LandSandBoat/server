@@ -384,10 +384,10 @@ xi.rhapsodies.requiredCharacters =
 -- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 
 xi.rhapsodies.charactersAvailable = function(player)
-    local rov_mission = player:getCurrentMission(xi.mission.log_id.ROV)
-    for _, char in pairs(xi.rhapsodies.requiredCharacters[rov_mission]) do
-        local expansion_mission = player:getCurrentMission(xi.rhapsodies.expansion[char])
-        if xi.rhapsodies.unavailability[char][expansion_mission] then
+    local rovMission = player:getCurrentMission(xi.mission.log_id.ROV)
+    for _, char in pairs(xi.rhapsodies.requiredCharacters[rovMission]) do
+        local expansionMission = player:getCurrentMission(xi.rhapsodies.expansion[char])
+        if xi.rhapsodies.unavailability[char][expansionMission] then
             return false
         end
     end

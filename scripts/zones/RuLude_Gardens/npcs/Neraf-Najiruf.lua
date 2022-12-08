@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         saveMySister == QUEST_COMPLETED and
-        player:hasKeyItem(xi.ki.DUCAL_GUARDS_LANTERN) == true
+        player:hasKeyItem(xi.ki.DUCAL_GUARDS_LANTERN)
     then
         player:startEvent(97) -- last CS (after talk with baudin)
 

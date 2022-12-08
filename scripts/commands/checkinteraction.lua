@@ -83,7 +83,7 @@ function onTrigger(player, handlerName)
         return
     end
 
-    local varCache = interactionUtil.makeTableCache(function (varname)
+    local varCache = interactionUtil.makeTableCache(function(varname)
         return player:getVar(varname)
     end)
 

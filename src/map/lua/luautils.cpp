@@ -3575,6 +3575,38 @@ namespace luautils
     }
 
     /************************************************************************
+     *                                                                       *
+     *  Сalled when a pet's level restriction status changes                 *
+     *                                                                       *
+     ************************************************************************/
+
+    int32 OnPetLevelRestriction(CBaseEntity* PMob)
+    {
+        TracyZoneScoped;
+
+        if (PMob == nullptr || PMob->objtype != TYPE_PET)
+        {
+            return -1;
+        }
+
+        sol::function onPetLevelRestriction = getEntityCachedFunction(PMob, "onPetLevelRestriction");
+        if (!onPetLevelRestriction.valid())
+        {
+            return -1;
+        }
+
+        auto result = onPetLevelRestriction(CLuaBaseEntity(PMob));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPetLevelRestriction: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
+    /************************************************************************
      *   OnGameDayAutomatisation()                                           *
      *   used for creating action of npc every game day                      *
      *                                                                       *
@@ -4522,6 +4554,58 @@ namespace luautils
         }
 
         return 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Called on Server Start                                               *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnServerStart()
+    {
+        TracyZoneScoped;
+
+        auto onServerStart = lua["xi"]["server"]["onServerStart"];
+        if (!onServerStart.valid())
+        {
+            ShowWarning("luautils::onServerStart");
+            return;
+        }
+
+        auto result = onServerStart();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onServerStart: %s", err.what());
+            return;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Called on JST Midnight                                               *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnJSTMidnight()
+    {
+        TracyZoneScoped;
+
+        auto onJSTMidnight = lua["xi"]["server"]["onJSTMidnight"];
+        if (!onJSTMidnight.valid())
+        {
+            ShowWarning("luautils::onJSTMidnight");
+            return;
+        }
+
+        auto result = onJSTMidnight();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onJSTMidnight: %s", err.what());
+            return;
+        }
     }
 
     /************************************************************************

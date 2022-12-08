@@ -23,7 +23,6 @@ entity.onTrade = function(player, npc, trade)
             end
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -45,7 +44,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 228 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 4, 1)
         player:addStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY, 1, 0, 120)

@@ -13,7 +13,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
 --    player:startEvent(79)  -- how the paper works -- under oath
 --    player:startEvent(51)  -- it says what i dont beleive you -- under oath
 --    player:startEvent(19)  -- thanks for your help i have to tell trion -- under oath
@@ -39,7 +38,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(76)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

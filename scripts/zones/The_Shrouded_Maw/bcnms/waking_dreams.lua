@@ -45,6 +45,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_DREAMS)
         end
+
         player:addTitle(xi.title.HEIR_TO_THE_REALM_OF_DREAMS)
     end
 end

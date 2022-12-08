@@ -56,11 +56,10 @@ local function parseActionShorthand(actionDef)
 
     if info ~= nil then
         -- Return -1 to open door, else 0
-        return LambdaAction:new(function ()
+        return LambdaAction:new(function()
             return info and -1 or 0
         end, Action.Priority.Default)
     end
-
 end
 
 -- Parses out short-hand ways of writing quest actions, in order to avoid having to make function declarations for each simple interaction.

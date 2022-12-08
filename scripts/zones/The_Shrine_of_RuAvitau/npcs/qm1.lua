@@ -15,6 +15,7 @@ entity.onTrade = function(player, npc, trade)
                 return
             end
         end
+
         player:tradeComplete()
         SpawnMob(ID.mob.OLLAS_OFFSET):updateClaim(player)
         npc:setStatus(xi.status.DISAPPEAR)

@@ -54,7 +54,6 @@ entity.onTimeTrigger = function(npc, triggerID)
         upperDoor:setAnimation(xi.animation.OPEN_DOOR)
         npc:setAnimation(xi.animation.OPEN_DOOR)
     end
-
 end
 
 return entity

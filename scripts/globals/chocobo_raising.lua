@@ -99,32 +99,32 @@ local glow =
 
 local validFoods =
 {
-    --  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
-        [xi.items.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-        [xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-        [xi.items.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-        [xi.items.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    --  [xi.items.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
+--  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
+    [xi.items.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.items.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.items.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+--  [xi.items.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
 }
 
 -- Items that can be found on a walk in a certain area
@@ -597,7 +597,7 @@ xi.chocoboRaising.initChocoboData = function(player)
 
     -- Add helpers and empty tables to navigate CSs
     chocoState.csList = {}
-    chocoState.food_given = {}
+    chocoState.foodGiven = {}
     chocoState.report = {}
     chocoState.report.events = {}
 
@@ -633,10 +633,21 @@ xi.chocoboRaising.initChocoboData = function(player)
     local plan4Type   = bit.rshift(bit.band(chocoState.care_plan, 0x0000000F),  0)
 
     local possibleCarePlanFuture = {}
-    for _ = 1, plan1Length do table.insert(possibleCarePlanFuture, plan1Type) end
-    for _ = 1, plan2Length do table.insert(possibleCarePlanFuture, plan2Type) end
-    for _ = 1, plan3Length do table.insert(possibleCarePlanFuture, plan3Type) end
-    for _ = 1, plan4Length do table.insert(possibleCarePlanFuture, plan4Type) end
+    for _ = 1, plan1Length do
+        table.insert(possibleCarePlanFuture, plan1Type)
+    end
+
+    for _ = 1, plan2Length do
+        table.insert(possibleCarePlanFuture, plan2Type)
+    end
+
+    for _ = 1, plan3Length do
+        table.insert(possibleCarePlanFuture, plan3Type)
+    end
+
+    for _ = 1, plan4Length do
+        table.insert(possibleCarePlanFuture, plan4Type)
+    end
 
     for idx = 1, reportLength do
         local possibleCarePlanEvent = possibleCarePlanFuture[idx]
@@ -672,42 +683,42 @@ xi.chocoboRaising.initChocoboData = function(player)
         table.insert(t, { eStart, eEnd, csList })
     end
 
-    local condensed_events = {}
-    local current_start_day = nil
-    local current_end_day = nil
-    local current_event_cs_table = nil
-    -- local current_event_size = nil
+    local condensedEvents = {}
+    local currentStartDay = nil
+    local currentEndDay = nil
+    local currentEventCSTable = nil
+    -- local currentEventSize = nil
 
     -- Each event is a table of cs's
     for idx, entry in pairs(events) do
         -- DEBUG
         -- print(entry)
         -- Only condense days with the same table contents
-        if compareTables(entry[2], current_event_cs_table) then
+        if compareTables(entry[2], currentEventCSTable) then
             -- Increase the span
-            current_end_day = current_end_day + 1
+            currentEndDay = currentEndDay + 1
         else
             -- If there is an active span, cut it now
-            if current_event_cs_table then
-                cutEvent(condensed_events, current_start_day, current_end_day, current_event_cs_table)
+            if currentEventCSTable then
+                cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
             end
 
             -- Start a new span
-            current_event_cs_table = entry[2]
-            current_start_day = chocoState.report.day_start + idx - 1
-            current_end_day = chocoState.report.day_start + idx - 1
-            -- current_event_size = entry[2]
+            currentEventCSTable = entry[2]
+            currentStartDay = chocoState.report.day_start + idx - 1
+            currentEndDay = chocoState.report.day_start + idx - 1
+            -- currentEventSize = entry[2]
         end
     end
 
     -- Final "cut"
-    cutEvent(condensed_events, current_start_day, current_end_day, current_event_cs_table)
+    cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
 
     -- Step 4: Assign this report to the cache
-    chocoState.report.events = condensed_events
+    chocoState.report.events = condensedEvents
 
     -- DEBUG
-    -- print(condensed_events)
+    -- print(condensedEvents)
 
     return chocoState
 end
@@ -770,7 +781,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
         end
 
         if #tradedItems > 0 then
-            chocoState.food_given = tradedItems
+            chocoState.foodGiven = tradedItems
         end
     else -- Trigger
         -- Trade an egg to me if you want to start raising a chocobo.
@@ -787,7 +798,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
     end
 
     local isTradeEvent = 0
-    if #chocoState.food_given > 0 then
+    if #chocoState.foodGiven > 0 then
         isTradeEvent = 8
     end
 
@@ -960,23 +971,23 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 if #chocoState.report.events > 0 then
                     -- Pop the event from the front of the list
-                    local current_event = chocoState.report.events[1]
+                    local currentEvent = chocoState.report.events[1]
                     table.remove(chocoState.report.events, 1)
 
-                    local event_start_start = current_event[1]
-                    local event_start_end = current_event[2]
-                    local event_cs_list = current_event[3]
+                    local eventStartStart = currentEvent[1]
+                    local eventStartEnd = currentEvent[2]
+                    local eventCSList = currentEvent[3]
 
-                    chocoState.age = event_start_start
+                    chocoState.age = eventStartStart
                     chocoState.stage = ageToStage(chocoState.age)
 
-                    for _, cs in pairs(event_cs_list) do
+                    for _, cs in pairs(eventCSList) do
                         table.insert(chocoState.csList, cs)
                     end
 
-                    report = bit.lshift(event_start_start, 0) + bit.lshift(event_start_end, 20)
+                    report = bit.lshift(eventStartStart, 0) + bit.lshift(eventStartEnd, 20)
 
-                    if event_start_start == event_start_end then
+                    if eventStartStart == eventStartEnd then
                         -- Single day update
                         report = report + 0x00000400
                     else
@@ -1083,7 +1094,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 -- Complete the trade here to prevent any cheesing
                 player:confirmTrade()
 
-                for idx, itemId in ipairs(chocoState.food_given) do
+                for idx, itemId in ipairs(chocoState.foodGiven) do
                     local itemData = validFoods[itemId]
                     local energyAmount = itemData[3]
                     local glowColour = itemData[10]
@@ -1099,14 +1110,14 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                     chocoState.energy = utils.clamp(chocoState.energy + energyAmount, 0, 100)
 
                     -- If multiple items, glow is always green
-                    if #chocoState.food_given > 1 then
+                    if #chocoState.foodGiven > 1 then
                         glowColour = glow.GREEN
                     end
 
                     player:updateEvent(10, glowColour, 0, 0, reaction, hungerLevel, 0, 0)
                 end
 
-                chocoState.food_given = nil
+                chocoState.foodGiven = nil
                 chocoState.last_update_age = chocoState.age
 
                 -- Write to cache

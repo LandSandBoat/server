@@ -294,7 +294,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     returninfo.hitslanded = hitslanded
 
     return returninfo
-
 end
 
 -- MAGICAL MOVE
@@ -368,7 +367,6 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     returninfo.dmg = finaldmg
 
     return returninfo
-
 end
 
 -- effect = xi.effect.WHATEVER if enfeeble
@@ -398,7 +396,6 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
 end
 
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN magical bloodpacts, despite the name.
-
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
@@ -522,7 +519,6 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 end
 
 xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType, damageType, shadowbehav)
-
     -- If target has Hysteria, no message skip rest
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         skill:setMsg(xi.msg.basic.NONE)

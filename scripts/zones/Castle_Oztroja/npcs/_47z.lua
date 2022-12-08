@@ -33,7 +33,6 @@ entity.onEventFinish = function(player, csid, option)
         torch2:openDoor(10)
         brassDoor:openDoor(6)
     end
-
 end
 
 return entity

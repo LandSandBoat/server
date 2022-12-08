@@ -22,7 +22,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local typeEffect = xi.effect.DISEASE
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 300)
 

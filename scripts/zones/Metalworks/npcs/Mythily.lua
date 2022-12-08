@@ -12,19 +12,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local new_nation = xi.nation.BASTOK
-    local old_nation = player:getNation()
-    local rank = GetNationRank(new_nation)
+    local newNation = xi.nation.BASTOK
+    local oldNation = player:getNation()
+    local rank = GetNationRank(newNation)
 
-    if old_nation == new_nation then
-        player:startEvent(362, 0, 0, 0, old_nation)
+    if oldNation == newNation then
+        player:startEvent(362, 0, 0, 0, oldNation)
     elseif
-        player:getCurrentMission(old_nation) ~= xi.mission.id.nation.NONE or
+        player:getCurrentMission(oldNation) ~= xi.mission.id.nation.NONE or
         player:getMissionStatus(player:getNation()) ~= 0
     then
-        player:startEvent(361, 0, 0, 0, new_nation)
-    elseif old_nation ~= new_nation then
-        local has_gil = 0
+        player:startEvent(361, 0, 0, 0, newNation)
+    elseif oldNation ~= newNation then
+        local hasGil = 0
         local cost = 0
 
         if rank == 1 then
@@ -36,10 +36,10 @@ entity.onTrigger = function(player, npc)
         end
 
         if player:getGil() >= cost then
-            has_gil = 1
+            hasGil = 1
         end
 
-        player:startEvent(360, 0, 1, player:getRank(new_nation), new_nation, has_gil, cost)
+        player:startEvent(360, 0, 1, player:getRank(newNation), newNation, hasGil, cost)
     end
 end
 
@@ -48,8 +48,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 360 and option == 1 then
-        local new_nation = xi.nation.BASTOK
-        local rank = GetNationRank(new_nation)
+        local newNation = xi.nation.BASTOK
+        local rank = GetNationRank(newNation)
         local cost = 0
 
         if rank == 1 then
@@ -60,11 +60,10 @@ entity.onEventFinish = function(player, csid, option)
             cost = 4000
         end
 
-        player:setNation(new_nation)
+        player:setNation(newNation)
         player:setGil(player:getGil() - cost)
         player:setRankPoints(0)
     end
-
 end
 
 return entity

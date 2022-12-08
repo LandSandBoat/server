@@ -9,7 +9,6 @@
 -- The increase in Life Cycle potency from Job points is applied in the same set as equipment bonuses.
 -----------------------------------
 require("scripts/globals/job_utils/geomancer")
-require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}
 

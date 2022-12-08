@@ -16,8 +16,8 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local body_list = { 12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595 }
-local legs_list = { 12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851 }
+local bodyList = { 12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595 }
+local legsList = { 12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851 }
 
 entity.onTrade = function(player, npc, trade)
     local brygidReturns = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
@@ -66,11 +66,11 @@ entity.onTrigger = function(player, npc)
     then
         -- Randomize and store sets here
         repeat
-            getBody = body_list[math.random(1, 20)]
+            getBody = bodyList[math.random(1, 20)]
         until(player:canEquipItem(getBody, false))
 
         repeat
-            getLegs = legs_list[math.random(1, 16)]
+            getLegs = legsList[math.random(1, 16)]
         until(player:canEquipItem(getLegs, false))
 
         player:setCharVar("BrygidGetBody", getBody)
@@ -99,7 +99,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(385, 0, 14400 + wantsSubligar, 15374 + wantsSubligar)
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

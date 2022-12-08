@@ -47,7 +47,9 @@ entity.onMobSpawn = function(ajidoMob)
     end)
 
     -- TODO: This doesn't work, but the logic is here.
-    ajidoMob:timer(40000, function(mobArg) ajidoSelectTarget(mobArg) end)
+    ajidoMob:timer(40000, function(mobArg)
+        ajidoSelectTarget(mobArg)
+    end)
 end
 
 entity.onMobRoam = function(mob)

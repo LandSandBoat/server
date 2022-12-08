@@ -399,7 +399,6 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 end
 
                 finaldmg = finaldmg + magicdmg
-
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -604,7 +603,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local firstHitBonus = (finaldmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100
 
     -- Reset fTP if it's not supposed to carry over across all hits for this WS
-    if not wsParams.multiHitfTP then ftp = 1 end -- We'll recalculate our mainhand damage after doing offhand
+    -- We'll recalculate our mainhand damage after doing offhand
+    if not wsParams.multiHitfTP then
+        ftp = 1
+    end
 
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
@@ -671,7 +673,6 @@ end
 -- Sets up the necessary calcParams for a melee WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
 function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
@@ -750,7 +751,6 @@ end
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
 function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
@@ -819,7 +819,6 @@ end
 --         ele (xi.magic.ele.FIRE), skill (xi.skill.STAFF)
 
 function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
-
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local attack =
     {
@@ -1238,35 +1237,35 @@ local function calculateRawFstr(dSTR, divisor)
 end
 
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
-function fSTR(atk_str, def_vit, weapon_rank)
-    local dSTR = atk_str - def_vit
+function fSTR(atkStr, defVit, weaponRank)
+    local dSTR = atkStr - defVit
     local fSTR = calculateRawFstr(dSTR, 4)
 
     -- Apply fSTR caps.
-    local lower_cap = weapon_rank * -1
-    if weapon_rank == 0 then
-        lower_cap = -1
+    local lowerCap = weaponRank * -1
+    if weaponRank == 0 then
+        lowerCap = -1
     end
 
-    fSTR = utils.clamp(fSTR, lower_cap, weapon_rank + 8)
+    fSTR = utils.clamp(fSTR, lowerCap, weaponRank + 8)
 
     return fSTR
 end
 
 -- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
-function fSTR2(atk_str, def_vit, weapon_rank)
-    local dSTR = atk_str - def_vit
+function fSTR2(atkStr, defVit, weaponRank)
+    local dSTR = atkStr - defVit
     local fSTR2 = calculateRawFstr(dSTR, 2)
 
     -- Apply fSTR2 caps.
-    local lower_cap = weapon_rank * -2
-    if weapon_rank == 0 then
-        lower_cap = -2
-    elseif weapon_rank == 1 then
-        lower_cap = -3
+    local lowerCap = weaponRank * -2
+    if weaponRank == 0 then
+        lowerCap = -2
+    elseif weaponRank == 1 then
+        lowerCap = -3
     end
 
-    fSTR2 = utils.clamp(fSTR2, lower_cap, (weapon_rank + 8) * 2)
+    fSTR2 = utils.clamp(fSTR2, lowerCap, (weaponRank + 8) * 2)
 
     return fSTR2
 end

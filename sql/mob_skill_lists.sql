@@ -2448,18 +2448,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1535); -- hyper_pulse
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1536); -- target_analysis
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1538); -- ion_efflux
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega',727,1539); -- rear_lasers
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1259);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1260);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1261);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1262);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1263);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1264);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1265);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1266);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1267);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1268);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1269);
-INSERT INTO `mob_skill_lists` VALUES ('Ultima',728,1270);
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase1',728,1259); -- wire_cutter
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase1',728,1269); -- chemical_bomb
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase1',728,1270); -- particle_shield
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1259);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1260);
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima',729,1261);
@@ -3845,6 +3836,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega_Standing',1188,1529); -- hype
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega_Standing',1188,1530); -- stun_cannon
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega_Final',1189,1526); -- colossal_blow
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega_Final',1189,1527); -- laser_shower
+
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase2',1190,1268); -- nuclear_waste
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase3',1191,1261); -- equalizer
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase3',1191,1269); -- chemical_bomb
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase3',1191,1270); -- particle_shield
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase4',1192,1260); -- antimatter
+INSERT INTO `mob_skill_lists` VALUES ('Ultima_Phase4',1192,1270); -- particle_shield
 
 -- Next available ID: 1190
 

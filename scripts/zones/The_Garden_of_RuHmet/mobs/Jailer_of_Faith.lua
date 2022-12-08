@@ -24,6 +24,7 @@ entity.onMobFight = function(mob)
         else -- Change from open to close
             mob:setAnimationSub(1)
         end
+
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 end

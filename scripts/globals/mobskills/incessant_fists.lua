@@ -16,7 +16,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 5
     local accmod = 1
     local dmgmod = 1.3
