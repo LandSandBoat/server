@@ -2,7 +2,7 @@
 -- Area: Sky 2.0
 --   NM: Kouryu
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
+local ID = require("scripts/zones/Escha_RuAun/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
 require("scripts/globals/titles")

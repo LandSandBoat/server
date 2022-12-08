@@ -36,6 +36,7 @@ entity.onMobSpawn = function(mob, target)
     mob:setMod(xi.mod.PARALYZERES, 9999)
     mob:setMod(xi.mod.LULLABYRES, 9999)
     mob:setDropID(3992)
+    mob:setLocalVar("popTime", os.time())
 
 	for _, despawnMob in ipairs(despawnMobTable) do
 	    DespawnMob(despawnMob)
@@ -109,18 +110,22 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
             end,
 
             onMobSpawn = function(mob)
-                local suzaku = GetMobByID(17961568)
 			    mob:setMod(xi.mod.SLEEPRES, 9999)
                 mob:setMod(xi.mod.LULLABYRES, 9999)
-                suzaku:setLocalVar("totalAdds", totalAdds + 1)
                 mob:timer(25000, function(mobArg)
-                    mob:useMobAbility(511) -- self-destruct
+                mob:useMobAbility(511) -- self-destruct
                 end)
+            end,
+
+            onMobRoam = function(mob)
+                local suzaku = GetMobByID(17961568)
+                if not suzaku:isAlive() then
+                    DespawnMob(mob:getID())
+                end
             end,
 
             onMobFight = function(mob, target)
                 local suzaku = GetMobByID(17961568)
-
                 if not suzaku:isAlive() then
                     DespawnMob(mob:getID())
                 end
@@ -139,6 +144,11 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
             specialSpawnAnimation = true,
         })
 
+        minion:addListener("WEAPONSKILL_STATE_ENTER", "SUZAKUS_MINION", function(mobArg, skillID)
+            local suzaku = GetMobByID(17961568)
+            suzaku:setLocalVar("totalAdds", totalAdds + 1)
+        end)
+
         -- Use the minion object as you normally would
         minion:setSpawn(randomPlayer:getXPos(), randomPlayer:getYPos(), randomPlayer:getZPos(), randomPlayer:getRotPos())
         minion:setDropID(0) -- No loot!
@@ -148,6 +158,12 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
 
     mob:setMod(xi.mod.MAIN_DMG_RATING, 55 * totalAdds)
     -- print(string.format("main dmg rating %s", 50 * numAdds))
+end
+
+entity.onMobRoam = function(mob)
+    if os.time() - mob:getLocalVar("popTime") > 180 then
+        DespawnMob(mob:getID())
+    end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
