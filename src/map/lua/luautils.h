@@ -313,6 +313,7 @@ namespace luautils
     uint32 GetMobRespawnTime(uint32 mobid);                        // get the respawn time of a mob
     void   DisallowRespawn(uint32 mobid, bool allowRespawn);       // Allow or prevent a mob from spawning
     void   UpdateNMSpawnPoint(uint32 mobid);                       // Update the spawn point of an NM
+    bool   CheckNMSpawnPoint(uint32 mobid);                        // Check to see if NM has extra spawn points
     void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
 
