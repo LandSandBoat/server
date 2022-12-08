@@ -962,6 +962,13 @@ enum class Mod
     CRITHITRATE_SLOT     = 1168, // CRITHITRATE for slot
     ATT_SLOT             = 1169, // ATT for slot
     UDMG                 = 1170, // Uncapped dmg taken (all types)
+    SLEEP_MEVA           = 1171, // Sleep MEVA from Barspells
+    POISON_MEVA          = 1172, // Poison MEVA from Barspells
+    PARALYZE_MEVA        = 1173, // Paralyze MEVA from Barspells
+    BLIND_MEVA           = 1174, // Blind MEVA from Barspells
+    SILENCE_MEVA         = 1175, // Silence MEVA from Barspells
+    VIRUS_MEVA           = 1176, // Virus MEVA from Barspells
+    PETRIFY_MEVA         = 1177, // Petrify MEVA from Barspells
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
