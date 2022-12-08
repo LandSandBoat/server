@@ -89,6 +89,7 @@ public:
     void       startEventString(int32 EventID, sol::variadic_args va);      // Begins Event with string param (0x33 packet)
     void       startCutscene(int32 EventID, sol::variadic_args va);         // Begins cutscene which locks the character
     void       startOptionalCutscene(int32 EventID, sol::variadic_args va); // Begins an event that can turn into a cutscene
+    void       startMenuEvent(int32 EventID, sol::variadic_args va);        // Begins an event that can be interrupted.
 
     void updateEvent(sol::variadic_args va);       // Updates event
     void updateEventString(sol::variadic_args va); // (string, string, string, string, uint32, ...)

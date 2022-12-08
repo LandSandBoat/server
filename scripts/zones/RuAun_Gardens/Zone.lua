@@ -59,7 +59,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
     if p["green"] ~= nil then -- green portal
         if player:getCharVar("skyShortcut") == 1 then
-            player:startEvent(42)
+            player:startMenuEvent(42)
         else
             local title = player:getTitle()
 
@@ -72,15 +72,15 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
     elseif p["portal"] ~= nil then -- blue portal
         if GetNPCByID(p["portal"]):getAnimation() == xi.anim.OPEN_DOOR then
-            player:startOptionalCutscene(p["event"])
+            player:startMenuEvent(p["event"])
         end
 
     elseif type(p["event"]) == "table" then -- portal with random destination
         local events = p["event"]
-        player:startOptionalCutscene(events[math.random(1, #events)])
+        player:startMenuEvent(events[math.random(1, #events)])
 
     else -- portal with static destination
-        player:startOptionalCutscene(p["event"])
+        player:startMenuEvent(p["event"])
     end
 end
 
