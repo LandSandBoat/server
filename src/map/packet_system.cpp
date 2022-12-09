@@ -697,7 +697,7 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             charutils::SaveCharStats(PChar);
             charutils::SaveCharPosition(PChar);
-            PChar->StatusEffectContainer->SaveStatusEffects();
+            PChar->StatusEffectContainer->SaveStatusEffects(false, true);
             PChar->m_nextDataSave = std::chrono::system_clock::now() + std::chrono::seconds(settings::get<uint16>("main.PLAYER_DATA_SAVE") > 0 ? settings::get<uint16>("main.PLAYER_DATA_SAVE") : 120);
         }
     }

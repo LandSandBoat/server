@@ -83,8 +83,8 @@ public:
     void TickEffects(time_point tick);
     void TickRegen(time_point tick);
 
-    void LoadStatusEffects();                    // загружаем эффекты персонажа
-    void SaveStatusEffects(bool logout = false); // сохраняем эффекты персонажа
+    void LoadStatusEffects();                                             // загружаем эффекты персонажа
+    void SaveStatusEffects(bool logout = false, bool skipRemove = false); // сохраняем эффекты персонажа
 
     uint8 GetEffectsCount(EFFECT ID); // получаем количество эффектов с указанным id
     uint8 GetLowestFreeSlot();        // returns the lowest free slot for songs/rolls
