@@ -233,7 +233,7 @@ public:
     void  changeContainerSize(uint8 locationID, int8 newSize); // Increase/Decreases container size
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
-    void  tradeComplete();                                     // Complete trade with an npc
+    void  tradeComplete(sol::object const& shouldTakeItems);   // Complete trade with an npc
     auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping

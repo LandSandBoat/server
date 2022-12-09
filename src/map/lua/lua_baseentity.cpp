@@ -4106,15 +4106,16 @@ void CLuaBaseEntity::confirmTrade()
 
 /************************************************************************
  *  Function: tradeComplete()
- *  Purpose : Completes trade and removes all items in trade container
+ *  Purpose : Completes trade and removes all items in trade container (unless false is passed as parameter)
  *  Example : player:tradeComplete()
  ************************************************************************/
 
-void CLuaBaseEntity::tradeComplete()
+void CLuaBaseEntity::tradeComplete(sol::object const& shouldTakeItems)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    bool  takeItems = (shouldTakeItems != sol::lua_nil) ? shouldTakeItems.as<bool>() : true;
+    auto* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
@@ -4126,7 +4127,10 @@ void CLuaBaseEntity::tradeComplete()
             if (PItem)
             {
                 PItem->setReserve(0);
-                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                if (takeItems)
+                {
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                }
             }
         }
     }
