@@ -25,7 +25,7 @@ quest.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, region)
                     if player:getCharVar("Mission[6][840]Status") == 8 then
@@ -88,7 +88,7 @@ quest.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, region)
                     if quest:getVar(player, 'Status') == 3 then
