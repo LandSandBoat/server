@@ -1081,13 +1081,12 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
         if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            bool isEntered = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1;
-            PBattlefield->InsertEntity(PChar, isEntered);
+            PBattlefield->InsertEntity(PChar, CBattlefield::hasPlayerEntered(PChar));
         }
         else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
             // Player is in a zone with a battlefield but they are not part of one.
-            if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1)
+            if (CBattlefield::hasPlayerEntered(PChar))
             {
                 // If inside of the battlefield arena then kick them out
                 // Battlefield and level restriction effects will be removed once fully kicked.
