@@ -1922,7 +1922,7 @@ namespace battleutils
     {
         CItemWeapon* PWeapon = GetEntityWeapon(PDefender, SLOT_MAIN);
         if (((PDefender->objtype == TYPE_PC && PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND) ||
-             (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && PDefender->GetMJob() != JOB_MNK)) &&
+             (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && PDefender->GetMJob() != JOB_MNK && PDefender->isInDynamis())) &&
             PDefender->PAI->IsEngaged())
         {
             // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
