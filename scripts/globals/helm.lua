@@ -853,7 +853,6 @@ local helmInfo =
                     { 1430,  721 }, -- Rattan Lumber
                     { 1190,  689 }, -- Lauan Log
                     { 1190,  940 }, -- Revival Tree Root
-                    {  950,  731 }, -- Aquilaria Log
                     {  480,  912 }, -- Beehive Chip
                     {  480, 1237 }, -- Tree Cuttings
                     {  100, 5662 }, -- Dragon Fruit
@@ -881,10 +880,7 @@ local helmInfo =
                     { 1130,  689 }, -- Lauan Log
                     {  780,  912 }, -- Beehive Chip
                     {  650,  923 }, -- Dryad Root
-                    {  650, 5908 }, -- Butterpear
                     {  610,  940 }, -- Revival Tree Root
-                    {  610,  731 }, -- Aquilaria Log
-                    {  570,  732 }, -- Kapor Log
                     {  350,  700 }, -- Mahogany Log
                     {  170,  702 }, -- Ebony Log
                     {   90, 1237 }, -- Tree Cuttings
