@@ -4708,7 +4708,6 @@ INSERT INTO `mob_droplist` VALUES (528,0,0,1000,816,130); -- Spool Of Silk Threa
 -- ZoneID: 115 - Crawler
 INSERT INTO `mob_droplist` VALUES (529,0,0,1000,816,@UNCOMMON);  -- Spool Of Silk Thread (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (529,0,0,1000,1156,@UNCOMMON); -- Crawler Calculus (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (529,0,0,1000,582,@RARE);      -- Meteorite (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (529,0,0,1000,583,@RARE);      -- Smooth Stone (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (529,4,0,1000,4357,0);         -- Crawler Egg (Despoil)
 
