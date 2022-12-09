@@ -21,6 +21,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     then
         return 1
     end
+
     return 0
 end
 
@@ -37,7 +38,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:resetEnmity(target)
 
     return dmg
-
 end
 
 return mobskillObject

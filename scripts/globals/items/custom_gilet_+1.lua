@@ -12,6 +12,7 @@ itemObject.onItemCheck = function(target)
     if not target:hasVisitedZone(4) then
         result = 56
     end
+
     return result
 end
 

@@ -23911,12 +23911,6 @@ INSERT INTO `mob_droplist` VALUES (2862,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 -- ZoneID:  37 - Orichalcum Quadav
 -- ZoneID:  37 - Pee Qoho The Python
 -- ZoneID:  37 - Light Elemental
--- ZoneID:  37 - Airi
--- ZoneID:  37 - Temenos Cleaner
--- ZoneID:  37 - Iruci
--- ZoneID:  37 - Temenos Weapon
--- ZoneID:  37 - Enhanced Dragon
--- ZoneID:  37 - Enhanced Ahriman
 -- ZoneID:  38 - Kronprinz Behemoth
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
@@ -26809,6 +26803,19 @@ INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3232,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+
+-- ZoneID:  37 - Airi
+-- ZoneID:  37 - Temenos Cleaner
+-- ZoneID:  37 - Iruci
+-- ZoneID:  37 - Temenos Weapon
+-- ZoneID:  37 - Enhanced Dragon
+-- ZoneID:  37 - Enhanced Ahriman
+INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

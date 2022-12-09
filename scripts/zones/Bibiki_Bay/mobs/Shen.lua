@@ -110,6 +110,7 @@ entity.onMobDeath = function(mob, player, optParams)
         local petID = GetMobByID(mobId + i)
         petID:setHP(0)
     end
+
     mob:resetLocalVars()
     mob:removeListener("SHEN_MAGIC_EXIT")
 end

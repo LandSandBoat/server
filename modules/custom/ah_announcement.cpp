@@ -104,7 +104,7 @@ class AHAnnouncementModule : public CPPModule
                                     if (sellerId > 0)
                                     {
                                         // Sanitize name
-                                        std::string name = (const char*)PItem->getName();
+                                        std::string name = PItem->getName();
                                         auto parts = split(name, "_");
                                         name = "";
                                         name += std::accumulate(std::begin(parts), std::end(parts), std::string(),

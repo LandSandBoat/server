@@ -42,8 +42,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         elseif power < 5 then
             power = 5
         end
+
         target:addStatusEffect(xi.effect.PARALYSIS, power, 0, duration)
     end
+
     return tpHits, extraHits, criticalHit, damage
 end
 

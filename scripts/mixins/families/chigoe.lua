@@ -10,10 +10,12 @@ g_mixins.families.chigoe = function(chigoeMob)
         mob:hideName(true)
         mob:setUntargetable(true)
     end)
+
     chigoeMob:addListener("ENGAGE", "CHIGOE_ENGAGE", function(mob, target)
         mob:hideName(false)
         mob:setUntargetable(false)
     end)
+
     chigoeMob:addListener("DISENGAGE", "CHIGOE_DISENGAGE", function(mob, target)
         mob:hideName(true)
         mob:setUntargetable(true)

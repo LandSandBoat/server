@@ -164,7 +164,7 @@ namespace battleutils
             {
                 CWeaponSkill* PWeaponSkill = new CWeaponSkill(sql->GetIntData(0));
 
-                PWeaponSkill->setName(sql->GetData(1));
+                PWeaponSkill->setName(sql->GetStringData(1));
                 PWeaponSkill->setJob(sql->GetData(2));
                 PWeaponSkill->setType(sql->GetIntData(3));
                 PWeaponSkill->setSkillLevel(sql->GetIntData(4));
@@ -210,7 +210,7 @@ namespace battleutils
             {
                 CMobSkill* PMobSkill = new CMobSkill(sql->GetIntData(0));
                 PMobSkill->setAnimationID(sql->GetIntData(1));
-                PMobSkill->setName(sql->GetData(2));
+                PMobSkill->setName(sql->GetStringData(2));
                 PMobSkill->setAoe(sql->GetIntData(3));
                 PMobSkill->setDistance(sql->GetFloatData(4));
                 PMobSkill->setAnimationTime(sql->GetIntData(5));

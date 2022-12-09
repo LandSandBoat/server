@@ -31,6 +31,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end
+
     skill:setMsg(msg)
 
     return typeEffect

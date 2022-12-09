@@ -27,7 +27,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(302)
 
     return dmg
-
 end
 
 return mobskillObject

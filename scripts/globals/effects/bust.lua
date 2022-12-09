@@ -18,6 +18,7 @@ effectObject.onEffectGain = function(target, effect)
         -- elseif effect:getSubType() == MOD_PET_MACC then
         --     target:getPet():addMod(MOD_MATT, -effect:getPower())
         end
+
         target:addMod(effect:getSubType(), -effect:getPower())
     end
 end
@@ -38,6 +39,7 @@ effectObject.onEffectLose = function(target, effect)
         -- elseif effect:getSubType() == MOD_PET_MACC then
         --     target:getPet():delMod(MOD_MATT, -effect:getPower())
         end
+
         target:delMod(effect:getSubType(), -effect:getPower())
     end
 end

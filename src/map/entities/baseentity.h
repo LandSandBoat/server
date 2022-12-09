@@ -228,12 +228,12 @@ struct location_t
     uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
 
     location_t()
+    : destination(0)
+    , zone(nullptr)
+    , prevzone(0)
+    , zoning(false)
+    , boundary(0)
     {
-        destination = 0;
-        zone        = nullptr;
-        prevzone    = 0;
-        zoning      = false;
-        boundary    = 0;
     }
 };
 
@@ -256,8 +256,8 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const int8* GetName();       // Internal name of entity
-    virtual const int8* GetPacketName(); // Name of entity sent to the client
+    virtual const std::string& GetName();       // Internal name of entity
+    virtual const std::string& GetPacketName(); // Name of entity sent to the client
 
     uint16 getZone() const; // Current zone
     float  GetXPos() const; // Position of co-ordinate X
@@ -309,6 +309,8 @@ public:
     uint8           updatemask; // what to update next server tick to players nearby
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
+
+    bool m_bReleaseTargIDOnDisappear = false;
 
     SPAWN_ANIMATION spawnAnimation;
 

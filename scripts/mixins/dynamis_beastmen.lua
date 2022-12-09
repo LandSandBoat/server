@@ -90,13 +90,32 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
                 singleChance = math.floor(singleChance * 1.5)
             end
 
-            if mob:getLocalVar("dynamis_proc") >= 4 then killer:addTreasure(currency + 1, mob) end           -- white (special) adds 100% hundo slot
-            if mob:isNM() then killer:addTreasure(currency + 1, mob, hundoChance) end                        -- base hundo slot
+            -- White (special) adds 100% hundred slot
+            if mob:getLocalVar("dynamis_proc") >= 4 then
+                killer:addTreasure(currency + 1, mob)
+            end
 
-            if mob:getLocalVar("dynamis_proc") >= 3 then killer:addTreasure(currency, mob) end               -- red (high) adds 100% single slot
-            if mob:getLocalVar("dynamis_proc") >= 2 then killer:addTreasure(currency, mob, singleChance) end -- yellow (medium) adds single slot
-            if mob:getLocalVar("dynamis_proc") >= 1 then killer:addTreasure(currency, mob, singleChance) end -- blue (low) adds single slot
-            killer:addTreasure(currency, mob, singleChance)                                                  -- base single slot
+            -- Base hundred slot
+            if mob:isNM() then
+                killer:addTreasure(currency + 1, mob, hundoChance)
+            end
+
+            -- red (high) adds 100% single slot
+            if mob:getLocalVar("dynamis_proc") >= 3 then
+                killer:addTreasure(currency, mob)
+            end
+
+            -- yellow (medium) adds single slot
+            if mob:getLocalVar("dynamis_proc") >= 2 then
+                killer:addTreasure(currency, mob, singleChance)
+            end
+
+            -- blue (low) adds single slot
+            if mob:getLocalVar("dynamis_proc") >= 1 then
+                killer:addTreasure(currency, mob, singleChance)
+            end
+
+            killer:addTreasure(currency, mob, singleChance) -- base single slot
         end
     end)
 end

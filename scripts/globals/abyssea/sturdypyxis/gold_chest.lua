@@ -38,6 +38,7 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
         for digit in string.gmatch(tostring(targetnumber), "%d") do
             table.insert(splitnumbers, digit)
         end
+
         currentAttempts = currentAttempts + 1
         npc:setLocalVar("CURRENT_ATTEMPTS", currentAttempts)
 
@@ -68,11 +69,12 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
                 [1] = function()
                     player:messageSpecial(ID.text.HUNCH_SECOND_FIRST_EVEN_ODD, randDigit - 1, isEven(digit), 0, 0)
                 end,
+
                 [2] = function()
                     player:messageSpecial(ID.text.HUNCH_SECOND_FIRST_IS, randDigit - 1, digit, 0, 0)
                 end,
-                [3] = function()
 
+                [3] = function()
                     local hints = {}
                     if digit == 0 then
                         hints =
@@ -111,9 +113,11 @@ xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
 
                     player:messageSpecial(ID.text.HUNCH_SECOND_FIRST_IS_OR, randDigit - 1, hintsRand.min, hintsRand.mid, hintsRand.max)
                 end,
+
                 [4] = function()
                     player:messageSpecial(ID.text.HUNCH_ONE_DIGIT_IS, digit, 0, 0, 0)
                 end,
+
                 [5] = function()
                     local sum = tonumber(splitnumbers[1]) + tonumber(splitnumbers[2])
                     player:messageSpecial(ID.text.HUNCH_SUM_EQUALS, sum)

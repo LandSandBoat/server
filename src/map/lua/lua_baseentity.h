@@ -153,7 +153,7 @@ public:
     void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    void ChangeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
+    void changeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
     void sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
     bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
     void openSendBox();                                                     // Opens send box (to deliver items)
@@ -170,7 +170,7 @@ public:
 
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
-    auto   getZoneName() -> const char*;                                // Get Entity zone name
+    auto   getZoneName() -> const std::string&;                         // Get Entity zone name
     bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region
@@ -511,6 +511,8 @@ public:
 
     bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
+    uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity); // Checks difficulty of the mob
+
     // Instances
     auto getInstance() -> std::optional<CLuaInstance>;
     void setInstance(CLuaInstance* PLuaInstance);
@@ -529,6 +531,8 @@ public:
     bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
     bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
     bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
+    void  setEnteredBattlefield(bool entered);                                                                                     // Sets if the player has entered into a battlefield or not
+    bool  hasEnteredBattlefield();                                                                                                 // If the player has entered into a battlefield return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -703,7 +707,7 @@ public:
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
 
-    auto getPetName() -> const char*;
+    auto getPetName() -> const std::string;
     void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
     void registerChocobo(uint32 value);
 
@@ -720,7 +724,7 @@ public:
     void delPetMod(uint16 modID, int16 amount);
 
     bool  hasAttachment(uint16 itemID);
-    auto  getAutomatonName() -> const char*;
+    auto  getAutomatonName() -> std::string;
     uint8 getAutomatonFrame();
     uint8 getAutomatonHead();
     bool  unlockAttachment(uint16 itemID);

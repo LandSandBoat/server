@@ -23,6 +23,7 @@ local misareauxGlobal =
             if random:getStatus() == xi.status.DISAPPEAR then
                 random:setLocalVar("[Ziphius]Spawn", 1)
             end
+
             for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE + 5 do
                 GetNPCByID(i):setStatus(xi.status.NORMAL)
             end
@@ -34,6 +35,7 @@ local misareauxGlobal =
             end
         end
     end,
+
     -----------------------------------
     -- Trade function for Ziphius NM QMs
     -----------------------------------
@@ -46,6 +48,7 @@ local misareauxGlobal =
             player:messageSpecial(ID.text.PUT_IN_TRAP, 16994)
         end
     end,
+
     -----------------------------------
     -- Spawn function for Ziphius NM QMs
     -----------------------------------

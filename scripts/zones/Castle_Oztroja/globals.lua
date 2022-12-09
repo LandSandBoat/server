@@ -67,6 +67,7 @@ local oztrojaGlobal =
                     break
                 end
             end
+
             if comboFound then
                 GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2):openDoor(6)
                 for i = 0, 3 do

@@ -42,6 +42,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP)
             player:setCharVar("Quest[3][132]Prog", pjob)
         end
+
         if not utils.mask.getBit(maatsCap, pjob - 1) then
             player:setCharVar("maatsCap", utils.mask.setBit(maatsCap, pjob - 1, true))
         end

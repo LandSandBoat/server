@@ -89,7 +89,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return mission:progressEvent(2802)
+                        return quest:progressEvent(2802)
                     end
                 end,
             },

@@ -49,6 +49,7 @@ xi.maws.addMaw = function(player, maw)
     if not player:hasTeleport(xi.teleport.type.PAST_MAW, maw.bit) then
         player:addTeleport(xi.teleport.type.PAST_MAW, maw.bit)
     end
+
     xi.maws.goToMaw(player, maw)
 end
 
@@ -62,6 +63,7 @@ xi.maws.gotoRandomMaw = function(player)
     else
         maw = xi.maws.pastMaws[xi.zone.SAUROMUGUE_CHAMPAIGN]
     end
+
     xi.maws.addMaw(player, maw)
 end
 
@@ -82,7 +84,7 @@ xi.maws.onTrigger = function(player, npc)
     local maw = xi.maws.pastMaws[player:getZoneID()]
     local hasMaw = player:hasTeleport(xi.teleport.type.PAST_MAW, maw.bit)
     local event = nil
-    local event_params = nil
+    local eventParams = nil
 
     if hasMaw then
         event = maw.cs.warp
@@ -90,15 +92,15 @@ xi.maws.onTrigger = function(player, npc)
         local hasFeather = player:hasKeyItem(xi.ki.PURE_WHITE_FEATHER)
         if maw.cs.new and not hasFeather then
             event = maw.cs.new
-            event_params = { maw.bit }
+            eventParams = { maw.bit }
         elseif maw.cs.add then
             event = maw.cs.add
         end
     end
 
     if event then
-        if event_params then
-            player:startCutscene(event, unpack(event_params))
+        if eventParams then
+            player:startCutscene(event, unpack(eventParams))
         else
             player:startOptionalCutscene(event)
         end

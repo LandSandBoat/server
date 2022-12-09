@@ -26,6 +26,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     if resm < 0.25 then
         resm = 0
     end
+
     duration = duration * resm
 
     if

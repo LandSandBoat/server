@@ -15,7 +15,6 @@ function error(player)
 end
 
 function onTrigger(player, offset)
-
     -- validate offset
     if offset == nil then
         error(player)

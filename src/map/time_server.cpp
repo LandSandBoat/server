@@ -97,6 +97,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
             daily::UpdateDailyTallyPoints();
             roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
+            luautils::OnJSTMidnight();
             lastTickedJstMidnight = tick;
         }
     }

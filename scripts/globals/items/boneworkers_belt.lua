@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
         result = 241
     end
+
     return result
 end
 

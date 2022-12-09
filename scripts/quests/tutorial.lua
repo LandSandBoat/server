@@ -39,6 +39,7 @@ xi.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
                     break
                 end
             end
+
             if not isSkilled then
                 player:startEvent(npc_event_offset + 5)
             else

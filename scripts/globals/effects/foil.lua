@@ -11,7 +11,6 @@ end
 
 -- https://www.ffxiah.com/forum/topic/56696/foil-potency-and-decay-testing/#3625559
 effectObject.onEffectTick = function(target, effect)
-
     local power = effect:getPower()
 
     -- TODO: Verify Foil evasion floor when more enhancing magic duration+ gear is available or RDM can cast foil from Master Levels.

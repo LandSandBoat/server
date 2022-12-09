@@ -77,7 +77,17 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
         }
 
         ref<uint16>(0x2C) = eventInfo->eventId;
-        ref<uint8>(0x2E)  = 8; // if the parameter is less than 8, then after the event is over the camera will "jump" behind the character
+
+        if (eventInfo->eventFlags != 0)
+        {
+            ref<uint16>(0x2E) = eventInfo->eventFlags & 0xFFFF;
+            ref<uint16>(0x32) = eventInfo->eventFlags >> 16;
+        }
+        else
+        {
+            // Backwards compatibility
+            ref<uint8>(0x2E) = 8; // if the parameter is less than 8, then after the event is over the camera will "jump" behind the character
+        }
     }
     else
     {
@@ -86,5 +96,8 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
 
         ref<uint16>(0x0A) = PChar->getZone();
         ref<uint16>(0x10) = PChar->getZone();
+
+        ref<uint16>(0x0E) = eventInfo->eventFlags & 0xFFFF;
+        ref<uint16>(0x12) = eventInfo->eventFlags >> 16;
     }
 }

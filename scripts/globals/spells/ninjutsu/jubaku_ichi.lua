@@ -51,6 +51,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST_2)
     end
+
     return effect
 end
 

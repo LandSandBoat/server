@@ -10,7 +10,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local typeEffect = xi.effect.WEIGHT
 
     local numhits = 1

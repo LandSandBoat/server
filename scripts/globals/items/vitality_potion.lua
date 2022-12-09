@@ -11,6 +11,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.MEDICINE) then
         return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
+
     return 0
 end
 

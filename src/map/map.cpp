@@ -86,6 +86,12 @@ void operator delete(void* ptr) noexcept
     TracyFree(ptr);
     free(ptr);
 }
+
+void operator delete(void* ptr, std::size_t count)
+{
+    TracyFree(ptr);
+    free(ptr);
+}
 #endif // TRACY_ENABLE
 
 const char* MAP_CONF_FILENAME = nullptr;
@@ -103,7 +109,7 @@ map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
+std::unique_ptr<SqlConnection> sql;
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
@@ -164,13 +170,14 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     ipp |= port64 << 32;
     map_session_list[ipp] = map_session_data;
 
-    const char* fmtQuery = "SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '%s' LIMIT 1;";
+    auto ipstr    = ip2str(map_session_data->client_addr);
+    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1;", ipstr);
 
-    int32 ret = sql->Query(fmtQuery, ip2str(map_session_data->client_addr));
+    int32 ret = sql->Query(fmtQuery.c_str());
 
     if (ret == SQL_ERROR || sql->NumRows() == 0)
     {
-        ShowError("recv_parse: Invalid login attempt from %s", ip2str(map_session_data->client_addr));
+        ShowError(fmt::format("recv_parse: Invalid login attempt from {}", ipstr));
         return nullptr;
     }
     return map_session_data;
@@ -206,17 +213,20 @@ int32 do_init(int32 argc, char** argv)
         }
     }
 
+    ShowInfo(fmt::format("map_port: {}", map_port));
+
     srand((uint32)time(nullptr));
     xirand::seed();
-
-    luautils::init();
-    PacketParserInitialize();
 
     ShowInfo("do_init: connecting to database");
     sql = std::make_unique<SqlConnection>();
 
     ShowInfo(sql->GetClientVersion().c_str());
     ShowInfo(sql->GetServerVersion().c_str());
+
+    luautils::init(); // Also calls moduleutils::LoadLuaModules();
+
+    PacketParserInitialize();
 
     sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
                map_ip.s_addr, map_port, map_ip.s_addr, map_port);
@@ -291,6 +301,8 @@ int32 do_init(int32 argc, char** argv)
 
     moduleutils::OnInit();
 
+    luautils::OnServerStart();
+
     moduleutils::ReportLuaModuleUsage();
 
     ShowInfo("The map-server is ready to work!");
@@ -314,8 +326,7 @@ int32 do_init(int32 argc, char** argv)
             return;
         }
 
-        // TODO: Replace all usages of int8* with const char* or std::string.
-        auto* name  = (int8*)inputs[1].c_str();
+        auto  name  = inputs[1];
         auto* PChar = zoneutils::GetCharByName(name);
         if (!PChar)
         {
@@ -330,7 +341,7 @@ int32 do_init(int32 argc, char** argv)
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level).c_str(), ""));
+            fmt::format("You have been set to GM level {}.", level), ""));
 
     });
 
@@ -408,13 +419,12 @@ void do_abort()
 
 /************************************************************************
  *                                                                       *
- *  set_server_type                                                      *
+ *  set_socket_type                                                      *
  *                                                                       *
  ************************************************************************/
 
-void set_server_type()
+void set_socket_type()
 {
-    SERVER_TYPE = XI_SERVER_MAP;
     SOCKET_TYPE = socket_type::UDP;
 }
 
@@ -579,7 +589,7 @@ int32 map_decipher_packet(int8* buff, size_t size, sockaddr_in* from, map_sessio
         return 0;
     }
 
-    ShowError("map_encipher_packet: bad packet from <%s>", ip2str(ip));
+    ShowError(fmt::format("map_encipher_packet: bad packet from <{}>", ip2str(ip)));
     return -1;
 }
 
@@ -606,7 +616,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     }
     catch (...)
     {
-        ShowError("Possible crash attempt from: %s", ip2str(map_session_data->client_addr));
+        ShowError(fmt::format("Possible crash attempt from: {}", ip2str(map_session_data->client_addr)));
         return -1;
     }
 
@@ -706,7 +716,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
     CCharEntity* PChar = map_session_data->PChar;
 
-    TracyZoneIString(PChar->GetName());
+    TracyZoneString(PChar->GetName());
 
     uint16 SmallPD_Size = 0;
     uint16 SmallPD_Type = 0;
@@ -982,8 +992,8 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 
 /************************************************************************
  *                                                                       *
- *  Timer function that clenup all timed out players                     *
- *                                                                       *
+ *  Timer function that cleans up all timed out players                  *
+ *  and removes stale dynamic targIDs after some time                    *
  ************************************************************************/
 
 int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
@@ -1087,6 +1097,28 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
         }
         ++it;
     }
+
+    // clang-format off
+    zoneutils::ForEachZone([](CZone* PZone)
+    {
+        auto& staledynamicTargIds = PZone->GetZoneEntities()->dynamicTargIdsToDelete;
+
+        auto it = staledynamicTargIds.begin();
+        while(it != staledynamicTargIds.end())
+        {
+            // Erase dynamic targid if it's stale enough
+            if ((server_clock::now() - it->second) > 60s)
+            {
+                PZone->GetZoneEntities()->dynamicTargIds.erase(it->first);
+                it = staledynamicTargIds.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+    });
+    // clang-format on
     return 0;
 }
 

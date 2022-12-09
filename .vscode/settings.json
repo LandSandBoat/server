@@ -5,6 +5,7 @@
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
 
     "editor.bracketPairColorization.enabled": true,
+    "editor.inlayHints.enabled": "offUnlessPressed",
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.trimAutoWhitespace": true,
@@ -554,6 +555,9 @@
         "typeindex": "cpp",
         "strstream": "cpp",
         "codecvt": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "*.ipp": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     },
 }

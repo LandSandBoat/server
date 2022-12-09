@@ -23,6 +23,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return xi.effect.SLEEP_I
     end
+
     duration = duration * resm
     if target:hasImmunity(1) or hasSleepEffects(target) then
         --No effect

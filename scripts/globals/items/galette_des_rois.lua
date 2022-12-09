@@ -18,9 +18,11 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.FOOD) then
         result = xi.msg.basic.IS_FULL
     end
+
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     return result
 end
 

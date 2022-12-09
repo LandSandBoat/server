@@ -162,6 +162,7 @@ xi.equipment.isBaseNyzulWeapon = function(itemId)
             return true
         end
     end
+
     return false
 end
 

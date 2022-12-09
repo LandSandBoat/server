@@ -13,7 +13,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-
     local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp     = pet:getTP() / 10
     local master = pet:getMaster()

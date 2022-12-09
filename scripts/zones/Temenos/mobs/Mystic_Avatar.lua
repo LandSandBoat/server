@@ -33,15 +33,15 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         local mobID = mob:getID()
         if mobID >= ID.mob.TEMENOS_C_MOB[2] + 9 then
-            local element_offset = mobID - ID.mob.TEMENOS_C_MOB[2] + 8
-            local partner_offset = element_offset % 6 -- Levithan's partner starts at 0
-            GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.FIRE_SDT - 1 + element_offset, -5000) -- ? IDK
-            if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset):isAlive() then
-                DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 3 + partner_offset)
-                SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 9 + partner_offset)
+            local elementOffset = mobID - ID.mob.TEMENOS_C_MOB[2] + 8
+            local partnerOffset = elementOffset % 6 -- Levithan's partner starts at 0
+
+            GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.FIRE_SDT - 1 + elementOffset, -5000) -- ? IDK
+            if GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 3 + partnerOffset):isAlive() then
+                DespawnMob(ID.mob.TEMENOS_C_MOB[2] + 3 + partnerOffset)
+                SpawnMob(ID.mob.TEMENOS_C_MOB[2] + 9 + partnerOffset)
             end
         end
-
     end
 end
 

@@ -165,18 +165,18 @@ int32 do_close_lobbyconf(login_session_data_t* loginsd, int32 fd)
 {
     if (loginsd != nullptr)
     {
-        ShowInfo("do_close_lobbyconf: %s shutdown the socket", loginsd->login);
+        ShowInfo(fmt::format("do_close_lobbyconf: {} shutdown the socket", loginsd->login));
         if (session_isActive(loginsd->login_lobbyconf_fd))
         {
             do_close_tcp(loginsd->login_lobbyconf_fd);
         }
         erase_loginsd_byaccid(loginsd->accid);
-        ShowInfo("lobbyconf_parse: %s's login_session_data is deleted", loginsd->login);
+        ShowInfo(fmt::format("lobbyconf_parse: {}'s login_session_data is deleted", loginsd->login));
         do_close_tcp(fd);
         return 0;
     }
 
-    ShowInfo("lobbyconf_parse: %s shutdown the socket", ip2str(sessions[fd]->client_addr));
+    ShowInfo(fmt::format("lobbyconf_parse: {} shutdown the socket", ip2str(sessions[fd]->client_addr)));
     do_close_tcp(fd);
     return 0;
 }

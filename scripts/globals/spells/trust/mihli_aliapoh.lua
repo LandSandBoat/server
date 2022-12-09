@@ -16,7 +16,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     -- Records of Eminence: Alter Ego: Mihli Aliapoh
     if caster:getEminenceProgress(934) then
         xi.roe.onRecordTrigger(caster, 934)

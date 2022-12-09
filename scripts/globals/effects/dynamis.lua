@@ -36,11 +36,13 @@ effectObject.onEffectTick = function(target, effect)
                 minutes = 1
                 time = time / 60
             end
+
             if time == 1 then
                 target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_1, time, minutes)
             else
                 target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_2, time, minutes)
             end
+
             target:setLocalVar("dynamis_lasttimeupdate", message)
         end
     else

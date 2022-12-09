@@ -31,6 +31,7 @@ function Message:perform(player, targetEntity)
     else
         player:messageText(self.npcId and GetNPCByID(self.npcId) or targetEntity, self.id, { face = self.face })
     end
+
     return self.returnValue
 end
 

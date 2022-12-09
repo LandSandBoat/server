@@ -21,6 +21,7 @@ function onTrigger(player, itemId, quantity)
     if itemId ~= nil then
         itemId = tonumber(itemId)
     end
+
     if itemId == nil or itemId == 0 then
         error(player, "Invalid itemID.")
         return

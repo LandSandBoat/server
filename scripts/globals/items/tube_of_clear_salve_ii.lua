@@ -13,6 +13,7 @@ itemObject.onItemCheck = function(target)
     if not target:hasPet() then
         return xi.msg.basic.REQUIRES_A_PET
     end
+
     return 0
 end
 

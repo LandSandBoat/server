@@ -60,27 +60,32 @@ xi.mix.uragnite.config = function(mob, params)
     if params.inShellSkillList and type(params.inShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]inShellSkillList", params.inShellSkillList)
     end
+
     if params.noShellSkillList and type(params.noShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]noShellSkillList", params.noShellSkillList)
     end
+
     if params.chanceToShell and type(params.chanceToShell) == "number" then
         mob:setLocalVar("[uragnite]chanceToShell", params.chanceToShell)
     end
+
     if params.timeInShellMin and type(params.timeInShellMin) == "number" then
         mob:setLocalVar("[uragnite]timeInShellMin", params.timeInShellMin)
     end
+
     if params.timeInShellMax and type(params.timeInShellMax) == "number" then
         mob:setLocalVar("[uragnite]timeInShellMax", params.timeInShellMax)
     end
+
     if params.inShellRegen and type(params.inShellRegen) == "number" then
         mob:setLocalVar("[uragnite]inShellRegen", params.inShellRegen)
     end
 end
 
 g_mixins.families.uragnite = function(uragniteMob)
-
     -- at spawn, give mob default skill lists for in-shell and out-of-shell states
     -- these defaults can be overwritten by using xi.mix.uragnite.config() in onMobSpawn.
+
     uragniteMob:addListener("SPAWN", "URAGNITE_SPAWN", function(mob)
         mob:setLocalVar("[uragnite]noShellSkillList", 251)
         mob:setLocalVar("[uragnite]inShellSkillList", 250)

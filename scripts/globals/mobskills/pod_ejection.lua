@@ -22,6 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             gunpod:updateEnmity(utils.randomEntry(mob:getBattlefield():getPlayers()))
         end
     end)
+
     skill:setMsg(0)
     return 0
 end

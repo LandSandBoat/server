@@ -12,11 +12,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 1
     end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.6

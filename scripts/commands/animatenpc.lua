@@ -35,6 +35,7 @@ function onTrigger(player, arg1, arg2)
         error(player, "You must either enter a valid npcID or target an NPC.")
         return
     end
+
     if not targ:isNPC() then
         error(player, "Targeted entity is not an NPC.")
         return
@@ -44,6 +45,7 @@ function onTrigger(player, arg1, arg2)
     if animationId ~= nil then
         animationId = tonumber(animationId) or xi.anim[string.upper(animationId)]
     end
+
     if animationId == nil then
         error(player, "Invalid animationID.")
         return

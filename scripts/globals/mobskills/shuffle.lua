@@ -21,6 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     else
         skill:setMsg(xi.msg.basic.SKILL_ERASE)
     end
+
     return effect
 end
 

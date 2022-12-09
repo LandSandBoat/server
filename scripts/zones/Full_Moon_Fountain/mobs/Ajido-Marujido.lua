@@ -47,7 +47,9 @@ entity.onMobSpawn = function(ajidoMob)
     end)
 
     -- TODO: This doesn't work, but the logic is here.
-    ajidoMob:timer(40000, function(mobArg) ajidoSelectTarget(mobArg) end)
+    ajidoMob:timer(40000, function(mobArg)
+        ajidoSelectTarget(mobArg)
+    end)
 end
 
 entity.onMobRoam = function(mob)
@@ -62,6 +64,7 @@ entity.onMobFight = function(mob, target)
         mob:showText(mob, ID.text.DONT_GIVE_UP)
         mob:setLocalVar("saidMessage", 1)
     end
+
     if target:isEngaged() then
         mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
     end

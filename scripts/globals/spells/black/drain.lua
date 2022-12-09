@@ -54,7 +54,6 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     caster:addHP(dmg)
     return dmg
-
 end
 
 return spellObject

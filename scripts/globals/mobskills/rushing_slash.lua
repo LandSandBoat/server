@@ -17,6 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.BST then
         return 0
     end
+
     return 1
 end
 

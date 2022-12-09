@@ -147,7 +147,6 @@ entity.onEventFinish = function(player, csid, option)
     then
         -- complete quest RNG AF3
         player:delKeyItem(xi.ki.KOHS_LETTER)
-
     end
 end
 

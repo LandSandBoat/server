@@ -14,7 +14,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 1
     local accmod = 1
     local dmgmod = 1
@@ -24,7 +23,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     mob:resetEnmity(target)
     return dmg
-
 end
 
 return mobskillObject

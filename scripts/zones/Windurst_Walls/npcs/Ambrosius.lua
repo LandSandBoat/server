@@ -27,10 +27,22 @@ entity.onTrade = function(player, npc, trade)
     if postman ~= QUEST_AVAILABLE then
         local reward = 0
 
-        if trade:hasItemQty(584, 1) then reward = reward + 1 end
-        if trade:hasItemQty(585, 1) then reward = reward + 1 end
-        if trade:hasItemQty(586, 1) then reward = reward + 1 end
-        if trade:hasItemQty(587, 1) then reward = reward + 1 end
+        -- TODO: Table this on converting to Interaction
+        if trade:hasItemQty(584, 1) then
+            reward = reward + 1
+        end
+
+        if trade:hasItemQty(585, 1) then
+            reward = reward + 1
+        end
+
+        if trade:hasItemQty(586, 1) then
+            reward = reward + 1
+        end
+
+        if trade:hasItemQty(587, 1) then
+            reward = reward + 1
+        end
 
         if trade:getItemCount() == reward then
             if reward == 1 then

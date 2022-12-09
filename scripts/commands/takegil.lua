@@ -33,6 +33,7 @@ function onTrigger(player, amount, target)
         error(player, "Invalid amount of gil.")
         return
     end
+
     if amount > oldAmount then
         amount = oldAmount
     end
@@ -40,5 +41,4 @@ function onTrigger(player, amount, target)
     -- remove gil
     targ:delGil(amount)
     player:PrintToPlayer(string.format("Removed %i gil from %s.  They now have %i gil.", amount, targ:getName(), targ:getGil()))
-
 end

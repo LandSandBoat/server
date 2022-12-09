@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(633)
     else
         player:showText(npc, 7817) -- nothing to report
-
     end
 end
 
@@ -33,6 +32,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOOK_OF_THE_EAST)
     end
 end
+
 --- for future use
     -- player:startEvent(847) --are you the chicks owner
 

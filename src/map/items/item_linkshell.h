@@ -49,15 +49,15 @@ public:
     CItemLinkshell(uint16);
     virtual ~CItemLinkshell();
 
-    uint32              GetLSID();
-    LSTYPE              GetLSType();
-    lscolor_t           GetLSColor();
-    uint16              GetLSRawColor();
-    void                SetLSID(uint32 lsid);
-    void                SetLSColor(uint16 color);
-    virtual const int8* getSignature();
-    virtual void        setSignature(int8* signature);
-    void                SetLSType(LSTYPE value);
+    uint32                    GetLSID();
+    LSTYPE                    GetLSType();
+    lscolor_t                 GetLSColor();
+    uint16                    GetLSRawColor();
+    void                      SetLSID(uint32 lsid);
+    void                      SetLSColor(uint16 color);
+    virtual const std::string getSignature();
+    virtual void              setSignature(std::string signature);
+    void                      SetLSType(LSTYPE value);
 
 private:
 };

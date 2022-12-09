@@ -6,7 +6,6 @@
 -- Recast Time: 00:10:00
 -- Duration: 00:01:00
 -----------------------------------
------------------------------------
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local abilityObject = {}

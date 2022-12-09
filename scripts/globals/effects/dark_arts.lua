@@ -9,6 +9,7 @@ effectObject.onEffectGain = function(target, effect)
     if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
         target:recalculateAbilitiesTable()
     end
+
     local bonus = effect:getPower()
     local helix = effect:getSubPower()
 
@@ -26,6 +27,7 @@ effectObject.onEffectGain = function(target, effect)
         target:addMod(xi.mod.HELIX_EFFECT, helix)
         target:addMod(xi.mod.HELIX_DURATION, 72)
     end
+
     if target:getObjType() ~= xi.objType.TRUST then
         target:recalculateSkillsTable()
     else -- account for trusts
@@ -46,6 +48,7 @@ effectObject.onEffectLose = function(target, effect)
     if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
         target:recalculateAbilitiesTable()
     end
+
     local bonus = effect:getPower()
     local helix = effect:getSubPower()
 
@@ -63,6 +66,7 @@ effectObject.onEffectLose = function(target, effect)
         target:delMod(xi.mod.HELIX_EFFECT, helix)
         target:delMod(xi.mod.HELIX_DURATION, 72)
     end
+
     if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
         target:recalculateSkillsTable()
     else

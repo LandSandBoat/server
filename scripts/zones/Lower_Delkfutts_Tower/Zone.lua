@@ -43,12 +43,12 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)
+        [1] = function()
             player:setCharVar("option", 1)
             player:startEvent(4)
         end,
 
-        [2] = function (x)
+        [2] = function()
             player:setCharVar("option", 2)
             player:startEvent(4)
         end,
@@ -68,6 +68,7 @@ zoneObject.onEventFinish = function(player, csid, option)
         else
             player:setPos(-51, -48, -40, 246, 157)
         end
+
         player:setCharVar("option", 0)
     elseif csid == 4 and (option == 0 or option >= 3) then
         player:setCharVar("option", 0)

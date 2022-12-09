@@ -75,6 +75,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.main.GIL_RATE)
             player:addExp(2000 * xi.settings.main.EXP_RATE)
         end
+
         player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)

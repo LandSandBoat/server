@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
         result = 238
     end
+
     return result
 end
 

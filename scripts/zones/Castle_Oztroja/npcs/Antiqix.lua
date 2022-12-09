@@ -88,7 +88,6 @@ entity.onTrade = function(player, npc, trade)
                     break
                 end
             end
-
         end
     end
 end
@@ -135,14 +134,13 @@ entity.onEventUpdate = function(player, csid, option)
                 player:addKeyItem(option)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, option)
             end
-            player:updateEvent(xi.dynamis.getDynamisMapList(player), player:getGil())
 
+            player:updateEvent(xi.dynamis.getDynamisMapList(player), player:getGil())
         end
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     -- bought prismatic hourglass
     if csid == 54 then
         player:tradeComplete()
@@ -189,6 +187,7 @@ entity.onEventFinish = function(player, csid, option)
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
                 end
             end
+
             player:messageSpecial(ID.text.ITEMS_OBTAINED, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
         end
 
@@ -202,8 +201,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(item)
             player:messageSpecial(ID.text.ITEM_OBTAINED, item)
         end
-        player:setLocalVar("hundoItemBought", 0)
 
+        player:setLocalVar("hundoItemBought", 0)
     end
 end
 

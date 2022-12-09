@@ -25,6 +25,7 @@ itemObject.onItemCheck = function(target)
     then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
@@ -37,7 +38,6 @@ itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEX, 4)
     target:addMod(xi.mod.VIT, 4)
     target:addMod(xi.mod.CHR, 4)
-
 end
 
 itemObject.onEffectLose = function(target, effect)

@@ -36,7 +36,9 @@ end
 entity.onMobEngaged = function(mob, target)
     local followers = xi.follow.getFollowers(mob)
 
-    if not followers then return end
+    if not followers then
+        return
+    end
 
     for _, follower in ipairs(followers) do
         if follower:isSpawned() and not follower:isEngaged() then
@@ -53,7 +55,12 @@ end
 -- Do the following and linking for the babies.
 entity.onMobRoamAction = function(mob)
     local leader = xi.follow.getFollowTarget(mob)
-    if not leader or not leader:isSpawned() then return end
+    if
+        not leader or
+        not leader:isSpawned()
+    then
+        return
+    end
 
     if leader:isEngaged() then
         local leaderTarget = leader:getTarget()

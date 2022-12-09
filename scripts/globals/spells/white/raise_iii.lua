@@ -22,6 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:addMP(target:getMaxMP())
         end
     end
+
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 
     return 3

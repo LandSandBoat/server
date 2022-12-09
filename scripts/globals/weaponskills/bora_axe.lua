@@ -19,7 +19,6 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-
     local params = {}
     params.numHits = 1
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
@@ -42,8 +41,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local duration = 20 * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
         target:addStatusEffect(xi.effect.BIND, 1, 0, duration)
     end
-    return tpHits, extraHits, criticalHit, damage
 
+    return tpHits, extraHits, criticalHit, damage
 end
 
 return weaponskillObject

@@ -12,34 +12,50 @@ abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
+local removableStatus =
+{
+    xi.effect.PETRIFICATION,
+    xi.effect.SILENCE,
+    xi.effect.BANE,
+    xi.effect.CURSE_II,
+    xi.effect.CURSE_I,
+    xi.effect.PARALYSIS,
+    xi.effect.PLAGUE,
+    xi.effect.POISON,
+    xi.effect.DISEASE,
+    xi.effect.BLINDNESS,
+}
+
+local function removeStatus(target)
+    for _, effectId in ipairs(removableStatus) do
+        if target:delStatusEffect(effectId) then
+            return true
+        end
+    end
+
+    if target:eraseStatusEffect() ~= xi.effect.NONE then
+        return true
+    end
+
+    return false
+end
+
 abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 30)
     local maneuvers = master:countEffect(xi.effect.LIGHT_MANEUVER)
     skill:setMsg(xi.msg.basic.USES)
 
-    local function removeStatus()
-        if target:delStatusEffect(xi.effect.PETRIFICATION) then return true end
-        if target:delStatusEffect(xi.effect.SILENCE) then return true end
-        if target:delStatusEffect(xi.effect.BANE) then return true end
-        if target:delStatusEffect(xi.effect.CURSE_II) then return true end
-        if target:delStatusEffect(xi.effect.CURSE_I) then return true end
-        if target:delStatusEffect(xi.effect.PARALYSIS) then return true end
-        if target:delStatusEffect(xi.effect.PLAGUE) then return true end
-        if target:delStatusEffect(xi.effect.POISON) then return true end
-        if target:delStatusEffect(xi.effect.DISEASE) then return true end
-        if target:delStatusEffect(xi.effect.BLINDNESS) then return true end
-        if target:eraseStatusEffect() ~= 255 then return true end
-        return false
-    end
-
     local toremove = maneuvers
     local removed = 0
 
     repeat
-        if not removeStatus() then break end
+        if not removeStatus(target) then
+            break
+        end
+
         toremove = toremove - 1
         removed = removed + 1
-    until (toremove <= 0)
+    until toremove <= 0
 
     for i = 1, maneuvers do
         master:delStatusEffectSilent(xi.effect.LIGHT_MANEUVER)

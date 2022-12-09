@@ -64,6 +64,7 @@ entity.onTrade = function(player, npc, trade)
                         player:messageSpecial(ID.text.CLOUD_BAD_COUNT, 951)
                         return
                     end
+
                     local stacks = itemQty / 99
                     fruitNeeded = fruitNeeded + stacks
                     giveToPlayer[#giveToPlayer + 1] = { v[2], stacks }
@@ -71,6 +72,7 @@ entity.onTrade = function(player, npc, trade)
                     break
                 end
             end
+
             if not validSlot then
                 player:messageSpecial(ID.text.CLOUD_BAD_ITEM)
                 return
@@ -96,6 +98,7 @@ entity.onTrade = function(player, npc, trade)
         player:addItem(v[1], v[2])
         player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
     end
+
     player:tradeComplete()
 end
 

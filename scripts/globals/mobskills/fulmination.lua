@@ -22,6 +22,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     end
+
     local family = mob:getFamily()
     local mobhp = mob:getHPP()
     local result = 1
@@ -36,7 +37,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
--- TODO: Hits all players near Khimaira, not just alliance.
+    -- TODO: Hits all players near Khimaira, not just alliance.
 
     local dmgmod = 3
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 4, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)

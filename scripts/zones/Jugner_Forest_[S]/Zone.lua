@@ -26,7 +26,6 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     return cs
-
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

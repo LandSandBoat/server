@@ -57,12 +57,14 @@ spellObject.onSpellCast = function(caster, target, spell)
             basepower = 0
         end
     end
+
     if isValidHealTarget(caster, target) then
         if xi.settings.main.USE_OLD_CURE_FORMULA then
             basecure = getBaseCureOld(power, divisor, constant)
         else
             basecure = getBaseCure(power, divisor, constant, basepower)
         end
+
         final = getCureFinal(caster, spell, basecure, minCure, false)
         if
             caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and
@@ -82,6 +84,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
             target:addStatusEffect(xi.effect.STONESKIN, solaceStoneskin, 0, 25, 0, 0, 1)
         end
+
         final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
 
         --Applying server mods
@@ -91,6 +94,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if final > diff then
             final = diff
         end
+
         target:addHP(final)
         target:wakeUp()
         caster:updateEnmityFromCure(target, final)
@@ -124,11 +128,13 @@ spellObject.onSpellCast = function(caster, target, spell)
             else
                 basecure = getBaseCure(power, divisor, constant, basepower)
             end
+
             final = getCureFinal(caster, spell, basecure, minCure, false)
             local diff = (target:getMaxHP() - target:getHP())
             if final > diff then
                 final = diff
             end
+
             target:addHP(final)
         end
     end

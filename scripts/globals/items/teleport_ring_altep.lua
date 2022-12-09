@@ -14,6 +14,7 @@ itemObject.onItemCheck = function(target)
     if not target:hasKeyItem(xi.ki.ALTEPA_GATE_CRYSTAL) then
         result = 445
     end
+
     return result
 end
 

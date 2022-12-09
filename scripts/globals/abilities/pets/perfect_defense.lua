@@ -21,8 +21,10 @@ abilityObject.onPetAbility = function(target, pet, skill, master)
         if summoningSkill > 600 then
             summoningSkill = 600
         end
+
         duration = 30 + summoningSkill / 20
     end
+
     target:delStatusEffect(xi.effect.PERFECT_DEFENSE)
     target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration)
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)

@@ -17,6 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     end
+
     if mob:getFamily() == 91 then
         local mobSkin = mob:getModelId()
 

@@ -30,6 +30,7 @@ local function AddAllAttachments(player)
     for i = 1, #validAttachments do
         player:unlockAttachment(validAttachments[i])
     end
+
     player:PrintToPlayer(string.format("%s now has all attachments.", player:getName()))
 end
 

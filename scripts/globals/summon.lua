@@ -71,6 +71,7 @@ local function getRandRatio(wRatio)
     else
         lowerLimit = math.min(wRatio - 0.375, maxRatio)
     end
+
     -- Randomly pick a value between lower and upper limits for qRatio
     qRatio = lowerLimit + (math.random() * (upperLimit - lowerLimit))
 
@@ -81,12 +82,14 @@ local function avatarFTP(tp, ftp1, ftp2, ftp3)
     if tp < 1000 then
         tp = 1000
     end
+
     if tp >= 1000 and tp < 2000 then
         return ftp1 + (ftp2 - ftp1) / 100 * (tp - 1000)
     elseif tp >= 2000 and tp <= 3000 then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
         return ftp2 + (ftp3 - ftp2) / 100 * (tp - 2000)
     end
+
     return 1 -- no ftp mod
 end
 
@@ -173,6 +176,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             levelCorrection = math.max((levelDiff * 2), 0)
         end
     end
+
     -- Delta acc / 2 for hit rate
     local dAcc = math.floor((acc - eva) / 2)
 
@@ -202,6 +206,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         if math.random() < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
         end
+
         numHitsProcessed = numHitsProcessed + 1
     end
 
@@ -251,6 +256,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             if isCrit then
                 wRatio = wRatio + 1
             end
+
             -- get a random ratio from min and max
             local qRatio = getRandRatio(wRatio)
 
@@ -271,6 +277,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             if isCrit then
                 wRatio = wRatio + 1
             end
+
             -- get a random ratio from min and max
             local qRatio = getRandRatio(wRatio)
 
@@ -342,6 +349,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
                 skill:setMsg(xi.msg.basic.ANTICIPATE)
                 return 0
             end
+
             target:delStatusEffect(xi.effect.THIRD_EYE)
         end
     end
@@ -381,6 +389,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
         if dmg < 0 then
             return dmg
         end
+
         dmg = utils.oneforall(target, dmg)
     end
 
@@ -423,5 +432,6 @@ xi.summon.avatarMiniFightCheck = function(caster)
             result = 40 -- Cannot use <spell> in this area.
         end
     end
+
     return result
 end

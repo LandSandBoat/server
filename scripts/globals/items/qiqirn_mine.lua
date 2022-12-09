@@ -13,6 +13,7 @@ itemObject.onItemCheck = function(target)
     if target:getZoneID() ~= xi.zone.LEBROS_CAVERN then
         result = 55
     end
+
     return result
 end
 

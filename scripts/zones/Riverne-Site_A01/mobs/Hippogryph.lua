@@ -35,12 +35,14 @@ entity.onMobRoam = function(mob)
                 noHeliodromosSpawned = false
             end
         end
+
         if noHeliodromosSpawned then
             -- despawn placeholders
             for i = ID.mob.HELIODROMOS_PH_OFFSET, ID.mob.HELIODROMOS_PH_OFFSET + 2 do
                 DisallowRespawn(i, true)
                 DespawnMob(i)
             end
+
             -- spawn heliodromos
             for i = ID.mob.HELIODROMOS_OFFSET, ID.mob.HELIODROMOS_OFFSET + 2 do
                 SpawnMob(i)

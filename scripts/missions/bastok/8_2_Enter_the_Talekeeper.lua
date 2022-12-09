@@ -197,6 +197,7 @@ mission.sections =
                         for i = 0, 2 do
                             SpawnMob(kuftalID.mob.TALEKEEPER_OFFSET + i)
                         end
+
                         return mission:messageSpecial(kuftalID.text.EVIL)
                     elseif
                         player:getMissionStatus(player:getNation()) == 3 and

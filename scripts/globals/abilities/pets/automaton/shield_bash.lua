@@ -34,6 +34,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         elseif slowPower == 25 then
             duration = math.random(70, 75)
         end
+
         target:addStatusEffect(xi.effect.SLOW, slowPower * 100, 0, duration)
     end
 
@@ -42,6 +43,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     if ratio > 1.3 then
         ratio = 1.3
     end
+
     if ratio < 0.2 then
         ratio = 0.2
     end

@@ -10,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     player:showText(npc, 11076)--temp dialog
 end
 

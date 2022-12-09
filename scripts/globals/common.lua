@@ -13,6 +13,7 @@ function switch(c)
             else
                 f = code.missing or code.default
             end
+
             if f then
                 if type(f) == "function" then
                     return f(self.casevar, self)
@@ -42,6 +43,7 @@ function set(list)
     for _, item in pairs(list) do
         set[item] = true
     end
+
     return set
 end
 
@@ -62,6 +64,7 @@ function getVanaMidnight(day)
     if day ~= nil then
         curtime = curtime + 24 * 144 * day
     end
+
     local finaltime = curtime + (23 - VanadielHour()) * 144 + (60 - VanadielMinute()) * 2.4
     return finaltime
 end

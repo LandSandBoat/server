@@ -103,12 +103,15 @@ xi.player.charCreate = function(player)
         for i = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_DIO_ABDHALJS_GHELSBA do
             player:addKeyItem(i)
         end
+
         for i = xi.ki.MAP_OF_AL_ZAHBI, xi.ki.MAP_OF_RAKAZNAR do
             player:addKeyItem(i)
         end
+
         for i = xi.ki.MAP_OF_RALA_WATERWAYS_U, xi.ki.MAP_OF_RAKAZNAR_U do
             player:addKeyItem(i)
         end
+
         for i = xi.ki.MAP_OF_ESCHA_ZITAH, xi.ki.MAP_OF_REISENJIMA do
             player:addKeyItem(i)
         end
@@ -138,14 +141,17 @@ xi.player.charCreate = function(player)
     end
 
     player:addItem(15198) -- Sprout Beret
-    player:addItem(536) -- adventurer coupon
+    if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Add coupon that would normally be added in cutscene.
+        player:addItem(xi.items.ADVENTURERS_COUPON)
+    end
+
     player:addTitle(xi.title.NEW_ADVENTURER)
     player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
-    player:setCharVar("spokeKindlix", 1) -- Kindlix introduction
-    player:setCharVar("spokePyropox", 1) -- Pyropox introduction
-    player:setCharVar("TutorialProgress", 1) -- Has not started tutorial
-    player:setCharVar("EinherjarIntro", 1) -- Has not seen Einherjar intro
-    player:setNewPlayer(true) -- apply new player flag
+    player:setCharVar("spokeKindlix", 1)                -- Kindlix introduction
+    player:setCharVar("spokePyropox", 1)                -- Pyropox introduction
+    player:setCharVar("TutorialProgress", 1)            -- Has not started tutorial
+    player:setCharVar("EinherjarIntro", 1)              -- Has not seen Einherjar intro
+    player:setNewPlayer(true)                           -- apply new player flag
     player:addLinkpearl("CatsEyeXI", true)
 end
 

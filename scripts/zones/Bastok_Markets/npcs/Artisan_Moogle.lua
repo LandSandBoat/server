@@ -17,4 +17,5 @@ end
 entity.onEventFinish = function(player, csid, option)
     xi.artisan.moogleOnFinish(player, csid, option)
 end
+
 return entity

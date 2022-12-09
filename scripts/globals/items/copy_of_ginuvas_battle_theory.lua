@@ -13,6 +13,7 @@ itemObject.onItemCheck = function(target)
     if target:getMainLvl() >= 65 then
         check = 0
     end
+
     return check
 end
 

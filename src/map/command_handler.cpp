@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -150,7 +150,7 @@ std::vector<CommandArg> splitToArgs(std::string const& input)
 }
 */
 
-int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* commandline)
+int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::string& commandline)
 {
     TracyZoneScoped;
 
@@ -168,7 +168,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     lua.set("cmdprops", sol::lua_nil);
 
     // TODO: stringstreams are slow. Replace with something else.
-    std::istringstream clstream((char*)commandline);
+    std::istringstream clstream(commandline);
     std::string        cmdname;
 
     clstream >> cmdname;
@@ -186,7 +186,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     }
 
     TracyZoneString(PChar->name);
-    TracyZoneIString(commandline);
+    TracyZoneString(commandline);
 
     auto filename = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
     if (auto maybeRegisteredCommand = registeredCommands.find(cmdname);
@@ -235,7 +235,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         if (settings::get<uint8>("map.AUDIT_GM_CMD") <= permission && settings::get<uint8>("map.AUDIT_GM_CMD") > 0)
         {
             std::string name       = PChar->name;
-            std::string cmdlinestr = autotranslate::replaceBytes((const char*)commandline);
+            std::string cmdlinestr = autotranslate::replaceBytes(commandline);
 
             char escaped_name[16 * 2 + 1];
             sql->EscapeString(escaped_name, name.c_str());
@@ -245,7 +245,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
             sql->EscapeString(escaped_gm_cmd.data(), (char*)cmdname.c_str());
 
             std::string escaped_full_string;
-            escaped_full_string.reserve(strlen((char*)commandline) * 2 + 1);
+            escaped_full_string.reserve(commandline.size() * 2 + 1);
             sql->EscapeString(escaped_full_string.data(), (char*)cmdlinestr.c_str());
 
             const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
@@ -279,7 +279,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
         switch (*parameter)
         {
             case 'b':
-                args.emplace_back(std::string((const char*)commandline));
+                args.emplace_back(std::string(commandline));
                 break;
 
             case 's':

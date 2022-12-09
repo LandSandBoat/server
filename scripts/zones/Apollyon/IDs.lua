@@ -378,10 +378,6 @@ zones[xi.zone.APOLLYON] =
     {
         npc =
         {
-            PORTAL = {},
-            ITEM_CRATES = {},
-            TIME_CRATES = {},
-            RECOVER_CRATES = {},
             LOOT_CRATE = 16933123,
         },
     },
@@ -397,14 +393,11 @@ zones[xi.zone.APOLLYON] =
 
         npc =
         {
-            PORTAL = {},
-            ITEM_CRATES = {},
             TIME_CRATES =
             {
                 16933127,
                 16933128,
             },
-            RECOVER_CRATES = {},
             LOOT_CRATE = 16933126,
         },
     },

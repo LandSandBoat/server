@@ -35,7 +35,6 @@ local lowerJeunoGlobal =
             else
                 player:startEvent(lampCs, 6) -- You examine the lamp. It seems that it must be lit manually.
             end
-
         end
     end,
 

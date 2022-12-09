@@ -53,6 +53,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if final > diff then
         final = diff
     end
+
     target:addHP(final)
 
     if
@@ -61,6 +62,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     then
         caster:updateEnmityFromCure(target, final)
     end
+
     spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
 
     return final

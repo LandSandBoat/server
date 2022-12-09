@@ -29,7 +29,6 @@ entity.onSpawn = function(npc)
     }
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
-
 end
 
 return entity

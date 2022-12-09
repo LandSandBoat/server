@@ -30,10 +30,6 @@
 #include "common/lua.h"
 extern sol::state lua;
 
-#ifdef TRACY_ENABLE
-#include "TracyLua.hpp"
-#endif
-
 // Sol compilation definitions are in the base CMakeLists file
 // SOL_ALL_SAFETIES_ON = 1
 // SOL_NO_CHECK_NUMBER_PRECISION = 1
@@ -214,6 +210,8 @@ namespace luautils
     void  OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
     int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
 
+    void OnServerStart();
+    void OnJSTMidnight();
     void OnTimeServerTick();
 
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                                // triggered when user targets npc and clicks action button
@@ -263,6 +261,8 @@ namespace luautils
     int32 OnCriticalHit(CBattleEntity* PMob, CBattleEntity* PAttacker);
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
+
+    int32 OnPetLevelRestriction(CBaseEntity* PMob); // Triggers onPetLevelRestriction in global pet script
 
     int32 OnPath(CBaseEntity* PEntity);         // triggers when an entity is on a pathfind point
     int32 OnPathPoint(CBaseEntity* PEntity);    // triggers when an entity stops on a path point and has finished waiting at it

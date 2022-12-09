@@ -18,11 +18,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     then
         return 0
     end
+
     return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     -- time to drain HP. 50-100
     local power = math.random(0, 151) + 150
     local dmg = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)

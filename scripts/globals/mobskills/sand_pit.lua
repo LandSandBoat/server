@@ -52,6 +52,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         for _, enmAlly in pairs(allies) do
             mob:resetEnmity(enmAlly)
         end
+
         -- Removes all enfeebling effects
         mob:delStatusEffectsByFlag(xi.effectFlag.ERASABLE)
     end

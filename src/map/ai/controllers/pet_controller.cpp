@@ -38,7 +38,7 @@ CPetController::CPetController(CPetEntity* _PPet)
 void CPetController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneIString(PPet->GetName());
+    TracyZoneString(PPet->GetName());
 
     if (PPet->shouldDespawn(tick))
     {

@@ -197,6 +197,7 @@ xi.armorStorage.onEventFinish = function(player, csid, option, deposit, withdraw
                         player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
                     end
                 end
+
                 player:delKeyItem(ki)
                 player:setGil(player:getGil() - cost)
             else

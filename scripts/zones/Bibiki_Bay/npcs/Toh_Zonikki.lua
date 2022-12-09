@@ -73,7 +73,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if player:hasKeyItem(xi.ki.CLAMMING_KIT) then -- Player has clamming kit
         if player:getCharVar("ClammingKitBroken") == 1 then -- Broken bucket
             player:startEvent(30, 0, 0, 0, 0, 0, 0, 0, 0)

@@ -18,7 +18,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, target)
-
     -- validate target
     local targ
     if target == nil then

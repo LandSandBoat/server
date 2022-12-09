@@ -22,19 +22,19 @@ function onTrigger(player, str)
     end
 
     -- For safety measures we will nuke the os table..
-    local old_os = os
+    local oldOs = os
     os = nil
 
     -- Define "player" and "target" inside the string for use by the caller
-    local define_player = "local player = GetPlayerByName(\"" .. player:getName() .. "\"); "
-    local define_target = "local target = player:getCursorTarget(); "
+    local definePlayer = "local player = GetPlayerByName(\"" .. player:getName() .. "\"); "
+    local defineTarget = "local target = player:getCursorTarget(); "
 
     -- Ensure the command compiles / is valid..
-    local scriptObj, err0 = loadstring(define_player .. define_target .. str)
+    local scriptObj, err0 = loadstring(definePlayer .. defineTarget .. str)
     if scriptObj == nil then
         player:PrintToPlayer("Failed to load the given string.")
         player:PrintToPlayer(err0)
-        os = old_os
+        os = oldOs
         return
     end
 
@@ -45,5 +45,5 @@ function onTrigger(player, str)
     end
 
     -- Restore the os table..
-    os = old_os
+    os = oldOs
 end

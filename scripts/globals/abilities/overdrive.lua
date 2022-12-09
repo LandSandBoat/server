@@ -5,10 +5,9 @@
 -- Recast Time: 1:00:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/pets")
 require("scripts/globals/msg")
+require("scripts/globals/pets")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -28,6 +27,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     player:addStatusEffect(xi.effect.OVERDRIVE, 0, 0, 60)
+
     return xi.effect.OVERDRIVE
 end
 

@@ -21,12 +21,14 @@ itemObject.onItemCheck = function(target)
     then
         result = xi.msg.basic.IS_FULL
     end
+
     return result
 end
 
 itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6567)
 end
+
 itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.INT, 2)
     target:addMod(xi.mod.MND, 2)

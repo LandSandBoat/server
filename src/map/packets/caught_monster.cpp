@@ -33,5 +33,5 @@ CCaughtMonsterPacket::CCaughtMonsterPacket(CCharEntity* PChar, uint16 messageID)
     ref<uint32>(0x08) = PChar->targid;
     ref<uint16>(0x0A) = messageID + 0x8000;
 
-    memcpy(data + (0x10), PChar->GetName(), PChar->name.size());
+    memcpy(data + (0x10), PChar->GetName().c_str(), PChar->GetName().size());
 }

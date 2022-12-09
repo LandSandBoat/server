@@ -23,6 +23,7 @@ entity.onMobRoam = function(mob)
                 DespawnMob(i)
             end
         end
+
         -- allow placeholders to respawn
         for i = ID.mob.HELIODROMOS_PH_OFFSET, ID.mob.HELIODROMOS_PH_OFFSET + 2 do
             local ph = GetMobByID(i)

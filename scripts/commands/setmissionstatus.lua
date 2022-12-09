@@ -18,7 +18,6 @@ function error(player, msg)
 end
 
 function onTrigger(player, target, value, logId, statusIndex)
-
     if statusIndex ~= nil then
         if statusIndex > 7 or statusIndex < 0 then
             error(player, "Invalid index!")
@@ -32,6 +31,7 @@ function onTrigger(player, target, value, logId, statusIndex)
     if logInfo == nil then
         logInfo = logIdHelpers.getMissionLogInfo(player:getNation())
     end
+
     logName = logInfo.full_name
     logId = logInfo.mission_log
 

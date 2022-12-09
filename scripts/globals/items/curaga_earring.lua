@@ -23,6 +23,7 @@ itemObject.onItemUse = function(target)
         if healAmount > diff then
             healAmount = diff
         end
+
         member:addHP(healAmount)
         member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, healAmount)
     end)

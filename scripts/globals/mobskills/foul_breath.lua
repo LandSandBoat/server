@@ -17,11 +17,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getZoneID() == 5 then
         return 1
     end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local typeEffect = xi.effect.DISEASE
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 300)
 

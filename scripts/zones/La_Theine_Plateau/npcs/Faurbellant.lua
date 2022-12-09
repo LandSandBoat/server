@@ -15,7 +15,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
     if gates == QUEST_COMPLETED then
         player:showText(npc, ID.text.FAURBELLANT_4)
@@ -31,7 +30,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, ID.text.FAURBELLANT_1)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

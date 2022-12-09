@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
         result = 242
     end
+
     return result
 end
 

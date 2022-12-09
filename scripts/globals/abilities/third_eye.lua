@@ -5,7 +5,6 @@
 -- Recast Time: 1:00
 -- Duration: 0:30
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
@@ -14,6 +13,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.SEIGAN) then
         ability:setRecast(ability:getRecast() / 2)
     end
+
     return 0, 0
 end
 

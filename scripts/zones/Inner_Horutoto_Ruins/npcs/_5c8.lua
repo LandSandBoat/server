@@ -27,9 +27,11 @@ entity.onTrigger = function(player, npc)
             npc:timer(100, function(npcArg)
                 GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 3):entityAnimationPacket("slrg")
             end)
+
             npc:timer(500, function(npcArg)
                 GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 3):openDoor(30)
             end)
+
             npc:timer(2500, function(npcArg)
                 npcArg:openDoor(30)
                 GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 3):entityAnimationPacket("klrg")

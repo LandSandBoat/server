@@ -21,9 +21,11 @@ itemObject.onItemCheck = function(target)
     then
         result = xi.msg.basic.IS_FULL
     end
+
     if target:getMod(xi.mod.EAT_RAW_FISH) == 1 then
         result = 0
     end
+
     return result
 end
 

@@ -27,7 +27,7 @@
 #include <numeric>
 #include <string>
 
-sol::state lua; // lgtm [cpp/short-global-name]
+sol::state lua;
 
 /**
  * @brief Load the bare minimum required to use Lua.
@@ -35,8 +35,6 @@ sol::state lua; // lgtm [cpp/short-global-name]
 void lua_init()
 {
     TracyZoneScoped;
-
-    ShowInfo("lua initialising");
 
     lua.open_libraries();
 

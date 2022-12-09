@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
         result = 240
     end
+
     return result
 end
 

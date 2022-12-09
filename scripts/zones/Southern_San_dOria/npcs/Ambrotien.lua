@@ -26,8 +26,8 @@ entity.onTrigger = function(player, npc)
         if currentMission ~= xi.mission.id.sandoria.NONE then
             player:startEvent(2001) -- Have mission already activated
         else
-            local mission_mask, repeat_mask = xi.mission.getMissionMask(player)
-            player:startEvent(2009, mission_mask, 0, 0 , 0 , 0 , repeat_mask) -- Mission List
+            local missionMask, repeatMask = xi.mission.getMissionMask(player)
+            player:startEvent(2009, missionMask, 0, 0 , 0 , 0 , repeatMask) -- Mission List
         end
     end
 end

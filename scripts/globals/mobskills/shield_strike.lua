@@ -17,7 +17,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     -- TODO: Knockback
 
     local numhits = 1

@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if caster:getPool() == 5310 then -- Amnaf (Flayer)
             caster:resetEnmity(target)
         end
+
         -- Todo: get rid of this whole block by handling it in the mob script
         -- this requires a multi target enmity without specifying a target (have to get hate list from mob)
         -- OR by altering onSpellPrecast to have a target param..

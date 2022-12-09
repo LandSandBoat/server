@@ -66,6 +66,7 @@ local assessment = function(player, npc)
         elseif killCount >= 19 then
             event = 199
         end
+
         return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
     -- handle the events for repeating mission
     elseif completed and secondsPassed > 6768 then
@@ -76,6 +77,7 @@ local assessment = function(player, npc)
         elseif killCount >= 30 then
             event = 209
         end
+
         return mission:progressEvent(event, 0, VanadielHour(), 1, killCount)
     -- player hasn't waited long enough to be assessed
     else

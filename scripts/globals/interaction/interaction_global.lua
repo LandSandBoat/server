@@ -28,7 +28,6 @@ end
 
 -- Add container handlers found for the added zones
 function InteractionGlobal.loadContainers(shouldReloadRequires)
-
     -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
@@ -46,6 +45,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
         containers[i] = utils.prequire(containerFiles[i])
         containers[i].filename = containerFiles[i]
     end
+
     InteractionGlobal.lookup:addContainers(containers, zoneIds)
 end
 

@@ -61,6 +61,7 @@ zoneObject.onEventFinish = function(player, csid, option)
                     playerArg:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
                 end)
             end
+
             v:setHP(v:getMaxHP())
             v:setMP(v:getMaxMP())
             if v:getPet() then

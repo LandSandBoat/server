@@ -23,6 +23,7 @@ entity.onMobFight = function(mob, target)
                 if warriorsSpawned == 1 then
                     GetMobByID(warrior):stun(5000)
                 end
+
                 warriorsSpawned = warriorsSpawned + 1
             end
         end

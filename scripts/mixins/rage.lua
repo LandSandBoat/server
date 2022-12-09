@@ -32,7 +32,6 @@ local rageBuffs =
 }
 
 g_mixins.rage = function(rageMob)
-
     rageMob:addListener("SPAWN", "RAGE_SPAWN", function(mob)
         mob:setLocalVar("[rage]timer", 1200) -- 20 minutes
     end)

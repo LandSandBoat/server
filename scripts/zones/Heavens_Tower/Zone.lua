@@ -34,11 +34,11 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function (x)  -- Heaven's Tower exit portal
+        [1] = function()  -- Heaven's Tower exit portal
             player:startEvent(41)
         end,
 
-        [2] = function (x)  -- Warp directly back to the first floor.
+        [2] = function()  -- Warp directly back to the first floor.
             player:startEvent(83)
         end,
     }

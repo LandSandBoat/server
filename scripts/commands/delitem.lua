@@ -47,5 +47,4 @@ function onTrigger(player, itemId, target)
             player:PrintToPlayer(string.format("%s does not have item %i.", targ:getName(), itemId))
         end
     end
-
 end

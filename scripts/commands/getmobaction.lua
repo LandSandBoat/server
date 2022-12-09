@@ -33,5 +33,4 @@ function onTrigger(player, mobId)
 
     -- report mob action
     player:PrintToPlayer(string.format("%s %i current action ID is %i.", targ:getName(), targ:getID(), targ:getCurrentAction()))
-
 end

@@ -20,6 +20,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         highestskill = 23
         highest = automaton:getSkillLevel(xi.skill.AUTOMATON_RANGED)
     end
+
     if automaton:getSkillLevel(xi.skill.AUTOMATON_MAGIC) > highest then
         highestskill = 24
     end

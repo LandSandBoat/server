@@ -35,6 +35,7 @@ entity.onTrigger = function(player, npc)
             player:messageText(player, ID.text.ASSAULT_FAILED)
             player:delAssault(currentAssault)
         end
+
         player:setCharVar("AssaultComplete", 0)
         player:setCharVar("assaultEntered", 0)
         player:setCharVar("Assault_Armband", 0)
@@ -44,6 +45,7 @@ entity.onTrigger = function(player, npc)
                 player:delKeyItem(orders)
             end
         end
+
         for maps = xi.ki.MAP_OF_LEUJAOAM_SANCTUM, xi.ki.MAP_OF_NYZUL_ISLE do
             if player:hasKeyItem(maps) then
                 player:delKeyItem(maps)
@@ -115,6 +117,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.CANNOT_ISSUE_TAG, xi.ki.IMPERIAL_ARMY_ID_TAG)
             return
         end
+
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
 
         local idTagPeriod = 86400
@@ -141,6 +144,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:delKeyItem(orders)
             end
         end
+
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
         player:delAssault(currentAssault)
     end

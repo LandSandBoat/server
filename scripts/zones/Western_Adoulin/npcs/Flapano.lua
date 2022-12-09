@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 2, true))
         if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
-            npcUtil.giveKeyItem(xi.ki.TARUTARU_SAUCE_RECEIPT)
+            npcUtil.giveKeyItem(player, xi.ki.TARUTARU_SAUCE_RECEIPT)
         end
 
     -- EXOTIC DELICACIES

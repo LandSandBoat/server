@@ -26,82 +26,241 @@ local csReq = -- add checks to this table
 {
     [xi.zone.LA_THEINE_PLATEAU] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)) end,
-        [2] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)) end,
-        [3] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)) end,
-        [4] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)) end,
-        [5] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)) end,
-        [6] = function(player) return (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)) end,
-        [7] = function(player) return (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)) end,
-        [8] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) end,
-        [9] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) end,
-        [10] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)) end,
-        [11] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)) end,
-        [12] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)) end,
-        [13] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_OFFICER_AND_A_PIRATE)) end,
-        [14] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.TENUOUS_EXISTENCE)) end,
-        [15] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [16] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [17] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [18] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [19] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [20] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [21] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [22] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [23] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [24] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [25] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
-        [26] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
+        end,
+
+        [2] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
+        end,
+
+        [3] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+        end,
+
+        [4] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)
+        end,
+
+        [5] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)
+        end,
+
+        [6] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
+        end,
+
+        [7] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
+        end,
+
+        [8] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [9] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [10] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+        end,
+
+        [11] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
+        end,
+
+        [12] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
+        end,
+
+        [13] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_OFFICER_AND_A_PIRATE)
+        end,
+
+        [14] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.TENUOUS_EXISTENCE)
+        end,
+
+        -- Not Implemented Below (ROV)
+        [15] = function(player)
+            return false
+        end,
+
+        [16] = function(player)
+            return false
+        end,
+
+        [17] = function(player)
+            return false
+        end,
+
+        [18] = function(player)
+            return false
+        end,
+
+        [19] = function(player)
+            return false
+        end,
+
+        [20] = function(player)
+            return false
+        end,
+
+        [21] = function(player)
+            return false
+        end,
+
+        [22] = function(player)
+            return false
+        end,
+
+        [23] = function(player)
+            return false
+        end,
+
+        [24] = function(player)
+            return false
+        end,
+
+        [25] = function(player)
+            return false
+        end,
+
+        [26] = function(player)
+            return false
+        end,
     },
+
     [xi.zone.NORTH_GUSTABERG] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)) end,
-        [2] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_GUSTABERG_TOUR)) end,
-        [3] = function(player) return (player:hasItem(18306) or player:hasItem(18307) or player:hasItem(18644) or
-        player:hasItem(18658) or player:hasItem(18672) or player:hasItem(19753) or player:hasItem(19846) or
-        player:hasItem(20880) or player:hasItem(20881) or player:hasItem(21808)) end, -- RELIC: Apocalypse
-        [4] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE)) end,
-        [5] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE)) end,
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
+        end,
+
+        [2] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_GUSTABERG_TOUR)
+        end,
+
+        [3] = function(player)
+            -- RELIC: Apocalypse
+            -- TODO: Table items and iterate over table for this check
+            return player:hasItem(18306) or
+                player:hasItem(18307) or
+                player:hasItem(18644) or
+                player:hasItem(18658) or
+                player:hasItem(18672) or
+                player:hasItem(19753) or
+                player:hasItem(19846) or
+                player:hasItem(20880) or
+                player:hasItem(20881) or
+                player:hasItem(21808)
+        end,
+
+        [4] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE)
+        end,
+
+        [5] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.AN_ULCEROUS_URAGNITE)
+        end,
     },
+
     [xi.zone.SOUTH_GUSTABERG] =
     {
-        [1] = function(player) return (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_TRANSIENT_DREAM)) end,
-        [2] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
-        [3] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
+        [1] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_TRANSIENT_DREAM)
+        end,
+
+        [2] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
+        end,
+
+        [3] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
+        end,
     },
+
     [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)) end,
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+        end,
     },
+
     [xi.zone.ROMAEVE] =
     {
-        [1] = function(player) return (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN)) end,
-        [2] = function(player) return (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)) end,
-        [3] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.ZILART, xi.quest.id.outlands.DIVINE_MIGHT)) end,
-        [4] = function(player) return (player:hasCompletedMission(xi.mission.log_id.ASA, xi.mission.id.asa.FOUNTAIN_OF_TROUBLE)) end,
+        [1] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN)
+        end,
+
+        [2] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
+        end,
+
+        [3] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.ZILART, xi.quest.id.outlands.DIVINE_MIGHT)
+        end,
+
+        [4] = function(player)
+            return player:hasCompletedMission(xi.mission.log_id.ASA, xi.mission.id.asa.FOUNTAIN_OF_TROUBLE)
+        end,
     },
+
     [xi.zone.CASTLE_ZVAHL_KEEP] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)) end,
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
+        end,
     },
+
     [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)) end,
-        [2] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)) end,
-        [3] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)) end,
-        [4] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)) end,
-        [5] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)) end,
-        [6] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)) end,
-        [7] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)) end,
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
+        end,
+
+        [2] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
+        end,
+
+        [3] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+        end,
+
+        [4] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+        end,
+
+        [5] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
+        end,
+
+        [6] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
+        end,
+
+        [7] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
+        end,
     },
+
     [xi.zone.MAZE_OF_SHAKHRAMI] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)) end,
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
+        end,
     },
+
     [xi.zone.GARLAIGE_CITADEL] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)) end,
-        [2] = function(player) return (player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)) end,
+        [1] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
+        end,
+
+        [2] = function(player)
+            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
+        end,
     },
 }
 
@@ -200,6 +359,7 @@ function xi.goblinfootprint.rewatch(player, trigger)
             end
         end
     end
+
     if options > 1 then
         local arg = utils.MAX_UINT32 - 1
         player:startEvent(gobCS[zone], bit.bnot(options), arg, arg, arg)

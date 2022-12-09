@@ -35,6 +35,7 @@ function onTrigger(player, id)
         modId = xi.mobMod[id]
         modName = id
     end
+
     if not modName or not modId then
         error(player, "Invalid modMobID.")
         return

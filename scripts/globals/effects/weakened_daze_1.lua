@@ -6,14 +6,18 @@ require("scripts/globals/status")
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.MEVA, -10)
+    local effectPower = effect:getPower()
+
+    target:addMod(xi.mod.MEVA, effectPower * -3)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MEVA, -10)
+    local effectPower = effect:getPower()
+
+    target:delMod(xi.mod.MEVA, effectPower * -3)
 end
 
 return effectObject

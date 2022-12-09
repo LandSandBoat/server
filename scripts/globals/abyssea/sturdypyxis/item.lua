@@ -299,6 +299,7 @@ local function GetLootTable(player, npc)
     for i = 1, maxItem do
         table.insert(loot, npc:getLocalVar("ITEM" ..i))
     end
+
     return loot
 end
 

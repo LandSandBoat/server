@@ -63,6 +63,7 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
         if player:hasStatusEffect(xi.effect.REGEN) then
             player:delStatusEffect(xi.effect.REGEN)
         end
+
         player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
     end
 

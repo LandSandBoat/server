@@ -26,26 +26,32 @@ local trustMemory = function(player)
     if player:getNation() == xi.nation.WINDURST then
         memories = memories + 2
     end
+
     -- 4 - ROCK_RACKETEER
     if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) then
         memories = memories + 4
     end
+
     -- 8 - HITTING_THE_MARQUISATE
     if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE) then
         memories = memories + 8
     end
+
     -- 16 - CRYING_OVER_ONIONS
     if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) then
         memories = memories + 16
     end
+
     -- 32 - hasItem(286) Nanaa Mihgo statue
     if player:hasItem(xi.items.NANAA_MIHGO_STATUE) then
         memories = memories + 32
     end
+
     -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
     if player:hasCompletedMission(xi.mission.log_id.AMK, xi.mission.id.amk.ROAR_A_CAT_BURGLAR_BARES_HER_FANGS) then
         memories = memories + 64
     end
+
     return memories
 end
 

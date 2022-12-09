@@ -46,5 +46,6 @@ function Mission:complete(player)
 
         self:cleanup(player)
     end
+
     return didComplete
 end

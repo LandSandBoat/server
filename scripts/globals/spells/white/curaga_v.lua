@@ -35,6 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if final > diff then
         final = diff
     end
+
     target:addHP(final)
 
     target:wakeUp()
