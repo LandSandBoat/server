@@ -70,7 +70,7 @@ quest.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, region)
                     return quest:progressEvent(123)
