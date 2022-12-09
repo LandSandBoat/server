@@ -430,17 +430,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     if spellElement ~= xi.magic.ele.NONE then
-        if target:isMob() and target:isNM() then
-            local currentPower = 0
-            local effect = xi.magic.eemStatus[spellElement]
-
-            if target:hasStatusEffect(effect) then
-                currentPower = target:getStatusEffect(effect):getPower()
-                target:delStatusEffectSilent(effect)
-            end
-
-            target:addStatusEffectEx(effect, xi.effect.NONE, currentPower + 1, 0, 10, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE, true)
-        end
 
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
@@ -621,12 +610,12 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -- STEP 3: Get Magic Hit Rate
     -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
     -----------------------------------
-    local magicHitRate = xi.magic.calculateMagicHitRate(magicAcc, magiceva, target, element, skillchainCount)
+    local magicHitRate = xi.magic.calculateMagicHitRate(magicAcc, magiceva, target, element, skillchainCount, skillType, caster)
 
     -----------------------------------
     -- STEP 4: Get Resist Tier
     -----------------------------------
-    local resistVal = xi.magic.getMagicResist(magicHitRate, target, element, 0, skillchainCount, nil, caster)
+    local resistVal = xi.magic.getMagicResist(magicHitRate, target, element, 0, skillchainCount, nil, caster, true)
 
     return resistVal
 end

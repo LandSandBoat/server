@@ -213,7 +213,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
     return magicAccBonus
 end
 
-xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, skillchainCount)
+xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, skillchainCount, skill, caster)
     local p = 0
     local eemTier = 0
 
@@ -221,7 +221,9 @@ xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, s
         eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
     end
 
-    local magicAccDiff = magicacc - (magiceva * (1 + eemTier * 0.075))
+    local resBuild = utils.ternary(target:isNM() and caster and skill == xi.skill.ELEMENTAL_MAGIC, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
+
+    local magicAccDiff = magicacc - (magiceva * (1 + utils.clamp(eemTier + resBuild, -3, 11) * 0.075))
 
     if magicAccDiff < 0 then
         p = utils.clamp(((50 + math.floor(magicAccDiff / 2))), 5, 95)
@@ -608,7 +610,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
 
     local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount)
 
-    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster)
+    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster, false)
 end
 
 -- Applies resistance for additional effects
@@ -630,7 +632,7 @@ xi.magic.applyResistanceAddEffect = function(player, target, element, effect, bo
     local _, skillchainCount = xi.magic.FormMagicBurst(element, target)
 
     local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus, 0, skillchainCount)
-    local resist = xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, player)
+    local resist = xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, player, false)
 
     if resist < 0.5 then
         resist = 0
@@ -647,7 +649,7 @@ xi.magic.applySkillchainResistance = function(player, target, element)
     end
 
     local p = xi.magic.getMagicHitRate(player, target, nil, element, 0, 0, 0, 0)
-    local resist = xi.magic.getMagicResist(p, target, element, 0, 0, nil, player)
+    local resist = xi.magic.getMagicResist(p, target, element, 0, 0, nil, player, true)
 
     return resist
 end
@@ -682,7 +684,7 @@ xi.magic.applyAbilityResistance = function(player, target, params)
     end
 
     local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus, skillchainCount)
-    local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount, params.effect, player)
+    local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount, params.effect, player, utils.ternary(params.damageSpell, true, false))
 
     if not params.ignoreStateLock then
         if resist < 0.5 then
@@ -811,7 +813,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     end
 
     if element ~= xi.magic.ele.NONE then
-        resMod = utils.clamp(target:getMod(xi.magic.resistMod[element]) - 50, 0, 999)
+        resMod = target:getMod(xi.magic.resistMod[element])
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
@@ -837,18 +839,20 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    return xi.magic.calculateMagicHitRate(magicacc, magiceva, target, element, skillchainCount)
+    return xi.magic.calculateMagicHitRate(magicacc, magiceva, target, element, skillchainCount, skillType, caster)
 end
 
 -- Returns resistance value from given magic hit rate (p)
-xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, skillchainCount, effect, caster)
+xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, skillchainCount, effect, caster, isDamageSpell)
     local eemVal = 1
     local resMod = 0
     local eemTier = 0
+    local resistTier = utils.ternary(target:isNM(), xi.magic.getBuildResistance(target, xi.magic.resistMod[element]), 0)
+    local damageSpell = utils.ternary(isDamageSpell and isDamageSpell == true, true, false)
 
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
-        eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
-        eemVal  = xi.magic.eem[eemTier]
+        eemTier = utils.clamp(xi.magic.calculateEEMTier(target, element, skillchainCount) + resistTier, -3, 11)
+        eemVal  = xi.magic.calculateEEMVal(eemTier)
     end
 
     local eighthTrigger = false
@@ -864,12 +868,17 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
         resMod >= 0,
     }
 
-    if resTriggerPoints[1] and eemTier >= -2 then
+    if resTriggerPoints[1] then
         eighthTrigger = true
     end
 
-    if resTriggerPoints[2] and eemTier >= -2 then
+    if resTriggerPoints[2] then
         quarterTrigger = true
+    end
+
+    if eemTier == -3 and damageSpell then
+        eighthTrigger  = false
+        quarterTrigger = false
     end
 
     local baseRes = 1
@@ -901,7 +910,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
         resist = 1.0
     end
 
-    if eemVal <= 0.50 then
+    if eemVal <= 0.50 and damageSpell then
         resist = resist / 2
     end
 
@@ -911,32 +920,37 @@ end
 xi.magic.tryBuildResistance = function(target, resistance, isEnfeeb, caster)
     local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
     local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
-    local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
+    local resBuilt = target:getLocalVar(string.format("[RES]ResTier_%s", resistance))
     local coolTime = 20
-    local buildPercent = 40
 
     if baseRes == 0 then
         target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
     end
 
-    if not isEnfeeb then
-        buildPercent = buildPercent / 2 -- Reduce Resistence Build to 2%/1% To Help With Timed Casts
+    if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
+        target:setLocalVar(string.format("[RES]ResTier_%s", resistance), 0) -- Reset BuiltPercent Var
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
+        return 0
+    else
+        target:setLocalVar(string.format("[RES]ResTier_%s", resistance), resBuilt + 1)
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
+        resBuilt = target:getLocalVar(string.format("[RES]ResTier_%s", resistance))
+        return math.max(resBuilt - 1, 0)
     end
+end
+
+xi.magic.getBuildResistance = function(target, resistance)
+    local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
+    local coolTime = 20
 
     if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
-        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), 0) -- Reset BuiltPercent Var
-        target:setMod(resistance, baseRes) -- Reset Mod To Base
+        target:setLocalVar(string.format("[RES]ResTier_%s", resistance), 0) -- Reset BuiltPercent Var
         target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
+        return 0
     else
-        if builtPercent + buildPercent + baseRes > 1000 then
-            buildPercent = 1000 - (builtPercent + baseRes)
-        end
-
-        target:setMod(resistance, baseRes + builtPercent + buildPercent)
-        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), builtPercent + buildPercent)
-        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
+        local resBuilt = target:getLocalVar(string.format("[RES]ResTier_%s", resistance))
+        return math.max(resBuilt - 1, 0)
     end
-
 end
 
 -- Returns the amount of resistance the
@@ -1825,7 +1839,7 @@ xi.magic.calculateEEMTier = function(target, element, skillchainCount)
         local eemVal = target:getMod(xi.magic.eleEvaMult[element]) / 100
         for _, eemTable in pairs(xi.magic.eemTiers) do -- Finds the highest tier for the resist.
             if eemVal >= eemTable.eem then
-                eemTier = utils.clamp(eemTable.tier, 1, 11)
+                eemTier = utils.clamp(eemTable.tier, -3, 11)
                 break
             end
         end
@@ -1835,9 +1849,21 @@ xi.magic.calculateEEMTier = function(target, element, skillchainCount)
         end
 
         if target:hasStatusEffect(xi.magic.eemStatus[element]) then
-            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), -3, 15)
+            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), -3, 11)
         end
     end
 
     return eemTier
+end
+
+xi.magic.calculateEEMVal = function(tier)
+    local eemVal = 0
+    for _, eemTable in pairs(xi.magic.eemTiers) do
+        if tier == eemTable.tier then
+            eemVal = eemTable.eem
+            break
+        end
+    end
+
+    return eemVal
 end
