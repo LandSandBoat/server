@@ -15,7 +15,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local param = skill:getParam()
     if param == 0 then
-        param = 50
+        param = 35
     end
 
     if mob:getHPP() <= param then
@@ -31,7 +31,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
 
     local hpMod = skill:getMobHPP() / 100
-    dmgmod = dmgmod + hpMod * 14 + math.random(2, 6)
+    dmgmod = dmgmod + hpMod * 5 + math.random(1, 3)
 
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         dmgmod = dmgmod * 5
