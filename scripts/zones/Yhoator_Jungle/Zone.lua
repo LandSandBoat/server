@@ -52,7 +52,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-function updateRainHarvesting(status)
+local function updateRainHarvesting(status)
     for point = 1, #ID.npc.HARVESTING do
         GetNPCByID(ID.npc.HARVESTING[point]):setStatus(status)
     end
