@@ -970,7 +970,7 @@ REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `
     (5230, 0, 'love_chocolate', 'love_chocolate', 1, 1580, 57, 0, 582),
     (5231, 0, 'truelove_chocolate', 'truelove_choco.', 1, 1580, 57, 0, 955),
     (5306, 0, 'bottle_of_hallowed_water', 'hallowed_water', 12, 1540, 33, 0, 424),
-    (5312, 0, 'toolbag_(hiraishin)', 'toolbag_(hira)', 12, 1540, 49, 0, 920),
+    (5312, 0, 'toolbag_hiraishin', 'toolbag_(hira)', 12, 1540, 49, 0, 920),
     (5335, 0, 'acid_bolt_quiver', 'ac._bolt_quiver', 12, 1540, 15, 0, 615),
     (5340, 0, 'silver_bullet_pouch', 'silv._bul._pouch', 12, 1540, 15, 0, 250),
     (5359, 0, 'bronze_bullet_pouch', 'brz._bull._pouch', 12, 1540, 15, 0, 15),
