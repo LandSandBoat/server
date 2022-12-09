@@ -2147,6 +2147,13 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
                 actionTarget.reaction = REACTION::HIT;
 
+                if (this->GetLocalVar("TREDECIM_COUNTER") == 13 && weaponSlot == SLOT_MAIN)
+                {
+                    // Ensure critical is only set to main weapon slot
+                    attack.SetCritical(true, weaponSlot, attack.IsGuarded());
+                    this->SetLocalVar("TREDECIM_COUNTER", -1);
+                }
+
                 // Critical hit.
                 if (attack.IsCritical())
                 {
