@@ -14,9 +14,14 @@ require("scripts/globals/utils")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    local pet = player:getPetID()
+    local pet = player:getPet()
+    local petID = 0
 
-    if pet >= 0 and pet <= 7 then -- spirits
+    if pet then
+        petID = pet:getPetID()
+    end
+
+    if petID >= xi.pet.id.FIRE_SPIRIT and petID <= xi.pet.id.DARK_SPIRIT then -- spirits
         return 0, 0
     end
 
@@ -24,8 +29,14 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local spiritEle = player:getPetID() + 1 -- get the spirit's ID, it is already aligned in proper element order
+    local spirit    = player:getPet()
+    local spiritEle = 0
+
+    -- get the spirit's ID, it is already aligned in proper element order
     -- element order: fire, ice, wind, earth, thunder, water, light, dark
+    if spirit then
+        spiritEle = spirit:getPetID() + 1
+    end
 
     local pEquipMods = player:getMod(xi.mod.ENHANCES_ELEMENTAL_SIPHON)
     local basePower  = player:getSkillLevel(xi.skill.SUMMONING_MAGIC) + pEquipMods - 50
@@ -57,7 +68,6 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     local power  = math.floor(basePower * weatherDayBonus)
-    local spirit = player:getPet()
     power        = utils.clamp(power, 0, spirit:getMP()) -- cap MP drained at spirit's MP
     power        = utils.clamp(power, 0, player:getMaxMP() - player:getMP()) -- cap MP drained at the max MP - current MP
 
