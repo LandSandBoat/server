@@ -661,6 +661,10 @@ namespace battleutils
         uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
         Mod     resistarray[8]         = { Mod::FIRE_MEVA, Mod::ICE_MEVA, Mod::WIND_MEVA, Mod::EARTH_MEVA,
                                            Mod::THUNDER_MEVA, Mod::WATER_MEVA, Mod::LIGHT_MEVA, Mod::DARK_MEVA };
+        // TODO: Implement
+        // Mod     resistRankArray[8]     = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK,
+        //                                    Mod::THUNDER_RES_RANK, Mod::WATER_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
+
         bool    obiBonus               = false;
 
         double half      = (double)(PDefender->getMod(resistarray[element - 1])) / 100;
