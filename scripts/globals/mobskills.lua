@@ -346,14 +346,14 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         damage = damage * (((skill:getTP() / 10) * tpvalue) / 100)
     end
 
-    -- resistence is added last
+    -- resistance is added last
     local finaldmg = damage * mab * dmgmod
 
-    -- get resistence
+    -- get resistance
     local avatarAccBonus = 0
     if mob:isPet() and mob:getMaster() ~= nil then
         local master = mob:getMaster()
-        if master:getPetID() >= 0 and master:getPetID() <= 20 then -- check to ensure pet is avatar
+        if mob:isAvatar() then
             avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
