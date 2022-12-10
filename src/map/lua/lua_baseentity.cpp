@@ -15533,7 +15533,7 @@ void CLuaBaseEntity::setWallhackAllowed(bool allowed)
 
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr || m_PBaseEntity->objtype == TYPE_PC);
 
-    m_PBaseEntity->m_ignoreWallhack = !allowed ? true : false;
+    m_PBaseEntity->m_ignoreWallhack = !allowed;
 }
 
 //==========================================================//
