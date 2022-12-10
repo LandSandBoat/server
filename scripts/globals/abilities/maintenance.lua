@@ -49,12 +49,10 @@ local function removeStatus(target)
 end
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if not player:getPet() then
+    local pet = player:getPet()
+    if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif
-        not player:getPetID() or
-        not (player:getPetID() >= 69 and player:getPetID() <= 72)
-    then
+    elseif not pet:isAutomaton() then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)
