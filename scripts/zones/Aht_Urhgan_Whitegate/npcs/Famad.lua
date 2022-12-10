@@ -27,8 +27,6 @@ local items =
     [9]  = { itemid = xi.items.PAHLUWAN_DASTANAS,            price = 20000 },
     [10] = { itemid = xi.items.YIGIT_CRACKOWS,               price = 20000 },
     [11] = { itemid = xi.items.AMIR_KORAZIN,                 price = 20000 },
-    [12] = { itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price =  3000 },
-    [13] = { itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price =  3000 },
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -38,18 +36,9 @@ entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
     local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.LEBROS_CAVERN)
-    local cipher = 0
-    local active = xi.extravaganza.campaignActive()
-
-    if
-        active == xi.extravaganza.campaign.SPRING_FALL or
-        active == xi.extravaganza.campaign.BOTH
-    then
-        cipher = 1
-    end
 
     if rank > 0 then
-        player:startEvent(275, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault(), cipher)
+        player:startEvent(275, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else
         player:startEvent(281)
     end

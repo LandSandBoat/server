@@ -57,15 +57,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        if
-                            not player:hasSpell(940) and
-                            not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO) and
-                            xi.settings.main.ENABLE_ROV == 1
-                        then
-                            return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA, 0, 0, 1)
-                        else
-                            return mission:progressEvent(238)
-                        end
+                        return mission:progressEvent(238)
                     elseif missionStatus == 5 then
                         return mission:event(240)
                     elseif missionStatus == 6 then
@@ -101,14 +93,6 @@ mission.sections =
                 [238] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 5)
                     npcUtil.giveKeyItem(player, xi.ki.SHIELD_OFFERING)
-
-                    if
-                        not player:hasSpell(940) and
-                        not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO) and
-                        xi.settings.main.ENABLE_ROV == 1
-                    then
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
-                    end
                 end,
             },
         },
