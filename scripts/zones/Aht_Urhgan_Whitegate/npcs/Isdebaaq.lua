@@ -36,7 +36,6 @@ entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
     local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.MAMOOL_JA_TRAINING_GROUNDS)
-    local active = xi.extravaganza.campaignActive()
 
     if rank > 0 then
         player:startEvent(274, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
