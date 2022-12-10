@@ -2,7 +2,7 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
-require("scripts/globals/damage/magic_accuracy")
+require("scripts/globals/damage/magic_hit_rate")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/msg")
@@ -29,7 +29,6 @@ xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL, xi.weather.SNOW,       xi
 xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE, xi.weather.BLIZZARDS,  xi.weather.GALES,     xi.weather.SAND_STORM, xi.weather.THUNDERSTORMS, xi.weather.SQUALL,        xi.weather.STELLAR_GLARE, xi.weather.DARKNESS      }
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,      xi.weather.HOT_SPELL,  xi.weather.SNOW,      xi.weather.WIND,       xi.weather.DUST_STORM,    xi.weather.THUNDER,       xi.weather.GLOOM,         xi.weather.AURORAS       }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,    xi.weather.HEAT_WAVE,  xi.weather.BLIZZARDS, xi.weather.GALES,      xi.weather.SAND_STORM,    xi.weather.THUNDERSTORMS, xi.weather.DARKNESS,      xi.weather.STELLAR_GLARE }
-xi.magic.resistMod           = { xi.mod.FIRE_MEVA,     xi.mod.ICE_MEVA,       xi.mod.WIND_MEVA,     xi.mod.EARTH_MEVA,     xi.mod.THUNDER_MEVA,      xi.mod.WATER_MEVA,        xi.mod.LIGHT_MEVA,        xi.mod.DARK_MEVA         }
 xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,      xi.mod.ICE_SDT,        xi.mod.WIND_SDT,      xi.mod.EARTH_SDT,      xi.mod.THUNDER_SDT,       xi.mod.WATER_SDT,         xi.mod.LIGHT_SDT,         xi.mod.DARK_SDT          }
 xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,   xi.mod.ICE_ABSORB,     xi.mod.WIND_ABSORB,   xi.mod.EARTH_ABSORB,   xi.mod.LTNG_ABSORB,       xi.mod.WATER_ABSORB,      xi.mod.LIGHT_ABSORB,      xi.mod.DARK_ABSORB       }
 xi.magic.barSpell            = { xi.effect.BARFIRE,    xi.effect.BARBLIZZARD, xi.effect.BARAERO,    xi.effect.BARSTONE,    xi.effect.BARTHUNDER,     xi.effect.BARWATER        }
@@ -196,11 +195,12 @@ local pTable =
 -----------------------------------
 -- Basic Functions
 -----------------------------------
-xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, skillType, statDiff)
+xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, skillType, statUsed)
     local spellDamage          = 0 -- The variable we want to calculate
     local baseSpellDamage      = 0 -- (V) In Wiki.
     local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
     local statDiffBonus        = 0 -- statDiff x appropriate multipliers.
+    local statDiff             = caster:getStat(statUsed) - target:getStat(statUsed)
 
     -- Spell Damage = baseSpellDamage + statDiffBonus + baseSpellDamageBonus
 
@@ -380,13 +380,8 @@ end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
-xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff)
+xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statUsed)
     local resist        = 1 -- The variable we want to calculate
-
-    local magicAcc      = 0
-    local magicEva      = 0
-    local magicHitRate  = 0
-    local resMod        = 0 -- Some spells may possibly be non elemental.
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = FormMagicBurst(spellElement, target)
@@ -412,30 +407,18 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- STEP 1: Get Caster Magic Accuracy.
     -----------------------------------
-    magicAcc = xi.damage.magicAccuracy.calculateCasterMagicAccuracy(caster, target, spell, skillType, spellElement, statDiff)
+    local magicAcc = xi.damage.magicHitRate.calculateCasterMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
 
     -----------------------------------
     -- STEP 2: Get target magic evasion
-    -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     -----------------------------------
-    if spellElement ~= xi.magic.ele.NONE then
-        -- Mod set in database. Base 0 means not resistant nor weak.
-        resMod = target:getMod(xi.magic.resistMod[spellElement])
-    end
-
-    magicEva = target:getMod(xi.mod.MEVA) + resMod
+    local magicEva = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement)
 
     -----------------------------------
     -- STEP 3: Get Magic Hit Rate
     -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
     -----------------------------------
-    local magicAccDiff = magicAcc - magicEva
-
-    if magicAccDiff < 0 then
-        magicHitRate = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)
-    else
-        magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
-    end
+    local magicHitRate = xi.damage.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 
     -----------------------------------
     -- STEP 4: Get Resist Tier
@@ -450,7 +433,8 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         end
     end
 
-    -- Apply extra roll for elemental resistance boons. Testimonial. This needs retail testing.
+    --[[
+    -- Apply forced tiers depending on resistance ranks. This thing below is wrong.
     if randomVar > 0.5 then
         if resMod > 0 then
             resistTier = resistTier + 1
@@ -458,6 +442,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
             resistTier = resistTier - 1
         end
     end
+    ]]
 
     resistTier = utils.clamp(resistTier, 0, 3)
     resist     = 1 / (2 ^ resistTier)
@@ -814,16 +799,16 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local spellId         = spell:getID()
     local skillType       = spell:getSkillType()
     local spellElement    = spell:getElement()
-    local statDiff        = caster:getStat(pTable[spellId][stat]) - target:getStat(pTable[spellId][stat])
+    local statUsed        = pTable[spellId][stat]
     local spellDamageType = xi.damageType.ELEMENTAL + spellElement
 
     -- Variables/steps to calculate finalDamage.
-    local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff)
+    local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statUsed)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(caster, target, spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
     local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
-    local resist                      = xi.spells.damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff)
+    local resist                      = xi.spells.damage.calculateResist(caster, target, spell, skillType, spellElement, statUsed)
     local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target,  spell, spellElement)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)

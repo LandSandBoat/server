@@ -1,17 +1,29 @@
 -----------------------------------
 xi = xi or {}
 xi.damage = xi.damage or {}
-xi.damage.magicAccuracy = xi.damage.magicAccuracy or {}
+xi.damage.magicHitRate = xi.damage.magicHitRate or {}
 -----------------------------------
--- Modifier Tables per element.
-local spellAcc          = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,              xi.mod.LIGHTACC,           xi.mod.DARKACC           }
-local strongAffinityAcc = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,    xi.mod.LIGHT_AFFINITY_ACC, xi.mod.DARK_AFFINITY_ACC }
-local rdmMerit          = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY }
 
-xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, spell, skillType, spellElement, statDiff)
+-- Modifier table per element.
+local elementTable =
+{
+    [xi.magic.element.FIRE   ] = { xi.mod.FIREACC,    xi.mod.FIRE_AFFINITY_ACC,    xi.merit.FIRE_MAGIC_ACCURACY,      xi.mod.FIRE_MEVA    },
+    [xi.magic.element.ICE    ] = { xi.mod.ICEACC,     xi.mod.ICE_AFFINITY_ACC,     xi.merit.ICE_MAGIC_ACCURACY,       xi.mod.ICE_MEVA     },
+    [xi.magic.element.WIND   ] = { xi.mod.WINDACC,    xi.mod.WIND_AFFINITY_ACC,    xi.merit.WIND_MAGIC_ACCURACY,      xi.mod.WIND_MEVA    },
+    [xi.magic.element.EARTH  ] = { xi.mod.EARTHACC,   xi.mod.EARTH_AFFINITY_ACC,   xi.merit.EARTH_MAGIC_ACCURACY,     xi.mod.EARTH_MEVA   },
+    [xi.magic.element.THUNDER] = { xi.mod.THUNDERACC, xi.mod.THUNDER_AFFINITY_ACC, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.mod.THUNDER_MEVA },
+    [xi.magic.element.WATER  ] = { xi.mod.WATERACC,   xi.mod.WATER_AFFINITY_ACC,   xi.merit.WATER_MAGIC_ACCURACY,     xi.mod.WATER_MEVA   },
+    [xi.magic.element.LIGHT  ] = { xi.mod.LIGHTACC,   xi.mod.LIGHT_AFFINITY_ACC,   0,                                 xi.mod.LIGHT_MEVA   },
+    [xi.magic.element.DARK   ] = { xi.mod.DARKACC,    xi.mod.DARK_AFFINITY_ACC,    0,                                 xi.mod.DARK_MEVA    },
+}
+
+-- Caster Magic Accuracy
+xi.damage.magicHitRate.calculateCasterMagicAccuracy = function(caster, target, spell, skillType, spellElement, statUsed)
     local casterJob     = caster:getMainJob()
     local casterWeather = caster:getWeather()
     local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
+    local statDiff      = caster:getStat(statUsed) - target:getStat(statUsed)
+
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
 
     -- Get the base magicAcc (just skill + skill mod (79 + skillID = ModID))
@@ -22,17 +34,22 @@ xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, 
         magicAcc = magicAcc + utils.getSkillLvl(1, caster:getMainLvl())
     end
 
+    -- Add acc for elemental affinity accuracy and element specific accuracy
     if spellElement ~= xi.magic.ele.NONE then
-        -- Add acc for elemental affinity accuracy and element specific accuracy
-        local affinityBonus = caster:getMod(strongAffinityAcc[spellElement]) * 10
-        local elementBonus  = caster:getMod(spellAcc[spellElement])
-        magicAcc            = magicAcc + affinityBonus + elementBonus
+        local elementBonus  = caster:getMod(elementTable[spellElement][1])
+        local affinityBonus = caster:getMod(elementTable[spellElement][2]) * 10
+
+        magicAcc            = magicAcc + elementBonus + affinityBonus
     end
 
     -- Get dStat Magic Accuracy. NOTE: Ninjutsu does not get this bonus/penalty.
     if skillType ~= xi.skill.NINJUTSU then
-        if statDiff > 10 then
-            magicAcc = magicAcc + 10 + (statDiff - 10) / 2
+        if statDiff >= 70 then
+            magicAcc = magicAcc + 30
+        elseif statDiff > 30 then
+            magicAcc = magicAcc + 20 + math.floor((statDiff - 30) / 4)
+        elseif statDiff > 10 then
+            magicAcc = magicAcc + 10 + math.floor((statDiff - 10) / 2)
         else
             magicAcc = magicAcc + statDiff
         end
@@ -59,8 +76,8 @@ xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, 
 
     --Add acc for klimaform
     if
-        spellElement > 0 and
         caster:hasStatusEffect(xi.effect.KLIMAFORM) and
+        spellElement > 0 and
         (casterWeather == xi.magic.singleWeatherStrong[spellElement] or casterWeather == xi.magic.doubleWeatherStrong[spellElement])
     then
         magicAcc = magicAcc + 15
@@ -68,20 +85,29 @@ xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, 
 
     -- Apply Divine Emblem to Banish and Holy families
     if
+        caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and
         casterJob == xi.job.PLD and
-        skillType == xi.skill.DIVINE_MAGIC and
-        caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM)
+        skillType == xi.skill.DIVINE_MAGIC
     then
         magicAcc = magicAcc + 100 -- TODO: Confirm this value in retail
     end
 
+    -- Elemental seal
+    if
+        caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) and
+        not skillType == xi.skill.DARK_MAGIC and
+        not skillType == xi.skill.DIVINE_MAGIC and
+        spellElement > 0
+    then
+        magicAcc = magicAcc + 256
+    end
+
     -- Dark Seal
     if
-        casterJob == xi.job.DRK and
-        skillType == xi.skill.DARK_MAGIC and
-        caster:hasStatusEffect(xi.effect.DARK_SEAL)
+        caster:hasStatusEffect(xi.effect.DARK_SEAL) and
+        skillType == xi.skill.DARK_MAGIC
     then
-        magicAcc = magicAcc + 256 -- Need citation. 256 seems OP
+        magicAcc = magicAcc + 256
     end
 
     -----------------------------------
@@ -143,7 +169,7 @@ xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, 
                 spellElement >= xi.magic.element.FIRE and
                 spellElement <= xi.magic.element.WATER
             then
-                magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
+                magicAcc = magicAcc + caster:getMerit(elementTable[spellElement][3])
             end
 
             -- Category 2
@@ -169,11 +195,40 @@ xi.damage.magicAccuracy.calculateCasterMagicAccuracy = function(caster, target, 
     local maccFood = magicAcc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicAcc = magicAcc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    -----------------------------------
-    -- Apply level correction and return final magic accuracy.
-    -----------------------------------
-    local levelDiff = utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
-    magicAcc        = magicAcc + levelDiff * 3
-
     return magicAcc
+end
+
+-- Target Magic Evasion
+xi.damage.magicHitRate.calculateTargetMagicEvasion = function(caster, target, spellElement)
+    local magicEva  = target:getMod(xi.mod.MEVA)
+    local levelDiff = target:getMainLvl() - caster:getMainLvl()
+
+    -- Elemental magic evasion.
+    if spellElement ~= xi.magic.ele.NONE then
+        -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
+        -- local resistRank = target:getMod(elementTable[spellElement][5]) -- TODO: Implement ranks.
+        local resMod = target:getMod(elementTable[spellElement][4])
+
+        -- magicEva = magicEva * (1 + (resistRank * .075))
+        magicEva = magicEva + resMod
+    end
+
+    -- Level correction. Target gets a bonus when higher level. Never a penalty.
+    if levelDiff > 0 then
+        magicEva = magicEva + levelDiff * 4
+    end
+
+    return magicEva
+end
+
+xi.damage.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
+    local magicAccDiff = magicAcc - magicEva
+
+    if magicAccDiff < 0 then
+        magicAccDiff = math.floor(magicAccDiff / 2)
+    end
+
+    local magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
+
+    return magicHitRate
 end
