@@ -32,10 +32,13 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
+    if csid == 1000 then
+        player:setPos(-210.2, 40.2, -447.3, 243, xi.zone.KAMIHR_DRIFTS)
+    end
 end
 
 zoneObject.onInstanceLoadFailed = function()
-    return 72
+    return xi.zone.KAMIHR_DRIFTS
 end
 
 return zoneObject
