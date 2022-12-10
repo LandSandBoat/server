@@ -32,9 +32,37 @@ xi.magic.singleWeatherWeak     = { xi.weather.RAIN,              xi.weather.HOT_
 xi.magic.doubleWeatherWeak     = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
 xi.magic.eemStatus             = { xi.effect.FIRE_EEM_MOD,       xi.effect.ICE_EEM_MOD,       xi.effect.WIND_EEM_MOD,        xi.effect.EARTH_EEM_MOD,       xi.effect.THUNDER_EEM_MOD,         xi.effect.WATER_EEM_MOD,        xi.effect.LIGHT_EEM_MOD,    xi.effect.DARK_EEM_MOD    }
 
-xi.magic.eem                   = { 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40, 0.50, 0.60, 0.70, 0.85, 1.00, 1.15, 1.30, 1.50 }
-xi.magic.eemTiers              = { { eem = 1.50, tier = -3 }, { eem = 1.30, tier = -2 }, { eem = 1.15, tier = -1 }, { eem = 1.00, tier = 0  }, { eem = 0.85, tier = 1  }, { eem = 0.70, tier = 2  }, { eem = 0.60, tier = 3  }, { eem = 0.50, tier = 4  }, { eem = 0.40, tier = 5  }, { eem = 0.30, tier = 6  }, { eem = 0.25, tier = 7  }, { eem = 0.20, tier = 8  }, { eem = 0.15, tier = 9  }, { eem = 0.10, tier = 10 }, { eem = 0.05, tier = 11 } }
-xi.magic.effectEva             = { [xi.effect.SLEEP_I] = xi.mod.SLEEP_MEVA, [xi.effect.SLEEP_II] = xi.mod.SLEEP_MEVA, [xi.effect.POISON] = xi.mod.POISON_MEVA, [xi.effect.PARALYSIS] = xi.mod.PARALYZE_MEVA, [xi.effect.BLINDNESS] = xi.mod.BLIND_MEVA, [xi.effect.SILENCE] = xi.mod.SILENCE_MEVA, [xi.effect.PLAGUE] = xi.mod.VIRUS_MEVA, [xi.effect.PETRIFICATION] = xi.effect.PETRIFY_MEVA }
+xi.magic.eemTiers =
+{
+    { eem = 1.50, mult = 0.95,    tier = -3 },
+    { eem = 1.30, mult = 0.96019, tier = -2 },
+    { eem = 1.15, mult = 0.98,    tier = -1 },
+    { eem = 1.00, mult = 1,       tier = 0  },
+    { eem = 0.85, mult = 1.023,   tier = 1  },
+    { eem = 0.70, mult = 1.049,   tier = 2  },
+    { eem = 0.60, mult = 1.0905,  tier = 3  },
+    { eem = 0.50, mult = 1.126,   tier = 4  },
+    { eem = 0.40, mult = 1.2075,  tier = 5  },
+    { eem = 0.30, mult = 1.3475,  tier = 6  },
+    { eem = 0.25, mult = 1.70065, tier = 7  },
+    { eem = 0.20, mult = 2.141,   tier = 8  },
+    { eem = 0.15, mult = 2.65,    tier = 9  },
+    { eem = 0.10, mult = 2.96,    tier = 10 },
+    { eem = 0.05, mult = 3.52,    tier = 11 }
+}
+
+xi.magic.effectEva =
+{
+    [xi.effect.SLEEP_I] = xi.mod.SLEEP_MEVA,
+    [xi.effect.SLEEP_II] = xi.mod.SLEEP_MEVA,
+    [xi.effect.POISON] = xi.mod.POISON_MEVA,
+    [xi.effect.PARALYSIS] = xi.mod.PARALYZE_MEVA,
+    [xi.effect.BLINDNESS] = xi.mod.BLIND_MEVA,
+    [xi.effect.SILENCE] = xi.mod.SILENCE_MEVA,
+    [xi.effect.PLAGUE] = xi.mod.VIRUS_MEVA,
+    [xi.effect.PETRIFICATION] = xi.effect.PETRIFY_MEVA
+}
+
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
 --Calculates magic damage using the standard magic damage calc.
 --Does NOT handle resistance.
@@ -213,17 +241,19 @@ local function getSpellBonusAcc(caster, target, spell, params)
     return magicAccBonus
 end
 
-xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, skillchainCount, skill, caster)
+xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, skillchainCount, skill, caster, isDamageSpell)
     local p = 0
     local eemTier = 0
+    local resBuild = 0
+    local mevaMult = 1
 
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
         eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
+        resBuild = utils.ternary(target:isNM() and isDamageSpell, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
+        mevaMult = xi.magic.calculateMEVAMult(utils.clamp(eemTier + resBuild, -3, 11))
     end
 
-    local resBuild = utils.ternary(target:isNM() and caster and skill == xi.skill.ELEMENTAL_MAGIC, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
-
-    local magicAccDiff = magicacc - (magiceva * (1 + utils.clamp(eemTier + resBuild, -3, 11) * 0.075))
+    local magicAccDiff = magicacc - math.floor((magiceva * mevaMult) + 0.5) -- Rounds to the nearest integer. LuaJIT does not have a math.round so this is a workaround.
 
     if magicAccDiff < 0 then
         p = utils.clamp(((50 + math.floor(magicAccDiff / 2))), 5, 95)
@@ -608,7 +638,7 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         effectRes = utils.ternary(xi.magic.effectEva[effect], xi.magic.effectEva[effect], 0)
     end
 
-    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount)
+    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount, false)
 
     return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster, false)
 end
@@ -631,7 +661,7 @@ xi.magic.applyResistanceAddEffect = function(player, target, element, effect, bo
 
     local _, skillchainCount = xi.magic.FormMagicBurst(element, target)
 
-    local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus, 0, skillchainCount)
+    local p = xi.magic.getMagicHitRate(player, target, nil, element, effectRes, bonus, 0, skillchainCount, false)
     local resist = xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, player, false)
 
     if resist < 0.5 then
@@ -648,7 +678,7 @@ xi.magic.applySkillchainResistance = function(player, target, element)
         element = xi.magic.ele.NONE
     end
 
-    local p = xi.magic.getMagicHitRate(player, target, nil, element, 0, 0, 0, 0)
+    local p = xi.magic.getMagicHitRate(player, target, nil, element, 0, 0, 0, 0, true)
     local resist = xi.magic.getMagicResist(p, target, element, 0, 0, nil, player, true)
 
     return resist
@@ -683,7 +713,7 @@ xi.magic.applyAbilityResistance = function(player, target, params)
         effectRes = utils.ternary(xi.magic.effectEva[params.effect], xi.magic.effectEva[params.effect], 0)
     end
 
-    local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus, skillchainCount)
+    local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus, skillchainCount, utils.ternary(params.damageSpell))
     local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount, params.effect, player, utils.ternary(params.damageSpell, true, false))
 
     if not params.ignoreStateLock then
@@ -715,7 +745,7 @@ end
 -- TODO: Reduce complexity
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
-xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRes, bonusAcc, dStat, skillchainCount)
+xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRes, bonusAcc, dStat, skillchainCount, isDamageSpell)
     local magicacc = 0
     local magiceva = 0
     local resMod = 0
@@ -839,7 +869,7 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effectRe
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    return xi.magic.calculateMagicHitRate(magicacc, magiceva, target, element, skillchainCount, skillType, caster)
+    return xi.magic.calculateMagicHitRate(magicacc, magiceva, target, element, skillchainCount, skillType, caster, isDamageSpell)
 end
 
 -- Returns resistance value from given magic hit rate (p)
@@ -1861,6 +1891,18 @@ xi.magic.calculateEEMVal = function(tier)
     for _, eemTable in pairs(xi.magic.eemTiers) do
         if tier == eemTable.tier then
             eemVal = eemTable.eem
+            break
+        end
+    end
+
+    return eemVal
+end
+
+xi.magic.calculateMEVAMult = function(tier)
+    local eemVal = 0
+    for _, eemTable in pairs(xi.magic.eemTiers) do
+        if tier == eemTable.tier then
+            eemVal = eemTable.mult
             break
         end
     end
