@@ -459,12 +459,16 @@ xi.garrison.start = function(player, npc)
     zoneData.despawnedMobCount = 0
     zoneData.lastTick          = os.time()
 
-    -- Adds level cap / registers lockout for all players
-    -- We register lockout at the beginning and end, in case players DC
+    -- Register lockout for the player
+    -- Only the trading player is locked out per tally
+    xi.garrison.saveTallyLockout(player)
+    -- We register zone lockout at the beginning and end, in case of zone crashes
+    xi.garrison.saveZoneLockout(zone)
+
+    -- Adds level cap / registers lockout for the player / zone
     for _, member in pairs(player:getAlliance()) do
         if member:getZoneID() == player:getZoneID() then
             xi.garrison.addLevelCap(member, zoneData.levelCap)
-            xi.garrison.savePlayerLockout(member)
 
             table.insert(zoneData.players, member:getID())
         end
@@ -481,11 +485,14 @@ end
 -- Can be called externally from GM commands
 xi.garrison.stop = function(zone)
     local zoneData = xi.garrison.zoneData[zone:getID()]
+
+    -- Again, we save lockout, this time based off of garrison end time
+    xi.garrison.saveZoneLockout(zone)
+
     for _, entityId in pairs(zoneData.players or {}) do
         local entity = GetPlayerByID(entityId)
         if entity ~= nil then
             entity:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-            xi.garrison.savePlayerLockout(entity)
         end
     end
 
@@ -619,23 +626,31 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
     if #membersInZone > xi.settings.main.GARRISON_PARTY_LIMIT then
         -- This is a custom message. I don't believe retail has this limitation
         debugLogf("Alliance exceeds member limit: %d", xi.settings.main.GARRISON_PARTY_LIMIT)
-        player:PrintToPlayer(printf("Maximum garrison alliance size is %d", xi.settings.main.GARRISON_PARTY_LIMIT))
+        debugPrintToPlayers({ player }, "Maximum garrison alliance size is " .. xi.settings.main.GARRISON_PARTY_LIMIT)
         return false
     end
 
-    local doesNotMeetRank = function(_, v)
-        return v:getRank(v:getNation()) < xi.settings.main.GARRISON_RANK
-    end
-    if utils.any(membersInZone, doesNotMeetRank) then
+    -- Only trading player needs to be required rank
+    local playerMeetsRank = player:getRank(player:getNation()) >= xi.settings.main.GARRISON_RANK
+    if not playerMeetsRank then
         -- These young participants are quite spirited, but they lack valuable battle experience
         debugLogf("Leader does not meet required rank: %d", xi.settings.main.GARRISON_RANK)
         player:messageText(npc, ID.text.GARRISON_BASE + 4)
         return false
     end
 
-    if xi.garrison.isAnyPlayerOnEntryCooldown(membersInZone) then
+    -- Only check tally cooldown for trading player
+    if xi.garrison.isPlayerOnTallyLockout(player) then
         -- We commend you on your services in helping us avert the beastmen's attack. I do not see them attacking us again any time soon
-        debugLogf("Alliance members on cooldown")
+        debugLog("Leader is on tally lockout")
+        player:messageText(npc, ID.text.GARRISON_BASE + 40)
+        return false
+    end
+
+    -- Check the "per zone" lockout, applied to all players for the same zone
+    if xi.garrison.isZoneOnLockout(player:getZone()) then
+        -- We commend you on your services in helping us avert the beastmen's attack. I do not see them attacking us again any time soon
+        debugLog("Zone on lockout")
         player:messageText(npc, ID.text.GARRISON_BASE + 40)
         return false
     end
@@ -643,26 +658,47 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
     return true
 end
 
--- Stores data related to player entry time / lockout
-xi.garrison.savePlayerLockout = function(player)
-    local nextEntryTime = os.time() + xi.settings.main.GARRISON_LOCKOUT
-    if xi.settings.main.GARRISON_ONCE_PER_WEEK then
-        nextEntryTime = math.max(nextEntryTime, getConquestTally())
+-- Stores the next valid entry time based on next conquest tally
+-- This lockout is only for the trading player
+xi.garrison.saveTallyLockout = function(player)
+    if xi.settings.main.GARRISON_ONCE_PER_WEEK == false then
+        return
     end
 
-    player:setCharVar("[Garrison]NextEntryTime", nextEntryTime)
+    player:setCharVar("[Garrison]NextEntryTime", getConquestTally())
 end
 
--- Returns true if any player in the given table has entered garrison too recently
--- according to the GARRISON_LOCKOUT and GARRISON_ONCE_PER_WEEK settings
+-- Returns true if the given player has entered garrison too recently
+-- according to the GARRISON_ONCE_PER_WEEK settings
 -- and their last entry time
-xi.garrison.isAnyPlayerOnEntryCooldown = function(players)
-    for _, player in pairs(players) do
-        local nextValidAttemptTime = player:getCharVar("[Garrison]NextEntryTime")
-        if os.time() < nextValidAttemptTime then
-            debugLogf("Cooldown time remaining: %d", nextValidAttemptTime - os.time())
-            return true
-        end
+xi.garrison.isPlayerOnTallyLockout = function(player)
+    if xi.settings.main.GARRISON_ONCE_PER_WEEK == false then
+        return false
+    end
+
+    local nextValidAttemptTime = player:getCharVar("[Garrison]NextEntryTime")
+    if os.time() < nextValidAttemptTime then
+        debugLogf("Cooldown time remaining: %d", nextValidAttemptTime - os.time())
+        return true
+    end
+
+    return false
+end
+
+-- Stores the next valid entry time for the given zone, based on
+-- lockout
+xi.garrison.saveZoneLockout = function(zone)
+    local nextEntryTime = os.time() + xi.settings.main.GARRISON_LOCKOUT
+    SetServerVariable("[Garrison]NextEntryTime_" .. zone:getID(), nextEntryTime)
+end
+
+-- Returns true if the given zone is still on lockout, based on lockout settings
+-- And last entry time of ANY player for this zone
+xi.garrison.isZoneOnLockout = function(zone)
+    local nextValidAttemptTime = GetServerVariable("[Garrison]NextEntryTime_" .. zone:getID())
+    if os.time() < nextValidAttemptTime then
+        debugLogf("Zone lockout time remaining: %d", nextValidAttemptTime - os.time())
+        return true
     end
 
     return false
