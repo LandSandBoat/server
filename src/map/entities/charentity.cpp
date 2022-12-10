@@ -655,6 +655,23 @@ CItemEquipment* CCharEntity::getEquip(SLOTTYPE slot)
     return item;
 }
 
+std::vector<CItemEquipment*> CCharEntity::getVisibleEquip()
+{
+    std::vector<CItemEquipment*> visibleItems;
+    CItemEquipment*              item = nullptr;
+
+    for (SLOTTYPE slot : { SLOT_HEAD, SLOT_BODY, SLOT_HANDS, SLOT_LEGS, SLOT_FEET })
+    {
+        item = getEquip(slot);
+        if (item != nullptr)
+        {
+            visibleItems.push_back(item);
+        }
+    }
+
+    return visibleItems;
+}
+
 void CCharEntity::ReloadPartyInc()
 {
     m_reloadParty = true;
