@@ -35,6 +35,14 @@ xi.confrontation.lookup = {}
 xi.confrontation.check = function(lookupKey, setupTimer)
     -- Get the list of mobs from the
     local lookup = xi.confrontation.lookup[lookupKey]
+
+    -- lookup can be nil when killing final mob triggers this function as well
+    -- yet the next scheduled check is still in the queue
+    -- in this case just escape this check
+    if not lookup then
+        return
+    end
+
     local didWin = false
     local didLose = false
 
@@ -64,6 +72,12 @@ xi.confrontation.check = function(lookupKey, setupTimer)
         didLose = true
     end
 
+    if lookup.timeLimit then
+        if lookup.elapsedConfrontationTime > lookup.timeLimit then
+            didLose = true
+        end
+    end
+
     -- Check to see if the mobs are still valid
     local validMobCount = 0
     for _, m in pairs(mobs) do
@@ -83,7 +97,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
     if didWin or didLose then
         for _, member in ipairs(players) do
             -- Clear effect
-            member:delStatusEffect(xi.effect.CONFRONTATION)
+            member:delStatusEffectSilent(xi.effect.CONFRONTATION)
 
             -- Fire callbacks
             if didWin and type(lookup.onWin) == "function" then
@@ -103,6 +117,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
         xi.confrontation.lookup[lookupKey] = nil
     else -- Check again soon
         if setupTimer then
+            xi.confrontation.lookup[lookupKey].elapsedConfrontationTime = lookup.elapsedConfrontationTime + 2.4
             lookup.npc:timer(2400, function(npcArg)
                 xi.confrontation.check(bit.rshift(npcArg:getID(), 16), true)
             end)
@@ -110,7 +125,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
     end
 end
 
-xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
+xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc, timeLimit)
     -- Generate lookup ID from spawn npc data
     local lookupKey = bit.rshift(npc:getID(), 16)
 
@@ -156,6 +171,8 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
     xi.confrontation.lookup[lookupKey].mobIds = mobIds
     xi.confrontation.lookup[lookupKey].onWin = winFunc
     xi.confrontation.lookup[lookupKey].onLose = loseFunc
+    xi.confrontation.lookup[lookupKey].elapsedConfrontationTime = 0
+    xi.confrontation.lookup[lookupKey].timeLimit = timeLimit
 
     -- Pop!
     npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1 })

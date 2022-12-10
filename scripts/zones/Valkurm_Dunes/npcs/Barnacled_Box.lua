@@ -15,9 +15,9 @@ local sharedLoot =
         [          xi.items.DRILL_CALAMARY] = 200,
         [             xi.items.DWARF_PUGIL] = 100,
         [xi.items.HIGH_QUALITY_PUGIL_SCALE] =  50,
-        [             xi.items.PAMTAM_KELP] = 250,
+        --[             xi.items.PAMTAM_KELP] = 250, (ToAU Era, giving weight to SHALL_SHELL as similar value item)
         [               xi.items.SALINATOR] = 100,
-        [             xi.items.SHALL_SHELL] = 150,
+        [             xi.items.SHALL_SHELL] = 400,
         [               xi.items.ZEBRA_EEL] = 100,
     },
     item2 =
@@ -97,6 +97,7 @@ entity.onTrigger = function(player, npc)
     shimmering:setStatus(xi.status.DISAPPEAR)
     local party = player:getParty()
     for _,member in pairs(party) do
+        member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         member:ChangeMusic(0, 0)
         member:ChangeMusic(1, 0)
         member:ChangeMusic(2, 101)

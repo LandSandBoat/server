@@ -72,6 +72,7 @@ entity.onEventUpdate = function(player, csid, option)
             removeTempItems(member)
             member:setLocalVar("Chart", 1)
         end
+        player:addPartyEffect(xi.effect.LEVEL_RESTRICTION, xi.effect.LEVEL_RESTRICTION, 20, 0, 0, 0, 0)
     end
 end
 
@@ -89,21 +90,34 @@ entity.onEventFinish = function(player, csid, option, npc)
         local barnacle   = GetNPCByID(ID.npc.BARNACLED_BOX)
 
         panictaru:setStatus(xi.status.NORMAL)
+        -- for some reason the shimmering point disappears when the level restriction is put on and does not come back
+        -- maybe this is not the right shimmering?
         shimmering:setStatus(xi.status.NORMAL)
-        player:addPartyEffect(xi.effect.LEVEL_RESTRICTION, xi.effect.LEVEL_RESTRICTION, 20, 0, 0, 0, 0)
         panictaru:timer(3000 , function(taru) taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT) end)
         panictaru:timer(23000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.HURRY_UP) end)
         panictaru:timer(33000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.ITS_COMING) end)
         panictaru:timer(43000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.THREE_OF_THEM)  end)
         panictaru:timer(45000, function(taru) taru:showText(npc, ID.text.NOOOOO) end)
-        panictaru:timer(45000, function(taru) taru:entityAnimationPacket("dead") shimmering:showText(npc, ID.text.CRY_OF_ANGUISH) end)
+        panictaru:timer(45000, function(taru) taru:entityAnimationPacket("dead") npc:messageText(npc, ID.text.CRY_OF_ANGUISH, false) end)
         panictaru:timer(50000, function(taru) taru:setStatus(xi.status.DISAPPEAR) npc:entityAnimationPacket("stnd") end)
-        player:timer(50000, function(playerArg, npcArg)
-            xi.confrontation.start(player, npc, mobs, function(member)
-                player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-                barnacle:setStatus(xi.status.NORMAL)
+        player:timer(50000,
+        function(playerArg, npcArg)
+            xi.confrontation.start(player, npc, mobs,
+            function(member)
                 barnacle:setLocalVar("open", 0)
-            end)
+            end,
+            function(member)
+                local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
+                shimmering:setStatus(xi.status.DISAPPEAR)
+                member:messageSpecial(ID.text.TOO_MUCH_TIME_PASSED)
+                member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+                member:ChangeMusic(0, 0)
+                member:ChangeMusic(1, 0)
+                member:ChangeMusic(2, 101)
+                member:ChangeMusic(3, 102)
+                member:setLocalVar("Chart", 0)
+            end
+            ,30)
         end)
     end
 end
