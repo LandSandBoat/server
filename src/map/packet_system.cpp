@@ -5895,7 +5895,15 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         case NFLAG_INVITE:
             // /invite [on|off]
-            PChar->nameflags.flags ^= FLAG_INVITE;
+            if (PChar->PParty)
+            {
+                // Can't put flag up while in a party
+                PChar->nameflags.flags &= ~FLAG_INVITE;
+            }
+            else
+            {
+                PChar->nameflags.flags ^= FLAG_INVITE;
+            }
             break;
         case NFLAG_AWAY:
             // /away | /online
