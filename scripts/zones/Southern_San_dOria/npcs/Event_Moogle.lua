@@ -26,7 +26,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.events.starlightCelebration.npcGiftsMoogleOnFinish(player, ID, csid, option)
+    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+        if csid == 32703 then
+            xi.events.starlightCelebration.npcGiftsMoogleOnFinish(player, ID, csid, option)
+        end
+    end
 end
 
 return entity

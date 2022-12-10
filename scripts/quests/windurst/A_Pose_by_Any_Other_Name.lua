@@ -63,7 +63,7 @@ quest.sections =
                     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
                         local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
                         if startedQuest ~= 0 then
-                            return xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+                            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
                         end
                     end
                     local desiredBody = poseItems[player:getMainJob()]

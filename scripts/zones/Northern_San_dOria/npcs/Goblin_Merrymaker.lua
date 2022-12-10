@@ -162,10 +162,10 @@ local pathNodes =
         { x = -151.000, y = 0.000, z = 126.000, wait = 0 },
         { x = -142.000, y = 0.000, z = 135.000, wait = 0 },
         { x = -132.000, y = 0.000, z = 146.000, wait = 0 },
-        { x = -133.000, y = 0.000, z = 177.000, wait = 0 },
-        { x = -144.000, y = 0.000, z = 189.000, wait = 0 },
-        { x = -131.000, y = 0.000, z = 215.000, wait = 0 },
-        { x = -130.000, y = 0.000, z = 253.000, wait = 0 },
+        { x = -133.000, y = 6.000, z = 177.000, wait = 0 },
+        { x = -144.000, y = 10.000, z = 189.000, wait = 0 },
+        { x = -131.000, y = 12.000, z = 215.000, wait = 0 },
+        { x = -130.000, y = 12.000, z = 253.000, wait = 0 },
     },
     [5] =
     {
@@ -271,7 +271,7 @@ entity.onPathPoint = function(npc)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.events.starlightCelebration.merryMakersGoblinOnTrigger(player, npc)
+    xi.events.starlightCelebration.merryMakersGoblinOnTrigger(player, npc, ID)
 end
 
 entity.onPathComplete = function(npc)

@@ -21,17 +21,17 @@ end
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
         xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 3)
-    else
-        if
-            player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
-            not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1)
-        then
-            player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
-            player:startEvent(59)
+    end
 
-        else
-            player:startEvent(650)
-        end
+    if
+        player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
+        not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1)
+    then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
+        player:startEvent(59)
+
+    else
+        player:startEvent(650)
     end
 end
 

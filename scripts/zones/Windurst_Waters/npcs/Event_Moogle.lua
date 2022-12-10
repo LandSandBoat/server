@@ -33,7 +33,11 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        xi.events.starlightCelebration.npcGiftsMoogleOnFinish(player, ID, csid, option)
+        if csid == 32703 or csid == 32702 then
+            xi.events.starlightCelebration.npcGiftsMoogleOnFinish(player, ID, csid, option)
+        elseif csid == 4702 then
+            xi.events.starlightCelebration.merryMakersMoogleOnFinish(player, ID, csid, option)
+        end
     end
 end
 

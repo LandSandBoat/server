@@ -157,6 +157,8 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         MERRYMAKER_GIVE          = 17650, -- Not for us, not for me? I give it back. Now you happy? Happy toy, happy toy, where be me happy toy?
         MERRYMAKER_NO            = 17651, -- No no no no no! Go away! Nose holes busy sniff for happy toy!
         MERRYMAKER_FRIEND        = 17653, -- You have friend you do? We gobbies have friend too.
+        MERRYMAKER_NPC_RETURNED  = 17692, -- I see you've returned. Mmm...that's good news indeed. Thank you for the kindess you've shown me and my friend.
+        MERRYMAKER_DEFAULT       = 17652, -- ...
     },
     mob =
     {
