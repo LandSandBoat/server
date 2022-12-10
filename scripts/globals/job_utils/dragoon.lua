@@ -348,8 +348,6 @@ end
 xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local wyvern = player:getPet()
     local playerHP = player:getHP()
-    local petTP = wyvern:getTP()
-    local regenAmount = player:getMainLvl() / 3 -- level/3 tic regen
 
     checkForRemovableEffectsOnSpiritLink(player, wyvern)
 
@@ -392,13 +390,6 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
             copyi = copyi + 1
         end
     end
-
-    if xi.settings.main.ENABLE_ABYSSEA == 1 then
-        player:addTP(petTP / 2) -- add half wyvern tp to you
-    end
-
-    wyvern:addStatusEffect(xi.effect.REGEN, regenAmount, 3, 90, 0, 0, 0) -- 90 seconds of regen
-    wyvern:delTP(petTP / 2) -- remove half tp from wyvern
 
     local drainamount = (math.random(25, 35) / 100) * playerHP
     local jpValue = player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)
