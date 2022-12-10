@@ -72,6 +72,7 @@ CInstance* CInstanceLoader::LoadInstance()
             slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
             fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
             fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
+            fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
             Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, \
@@ -168,43 +169,41 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(55)));
             PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(56)));
 
-            /* Todo
-            PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
-            PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
-            */
+            PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(57)));
+            PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(58)));
+            PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(59)));
+            PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(60)));
+            PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(61)));
+            PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(62)));
+            PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(63)));
+            PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(64)));
 
-            PMob->m_Element     = (uint8)sql->GetIntData(57);
-            PMob->m_Family      = (uint16)sql->GetIntData(58);
-            PMob->m_name_prefix = (uint8)sql->GetIntData(59);
-            PMob->m_flags       = (uint32)sql->GetIntData(60);
+            PMob->m_Element     = (uint8)sql->GetIntData(65);
+            PMob->m_Family      = (uint16)sql->GetIntData(66);
+            PMob->m_name_prefix = (uint8)sql->GetIntData(67);
+            PMob->m_flags       = (uint32)sql->GetIntData(68);
 
             // Special sub animation for Mob (yovra, jailer of love, phuabo)
             // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
             // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-            PMob->animationsub = (uint32)sql->GetIntData(61);
+            PMob->animationsub = (uint32)sql->GetIntData(69);
 
             // Setup HP / MP Stat Percentage Boost
-            PMob->HPscale = sql->GetFloatData(62);
-            PMob->MPscale = sql->GetFloatData(63);
+            PMob->HPscale = sql->GetFloatData(70);
+            PMob->MPscale = sql->GetFloatData(71);
 
             // TODO: Remove me
             // Check if we should be looking up scripts for this mob
-            // PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
+            // PMob->m_HasSpellScript = (uint8)sql->GetIntData(72);
 
-            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(65));
+            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(73));
 
-            PMob->m_Pool = sql->GetUIntData(66);
+            PMob->m_Pool = sql->GetUIntData(74);
 
-            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(67));
-            PMob->namevis    = sql->GetUIntData(68);
+            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(75));
+            PMob->namevis    = sql->GetUIntData(76);
 
-            uint32 aggro  = sql->GetUIntData(69);
+            uint32 aggro  = sql->GetUIntData(77);
             PMob->m_Aggro = aggro;
 
             // If a special instanced mob aggros, it should always aggro regardless of level.
@@ -213,11 +212,11 @@ CInstance* CInstanceLoader::LoadInstance()
                 PMob->setMobMod(MOBMOD_ALWAYS_AGGRO, aggro);
             }
 
-            PMob->m_MobSkillList  = sql->GetUIntData(70);
-            PMob->m_TrueDetection = sql->GetUIntData(71);
-            PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(72));
+            PMob->m_MobSkillList  = sql->GetUIntData(78);
+            PMob->m_TrueDetection = sql->GetUIntData(79);
+            PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(80));
 
-            PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(73));
+            PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(81));
 
             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
             // can be set in mob_spawn_mods or in their onInitialize

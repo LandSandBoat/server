@@ -41,16 +41,26 @@ enum class Mod
     MND = 13, // Mind
     CHR = 14, // Charisma
 
-    // Magic Evasion versus elements (resistance)
+    // Magic Evasion versus elements
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_MEVA    = 15, // Fire Resistance
-    ICE_MEVA     = 16, // Ice Resistance
-    WIND_MEVA    = 17, // Wind Resistance
-    EARTH_MEVA   = 18, // Earth Resistance
-    THUNDER_MEVA = 19, // Thunder Resistance
-    WATER_MEVA   = 20, // Water Resistance
-    LIGHT_MEVA   = 21, // Light Resistance
-    DARK_MEVA    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Magic Evasion
+    ICE_MEVA     = 16, // Ice Magic Evasion
+    WIND_MEVA    = 17, // Wind Magic Evasion
+    EARTH_MEVA   = 18, // Earth Magic Evasion
+    THUNDER_MEVA = 19, // Thunder Magic Evasion
+    WATER_MEVA   = 20, // Water Magic Evasion
+    LIGHT_MEVA   = 21, // Light Magic Evasion
+    DARK_MEVA    = 22, // Dark Magic Evasion
+
+    // Magic Evasion RANK versus elements (resistance ranks)
+    FIRE_RES_RANK    = 192, // Fire Resistance Rank
+    ICE_RES_RANK     = 193, // Ice Resistance Rank
+    WIND_RES_RANK    = 194, // Wind Resistance Rank
+    EARTH_RES_RANK   = 195, // Earth Resistance Rank
+    THUNDER_RES_RANK = 196, // Thunder Resistance Rank
+    WATER_RES_RANK   = 197, // Water Resistance Rank
+    LIGHT_RES_RANK   = 198, // Light Resistance Rank
+    DARK_RES_RANK    = 199, // Dark Resistance Rank
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -937,7 +947,7 @@ enum class Mod
     // 74 to 79
     // 138 to 143
     // 156 to 159
-    // 192 to 223
+    // 200 to 223
     // 261 to 280
     //
     // SPARE = 1075, and onward
