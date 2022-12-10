@@ -360,7 +360,18 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
 void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
-    static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
+    static const char fmtQuery[] =
+        "SELECT "
+        "zonelines.zoneline,"     // 0
+        "zonelines.tozone,"       // 1
+        "zonelines.tox,"          // 2
+        "zonelines.toy,"          // 3
+        "zonelines.toz,"          // 4
+        "zonelines.rotation,"     // 5
+        "zone_settings.zonetype " // 6
+        "FROM zonelines INNER JOIN zone_settings "
+        "ON zonelines.tozone = zone_settings.zoneid "
+        "WHERE zonelines.fromzone = %u;";
 
     int32 ret = sql->Query(fmtQuery, m_zoneID);
 
@@ -376,6 +387,7 @@ void CZone::LoadZoneLines()
             zl->m_toPos.y        = sql->GetFloatData(3);
             zl->m_toPos.z        = sql->GetFloatData(4);
             zl->m_toPos.rotation = (uint8)sql->GetIntData(5);
+            zl->m_toZoneType     = (ZONE_TYPE)sql->GetUIntData(6);
 
             m_zoneLineList.push_back(zl);
         }
