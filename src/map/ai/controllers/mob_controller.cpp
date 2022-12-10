@@ -1260,6 +1260,15 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
         return false;
     }
 
+    // Don't aggro, I'm a normal CoP Fomor and you have low hate
+    if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && (PMob->getZone() >= 24 && PMob->getZone() <= 28) && PTarget->objtype == TYPE_PC)
+    {
+        if (((CCharEntity*)PTarget)->getCharVar("FOMOR_HATE") < 8)
+        {
+            return false;
+        }
+    }
+
     // Don't aggro I'm an underground worm
     if ((PMob->m_roamFlags & ROAMFLAG_WORM) && PMob->animationsub == 1)
     {
