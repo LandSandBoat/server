@@ -264,7 +264,7 @@ namespace trustutils
                 mob_resistances.fire_meva, mob_resistances.ice_meva, \
                 mob_resistances.wind_meva, mob_resistances.earth_meva, \
                 mob_resistances.lightning_meva, mob_resistances.water_meva, \
-                mob_resistances.light_meva, mob_resistances.dark_meva \
+                mob_resistances.light_meva, mob_resistances.dark_meva, \
                 mob_resistances.fire_res_rank, mob_resistances.ice_res_rank, \
                 mob_resistances.wind_res_rank, mob_resistances.earth_res_rank, \
                 mob_resistances.lightning_res_rank, mob_resistances.water_res_rank, \
