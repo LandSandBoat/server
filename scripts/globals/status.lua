@@ -967,6 +967,9 @@ xi.mod =
     INT                             = 12,
     MND                             = 13,
     CHR                             = 14,
+
+    -- Magic Evasion versus elements
+    -- This has been repeatedly mixed up with SDT - be careful!
     FIRE_MEVA                       = 15,
     ICE_MEVA                        = 16,
     WIND_MEVA                       = 17,
@@ -975,6 +978,17 @@ xi.mod =
     WATER_MEVA                      = 20,
     LIGHT_MEVA                      = 21,
     DARK_MEVA                       = 22,
+
+    -- Magic Evasion RANK versus elements (resistance ranks)
+    FIRE_RES_RANK                   = 192, -- Fire Resistance Rank
+    ICE_RES_RANK                    = 193, -- Ice Resistance Rank
+    WIND_RES_RANK                   = 194, -- Wind Resistance Rank
+    EARTH_RES_RANK                  = 195, -- Earth Resistance Rank
+    THUNDER_RES_RANK                = 196, -- Thunder Resistance Rank
+    WATER_RES_RANK                  = 197, -- Water Resistance Rank
+    LIGHT_RES_RANK                  = 198, -- Light Resistance Rank
+    DARK_RES_RANK                   = 199, -- Dark Resistance Rank
+
     ATT                             = 23,
     RATT                            = 24,
     ACC                             = 25,
