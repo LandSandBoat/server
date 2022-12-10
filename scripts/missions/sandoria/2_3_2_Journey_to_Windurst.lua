@@ -57,7 +57,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        return mission:progressEvent(238)
+                        return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA)
                     elseif missionStatus == 5 then
                         return mission:event(240)
                     elseif missionStatus == 6 then
