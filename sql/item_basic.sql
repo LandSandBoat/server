@@ -86,7 +86,7 @@ INSERT INTO `item_basic` VALUES (91,0,'blue_pitcher','blue_pitcher',1,4,34,0,37)
 INSERT INTO `item_basic` VALUES (92,0,'tarutaru_stool','tarutaru_stool',1,36,34,0,252);
 INSERT INTO `item_basic` VALUES (93,0,'water_cask','water_cask',1,4,34,0,95);
 INSERT INTO `item_basic` VALUES (95,0,'water_barrel','water_barrel',1,36,34,0,1879);
-INSERT INTO `item_basic` VALUES (96,0,'beverage_barrel','beverage_barrel',1,36,34,0,1773);
+INSERT INTO `item_basic` VALUES (96,0,'beverage_barrel','beverage_barrel',1,36,34,0,50);
 INSERT INTO `item_basic` VALUES (97,0,'book_holder','book_holder',1,36,34,0,205);
 INSERT INTO `item_basic` VALUES (98,0,'scimitar_cactus','scimitar_cactus',1,36,34,0,408);
 INSERT INTO `item_basic` VALUES (99,0,'elshimo_palm','elshimo_palm',1,36,34,0,403);
@@ -1347,7 +1347,7 @@ INSERT INTO `item_basic` VALUES (1454,0,'ranperre_goldpiece','r._goldpiece',99,4
 INSERT INTO `item_basic` VALUES (1455,0,'one_byne_bill','1_byne_bill',99,4100,65,1,0);
 INSERT INTO `item_basic` VALUES (1456,0,'one_hundred_byne_bill','100_byne_bill',99,4100,65,1,0);
 INSERT INTO `item_basic` VALUES (1457,0,'ten_thousand_byne_bill','10,000_byne_bill',99,4096,65,1,0);
-INSERT INTO `item_basic` VALUES (1458,0,'mammoth_tusk','mammoth_tusk',12,4,42,0,2650);
+INSERT INTO `item_basic` VALUES (1458,0,'mammoth_tusk','mammoth_tusk',12,4,42,0,270);
 INSERT INTO `item_basic` VALUES (1459,0,'square_of_griffon_leather','griffon_leather',12,4,41,0,2650);
 INSERT INTO `item_basic` VALUES (1460,0,'koh-i-noor','koh-i-noor',12,4,39,0,9937);
 INSERT INTO `item_basic` VALUES (1461,0,'wootz_ingot','wootz_ingot',12,4,38,0,3975);
@@ -1478,7 +1478,7 @@ INSERT INTO `item_basic` VALUES (1585,0,'ethereal_fragment','ethereal_fragment',
 INSERT INTO `item_basic` VALUES (1586,0,'titanictus_shell','titanictus_shell',12,4,42,0,350);
 INSERT INTO `item_basic` VALUES (1587,0,'handful_of_high-quality_pugil_scales','h.q._pugil_scls.',12,4,42,0,260);
 INSERT INTO `item_basic` VALUES (1588,0,'slab_of_tufa','tufa',12,4,39,0,1982);
-INSERT INTO `item_basic` VALUES (1589,0,'shard_of_necropsyche','necropsyche',1,57428,0,0,10600);
+INSERT INTO `item_basic` VALUES (1589,0,'shard_of_necropsyche','necropsyche',1,57428,0,0,1086);
 INSERT INTO `item_basic` VALUES (1590,0,'sprig_of_holy_basil','holy_basil',12,4,59,0,271);
 INSERT INTO `item_basic` VALUES (1591,0,'high-quality_coeurl_hide','h.q._coeurl_hide',12,4,41,0,860);
 INSERT INTO `item_basic` VALUES (1592,0,'cactuar_root','cactuar_root',12,4,44,0,1060);
@@ -2298,8 +2298,8 @@ INSERT INTO `item_basic` VALUES (2405,0,'race_chocobo_training_token_dsc','r_cho
 INSERT INTO `item_basic` VALUES (2406,0,'race_chocobo_training_token_rcp','r_chocotrain_rcp',1,4,46,0,192);
 INSERT INTO `item_basic` VALUES (2407,0,'race_chocobo_training_token','r_chocotrain',1,4,46,0,192);
 INSERT INTO `item_basic` VALUES (2408,0,'flocon-de-mer','flocon-de-mer',12,4,42,0,2760);
-INSERT INTO `item_basic` VALUES (2409,8455,'flame_holder','flame_holder',12,4,61,0,1052);
-INSERT INTO `item_basic` VALUES (2410,8487,'ice_maker','ice_maker',12,4,61,0,1052);
+INSERT INTO `item_basic` VALUES (2409,8455,'flame_holder','flame_holder',12,4,61,0,123);
+INSERT INTO `item_basic` VALUES (2410,8487,'ice_maker','ice_maker',12,4,61,0,123);
 INSERT INTO `item_basic` VALUES (2411,8519,'replicator','replicator',12,4,61,0,80);
 INSERT INTO `item_basic` VALUES (2412,8551,'hammermill','hammermill',12,4,61,0,1216);
 INSERT INTO `item_basic` VALUES (2413,8583,'coiler','coiler',12,4,61,0,529);
@@ -13692,7 +13692,7 @@ INSERT INTO `item_basic` VALUES (16368,0,'herders_subligar','herders_subligar',1
 INSERT INTO `item_basic` VALUES (16369,0,'blitzer_poleyn','blitzer_poleyn',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (16370,0,'desultor_tassets','desultor_tassets',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (16371,0,'tatsumaki_sitagoromo','tatsu._sitagoromo',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (16372,0,'stearc_subligar','stearc_subligar',1,2048,20,0,6000);
+INSERT INTO `item_basic` VALUES (16372,0,'stearc_subligar','stearc_subligar',1,2048,20,0,600);
 INSERT INTO `item_basic` VALUES (16373,0,'kyoshu_sitabaki','kyoshu_sitabaki',1,2084,20,0,4228);
 INSERT INTO `item_basic` VALUES (16374,0,'layqa_seraweels','layqa_seraweels',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (16375,0,'surge_subligar','surge_subligar',1,63572,0,1,0);
