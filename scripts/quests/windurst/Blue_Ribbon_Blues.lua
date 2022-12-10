@@ -48,7 +48,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    return quest:event(357):oncePerZone()
+                    return quest:progressEvent(357):oncePerZone()
                 end,
             },
 
@@ -84,7 +84,7 @@ quest.sections =
                             return quest:progressEvent(377, 0, xi.items.PURPLE_RIBBON)
                         end
                     else
-                        return quest:progressEvent(379)
+                        return quest:event(379)
                     end
                 end,
             },
@@ -173,18 +173,18 @@ quest.sections =
 
                     if questProgress == 0 then
                         if os.time() < quest:getVar(player, 'Timer') then
-                            return quest:progressEvent(359)
+                            return quest:event(359)
                         else
                             return quest:progressEvent(360)
                         end
                     elseif questProgress == 1 then
                         if not player:findItem(xi.items.PURPLE_RIBBON) then
-                            return quest:progressEvent(366, 0, xi.items.PURPLE_RIBBON)
+                            return quest:event(366, 0, xi.items.PURPLE_RIBBON)
                         else
-                            return quest:progressEvent(361, 0, xi.items.PURPLE_RIBBON)
+                            return quest:event(361, 0, xi.items.PURPLE_RIBBON)
                         end
                     elseif questProgress == 3 then
-                        return quest:progressEvent(362)
+                        return quest:event(362)
                     end
                 end,
             },
@@ -222,7 +222,7 @@ quest.sections =
                     then
                         return quest:progressEvent(377, 0, xi.items.PURPLE_RIBBON)
                     else
-                        return quest:progressEvent(380)
+                        return quest:event(380)
                     end
                 end,
             },

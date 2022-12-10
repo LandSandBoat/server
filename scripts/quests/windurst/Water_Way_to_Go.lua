@@ -148,10 +148,10 @@ quest.sections =
                         then
                             return quest:progressEvent(354)
                         else
-                            return quest:progressEvent(353)
+                            return quest:event(353)
                         end
                     else
-                        return quest:progressEvent(356, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
+                        return quest:event(356, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
                     end
                 end,
             },

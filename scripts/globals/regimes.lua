@@ -491,8 +491,6 @@ local regimeInfo =
             [244] = { act = "INSTANT_NOODLES", cost =  50, discounted =  25, food = true },
             [260] = { act = "DRIED_AGARICUS",  cost =  50, discounted =  25, food = true },
             [276] = { act = "INSTANT_RICE",    cost =  50, discounted =  25, food = true },
-            [292] = { act = "CIPHER_SAKURA",   cost = 300, discounted = 300 },
-            [308] = { act = "CIPHER_KORU",     cost = 300, discounted = 300 },
         },
         zone =
         {
@@ -1088,7 +1086,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
-        local pages = table.getn(info.page)
+        local pages = #info.page
         local arg2 = 0
         local arg4 = 0
 
