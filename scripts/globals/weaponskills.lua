@@ -734,7 +734,8 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         ['type'] = xi.attackType.RANGED,
         ['slot'] = xi.slot.RANGED,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.RANGED),
-        ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED)
+        ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED),
+        ['attackType'] = xi.attackType.RANGED,
     }
 
     local calcParams =
@@ -794,7 +795,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         ['type'] = xi.attackType.MAGICAL,
         ['slot'] = xi.slot.MAIN,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.MAIN),
-        ['damageType'] = xi.damageType.ELEMENTAL + wsParams.element
+        ['damageType'] = xi.damageType.ELEMENTAL + wsParams.element,
+        ['attackType'] = xi.attackType.MAGICAL,
     }
 
     local calcParams =
@@ -947,7 +949,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         wsResults.extraHitsLanded = 0
     end
 
-    finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
+    finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult, attack.damageType == xi.attackType.MAGICAL)
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
         if finaldmg >= 0 then
             action:param(defender:getID(), math.abs(finaldmg))

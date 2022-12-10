@@ -2251,8 +2251,11 @@ namespace battleutils
             if ((slot == SLOT_RANGED || slot == SLOT_AMMO) && PAttacker->objtype == TYPE_PC)
             {
                 int16 delay = PAttacker->GetRangedWeaponDelay(true);
+                auto  PChar = static_cast<CCharEntity*>(PAttacker);
 
-                baseTp = CalculateBaseTP((delay * 120) / 1000);
+                auto skill = slot == SLOT_RANGED ? ((CItemWeapon*)PChar->getEquip(SLOT_RANGED))->getSkillType() : ((CItemWeapon*)PChar->getEquip(SLOT_AMMO))->getSkillType();
+
+                baseTp = slot == SLOT_RANGED && skill == SKILL_THROWING ? CalculateBaseTP((int16)(delay * 38.0f / 1000.0f)) : CalculateBaseTP((delay * 120) / 1000);
             }
             else
             {
@@ -2265,12 +2268,7 @@ namespace battleutils
                     delay = delay / 2;
                 }
 
-                float ratio = 1.0f;
-
-                if (weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND)
-                {
-                    ratio = 2.0f;
-                }
+                float ratio = weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND ? 2.0f : 1.0f;
 
                 baseTp = CalculateBaseTP((int16)(delay * 60.0f / 1000.0f / ratio));
             }
@@ -2329,7 +2327,7 @@ namespace battleutils
      ************************************************************************/
 
     int32 TakeWeaponskillDamage(CCharEntity* PAttacker, CBattleEntity* PDefender, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType, uint8 slot,
-                                bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
+                                bool primary, float tpMultiplier, uint16 bonusTP, float targetTPMultiplier, bool isMagicWS)
     {
         auto* weapon   = GetEntityWeapon(PAttacker, (SLOTTYPE)slot);
         bool  isRanged = (slot == SLOT_AMMO || slot == SLOT_RANGED);
@@ -2396,34 +2394,7 @@ namespace battleutils
             // try to interrupt spell
             PDefender->TryHitInterrupt(PAttacker);
 
-            int16 baseTp = 0;
-
-            if (isRanged)
-            {
-                int16 delay = PAttacker->GetRangedWeaponDelay(true);
-                baseTp      = CalculateBaseTP((delay * 120) / 1000);
-            }
-            else
-            {
-                int16 delay = PAttacker->GetWeaponDelay(true);
-
-                auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
-
-                if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
-                    weapon->getSkillType() != SKILL_HAND_TO_HAND)
-                {
-                    delay /= 2;
-                }
-
-                float ratio = 1.0f;
-
-                if (weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND)
-                {
-                    ratio = 2.0f;
-                }
-
-                baseTp = (int16)(CalculateBaseTP((delay * 60) / 1000) / ratio);
-            }
+            int16 baseTp = CalculateReturnedTPWS(PAttacker, isRanged, weapon);
 
             // add tp to attacker
             if (primary)
@@ -2455,6 +2426,33 @@ namespace battleutils
         }
         else if (PDefender->objtype == TYPE_MOB)
         {
+            if (isMagicWS)
+            {
+                int16 baseTp = CalculateReturnedTPWS(PAttacker, isRanged, weapon);
+
+                standbyTp = bonusTP + ((int16)((tpMultiplier * baseTp) *
+                                               (1.0f + 0.01f * (float)((PAttacker->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PAttacker))))));
+
+                // account for attacker's subtle blow which reduces the baseTP gain for the defender
+                float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
+                float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
+                float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
+                // mobs hit get basetp+30 whereas pcs hit get basetp/3
+                if (PDefender->objtype == TYPE_PC)
+                {
+                    PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier *
+                                             ((baseTp / 3) * sBlowMult *
+                                              (1.0f + 0.01f * (float)((PDefender->getMod(Mod::STORETP) +
+                                                                       getStoreTPbonusFromMerit(PAttacker))))))); // yup store tp counts on hits taken too!
+                }
+                else
+                {
+                    PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier *
+                                             ((baseTp + 30) * sBlowMult *
+                                              (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
+                }
+            }
+
             ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, 0);
         }
 
@@ -7345,4 +7343,34 @@ namespace battleutils
         return 1.0;
     }
 
+    int16 CalculateReturnedTPWS(CBattleEntity* PAttacker, bool isRanged, CItemWeapon* weapon)
+    {
+        int16 baseTp = 0;
+
+        if (isRanged)
+        {
+            auto  slot  = weapon->getSlotType();
+            auto  skill = weapon->getSkillType();
+            int16 delay = PAttacker->GetRangedWeaponDelay(true);
+
+            baseTp = slot == SLOT_RANGED && skill == SKILL_THROWING ? CalculateBaseTP((int16)(delay * 38.0f / 1000.0f)) : CalculateBaseTP((delay * 120) / 1000);
+        }
+        else
+        {
+            int16 delay      = PAttacker->GetWeaponDelay(true);
+            auto* sub_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
+
+            if (sub_weapon && sub_weapon->getDmgType() > DAMAGE_TYPE::NONE && sub_weapon->getDmgType() < DAMAGE_TYPE::HTH &&
+                weapon->getSkillType() != SKILL_HAND_TO_HAND)
+            {
+                delay /= 2;
+            }
+
+            float ratio = weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND ? 2.0f : 1.0f;
+
+            baseTp = (int16)(CalculateBaseTP((delay * 60) / 1000) / ratio);
+        }
+
+        return baseTp;
+    }
 }; // namespace battleutils
