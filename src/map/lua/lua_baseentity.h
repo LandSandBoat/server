@@ -879,6 +879,7 @@ public:
 
     uint8 getMannequinPose(uint16 itemID);
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
+    void  setWallhackAllowed(bool allowed); // Sets whether an entity should ignore wallhack flags in pathfind.
 
     static void Register();
 };

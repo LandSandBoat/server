@@ -15527,6 +15527,15 @@ uint8 CLuaBaseEntity::getMannequinPose(uint16 itemID)
     return 0;
 }
 
+void CLuaBaseEntity::setWallhackAllowed(bool allowed)
+{
+    TracyZoneScoped;
+
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr || m_PBaseEntity->objtype == TYPE_PC);
+
+    m_PBaseEntity->m_ignoreWallhack = !allowed ? true : false;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -16349,6 +16358,7 @@ void CLuaBaseEntity::Register()
     // Mannequins
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
     SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
+    SOL_REGISTER("setWallhackAllowed", CLuaBaseEntity::setWallhackAllowed);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

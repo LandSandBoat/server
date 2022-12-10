@@ -308,6 +308,8 @@ public:
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
 
+    bool m_ignoreWallhack = false; // Flag to ignore wallhack if set to true.
+
     uint32 animBegin; // Animation start time
     uint8  animPath;  // Which animation Path
     bool   animStart; // Is this starting an animation?
