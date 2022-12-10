@@ -12440,14 +12440,14 @@ auto CLuaBaseEntity::getWSSkillchainProp() -> std::tuple<uint8, uint8, uint8>
  ************************************************************************/
 
 int32 CLuaBaseEntity::takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
-                                            float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
+                                            float tpMultiplier, uint16 bonusTP, float targetTPMultiplier, bool isMagicWS)
 {
     auto*       PChar      = static_cast<CCharEntity*>(attacker->m_PBaseEntity);
     ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
     DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(dmgType);
 
     return battleutils::TakeWeaponskillDamage(PChar, static_cast<CBattleEntity*>(m_PBaseEntity), damage, attackType, damageType, slot,
-                                              primary, tpMultiplier, bonusTP, targetTPMultiplier);
+                                              primary, tpMultiplier, bonusTP, targetTPMultiplier, isMagicWS);
 }
 
 /************************************************************************
