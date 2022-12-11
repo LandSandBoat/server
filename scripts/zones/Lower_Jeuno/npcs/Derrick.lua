@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(230, 12) -- airship
 
     else
-        player:startEvent(230, 14) -- rien
+        player:startEvent(230, 14) -- Nothing
     end
 end
 

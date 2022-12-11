@@ -2613,6 +2613,7 @@ xi.items =
     CUIR_GLOVES                     = 12699,
     GLOVES                          = 12720,
     COTTON_GLOVES                   = 12721,
+    ENGINEERS_GLOVES                = 12727,
     CUFFS                           = 12728,
     PERLE_MOUFLES                   = 12745,
     AURORE_GLOVES                   = 12746,

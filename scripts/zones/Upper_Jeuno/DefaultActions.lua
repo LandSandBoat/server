@@ -1,9 +1,11 @@
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 
 return {
+    ['_6s2']         = { event = 116 },
     ['_6sb']         = { text = ID.text.IT_READS_STAFF_ONLY },
     ['Baudin']       = { event = 122 },
     ['Chocobo']      = { event = 54 },
+    ['Collet']       = { event = 114 },
     ['Guide_Stone']  = { messageSpecial = ID.text.GUIDE_STONE },
     ['Ilumida']      = { event = 189 },
     ['Laila']        = { event = 10120 },
