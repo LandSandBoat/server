@@ -714,6 +714,12 @@ xi.magic.applyAbilityResistance = function(player, target, params)
     end
 
     local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, effectRes, params.maccBonus, skillchainCount, utils.ternary(params.damageSpell))
+
+    -- Nether blast does not have a hit check so return a hit
+    if params.netherBlast then
+        p = 100
+    end
+
     local resist = xi.magic.getMagicResist(p, target, params.element, effectRes, skillchainCount, params.effect, player, utils.ternary(params.damageSpell, true, false))
 
     if not params.ignoreStateLock then

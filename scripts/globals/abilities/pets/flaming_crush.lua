@@ -24,6 +24,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.melee = true
 
     local paramsEle = {}
+    paramsEle.numHits = 1
     paramsEle.ftp000 = 6 paramsEle.ftp150 = 6 paramsEle.ftp300 = 6
     paramsEle.str_wsc = 0.2 paramsEle.dex_wsc = 0.0 paramsEle.vit_wsc = 0.0 paramsEle.agi_wsc = 0.0 paramsEle.int_wsc = 0.2 paramsEle.mnd_wsc = 0.0 paramsEle.chr_wsc = 0.0
     paramsEle.element = xi.magic.ele.FIRE
@@ -37,7 +38,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local damageEle = xi.summon.avatarMagicSkill(pet, target, skill, paramsEle)
 
     local totaldamagePhys = xi.summon.avatarFinalAdjustments(damagePhys.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, damagePhys.hitslanded)
-    local totaldamageEle = xi.summon.avatarFinalAdjustments(damageEle.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local totaldamageEle = xi.summon.avatarFinalAdjustments(damageEle.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, damagePhys.hitslanded)
 
     target:takeDamage(totaldamagePhys, pet, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:takeDamage(totaldamageEle, pet, xi.attackType.MAGICAL, xi.damageType.FIRE)
