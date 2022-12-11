@@ -11,29 +11,11 @@ require('scripts/globals/items')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
-
-    if
-        npcUtil.tradeHasExactly(trade, xi.items.FLINT_STONE) and
-        os.time() > timer
-    then
-        func.skullTrade(player, npc)
-    elseif os.time() < timer then
-        player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
-    end
+    func.candleOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
-    local active = npc:getLocalVar("candlesActive")
-
-    if os.time() < active then
-        player:messageSpecial(ID.text.BRAZIER_ACTIVE)
-    elseif os.time() > timer and os.time() > active then
-        player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.items.FLINT_STONE)
-    else
-        player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
-    end
+    func.candleOnTrigger(player, npc)
 end
 
 return entity
