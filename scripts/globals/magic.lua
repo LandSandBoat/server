@@ -15,7 +15,7 @@ xi.magic = xi.magic or {}
 xi.magic.dayStrong             = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY           }
 xi.magic.singleWeatherStrong   = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM          }
 xi.magic.doubleWeatherStrong   = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
-local elementalObi             = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
+xi.magic.elementalObi          = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
 local spellAcc                 = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC            }
 local strongAffinityDmg        = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG  }
 local strongAffinityAcc        = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC  }
@@ -512,41 +512,41 @@ xi.magic.getCureFinal = function(caster, spell, basecure, minCure, isBlueMagic)
 
     if castersWeather == xi.magic.singleWeatherStrong[ele] then
         if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-            if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+            if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
                 dayWeatherBonus = dayWeatherBonus + 0.10
             end
         end
 
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
     elseif castersWeather == xi.magic.singleWeatherWeak[ele] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
     elseif castersWeather == xi.magic.doubleWeatherStrong[ele] then
         if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-            if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+            if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
                 dayWeatherBonus = dayWeatherBonus + 0.10
             end
         end
 
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.25
         end
     elseif castersWeather == xi.magic.doubleWeatherWeak[ele] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.25
         end
     end
 
     local dayElement = VanadielDayElement()
     if dayElement == ele then
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
     elseif dayElement == xi.magic.elementDescendant[ele] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
     end
@@ -1193,7 +1193,7 @@ xi.magic.addBonuses = function(caster, spell, target, dmg, params)
     dmg = math.floor(dmg * affinityBonus)
     dmg = math.floor(dmg * magicDefense)
 
-    local dayWeatherBonusCheck = math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)
+    local dayWeatherBonusCheck = math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 or isHelixSpell(spell)
 
     if dayWeatherBonusCheck then
         if weather == xi.magic.singleWeatherStrong[ele] then
@@ -1301,7 +1301,7 @@ xi.magic.addBonusesAbility = function(caster, ele, target, dmg, params)
     local dayWeatherBonus = 1.00
     local weather = caster:getWeather()
 
-    if elementalObi[ele] ~= nil and (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1) then
+    if xi.magic.elementalObi[ele] ~= nil and (math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1) then
         if weather == xi.magic.singleWeatherStrong[ele] then
             if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
                 dayWeatherBonus = dayWeatherBonus + 0.10
@@ -1324,11 +1324,11 @@ xi.magic.addBonusesAbility = function(caster, ele, target, dmg, params)
     local dayElement = VanadielDayElement()
     if dayElement == ele then
         dayWeatherBonus = dayWeatherBonus + caster:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
     elseif dayElement == xi.magic.elementDescendant[ele] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+        if math.random() < 0.33 or caster:getMod(xi.magic.elementalObi[ele]) >= 1 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
     end

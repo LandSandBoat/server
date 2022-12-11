@@ -16,6 +16,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
+require("scripts/globals/spells/healing_spell")
 -----------------------------------
 local spellObject = {}
 
@@ -24,41 +25,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local minCure = 250
-    local divisor = 0.6666
-    local constant = 130
-    local power = xi.magic.getCurePowerOld(caster)
-    local final = xi.magic.getCureFinal(caster, spell, xi.magic.getBaseCureOld(power, divisor, constant), minCure, true)
-    local diff = target:getMaxHP() - target:getHP()
-
-    if power > 559 then
-        divisor = 2.8333
-        constant = 391.2
-    elseif power > 319 then
-        divisor =  1
-        constant = 210
-    end
-
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-
-    if
-        target:getAllegiance() == caster:getAllegiance() and
-        (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)
-    then
-        --Applying server mods
-        final = final * xi.settings.main.CURE_POWER
-    end
-
-    if final > diff then
-        final = diff
-    end
-
-    target:addHP(final)
-    target:wakeUp()
-    caster:updateEnmityFromCure(target, final)
-    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
-
-    return final
+    return xi.spells.healing.doHealingSpell(caster, target, spell, true)
 end
 
 return spellObject
