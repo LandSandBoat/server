@@ -22,6 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     for _, effect in pairs(statii) do
         target:delStatusEffect(effect)
     end
+
     return 0
 end
 
