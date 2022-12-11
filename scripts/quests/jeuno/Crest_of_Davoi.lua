@@ -72,7 +72,6 @@ quest.sections =
                 [171] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:setCharVar("saveMySisterVar", 1)
                     end
                 end,
             },

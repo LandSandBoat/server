@@ -4098,6 +4098,7 @@ xi.items =
     GREAT_CLUB                      = 17030,
     SHELL_SCEPTER                   = 17031,
     GOBBIE_GAVEL                    = 17032,
+    HOLY_MACE                       = 17041,
     MAUL                            = 17045,
     MAPLE_WAND                      = 17049,
     CADUCEUS                        = 17058,
