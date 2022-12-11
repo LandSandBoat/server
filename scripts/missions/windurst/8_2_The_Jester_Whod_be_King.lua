@@ -291,7 +291,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 0 then
-                        return mission:progressEvent(588)
+                        return mission:progressEvent(588, 0, xi.ki.MANUSTERY_RING)
                     elseif missionStatus == 2 then
                         return mission:progressEvent(601, 0, xi.ki.ORASTERY_RING)
                     elseif missionStatus == 6 then
