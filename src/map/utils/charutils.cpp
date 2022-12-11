@@ -6494,8 +6494,10 @@ namespace charutils
 
         if (type == 2)
         {
-            sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u;", (uint32)ipp, (uint32)(ipp >> 32),
-                       PChar->id);
+            auto ip   = (uint32)ipp;
+            auto port = (uint32)(ipp >> 32);
+            sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u;",
+                       ip, port, PChar->id);
 
             const char* Query = "UPDATE chars "
                                 "SET "
