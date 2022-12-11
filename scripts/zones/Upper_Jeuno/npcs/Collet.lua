@@ -38,19 +38,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local aClockMostdelicate = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
-    if
-        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5 and
-        aClockMostdelicate == QUEST_AVAILABLE and
-        player:getCharVar("aClockMostdelicateVar") == 0
-    then
-        player:startEvent(112)
-    elseif player:getCharVar("saveTheClockTowerVar") >= 1 then
+    if player:getCharVar("saveTheClockTowerVar") >= 1 then
         player:startEvent(164)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED then
         player:startEvent(163)
-    else
-        player:startEvent(114)
     end
 end
 
@@ -58,9 +49,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 112 then
-        player:setCharVar("aClockMostdelicateVar", 1)
-    elseif csid == 115 then
+    if csid == 115 then
         player:incrementCharVar("saveTheClockTowerVar", 1)
         player:incrementCharVar("saveTheClockTowerNPCz1", 2)
     end
