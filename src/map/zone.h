@@ -414,7 +414,6 @@ enum class ZONE_TYPE : uint8
     BATTLEFIELD       = 4,
     DYNAMIS           = 5,
     DUNGEON_INSTANCED = 6,
-    LIMBUS            = 7
 };
 
 enum GLOBAL_MESSAGE_TYPE
