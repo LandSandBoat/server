@@ -290,7 +290,7 @@ enum class Mod
     LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
     LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
 
-    // Resistances to enfeebles - Traits/Job Ability
+    // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
     POISONRES   = 241, // Enhances "Resist Poison" effect
     PARALYZERES = 242, // Enhances "Resist Paralyze" effect
@@ -308,6 +308,25 @@ enum class Mod
     LULLABYRES  = 254, // Enhances "Resist Lullaby" effect
     DEATHRES    = 255, // Used by gear and ATMA that give resistance to instance KO
     STATUSRES   = 958, // "Resistance to All Status Ailments"
+
+    // MEVA bonus to enfeebles (Bar-Effect, for example. And modifiers in mobs)
+    SLEEP_MEVA    = 200,
+    POISON_MEVA   = 201,
+    PARALYZE_MEVA = 202,
+    BLIND_MEVA    = 203,
+    SILENCE_MEVA  = 204,
+    VIRUS_MEVA    = 205,
+    PETRIFY_MEVA  = 206,
+    BIND_MEVA     = 207,
+    CURSE_MEVA    = 208,
+    GRAVITY_MEVA  = 209,
+    SLOW_MEVA     = 210,
+    STUN_MEVA     = 211,
+    CHARM_MEVA    = 212,
+    AMNESIA_MEVA  = 213,
+    LULLABY_MEVA  = 214,
+    DEATH_MEVA    = 215,
+    STATUS_MEVA   = 216,
 
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
@@ -947,7 +966,7 @@ enum class Mod
     // 74 to 79
     // 138 to 143
     // 156 to 159
-    // 200 to 223
+    // 217 to 223
     // 261 to 280
     //
     // SPARE = 1075, and onward
