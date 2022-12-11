@@ -32,7 +32,6 @@ entity.onMobFight = function(mob, player, target)
         mob:setLocalVar("salty", 0)
     end
 
-
     -- big
     if
         delay < os.time() and
