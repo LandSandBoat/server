@@ -20,6 +20,18 @@ entity.onMobFight = function(mob, player, target)
 
     mob:setDamage(130)
 
+    -- handle salt usage
+    if mob:getLocalVar("melt") == 1 then
+        player:messageText(player, ID.text.BEGINS_TO_MELT)
+        mob:setLocalVar("melt", 0)
+    end
+
+    -- salt cooldown time reset
+    if (mob:getLocalVar("cooldown") < os.time() and mob:getLocalVar("salty") == 1) then
+        player:messageText(player, ID.text.SHOOK_SALT)
+        mob:setLocalVar("salty", 0)
+    end
+
     -- big
     if
         delay < os.time() and
