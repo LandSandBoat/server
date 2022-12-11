@@ -192,7 +192,18 @@ quest.sections =
                 [160] = petitionOnEventFinish,
             },
         },
-    }
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Souren'] = quest:event(181):replaceDefault(),
+        },
+    },
 }
 
 return quest

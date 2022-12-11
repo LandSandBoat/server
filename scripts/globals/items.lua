@@ -3647,6 +3647,7 @@ xi.items =
     MAPLE_WAND                      = 17049,
     CADUCEUS                        = 17058,
     EARTH_WAND                      = 17076,
+    TIME_HAMMER                     = 17083,
     MISERY_STAFF                    = 17116,
     SHORTBOW                        = 17152,
     SELF_BOW                        = 17153,
