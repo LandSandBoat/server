@@ -364,7 +364,7 @@ xi.quest.id =
     [xi.quest.area[xi.quest.log_id.JEUNO]] =
     {
         CREST_OF_DAVOI                  = 0,  -- + Converted
-        SAVE_MY_SISTER                  = 1,  -- +
+        SAVE_MY_SISTER                  = 1,  -- + Converted
         A_CLOCK_MOST_DELICATE           = 2,  -- +
         SAVE_THE_CLOCK_TOWER            = 3,  -- +
         CHOCOBOS_WOUNDS                 = 4,  -- + Converted
