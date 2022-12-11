@@ -13,8 +13,8 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEPRES, 50)
-    mob:addMod(xi.mod.LULLABYRES, 50)
+    mob:addMod(xi.mod.SLEEP_MEVA, 50)
+    mob:addMod(xi.mod.LULLABY_MEVA, 50)
     mob:setLocalVar("everyonesRancorHPP", math.random(20, 30))
 end
 

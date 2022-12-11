@@ -281,9 +281,9 @@ content.groups =
         mobs = { "Criosphinx", "Hieracosphinx" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = 75,
-            [xi.mod.BINDRES] = 75,
-            [xi.mod.SLEEPRES] = 75,
+            [xi.mod.GRAVITY_MEVA] = 75,
+            [xi.mod.BIND_MEVA] = 75,
+            [xi.mod.SLEEP_MEVA] = 75,
         },
     }
 }

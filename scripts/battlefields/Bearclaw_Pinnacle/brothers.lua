@@ -30,7 +30,7 @@ content.groups =
         mods =
         {
             [xi.mod.DMGMAGIC] = -1000,
-            [xi.mod.SLEEPRES] = 75,
+            [xi.mod.SLEEP_MEVA] = 75,
         },
 
         mobMods =
@@ -43,8 +43,8 @@ content.groups =
         mods =
         {
             [xi.mod.DMGMAGIC] = -1000,
-            [xi.mod.SILENCERES] = 75,
-            [xi.mod.SLEEPRES] = 50,
+            [xi.mod.SILENCE_MEVA] = 75,
+            [xi.mod.SLEEP_MEVA] = 50,
         },
 
         mobMods =

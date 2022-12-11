@@ -10,11 +10,11 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MULTI_HIT, 6)
-    mob:setMod(xi.mod.BINDRES, 20)
-    mob:setMod(xi.mod.BLINDRES, 20)
-    mob:setMod(xi.mod.SLEEPRES, 20)
-    mob:setMod(xi.mod.LULLABYRES, 20)
-    mob:setMod(xi.mod.GRAVITYRES, 20)
+    mob:setMod(xi.mod.BIND_MEVA, 20)
+    mob:setMod(xi.mod.BLIND_MEVA, 20)
+    mob:setMod(xi.mod.SLEEP_MEVA, 20)
+    mob:setMod(xi.mod.LULLABY_MEVA, 20)
+    mob:setMod(xi.mod.GRAVITY_MEVA, 20)
 end
 
 entity.onMobSpawn = function(mob)
@@ -38,11 +38,11 @@ local function removeTentacle(mob, tentacles)
 
     mob:addMod(xi.mod.ATT, 50)
     mob:addMod(xi.mod.REGAIN, 50)
-    mob:addMod(xi.mod.BINDRES, 10)
-    mob:addMod(xi.mod.BLINDRES, 10)
-    mob:addMod(xi.mod.SLEEPRES, 10)
-    mob:addMod(xi.mod.LULLABYRES, 10)
-    mob:addMod(xi.mod.GRAVITYRES, 10)
+    mob:addMod(xi.mod.BIND_MEVA, 10)
+    mob:addMod(xi.mod.BLIND_MEVA, 10)
+    mob:addMod(xi.mod.SLEEP_MEVA, 10)
+    mob:addMod(xi.mod.LULLABY_MEVA, 10)
+    mob:addMod(xi.mod.GRAVITY_MEVA, 10)
 end
 
 entity.onMobFight = function(mob, target)
