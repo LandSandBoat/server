@@ -120,6 +120,7 @@ xi.items =
     LOCK_OF_HIWONS_HAIR             = 552,
     DANGRUF_STONE                   = 553,
     GOLD_ORCMASK                    = 554,
+    CLOCK_TOWER_PETITION            = 555,
     DIVINATION_SPHERE               = 556,
     AHRIMAN_LENS                    = 557,
     TARUT_CARD_THE_FOOL             = 558,

@@ -9,6 +9,7 @@ return {
     ['Muckvix']          = { event = 15 },
     ['Omer']             = { event = 206 },
     ['Sattal-Mansal']    = { event = 96 },
+    ['Teigero-Bangero']  = { event = 34 },
     ['Yatniel']          = { event = 10028 },
     ['Ghebi_Damomohe']   = { event = 106, options = 4 },
     ['Vhana_Ehgaklywha'] = { text = ID.text.VHANA_DEFAULT },

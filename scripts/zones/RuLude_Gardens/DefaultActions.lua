@@ -10,5 +10,6 @@ return {
     ['Neraf-Najiruf']   = { event = 156 },
     ['Nomad_Moogle']    = { event = 10045, options = { 0, 2, 0, 0 } },
     ['Pherimociel']     = { event = 155 },
+    ['Radeivepart']     = { event = 159 },
     ['Taillegeas']      = { event = 10061 },
 }

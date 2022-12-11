@@ -366,8 +366,8 @@ xi.quest.id =
     {
         CREST_OF_DAVOI                  = 0,  -- + Converted
         SAVE_MY_SISTER                  = 1,  -- + Converted
-        A_CLOCK_MOST_DELICATE           = 2,  -- +
-        SAVE_THE_CLOCK_TOWER            = 3,  -- +
+        A_CLOCK_MOST_DELICATE           = 2,  -- + Converted
+        SAVE_THE_CLOCK_TOWER            = 3,  -- + Converted
         CHOCOBOS_WOUNDS                 = 4,  -- + Converted
         SAVE_MY_SON                     = 5,  -- +
         A_CANDLELIGHT_VIGIL             = 6,  -- + Converted
