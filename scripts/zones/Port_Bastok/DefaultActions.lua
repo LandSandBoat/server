@@ -11,7 +11,7 @@ return {
     ['Evi']          = { event = 21 },
     ['Gudav']        = { event = 31 },
     ['Hilda']        = { event = 48 },
-    ['Juroro']       = { event = 253 },
+    -- ['Juroro']       = { event = 253 },
     ['Kurando']      = { event = 28 },
     ['Latifah']      = { event = 13 },
     ['Mine_Konte']   = { event = 42 },

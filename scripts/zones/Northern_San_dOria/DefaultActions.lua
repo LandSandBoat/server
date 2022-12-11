@@ -24,7 +24,6 @@ return {
     },
     ['Guilerme']   = { text = ID.text.GUILERME_DIALOG },
     ['Helaku']     = { event = 541 },
-    ['Hinaree']    = { event = 580 },
     ['Kasaroro']   = { event = 548 },
     ['Maurinne']   = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']    = { event = 517 },
