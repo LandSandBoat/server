@@ -931,7 +931,6 @@ INSERT INTO `mob_droplist` VALUES (90,0,0,1000,1133,@VRARE);     -- Vial Of Drag
 -- ZoneID: 124 - Anemone
 INSERT INTO `mob_droplist` VALUES (91,0,0,1000,920,@VCOMMON);   -- Malboro Vine (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (91,0,0,1000,920,@VCOMMON);   -- Malboro Vine (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (91,0,0,1000,1983,@UNCOMMON); -- Mushroom Locust (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (91,0,0,1000,4602,@RARE);     -- Warm Egg (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (91,0,0,1000,1446,@VRARE);    -- Lacquer Tree Log (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (91,2,0,1000,920,0);          -- Malboro Vine (Steal)
@@ -1069,7 +1068,6 @@ INSERT INTO `mob_droplist` VALUES (111,0,0,1000,18781,620);    -- Furor Cesti (6
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,2518,500);     -- Smilodon Hide (50.0%)
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,11719,140);    -- Navarchs Earring (14.0%)
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,902,110);      -- Demon Horn (11.0%)
-INSERT INTO `mob_droplist` VALUES (111,0,0,1000,1985,110);     -- Helmet Mole (11.0%)
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,2168,80);      -- Cerberus Claw (8.0%)
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,5466,70);      -- Trumpet Shell (7.0%)
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,3232,60);      -- Tiger Kings Hide (6.0%)
@@ -4591,7 +4589,6 @@ INSERT INTO `mob_droplist` VALUES (513,0,0,1000,12961,@VRARE);   -- Brass Leggin
 INSERT INTO `mob_droplist` VALUES (513,2,0,1000,750,0);          -- Silver Beastcoin (Steal)
 
 -- ZoneID: 143 - Copper Quadav
-INSERT INTO `mob_droplist` VALUES (514,0,0,1000,1984,@VCOMMON); -- Snapping Mole (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (514,0,0,1000,1025,@VRARE);   -- Palborough Chest Key (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (514,0,0,1000,1529,@VRARE);   -- Darksteel Engraving (Very Rare, 1%)
 -- INSERT INTO `mob_droplist` VALUES (514,0,0,1000,2758,@VRARE);   -- Quadav Backscale (Very Rare, 1%) AMK item
@@ -8106,7 +8103,6 @@ INSERT INTO `mob_droplist` VALUES (993,0,0,1000,1036,@RARE); -- Delkfutt Chest K
 
 -- ZoneID: 173 - Gigas Stonecarrier
 INSERT INTO `mob_droplist` VALUES (994,0,0,1000,497,@VCOMMON);    -- Gigas Socks (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (994,0,0,1000,1985,@UNCOMMON);  -- Helmet Mole (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (994,0,0,1000,12290,@UNCOMMON); -- Maple Shield (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (994,0,0,1000,499,@RARE);       -- Gigas Necklace (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (994,0,0,1000,1836,@VRARE);     -- Marble Slab (Very Rare, 1%)
@@ -8114,7 +8110,6 @@ INSERT INTO `mob_droplist` VALUES (994,0,0,1000,1836,@VRARE);     -- Marble Slab
 -- ZoneID: 173 - Gigas Stonegrinder
 INSERT INTO `mob_droplist` VALUES (995,0,0,1000,497,@VCOMMON);   -- Gigas Socks (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (995,0,0,1000,499,@VCOMMON);   -- Gigas Necklace (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (995,0,0,1000,1985,@UNCOMMON); -- Helmet Mole (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (995,0,0,1000,1836,@RARE);     -- Marble Slab (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (995,0,0,1000,12290,@VRARE);   -- Maple Shield (Very Rare, 1%)
 
@@ -8123,7 +8118,6 @@ INSERT INTO `mob_droplist` VALUES (996,0,0,1000,1036,@RARE);  -- Delkfutt Chest 
 
 -- ZoneID: 173 - Gigas Stonemason
 INSERT INTO `mob_droplist` VALUES (997,0,0,1000,497,@VCOMMON);   -- Gigas Socks (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (997,0,0,1000,1985,@UNCOMMON); -- Helmet Mole (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (997,0,0,1000,1836,@RARE);     -- Marble Slab (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (997,0,0,1000,12290,@RARE);    -- Maple Shield (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (997,0,0,1000,499,@VRARE);     -- Gigas Necklace (Very Rare, 1%)
@@ -10478,7 +10472,6 @@ INSERT INTO `mob_droplist` VALUES (1285,1,1,1000,17184,80);  -- Assassins Bow (G
 INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,2168,@ALWAYS);    -- Cerberus Claw (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,679,@UNCOMMON);   -- Aluminum Ingot (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,806,@UNCOMMON);   -- Tourmaline (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,1985,@UNCOMMON);  -- Helmet Mole (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,4137,@UNCOMMON);  -- Super Ether +1 (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,4969,@UNCOMMON);  -- Scroll Of Migawari Ichi (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1286,0,0,1000,5006,@UNCOMMON);  -- Scroll Of Valor Minuet V (Uncommon, 10%)
@@ -12360,7 +12353,6 @@ INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,2168,@ALWAYS);    -- Cerberus C
 INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,897,560);         -- Scorpion Claw (56.0%)
 INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,654,@UNCOMMON);   -- Darksteel Ingot (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,679,@UNCOMMON);   -- Aluminum Ingot (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,1985,@UNCOMMON);  -- Helmet Mole (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,4761,@UNCOMMON);  -- Scroll Of Blizzard V (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,4892,@UNCOMMON);  -- Scroll Of Aeroja (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1532,0,0,1000,5090,@UNCOMMON);  -- Scroll Of Gain-Agi (Uncommon, 10%)
@@ -14949,8 +14941,6 @@ INSERT INTO `mob_droplist` VALUES (1848,0,0,1000,609,@VRARE);   -- Quadav Fetich
 INSERT INTO `mob_droplist` VALUES (1848,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID: 143 - Old Quadav
-INSERT INTO `mob_droplist` VALUES (1849,0,0,1000,1984,@UNCOMMON); -- Snapping Mole (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1849,0,0,1000,1984,@UNCOMMON); -- Snapping Mole (Uncommon, 10%)
 -- INSERT INTO `mob_droplist` VALUES (1849,0,0,1000,2758,@RARE);     -- Quadav Backscale (Rare, 5%) AMK item
 INSERT INTO `mob_droplist` VALUES (1849,0,0,1000,1025,@RARE);     -- Palborough Chest Key (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1849,0,0,1000,606,@VRARE);     -- Quadav Fetich Head (Very Rare, 1%)
@@ -21620,7 +21610,6 @@ INSERT INTO `mob_droplist` VALUES (2632,2,0,1000,4370,0);         -- Pot Of Hone
 -- ZoneID:  87 - Waughroon Heavyshell
 -- ZoneID: 218 - Waugyl
 INSERT INTO `mob_droplist` VALUES (2633,0,0,1000,2148,380);        -- Puk Wing (38.0%)
-INSERT INTO `mob_droplist` VALUES (2633,0,0,1000,1985,@UNCOMMON);  -- Helmet Mole (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2633,0,0,1000,11574,@UNCOMMON); -- Potentia Cape (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2633,0,0,1000,18898,@UNCOMMON); -- Mageblade (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2633,0,0,1000,1616,70);         -- Antlion Jaw (7.0%)
@@ -22290,8 +22279,6 @@ INSERT INTO `mob_droplist` VALUES (2714,0,0,1000,4618,@VRARE);    -- Scroll Of C
 INSERT INTO `mob_droplist` VALUES (2714,2,0,1000,656,0);          -- Beastcoin (Steal)
 
 -- ZoneID:  95 - Yagudo Initiate
-INSERT INTO `mob_droplist` VALUES (2715,0,0,1000,1981,@UNCOMMON); -- Skull Locust (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2715,0,0,1000,1982,@UNCOMMON); -- King Locust (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2715,0,0,1000,2520,60);        -- Yagudo Kote (6.0%)
 INSERT INTO `mob_droplist` VALUES (2715,0,0,1000,2525,20);        -- Bottled Pixie (2.0%)
 INSERT INTO `mob_droplist` VALUES (2715,2,0,1000,748,0);          -- Gold Beastcoin (Steal)
@@ -22304,7 +22291,6 @@ INSERT INTO `mob_droplist` VALUES (2716,0,0,1000,841,@COMMON);   -- Yagudo Feath
 INSERT INTO `mob_droplist` VALUES (2716,0,0,1000,841,@COMMON);   -- Yagudo Feather (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2716,0,0,1000,841,@COMMON);   -- Yagudo Feather (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2716,0,0,1000,498,@UNCOMMON); -- Yagudo Bead Necklace (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2716,0,0,1000,1981,@VRARE);   -- Skull Locust (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2716,2,0,1000,656,0);         -- Beastcoin (Steal)
 
 -- ZoneID: 117 - Yagudo Initiate
@@ -22313,7 +22299,6 @@ INSERT INTO `mob_droplist` VALUES (2717,0,0,1000,841,@UNCOMMON);  -- Yagudo Feat
 INSERT INTO `mob_droplist` VALUES (2717,0,0,1000,841,@UNCOMMON);  -- Yagudo Feather (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2717,0,0,1000,841,@UNCOMMON);  -- Yagudo Feather (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2717,0,0,1000,498,@UNCOMMON);  -- Yagudo Bead Necklace (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2717,0,0,1000,1981,@VRARE);    -- Skull Locust (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2717,2,0,1000,656,0);          -- Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (2717,4,0,1000,4537,0);         -- Roast Carp (Despoil)
 
@@ -22781,7 +22766,6 @@ INSERT INTO `mob_droplist` VALUES (2775,0,0,1000,12969,@SRARE); -- Cotton Kyahan
 INSERT INTO `mob_droplist` VALUES (2775,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID: 145 - Yagudo Votary
-INSERT INTO `mob_droplist` VALUES (2776,0,0,1000,1982,@VCOMMON); -- King Locust (Very Common, 24%)
 -- INSERT INTO `mob_droplist` VALUES (2776,0,0,1000,2759,@RARE);    -- Block Of Yagudo Caulk (Rare, 5%) AMK item
 INSERT INTO `mob_droplist` VALUES (2776,0,0,1000,1026,@RARE);    -- Giddeus Chest Key (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2776,0,0,1000,1530,@RARE);    -- Seven-Knot Quipu (Rare, 5%)
@@ -23985,7 +23969,6 @@ INSERT INTO `mob_droplist` VALUES (2921,2,0,1000,920,0);   -- Malboro Vine (Stea
 
 -- ZoneID: 123 - Overgrown Rose
 INSERT INTO `mob_droplist` VALUES (2922,0,0,1000,920,@VCOMMON);   -- Malboro Vine (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (2922,0,0,1000,1983,@COMMON);   -- Mushroom Locust (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2922,0,0,1000,4598,@RARE);     -- Wild Pineapple (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2922,0,0,1000,1446,@VRARE);    -- Lacquer Tree Log (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2922,2,0,1000,920,0);          -- Malboro Vine (Steal)

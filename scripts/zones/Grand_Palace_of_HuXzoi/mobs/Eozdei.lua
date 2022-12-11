@@ -11,7 +11,7 @@ entity.onPath = function(mob)
     local spawnPos = mob:getSpawnPos()
     mob:pathThrough({ spawnPos.x, spawnPos.y, spawnPos.z })
     local pos = mob:getPos()
-    if spawnPos.x == pos.x and spawnPos.z == pos.z and mob:getYPos() > -1 then
+    if spawnPos.x == pos.x and spawnPos.z == pos.z and pos.y > -1 then
         mob:setPos(spawnPos.x, spawnPos.y, spawnPos.z, mob:getRotPos() + 16)
     end
 end
