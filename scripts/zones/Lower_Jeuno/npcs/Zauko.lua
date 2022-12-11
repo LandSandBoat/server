@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Lower Jeuno
 --  NPC: Zauko
--- Involved in Quests: Save the Clock Tower, Community Service
+-- Involved in Quests: Community Service
 -- !pos -3 0 11 245
 -----------------------------------
 require("scripts/zones/Lower_Jeuno/globals")
@@ -15,36 +15,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    ----- Save The Clock Tower Quest -----
-    if
-        trade:hasItemQty(555, 1) and
-        trade:getItemCount() == 1
-    then
-        local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
-        if
-            a == 0 or
-            (
-                a ~= 256 and
-                a ~= 288 and
-                a ~= 320 and
-                a ~= 384 and
-                a ~= 768 and
-                a ~= 352 and
-                a ~= 896 and
-                a ~= 416 and
-                a ~= 832 and
-                a ~= 448 and
-                a ~= 800 and
-                a ~= 480 and
-                a ~= 864 and
-                a ~= 928 and
-                a ~= 960 and
-                a ~= 992
-            )
-        then
-            player:startEvent(50, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -120,13 +90,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- SAVE THE CLOCKTOWER
-    if csid == 50 then
-        player:incrementCharVar("saveTheClockTowerVar", 1)
-        player:incrementCharVar("saveTheClockTowerNPCz2", 256)
-
     -- COMMUNITY SERVICE
-    elseif csid == 117 then
+    if csid == 117 then
         local params = { title = xi.title.TORCHBEARER, var = "currCommService" }
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) ~= QUEST_COMPLETED then
             -- first victory
