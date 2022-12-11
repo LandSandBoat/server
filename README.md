@@ -19,7 +19,7 @@ At AirSkyBoat, we are focused on giving credit where its due when pulling in Ope
 
 As AirSkyBoat is a derivative of LandSandBoat, please use all of their guides for how to setup a server. They have a great and consistently updated wiki for how to work with their systems.
 
-A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Guide), the [frequently asked questions](https://github.com/LandSandBoat/server/-/wikis/Frequently-Asked-Questions), and a table of "[what works](https://github.com/LandSandBoat/server/wikis/What-Works)" are all available on [LSB's wiki](https://github.com/LandSandBoat/server/wiki).
+A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Guide), the [frequently asked questions](https://github.com/LandSandBoat/server/wiki/Frequently-Asked-Questions), and a table of "[what works](https://github.com/LandSandBoat/server/wikis/What-Works)" are all available on [LSB's wiki](https://github.com/LandSandBoat/server/wiki).
 
 ## Interacting with AirSkyBoat
 
