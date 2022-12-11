@@ -2630,12 +2630,20 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
+            auto ipp = zoneutils::GetZoneIPP(zoneid);
+            if (ipp == 0)
+            {
+                ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, zoneid));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                return;
+            }
+
             PChar->loc.destination = zoneid;
             PChar->status          = STATUS_TYPE::DISAPPEAR;
             PChar->loc.boundary    = 0;
             PChar->m_moghouseID    = 0;
             PChar->clearPacketList();
-            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+            charutils::SendToZone(PChar, 2, ipp);
         }
         else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
