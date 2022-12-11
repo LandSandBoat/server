@@ -6,6 +6,7 @@ return {
     ['Baudin']       = { event = 122 },
     ['Chocobo']      = { event = 54 },
     ['Collet']       = { event = 114 },
+    ['Constance']    = { event = 90 },
     ['Guide_Stone']  = { messageSpecial = ID.text.GUIDE_STONE },
     ['Ilumida']      = { event = 189 },
     ['Laila']        = { event = 10120 },
@@ -16,4 +17,6 @@ return {
     ['Rhea_Myuliah'] = { event = 10121 },
     ['Rosaline']     = { event = 96 },
     ['Rouliette']    = { event = 30 },
+    ['Souren']       = { event = 88 },
+    ['Zuber']        = { event = 125 },
 }
