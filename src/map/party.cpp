@@ -553,7 +553,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
         if (PChar->nameflags.flags & FLAG_INVITE)
         {
-            PChar->nameflags.flags ^= FLAG_INVITE;
+            PChar->nameflags.flags &= ~FLAG_INVITE;
             PChar->updatemask |= UPDATE_HP;
 
             charutils::SaveCharStats(PChar);
