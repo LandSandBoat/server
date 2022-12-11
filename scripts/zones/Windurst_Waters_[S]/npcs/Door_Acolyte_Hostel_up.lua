@@ -17,8 +17,8 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_ACCEPTED
-        and player:getCharVar("sayItWithAHandbagCS") == 0
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_ACCEPTED and
+        player:getCharVar("sayItWithAHandbagCS") == 0
     then
         player:startEvent(171)
     end

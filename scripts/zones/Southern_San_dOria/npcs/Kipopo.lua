@@ -14,9 +14,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER)
-        and player:getCharVar("sayItWithAHandbagCS") == 2
-        and npcUtil.tradeHasExactly(trade, { 2012, 850, 816 })
+        player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) and
+        player:getCharVar("sayItWithAHandbagCS") == 2 and
+        npcUtil.tradeHasExactly(trade, { 2012, 850, 816 })
     then
         player:startEvent(910)
     end
@@ -28,8 +28,8 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
-        and player:getCharVar("sayItWithAHandbagBonusCS") == 1
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED and
+        player:getCharVar("sayItWithAHandbagBonusCS") == 1
     then
         player:startEvent(914)
     elseif player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
