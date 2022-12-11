@@ -195,11 +195,20 @@ xi.damage.magicHitRate.calculateCasterMagicAccuracy = function(caster, target, s
     local maccFood = magicAcc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicAcc = magicAcc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
+    -----------------------------------
+    -- magicAcc from Magic Burst
+    -----------------------------------
+    local _, skillchainCount = FormMagicBurst(spellElement, target)
+
+    if skillchainCount > 0 then
+        magicAcc = magicAcc + 100
+    end
+
     return magicAcc
 end
 
 -- Target Magic Evasion
-xi.damage.magicHitRate.calculateTargetMagicEvasion = function(caster, target, spellElement)
+xi.damage.magicHitRate.calculateTargetMagicEvasion = function(caster, target, spellElement, isEnfeeble, mEvaMod)
     local magicEva   = target:getMod(xi.mod.MEVA) -- Base MACC.
     local resistRank = 0 -- Elemental specific Resistance rank. Acts as multiplier to base MACC.
     local resMod     = 0 -- Elemental specific magic evasion. Acts as a additive bonus to base MACC after affected by resistance rank.
@@ -213,6 +222,11 @@ xi.damage.magicHitRate.calculateTargetMagicEvasion = function(caster, target, sp
 
         magicEva = magicEva * (1 + (resistRank * 0.075))
         magicEva = magicEva + resMod
+    end
+
+    -- Magic evasion against specific status effects.
+    if isEnfeeble then
+        magicEva = magicEva + target:getMod(mEvaMod) + target:getMod(xi.mod.STATUS_MEVA)
     end
 
     -- Level correction. Target gets a bonus when higher level. Never a penalty.

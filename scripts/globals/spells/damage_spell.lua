@@ -381,10 +381,7 @@ end
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
 xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statUsed)
-    local resist        = 1 -- The variable we want to calculate
-
-    -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
-    local _, skillchainCount = FormMagicBurst(spellElement, target)
+    local resist = 0 -- The variable we want to calculate
 
     -- Function flow:
     -- Step 0: We check for exceptions that would make the next steps obsolete.
@@ -396,11 +393,8 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- STEP 0: Exceptions.
     -----------------------------------
-    -- Magic Shield and magic burst exceptions.
+    -- Magic Shield exceptions.
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        resist = 0
-        return resist
-    elseif skillchainCount > 0 then
         return resist
     end
 
@@ -412,7 +406,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- STEP 2: Get target magic evasion
     -----------------------------------
-    local magicEva = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement)
+    local magicEva = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0) -- false = not an enfeeble. 0 = No meva modifier.
 
     -----------------------------------
     -- STEP 3: Get Magic Hit Rate
