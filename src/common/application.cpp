@@ -22,6 +22,8 @@
 #include "application.h"
 #include "debug.h"
 #include "logging.h"
+#include "lua.h"
+#include "settings.h"
 #include "taskmgr.h"
 
 #ifdef _WIN32
@@ -38,6 +40,8 @@ Application::Application(std::string serverName, std::unique_ptr<argparse::Argum
 #endif
 
     logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
+    lua_init();
+    settings::init();
     ShowInfo("Begin %s-server initialisation...", serverName);
 
     debug::init();
