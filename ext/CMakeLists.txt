@@ -87,6 +87,12 @@ CPMAddPackage(
     GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
 ) # defines: jthread-lite
 
+CPMAddPackage(
+    NAME cpp-httplib
+    GITHUB_REPOSITORY yhirose/cpp-httplib
+    GIT_TAG v0.11.3
+) # defines: httplib::httplib
+
 set(EXTERNAL_LIBS
     concurrentqueue
     mariadbclient
@@ -97,6 +103,7 @@ set(EXTERNAL_LIBS
     argparse
     efsw
     jthread-lite
+    httplib::httplib
 )
 
 if (WIN32)
