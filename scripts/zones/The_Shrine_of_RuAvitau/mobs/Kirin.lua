@@ -16,10 +16,10 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.WIND_MEVA, -64) -- Todo: Move to mob_resists.sql
-    mob:setMod(xi.mod.SILENCERES, 35)
-    mob:setMod(xi.mod.STUNRES, 35)
-    mob:setMod(xi.mod.BINDRES, 35)
-    mob:setMod(xi.mod.GRAVITYRES, 35)
+    mob:setMod(xi.mod.SILENCE_MEVA, 35)
+    mob:setMod(xi.mod.STUN_MEVA, 35)
+    mob:setMod(xi.mod.BIND_MEVA, 35)
+    mob:setMod(xi.mod.GRAVITY_MEVA, 35)
     mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
     mob:setLocalVar("numAdds", 1)
 end

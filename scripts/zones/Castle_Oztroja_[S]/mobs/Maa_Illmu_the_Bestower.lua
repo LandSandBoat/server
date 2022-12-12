@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
-    mob:setMod(xi.mod.SILENCERES, 100)
+    mob:setMod(xi.mod.SILENCE_MEVA, 100)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -240,8 +240,8 @@ content.groups =
         mobs = { "Pluto" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
         },
 
         setup = empowerBoss,
@@ -254,9 +254,9 @@ content.groups =
         mobs = { "Bardha" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
-            [xi.mod.SLEEPRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
+            [xi.mod.SLEEP_MEVA] = -25,
         },
 
         allDeath = function(battlefield, mob)
@@ -273,9 +273,9 @@ content.groups =
         mobs = { "Zlatorog" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
-            [xi.mod.SLEEPRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
+            [xi.mod.SLEEP_MEVA] = -25,
         },
 
         setup = empowerBoss,
@@ -288,9 +288,9 @@ content.groups =
         mobs = { "Mountain_Buffalo" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
-            [xi.mod.SLEEPRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
+            [xi.mod.SLEEP_MEVA] = -25,
         },
 
         allDeath = function(battlefield, mob)
@@ -316,9 +316,9 @@ content.groups =
         mobs = { "Apollyon_Scavenger" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
-            [xi.mod.SLEEPRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
+            [xi.mod.SLEEP_MEVA] = -25,
         },
 
         stationary = true,
@@ -336,8 +336,8 @@ content.groups =
         mobs = { "Cynoprosopi" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
         },
 
         setup = empowerBoss,
@@ -350,9 +350,9 @@ content.groups =
         mobs = { "Gorynich" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = -25,
-            [xi.mod.SLEEPRES] = -25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = -25,
+            [xi.mod.SLEEP_MEVA] = -25,
         },
 
         allDeath = function(battlefield, mob)
@@ -384,9 +384,9 @@ content.groups =
         mobs = { "Kronprinz_Behemoth" },
         mods =
         {
-            [xi.mod.GRAVITYRES] = -25,
-            [xi.mod.BINDRES] = 25,
-            [xi.mod.SLEEPRES] = 25,
+            [xi.mod.GRAVITY_MEVA] = -25,
+            [xi.mod.BIND_MEVA] = 25,
+            [xi.mod.SLEEP_MEVA] = 25,
         },
 
         mobMods = { [xi.mobMod.ALLI_HATE] = 50 },
