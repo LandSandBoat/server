@@ -1054,7 +1054,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
         m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
     }
     else if (this->objtype == TYPE_PET &&
-             (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR) &&
+             (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->m_PetID <= PETID_DARKSPIRIT) &&
              static_cast<CPetEntity*>(this)->PMaster != nullptr && static_cast<CPetEntity*>(this)->PMaster->objtype == TYPE_PC)
     {
         m_slvl = this->GetMLevel();
