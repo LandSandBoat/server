@@ -23839,23 +23839,6 @@ INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin
 -- ZoneID:  38 - Cronos
 INSERT INTO `mob_droplist` VALUES (2860,0,0,1000,1875,800); -- Ancient Beastcoin (80.0%)
 
--- ZoneID:  37 - Grognard Mesmerizer
--- ZoneID:  37 - Grognard Footsoldier
--- ZoneID:  37 - Grognard Predator
--- ZoneID:  37 - Grognard Neckchopper
--- ZoneID:  37 - Grognard Grappler
--- ZoneID:  37 - Grognard Impaler
--- ZoneID:  37 - Star Ruby Quadav
--- ZoneID:  37 - Whitegold Quadav
--- ZoneID:  37 - Wootz Quadav
--- ZoneID:  37 - Star Sapphire Quadav
--- ZoneID:  37 - Lightsteel Quadav
--- ZoneID:  37 - Yagudo Archpriest
--- ZoneID:  37 - Yagudo Disciplinant
--- ZoneID:  37 - Yagudo Kapellmeister
--- ZoneID:  37 - Yagudo Knight Templar
--- ZoneID:  37 - Yagudo Prelatess
--- ZoneID:  37 - Yagudo Eradicator
 -- ZoneID:  38 - Air Elemental
 -- ZoneID:  38 - Dark Elemental
 -- ZoneID:  38 - Earth Elemental
@@ -26838,6 +26821,27 @@ INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Grognard Mesmerizer
+-- ZoneID:  37 - Grognard Footsoldier
+-- ZoneID:  37 - Grognard Predator
+-- ZoneID:  37 - Grognard Neckchopper
+-- ZoneID:  37 - Grognard Grappler
+-- ZoneID:  37 - Grognard Impaler
+-- ZoneID:  37 - Star Ruby Quadav
+-- ZoneID:  37 - Whitegold Quadav
+-- ZoneID:  37 - Wootz Quadav
+-- ZoneID:  37 - Star Sapphire Quadav
+-- ZoneID:  37 - Lightsteel Quadav
+-- ZoneID:  37 - Yagudo Archpriest
+-- ZoneID:  37 - Yagudo Disciplinant
+-- ZoneID:  37 - Yagudo Kapellmeister
+-- ZoneID:  37 - Yagudo Knight Templar
+-- ZoneID:  37 - Yagudo Prelatess
+-- ZoneID:  37 - Yagudo Eradicator
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
