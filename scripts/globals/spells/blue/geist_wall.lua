@@ -28,12 +28,13 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.LIZARD
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistance(caster, target, spell, params)
-    local effect = xi.effect.NONE
+    params.effect = xi.effect.NONE
+    local resistThreshold = 0.25
 
-    if resist > 0.0625 then
-        spell:setMsg(xi.msg.basic.MAGIC_ERASE)
+    local resist = applyResistance(caster, target, spell, params)
+    if resist > resistThreshold then
         effect = target:dispelStatusEffect()
+        spell:setMsg(xi.msg.basic.MAGIC_ERASE)
         if effect == xi.effect.NONE then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end

@@ -24,23 +24,28 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.FROST
     local params = {}
     params.ecosystem = xi.ecosystem.ARCANA
-    params.diff = nil
+    params.effect = xi.effect.FROST
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
-    params.effect = nil
+    local tick = 3
+    local duration = 60
+    local resistThreshold = 0.5
     local resist = applyResistance(caster, target, spell, params)
 
+    -- Cannot apply if target has Burn
     if target:getStatusEffect(xi.effect.BURN) ~= nil then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    elseif resist > 0.5 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+
+    elseif resist > resistThreshold then
+        
+        -- Remove Choke on target
         if target:getStatusEffect(xi.effect.CHOKE) ~= nil then
             target:delStatusEffect(xi.effect.CHOKE)
         end
 
+<<<<<<< refs/remotes/upstream/base
         local sINT = caster:getStat(xi.mod.INT)
         local DOT = getElementalDebuffDOT(sINT)
         local effect = target:getStatusEffect(typeEffect)
@@ -61,12 +66,20 @@ spellObject.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
             local duration = math.floor(xi.settings.main.ELEMENTAL_DEBUFF_DURATION * resist)
             target:addStatusEffect(typeEffect, DOT, 3, duration)
+=======
+        local agiDown = utils.clamp(caster:getMainLvl() / 2, 0, 49)
+        local dot = utils.clamp(math.floor((agiDown - 3) / 2),0,23)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+
+        if target:addStatusEffect(params.effect, dot, tick, duration * resist) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+>>>>>>> Abstraction for physical spells AE and pure enfeebling spells + individual enfeebling spells
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return typeEffect
+    return params.effect
 end
 
 return spellObject

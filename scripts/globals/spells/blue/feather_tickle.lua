@@ -28,16 +28,20 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.BIRD
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
+    local power = 1500
+    local resistThreshold = 0.5
+
     local resist = applyResistance(caster, target, spell, params)
-    local power = 3000 * resist
-
-    if target:getTP() == 0 then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    if resist > resistThreshold then
+        if target:getTP() == 0 then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        else
+            target:delTP(power * resist)
+            spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
+        end
     else
-        target:delTP(power)
-        spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
-
     return 0
 end
 

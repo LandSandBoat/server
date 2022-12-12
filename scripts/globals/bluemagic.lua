@@ -190,7 +190,7 @@ local function blueGetHitrate(attacker, target)
 end
 
 -- Get the effect of ecosystem correlation
-function blueGetCorrelation(spellEcosystem, monsterEcosystem, merits)
+local function blueGetCorrelation(spellEcosystem, monsterEcosystem, merits)
     local effect = utils.getSystemStrengthBonus(spellEcosystem, monsterEcosystem)
     effect = effect * 0.25
     if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
@@ -351,7 +351,7 @@ function blueDoMagicalSpell(caster, target, spell, params, statMod)
     return dmg
 end
 
--- Get the damage for a HP draining magical Blue Magic spell
+-- Perform a draining magical Blue Magic spell
 function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
 
     -- determine base damage
@@ -437,6 +437,7 @@ function blueDoBreathSpell(caster, target, spell, params, isConal)
 
 end
 
+
 -- Finalize HP damage after a spell
 function blueFinalizeDamage(caster, target, spell, dmg, params)
 
@@ -485,6 +486,52 @@ function blueGetDurationWithDiffusion(caster, duration)
     return duration
 end
 
+-- Perform an enfeebling Blue Magic spell
+function blueDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
+
+    -- INT and Blue Magic skill are the default resistance modifiers
+    if params.attribute == nil then params.attribute = xi.mod.INT end
+    if params.skillType == nil then params.skillType = xi.skill.BLUE_MAGIC end
+    local resist = applyResistanceEffect(caster, target, spell, params)
+
+    -- If unresisted
+    if resist >= resistThreshold then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+
+        -- If this is a conal move, target needs to be in front of caster
+        if not isConal or (isConal and target:isInfront(caster,64)) then -- 90° cone
+
+            -- If this is a gaze move, entities need to face each other
+            if not isGaze or (isGaze and target:isFacing(caster) and caster:isFacing(target))then
+
+                -- If status effect was inflicted
+                if target:addStatusEffect(params.effect, power, tick, duration * resist) then
+                    spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+                end
+            end
+        end
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
+
+    return params.effect
+
+end
+
+-- Inflict an added enfeebling effect (after a physical spell)
+function blueDoPhysicalSpellAddedEffect(caster,target,spell,params,damage,power,tick,duration)
+
+    -- Physical spell needs to do damage before added effect can hit
+    if damage > 0 then
+        local resist = applyResistanceEffect(caster, target, spell, params)
+        if resist >= 0.5 then
+            target:addStatusEffect(params.effect, power, tick, duration * resist)
+        end
+    end
+
+end
+
+
 -- Function to stagger duration of effects by using the resistance to change the value
 -- Intend to render this obsolete, do a find once you've gone through all spells
 function getBlueEffectDuration(caster, resist, effect)
@@ -527,10 +574,7 @@ end
 | NOTES |
 +-------+
 
-_____________
-GENERAL NOTES
-
-- Spell values (multiplier, TP, D, WSC, TP etc) are gotten from:
+- Spell values (multiplier, TP, D, WSC, TP etc) from:
     - https://www.bg-wiki.com/ffxi/Calculating_Blue_Magic_Damage
     - https://ffxiclopedia.fandom.com/wiki/Calculating_Blue_Magic_Damage
     - BG-wiki spell pages
@@ -542,11 +586,6 @@ GENERAL NOTES
 
 - Assumed INT as the main magic accuracy modifier for physical spells' additional effects (when no data was found).
 
-____________________
-SPELL-SPECIFIC NOTES
-
-- Head Butt, Frypan and Tail Slap Stun will overwrite existing Stun. Blitzstrahl/Temporal Shift won't.
-
 ---------------------------
 changes in blu_fixes branch
 ---------------------------
@@ -555,9 +594,8 @@ changes in blu_fixes branch
     - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which doesnt't make sense.
     - Updated WSC values, though most were correct.
     - Added spell ecosystem.
+    - Streamlined the way spells of the same type are coded.
     - Status/added effect changes:
-        - All physical spells now need to hit before the AE can kick in.
-        - All physical spells with an AE get a resistance check for the AE.
         - Resistance now influences duration properly.
         - Effects that decay over time now work, such as Wild Oats (VIT down) and Saline Coat (Magic Defense Boost).
         - Some spells had 0 duration.
@@ -565,18 +603,25 @@ changes in blu_fixes branch
 - Physical Blue Magic spell changes:
     - Simplified some functions.
     - Added Physical Potency merits effect.
-    - Added monster correlation effects, including merits.
     - Added Azure Lore effect on multiplier.
+    - Damage is influenced by monster correlation.
+    - All physical spells now need to hit before the added effect (AE) can kick in.
+    - All physical spells with an AE get a resistance check for the AE.
 
 - Enhancing Blue Magic spell changes:
     - Consolidated Diffusion's effect on duration into one function.
+
+- Enfeebling Blue Magic spell changes:
+    - Consolidated enfeebling spells into one function, where possible.
+    - Added isGaze/isConal flags.
+    - Put the resist threshold in line with other enfeebles (>= 0.5) and halved duration when half-resist.
 
 - Breath Blue Magic spell changes:
     - Corrected breath spells to do breath damage, not magic damage.
     - You have to be in front of the monster to do breath damage.
     - Added an angle damage multiplier that lowers damage when monster is more to your side than in front.
     - Damage is influenced by a monster's elemental resistance, but not by mab/mdb or weather/day bonuses.
-    - Damage is influences by monster correlation.
+    - Damage is influenced by monster correlation.
     - The resist rate is calculated once and affects both damage and added effect hit rate / duration.
 
 - Drain Blue Magic spell changes:
@@ -589,35 +634,58 @@ changes in blu_fixes branch
     - Updated Mirage Keffiyeh/Mirage Keffiyeh +1/Saurian Helm to have BREATH_DMG_DEALT +10 mods.
 
 - TODOs:
-    - Cannot magic burst Breath spells. (bursting Breath spells only affects accuracy, not damage)
-        - Burst Affinity doesn't work with Breath spells.
-    - Conal calculations on additional targets (not the main target) for Breath spells get a reduced range due to checking a triangle and not a half-circle.
-        (see targetfind.cpp > findWithinCone, I didnt dare touch these calculations)
-    - Convergence effect isn't coded.
     - "Damage/Accuracy/Critical Hit Rate/Effect Duration varies with TP" is not implemented.
     - Missed physical spells should not be 0 dmg, but there's currently no way to make spells "miss".
     - Sneak Attack / Trick Attack in combination with spells doesn't work, but it should (but not for all spells).
     - Add 75+ spells. I didn't bother personally since we're on a 75 server and I have no knowledge of these spells at all.
     - Add Monster Correlation effect to Magus Keffiyeh (adds another 0.02).
+    - Convergence effect isn't coded.
+    - Cannot magic burst Breath spells. (bursting Breath spells only affects accuracy, not damage)
+        - Burst Affinity doesn't work with Breath spells.
+    - Conal calculations on main targets have to be done manually, because they will always hit even if not in cone.
+        - Additional targets go through the conal check, but not the main target.
+    - Conal calculations on additional targets (not the main target) for Breath spells get a reduced range due to checking a triangle and not a half-circle.
+        (see targetfind.cpp > findWithinCone, I didn't want to touch these calculations)
+
+
 
 - END RESULT
-    - Physical
-        - dmg: acc / att / STR / stat modifiers
-        - AE macc: acc / macc / blue magic skill / INT
-    - Breath
-        - dmg: HP / level / elemental resistance (dmg is not influenced by mab/mdb or weather/day bonuses)
-        - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc for breaths)
+    - Physical spells
+        - acc: acc / DEX
+        - dmg: att / STR / stat modifiers / monster correlation
+        - Added effect macc: acc / macc / blue magic skill / INT
+    - Breath spells
+        - dmg: HP / level / elemental resistance / monster correlation (dmg is not influenced by mab/mdb or weather/day bonuses)
+        - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
+    - Drain spells
+        - dmg: blue magic skill
+        - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
+    - Enfeebling spells
+        - potency: none
+        - duration: a .5 resist halves duration, any lower and the spell doesn't hit
+        - macc: macc / blue magic skill / INT
     - Correlation = multiplier +- 0.25 (breath multiplier = 1)
     - Azure Lore allows for continuous chaining and bursting
     - Merits
-        - Physical Potency = +2 acc per merit
-        - Correlation = +0.004 per merit (only for strengths, not weaknesses)
+        - Physical Potency: +2 acc per merit
+        - Magical Accuracy: TODO
+        - Correlation: +0.004 per merit (only for strengths, not weaknesses)
+        - Convergence: does not work
+        - Enchainment: adds 100 TP per merit
+        - Diffusion: adds 5% duration per merit
+        - Assimilation: 1 extra point per slot (TO CHECK)
 
 
 CLEANUP*********************
 
+- TODO OWN:
+    - Set spells: DELAY can I do that?
+    - Physical AE into one function with params.effect?
+    - Enfeebling, also check enhancing for (does not have, like Warm-up, why so complicated?)
+    - Gaze check - do myself? isFacing works, but also need isFacing from other side for gaze!
+        - Yep gaze is not in DB
 - Getstats, put back
 - Magic, remove prints
-- Remove defmode, although it might come in
+- Remove defmode, although it might come in handy (put in modules for yourself)
 
 ]]

@@ -46,16 +46,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
+    params.effect = xi.effect.SLOW
+    local power = 1500
+    local tick = 0
+    local duration = 180
+
     local damage = blueDoPhysicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
-
-    -- Additional effect: Slow (15% for 90s/180s)
-    if damage > 0 then
-        local resist = applyResistanceEffect(caster, target, spell, params)
-        if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.SLOW, 1500, 0, 180 * resist)
-        end
-    end
+    blueDoPhysicalSpellAddedEffect(caster,target,spell,params,damage,power,tick,duration)
 
     return damage
 end

@@ -28,19 +28,20 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.BEAST
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
+    params.effect = xi.effect.NONE
+    local resistThreshold = 0.25
 
     local resist = applyResistance(caster, target, spell, params)
-    local effect = xi.effect.NONE
+    if resist > resistThreshold then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
-    if resist > 0.0625 then
-        if target:isFacing(caster) then
-            spell:setMsg(xi.msg.basic.MAGIC_ERASE)
+        -- Gaze move
+        if target:isFacing(caster) and caster:isFacing(target) then
             effect = target:dispelStatusEffect()
+            spell:setMsg(xi.msg.basic.MAGIC_ERASE)
             if effect == xi.effect.NONE then
                 spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
