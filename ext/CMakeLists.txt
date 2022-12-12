@@ -93,6 +93,12 @@ CPMAddPackage(
     GIT_TAG v0.11.3
 ) # defines: httplib::httplib
 
+CPMAddPackage(
+    NAME json
+    GITHUB_REPOSITORY nlohmann/json
+    GIT_TAG v3.11.2
+) # defines: nlohmann_json::nlohmann_json
+
 set(EXTERNAL_LIBS
     concurrentqueue
     mariadbclient
@@ -104,6 +110,7 @@ set(EXTERNAL_LIBS
     efsw
     jthread-lite
     httplib::httplib
+    nlohmann_json::nlohmann_json
 )
 
 if (WIN32)
