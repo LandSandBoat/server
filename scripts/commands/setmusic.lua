@@ -29,5 +29,5 @@ function onTrigger(player, typeId, songId)
     end
 
     -- change music
-    player:ChangeMusic(typeId, songId)
+    player:changeMusic(typeId, songId)
 end

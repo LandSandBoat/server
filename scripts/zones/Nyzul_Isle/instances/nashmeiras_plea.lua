@@ -65,6 +65,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
             v:startEvent(203)
             v:setPos(entryPos.x, entryPos.y, entryPos.z, entryPos.rot)
         end
+
         SpawnMob(ID.mob[59].ALEXANDER, instance)
 
     elseif progress == 5 then
@@ -73,7 +74,6 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instanceObject.onInstanceComplete = function(instance)
-
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do

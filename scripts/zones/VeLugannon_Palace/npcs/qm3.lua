@@ -19,6 +19,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
         end
+
         npc:setLocalVar("PillarCharged", 0) -- Pillar always loses charge after a morph attempt.
     end
 end

@@ -12,7 +12,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     -- Pull base stats.
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND) --blind uses caster INT vs target MND
 
@@ -46,6 +45,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
+
     return xi.effect.BLINDNESS
 end
 

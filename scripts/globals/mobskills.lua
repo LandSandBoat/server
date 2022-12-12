@@ -113,12 +113,14 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     if tp < 1000 then
         tp = 1000
     end
+
     if tp >= 1000 and tp < 1500 then
         return ftp1 + (((ftp2 - ftp1) / 500) * (tp - 1000))
     elseif tp >= 1500 and tp <= 3000 then
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
         return ftp2 + (((ftp3 - ftp2) / 1500) * (tp - 1500))
     end
+
     return 1 -- no ftp mod
 end
 
@@ -292,7 +294,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     returninfo.hitslanded = hitslanded
 
     return returninfo
-
 end
 
 -- MAGICAL MOVE
@@ -329,6 +330,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
     end
+
     -- plus 100 forces it to be a number
     local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
@@ -365,7 +367,6 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     returninfo.dmg = finaldmg
 
     return returninfo
-
 end
 
 -- effect = xi.effect.WHATEVER if enfeeble
@@ -395,11 +396,10 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
 end
 
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN magical bloodpacts, despite the name.
-
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
-    dayWeatherBonus = 1.00
+    local dayWeatherBonus = 1.00
 
     if caster:getWeather() == xi.magic.singleWeatherStrong[ele] then
         if math.random() < 0.33 then
@@ -446,6 +446,7 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
+
     local mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
 
     dmg = math.floor(dmg * mab)
@@ -518,7 +519,6 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 end
 
 xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType, damageType, shadowbehav)
-
     -- If target has Hysteria, no message skip rest
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         skill:setMsg(xi.msg.basic.NONE)
@@ -593,6 +593,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             target:setLocalVar("analyzer_skill", skill:getID())
             analyzerHits = 0
         end
+
         target:setLocalVar("analyzer_hits", analyzerHits)
     end
 
@@ -797,6 +798,7 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
     if target:isFacing(mob) and mob:isInfront(target) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
+
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
@@ -804,19 +806,20 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
     if mob:addStatusEffect(typeEffect, power, tick, duration) then
         return xi.msg.basic.SKILL_GAIN_EFFECT
     end
+
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobHealMove = function(target, heal)
+xi.mobskills.mobHealMove = function(target, healAmount)
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if mobHP + heal > mobMaxHP then
-        heal = mobMaxHP - mobHP
+    if (mobHP + healAmount) > mobMaxHP then
+        healAmount = mobMaxHP - mobHP
     end
 
     target:wakeUp()
-    target:addHP(heal)
+    target:addHP(healAmount)
 
-    return heal
+    return healAmount
 end

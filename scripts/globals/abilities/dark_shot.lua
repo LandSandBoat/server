@@ -17,6 +17,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     then
         return 216, 0
     end
+
     if player:hasItem(2183, 0) or player:hasItem(2974, 0) then
         return 0, 0
     else

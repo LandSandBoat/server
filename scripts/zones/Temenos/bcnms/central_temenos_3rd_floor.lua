@@ -22,6 +22,7 @@ battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
         SetServerVariable("[CENTRAL_TEMENOS_3RD_FLOOR]Time", battlefield:getRemainingTime() / 60)
     end
+
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 

@@ -29,5 +29,6 @@ function HiddenQuest:complete(player)
     if gaveReward then
         self:cleanup(player)
     end
+
     return gaveReward
 end

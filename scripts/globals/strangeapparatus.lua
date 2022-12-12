@@ -353,6 +353,7 @@ xi.strangeApparatus =
                 doctorStatus = 0
                 addDoctorStatus(player)
             end
+
             player:updateEvent(doctorStatus, 0, xi.items.INFINITY_CORE, 0, 0, 0, 0, 0)
         end
     end,

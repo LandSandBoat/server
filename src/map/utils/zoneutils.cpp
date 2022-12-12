@@ -132,7 +132,7 @@ namespace zoneutils
         }
     }
 
-    CCharEntity* GetCharByName(int8* name)
+    CCharEntity* GetCharByName(std::string name)
     {
         for (auto PZone : g_PZoneList)
         {
@@ -667,6 +667,8 @@ namespace zoneutils
             ShowCritical("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
+
+        ShowInfo(fmt::format("Loading {} zones", zones.size()));
 
         for (auto zone : zones)
         {

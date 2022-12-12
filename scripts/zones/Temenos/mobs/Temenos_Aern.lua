@@ -30,12 +30,15 @@ entity.onMobDespawn = function(mob)
             [ID.mob.TEMENOS_C_MOB[5] + 19] = function()
                 xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
+
             [ID.mob.TEMENOS_C_MOB[5] + 20] = function()
                 xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
+
             [ID.mob.TEMENOS_C_MOB[5] + 29] = function()
                 xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
+
             [ID.mob.TEMENOS_C_MOB[5] + 30] = function()
                 xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,

@@ -18,6 +18,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getMentor() then
         var = 2
     end
+
     player:startEvent(10026, var)
 end
 

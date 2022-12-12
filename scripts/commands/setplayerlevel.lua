@@ -25,6 +25,7 @@ function onTrigger(player, arg1, arg2)
             error(player, string.format("Player named '%s' not found!", arg1))
             return
         end
+
         level = tonumber(arg2)
     elseif arg1 ~= nil then
         targ = player

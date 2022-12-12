@@ -106,6 +106,7 @@ xi.shop =
                 table.insert(newStock, stock[i+1])
             end
         end
+
         xi.shop.general(player, newStock, nation)
     end,
 

@@ -29,6 +29,7 @@ entity.onTrigger = function(player, npc)
         for i = 1, 7 do
             SetDropRate(172, 18246 + i, 0) -- zeros all satchet drop rates
         end
+
         SetDropRate(172, 18246 + playerRace - raceOffset, 130) -- adds 13% drop rate to specific week's race
 
         local newSpawn = math.random(1, 3) -- determine new spawn point for ???

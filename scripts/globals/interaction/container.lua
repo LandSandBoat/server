@@ -114,6 +114,7 @@ function Container:isVarBitsSet(player, name, ...)
     for _, bitNum in ipairs({ ... }) do
         sum = sum + bit.lshift(1, bitNum)
     end
+
     return bit.band(player:getVar(self.varPrefix .. name), sum) ~= 0
 end
 

@@ -23,6 +23,7 @@ entity.onTrade = function(player, npc, trade)
                     item = abjurList[i + 2]
                     reward = abjurList[i + 4]
                 end
+
                 break
             end
         end

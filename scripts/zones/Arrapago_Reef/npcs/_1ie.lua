@@ -22,6 +22,7 @@ entity.onTrade = function(player, npc, trade)
             else
                 player:messageSpecial(ID.text.LOCK_FAIL, 1022)
             end
+
             player:confirmTrade()
         elseif npcUtil.tradeHas(trade, 1023) and player:getMainJob() == xi.job.THF then -- living key
             if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
@@ -30,6 +31,7 @@ entity.onTrade = function(player, npc, trade)
             else
                 player:messageSpecial(ID.text.LOCK_FAIL, 1023)
             end
+
             player:confirmTrade()
         elseif npcUtil.tradeHas(trade, 1115) and player:getMainJob() == xi.job.THF then -- skeleton key
             if math.random(1, 2) == 1 then -- TODO: figure out actual percentage chance to pick locks; 50% for now
@@ -38,6 +40,7 @@ entity.onTrade = function(player, npc, trade)
             else
                 player:messageSpecial(ID.text.LOCK_FAIL, 1115)
             end
+
             player:confirmTrade()
         end
     end

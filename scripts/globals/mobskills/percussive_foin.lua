@@ -16,11 +16,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getAnimationSub() == 2 then
         return 0
     end
+
     return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local numhits = 1
     local accmod = 1
     local dmgmod = 1

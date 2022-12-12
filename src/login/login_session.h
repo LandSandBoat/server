@@ -40,6 +40,8 @@ struct login_session_data_t
     int32 login_lobbydata_fd;
     int32 login_lobbyview_fd;
     int32 login_lobbyconf_fd;
+
+    bool justCreatedNewChar = false;
 };
 
 typedef std::list<login_session_data_t*> login_sd_list_t;

@@ -58,7 +58,7 @@ public:
     bool isType(uint8 type);       // check the item type
     bool isSubType(uint8 subtype); // check the item's sub type
 
-    auto   getName() -> const char*; // get the item's name
+    auto   getName() -> std::string; // get the item's name
     uint16 getILvl();                // get the item's ilvl
     uint16 getReqLvl();              // get the item's level
 

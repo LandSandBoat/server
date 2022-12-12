@@ -50,7 +50,7 @@
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
+std::unique_ptr<SqlConnection> sql;
 
 uint8 ver_lock   = 0;
 uint8 maint_mode = 0;
@@ -60,13 +60,13 @@ bool requestExit = false;
 int32 do_init(int32 argc, char** argv)
 {
     login_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_AUTH_IP").c_str(), settings::get<uint16>("network.LOGIN_AUTH_PORT"), connect_client_login);
-    ShowInfo("The login-server-auth is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_AUTH_PORT"));
+    ShowInfo(fmt::format("The login-server-auth is ready (Server is listening on the port {}).", settings::get<uint16>("network.LOGIN_AUTH_PORT")));
 
     login_lobbydata_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_DATA_IP").c_str(), settings::get<uint16>("network.LOGIN_DATA_PORT"), connect_client_lobbydata);
-    ShowInfo("The login-server-lobbydata is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_DATA_PORT"));
+    ShowInfo(fmt::format("The login-server-lobbydata is ready (Server is listening on the port {}).", settings::get<uint16>("network.LOGIN_DATA_PORT")));
 
     login_lobbyview_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_VIEW_IP").c_str(), settings::get<uint16>("network.LOGIN_VIEW_PORT"), connect_client_lobbyview);
-    ShowInfo("The login-server-lobbyview is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_VIEW_PORT"));
+    ShowInfo(fmt::format("The login-server-lobbyview is ready (Server is listening on the port {}).", settings::get<uint16>("network.LOGIN_VIEW_PORT")));
 
     // NOTE: See login_conf.h for more information about what happens on this port
     // login_lobbyconf_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_CONF_IP").c_str(), settings::get<uint16>("network.LOGIN_CONF_PORT"), connect_client_lobbyconf);
@@ -172,9 +172,8 @@ void do_abort()
     do_final(EXIT_FAILURE);
 }
 
-void set_server_type()
+void set_socket_type()
 {
-    SERVER_TYPE = XI_SERVER_LOGIN;
     SOCKET_TYPE = socket_type::TCP;
 }
 
@@ -193,7 +192,7 @@ int do_sockets(fd_set* rfd, duration next)
     {
         if (sErrno != S_EINTR)
         {
-            ShowCritical("do_sockets: select() failed, error code %d!", sErrno);
+            ShowCritical(fmt::format("do_sockets: select() failed, error code {}!", sErrno));
             exit(EXIT_FAILURE);
         }
         return 0; // interrupted by a signal, just loop and try again

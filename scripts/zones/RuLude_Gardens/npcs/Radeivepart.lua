@@ -88,6 +88,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_CASTLE_ZVAHL)
         end
+
         player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
     end

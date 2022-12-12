@@ -45,6 +45,7 @@ local function findMother(mob)
             mother = k
         end
     end
+
     return mother
 end
 

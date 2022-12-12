@@ -44,6 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if caster:isBehind(target, 15) then -- guesstimating the angle at 15 degrees here
         damage = math.floor(damage * 1.25)
     end
+
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     --TODO: Knockback? Where does that get handled? How much knockback does it have?

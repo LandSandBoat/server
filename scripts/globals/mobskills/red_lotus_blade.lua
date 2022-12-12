@@ -17,6 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getPool() ~= 4006 and mob:getPool() ~= 4249 then
         mob:messageBasic(xi.msg.basic.READIES_WS, 0, 34)
     end
+
     return 0
 end
 

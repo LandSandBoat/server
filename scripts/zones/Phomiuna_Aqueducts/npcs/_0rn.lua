@@ -11,7 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local doorOffset = npc:getID()
 
     player:messageSpecial(ID.text.LAMP_OFFSET + 7) -- Dark lamp
@@ -27,7 +26,6 @@ entity.onTrigger = function(player, npc)
             GetNPCByID(doorOffset - 2):openDoor(15) -- Opens Door _0rk
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

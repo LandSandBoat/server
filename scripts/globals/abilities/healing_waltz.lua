@@ -5,9 +5,8 @@
 -- TP Required: 20%
 -- Recast Time: 00:15
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 
@@ -28,6 +27,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             local newRecast = ability:getRecast() + recastMod
             ability:setRecast(utils.clamp(newRecast, 0, newRecast))
         end
+
         -- Apply "Fan Dance" Waltz recast reduction
         if player:hasStatusEffect(xi.effect.FAN_DANCE) then
             local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
@@ -36,6 +36,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
                 ability:setRecast(ability:getRecast() * ((fanDanceMerits - 5) / 100))
             end
         end
+
         return 0, 0
     end
 end

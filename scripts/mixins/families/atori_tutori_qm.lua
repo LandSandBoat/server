@@ -4,7 +4,6 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.atori_tutori_qm = function(atoriMob)
-
     atoriMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         mob:setLocalVar("specialThreshold", 35)
     end)
@@ -44,7 +43,6 @@ g_mixins.atori_tutori_qm = function(atoriMob)
             mob:showText(mob, ID.text.WHATS_THE_MATTARU)
         end
     end)
-
 end
 
 return g_mixins.atori_tutori_qm

@@ -70,6 +70,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
+
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         player:setCharVar("TrialByWater_date", 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
@@ -102,6 +103,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
+
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WATER)
             player:delKeyItem(xi.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
             player:setCharVar("TrialByWater_date", getMidnight())

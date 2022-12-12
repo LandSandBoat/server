@@ -22,7 +22,6 @@ entity.onMobDeath = function(mob, player, optParams)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
         end
     end
-
 end
 
 return entity

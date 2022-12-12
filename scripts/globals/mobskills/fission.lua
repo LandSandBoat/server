@@ -15,6 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             break
         end
     end
+
     return fam
 end
 

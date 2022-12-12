@@ -29,6 +29,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.CANNOT_BE_OPENED_FROM_THIS_SIDE)
         end
     end
+
     return 1
 end
 

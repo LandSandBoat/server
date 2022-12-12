@@ -13,6 +13,7 @@ itemObject.onItemCheck = function(target)
     if effect ~= nil and effect:getSubType() == 15866 then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
+
     return 0
 end
 

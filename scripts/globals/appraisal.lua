@@ -1514,7 +1514,9 @@ xi.appraisal.appraiseItem = function(player, npc, trade, gil, appraisalCsid)
                 if appraisedItem ~= 0 then
                     player:startEvent(appraisalCsid, 1, appraisedItem)
                     player:setLocalVar("Appraisal", appraisedItem) -- anticheat
+                    player:confirmTrade()
                 end
+
                 break
             end
         end
@@ -1550,7 +1552,6 @@ end
 xi.appraisal.appraisalOnEventFinish = function(player, csid, option, gil, appraisalCsid, npc)
     if csid == appraisalCsid then
         local appraisedItem = player:getLocalVar("Appraisal")
-        player:confirmTrade()
         player:addTreasure(appraisedItem, npc)
         player:delGil(gil)
         player:setLocalVar("Appraisal", 0)
@@ -1578,6 +1579,7 @@ xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
                 for _, entry in pairs(lootGroup) do
                     max = max + entry.droprate
                 end
+
                 local roll = math.random(1, max)
 
                 for _, entry in pairs(lootGroup) do
@@ -1618,8 +1620,13 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
         npc:entityAnimationPacket("open")
         npc:setLocalVar("open", 1)
         npc:setUntargetable(true)
-        npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
-        npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
+        npc:timer(15000, function(npcArg)
+            npcArg:entityAnimationPacket("kesu")
+        end)
+
+        npc:timer(16000, function(npcArg)
+            npcArg:setStatus(xi.status.DISAPPEAR)
+        end)
 
         for i = 1, #regItemTable, 1 do
             local lootGroup = regItemTable[i]
@@ -1636,6 +1643,7 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
                         if entry.itemid ~= 0 then
                             player:addTreasure(entry.itemid, npc)
                         end
+
                         break
                     end
                 end

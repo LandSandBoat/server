@@ -136,7 +136,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             for _, entities in pairs(chars) do
-                entities:timer(1500, function(char) char:startCutscene(95) end)
+                entities:timer(1500, function(char)
+                    char:startCutscene(95)
+                end)
             end
 
             -- left/right Menu

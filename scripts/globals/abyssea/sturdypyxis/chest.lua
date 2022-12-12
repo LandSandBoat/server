@@ -113,7 +113,6 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
 end
 
 xi.pyxis.getDrops = function(npc, dropType, tier)
-
     if npc:getLocalVar("ITEMS_SET") == 1 then -- sets this to 1 so can get items once when triggered
         return
     end
@@ -124,18 +123,22 @@ xi.pyxis.getDrops = function(npc, dropType, tier)
             xi.pyxis.tempItem.setTempItems(npc, tier)
             npc:setLocalVar("ITEMS_SET", 1)
         end,
+
         [xi.pyxis.chestDropType.KEY_ITEM] = function(x)
             xi.pyxis.ki.setKeyItems(npc)
             npc:setLocalVar("ITEMS_SET", 1)
         end,
+
         [xi.pyxis.chestDropType.AUGMENTED_ITEM] = function(x)
             xi.pyxis.augItem.setAugmentItems(npc, tier)
             npc:setLocalVar("ITEMS_SET", 1)
         end,
+
         [xi.pyxis.chestDropType.ITEM] = function(x)
             xi.pyxis.item.setItems(npc, tier)
             npc:setLocalVar("ITEMS_SET", 1)
         end,
+
         [xi.pyxis.chestDropType.POPITEM] = function(x)
             xi.pyxis.popitem.setPopItems(npc)
             npc:setLocalVar("ITEMS_SET", 1)
@@ -155,22 +158,27 @@ xi.pyxis.openChest = function(player, npc)
             xi.pyxis.light.giveLight(npc, player)
             xi.pyxis.removeChest(player, npc, 0, 3)
         end,
+
         [xi.pyxis.chestDropType.RESTORE] = function() -- RESTORE HP/MP/JA
             xi.pyxis.restore.giveRestore(npc, player)
             xi.pyxis.removeChest(player, npc, 0, 4)
         end,
+
         [xi.pyxis.chestDropType.CRUOR] = function() -- CRUOR
             xi.pyxis.cruor.giveCruor(npc, player)
             xi.pyxis.removeChest(player, npc, 0, 3)
         end,
+
         [xi.pyxis.chestDropType.TIME] = function() -- TIME
             xi.pyxis.time.giveTime(npc, player)
             xi.pyxis.removeChest(player, npc, 0, 3)
         end,
+
         [xi.pyxis.chestDropType.EXP] = function() -- EXP
             xi.pyxis.exp.giveExperience(npc, player)
             xi.pyxis.removeChest(player, npc, 0, 3)
         end,
+
         [xi.pyxis.chestDropType.NUMEROUS_TEMPITEMS] = function() -- TEMPORARY ITEM
             xi.pyxis.tempItem.giveTemporaryItems(npc, player)
             xi.pyxis.removeChest(player, npc, 0, 3)

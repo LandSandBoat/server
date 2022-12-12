@@ -592,7 +592,7 @@ xi.abyssea.visionsCruorProspectorOnTrigger = function(player, npc)
     player:startEvent(2002, cruor, demilune, 0, 0, cipher)
 end
 
-xi.abyssea.visionsCruorProspectorOnEventFinish = function (player, csid, option, prospectorItems)
+xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, prospectorItems)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
     local cruorTotal = player:getCurrency("cruor")
@@ -799,6 +799,7 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
             else
                 mob:setLocalVar("[AbysseaRedProc]", 0)
             end
+
             mob:weaknessTrigger(2)
             mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
         elseif triggerType == xi.abyssea.triggerType.YELLOW then
@@ -807,6 +808,7 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
             else
                 mob:setLocalVar("[AbysseaYellowProc]", 0)
             end
+
             mob:weaknessTrigger(1)
             mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
         elseif triggerType == xi.abyssea.triggerType.BLUE then
@@ -815,6 +817,7 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
             else
                 mob:setLocalVar("[AbysseaBlueProc]", 0)
             end
+
             mob:weaknessTrigger(0)
             mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
         end
@@ -860,6 +863,7 @@ local checkMobID = function(zoneId, mobId)
             return true
         end
     end
+
     return false
 end
 
@@ -877,6 +881,7 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
                     t[i] = 0
                 end
             end
+
             player:startEvent(events[1], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8]) -- report required trades
             return true
         end
@@ -901,6 +906,7 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
         if keyItem ~= 0 and not player:hasKeyItem(keyItem) then
             validKis = false
         end
+
         player:setLocalVar("KI" .. index, keyItem)
         kisExpected[index] = keyItem
     end
@@ -1133,7 +1139,9 @@ xi.abyssea.searingWardTimer = function(player)
         end
 
         player:setLocalVar('tetherTimer', tetherTimer - 1)
-        player:timer(1500, function() xi.abyssea.searingWardTimer(player) end)
+        player:timer(1500, function()
+            xi.abyssea.searingWardTimer(player)
+        end)
     elseif tetherTimer == 1 then
         player:setLocalVar('tetherTimer', 0)
         player:messageSpecial(ID.text.RETURNING_TO_WARD)

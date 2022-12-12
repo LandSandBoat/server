@@ -106,7 +106,9 @@ local entryInfo =
         beatVar  = "DynaXarcabard_Win",
         beatKI   = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = { 569.312, -0.098, -270.158, 90, 135 },
-        reqs     = function(player) return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA) end,
+        reqs     = function(player)
+            return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA)
+        end,
     },
 
     -- TODO: Make absolutely sure that winning Xarcabard does NOT allow early access to dreamlands BEFORE CoP 3-5
@@ -472,12 +474,18 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
 
     if player:getCharVar("Dynamis_Entry") == 1 or player:getGMLevel() > 0 then
         if player:getCharVar("Dynamis_subjob") == 1 then
-            player:timer(5000, function(playerArg) playerArg:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ) end)
+            player:timer(5000, function(playerArg)
+                playerArg:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ)
+            end)
+
             player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 7200)
         end
 
         player:addStatusEffectEx(xi.effect.DYNAMIS, 0, 0, 3, 3600)
-        player:timer(5500, function(playerArg) playerArg:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS) end)
+        player:timer(5500, function(playerArg)
+            playerArg:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS)
+        end)
+
         player:setCharVar("Dynamis_Entry", 0)
         player:setCharVar("Dynamis_subjob", 0)
     end
@@ -578,8 +586,8 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
             local effect = player:getStatusEffect(xi.effect.DYNAMIS)
             if effect and not player:hasKeyItem(te.ki) then
                 npcUtil.giveKeyItem(player, te.ki)
-                local old_duration = effect:getDuration()
-                effect:setDuration((old_duration + (te.minutes * 60)) * 1000)
+                local oldDuration = effect:getDuration()
+                effect:setDuration((oldDuration + (te.minutes * 60)) * 1000)
                 player:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
                 player:messageSpecial(ID.text.DYNAMIS_TIME_EXTEND, te.minutes)
             end
@@ -591,6 +599,7 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
                     DisallowRespawn(mobId, true)
                     DisallowRespawn(teId, false)
                 end
+
                 GetMobByID(teId):setRespawnTime(85)
             end
         else
@@ -681,6 +690,7 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, optParams)
                         end
                     end
                 end
+
                 mob:setAnimationSub(xi.dynamis.eye.NONE)
 
                 -- spawn a new mob in this group
@@ -689,6 +699,7 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, optParams)
                     DisallowRespawn(mobId, true)
                     DisallowRespawn(nextId, false)
                 end
+
                 GetMobByID(nextId):setRespawnTime(300) -- 5 minutes
             end
         else

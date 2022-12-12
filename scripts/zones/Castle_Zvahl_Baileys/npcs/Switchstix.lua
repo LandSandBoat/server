@@ -132,6 +132,7 @@ local function hasRelic(player, isTrade)
                 return key
             end
         end
+
         return nil
     else
         for key, value in pairs(relics) do
@@ -139,6 +140,7 @@ local function hasRelic(player, isTrade)
                 return key
             end
         end
+
         return nil
     end
 end
@@ -172,6 +174,7 @@ local function tradeHasRequiredMaterials(trade, relicId, reqItems)
         if not trade:hasItemQty(relicId, 1) then
             return false
         end
+
         for i = 1, #reqItems, 1 do
             if not trade:hasItemQty(reqItems[i], 1) then
                 return false
@@ -288,26 +291,28 @@ entity.onTrigger = function(player, npc)
         elseif currentStage == 3 then
             player:startEvent(50, relicId, requiredItem1, requiredItem2, requiredItem3, 0, 0, 0, relic[csParam])
         elseif currentStage == 4 then
-            switch(relicId):caseof
-                {
-                    -- Fragment for body, Necropsyche for soul
-                    [18263] = function(x) player:startEvent(68, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Spharai
-                    [18269] = function(x) player:startEvent(69, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Mandau
-                    [18275] = function(x) player:startEvent(70, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Excalibur
-                    [18281] = function(x) player:startEvent(71, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Ragnarok
-                    [18287] = function(x) player:startEvent(72, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Guttler
-                    [18293] = function(x) player:startEvent(73, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Bravura
-                    [18299] = function(x) player:startEvent(75, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Gungnir
-                    [18305] = function(x) player:startEvent(74, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Apocalypse
-                    [18311] = function(x) player:startEvent(76, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Kikoku
-                    [18317] = function(x) player:startEvent(77, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Amanomurakumo
-                    [18323] = function(x) player:startEvent(78, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Mjollnir
-                    [18329] = function(x) player:startEvent(79, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Claustrum
-                    [18335] = function(x) player:startEvent(81, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Annihilator
-                    [18341] = function(x) player:startEvent(82, requiredItem2, requiredItem1, relic[currencyType], relic[currencyAmount], relicId); end, -- Gjallarhorn
-                    [18347] = function(x) player:startEvent(80, requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId); end, -- Yoichinoyumi
-                    [15069] = function(x) player:startEvent(86, requiredItem2, requiredItem1, relic[currencyType], relic[currencyAmount], relicId); end, -- Aegis
-                }
+            -- TODO: Use xi.items enum in key for the below table
+            local itemToEventId =
+            {
+                [18263] = 68, -- Spharai
+                [18269] = 69, -- Mandau
+                [18275] = 70, -- Excalibur
+                [18281] = 71, -- Ragnarok
+                [18287] = 72, -- Guttler
+                [18293] = 73, -- Bravura
+                [18299] = 75, -- Gungnir
+                [18305] = 74, -- Apocalypse
+                [18311] = 76, -- Kikoku
+                [18317] = 77, -- Amanomurakumo
+                [18323] = 78, -- Mjollnir
+                [18329] = 79, -- Claustrum
+                [18335] = 81, -- Annihilator
+                [18341] = 82, -- Gjallarhorn
+                [18347] = 80, -- Yoichinoyumi
+                [15069] = 86, -- Aegis
+            }
+
+            player:startEvent(itemToEventId[relicId], requiredItem1, requiredItem2, relic[currencyType], relic[currencyAmount], relicId)
         end
     else
         player:startEvent(10)
@@ -353,6 +358,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("RELIC_MAKE_ANOTHER", 0)
             player:setCharVar("RELIC_CONQUEST_WAIT", getConquestTally())
         end
+
         -- Picking up a finished relic stage 3>4.
     elseif csid == 52 and reward ~= 0 then
         if player:getFreeSlotsCount() < 1 then
@@ -368,26 +374,29 @@ entity.onEventFinish = function(player, csid, option)
 
         -- Stage 4 cutscenes
     elseif (csid >= 68 and csid <= 82) or csid == 86 then
+        -- TODO: Use xi.items enum below
+        local eventToItemId =
+        {
+                [68] = 18263, -- Spharai
+                [69] = 18269, -- Mandau
+                [70] = 18275, -- Excalibur
+                [71] = 18281, -- Ragnarok
+                [72] = 18287, -- Guttler
+                [73] = 18293, -- Bravura
+                [75] = 18299, -- Gungnir
+                [74] = 18305, -- Apocalypse
+                [76] = 18311, -- Kikoku
+                [77] = 18317, -- Amanomurakumo
+                [78] = 18323, -- Mjollnir
+                [79] = 18329, -- Claustrum
+                [81] = 18335, -- Annihilator
+                [82] = 18341, -- Gjallarhorn
+                [80] = 18347, -- Yoichinoyumi
+                [86] = 15069, -- Aegis
+        }
+
         player:setCharVar("RELIC_CONQUEST_WAIT", 0)
-        switch(csid):caseof
-            {
-                [68] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18263); end, -- Spharai
-                [69] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18269); end, -- Mandau
-                [70] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18275); end, -- Excalibur
-                [71] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18281); end, -- Ragnarok
-                [72] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18287); end, -- Guttler
-                [73] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18293); end, -- Bravura
-                [75] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18299); end, -- Gungnir
-                [74] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18305); end, -- Apocalypse
-                [76] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18311); end, -- Kikoku
-                [77] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18317); end, -- Amanomurakumo
-                [78] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18323); end, -- Mjollnir
-                [79] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18329); end, -- Claustrum
-                [81] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18335); end, -- Annihilator
-                [82] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18341); end, -- Gjallarhorn
-                [80] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 18347); end, -- Yoichinoyumi
-                [86] = function(x) player:setCharVar("RELIC_IN_PROGRESS", 15069); end, -- Aegis
-            }
+        player:setCharVar("RELIC_IN_PROGRESS", eventToItemId[csid])
     end
 end
 

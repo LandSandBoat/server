@@ -81,8 +81,6 @@ CSynthSuggestionRecipePacket::CSynthSuggestionRecipePacket(uint16 skillID, uint1
         maxSkill = skillLevel;
     }
 
-    ShowDebug("%d", selectedRecipeOffset);
-
     const char* fmtQuery = "SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, \
         Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 \
         FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid \

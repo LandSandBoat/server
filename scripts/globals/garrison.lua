@@ -463,7 +463,7 @@ local spawnNPC = function(zone, x, y, z, rot, name, look)
         groupId = 35,
         groupZoneId = xi.zone.NORTH_GUSTABERG,
 
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
         specialSpawnAnimation = true,
     })
 

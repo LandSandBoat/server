@@ -37,10 +37,12 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:addSpell(303)
             player:messageSpecial(ID.text.RAMUH_UNLOCKED, 0, 0, 5)
         end
+
         if not player:hasItem(4181) then
             player:addItem(4181) -- Scroll of instant warp
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
         end
+
         player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
     end

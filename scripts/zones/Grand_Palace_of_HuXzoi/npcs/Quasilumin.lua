@@ -27,6 +27,7 @@ entity.onTrigger = function(player, npc)
             end
         end
     end
+
     player:showText(npc, ID.text.QUASILUMIN_MAP_QUEST_OFFSET + index)
 end
 

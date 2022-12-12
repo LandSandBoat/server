@@ -11,6 +11,7 @@ itemObject.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
         return xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     return 0
 end
 

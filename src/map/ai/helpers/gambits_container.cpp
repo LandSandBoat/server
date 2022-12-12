@@ -216,10 +216,8 @@ namespace gambits
                 {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
-                        auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                        std::transform(name.begin(), name.end(), name.begin(),
-                        [](unsigned char c) { return std::tolower(c); });
-                        if (name == "curilla")
+                        auto name = PMember->GetName();
+                        if (strcmpi(name.c_str(), "curilla") == 0)
                         {
                             result = true;
                         }
@@ -227,6 +225,20 @@ namespace gambits
                 });
                 // clang-format on
                 return result;
+            }
+            else if (predicate.target == G_TARGET::PARTY_MULTI)
+            {
+                uint8 count = 0;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
+                    {
+                        ++count;
+                    }
+                });
+                // clang-format on
+                return count > 1;
             }
 
             // Fallthrough
@@ -381,10 +393,8 @@ namespace gambits
                     {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
-                            auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
-                            std::transform(name.begin(), name.end(), name.begin(),
-                                           [](unsigned char c) { return std::tolower(c); });
-                            if (name == "curilla")
+                            auto name = PMember->GetName();
+                            if (strcmpi(name.c_str(), "curilla") == 0)
                             {
                                 target = PMember;
                             }
@@ -640,11 +650,11 @@ namespace gambits
                         }
                     }
                 }
-                else if (action.reaction == G_REACTION::MSG)
+                else if (action.reaction == G_REACTION::MS)
                 {
                     if (action.select == G_SELECT::SPECIFIC)
                     {
-                        // trustutils::SendTrustMessage(POwner, action.select_arg);
+                        controller->MobSkill(target->targid, action.select_arg);
                     }
                 }
 
@@ -816,6 +826,11 @@ namespace gambits
             case G_CONDITION::RANDOM:
             {
                 return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
+                break;
+            }
+            case G_CONDITION::HP_MISSING:
+            {
+                return (trigger_target->health.maxhp - trigger_target->health.hp) >= (int16)predicate.condition_arg;
                 break;
             }
             default:

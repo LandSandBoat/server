@@ -22,7 +22,8 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.USES)
-    local mobID = mob:getID()
+
+    local mobID  = mob:getID()
     local avatar = 0
 
     if avatarOffsets[mobID] then

@@ -189,7 +189,6 @@ public:
     void setArmouryCrate(uint32 entityId);
 
     void         ApplyLevelRestrictions(CCharEntity* PChar) const;
-    void         ClearEnmityForEntity(CBattleEntity* PEntity);
     bool         InsertEntity(CBaseEntity* PEntity, bool inBattlefield = false, BATTLEFIELDMOBCONDITION conditions = CONDITION_NONE, bool ally = false);
     CBaseEntity* GetEntity(CBaseEntity* PEntity);
     bool         IsRegistered(CCharEntity* PChar);
@@ -203,6 +202,11 @@ public:
     // Groups
     void addGroup(BattlefieldGroup group);
     void handleDeath(CBaseEntity* PEntity);
+
+    static void setPlayerEntered(CCharEntity* PChar, bool entered);
+    static bool hasPlayerEntered(CCharEntity* PChar);
+
+    static uint16 getBattlefieldArea(CCharEntity* PChar);
 
     uint8 m_isMission;
     bool  m_showTimer = true;

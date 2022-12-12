@@ -18,6 +18,7 @@ itemObject.onItemUse = function(target)
     if legs == 11966 or legs == 11968 then -- Dream Trousers +1 & Dream Pants +1
         power = power + 1
     end
+
     if not target:hasStatusEffect(xi.effect.REFRESH) then
         target:addStatusEffect(xi.effect.REFRESH, power, 3, 90)
     else

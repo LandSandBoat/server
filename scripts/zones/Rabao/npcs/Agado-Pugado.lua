@@ -58,11 +58,25 @@ entity.onTrigger = function(player, npc)
     then
         local numitem = 0
 
-        if player:hasItem(17627) then numitem = numitem + 1 end  -- Garuda's Dagger
-        if player:hasItem(13243) then numitem = numitem + 2 end  -- Wind Belt
-        if player:hasItem(13562) then numitem = numitem + 4 end  -- Wind Ring
-        if player:hasItem(1202) then numitem = numitem + 8 end   -- Bubbly Water
-        if player:hasSpell(301) then numitem = numitem + 32 end  -- Ability to summon Garuda
+        if player:hasItem(17627) then
+            numitem = numitem + 1
+        end  -- Garuda's Dagger
+
+        if player:hasItem(13243) then
+            numitem = numitem + 2
+        end  -- Wind Belt
+
+        if player:hasItem(13562) then
+            numitem = numitem + 4
+        end  -- Wind Ring
+
+        if player:hasItem(1202) then
+            numitem = numitem + 8
+        end   -- Bubbly Water
+
+        if player:hasSpell(301) then
+            numitem = numitem + 32
+        end  -- Ability to summon Garuda
 
         player:startEvent(69, 0, 331, 3, 0, numitem)
     else
@@ -78,6 +92,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end
+
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar("TrialByWind_date", 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
@@ -106,6 +121,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
+
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
             player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar("TrialByWind_date", getMidnight())

@@ -17,6 +17,7 @@ itemObject.onItemCheck = function(target)
     if target:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
         result = 236
     end
+
     return result
 end
 

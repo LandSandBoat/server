@@ -70,9 +70,11 @@ local pathFind =
                 mob:setLocalVar("reversePath", 1)
                 pathNodes = pathBranch5
             end
+
             return pathNodes
         end
     end,
+
     ['pathFind2'] = function(mob, reversePath)
         local pathNodes = {}
         mob:setLocalVar("mobPath", 3)
@@ -81,16 +83,20 @@ local pathFind =
         else
             pathNodes = pathBranch4
         end
+
         return pathNodes
     end,
+
     ['pathFind3'] = function(mob, reversePath)
         local pathNodes = {}
         mob:setLocalVar("mobPath", 4)
         if reversePath == 0 or reversePath == 1 then
             pathNodes = pathBranch3
         end
+
         return pathNodes
     end,
+
     ['pathFind4'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 then
@@ -108,8 +114,10 @@ local pathFind =
                 pathNodes = pathBranch2
             end
         end
+
         return pathNodes
     end,
+
     ['pathFind5'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 then
@@ -127,14 +135,17 @@ local pathFind =
             mob:setLocalVar("mobPath", 6)
             pathNodes = pathBranch1
         end
+
         return pathNodes
     end,
+
     ['pathFind6'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 1)
             pathNodes = pathStart
         end
+
         return pathNodes
     end,
 }
@@ -187,6 +198,7 @@ entity.onPath = function(mob)
                     x = x, y = y, z = z, rotation = math.random(0, 255), wait = wait
                 }
             end
+
             mob:pathThrough(rotations, xi.path.flag.COORDS)
             mob:setLocalVar("isPaused", 1)
         end

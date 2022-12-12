@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
     if not target:hasVisitedZone(xi.zone.BASTOK_MINES) then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
+
     return result
 end
 

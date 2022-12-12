@@ -15,6 +15,7 @@ itemObject.onItemCheck = function(target)
             return 0
         end
     end
+
     return -1
 end
 
@@ -26,6 +27,7 @@ itemObject.onItemUse = function(target)
     if newpower > 0 then
         target:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, newpower, 0, 0)
     end
+
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 5)
 end
 

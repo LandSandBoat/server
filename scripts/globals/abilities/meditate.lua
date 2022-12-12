@@ -15,7 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    local amount = 12
+    local amount   = 12
     local duration = 15 + player:getMod(xi.mod.MEDITATE_DURATION)
 
     if player:getMainJob() == xi.job.SAM then

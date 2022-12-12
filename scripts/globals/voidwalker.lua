@@ -43,8 +43,10 @@ local function getCurrentKIsBitsFromPlayer(player)
         if player:hasKeyItem(keyitem) then
             currentBit = 1
         end
+
         results = results + bit.lshift(currentBit, i - 1)
     end
+
     return results
 end
 
@@ -55,6 +57,7 @@ local function getCurrentKIsFromPlayer(player)
             table.insert(results, keyitem)
         end
     end
+
     return results
 end
 
@@ -74,6 +77,7 @@ local function getMobsFromAbyssites(zoneId, abyssites)
             end
         end
     end
+
     return results
 end
 
@@ -101,6 +105,7 @@ local function setRandomPos(zoneId, mobId)
     if not mob or not xi.voidwalker.pos[zoneId] then
         return
     end
+
     local pos = searchEmptyPos(zoneId)
 
     xi.voidwalker.pos[zoneId][pos].mobId = mobId
@@ -116,7 +121,11 @@ local getNearestMob = function(player, mobs)
         local distance = player:checkDistance(mob)
         table.insert(results, { mobId = v.mobId, keyItem = v.keyItem, distance = distance })
     end
-    table.sort(results, function(a, b) return a.distance < b.distance end)
+
+    table.sort(results, function(a, b)
+        return a.distance < b.distance
+    end)
+
     if table.getn(results) > 0 then
         return results[1]
     else
@@ -135,6 +144,7 @@ local getDirection = function(player, mob, distance)
     if degree < 0 then
         degree = degree * -1
     end
+
     local minDegree = 20
     local maxDegree = 70
     if diffz >= 0 and degree >= maxDegree then
@@ -169,6 +179,7 @@ local function checkUpgrade(player, mob, nextKeyItem)
             if player:hasKeyItem(currentKeyItem) then
                 player:delKeyItem(currentKeyItem)
             end
+
             if nextKeyItem then
                 player:addKeyItem(nextKeyItem)
                 if currentKeyItem == xi.keyItem.CLEAR_ABYSSITE then
@@ -445,10 +456,12 @@ xi.voidwalker.onMobDeath = function(mob, player, optParams, keyItem)
                     break
                 end
             end
+
             if outOfParty and not playerpoped:hasKeyItem(keyItem) then
                 checkUpgrade(playerpoped, mob, keyItem)
             end
         end
+
         if player:hasKeyItem(popkeyitem) and not player:hasKeyItem(keyItem) then
             checkUpgrade(player, mob, keyItem)
         end

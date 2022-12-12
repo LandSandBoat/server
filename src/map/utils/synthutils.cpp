@@ -941,10 +941,10 @@ namespace synthutils
             {
                 if ((PItem->getFlag() & ITEM_FLAG_INSCRIBABLE) && (PChar->CraftContainer->getItemID(0) > 0x1080))
                 {
-                    int8 encodedSignature[SignatureStringLength];
+                    char encodedSignature[SignatureStringLength];
 
                     memset(&encodedSignature, 0, sizeof(encodedSignature));
-                    PItem->setSignature(EncodeStringSignature((int8*)PChar->name.c_str(), encodedSignature));
+                    PItem->setSignature(EncodeStringSignature(PChar->name.c_str(), encodedSignature));
 
                     char signature_esc[31]; // max charname: 15 chars * 2 + 1
                     sql->EscapeStringLen(signature_esc, PChar->name.c_str(), strlen(PChar->name.c_str()));

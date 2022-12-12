@@ -338,7 +338,7 @@ void CAlliance::assignAllianceLeader(const char* name)
 
         for (auto* PParty : partyList)
         {
-            if (PParty->GetMemberByName((const int8*)name))
+            if (PParty->GetMemberByName(name))
             {
                 this->aLeader = PParty;
                 break;

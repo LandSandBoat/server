@@ -84,6 +84,7 @@ entity.onMobSpawn = function(mob)
         mob:setMod(xi.mod.SLEEPRES, 100)
         mob:setMod(xi.mod.LIGHT_MEVA, -27)
     end
+
     mob:setModelId(1167)
 end
 
@@ -114,6 +115,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getLocalVar("state") == 3 then
             mob:useMobAbility(693) -- perfect dodge
         end
+
         mob:setLocalVar("canTwoHour", 1)
     end
 

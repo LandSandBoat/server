@@ -18,6 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     then -- if tenzen is in bow mode
         return 0
     end
+
     return 1
 end
 

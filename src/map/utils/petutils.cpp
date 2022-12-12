@@ -1030,6 +1030,14 @@ namespace petutils
         PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
         PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
 
+        // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Combat_Stats
+        // innate -40 % DT, which does not contribute to the -50 % cap (this is a unique attribute to pets having a "higher" DT cap)
+        // TODO: need "UDMG" modifier or equivalent
+        PPet->setModifier(Mod::DMG, -4000);
+
+        // innate + 40 subtle blow
+        PPet->setModifier(Mod::SUBTLE_BLOW, 40);
+
         // Job Point: Wyvern Max HP
         if (PMaster->objtype == TYPE_PC)
         {
@@ -1799,6 +1807,7 @@ namespace petutils
         else
         {
             PPet = new CPetEntity(petType);
+            PPet->saveModifiers();
         }
 
         PPet->loc = PMaster->loc;

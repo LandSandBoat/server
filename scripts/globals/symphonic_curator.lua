@@ -14,61 +14,60 @@ xi = xi or {}
 xi.symphonic_curator = xi.symphonic_curator or {}
 
 xi.symphonic_curator.onTrigger = function(player, npc)
-
     -- The first time you click, you'll always already be listening to Mog House
     if player:getLocalVar("Symphonic_Curator_Music") == 0 then
         player:setLocalVar("Symphonic_Curator_Music", 126)
     end
 
     -- All music type 6 (Moghouse)
-    local song_packs = 0
+    local songPacks = 0
 
     -- Default: Mog House (126), Vana'diel March (108)
-    song_packs = utils.mask.setBit(song_packs, 0, 1)
+    songPacks = utils.mask.setBit(songPacks, 0, 1)
 
-    song_packs = utils.mask.setBit(song_packs, 1, player:hasKeyItem(xi.ki.SHEET_OF_SAN_DORIAN_TUNES))   -- The Kingdom of San d'Oria (107), Chateau d'Oraguille (156), Ronfaure (109)
-    song_packs = utils.mask.setBit(song_packs, 2, player:hasKeyItem(xi.ki.SHEET_OF_BASTOKAN_TUNES))     -- The Republic of Bastok (152), Metalworks (154), Gustaberg (116)
-    song_packs = utils.mask.setBit(song_packs, 3, player:hasKeyItem(xi.ki.SHEET_OF_WINDURSTIAN_TUNES))  -- The Federation of Windurst (151), Heavens Tower (162), Sarutabaruta (113)
-    song_packs = utils.mask.setBit(song_packs, 4, player:hasKeyItem(xi.ki.SHEET_OF_E_ADOULINIAN_TUNES)) -- The Sacred City of Adoulin (63)
-    song_packs = utils.mask.setBit(song_packs, 5, player:hasKeyItem(xi.ki.SHEET_OF_W_ADOULINIAN_TUNES)) -- The Pioneers (59)
-    song_packs = utils.mask.setBit(song_packs, 6, player:hasKeyItem(xi.ki.SHEET_OF_ZILART_TUNES))       -- Kazham (135), The Sanctuary of Zi'Tah (190), Tu'Lia (210)
+    songPacks = utils.mask.setBit(songPacks, 1, player:hasKeyItem(xi.ki.SHEET_OF_SAN_DORIAN_TUNES))   -- The Kingdom of San d'Oria (107), Chateau d'Oraguille (156), Ronfaure (109)
+    songPacks = utils.mask.setBit(songPacks, 2, player:hasKeyItem(xi.ki.SHEET_OF_BASTOKAN_TUNES))     -- The Republic of Bastok (152), Metalworks (154), Gustaberg (116)
+    songPacks = utils.mask.setBit(songPacks, 3, player:hasKeyItem(xi.ki.SHEET_OF_WINDURSTIAN_TUNES))  -- The Federation of Windurst (151), Heavens Tower (162), Sarutabaruta (113)
+    songPacks = utils.mask.setBit(songPacks, 4, player:hasKeyItem(xi.ki.SHEET_OF_E_ADOULINIAN_TUNES)) -- The Sacred City of Adoulin (63)
+    songPacks = utils.mask.setBit(songPacks, 5, player:hasKeyItem(xi.ki.SHEET_OF_W_ADOULINIAN_TUNES)) -- The Pioneers (59)
+    songPacks = utils.mask.setBit(songPacks, 6, player:hasKeyItem(xi.ki.SHEET_OF_ZILART_TUNES))       -- Kazham (135), The Sanctuary of Zi'Tah (190), Tu'Lia (210)
     -- Next page
-    song_packs = utils.mask.setBit(song_packs, 7, player:hasKeyItem(xi.ki.SHEET_OF_CONFLICT_TUNES))     -- Awakening (119), Belief (195), A Realm of Emptiness (137)
-    song_packs = utils.mask.setBit(song_packs, 8, player:hasKeyItem(xi.ki.SHEET_OF_PROMATHIA_TUNES))    -- Distant Worlds (900)
-    song_packs = utils.mask.setBit(song_packs, 9, player:hasKeyItem(xi.ki.SHEET_OF_ADOULINIAN_TUNES))   -- Forever Today (76)
-    song_packs = utils.mask.setBit(song_packs, 10, false)                                                -- Unknown Item: Rhapsodies of Vana'diel (83)
-    song_packs = utils.mask.setBit(song_packs, 11, player:hasKeyItem(xi.ki.SHEET_OF_SHADOW_LORD_TUNES)) -- Awakening (The Shadow Lord Battle) (FFRK Ver.) (119)
-    song_packs = utils.mask.setBit(song_packs, 12, player:hasKeyItem(xi.ki.SHEET_OF_MAPITOTO_TUNES))    -- Full Speed Ahead! (84)
-    song_packs = utils.mask.setBit(song_packs, 13, player:hasKeyItem(xi.ki.SHEET_OF_ALTAIEU_TUNES))     -- The Celestial Capital - Al'Taieu (233)
-    song_packs = utils.mask.setBit(song_packs, 14, player:hasKeyItem(xi.ki.SHEET_OF_JEUNO_TUNES))       -- The Grand Duchy of Jeuno (110), Ru'Lude Gardens (117)
-    song_packs = utils.mask.setBit(song_packs, 15, player:hasKeyItem(xi.ki.SHEET_OF_HARVEST_TUNES))     -- Devils' Delight (29)
+    songPacks = utils.mask.setBit(songPacks, 7, player:hasKeyItem(xi.ki.SHEET_OF_CONFLICT_TUNES))     -- Awakening (119), Belief (195), A Realm of Emptiness (137)
+    songPacks = utils.mask.setBit(songPacks, 8, player:hasKeyItem(xi.ki.SHEET_OF_PROMATHIA_TUNES))    -- Distant Worlds (900)
+    songPacks = utils.mask.setBit(songPacks, 9, player:hasKeyItem(xi.ki.SHEET_OF_ADOULINIAN_TUNES))   -- Forever Today (76)
+    songPacks = utils.mask.setBit(songPacks, 10, false)                                                -- Unknown Item: Rhapsodies of Vana'diel (83)
+    songPacks = utils.mask.setBit(songPacks, 11, player:hasKeyItem(xi.ki.SHEET_OF_SHADOW_LORD_TUNES)) -- Awakening (The Shadow Lord Battle) (FFRK Ver.) (119)
+    songPacks = utils.mask.setBit(songPacks, 12, player:hasKeyItem(xi.ki.SHEET_OF_MAPITOTO_TUNES))    -- Full Speed Ahead! (84)
+    songPacks = utils.mask.setBit(songPacks, 13, player:hasKeyItem(xi.ki.SHEET_OF_ALTAIEU_TUNES))     -- The Celestial Capital - Al'Taieu (233)
+    songPacks = utils.mask.setBit(songPacks, 14, player:hasKeyItem(xi.ki.SHEET_OF_JEUNO_TUNES))       -- The Grand Duchy of Jeuno (110), Ru'Lude Gardens (117)
+    songPacks = utils.mask.setBit(songPacks, 15, player:hasKeyItem(xi.ki.SHEET_OF_HARVEST_TUNES))     -- Devils' Delight (29)
 
     -- 0000 = all instruments shown
     -- 1111 = all instruments hidden
-    local instruments_available = 15
+    local instrumentsAvailable = 15
 
-    local orchestrion    = player:findItem(426)
-    local spinet         = player:findItem(3677)
-    local nanaa_statue_1 = player:findItem(286)
-    local nanaa_statue_2 = player:findItem(287)
+    local orchestrion  = player:findItem(426)
+    local spinet       = player:findItem(3677)
+    local nanaaStatue1 = player:findItem(286)
+    local nanaaStatue2 = player:findItem(287)
 
-    local has_orchestrion    = orchestrion and orchestrion:isInstalled()
-    local has_spinet         = spinet and spinet:isInstalled()
-    local has_nanaa_statue_1 = nanaa_statue_1 and nanaa_statue_1:isInstalled()
-    local has_nanaa_statue_2 = nanaa_statue_2 and nanaa_statue_1:isInstalled()
+    local hasOrchestrion  = orchestrion and orchestrion:isInstalled()
+    local hasSpinet       = spinet and spinet:isInstalled()
+    local hasNanaaStatue1 = nanaaStatue1 and nanaaStatue1:isInstalled()
+    local hasNanaaStatue2 = nanaaStatue2 and nanaaStatue2:isInstalled()
 
-    instruments_available = utils.mask.setBit(instruments_available, 0, not has_orchestrion)    -- Orchestrion
-    instruments_available = utils.mask.setBit(instruments_available, 1, not has_spinet)         -- Spinet
-    instruments_available = utils.mask.setBit(instruments_available, 2, not has_nanaa_statue_1) -- Nanaa Statue I
-    instruments_available = utils.mask.setBit(instruments_available, 3, not has_nanaa_statue_2) -- Nanaa Statue II
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 0, not hasOrchestrion)  -- Orchestrion
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 1, not hasSpinet)       -- Spinet
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 2, not hasNanaaStatue1) -- Nanaa Statue I
+    instrumentsAvailable = utils.mask.setBit(instrumentsAvailable, 3, not hasNanaaStatue2) -- Nanaa Statue II
 
     -- GMs get access to all music
     if player:getGMLevel() > 0 then
-        song_packs = 65535
-        instruments_available = 0
+        songPacks = 65535
+        instrumentsAvailable = 0
     end
 
-    player:startEvent(30034, 0, 4095, song_packs, instruments_available)
+    player:startEvent(30034, 0, 4095, songPacks, instrumentsAvailable)
 end
 
 -- The options that comes through the event doesn't line up with the song request packet,
@@ -128,16 +127,16 @@ local optionToSongLookup =
 }
 
 xi.symphonic_curator.onEventUpdate = function(player, csid, option)
-    player:ChangeMusic(6, optionToSongLookup[option])
+    player:changeMusic(6, optionToSongLookup[option])
 end
 
 xi.symphonic_curator.onEventFinish = function(player, csid, option)
     if option == 0 then
         -- Reset
-        player:ChangeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))
+        player:changeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))
     else
         -- Confirmed, set
         player:setLocalVar("Symphonic_Curator_Music", optionToSongLookup[option])
-        player:ChangeMusic(6, optionToSongLookup[option])
+        player:changeMusic(6, optionToSongLookup[option])
     end
 end

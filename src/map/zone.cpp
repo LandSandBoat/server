@@ -205,9 +205,9 @@ uint32 CZone::GetWeatherChangeTime() const
     return m_WeatherChangeTime;
 }
 
-const int8* CZone::GetName()
+const std::string& CZone::GetName()
 {
-    return (const int8*)m_zoneName.c_str();
+    return m_zoneName;
 }
 
 uint8 CZone::GetSoloBattleMusic() const
@@ -274,7 +274,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (matches(std::string((const char*)PNpc->GetName()), pattern))
+        if (matches(PNpc->GetName(), pattern))
         {
             entities.push_back(PNpc);
         }
@@ -282,7 +282,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (matches(std::string((const char*)PMob->GetName()), pattern))
+        if (matches(PMob->GetName(), pattern))
         {
             entities.push_back(PMob);
         }
@@ -474,7 +474,7 @@ void CZone::LoadNavMesh()
 
     char file[255];
     memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName());
+    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName().c_str());
 
     if (!m_navMesh->load(file))
     {
@@ -855,7 +855,7 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-CCharEntity* CZone::GetCharByName(int8* name)
+CCharEntity* CZone::GetCharByName(std::string name)
 {
     return m_zoneEntities->GetCharByName(name);
 }
@@ -1062,13 +1062,12 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         auto* PBattlefield = m_BattlefieldHandler->GetBattlefield(PChar, true);
         if (PBattlefield != nullptr && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            bool isEntered = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1;
-            PBattlefield->InsertEntity(PChar, isEntered);
+            PBattlefield->InsertEntity(PChar, CBattlefield::hasPlayerEntered(PChar));
         }
         else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
             // Player is in a zone with a battlefield but they are not part of one.
-            if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1)
+            if (CBattlefield::hasPlayerEntered(PChar))
             {
                 // If inside of the battlefield arena then kick them out
                 // Battlefield and level restriction effects will be removed once fully kicked.
@@ -1124,7 +1123,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         {
             if (PChar->PParty->GetSyncTarget() == PChar || PChar->PParty->GetLeader() == PChar)
             {
-                PChar->PParty->SetSyncTarget(nullptr, 551);
+                PChar->PParty->SetSyncTarget("", 551);
             }
             if (PChar->PParty->GetSyncTarget() != nullptr)
             {
@@ -1138,7 +1137,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
                 }
                 if (count < 2) // 3, because one is zoning out - thus at least 2 will be left
                 {
-                    PChar->PParty->SetSyncTarget(nullptr, 552);
+                    PChar->PParty->SetSyncTarget("", 552);
                 }
             }
         }

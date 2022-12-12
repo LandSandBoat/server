@@ -140,8 +140,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 63 then
         player:setCharVar("KnightStalker_Progress", 3)
     end
-
 end
+
 --    player:startEvent(32690)     -- starlight celebration
 
 return entity

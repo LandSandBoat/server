@@ -41,5 +41,6 @@ function Quest:complete(player)
     if didComplete then
         self:cleanup(player)
     end
+
     return didComplete
 end

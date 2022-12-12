@@ -19,7 +19,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     --[[
     power = 1
     tic = 0
@@ -40,6 +39,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
+
     return typeEffect
     ]]
 end

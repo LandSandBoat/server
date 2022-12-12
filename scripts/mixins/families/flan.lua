@@ -45,7 +45,6 @@ g_mixins.families.flan = function(flanMob)
             mob:setLocalVar("magical", accumulatedMagical)
         end
     end)
-
 end
 
 return g_mixins.families.flan

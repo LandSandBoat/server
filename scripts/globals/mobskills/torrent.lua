@@ -17,6 +17,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     for i = xi.slot.MAIN, xi.slot.BACK do
         target:unequipItem(i)
     end
+
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end

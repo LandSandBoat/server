@@ -21,6 +21,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
         return 1
     end
+
     return 0
 end
 

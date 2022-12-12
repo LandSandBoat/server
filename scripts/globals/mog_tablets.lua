@@ -233,9 +233,23 @@ xi.mogTablet.moogleOnEventUpdate = function(player, csid, option)
     if option == 1 then
 
         -- Overwrite with their shifted values
-        if power1 then power1 = bit.lshift(1, power1 - 1) else power1 = 0 end
-        if power2 then power2 = bit.lshift(1, power2 - 1) else power2 = 0 end
-        if power3 then power3 = bit.lshift(1, power3 - 1) else power3 = 0 end
+        if power1 then
+            power1 = bit.lshift(1, power1 - 1)
+        else
+            power1 = 0
+        end
+
+        if power2 then
+            power2 = bit.lshift(1, power2 - 1)
+        else
+            power2 = 0
+        end
+
+        if power3 then
+            power3 = bit.lshift(1, power3 - 1)
+        else
+            power3 = 0
+        end
 
         player:updateEvent(power1 + power2 + power3)
 

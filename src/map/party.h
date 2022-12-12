@@ -67,7 +67,7 @@ public:
     CBattleEntity* GetLeader();
     CBattleEntity* GetSyncTarget();
     CBattleEntity* GetQuaterMaster();
-    CBattleEntity* GetMemberByName(const int8* MemberName); // Returns entity pointer for member name string
+    CBattleEntity* GetMemberByName(const std::string& memberName); // Returns entity pointer for member name string
 
     void DisbandParty(bool playerInitiated = true);
     void ReloadParty();
@@ -81,9 +81,9 @@ public:
     void   PopMember(CBattleEntity* PEntity);    // remove a member from memberlist (zoned to different server)
     void   PushMember(CBattleEntity* PEntity);   // add a member without invoking chat/db
     void   SetPartyID(uint32 id);                // set new party ID
-    void   AssignPartyRole(int8* MemberName, uint8 role);
+    void   AssignPartyRole(const std::string& MemberName, uint8 role);
     void   DisableSync();
-    void   SetSyncTarget(int8* MemberName, uint16 message);
+    void   SetSyncTarget(const std::string& MemberName, uint16 message);
     void   RefreshSync();
     void   SetPartyNumber(uint8 number);
     bool   HasOnlyOneMember() const;
@@ -117,9 +117,9 @@ private:
 
     bool m_EffectsChanged;
 
-    void                     SetLeader(const char* MemberName);         // set party leader
-    void                     SetQuarterMaster(const char* MemberName);  // set Quartermaster
-    bool                     RemovePartyLeader(CBattleEntity* PEntity); // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
+    void                     SetLeader(const std::string& MemberName);        // set party leader
+    void                     SetQuarterMaster(const std::string& MemberName); // set Quartermaster
+    bool                     RemovePartyLeader(CBattleEntity* PEntity);       // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
     std::vector<partyInfo_t> GetPartyInfo() const;
     void                     RefreshFlags(std::vector<partyInfo_t>&);
 };

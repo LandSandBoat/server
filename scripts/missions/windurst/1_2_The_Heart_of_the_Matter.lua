@@ -386,6 +386,7 @@ mission.sections =
                     for i = 1, 6 do
                         player:delKeyItem(glowingOrbKI[i])
                     end
+
                     player:setMissionStatus(mission.areaId, 6)
                 end,
             },

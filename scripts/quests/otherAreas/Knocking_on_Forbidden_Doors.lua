@@ -140,11 +140,11 @@ quest.sections =
 
             onEventFinish =
             {
-                [556] = function (player, csid, option, npc)
+                [556] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
 
-                [557] = function (player, csid, option, npc)
+                [557] = function(player, csid, option, npc)
                     if
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.popFromQM(player, npc, ID.mob.ALSHA, { claim = true, hide = 0 })
@@ -237,6 +237,7 @@ quest.sections =
                         if player:getGil() >= xi.mannequin.cost.PURCHASE then
                             richEnough = 1
                         end
+
                         player:updateEvent({ [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
                             [1] = xi.mannequin.getMannequins(player),
                             [2] = option,

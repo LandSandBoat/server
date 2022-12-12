@@ -1,4 +1,7 @@
+require("scripts/globals/items")
 require("scripts/globals/msg")
+require("scripts/globals/pathfind")
+require("scripts/globals/status")
 
 xi = xi or {}
 
@@ -453,7 +456,6 @@ function Battlefield:register()
                     end
                 end
             end
-
         end
     end
 
@@ -505,6 +507,7 @@ function Battlefield:register()
     else
         xi.battlefield.contentsByZone[self.zoneId] = { self }
     end
+
     return self
 end
 
@@ -595,6 +598,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
+
         return
     end
 
@@ -615,6 +619,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
                 end
+
                 return
             end
         end
@@ -676,6 +681,7 @@ function Battlefield.onEntryTrigger(player, npc)
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
+
         return
     end
 
@@ -790,6 +796,7 @@ function Battlefield.redirectEventCall(eventName, player, csid, option)
 end
 
 function Battlefield:onEventFinishEnter(player, csid, option)
+    player:setEnteredBattlefield(true)
     player:setLocalVar("[battlefield]area", 0)
     self:setLocalVar(player, "CS", 1)
 end
@@ -798,6 +805,7 @@ function Battlefield:onEventFinishWin(player, csid, option)
     if self.title then
         player:addTitle(self.title)
     end
+
     if self.grantXP then
         player:addExp(self.grantXP)
     end
@@ -861,6 +869,7 @@ function Battlefield:onBattlefieldTick(battlefield, tick)
         for _, player in pairs(players) do
             player:messageSpecial(zones[player:getZoneID()].text.TIME_IN_THE_BATTLEFIELD_IS_UP)
         end
+
         battlefield:setStatus(xi.battlefield.status.LOST)
         isExiting = true
     end
@@ -884,13 +893,14 @@ end
 function Battlefield:onBattlefieldRegister(player, battlefield)
 end
 
-function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
+function Battlefield:onBattlefieldStatusChange(battlefield, status)
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
     if
         status == xi.battlefield.status.LOCKED and
         battlefield:getLocalVar("statusRemoval") == 0
     then
         battlefield:setLocalVar("statusRemoval", 1)
+        local players = battlefield:getPlayers()
 
         for _, player in pairs(players) do
             local alliance = player:getAlliance()
@@ -925,6 +935,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
                         if not self.requiredKeyItems.keep then
                             player:delKeyItem(subitem)
                         end
+
                         table.insert(items, subitem)
                     end
                 end
@@ -932,6 +943,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
                 if not self.requiredKeyItems.keep then
                     player:delKeyItem(item)
                 end
+
                 table.insert(items, item)
             end
         end
@@ -971,11 +983,6 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
-
-    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        status:setSubPower(1)
-    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -986,9 +993,6 @@ function Battlefield:onBattlefieldLeave(player, battlefield, leavecode)
         self:onBattlefieldWin(player, battlefield)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         self:onBattlefieldLoss(player, battlefield)
-    elseif player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        status:setSubPower(0)
     end
 end
 
@@ -1158,6 +1162,7 @@ function xi.battlefield.rejectLevelSyncedParty(player, npc)
             return true
         end
     end
+
     return false
 end
 
@@ -1198,9 +1203,15 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
 
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
-    local missionStatusArea = self.missionStatusArea or player:getNation()
-    local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
-    return current == self.mission and status == self.requiredMissionStatus
+
+    if self.requiredMissionStatus ~= nil then
+        local missionStatusArea = self.missionStatusArea or player:getNation()
+        local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
+        return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or (current == self.mission and status >= self.requiredMissionStatus))) or
+            (current == self.mission and status == self.requiredMissionStatus)
+    else
+        return (not isRegistrant and player:hasCompletedMission(missionArea, self.mission)) or current == self.mission
+    end
 end
 
 function BattlefieldMission:checkSkipCutscene(player)

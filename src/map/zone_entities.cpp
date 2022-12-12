@@ -481,7 +481,7 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
         id += 0x100;
     }
 
-    m_zone->GetZoneEntities()->dynamicTargIds.insert(targid);
+    dynamicTargIds.insert(targid);
 
     PEntity->targid   = targid;
     PEntity->id       = id;
@@ -1068,7 +1068,7 @@ void CZoneEntities::SavePlayTime()
     }
 }
 
-CCharEntity* CZoneEntities::GetCharByName(int8* name)
+CCharEntity* CZoneEntities::GetCharByName(const std::string& name)
 {
     TracyZoneScoped;
     if (!m_charList.empty())
@@ -1076,7 +1076,8 @@ CCharEntity* CZoneEntities::GetCharByName(int8* name)
         for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
         {
             CCharEntity* PCurrentChar = (CCharEntity*)it->second;
-            if (stricmp((char*)PCurrentChar->GetName(), (const char*)name) == 0)
+
+            if (strcmpi(PCurrentChar->GetName().c_str(), name.c_str()) == 0)
             {
                 return PCurrentChar;
             }
@@ -1307,7 +1308,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 {
     TracyZoneScoped;
-    TracyZoneIString(m_zone->GetName());
+    TracyZoneString(m_zone->GetName());
 
     luautils::OnZoneTick(this->m_zone);
 
@@ -1338,7 +1339,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
         PMob->PAI->Tick(tick);
 
-        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath)
+        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
         {
             for (auto PMobIt : m_mobList)
             {
@@ -1362,7 +1363,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
             it->second = nullptr;
             m_mobList.erase(it++);
-            dynamicTargIds.erase(PMob->targid);
+            dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
             delete PMob;
             continue;
         }
@@ -1392,10 +1393,32 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
         }
     }
 
-    for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
+    it = m_npcList.begin();
+    while (it != m_npcList.end())
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
         PNpc->PAI->Tick(tick);
+
+        // This is only valid for dynamic entities
+        if (PNpc->status == STATUS_TYPE::DISAPPEAR && PNpc->m_bReleaseTargIDOnDisappear)
+        {
+            for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+            {
+                CCharEntity* PChar = (CCharEntity*)it->second;
+                if (distance(PChar->loc.p, PNpc->loc.p) < 50)
+                {
+                    PChar->SpawnNPCList.erase(PNpc->id);
+                }
+            }
+
+            delete it->second;
+            it->second = nullptr;
+            dynamicTargIdsToDelete.push_back({ it->first, server_clock::now() });
+
+            m_npcList.erase(it++);
+            continue;
+        }
+        it++;
     }
 
     it = m_petList.begin();
@@ -1421,12 +1444,15 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                     CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
                     PCurrentMob->PEnmityContainer->Clear(PPet->id);
                 }
+
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
                 {
                     delete it->second;
                     it->second = nullptr;
                 }
-                dynamicTargIds.erase(it->first);
+
+                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+
                 m_petList.erase(it++);
                 continue;
             }
@@ -1471,7 +1497,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
                 delete it->second;
                 it->second = nullptr;
-                dynamicTargIds.erase(it->first);
+                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+
                 m_trustList.erase(it++);
                 continue;
             }

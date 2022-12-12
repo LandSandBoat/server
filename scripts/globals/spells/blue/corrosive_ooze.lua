@@ -29,6 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
     end
+
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
     params.multiplier = multi

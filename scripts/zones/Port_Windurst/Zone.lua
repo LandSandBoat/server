@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Port_Windurst/IDs')
 require('scripts/globals/conquest')
+require('scripts/globals/cutscenes')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
@@ -13,17 +14,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
-    -- FIRST LOGIN (START CS)
-    if player:getPlaytime(false) == 0 then
-        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
-            cs = 305
-        end
-
-        player:setPos(-120, -5.5, 175, 48)
-        player:setHomePoint()
-    end
+    local cs = { -1 }
 
     if
         player:getXPos() == 0 and
@@ -31,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.WINDURST_JEUNO_AIRSHIP then
-            cs = 10004
+            cs = { 10004 }
             player:setPos(228.000, -3.000, 76.000, 160)
         else
             local position = math.random(1, 5) + 195
@@ -54,9 +45,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 305 then
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 10002 then
+    if csid == 10002 then
         player:setPos(0, 0, 0, 0, 225)
     end
 end

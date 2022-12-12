@@ -25,6 +25,7 @@ function onTrigger(player, logId, missionId, target)
         error(player, "Invalid logID.")
         return
     end
+
     logName = logInfo.full_name
     logId = logInfo.mission_log
 
@@ -33,6 +34,7 @@ function onTrigger(player, logId, missionId, target)
     if missionId ~= nil then
         missionId = tonumber(missionId) or areaMissionIds[string.upper(missionId)] or _G[string.upper(missionId)]
     end
+
     if missionId == nil or missionId < 0 then
         error(player, "Invalid missionID.")
         return

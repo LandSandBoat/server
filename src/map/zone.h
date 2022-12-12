@@ -518,18 +518,18 @@ int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 class CZone
 {
 public:
-    ZONEID         GetID();
-    ZONE_TYPE      GetType();
-    REGION_TYPE    GetRegionID();
-    CONTINENT_TYPE GetContinentID();
-    uint8          getLevelRestriction();
-    uint32         GetIP() const;
-    uint16         GetPort() const;
-    uint16         GetTax() const;
-    WEATHER        GetWeather();
-    uint32         GetWeatherChangeTime() const;
-    const int8*    GetName();
-    zoneLine_t*    GetZoneLine(uint32 zoneLineID);
+    ZONEID             GetID();
+    ZONE_TYPE          GetType();
+    REGION_TYPE        GetRegionID();
+    CONTINENT_TYPE     GetContinentID();
+    uint8              getLevelRestriction();
+    uint32             GetIP() const;
+    uint16             GetPort() const;
+    uint16             GetTax() const;
+    WEATHER            GetWeather();
+    uint32             GetWeatherChangeTime() const;
+    const std::string& GetName();
+    zoneLine_t*        GetZoneLine(uint32 zoneLineID);
 
     uint8 GetSoloBattleMusic() const;
     uint8 GetPartyBattleMusic() const;
@@ -547,7 +547,7 @@ public:
     void   SetLocalVar(const char* var, uint32 val);
     void   ResetLocalVars();
 
-    virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
+    virtual CCharEntity* GetCharByName(std::string name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
 
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)

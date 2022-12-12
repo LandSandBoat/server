@@ -30,10 +30,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
-    {
-        [1] = function (x) player:startEvent(100); end,
-    }
+    if triggerArea:GetTriggerAreaID() == 1 then
+        player:startEvent(100)
+    end
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)

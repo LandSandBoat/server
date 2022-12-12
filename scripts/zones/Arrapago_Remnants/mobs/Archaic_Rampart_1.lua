@@ -26,6 +26,7 @@ entity.onMobFight = function(mob, target)
             end)
         end
     end
+
     if mobPet:isSpawned() then
         mobPet:updateEnmity(target)
     end

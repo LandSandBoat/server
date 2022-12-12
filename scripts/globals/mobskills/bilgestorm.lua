@@ -23,6 +23,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     end
+
     return 0
 end
 

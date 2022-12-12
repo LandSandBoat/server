@@ -29,6 +29,7 @@ function onTrigger(player, equipSlot, name)
         if not target then
             target = player
         end
+
         name = target:getName()
     end
 

@@ -239,7 +239,15 @@ zones[xi.zone.TEMENOS] =
                 16928890,
             },
         },
-    }
+    },
+
+    CENTRAL_TEMENOS_1ST_FLOOR =
+    {
+        npc =
+        {
+            LOOT_CRATE = 16929045,
+        }
+    },
 }
 
 return zones[xi.zone.TEMENOS]

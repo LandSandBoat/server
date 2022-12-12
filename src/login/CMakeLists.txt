@@ -22,6 +22,10 @@ endif()
 
 add_executable(xi_connect ${SOURCES} ${resource})
 
+if (APPLE)
+    disable_lto(xi_connect)
+endif()
+
 if(WIN32)
     set_target_properties(xi_connect PROPERTIES OUTPUT_NAME xi_connect)
 endif()

@@ -13,6 +13,7 @@ battlefieldObject.onBattlefieldTick = function(battlefield, tick)
         battlefield:lose()
         return
     end
+
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 

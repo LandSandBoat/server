@@ -37,10 +37,12 @@ battlefieldObject.onEventFinish = function(player, csid, option)
             player:addSpell(302)
             player:messageSpecial(ID.text.SHIVA_UNLOCKED, 0, 0, 4)
         end
+
         if not player:hasItem(4181) then
             player:addItem(4181) -- Scroll of instant warp
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
         end
+
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
     end

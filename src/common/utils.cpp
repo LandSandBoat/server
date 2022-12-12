@@ -504,13 +504,12 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
     return retVal;
 }
 
-void EncodeStringLinkshell(int8* signature, int8* target)
+void EncodeStringLinkshell(const std::string& signature, char* target)
 {
-    uint8 encodedSignature[LinkshellStringLength];
-    memset(&encodedSignature, 0, sizeof encodedSignature);
-    uint8 chars    = 0;
-    uint8 leftover = 0;
-    auto  length   = std::min<size_t>(20u, strlen((const char*)signature));
+    uint8 encodedSignature[LinkshellStringLength] = {};
+    uint8 chars                                   = 0;
+    uint8 leftover                                = 0;
+    auto  length                                  = std::min<size_t>(20u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -535,19 +534,18 @@ void EncodeStringLinkshell(int8* signature, int8* target)
     leftover = (leftover == 8 || leftover == 2 ? 6 : leftover);
     packBitsLE(encodedSignature, 0xFF, 6 * chars, leftover);
 
-    strncpy((char*)target, (const char*)encodedSignature, LinkshellStringLength);
+    strncpy(target, reinterpret_cast<const char*>(encodedSignature), LinkshellStringLength);
 }
 
-void DecodeStringLinkshell(int8* signature, int8* target)
+void DecodeStringLinkshell(const std::string& signature, char* target)
 {
-    uint8 decodedSignature[21];
-    memset(&decodedSignature, 0, sizeof decodedSignature);
-    auto length = std::min<size_t>(20u, (strlen((const char*)signature) * 8) / 6);
+    char decodedSignature[21] = {};
+    auto length               = std::min<size_t>(20u, (signature.size() * 8) / 6);
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = '\0';
-        tempChar       = (uint8)unpackBitsLE((uint8*)signature, static_cast<uint32>(currChar * 6), 6);
+        tempChar       = (uint8)unpackBitsLE((uint8*)signature.c_str(), static_cast<uint32>(currChar * 6), 6);
         if (tempChar >= 1 && tempChar <= 26)
         {
             tempChar = 'a' - 1 + tempChar;
@@ -577,15 +575,14 @@ void DecodeStringLinkshell(int8* signature, int8* target)
         }
     }
 
-    strncpy((char*)target, (const char*)decodedSignature, LinkshellStringLength);
+    strncpy(target, decodedSignature, LinkshellStringLength);
 }
 
-int8* EncodeStringSignature(int8* signature, int8* target)
+std::string EncodeStringSignature(const std::string& signature, char* target)
 {
-    uint8 encodedSignature[SignatureStringLength];
-    memset(&encodedSignature, 0, sizeof encodedSignature);
-    uint8 chars  = 0;
-    auto  length = std::min<size_t>(15u, strlen((const char*)signature));
+    uint8 encodedSignature[SignatureStringLength] = {};
+    uint8 chars                                   = 0;
+    auto  length                                  = std::min<size_t>(15u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -606,15 +603,15 @@ int8* EncodeStringSignature(int8* signature, int8* target)
         chars++;
     }
 
-    return (int8*)strncpy((char*)target, (const char*)encodedSignature, SignatureStringLength);
+    return strncpy(target, reinterpret_cast<const char*>(encodedSignature), SignatureStringLength);
 }
 
-void DecodeStringSignature(int8* signature, int8* target)
+void DecodeStringSignature(const std::string& signature, char* target)
 {
-    uint8 decodedSignature[PacketNameLength + 1] = { 0 };
+    char decodedSignature[PacketNameLength + 1] = {};
     for (uint8 currChar = 0; currChar < PacketNameLength; ++currChar)
     {
-        uint8 tempChar = (uint8)unpackBitsLE((uint8*)signature, currChar * 6, 6);
+        char tempChar = unpackBitsLE((uint8*)signature.c_str(), currChar * 6, 6);
         if (tempChar >= 1 && tempChar <= 10)
         {
             tempChar = '0' - 1 + tempChar;
@@ -630,7 +627,7 @@ void DecodeStringSignature(int8* signature, int8* target)
 
         decodedSignature[currChar] = tempChar;
     }
-    strncpy((char*)target, (const char*)decodedSignature, SignatureStringLength);
+    strncpy(target, decodedSignature, SignatureStringLength);
 }
 
 // Take a regular string of 8-bit wide chars and packs it down into an

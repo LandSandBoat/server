@@ -99,6 +99,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
                 DespawnMob(mob:getID())
             end
         end
+
         xi.confrontation.lookup[lookupKey] = nil
     else -- Check again soon
         if setupTimer then
@@ -124,6 +125,7 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
             end
         end
     end
+
     mobIds = mobs
 
     -- Tag alliance members with the confrontation effect

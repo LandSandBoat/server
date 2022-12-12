@@ -14,14 +14,15 @@ g_mixins.families.aern = function(aernMob)
     aernMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
         if killer then
             local reraises = mob:getLocalVar("AERN_RERAISE_MAX")
-            local curr_reraise = mob:getLocalVar("AERN_RERAISES")
+            local currReraise = mob:getLocalVar("AERN_RERAISES")
             if reraises == 0 then
                 if math.random() < 0.4 then
                     reraises = 1
                 end
             end
+
             mob:setMobMod(xi.mobMod.NO_DROPS, 0) -- Drops on if Not reraising
-            if curr_reraise < reraises then
+            if currReraise < reraises then
                 mob:setMobMod(xi.mobMod.NO_DROPS, 1)  -- Drops off if reraising
                 local dropid = mob:getDropID()
                 local target = mob:getTarget()
@@ -31,11 +32,12 @@ g_mixins.families.aern = function(aernMob)
                 then
                     target = target:getMaster()
                 end
+
                 mob:timer(12000, function(mobArg)
                     mobArg:setHP(mob:getMaxHP())
                     mobArg:setDropID(dropid)
                     mobArg:setAnimationSub(3)
-                    mobArg:setLocalVar("AERN_RERAISES", curr_reraise + 1)
+                    mobArg:setLocalVar("AERN_RERAISES", currReraise + 1)
                     mobArg:resetAI()
                     mobArg:stun(3000)
                     if
@@ -56,13 +58,15 @@ g_mixins.families.aern = function(aernMob)
                                 elseif i == partySize then --if all checks fail just disengage
                                     mobArg:disengage()
                                 end
+
                                 i = i + 1
                             end
                         else
                             mobArg:disengage()
                         end
                     end
-                    mobArg:triggerListener("AERN_RERAISE", mobArg, curr_reraise + 1)
+
+                    mobArg:triggerListener("AERN_RERAISE", mobArg, currReraise + 1)
                 end)
             end
         end

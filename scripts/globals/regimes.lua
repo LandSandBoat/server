@@ -955,10 +955,14 @@ end
 
 local function getPageByNum(regimeType, zoneId, pageNum)
     local info = regimeInfo[regimeType]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.zone[zoneId]
-    if not info then return nil end
+    if not info then
+        return nil
+    end
 
     info = info.page
     return info[pageNum]
@@ -969,9 +973,11 @@ local function getUpdateOpts(regimeType)
     for k, v in pairs(regimeInfo[regimeType].updateOptions) do
         out[k] = v
     end
+
     for k, v in pairs(regimeInfo[regimeType].sharedOptions) do
         out[k] = v
     end
+
     return out
 end
 
@@ -980,9 +986,11 @@ local function getFinishOpts(regimeType)
     for k, v in pairs(regimeInfo[regimeType].finishOptions) do
         out[k] = v
     end
+
     for k, v in pairs(regimeInfo[regimeType].sharedOptions) do
         out[k] = v
     end
+
     return out
 end
 

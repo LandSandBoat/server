@@ -24,6 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST) ~= nil then
         mabTotal = mabTotal:getPower() + 10
     end
+
     if mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST) ~= nil then
         mabTotal = mabTotal:getPower() + 10
     end

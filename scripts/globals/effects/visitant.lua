@@ -37,6 +37,7 @@ reportTimeRemaining = function(player, effect)
             if messageParam <= 30 then
                 player:setLocalVar('finalCountdown', 1)
             end
+
             break
         end
     end

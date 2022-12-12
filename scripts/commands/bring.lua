@@ -20,11 +20,13 @@ function onTrigger(player, target, forceZone)
         error(player, "You must enter a target player name.")
         return
     end
+
     local targ = GetPlayerByName(target)
     if targ == nil then
         if not player:bringPlayer(target) then
             error(player, string.format("Player named '%s' not found!", target))
         end
+
         return
     end
 

@@ -23,6 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     elseif target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
         target:delStatusEffectSilent(xi.effect.FIELD_SUPPORT_FOOD)
     end
+
     target:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, xi.effect.FOOD, 255, 0, 1800)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

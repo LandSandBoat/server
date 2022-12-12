@@ -44,9 +44,9 @@ uint16 CLuaInstance::getID()
     return m_PLuaInstance->GetID();
 }
 
-std::string CLuaInstance::getName()
+const std::string& CLuaInstance::getName()
 {
-    return (const char*)m_PLuaInstance->GetName();
+    return m_PLuaInstance->GetName();
 }
 
 CLuaZone CLuaInstance::getZone()

@@ -19,6 +19,7 @@ entity.onTrigger = function(player, npc)
             local anim = ID.npc.DOORS[i] == colorTouched and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
             GetNPCByID(ID.npc.DOOR_OFFSET + i):setAnimation(anim)
         end
+
         for i = 0, 19 do
             local anim = ID.npc.MONOLITHS[i] == colorTouched and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
             GetNPCByID(ID.npc.MONOLITH_OFFSET + (i * 2) - 1):setAnimation(anim)

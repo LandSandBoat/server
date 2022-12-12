@@ -17,7 +17,6 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.colibri_mimic = function(colibriMob)
-
     colibriMob:addListener("MAGIC_TAKE", "COLIBRI_MIMIC_MAGIC_TAKE", function(target, caster, spell)
         if
             target:getAnimationSub() == 0 and
@@ -67,7 +66,6 @@ g_mixins.families.colibri_mimic = function(colibriMob)
             mob:setAnimationSub(0)
         end
     end)
-
 end
 
 return g_mixins.families.colibri_mimic

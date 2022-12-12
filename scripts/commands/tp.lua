@@ -17,7 +17,7 @@ end
 function onTrigger(player, tp, target)
     -- validate target
     local targ
-    local cursor_target = player:getCursorTarget()
+    local cursorTarget = player:getCursorTarget()
 
     if target then
         targ = GetPlayerByName(target)
@@ -25,8 +25,8 @@ function onTrigger(player, tp, target)
             error(player, string.format("Player named '%s' not found!", target))
             return
         end
-    elseif cursor_target and not cursor_target:isNPC() then
-        targ = cursor_target
+    elseif cursorTarget and not cursorTarget:isNPC() then
+        targ = cursorTarget
     else
         targ = player
     end
@@ -47,6 +47,7 @@ function onTrigger(player, tp, target)
         if pet and pet:isAlive() then
             pet:setTP(tp)
         end
+
         if targ:getID() ~= player:getID() then
             player:PrintToPlayer(string.format("Set %s's TP to %i.", targ:getName(), targ:getTP()))
         end

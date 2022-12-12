@@ -112,7 +112,7 @@ void CPetSkill::setAnimationID(uint16 animID)
     m_AnimID = animID;
 }
 
-const std::string CPetSkill::getName() const
+const std::string& CPetSkill::getName() const
 {
     return m_name;
 }

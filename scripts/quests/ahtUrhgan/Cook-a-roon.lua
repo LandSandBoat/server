@@ -66,6 +66,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW)
                     end
+
                     if quest:complete(player) then
                         player:confirmTrade()
                     end
@@ -103,6 +104,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW)
                     end
+
                     quest:setVar(player, 'Prog', 0)
                 end,
             },

@@ -12,6 +12,7 @@ itemObject.onItemCheck = function(target)
     if target:getMP() == target:getMaxMP() then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
+
     return 0
 end
 

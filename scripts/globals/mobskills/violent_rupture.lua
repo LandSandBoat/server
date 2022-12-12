@@ -18,7 +18,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
     local power = 50
     local duration = 120
 
@@ -30,7 +29,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.FIRE)
     return dmg
-
 end
 
 return mobskillObject

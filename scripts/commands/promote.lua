@@ -91,9 +91,11 @@ function onTrigger(player, target, level)
         if targ:checkNameFlags(gmFlags.GM) then
             targ:setFlag(gmFlags.GM)
         end
+
         if targ:checkNameFlags(gmFlags.SENIOR) then
             targ:setFlag(gmFlags.SENIOR)
         end
+
         if targ:checkNameFlags(gmFlags.LEAD) then
             targ:setFlag(gmFlags.LEAD)
         end

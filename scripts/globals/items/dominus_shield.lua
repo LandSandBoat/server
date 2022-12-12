@@ -17,6 +17,7 @@ itemObject.onItemUse = function(target)
     if mpHeal > dif then
         mpHeal = dif
     end
+
     target:addMP(mpHeal)
     target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, mpHeal)
 end

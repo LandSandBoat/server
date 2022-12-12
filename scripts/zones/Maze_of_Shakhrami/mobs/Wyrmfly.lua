@@ -35,4 +35,5 @@ entity.onMobDeath = function(mob, player, optParams)
         end
     end
 end
+
 return entity

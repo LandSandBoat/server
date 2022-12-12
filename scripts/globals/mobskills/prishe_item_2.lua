@@ -24,6 +24,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     elseif math.random() < 0.25 then
         return 1
     end
+
     return 0
 end
 
@@ -48,6 +49,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 11, false)
         mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 30)
     end
+
     return 0
 end
 

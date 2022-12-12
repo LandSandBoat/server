@@ -70,6 +70,7 @@ entity.onEventUpdate = function(player, csid, option)
             if hp > 5 then
                 player:setHP(math.ceil(hp / 2))
             end
+
             local mp = player:getMP()
             if mp > 5 then
                 player:setMP(math.ceil(mp / 2))
@@ -93,6 +94,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("RUN_COTR", cotrStates.REWARD_PENDING)
         end
     end
+
     -- Attempt to issue the Children of the Rune reward if the player has space.
     if player:getCharVar("RUN_COTR") == cotrStates.REWARD_PENDING then
         if npcUtil.giveItem(player, xi.items.SOWILO_CLAYMORE) then  -- Sowilo Claymore

@@ -15,7 +15,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     ----- Save The Clock Tower Quest -----
     if
         trade:hasItemQty(555, 1) and
@@ -46,7 +45,6 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(50, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -93,7 +91,6 @@ entity.onTrigger = function(player, npc)
     -- default dialog including option to drop membership card
     else
         player:startEvent(118, hasMembershipCard)
-
     end
 end
 
@@ -141,6 +138,7 @@ entity.onEventFinish = function(player, csid, option)
                 params.ki = xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD
             end
         end
+
         npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE, params)
 
     elseif csid == 118 and option == 1 then

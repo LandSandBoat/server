@@ -16,7 +16,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-
     -- Records of Eminence: Alter Ego: Joachim
     if caster:getEminenceProgress(937) then
         xi.roe.onRecordTrigger(caster, 937)

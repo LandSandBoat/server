@@ -68,6 +68,8 @@ namespace puppetutils
             if (PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP)
             {
                 PChar->PAutomaton = new CAutomatonEntity();
+                PChar->PAutomaton->saveModifiers();
+
                 PChar->PAutomaton->name.insert(0, (const char*)sql->GetData(1));
                 automaton_equip_t tempEquip;
                 attachments = nullptr;
