@@ -324,7 +324,7 @@ enum ZONEID : uint16
     ZONE_OUTER_RAKAZNAR_U1              = 275,
     ZONE_RAKAZNAR_INNER_COURT           = 276,
     ZONE_RAKAZNAR_TURRIS                = 277,
-    ZONE_278                            = 278,
+    ZONE_GWORA_CORRIDOR                 = 278,
     ZONE_WALK_OF_ECHOES_P2              = 279,
     ZONE_MOG_GARDEN                     = 280,
     ZONE_LEAFALLIA                      = 281,
