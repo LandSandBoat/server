@@ -36,6 +36,7 @@ xi.magic.barSpell            = { xi.effect.BARFIRE,    xi.effect.BARBLIZZARD, xi
 local elementalObi           = { xi.mod.FORCE_FIRE_DWBONUS,   xi.mod.FORCE_ICE_DWBONUS,   xi.mod.FORCE_WIND_DWBONUS,   xi.mod.FORCE_EARTH_DWBONUS,   xi.mod.FORCE_LIGHTNING_DWBONUS,   xi.mod.FORCE_WATER_DWBONUS,  xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
 local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,    xi.mod.ICE_AFFINITY_DMG,    xi.mod.WIND_AFFINITY_DMG,    xi.mod.EARTH_AFFINITY_DMG,    xi.mod.THUNDER_AFFINITY_DMG,      xi.mod.WATER_AFFINITY_DMG,   xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG  }
 local nullMod                = { xi.mod.FIRE_NULL,            xi.mod.ICE_NULL,            xi.mod.WIND_NULL,            xi.mod.EARTH_NULL,            xi.mod.LTNG_NULL,                 xi.mod.WATER_NULL,           xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL          }
+local resistRankMod          = { xi.mod.FIRE_RES_RANK,        xi.mod.ICE_RES_RANK,        xi.mod.WIND_RES_RANK,        xi.mod.EARTH_RES_RANK,        xi.mod.THUNDER_RES_RANK,          xi.mod.WATER_RES_RANK,       xi.mod.LIGHT_RES_RANK,      xi.mod.DARK_RES_RANK      }
 local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY, xi.merit.ICE_MAGIC_POTENCY, xi.merit.WIND_MAGIC_POTENCY, xi.merit.EARTH_MAGIC_POTENCY, xi.merit.LIGHTNING_MAGIC_POTENCY, xi.merit.WATER_MAGIC_POTENCY }
 
 -- Table variables.
@@ -381,65 +382,17 @@ end
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
 xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statUsed)
-    local resist = 0 -- The variable we want to calculate
-
-    -- Function flow:
-    -- Step 0: We check for exceptions that would make the next steps obsolete.
-    -- Step 1: We calculate caster magic Accuracy. Substeps categorized. Magic accuracy has no effect on potency.
-    -- Step 2: We calculate target magic Evasion.
-    -- Step 3: We calculate magic Hit Rate with the values calculated in steps 1 and 2.
-    -- Step 4: We calculate resist tiers based off magic hit rate.
-
-    -----------------------------------
-    -- STEP 0: Exceptions.
-    -----------------------------------
-    -- Magic Shield exceptions.
-    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return resist
-    end
-
-    -----------------------------------
-    -- STEP 1: Get Caster Magic Accuracy.
-    -----------------------------------
+    -- Get Caster Magic Accuracy.
     local magicAcc = xi.damage.magicHitRate.calculateCasterMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
 
-    -----------------------------------
-    -- STEP 2: Get target magic evasion
-    -----------------------------------
+    -- Get Target Magic Evasion.
     local magicEva = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0) -- false = not an enfeeble. 0 = No meva modifier.
 
-    -----------------------------------
-    -- STEP 3: Get Magic Hit Rate
-    -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
-    -----------------------------------
+    -- Calculate Magic Hit Rate with the previous 2 values.
     local magicHitRate = xi.damage.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 
-    -----------------------------------
-    -- STEP 4: Get Resist Tier
-    -----------------------------------
-    local resistTier = 0
-    local randomVar  = math.random()
-
-    for tierVar = 3, 1, -1 do
-        if randomVar <= (1 - magicHitRate / 100) ^ tierVar then
-            resistTier = tierVar
-            break
-        end
-    end
-
-    --[[
-    -- Apply forced tiers depending on resistance ranks. This thing below is wrong.
-    if randomVar > 0.5 then
-        if resMod > 0 then
-            resistTier = resistTier + 1
-        elseif resMod < 0 then
-            resistTier = resistTier - 1
-        end
-    end
-    ]]
-
-    resistTier = utils.clamp(resistTier, 0, 3)
-    resist     = 1 / (2 ^ resistTier)
+    -- Calculate Resist Rate.
+    local resist = xi.damage.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
 
     return resist
 end
@@ -449,15 +402,30 @@ xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellEl
     local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     if skillchainCount > 0 then
-        magicBurst = 1.25 + (0.1 * skillchainCount) -- Here we add SDT DAMAGE bonus for magic bursts aswell, once SDT is implemented. https://www.bg-wiki.com/ffxi/Resist#SDT_and_Magic_Bursting
+        local rankBonus  = 0
+
+        if spellElement ~= xi.magic.ele.NONE then
+            local resistRank = target:getMod(resistRankMod[spellElement])
+            local rankTable  = { 1.15, 0.85, 0.6, 0.5, 0.4, 0.15, 0.05 }
+
+            if resistRank <= -3 then
+                rankBonus = 1.5
+            elseif resistRank >= 5 then
+                rankBonus = 0
+            else
+                rankBonus = rankTable[resistRank + 3]
+            end
+        end
+
+        magicBurst = 1.25 + (0.1 * skillchainCount) + rankBonus
     end
 
     return magicBurst
 end
 
 xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement)
-    local magicBurstBonus        = 1.0 -- The variable we want to calculate
-    local modBurst               = 1.0
+    local magicBurstBonus        = 1 -- The variable we want to calculate
+    local modBurst               = 1
     local ancientMagicBurstBonus = 0
     local _, skillchainCount     = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 

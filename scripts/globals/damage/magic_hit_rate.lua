@@ -237,6 +237,7 @@ xi.damage.magicHitRate.calculateTargetMagicEvasion = function(caster, target, sp
     return magicEva
 end
 
+-- Magic Hit Rate. The function gets fed the result of both functions above.
 xi.damage.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     local magicAccDiff = magicAcc - magicEva
 
@@ -247,4 +248,58 @@ xi.damage.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     local magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
 
     return magicHitRate
+end
+
+xi.damage.magicHitRate.calculateResistRate = function(caster, target, skillType, spellElement, magicHitRate)
+    local resistRate = 0
+    local resistRank = 0
+
+    -- Magic Shield exception.
+    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
+        return resistRate
+    end
+
+    -- Fetch resistance rank modifier.
+    if spellElement ~= xi.magic.ele.NONE then
+        resistRank = target:getMod(elementTable[spellElement][4])
+    end
+
+    -- Resistance Ranks "boons".
+    if resistRank > 10 then -- Resistance rank 11 is technically the max, but we check for higher JUST IN CASE something altered it.
+        -- TODO: Inmunobreak logic probably goes here
+
+        resistRate = 0.0625
+        return resistRate
+    elseif resistRank == 10 then
+        magicHitRate = 5
+    end
+
+    -- Determine final resist based on which thresholds have been crossed.
+    local resistTier = 0
+    local randomVar  = math.random()
+
+    -- NOTE: Elemental magic evasion "Boons".
+    -- According to wiki, 1 positive point in the spell element MEVA allows for an additional tier. This would be tier 3, not the resistance rank tier.
+    -- However, it also states that a negative value will also prevent full resists, which is redundant. We already wouldnt be eligible for it.
+
+    for tierVar = 3, 1, -1 do
+        if randomVar <= (1 - magicHitRate / 100) ^ tierVar then
+            resistTier = tierVar
+            break
+        end
+    end
+
+    resistRate = 1 / (2 ^ resistTier)
+
+    -- Apply additional resistance tier. (The so called "Fourth resist tier"). Subtle sorcery bypasses it.
+    if resistRank >= 4 then
+        if
+            skillType ~= xi.skill.ELEMENTAL_MAGIC or
+            not caster:hasStatusEffect(xi.effect.SUBTLE_SORCERY)
+        then
+            resistRate = resistRate / 2
+        end
+    end
+
+    return resistRate
 end
