@@ -71,8 +71,10 @@ entity.onEventUpdate = function(player, csid, option)
             member:delStatusEffectsByFlag(xi.effectFlag.DISPELABLE)
             removeTempItems(member)
             member:setLocalVar("Chart", 1)
+            member:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 20, 0 , 0, 0, 0)
+            local effect = member:getStatusEffect(xi.effect.LEVEL_RESTRICTION)
+            effect:setFlag(effect:getFlag() + xi.effectFlag.ON_ZONE)
         end
-        player:addPartyEffect(xi.effect.LEVEL_RESTRICTION, xi.effect.LEVEL_RESTRICTION, 20, 0, 0, 0, 0)
     end
 end
 
@@ -84,40 +86,104 @@ entity.onEventFinish = function(player, csid, option, npc)
         ID.mob.HEIKE_CRAB,
     }
 
+    rangeChecking = function(spawnNpc,spawnerID,timeToMobSpawn,wasInRangeLastCheck,timeOutOfRange)
+
+        local spawner = GetPlayerByID(spawnerID)
+        -- spawner does not meet some condition so can stop checking
+        -- so will not spawn mobs in any case
+        if (not spawner) or (spawner:getZoneID() ~= spawnNpc:getZoneID())
+            or not spawner:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
+            or (not spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20) then
+            return
+        end
+
+        --default to in range
+        local isInRange = true
+        local timeOutOfRangeUpdated = 0
+        --if not in range
+        if spawner:checkDistance(spawnNpc) > 10 then
+            isInRange = false
+            timeOutOfRangeUpdated = timeOutOfRange + 500
+            --send message if just went out of range or every 5 seconds out of range
+            if wasInRangeLastCheck or ((timeOutOfRange % 5000) == 0) then
+                spawner:messageSpecial(ID.text.NO_LONGER_FEEL_CHILL)
+            end
+        end
+
+        --keep scheduling new checks up until the mobs spawn
+        if(timeToMobSpawn > 500) then
+            spawnNpc:timer(500, function(npcArg)
+                rangeChecking(spawnNpc,spawnerID, timeToMobSpawn - 500, isInRange, timeOutOfRangeUpdated)
+            end)
+        end
+    end
+
     if csid == 14 and option == 0 then
         local panictaru  = GetNPCByID(ID.npc.PIRATE_CHART_TARU)
         local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
         local barnacle   = GetNPCByID(ID.npc.BARNACLED_BOX)
 
         panictaru:setStatus(xi.status.NORMAL)
-        -- for some reason the shimmering point disappears when the level restriction is put on and does not come back
-        -- maybe this is not the right shimmering?
+        -- for some reason the shimmering might not be showing up
         shimmering:setStatus(xi.status.NORMAL)
+
+        -- start range checking for the range message
+        rangeChecking(npc,player:getID(),31000,true,0)
+
+        -- need to use the qm4 npc for showing text because the taru has a blank name and need a ???
         panictaru:timer(3000 , function(taru) taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT) end)
         panictaru:timer(23000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.HURRY_UP) end)
         panictaru:timer(33000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.ITS_COMING) end)
         panictaru:timer(43000, function(taru) taru:sendNpcEmote(shimmering, xi.emote.PANIC, xi.emoteMode.MOTION) npc:showText(npc, ID.text.THREE_OF_THEM)  end)
-        panictaru:timer(45000, function(taru) taru:showText(npc, ID.text.NOOOOO) end)
-        panictaru:timer(45000, function(taru) taru:entityAnimationPacket("dead") npc:messageText(npc, ID.text.CRY_OF_ANGUISH, false) end)
-        panictaru:timer(50000, function(taru) taru:setStatus(xi.status.DISAPPEAR) npc:entityAnimationPacket("stnd") end)
-        player:timer(50000,
+        panictaru:timer(45000, function(taru) npc:showText(npc, ID.text.NOOOOO) end)
+        panictaru:timer(45000, function(taru) taru:entityAnimationPacket("dead") taru:messageText(taru, ID.text.CRY_OF_ANGUISH, false) end)
+        panictaru:timer(50000, function(taru) taru:setStatus(xi.status.DISAPPEAR) taru:entityAnimationPacket("stnd") end)
+        npc:timer(50000,
         function(playerArg, npcArg)
-            xi.confrontation.start(player, npc, mobs,
-            function(member)
-                barnacle:setLocalVar("open", 0)
-            end,
-            function(member)
-                local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
-                shimmering:setStatus(xi.status.DISAPPEAR)
-                member:messageSpecial(ID.text.TOO_MUCH_TIME_PASSED)
-                member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-                member:ChangeMusic(0, 0)
-                member:ChangeMusic(1, 0)
-                member:ChangeMusic(2, 101)
-                member:ChangeMusic(3, 102)
-                member:setLocalVar("Chart", 0)
+            -- make sure player is still here, in the zone, and has correct level restriction
+            if player and (player:getZoneID() == xi.zone.VALKURM_DUNES)
+                and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
+                and (player:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20) then
+
+                xi.confrontation.start(player, npc, mobs,
+                -- if won then cleanup is done by barnacled box when opened
+                function(member)
+                    -- allow box to be opened (maybe do not need this here as open is also set when last mob dies)
+                    barnacle:setLocalVar("open", 0)
+                end,
+                -- if lost then do cleanup here for each member
+                function(member)
+                    -- eventually move shimmering parts to global confrontation cleanup function
+                    local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
+                    shimmering:setStatus(xi.status.DISAPPEAR)
+                    member:messageSpecial(ID.text.TOO_MUCH_TIME_PASSED)
+                    if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+                        member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+                    end
+                    member:ChangeMusic(0, 0)
+                    member:ChangeMusic(1, 0)
+                    member:ChangeMusic(2, 101)
+                    member:ChangeMusic(3, 102)
+                    member:setLocalVar("Chart", 0)
+                end
+                -- time limit of 10 mins
+                , {timeLimit = 600000,
+                validPlayerFunc = function(member)
+                    -- member must have level 20 restriction to get confrontation status
+                    -- this stops cheating like joining party after level restriction but before confrontation
+                    if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+                        return (member:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20)
+                    else
+                        return false
+                    end
+                 end,
+                -- give all registered players in confrontation emnity
+                allRegPlayerEnmity = true }
+                )
+            -- player does not meet the conditions do not spawn mobs and repop the ???
+            else
+                GetNPCByID(ID.npc.PIRATE_CHART_QM):setStatus(xi.status.NORMAL)
             end
-            ,30)
         end)
     end
 end

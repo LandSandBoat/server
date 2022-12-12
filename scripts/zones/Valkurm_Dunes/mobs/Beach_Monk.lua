@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 8)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 60)
     mob:setLocalVar("spawner", 0)
     local qm = GetNPCByID(ID.npc.PIRATE_CHART_QM)
 end

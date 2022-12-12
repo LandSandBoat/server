@@ -34,7 +34,8 @@ npcUtil = {}
         how long to hide the QM for after mobs die
     message (number)
         if set a message will play if a entity spawns
-
+    enmityPlayerList (list of players, default empty)
+        for each mob add base enmity to a list of players
 --]]
 function npcUtil.popFromQM(player, qm, mobId, params)
     local qmId = qm:getID()
@@ -50,6 +51,10 @@ function npcUtil.popFromQM(player, qm, mobId, params)
 
     if params.hide == nil or type(params.hide) ~= "number" then
         params.hide = xi.settings.main.FORCE_SPAWN_QM_RESET_TIME
+    end
+
+    if params.enmityPlayerList == nil or type(params.enmityPlayerList) ~= "table" then
+        params.enmityPlayerList = false
     end
 
     -- get list of mobs to pop
@@ -96,6 +101,15 @@ function npcUtil.popFromQM(player, qm, mobId, params)
         -- claim
         if params.claim then
             mob:updateClaim(player)
+        end
+
+        --add base enmity to an entire list of players (like a party)
+        if params.enmityPlayerList then
+            for _,member in pairs(params.enmityPlayerList) do
+                mob:updateEnmity(member)
+            end
+            --add a bit more (1 CE) to player that pops mob so mob goes for them first
+            mob:addEnmity(player,1,0)
         end
 
         -- look

@@ -97,7 +97,9 @@ entity.onTrigger = function(player, npc)
     shimmering:setStatus(xi.status.DISAPPEAR)
     local party = player:getParty()
     for _,member in pairs(party) do
-        member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
+            member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        end
         member:ChangeMusic(0, 0)
         member:ChangeMusic(1, 0)
         member:ChangeMusic(2, 101)
