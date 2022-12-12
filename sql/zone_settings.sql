@@ -319,7 +319,7 @@ INSERT INTO `zone_settings` VALUES (274,3,'127.0.0.1',54230,'Outer_RaKaznar',73,
 INSERT INTO `zone_settings` VALUES (275,0,'127.0.0.1',54230,'Outer_RaKaznar_[U1]',62,62,62,62,0,0.00,2202);
 INSERT INTO `zone_settings` VALUES (276,0,'127.0.0.1',54230,'RaKaznar_Inner_Court',73,73,57,57,0,0.00,2202);
 INSERT INTO `zone_settings` VALUES (277,0,'127.0.0.1',54230,'RaKaznar_Turris',0,0,0,0,0,0.00,0);
-INSERT INTO `zone_settings` VALUES (278,0,'127.0.0.1',0,'278',0,0,0,0,0,0.00,0);
+INSERT INTO `zone_settings` VALUES (278,0,'127.0.0.1',54230,'Gwora-Corridor',0,0,0,0,0,0.00,0);
 INSERT INTO `zone_settings` VALUES (279,0,'127.0.0.1',54230,'Walk_of_Echoes_[P2]',0,0,0,0,0,0.00,2048);
 INSERT INTO `zone_settings` VALUES (280,1,'127.0.0.1',54230,'Mog_Garden',67,67,67,67,0,0.00,4128);
 INSERT INTO `zone_settings` VALUES (281,0,'127.0.0.1',54230,'Leafallia',0,0,0,0,0,0.00,0);
