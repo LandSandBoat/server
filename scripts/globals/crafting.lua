@@ -486,7 +486,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
             else
                 player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
                 if ki.cost == 999999 then
-                    player:PrintToPlayer("This key item is out of era, no points have been deducted.", xi.msg.channel.NS_LINKSHELL3, "")
+                    player:PrintToPlayer("This key item is out of era, no points have been deducted.", xi.msg.channel.UNKNOWN_32, "")
                 end
             end
         end
@@ -514,7 +514,7 @@ xi.crafting.unionRepresentativeTriggerFinish = function(player, option, target, 
             else
                 player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
                 if cost == 999999 then
-                    player:PrintToPlayer("This item is out of era, no points have been deducted.", xi.msg.channel.NS_LINKSHELL3, "")
+                    player:PrintToPlayer("This item is out of era, no points have been deducted.", xi.msg.channel.UNKNOWN_32, "")
                 end
             end
         end
