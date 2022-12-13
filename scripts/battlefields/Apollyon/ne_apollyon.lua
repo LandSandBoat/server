@@ -294,39 +294,39 @@ content.loot =
     {
         {
             quantity = 3,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 1953, droprate = 304 }, -- SAM
-            { itemid = 1943, droprate =  18 }, -- PLD
-            { itemid = 1941, droprate = 200 }, -- THF
-            { itemid = 2715, droprate = 200 }, -- DNC
-            { itemid = 2661, droprate =  36 }, -- PUP
-            { itemid = 1933, droprate =  18 }, -- MNK
-            { itemid = 1939, droprate =  36 }, -- RDM
-            { itemid = 1935, droprate = 411 }, -- WHM
-            { itemid = 2717, droprate = 482 }, -- SCH
-            { itemid = 1947, droprate =  18 }, -- BST
+            { item =  1953, weight = 304 }, -- SAM
+            { item =  1943, weight =  18 }, -- PLD
+            { item =  1941, weight = 200 }, -- THF
+            { item =  2715, weight = 200 }, -- DNC
+            { item =  2661, weight =  36 }, -- PUP
+            { item =  1933, weight =  18 }, -- MNK
+            { item =  1939, weight =  36 }, -- RDM
+            { item =  1935, weight = 411 }, -- WHM
+            { item =  2717, weight = 482 }, -- SCH
+            { item =  1947, weight =  18 }, -- BST
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- SAM
-            { itemid = 1953, droprate =  304 }, -- SAM
-            { itemid = 1943, droprate =   18 }, -- PLD
-            { itemid = 1941, droprate =  200 }, -- THF
-            { itemid = 2715, droprate =  200 }, -- DNC
-            { itemid = 2661, droprate =   36 }, -- PUP
-            { itemid = 1933, droprate =   18 }, -- MNK
-            { itemid = 1939, droprate =   36 }, -- RDM
-            { itemid = 1935, droprate =  411 }, -- WHM
-            { itemid = 2717, droprate =  482 }, -- SCH
-            { itemid = 1947, droprate =   18 }, -- BST
+            { item =     0, weight = 1000 }, -- SAM
+            { item =  1953, weight =  304 }, -- SAM
+            { item =  1943, weight =   18 }, -- PLD
+            { item =  1941, weight =  200 }, -- THF
+            { item =  2715, weight =  200 }, -- DNC
+            { item =  2661, weight =   36 }, -- PUP
+            { item =  1933, weight =   18 }, -- MNK
+            { item =  1939, weight =   36 }, -- RDM
+            { item =  1935, weight =  411 }, -- WHM
+            { item =  2717, weight =  482 }, -- SCH
+            { item =  1947, weight =   18 }, -- BST
         },
     },
 
@@ -335,37 +335,37 @@ content.loot =
     {
         {
             quantity = 3,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 1947, droprate =  26 }, -- BST
-            { itemid = 1933, droprate =  53 }, -- MNK
-            { itemid = 1943, droprate =  26 }, -- PLD
-            { itemid = 2661, droprate =  26 }, -- PUP
-            { itemid = 1937, droprate = 395 }, -- BLM
-            { itemid = 1957, droprate = 289 }, -- DRG
-            { itemid = 1941, droprate =  53 }, -- THF
-            { itemid = 1939, droprate = 112 }, -- RDM
-            { itemid = 2657, droprate = 477 }, -- BLU
+            { item =  1947, weight =  26 }, -- BST
+            { item =  1933, weight =  53 }, -- MNK
+            { item =  1943, weight =  26 }, -- PLD
+            { item =  2661, weight =  26 }, -- PUP
+            { item =  1937, weight = 395 }, -- BLM
+            { item =  1957, weight = 289 }, -- DRG
+            { item =  1941, weight =  53 }, -- THF
+            { item =  1939, weight = 112 }, -- RDM
+            { item =  2657, weight = 477 }, -- BLU
         },
 
         {
-            { itemid =    0, droprate =  1000 }, -- Nothing
-            { itemid = 1947, droprate =    26 }, -- BST
-            { itemid = 1933, droprate =    53 }, -- MNK
-            { itemid = 1943, droprate =    26 }, -- PLD
-            { itemid = 2661, droprate =    26 }, -- PUP
-            { itemid = 1937, droprate =   395 }, -- BLM
-            { itemid = 1957, droprate =   289 }, -- DRG
-            { itemid = 1941, droprate =    53 }, -- THF
-            { itemid = 1939, droprate =   112 }, -- RDM
-            { itemid = 2657, droprate =   477 }, -- BLU
+            { item =     0, weight =  1000 }, -- Nothing
+            { item =  1947, weight =    26 }, -- BST
+            { item =  1933, weight =    53 }, -- MNK
+            { item =  1943, weight =    26 }, -- PLD
+            { item =  2661, weight =    26 }, -- PUP
+            { item =  1937, weight =   395 }, -- BLM
+            { item =  1957, weight =   289 }, -- DRG
+            { item =  1941, weight =    53 }, -- THF
+            { item =  1939, weight =   112 }, -- RDM
+            { item =  2657, weight =   477 }, -- BLU
         },
     },
 
@@ -374,53 +374,53 @@ content.loot =
     {
         {
             quantity = 4,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1931, droprate =  788 }, -- WAR
-            { itemid = 1939, droprate =   30 }, -- RDM
-            { itemid = 1953, droprate =  130 }, -- SAM
-            { itemid = 1957, droprate =  100 }, -- DRG
-            { itemid = 1947, droprate =   90 }, -- BST
-            { itemid = 1933, droprate =   30 }, -- MNK
-            { itemid = 1941, droprate =   99 }, -- THF
-            { itemid = 2661, droprate =   61 }, -- PUP
-            { itemid = 2715, droprate =   30 }, -- DNC
-            { itemid = 1943, droprate =  160 }, -- PLD
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1931, weight =  788 }, -- WAR
+            { item =  1939, weight =   30 }, -- RDM
+            { item =  1953, weight =  130 }, -- SAM
+            { item =  1957, weight =  100 }, -- DRG
+            { item =  1947, weight =   90 }, -- BST
+            { item =  1933, weight =   30 }, -- MNK
+            { item =  1941, weight =   99 }, -- THF
+            { item =  2661, weight =   61 }, -- PUP
+            { item =  2715, weight =   30 }, -- DNC
+            { item =  1943, weight =  160 }, -- PLD
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1931, droprate =  788 }, -- WAR
-            { itemid = 1939, droprate =   30 }, -- RDM
-            { itemid = 1953, droprate =  130 }, -- SAM
-            { itemid = 1957, droprate =  100 }, -- DRG
-            { itemid = 1947, droprate =   90 }, -- BST
-            { itemid = 1933, droprate =   30 }, -- MNK
-            { itemid = 1941, droprate =   99 }, -- THF
-            { itemid = 2661, droprate =   61 }, -- PUP
-            { itemid = 2715, droprate =   30 }, -- DNC
-            { itemid = 1943, droprate =  160 }, -- PLD
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1931, weight =  788 }, -- WAR
+            { item =  1939, weight =   30 }, -- RDM
+            { item =  1953, weight =  130 }, -- SAM
+            { item =  1957, weight =  100 }, -- DRG
+            { item =  1947, weight =   90 }, -- BST
+            { item =  1933, weight =   30 }, -- MNK
+            { item =  1941, weight =   99 }, -- THF
+            { item =  2661, weight =   61 }, -- PUP
+            { item =  2715, weight =   30 }, -- DNC
+            { item =  1943, weight =  160 }, -- PLD
         },
 
         {
-            { itemid =    0, droprate = 180 }, -- Nothing
-            { itemid = 1633, droprate =  30 }, -- Clot Plasma
-            { itemid =  821, droprate =  40 }, -- Rainbow Thread
-            { itemid = 1311, droprate =  50 }, -- Oxblood
-            { itemid = 1883, droprate =  40 }, -- Shell Powder
-            { itemid = 2004, droprate =  20 }, -- Carapace Powder
+            { item =     0, weight = 180 }, -- Nothing
+            { item =  1633, weight =  30 }, -- Clot Plasma
+            { item =   821, weight =  40 }, -- Rainbow Thread
+            { item =  1311, weight =  50 }, -- Oxblood
+            { item =  1883, weight =  40 }, -- Shell Powder
+            { item =  2004, weight =  20 }, -- Carapace Powder
         },
 
         {
-            { itemid =    0, droprate = 180 }, -- Nothing
-            { itemid = 1633, droprate =  30 }, -- Clot Plasma
-            { itemid =  821, droprate =  40 }, -- Rainbow Thread
-            { itemid = 1311, droprate =  50 }, -- Oxblood
-            { itemid = 1883, droprate =  40 }, -- Shell Powder
-            { itemid = 2004, droprate =  20 }, -- Carapace Powder
+            { item =     0, weight = 180 }, -- Nothing
+            { item =  1633, weight =  30 }, -- Clot Plasma
+            { item =   821, weight =  40 }, -- Rainbow Thread
+            { item =  1311, weight =  50 }, -- Oxblood
+            { item =  1883, weight =  40 }, -- Shell Powder
+            { item =  2004, weight =  20 }, -- Carapace Powder
         },
     },
 
@@ -429,31 +429,31 @@ content.loot =
     {
         {
             quantity = 6,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 1949, droprate = 326 }, -- BRD
-            { itemid = 1945, droprate = 256 }, -- DRK
-            { itemid = 1951, droprate = 395 }, -- RNG
-            { itemid = 1959, droprate = 279 }, -- SMN
-            { itemid = 1955, droprate = 256 }, -- NIN
-            { itemid = 2659, droprate = 326 }, -- COR
+            { item =  1949, weight = 326 }, -- BRD
+            { item =  1945, weight = 256 }, -- DRK
+            { item =  1951, weight = 395 }, -- RNG
+            { item =  1959, weight = 279 }, -- SMN
+            { item =  1955, weight = 256 }, -- NIN
+            { item =  2659, weight = 326 }, -- COR
         },
 
         {
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1949, droprate =  326 }, -- BRD
-            { itemid = 1945, droprate =  256 }, -- DRK
-            { itemid = 1951, droprate =  395 }, -- RNG
-            { itemid = 1959, droprate =  279 }, -- SMN
-            { itemid = 1955, droprate =  256 }, -- NIN
-            { itemid = 2659, droprate =  326 }, -- COR
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1949, weight =  326 }, -- BRD
+            { item =  1945, weight =  256 }, -- DRK
+            { item =  1951, weight =  395 }, -- RNG
+            { item =  1959, weight =  279 }, -- SMN
+            { item =  1955, weight =  256 }, -- NIN
+            { item =  2659, weight =  326 }, -- COR
         },
     },
 
@@ -462,16 +462,16 @@ content.loot =
     {
         {
             quantity = 7,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 1910, droprate = 1000 }, -- Smoky Chip
+            { item =  1910, weight = 1000 }, -- Smoky Chip
         },
 
         {
-            { itemid =    0, droprate = 100 }, -- Nothing
-            { itemid = 2127, droprate =  59 }, -- Metal Chip
+            { item =     0, weight = 100 }, -- Nothing
+            { item =  2127, weight =  59 }, -- Metal Chip
         },
     },
 }

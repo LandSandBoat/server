@@ -174,22 +174,22 @@ content.loot =
     {
         {
             quantity = 7,
-            { itemid = 1875, droprate = 1000 },
+            { item =  1875, weight = 1000 },
         },
 
         {
-            { itemid = 1934, droprate =  53 },
-            { itemid = 1940, droprate = 132 },
-            { itemid = 1954, droprate = 105 },
-            { itemid = 1932, droprate = 211 },
-            { itemid = 1956, droprate = 211 },
-            { itemid = 1930, droprate = 100 },
-            { itemid = 2658, droprate = 211 },
-            { itemid = 2716, droprate = 105 },
+            { item =  1934, weight =  53 },
+            { item =  1940, weight = 132 },
+            { item =  1954, weight = 105 },
+            { item =  1932, weight = 211 },
+            { item =  1956, weight = 211 },
+            { item =  1930, weight = 100 },
+            { item =  2658, weight = 211 },
+            { item =  2716, weight = 105 },
         },
 
         {
-            { itemid = 1907, droprate = 1000 },
+            { item =  1907, weight = 1000 },
         },
     }
 }

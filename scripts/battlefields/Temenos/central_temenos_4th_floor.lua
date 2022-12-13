@@ -149,15 +149,15 @@ content.loot =
     {
         {
             quantity = 6,
-            { itemid = 1875, droprate = 1000 },
+            { item =  1875, weight = 1000 },
         },
 
         {
-            { itemid = 1934, droprate = 200 },
-            { itemid = 1930, droprate = 200 },
-            { itemid = 1958, droprate = 200 },
-            { itemid = 2658, droprate = 400 },
-            { itemid = 1940, droprate = 200 },
+            { item =  1934, weight = 200 },
+            { item =  1930, weight = 200 },
+            { item =  1958, weight = 200 },
+            { item =  2658, weight = 400 },
+            { item =  1940, weight = 200 },
         },
     },
 
@@ -165,26 +165,26 @@ content.loot =
     {
         {
             quantity = 7,
-            { itemid = 1875, droprate = 1000 },
+            { item =  1875, weight = 1000 },
         },
 
         {
-            { itemid = 1920, droprate = 659 },
-            { itemid = 1924, droprate = 394 },
-            { itemid = 1923, droprate = 388 },
-            { itemid = 1922, droprate = 404 },
+            { item =  1920, weight = 659 },
+            { item =  1924, weight = 394 },
+            { item =  1923, weight = 388 },
+            { item =  1922, weight = 404 },
         },
 
         {
-            { itemid = 1924, droprate = 394 },
-            { itemid = 1922, droprate = 402 },
-            { itemid = 1920, droprate = 659 },
-            { itemid = 1923, droprate = 383 },
+            { item =  1924, weight = 394 },
+            { item =  1922, weight = 402 },
+            { item =  1920, weight = 659 },
+            { item =  1923, weight = 383 },
         },
 
         {
-            { itemid = 1921, droprate = 265 },
-            { itemid =    0, droprate = 735 },
+            { item =  1921, weight = 265 },
+            { item =     0, weight = 735 },
         },
     },
 }

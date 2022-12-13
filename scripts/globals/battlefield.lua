@@ -1093,7 +1093,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
 
             for _, entry in pairs(lootGroup) do
                 if type(entry) == 'table' then
-                    max = max + entry.droprate
+                    max = max + entry.weight
                 end
             end
 
@@ -1104,14 +1104,14 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                 local current = 0
                 for _, entry in pairs(lootGroup) do
                     if type(entry) == 'table' then
-                        current = current + entry.droprate
+                        current = current + entry.weight
 
                         if current > roll then
-                            if entry.itemid == 0 then
+                            if entry.item == 0 then
                                 break
                             end
 
-                            if entry.itemid == 65535 then
+                            if entry.item == 65535 then
                                 local gil = entry.amount / #players
 
                                 for k = 1, #players, 1 do
@@ -1122,7 +1122,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                                 break
                             end
 
-                            players[1]:addTreasure(entry.itemid, npc)
+                            players[1]:addTreasure(entry.item, npc)
                             break
                         end
                     end
