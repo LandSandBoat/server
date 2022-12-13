@@ -57,7 +57,7 @@
 
 std::atomic<bool> gRunFlag = true;
 
-std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
+std::array<std::unique_ptr<socket_data>, MAX_FD> sessions;
 
 // This must be manually created
 std::unique_ptr<ConsoleService> gConsoleService;

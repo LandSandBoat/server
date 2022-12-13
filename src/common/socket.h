@@ -11,8 +11,13 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#ifdef __APPLE__
+#define MAX_FD FD_SETSIZE
+#else
+#define MAX_FD 10240
+#endif
+
 #ifdef WIN32
-#define FD_SETSIZE 1024
 #include <winsock2.h>
 #include <ws2tcpip.h>
 typedef long in_addr_t;
@@ -52,7 +57,7 @@ typedef int socklen_t;
 
 // global array of sockets (emulating linux)
 // fd is the position in the array
-extern SOCKET sock_arr[FD_SETSIZE];
+extern SOCKET sock_arr[MAX_FD];
 extern int    sock_arr_len;
 
 /// Returns the socket associated with the target fd.
@@ -72,7 +77,7 @@ int sock2fd(SOCKET s);
 /// Returns a new fd associated with the socket.
 /// If there are too many sockets it closes the socket, sets an error and
 //  returns -1 instead.
-/// Since fd 0 is reserved, it returns values in the range [1,FD_SETSIZE[.
+/// Since fd 0 is reserved, it returns values in the range [1,MAX_FD[.
 ///
 /// @param s Socket
 /// @return New fd or -1
@@ -259,7 +264,7 @@ struct socket_data
 };
 
 // Data prototype declaration
-extern std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
+extern std::array<std::unique_ptr<socket_data>, MAX_FD> sessions;
 
 //////////////////////////////////
 // some checking on sockets
