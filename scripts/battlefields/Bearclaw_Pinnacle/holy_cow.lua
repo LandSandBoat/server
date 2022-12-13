@@ -28,25 +28,25 @@ content:addEssentialMobs({ "Apis" })
 content.loot =
 {
     {
-        { item = xi.items.NONE, weight = xi.battlefield.dropChance.VERY_LOW },
-        { item = xi.items.SQUARE_OF_ELTORO_LEATHER, weight = xi.battlefield.dropChance.NORMAL },
-        { item = xi.items.PIECE_OF_CASSIA_LUMBER, weight = xi.battlefield.dropChance.NORMAL },
-        { item = xi.items.DRAGON_BONE, weight = xi.battlefield.dropChance.NORMAL },
+        { item = xi.items.NONE, weight = xi.loot.weight.VERY_LOW },
+        { item = xi.items.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL },
+        { item = xi.items.PIECE_OF_CASSIA_LUMBER, weight = xi.loot.weight.NORMAL },
+        { item = xi.items.DRAGON_BONE, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { item = xi.items.NONE, weight = xi.battlefield.dropChance.EXTREMELY_HIGH },
-        { item = xi.items.CLOUD_EVOKER, weight = xi.battlefield.dropChance.LOW },
+        { item = xi.items.NONE, weight = xi.loot.weight.EXTREMELY_HIGH },
+        { item = xi.items.CLOUD_EVOKER, weight = xi.loot.weight.LOW },
     },
 
     {
         quantity = 2,
-        { item = xi.items.NONE, weight = xi.battlefield.dropChance.HIGH },
-        { item = xi.items.GIGANT_MANTLE, weight = xi.battlefield.dropChance.LOW },
-        { item = xi.items.PSILOS_MANTLE, weight = xi.battlefield.dropChance.LOW },
-        { item = xi.items.MARTIAL_BOW, weight = xi.battlefield.dropChance.LOW },
-        { item = xi.items.MARTIAL_KNUCKLES, weight = xi.battlefield.dropChance.LOW },
-        { item = xi.items.SCROLL_OF_RAISE_III, weight = xi.battlefield.dropChance.HIGH },
+        { item = xi.items.NONE, weight = xi.loot.weight.HIGH },
+        { item = xi.items.GIGANT_MANTLE, weight = xi.loot.weight.LOW },
+        { item = xi.items.PSILOS_MANTLE, weight = xi.loot.weight.LOW },
+        { item = xi.items.MARTIAL_BOW, weight = xi.loot.weight.LOW },
+        { item = xi.items.MARTIAL_KNUCKLES, weight = xi.loot.weight.LOW },
+        { item = xi.items.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
     },
 }
 
