@@ -124,7 +124,6 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 14 and option == 0 then
         local panictaru  = GetNPCByID(ID.npc.PIRATE_CHART_TARU)
         local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
-        local barnacle   = GetNPCByID(ID.npc.BARNACLED_BOX)
 
         panictaru:setStatus(xi.status.NORMAL)
         -- for some reason the shimmering might not be showing up
