@@ -60,15 +60,15 @@ class LuaStyleCheck:
             self.error("Incorrectly defined table")
 
         # \{         : Opening curly brace
-        # [^ ^\n^\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
+        # [^ \n\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
 
-        for _ in re.finditer("\{[^ ^\n^\}]", line):
+        for _ in re.finditer("\{[^ \n\}]", line):
             self.error("Table opened without an appropriate following space or newline")
 
-        # [^ ^\n^\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
+        # [^ \n\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
         # \}         : Closing curly brace
 
-        for _ in re.finditer("[^ ^\n^\{]\}", line):
+        for _ in re.finditer("[^ \n\{]\}", line):
             self.error("Table closed without an appropriate preceding space or newline")
 
     def check_parameter_padding(self, line):
@@ -224,16 +224,15 @@ class LuaStyleCheck:
                 self.error("Invalid multiline conditional format")
 
     def run_style_check(self):
-        if self.filename == None:
+        if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
-            return 0
+            return
 
         with open(self.filename, 'r') as f:
             self.lines          = f.readlines()
             in_block_comment    = False
             in_condition        = False
             full_condition      = ""
-            next_indent_level   = 0
 
             for line in self.lines:
                 self.counter = self.counter + 1
@@ -314,6 +313,8 @@ class LuaStyleCheck:
             # f.seek(0)
             # f.writelines(lines)
 
+        return
+
     show_errors  = True
     lines        = []
     counter      = 0
@@ -337,7 +338,7 @@ if target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 38
+    expected_errors = 40
 else:
     total_errors = LuaStyleCheck(target).errcount
 
