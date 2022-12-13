@@ -173,23 +173,48 @@ content.loot =
     [ID.CENTRAL_TEMENOS_3RD_FLOOR.npc.LOOT_CRATE] =
     {
         {
-            quantity = 7,
-            { item =  1875, weight = 1000 },
+            quantity = 4,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1934, weight =  53 },
-            { item =  1940, weight = 132 },
-            { item =  1954, weight = 105 },
-            { item =  1932, weight = 211 },
-            { item =  1956, weight = 211 },
-            { item =  1930, weight = 100 },
-            { item =  2658, weight = 211 },
-            { item =  2716, weight = 105 },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1907, weight = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.LOW },
+            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.SILVER_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     }
 }

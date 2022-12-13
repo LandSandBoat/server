@@ -32,9 +32,9 @@ local sharedLoot =
     },
     item3 =
     {
-        [       xi.items.FUSCINA] = 880,
-        [xi.items.MERCURIAL_KRIS] =  28,
-        [       xi.items.OXBLOOD] =  92,
+        [         xi.items.FUSCINA] = 880,
+        [  xi.items.MERCURIAL_KRIS] =  28,
+        [xi.items.PIECE_OF_OXBLOOD] =  92,
     },
     item4 =
     {

@@ -403,204 +403,157 @@ content.loot =
     {
         {
             quantity = 2,
-            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 100 }, -- Nothing
-            { item =  1937, weight =  25 }, -- BLM
-            { item =  2657, weight = 175 }, -- BLU
-            { item =  1957, weight = 100 }, -- DRG
-            { item =  1943, weight =  25 }, -- PLD
-            { item =  1953, weight = 250 }, -- SAM
-            { item =  2717, weight =  75 }, -- SCH
-            { item =  1931, weight = 225 }, -- WAR
-            { item =  1935, weight =  50 }, -- WHM
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.ARGYRO_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_LIGHT_FILAMENT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_BROWN_DOESKIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_DIABOLIC_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.BLACK_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_ASTRAL_LEATHER, weight = xi.loot.weight.LOW },
+            { item = xi.items.GOLD_STUD, weight = xi.loot.weight.LOW },
         },
     },
 
     [ID.NW_APOLLYON.npc.ITEM_CRATES[2]] =
     {
         {
-            quantity = 2,
-            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
+            quantity = 3,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 100 }, -- Nothing
-            { item =  1943, weight = 235 }, -- PLD
-            { item =  2659, weight =  59 }, -- COR
-            { item =  1945, weight = 235 }, -- DRK
-            { item =  1955, weight = 147 }, -- NIN
-            { item =  1951, weight = 118 }, -- RNG
-            { item =  1959, weight = 176 }, -- SMN
-            { item =  1935, weight = 110 }, -- WHM
+            { item = xi.items.SPOOL_OF_BENEDICT_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_DIABOLIC_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.POT_OF_EBONY_LACQUER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CANVAS_TOILE, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.ANCIENT_BRASS_INGOT, weight = xi.loot.weight.LOW },
+            { item = xi.items.WHITE_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.BLUE_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.ELECTRUM_STUD, weight = xi.loot.weight.LOW },
         },
     },
 
-    -- NW_Apollyon floor 3
     [ID.NW_APOLLYON.npc.ITEM_CRATES[3]] =
     {
         {
-            quantity = 5,
-            { item =     0, weight = 1000 }, -- Nothing
-            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
+            quantity = 4,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1947, weight = 133 }, -- BST
-            { item =  1933, weight = 133 }, -- MNK
-            { item =  1943, weight = 133 }, -- PLD
-            { item =  2661, weight = 133 }, -- PUP
-            { item =  1939, weight = 110 }, -- RDM
-            { item =  1941, weight = 400 }, -- THF
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 400 }, -- Nothing
-            { item =   646, weight =  50 }, -- Adaman Ore
-            { item =  1633, weight =  50 }, -- Clot Plasma
-            { item =   664, weight =  50 }, -- Darksteel Sheet
-            { item =   645, weight =  50 }, -- Darksteel Ore
-            { item =  1311, weight =  50 }, -- Oxblood
-            { item =  1681, weight =  50 }, -- Light Steel
-            { item =   821, weight =  50 }, -- Rainbow Thread
-            { item =  1883, weight =  50 }, -- Shell Powder
+            { item = xi.items.ANCIENT_BRASS_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.BLUE_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_CORDUROY_CLOTH, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 400 }, -- Nothing
-            { item =   646, weight =  50 }, -- Adaman Ore
-            { item =  1633, weight =  50 }, -- Clot Plasma
-            { item =   664, weight =  50 }, -- Darksteel Sheet
-            { item =   645, weight =  50 }, -- Darksteel Ore
-            { item =  1311, weight =  50 }, -- Oxblood
-            { item =  1681, weight =  50 }, -- Light Steel
-            { item =   821, weight =  50 }, -- Rainbow Thread
-            { item =  1883, weight =  50 }, -- Shell Powder
-        },
-    },
-
-    -- NW_Apollyon floor 4
-    [ID.NW_APOLLYON.npc.ITEM_CRATES[4]] =
-    {
-        {
-            quantity = 7,
-            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_BENEDICT_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_LIGHT_FILAMENT, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_BROWN_DOESKIN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_CANVAS_TOILE, weight = xi.loot.weight.LOW },
         },
 
         {
             quantity = 2,
-            { item =     0, weight = 1000 }, -- Nothing
-            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.CHUNK_OF_ADAMAN_ORE, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.HANDFUL_OF_CLOT_PLASMA, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.DARKSTEEL_SHEET, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.CHUNK_OF_DARKSTEEL_ORE, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.PIECE_OF_OXBLOOD, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.LIGHT_STEEL_INGOT, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.SPOOL_OF_RAINBOW_THREAD, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.SHELL_POWDER, weight = xi.loot.weight.VERY_LOW },
         },
 
         {
-            { item =     0, weight = 100 }, -- Nothing
-            { item =  1937, weight =  80 }, -- BLM
-            { item =  2657, weight =  70 }, -- BLU
-            { item =  1949, weight =  48 }, -- BRD
-            { item =  1947, weight =  30 }, -- BST
-            { item =  2659, weight =  25 }, -- COR
-            { item =  1957, weight =  19 }, -- DRG
-            { item =  1945, weight =  48 }, -- DRK
-            { item =  1933, weight =  90 }, -- MNK
-            { item =  1955, weight = 100 }, -- NIN
-            { item =  2661, weight =  48 }, -- PUP
-            { item =  1939, weight = 136 }, -- RDM
-            { item =  1951, weight =  80 }, -- RNG
-            { item =  1953, weight = 110 }, -- SAM
-            { item =  1959, weight =  95 }, -- SMN
-            { item =  2715, weight = 123 }, -- DNC
-            { item =  1935, weight =  48 }, -- WHM
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
     },
 
-    -- NW_Apollyon floor 5
-    [ID.NW_APOLLYON.npc.LOOT_CRATE] =
+    [ID.NW_APOLLYON.npc.ITEM_CRATES[4]] =
     {
         {
             quantity = 5,
-            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1937, weight = 109 }, -- BLM
-            { item =  2657, weight = 152 }, -- BLU
-            { item =  1949, weight = 283 }, -- BRD
-            { item =  1947, weight = 109 }, -- BST
-            { item =  2659, weight =  65 }, -- COR
-            { item =  2715, weight = 130 }, -- DNC
-            { item =  1957, weight =  65 }, -- DRG
-            { item =  1945, weight = 174 }, -- DRK
-            { item =  1933, weight = 130 }, -- MNK
-            { item =  1955, weight = 196 }, -- NIN
-            { item =  1943, weight = 174 }, -- PLD
-            { item =  2661, weight = 174 }, -- PUP
-            { item =  1939, weight = 109 }, -- RDM
-            { item =  1951, weight = 130 }, -- RNG
-            { item =  1953, weight = 304 }, -- SAM
-            { item =  2717, weight =  87 }, -- SCH
-            { item =  1959, weight = 217 }, -- SMN
-            { item =  1941, weight = 174 }, -- THF
-            { item =  1931, weight = 130 }, -- WAR
-            { item =  1935, weight = 109 }, -- WHM
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1937, weight = 109 }, -- BLM
-            { item =  2657, weight = 152 }, -- BLU
-            { item =  1949, weight = 283 }, -- BRD
-            { item =  1947, weight = 109 }, -- BST
-            { item =  2659, weight =  65 }, -- COR
-            { item =  2715, weight = 130 }, -- DNC
-            { item =  1957, weight =  65 }, -- DRG
-            { item =  1945, weight = 174 }, -- DRK
-            { item =  1933, weight = 130 }, -- MNK
-            { item =  1955, weight = 196 }, -- NIN
-            { item =  1943, weight = 174 }, -- PLD
-            { item =  2661, weight = 174 }, -- PUP
-            { item =  1939, weight = 109 }, -- RDM
-            { item =  1951, weight = 130 }, -- RNG
-            { item =  1953, weight = 304 }, -- SAM
-            { item =  2717, weight =  87 }, -- SCH
-            { item =  1959, weight = 217 }, -- SMN
-            { item =  1941, weight = 174 }, -- THF
-            { item =  1931, weight = 130 }, -- WAR
-            { item =  1935, weight = 109 }, -- WHM
+            { item = xi.items.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.FETID_LANOLIN_CUBE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_KUROGANE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ELECTRUM_STUD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 300 }, -- Nothing
-            { item =  1937, weight = 109 }, -- BLM
-            { item =  2657, weight = 152 }, -- BLU
-            { item =  1949, weight = 283 }, -- BRD
-            { item =  1947, weight = 109 }, -- BST
-            { item =  2659, weight =  65 }, -- COR
-            { item =  2715, weight = 130 }, -- DNC
-            { item =  1957, weight =  65 }, -- DRG
-            { item =  1945, weight = 174 }, -- DRK
-            { item =  1933, weight = 130 }, -- MNK
-            { item =  1955, weight = 196 }, -- NIN
-            { item =  1943, weight = 174 }, -- PLD
-            { item =  2661, weight = 174 }, -- PUP
-            { item =  1939, weight = 109 }, -- RDM
-            { item =  1951, weight = 130 }, -- RNG
-            { item =  1953, weight = 304 }, -- SAM
-            { item =  2717, weight =  87 }, -- SCH
-            { item =  1959, weight = 217 }, -- SMN
-            { item =  1941, weight = 174 }, -- THF
-            { item =  1931, weight = 130 }, -- WAR
-            { item =  1935, weight = 109 }, -- WHM
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.ARGYRO_RIVET, weight = xi.loot.weight.LOW },
+            { item = xi.items.POT_OF_EBONY_LACQUER, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.LOW },
+        },
+    },
+
+    [ID.NW_APOLLYON.npc.LOOT_CRATE] =
+    {
+        {
+            quantity = 6,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1988, weight = 1000 }, -- Magenta Chip
+            { item = xi.items.WHITE_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.BLACK_RIVET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_ASTRAL_LEATHER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.GOLD_STUD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 100 }, -- Nothing
-            { item =  2127, weight =  59 }, -- Metal Chip
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.LOW },
+            { item = xi.items.FETID_LANOLIN_CUBE, weight = xi.loot.weight.LOW },
+            { item = xi.items.SHEET_OF_KUROGANE, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_CORDUROY_CLOTH, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.MAGENTA_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     },
 }
