@@ -19,48 +19,56 @@ jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Install Dependencies
-        run: |
-          # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
-          # Ubuntu is using an old libmariadb but python3 pip expects it to be newer. Use the mariadb provided deb packages.
-          wget -P /tmp/ https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-          # Note: there is a sha256sum command here according to the above link, but I am unsure if this file may change with time
-          chmod +x /tmp/mariadb_repo_setup
-          sudo /tmp/mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
-          # Remove the above when it's no longer necessary
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Install Dependencies
+      run: |
+        # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
+        # Ubuntu is using an old libmariadb but python3 pip expects it to be newer. Use the mariadb provided deb packages.
+        wget -P /tmp/ https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+        # Note: there is a sha256sum command here according to the above link, but I am unsure if this file may change with time
+        chmod +x /tmp/mariadb_repo_setup
+        sudo /tmp/mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
+        # Remove the above when it's no longer necessary
 
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
-          pip install -r tools/requirements.txt
-          luarocks install luacheck --local
-          npm install -g diff-so-fancy
-      - id: changed-files
-        name: Get Changed Files
-        uses: Ana06/get-changed-files@v2.2.0
-        with:
-          filter: |
-            src/**
-            scripts/**
-            sql/**
-        continue-on-error: true
-      - name: List Changed Files
-        if: always()
-        run: |
-          for changed_file in ${{ steps.changed-files.outputs.all }}; do
-            echo "${changed_file}"
-          done
-      - name: Git Formatting Checks
-        if: github.event_name == 'pull_request'
-        run: |
-          touch git_checks.txt
-          bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
-          cat git_checks.txt
-          if [ -s git_checks.txt ]
-          then
-            exit 1
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
+        pip install -r tools/requirements.txt
+        luarocks install luacheck --local
+    - id: changed-files
+      name: Get Changed Files
+      uses: Ana06/get-changed-files@v2.2.0
+      with:
+        filter: |
+          src/**
+          scripts/**
+          sql/**
+      continue-on-error: true
+    - name: List Changed Files
+      if: always()
+      run: |
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          echo "${changed_file}"
+        done
+    - name: Git Formatting Checks
+      if: github.event_name == 'pull_request'
+      run: |
+        touch git_checks.txt
+        bash tools/ci/git.sh origin/${{ github.event.pull_request.base.ref }} >> git_checks.txt || true
+        cat git_checks.txt
+        if [ -s git_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: General File Checks
+      if: always()
+      run: |
+        touch general_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
           fi
           exit 0
       - name: General File Checks
@@ -94,17 +102,30 @@ jobs:
           then
             exit 1
           fi
-          exit 0
-      - name: CPP Formatting Checks
-        if: always()
-        run: |
-          clang-format-14 -version
-          touch cpp_formatting_checks.txt
-          for changed_file in ${{ steps.changed-files.outputs.all }}; do
-            if [[ -f $changed_file ]]; then
-              if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-                clang-format-14 -style=file -i ${changed_file}
-              fi
+        done
+        git diff >> cpp_formatting_checks.txt
+        cat cpp_formatting_checks.txt
+        git reset --hard
+        if [ -s cpp_formatting_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Upload CPP Formatting Diff
+      if: hashFiles('cpp_formatting_checks.txt') != ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: clang_format_diff
+        path: |
+          cpp_formatting_checks.txt
+    - name: Lua Checks
+      if: always()
+      run: |
+        touch lua_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.lua ]]; then
+              bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
             fi
           done
           git diff --color >> cpp_formatting_checks.txt
@@ -189,62 +210,61 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-      #- name: Cache 'build' folder
-      #  uses: actions/cache@v3
-      #  with:
-      #    path: build
-      #    key: ${{ runner.os }}-clang
-      - name: Configure CMake
-        run: |
-          export CC=/usr/bin/clang-14
-          export CXX=/usr/bin/clang++-14
-          mkdir -p build
-          cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
-      - name: Archive Executables
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux_executables
-          path: |
-            xi_connect
-            xi_map
-            xi_search
-            xi_world
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-clang
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
+        mkdir -p build
+        cmake -S . -B build
+    - name: Build
+      run: |
+        cmake --build build -j4
+    - name: Archive Executables
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux_executables
+        path: |
+          xi_connect
+          xi_map
+          xi_search
 
   Linux_GCC11_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
-      #- name: Cache 'build' folder
-      #  uses: actions/cache@v3
-      #  with:
-      #    path: build
-      #    key: ${{ runner.os }}-gcc
-      - name: Configure CMake
-        run: |
-          export CC=/usr/bin/gcc-11
-          export CXX=/usr/bin/g++-11
-          mkdir -p build
-          CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-gcc
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/gcc-11
+        export CXX=/usr/bin/g++-11
+        mkdir -p build
+        CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
+    - name: Build
+      run: |
+        cmake --build build -j4
 
   Windows_32bit:
     needs: Sanity_Checks
@@ -379,35 +399,45 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: actions/download-artifact@v3
-        with:
-          name: linux_executables
-          path: .
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-      - name: Verify MySQL connection from container
-        run: |
-          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
-      - name: Import SQL files
-        run: |
-          for f in sql/*.sql; do
-            echo -e "Importing $f into the database..."
-            mysql xidb -h 127.0.0.1 -uroot -proot < $f
-          done
-          for f in modules/era/sql/*.sql; do
-            echo -e "Importing $f into the database..."
-            mysql xidb -h 127.0.0.1 -uroot -proot < $f
-          done
-          mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-      - name: Copy settings
-        run: |
-          cp settings/default/* settings/
-      - name: Enable Modules
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - uses: actions/download-artifact@v3
+      with:
+        name: linux_executables
+        path: .
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+    - name: Verify MySQL connection from container
+      run: |
+        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    - name: Import SQL files
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Copy settings
+      run: |
+        cp settings/default/* settings/
+    - name: Enable Modules
+      shell: bash
+      run: |
+        python3 << EOF
+        with open("modules/init.txt", "w") as f:
+            f.write("custom\n")
+            f.write("era\n")
+            f.write("renamer\n")
+        EOF
+    - name: Startup and character login checks
+      uses: nick-invision/retry@v2
+      with:
+        timeout_minutes: 5
+        max_attempts: 3
+        retry_on: timeout
         shell: bash
         run: |
           python3 << EOF
@@ -526,62 +556,41 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: actions/download-artifact@v3
-        with:
-          name: linux_executables
-          path: .
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
-      - name: Verify MySQL connection from container
-        run: |
-          mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
-      - name: Import SQL files
-        run: |
-          for f in sql/*.sql; do
-            echo -e "Importing $f into the database..."
-            mysql xidb -h 127.0.0.1 -uroot -proot < $f
-          done
-          for f in modules/era/sql/*.sql; do
-            echo -e "Importing $f into the database..."
-            mysql xidb -h 127.0.0.1 -uroot -proot < $f
-          done
-          mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-      - name: Assign odd zones a different port
-        run: |
-          mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
-      - name: Copy settings
-        run: |
-          cp settings/default/* settings/
-      - name: Startup checks
-        env:
-          MYSQL_HOST: mysql
-        run: |
-          chmod +x xi_connect
-          chmod +x xi_map
-          chmod +x xi_search
-          chmod +x xi_world
-          ls -l
-          printf "\nStart server processes\n"
-          screen -d -m -S xi_connect ./xi_connect --log login-server.log
-          screen -d -m -S xi_search ./xi_search --log search-server.log
-          screen -d -m -S xi_map ./xi_map --log map-server-0.log --ip 127.0.0.1 --port 54230
-          screen -d -m -S xi_map ./xi_map --log map-server-1.log --ip 127.0.0.1 --port 54231
-          screen -d -m -S xi_world ./xi_world --log world-server.log
-          sleep 300s
-          killall screen
-      - name: Check for errors and warnings
-        if: ${{ success() || failure() }}
-        run: |
-          cat login-server*.log
-          cat search-server*.log
-          cat map-server-0*.log
-          cat map-server-1*.log
-          cat world-server*.log
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - uses: actions/download-artifact@v3
+      with:
+        name: linux_executables
+        path: .
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+    - name: Verify MySQL connection from container
+      run: |
+        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    - name: Import SQL files
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Assign odd zones a different port
+      run: |
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
+    - name: Copy settings
+      run: |
+        cp settings/default/* settings/
+    - name: Startup checks
+      env:
+        MYSQL_HOST: mysql
+      run: |
+        chmod +x xi_connect
+        chmod +x xi_map
+        chmod +x xi_search
+        ls -l
 
           if grep -qi "warning\|error\|crash" login-server*.log; then
               exit -1
@@ -607,15 +616,15 @@ jobs:
     runs-on: windows-latest
     needs: Windows_64bit_Debug
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: actions/download-artifact@v3
-        with:
-          name: windows_executables
-          path: .
-      - uses: zach2good/setup-mariadb@v1
-        with:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - uses: actions/download-artifact@v3
+      with:
+        name: windows_executables
+        path: .
+    - uses: zach2good/setup-mariadb@v1
+      with:
           database: xidb
       - name: Copy settings
         run: |
