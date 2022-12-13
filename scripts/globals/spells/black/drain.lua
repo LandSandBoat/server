@@ -43,7 +43,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     -- Upyri: ID 4105
-    if target:isUndead() or target:getPool() == 4105 then
+    if target:isMob() and (target:isUndead() or target:getPool() == 4105) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return 0
     end
