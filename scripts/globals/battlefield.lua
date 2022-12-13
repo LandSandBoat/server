@@ -34,6 +34,17 @@ end
 
 xi.loot = xi.loot or {}
 
+xi.loot.weight =
+{
+    EXTREMELY_LOW  = 2,
+    VERY_LOW       = 10,
+    LOW            = 30,
+    NORMAL         = 50,
+    HIGH           = 70,
+    VERY_HIGH      = 100,
+    EXTREMELY_HIGH = 140,
+}
+
 xi.battlefield = xi.battlefield or {}
 xi.battlefield.contents = xi.battlefield.contents or {}
 xi.battlefield.contentsByZone = xi.battlefield.contentsByZone or {}
@@ -62,17 +73,6 @@ xi.battlefield.leaveCode =
     WON    = 2,
     WARPDC = 3,
     LOST   = 4
-}
-
-xi.battlefield.dropChance =
-{
-    EXTREMELY_LOW  = 2,
-    VERY_LOW       = 10,
-    LOW            = 30,
-    NORMAL         = 50,
-    HIGH           = 70,
-    VERY_HIGH      = 100,
-    EXTREMELY_HIGH = 140,
 }
 
 xi.battlefield.id =
