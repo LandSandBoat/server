@@ -96,7 +96,7 @@ entity.onTrigger = function(player, npc)
     local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
     shimmering:setStatus(xi.status.DISAPPEAR)
     local party = player:getParty()
-    for _,member in pairs(party) do
+    for _, member in pairs(party) do
         if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         end

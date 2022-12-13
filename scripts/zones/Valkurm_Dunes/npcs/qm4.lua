@@ -11,25 +11,25 @@ local entity = {}
 
 local tempitems =
 {
-    [1]  = 4148,-- Antidoate
-    [2]  = 4112,-- Potion
-    [3]  = 4113,-- Potion +1
-    [4]  = 4114,-- Potion +2
-    [5]  = 4115,-- Potion +3
-    [6]  = 4206,-- Catholicon
-    [7]  = 4202,-- Daedalus Wing
-    [8]  = 4151,-- Echo Drops
-    [9]  = 4174,-- Elixir
-    [10] = 4128,-- Ether
-    [11] = 4129,-- Ether +1
-    [12] = 4130,-- Ether +2
-    [13] = 4131,-- Ether +3
-    [14] = 4150,-- Eye Drops
-    [15] = 4301,-- Pear au Lait
-    [16] = 4164,-- Prism Powder
-    [17] = 4155,-- Remedy
-    [18] = 4165,-- Silent Oil
-    [19] = 4425,-- Tomato Juice
+    [1]  = 4148, -- Antidoate
+    [2]  = 4112, -- Potion
+    [3]  = 4113, -- Potion +1
+    [4]  = 4114, -- Potion +2
+    [5]  = 4115, -- Potion +3
+    [6]  = 4206, -- Catholicon
+    [7]  = 4202, -- Daedalus Wing
+    [8]  = 4151, -- Echo Drops
+    [9]  = 4174, -- Elixir
+    [10] = 4128, -- Ether
+    [11] = 4129, -- Ether +1
+    [12] = 4130, -- Ether +2
+    [13] = 4131, -- Ether +3
+    [14] = 4150, -- Eye Drops
+    [15] = 4301, -- Pear au Lait
+    [16] = 4164, -- Prism Powder
+    [17] = 4155, -- Remedy
+    [18] = 4165, -- Silent Oil
+    [19] = 4425, -- Tomato Juice
 }
 
 local removeTempItems = function(player)
@@ -63,7 +63,7 @@ entity.onEventUpdate = function(player, csid, option)
         GetNPCByID(ID.npc.PIRATE_CHART_TARU):setAnimation(xi.animation.NONE)
         GetNPCByID(ID.npc.PIRATE_CHART_QM):setStatus(xi.status.DISAPPEAR)
         local party = player:getParty()
-        for _,member in pairs(party) do
+        for _, member in pairs(party) do
             member:ChangeMusic(0, 136)
             member:ChangeMusic(1, 136)
             member:ChangeMusic(2, 136)
@@ -86,14 +86,17 @@ entity.onEventFinish = function(player, csid, option, npc)
         ID.mob.HEIKE_CRAB,
     }
 
-    rangeChecking = function(spawnNpc,spawnerID,timeToMobSpawn,wasInRangeLastCheck,timeOutOfRange)
+    local function rangeChecking(spawnNpc, spawnerID, timeToMobSpawn, wasInRangeLastCheck, timeOutOfRange)
 
         local spawner = GetPlayerByID(spawnerID)
         -- spawner does not meet some condition so can stop checking
         -- so will not spawn mobs in any case
-        if (not spawner) or (spawner:getZoneID() ~= spawnNpc:getZoneID())
-            or not spawner:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
-            or (not spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20) then
+        if
+            not spawner or
+            spawner:getZoneID() ~= spawnNpc:getZoneID() or
+            not spawner:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or
+            not (spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20)
+        then
             return
         end
 
@@ -111,9 +114,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         --keep scheduling new checks up until the mobs spawn
-        if(timeToMobSpawn > 500) then
+        if timeToMobSpawn > 500 then
             spawnNpc:timer(500, function(npcArg)
-                rangeChecking(spawnNpc,spawnerID, timeToMobSpawn - 500, isInRange, timeOutOfRangeUpdated)
+                rangeChecking(spawnNpc, spawnerID, timeToMobSpawn - 500, isInRange, timeOutOfRangeUpdated)
             end)
         end
     end
@@ -128,7 +131,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         shimmering:setStatus(xi.status.NORMAL)
 
         -- start range checking for the range message
-        rangeChecking(npc,player:getID(),31000,true,0)
+        rangeChecking(npc, player:getID(), 31000, true, 0)
 
         -- need to use the qm4 npc for showing text because the taru has a blank name and need a ???
         panictaru:timer(3000 , function(taru) taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT) end)
@@ -141,9 +144,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         npc:timer(50000,
         function(playerArg, npcArg)
             -- make sure player is still here, in the zone, and has correct level restriction
-            if player and (player:getZoneID() == xi.zone.VALKURM_DUNES)
-                and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
-                and (player:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20) then
+            if
+                player and
+                player:getZoneID() == xi.zone.VALKURM_DUNES and
+                player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) and
+                player:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20
+            then
 
                 xi.confrontation.start(player, npc, mobs,
                 -- if won then cleanup is done by barnacled box when opened
@@ -154,7 +160,6 @@ entity.onEventFinish = function(player, csid, option, npc)
                 -- if lost then do cleanup here for each member
                 function(member)
                     -- eventually move shimmering parts to global confrontation cleanup function
-                    local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
                     shimmering:setStatus(xi.status.DISAPPEAR)
                     member:messageSpecial(ID.text.TOO_MUCH_TIME_PASSED)
                     if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
@@ -167,7 +172,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     member:setLocalVar("Chart", 0)
                 end
                 -- time limit of 10 mins
-                , {timeLimit = 600000,
+                , { timeLimit = 600000,
                 validPlayerFunc = function(member)
                     -- member must have level 20 restriction to get confrontation status
                     -- this stops cheating like joining party after level restriction but before confrontation

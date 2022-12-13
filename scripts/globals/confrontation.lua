@@ -173,7 +173,7 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc, params
             effect:setFlag(effect:getFlag() + xi.effectFlag.ON_ZONE)
             table.insert(registeredPlayerIds, member:getID())
             table.insert(registeredPlayers, member)
-        end 
+        end
     end
 
     -- Tag mobs with the confrontation effect
@@ -200,10 +200,10 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc, params
 
     -- Pop with enmity to all registeredPlayers
     if params.allRegPlayerEnmity then
-        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1, enmityPlayerList = registeredPlayers})
+        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1, enmityPlayerList = registeredPlayers })
     -- Pop with claim and enmity only to player popping
     else
-        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1})
+        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1 })
     end
 
     -- Set up timed checks
