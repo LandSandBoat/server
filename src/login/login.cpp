@@ -166,6 +166,13 @@ int32 do_init(int32 argc, char** argv)
         fmt::printf("Maintenance mode changed to %i\n", maint_mode);
     });
 
+    gConsoleService->RegisterCommand(
+    "show_fds", "Print current amount of File Descriptors in use.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::printf("Total fds in use: %i (4 are reserved for login itself)\n", fd_max);
+    });
+
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
     [&](std::vector<std::string> inputs)
     {
@@ -280,13 +287,23 @@ int do_sockets(fd_set* rfd, duration next)
     for (int i = 0; ret > 0 && i < fd_max; i++)
     {
         int fd = events[i].data.fd;
-        if (events[i].events & EPOLLHUP) // "unexpected" socket shutdown from client, seems normal
+
+        // https://man7.org/linux/man-pages/man2/epoll_ctl.2.html
+        // Handle all "always reported" error events
+        // EPOLLHUP is an "unexpected" socket shutdown from client, but seems normal when disconnecting
+        // EPOLLERR has not been witnessed, but is probably good to try to handle.
+        if (events[i].events & EPOLLHUP || events[i].events & EPOLLERR)
         {
             do_close_tcp(fd);
+            ret--;
+            continue;
         }
 
+        // Input recieved
         if (events[i].events & EPOLLIN && sessions[fd])
         {
+            ret--;
+
             // new session
             if (fd == login_fd || fd == login_lobbydata_fd || fd == login_lobbyview_fd)
             {
@@ -316,8 +333,6 @@ int do_sockets(fd_set* rfd, duration next)
                     }
                 }
             }
-
-            ret--;
         }
     }
 #endif
