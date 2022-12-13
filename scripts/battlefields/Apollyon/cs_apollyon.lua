@@ -277,18 +277,18 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 2127, droprate =  59 }, -- Metal Chip
-            { itemid =    0, droprate = 100 }, -- Nothing
+            { item =  2127, weight =  59 }, -- Metal Chip
+            { item =     0, weight = 100 }, -- Nothing
         },
     },
 }

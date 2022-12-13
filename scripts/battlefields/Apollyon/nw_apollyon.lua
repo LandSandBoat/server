@@ -403,19 +403,19 @@ content.loot =
     {
         {
             quantity = 2,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 100 }, -- Nothing
-            { itemid = 1937, droprate =  25 }, -- BLM
-            { itemid = 2657, droprate = 175 }, -- BLU
-            { itemid = 1957, droprate = 100 }, -- DRG
-            { itemid = 1943, droprate =  25 }, -- PLD
-            { itemid = 1953, droprate = 250 }, -- SAM
-            { itemid = 2717, droprate =  75 }, -- SCH
-            { itemid = 1931, droprate = 225 }, -- WAR
-            { itemid = 1935, droprate =  50 }, -- WHM
+            { item =     0, weight = 100 }, -- Nothing
+            { item =  1937, weight =  25 }, -- BLM
+            { item =  2657, weight = 175 }, -- BLU
+            { item =  1957, weight = 100 }, -- DRG
+            { item =  1943, weight =  25 }, -- PLD
+            { item =  1953, weight = 250 }, -- SAM
+            { item =  2717, weight =  75 }, -- SCH
+            { item =  1931, weight = 225 }, -- WAR
+            { item =  1935, weight =  50 }, -- WHM
         },
     },
 
@@ -423,18 +423,18 @@ content.loot =
     {
         {
             quantity = 2,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 100 }, -- Nothing
-            { itemid = 1943, droprate = 235 }, -- PLD
-            { itemid = 2659, droprate =  59 }, -- COR
-            { itemid = 1945, droprate = 235 }, -- DRK
-            { itemid = 1955, droprate = 147 }, -- NIN
-            { itemid = 1951, droprate = 118 }, -- RNG
-            { itemid = 1959, droprate = 176 }, -- SMN
-            { itemid = 1935, droprate = 110 }, -- WHM
+            { item =     0, weight = 100 }, -- Nothing
+            { item =  1943, weight = 235 }, -- PLD
+            { item =  2659, weight =  59 }, -- COR
+            { item =  1945, weight = 235 }, -- DRK
+            { item =  1955, weight = 147 }, -- NIN
+            { item =  1951, weight = 118 }, -- RNG
+            { item =  1959, weight = 176 }, -- SMN
+            { item =  1935, weight = 110 }, -- WHM
         },
     },
 
@@ -443,41 +443,41 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 1947, droprate = 133 }, -- BST
-            { itemid = 1933, droprate = 133 }, -- MNK
-            { itemid = 1943, droprate = 133 }, -- PLD
-            { itemid = 2661, droprate = 133 }, -- PUP
-            { itemid = 1939, droprate = 110 }, -- RDM
-            { itemid = 1941, droprate = 400 }, -- THF
+            { item =  1947, weight = 133 }, -- BST
+            { item =  1933, weight = 133 }, -- MNK
+            { item =  1943, weight = 133 }, -- PLD
+            { item =  2661, weight = 133 }, -- PUP
+            { item =  1939, weight = 110 }, -- RDM
+            { item =  1941, weight = 400 }, -- THF
         },
 
         {
-            { itemid =    0, droprate = 400 }, -- Nothing
-            { itemid =  646, droprate =  50 }, -- Adaman Ore
-            { itemid = 1633, droprate =  50 }, -- Clot Plasma
-            { itemid =  664, droprate =  50 }, -- Darksteel Sheet
-            { itemid =  645, droprate =  50 }, -- Darksteel Ore
-            { itemid = 1311, droprate =  50 }, -- Oxblood
-            { itemid = 1681, droprate =  50 }, -- Light Steel
-            { itemid =  821, droprate =  50 }, -- Rainbow Thread
-            { itemid = 1883, droprate =  50 }, -- Shell Powder
+            { item =     0, weight = 400 }, -- Nothing
+            { item =   646, weight =  50 }, -- Adaman Ore
+            { item =  1633, weight =  50 }, -- Clot Plasma
+            { item =   664, weight =  50 }, -- Darksteel Sheet
+            { item =   645, weight =  50 }, -- Darksteel Ore
+            { item =  1311, weight =  50 }, -- Oxblood
+            { item =  1681, weight =  50 }, -- Light Steel
+            { item =   821, weight =  50 }, -- Rainbow Thread
+            { item =  1883, weight =  50 }, -- Shell Powder
         },
 
         {
-            { itemid =    0, droprate = 400 }, -- Nothing
-            { itemid =  646, droprate =  50 }, -- Adaman Ore
-            { itemid = 1633, droprate =  50 }, -- Clot Plasma
-            { itemid =  664, droprate =  50 }, -- Darksteel Sheet
-            { itemid =  645, droprate =  50 }, -- Darksteel Ore
-            { itemid = 1311, droprate =  50 }, -- Oxblood
-            { itemid = 1681, droprate =  50 }, -- Light Steel
-            { itemid =  821, droprate =  50 }, -- Rainbow Thread
-            { itemid = 1883, droprate =  50 }, -- Shell Powder
+            { item =     0, weight = 400 }, -- Nothing
+            { item =   646, weight =  50 }, -- Adaman Ore
+            { item =  1633, weight =  50 }, -- Clot Plasma
+            { item =   664, weight =  50 }, -- Darksteel Sheet
+            { item =   645, weight =  50 }, -- Darksteel Ore
+            { item =  1311, weight =  50 }, -- Oxblood
+            { item =  1681, weight =  50 }, -- Light Steel
+            { item =   821, weight =  50 }, -- Rainbow Thread
+            { item =  1883, weight =  50 }, -- Shell Powder
         },
     },
 
@@ -486,33 +486,33 @@ content.loot =
     {
         {
             quantity = 7,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 }, -- Nothing
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =     0, weight = 1000 }, -- Nothing
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid =    0, droprate = 100 }, -- Nothing
-            { itemid = 1937, droprate =  80 }, -- BLM
-            { itemid = 2657, droprate =  70 }, -- BLU
-            { itemid = 1949, droprate =  48 }, -- BRD
-            { itemid = 1947, droprate =  30 }, -- BST
-            { itemid = 2659, droprate =  25 }, -- COR
-            { itemid = 1957, droprate =  19 }, -- DRG
-            { itemid = 1945, droprate =  48 }, -- DRK
-            { itemid = 1933, droprate =  90 }, -- MNK
-            { itemid = 1955, droprate = 100 }, -- NIN
-            { itemid = 2661, droprate =  48 }, -- PUP
-            { itemid = 1939, droprate = 136 }, -- RDM
-            { itemid = 1951, droprate =  80 }, -- RNG
-            { itemid = 1953, droprate = 110 }, -- SAM
-            { itemid = 1959, droprate =  95 }, -- SMN
-            { itemid = 2715, droprate = 123 }, -- DNC
-            { itemid = 1935, droprate =  48 }, -- WHM
+            { item =     0, weight = 100 }, -- Nothing
+            { item =  1937, weight =  80 }, -- BLM
+            { item =  2657, weight =  70 }, -- BLU
+            { item =  1949, weight =  48 }, -- BRD
+            { item =  1947, weight =  30 }, -- BST
+            { item =  2659, weight =  25 }, -- COR
+            { item =  1957, weight =  19 }, -- DRG
+            { item =  1945, weight =  48 }, -- DRK
+            { item =  1933, weight =  90 }, -- MNK
+            { item =  1955, weight = 100 }, -- NIN
+            { item =  2661, weight =  48 }, -- PUP
+            { item =  1939, weight = 136 }, -- RDM
+            { item =  1951, weight =  80 }, -- RNG
+            { item =  1953, weight = 110 }, -- SAM
+            { item =  1959, weight =  95 }, -- SMN
+            { item =  2715, weight = 123 }, -- DNC
+            { item =  1935, weight =  48 }, -- WHM
         },
     },
 
@@ -521,86 +521,86 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+            { item =  1875, weight = 1000 }, -- Ancient Beastcoin
         },
 
         {
-            { itemid = 1937, droprate = 109 }, -- BLM
-            { itemid = 2657, droprate = 152 }, -- BLU
-            { itemid = 1949, droprate = 283 }, -- BRD
-            { itemid = 1947, droprate = 109 }, -- BST
-            { itemid = 2659, droprate =  65 }, -- COR
-            { itemid = 2715, droprate = 130 }, -- DNC
-            { itemid = 1957, droprate =  65 }, -- DRG
-            { itemid = 1945, droprate = 174 }, -- DRK
-            { itemid = 1933, droprate = 130 }, -- MNK
-            { itemid = 1955, droprate = 196 }, -- NIN
-            { itemid = 1943, droprate = 174 }, -- PLD
-            { itemid = 2661, droprate = 174 }, -- PUP
-            { itemid = 1939, droprate = 109 }, -- RDM
-            { itemid = 1951, droprate = 130 }, -- RNG
-            { itemid = 1953, droprate = 304 }, -- SAM
-            { itemid = 2717, droprate =  87 }, -- SCH
-            { itemid = 1959, droprate = 217 }, -- SMN
-            { itemid = 1941, droprate = 174 }, -- THF
-            { itemid = 1931, droprate = 130 }, -- WAR
-            { itemid = 1935, droprate = 109 }, -- WHM
+            { item =  1937, weight = 109 }, -- BLM
+            { item =  2657, weight = 152 }, -- BLU
+            { item =  1949, weight = 283 }, -- BRD
+            { item =  1947, weight = 109 }, -- BST
+            { item =  2659, weight =  65 }, -- COR
+            { item =  2715, weight = 130 }, -- DNC
+            { item =  1957, weight =  65 }, -- DRG
+            { item =  1945, weight = 174 }, -- DRK
+            { item =  1933, weight = 130 }, -- MNK
+            { item =  1955, weight = 196 }, -- NIN
+            { item =  1943, weight = 174 }, -- PLD
+            { item =  2661, weight = 174 }, -- PUP
+            { item =  1939, weight = 109 }, -- RDM
+            { item =  1951, weight = 130 }, -- RNG
+            { item =  1953, weight = 304 }, -- SAM
+            { item =  2717, weight =  87 }, -- SCH
+            { item =  1959, weight = 217 }, -- SMN
+            { item =  1941, weight = 174 }, -- THF
+            { item =  1931, weight = 130 }, -- WAR
+            { item =  1935, weight = 109 }, -- WHM
         },
 
         {
-            { itemid = 1937, droprate = 109 }, -- BLM
-            { itemid = 2657, droprate = 152 }, -- BLU
-            { itemid = 1949, droprate = 283 }, -- BRD
-            { itemid = 1947, droprate = 109 }, -- BST
-            { itemid = 2659, droprate =  65 }, -- COR
-            { itemid = 2715, droprate = 130 }, -- DNC
-            { itemid = 1957, droprate =  65 }, -- DRG
-            { itemid = 1945, droprate = 174 }, -- DRK
-            { itemid = 1933, droprate = 130 }, -- MNK
-            { itemid = 1955, droprate = 196 }, -- NIN
-            { itemid = 1943, droprate = 174 }, -- PLD
-            { itemid = 2661, droprate = 174 }, -- PUP
-            { itemid = 1939, droprate = 109 }, -- RDM
-            { itemid = 1951, droprate = 130 }, -- RNG
-            { itemid = 1953, droprate = 304 }, -- SAM
-            { itemid = 2717, droprate =  87 }, -- SCH
-            { itemid = 1959, droprate = 217 }, -- SMN
-            { itemid = 1941, droprate = 174 }, -- THF
-            { itemid = 1931, droprate = 130 }, -- WAR
-            { itemid = 1935, droprate = 109 }, -- WHM
+            { item =  1937, weight = 109 }, -- BLM
+            { item =  2657, weight = 152 }, -- BLU
+            { item =  1949, weight = 283 }, -- BRD
+            { item =  1947, weight = 109 }, -- BST
+            { item =  2659, weight =  65 }, -- COR
+            { item =  2715, weight = 130 }, -- DNC
+            { item =  1957, weight =  65 }, -- DRG
+            { item =  1945, weight = 174 }, -- DRK
+            { item =  1933, weight = 130 }, -- MNK
+            { item =  1955, weight = 196 }, -- NIN
+            { item =  1943, weight = 174 }, -- PLD
+            { item =  2661, weight = 174 }, -- PUP
+            { item =  1939, weight = 109 }, -- RDM
+            { item =  1951, weight = 130 }, -- RNG
+            { item =  1953, weight = 304 }, -- SAM
+            { item =  2717, weight =  87 }, -- SCH
+            { item =  1959, weight = 217 }, -- SMN
+            { item =  1941, weight = 174 }, -- THF
+            { item =  1931, weight = 130 }, -- WAR
+            { item =  1935, weight = 109 }, -- WHM
         },
 
         {
-            { itemid =    0, droprate = 300 }, -- Nothing
-            { itemid = 1937, droprate = 109 }, -- BLM
-            { itemid = 2657, droprate = 152 }, -- BLU
-            { itemid = 1949, droprate = 283 }, -- BRD
-            { itemid = 1947, droprate = 109 }, -- BST
-            { itemid = 2659, droprate =  65 }, -- COR
-            { itemid = 2715, droprate = 130 }, -- DNC
-            { itemid = 1957, droprate =  65 }, -- DRG
-            { itemid = 1945, droprate = 174 }, -- DRK
-            { itemid = 1933, droprate = 130 }, -- MNK
-            { itemid = 1955, droprate = 196 }, -- NIN
-            { itemid = 1943, droprate = 174 }, -- PLD
-            { itemid = 2661, droprate = 174 }, -- PUP
-            { itemid = 1939, droprate = 109 }, -- RDM
-            { itemid = 1951, droprate = 130 }, -- RNG
-            { itemid = 1953, droprate = 304 }, -- SAM
-            { itemid = 2717, droprate =  87 }, -- SCH
-            { itemid = 1959, droprate = 217 }, -- SMN
-            { itemid = 1941, droprate = 174 }, -- THF
-            { itemid = 1931, droprate = 130 }, -- WAR
-            { itemid = 1935, droprate = 109 }, -- WHM
+            { item =     0, weight = 300 }, -- Nothing
+            { item =  1937, weight = 109 }, -- BLM
+            { item =  2657, weight = 152 }, -- BLU
+            { item =  1949, weight = 283 }, -- BRD
+            { item =  1947, weight = 109 }, -- BST
+            { item =  2659, weight =  65 }, -- COR
+            { item =  2715, weight = 130 }, -- DNC
+            { item =  1957, weight =  65 }, -- DRG
+            { item =  1945, weight = 174 }, -- DRK
+            { item =  1933, weight = 130 }, -- MNK
+            { item =  1955, weight = 196 }, -- NIN
+            { item =  1943, weight = 174 }, -- PLD
+            { item =  2661, weight = 174 }, -- PUP
+            { item =  1939, weight = 109 }, -- RDM
+            { item =  1951, weight = 130 }, -- RNG
+            { item =  1953, weight = 304 }, -- SAM
+            { item =  2717, weight =  87 }, -- SCH
+            { item =  1959, weight = 217 }, -- SMN
+            { item =  1941, weight = 174 }, -- THF
+            { item =  1931, weight = 130 }, -- WAR
+            { item =  1935, weight = 109 }, -- WHM
         },
 
         {
-            { itemid = 1988, droprate = 1000 }, -- Magenta Chip
+            { item =  1988, weight = 1000 }, -- Magenta Chip
         },
 
         {
-            { itemid =    0, droprate = 100 }, -- Nothing
-            { itemid = 2127, droprate =  59 }, -- Metal Chip
+            { item =     0, weight = 100 }, -- Nothing
+            { item =  2127, weight =  59 }, -- Metal Chip
         },
     },
 }
