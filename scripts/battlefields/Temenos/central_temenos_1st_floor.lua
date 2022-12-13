@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Temenos
 -- Name: Central Temenos 1st Floor
+-- !additem emerald_chip
 -- !addkeyitem white_card
 -- !addkeyitem cosmo_cleanse
 -- !pos 580.000 -2.375 104.000 37
