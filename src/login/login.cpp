@@ -47,6 +47,7 @@
 #include <sys/ioctl.h>
 #else
 #include <sys/epoll.h>
+#include <sys/resource.h>
 #endif
 
 typedef int HANDLE;
@@ -101,6 +102,19 @@ int32 do_init(int32 argc, char** argv)
     epoll_ctl(epollHandle, EPOLL_CTL_ADD, login_fd, &loginEpollEvent);
     epoll_ctl(epollHandle, EPOLL_CTL_ADD, login_lobbydata_fd, &login_lobbydataEpollEvent);
     epoll_ctl(epollHandle, EPOLL_CTL_ADD, login_lobbyview_fd, &login_lobbyviewEpollEvent);
+
+    struct rlimit limits;
+
+    // Get old limits
+    if (getrlimit(RLIMIT_NOFILE, &limits) == 0)
+    {
+        // Increase open file limit, which includes sockets, to MAX_FD. This only effects the current process and child processes
+        limits.rlim_cur = MAX_FD;
+        if (setrlimit(RLIMIT_NOFILE, &limits) == -1)
+        {
+            ShowError("Failed to increase rlim_cur to %d", MAX_FD);
+        }
+    }
 #endif
 #endif
 
