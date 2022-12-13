@@ -7,6 +7,9 @@ local badTable = { -- FAIL
     1,
 }
 
+local badTable2 = {1 }
+local badTable3 = { 1}
+
 local goodTable = { 1 }
 
 local goodTable2 =
