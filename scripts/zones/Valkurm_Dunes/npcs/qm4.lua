@@ -95,7 +95,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             not spawner or
             spawner:getZoneID() ~= spawnNpc:getZoneID() or
             not spawner:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or
-            not (spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20)
+            spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() ~= 20
         then
             return
         end
