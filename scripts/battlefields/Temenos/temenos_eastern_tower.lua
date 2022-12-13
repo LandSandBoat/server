@@ -373,23 +373,21 @@ content.loot =
     {
         {
             quantity = 5,
-            { item =  1875, weight = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item =     0, weight = 1000 },
-            { item =  1875, weight = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1944, weight =  65 },
-            { item =  1936, weight =  97 },
-            { item =  1946, weight =  40 },
-            { item =  1942, weight =  95 },
-            { item =  2660, weight = 194 },
-            { item =  2714, weight =  32 },
-            { item =  1950, weight = 161 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.LOW },
         },
     },
 
@@ -397,42 +395,29 @@ content.loot =
     {
         {
             quantity = 5,
-            { item =  1875, weight = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 3,
-            { item =     0, weight = 1000 },
-            { item =  1875, weight = 1000 },
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1936, weight = 367 },
-            { item =  1952, weight =  70 },
-            { item =  1950, weight =  40 },
-            { item =  1942, weight = 333 },
-            { item =  1958, weight =  20 },
-            { item =  1956, weight = 106 },
-            { item =  1938, weight =  33 },
-            { item =  1944, weight =  76 },
-            { item =  1948, weight =  95 },
-            { item =  2658, weight =  67 },
-            { item =  1946, weight = 133 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.LOW },
         },
 
         {
-            { item =     0, weight = 350 },
-            { item =  1936, weight = 367 },
-            { item =  1952, weight =  70 },
-            { item =  1950, weight =  40 },
-            { item =  1942, weight = 333 },
-            { item =  1958, weight =  20 },
-            { item =  1956, weight = 106 },
-            { item =  1938, weight =  33 },
-            { item =  1944, weight =  76 },
-            { item =  1948, weight =  95 },
-            { item =  2658, weight =  67 },
-            { item =  1946, weight = 133 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.LOW },
         },
     },
 
@@ -440,190 +425,129 @@ content.loot =
     {
         {
             quantity = 5,
-            { item =  1875, weight = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 3,
-            { item =     0, weight = 1000 },
-            { item =  1875, weight = 1000 },
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1942, weight = 625 },
-            { item =  1944, weight = 102 },
-            { item =  1950, weight =  42 },
-            { item =  1952, weight =  83 },
-            { item =  1946, weight =  50 },
-            { item =  1940, weight =  83 },
-            { item =  1936, weight =  70 },
-            { item =  1938, weight =  42 },
-            { item =  1948, weight =  42 },
-            { item =  2660, weight = 292 },
-        },
-
-        {
-            { item =     0, weight = 300 },
-            { item =  1942, weight = 625 },
-            { item =  1944, weight = 102 },
-            { item =  1950, weight =  42 },
-            { item =  1952, weight =  83 },
-            { item =  1946, weight =  50 },
-            { item =  1940, weight =  83 },
-            { item =  1936, weight =  70 },
-            { item =  1938, weight =  42 },
-            { item =  1948, weight =  42 },
-            { item =  2660, weight = 292 },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.NORMAL },
         },
     },
 
     [4] =
     {
         {
-            quantity = 6,
-            { item =  1875, weight = 1000 },
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item =     0, weight = 1000 },
-            { item =  1875, weight = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1950, weight = 417 },
-            { item =  1956, weight =  75 },
-            { item =  1944, weight = 208 },
-            { item =  1940, weight = 167 },
-            { item =  1946, weight =  62 },
-            { item =  1936, weight =  69 },
-            { item =  2660, weight = 208 },
-            { item =  1952, weight =  42 },
-            { item =  2658, weight =  83 },
-        },
-
-        {
-            { item =     0, weight = 400 },
-            { item =  1950, weight = 417 },
-            { item =  1956, weight =  75 },
-            { item =  1944, weight = 208 },
-            { item =  1940, weight = 167 },
-            { item =  1946, weight =  62 },
-            { item =  1936, weight =  69 },
-            { item =  2660, weight = 208 },
-            { item =  1952, weight =  42 },
-            { item =  2658, weight =  83 },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
         },
     },
 
     [5] =
     {
         {
-            quantity = 6,
-            { item =  1875, weight = 1000 },
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 1000 },
-            { item =  1875, weight = 1000 },
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1944, weight = 208 },
-            { item =  1938, weight =  42 },
-            { item =  1946, weight =  36 },
-            { item =  1940, weight =  83 },
-            { item =  1942, weight =  20 },
-            { item =  1952, weight =  94 },
-            { item =  1956, weight =  42 },
-            { item =  1936, weight =  49 },
-            { item =  1950, weight = 167 },
-            { item =  2714, weight = 458 },
-        },
-
-        {
-            { item =     0, weight = 200 },
-            { item =  1944, weight = 208 },
-            { item =  1938, weight =  42 },
-            { item =  1946, weight =  36 },
-            { item =  1940, weight =  83 },
-            { item =  1942, weight =  20 },
-            { item =  1952, weight =  94 },
-            { item =  1956, weight =  42 },
-            { item =  1936, weight =  49 },
-            { item =  1950, weight = 167 },
-            { item =  2714, weight = 458 },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.NORMAL },
         },
     },
 
     [6] =
     {
         {
-            quantity = 6,
-            { item =  1875, weight = 1000 },
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 1000 },
-            { item =  1875, weight = 1000 },
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1942, weight =  68 },
-            { item =  1948, weight =  74 },
-            { item =  1936, weight = 259 },
-            { item =  1940, weight =  74 },
-            { item =  1956, weight =  74 },
-            { item =  1950, weight =  62 },
-            { item =  2656, weight = 150 },
-            { item =  1938, weight =  76 },
-            { item =  1952, weight =  53 },
-            { item =  2658, weight = 111 },
-            { item =  2714, weight = 370 },
-            { item =  1946, weight = 333 },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 300 },
-            { item =  1942, weight =  68 },
-            { item =  1948, weight =  74 },
-            { item =  1936, weight = 259 },
-            { item =  1940, weight =  74 },
-            { item =  1956, weight =  74 },
-            { item =  1950, weight =  62 },
-            { item =  2656, weight = 150 },
-            { item =  1938, weight =  76 },
-            { item =  1952, weight =  53 },
-            { item =  2658, weight = 111 },
-            { item =  2714, weight = 370 },
-            { item =  1946, weight = 333 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.LOW },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW },
         },
     },
 
     [7] =
     {
         {
-            quantity = 7,
-            { item =  1875, weight = 1000 },
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1942, weight =  38 },
-            { item =  1950, weight =  67 },
-            { item =  1944, weight = 100 },
-            { item =  1936, weight = 233 },
-            { item =  1946, weight =  80 },
-            { item =  2660, weight = 333 },
-            { item =  2714, weight =  67 },
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =  1905, weight = 1000 },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item =     0, weight = 100 },
-            { item =  2127, weight =  55 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.LOW },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.SCARLET_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     },
 }
