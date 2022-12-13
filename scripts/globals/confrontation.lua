@@ -76,8 +76,8 @@ xi.confrontation.check = function(lookupKey, setupTimer)
         didLose = true
     end
 
-    if lookup.timeLimit then
-        if lookup.elapsedConfrontationTime > lookup.timeLimit then
+    if lookup.endTime then
+        if os.time() > lookup.endTime then
             didLose = true
         end
     end
@@ -197,7 +197,7 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc, params
     xi.confrontation.lookup[lookupKey].onLose = loseFunc
     xi.confrontation.lookup[lookupKey].elapsedConfrontationTime = 0
     if params.timeLimit then
-        xi.confrontation.lookup[lookupKey].timeLimit = params.timeLimit
+        xi.confrontation.lookup[lookupKey].endTime = os.time() + params.timeLimit
     end
 
     -- Pop with enmity to all registeredPlayers

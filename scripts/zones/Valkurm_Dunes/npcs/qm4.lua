@@ -86,7 +86,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         ID.mob.HEIKE_CRAB,
     }
 
-    local function rangeChecking(spawnNpc, spawnerID, timeToMobSpawn, wasInRangeLastCheck, timeOutOfRange)
+    local function rangeChecking(spawnNpc, spawnerID, timeToMobSpawn, timeOfLastCheck, wasInRangeLastCheck, timeOutOfRangeLastMsg)
 
         local spawner = GetPlayerByID(spawnerID)
         -- spawner does not meet some condition so can stop checking
@@ -100,23 +100,28 @@ entity.onEventFinish = function(player, csid, option, npc)
             return
         end
 
+        local timeOfCurrentCheck = ServerEpochTimeMS()
+        local timeElapsed = timeOfCurrentCheck - timeOfLastCheck
+
         --default to in range
         local isInRange = true
-        local timeOutOfRangeUpdated = 0
+        local timeOutOfRange = 0
         --if not in range
         if spawner:checkDistance(spawnNpc) > 10 then
             isInRange = false
-            timeOutOfRangeUpdated = timeOutOfRange + 500
+            timeOutOfRange = timeOutOfRangeLastMsg + timeElapsed
             --send message if just went out of range or every 5 seconds out of range
-            if wasInRangeLastCheck or ((timeOutOfRange % 5000) == 0) then
+            if wasInRangeLastCheck or (timeOutOfRange > 5000) then
                 spawner:messageSpecial(ID.text.NO_LONGER_FEEL_CHILL)
+                --reset timeOutOfRange here as well as only count since the last sent message
+                timeOutOfRange = 0
             end
         end
 
         --keep scheduling new checks up until the mobs spawn
-        if timeToMobSpawn > 500 then
-            spawnNpc:timer(500, function(npcArg)
-                rangeChecking(spawnNpc, spawnerID, timeToMobSpawn - 500, isInRange, timeOutOfRangeUpdated)
+        if timeToMobSpawn > 1000 then
+            spawnNpc:timer(1000, function(npcArg)
+                rangeChecking(spawnNpc, spawnerID, timeToMobSpawn - timeElapsed, timeOfCurrentCheck, isInRange, timeOutOfRange)
             end)
         end
     end
@@ -131,7 +136,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         local playerID = player:getID()
         -- start range checking for the range message
-        rangeChecking(npc, playerID, 31000, true, 0)
+        rangeChecking(npc, playerID, 50000, ServerEpochTimeMS(), true, 0)
 
         -- need to use the qm4 npc for showing text because the taru has a blank name and need a ???
         panictaru:timer(3000 , function(taru) taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT) end)
@@ -170,8 +175,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                     member:ChangeMusic(3, 102)
                     member:setLocalVar("Chart", 0)
                 end
-                -- time limit of 10 mins
-                , { timeLimit = 600000,
+                -- time limit of 10 mins (600 seconds)
+                , { timeLimit = 600,
                 validPlayerFunc = function(member)
                     -- member must have level 20 restriction to get confrontation status
                     -- this stops cheating like joining party after level restriction but before confrontation
