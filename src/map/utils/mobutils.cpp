@@ -545,10 +545,6 @@ namespace mobutils
         {
             SetupDungeonMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::LIMBUS)
-        {
-            SetupLimbusMob(PMob);
-        }
         else if (zoneType == ZONE_TYPE::BATTLEFIELD || PMob->m_Type & MOBTYPE_BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
@@ -819,20 +815,6 @@ namespace mobutils
                 PMob->addModifier(type, PTrait->getValue() * 3);
             }
         }
-    }
-
-    void SetupLimbusMob(CMobEntity* PMob)
-    {
-        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
-
-        // Battlefield mobs don't drop gil
-        PMob->setMobMod(MOBMOD_GIL_MAX, -1);
-        PMob->setMobMod(MOBMOD_MUG_GIL, -1);
-        PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
-
-        // never despawn
-        PMob->SetDespawnTime(0s);
-        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
     }
 
     void SetupBattlefieldMob(CMobEntity* PMob)

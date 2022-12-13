@@ -1060,86 +1060,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return toauMission == xi.mission.id.toau.PUPPET_IN_PERIL and toauStatus == 1
         end,
 
-        [1290] = function() -- NW Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.RED_CARD) and
-                npcId == getEntranceOffset(0)
-        end,
-
-        [1291] = function() -- SW Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.RED_CARD) and
-                npcId == getEntranceOffset(0)
-        end,
-
-        [1292] = function() -- NE Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.BLACK_CARD) and
-                npcId == getEntranceOffset(1)
-        end,
-
-        [1293] = function() -- SE Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.BLACK_CARD) and
-                npcId == getEntranceOffset(1)
-        end,
-
-        [1294] = function() -- CS Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-            (
-                (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
-                (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
-            )
-        end,
-
-        [1296] = function() -- Central Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                (
-                    (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
-                    (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
-                )
-        end,
-
-        [1298] = function() -- Temenos Western Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1299] = function() -- Temenos Northern Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1300] = function() -- Temenos Eastern Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1301] = function() -- Central Temenos Basement
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1303] = function() -- Central Temenos 1st Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1304] = function() -- Central Temenos 2nd Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1305] = function() -- Central Temenos 3rd Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1306] = function() -- Central Temenos 4th Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
         [2721] = function() -- WOTG07: Purple, The New Black
             return player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.PURPLE_THE_NEW_BLACK and
                 player:getMissionStatus(xi.mission.log_id.WOTG) == 1
@@ -1889,29 +1809,6 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
         local clearTime = 1
         local name      = "Meme"
         local partySize = 1
-
-        switch (battlefieldId): caseof
-        {
-            [1301] = function() -- Central_Temenos_Basement
-                area = 8
-            end,
-
-            [1303] = function() -- Central_Temenos_1st_Floor
-                area = 7
-            end,
-
-            [1304] = function() -- Central_Temenos_2nd_Floor
-                area = 6
-            end,
-
-            [1305] = function() -- Central_Temenos_3rd_Floor
-                area = 5
-            end,
-
-            [1306] = function() -- Central_Temenos_4th_Floor
-                area = 4
-            end,
-        }
 
         local result = xi.battlefield.returnCode.REQS_NOT_MET
         result       = player:registerBattlefield(id, area)

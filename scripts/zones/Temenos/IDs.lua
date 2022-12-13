@@ -37,35 +37,6 @@ zones[xi.zone.TEMENOS] =
         CANNOT_OPEN_CHEST             = 7567, -- You cannot open the treasure chest now.
         GATE_OPEN                     = 7568, -- he gate opens...
     },
-    mob =
-    {
-        TEMENOS_C_MOB =
-        {
-            16929046,
-            16929030,
-            16929005,
-            16928966,
-            16929053,
-        }
-    },
-    npc =
-    {
-        TEMENOS_C_GATE =
-        {
-            16929219,
-            16929220,
-            16929221,
-            16929222,
-            16929218,
-        },
-        TEMENOS_C_CRATE =
-        {
-            16929045,
-            16929029,
-            16929004,
-            [5] = 16929052, -- basement 1 boss
-        },
-    },
 
     TEMENOS_NORTHERN_TOWER =
     {
@@ -263,6 +234,14 @@ zones[xi.zone.TEMENOS] =
                 { offset = 16928997, count = 7 },
             },
         },
+    },
+
+    CENTRAL_TEMENOS_BASEMENT =
+    {
+        npc =
+        {
+            LOOT_CRATE = 16929052,
+        }
     },
 }
 
