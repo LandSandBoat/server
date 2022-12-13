@@ -549,7 +549,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             }
         }
 
-        auto mixins = groupData.get<sol::table>("mixins");
+        auto mixins = groupData["mixins"];
         if (mixins.valid() && applyMixins.valid())
         {
             // get the parameter "mixinOptions" (optional)
