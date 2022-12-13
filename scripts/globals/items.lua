@@ -4078,6 +4078,7 @@ xi.items =
     MAPLE_WAND                      = 17049,
     CADUCEUS                        = 17058,
     EARTH_WAND                      = 17076,
+    BRASS_ROD                       = 17081,
     MISERY_STAFF                    = 17116,
     HYPNO_STAFF                     = 17117,
     SHORTBOW                        = 17152,
