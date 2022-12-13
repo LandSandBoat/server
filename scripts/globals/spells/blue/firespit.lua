@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.FIRE
+    params.attribute = xi.mod.INT
     params.multiplier = 3.0
     params.tMultiplier = 1.5
     params.duppercap = 69
@@ -37,7 +38,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.2
     params.chr_wsc = 0.0
-    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
+
+    local damage = blueDoMagicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     return damage

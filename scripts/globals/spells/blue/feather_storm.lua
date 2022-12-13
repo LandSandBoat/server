@@ -29,8 +29,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
     params.scattr = SC_TRANSFIXION
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
     params.multiplier = 2
     params.tp150 = 2
@@ -45,16 +43,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
+    params.effect = xi.effect.POISON
+    local power = 1
+    local tick = 0
+    local duration = 180
+
     local damage = blueDoPhysicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
-
-    -- Added effect: Poison (1/tick for 90s/180s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.POISON) then
-        local resist = applyResistanceEffect(caster, target, spell, params)
-        if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.POISON, 1, 0, 180 * resist)
-        end
-    end
+    blueDoPhysicalSpellAddedEffect(caster,target,spell,params,damage,power,tick,duration)
 
     return damage
 end

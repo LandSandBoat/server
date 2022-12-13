@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.VERMIN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
+    params.attribute = xi.mod.INT
     params.multiplier = 1.50
     params.tMultiplier = 1.0
     params.duppercap = 30
@@ -37,7 +38,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.3
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
+
+    local damage = blueDoMagicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     return damage

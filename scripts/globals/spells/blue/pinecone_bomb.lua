@@ -46,8 +46,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
     params.scattr = SC_LIQUEFACTION
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
+
     params.numhits = 1
     params.multiplier = 2.25
     params.tp150 = 2.25
@@ -61,17 +60,15 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+    
+    params.effect = xi.effect.SLEEP_I
+    local power = 1
+    local tick = 0
+    local duration = 60
 
     local damage = blueDoPhysicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
-
-    -- Added effect: Sleep (30s/60s)
-    if damage > 0 then
-        local resist = applyResistanceEffect(caster, target, spell, params)
-        if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 60 * resist)
-        end
-    end
+    blueDoPhysicalSpellAddedEffect(caster,target,spell,params,damage,power,tick,duration)
 
     return damage
 end

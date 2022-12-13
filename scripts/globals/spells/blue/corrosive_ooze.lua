@@ -25,14 +25,19 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.AMORPH
+<<<<<<< refs/remotes/upstream/base
     local multi = 2.125
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         multi = multi + 0.50
     end
 
+=======
+>>>>>>> Enfeebling diff/attribute fixes + general magic damage function + almost all magical dmg spells + AE
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
-    params.multiplier = multi
+    params.attribute = xi.mod.INT
+    params.multiplier = 2.125
+    params.azureBonus = 0.5
     params.tMultiplier = 2.0
     params.duppercap = 69
     params.str_wsc = 0.0
@@ -42,22 +47,23 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
+
+    local typeEffectOne = xi.effect.DEFENSE_DOWN
+    local typeEffectTwo = xi.effect.ATTACK_DOWN
+    local power = 5
+    local tick = 0
+    local duration = 90
+
+    local damage = blueDoMagicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
 
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
+    local resist = applyResistanceEffect(caster, target, spell, params)
 
-    local resist = applyResistance(caster, target, spell, params)
-    local typeEffectOne = xi.effect.DEFENSE_DOWN
-    local typeEffectTwo = xi.effect.ATTACK_DOWN
-    local duration = 60
-
-    if damage > 0 and resist > 0.3 then
-        target:addStatusEffect(typeEffectOne, 5, 0, duration)
-        target:addStatusEffect(typeEffectTwo, 5, 0, duration)
+    if resist >= 0.5 then
+        target:addStatusEffect(typeEffectOne, power, tick, duration * resist)
+        target:addStatusEffect(typeEffectTwo, power, tick, duration * resist)
     end
 
     return damage

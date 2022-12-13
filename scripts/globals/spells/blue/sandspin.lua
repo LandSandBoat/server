@@ -27,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.ecosystem = xi.ecosystem.AMORPH
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.EARTH
+    params.attribute = xi.mod.INT
     params.multiplier = 1.0
     params.tMultiplier = 1.0
     params.duppercap = 13
@@ -37,20 +38,15 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
+
+    params.addedEffect = xi.effect.ACCURACY_DOWN
+    local power = 25
+    local tick = 0
+    local duration = 60
+
+    local damage = blueDoMagicalSpell(caster, target, spell, params)
     damage = blueFinalizeDamage(caster, target, spell, damage, params)
-
-    local resist = applyResistance(caster, target, spell, params)
-
-    if damage > 0 and resist > 0.0625 then
-        if target:canGainStatusEffect(xi.effect.ACCURACY_DOWN) then
-            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 3, 60)
-        end
-    end
+    blueDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     return damage
 end

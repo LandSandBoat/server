@@ -26,7 +26,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.BIRD
-    params.attribute = xi.mod.INT
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.skillType = xi.skill.BLUE_MAGIC
     local power = 1500
     local resistThreshold = 0.5

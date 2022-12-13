@@ -12,10 +12,6 @@ TPMOD_ACC = 3
 TPMOD_ATTACK = 4
 TPMOD_DURATION = 5
 
-INT_BASED = 1
-CHR_BASED = 2
-MND_BASED = 3
-
 -----------------------------------
 -- Utility functions below
 -----------------------------------
@@ -300,55 +296,50 @@ function blueDoPhysicalSpell(caster, target, spell, params)
 end
 
 -- Get the damage for a magical Blue Magic spell
-function blueDoMagicalSpell(caster, target, spell, params, statMod)
+function blueDoMagicalSpell(caster, target, spell, params)
 
-    -- how do mobs weak to element get more dmg from that? (getElementalDamageReduction in addBonuses, DONE)
+    -- In individual magical spells, don't use params.effect for the added effect
+    -- This would affect the resistance check for damage here
+    -- We just want that to affect the resistance check for the added effect
+    -- Use params.addedEffect instead
 
-    local D = caster:getMainLvl() + 2
+    -- Initial values
+    local initialD = utils.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
+    params.skillType = xi.skill.BLUE_MAGIC
 
-    if D > params.duppercap then
-        D = params.duppercap
-    end
-
-    local st = blueGetWSC(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
-
+    -- WSC
+    local wsc = blueGetWSC(caster, params)
     if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
-        st = st * 2
+        wsc = wsc * 2
+        caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
-    local statBonus = 0
-    local dStat = 0 -- Please make sure to add an additional stat check if there is to be a spell that uses neither INT, MND, or CHR. None currently exist.
-    if statMod == INT_BASED then -- Stat mod is INT
-        dStat = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-        statBonus = dStat * params.tMultiplier
-    elseif statMod == CHR_BASED then -- Stat mod is CHR
-        dStat = caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR)
-        statBonus = dStat * params.tMultiplier
-    elseif statMod == MND_BASED then -- Stat mod is MND
-        dStat = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
-        statBonus = dStat * params.tMultiplier
+    -- INT/MND/CHR dmg bonuses
+    params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    local statBonus = params.diff * params.tMultiplier
+
+    -- Azure Lore
+    local azureBonus = 0
+    if caster:getStatusEffect(xi.effect.AZURE_LORE) then
+        azureBonus = params.azureBonus or 0
     end
 
-    D = ((D + st) * params.multiplier) + statBonus
+    -- Monster correlation
+    local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
-    -- At this point according to wiki we apply standard magic attack calculations
+    -- Final D value
+    local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
 
-    local magicAttack = 1.0
-    local multTargetReduction = 1.0 -- TODO: Make this dynamically change, temp static till implemented.
-    magicAttack = math.floor(D * multTargetReduction)
+    -- Multitarget damage reduction
+    local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(caster, target, spell))
 
-    local rparams = {}
-    rparams.diff = dStat
-    rparams.skillType = xi.skill.BLUE_MAGIC
-    magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
+    -- Resistance
+    finaldmg = math.floor(finaldmg * applyResistance(caster, target, spell, params))
 
-    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack)) -- mab/mdb/weather/day
+    -- MAB/MDB/weather/day/affinity/burst effect on damage
+    finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
 
-    caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
-
-
-
-    return dmg
+    return finaldmg
 end
 
 -- Perform a draining magical Blue Magic spell
@@ -437,7 +428,6 @@ function blueDoBreathSpell(caster, target, spell, params, isConal)
 
 end
 
-
 -- Finalize HP damage after a spell
 function blueFinalizeDamage(caster, target, spell, dmg, params)
 
@@ -490,8 +480,8 @@ end
 function blueDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 
     -- INT and Blue Magic skill are the default resistance modifiers
-    if params.attribute == nil then params.attribute = xi.mod.INT end
-    if params.skillType == nil then params.skillType = xi.skill.BLUE_MAGIC end
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.skillType = xi.skill.BLUE_MAGIC
     local resist = applyResistanceEffect(caster, target, spell, params)
 
     -- If unresisted
@@ -519,14 +509,34 @@ function blueDoEnfeeblingSpell(caster, target, spell, params, power, tick, durat
 end
 
 -- Inflict an added enfeebling effect (after a physical spell)
-function blueDoPhysicalSpellAddedEffect(caster,target,spell,params,damage,power,tick,duration)
+function blueDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     -- Physical spell needs to do damage before added effect can hit
     if damage > 0 then
+
+        -- INT and Blue Magic skill are the default resistance modifiers
+        params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        params.skillType = xi.skill.BLUE_MAGIC
         local resist = applyResistanceEffect(caster, target, spell, params)
+
         if resist >= 0.5 then
             target:addStatusEffect(params.effect, power, tick, duration * resist)
         end
+    end
+
+end
+
+-- Inflict an added enfeebling effect (after a magical spell)
+function blueDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
+
+    -- Blue Magic skill + whichever attribute the spell uses will be used as resistance modifiers
+    params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.effect = params.addedEffect -- renamed to avoid magical spells' dmg resistance check being influenced by this
+    local resist = applyResistanceEffect(caster, target, spell, params)
+
+    if resist >= 0.5 then
+        target:addStatusEffect(params.effect, power, tick, duration * resist)
     end
 
 end
@@ -595,21 +605,32 @@ changes in blu_fixes branch
     - Updated WSC values, though most were correct.
     - Added spell ecosystem.
     - Streamlined the way spells of the same type are coded.
-    - Status/added effect changes:
+    - Added effect changes:
+        - Consolidated all AE into one function.
         - Resistance now influences duration properly.
-        - Effects that decay over time now work, such as Wild Oats (VIT down) and Saline Coat (Magic Defense Boost).
+        - Effects that decay over time now work, such as Wild Oats (VIT down).
         - Some spells had 0 duration.
 
 - Physical Blue Magic spell changes:
     - Simplified some functions.
     - Added Physical Potency merits effect.
     - Added Azure Lore effect on multiplier.
-    - Damage is influenced by monster correlation.
+    - Damage is now influenced by monster correlation.
     - All physical spells now need to hit before the added effect (AE) can kick in.
     - All physical spells with an AE get a resistance check for the AE.
 
+- Magical Blue Magic spell changes:
+    - Simplified Azure Lore's multiplier code.
+    - Simplified main attribute checking code (INT/MND/CHR).
+    - Damage is now influenced by monster correlation.
+    - Added multi-target damage reduction.
+    - Added effect changes:
+        - Consolidated all AE into one function.
+        - Resistance now influences duration properly.
+
 - Enhancing Blue Magic spell changes:
     - Consolidated Diffusion's effect on duration into one function.
+    - Effects that decay over time now work, such as Saline Coat (Magic Defense Boost).
 
 - Enfeebling Blue Magic spell changes:
     - Consolidated enfeebling spells into one function, where possible.
@@ -620,8 +641,8 @@ changes in blu_fixes branch
     - Corrected breath spells to do breath damage, not magic damage.
     - You have to be in front of the monster to do breath damage.
     - Added an angle damage multiplier that lowers damage when monster is more to your side than in front.
-    - Damage is influenced by a monster's elemental resistance, but not by mab/mdb or weather/day bonuses.
-    - Damage is influenced by monster correlation.
+    - Damage is now influenced by a monster's elemental resistance, but not by mab/mdb or weather/day bonuses.
+    - Damage is now influenced by monster correlation.
     - The resist rate is calculated once and affects both damage and added effect hit rate / duration.
 
 - Drain Blue Magic spell changes:
@@ -653,22 +674,26 @@ changes in blu_fixes branch
     - Physical spells
         - acc: acc / DEX
         - dmg: att / STR / stat modifiers / monster correlation
-        - Added effect macc: acc / macc / blue magic skill / INT
+        - Added effect macc: macc / blue magic skill / INT (cannot land without spell hitting)
+    - Magical spells
+        - dmg: mab / affinity / stat modifiers / monster correlation
+        - macc: macc / blue magic skill / main stat modifier (INT, MND or CHR)
+        - Added effect macc: macc / blue magic skill / main stat modifier (INT, MND or CHR)
+    - Enfeebling spells (magical without damage)
+        - potency: none
+        - duration: a .5 resist halves duration, any lower and the spell doesn't hit
+        - macc: macc / blue magic skill / INT
     - Breath spells
         - dmg: HP / level / elemental resistance / monster correlation (dmg is not influenced by mab/mdb or weather/day bonuses)
         - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
     - Drain spells
         - dmg: blue magic skill
         - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
-    - Enfeebling spells
-        - potency: none
-        - duration: a .5 resist halves duration, any lower and the spell doesn't hit
-        - macc: macc / blue magic skill / INT
     - Correlation = multiplier +- 0.25 (breath multiplier = 1)
     - Azure Lore allows for continuous chaining and bursting
     - Merits
-        - Physical Potency: +2 acc per merit
-        - Magical Accuracy: TODO
+        - Physical Potency: +2 acc per merit (for physical spells)
+        - Magical Accuracy: +2 macc per merit (for magical spells)
         - Correlation: +0.004 per merit (only for strengths, not weaknesses)
         - Convergence: does not work
         - Enchainment: adds 100 TP per merit
@@ -681,11 +706,9 @@ CLEANUP*********************
 - TODO OWN:
     - Set spells: DELAY can I do that?
     - Physical AE into one function with params.effect?
-    - Enfeebling, also check enhancing for (does not have, like Warm-up, why so complicated?)
-    - Gaze check - do myself? isFacing works, but also need isFacing from other side for gaze!
-        - Yep gaze is not in DB
 - Getstats, put back
 - Magic, remove prints
 - Remove defmode, although it might come in handy (put in modules for yourself)
+- Check out https://www.bluegartr.com/threads/61949-BLU-Magical-Build for reference for DMG for SN specific modifiers
 
 ]]

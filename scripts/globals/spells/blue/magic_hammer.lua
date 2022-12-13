@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Magic Hammer
--- Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead
+-- Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead.
 -- Spell cost: 40 MP
 -- Monster Type: Beastmen
 -- Spell Type: Magical (Light)
@@ -31,18 +31,13 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local dmg = 0
-    local multi = 1.5
-
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        multi = multi + 0.50
-    end
-
     local params = {}
     params.ecosystem = xi.ecosystem.BEASTMEN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHT
-    params.multiplier = multi
+    params.attribute = xi.mod.MND
+    params.multiplier = 1.5
+    params.azureBonus = 0.5
     params.tMultiplier = 1.0
     params.duppercap = 35
     params.str_wsc = 0.0
@@ -53,9 +48,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
 
+    local damage = 0
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
     else
+<<<<<<< refs/remotes/upstream/base
         dmg = blueDoMagicalSpell(caster, target, spell, params, MND_BASED)
         dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
         if target:getMP() > 0 then
@@ -67,9 +64,16 @@ spellObject.onSpellCast = function(caster, target, spell)
         else
             return 0
         end
+=======
+        damage = blueDoMagicalSpell(caster, target, spell, params)
+        damage = blueFinalizeDamage(caster, target, spell, damage, params)
+        caster:addMP(utils.clamp(damage,0,target:getMP()))
+>>>>>>> Enfeebling diff/attribute fixes + general magic damage function + almost all magical dmg spells + AE
     end
 
-    return dmg
+    -- weirdly this spell returns MP dmg message even if nothing's here wtf
+
+    return damage
 end
 
 return spellObject
