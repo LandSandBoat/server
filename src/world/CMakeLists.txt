@@ -1,6 +1,9 @@
 set(SOURCES
     ${COMMON_SOURCES}
+    http_server.cpp
+    http_server.h
     main.cpp
+    world_server.cpp
     world_server.h)
 
 # Temporarily remove clashing old code
