@@ -736,15 +736,24 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
     }
 
     local lowest = resistances[1]
-    local breath = breathList[1]
+    local breath = breathList[math.random(#breathList)]
+    local head = player:getEquippedItem(xi.slot.HEAD)
 
-    -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
-    -- The wyvern simply picks the lowest resistance breath and no longer relies on Drachen Armet et al
-    -- if all resistances are equal, Flame Breath is picked first.
-    for i, v in ipairs(breathList) do
-        if resistances[i] < lowest then
-            lowest = resistances[i]
-            breath = v
+    -- https://ffxiclopedia.fandom.com/wiki/Drachen_Armet?oldid=965925
+    -- https://ffxiclopedia.fandom.com/wiki/Elemental_Breath?oldid=738854
+    -- The wyvern picks breath based on the lowest resistance if the player has Drachen Armet equipped.
+    -- If all resistances are equal, a random breath is used.
+    -- However there innately exists a chance where wyvern use breath based on weakness.
+    if
+        head == xi.items.DRACHEN_ARMET or
+        head == xi.items.DRACHEN_ARMET_P1 or
+        math.random() < 0.5
+    then
+        for i, v in ipairs(breathList) do
+            if resistances[i] < lowest then
+                lowest = resistances[i]
+                breath = v
+            end
         end
     end
 
