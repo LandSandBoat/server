@@ -16,21 +16,34 @@ xi.spells = xi.spells or {}
 xi.spells.enfeebling = xi.spells.enfeebling or {}
 -----------------------------------
 
-local m = xi.mod
+local s = xi.magic.spell
 local e = xi.effect
+local m = xi.mod
 
 local pTable =
-{   --                              1           2          3             4               5      6    7         8       9           10       11
-    --               [Spell ID] = { Effect,     Stat-Used, Resist-Mod,   MEVA-Mod,       Power, DoT, Duration, Resist, Bonus-MACC, Potency, Overwrite },
-    [xi.magic.spell.SILENCE   ] = { e.SILENCE,  m.MND,     m.SILENCERES, m.SILENCE_MEVA,     1,   0,      120,      2,          0,   false,     false },
-    [xi.magic.spell.SILENCEGA ] = { e.SILENCE,  m.MND,     m.SILENCERES, m.SILENCE_MEVA,     1,   0,      120,      2,          0,   false,     false },
-
-    [xi.magic.spell.SLEEP     ] = { e.SLEEP_I,  m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       1,   0,       60,      2,          0,   false,     false },
-    [xi.magic.spell.SLEEP_II  ] = { e.SLEEP_I,  m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       2,   0,       60,      2,          0,   false,     false },
-    [xi.magic.spell.SLEEPGA   ] = { e.SLEEP_II, m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       1,   0,       90,      2,          0,   false,     false },
-    [xi.magic.spell.SLEEPGA_II] = { e.SLEEP_II, m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       2,   0,       90,      2,          0,   false,     false },
-
-    -- [xi.magic.spell.SLOW      ] = { e.SLOW,     m.MND,     m.SLOWRES,    m.SLOW_MEVA,        X,   0,      180,      2,          0,    true,      true },
+{   --                   1           2          3             4               5      6    7         8       9           10         11
+    --    [Spell ID] = { Effect,     Stat-Used, Resist-Mod,   MEVA-Mod,       pBase, DoT, Duration, Resist, Bonus-MACC, pSaboteur, pResist },
+    [s.BIND        ] = { e.BIND,     m.INT,     m.BINDRES,    m.BIND_MEVA,        0,   0,       60,      2,          0, false,     false   },
+    [s.BINDGA      ] = { e.BIND,     m.INT,     m.BINDRES,    m.BIND_MEVA,        0,   0,       60,      2,          0, false,     false   },
+    [s.BLIND       ] = { e.BLIND,    m.INT,     m.BLINDRES,   m.BLIND_MEVA,       0,   0,      180,      2,          0, true,      false   },
+    [s.BLIND_II    ] = { e.BLIND,    m.INT,     m.BLINDRES,   m.BLIND_MEVA,       0,   0,      180,      2,          0, true,      false   },
+    [s.BLINDGA     ] = { e.BLIND,    m.INT,     m.BLINDRES,   m.BLIND_MEVA,       0,   0,      180,      2,          0, true,      false   },
+    [s.GRAVITY     ] = { e.WEIGHT,   m.INT,     m.GRAVITYRES, m.GRAVITY_MEVA,    26,   0,      120,      2,          0, true,      false   },
+    [s.GRAVITY_II  ] = { e.WEIGHT,   m.INT,     m.GRAVITYRES, m.GRAVITY_MEVA,    32,   0,      180,      2,          0, true,      false   },
+    [s.GRAVIGA     ] = { e.WEIGHT,   m.INT,     m.GRAVITYRES, m.GRAVITY_MEVA,    50,   0,      120,      2,          0, true,      false   },
+    [s.POISON      ] = { e.POISON,   m.INT,     m.POISONRES,  m.POISON_MEVA,      0,   3,       90,      2,          0, true,      false   },
+    [s.POISON_II   ] = { e.POISON,   m.INT,     m.POISONRES,  m.POISON_MEVA,      0,   3,      120,      2,          0, true,      false   },
+    [s.POISON_III  ] = { e.POISON,   m.INT,     m.POISONRES,  m.POISON_MEVA,      0,   3,      150,      2,          0, true,      false   },
+    [s.POISONGA    ] = { e.POISON,   m.INT,     m.POISONRES,  m.POISON_MEVA,      0,   3,       90,      2,          0, true,      false   },
+    [s.POISONGA_II ] = { e.POISON,   m.INT,     m.POISONRES,  m.POISON_MEVA,      0,   3,      120,      2,          0, true,      false   },
+    [s.POISONGA_III] = { e.POISON,   m.INT,     m.POISONRES,  m.POISON_MEVA,      0,   3,      150,      2,          0, true,      false   },
+    [s.SILENCE     ] = { e.SILENCE,  m.MND,     m.SILENCERES, m.SILENCE_MEVA,     1,   0,      120,      2,          0, false,     false   },
+    [s.SILENCEGA   ] = { e.SILENCE,  m.MND,     m.SILENCERES, m.SILENCE_MEVA,     1,   0,      120,      2,          0, false,     false   },
+    [s.SLEEP       ] = { e.SLEEP_I,  m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       1,   0,       60,      2,          0, false,     false   },
+    [s.SLEEP_II    ] = { e.SLEEP_I,  m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       2,   0,       60,      2,          0, false,     false   },
+    [s.SLEEPGA     ] = { e.SLEEP_II, m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       1,   0,       90,      2,          0, false,     false   },
+    [s.SLEEPGA_II  ] = { e.SLEEP_II, m.INT,     m.SLEEPERES,  m.SLEEP_MEVA,       2,   0,       90,      2,          0, false,     false   },
+    [s.SLOW        ] = { e.SLOW,     m.MND,     m.SLOWRES,    m.SLOW_MEVA,        0,   0,      180,      2,          0, true,      true    },
 }
 
 -- Calculates if target has resistance traits or gear mods that can nullify effects.
@@ -55,12 +68,52 @@ xi.spells.enfeebling.calculateTraitTrigger = function(caster, target, spellId)
     return false
 end
 
-xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, skillType, statUsed)
+xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellEffect, skillType, statUsed)
     local potency  = pTable[spellId][5]
     local statDiff = caster:getStat(statUsed) - target:getStat(statUsed)
 
-    potency = potency * statDiff
+    -- Calculate base potency for spells.
 
+    -- Blind Family
+    if spellEffect == xi.effect.BLIND then
+        statDiff = caster:getStat(statUsed) - target:getStat(xi.mod.MND)
+
+        if spellId == xi.magic.spell.BLIND_II then
+            potency = utils.clamp(math.floor(statDiff * 0.375 + 49), 15, 90) -- Values from JP wiki: http://wiki.ffo.jp/html/3449.html
+        else
+            potency = utils.clamp(math.floor(statDiff * 0.225 + 23), 5, 50)  -- Values from JP wiki: http://wiki.ffo.jp/html/834.html
+        end
+
+    -- Poison Family
+    elseif spellEffect == xi.effect.POISON then
+        local skillLevel = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC)
+
+        if
+            spellId == xi.magic.spell.POISON or
+            spellId == xi.magic.spell.POISONGA
+        then
+            potency = math.max(skillLevel / 25, 1)
+            if skillLevel > 400 then
+                potency = math.min((skillLevel - 225) / 5, 55) -- Cap is 55 hp/tick.
+            end
+        elseif
+            spellId == xi.magic.spell.POISON_II or
+            spellId == xi.magic.spell.POISONGA_II
+        then
+            potency = math.max(skillLevel / 20, 4)
+            if skillLevel > 400 then
+                potency = math.floor(skillLevel * 49 / 183 - 55) -- No cap can be reached yet
+            end
+        else
+            potency = skillLevel / 10 + 1
+        end
+
+    -- Slow Family
+    elseif spellEffect == xi.effect.SLOW then
+        potency = potency * statDiff
+    end
+
+    -- Apply Saboteur Effect when aplicable.
     if
         caster:hasStatusEffect(xi.effect.SABOTEUR) and
         skillType == xi.skill.ENFEEBLING_MAGIC
@@ -108,19 +161,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local spellEffect    = pTable[spellId][1]
 
     ------------------------------
-    -- STEP 1: Check spell overwrite.
-    ------------------------------
-    if
-        not pTable[spellId][11] and
-        target:hasStatusEffect(spellEffect)
-    then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-
-        return spellEffect
-    end
-
-    ------------------------------
-    -- STEP 2: Check trait nullification.
+    -- STEP 1: Check trait nullification.
     ------------------------------
     local traitTrigger = xi.spells.enfeebling.calculateTraitTrigger(caster, target, spellId)
 
@@ -131,7 +172,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     end
 
     ------------------------------
-    -- STEP 3: Calculate resist tiers.
+    -- STEP 2: Calculate resist tiers.
     ------------------------------
     local skillType    = spell:getSkillType()
     local spellElement = spell:getElement()
@@ -145,47 +186,58 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local magicEva     = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
     local magicHitRate = xi.damage.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 
-    -- Calculate individualy resists for potency and duration.
+    -- Calculate individualy resist rates for potency and duration.
     local resistDuration = xi.damage.magicHitRate.calculateResistRate(magicHitRate, resistStages)
+    local resistPotency  = 1
+
+    -- Check if potency is affected by resist rate.
+    if pTable[spellId][11] then
+        resistPotency  = xi.damage.magicHitRate.calculateResistRate(magicHitRate, resistStages)
+    end
+
+    -- Check if spell gets resisted.
+    if resistDuration <= 1 / (2 ^ resistStages) then
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+
+        return spellEffect
+    end
 
     ------------------------------
-    -- STEP 4: Calculate Potency and Duration.
+    -- STEP 3: Calculate Duration, Potency and Tick.
     ------------------------------
-    if resistDuration > 1 / (2 ^ resistStages) then
-        -- Calculate Duration.
-        local duration = xi.spells.enfeebling.calculateDuration(caster, target, spellId)
-        duration       = math.floor(duration * resistDuration)
+    -- Calculate Duration.
+    local duration = xi.spells.enfeebling.calculateDuration(caster, target, spellId)
+    duration       = math.floor(duration * resistDuration)
 
-        -- Calculate potency.
-        local potency        = pTable[spellId][4]
-        local resistPotency  = 1
+    -- Calculate potency.
+    local potency = xi.spells.enfeebling.calculatePotency(caster, target, spellId, spellEffect, skillType, statUsed)
+    potency       = math.floor(potency * resistPotency)
 
-        -- If potency is variable.
-        if pTable[spellId][10] then
-            resistPotency  = xi.damage.magicHitRate.calculateResistRate(magicHitRate, resistStages)
-            potency        = xi.spells.enfeebling.calculatePotency(caster, target, spellId, skillType, statUsed)
-            potency        = math.floor(potency * resistPotency)
-        end
+    -- Set tick (Poison, etc...)
+    local tick = pTable[spellId][6]
 
-        -- Set tick (Poison, etc...)
-        local tick = pTable[spellId][6]
+    ------------------------------
+    -- STEP 4: Exceptions.
+    ------------------------------
+    if spellEffect == xi.effect.BIND then
+        potency = target:getSpeed()
+    end
 
-        -- Final operations.
-        if target:addStatusEffect(spellEffect, potency, tick, duration) then
-            -- Add "Magic Burst!" message
-            local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
+    ------------------------------
+    -- STEP 5: Final Operations.
+    ------------------------------
+    if target:addStatusEffect(spellEffect, potency, tick, duration) then
+        -- Add "Magic Burst!" message
+        local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
-            if skillchainCount > 0 then
-                spell:setMsg(spell:getMagicBurstMessage())
-                caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
-            else
-                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-            end
+        if skillchainCount > 0 then
+            spell:setMsg(spell:getMagicBurstMessage())
+            caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
         else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         end
     else
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     return spellEffect
