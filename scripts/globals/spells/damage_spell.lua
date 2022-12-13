@@ -610,7 +610,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -- STEP 3: Get Magic Hit Rate
     -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
     -----------------------------------
-    local magicHitRate = xi.magic.calculateMagicHitRate(magicAcc, magiceva, target, element, skillchainCount, skillType, caster)
+    local magicHitRate = xi.magic.calculateMagicHitRate(magicAcc, magiceva, target, element, skillchainCount, skillType, caster, true)
 
     -----------------------------------
     -- STEP 4: Get Resist Tier

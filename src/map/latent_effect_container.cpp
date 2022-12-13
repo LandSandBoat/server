@@ -973,57 +973,36 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             expression = m_POwner->health.hp < latentEffect.GetConditionsValue() && m_POwner->animation == ANIMATION_ATTACK;
             break;
         case LATENT::MP_UNDER_VISIBLE_GEAR:
-            // TODO: figure out if this is actually right
-            // CItemEquipment* head = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_HEAD]));
-            // CItemEquipment* body = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_BODY]));
-            // CItemEquipment* hands = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_HANDS]));
-            // CItemEquipment* legs = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_LEGS]));
-            // CItemEquipment* feet = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_FEET]));
+        {
+            // Since equipment is fairly specific to a player, don't put this visible calculation in battleentity
+            std::vector<CItemEquipment*> visibleEquip = m_POwner->getVisibleEquip();
 
-            // int32 visibleMp = 0;
-            // visibleMp += (head ? head->getModifier(Mod::MP) : 0);
-            // visibleMp += (body ? body->getModifier(Mod::MP) : 0);
-            // visibleMp += (hands ? hands->getModifier(Mod::MP) : 0);
-            // visibleMp += (legs ? legs->getModifier(Mod::MP) : 0);
-            // visibleMp += (feet ? feet->getModifier(Mod::MP) : 0);
+            int16 visibleMP = m_POwner->health.maxmp;
 
-            // TODO: add mp percent too
-            // if ((float)( mp / ((m_POwner->health.mp - m_POwner->health.modmp) + (m_POwner->PMeritPoints->GetMerit(MERIT_MAX_MP)->count * 10 ) +
-            //    visibleMp) ) <= m_LatentEffectList.at(i)->GetConditionsValue())
-            //{
-            //    m_LatentEffectList.at(i)->Activate();
-            //}
-            // else
-            //{
-            //    m_LatentEffectList.at(i)->Deactivate();
-            //}
+            for (auto equip: visibleEquip)
+            {
+                visibleMP += equip->getModifier(Mod::MP);
+            }
+
+            // there is evidence that 0/0 (e.g., 0/20 with uggalepih pendant) does not trigger this latent
+            expression = visibleMP > 0 && (uint8)floor(((float)m_POwner->health.mp / (float)visibleMP) * 100) <= latentEffect.GetConditionsValue();
             break;
+        }
         case LATENT::HP_OVER_VISIBLE_GEAR:
-            // TODO: figure out if this is actually right
-            // CItemEquipment* head = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_HEAD]));
-            // CItemEquipment* body = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_BODY]));
-            // CItemEquipment* hands = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_HANDS]));
-            // CItemEquipment* legs = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_LEGS]));
-            // CItemEquipment* feet = (CItemEquipment*)(m_POwner->getStorage(LOC_INVENTORY)->GetItem(m_POwner->equip[SLOT_FEET]));
+        {
+            // Since equipment is fairly specific to a player, don't put this visible calculation in battleentity
+            std::vector<CItemEquipment*> visibleEquip = m_POwner->getVisibleEquip();
 
-            // int32 visibleHp = 0;
-            // visibleHp += (head ? head->getModifier(Mod::HP) : 0);
-            // visibleHp += (body ? body->getModifier(Mod::HP) : 0);
-            // visibleHp += (hands ? hands->getModifier(Mod::HP) : 0);
-            // visibleHp += (legs ? legs->getModifier(Mod::HP) : 0);
-            // visibleHp += (feet ? feet->getModifier(Mod::HP) : 0);
+            int16 visibleHP = m_POwner->health.maxhp;
 
-            // TODO: add mp percent too
-            // if ((float)( hp / ((m_POwner->health.hp - m_POwner->health.modhp) + (m_POwner->PMeritPoints->GetMerit(MERIT_MAX_HP)->count * 10 ) +
-            //    visibleHp) ) <= m_LatentEffectList.at(i)->GetConditionsValue())
-            //{
-            //    m_LatentEffectList.at(i)->Activate();
-            //}
-            // else
-            //{
-            //    m_LatentEffectList.at(i)->Deactivate();
-            //}
+            for (auto equip: visibleEquip)
+            {
+                visibleHP += equip->getModifier(Mod::HP);
+            }
+
+            expression = (uint8)floor(((float)m_POwner->health.hp / (float)visibleHP) * 100) >= latentEffect.GetConditionsValue();
             break;
+        }
         case LATENT::WEAPON_BROKEN:
         {
             auto  slot = latentEffect.GetSlot();

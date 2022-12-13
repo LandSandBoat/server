@@ -738,11 +738,6 @@ local overseerInvCommon =
     [32934] = { cp =  1000, lvl =  1, item = 15762 },             -- empress_band
     [32935] = { cp =  2000, lvl =  1, item = 15763 },             -- emperor_band
     [32936] = { cp =  5000, lvl =  1, item = 28540 },             -- warp_ring
-    -- [32937] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_TENZENS_ALTER_EGO },
-    -- [32938] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_RAHALS_ALTER_EGO },
-    -- [32939] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_KUKKIS_ALTER_EGO },
-    -- [32941] = { cp = 20000, lvl =  1, item = xi.items.REFINED_CHAIR_SET, rank = 10 },
-    -- [32942] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_MAKKIS_ALTER_EGO },
 }
 
 local overseerInvNation =
@@ -1118,11 +1113,13 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                     player:setCharVar("CONQUEST_RING_RECHARGE", getConquestTally())
                     player:showText(npc, mOffset + 58, item, ring.cp, ring.charges) -- "Your ring is now fully recharged."
                 else
+                    player:tradeComplete(false)
                     player:showText(npc, mOffset + 55, item, ring.cp) -- "You do not have the required conquest points to recharge."
                 end
             else
                 -- TODO: Verify that message is retail correct.
                 -- This gives feedback on a failure at least, and is grouped with the recharge messages.  Confident enough for a commit.
+                player:tradeComplete(false)
                 player:showText(npc, mOffset + 56, item) -- "Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.
             end
         end

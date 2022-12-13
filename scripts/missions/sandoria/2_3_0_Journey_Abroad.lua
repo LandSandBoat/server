@@ -118,12 +118,7 @@ mission.sections =
                     if missionStatus == 11 then
                         return mission:progressEvent(507)
                     elseif missionStatus == 0 then
-                        local needsHalverTrust =
-                            (not player:hasSpell(972) and
-                            not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO)) and
-                            xi.settings.main.ENABLE_ROV == 1
-
-                        return mission:progressEvent(505, { [7] = needsHalverTrust })
+                        return mission:progressEvent(505)
                     else
                         return mission:progressEvent(532)
                     end
@@ -135,14 +130,6 @@ mission.sections =
                 [505] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
-
-                    if
-                        not player:hasSpell(972) and
-                        not player:findItem(xi.items.CIPHER_OF_HALVERS_ALTER_EGO) and
-                        xi.settings.main.ENABLE_ROV == 1
-                    then
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_HALVERS_ALTER_EGO)
-                    end
                 end,
 
                 [507] = function(player, csid, option, npc)

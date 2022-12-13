@@ -14,21 +14,23 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
-    local damage = (5 * pet:getMainLvl()) + 10 -- https://ffxiclopedia.fandom.com/wiki/Nether_Blast | http://wiki.ffo.jp/html/4045.html
-    local dmgmod = 1
-    local ignoreres = true
-    local element = xi.magic.ele.DARK
-    local dmgtype = xi.damageType.DARK
-    local shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
-    local tpbonus = xi.mobskills.magicalTpBonus.NO_EFFECT
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
+    local params = {}
+    params.ftp000 = 5 params.ftp150 = 5 params.ftp300 = 5
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.element = xi.magic.ele.DARK
+    params.includemab = true
+    params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
+    params.ignoreStateLock = true
+    params.breathe = true
+    params.netherBlast = true
 
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, element, dmgmod, tpbonus, shadows, ignoreres)
-    damage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.BREATH, dmgtype, 1)
-    target:takeDamage(damage, pet, xi.attackType.BREATH, dmgtype)
-    target:updateEnmityFromDamage(pet, damage)
+    local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
-    return damage
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(totaldamage, pet, xi.attackType.BREATH, xi.damageType.DARK)
+
+    return totaldamage
 end
 
 return abilityObject

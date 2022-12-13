@@ -14,9 +14,8 @@ end
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
         xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 1)
-    else
-        player:startEvent(975)
     end
+    player:startEvent(975)
 end
 
 entity.onEventUpdate = function(player, csid, option)

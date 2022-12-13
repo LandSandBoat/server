@@ -2653,12 +2653,20 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
+            auto ipp = zoneutils::GetZoneIPP(zoneid);
+            if (ipp == 0)
+            {
+                ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, zoneid));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                return;
+            }
+
             PChar->loc.destination = zoneid;
             PChar->status          = STATUS_TYPE::DISAPPEAR;
             PChar->loc.boundary    = 0;
             PChar->m_moghouseID    = 0;
             PChar->clearPacketList();
-            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+            charutils::SendToZone(PChar, 2, ipp);
         }
         else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
@@ -4106,15 +4114,16 @@ void CLuaBaseEntity::confirmTrade()
 
 /************************************************************************
  *  Function: tradeComplete()
- *  Purpose : Completes trade and removes all items in trade container
+ *  Purpose : Completes trade and removes all items in trade container (unless false is passed as parameter)
  *  Example : player:tradeComplete()
  ************************************************************************/
 
-void CLuaBaseEntity::tradeComplete()
+void CLuaBaseEntity::tradeComplete(sol::object const& shouldTakeItems)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    bool  takeItems = (shouldTakeItems != sol::lua_nil) ? shouldTakeItems.as<bool>() : true;
+    auto* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
@@ -4126,7 +4135,10 @@ void CLuaBaseEntity::tradeComplete()
             if (PItem)
             {
                 PItem->setReserve(0);
-                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                if (takeItems)
+                {
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                }
             }
         }
     }
@@ -12440,14 +12452,14 @@ auto CLuaBaseEntity::getWSSkillchainProp() -> std::tuple<uint8, uint8, uint8>
  ************************************************************************/
 
 int32 CLuaBaseEntity::takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
-                                            float tpMultiplier, uint16 bonusTP, float targetTPMultiplier)
+                                            float tpMultiplier, uint16 bonusTP, float targetTPMultiplier, bool isMagicWS)
 {
     auto*       PChar      = static_cast<CCharEntity*>(attacker->m_PBaseEntity);
     ATTACK_TYPE attackType = static_cast<ATTACK_TYPE>(atkType);
     DAMAGE_TYPE damageType = static_cast<DAMAGE_TYPE>(dmgType);
 
     return battleutils::TakeWeaponskillDamage(PChar, static_cast<CBattleEntity*>(m_PBaseEntity), damage, attackType, damageType, slot,
-                                              primary, tpMultiplier, bonusTP, targetTPMultiplier);
+                                              primary, tpMultiplier, bonusTP, targetTPMultiplier, isMagicWS);
 }
 
 /************************************************************************
@@ -15527,6 +15539,15 @@ uint8 CLuaBaseEntity::getMannequinPose(uint16 itemID)
     return 0;
 }
 
+void CLuaBaseEntity::setWallhackAllowed(bool allowed)
+{
+    TracyZoneScoped;
+
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr || m_PBaseEntity->objtype == TYPE_PC);
+
+    m_PBaseEntity->m_ignoreWallhack = !allowed;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -16349,6 +16370,7 @@ void CLuaBaseEntity::Register()
     // Mannequins
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
     SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
+    SOL_REGISTER("setWallhackAllowed", CLuaBaseEntity::setWallhackAllowed);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

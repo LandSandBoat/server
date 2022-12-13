@@ -17,8 +17,10 @@ end
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    xi.mob.nmTODPersistCache(zone, ID.mob.HIGHLANDER_LIZARD)
-    xi.mob.nmTODPersistCache(zone, ID.mob.GHILLIE_DHU)
+    if xi.settings.main.ENABLE_WOTG then
+        xi.mob.nmTODPersistCache(zone, ID.mob.HIGHLANDER_LIZARD)
+        xi.mob.nmTODPersistCache(zone, ID.mob.GHILLIE_DHU)
+    end
 
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)

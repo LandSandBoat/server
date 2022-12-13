@@ -233,7 +233,7 @@ public:
     void  changeContainerSize(uint8 locationID, int8 newSize); // Increase/Decreases container size
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
-    void  tradeComplete();                                     // Complete trade with an npc
+    void  tradeComplete(sol::object const& shouldTakeItems);   // Complete trade with an npc
     auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping
@@ -697,7 +697,7 @@ public:
     auto   getWSSkillchainProp() -> std::tuple<uint8, uint8, uint8>; // returns weapon skill's skillchain properties (up to 3)
 
     int32 takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
-                                float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
+                                float tpMultiplier, uint16 bonusTP, float targetTPMultiplier, bool isMagicWS = false);
 
     int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
     int32 takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage, uint8 atkType, uint8 dmgType);
@@ -879,6 +879,7 @@ public:
 
     uint8 getMannequinPose(uint16 itemID);
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
+    void  setWallhackAllowed(bool allowed); // Sets whether an entity should ignore wallhack flags in pathfind.
 
     static void Register();
 };

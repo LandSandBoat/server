@@ -493,6 +493,7 @@ struct zoneLine_t
     uint32     m_zoneLineID;
     uint16     m_toZone;
     position_t m_toPos;
+    ZONE_TYPE  m_toZoneType;
 };
 
 class CBasicPacket;

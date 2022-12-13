@@ -11,11 +11,6 @@ local entity = {}
 -- 1) Make the diremites in the pit all aggro said player that falls into region. Should have a respawn time of 10 seconds.
 -- 2) Diremites also shouldnt follow you back to the fight area if you make it there. Should despawn and respawn instantly if all players
 --    make it back to the Diabolos floor area.
--- 3) ANIMATION Packet ids for instance 2 and 3 are wrong (needs guesswork). Sounds working.
---    Update 2018-01-02 these no longer seem to work for any instance. neither animation nor sound.
-
--- TODO: Diabolos Prime
--- Note: Diabolos Prime fight drops all tiles at once.
 
 entity.onMobSpawn = function(mob)
     local dBase = ID.mob.DIABOLOS_OFFSET
@@ -82,7 +77,7 @@ entity.onMobFight = function(mob, target)
                 SendEntityVisualPacket(tileId, animationSet[area + 1], 4)     -- Animation for floor dropping
                 SendEntityVisualPacket(tileId, "s123", 4)          -- Tile dropping sound
 
-                tile:timer(2750, function(t)                 -- 2.7s second delay (ish)
+                tile:timer(3100, function(t)                 -- 3.1s second delay (ish)
                     t:updateToEntireZone(xi.status.NORMAL, xi.anim.OPEN_DOOR)       -- Floor opens
                 end)
             end

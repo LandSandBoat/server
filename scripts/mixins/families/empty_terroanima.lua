@@ -23,7 +23,7 @@ local function doTerrorRun(mob)
                 mob:setAutoAttackEnabled(false)
                 mob:setMobAbilityEnabled(false)
                 mob:setMagicCastingEnabled(false)
-                local pos = mob:getPos()
+                local pos = GetPlayerByID(mob:getLocalVar("EmptyTerrorUser")):getPos()
                 mob:pathTo(pos.x + math.random(-5, 5), pos.y, pos.z + math.random(-5, 5), 9) -- Pathflags = 9 (xi.pathflag.run, xi.pathflag.scripted)
             end
         end

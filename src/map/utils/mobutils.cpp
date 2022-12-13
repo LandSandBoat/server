@@ -63,9 +63,9 @@ namespace mobutils
         {
             bonus = 5;
         }
-        else if (lvl == 1)
+        if (lvl == 1)
         {
-            bonus = -1;
+            bonus = 0;
         }
 
         damage = lvl + bonus;

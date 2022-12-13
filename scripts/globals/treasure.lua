@@ -37,6 +37,21 @@ local thiefKeyInfo =
     [keyType.LIVING_KEY  ] = { xi.items.LIVING_KEY,          0.15 },
 }
 
+local function getIndexAtPosition(targetChest, typeId, zoneId)
+    local treasurePoints = xi.treasure.treasureInfo[typeId].zone[zoneId].points
+    local targetChestPos = targetChest:getPos()
+    for chestId, chestCoords in pairs(treasurePoints) do
+        if
+            math.abs(tonumber(chestCoords[1]) - tonumber(targetChestPos['x']) ) < 1 and
+            math.abs(tonumber(chestCoords[3]) - tonumber(targetChestPos['z']) ) < 1
+        then
+            return chestId
+        end
+    end
+
+    return 0
+end
+
 xi.treasure.treasureInfo =
 {
     [xi.treasure.type.CHEST] =
@@ -92,16 +107,33 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1061,
+                misc =
+                {
+                    {
+                        test = function(player)
+                            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS) == QUEST_ACCEPTED and
+                                not player:hasKeyItem(xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
+                        end,
+
+                        code = function(player, npc)
+                            player:setCharVar(string.format("Quest[%s][%s]Chest", xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS), getIndexAtPosition(npc, xi.treasure.type.CHEST, xi.zone.SACRARIUM))
+                            npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
+                        end,
+                    },
+                },
                 points =
                 {
-                    { 179.709,   -7.693,  -97.007, 192 },
-                    { 111.451,   -2.000, -100.159,  65 },
-                    {   8.974,   -2.179, -133.075, 190 },
-                    { 260.391,    0.000,   21.487,  60 },
-                    { 177.600,    8.310,  100.000, 130 },
-                    {  89.034,   -2.000,   99.248, 190 },
-                    {  88.223,   -2.000,  -36.017,   0 },
-                    {  31.021,   -2.000,   99.013, 190 },
+                    -- These points are sequenced to align to the indeces required for the quest
+                    -- Paradise, Salvation, and Maps
+                    -- If you change the order or locations of these, the quest may not function as intended
+                    {  31.021, -2.000,   99.013, 190 }, -- (F-5)
+                    {  89.034, -2.000,   99.248, 190 }, -- (H-5)
+                    {  88.223, -2.000,  -36.017,   0 }, -- (H-9)
+                    { 177.600,  8.310,  100.000, 130 }, -- (J-6)
+                    { 179.709, -7.693,  -97.007, 192 }, -- (J-10)
+                    { 260.391,  0.000,   21.487,  60 }, -- (L-8)
+                    { 111.451, -2.000, -100.159,  65 }, -- (H-11)
+                    {   8.974, -2.179, -133.075, 190 }, -- (F-11)
                 },
                 gil = { 0.929, 5100, 9900 },
                 gem = { 0.071, 790, 799, 815, 788, 796 },
@@ -1619,7 +1651,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
             if v.test(player) then
                 player:messageSpecial(msgBase)
                 player:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
-                v.code(player)
+                v.code(player, npc)
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
                 return

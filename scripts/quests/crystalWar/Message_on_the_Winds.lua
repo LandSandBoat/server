@@ -27,6 +27,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
+                xi.settings.main.ENABLE_WOTG and
                 player:getMainLvl() >= 20
         end,
 

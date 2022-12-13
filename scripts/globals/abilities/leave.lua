@@ -10,6 +10,10 @@ require("scripts/globals/status")
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getPet() == nil then
+        return xi.msg.basic.REQUIRES_A_PET, 0
+    end
+
     return 0, 0
 end
 

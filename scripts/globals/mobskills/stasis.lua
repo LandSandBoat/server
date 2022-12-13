@@ -18,18 +18,20 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local shadows = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    -- local dmg = xi.mobskills.mobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
+    local numhits = 1
+    local accmod = 1
+    local dmgmod = 2
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 1.0, 1.25, 1.5)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+
     local typeEffect = xi.effect.PARALYSIS
 
     mob:resetEnmity(target)
 
-    if xi.mobskills.mobPhysicalHit(skill) then
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 60))
-        return typeEffect
-    end
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 40, 0, 60)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
-    return shadows
+    return dmg
 end
 
 return mobskillObject

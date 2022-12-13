@@ -66,7 +66,7 @@ INSERT INTO `mob_skills` VALUES (42,11,'savage_blade',0,7.0,2000,0,4,0,0,0,12,4,
 INSERT INTO `mob_skills` VALUES (49,107,'power_slash',0,7.0,2000,500,4,0,0,0,7,0,0);
 INSERT INTO `mob_skills` VALUES (50,108,'frostbite',0,7.0,2000,500,4,0,0,0,7,0,0);
 INSERT INTO `mob_skills` VALUES (51,109,'freezebite',0,7.0,2000,500,4,0,0,0,5,0,0);
--- INSERT INTO `mob_skills` VALUES (52,110,'shockwave',0,10,2000,500,4,0,0,0,1,0,0);
+INSERT INTO `mob_skills` VALUES (52,110,'shockwave',0,10,2000,500,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (53,111,'crescent_moon',0,7.0,2000,500,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (54,112,'sickle_moon',0,7.0,2000,500,4,0,0,0,4,8,0);
 INSERT INTO `mob_skills` VALUES (56,114,'ground_strike',0,7.0,2000,500,4,0,0,0,12,10,0);
@@ -1424,7 +1424,7 @@ INSERT INTO `mob_skills` VALUES (1522,1082,'energy_screen',0,10,2000,1500,1,0,0,
 INSERT INTO `mob_skills` VALUES (1523,1083,'mana_screen',0,10,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1524,1084,'dissipation',2,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1525,1090,'guided_missile_ii',2,5.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1526,1085,'colossal_blow',0,10.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1526,1085,'colossal_blow',0,10.0,2000,3000,4,0,0,10,0,0,0);
 INSERT INTO `mob_skills` VALUES (1527,1086,'laser_shower',4,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1528,1087,'floodlight',2,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1529,1089,'hyper_pulse',1,10.0,2000,1500,4,0,0,0,0,0,0); -- Proto-Omega

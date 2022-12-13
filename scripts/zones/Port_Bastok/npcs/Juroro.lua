@@ -55,6 +55,8 @@ entity.onTrigger = function(player, npc)
         end  -- Ability to summon Titan
 
         player:startEvent(252, 0, xi.ki.TUNING_FORK_OF_EARTH, 1, 0, numitem)
+    else
+        player:startEvent(253)
     end
 end
 
