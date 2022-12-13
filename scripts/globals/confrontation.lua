@@ -113,10 +113,12 @@ xi.confrontation.check = function(lookupKey, setupTimer)
             end
         end
 
-        -- Despawn Mobs
-        for _, mob in ipairs(mobs) do
-            if mob:isSpawned() then
-                DespawnMob(mob:getID())
+        -- if lost then despawn mobs, if won then can let dead mobs despawn normally
+        if didLose then
+            for _, mob in ipairs(mobs) do
+                if mob:isSpawned() then
+                    DespawnMob(mob:getID())
+                end
             end
         end
 

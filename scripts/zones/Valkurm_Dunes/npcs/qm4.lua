@@ -130,8 +130,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- for some reason the shimmering might not be showing up
         shimmering:setStatus(xi.status.NORMAL)
 
+        local playerID = player:getID()
         -- start range checking for the range message
-        rangeChecking(npc, player:getID(), 31000, true, 0)
+        rangeChecking(npc, playerID, 31000, true, 0)
 
         -- need to use the qm4 npc for showing text because the taru has a blank name and need a ???
         panictaru:timer(3000 , function(taru) taru:sendNpcEmote(shimmering, xi.emote.POINT, xi.emoteMode.MOTION) npc:showText(npc, ID.text.SHIMMERY_POINT) end)
@@ -142,21 +143,20 @@ entity.onEventFinish = function(player, csid, option, npc)
         panictaru:timer(45000, function(taru) taru:entityAnimationPacket("dead") taru:messageText(taru, ID.text.CRY_OF_ANGUISH, false) end)
         panictaru:timer(50000, function(taru) taru:setStatus(xi.status.DISAPPEAR) taru:entityAnimationPacket("stnd") end)
         npc:timer(50000,
-        function(playerArg, npcArg)
+        function(npcArg)
+            local spawner = GetPlayerByID(playerID)
             -- make sure player is still here, in the zone, and has correct level restriction
             if
-                player and
-                player:getZoneID() == xi.zone.VALKURM_DUNES and
-                player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) and
-                player:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20
+                spawner and
+                spawner:getZoneID() == xi.zone.VALKURM_DUNES and
+                spawner:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) and
+                spawner:getStatusEffect(xi.effect.LEVEL_RESTRICTION):getPower() == 20
             then
 
-                xi.confrontation.start(player, npc, mobs,
+                xi.confrontation.start(spawner, npc, mobs,
                 -- if won then cleanup is done by barnacled box when opened
-                function(member)
-                    -- allow box to be opened (maybe do not need this here as open is also set when last mob dies)
-                    barnacle:setLocalVar("open", 0)
-                end,
+                -- so do not need to pass in a function
+                false,
                 -- if lost then do cleanup here for each member
                 function(member)
                     -- eventually move shimmering parts to global confrontation cleanup function
