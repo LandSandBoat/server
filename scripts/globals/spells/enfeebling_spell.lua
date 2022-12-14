@@ -46,8 +46,37 @@ local pTable =
     [s.SLOW        ] = { e.SLOW,     m.MND,     m.SLOWRES,    m.SLOW_MEVA,        0,   0,      180,      2,          0, true,      true    },
 }
 
+-- Determine if target mob is immune to a status effect.
+xi.spells.enfeebling.checkInnateImmunity = function(target, spellEffect)
+    local immunityTable =
+    {
+        [xi.effect.SLEEP      ] = {     1 },
+        [xi.effect.GRAVITY    ] = {     2 },
+        [xi.effect.BIND       ] = {     4 },
+        [xi.effect.STUN       ] = {     8 },
+        [xi.effect.SILENCE    ] = {    16 },
+        [xi.effect.PARALYZE   ] = {    32 },
+        [xi.effect.BLIND      ] = {    64 },
+        [xi.effect.SLOW       ] = {   128 },
+        [xi.effect.POISON     ] = {   256 },
+        [xi.effect.ELEGY      ] = {   512 },
+        [xi.effect.REQUIEM    ] = {  1024 },
+        [xi.effect.LIGHT_SLEEP] = {  2048 },
+        [xi.effect.DARK_SLEEP ] = {  4096 },
+        [xi.effect.ASPIR      ] = {  8192 },
+        [xi.effect.TERROR     ] = { 16384 },
+        [xi.effect.DISPEL     ] = { 32768 },
+    }
+
+    if target:hasImmunity(immunityTable[spellEffect][1]) then
+        return true
+    end
+
+    return false
+end
+
 -- Calculates if target has resistance traits or gear mods that can nullify effects.
-xi.spells.enfeebling.calculateTraitTrigger = function(caster, target, spellId)
+xi.spells.enfeebling.checkTraitTrigger = function(caster, target, spellId)
     local specificModPower = target:getMod(pTable[spellId][3])
     local globalModPower   = target:getMod(xi.mod.STATUSRES)
     local totalPower       = specificModPower + globalModPower
@@ -161,8 +190,20 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local spellEffect    = pTable[spellId][1]
 
     ------------------------------
-    -- STEP 1: Check trait nullification.
+    -- STEP 1: Check spell nullification.
     ------------------------------
+    -- Check innate immunity
+    if target:isMob() then
+        local isInmune = xi.spells.enfeebling.checkInnateImmunity(target, spellEffect)
+
+        if isInmune then
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST_2) -- TODO: Confirm correct message.
+
+            return spellEffect
+        end
+    end
+
+    -- Check trait nullification trigger.
     local traitTrigger = xi.spells.enfeebling.calculateTraitTrigger(caster, target, spellId)
 
     if traitTrigger then
