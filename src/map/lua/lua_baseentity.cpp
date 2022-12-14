@@ -4810,6 +4810,7 @@ void CLuaBaseEntity::setCostume2(uint16 costume)
 
     if (PChar->m_Monstrosity != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
     {
+        PChar->setCharVar("Monstrosity", costume);
         PChar->m_Monstrosity = costume;
         PChar->updatemask |= UPDATE_LOOK;
         PChar->pushPacket(new CCharAppearancePacket(PChar));
