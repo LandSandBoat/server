@@ -41,9 +41,11 @@
 #include "battleutils.h"
 #include "blueutils.h"
 #include "charutils.h"
+#include "../status_effect_container.h"
 
 namespace blueutils
 {
+
     void SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool addingSpell)
     {
         // sanity check
@@ -71,6 +73,11 @@ namespace blueutils
                         ShowWarning("SetBlueSpell: Player %s trying to set spell ID %u they don't have! ", PChar->GetName(), spellID);
                     }
                 }
+
+                // give player Blue Magic Lock for 1 minute
+                CStatusEffect* effect = new CStatusEffect(EFFECT_BLUE_MAGIC_LOCK, EFFECT_OMERTA, 1, 0, 60);
+                PChar->StatusEffectContainer->AddStatusEffect(effect);
+                
                 SaveSetSpells(PChar);
             }
         }

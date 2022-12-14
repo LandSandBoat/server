@@ -28,7 +28,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.tpmod = TPMOD_CRITICAL
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.scattr = SC_COMPRESSION
+    params.diff = 0
+    params.bonus = -50 -- 50 magic accuracy penalty
     params.numhits = 1
     params.multiplier = 1.5
     params.tp150 = 1.5
@@ -43,8 +46,15 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 1.0
     params.chr_wsc = 1.0
 
-    local damage = blueDoPhysicalSpell(caster, target, spell, params)
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    local damage = 1000
+    local resist = applyResistance(caster, target, spell, params)
+    if resist == 1 then
+        local targets = spell:getTotalTargets()
+        damage = damage / targets
+        damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    else
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+    end
 
     return damage
 end

@@ -348,8 +348,7 @@ function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
     -- determine base damage
     local dmg = params.dmgMultiplier * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
     if softCap > 0 then dmg = utils.clamp(dmg,0,softCap) end
-    local resist = applyResistance(caster, target, spell, params)
-    dmg = dmg * resist
+    dmg = dmg * applyResistance(caster, target, spell, params)
     dmg = addBonuses(caster, spell, target, dmg)
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
@@ -360,11 +359,11 @@ function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
         -- only drain what the mob has
         if mpDrain then
             dmg = dmg * xi.settings.main.BLUE_POWER
-            dmg = utils.clamp(dmg,0,target:getMP())
+            dmg = utils.clamp(dmg, 0, target:getMP())
             target:delMP(dmg)
             caster:addMP(dmg)
         else
-            dmg = utils.clamp(dmg,0,target:getHP())
+            dmg = utils.clamp(dmg, 0, target:getHP())
             dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
             caster:addHP(dmg)
         end
@@ -431,7 +430,9 @@ end
 -- Finalize HP damage after a spell
 function blueFinalizeDamage(caster, target, spell, dmg, params)
 
-    if dmg < 0 then dmg = 0 end
+    if dmg < 0 then
+        dmg = 0
+    end
     dmg = dmg * xi.settings.main.BLUE_POWER
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
@@ -450,7 +451,9 @@ function blueFinalizeDamage(caster, target, spell, dmg, params)
     end
 
     -- handle Phalanx
-    if dmg > 0 then dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999) end
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
 
     -- handle stoneskin
     dmg = utils.stoneskin(target, dmg)
@@ -541,43 +544,6 @@ function blueDoMagicalSpellAddedEffect(caster, target, spell, params, power, tic
 
 end
 
-
--- Function to stagger duration of effects by using the resistance to change the value
--- Intend to render this obsolete, do a find once you've gone through all spells
-function getBlueEffectDuration(caster, resist, effect)
-    local duration = 0
-
-    if resist == 0.125 then
-        resist = 1
-    elseif resist == 0.25 then
-        resist = 2
-    elseif resist == 0.5 then
-        resist = 3
-    else
-        resist = 4
-    end
-
-    if effect == xi.effect.BIND then
-        duration = math.random(0, 5) + resist * 5
-    elseif effect == xi.effect.STUN then
-        duration = math.random(2, 3) + resist
-    elseif effect == xi.effect.WEIGHT then
-        duration = math.random(20, 24) + resist * 9 -- 20-24
-    elseif effect == xi.effect.PARALYSIS then
-        duration = math.random(50, 60) + resist * 15 -- 50- 60
-    elseif effect == xi.effect.SLOW then
-        duration = math.random(60, 120) + resist * 15 -- 60- 120 -- Needs confirmation but capped max duration based on White Magic Spell Slow
-    elseif effect == xi.effect.SILENCE then
-        duration = math.random(60, 180) + resist * 15 -- 60- 180 -- Needs confirmation but capped max duration based on White Magic Spell Silence
-    elseif effect == xi.effect.POISON then
-        duration = math.random(20, 30) + resist * 9 -- 20-30 -- based on magic spell poison
-    else
-        duration = math.random(10,30) + resist * 8
-    end
-
-    return duration
-end
-
 --[[
 
 +-------+
@@ -654,8 +620,12 @@ changes in blu_fixes branch
     - Added BREATH_DMG_DEALT mod.
     - Updated Mirage Keffiyeh/Mirage Keffiyeh +1/Saurian Helm to have BREATH_DMG_DEALT +10 mods.
 
+- Supernova changes:
+    - Added a BLUE_MAGIC_LOCK status effect (with Omerta name/icon).
+    - Induces BLUE_MAGIC_LOCK for 1 minute after changing spell set.
+
 - TODOs:
-    - "Damage/Accuracy/Critical Hit Rate/Effect Duration varies with TP" is not implemented.
+    - "Damage / Accuracy / Critical Hit Rate / Effect Duration varies with TP" is not implemented.
     - Missed physical spells should not be 0 dmg, but there's currently no way to make spells "miss".
     - Sneak Attack / Trick Attack in combination with spells doesn't work, but it should (but not for all spells).
     - Add 75+ spells. I didn't bother personally since we're on a 75 server and I have no knowledge of these spells at all.
@@ -684,7 +654,7 @@ changes in blu_fixes branch
         - duration: a .5 resist halves duration, any lower and the spell doesn't hit
         - macc: macc / blue magic skill / INT
     - Breath spells
-        - dmg: HP / level / elemental resistance / monster correlation (dmg is not influenced by mab/mdb or weather/day bonuses)
+        - dmg: HP / level / elemental resistance / monster correlation / angle (dmg is not influenced by mab/mdb or weather/day bonuses)
         - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
     - Drain spells
         - dmg: blue magic skill
