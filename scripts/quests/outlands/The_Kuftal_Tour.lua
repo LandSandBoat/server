@@ -27,7 +27,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.OUTLANDS) >= 3
+            player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 3
         end,
 
         [xi.zone.RABAO] =
