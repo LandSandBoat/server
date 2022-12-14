@@ -78,6 +78,18 @@ struct LootItem_t
 
 typedef std::vector<LootItem_t> LootList_t;
 
+struct LootContainer
+{
+    LootContainer(DropList_t* dropList);
+    DropList_t drops;
+
+    void ForEachGroup(const std::function<void(const DropGroup_t&)>& func);
+    void ForEachItem(const std::function<void(const DropItem_t&)>& func);
+
+private:
+    DropList_t* dropList;
+};
+
 /************************************************************************
  *                                                                       *
  *  The namespace for working with a global lists of items               *

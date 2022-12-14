@@ -32,6 +32,7 @@
 #include "../conquest_system.h"
 #include "../enmity_container.h"
 #include "../entities/charentity.h"
+#include "../lua/lua_loot.h"
 #include "../mob_modifier.h"
 #include "../mob_spell_container.h"
 #include "../mob_spell_list.h"
@@ -1263,20 +1264,19 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     // Limit number of items that can drop to the treasure pool size
     uint8 dropCount = 0;
 
-    // Make a temporary copy of the global droplist entry for this drop id
-    // so we can modify it without modifying the global lists
-    DropList_t DropList;
-    if (auto droplistPtr = itemutils::GetDropList(m_DropID))
-    {
-        DropList = *droplistPtr;
-    }
+    DropList_t* dropList = itemutils::GetDropList(m_DropID);
 
-    if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
+    if (!getMobMod(MOBMOD_NO_DROPS) && dropList != nullptr && (!dropList->Items.empty() || !dropList->Groups.empty() || PAI->EventHandler.hasListener("ITEM_DROPS")))
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
         int16 maxRolls = 1;
 
-        for (const DropGroup_t& group : DropList.Groups)
+        LootContainer loot(dropList);
+
+        PAI->EventHandler.triggerListener("ITEM_DROPS", CLuaBaseEntity(this), CLuaLootContainer(&loot));
+
+        // clang-format off
+        loot.ForEachGroup([&](const DropGroup_t& group)
         {
             uint16 total = 0;
             for (const DropItem_t& item : group.Items)
@@ -1309,9 +1309,9 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
                 }
             }
-        }
+        });
 
-        for (const DropItem_t& item : DropList.Items)
+        loot.ForEachItem([&](const DropItem_t& item)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
@@ -1325,7 +1325,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
                 }
             }
-        }
+        });
+        // clang-format on
     }
 
     ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetType();
