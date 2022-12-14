@@ -72,6 +72,9 @@ xi.settings.main =
     MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1,
     MAGIAN_TRIALS_TRADE_MULTIPLIER   = 1,
 
+    -- Explorer Moogles
+    ENABLE_EXPLORERMOOGLE = false,
+
     -- VoidWalker
     ENABLE_VOIDWALKER = 0,
 
