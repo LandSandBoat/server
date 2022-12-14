@@ -527,7 +527,7 @@ local function checkReqs(player, npc, bfid, registrant)
     if battlefield then
         return battlefield:checkRequirements(player, npc, registrant)
     end
-    local mi        = xi.mission.id
+
     local npcId     = npc:getID()
     local mainJob   = player:getMainJob()
     local mainLevel = player:getMainLvl()
@@ -1465,7 +1465,7 @@ local function checkSkip(player, bfid)
     if battlefield then
         return battlefield:checkSkipCutscene(player)
     end
-    local mi               = xi.mission.id
+
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
