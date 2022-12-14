@@ -21,13 +21,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local effects =
     {
-        { xi.effect.STR_DOWN, 10, 3, 60 },
-        { xi.effect.DEX_DOWN, 10, 3, 60 },
-        { xi.effect.VIT_DOWN, 10, 3, 60 },
-        { xi.effect.AGI_DOWN, 10, 3, 60 },
-        { xi.effect.INT_DOWN, 10, 3, 60 },
-        { xi.effect.MND_DOWN, 10, 3, 60 },
-        { xi.effect.CHR_DOWN, 10, 3, 60 }
+        { xi.effect.STR_DOWN, 10, 10, 180 },
+        { xi.effect.DEX_DOWN, 10, 10, 180 },
+        { xi.effect.VIT_DOWN, 10, 10, 180 },
+        { xi.effect.AGI_DOWN, 10, 10, 180 },
+        { xi.effect.INT_DOWN, 10, 10, 180 },
+        { xi.effect.MND_DOWN, 10, 10, 180 },
+        { xi.effect.CHR_DOWN, 10, 10, 180 }
     }
 
     for _, eff in pairs(effects) do

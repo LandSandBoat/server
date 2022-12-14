@@ -19,12 +19,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.CURSE_I
-    local noResist = 1
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, math.random(900, 2280)))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 480, noResist))
-
-    return typeEffect
+    return xi.effect.CURSE_I
 end
 
 return mobskillObject

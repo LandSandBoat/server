@@ -18,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 25
+    local power = mob:getStat(xi.mod.EVA) * 0.5
     local duration = 180
 
     local typeEffect = xi.effect.EVASION_BOOST

@@ -40,7 +40,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     for i = 1, 7 do
         if math.random(0, 100) < 40 then
-            skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, attributesDown[i], 10, 3, 60))
+            skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, attributesDown[i], 14, 3, 120))
             drained = drained + 1
         end
     end
