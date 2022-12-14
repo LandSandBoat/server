@@ -18,21 +18,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.POISON
-    local duration = 60
-    local power = mob:getMainLvl() / 3
-
-    if math.random() <= 0.5 then
-        -- stun
-        typeEffect = xi.effect.STUN
-        duration = 10
-        power = 1
-    end
-
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
-
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 10, 3, 300))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 10))
     mob:resetEnmity(target)
-    return typeEffect
+
+    return xi.effect.POISON, xi.effect.STUN
 end
 
 return mobskillObject

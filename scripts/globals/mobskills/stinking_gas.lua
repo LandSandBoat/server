@@ -17,11 +17,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.VIT_DOWN
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.VIT_DOWN, 10, 15, 180))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 3, 120))
-
-    return typeEffect
+    return xi.effect.VIT_DOWN
 end
 
 return mobskillObject

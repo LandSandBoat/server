@@ -17,7 +17,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 3, 15)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 3, math.random(30, 45))
 
     local dmgmod = 2
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)

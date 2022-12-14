@@ -15,10 +15,10 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local slow = xi.effect.SLOW
     local gravity = xi.effect.WEIGHT
-    local duration = math.random(110, 130)
+    local duration = math.random(120, 180)
 
-    xi.mobskills.mobStatusEffectMove(mob, target, gravity, 25, 0, duration)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, slow, 2500, 0, duration))
+    xi.mobskills.mobStatusEffectMove(mob, target, gravity, 50, 0, duration)
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, slow, 5000, 0, duration))
 
     return slow
 end

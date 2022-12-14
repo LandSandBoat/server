@@ -18,11 +18,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.SILENCE
+    local duration = 90
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 45))
+    if mob:getMainLvl() < 10 then
+        duration = duration / 2
+    end
 
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, duration))
+
+    return xi.effect.SILENCE
 end
 
 return mobskillObject

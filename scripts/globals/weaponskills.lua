@@ -1083,7 +1083,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local atkmulti = 0
 
     if params.atk150 ~= nil then -- Use mob fTP
-        atkmulti = 1 -- Temp fix in prep for re-write. Always set multi to 1.
+        atkmulti = xi.weaponskills.fTP(tp, params.atk000, params.atk150, params.atk300) -- Calculates attack modifier for mobs
     else -- Use player fTP to scale the attack modifier
         atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
     end

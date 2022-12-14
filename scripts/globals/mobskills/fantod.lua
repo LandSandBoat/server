@@ -13,9 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BOOST
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 60, 0, 180))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BOOST, 300, 0, 180))
+
+    return xi.effect.BOOST
 end
 
 return mobskillObject

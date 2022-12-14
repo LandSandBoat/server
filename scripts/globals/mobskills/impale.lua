@@ -22,7 +22,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 1.25, 1.5)
+    local attmod = 2
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 1.5, 2, 0, attmod)
     local shadows = info.hitslanded
 
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then

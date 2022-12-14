@@ -16,13 +16,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local powerFrost = mob:getMainLvl() / 5 * 0.6 + 6
-    -- Agility debuff is -33 last for 60 seconds
-    local powerAgi = 33
-    local tick = 3
-    local duration = powerAgi * tick
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FROST, powerFrost, 3, 60)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AGI_DOWN, powerAgi, tick, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AGI_DOWN, 33, 10, 60)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.ICE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

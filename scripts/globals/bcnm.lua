@@ -1025,7 +1025,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                player:getCharVar("Quest[3][86]Status") >= 2
+                player:getCharVar("Quest[3][86]Status") == 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1190,8 +1190,22 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
+        [677] = function() -- Quest: Tango with a Tracker
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+        end,
+
+        [678] = function() -- Quest: Requiem of Sin
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
+                player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
+        end,
+
         [705] = function() -- ENM: Test Your Mite
             return player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
+        end,
+
+        [737] = function() -- Quest: Return to the Depths
+            return player:getCharVar("Quest[1][78]prog") >= 9 or
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
 
         [738] = function() -- ENM: Bionic Bug
@@ -1220,6 +1234,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [865] = function() -- ENM: Pulling the Plug
             return player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
+        end,
+
+        [896] = function() -- Quest: Storms of Fate
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
+                player:getCharVar("Quest[3][86]Status") > 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1260,10 +1279,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
-                (
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-                    player:getCharVar('ApocalypseNigh') == 4
-                )
+                player:getCharVar('ApocalypseNigh') >= 3
         end,
 
         [1290] = function() -- NW Apollyon
@@ -1470,6 +1486,34 @@ local function checkSkip(player, bfid)
                 )
         end,
 
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
         [256] = function() -- ZM8: Return to Delkfutt's Tower
             return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
         end,
@@ -1553,12 +1597,11 @@ local function checkSkip(player, bfid)
         end,
 
         [677] = function() -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
         end,
 
         [678] = function() -- Quest: Requiem of Sin
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
-                player:hasKeyItem(xi.ki.LETTER_FROM_MITHRAN_TRACKERS)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
         end,
 
         [704] = function() -- PM3-5: Darkness Named
@@ -1606,13 +1649,8 @@ local function checkSkip(player, bfid)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            local stormsOfFateStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
-
-            return stormsOfFateStatus == QUEST_COMPLETED or
-                (
-                    stormsOfFateStatus == QUEST_ACCEPTED and
-                    player:getCharVar("Quest[3][86]Status") > 2
-                )
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
+                player:getCharVar("Quest[3][86]Status") > 2
         end,
 
         [960] = function() -- PM2-5: Ancient Vows
@@ -1647,8 +1685,12 @@ local function checkSkip(player, bfid)
                 )
         end,
 
-        [1057] = function() -- Apocalypse Nigh
-            return player:getCharVar("Quest[3][89]Prog") > 3
+        [1057] = function() -- Quest: Apocalypse Nigh
+            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
+                (
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+                    player:getCharVar('ApocalypseNigh') > 3
+                )
         end,
 
         [2721] = function() -- WOTG07: Purple, The New Black

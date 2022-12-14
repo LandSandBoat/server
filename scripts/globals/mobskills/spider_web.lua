@@ -13,12 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.SLOW
-    local power = 3000
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 5000, 0, math.random(120, 180)))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, 90))
-
-    return typeEffect
+    return xi.effect.SLOW
 end
 
 return mobskillObject

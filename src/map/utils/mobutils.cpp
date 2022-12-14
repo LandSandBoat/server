@@ -286,27 +286,6 @@ namespace mobutils
                     mobHP = baseMobHP + sjHP;
                 }
 
-                // Mimic HP boost traits for monks
-                if (PMob->GetMJob() == JOB_MNK)
-                {
-                    if (mLvl >= 70)
-                    {
-                        mobHP += 180;
-                    }
-                    else if (mLvl >= 55)
-                    {
-                        mobHP += 120;
-                    }
-                    else if (mLvl >= 35)
-                    {
-                        mobHP += 60;
-                    }
-                    else if (mLvl >= 15)
-                    {
-                        mobHP += 30;
-                    }
-                }
-
                 if (PMob->PMaster != nullptr)
                 {
                     mobHP *= 0.30f; // Retail captures have all pets at 30% of the mobs family of the same level
@@ -394,11 +373,6 @@ namespace mobutils
                     PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.MOB_MP_MULTIPLIER"));
                 }
             }
-
-            PMob->UpdateHealth();
-            PMob->health.tp = 0;
-            PMob->health.hp = PMob->GetMaxHP();
-            PMob->health.mp = PMob->GetMaxMP();
         }
 
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
@@ -553,6 +527,12 @@ namespace mobutils
         // add traits for sub and main
         battleutils::AddTraits(PMob, traits::GetTraits(mJob), mLvl);
         battleutils::AddTraits(PMob, traits::GetTraits(PMob->GetSJob()), PMob->GetSLevel());
+
+        // Max [HP/MP] Boost traits
+        PMob->UpdateHealth();
+        PMob->health.tp = 0;
+        PMob->health.hp = PMob->GetMaxHP();
+        PMob->health.mp = PMob->GetMaxMP();
 
         SetupJob(PMob);
         SetupRoaming(PMob);

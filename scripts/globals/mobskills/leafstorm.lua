@@ -31,14 +31,21 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
         end
 
-        return count
-    else
-        local dmgmod = 1
-        local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, 1, 1.25, 1.5)
-        local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-        target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-        return dmg
     end
+
+    local ftp100 = 1
+    local ftp200 = 1.5
+    local ftp300 = 2
+
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+        ftp100 = 5
+        ftp200 = 5
+        ftp300 = 5
+    end
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WIND, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, ftp100, ftp200, ftp300)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    return dmg
 end
 
 return mobskillObject

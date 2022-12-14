@@ -173,8 +173,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,477);
 INSERT INTO `mob_skill_lists` VALUES ('Bhoot',52,1794);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,551);
 INSERT INTO `mob_skill_lists` VALUES ('Likho',53,555);
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1235); -- hyper pulse
-INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1237); -- guided missle
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1237); -- hyper pulse
+INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1236); -- guided missle
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1238); -- target analysis
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1240); -- ion efflux
 INSERT INTO `mob_skill_lists` VALUES ('Omega',54,1241); -- rear lasers
@@ -1492,9 +1492,14 @@ INSERT INTO `mob_skill_lists` VALUES ('WarlordRojgnojOrc',334,607);
 INSERT INTO `mob_skill_lists` VALUES ('WarlordRojgnojOrc',334,608);
 INSERT INTO `mob_skill_lists` VALUES ('WarlordRojgnojOrc',334,609);
 INSERT INTO `mob_skill_lists` VALUES ('WarlordRojgnojOrc',334,1066);
-INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1028);
-INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1033);
-INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1034);
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1027); -- combo
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1028); -- tackle
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1029); -- one-inch_punch
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1031); -- spinning_attack
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1032); -- howling_fist
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1033); -- dragon_kick
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1034); -- asuran_fists
+INSERT INTO `mob_skill_lists` VALUES ('Maat',335,1036); -- maats_bash
 INSERT INTO `mob_skill_lists` VALUES ('ZM4-Tonberry',336,783);
 INSERT INTO `mob_skill_lists` VALUES ('ZM4-Tonberry',336,784);
 INSERT INTO `mob_skill_lists` VALUES ('ZM4-Tonberry',336,785);
@@ -3820,7 +3825,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,452); -- Screwdriver
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,453); -- Water Wall
 INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1198,392); -- Ultrasonics
 
-INSERT INTO `mob_skill_lists` VALUES ('Omega_Critical',1187,1236); -- pile pitch
+INSERT INTO `mob_skill_lists` VALUES ('Omega_Critical',1187,1235); -- pile pitch
 INSERT INTO `mob_skill_lists` VALUES ('Omega_Critical',1187,1239); -- discharger
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega_Standing',1188,1525); -- guided_missile_ii
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Omega_Standing',1188,1528); -- floodlight

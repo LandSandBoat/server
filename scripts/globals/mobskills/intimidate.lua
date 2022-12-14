@@ -13,10 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.SLOW
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SLOW, 2500, 0, 120))
 
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1250, 0, 120))
-    return typeEffect
+    return xi.effect.SLOW
 end
 
 return mobskillObject

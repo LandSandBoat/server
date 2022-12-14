@@ -25,7 +25,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     local typeEffect = xi.effect.PARALYSIS
-
     mob:resetEnmity(target)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 40, 0, 60)

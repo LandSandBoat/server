@@ -260,6 +260,9 @@ INSERT INTO `mob_family_mods` VALUES (76,36,15,1); -- ROAM_COOL: 15
 -- Crab
 INSERT INTO `mob_family_mods` VALUES (77,36,15,1); -- ROAM_COOL: 15
 
+-- Craver
+INSERT INTO `mob_family_mods` VALUES (78,63,10,0);  -- DEFP: 10
+
 -- Crawler
 INSERT INTO `mob_family_mods` VALUES (79,36,55,1);  -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (79,52,30,1);  -- ROAM_RATE: 30
@@ -463,6 +466,12 @@ INSERT INTO `mob_family_mods` VALUES (136,31,5,1);   -- ROAM_DISTANCE: 5
 INSERT INTO `mob_family_mods` VALUES (136,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (136,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (136,59,110,1); -- WEAPON_BONUS: 110
+
+-- Gorger (Offspring)
+INSERT INTO `mob_family_mods` VALUES (137,63,10,0);  -- DEFP: 10
+
+-- Gorger
+INSERT INTO `mob_family_mods` VALUES (138,63,10,0);  -- DEFP: 10
 
 -- Hecteyes
 INSERT INTO `mob_family_mods` VALUES (139,36,55,1);   -- ROAM_COOL: 55
@@ -695,6 +704,10 @@ INSERT INTO `mob_family_mods` VALUES (218,36,30,1); -- ROAM_COOL: 30
 -- Sea Monk
 INSERT INTO `mob_family_mods` VALUES (219,36,30,1); -- ROAM_COOL: 30
 
+-- Seether
+INSERT INTO `mob_family_mods` VALUES (220,62,30,0);  -- ATTP: 30
+INSERT INTO `mob_family_mods` VALUES (220,63,10,0);  -- DEFP: 10
+
 -- Shadow
 INSERT INTO `mob_family_mods` VALUES (221,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (221,51,2,1);    -- ROAM_TURNS: 2
@@ -751,6 +764,9 @@ INSERT INTO `mob_family_mods` VALUES (240,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (240,63,-20,0); -- DEFP: -20%
 INSERT INTO `mob_family_mods` VALUES (240,68,-10,0); -- EVA: -10
 
+-- Thinker
+INSERT INTO `mob_family_mods` VALUES (241,63,10,0);  -- DEFP: 10
+
 -- Tiger
 INSERT INTO `mob_family_mods` VALUES (242,31,15,1);  -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (242,36,45,1);  -- ROAM_COOL: 45
@@ -795,11 +811,12 @@ INSERT INTO `mob_family_mods` VALUES (253,63,12,0); -- DEFP: 12
 INSERT INTO `mob_family_mods` VALUES (254,10,6,1); -- SUBLINK: 6
 
 -- Wanderer
-INSERT INTO `mob_family_mods` VALUES (255,3,50,1); -- MP_BASE: 50
-INSERT INTO `mob_family_mods` VALUES (255,68,40,0); -- EVA: 40
+INSERT INTO `mob_family_mods` VALUES (255,3,50,1);   -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (255,68,40,0);  -- EVA: 40
+INSERT INTO `mob_family_mods` VALUES (255,63,-10,0); -- DEFP: -10
 
 -- Weeper
-INSERT INTO `mob_family_mods` VALUES (256,63,10,0); -- DEFP: 10
+INSERT INTO `mob_family_mods` VALUES (256,63,-10,0); -- DEFP: -10
 
 -- Wivre
 INSERT INTO `mob_family_mods` VALUES (257,36,50,1); -- ROAM_COOL: 50

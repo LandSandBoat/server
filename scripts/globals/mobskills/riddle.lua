@@ -17,11 +17,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.MAX_MP_DOWN
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_MP_DOWN, math.floor(39.5 + (target:getStat(xi.mod.INT) / 2)), 0, 60))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 42, 0, 120))
-
-    return typeEffect
+    return xi.effect.MAX_MP_DOWN
 end
 
 return mobskillObject

@@ -24,16 +24,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = mob:getMainLvl() * .75
-    local duration = 30
+    local power = math.min(1, math.floor(mob:getMainLvl() / 10))
+    local duration = 120
 
-    if power < 1 then
-        power = 1
+    -- Sabotender have longer duration
+    if mob:getFamily() ~= 178 then
+        duration = 180
     end
 
-    local typeEffect = xi.effect.REGEN
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, power, 3, duration))
+
+    return xi.effect.REGEN
 end
 
 return mobskillObject

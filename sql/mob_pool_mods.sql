@@ -124,6 +124,7 @@ INSERT INTO `mob_pool_mods` VALUES (680,251,-50,0); -- STUNRES: -50
 
 -- Cerebrator
 INSERT INTO `mob_pool_mods` VALUES (681,368,10,0); -- REGAIN: 10
+INSERT INTO `mob_pool_mods` VALUES (681,59,119,1); -- WEAPON_BONUS: 119
 
 -- Citipati
 INSERT INTO `mob_pool_mods` VALUES (733,302,5,0); -- TRIPLE_ATTACK: 5
@@ -136,6 +137,7 @@ INSERT INTO `mob_pool_mods` VALUES (770,4,4,1); -- SIGHT_RANGE: 4
 
 -- Coveter
 INSERT INTO `mob_pool_mods` VALUES (820,368,10,0); -- REGAIN: 10
+INSERT INTO `mob_pool_mods` VALUES (820,59,119,1); -- WEAPON_BONUS: 119
 
 -- Darksteel Golem
 INSERT INTO `mob_pool_mods` VALUES (906,4,4,1); -- SIGHT_RANGE: 4
@@ -260,6 +262,7 @@ INSERT INTO `mob_pool_mods` VALUES (2135,59,207,1); -- WEAPON_BONUS: 207
 INSERT INTO `mob_pool_mods` VALUES (2136,59,115,1); -- WEAPON_BONUS: 115
 
 -- Jormungand
+INSERT INTO `mob_pool_mods` VALUES (2156,29,12,0);  -- MDEF: 12
 INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0); -- REGEN: 25
 INSERT INTO `mob_pool_mods` VALUES (2156,59,263,1); -- WEAPON_BONUS: 263
 
@@ -365,6 +368,7 @@ INSERT INTO `mob_pool_mods` VALUES (2963,252,40,0); -- CHARMRES: 40
 -- Omega
 INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0); -- COUNTER: 25
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);  -- REGEN: 1
+INSERT INTO `mob_pool_mods` VALUES (2973,59,112,1); -- WEAPON_BONUS: 112
 
 -- Ore Golem
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
@@ -421,6 +425,9 @@ INSERT INTO `mob_pool_mods` VALUES (3379,4,4,1); -- SIGHT_RANGE: 4
 -- Sabotender
 INSERT INTO `mob_pool_mods` VALUES (3426,105,1,1); -- ATTRACT_FAMILY_NM: 1
 
+-- Satiator
+INSERT INTO `mob_pool_mods` VALUES (3483,59,119,1); -- WEAPON_BONUS: 119
+
 -- Seiryu
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
 INSERT INTO `mob_pool_mods` VALUES (3540,59,157,1); -- WEAPON_BONUS: 157
@@ -469,10 +476,15 @@ INSERT INTO `mob_pool_mods` VALUES (3824,29,2,1); -- ASSIST: 2
 -- Tavnazian Ram
 INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
 
+-- Tenzen
+INSERT INTO `mob_pool_mods` VALUES (3875,59,153,1); -- WEAPON_BONUS: 153
+
 -- Tiamat
-INSERT INTO `mob_pool_mods` VALUES (3916,29,50,0);   -- MDEF: 50
 INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
 INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
+INSERT INTO `mob_pool_mods` VALUES (3916,162,-50,0);  -- DMGBREATH: -50
+INSERT INTO `mob_pool_mods` VALUES (3916,163,-40,0);  -- DMGMAGIC: -40
+
 
 -- Tombstone Prototype
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
@@ -486,6 +498,7 @@ INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
 -- Ultima
 INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0); -- REGAIN: 30
 INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);  -- REGEN: 1
+INSERT INTO `mob_pool_mods` VALUES (4083,59,105,1); -- WEAPON_BONUS: 105
 
 -- Vanguards Crow
 INSERT INTO `mob_pool_mods` VALUES (4186,34,20,1);  -- MAGIC_COOL: 20
@@ -518,7 +531,6 @@ INSERT INTO `mob_pool_mods` VALUES (4222,4,4,1); -- SIGHT_RANGE: 4
 INSERT INTO `mob_pool_mods` VALUES (4238,28,5,1); -- EXP_BONUS: 5
 
 -- Vrtra
-INSERT INTO `mob_pool_mods` VALUES (4261,29,50,0);  -- MDEF: 50
 INSERT INTO `mob_pool_mods` VALUES (4261,370,10,0); -- REGEN: 10
 
 -- Woodland Sage

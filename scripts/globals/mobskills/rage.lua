@@ -18,7 +18,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local duration = 60
+    local duration = 120
+    local power = (116 / 256) * 100
 
     if mob:isPet() then
         local player = mob:getMaster()
@@ -26,13 +27,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         -- TODO - Rule of 3 counter = 1 - rename isJugPet to has, add isJugPet
         if player ~= nil and player:isJugPet() then
             local tp = skill:getTP()
-            duration = math.max(duration, duration * (tp / 1000))
+            duration = math.max(60, 60 * (tp / 1000))
         end
     end
 
-    local typeEffect = xi.effect.BERSERK
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 50, 0, duration))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, power, 0, duration))
+    return xi.effect.BERSERK
 end
 
 return mobskillObject

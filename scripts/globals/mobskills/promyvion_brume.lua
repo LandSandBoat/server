@@ -18,11 +18,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.POISON
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 5, 3, 180)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 9, 3, 180)
 
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WATER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 3, 3.25, 3.5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
     return dmg
