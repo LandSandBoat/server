@@ -35,10 +35,11 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local chance = math.random(1, 2)
                     if chance == 1 then
-                        return quest:progressEvent(10019, 0, xi.keyItem.PHOENIX_ARMLET)
+                        quest:setVar(player, 'KIChoice', xi.keyItem.PHOENIX_ARMLET)
                     else
-                        return quest:progressEvent(10019, 0, xi.keyItem.PHOENIX_PEARL)
+                        quest:setVar(player, 'KIChoice', xi.keyItem.PHOENIX_PEARL)
                     end
+                    return quest:progressEvent(10019, 0, quest:getVar(player, 'KIChoice'))
                 end,
             },
 
@@ -47,6 +48,7 @@ quest.sections =
                 [10019] = function(player, csid, option, npc)
                     if option == 3 then
                         quest:begin(player)
+                        npcUtil.giveKeyItem(player, quest:getVar(player, 'KIChoice'))
                     end
                 end,
             },
@@ -64,10 +66,14 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):getAnimation() == 8 and not player:hasKeyItem(xi.keyItem.BLUE_BRACELET) and player:getLocalVar("blueKilled") == 0 then
+                        if GetMobByID(ID.mob.BLUE_GARGOYLES):isSpawned() or GetMobByID(ID.mob.BLUE_GARGOYLES +1):isSpawned() then
+                            return 
+                        end
                         GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):setAnimation(9)
                         SpawnMob(ID.mob.BLUE_GARGOYLES):updateEnmity(player)
                         SpawnMob(ID.mob.BLUE_GARGOYLES + 1):updateEnmity(player)
-                        return quest:messageSpecial(ID.text.TRAP_ACTIVATED, player)
+                        player:messageName(ID.text.TRAP_ACTIVATED, player)
+                        return quest:noAction()
                     elseif player:getLocalVar("blueKilled") == 1 and not player:hasKeyItem(xi.keyItem.BLUE_BRACELET) then
                         player:addKeyItem(xi.keyItem.BLUE_BRACELET)
                         return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLUE_BRACELET)
@@ -81,10 +87,14 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):getAnimation() == 8 and not player:hasKeyItem(xi.keyItem.GREEN_BRACELET) and player:getLocalVar("greenKilled") == 0 then
+                        if GetMobByID(ID.mob.GREEN_GARGOYLES):isSpawned() or GetMobByID(ID.mob.GREEN_GARGOYLES +1):isSpawned() then
+                            return 
+                        end
                         GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):setAnimation(9)
                         SpawnMob(ID.mob.GREEN_GARGOYLES):updateEnmity(player)
                         SpawnMob(ID.mob.GREEN_GARGOYLES + 1):updateEnmity(player)
-                        return quest:messageSpecial(ID.text.TRAP_ACTIVATED, player)
+                        player:messageName(ID.text.TRAP_ACTIVATED, player)
+                        return quest:noAction()
                     elseif player:getLocalVar("greenKilled") == 1 and not player:hasKeyItem(xi.keyItem.GREEN_BRACELET) then
                         player:addKeyItem(xi.keyItem.GREEN_BRACELET)
                         return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GREEN_BRACELET)
@@ -97,10 +107,8 @@ quest.sections =
             ['_i95'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.keyItem.PHOENIX_ARMLET) and quest:getVar(player, 'Prog') == 0 then
-                        return quest:progressEvent(7, 0, xi.keyItem.PHOENIX_ARMLET)
-                    elseif quest:getVar(player, 'Prog') == 0 then
-                        return quest:progressEvent(7, 0, xi.keyItem.PHOENIX_PEARL)
+                    if player:hasKeyItem(quest:getVar(player, 'KIChoice')) and quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(7, 0, quest:getVar(player, 'KIChoice'))
                     end
                 end,
             },
@@ -109,13 +117,8 @@ quest.sections =
             {
                 [7] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    if player:hasKeyItem(xi.keyItem.PHOENIX_ARMLET) then
-                        player:delKeyItem(xi.keyItem.PHOENIX_ARMLET)
-                        return quest:messageSpecial(ID.text.PHOENIX_FADES, 0, xi.keyItem.PHOENIX_ARMLET)
-                    else
-                        player:delKeyItem(xi.keyItem.PHOENIX_PEARL)
-                        return quest:messageSpecial(ID.text.PHOENIX_FADES, 0, xi.keyItem.PHOENIX_PEARL)
-                    end
+                    player:delKeyItem(quest:getVar(player, 'KIChoice'))
+                    return quest:messageSpecial(ID.text.PHOENIX_FADES, 0, quest:getVar(player, 'KIChoice'))
                 end,
             },
         },
@@ -134,7 +137,7 @@ quest.sections =
             onEventFinish =
             {
                 [10020] = function(player, csid, option, npc)
-                    return quest:complete(player)
+                    quest:complete(player)
                 end,
             },
         },
