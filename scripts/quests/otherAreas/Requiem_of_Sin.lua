@@ -28,7 +28,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
             player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER) and
-            quest:getVar(player, 'conquestRequiem') <= os.time()
+            quest:getVar(player, 'conquestRequiem') <= os.time() and
+            quest:getVar(player, 'conquestRequiem') > 0 -- Prevents players from getting this quest too early.
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
