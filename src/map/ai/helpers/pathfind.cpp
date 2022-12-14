@@ -190,14 +190,14 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     {
         auto PEntity = dynamic_cast<CBattleEntity*>(m_POwner)->GetBattleTarget();
 
-        if (PEntity)
+        if (PEntity && !m_POwner->m_ignoreWallhack)
         {
             result           = abs(m_POwner->loc.p.y - PEntity->loc.p.y) < m_POwner->loc.zone->m_navMesh->GetVerticalLimit() ? ValidPosition(PEntity->loc.p) : true;
             m_carefulPathing = result ? true : false;
         }
     }
 
-    if (!result) // If I failed to path successfully, then I should wallhack to reach my destination.
+    if (!result && !m_POwner->m_ignoreWallhack) // If I failed to path successfully, then I should wallhack to reach my destination.
     {
         pathFlags |= PATHFLAG_WALLHACK;
         PathTo(point, pathFlags, false);

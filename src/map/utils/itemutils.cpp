@@ -617,7 +617,7 @@ namespace itemutils
 
         PUnarmedH2HItem->setDmgType(DAMAGE_TYPE::HTH);
         PUnarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
-        PUnarmedH2HItem->setDamage(3);
+        PUnarmedH2HItem->setDamage(0);
     }
 
     /************************************************************************

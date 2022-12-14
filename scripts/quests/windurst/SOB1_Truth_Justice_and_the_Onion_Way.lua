@@ -59,7 +59,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.RARAB_TAIL) then
-                        return quest:progressEvent(378, 0, xi.items.RARAB_TAIL)
+                        return quest:progressEvent(378, 0, xi.items.RARAB_TAIL, xi.items.JUSTICE_BADGE)
                     end
                 end,
             },

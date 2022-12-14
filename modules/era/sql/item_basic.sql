@@ -787,7 +787,7 @@ REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `
     (4154, 0, 'flask_of_holy_water', 'holy_water', 12, 1540, 33, 0, 357),
     (4155, 0, 'remedy', 'remedy', 12, 1540, 33, 0, 3280),
     (4159, 0, 'flask_of_paralyze_potion', 'paralyze_potion', 12, 1540, 33, 0, 727),
-    (4215, 0, 'popstar', 'popstar', 99, 1548, 63, 0, 40),
+    (4215, 0, 'popstar', 'popstar', 99, 1548, 63, 0, 10),
     (4224, 0, 'demon_quiver', 'demon_quiver', 12, 1540, 15, 0, 687),
     (4228, 0, 'mythril_bolt_quiver', 'm._bolt_quiver', 12, 1540, 15, 0, 620),
     (4229, 0, 'darksteel_bolt_quiver', 'd._bolt_quiver', 12, 1540, 15, 0, 910),

@@ -4013,7 +4013,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Boggelman',4046,384);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',4046,385);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',4046,386);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',4046,387);
-INSERT INTO `mob_skill_lists` VALUES ('Boggelman',4046,822);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',4046,1363);
 
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1463);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1465);

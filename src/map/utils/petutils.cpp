@@ -1958,12 +1958,11 @@ namespace petutils
             PPet = new CPetEntity(petType);
             PPet->saveModifiers();
 
-            if (PetID <= PETID_DARKSPIRIT)
+            if (petType == PET_TYPE::AVATAR || PetID <= PETID_DARKSPIRIT)
             {
                 PPet->PMaster = PMaster;
                 PPet->m_PetID = PetID;
                 PPet->PAI->SetController(std::make_unique<CSpiritController>(PPet));
-                ;
             }
         }
 

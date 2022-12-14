@@ -4,17 +4,18 @@
 -- Involved in Quest: Sin Hunting - RNG AF1
 -- !pos -10.946 -1.000 313.810 104
 -----------------------------------
+local ID = require('scripts/zones/Jugner_Forest/IDs')
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local phase = VanadielMoonPhase()
-    local direction = VanadielMoonDirection()
-    if player:getCharVar("sinHunting") == 4 and
-    ((phase <= 90 and direction == 2) or (phase <= 95 and direction == 1)) then
+    if player:getCharVar("sinHunting") == 4 and IsMoonFull() then
         player:startEvent(13, 0, 1107)
+    else
+       player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 

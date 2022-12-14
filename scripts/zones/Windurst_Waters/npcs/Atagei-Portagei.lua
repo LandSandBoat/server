@@ -43,22 +43,22 @@ entity.onTrigger = function(player, npc)
                 player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 2)
             elseif fame == 4 then
                 player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0240, 0003, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:startEvent(32741, 0280, 0003, 0600, 0000, 7800, 0000, 0000, 0000)
             elseif fame == 5 then
                 player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0240, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:startEvent(32741, 0280, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
             elseif fame == 6 then
                 player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0240, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:startEvent(32741, 0280, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
             elseif fame == 7 then
                 player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0240, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:startEvent(32741, 0280, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
             elseif fame == 8 then
                 player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0240, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:startEvent(32741, 0280, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
             elseif fame == 9 then
                 player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0240, 0006, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:startEvent(32741, 0280, 0006, 0600, 0000, 7800, 0000, 0000, 0000)
             end
         else
             player:startEvent(32742)

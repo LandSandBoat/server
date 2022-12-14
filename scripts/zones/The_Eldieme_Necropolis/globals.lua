@@ -2,12 +2,71 @@
 -- Zone: The Eldieme Necropolis (195)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+-----------------------------------
+local function lightCandle(player, npc)
+    -- Handle 7 Sins Skeleton NMs Spawns
+    local zone = npc:getZone()
+    local skullRespawn = zone:getLocalVar("SkullRespawn")
+    local candleOffset = ID.npc.TALLOW_CANDLE_OFFSET
+    local candlesLit = 0
+    local candleText =
+    {
+        ID.text.SKULL_SIX_REMAIN,
+        ID.text.SKULL_FIVE_REMAIN,
+        ID.text.SKULL_FOUR_REMAIN,
+        ID.text.SKULL_THREE_REMAIN,
+        ID.text.SKULL_TWO_REMAIN,
+        ID.text.SKULL_ONE_REMAIN,
+        ID.text.SKULL_SPAWN,
+    }
+
+    -- If this candle is already lit, then don't change anything (Do we tell player?)
+    if npc:getAnimation() == xi.anim.OPEN_DOOR then
+        return
+    else
+        player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
+        npc:setAnimation(xi.anim.OPEN_DOOR)
+        npc:timer(300000, function(candle)
+            candle:setAnimation(xi.anim.CLOSE_DOOR)
+        end)
+    end
+
+    -- Find the lit candles
+    for i = 0, 6 do
+        local candle = GetNPCByID(candleOffset + i)
+        -- If (candle is lit) then increment lit counter
+        if candle:getAnimation() == xi.anim.OPEN_DOOR then
+            candlesLit = candlesLit + 1
+        end
+    end
+
+    -- Present message to player based on # of lit candles
+    player:messageSpecial(candleText[candlesLit])
+
+    if
+        candlesLit == 7 and
+        os.time() > skullRespawn
+    then -- Final candle, spawn Skulls
+        zone:setLocalVar("SkullRespawn", os.time() + 3600) -- One-hour respawn timer
+
+        -- Spawn all 7 Skulls
+        for skull = 1, 7 do
+            SpawnMob(ID.mob.SKULL_OFFSET + skull)
+        end
+
+    elseif
+        candlesLit == 7 and
+        os.time() <= skullRespawn
+    then -- ??? Unknown Edge case.  ToDo?
+        return
+    end
+end
 
 local eldiemeGlobal =
 {
@@ -42,51 +101,30 @@ local eldiemeGlobal =
         end
     end,
 
-    -- Handle 7 Sins Skeleton NMs Spawns
-    skullTrade = function(player, npc)
-        local candleCount =
-        {
-        ID.text.SKULL_FIVE_REMAIN,
-        ID.text.SKULL_FOUR_REMAIN,
-        ID.text.SKULL_THREE_REMAIN,
-        ID.text.SKULL_TWO_REMAIN,
-        ID.text.SKULL_ONE_REMAIN,
-        ID.text.SKULL_SPAWN,
-        }
+    candleOnTrade = function(player, npc, trade)
+        local zone = npc:getZone()
+        local skullRespawn = zone:getLocalVar("SkullRespawn") or 0 -- 1 hour cooldown to respawn skulls
 
-        local tradeCount = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullTradeCount") -- Track how many candles have been lit
-        local tradeWindow = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullTradeTimer") -- Track how much time before candles reset
-        local active = npc:getLocalVar("candleActive") -- Track if current candle has already been lit
+        if
+            npcUtil.tradeHasExactly(trade, xi.items.FLINT_STONE) and
+            os.time() > skullRespawn
+        then
+            lightCandle(player, npc)
+        elseif os.time() < skullRespawn then
+            player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
+        end
+    end,
 
-        for i = 1, 5 do
-            if tradeCount == 6 and os.time() < tradeWindow and os.time() > active then -- Final candle, spawn Skulls
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", 0)
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullRespawn", os.time() + 3600) -- 1 hour cooldown to respawn skulls
-                player:messageSpecial(ID.text.SKULL_SPAWN)
-                player:confirmTrade()
+    candleOnTrigger = function(player, npc)
+        local zone = npc:getZone()
+        local skullRespawn = zone:getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
 
-                -- Spawn all 7 Skulls
-                for skull = 1, 7 do
-                    SpawnMob(ID.mob.SKULL_OFFSET + skull)
-                end
-
-                break
-            elseif tradeCount == i and os.time() < tradeWindow and os.time() > active then -- Candle trades 2 through 6
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", i + 1)
-                npc:setLocalVar("candleActive", os.time() + 10)
-                player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
-                player:messageSpecial(candleCount[i])
-                player:confirmTrade()
-                break
-            elseif os.time() > tradeWindow and os.time() > active then -- First candle trade to start timer
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", 1)
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeTimer", os.time() + 40)
-                npc:setLocalVar("candleActive", os.time() + 10)
-                player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
-                player:messageSpecial(ID.text.SKULL_SIX_REMAIN)
-                player:confirmTrade()
-                break
-            end
+        if npc:getAnimation() == xi.anim.OPEN_DOOR then
+            player:messageSpecial(ID.text.BRAZIER_ACTIVE)
+        elseif os.time() > skullRespawn then
+            player:messageSpecial(ID.text.BRAZIER_OUT, 0, xi.items.FLINT_STONE)
+        else
+            player:messageSpecial(ID.text.BRAZIER_COOLDOWN)
         end
     end,
 }

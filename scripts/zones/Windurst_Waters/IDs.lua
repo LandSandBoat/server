@@ -92,6 +92,8 @@ zones[xi.zone.WINDURST_WATERS] =
         MERRYMAKER_GIVE            = 15641, -- Not for us, not for me? I give it back. Now you happy? Happy toy, happy toy, where be me happy toy?
         MERRYMAKER_NO              = 15642, -- No no no no no! Go away! Nose holes busy sniff for happy toy!
         MERRYMAKER_FRIEND          = 15644, -- You have friend you do? We gobbies have friend too.
+        MERRYMAKER_NPC_RETURNED    = 15683, -- I see you've returned. Mmm...that's good news indeed. Thank you for the kindess you've shown me and my friend.
+        MERRYMAKER_DEFAULT         = 15643, -- ...
     },
 
     mob =
@@ -131,6 +133,7 @@ zones[xi.zone.WINDURST_WATERS] =
             [17752548] = 17752548,  -- Starlight Celebration Tree
             [17752549] = 17752549,  -- Starlight Celebration Tree
             [17752529] = 17752529,  -- Atagei-Portagei
+            [17752336] = 17752336,  -- Kayeel-Payeel (WOTG NPC, but is an NPC used in event)
             [17752550] = 17752550,  -- Token Moogle
             [17752551] = 17752551,  -- Event Moogle
             [17752552] = 17752552,  -- Event Moogle

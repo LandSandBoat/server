@@ -1054,7 +1054,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
         m_slvl = (slvl > (m_mlvl >> 1) ? (m_mlvl == 1 ? 1 : (m_mlvl >> 1)) : slvl);
     }
     else if (this->objtype == TYPE_PET &&
-             (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR) &&
+             (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->m_PetID <= PETID_DARKSPIRIT) &&
              static_cast<CPetEntity*>(this)->PMaster != nullptr && static_cast<CPetEntity*>(this)->PMaster->objtype == TYPE_PC)
     {
         m_slvl = this->GetMLevel();
@@ -2147,6 +2147,13 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
                 actionTarget.reaction = REACTION::HIT;
 
+                if (this->GetLocalVar("TREDECIM_COUNTER") == 13 && weaponSlot == SLOT_MAIN)
+                {
+                    // Ensure critical is only set to main weapon slot
+                    attack.SetCritical(true, weaponSlot, attack.IsGuarded());
+                    this->SetLocalVar("TREDECIM_COUNTER", -1);
+                }
+
                 // Critical hit.
                 if (attack.IsCritical())
                 {
@@ -2306,8 +2313,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
     }
 
-    PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), &action);
-    PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), &action);
+    PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAction(&action));
+    PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), CLuaAction(&action));
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
     /////////////////////////////////////////////////////////////////////////////////////////////

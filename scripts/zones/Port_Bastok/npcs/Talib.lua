@@ -28,6 +28,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(4)
     elseif shadyBusiness == QUEST_COMPLETED then
         player:startEvent(90)
+    elseif beautyAndTheGalka == QUEST_AVAILABLE then
+        player:startEvent(2)
     end
 end
 

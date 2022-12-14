@@ -10,7 +10,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 100, power = math.random(200,260) })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 100, power = math.random(200, 260) })
 end
 
 entity.onMobSpawn = function(mob)
@@ -34,14 +34,14 @@ entity.onMobFight = function(mob, target)
         if mob:checkDistance(target) > 14 then
             mob:timer(2000, function(mobArg)
                 local pos = target:getPos()
-                mobArg:setPos(pos.x+1, pos.y, pos.z+1)
+                mobArg:setPos(pos.x + 1, pos.y, pos.z + 1)
                 mobArg:setLocalVar("timer", os.time() + 30)
             end)
         end
     end
 end
 
-entity.onMobDead = function(mob, player, optParams)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity
