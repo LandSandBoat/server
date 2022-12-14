@@ -10,6 +10,7 @@ local function disturbMob(mob)
     local phIndex = mob:getLocalVar("phIndex")
     if phIndex > 0 then
         mob:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
+        SetServerVariable("[Taisai]TimeToGrow", mob:getLocalVar("timeToGrow"))
     end
 end
 
