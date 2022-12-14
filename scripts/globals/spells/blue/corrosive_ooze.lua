@@ -57,7 +57,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = bluDoMagicalSpell(caster, target, spell, params)
     damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     local resist = applyResistanceEffect(caster, target, spell, params)
 

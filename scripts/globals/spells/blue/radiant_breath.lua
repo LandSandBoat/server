@@ -37,11 +37,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = results[2]
     damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
-    local duration = 60 -- 30s/60s
+    local duration = 60
     if resist >= 0.5 then
-        -- Added effect: Slow (25%)
         target:addStatusEffect(xi.effect.SLOW, 2500, 0, duration * resist)
-        -- Added effect: Silence
         target:addStatusEffect(xi.effect.SILENCE, 25, 0, duration * resist)
     end
 

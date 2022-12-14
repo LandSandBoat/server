@@ -28,7 +28,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     local stolen = 0
 
-    -- Steal a monster's buff
     local resist = applyResistanceEffect(caster, target, spell, params)
     if resist >= 0.5 then
         stolen = caster:stealStatusEffect(target)

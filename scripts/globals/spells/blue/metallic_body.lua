@@ -26,7 +26,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.STONESKIN
-    local blueSkill = utils.clamp(caster:getSkillLevel(xi.skill.BLUE_MAGIC),0,500)
+    local blueSkill = utils.clamp(caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 500)
     local power = utils.clamp(0.375 * blueSkill + 12.5, 0, 150)
     local duration = bluGetDurationWithDiffusion(caster, 300)
 

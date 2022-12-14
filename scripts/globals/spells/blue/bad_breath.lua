@@ -47,19 +47,12 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local duration = 60 -- 30s/60s
     if resist >= 0.5 then
-        -- Added effect: Slow (20%)
         target:addStatusEffect(xi.effect.SLOW, 2000, 0, duration * resist)
-        -- Added effect: Silence
         target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration * resist)
-        -- Added effect: Paralyze (15%)
         target:addStatusEffect(xi.effect.PARALYSIS, 15, 0, duration * resist)
-        -- Added effect: Bind
         target:addStatusEffect(xi.effect.BIND, 1, 0, duration * resist)
-        -- Added effect: Weight (20%)
         target:addStatusEffect(xi.effect.WEIGHT, 20, 0, duration * resist)
-        -- Added effect: Poison (4/tick)
         target:addStatusEffect(xi.effect.POISON, 4, 0, duration * resist)
-        -- Added effect: Blind (-20)
         target:addStatusEffect(xi.effect.BLINDNESS, 20, 0, duration * resist)
     end
 

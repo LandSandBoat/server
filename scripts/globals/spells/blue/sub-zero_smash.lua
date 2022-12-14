@@ -45,16 +45,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
+    params.effect = xi.effect.PARALYSIS
+    local power = 10
+    local tick = 0
+    local duration = 180
+
     local damage = bluDoPhysicalSpell(caster, target, spell, params)
     damage = bluFinalizeDamage(caster, target, spell, damage, params)
-
-    -- Added effect: Paralyze (20% for 90s/180s)
-    if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
-        local resist = applyResistanceEffect(caster, target, spell, params)
-        if resist >= 0.5 then
-            target:addStatusEffect(xi.effect.PARALYSIS, 10, 0, 180 * resist)
-        end
-    end
+    bluDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

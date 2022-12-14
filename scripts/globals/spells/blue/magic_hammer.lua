@@ -91,6 +91,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_DRAIN_MP)
         end
     end
+    
     return damage
 end
 

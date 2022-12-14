@@ -37,7 +37,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = results[2]
     damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
-    -- Added effect: Paralyze (15% for 30s/60s)
     if resist >= 0.5 then
         target:addStatusEffect(xi.effect.PARALYSIS, 15, 0, 60 * resist)
     end

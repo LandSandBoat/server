@@ -53,7 +53,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     local damage = bluDoPhysicalSpell(caster, target, spell, params)
     damage = bluFinalizeDamage(caster, target, spell, damage, params)
-    bluDoPhysicalSpellAddedEffect(caster,target,spell,params,damage,power,tick,duration)
+    bluDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

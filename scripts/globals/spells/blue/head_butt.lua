@@ -42,18 +42,15 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
+
     params.effect = xi.effect.STUN
+    local power = 1
+    local tick = 0
+    local duration = 5
 
     local damage = bluDoPhysicalSpell(caster, target, spell, params)
     damage = bluFinalizeDamage(caster, target, spell, damage, params)
-
-    -- Additional effect: Stun (2.5/5s)
-    if damage > 0 then
-        local resist = applyResistanceEffect(caster, target, spell, params)
-        if resist >= 0.5 then
-            target:addStatusEffect(params.effect, 1, 0, 5 * resist)
-        end
-    end
+    bluDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end
