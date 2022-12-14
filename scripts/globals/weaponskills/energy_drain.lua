@@ -4,35 +4,50 @@
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
+require("scripts/globals/msg")
 -----------------------------------
 local weaponskillObject = {}
 
+-- https://www.bg-wiki.com/ffxi/Energy_Drain
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    -- TODO: Should not wake the mob involved. Not tested on sleeping mob. Need to add Darkness element and resistance. More testing needed to understand retail behavior.
+    local fTPAnchors = { 1.25, 2.5, 4.125 }
 
-    --[[
-    local damage = 60 -- Base mp absorbtion from http://wiki.ffo.jp/html/687.html saying it was between 60 and 120 and always higher than Energy Steal this is before adoulin era
+    local startingAnchor = math.floor(tp / 1000)
 
-    -- params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 2 -- to follow earlier statement of been always higher than Energy Steal
-    -- params.mnd_wsc = 1
+    local multiplier = 0
 
-    local damagemod = damage * ((tp - 1000) / 2000 + 1) -- Simplified formula for getting difference in tp return from 1000 tp to 3000 tp
-
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        damagemod = damagemod + player:getStat(xi.mod.MND)
+    if tp >= 3000 then
+        multiplier = fTPAnchors[3]
+    else
+        local basefTP   = fTPAnchors[startingAnchor]
+        local nextfTP   = fTPAnchors[startingAnchor + 1]
+        local multPerTP = (nextfTP - basefTP) / 1000 * (tp - 1000 * startingAnchor)
+        -- TP = 1250; multiplier = 1.25 + ( (2.5 - 1.25) / 1000 * (1250 - (1000 * 1))
+        --            multiplier = 1.25 + (1.25 / 1000) * 250)
+        --            multiplier = 1.25 + 0.3125 = 1.5625
+        multiplier = basefTP + multPerTP
     end
 
-    damagemod = damagemod * xi.settings.main.WEAPON_SKILL_POWER
+    local skill = player:getSkillLevel(xi.skill.DAGGER)
+    local wsc   = player:getStat(xi.mod.MND) * 1.0
 
-    if not target:isUndead() then
-        player:addMP(target:addMP(-damagemod))
+    local mpRestored = math.floor((math.floor(skill * 0.11) + wsc) * multiplier)
+
+    if target:isUndead() then
+        mpRestored = 0
+    else
+        -- Absorb MP from target
+        mpRestored = target:delMP(mpRestored)
+
+        -- Add stolen MP to player
+        mpRestored = player:addMP(mpRestored)
     end
 
-    if not target:isUndead() then
-        player:addMP(target:addMP(-damagemod))
-    end
-    --]]
-    return 1, 0, false, 0
+    -- Display MP actually given to player
+    action:messageID(target:getID(), xi.msg.basic.SKILL_DRAIN_MP)
+    action:param(target:getID(), mpRestored)
+
+    return 1, 0, false, mpRestored
 end
 
 return weaponskillObject
