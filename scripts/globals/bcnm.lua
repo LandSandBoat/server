@@ -913,12 +913,26 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
         end,
 
+        [640] = function() -- PM5-3 U3: Flames for the Dead
+            return promathiaMission == xi.mission.id.cop.THREE_PATHS and
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8 and
+                npcId == getEntranceOffset(0)
+        end,
+
         [641] = function() -- ENM: Follow the White Rabbit
             return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(2)
         end,
 
         [642] = function() -- ENM: When Hell Freezes Over
             return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(4)
+        end,
+
+        [643] = function() -- ENM: Brothers
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(6)
+        end,
+
+        [644] = function() -- ENM: Holy Cow
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(8)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
@@ -1163,15 +1177,25 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [640] = function() -- PM5-3 U3: Flames for the Dead
-            return npc:getXPos() > -721 and npc:getXPos() < 719
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+            (player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8)
+            and npcId == getEntranceOffset(0)
         end,
 
         [641] = function() -- ENM: Follow the White Rabbit
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(2)
         end,
 
         [642] = function() -- ENM: When Hell Freezes Over
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(4)
+        end,
+
+        [643] = function() -- ENM: Brothers
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(6)
+        end,
+
+        [644] = function() -- ENM: Holy Cow
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(8)
         end,
 
         [673] = function() -- ENM: Like the Wind
@@ -1586,6 +1610,14 @@ local function checkSkip(player, bfid)
         [608] = function() -- Quest: Trial by Water
             return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
+        end,
+
+        [640] = function() -- PM5-3 U3: Flames for the Dead
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                (
+                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
+                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 8
+                )
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
