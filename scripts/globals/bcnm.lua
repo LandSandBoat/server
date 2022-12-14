@@ -559,10 +559,6 @@ local function checkReqs(player, npc, bfid, registrant)
         return true
     end
 
-    local function getEntranceOffset(offset)
-        return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
-    end
-
     -- Requirements to register a battlefield
     local registerReqs =
     {
