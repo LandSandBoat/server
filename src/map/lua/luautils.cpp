@@ -145,6 +145,7 @@ namespace luautils
         lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("ServerEpochTimeMS", &luautils::ServerEpochTimeMS);
         lua.set_function("VanadielTime", &luautils::VanadielTime);
         lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
         lua.set_function("VanadielHour", &luautils::VanadielHour);
@@ -1110,6 +1111,12 @@ namespace luautils
     void SendLuaFuncStringToZone(uint16 zoneId, std::string const& str)
     {
         message::send(zoneId, str);
+    }
+
+    uint64 ServerEpochTimeMS()
+    {
+        using namespace std::chrono;
+        return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
     }
 
     /************************************************************************

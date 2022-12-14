@@ -12,10 +12,8 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.GIL_MAX, -1)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 8)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 60)
     mob:setLocalVar("spawner", 0)
-    local qm = GetNPCByID(ID.npc.PIRATE_CHART_QM)
-    qm:setLocalVar("lostinterest", 0)
 end
 
 entity.onMobFight = function(mob, target)
@@ -29,28 +27,6 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar("taruSnare") == 1 then -- Tarutaru Snare lowers damage to 1 or 2, since we can't force that this is the best we can do
         mob:setDamage(0)
-    end
-end
-
-entity.onMobDespawn = function(mob)
-    local spawner = GetPlayerByID(mob:getLocalVar("spawner"))
-    local qm = GetNPCByID(ID.npc.PIRATE_CHART_QM)
-
-    local shimmering = GetNPCByID(ID.npc.SHIMMERING_POINT)
-    if qm:getLocalVar("lostinterest") == 0 and spawner:getHPP() == 0 then
-        qm:setLocalVar("lostinterest", 1)
-        qm:showText(qm, ID.text.TOO_MUCH_TIME_PASSED)
-    end
-
-    shimmering:setStatus(xi.status.DISAPPEAR)
-
-    local party = spawner:getParty()
-    for _, member in pairs(party) do
-        member:ChangeMusic(0, 0)
-        member:ChangeMusic(1, 0)
-        member:ChangeMusic(2, 101)
-        member:ChangeMusic(3, 102)
-        member:setLocalVar("Chart", 0)
     end
 end
 
