@@ -35,6 +35,7 @@
 #include "lua_battlefield.h"
 #include "lua_instance.h"
 #include "lua_item.h"
+#include "lua_loot.h"
 #include "lua_mobskill.h"
 #include "lua_petskill.h"
 #include "lua_spell.h"
@@ -207,6 +208,7 @@ namespace luautils
         CLuaBaseEntity::Register();
         CLuaBattlefield::Register();
         CLuaInstance::Register();
+        CLuaLootContainer::Register();
         CLuaMobSkill::Register();
         CLuaPetSkill::Register();
         CLuaTriggerArea::Register();
