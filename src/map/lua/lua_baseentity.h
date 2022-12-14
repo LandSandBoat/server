@@ -443,12 +443,12 @@ public:
     int32 addMP(int32 amount);     // Modify mp of Entity +/-
     void  setMP(int32 value);      // Set mp of Entity to value
     int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
-    void  delMP(int32 amount);     // Subtract mp of Entity
+    int32 delMP(int32 amount);     // Subtract mp of Entity
 
     float getTP();
-    void  addTP(int16 amount); // Modify tp of Entity +/-
+    int16 addTP(int16 amount); // Modify tp of Entity +/-
     void  setTP(int16 value);  // Set tp of Entity to value
-    void  delTP(int16 amount); // Subtract tp of Entity
+    int16 delTP(int16 amount); // Subtract tp of Entity
 
     void  updateHealth();
     uint8 getAverageItemLevel();

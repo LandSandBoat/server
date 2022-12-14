@@ -8027,11 +8027,11 @@ int32 CLuaBaseEntity::restoreMP(int32 amount)
  *  Example : player:delMP(1000)
  ************************************************************************/
 
-void CLuaBaseEntity::delMP(int32 amount)
+int32 CLuaBaseEntity::delMP(int32 amount)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->addMP(-amount);
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->addMP(-amount);
 }
 
 /************************************************************************
@@ -8054,11 +8054,11 @@ float CLuaBaseEntity::getTP()
  *  Example : player:addTP(1000) - Icarus Wing
  ************************************************************************/
 
-void CLuaBaseEntity::addTP(int16 amount)
+int16 CLuaBaseEntity::addTP(int16 amount)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->addTP(amount);
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->addTP(amount);
 }
 
 /************************************************************************
@@ -8082,11 +8082,11 @@ void CLuaBaseEntity::setTP(int16 value)
  *  Example : player:delTP(50)
  ************************************************************************/
 
-void CLuaBaseEntity::delTP(int16 amount)
+int16 CLuaBaseEntity::delTP(int16 amount)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    static_cast<CBattleEntity*>(m_PBaseEntity)->addTP(-amount);
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->addTP(-amount);
 }
 
 /************************************************************************
