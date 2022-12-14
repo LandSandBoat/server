@@ -1476,13 +1476,13 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                 local max = 0
 
                 for _, entry in pairs(lootGroup) do
-                    max = max + entry.weight
+                    max = max + entry.droprate
                 end
 
                 local roll = math.random(max)
 
                 for _, entry in pairs(lootGroup) do
-                    max = max - entry.weight
+                    max = max - entry.droprate
 
                     if roll > max then
                         if entry.itemid ~= 0 then

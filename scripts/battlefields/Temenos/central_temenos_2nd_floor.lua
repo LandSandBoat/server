@@ -33,6 +33,7 @@ local function weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield,
     if elementalMod ~= xi.mod.NONE then
         carbuncle:setMod(elementalMod, 0)
     end
+
     carbuncle:delMod(bonusMod, bonusAmount)
 end
 
