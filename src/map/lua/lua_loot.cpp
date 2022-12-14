@@ -21,6 +21,20 @@
 
 #include "lua_loot.h"
 
+// Converts known TH rarity rates to their respective percentages
+// Once the new TH logic has been applied to mobentity.cpp then this can be removed
+static const std::array<uint16, 10> RATE_PERCENTAGES = {
+    0,    // NEVER         0.00%
+    1,    // ULTRA_RARE    0.10%
+    5,    // SUPER_RARE    0.50%
+    10,   // VERY_RARE     1.00%
+    50,   // RARE          5.00%
+    100,  // UNCOMMON     10.00%
+    150,  // COMMON       15.00%
+    240,  // VERY_COMMON  24.00%
+    1000, // GUARANTEED  100.00%
+};
+
 CLuaLootContainer::CLuaLootContainer(LootContainer* loot)
 : m_PLootContainer(loot)
 {
@@ -42,7 +56,7 @@ void CLuaLootContainer::addItem(uint16 item, uint16 rate, sol::variadic_args va)
     const auto quantity = va.get_type(0) == sol::type::number ? va.get<uint16>(0) : 1;
     for (uint16 i = 0; i < quantity; ++i)
     {
-        m_PLootContainer->drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, item, rate);
+        m_PLootContainer->drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, item, RATE_PERCENTAGES[rate]);
     }
 }
 
@@ -55,7 +69,7 @@ void CLuaLootContainer::addItem(uint16 item, uint16 rate, sol::variadic_args va)
 
 void CLuaLootContainer::addGroup(uint16 groupRate, sol::table items)
 {
-    DropGroup_t group(groupRate);
+    DropGroup_t group(RATE_PERCENTAGES[groupRate]);
 
     for (const auto& entryTable : items)
     {
