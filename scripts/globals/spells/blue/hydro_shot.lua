@@ -43,8 +43,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local damage = blueDoPhysicalSpell(caster, target, spell, params)
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    local damage = bluDoPhysicalSpell(caster, target, spell, params)
+    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
     -- Enmity Down amount is trivial, not worth implementing
     -- Sources: https://www.bluegartr.com/threads/37619-Blue-Mage-Best-thread-ever?p=4845494&viewfull=1#post4845494 and https://www.bg-wiki.com/ffxi/Hydro_Shot

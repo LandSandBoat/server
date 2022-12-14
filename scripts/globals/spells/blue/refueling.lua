@@ -27,7 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.HASTE
     local power = 1000 -- 10%
-    local duration = blueGetDurationWithDiffusion(caster, 300)
+    local duration = bluGetDurationWithDiffusion(caster, 300)
 
     if not target:addStatusEffect(typeEffect, power, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

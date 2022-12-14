@@ -32,10 +32,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.hpMod = 6
     params.lvlMod = 1.875
 
-    local results = blueDoBreathSpell(caster, target, spell, params, true)
+    local results = bluDoBreathSpell(caster, target, spell, params, true)
     local damage = results[1]
     local resist = results[2]
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
     -- Added effect: Weight (25% for 30s/60s)
     if resist >= 0.5 then

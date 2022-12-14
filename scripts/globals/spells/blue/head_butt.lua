@@ -44,8 +44,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 0.0
     params.effect = xi.effect.STUN
 
-    local damage = blueDoPhysicalSpell(caster, target, spell, params)
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    local damage = bluDoPhysicalSpell(caster, target, spell, params)
+    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
     -- Additional effect: Stun (2.5/5s)
     if damage > 0 then

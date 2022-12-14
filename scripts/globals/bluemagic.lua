@@ -17,7 +17,7 @@ TPMOD_DURATION = 5
 -----------------------------------
 
 -- Get alpha (level-dependent multiplier on WSC)
-local function blueGetAlpha(level)
+local function bluGetAlpha(level)
     if level < 61 then
         return math.ceil(100 - (level / 6)) / 100
     elseif level <= 75 then
@@ -33,16 +33,16 @@ local function blueGetAlpha(level)
 end
 
 -- Get WSC
-local function blueGetWSC(attacker, params)
+local function bluGetWSC(attacker, params)
     local wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
         attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
-        attacker:getStat(xi.mod.CHR) * params.chr_wsc) * blueGetAlpha(attacker:getMainLvl())
+        attacker:getStat(xi.mod.CHR) * params.chr_wsc) * bluGetAlpha(attacker:getMainLvl())
     return wsc
 end
 
 -- Get cRatio
-local function blueGetcRatio(ratio, atk_lvl, def_lvl)
+local function bluGetcRatio(ratio, atk_lvl, def_lvl)
 
     -- Apply level penalty
     local levelcor = 0
@@ -91,7 +91,7 @@ local function blueGetcRatio(ratio, atk_lvl, def_lvl)
 end
 
 -- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
-local function blueGetfTP(tp, ftp0, ftp1500, ftp3000)
+local function bluGetfTP(tp, ftp0, ftp1500, ftp3000)
     tp = utils.clamp(tp,0,3000)
     if tp >= 0 and tp < 1500 then
         return ftp0 + ((ftp1500 - ftp0) * (tp / 1500))
@@ -108,7 +108,7 @@ local function blueGetfTP(tp, ftp0, ftp1500, ftp3000)
 end
 
 -- Get fSTR
-local function blueGetfSTR(dSTR)
+local function bluGetfSTR(dSTR)
     local fSTR2 = nil
     if dSTR >= 12 then
         fSTR2 = (dSTR + 4) / 2
@@ -131,7 +131,7 @@ local function blueGetfSTR(dSTR)
 end
 
 -- Get hitrate
-local function blueGetHitrate(attacker, target)
+local function bluGetHitrate(attacker, target)
     local acc = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
     local eva = target:getEVA()
     acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
@@ -186,7 +186,7 @@ local function blueGetHitrate(attacker, target)
 end
 
 -- Get the effect of ecosystem correlation
-local function blueGetCorrelation(spellEcosystem, monsterEcosystem, merits)
+local function bluGetCorrelation(spellEcosystem, monsterEcosystem, merits)
     local effect = utils.getSystemStrengthBonus(spellEcosystem, monsterEcosystem)
     effect = effect * 0.25
     if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
@@ -196,7 +196,7 @@ local function blueGetCorrelation(spellEcosystem, monsterEcosystem, merits)
 end
 
 -- Get the damage for a physical Blue Magic spell
-function blueDoPhysicalSpell(caster, target, spell, params)
+function bluDoPhysicalSpell(caster, target, spell, params)
 
     -----------------------
     -- Get final D value --
@@ -207,7 +207,7 @@ function blueDoPhysicalSpell(caster, target, spell, params)
     initialD = utils.clamp(initialD,0,params.duppercap)
 
     -- fSTR
-    local fStr = blueGetfSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
+    local fStr = bluGetfSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
     if fStr > 22 then
         if params.ignorefstrcap == nil then -- Smite of Rage / Grand Slam don't have this cap applied
             fStr = 22
@@ -227,16 +227,16 @@ function blueDoPhysicalSpell(caster, target, spell, params)
     if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
         local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
         tp = utils.clamp(tp,0,3000)
-        multiplier = blueGetfTP(tp, params.multiplier, params.tp150, params.tp300)
+        multiplier = bluGetfTP(tp, params.multiplier, params.tp150, params.tp300)
         bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
 
     -- WSC
-    local wsc = blueGetWSC(caster, params)
+    local wsc = bluGetWSC(caster, params)
     wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
 
     -- Monster correlation
-    local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = bluGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Azure Lore
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
@@ -254,8 +254,8 @@ function blueDoPhysicalSpell(caster, target, spell, params)
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
 
-    local cratio = blueGetcRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = blueGetHitrate(caster, target)
+    local cratio = bluGetcRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
+    local hitrate = bluGetHitrate(caster, target)
 
     -------------------------
     -- Perform the attacks --
@@ -296,7 +296,7 @@ function blueDoPhysicalSpell(caster, target, spell, params)
 end
 
 -- Get the damage for a magical Blue Magic spell
-function blueDoMagicalSpell(caster, target, spell, params)
+function bluDoMagicalSpell(caster, target, spell, params)
 
     -- In individual magical spells, don't use params.effect for the added effect
     -- This would affect the resistance check for damage here
@@ -308,7 +308,7 @@ function blueDoMagicalSpell(caster, target, spell, params)
     params.skillType = xi.skill.BLUE_MAGIC
 
     -- WSC
-    local wsc = blueGetWSC(caster, params)
+    local wsc = bluGetWSC(caster, params)
     if caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
         wsc = wsc * 2
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
@@ -325,7 +325,7 @@ function blueDoMagicalSpell(caster, target, spell, params)
     end
 
     -- Monster correlation
-    local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = bluGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Final D value
     local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
@@ -343,7 +343,7 @@ function blueDoMagicalSpell(caster, target, spell, params)
 end
 
 -- Perform a draining magical Blue Magic spell
-function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
+function bluDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
 
     -- determine base damage
     local dmg = params.dmgMultiplier * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
@@ -364,7 +364,7 @@ function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
             caster:addMP(dmg)
         else
             dmg = utils.clamp(dmg, 0, target:getHP())
-            dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
+            dmg = bluFinalizeDamage(caster, target, spell, dmg, params)
             caster:addHP(dmg)
         end
     end
@@ -374,7 +374,7 @@ function blueDoDrainSpell(caster, target, spell, params, softCap, mpDrain)
 end
 
 -- Get the damage and resistance for a breath Blue Magic spell
-function blueDoBreathSpell(caster, target, spell, params, isConal)
+function bluDoBreathSpell(caster, target, spell, params, isConal)
 
     local results = {}
     results[1] = 0 -- damage
@@ -404,7 +404,7 @@ function blueDoBreathSpell(caster, target, spell, params, isConal)
     end
 
     -- Monster correlation
-    local correlationMultiplier = blueGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
+    local correlationMultiplier = bluGetCorrelation(params.ecosystem, target:getSystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
     dmg = dmg * (1 + correlationMultiplier)
 
     -- Monster elemental adjustments
@@ -428,7 +428,7 @@ function blueDoBreathSpell(caster, target, spell, params, isConal)
 end
 
 -- Finalize HP damage after a spell
-function blueFinalizeDamage(caster, target, spell, dmg, params)
+function bluFinalizeDamage(caster, target, spell, dmg, params)
 
     if dmg < 0 then
         dmg = 0
@@ -466,7 +466,7 @@ function blueFinalizeDamage(caster, target, spell, dmg, params)
 end
 
 -- Get the duration of an enhancing Blue Magic spell
-function blueGetDurationWithDiffusion(caster, duration)
+function bluGetDurationWithDiffusion(caster, duration)
 
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local merits = caster:getMerit(xi.merit.DIFFUSION)
@@ -480,7 +480,7 @@ function blueGetDurationWithDiffusion(caster, duration)
 end
 
 -- Perform an enfeebling Blue Magic spell
-function blueDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
+function bluDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 
     -- INT and Blue Magic skill are the default resistance modifiers
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
@@ -511,8 +511,38 @@ function blueDoEnfeeblingSpell(caster, target, spell, params, power, tick, durat
 
 end
 
+
+-- Perform a curative Blue Magic spell
+function bluDoCuringSpell(caster, target, spell, params)
+
+    local power = getCurePowerOld(caster)
+    local divisor = params.divisor0
+    local constant = params.constant0
+
+    if power > params.powerThreshold2 then
+        divisor = params.divisor2
+        constant = params.constant2
+    elseif power > params.powerThreshold1 then
+        divisor = params.divisor1
+        constant = params.constant1
+    end
+
+    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), params.minCure, true)
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
+    final = final * xi.settings.main.CURE_POWER
+    final = utils.clamp(final, 0, target:getMaxHP() - target:getHP())
+
+    target:addHP(final)
+    target:wakeUp()
+    caster:updateEnmityFromCure(target, final)
+    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+
+    return final
+
+end    
+
 -- Inflict an added enfeebling effect (after a physical spell)
-function blueDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+function bluDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     -- Physical spell needs to do damage before added effect can hit
     if damage > 0 then
@@ -530,7 +560,7 @@ function blueDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, p
 end
 
 -- Inflict an added enfeebling effect (after a magical spell)
-function blueDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
+function bluDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     -- Blue Magic skill + whichever attribute the spell uses will be used as resistance modifiers
     params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
@@ -563,7 +593,7 @@ end
 - Assumed INT as the main magic accuracy modifier for physical spells' additional effects (when no data was found).
 
 ---------------------------
-changes in blu_fixes branch
+Changes in blu_fixes branch
 ---------------------------
 
 - Individual spell changes:
@@ -614,6 +644,9 @@ changes in blu_fixes branch
 - Drain Blue Magic spell changes:
     - Consolidated drain spells into one function.
 
+- Curing Blue Magic spell changes:
+    - Consolidated curing spells into one function.
+
 - General changes:
     - Azure Lore will now allow Physical spells to always skillchain, and Magical spells to always magic burst.
     - Changed all (wrongly named) LUMORIAN and LUMORIAN_KILLER to LUMINIAN and LUMINIAN_KILLER.
@@ -622,7 +655,7 @@ changes in blu_fixes branch
 
 - Supernova changes:
     - Added a BLUE_MAGIC_LOCK status effect (with Omerta name/icon).
-    - Induces BLUE_MAGIC_LOCK for 1 minute after changing spell set.
+    - Induces BLUE_MAGIC_LOCK for 1 minute after changing spell set to prevent players from switching all the time.
 
 - TODOs:
     - "Damage / Accuracy / Critical Hit Rate / Effect Duration varies with TP" is not implemented.
@@ -638,9 +671,7 @@ changes in blu_fixes branch
     - Conal calculations on additional targets (not the main target) for Breath spells get a reduced range due to checking a triangle and not a half-circle.
         (see targetfind.cpp > findWithinCone, I didn't want to touch these calculations)
 
-
-
-- END RESULT
+- End result for players
     - Physical spells
         - acc: acc / DEX
         - dmg: att / STR / stat modifiers / monster correlation
@@ -659,6 +690,8 @@ changes in blu_fixes branch
     - Drain spells
         - dmg: blue magic skill
         - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
+    - Curing spells
+        - potency: 1 MND = 3 VIT = 5 Healing Magic skill (influenced by day/weather bonuses)
     - Correlation = multiplier +- 0.25 (breath multiplier = 1)
     - Azure Lore allows for continuous chaining and bursting
     - Merits

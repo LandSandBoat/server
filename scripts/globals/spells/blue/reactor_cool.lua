@@ -29,7 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectTwo = xi.effect.ICE_SPIKES
     local powerOne = 12 -- 12%
     local powerTwo = 5 -- 5 dmg
-    local duration = blueGetDurationWithDiffusion(caster, 120)
+    local duration = bluGetDurationWithDiffusion(caster, 120)
     local returnEffect = typeEffectOne
 
     -- Reactor Cool Will Overwrite Ice Spikes and Def Boost regardless of Power

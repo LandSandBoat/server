@@ -24,11 +24,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local minCure = 14
-    local divisor = 1
-    local constant = -6
-    local power = getCurePowerOld(caster)
     local params = {}
+<<<<<<< refs/remotes/upstream/base
     params.ecosystem = xi.ecosystem.VERMIN
 
     if power > 99 then
@@ -68,6 +65,19 @@ spellObject.onSpellCast = function(caster, target, spell)
     spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
 
     return final
+=======
+    params.minCure = 14
+    params.divisor0 = 1
+    params.constant0 = -6
+    params.powerThreshold1 = 59
+    params.divisor1 = 2
+    params.constant1 = 9
+    params.powerThreshold2 = 99
+    params.divisor2 = 57
+    params.constant2 = 33.125
+
+    return bluDoCuringSpell(caster, target, spell, params)
+>>>>>>> Healing spells + global blu functions name change
 end
 
 return spellObject

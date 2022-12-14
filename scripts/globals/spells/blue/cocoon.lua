@@ -27,7 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.DEFENSE_BOOST
     local power = 50 -- 50%
-    local duration = blueGetDurationWithDiffusion(caster, 90)
+    local duration = bluGetDurationWithDiffusion(caster, 90)
 
     if not target:addStatusEffect(typeEffect, power, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

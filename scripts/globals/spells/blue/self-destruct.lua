@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local damage = playerHP - 1
 
     if damage > 0 then
-        damage = blueFinalizeDamage(caster, target, spell, damage, params)
+        damage = bluFinalizeDamage(caster, target, spell, damage, params)
         caster:setHP(1)
         caster:delStatusEffectSilent(xi.effect.WEAKNESS)
         caster:addStatusEffect(xi.effect.WEAKNESS, 1, 0, 300)

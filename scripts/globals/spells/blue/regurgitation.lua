@@ -61,10 +61,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local tick = 0
     local duration = 30
 
-    local damage = blueDoMagicalSpell(caster, target, spell, params)
+    local damage = bluDoMagicalSpell(caster, target, spell, params)
     if caster:isBehind(target) then damage = math.floor(damage * 1.25) end
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
-    blueDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
+    damage = bluFinalizeDamage(caster, target, spell, damage, params)
+    bluDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     return damage
 end

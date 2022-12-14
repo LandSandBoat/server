@@ -27,7 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.SHOCK_SPIKES
     local power = 5 -- 5 dmg
-    local duration = blueGetDurationWithDiffusion(caster, 60)
+    local duration = bluGetDurationWithDiffusion(caster, 60)
 
     if not target:addStatusEffect(typeEffect, power, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

@@ -54,8 +54,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local tick = 0
     local duration = 90
 
-    local damage = blueDoMagicalSpell(caster, target, spell, params)
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
+    local damage = bluDoMagicalSpell(caster, target, spell, params)
+    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.skillType = xi.skill.BLUE_MAGIC

@@ -29,7 +29,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.BEASTMEN
     params.effect = typeEffectOne
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     local duration = 30
     local resistThreshold = 0.5
@@ -42,9 +42,13 @@ spellObject.onSpellCast = function(caster, target, spell)
         local actionTwo = target:addStatusEffect(typeEffectTwo, 8, 0, duration * resist)
 
         -- If at least one of effects got applied, set the message type
-        if actionOne or actionTwo then spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS) end
+        if actionOne or actionTwo then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+        end
         -- Set the returnEffect to effectTwo if the first one failed
-        if not actionOne and actionTwo then returnEffect = typeEffectTwo end
+        if not actionOne and actionTwo then
+            returnEffect = typeEffectTwo
+        end
 
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)

@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.dmgMultiplier = 3.5
 
-    return blueDoDrainSpell(caster, target, spell, params, 0, false)
+    return bluDoDrainSpell(caster, target, spell, params, 0, false)
 end
 
 return spellObject

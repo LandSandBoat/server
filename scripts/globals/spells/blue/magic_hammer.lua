@@ -53,6 +53,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
 <<<<<<< refs/remotes/upstream/base
+<<<<<<< refs/remotes/upstream/base
         dmg = blueDoMagicalSpell(caster, target, spell, params, MND_BASED)
         dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
         if target:getMP() > 0 then
@@ -75,6 +76,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- weirdly this spell returns MP dmg message even if nothing's here wtf
 =======
 >>>>>>> Blue magic lock + 1000 needles/magic hammer/self-destruct
+=======
+        damage = bluDoMagicalSpell(caster, target, spell, params)
+        damage = bluFinalizeDamage(caster, target, spell, damage, params)
+>>>>>>> Healing spells + global blu functions name change
 
         local mpDrained = utils.clamp(damage, 0, target:getMP())
         if mpDrained == 0 then

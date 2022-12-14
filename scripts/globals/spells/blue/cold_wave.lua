@@ -38,7 +38,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if target:getStatusEffect(xi.effect.BURN) ~= nil then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
-    elseif resist > resistThreshold then
+    elseif resist >= resistThreshold then
         
         -- Remove Choke on target
         if target:getStatusEffect(xi.effect.CHOKE) ~= nil then

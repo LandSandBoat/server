@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local isGaze = false
     local isConal = false
 
-    return blueDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
+    return bluDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 end
 
 return spellObject

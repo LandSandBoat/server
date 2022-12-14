@@ -28,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.MAGIC_ATK_BOOST
     local typeEffectTwo = xi.effect.MAGIC_DEF_BOOST
     local power = 10
-    local duration = blueGetDurationWithDiffusion(caster, 90)
+    local duration = bluGetDurationWithDiffusion(caster, 90)
     local returnEffect = typeEffectOne
 
     local actionOne = target:addStatusEffect(typeEffectOne, power, 0, duration)

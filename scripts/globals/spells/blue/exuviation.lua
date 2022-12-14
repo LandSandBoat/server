@@ -24,44 +24,19 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local minCure = 60
+    local params = {}
+    params.minCure = 60
+    params.divisor0 = 0.6666
+    params.constant0 = -45
+    params.powerThreshold1 = 219
+    params.divisor1 = 2
+    params.constant1 = 65
+    params.powerThreshold2 = 459
+    params.divisor2 = 1.5
+    params.constant2 = 144.6666
+
     target:eraseStatusEffect()
-    local divisor = 0.6666
-    local constant = -45
-    local power = getCurePowerOld(caster)
-
-    if power > 459 then
-        divisor = 1.5
-        constant = 144.6666
-    elseif power > 219 then
-        divisor =  2
-        constant = 65
-    end
-
-    local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, true)
-
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-
-    if
-        target:getAllegiance() == caster:getAllegiance() and
-        (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)
-    then
-        --Applying server mods
-        final = final * xi.settings.main.CURE_POWER
-    end
-
-    local diff = target:getMaxHP() - target:getHP()
-    if final > diff then
-        final = diff
-    end
-
-    target:addHP(final)
-    target:wakeUp()
-    target:eraseStatusEffect()
-    caster:updateEnmityFromCure(target, final)
-    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
-
-    return final
+    return bluDoCuringSpell(caster, target, spell, params)
 end
 
 return spellObject
