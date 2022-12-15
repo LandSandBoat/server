@@ -111,10 +111,12 @@ jobs:
         git reset --hard
         if [ -s cpp_formatting_checks.txt ]
         then
+          echo ""
           echo "You have errors in your C++ code formatting."
           echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
           echo "You can either fix the formatting by hand or use clang-format."
           echo "(You can safely ignore warnings about \$TERM and tput)"
+          echo ""
           cat cpp_formatting_checks.txt | diff-so-fancy || true
           exit 1
         fi
