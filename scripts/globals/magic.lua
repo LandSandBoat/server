@@ -246,14 +246,16 @@ xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, s
     local eemTier = 0
     local resBuild = 0
     local mevaMult = 1
+    local eemBonus = 0
 
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
         eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
         resBuild = utils.ternary(target:isNM() and isDamageSpell, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
         mevaMult = xi.magic.calculateMEVAMult(utils.clamp(eemTier + resBuild, -3, 11))
+        eemBonus = (target:getMod(xi.mod.MEVA) * mevaMult) - target:getMod(xi.mod.MEVA)
     end
 
-    local magicAccDiff = magicacc - math.floor((magiceva * mevaMult) + 0.5) -- Rounds to the nearest integer. LuaJIT does not have a math.round so this is a workaround.
+    local magicAccDiff = magicacc - math.floor(magiceva + eemBonus + 0.5) -- Rounds to the nearest integer. LuaJIT does not have a math.round so this is a workaround.
 
     if magicAccDiff < 0 then
         p = utils.clamp(((50 + math.floor(magicAccDiff / 2))), 5, 95)
@@ -638,9 +640,9 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         effectRes = utils.ternary(xi.magic.effectEva[effect], xi.magic.effectEva[effect], 0)
     end
 
-    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount, false)
+    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount, utils.ternary(params.damageSpell, true, false))
 
-    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster, false)
+    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster, utils.ternary(params.damageSpell, true, false))
 end
 
 -- Applies resistance for additional effects

@@ -71,12 +71,12 @@ quest.sections =
 
         [xi.zone.KUFTAL_TUNNEL] =
         {
-            ['Hawk_Nose'] =
+            ['qm5'] =
             {
                 onTrigger = function(player, npc)
                     local flag = true
 
-                    for _, member in pairs(player:getAlliance()) do
+                    for _, member in pairs(player:getParty()) do
                         if
                             member:getMainLvl() > 40 or
                             member:checkDistance(player) > 15
@@ -88,7 +88,7 @@ quest.sections =
                     if
                         flag and
                         quest:getVar(player, 'Prog') == 0 and
-                        #player:getParty() > 1
+                        #player:getParty() >= 6
                     then
                         return quest:progressEvent(14)
                     end
@@ -98,7 +98,7 @@ quest.sections =
             onEventFinish =
             {
                 [14] = function(player, csid, option, npc)
-                    for _, member in pairs(player:getAlliance()) do
+                    for _, member in pairs(player:getParty()) do
                         quest:setVar(member, 'Prog', 1)
                     end
                 end,
