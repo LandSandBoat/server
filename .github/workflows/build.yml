@@ -107,12 +107,14 @@ jobs:
             fi
           fi
         done
-        git diff --color | diff-so-fancy || true
-        git diff >> cpp_formatting_checks.txt
-        cat cpp_formatting_checks.txt
+        git diff --color >> cpp_formatting_checks.txt
         git reset --hard
         if [ -s cpp_formatting_checks.txt ]
         then
+          echo "You have errors in your C++ code formatting."
+          echo "Please see below in red for the incorrect formatted, and in green for the correct formatting."
+          echo "(You can ignore warnings about tput and \$TERM)"
+          cat cpp_formatting_checks.txt | diff-so-fancy || true
           exit 1
         fi
         exit 0
