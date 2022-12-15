@@ -351,3 +351,22 @@ xi.moghouse.onEventFinishRentARoom = function(player, csid, option)
         end
     end
 end
+
+xi.moghouse.isRented = function(player)
+    local playerzone = player:getZoneID()
+    local isrentexempt = (playerzone >= xi.zone.SOUTHERN_SAN_DORIA_S and playerzone <= xi.zone.WINDURST_WATERS_S) or (playerzone >= xi.zone.WESTERN_ADOULIN and playerzone <= xi.zone.EASTERN_ADOULIN)
+
+    if isrentexempt or not xi.settings.map.RENT_A_ROOM then
+        return true
+    end
+
+    local playerregion = player:getZone():getRegionID()
+    local ishomenation = playerregion == xi.moghouse.nationRegionBits[player:getNation()]
+    local isrentedcity = playerregion == player:getCharVar("[Moghouse]Rent-a-room")
+
+    if xi.settings.map.RENT_A_ROOM and utils.ternary(xi.settings.map.ERA_RENT_A_ROOM, isrentedcity, ishomenation or isrentedcity) then
+        return true
+    end
+
+    return false
+end
