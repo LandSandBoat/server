@@ -640,9 +640,9 @@ xi.magic.applyResistanceEffect = function(caster, target, spell, params)
         effectRes = utils.ternary(xi.magic.effectEva[effect], xi.magic.effectEva[effect], 0)
     end
 
-    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount, false)
+    local p = xi.magic.getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, nil, skillchainCount, utils.ternary(params.damageSpell, true, false))
 
-    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster, false)
+    return xi.magic.getMagicResist(p, target, element, effectRes, skillchainCount, effect, caster, utils.ternary(params.damageSpell, true, false))
 end
 
 -- Applies resistance for additional effects

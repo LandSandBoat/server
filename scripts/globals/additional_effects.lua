@@ -78,13 +78,21 @@ xi.additionalEffect.statusAttack = function(addStatus, defender)
     return 0
 end
 
-xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
+xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, item)
     local params = {}
     params.bonusmab   = 0
     params.includemab = false
 
+    if item:getID() == 18153 then
+        params.element = xi.magic.ele.LIGHT
+        params.attribute = xi.mod.MND
+        params.skillType = xi.skill.MARKSMANSHIP
+        params.damageSpell = true
+        params.includemab = true
+    end
+
     damage = xi.magic.addBonusesAbility(attacker, element, defender, damage, params)
-    damage = damage * xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
+    damage = damage * xi.magic.applyResistanceEffect(attacker, defender, nil, params)
     damage = xi.magic.adjustForTarget(defender, damage, element)
     damage = xi.magic.finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 
@@ -160,7 +168,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     --------------------------------------
 
     if addType == procType.DAMAGE then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+        if item:getID() == 18153 then
+            damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
+        end
+
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
         msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
         if damage < 0 then
@@ -227,7 +239,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         addType == procType.HP_DRAIN or
         (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1)
     then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
 
         -- Upyri: ID 4105
         if defender:isUndead() or defender:getPool() == 4105 then
@@ -247,7 +259,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         addType == procType.MP_DRAIN or
         (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2)
     then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
 
         if damage > defender:getMP() then
             damage = defender:getMP()
@@ -262,7 +274,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         addType == procType.TP_DRAIN or
         (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 3)
     then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
 
         if damage > defender:getTP() then
             damage = defender:getTP()
@@ -342,7 +354,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:setMod(xi.mod.DMG, 0)
             defender:setLocalVar("killable", 1)
             defender:setUnkillable(false)
-            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
             msgID = xi.msg.basic.ADD_EFFECT_DMG
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
