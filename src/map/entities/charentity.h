@@ -332,6 +332,7 @@ public:
     bool              shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
     uint8             m_SetBlueSpells[20];             // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
     uint32            m_FieldChocobo;
+    uint32            m_claimedDeeds[5];
 
     UnlockedAttachments_t m_unlockedAttachments; // Unlocked Automaton Attachments (1 bit per attachment)
     CAutomatonEntity*     PAutomaton;            // Automaton statistics

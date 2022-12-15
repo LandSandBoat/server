@@ -6791,6 +6791,52 @@ std::optional<uint8> CLuaBaseEntity::getUnityRank(sol::object const& unityObj)
 }
 
 /************************************************************************
+ *  Function: getClaimedDeedMask()
+ *  Purpose : Gets a table of uint32 corresponding to claimed deeds of
+ *            heroism rewards.
+ *  Example : player:getClaimedDeedMask()
+ ************************************************************************/
+
+sol::table CLuaBaseEntity::getClaimedDeedMask()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to get claimed deed mask for Non-PC.");
+        return sol::lua_nil;
+    }
+
+    auto* PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto maskTable = lua.create_table();
+    for (uint8 i = 0; i < 5; ++i)
+    {
+        maskTable.add(PChar->m_claimedDeeds[i]);
+    }
+
+    return maskTable;
+}
+
+void CLuaBaseEntity::setClaimedDeed(uint16 deedBitNum)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to set claimed deed mask for Non-PC.");
+        return;
+    }
+
+    auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 index  = deedBitNum / 32;
+    uint8 setBit = deedBitNum % 32;
+
+    PChar->m_claimedDeeds[index] |= (1 << setBit);
+
+    const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
+    char buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
+    sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
  *  Function: addAssault()
  *  Purpose : Adds an assault mission to the player's log
  *  Example : player:addAssault(bit.rshift(option,4))
@@ -15116,6 +15162,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setUnityLeader", CLuaBaseEntity::setUnityLeader);
     SOL_REGISTER("getUnityLeader", CLuaBaseEntity::getUnityLeader);
     SOL_REGISTER("getUnityRank", CLuaBaseEntity::getUnityRank);
+    SOL_REGISTER("getClaimedDeedMask", CLuaBaseEntity::getClaimedDeedMask);
+    SOL_REGISTER("setClaimedDeed", CLuaBaseEntity::setClaimedDeed);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);
