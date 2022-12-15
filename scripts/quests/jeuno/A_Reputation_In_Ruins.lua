@@ -66,7 +66,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):getAnimation() == 8 and not player:hasKeyItem(xi.keyItem.BLUE_BRACELET) and player:getLocalVar("blueKilled") == 0 then
-                        if GetMobByID(ID.mob.BLUE_GARGOYLES):isSpawned() or GetMobByID(ID.mob.BLUE_GARGOYLES +1):isSpawned() then
+                        if GetMobByID(ID.mob.BLUE_GARGOYLES):isSpawned() or GetMobByID(ID.mob.BLUE_GARGOYLES + 1):isSpawned() then
                             return 
                         end
                         GetNPCByID(ID.npc.BLUE_BRACELET_DOOR):setAnimation(9)
@@ -87,7 +87,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):getAnimation() == 8 and not player:hasKeyItem(xi.keyItem.GREEN_BRACELET) and player:getLocalVar("greenKilled") == 0 then
-                        if GetMobByID(ID.mob.GREEN_GARGOYLES):isSpawned() or GetMobByID(ID.mob.GREEN_GARGOYLES +1):isSpawned() then
+                        if GetMobByID(ID.mob.GREEN_GARGOYLES):isSpawned() or GetMobByID(ID.mob.GREEN_GARGOYLES + 1):isSpawned() then
                             return 
                         end
                         GetNPCByID(ID.npc.GREEN_BRACELET_DOOR):setAnimation(9)
