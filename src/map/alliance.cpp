@@ -40,8 +40,7 @@
 #include "packets/party_define.h"
 #include "packets/party_member_update.h"
 
-CAlliance::CAlliance(CBattleEntity* PEntity)
-{
+CAlliance::CAlliance(CBattleEntity* PEntity) {
     XI_DEBUG_BREAK_IF(PEntity->PParty == nullptr);
 
     m_AllianceID = PEntity->PParty->GetPartyID();
