@@ -106,7 +106,8 @@ jobs:
             fi
           fi
         done
-        git diff >> cpp_formatting_checks.txt
+        npm install -g diff-so-fancy
+        git diff --color | diff-so-fancy >> cpp_formatting_checks.txt
         cat cpp_formatting_checks.txt
         git reset --hard
         if [ -s cpp_formatting_checks.txt ]
