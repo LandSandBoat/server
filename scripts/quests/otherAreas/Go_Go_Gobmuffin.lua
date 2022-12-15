@@ -11,14 +11,14 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mhauraID = require('scripts/zones/Riverne-Site_B01/IDs')
+local ID = require('scripts/zones/Riverne-Site_B01/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GO_GO_GOBMUFFIN)
 
 quest.rewards =
 {
-    keyItem = xi.ki.MAP_OF_CAPE_RIVERNE
+    keyItem = xi.ki.MAP_OF_CAPE_RIVERNE,
 }
 
 quest.sections =
@@ -68,9 +68,17 @@ quest.sections =
 
         [xi.zone.RIVERNE_SITE_B01] =
         {
-            -- Spawning of mobs is handled in Spatial_Displacement.lua
-            -- TODO: Move here. Having difficulties calling events from
-            -- the quest framework upon initial implementation.
+            ['Spatial_Displacement'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        npc:getID() == 16896198 and
+                        quest:getVar(player, 'Prog') == 0
+                    then
+                        return quest:progressEvent(17)
+                    end
+                end,
+            },
 
             ['Spell_Spitter_Spilospok'] =
             {
@@ -78,6 +86,21 @@ quest.sections =
                     -- This is called for all players in range
                     if quest:getVar(player, 'Prog') == 0 then
                         quest:setVar(player, 'Prog', 1)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [17] = function(player, csid, option, npc)
+                    if
+                        quest:getVar(player, 'Prog') == 0 and
+                        not GetMobByID(ID.mob.SPILOSPOK):isSpawned() and
+                        option == 0
+                    then
+                        SpawnMob(ID.mob.SPILOSPOK):updateClaim(player)
+                        SpawnMob(ID.mob.CHEMACHIQ):updateClaim(player)
+                        SpawnMob(ID.mob.BOKABRAQ):updateClaim(player)
                     end
                 end,
             },
