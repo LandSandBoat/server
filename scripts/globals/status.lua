@@ -870,8 +870,8 @@ xi.effect =
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
-    BLUE_MAGIC_LOCK          = 806, -- Locks the use of Blue Magic after setting spells
-    -- 807-1022
+
+    -- 806-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 

@@ -25,11 +25,6 @@ local function bluGetAlpha(level)
     elseif level <= 99 then
         return 0.83
     end
-<<<<<<< refs/remotes/upstream/base
-
-    return alpha
-=======
->>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 end
 
 -- Get WSC
@@ -53,7 +48,6 @@ local function bluGetcRatio(ratio, atk_lvl, def_lvl)
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
     end
-
     ratio = ratio - levelcor
     ratio = utils.clamp(ratio,0,2)
 
@@ -77,22 +71,11 @@ local function bluGetcRatio(ratio, atk_lvl, def_lvl)
         cratiomax = 1.2 * ratio
     end
 
-<<<<<<< refs/remotes/upstream/base
-=======
     -- Return data
->>>>>>> Lua code cleanup
     local cratio = {}
     if cratiomin < 0 then
         cratiomin = 0
     end
-<<<<<<< refs/remotes/upstream/base
-
-<<<<<<< refs/remotes/upstream/base
-=======
-    -- Return data
->>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
-=======
->>>>>>> Lua code cleanup
     cratio[1] = cratiomin
     cratio[2] = cratiomax
     return cratio
@@ -108,11 +91,6 @@ local function bluGetfTP(tp, ftp0, ftp1500, ftp3000)
     else -- unreachable
         return 1
     end
-<<<<<<< refs/remotes/upstream/base
-
-    return 1 -- no ftp mod
-=======
->>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 end
 
 -- Get fSTR
@@ -145,52 +123,10 @@ local function bluGetHitrate(attacker, target)
     local eva = target:getEVA()
     acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
 
-<<<<<<< refs/remotes/upstream/base
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
-    end
-
-    local hitdiff = 0
-    local hitrate = 75
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = (-1 * (eva - acc)) / 2
-    end
-
-    hitrate = hitrate + hitdiff
-=======
     local hitrate = 75 + (acc - eva) / 2
->>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
     hitrate = hitrate / 100
     hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
-<<<<<<< refs/remotes/upstream/base
-<<<<<<< refs/remotes/upstream/base
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
-
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
-    end
-<<<<<<< refs/remotes/upstream/base
-=======
-    attacker:PrintToPlayer(string.format("Hitrate %s", hitrate))
->>>>>>> Temp save
-=======
-    --attacker:PrintToPlayer(string.format("Hitrate %s", hitrate))
->>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
-
-=======
->>>>>>> Renamed BLU functions, added drain function (yet to rewire), used existing systemStrength table
     return hitrate
 end
 
@@ -453,7 +389,6 @@ function bluFinalizeDamage(caster, target, spell, dmg, params)
             -- TODO: verify Afflatus/enmity from absorb?
             return dmg
         end
-
         dmg = utils.oneforall(target, dmg)
     end
 
@@ -576,11 +511,9 @@ function bluDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick
 end
 
 --[[
-
 +-------+
 | NOTES |
 +-------+
-
 - Spell values (multiplier, TP, D, WSC, TP etc) from:
     - https://www.bg-wiki.com/ffxi/Calculating_Blue_Magic_Damage
     - https://ffxiclopedia.fandom.com/wiki/Calculating_Blue_Magic_Damage
@@ -591,123 +524,3 @@ end
         https://www.bluegartr.com/threads/107650-Random-Question-Thread-XXIV-Occupy-the-RQT?p=4906565&viewfull=1#post4906565
     - When values were absent, spell values were decided based on Blue Gartr threads and Wiki page discussions.
     - Assumed INT as the main magic accuracy modifier for physical spells' additional effects (when no data was found).
-
----------------------------
-Changes in blu_fixes branch
----------------------------
-
-- Individual spell changes:
-    - Updated TP values. A lot of spells had lower TP values for 150/300/Azure, which doesnt't make sense.
-    - Updated WSC values, though most were correct.
-    - Added spell ecosystem.
-    - Streamlined the way spells of the same type are coded.
-    - Added effect changes:
-        - Consolidated all AE into one function.
-        - Resistance now influences duration properly.
-        - Effects that decay over time now work, such as Wild Oats (VIT down).
-        - Some spells had 0 duration.
-
-- Physical Blue Magic spell changes:
-    - Simplified some functions.
-    - Added Physical Potency merits effect.
-    - Added Azure Lore effect on multiplier.
-    - Damage is now influenced by monster correlation.
-    - All physical spells now need to hit before the added effect (AE) can kick in.
-    - All physical spells with an AE get a resistance check for the AE.
-
-- Magical Blue Magic spell changes:
-    - Simplified Azure Lore's multiplier code.
-    - Simplified main attribute checking code (INT/MND/CHR).
-    - Damage is now influenced by monster correlation.
-    - Added multi-target damage reduction.
-    - Added effect changes:
-        - Consolidated all AE into one function.
-        - Resistance now influences duration properly.
-
-- Enhancing Blue Magic spell changes:
-    - Consolidated Diffusion's effect on duration into one function.
-    - Effects that decay over time now work, such as Saline Coat (Magic Defense Boost).
-
-- Enfeebling Blue Magic spell changes:
-    - Consolidated enfeebling spells into one function, where possible.
-    - Added isGaze/isConal flags.
-    - Put the resist threshold in line with other enfeebles (>= 0.5) and halved duration when half-resist.
-
-- Breath Blue Magic spell changes:
-    - Corrected breath spells to do breath damage, not magic damage.
-    - You have to be in front of the monster to do breath damage.
-    - Added an angle damage multiplier that lowers damage when monster is more to your side than in front.
-    - Damage is now influenced by a monster's elemental resistance, but not by mab/mdb or weather/day bonuses.
-    - Damage is now influenced by monster correlation.
-    - The resist rate is calculated once and affects both damage and added effect hit rate / duration.
-
-- Drain Blue Magic spell changes:
-    - Consolidated drain spells into one function.
-
-- Curing Blue Magic spell changes:
-    - Consolidated curing spells into one function.
-
-- General changes:
-    - Azure Lore will now allow Physical spells to always skillchain, and Magical spells to always magic burst.
-    - Changed all (wrongly named) LUMORIAN and LUMORIAN_KILLER to LUMINIAN and LUMINIAN_KILLER.
-    - Added BREATH_DMG_DEALT mod.
-    - Updated Mirage Keffiyeh/Mirage Keffiyeh +1/Saurian Helm to have BREATH_DMG_DEALT +10 mods.
-
-- Supernova changes:
-    - Added a BLUE_MAGIC_LOCK status effect (with Omerta name/icon).
-    - Induces BLUE_MAGIC_LOCK for 1 minute after changing spell set to prevent players from switching all the time.
-
-- TODOs:
-    - "Damage / Accuracy / Critical Hit Rate / Effect Duration varies with TP" is not implemented.
-    - Missed physical spells should not be 0 dmg, but there's currently no way to make spells "miss".
-    - Sneak Attack / Trick Attack in combination with spells doesn't work, but it should (but not for all spells).
-    - Add 75+ spells. I didn't bother personally since we're on a 75 server and I have no knowledge of these spells at all.
-    - Add Monster Correlation effect to Magus Keffiyeh (adds another 0.02).
-    - Convergence effect isn't coded.
-    - Cannot magic burst Breath spells. (bursting Breath spells only affects accuracy, not damage)
-        - Burst Affinity doesn't work with Breath spells.
-    - Conal calculations on main targets have to be done manually, because they will always hit even if not in cone.
-        - Additional targets go through the conal check, but not the main target.
-    - Conal calculations on additional targets (not the main target) for Breath spells get a reduced range due to checking a triangle and not a half-circle.
-        (see targetfind.cpp > findWithinCone, I didn't want to touch these calculations)
-
-- End result for players
-    - Physical spells
-        - acc: acc / DEX
-        - dmg: att / STR / stat modifiers / monster correlation
-        - Added effect macc: macc / blue magic skill / INT (cannot land without spell hitting)
-    - Magical spells
-        - dmg: mab / affinity / stat modifiers / monster correlation
-        - macc: macc / blue magic skill / main stat modifier (INT, MND or CHR)
-        - Added effect macc: macc / blue magic skill / main stat modifier (INT, MND or CHR)
-    - Enfeebling spells (magical without damage)
-        - potency: none
-        - duration: a .5 resist halves duration, any lower and the spell doesn't hit
-        - macc: macc / blue magic skill / INT
-    - Breath spells
-        - dmg: HP / level / elemental resistance / monster correlation / angle (dmg is not influenced by mab/mdb or weather/day bonuses)
-        - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
-    - Drain spells
-        - dmg: blue magic skill
-        - macc: macc / blue magic skill (no direct stat (such as INT or CHR) increases macc)
-    - Curing spells
-        - potency: 1 MND = 3 VIT = 5 Healing Magic skill (influenced by day/weather bonuses)
-    - Correlation = multiplier +- 0.25 (breath multiplier = 1)
-    - Azure Lore allows for continuous chaining and bursting
-    - Merits
-        - Physical Potency: +2 acc per merit (for physical spells)
-        - Magical Accuracy: +2 macc per merit (for magical spells)
-        - Correlation: +0.004 per merit (only for strengths, not weaknesses)
-        - Convergence: does not work
-        - Enchainment: adds 100 TP per merit
-        - Diffusion: adds 5% duration per merit
-        - Assimilation: 1 extra point per slot (TO CHECK)
-
-
-CLEANUP*********************
-- Getstats, put back
-- Magic, remove prints
-- Remove defmode, although it might come in handy (put in modules for yourself)
-- Check out https://www.bluegartr.com/threads/61949-BLU-Magical-Build for reference for DMG for SN specific modifiers
-
-]]

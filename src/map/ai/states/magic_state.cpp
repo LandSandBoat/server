@@ -297,14 +297,6 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
             return false;
         }
     }
-    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_BLUE_MAGIC_LOCK))
-    {
-        if (m_PSpell->getSpellGroup() == 3)
-        {
-            m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_WAIT_LONGER );
-            return false;
-        }
-    }
     if (!HasCost())
     {
         return false;

@@ -18,23 +18,6 @@ require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
 
-<<<<<<< refs/remotes/upstream/base
-local function inverseBellRand(min, max, weight)
-    if not weight then
-        weight = 0.5
-    end
-
-    local mid = math.floor((max - min) / 2)
-    local rand = math.floor(mid * math.pow(math.random(), weight))
-    if math.random() < 0.5 then
-        return min + mid - rand
-    else
-        return min + mid + rand
-    end
-end
-
-=======
->>>>>>> Azure Lore, potency/correlation merits, correlation in general, clean up, physical about done
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end

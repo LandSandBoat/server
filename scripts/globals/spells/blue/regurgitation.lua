@@ -38,23 +38,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
-<<<<<<< refs/remotes/upstream/base
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local damage = blueDoMagicalSpell(caster, target, spell, params, INT_BASED)
-    if caster:isBehind(target, 15) then -- guesstimating the angle at 15 degrees here
-        damage = math.floor(damage * 1.25)
-    end
-<<<<<<< refs/remotes/upstream/base
-
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-=======
-    damage = blueFinalizeDamage(caster, target, spell, damage, params)
->>>>>>> Renamed BLU functions, added drain function (yet to rewire), used existing systemStrength table
-=======
->>>>>>> Enfeebling diff/attribute fixes + general magic damage function + almost all magical dmg spells + AE
 
     params.addedEffect = xi.effect.BIND
     local power = 1

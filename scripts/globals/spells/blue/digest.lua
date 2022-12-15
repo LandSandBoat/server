@@ -24,16 +24,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-<<<<<<< refs/remotes/upstream/base
-<<<<<<< refs/remotes/upstream/base
-    local dmg = 5 + 0.575 * caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-=======
-
-
->>>>>>> Renamed BLU functions, added drain function (yet to rewire), used existing systemStrength table
-    --get resist multiplier (1x if no resist)
-=======
->>>>>>> Drain spells, enhancing spells, merit fixes
     local params = {}
     params.ecosystem = xi.ecosystem.AMORPH
     params.attackType = xi.attackType.MAGICAL

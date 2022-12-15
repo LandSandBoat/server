@@ -52,34 +52,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-<<<<<<< refs/remotes/upstream/base
-<<<<<<< refs/remotes/upstream/base
-        dmg = blueDoMagicalSpell(caster, target, spell, params, MND_BASED)
-        dmg = blueFinalizeDamage(caster, target, spell, dmg, params)
-        if target:getMP() > 0 then
-            if target:getMP() < dmg then
-                dmg = target:getMP()
-            end
-
-            caster:addMP(dmg)
-        else
-            return 0
-        end
-=======
-        damage = blueDoMagicalSpell(caster, target, spell, params)
-        damage = blueFinalizeDamage(caster, target, spell, damage, params)
-<<<<<<< refs/remotes/upstream/base
-        caster:addMP(utils.clamp(damage,0,target:getMP()))
->>>>>>> Enfeebling diff/attribute fixes + general magic damage function + almost all magical dmg spells + AE
-    end
-
-    -- weirdly this spell returns MP dmg message even if nothing's here wtf
-=======
->>>>>>> Blue magic lock + 1000 needles/magic hammer/self-destruct
-=======
         damage = bluDoMagicalSpell(caster, target, spell, params)
         damage = bluFinalizeDamage(caster, target, spell, damage, params)
->>>>>>> Healing spells + global blu functions name change
 
         local mpDrained = utils.clamp(damage, 0, target:getMP())
         if mpDrained == 0 then

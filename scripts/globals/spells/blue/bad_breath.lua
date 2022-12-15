@@ -25,14 +25,6 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.PLANTOID
-<<<<<<< refs/remotes/upstream/base
-    local multi = 2.08
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        multi = multi + 0.50
-    end
-
-=======
->>>>>>> More breaths stuff, status check removal
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.EARTH
     params.diff = 0 -- no stat increases magic accuracy

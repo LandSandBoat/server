@@ -574,12 +574,6 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    -- MHR here for print purposes only
-    local mhr = 0
-    local levelDiff = utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
-    mhr = utils.clamp(70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus,5,95)
-    if caster:isPC() then caster:PrintToPlayer(string.format("Macc %s   Meva %s   MHR %s",magicacc,magiceva,mhr)) end
-
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
 
 end

@@ -45,35 +45,12 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:delStatusEffect(xi.effect.CHOKE)
         end
 
-<<<<<<< refs/remotes/upstream/base
-        local sINT = caster:getStat(xi.mod.INT)
-        local DOT = getElementalDebuffDOT(sINT)
-        local effect = target:getStatusEffect(typeEffect)
-        local noeffect = false
-        if effect ~= nil then
-            if effect:getPower() >= DOT then
-                noeffect = true
-            end
-        end
-
-        if noeffect then
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-        else
-            if effect ~= nil then
-                target:delStatusEffect(typeEffect)
-            end
-
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
-            local duration = math.floor(xi.settings.main.ELEMENTAL_DEBUFF_DURATION * resist)
-            target:addStatusEffect(typeEffect, DOT, 3, duration)
-=======
         local agiDown = utils.clamp(caster:getMainLvl() / 2, 0, 49)
         local dot = utils.clamp(math.floor((agiDown - 3) / 2), 0, 23)
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
         if target:addStatusEffect(params.effect, dot, tick, duration * resist) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
->>>>>>> Abstraction for physical spells AE and pure enfeebling spells + individual enfeebling spells
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)

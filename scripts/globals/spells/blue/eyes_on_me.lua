@@ -25,14 +25,6 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.DEMON
-<<<<<<< refs/remotes/upstream/base
-    local multi = 2.625
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        multi = multi + 2.0
-    end
-
-=======
->>>>>>> Enfeebling diff/attribute fixes + general magic damage function + almost all magical dmg spells + AE
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
     params.attribute = xi.mod.CHR

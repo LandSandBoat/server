@@ -25,14 +25,6 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.AMORPH
-<<<<<<< refs/remotes/upstream/base
-    local multi = 2.125
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        multi = multi + 0.50
-    end
-
-=======
->>>>>>> Enfeebling diff/attribute fixes + general magic damage function + almost all magical dmg spells + AE
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
     params.attribute = xi.mod.INT
