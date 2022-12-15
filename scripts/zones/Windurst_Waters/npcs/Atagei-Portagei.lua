@@ -96,7 +96,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("SmilebringersFameReset", 1)
             end
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1742)
         end
     end
 end
