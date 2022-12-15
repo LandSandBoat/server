@@ -21,6 +21,24 @@ require("scripts/globals/events/harvest_festivals")
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
 
+xi.additionalEffect.procType =
+{
+    -- These are arbitrary, make up new ones as needed.
+    DAMAGE        = 1,
+    DEBUFF        = 2,
+    HP_HEAL       = 3,
+    MP_HEAL       = 4,
+    HP_DRAIN      = 5,
+    MP_DRAIN      = 6,
+    TP_DRAIN      = 7,
+    HPMPTP_DRAIN  = 8,
+    DISPEL        = 9,
+    ABSORB_STATUS = 10,
+    SELF_BUFF = 11,
+    DEATH = 12,
+    BRIGAND = 13,
+}
+
 xi.additionalEffect.isRanged = function(item)
     -- Archery/Marksmanship/Throwing
     return math.abs(item:getSkillType() - xi.skill.MARKSMANSHIP) < 2
@@ -78,15 +96,15 @@ xi.additionalEffect.statusAttack = function(addStatus, defender)
     return 0
 end
 
-xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, item)
+xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, addType, item)
     local params = {}
     params.bonusmab   = 0
     params.includemab = false
 
-    if item:getID() == 18153 then
+    if addType == xi.additionalEffect.procType.DAMAGE and element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
         params.element = xi.magic.ele.LIGHT
         params.attribute = xi.mod.MND
-        params.skillType = xi.skill.MARKSMANSHIP
+        params.skillType = item:getSkillType()
         params.damageSpell = true
         params.includemab = true
     end
@@ -104,7 +122,7 @@ end
 -- luacheck: ignore 561
 -- TODO: Reduce complexity in this function:
 -- - replace giant if/else chain with switch statement
--- - replace each handler (elseif addType == procType.DEBUFF then) with a function
+-- - replace each handler (elseif addType == xi.additionalEffect.procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
     local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
@@ -117,25 +135,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local msgID     = 0
     local msgParam  = 0
 
-    local procType =
-    {
-        -- These are arbitrary, make up new ones as needed.
-        DAMAGE        = 1,
-        DEBUFF        = 2,
-        HP_HEAL       = 3,
-        MP_HEAL       = 4,
-        HP_DRAIN      = 5,
-        MP_DRAIN      = 6,
-        TP_DRAIN      = 7,
-        HPMPTP_DRAIN  = 8,
-        DISPEL        = 9,
-        ABSORB_STATUS = 10,
-        SELF_BUFF = 11,
-        DEATH = 12,
-        BRIGAND = 13,
-    }
-
-    if item:getID() == 18148 then
+    if addStatus == xi.effect.DEFENSE_DOWN  and item:getSkillType() == xi.skill.MARKSMANSHIP then
         local dLvl = defender:getMainLvl() - attacker:getMainLvl()
         if dLvl <= 0 then
             chance = 99
@@ -167,12 +167,12 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     --------------------------------------
 
-    if addType == procType.DAMAGE then
-        if item:getID() == 18153 then
+    if addType == xi.additionalEffect.procType.DAMAGE then
+        if element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
             damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
         end
 
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
         msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
         if damage < 0 then
@@ -181,7 +181,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         msgParam = damage
 
-    elseif addType == procType.DEBUFF then
+    elseif addType == xi.additionalEffect.procType.DEBUFF then
         if addStatus and addStatus > 0 then
             local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
             local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
@@ -221,14 +221,14 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             end
         end
 
-    elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
+    elseif addType == xi.additionalEffect.procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
         local hitPoints = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
         -- Unknown what modifies the HP, using power directly for now
         msgID = xi.msg.basic.ADD_EFFECT_HP_HEAL
         attacker:addHP(hitPoints)
         msgParam = hitPoints
 
-    elseif addType == procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
+    elseif addType == xi.additionalEffect.procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
         local magicPoints = damage
         -- Unknown what modifies this, using power directly for now
         msgID = xi.msg.basic.ADD_EFFECT_MP_HEAL
@@ -236,10 +236,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         msgParam = magicPoints
 
     elseif
-        addType == procType.HP_DRAIN or
-        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1)
+        addType == xi.additionalEffect.procType.HP_DRAIN or
+        (addType == xi.additionalEffect.procType.HPMPTP_DRAIN and math.random(1, 3) == 1)
     then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
 
         -- Upyri: ID 4105
         if defender:isUndead() or defender:getPool() == 4105 then
@@ -256,10 +256,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         attacker:addHP(damage)
 
     elseif
-        addType == procType.MP_DRAIN or
-        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2)
+        addType == xi.additionalEffect.procType.MP_DRAIN or
+        (addType == xi.additionalEffect.procType.HPMPTP_DRAIN and math.random(1, 3) == 2)
     then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
 
         if damage > defender:getMP() then
             damage = defender:getMP()
@@ -271,10 +271,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         attacker:addMP(damage)
 
     elseif
-        addType == procType.TP_DRAIN or
-        (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 3)
+        addType == xi.additionalEffect.procType.TP_DRAIN or
+        (addType == xi.additionalEffect.procType.HPMPTP_DRAIN and math.random(1, 3) == 3)
     then
-        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
 
         if damage > defender:getTP() then
             damage = defender:getTP()
@@ -285,7 +285,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         defender:addTP(-damage)
         attacker:addTP(damage)
 
-    elseif addType == procType.DISPEL then
+    elseif addType == xi.additionalEffect.procType.DISPEL then
         local dispel = defender:dispelStatusEffect()
         -- Resistance check should be in dispelStatusEffect() itself
         if dispel == xi.effect.NONE then
@@ -297,7 +297,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             return 0, 0, 0
         end
 
-    elseif addType == procType.ABSORB then
+    elseif addType == xi.additionalEffect.procType.ABSORB then
         -- Ripping off Aura Steal here
         local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
         if resist > 0.0625 then
@@ -306,7 +306,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgParam     = stolen
         end
 
-    elseif addType == procType.SELF_BUFF then
+    elseif addType == xi.additionalEffect.procType.SELF_BUFF then
         if addStatus == xi.effect.TELEPORT then -- WARP
             attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
             msgID    = xi.msg.basic.ADD_EFFECT_WARP
@@ -332,7 +332,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
         end
 
-    elseif addType == procType.DEATH then
+    elseif addType == xi.additionalEffect.procType.DEATH then
         if
             defender:isNM() or
             defender:isUndead() or
@@ -346,7 +346,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:setHP(0)
         end
 
-    elseif addType == procType.BRIGAND then
+    elseif addType == xi.additionalEffect.procType.BRIGAND then
         if
             defender:getPool() == 531 and
             attacker:getEquipID(xi.slot.MAIN) == xi.items.BUCCANEERS_KNIFE
@@ -354,7 +354,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:setMod(xi.mod.DMG, 0)
             defender:setLocalVar("killable", 1)
             defender:setUnkillable(false)
-            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, item)
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
             msgID = xi.msg.basic.ADD_EFFECT_DMG
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -376,7 +376,7 @@ end
 
 xi.additionalEffect.spikes = function(attacker, defender, damage, spikeEffect, power, chance)
     --[[ Todo..
-    local procType =
+    local xi.additionalEffect.procType =
     {
         -- These are arbitrary, make up new ones as needed.
     }
