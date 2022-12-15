@@ -30,6 +30,8 @@ local pTable =
     [s.BREAK       ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,          0, false,     false   },
     [s.BREAKGA     ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,          0, false,     false   },
     [s.CURSE       ] = { e.CURSE_I,            m.INT,     m.CURSERES,    m.CURSE_MEVA,      50,   0,      300,      2,          0, false,     false   },
+    [s.DISPEL      ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,          0, false,     false   },
+    [s.DISPELGA    ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,          0, false,     false   },
     [s.DISTRACT    ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
     [s.DISTRACT_II ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
     [s.DISTRACT_III] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
@@ -70,7 +72,7 @@ xi.spells.enfeebling.checkInnateImmunity = function(target, spellEffect)
     {
         [xi.effect.SLEEP      ] = {     1 },
         [xi.effect.SLEEP_II   ] = {     1 },
-        [xi.effect.GRAVITY    ] = {     2 },
+        [xi.effect.WEIGHT     ] = {     2 },
         [xi.effect.BIND       ] = {     4 },
         [xi.effect.STUN       ] = {     8 },
         [xi.effect.SILENCE    ] = {    16 },
@@ -84,7 +86,6 @@ xi.spells.enfeebling.checkInnateImmunity = function(target, spellEffect)
         [xi.effect.DARK_SLEEP ] = {  4096 },
         [xi.effect.ASPIR      ] = {  8192 },
         [xi.effect.TERROR     ] = { 16384 },
-        [xi.effect.DISPEL     ] = { 32768 },
     }
 
     if target:hasImmunity(immunityTable[spellEffect][1]) then
@@ -290,7 +291,25 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         resistPotency  = xi.damage.magicHitRate.calculateResistRate(magicHitRate, resistStages)
     end
 
-    -- Check if spell gets resisted.
+    ------------------------------
+    -- STEP 3: Check if spell resists.
+    ------------------------------
+    if spellEffect ~= xi.effect.NONE then
+        -- Stymie
+        if
+            skillType == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.STYMIE)
+        then
+            resistDuration = 1
+            resistPotency  = 1
+
+        -- Fealty
+        elseif target:hasStatusEffect(xi.effect.FEALTY) then
+            resistDuration = 0
+            resistPotency  = 0
+        end
+    end
+
     if resistDuration <= 1 / (2 ^ resistStages) then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
@@ -298,7 +317,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     end
 
     ------------------------------
-    -- STEP 3: Calculate Duration, Potency and Tick.
+    -- STEP 4: Calculate Duration, Potency and Tick.
     ------------------------------
     -- Calculate Duration.
     local duration = xi.spells.enfeebling.calculateDuration(caster, target, spellId)
@@ -312,16 +331,38 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local tick = pTable[spellId][6]
 
     ------------------------------
-    -- STEP 4: Exceptions.
+    -- STEP 5: Exceptions.
     ------------------------------
+    -- Bind
     if spellEffect == xi.effect.BIND then
         potency = target:getSpeed()
     end
 
+    -- Dispel
+    if spellEffect == xi.effect.NONE then
+        spellEffect = target:dispelStatusEffect()
+
+        if spellEffect == xi.effect.NONE then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        else
+            spell:setMsg(xi.msg.basic.MAGIC_ERASE)
+        end
+
+        return spellEffect
+    end
+
     ------------------------------
-    -- STEP 5: Final Operations.
+    -- STEP 6: Final Operations.
     ------------------------------
     if target:addStatusEffect(spellEffect, potency, tick, duration) then
+        -- Delete Stymie effect
+        if
+            skillType == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.STYMIE)
+        then
+            caster:delStatusEffect(xi.effect.STYMIE)
+        end
+
         -- Add "Magic Burst!" message
         local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
