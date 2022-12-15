@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Frazzle
+-- Spell: Frazzle III
 -----------------------------------
 require("scripts/globals/spells/enfeebling_spell")
 -----------------------------------

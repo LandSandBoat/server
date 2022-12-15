@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Frazzle
+-- Spell: Distract III
 -----------------------------------
 require("scripts/globals/spells/enfeebling_spell")
 -----------------------------------
