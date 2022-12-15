@@ -246,14 +246,16 @@ xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, s
     local eemTier = 0
     local resBuild = 0
     local mevaMult = 1
+    local eemBonus = 0
 
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
         eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
         resBuild = utils.ternary(target:isNM() and isDamageSpell, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
         mevaMult = xi.magic.calculateMEVAMult(utils.clamp(eemTier + resBuild, -3, 11))
+        eemBonus = (target:getMod(xi.mod.MEVA) * mevaMult) - target:getMod(xi.mod.MEVA)
     end
 
-    local magicAccDiff = magicacc - math.floor((magiceva * mevaMult) + 0.5) -- Rounds to the nearest integer. LuaJIT does not have a math.round so this is a workaround.
+    local magicAccDiff = magicacc - math.floor(magiceva + eemBonus + 0.5) -- Rounds to the nearest integer. LuaJIT does not have a math.round so this is a workaround.
 
     if magicAccDiff < 0 then
         p = utils.clamp(((50 + math.floor(magicAccDiff / 2))), 5, 95)
