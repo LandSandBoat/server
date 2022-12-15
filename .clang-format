@@ -22,6 +22,7 @@ KeepEmptyLinesAtTheStartOfBlocks: 'false'
 Language: Cpp
 NamespaceIndentation: All
 PointerAlignment: Left
+QualifierAlignment: Left # East Const
 ReflowComments: true
 SortIncludes: 'true'
 SortUsingDeclarations: 'true'
