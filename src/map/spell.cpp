@@ -327,6 +327,16 @@ void CSpell::setMagicBurstMessage(uint16 message)
     m_MagicBurstMessage = message;
 }
 
+MODIFIER CSpell::getModifier()
+{
+    return m_MessageModifier;
+}
+
+void CSpell::setModifier(MODIFIER modifier)
+{
+    m_MessageModifier = modifier;
+}
+
 uint16 CSpell::getElement() const
 {
     return m_element;

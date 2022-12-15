@@ -1794,6 +1794,9 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
                 msg = PSpell->getAoEMessage();
             }
 
+            actionTarget.modifier = PSpell->getModifier();
+            PSpell->setModifier(MODIFIER::NONE); // Reset modifier on use
+
             if (damage < 0)
             {
                 msg                = MSGBASIC_MAGIC_RECOVERS_HP;
