@@ -12737,13 +12737,13 @@ void CLuaBaseEntity::despawnPet()
 }
 
 /************************************************************************
- *  Function: isJugPet()
- *  Purpose : Returns true if the entity crawled out of a jug after birth
- *  Example : if pet:isJugPet() then
+ *  Function: hasJugPet()
+ *  Purpose : Returns true if player has a jug pet, birth details are fuzzy
+ *  Example : if player:hasJugPet() then
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::isJugPet()
+bool CLuaBaseEntity::hasJugPet()
 {
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
 
@@ -16189,7 +16189,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("spawnPet", CLuaBaseEntity::spawnPet);
     SOL_REGISTER("despawnPet", CLuaBaseEntity::despawnPet);
 
-    SOL_REGISTER("isJugPet", CLuaBaseEntity::isJugPet);
+    SOL_REGISTER("hasJugPet", CLuaBaseEntity::hasJugPet);
     SOL_REGISTER("hasValidJugPetItem", CLuaBaseEntity::hasValidJugPetItem);
 
     SOL_REGISTER("hasPet", CLuaBaseEntity::hasPet);
