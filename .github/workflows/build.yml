@@ -36,6 +36,7 @@ jobs:
         sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
+        npm install -g diff-so-fancy
     - id: changed-files
       name: Get Changed Files
       uses: Ana06/get-changed-files@v2.2.0
@@ -106,8 +107,8 @@ jobs:
             fi
           fi
         done
-        npm install -g diff-so-fancy
-        git diff --color | diff-so-fancy >> cpp_formatting_checks.txt
+        git diff --color | diff-so-fancy || true
+        git diff >> cpp_formatting_checks.txt
         cat cpp_formatting_checks.txt
         git reset --hard
         if [ -s cpp_formatting_checks.txt ]
