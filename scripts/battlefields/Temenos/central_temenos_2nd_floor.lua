@@ -299,22 +299,39 @@ content.loot =
     [ID.CENTRAL_TEMENOS_2ND_FLOOR.npc.LOOT_CRATE] =
     {
         {
-            quantity = 7,
-            { itemid = 1875, droprate = 1000 },
+            quantity = 6,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1944, droprate = 250 },
-            { itemid = 1936, droprate =  94 },
-            { itemid = 1950, droprate =  63 },
-            { itemid = 1942, droprate = 125 },
-            { itemid = 1946, droprate =  63 },
-            { itemid = 2660, droprate = 281 },
-            { itemid = 2714, droprate = 125 },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1908, droprate = 1000 },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.CERULEAN_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     }
 }
