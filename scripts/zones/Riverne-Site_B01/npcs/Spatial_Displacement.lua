@@ -28,10 +28,22 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 33 and option == 1 then
         player:setPos(12.527, 0.345, -539.602, 127, 31) -- to Monarch Linn (Retail confirmed)
+
     elseif csid == 10 and option == 1 then
         player:setPos(-538.526, -29.5, 359.219, 255, 25) -- back to Misareaux Coast (Retail confirmed)
+
+    -- Go! Go! Gobmuffin!
     elseif csid == 17 and option == 0 then
-        -- TODO: Go! Go! Gobmuffin quest. Player just ported to J-6 island
+        -- TODO: Move this to existing quest framework.
+        if
+            player:getCharVar("Quest[4][69]Prog") == 0 and
+            not GetMobByID(ID.mob.SPILOSPOK):isSpawned() and
+            option == 0
+        then
+            SpawnMob(ID.mob.SPILOSPOK):updateClaim(player)
+            SpawnMob(ID.mob.CHEMACHIQ):updateEnmity(player)
+            SpawnMob(ID.mob.BOKABRAQ):updateEnmity(player)
+        end
     elseif csid == 32003 then
         xi.bcnm.onEventFinish(player, csid, option)
 
