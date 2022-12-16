@@ -173,9 +173,13 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     end
 
     --------------------------------------
-    -- This helper is used under multiple different environments
+    -- Additional Effect Damage
     --------------------------------------
-    local damagingEffect = function()
+    if addType == xi.additionalEffect.procType.DAMAGE then
+        if element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
+            damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
+        end
+
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
         msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
@@ -184,16 +188,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
         msgParam = damage
-    end
-
-    --------------------------------------
-    -- Additional Effect Damage
-    --------------------------------------
-    if addType == xi.additionalEffect.procType.DAMAGE then
-        if element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
-            damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
-        end
-        damagingEffect()
     --------------------------------------
     -- Inflicts negative effects vs target
     --------------------------------------
@@ -423,7 +417,14 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     --------------------------------------
     elseif addType == xi.additionalEffect.procType.VS_FAMILY then
         if defender:getSuperFamily() == option then
-            damagingEffect()
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
+            msgID  = xi.msg.basic.ADD_EFFECT_DMG
+
+            if damage < 0 then
+                msgID = xi.msg.basic.ADD_EFFECT_HEAL
+            end
+
+            msgParam = damage
         else
             return 0, 0, 0 -- Conditions not hit
         end
@@ -446,7 +447,14 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
         if flag then
-            damagingEffect()
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
+            msgID  = xi.msg.basic.ADD_EFFECT_DMG
+
+            if damage < 0 then
+                msgID = xi.msg.basic.ADD_EFFECT_HEAL
+            end
+
+            msgParam = damage
         else
             return 0, 0, 0 -- Conditions not hit
         end
@@ -458,7 +466,14 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         local time = VanadielHour()
 
         if time >= 20 and time <= 4 then
-            damagingEffect()
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
+            msgID  = xi.msg.basic.ADD_EFFECT_DMG
+
+            if damage < 0 then
+                msgID = xi.msg.basic.ADD_EFFECT_HEAL
+            end
+
+            msgParam = damage
         else
             return 0, 0, 0 -- Conditions not hit
         end

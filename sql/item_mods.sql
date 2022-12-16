@@ -32613,7 +32613,7 @@ INSERT INTO `item_mods` VALUES (16849,25,2); -- ACC: 2
 
 -- Lizard Piercer
 INSERT INTO `item_mods` VALUES (16853,431,14);   -- ITEM_ADDEFFECT_TYPE: 14 (Vs. Family)
-INSERT INTO `item_mods` VALUES (16853,1178,60); -- ITEM_ADDEFFECT_OPTION: 60 Lizard super family
+INSERT INTO `item_mods` VALUES (16853,1178,60);  -- ITEM_ADDEFFECT_OPTION: 60 Lizard super family
 INSERT INTO `item_mods` VALUES (16853,499,2);    -- ITEM_SUBEFFECT: 2 (Enblizzard)
 INSERT INTO `item_mods` VALUES (16853,500,10);   -- ITEM_ADDEFFECT_DMG: 10
 INSERT INTO `item_mods` VALUES (16853,501,10);   -- ITEM_ADDEFFECT_CHANCE: 10% (Need verification)
