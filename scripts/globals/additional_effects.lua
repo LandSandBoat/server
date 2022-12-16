@@ -141,6 +141,22 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local msgID     = 0
     local msgParam  = 0
 
+    local immunityTable =
+            {
+                { status = xi.effect.SLEEP_I,   immunity = xi.immunity.SLEEP    },
+                { status = xi.effect.WEIGHT,    immunity = xi.immunity.GRAVITY  },
+                { status = xi.effect.BIND,      immunity = xi.immunity.BIND     },
+                { status = xi.effect.STUN,      immunity = xi.immunity.STUN     },
+                { status = xi.effect.SILENCE,   immunity = xi.immunity.SILENCE  },
+                { status = xi.effect.PARALYSIS, immunity = xi.immunity.PARALYZE },
+                { status = xi.effect.BLINDNESS, immunity = xi.immunity.BLIND    },
+                { status = xi.effect.SLOW,      immunity = xi.immunity.SLOW     },
+                { status = xi.effect.POISON,    immunity = xi.immunity.POISON   },
+                { status = xi.effect.ELEGY,     immunity = xi.immunity.ELEGY    },
+                { status = xi.effect.REQUIEM,   immunity = xi.immunity.REQUIEM  },
+                { status = xi.effect.TERROR,    immunity = xi.immunity.TERROR   },
+            }
+
     if addStatus == xi.effect.DEFENSE_DOWN  and item:getSkillType() == xi.skill.MARKSMANSHIP then
         local dLvl = defender:getMainLvl() - attacker:getMainLvl()
         if dLvl <= 0 then
@@ -196,22 +212,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
             local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
             local immunity = 0
-
-            local immunityTable =
-            {
-                { status = xi.effect.SLEEP_I,   immunity = xi.immunity.SLEEP    },
-                { status = xi.effect.WEIGHT,    immunity = xi.immunity.GRAVITY  },
-                { status = xi.effect.BIND,      immunity = xi.immunity.BIND     },
-                { status = xi.effect.STUN,      immunity = xi.immunity.STUN     },
-                { status = xi.effect.SILENCE,   immunity = xi.immunity.SILENCE  },
-                { status = xi.effect.PARALYSIS, immunity = xi.immunity.PARALYZE },
-                { status = xi.effect.BLINDNESS, immunity = xi.immunity.BLIND    },
-                { status = xi.effect.SLOW,      immunity = xi.immunity.SLOW     },
-                { status = xi.effect.POISON,    immunity = xi.immunity.POISON   },
-                { status = xi.effect.ELEGY,     immunity = xi.immunity.ELEGY    },
-                { status = xi.effect.REQUIEM,   immunity = xi.immunity.REQUIEM  },
-                { status = xi.effect.TERROR,    immunity = xi.immunity.TERROR   },
-            }
 
             for _, statusTable in pairs(immunityTable) do
                 if statusTable.status == addStatus then
@@ -410,21 +410,60 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     --------------------------------------
-    -- Additional effects vs various family ecosystems
+    -- Additional effects vs various super families
     -- Note: This checks a mobs super family to cover all types of
     --       mobs within a family.
     --   Ex: Beast, Lizard, Orc, etc.
     --------------------------------------
     elseif addType == xi.additionalEffect.procType.VS_FAMILY then
         if defender:getSuperFamily() == option then
-            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
-            msgID  = xi.msg.basic.ADD_EFFECT_DMG
+            -- If Drain effect:
+            if subEffect == xi.subEffect.HP_DRAIN then
+                damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
 
-            if damage < 0 then
-                msgID = xi.msg.basic.ADD_EFFECT_HEAL
+                if damage > defender:getHP() then
+                    damage = defender:getHP()
+                end
+
+                msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+                msgParam = damage
+                defender:addHP(-damage)
+                attacker:addHP(damage)
+
+            -- If debuff effect
+            elseif addStatus and addStatus > 0 then
+                local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
+                local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
+                local immunity = 0
+
+                for _, statusTable in pairs(immunityTable) do
+                    if statusTable.status == addStatus then
+                        immunity = statusTable.immunity
+                        break
+                    end
+                end
+
+                if
+                    resist >= 0.5 and
+                    duration * resist > 0 and
+                    not defender:hasImmunity(immunity)
+                then
+                    defender:addStatusEffect(addStatus, power, tick, duration * resist)
+                    msgID    = xi.msg.basic.ADD_EFFECT_STATUS
+                    msgParam = addStatus
+                end
+
+            -- Else damaging effect
+            else
+                damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
+                msgID  = xi.msg.basic.ADD_EFFECT_DMG
+
+                if damage < 0 then
+                    msgID = xi.msg.basic.ADD_EFFECT_HEAL
+                end
+
+                msgParam = damage
             end
-
-            msgParam = damage
         else
             return 0, 0, 0 -- Conditions not hit
         end
@@ -485,6 +524,65 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == xi.additionalEffect.procType.GOD_WIND then
         if defender:getFamily() == option then
             defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
+        else
+            return 0, 0, 0 -- Conditions not hit
+        end
+
+    --------------------------------------
+    -- Additional effects vs various family ecosystems
+    -- Note: This checks a mob's ecosystem to cover all types of
+    --       mobs within an ecosystem.
+    --   Ex: Plantoid, Beast, Aquatic
+    --------------------------------------
+    elseif addType == xi.additionalEffect.procType.VS_ECOSYSTEM then
+        if defender:getSystem() == option then
+            -- If Drain effect:
+            if subEffect == xi.subEffect.HP_DRAIN then
+                damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
+
+                if damage > defender:getHP() then
+                    damage = defender:getHP()
+                end
+
+                msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+                msgParam = damage
+                defender:addHP(-damage)
+                attacker:addHP(damage)
+
+            -- If Debuff effect:
+            elseif addStatus and addStatus > 0 then
+                local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
+                local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, addStatus, 0)
+                local immunity = 0
+
+                for _, statusTable in pairs(immunityTable) do
+                    if statusTable.status == addStatus then
+                        immunity = statusTable.immunity
+                        break
+                    end
+                end
+
+                if
+                    resist >= 0.5 and
+                    duration * resist > 0 and
+                    not defender:hasImmunity(immunity)
+                then
+                    defender:addStatusEffect(addStatus, power, tick, duration * resist)
+                    msgID    = xi.msg.basic.ADD_EFFECT_STATUS
+                    msgParam = addStatus
+                end
+
+            -- Else damaging effect
+            else
+                damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
+                msgID  = xi.msg.basic.ADD_EFFECT_DMG
+
+                if damage < 0 then
+                    msgID = xi.msg.basic.ADD_EFFECT_HEAL
+                end
+
+                msgParam = damage
+            end
         else
             return 0, 0, 0 -- Conditions not hit
         end
