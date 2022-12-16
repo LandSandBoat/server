@@ -20,56 +20,72 @@ local e = xi.effect
 local m = xi.mod
 
 local pTable =
-{   --                   1                     2          3              4               5      6    7         8       9           10         11
-    --    [Spell ID] = { Effect,               Stat-Used, Resist-Mod,    MEVA-Mod,       pBase, DoT, Duration, Resist, msg, pSaboteur, pResist },
-    [s.BIND        ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,   0, false,     false   },
-    [s.BINDGA      ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,   0, false,     false   },
-    [s.BLIND       ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
-    [s.BLIND_II    ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
-    [s.BLINDGA     ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
-    [s.BREAK       ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,   0, false,     false   },
-    [s.BREAKGA     ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,   0, false,     false   },
-    [s.BURN        ] = { e.BURN,               m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
-    [s.CHOKE       ] = { e.CHOKE,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
-    [s.CURSE       ] = { e.CURSE_I,            m.INT,     m.CURSERES,    m.CURSE_MEVA,      50,   0,      300,      2,   0, false,     false   },
-    [s.DISPEL      ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,   0, false,     false   },
-    [s.DISPELGA    ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,   0, false,     false   },
-    [s.DISTRACT    ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
-    [s.DISTRACT_II ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
-    [s.DISTRACT_III] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
-    [s.DROWN       ] = { e.DROWN,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
-    [s.FLASH       ] = { e.FLASH,              m.MND,     m.BLINDRES,    m.BLIND_MEVA,     300,   0,       12,      4,   0, true,      false   },
-    [s.FRAZZLE     ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
-    [s.FRAZZLE_II  ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
-    [s.FRAZZLE_III ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
-    [s.FROST       ] = { e.FROST,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
-    [s.GRAVITY     ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    26,   0,      120,      2,   0, true,      false   },
-    [s.GRAVITY_II  ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    32,   0,      180,      2,   0, true,      false   },
-    [s.GRAVIGA     ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    50,   0,      120,      2,   0, true,      false   },
-    [s.INUNDATION  ] = { e.INUNDATION,         m.MND,     0,             0,                  1,   0,      300,      5,   0, false,     false   },
-    [s.PARALYZE    ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
-    [s.PARALYZE_II ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
-    [s.PARALYGA    ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
-    [s.POISON      ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,   0, true,      false   },
-    [s.POISON_II   ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,   0, true,      false   },
-    [s.POISON_III  ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,   0, true,      false   },
-    [s.POISONGA    ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,   0, true,      false   },
-    [s.POISONGA_II ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,   0, true,      false   },
-    [s.POISONGA_III] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,   0, true,      false   },
-    [s.RASP        ] = { e.RASP,               m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
-    [s.REPOSE      ] = { e.SLEEP_II,           m.MND,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   1, false,     false   },
-    [s.SHOCK       ] = { e.SHOCK,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
-    [s.SILENCE     ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,   0, false,     false   },
-    [s.SILENCEGA   ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,   0, false,     false   },
-    [s.SLEEP       ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,   0, false,     false   },
-    [s.SLEEP_II    ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   0, false,     false   },
-    [s.SLEEPGA     ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,   0, false,     false   },
-    [s.SLEEPGA_II  ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   0, false,     false   },
-    [s.SLOW        ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
-    [s.SLOW_II     ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
-    [s.SLOWGA      ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
-    [s.STUN        ] = { e.STUN,               m.INT,     m.STUNRES,     m.STUN_MEVA,        1,   0,        5,      4,   0, false,     false   },
-    [s.VIRUS       ] = { e.PLAGUE,             m.INT,     m.VIRUSRES,    m.VIRUS_MEVA,       5,   3,       60,      2,   0, false,     false   },
+{   --                    1                     2          3              4               5      6    7         8       9           10         11
+    --    [Spell ID ] = { Effect,               Stat-Used, Resist-Mod,    MEVA-Mod,       pBase, DoT, Duration, Resist, msg, pSaboteur, pResist },
+    [s.BIND         ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,   0, false,     false   },
+    [s.BINDGA       ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,   0, false,     false   },
+    [s.BLIND        ] = { e.BLINDNESS,          m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
+    [s.BLIND_II     ] = { e.BLINDNESS,          m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
+    [s.BLINDGA      ] = { e.BLINDNESS,          m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
+    [s.BREAK        ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,   0, false,     false   },
+    [s.BREAKGA      ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,   0, false,     false   },
+    [s.BURN         ] = { e.BURN,               m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.CHOKE        ] = { e.CHOKE,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.CURSE        ] = { e.CURSE_I,            m.INT,     m.CURSERES,    m.CURSE_MEVA,      50,   0,      300,      2,   0, false,     false   },
+    [s.DISPEL       ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,   0, false,     false   },
+    [s.DISPELGA     ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,   0, false,     false   },
+    [s.DISTRACT     ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.DISTRACT_II  ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.DISTRACT_III ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.DROWN        ] = { e.DROWN,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.FLASH        ] = { e.FLASH,              m.MND,     m.BLINDRES,    m.BLIND_MEVA,     300,   0,       12,      4,   0, true,      false   },
+    [s.FRAZZLE      ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.FRAZZLE_II   ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.FRAZZLE_III  ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.FROST        ] = { e.FROST,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.GRAVITY      ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    26,   0,      120,      2,   0, true,      false   },
+    [s.GRAVITY_II   ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    32,   0,      180,      2,   0, true,      false   },
+    [s.GRAVIGA      ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    50,   0,      120,      2,   0, true,      false   },
+    [s.INUNDATION   ] = { e.INUNDATION,         m.MND,     0,             0,                  1,   0,      300,      5,   0, false,     false   },
+    [s.PARALYZE     ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
+    [s.PARALYZE_II  ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
+    [s.PARALYGA     ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
+    [s.POISON       ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,   0, true,      false   },
+    [s.POISON_II    ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,   0, true,      false   },
+    [s.POISON_III   ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,   0, true,      false   },
+    [s.POISONGA     ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,   0, true,      false   },
+    [s.POISONGA_II  ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,   0, true,      false   },
+    [s.POISONGA_III ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,   0, true,      false   },
+    [s.RASP         ] = { e.RASP,               m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.REPOSE       ] = { e.SLEEP_II,           m.MND,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   1, false,     false   },
+    [s.SHOCK        ] = { e.SHOCK,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.SILENCE      ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,   0, false,     false   },
+    [s.SILENCEGA    ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,   0, false,     false   },
+    [s.SLEEP        ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,   0, false,     false   },
+    [s.SLEEP_II     ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   0, false,     false   },
+    [s.SLEEPGA      ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,   0, false,     false   },
+    [s.SLEEPGA_II   ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   0, false,     false   },
+    [s.SLOW         ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
+    [s.SLOW_II      ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
+    [s.SLOWGA       ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
+    [s.STUN         ] = { e.STUN,               m.INT,     m.STUNRES,     m.STUN_MEVA,        1,   0,        5,      4,   0, false,     false   },
+    [s.VIRUS        ] = { e.PLAGUE,             m.INT,     m.VIRUSRES,    m.VIRUS_MEVA,       5,   3,       60,      2,   0, false,     false   },
+
+    -- Ninjutsu
+    [s.AISHA_ICHI   ] = { e.ATTACK_DOWN,        m.INT,     0,             0,                 15,   0,      120,      4,   1, false,     false   },
+    [s.DOKUMORI_ICHI] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      3,   3,       60,      2,   0, false,     false   },
+    [s.DOKUMORI_NI  ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,     10,   3,      120,      2,   0, false,     false   },
+    [s.DOKUMORI_SAN ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,     20,   3,      360,      2,   0, false,     false   },
+    [s.HOJO_ICHI    ] = { e.SLOW,               m.INT,     m.SLOWRES,     m.SLOW_MEVA,     1465,   0,      180,      2,   0, false,     false   },
+    [s.HOJO_NI      ] = { e.SLOW,               m.INT,     m.SLOWRES,     m.SLOW_MEVA,     1953,   0,      300,      2,   0, false,     false   },
+    [s.HOJO_SAN     ] = { e.SLOW,               m.INT,     m.SLOWRES,     m.SLOW_MEVA,     2930,   0,      420,      2,   0, false,     false   },
+    [s.JUBAKU_ICHI  ] = { e.PARALYSIS,          m.INT,     m.PARALYZERES, m.PARALYZE_MEVA,   20,   0,      180,      2,   1, false,     false   },
+    [s.JUBAKU_NI    ] = { e.PARALYSIS,          m.INT,     m.PARALYZERES, m.PARALYZE_MEVA,   30,   0,      300,      2,   1, false,     false   },
+    [s.JUBAKU_SAN   ] = { e.PARALYSIS,          m.INT,     m.PARALYZERES, m.PARALYZE_MEVA,   35,   0,      420,      2,   1, false,     false   },
+    [s.KURAYAMI_ICHI] = { e.BLINDNESS,          m.INT,     m.BLINDRES,    m.BLIND_MEVA,      20,   0,      180,      2,   0, false,     false   },
+    [s.KURAYAMI_NI  ] = { e.BLINDNESS,          m.INT,     m.BLINDRES,    m.BLIND_MEVA,      30,   0,      300,      2,   0, false,     false   },
+    [s.KURAYAMI_SAN ] = { e.BLINDNESS,          m.INT,     m.BLINDRES,    m.BLIND_MEVA,      40,   0,      420,      2,   0, false,     false   },
+    [s.YURIN_ICHI   ] = { e.INHIBIT_TP,         m.INT,     0,             0,                 10,   0,      180,      3,   1, false,     false   },
 }
 
 local elementalDebuffTable =
@@ -281,7 +297,10 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId)
     end
 
     -- After Saboteur according to bg-wiki
-    if caster:getMainJob() == xi.job.RDM then
+    if
+        caster:getMainJob() == xi.job.RDM and
+        skillType == xi.skill.ENFEEBLING_MAGIC
+    then
         -- RDM Merit: Enfeebling Magic Duration
         duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
 
@@ -369,6 +388,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     end
 
     if resistDuration <= 1 / (2 ^ resistStages) then
+        -- spell:setModifier(xi.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return spellEffect
