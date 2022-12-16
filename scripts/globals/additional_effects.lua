@@ -41,6 +41,7 @@ xi.additionalEffect.procType =
     AVATAR_SUMMONED = 15,
     NIGHTTIME       = 16,
     GOD_WIND        = 17,
+    VS_ECOSYSTEM    = 18,
 }
 
 xi.additionalEffect.isRanged = function(item)
@@ -466,6 +467,16 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == xi.additionalEffect.procType.GOD_WIND then
         if defender:getFamily() == option then
             defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
+        else
+            return 0, 0, 0 -- Conditions not hit
+        end
+
+        --------------------------------------
+        -- Additional effects vs ecosystems. Ex. "Beast, Vermin, etc."
+        --------------------------------------
+    elseif addType == xi.additionalEffect.procType.VS_ECOSYSTEM then
+        if defender:getSystem() == option then
+            damagingEffect()
         else
             return 0, 0, 0 -- Conditions not hit
         end
