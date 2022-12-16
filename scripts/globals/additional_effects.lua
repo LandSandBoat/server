@@ -37,7 +37,7 @@ xi.additionalEffect.procType =
     SELF_BUFF       = 11,
     DEATH           = 12,
     BRIGAND         = 13,
-    VS_FAMILY_DMG   = 14,
+    VS_FAMILY       = 14,
     AVATAR_SUMMONED = 15,
     NIGHTTIME       = 16,
     GOD_WIND        = 17,
@@ -416,10 +416,13 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     --------------------------------------
-    -- Additional effects vs various families
+    -- Additional effects vs various family ecosystems
+    -- Note: This checks a mobs super family to cover all types of
+    --       mobs within a family.
+    --   Ex: Beast, Lizard, Orc, etc.
     --------------------------------------
-    elseif addType == xi.additionalEffect.procType.VS_FAMILY_DMG then
-        if defender:getFamily() == option then
+    elseif addType == xi.additionalEffect.procType.VS_FAMILY then
+        if defender:getSuperFamily() == option then
             damagingEffect()
         else
             return 0, 0, 0 -- Conditions not hit
@@ -467,16 +470,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == xi.additionalEffect.procType.GOD_WIND then
         if defender:getFamily() == option then
             defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
-        else
-            return 0, 0, 0 -- Conditions not hit
-        end
-
-        --------------------------------------
-        -- Additional effects vs ecosystems. Ex. "Beast, Vermin, etc."
-        --------------------------------------
-    elseif addType == xi.additionalEffect.procType.VS_ECOSYSTEM then
-        if defender:getSystem() == option then
-            damagingEffect()
         else
             return 0, 0, 0 -- Conditions not hit
         end
