@@ -24,19 +24,23 @@ xi.additionalEffect = xi.additionalEffect or {}
 xi.additionalEffect.procType =
 {
     -- These are arbitrary, make up new ones as needed.
-    DAMAGE        = 1,
-    DEBUFF        = 2,
-    HP_HEAL       = 3,
-    MP_HEAL       = 4,
-    HP_DRAIN      = 5,
-    MP_DRAIN      = 6,
-    TP_DRAIN      = 7,
-    HPMPTP_DRAIN  = 8,
-    DISPEL        = 9,
-    ABSORB_STATUS = 10,
-    SELF_BUFF = 11,
-    DEATH = 12,
-    BRIGAND = 13,
+    DAMAGE          = 1,
+    DEBUFF          = 2,
+    HP_HEAL         = 3,
+    MP_HEAL         = 4,
+    HP_DRAIN        = 5,
+    MP_DRAIN        = 6,
+    TP_DRAIN        = 7,
+    HPMPTP_DRAIN    = 8,
+    DISPEL          = 9,
+    ABSORB_STATUS   = 10,
+    SELF_BUFF       = 11,
+    DEATH           = 12,
+    BRIGAND         = 13,
+    VS_FAMILY_DMG   = 14,
+    AVATAR_SUMMONED = 15,
+    NIGHTTIME       = 16,
+    GOD_WIND        = 17,
 }
 
 xi.additionalEffect.isRanged = function(item)
@@ -132,6 +136,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local addStatus = item:getMod(xi.mod.ITEM_ADDEFFECT_STATUS)
     local power     = item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
     local duration  = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
+    local option    = item:getMod(xi.mod.ITEM_ADDEFFECT_OPTION)
     local msgID     = 0
     local msgParam  = 0
 
@@ -157,6 +162,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
+    --------------------------------------
     if xi.additionalEffect.isRanged(item) then
         if element then
             damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
@@ -166,12 +172,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     end
 
     --------------------------------------
-
-    if addType == xi.additionalEffect.procType.DAMAGE then
-        if element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
-            damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
-        end
-
+    -- This helper is used under multiple different environments
+    --------------------------------------
+    damagingEffect = function()
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
         msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
@@ -180,7 +183,19 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
         msgParam = damage
+    end
 
+    --------------------------------------
+    -- Additional Effect Damage
+    --------------------------------------
+    if addType == xi.additionalEffect.procType.DAMAGE then
+        if element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
+            damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
+        end
+        damagingEffect()
+    --------------------------------------
+    -- Inflicts negative effects vs target
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.DEBUFF then
         if addStatus and addStatus > 0 then
             local tick   = xi.additionalEffect.statusAttack(addStatus, defender)
@@ -220,7 +235,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 msgParam = addStatus
             end
         end
-
+    --------------------------------------
+    -- Recovers user's HP
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
         local hitPoints = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
         -- Unknown what modifies the HP, using power directly for now
@@ -228,6 +245,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         attacker:addHP(hitPoints)
         msgParam = hitPoints
 
+    --------------------------------------
+    -- Recovers user's MP
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
         local magicPoints = damage
         -- Unknown what modifies this, using power directly for now
@@ -235,6 +255,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         attacker:addMP(magicPoints)
         msgParam = magicPoints
 
+    --------------------------------------
+    -- Drains HP from target
+    --------------------------------------
     elseif
         addType == xi.additionalEffect.procType.HP_DRAIN or
         (addType == xi.additionalEffect.procType.HPMPTP_DRAIN and math.random(1, 3) == 1)
@@ -255,6 +278,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         defender:addHP(-damage)
         attacker:addHP(damage)
 
+    --------------------------------------
+    -- Drains MP from target
+    --------------------------------------
     elseif
         addType == xi.additionalEffect.procType.MP_DRAIN or
         (addType == xi.additionalEffect.procType.HPMPTP_DRAIN and math.random(1, 3) == 2)
@@ -263,6 +289,8 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         if damage > defender:getMP() then
             damage = defender:getMP()
+        elseif defender:getMP() == 0 then
+            return 0, 0, 0 -- Conditions not hit
         end
 
         msgID    = xi.msg.basic.ADD_EFFECT_MP_DRAIN
@@ -270,6 +298,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         defender:addMP(-damage)
         attacker:addMP(damage)
 
+    --------------------------------------
+    -- Drains TP from target
+    --------------------------------------
     elseif
         addType == xi.additionalEffect.procType.TP_DRAIN or
         (addType == xi.additionalEffect.procType.HPMPTP_DRAIN and math.random(1, 3) == 3)
@@ -278,6 +309,8 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         if damage > defender:getTP() then
             damage = defender:getTP()
+        elseif defender:getTP() == 0 then
+            return 0, 0, 0 -- Conditions not hit
         end
 
         msgID    = xi.msg.basic.ADD_EFFECT_TP_DRAIN
@@ -285,6 +318,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         defender:addTP(-damage)
         attacker:addTP(damage)
 
+    --------------------------------------
+    -- Dispels dispelable effects from target
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.DISPEL then
         local dispel = defender:dispelStatusEffect()
         -- Resistance check should be in dispelStatusEffect() itself
@@ -297,6 +333,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             return 0, 0, 0
         end
 
+    --------------------------------------
+    -- Absorbs status effects from target
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.ABSORB then
         -- Ripping off Aura Steal here
         local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
@@ -304,8 +343,13 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             local stolen = attacker:stealStatusEffect(defender)
             msgID        = xi.msg.basic.STEAL_EFFECT
             msgParam     = stolen
+        else
+            return 0, 0, 0 -- Conditions not hit
         end
 
+    --------------------------------------
+    -- Buffs that affect the player
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.SELF_BUFF then
         if addStatus == xi.effect.TELEPORT then -- WARP
             attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
@@ -332,6 +376,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
         end
 
+    --------------------------------------
+    -- Inflicts death
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.DEATH then
         if
             defender:isNM() or
@@ -346,6 +393,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:setHP(0)
         end
 
+    --------------------------------------
+    -- Special case for Bucc. knife
+    --------------------------------------
     elseif addType == xi.additionalEffect.procType.BRIGAND then
         if
             defender:getPool() == 531 and
@@ -360,6 +410,64 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
             end
             msgParam = damage
+        else
+            return 0, 0, 0 -- Conditions not hit
+        end
+
+    --------------------------------------
+    -- Additional effects vs various families
+    --------------------------------------
+    elseif addType == xi.additionalEffect.procType.VS_FAMILY_DMG then
+        if defender:getFamily() == option then
+            damagingEffect()
+        else
+            return 0, 0, 0 -- Conditions not hit
+        end
+
+    --------------------------------------
+    -- Additional effects trigger when specific avatar is summoned in party.
+    -- Option is used to determine the specific avatar required to trigger.
+    -- This ID reads from pets.lua (xi.pet.id)
+    --------------------------------------
+    elseif addType == xi.additionalEffect.procType.AVATAR_SUMMONED then
+        local flag = false
+
+        for _, member in pairs(attacker:getParty()) do
+            if
+                member:getPet() ~= nil and
+                member:getPetID() == option
+            then
+                flag = true
+            end
+        end
+
+        if flag then
+            damagingEffect()
+        else
+            return 0, 0, 0 -- Conditions not hit
+        end
+
+    --------------------------------------
+    -- Triggers at night
+    --------------------------------------
+    elseif addType == xi.additionalEffect.procType.NIGHTTIME then
+        local time = VanadielHour()
+
+        if time >= 20 and time <= 4 then
+            damagingEffect()
+        else
+            return 0, 0, 0 -- Conditions not hit
+        end
+
+    --------------------------------------
+    -- Throwables towards Gods in sky to
+    -- dispel their en-effect
+    --------------------------------------
+    elseif addType == xi.additionalEffect.procType.GOD_WIND then
+        if defender:getFamily() == option then
+            defender:setMobMod(xi.mobMod.ADD_EFFECT, 0)
+        else
+            return 0, 0, 0 -- Conditions not hit
         end
     end
 
