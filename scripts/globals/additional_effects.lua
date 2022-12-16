@@ -174,7 +174,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     --------------------------------------
     -- This helper is used under multiple different environments
     --------------------------------------
-    damagingEffect = function()
+    local damagingEffect = function()
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
         msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
