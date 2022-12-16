@@ -34,7 +34,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()  -- An Undying Pledge cs trigger
-            if player:getCharVar("anUndyingPledgeCS") == 1 then
+            if player:getCharVar("Quest[5][149]Prog") == 1 then
                 player:startEvent(226)
             end
         end,
@@ -46,7 +46,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 226 then
-        player:setCharVar("anUndyingPledgeCS", 2)
+        player:setCharVar("Quest[5][149]Prog", 2)
     end
 end
 
