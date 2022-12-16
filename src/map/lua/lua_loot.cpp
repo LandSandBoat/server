@@ -23,7 +23,7 @@
 
 // Converts known TH rarity rates to their respective percentages
 // Once the new TH logic has been applied to mobentity.cpp then this can be removed
-static const std::array<uint16, 10> RATE_PERCENTAGES = {
+static const std::array<uint16, 9> RATE_PERCENTAGES = {
     0,    // NEVER         0.00%
     1,    // ULTRA_RARE    0.10%
     5,    // SUPER_RARE    0.50%
@@ -53,11 +53,7 @@ CLuaLootContainer::CLuaLootContainer(LootContainer* loot)
 
 void CLuaLootContainer::addItem(uint16 item, uint16 rate, sol::variadic_args va)
 {
-    const auto quantity = va.get_type(0) == sol::type::number ? va.get<uint16>(0) : 1;
-    for (uint16 i = 0; i < quantity; ++i)
-    {
-        m_PLootContainer->drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, item, RATE_PERCENTAGES[rate]);
-    }
+    addItemToContainer(item, RATE_PERCENTAGES[rate], va, false);
 }
 
 /************************************************************************
@@ -69,7 +65,47 @@ void CLuaLootContainer::addItem(uint16 item, uint16 rate, sol::variadic_args va)
 
 void CLuaLootContainer::addGroup(uint16 groupRate, sol::table items)
 {
-    DropGroup_t group(RATE_PERCENTAGES[groupRate]);
+    addGroupToContainer(RATE_PERCENTAGES[groupRate], items, false);
+}
+
+/************************************************************************
+ *  Function: addItemFixed()
+ *  Purpose : Adds an item to the loot container with a fixed drop rate
+ *  Example : loot:addItemFixed(xi.items.ANCIENT_BEASTCOIN, 500, 2);
+ *  Notes   : Last parameter, quantity, is optional and defaults to 1
+ *            Fixed drop rate is 0-1000.
+ ************************************************************************/
+
+void CLuaLootContainer::addItemFixed(uint16 item, uint16 rate, sol::variadic_args va)
+{
+    addItemToContainer(item, rate, va, true);
+}
+
+/************************************************************************
+ *  Function: addGroupFixed()
+ *  Purpose : Adds a group of items to the loot container with a fixed drop rate
+ *  Example : loot:addGroup(500, { { item = xi.items.ANCIENT_BEASTCOIN, weight = 100 } });
+ *  Notes   : Item table is a list of tables with "item" key and an optional "weight" which defaults to 1
+ *            Fixed drop rate is 0-1000.
+ ************************************************************************/
+
+void CLuaLootContainer::addGroupFixed(uint16 groupRate, sol::table items)
+{
+    addGroupToContainer(groupRate, items, true);
+}
+
+void CLuaLootContainer::addItemToContainer(uint16 item, uint16 rate, sol::variadic_args va, bool hasFixedRate)
+{
+    const auto quantity = va.get_type(0) == sol::type::number ? va.get<uint16>(0) : 1;
+    for (uint16 i = 0; i < quantity; ++i)
+    {
+        m_PLootContainer->drops.Items.emplace_back(DROP_TYPE::DROP_NORMAL, item, rate, hasFixedRate);
+    }
+}
+
+void CLuaLootContainer::addGroupToContainer(uint16 groupRate, sol::table items, bool hasFixedRate)
+{
+    DropGroup_t group(groupRate, hasFixedRate);
 
     for (const auto& entryTable : items)
     {
@@ -93,6 +129,8 @@ void CLuaLootContainer::Register()
     SOL_USERTYPE("CLootContainer", CLuaLootContainer);
     SOL_REGISTER("addItem", CLuaLootContainer::addItem);
     SOL_REGISTER("addGroup", CLuaLootContainer::addGroup);
+    SOL_REGISTER("addItemFixed", CLuaLootContainer::addItemFixed);
+    SOL_REGISTER("addGroupFixed", CLuaLootContainer::addGroupFixed);
 };
 
 std::ostream& operator<<(std::ostream& os, const CLuaLootContainer& loot)
