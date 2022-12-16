@@ -300,13 +300,14 @@ int do_sockets(fd_set* rfd, duration next)
 #else
     for (int i = 0; ret > 0 && i < fd_max; i++)
     {
-        int fd = events[i].data.fd;
+        int  fd        = events[i].data.fd;
+        auto thisEvent = events[i].events;
 
         // https://man7.org/linux/man-pages/man2/epoll_ctl.2.html
         // Handle all "always reported" error events
         // EPOLLHUP is an "unexpected" socket shutdown from client, but seems normal when disconnecting
         // EPOLLERR has not been witnessed, but is probably good to try to handle.
-        if (events[i].events & EPOLLHUP || events[i].events & EPOLLERR)
+        if (thisEvent & EPOLLHUP || thisEvent & EPOLLERR)
         {
             do_close_tcp(fd);
             ret--;
@@ -314,7 +315,9 @@ int do_sockets(fd_set* rfd, duration next)
         }
 
         // Input recieved
-        if (events[i].events & EPOLLIN && sessions[fd])
+        // EPOLLIN is normal input
+        // EPOLLPRI appears to be "out of band" extra data from the socket. Needed to read data from sockets >1024(?)
+        if (sessions[fd] && (thisEvent & EPOLLIN || thisEvent & EPOLLPRI))
         {
             ret--;
 

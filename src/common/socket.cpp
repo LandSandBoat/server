@@ -227,7 +227,9 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 void do_close(int32 fd)
 {
     TracyZoneScoped;
-    sFD_CLR(fd, &readfds);    // this needs to be done before closing the socket
+#ifdef __APPLE__
+    sFD_CLR(fd, &readfds); // this needs to be done before closing the socket
+#endif
     sShutdown(fd, SHUT_RDWR); // Disallow further reads/writes
     sClose(fd);               // We don't really care if these closing functions return an error, we are just shutting down and not reusing this socket.
 }
@@ -774,8 +776,9 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     {
         fd_max = fd + 1;
     }
+#ifdef __APPLE__
     sFD_SET(fd, &readfds);
-
+#endif
     return fd;
 }
 
