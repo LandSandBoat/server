@@ -17,10 +17,8 @@ CREATE TABLE IF NOT EXISTS `mob_ele_evasion` (
 	`water_eem` SMALLINT(4) NULL DEFAULT '100',
 	`light_eem` SMALLINT(4) NULL DEFAULT '100',
 	`dark_eem` SMALLINT(4) NULL DEFAULT '100',
-	PRIMARY KEY (`ele_eva_id`) USING BTREE,
-	UNIQUE INDEX `UniqueSet` (`fire_eem`, `ice_eem`, `wind_eem`, `earth_eem`, `lightning_eem`, `water_eem`, `light_eem`, `dark_eem`) USING BTREE
+	PRIMARY KEY (`ele_eva_id`)
 )
-COLLATE='utf8mb3_general_ci'
 ENGINE=InnoDB
 ;
 
@@ -428,7 +426,7 @@ REPLACE INTO `mob_ele_evasion` (`ele_eva_id`, `fire_eem`, `ice_eem`, `wind_eem`,
 	(390,130,115,130,115,150,150,115,150), -- Rabbit
 	(391,130,100,150,100,150,130,130,130), -- Dhalmel
 	(392,100,150,100,100,100,100,150,100), -- Beetle
-	(393,130,150,130,100,150,130,100,150), -- Crawle
+	(393,130,150,130,100,150,130,100,150), -- Crawler
 	(394,130,115,150,130,130,130,150,30), -- Bat
 	(395,130,115,150,130,130,130,150,30), -- Bat_Trio
 	(396,130,130,130,130,130,130,150,100), -- Goblin
@@ -439,8 +437,7 @@ REPLACE INTO `mob_ele_evasion` (`ele_eva_id`, `fire_eem`, `ice_eem`, `wind_eem`,
 	(401,130,150,130,130,150,30,130,130), -- Pugil
 	(402,130,100,130,130,150,150,130,130), -- Sheep
 	(403,130,150,100,100,130,130,130,130), -- Bird
-	-- (404,100,100,130,130,130,150,130,130), -- Orc 150 breaks things??
-	(404,100,100,130,130,130,130,130,130), -- Orc
+	(404,100,100,130,130,130,150,130,130), -- Orc
 	(405,100,100,130,130,130,150,130,130), -- Orc-NM
 	(406,100,150,100,100,115,115,100,100), -- Spider
 	(407,85,115,115,115,130,85,115,115), -- Quadav
@@ -451,8 +448,8 @@ REPLACE INTO `mob_ele_evasion` (`ele_eva_id`, `fire_eem`, `ice_eem`, `wind_eem`,
 	(412,150,115,60,100,100,60,60,115), -- Flytrap
 	(413,130,150,100,100,130,130,130,130), -- Yagudo
 	(414,130,150,100,100,130,130,130,130), -- Yagudo-NM
-	(415,100,100,130,130,130,150,130,130), -- Raptor 210
-	(416,150,100,100,130,130,130,130,130), -- Raptor 377
+	(415,100,100,130,130,130,150,130,130), -- Raptor
+	(416,150,100,100,130,130,130,130,130), -- Raptor
 	(417,115,115,115,115,115,150,130,60), -- Diremite
 	(418,85,150,50,85,85,85,85,85), -- Greater_Bird
 	(419,60,115,115,115,150,60,115,115), -- Uragnite
@@ -466,56 +463,330 @@ REPLACE INTO `mob_ele_evasion` (`ele_eva_id`, `fire_eem`, `ice_eem`, `wind_eem`,
 	(427,100,100,100,100,100,100,5,150), -- Elemental-Light
 	(428,100,100,100,150,5,5,100,100), -- Elemental-Lightning
 	(429,5,100,100,100,150,5,100,100), -- Elemental-Water
-	(430,150,150,150,100,150,100,100,150); -- Mandragora
-
+	(430,150,150,150,100,150,100,100,150), -- Mandragora
+	(431,115,130,150,50,115,115,130,50), -- Antica
+	(432,130,130,130,130,130,50,150,50), -- Funguar
+	(433,100,100,130,60,100,100,150,60), -- Antlion
+	(434,115,115,115,115,115,115,30,130), -- Aern
+	(435,100,100,100,100,100,100,130,30), -- Ahriman
+	(436,50,130,50,5,5,5,50,50), -- Adamantoise
+	(437,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Archery
+	(438,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Axe
+	(439,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Club
+	(440,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Dagger
+	(441,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Greataxe
+	(442,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Greatkatana
+	(443,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Greatsword
+	(444,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Handtohand
+	(445,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Instrument
+	(446,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Katana
+	(447,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Marksmanship
+	(448,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Polearm
+	(449,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Scythe
+	(450,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Shield
+	(451,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Staff
+	(452,130,70,100,115,100,115,130,100), -- AnimatedWeapon-Sword
+	(453,100,60,60,60,70,100,30,5), -- Acrolith
+	(454,70,70,100,50,70,70,100,50), -- Amoeban
+	(455,85,85,115,115,130,40,115,115), -- Apkallu
+	(456,70,70,70,70,70,70,70,70), -- Behemoth
+	(457,130,40,115,100,130,115,130,40), -- Bhoot
+	(458,150,50,50,50,50,50,50,50), -- Bomb
+	(459,115,70,115,115,115,130,115,115), -- Buffalo
+	(460,70,130,115,115,115,115,70,115), -- Bugard
+	(461,115,115,115,100,115,115,150,70), -- Bugbear
+	(462,130,130,130,130,130,130,130,130), -- Cardian
+	(463,100,100,100,100,100,100,100,100), -- Cerberus
+	(465,115,115,130,115,115,115,85,85), -- Slime-Clot
+	(466,115,115,130,115,115,115,85,85), -- Slime-GlutinousClot
+	(467,130,60,60,60,60,60,60,60), -- Cluster
+	(468,130,60,60,60,60,60,60,60), -- Cluster
+	(469,130,130,150,70,70,130,130,130), -- Cockatrice
+	(470,130,70,115,70,115,115,150,60), -- Corse
+	(471,130,150,130,130,150,70,130,130), -- Crab
+	(472,130,150,130,130,150,70,130,130), -- Crab
+	(473,150,5,5,100,100,100,100,100), -- Craver
+	(474,70,70,70,70,150,70,70,70), -- Doll
+	(475,70,70,70,70,150,70,70,70), -- Doll
+	(476,70,70,70,70,150,70,70,70), -- Doll
+	(477,130,60,100,100,100,70,130,20), -- Doomed
+	(478,70,70,70,70,70,70,70,70), -- Dragon
+	(479,115,115,115,115,115,115,130,85), -- DynamisStatue-Goblin
+	(480,85,85,115,115,115,130,115,115), -- DynamisStatue-Orc
+	(481,85,115,115,115,130,85,115,115), -- DynamisStatue-Quadav
+	(482,115,130,85,85,115,115,115,115), -- DynamisStatue-Yagudo
+	(483,115,130,70,70,115,70,115,115), -- Eft
+	(484,85,115,115,100,115,130,100,115), -- Eruca
+	(485,85,115,115,100,115,130,100,115), -- Eruca
+	(486,150,115,115,115,115,60,60,115), -- Euvhi
+	(487,115,85,85,85,115,60,115,70), -- Flan
+	(488,150,50,130,100,130,130,150,50), -- Ghost
+	(489,70,70,70,70,70,70,70,70), -- Golem
+	(490,130,100,100,100,100,100,100,130), -- Goobbue
+	(491,60,60,60,60,60,60,60,60), -- Gorger
+	(492,60,60,60,60,60,60,60,60), -- Gorger
+	(493,130,130,130,130,130,130,130,70), -- Hecteyes
+	(494,115,115,60,135,60,115,115,115), -- Hippogryph
+	(496,150,50,130,100,130,130,150,50), -- Hound
+	(497,150,50,130,100,130,130,150,50), -- Hound
+	(498,100,130,130,130,130,130,85,115), -- Hpemde
+	(509,115,85,115,85,130,130,115,115), -- Karakul
+	(510,100,100,100,100,100,100,130,100), -- Kindred
+	(511,70,70,70,70,70,70,70,70), -- Magic_Pot
+	(512,50,130,50,130,130,150,100,100), -- Manticore
+	(513,100,115,115,70,115,100,115,115), -- Marid
+	(514,100,100,100,100,100,100,100,100), -- MemoryReceptacle
+	(515,100,100,100,100,100,100,100,100), -- Mimic
+	(516,115,115,115,100,115,115,150,70), -- Moblin
+	(518,130,150,115,100,100,130,100,130), -- Opo-opo
+	(519,150,130,130,130,130,130,50,50), -- Orc-Warmachine
+	(520,115,85,115,115,130,30,130,60), -- Orobon
+	(521,100,100,100,70,100,60,100,100), -- Peiste
+	(522,130,130,130,130,130,130,130,130), -- Wyvern-Pet
+	(523,130,130,130,130,130,50,85,130), -- Phuabo
+	(524,85,115,115,115,130,85,115,115), -- Quadav
+	(525,85,115,115,115,130,85,115,115), -- Quadav
+	(526,115,85,115,115,130,130,115,115), -- Ram
+	(527,130,150,100,100,130,50,50,150), -- Sabotender
+	(528,100,130,115,115,150,50,100,100), -- Sahagin
+	(529,100,150,100,100,130,130,150,100), -- Scorpion
+	(530,130,150,130,130,150,50,130,130), -- Sea_Monk
+	(531,130,150,130,130,150,50,130,130), -- Sea_Monk
+	(532,5,5,100,100,100,150,100,100), -- Seether
+	(533,150,70,100,100,100,100,150,70), -- Shadow
+	(534,150,70,100,100,100,100,150,70), -- Shadow
+	(535,150,70,100,100,100,100,150,70), -- Shadow
+	(536,100,100,100,100,100,100,100,15), -- ShadowLord
+	(537,100,100,100,100,100,100,100,15), -- ShadowLord
+	(538,150,130,130,130,130,130,130,130), -- Slime
+	(539,150,130,130,130,130,130,130,130), -- Slime
+	(540,150,130,130,130,130,130,130,130), -- Slime
+	(541,100,100,100,100,150,100,100,100), -- Spheroid
+	(543,115,115,115,115,115,115,130,70), -- Tauri
+	(544,60,60,60,60,60,60,60,60), -- Thinker
+	(545,115,150,115,100,130,85,50,100), -- Tonberry
+	(546,115,150,115,100,130,85,50,100), -- Tonberry
+	(547,150,130,130,100,130,100,100,150), -- Treant
+	(548,150,5,5,100,100,100,100,100), -- Wanderer
+	(549,100,100,100,100,100,100,150,5), -- Weeper
+	(550,100,100,130,5,5,100,100,100), -- Wyrm-Ouryu
+	(551,5,5,100,100,100,130,130,100), -- Wyrm-Fafnir
+	(552,5,5,100,100,100,130,100,100), -- Wyrm-Cynoprosopi
+	(553,5,5,100,100,100,130,100,100), -- Wyrm
+	(554,5,5,100,100,100,130,130,100), -- Wyrm-Nidhogg
+	(555,5,5,100,100,100,130,100,100), -- Wyrm
+	(556,130,130,130,130,130,130,130,130), -- Wyvern-Pet
+	(557,50,90,100,100,130,130,130,150), -- Wyvern-Guivre
+	(558,130,130,100,130,130,130,100,100), -- Xzomit
+	(559,100,100,100,130,30,100,70,115), -- Yovra
+	(560,70,70,70,70,70,70,70,70), -- Zdei
+	(561,100,100,100,100,100,100,100,100), -- ArkAngel-EV
+	(562,100,100,100,100,100,100,100,100), -- ArkAngel-GK
+	(563,100,100,100,100,100,100,100,100), -- ArkAngel-HM
+	(564,100,100,100,100,100,100,100,100), -- ArkAngel-MR
+	(565,100,100,100,100,100,100,100,100), -- ArkAngel-TT
+	(566,100,130,100,100,130,50,100,100), -- Scorpion-Serket
+	(567,100,130,100,100,130,50,100,100), -- Scorpion-KingV
+	(568,115,150,115,100,130,85,50,100), -- Tonberry-ZM4
+	(569,100,100,100,100,100,100,130,100), -- Kindred
+	(570,130,50,100,100,100,100,130,50), -- Fomor
+	(571,130,130,100,100,100,50,150,70), -- Leech
+	(572,100,100,130,130,130,150,130,130), -- Raptor
+	(573,100,100,100,100,100,100,130,5), -- Wyrm-Vrtra
+	(574,130,5,5,100,100,100,100,100), -- Wyrm-Jormungand
+	(575,5,5,100,100,100,130,100,100), -- Wyrm-Tiamat
+	(576,50,100,100,100,100,100,100,30), -- Bahamut
+	(577,60,60,60,60,60,60,30,30), -- Shinryu
+	(578,100,130,70,70,100,30,30,100), -- Sabotender-Florido
+	(579,100,100,100,100,100,100,150,5), -- Ghrah
+	(580,100,100,100,100,100,100,150,5), -- Ghrah
+	(581,100,100,100,100,100,100,150,5); -- Ghrah
 
 -- Update the mob resistance table to bind to an elemental evasion set
 -- Update large family blocks
 -- Start to fix EEMs
--- UPDATE `mob_pools` SET `ele_eva_id` = 387 WHERE `familyid` = 258; -- Worm
--- UPDATE `mob_pools` SET `ele_eva_id` = 388 WHERE `familyid` = 113 or `familyid` = 374 or `familyid` = 375; -- Fly
--- UPDATE `mob_pools` SET `ele_eva_id` = 389 WHERE `familyid` = 75; -- Crab
--- UPDATE `mob_pools` SET `ele_eva_id` = 390 WHERE `familyid` = 206; -- Rabbit
--- UPDATE `mob_pools` SET `ele_eva_id` = 391 WHERE `familyid` = 80; -- Dhalmel
--- UPDATE `mob_pools` SET `ele_eva_id` = 392 WHERE `familyid` = 49; -- Beetle
--- UPDATE `mob_pools` SET `ele_eva_id` = 393 WHERE `familyid` = 79; -- Crawler
--- UPDATE `mob_pools` SET `ele_eva_id` = 394 WHERE `familyid` = 46; -- Bat
--- UPDATE `mob_pools` SET `ele_eva_id` = 395 WHERE `familyid` = 47; -- Bat_Trio
--- UPDATE `mob_pools` SET `ele_eva_id` = 396 WHERE `familyid` = 133; -- Goblin
--- UPDATE `mob_pools` SET `ele_eva_id` = 397 WHERE `familyid` = 126; -- Gigas
--- UPDATE `mob_pools` SET `ele_eva_id` = 398 WHERE `familyid` = 174; -- Lizard
--- UPDATE `mob_pools` SET `ele_eva_id` = 399 WHERE `familyid` = 97; -- Lizard-Ice
--- UPDATE `mob_pools` SET `ele_eva_id` = 400 WHERE `familyid` = 227; -- Skeleton
--- UPDATE `mob_pools` SET `ele_eva_id` = 401 WHERE `familyid` = 197; -- Pugil
--- UPDATE `mob_pools` SET `ele_eva_id` = 402 WHERE `familyid` = 226; -- Sheep
--- UPDATE `mob_pools` SET `ele_eva_id` = 403 WHERE `familyid` = 55; -- Bird
+UPDATE `mob_pools` SET `ele_eva_id` = 387 WHERE `familyid` = 258; -- Worm
+UPDATE `mob_pools` SET `ele_eva_id` = 388 WHERE `familyid` = 113; -- Fly
+UPDATE `mob_pools` SET `ele_eva_id` = 389 WHERE `familyid` = 75; -- Crab
+UPDATE `mob_pools` SET `ele_eva_id` = 390 WHERE `familyid` = 206; -- Rabbit
+UPDATE `mob_pools` SET `ele_eva_id` = 391 WHERE `familyid` = 80; -- Dhalmel
+UPDATE `mob_pools` SET `ele_eva_id` = 392 WHERE `familyid` = 49; -- Beetle
+UPDATE `mob_pools` SET `ele_eva_id` = 393 WHERE `familyid` = 79; -- Crawler
+UPDATE `mob_pools` SET `ele_eva_id` = 394 WHERE `familyid` = 46; -- Bat
+UPDATE `mob_pools` SET `ele_eva_id` = 395 WHERE `familyid` = 47; -- Bat_Trio
+UPDATE `mob_pools` SET `ele_eva_id` = 396 WHERE `familyid` = 133; -- Goblin
+UPDATE `mob_pools` SET `ele_eva_id` = 397 WHERE `familyid` = 126; -- Gigas
+UPDATE `mob_pools` SET `ele_eva_id` = 398 WHERE `familyid` = 174; -- Lizard
+UPDATE `mob_pools` SET `ele_eva_id` = 399 WHERE `familyid` = 97; -- Lizard-Ice
+UPDATE `mob_pools` SET `ele_eva_id` = 400 WHERE `familyid` = 227; -- Skeleton
+UPDATE `mob_pools` SET `ele_eva_id` = 401 WHERE `familyid` = 197; -- Pugil
+UPDATE `mob_pools` SET `ele_eva_id` = 402 WHERE `familyid` = 226; -- Sheep
+UPDATE `mob_pools` SET `ele_eva_id` = 403 WHERE `familyid` = 55; -- Bird
 UPDATE `mob_pools` SET `ele_eva_id` = 404 WHERE `familyid` = 189; -- Orc
--- UPDATE `mob_pools` SET `ele_eva_id` = 405 WHERE `familyid` = 334; -- Orc-NM
--- UPDATE `mob_pools` SET `ele_eva_id` = 406 WHERE `familyid` = 235; -- Spider
--- UPDATE `mob_pools` SET `ele_eva_id` = 407 WHERE `familyid` = 200; -- Quadav
--- UPDATE `mob_pools` SET `ele_eva_id` = 408 WHERE `familyid` = 337; -- Quadav-NM
--- UPDATE `mob_pools` SET `ele_eva_id` = 409 WHERE `familyid` = 216; -- Sapling
--- UPDATE `mob_pools` SET `ele_eva_id` = 410 WHERE `familyid` = 172; -- Leech
--- UPDATE `mob_pools` SET `ele_eva_id` = 411 WHERE `familyid` = 242; -- Tiger
--- UPDATE `mob_pools` SET `ele_eva_id` = 412 WHERE `familyid` = 114; -- Flytrap
--- UPDATE `mob_pools` SET `ele_eva_id` = 413 WHERE `familyid` = 270; -- Yagudo
--- UPDATE `mob_pools` SET `ele_eva_id` = 414 WHERE `familyid` = 360; -- Yagudo-NM
--- UPDATE `mob_pools` SET `ele_eva_id` = 415 WHERE `familyid` = 210; -- Raptor
--- UPDATE `mob_pools` SET `ele_eva_id` = 416 WHERE `familyid` = 377; -- Raptor
--- UPDATE `mob_pools` SET `ele_eva_id` = 417 WHERE `familyid` = 81; -- Diremite
--- UPDATE `mob_pools` SET `ele_eva_id` = 418 WHERE `familyid` = 125; -- Greater_Bird
--- UPDATE `mob_pools` SET `ele_eva_id` = 419 WHERE `familyid` = 251; -- Uragnite
--- UPDATE `mob_pools` SET `ele_eva_id` = 420 WHERE `familyid` = 110; -- Evil_Weapon
--- UPDATE `mob_pools` SET `ele_eva_id` = 421 WHERE `familyid` = 71; -- Coeurl
--- UPDATE `mob_pools` SET `ele_eva_id` = 422 WHERE `familyid` = 99; -- Elemental-Air
--- UPDATE `mob_pools` SET `ele_eva_id` = 423 WHERE `familyid` = 100; -- Elemental-Dark
--- UPDATE `mob_pools` SET `ele_eva_id` = 424 WHERE `familyid` = 101; -- Elemental-Earth
--- UPDATE `mob_pools` SET `ele_eva_id` = 425 WHERE `familyid` = 102; -- Elemental-Fire
--- UPDATE `mob_pools` SET `ele_eva_id` = 426 WHERE `familyid` = 103; -- Elemental-Ice
--- UPDATE `mob_pools` SET `ele_eva_id` = 427 WHERE `familyid` = 104; -- Elemental-Light
--- UPDATE `mob_pools` SET `ele_eva_id` = 428 WHERE `familyid` = 105; -- Elemental-Lightning
--- UPDATE `mob_pools` SET `ele_eva_id` = 429 WHERE `familyid` = 106; -- Elemental-Water
--- UPDATE `mob_pools` SET `ele_eva_id` = 430 WHERE `familyid` = 178; -- Mandragora
+UPDATE `mob_pools` SET `ele_eva_id` = 405 WHERE `familyid` = 334; -- Orc-NM
+UPDATE `mob_pools` SET `ele_eva_id` = 406 WHERE `familyid` = 235; -- Spider
+UPDATE `mob_pools` SET `ele_eva_id` = 407 WHERE `familyid` = 200; -- Quadav
+UPDATE `mob_pools` SET `ele_eva_id` = 408 WHERE `familyid` = 337; -- Quadav-NM
+UPDATE `mob_pools` SET `ele_eva_id` = 409 WHERE `familyid` = 216; -- Sapling
+UPDATE `mob_pools` SET `ele_eva_id` = 410 WHERE `familyid` = 172; -- Leech
+UPDATE `mob_pools` SET `ele_eva_id` = 411 WHERE `familyid` = 242; -- Tiger
+UPDATE `mob_pools` SET `ele_eva_id` = 412 WHERE `familyid` = 114; -- Flytrap
+UPDATE `mob_pools` SET `ele_eva_id` = 413 WHERE `familyid` = 270; -- Yagudo
+UPDATE `mob_pools` SET `ele_eva_id` = 414 WHERE `familyid` = 360; -- Yagudo-NM
+UPDATE `mob_pools` SET `ele_eva_id` = 415 WHERE `familyid` = 210; -- Raptor
+UPDATE `mob_pools` SET `ele_eva_id` = 416 WHERE `familyid` = 377; -- Raptor
+UPDATE `mob_pools` SET `ele_eva_id` = 417 WHERE `familyid` = 81; -- Diremite
+UPDATE `mob_pools` SET `ele_eva_id` = 418 WHERE `familyid` = 125; -- Greater_Bird
+UPDATE `mob_pools` SET `ele_eva_id` = 419 WHERE `familyid` = 251; -- Uragnite
+UPDATE `mob_pools` SET `ele_eva_id` = 420 WHERE `familyid` = 110; -- Evil_Weapon
+UPDATE `mob_pools` SET `ele_eva_id` = 421 WHERE `familyid` = 71; -- Coeurl
+UPDATE `mob_pools` SET `ele_eva_id` = 422 WHERE `familyid` = 99; -- Elemental-Air
+UPDATE `mob_pools` SET `ele_eva_id` = 423 WHERE `familyid` = 100; -- Elemental-Dark
+UPDATE `mob_pools` SET `ele_eva_id` = 424 WHERE `familyid` = 101; -- Elemental-Earth
+UPDATE `mob_pools` SET `ele_eva_id` = 425 WHERE `familyid` = 102; -- Elemental-Fire
+UPDATE `mob_pools` SET `ele_eva_id` = 426 WHERE `familyid` = 103; -- Elemental-Ice
+UPDATE `mob_pools` SET `ele_eva_id` = 427 WHERE `familyid` = 104; -- Elemental-Light
+UPDATE `mob_pools` SET `ele_eva_id` = 428 WHERE `familyid` = 105; -- Elemental-Lightning
+UPDATE `mob_pools` SET `ele_eva_id` = 429 WHERE `familyid` = 106; -- Elemental-Water
+UPDATE `mob_pools` SET `ele_eva_id` = 430 WHERE `familyid` = 178; -- Mandragora
+UPDATE `mob_pools` SET `ele_eva_id` = 431 WHERE `familyid` = 25; -- Antica
+UPDATE `mob_pools` SET `ele_eva_id` = 432 WHERE `familyid` = 116; -- Funguar
+UPDATE `mob_pools` SET `ele_eva_id` = 433 WHERE `familyid` = 26; -- Antlion
+UPDATE `mob_pools` SET `ele_eva_id` = 434 WHERE `familyid` = 3; -- Aern
+UPDATE `mob_pools` SET `ele_eva_id` = 435 WHERE `familyid` = 4; -- Ahriman
+UPDATE `mob_pools` SET `ele_eva_id` = 436 WHERE `familyid` = 2; -- Adamantoise
+UPDATE `mob_pools` SET `ele_eva_id` = 437 WHERE `familyid` = 7; -- AnimatedWeapon-Archery
+UPDATE `mob_pools` SET `ele_eva_id` = 438 WHERE `familyid` = 8; -- AnimatedWeapon-Axe
+UPDATE `mob_pools` SET `ele_eva_id` = 439 WHERE `familyid` = 9; -- AnimatedWeapon-Club
+UPDATE `mob_pools` SET `ele_eva_id` = 440 WHERE `familyid` = 11; -- AnimatedWeapon-Dagger
+UPDATE `mob_pools` SET `ele_eva_id` = 441 WHERE `familyid` = 12; -- AnimatedWeapon-Greataxe
+UPDATE `mob_pools` SET `ele_eva_id` = 442 WHERE `familyid` = 13; -- AnimatedWeapon-Greatkatana
+UPDATE `mob_pools` SET `ele_eva_id` = 443 WHERE `familyid` = 14; -- AnimatedWeapon-Greatsword
+UPDATE `mob_pools` SET `ele_eva_id` = 444 WHERE `familyid` = 15; -- AnimatedWeapon-Handtohand
+UPDATE `mob_pools` SET `ele_eva_id` = 445 WHERE `familyid` = 16; -- AnimatedWeapon-Instrument
+UPDATE `mob_pools` SET `ele_eva_id` = 446 WHERE `familyid` = 17; -- AnimatedWeapon-Katana
+UPDATE `mob_pools` SET `ele_eva_id` = 447 WHERE `familyid` = 18; -- AnimatedWeapon-Marksmanship
+UPDATE `mob_pools` SET `ele_eva_id` = 448 WHERE `familyid` = 19; -- AnimatedWeapon-Polearm
+UPDATE `mob_pools` SET `ele_eva_id` = 449 WHERE `familyid` = 20; -- AnimatedWeapon-Scythe
+UPDATE `mob_pools` SET `ele_eva_id` = 450 WHERE `familyid` = 21; -- AnimatedWeapon-Shield
+UPDATE `mob_pools` SET `ele_eva_id` = 451 WHERE `familyid` = 23; -- AnimatedWeapon-Staff
+UPDATE `mob_pools` SET `ele_eva_id` = 452 WHERE `familyid` = 24; -- AnimatedWeapon-Sword
+UPDATE `mob_pools` SET `ele_eva_id` = 453 WHERE `familyid` = 1; -- Acrolith
+UPDATE `mob_pools` SET `ele_eva_id` = 454 WHERE `familyid` = 5; -- Amoeban
+UPDATE `mob_pools` SET `ele_eva_id` = 455 WHERE `familyid` = 27; -- Apkallu
+UPDATE `mob_pools` SET `ele_eva_id` = 456 WHERE `familyid` = 51; -- Behemoth
+UPDATE `mob_pools` SET `ele_eva_id` = 457 WHERE `familyid` = 52; -- Bhoot
+UPDATE `mob_pools` SET `ele_eva_id` = 458 WHERE `familyid` = 56; -- Bomb
+UPDATE `mob_pools` SET `ele_eva_id` = 459 WHERE `familyid` = 57; -- Buffalo
+UPDATE `mob_pools` SET `ele_eva_id` = 460 WHERE `familyid` = 58; -- Bugard
+UPDATE `mob_pools` SET `ele_eva_id` = 461 WHERE `familyid` = 59; -- Bugbear
+UPDATE `mob_pools` SET `ele_eva_id` = 462 WHERE `familyid` = 61; -- Cardian
+UPDATE `mob_pools` SET `ele_eva_id` = 463 WHERE `familyid` = 62; -- Cerberus
+UPDATE `mob_pools` SET `ele_eva_id` = 465 WHERE `familyid` = 66; -- Slime-Clot
+UPDATE `mob_pools` SET `ele_eva_id` = 466 WHERE `familyid` = 67; -- Slime-GlutinousClot
+UPDATE `mob_pools` SET `ele_eva_id` = 467 WHERE `familyid` = 68; -- Cluster
+UPDATE `mob_pools` SET `ele_eva_id` = 468 WHERE `familyid` = 69; -- Cluster
+UPDATE `mob_pools` SET `ele_eva_id` = 469 WHERE `familyid` = 70; -- Cockatrice
+UPDATE `mob_pools` SET `ele_eva_id` = 470 WHERE `familyid` = 74; -- Corse
+UPDATE `mob_pools` SET `ele_eva_id` = 471 WHERE `familyid` = 76; -- Crab
+UPDATE `mob_pools` SET `ele_eva_id` = 472 WHERE `familyid` = 77; -- Crab
+UPDATE `mob_pools` SET `ele_eva_id` = 473 WHERE `familyid` = 78; -- Craver
+UPDATE `mob_pools` SET `ele_eva_id` = 474 WHERE `familyid` = 83; -- Doll
+UPDATE `mob_pools` SET `ele_eva_id` = 475 WHERE `familyid` = 84; -- Doll
+UPDATE `mob_pools` SET `ele_eva_id` = 476 WHERE `familyid` = 85; -- Doll
+UPDATE `mob_pools` SET `ele_eva_id` = 477 WHERE `familyid` = 86; -- Doomed
+UPDATE `mob_pools` SET `ele_eva_id` = 478 WHERE `familyid` = 87; -- Dragon
+UPDATE `mob_pools` SET `ele_eva_id` = 479 WHERE `familyid` = 92; -- DynamisStatue-Goblin
+UPDATE `mob_pools` SET `ele_eva_id` = 480 WHERE `familyid` = 93; -- DynamisStatue-Orc
+UPDATE `mob_pools` SET `ele_eva_id` = 481 WHERE `familyid` = 94; -- DynamisStatue-Quadav
+UPDATE `mob_pools` SET `ele_eva_id` = 482 WHERE `familyid` = 95; -- DynamisStatue-Yagudo
+UPDATE `mob_pools` SET `ele_eva_id` = 483 WHERE `familyid` = 98; -- Eft
+UPDATE `mob_pools` SET `ele_eva_id` = 484 WHERE `familyid` = 107; -- Eruca
+UPDATE `mob_pools` SET `ele_eva_id` = 485 WHERE `familyid` = 108; -- Eruca
+UPDATE `mob_pools` SET `ele_eva_id` = 486 WHERE `familyid` = 109; -- Euvhi
+UPDATE `mob_pools` SET `ele_eva_id` = 487 WHERE `familyid` = 112; -- Flan
+UPDATE `mob_pools` SET `ele_eva_id` = 488 WHERE `familyid` = 121; -- Ghost
+UPDATE `mob_pools` SET `ele_eva_id` = 489 WHERE `familyid` = 135; -- Golem
+UPDATE `mob_pools` SET `ele_eva_id` = 490 WHERE `familyid` = 136; -- Goobbue
+UPDATE `mob_pools` SET `ele_eva_id` = 491 WHERE `familyid` = 137; -- Gorger
+UPDATE `mob_pools` SET `ele_eva_id` = 492 WHERE `familyid` = 138; -- Gorger
+UPDATE `mob_pools` SET `ele_eva_id` = 493 WHERE `familyid` = 139; -- Hecteyes
+UPDATE `mob_pools` SET `ele_eva_id` = 494 WHERE `familyid` = 140; -- Hippogryph
+UPDATE `mob_pools` SET `ele_eva_id` = 496 WHERE `familyid` = 142; -- Hound
+UPDATE `mob_pools` SET `ele_eva_id` = 497 WHERE `familyid` = 143; -- Hound
+UPDATE `mob_pools` SET `ele_eva_id` = 498 WHERE `familyid` = 144; -- Hpemde
+UPDATE `mob_pools` SET `ele_eva_id` = 509 WHERE `familyid` = 167; -- Karakul
+UPDATE `mob_pools` SET `ele_eva_id` = 510 WHERE `familyid` = 169; -- Kindred
+UPDATE `mob_pools` SET `ele_eva_id` = 511 WHERE `familyid` = 175; -- Magic_Pot
+UPDATE `mob_pools` SET `ele_eva_id` = 512 WHERE `familyid` = 179; -- Manticore
+UPDATE `mob_pools` SET `ele_eva_id` = 513 WHERE `familyid` = 180; -- Marid
+UPDATE `mob_pools` SET `ele_eva_id` = 514 WHERE `familyid` = 181; -- MemoryReceptacle
+UPDATE `mob_pools` SET `ele_eva_id` = 515 WHERE `familyid` = 183; -- Mimic
+UPDATE `mob_pools` SET `ele_eva_id` = 516 WHERE `familyid` = 184; -- Moblin
+UPDATE `mob_pools` SET `ele_eva_id` = 517 WHERE `familyid` = 186; -- Morbol
+UPDATE `mob_pools` SET `ele_eva_id` = 518 WHERE `familyid` = 188; -- Opo-opo
+UPDATE `mob_pools` SET `ele_eva_id` = 519 WHERE `familyid` = 190; -- Orc-Warmachine
+UPDATE `mob_pools` SET `ele_eva_id` = 520 WHERE `familyid` = 191; -- Orobon
+UPDATE `mob_pools` SET `ele_eva_id` = 521 WHERE `familyid` = 192; -- Peiste
+UPDATE `mob_pools` SET `ele_eva_id` = 522 WHERE `familyid` = 193; -- Wyvern-Pet
+UPDATE `mob_pools` SET `ele_eva_id` = 523 WHERE `familyid` = 194; -- Phuabo
+UPDATE `mob_pools` SET `ele_eva_id` = 524 WHERE `familyid` = 201; -- Quadav
+UPDATE `mob_pools` SET `ele_eva_id` = 525 WHERE `familyid` = 202; -- Quadav
+UPDATE `mob_pools` SET `ele_eva_id` = 526 WHERE `familyid` = 208; -- Ram
+UPDATE `mob_pools` SET `ele_eva_id` = 527 WHERE `familyid` = 212; -- Sabotender
+UPDATE `mob_pools` SET `ele_eva_id` = 528 WHERE `familyid` = 213; -- Sahagin
+UPDATE `mob_pools` SET `ele_eva_id` = 529 WHERE `familyid` = 217; -- Scorpion
+UPDATE `mob_pools` SET `ele_eva_id` = 530 WHERE `familyid` = 218; -- Sea_Monk
+UPDATE `mob_pools` SET `ele_eva_id` = 531 WHERE `familyid` = 219; -- Sea_Monk
+UPDATE `mob_pools` SET `ele_eva_id` = 532 WHERE `familyid` = 220; -- Seether
+UPDATE `mob_pools` SET `ele_eva_id` = 533 WHERE `familyid` = 221; -- Shadow
+UPDATE `mob_pools` SET `ele_eva_id` = 534 WHERE `familyid` = 222; -- Shadow
+UPDATE `mob_pools` SET `ele_eva_id` = 535 WHERE `familyid` = 223; -- Shadow
+UPDATE `mob_pools` SET `ele_eva_id` = 536 WHERE `familyid` = 224; -- ShadowLord
+UPDATE `mob_pools` SET `ele_eva_id` = 537 WHERE `familyid` = 225; -- ShadowLord
+UPDATE `mob_pools` SET `ele_eva_id` = 538 WHERE `familyid` = 228; -- Slime
+UPDATE `mob_pools` SET `ele_eva_id` = 539 WHERE `familyid` = 229; -- Slime
+UPDATE `mob_pools` SET `ele_eva_id` = 540 WHERE `familyid` = 230; -- Slime
+UPDATE `mob_pools` SET `ele_eva_id` = 541 WHERE `familyid` = 234; -- Spheroid
+UPDATE `mob_pools` SET `ele_eva_id` = 543 WHERE `familyid` = 240; -- Tauri
+UPDATE `mob_pools` SET `ele_eva_id` = 544 WHERE `familyid` = 241; -- Thinker
+UPDATE `mob_pools` SET `ele_eva_id` = 545 WHERE `familyid` = 243; -- Tonberry
+UPDATE `mob_pools` SET `ele_eva_id` = 546 WHERE `familyid` = 244; -- Tonberry
+UPDATE `mob_pools` SET `ele_eva_id` = 547 WHERE `familyid` = 245; -- Treant
+UPDATE `mob_pools` SET `ele_eva_id` = 548 WHERE `familyid` = 255; -- Wanderer
+UPDATE `mob_pools` SET `ele_eva_id` = 549 WHERE `familyid` = 256; -- Weeper
+UPDATE `mob_pools` SET `ele_eva_id` = 550 WHERE `familyid` = 259; -- Wyrm-Ouryu
+UPDATE `mob_pools` SET `ele_eva_id` = 551 WHERE `familyid` = 260; -- Wyrm-Fafnir
+UPDATE `mob_pools` SET `ele_eva_id` = 552 WHERE `familyid` = 261; -- Wyrm-Cynoprosopi
+UPDATE `mob_pools` SET `ele_eva_id` = 553 WHERE `familyid` = 262; -- Wyrm
+UPDATE `mob_pools` SET `ele_eva_id` = 554 WHERE `familyid` = 263; -- Wyrm-Nidhogg
+UPDATE `mob_pools` SET `ele_eva_id` = 555 WHERE `familyid` = 264; -- Wyrm
+UPDATE `mob_pools` SET `ele_eva_id` = 556 WHERE `familyid` = 266; -- Wyvern-Pet
+UPDATE `mob_pools` SET `ele_eva_id` = 557 WHERE `familyid` = 267; -- Wyvern-Guivre
+UPDATE `mob_pools` SET `ele_eva_id` = 558 WHERE `familyid` = 269; -- Xzomit
+UPDATE `mob_pools` SET `ele_eva_id` = 559 WHERE `familyid` = 271; -- Yovra
+UPDATE `mob_pools` SET `ele_eva_id` = 560 WHERE `familyid` = 272; -- Zdei
+UPDATE `mob_pools` SET `ele_eva_id` = 561 WHERE `familyid` = 352; -- ArkAngel-EV
+UPDATE `mob_pools` SET `ele_eva_id` = 562 WHERE `familyid` = 353; -- ArkAngel-GK
+UPDATE `mob_pools` SET `ele_eva_id` = 563 WHERE `familyid` = 354; -- ArkAngel-HM
+UPDATE `mob_pools` SET `ele_eva_id` = 564 WHERE `familyid` = 355; -- ArkAngel-MR
+UPDATE `mob_pools` SET `ele_eva_id` = 565 WHERE `familyid` = 356; -- ArkAngel-TT
+UPDATE `mob_pools` SET `ele_eva_id` = 566 WHERE `familyid` = 273; -- Scorpion-Serket
+UPDATE `mob_pools` SET `ele_eva_id` = 567 WHERE `familyid` = 274; -- Scorpion-KingV
+UPDATE `mob_pools` SET `ele_eva_id` = 568 WHERE `familyid` = 336; -- Tonberry-ZM4
+UPDATE `mob_pools` SET `ele_eva_id` = 569 WHERE `familyid` = 358; -- Kindred
+UPDATE `mob_pools` SET `ele_eva_id` = 570 WHERE `familyid` = 359; -- Fomor
+UPDATE `mob_pools` SET `ele_eva_id` = 571 WHERE `familyid` = 369; -- Leech
+UPDATE `mob_pools` SET `ele_eva_id` = 572 WHERE `familyid` = 376; -- Raptor
+UPDATE `mob_pools` SET `ele_eva_id` = 573 WHERE `familyid` = 391; -- Wyrm-Vrtra
+UPDATE `mob_pools` SET `ele_eva_id` = 574 WHERE `familyid` = 392; -- Wyrm-Jormungand
+UPDATE `mob_pools` SET `ele_eva_id` = 575 WHERE `familyid` = 393; -- Wyrm-Tiamat
+UPDATE `mob_pools` SET `ele_eva_id` = 576 WHERE `familyid` = 449; -- Bahamut
+UPDATE `mob_pools` SET `ele_eva_id` = 577 WHERE `familyid` = 475; -- Shinryu
+UPDATE `mob_pools` SET `ele_eva_id` = 578 WHERE `familyid` = 362; -- Sabotender-Florido
+UPDATE `mob_pools` SET `ele_eva_id` = 579 WHERE `familyid` = 122; -- Ghrah
+UPDATE `mob_pools` SET `ele_eva_id` = 580 WHERE `familyid` = 123; -- Ghrah
+UPDATE `mob_pools` SET `ele_eva_id` = 581 WHERE `familyid` = 124; -- Ghrah
 
 
 -- Update individual pools
