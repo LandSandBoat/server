@@ -88,8 +88,9 @@ quest.sections =
                         npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, { claim = true, hide = 0 })
                     then
                         return player:messageSpecial(ID.text.BODY_NUMB_DREAD)
-                    elseif quest:getVar(player, 'Prog') == 2
-                        and player:getCharVar("anUndyingPledgeNM_killed") == 1
+                    elseif
+                        quest:getVar(player, 'Prog') == 2 and
+                        player:getCharVar("anUndyingPledgeNM_killed") == 1
                     then
                         return quest:progressEvent(18)
                     else
