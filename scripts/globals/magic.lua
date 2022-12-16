@@ -34,21 +34,36 @@ xi.magic.eemStatus             = { xi.effect.FIRE_EEM_MOD,       xi.effect.ICE_E
 
 xi.magic.eemTiers =
 {
-    { eem = 1.50, mult = 0.95,    tier = -3 },
-    { eem = 1.30, mult = 0.96019, tier = -2 },
-    { eem = 1.15, mult = 0.98,    tier = -1 },
-    { eem = 1.00, mult = 1,       tier = 0  },
-    { eem = 0.85, mult = 1.023,   tier = 1  },
-    { eem = 0.70, mult = 1.049,   tier = 2  },
-    { eem = 0.60, mult = 1.0905,  tier = 3  },
-    { eem = 0.50, mult = 1.126,   tier = 4  },
-    { eem = 0.40, mult = 1.2075,  tier = 5  },
-    { eem = 0.30, mult = 1.3475,  tier = 6  },
-    { eem = 0.25, mult = 1.70065, tier = 7  },
-    { eem = 0.20, mult = 2.141,   tier = 8  },
-    { eem = 0.15, mult = 2.65,    tier = 9  },
-    { eem = 0.10, mult = 2.96,    tier = 10 },
-    { eem = 0.05, mult = 3.52,    tier = 11 }
+    { eem = 1.50, mult = 0.95,    tier = -18, baseTier = true  },
+    { eem = 1.30, mult = 0.96019, tier = -17, baseTier = false },
+    { eem = 1.30, mult = 0.96019, tier = -16, baseTier = false },
+    { eem = 1.30, mult = 0.96019, tier = -15, baseTier = false },
+    { eem = 1.30, mult = 0.96019, tier = -14, baseTier = false },
+    { eem = 1.30, mult = 0.96019, tier = -13, baseTier = false },
+    { eem = 1.30, mult = 0.96019, tier = -12, baseTier = true  },
+    { eem = 1.15, mult = 0.98,    tier = -11, baseTier = false },
+    { eem = 1.15, mult = 0.98,    tier = -10, baseTier = false },
+    { eem = 1.15, mult = 0.98,    tier = -9,  baseTier = false },
+    { eem = 1.15, mult = 0.98,    tier = -8,  baseTier = false },
+    { eem = 1.15, mult = 0.98,    tier = -7,  baseTier = false },
+    { eem = 1.00, mult = 1,       tier = -6,  baseTier = true  },
+    { eem = 1.00, mult = 1,       tier = -5,  baseTier = false },
+    { eem = 1.00, mult = 1,       tier = -4,  baseTier = false },
+    { eem = 1.00, mult = 1,       tier = -3,  baseTier = false },
+    { eem = 1.00, mult = 1,       tier = -2,  baseTier = false },
+    { eem = 1.00, mult = 1,       tier = -1,  baseTier = false },
+    { eem = 1.00, mult = 1,       tier = 0,   baseTier = true  },
+    { eem = 0.85, mult = 1.023,   tier = 1,   baseTier = true  },
+    { eem = 0.70, mult = 1.049,   tier = 2,   baseTier = true  },
+    { eem = 0.60, mult = 1.0905,  tier = 3,   baseTier = true  },
+    { eem = 0.50, mult = 1.126,   tier = 4,   baseTier = true  },
+    { eem = 0.40, mult = 1.2075,  tier = 5,   baseTier = true  },
+    { eem = 0.30, mult = 1.3475,  tier = 6,   baseTier = true  },
+    { eem = 0.25, mult = 1.70065, tier = 7,   baseTier = true  },
+    { eem = 0.20, mult = 2.141,   tier = 8,   baseTier = true  },
+    { eem = 0.15, mult = 2.65,    tier = 9,   baseTier = true  },
+    { eem = 0.10, mult = 2.96,    tier = 10,  baseTier = true  },
+    { eem = 0.05, mult = 3.52,    tier = 11,  baseTier = true  }
 }
 
 xi.magic.effectEva =
@@ -251,7 +266,7 @@ xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, s
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
         eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
         resBuild = utils.ternary(target:isNM() and isDamageSpell, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
-        mevaMult = xi.magic.calculateMEVAMult(utils.clamp(eemTier + resBuild, -3, 11))
+        mevaMult = xi.magic.calculateMEVAMult(utils.clamp(eemTier + resBuild, -18, 11))
         eemBonus = (target:getMod(xi.mod.MEVA) * mevaMult) - target:getMod(xi.mod.MEVA)
     end
 
@@ -889,7 +904,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
     local damageSpell = utils.ternary(isDamageSpell and isDamageSpell == true, true, false)
 
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
-        eemTier = utils.clamp(xi.magic.calculateEEMTier(target, element, skillchainCount) + resistTier, -3, 11)
+        eemTier = utils.clamp(xi.magic.calculateEEMTier(target, element, skillchainCount) + resistTier, -18, 11)
         eemVal  = xi.magic.calculateEEMVal(eemTier)
     end
 
@@ -1876,8 +1891,8 @@ xi.magic.calculateEEMTier = function(target, element, skillchainCount)
     if target ~= nil and element ~= nil and element ~= xi.magic.ele.NONE and target:getObjType() == xi.objType.MOB then
         local eemVal = target:getMod(xi.magic.eleEvaMult[element]) / 100
         for _, eemTable in pairs(xi.magic.eemTiers) do -- Finds the highest tier for the resist.
-            if eemVal >= eemTable.eem then
-                eemTier = utils.clamp(eemTable.tier, -3, 11)
+            if eemVal >= eemTable.eem and eemTable.baseTier then
+                eemTier = utils.clamp(eemTable.tier, -18, 11)
                 break
             end
         end
@@ -1887,7 +1902,7 @@ xi.magic.calculateEEMTier = function(target, element, skillchainCount)
         end
 
         if target:hasStatusEffect(xi.magic.eemStatus[element]) then
-            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), -3, 11)
+            eemTier = utils.clamp(eemTier - target:getStatusEffect(xi.magic.eemStatus[element]):getPower(), -18, 11)
         end
     end
 
