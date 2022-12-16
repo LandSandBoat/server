@@ -23671,9 +23671,7 @@ INSERT INTO `mob_droplist` VALUES (2843,1,1,1000,1903,220); -- Vice Of Aspersion
 INSERT INTO `mob_droplist` VALUES (2844,1,1,1000,1854,810); -- Deed Of Moderation (Group 1 - 81.0%)
 INSERT INTO `mob_droplist` VALUES (2844,1,1,1000,1902,190); -- Vice Of Avarice (Group 1 - 19.0%)
 
--- ZoneID:  34 - Ixaern Mnk
-INSERT INTO `mob_droplist` VALUES (2845,0,0,1000,1851,750); -- Deed Of Placidity (75.0%)
-INSERT INTO `mob_droplist` VALUES (2845,0,0,1000,1901,250); -- Vice Of Antipathy (25.0%)
+-- 2845 Available
 
 -- ZoneID: 115 - Savanna Rarab
 INSERT INTO `mob_droplist` VALUES (2846,0,0,1000,856,@UNCOMMON); -- Rabbit Hide (Uncommon, 10%)
