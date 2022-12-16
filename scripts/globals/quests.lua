@@ -637,7 +637,7 @@ xi.quest.id =
         THE_POTENTIAL_WITHIN            = 146, -- + Converted
         BUGI_SODEN                      = 147, -- + Converted
         TRIAL_SIZE_TRIAL_BY_WATER       = 148, -- +
-        AN_UNDYING_PLEDGE               = 149,
+        AN_UNDYING_PLEDGE               = 149, -- + Converted
 
         -- Misc (160-165)
         WRATH_OF_THE_OPO_OPOS           = 160, -- ± Converted
