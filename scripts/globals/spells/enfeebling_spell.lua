@@ -21,50 +21,84 @@ local m = xi.mod
 
 local pTable =
 {   --                   1                     2          3              4               5      6    7         8       9           10         11
-    --    [Spell ID] = { Effect,               Stat-Used, Resist-Mod,    MEVA-Mod,       pBase, DoT, Duration, Resist, Bonus-MACC, pSaboteur, pResist },
-    [s.BIND        ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,          0, false,     false   },
-    [s.BINDGA      ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,          0, false,     false   },
-    [s.BLIND       ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,          0, true,      false   },
-    [s.BLIND_II    ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,          0, true,      false   },
-    [s.BLINDGA     ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,          0, true,      false   },
-    [s.BREAK       ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,          0, false,     false   },
-    [s.BREAKGA     ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,          0, false,     false   },
-    [s.CURSE       ] = { e.CURSE_I,            m.INT,     m.CURSERES,    m.CURSE_MEVA,      50,   0,      300,      2,          0, false,     false   },
-    [s.DISPEL      ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,          0, false,     false   },
-    [s.DISPELGA    ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,          0, false,     false   },
-    [s.DISTRACT    ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
-    [s.DISTRACT_II ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
-    [s.DISTRACT_III] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
-    [s.FLASH       ] = { e.FLASH,              m.MND,     m.BLINDRES,    m.BLIND_MEVA,     300,   0,       12,      4,          0, true,      false   },
-    [s.FRAZZLE     ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
-    [s.FRAZZLE_II  ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
-    [s.FRAZZLE_III ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,          0, true,      true    },
-    [s.GRAVITY     ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    26,   0,      120,      2,          0, true,      false   },
-    [s.GRAVITY_II  ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    32,   0,      180,      2,          0, true,      false   },
-    [s.GRAVIGA     ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    50,   0,      120,      2,          0, true,      false   },
-    [s.INUNDATION  ] = { e.INUNDATION,         m.MND,     0,             0,                  1,   0,      300,      5,          0, false,     false   },
-    [s.PARALYZE    ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,          0, true,      true    },
-    [s.PARALYZE_II ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,          0, true,      true    },
-    [s.PARALYGA    ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,          0, true,      true    },
-    [s.POISON      ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,          0, true,      false   },
-    [s.POISON_II   ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,          0, true,      false   },
-    [s.POISON_III  ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,          0, true,      false   },
-    [s.POISONGA    ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,          0, true,      false   },
-    [s.POISONGA_II ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,          0, true,      false   },
-    [s.POISONGA_III] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,          0, true,      false   },
-    [s.REPOSE      ] = { e.SLEEP_II,           m.MND,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,          0, false,     false   },
-    [s.SILENCE     ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,          0, false,     false   },
-    [s.SILENCEGA   ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,          0, false,     false   },
-    [s.SLEEP       ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,          0, false,     false   },
-    [s.SLEEP_II    ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,          0, false,     false   },
-    [s.SLEEPGA     ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,          0, false,     false   },
-    [s.SLEEPGA_II  ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,          0, false,     false   },
-    [s.SLOW        ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,          0, true,      true    },
-    [s.SLOW_II     ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,          0, true,      true    },
-    [s.SLOWGA      ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,          0, true,      true    },
-    [s.STUN        ] = { e.STUN,               m.INT,     m.STUNRES,     m.STUN_MEVA,        1,   0,        5,      4,          0, false,     false   },
-    [s.VIRUS       ] = { e.PLAGUE,             m.INT,     m.VIRUSRES,    m.VIRUS_MEVA,       5,   3,       60,      2,          0, false,     false   },
+    --    [Spell ID] = { Effect,               Stat-Used, Resist-Mod,    MEVA-Mod,       pBase, DoT, Duration, Resist, msg, pSaboteur, pResist },
+    [s.BIND        ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,   0, false,     false   },
+    [s.BINDGA      ] = { e.BIND,               m.INT,     m.BINDRES,     m.BIND_MEVA,        0,   0,       60,      2,   0, false,     false   },
+    [s.BLIND       ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
+    [s.BLIND_II    ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
+    [s.BLINDGA     ] = { e.BLIND,              m.INT,     m.BLINDRES,    m.BLIND_MEVA,       0,   0,      180,      2,   0, true,      false   },
+    [s.BREAK       ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,   0, false,     false   },
+    [s.BREAKGA     ] = { e.PETRIFICATION,      m.INT,     m.PETRIFYRES,  m.PETRIFY_MEVA,     1,   0,       30,      2,   0, false,     false   },
+    [s.BURN        ] = { e.BURN,               m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.CHOKE       ] = { e.CHOKE,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.CURSE       ] = { e.CURSE_I,            m.INT,     m.CURSERES,    m.CURSE_MEVA,      50,   0,      300,      2,   0, false,     false   },
+    [s.DISPEL      ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,   0, false,     false   },
+    [s.DISPELGA    ] = { e.NONE,               m.INT,     0,             0,                  0,   0,        0,      4,   0, false,     false   },
+    [s.DISTRACT    ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.DISTRACT_II ] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.DISTRACT_III] = { e.EVASION_DOWN,       m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.DROWN       ] = { e.DROWN,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.FLASH       ] = { e.FLASH,              m.MND,     m.BLINDRES,    m.BLIND_MEVA,     300,   0,       12,      4,   0, true,      false   },
+    [s.FRAZZLE     ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.FRAZZLE_II  ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.FRAZZLE_III ] = { e.MAGIC_EVASION_DOWN, m.MND,     0,             0,                  0,   0,      120,      2,   0, true,      true    },
+    [s.FROST       ] = { e.FROST,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.GRAVITY     ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    26,   0,      120,      2,   0, true,      false   },
+    [s.GRAVITY_II  ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    32,   0,      180,      2,   0, true,      false   },
+    [s.GRAVIGA     ] = { e.WEIGHT,             m.INT,     m.GRAVITYRES,  m.GRAVITY_MEVA,    50,   0,      120,      2,   0, true,      false   },
+    [s.INUNDATION  ] = { e.INUNDATION,         m.MND,     0,             0,                  1,   0,      300,      5,   0, false,     false   },
+    [s.PARALYZE    ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
+    [s.PARALYZE_II ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
+    [s.PARALYGA    ] = { e.PARALYSIS,          m.MND,     m.PARALYZERES, m.PARALYZE_MEVA,    0,   0,      120,      2,   0, true,      true    },
+    [s.POISON      ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,   0, true,      false   },
+    [s.POISON_II   ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,   0, true,      false   },
+    [s.POISON_III  ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,   0, true,      false   },
+    [s.POISONGA    ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,       90,      2,   0, true,      false   },
+    [s.POISONGA_II ] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      120,      2,   0, true,      false   },
+    [s.POISONGA_III] = { e.POISON,             m.INT,     m.POISONRES,   m.POISON_MEVA,      0,   3,      150,      2,   0, true,      false   },
+    [s.RASP        ] = { e.RASP,               m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.REPOSE      ] = { e.SLEEP_II,           m.MND,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   1, false,     false   },
+    [s.SHOCK       ] = { e.SHOCK,              m.INT,     0,             0,                  0,   3,       90,      4,   1, true,      false   },
+    [s.SILENCE     ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,   0, false,     false   },
+    [s.SILENCEGA   ] = { e.SILENCE,            m.MND,     m.SILENCERES,  m.SILENCE_MEVA,     1,   0,      120,      2,   0, false,     false   },
+    [s.SLEEP       ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,   0, false,     false   },
+    [s.SLEEP_II    ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   0, false,     false   },
+    [s.SLEEPGA     ] = { e.SLEEP_I,            m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       1,   0,       60,      2,   0, false,     false   },
+    [s.SLEEPGA_II  ] = { e.SLEEP_II,           m.INT,     m.SLEEPERES,   m.SLEEP_MEVA,       2,   0,       90,      2,   0, false,     false   },
+    [s.SLOW        ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
+    [s.SLOW_II     ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
+    [s.SLOWGA      ] = { e.SLOW,               m.MND,     m.SLOWRES,     m.SLOW_MEVA,        0,   0,      180,      2,   0, true,      true    },
+    [s.STUN        ] = { e.STUN,               m.INT,     m.STUNRES,     m.STUN_MEVA,        1,   0,        5,      4,   0, false,     false   },
+    [s.VIRUS       ] = { e.PLAGUE,             m.INT,     m.VIRUSRES,    m.VIRUS_MEVA,       5,   3,       60,      2,   0, false,     false   },
 }
+
+local elementalDebuffTable =
+{
+    -- effect = Nullified by, Nullifies
+    [e.BURN ] = { e.DROWN, e.FROST },
+    [e.CHOKE] = { e.FROST, e.RASP  },
+    [e.DROWN] = { e.SHOCK, e.BURN  },
+    [e.FROST] = { e.BURN,  e.CHOKE },
+    [e.RASP ] = { e.CHOKE, e.SHOCK },
+    [e.SHOCK] = { e.RASP,  e.DROWN },
+}
+
+local function getElementalDebuffPotency(caster, statUsed)
+    local potency    = 1
+    local casterStat = caster:getStat(statUsed)
+
+    if casterStat > 150 then
+        potency = potency + 4
+    elseif casterStat > 100 then
+        potency = potency + 3
+    elseif casterStat > 70 then
+        potency = potency + 2
+    elseif casterStat > 40 then
+        potency = potency + 1
+    end
+
+    return potency
+end
 
 -- Determine if target mob is immune to a status effect.
 xi.spells.enfeebling.checkInnateImmunity = function(target, spellEffect)
@@ -192,6 +226,30 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
                 potency = utils.clamp(statDiff * 73 / 5 + 1825, 730, 2920)
             end
         end,
+
+        [xi.effect.BURN] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.CHOKE] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.DROWN] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.FROST] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.RASP] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
+
+        [xi.effect.SHOCK] = function()
+            potency = getElementalDebuffPotency(caster, statUsed)
+        end,
     }
 
     potency = math.floor(potency)
@@ -275,7 +333,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local statUsed     = pTable[spellId][2]
     local mEvaMod      = pTable[spellId][4]
     local resistStages = pTable[spellId][8]
-    -- local spellMacc    = pTable[spellId][9] TODO: Add support in magic accuracy calculations for spell specific macc
+    local message      = pTable[spellId][9]
 
     -- Magic Hit Rate calculations.
     local magicAcc     = xi.damage.magicHitRate.calculateCasterMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
@@ -351,6 +409,26 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         return spellEffect
     end
 
+    -- Elemental DoTs
+    if
+        spellEffect == xi.effect.BURN or
+        spellEffect == xi.effect.CHOKE or
+        spellEffect == xi.effect.DROWN or
+        spellEffect == xi.effect.FROST or
+        spellEffect == xi.effect.RASP or
+        spellEffect == xi.effect.SHOCK
+    then
+        if target:hasStatusEffect(elementalDebuffTable[spellEffect][1]) then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+
+            return spellEffect
+        end
+
+        target:delStatusEffect(elementalDebuffTable[spellEffect][2])
+        duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
+        potency  = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) / 2
+    end
+
     ------------------------------
     -- STEP 6: Final Operations.
     ------------------------------
@@ -370,7 +448,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
             spell:setMsg(spell:getMagicBurstMessage())
             caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
         else
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS + message)
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
