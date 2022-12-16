@@ -1712,16 +1712,7 @@ INSERT INTO `mob_droplist` VALUES (171,0,0,1000,15631,280); -- Freyrs Trousers (
 INSERT INTO `mob_droplist` VALUES (171,0,0,1000,15713,260); -- Phoboss Sabatons (26.0%)
 INSERT INTO `mob_droplist` VALUES (171,0,0,1000,5736,200);  -- Linen Coin Purse (20.0%)
 
--- ZoneID: 193 - Aroma Leech
--- ZoneID: 196 - Aroma Fly
--- ZoneID: 198 - Aroma Crawler
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18247,@UNCOMMON); -- Balm Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18248,@UNCOMMON); -- Millefleurs Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18249,@UNCOMMON); -- Olibanum Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18250,@UNCOMMON); -- Attar Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18251,@UNCOMMON); -- Sweet Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18252,@UNCOMMON); -- Civet Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18253,@UNCOMMON); -- Musk Sachet (Uncommon, 10%)
+-- 172 Available
 
 -- ZoneID:  54 - Arrapago Apkallu
 INSERT INTO `mob_droplist` VALUES (173,0,0,1000,2149,330); -- Apkallu Feather (33.0%)
