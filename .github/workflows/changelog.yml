@@ -12,8 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: fregante/setup-git-user@v1
-      with:
-        fetch-depth: 1
     - name: Install dependencies
       run: |
         sudo apt-get update
