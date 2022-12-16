@@ -239,9 +239,9 @@ xi.weaponskills.getRangedHitRate = function(attacker, target, capHitRate, bonus,
         bonus = 0
     end
 
-    local acc100 = wsParams.acc100 or 0
-    local acc200 = wsParams.acc200 or 0
-    local acc300 = wsParams.acc300 or 0
+    local acc100 = (wsParams and wsParams.acc100) or 0
+    local acc200 = (wsParams and wsParams.acc200) or 0
+    local acc300 = (wsParams and wsParams.acc300) or 0
 
     if acc100 ~= 0 and acc200 ~= 0 and acc300 ~= 0 then
         if calcParams.tp >= 3000 then
@@ -1010,9 +1010,9 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     local accVarryTP = 0
 
-    local acc100 = wsParams.acc100 or 0
-    local acc200 = wsParams.acc200 or 0
-    local acc300 = wsParams.acc300 or 0
+    local acc100 = (wsParams and wsParams.acc100) or 0
+    local acc200 = (wsParams and wsParams.acc200) or 0
+    local acc300 = (wsParams and wsParams.acc300) or 0
 
     if acc100 ~= 0 and acc200 ~= 0 and acc300 ~= 0 then
         if calcParams.tp >= 3000 then
