@@ -41,6 +41,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaSpell& spell);
 
     void   setMsg(uint16 messageID);
+    void   setModifier(uint8 modifier);
     void   setAoE(uint8 aoe);
     void   setFlag(uint8 flags);
     void   setRadius(float radius);
