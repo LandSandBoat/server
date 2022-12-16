@@ -949,27 +949,26 @@ enum class Mod
     PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
     DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
-
-    FIRE_EEM                = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    ICE_EEM                 = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WIND_EEM                = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    EARTH_EEM               = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    THUNDER_EEM             = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WATER_EEM               = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    LIGHT_EEM               = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    DARK_EEM                = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    TAME_SUCCESS_RATE       = 1166, // Tame Success Rate +
-    RAMPART_MAGIC_SHIELD    = 1167, // Rampart Magic Shield
-    CRITHITRATE_SLOT        = 1168, // CRITHITRATE for slot
-    ATT_SLOT                = 1169, // ATT for slot
-    UDMG                    = 1170, // Uncapped dmg taken (all types)
-    SLEEP_MEVA              = 1171, // Sleep MEVA from Barspells
-    POISON_MEVA             = 1172, // Poison MEVA from Barspells
-    PARALYZE_MEVA           = 1173, // Paralyze MEVA from Barspells
-    BLIND_MEVA              = 1174, // Blind MEVA from Barspells
-    SILENCE_MEVA            = 1175, // Silence MEVA from Barspells
-    VIRUS_MEVA              = 1176, // Virus MEVA from Barspells
-    PETRIFY_MEVA            = 1177, // Petrify MEVA from Barspells
+    FIRE_EEM               = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM                = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM               = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM              = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM            = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM              = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM              = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM               = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    TAME_SUCCESS_RATE      = 1166, // Tame Success Rate +
+    RAMPART_MAGIC_SHIELD   = 1167, // Rampart Magic Shield
+    CRITHITRATE_SLOT       = 1168, // CRITHITRATE for slot
+    ATT_SLOT               = 1169, // ATT for slot
+    UDMG                   = 1170, // Uncapped dmg taken (all types)
+    SLEEP_MEVA             = 1171, // Sleep MEVA from Barspells
+    POISON_MEVA            = 1172, // Poison MEVA from Barspells
+    PARALYZE_MEVA          = 1173, // Paralyze MEVA from Barspells
+    BLIND_MEVA             = 1174, // Blind MEVA from Barspells
+    SILENCE_MEVA           = 1175, // Silence MEVA from Barspells
+    VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
+    PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
