@@ -13277,6 +13277,18 @@ INSERT INTO `mob_groups` VALUES (6,7042,209,'Titan_Prime_ASA',0,128,0,4000,0,40,
 INSERT INTO `mob_groups` VALUES (7,6954,209,'Titan_Prime_HTBF',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
+-- GM Zone (Zone 210)
+-- ------------------------------------------------------------
+
+-- Garrison npcs (1 per cap). These are inserted dynamically. Only min/max level matters.
+-- Consider adding a dynamic entitiy spawn param for min / max level so we only need 1 base mob group.
+INSERT INTO `mob_groups` VALUES (1,20001,210,'Garrison_20',0,129,0,0,0,15,20,1);
+INSERT INTO `mob_groups` VALUES (2,20001,210,'Garrison_30',0,129,0,0,0,25,30,1);
+INSERT INTO `mob_groups` VALUES (3,20001,210,'Garrison_40',0,129,0,0,0,35,40,1);
+INSERT INTO `mob_groups` VALUES (4,20001,210,'Garrison_50',0,129,0,0,0,45,50,1);
+INSERT INTO `mob_groups` VALUES (5,20001,210,'Garrison_75',0,129,0,0,0,70,75,1);
+
+-- ------------------------------------------------------------
 -- Cloister_of_Tides (Zone 211)
 -- ------------------------------------------------------------
 

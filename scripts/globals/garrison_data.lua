@@ -19,6 +19,18 @@ xi.garrison.allyNames =
     [75] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
+-- Group Ids are different per cap due to min / max level requirements
+-- They all use the same pool at the moment, but we could also change families
+-- based on cap, which would change base stats
+xi.garrison.allyGroupIds =
+{
+    [20] = 1,
+    [30] = 2,
+    [40] = 3,
+    [50] = 4,
+    [75] = 5,
+}
+
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
 xi.garrison.allyLooks =
 {
