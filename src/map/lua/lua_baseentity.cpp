@@ -6815,6 +6815,12 @@ sol::table CLuaBaseEntity::getClaimedDeedMask()
     return maskTable;
 }
 
+/************************************************************************
+ *  Function: setClaimedDeed()
+ *  Purpose : Sets bit corresponding to a deed of heroism reward as claimed
+ *  Example : player:setClaimedDeed(1)
+ ************************************************************************/
+
 void CLuaBaseEntity::setClaimedDeed(uint16 deedBitNum)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
@@ -6831,6 +6837,35 @@ void CLuaBaseEntity::setClaimedDeed(uint16 deedBitNum)
 
     const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
     char buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
+    sql->Query(query, buf, PChar->id);
+}
+
+/************************************************************************
+ *  Function: resetClaimedDeeds()
+ *  Purpose : Clears existing rewards that can be reset, and increments the reset
+ *            value to increase future cost for the player.
+ *  Example : player:resetClaimedDeeds()
+ ************************************************************************/
+
+void CLuaBaseEntity::resetClaimedDeeds()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to set claimed deed mask for Non-PC.");
+        return;
+    }
+
+    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint32 numResets = (PChar->m_claimedDeeds[4] >> 18) + 1;
+
+    // First two bits of m_claimedDeeds[3] are not resettable.
+    PChar->m_claimedDeeds[3] = PChar->m_claimedDeeds[3] & 0b11;
+    PChar->m_claimedDeeds[4] = numResets << 18;
+
+    const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
+    char        buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
 
     sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
     sql->Query(query, buf, PChar->id);
@@ -15164,6 +15199,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getUnityRank", CLuaBaseEntity::getUnityRank);
     SOL_REGISTER("getClaimedDeedMask", CLuaBaseEntity::getClaimedDeedMask);
     SOL_REGISTER("setClaimedDeed", CLuaBaseEntity::setClaimedDeed);
+    SOL_REGISTER("resetClaimedDeeds", CLuaBaseEntity::resetClaimedDeeds);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);
