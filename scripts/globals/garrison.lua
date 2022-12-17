@@ -94,6 +94,7 @@ xi.garrison.aggroGroups = function(group1, group2)
             if entity1 == nil or entity2 == nil then
                 printf("[warning] Could not apply aggro because either %i or %i are not valid entities", entityId1, entityId2)
             else
+                debugLogf("Applying enmity: %i <-> %i", entityId1, entityId2)
                 entity1:addEnmity(entity2, math.random(1, 5), math.random(1, 5))
                 entity2:addEnmity(entity1, math.random(1, 5), math.random(1, 5))
             end
@@ -103,7 +104,7 @@ end
 
 -- Spawns and npc for the given zone and with the given name, look, pose
 -- Uses dynamic entities
-xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
+xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, look)
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         allegiance = xi.allegiance.PLAYER,
@@ -114,7 +115,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
         rotation = rot,
         look = look,
 
-        groupId = 1,
+        groupId = groupId,
         groupZoneId = xi.zone.GM_HOME,
 
         releaseIdOnDisappear = true,
@@ -155,11 +156,16 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
     local regionIndex = GetRegionOwner(zone:getRegionID()) + 1
     local allyName    = xi.garrison.allyNames[zoneData.levelCap][regionIndex]
     local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][regionIndex]
+    local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
+    debugLogf("Spawning %d npcs. GroupId: %d", #zoneData.players, allyGroupId)
 
     -- Spawn 1 npc per player in alliance
     for i = 1, #zoneData.players do
-        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyName, utils.randomEntry(allyLooks))
-        mob:setMobLevel(zoneData.levelCap - math.floor(zoneData.levelCap / 5))
+        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyName, allyGroupId, utils.randomEntry(allyLooks))
+        -- Note: This does change the mob level because ally npcs are of type mob, and
+        -- level_restriction is only applied to PCs. However, we need the status to validate that the
+        -- npcs are part of the garrison.
+        -- Because the npcs are not level capped, group ids should be used to define min / max level.
         xi.garrison.addLevelCap(mob, zoneData.levelCap)
         table.insert(zoneData.npcs, mob:getID())
 
@@ -602,7 +608,8 @@ xi.garrison.getSpawnSchedule = function(player)
     local spawnSchedule = xi.garrison.waves.spawnSchedule[numParties]
 
     if spawnSchedule == nil then
-        printf("[warning] Spawn schedule not found for number of parties: %d", numParties)
+        -- Leave the log there even if valid most times, because it may help us cause bad use cases
+        debugLogf("[warning] Spawn schedule not found for number of parties: %d. Ignore if player has no party.", numParties)
         spawnSchedule = xi.garrison.waves.spawnSchedule[1]
     end
 
