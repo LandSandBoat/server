@@ -972,6 +972,7 @@ UPDATE `mob_pools` SET `ele_eva_id` = 146 WHERE `poolid` = 5008; -- Frenzied Man
 UPDATE `mob_pools` SET `ele_eva_id` = 43 WHERE `poolid` = 6424; -- Funnel Bats
 UPDATE `mob_pools` SET `ele_eva_id` = 176 WHERE `poolid` = 1462; -- Gargouille
 UPDATE `mob_pools` SET `ele_eva_id` = 250 WHERE `poolid` = 1463; -- Gargoyle
+UPDATE `mob_pools` SET `ele_eva_id` = 164 WHERE `poolid` = 20001; -- Garrison allies
 UPDATE `mob_pools` SET `ele_eva_id` = 365 WHERE `poolid` = 1473; -- Garuda Prime
 UPDATE `mob_pools` SET `ele_eva_id` = 345 WHERE `poolid` = 4647; -- Garuda Prime
 UPDATE `mob_pools` SET `ele_eva_id` = 103 WHERE `poolid` = 5179; -- Gasha
