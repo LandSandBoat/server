@@ -255,6 +255,23 @@ local function getStoredVoucherMask(player)
     return voucherMask
 end
 
+local function updateValidatorEvent(player)
+    local claimedRewards = player:getClaimedDeedMask()
+    local storedVouchers = getStoredVoucherMask(player)
+    local numDeeds       = player:getCurrency('deeds')
+
+    player:updateEvent(
+        numDeeds,
+        claimedRewards[1],
+        claimedRewards[2],
+        claimedRewards[3],
+        claimedRewards[4],
+        claimedRewards[5],
+        storedVouchers,
+        0
+    )
+end
+
 xi.deeds.validatorOnTrigger = function(player, npc)
     local zoneId         = player:getZoneID()
     local numDeeds       = player:getCurrency('deeds')
@@ -297,7 +314,6 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
         player:setClaimedDeed(bitLocation)
 
         local claimedRewards = player:getClaimedDeedMask()
-        local storedVouchers = getStoredVoucherMask(player)
         local numDeeds       = player:getCurrency('deeds')
         local totalCost      = 480 * bit.rshift(claimedRewards[5], 18) + updateOption * 10
 
@@ -305,22 +321,17 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
             return
         end
 
-        player:updateEvent(
-            numDeeds,
-            claimedRewards[1],
-            claimedRewards[2],
-            claimedRewards[3],
-            claimedRewards[4],
-            claimedRewards[5],
-            storedVouchers,
-            0
-        )
+        updateValidatorEvent(player)
 
         if validatorRewards[updateOption]['keyItemId'] then
             npcUtil.giveKeyItem(player, validatorRewards[updateOption]['keyItemId'])
         else
             npcUtil.giveItem(player, { { validatorRewards[updateOption]['itemId'], validatorRewards[updateOption]['qty'] } })
         end
+    elseif updateAction == 4 and updateOption == 0 then
+        player:resetClaimedDeeds()
+
+        updateValidatorEvent(player)
     end
 end
 
