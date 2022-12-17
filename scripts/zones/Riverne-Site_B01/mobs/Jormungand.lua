@@ -31,9 +31,9 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime then
+        if mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime then
             mob:useMobAbility(695)
-            mob:setLocalVar("twohourTime", (mob:getBattleTime()/15) +20)
+            mob:setLocalVar("twohourTime", (mob:getBattleTime() / 15) + 20)
         elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
@@ -54,10 +54,12 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Wakeup from sleep immediately if flying
-    if mob:getAnimationSub() == 1 and
-    (mob:hasStatusEffect(xi.effect.SLEEP_I) or
-    mob:hasStatusEffect(xi.effect.SLEEP_II) or
-    mob:hasStatusEffect(xi.effect.LULLABY)) then
+    if
+        mob:getAnimationSub() == 1 and
+        (mob:hasStatusEffect(xi.effect.SLEEP_I) or
+        mob:hasStatusEffect(xi.effect.SLEEP_II) or
+        mob:hasStatusEffect(xi.effect.LULLABY))
+    then
         mob:wakeUp()
     end
 end
@@ -73,7 +75,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 1296 and mob:getHPP() <= 30 then
         local roarCounter = mob:getLocalVar("roarCounter")
 
-        roarCounter = roarCounter +1
+        roarCounter = roarCounter + 1
         mob:setLocalVar("roarCounter", roarCounter)
 
         if roarCounter > 2 then
