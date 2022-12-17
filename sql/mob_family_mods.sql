@@ -876,12 +876,6 @@ INSERT INTO `mob_family_mods` VALUES (271,363,50,0); -- DEFP: 50
 INSERT INTO `mob_family_mods` VALUES (272,4,10,1);    -- SIGHT_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (272,102,60,1);  -- MOBMOD_SIGHT_ANGLE
 
--- Scorpion-Serket
-INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256
-
--- Scorpion-Kingv
-INSERT INTO `mob_family_mods` VALUES (274,23,256,1); -- IMMUNITY: 256
-
 -- Slime
 INSERT INTO `mob_family_mods` VALUES (228,252,35,0); -- CHARMRES: 35
 

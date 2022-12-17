@@ -12,6 +12,8 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    --need this until the dark_sleep and light_sleep immunities are working
+    mob:addMod(xi.mod.SLEEPRES, 100)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
