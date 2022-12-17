@@ -33,6 +33,8 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)
 
+    xi.magic.handleSMNBurstMsg(pet, target, skill, params.element, 379)
+
     return totaldamage
 end
 
