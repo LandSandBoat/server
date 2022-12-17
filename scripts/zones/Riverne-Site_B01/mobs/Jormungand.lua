@@ -15,6 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 80)
     mob:setMobMod(xi.mobMod.BUFF_CHANCE, 20)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:addMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.MDEF, 124) -- 385 * 1.32/2.24 = 226 nether blast
     mob:setMod(xi.mod.DEF, 500)
     mob:setMod(xi.mod.MATT, 0)
