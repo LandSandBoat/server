@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Paralyze II
+-- Spell: Distract III
 -----------------------------------
 require("scripts/globals/spells/enfeebling_spell")
 -----------------------------------
