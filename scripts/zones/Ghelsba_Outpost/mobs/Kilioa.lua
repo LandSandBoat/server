@@ -6,8 +6,6 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SLEEPRES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1) -- lock from moving
     mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end

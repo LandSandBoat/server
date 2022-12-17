@@ -491,7 +491,6 @@ INSERT INTO `mob_pool_mods` VALUES (3916,163,-40,0);  -- DMGMAGIC: -40
 -- need this until the dark_sleep and light_sleep immunities are working
 INSERT INTO `mob_pool_mods` VALUES (3916,254,100,0); -- LULLABYRES: 100
 
-
 -- Tombstone Prototype
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
 
