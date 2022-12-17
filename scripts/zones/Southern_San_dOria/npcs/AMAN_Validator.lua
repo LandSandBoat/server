@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Southern San d'Oria
---  NPC: A.M.A.N Validator
+-- NPC: A.M.A.N Validator
+-- !pos -83.07 1 -55.58 230
 -----------------------------------
 require('scripts/globals/deeds')
 -----------------------------------
