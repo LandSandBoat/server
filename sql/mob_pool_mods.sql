@@ -222,6 +222,8 @@ INSERT INTO `mob_pool_mods` VALUES (1806,28,10,1); -- EXP_BONUS: 10
 
 -- Guivre
 INSERT INTO `mob_pool_mods` VALUES (1841,28,10,1); -- EXP_BONUS: 10
+-- need this until the dark_sleep and light_sleep immunities are working
+INSERT INTO `mob_pool_mods` VALUES (1841,254,100,0); -- LULLABYRES: 100
 
 -- Hydras Hound
 INSERT INTO `mob_pool_mods` VALUES (2032,34,20,1);  -- MAGIC_COOL: 20
@@ -265,6 +267,8 @@ INSERT INTO `mob_pool_mods` VALUES (2136,59,115,1); -- WEAPON_BONUS: 115
 INSERT INTO `mob_pool_mods` VALUES (2156,29,12,0);  -- MDEF: 12
 INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0); -- REGEN: 25
 INSERT INTO `mob_pool_mods` VALUES (2156,59,263,1); -- WEAPON_BONUS: 263
+-- need this until the dark_sleep and light_sleep immunities are working
+INSERT INTO `mob_pool_mods` VALUES (2156,254,100,0); -- LULLABYRES: 100
 
 -- Kaiser Behemoth S
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1); -- MP_BASE: 100
@@ -484,6 +488,8 @@ INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
 INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
 INSERT INTO `mob_pool_mods` VALUES (3916,162,-50,0);  -- DMGBREATH: -50
 INSERT INTO `mob_pool_mods` VALUES (3916,163,-40,0);  -- DMGMAGIC: -40
+-- need this until the dark_sleep and light_sleep immunities are working
+INSERT INTO `mob_pool_mods` VALUES (3916,254,100,0); -- LULLABYRES: 100
 
 
 -- Tombstone Prototype
@@ -605,6 +611,69 @@ INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1); -- LINK_RADIUS: 30
 
 -- Kaiser Behemoth (Apollyon NW)
 INSERT INTO `mob_pool_mods` VALUES (6732,3,100,1); -- MP_BASE: 100
+
+-- need these until the dark_sleep and light_sleep immunities are working
+-- Apollyon_Cleaner (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (200,254,100,0); -- LULLABYRES: 100
+INSERT INTO `mob_pool_mods` VALUES (6131,254,100,0); -- LULLABYRES: 100
+-- Apollyon_Sweeper (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (203,254,100,0); -- LULLABYRES: 100
+-- Barometz (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (345,254,100,0); -- LULLABYRES: 100
+INSERT INTO `mob_pool_mods` VALUES (98,254,100,0); -- LULLABYRES: 100
+-- Goobbue_Harvester (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (1759,254,100,0); -- LULLABYRES: 100
+-- Sirin (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (3634,254,100,0); -- LULLABYRES: 100
+-- Cornu (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (796,254,100,0); -- LULLABYRES: 100
+-- Hyperion (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (2039,254,100,0); -- LULLABYRES: 100
+-- Okeanos (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (2959,254,100,0); -- LULLABYRES: 100
+-- Cronos (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (843,254,100,0); -- LULLABYRES: 100
+-- Kerkopes (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (2211,254,100,0); -- LULLABYRES: 100
+INSERT INTO `mob_pool_mods` VALUES (6132,254,100,0); -- LULLABYRES: 100
+-- Troglodyte_Dhalmel (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (4008,254,100,0); -- LULLABYRES: 100
+-- Criosphinx (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (841,254,100,0); -- LULLABYRES: 100
+-- Hieracosphinx (Apollyon NE)
+INSERT INTO `mob_pool_mods` VALUES (1941,254,100,0); -- LULLABYRES: 100
+INSERT INTO `mob_pool_mods` VALUES (6168,254,100,0); -- LULLABYRES: 100
+-- Zlatorog (Apollyon NW)
+INSERT INTO `mob_pool_mods` VALUES (4513,254,100,0); -- LULLABYRES: 100
+-- Mountain_Buffalo (Apollyon NW)
+INSERT INTO `mob_pool_mods` VALUES (2757,254,100,0); -- LULLABYRES: 100
+-- Apollyon_Scavenger (Apollyon NW)
+INSERT INTO `mob_pool_mods` VALUES (202,254,100,0); -- LULLABYRES: 100
+-- Ghost_Clot (Apollyon SE)
+INSERT INTO `mob_pool_mods` VALUES (1515,254,100,0); -- LULLABYRES: 100
+-- Metalloid_Amoeba (Apollyon SE)
+INSERT INTO `mob_pool_mods` VALUES (2634,254,100,0); -- LULLABYRES: 100
+-- Tieholtsodi (Apollyon SE)
+INSERT INTO `mob_pool_mods` VALUES (3918,254,100,0); -- LULLABYRES: 100
+-- Adamantshell (Apollyon SE)
+INSERT INTO `mob_pool_mods` VALUES (45,254,100,0); -- LULLABYRES: 100
+-- Grave_Digger (Apollyon SE)
+INSERT INTO `mob_pool_mods` VALUES (1797,240,100,0); -- SLEEPRES: 100
+-- Inhumer (Apollyon SE)
+INSERT INTO `mob_pool_mods` VALUES (2082,240,100,0); -- SLEEPRES: 100
+
+-- Bearclaw_Leveret
+INSERT INTO `mob_pool_mods` VALUES (383,254,100,0); -- LULLABYRES: 100
+-- Mindertaur
+INSERT INTO `mob_pool_mods` VALUES (2668,254,100,0); -- LULLABYRES: 100
+-- Voluptuous_Vivian
+INSERT INTO `mob_pool_mods` VALUES (4253,254,100,0); -- LULLABYRES: 100
+-- Nunyenunc
+INSERT INTO `mob_pool_mods` VALUES (2921,254,100,0); -- LULLABYRES: 100
+-- Roc
+INSERT INTO `mob_pool_mods` VALUES (3376,240,100,0); -- SLEEPRES: 100
+-- Simurgh
+INSERT INTO `mob_pool_mods` VALUES (3630,240,100,0); -- SLEEPRES: 100
 
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;
