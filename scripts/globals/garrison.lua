@@ -431,7 +431,8 @@ xi.garrison.tick = function(npc)
             debugPrintToPlayers(players, "Mission success")
 
             messagePlayers(npc, players, ID.text.GARRISON_BASE + 36)
-            xi.garrison.handleLootRolls(xi.garrison.loot[zoneData.levelCap], zoneData.players)
+            xi.garrison.handleLootRolls(xi.garrison.loot[zoneData.levelCap], players)
+            xi.garrison.handleGilPayout(zoneData.levelCap, players)
             zoneData.state = xi.garrison.state.ENDED
         end,
 
@@ -588,8 +589,7 @@ xi.garrison.handleLootRolls = function(lootTable, players)
 
         if roll > max then
             if entry.itemid ~= 0 then
-                for _, entityId in ipairs(players) do
-                    local player = GetPlayerByID(entityId)
+                for _, player in ipairs(players) do
                     if player ~= nil then
                         player:addTreasure(entry.itemid)
                         return
@@ -598,6 +598,20 @@ xi.garrison.handleLootRolls = function(lootTable, players)
             end
 
             break
+        end
+    end
+end
+
+xi.garrison.handleGilPayout = function(levelCap, players)
+    -- We have two captures at level 30 being rewarded a total of 3k gil.
+    -- This is an assumption of how the rest of tiers work.
+    local payout = xi.settings.main.GIL_RATE * levelCap * 100 * #players
+    print("Payout: " .. payout)
+    for _, player in ipairs(players) do
+        if player ~= nil then
+            local gil = payout / #players
+            player:addGil(gil)
+            player:messageSpecial(zones[player:getZoneID()].text.GIL_OBTAINED, gil)
         end
     end
 end
@@ -749,4 +763,13 @@ xi.garrison.isZoneOnLockout = function(zone)
     end
 
     return false
+end
+
+-----------------------------------
+-- Debugging
+-----------------------------------
+
+xi.garrison.win = function(zone)
+    local zoneData = xi.garrison.zoneData[zone:getID()]
+    zoneData.state = xi.garrison.state.GRANT_LOOT
 end
