@@ -7,6 +7,7 @@
 -- Zero values indicate immunity
 -- --------------------------------------------------------
 
+DROP TABLE IF EXISTS `mob_ele_evasion`;
 CREATE TABLE IF NOT EXISTS `mob_ele_evasion` (
 	`ele_eva_id` SMALLINT(4) UNSIGNED NOT NULL,
 	`fire_eem` SMALLINT(4) NULL DEFAULT '100',
