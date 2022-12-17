@@ -105,6 +105,7 @@ end
 -- Spawns and npc for the given zone and with the given name, look, pose
 -- Uses dynamic entities
 xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, look)
+    local moddedLook = xi.garrison.addWeaponIfNecessary(look)
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         allegiance = xi.allegiance.PLAYER,
@@ -113,7 +114,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
         y = y,
         z = z,
         rotation = rot,
-        look = look,
+        look = moddedLook,
 
         groupId = groupId,
         groupZoneId = xi.zone.GM_HOME,
@@ -143,6 +144,18 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
     end)
 
     return mob
+end
+
+-- Adds a random weapon if the given look does not contain one.
+-- Weapons are on the byte found in digits 31-32 (including 0x prefix)
+xi.garrison.addWeaponIfNecessary = function(look)
+    -- Weapon already set. Don't change it.
+    if string.sub(look, 31, 32) ~= "00" then
+        return look
+    end
+
+    local weapon = utils.randomEntry(xi.garrison.allyArsenal)
+    return string.sub(look, 1, 30) .. weapon .. string.sub(look, 33, string.len(look))
 end
 
 -- Spawns all npcs for the zone in the given garrison starting npc
