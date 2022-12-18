@@ -69,10 +69,11 @@ quest.sections =
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
-                    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-                        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2)
-
-                        return
+                    -- short-circuit for Starlight Celebration if player is currently doing NPC Gifts
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2) then
+                            return
+                        end
                     end
                     return quest:event(310)
                 end
@@ -168,6 +169,13 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
+                    -- short-circuit for Starlight Celebration if player is currently doing NPC Gifts
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2) then
+                            return
+                        end
+                    end
+
                     local kenapaProg = quest:getVar(player, 'kenapaProg')
 
                     if kenapaProg == 0 then

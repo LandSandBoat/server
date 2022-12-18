@@ -75,21 +75,28 @@ function xi.events.starlightCelebration.onStarlightSmilebringersTrade(player, tr
                         player:messageSpecial(ID.text.BARRELS_JOY_TO_CHILDREN)
                         player:addFame(xi.quest.fame_area.HOLIDAY, 128)
                         player:tradeComplete()
+                        player:setLocalVar("[Smilebringers][" .. npcID .. "]GiftsReceived", npcTrades + 1)
+                        return true
                     elseif (item == gifts_table[itemInList] and (player:getFameLevel(xi.quest.fame_area.HOLIDAY) < 9)) then
                         player:showText(npc, ID.text.GIFT_THANK_YOU)
                         player:messageSpecial(ID.text.JOY_TO_CHILDREN)
                         player:addFame(xi.quest.fame_area.HOLIDAY, 32)
                         player:tradeComplete()
+                        player:setLocalVar("[Smilebringers][" .. npcID .. "]GiftsReceived", npcTrades + 1)
+                        return true
                     elseif ((item == gifts_table[itemInList]) and (player:getFameLevel(xi.quest.fame_area.HOLIDAY) >= 9)) then
                         player:showText(npc, ID.text.ONLY_TWO_HANDS)
+                        player:setLocalVar("[Smilebringers][" .. npcID .. "]GiftsReceived", npcTrades + 1)
+                        return true
                     end
                 end
-                player:setLocalVar("[Smilebringers][" .. npcID .. "]GiftsReceived", npcTrades + 1)
+                return false
             else
                 player:showText(npc, ID.text.ONLY_TWO_HANDS)
+                return true
             end
         else
-            return
+            return false
         end
     end
 end
@@ -175,10 +182,12 @@ function xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, eventid)
             local questUpdateStr = "[StarlightNPCGifts]Npc" .. eventid
             player:setLocalVar(questUpdateStr, 1)
             player:startEvent(eventTable[eventid])
+
+            return true
         end
-    else
-        return
     end
+
+    return false
 end
 
 --------------------------------
@@ -287,7 +296,7 @@ function xi.events.starlightCelebration.tokenMoogleOnFinish(player, id, csid, op
                 count = 0
                 npcUtil.giveItem(player, reward)
             else
-                if (picked > 178 and picked < 14519) then -- checks if reward is a food item
+                if (picked > 178 and picked < 10382) then -- checks if reward is a food item
                     reward = picked
                     count = 0
                     npcUtil.giveItem(player, reward)
@@ -325,7 +334,7 @@ end
 -- Smilebringer Bootcamp Sub-Quest --
 -------------------------------------
 
-function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, npc)
+function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, npc, zoneOption)
     local elapsedTime = (os.time() - player:getLocalVar("bootCampStarted"))
     local playerPoint = player:getLocalVar("playerBCCP")
     local completedDay = player:getCharVar("[SmileBootCamp]Completed")
@@ -335,11 +344,16 @@ function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, np
     local recordHolderID = npc:getLocalVar("recordHolderID")
     local recordHolderName = ""
     local recordTime = 0
-    local entry = 600
+    local entry = 0
     local qualifyingTime = 540
 
     if recordHolderID ~= 0 then
-        recordHolderName = GetPlayerByID(recordHolderID):getName()
+        local recordID = GetPlayerByID(recordHolderID)
+        if recordID ~= nil then
+            recordHolderName = GetPlayerByID(recordHolderID):getName()
+        else
+            recordHolderName = "Smilebringer"
+        end
         recordTime = npc:getLocalVar("recordTime")
     else
         recordHolderName = "Smilebringer"
@@ -347,7 +361,7 @@ function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, np
     end
 
     if completedDay ~= currentDay then
-        if (gil >= 600) then
+        if (gil >= 0) then
             if playerPoint ~= 0 then
                 if playerPoint == 10 then
                     if (elapsedTime >= 540) then
@@ -371,20 +385,19 @@ function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, np
                     player:startEvent(7004)
                 end
             else
-                player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 1, recordTime, qualifyingTime, entry, 386)
+                player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 1, 0, recordTime, qualifyingTime, entry, zoneOption)
             end
         else
-            player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 0, recordTime, qualifyingTime, entry, 386)
+            player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 0, recordTime, qualifyingTime, entry, zoneOption)
         end
     else
-        player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 1, 0, 0, recordTime, qualifyingTime, entry, 386)
+        player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 1, 0, 0, recordTime, qualifyingTime, entry, zoneOption)
     end
 end
 
 function xi.events.starlightCelebration.smileBringerSergeantOnFinish(player, npc, id, csid, option)
-    if csid == 7001 and option == 2 then
+    if csid == 7001 and option == 1 then
         local zoneid = player:getZoneID()
-        player:delGil(600)
         player:showText(npc, id.text.SMILEBRINGER_START)
         player:setLocalVar("bootCampStarted", os.time())
         player:setLocalVar("playerBCCP", 1)
@@ -404,6 +417,9 @@ function xi.events.starlightCelebration.smileBringerSergeantOnFinish(player, npc
             player:setCharVar("[SmileBootCamp]Completed", VanadielUniqueDay())
             npcUtil.giveItem( player, 138, { silent = true } )
         end
+    elseif csid == 7004 and option == 5 then
+        player:setLocalVar("bootCampStarted", 0)
+        player:setLocalVar("playerBCCP", 0)
     elseif csid == 7011 then
         player:resetLocalVars()
     end
@@ -446,7 +462,7 @@ function xi.events.starlightCelebration.smileHelperTrigger(player, npc, id)
             end
         end
     else
-        player:showText(npc, ID.text.SMILEHELPER_IDLE)
+        player:showText(npc, id.text.SMILEHELPER_IDLE)
     end
 end
 
@@ -641,6 +657,14 @@ function xi.events.starlightCelebration.merryMakersMoogleOnTrigger(player, npc)
     local cleared = player:getLocalVar("[StarlightMerryMakers]Cleared")
     local confirmed = player:getLocalVar("[StarlightMerryMakers]Confirmed")
     local delivered = player:getLocalVar("[StarlightMerryMakers]Delivered")
+    local red_present = player:hasKeyItem(xi.keyItem.RED_PRESENT)
+    local green_present = player:hasKeyItem(xi.keyItem.GREEN_PRESENT)
+    local blue_present = player:hasKeyItem(xi.keyItem.BLUE_PRESENT)
+
+    if (red_present or green_present or blue_present) then
+        player:setLocalVar("[StarlightMerryMakers]HasPresent", 1)
+    end
+
     if questStatus ~= 0 then
         if cleared ~= 0 then
             player:startEvent(4702)
@@ -657,9 +681,6 @@ function xi.events.starlightCelebration.merryMakersMoogleOnTrigger(player, npc)
             end
             player:startEventString(4704, npcName)
         elseif (sender == 0 and hasPresent ~= 0) then
-            local red_present = player:hasKeyItem(xi.keyItem.RED_PRESENT)
-            local green_present = player:hasKeyItem(xi.keyItem.GREEN_PRESENT)
-            local blue_present = player:hasKeyItem(xi.keyItem.BLUE_PRESENT)
 
             local npc_table = xi.events.starlightCelebration.getMerrymakerNPCIDs(npc:getZoneID())
 
