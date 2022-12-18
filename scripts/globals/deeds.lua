@@ -236,7 +236,10 @@ local voucherKeyItems =
     xi.ki.DEED_TOKEN_PLUS_2_FEET,
 }
 
--- Subtables to determine what items can be rewarded per store voucher
+-- Subtables to determine what items can be rewarded per store voucher.
+-- Sub-keys are by Job ID in the event, which currently align to the Job
+-- enum - 1.  In this case, not using the enum in order to specify that
+-- this is strictly received from the event itself.
 local voucherData =
 {
     [0] = -- Deed Voucher
@@ -1263,6 +1266,7 @@ local function updateValidatorEvent(player)
     local claimedRewards = player:getClaimedDeedMask()
     local storedVouchers = getStoredVoucherMask(player)
     local numDeeds       = player:getCurrency('deeds')
+    local showOrHide     = bit.band(claimedRewards[1], 0x1)
 
     player:updateEvent(
         numDeeds,
@@ -1272,7 +1276,7 @@ local function updateValidatorEvent(player)
         claimedRewards[4],
         claimedRewards[5],
         storedVouchers,
-        0
+        showOrHide
     )
 end
 
@@ -1281,8 +1285,8 @@ xi.deeds.validatorOnTrigger = function(player, npc)
     local numDeeds       = player:getCurrency('deeds')
     local claimedRewards = player:getClaimedDeedMask()
     local storedVouchers = getStoredVoucherMask(player)
+    local showOrHide     = bit.band(claimedRewards[1], 0x1)
 
-    -- TODO: Other event parameters are probably an extended mask
     player:startEvent(validatorNpcEvents[zoneId],
         numDeeds,
         claimedRewards[1],
@@ -1291,7 +1295,7 @@ xi.deeds.validatorOnTrigger = function(player, npc)
         claimedRewards[4],
         claimedRewards[5],
         storedVouchers,
-        0
+        showOrHide
     )
 end
 
@@ -1300,37 +1304,36 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
     -- be obtained.
     local updateAction = bit.rshift(option, 16)
     local updateOption = bit.band(option, 0xFFFF)
-    local bitLocation  = updateOption
-
-    -- NOTE: Resettable rewards (970+) are handled in the same table; however, the stored
-    -- data is offset by one bit in the fourth parameter.  This block handles the conversion
-    -- for the following condition.
-    if updateAction == 3 then
-        updateAction = 1
-        updateOption = updateOption > 0 and updateOption + 96 or 0
-        bitLocation  = updateOption + 1
-    end
+    print(option)
 
     if
-        updateAction == 1 and
+        (updateAction == 1 or updateAction == 3) and
         validatorRewards[updateOption]
     then
-        player:setClaimedDeed(bitLocation)
-
+        local bitLocation    = updateOption
         local claimedRewards = player:getClaimedDeedMask()
         local numDeeds       = player:getCurrency('deeds')
-        local totalCost      = 480 * bit.rshift(claimedRewards[5], 18) + updateOption * 10
+        local totalCost      = updateOption * 10
 
-        if numDeeds < totalCost then
-            return
+        -- NOTE: Resettable rewards (970+) are handled in the same table; however, the stored
+        -- data is offset by one bit in the fourth parameter.  This block handles the conversion
+        -- for the following condition.
+        if updateAction == 3 then
+            updateOption = updateOption > 0 and updateOption + 96 or 0
+            bitLocation  = updateOption + 1
+            totalCost    = 480 * bit.rshift(claimedRewards[5], 18) + updateOption * 10
         end
 
-        updateValidatorEvent(player)
+        if numDeeds >= totalCost then
+            if validatorRewards[updateOption]['keyItemId'] then
+                npcUtil.giveKeyItem(player, validatorRewards[updateOption]['keyItemId'])
+                player:setClaimedDeed(bitLocation)
+            elseif npcUtil.giveItem(player, { { validatorRewards[updateOption]['itemId'], validatorRewards[updateOption]['qty'] } }) then
+                player:setClaimedDeed(bitLocation)
+            end
 
-        if validatorRewards[updateOption]['keyItemId'] then
-            npcUtil.giveKeyItem(player, validatorRewards[updateOption]['keyItemId'])
-        else
-            npcUtil.giveItem(player, { { validatorRewards[updateOption]['itemId'], validatorRewards[updateOption]['qty'] } })
+            -- Only update event if the player can purchase the item.
+            updateValidatorEvent(player)
         end
     elseif updateAction == 2 then
         local keyItemIndex = bit.rshift(updateOption, 8)
@@ -1339,7 +1342,9 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
 
     elseif updateAction == 4 and updateOption == 0 then
         player:resetClaimedDeeds()
-
+        updateValidatorEvent(player)
+    elseif updateAction == 10 and updateOption == 0 then
+        player:toggleReceivedDeedRewards()
         updateValidatorEvent(player)
     end
 end
