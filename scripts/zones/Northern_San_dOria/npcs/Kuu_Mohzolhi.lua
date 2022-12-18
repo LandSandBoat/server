@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+require("scripts/globals/items")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/events/starlight_celebrations")
 -----------------------------------
