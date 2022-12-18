@@ -328,7 +328,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local traitTrigger = xi.spells.enfeebling.checkTraitTrigger(caster, target, spellId)
 
     if traitTrigger then
-        -- TODO: Change action modifier so Resist! appears.
+        spell:setModifier(xi.msg.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return spellEffect
@@ -378,7 +378,6 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     end
 
     if resistDuration <= 1 / (2 ^ resistStages) then
-        -- spell:setModifier(xi.actionModifier.RESIST)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return spellEffect
@@ -455,7 +454,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
         if skillchainCount > 0 then
-            spell:setMsg(spell:getMagicBurstMessage())
+            spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB_IS - message * 3)
             caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
         else
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS + message)

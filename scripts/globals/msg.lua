@@ -81,6 +81,9 @@ xi.msg.basic =
     MAGIC_GAIN_EFFECT      = 230, -- <caster> casts <spell>. <target> gains the effect of <status>.
     MAGIC_ENFEEB_IS        = 236, -- <caster> casts <spell>. <target> is <status>.
     MAGIC_ENFEEB           = 237, -- <caster> casts <spell>. <target> receives the effect of <status>.
+    MAGIC_BURST_DAMAGE     = 252, -- <caster> casts <spell> Magic burst! <target> takes <amount> points of damage.
+    MAGIC_BURST_ENFEEB     = 268, -- <caster> casts <spell> Magic burst! <target> receives the effect of <status>.
+    MAGIC_BURST_ENFEEB_IS  = 271, -- <caster> casts <spell> Magic burst! <target> is <status>.
     MAGIC_RESIST_2         = 284, -- <target> resists the effects of the spell!
     MAGIC_CASTS_ON         = 309, -- <caster> casts <spell> on <target>.
     MAGIC_ABSORB_STR       = 329, -- <caster> casts <spell>. <target>'s STR is drained.
@@ -371,6 +374,16 @@ xi.msg.basic =
     -- TRUST & ALTER EGO
     TRUST_NO_CAST_TRUST     = 700,  -- You are unable to use Trust magic at this time.
     TRUST_NO_CALL_AE        = 717,  -- You cannot call forth alter egos here.
+}
+
+-- Used to modify certain basic messages.
+xi.msg.actionModifier =
+{
+    NONE        = 0x00,
+    COVER       = 0x01,
+    RESIST      = 0x02, -- Resist! <Regular message> -- Used for resist traits triggers.
+    MAGIC_BURST = 0x04, -- Currently known to be used for Swipe/Lunge only
+    IMMUNOBREAK = 0x08,
 }
 
 -----------------------------------
