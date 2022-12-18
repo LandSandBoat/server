@@ -20,8 +20,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-        if player:getLocalVar("[StarlightNPCGifts]Started") ~= 0 then
-            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4) then
             return
         end
 

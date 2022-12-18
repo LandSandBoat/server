@@ -13,7 +13,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2)
+        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2) then
+            return
+        end
     end
 end
 

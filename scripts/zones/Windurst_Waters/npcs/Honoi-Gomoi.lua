@@ -20,10 +20,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
-        local npcGiftCheck = player:getLocalVar("[StarlightNPCGifts]Npc3")
-        if (startedQuest ~= 0 and npcGiftCheck == 0) then
-            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 3)
+        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 3) then
             return
         end
     end

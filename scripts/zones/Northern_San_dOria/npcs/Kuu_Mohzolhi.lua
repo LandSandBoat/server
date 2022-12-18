@@ -13,10 +13,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        xi.events.starlightCelebration.onStarlightSmilebringersTrade(player, trade, npc)
-
-        return
+        if xi.events.starlightCelebration.onStarlightSmilebringersTrade(player, trade, npc) then
+            return
+        end
     end
+
     local itemQuality = 0
 
     if trade:getItemCount() == 1 and trade:getGil() == 0 then
