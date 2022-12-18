@@ -446,7 +446,7 @@ function xi.events.starlightCelebration.smileHelperTrigger(player, npc, id)
             end
         end
     else
-        player:showText(npc, ID.text.SMILEHELPER_IDLE)
+        player:showText(npc, id.text.SMILEHELPER_IDLE)
     end
 end
 
