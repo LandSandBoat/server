@@ -641,6 +641,14 @@ function xi.events.starlightCelebration.merryMakersMoogleOnTrigger(player, npc)
     local cleared = player:getLocalVar("[StarlightMerryMakers]Cleared")
     local confirmed = player:getLocalVar("[StarlightMerryMakers]Confirmed")
     local delivered = player:getLocalVar("[StarlightMerryMakers]Delivered")
+    local red_present = player:hasKeyItem(xi.keyItem.RED_PRESENT)
+    local green_present = player:hasKeyItem(xi.keyItem.GREEN_PRESENT)
+    local blue_present = player:hasKeyItem(xi.keyItem.BLUE_PRESENT)
+
+    if (red_present or green_present or blue_present) then
+        player:setLocalVar("[StarlightMerryMakers]HasPresent", 1)
+    end
+
     if questStatus ~= 0 then
         if cleared ~= 0 then
             player:startEvent(4702)
@@ -657,9 +665,6 @@ function xi.events.starlightCelebration.merryMakersMoogleOnTrigger(player, npc)
             end
             player:startEventString(4704, npcName)
         elseif (sender == 0 and hasPresent ~= 0) then
-            local red_present = player:hasKeyItem(xi.keyItem.RED_PRESENT)
-            local green_present = player:hasKeyItem(xi.keyItem.GREEN_PRESENT)
-            local blue_present = player:hasKeyItem(xi.keyItem.BLUE_PRESENT)
 
             local npc_table = xi.events.starlightCelebration.getMerrymakerNPCIDs(npc:getZoneID())
 

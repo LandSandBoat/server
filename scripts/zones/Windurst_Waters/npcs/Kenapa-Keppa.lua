@@ -32,6 +32,14 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(519)
     else
+        if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+            local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
+            local npcGiftCheck = player:getLocalVar("[StarlightNPCGifts]Npc2")
+            if (startedQuest ~= 0 and npcGiftCheck == 0) then
+                xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2)
+                return
+            end
+        end
         if math.random(1, 2) == 1 then
             player:startEvent(302) -- Standard converstation
         else

@@ -69,11 +69,6 @@ quest.sections =
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
-                    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-                        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 2)
-
-                        return
-                    end
                     return quest:event(310)
                 end
             },

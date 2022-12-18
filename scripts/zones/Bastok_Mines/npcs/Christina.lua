@@ -48,27 +48,34 @@ entity.onTrigger = function(player, npc)
             elseif fame == 3 then
                 player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 2)
             elseif fame == 4 then
-                player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0260, 0003, 0600, 0000, 7800, 0000, 0000, 0000)
+                -- player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
+                -- player:startEvent(32741, 0260, 0003, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 3)
             elseif fame == 5 then
-                player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0260, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
+                -- player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
+                -- player:startEvent(32741, 0260, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 4)
             elseif fame == 6 then
-                player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0260, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
+                -- player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
+                -- player:startEvent(32741, 0260, 0004, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 5)
             elseif fame == 7 then
-                player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0260, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
+                -- player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
+                -- player:startEvent(32741, 0260, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 5)
             elseif fame == 8 then
-                player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0260, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
+                -- player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
+                -- player:startEvent(32741, 0260, 0005, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 5)
             elseif fame == 9 then
-                player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
-                player:startEvent(32741, 0260, 0006, 0600, 0000, 7800, 0000, 0000, 0000)
+                -- player:setLocalVar("famebefore", player:getFame(xi.quest.fame_area.HOLIDAY))
+                -- player:startEvent(32741, 0260, 0006, 0600, 0000, 7800, 0000, 0000, 0000)
+                player:showText(npc, ID.text.STARLIGHT_FAME_DIALOG, 0, 6)
             end
         else
             player:startEvent(32742)
         end
+        player:PrintToPlayer("Please note: Teleports have been disabled for the current Starlight Celebration. Merry Starlight!", xi.msg.channel.UNKNOWN_32, "")
     end
 end
 
@@ -80,18 +87,18 @@ entity.onEventFinish = function(player, csid, option)
     local cost = 90
     local famebefore = player:getLocalVar("famebefore")
     local fameafter = (famebefore - cost)
-    if csid == 32741 and fame > 3 then
-        if option == 1 then
-            player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.SAN_DORIA_STARLIGHT, 0, 1)
-        elseif option == 2 then
-            player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.BASTOK_STARLIGHT, 0, 1)
-        elseif option == 3 then
-            player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WINDURST_STARLIGHT, 0, 1)
-        end
-    elseif csid == 252 then
+    -- if csid == 32741 and fame > 3 then
+        -- if option == 1 then
+        --     player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)
+        --     player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.SAN_DORIA_STARLIGHT, 0, 1)
+        -- elseif option == 2 then
+        --     player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)
+        --     player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.BASTOK_STARLIGHT, 0, 1)
+        -- elseif option == 3 then
+        --     player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)
+        --     player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WINDURST_STARLIGHT, 0, 1)
+        -- end
+    if csid == 252 then
         if player:getFreeSlotsCount() >= 1 then
             player:addItem(1742, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.PRESENT_FOR_THE_KIDDIES)
@@ -105,6 +112,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.PRESENT_FOR_THE_KIDDIES)
         end
     end
+    player:PrintToPlayer("Please note: Teleports have been disabled for the current Starlight Celebration. Merry Starlight!", xi.msg.channel.UNKNOWN_32, "")
 end
 
 return entity
