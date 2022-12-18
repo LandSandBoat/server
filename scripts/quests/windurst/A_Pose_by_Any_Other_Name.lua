@@ -117,6 +117,15 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
+                        local npcGiftCheck = player:getLocalVar("[StarlightNPCGifts]Npc4")
+                        if (startedQuest ~= 0 and npcGiftCheck == 0) then
+                            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+                            return
+                        end
+                    end
+
                     local requestedBody = poseItems[player:getMainJob()]
 
                     quest:setVar(player, 'Stage', os.time() + 300)
@@ -139,6 +148,15 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
+                        local npcGiftCheck = player:getLocalVar("[StarlightNPCGifts]Npc4")
+                        if (startedQuest ~= 0 and npcGiftCheck == 0) then
+                            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+                            return
+                        end
+                    end
+
                     local requestedBody = quest:getVar(player, 'Prog')
                     if quest:getVar(player, 'Stage') >= os.time() then -- Under time. Quest completed.
                         if player:getEquipID(xi.slot.BODY) == requestedBody then
@@ -180,6 +198,15 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
+                        local npcGiftCheck = player:getLocalVar("[StarlightNPCGifts]Npc4")
+                        if (startedQuest ~= 0 and npcGiftCheck == 0) then
+                            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+                            return
+                        end
+                    end
+
                     return quest:event(101):replaceDefault()
                 end,
             },
