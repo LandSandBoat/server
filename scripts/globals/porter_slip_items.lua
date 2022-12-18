@@ -1969,7 +1969,7 @@ local slipItems =
         xi.items.THEOPHANY_MITTS_P1,
         xi.items.THEOPHANY_PANTALOONS_P1,
         xi.items.THEOPHANY_DUCKBILLS_P1,
-        xi.items.THEOPHANY_DUCKBILLS_P1,
+        xi.items.SPAEKONAS_PETASOS_P1,
         xi.items.SPAEKONAS_COAT_P1,
         xi.items.SPAEKONAS_GLOVES_P1,
         xi.items.SPAEKONAS_TONBAN_P1,

@@ -5656,6 +5656,7 @@ xi.items =
     PUMMELERS_MASK_P1               = 27684,
     ANCHORITES_CROWN_P1             = 27685,
     THEOPHANY_CAP_P1                = 27686,
+    SPAEKONAS_PETASOS_P1            = 27687,
     ATROPHY_CHAPEAU_P1              = 27688,
     PILLAGERS_BONNET_P1             = 27689,
     REVERENCE_CORONET_P1            = 27690,
