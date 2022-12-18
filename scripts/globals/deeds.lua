@@ -1249,7 +1249,6 @@ local voucherData =
 local function getStoredVoucherMask(player)
     local voucherMask = 0
 
-    -- TODO: This may involve two separate uint32 bitfields
     for keyItemIndex = 1, #voucherKeyItems do
         if player:hasKeyItem(voucherKeyItems[keyItemIndex]) then
             voucherMask = utils.mask.setBit(voucherMask, keyItemIndex - 1, true)
@@ -1274,6 +1273,16 @@ local function updateValidatorEvent(player)
         storedVouchers,
         0
     )
+end
+
+local function hasItemInSet(player, setTable)
+    for _, itemId in ipairs(setTable) do
+        if player:hasItem(itemId) then
+            return true
+        end
+    end
+
+    return false
 end
 
 xi.deeds.validatorOnTrigger = function(player, npc)
@@ -1315,28 +1324,51 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
         updateAction == 1 and
         validatorRewards[updateOption]
     then
-        player:setClaimedDeed(bitLocation)
-
         local claimedRewards = player:getClaimedDeedMask()
         local numDeeds       = player:getCurrency('deeds')
         local totalCost      = 480 * bit.rshift(claimedRewards[5], 18) + updateOption * 10
 
-        if numDeeds < totalCost then
-            return
+        if numDeeds <= totalCost then
+            if validatorRewards[updateOption]['keyItemId'] then
+                npcUtil.giveKeyItem(player, validatorRewards[updateOption]['keyItemId'])
+                player:setClaimedDeed(bitLocation)
+            elseif npcUtil.giveItem(player, { { validatorRewards[updateOption]['itemId'], validatorRewards[updateOption]['qty'] } }) then
+                player:setClaimedDeed(bitLocation)
+            end
         end
 
         updateValidatorEvent(player)
-
-        if validatorRewards[updateOption]['keyItemId'] then
-            npcUtil.giveKeyItem(player, validatorRewards[updateOption]['keyItemId'])
-        else
-            npcUtil.giveItem(player, { { validatorRewards[updateOption]['itemId'], validatorRewards[updateOption]['qty'] } })
-        end
     elseif updateAction == 2 then
         local keyItemIndex = bit.rshift(updateOption, 8)
         local selectedSet  = bit.band(updateOption, 0xFF)
+        local rewardTable  = {}
 
+        -- NOTE: Lua tables are passed by reference on assignment, and need to ensure
+        -- that we're not accidentally overwriting data when determining what to use.
+        if voucherData[keyItemIndex][selectedSet].genderSpecific then
+            rewardTable = voucherData[keyItemIndex][selectedSet][player:getGender()]
+        else
+            rewardTable = voucherData[keyItemIndex][selectedSet]
+        end
 
+        -- NOTE: Do not attempt to give any of the items if the player cannot obtain them
+        -- all.  All of the rewarded items are R/EX, so it is safe to check count and hasItem.
+        if
+            player:getFreeSlotsCount() >= #rewardTable and
+            not hasItemInSet(player, rewardTable)
+        then
+            player:delKeyItem(voucherKeyItems[keyItemIndex + 1])
+
+            for _, itemId in ipairs(rewardTable) do
+                npcUtil.giveItem(player, itemId)
+            end
+        else
+            local ID = zones[player:getZoneID()]
+
+            player:messageSpecial(ID.text.CANNOT_OBTAIN_THE_ITEM)
+        end
+
+        updateValidatorEvent(player)
     elseif updateAction == 4 and updateOption == 0 then
         player:resetClaimedDeeds()
 
