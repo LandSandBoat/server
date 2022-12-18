@@ -325,7 +325,7 @@ end
 -- Smilebringer Bootcamp Sub-Quest --
 -------------------------------------
 
-function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, npc)
+function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, npc, zoneOption)
     local elapsedTime = (os.time() - player:getLocalVar("bootCampStarted"))
     local playerPoint = player:getLocalVar("playerBCCP")
     local completedDay = player:getCharVar("[SmileBootCamp]Completed")
@@ -371,13 +371,13 @@ function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, np
                     player:startEvent(7004)
                 end
             else
-                player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 1, recordTime, qualifyingTime, entry, 386)
+                player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 1, recordTime, qualifyingTime, entry, zoneOption)
             end
         else
-            player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 0, recordTime, qualifyingTime, entry, 386)
+            player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 0, 0, 0, recordTime, qualifyingTime, entry, zoneOption)
         end
     else
-        player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 1, 0, 0, recordTime, qualifyingTime, entry, 386)
+        player:startEventString(7001, recordHolderName, recordHolderName, recordHolderName, recordHolderName, 0, 1, 0, 0, recordTime, qualifyingTime, entry, zoneOption)
     end
 end
 
