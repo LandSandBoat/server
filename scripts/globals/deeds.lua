@@ -1319,20 +1319,31 @@ xi.deeds.validatorOnEventUpdate = function(player, csid, option, npc)
         (updateAction == 1 or updateAction == 3) and
         validatorRewards[updateOption]
     then
+        local bitLocation    = updateOption
         local claimedRewards = player:getClaimedDeedMask()
         local numDeeds       = player:getCurrency('deeds')
         local totalCost      = updateOption * 10
 
-        if numDeeds <= totalCost then
+        -- NOTE: Resettable rewards (970+) are handled in the same table; however, the stored
+        -- data is offset by one bit in the fourth parameter.  This block handles the conversion
+        -- for the following condition.
+        if updateAction == 3 then
+            updateOption = updateOption > 0 and updateOption + 96 or 0
+            bitLocation  = updateOption + 1
+            totalCost    = 480 * bit.rshift(claimedRewards[5], 18) + updateOption * 10
+        end
+
+        if numDeeds >= totalCost then
             if validatorRewards[updateOption]['keyItemId'] then
                 npcUtil.giveKeyItem(player, validatorRewards[updateOption]['keyItemId'])
                 player:setClaimedDeed(bitLocation)
             elseif npcUtil.giveItem(player, { { validatorRewards[updateOption]['itemId'], validatorRewards[updateOption]['qty'] } }) then
                 player:setClaimedDeed(bitLocation)
             end
-        end
 
-        updateValidatorEvent(player)
+            -- Only update event if the player can purchase the item.
+            updateValidatorEvent(player)
+        end
     elseif updateAction == 2 then
         local keyItemIndex = bit.rshift(updateOption, 8)
         local selectedSet  = bit.band(updateOption, 0xFF)
