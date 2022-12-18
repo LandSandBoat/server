@@ -665,8 +665,6 @@ INSERT INTO `mob_pool_mods` VALUES (2082,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_pool_mods` VALUES (383,254,100,0); -- LULLABYRES: 100
 -- Mindertaur
 INSERT INTO `mob_pool_mods` VALUES (2668,254,100,0); -- LULLABYRES: 100
--- Voluptuous_Vivian
-INSERT INTO `mob_pool_mods` VALUES (4253,254,100,0); -- LULLABYRES: 100
 -- Nunyenunc
 INSERT INTO `mob_pool_mods` VALUES (2921,254,100,0); -- LULLABYRES: 100
 -- Roc
