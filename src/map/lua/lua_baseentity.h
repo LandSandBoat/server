@@ -371,6 +371,7 @@ public:
     uint8  getUnityLeader();                                                  // Returns player's unity leader
     auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>; // Returns current rank of player's unity
     auto   getClaimedDeedMask() -> sol::table;                                // Returns a table corresponding to claimed items from AMAN Validator
+    void   toggleReceivedDeedRewards();
     void   setClaimedDeed(uint16 deedBitNum);
     void   resetClaimedDeeds();
 

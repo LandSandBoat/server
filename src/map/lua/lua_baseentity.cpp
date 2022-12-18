@@ -6805,14 +6805,41 @@ sol::table CLuaBaseEntity::getClaimedDeedMask()
         return sol::lua_nil;
     }
 
-    auto* PChar    = static_cast<CCharEntity*>(m_PBaseEntity);
-    auto maskTable = lua.create_table();
+    auto* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto  maskTable = lua.create_table();
     for (uint8 i = 0; i < 5; ++i)
     {
         maskTable.add(PChar->m_claimedDeeds[i]);
     }
 
     return maskTable;
+}
+
+/************************************************************************
+ *  Function: toggleReceivedDeedRewards()
+ *  Purpose : Sets bit corresponding to showing or hiding received deed rewards
+ *  Example : player:toggleReceivedDeedRewards()
+ ************************************************************************/
+
+void CLuaBaseEntity::toggleReceivedDeedRewards()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to toggle hide/show received rewards for Non-PC.");
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    // Bit0 is unused in the 1st and 5th array value.  Packing this setting into
+    // the first bit of the first array index.
+    PChar->m_claimedDeeds[0] ^= 1;
+
+    const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
+    char        buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
+
+    sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
+    sql->Query(query, buf, PChar->id);
 }
 
 /************************************************************************
@@ -6836,7 +6863,7 @@ void CLuaBaseEntity::setClaimedDeed(uint16 deedBitNum)
     PChar->m_claimedDeeds[index] |= (1 << setBit);
 
     const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
-    char buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
+    char        buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
 
     sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
     sql->Query(query, buf, PChar->id);
@@ -6857,7 +6884,7 @@ void CLuaBaseEntity::resetClaimedDeeds()
         return;
     }
 
-    auto* PChar      = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto*  PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
     uint32 numResets = (PChar->m_claimedDeeds[4] >> 18) + 1;
 
     // First two bits of m_claimedDeeds[3] are not resettable.
@@ -15198,6 +15225,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getUnityLeader", CLuaBaseEntity::getUnityLeader);
     SOL_REGISTER("getUnityRank", CLuaBaseEntity::getUnityRank);
     SOL_REGISTER("getClaimedDeedMask", CLuaBaseEntity::getClaimedDeedMask);
+    SOL_REGISTER("toggleReceivedDeedRewards", CLuaBaseEntity::toggleReceivedDeedRewards);
     SOL_REGISTER("setClaimedDeed", CLuaBaseEntity::setClaimedDeed);
     SOL_REGISTER("resetClaimedDeeds", CLuaBaseEntity::resetClaimedDeeds);
 
