@@ -45810,7 +45810,7 @@ INSERT INTO `item_mods` VALUES (23046,384,700);  -- HASTE_GEAR: 700
 INSERT INTO `item_mods` VALUES (23046,966,1);    -- COVER_MAGIC_AND_RANGED: 1
 INSERT INTO `item_mods` VALUES (23046,967,9);    -- COVER_DURATION: 9
 
--- Ignominy Burgonet +2
+-- Ignominy Burgeonet +2
 INSERT INTO `item_mods` VALUES (23047,1,126);   -- DEF: 126
 INSERT INTO `item_mods` VALUES (23047,2,61);    -- HP: 61
 INSERT INTO `item_mods` VALUES (23047,5,34);    -- MP: 34
@@ -48188,7 +48188,7 @@ INSERT INTO `item_mods` VALUES (23381,384,700);  -- HASTE_GEAR: 700
 INSERT INTO `item_mods` VALUES (23381,966,1);    -- COVER_MAGIC_AND_RANGED: 1
 INSERT INTO `item_mods` VALUES (23381,967,10);   -- COVER_DURATION: 10
 
--- Ignominy Burgonet +3
+-- Ignominy Burgeonet +3
 INSERT INTO `item_mods` VALUES (23382,1,136);   -- DEF: 136
 INSERT INTO `item_mods` VALUES (23382,2,71);    -- HP: 71
 INSERT INTO `item_mods` VALUES (23382,5,44);    -- MP: 44
