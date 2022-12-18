@@ -83,10 +83,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local fame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
-    local cost = 90
-    local famebefore = player:getLocalVar("famebefore")
-    local fameafter = (famebefore - cost)
+    -- local fame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
+    -- local cost = 90
+    -- local famebefore = player:getLocalVar("famebefore")
+    -- local fameafter = (famebefore - cost)
     -- if csid == 32741 and fame > 3 then
         -- if option == 1 then
         --     player:setFame(xi.quest.fame_area.HOLIDAY, fameafter)

@@ -287,7 +287,7 @@ function xi.events.starlightCelebration.tokenMoogleOnFinish(player, id, csid, op
                 count = 0
                 npcUtil.giveItem(player, reward)
             else
-                if (picked > 178 and picked < 14519) then -- checks if reward is a food item
+                if (picked > 178 and picked < 10382) then -- checks if reward is a food item
                     reward = picked
                     count = 0
                     npcUtil.giveItem(player, reward)
