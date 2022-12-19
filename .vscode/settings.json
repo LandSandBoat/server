@@ -449,7 +449,7 @@
         "ForceCrash",
         "BuildString",
         "SendLuaFuncStringToZone",
-        "DYNAMIC_LOOKUP",
+        "GetFirstID",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"

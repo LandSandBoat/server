@@ -109,7 +109,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
 
     npc =
     {
-        SYRILLIA = DYNAMIC_LOOKUP
+        SYRILLIA = GetFirstID("Syrillia"),
     },
 }
 
