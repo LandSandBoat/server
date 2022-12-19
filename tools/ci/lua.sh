@@ -201,7 +201,7 @@ global_objects=(
     ForceCrash
     BuildString
 
-    DYNAMIC_LOOKUP
+    GetFirstID
 )
 
 ignores=(
