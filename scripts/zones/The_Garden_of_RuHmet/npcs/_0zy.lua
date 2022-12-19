@@ -12,11 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- the door breaks during the CS in Al'Taieu after receiving the Dawn mission, which sets the var to 1. Also checking for The Last Verse mission for whenever that gets implemented.
-    if
-        (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") > 0) or
-        player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN
-    then
+    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) then
         if player:getZPos() <= 360 then
             player:startEvent(140)
         else
@@ -25,8 +21,8 @@ entity.onTrigger = function(player, npc)
     else
         if player:getZPos() <= 360 then
             player:messageSpecial(ID.text.PORTAL_SEALED)
-        else
-            player:startEvent(139)
+        else 
+            player:startEvent(141)
         end
     end
 

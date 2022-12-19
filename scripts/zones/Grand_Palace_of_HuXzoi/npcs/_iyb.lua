@@ -9,24 +9,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.A_FATE_DECIDED and
-        player:getCharVar("PromathiaStatus") == 0
-    then
-        player:startEvent(2)
-    else
-        player:startEvent(56)
+    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY) then
+        return player:startEvent(56)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 2 then
-        player:setCharVar("PromathiaStatus", 1)
+    if csid == 56 and option == 1 then
+        player:setPos(-20, 0.6250, -355.4820, 188, xi.zone.GRAND_PALACE_OF_HUXZOI)
     end
 end
 

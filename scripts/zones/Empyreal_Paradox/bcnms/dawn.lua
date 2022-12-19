@@ -43,6 +43,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         -- local name, clearTime, partySize = battlefield:getRecord()
+        player:setLocalVar('battlefieldWin', battlefield:getID())
         player:startEvent(6)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -57,15 +58,6 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         player:setPos(539, 0, -593, 192)
         player:addTitle(xi.title.AVERTER_OF_THE_APOCALYPSE)
         player:startEvent(3)
-        if
-            player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-            player:getCharVar("PromathiaStatus") == 2
-        then
-            player:addKeyItem(xi.ki.TEAR_OF_ALTANA)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
-            player:setCharVar("Promathia_kill_day", getMidnight())
-            player:setCharVar("PromathiaStatus", 3)
-        end
     end
 end
 
