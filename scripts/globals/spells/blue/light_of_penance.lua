@@ -47,9 +47,14 @@ spellObject.onSpellCast = function(caster, target, spell)
         if target:isFacing(caster) and caster:isFacing(target) then
 
             -- If at least one of effects got applied, set the message type
-            if actionOne or actionTwo then spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS) end
+            if actionOne or actionTwo then
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            end
+
             -- Set the returnEffect to effectTwo if the first one failed
-            if not actionOne and actionTwo then returnEffect = typeEffectTwo end
+            if not actionOne and actionTwo then
+                returnEffect = typeEffectTwo
+            end
 
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

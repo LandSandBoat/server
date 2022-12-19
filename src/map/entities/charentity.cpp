@@ -1007,7 +1007,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
         {
             if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
-                    static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
+                static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
                 auto*     PBlueSpell = static_cast<CBlueSpell*>(PSpell);
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);

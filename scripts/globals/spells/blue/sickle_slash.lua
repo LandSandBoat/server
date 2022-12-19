@@ -42,11 +42,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    
-    local damage = bluDoPhysicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

@@ -44,9 +44,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local tick = 0
     local duration = 5
 
-    local damage = bluDoMagicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
-    bluDoMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
+    local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
+    xi.spells.blue.useMagicalSpellAddedEffect(caster, target, spell, params, power, tick, duration)
 
     return damage
 end

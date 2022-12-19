@@ -14,7 +14,6 @@
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -28,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.MAGIC_ATK_BOOST
     local typeEffectTwo = xi.effect.MAGIC_DEF_BOOST
     local power = 10
-    local duration = bluGetDurationWithDiffusion(caster, 90)
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 90)
     local returnEffect = typeEffectOne
 
     local actionOne = target:addStatusEffect(typeEffectOne, power, 0, duration)
@@ -36,9 +35,9 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     if not actionOne and not actionTwo then -- both statuses fail to apply
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    elseif not actionOne and actionTwo then -- the first status fails to apply 
+    elseif not actionOne and actionTwo then -- the first status fails to apply
         returnEffect = typeEffectTwo
-    elseif actionOne and not actionTwo then -- the second status fails to apply 
+    elseif actionOne and not actionTwo then -- the second status fails to apply
         returnEffect = typeEffectOne
     end
 

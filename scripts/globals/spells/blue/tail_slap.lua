@@ -44,15 +44,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    
+
     params.effect = xi.effect.STUN
     local power = 1
     local tick = 0
     local duration = 5
 
-    local damage = bluDoPhysicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
-    bluDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

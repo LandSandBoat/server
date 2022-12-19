@@ -32,10 +32,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.hpMod = 4
     params.lvlMod = 1.5
 
-    local results = bluDoBreathSpell(caster, target, spell, params, true)
+    local results = xi.spells.blue.useBreathSpell(caster, target, spell, params, true)
     local damage = results[1]
     local resist = results[2]
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
     if resist >= 0.5 then
         target:addStatusEffect(xi.effect.BLINDNESS, 20, 0, 60 * resist)

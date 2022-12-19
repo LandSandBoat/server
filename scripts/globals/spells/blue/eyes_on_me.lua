@@ -40,10 +40,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.4
 
-    local damage = bluDoMagicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
-
-    return damage
+    return xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 end
 
 return spellObject

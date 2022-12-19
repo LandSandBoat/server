@@ -49,9 +49,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local tick = 6
     local duration = 60
 
-    local damage = bluDoPhysicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
-    bluDoPhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

@@ -30,6 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     params.effect = xi.effect.NONE
     local resistThreshold = 0.25
+    local effect = xi.effect.NONE
 
     local resist = applyResistance(caster, target, spell, params)
     if resist >= resistThreshold then

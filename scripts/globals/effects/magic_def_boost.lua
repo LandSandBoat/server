@@ -15,17 +15,17 @@ end
 
 effectObject.onEffectTick = function(target, effect)
     -- decay the effect by 1 every effectTick
-    local boostMDB_effect_size = effect:getPower()
-    if boostMDB_effect_size > 0 then
-        effect:setPower(boostMDB_effect_size - 1)
+    local power = effect:getPower()
+    if power > 0 then
+        effect:setPower(power - 1)
         target:delMod(xi.mod.MDEF, 1)
     end
 end
 
 effectObject.onEffectLose = function(target, effect)
-    local boostMDB_effect_size = effect:getPower()
-    if boostMDB_effect_size > 0 then
-        target:delMod(xi.mod.MDEF, boostMDB_effect_size)
+    local power = effect:getPower()
+    if power > 0 then
+        target:delMod(xi.mod.MDEF, power)
     end
 end
 

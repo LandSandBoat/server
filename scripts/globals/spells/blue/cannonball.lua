@@ -44,10 +44,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 0.0
     params.offcratiomod = caster:getStat(xi.mod.DEF) -- Cannonball uses Defense as its main modifier
 
-    local damage = bluDoPhysicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
-
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

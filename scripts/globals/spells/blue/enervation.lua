@@ -45,6 +45,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         if actionOne or actionTwo then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         end
+
         -- Set the returnEffect to effectTwo if the first one failed
         if not actionOne and actionTwo then
             returnEffect = typeEffectTwo
@@ -55,7 +56,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     return returnEffect
-
 end
 
 return spellObject

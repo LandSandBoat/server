@@ -26,8 +26,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     local skill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power = skill / 50
     local duration = 300
-    local params = {}
-    params.ecosystem = xi.ecosystem.EMPTY
 
     -- 400 skill = 8 shadows, 450 = 9 shadows, so I am assuming every 50 skill is a shadow.
     -- Also assuming minimum of 2 shadows.

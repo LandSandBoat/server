@@ -32,10 +32,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.hpMod = 8
     params.lvlMod = 3
 
-    local results = bluDoBreathSpell(caster, target, spell, params, true)
+    local results = xi.spells.blue.useBreathSpell(caster, target, spell, params, true)
     local damage = results[1]
     local resist = results[2]
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
     local duration = 60 -- 30s/60s
     if resist >= 0.5 then

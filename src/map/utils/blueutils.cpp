@@ -44,7 +44,6 @@
 
 namespace blueutils
 {
-
     void SetBlueSpell(CCharEntity* PChar, CBlueSpell* PSpell, uint8 slotIndex, bool addingSpell)
     {
         // sanity check

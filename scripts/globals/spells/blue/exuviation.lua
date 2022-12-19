@@ -36,7 +36,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.constant2 = 144.6666
 
     target:eraseStatusEffect()
-    return bluDoCuringSpell(caster, target, spell, params)
+    return xi.spells.blue.useCuringSpell(caster, target, spell, params)
 end
 
 return spellObject

@@ -43,11 +43,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
     params.ignorefstrcap = true -- Smite of Rage doesn't have an fSTR cap
-    
-    local damage = bluDoPhysicalSpell(caster, target, spell, params)
-    damage = bluFinalizeDamage(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

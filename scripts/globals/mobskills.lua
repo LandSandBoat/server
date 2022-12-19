@@ -473,7 +473,6 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     end
 
     -- Deal bonus damage vs mob ecosystem
-    print(string.format("System mob " .. mob:getSystem() .. "/ System target " .. target:getSystem()))
     local systemBonus = utils.getSystemStrengthBonus(mob:getSystem(), target:getSystem())
     damage = damage + damage * (systemBonus * 0.25)
 

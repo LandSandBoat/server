@@ -27,24 +27,15 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.VERMIN
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
-    params.effect = nil
-    local resist = applyResistance(caster, target, spell, params)
+    params.effect = xi.effect.SLOW
+    local power = 2000
+    local tick = 0
+    local duration = 90
+    local resistThreshold = 0.5
+    local isGaze = false
+    local isConal = false
 
-    if resist < 0.5 then
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST) --resist message
-    else
-        if target:addStatusEffect(xi.effect.SLOW, 2000, 0, getBlueEffectDuration(caster, resist, xi.effect.SLOW)) then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        end
-    end
-
-    return xi.effect.SLOW
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 end
 
 return spellObject

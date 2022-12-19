@@ -575,7 +575,6 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
-
 end
 
 -- Returns resistance value from given magic hit rate (p)
@@ -889,7 +888,7 @@ function addBonuses(caster, spell, target, dmg, params)
         elseif casterJob == xi.job.GEO then
             mab = mab + caster:getJobPointLevel(xi.jp.GEO_MAGIC_ATK_BONUS)
         end
-        
+
         mabbonus = (100 + mab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     end
 

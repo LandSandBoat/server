@@ -34,7 +34,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local isGaze = true
     local isConal = false
 
-    return bluDoEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 end
 
 return spellObject

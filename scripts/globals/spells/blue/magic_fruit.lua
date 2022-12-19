@@ -35,7 +35,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.divisor2 = 2.8333
     params.constant2 = 391
 
-    return bluDoCuringSpell(caster, target, spell, params)
+    return xi.spells.blue.useCuringSpell(caster, target, spell, params)
 end
 
 return spellObject
