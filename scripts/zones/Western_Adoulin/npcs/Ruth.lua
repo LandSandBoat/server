@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Ruth
--- Type: Standard NPC and Quest NPC
 -- Involved With Quest: 'A Pioneers Best (Imaginary) Friend'
 -- !pos -144 4 -10 256
 -----------------------------------
@@ -22,13 +21,7 @@ entity.onTrigger = function(player, npc)
         if apbif == QUEST_ACCEPTED and not player:hasStatusEffect(xi.effect.IONIS) then
             -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2523)
-        else
-            -- Standard dialogue, after joining colonization effort
-            player:startEvent(590)
         end
-    else
-        -- Dialogue prior to joining colonization effort
-        player:startEvent(503)
     end
 end
 

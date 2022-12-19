@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Merleg
--- Type: Standard NPC and Quest Giver
 -- Starts, Involved with, and Finishes Quest: 'A Pioneers Best (Imaginary) Friend'
 -- !pos 34 0 -131 256
 -----------------------------------
@@ -27,9 +26,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif apbif == QUEST_AVAILABLE then
         player:startEvent(2520)
-    else
-        -- Standard dialogue
-        player:startEvent(543)
     end
 end
 
