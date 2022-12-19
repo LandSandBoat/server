@@ -870,7 +870,7 @@ xi.effect =
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
-    -- PLACEHOLDER           = 806, -- Description
+
     -- 806-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
@@ -1178,7 +1178,7 @@ xi.mod =
     DEMON_KILLER                    = 234,
     EMPTY_KILLER                    = 235,
     HUMANOID_KILLER                 = 236,
-    LUMORIAN_KILLER                 = 237,
+    LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
     SLEEPRES                        = 240,
     POISONRES                       = 241,
@@ -1819,6 +1819,7 @@ xi.mod =
     QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
@@ -2862,7 +2863,7 @@ xi.ecosystem =
     EMPTY          = 12,
     HUMANOID       = 13,
     LIZARD         = 14,
-    LUMORIAN       = 15,
+    LUMINIAN       = 15,
     LUMINION       = 16,
     PLANTOID       = 17,
     UNCLASSIFIED   = 18,

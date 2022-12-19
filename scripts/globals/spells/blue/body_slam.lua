@@ -9,7 +9,7 @@
 -- Level: 62
 -- Casting Time: 1 seconds
 -- Recast Time: 27.75 seconds
--- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
+-- Skillchain Element(s): Impaction
 -- Combos: Max HP Boost
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.DRAGON
     params.tpmod = TPMOD_ATTACK
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
@@ -42,10 +42,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

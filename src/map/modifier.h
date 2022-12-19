@@ -287,7 +287,7 @@ enum class Mod
     DEMON_KILLER    = 234, // Enhances "Demon Killer" effect
     EMPTY_KILLER    = 235, // Enhances "Empty Killer" effect
     HUMANOID_KILLER = 236, // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
+    LUMINIAN_KILLER = 237, // Enhances "Luminian Killer" effect
     LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
 
     // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear
@@ -955,6 +955,7 @@ enum class Mod
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
@@ -969,7 +970,7 @@ enum class Mod
     // 217 to 223
     // 261 to 280
     //
-    // SPARE = 1075, and onward
+    // SPARE = 1076 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
