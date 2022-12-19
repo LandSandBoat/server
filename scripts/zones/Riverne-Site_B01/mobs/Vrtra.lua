@@ -10,8 +10,6 @@ local entity = {}
 local offsets = { 7, 9, 11, 8, 10, 12 }
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEPRES, 100)
-    mob:addMod(xi.mod.LULLABYRES, 100)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 75)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -80,7 +78,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     -- Despawn adds when Vrtra dies
     for i, offset in ipairs(offsets) do
-        DespawnMob(mob:getID()+offset)
+        DespawnMob(mob:getID() + offset)
     end
 end
 
