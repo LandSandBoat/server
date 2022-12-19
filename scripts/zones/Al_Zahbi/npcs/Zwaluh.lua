@@ -11,9 +11,7 @@ local ID = require("scripts/zones/Al_Zahbi/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = xi.crafting.isGuildMember(player, 7)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
             if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
                 player:tradeComplete()
@@ -26,10 +24,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 7)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(226, 8, skillLevel, 0, 511, 188, 0, 5, 2184)
         else
