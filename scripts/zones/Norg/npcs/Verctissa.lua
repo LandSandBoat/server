@@ -43,8 +43,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif trialSizeWater == QUEST_COMPLETED then
         player:startEvent(202) --Defeated Avatar
-    else
-        player:startEvent(114) --Standard dialogue
     end
 end
 

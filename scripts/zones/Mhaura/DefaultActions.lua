@@ -4,6 +4,7 @@ return {
     ['Hagain']          = { event = 10002 },
     ['Kotan-Purutan']   = { event = 140 },
     ['Koh_Lenbalalako'] = { event = 10013 },
+    ['Lacia']           = { event = 10021 },
     ['Numi_Adaligo']    = { event = 50 },
     ['Phoochuchu']      = { event = 300 },
     ['Rycharde']        = { event = 69 },

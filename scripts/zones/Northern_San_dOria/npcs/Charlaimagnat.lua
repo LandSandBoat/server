@@ -32,8 +32,6 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("TheMissingPiece_date") > 0
     then
         player:startEvent(705) -- Quest Completed
-    else
-        player:startEvent(702) -- standard dialogue
     end
 end
 
@@ -41,7 +39,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 703) then
+    if csid == 703 then
         player:setCharVar("TheMissingPiece_date", getMidnight())
         player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)
         player:delKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)

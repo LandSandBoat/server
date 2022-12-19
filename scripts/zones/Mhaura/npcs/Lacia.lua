@@ -42,8 +42,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif trialSizeLightning == QUEST_COMPLETED then
         player:startEvent(10028) --Defeated Ramuh
-    else
-        player:startEvent(10021) --Standard dialogue
     end
 end
 
