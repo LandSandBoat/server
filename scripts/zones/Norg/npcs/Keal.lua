@@ -91,8 +91,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif vault == QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
-    else
-        player:startEvent(89) -- Standard Conversation
     end
 end
 

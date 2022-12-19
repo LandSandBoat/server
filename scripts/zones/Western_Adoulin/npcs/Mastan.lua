@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
---  NPC: Virsaint
--- Type: Standard NPC and Quest NPC
+--  NPC: Mastan
 --  Involved with Quests: 'Order Up'
 --                        'The Curious Case of Melvien'
 -- !pos -9 0 67 256
@@ -28,9 +27,6 @@ entity.onTrigger = function(player, npc)
     elseif tccom == QUEST_ACCEPTED and tccomNeedKI then
         -- Progresses Quest: 'The Curious Case of Melvien'
         player:startEvent(184)
-    else
-        -- Standard Dialogue
-        player:startEvent(525)
     end
 end
 

@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Zabahf
--- Type: Standard NPC
 -- !pos -90.070 -1 10.140 50
------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

@@ -46,6 +46,35 @@ mission.sections =
             },
         },
     },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.WESTERN_ADOULIN] =
+        {
+            ['Berstrogus']      = mission:event(587):replaceDefault(),
+            ['Chanteillie']     = mission:event(588):replaceDefault(),
+            ['Clemmar']         = mission:event(570):replaceDefault(),
+            ['Dangueubert']     = mission:event(546, 0, 1):replaceDefault(),
+            ['Nikkhail']        = mission:event(584):replaceDefault(),
+            ['Nylene']          = mission:event(562):replaceDefault(),
+            ['Quam_Jitahr']     = mission:event(573):replaceDefault(),
+            ['Rising_Solstice'] = mission:event(580):replaceDefault(),
+            ['Ruth']            = mission:event(590):replaceDefault(),
+            ['Shipilolo']       = mission:event(535):replaceDefault(),
+
+            onEventFinish =
+            {
+                [546] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:setPos(0, 0, 0, 0, xi.zone.MOG_GARDEN)
+                    end
+                end,
+            },
+        },
+    },
 }
 
 return mission

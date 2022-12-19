@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Clautaire
--- Type: Standard NPC and Quest Giver
 -- Starts, Involved with, and Finishes Quest: 'F.A.I.L.ure Is Not an Option'
 -- !pos 44 4 -159 256
 -----------------------------------
@@ -32,9 +31,6 @@ entity.onTrigger = function(player, npc)
     then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:startEvent(78)
-    else
-        -- Standard dialogue
-        player:startEvent(545)
     end
 end
 
