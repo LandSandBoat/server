@@ -14,11 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 7)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(652, skillCap, skillLevel, 2, 239, player:getGil(), 0, 0, 0)
         else
