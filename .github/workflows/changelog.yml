@@ -10,7 +10,7 @@ jobs:
   Publish_Changelog:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v1
     - uses: fregante/setup-git-user@v1
     - name: Install dependencies
       run: |
@@ -29,7 +29,7 @@ jobs:
           git stash --include-untracked
     - name: Git checkout website branch
       run: |
-          git checkout -t -b website
+          git checkout website
           git pull
     - name: Git stash pop changes
       run: |
