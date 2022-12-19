@@ -1,5 +1,15 @@
 #include <csignal>
+#include <sys/ptrace.h>
 #include <sys/resource.h>
+#include <sys/types.h>
+
+#ifndef PTRACE_TRACEME
+#define PTRACE_TRACEME 0
+#endif // PTRACE_TRACEME
+
+#ifndef PTRACE_DETACH
+#define PTRACE_DETACH 17
+#endif // PTRACE_DETACH
 
 #include "debug.h"
 #include "kernel.h"
@@ -52,4 +62,26 @@ void debug::init()
     std::signal(SIGILL, SIG_DFL);
     std::signal(SIGBUS, SIG_DFL);
     std::signal(SIGTRAP, SIG_DFL);
+}
+
+bool debug::isRunningUnderDebugger()
+{
+    static bool isCheckedAlready = false;
+
+    bool underDebugger = false;
+
+    if (!isCheckedAlready)
+    {
+        if (ptrace(PTRACE_TRACEME, 0, NULL, 0) < 0)
+        {
+            underDebugger = true;
+        }
+        else
+        {
+            ptrace(PTRACE_DETACH, 0, NULL, 0);
+        }
+
+        isCheckedAlready = true;
+    }
+    return underDebugger;
 }
