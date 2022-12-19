@@ -83,7 +83,7 @@ zones[xi.zone.BASTOK_MARKETS] =
     },
     npc =
     {
-        AQUILLINA = DYNAMIC_LOOKUP,
+        AQUILLINA = GetFirstID("Aquillina"),
 
         HALLOWEEN_SKINS =
         {
