@@ -277,7 +277,7 @@ enum class Mod
     DEMON_KILLER             = 234,  // Enhances "Demon Killer" effect
     EMPTY_KILLER             = 235,  // Enhances "Empty Killer" effect
     HUMANOID_KILLER          = 236,  // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER          = 237,  // Enhances "Lumorian Killer" effect
+    LUMINIAN_KILLER          = 237,  // Enhances "Luminian Killer" effect
     LUMINION_KILLER          = 238,  // Enhances "Luminion Killer" effect
     WYRMAL_ABJ_KILLER_EFFECT = 1178, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
@@ -928,6 +928,8 @@ enum class Mod
     AUGMENT_BLOOD_BOON     = 1035, // Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
+
+    BREATH_DMG_DEALT = 1075, // Breath damage dealt
 
     // Permenant Resistance Build Modifiers
     SLEEPRESBUILD          = 1138, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)

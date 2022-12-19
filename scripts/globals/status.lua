@@ -1173,7 +1173,7 @@ xi.mod =
     DEMON_KILLER                    = 234,
     EMPTY_KILLER                    = 235,
     HUMANOID_KILLER                 = 236,
-    LUMORIAN_KILLER                 = 237,
+    LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
     WYRMAL_ABJ_KILLER_EFFECT        = 1178, -- Wyrmal Abjuration (Crimson/Blood) which makes players susceptible to Dragon Killer effects
     SLEEPRES                        = 240,
@@ -1799,6 +1799,7 @@ xi.mod =
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
     QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
 
+    BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
     -- Permanent Resistance Build Modifiers
     SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
     POISONRESBUILD                = 1139, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
@@ -2940,7 +2941,7 @@ xi.ecosystem =
     EMPTY          = 12,
     HUMANOID       = 13,
     LIZARD         = 14,
-    LUMORIAN       = 15,
+    LUMINIAN       = 15,
     LUMINION       = 16,
     PLANTOID       = 17,
     UNCLASSIFIED   = 18,
