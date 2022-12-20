@@ -109,6 +109,10 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
 void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
 {
     TracyZoneScoped;
+    if (PChar->getZone() != m_EnmityHolder->getZone())
+    {
+        return;
+    }
     m_EnmityList.emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, false, 0 });
     PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
@@ -468,6 +472,10 @@ void CEnmityContainer::DecayEnmity()
 
 bool CEnmityContainer::IsWithinEnmityRange(CBattleEntity* PEntity) const
 {
+    if (PEntity->getZone() != m_EnmityHolder->getZone())
+    {
+        return false;
+    }
     float maxRange = square(m_EnmityHolder->m_Type == MOBTYPE_NOTORIOUS ? 28.f : 25.f);
     return distanceSquared(m_EnmityHolder->loc.p, PEntity->loc.p) <= maxRange;
 }
