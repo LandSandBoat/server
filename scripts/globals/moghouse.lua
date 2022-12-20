@@ -195,8 +195,13 @@ end
 
 xi.moghouse.moogleEventFinish = function(player, csid, option)
     if csid == 30017 and option == 0 then
+        local invAvailable = player:getFreeSlotsCount()
+
+        if invAvailable ~= 0 then
+            player:setCharVar("[StarlightMisc]DreamHatHQ", 1)
+        end
+
         npcUtil.giveItem(player, 5269)
-        player:setCharVar("[StarlightMisc]DreamHatHQ", 1)
     end
 end
 
