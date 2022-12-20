@@ -153,23 +153,25 @@ xi.moghouse.moogleTrigger = function(player, npc)
                 local hasItem = player:hasItem(xi.items.DREAM_HAT_P1)
                 local currentDay = VanadielUniqueDay()
 
-                if (treePlaced ~= 0 and (not hasItem or earnedReward ~= 1)) then
-                    local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
-                    local bastokanTree = player:getCharVar("[StarlightMisc]BastokanTree")
-                    local windurstianTree = player:getCharVar("[StarlightMisc]WindurstianTree")
-                    local jeunoanTree = player:getCharVar("[StarlightMisc]JeunoanTree")
-                    local holidayFame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
+                if (treePlaced ~= 0) then
+                    if (not hasItem and earnedReward == 1) or earnedReward ~= 1 then
+                        local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
+                        local bastokanTree = player:getCharVar("[StarlightMisc]BastokanTree")
+                        local windurstianTree = player:getCharVar("[StarlightMisc]WindurstianTree")
+                        local jeunoanTree = player:getCharVar("[StarlightMisc]JeunoanTree")
+                        local holidayFame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
 
-                    if (placedDay < currentDay) then
-                        if holidayFame == 9 then
-                            if sandOrianTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 86)
-                            elseif bastokanTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 115)
-                            elseif windurstianTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 116)
-                            elseif jeunoanTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 138)
+                        if (placedDay < currentDay) then
+                            if holidayFame == 9 then
+                                if sandOrianTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 86)
+                                elseif bastokanTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 115)
+                                elseif windurstianTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 116)
+                                elseif jeunoanTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 138)
+                                end
                             end
                         end
                     end
