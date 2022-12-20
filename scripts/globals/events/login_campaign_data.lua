@@ -441,6 +441,7 @@ local prizes =
 			-- 1312, -- Angel Skin
 			-- 723, -- Divine Lumber
 			-- 720, -- Ancient Lumber
+			-- 2371, -- Khimaira Horn
 			
 			-- Cycle #2 
 			-- 1289, -- Burning Hakutaku Eye
@@ -469,6 +470,7 @@ local prizes =
 			1110, -- Beetle Blood
 			2172, -- hydra scale
 			2168, -- Cerberus Claw
+
         },
     },
 
