@@ -30,7 +30,8 @@ quest.sections[1].check = function(player, status, vars)
         player:getFameLevel(player:getNation()) >= 5 and
         not quest:getMustZone(player) and
         quest:getLocalVar(player, 'questSeen') == 0 and
-        os.time() > quest:getVar(player, 'bedPlacedTime')
+        os.time() > quest:getVar(player, 'bedPlacedTime') and
+        quest:getVar(player, 'bedPlacedTime') > 0
 end
 
 local questAvailable =
