@@ -151,10 +151,11 @@ xi.moghouse.moogleTrigger = function(player, npc)
                 local placedDay = player:getCharVar("[StarlightMisc]TreeTimePlaced")
                 local earnedReward = player:getCharVar("[StarlightMisc]DreamHatHQ")
                 local hasItem = player:hasItem(xi.items.DREAM_HAT_P1)
+                local hasPresent = player:hasItem(xi.items.SPECIAL_PRESENT)
                 local currentDay = VanadielUniqueDay()
 
-                if (treePlaced ~= 0) then
-                    if (not hasItem and earnedReward == 1) or earnedReward ~= 1 then
+                if treePlaced ~= 0 then
+                    if (earnedReward ~= 1) or (not hasItem and not hasPresent) then
                         local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
                         local bastokanTree = player:getCharVar("[StarlightMisc]BastokanTree")
                         local windurstianTree = player:getCharVar("[StarlightMisc]WindurstianTree")
