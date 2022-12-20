@@ -6,22 +6,37 @@
 require("scripts/globals/status")
 require('scripts/globals/npc_util')
 require("scripts/globals/msg")
+require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
+    end
+
+    return result
 end
 
 itemObject.onItemUse = function(target)
-    local dreamHatHQ = target:hasItem(15179)
+    local dreamHatHQ = target:hasItem(xi.items.DREAM_HAT_P1)
 
     if not dreamHatHQ then
-        npcUtil.giveItem(target, 15179)
+        npcUtil.giveItem(target, xi.items.DREAM_HAT_P1)
     else
-        npcUtil.giveItem(target, 5622)
+        npcUtil.giveItem(target, xi.items.CANDY_CANE)
     end
 
     return 0
+end
+
+itemObject.onItemDrop = function(target)
+    local dreamHatHQ = target:hasItem(xi.items.DREAM_HAT_P1)
+
+    if not dreamHatHQ then
+        target:setCharVar("[StarlightMisc]DreamHatHQ", 0)
+    end
 end
 
 return itemObject
