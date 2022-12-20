@@ -88,10 +88,15 @@ class LuaStyleCheck:
 
         See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
         """
-        # .*\;$ : Any line that ends with a semi-colon (TODO: No semicolons outside of comments at all)
 
-        for _ in re.finditer(".*\;$", line):
-            self.error("Semicolon detected at end of line")
+        # Ignore strings in line
+        quote_regex = regex.compile("\"(([^\"\"]+)|(?R))*+\"|\'(([^\'\']+)|(?R))*+\'", re.S)
+        removed_quote_str = regex.sub(quote_regex, "", line)
+
+        # ; : Any line that contains a semicolon.
+
+        for _ in re.finditer(";", removed_quote_str):
+            self.error("Semicolon detected in line.")
 
     def check_variable_names(self, line):
         """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
