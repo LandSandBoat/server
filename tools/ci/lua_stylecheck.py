@@ -343,7 +343,7 @@ if target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 40
+    expected_errors = 41
 else:
     total_errors = LuaStyleCheck(target).errcount
 
