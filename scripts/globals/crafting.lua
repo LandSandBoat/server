@@ -79,8 +79,8 @@ local hqCrystals =
     [4] = { id = xi.items.TERRA_CRYSTAL,    cost = 200 },
     [5] = { id = xi.items.PLASMA_CRYSTAL,   cost = 200 },
     [6] = { id = xi.items.TORRENT_CRYSTAL,  cost = 200 },
-    [7] = { id = xi.items.AURORA_CRYSTAL,   cost = 500 },
-    [8] = { id = xi.items.TWILIGHT_CRYSTAL, cost = 500 },
+    [7] = { id = xi.items.AURORA_CRYSTAL,   cost = 200 },
+    [8] = { id = xi.items.TWILIGHT_CRYSTAL, cost = 200 },
 }
 
 xi.crafting.gpRewards =
@@ -375,12 +375,12 @@ end
 -----------------------------------
 -- unionRepresentative
 -----------------------------------
-xi.crafting.unionRepresentativeTrigger = function(player, guildID, csid, currency)
-    local gpItem, remainingPoints = player:getCurrentGPItem(guildID)
-    local rank   = player:getSkillRank(guildID + 48)
+xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
+    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
+    local rank   = player:getSkillRank(guildId + 48)
     local cap    = (rank + 1) * 10
     local kibits = 0
-    local rewardTable = xi.crafting.gpRewards[guildID]["Keyitems"]
+    local rewardTable = xi.crafting.gpRewards[guildId]["Keyitems"]
 
     for kbit, ki in pairs(rewardTable) do
         if rank >= ki.rank then

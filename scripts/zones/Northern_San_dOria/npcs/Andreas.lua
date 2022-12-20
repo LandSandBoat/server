@@ -18,15 +18,15 @@ entity.onTrigger = function(player, npc)
     xi.crafting.unionRepresentativeTrigger(player, 1, 731, "guild_woodworking")
 end
 
-entity.onEventUpdate = function(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 731 then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 1, "guild_woodworking")
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, npc, 1, "guild_woodworking")
     end
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 731 then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 1, "guild_woodworking")
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, npc, 1, "guild_woodworking")
     elseif csid == 732 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end

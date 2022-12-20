@@ -18,15 +18,15 @@ entity.onTrigger = function(player, npc)
     xi.crafting.unionRepresentativeTrigger(player, 6, 10022, "guild_bonecraft")
 end
 
-entity.onEventUpdate = function(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 10022 then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 6, "guild_bonecraft")
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, npc, 6, "guild_bonecraft")
     end
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10022 then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 6, "guild_bonecraft")
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, npc, 6, "guild_bonecraft")
     elseif csid == 10023 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end

@@ -107,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
             xi.crafting.signupGuild(player, xi.crafting.guild.ALCHEMY)
         end
-    elseif (csid == 120 and option > 900) then
+    elseif csid == 120 and option > 900 then
         player:resetLocalVars()
     else
         if player:getLocalVar("AlchemyTraded") == 1 then
