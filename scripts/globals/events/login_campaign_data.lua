@@ -16,8 +16,6 @@ local prizes =
         {
         -- CONSUMABLES I
 			
-			1126, -- Beastmen's Seal
-			1127, -- Kindred's Seal
 			1455, -- 1 Byne Bill
 			1449, -- Tukuku Whiteshell
 			1452, -- Ordelle Bronzepiece
