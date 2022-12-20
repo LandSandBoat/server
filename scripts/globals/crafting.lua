@@ -170,9 +170,9 @@ end
 -----------------------------------
 -- unionRepresentative
 -----------------------------------
-xi.crafting.unionRepresentativeTrigger = function(player, guildID, csid, currency, keyitems)
-    local gpItem, remainingPoints = player:getCurrentGPItem(guildID)
-    local rank   = player:getSkillRank(guildID + 48)
+xi.crafting.unionRepresentativeTrigger = function(player, guildId, csid, currency, keyitems)
+    local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
+    local rank   = player:getSkillRank(guildId + 48)
     local cap    = (rank + 1) * 10
     local kibits = 0
 
