@@ -817,6 +817,19 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
     server_address.sin_port = htons(port);
 
+    // https://stackoverflow.com/questions/3229860/what-is-the-meaning-of-so-reuseaddr-setsockopt-option-linux
+    // Avoid hangs in TIME_WAIT state of TCP
+#ifdef WIN32
+    // Windows doesn't seem to have this problem, but apparently this would be the right way to explicitly mimic SO_REUSEADDR unix's behavior.
+    setsockopt(sock_arr[fd], SOL_SOCKET, SO_DONTLINGER, "\x00\x00\x00\x00", 4);
+#else
+    int enable = 1;
+    if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+    {
+        ShowError("setsockopt SO_REUSEADDR failed!");
+    }
+#endif
+
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
