@@ -1946,6 +1946,8 @@ namespace fishingutils
         }
         else
         {
+            auto secs = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch());
+            PChar->setCharVar("[Fish]LastCastTime", secs.count());
             PChar->lastCastTime = vanaTime;
             PChar->nextFishTime = PChar->lastCastTime + 5;
         }

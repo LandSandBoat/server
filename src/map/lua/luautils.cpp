@@ -178,6 +178,7 @@ namespace luautils
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("CheckNMSpawnPoint", &luautils::CheckNMSpawnPoint);
         lua.set_function("SetDropRate", &luautils::SetDropRate);
+        lua.set_function("GetRecentFishers", &luautils::GetRecentFishers);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
@@ -4928,6 +4929,39 @@ namespace luautils
                 }
             }
         }
+    }
+
+    /************************************************************************
+     *   Gets a list of players that have fished in the past 5 minutes       *
+     *                                                                       *
+     *   TODO: Rather than this specific lua binding, add a more generic     *
+     *   GetCharVarsMatchingCriteria method, which allows us to search       *
+     *   for players with a given char var key / value criteria              *
+     ************************************************************************/
+
+    sol::table GetRecentFishers()
+    {
+        sol::table  fishers = lua.create_table();
+        const char* Query   = "SELECT cv.charid, charname, cs.value / 10 FROM `char_vars` as cv "
+                              "INNER JOIN `chars` ON chars.charid = cv.charid "
+                              "INNER JOIN `char_skills` as cs ON cs.charid = cv.charid "
+                              "WHERE skillid = 48 "
+                              "AND varname = '[Fish]LastCastTime' "
+                              "AND cv.value > (UNIX_TIMESTAMP(NOW()) - 300);";
+
+        if (sql->Query(Query) != SQL_ERROR && sql->NumRows() != 0)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                auto fisher     = lua.create_table();
+                auto charId     = sql->GetUIntData(0);
+                fisher["name"]  = sql->GetStringData(1);
+                fisher["skill"] = sql->GetUIntData(2);
+                fishers[charId] = fisher;
+            }
+        }
+
+        return fishers;
     }
 
     /***************************************************************************
