@@ -13,6 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 100)
+    mob:setMod(xi.mod.EVA, 400)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 

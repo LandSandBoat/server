@@ -13,6 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMod(xi.mod.EVA, 300)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

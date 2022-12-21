@@ -384,7 +384,7 @@ INSERT INTO `mob_family_system` VALUES (331,'Wyvern-PetSeiryu',109,'Wyvern',10,'
 INSERT INTO `mob_family_system` VALUES (332,'Tiger-PetByakko',137,'Tiger',6,'Beast',3,60,111,120,4,3,4,4,6,4,4,1,3,1,3,5,2,0);
 INSERT INTO `mob_family_system` VALUES (333,'Greater_Bird-PetSuzaku',73,'Greater_Bird',8,'Bird',3,60,130,120,3,3,3,3,3,3,3,1,2,1,3,7,1,0);
 INSERT INTO `mob_family_system` VALUES (334,'Orc-NM',0,'Orc',7,'Beastmen',1,40,108,100,2,3,4,4,7,4,3,1,3,1,3,1,257,0);
-INSERT INTO `mob_family_system` VALUES (335,'Maat',0,'Maat',13,'Humanoid',0,40,90,110,4,4,4,4,4,4,4,1,3,1,3,0,3,0);
+INSERT INTO `mob_family_system` VALUES (335,'Maat',0,'Maat',13,'Humanoid',0,40,90,110,3,3,3,3,3,3,3,1,3,1,3,0,3,0);
 INSERT INTO `mob_family_system` VALUES (336,'Tonberry-ZM4',138,'Tonberry',7,'Beastmen',1,40,91,140,3,1,3,2,1,5,4,1,3,1,2,7,1,0);
 INSERT INTO `mob_family_system` VALUES (337,'Quadav-NM',116,'Quadav',7,'Beastmen',0,40,120,110,2,3,4,4,4,5,3,1,3,1,3,6,258,0);
 INSERT INTO `mob_family_system` VALUES (338,'Twitherym',154,'Moth',20,'Vermin',0,40,92,90,1,3,4,3,6,6,5,1,3,1,3,3,1,1);
