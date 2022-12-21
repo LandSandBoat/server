@@ -60,12 +60,13 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    -- short-circuit for Starlight Celebration if player is currently doing NPC Gifts
                     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-                        local startedQuest = player:getLocalVar("[StarlightNPCGifts]Started")
-                        if startedQuest ~= 0 then
-                            xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
+                        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4) then
+                            return
                         end
                     end
+
                     local desiredBody = poseItems[player:getMainJob()]
                     local currentBody = player:getEquipID(xi.slot.BODY)
                     if currentBody ~= desiredBody then
@@ -115,6 +116,13 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    -- short-circuit for Starlight Celebration if player is currently doing NPC Gifts
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4) then
+                            return
+                        end
+                    end
+
                     local requestedBody = poseItems[player:getMainJob()]
 
                     quest:setVar(player, 'Stage', os.time() + 300)
@@ -137,6 +145,13 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    -- short-circuit for Starlight Celebration if player is currently doing NPC Gifts
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4) then
+                            return
+                        end
+                    end
+
                     local requestedBody = quest:getVar(player, 'Prog')
                     if quest:getVar(player, 'Stage') >= os.time() then -- Under time. Quest completed.
                         if player:getEquipID(xi.slot.BODY) == requestedBody then
@@ -178,6 +193,13 @@ quest.sections =
             ['Angelica'] =
             {
                 onTrigger = function(player, npc)
+                    -- short-circuit for Starlight Celebration if player is currently doing NPC Gifts
+                    if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+                        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4) then
+                            return
+                        end
+                    end
+
                     return quest:event(101):replaceDefault()
                 end,
             },

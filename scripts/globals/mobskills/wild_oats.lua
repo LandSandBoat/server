@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
-    skill:setMsg(xi.mobskills.mobPhysicalStatusEffectMove(mob, target, xi.effect.VIT_DOWN, 10, 10, 180))
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.VIT_DOWN, 10, 10, 180)
 
     return dmg
 end

@@ -715,7 +715,7 @@ public:
     void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
-    bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
+    bool hasJugPet(); // If the entity has a pet, test if it is a jug pet.
     bool hasValidJugPetItem();
 
     bool   hasPet();                                  // returns true if the player has a pet

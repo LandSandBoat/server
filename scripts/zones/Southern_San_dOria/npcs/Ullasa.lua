@@ -12,9 +12,11 @@ end
 
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 1)
-        return
+        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 1) then
+            return
+        end
     end
+
     if player:getCharVar("UnderOathCS") == 2 then  -- Quest: Under Oath - PLD AF3
         player:startEvent(40)
     else

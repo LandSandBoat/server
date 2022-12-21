@@ -27,9 +27,10 @@ quest.sections[1].check = function(player, status, vars)
     return status == QUEST_AVAILABLE and
         xi.moghouse.isInMogHouseInHomeNation(player) and
         player:getFameLevel(player:getNation()) >= 3 and
-        not quest:getMustZone(player) and
         quest:getLocalVar(player, 'questSeen') == 0 and
-        os.time() > quest:getVar(player, 'bedPlacedTime')
+        quest:getVar(player, 'bedPlacedTime') > 0 and
+        os.time() > quest:getVar(player, 'bedPlacedTime') and
+        not quest:getMustZone(player)
 end
 
 local questAvailable =
@@ -37,7 +38,10 @@ local questAvailable =
     ['Moogle'] =
     {
         onTrigger = function(player, npc)
-            return quest:progressEvent(30005, 0, 0, 0, 5, 0, xi.items.POWER_BOW, xi.items.BEETLE_RING)
+            return quest:progressEvent(30005, { [3] = 5,
+                                                [5] = xi.items.POWER_BOW,
+                                                [6] = xi.items.BEETLE_RING,
+                                                })
         end,
     },
 
@@ -77,7 +81,9 @@ local questAccepted =
             end
 
             if questProgress == 0 then
-                return quest:progressEvent(30006, 0, 0, 0, 0, 0, xi.items.POWER_BOW, xi.items.BEETLE_RING)
+                return quest:progressEvent(30006, { [5] = xi.items.POWER_BOW,
+                                                    [6] = xi.items.BEETLE_RING,
+                                                    })
             elseif
                 questProgress == 1 and
                 quest:getVar(player, 'Timer') < os.time()

@@ -876,12 +876,6 @@ INSERT INTO `mob_family_mods` VALUES (271,363,50,0); -- DEFP: 50
 INSERT INTO `mob_family_mods` VALUES (272,4,10,1);    -- SIGHT_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (272,102,60,1);  -- MOBMOD_SIGHT_ANGLE
 
--- Scorpion-Serket
-INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256
-
--- Scorpion-Kingv
-INSERT INTO `mob_family_mods` VALUES (274,23,256,1); -- IMMUNITY: 256
-
 -- Slime
 INSERT INTO `mob_family_mods` VALUES (228,252,35,0); -- CHARMRES: 35
 
@@ -1038,6 +1032,10 @@ INSERT INTO `mob_family_mods` VALUES (495,56,-1,1); -- HP_STANDBACK: -1
 -- Cockatrice (Ziz)
 INSERT INTO `mob_family_mods` VALUES (512,1,-10,0); -- DEF: -10
 INSERT INTO `mob_family_mods` VALUES (512,29,-1,0); -- MDEF: -10
+
+-- Elemental-Dark
+-- need this until the dark_sleep and light_sleep immunities are working
+INSERT INTO `mob_family_mods` VALUES (100,240,100,0); -- SLEEPRES: 100
 
 /*!40000 ALTER TABLE `mob_family_mods` ENABLE KEYS */;
 UNLOCK TABLES;
