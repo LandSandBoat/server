@@ -81,11 +81,9 @@ entity.onEventFinish = function(player, csid, option)
 
         local reward = player:getLocalVar("lipService")
         if reward == 1 then
-            player:addGil(xi.settings.main.GIL_RATE * 150)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 150)
+            npcUtil.giveCurrency(player, 'gil', 150)
         else
-            player:addGil(xi.settings.main.GIL_RATE * 200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 200)
+            npcUtil.giveCurrency(player, 'gil', 200)
         end
 
         player:confirmTrade()
