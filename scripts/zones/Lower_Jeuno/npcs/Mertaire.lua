@@ -85,8 +85,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- A MINSTREL IN DESPAIR
     elseif csid == 101 then
-        player:addGil(xi.settings.main.GIL_RATE * 2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2100)
+        npcUtil.giveCurrency(player, 'gil', 2100)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
         player:addFame(xi.quest.fame_area.JEUNO, 30)

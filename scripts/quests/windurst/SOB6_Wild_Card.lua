@@ -105,7 +105,7 @@ quest.sections =
 
                 [387] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 5)
                 end,
 
@@ -115,7 +115,7 @@ quest.sections =
 
                 [389] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },
@@ -159,7 +159,7 @@ quest.sections =
             {
                 [600] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },

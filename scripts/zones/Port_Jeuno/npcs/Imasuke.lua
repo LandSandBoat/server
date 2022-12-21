@@ -71,8 +71,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.MAP_OF_DELKFUTTS_TOWER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_DELKFUTTS_TOWER)
         else
-            player:addGil(2000 * xi.settings.main.GIL_RATE)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 2000 * xi.settings.main.GIL_RATE)
+            npcUtil.giveCurrency(player, 'gil', 2000)
             player:addExp(2000 * xi.settings.main.EXP_RATE)
         end
 
