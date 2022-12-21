@@ -132,8 +132,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12750) -- New Moon Armlets
         else
             player:tradeComplete()
-            player:addGil(xi.settings.main.GIL_RATE * 4800)
-            player:messageSpecial(ID.text.GIL_OBTAINED, 4800)
+            npcUtil.giveCurrency(player, 'gil', 4800)
             player:addItem(12750) -- New Moon Armlets
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets
             player:addFame(xi.quest.fame_area.WINDURST, 150)

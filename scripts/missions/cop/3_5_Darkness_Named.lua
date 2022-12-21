@@ -95,7 +95,7 @@ mission.sections =
                 [52] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    player:addGil(500 * xi.settings.main.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 500)
                     npcUtil.giveKeyItem(player, xi.ki.PSOXJA_PASS)
                     mission:setVar(player, 'Status', 3)
                 end,
