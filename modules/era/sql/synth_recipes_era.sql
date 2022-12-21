@@ -1373,6 +1373,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Melanzane' AND
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Windurst Taco' AND ID = 72002;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Salmon Roe' AND ID = 72005;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Rainbow Powder' AND ID = 63503;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Mercury' AND ID = 60515;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1748,6 +1749,7 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Fire Biscuit'
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Bloody Chocolate' AND ID = 71528;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Sutlac' AND ID = 71547;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Simit' AND ID = 72008;
+UPDATE `synth_recipes` SET ContentTag = 'ToAU' WHERE ResultName = 'Mercury' AND ID = 60519;
 
 -- ------------------------------------------------------------
 -- WotG Synths
@@ -1882,8 +1884,6 @@ UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Horn Trophy' 
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Trumpet Ring' AND ID = 54539;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Dark Ixion Ferrule' AND ID = 55009;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Winged Balance' AND ID = 55012;
-UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Mercury' AND ID = 60515;
-UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Mercury' AND ID = 60519;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Matka' AND ID = 60529;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Kodoku' AND ID = 60532;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Carbon Dioxide' AND ID = 61003;
