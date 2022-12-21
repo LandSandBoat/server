@@ -187,15 +187,11 @@ zones[xi.zone.NYZUL_ISLE] =
         },
 
         -- Nyzul Isle Investigation
-        RUNIC_LAMP_1        = 17093332,
-        RUNIC_LAMP_2        = 17093333,
-        RUNIC_LAMP_3        = 17093334,
-        RUNIC_LAMP_4        = 17093335,
-        RUNIC_LAMP_5        = 17093336,
-        _257                = 17093359,
-        _259                = 17093361,
-        RUNE_TRANSFER_START = 17093429,
-        VENDING_BOX         = 17093430,
+        RUNIC_LAMP_OFFSET   = GetFirstID("Runic_Lamp"),
+        _257                = GetFirstID("_257"),
+        _259                = GetFirstID("_259"),
+        RUNE_TRANSFER_START = GetFirstID("Rune_of_Transfer_Start"),
+        VENDING_BOX         = GetFirstID("Vending_Box"),
 
         -- Other instances
         WEATHER             = 17093423,
