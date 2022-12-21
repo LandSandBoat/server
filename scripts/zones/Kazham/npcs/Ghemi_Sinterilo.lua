@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         5187,  156,    -- Elshimo Coconut
         5604,  154,    -- Elshimo Pachira Fruit
         -- 2869, 9100,    -- Kazham Waystone (SOA)
-        731,  2877,    -- Aquilaria Log
+        -- 731,  2877,    -- Aquilaria Log (Abyssea)
     }
 
     player:showText(npc, ID.text.GHEMISENTERILO_SHOP_DIALOG)

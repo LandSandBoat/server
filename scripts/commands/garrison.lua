@@ -3,6 +3,7 @@
 -- commands:
 -- !garrison start (player) starts the garrison for the given player (or targetted one). This bypasses requirements like lockout
 -- !garrison stop  (player) stops the garrison (if any) currently running in the player's zone
+-- !garrison win (player) win the garrison (if any) currently running in the player's zone
 ---------------------------------------------------------------------------------------------------
 
 require("scripts/globals/status")
@@ -52,6 +53,9 @@ function onTrigger(player, command, target)
         ["stop"] = function()
             xi.garrison.stop(targ:getZone())
             targ:PrintToPlayer(string.format("%s garrison stopped", zone:getName()))
+        end,
+        ["win"] = function()
+            xi.garrison.win(targ:getZone())
         end,
     }
 end

@@ -26323,8 +26323,8 @@ INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1452,0);         -- Ordelle Bro
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1455,0);         -- One Byne Bill (Steal)
 
 -- Garrison Drops
-INSERT INTO `mob_droplist` VALUES (3226,1,1,@UNCOMMON,1604,500); -- (Garrison) Mannequin Legs (Group 1 - Uncommon, 10% * 50%)
-INSERT INTO `mob_droplist` VALUES (3226,1,1,@UNCOMMON,1605,500); -- (Garrison) Mannequin Feet (Group 1 - Uncommon, 10% * 50%)
+INSERT INTO `mob_droplist` VALUES (3226,1,1,@RARE,1604,500); -- (Garrison) Mannequin Legs (Group 1 - Rare, 5% * 50%)
+INSERT INTO `mob_droplist` VALUES (3226,1,1,@RARE,1605,500); -- (Garrison) Mannequin Feet (Group 1 - Rare, 5% * 50%)
 
 -- ZoneID: 115 - Crawler (Starfall Hillock)
 INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,816,@UNCOMMON);  -- Spool Of Silk Thread (Uncommon, 10%)

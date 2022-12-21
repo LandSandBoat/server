@@ -16,7 +16,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB then
+    elseif not player:hasJugPet() and pet:getObjType() ~= xi.objType.MOB then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         local id = player:getEquipID(xi.slot.AMMO)

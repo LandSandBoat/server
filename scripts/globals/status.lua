@@ -1541,14 +1541,15 @@ xi.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\additional_effects.lua
-    ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
-    ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_ELEMENT  = 950, -- Element of the Additional Effect or Spikes, for resist purposes
-    ITEM_ADDEFFECT_STATUS   = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER    = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_DURATION = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE     = 431,  -- see procType table in scripts\globals\additional_effects.lua
+    ITEM_SUBEFFECT          = 499,  -- Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG      = 500,  -- Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE   = 501,  -- Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT  = 950,  -- Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS   = 951,  -- Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER    = 952,  -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION = 953,  -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_OPTION   = 1178, -- Additional parameters for more specific latents required to proc
 
     FERAL_HOWL_DURATION             = 503, -- +20% duration per merit when wearing augmented Monster Jackcoat +2
     MANEUVER_BONUS                  = 504, -- Maneuver Stat Bonus

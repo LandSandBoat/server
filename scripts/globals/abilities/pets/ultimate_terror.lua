@@ -23,13 +23,13 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     local effects =
     {
-        { xi.effect.STR_DOWN, 21, 3, duration },
-        { xi.effect.DEX_DOWN, 21, 3, duration },
-        { xi.effect.VIT_DOWN, 21, 3, duration },
-        { xi.effect.AGI_DOWN, 21, 3, duration },
-        { xi.effect.INT_DOWN, 21, 3, duration },
-        { xi.effect.MND_DOWN, 21, 3, duration },
-        { xi.effect.CHR_DOWN, 21, 3, duration }
+        { xi.effect.STR_DOWN, math.random(0, 7), 3, duration },
+        { xi.effect.DEX_DOWN, math.random(0, 7), 3, duration },
+        { xi.effect.VIT_DOWN, math.random(0, 7), 3, duration },
+        { xi.effect.AGI_DOWN, math.random(0, 7), 3, duration },
+        { xi.effect.INT_DOWN, math.random(0, 7), 3, duration },
+        { xi.effect.MND_DOWN, math.random(0, 7), 3, duration },
+        { xi.effect.CHR_DOWN, math.random(0, 7), 3, duration }
     }
 
     for _, eff in pairs(effects) do

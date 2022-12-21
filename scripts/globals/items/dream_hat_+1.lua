@@ -20,4 +20,8 @@ itemObject.onItemUse = function(target)
     target:addItem(4394, math.random(1, 10))
 end
 
+itemObject.onItemDrop = function(target)
+    target:setCharVar("[StarlightMisc]DreamHatHQ", 1)
+end
+
 return itemObject

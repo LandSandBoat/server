@@ -19,6 +19,44 @@ xi.garrison.allyNames =
     [75] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
+-- Group Ids are different per cap due to min / max level requirements
+-- They all use the same pool at the moment, but we could also change families
+-- based on cap, which would change base stats
+xi.garrison.allyGroupIds =
+{
+    [20] = 1,
+    [30] = 2,
+    [40] = 3,
+    [50] = 4,
+    [75] = 5,
+}
+
+-- This is used to replace blank weapons in ally looks.
+-- TODO: Use proper npc looks for all models or at least find the right range
+-- so we can purely generate these
+xi.garrison.allyArsenal =
+{
+    "08",
+    "83",
+    "B8",
+    "73",
+    "62",
+    "01",
+    "19",
+    "6B",
+    "B5",
+    "75",
+    "6F",
+    "BB",
+    "3C",
+    "56",
+    "4E",
+    "19",
+    "5C",
+    "61",
+    "E6"
+}
+
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
 xi.garrison.allyLooks =
 {
@@ -229,24 +267,133 @@ xi.garrison.loot =
     },
 }
 
--- Defines the structure of each wave and the wave count
--- groupsPerWave: How many groups of mobs spawn for each wave.
--- mobsPerGroup: How many mobs spawn per group. Each wave consists of different
--- 'mini waves', which are separated from each other by a certain interval of time.
--- delayBetweenGroups: How many seconds before each group spawns.
--- After all groups in a wave are killed, the wave ends and after delayBetweenGroups,
--- the next wave begins.
--- Constraints: A wave can only spawn 8 mobs at a time at most. This is due to the assumption
--- That the boss is always 8 IDs after the mobs spawning in each wave.
--- e.g:
--- Wave 2 contains 2 groups. Each group has 2 mobs and 15 second between group.
--- 2 mobs will spawn initially, then 15 seconds later 2 new mobs will spawn.
 xi.garrison.waves =
 {
-    -- The last wave is a special case. It's 4 groups + Boss
-    groupsPerWave = { 1, 2, 3, 4 },
-    mobsPerGroup = 2,
-    delayBetweenGroups = 15
+    -- Each wave consists of different 'mini waves' or spawn groups,
+    -- which are separated from each other by a certain interval of time.
+    --
+    -- Flow:
+    -- * After all groups in a wave are killed, the wave ends.
+    -- * After delayBetweenGroups, the next wave begins.
+    -- * When all groups in the last wave have been killed, boss spawns after delayBetweenGroups.
+    --
+    -- Constraints: A wave can only spawn 8 mobs at a time at most. This is due to the assumption
+    -- That the boss is always 8 IDs after the mobs spawning in each wave.
+    spawnSchedule =
+    {
+        -- 1 Party
+        [1] =
+        {
+            -- Wave 1
+            -- 2 Mobs at once
+            [1] =
+            {
+                2
+            },
+            -- Wave 2
+            -- 2 Mobs every `delayBetweenGroups`
+            -- 4 total
+            [2] =
+            {
+                2,
+                2
+            },
+            -- Wave 3
+            -- 2 Mobs every `delayBetweenGroups`
+            -- 6 total
+            [3] =
+            {
+                2,
+                2,
+                2
+            },
+            -- Wave 4
+            -- 2 Mobs every `delayBetweenGroups`
+            -- 8 total
+            -- Boss spawns after all 8 are killed
+            [4] =
+            {
+                2,
+                2,
+                2,
+                2
+            }
+        },
+        -- 2 Parties
+        [2] =
+        {
+            -- Wave 1
+            -- 4 Mobs at once
+            [1] =
+            {
+                4
+            },
+            -- Wave 2
+            -- 4 Mobs
+            -- 2 Mobs after `delayBetweenGroups`
+            [2] =
+            {
+                4,
+                2
+            },
+            -- Wave 3
+            -- 4 Mobs
+            -- 2 Mobs after `delayBetweenGroups`
+            -- 2 Mobs after 2 * `delayBetweenGroups`
+            [3] =
+            {
+                4,
+                2,
+                2
+            },
+            -- Wave 4
+            -- 4 Mobs
+            -- 2 Mobs after `delayBetweenGroups`
+            -- 2 Mobs after 2 * `delayBetweenGroups`
+            -- Boss after all 8 mobs are killed
+            [4] =
+            {
+                4,
+                2,
+                2,
+            }
+        },
+        -- 3 Parties
+        -- Only 3 waves with 3 parties.
+        -- I don't understand the thinking behind this, but this matches the two videos
+        -- I found showing garrison gameplay with 3 parties.
+        [3] =
+        {
+            -- Wave 1
+            -- 4 Mobs at once
+            [1] =
+            {
+                4,
+                2
+            },
+            -- Wave 2
+            -- 6 Mobs
+            -- 2 Mobs after `delayBetweenGroups`
+            [2] =
+            {
+                6,
+                2
+            },
+            -- Wave 3
+            -- 4 Mobs
+            -- 2 Mobs after `delayBetweenGroups`
+            -- 2 Mobs after 2 * `delayBetweenGroups`
+            -- Boss after all 8 mobs are killed
+            [3] =
+            {
+                4,
+                2,
+                2
+            },
+        },
+    },
+    -- How many seconds before each group spawns
+    delayBetweenGroups = 15,
 }
 
 --Zone Data

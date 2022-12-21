@@ -16,7 +16,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BUFF_CHANCE, 30)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.SLEEPRES, 100)
-    mob:addMod(xi.mod.LULLABYRES, 100)
     mob:setMod(xi.mod.MDEF, 100) -- 385 * 1.32/2 = 254 nether blast
     mob:setMod(xi.mod.DEF, 500)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
@@ -47,35 +46,37 @@ entity.onMobFight = function(mob, target)
             mob:setLocalVar("twohourTime", twohourTime)
         end
 
-        if mob:getAnimationSub() == 2 and mob:getBattleTime()/15 > twohourTime then
+        if mob:getAnimationSub() == 2 and mob:getBattleTime() / 15 > twohourTime then
             mob:useMobAbility(688)
-            mob:setLocalVar("twohourTime", math.random((mob:getBattleTime()/15)+4, (mob:getBattleTime()/15)+8))
+            mob:setLocalVar("twohourTime", math.random((mob:getBattleTime() / 15) + 4, (mob:getBattleTime() / 15) + 8))
         elseif mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(730)
             mob:setLocalVar("changeTime", mob:getBattleTime()) -- Record the time and HP this phase was started
-            mob:setLocalVar("changeHP", mob:getHP()/1000)
+            mob:setLocalVar("changeHP", mob:getHP() / 1000)
         -- AnimationSub 1 is flight, so check if she should land
-        elseif mob:getAnimationSub() == 1 and (mob:getHP()/1000 <= changeHP - 10 or mob:getBattleTime() - changeTime > 120) then
+        elseif mob:getAnimationSub() == 1 and (mob:getHP() / 1000 <= changeHP - 10 or mob:getBattleTime() - changeTime > 120) then
             mob:useMobAbility(1282)
             mob:setLocalVar("changeTime", mob:getBattleTime())
-            mob:setLocalVar("changeHP", mob:getHP()/1000)
+            mob:setLocalVar("changeHP", mob:getHP() / 1000)
         -- AnimationSub 2 is grounded mode, so check if she should take off
-        elseif mob:getAnimationSub() == 2 and (mob:getHP()/1000 <= changeHP - 10 or mob:getBattleTime() - changeTime > 120) then
+        elseif mob:getAnimationSub() == 2 and (mob:getHP() / 1000 <= changeHP - 10 or mob:getBattleTime() - changeTime > 120) then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(730)
             mob:setLocalVar("changeTime", mob:getBattleTime())
-            mob:setLocalVar("changeHP", mob:getHP()/1000)
+            mob:setLocalVar("changeHP", mob:getHP() / 1000)
         end
     end
 
     -- Wakeup from sleep immediately if flying
-    if mob:getAnimationSub() == 1 and
-    (mob:hasStatusEffect(xi.effect.SLEEP_I) or
-    mob:hasStatusEffect(xi.effect.SLEEP_II) or
-    mob:hasStatusEffect(xi.effect.LULLABY)) then
+    if
+        mob:getAnimationSub() == 1 and
+        (mob:hasStatusEffect(xi.effect.SLEEP_I) or
+        mob:hasStatusEffect(xi.effect.SLEEP_II) or
+        mob:hasStatusEffect(xi.effect.LULLABY))
+    then
         mob:wakeUp()
     end
 end

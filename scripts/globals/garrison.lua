@@ -95,6 +95,7 @@ xi.garrison.aggroGroups = function(group1, group2)
             if entity1 == nil or entity2 == nil then
                 printf("[warning] Could not apply aggro because either %i or %i are not valid entities", entityId1, entityId2)
             else
+                debugLogf("Applying enmity: %i <-> %i", entityId1, entityId2)
                 entity1:addEnmity(entity2, math.random(1, 5), math.random(1, 5))
                 entity2:addEnmity(entity1, math.random(1, 5), math.random(1, 5))
             end
@@ -104,7 +105,8 @@ end
 
 -- Spawns and npc for the given zone and with the given name, look, pose
 -- Uses dynamic entities
-xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
+xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, look)
+    local moddedLook = xi.garrison.addWeaponIfNecessary(look)
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
         allegiance = xi.allegiance.PLAYER,
@@ -113,9 +115,9 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
         y = y,
         z = z,
         rotation = rot,
-        look = look,
+        look = moddedLook,
 
-        groupId = 1,
+        groupId = groupId,
         groupZoneId = xi.zone.GM_HOME,
 
         releaseIdOnDeath = true,
@@ -145,6 +147,18 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, look)
     return mob
 end
 
+-- Adds a random weapon if the given look does not contain one.
+-- Weapons are on the byte found in digits 31-32 (including 0x prefix)
+xi.garrison.addWeaponIfNecessary = function(look)
+    -- Weapon already set. Don't change it.
+    if string.sub(look, 31, 32) ~= "00" then
+        return look
+    end
+
+    local weapon = utils.randomEntry(xi.garrison.allyArsenal)
+    return string.sub(look, 1, 30) .. weapon .. string.sub(look, 33, string.len(look))
+end
+
 -- Spawns all npcs for the zone in the given garrison starting npc
 xi.garrison.spawnNPCs = function(zone, zoneData)
     local xPos     = zoneData.xPos
@@ -156,11 +170,16 @@ xi.garrison.spawnNPCs = function(zone, zoneData)
     local regionIndex = GetRegionOwner(zone:getRegionID()) + 1
     local allyName    = xi.garrison.allyNames[zoneData.levelCap][regionIndex]
     local allyLooks   = xi.garrison.allyLooks[zoneData.levelCap][regionIndex]
+    local allyGroupId = xi.garrison.allyGroupIds[zoneData.levelCap]
+    debugLogf("Spawning %d npcs. GroupId: %d", #zoneData.players, allyGroupId)
 
     -- Spawn 1 npc per player in alliance
     for i = 1, #zoneData.players do
-        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyName, utils.randomEntry(allyLooks))
-        mob:setMobLevel(zoneData.levelCap - math.floor(zoneData.levelCap / 5))
+        local mob = xi.garrison.spawnNPC(zone, zoneData, xPos, yPos, zPos, rot, allyName, allyGroupId, utils.randomEntry(allyLooks))
+        -- Note: This does change the mob level because ally npcs are of type mob, and
+        -- level_restriction is only applied to PCs. However, we need the status to validate that the
+        -- npcs are part of the garrison.
+        -- Because the npcs are not level capped, group ids should be used to define min / max level.
         xi.garrison.addLevelCap(mob, zoneData.levelCap)
         table.insert(zoneData.npcs, mob:getID())
 
@@ -319,14 +338,16 @@ xi.garrison.tick = function(npc)
 
             -- case 2: More mobs to spawn in this wave, and past next spawn time. Spawn Mobs.
             local shouldSpawnMobs = os.time() >= zoneData.nextSpawnTime
-            local isLastGroup = zoneData.groupIndex > xi.garrison.waves.groupsPerWave[zoneData.waveIndex]
+            local numGroups = #zoneData.spawnSchedule[zoneData.waveIndex]
+            local isLastGroup = zoneData.groupIndex > numGroups
             if shouldSpawnMobs and not isLastGroup then
                 zoneData.state = xi.garrison.state.SPAWN_MOBS
                 return
             end
 
             -- case 3: All mobs spawned for last wave. Spawn boss
-            local isLastWave = zoneData.waveIndex == #xi.garrison.waves.groupsPerWave
+            local numWaves = #zoneData.spawnSchedule
+            local isLastWave = zoneData.waveIndex == numWaves
             if shouldSpawnMobs and isLastWave and isLastGroup and not zoneData.bossSpawned then
                 zoneData.state = xi.garrison.state.SPAWN_BOSS
                 return
@@ -373,7 +394,7 @@ xi.garrison.tick = function(npc)
 
         [xi.garrison.state.ADVANCE_WAVE] = function()
             debugLog("State: Advance Wave")
-            debugLogf("Wave Idx: %i. Waves: %i", zoneData.waveIndex, #xi.garrison.waves.groupsPerWave)
+            debugLogf("Wave Idx: %i. Waves: %i", zoneData.waveIndex, #zoneData.spawnSchedule)
             debugLogf("Next wave: %i", zoneData.waveIndex)
             debugPrintToPlayers(players, "Wave " .. zoneData.waveIndex .. " cleared")
 
@@ -393,8 +414,14 @@ xi.garrison.tick = function(npc)
             -- There are always at most 8 mobs + 1 boss for Garrison, so we will look up the
             -- boss's ID using their name and then subtract 8 to get the starting mob ID.
             local firstMobID = zone:queryEntitiesByName(zoneData.mobBoss)[1]:getID() - 8
-            local numMobs = xi.garrison.waves.mobsPerGroup
-            local poolSize = xi.garrison.waves.mobsPerGroup * xi.garrison.waves.groupsPerWave[zoneData.waveIndex]
+            if zoneData.spawnSchedule[zoneData.waveIndex] == nil then
+                printf("[error] No spawn schedule for wave: %d. Num Parties: %d", zoneData.waveIndex, zoneData.numParties)
+                zoneData.state = xi.garrison.state.ENDED
+                return
+            end
+
+            local poolSize = utils.sum(zoneData.spawnSchedule[zoneData.waveIndex], function(_, v) return v end)
+            local numMobs   = zoneData.spawnSchedule[zoneData.waveIndex][zoneData.groupIndex]
             local lastMobID = firstMobID + poolSize - 1
 
             -- Pick mobs randomly and spawn them
@@ -418,7 +445,8 @@ xi.garrison.tick = function(npc)
             debugPrintToPlayers(players, "Mission success")
 
             messagePlayers(npc, players, ID.text.GARRISON_BASE + 36)
-            xi.garrison.handleLootRolls(xi.garrison.loot[zoneData.levelCap], zoneData.players)
+            xi.garrison.handleLootRolls(xi.garrison.loot[zoneData.levelCap], players)
+            xi.garrison.handleGilPayout(zoneData.levelCap, players)
             zoneData.state = xi.garrison.state.ENDED
         end,
 
@@ -441,19 +469,20 @@ xi.garrison.tick = function(npc)
 end
 
 xi.garrison.start = function(player, npc)
-    local zone           = player:getZone()
-    local zoneData       = xi.garrison.zoneData[zone:getID()]
-    zoneData.players     = {}
-    zoneData.npcs        = {}
-    zoneData.mobs        = {}
-    zoneData.state       = xi.garrison.state.SPAWN_NPCS
-    zoneData.isRunning    = true
-    zoneData.stateTime   = os.time()
-    zoneData.waveIndex   = 1
-    zoneData.groupIndex  = 1
-    zoneData.bossSpawned = false
+    local zone             = player:getZone()
+    local zoneData         = xi.garrison.zoneData[zone:getID()]
+    zoneData.players       = {}
+    zoneData.spawnSchedule = xi.garrison.getSpawnSchedule(player)
+    zoneData.npcs          = {}
+    zoneData.mobs          = {}
+    zoneData.state         = xi.garrison.state.SPAWN_NPCS
+    zoneData.isRunning     = true
+    zoneData.stateTime     = os.time()
+    zoneData.waveIndex     = 1
+    zoneData.groupIndex    = 1
+    zoneData.bossSpawned   = false
     -- First mob spawn takes xi.garrison.waves.delayBetweenGroups to start
-    zoneData.nextSpawnTime = os.time() + xi.garrison.waves.delayBetweenGroups
+    zoneData.nextSpawnTime     = os.time() + xi.garrison.waves.delayBetweenGroups
     zoneData.endTime           = os.time() + xi.settings.main.GARRISON_TIME_LIMIT
     zoneData.deadNPCCount      = 0
     zoneData.deadMobCount      = 0
@@ -505,10 +534,11 @@ xi.garrison.stop = function(zone)
         DespawnMob(entityId, zone)
     end
 
-    zoneData.players     = {}
-    zoneData.npcs        = {}
-    zoneData.mobs        = {}
-    zoneData.isRunning   = false
+    zoneData.players       = {}
+    zoneData.spawnSchedule = {}
+    zoneData.npcs          = {}
+    zoneData.mobs          = {}
+    zoneData.isRunning     = false
 end
 
 xi.garrison.onTrade = function(player, npc, trade, guardNation)
@@ -573,8 +603,7 @@ xi.garrison.handleLootRolls = function(lootTable, players)
 
         if roll > max then
             if entry.itemid ~= 0 then
-                for _, entityId in ipairs(players) do
-                    local player = GetPlayerByID(entityId)
+                for _, player in ipairs(players) do
                     if player ~= nil then
                         player:addTreasure(entry.itemid)
                         return
@@ -585,6 +614,51 @@ xi.garrison.handleLootRolls = function(lootTable, players)
             break
         end
     end
+end
+
+xi.garrison.handleGilPayout = function(levelCap, players)
+    -- We have two captures at level 30 being rewarded a total of 3k gil.
+    -- This is an assumption of how the rest of tiers work.
+    local payout = xi.settings.main.GIL_RATE * levelCap * 100 * #players
+    print("Payout: " .. payout)
+    for _, player in ipairs(players) do
+        if player ~= nil then
+            local gil = payout / #players
+            player:addGil(gil)
+            player:messageSpecial(zones[player:getZoneID()].text.GIL_OBTAINED, gil)
+        end
+    end
+end
+
+-- Gets the spawn schedule for the player starting garrison
+xi.garrison.getSpawnSchedule = function(player)
+    local numParties = xi.garrison.getNumPartiesInAlliance(player)
+    local spawnSchedule = xi.garrison.waves.spawnSchedule[numParties]
+
+    if spawnSchedule == nil then
+        -- Leave the log there even if valid most times, because it may help us cause bad use cases
+        debugLogf("[warning] Spawn schedule not found for number of parties: %d. Ignore if player has no party.", numParties)
+        spawnSchedule = xi.garrison.waves.spawnSchedule[1]
+    end
+
+    return spawnSchedule
+end
+
+-- Utility function to get the number of parties in the player's alliance
+-- This should be moved to utils if we have other files needing the same method
+xi.garrison.getNumPartiesInAlliance = function(player)
+    local alliance = player:getAlliance()
+    local leaders = {}
+    local numLeaders = 0
+    for _, member in pairs(alliance) do
+        local leader = member:getPartyLeader()
+        if leader ~= nil and not leaders[leader:getName()] then
+            numLeaders = numLeaders + 1
+            leaders[leader:getName()] = true
+        end
+    end
+
+    return numLeaders
 end
 
 -----------------------------------
@@ -703,4 +777,13 @@ xi.garrison.isZoneOnLockout = function(zone)
     end
 
     return false
+end
+
+-----------------------------------
+-- Debugging
+-----------------------------------
+
+xi.garrison.win = function(zone)
+    local zoneData = xi.garrison.zoneData[zone:getID()]
+    zoneData.state = xi.garrison.state.GRANT_LOOT
 end

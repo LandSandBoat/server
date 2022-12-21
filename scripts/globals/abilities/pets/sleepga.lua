@@ -15,8 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
-    local bonusTime = utils.clamp(xi.summon.getSummoningSkillOverCap(pet) * 3, 0, 90)-- 3 seconds / skill | Duration is capped at 180 total
-    local duration = 90 + bonusTime
+    local duration = 90
     local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local bonus = xi.summon.getSummoningSkillOverCap(pet)
     local resm = xi.mobskills.applyPlayerResistance(pet, -1, target, dINT, bonus, xi.magic.ele.DARK)

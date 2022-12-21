@@ -14,8 +14,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 3)
-        return
+        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 3) then
+            return
+        end
     end
 
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED then

@@ -769,14 +769,15 @@ enum class Mod
     PHYS_ABSORB        = 512, // Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP   = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
-    ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
-    ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
-    ITEM_ADDEFFECT_DMG      = 500, // Damage of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_CHANCE   = 501, // Chance of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_ELEMENT  = 950, // Element of the Additional Effect or Spikes, for resist purposes
-    ITEM_ADDEFFECT_STATUS   = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER    = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_DURATION = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE     = 431,  // see procType table in scripts\globals\additional_effects.lua
+    ITEM_SUBEFFECT          = 499,  // Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG      = 500,  // Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE   = 501,  // Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT  = 950,  // Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS   = 951,  // Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER    = 952,  // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION = 953,  // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_OPTION   = 1178, // Additional parameters for more specific latents required to proc
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -948,27 +949,26 @@ enum class Mod
     PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
     DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
-
-    FIRE_EEM             = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    ICE_EEM              = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WIND_EEM             = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    EARTH_EEM            = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    THUNDER_EEM          = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WATER_EEM            = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    LIGHT_EEM            = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    DARK_EEM             = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    TAME_SUCCESS_RATE    = 1166, // Tame Success Rate +
-    RAMPART_MAGIC_SHIELD = 1167, // Rampart Magic Shield
-    CRITHITRATE_SLOT     = 1168, // CRITHITRATE for slot
-    ATT_SLOT             = 1169, // ATT for slot
-    UDMG                 = 1170, // Uncapped dmg taken (all types)
-    SLEEP_MEVA           = 1171, // Sleep MEVA from Barspells
-    POISON_MEVA          = 1172, // Poison MEVA from Barspells
-    PARALYZE_MEVA        = 1173, // Paralyze MEVA from Barspells
-    BLIND_MEVA           = 1174, // Blind MEVA from Barspells
-    SILENCE_MEVA         = 1175, // Silence MEVA from Barspells
-    VIRUS_MEVA           = 1176, // Virus MEVA from Barspells
-    PETRIFY_MEVA         = 1177, // Petrify MEVA from Barspells
+    FIRE_EEM               = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM                = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM               = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM              = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM            = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM              = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM              = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM               = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    TAME_SUCCESS_RATE      = 1166, // Tame Success Rate +
+    RAMPART_MAGIC_SHIELD   = 1167, // Rampart Magic Shield
+    CRITHITRATE_SLOT       = 1168, // CRITHITRATE for slot
+    ATT_SLOT               = 1169, // ATT for slot
+    UDMG                   = 1170, // Uncapped dmg taken (all types)
+    SLEEP_MEVA             = 1171, // Sleep MEVA from Barspells
+    POISON_MEVA            = 1172, // Poison MEVA from Barspells
+    PARALYZE_MEVA          = 1173, // Paralyze MEVA from Barspells
+    BLIND_MEVA             = 1174, // Blind MEVA from Barspells
+    SILENCE_MEVA           = 1175, // Silence MEVA from Barspells
+    VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
+    PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
@@ -976,14 +976,13 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 53
     // 74 to 79
     // 138 to 143
     // 156 to 159
     // 192 to 223
     // 261 to 280
     //
-    // SPARE = 1075, and onward
+    // SPARE = 1179, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

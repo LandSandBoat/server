@@ -16,11 +16,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif
-        (not pet:isJugPet() and pet:getObjType() ~= xi.objType.MOB) or
+        not (player:hasJugPet() or pet:getObjType() == xi.objType.MOB) or
         pet:getLocalVar("ReceivedFamiliar") == 1
     then
-        return xi.msg.basic.NO_EFFECT_ON_PET, 0
-    elseif pet:getLocalVar("ReceivedFamiliar") == 1 then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     end
 
