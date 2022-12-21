@@ -69,8 +69,8 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(32742)
         end
+        player:PrintToPlayer("Please note: Teleports have been disabled for the current Starlight Celebration. Merry Starlight!", xi.msg.channel.UNKNOWN_32, "")
     end
-    player:PrintToPlayer("Please note: Teleports have been disabled for the current Starlight Celebration. Merry Starlight!", xi.msg.channel.UNKNOWN_32, "")
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -106,7 +106,6 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.PRESENT_FOR_THE_KIDDIES)
         end
     end
-    player:PrintToPlayer("Please note: Teleports have been disabled for the current Starlight Celebration. Merry Starlight!", xi.msg.channel.UNKNOWN_32, "")
 end
 
 return entity
