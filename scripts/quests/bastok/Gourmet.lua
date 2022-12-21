@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
 quest.reward =
 {
-    fame     = 30,
+    fame     = 10,
     fameArea = xi.quest.fame_area.BASTOK,
     title    = xi.title.MOMMYS_HELPER,
 }
@@ -103,11 +103,11 @@ quest.sections =
             onEventFinish =
             {
                 [201] = function(player, csid, option, npc)
-                    tradeEventFinish(player, 200, 30)
+                    tradeEventFinish(player, 200, 0) -- Original: 30
                 end,
 
                 [202] = function(player, csid, option, npc)
-                    tradeEventFinish(player, 350, 90)
+                    tradeEventFinish(player, 350, 0) -- Original: 90
                 end,
 
                 [203] = function(player, csid, option, npc)

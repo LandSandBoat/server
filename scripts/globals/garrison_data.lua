@@ -31,6 +31,32 @@ xi.garrison.allyGroupIds =
     [75] = 5,
 }
 
+-- This is used to replace blank weapons in ally looks.
+-- TODO: Use proper npc looks for all models or at least find the right range
+-- so we can purely generate these
+xi.garrison.allyArsenal =
+{
+    "08",
+    "83",
+    "B8",
+    "73",
+    "62",
+    "01",
+    "19",
+    "6B",
+    "B5",
+    "75",
+    "6F",
+    "BB",
+    "3C",
+    "56",
+    "4E",
+    "19",
+    "5C",
+    "61",
+    "E6"
+}
+
 -- Look is Determined by Nation and LevelCap (Appears to be 4 for each outpost need more data though)
 xi.garrison.allyLooks =
 {

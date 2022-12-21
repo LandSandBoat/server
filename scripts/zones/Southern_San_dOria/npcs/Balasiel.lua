@@ -24,8 +24,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
-        xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4)
-        return
+        if xi.events.starlightCelebration.npcGiftsNpcOnTrigger(player, 4) then
+            return
+        end
     end
 
     local lvl = player:getMainLvl()
