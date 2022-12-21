@@ -28,8 +28,8 @@ quest.sections[1].check = function(player, status, vars)
         xi.moghouse.isInMogHouseInHomeNation(player) and
         player:getFameLevel(player:getNation()) >= 3 and
         quest:getLocalVar(player, 'questSeen') == 0 and
-        quest:getVar(player, 'bedPlacedTime') > 0 and
         os.time() > quest:getVar(player, 'bedPlacedTime') and
+        quest:getVar(player, 'bedPlacedTime') > 0 and
         not quest:getMustZone(player)
 end
 
