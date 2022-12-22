@@ -204,9 +204,11 @@ message(STATUS "Downloading wolfssl, this might take a while!")
 CPMAddPackage(
   NAME wolfssl
   GITHUB_REPOSITORY wolfSSL/wolfssl
-  GIT_TAG a7635da9e64a43028d2f8f14bce75e4bed39f162
+  GIT_TAG 4fbd4fd36a21efd9d1a7e17aba390e91c78693b1
   OPTIONS
     "BUILD_SHARED_LIBS OFF"
+    "WOLFSSL_CRYPT_TESTS no"
+    "WOLFSSL_EXAMPLES no"
 )
 
 set(EXTERNAL_LIBS
