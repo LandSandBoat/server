@@ -50,6 +50,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define LOGIN_CHANGE_PASSWORD 0x30
 
 /*return result*/
+#define LOGIN_FAIL                    0x00
 #define LOGIN_SUCCESS                 0x01
 #define LOGIN_SUCCESS_CREATE          0x03
 #define LOGIN_SUCCESS_CHANGE_PASSWORD 0x06
@@ -81,7 +82,9 @@ class handler_session
 public:
     handler_session(asio::ip::tcp::socket socket)
     : socket_(std::move(socket))
+    , data_()
     {
+        socket_.set_option(asio::socket_base::reuse_address(true));
     }
 
     virtual ~handler_session() = default;
@@ -141,7 +144,20 @@ public:
     {
         max_length = 1024
     };
-    char data_[max_length];
+    char data_[max_length] = {};
+};
+
+enum ACCOUNT_STATUS_CODE : uint8
+{
+    NORMAL = 0x01,
+    BANNED = 0x02,
+};
+
+enum ACCOUNT_PRIVILIGE_CODE : uint8
+{
+    USER  = 0x01,
+    ADMIN = 0x02,
+    ROOT  = 0x04,
 };
 
 // TODO: Metadata about each session
@@ -151,9 +167,10 @@ struct session_t
     std::shared_ptr<handler_session> data_session;
     std::shared_ptr<handler_session> view_session;
     std::shared_ptr<handler_session> pol_session;
+
+    uint32 accountID = 0;
 };
 
-// Now that we know we're in "new" mode, we can communicate what information we want from the server.
 // NOTE: This collection of flags is 64-bits wide!
 enum AUTH_COMPONENTS
 {
@@ -203,6 +220,8 @@ protected:
         auto newModeFlag = ref<uint8>(data_, 0) == 0xFF;
         if (newModeFlag)
         {
+            [[maybe_unused]] AUTH_COMPONENTS auth = {};
+
             auto componentFlags = ref<uint64>(data_, 1);
 
             if (componentFlags & AUTH_COMPONENTS::USE_TLS)
@@ -230,14 +249,19 @@ protected:
             ShowWarning("login_parse: send unreadable data");
             return;
         }
+        auto sql = std::make_unique<SqlConnection>();
 
-        // TODO: Hook up escaping
-        // char escaped_name[16 * 2 + 1];
-        // char escaped_pass[32 * 2 + 1];
-        // sql->EscapeString(escaped_name, username.c_str());
-        // sql->EscapeString(escaped_pass, password.c_str());
-        // username = escaped_name;
-        // password = escaped_pass;
+        char escaped_name[16 * 2 + 1] = {};
+        char escaped_pass[32 * 2 + 1] = {};
+
+        sql->EscapeString(escaped_name, username.c_str());
+        sql->EscapeString(escaped_pass, password.c_str());
+
+        username = escaped_name;
+        password = escaped_pass;
+
+        // TODO: support multi-account same-IP login
+        session_t session = get_session(socket_);
 
         switch (code)
         {
@@ -245,15 +269,60 @@ protected:
             {
                 ShowInfo("LOGIN_ATTEMPT");
 
-                // Success
-                std::memset(data_, 0, 33);
-                ref<uint8>(data_, 0)  = LOGIN_SUCCESS;
-                ref<uint32>(data_, 1) = 1001; // accid;
-                do_write(33);
+                const char* fmtQuery = "SELECT accounts.id,accounts.status \
+                                    FROM accounts \
+                                    WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')";
+                int32       ret      = sql->Query(fmtQuery, escaped_name, escaped_pass);
+                if (ret != SQL_ERROR && sql->NumRows() != 0)
+                {
+                    ret = sql->NextRow();
 
-                // Fail
-                // ref<uint8>(data_, 0) = LOGIN_ERROR;
-                // do_write(1);
+                    session.accountID = sql->GetUIntData(0);
+                    uint32 status     = sql->GetUIntData(1);
+
+                    if (status & ACCOUNT_STATUS_CODE::NORMAL)
+                    {
+                        fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
+                        sql->Query(fmtQuery, session.accountID);
+                        fmtQuery = "SELECT charid, server_addr, server_port \
+                                FROM accounts_sessions JOIN accounts \
+                                ON accounts_sessions.accid = accounts.id \
+                                WHERE accounts.id = %d;";
+                        ret      = sql->Query(fmtQuery, session.accountID);
+                        if (ret != SQL_ERROR && sql->NumRows() == 1)
+                        {
+                            while (sql->NextRow() == SQL_SUCCESS)
+                            {
+                                uint32 charid = sql->GetUIntData(0);
+                                uint64 ip     = sql->GetUIntData(1);
+                                uint64 port   = sql->GetUIntData(2);
+
+                                ip |= (port << 32);
+
+                                zmq::message_t chardata(sizeof(charid));
+                                ref<uint32>((uint8*)chardata.data(), 0) = charid;
+                                zmq::message_t empty(0);
+
+                                queue_message(ip, MSG_LOGIN, &chardata, &empty);
+                            }
+                        }
+                        // Success
+                        std::memset(data_, 0, 33);
+                        ref<uint8>(data_, 0)  = LOGIN_SUCCESS;
+                        ref<uint32>(data_, 1) = session.accountID;
+                        do_write(33);
+                    }
+                    else if (status & ACCOUNT_STATUS_CODE::BANNED)
+                    {
+                        ref<uint8>(data_, 0) = LOGIN_FAIL;
+                        do_write(33);
+                    }
+                }
+                else // No account match
+                {
+                    ref<uint8>(data_, 0) = LOGIN_ERROR;
+                    do_write(1);
+                }
             }
             break;
             case LOGIN_CREATE:
