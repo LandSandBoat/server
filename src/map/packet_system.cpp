@@ -2087,8 +2087,8 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    char blacklistedName[15] = {};
-    memcpy(&blacklistedName, data[0x08], sizeof(blacklistedName));
+    char blacklistedName[PacketNameLength] = {};
+    memcpy(&blacklistedName, data[0x08], PacketNameLength - 1);
 
     std::string name = blacklistedName;
     uint8       cmd  = data.ref<uint8>(0x18);
@@ -2414,8 +2414,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     CItem* PUBoxItem = itemutils::GetItem(PItem->getID());
 
-                    char receiver[15] = {};
-                    memcpy(&receiver, data[0x10], sizeof(receiver));
+                    char receiver[PacketNameLength] = {};
+                    memcpy(&receiver, data[0x10], PacketNameLength - 1);
                     PUBoxItem->setReceiver(receiver);
                     PUBoxItem->setSender(PChar->GetName());
                     PUBoxItem->setQuantity(quantity);
@@ -4287,8 +4287,8 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
         case 0: // party - party leader may remove member of his own party
             if (PChar->PParty && PChar->PParty->GetLeader() == PChar)
             {
-                char charName[15] = {};
-                memcpy(&charName, data[0x0C], sizeof(charName));
+                char charName[PacketNameLength] = {};
+                memcpy(&charName, data[0x0C], PacketNameLength - 1);
 
                 CCharEntity* PVictim = dynamic_cast<CCharEntity*>(PChar->PParty->GetMemberByName(charName));
                 if (PVictim)
@@ -4375,8 +4375,8 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                 CCharEntity* PVictim = nullptr;
                 for (std::size_t i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
                 {
-                    char charName[15] = {};
-                    memcpy(&charName, data[0x0C], sizeof(charName));
+                    char charName[PacketNameLength] = {};
+                    memcpy(&charName, data[0x0C], PacketNameLength - 1);
 
                     PVictim = dynamic_cast<CCharEntity*>(PChar->PParty->m_PAlliance->partyList[i]->GetMemberByName(charName));
                     if (PVictim && PVictim->PParty && PVictim->PParty->m_PAlliance) // victim is in this party
@@ -4586,10 +4586,10 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->PParty != nullptr && PChar->PParty->GetLeader() == PChar)
             {
-                char memberName[15] = {};
-                memcpy(&memberName, data[0x04], sizeof(memberName));
+                char memberName[PacketNameLength] = {};
+                memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug("(Party)Changing leader to %s", data[0x04]);
+                ShowDebug("(Party)Altering permissions of %s to %d", data[0x04], data[0x15]);
                 PChar->PParty->AssignPartyRole(memberName, data.ref<uint8>(0x15));
             }
         }
