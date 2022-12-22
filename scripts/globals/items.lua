@@ -22,6 +22,7 @@ xi.items =
     COPY_OF_EMERALDA                = 134,
     SET_OF_KAISERIN_COSMETICS       = 136,
     CORDON_BLEU_COOKING_SET         = 137,
+    JEUNOAN_TREE                    = 138,
     DROGAROGAS_FANG                 = 142,
     STACK_OF_FOOLS_GOLD             = 151,
     MASTERSMITH_ANVIL               = 153,

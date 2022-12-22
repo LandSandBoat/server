@@ -334,16 +334,23 @@ end
 -- Smilebringer Bootcamp Sub-Quest --
 -------------------------------------
 
+local zoneDefaultTimes =
+{
+    [385] = 230,
+    [386] = 270,
+    [387] = 240,
+}
+
 function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, npc, zoneOption)
     local elapsedTime = (os.time() - player:getLocalVar("bootCampStarted"))
     local playerPoint = player:getLocalVar("playerBCCP")
     local completedDay = player:getCharVar("[SmileBootCamp]Completed")
     local currentDay = VanadielUniqueDay()
     local gil = player:getGil()
-    local hasTree = player:hasItem(138)
+    local hasTree = player:hasItem(xi.items.JEUNOAN_TREE)
     local recordHolderID = npc:getLocalVar("recordHolderID")
     local recordHolderName = ""
-    local recordTime = 0
+    local recordTime = zoneDefaultTimes[zoneOption]
     local entry = 0
     local qualifyingTime = 540
 
@@ -357,7 +364,6 @@ function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, np
         recordTime = npc:getLocalVar("recordTime")
     else
         recordHolderName = "Smilebringer"
-        recordTime = 270
     end
 
     if completedDay ~= currentDay then
@@ -374,9 +380,9 @@ function xi.events.starlightCelebration.smileBringerSergeantOnTrigger(player, np
                         end
                     elseif (elapsedTime < recordTime) then -- new record
                         if hasTree == true then
-                            player:startEvent(7005, elapsedTime, 5622, 0, 44519, -412436, 28, 1, 5)
+                            player:startEvent(7005, elapsedTime, xi.items.CANDY_CANE, 0, 44519, -412436, 28, 1, 5)
                         else
-                            player:startEvent(7005, elapsedTime, 138, 0, 44519, -412436, 28, 1, 5)
+                            player:startEvent(7005, elapsedTime, xi.items.JEUNOAN_TREE, 0, 44519, -412436, 28, 1, 5)
                         end
                         npc:setLocalVar("recordHolderID", player:getID())
                         npc:setLocalVar("recordTime", elapsedTime)
@@ -403,23 +409,33 @@ function xi.events.starlightCelebration.smileBringerSergeantOnFinish(player, npc
         player:setLocalVar("playerBCCP", 1)
         xi.events.starlightCelebration.toggleSmileHelpers(zoneid)
     elseif csid == 7005 then
-        local hasItem = player:hasItem(138)
-        if hasItem == true then
-            player:resetLocalVars()
-            player:setCharVar("[SmileBootCamp]Completed", VanadielUniqueDay())
-            npcUtil.giveItem( player, 5622, { silent = true } )
-            if not player:hasKeyItem(xi.keyItem.BELL_THEMED_GIFT_TOKEN) then
-                player:addKeyItem(xi.keyItem.BELL_THEMED_GIFT_TOKEN)
-                player:messageSpecial(id.text.KEYITEM_OBTAINED, xi.keyItem.BELL_THEMED_GIFT_TOKEN)
+        local hasItem = player:hasItem(xi.items.JEUNOAN_TREE)
+        local invAvailable = player:getFreeSlotsCount()
+
+        if invAvailable ~= 0 then
+            if hasItem == true then
+                player:resetLocalVars()
+                player:setCharVar("[SmileBootCamp]Completed", VanadielUniqueDay())
+                npcUtil.giveItem( player, xi.items.CANDY_CANE, { silent = true } )
+                if not player:hasKeyItem(xi.keyItem.BELL_THEMED_GIFT_TOKEN) then
+                    player:addKeyItem(xi.keyItem.BELL_THEMED_GIFT_TOKEN)
+                    player:messageSpecial(id.text.KEYITEM_OBTAINED, xi.keyItem.BELL_THEMED_GIFT_TOKEN)
+                end
+            else
+                player:resetLocalVars()
+                player:setCharVar("[SmileBootCamp]Completed", VanadielUniqueDay())
+                npcUtil.giveItem( player, xi.items.JEUNOAN_TREE, { silent = true } )
             end
         else
-            player:resetLocalVars()
-            player:setCharVar("[SmileBootCamp]Completed", VanadielUniqueDay())
-            npcUtil.giveItem( player, 138, { silent = true } )
+            if player:hasItem(xi.items.JEUNOAN_TREE) then
+                player:showText(npc, id.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CANDY_CANE)
+            else
+                player:showText(npc, id.text.ITEM_CANNOT_BE_OBTAINED, xi.items.JEUNOAN_TREE)
+            end
         end
     elseif csid == 7004 and option == 5 then
-        player:setLocalVar("bootCampStarted", 0)
-        player:setLocalVar("playerBCCP", 0)
+        player:resetLocalVars()
+
     elseif csid == 7011 then
         player:resetLocalVars()
     end
@@ -439,12 +455,12 @@ function xi.events.starlightCelebration.smileHelperTrigger(player, npc, id)
             if (npcPoint == 0 and playerPoint ~= 10) then
                 player:setLocalVar("playerBCCP", playerPoint + 1)
                 player:setLocalVar("Checkpoint" .. npcID, 1)
-                if player:getStatusEffect(xi.effect.FLEE) ~= nil or playerPoint == 0 or missedFlee == 0 then
+                if (player:getStatusEffect(xi.effect.FLEE) ~= nil or playerPoint == 1 or missedFlee == 1) then
                     player:setLocalVar("missedFlee", 0)
                     player:showText(npc, id.text.SMILEHELPER_CHECKPOINT_2, 0, playerPoint, minutes, seconds)
                     player:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
                 else
-                    local rnd = math.random(0, 3)
+                    local rnd = math.random(0, 5)
                     if rnd ~= 3 then
                         player:setLocalVar("missedFlee", 1)
                         player:showText(npc, id.text.SMILEHELPER_CHECKPOINT_1, 0, playerPoint, minutes, seconds)
@@ -454,7 +470,7 @@ function xi.events.starlightCelebration.smileHelperTrigger(player, npc, id)
                         player:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
                     end
                 end
-            elseif playerPoint == 10 then
+            elseif (playerPoint == 10 and npcPoint == 0) then
                 player:showText(npc, id.text.SMILEHELPER_POINTS_CLEARED)
                 player:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
             elseif npcPoint ~= 0 then
