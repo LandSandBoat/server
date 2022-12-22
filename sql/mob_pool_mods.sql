@@ -111,6 +111,9 @@ INSERT INTO `mob_pool_mods` VALUES (592,68,15,0);  -- EVA: 15
 INSERT INTO `mob_pool_mods` VALUES (592,302,45,0); -- TRIPLE_ATTACK: 45
 INSERT INTO `mob_pool_mods` VALUES (592,59,160,1); -- WEAPON_BONUS: 160
 
+-- Capricious Cassie
+INSERT INTO `mob_pool_mods` VALUES (630,59,128,1); -- WEAPON_BONUS: 128
+
 -- Cargo Crab Colin
 INSERT INTO `mob_pool_mods` VALUES (639,63,25,0); -- DEFP: 25
 
@@ -304,6 +307,10 @@ INSERT INTO `mob_pool_mods` VALUES (2314,28,23,1); -- EXP_BONUS: 23
 -- Lindwurm
 INSERT INTO `mob_pool_mods` VALUES (2420,302,10,0); -- TRIPLE_ATTACK: 10
 
+-- Maat MNK
+INSERT INTO `mob_pool_mods` VALUES (2460,59,154,1); -- WEAPON_BONUS: 154
+INSERT INTO `mob_pool_mods` VALUES (2460,288,100,0); -- DOUBLE_ATTACK: 100
+
 -- Maats Avatar
 INSERT INTO `mob_pool_mods` VALUES (2461,61,25,1); -- HP_SCALE: 25
 
@@ -423,6 +430,9 @@ INSERT INTO `mob_pool_mods` VALUES (3268,56,1,1); -- HP_STANDBACK: 1
 -- Race Runner
 INSERT INTO `mob_pool_mods` VALUES (3301,29,100,0); -- MDEF: 100
 
+-- Roc
+INSERT INTO `mob_pool_mods` VALUES (3376,59,136,1); -- WEAPON_BONUS: 136
+
 -- Rock Golem
 INSERT INTO `mob_pool_mods` VALUES (3379,4,4,1); -- SIGHT_RANGE: 4
 
@@ -438,6 +448,7 @@ INSERT INTO `mob_pool_mods` VALUES (3540,59,157,1); -- WEAPON_BONUS: 157
 
 -- Serket
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0); -- REGEN: 50
+INSERT INTO `mob_pool_mods` VALUES (3549,59,128,1); -- WEAPON_BONUS: 128
 
 -- Shikaree X
 INSERT INTO `mob_pool_mods` VALUES (3598,161,30,0); -- DMGPHYS: 30
@@ -450,6 +461,9 @@ INSERT INTO `mob_pool_mods` VALUES (3600,368,70,0); -- REGAIN: 70
 -- Shikaree Z
 INSERT INTO `mob_pool_mods` VALUES (3601,168,30,0); -- SPELLINTERRUPT: 30
 INSERT INTO `mob_pool_mods` VALUES (3601,368,70,0); -- REGAIN: 70
+
+-- Simurgh
+INSERT INTO `mob_pool_mods` VALUES (3630,59,134,1); -- WEAPON_BONUS: 134
 
 -- Slave Globe
 INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1); -- EXP_BONUS: -100
@@ -560,15 +574,27 @@ INSERT INTO `mob_pool_mods` VALUES (4672,3,100,1); -- MP_BASE: 100
 -- Suzaku Pet
 INSERT INTO `mob_pool_mods` VALUES (4673,3,100,1); -- MP_BASE: 100
 
+-- Maat WAR
+INSERT INTO `mob_pool_mods` VALUES (4835,59,154,1); -- WEAPON_BONUS: 154
+
 -- Maat Blm
-INSERT INTO `mob_pool_mods` VALUES (4836,62,1,1); -- NO_STANDBACK: 1
+INSERT INTO `mob_pool_mods` VALUES (4836,62,1,1);   -- NO_STANDBACK: 1
+INSERT INTO `mob_pool_mods` VALUES (4836,59,154,1); -- WEAPON_BONUS: 154
 
 -- Maat Rng
-INSERT INTO `mob_pool_mods` VALUES (4837,62,1,1); -- NO_STANDBACK: 1
+INSERT INTO `mob_pool_mods` VALUES (4837,62,1,1);   -- NO_STANDBACK: 1
+INSERT INTO `mob_pool_mods` VALUES (4837,59,154,1); -- WEAPON_BONUS: 154
+
+-- Maat RDM
+INSERT INTO `mob_pool_mods` VALUES (4838,59,154,1); -- WEAPON_BONUS: 154
+
+-- Maat THF
+INSERT INTO `mob_pool_mods` VALUES (4839,59,154,1); -- WEAPON_BONUS: 154
 
 -- Maat Bst
 INSERT INTO `mob_pool_mods` VALUES (4932,30,1017,1); -- SPECIAL_SKILL: 1017
 INSERT INTO `mob_pool_mods` VALUES (4932,33,50,1);   -- SPECIAL_COOL: 50
+INSERT INTO `mob_pool_mods` VALUES (4832,59,154,1);  -- WEAPON_BONUS: 154
 
 -- Promathia
 INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);  -- DEF: 250
@@ -576,18 +602,36 @@ INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);  -- MDEF: 30
 INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0); -- DOUBLE_ATTACK: 25
 INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0); -- MAIN_DMG_RATING: 10
 
+-- Maat WHM
+INSERT INTO `mob_pool_mods` VALUES (5232,59,154,1); -- WEAPON_BONUS: 154
+
+-- Maat WHM
+INSERT INTO `mob_pool_mods` VALUES (5274,59,154,1); -- WEAPON_BONUS: 154
+
+-- Maat SAM
+INSERT INTO `mob_pool_mods` VALUES (5345,59,154,1); -- WEAPON_BONUS: 154
+
 -- Maat Nin
 INSERT INTO `mob_pool_mods` VALUES (5403,62,1,1); -- NO_STANDBACK: 1
+INSERT INTO `mob_pool_mods` VALUES (5403,59,154,1); -- WEAPON_BONUS: 154
+
+-- Maat DRG
+INSERT INTO `mob_pool_mods` VALUES (5404,59,154,1); -- WEAPON_BONUS: 154
 
 -- Maat Pld
 INSERT INTO `mob_pool_mods` VALUES (5408,30,1036,1); -- SPECIAL_SKILL: 1036
 INSERT INTO `mob_pool_mods` VALUES (5408,33,50,1);   -- SPECIAL_COOL: 50
 INSERT INTO `mob_pool_mods` VALUES (5408,58,40,1);   -- SPECIAL_DELAY: 40
+INSERT INTO `mob_pool_mods` VALUES (5408,59,154,1);  -- WEAPON_BONUS: 154
 
 -- Maat Drk
 INSERT INTO `mob_pool_mods` VALUES (5409,30,1036,1); -- SPECIAL_SKILL: 1036
 INSERT INTO `mob_pool_mods` VALUES (5409,33,50,1);   -- SPECIAL_COOL: 50
 INSERT INTO `mob_pool_mods` VALUES (5409,58,40,1);   -- SPECIAL_DELAY: 40
+INSERT INTO `mob_pool_mods` VALUES (5409,59,154,1);  -- WEAPON_BONUS: 154
+
+-- Maat WHM
+INSERT INTO `mob_pool_mods` VALUES (5413,59,154,1); -- WEAPON_BONUS: 154
 
 -- Trust: Shikaree Z
 INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- MPP: 100
