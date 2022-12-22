@@ -1373,6 +1373,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Melanzane' AND
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Windurst Taco' AND ID = 72002;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Salmon Roe' AND ID = 72005;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Rainbow Powder' AND ID = 63503;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Honey' AND ID = 70507;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Mercury' AND ID = 60515;
 
 -- ------------------------------------------------------------
@@ -1898,7 +1899,6 @@ UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Firesand' AND
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Hi-Potion Drop' AND ID = 62555;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ID = 64551;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Cheese Sandwich' AND ID = 70018;
-UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Honey' AND ID = 70507;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Army Biscuit' AND ID = 70511;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Bavarois' AND ID = 72013;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Soba Noodles' AND ID = 72027;
