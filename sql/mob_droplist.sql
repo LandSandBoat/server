@@ -16080,9 +16080,7 @@ INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,2920,120);  -- Clump Of Alkalin
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,834,0);     -- Ball Of Saruta Cotton (Despoil)
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,4368,0);    -- Two-Leaf Mandragora Bud (Despoil)
 
--- ZoneID:  24 - Padfoot
-INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,505,@ALWAYS); -- Sheepskin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,531,@ALWAYS); -- Lanolin Cube (Always, 100%)
+-- 1972 Available
 
 -- ZoneID: 176 - Pahh The Gullcaller
 INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,888,340);        -- Seashell (34.0%)
@@ -24189,9 +24187,7 @@ INSERT INTO `mob_droplist` VALUES (2910,2,0,1000,1449,0);      -- Tukuku Whitesh
 INSERT INTO `mob_droplist` VALUES (2910,2,0,1000,1452,0);      -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (2910,2,0,1000,1455,0);      -- One Byne Bill (Steal)
 
--- ZoneID: Unknown - Unknown
-INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14676,730); -- Assailants Ring (Group 1 - 73.0%)
-INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14782,270); -- Astral Earring (Group 1 - 27.0%)
+-- 2911 Available
 
 -- ZoneID: 105 - Stalking Sapling
 INSERT INTO `mob_droplist` VALUES (2912,0,0,1000,953,310); -- Treant Bulb (31.0%)
