@@ -1041,53 +1041,7 @@ INSERT INTO `mob_droplist` VALUES (94,0,0,1000,2893,280); -- Gargantuan Black Ti
 INSERT INTO `mob_droplist` VALUES (94,0,0,1000,884,170);  -- Black Tiger Fang (17.0%)
 INSERT INTO `mob_droplist` VALUES (94,0,0,1000,861,130);  -- Black Tiger Hide (13.0%)
 
--- ZoneID: 135 - Animated Claymore
-INSERT INTO `mob_droplist` VALUES (95,0,0,1000,1574,@ALWAYS); -- Intricate Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Dagger
-INSERT INTO `mob_droplist` VALUES (96,0,0,1000,1572,@ALWAYS); -- Ornate Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Great Axe
-INSERT INTO `mob_droplist` VALUES (97,0,0,1000,1576,@ALWAYS); -- Seraphic Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Gun
-INSERT INTO `mob_droplist` VALUES (98,0,0,1000,1585,@ALWAYS); -- Ethereal Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Hammer
-INSERT INTO `mob_droplist` VALUES (99,0,0,1000,1581,@ALWAYS); -- Heavenly Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Horn
-INSERT INTO `mob_droplist` VALUES (100,0,0,1000,1584,@ALWAYS); -- Mysterial Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Knuckles
-INSERT INTO `mob_droplist` VALUES (101,0,0,1000,1571,@ALWAYS); -- Mystic Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Kunai
-INSERT INTO `mob_droplist` VALUES (102,0,0,1000,1579,@ALWAYS); -- Demoniac Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Longbow
-INSERT INTO `mob_droplist` VALUES (103,0,0,1000,1583,@ALWAYS); -- Snarled Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Longsword
-INSERT INTO `mob_droplist` VALUES (104,0,0,1000,1573,@ALWAYS); -- Holy Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Scythe
-INSERT INTO `mob_droplist` VALUES (105,0,0,1000,1577,@ALWAYS); -- Tenebrous Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Shield
-INSERT INTO `mob_droplist` VALUES (106,0,0,1000,1822,@ALWAYS); -- Supernal Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Spear
-INSERT INTO `mob_droplist` VALUES (107,0,0,1000,1578,@ALWAYS); -- Stellar Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Staff
-INSERT INTO `mob_droplist` VALUES (108,0,0,1000,1582,@ALWAYS); -- Celestial Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Tabar
-INSERT INTO `mob_droplist` VALUES (109,0,0,1000,1575,@ALWAYS); -- Runaeic Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Tachi
-INSERT INTO `mob_droplist` VALUES (110,0,0,1000,1580,@ALWAYS); -- Divine Fragment (Always, 100%)
+-- 95-110 Available
 
 -- ZoneID: 218 - Ansherekh
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,2168,@ALWAYS); -- Cerberus Claw (Always, 100%)

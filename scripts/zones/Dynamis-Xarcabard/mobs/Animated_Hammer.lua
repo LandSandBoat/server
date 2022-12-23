@@ -2,18 +2,14 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Hammer
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+require("scripts/globals/status")
+mixins = { require("scripts/mixins/animated_weapon") }
+mixinOptions = { item = xi.items.HEAVENLY_FRAGMENT }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(106, 1581, 1000)
-    else
-        SetDropRate(106, 1581, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_HAMMER_DIALOG)
 end
 
