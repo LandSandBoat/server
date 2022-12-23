@@ -17,15 +17,51 @@ xi.spells.healing = xi.spells.healing or {}
 
 xi.spells.healing.healingTable =
 {
-    [xi.magic.spell.CURE]           = { { power = 60,  maxCap = 20,  rate = 1,      constant = -10, minCap = 10  }, { power = 100, maxCap = 20,  rate = 2, constant = 5,    minCap = 10  }, { power = 999, maxCap = 30,  rate = 57,      constant = 29.125,   minCap = 10  } },
-    [xi.magic.spell.CURE_II]        = { { power = 110, maxCap = 75,  rate = 1,      constant = 20,  minCap = 60  }, { power = 170, maxCap = 75,  rate = 2, constant = 47.5, minCap = 60  }, { power = 999, maxCap = 90,  rate = 35.6666, constant = 87.62,    minCap = 60  } },
-    [xi.magic.spell.CURE_III]       = { { power = 180, maxCap = 160, rate = 1,      constant = 70,  minCap = 130 }, { power = 300, maxCap = 160, rate = 2, constant = 115,  minCap = 130 }, { power = 999, maxCap = 190, rate = 15.6666, constant = 180.43,   minCap = 130 } },
-    [xi.magic.spell.CURE_IV]        = { { power = 220, maxCap = 330, rate = 0.6666, constant = 165, minCap = 270 }, { power = 460, maxCap = 330, rate = 2, constant = 275,  minCap = 270 }, { power = 999, maxCap = 390, rate = 6.5,     constant = 354.6666, minCap = 270 } },
-    [xi.magic.spell.CURE_V]         = { { power = 320, maxCap = 570, rate = 0.6666, constant = 330, minCap = 450 }, { power = 560, maxCap = 570, rate = 1, constant = 410,  minCap = 450 }, { power = 999, maxCap = 690, rate = 2.8333,  constant = 591.2,    minCap = 450 } },
-    [xi.magic.spell.CURAGA]         = { { power = 110, maxCap = 75,  rate = 1,      constant = 20,  minCap = 60  }, { power = 170, maxCap = 75,  rate = 2, constant = 47.5, minCap = 60  }, { power = 999, maxCap = 90,  rate = 35.6666, constant = 87.62,    minCap = 60  } },
-    [xi.magic.spell.CURAGA_II]      = { { power = 180, maxCap = 160, rate = 1,      constant = 70,  minCap = 130 }, { power = 300, maxCap = 160, rate = 2, constant = 115,  minCap = 130 }, { power = 999, maxCap = 190, rate = 15.6666, constant = 180.43,   minCap = 130 } },
-    [xi.magic.spell.CURAGA_III]     = { { power = 220, maxCap = 330, rate = 0.6666, constant = 165, minCap = 270 }, { power = 460, maxCap = 330, rate = 2, constant = 275,  minCap = 270 }, { power = 999, maxCap = 390, rate = 6.5,     constant = 354.6666, minCap = 270 } },
-    [xi.magic.spell.CURAGA_IV]      = { { power = 320, maxCap = 570, rate = 0.6666, constant = 330, minCap = 450 }, { power = 560, maxCap = 570, rate = 1, constant = 410,  minCap = 450 }, { power = 999, maxCap = 690, rate = 2.8333,  constant = 591.2,    minCap = 450 } },
+    [xi.magic.spell.CURE]           = { 
+        { power = 60,  maxCap = 20,  rate = 1,       constant = -10,    minCap = 10  }, 
+        { power = 100, maxCap = 30,  rate = 2,       constant = 5,      minCap = 10  }, 
+        { power = 999, maxCap = 30,  rate = 57,      constant = 29.125, minCap = 10  } 
+    },
+    [xi.magic.spell.CURE_II]        = { 
+        { power = 110, maxCap = 75,  rate = 1,       constant = 20,      minCap = 60  }, 
+        { power = 170, maxCap = 90,  rate = 2,       constant = 47.5,    minCap = 60  }, 
+        { power = 999, maxCap = 90,  rate = 35.6666, constant = 87.62,   minCap = 60  } 
+    },
+    [xi.magic.spell.CURE_III]       = { 
+        { power = 180, maxCap = 160, rate = 1,       constant = 70,      minCap = 130 }, 
+        { power = 300, maxCap = 190, rate = 2,       constant = 115,     minCap = 130 }, 
+        { power = 999, maxCap = 190, rate = 15.6666, constant = 180.43,  minCap = 130 } 
+    },
+    [xi.magic.spell.CURE_IV]        = { 
+        { power = 220, maxCap = 330, rate = 0.6666,  constant = 165,      minCap = 270 }, 
+        { power = 460, maxCap = 390, rate = 2,       constant = 275,      minCap = 270 }, 
+        { power = 999, maxCap = 390, rate = 6.5,     constant = 354.6666, minCap = 270 } 
+    },
+    [xi.magic.spell.CURE_V]         = { 
+        { power = 320, maxCap = 570, rate = 0.6666,  constant = 330,      minCap = 450 }, 
+        { power = 560, maxCap = 690, rate = 1,       constant = 410,      minCap = 450 }, 
+        { power = 999, maxCap = 690, rate = 2.8333,  constant = 591.2,    minCap = 450 } 
+    },
+    [xi.magic.spell.CURAGA]         = { 
+        { power = 110, maxCap = 75,  rate = 1,       constant = 20,       minCap = 60  }, 
+        { power = 170, maxCap = 90,  rate = 2,       constant = 47.5,     minCap = 60  }, 
+        { power = 999, maxCap = 90,  rate = 35.6666, constant = 87.62,    minCap = 60  } 
+    },
+    [xi.magic.spell.CURAGA_II]      = { 
+        { power = 180, maxCap = 160, rate = 1,       constant = 70,       minCap = 130 }, 
+        { power = 300, maxCap = 190, rate = 2,       constant = 115,      minCap = 130 }, 
+        { power = 999, maxCap = 190, rate = 15.6666, constant = 180.43,   minCap = 130 } 
+    },
+    [xi.magic.spell.CURAGA_III]     = { 
+        { power = 220, maxCap = 330, rate = 0.6666,  constant = 165,      minCap = 270 }, 
+        { power = 460, maxCap = 390, rate = 2,       constant = 275,      minCap = 270 }, 
+        { power = 999, maxCap = 390, rate = 6.5,     constant = 354.6666, minCap = 270 } 
+    },
+    [xi.magic.spell.CURAGA_IV]      = { 
+        { power = 320, maxCap = 570, rate = 0.6666,  constant = 330,      minCap = 450 }, 
+        { power = 560, maxCap = 690, rate = 1,       constant = 410,      minCap = 450 }, 
+        { power = 999, maxCap = 690, rate = 2.8333,  constant = 591.2,    minCap = 450 } 
+    },
     [xi.magic.spell.POLLEN]         = { { power = 60,  maxCap = 24,  rate = 1,      constant = -6,  minCap = 14  }, { power = 100, maxCap = 24,  rate = 2, constant = 9,    minCap = 14  }, { power = 999, maxCap = 34,  rate = 57,      constant = 33.125,   minCap = 14  } },
     [xi.magic.spell.HEALING_BREEZE] = { { power = 220, maxCap = 120, rate = 0.6666, constant = -45, minCap = 60  }, { power = 460, maxCap = 120, rate = 2, constant = 65,   minCap = 60  }, { power = 999, maxCap = 180, rate = 6.5,     constant = 144.6666, minCap = 60  } },
     [xi.magic.spell.WILD_CARROT]    = { { power = 180, maxCap = 150, rate = 1,      constant = 60,  minCap = 120  }, { power = 300, maxCap = 150, rate = 2, constant = 105,  minCap = 120  }, { power = 999, maxCap = 180, rate = 15.6666, constant = 170.43,   minCap = 120  } },
@@ -35,9 +71,8 @@ xi.spells.healing.healingTable =
 
 xi.spells.healing.calculatePower = function(player)
     if player then
-        return 3 * player:getStat(xi.mod.MND) + player:getStat(xi.mod.VIT) + 3 * (player:getSkillLevel(xi.skill.HEALING_MAGIC) / 5)
+        return 3 * player:getStat(xi.mod.MND) + player:getStat(xi.mod.VIT) + 3 * (math.floor(player:getSkillLevel(xi.skill.HEALING_MAGIC) / 5))
     end
-
     return 0
 end
 
@@ -121,7 +156,6 @@ xi.spells.healing.applyCasterBonuses = function(caster, final, element, isWhiteM
     local equipBonuses = xi.spells.healing.getEquipBonuses(caster)
     local dwBonus = xi.spells.healing.getDayWeatherBonus(caster, element)
     local abilityBonus = xi.spells.healing.getAbilityBonus(caster, isWhiteMagic)
-
     return math.floor(((final * equipBonuses) * dwBonus) * abilityBonus)
 end
 
