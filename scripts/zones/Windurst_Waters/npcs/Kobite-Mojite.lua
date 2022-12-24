@@ -14,8 +14,8 @@ end
 entity.onTrigger = function(player, npc)
     if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
         local npcID = npc:getID()
-        local sender = player:getCharVar("[StarlightMerryMakers]Sender")
-        local confirmed = player:getCharVar("[StarlightMerryMakers]Confirmed")
+        local sender = player:getCharVar("[MerryMakers]Sender")
+        local confirmed = player:getCharVar("[MerryMakers]Confirmed")
 
         if npcID == sender or npcID == confirmed then
             xi.events.starlightCelebration.merryMakersNPCDeliverOnTrigger(player, npc, ID)
