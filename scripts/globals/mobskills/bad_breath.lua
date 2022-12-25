@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 60)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl() / 10, 3, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, math.min(1, mob:getMainLvl() / 10), 3, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 15, 0, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)

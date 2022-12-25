@@ -18,21 +18,21 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentMsg = xi.msg.basic.NONE
     local msg = xi.msg.basic.NONE
 
-    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300)
+    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 20, 0, 180)
 
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.CURSE_I
         currentMsg = msg
     end
 
-    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 100, 0, 180)
 
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.BLINDNESS
         currentMsg = msg
     end
 
-    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
+    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 60)
 
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.SLEEP_I

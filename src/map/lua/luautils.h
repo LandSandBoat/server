@@ -164,6 +164,7 @@ namespace luautils
 
     uint32 JstMidnight();
     uint32 JstWeekday();
+    uint64 ServerEpochTimeMS();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     uint8  VanadielTOTD();          // текущее игровое время суток
     uint32 VanadielHour();          // текущие Vanadiel часы
@@ -316,6 +317,7 @@ namespace luautils
     bool   CheckNMSpawnPoint(uint32 mobid);                        // Check to see if NM has extra spawn points
     void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
+    auto   GetRecentFishers() -> sol::table;                       // returns a list of recently active fishers (Fished in the last 5 minutes)
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes

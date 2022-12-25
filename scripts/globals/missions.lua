@@ -758,8 +758,21 @@ xi.mission.getMissionMask = function(player)
         -- All repeatable missions are skippable as well, so track the required
         -- missions, and only add to mask if rank and required are met
 
-        -- If 1-3 (mId 2), require 1-2 (mId 1)
-        if missionId == 2 and not player:hasCompletedMission(nation, 1) then
+        -- Special exceptions:
+        -- 1-2 is repeatable for some nations, but never skippable
+        if
+            missionId == 2 and
+            not player:hasCompletedMission(nation, 1)
+        then
+            break
+        end
+
+        -- San d'Oria 3-1 is repeatable, but not skippable
+        if
+            nation == 0 and
+            missionId > 10 and
+            not player:hasCompletedMission(0, 10)
+        then
             break
         end
 

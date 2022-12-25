@@ -15,7 +15,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local param = skill:getParam()
     if param == 0 then
-        param = 35
+        param = 33
     end
 
     if mob:getHPP() <= param then
@@ -26,22 +26,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 1
-
-    local hpMod = skill:getMobHPP() / 100
-    dmgmod = dmgmod + hpMod * 5 + math.random(1, 3)
-
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
-        dmgmod = dmgmod * 5
-    end
+    local damage = mob:getHP() * 0.5
 
     mob:setHP(0)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.LIGHT, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, 1, 1, 1)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
 
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end
 

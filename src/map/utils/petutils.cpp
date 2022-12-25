@@ -485,27 +485,6 @@ namespace petutils
             mobHP = BaseHP + (std::min(lvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(lvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(lvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((lvl - 30) * (63 + ScaleXHP) + (lvl - 31) * (JobScale + raceScale));
         }
 
-        // Mimic HP boost traits for monks
-        if (PMob->GetMJob() == JOB_MNK)
-        {
-            if (lvl >= 70)
-            {
-                mobHP += 180;
-            }
-            else if (lvl >= 55)
-            {
-                mobHP += 120;
-            }
-            else if (lvl >= 35)
-            {
-                mobHP += 60;
-            }
-            else if (lvl >= 15)
-            {
-                mobHP += 30;
-            }
-        }
-
         PMob->health.maxhp = (int16)(mobHP * petStats->HPscale);
 
         switch (PMob->GetMJob())
@@ -525,11 +504,6 @@ namespace petutils
 
         PMob->speed    = petStats->speed;
         PMob->speedsub = petStats->speed;
-
-        PMob->UpdateHealth();
-        PMob->health.tp = 0;
-        PMob->health.hp = PMob->GetMaxHP();
-        PMob->health.mp = PMob->GetMaxMP();
 
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
@@ -1293,9 +1267,11 @@ namespace petutils
     {
         // set C magic evasion
         PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel() > 99 ? 99 : PPet->GetMLevel()));
-        PPet->health.tp = 0;
         PMaster->applyPetModifiers(PPet);
+
+        // Max [HP/MP] Boost traits
         PPet->UpdateHealth();
+        PPet->health.tp = 0;
         PPet->health.hp = PPet->GetMaxHP();
         PPet->health.mp = PPet->GetMaxMP();
 

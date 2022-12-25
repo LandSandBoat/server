@@ -15,10 +15,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = mob:getWeaponDmg() * 5
+    local dmgmod = mob:getMobWeaponDmg(xi.slot.MAIN) * 6
 
     if mob:getZoneID() == bit.bor(xi.zone.TEMENOS, xi.zone.APOLLYON) then
-        dmgmod = mob:getWeaponDmg() * 7
+        dmgmod = mob:getMobWeaponDmg(xi.slot.MAIN) * 7
     end
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.SPECIAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)

@@ -2872,7 +2872,15 @@ namespace charutils
                     auto      maxCharges = 0;
                     if (charge)
                     {
-                        chargeTime = charge->chargeTime - PChar->PMeritPoints->GetMeritValue((MERIT_TYPE)charge->merit, PChar);
+                        uint8 meritRecastReduction = PChar->PMeritPoints->GetMeritValue((MERIT_TYPE)charge->merit, PChar);
+
+                        // Ready is 2sec/merit (Sic is 4sec/merit so divide by 2)
+                        if (PAbility->getMeritModID() == 902)
+                        {
+                            meritRecastReduction /= 2;
+                        }
+
+                        chargeTime = charge->chargeTime - meritRecastReduction;
                         maxCharges = charge->maxCharges;
                     }
                     if (!PChar->PRecastContainer->Has(RECAST_ABILITY, PAbility->getRecastId()))

@@ -913,12 +913,26 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
         end,
 
+        [640] = function() -- PM5-3 U3: Flames for the Dead
+            return promathiaMission == xi.mission.id.cop.THREE_PATHS and
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8 and
+                npcId == getEntranceOffset(0)
+        end,
+
         [641] = function() -- ENM: Follow the White Rabbit
             return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(2)
         end,
 
         [642] = function() -- ENM: When Hell Freezes Over
             return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(4)
+        end,
+
+        [643] = function() -- ENM: Brothers
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(6)
+        end,
+
+        [644] = function() -- ENM: Holy Cow
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(8)
         end,
 
         [672] = function() -- PM5-3 U2: Head Wind
@@ -1120,86 +1134,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return toauMission == xi.mission.id.toau.PUPPET_IN_PERIL and toauStatus == 1
         end,
 
-        [1290] = function() -- NW Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.RED_CARD) and
-                npcId == getEntranceOffset(0)
-        end,
-
-        [1291] = function() -- SW Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.RED_CARD) and
-                npcId == getEntranceOffset(0)
-        end,
-
-        [1292] = function() -- NE Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.BLACK_CARD) and
-                npcId == getEntranceOffset(1)
-        end,
-
-        [1293] = function() -- SE Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.BLACK_CARD) and
-                npcId == getEntranceOffset(1)
-        end,
-
-        [1294] = function() -- CS Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-            (
-                (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
-                (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
-            )
-        end,
-
-        [1296] = function() -- Central Apollyon
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                (
-                    (player:hasKeyItem(xi.ki.RED_CARD) and npcId == getEntranceOffset(0)) or
-                    (player:hasKeyItem(xi.ki.BLACK_CARD) and npcId == getEntranceOffset(1))
-                )
-        end,
-
-        [1298] = function() -- Temenos Western Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1299] = function() -- Temenos Northern Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1300] = function() -- Temenos Eastern Tower
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1301] = function() -- Central Temenos Basement
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1303] = function() -- Central Temenos 1st Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1304] = function() -- Central Temenos 2nd Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1305] = function() -- Central Temenos 3rd Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
-        [1306] = function() -- Central Temenos 4th Floor
-            return player:hasKeyItem(xi.ki.COSMO_CLEANSE) and
-                player:hasKeyItem(xi.ki.WHITE_CARD)
-        end,
-
         [2721] = function() -- WOTG07: Purple, The New Black
             return player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.PURPLE_THE_NEW_BLACK and
                 player:getMissionStatus(xi.mission.log_id.WOTG) == 1
@@ -1243,15 +1177,25 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [640] = function() -- PM5-3 U3: Flames for the Dead
-            return npc:getXPos() > -721 and npc:getXPos() < 719
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+            (player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8)
+            and npcId == getEntranceOffset(0)
         end,
 
         [641] = function() -- ENM: Follow the White Rabbit
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(2)
         end,
 
         [642] = function() -- ENM: When Hell Freezes Over
-            return player:hasKeyItem(xi.ki.ZEPHYR_FAN)
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(4)
+        end,
+
+        [643] = function() -- ENM: Brothers
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(6)
+        end,
+
+        [644] = function() -- ENM: Holy Cow
+            return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(8)
         end,
 
         [673] = function() -- ENM: Like the Wind
@@ -1668,6 +1612,14 @@ local function checkSkip(player, bfid)
                 player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
+        [640] = function() -- PM5-3 U3: Flames for the Dead
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                (
+                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
+                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 8
+                )
+        end,
+
         [672] = function() -- PM5-3 U2: Head Wind
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
                 (
@@ -2039,29 +1991,6 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
         local clearTime = 1
         local name      = "Meme"
         local partySize = 1
-
-        switch (battlefieldId): caseof
-        {
-            [1301] = function() -- Central_Temenos_Basement
-                area = 8
-            end,
-
-            [1303] = function() -- Central_Temenos_1st_Floor
-                area = 7
-            end,
-
-            [1304] = function() -- Central_Temenos_2nd_Floor
-                area = 6
-            end,
-
-            [1305] = function() -- Central_Temenos_3rd_Floor
-                area = 5
-            end,
-
-            [1306] = function() -- Central_Temenos_4th_Floor
-                area = 4
-            end,
-        }
 
         local result = xi.battlefield.returnCode.REQS_NOT_MET
         result       = player:registerBattlefield(id, area)

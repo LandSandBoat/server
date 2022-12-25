@@ -24,6 +24,7 @@ entity.onMobDespawn = function(mob)
     phIndex = (phIndex % 3) + 1
     ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
     ph:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
+    SetServerVariable("[Taisai]TimeToGrow", mob:getLocalVar("timeToGrow"))
     ph:setLocalVar("phIndex", phIndex)
 end
 

@@ -14,14 +14,25 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getAnimationSub() == 6  then
+        return 1
+    end
+
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3 -- should be number of bombs left
     local accmod = 1
-    local dmgmod = math.random(0.5, 1)
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local bombNum = 2 -- Base FTP
+
+    if mob:getAnimationSub() == 4 then
+        bombNum = bombNum + 3
+    elseif mob:getAnimationSub() == 5 then
+        bombNum = bombNum + 2
+    end
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, bombNum, bombNum, bombNum)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

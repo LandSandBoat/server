@@ -150,25 +150,29 @@ xi.moghouse.moogleTrigger = function(player, npc)
                 local treePlaced = player:getCharVar("[StarlightMisc]TreePlaced")
                 local placedDay = player:getCharVar("[StarlightMisc]TreeTimePlaced")
                 local earnedReward = player:getCharVar("[StarlightMisc]DreamHatHQ")
+                local hasItem = player:hasItem(xi.items.DREAM_HAT_P1)
+                local hasPresent = player:hasItem(xi.items.SPECIAL_PRESENT)
                 local currentDay = VanadielUniqueDay()
 
-                if (treePlaced ~= 0 and earnedReward ~= 1) then
-                    local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
-                    local bastokanTree = player:getCharVar("[StarlightMisc]BastokanTree")
-                    local windurstianTree = player:getCharVar("[StarlightMisc]WindurstianTree")
-                    local jeunoanTree = player:getCharVar("[StarlightMisc]JeunoanTree")
-                    local holidayFame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
+                if treePlaced ~= 0 then
+                    if (earnedReward ~= 1) or (not hasItem and not hasPresent) then
+                        local sandOrianTree = player:getCharVar("[StarlightMisc]SandOrianTree")
+                        local bastokanTree = player:getCharVar("[StarlightMisc]BastokanTree")
+                        local windurstianTree = player:getCharVar("[StarlightMisc]WindurstianTree")
+                        local jeunoanTree = player:getCharVar("[StarlightMisc]JeunoanTree")
+                        local holidayFame = player:getFameLevel(xi.quest.fame_area.HOLIDAY)
 
-                    if (placedDay < currentDay) then
-                        if holidayFame == 9 then
-                            if sandOrianTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 86)
-                            elseif bastokanTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 115)
-                            elseif windurstianTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 116)
-                            elseif jeunoanTree == 1 then
-                                player:startEvent(30017, 0, 0, 0, 138)
+                        if (placedDay < currentDay) then
+                            if holidayFame == 9 then
+                                if sandOrianTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 86)
+                                elseif bastokanTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 115)
+                                elseif windurstianTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 116)
+                                elseif jeunoanTree == 1 then
+                                    player:startEvent(30017, 0, 0, 0, 138)
+                                end
                             end
                         end
                     end
@@ -195,8 +199,13 @@ end
 
 xi.moghouse.moogleEventFinish = function(player, csid, option)
     if csid == 30017 and option == 0 then
+        local invAvailable = player:getFreeSlotsCount()
+
+        if invAvailable ~= 0 then
+            player:setCharVar("[StarlightMisc]DreamHatHQ", 1)
+        end
+
         npcUtil.giveItem(player, 5269)
-        player:setCharVar("[StarlightMisc]DreamHatHQ", 1)
     end
 end
 
@@ -350,4 +359,23 @@ xi.moghouse.onEventFinishRentARoom = function(player, csid, option)
             player:setCharVar("[Moghouse]Rent-a-room", player:getZone():getRegionID())
         end
     end
+end
+
+xi.moghouse.isRented = function(player)
+    local playerzone = player:getZoneID()
+    local isrentexempt = (playerzone >= xi.zone.SOUTHERN_SAN_DORIA_S and playerzone <= xi.zone.WINDURST_WATERS_S) or (playerzone >= xi.zone.WESTERN_ADOULIN and playerzone <= xi.zone.EASTERN_ADOULIN)
+
+    if isrentexempt or not xi.settings.map.RENT_A_ROOM then
+        return true
+    end
+
+    local playerregion = player:getZone():getRegionID()
+    local ishomenation = playerregion == xi.moghouse.nationRegionBits[player:getNation()]
+    local isrentedcity = playerregion == player:getCharVar("[Moghouse]Rent-a-room")
+
+    if xi.settings.map.RENT_A_ROOM and utils.ternary(xi.settings.map.ERA_RENT_A_ROOM, isrentedcity, ishomenation or isrentedcity) then
+        return true
+    end
+
+    return false
 end

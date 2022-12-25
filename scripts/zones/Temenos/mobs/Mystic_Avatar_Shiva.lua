@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Temenos Eastern Temenos
+-- Area: Central Temenos 2nd Floor
 --  Mob: Mystic Avatar (Shiva)
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }

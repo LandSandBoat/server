@@ -327,6 +327,11 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         charutils::SaveZonesVisited(PChar);
         charutils::SavePlayTime(PChar);
 
+        if (PChar->getCharVar("Monstrosity") != 0)
+        {
+            PChar->m_Monstrosity = PChar->getCharVar("Monstrosity");
+        }
+
         if (PChar->m_moghouseID != 0)
         {
             PChar->m_charHistory.mhEntrances++;

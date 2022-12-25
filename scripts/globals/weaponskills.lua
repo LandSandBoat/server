@@ -239,7 +239,11 @@ xi.weaponskills.getRangedHitRate = function(attacker, target, capHitRate, bonus,
         bonus = 0
     end
 
-    if wsParams and wsParams.acc100 ~= 0 then
+    local acc100 = (wsParams and wsParams.acc100) or 0
+    local acc200 = (wsParams and wsParams.acc200) or 0
+    local acc300 = (wsParams and wsParams.acc300) or 0
+
+    if acc100 ~= 0 and acc200 ~= 0 and acc300 ~= 0 then
         if calcParams.tp >= 3000 then
             accVarryTP = (wsParams.acc300 - 1) * 100
         elseif calcParams.tp >= 2000 then
@@ -1006,7 +1010,11 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     local accVarryTP = 0
 
-    if wsParams and wsParams.acc100 ~= 0 then
+    local acc100 = (wsParams and wsParams.acc100) or 0
+    local acc200 = (wsParams and wsParams.acc200) or 0
+    local acc300 = (wsParams and wsParams.acc300) or 0
+
+    if acc100 ~= 0 and acc200 ~= 0 and acc300 ~= 0 then
         if calcParams.tp >= 3000 then
             accVarryTP = wsParams.acc300 - 1
         elseif calcParams.tp >= 2000 then
@@ -1083,7 +1091,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local atkmulti = 0
 
     if params.atk150 ~= nil then -- Use mob fTP
-        atkmulti = 1 -- Temp fix in prep for re-write. Always set multi to 1.
+        atkmulti = xi.weaponskills.fTP(tp, params.atk000, params.atk150, params.atk300) -- Calculates attack modifier for mobs
     else -- Use player fTP to scale the attack modifier
         atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
     end

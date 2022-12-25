@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:addStatusEffect(xi.effect.PROTECT, 60, 0, duration)
     mob:addStatusEffect(xi.effect.SHELL, 60, 0, duration)
     mob:addStatusEffect(xi.effect.HASTE, 2000, 0, duration) -- 20% haste
-    mob:addStatusEffect(xi.effect.REGEN, regenPower, 0, duration)
+    mob:addStatusEffect(xi.effect.REGEN, regenPower, 3, duration)
 
     mob:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.BLINK)
 end

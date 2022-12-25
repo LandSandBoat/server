@@ -19,9 +19,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local tpReduced = 0
     target:setTP(tpReduced)
 
-    xi.mobskills.mobGazeMove(mob, target, xi.effect.BLINDNESS, 20, 0, 120)
+    local duration = math.random(30, 60)
 
-    xi.mobskills.mobGazeMove(mob, target, xi.effect.BIND, 1, 0, 30)
+    xi.mobskills.mobGazeMove(mob, target, xi.effect.BLINDNESS, 100, 0, duration)
+    xi.mobskills.mobGazeMove(mob, target, xi.effect.BIND, 1, 0, duration)
 
     skill:setMsg(xi.msg.basic.TP_REDUCED)
 

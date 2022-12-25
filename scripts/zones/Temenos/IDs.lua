@@ -37,58 +37,6 @@ zones[xi.zone.TEMENOS] =
         CANNOT_OPEN_CHEST             = 7567, -- You cannot open the treasure chest now.
         GATE_OPEN                     = 7568, -- he gate opens...
     },
-    mob =
-    {
-        TEMENOS_C_MOB =
-        {
-            16929046,
-            16929030,
-            16929005,
-            16928966,
-            16929053,
-        }
-    },
-    npc =
-    {
-        TEMENOS_C_GATE =
-        {
-            16929219,
-            16929220,
-            16929221,
-            16929222,
-            16929218,
-        },
-        TEMENOS_C_CRATE =
-        {
-            16929045,
-            16929029,
-            16929004,
-            [4] =
-            {
-                [1] = 16928965, -- boss
-                [16928967] = 1, -- NE corner
-                [16928968] = 1, -- SE corner
-                [16928969] = 1, -- SW corner
-                [16928970] = 1, -- NW corner
-                [16928971] = 2, -- center
-                [16928972] = 2, -- E
-                [16928973] = 2, -- E
-                [16928974] = 2, -- E
-                [16928975] = 2, -- W
-                [16928976] = 2, -- W
-                [16928977] = 2, -- W
-                [16928978] = 3, -- SW
-                [16928979] = 3, -- SW
-                [16928980] = 3, -- SW
-                [16928981] = 3, -- SW
-                [16928982] = 3, -- SE
-                [16928983] = 3, -- SE
-                [16928984] = 3, -- SE
-                [16928985] = 3, -- SE
-            },
-            [5] = 16929052, -- basement 1 boss
-        },
-    },
 
     TEMENOS_NORTHERN_TOWER =
     {
@@ -246,6 +194,53 @@ zones[xi.zone.TEMENOS] =
         npc =
         {
             LOOT_CRATE = 16929045,
+        }
+    },
+
+    CENTRAL_TEMENOS_2ND_FLOOR =
+    {
+        npc =
+        {
+            LOOT_CRATE = 16929029,
+        }
+    },
+
+    CENTRAL_TEMENOS_3RD_FLOOR =
+    {
+        npc =
+        {
+            LOOT_CRATE = 16929004,
+        }
+    },
+
+    CENTRAL_TEMENOS_4TH_FLOOR =
+    {
+        npc =
+        {
+            LOOT_CRATE = 16928965,
+            GROUPS =
+            {
+                { offset = 16928967, count = 4 },
+                { offset = 16928971, count = 7 },
+                { offset = 16928978, count = 8 },
+            },
+        },
+        mob =
+        {
+            GROUPS =
+            {
+                { offset = 16928986, count = 3 },
+                { offset = 16928991, count = 6 },
+                { offset = 16928997, count = 7 },
+            },
+        },
+    },
+
+    CENTRAL_TEMENOS_BASEMENT =
+    {
+        npc =
+        {
+            LOOT_CRATE = 16929052,
         }
     },
 }

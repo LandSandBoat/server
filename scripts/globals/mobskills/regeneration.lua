@@ -17,13 +17,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = ((mob:getMainLvl() - 3) / 2)
+    local power = math.min(1, math.floor(((mob:getMainLvl() - 3) / 2)))
     local duration = 60
 
-    local typeEffect = xi.effect.REGEN
+    if
+        mob:getFamily() == 218 or
+        mob:getFamily() == 219
+    then
+        power = math.min(1, math.floor(((mob:getMainLvl() - 1) / 2) / 2))
+        duration = 300
+    end
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 3, duration))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, power, 3, duration))
+    return xi.effect.REGEN
 end
 
 return mobskillObject

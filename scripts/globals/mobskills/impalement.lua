@@ -14,19 +14,17 @@ require("scripts/globals/magic")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+        return 0
+    end
+
+    return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
+    local damage = target:getHP() * 0.95
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 0, 120)
-    local currentHP = target:getHP()
-    -- remove all by 5%
-    local stab = currentHP * .95
-
-    local dmg = xi.mobskills.mobFinalAdjustments(stab, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-
+    local dmg = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
     mob:resetEnmity(target)

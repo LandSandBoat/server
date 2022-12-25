@@ -35,12 +35,23 @@ xi.confrontation.lookup = {}
 xi.confrontation.check = function(lookupKey, setupTimer)
     -- Get the list of mobs from the
     local lookup = xi.confrontation.lookup[lookupKey]
+
+    -- lookup can be nil when killing final mob triggers this function as well
+    -- yet the next scheduled check is still in the queue
+    -- in this case just escape this check
+    if not lookup then
+        return
+    end
+
     local didWin = false
     local didLose = false
 
     local players = {}
     for _, id in ipairs(lookup.registeredPlayerIds) do
-        table.insert(players, GetPlayerByID(id))
+        local player = GetPlayerByID(id)
+        if player then
+            table.insert(players, player)
+        end
     end
 
     local mobs = {}
@@ -54,6 +65,7 @@ xi.confrontation.check = function(lookupKey, setupTimer)
         if
             m:isAlive() and
             m:getZoneID() == lookup.npc:getZoneID() and
+            m:hasStatusEffect(xi.effect.CONFRONTATION) and
             m:getStatusEffect(xi.effect.CONFRONTATION):getPower() == lookupKey
         then
             validPlayerCount = validPlayerCount + 1
@@ -62,6 +74,12 @@ xi.confrontation.check = function(lookupKey, setupTimer)
 
     if validPlayerCount == 0 then
         didLose = true
+    end
+
+    if lookup.endTime then
+        if os.time() > lookup.endTime then
+            didLose = true
+        end
     end
 
     -- Check to see if the mobs are still valid
@@ -83,7 +101,9 @@ xi.confrontation.check = function(lookupKey, setupTimer)
     if didWin or didLose then
         for _, member in ipairs(players) do
             -- Clear effect
-            member:delStatusEffect(xi.effect.CONFRONTATION)
+            if member:hasStatusEffect(xi.effect.CONFRONTATION) then
+                member:delStatusEffectSilent(xi.effect.CONFRONTATION)
+            end
 
             -- Fire callbacks
             if didWin and type(lookup.onWin) == "function" then
@@ -93,16 +113,19 @@ xi.confrontation.check = function(lookupKey, setupTimer)
             end
         end
 
-        -- Despawn Mobs
-        for _, mob in ipairs(mobs) do
-            if mob:isSpawned() then
-                DespawnMob(mob:getID())
+        -- if lost then despawn mobs, if won then can let dead mobs despawn normally
+        if didLose then
+            for _, mob in ipairs(mobs) do
+                if mob:isSpawned() then
+                    DespawnMob(mob:getID())
+                end
             end
         end
 
         xi.confrontation.lookup[lookupKey] = nil
     else -- Check again soon
         if setupTimer then
+            xi.confrontation.lookup[lookupKey].elapsedConfrontationTime = lookup.elapsedConfrontationTime + 2400
             lookup.npc:timer(2400, function(npcArg)
                 xi.confrontation.check(bit.rshift(npcArg:getID(), 16), true)
             end)
@@ -110,9 +133,14 @@ xi.confrontation.check = function(lookupKey, setupTimer)
     end
 end
 
-xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
+xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc, params)
     -- Generate lookup ID from spawn npc data
     local lookupKey = bit.rshift(npc:getID(), 16)
+
+     -- default params
+    if not params then
+        params = {}
+    end
 
     -- Extract mobIds
     local mobs = {}
@@ -128,15 +156,26 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
 
     mobIds = mobs
 
+    --if no valid validPlayerFunc param then let all pass
+    if (not params.validPlayerFunc) or (type(params.validPlayerFunc) ~= "function") then
+        params.validPlayerFunc = function(member) return true end
+    end
+
     -- Tag alliance members with the confrontation effect
     local registeredPlayerIds = {}
+    local registeredPlayers = {}
     local alliance = player:getAlliance()
     for _, member in ipairs(alliance) do
-        -- Using the pop npc's ID as the "key"
-        member:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
-        local effect = member:getStatusEffect(xi.effect.CONFRONTATION)
-        effect:setFlag(effect:getFlag() + xi.effectFlag.ON_ZONE)
-        table.insert(registeredPlayerIds, member:getID())
+        -- only add players that fit some passed in criteria function
+        -- like a function that checks level sync effect
+        if params.validPlayerFunc(member) then
+            -- Using the pop npc's ID as the "key"
+            member:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
+            local effect = member:getStatusEffect(xi.effect.CONFRONTATION)
+            effect:setFlag(effect:getFlag() + xi.effectFlag.ON_ZONE)
+            table.insert(registeredPlayerIds, member:getID())
+            table.insert(registeredPlayers, member)
+        end
     end
 
     -- Tag mobs with the confrontation effect
@@ -156,9 +195,18 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
     xi.confrontation.lookup[lookupKey].mobIds = mobIds
     xi.confrontation.lookup[lookupKey].onWin = winFunc
     xi.confrontation.lookup[lookupKey].onLose = loseFunc
+    xi.confrontation.lookup[lookupKey].elapsedConfrontationTime = 0
+    if params.timeLimit then
+        xi.confrontation.lookup[lookupKey].endTime = os.time() + params.timeLimit
+    end
 
-    -- Pop!
-    npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1 })
+    -- Pop with enmity to all registeredPlayers
+    if params.allRegPlayerEnmity then
+        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1, enmityPlayerList = registeredPlayers })
+    -- Pop with claim and enmity only to player popping
+    else
+        npcUtil.popFromQM(player, npc, mobIds, { look = true, claim = true, hide = 1 })
+    end
 
     -- Set up timed checks
     xi.confrontation.check(lookupKey, true)

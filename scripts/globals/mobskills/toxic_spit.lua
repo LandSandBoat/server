@@ -17,9 +17,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.POISON
-    local power = mob:getMainLvl()/5 + 3
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 180)
+    local power = mob:getMainLvl() / 5 + 3
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, 180)
 end
 
 return mobskillObject
