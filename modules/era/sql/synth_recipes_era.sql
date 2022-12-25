@@ -1375,6 +1375,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Salmon Roe' AN
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Rainbow Powder' AND ID = 63503;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Honey' AND ID = 70507;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Mercury' AND ID = 60515;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Himantes' AND ID = 42503;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1550,7 +1551,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Chocobo Blink
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Armored Ring' AND ID = 41022;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Aiming Gloves' AND ID = 41034;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Frigid Skin' AND ID = 42501;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Himantes' AND ID = 42503;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Raptor Strap' AND ID = 42508;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Noble Himantes' AND ID = 42513;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Ice Trousers' AND ID = 42520;
