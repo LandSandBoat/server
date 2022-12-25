@@ -3,19 +3,17 @@
 -- San d'Oria M6-1
 -----------------------------------
 -- !addmission 0 16
--- Ambrotien            : !pos 93.419 -0.001 -57.347 230
--- Grilau               : !pos -241.987 6.999 57.887 231
--- Endracion            : !pos -110 1 -34 230
--- Halver               : !pos 2 0.1 0.1 233
--- Door: Great Hall     : !pos 0 -1 13 233
--- Chalvatot            : !pos -105 0.1 72 233
--- Dreamrose            : !pos -262.403 -10.155 49.164 125
+-- Ambrotien        : !pos 93.419 -0.001 -57.347 230
+-- Grilau           : !pos -241.987 6.999 57.887 231
+-- Endracion        : !pos -110 1 -34 230
+-- Halver           : !pos 2 0.1 0.1 233
+-- Door: Great Hall : !pos 0 -1 13 233
+-- Chalvatot        : !pos -105 0.1 72 233
+-- Dreamrose        : !pos -262.403 -10.155 49.164 125
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -27,7 +25,7 @@ local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.L
 mission.reward =
 {
     rankPoints = 600,
-    keyItem = xi.ki.PIECE_OF_PAPER,
+    keyItem    = xi.ki.PIECE_OF_PAPER,
 }
 
 local handleAcceptMission = function(player, csid, option, npc)
@@ -71,14 +69,20 @@ mission.sections =
 
         [xi.zone.CHATEAU_DORAGUILLE] =
         {
-            ['Chalvatot'] =
+            ['Arsha'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        player:getMissionStatus(mission.areaId) == 4 and
-                        player:hasKeyItem(xi.ki.DREAMROSE)
-                    then
-                        return mission:progressEvent(111)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:progressEvent(85)
+                    end
+                end,
+            },
+
+            ['Chupaile'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getMissionStatus(mission.areaId) == 1 then
+                        return mission:progressEvent(86)
                     end
                 end,
             },
@@ -105,6 +109,18 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
                         return mission:progressEvent(87)
+                    end
+                end,
+            },
+
+            onTriggerAreaEnter =
+            {
+                [2] = function(player, triggerArea)
+                    if
+                        player:getMissionStatus(mission.areaId) == 4 and
+                        player:hasKeyItem(xi.ki.DREAMROSE)
+                    then
+                        return mission:progressEvent(111)
                     end
                 end,
             },
