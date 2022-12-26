@@ -10,6 +10,7 @@ return {
     ['Chemioue']         = { event = 280 },
     ['Despachiaire']     = { event = 106 }, -- NOTE: 0-Parameter values appear to be default, but this has multiple outputs
     ['Dominec']          = { event = 380 },
+    ['Elysia']           = { event = 190 },
     ['Epinolle']         = { event = 230 },
     ['Equette']          = { event = 162 },
     ['Evindigar']        = { event = 361 },
