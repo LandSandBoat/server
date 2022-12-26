@@ -2781,6 +2781,7 @@ xi.items =
     PARANA_SHIELD                   = 12298,
     ASPIS                           = 12299,
     TARGE                           = 12300,
+    FISH_SCALE_SHIELD               = 12316,
     FLAME_SHIELD                    = 12317,
     TOWER_SHIELD                    = 12324,
     MASTER_SHIELD                   = 12344,
