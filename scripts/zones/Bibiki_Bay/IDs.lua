@@ -73,8 +73,9 @@ zones[xi.zone.BIBIKI_BAY] =
             16793714,
             16793715,
         },
-        DALHAM = 16793928,
-        SHEN   = 16793929,
+        DALHAM       = 16793928,
+        SHEN         = 16793929,
+        ROHEMOLIPAUD = 16793927,
     },
     npc =
     {

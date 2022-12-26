@@ -655,7 +655,7 @@ xi.quest.id =
         THE_IMMORTAL_LU_SHANG           = 196, -- ±
         TRIAL_SIZE_TRIAL_BY_WIND        = 197, -- ±
         CHASING_DREAMS                  = 199, -- + Converted
-        THE_SEARCH_FOR_GOLDMANE         = 200,            -- CoP Quest
+        THE_SEARCH_FOR_GOLDMANE         = 200, -- + Converted
         INDOMITABLE_SPIRIT              = 201, -- ±
     },
 
