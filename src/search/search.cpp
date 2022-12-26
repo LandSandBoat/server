@@ -214,6 +214,18 @@ int32 main(int32 argc, char** argv)
         return 1;
     }
 
+    // https://stackoverflow.com/questions/3229860/what-is-the-meaning-of-so-reuseaddr-setsockopt-option-linux
+    // Avoid hangs in TIME_WAIT state of TCP
+#ifdef WIN32
+    // Windows doesn't seem to have this problem, but apparently this would be the right way to explicitly mimic SO_REUSEADDR unix's behavior.
+    setsockopt(ListenSocket, SOL_SOCKET, SO_DONTLINGER, "\x00\x00\x00\x00", 4);
+#else
+    int enable = 1;
+    if (setsockopt(ListenSocket, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+    {
+        ShowError("setsockopt SO_REUSEADDR failed!");
+    }
+#endif
     // Setup the TCP listening socket
     iResult = bind(ListenSocket, result->ai_addr, (int)result->ai_addrlen);
     if (iResult == SOCKET_ERROR)
