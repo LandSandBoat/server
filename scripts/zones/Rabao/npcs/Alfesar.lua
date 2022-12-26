@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Rabao
 --  NPC: Alfesar
---Starts The Missing Piece
+-- Starts The Missing Piece
+-- !addquest 5 193
+-- !pos 22 8 40 247
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
@@ -19,25 +21,27 @@ entity.onTrigger = function(player, npc)
     local fame = player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO)
 
     if theMissingPiece == QUEST_AVAILABLE and fame >= 4 then -- start quest
-        player:startEvent(6)
+        player:startEvent(6, xi.ki.ANCIENT_TABLET_FRAGMENT)
     elseif
         theMissingPiece == QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+        not player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT) and
+        not player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
     then
         -- talk to again with quest activated
-        player:startEvent(7)
+        player:startEvent(7, xi.ki.ANCIENT_TABLET_FRAGMENT)
     elseif
         theMissingPiece == QUEST_ACCEPTED and
-        player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+        player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT) and
+        not player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
     then
         -- successfully retrieve key item
-        player:startEvent(8)
+        player:startEvent(8, xi.ki.ANCIENT_TABLET_FRAGMENT)
     elseif
         theMissingPiece == QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
     then
         -- They got their Key items. tell them to goto sandy
-        player:startEvent(9)
+        player:startEvent(9, 0, xi.ki.ANCIENT_TABLET_FRAGMENT)
     else
         player:startEvent(52) -- standard dialogue
     end

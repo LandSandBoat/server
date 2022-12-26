@@ -3,12 +3,12 @@
 --  NPC: ??? (qm5)
 -- Involved in Quest: The Missing Piece
 -- positions:
--- 1: !pos 770 0 -419
--- 2: !pos 657 0 -537
--- 3: !pos 749 0 -573
--- 4: !pos 451 -16 -739
--- 5: !pos 787 -16 -819
--- spawn in npc_list is 770 0 -419
+-- 1: !pos 770 0 -419 208
+-- 2: !pos 657 0 -537 208
+-- 3: !pos 749 0 -573 208
+-- 4: !pos 451 -16 -739 208
+-- 5: !pos 787 -16 -819 208
+-- spawn in npc_list is 770 0 -419 208
 -----------------------------------
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/keyitems")
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         theMissingPiece == QUEST_ACCEPTED and
         not hasAncientTablet and
         not hasAncientFragment and
-        not player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM
+        player:getTitle() ~= xi.title.ACQUIRER_OF_ANCIENT_ARCANUM
     then
         player:addKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_TABLET_FRAGMENT)

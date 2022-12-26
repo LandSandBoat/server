@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Charlaimagnat
+-- !pos 125 6 111 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")
