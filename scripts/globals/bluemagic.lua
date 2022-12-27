@@ -488,7 +488,12 @@ xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
     target:addHP(final)
     target:wakeUp()
     caster:updateEnmityFromCure(target, final)
-    spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+
+    if target:getID() == spell:getPrimaryTargetID() then
+        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    else
+        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+    end
 
     return final
 end

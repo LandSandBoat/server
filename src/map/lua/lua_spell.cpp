@@ -91,6 +91,11 @@ void CLuaSpell::setCastTime(uint32 casttime)
     m_PLuaSpell->setCastTime(casttime);
 }
 
+uint32 CLuaSpell::getPrimaryTargetID()
+{
+    return m_PLuaSpell->getPrimaryTargetID();
+}
+
 bool CLuaSpell::canTargetEnemy()
 {
     return m_PLuaSpell->canTargetEnemy();
@@ -176,6 +181,7 @@ void CLuaSpell::Register()
     SOL_REGISTER("getSpellFamily", CLuaSpell::getSpellFamily);
     SOL_REGISTER("getFlag", CLuaSpell::getFlag);
     SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
+    SOL_REGISTER("getPrimaryTargetID", CLuaSpell::getPrimaryTargetID);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaSpell& spell)

@@ -21,6 +21,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    --  TODO: get capture of messages, message may be the following:
+    --[[
+    if target:getID() == target:getID() then
+        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    else
+        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+    end
+    --]]
     skill:setMsg(xi.msg.basic.SKILL_RECOVERS_HP)
     -- Todo: verify/correct maths
     return xi.mobskills.mobHealMove(mob, math.floor(mob:getHP() / 7) * 2)
