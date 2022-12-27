@@ -3209,11 +3209,13 @@ void CLuaBaseEntity::goToEntity(uint32 targetID, sol::object const& option)
 
 bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    bool found = false;
 
-    bool        found    = false;
+    char escapedCharName[16 * 2 + 1];
+    sql->EscapeString(escapedCharName, playerName.c_str());
+
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret      = sql->Query(fmtQuery, playerName.c_str());
+    int32       ret      = sql->Query(fmtQuery, escapedCharName);
 
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
@@ -3241,8 +3243,11 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
 {
     bool found = false;
 
+    char escapedCharName[16 * 2 + 1];
+    sql->EscapeString(escapedCharName, playerName.c_str());
+
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret      = sql->Query(fmtQuery, playerName.c_str());
+    int32       ret      = sql->Query(fmtQuery, escapedCharName);
 
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
