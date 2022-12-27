@@ -1275,8 +1275,8 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
     if player:getCP() < price then
         if
             not (option <= 32933 and
-            option >= 32935 and
-            player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER))
+            option >= 32935) or
+            player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
         then
             player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
             return -1
