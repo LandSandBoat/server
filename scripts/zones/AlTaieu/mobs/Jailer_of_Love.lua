@@ -20,6 +20,15 @@ local minionGroup =
     [7] = 25, -- Qnhpemde
 }
 
+entity.onMobInitialize = function(mob)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+end
+
+entity.onMobSpawn = function(mob)
+end
+
 entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)
@@ -76,9 +85,11 @@ entity.onMobFight = function(mob, target)
                 SpawnMob(phuaboDn[i]):updateEnmity(target)
             end
         end
-
         mob:setLocalVar("SPAWNS", spawns + 1)
     end
+end
+
+entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
