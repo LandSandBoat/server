@@ -54,6 +54,15 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
 
+    -- If player has Diabolos's Pole equipped and dark weather, HP drained is enhanced by 25%
+    if
+        not caster:isMob() and
+        caster:getCharVar("Diaboloss_Pole") == 1 and
+        (caster:getWeather() == xi.weather.GLOOM or caster:getWeather() == xi.weather.DARKNESS)
+    then
+        dmg = dmg + (dmg * 0.25)
+    end
+
     local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()
     local overHeal = (leftOver / caster:getMaxHP()) * 100
     if caster:hasStatusEffect(xi.effect.WEAKNESS) then

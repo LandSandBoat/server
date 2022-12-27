@@ -14,32 +14,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unforgiven = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
-
-    if unforgiven == QUEST_ACCEPTED and player:getCharVar("UnforgivenVar") == 1 then
-        player:startEvent(204) -- Dialogue for final stage of Unforgiven Quest
-    elseif
-        unforgiven == QUEST_COMPLETED and
-        player:getCharVar("UnforgivenVar") == 2
-    then
-        player:startEvent(206) -- Dialogue after completing quest (optional)
-    else
-        player:startEvent(371) -- Default Dialogue TODO: Dialogue default is 192 before Unforgiven, so this might change
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 204 then
-        player:setCharVar("UnforgivenVar", 2)
-        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_TAVNAZIA)
-        player:addGil(2000 * xi.settings.main.GIL_RATE)
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
-    elseif csid == 206 then
-        player:setCharVar("UnforgivenVar", 0)
-    end
 end
 
 return entity

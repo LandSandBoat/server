@@ -557,7 +557,7 @@ xi.quest.id =
         GO_GO_GOBMUFFIN                 = 69, -- + Converted
         THE_BIG_ONE                     = 70,
         FLY_HIGH                        = 71, -- ±
-        UNFORGIVEN                      = 72, -- +
+        UNFORGIVEN                      = 72, -- + Converted
         SECRETS_OF_OVENS_LOST           = 73,
         PETALS_FOR_PARELBRIAUX          = 74, -- + Converted
         ELDERLY_PURSUITS                = 75,
@@ -654,8 +654,8 @@ xi.quest.id =
         THE_KUFTAL_TOUR                 = 195, -- ± Converted
         THE_IMMORTAL_LU_SHANG           = 196, -- ±
         TRIAL_SIZE_TRIAL_BY_WIND        = 197, -- ±
-        CHASING_DREAMS                  = 199,            -- CoP Quest
-        THE_SEARCH_FOR_GOLDMANE         = 200,            -- CoP Quest
+        CHASING_DREAMS                  = 199, -- + Converted
+        THE_SEARCH_FOR_GOLDMANE         = 200, -- + Converted
         INDOMITABLE_SPIRIT              = 201, -- ±
     },
 

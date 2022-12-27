@@ -59,7 +59,8 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        return quest:progressEvent(120)
+                        -- Additional Dialogue
+                        return quest:event(120)
                     elseif questProgress == 1 then
                         return quest:progressEvent(121)
                     end
