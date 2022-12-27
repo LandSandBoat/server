@@ -2467,6 +2467,13 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     char extra[sizeof(PItem->m_extra) * 2 + 1];
                     sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
+                    // Before inserting to DBox, check we CAN actually remove this item (locked, etc..)
+                    if (!charutils::ValidateUpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
+                    {
+                        delete PUBoxItem;
+                        return;
+                    }
+
                     ret = sql->Query(
                         "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(%u, "
                         "'%s', 2, %u, %u, %u, %u, '%s', %u, '%s'); ",
@@ -3183,16 +3190,40 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     return;
                 }
 
-                const char* fmtQuery = "INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(%u,%u,%u,'%s',%u,%u)";
+                // Order here matters. We first make sure we CAN remove the item from the player's inventory,
+                // and then we put the item up for sale. Otherwise the item could go on sale without it being removed
+                // from the player's inventory.
 
+                // 1. Check we can afford AH fee. This needs to be done before updating item so we are sure
+                // we can perform the whole operation.
+                if (!charutils::ValidateUpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee))
+                {
+                    return;
+                }
+
+                // 2. Remove item from inventory
+                auto deductQuantity = -(int32)(quantity != 0 ? 1 : PItem->getStackSize());
+                auto itemId         = charutils::UpdateItem(PChar, LOC_INVENTORY, slot, deductQuantity);
+                if (itemId == 0)
+                {
+                    return;
+                }
+
+                // 3. Deduct AH fee
+                itemId = charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee);
+                if (itemId == 0)
+                {
+                    return;
+                }
+
+                // 4. List the item into the auction house
+                const char* fmtQuery = "INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(%u,%u,%u,'%s',%u,%u)";
                 if (sql->Query(fmtQuery, PItem->getID(), quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
                 {
                     ShowError("SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database", PItem->getName());
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, quantity)); // failed to place up
                     return;
                 }
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -(int32)(quantity != 0 ? 1 : PItem->getStackSize()));
-                charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee); // Deduct AH fee
 
                 PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0, quantity));       // Merchandise put up on auction msg
                 PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)ah_listings, PChar)); // Inform history of slot

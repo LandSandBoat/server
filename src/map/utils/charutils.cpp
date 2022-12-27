@@ -1440,40 +1440,62 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Update the number of items in the specified container and slot       *
+     *  Checks if the given update can be applied for the given location     *
+     *  and slot                                                             *
      *                                                                       *
      ************************************************************************/
 
-    uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force)
+    bool ValidateUpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force)
     {
         CItem* PItem = PChar->getStorage(LocationID)->GetItem(slotID);
-
         if (PItem == nullptr)
         {
-            ShowDebug("UpdateItem: No item in slot %u", slotID);
+            ShowWarning("ValidateUpdateItem: No item in slot %u", slotID);
             PChar->pushPacket(new CInventoryItemPacket(nullptr, LocationID, slotID));
-            return 0;
+            return false;
         }
 
         uint16 ItemID = PItem->getID();
-
         if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
         {
-            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->GetName(), quantity, ItemID);
-            return 0;
+            ShowWarning("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->GetName(), quantity, ItemID);
+            return false;
         }
 
         auto* PState = dynamic_cast<CItemState*>(PChar->PAI->GetCurrentState());
         if (PState)
         {
             CItem* item = PState->GetItem();
-
             if (item && item->getSlotID() == PItem->getSlotID() && item->getLocationID() == PItem->getLocationID() && !force)
             {
-                return 0;
+                return false;
             }
         }
 
+        return true;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Update the number of items in the specified container and slot       *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force)
+    {
+        if (!ValidateUpdateItem(PChar, LocationID, slotID, quantity))
+        {
+            return 0;
+        }
+
+        // ValidateUpdateItem already performs this check, but better to be defensive to code changes
+        CItem* PItem = PChar->getStorage(LocationID)->GetItem(slotID);
+        if (PItem == nullptr)
+        {
+            return 0;
+        }
+
+        uint16 ItemID      = PItem->getID();
         uint32 newQuantity = PItem->getQuantity() + quantity;
 
         if (newQuantity > PItem->getStackSize())
