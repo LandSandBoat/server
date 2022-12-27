@@ -127,7 +127,7 @@ end
 local function getBarSpellDefBonus(mob, target, spellElement)
     if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
         if target:hasStatusEffect(xi.magic.barSpell[spellElement]) then -- bar- spell magic defense bonus
-            return target:getStatusEffect(xi.magic.barSpell[spellElement]):getSubPower()
+            return target:getStatusEffect(xi.magic.barSpell[spellElement]):getPower()
         end
     end
 end
