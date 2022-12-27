@@ -61,6 +61,7 @@ public:
     uint8  getSpellFamily();
     uint8  getFlag();
     uint32 getCastTime();
+    uint32 getPrimaryTargetID();
 
     static void Register();
 };
