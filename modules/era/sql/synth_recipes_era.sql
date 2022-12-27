@@ -1407,7 +1407,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Wardrobe' AND
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Mezraq' AND ID = 5001;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ID = 11020;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Athenienne' AND ID = 11024;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Plain Sword' AND ID = 11518;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lt. Steel Sheet' AND ID = 11529;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lt. Steel Sheet' AND ID = 11534;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Bannaret Mail' AND ID = 11553;
