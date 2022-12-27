@@ -96,7 +96,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
     -- Tuning Out
-    elseif tuningIn == QUEST_COMPLETED and tuningOut == QUEST_AVAILABLE and os.time() > tuningOutWait then
+    elseif
+        tuningIn == QUEST_COMPLETED and
+        tuningOut == QUEST_AVAILABLE and
+        os.time() > tuningOutWait
+    then
         player:startEvent(888) -- Starting dialogue
 
     elseif

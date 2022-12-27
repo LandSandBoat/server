@@ -28,7 +28,6 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6
-
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -151,7 +150,10 @@ quest.sections =
             ['Apururu'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 and player:hasKeyItem(xi.ki.JOKER_CARD) then
+                    if
+                        quest:getVar(player, 'Prog') == 3 and
+                        player:hasKeyItem(xi.ki.JOKER_CARD)
+                    then
                         return quest:progressEvent(600) -- 2nd meeting with Apururu after meeting him in Hero's hause.
                     end
                 end,
