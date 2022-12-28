@@ -51,10 +51,6 @@ entity.onTrigger = function(player, npc)
 
     elseif theAntiqueCollector == QUEST_ACCEPTED then
         player:startEvent(14) -- Mid CS
-
-    -- DEFAULT DIALOG
-    else
-        player:startEvent(12)
     end
 end
 
