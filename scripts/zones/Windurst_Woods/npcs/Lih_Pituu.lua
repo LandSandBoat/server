@@ -28,11 +28,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 2)
     local skillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
             player:startEvent(10018, cost, skillLevel, 0, 511, player:getGil(), 0, 7028, 0)
         else

@@ -56,11 +56,11 @@ zones[xi.zone.ARRAPAGO_REEF] =
         {
             [16998653] = 16998655, -- 136.234 -6.831 468.779
         },
-        MEDUSA                = DYNAMIC_LOOKUP,
-        LIL_APKALLU           = DYNAMIC_LOOKUP,
-        VELIONIS              = DYNAMIC_LOOKUP,
-        ZAREEHKL_THE_JUBILANT = DYNAMIC_LOOKUP,
-        NUHN                  = DYNAMIC_LOOKUP,
+        MEDUSA                = GetFirstID("Medusa"),
+        LIL_APKALLU           = GetFirstID("Lil_Apkallu"),
+        VELIONIS              = GetFirstID("Velionis"),
+        ZAREEHKL_THE_JUBILANT = GetFirstID("Zareehkl_the_Jubilant"),
+        NUHN                  = GetFirstID("Nuhn"),
     },
     npc =
     {

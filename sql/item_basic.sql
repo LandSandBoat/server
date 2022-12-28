@@ -18668,7 +18668,7 @@ INSERT INTO `item_basic` VALUES (23043,0,'spaekonas_petasos_+2','spae._petasos_+
 INSERT INTO `item_basic` VALUES (23044,0,'atrophy_chapeau_+2','atro._chapeau_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23045,0,'pillagers_bonnet_+2','pill._bonnet_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23046,0,'reverence_coronet_+2','rev._coronet_+2',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23047,0,'ignominy_burgonet_+2','ig._burgonet_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23047,0,'ignominy_burgeonet_+2','ig._burgeonet_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23048,0,'totemic_helm_+2','totemic_helm_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23049,0,'brioso_roundlet_+2','brioso_roundlet_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23050,0,'orion_beret_+2','orion_beret_+2',1,63552,0,1,0);
@@ -18683,7 +18683,7 @@ INSERT INTO `item_basic` VALUES (23058,0,'maxixi_tiara_+2','maxixi_tiara_+2',1,6
 INSERT INTO `item_basic` VALUES (23059,0,'maxixi_tiara_+2','maxixi_tiara_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23060,0,'academics_mortarboard_+2','acad._mortar._+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23061,0,'geomancy_galero_+2','geo._galero_+2',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23062,0,'runeists_bandeau_+2','rune._bandeau_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23062,0,'runeist_bandeau_+2','rune._bandeau_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23063,0,'agoge_mask_+2','agoge_mask_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23064,0,'hesychasts_crown_+2','hes._crown_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23065,0,'piety_cap_+2','piety_cap_+2',1,63552,0,1,0);
@@ -18728,7 +18728,7 @@ INSERT INTO `item_basic` VALUES (23125,0,'maxixi_casaque_+2','maxixi_casaque_+2'
 INSERT INTO `item_basic` VALUES (23126,0,'maxixi_casaque_+2','maxixi_casaque_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23127,0,'academics_gown_+2','acad._gown_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23128,0,'geomancy_tunic_+2','geomancy_tunic_+2',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23129,0,'runeists_coat_+2','runeists_coat_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23129,0,'runeist_coat_+2','runeist_coat_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23130,0,'agoge_lorica_+2','agoge_lorica_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23131,0,'hesychasts_cyclas_+2','hes._cyclas_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23132,0,'piety_briault_+2','piety_briault_+2',1,63552,0,1,0);
@@ -18773,7 +18773,7 @@ INSERT INTO `item_basic` VALUES (23192,0,'maxixi_bangles_+2','maxixi_bangles_+2'
 INSERT INTO `item_basic` VALUES (23193,0,'maxixi_bangles_+2','maxixi_bangles_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23194,0,'academics_bracers_+2','acad._bracers_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23195,0,'geomancy_mitaines_+2','geo._mitaines_+2',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23196,0,'runeists_mitons_+2','runeists_mitons_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23196,0,'runeist_mitons_+2','runeist_mitons_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23197,0,'agoge_mufflers_+2','agoge_mufflers_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23198,0,'hesychasts_gloves_+2','hes._gloves_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23199,0,'piety_mitts_+2','piety_mitts_+2',1,63552,0,0,0);
@@ -18863,7 +18863,7 @@ INSERT INTO `item_basic` VALUES (23326,0,'maxixi_toe_shoes_+2','maxixi_toe_shoes
 INSERT INTO `item_basic` VALUES (23327,0,'maxixi_toe_shoes_+2','maxixi_toe_shoes_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23328,0,'academics_loafers_+2','acad._loafers_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23329,0,'geomancy_sandals_+2','geo._sandals_+2',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23330,0,'runeists_boots_+2','runeists_boots_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23330,0,'runeist_boots_+2','runeist_boots_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23331,0,'agoge_calligae_+2','agoge_calligae_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23332,0,'hesychasts_gaiters_+2','hes._gaiters_+2',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23333,0,'piety_duckbills_+2','piety_duckbills_+2',1,63552,0,0,0);
@@ -18893,7 +18893,7 @@ INSERT INTO `item_basic` VALUES (23378,0,'spaekonas_petasos_+3','spae._petasos_+
 INSERT INTO `item_basic` VALUES (23379,0,'atrophy_chapeau_+3','atrophy_chapeau_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23380,0,'pillagers_bonnet_+3','pill._bonnet_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23381,0,'reverence_coronet_+3','rev._coronet_+3',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23382,0,'ignominy_burgonet_+3','ig._burgonet_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23382,0,'ignominy_burgeonet_+3','ig._burgeonet_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23383,0,'totemic_helm_+3','totemic_helm_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23384,0,'brioso_roundlet_+3','brioso_roundlet_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23385,0,'orion_beret_+3','orion_beret_+3',1,63552,0,1,0);
@@ -18908,7 +18908,7 @@ INSERT INTO `item_basic` VALUES (23393,0,'maxixi_tiara_+3','maxixi_tiara_+3',1,6
 INSERT INTO `item_basic` VALUES (23394,0,'maxixi_tiara_+3','maxixi_tiara_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23395,0,'academics_mortarboard_+3','acad._mortar._+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23396,0,'geomancy_galero_+3','geo._galero_+3',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23397,0,'runeists_bandeau_+3','rune._bandeau_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23397,0,'runeist_bandeau_+3','rune._bandeau_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23398,0,'agoge_mask_+3','agoge_mask_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23399,0,'hesychasts_crown_+3','hes._crown_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23400,0,'piety_cap_+3','piety_cap_+3',1,63552,0,1,0);
@@ -18953,7 +18953,7 @@ INSERT INTO `item_basic` VALUES (23460,0,'maxixi_casaque_+3','maxixi_casaque_+3'
 INSERT INTO `item_basic` VALUES (23461,0,'maxixi_casaque_+3','maxixi_casaque_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23462,0,'academics_gown_+3','acad._gown_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23463,0,'geomancy_tunic_+3','geomancy_tunic_+3',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23464,0,'runeists_coat_+3','runeists_coat_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23464,0,'runeist_coat_+3','runeist_coat_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23465,0,'agoge_lorica_+3','agoge_lorica_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23466,0,'hesychasts_cyclas_+3','hes._cyclas_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23467,0,'piety_briault_+3','piety_briault_+3',1,63552,0,1,0);
@@ -18998,7 +18998,7 @@ INSERT INTO `item_basic` VALUES (23527,0,'maxixi_bangles_+3','maxixi_bangles_+3'
 INSERT INTO `item_basic` VALUES (23528,0,'maxixi_bangles_+3','maxixi_bangles_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23529,0,'academics_bracers_+3','acad._bracers_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23530,0,'geomancy_mitaines_+3','geo._mitaines_+3',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23531,0,'runeists_mitons_+3','runeists_mitons_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23531,0,'runeist_mitons_+3','runeist_mitons_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23532,0,'agoge_mufflers_+3','agoge_mufflers_+3',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23533,0,'hesychasts_gloves_+3','hes._gloves_+3',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23534,0,'piety_mitts_+3','piety_mitts_+3',1,63552,0,0,0);
@@ -19043,7 +19043,7 @@ INSERT INTO `item_basic` VALUES (23594,0,'maxixi_tights_+3','maxixi_tights_+3',1
 INSERT INTO `item_basic` VALUES (23595,0,'maxixi_tights_+3','maxixi_tights_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23596,0,'academics_pants_+3','acad._pants_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23597,0,'geomancy_pants_+3','geomancy_pants_+3',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23598,0,'runeists_trousers_+3','rune._trousers_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23598,0,'runeist_trousers_+3','rune._trousers_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23599,0,'agoge_cuisses_+3','agoge_cuisses_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23600,0,'hesychasts_hose_+3','hes._hose_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23601,0,'piety_pantaloons_+3','piety_pantaln._+3',1,63552,0,1,0);
@@ -19088,7 +19088,7 @@ INSERT INTO `item_basic` VALUES (23661,0,'maxixi_toe_shoes_+3','maxixi_toe_shoes
 INSERT INTO `item_basic` VALUES (23662,0,'maxixi_toe_shoes_+3','maxixi_toe_shoes_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23663,0,'academics_loafers_+3','acad._loafers_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23664,0,'geomancy_sandals_+3','geo._sandals_+3',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (23665,0,'runeists_boots_+3','runeists_boots_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23665,0,'runeist_boots_+3','runeist_boots_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23666,0,'agoge_calligae_+3','agoge_calligae_+3',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23667,0,'hesychasts_gaiters_+3','hes._gaiters_+3',1,63552,0,0,0);
 INSERT INTO `item_basic` VALUES (23668,0,'piety_duckbills_+3','piety_duckbills_+3',1,63552,0,0,0);

@@ -41,7 +41,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     target:wakeUp()
     caster:updateEnmityFromCure(target, final)
 
-    spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
+    if target:getID() == spell:getPrimaryTargetID() then
+        spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    else
+        spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+    end
 
     local mpBonusPercent = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100
     if mpBonusPercent > 0 then

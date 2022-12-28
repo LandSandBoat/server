@@ -8,6 +8,8 @@ return {
     ['Heillal']    = { event = 64 },
     ['Jaucribaix'] = { event = 71 },
     ['Kamui']      = { event = 61 },
+    ['Keal']       = { event = 89 },
     ['Ranemaud']   = { event = 68 },
+    ['Verctissa']  = { event = 114 },
     ['Washu']      = { event = 80 },
 }

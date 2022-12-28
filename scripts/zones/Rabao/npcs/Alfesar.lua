@@ -38,8 +38,6 @@ entity.onTrigger = function(player, npc)
     then
         -- They got their Key items. tell them to goto sandy
         player:startEvent(9)
-    else
-        player:startEvent(52) -- standard dialogue
     end
 end
 

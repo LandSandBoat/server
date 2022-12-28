@@ -14,10 +14,19 @@ effectObject.onEffectGain = function(target, effect)
 end
 
 effectObject.onEffectTick = function(target, effect)
+    -- decay the effect by 1 every effectTick
+    local power = effect:getPower()
+    if power > 0 then
+        effect:setPower(power - 1)
+        target:delMod(xi.mod.MDEF, 1)
+    end
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MDEF, effect:getPower())
+    local power = effect:getPower()
+    if power > 0 then
+        target:delMod(xi.mod.MDEF, power)
+    end
 end
 
 return effectObject

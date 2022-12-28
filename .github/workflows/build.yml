@@ -19,7 +19,7 @@ jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: Install Dependencies
@@ -36,9 +36,10 @@ jobs:
         sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
+        npm install -g diff-so-fancy
     - id: changed-files
       name: Get Changed Files
-      uses: Ana06/get-changed-files@v2.1.0
+      uses: Ana06/get-changed-files@v2.2.0
       with:
         filter: |
           src/**
@@ -106,17 +107,23 @@ jobs:
             fi
           fi
         done
-        git diff >> cpp_formatting_checks.txt
-        cat cpp_formatting_checks.txt
+        git diff --color >> cpp_formatting_checks.txt
         git reset --hard
         if [ -s cpp_formatting_checks.txt ]
         then
+          echo ""
+          echo "You have errors in your C++ code formatting."
+          echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
+          echo "You can either fix the formatting by hand or use clang-format."
+          echo "(You can safely ignore warnings about \$TERM and tput)"
+          echo ""
+          cat cpp_formatting_checks.txt | diff-so-fancy || true
           exit 1
         fi
         exit 0
     - name: Upload CPP Formatting Diff
       if: hashFiles('cpp_formatting_checks.txt') != ''
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: clang_format_diff
         path: |
@@ -125,6 +132,8 @@ jobs:
       if: always()
       run: |
         touch lua_checks.txt
+        python3 tools/ci/lua_stylecheck.py test >> lua_checks.txt
+
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.lua ]]; then
@@ -180,7 +189,7 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -202,7 +211,7 @@ jobs:
       run: |
         cmake --build build -j4
     - name: Archive Executables
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: linux_executables
         path: |
@@ -214,7 +223,7 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
     - name: Install Dependencies
@@ -242,7 +251,7 @@ jobs:
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
@@ -266,7 +275,7 @@ jobs:
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
@@ -284,7 +293,7 @@ jobs:
         run: |
           cmake --build build -j4
       - name: Archive Executables
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: windows_executables
           path: |
@@ -292,13 +301,13 @@ jobs:
             xi_map.exe
             xi_search.exe
 
-  Windows_64bit_Release_Tracy_Modules_World:
+  Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
     runs-on: windows-latest
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Cache 'build' folder
@@ -319,7 +328,7 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON -DBUILD_WORLD=ON
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
       - name: Build
         shell: cmd
         run: |
@@ -330,7 +339,7 @@ jobs:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
@@ -368,10 +377,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: linux_executables
         path: .
@@ -499,10 +508,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: linux_executables
         path: .
@@ -570,10 +579,10 @@ jobs:
     runs-on: windows-latest
     needs: Windows_64bit_Debug
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: windows_executables
         path: .

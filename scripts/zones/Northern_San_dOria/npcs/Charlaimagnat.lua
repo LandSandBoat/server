@@ -30,8 +30,6 @@ entity.onTrigger = function(player, npc)
         os.time() >= player:getCharVar("TheMissingPiece_date")
     then
         player:startEvent(705) -- Quest Completed
-    else
-        player:startEvent(702) -- standard dialogue
     end
 end
 

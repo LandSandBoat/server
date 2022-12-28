@@ -303,25 +303,21 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 },
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 2,
-            { itemid =    0, droprate = 250 },
-            { itemid = 1954, droprate = 159 },
-            { itemid = 1940, droprate = 146 },
-            { itemid = 1932, droprate =  85 },
-            { itemid = 1956, droprate = 171 },
-            { itemid = 1934, droprate = 110 },
-            { itemid = 2658, droprate = 220 },
-            { itemid = 2716, droprate =  98 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.LOW },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.LOW },
         },
     },
 
@@ -329,28 +325,29 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 },
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 2,
-            { itemid =    0, droprate = 400 },
-            { itemid = 1932, droprate = 333 },
-            { itemid = 1954, droprate = 200 },
-            { itemid = 1950, droprate = 100 },
-            { itemid = 1940, droprate =  90 },
-            { itemid = 1942, droprate =  70 },
-            { itemid = 1934, droprate =  90 },
-            { itemid = 1936, droprate = 100 },
-            { itemid = 1958, droprate =  90 },
-            { itemid = 2656, droprate =  67 },
-            { itemid = 1956, droprate = 167 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.LOW },
+            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.LOW },
         },
     },
 
@@ -358,28 +355,20 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 },
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 2,
-            { itemid = 1956, droprate =  27 },
-            { itemid = 1932, droprate = 324 },
-            { itemid = 1950, droprate =  80 },
-            { itemid = 1934, droprate = 189 },
-            { itemid = 1930, droprate =  50 },
-            { itemid = 1940, droprate =  27 },
-            { itemid = 1936, droprate =  81 },
-            { itemid = 1944, droprate =  80 },
-            { itemid = 1958, droprate =  81 },
-            { itemid = 2658, droprate = 270 },
-            { itemid = 2714, droprate = 108 },
+            { item = xi.items.SQUARE_OF_BENEDICT_SILK, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.CHUNK_OF_SNOWY_CERMET, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_BRILLIANTINE, weight = xi.loot.weight.NORMAL },
         },
     },
 
@@ -387,28 +376,20 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 },
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 2,
-            { itemid =    0, droprate = 300 },
-            { itemid = 1942, droprate =  90 },
-            { itemid = 1934, droprate = 435 },
-            { itemid = 1956, droprate =  80 },
-            { itemid = 1940, droprate = 174 },
-            { itemid = 1958, droprate =  87 },
-            { itemid = 1954, droprate =  90 },
-            { itemid = 1936, droprate =  87 },
-            { itemid = 1930, droprate =  43 },
-            { itemid = 2656, droprate =  27 },
-            { itemid = 2658, droprate = 261 },
+            { item = xi.items.SQUARE_OF_DIABOLIC_SILK, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PANTIN_WIRE, weight = xi.loot.weight.NORMAL },
         },
     },
 
@@ -416,28 +397,20 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 },
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 2,
-            { itemid =    0, droprate = 200 },
-            { itemid = 1954, droprate =  67 },
-            { itemid = 1940, droprate = 353 },
-            { itemid = 1936, droprate =  87 },
-            { itemid = 1956, droprate = 110 },
-            { itemid = 1958, droprate =  87 },
-            { itemid = 1942, droprate =  50 },
-            { itemid = 1950, droprate =  60 },
-            { itemid = 1932, droprate =  59 },
-            { itemid = 2716, droprate = 100 },
-            { itemid = 2714, droprate = 110 },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
         },
     },
 
@@ -445,53 +418,66 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid =    0, droprate = 1000 },
-            { itemid = 1875, droprate = 1000 },
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            quantity = 2,
-            { itemid = 1954, droprate = 263 },
-            { itemid = 1932, droprate =  59 },
-            { itemid = 1942, droprate =  53 },
-            { itemid = 1934, droprate =  60 },
-            { itemid = 1956, droprate = 526 },
-            { itemid = 1930, droprate =  60 },
-            { itemid = 1936, droprate =  53 },
-            { itemid = 1950, droprate = 158 },
-            { itemid = 2716, droprate = 105 },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_CHAMELEON_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW },
         },
     },
 
     [ID.TEMENOS_NORTHERN_TOWER.npc.LOOT_CRATE] =
     {
         {
-            quantity = 6,
-            { itemid = 1875, droprate = 1000 },
+            quantity = 5,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1956, droprate = 240 },
-            { itemid = 1932, droprate = 120 },
-            { itemid = 1940, droprate = 200 },
-            { itemid = 1934, droprate =  40 },
-            { itemid = 1954, droprate = 120 },
-            { itemid = 2658, droprate = 200 },
-            { itemid = 2716, droprate =  80 },
+            quantity = 2,
+            { item = xi.items.NONE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1904, droprate = 1000 },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid =    0, droprate = 100 },
-            { itemid = 2127, droprate =  55 },
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.LOW },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.IVORY_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     },
 }

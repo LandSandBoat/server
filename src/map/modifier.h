@@ -41,16 +41,26 @@ enum class Mod
     MND = 13, // Mind
     CHR = 14, // Charisma
 
-    // Magic Evasion versus elements (resistance)
+    // Magic Evasion versus elements
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_MEVA    = 15, // Fire Resistance
-    ICE_MEVA     = 16, // Ice Resistance
-    WIND_MEVA    = 17, // Wind Resistance
-    EARTH_MEVA   = 18, // Earth Resistance
-    THUNDER_MEVA = 19, // Thunder Resistance
-    WATER_MEVA   = 20, // Water Resistance
-    LIGHT_MEVA   = 21, // Light Resistance
-    DARK_MEVA    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Magic Evasion
+    ICE_MEVA     = 16, // Ice Magic Evasion
+    WIND_MEVA    = 17, // Wind Magic Evasion
+    EARTH_MEVA   = 18, // Earth Magic Evasion
+    THUNDER_MEVA = 19, // Thunder Magic Evasion
+    WATER_MEVA   = 20, // Water Magic Evasion
+    LIGHT_MEVA   = 21, // Light Magic Evasion
+    DARK_MEVA    = 22, // Dark Magic Evasion
+
+    // Magic Evasion RANK versus elements (resistance ranks)
+    FIRE_RES_RANK    = 192, // Fire Resistance Rank
+    ICE_RES_RANK     = 193, // Ice Resistance Rank
+    WIND_RES_RANK    = 194, // Wind Resistance Rank
+    EARTH_RES_RANK   = 195, // Earth Resistance Rank
+    THUNDER_RES_RANK = 196, // Thunder Resistance Rank
+    WATER_RES_RANK   = 197, // Water Resistance Rank
+    LIGHT_RES_RANK   = 198, // Light Resistance Rank
+    DARK_RES_RANK    = 199, // Dark Resistance Rank
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -277,10 +287,10 @@ enum class Mod
     DEMON_KILLER    = 234, // Enhances "Demon Killer" effect
     EMPTY_KILLER    = 235, // Enhances "Empty Killer" effect
     HUMANOID_KILLER = 236, // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER = 237, // Enhances "Lumorian Killer" effect
+    LUMINIAN_KILLER = 237, // Enhances "Luminian Killer" effect
     LUMINION_KILLER = 238, // Enhances "Luminion Killer" effect
 
-    // Resistances to enfeebles - Traits/Job Ability
+    // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
     POISONRES   = 241, // Enhances "Resist Poison" effect
     PARALYZERES = 242, // Enhances "Resist Paralyze" effect
@@ -298,6 +308,25 @@ enum class Mod
     LULLABYRES  = 254, // Enhances "Resist Lullaby" effect
     DEATHRES    = 255, // Used by gear and ATMA that give resistance to instance KO
     STATUSRES   = 958, // "Resistance to All Status Ailments"
+
+    // MEVA bonus to enfeebles (Bar-Effect, for example. And modifiers in mobs)
+    SLEEP_MEVA    = 200,
+    POISON_MEVA   = 201,
+    PARALYZE_MEVA = 202,
+    BLIND_MEVA    = 203,
+    SILENCE_MEVA  = 204,
+    VIRUS_MEVA    = 205,
+    PETRIFY_MEVA  = 206,
+    BIND_MEVA     = 207,
+    CURSE_MEVA    = 208,
+    GRAVITY_MEVA  = 209,
+    SLOW_MEVA     = 210,
+    STUN_MEVA     = 211,
+    CHARM_MEVA    = 212,
+    AMNESIA_MEVA  = 213,
+    LULLABY_MEVA  = 214,
+    DEATH_MEVA    = 215,
+    STATUS_MEVA   = 216,
 
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
@@ -926,6 +955,7 @@ enum class Mod
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
@@ -937,10 +967,10 @@ enum class Mod
     // 74 to 79
     // 138 to 143
     // 156 to 159
-    // 192 to 223
+    // 217 to 223
     // 261 to 280
     //
-    // SPARE = 1075, and onward
+    // SPARE = 1076 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

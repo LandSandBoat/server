@@ -37,6 +37,8 @@ CREATE TABLE `zone_settings` (
 -- Dumping data for table `zone_settings`
 --
 
+-- NOTE: To disable a zone, you must set the zoneip and zoneport to '' and 0 respectively!
+
 LOCK TABLES `zone_settings` WRITE;
 /*!40000 ALTER TABLE `zone_settings` DISABLE KEYS */;
 INSERT INTO `zone_settings` VALUES (0,1,'127.0.0.1',54230,'unknown',0,0,0,0,0,0.00,32); -- Demonstration Area from pre-release: Has no client side mesh, use wallhack to get around.
@@ -76,8 +78,8 @@ INSERT INTO `zone_settings` VALUES (33,2,'127.0.0.1',54230,'AlTaieu',233,233,101
 INSERT INTO `zone_settings` VALUES (34,3,'127.0.0.1',54230,'Grand_Palace_of_HuXzoi',0,0,115,218,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (35,3,'127.0.0.1',54230,'The_Garden_of_RuHmet',228,228,115,218,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (36,4,'127.0.0.1',54230,'Empyreal_Paradox',0,0,224,224,0,0.00,2201);
-INSERT INTO `zone_settings` VALUES (37,7,'127.0.0.1',54230,'Temenos',0,0,218,219,0,0.00,152);
-INSERT INTO `zone_settings` VALUES (38,7,'127.0.0.1',54230,'Apollyon',0,0,218,219,0,0.00,152);
+INSERT INTO `zone_settings` VALUES (37,4,'127.0.0.1',54230,'Temenos',0,0,218,219,0,0.00,152);
+INSERT INTO `zone_settings` VALUES (38,4,'127.0.0.1',54230,'Apollyon',0,0,218,219,0,0.00,152);
 INSERT INTO `zone_settings` VALUES (39,5,'127.0.0.1',54230,'Dynamis-Valkurm',121,121,121,121,0,0.00,2200);
 INSERT INTO `zone_settings` VALUES (40,5,'127.0.0.1',54230,'Dynamis-Buburimu',121,121,121,121,0,0.00,2200);
 INSERT INTO `zone_settings` VALUES (41,5,'127.0.0.1',54230,'Dynamis-Qufim',121,121,121,121,0,0.00,2200);
@@ -317,7 +319,7 @@ INSERT INTO `zone_settings` VALUES (274,3,'127.0.0.1',54230,'Outer_RaKaznar',73,
 INSERT INTO `zone_settings` VALUES (275,0,'127.0.0.1',54230,'Outer_RaKaznar_[U1]',62,62,62,62,0,0.00,2202);
 INSERT INTO `zone_settings` VALUES (276,0,'127.0.0.1',54230,'RaKaznar_Inner_Court',73,73,57,57,0,0.00,2202);
 INSERT INTO `zone_settings` VALUES (277,0,'127.0.0.1',54230,'RaKaznar_Turris',0,0,0,0,0,0.00,0);
-INSERT INTO `zone_settings` VALUES (278,0,'127.0.0.1',0,'278',0,0,0,0,0,0.00,0);
+INSERT INTO `zone_settings` VALUES (278,0,'127.0.0.1',54230,'Gwora-Corridor',0,0,0,0,0,0.00,0);
 INSERT INTO `zone_settings` VALUES (279,0,'127.0.0.1',54230,'Walk_of_Echoes_[P2]',0,0,0,0,0,0.00,2048);
 INSERT INTO `zone_settings` VALUES (280,1,'127.0.0.1',54230,'Mog_Garden',67,67,67,67,0,0.00,32);
 INSERT INTO `zone_settings` VALUES (281,0,'127.0.0.1',54230,'Leafallia',0,0,0,0,0,0.00,0);
@@ -338,6 +340,8 @@ INSERT INTO `zone_settings` VALUES (295,5,'127.0.0.1',54230,'Dynamis-Bastok_[D]'
 INSERT INTO `zone_settings` VALUES (296,5,'127.0.0.1',54230,'Dynamis-Windurst_[D]',88,88,88,88,0,0.00,2448);
 INSERT INTO `zone_settings` VALUES (297,5,'127.0.0.1',54230,'Dynamis-Jeuno_[D]',88,88,88,88,0,0.00,2448);
 INSERT INTO `zone_settings` VALUES (298,0,'127.0.0.1',54230,'Walk_of_Echoes_[P1]',186,186,186,186,0,0.00,2048);
+
+-- NOTE: To disable a zone, you must set the zoneip and zoneport to '' and 0 respectively!
 
 /*!40000 ALTER TABLE `zone_settings` ENABLE KEYS */;
 UNLOCK TABLES;

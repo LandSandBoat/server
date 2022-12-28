@@ -68,20 +68,20 @@ content.loot =
     {
         {
             quantity = 5,
-            { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL },
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { itemid = xi.items.PIECE_OF_OMEGAS_EYE, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SEGMENT_OF_OMEGAS_FORELEG, droprate = xi.battlefield.dropChance.LOW },
-            { itemid = xi.items.SEGMENT_OF_OMEGAS_HIND_LEG, droprate = xi.battlefield.dropChance.LOW },
-            { itemid = xi.items.SEGMENT_OF_OMEGAS_TAIL, droprate = xi.battlefield.dropChance.LOW },
+            { item = xi.items.PIECE_OF_OMEGAS_EYE, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SEGMENT_OF_OMEGAS_FORELEG, weight = xi.loot.weight.LOW },
+            { item = xi.items.SEGMENT_OF_OMEGAS_HIND_LEG, weight = xi.loot.weight.LOW },
+            { item = xi.items.SEGMENT_OF_OMEGAS_TAIL, weight = xi.loot.weight.LOW },
         },
 
         {
-            { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.EXTREMELY_HIGH },
-            { itemid = xi.items.PIECE_OF_OMEGAS_HEART, droprate = xi.battlefield.dropChance.NORMAL },
+            { item = xi.items.NONE, weight = xi.loot.weight.EXTREMELY_HIGH },
+            { item = xi.items.PIECE_OF_OMEGAS_HEART, weight = xi.loot.weight.NORMAL },
         },
     },
 }

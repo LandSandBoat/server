@@ -326,6 +326,21 @@ void CSpell::setMagicBurstMessage(uint16 message)
     m_MagicBurstMessage = message;
 }
 
+MODIFIER CSpell::getModifier()
+{
+    return m_MessageModifier;
+}
+
+void CSpell::setModifier(MODIFIER modifier)
+{
+    m_MessageModifier = modifier;
+}
+
+void CSpell::setPrimaryTargetID(uint32 targid)
+{
+    m_primaryTargetID = targid;
+}
+
 uint16 CSpell::getElement() const
 {
     return m_element;
@@ -409,6 +424,11 @@ const std::string& CSpell::getContentTag()
 float CSpell::getRange() const
 {
     return m_range;
+}
+
+uint32 CSpell::getPrimaryTargetID() const
+{
+    return m_primaryTargetID;
 }
 
 void CSpell::setContentTag(const std::string& contentTag)

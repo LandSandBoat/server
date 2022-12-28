@@ -3071,6 +3071,21 @@ namespace battleutils
         int32 rank = 0;
         int32 fstr = 0;
         float dif  = (float)(PAttacker->STR() - PDefender->VIT());
+
+        // does mob FSTR2 for ranged attack apply here?
+        if (PAttacker->objtype == TYPE_MOB || PAttacker->objtype == TYPE_PET)
+        {
+            fstr = (PAttacker->STR() - PDefender->VIT() + 4) / 4;
+
+            // Level -1 mobs are coded as level 1, but they have an fSTR of 1 always
+            if (PAttacker->objtype == TYPE_MOB && PAttacker->GetMLevel() == 1)
+            {
+                return 1;
+            }
+
+            return std::clamp(fstr, -20, 24);
+        }
+
         if (dif >= 12)
         {
             fstr = static_cast<int32>((dif + 4) / 2);
@@ -3103,6 +3118,7 @@ namespace battleutils
         {
             fstr = static_cast<int32>((dif + 13) / 2);
         }
+
         if (SlotID == SLOT_RANGED)
         {
             rank = PAttacker->GetRangedWeaponRank();
@@ -3124,6 +3140,7 @@ namespace battleutils
         else
         {
             fstr /= 2;
+
             if (SlotID == SLOT_MAIN)
             {
                 rank = PAttacker->GetMainWeaponRank();
@@ -3132,31 +3149,11 @@ namespace battleutils
             {
                 rank = PAttacker->GetSubWeaponRank();
             }
+
             // Everything else
             if (fstr <= (-rank))
             {
                 return (-rank);
-            }
-
-            // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-            // fSTR has no upper cap for Avatars, this is likely true for monsters and all pets.
-            // Since I can only confirm Avatars and this has a much larger impact on balance I will
-            // Only change this logic for Avatars pending further testing.
-
-            ENTITYTYPE attackerType = PAttacker->objtype;
-            bool       isAvatar     = false;
-
-            if (attackerType == TYPE_PET)
-            {
-                if (CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker))
-                {
-                    isAvatar = petEntity->getPetType() == PET_TYPE::AVATAR;
-                }
-            }
-
-            if (isAvatar)
-            {
-                return fstr;
             }
 
             if ((fstr > (-rank)) && (fstr <= rank + 8))
@@ -3577,8 +3574,8 @@ namespace battleutils
             case ECOSYSTEM::LUMINION:
                 KillerEffect = PDefender->getMod(Mod::LUMINION_KILLER);
                 break;
-            case ECOSYSTEM::LUMORIAN:
-                KillerEffect = PDefender->getMod(Mod::LUMORIAN_KILLER);
+            case ECOSYSTEM::LUMINIAN:
+                KillerEffect = PDefender->getMod(Mod::LUMINIAN_KILLER);
                 break;
             case ECOSYSTEM::PLANTOID:
                 KillerEffect = PDefender->getMod(Mod::PLANTOID_KILLER);

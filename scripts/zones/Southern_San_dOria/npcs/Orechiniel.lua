@@ -13,11 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 7)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.LEATHERCRAFT)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(650, cost, skillLevel, 0, 239, player:getGil(), 0, 0, 0)
         else

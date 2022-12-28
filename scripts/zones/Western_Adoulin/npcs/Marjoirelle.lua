@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Majoirelle
--- Type: Standard NPC and Quest NPC
 --  Involved With Quest: 'Order Up'
 -- !pos 127 4 -81 256
 -----------------------------------
@@ -20,9 +19,6 @@ entity.onTrigger = function(player, npc)
     if orderUp == QUEST_ACCEPTED and not orderMarjoirelle then
         -- Progresses Quest: 'Order Up'
         player:startEvent(68)
-    else
-        -- Standard Dialogue
-        player:startEvent(538)
     end
 end
 

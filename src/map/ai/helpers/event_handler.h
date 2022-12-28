@@ -46,6 +46,7 @@ class CAIEventHandler
 public:
     void addListener(std::string const& eventname, sol::function lua_func, std::string const& identifier);
     void removeListener(std::string const& identifier);
+    bool hasListener(std::string const& eventName);
 
     // calls event from core
     template <class... Args>

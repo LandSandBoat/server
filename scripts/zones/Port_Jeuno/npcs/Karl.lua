@@ -40,9 +40,6 @@ entity.onTrigger = function(player, npc)
 
     elseif childsPlay == QUEST_ACCEPTED then
         player:startEvent(61) -- mid quest CS
-
-    else
-        player:startEvent(58) -- Standard dialog
     end
 end
 

@@ -1,14 +1,10 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Naja Salaheem
--- Type: Standard NPC
 -- !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
-require("scripts/globals/titles")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

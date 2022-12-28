@@ -36,7 +36,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()
-            xi.abyssea.onWardRegionEnter(player)
+            xi.abyssea.onWardTriggerAreaEnter(player)
         end,
     }
 end
@@ -45,7 +45,7 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()
-            xi.abyssea.onWardRegionLeave(player)
+            xi.abyssea.onWardTriggerAreaLeave(player)
         end,
     }
 end

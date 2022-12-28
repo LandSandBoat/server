@@ -13,9 +13,9 @@ end
 
 entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
-    mob:addMod(xi.mod.SLEEPRES, 50)
-    mob:addMod(xi.mod.LULLABYRES, 50)
-    mob:addMod(xi.mod.STUNRES, 50)
+    mob:addMod(xi.mod.SLEEP_MEVA, 50)
+    mob:addMod(xi.mod.LULLABY_MEVA, 50)
+    mob:addMod(xi.mod.STUN_MEVA, 50)
     mob:addMod(xi.mod.DMGMAGIC, 8000)
 end
 

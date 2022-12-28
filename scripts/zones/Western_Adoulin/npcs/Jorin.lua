@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Jorin
--- Type: Standard NPC and Quest Giver
 -- Starts, Involved with, and Finishes Quest: 'The Old Man and the Harpoon'
 -- !pos 92 32 152 256
 -----------------------------------
@@ -27,9 +26,6 @@ entity.onTrigger = function(player, npc)
     elseif tomath == QUEST_AVAILABLE then
         -- Starts Quest: 'The Old Man and the Harpoon'
         player:startEvent(2540)
-    else
-        -- Standard dialogue
-        player:startEvent(560)
     end
 end
 

@@ -117,7 +117,21 @@ local pathNodes =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:setSpeed(250)
+    mob:setSpeed(70)
+    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+end
+
+entity.onMobFight = function(mob)
+    -- Speed and animsub are being ignored on engage, set here to ensure speed and animsub are set correctly
+    if mob:getSpeed() > 40 or mob:getAnimationSub() > 0 then
+        mob:setSpeed(40)
+        mob:setAnimationSub(0)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setSpeed(70)
+    mob:setAnimationSub(5)
     mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 

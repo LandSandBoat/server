@@ -14,11 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 4)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local skillLevel = player:getSkillLevel(xi.skill.COOKING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
         if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
             player:startEvent(10016, skillCap, skillLevel, 1, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
         else

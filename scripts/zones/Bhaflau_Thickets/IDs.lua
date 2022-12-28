@@ -62,8 +62,8 @@ zones[xi.zone.BHAFLAU_THICKETS] =
             [16990398] = 16990403, -- -119 -15 -651
         },
         HARVESTMAN         = 16990252,
-        LIVIDROOT_AMOOSHAH = DYNAMIC_LOOKUP,
-        DEA                = DYNAMIC_LOOKUP,
+        LIVIDROOT_AMOOSHAH = GetFirstID("Lividroot_Amooshah"),
+        DEA                = GetFirstID("Dea"),
     },
     npc =
     {

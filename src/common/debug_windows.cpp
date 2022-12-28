@@ -8,3 +8,8 @@ void debug::init()
 {
     g_WheatyExceptionReport = WheatyExceptionReport();
 }
+
+bool debug::isRunningUnderDebugger()
+{
+    return IsDebuggerPresent();
+}
