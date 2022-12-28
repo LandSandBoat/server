@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.divisor1 = 2
     params.constant1 = 65
     params.powerThreshold2 = 459
-    params.divisor2 = 1.5
+    params.divisor2 = 6.5
     params.constant2 = 144.6666
 
     target:eraseStatusEffect()
