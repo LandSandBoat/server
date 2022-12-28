@@ -32,7 +32,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.hpMod = 3
     params.lvlMod = 0
 
-    local results = xi.spells.blue.useBreathSpell(caster, target, spell, params, true)
+    local results = xi.spells.blue.useBreathSpell(caster, target, spell, params, false)
     local damage = results[1]
 
     return damage

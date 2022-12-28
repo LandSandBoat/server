@@ -40,7 +40,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much
         target:delTP(100)
-        local actionOne = target:addStatusEffect(typeEffectOne, 100, 0, duration * resist)
+        local actionOne = target:addStatusEffect(typeEffectOne, 10, 0, duration * resist)
         local actionTwo = target:addStatusEffect(typeEffectTwo, 1, 0, duration * resist)
 
         -- Gaze move
