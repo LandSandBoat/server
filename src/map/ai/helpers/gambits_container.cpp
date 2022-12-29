@@ -494,6 +494,12 @@ namespace gambits
                     {
                         CStatusEffect* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
 
+                        if (PSCEffect == nullptr)
+                        {
+                            ShowError("G_SELECT::MB_ELEMENT: PSCEffect was null.");
+                            return;
+                        }
+
                         std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
                         if (uint16 power = PSCEffect->GetPower())
                         {
@@ -1010,6 +1016,13 @@ namespace gambits
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
+
+                if (PWeaponSkill == nullptr)
+                {
+                    ShowError("G_REACTION::WS: PWeaponSkill was null.");
+                    return false;
+                }
+
                 if (chosen_skill->valid_targets & TARGET_SELF)
                 {
                     target = POwner;

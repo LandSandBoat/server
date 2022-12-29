@@ -2414,6 +2414,12 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     CItem* PUBoxItem = itemutils::GetItem(PItem->getID());
 
+                    if (PUBoxItem == nullptr)
+                    {
+                        ShowError("PUBoxItem was null.");
+                        return;
+                    }
+
                     char receiver[PacketNameLength] = {};
                     memcpy(&receiver, data[0x10], PacketNameLength - 1);
                     PUBoxItem->setReceiver(receiver);
@@ -6872,7 +6878,7 @@ void SmallPacket0x0FF(map_session_data_t* const PSession, CCharEntity* const PCh
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
     CItemFlowerpot* PItem          = (CItemFlowerpot*)PItemContainer->GetItem(slotID);
 
-    if (PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
+    if (PItem != nullptr && PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
     {
         PChar->pushPacket(new CMessageStandardPacket(itemID, 133)); // Your moogle dries the plant in the <item>.
         PChar->pushPacket(new CFurnitureInteractPacket(PItem, containerID, slotID));
