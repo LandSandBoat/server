@@ -982,7 +982,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
                     for (auto& deathMobId : group.mobIds)
                     {
                         CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(deathMobId, TYPE_MOB | TYPE_PET);
-                        if (PMob->isDead())
+                        if (PMob != nullptr && PMob->isDead())
                         {
                             ++deathCount;
                         }
@@ -1017,6 +1017,13 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 void CBattlefield::setPlayerEntered(CCharEntity* PChar, bool entered)
 {
     CStatusEffect* effect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+
+    if (effect == nullptr)
+    {
+        ShowError("Effect was null.");
+        return;
+    }
+
     effect->SetTier(entered ? 1 : 0);
 }
 
