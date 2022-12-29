@@ -26,6 +26,8 @@ zones[xi.zone.RAKAZNAR_TURRIS] =
     },
     npc =
     {
+        MOOGLE1 = 17911948,
+        MOOGLE2 = 17911949,
     },
 }
 
