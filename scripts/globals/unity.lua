@@ -79,19 +79,19 @@ local unityOptions =
 
     [4] = -- Items (Item ID, askQuantity (0 = true), limitSize (99 = limit by accolades), cost)
     {
-        [ 0] = { 9049, 0, 99, 15000 }, -- Refractive Crystal
-        [ 1] = { 8973, 0, 99, 15000 }, -- Special Gobbiedial Key
-        [ 2] = { 4181, 1,  1, 10    }, -- Scroll of Instant Warp
-        [ 3] = { 4182, 1,  1, 10    }, -- Scroll of Instant Reraise
-        [ 4] = { 5988, 1,  1, 10    }, -- Scroll of Instant Protect
-        [ 5] = { 5989, 1,  1, 10    }, -- Scroll of Instant Shell
-        [ 6] = { 5114, 0, 99, 10    }, -- Moist Rolanberry
-        [ 7] = { 5115, 0, 99, 10    }, -- Ravaged Moko Grass
-        [ 8] = { 5116, 0, 99, 10    }, -- Cavorting Worm
-        [ 9] = { 5117, 0, 99, 10    }, -- Levigated Rock
-        [10] = { 5118, 0, 99, 10    }, -- Little Lugworm
-        [11] = { 5119, 0, 99, 10    }, -- Training Manual
-        [12] = { 5945, 0, 99, 10    }, -- Prize Powder
+        [ 0] = { xi.items.REFRACTIVE_CRYSTAL,          0, 99, 15000 },
+        [ 1] = { xi.items.SPECIAL_GOBBIEDIAL_KEY,      0, 99, 15000 },
+        [ 2] = { xi.items.SCROLL_OF_INSTANT_WARP,      1,  1, 10    },
+        [ 3] = { xi.items.SCROLL_OF_INSTANT_RERAISE,   1,  1, 10    },
+        [ 4] = { xi.items.SCROLL_OF_INSTANT_PROTECT,   1,  1, 10    },
+        [ 5] = { xi.items.SCROLL_OF_INSTANT_SHELL,     1,  1, 10    },
+        [ 6] = { xi.items.MOIST_ROLANBERRY,            0, 99, 10    },
+        [ 7] = { xi.items.CLUMP_OF_RAVAGED_MOKO_GRASS, 0, 99, 10    },
+        [ 8] = { xi.items.CAVORTING_WORM,              0, 99, 10    },
+        [ 9] = { xi.items.LEVIGATED_ROCK,              0, 99, 10    },
+        [10] = { xi.items.LITTLE_LUGWORM,              0, 99, 10    },
+        [11] = { xi.items.TRAINING_MANUAL,             0, 99, 10    },
+        [12] = { xi.items.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
     },
 }
 
