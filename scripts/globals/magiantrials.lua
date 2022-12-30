@@ -252,8 +252,8 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     local items, itemsTrial = getItemsInTrade(trade)
 
     -- get size of tables
-    local nbitems = table.getn(items)
-    local nbitemsTrial = table.getn(itemsTrial)
+    local nbitems      = #items
+    local nbitemsTrial = #itemsTrial
 
     -- playerTrials = active trials for the player
     local nbTrialsPlayer = 0
@@ -272,8 +272,9 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
 
     if nbitemsTrial >= 1 then
         for i, item in ipairs(itemsTrial) do
-            local trials = getPlayerTrialByItemId(player, item.id)
-            local nbtrials = table.getn(trials)
+            local trials   = getPlayerTrialByItemId(player, item.id)
+            local nbtrials = #trials
+
             if nbtrials > 0 then
                 currentTrial = trials[1]
                 currentTrialId = trials[1].trial

@@ -90,7 +90,7 @@ local function removeMobIdFromPos(zoneId, mobId)
 end
 
 local function searchEmptyPos(zoneId)
-    local maxPos = table.getn(xi.voidwalker.pos[zoneId])
+    local maxPos = #xi.voidwalker.pos[zoneId]
     local pos = math.random(1, maxPos)
     local currentPos = xi.voidwalker.pos[zoneId][pos]
     if currentPos.mobId == nil then
@@ -126,7 +126,7 @@ local getNearestMob = function(player, mobs)
         return a.distance < b.distance
     end)
 
-    if table.getn(results) > 0 then
+    if #results > 0 then
         return results[1]
     else
         return nil
@@ -481,7 +481,7 @@ xi.voidwalker.onHealing = function(player)
     local abyssites = getCurrentKIsFromPlayer(player)
 
     if
-        table.getn(abyssites) == 0 or
+        #abyssites == 0 or
         not zones[zoneId].mob or
         not zones[zoneId].mob.VOIDWALKER
     then
