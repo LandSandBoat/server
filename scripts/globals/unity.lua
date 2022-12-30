@@ -72,9 +72,9 @@ local unityOptions =
         [48] = {  -60.000,  -10.000, -119.000, 192, 212 }, -- Gustav Tunnel
         [49] = { -183.100,  -19.854,   57.900, 127, 127 }, -- Behemoth's Dominion
         [50] = {  -60.000,  -19.329,   17.000,  15, 153 }, -- The Boyahda Tree
-        [51] = nil,                                        -- Valley of Sorrows
-        [52] = nil,                                        -- Wajaom Woodlands
-        [53] = nil,                                        -- Mount Zhayolm
+        [51] = { -141.500,   -5.511,   19.800,  31, 128 }, -- Valley of Sorrows
+        [52] = {  100.000,  -12.000, -163.000,  63,  51 }, -- Wajaom Woodlands
+        [53] = { -613.000,  -21.301,  230.000, 224,  61 }, -- Mount Zhayolm
     },
 
     [4] = -- Items (Item ID, askQuantity (0 = true), limitSize (99 = limit by accolades), cost)
