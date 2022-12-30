@@ -17,16 +17,16 @@ xi.treasure = xi.treasure or {}
 
 xi.treasure.type =
 {
-    CHEST   = 1,
-    COFFER  = 2,
+    CHEST  = 1,
+    COFFER = 2,
 }
 
 local keyType =
 {
-    ZONE_KEY      = 1,
-    THIEF_TOOLS   = 2,
-    SKELETON_KEY  = 3,
-    LIVING_KEY    = 4,
+    ZONE_KEY     = 1,
+    THIEF_TOOLS  = 2,
+    SKELETON_KEY = 3,
+    LIVING_KEY   = 4,
 }
 
 local thiefKeyInfo =
