@@ -186,6 +186,9 @@ public:
     bool TransactionCommit();
     bool TransactionRollback();
 
+    void StartProfiling();
+    void FinishProfiling();
+
     std::shared_ptr<SqlPreparedStatement> GetPreparedStatement(std::string const& name);
 
     // NOTE: You need to be very careful of the lifetime you pass into these std::functions.
