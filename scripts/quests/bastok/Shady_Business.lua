@@ -30,11 +30,11 @@ quest.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Talib'] = quest:progressEvent(2),
+            ['Talib'] = quest:progressEvent(90),
 
             onEventFinish =
             {
-                [2] = function(player, csid, option, npc)
+                [90] = function(player, csid, option, npc)
                     quest:begin(player)
                 end,
             },
