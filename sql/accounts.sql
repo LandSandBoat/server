@@ -23,5 +23,6 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `features` tinyint(2) UNSIGNED NOT NULL DEFAULT '253',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `priv` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `login` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

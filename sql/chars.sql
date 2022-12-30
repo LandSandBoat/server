@@ -46,5 +46,6 @@ CREATE TABLE `chars` (
   `timecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastupdate` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`charid`),
+  KEY `accid` (`accid`),
   FULLTEXT KEY `charname` (`charname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
