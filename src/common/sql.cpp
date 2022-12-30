@@ -634,6 +634,56 @@ bool SqlConnection::TransactionRollback()
     return false;
 }
 
+// Prepares to profile a single query.
+// If you try to query multiple queries inside a start/end block,
+// only the most recent will print results.
+void SqlConnection::StartProfiling()
+{
+    TracyZoneScoped;
+    if (self && QueryStr("SET profiling = 1;") != SQL_ERROR)
+    {
+        return;
+    }
+
+    ShowCritical("Query: %s", self->buf);
+    ShowCritical("StartProfiling: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+}
+
+// Finished profiling a single query.
+// Will print out a table corresponding to the results shown by `SHOW PROFILE;`
+// If you try to query multiple queries inside a start/end block,
+// only the most recent will print results.
+void SqlConnection::FinishProfiling()
+{
+    TracyZoneScoped;
+    if (!self)
+    {
+        return;
+    }
+
+    auto lastQuery = self->buf;
+    if (QueryStr("SHOW PROFILE;") != SQL_ERROR && NumRows() > 0)
+    {
+        std::string outStr = "SQL SHOW PROFILE:\n";
+        outStr += fmt::format("Query: {}\n", lastQuery);
+        outStr += fmt::format("| {:<31}| {:<8} |\n", "Status", "Duration");
+        outStr += fmt::format("|{:=<32}|{:=<10}|\n", "", "");
+
+        while (NextRow() == SQL_SUCCESS)
+        {
+            auto category    = GetStringData(0);
+            auto measurement = GetStringData(1);
+            outStr += fmt::format("| {:<31}| {:<8} |\n", category, measurement);
+        }
+        QueryStr("SET profiling = 0;");
+        ShowInfo(outStr);
+        return;
+    }
+
+    ShowCritical("Query: %s", self->buf);
+    ShowCritical("FinishProfiling: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+}
+
 void SqlConnection::InitPreparedStatements()
 {
     TracyZoneScoped;
