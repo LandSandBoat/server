@@ -68,6 +68,21 @@
             },
         },
         {
+            "name": "(Windows) xi_world",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_world.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "logging": {
+                "moduleLoad": false,
+                "exceptions": false,
+            },
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
