@@ -1483,7 +1483,7 @@ namespace charutils
 
     uint32 UpdateItem(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, bool force)
     {
-        if (!ValidateUpdateItem(PChar, LocationID, slotID, quantity))
+        if (!ValidateUpdateItem(PChar, LocationID, slotID, quantity, force))
         {
             return 0;
         }
