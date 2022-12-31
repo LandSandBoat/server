@@ -83,6 +83,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "timetriggers.h"
+#include "trade_container.h"
 #include "transport.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
@@ -2235,6 +2236,17 @@ namespace luautils
             PChar->animation = ANIMATION_DEATH;
             PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_HOMEPOINT));
             PChar->updatemask |= UPDATE_HP;
+        }
+
+        if (PChar->TradeContainer->getItemsCount() > 0)
+        {
+            ShowDebug("Event [%d] finished without trade cleaned up. "
+                      "Call player:tradeComplete(false) or player:confirmTrade onEventFinish.",
+                      eventID);
+
+            // Because we can't guarantee that a trade is cleaned up after a quest or event is complete,
+            // we clean up the trade container here to avoid having items in reserve.
+            PChar->TradeContainer->Clean();
         }
 
         return 0;

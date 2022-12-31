@@ -1772,6 +1772,11 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->UContainer->UnLock();
             PTarget->UContainer->UnLock();
         }
+        else
+        {
+            ShowError("SmallPacket0x034: Player %s trying to trade invalid item. [Item: %i | Trade Slot: %i | Inv Slot: %i | Quantity: %i] ",
+                      PChar->GetName(), itemID, tradeSlotID, invSlotID, quantity);
+        }
     }
 }
 
