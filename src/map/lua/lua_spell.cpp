@@ -51,6 +51,11 @@ void CLuaSpell::setMsg(uint16 messageID)
     m_PLuaSpell->setMessage(messageID);
 }
 
+void CLuaSpell::setModifier(uint8 modifier)
+{
+    m_PLuaSpell->setModifier(static_cast<MODIFIER>(modifier));
+}
+
 void CLuaSpell::setAoE(uint8 aoe)
 {
     m_PLuaSpell->setAOE(aoe);
@@ -152,6 +157,7 @@ void CLuaSpell::Register()
 {
     SOL_USERTYPE("CSpell", CLuaSpell);
     SOL_REGISTER("setMsg", CLuaSpell::setMsg);
+    SOL_REGISTER("setModifier", CLuaSpell::setModifier);
     SOL_REGISTER("setAoE", CLuaSpell::setAoE);
     SOL_REGISTER("setFlag", CLuaSpell::setFlag);
     SOL_REGISTER("setRadius", CLuaSpell::setRadius);

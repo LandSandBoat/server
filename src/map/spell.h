@@ -1112,6 +1112,9 @@ public:
     void setMultiplier(float multiplier);
     void setMessage(uint16 message);
     void setMagicBurstMessage(uint16 message);
+    auto getModifier() -> MODIFIER;
+    void setModifier(MODIFIER modifier); // set Spell modifier message, MUST reset the modifier on use otherwise it will be stale
+
     void setCE(uint16 ce);
     void setVE(uint16 ve);
     void setRequirements(uint8 requirements);
@@ -1152,6 +1155,7 @@ private:
     uint16      m_element{};                       // element of spell
     uint16      m_message{};                       // message id
     uint16      m_MagicBurstMessage{};             // Message used for magic bursts.
+    MODIFIER    m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
     uint16      m_CE{};                            // cumulative enmity of spell
     uint16      m_VE{};                            // volatile enmity of spell
     std::string m_name;                            // spell name
