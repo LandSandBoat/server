@@ -207,7 +207,10 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    if caster:isPC() and not xi.settings.main.USE_OLD_MAGIC_DAMAGE then
+    if
+        caster:isPC() and
+        not xi.settings.main.USE_OLD_MAGIC_DAMAGE
+    then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
     else
         baseSpellDamage = pTable[spellId][vNPC] -- vNPC
@@ -216,10 +219,11 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 2: statDiffBonus (statDiff * M)
     -----------------------------------
-    -- Player Elemental magic.
+    -- New System: Player Elemental magic. Setting for old system must be false.
     if
         skillType == xi.skill.ELEMENTAL_MAGIC and
-        caster:isPC()
+        caster:isPC() and
+        not xi.settings.main.USE_OLD_MAGIC_DAMAGE
     then
         local mTable =
         {
@@ -236,11 +240,13 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
             statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][5 + i])
         end
 
-    -- Divine magic and Non-Player Elemental magic.
     -- TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
+
+    -- Old System: Divine magic, Non-Player Elemental magic and Player elemental magic IF setting for old system is used.
     elseif
         skillType == xi.skill.DIVINE_MAGIC or
-        (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
+        (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC()) or                                    -- Mobs always use old system
+        (skillType == xi.skill.ELEMENTAL_MAGIC and caster:isPC() and xi.settings.main.USE_OLD_MAGIC_DAMAGE) -- Players use old system only when setting is enabled.
     then
         local spellMultiplier = pTable[spellId][mNPC]            -- M
         local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
@@ -253,7 +259,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
             statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
         end
 
-    -- Ninjutsu.
+    -- Old System: Ninjutsu. "I" (Infection point) isn't used due to lack of information. Values in table are currently made up and unused.
     elseif skillType == xi.skill.NINJUTSU then
         statDiffBonus = math.floor(statDiff * pTable[spellId][mNPC])
     end
