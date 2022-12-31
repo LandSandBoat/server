@@ -45,7 +45,6 @@ local vNPC            = 2
 local mNPC            = 3
 local vPC             = 4
 local inflectionPoint = 5
-local zeroMultiplier  = 6
 
 local pTable =
 {
@@ -217,46 +216,35 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 2: statDiffBonus (statDiff * M)
     -----------------------------------
-    -- Black spell.
-    if skillType == xi.skill.ELEMENTAL_MAGIC then
-        if caster:isPC() then
-            -- (M) In wiki.
-            local spellMultiplier0   = pTable[spellId][zeroMultiplier]
-            local spellMultiplier50  = pTable[spellId][zeroMultiplier + 1]
-            local spellMultiplier100 = pTable[spellId][zeroMultiplier + 2]
-            local spellMultiplier200 = pTable[spellId][zeroMultiplier + 3]
-            local spellMultiplier300 = pTable[spellId][zeroMultiplier + 4]
-            local spellMultiplier400 = pTable[spellId][zeroMultiplier + 5]
-            local spellMultiplier500 = pTable[spellId][zeroMultiplier + 6]
+    -- Player Elemental magic.
+    if
+        skillType == xi.skill.ELEMENTAL_MAGIC and
+        caster:isPC()
+    then
+        local mTable =
+        {
+            [1] = {   0,  50 },
+            [2] = {  50,  50 },
+            [3] = { 100, 100 },
+            [4] = { 200, 100 },
+            [5] = { 300, 100 },
+            [6] = { 400, 100 },
+            [7] = { 500, 100 },
+        }
 
-            -- Ugly, but better than 7 more values in spells table.
-            if statDiff < 50 then
-                statDiffBonus = math.floor(statDiff * spellMultiplier0)
-            elseif statDiff < 100 and statDiff >= 50 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor((statDiff - 50) * spellMultiplier50)
-            elseif statDiff < 200 and statDiff >= 100 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor((statDiff - 100) * spellMultiplier100)
-            elseif statDiff < 300 and statDiff >= 200 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor((statDiff - 200) * spellMultiplier200)
-            elseif statDiff < 400 and statDiff >= 300 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(100 * spellMultiplier200)
-                statDiffBonus = statDiffBonus + math.floor((statDiff - 300) * spellMultiplier300)
-            elseif statDiff < 500 and statDiff >= 400 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(100 * spellMultiplier200)
-                statDiffBonus = statDiffBonus + math.floor(100 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
-            else -- It's over 500!
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(100 * spellMultiplier200)
-                statDiffBonus = statDiffBonus + math.floor(100 * spellMultiplier300) + math.floor(100 * spellMultiplier400) + math.floor((statDiff - 500) * spellMultiplier500)
-            end
+        for i = 1, 7 do
+            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][5 + i])
         end
 
-    -- Divine magic and Non-Player Elemental magic. TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
+    -- Divine magic and Non-Player Elemental magic.
+    -- TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
     elseif
         skillType == xi.skill.DIVINE_MAGIC or
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
     then
-        local spellMultiplier = pTable[spellId][mNPC] -- M
+        local spellMultiplier = pTable[spellId][mNPC]            -- M
         local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
+
         if statDiff <= 0 then
             statDiffBonus = statDiff
         elseif statDiff > 0 and statDiff <= inflexionPoint then
