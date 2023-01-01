@@ -97,8 +97,14 @@ bool CAIActionQueue::isEmpty()
     return actionQueue.empty() && timerQueue.empty();
 }
 
-void CAIActionQueue::clearQueue()
+void CAIActionQueue::clearActionQueue()
 {
     while (!actionQueue.empty())
         actionQueue.pop();
+}
+
+void CAIActionQueue::clearTimerQueue()
+{
+    while (!timerQueue.empty())
+        timerQueue.pop();
 }

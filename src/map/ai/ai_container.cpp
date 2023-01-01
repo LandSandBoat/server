@@ -541,7 +541,12 @@ bool CAIContainer::QueueEmpty()
 
 void CAIContainer::ClearActionQueue()
 {
-    ActionQueue.clearQueue();
+    ActionQueue.clearActionQueue();
+}
+
+void CAIContainer::ClearTimerQueue()
+{
+    ActionQueue.clearTimerQueue();
 }
 
 void CAIContainer::checkQueueImmediately()
