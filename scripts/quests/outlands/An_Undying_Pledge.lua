@@ -81,7 +81,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, { claim = true, hide = 0 })
+                     npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, { claim = true, hide = 0 })
                         then
                             return quest:messageSpecial(ID.text.BODY_NUMB_DREAD)
                     elseif
