@@ -2135,7 +2135,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     bool  isParalyzed      = battleutils::IsParalyzed(this);
     bool  itemLoss         = lua["xi"]["settings"]["map"]["ITEM_PARALYSIS_LOSS"].get<bool>();
     bool  scrollProtection = lua["xi"]["settings"]["map"]["ITEM_PARALYSIS_SCROLL_PROTECTION"].get<bool>();
-    bool  isScroll = PItem->isScroll();
+    bool  isScroll         = PItem->isScroll();
 
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
