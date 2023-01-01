@@ -129,7 +129,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             if instance:getStage() == xi.nyzul.objective.ACTIVATE_ALL_LAMPS then
-                for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
+                for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + 4 do
                     GetNPCByID(i, instance):setStatus(xi.status.DISAPPEAR)
                     GetNPCByID(i, instance):setAnimationSub(0)
                 end
