@@ -47,53 +47,13 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        -- Supporting Character dialogue after Accepted
-        [xi.zone.PORT_WINDURST] =
-        {
-            ['Tohopka'] = quest:event(198, 0, xi.items.STARFALL_TEAR, xi.items.HANDFUL_OF_PUGIL_SCALES)
-        },
-
-        -- Twinkle Tree in West Saru.
-        [xi.zone.WEST_SARUTABARUTA] =
-        {
-            ['Twinkle_Tree'] =
-            {
-                onTrigger = function(player, npc)
-                    if VanadielHour() <= 3 then
-                        player:messageSpecial(westSaruIDs.text.FROST_DEPOSIT_TWINKLES)
-                        return quest:messageSpecial(westSaruIDs.text.MELT_BARE_HANDS)
-                    end
-                    return quest:messageSpecial(westSaruIDs.text.NOTHING_OUT_OF_ORDINARY)
-                end,
-
-                onTrade = function(player, npc, trade)
-                    if VanadielHour() > 3 then
-                        return quest:messageSpecial(westSaruIDs.text.NOTHING_OUT_OF_ORDINARY)
-                    end
-
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.HANDFUL_OF_PUGIL_SCALES, 1 } }) then
-                        if npcUtil.giveItem(player, xi.items.STARFALL_TEAR) then
-                            player:confirmTrade()
-                            if quest:getVar(player, 'Prog') == 0 then
-                                quest:setVar(player, 'Prog', 1)
-                            end
-                            player:messageSpecial(westSaruIDs.text.FROST_DEPOSIT_TWINKLES)
-                            return quest:messageSpecial(westSaruIDs.text.MELT_BARE_HANDS)
-                        end
-                    end
-                end
-            }
-        }
-    },
-
-    -- Quest Complete
-    {
-        check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
-        end,
 
         [xi.zone.PORT_WINDURST] =
         {
+            -- Supporting Character dialogue after Accepted
+            ['Tohopka'] = quest:event(198, 0, xi.items.STARFALL_TEAR, xi.items.HANDFUL_OF_PUGIL_SCALES),
+
+            -- Quest Completion
             ['Sigismund'] =
             {
                 onTrigger = function(player, npc)
@@ -110,13 +70,46 @@ quest.sections =
             onEventFinish =
             {
                 [199] = function(player, csid, option, npc)
+                    -- quest:complete() will clear this quest's variables
                     if quest:complete(player) then
                         player:tradeComplete()
+                        -- Re-establish the Prog variable so Sigismund provides his After completion text
                         quest:setVar(player, 'Prog', 2)
                     end
                 end
             }
-        }
+        },
+
+        -- Twinkle Tree in West Saru.
+        [xi.zone.WEST_SARUTABARUTA] =
+        {
+            ['Twinkle_Tree'] =
+            {
+                onTrigger = function(player, npc)
+                    if VanadielHour() <= 3 then
+                        player:messageSpecial(westSaruIDs.text.FROST_DEPOSIT_TWINKLES)
+                        return quest:messageSpecial(westSaruIDs.text.MELT_BARE_HANDS)
+                    end
+                end,
+
+                onTrade = function(player, npc, trade)
+                    if
+                        VanadielHour() <= 3 and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.HANDFUL_OF_PUGIL_SCALES, 1 } }) and
+                        npcUtil.giveItem(player, xi.items.STARFALL_TEAR)
+                    then
+                        player:confirmTrade()
+                        if quest:getVar(player, 'Prog') == 0 then
+                            quest:setVar(player, 'Prog', 1)
+                        end
+                        player:messageSpecial(westSaruIDs.text.FROST_DEPOSIT_TWINKLES)
+                        return quest:messageSpecial(westSaruIDs.text.MELT_BARE_HANDS)
+                    end
+
+
+                end
+            }
+        },
     },
 
     -- After Quest Complete
@@ -134,6 +127,7 @@ quest.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
+                    -- Clear the Prog variable so this event only fires once
                     quest:setVar(player, 'Prog', 0)
                 end
             }
