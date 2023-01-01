@@ -2136,10 +2136,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     bool  itemLoss         = lua["xi"]["settings"]["map"]["ITEM_PARALYSIS_LOSS"].get<bool>();
     bool  scrollProtection = lua["xi"]["settings"]["map"]["ITEM_PARALYSIS_SCROLL_PROTECTION"].get<bool>();
     // clang-format off
-    bool isScroll = (PItem->getID() >= 4606 && PItem->getID() <= 4638) || PItem->getID() == 4641 ||
-                    (PItem->getID() >= 4646 && PItem->getID() <= 4647) || (PItem->getID() >= 4651 && PItem->getID() <= 4851) ||
-                    (PItem->getID() >= 4853 && PItem->getID() <= 4863) || (PItem->getID() >= 4866 && PItem->getID() <= 4958) ||
-                    (PItem->getID() >= 4961 && PItem->getID() <= 5106) || (PItem->getID() >= 6569 && PItem->getID() <= 6571);
+    // bool isScroll = (PItem->getID() >= 4606 && PItem->getID() <= 4638) || PItem->getID() == 4641 ||
+    //                 (PItem->getID() >= 4646 && PItem->getID() <= 4647) || (PItem->getID() >= 4651 && PItem->getID() <= 4851) ||
+    //                 (PItem->getID() >= 4853 && PItem->getID() <= 4863) || (PItem->getID() >= 4866 && PItem->getID() <= 4958) ||
+    //                 (PItem->getID() >= 4961 && PItem->getID() <= 5106) || (PItem->getID() >= 6569 && PItem->getID() <= 6571);
     // clang-format on
 
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
@@ -2191,7 +2191,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         actionTarget.knockback = 0;
     }
 
-    if ((isParalyzed && scrollProtection && isScroll && itemLoss) || (isParalyzed && !itemLoss)) // Become paralyzed and stop executing.
+    if ((isParalyzed && scrollProtection && PItem->isScroll() && itemLoss) || (isParalyzed && !itemLoss)) // Become paralyzed and stop executing.
     {
         this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
         PItem->setSubType(ITEM_UNLOCKED);
