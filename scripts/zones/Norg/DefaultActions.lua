@@ -11,5 +11,4 @@ return {
     ['Ranemaud']    = { event = 68 },
     ['Washu']       = { event = 80 },
     ['Stray_Cloud'] = { event = 231 },
-
 }

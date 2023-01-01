@@ -8,9 +8,6 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar("Quest[5][149]Prog") == 2 then
-        player:setCharVar("anUndyingPledgeNM_killed", 1)
-    end
 end
 
 return entity

@@ -80,15 +80,14 @@ quest.sections =
             ['qm5'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 and npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, { claim = true, hide = 0 }) then
-                        return quest:messageSpecial(ID.text.BODY_NUMB_DREAD)
+                    if quest:getVar(player, 'Prog') == 2 and
+                        npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, { claim = true, hide = 0 })
+                        then
+                            return quest:messageSpecial(ID.text.BODY_NUMB_DREAD)
                     elseif
-                        quest:getVar(player, 'Prog') == 2 and
-                        player:getCharVar("anUndyingPledgeNM_killed") == 1
+                        quest:getVar(player, 'Prog') == 3
                     then
                         return quest:progressEvent(18)
-                    else
-                        return quest:noAction()
                     end
                 end,
             },
@@ -97,8 +96,15 @@ quest.sections =
             {
                 [18] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.CALIGINOUS_BLADE)
-                    quest:setVar(player, 'Prog', 3)
-                    player:setCharVar("anUndyingPledgeNM_killed", 0)
+                end,
+            },
+
+            ['Glyryvilu'] =
+            {
+                onMobDeath = function(mob, player, optParams)
+                    if quest:getVar(player, 'Prog') == 2 then
+                        quest:setVar(player, 'Prog', 3)
+                    end
                 end,
             },
         },
