@@ -47,7 +47,6 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-
         [xi.zone.PORT_WINDURST] =
         {
             -- Supporting Character dialogue after Accepted
@@ -105,8 +104,6 @@ quest.sections =
                         player:messageSpecial(westSaruIDs.text.FROST_DEPOSIT_TWINKLES)
                         return quest:messageSpecial(westSaruIDs.text.MELT_BARE_HANDS)
                     end
-
-
                 end
             }
         },
