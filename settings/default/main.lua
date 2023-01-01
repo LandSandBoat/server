@@ -214,6 +214,12 @@ xi.settings.main =
     GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
     GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
+    -- NYZUL
+    RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
+    ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
+    ENABLE_VIGIL_DROPS   = true, -- Enable Vigil Weapon drops from NMs.
+    ACTIVATE_LAMP_TIME   = 6000, -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
+
     -- MISC
     RIVERNE_PORTERS              = 120,   -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200,  -- time in seconds that lanterns in the Den of Rancor stay lit.
