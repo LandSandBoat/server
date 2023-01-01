@@ -106,5 +106,7 @@ void CAIActionQueue::clearActionQueue()
 void CAIActionQueue::clearTimerQueue()
 {
     while (!timerQueue.empty())
+    {
         timerQueue.pop();
+    }
 }
