@@ -158,7 +158,6 @@ bool CItemUsable::isScroll() const
             (id >= 4646 && id <= 4647) || (id >= 4651 && id <= 4851) ||
             (id >= 4853 && id <= 4863) || (id >= 4866 && id <= 4958) ||
             (id >= 4961 && id <= 5106) || (id >= 6569 && id <= 6571);
-    // clang-format on
 }
 
 
