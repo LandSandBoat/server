@@ -553,6 +553,11 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
         }
         m_POwner->updatemask |= UPDATE_HP;
 
+        if (statusId == EFFECT_FOOD || statusId == EFFECT_DEDICATION)
+        {
+            m_POwner->StatusEffectContainer->SaveStatusEffects();
+        }
+
         return true;
     }
     else
