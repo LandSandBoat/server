@@ -57,6 +57,8 @@ public:
     void setAssignTime(uint32 VanaTime);
     void setAoE(uint16 AoE);
 
+    bool isScroll() const;
+
 private:
     uint8  m_UseDelay;   // задержка использования после экипировки
     uint8  m_MaxCharges; // максимальное количество зарядов предмета
