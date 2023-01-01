@@ -5039,14 +5039,6 @@ namespace battleutils
     {
         // Gear with Charm + does not affect the success rate of Charm, but increases the duration of the Charm.
         // Each +1 to Charm increases the duration of charm by 5%; +20 Charm doubles the duration of charm.
-
-        // Too Weak          30 Minutes
-        // Easy Prey         20 Minutes
-        // Decent Challenge  10 Minutes
-        // Even Match        3.0 Minutes
-        // Tough             1.5 Minutes
-        // VT                1 minute    guess
-        // IT                30 seconds  guess
         uint32 CharmTime = 0;
 
         // player charming mob
@@ -5061,54 +5053,76 @@ namespace battleutils
             }
 
             // mob is charmable
-            const EMobDifficulty mobCheck = charutils::CheckMob(PCharmer->GetMLevel(), PVictim->GetMLevel());
-            switch (mobCheck)
+            uint16 baseCharmDuration = floor(1.25f * PCharmer->stats.CHR + 150);
+
+            int8 dLvl = PCharmer->GetMLevel() - PVictim->GetMLevel();
+
+            // dLvl -6 or lower
+            float dLvlCharmMod = 1 / 24.f;
+
+            // dLvl 9 or higher
+            if (dLvl >= 9)
             {
-                case EMobDifficulty::TooWeak:
-                    CharmTime = 1800000;
-                    break;
+                dLvlCharmMod = 6.0f;
+            }
 
-                case EMobDifficulty::IncrediblyEasyPrey:
-                case EMobDifficulty::EasyPrey:
-                    CharmTime = 1200000;
+            // -6 < dLvl < 9
+            switch (dLvl)
+            {
+                case -5:
+                    dLvlCharmMod = 1 / 12.f;
                     break;
-
-                case EMobDifficulty::DecentChallenge:
-                    CharmTime = 600000;
+                case -4:
+                    dLvlCharmMod = 1 / 8.f;
                     break;
-
-                case EMobDifficulty::EvenMatch:
-                    CharmTime = 180000;
+                case -3:
+                    dLvlCharmMod = 1 / 6.f;
                     break;
-
-                case EMobDifficulty::Tough:
-                    CharmTime = 90000;
+                case -2:
+                    dLvlCharmMod = 1 / 3.f;
                     break;
-
-                case EMobDifficulty::VeryTough:
-                    CharmTime = 45000;
+                case -1:
+                    dLvlCharmMod = 2 / 3.f;
                     break;
-
-                case EMobDifficulty::IncrediblyTough:
-                    CharmTime = 22500;
+                case 0:
+                    dLvlCharmMod = 1.0f;
                     break;
-
+                case 1:
+                    dLvlCharmMod = 1.4f;
+                    break;
+                case 2:
+                    dLvlCharmMod = 1.8f;
+                    break;
+                case 3:
+                    dLvlCharmMod = 2.2f;
+                    break;
+                case 4:
+                    dLvlCharmMod = 2.6f;
+                    break;
+                case 5:
+                    dLvlCharmMod = 3.0f;
+                    break;
+                case 6:
+                    dLvlCharmMod = 3.4f;
+                    break;
+                case 7:
+                    dLvlCharmMod = 4.0f;
+                    break;
+                case 8:
+                    dLvlCharmMod = 5.0f;
+                    break;
                 default:
-                    // no-op
                     break;
             }
+
+            // Pre-Gear Charm Duration = Base Charm Duration x % Change
+            CharmTime = baseCharmDuration * dLvlCharmMod;
 
             // apply charm time extension from gear
             uint16 charmModValue = (PCharmer->getMod(Mod::CHARM_TIME));
             // adds 5% increase
-            uint32 extraCharmTime = (uint32)(CharmTime * (charmModValue * 0.5f) / 10.f);
+            uint32 extraCharmTime = (uint32)(CharmTime * (charmModValue * 0.05f));
             CharmTime += extraCharmTime;
-
-            // randomize charm time if > EM
-            if (mobCheck > EMobDifficulty::EvenMatch)
-            {
-                CharmTime = (uint32)(CharmTime * xirand::GetRandomNumber(0.75f, 1.25f));
-            }
 
             if (!TryCharm(PCharmer, PVictim))
             {
@@ -5116,7 +5130,7 @@ namespace battleutils
             }
         }
 
-        applyCharm(PCharmer, PVictim, std::chrono::milliseconds(CharmTime));
+        applyCharm(PCharmer, PVictim, std::chrono::seconds(CharmTime));
     }
 
     void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime)
