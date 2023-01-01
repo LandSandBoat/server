@@ -19,6 +19,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
+require("scripts/globals/status")
 -----------------------------------
 local behemothsDominionID = require('scripts/zones/Behemoths_Dominion/IDs')
 local capeTerigganID      = require('scripts/zones/Cape_Teriggan/IDs')
@@ -94,7 +95,7 @@ mission.sections =
             {
                 onMobDeath = function(mob, player, optParams)
                     if optParams.isKiller then
-                        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+                        GetNPCByID(behemothsDominionID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
                     end
                 end,
             },
@@ -105,8 +106,13 @@ mission.sections =
                     if option == 1 then
                         player:messageSpecial(behemothsDominionID.text.AIR_AROUND_YOU_CHANGED)
 
-                        SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON)
-                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
+                        if player:hasStatusEffect(xi.effect.SNEAK) then
+                            SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON)
+                            SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
+                        else
+                            SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON):updateClaim(player)
+                            SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON):updateClaim(player)
+                        end
                     end
                 end,
 
@@ -349,8 +355,17 @@ mission.sections =
             ['Tipha'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if optParams.isKiller and GetMobByID(ID.mob.CARTHI):isDead() then
-                        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+                    if optParams.isKiller and GetMobByID(yuhtungaJungleID.mob.CARTHI):isDead() then
+                        GetNPCByID(yuhtungaJungleID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+                    end
+                end,
+            },
+
+            ['Carthi'] =
+            {
+                onMobDeath = function(mob, player, optParams)
+                    if optParams.isKiller and GetMobByID(yuhtungaJungleID.mob.TIPHA):isDead() then
+                        GetNPCByID(yuhtungaJungleID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
                     end
                 end,
             },
@@ -362,7 +377,11 @@ mission.sections =
                         player:messageSpecial(yuhtungaJungleID.text.THE_OPO_OPOS_ATTACK)
 
                         SpawnMob(yuhtungaJungleID.mob.TIPHA):updateClaim(player)
-                        SpawnMob(yuhtungaJungleID.mob.CARTHI)
+                        if player:hasStatusEffect(xi.effect.SNEAK) then
+                            SpawnMob(yuhtungaJungleID.mob.CARTHI)
+                        else
+                            SpawnMob(yuhtungaJungleID.mob.CARTHI):updateClaim(player)
+                        end
                     end
                 end,
 
