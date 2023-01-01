@@ -2,10 +2,11 @@
 -- Nyzul Isle Global
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
+require("scripts/globals/appraisal")
 require("scripts/globals/items")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/appraisal")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
@@ -492,10 +493,10 @@ xi.nyzul.appraisalItems =
 -- Local functions
 local function getTokenRate(instance)
     local partySize = instance:getLocalVar("partySize")
-    local rate       = 1
+    local rate      = 1
 
     if partySize > 3 then
-        rate = rate - ((partySize - 3) * 0.1)
+        rate = rate - (partySize - 3) * 0.1
     end
 
     return rate
@@ -508,7 +509,7 @@ local function calculateTokens(instance)
     local floorBonus      = 0
 
     if relativeFloor > 1 then
-        floorBonus = (10 * math.floor((relativeFloor - 1) / 5))
+        floorBonus = 10 * math.floor((relativeFloor - 1) / 5)
     end
 
     potentialTokens = math.floor(potentialTokens + (200 + floorBonus) * rate)
@@ -535,7 +536,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
         if npc:getID() == cofferID and npc:getLocalVar("opened") == 0 then
             -- Appraisal Items
-            local mobOffset = npc:getLocalVar("appraisalItem") - 17092723
+            local mobOffset = npc:getLocalVar("appraisalItem") - (ID.mob[51].OFFSET_NM - xi.appraisal.origin.NYZUL_BAT_EYE) -- Bat Eye mobId - Appraisal mob value.
 
             if mobOffset == 166 or mobOffset == 187 then
                 mobOffset = 108
@@ -622,8 +623,8 @@ xi.nyzul.tempBoxPickItems = function(npc)
         [22] = { itemID = xi.items.DUSTY_ELIXIR,               amount = 1                 }
     }
 
-    local random       = math.random(1, #tempBoxItems)
-    local item         = tempBoxItems[random]
+    local random      = math.random(1, #tempBoxItems)
+    local item        = tempBoxItems[random]
     local item2Random = math.random(1, 10)
     local item3Random = math.random(1, 10)
 
@@ -660,7 +661,11 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
         local item2 = npc:getLocalVar("itemID_2")
         local item3 = npc:getLocalVar("itemID_3")
 
-        if option == 1 and item1 > 0 and npc:getLocalVar("itemAmount_1") > 0 then
+        if
+            option == 1 and
+            item1 > 0 and
+            npc:getLocalVar("itemAmount_1") > 0
+        then
             if not player:hasItem(item1, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item1)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item1)
@@ -668,7 +673,12 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
-        elseif option == 2 and item2 > 0 and npc:getLocalVar("itemAmount_2") > 0 then
+
+        elseif
+            option == 2 and
+            item2 > 0 and
+            npc:getLocalVar("itemAmount_2") > 0
+        then
             if not player:hasItem(item2, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item2)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item2)
@@ -676,7 +686,12 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
-        elseif option == 3 and item3 > 0 and npc:getLocalVar("itemAmount_3") > 0 then
+
+        elseif
+            option == 3 and
+            item3 > 0 and
+            npc:getLocalVar("itemAmount_3") > 0
+        then
             if not player:hasItem(item3, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item3)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item3)
@@ -715,7 +730,7 @@ xi.nyzul.clearChests = function(instance)
         end
     end
 
-    if xi.settings.ENABLE_NYZUL_CASKETS == 1 then
+    if xi.settings.main.ENABLE_NYZUL_CASKETS then
         for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
             local casket = GetNPCByID(casketID, instance)
 
@@ -741,7 +756,7 @@ xi.nyzul.handleRunicKey = function(mob)
                 entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
                 not entity:hasKeyItem(xi.ki.RUNIC_KEY)
             then
-                if xi.settings.RUNIC_DISK_SAVE == 0 then -- On early version only initiator of floor got progress saves and key credit
+                if not xi.settings.main.RUNIC_DISK_SAVE then -- On early version only initiator of floor got progress saves and key credit
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
                             entity:setVar("NyzulFloorProgress", 0)
@@ -861,7 +876,7 @@ xi.nyzul.vigilWeaponDrop = function(player, mob)
         player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
 
     -- Every NM can randomly drop a vigil weapon
-    elseif math.random(100) <= 20 and xi.settings.ENABLE_VIGIL_DROPS == 1 then
+    elseif math.random(1, 100) <= 20 and xi.settings.main.ENABLE_VIGIL_DROPS then
         player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
     end
 end
@@ -889,8 +904,8 @@ xi.nyzul.spawnChest = function(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.ENABLE_NYZUL_CASKETS == 1 then
-        if math.random(100) <= 6 then
+    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.main.ENABLE_NYZUL_CASKETS then
+        if math.random(1, 100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
 
