@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             for _, players in pairs(chars) do
                 local floorProgress = players:getVar("NyzulFloorProgress")
 
-                if xi.settings.RUNIC_DISK_SAVE == 0 then
+                if not xi.settings.main.RUNIC_DISK_SAVE then
                     -- Only the person who chose floor gets disk recoreded
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then

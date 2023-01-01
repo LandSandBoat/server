@@ -2,10 +2,11 @@
 -- Nyzul Isle Global
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
+require("scripts/globals/appraisal")
 require("scripts/globals/items")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/appraisal")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
@@ -715,7 +716,7 @@ xi.nyzul.clearChests = function(instance)
         end
     end
 
-    if xi.settings.ENABLE_NYZUL_CASKETS == 1 then
+    if xi.settings.main.ENABLE_NYZUL_CASKETS then
         for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
             local casket = GetNPCByID(casketID, instance)
 
@@ -741,7 +742,7 @@ xi.nyzul.handleRunicKey = function(mob)
                 entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
                 not entity:hasKeyItem(xi.ki.RUNIC_KEY)
             then
-                if xi.settings.RUNIC_DISK_SAVE == 0 then -- On early version only initiator of floor got progress saves and key credit
+                if not xi.settings.main.RUNIC_DISK_SAVE then -- On early version only initiator of floor got progress saves and key credit
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
                             entity:setVar("NyzulFloorProgress", 0)
@@ -861,7 +862,7 @@ xi.nyzul.vigilWeaponDrop = function(player, mob)
         player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
 
     -- Every NM can randomly drop a vigil weapon
-    elseif math.random(100) <= 20 and xi.settings.ENABLE_VIGIL_DROPS == 1 then
+    elseif math.random(100) <= 20 and xi.settings.main.ENABLE_VIGIL_DROPS then
         player:addTreasure(xi.nyzul.baseWeapons[math.random(1, #xi.nyzul.baseWeapons)], mob)
     end
 end
@@ -889,7 +890,7 @@ xi.nyzul.spawnChest = function(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.ENABLE_NYZUL_CASKETS == 1 then
+    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.main.ENABLE_NYZUL_CASKETS then
         if math.random(100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
