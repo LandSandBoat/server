@@ -71,7 +71,7 @@ quest.sections =
                     player:tradeComplete()
                     if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_COMPLETED then
                         -- Quest is repeatable but only gives 5 fame per turn in instead of the 30 for the original completion
-                        quest.reward.fame = 5;
+                        quest.reward.fame = 5
                     end
                     quest:complete(player)
                 end,
