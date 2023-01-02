@@ -2245,6 +2245,12 @@ namespace fishingutils
                     }
                     else
                     {
+                        // ignore pirates chart items since not in pirates fight
+                        if (item->fishID == 5329 || item->fishID == 5330)
+                        {
+                            continue;
+                        }
+
                         if (!item->quest_only && FishingPools[PChar->getZone()].catchPools[area->areaId].stock[item->fishID].quantity == 0)
                         {
                             NoCatchList.insert(item->fishID);
