@@ -728,15 +728,15 @@ bool CMobController::IsStuck()
 void CMobController::UpdateLastKnownPosition()
 {
     // Mob is considered "Stuck" if:
-    // 1. Last Pos && Current Pos are <= 1.5
-    // 2. Distance to Target > Melee Range
+    // 1. Current Pos - Last Pos is <= 2.5 
+    // 2. Distance to Target's Last Pos > Melee Range
     // 3. Mob is not bound or asleep
     m_Stuck =
         PMob->CanMove() &&
-        !PMob->StatusEffectContainer->IsAsleep() &&
-        distanceSquared(m_LastPos, PMob->loc.p) <= 1.5f &&
-        distanceSquared(PMob->loc.p, PTarget->loc.p) > PMob->GetMeleeRange();
+        distanceSquared(m_LastPos, PMob->loc.p) <= 2.5f &&
+        distanceSquared(PMob->loc.p, m_LastTargetPos) > PMob->GetMeleeRange();
 
+    m_LastTargetPos = PTarget->loc.p;
     m_LastPos = PMob->loc.p;
 }
 

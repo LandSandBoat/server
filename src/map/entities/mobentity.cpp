@@ -1640,7 +1640,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
 bool CMobEntity::CanMove()
 {
-    return !StatusEffectContainer->HasStatusEffect({EFFECT_BIND, EFFECT_PETRIFICATION, EFFECT_TERROR, EFFECT_STUN});
+    return !StatusEffectContainer->IsAsleep() && !StatusEffectContainer->HasStatusEffect({EFFECT_BIND, EFFECT_PETRIFICATION, EFFECT_TERROR, EFFECT_STUN});
 }
 
 bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
