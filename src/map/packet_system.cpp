@@ -4143,12 +4143,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                         break;
                 }
 
-                // Handle case for mog garden (Above addition does not work for this zone.)
+                // Handle case for mog garden (Above addition does not work for this zone)
                 if (requestedZone == 127)
                 {
                     destinationZone = ZONE_MOG_GARDEN;
                 }
-                else if (requestedZone == 125) // Go to second floor
+                else if (requestedZone == 126) // Go to first floor from second
+                {
+                    destinationZone = PChar->getZone();
+                }
+                else if (requestedZone == 125) // Go to second floor from first
                 {
                     destinationZone = PChar->getZone();
                 }
@@ -4161,8 +4165,8 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
             auto moghouseExitRegions          = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
             auto moghouseSameRegion           = std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
-                                                         [&destinationRegion](REGION_TYPE acceptedReg)
-                                                         { return destinationRegion == acceptedReg; });
+                                                            [&destinationRegion](REGION_TYPE acceptedReg)
+                                                            { return destinationRegion == acceptedReg; });
             auto moghouseQuestComplete        = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
             bool moghouseExitQuestZoneline    = moghouseQuestComplete &&
                                              startingRegion == destinationRegion &&
@@ -4172,6 +4176,9 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
             bool requestedMoghouseFloorChange  = startingZone == destinationZone;
+
+            // TODO: Handle 2F unlock
+            std::ignore = moghouse2FUnlocked;
 
             // Validate travel
             if (moghouseExitRegular || moghouseExitQuestZoneline || moghouseExitMogGardenZoneline)
@@ -4183,7 +4190,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 // Clear Moghouse 2F tracker flag
                 PChar->profile.mhflag &= ~(0x40);
             }
-            else if (moghouse2FUnlocked && requestedMoghouseFloorChange)
+            else if (requestedMoghouseFloorChange)
             {
                 // Toggle Moghouse 2F tracker flag
                 PChar->profile.mhflag ^= 0x40;
@@ -6164,20 +6171,28 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Open/Close Mog House                                                 *
+ *  Mog House actions                                                    *
  *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (data.ref<uint8>(0x04) == 1)
+
+    auto operation = data.ref<uint8>(0x04);
+    if (operation == 1)
     {
-        // open
+        // open mog house
     }
-    else if (data.ref<uint8>(0x04) == 2)
+    else if (operation == 2)
     {
-        // close
+        // close mog house
+    }
+    else if (operation == 5)
+    {
+        // remodel mog house
+        auto type = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105
+        std::ignore = type;
     }
     else
     {

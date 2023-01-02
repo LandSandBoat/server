@@ -183,7 +183,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     auto csid = currentEvent->eventId;
     if (csid != -1)
     {
-        // ref<uint8>(data,(0x1F)) = 4;                             // Presumably Animation
+        // ref<uint8>(data,(0x1F)) = 4; // Presumably Animation
         // ref<uint8>(data,(0x20)) = 2;
 
         ref<uint16>(0x40) = PChar->currentEvent->textTable == -1 ? PChar->getZone() : PChar->currentEvent->textTable;
@@ -201,18 +201,24 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     {
         ref<uint8>(0x80)  = 1;
         ref<uint16>(0xAA) = GetMogHouseModelID(PChar);
-        ref<uint8>(0xAE)  = GetMogHouseLeavingFlag(PChar);
-        PChar->setCharVar("[Moghouse]Exit_Pending", 1);
     }
     else
     {
         ref<uint8>(0x80)  = 2;
         ref<uint16>(0xAA) = 0x01FF;
+
+        // TODO: This has also been seen as 0x04
         ref<uint8>(0xAC)  = csid > 0 ? 0x01 : 0x00;                    // if 0x01 then pause between zone
         ref<uint8>(0xAF)  = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
     }
 
     ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation
+
+    // Using Moghouse2F
+    ref<uint8>(0xA8) = PChar->profile.mhflag & 0x40 ? 0x3A : 0x38;
+
+    ref<uint8>(0xAE)  = GetMogHouseLeavingFlag(PChar);
+    PChar->setCharVar("[Moghouse]Exit_Pending", 1);
 
     uint32 pktTime = CVanaTime::getInstance()->getVanaTime();
 
@@ -220,6 +226,10 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint32>(0x3C) = pktTime;
 
     ref<uint32>(0xA4) = PChar->GetTimeRemainingUntilDeathHomepoint();
+
+    // TODO: What are these for?
+    ref<uint8>(0xB0) = 0x01;
+    ref<uint8>(0xB2) = 0x02;
 
     ref<uint8>(0xB4) = PChar->GetMJob();
     ref<uint8>(0xB7) = PChar->GetSJob();
