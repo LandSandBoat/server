@@ -733,7 +733,7 @@ void CMobController::UpdateLastKnownPosition()
     // 3. Mob is not bound or asleep
     m_Stuck =
         PMob->CanMove() &&
-        !PMob->isAsleep() &&
+        !PMob->StatusEffectContainer->IsAsleep() &&
         distanceSquared(m_LastPos, PMob->loc.p) <= 1.5f &&
         distanceSquared(PMob->loc.p, PTarget->loc.p) > PMob->GetMeleeRange();
 
