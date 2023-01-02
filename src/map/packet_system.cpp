@@ -4180,12 +4180,12 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->loc.destination = destinationZone;
                 PChar->loc.p           = {};
 
-                // Clear "onMogHouse2F" bit
+                // Clear Moghouse 2F tracker flag
                 PChar->profile.mhflag &= ~(0x40);
             }
             else if (moghouse2FUnlocked && requestedMoghouseFloorChange)
             {
-                // Toggle "onMogHouse2F" bit
+                // Toggle Moghouse 2F tracker flag
                 PChar->profile.mhflag ^= 0x40;
 
                 PChar->loc.destination = destinationZone;

@@ -1232,7 +1232,7 @@ void CLuaBaseEntity::setFlag(uint32 flags)
  *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
  ************************************************************************/
 
-void CLuaBaseEntity::setMoghouseFlag(uint8 flag)
+void CLuaBaseEntity::setMoghouseFlag(uint16 flag)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -1249,7 +1249,7 @@ void CLuaBaseEntity::setMoghouseFlag(uint8 flag)
  *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getMoghouseFlag()
+uint16 CLuaBaseEntity::getMoghouseFlag()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
