@@ -4119,6 +4119,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
         if (zoneLineID == 1903324538)
         {
             uint16 destinationZone = PChar->getZone();
+
             // Note: zone zero actually exists but is unused in retail, we should stop using zero someday.
             // If zero, return to previous zone otherwise, determine the zone
             if (requestedZone != 0)
@@ -4153,16 +4154,21 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
             }
 
-            bool moghouseExitRegular = requestedZone == 0 && PChar->m_moghouseID > 0;
-
-            auto startingRegion            = zoneutils::GetCurrentRegion(startingZone);
-            auto destinationRegion         = zoneutils::GetCurrentRegion(destinationZone);
-            auto moghouseExitRegions       = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
-            auto moghouseQuestComplete     = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
-            bool moghouseExitQuestZoneline = moghouseQuestComplete && startingRegion == destinationRegion && PChar->m_moghouseID > 0 &&
-                                             std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
+            bool moghouseExitRegular          = requestedZone == 0 && PChar->m_moghouseID > 0;
+            bool requestedMoghouseFloorChange = startingZone == destinationZone;
+            bool moghouse2FUnlocked           = PChar->profile.mhflag & 0x20;
+            auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
+            auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
+            auto moghouseExitRegions          = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
+            auto moghouseSameRegion           = std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
                                                          [&destinationRegion](REGION_TYPE acceptedReg)
                                                          { return destinationRegion == acceptedReg; });
+            auto moghouseQuestComplete        = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
+            bool moghouseExitQuestZoneline    = moghouseQuestComplete &&
+                                             startingRegion == destinationRegion &&
+                                             PChar->m_moghouseID > 0 &&
+                                             moghouseSameRegion &&
+                                             !requestedMoghouseFloorChange;
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
             bool requestedMoghouseFloorChange  = startingZone == destinationZone;
@@ -4173,10 +4179,17 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
                 PChar->loc.p           = {};
-                if (requestedMoghouseFloorChange)
-                {
-                    PChar->profile.mhflag &= ~(0x40);
-                }
+
+                // Clear "onMogHouse2F" bit
+                PChar->profile.mhflag &= ~(0x40);
+            }
+            else if (moghouse2FUnlocked && requestedMoghouseFloorChange)
+            {
+                // Toggle "onMogHouse2F" bit
+                PChar->profile.mhflag ^= 0x40;
+
+                PChar->loc.destination = destinationZone;
+                PChar->loc.p           = {};
             }
             else
             {

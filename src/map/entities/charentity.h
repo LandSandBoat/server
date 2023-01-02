@@ -71,7 +71,8 @@ struct jobs_t
 struct profile_t
 {
     uint8      nation;     // Your Nation Allegiance.
-    uint8      mhflag;     // Flag of exit from MOGHOUSE
+    // TODO: Migrate from uint8 to uint16
+    uint16     mhflag;     // Moghouse data. 0x01-0x10: Flag of exit from Moghouse, 0x20-0x80: Flags for Moghouse 2F
     uint16     title;      // rank
     uint16     fame[16];   // Fame
     uint8      rank[3];    // RAGN in three states
