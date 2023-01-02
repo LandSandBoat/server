@@ -200,8 +200,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
         ref<uint16>(0xAA) = 0x01FF;
 
         // TODO: This has also been seen as 0x04
-        ref<uint8>(0xAC)  = csid > 0 ? 0x01 : 0x00;                    // if 0x01 then pause between zone
-        ref<uint8>(0xAF)  = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
+        ref<uint8>(0xAC) = csid > 0 ? 0x01 : 0x00;                    // if 0x01 then pause between zone
+        ref<uint8>(0xAF) = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
     }
 
     ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation
@@ -209,7 +209,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     // Using Moghouse2F
     ref<uint8>(0xA8) = PChar->profile.mhflag & 0x40 ? 0x3A : 0x38;
 
-    ref<uint8>(0xAE)  = GetMogHouseLeavingFlag(PChar);
+    ref<uint8>(0xAE) = GetMogHouseLeavingFlag(PChar);
 
     uint32 pktTime = CVanaTime::getInstance()->getVanaTime();
 

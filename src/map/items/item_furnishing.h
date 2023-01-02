@@ -133,6 +133,9 @@ public:
     void  setMannequinPose(uint8 pose);
     uint8 getMannequinPose();
 
+    void setOn2ndFloor(bool on2ndFloor);
+    bool getOn2ndFloor();
+
 private:
     uint8  m_storage;
     uint16 m_moghancement;
