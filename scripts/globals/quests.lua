@@ -168,7 +168,7 @@ xi.quest.id =
     [xi.quest.area[xi.quest.log_id.BASTOK]] =
     {
         THE_SIRENS_TEAR                 = 0,  -- ± Converted
-        BEAUTY_AND_THE_GALKA            = 1,  -- ±
+        BEAUTY_AND_THE_GALKA            = 1,  -- ± Converted
         WELCOME_TO_BASTOK               = 2,  -- + Converted
         GUEST_OF_HAUTEUR                = 3,  -- + Converted
         THE_QUADAVS_CURSE               = 4,  -- ± Converted
@@ -319,7 +319,7 @@ xi.quest.id =
         SAY_IT_WITH_FLOWERS             = 50, -- +
         HOIST_THE_JELLY_ROGER           = 51, -- +
         SOMETHING_FISHY                 = 52, -- +
-        TO_CATCH_A_FALLING_STAR         = 53, -- +
+        TO_CATCH_A_FALLING_STAR         = 53, -- + Converted
         PAYING_LIP_SERVICE              = 60, -- +
         THE_AMAZIN_SCORPIO              = 61, -- +
         TWINSTONE_BONDING               = 62, -- +
