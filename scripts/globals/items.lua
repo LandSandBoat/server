@@ -2789,6 +2789,7 @@ xi.items =
     VIKING_SHIELD                   = 12356,
     HICKORY_SHIELD                  = 12359,
     CLIPEUS                         = 12371,
+    LIGHT_BUCKLER                   = 12375,
     MERCENARYS_SHIELD               = 12389,
     WRESTLERS_SHIELD                = 12390,
     ASTRAL_ASPIS                    = 12382,
