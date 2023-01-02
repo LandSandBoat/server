@@ -160,3 +160,20 @@ uint8 CItemFurnishing::getMannequinPose()
 {
     return ref<uint8>(m_extra, 0x13);
 }
+
+void CItemFurnishing::setOn2ndFloor(bool on2ndFloor)
+{
+    if (on2ndFloor)
+    {
+        ref<uint8>(m_extra, 0x01) |= 0x01;
+    }
+    else
+    {
+        ref<uint8>(m_extra, 0x01) &= ~0x01;
+    }
+}
+
+bool CItemFurnishing::getOn2ndFloor()
+{
+    return ref<uint8>(m_extra, 0x01) & 01;
+}

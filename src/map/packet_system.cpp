@@ -6191,7 +6191,7 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
     else if (operation == 5)
     {
         // remodel mog house
-        auto type = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105
+        auto type   = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105
         std::ignore = type;
     }
     else
@@ -6992,6 +6992,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint8 slotID      = data.ref<uint8>(0x06);
     uint8 containerID = data.ref<uint8>(0x07);
+    uint8 on2ndFloor  = data.ref<uint8>(0x08);
     uint8 col         = data.ref<uint8>(0x09);
     uint8 level       = data.ref<uint8>(0x0A);
     uint8 row         = data.ref<uint8>(0x0B);
@@ -7013,6 +7014,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         bool wasInstalled = PItem->isInstalled();
         PItem->setInstalled(true);
+        PItem->setOn2ndFloor(on2ndFloor);
         PItem->setCol(col);
         PItem->setRow(row);
         PItem->setLevel(level);
