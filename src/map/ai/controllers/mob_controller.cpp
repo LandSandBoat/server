@@ -732,11 +732,11 @@ void CMobController::UpdateLastKnownPosition()
     // 2. Distance to Target > Melee Range
     // 3. Mob is not bound or asleep
     m_Stuck =
+        PMob->CanMove() &&
+        !PMob->isAsleep() &&
         distanceSquared(m_LastPos, PMob->loc.p) <= 1.5f &&
-        distanceSquared(PMob->loc.p, PTarget->loc.p) > PMob->GetMeleeRange() &&
-        PMob->StatusEffectContainer->GetStatusEffect(EFFECT_BIND) == nullptr &&
-        PMob->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) == nullptr &&
-        PMob->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP_II) == nullptr;
+        distanceSquared(PMob->loc.p, PTarget->loc.p) > PMob->GetMeleeRange();
+
     m_LastPos = PMob->loc.p;
 }
 

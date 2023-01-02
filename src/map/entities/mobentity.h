@@ -179,6 +179,8 @@ public:
     virtual void Spawn() override;
     virtual void FadeOut() override;
 
+    virtual bool CanMove();
+
     bool   m_AllowRespawn; // if true, allow respawn
     uint32 m_RespawnTime;  // respawn time
     uint32 m_DropItemTime; // time until monster death animation
