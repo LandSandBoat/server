@@ -17,8 +17,8 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 643) and
-        npcUtil.popFromQM(player, npc, ID.mob.MORION_WORM, { radius = 1 })
+        npcUtil.tradeHasExactly(trade, 643) and
+        npcUtil.popFromQM(player, npc, ID.mob.MORION_WORM, { radius = 1, hide = 0 })
     then
         -- Iron Ore
         player:confirmTrade()
