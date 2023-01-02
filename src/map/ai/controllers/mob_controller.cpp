@@ -737,7 +737,7 @@ void CMobController::UpdateLastKnownPosition()
         distanceSquared(PMob->loc.p, m_LastTargetPos) > PMob->GetMeleeRange();
 
     m_LastTargetPos = PTarget->loc.p;
-    m_LastPos = PMob->loc.p;
+    m_LastPos       = PMob->loc.p;
 }
 
 void CMobController::Move()
