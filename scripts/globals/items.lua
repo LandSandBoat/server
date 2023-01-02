@@ -317,6 +317,7 @@ xi.items =
     MALBORO_VINE                    = 920,
     VIAL_OF_FIEND_BLOOD             = 924,
     BOTTLE_OF_AHRIMAN_TEARS         = 921,
+    BAT_WING                        = 922,
     LIZARD_TAIL                     = 926,
     PINCH_OF_BOMB_ASH               = 928,
     JAR_OF_BLACK_INK                = 929,
