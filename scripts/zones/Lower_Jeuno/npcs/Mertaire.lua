@@ -15,15 +15,6 @@ local entity = {}
 local poeticParchmentID = 634
 
 entity.onTrade = function(player, npc, trade)
-    -- A MINSTREL IN DESPAIR (poetic parchment)
-    if
-        trade:hasItemQty(poeticParchmentID, 1) and
-        trade:getItemCount() == 1 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_AVAILABLE
-    then
-        player:startEvent(101)
-    end
 end
 
 entity.onTrigger = function(player, npc)
@@ -72,19 +63,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- A MINSTREL IN DESPAIR
-    if csid == 101 then
-        npcUtil.giveCurrency(player, 'gil', 2100)
-        player:tradeComplete()
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
-
-        -- Placing this here allows the player to get additional poetic
-        -- parchments should they drop them until this quest is complete
-        player:setCharVar("TheOldMonument_Event", 0)
-
     -- PAINFUL MEMORY (Bard AF1)
-    elseif csid == 138 and option == 0 then
+    if csid == 138 and option == 0 then
         player:setCharVar("PainfulMemoryCS", 1) -- player declined quest
 
     elseif

@@ -39,6 +39,7 @@ zones[xi.zone.LOWER_JEUNO] =
         CHOCOBO_DIALOG                = 7332,  -- Hmph.
         MERTAIRE_MALLIEBELL_LEFT      = 7413,  -- Ugh... Malliebell... This time she's left me forever...
         MERTAIRE_DEFAULT              = 7438,  -- Who are you? Leave me alone!
+        MERTAIRE_HE_COULDNT_BE        = 7448,  -- Wait, could he be...? Naw, he couldn't be.
         ITS_LOCKED                    = 7600,  -- It's locked.
         PAWKRIX_SHOP_DIALOG           = 7648,  -- Hey, we're fixin' up some stew. Gobbie food's good food!
         AMALASANDA_SHOP_DIALOG        = 7696,  -- Welcome to the Tenshodo. You want something, we got it. We got all kinds of special merchandise you won't find anywhere else!

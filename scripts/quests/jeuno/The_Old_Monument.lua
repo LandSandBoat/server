@@ -50,7 +50,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(102)
                     else
-                        return quest:messageSpecial(lowerJeunoID.text.MERTAIRE_MALLIEBELL_LEFT)
+                        return quest:messageText(lowerJeunoID.text.MERTAIRE_MALLIEBELL_LEFT)
                     end
                 end,
             },
@@ -90,7 +90,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Prog == 3 or
-                status == QUEST_COMPLETED
+                (status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR))
         end,
 
         [xi.zone.BUBURIMU_PENINSULA] =
