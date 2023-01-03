@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Door : Wooden Shutter
--- Working 100%
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------

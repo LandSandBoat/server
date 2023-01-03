@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Hepo Pinulpe
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

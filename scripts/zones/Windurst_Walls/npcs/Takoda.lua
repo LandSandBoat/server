@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Takoda
--- Working 100%
 -----------------------------------
 local entity = {}
 
