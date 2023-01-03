@@ -94,6 +94,7 @@ INSERT INTO `fishing_bait_affinity` VALUES (16996,4307,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16996,5462,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16996,4354,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16996,5458,2);
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4483,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5476,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5461,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,4316,2);
