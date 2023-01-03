@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Mosusu
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

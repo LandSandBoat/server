@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Finene
--- Working 100%
 -----------------------------------
 local entity = {}
 
