@@ -4248,6 +4248,7 @@ xi.items =
     SLEEP_DAGGER                    = 16497,
     ASPIR_KNIFE                     = 16509,
     BURNITE_SHELL_STONE             = 16511,
+    FLAME_DEGEN                     = 16522,
     XIPHOS                          = 16530,
     ANCIENT_SWORD                   = 16533,
     BRONZE_SWORD                    = 16535,
