@@ -1649,7 +1649,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Copper Bullet
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Automaton Oil' AND ID = 61025;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Little Comet' AND ID = 61517;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Bullet' AND ID = 62001;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Bokuto' AND ID = 62007;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Poison Katars' AND ID = 62014;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Iron Bullet' AND ID = 62028;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Stabilizer' AND ID = 62032;
