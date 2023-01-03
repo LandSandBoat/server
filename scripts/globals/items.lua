@@ -3661,6 +3661,7 @@ xi.items =
     RUSTY_GREATSWORD                = 16606,
     CHAOSBRINGER                    = 16607,
     SMALL_SWORD                     = 16629,
+    KAISER_SWORD                    = 16631,
     DEATHBRINGER                    = 16637,
     BRONZE_AXE                      = 16640,
     BONE_AXE                        = 16642,
