@@ -576,6 +576,10 @@ xi.treasure.treasureInfo =
                             xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD, 'Prog') == 2 and
                             not player:hasKeyItem(xi.ki.TORN_OUT_PAGES)
                         end,
+
+                        code = function(player)
+                            npcUtil.giveKeyItem(player, xi.ki.TORN_OUT_PAGES)
+                        end,
                     },
 
                     {
