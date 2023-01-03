@@ -654,8 +654,6 @@ xi.nyzul.tempBoxPickItems = function(npc)
 end
 
 xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
-    local ID = require("scripts/zones/"..player:getZoneName().."/IDs")
-
     if csid == 2 then
         local item1 = npc:getLocalVar("itemID_1")
         local item2 = npc:getLocalVar("itemID_2")
@@ -756,13 +754,16 @@ xi.nyzul.handleRunicKey = function(mob)
                 entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
                 not entity:hasKeyItem(xi.ki.RUNIC_KEY)
             then
-                if not xi.settings.main.RUNIC_DISK_SAVE then -- On early version only initiator of floor got progress saves and key credit
+                -- On early version only initiator of floor got progress saves and key credit
+                if not xi.settings.main.RUNIC_DISK_SAVE then
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
                             entity:setVar("NyzulFloorProgress", 0)
                         end
                     end
-                else -- Anyone can get a key on 100 win if disk passed check
+
+                -- Anyone can get a key on 100 win if disk passed check
+                else
                     npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY)
                 end
             end
@@ -771,10 +772,8 @@ xi.nyzul.handleRunicKey = function(mob)
 end
 
 xi.nyzul.handleProgress = function(instance, progress)
-    local chars        = instance:getChars()
-    local stage        = instance:getStage()
-    local currectFloor = instance:getLocalVar("Nyzul_Current_Floor")
-    local complete     = false
+    local stage      = instance:getStage()
+    local isComplete = false
 
     if
         ((stage == xi.nyzul.objective.FREE_FLOOR or
@@ -786,18 +785,21 @@ xi.nyzul.handleProgress = function(instance, progress)
         ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
         progress >= instance:getLocalVar("Eliminate"))
     then
+        local chars        = instance:getChars()
+        local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+
         instance:setProgress(0)
         instance:setLocalVar("Eliminate", 0)
         instance:setLocalVar("potential_tokens", calculateTokens(instance))
 
         for _, players in ipairs(chars) do
-            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currectFloor)
+            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currentFloor)
         end
 
-        complete = true
+        isComplete = true
     end
 
-    return complete
+    return isComplete
 end
 
 xi.nyzul.enemyLeaderKill = function(mob)
@@ -825,13 +827,17 @@ end
 
 xi.nyzul.specifiedEnemyKill = function(mob)
     local instance = mob:getInstance()
+    local stage    = instance:getStage()
 
-    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
+    -- Eliminate specified enemy
+    if stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
         if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
             instance:setProgress(15)
             instance:setLocalVar("Nyzul_Specified_Enemy", 0)
         end
-    elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+
+    -- Eliminiate all enemies
+    elseif stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
         instance:setProgress(instance:getProgress() + 1)
     end
 end
@@ -885,6 +891,7 @@ xi.nyzul.spawnChest = function(mob, player)
     local instance = mob:getInstance()
     local mobID    = mob:getID()
 
+    -- NM chest spawn.
     if
         mobID >= ID.mob[51].OFFSET_NM and
         mobID <= ID.mob[51].TAISAIJIN
@@ -904,7 +911,12 @@ xi.nyzul.spawnChest = function(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.main.ENABLE_NYZUL_CASKETS then
+
+    -- NM casket spawn.
+    elseif
+        mobID < ID.mob[51].ADAMANTOISE and
+        xi.settings.main.ENABLE_NYZUL_CASKETS
+    then
         if math.random(1, 100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
@@ -923,7 +935,7 @@ end
 
 xi.nyzul.removePathos = function(instance)
     if instance:getLocalVar("floorPathos") > 0 then
-        for i = 1, 29 do
+        for i = 1, #xi.nyzul.pathos do
             if utils.mask.getBit(instance:getLocalVar("floorPathos"), i) then
                 local removeMessage = xi.nyzul.pathos[i].ID
                 local chars         = instance:getChars()
@@ -1003,7 +1015,8 @@ xi.nyzul.addPenalty = function(mob)
     -- Status effect penalty
     else
         for i = 1, 17 do
-            local randomEffect = math.random(1, 17)
+            local randomEffect = math.random(1, 17) -- TODO: Ask KO why we are looping 17 times for 17 random rolls. Shouldn't we be checking for "i" down below?
+                                                    -- NOTE: "i" is unused. 17 is the amount of different floor layouts - 1 (We start at 0, boss layout)
 
             if not utils.mask.getBit(pathos, randomEffect) then
                 instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
@@ -1050,5 +1063,5 @@ xi.nyzul.getTokenPenalty = function(instance)
     local floorPenalities = instance:getLocalVar("tokenPenalty")
     local rate            = getTokenRate(instance)
 
-    return math.floor(117 * rate) * floorPenalities
+    return math.floor(117 * rate * floorPenalities)
 end
