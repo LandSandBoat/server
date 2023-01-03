@@ -28,12 +28,8 @@ end
 entity.onTrigger = function(player, npc)
     local theRequiem = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
 
-    -- THE OLD MONUMENT
-    if player:getCharVar("TheOldMonument_Event") == 1 then
-        player:startEvent(181) -- mentions song runes in Buburimu
-
     -- PATH OF THE BARD (Bard Flag)
-    elseif
+    if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_COMPLETED and
         player:getCharVar("PathOfTheBard_Event") == 0
     then
@@ -88,12 +84,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- THE OLD MONUMENT
-    if csid == 181 then
-        player:setCharVar("TheOldMonument_Event", 2)
-
     -- PATH OF THE BARD
-    elseif csid == 182 then
+    if csid == 182 then
         player:setCharVar("PathOfTheBard_Event", 1)
 
     -- THE REQUIEM
