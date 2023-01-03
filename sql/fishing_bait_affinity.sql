@@ -76,25 +76,17 @@ INSERT INTO `fishing_bait_affinity` VALUES (16998,4310,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16998,4426,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16998,5330,10);
 INSERT INTO `fishing_bait_affinity` VALUES (16998,5329,10);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,5476,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,5461,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4316,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4429,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4313,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4379,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4443,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4528,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4428,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,5447,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4454,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4469,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4308,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4306,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4307,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,5462,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4354,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,5458,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16996,4483,2);
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4443,2); -- Cobalt Jellyfish
+INSERT INTO `fishing_bait_affinity` VALUES (16996,5447,2); -- Denizanasi
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4314,2); -- Bibikibo
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4500,2); -- Greedie
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4501,2); -- Fat Greedie
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4483,2); -- Tiger Cod
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4318,2); -- Bibiki Urchin
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4482,2); -- Nosteau Herring
+INSERT INTO `fishing_bait_affinity` VALUES (16996,4385,2); -- Zafmlug Bass
+INSERT INTO `fishing_bait_affinity` VALUES (16996,5330,10);
+INSERT INTO `fishing_bait_affinity` VALUES (16996,5329,10);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5476,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5461,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,4316,2);
