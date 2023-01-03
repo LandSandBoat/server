@@ -1014,46 +1014,52 @@ xi.nyzul.addPenalty = function(mob)
 
     -- Status effect penalty
     else
+        -- Create table with negative pathos that are not currently set.
+        local availablePathos = {}
+
         for i = 1, 17 do
-            local randomEffect = math.random(1, 17) -- TODO: Ask KO why we are looping 17 times for 17 random rolls. Shouldn't we be checking for "i" down below?
-                                                    -- NOTE: "i" is unused. 17 is the amount of different floor layouts - 1 (We start at 0, boss layout)
+            if not utils.mask.getBit(pathos, i) then
+                table.insert(availablePathos, i)
+            end
+        end
 
-            if not utils.mask.getBit(pathos, randomEffect) then
-                instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
-                pathos = xi.nyzul.pathos[randomEffect]
-                local effect = pathos.effect
-                local power  = pathos.power
+        -- Pick a random pathos to apply from the available pathos table.
+        if #availablePathos > 0 then -- Failsafe in case all 17 are applied. Unlikely, but just in case.
+            local randomEffect = availablePathos[math.random(1, #availablePathos)]
 
-                for _, player in pairs(chars) do
-                    if
-                        effect == xi.effect.IMPAIRMENT or
-                        effect == xi.effect.OMERTA or
-                        effect == xi.effect.DEBILITATION
-                    then
-                        if player:hasStatusEffect(effect) then
-                            local statusEffect = player:getStatusEffect(effect)
-                            local effectPower  = statusEffect:getPower()
-                            power              = bit.bor(effectPower, power)
-                        end
-                    end
+            instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
+            pathos = xi.nyzul.pathos[randomEffect]
 
-                    player:addStatusEffect(effect, power, 0, 0)
-                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                    player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
-                    player:messageSpecial(ID.text.MALFUNCTION)
-                    player:messageSpecial(pathos.textId)
+            local effect = pathos.effect
+            local power  = pathos.power
 
-                    if player:hasPet() then
-                        local pet = player:getPet()
-                        pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                        pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+            for _, player in pairs(chars) do
+                if
+                    effect == xi.effect.IMPAIRMENT or
+                    effect == xi.effect.OMERTA or
+                    effect == xi.effect.DEBILITATION
+                then
+                    if player:hasStatusEffect(effect) then
+                        local statusEffect = player:getStatusEffect(effect)
+                        local effectPower  = statusEffect:getPower()
+                        power              = bit.bor(effectPower, power)
                     end
                 end
 
-                break
+                player:addStatusEffect(effect, power, 0, 0)
+                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                player:messageSpecial(ID.text.MALFUNCTION)
+                player:messageSpecial(pathos.textId)
+
+                if player:hasPet() then
+                    local pet = player:getPet()
+                    pet:addStatusEffectEx(effect, effect, power, 0, 0)
+                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                    pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                end
             end
         end
     end
