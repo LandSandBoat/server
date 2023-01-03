@@ -183,6 +183,7 @@ xi.items =
     CLUMP_OF_PAMTAM_KELP            = 624,
     STICK_OF_CINNAMON               = 628,
     EAR_OF_MILLIONCORN              = 629,
+    POETIC_PARCHMENT                = 634,
     CHAMOMILE                       = 636,
     VIAL_OF_SLIME_OIL               = 637,
     SPRIG_OF_SAGE                   = 638,
