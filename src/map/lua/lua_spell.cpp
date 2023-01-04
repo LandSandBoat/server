@@ -101,6 +101,11 @@ uint16 CLuaSpell::getTotalTargets()
     return m_PLuaSpell->getTotalTargets();
 }
 
+uint32 CLuaSpell::getPrimaryTargetID()
+{
+    return m_PLuaSpell->getPrimaryTargetID();
+}
+
 uint16 CLuaSpell::getMagicBurstMessage()
 {
     return m_PLuaSpell->getMagicBurstMessage();
@@ -169,6 +174,7 @@ void CLuaSpell::Register()
     SOL_REGISTER("getMagicBurstMessage", CLuaSpell::getMagicBurstMessage);
     SOL_REGISTER("getElement", CLuaSpell::getElement);
     SOL_REGISTER("getTotalTargets", CLuaSpell::getTotalTargets);
+    SOL_REGISTER("getPrimaryTargetID", CLuaSpell::getPrimaryTargetID);
     SOL_REGISTER("getSkillType", CLuaSpell::getSkillType);
     SOL_REGISTER("getID", CLuaSpell::getID);
     SOL_REGISTER("getMPCost", CLuaSpell::getMPCost);
