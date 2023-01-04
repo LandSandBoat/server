@@ -19,25 +19,25 @@ entity.onTrade = function(player, npc, trade)
 
     if
         player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) and
-        npcUtil.tradeHas(trade, { { "gil", mineShaftWarpCost } })
+        npcUtil.tradeHasExactly(trade, { { "gil", mineShaftWarpCost } })
     then
         player:startEvent(56, 1781, 23, 1757, 177552692, 8, 17407, 15, 0)
 
     elseif
         player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
-        npcUtil.tradeHas(trade, { { "gil", mineShaftWarpCost } })
+        npcUtil.tradeHasExactly(trade, { { "gil", mineShaftWarpCost } })
     then
         player:startEvent(56)
 
     elseif
         not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
         tradeGil > 0 and tradeGil <= 10000 and
-        npcUtil.tradeHas(trade, { { "gil", tradeGil } }) and
+        npcUtil.tradeHasExactly(trade, { { "gil", tradeGil } }) and
         gateDialCD < os.time()
     then
         local maxRoll = tradeGil / 200
         local diceRoll = math.random(2, 100)
-        player:confirmTrade() -- Confirming trade here prevents exploiting this system
+        player:tradeComplete() -- Completing trade here prevents exploiting this system
         player:startEvent(55, tradeGil, maxRoll, diceRoll, mineShaftWarpCost)
 
     elseif
@@ -76,16 +76,16 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 51 then
         player:setCharVar("[ENM]OperatingLever", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600))
         npcUtil.giveKeyItem(player, xi.ki.SHAFT_2716_OPERATING_LEVER)
-        player:confirmTrade()
+        player:tradeComplete()
 
     elseif csid == 55 and option == 1 then
         player:setCharVar("[ENM]GateDial", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600))
         npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
 
     elseif csid == 56 and option == 1 then
-            player:delKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
-            player:confirmTrade()
-            xi.teleport.to(player, xi.teleport.id.MINESHAFT)
+        player:delKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
+        player:tradeComplete()
+        xi.teleport.to(player, xi.teleport.id.MINESHAFT)
     end
 end
 
