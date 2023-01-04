@@ -30,10 +30,12 @@ function onTrigger(player, cmd)
     if isHidden == 1 then
         player:setCharVar("GMHidden", 1)
         player:setGMHidden(true)
+        player:addStatusEffect(xi.effect.INVISIBLE, 99, 0, 0)
         player:PrintToPlayer("You are now GM hidden from other players.")
     else
         player:setCharVar("GMHidden", 0)
         player:setGMHidden(false)
+        player:delStatusEffect(xi.effect.INVISIBLE)
         player:PrintToPlayer("You are no longer GM hidden from other players.")
     end
 end
