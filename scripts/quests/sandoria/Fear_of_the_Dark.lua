@@ -2,7 +2,7 @@
 -- Fear of the Dark
 -----------------------------------
 -- Log ID: 0, Quest ID: 78
--- Secodiand : !pos -160 -0 137 231
+-- Secodiand : !pos -160 -0 137 231 Starts and Finishes
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
