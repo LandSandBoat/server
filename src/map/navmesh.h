@@ -65,6 +65,7 @@ public:
     static void       ToDetourPos(position_t* out);
 
 public:
+    CNavMesh(CNavMesh* other);
     CNavMesh(uint16 zoneID);
     ~CNavMesh();
 
@@ -92,15 +93,50 @@ public:
     // Like validPosition(), but will also set the given position to the valid position that it finds.
     void snapToValidPosition(position_t& position);
 
+    static inline void outputError(uint32 status)
+    {
+        if (status & DT_WRONG_MAGIC)
+        {
+            ShowError("Detour: Input data is not recognized.");
+        }
+        else if (status & DT_WRONG_VERSION)
+        {
+            ShowError("Detour: Input data is in wrong version.");
+        }
+        else if (status & DT_OUT_OF_MEMORY)
+        {
+            ShowError("Detour: Operation ran out of memory.");
+        }
+        else if (status & DT_INVALID_PARAM)
+        {
+            ShowError("Detour: An input parameter was invalid.");
+        }
+        else if (status & DT_BUFFER_TOO_SMALL)
+        {
+            ShowError("Detour: Result buffer for the query was too small to store all results.");
+        }
+        else if (status & DT_OUT_OF_NODES)
+        {
+            ShowError("Detour: Query ran out of nodes during search.");
+        }
+        else if (status & DT_PARTIAL_RESULT)
+        {
+            ShowError("Detour: Query did not reach the end location, returning best guess.");
+        }
+        else if (status & DT_ALREADY_OCCUPIED)
+        {
+            ShowError("Detour: A tile has already been assigned to the given x,y coordinate");
+        }
+    }
+
 private:
-    void outputError(uint32 status);
     bool onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter);
 
-    std::string                filename;
+    std::string                m_filename;
     uint16                     m_zoneID;
     dtRaycastHit               m_hit;
     dtPolyRef                  m_hitPath[20];
-    std::unique_ptr<dtNavMesh> m_navMesh;
+    std::shared_ptr<dtNavMesh> m_navMesh;
     dtNavMeshQuery             m_navMeshQuery;
 };
 
