@@ -7,6 +7,12 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+end
+
+entity.onMobSpawn = function(mob)
+end
+
 entity.onMobFight = function(mob, target)
     local popTime = mob:getLocalVar("lastPetPop")
     -- ffxiclopedia says 30 sec, bgwiki says 1-2 min..
@@ -25,6 +31,12 @@ entity.onMobFight = function(mob, target)
             end
         end
     end
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+end
+
+entity.onMobDespawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
