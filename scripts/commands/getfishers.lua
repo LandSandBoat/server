@@ -18,6 +18,6 @@ function onTrigger(player)
     end
 
     for _, fisher in pairs(fishers) do
-        player:PrintToPlayer(string.format("Name: %s Skill: %d", fisher.name, fisher.skill), xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer(string.format("Zone: %s | Player Name: %s | Job Level: %d | Skill: %d", fisher.zoneName, fisher.playerName, fisher.jobLevel, fisher.skill), xi.msg.channel.SYSTEM_3)
     end
 end
