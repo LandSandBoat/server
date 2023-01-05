@@ -720,6 +720,26 @@ void CMobController::FaceTarget(uint16 targid)
     }
 }
 
+bool CMobController::IsStuck()
+{
+    return m_Stuck;
+}
+
+void CMobController::UpdateLastKnownPosition()
+{
+    // Mob is considered "Stuck" if:
+    // 1. Current Pos - Last Pos is <= 2.5
+    // 2. Distance to Target's Last Pos > Melee Range
+    // 3. Mob is not bound or asleep
+    m_Stuck =
+        PMob->CanMove() &&
+        distanceSquared(m_LastPos, PMob->loc.p) <= 2.5f &&
+        distanceSquared(PMob->loc.p, m_LastTargetPos) > PMob->GetMeleeRange();
+
+    m_LastTargetPos = PTarget->loc.p;
+    m_LastPos       = PMob->loc.p;
+}
+
 void CMobController::Move()
 {
     TracyZoneScoped;
@@ -827,6 +847,25 @@ void CMobController::Move()
                 }
 
                 PMob->PAI->PathFind->FollowPath(m_Tick);
+
+                // Only check if stuck every 2s, this prevents overlap or interference with
+                // PathFind following path if the mob's move speed is slow.
+                if (m_Tick - m_StuckTick >= 2s)
+                {
+                    m_StuckTick = m_Tick;
+
+                    // Keep a record of the last known position to check if we need
+                    // to manually intervene to move the mob.
+                    UpdateLastKnownPosition();
+
+                    // Check if the mob is stuck, if stuck, directly intervene
+                    // by stepping to the player. This fixes people being able to hold mobs
+                    // because they can't find a path around to the player's position.
+                    if (IsStuck() && PTarget != nullptr)
+                    {
+                        PMob->PAI->PathFind->StepTo(PTarget->loc.p, false);
+                    }
+                }
 
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
