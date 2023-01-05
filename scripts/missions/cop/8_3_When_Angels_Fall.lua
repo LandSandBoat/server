@@ -23,7 +23,6 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-local AlTaieuID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
@@ -33,39 +32,50 @@ mission.reward =
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.DAWN },
 }
 
-local towerByNpcId = {
-    [ID.npc.EBON_PANEL_HUME] = {
+local towerByNpcId =
+{
+    [ID.npc.EBON_PANEL_HUME] =
+    {
         checkRace = function(playerRace)
             return playerRace == xi.race.HUME_M or playerRace == xi.race.HUME_F
         end,
+
         eventId = 120
     },
 
-    [ID.npc.EBON_PANEL_ELVAAN] = {
+    [ID.npc.EBON_PANEL_ELVAAN] =
+    {
         checkRace = function(playerRace)
             return playerRace == xi.race.ELVAAN_M or playerRace == xi.race.ELVAAN_F
         end,
+
         eventId = 121
     },
 
-    [ID.npc.EBON_PANEL_GALKA] = {
+    [ID.npc.EBON_PANEL_GALKA] =
+    {
         checkRace = function(playerRace)
             return playerRace == xi.race.GALKA
         end,
+
         eventId = 122
     },
 
-    [ID.npc.EBON_PANEL_TARU] = {
+    [ID.npc.EBON_PANEL_TARU] =
+    {
         checkRace = function(playerRace)
             return playerRace == xi.race.TARU_M or playerRace == xi.race.TARU_F
         end,
+
         eventId = 123
     },
 
-    [ID.npc.EBON_PANEL_MITHRA] = {
+    [ID.npc.EBON_PANEL_MITHRA] =
+    {
         checkRace = function(playerRace)
             return playerRace == xi.race.MITHRA
         end,
+
         eventId = 124
     },
 }
@@ -104,13 +114,15 @@ mission.sections =
                 end,
             },
 
-            ['_iz2'] = {
+            ['_iz2'] =
+            {
                 onTrigger = function(player, npc)
                     onTriggerEbonPanel(player, npc)
                 end,
             },
 
-            ['_0zu'] = {
+            ['_0zu'] =
+            {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.BRAND_OF_DAWN) then
                         return mission:progressEvent(110)
@@ -118,7 +130,8 @@ mission.sections =
                 end,
             },
 
-            ['_0zv'] = {
+            ['_0zv'] =
+            {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) then
                         return mission:progressEvent(111)
@@ -126,7 +139,8 @@ mission.sections =
                 end,
             },
 
-            ['_0z0'] = {
+            ['_0z0'] =
+            {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 4 then
                         return mission:progressEvent(203)
@@ -134,7 +148,8 @@ mission.sections =
                 end,
             },
 
-            ['_0zt'] = {
+            ['_0zt'] =
+            {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 6 then
                         return mission:progressEvent(204)
@@ -160,7 +175,7 @@ mission.sections =
                     end
                 end,
 
-                [110] = function(player, csid, option,npc) -- BRAND_OF_DAWN
+                [110] = function(player, csid, option, npc) -- BRAND_OF_DAWN
                     if option == 1 then
                         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_DAWN)
                         player:addKeyItem(xi.ki.BRAND_OF_DAWN)
@@ -170,7 +185,7 @@ mission.sections =
                     end
                 end,
 
-                [111] = function(player, csid, option,npc) -- BRAND_OF_TWILIGHT
+                [111] = function(player, csid, option, npc) -- BRAND_OF_TWILIGHT
                     if option == 1 then
                         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
                         player:addKeyItem(xi.ki.BRAND_OF_TWILIGHT)
@@ -180,35 +195,35 @@ mission.sections =
                     end
                 end,
 
-                [120] = function(player, csid, option,npc) -- HUME
+                [120] = function(player, csid, option, npc) -- HUME
                     mission:setVar(player, 'Status', 3)
                     player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
                     player:addKeyItem(xi.ki.LIGHT_OF_VAHZL)
                     player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_VAHZL)
                 end,
 
-                [121] = function(player, csid, option,npc) -- ELVAAN
+                [121] = function(player, csid, option, npc) -- ELVAAN
                     mission:setVar(player, 'Status', 3)
                     player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
                     player:addKeyItem(xi.ki.LIGHT_OF_MEA)
                     player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_MEA)
                 end,
 
-                [122] = function(player, csid, option,npc) -- GALKA
+                [122] = function(player, csid, option, npc) -- GALKA
                     mission:setVar(player, 'Status', 3)
                     player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
                     player:addKeyItem(xi.ki.LIGHT_OF_ALTAIEU)
                     player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_ALTAIEU)
                 end,
 
-                [123] = function(player, csid, option,npc) -- TARUTARU
+                [123] = function(player, csid, option, npc) -- TARUTARU
                     mission:setVar(player, 'Status', 3)
                     player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
                     player:addKeyItem(xi.ki.LIGHT_OF_HOLLA)
                     player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_HOLLA)
                 end,
 
-                [124] = function(player, csid, option,npc) -- MITHRA
+                [124] = function(player, csid, option, npc) -- MITHRA
                     mission:setVar(player, 'Status', 3)
                     player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
                     player:addKeyItem(xi.ki.LIGHT_OF_DEM)
@@ -243,6 +258,7 @@ mission.sections =
                     if mission:getVar(player, 'Status') == 7 then
                         return 167
                     end
+
                     return -1
                 end,
             },
@@ -250,8 +266,9 @@ mission.sections =
             onEventFinish =
             {
                 [167] = function(player, csid, option, npc)
+                    local altaieuID = require("scripts/zones/AlTaieu/IDs")
                     player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-                    player:messageSpecial(AlTaieuID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
+                    player:messageSpecial(altaieuID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
                     mission:complete(player)
                 end,
             }

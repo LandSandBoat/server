@@ -6,7 +6,8 @@ local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 mixins = { require("scripts/mixins/families/zdei") }
 -----------------------------------
 
-local idleState = {
+local idleState =
+{
     NOT_ON_PEDESTAL = 0,
     ON_PEDESTAL = 1
 }
@@ -33,6 +34,7 @@ local updateIdleState = function(mob, idle)
         if mobOffset ~= 0 then
             doorOffset = math.floor(mobOffset / 4)
         end
+
         local doorID = ID.npc.QNZDEI_DOOR_OFFSET + doorOffset
         local door = GetNPCByID(doorID)
         local doorIdle = door:getLocalVar("idle")
@@ -42,6 +44,7 @@ local updateIdleState = function(mob, idle)
         else
             doorIdle = math.min(doorIdle + 1, 4)
         end
+
         door:setLocalVar("idle", doorIdle)
         checkDoorState(door)
     end

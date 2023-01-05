@@ -67,7 +67,11 @@ local function rubiousCrystalOnTrigger(player, npc)
         local thisCsAcquired = mission:getVar(player, cVar[2])
 
         -- spawn ru'aerns
-        if thisCsAcquired == 0 and thisFightDone == 0 and npcUtil.popFromQM(player, npc, { ruaernOffset, ruaernOffset + 1, ruaernOffset + 2 }, { hide = 0 }) then
+        if
+            thisCsAcquired == 0 and
+            thisFightDone == 0 and
+            npcUtil.popFromQM(player, npc, { ruaernOffset, ruaernOffset + 1, ruaernOffset + 2 }, { hide = 0 })
+        then
             clearKillVars(player, crystalOffset)
             return player:messageSpecial(ID.text.OMINOUS_SHADOW)
         -- post-fight CS
@@ -231,6 +235,7 @@ mission.sections =
                         mission:setVar(player, 'Status', 3)
                     end
                 end,
+
                 [2] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,

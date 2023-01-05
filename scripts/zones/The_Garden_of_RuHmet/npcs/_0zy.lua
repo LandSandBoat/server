@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     else
         if player:getZPos() <= 360 then
             player:messageSpecial(ID.text.PORTAL_SEALED)
-        else 
+        else
             player:startEvent(141)
         end
     end

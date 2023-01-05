@@ -21,7 +21,8 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
 
-mission.reward = {
+mission.reward =
+{
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE },
 }
 
@@ -45,7 +46,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [2] = function(player, csid, option,npc)
+                [2] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 1)
                 end,
 
@@ -60,6 +61,7 @@ mission.sections =
                             player:addKeyItem(xi.ki.TEAR_OF_ALTANA)
                             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
                         end
+
                         player:setPos(0.13, -10, -470.8, 64, 33)
                     end
                 end,
@@ -82,7 +84,8 @@ mission.sections =
                 end,
             },
 
-            onTriggerAreaEnter = {
+            onTriggerAreaEnter =
+            {
                 [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Louverance') == 2 then
                         return mission:progressEvent(758)
@@ -92,11 +95,11 @@ mission.sections =
 
             onEventFinish =
             {
-                [757] = function(player, csid, option,npc)
+                [757] = function(player, csid, option, npc)
                     mission:setVar(player, 'Louverance', 1)
                 end,
 
-                [758] = function(player, csid, option,npc)
+                [758] = function(player, csid, option, npc)
                     mission:setVar(player, 'Louverance', 3)
                     local missionStatus = mission:getVar(player, 'Status')
                     mission:setVar(player, 'Status', missionStatus + 1)
@@ -116,7 +119,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [17] = function(player, csid, option,npc)
+                [17] = function(player, csid, option, npc)
                     mission:setVar(player, 'Louverance', 2)
                 end,
             },
@@ -134,7 +137,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [619] = function(player, csid, option,npc)
+                [619] = function(player, csid, option, npc)
                     mission:setVar(player, 'Chebukkis', 1)
                 end,
             },
@@ -153,7 +156,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [43] = function(player, csid, option,npc)
+                [43] = function(player, csid, option, npc)
                     local IDBibikyBay = require("scripts/zones/Bibiki_Bay/IDs")
                     local coloredDrop = 4258 + math.random(0, 7)
                     if player:getFreeSlotsCount() == 0 then
@@ -181,7 +184,7 @@ mission.sections =
             },
             onEventFinish =
             {
-                [322] = function(player, csid, option,npc)
+                [322] = function(player, csid, option, npc)
                     mission:setVar(player, 'Shikarees', 1)
                     local missionStatus = mission:getVar(player, 'Status')
                     mission:setVar(player, 'Status', missionStatus + 1)
@@ -201,7 +204,7 @@ mission.sections =
             },
             onEventFinish =
             {
-                [57] = function(player, csid, option,npc)
+                [57] = function(player, csid, option, npc)
                     mission:setVar(player, 'Jabbos', 1)
                     local missionStatus = mission:getVar(player, 'Status')
                     mission:setVar(player, 'Status', missionStatus + 1)
@@ -222,7 +225,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [897] = function(player, csid, option,npc)
+                [897] = function(player, csid, option, npc)
                     mission:setVar(player, 'Tenzen', 1)
                     local missionStatus = mission:getVar(player, 'Status')
                     mission:setVar(player, 'Status', missionStatus + 1)
@@ -232,7 +235,8 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onTriggerAreaEnter = {
+            onTriggerAreaEnter =
+            {
                 [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 7 then
                         return mission:progressEvent(122)
@@ -242,7 +246,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [122] = function(player, csid, option,npc)
+                [122] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 8)
                 end,
             },
@@ -261,7 +265,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [129] = function(player, csid, option,npc)
+                [129] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 9)
                 end,
             },
@@ -280,7 +284,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [543] = function(player, csid, option,npc)
+                [543] = function(player, csid, option, npc)
                     mission:setVar(player, 'Status', 10)
                 end,
             },
@@ -288,7 +292,8 @@ mission.sections =
 
         [xi.zone.LUFAISE_MEADOWS] =
         {
-            onTriggerAreaEnter = {
+            onTriggerAreaEnter =
+            {
                 [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 10 then
                         return mission:progressEvent(116)
@@ -298,7 +303,7 @@ mission.sections =
 
             onEventFinish =
             {
-                [116] = function(player, csid, option,npc)
+                [116] = function(player, csid, option, npc)
                     player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
                     mission:setVar(player, 'Status', 11)
                 end,

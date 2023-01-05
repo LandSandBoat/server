@@ -18,8 +18,6 @@ entity.onTrigger = function(player, npc)
     --     player:getCharVar('ApocalypseNigh') == 2
     -- then
     --     player:startEvent(4)
-    -- else
-    --     
     -- end
     if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED) then
         return player:startEvent(52)
@@ -35,6 +33,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 52 and option == 1 then
         player:setPos(-419.995, 0, 248.483, 191, 35) -- To The Garden of RuHmet
     end
+
     -- elseif csid == 4 then
     --     player:setCharVar('ApocalypseNigh', 3)
     --     player:setPos(-419.995, 0, 248.483, 191, 35)

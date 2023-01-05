@@ -4,15 +4,16 @@
 -- !pos -96.6 -0.2 92.3 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
+require("scripts/globals/items")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
 local ring =
 {
-    15543, -- Rajas Ring
-    15544, -- Sattva Ring
-    15545  -- Tamas Ring
+    xi.items.RAJAS_RING,
+    xi.items.SATTVA_RING,
+    xi.items.TAMAS_RING
 }
 
 entity.onTrade = function(player, npc, trade)

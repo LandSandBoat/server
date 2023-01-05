@@ -542,7 +542,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local zilartStatus    = player:getMissionStatus(xi.mission.log_id.ZILART)
-    local promathiaStatus = player:getCharVar("PromathiaStatus")
     local toauStatus      = player:getMissionStatus(xi.mission.log_id.TOAU)
 
     local function getEntranceOffset(offset)
@@ -1273,7 +1272,6 @@ local function checkSkip(player, bfid)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
-    local promathiaStatus = player:getCharVar("PromathiaStatus")
 
     -- Requirements to skip a battlefield
     local skipReqs =
