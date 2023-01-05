@@ -22,6 +22,11 @@ import re
 import regex
 import sys
 
+# [["deprecated func", "suggested replacement"], ...]
+deprecated_functions = [
+    ["table.getn", "#t"],
+]
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -228,6 +233,13 @@ class LuaStyleCheck:
             if not 'if' in condition_end and condition_end != '':
                 self.error("Invalid multiline conditional format")
 
+    def check_deprecated_functions(self, line):
+        for entry in deprecated_functions:
+            deprecated_func = entry[0]
+            replacement     = entry[1]
+            if contains_word(deprecated_func)(line):
+                self.error(f"Use of deprecated function: {deprecated_func}. Suggested replacement: {replacement}")
+
     def run_style_check(self):
         if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
@@ -272,6 +284,8 @@ class LuaStyleCheck:
 
                 # Multiline conditionals should not have data in if, elseif, or then
                 self.check_multiline_condition_format(code_line)
+
+                self.check_deprecated_functions(code_line)
 
                 # Condition blocks/lines should not have outer parentheses
                 # Find all strings contained in parentheses: \((([^\)\(]+)|(?R))*+\)
