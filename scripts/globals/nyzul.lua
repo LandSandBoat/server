@@ -654,8 +654,6 @@ xi.nyzul.tempBoxPickItems = function(npc)
 end
 
 xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
-    local ID = require("scripts/zones/"..player:getZoneName().."/IDs")
-
     if csid == 2 then
         local item1 = npc:getLocalVar("itemID_1")
         local item2 = npc:getLocalVar("itemID_2")
@@ -756,13 +754,16 @@ xi.nyzul.handleRunicKey = function(mob)
                 entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
                 not entity:hasKeyItem(xi.ki.RUNIC_KEY)
             then
-                if not xi.settings.main.RUNIC_DISK_SAVE then -- On early version only initiator of floor got progress saves and key credit
+                -- On early version only initiator of floor got progress saves and key credit
+                if not xi.settings.main.RUNIC_DISK_SAVE then
                     if entity:getID() == instance:getLocalVar("diskHolder") then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
                             entity:setVar("NyzulFloorProgress", 0)
                         end
                     end
-                else -- Anyone can get a key on 100 win if disk passed check
+
+                -- Anyone can get a key on 100 win if disk passed check
+                else
                     npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY)
                 end
             end
@@ -771,10 +772,8 @@ xi.nyzul.handleRunicKey = function(mob)
 end
 
 xi.nyzul.handleProgress = function(instance, progress)
-    local chars        = instance:getChars()
-    local stage        = instance:getStage()
-    local currectFloor = instance:getLocalVar("Nyzul_Current_Floor")
-    local complete     = false
+    local stage      = instance:getStage()
+    local isComplete = false
 
     if
         ((stage == xi.nyzul.objective.FREE_FLOOR or
@@ -786,18 +785,21 @@ xi.nyzul.handleProgress = function(instance, progress)
         ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
         progress >= instance:getLocalVar("Eliminate"))
     then
+        local chars        = instance:getChars()
+        local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+
         instance:setProgress(0)
         instance:setLocalVar("Eliminate", 0)
         instance:setLocalVar("potential_tokens", calculateTokens(instance))
 
         for _, players in ipairs(chars) do
-            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currectFloor)
+            players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currentFloor)
         end
 
-        complete = true
+        isComplete = true
     end
 
-    return complete
+    return isComplete
 end
 
 xi.nyzul.enemyLeaderKill = function(mob)
@@ -825,13 +827,17 @@ end
 
 xi.nyzul.specifiedEnemyKill = function(mob)
     local instance = mob:getInstance()
+    local stage    = instance:getStage()
 
-    if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
+    -- Eliminate specified enemy
+    if stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
         if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
             instance:setProgress(15)
             instance:setLocalVar("Nyzul_Specified_Enemy", 0)
         end
-    elseif instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+
+    -- Eliminiate all enemies
+    elseif stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
         instance:setProgress(instance:getProgress() + 1)
     end
 end
@@ -885,6 +891,7 @@ xi.nyzul.spawnChest = function(mob, player)
     local instance = mob:getInstance()
     local mobID    = mob:getID()
 
+    -- NM chest spawn.
     if
         mobID >= ID.mob[51].OFFSET_NM and
         mobID <= ID.mob[51].TAISAIJIN
@@ -904,7 +911,12 @@ xi.nyzul.spawnChest = function(mob, player)
                 break
             end
         end
-    elseif mobID < ID.mob[51].ADAMANTOISE and xi.settings.main.ENABLE_NYZUL_CASKETS then
+
+    -- NM casket spawn.
+    elseif
+        mobID < ID.mob[51].ADAMANTOISE and
+        xi.settings.main.ENABLE_NYZUL_CASKETS
+    then
         if math.random(1, 100) <= 6 then
             for _, casketID in ipairs(ID.npc.TREASURE_CASKET) do
                 local casket = GetNPCByID(casketID, instance)
@@ -923,7 +935,7 @@ end
 
 xi.nyzul.removePathos = function(instance)
     if instance:getLocalVar("floorPathos") > 0 then
-        for i = 1, 29 do
+        for i = 1, #xi.nyzul.pathos do
             if utils.mask.getBit(instance:getLocalVar("floorPathos"), i) then
                 local removeMessage = xi.nyzul.pathos[i].ID
                 local chars         = instance:getChars()
@@ -1002,45 +1014,52 @@ xi.nyzul.addPenalty = function(mob)
 
     -- Status effect penalty
     else
+        -- Create table with negative pathos that are not currently set.
+        local availablePathos = {}
+
         for i = 1, 17 do
-            local randomEffect = math.random(1, 17)
+            if not utils.mask.getBit(pathos, i) then
+                table.insert(availablePathos, i)
+            end
+        end
 
-            if not utils.mask.getBit(pathos, randomEffect) then
-                instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
-                pathos = xi.nyzul.pathos[randomEffect]
-                local effect = pathos.effect
-                local power  = pathos.power
+        -- Pick a random pathos to apply from the available pathos table.
+        if #availablePathos > 0 then -- Failsafe in case all 17 are applied. Unlikely, but just in case.
+            local randomEffect = availablePathos[math.random(1, #availablePathos)]
 
-                for _, player in pairs(chars) do
-                    if
-                        effect == xi.effect.IMPAIRMENT or
-                        effect == xi.effect.OMERTA or
-                        effect == xi.effect.DEBILITATION
-                    then
-                        if player:hasStatusEffect(effect) then
-                            local statusEffect = player:getStatusEffect(effect)
-                            local effectPower  = statusEffect:getPower()
-                            power              = bit.bor(effectPower, power)
-                        end
-                    end
+            instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
+            pathos = xi.nyzul.pathos[randomEffect]
 
-                    player:addStatusEffect(effect, power, 0, 0)
-                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                    player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
-                    player:messageSpecial(ID.text.MALFUNCTION)
-                    player:messageSpecial(pathos.textId)
+            local effect = pathos.effect
+            local power  = pathos.power
 
-                    if player:hasPet() then
-                        local pet = player:getPet()
-                        pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                        pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+            for _, player in pairs(chars) do
+                if
+                    effect == xi.effect.IMPAIRMENT or
+                    effect == xi.effect.OMERTA or
+                    effect == xi.effect.DEBILITATION
+                then
+                    if player:hasStatusEffect(effect) then
+                        local statusEffect = player:getStatusEffect(effect)
+                        local effectPower  = statusEffect:getPower()
+                        power              = bit.bor(effectPower, power)
                     end
                 end
 
-                break
+                player:addStatusEffect(effect, power, 0, 0)
+                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                player:messageSpecial(ID.text.MALFUNCTION)
+                player:messageSpecial(pathos.textId)
+
+                if player:hasPet() then
+                    local pet = player:getPet()
+                    pet:addStatusEffectEx(effect, effect, power, 0, 0)
+                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                    pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                    pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                end
             end
         end
     end
@@ -1050,5 +1069,5 @@ xi.nyzul.getTokenPenalty = function(instance)
     local floorPenalities = instance:getLocalVar("tokenPenalty")
     local rate            = getTokenRate(instance)
 
-    return math.floor(117 * rate) * floorPenalities
+    return math.floor(117 * rate * floorPenalities)
 end
