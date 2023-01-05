@@ -1514,7 +1514,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
 
-        if os.time() > lastTrade + 4 then
+        if os.time() > lastTrade + 3 then
             if csid then
                 player:startEvent(csid, item, broke, full)
             end
