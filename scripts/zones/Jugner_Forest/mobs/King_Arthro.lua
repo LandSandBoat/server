@@ -46,6 +46,7 @@ entity.onMobDespawn = function(mob)
     local respawnTime = 75900 + math.random(0, 6) * 1800 -- 21:05 to 24:05 respawn timer in 30 minute intervals
     for offset = 1, 10 do
         xi.mob.nmTODPersist(GetMobByID(kingArthroID - offset), respawnTime)
+        DisallowRespawn(kingArthroID - offset, false)
     end
 end
 

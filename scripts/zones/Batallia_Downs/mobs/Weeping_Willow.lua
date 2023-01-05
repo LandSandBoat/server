@@ -24,6 +24,7 @@ entity.onMobDespawn = function(mob)
     -- In that case, it will walk back near where Willow was spawned at.
     GetMobByID(lumberJackID):setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
     SpawnMob(lumberJackID)
+    DisallowRespawn(mob:getID(), true)
 end
 
 return entity

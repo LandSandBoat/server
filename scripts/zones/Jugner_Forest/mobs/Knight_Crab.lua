@@ -32,7 +32,7 @@ entity.onMobDespawn = function(mob)
     local kingArthro = GetMobByID(ID.mob.KING_ARTHRO)
 
     kingArthro:setLocalVar("[POP]King_Arthro", kingArthro:getLocalVar("[POP]King_Arthro") + 1)
-
+    DisallowRespawn(mob:getID(), true)
     if kingArthro:getLocalVar("[POP]King_Arthro") == 10 then
         kingArthro:setLocalVar("[POP]King_Arthro", 0)
         SpawnMob(ID.mob.KING_ARTHRO) -- Pop King Arthro !
