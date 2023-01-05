@@ -13,7 +13,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_T
 
 quest.reward =
 {
-    game = 30,
+    fame = 30,
     gil = 200 * xi.settings.main.GIL_RATE,
     fameArea = xi.quest.fame_area.SANDORIA,
 }
