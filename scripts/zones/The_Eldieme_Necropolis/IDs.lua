@@ -80,6 +80,8 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         APPARATUS_ELEMENTAL = 17576271,
         NAMORODO            = 17576272,
         SKULL_OFFSET        = 17575937,
+        ANEMONE_ONE         = 17576008,
+        ANEMONE_TWO         = 17576067,
     },
     npc =
     {
