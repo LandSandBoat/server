@@ -1074,7 +1074,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 (41,1527,191,'Giant_Grub',330,0,2341,0,0,9,12,0),       -- These are in prep for complete zone revamps
 (42,1666,191,'Goblin_Gambler',330,0,1119,0,0,21,23,0),  -- These are in prep for complete zone revamps
 (43,1683,191,'Goblin_Leecher',330,0,1107,0,0,21,23,0),  -- These are in prep for complete zone revamps
-(44,1690,191,'Goblin_Mugger',330,0,2341,0,0,21,23,0),   -- These are in prep for complete zone revamps
+(44,1690,191,'Goblin_Mugger',330,0,1117,0,0,21,23,0),   -- These are in prep for complete zone revamps
 (45,5733,191,'Snipper',330,0,2283,0,0,16,20,0);         -- These are in prep for complete zone revamps
 UPDATE mob_groups SET minLevel = 15, maxLevel = 17 WHERE name = "Wadi_Leech_fished"  and zoneid = 191;
 UPDATE mob_groups SET minLevel = 80, maxLevel = 80 WHERE name = "Lemures"  and zoneid = 190;
