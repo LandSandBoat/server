@@ -22,7 +22,7 @@ local clammingItems =
     703,   6, 0.021, 0.063, -- Petrified Log
     691,   6, 0.025, 0.075, -- Maple Log
     4468,  6, 0.029, 0.087, -- Pamamas
-    3270,  6, 0.033, 0.099, -- HQ Pugil Scales
+    1587,  6, 0.033, 0.099, -- Handful of HQ Pugil Scales
     888,   6, 0.038, 0.114, -- Seashell
     4328,  6, 0.044, 0.132, -- Hobgoblin Bread
     485,   6, 0.051, 0.153, -- Broken Willow Rod
