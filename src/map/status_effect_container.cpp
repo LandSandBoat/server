@@ -969,7 +969,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
 
     uint8          numOfEffects = 0;
     CStatusEffect* oldestSong   = nullptr;
-    uint8           overwrite   = false;    // are we overwriting the same song effect?
+    uint8          overwrite    = false; // are we overwriting the same song effect?
     for (CStatusEffect* ExistingStatusEffect : m_StatusEffectSet)
     {
         if (ExistingStatusEffect->GetStatusID() >= EFFECT_REQUIEM && ExistingStatusEffect->GetStatusID() <= EFFECT_NOCTURNE) // is an active brd effect
@@ -980,7 +980,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
                 PStatusEffect->SetSlot(ExistingStatusEffect->GetSlot()); // use same slot as the one it replaces
                 DelStatusEffectByTier(PStatusEffect->GetStatusID(), PStatusEffect->GetTier());
                 oldestSong = ExistingStatusEffect;
-                overwrite = true;
+                overwrite  = true;
             }
             if (ExistingStatusEffect->GetSubID() == PStatusEffect->GetSubID())
             { // YOUR BRD effect
@@ -991,7 +991,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
                 }
                 else if (!overwrite &&
                          std::chrono::milliseconds(ExistingStatusEffect->GetDuration()) + ExistingStatusEffect->GetStartTime() <
-                         std::chrono::milliseconds(oldestSong->GetDuration()) + oldestSong->GetStartTime())
+                             std::chrono::milliseconds(oldestSong->GetDuration()) + oldestSong->GetStartTime())
                 {
                     oldestSong = ExistingStatusEffect;
                 }
