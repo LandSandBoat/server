@@ -674,7 +674,6 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ID = 41027;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Dhalmel Mantle' AND ID = 41028;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Noct Brais' AND ID = 41029;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Studded Boots' AND ID = 41030;
-UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Dhalmel Hair' AND ID = 41031;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Sandals' AND ID = 41032;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ID = 41033;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Breath Mantle' AND ID = 41035;
@@ -1951,6 +1950,7 @@ UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Marinara Pizz
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Marinara Slice' AND ID = 71545;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Pizza Dough' AND ID = 72004;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Cherry Muffin' AND ID = 72011;
+UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Dhalmel Hair' AND ID = 41031;
 
 -- ------------------------------------------------------------
 -- ACP
