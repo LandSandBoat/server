@@ -352,6 +352,9 @@ end
 
 xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue, ignoreresist, ftp100, ftp200, ftp300, dStatMult)
     local returninfo = { }
+    if ignoreresist == 0 then
+        ignoreresist = false
+    end
     local ignoreres = ignoreresist or false
 
     --get all the stuff we need
