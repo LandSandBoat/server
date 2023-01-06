@@ -15,6 +15,8 @@ class HXIClient:
         self.password = password
         self.server = server
         self.slot = slot
+        self.macAddress = "CA:FE:BE:EF:00:00"
+        self.xiloaderVersionNumber = "1.0.0" # compatible xiloader version
 
         # Read from version.conf default
         if client_str == "":
@@ -31,24 +33,44 @@ class HXIClient:
         # Character & Account state
         self.connected = False
         self.char_id = 1
+        self.sessionHash = ""
 
     def login(self):
         self.login_connect()
 
-        data = bytearray(33)
-        util.memcpy(self.username, 0, data, 0, len(self.username))
-        util.memcpy(self.password, 0, data, 16, len(self.password))
-        data[32] = 0x10  # Login
+        data = bytearray(86)
+        data[0x00] = 0xFF # magic for new xiloader
+        data[0x01] = 0    # unused feature flags
+        data[0x02] = 0
+        data[0x03] = 0
+        data[0x04] = 0
+        data[0x05] = 0
+        data[0x06] = 0
+        data[0x07] = 0
+        data[0x08] = 0
+        util.memcpy(self.username, 0, data, 0x09, len(self.username))
+        util.memcpy(self.password, 0, data, 0x19, len(self.password))
+
+        data[0x29] = 0x10  # Auto-login
+
+	# memory space fro changed pasword, unused in 0x10
+        util.memcpy(self.password, 0, data, 0x30, len(self.password))
+
+        util.memcpy(self.macAddress, 0, data, 0x40, 17)
+        util.memcpy(self.xiloaderVersionNumber, 0, data, 0x51, 5)
 
         self.login_sock.sendall(data)
 
-        in_data = self.login_sock.recv(16)
+        in_data = self.login_sock.recv(21)
         self.login_sock.close()
 
         if in_data[0] == 0x01:
             print("Login successful")
             self.account_id = util.unpack_uint16(in_data, 1)
             print("Account ID: " + str(self.account_id))
+
+            self.sessionHash = util.unpack_string(in_data, 0x05, 16)
+            print("Session Hash : " + self.sessionHash)
 
             # Connect
             self.lobby_data_connect()
@@ -91,6 +113,14 @@ class HXIClient:
         print("Starting up lobby data connection on %s port %s" % server_address)
         self.lobbydata_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.lobbydata_sock.connect(server_address)
+        print("Sending session hash back through lobbydata")
+        try:
+            data = bytearray(28)
+            data[0] = 0xFE
+            util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
+            self.lobbydata_sock.sendall(data)
+        except Exception as ex:
+            print(ex)
 
     def lobby_view_connect(self):
         server_address = (self.server, 54001)
@@ -101,9 +131,10 @@ class HXIClient:
     def lobby_data_0xA1_0(self):
         print("Sending lobby_data_0xA1 (0)")
         try:
-            data = bytearray(5)
+            data = bytearray(28)
             data[0] = 0xA1
             util.memcpy(util.pack_32(self.account_id), 0, data, 1, 4)
+            util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbydata_sock.sendall(data)
         except Exception as ex:
             print(ex)
@@ -114,6 +145,7 @@ class HXIClient:
             data = bytearray(152)
             data[8] = 0x26
             util.memcpy(self.client_str, 0, data, 116, 10)
+            util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbyview_sock.sendall(data)
 
             in_data = self.lobbyview_sock.recv(40)
@@ -143,6 +175,7 @@ class HXIClient:
         try:
             data = bytearray(44)
             data[8] = 0x1F
+            util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbyview_sock.sendall(data)
         except Exception as ex:
             print(ex)
@@ -153,7 +186,8 @@ class HXIClient:
             # Should send 9 bytes: A1 00 00 01 00 00 00 00 00
             data = bytearray.fromhex("A10000010000000000")
 
-            # Sends: bytearray(b'\xa1\x00\x00\x01\x00\x00\x00\x00\x00')
+            # Sends: bytearray(b'\xa1\x00\x00\x01\x00\x00\x00\x00\x00') packed with account ID
+            util.memcpy(util.pack_32(self.account_id), 0, data, 1, 4)
             self.lobbydata_sock.sendall(data)
 
             _ = self.lobbydata_sock.recv(328)
@@ -183,7 +217,9 @@ class HXIClient:
         try:
             data = bytearray(88)
             data[8] = 0x07
-            util.memcpy(util.pack_32(self.char_id), 0, data, 28, 4)
+            util.memcpy(util.pack_32(self.char_id), 0, data, 32, 4)
+            util.pack_string(data, 36, self.char_name, len(self.char_name))
+            util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbyview_sock.sendall(data)
         except Exception as ex:
             print(ex)
