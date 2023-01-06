@@ -10,6 +10,7 @@
 -- _1l0 (Rock Slab) : !pos -99 -7 -91 57
 -----------------------------------
 require('scripts/globals/items')
+require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/settings')
 require('scripts/globals/titles')
@@ -22,8 +23,9 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_O
 
 quest.reward =
 {
-    item  = xi.items.CORSAIR_DIE,
-    title = xi.title.SEAGULL_PHRATRIE_CREW_MEMBER,
+    item    = xi.items.CORSAIR_DIE,
+    keyItem = xi.ki.JOB_GESTURE_CORSAIR,
+    title   = xi.title.SEAGULL_PHRATRIE_CREW_MEMBER,
 }
 
 quest.sections =
@@ -64,8 +66,12 @@ quest.sections =
             ['Mafwahb'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
+                    local questProgress = quest:getVar(player, 'Prog')
+
+                    if questProgress == 1 then
                         return quest:progressEvent(548)
+                    elseif questProgress == 2 then
+                        return quest:event(647)
                     end
                 end,
             },
@@ -141,8 +147,9 @@ quest.sections =
             -- Event 552 is a one-time-only event that can occur after completing "Luck of the Draw"
             -- but before finishing Equipped for all Occasions.
             -- This charvar is cleaned up on complete of 'Equipped for all Occasions' when quest:complete() is called.
+
             return status == QUEST_COMPLETED and
-                player:getCharVar('Quest[6][24]Stage') == 0 and
+                xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, 'Stage') == 0 and
                 not player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
         end,
 
@@ -158,7 +165,7 @@ quest.sections =
             onEventFinish =
             {
                 [552] = function(player, csid, option, npc)
-                    player:setCharVar('Quest[6][24]Stage', 1)
+                    xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, 'Stage', 1)
                 end,
             },
         },
