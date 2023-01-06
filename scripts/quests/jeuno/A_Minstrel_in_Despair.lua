@@ -66,7 +66,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BARD)
         end,
 
         [xi.zone.LOWER_JEUNO] =
