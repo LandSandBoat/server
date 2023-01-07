@@ -24,4 +24,17 @@ UPDATE `zone_settings` SET `updatedmesh` = 1, `forcecarefulpathing` = 1 WHERE `z
 UPDATE `zone_settings` SET `updatedmesh` = 1, `forcecarefulpathing` = 1 WHERE `zoneid` = 139;
 UPDATE `zone_settings` SET `updatedmesh` = 1, `forcecarefulpathing` = 1 WHERE `zoneid` = 128;
 
+-- Remove mount flag from zones that cannot have Chocobos prior to mounts being added
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 5;   -- Uleguerand Range
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 7;   -- Attohwa Chasm
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 24;  -- Lufaise Meadows
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 25;  -- Misareaux Coast
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 111; -- Beaucedine Glacier
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 112; -- Xarcabard
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 113; -- Cape Teriggan
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 122; -- Ro'Maeve
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 126; -- Qufim Island
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 127; -- Behemoth's Dominion
+UPDATE `zone_settings` SET `misc` = 2200 WHERE `zoneid` = 128; -- Valley of Sorrows
+
 UNLOCK TABLES;
