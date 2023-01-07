@@ -109,8 +109,8 @@ namespace message
             }
             case MSG_CHAT_TELL:
             {
-                char characterName[15] = {};
-                memcpy(&characterName, reinterpret_cast<char*>(extra.data()) + 4, sizeof(characterName));
+                char characterName[PacketNameLength] = {};
+                memcpy(&characterName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
 
                 CCharEntity* PChar = zoneutils::GetCharByName(characterName);
                 if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
@@ -394,16 +394,16 @@ namespace message
 
                 if (PLinkshell)
                 {
-                    char memberName[15] = {};
-                    memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, sizeof(memberName));
+                    char memberName[PacketNameLength] = {};
+                    memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
                     PLinkshell->ChangeMemberRank(memberName, ref<uint8>((uint8*)extra.data(), 28));
                 }
                 break;
             }
             case MSG_LINKSHELL_REMOVE:
             {
-                char memberName[15] = {};
-                memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, sizeof(memberName));
+                char memberName[PacketNameLength] = {};
+                memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
                 CCharEntity* PChar = zoneutils::GetCharByName(memberName);
 
                 if (PChar && PChar->PLinkshell1 && PChar->PLinkshell1->getID() == ref<uint32>((uint8*)extra.data(), 24))
