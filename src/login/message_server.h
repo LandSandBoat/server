@@ -39,12 +39,11 @@ void message_server_init(const bool& requestExit);
 void message_server_close();
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
 
-/*
 struct message_server_wrapper_t
 {
     message_server_wrapper_t(const std::atomic_bool& requestExit)
+    : m_thread(std::make_unique<nonstd::jthread>(std::bind(message_server_init, std::ref(requestExit))))
     {
-        m_thread = std::make_unique<nonstd::jthread>(message_server_init, std::ref(requestExit));
     }
 
     ~message_server_wrapper_t()
@@ -55,4 +54,3 @@ struct message_server_wrapper_t
 private:
     std::unique_ptr<nonstd::jthread> m_thread;
 };
-*/

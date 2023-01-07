@@ -50,7 +50,8 @@ xi.settings.login =
     HEROES_OF_ABYSSEA       = true,
     SEEKERS_OF_ADOULIN      = true,
 
-    -- Feature display on client
+    -- Feature display on client's login screen. This does NOT effect in game content whatsoever!
+    -- Mog wardrobes are per character, so anything custom will not be able to reflect per-account login screen.
     SECURE_TOKEN   = false, -- 2FA not supported yet
     MOG_WARDROBE_3 = true,
     MOG_WARDROBE_4 = true,
