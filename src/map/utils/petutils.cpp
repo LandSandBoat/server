@@ -895,6 +895,44 @@ namespace petutils
         PPet->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat);
         PPet->health.hp    = PPet->health.maxhp;
 
+        if (PPet->m_PetID == PETID_FIRESPIRIT || PPet->m_PetID == PETID_EARTHSPIRIT || PPet->m_PetID == PETID_AIRSPIRIT ||
+            PPet->m_PetID == PETID_ICESPIRIT || PPet->m_PetID == PETID_THUNDERSPIRIT || PPet->m_PetID == PETID_WATERSPIRIT ||
+            PPet->m_PetID == PETID_LIGHTSPIRIT || PPet->m_PetID == PETID_DARKSPIRIT)
+        {
+            // Start MP calculation
+            raceStat = 0;
+            jobStat  = 0;
+            sJobStat = 0;
+
+
+            grade = 4; //Grade for MP
+
+            // If the main job doesn't have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
+            if (!(grade::GetJobGrade(mjob, 1) == 0 && grade::GetJobGrade(sjob, 1) == 0))
+            {
+                // calculate normal racial bonus
+                raceStat = grade::GetMPScale(grade, baseValueColumn) + (grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
+                           (grade::GetMPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetMPScale(grade, scaleOver60Column) * mainLevelOver60To75);
+            }
+
+            // For the main profession
+            grade = grade::GetJobGrade(mjob, 1);
+            if (grade > 0)
+            {
+                jobStat = grade::GetMPScale(grade, baseValueColumn) + (grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
+                          (grade::GetMPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetMPScale(grade, scaleOver60Column) * mainLevelOver60To75);
+            }
+
+            grade = grade::GetJobGrade(sjob, 1);
+            if (grade > 0)
+            {
+                sJobStat = grade::GetMPScale(grade, baseValueColumn) + (grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) +
+                           (grade::GetMPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
+            }
+
+            PPet->health.maxmp = (int32)(raceStat + jobStat + sJobStat);
+        }
+
         PPet->UpdateHealth();
         PPet->health.tp  = 0;
         PPet->health.hp  = PPet->GetMaxHP();
