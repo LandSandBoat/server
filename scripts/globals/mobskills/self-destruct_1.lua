@@ -13,15 +13,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     end
 
-    mob:setLocalVar("HPSelfDestruct", mob:getHP())
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local selfDestHPP = mob:getLocalVar("HPSelfDestruct")
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, selfDestHPP, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1, 1.1, 1.2)
+    local damage = skill:getMobHP()
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1, 1.1, 1.2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
     mob:setHP(0)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

@@ -19,7 +19,12 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.25, 2, xi.magic.ele.DARK, 800)
+    local dmgmod = 1
+    if mob:getMaster() then
+        dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.1, 2, xi.magic.ele.DARK, 300)
+    else
+        dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.25, 2, xi.magic.ele.DARK, 800)
+    end
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

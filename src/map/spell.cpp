@@ -63,6 +63,16 @@ SpellID CSpell::getID()
     return m_ID;
 }
 
+void CSpell::setPrimaryTargetID(uint32 targid)
+{
+    m_primaryTargetID = targid;
+}
+
+uint32 CSpell::getPrimaryTargetID() const
+{
+    return m_primaryTargetID;
+}
+
 uint8 CSpell::getJob(JOBTYPE JobID)
 {
     return (m_job[JobID] == CANNOT_USE_SPELL ? 255 : m_job[JobID]);

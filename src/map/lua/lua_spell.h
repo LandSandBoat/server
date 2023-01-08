@@ -52,6 +52,7 @@ public:
     uint8  isAoE();
     bool   tookEffect();
     uint16 getTotalTargets();
+    uint32 getPrimaryTargetID();
     uint16 getMagicBurstMessage();
     uint16 getElement();
     uint16 getID();

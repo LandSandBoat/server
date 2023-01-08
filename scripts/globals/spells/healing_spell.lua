@@ -172,6 +172,12 @@ xi.spells.healing.doHealingSpell = function(caster, target, spell, isWhiteMagic)
     if healingspell then
         final = math.min(final, target:getMaxHP() - target:getHP())
         target:addHP(final)
+
+        if target:getID() == spell:getPrimaryTargetID() then
+            spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+        else
+            spell:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+        end
     end
 
     local curetomp = (final * caster:getMod(xi.mod.CURE2MP_PERCENT)) / 100

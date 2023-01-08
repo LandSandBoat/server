@@ -69,21 +69,26 @@ end
 xi.mob.nmTODPersistCache = function(zone, mobId)
     if xi.settings.main.NM_PERSISTENCE == 1 then
         local mob = GetMobByID(mobId)
+        if mob == nil then
+            return
+        end
+
         local respawn = GetServerVariable(string.format("[SPAWN]%s", mobId))
         zone:setLocalVar(string.format("[SPAWN]%s", mobId), respawn)
-
-        if mob then
+        if
+            mob ~= nil and
+            mob:isSpawned() and
+            os.time() < respawn -- Spawned, but hasn't reached its time yet
+        then
             DespawnMob(mobId)
-
             if CheckNMSpawnPoint(mobId) then
                 UpdateNMSpawnPoint(mobId)
             end
-
-            if respawn <= os.time() then
-                mob:setRespawnTime(10)
-            else
-                mob:setRespawnTime(respawn - os.time())
-            end
+            mob:setRespawnTime(respawn - os.time())
+        elseif os.time() >= respawn then -- Mob should be spawned.  Give it a few seconds.
+            mob:setRespawnTime(10)
+        else
+            mob:setRespawnTime(respawn - os.time()) -- Is dead when server restarts set its respawn timer
         end
     end
 end

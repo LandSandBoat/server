@@ -8,6 +8,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
+local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
@@ -90,7 +91,9 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.WILD_ONION, 4 } }) then
+                    if player:getFreeSlotsCount() == 0 then
+                        return mission:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_BLAZE_SPIKES)
+                    elseif npcUtil.tradeHasExactly(trade, { { xi.items.WILD_ONION, 4 } }) then
                         return quest:progressEvent(398, 0, xi.items.WILD_ONION) -- Trade in time. Quest goes on.
                     end
                 end,

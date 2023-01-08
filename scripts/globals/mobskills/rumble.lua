@@ -18,7 +18,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.EVASION_DOWN, 50, 0, 120))
+    local eva = mob:getStat(xi.mod.EVA) * 0.1
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.EVASION_DOWN, eva, 0, math.random(45, 120)))
 
     return xi.effect.EVASION_DOWN
 end

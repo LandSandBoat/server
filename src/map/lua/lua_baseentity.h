@@ -876,6 +876,7 @@ public:
     bool clearSession(std::string const& playerName);
     void sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
     void clearActionQueue();
+    void clearTimerQueue();
 
     uint8 getMannequinPose(uint16 itemID);
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);

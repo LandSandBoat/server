@@ -1356,7 +1356,7 @@ INSERT INTO `guild_shops` VALUES
     (60432, 1555, 1061, 1500, 64, 24, 24), -- onz of coriander
     (60432, 5164, 1945, 2854, 64, 24, 24), -- Ground Wasabi
     (60432, 1590, 536, 700, 64, 24, 24), -- sprig of holy basil
-    (60432, 1652, 150, 160, 64, 24, 24), -- bottle of rice vinegar
+    (60432, 1652, 233, 250, 64, 24, 24), -- bottle of rice vinegar
     (60432, 5237, 369, 500, 64, 24, 24), -- bundle of shirataki
     (60432, 1471, 316, 416, 120, 24, 24), -- sticky rice
     (60432, 1554, 431, 512, 64, 24, 24), -- onz of turmeric
@@ -1410,7 +1410,7 @@ INSERT INTO `guild_shops` VALUES
     (60419, 1164, 30, 65, 2970, 0, 0), -- tsurara
     (60419, 4874, 4000, 4500, 7, 0, 0), -- scroll of absorb-str
     (60419, 5164, 1945, 2854, 64, 24, 24), -- jar of ground wasabi
-    (60419, 1652, 150, 160, 64, 24, 24), -- bottle of rice vinegar
+    (60419, 1652, 233, 250, 64, 24, 24), -- bottle of rice vinegar
     (60419, 5236, 194, 224, 64, 24, 24), -- clump of shungiku
     (60419, 4875, 4000, 4500, 7, 0, 0), -- scroll of absorb-dex
     -- Silver_Owl (Port_Bastok)

@@ -687,6 +687,11 @@ namespace roeutils
     void CycleUnityRankings()
     {
         TracyZoneScoped;
+        if (!settings::get<bool>("main.ENABLE_ROE"))
+        {
+            return;
+        }
+
         const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0;";
         sql->Query(rankingQuery);
 
@@ -696,6 +701,11 @@ namespace roeutils
     void UpdateUnityRankings()
     {
         TracyZoneScoped;
+        if (!settings::get<bool>("main.ENABLE_ROE"))
+        {
+            return;
+        }
+
         const char* memberQuery = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members;";
         sql->Query(memberQuery);
 

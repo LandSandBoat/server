@@ -20,7 +20,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PARALYSIS
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 25, 0, 120))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 60, 0, 60))
 
     return typeEffect
 end

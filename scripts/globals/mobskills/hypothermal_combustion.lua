@@ -16,15 +16,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     end
 
-    mob:setLocalVar("HPHypoCombust", mob:getHP())
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local bombTossHPP = mob:getLocalVar("HPHypoCombust") / 3
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, bombTossHPP, xi.magic.ele.ICE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local damage = skill:getMobHP() / 3
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.ICE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
     mob:setHP(0)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
     return dmg
