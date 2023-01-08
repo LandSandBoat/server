@@ -906,7 +906,7 @@ namespace petutils
             jobStat  = 0;
             sJobStat = 0;
 
-            grade = 4; //Grade for MP
+            grade = 4; // Grade for MP
 
             // If the main job doesn't have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
             if (!(grade::GetJobGrade(mjob, 1) == 0 && grade::GetJobGrade(sjob, 1) == 0))
