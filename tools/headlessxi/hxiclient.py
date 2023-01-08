@@ -9,7 +9,7 @@ from .packets import packets
 
 
 class HXIClient:
-    def __init__(self, username, password, server, slot=1, client_str=""):
+    def __init__(self, username, password, server, slot=0, client_str=""):
         # Args
         self.username = username
         self.password = password
@@ -70,7 +70,6 @@ class HXIClient:
             print("Account ID: " + str(self.account_id))
 
             self.sessionHash = util.unpack_string(in_data, 0x05, 16)
-            print("Session Hash : " + self.sessionHash)
 
             # Connect
             self.lobby_data_connect()
@@ -205,6 +204,9 @@ class HXIClient:
                 # TODO: Parse the rest of the char data
 
                 print(self.char_id, self.char_name)
+            else:
+                print(f"Could not locate character name, got {data}")
+
         except Exception as ex:
             print(ex)
 
