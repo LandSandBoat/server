@@ -147,7 +147,6 @@ REPLACE INTO `synth_recipes` VALUES
 
 -- Goldsmithing
     (10000,1,0,0,0,13,0,0,0,0,0,4100,4242,16449,0,0,0,0,0,0,0,649,648,648,648,1,1,1,1,'Brass Dagger (desynth)'), -- Adding desynth option for Brass Dagger
-    (10001,1,0,0,0,23,0,0,0,0,0,4100,4242,1625,0,0,0,0,0,0,0,650,650,650,745,1,1,1,1,'Moblin Helm (desynth)'), -- Adding lightning crystal desynth option for Moblin Helm
     (10002,1,0,0,0,30,0,0,0,0,0,4100,4242,12689,0,0,0,0,0,0,0,817,818,850,650,3,1,2,2,'Brass Finger Gauntlets (desynth)'), -- Adding desynth option for Brass Finger Gauntlets
     (10003,1,0,0,0,35,0,0,0,0,0,4100,4242,15801,0,0,0,0,0,0,0,744,744,1766,1766,1,1,1,1,'Tigereye Ring (desynth)'), -- Adding desynth option for Tigereye Ring
     (10004,1,0,0,0,36,0,0,0,0,0,4100,4242,17686,0,0,0,0,0,0,0,648,744,1234,1234,1,1,6,6,'Spark Bilbo (desynth)'), -- Adding desynth option for Spark Bilbo
