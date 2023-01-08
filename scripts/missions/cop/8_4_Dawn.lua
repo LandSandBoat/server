@@ -14,9 +14,8 @@
 require('scripts/globals/bcnm')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
+require('scripts/globals/keyitems')
 require('scripts/globals/zone')
-
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
@@ -56,13 +55,13 @@ mission.sections =
                         mission:getVar(player, 'Status') == 1
                     then
                         mission:setVar(player, 'Status', 2)
-                        mission:setVar(player, "PromKillDay", getMidnight())
-                        if not player:hasKeyItem(xi.ki.TEAR_OF_ALTAN) then
+                        mission:setVar(player, 'PromKillDay', getMidnight())
+                        local empyrealParadoxID = require('scripts/zones/Empyreal_Paradox/IDs')
+                        if not player:hasKeyItem(xi.ki.TEAR_OF_ALTANA) then
                             player:addKeyItem(xi.ki.TEAR_OF_ALTANA)
-                            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
+                            player:messageSpecial(empyrealParadoxID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
+                            player:setPos(0, -10, -470, 64, xi.zone.ALTAIEU)
                         end
-
-                        player:setPos(0.13, -10, -470.8, 64, 33)
                     end
                 end,
             },

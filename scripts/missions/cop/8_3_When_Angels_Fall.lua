@@ -116,9 +116,7 @@ mission.sections =
 
             ['_iz2'] =
             {
-                onTrigger = function(player, npc)
-                    onTriggerEbonPanel(player, npc)
-                end,
+                onTrigger = onTriggerEbonPanel
             },
 
             ['_0zu'] =
@@ -159,9 +157,7 @@ mission.sections =
 
             ['Ebon_Panel'] =
             {
-                onTrigger = function(player, npc)
-                    onTriggerEbonPanel(player, npc)
-                end,
+                onTrigger = onTriggerEbonPanel
             },
 
             onEventFinish =

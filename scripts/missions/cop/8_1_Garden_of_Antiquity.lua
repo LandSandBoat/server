@@ -115,23 +115,17 @@ mission.sections =
 
             ['_0x1'] =
             {
-                onTrigger = function(player, npc)
-                    return rubiousCrystalOnTrigger(player, npc)
-                end,
+                onTrigger = rubiousCrystalOnTrigger
             },
 
             ['_0x2'] =
             {
-                onTrigger = function(player, npc)
-                    return rubiousCrystalOnTrigger(player, npc)
-                end,
+                onTrigger = rubiousCrystalOnTrigger
             },
 
             ['_0x3'] =
             {
-                onTrigger = function(player, npc)
-                    return rubiousCrystalOnTrigger(player, npc)
-                end,
+                onTrigger = rubiousCrystalOnTrigger
             },
 
             ['Ruaern'] =
