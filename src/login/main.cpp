@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2022 LandSandBoat Dev Teams
@@ -26,6 +26,8 @@ std::atomic<bool> gRunFlag = true;
 int main(int argc, char** argv)
 {
     auto argParser = std::make_unique<argparse::ArgumentParser>(argv[0]);
+
+    argParser->add_argument("--log").default_value(std::string{ "" }).help("Specify custom log file path.");
 
     try
     {

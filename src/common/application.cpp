@@ -39,7 +39,17 @@ Application::Application(std::string serverName, std::unique_ptr<argparse::Argum
     SetConsoleTitleA(fmt::format("{}-server", serverName).c_str());
 #endif
 
-    logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
+    std::string logfileOverride = gArgParser->get<std::string>("--log");
+
+    //  TODO: input sanitization?
+    if (logfileOverride != "")
+    {
+        logging::InitializeLog(serverName, fmt::format("{}", logfileOverride), false);
+    }
+    else
+    {
+        logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
+    }
     lua_init();
     settings::init();
     ShowInfo("Begin %s-server initialisation...", serverName);
