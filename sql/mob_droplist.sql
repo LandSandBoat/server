@@ -1041,53 +1041,7 @@ INSERT INTO `mob_droplist` VALUES (94,0,0,1000,2893,280); -- Gargantuan Black Ti
 INSERT INTO `mob_droplist` VALUES (94,0,0,1000,884,170);  -- Black Tiger Fang (17.0%)
 INSERT INTO `mob_droplist` VALUES (94,0,0,1000,861,130);  -- Black Tiger Hide (13.0%)
 
--- ZoneID: 135 - Animated Claymore
-INSERT INTO `mob_droplist` VALUES (95,0,0,1000,1574,@ALWAYS); -- Intricate Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Dagger
-INSERT INTO `mob_droplist` VALUES (96,0,0,1000,1572,@ALWAYS); -- Ornate Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Great Axe
-INSERT INTO `mob_droplist` VALUES (97,0,0,1000,1576,@ALWAYS); -- Seraphic Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Gun
-INSERT INTO `mob_droplist` VALUES (98,0,0,1000,1585,@ALWAYS); -- Ethereal Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Hammer
-INSERT INTO `mob_droplist` VALUES (99,0,0,1000,1581,@ALWAYS); -- Heavenly Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Horn
-INSERT INTO `mob_droplist` VALUES (100,0,0,1000,1584,@ALWAYS); -- Mysterial Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Knuckles
-INSERT INTO `mob_droplist` VALUES (101,0,0,1000,1571,@ALWAYS); -- Mystic Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Kunai
-INSERT INTO `mob_droplist` VALUES (102,0,0,1000,1579,@ALWAYS); -- Demoniac Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Longbow
-INSERT INTO `mob_droplist` VALUES (103,0,0,1000,1583,@ALWAYS); -- Snarled Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Longsword
-INSERT INTO `mob_droplist` VALUES (104,0,0,1000,1573,@ALWAYS); -- Holy Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Scythe
-INSERT INTO `mob_droplist` VALUES (105,0,0,1000,1577,@ALWAYS); -- Tenebrous Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Shield
-INSERT INTO `mob_droplist` VALUES (106,0,0,1000,1822,@ALWAYS); -- Supernal Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Spear
-INSERT INTO `mob_droplist` VALUES (107,0,0,1000,1578,@ALWAYS); -- Stellar Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Staff
-INSERT INTO `mob_droplist` VALUES (108,0,0,1000,1582,@ALWAYS); -- Celestial Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Tabar
-INSERT INTO `mob_droplist` VALUES (109,0,0,1000,1575,@ALWAYS); -- Runaeic Fragment (Always, 100%)
-
--- ZoneID: 135 - Animated Tachi
-INSERT INTO `mob_droplist` VALUES (110,0,0,1000,1580,@ALWAYS); -- Divine Fragment (Always, 100%)
+-- 95-110 Available
 
 -- ZoneID: 218 - Ansherekh
 INSERT INTO `mob_droplist` VALUES (111,0,0,1000,2168,@ALWAYS); -- Cerberus Claw (Always, 100%)
@@ -1712,16 +1666,7 @@ INSERT INTO `mob_droplist` VALUES (171,0,0,1000,15631,280); -- Freyrs Trousers (
 INSERT INTO `mob_droplist` VALUES (171,0,0,1000,15713,260); -- Phoboss Sabatons (26.0%)
 INSERT INTO `mob_droplist` VALUES (171,0,0,1000,5736,200);  -- Linen Coin Purse (20.0%)
 
--- ZoneID: 193 - Aroma Leech
--- ZoneID: 196 - Aroma Fly
--- ZoneID: 198 - Aroma Crawler
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18247,@UNCOMMON); -- Balm Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18248,@UNCOMMON); -- Millefleurs Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18249,@UNCOMMON); -- Olibanum Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18250,@UNCOMMON); -- Attar Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18251,@UNCOMMON); -- Sweet Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18252,@UNCOMMON); -- Civet Sachet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (172,0,0,1000,18253,@UNCOMMON); -- Musk Sachet (Uncommon, 10%)
+-- 172 Available
 
 -- ZoneID:  54 - Arrapago Apkallu
 INSERT INTO `mob_droplist` VALUES (173,0,0,1000,2149,330); -- Apkallu Feather (33.0%)
@@ -9972,8 +9917,7 @@ INSERT INTO `mob_droplist` VALUES (1189,0,0,1000,15506,@COMMON); -- Parade Gorge
 INSERT INTO `mob_droplist` VALUES (1189,0,0,1000,507,@RARE);     -- Goblin Mail (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1189,0,0,1000,508,@VRARE);    -- Goblin Helm (Very Rare, 1%)
 
--- ZoneID:   9 - Golden-Tongued Culberry
-INSERT INTO `mob_droplist` VALUES (1190,0,0,1000,13145,500); -- Uggalepih Pendant (50.0%)
+-- 1190 Available
 
 -- ZoneID: 103 - Golden Bat
 INSERT INTO `mob_droplist` VALUES (1191,0,0,1000,922,660);   -- Bat Wing (66.0%)
@@ -16136,9 +16080,7 @@ INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,2920,120);  -- Clump Of Alkalin
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,834,0);     -- Ball Of Saruta Cotton (Despoil)
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,4368,0);    -- Two-Leaf Mandragora Bud (Despoil)
 
--- ZoneID:  24 - Padfoot
-INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,505,@ALWAYS); -- Sheepskin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,531,@ALWAYS); -- Lanolin Cube (Always, 100%)
+-- 1972 Available
 
 -- ZoneID: 176 - Pahh The Gullcaller
 INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,888,340);        -- Seashell (34.0%)
@@ -23672,9 +23614,7 @@ INSERT INTO `mob_droplist` VALUES (2843,1,1,1000,1903,220); -- Vice Of Aspersion
 INSERT INTO `mob_droplist` VALUES (2844,1,1,1000,1854,810); -- Deed Of Moderation (Group 1 - 81.0%)
 INSERT INTO `mob_droplist` VALUES (2844,1,1,1000,1902,190); -- Vice Of Avarice (Group 1 - 19.0%)
 
--- ZoneID:  34 - Ixaern Mnk
-INSERT INTO `mob_droplist` VALUES (2845,0,0,1000,1851,750); -- Deed Of Placidity (75.0%)
-INSERT INTO `mob_droplist` VALUES (2845,0,0,1000,1901,250); -- Vice Of Antipathy (25.0%)
+-- 2845 Available
 
 -- ZoneID: 115 - Savanna Rarab
 INSERT INTO `mob_droplist` VALUES (2846,0,0,1000,856,@UNCOMMON); -- Rabbit Hide (Uncommon, 10%)
@@ -23784,13 +23724,13 @@ INSERT INTO `mob_droplist` VALUES (2856,0,0,1000,1875,300); -- Ancient Beastcoin
 -- ZoneID:  37 - Praetorian Guard Ccxx
 -- ZoneID:  37 - Praetorian Guard Cxlviii
 -- ZoneID:  37 - Praetorian Guard Lxxiii
--- ZoneID:  37 - Fire Elemental
--- ZoneID:  37 - Ice Elemental
--- ZoneID:  37 - Air Elemental
--- ZoneID:  37 - Earth Elemental
--- ZoneID:  37 - Thunder Elemental
--- ZoneID:  37 - Water Elemental
--- ZoneID:  37 - Dark Elemental
+-- ZoneID:  37 - Fire Elemental (Eastern)
+-- ZoneID:  37 - Ice Elemental (Eastern)
+-- ZoneID:  37 - Air Elemental (Eastern)
+-- ZoneID:  37 - Earth Elemental (Eastern)
+-- ZoneID:  37 - Thunder Elemental (Eastern)
+-- ZoneID:  37 - Water Elemental (Eastern)
+-- ZoneID:  37 - Dark Elemental (Eastern)
 -- ZoneID:  38 - Zlatorog
 -- ZoneID:  38 - Mountain Buffalo
 -- ZoneID:  38 - Thiazi
@@ -23839,23 +23779,6 @@ INSERT INTO `mob_droplist` VALUES (2859,0,0,1000,1875,700); -- Ancient Beastcoin
 -- ZoneID:  38 - Cronos
 INSERT INTO `mob_droplist` VALUES (2860,0,0,1000,1875,800); -- Ancient Beastcoin (80.0%)
 
--- ZoneID:  37 - Grognard Mesmerizer
--- ZoneID:  37 - Grognard Footsoldier
--- ZoneID:  37 - Grognard Predator
--- ZoneID:  37 - Grognard Neckchopper
--- ZoneID:  37 - Grognard Grappler
--- ZoneID:  37 - Grognard Impaler
--- ZoneID:  37 - Star Ruby Quadav
--- ZoneID:  37 - Whitegold Quadav
--- ZoneID:  37 - Wootz Quadav
--- ZoneID:  37 - Star Sapphire Quadav
--- ZoneID:  37 - Lightsteel Quadav
--- ZoneID:  37 - Yagudo Archpriest
--- ZoneID:  37 - Yagudo Disciplinant
--- ZoneID:  37 - Yagudo Kapellmeister
--- ZoneID:  37 - Yagudo Knight Templar
--- ZoneID:  37 - Yagudo Prelatess
--- ZoneID:  37 - Yagudo Eradicator
 -- ZoneID:  38 - Air Elemental
 -- ZoneID:  38 - Dark Elemental
 -- ZoneID:  38 - Earth Elemental
@@ -23910,7 +23833,6 @@ INSERT INTO `mob_droplist` VALUES (2862,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 -- ZoneID:  37 - Abyssdweller Jhabdebb
 -- ZoneID:  37 - Orichalcum Quadav
 -- ZoneID:  37 - Pee Qoho The Python
--- ZoneID:  37 - Light Elemental
 -- ZoneID:  38 - Kronprinz Behemoth
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
@@ -24265,9 +24187,7 @@ INSERT INTO `mob_droplist` VALUES (2910,2,0,1000,1449,0);      -- Tukuku Whitesh
 INSERT INTO `mob_droplist` VALUES (2910,2,0,1000,1452,0);      -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (2910,2,0,1000,1455,0);      -- One Byne Bill (Steal)
 
--- ZoneID: Unknown - Unknown
-INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14676,730); -- Assailants Ring (Group 1 - 73.0%)
-INSERT INTO `mob_droplist` VALUES (2911,1,1,1000,14782,270); -- Astral Earring (Group 1 - 27.0%)
+-- 2911 Available
 
 -- ZoneID: 105 - Stalking Sapling
 INSERT INTO `mob_droplist` VALUES (2912,0,0,1000,953,310); -- Treant Bulb (31.0%)
@@ -26816,6 +26736,66 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Fire Elemental
+-- ZoneID:  37 - Ice Elemental
+-- ZoneID:  37 - Air Elemental
+-- ZoneID:  37 - Earth Elemental
+-- ZoneID:  37 - Thunder Elemental
+-- ZoneID:  37 - Water Elemental
+-- ZoneID:  37 - Dark Elemental
+-- ZoneID:  37 - Mystic_Avatar
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Light Elemental
+-- ZoneID:  37 - Mystic_Avatar (Carbuncle)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Grognard Mesmerizer
+-- ZoneID:  37 - Grognard Footsoldier
+-- ZoneID:  37 - Grognard Predator
+-- ZoneID:  37 - Grognard Neckchopper
+-- ZoneID:  37 - Grognard Grappler
+-- ZoneID:  37 - Grognard Impaler
+-- ZoneID:  37 - Star Ruby Quadav
+-- ZoneID:  37 - Whitegold Quadav
+-- ZoneID:  37 - Wootz Quadav
+-- ZoneID:  37 - Star Sapphire Quadav
+-- ZoneID:  37 - Lightsteel Quadav
+-- ZoneID:  37 - Yagudo Archpriest
+-- ZoneID:  37 - Yagudo Disciplinant
+-- ZoneID:  37 - Yagudo Kapellmeister
+-- ZoneID:  37 - Yagudo Knight Templar
+-- ZoneID:  37 - Yagudo Prelatess
+-- ZoneID:  37 - Yagudo Eradicator
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID:  37 - Kingslayer_Doggvdegg
+-- ZoneID:  37 - JiGho_Ageless
+-- ZoneID:  37 - Koo_Buzu_the_Theomanic
+-- ZoneID:  37 - Mystic_Avatar
+-- ZoneID:  37 - Enhanced_Koenigstiger
+-- ZoneID:  37 - Enhanced_Pygmaioi
+-- ZoneID:  37 - Enhanced_Kettenkaefer
+-- ZoneID:  37 - Enhanced_Salamander
+-- ZoneID:  37 - Enhanced_Jelly
+-- ZoneID:  37 - Enhanced_Makara
+-- ZoneID:  37 - Enhanced_Akbaba
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

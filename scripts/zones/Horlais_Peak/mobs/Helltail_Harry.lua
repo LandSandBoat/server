@@ -8,9 +8,9 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SLEEPRES, 1000)
-    mob:setMod(xi.mod.SILENCERES, 900)
-    mob:setMod(xi.mod.LULLABYRES, 700)
+    mob:setMod(xi.mod.SLEEP_MEVA, 1000)
+    mob:setMod(xi.mod.SILENCE_MEVA, 900)
+    mob:setMod(xi.mod.LULLABY_MEVA, 700)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

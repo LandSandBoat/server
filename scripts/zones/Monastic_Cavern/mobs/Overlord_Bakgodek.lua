@@ -11,9 +11,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.SLEEPRES, 90)
-    mob:setMod(xi.mod.PARALYZERES, 75)
-    mob:setMod(xi.mod.SILENCERES, 75)
+    mob:setMod(xi.mod.SLEEP_MEVA, 90)
+    mob:setMod(xi.mod.PARALYZE_MEVA, 75)
+    mob:setMod(xi.mod.SILENCE_MEVA, 75)
 end
 
 entity.onMobEngaged = function(mob, target)

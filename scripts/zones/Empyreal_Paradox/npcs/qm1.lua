@@ -12,14 +12,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    -- TODO: Use xi.items enum and table items.
     if
-        player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and not
-        (
-            player:hasItem(15962) or
-            player:hasItem(15963) or
-            player:hasItem(15964) or
-            player:hasItem(15965)
-        )
+        player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and
+        not (player:hasItem(15962) or player:hasItem(15963) or player:hasItem(15964) or player:hasItem(15965))
     then
         player:startEvent(5)
     else

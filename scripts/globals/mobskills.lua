@@ -346,14 +346,14 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         damage = damage * (((skill:getTP() / 10) * tpvalue) / 100)
     end
 
-    -- resistence is added last
+    -- resistance is added last
     local finaldmg = damage * mab * dmgmod
 
-    -- get resistence
+    -- get resistance
     local avatarAccBonus = 0
     if mob:isPet() and mob:getMaster() ~= nil then
         local master = mob:getMaster()
-        if master:getPetID() >= 0 and master:getPetID() <= 20 then -- check to ensure pet is avatar
+        if mob:isAvatar() then
             avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
@@ -399,7 +399,7 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
 
-    dayWeatherBonus = 1.00
+    local dayWeatherBonus = 1.00
 
     if caster:getWeather() == xi.magic.singleWeatherStrong[ele] then
         if math.random() < 0.33 then
@@ -473,7 +473,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     end
 
     -- Deal bonus damage vs mob ecosystem
-    local systemBonus = utils.getSystemStrengthBonus(mob, target)
+    local systemBonus = utils.getSystemStrengthBonus(mob:getSystem(), target:getSystem())
     damage = damage + damage * (systemBonus * 0.25)
 
     -- elemental resistence
@@ -810,16 +810,16 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobHealMove = function(target, heal)
+xi.mobskills.mobHealMove = function(target, healAmount)
     local mobHP = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if mobHP + heal > mobMaxHP then
-        heal = mobMaxHP - mobHP
+    if (mobHP + healAmount) > mobMaxHP then
+        healAmount = mobMaxHP - mobHP
     end
 
     target:wakeUp()
-    target:addHP(heal)
+    target:addHP(healAmount)
 
-    return heal
+    return healAmount
 end

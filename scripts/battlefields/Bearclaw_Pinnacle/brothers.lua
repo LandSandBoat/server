@@ -30,7 +30,7 @@ content.groups =
         mods =
         {
             [xi.mod.DMGMAGIC] = -1000,
-            [xi.mod.SLEEPRES] = 75,
+            [xi.mod.SLEEP_MEVA] = 75,
         },
 
         mobMods =
@@ -43,8 +43,8 @@ content.groups =
         mods =
         {
             [xi.mod.DMGMAGIC] = -1000,
-            [xi.mod.SILENCERES] = 75,
-            [xi.mod.SLEEPRES] = 50,
+            [xi.mod.SILENCE_MEVA] = 75,
+            [xi.mod.SLEEP_MEVA] = 50,
         },
 
         mobMods =
@@ -59,25 +59,25 @@ content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
 content.loot =
 {
     {
-        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.VERY_LOW },
-        { itemid = xi.items.SQUARE_OF_ELTORO_LEATHER, droprate = xi.battlefield.dropChance.NORMAL },
-        { itemid = xi.items.PIECE_OF_CASSIA_LUMBER, droprate = xi.battlefield.dropChance.NORMAL },
-        { itemid = xi.items.DRAGON_BONE, droprate = xi.battlefield.dropChance.NORMAL },
+        { item = xi.items.NONE, weight = xi.loot.weight.VERY_LOW },
+        { item = xi.items.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL },
+        { item = xi.items.PIECE_OF_CASSIA_LUMBER, weight = xi.loot.weight.NORMAL },
+        { item = xi.items.DRAGON_BONE, weight = xi.loot.weight.NORMAL },
     },
 
     {
-        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.EXTREMELY_HIGH },
-        { itemid = xi.items.CLOUD_EVOKER, droprate = xi.battlefield.dropChance.LOW },
+        { item = xi.items.NONE, weight = xi.loot.weight.EXTREMELY_HIGH },
+        { item = xi.items.CLOUD_EVOKER, weight = xi.loot.weight.LOW },
     },
 
     {
         quantity = 2,
-        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.HIGH },
-        { itemid = xi.items.SCOUTERS_ROPE, droprate = xi.battlefield.dropChance.LOW },
-        { itemid = xi.items.HEDGEHOG_BOMB, droprate = xi.battlefield.dropChance.LOW },
-        { itemid = xi.items.MARTIAL_ANELACE, droprate = xi.battlefield.dropChance.LOW },
-        { itemid = xi.items.MARTIAL_LANCE, droprate = xi.battlefield.dropChance.LOW },
-        { itemid = xi.items.SCROLL_OF_RAISE_III, droprate = xi.battlefield.dropChance.HIGH },
+        { item = xi.items.NONE, weight = xi.loot.weight.HIGH },
+        { item = xi.items.SCOUTERS_ROPE, weight = xi.loot.weight.LOW },
+        { item = xi.items.HEDGEHOG_BOMB, weight = xi.loot.weight.LOW },
+        { item = xi.items.MARTIAL_ANELACE, weight = xi.loot.weight.LOW },
+        { item = xi.items.MARTIAL_LANCE, weight = xi.loot.weight.LOW },
+        { item = xi.items.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
     },
 }
 

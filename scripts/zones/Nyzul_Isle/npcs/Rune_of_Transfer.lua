@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             for _, players in pairs(chars) do
                 local floorProgress = players:getVar("NyzulFloorProgress")
 
-                if xi.settings.RUNIC_DISK_SAVE == 0 then
+                if not xi.settings.main.RUNIC_DISK_SAVE then
                     -- Only the person who chose floor gets disk recoreded
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
@@ -129,7 +129,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             if instance:getStage() == xi.nyzul.objective.ACTIVATE_ALL_LAMPS then
-                for i = ID.npc.RUNIC_LAMP_1, ID.npc.RUNIC_LAMP_5 do
+                for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + 4 do
                     GetNPCByID(i, instance):setStatus(xi.status.DISAPPEAR)
                     GetNPCByID(i, instance):setAnimationSub(0)
                 end

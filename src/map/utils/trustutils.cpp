@@ -108,6 +108,15 @@ struct Trust_t
     int16 light_meva;
     int16 dark_meva;
 
+    int8 fire_res_rank;
+    int8 ice_res_rank;
+    int8 wind_res_rank;
+    int8 earth_res_rank;
+    int8 thunder_res_rank;
+    int8 water_res_rank;
+    int8 light_res_rank;
+    int8 dark_res_rank;
+
     Trust_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
@@ -168,6 +177,15 @@ struct Trust_t
         water_meva   = 0;
         light_meva   = 0;
         dark_meva    = 0;
+
+        fire_res_rank    = 0;
+        ice_res_rank     = 0;
+        wind_res_rank    = 0;
+        earth_res_rank   = 0;
+        thunder_res_rank = 0;
+        water_res_rank   = 0;
+        light_res_rank   = 0;
+        dark_res_rank    = 0;
     }
 };
 
@@ -246,7 +264,11 @@ namespace trustutils
                 mob_resistances.fire_meva, mob_resistances.ice_meva, \
                 mob_resistances.wind_meva, mob_resistances.earth_meva, \
                 mob_resistances.lightning_meva, mob_resistances.water_meva, \
-                mob_resistances.light_meva, mob_resistances.dark_meva \
+                mob_resistances.light_meva, mob_resistances.dark_meva, \
+                mob_resistances.fire_res_rank, mob_resistances.ice_res_rank, \
+                mob_resistances.wind_res_rank, mob_resistances.earth_res_rank, \
+                mob_resistances.lightning_res_rank, mob_resistances.water_res_rank, \
+                mob_resistances.light_res_rank, mob_resistances.dark_res_rank \
                 FROM spell_list, mob_pools, mob_family_system, mob_resistances \
                 WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid \
@@ -335,6 +357,15 @@ namespace trustutils
                 trust->water_meva   = (int16)sql->GetIntData(49);
                 trust->light_meva   = (int16)sql->GetIntData(50);
                 trust->dark_meva    = (int16)sql->GetIntData(51);
+
+                trust->fire_meva    = (int8)sql->GetIntData(52);
+                trust->ice_meva     = (int8)sql->GetIntData(53);
+                trust->wind_meva    = (int8)sql->GetIntData(54);
+                trust->earth_meva   = (int8)sql->GetIntData(55);
+                trust->thunder_meva = (int8)sql->GetIntData(56);
+                trust->water_meva   = (int8)sql->GetIntData(57);
+                trust->light_meva   = (int8)sql->GetIntData(58);
+                trust->dark_meva    = (int8)sql->GetIntData(59);
 
                 g_PTrustList.push_back(trust);
             }

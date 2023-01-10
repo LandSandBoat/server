@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Mahoh Mahborogho
--- Working 100%
 -----------------------------------
 local entity = {}
 

@@ -2,120 +2,72 @@
 -- Area: Apollyon Central
 --  Mob: Gunpod
 -----------------------------------
+require("scripts/globals/loot")
+-----------------------------------
+
 local entity = {}
 
-local loot =
-{
-    [1] = -- AF
-    {
-        {
-            { itemid = 1933, droprate =  9 }, -- MNK
-            { itemid = 1931, droprate = 53 }, -- WAR
-            { itemid = 1959, droprate =  6 }, -- SMN
-            { itemid = 1935, droprate = 12 }, -- WHM
-            { itemid = 1945, droprate = 29 }, -- DRK
-            { itemid = 1957, droprate = 12 }, -- DRG
-            { itemid = 1949, droprate = 35 }, -- BRD
-            { itemid = 2659, droprate = 35 }, -- COR
-            { itemid = 1939, droprate = 12 }, -- RDM
-            { itemid = 1951, droprate = 12 }, -- RNG
-            { itemid = 2661, droprate = 12 }, -- PUP
-            { itemid = 1937, droprate = 18 }, -- BLM
-            { itemid = 1955, droprate = 29 }, -- NIN
-            { itemid = 2717, droprate = 12 }, -- SCH
-            { itemid = 1947, droprate = 12 }, -- BST
-            { itemid = 2657, droprate = 18 }, -- BLU
-            { itemid = 2715, droprate =  5 }, -- DNC
-            { itemid = 1953, droprate = 35 }, -- SAM
-            { itemid = 1941, droprate = 41 }, -- THF
-            { itemid = 1943, droprate = 18 }, -- PLD
-        },
-    },
-
-    [2] = -- Chip
-    {
-        {
-            { itemid = 1987, droprate = 53 }, -- Charcoal Chip
-            { itemid = 1988, droprate = 76 }, -- Magenta Chip
-            { itemid = 1909, droprate = 64 }, -- Smalt Chip
-            { itemid = 1910, droprate = 41 }, -- Smoky Chip
-        },
-    },
-
-    [3] = -- Crafting
-    {
-        {
-            { itemid =  646, droprate = 50 }, -- Adaman Ore
-            { itemid = 1633, droprate = 50 }, -- Clot Plasma
-            { itemid =  664, droprate = 50 }, -- Darksteel Sheet
-            { itemid =  645, droprate = 50 }, -- Darksteel Ore
-            { itemid = 1311, droprate = 50 }, -- Oxblood
-            { itemid = 1681, droprate = 50 }, -- Light Steel
-            { itemid =  821, droprate = 50 }, -- Rainbow Thread
-            { itemid = 1883, droprate = 50 }, -- Shell Powder
-        },
-    },
-
-    [4] = -- ABCs
-    {
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid =    0, droprate = 1000 }, -- Ancient Beastcoin
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-    },
-}
-
-entity.onMobDeath = function(mob, player, optParams)
-    if optParams.isKiller or optParams.noKiller then
-        local players = mob:getBattlefield():getPlayers()
-        local random  = math.random(1, 4)
-
-        for i = 1, #loot[random] do
-            local lootGroup = loot[random][i]
-
-            if lootGroup then
-                local max = 0
-
-                for _, entry in pairs(lootGroup) do
-                    max = max + entry.droprate
-                end
-
-                local roll = math.random(max)
-
-                for _, entry in pairs(lootGroup) do
-                    max = max - entry.droprate
-
-                    if roll > max then
-                        if entry.itemid ~= 0 then
-                            players[1]:addTreasure(entry.itemid, mob)
-                        end
-
-                        break
-                    end
-                end
-            end
+entity.onMobInitialize = function(mob)
+    mob:addListener("ITEM_DROPS", "GUNPOD_ITEM_DROPS", function(mobArg, loot)
+        local result = math.random(1, 100)
+        local group = nil
+        if result <= 25 then
+            -- Apollyon Chips
+            group =
+            {
+                { item = xi.items.SMALT_CHIP },
+                { item = xi.items.SMOKY_CHIP },
+                { item = xi.items.CHARCOAL_CHIP },
+                { item = xi.items.MAGENTA_CHIP },
+            }
+        elseif result <= 50 then
+            -- Craft Materials
+            group =
+            {
+                { item = xi.items.CHUNK_OF_DARKSTEEL_ORE },
+                { item = xi.items.CHUNK_OF_ADAMAN_ORE },
+                { item = xi.items.DARKSTEEL_INGOT },
+                { item = xi.items.DARKSTEEL_SHEET },
+                { item = xi.items.SPOOL_OF_RAINBOW_THREAD },
+                { item = xi.items.PIECE_OF_OXBLOOD },
+                { item = xi.items.HANDFUL_OF_CLOT_PLASMA },
+                { item = xi.items.LIGHT_STEEL_INGOT },
+                { item = xi.items.PONZE_OF_SHELL_POWDER },
+            }
+        elseif result <= 86 then
+            -- AF+1 Materials
+            group =
+            {
+                { item = xi.items.ARGYRO_RIVET },
+                { item = xi.items.ANCIENT_BRASS_INGOT },
+                { item = xi.items.SPOOL_OF_BENEDICT_YARN },
+                { item = xi.items.SPOOL_OF_DIABOLIC_YARN },
+                { item = xi.items.SQUARE_OF_CARDINAL_CLOTH },
+                { item = xi.items.SPOOL_OF_LIGHT_FILAMENT },
+                { item = xi.items.WHITE_RIVET },
+                { item = xi.items.BLACK_RIVET },
+                { item = xi.items.FETID_LANOLIN_CUBE },
+                { item = xi.items.SQUARE_OF_BROWN_DOESKIN },
+                { item = xi.items.SQUARE_OF_CHARCOAL_COTTON },
+                { item = xi.items.SHEET_OF_KUROGANE },
+                { item = xi.items.POT_OF_EBONY_LACQUER },
+                { item = xi.items.BLUE_RIVET },
+                { item = xi.items.SQUARE_OF_ASTRAL_LEATHER },
+                { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH },
+                { item = xi.items.SQUARE_OF_CANVAS_TOILE },
+                { item = xi.items.SQUARE_OF_CORDUROY_CLOTH },
+                { item = xi.items.GOLD_STUD },
+                { item = xi.items.ELECTRUM_STUD },
+            }
+        else
+            -- Acient Beastcoins
+            loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.GUARANTEED, 5)
+            loot:addItem(xi.items.ANCIENT_BEASTCOIN, xi.loot.rate.COMMON)
+            return
         end
-    end
+
+        loot:addGroup(xi.loot.rate.GUARANTEED, group)
+    end)
 end
 
 return entity

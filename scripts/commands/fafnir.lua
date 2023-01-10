@@ -62,6 +62,8 @@ function onTrigger(player)
 
     mob:setDropID(0) -- No loot!
 
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
+
     mob:spawn()
 
     player:PrintToPlayer(string.format("Spawning Fafnir (Lv: %i, HP: %i)\n%s", mob:getMainLvl(), mob:getMaxHP(), mob))

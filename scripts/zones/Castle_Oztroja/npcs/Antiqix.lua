@@ -150,8 +150,7 @@ entity.onEventFinish = function(player, csid, option)
     -- refund timeless hourglass
     elseif csid == 97 then
         player:tradeComplete()
-        player:addGil(xi.settings.main.TIMELESS_HOURGLASS_COST)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.TIMELESS_HOURGLASS_COST)
+        npcUtil.giveCurrency(player, 'gil', xi.settings.main.TIMELESS_HOURGLASS_COST)
 
     -- singles to hundos
     elseif csid == 55 then

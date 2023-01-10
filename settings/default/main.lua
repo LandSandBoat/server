@@ -99,6 +99,7 @@ xi.settings.main =
     BAYLD_RATE      = 1.000, -- Multiples bayld earned from quests.
     -- Note: EXP rates are also influenced by conf setting
     EXP_RATE        = 1.000, -- Multiplies exp from script (except FoV/GoV).
+    CAPACITY_RATE   = 1.000, -- Multiplies capacy points gained.
     BOOK_EXP_RATE   = 1.000, -- Multiplies exp from FoV/GoV book pages.
     TABS_RATE       = 1.000, -- Multiplies tabs earned from fov.
     ROE_EXP_RATE    = 1.000, -- Multiplies exp earned from records of eminence.
@@ -212,6 +213,12 @@ xi.settings.main =
     GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
     GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
     GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
+
+    -- NYZUL
+    RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
+    ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
+    ENABLE_VIGIL_DROPS   = true, -- Enable Vigil Weapon drops from NMs.
+    ACTIVATE_LAMP_TIME   = 6000, -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
 
     -- MISC
     RIVERNE_PORTERS              = 120,   -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.

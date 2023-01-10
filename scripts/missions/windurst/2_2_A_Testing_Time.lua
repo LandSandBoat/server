@@ -86,8 +86,11 @@ local assessment = function(player, npc)
         elseif VanadielDayOfTheYear() == startDay + 1 then
             hoursPassed = VanadielHour() - startHour + 24
         else
-            if completed then hoursPassed = (24 - startHour) + VanadielHour() + 24
-            else hoursPassed = (24 - startHour) + VanadielHour(); end
+            if completed then
+                hoursPassed = (24 - startHour) + VanadielHour() + 24
+            else
+                hoursPassed = (24 - startHour) + VanadielHour()
+            end
         end
 
         if completed then

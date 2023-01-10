@@ -545,10 +545,6 @@ namespace mobutils
         {
             SetupDungeonMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::LIMBUS)
-        {
-            SetupLimbusMob(PMob);
-        }
         else if (zoneType == ZONE_TYPE::BATTLEFIELD || PMob->m_Type & MOBTYPE_BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
@@ -821,20 +817,6 @@ namespace mobutils
         }
     }
 
-    void SetupLimbusMob(CMobEntity* PMob)
-    {
-        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
-
-        // Battlefield mobs don't drop gil
-        PMob->setMobMod(MOBMOD_GIL_MAX, -1);
-        PMob->setMobMod(MOBMOD_MUG_GIL, -1);
-        PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
-
-        // never despawn
-        PMob->SetDespawnTime(0s);
-        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
-    }
-
     void SetupBattlefieldMob(CMobEntity* PMob)
     {
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
@@ -1001,9 +983,9 @@ namespace mobutils
                 PMob->addModifier(Mod::VERMIN_KILLER, 5);
                 break;
             case ECOSYSTEM::LUMINION:
-                PMob->addModifier(Mod::LUMORIAN_KILLER, 5);
+                PMob->addModifier(Mod::LUMINIAN_KILLER, 5);
                 break;
-            case ECOSYSTEM::LUMORIAN:
+            case ECOSYSTEM::LUMINIAN:
                 PMob->addModifier(Mod::LUMINION_KILLER, 5);
                 break;
             case ECOSYSTEM::PLANTOID:
@@ -1249,6 +1231,7 @@ Usage:
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
         fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
+        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
         allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
@@ -1339,45 +1322,43 @@ Usage:
                 PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(52)));
                 PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(53)));
 
-                /* Todo: hook this up, seems to force resist tiering
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
-                */
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(54)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(55)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(56)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(57)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(58)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(59)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(60)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(61)));
 
-                PMob->m_Element     = (uint8)sql->GetIntData(54);
-                PMob->m_Family      = (uint16)sql->GetIntData(55);
-                PMob->m_name_prefix = (uint8)sql->GetIntData(56);
-                PMob->m_flags       = (uint32)sql->GetIntData(57);
+                PMob->m_Element     = (uint8)sql->GetIntData(62);
+                PMob->m_Family      = (uint16)sql->GetIntData(63);
+                PMob->m_name_prefix = (uint8)sql->GetIntData(64);
+                PMob->m_flags       = (uint32)sql->GetIntData(65);
 
                 // Special sub animation for Mob (yovra, jailer of love, phuabo)
                 // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
                 // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                PMob->animationsub = (uint32)sql->GetIntData(58);
+                PMob->animationsub = (uint32)sql->GetIntData(66);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = sql->GetFloatData(59);
-                PMob->MPscale = sql->GetFloatData(60);
+                PMob->HPscale = sql->GetFloatData(67);
+                PMob->MPscale = sql->GetFloatData(68);
 
                 // TODO: Remove me
                 // Check if we should be looking up scripts for this mob
-                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
+                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(69);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(62));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(70));
 
-                PMob->m_Pool = sql->GetUIntData(63);
+                PMob->m_Pool = sql->GetUIntData(71);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(64));
-                PMob->namevis         = sql->GetUIntData(65);
-                PMob->m_Aggro         = sql->GetUIntData(66);
-                PMob->m_MobSkillList  = sql->GetUIntData(67);
-                PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(72));
+                PMob->namevis         = sql->GetUIntData(73);
+                PMob->m_Aggro         = sql->GetUIntData(74);
+                PMob->m_MobSkillList  = sql->GetUIntData(75);
+                PMob->m_TrueDetection = sql->GetUIntData(76);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(77));
 
                 CZone* newZone = zoneutils::GetZone(zoneID);
 
@@ -1418,6 +1399,7 @@ Usage:
         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
         fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
+        fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
         allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
@@ -1503,41 +1485,39 @@ Usage:
                 PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(52)));
                 PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(53)));
 
-                /* Todo: hook this up, seems to force resist tiering
-                PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
-                PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
-                */
+                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(54)));
+                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(55)));
+                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(56)));
+                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(57)));
+                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(58)));
+                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(59)));
+                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(60)));
+                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(61)));
 
-                PMob->m_Element     = (uint8)sql->GetIntData(54);
-                PMob->m_Family      = (uint16)sql->GetIntData(55);
-                PMob->m_name_prefix = (uint8)sql->GetIntData(56);
-                PMob->m_flags       = (uint32)sql->GetIntData(57);
+                PMob->m_Element     = (uint8)sql->GetIntData(62);
+                PMob->m_Family      = (uint16)sql->GetIntData(63);
+                PMob->m_name_prefix = (uint8)sql->GetIntData(64);
+                PMob->m_flags       = (uint32)sql->GetIntData(65);
 
-                PMob->animationsub = (uint32)sql->GetIntData(58);
+                PMob->animationsub = (uint32)sql->GetIntData(66);
 
                 // Setup HP / MP Stat Percentage Boost
-                PMob->HPscale = sql->GetFloatData(59);
-                PMob->MPscale = sql->GetFloatData(60);
+                PMob->HPscale = sql->GetFloatData(67);
+                PMob->MPscale = sql->GetFloatData(68);
 
                 // TODO: Remove me
-                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(61);
+                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(69);
 
-                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(62));
+                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(70));
 
-                PMob->m_Pool = sql->GetUIntData(63);
+                PMob->m_Pool = sql->GetUIntData(71);
 
-                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(64));
-                PMob->namevis         = sql->GetUIntData(65);
-                PMob->m_Aggro         = sql->GetUIntData(66);
-                PMob->m_MobSkillList  = sql->GetUIntData(67);
-                PMob->m_TrueDetection = sql->GetUIntData(68);
-                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
+                PMob->allegiance      = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(72));
+                PMob->namevis         = sql->GetUIntData(73);
+                PMob->m_Aggro         = sql->GetUIntData(74);
+                PMob->m_MobSkillList  = sql->GetUIntData(75);
+                PMob->m_TrueDetection = sql->GetUIntData(76);
+                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(77));
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));

@@ -149,18 +149,6 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [22] = function(x)
             player:startEvent(210)
         end,
-
-        [24] = function(x)
-            if player:getCharVar("TransformationsProgress") == 2 then
-                player:startEvent(2)
-            end
-        end,
-
-        [25] = function(x)
-            if player:getCharVar("TransformationsProgress") == 3 then
-                player:startEvent(3)
-            end
-        end,
     }
 end
 
@@ -183,11 +171,7 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 2 then
-        player:setCharVar("TransformationsProgress", 3)
-    elseif csid == 3 then
-        player:setCharVar("TransformationsProgress", 4)
-    elseif csid == 116 and player:getLocalVar("SalvageArrapago") == 1 then -- enter Salvage Silver Sea zone
+    if csid == 116 and player:getLocalVar("SalvageArrapago") == 1 then -- enter Salvage Silver Sea zone
         player:setPos(0, 0, 0, 0, 74)
     elseif csid == 116 and player:getLocalVar("SalvageSilverSea") == 1 then -- enter Salvage Arrapago zone
         player:setPos(0, 0, 0, 0, 76)

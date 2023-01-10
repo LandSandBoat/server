@@ -370,6 +370,10 @@ public:
     void   setUnityLeader(uint8 leaderID);                                    // Sets a player's unity leader
     uint8  getUnityLeader();                                                  // Returns player's unity leader
     auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>; // Returns current rank of player's unity
+    auto   getClaimedDeedMask() -> sol::table;                                // Returns a table corresponding to claimed items from AMAN Validator
+    void   toggleReceivedDeedRewards();
+    void   setClaimedDeed(uint16 deedBitNum);
+    void   resetClaimedDeeds();
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
@@ -443,12 +447,12 @@ public:
     int32 addMP(int32 amount);     // Modify mp of Entity +/-
     void  setMP(int32 value);      // Set mp of Entity to value
     int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
-    void  delMP(int32 amount);     // Subtract mp of Entity
+    int32 delMP(int32 amount);     // Subtract mp of Entity
 
     float getTP();
-    void  addTP(int16 amount); // Modify tp of Entity +/-
+    int16 addTP(int16 amount); // Modify tp of Entity +/-
     void  setTP(int16 value);  // Set tp of Entity to value
-    void  delTP(int16 amount); // Subtract tp of Entity
+    int16 delTP(int16 amount); // Subtract tp of Entity
 
     void  updateHealth();
     uint8 getAverageItemLevel();
@@ -531,6 +535,8 @@ public:
     bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
     bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
     bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
+    void  setEnteredBattlefield(bool entered);                                                                                     // Sets if the player has entered into a battlefield or not
+    bool  hasEnteredBattlefield();                                                                                                 // If the player has entered into a battlefield return true else false
 
     // Battle Utilities
     bool isAlive();
@@ -700,7 +706,9 @@ public:
 
     bool   hasPet();                                  // returns true if the player has a pet
     auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
-    uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
+    uint32 getPetID();                                // returns the PetID of an entity if it is a pet, otherwise 0.
+    bool   isAutomaton();                             // returns true if entity is an automaton.
+    bool   isAvatar();                                // returns true if entity is an avatar
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
@@ -824,7 +832,6 @@ public:
     uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
     bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
     int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
-    void   addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va);    // Adds a modification to the drop list of this mob, erased on death
 
     uint32 getAvailableTraverserStones();
     time_t getTraverserEpoch();

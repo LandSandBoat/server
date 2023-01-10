@@ -685,15 +685,6 @@ xi.reaction =
     ABILITY  = 0x10,
 }
 
-xi.actionModifier =
-{
-    NONE        = 0x00,
-    COVER       = 0x01,
-    RESIST      = 0x02,
-    MAGIC_BURST = 0x04, -- Currently known to be used for Swipe/Lunge only
-    IMMUNOBREAK = 0x08,
-}
-
 xi.specEffect =
 {
     NONE           = 0x00,

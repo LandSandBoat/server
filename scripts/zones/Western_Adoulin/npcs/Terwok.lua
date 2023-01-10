@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Terwok
--- Type: Standard NPC and Quest NPC
 --  Involved With Quest: 'Order Up'
 -- !pos 127 4 -81 256
 -----------------------------------
@@ -20,9 +19,6 @@ entity.onTrigger = function(player, npc)
     if orderUp == QUEST_ACCEPTED and not orderTerwok then
         -- Progresses Quest: 'Order Up'
         player:startEvent(67)
-    else
-        -- Standard Dialogue
-        player:startEvent(532)
     end
 end
 

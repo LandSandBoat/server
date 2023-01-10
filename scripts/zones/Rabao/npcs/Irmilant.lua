@@ -50,8 +50,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(134) --Ends the Quest
     elseif Indomitable == QUEST_COMPLETED then
         player:startEvent(135) --Dialogue for those who have completed Indomitable Spirit
-    else
-        player:startEvent(76) --Standard Dialogue
     end
 end
 
