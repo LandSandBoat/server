@@ -2696,6 +2696,7 @@ xi.items =
     CUIR_HIGHBOOTS                  = 12955,
     ASH_CLOGS                       = 12984,
     SOLEA                           = 12992,
+    POWER_SANDALS                   = 13012,
     STUMBLING_SANDALS               = 13013,
     LEAPING_BOOTS                   = 13014,
     PEACOCK_CHARM                   = 13056,

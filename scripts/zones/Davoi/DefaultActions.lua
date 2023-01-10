@@ -7,6 +7,7 @@ return {
     ['Bernal']       = { event = 31 },
     ['Hide_Flap_1']  = { messageSpecial = ID.text.YOU_SEE_NOTHING },
     ['Hide_Flap_2']  = { messageSpecial = ID.text.YOU_SEE_NOTHING },
+    ['Jar']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm2']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Sedal-Godjal'] = { event = 27 },
     ['Storage_Hole'] = { messageSpecial = ID.text.YOU_SEE_NOTHING },
