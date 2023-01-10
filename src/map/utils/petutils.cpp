@@ -897,9 +897,8 @@ namespace petutils
         PPet->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat);
         PPet->health.hp    = PPet->health.maxhp;
 
-        if (PPet->m_PetID == PETID_FIRESPIRIT || PPet->m_PetID == PETID_EARTHSPIRIT || PPet->m_PetID == PETID_AIRSPIRIT ||
-            PPet->m_PetID == PETID_ICESPIRIT || PPet->m_PetID == PETID_THUNDERSPIRIT || PPet->m_PetID == PETID_WATERSPIRIT ||
-            PPet->m_PetID == PETID_LIGHTSPIRIT || PPet->m_PetID == PETID_DARKSPIRIT)
+        // if a spirit then add mp so it can cast spells
+        if (PPet->m_PetID <= PETID_DARKSPIRIT)
         {
             // Start MP calculation
             raceStat = 0;
