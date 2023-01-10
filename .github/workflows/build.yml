@@ -443,7 +443,7 @@ jobs:
           -- Create an account
           INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
           VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
-          SELECT id, login FROM accounts;
+          SELECT id, login, content_ids FROM accounts;
           -- Create a character
           INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
           VALUES(1, 1000, 'Test', 0, 0, 5);
@@ -461,7 +461,7 @@ jobs:
               pos_y = -9,
               pos_z = -140
           WHERE charid = 1;
-          SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+          SELECT charid, accid, charname, pos_zone, pos_x, pos_y, pos_z FROM chars;
           -- Set GodMode CharVar = 1
           INSERT INTO char_vars(charid, varname, value)
           VALUES(1, 'GodMode', 1);
