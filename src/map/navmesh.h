@@ -25,8 +25,8 @@ The NavMesh class will load and find paths given a start point and end point.
 #ifndef _NAVMESH_H
 #define _NAVMESH_H
 
-#include <detour/DetourNavMesh.h>
-#include <detour/DetourNavMeshQuery.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshQuery.h>
 
 #include "common/logging.h"
 #include "common/mmo.h"
