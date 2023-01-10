@@ -65,7 +65,7 @@ uint32 CTradeContainer::getQuantity(uint8 slotID)
     return 0;
 }
 
-uint8 CTradeContainer::getConfirmedStatus(uint8 slotID)
+uint32 CTradeContainer::getConfirmedStatus(uint8 slotID)
 {
     if (slotID < m_PItem.size())
     {
@@ -263,7 +263,7 @@ void CTradeContainer::unreserveUnconfirmed()
 
         if (PItem)
         {
-            uint8 confirmedStatus = getConfirmedStatus(slotID);
+            uint32 confirmedStatus = getConfirmedStatus(slotID);
             if (confirmedStatus > 0)
             {
                 PItem->setReserve(confirmedStatus);
