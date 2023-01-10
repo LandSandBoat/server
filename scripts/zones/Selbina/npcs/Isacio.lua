@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ~= QUEST_AVAILABLE then
-        player:startEvent(99)
+        player:startEvent(110)
     elseif questStatus == QUEST_COMPLETED then
         player:startEvent(118)
     elseif questStatus == QUEST_ACCEPTED then
