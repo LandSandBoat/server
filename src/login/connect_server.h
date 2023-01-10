@@ -116,7 +116,7 @@ public:
             }
             else
             {
-                ShowError(ec.message());
+                DebugSockets(ec.message());
                 handle_error(ec, self);
             }
         });
@@ -125,7 +125,6 @@ public:
 
     virtual void handle_error(std::error_code ec, std::shared_ptr<handler_session> self)
     {
-        ShowError(ec.message());
     }
 
     void do_write(std::size_t length)

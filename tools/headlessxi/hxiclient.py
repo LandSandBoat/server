@@ -9,7 +9,7 @@ from .packets import packets
 
 
 class HXIClient:
-    def __init__(self, username, password, server, slot=0, client_str="", debug_packets=True):
+    def __init__(self, username, password, server, slot=0, client_str="", debug_packets=False):
         # Args
         self.username = username
         self.password = password
