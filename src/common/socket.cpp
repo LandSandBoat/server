@@ -1,15 +1,17 @@
 ﻿// Copyright (c) 2010-2015 Darkstar Dev Teams
 
-#include "../common/cbasetypes.h"
-#include "../common/kernel.h"
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/utils.h"
+#include "common/cbasetypes.h"
+#include "common/kernel.h"
+#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include "settings.h"
 #include "socket.h"
+
+#include <sstream>
 
 #include <cstdio>
 #include <cstdlib>
