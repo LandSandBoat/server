@@ -5219,7 +5219,7 @@ bool CLuaBaseEntity::getGMHidden()
 
 /************************************************************************
  *  Function: setGMHidden()
- *  Purpose : Sets a GM to hidden mode
+ *  Purpose : Sets a GM to hidden mode. Adds invis status.
  *  Example : player:setGMHidden(1)
  ************************************************************************/
 
@@ -5230,6 +5230,17 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
     auto* PChar         = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_isGMHidden = isHidden;
 
+    // Adds an invisible effect.
+    if (isHidden)
+    {
+        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HIDE, EFFECT_HIDE, 99, 0, 0, 0, 0, 0, EFFECTFLAG_NO_CANCEL));
+    }
+    else
+    {
+        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
+    }
+
+    // Push packets so characters spawn / despawn for other entities as needed
     if (PChar->loc.zone)
     {
         if (PChar->m_isGMHidden)
