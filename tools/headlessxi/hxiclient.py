@@ -9,12 +9,13 @@ from .packets import packets
 
 
 class HXIClient:
-    def __init__(self, username, password, server, slot=0, client_str=""):
+    def __init__(self, username, password, server, slot=0, client_str="", debug_packets=True):
         # Args
         self.username = username
         self.password = password
         self.server = server
         self.slot = slot
+        self.debug_packets = debug_packets
         self.macAddress = "CA:FE:BE:EF:00:00"
         self.xiloaderVersionNumber = "1.0.0" # compatible xiloader version
 
@@ -118,6 +119,9 @@ class HXIClient:
             data[0] = 0xFE
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbydata_sock.sendall(data)
+            if self.debug_packets:
+                print(f"lobby_data_connect: sent {data}")
+
         except Exception as ex:
             print(ex)
 
@@ -133,8 +137,13 @@ class HXIClient:
             data = bytearray(28)
             data[0] = 0xA1
             util.memcpy(util.pack_32(self.account_id), 0, data, 1, 4)
+            util.memcpy(socket.inet_aton(self.lobbydata_sock.getpeername()[0]), 0, data, 5, 4)
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
+
             self.lobbydata_sock.sendall(data)
+            if self.debug_packets:
+                print(f"0xA1_0: sent {data}")
+
         except Exception as ex:
             print(ex)
 
@@ -145,9 +154,15 @@ class HXIClient:
             data[8] = 0x26
             util.memcpy(self.client_str, 0, data, 116, 10)
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
+
+            if self.debug_packets:
+                print(f"0x26: sent {data}")
             self.lobbyview_sock.sendall(data)
 
             in_data = self.lobbyview_sock.recv(40)
+
+            if self.debug_packets:
+                print(f"0x26: received {data}")
 
             expansion_bitmask = util.unpack_uint32(in_data, 32)
             print(
@@ -176,18 +191,23 @@ class HXIClient:
             data[8] = 0x1F
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbyview_sock.sendall(data)
+            if self.debug_packets:
+                print(f"0x1F: sent {data}")
         except Exception as ex:
             print(ex)
 
     def lobby_data_0xA1_1(self):
         print("Sending lobby_data_0xA1 (1)")
         try:
-            # Should send 9 bytes: A1 00 00 01 00 00 00 00 00
-            data = bytearray.fromhex("A10000010000000000")
+            data = bytearray(28)
+            data[0] = 0xA1
 
-            # Sends: bytearray(b'\xa1\x00\x00\x01\x00\x00\x00\x00\x00') packed with account ID
             util.memcpy(util.pack_32(self.account_id), 0, data, 1, 4)
+            util.memcpy(socket.inet_aton(self.lobbydata_sock.getpeername()[0]), 0, data, 5, 4)
             self.lobbydata_sock.sendall(data)
+
+            if self.debug_packets:
+                print(f"0xA1_1: sent {data}")
 
             _ = self.lobbydata_sock.recv(328)
             data = self.lobbyview_sock.recv(2272)
@@ -206,6 +226,8 @@ class HXIClient:
                 print(self.char_id, self.char_name)
             else:
                 print(f"Could not locate character name, got {data}")
+            if self.debug_packets:
+                print(f"0xA1_1: received {data}")
 
         except Exception as ex:
             print(ex)
@@ -223,6 +245,8 @@ class HXIClient:
             util.pack_string(data, 36, self.char_name, len(self.char_name))
             util.pack_string(data, 12, self.sessionHash, len(self.sessionHash))
             self.lobbyview_sock.sendall(data)
+            if self.debug_packets:
+                print(f"0x07: sent {data}")
         except Exception as ex:
             print(ex)
 
@@ -240,6 +264,8 @@ class HXIClient:
         status_code = 0
         try:
             self.lobbydata_sock.sendall(data)
+            if self.debug_packets:
+                print(f"0xA2: sent {data}")
             data = self.lobbyview_sock.recv(72)  # 0x48
             if len(data) != 0x48:
                 raise Exception(
@@ -249,7 +275,8 @@ class HXIClient:
             print(f"Error communicating lobby 0xA2 packet. Error: {status_code}")
             print(ex)
             exit(-1)
-
+        if self.debug_packets:
+            print(f"0xA2: received {data}")
         try:
             self.zone_ip = util.int_to_ip(socket.htonl(util.unpack_uint32(data, 0x38)))
             self.zone_port = util.unpack_uint16(data, 0x3C)
