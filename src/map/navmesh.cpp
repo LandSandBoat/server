@@ -21,9 +21,9 @@
 
 #include "navmesh.h"
 
-#include <detour/DetourCommon.h>
-#include <detour/DetourNavMesh.h>
-#include <detour/DetourNavMeshQuery.h>
+#include <DetourCommon.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshQuery.h>
 
 #include "common/utils.h"
 #include "common/xirand.h"
