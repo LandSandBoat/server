@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Devean
+-- Test My Mettle
+-- !pos 39.858 -14.558 40.009
 -----------------------------------
 local entity = {}
 
@@ -8,7 +10,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(120)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
