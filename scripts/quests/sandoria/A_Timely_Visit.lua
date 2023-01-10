@@ -7,6 +7,7 @@
 --  Phillone !pos -208 -2 67
 --       ??? !pos -310 0 407
 -----------------------------------
+require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -173,7 +174,7 @@ quest.sections =
                 end,
             },
 
-            ['Giollemitte_B_Feuron'] =
+            ['Giollemitte_B_Feroun'] =
             {
                 onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 6 then
