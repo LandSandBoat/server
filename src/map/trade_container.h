@@ -58,7 +58,7 @@ public:
     uint16 getItemID(uint8 slotID);
     uint8  getInvSlotID(uint8 slotID);
     uint32 getQuantity(uint8 slotID); // Number of items in the slot
-    uint8  getConfirmedStatus(uint8 slotID);
+    uint32 getConfirmedStatus(uint8 slotID);
     uint32 getItemQuantity(uint16 itemID); // Number of items of one type
     uint8  getSize();
     uint8  getExSize() const;
