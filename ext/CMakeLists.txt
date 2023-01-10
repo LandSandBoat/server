@@ -4,7 +4,6 @@
 
 add_subdirectory(concurrentqueue)
 add_subdirectory(sol)
-add_subdirectory(spdlog)
 
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
 
@@ -60,6 +59,16 @@ if(TRACY_ENABLE)
     endif()
 endif(TRACY_ENABLE)
 
+# NOTE: We are not using the latest versions of spdlog, since the
+#     : version of fmt it is bundled with deprecated some arg mapping
+#     : that we use in a lot of places (formatting enums as ints and
+#     : formatting non-void pointers).
+CPMAddPackage(
+    NAME spdlog
+    GITHUB_REPOSITORY gabime/spdlog
+    GIT_TAG v1.9.2
+) # defines: spdlog
+
 # NOTE: Using the 'release-2.0' branch
 CPMAddPackage(
     NAME recastnavigation
@@ -109,9 +118,9 @@ CPMAddPackage(
 ) # defines: nlohmann_json::nlohmann_json
 
 set(EXTERNAL_LIBS
+    spdlog
     concurrentqueue
     mariadbclient
-    spdlog
     RecastNavigation::Recast
     RecastNavigation::Detour
     sol2_single
