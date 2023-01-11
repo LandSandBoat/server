@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -6191,8 +6191,20 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
     else if (operation == 5)
     {
         // remodel mog house
-        auto type   = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105
-        std::ignore = type;
+        auto type = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105, Patio: 106
+
+        // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+        // 0x0100: ^ As above
+
+        // Clear bits first
+        PChar->profile.mhflag &= ~(0x0080);
+        PChar->profile.mhflag &= ~(0x0100);
+
+        // Write new model bits
+        PChar->profile.mhflag |= ((type - 103) << 7);
+        charutils::SaveCharStats(PChar);
+
+        // TODO: It's possible to do this from 2F, so if you're on 2F (check the  flag), force a re-zone to get the new look
     }
     else
     {

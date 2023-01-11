@@ -36,9 +36,15 @@
 // (These used to be entries in the ZONEID enum, but that was wrong, knowing what we know now)
 uint16 GetMogHouseModelID(CCharEntity* PChar)
 {
-    // TODO: Hook these up using information stored in PChar
+    // Shift right 7 places, mask the bottom two bits.
+    // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    // 0x0100: ^ As above
+    uint16 moghouse2FModel      = 0x0267 + ((PChar->profile.mhflag >> 7) & 0x03);
     bool   requestingMoghouse2F = PChar->profile.mhflag & 0x40;
-    uint16 moghouse2FModel      = 0x026A; // TODO: Lookup which model the play has saved
+    if (requestingMoghouse2F)
+    {
+        return moghouse2FModel;
+    }
 
     // clang-format off
     switch (zoneutils::GetCurrentRegion(PChar->getZone()))
@@ -52,11 +58,11 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
         case REGION_TYPE::SARUTA_FRONT:
             return 219;
         case REGION_TYPE::SANDORIA:
-            return requestingMoghouse2F ? moghouse2FModel : PChar->profile.nation == 0 ? 0x0121 : 0x0101;
+            return PChar->profile.nation == 0 ? 0x0121 : 0x0101;
         case REGION_TYPE::BASTOK:
-            return requestingMoghouse2F ? moghouse2FModel : PChar->profile.nation == 1 ? 0x0122 : 0x0102;
+            return PChar->profile.nation == 1 ? 0x0122 : 0x0102;
         case REGION_TYPE::WINDURST:
-            return requestingMoghouse2F ? moghouse2FModel : PChar->profile.nation == 2 ? 0x0123 : 0x0120;
+            return PChar->profile.nation == 2 ? 0x0123 : 0x0120;
         case REGION_TYPE::JEUNO:
             return 0x0100;
         default:
