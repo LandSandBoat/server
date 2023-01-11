@@ -25,10 +25,10 @@ zones[xi.zone.ESCHA_RUAUN] =
     },
     npc =
     {
-        QM_BYAKKO = DYNAMIC_LOOKUP,
-        QM_GENBU  = DYNAMIC_LOOKUP,
-        QM_SEIRYU = DYNAMIC_LOOKUP,
-        QM_SUZAKU = DYNAMIC_LOOKUP,
+        QM_BYAKKO = 17961730,
+        QM_GENBU  = 17961733,
+        QM_SEIRYU = 17961736,
+        QM_SUZAKU = 17961731,
     },
 }
 

@@ -27,8 +27,6 @@ local prizes =
 			4109, -- Water Cluster
 			4110, -- Light Cluster
 			4111, -- Dark Cluster
-			
-
         },
     },
 
@@ -68,22 +66,22 @@ local prizes =
 			-- 278, -- cardian statue
 			
 			-- Cycle #3
-			279, -- s lord statue ii
-			280, -- s lord statue iii
-			281, -- atomos statue
-			284, -- goobbue statue
-			286, -- nanaa mihgo statue
-			287, -- nanaa mihgo s ii
-			320, -- harpsichord
+			-- 279, -- s lord statue ii
+			-- 280, -- s lord statue iii
+			-- 281, -- atomos statue
+			-- 284, -- goobbue statue
+			-- 286, -- nanaa mihgo statue
+			-- 287, -- nanaa mihgo s ii
+			-- 320, -- harpsichord
 			
 			-- Cycle #4
-			-- 365, -- poele classique
-			-- 366, -- kanonenofen
-			-- 367, -- pot topper
-			-- 415, -- aldebaran horn
-			-- 426, -- orchestrion
-			-- 3585, -- galley kitchen
-			-- 3652, -- memorial cake
+			365, -- poele classique
+			366, -- kanonenofen
+			367, -- pot topper
+			415, -- aldebaran horn
+			426, -- orchestrion
+			3585, -- galley kitchen
+			3652, -- memorial cake
 			
 			-- Cycle # 5
 			-- 3679, -- beastman gonfalon
@@ -113,46 +111,46 @@ local prizes =
         -- COSTUMES
 			
 			-- Cycle #1/#6
-			10429, -- Moogle Masque
-			10250, -- Moogle Suit
-			27765, -- Chocobo Masque
-			27911, -- Chocobo Suit
-			26798, -- Behemoth Masque
-			26954, -- Behemoth Suit
-			27715, -- Goblin Masque
-			27866, -- Goblin Suit
-			26705, -- Mandragora Masque
-			27854, -- Mandragora Suit
-			26956, -- Poroggo Coat
-			25711, -- Botulus Suit
-			25632, -- Carbie Cap
-			10384, -- Cumulus Masque
-			27859, -- Kengyu Happi 
-			-- 28149, -- Kengyu Hanmomohiki 	-- BROKEN
-			-- 27860, -- Shokujo Happi 			-- BROKEN
-			-- 28150, -- Shokujo Hanmomohiki	-- BROKEN
-			26889, -- Heart Apron
+			-- 10429, -- Moogle Masque
+			-- 10250, -- Moogle Suit
+			-- 27765, -- Chocobo Masque
+			-- 27911, -- Chocobo Suit
+			-- 26798, -- Behemoth Masque
+			-- 26954, -- Behemoth Suit
+			-- 27715, -- Goblin Masque
+			-- 27866, -- Goblin Suit
+			-- 26705, -- Mandragora Masque
+			-- 27854, -- Mandragora Suit
+			-- 26956, -- Poroggo Coat
+			-- 25711, -- Botulus Suit
+			-- 25632, -- Carbie Cap
+			-- 10384, -- Cumulus Masque
+			-- 27859, -- Kengyu Happi 
+			-- -- 28149, -- Kengyu Hanmomohiki 	-- BROKEN
+			-- -- 27860, -- Shokujo Happi 			-- BROKEN
+			-- -- 28150, -- Shokujo Hanmomohiki	-- BROKEN
+			-- 26889, -- Heart Apron
 			
 			-- Cycle #2
-            -- 25606, -- Agent Hood
-			-- 26974, -- Agent Coat
-			-- 27111, -- Agent Cuffs
-			-- 27296, -- Agent Pants
-			-- 27467, -- Agent Boots
-			-- 25607, -- Starlet Flower
-			-- 26975, -- Starlet Jabot
-			-- 27112, -- Starlet Gloves
-			-- 27297, -- Starlet Skirt
-			-- 27468, -- Starlet Boots
-			-- 25657, -- Wyrmking Masque
-			-- 25756, -- Wyrmking Suit
-			-- 25585, -- Bl. Chocobo Cap
-			-- 25776, -- Bl. Chocobo Suit
-			-- 26514, -- Poroggo Fleece
-			-- 27717, -- Worm Masque
-			-- 11491, -- Snow Bunny Hat +1
-			-- 23730, -- Karakul Cap
-			-- 25850, -- Pink Subligar
+            25606, -- Agent Hood
+			26974, -- Agent Coat
+			27111, -- Agent Cuffs
+			27296, -- Agent Pants
+			27467, -- Agent Boots
+			25607, -- Starlet Flower
+			26975, -- Starlet Jabot
+			27112, -- Starlet Gloves
+			27297, -- Starlet Skirt
+			27468, -- Starlet Boots
+			25657, -- Wyrmking Masque
+			25756, -- Wyrmking Suit
+			25585, -- Bl. Chocobo Cap
+			25776, -- Bl. Chocobo Suit
+			26514, -- Poroggo Fleece
+			27717, -- Worm Masque
+			11491, -- Snow Bunny Hat +1
+			23730, -- Karakul Cap
+			25850, -- Pink Subligar
 			
 			-- Cycle #3
 			-- 25774, -- Fancy Gilet
@@ -334,36 +332,36 @@ local prizes =
 		   -- 18563, -- Ark Scythe
 		   
 		   -- Cycle #4
-		   20571, -- Infiltrator
-		   20569, -- Esikuva
-		   20576, -- Qutrub Knife
-		   21608, -- Onion Sword II
-		   21609, -- Save The Queen II
-		   21636, -- Nihility
-		   20668, -- Firetongue
-		   20666, -- Blizzard Brand
-		   26410, -- Diamond Buckler
-		   10809, -- Moogle Guard
-		   21965, -- Zanmato
-		   21867, -- Sha Wujing's Lance
-		   20933, -- Hotengeki
-		   21086, -- Heartstopper
-		   21095, -- Heartbeater
-		   22039, -- Floral Hagoita
-		   21074, -- Kupo Rod
-		   21153, -- Malice Masher
-		   22089, -- Sophistry
+		   -- 20571, -- Infiltrator
+		   -- 20569, -- Esikuva
+		   -- 20576, -- Qutrub Knife
+		   -- 21608, -- Onion Sword II
+		   -- 21609, -- Save The Queen II
+		   -- 21636, -- Nihility
+		   -- 20668, -- Firetongue
+		   -- 20666, -- Blizzard Brand
+		   -- 26410, -- Diamond Buckler
+		   -- 10809, -- Moogle Guard
+		   -- 21965, -- Zanmato
+		   -- 21867, -- Sha Wujing's Lance
+		   -- 20933, -- Hotengeki
+		   -- 21086, -- Heartstopper
+		   -- 21095, -- Heartbeater
+		   -- 22039, -- Floral Hagoita
+		   -- 21074, -- Kupo Rod
+		   -- 21153, -- Malice Masher
+		   -- 22089, -- Sophistry
            
 		   -- Cycle #5
-		   -- 11499, -- trainees specs
-		   -- 15008, -- trainee gloves
-		   -- 19101, -- trainee knife
-		   -- 18855, -- trainee hammer
-		   -- 19110, -- trainees needle
-		   -- 18502, -- trainee axe
-		   -- 19274, -- trainee burin
-		   -- 18763, -- trainee scissors
-		   -- 17764, -- trainee sword
+		   11499, -- trainees specs
+		   15008, -- trainee gloves
+		   19101, -- trainee knife
+		   18855, -- trainee hammer
+		   19110, -- trainees needle
+		   18502, -- trainee axe
+		   19274, -- trainee burin
+		   18763, -- trainee scissors
+		   17764, -- trainee sword
         },
     },
 
@@ -429,19 +427,19 @@ local prizes =
 			
 	    -- HIGHLEVEL MATERIALS
 		    -- Cycle #1 
-			-- 658, -- Damascus Ingot
-			-- 747, -- Orichalcum Ingot
-			-- 686, -- Imperial Wootz Ingot
-			-- 1714, -- Cashmere Cloth
-			-- 1313, -- Siren's Hair
-			-- 1409, -- Siren's Macrame
-			-- 831, -- Shining Cloth
-			-- 862, -- Behemoth Leather
-			-- 2169, -- Cerberus Hide
-			-- 1312, -- Angel Skin
-			-- 723, -- Divine Lumber
-			-- 720, -- Ancient Lumber
-			-- 2371, -- Khimaira Horn
+			658, -- Damascus Ingot
+			747, -- Orichalcum Ingot
+			686, -- Imperial Wootz Ingot
+			1714, -- Cashmere Cloth
+			1313, -- Siren's Hair
+			1409, -- Siren's Macrame
+			831, -- Shining Cloth
+			862, -- Behemoth Leather
+			2169, -- Cerberus Hide
+			1312, -- Angel Skin
+			723, -- Divine Lumber
+			720, -- Ancient Lumber
+			2371, -- Khimaira Horn
 			
 			-- Cycle #2 
 			-- 1289, -- Burning Hakutaku Eye
@@ -459,17 +457,17 @@ local prizes =
 			-- 2152, -- Marid Leather
 			
 			-- Cycle #3
-			730, -- Bloodwood Lumber
-			901, -- Venomous Claw
-			903, -- Dragon Talon
-			1311, -- Oxblood
-			908, -- Adamantoise Shell
-			867, -- Dragon Scales
-			866, -- Wyvern Scales
-			1816, -- Wyrm Horn
-			1110, -- Beetle Blood
-			2172, -- hydra scale
-			2168, -- Cerberus Claw
+			-- 730, -- Bloodwood Lumber
+			-- 901, -- Venomous Claw
+			-- 903, -- Dragon Talon
+			-- 1311, -- Oxblood
+			-- 908, -- Adamantoise Shell
+			-- 867, -- Dragon Scales
+			-- 866, -- Wyvern Scales
+			-- 1816, -- Wyrm Horn
+			-- 1110, -- Beetle Blood
+			-- 2172, -- hydra scale
+			-- 2168, -- Cerberus Claw
 
         },
     },
@@ -482,44 +480,44 @@ local prizes =
 		-- NICE TO HAVE STUFF
 
 			-- Cycle #1 -- Crafting/Nyzul sets <- These need to be highest login tier next time!
-			28587, -- Artificer's Ring
-			28585, -- Craftkeeper's Ring
-			16106, -- Askar Zucchetto
-			14568, -- Askar Korazin
-			14983, -- Askar Manopolas
-			15647, -- Askar Dirs
-			15733, -- Askar Gambieras
-			16107, -- Denali Bonnet
-			14569, -- Denali Jacket 
-			14984, -- Denali Wristbands 
-			15648, -- Denali Kecks
-			15734, -- Denali Gamashes
-			16108, -- Goliard Chapeau 
-			14570, -- Goliard Saio 
-			14985, -- Goliard Cuffs
-			15649, -- Goliard Trews
-			15735, -- Goliard Clogs
+			-- 28587, -- Artificer's Ring
+			-- 28585, -- Craftkeeper's Ring
+			-- 16106, -- Askar Zucchetto
+			-- 14568, -- Askar Korazin
+			-- 14983, -- Askar Manopolas
+			-- 15647, -- Askar Dirs
+			-- 15733, -- Askar Gambieras
+			-- 16107, -- Denali Bonnet
+			-- 14569, -- Denali Jacket 
+			-- 14984, -- Denali Wristbands 
+			-- 15648, -- Denali Kecks
+			-- 15734, -- Denali Gamashes
+			-- 16108, -- Goliard Chapeau 
+			-- 14570, -- Goliard Saio 
+			-- 14985, -- Goliard Cuffs
+			-- 15649, -- Goliard Trews
+			-- 15735, -- Goliard Clogs
 			
 			-- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
-			-- 11538, -- Nexus Cape
-			-- 11589, -- Aesir Torque
-			-- 11546, -- Aesir Mantle
-			-- 16057, -- Aesir Ear Pendant
-			-- 11590, -- Colossus's Torque
-			-- 11547, -- Colossus's Mantle
-			-- 16058, -- Colossus's Earring
-			-- 17208, -- Hamayumi
-			-- 17466, -- Dia Wand
-			-- 13177, -- Stone Gorget
-			-- 18019, -- X's Knife
-			-- 18057, -- Y's Scythe
-			-- 18101, -- Z's Trident
-			-- 15457, -- Swift Belt
-			-- 14889, -- Barbarian Mittens
-			-- 16036, -- Wilhelm's Earring
-			-- 16035, -- Altdorf's Earring
-			-- 11343, -- Thrakon Breastplate
-			-- 27556, -- Echad Ring
+			11538, -- Nexus Cape
+			11589, -- Aesir Torque
+			11546, -- Aesir Mantle
+			16057, -- Aesir Ear Pendant
+			11590, -- Colossus's Torque
+			11547, -- Colossus's Mantle
+			16058, -- Colossus's Earring
+			17208, -- Hamayumi
+			17466, -- Dia Wand
+			13177, -- Stone Gorget
+			18019, -- X's Knife
+			18057, -- Y's Scythe
+			18101, -- Z's Trident
+			15457, -- Swift Belt
+			14889, -- Barbarian Mittens
+			16036, -- Wilhelm's Earring
+			16035, -- Altdorf's Earring
+			11343, -- Thrakon Breastplate
+			27556, -- Echad Ring
 			
 			-- Cycle #3 -- WOTG Nations
 			-- 16149, -- Cobra Cloche
@@ -600,24 +598,24 @@ local prizes =
         -- GAMECHANGERS
 			
 			-- Cycle #1 -- TH/Crafting/EXP/CoP rings
-			25679, -- White Rarab Cap +1
-			28586, -- Craftmaster's Ring
-			11009, -- Shaper's Shawl
-			15220, -- Rain hat
-			25608, -- Tlahtlamah glasses
-			15543, -- Raja's Ring
-			15544, -- Sattva Ring
-			15545, -- Tamas Ring
+			-- 25679, -- White Rarab Cap +1
+			-- 28586, -- Craftmaster's Ring
+			-- 11009, -- Shaper's Shawl
+			-- 15220, -- Rain hat
+			-- 25608, -- Tlahtlamah glasses
+			-- 15543, -- Raja's Ring
+			-- 15544, -- Sattva Ring
+			-- 15545, -- Tamas Ring
 			
 			-- Cycle #2 -- Divine Might/Apocalypse Nigh
-			-- 15962, -- Static Earring
-			-- 15963, -- Magnetic Earring
-			-- 15964, -- Hollow Earring
-			-- 15965, -- Ethereal Earring
-			-- 14740, -- Knight's Earring
-			-- 14741, -- Abyssal Earring
-			-- 14742, -- Beastly Earring
-			-- 14743, -- Bushinomimi			
+			15962, -- Static Earring
+			15963, -- Magnetic Earring
+			15964, -- Hollow Earring
+			15965, -- Ethereal Earring
+			14740, -- Knight's Earring
+			14741, -- Abyssal Earring
+			14742, -- Beastly Earring
+			14743, -- Bushinomimi			
 			
 			-- Cycle #3 -- Useful NM drops/MMM
 			-- 15351, -- Bounding Boots
