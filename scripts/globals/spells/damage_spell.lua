@@ -1018,6 +1018,19 @@ xi.spells.damage.calculateUndeadDivinePenalty = function(caster, target, spell, 
     return undeadDivinePenalty
 end
 
+xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
+    local scarletDeliriumMultiplier = 1
+
+    -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
+    if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
+
+        scarletDeliriumMultiplier = 1 + power / 100
+    end
+
+    return scarletDeliriumMultiplier
+end
+
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
 
@@ -1074,6 +1087,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, target, spell, skillType)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
 
     -- Debug
@@ -1136,6 +1150,8 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     xi.msg.debugValue(caster, "Ninjutsu Futae BOnus Damage", finalDamage)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     xi.msg.debugValue(caster, "Undead Penalty Damage", finalDamage)
+    finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
+    xi.msg.debugValue(caster, "Scarlet Delirium Damage", finalDamage)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
     xi.msg.debugValue(caster, "Nuke Absorb / Nullify Damage", finalDamage)
 
