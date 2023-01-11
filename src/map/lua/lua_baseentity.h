@@ -927,6 +927,9 @@ public:
     auto   getAwardHistory() -> sol::table;
     void   faceTarget(CLuaBaseEntity* npc);
 
+    void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
+    void clearPacketMods();
+
     static void Register();
 };
 

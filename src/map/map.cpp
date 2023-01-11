@@ -121,6 +121,8 @@ extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zon
 
 bool gLoadAllLua = false;
 
+std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
+
 namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
@@ -911,6 +913,24 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 packetList.pop_front();
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
+
+                // Apply packet mods if available
+                if (!PacketMods[PChar->id].empty())
+                {
+                    auto type = PSmallPacket->getType();
+                    if (PacketMods[PChar->id].find(type) != PacketMods[PChar->id].end())
+                    {
+                        for (auto& entry : PacketMods[PChar->id][type])
+                        {
+                            auto offset = entry.first;
+                            auto value  = entry.second;
+                            ShowInfo(fmt::format("Packet Mod ({}): {:04X}: {:04X}: {:02X}",
+                                                 PChar->name, type, offset, value));
+                            PSmallPacket->ref<uint8>(offset) = value;
+                        }
+                    }
+                }
+
                 memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
 
                 *buffsize += PSmallPacket->getSize();
