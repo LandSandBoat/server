@@ -582,7 +582,7 @@ void CZone::updateCharLevelRestriction(CCharEntity* PChar)
     {
         // If the level restriction is already the same then no need to change it
         CStatusEffect* statusEffect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_RESTRICTION);
-        if (statusEffect->GetPower() == m_levelRestriction)
+        if (statusEffect == nullptr || statusEffect->GetPower() == m_levelRestriction)
         {
             return;
         }

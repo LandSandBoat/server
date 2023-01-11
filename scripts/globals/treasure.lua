@@ -17,16 +17,16 @@ xi.treasure = xi.treasure or {}
 
 xi.treasure.type =
 {
-    CHEST   = 1,
-    COFFER  = 2,
+    CHEST  = 1,
+    COFFER = 2,
 }
 
 local keyType =
 {
-    ZONE_KEY      = 1,
-    THIEF_TOOLS   = 2,
-    SKELETON_KEY  = 3,
-    LIVING_KEY    = 4,
+    ZONE_KEY     = 1,
+    THIEF_TOOLS  = 2,
+    SKELETON_KEY = 3,
+    LIVING_KEY   = 4,
 }
 
 local thiefKeyInfo =
@@ -1655,12 +1655,12 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
 
     -- gem
     elseif roll <= (info.gil[1] + info.gem[1]) then
-        local gemIndex = math.random(table.getn(info.gem) - 1) + 1
+        local gemIndex = math.random(#info.gem - 1) + 1
         player:addTreasure(info.gem[gemIndex], npc)
 
     -- item
     elseif info.item then
-        local itemIndex = math.random(table.getn(info.item) - 1) + 1
+        local itemIndex = math.random(#info.item - 1) + 1
         player:addTreasure(info.item[itemIndex], npc)
     end
 

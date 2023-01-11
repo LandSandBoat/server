@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Jolwa-Moowa
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

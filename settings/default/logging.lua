@@ -37,12 +37,20 @@ xi.settings.logging =
     --]]
     PATTERN = "[%D %T:%e][%&]%^[%n]%$ %v (%!:%#)",
 
-    DEBUG_SOCKETS        = false,
-    DEBUG_NAVMESH        = false,
-    DEBUG_PACKETS        = false,
-    DEBUG_ACTIONS        = false,
-    DEBUG_SQL            = false,
-    DEBUG_ID_LOOKUP      = false,
-    DEBUG_MODULES        = false,
-    DEBUG_PACKET_BACKLOG = false,
+    -- Enable/Disable these logging types globally
+    LOG_DEBUG   = true,
+    LOG_INFO    = true,
+    LOG_WARNING = true,
+    LOG_LUA     = true, -- Prints from Lua using `print()`
+
+    -- Specific Debug loggers
+    -- NOTE: None of these will print unless you also have the above LOG_DEBUG setting set to true!
+    DEBUG_SOCKETS        = false, -- Calls in C++: DebugSockets(...)
+    DEBUG_NAVMESH        = false, -- Calls in C++: DebugNavmesh(...)
+    DEBUG_PACKETS        = false, -- Calls in C++: DebugPackets(...)
+    DEBUG_ACTIONS        = false, -- Calls in C++: DebugActions(...)
+    DEBUG_SQL            = false, -- Calls in C++: DebugSQL(...)
+    DEBUG_ID_LOOKUP      = false, -- Calls in C++: DebugIDLookup(...)
+    DEBUG_MODULES        = false, -- Calls in C++: DebugModules(...)
+    DEBUG_PACKET_BACKLOG = false, -- Special logic in map.cpp::send_parse
 }

@@ -81,19 +81,19 @@ local unityOptions =
 
     [4] = -- Items (Item ID, askQuantity (0 = true), limitSize (99 = limit by accolades), cost)
     {
-        [ 0] = { 9049, 0, 99, 15000 }, -- Refractive Crystal
-        [ 1] = { 8973, 0, 99, 15000 }, -- Special Gobbiedial Key
-        [ 2] = { 4181, 1,  1, 10 }, -- Scroll of Instant Warp
-        [ 3] = { 4182, 1,  1, 10 }, -- Scroll of Instant Reraise
-        [ 4] = { 5988, 1,  1, 10 }, -- Scroll of Instant Protect
-        [ 5] = { 5989, 1,  1, 10 }, -- Scroll of Instant Shell
-        [ 6] = { 5114, 0, 99, 10 }, -- Moist Rolanberry
-        [ 7] = { 5115, 0, 99, 10 }, -- Ravaged Moko Grass
-        [ 8] = { 5116, 0, 99, 10 }, -- Cavorting Worm
-        [ 9] = { 5117, 0, 99, 10 }, -- Levigated Rock
-        [10] = { 5118, 0, 99, 10 }, -- Little Lugworm
-        [11] = { 5119, 0, 99, 10 }, -- Training Manual
-        [12] = { 5945, 0, 99, 10 }, -- Prize Powder
+        [ 0] = { xi.items.REFRACTIVE_CRYSTAL,          0, 99, 15000 },
+        [ 1] = { xi.items.SPECIAL_GOBBIEDIAL_KEY,      0, 99, 15000 },
+        [ 2] = { xi.items.SCROLL_OF_INSTANT_WARP,      1,  1, 10    },
+        [ 3] = { xi.items.SCROLL_OF_INSTANT_RERAISE,   1,  1, 10    },
+        [ 4] = { xi.items.SCROLL_OF_INSTANT_PROTECT,   1,  1, 10    },
+        [ 5] = { xi.items.SCROLL_OF_INSTANT_SHELL,     1,  1, 10    },
+        [ 6] = { xi.items.MOIST_ROLANBERRY,            0, 99, 10    },
+        [ 7] = { xi.items.CLUMP_OF_RAVAGED_MOKO_GRASS, 0, 99, 10    },
+        [ 8] = { xi.items.CAVORTING_WORM,              0, 99, 10    },
+        [ 9] = { xi.items.LEVIGATED_ROCK,              0, 99, 10    },
+        [10] = { xi.items.LITTLE_LUGWORM,              0, 99, 10    },
+        [11] = { xi.items.TRAINING_MANUAL,             0, 99, 10    },
+        [12] = { xi.items.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
     },
 }
 
@@ -106,8 +106,8 @@ end
 
 local function getChangeUnityCost(player, selection)
     local currentRank = player:getUnityRank()
-    local newRank = player:getUnityRank(selection)
-    local changeCost = (500 * (11 - newRank)) - ((11 - currentRank) * 400)
+    local newRank     = player:getUnityRank(selection)
+    local changeCost  = (500 * (11 - newRank)) - ((11 - currentRank) * 400)
 
     if changeCost < 100 then
         changeCost = 100
@@ -120,18 +120,21 @@ function xi.unity.onTrade(player, npc, trade, eventid)
 end
 
 function xi.unity.onTrigger(player, npc)
-    local zoneId = player:getZoneID()
-    local hasAllForOne = player:hasEminenceRecord(5)
+    local zoneId             = player:getZoneID()
+    local hasAllForOne       = player:hasEminenceRecord(5)
     local allForOneCompleted = player:getEminenceCompleted(5)
-    local accolades = player:getCurrency("unity_accolades")
-    local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
+    local accolades          = player:getCurrency("unity_accolades")
+    local remainingLimit     = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
 
     -- Check player total records completed
     if player:getNumEminenceCompleted() < 10 then
         player:startEvent(zoneEventIds[zoneId][1])
 
     -- Check for "All for One"
-    elseif not hasAllForOne and not allForOneCompleted then
+    elseif
+        not hasAllForOne and
+        not allForOneCompleted
+    then
         player:startEvent(zoneEventIds[zoneId][2])
 
     -- First time selecting Unity
@@ -143,13 +146,13 @@ function xi.unity.onTrigger(player, npc)
 end
 
 function xi.unity.onEventUpdate(player, csid, option)
-    local zoneId = player:getZoneID()
-    local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
-    local accolades = player:getCurrency("unity_accolades")
+    local zoneId               = player:getZoneID()
+    local ID                   = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
+    local accolades            = player:getCurrency("unity_accolades")
     local weeklyAccoladesSpent = player:getCharVar("weekly_sparks_spent")
-    local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
-    local category  = bit.band(option, 0xF)
-    local selection = bit.band(bit.rshift(option, 5), 0xFF)
+    local remainingLimit       = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
+    local category             = bit.band(option, 0xF)
+    local selection            = bit.band(bit.rshift(option, 5), 0xFF)
 
     if csid == zoneEventIds[zoneId][4] then
         if option == 10 then
@@ -161,9 +164,9 @@ function xi.unity.onEventUpdate(player, csid, option)
 
         -- Attempt to grant the Item selected
         elseif category == 4 then
-            local qty = bit.rshift(option, 13)
+            local qty    = bit.rshift(option, 13)
             local itemId = unityOptions[category][selection][1]
-            local cost = unityOptions[category][selection][4] * qty
+            local cost   = unityOptions[category][selection][4] * qty
 
             if npcUtil.giveItem(player, { { itemId, qty } }) then
                 accolades = accolades - cost
@@ -192,13 +195,17 @@ function xi.unity.onEventUpdate(player, csid, option)
 end
 
 function xi.unity.onEventFinish(player, csid, option)
-    local zoneId = player:getZoneID()
-    local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
+    local zoneId    = player:getZoneID()
+    local ID        = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local category  = bit.band(option, 0x1F)
     local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
 
     -- First time joining Unity (Requirements met for num Objectives and All for One set)
-    if csid == zoneEventIds[zoneId][3] and option >= 1 and option <= 11 then
+    if
+        csid == zoneEventIds[zoneId][3] and
+        option >= 1 and
+        option <= 11
+    then
         changeUnityLeader(player, option)
         xi.roe.onRecordTrigger(player, 5)
         player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, option - 1)

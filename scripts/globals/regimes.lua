@@ -1088,9 +1088,9 @@ xi.regime.bookOnTrigger = function(player, regimeType)
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
-        local pages = table.getn(info.page)
-        local arg2 = 0
-        local arg4 = 0
+        local pages = #info.page
+        local arg2  = 0
+        local arg4  = 0
 
         for i = 1, 10 do
             if i > pages then

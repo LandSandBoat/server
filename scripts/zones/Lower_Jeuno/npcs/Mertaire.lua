@@ -32,15 +32,8 @@ entity.onTrigger = function(player, npc)
     local job            = player:getMainJob()
     local level          = player:getMainLvl()
 
-    -- THE OLD MONUMENT
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_AVAILABLE and
-        level >= xi.settings.main.ADVANCED_JOB_LEVEL
-    then
-        player:startEvent(102)
-
     -- PAINFUL MEMORY (Bard AF1)
-    elseif
+    if
         painfulMemory == QUEST_AVAILABLE and
         job == xi.job.BRD and
         level >= xi.settings.main.AF1_QUEST_LEVEL
@@ -79,12 +72,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- THE OLD MONUMENT
-    if csid == 102 then
-        player:setCharVar("TheOldMonument_Event", 1)
-
     -- A MINSTREL IN DESPAIR
-    elseif csid == 101 then
+    if csid == 101 then
         npcUtil.giveCurrency(player, 'gil', 2100)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)

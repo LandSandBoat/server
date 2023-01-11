@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Dhiz Tomehrih
--- Working 100%
 -----------------------------------
 local entity = {}
 

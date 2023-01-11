@@ -2,7 +2,6 @@
 -- Area: Windurst Waters
 --  NPC: Jack of Hearts
 -- Adventurer's Assistant
--- Working 100%
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------
