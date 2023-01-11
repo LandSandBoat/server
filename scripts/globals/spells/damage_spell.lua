@@ -725,6 +725,19 @@ xi.spells.damage.calculateUndeadDivinePenalty = function(caster, target, spell, 
     return undeadDivinePenalty
 end
 
+xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
+    local scarletDeliriumMultiplier = 1
+
+    -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
+    if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
+
+        scarletDeliriumMultiplier = 1 + power / 100
+    end
+
+    return scarletDeliriumMultiplier
+end
+
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
 
@@ -776,30 +789,8 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, target, spell, skillType)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
-
-    -- Debug
-    -- printf("=====================")
-    -- printf("spellDamage = %s", spellDamage)
-    -- printf("======Multipliers====")
-    -- printf("MTDR = %s", multipleTargetReduction)
-    -- printf("eleStaffBonus = %s", eleStaffBonus)
-    -- printf("magianAffinity = %s", magianAffinity)
-    -- printf("SDT = %s", sdt)
-    -- printf("resist = %s", resist)
-    -- printf("magicBurst = %s", magicBurst)
-    -- printf("magicBurstBonus = %s", magicBurstBonus)
-    -- printf("dayAndWeather = %s", dayAndWeather)
-    -- printf("magicBonusDiff = %s", magicBonusDiff)
-    -- printf("TMDA = %s", targetMagicDamageAdjustment)
-    -- printf("divineEmblemMultiplier = %s", divineEmblemMultiplier)
-    -- printf("ebullienceMultiplier = %s", ebullienceMultiplier)
-    -- printf("skillTypeMultiplier = %s", skillTypeMultiplier)
-    -- printf("ninSkillBonus = %s", ninSkillBonus)
-    -- printf("ninFutaeBonus = %s", ninFutaeBonus)
-    -- printf("undeadDivinePenalty = %s", undeadDivinePenalty)
-    -- printf("nukeAbsorbOrNullify = %s", nukeAbsorbOrNullify)
-    -- printf("=====================")
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
@@ -818,6 +809,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * ninSkillBonus)
     finalDamage = math.floor(finalDamage * ninFutaeBonus)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
+    finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
     -- Handle Phalanx
