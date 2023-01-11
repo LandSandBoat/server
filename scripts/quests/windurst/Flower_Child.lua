@@ -93,7 +93,8 @@ quest.sections =
                     if option == 3002 then
                         if quest:complete(player) then
                             player:confirmTrade()
-                            player:setMoghouseFlag(4)
+                            local mhflag = player:getMoghouseFlag()
+                            player:setMoghouseFlag(bit.band(mhflag, 0x0004))
                             player:messageSpecial(windurstWallsID.text.MOGHOUSE_EXIT)
                         end
 
