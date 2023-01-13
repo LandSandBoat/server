@@ -679,11 +679,12 @@ int32 lobbyview_parse(int32 fd)
                 RFIFOSKIP(fd, sessions[fd]->rdata.size());
                 RFIFOFLUSH(fd);
 
-                // Perform character deletion from the database. It is sufficient to remove the
-                // value from the `chars` table. The mysql server will handle the rest.
+                // Perform character deletion.
+                // Instead of performing an actual character deletion, we simply set accid to 0, and original_accid to old accid.
+                // This allows character recovery.
 
-                const char* pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
-                sql->Query(pfmtQuery, CharID, sd->accid);
+                const char* pfmtQuery = "UPDATE chars SET accid = 0, original_accid = %i WHERE charid = %i AND accid = %i";
+                sql->Query(pfmtQuery, sd->accid, CharID, sd->accid);
 
                 break;
             }
