@@ -367,6 +367,7 @@ xi.items =
     PARASITE_SKIN                   = 1099,
     XALMO_FEATHER                   = 1100,
     MOTTLED_QUADAV_EGG              = 1101,
+    BUNCH_OF_BLAZING_PEPPERS        = 1102,
     DAVOI_STORAGE_KEY               = 1103,
     PINCH_OF_SULFUR                 = 1108,
     VIAL_OF_BLACK_BEETLE_BLOOD      = 1110,
