@@ -47,6 +47,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <nonstd/jthread.hpp>
 
+#ifndef _WIN32
+#include <sys/resource.h>
+#endif
+
 // TODO: Move to enum
 #define LOGIN_ATTEMPT         0x10
 #define LOGIN_CREATE          0x20
@@ -1051,11 +1055,12 @@ protected:
                 ShowInfo(fmt::format("attempt to delete char:<{}> from ip:<{}>",
                                      CharID, ipAddress));
 
-                // Perform character deletion from the database. It is sufficient to remove the
-                // value from the `chars` table. The mysql server will handle the rest.
+                // Perform character deletion.
+                // Instead of performing an actual character deletion, we simply set accid to 0, and original_accid to old accid.
+                // This allows character recovery.
 
-                const char* pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
-                sql->Query(pfmtQuery, CharID, session.accountID);
+                const char* pfmtQuery = "UPDATE chars SET accid = 0, original_accid = %i WHERE charid = %i AND accid = %i";
+                sql->Query(pfmtQuery, session.accountID, CharID, session.accountID);
             }
             break;
             case 0x21: // 33: Registering character name onto the lobby server
@@ -1960,6 +1965,23 @@ public:
             gConsoleService->stop();
         });
         // clang-format on
+
+#ifndef _WIN32
+        struct rlimit limits;
+
+        uint32 newRLimit = 10240;
+
+        // Get old limits
+        if (getrlimit(RLIMIT_NOFILE, &limits) == 0)
+        {
+            // Increase open file limit, which includes sockets, to newRLimit. This only effects the current process and child processes
+            limits.rlim_cur = newRLimit;
+            if (setrlimit(RLIMIT_NOFILE, &limits) == -1)
+            {
+                ShowError("Failed to increase rlim_cur to %d", newRLimit);
+            }
+        }
+#endif
 
         message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit));
 
