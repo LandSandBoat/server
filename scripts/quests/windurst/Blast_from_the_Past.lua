@@ -129,11 +129,7 @@ quest.sections =
             ['Fossil_Rock'] =
             {
                 onTrigger = function(player, npc)
-                    -- TODO: Break out Fossil Rock into multiple NPC names and update impacted
-                    -- quests and missions.
-                    local rockOffset = npc:getID() - shakhramiID.npc.FOSSIL_ROCK_OFFSET
-
-                    if rockOffset == 8 then
+                    if npc:getID() == shakhramiID.npc.ICHOROUS_IRE_FOSSIL_ROCK then
                         if
                             not GetMobByID(shakhramiID.mob.ICHOROUS_IRE):isSpawned() and
                             not player:hasItem(xi.items.BURNITE_SHELL_STONE)
