@@ -46,6 +46,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include <nonstd/jthread.hpp>
 
+#ifndef _WIN32
+#include <sys/resource.h>
+#endif
+
 // TODO: Move to enum
 #define LOGIN_ATTEMPT         0x10
 #define LOGIN_CREATE          0x20
@@ -1959,6 +1963,23 @@ public:
             gConsoleService->stop();
         });
         // clang-format on
+
+#ifndef _WIN32
+        struct rlimit limits;
+
+        uint32 newRLimit = 10240;
+
+        // Get old limits
+        if (getrlimit(RLIMIT_NOFILE, &limits) == 0)
+        {
+            // Increase open file limit, which includes sockets, to newRLimit. This only effects the current process and child processes
+            limits.rlim_cur = newRLimit;
+            if (setrlimit(RLIMIT_NOFILE, &limits) == -1)
+            {
+                ShowError("Failed to increase rlim_cur to %d", newRLimit);
+            }
+        }
+#endif
 
         message_server = std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit));
 
