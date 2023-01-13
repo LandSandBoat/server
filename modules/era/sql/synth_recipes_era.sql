@@ -1375,6 +1375,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Rainbow Powder
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Honey' AND ID = 70507;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Mercury' AND ID = 60515;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Himantes' AND ID = 42503;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Beast Horn' AND ID = 53025;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1600,7 +1601,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Mittens
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Scapegoat' AND ID = 53013;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Leggings' AND ID = 53018;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Seadog Gun' AND ID = 53023;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Beast Horn' AND ID = 53025;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lithic Wyvern Scale' AND ID = 53507;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ID = 53520;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Tusk Arrowheads' AND ID = 53524;
