@@ -610,7 +610,7 @@ protected:
         std::memcpy(usernameBuffer, data_ + 0x09, 16);
         std::memcpy(passwordBuffer, data_ + 0x19, 16);
 
-        std::string macAddress(data_ + 0x40, 17);
+        // std::string reservedData(data_ + 0x40, 17);
         std::string version(data_ + 0x51, 5);
 
         std::string username(usernameBuffer, 16);
@@ -848,7 +848,6 @@ protected:
                     // Account info verified, grab password
                     std::string updated_password(data_ + 0x30, 16);
 
-                    ShowWarning(fmt::format("{}", macAddress));
                     if (updated_password == "")
                     {
                         ShowWarning(fmt::format("login_parse: Empty password; Could not update password for user <{}>.", escaped_name));
