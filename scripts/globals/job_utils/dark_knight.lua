@@ -108,15 +108,24 @@ xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
-    player:addStatusEffect(xi.effect.NETHER_VOID, 8, 1, 30)
+    local power = 50 + player:getMod(xi.mod.ENHANCES_NETHER_VOID) + 2 * player:getJobPointLevel(xi.jp.NETHER_VOID_EFFECT)
+
+    player:addStatusEffect(xi.effect.NETHER_VOID, power, 0, 60)
 end
 
 xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 8, 1, 90)
+    local jpValue  = player:getJobPointLevel(xi.jp.SCARLET_DLRIUM_DURATION)
+    local duration = 90 + jpValue
+
+    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 0, 0, duration, 0, jpValue)
 end
 
 xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SOUL_ENSLAVEMENT, 8, 1, 30)
+    if player:hasStatusEffect(xi.effect.AUSPICE)
+        player:delStatusEffect(xi.effect.AUSPICE)
+    end
+
+    player:addStatusEffect(xi.effect.SOUL_ENSLAVEMENT, 1, 0, 30)
 end
 
 xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
