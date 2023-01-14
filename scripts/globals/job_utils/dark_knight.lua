@@ -97,7 +97,10 @@ xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DIABOLIC_EYE, player:getMerit(xi.merit.DIABOLIC_EYE), 0, 180)
+    local power    = 15 + player:getMerit(xi.merit.DIABOLIC_EYE)
+    local duration = 180 -- TODO: Abyss Gauntlets + 2 boost duration by 6s * merit
+
+    player:addStatusEffect(xi.effect.DIABOLIC_EYE, power, 0, duration)
 end
 
 xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
@@ -117,9 +120,10 @@ xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useSouleater = function(player, target, ability)
-    local jpValue = target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
+    local duration = 60 + target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
+    local subPower = target:getMod(xi.mod.ENHANCES_MUTED_SOUL) * target:getMerit(xi.merit.MUTED_SOUL) / 10 -- Origin: Abyss Flanchard +2
 
-    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, 60 + jpValue)
+    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, duration, 0, subPower)
 end
 
 xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)
