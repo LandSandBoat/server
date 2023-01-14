@@ -2,7 +2,6 @@
 -- Common Requires
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/conquest")
 require("scripts/globals/zone")
 require("settings/main")
 
