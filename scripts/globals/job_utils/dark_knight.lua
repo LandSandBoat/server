@@ -72,8 +72,7 @@ end
 
 xi.job_utils.dark_knight.useArcaneCrest = function(player, target, ability)
     local power    = 20
-    local jpValue  = player:getJobPointLevel(xi.jp.ARCANE_CREST_DURATION)
-    local duration = 180 + jpValue
+    local duration = 180 + player:getJobPointLevel(xi.jp.ARCANE_CREST_DURATION)
 
     target:addStatusEffect(xi.effect.ARCANE_CREST, power, 0, duration)
 end
@@ -91,8 +90,8 @@ end
 xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
     -- Power: Each merit level after the first reduces Dark Magic casting time by -10% (total of -40% bonus).
     -- Sub Power: Enhances Dark Seal effect by increasing duration of Dark Magic by 10% per merit level (total of 50% bonus).
-    local power    = player:getMerit(xi.merit.DARK_SEAL) - 10
-    local subPower = (player:getMerit(xi.merit.DARK_SEAL) / 10) * player:getMod(xi.mod.ENHANCES_DARK_SEAL)
+    local power    = utils.clamp(player:getMerit(xi.merit.DARK_SEAL) - 10, 0, 40)
+    local subPower = utils.clamp(player:getMod(xi.mod.ENHANCES_DARK_SEAL) * player:getMerit(xi.merit.DARK_SEAL), 0, 50)
 
     player:addStatusEffect(xi.effect.DARK_SEAL, power, 0, 60, 0, subPower)
 end

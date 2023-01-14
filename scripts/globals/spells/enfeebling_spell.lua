@@ -302,6 +302,14 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, skill
         end
     end
 
+    -- Dark Seal bonus duration. 
+    if
+        caster:hasStatusEffect(xi.effect.DARK_SEAL)
+        skillType == xi.skill.DARK_MAGIC
+    then
+        duration = duration * (1 + player:getMod(xi.mod.DARK_MAGIC_DURATION) / 100)
+    end
+
     return math.floor(duration)
 end
 
