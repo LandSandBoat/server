@@ -242,7 +242,7 @@ INSERT INTO `merits` VALUES (2434,'chivalry',5,5,64,7,37);
 INSERT INTO `merits` VALUES (2436,'iron_will',5,19,64,7,37);
 INSERT INTO `merits` VALUES (2438,'guardian',5,19,64,7,37);
 INSERT INTO `merits` VALUES (2496,'dark_seal',5,10,128,7,38);
-INSERT INTO `merits` VALUES (2498,'diabolic_eye',5,5,128,7,38);
+INSERT INTO `merits` VALUES (2498,'diabolic_eye',5,1,128,7,38);
 INSERT INTO `merits` VALUES (2500,'muted_soul',5,10,128,7,38);
 INSERT INTO `merits` VALUES (2502,'desperate_blows_effect',5,200,128,7,38);
 INSERT INTO `merits` VALUES (2560,'feral_howl',5,5,256,7,39);

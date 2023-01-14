@@ -97,8 +97,8 @@ xi.job_utils.dark_knight.useDarkSeal = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability)
-    local power    = 15 + player:getMerit(xi.merit.DIABOLIC_EYE)
-    local duration = 180 -- TODO: Abyss Gauntlets + 2 boost duration by 6s * merit
+    local power    = 15 + 5 * player:getMerit(xi.merit.DIABOLIC_EYE)
+    local duration = 180 + player:getMod(xi.mod.ENHANCES_DIABOLIC_EYE) * player:getMerit(xi.merit.DIABOLIC_EYE)
 
     player:addStatusEffect(xi.effect.DIABOLIC_EYE, power, 0, duration)
 end
@@ -121,7 +121,7 @@ xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.AUSPICE)
+    if player:hasStatusEffect(xi.effect.AUSPICE) then
         player:delStatusEffect(xi.effect.AUSPICE)
     end
 
