@@ -12,7 +12,8 @@ zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
     misareauxGlobal.ziphiusHandleQM()
 
-    GetMobByID(ID.mob.ODQAN):setLocalVar("chooseOdqan", math.random(1,2))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ODQAN)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
@@ -51,22 +52,14 @@ zoneObject.onEventFinish = function(player, csid, option)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)
-    if os.time() > GetMobByID(ID.mob.ODQAN):getLocalVar("odqanRespawn") and weather == xi.weather.FOG then
-        local chooseOdqan = GetMobByID(ID.mob.ODQAN):getLocalVar("chooseOdqan")
-        local count = 1
+    local odqan = ID.mob.ODQAN
 
-        for k, v in pairs(ID.mob.ODQAN_PH) do
-            if count == chooseOdqan then
-                DisallowRespawn(k, true)
-                DisallowRespawn(v, false)
-                local pos = GetMobByID(k):getSpawnPos()
-                DespawnMob(k) -- Ensure PH is not up
-                GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
-                SpawnMob(v) -- Spawn Odqan
-            else
-                count = count + 1
-            end
-        end
+    if os.time() > GetServerVariable(string.format("[SPAWN]%s", odqan)) and weather == xi.weather.FOG then
+        DisallowRespawn(odqan, false)
+        -- While it is very likely that Odqan will spawn at the beginning of foggy weather, it is not guaranteed.
+        GetMobByID(odqan):setRespawnTime(math.random(5, 30))
+    else
+        DisallowRespawn(odqan, true)
     end
 end
 
