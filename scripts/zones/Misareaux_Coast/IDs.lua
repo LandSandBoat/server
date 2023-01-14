@@ -53,8 +53,8 @@ zones[xi.zone.MISAREAUX_COAST] =
         },
         ODQAN_PH =
         {
-            [16879722] = 16879737,
-            [16879833] = 16879758,
+            16879722,
+            16879833,
         },
         PM6_2_MOB_OFFSET = 16879893,
         BOGGELMANN       = 16879897,
