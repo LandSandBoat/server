@@ -26,7 +26,8 @@ entity.onMobDespawn = function(mob)
     local mobId = mob:getID()
 
     if mobId == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
-        local respawn = 75600 + math.random(0, 6) * 1800 -- 21 - 24 hours with half hour windows
+        local respawn = os.time() + (75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
+        SetServerVariable("[Padfoot]Respawn", respawn)
 
         for _, v in pairs(ID.mob.PADFOOT) do
             if v ~= mobId and GetMobByID(v):isSpawned() then
