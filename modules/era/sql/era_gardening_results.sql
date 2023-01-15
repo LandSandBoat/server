@@ -2,8 +2,7 @@
 -- Gardening Module to remove Results based on Era by Expansion
 -- -------------------------------------------------------------
 
-UPDATE gardening_results
-SET weight = 0 WHERE resultid IN 
+DELETE FROM gardening_results WHERE resultid IN
 (
 -- Chains of Promathia
 -- 34,  -- Eggplant

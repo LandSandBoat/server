@@ -242,12 +242,7 @@ quest.sections =
             ['Hagain'] =
             {
                 onTrade = function(player, npc, trade)
-                    local hagainProgress = quest:getVar(player, 'hagainProg')
-
-                    if
-                        npcUtil.tradeHasExactly(trade, xi.items.LUMP_OF_CHANDELIER_COAL) and
-                        hagainProgress == 1
-                    then
+                    if npcUtil.tradeHasExactly(trade, xi.items.LUMP_OF_CHANDELIER_COAL) then
                         return quest:progressEvent(10005)
                     end
                 end,

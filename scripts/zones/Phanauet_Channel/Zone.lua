@@ -31,6 +31,14 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zoneObject.onGameHour = function(zone)
+    local vHour = VanadielHour()
+    local death = GetServerVariable("[SPAWN]16781327")
+    if vHour == 11 and os.time() > death then
+        GetMobByID(ID.mob.STUBBORN_DREDVODD):setRespawnTime(30)
+    end
+end
+
 zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(100)
 end

@@ -180,7 +180,7 @@ xi.barge.onTransportEvent = function(player, transport)
     -- [xi.ki.ticketki] = { ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3 }
     local bargeTable =
     {
-        [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+        [xi.ki.BARGE_MULTI_TICKET] = { "Multi_Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
         [xi.ki.BARGE_TICKET]       = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
     }
 
@@ -230,12 +230,12 @@ xi.barge.ticketshopOnTrigger = function(player, eventId)
     end
 
     -- Params (KI1, KI2, Price of KI1, Price of KI2, Multiticket #s left, Which tickets does player have)
-    player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar("Barge_Ticket"), player:getCharVar("currentticket"), 0, 4095) -- Start event
+    player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar("Multi_Barge_Ticket"), player:getCharVar("currentticket"), 0, 4095) -- Start event
 end
 
 xi.barge.ticketshoponEventFinish = function(player, csid, option)
     local currentticket = player:getCharVar("currentticket")
-    local numberticket = player:getCharVar("Barge_Ticket")
+    local numberticket = player:getCharVar("Multi_Barge_Ticket")
 
     -- Option 1: BARGE_TICKET
     -- Option 2: MULTI_TICKET
@@ -246,15 +246,16 @@ xi.barge.ticketshoponEventFinish = function(player, csid, option)
             player:delGil(50)
             player:addKeyItem(xi.ki.BARGE_TICKET)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_TICKET)
+            player:setCharVar("Barge_Ticket", 1)
         elseif option == 2 and (currentticket == 2 or currentticket == 3) and numberticket <= 9 then -- If you have multi ticket with less than 9
             player:delGil(300)
             player:messageSpecial(ID.text.MTICKET_ADDED, xi.ki.BARGE_MULTI_TICKET, 10)
-            player:setCharVar("Barge_Ticket", 10)
+            player:setCharVar("Multi_Barge_Ticket", 10)
         elseif option == 2 and player:getGil() >= 300 then
             player:delGil(300)
             player:addKeyItem(xi.ki.BARGE_MULTI_TICKET)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_MULTI_TICKET)
-            player:setCharVar("Barge_Ticket", 10)
+            player:setCharVar("Multi_Barge_Ticket", 10)
         else
             -- Event auto plays the correct message
         end

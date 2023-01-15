@@ -2,7 +2,11 @@
 -- Let Sleeping Dogs Die
 -----------------------------------
 -- !addquest 2 46
--- Mashuu-Ajuu 130 -5 167
+-- Paku-Nakku !gotoid 17752127
+-- Maabu-Sonbu !gotoid 17760275
+-- ??? QM 1 !gotoid 17224342
+-- Pechiru-Mashiru !gotoid 17752116
+
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -17,6 +21,7 @@ quest.reward =
     item = xi.items.HYPNO_STAFF,
     fame = 75,
     fameArea = xi.quest.fame_area.WINDURST,
+    title = xi.title.SPOILSPORT,
 }
 
 quest.sections =
@@ -56,15 +61,20 @@ quest.sections =
             ['Chomoro-Kyotoro'] = quest:event(489),
             ['Paku-Nakku'] =
             {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.BUNCH_OF_BLAZING_PEPPERS) and quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(494)
+                    end
+                end,
+
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(494, 653393087, 1, 0, 1200, 8388608, 3749, 4095, 2) -- 0, 0, 0, 0)
-                    elseif quest:getVar(player, 'Prog') == 3 then
+                    if quest:getVar(player, 'Prog') == 3 then
                         return quest:progressEvent(499)
                     else
                         return quest:event(482)
                     end
                 end,
+
             },
             ['Pechiru-Mashiru'] =
             {
@@ -74,7 +84,7 @@ quest.sections =
                     elseif quest:getVar(player, 'Prog') == 3 then
                         return quest:event(496)
                     elseif quest:getVar(player, 'Prog') == 4 then
-                        return quest:event(497)
+                        return quest:progressEvent(497)
                     end
                 end,
             },
@@ -88,7 +98,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 3)
                 end,
                 [497] = function(player, csid, option, npc)
-                    quest:completeQuest(player)
+                    quest:complete(player)
                 end,
                 [499] = function(player, csid, option, npc)
                     if option == 2 then
@@ -117,6 +127,33 @@ quest.sections =
             {
                 [319] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
+                end,
+            },
+        },
+
+        [xi.zone.PASHHOW_MARSHLANDS] =
+        {
+            ['qm1'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.SICKLE) then
+                        local chance = math.random(1, 5)
+                        if chance <= 2 then
+                            npcUtil.giveItem(player, xi.items.BUNCH_OF_BLAZING_PEPPERS)
+                            player:tradeComplete(false)
+                            return player:startEvent(12, 1102, 0, 0, xi.items.BUNCH_OF_BLAZING_PEPPERS)-- successful no break
+                        elseif chance == 3 then
+                            npcUtil.giveItem(player, xi.items.BUNCH_OF_BLAZING_PEPPERS)
+                            player:confirmTrade()
+                            return player:startEvent(12, 1102, 1, 0, xi.items.BUNCH_OF_BLAZING_PEPPERS) -- successful but breaks
+                        elseif chance == 4 then
+                            player:confirmTrade()
+                            return player:startEvent(12, 0, 1, 0) -- unsuccessful and breaks
+                        elseif chance == 5 then
+                            player:tradeComplete(false)
+                            return player:startEvent(12, 0, 0, 0) -- unsuccessful and no break
+                        end
+                    end
                 end,
             },
         },
