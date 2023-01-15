@@ -53,11 +53,16 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     local odqan = ID.mob.ODQAN
+    local ph = ID.mob.ODQAN_PH[math.random(1, 2)]
+    local pos = GetMobByID(ph):getPos()
+    GetMobByID(odqan):setLocalVar("ph", ph)
 
     if os.time() > GetServerVariable(string.format("[SPAWN]%s", odqan)) and weather == xi.weather.FOG then
         DisallowRespawn(odqan, false)
-        -- While it is very likely that Odqan will spawn at the beginning of foggy weather, it is not guaranteed.
-        GetMobByID(odqan):setRespawnTime(math.random(5, 30))
+        DisallowRespawn(ph, true)
+        DespawnMob(ph)
+        GetMobByID(odqan):setSpawn(pos.x, pos.y, pos.z)
+        SpawnMob(odqan)
     else
         DisallowRespawn(odqan, true)
     end
