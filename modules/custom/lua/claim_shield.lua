@@ -75,7 +75,7 @@ for _, entry in pairs(nmsToShield) do
 
             mobArg:setClaimable(true)
             mobArg:setUnkillable(false)
-            mob:setCallForHelpBlocked(false)
+            mobArg:setCallForHelpBlocked(false)
 
             mobArg:resetAI()
             mobArg:setHP(mobArg:getMaxHP())
