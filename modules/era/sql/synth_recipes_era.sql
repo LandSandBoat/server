@@ -866,8 +866,6 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Fang Necklace'
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Vivio Femur' AND ID = 50507;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Fish Scales' AND ID = 50509;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Gelatin' AND ID = 50510;
-UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Pebble' AND ID = 50515;
-UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Pearl' AND ID = 50516;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Pebble' AND ID = 50517;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Carapace Powder' AND ID = 51001;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Gemshorn' AND ID = 51007;
@@ -1748,6 +1746,7 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Bloody Chocol
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Sutlac' AND ID = 71547;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Simit' AND ID = 72008;
 UPDATE `synth_recipes` SET ContentTag = 'ToAU' WHERE ResultName = 'Mercury' AND ID = 60519;
+UPDATE `synth_recipes` SET ContentTag = 'ToAU' WHERE ResultName = 'Pebble' AND ID = 50516;
 
 -- ------------------------------------------------------------
 -- WotG Synths
@@ -2788,6 +2787,5 @@ UPDATE `synth_recipes` SET ContentTag = 'ROV' WHERE ID = 65015;
 UPDATE `synth_recipes` SET ContentTag = 'ROV' WHERE ResultName = 'Bagua Charm' AND ID = 65016;
 UPDATE `synth_recipes` SET ContentTag = 'ROV' WHERE ID = 65017;
 UPDATE `synth_recipes` SET ContentTag = 'ROV' WHERE ResultName = 'Wispy Broth' AND ID = 70520;
-UPDATE `synth_recipes` SET ContentTag = 'ROV' WHERE ResultName = 'Pearl' AND ID = 50514; -- OOE change
 
 UNLOCK TABLES;
