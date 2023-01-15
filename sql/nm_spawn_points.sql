@@ -5794,6 +5794,11 @@ INSERT INTO `nm_spawn_points` VALUES (17547490,0,7.549,2.599,118.240); -- Prowlo
 INSERT INTO `nm_spawn_points` VALUES (17547492,0,0.320,2.599,114.251); -- Slystix_Megapeepers
 INSERT INTO `nm_spawn_points` VALUES (17555664,0,-65.363,7.726,75.649); -- Gwyllgi
 INSERT INTO `nm_spawn_points` VALUES (17555721,0,133.000,-0.500,220.000);
+INSERT INTO `nm_spawn_points` VALUES (17555754,0,2.87,0,-280.87); -- Cemetery Cherry
+INSERT INTO `nm_spawn_points` VALUES (17555754,1,8.96,0,-288.9);  -- Cemetery Cherry
+INSERT INTO `nm_spawn_points` VALUES (17555754,2,31.6,0,-285.5);  -- Cemetery Cherry
+INSERT INTO `nm_spawn_points` VALUES (17555754,3,23.12,0,-288.9); -- Cemetery Cherry
+INSERT INTO `nm_spawn_points` VALUES (17555754,4,36.9,0,-279.5);  -- Cemetery Cherry
 INSERT INTO `nm_spawn_points` VALUES (17555763,0,228.000,7.134,-311.000);
 INSERT INTO `nm_spawn_points` VALUES (17555763,1,220.463,8.136,-302.294);
 INSERT INTO `nm_spawn_points` VALUES (17555763,2,204.672,7.500,-271.593);
