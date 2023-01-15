@@ -749,231 +749,288 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
         finaldmg = math.random(1000, 1005)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1010 and finaldmg <= 1020 then
         finaldmg = math.random(1005, 1010)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1020 and finaldmg <= 1030 then
         finaldmg = math.random(1010, 1015)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1030 and finaldmg <= 1040 then
         finaldmg = math.random(1015, 1020)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1040 and finaldmg <= 1050 then
         finaldmg = math.random(1020, 1025)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1050 and finaldmg <= 1060 then
         finaldmg = math.random(1025, 1030)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1060 and finaldmg <= 1070 then
         finaldmg = math.random(1030, 1035)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1070 and finaldmg <= 1080 then
         finaldmg = math.random(1035, 1040)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1080 and finaldmg <= 1090 then
         finaldmg = math.random(1040, 1045)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1090 and finaldmg <= 1100 then
         finaldmg = math.random(1045, 1050)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1050 - 1500 DMG ~ 15 damage range
     if finaldmg >= 1100 and finaldmg <= 1115 then
         finaldmg = math.random(1050, 1055)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1115 and finaldmg <= 1130 then
         finaldmg = math.random(1055, 1060)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1130 and finaldmg <= 1145 then
         finaldmg = math.random(1060, 1065)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1145 and finaldmg <= 1160 then
         finaldmg = math.random(1065, 1070)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1160 and finaldmg <= 1175 then
         finaldmg = math.random(1070, 1075)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1175 and finaldmg <= 1190 then
         finaldmg = math.random(1075, 1080)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1190 and finaldmg <= 1205 then
         finaldmg = math.random(1080, 1085)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1205 and finaldmg <= 1220 then
         finaldmg = math.random(1085, 1090)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1220 and finaldmg <= 1235 then
         finaldmg = math.random(1090, 1095)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1235 and finaldmg <= 1250 then
         finaldmg = math.random(1095, 1100)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1250 and finaldmg <= 1265 then
         finaldmg = math.random(1100, 1105)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1265 and finaldmg <= 1280 then
         finaldmg = math.random(1105, 1110)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1280 and finaldmg <= 1295 then
         finaldmg = math.random(1110, 1115)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1295 and finaldmg <= 1310 then
         finaldmg = math.random(1115, 1120)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1310 and finaldmg <= 1325 then
         finaldmg = math.random(1120, 1125)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1325 and finaldmg <= 1340 then
         finaldmg = math.random(1125, 1130)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1340 and finaldmg <= 1355 then
         finaldmg = math.random(1130, 1135)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1355 and finaldmg <= 1370 then
         finaldmg = math.random(1135, 1140)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1370 and finaldmg <= 1385 then
         finaldmg = math.random(1140, 1145)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1385 and finaldmg <= 1400 then
         finaldmg = math.random(1145, 1150)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1400 and finaldmg <= 1415 then
         finaldmg = math.random(1150, 1155)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1415 and finaldmg <= 1430 then
         finaldmg = math.random(1155, 1160)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1430 and finaldmg <= 1445 then
         finaldmg = math.random(1160, 1165)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1445 and finaldmg <= 1460 then
         finaldmg = math.random(1165, 1170)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1460 and finaldmg <= 1475 then
         finaldmg = math.random(1170, 1175)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1475 and finaldmg <= 1490 then
         finaldmg = math.random(1175, 1180)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1490 and finaldmg <= 1505 then
         finaldmg = math.random(1180, 1185)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1505 and finaldmg <= 1520 then
         finaldmg = math.random(1185, 1190)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1520 and finaldmg <= 1535 then
         finaldmg = math.random(1190, 1195)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1535 and finaldmg <= 1550 then
         finaldmg = math.random(1195, 1200)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1550 and finaldmg <= 1565 then
         finaldmg = math.random(1200, 1205)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1565 and finaldmg <= 1580 then
         finaldmg = math.random(1205, 1210)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1580 and finaldmg <= 1595 then
         finaldmg = math.random(1210, 1215)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1595 and finaldmg <= 1610 then
         finaldmg = math.random(1215, 1220)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1610 and finaldmg <= 1625 then
         finaldmg = math.random(1220, 1225)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1625 and finaldmg <= 1640 then
         finaldmg = math.random(1225, 1230)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1640 and finaldmg <= 1655 then
         finaldmg = math.random(1230, 1235)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1655 and finaldmg <= 1670 then
         finaldmg = math.random(1235, 1240)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1670 and finaldmg <= 1685 then
         finaldmg = math.random(1240, 1245)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1685 and finaldmg <= 1700 then
         finaldmg = math.random(1245, 1250)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1700 and finaldmg <= 1715 then
         finaldmg = math.random(1250, 1255)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1715 and finaldmg <= 1730 then
         finaldmg = math.random(1255, 1260)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1730 and finaldmg <= 1745 then
         finaldmg = math.random(1260, 1265)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1745 and finaldmg <= 1760 then
         finaldmg = math.random(1265, 1270)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1760 and finaldmg <= 1775 then
         finaldmg = math.random(1270, 1275)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1775 and finaldmg <= 1790 then
         finaldmg = math.random(1275, 1280)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1790 and finaldmg <= 1805 then
         finaldmg = math.random(1280, 1285)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1805 and finaldmg <= 1820 then
         finaldmg = math.random(1285, 1290)
         calcParams.finalDmg = finaldmg
@@ -982,654 +1039,816 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
         finaldmg = math.random(1290, 1295)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1835 and finaldmg <= 1850 then
         finaldmg = math.random(1295, 1300)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1850 and finaldmg <= 1865 then
         finaldmg = math.random(1300, 1305)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1865 and finaldmg <= 1880 then
         finaldmg = math.random(1305, 1310)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1880 and finaldmg <= 1895 then
         finaldmg = math.random(1310, 1315)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1895 and finaldmg <= 1910 then
         finaldmg = math.random(1315, 1320)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1910 and finaldmg <= 1925 then
         finaldmg = math.random(1320, 1325)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1925 and finaldmg <= 1940 then
         finaldmg = math.random(1325, 1330)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1940 and finaldmg <= 1955 then
         finaldmg = math.random(1330, 1335)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1955 and finaldmg <= 1970 then
         finaldmg = math.random(1335, 1340)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1970 and finaldmg <= 1985 then
         finaldmg = math.random(1340, 1345)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1985 and finaldmg <= 2000 then
         finaldmg = math.random(1345, 1350)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2000 and finaldmg <= 2015 then
         finaldmg = math.random(1350, 1355)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2015 and finaldmg <= 2030 then
         finaldmg = math.random(1355, 1360)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2030 and finaldmg <= 2045 then
         finaldmg = math.random(1360, 1365)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2045 and finaldmg <= 2060 then
         finaldmg = math.random(1365, 1370)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2060 and finaldmg <= 2075 then
         finaldmg = math.random(1370, 1375)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2075 and finaldmg <= 2090 then
         finaldmg = math.random(1375, 1380)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2090 and finaldmg <= 2105 then
         finaldmg = math.random(1380, 1385)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2105 and finaldmg <= 2120 then
         finaldmg = math.random(1385, 1390)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2120 and finaldmg <= 2135 then
         finaldmg = math.random(1390, 1395)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2135 and finaldmg <= 2150 then
         finaldmg = math.random(1395, 1400)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2150 and finaldmg <= 2165 then
         finaldmg = math.random(1400, 1405)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2165 and finaldmg <= 2180 then
         finaldmg = math.random(1405, 1410)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2180 and finaldmg <= 2195 then
         finaldmg = math.random(1410, 1415)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2195 and finaldmg <= 2210 then
         finaldmg = math.random(1415, 1420)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2210 and finaldmg <= 2225 then
         finaldmg = math.random(1420, 1425)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2225 and finaldmg <= 2240 then
         finaldmg = math.random(1425, 1430)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2240 and finaldmg <= 2255 then
         finaldmg = math.random(1430, 1435)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2255 and finaldmg <= 2270 then
         finaldmg = math.random(1435, 1440)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2270 and finaldmg <= 2285 then
         finaldmg = math.random(1440, 1445)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2285 and finaldmg <= 2300 then
         finaldmg = math.random(1445, 1450)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2300 and finaldmg <= 2315 then
         finaldmg = math.random(1450, 1455)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2315 and finaldmg <= 2330 then
         finaldmg = math.random(1455, 1460)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2330 and finaldmg <= 2345 then
         finaldmg = math.random(1460, 1465)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2345 and finaldmg <= 2360 then
         finaldmg = math.random(1465, 1470)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2360 and finaldmg <= 2375 then
         finaldmg = math.random(1470, 1475)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2375 and finaldmg <= 2390 then
         finaldmg = math.random(1475, 1480)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2390 and finaldmg <= 2405 then
         finaldmg = math.random(1480, 1485)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2405 and finaldmg <= 2420 then
         finaldmg = math.random(1485, 1490)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2420 and finaldmg <= 2435 then
         finaldmg = math.random(1490, 1495)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2435 and finaldmg <= 2450 then
         finaldmg = math.random(1495, 1500)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1500 - 1800 DMG ~ 20 damage range
     if finaldmg >= 2450 and finaldmg <= 2470 then
         finaldmg = math.random(1500, 1505)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2470 and finaldmg <= 2490 then
         finaldmg = math.random(1505, 1510)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2490 and finaldmg <= 2510 then
         finaldmg = math.random(1510, 1515)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2510 and finaldmg <= 2530 then
         finaldmg = math.random(1515, 1520)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2530 and finaldmg <= 2550 then
         finaldmg = math.random(1520, 1525)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2550 and finaldmg <= 2570 then
         finaldmg = math.random(1525, 1530)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2570 and finaldmg <= 2590 then
         finaldmg = math.random(1530, 1535)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2590 and finaldmg <= 2610 then
         finaldmg = math.random(1535, 1540)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2610 and finaldmg <= 2630 then
         finaldmg = math.random(1540, 1545)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2630 and finaldmg <= 2650 then
         finaldmg = math.random(1545, 1550)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2650 and finaldmg <= 2670 then
         finaldmg = math.random(1550, 1555)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2670 and finaldmg <= 2690 then
         finaldmg = math.random(1555, 1560)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2690 and finaldmg <= 2710 then
         finaldmg = math.random(1560, 1565)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2710 and finaldmg <= 2730 then
         finaldmg = math.random(1565, 1570)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2730 and finaldmg <= 2750 then
         finaldmg = math.random(1570, 1575)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2750 and finaldmg <= 2770 then
         finaldmg = math.random(1575, 1580)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2770 and finaldmg <= 2790 then
         finaldmg = math.random(1580, 1585)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2790 and finaldmg <= 2810 then
         finaldmg = math.random(1585, 1590)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2810 and finaldmg <= 2830 then
         finaldmg = math.random(1590, 1595)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2830 and finaldmg <= 2850 then
         finaldmg = math.random(1595, 1600)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2850 and finaldmg <= 2870 then
         finaldmg = math.random(1600, 1605)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2870 and finaldmg <= 2890 then
         finaldmg = math.random(1605, 1610)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2890 and finaldmg <= 3010 then
         finaldmg = math.random(1610, 1615)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3010 and finaldmg <= 3030 then
         finaldmg = math.random(1615, 1620)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3030 and finaldmg <= 3050 then
         finaldmg = math.random(1620, 1625)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3050 and finaldmg <= 3070 then
         finaldmg = math.random(1625, 1630)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3070 and finaldmg <= 3090 then
         finaldmg = math.random(1630, 1635)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3090 and finaldmg <= 3110 then
         finaldmg = math.random(1635, 1640)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3110 and finaldmg <= 3130 then
         finaldmg = math.random(1640, 1645)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3130 and finaldmg <= 3150 then
         finaldmg = math.random(1645, 1650)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3150 and finaldmg <= 3170 then
         finaldmg = math.random(1650, 1655)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3170 and finaldmg <= 3190 then
         finaldmg = math.random(1655, 1660)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3190 and finaldmg <= 3210 then
         finaldmg = math.random(1660, 1665)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3210 and finaldmg <= 3230 then
         finaldmg = math.random(1665, 1670)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3230 and finaldmg <= 3250 then
         finaldmg = math.random(1670, 1675)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3250 and finaldmg <= 3270 then
         finaldmg = math.random(1675, 1680)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3270 and finaldmg <= 3290 then
         finaldmg = math.random(1680, 1685)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3290 and finaldmg <= 3310 then
         finaldmg = math.random(1685, 1690)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3310 and finaldmg <= 3330 then
         finaldmg = math.random(1690, 1695)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3330 and finaldmg <= 3350 then
         finaldmg = math.random(1695, 1700)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3350 and finaldmg <= 3370 then
         finaldmg = math.random(1700, 1705)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3370 and finaldmg <= 3390 then
         finaldmg = math.random(1705, 1710)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3390 and finaldmg <= 3410 then
         finaldmg = math.random(1710, 1715)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3410 and finaldmg <= 3430 then
         finaldmg = math.random(1715, 1720)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3430 and finaldmg <= 3450 then
         finaldmg = math.random(1720, 1725)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3450 and finaldmg <= 3470 then
         finaldmg = math.random(1725, 1730)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3470 and finaldmg <= 3490 then
         finaldmg = math.random(1730, 1735)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3490 and finaldmg <= 3510 then
         finaldmg = math.random(1735, 1740)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3510 and finaldmg <= 3530 then
         finaldmg = math.random(1740, 1745)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3530 and finaldmg <= 3550 then
         finaldmg = math.random(1745, 1750)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3550 and finaldmg <= 3570 then
         finaldmg = math.random(1750, 1755)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3570 and finaldmg <= 3590 then
         finaldmg = math.random(1755, 1760)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3590 and finaldmg <= 3610 then
         finaldmg = math.random(1760, 1765)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3610 and finaldmg <= 3630 then
         finaldmg = math.random(1765, 1770)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3630 and finaldmg <= 3650 then
         finaldmg = math.random(1770, 1775)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3650 and finaldmg <= 3670 then
         finaldmg = math.random(1775, 1780)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3670 and finaldmg <= 3690 then
         finaldmg = math.random(1780, 1785)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3690 and finaldmg <= 3710 then
         finaldmg = math.random(1785, 1790)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3710 and finaldmg <= 3730 then
         finaldmg = math.random(1790, 1795)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3730 and finaldmg <= 3750 then
         finaldmg = math.random(1795, 1800)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1800 - 1900 DMG ~ 50 damage range
     if finaldmg >= 3750 and finaldmg <= 3800 then
         finaldmg = math.random(1800, 1805)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3800 and finaldmg <= 3850 then
         finaldmg = math.random(1805, 1810)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3850 and finaldmg <= 3900 then
         finaldmg = math.random(1810, 1815)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3900 and finaldmg <= 3950 then
         finaldmg = math.random(1815, 1820)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3950 and finaldmg <= 4000 then
         finaldmg = math.random(1820, 1825)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4000 and finaldmg <= 4050 then
         finaldmg = math.random(1825, 1830)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4050 and finaldmg <= 4100 then
         finaldmg = math.random(1830, 1835)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4100 and finaldmg <= 4150 then
         finaldmg = math.random(1835, 1840)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4150 and finaldmg <= 4200 then
         finaldmg = math.random(1840, 1845)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4200 and finaldmg <= 4250 then
         finaldmg = math.random(1845, 1850)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4250 and finaldmg <= 4300 then
         finaldmg = math.random(1850, 1855)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4300 and finaldmg <= 4350 then
         finaldmg = math.random(1855, 1860)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4350 and finaldmg <= 4400 then
         finaldmg = math.random(1860, 1865)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4400 and finaldmg <= 4450 then
         finaldmg = math.random(1865, 1870)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4450 and finaldmg <= 4500 then
         finaldmg = math.random(1870, 1875)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4500 and finaldmg <= 4550 then
         finaldmg = math.random(1875, 1880)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4550 and finaldmg <= 4600 then
         finaldmg = math.random(1880, 1885)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4600 and finaldmg <= 4650 then
         finaldmg = math.random(1885, 1890)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4650 and finaldmg <= 4700 then
         finaldmg = math.random(1890, 1895)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4700 and finaldmg <= 4750 then
         finaldmg = math.random(1895, 1900)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1900 - 2000 DMG ~ 100 damage range
     if finaldmg >= 4750 and finaldmg <= 4850 then
         finaldmg = math.random(1900, 1905)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4850 and finaldmg <= 4950 then
         finaldmg = math.random(1905, 1910)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4950 and finaldmg <= 5050 then
         finaldmg = math.random(1910, 1915)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5050 and finaldmg <= 5150 then
         finaldmg = math.random(1915, 1920)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5150 and finaldmg <= 5250 then
         finaldmg = math.random(1920, 1925)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5250 and finaldmg <= 5350 then
         finaldmg = math.random(1925, 1930)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5350 and finaldmg <= 5450 then
         finaldmg = math.random(1930, 1935)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5450 and finaldmg <= 5550 then
         finaldmg = math.random(1935, 1940)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5550 and finaldmg <= 5650 then
         finaldmg = math.random(1940, 1945)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5650 and finaldmg <= 5750 then
         finaldmg = math.random(1945, 1950)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5750 and finaldmg <= 5850 then
         finaldmg = math.random(1950, 1955)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5850 and finaldmg <= 5950 then
         finaldmg = math.random(1955, 1960)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5950 and finaldmg <= 6050 then
         finaldmg = math.random(1960, 1965)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6050 and finaldmg <= 6150 then
         finaldmg = math.random(1965, 1970)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6150 and finaldmg <= 6250 then
         finaldmg = math.random(1970, 1975)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6250 and finaldmg <= 6350 then
         finaldmg = math.random(1975, 1980)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6350 and finaldmg <= 6450 then
         finaldmg = math.random(1980, 1985)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6450 and finaldmg <= 6550 then
         finaldmg = math.random(1985, 1990)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6550 and finaldmg <= 6650 then
         finaldmg = math.random(1990, 1995)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6650 and finaldmg <= 6750 then
         finaldmg = math.random(1995, 2000)
         calcParams.finalDmg = finaldmg
     end
+
 -- 2000 - 2105 DMG ~ 200 damage range
     if finaldmg >= 6750 and finaldmg <= 6950 then
         finaldmg = math.random(2000, 2005)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6950 and finaldmg <= 7150 then
         finaldmg = math.random(2005, 2010)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7150 and finaldmg <= 7350 then
         finaldmg = math.random(2010, 2015)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7350 and finaldmg <= 7550 then
         finaldmg = math.random(2015, 2020)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7550 and finaldmg <= 7750 then
         finaldmg = math.random(2020, 2025)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7750 and finaldmg <= 7950 then
         finaldmg = math.random(2025, 2030)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7950 and finaldmg <= 8150 then
         finaldmg = math.random(2030, 2035)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8150 and finaldmg <= 8350 then
         finaldmg = math.random(2035, 2040)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8350 and finaldmg <= 8550 then
         finaldmg = math.random(2040, 2045)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8550 and finaldmg <= 8750 then
         finaldmg = math.random(2045, 2050)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8750 and finaldmg <= 8950 then
         finaldmg = math.random(2050, 2055)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8950 and finaldmg <= 9150 then
         finaldmg = math.random(2055, 2060)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9150 and finaldmg <= 9350 then
         finaldmg = math.random(2060, 2065)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9350 and finaldmg <= 9550 then
         finaldmg = math.random(2065, 2070)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9550 and finaldmg <= 9750 then
         finaldmg = math.random(2070, 2075)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9750 and finaldmg <= 9950 then
         finaldmg = math.random(2075, 2080)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9950 and finaldmg <= 10150 then
         finaldmg = math.random(2080, 2085)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10150 and finaldmg <= 10350 then
         finaldmg = math.random(2085, 2090)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10350 and finaldmg <= 10550 then
         finaldmg = math.random(2090, 2095)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10550 and finaldmg <= 10750 then
         finaldmg = math.random(2095, 2100)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10750 then
         finaldmg = math.random(2100, 2105)
         calcParams.finalDmg = finaldmg
@@ -1706,888 +1925,1107 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
         finaldmg = math.random(1000, 1005)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1010 and finaldmg <= 1020 then
         finaldmg = math.random(1005, 1010)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1020 and finaldmg <= 1030 then
         finaldmg = math.random(1010, 1015)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1030 and finaldmg <= 1040 then
         finaldmg = math.random(1015, 1020)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1040 and finaldmg <= 1050 then
         finaldmg = math.random(1020, 1025)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1050 and finaldmg <= 1060 then
         finaldmg = math.random(1025, 1030)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1060 and finaldmg <= 1070 then
         finaldmg = math.random(1030, 1035)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1070 and finaldmg <= 1080 then
         finaldmg = math.random(1035, 1040)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1080 and finaldmg <= 1090 then
         finaldmg = math.random(1040, 1045)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1090 and finaldmg <= 1100 then
         finaldmg = math.random(1045, 1050)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1050 - 1500 DMG ~ 15 damage range
     if finaldmg >= 1100 and finaldmg <= 1115 then
         finaldmg = math.random(1050, 1055)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1115 and finaldmg <= 1130 then
         finaldmg = math.random(1055, 1060)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1130 and finaldmg <= 1145 then
         finaldmg = math.random(1060, 1065)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1145 and finaldmg <= 1160 then
         finaldmg = math.random(1065, 1070)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1160 and finaldmg <= 1175 then
         finaldmg = math.random(1070, 1075)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1175 and finaldmg <= 1190 then
         finaldmg = math.random(1075, 1080)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1190 and finaldmg <= 1205 then
         finaldmg = math.random(1080, 1085)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1205 and finaldmg <= 1220 then
         finaldmg = math.random(1085, 1090)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1220 and finaldmg <= 1235 then
         finaldmg = math.random(1090, 1095)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1235 and finaldmg <= 1250 then
         finaldmg = math.random(1095, 1100)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1250 and finaldmg <= 1265 then
         finaldmg = math.random(1100, 1105)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1265 and finaldmg <= 1280 then
         finaldmg = math.random(1105, 1110)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1280 and finaldmg <= 1295 then
         finaldmg = math.random(1110, 1115)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1295 and finaldmg <= 1310 then
         finaldmg = math.random(1115, 1120)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1310 and finaldmg <= 1325 then
         finaldmg = math.random(1120, 1125)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1325 and finaldmg <= 1340 then
         finaldmg = math.random(1125, 1130)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1340 and finaldmg <= 1355 then
         finaldmg = math.random(1130, 1135)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1355 and finaldmg <= 1370 then
         finaldmg = math.random(1135, 1140)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1370 and finaldmg <= 1385 then
         finaldmg = math.random(1140, 1145)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1385 and finaldmg <= 1400 then
         finaldmg = math.random(1145, 1150)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1400 and finaldmg <= 1415 then
         finaldmg = math.random(1150, 1155)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1415 and finaldmg <= 1430 then
         finaldmg = math.random(1155, 1160)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1430 and finaldmg <= 1445 then
         finaldmg = math.random(1160, 1165)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1445 and finaldmg <= 1460 then
         finaldmg = math.random(1165, 1170)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1460 and finaldmg <= 1475 then
         finaldmg = math.random(1170, 1175)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1475 and finaldmg <= 1490 then
         finaldmg = math.random(1175, 1180)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1490 and finaldmg <= 1505 then
         finaldmg = math.random(1180, 1185)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1505 and finaldmg <= 1520 then
         finaldmg = math.random(1185, 1190)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1520 and finaldmg <= 1535 then
         finaldmg = math.random(1190, 1195)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1535 and finaldmg <= 1550 then
         finaldmg = math.random(1195, 1200)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1550 and finaldmg <= 1565 then
         finaldmg = math.random(1200, 1205)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1565 and finaldmg <= 1580 then
         finaldmg = math.random(1205, 1210)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1580 and finaldmg <= 1595 then
         finaldmg = math.random(1210, 1215)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1595 and finaldmg <= 1610 then
         finaldmg = math.random(1215, 1220)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1610 and finaldmg <= 1625 then
         finaldmg = math.random(1220, 1225)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1625 and finaldmg <= 1640 then
         finaldmg = math.random(1225, 1230)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1640 and finaldmg <= 1655 then
         finaldmg = math.random(1230, 1235)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1655 and finaldmg <= 1670 then
         finaldmg = math.random(1235, 1240)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1670 and finaldmg <= 1685 then
         finaldmg = math.random(1240, 1245)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1685 and finaldmg <= 1700 then
         finaldmg = math.random(1245, 1250)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1700 and finaldmg <= 1715 then
         finaldmg = math.random(1250, 1255)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1715 and finaldmg <= 1730 then
         finaldmg = math.random(1255, 1260)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1730 and finaldmg <= 1745 then
         finaldmg = math.random(1260, 1265)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1745 and finaldmg <= 1760 then
         finaldmg = math.random(1265, 1270)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1760 and finaldmg <= 1775 then
         finaldmg = math.random(1270, 1275)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1775 and finaldmg <= 1790 then
         finaldmg = math.random(1275, 1280)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1790 and finaldmg <= 1805 then
         finaldmg = math.random(1280, 1285)
         calcParams.finalDmg = finaldmg
     end
- 
+
     if finaldmg >= 1805 and finaldmg <= 1820 then
         finaldmg = math.random(1285, 1290)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1820 and finaldmg <= 1835 then
         finaldmg = math.random(1290, 1295)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1835 and finaldmg <= 1850 then
         finaldmg = math.random(1295, 1300)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1850 and finaldmg <= 1865 then
         finaldmg = math.random(1300, 1305)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1865 and finaldmg <= 1880 then
         finaldmg = math.random(1305, 1310)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1880 and finaldmg <= 1895 then
         finaldmg = math.random(1310, 1315)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1895 and finaldmg <= 1910 then
         finaldmg = math.random(1315, 1320)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1910 and finaldmg <= 1925 then
         finaldmg = math.random(1320, 1325)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1925 and finaldmg <= 1940 then
         finaldmg = math.random(1325, 1330)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1940 and finaldmg <= 1955 then
         finaldmg = math.random(1330, 1335)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1955 and finaldmg <= 1970 then
         finaldmg = math.random(1335, 1340)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1970 and finaldmg <= 1985 then
         finaldmg = math.random(1340, 1345)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1985 and finaldmg <= 2000 then
         finaldmg = math.random(1345, 1350)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2000 and finaldmg <= 2015 then
         finaldmg = math.random(1350, 1355)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2015 and finaldmg <= 2030 then
         finaldmg = math.random(1355, 1360)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2030 and finaldmg <= 2045 then
         finaldmg = math.random(1360, 1365)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2045 and finaldmg <= 2060 then
         finaldmg = math.random(1365, 1370)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2060 and finaldmg <= 2075 then
         finaldmg = math.random(1370, 1375)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2075 and finaldmg <= 2090 then
         finaldmg = math.random(1375, 1380)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2090 and finaldmg <= 2105 then
         finaldmg = math.random(1380, 1385)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2105 and finaldmg <= 2120 then
         finaldmg = math.random(1385, 1390)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2120 and finaldmg <= 2135 then
         finaldmg = math.random(1390, 1395)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2135 and finaldmg <= 2150 then
         finaldmg = math.random(1395, 1400)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2150 and finaldmg <= 2165 then
         finaldmg = math.random(1400, 1405)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2165 and finaldmg <= 2180 then
         finaldmg = math.random(1405, 1410)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2180 and finaldmg <= 2195 then
         finaldmg = math.random(1410, 1415)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2195 and finaldmg <= 2210 then
         finaldmg = math.random(1415, 1420)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2210 and finaldmg <= 2225 then
         finaldmg = math.random(1420, 1425)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2225 and finaldmg <= 2240 then
         finaldmg = math.random(1425, 1430)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2240 and finaldmg <= 2255 then
         finaldmg = math.random(1430, 1435)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2255 and finaldmg <= 2270 then
         finaldmg = math.random(1435, 1440)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2270 and finaldmg <= 2285 then
         finaldmg = math.random(1440, 1445)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2285 and finaldmg <= 2300 then
         finaldmg = math.random(1445, 1450)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2300 and finaldmg <= 2315 then
         finaldmg = math.random(1450, 1455)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2315 and finaldmg <= 2330 then
         finaldmg = math.random(1455, 1460)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2330 and finaldmg <= 2345 then
         finaldmg = math.random(1460, 1465)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2345 and finaldmg <= 2360 then
         finaldmg = math.random(1465, 1470)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2360 and finaldmg <= 2375 then
         finaldmg = math.random(1470, 1475)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2375 and finaldmg <= 2390 then
         finaldmg = math.random(1475, 1480)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2390 and finaldmg <= 2405 then
         finaldmg = math.random(1480, 1485)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2405 and finaldmg <= 2420 then
         finaldmg = math.random(1485, 1490)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2420 and finaldmg <= 2435 then
         finaldmg = math.random(1490, 1495)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2435 and finaldmg <= 2450 then
         finaldmg = math.random(1495, 1500)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1500 - 1800 DMG ~ 20 damage range
     if finaldmg >= 2450 and finaldmg <= 2470 then
         finaldmg = math.random(1500, 1505)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2470 and finaldmg <= 2490 then
         finaldmg = math.random(1505, 1510)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2490 and finaldmg <= 2510 then
         finaldmg = math.random(1510, 1515)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2510 and finaldmg <= 2530 then
         finaldmg = math.random(1515, 1520)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2530 and finaldmg <= 2550 then
         finaldmg = math.random(1520, 1525)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2550 and finaldmg <= 2570 then
         finaldmg = math.random(1525, 1530)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2570 and finaldmg <= 2590 then
         finaldmg = math.random(1530, 1535)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2590 and finaldmg <= 2610 then
         finaldmg = math.random(1535, 1540)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2610 and finaldmg <= 2630 then
         finaldmg = math.random(1540, 1545)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2630 and finaldmg <= 2650 then
         finaldmg = math.random(1545, 1550)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2650 and finaldmg <= 2670 then
         finaldmg = math.random(1550, 1555)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2670 and finaldmg <= 2690 then
         finaldmg = math.random(1555, 1560)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2690 and finaldmg <= 2710 then
         finaldmg = math.random(1560, 1565)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2710 and finaldmg <= 2730 then
         finaldmg = math.random(1565, 1570)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2730 and finaldmg <= 2750 then
         finaldmg = math.random(1570, 1575)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2750 and finaldmg <= 2770 then
         finaldmg = math.random(1575, 1580)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2770 and finaldmg <= 2790 then
         finaldmg = math.random(1580, 1585)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2790 and finaldmg <= 2810 then
         finaldmg = math.random(1585, 1590)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2810 and finaldmg <= 2830 then
         finaldmg = math.random(1590, 1595)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2830 and finaldmg <= 2850 then
         finaldmg = math.random(1595, 1600)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2850 and finaldmg <= 2870 then
         finaldmg = math.random(1600, 1605)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2870 and finaldmg <= 2890 then
         finaldmg = math.random(1605, 1610)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 2890 and finaldmg <= 3010 then
         finaldmg = math.random(1610, 1615)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3010 and finaldmg <= 3030 then
         finaldmg = math.random(1615, 1620)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3030 and finaldmg <= 3050 then
         finaldmg = math.random(1620, 1625)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3050 and finaldmg <= 3070 then
         finaldmg = math.random(1625, 1630)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3070 and finaldmg <= 3090 then
         finaldmg = math.random(1630, 1635)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3090 and finaldmg <= 3110 then
         finaldmg = math.random(1635, 1640)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3110 and finaldmg <= 3130 then
         finaldmg = math.random(1640, 1645)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3130 and finaldmg <= 3150 then
         finaldmg = math.random(1645, 1650)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3150 and finaldmg <= 3170 then
         finaldmg = math.random(1650, 1655)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3170 and finaldmg <= 3190 then
         finaldmg = math.random(1655, 1660)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3190 and finaldmg <= 3210 then
         finaldmg = math.random(1660, 1665)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3210 and finaldmg <= 3230 then
         finaldmg = math.random(1665, 1670)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3230 and finaldmg <= 3250 then
         finaldmg = math.random(1670, 1675)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3250 and finaldmg <= 3270 then
         finaldmg = math.random(1675, 1680)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3270 and finaldmg <= 3290 then
         finaldmg = math.random(1680, 1685)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3290 and finaldmg <= 3310 then
         finaldmg = math.random(1685, 1690)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3310 and finaldmg <= 3330 then
         finaldmg = math.random(1690, 1695)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3330 and finaldmg <= 3350 then
         finaldmg = math.random(1695, 1700)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3350 and finaldmg <= 3370 then
         finaldmg = math.random(1700, 1705)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3370 and finaldmg <= 3390 then
         finaldmg = math.random(1705, 1710)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3390 and finaldmg <= 3410 then
         finaldmg = math.random(1710, 1715)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3410 and finaldmg <= 3430 then
         finaldmg = math.random(1715, 1720)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3430 and finaldmg <= 3450 then
         finaldmg = math.random(1720, 1725)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3450 and finaldmg <= 3470 then
         finaldmg = math.random(1725, 1730)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3470 and finaldmg <= 3490 then
         finaldmg = math.random(1730, 1735)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3490 and finaldmg <= 3510 then
         finaldmg = math.random(1735, 1740)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3510 and finaldmg <= 3530 then
         finaldmg = math.random(1740, 1745)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3530 and finaldmg <= 3550 then
         finaldmg = math.random(1745, 1750)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3550 and finaldmg <= 3570 then
         finaldmg = math.random(1750, 1755)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3570 and finaldmg <= 3590 then
         finaldmg = math.random(1755, 1760)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3590 and finaldmg <= 3610 then
         finaldmg = math.random(1760, 1765)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3610 and finaldmg <= 3630 then
         finaldmg = math.random(1765, 1770)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3630 and finaldmg <= 3650 then
         finaldmg = math.random(1770, 1775)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3650 and finaldmg <= 3670 then
         finaldmg = math.random(1775, 1780)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3670 and finaldmg <= 3690 then
         finaldmg = math.random(1780, 1785)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3690 and finaldmg <= 3710 then
         finaldmg = math.random(1785, 1790)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3710 and finaldmg <= 3730 then
         finaldmg = math.random(1790, 1795)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3730 and finaldmg <= 3750 then
         finaldmg = math.random(1795, 1800)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1800 - 1900 DMG ~ 50 damage range
     if finaldmg >= 3750 and finaldmg <= 3800 then
         finaldmg = math.random(1800, 1805)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3800 and finaldmg <= 3850 then
         finaldmg = math.random(1805, 1810)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3850 and finaldmg <= 3900 then
         finaldmg = math.random(1810, 1815)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3900 and finaldmg <= 3950 then
         finaldmg = math.random(1815, 1820)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 3950 and finaldmg <= 4000 then
         finaldmg = math.random(1820, 1825)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4000 and finaldmg <= 4050 then
         finaldmg = math.random(1825, 1830)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4050 and finaldmg <= 4100 then
         finaldmg = math.random(1830, 1835)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4100 and finaldmg <= 4150 then
         finaldmg = math.random(1835, 1840)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4150 and finaldmg <= 4200 then
         finaldmg = math.random(1840, 1845)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4200 and finaldmg <= 4250 then
         finaldmg = math.random(1845, 1850)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4250 and finaldmg <= 4300 then
         finaldmg = math.random(1850, 1855)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4300 and finaldmg <= 4350 then
         finaldmg = math.random(1855, 1860)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4350 and finaldmg <= 4400 then
         finaldmg = math.random(1860, 1865)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4400 and finaldmg <= 4450 then
         finaldmg = math.random(1865, 1870)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4450 and finaldmg <= 4500 then
         finaldmg = math.random(1870, 1875)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4500 and finaldmg <= 4550 then
         finaldmg = math.random(1875, 1880)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4550 and finaldmg <= 4600 then
         finaldmg = math.random(1880, 1885)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4600 and finaldmg <= 4650 then
         finaldmg = math.random(1885, 1890)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4650 and finaldmg <= 4700 then
         finaldmg = math.random(1890, 1895)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4700 and finaldmg <= 4750 then
         finaldmg = math.random(1895, 1900)
         calcParams.finalDmg = finaldmg
     end
+
 -- 1900 - 2000 DMG ~ 100 damage range
     if finaldmg >= 4750 and finaldmg <= 4850 then
         finaldmg = math.random(1900, 1905)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4850 and finaldmg <= 4950 then
         finaldmg = math.random(1905, 1910)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 4950 and finaldmg <= 5050 then
         finaldmg = math.random(1910, 1915)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5050 and finaldmg <= 5150 then
         finaldmg = math.random(1915, 1920)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5150 and finaldmg <= 5250 then
         finaldmg = math.random(1920, 1925)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5250 and finaldmg <= 5350 then
         finaldmg = math.random(1925, 1930)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5350 and finaldmg <= 5450 then
         finaldmg = math.random(1930, 1935)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5450 and finaldmg <= 5550 then
         finaldmg = math.random(1935, 1940)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5550 and finaldmg <= 5650 then
         finaldmg = math.random(1940, 1945)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5650 and finaldmg <= 5750 then
         finaldmg = math.random(1945, 1950)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5750 and finaldmg <= 5850 then
         finaldmg = math.random(1950, 1955)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5850 and finaldmg <= 5950 then
         finaldmg = math.random(1955, 1960)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 5950 and finaldmg <= 6050 then
         finaldmg = math.random(1960, 1965)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6050 and finaldmg <= 6150 then
         finaldmg = math.random(1965, 1970)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6150 and finaldmg <= 6250 then
         finaldmg = math.random(1970, 1975)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6250 and finaldmg <= 6350 then
         finaldmg = math.random(1975, 1980)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6350 and finaldmg <= 6450 then
         finaldmg = math.random(1980, 1985)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6450 and finaldmg <= 6550 then
         finaldmg = math.random(1985, 1990)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6550 and finaldmg <= 6650 then
         finaldmg = math.random(1990, 1995)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6650 and finaldmg <= 6750 then
         finaldmg = math.random(1995, 2000)
         calcParams.finalDmg = finaldmg
     end
+
 -- 2000 - 2105 DMG ~ 200 damage range
     if finaldmg >= 6750 and finaldmg <= 6950 then
         finaldmg = math.random(2000, 2005)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 6950 and finaldmg <= 7150 then
         finaldmg = math.random(2005, 2010)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7150 and finaldmg <= 7350 then
         finaldmg = math.random(2010, 2015)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7350 and finaldmg <= 7550 then
         finaldmg = math.random(2015, 2020)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7550 and finaldmg <= 7750 then
         finaldmg = math.random(2020, 2025)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7750 and finaldmg <= 7950 then
         finaldmg = math.random(2025, 2030)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 7950 and finaldmg <= 8150 then
         finaldmg = math.random(2030, 2035)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8150 and finaldmg <= 8350 then
         finaldmg = math.random(2035, 2040)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8350 and finaldmg <= 8550 then
         finaldmg = math.random(2040, 2045)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8550 and finaldmg <= 8750 then
         finaldmg = math.random(2045, 2050)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8750 and finaldmg <= 8950 then
         finaldmg = math.random(2050, 2055)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 8950 and finaldmg <= 9150 then
         finaldmg = math.random(2055, 2060)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9150 and finaldmg <= 9350 then
         finaldmg = math.random(2060, 2065)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9350 and finaldmg <= 9550 then
         finaldmg = math.random(2065, 2070)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9550 and finaldmg <= 9750 then
         finaldmg = math.random(2070, 2075)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9750 and finaldmg <= 9950 then
         finaldmg = math.random(2075, 2080)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 9950 and finaldmg <= 10150 then
         finaldmg = math.random(2080, 2085)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10150 and finaldmg <= 10350 then
         finaldmg = math.random(2085, 2090)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10350 and finaldmg <= 10550 then
         finaldmg = math.random(2090, 2095)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10550 and finaldmg <= 10750 then
         finaldmg = math.random(2095, 2100)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 10750 then
         finaldmg = math.random(2100, 2105)
         calcParams.finalDmg = finaldmg
