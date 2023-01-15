@@ -3496,7 +3496,7 @@ INSERT INTO `synth_recipes` VALUES (54525,0,0,0,0,0,0,0,94,0,0,4099,4241,1395,91
 INSERT INTO `synth_recipes` VALUES (54526,0,0,0,0,0,0,0,94,0,0,4098,4240,1517,0,0,0,0,0,0,0,1458,1458,1458,1458,1,1,1,1,'Mammoth Tusk');
 INSERT INTO `synth_recipes` VALUES (54527,0,0,0,0,0,0,52,94,0,0,4099,4241,866,1629,1771,0,0,0,0,0,14823,14824,14824,14824,1,1,1,1,'Dragon Mittens');
 INSERT INTO `synth_recipes` VALUES (54528,0,0,0,0,0,0,0,95,0,0,4099,4241,850,851,851,1193,1193,1193,1193,0,13789,13790,13790,13790,1,1,1,1,'Carapace Breastplate');
-INSERT INTO `synth_recipes` VALUES (54529,0,0,0,0,0,0,255,95,0,0,4099,4241,821,1586,1587,12824,0,0,0,0,12821,14313,14313,14313,1,1,1,1,'Gavial Cuisses');  -- 2021.11.10 All agree on Bonecraft 95.  FFXIclopedia shows Leathercraft 1 where BGWiki states 1-15 and JPWiki states 5.  Implimented @ 15 to err on the side of more difficult.
+INSERT INTO `synth_recipes` VALUES (54529,0,0,0,0,0,0,15,95,0,0,4099,4241,821,1586,1587,12824,0,0,0,0,12821,14313,14313,14313,1,1,1,1,'Gavial Cuisses');  -- 2021.11.10 All agree on Bonecraft 95.  FFXIclopedia shows Leathercraft 1 where BGWiki states 1-15 and JPWiki states 5.  Implimented @ 15 to err on the side of more difficult.
 INSERT INTO `synth_recipes` VALUES (54530,0,0,0,0,0,0,0,95,0,0,4099,4241,9513,0,0,0,0,0,0,0,13789,13789,13789,13789,1,1,1,1,'Carapace Breastplate');
 INSERT INTO `synth_recipes` VALUES (54531,0,0,0,0,0,0,54,95,0,0,4099,4241,823,862,866,1841,0,0,0,0,14055,14056,14056,14056,1,1,1,1,'Unicorn Mittens');
 INSERT INTO `synth_recipes` VALUES (54532,0,0,0,0,0,0,50,95,0,0,4099,4241,506,927,1622,1680,1719,0,0,0,15309,15310,15310,15310,1,1,1,1,'Igqira Huaraches');
