@@ -30,7 +30,7 @@ zoneObject.onInitialize = function(zone)
     end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
-
+    
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end
 
