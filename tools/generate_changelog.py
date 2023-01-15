@@ -1,4 +1,4 @@
-# pip3 install requests
+# py -m pip install requests
 #
 # Usage:
 # .\tools\generate_changelog.py <days to generate, or "ci"> <repo owner name> <repo name> <changelog title>
