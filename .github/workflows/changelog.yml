@@ -19,7 +19,8 @@ jobs:
         pip3 install requests
     - name: Generate changelog
       run: |
-          python3 tools/generate_changelog.py ci LandSandBoat server LandSandBoat
+          # https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types
+          python3 tools/generate_changelog.py ci ${{ github.event.repository.name }}
           cat changelog-$(date +'%Y-%m-%d').md
     - name: Capture date
       id: date

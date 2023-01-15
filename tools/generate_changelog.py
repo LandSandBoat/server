@@ -1,11 +1,16 @@
 # py -m pip install requests
 #
 # Usage:
-# .\tools\generate_changelog.py <days to generate, or "ci"> <repo owner name> <repo name> <changelog title>
+# .\tools\generate_changelog.py <days to generate, or "ci"> <repo owner name/repo name> <optional changelog title>
+#
+# NOTE: If you don't populate the optional changelog title, the repo owner name will be used
 #
 # Examples:
-# .\tools\generate_changelog.py ci LandSandBoat server LandSandBoat
-# .\tools\generate_changelog.py 7 LandSandBoat server LandSandBoat
+# .\tools\generate_changelog.py ci LandSandBoat/server
+# => ## LandSandBoat Changelog
+#
+# .\tools\generate_changelog.py 7 LandSandBoat/server YourServerName
+# => ## YourServerName Changelog
 
 import sys
 from datetime import date
@@ -48,24 +53,24 @@ def remove_real_names(authors):
         except:
             pass
 
+
+if len(sys.argv) < 3:
+    print("Usage:\ngenerate_changelog.py <days to generate, or 'ci'> <repo owner name/repo name> <optional changelog title>")
+    sys.exit(-1)
+
 length_days = 14
-if len(sys.argv) >= 2:
-    if "ci" in sys.argv[1]:
-        length_days = days_since_last_run()
-    else:
-        length_days = int(sys.argv[1])
+if "ci" in sys.argv[1]:
+    length_days = days_since_last_run()
+else:
+    length_days = int(sys.argv[1])
 
-user = ""
-if len(sys.argv) >= 3:
-    user = sys.argv[2]
+repo_name = sys.argv[2]
+user = repo_name.split("/")[0]
+repo = repo_name.split("/")[1]
 
-repo = ""
+title = user
 if len(sys.argv) >= 4:
-    repo = sys.argv[3]
-
-title = ""
-if len(sys.argv) >= 5:
-    title = sys.argv[4]
+    title = sys.argv[3]
 
 print(f"Calculating changes for {length_days} days...")
 
