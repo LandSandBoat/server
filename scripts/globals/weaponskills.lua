@@ -1035,6 +1035,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
         finaldmg = math.random(1285, 1290)
         calcParams.finalDmg = finaldmg
     end
+
     if finaldmg >= 1820 and finaldmg <= 1835 then
         finaldmg = math.random(1290, 1295)
         calcParams.finalDmg = finaldmg
