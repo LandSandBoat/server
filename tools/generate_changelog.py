@@ -1,4 +1,4 @@
-# pip3 install requests
+# py -m pip install requests
 #
 # Usage:
 # .\tools\generate_changelog.py <days to generate, or "ci"> <repo owner name> <repo name> <changelog title>
@@ -26,6 +26,27 @@ def days_since_last_run():
         last_date_day = (today - timedelta(days=days)).day
     return days
 
+def is_real_name(str):
+    parts = str.split(" ")
+
+    parts_are_capitalized = True
+    for part in parts:
+        if part.capitalize() != part:
+            parts_are_capitalized = False
+
+    return len(parts) > 1 and parts_are_capitalized
+
+def remove_real_names(authors):
+    to_remove = set()
+    for name in authors:
+        if is_real_name(name):
+            to_remove.add(name)
+
+    for name in to_remove:
+        try:
+            authors.remove(name)
+        except:
+            pass
 
 length_days = 14
 if len(sys.argv) >= 2:
@@ -69,6 +90,34 @@ with open(f"changelog-{today}.md", "w") as file:
         html_url = entry["html_url"]
         patch_url = entry["pull_request"]["patch_url"]
         username = entry["user"]["login"]
+
+        # Extract out more author information
+        authors = set()
+        authors.add(username)
+        patch = reqs.get(patch_url).text
+        for line in patch.split("\n"):
+            if line.startswith("From: "):
+                authors.add(line.replace("From: ", "").split("<")[0].strip())
+
+            if line.lower().startswith("co-authored-by: "):
+                authors.add(line.split(":")[1].split("<")[0].strip())
+
+        # Try and remove "real names"; even though these are already visible to the public, we
+        # don't want to advertise them in our patch notes.
+        remove_real_names(authors)
+
+        # We want the submitting user to be first in the list, if relevant (and if the names match)
+        authors_string = username
+        if len(authors) > 1:
+            # Since the authors_string starts with the submitting user, we can remove it from the set
+            try:
+                authors.remove(username)
+            except:
+                pass
+
+            authors_string += ", "
+            authors_string += ", ".join(authors)
+
         file.write(
-            f"- {title.capitalize()} [[#{number}]({html_url}), [patch]({patch_url})] ({username})\n"
+            f"- {title.capitalize()} [[#{number}]({html_url}), [patch]({patch_url})] ({authors_string})\n"
         )
