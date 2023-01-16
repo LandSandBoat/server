@@ -38,12 +38,59 @@ DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate)
 : DropType(DropType)
 , ItemID(ItemID)
 , DropRate(DropRate)
+, hasFixedRate(false)
+{
+}
+
+DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate, bool hasFixedRate)
+: DropType(DropType)
+, ItemID(ItemID)
+, DropRate(DropRate)
+, hasFixedRate(hasFixedRate)
 {
 }
 
 DropGroup_t::DropGroup_t(uint16 GroupRate)
 : GroupRate(GroupRate)
+, hasFixedRate(false)
 {
+}
+
+DropGroup_t::DropGroup_t(uint16 GroupRate, bool hasFixedRate)
+: GroupRate(GroupRate)
+, hasFixedRate(hasFixedRate)
+{
+}
+
+LootContainer::LootContainer(DropList_t* dropList)
+: dropList(dropList)
+{
+}
+
+void LootContainer::ForEachGroup(const std::function<void(const DropGroup_t&)>& func)
+{
+    for (const auto& group : dropList->Groups)
+    {
+        func(group);
+    }
+
+    for (const auto& group : drops.Groups)
+    {
+        func(group);
+    }
+}
+
+void LootContainer::ForEachItem(const std::function<void(const DropItem_t&)>& func)
+{
+    for (const auto& item : dropList->Items)
+    {
+        func(item);
+    }
+
+    for (const auto& item : drops.Items)
+    {
+        func(item);
+    }
 }
 
 /************************************************************************
@@ -579,6 +626,9 @@ namespace itemutils
                 }
             }
         }
+
+        // Populate 0 drop list with an empty list to support mobs that only drop loot through script logic
+        g_pDropList[0] = new DropList_t;
     }
 
     /************************************************************************
@@ -615,7 +665,7 @@ namespace itemutils
 
         PUnarmedH2HItem->setDmgType(DAMAGE_TYPE::HTH);
         PUnarmedH2HItem->setSkillType(SKILL_HAND_TO_HAND);
-        PUnarmedH2HItem->setDamage(3);
+        PUnarmedH2HItem->setDamage(0);
     }
 
     /************************************************************************

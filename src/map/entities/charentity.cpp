@@ -152,6 +152,8 @@ CCharEntity::CCharEntity()
     memset(&m_missionLog, 0, sizeof(m_missionLog));
     m_eminenceCache.activemap.reset();
 
+    memset(&m_claimedDeeds, 0, sizeof(m_claimedDeeds));
+
     for (uint8 i = 0; i <= 3; ++i)
     {
         m_missionLog[i].current = 0xFFFF;
@@ -1006,7 +1008,8 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
         for (auto&& actionTarget : actionList.actionTargets)
         {
             if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
-                StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) && static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
+                (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
+                static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
                 auto*     PBlueSpell = static_cast<CBlueSpell*>(PSpell);
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);

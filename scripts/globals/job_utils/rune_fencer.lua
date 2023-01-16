@@ -650,7 +650,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
     end
 
     if magicBursted then -- Note: the vanilla client does not report a healed magic burst, but this bit is set.
-        action:modifier(target:getID(), xi.actionModifier.MAGIC_BURST)
+        action:modifier(target:getID(), xi.msg.actionModifier.MAGIC_BURST)
     end
 
     return math.abs(cumulativeDamage)

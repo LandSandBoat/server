@@ -146,7 +146,7 @@ JobPoints_t* CJobPoints::GetAllJobPoints()
 
 bool CJobPoints::AddCapacityPoints(uint16 amount)
 {
-    uint32 adjustedCapacity = m_jobPoints[m_PChar->GetMJob()].capacityPoints + amount;
+    uint32 adjustedCapacity = m_jobPoints[m_PChar->GetMJob()].capacityPoints + amount * settings::get<float>("map.CAPACITY_RATE");
     uint16 currentJobPoints = this->GetJobPoints();
 
     if (adjustedCapacity >= 30000)

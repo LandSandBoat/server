@@ -81,6 +81,9 @@ xi.msg.basic =
     MAGIC_GAIN_EFFECT      = 230, -- <caster> casts <spell>. <target> gains the effect of <status>.
     MAGIC_ENFEEB_IS        = 236, -- <caster> casts <spell>. <target> is <status>.
     MAGIC_ENFEEB           = 237, -- <caster> casts <spell>. <target> receives the effect of <status>.
+    MAGIC_BURST_DAMAGE     = 252, -- <caster> casts <spell> Magic burst! <target> takes <amount> points of damage.
+    MAGIC_BURST_ENFEEB     = 268, -- <caster> casts <spell> Magic burst! <target> receives the effect of <status>.
+    MAGIC_BURST_ENFEEB_IS  = 271, -- <caster> casts <spell> Magic burst! <target> is <status>.
     MAGIC_RESIST_2         = 284, -- <target> resists the effects of the spell!
     MAGIC_CASTS_ON         = 309, -- <caster> casts <spell> on <target>.
     MAGIC_ABSORB_STR       = 329, -- <caster> casts <spell>. <target>'s STR is drained.
@@ -115,6 +118,8 @@ xi.msg.basic =
     SKILL_ENFEEB           = 243, -- <user> uses <skill>. <target> receives the effect of <status>.
     SELF_HEAL_SECONDARY    = 263, -- <target> recovers <amount> HP.
     DAMAGE_SECONDARY       = 264, -- <target> takes <amount> points of damage.
+    RANGED_ATTACK_HIT      = 352, -- <user> ranged attack hits <target> for <amount> points of damage.
+    RANGED_ATTACK_MISS     = 354, -- <user> ranged attack misses.
     AOE_REGAIN_HP          = 357, -- <target> regains <amount> HP.
     AOE_REGAIN_MP          = 358, -- <target> regains <amount> MP.
     ABILITIES_RECHARGED    = 360, -- <user> uses <skill>. All of <target>'s abilities are recharged.
@@ -215,21 +220,22 @@ xi.msg.basic =
     EATS_FINDS_NOTHING      = 604,  -- <actor> eats a <item>, but finds nothing inside...
 
     -- Items
-    ITEM_USES               = 28,   -- <actor> uses a <item>.
-    ITEM_UNABLE_TO_USE      = 55,   -- Unable to use item.
-    ITEM_UNABLE_TO_USE_2    = 56,   -- Unable to use item.
-    ITEM_FAILS_TO_ACTIVATE  = 62,   -- The <item> fails to activate.
-    ITEM_NO_PETRAS          = 65,   -- You are not carrying any Petras.<br>You cannot use the <item>.
-    ITEM_DOES_NOT_HAVE      = 91,   -- <actor> does not have any <item>.
-    ITEM_CANNOT_USE_ON      = 92,   -- Cannot use the <item> on <target>.
-    ITEM_YOU_OBTAIN_FROM    = 98,   -- You obtain a <item> from <target>.
-    ITEM_NO_USE_LEVEL       = 104,  -- Unable to use item.<br>You do not meet the level requirement.
-    ITEM_NO_USE_MEDICATED   = 111,  -- You cannot use <item> while medicated.
-    ITEM_NO_USE_INVENTORY   = 308,  -- Unable to use the <item>.<br><target>'s inventory is full.
-    ITEM_RECEIVES_EFFECT    = 375,  -- <actor> uses a <item>.<br><target> receives the effect of <status>.
-    ITEM_OBTAINS_A          = 376,  -- <actor> uses a <item>.<br><target> obtains a <item2>.
-    ITEM_OBTAINS            = 377,  -- <actor> uses a <item>.<br><target> obtains <item2>.
-    ITEM_EFFECT_DISAPPEARS  = 378,  -- <actor> uses a <item>.<br><target>'s <status> effect disappears!
+    ITEM_USES                       = 28,  -- <actor> uses a <item>.
+    ITEM_UNABLE_TO_USE              = 55,  -- Unable to use item.
+    ITEM_UNABLE_TO_USE_2            = 56,  -- Unable to use item.
+    ITEM_FAILS_TO_ACTIVATE          = 62,  -- The <item> fails to activate.
+    ITEM_NO_PETRAS                  = 65,  -- You are not carrying any Petras.<br>You cannot use the <item>.
+    ITEM_DOES_NOT_HAVE              = 91,  -- <actor> does not have any <item>.
+    ITEM_CANNOT_USE_ON              = 92,  -- Cannot use the <item> on <target>.
+    ITEM_YOU_OBTAIN_FROM            = 98,  -- You obtain a <item> from <target>.
+    ITEM_NO_USE_LEVEL               = 104, -- Unable to use item.<br>You do not meet the level requirement.
+    ITEM_NO_USE_MEDICATED           = 111, -- You cannot use <item> while medicated.
+    ITEM_NO_USE_INVENTORY           = 308, -- Unable to use the <item>.<br><target>'s inventory is full.
+    ITEM_RECEIVES_EFFECT            = 375, -- <actor> uses a <item>.<br><target> receives the effect of <status>.
+    ITEM_OBTAINS_A                  = 376, -- <actor> uses a <item>.<br><target> obtains a <item2>.
+    ITEM_OBTAINS                    = 377, -- <actor> uses a <item>.<br><target> obtains <item2>.
+    ITEM_EFFECT_DISAPPEARS          = 378, -- <actor> uses a <item>.<br><target>'s <status> effect disappears!
+    ITEM_UNABLE_TO_USE_PARTY_LEADER = 580, -- Unable to use <item>. The party leader is in either an area beyond warping range or a place you have yet to visit.
 
     -- Ranged
     NO_RANGED_WEAPON       = 216, -- You do not have an appropriate ranged weapon equipped.
@@ -237,7 +243,7 @@ xi.msg.basic =
     MOVE_AND_INTERRUPT     = 218, -- You move and interrupt your aim.
 
     -- Additional effects and spike effects
-    SPIKES_EFFECT_DMG      = 44 , -- <Defender>'s spikes deal <number> points of damage to the <Attacker>.
+    SPIKES_EFFECT_DMG      = 44,  -- <Defender>'s spikes deal <number> points of damage to the <Attacker>.
     SPIKES_EFFECT_HP_DRAIN = 132, -- <Defender>'s spikes drain <number> HP from the <Attacker>.
     ADD_EFFECT_MP_HEAL     = 152, -- Additional effect: The <player> recovers <number> MP.
     ADD_EFFECT_STATUS      = 160, -- Additional effect: <Status Effect>.
@@ -368,6 +374,16 @@ xi.msg.basic =
     -- TRUST & ALTER EGO
     TRUST_NO_CAST_TRUST     = 700,  -- You are unable to use Trust magic at this time.
     TRUST_NO_CALL_AE        = 717,  -- You cannot call forth alter egos here.
+}
+
+-- Used to modify certain basic messages.
+xi.msg.actionModifier =
+{
+    NONE        = 0x00,
+    COVER       = 0x01,
+    RESIST      = 0x02, -- Resist! <Regular message> -- Used for resist traits triggers.
+    MAGIC_BURST = 0x04, -- Currently known to be used for Swipe/Lunge only
+    IMMUNOBREAK = 0x08,
 }
 
 -----------------------------------

@@ -581,6 +581,12 @@ void CAttack::ProcessDamage()
     {
         CStatusEffect* effect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT);
 
+        if (effect == nullptr)
+        {
+            ShowError("Restraint effect was null.");
+            return;
+        }
+
         if (effect->GetPower() < 30)
         {
             uint8 jpBonus = 0;

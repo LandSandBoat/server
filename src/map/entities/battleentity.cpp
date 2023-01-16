@@ -1440,6 +1440,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     auto totalTargets = (uint16)PAI->TargetFind->m_targets.size();
 
     PSpell->setTotalTargets(totalTargets);
+    PSpell->setPrimaryTargetID(PActionTarget->id);
 
     action.id         = id;
     action.actiontype = ACTION_MAGIC_FINISH;
@@ -1502,15 +1503,10 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
                 msg = PSpell->getAoEMessage();
             }
 
-            if (damage < 0)
-            {
-                msg                = MSGBASIC_MAGIC_RECOVERS_HP;
-                actionTarget.param = static_cast<uint16>(std::clamp(damage * -1, 0, PTarget->GetMaxHP() - PTarget->health.hp));
-            }
-            else
-            {
-                actionTarget.param = damage;
-            }
+            actionTarget.modifier = PSpell->getModifier();
+            PSpell->setModifier(MODIFIER::NONE); // Reset modifier on use
+
+            actionTarget.param = damage;
         }
 
         if (actionTarget.animation == 122)
@@ -1981,8 +1977,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
     }
 
-    PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), &action);
-    PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), &action);
+    PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAction(&action));
+    PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), CLuaAction(&action));
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
     /////////////////////////////////////////////////////////////////////////////////////////////

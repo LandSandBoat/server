@@ -2,8 +2,6 @@
 -- Spell: Raiton: Ni
 -----------------------------------
 require("scripts/globals/spells/damage_spell")
-require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
 
@@ -13,7 +11,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local duration = 15 + caster:getMerit(xi.merit.RAITON_EFFECT) -- T1 bonus debuff duration
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.EARTH_MEVA)
+    target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, 30, 0, duration, 0, xi.mod.EARTH_MEVA, 0)
 
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end

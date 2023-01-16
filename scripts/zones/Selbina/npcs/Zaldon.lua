@@ -554,8 +554,7 @@ local function giveReward(player, csid)
         end
 
         if traded then
-            player:addGil(xi.settings.main.GIL_RATE * reward.gil)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * reward.gil)
+            npcUtil.giveCurrency(player, 'gil', reward.gil)
             player:setCharVar("insideBellyFishId", 0)
             player:setCharVar("insideBellyItemIdx", 0)
             if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then

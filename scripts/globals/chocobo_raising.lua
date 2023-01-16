@@ -38,8 +38,8 @@ xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 xi.chocoboRaising.chocoState = xi.chocoboRaising.chocoState or {}
 
--- FOR HEAVILY-IN-DEVELOPMET TESTING, you can force these setting:
--- TODO: When ready for release, publish these to main settings files.
+-- FOR HEAVILY-IN-DEVELOPMET TESTING, you can use the `!chocoboraising`
+-- command to toggle these settings
 xi.settings.main.ENABLE_CHOCOBO_RAISING = false
 xi.settings.main.DEBUG_CHOCOBO_RAISING = false
 
@@ -99,32 +99,32 @@ local glow =
 
 local validFoods =
 {
-    --  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
-        [xi.items.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-        [xi.items.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-        [xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-        [xi.items.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-        [xi.items.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-        [xi.items.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-        [xi.items.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    --  [xi.items.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
+--  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
+    [xi.items.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.items.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.items.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.items.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.items.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.items.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
+--  [xi.items.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
 }
 
 -- Items that can be found on a walk in a certain area
@@ -860,7 +860,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             return
         end
 
-        debug(player, string.format("Update: %i", option))
+        debug(player, string.format("CS Update: %i", option))
 
         -- Setting the name for a chocobo: when the name is
         -- applied from the menu the name offsets (from the menu)
@@ -1038,14 +1038,17 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 -- 8 - 25 are all "-----" (blank)
 
-                -- bit.lshift(0x01, 26): Go forward 1 unit (debug)
+                -- Go forward 1 unit (debug) (Unused, see command: !chocoboraising)
                 local goForward1UnitDebug = -bit.lshift(0x01, 26)
+                utils.unused(goForward1UnitDebug)
 
-                -- bit.lshift(0x01, 27): Abilities print (debug)
+                -- Abilities print (debug) (Unused, see command: !chocoboraising)
                 local abilitiesPrintDebug = -bit.lshift(0x01, 27)
+                utils.unused(abilitiesPrintDebug)
 
-                -- bit.lshift(0x01, 28): User work print (debug)
+                -- User work print (debug) (Unused, see command: !chocoboraising)
                 local userWorkPrintDebug = -bit.lshift(0x01, 28)
+                utils.unused(userWorkPrintDebug)
 
                 local retireOrGiveUp = 0
                 if chocoState.stage < stage.ADULT_1 then
@@ -1075,13 +1078,6 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 
                 if chocoState.stage >= stage.ADULT_1 then
                     -- menuFlags = menuFlags
-                end
-
-                -- GMs can access debug options
-                if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
-                    menuFlags = menuFlags + goForward1UnitDebug
-                    menuFlags = menuFlags + abilitiesPrintDebug
-                    menuFlags = menuFlags + userWorkPrintDebug
                 end
 
                 -- Exit is always available

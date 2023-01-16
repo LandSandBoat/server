@@ -60,8 +60,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR)
         player:addKeyItem(xi.ki.WARNING_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WARNING_LETTER)
-        player:addGil(xi.settings.main.GIL_RATE * 10000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000)
+        npcUtil.giveCurrency(player, 'gil', 10000)
         player:setCharVar("BetterPartOfValProg", 0)
         player:needToZone(true)
     elseif csid == 120 then
@@ -73,8 +72,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("FiresOfDiscProg", 5)
     elseif csid == 164 then
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT)
-        player:addGil(xi.settings.main.GIL_RATE * 10000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000)
+        npcUtil.giveCurrency(player, 'gil', 10000)
         player:setCharVar("FiresOfDiscProg", 0)
     end
 end

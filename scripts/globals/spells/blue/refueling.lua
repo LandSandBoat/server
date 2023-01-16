@@ -13,6 +13,8 @@
 -----------------------------------
 -- Combos: None
 -----------------------------------
+require("scripts/globals/bluemagic")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -25,17 +27,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.HASTE
     local power = 1000 -- 10%
-    local duration = 300
-
-    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
-        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
-
-        if diffMerit > 0 then
-            duration = duration + (duration / 100) * diffMerit
-        end
-
-        caster:delStatusEffect(xi.effect.DIFFUSION)
-    end
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 300)
 
     if not target:addStatusEffect(typeEffect, power, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

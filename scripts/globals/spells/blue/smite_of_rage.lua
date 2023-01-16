@@ -9,7 +9,7 @@
 -- Level: 34
 -- Casting Time: 0.5 seconds
 -- Recast Time: 13 seconds
--- Skillchain Element(s): Wind (can open Scission or Gravitation can close Detonation)
+-- Skillchain Element(s): Detonation
 -- Combos: Undead Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
@@ -24,7 +24,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.ARCANA
     params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
@@ -42,10 +42,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
+    params.ignorefstrcap = true -- Smite of Rage doesn't have an fSTR cap
 
-    return damage
+    return xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
 end
 
 return spellObject

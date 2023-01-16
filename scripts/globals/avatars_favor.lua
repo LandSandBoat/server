@@ -111,54 +111,63 @@ local shouldAvatarsFavorBeApplied = function(petId)
 end
 
 local removeAvatarsFavorDebuffsFromPet = function(target)
-    local petId = target:getPetID()
-    if  -- Different pet states for in and out of retail / eras
-        shouldAvatarsFavorBeApplied(petId) and
-        xi.settings.main.ENABLE_SOA == 0
-    then
-        local pet = target:getPet()
-        pet:addMod(xi.mod.MATT, 20)
-        pet:addMod(xi.mod.ATTP, 20)
-        pet:addMod(xi.mod.ACC, 10)
-        pet:addMod(xi.mod.DEFP, 10)
+    local pet = target:getPet()
+    if pet then
+        local petId = pet:getPetID()
+        if  -- Different pet states for in and out of retail / eras
+            shouldAvatarsFavorBeApplied(petId) and
+            xi.settings.main.ENABLE_SOA == 0
+        then
+            pet:addMod(xi.mod.MATT, 20)
+            pet:addMod(xi.mod.ATTP, 20)
+            pet:addMod(xi.mod.ACC, 10)
+            pet:addMod(xi.mod.DEFP, 10)
+        end
     end
 end
 
 xi.avatarsFavor.applyAvatarsFavorAuraToPet = function(target, effect)
-    local petId = target:getPetID()
-    if shouldAvatarsFavorBeApplied(petId) then
-        local power = avatarsFavorEffect[petId].scaling[effect:getPower()]
-        local avatarEffect = avatarsFavorEffect[petId].effect
+    local pet = target:getPet()
+    if pet then
+        local petId = pet:getPetID()
+        if shouldAvatarsFavorBeApplied(petId) then
+            local power = avatarsFavorEffect[petId].scaling[effect:getPower()]
+            local avatarEffect = avatarsFavorEffect[petId].effect
 
-        --Useful debug message
-        --printf("Power %d, Effect %d", effect:getPower(), power)
+            --Useful debug message
+            --printf("Power %d, Effect %d", effect:getPower(), power)
 
-        target:getPet():addStatusEffectEx(avatarEffect, avatarEffect, 6, 3, 15, avatarEffect, power, xi.auraTarget.ALLIES, bit.bor(xi.effectFlag.NO_LOSS_MESSAGE, xi.effectFlag.AURA))
+            pet:addStatusEffectEx(avatarEffect, avatarEffect, 6, 3, 15, avatarEffect, power, xi.auraTarget.ALLIES, bit.bor(xi.effectFlag.NO_LOSS_MESSAGE, xi.effectFlag.AURA))
+        end
     end
 end
 
 xi.avatarsFavor.removeAvatarsFavorAuraFromPet = function(target)
-    local petId = target:getPetID()
-    if shouldAvatarsFavorBeApplied(petId) then
-        local pet = target:getPet()
-        if pet:hasStatusEffect(avatarsFavorEffect[petId].effect) then
-            pet:delStatusEffect(avatarsFavorEffect[petId].effect)
-        end
+    local pet = target:getPet()
+    if pet then
+        local petId = pet:getPetID()
+        if shouldAvatarsFavorBeApplied(petId) then
+            if pet:hasStatusEffect(avatarsFavorEffect[petId].effect) then
+                pet:delStatusEffect(avatarsFavorEffect[petId].effect)
+            end
 
-        removeAvatarsFavorDebuffsFromPet(target)
+            removeAvatarsFavorDebuffsFromPet(target)
+        end
     end
 end
 
 xi.avatarsFavor.applyAvatarsFavorDebuffsToPet = function(target)
-    local petId = target:getPetID()
-    if  -- Different pet states for in and out of retail / eras
-        shouldAvatarsFavorBeApplied(petId) and
-        xi.settings.main.ENABLE_SOA == 0
-    then
-        local pet = target:getPet()
-        pet:delMod(xi.mod.MATT, 20) -- Other than MATT most of these values are myth and guesses from multiple sources
-        pet:delMod(xi.mod.ATTP, 20)
-        pet:delMod(xi.mod.ACC, 10)
-        pet:delMod(xi.mod.DEFP, 10)
+    local pet = target:getPet()
+    if pet then
+        local petId = pet:getPetID()
+        if  -- Different pet states for in and out of retail / eras
+            shouldAvatarsFavorBeApplied(petId) and
+            xi.settings.main.ENABLE_SOA == 0
+        then
+            pet:delMod(xi.mod.MATT, 20) -- Other than MATT most of these values are myth and guesses from multiple sources
+            pet:delMod(xi.mod.ATTP, 20)
+            pet:delMod(xi.mod.ACC, 10)
+            pet:delMod(xi.mod.DEFP, 10)
+        end
     end
 end

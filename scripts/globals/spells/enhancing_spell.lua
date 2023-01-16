@@ -42,23 +42,23 @@ local pTable =
     [xi.magic.spell.BARTHUNDRA   ] = { 2, xi.effect.BARTHUNDER,     1,    0,  480, true,  true,  0 },
     [xi.magic.spell.BARWATERA    ] = { 2, xi.effect.BARWATER,       1,    0,  480, true,  true,  0 },
 
-    -- Bar-Element
-    [xi.magic.spell.BARAMNESIA   ] = { 1, xi.effect.BARAMNESIA,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARBLIND     ] = { 1, xi.effect.BARBLIND,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPARALYZE  ] = { 1, xi.effect.BARPARALYZE,    1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPETRIFY   ] = { 1, xi.effect.BARPETRIFY,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPOISON    ] = { 1, xi.effect.BARPOISON,      1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSILENCE   ] = { 1, xi.effect.BARSILENCE,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSLEEP     ] = { 1, xi.effect.BARSLEEP,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARVIRUS     ] = { 1, xi.effect.BARVIRUS,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARAMNESRA   ] = { 2, xi.effect.BARAMNESIA,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARBLINDRA   ] = { 2, xi.effect.BARBLIND,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPARALYZRA ] = { 2, xi.effect.BARPARALYZE,    1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPETRA     ] = { 2, xi.effect.BARPETRIFY,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPOISONRA  ] = { 2, xi.effect.BARPOISON,      1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSILENCERA ] = { 2, xi.effect.BARSILENCE,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.effect.BARSLEEP,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARVIRA      ] = { 2, xi.effect.BARVIRUS,       1,    1,  480, true,  true,  0 },
+    -- Bar-Effect
+    [xi.magic.spell.BARAMNESIA   ] = { 1, xi.effect.BARAMNESIA,     1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARBLIND     ] = { 1, xi.effect.BARBLIND,       1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARPARALYZE  ] = { 1, xi.effect.BARPARALYZE,    1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARPETRIFY   ] = { 1, xi.effect.BARPETRIFY,     1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARPOISON    ] = { 1, xi.effect.BARPOISON,      1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARSILENCE   ] = { 1, xi.effect.BARSILENCE,     1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARSLEEP     ] = { 1, xi.effect.BARSLEEP,       1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARVIRUS     ] = { 1, xi.effect.BARVIRUS,       1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARAMNESRA   ] = { 2, xi.effect.BARAMNESIA,     1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARBLINDRA   ] = { 2, xi.effect.BARBLIND,       1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARPARALYZRA ] = { 2, xi.effect.BARPARALYZE,    1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARPETRA     ] = { 2, xi.effect.BARPETRIFY,     1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARPOISONRA  ] = { 2, xi.effect.BARPOISON,      1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARSILENCERA ] = { 2, xi.effect.BARSILENCE,     1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.effect.BARSLEEP,       1,   20,  480, true,  true,  0 },
+    [xi.magic.spell.BARVIRA      ] = { 2, xi.effect.BARVIRUS,       1,   20,  480, true,  true,  0 },
 
     -- Blink
     [xi.magic.spell.BLINK        ] = { 1, xi.effect.BLINK,          1,    2,  300, true,  false, 0 },
@@ -203,12 +203,6 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         end
 
         basePower = utils.clamp(basePower, 40, 150) -- Max is 150 and min is 40 at skill 0.
-    -- Bar-Status
-    elseif
-        spellEffect == xi.effect.BARAMNESIA or
-        (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS)
-    then
-        basePower = basePower + skillLevel / 50 -- This is WRONG. SO SO WRONG.
 
     -- Boost-Stat / Gain-Stat
     elseif
@@ -304,7 +298,7 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
         spellEffect == xi.effect.BARAMNESIA or
         (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS)
     then
-        finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+        finalPower = finalPower + caster:getMerit(xi.merit.BAR_SPELL_EFFECT)
 
     -- Protect/Protectra
     elseif spellEffect == xi.effect.PROTECT then
@@ -432,6 +426,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     local spellId           = spell:getID()
     local spellGroup        = spell:getSpellGroup()
     local magicDefenseBonus = 0
+
     -- Get Variables from Parameters Table.
     local tier            = pTable[spellId][1]
     local spellEffect     = pTable[spellId][2]
@@ -447,6 +442,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         magicDefenseBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
+
     -- Embrava
     elseif spellEffect == xi.effect.EMBRAVA then
         -- If Tabula Rasa wears before spell goes off, no Embrava for you!

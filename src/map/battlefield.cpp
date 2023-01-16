@@ -527,9 +527,16 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         m_Zone->updateCharLevelRestriction(PChar);
 
-        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+        if (leavecode == BATTLEFIELD_LEAVE_CODE_EXIT && PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
         {
-            PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->SetSubPower(0);
+            if (GetStatus() == BATTLEFIELD_STATUS_LOCKED)
+            {
+                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            }
+            else
+            {
+                setPlayerEntered(PChar, false);
+            }
         }
 
         if (PChar->isDead())
@@ -975,7 +982,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
                     for (auto& deathMobId : group.mobIds)
                     {
                         CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(deathMobId, TYPE_MOB | TYPE_PET);
-                        if (PMob->isDead())
+                        if (PMob != nullptr && PMob->isDead())
                         {
                             ++deathCount;
                         }
@@ -1005,4 +1012,32 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
             }
         }
     }
+}
+
+void CBattlefield::setPlayerEntered(CCharEntity* PChar, bool entered)
+{
+    CStatusEffect* effect = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+
+    if (effect == nullptr)
+    {
+        ShowError("Effect was null.");
+        return;
+    }
+
+    effect->SetTier(entered ? 1 : 0);
+}
+
+bool CBattlefield::hasPlayerEntered(CCharEntity* PChar)
+{
+    if (!PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+    {
+        return false;
+    }
+
+    return PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetTier() == 1;
+}
+
+uint16 CBattlefield::getBattlefieldArea(CCharEntity* PChar)
+{
+    return PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower();
 }

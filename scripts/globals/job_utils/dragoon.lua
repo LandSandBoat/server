@@ -64,7 +64,7 @@ end
 local function getWyvern(player)
     local wyvern = player:getPet()
 
-    if wyvern and player:getPetID() == xi.pet.id.WYVERN then
+    if wyvern and wyvern:getPetID() == xi.pet.id.WYVERN then
         return wyvern
     end
 
@@ -705,7 +705,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
         -- The bit does not actually change the message.
         action:messageID(target:getID(), xi.msg.basic.JA_RECOVERS_HP)
         if magicBurst > 1  then
-            action:modifier(target:getID(), xi.actionModifier.MAGIC_BURST)
+            action:modifier(target:getID(), xi.msg.actionModifier.MAGIC_BURST)
         end
 
         return target:addHP(math.abs(damage))

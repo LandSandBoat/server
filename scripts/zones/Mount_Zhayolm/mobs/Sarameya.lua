@@ -21,9 +21,9 @@ end
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MEVA, 95)
     mob:addMod(xi.mod.MDEF, 30)
-    mob:addMod(xi.mod.SILENCERES, 20)
-    mob:addMod(xi.mod.GRAVITYRES, 20)
-    mob:addMod(xi.mod.LULLABYRES, 30)
+    mob:addMod(xi.mod.SILENCE_MEVA, 20)
+    mob:addMod(xi.mod.GRAVITY_MEVA, 20)
+    mob:addMod(xi.mod.LULLABY_MEVA, 30)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 

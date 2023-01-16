@@ -124,6 +124,15 @@ struct Pet_t
     int16 light_meva;
     int16 dark_meva;
 
+    int8 fire_res_rank;
+    int8 ice_res_rank;
+    int8 wind_res_rank;
+    int8 earth_res_rank;
+    int8 thunder_res_rank;
+    int8 water_res_rank;
+    int8 light_res_rank;
+    int8 dark_res_rank;
+
     Pet_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
@@ -185,6 +194,15 @@ struct Pet_t
         water_meva   = 0;
         light_meva   = 0;
         dark_meva    = 0;
+
+        fire_res_rank    = 0;
+        ice_res_rank     = 0;
+        wind_res_rank    = 0;
+        earth_res_rank   = 0;
+        thunder_res_rank = 0;
+        water_res_rank   = 0;
+        light_res_rank   = 0;
+        dark_res_rank    = 0;
     }
 };
 
@@ -233,6 +251,7 @@ namespace petutils
                 slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
                 fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
                 fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
+                fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
                 cmbDelay, name_prefix, mob_pools.skill_list_id \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
                 WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
@@ -305,20 +324,19 @@ namespace petutils
                 Pet->water_meva   = (int16)sql->GetIntData(45);
                 Pet->light_meva   = (int16)sql->GetIntData(46);
                 Pet->dark_meva    = (int16)sql->GetIntData(47);
-                /* Todo
-                Pet->fire_res_rank    = (int16)sql->GetIntData(??);
-                Pet->ice_res_rank     = (int16)sql->GetIntData(??);
-                Pet->wind_res_rank    = (int16)sql->GetIntData(??);
-                Pet->earth_res_rank   = (int16)sql->GetIntData(??);
-                Pet->thunder_res_rank = (int16)sql->GetIntData(??);
-                Pet->water_res_rank   = (int16)sql->GetIntData(??);
-                Pet->light_res_rank   = (int16)sql->GetIntData(??);
-                Pet->dark_res_rank    = (int16)sql->GetIntData(??);
-                */
 
-                Pet->cmbDelay       = (uint16)sql->GetIntData(48);
-                Pet->name_prefix    = (uint8)sql->GetUIntData(49);
-                Pet->m_MobSkillList = (uint16)sql->GetUIntData(50);
+                Pet->fire_res_rank    = (int8)sql->GetIntData(48);
+                Pet->ice_res_rank     = (int8)sql->GetIntData(49);
+                Pet->wind_res_rank    = (int8)sql->GetIntData(50);
+                Pet->earth_res_rank   = (int8)sql->GetIntData(51);
+                Pet->thunder_res_rank = (int8)sql->GetIntData(52);
+                Pet->water_res_rank   = (int8)sql->GetIntData(53);
+                Pet->light_res_rank   = (int8)sql->GetIntData(54);
+                Pet->dark_res_rank    = (int8)sql->GetIntData(55);
+
+                Pet->cmbDelay       = (uint16)sql->GetIntData(56);
+                Pet->name_prefix    = (uint8)sql->GetUIntData(57);
+                Pet->m_MobSkillList = (uint16)sql->GetUIntData(58);
 
                 g_PPetList.push_back(Pet);
             }

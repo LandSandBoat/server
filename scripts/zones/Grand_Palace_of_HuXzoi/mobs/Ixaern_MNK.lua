@@ -3,25 +3,24 @@
 --  Mob: Ix'aern MNK
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+require("scripts/globals/items")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addListener("ITEM_DROPS", "ITEM_DROPS_IXAERN_MNK", function(mobArg, loot)
+        local rate = mob:getLocalVar("[SEA]IxAern_DropRate")
+        loot:addGroupFixed(rate,
+        {
+            { item = xi.items.DEED_OF_PLACIDITY, weight = 750 },
+            { item = xi.items.VICE_OF_ANTIPATHY, weight = 250 },
+        })
+    end)
+end
+
 entity.onMobSpawn = function(mob)
-    -- adjust drops based on number of HQ Aern Organs traded to QM
-    local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
-    local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
-    if math.random(0, 1) > 0 then
-        SetDropRate(4398, 1851, chance * 10) -- Deed Of Placidity
-        SetDropRate(4398, 1901, 0)
-    else
-        SetDropRate(4398, 1851, 0)
-        SetDropRate(4398, 1901, chance * 10) -- Vice of Antipathy
-    end
-
-    qm:setLocalVar("[SEA]IxAern_DropRate", 0)
-
     mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
 end
 

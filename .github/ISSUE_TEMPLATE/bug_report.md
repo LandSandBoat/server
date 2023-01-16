@@ -15,7 +15,7 @@ assignees:
 
 ## OS / platform the server is running (if known)
 
-<!-- Windows10 / Unbuntu / Mac / ARM etc -->
+<!-- Windows10 / Ubuntu / Mac / ARM etc -->
 
 ## Branch affected by issue <!-- Change to the branch the issue exists on (if relevant) -->
 

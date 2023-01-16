@@ -18,42 +18,20 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-
 #pragma once
 
 #include "common/application.h"
-#include "common/console_service.h"
-#include "common/logging.h"
+
+class HTTPServer;
 
 class WorldServer final : public Application
 {
 public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
-    : Application("world", std::move(pArgParser))
-    {
-        // World server should _mostly_ be comprised of ZMQ handlers and timed tasks.
+    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    ~WorldServer() override;
 
-        // clang-format off
-        gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
-        [](std::vector<std::string> inputs)
-        {
-            fmt::print("TODO: Some stats!\n");
-        });
-        // clang-format on
-    }
-
-    ~WorldServer() override
-    {
-        // Everything should be handled with RAII
-    }
-
-    void Tick() override
-    {
-        Application::Tick();
-
-        // World Server specific things
-    }
+    void Tick() override;
 
 private:
-    // World server doesn't need external-facing sockets
+    std::unique_ptr<HTTPServer> httpServer;
 };

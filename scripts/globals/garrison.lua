@@ -463,13 +463,13 @@ local spawnNPC = function(zone, x, y, z, rot, name, look)
         groupId = 35,
         groupZoneId = xi.zone.NORTH_GUSTABERG,
 
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
         specialSpawnAnimation = true,
     })
 
     -- Use the mob object as you normally would
     mob:setSpawn(x, y, z, rot)
-    mob:setDropID(0)
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 
     mob:spawn()

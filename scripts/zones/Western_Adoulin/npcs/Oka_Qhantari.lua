@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Oka Qhantari
--- Type: Standard NPC and Quest NPC
 --  Involved With Quest: 'Order Up'
 -- !pos -30 3 -6 256
 -----------------------------------
@@ -20,9 +19,6 @@ entity.onTrigger = function(player, npc)
     if orderUp == QUEST_ACCEPTED and not orderOkaQhantari then
         -- Progresses Quest: 'Order Up'
         player:startEvent(71)
-    else
-        -- Standard Dialogue
-        player:startEvent(511)
     end
 end
 

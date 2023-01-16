@@ -120,6 +120,16 @@ void CLuaAction::setAnimation(uint32 actionTargetID, uint16 animation)
     }
 }
 
+auto CLuaAction::getCategory() -> uint8
+{
+    return m_PLuaAction->actiontype;
+}
+
+void CLuaAction::setCategory(uint8 category)
+{
+    m_PLuaAction->actiontype = static_cast<ACTIONTYPE>(category);
+}
+
 void CLuaAction::speceffect(uint32 actionTargetID, uint8 speceffect)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
@@ -223,6 +233,8 @@ void CLuaAction::Register()
     SOL_REGISTER("messageID", CLuaAction::messageID);
     SOL_REGISTER("getAnimation", CLuaAction::getAnimation);
     SOL_REGISTER("setAnimation", CLuaAction::setAnimation);
+    SOL_REGISTER("getCategory", CLuaAction::getCategory);
+    SOL_REGISTER("setCategory", CLuaAction::setCategory);
     SOL_REGISTER("speceffect", CLuaAction::speceffect);
     SOL_REGISTER("reaction", CLuaAction::reaction);
     SOL_REGISTER("modifier", CLuaAction::modifier);

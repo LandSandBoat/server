@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(server C CXX)
 
+cmake_policy(SET CMP0069 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
+
 set_property(GLOBAL PROPERTY CXX_STANDARD 17)
 set_property(GLOBAL PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(GLOBAL PROPERTY CXX_EXTENSIONS ON)

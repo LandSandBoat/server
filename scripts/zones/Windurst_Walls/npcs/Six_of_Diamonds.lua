@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Six of Diamonds
--- Working 100%
 -----------------------------------
 local entity = {}
 

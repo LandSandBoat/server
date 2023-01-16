@@ -35,6 +35,7 @@
 #include "lua_battlefield.h"
 #include "lua_instance.h"
 #include "lua_item.h"
+#include "lua_loot.h"
 #include "lua_mobskill.h"
 #include "lua_petskill.h"
 #include "lua_spell.h"
@@ -199,6 +200,11 @@ namespace luautils
                 version::GetGitCommitSubject(),
                 version::GetGitDate());
         });
+
+        lua.set_function("GetFirstID", [](std::string const& name)
+        {
+            return "LOOKUP_" + name;
+        });
         // clang-format on
 
         // Register Sol Bindings
@@ -207,6 +213,7 @@ namespace luautils
         CLuaBaseEntity::Register();
         CLuaBattlefield::Register();
         CLuaInstance::Register();
+        CLuaLootContainer::Register();
         CLuaMobSkill::Register();
         CLuaPetSkill::Register();
         CLuaTriggerArea::Register();
@@ -766,8 +773,14 @@ namespace luautils
 
         // Make sure this has been run at least once!
         auto result = lua.safe_script_file("scripts/globals/zone.lua");
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError(fmt::format("Failed to load globals/zone.lua: {}", err.what()));
+        }
 
         // clang-format off
+        std::string lookupPrefix = "LOOKUP_";
         auto handleZone = [&](CZone* PZone)
         {
             auto zoneName = PZone->GetName();
@@ -782,54 +795,58 @@ namespace luautils
                     {
                         for (auto [innerKey, innerValue] : outerValue.as<sol::table>())
                         {
-                            if (innerKey.get_type() == sol::type::string && innerValue.get_type() == sol::type::number)
+                            if (innerKey.get_type() == sol::type::string && innerValue.get_type() == sol::type::string)
                             {
-                                auto name = to_upper(innerKey.as<std::string>());
-                                auto num  = innerValue.as<int32>();
+                                auto innerName  = to_upper(innerKey.as<std::string>());
+                                auto lookupName = innerValue.as<std::string>();
 
-                                // -1 == DYNAMIC_LOOKUP
-                                if (num == -1)
+                                if (!starts_with(lookupName, lookupPrefix))
                                 {
-                                    bool found = false;
-                                    if (outerName == "mob")
-                                    {
-                                        // TODO: Execute this as a single query per-zone and pull out the desired results.
-                                        auto query = fmt::sprintf("SELECT mobid FROM mob_spawn_points "
-                                                            "WHERE ((mobid >> 12) & 0xFFF) = %i AND "
-                                                            "UPPER(REPLACE(mobname, '-', '_')) = '%s' "
-                                                            "LIMIT 1;", PZone->GetID(), name.c_str());
-                                        DebugIDLookup(query.c_str());
-                                        auto ret = sql->Query(query.c_str());
-                                        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                                        {
-                                            lua["zones"][PZone->GetID()][outerName][name] = sql->GetUIntData(0);
-                                            found = true;
-                                            DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
-                                                zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][name].get<uint32>()));
-                                        }
-                                    }
-                                    else if (outerName == "npc")
-                                    {
-                                        // TODO: Execute this as a single query per-zone and pull out the desired results.
-                                        auto query = fmt::sprintf("SELECT npcid FROM npc_list "
-                                                            "WHERE ((npcid >> 12) & 0xFFF) = %i AND "
-                                                            "UPPER(REPLACE(CAST(`name` as CHAR(64)), '-', '_')) = '%s' "
-                                                            "LIMIT 1;", PZone->GetID(), name.c_str());
-                                        DebugIDLookup(query.c_str());
-                                        auto ret = sql->Query(query.c_str());
-                                        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                                        {
-                                            lua["zones"][PZone->GetID()][outerName][name] = sql->GetUIntData(0);
-                                            found = true;
-                                            DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
-                                                zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][name].get<uint32>()));
-                                        }
-                                    }
+                                    continue;
+                                }
 
-                                    if (!found)
+                                // We have a lookup string, remove the prefix
+                                lookupName = lookupName.substr(lookupPrefix.length());
+
+                                bool found = false;
+                                if (outerName == "mob")
+                                {
+                                    // TODO: Execute this as a single query per-zone and pull out the desired results.
+                                    auto query = fmt::sprintf("SELECT mobid FROM mob_spawn_points "
+                                                        "WHERE ((mobid >> 12) & 0xFFF) = %i AND "
+                                                        "UPPER(REPLACE(mobname, '-', '_')) = '%s' "
+                                                        "LIMIT 1;", PZone->GetID(), lookupName.c_str());
+                                    DebugIDLookup(query.c_str());
+                                    auto ret = sql->Query(query.c_str());
+                                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                                     {
-                                        ShowError(fmt::format("Could not complete id lookup for {}.ID.{}.{}", zoneName, outerName, name))
+                                        lua["zones"][PZone->GetID()][outerName][innerName] = sql->GetUIntData(0);
+                                        found = true;
+                                        DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
+                                            zoneName, outerName, innerName, lua["zones"][PZone->GetID()][outerName][innerName].get<uint32>()));
                                     }
+                                }
+                                else if (outerName == "npc")
+                                {
+                                    // TODO: Execute this as a single query per-zone and pull out the desired results.
+                                    auto query = fmt::sprintf("SELECT npcid FROM npc_list "
+                                                        "WHERE ((npcid >> 12) & 0xFFF) = %i AND "
+                                                        "UPPER(REPLACE(CAST(`name` as CHAR(64)), '-', '_')) = '%s' "
+                                                        "LIMIT 1;", PZone->GetID(), lookupName.c_str());
+                                    DebugIDLookup(query.c_str());
+                                    auto ret = sql->Query(query.c_str());
+                                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                                    {
+                                        lua["zones"][PZone->GetID()][outerName][innerName] = sql->GetUIntData(0);
+                                        found = true;
+                                        DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
+                                            zoneName, outerName, innerName, lua["zones"][PZone->GetID()][outerName][innerName].get<uint32>()));
+                                    }
+                                }
+
+                                if (!found)
+                                {
+                                    ShowError(fmt::format("Could not complete id lookup for {}.ID.{}.{}", zoneName, outerName, innerName))
                                 }
                             }
                         }
@@ -3446,6 +3463,8 @@ namespace luautils
 
                     // onMobDeath(mob, player, optParams)
                     auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, optParams, onMobDeath);
+
+                    // NOTE: result is only NOT valid if the function call fails. If it returns nil its still valid (this is expected)
                     if (!result.valid())
                     {
                         sol::error err = result;
@@ -3464,6 +3483,8 @@ namespace luautils
 
             // onMobDeath(mob, player, optParams)
             auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, optParams, onMobDeath);
+
+            // NOTE: result is only NOT valid if the function call fails. If it returns nil its still valid (this is expected)
             if (!result.valid())
             {
                 sol::error err = result;
@@ -4558,6 +4579,58 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     *  Called on Server Start                                               *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnServerStart()
+    {
+        TracyZoneScoped;
+
+        auto onServerStart = lua["xi"]["server"]["onServerStart"];
+        if (!onServerStart.valid())
+        {
+            ShowWarning("luautils::onServerStart");
+            return;
+        }
+
+        auto result = onServerStart();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onServerStart: %s", err.what());
+            return;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Called on JST Midnight                                               *
+     *                                                                       *
+     ************************************************************************/
+
+    void OnJSTMidnight()
+    {
+        TracyZoneScoped;
+
+        auto onJSTMidnight = lua["xi"]["server"]["onJSTMidnight"];
+        if (!onJSTMidnight.valid())
+        {
+            ShowWarning("luautils::onJSTMidnight");
+            return;
+        }
+
+        auto result = onJSTMidnight();
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onJSTMidnight: %s", err.what());
+            return;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Called on TimeServer Tick (every 2400ms)                             *
      *                                                                       *
      ************************************************************************/
@@ -4805,6 +4878,7 @@ namespace luautils
     }
 
     /************************************************************************
+     *   DEPRECATED: Use mob:addListener("ITEM_DROPS", ...) instead.         *
      *   Change drop rate of a mob                                           *
      *   1st number: dropid in mob_droplist.sql                              *
      *   2nd number: itemid in mob_droplist.sql                              *

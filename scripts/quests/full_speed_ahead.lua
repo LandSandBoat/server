@@ -5,6 +5,8 @@ require('scripts/globals/status')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
+local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
+-----------------------------------
 
 --[[
 Debugging:
@@ -27,10 +29,10 @@ FULL_SPEED_AHEAD effect power:
 xi = xi or {}
 xi.full_speed_ahead = xi.full_speed_ahead or {}
 
-xi.full_speed_ahead.duration = 600
-xi.full_speed_ahead.motivation_decay = 2
+xi.full_speed_ahead.duration              = 600
+xi.full_speed_ahead.motivation_decay      = 2
 xi.full_speed_ahead.motivation_food_bonus = 15
-xi.full_speed_ahead.pep_growth = 1
+xi.full_speed_ahead.pep_growth            = 1
 
 xi.full_speed_ahead.onEffectGain = function(player, effect)
     player:setLocalVar("FSA_Time", os.time() + xi.full_speed_ahead.duration)
@@ -63,7 +65,6 @@ xi.full_speed_ahead.tick = function(player, effect)
     player:setLocalVar("FSA_Motivation", player:getLocalVar("FSA_Motivation") - xi.full_speed_ahead.motivation_decay + effect:getPower())
     player:setLocalVar("FSA_Pep", player:getLocalVar("FSA_Pep") + xi.full_speed_ahead.pep_growth + effect:getPower())
 
-    local ID = zones[xi.zone.BATALLIA_DOWNS]
     local timeLeft   = player:getLocalVar("FSA_Time") - os.time()
     local motivation = player:getLocalVar("FSA_Motivation")
     local pep        = player:getLocalVar("FSA_Pep")
@@ -73,8 +74,8 @@ xi.full_speed_ahead.tick = function(player, effect)
     local foodData = {}
     for i = 0, 7 do
         if bit.band(foodByte, bit.lshift(1, i)) > 0 then
-            table.insert(foodData, ID.npc.BLUE_BEAM_BASE + i)
-            table.insert(foodData, ID.npc.RAPTOR_FOOD_BASE + i)
+            table.insert(foodData, batalliaID.npc.BLUE_BEAM_BASE + i)
+            table.insert(foodData, batalliaID.npc.RAPTOR_FOOD_BASE + i)
         end
     end
 
@@ -91,7 +92,6 @@ xi.full_speed_ahead.tick = function(player, effect)
 end
 
 xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
-    local ID = zones[xi.zone.BATALLIA_DOWNS]
     local foodByte   = player:getLocalVar("FSA_Food")
     local foodCount  = player:getLocalVar("FSA_FoodCount")
     local motivation = player:getLocalVar("FSA_Motivation")
@@ -110,26 +110,25 @@ xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
         -- Hearts
         player:independentAnimation(player, 251, 4)
 
-        player:messageSpecial(ID.text.RAPTOR_OVERCOME_MUNCHIES, newFoodCount, 5)
+        player:messageSpecial(batalliaID.text.RAPTOR_OVERCOME_MUNCHIES, newFoodCount, 5)
 
         if newFoodCount == 5 then
-            player:messageSpecial(ID.text.MEET_SYRILLIA)
+            player:messageSpecial(batalliaID.text.MEET_SYRILLIA)
         end
     end
 end
 
 xi.full_speed_ahead.onCheer = function(player)
-    local ID = zones[xi.zone.BATALLIA_DOWNS]
-    local timeLeft = player:getLocalVar("FSA_Time") - os.time()
+    local timeLeft   = player:getLocalVar("FSA_Time") - os.time()
     local motivation = player:getLocalVar("FSA_Motivation")
-    local pep = player:getLocalVar("FSA_Pep")
+    local pep        = player:getLocalVar("FSA_Pep")
 
     local newMotivation = utils.clamp(motivation + (pep / 2), 0, 100)
 
     player:setLocalVar("FSA_Motivation", newMotivation)
     player:setLocalVar("FSA_Pep", 0)
 
-    player:messageSpecial(ID.text.RAPTOR_SECOND_WIND)
+    player:messageSpecial(batalliaID.text.RAPTOR_SECOND_WIND)
 
     -- Music Notes
     player:independentAnimation(player, 252, 4)

@@ -59,7 +59,7 @@ enum class ECOSYSTEM : uint8
     EMPTY          = 12,
     HUMANOID       = 13,
     LIZARD         = 14,
-    LUMORIAN       = 15,
+    LUMINIAN       = 15,
     LUMINION       = 16,
     PLANTOID       = 17,
     UNCLASSIFIED   = 18,
@@ -768,8 +768,6 @@ public:
     CBattleEntity*  PLastAttacker;
     time_point      LastAttacked;
     battlehistory_t BattleHistory; // Stores info related to most recent combat actions taken towards this entity.
-
-    bool m_bReleaseTargIDOnDeath = false;
 
     std::unique_ptr<CStatusEffectContainer> StatusEffectContainer;
     std::unique_ptr<CRecastContainer>       PRecastContainer;

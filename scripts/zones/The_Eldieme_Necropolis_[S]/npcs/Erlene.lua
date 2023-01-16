@@ -71,13 +71,13 @@ entity.onTrigger = function(player, npc)
         mLvl >= 5 and
         not (player:hasSpell(478) and player:hasSpell(502))
     then
-            player:startEvent(47)
+        player:startEvent(47)
     elseif
         onSabbatical == QUEST_AVAILABLE and
         mJob == xi.job.SCH and
         mLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
-            player:startEvent(18)
+        player:startEvent(18)
     elseif onSabbatical == QUEST_ACCEPTED then
         if onSabbaticalProgress < 3 then
             player:startEvent(19)
