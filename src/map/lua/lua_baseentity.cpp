@@ -11183,7 +11183,7 @@ bool CLuaBaseEntity::getClaimable()
  *  Function: clearEnmityForEntity(...)
  *  Purpose :
  *  Example : mob:clearEnmityForEntity(player)
- *  Notes   : Taken from LSB. When merging from upstream, please accept theirs.
+ *  Notes   :
  ************************************************************************/
 
 void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
@@ -17042,6 +17042,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearEnmity", CLuaBaseEntity::clearEnmity);
     SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
     SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
+    SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
