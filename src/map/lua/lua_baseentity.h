@@ -600,6 +600,7 @@ public:
     auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
     void  setClaimable(bool claimable);
     bool  getClaimable();
+    void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
