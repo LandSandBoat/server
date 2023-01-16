@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Mercedes
+-- NPC: Mercedes
+-- !pos -363.256 0.004 -533.551 70
 -----------------------------------
 local entity = {}
 
