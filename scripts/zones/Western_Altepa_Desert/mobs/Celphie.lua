@@ -3,11 +3,12 @@
 --   NM: Celphie
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobFight = function(mob, target)
-    if mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
+entity.onMobWeaponSkill = function(target, mob, skill)
+    if skill:getID() == xi.jsa.HUNDRED_FISTS then
         mob:addMod(xi.mod.REGEN, 20)
     end
 end
