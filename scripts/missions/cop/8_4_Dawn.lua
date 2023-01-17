@@ -14,7 +14,6 @@
 require('scripts/globals/bcnm')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
-require('scripts/globals/keyitems')
 require('scripts/globals/zone')
 -----------------------------------
 
