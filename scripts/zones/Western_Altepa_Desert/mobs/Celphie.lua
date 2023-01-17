@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == xi.jsa.HUNDRED_FISTS then
-        mob:addMod(xi.mod.REGEN, 20)
+        mob:setMod(xi.mod.REGEN, 20)
     end
 end
 
