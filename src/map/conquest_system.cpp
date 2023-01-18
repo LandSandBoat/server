@@ -51,7 +51,7 @@ namespace conquest
         zoneutils::ForEachZone([](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
+            if (PZone->GetRegionID() < REGION_TYPE::PROMYVION)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Update);
                 PZone->ForEachChar([](CCharEntity* PChar)
