@@ -33,13 +33,13 @@ local doorCheck =
     xi.job.PUP,
     xi.job.DNC,
     xi.job.SCH,
-    xi.race.HUME_M,
-    xi.race.ELVAAN_M,
-    xi.race.TARU_M,
+    xi.race.HUME_F,
+    xi.race.ELVAAN_F,
+    xi.race.TARU_F,
     xi.race.MITHRA,
     xi.race.GALKA,
-    0,
     1,
+    0,
 }
 
 local marbleEateryDoorCheck = function(player)
@@ -48,26 +48,35 @@ local marbleEateryDoorCheck = function(player)
     -- Rotation is based on https://ffxiclopedia.fandom.com/wiki/Marble_Bridge_Eatery removed by 3 days to match up with http://www.mithrapride.org/vana_time/
     for k, v in pairs(doorCheck) do
         if dayofthemonth == k then
-            if (k >= 1 or k <= 3) and player:getNation() == v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
-            elseif (k >= 4 or k <= 23) and player:getMainJob() == v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+            if (k >= 1 and k <= 3) then
+                if player:getNation() == v then
+                    player:startEvent(124, (dayofthemonth - 1), 1)
+                else
+                    player:startEvent(124, (dayofthemonth - 1), 0)
+                end
+            elseif (k >= 4 and k <= 23) then
+                if player:getMainJob() == v then
+                    player:startEvent(124, (dayofthemonth - 1), 1)
+                else
+                    player:startEvent(124, (dayofthemonth - 1), 0)
+                end
+            -- The second argument to startevent() becomes dayofthemonth + 1 instead of - 1 from here, so that we skip over the RUN and GEO events.
             elseif k == 24 and player:getRace() > 0 and player:getRace() <= v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             elseif k == 25 and player:getRace() > doorCheck[k - 1] and player:getRace() <= v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             elseif k == 26 and player:getRace() > doorCheck[k - 1] and player:getRace() <= v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             elseif k == 27 and player:getRace() > doorCheck[k - 1] and player:getRace() <= v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             elseif k == 28 and player:getRace() > doorCheck[k - 1] and player:getRace() <= v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             elseif k == 29 and player:getGender() == v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             elseif k == 30 and player:getGender() == v then
-                player:startEvent(124, (dayofthemonth - 1), 1)
+                player:startEvent(124, (dayofthemonth + 1), 1)
             else
-                player:startEvent(124, (dayofthemonth - 1), 0)
+                player:startEvent(124, (dayofthemonth + 1), 0)
             end
         end
     end
