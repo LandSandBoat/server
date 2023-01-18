@@ -45,6 +45,7 @@ CREATE TRIGGER char_delete
     FOR EACH ROW
 BEGIN
     DELETE FROM `char_blacklist`  WHERE `charid_owner` = OLD.charid;
+    DELETE FROM `char_chocobos`   WHERE `charid` = OLD.charid;
     DELETE FROM `char_effects`    WHERE `charid` = OLD.charid;
     DELETE FROM `char_equip`      WHERE `charid` = OLD.charid;
     DELETE FROM `char_equip_saved` WHERE `charid` = OLD.charid;
