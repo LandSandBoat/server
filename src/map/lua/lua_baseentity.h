@@ -600,6 +600,7 @@ public:
     auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
     void  setClaimable(bool claimable);
     bool  getClaimable();
+    void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
@@ -848,6 +849,9 @@ public:
 
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
     uint8 getMannequinPose(uint16 itemID);
+
+    void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
+    void clearPacketMods();
 
     static void Register();
 };

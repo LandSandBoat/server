@@ -4608,6 +4608,7 @@ INSERT INTO `item_weapon` VALUES (21827,'ajja_scythe',7,0,223,223,223,2,1,528,30
 INSERT INTO `item_weapon` VALUES (21828,'eletta_scythe',7,0,231,231,231,2,1,528,322,0);   -- DMG:322 Delay:528
 INSERT INTO `item_weapon` VALUES (21829,'kaja_scythe',7,0,242,242,242,2,1,528,344,0);     -- DMG:344 Delay:528
 INSERT INTO `item_weapon` VALUES (21830,'drepanum',7,0,250,250,250,2,1,528,366,0);        -- DMG:366 Delay:528
+INSERT INTO `item_weapon` VALUES (21832,'agwus_scythe',7,0,248,248,248,2,1,528,352,0);    -- DMG:352 Delay:528
 INSERT INTO `item_weapon` VALUES (21854,'reienkyo',8,0,242,242,188,2,1,480,282,0);        -- DMG:282 Delay:480
 INSERT INTO `item_weapon` VALUES (21855,'lembing',8,0,242,242,188,2,1,492,313,0);         -- DMG:313 Delay:492
 INSERT INTO `item_weapon` VALUES (21857,'gungnir',8,0,269,269,228,2,1,492,347,0);         -- DMG:347 Delay:492

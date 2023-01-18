@@ -55,40 +55,121 @@ local nmsToShield =
     { "Sea_Serpent_Grotto", "Charybdis" },
 }
 
+-- Find the position of a target entity in a table,
+-- only if they have matching ids
+local tableFindPosByID = function(t, target)
+    for index, entity in ipairs(t) do
+        if entity:getID() == target:getID() then
+            return index
+        end
+    end
+    return nil
+end
+
+-- Using entity ids: dedupe a table in-place
+local dedupeByID = function(t)
+    local seen = {}
+    for index, entity in ipairs(t) do
+        if seen[entity:getID()] then
+            table.remove(t, index)
+        else
+            seen[entity:getID()] = true
+        end
+    end
+end
+
+-- Called when the claimshield period ends
+local timerFunc = function(mob)
+    local enmityList = mob:getEnmityList()
+
+    -- Filter so that pets will only count as a single entry along
+    -- with their masters
+    local entries = {}
+    for _, v in pairs(enmityList) do
+        local entity = v["entity"]
+        local master = entity:getMaster()
+        if
+            not entity:isPC() and
+            master and
+            master:isPC()
+        then
+            table.insert(entries, master)
+        else
+            table.insert(entries, entity)
+        end
+    end
+
+    -- Remove duplicates from entries table caused by pets or other shenanigans
+    dedupeByID(entries)
+
+    local numEntries = #entries
+
+    mob:setClaimable(true)
+    mob:setUnkillable(false)
+    mob:setCallForHelpBlocked(false)
+
+    mob:resetAI()
+    mob:setHP(mob:getMaxHP())
+    mob:delStatusEffectsByFlag(0xFFFF) -- Delete all effects with all flags
+
+    -- Select a winner
+    local claimWinner = utils.randomEntry(entries)
+    if claimWinner then
+        mob:updateClaim(claimWinner)
+
+        -- Message winner and their party/alliance that they've won
+        local alliance = claimWinner:getAlliance()
+        for _, member in pairs(alliance) do
+            local str = string.format("Your group has won the lottery for %s! (out of %i players)", mob:getName(), numEntries)
+            if #alliance == 1 then
+                str = string.format("You have won the lottery for %s! (out of %i players)", mob:getName(), numEntries)
+            end
+            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+
+            -- Remove from entries table
+            local pos = tableFindPosByID(entries, member)
+            if pos then
+                table.remove(entries, pos)
+            end
+        end
+
+        -- Everyone left in the entries table isn't part of the winning group, message them and
+        -- clear them from the enmity list
+        for _, member in pairs(entries) do
+            local str = string.format("Your group was not successful in the lottery for %s. (out of %i players)", mob:getName(), numEntries)
+            if #alliance == 1 then
+                str = string.format("Your were not successful in the lottery for %s. (out of %i players)", mob:getName(), numEntries)
+            end
+            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+            mob:clearEnmityForEntity(member)
+        end
+    end
+end
+
+-- Called on entity onMobSpawn, sets up timerFunc
+local listenerFunc = function(mob)
+    print(string.format("Applying Claimshield to %s for %ims", mob:getName(), claimshieldTime))
+
+    mob:setClaimable(false)
+    mob:setUnkillable(true)
+    mob:setCallForHelpBlocked(true)
+    mob:stun(claimshieldTime)
+
+    mob:timer(claimshieldTime, timerFunc)
+end
+
+-- Main entrypoint of each override
+local overrideFunc = function(mob)
+    mob:addListener("SPAWN", mob:getName() .. "_CS_SPAWN", listenerFunc)
+
+    -- Call original onMobInitialize
+    super(mob)
+end
+
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
 --     : so we deal with everything as strings for now.
 for _, entry in pairs(nmsToShield) do
-    local zoneName = entry[1]
-    local mobName = entry[2]
-
-    m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobSpawn", zoneName, mobName),
-    function(mob)
-        print(string.format("Applying Claimshield to %s for %ims", mob:getName(), claimshieldTime))
-        mob:setClaimable(false)
-        mob:setUnkillable(true)
-        mob:setCallForHelpBlocked(true)
-        mob:stun(claimshieldTime)
-
-        mob:timer(claimshieldTime, function(mobArg)
-            local enmityList = mobArg:getEnmityList()
-            local numEntries = #enmityList
-
-            mobArg:setClaimable(true)
-            mobArg:setUnkillable(false)
-            mob:setCallForHelpBlocked(false)
-
-            mobArg:resetAI()
-            mobArg:setHP(mobArg:getMaxHP())
-
-            local claimWinner = utils.randomEntry(enmityList)["entity"]
-            if claimWinner then
-                mobArg:updateClaim(claimWinner)
-                print(string.format("Claimshield Winner: %s - %s, out of %i entries", mobArg:getName(), claimWinner:getName(), numEntries))
-            end
-
-            super(mobArg)
-        end)
-    end)
+    m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobInitialize", entry[1], entry[2]), overrideFunc)
 end
 
 return m

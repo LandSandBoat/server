@@ -2181,6 +2181,9 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
+        // Scarlet Delirium: Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
         if (damage < 0)
         {
@@ -2485,6 +2488,9 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        // Scarlet Delirium: Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -5593,6 +5599,25 @@ namespace battleutils
             }
         }
         return damage;
+    }
+
+    void HandleScarletDelirium(CBattleEntity* PDefender, int32 damage)
+    {
+        // Check for Scarlet Delirium and update Effect Power with bonus from damage
+        CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
+
+        // Damage bonus calculation, update Effect Power
+        if (effectScarDel && effectScarDel->GetPower() == 0)
+        {
+            // Damage to Max HP Ratio
+            int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
+            int8   jpValue  = effectScarDel->GetSubPower();
+            uint32 duration = 90 + jpValue;
+
+            // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
+            PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), true);
+        }
     }
 
     int32 HandleSevereDamageEffect(CBattleEntity* PDefender, EFFECT effect, int32 damage, bool removeEffect)

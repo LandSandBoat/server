@@ -164,6 +164,8 @@
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+extern std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
+
 //======================================================//
 
 CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
@@ -10668,6 +10670,23 @@ bool CLuaBaseEntity::getClaimable()
 }
 
 /************************************************************************
+ *  Function: clearEnmityForEntity(...)
+ *  Purpose :
+ *  Example : mob:clearEnmityForEntity(player)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->PEnmityContainer->Clear(PEntity->getID());
+        return;
+    }
+    ShowError("lua::clearEnmityForEntity called on invalid entity");
+}
+
+/************************************************************************
  *  Function: addStatusEffect(effect, power, tick, duration)
  *  Purpose : Adds a specified Status Effect to the Entity
  *  Example : target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 3, 60)
@@ -14950,6 +14969,29 @@ uint8 CLuaBaseEntity::getMannequinPose(uint16 itemID)
 
     return 0;
 }
+
+void CLuaBaseEntity::addPacketMod(uint16 packetId, uint16 offset, uint8 value)
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        ShowInfo(fmt::format("Adding Packet Mod ({}): 0x{:04X}: 0x{:04X}: 0x{:02X}",
+                             PChar->name, packetId, offset, value));
+        PacketMods[PChar->id][packetId].emplace_back(std::make_pair(offset, value));
+    }
+}
+
+void CLuaBaseEntity::clearPacketMods()
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PacketMods[PChar->id].clear();
+    }
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -15487,6 +15529,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getNotorietyList", CLuaBaseEntity::getNotorietyList);
     SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
     SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
+    SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
@@ -15739,6 +15782,9 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
     SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
+
+    SOL_REGISTER("addPacketMod", CLuaBaseEntity::addPacketMod);
+    SOL_REGISTER("clearPacketMods", CLuaBaseEntity::clearPacketMods);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

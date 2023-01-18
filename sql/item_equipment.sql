@@ -9724,7 +9724,7 @@ INSERT INTO `item_equipment` VALUES (20563,'twashtar',99,119,262688,465,0,1,3,0,
 INSERT INTO `item_equipment` VALUES (20564,'twashtar',99,119,262688,571,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (20568,'wind_knife_+1',1,0,4194303,785,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (20569,'esikuva',1,0,4194303,804,0,0,3,0,0);
-INSERT INTO `item_equipment` VALUES (20570,'norgish_dagger',1,0,4194303,803,0,0,3,0,0); 
+INSERT INTO `item_equipment` VALUES (20570,'norgish_dagger',1,0,4194303,803,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20571,'infiltrator',1,0,4194303,805,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20573,'aern_dagger',1,0,4194303,826,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20574,'aern_dagger_ii',1,0,4194303,892,0,0,3,0,0);
@@ -10797,6 +10797,7 @@ INSERT INTO `item_equipment` VALUES (21827,'ajja_scythe',99,119,393,194,0,0,1,0,
 INSERT INTO `item_equipment` VALUES (21828,'eletta_scythe',99,119,393,201,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21829,'kaja_scythe',99,119,393,842,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21830,'drepanum',99,119,393,842,0,0,1,0,0);
+INSERT INTO `item_equipment` VALUES (21832,'agwus_scythe',99,119,128,883,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21854,'reienkyo',99,119,8192,391,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21855,'lembing',99,119,8192,214,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21857,'gungnir',99,119,8192,549,0,1,1,0,0);
