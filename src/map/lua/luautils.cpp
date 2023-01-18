@@ -1039,13 +1039,13 @@ namespace luautils
     uint8 GetRegionOwner(uint8 type)
     {
         TracyZoneScoped;
-        return conquest::GetRegionOwner(static_cast<REGION_TYPE>(type));
+        return conquest::GetRegionOwner(static_cast<REGION_ID>(type));
     }
 
     uint8 GetRegionInfluence(uint8 type)
     {
         TracyZoneScoped;
-        return conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(type));
+        return conquest::GetInfluenceGraphics(static_cast<REGION_ID>(type));
     }
 
     /************************************************************************

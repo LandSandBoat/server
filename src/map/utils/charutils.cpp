@@ -3877,7 +3877,7 @@ namespace charutils
         uint8       pcinzone = 0;
         uint8       minlevel = 0;
         uint8       maxlevel = PChar->GetMLevel();
-        REGION_TYPE region   = PChar->loc.zone->GetRegionID();
+        REGION_ID   region   = PChar->loc.zone->GetRegionID();
 
         if (PChar->PParty)
         {
@@ -3965,13 +3965,12 @@ namespace charutils
 
                     bool isInSignetZone =
                         PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) &&
-                        region >= REGION_TYPE::RONFAURE &&
-                        region <= REGION_TYPE::JEUNO;
+                        region <= REGION_ID::TAVNAZIAN_ARCHIPELAGO;
 
                     bool isInSanctionZone =
                         PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) &&
-                        region >= REGION_TYPE::WEST_AHT_URHGAN &&
-                        region <= REGION_TYPE::ALZADAAL;
+                        region >= REGION_ID::EMPIRE_OF_AHT_URHGAN &&
+                        region <= REGION_ID::RUINS_OF_ALZADAAL;
 
                     exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
 
@@ -4349,7 +4348,7 @@ namespace charutils
 
         // COMMITMENT from Capacity Bands
 
-        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT) && PChar->loc.zone->GetRegionID() != REGION_ID::ABYSSEA)
         {
             CStatusEffect* commitment = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT);
             int16          percentage = commitment->GetPower();
@@ -4643,17 +4642,17 @@ namespace charutils
 
         if (!expFromRaise)
         {
-            REGION_TYPE region = PChar->loc.zone->GetRegionID();
+            REGION_ID region = PChar->loc.zone->GetRegionID();
 
             // Should this user be awarded conquest points..
-            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && (region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO))
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region <= REGION_ID::TAVNAZIAN_ARCHIPELAGO)
             {
                 // Add influence for the players region..
                 conquest::AddConquestPoints(PChar, exp);
             }
 
             // Should this user be awarded imperial standing..
-            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && (region >= REGION_TYPE::WEST_AHT_URHGAN && region <= REGION_TYPE::ALZADAAL))
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && (region >= REGION_ID::EMPIRE_OF_AHT_URHGAN && region <= REGION_ID::RUINS_OF_ALZADAAL))
             {
                 charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.1f));
                 PChar->pushPacket(new CConquestPacket(PChar));
@@ -4661,7 +4660,7 @@ namespace charutils
 
             // Cruor Drops in Abyssea zones.
             uint16 Pzone = PChar->getZone();
-            if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
+            if (zoneutils::GetCurrentRegion(Pzone) == REGION_ID::ABYSSEA)
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
                 // uint32 Total  = charutils::GetPoints(PChar, "cruor");
@@ -5542,7 +5541,7 @@ namespace charutils
         TracyZoneScoped;
 
         int32 bonus = 0;
-        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION) && PChar->loc.zone->GetRegionID() != REGION_ID::ABYSSEA)
         {
             CStatusEffect* dedication = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_DEDICATION);
             int16          percentage = dedication->GetPower();

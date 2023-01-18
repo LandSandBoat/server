@@ -1221,25 +1221,25 @@ void CMobEntity::DropItems(CCharEntity* PChar)
 
         if (m_Element > 0)
         {
-            REGION_TYPE regionID = PChar->loc.zone->GetRegionID();
+            REGION_ID regionID = PChar->loc.zone->GetRegionID();
             switch (regionID)
             {
                 // Sanction Regions
-                case REGION_TYPE::WEST_AHT_URHGAN:
-                case REGION_TYPE::MAMOOL_JA_SAVAGE:
-                case REGION_TYPE::HALVUNG:
-                case REGION_TYPE::ARRAPAGO:
+                case REGION_ID::WEST_AHT_URHGAN:
+                case REGION_ID::MAMOOL_JA_SAVAGELANDS:
+                case REGION_ID::HALVUNG_TERRITORY:
+                case REGION_ID::ARRAPAGO_ISLANDS:
                     effect = 2;
                     break;
                 // Sigil Regions
-                case REGION_TYPE::RONFAURE_FRONT:
-                case REGION_TYPE::NORVALLEN_FRONT:
-                case REGION_TYPE::GUSTABERG_FRONT:
-                case REGION_TYPE::DERFLAND_FRONT:
-                case REGION_TYPE::SARUTA_FRONT:
-                case REGION_TYPE::ARAGONEAU_FRONT:
-                case REGION_TYPE::FAUREGANDI_FRONT:
-                case REGION_TYPE::VALDEAUNIA_FRONT:
+                case REGION_ID::THE_RONFAURE_FRONT:
+                case REGION_ID::THE_NORVALLEN_FRONT:
+                case REGION_ID::THE_GUSTABERG_FRONT:
+                case REGION_ID::THE_DERFLAND_FRONT:
+                case REGION_ID::THE_SARUTABARUTA_FRONT:
+                case REGION_ID::THE_ARAGONEU_FRONT:
+                case REGION_ID::THE_FAUREGANDI_FRONT:
+                case REGION_ID::THE_VALDEAUNIA_FRONT:
                     effect = 3;
                     break;
                 // Signet Regions

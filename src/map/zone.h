@@ -345,7 +345,7 @@ enum ZONEID : uint16
     MAX_ZONEID                          = 299,
 };
 
-enum class REGION_TYPE : uint8
+enum class REGION_ID : uint8
 {
     SAN_DORIA                  =  0,
     BASTOK                     =  1,
@@ -528,7 +528,7 @@ class CZone
 public:
     ZONEID             GetID();
     ZONE_TYPE          GetType();
-    REGION_TYPE        GetRegionID();
+    REGION_ID          GetRegionID();
     CONTINENT_TYPE     GetContinentID();
     uint8              getLevelRestriction();
     uint32             GetIP() const;
@@ -617,7 +617,7 @@ public:
     virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func);
     virtual void ForEachNpc(std::function<void(CNpcEntity*)> func);
 
-    CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
+    CZone(ZONEID ZoneID, REGION_ID RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
 
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
@@ -630,7 +630,7 @@ public:
 private:
     ZONEID         m_zoneID; // ID зоны
     ZONE_TYPE      m_zoneType;
-    REGION_TYPE    m_regionID;    // ID области
+    REGION_ID      m_regionID;    // ID области
     CONTINENT_TYPE m_continentID; // ID континента
     uint8          m_levelRestriction;
     std::string    m_zoneName;   // имя зоны

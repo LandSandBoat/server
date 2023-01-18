@@ -33,7 +33,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
  *                                                                       *
  ************************************************************************/
 
-CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
+CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_ID RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : CZone(ZoneID, RegionID, ContinentID, levelRestriction)
 {
 }

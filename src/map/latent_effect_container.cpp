@@ -715,25 +715,25 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         {
             CBattleEntity* PTarget = m_POwner->GetBattleTarget();
             expression =
-                PTarget != nullptr && m_POwner->GetMLevel() >= PTarget->GetMLevel() && m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
+                PTarget != nullptr && m_POwner->GetMLevel() >= PTarget->GetMLevel() && m_POwner->loc.zone->GetRegionID() < REGION_ID::WEST_AHT_URHGAN;
             break;
         }
         case LATENT::SANCTION_REGEN_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+            expression = m_POwner->loc.zone->GetRegionID() >= REGION_ID::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_ID::RUINS_OF_ALZADAAL &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SANCTION_REFRESH_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+            expression = m_POwner->loc.zone->GetRegionID() >= REGION_ID::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_ID::RUINS_OF_ALZADAAL &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REGEN_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
+            expression = m_POwner->loc.zone->GetRegionID() >= REGION_ID::THE_RONFAURE_FRONT &&
+                         m_POwner->loc.zone->GetRegionID() <= REGION_ID::THE_VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REFRESH_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
-                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
+            expression = m_POwner->loc.zone->GetRegionID() >= REGION_ID::THE_RONFAURE_FRONT &&
+                         m_POwner->loc.zone->GetRegionID() <= REGION_ID::THE_VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::STATUS_EFFECT_ACTIVE:
@@ -1063,12 +1063,12 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             {
                 case 0:
                     // under own nation's control
-                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && conquest::GetRegionOwner(region) == m_POwner->profile.nation &&
+                    expression = region < REGION_ID::WEST_AHT_URHGAN && conquest::GetRegionOwner(region) == m_POwner->profile.nation &&
                                  (hasSignet || hasSanction || hasSigil);
                     break;
                 case 1:
                     // outside of own nation's control
-                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && m_POwner->profile.nation != conquest::GetRegionOwner(region) &&
+                    expression = region < REGION_ID::WEST_AHT_URHGAN && m_POwner->profile.nation != conquest::GetRegionOwner(region) &&
                                  (hasSignet || hasSanction || hasSigil);
                     break;
             }
@@ -1083,17 +1083,17 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             }
 
             auto* PZone  = m_POwner->loc.zone;
-            auto  region = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
+            auto  region = static_cast<REGION_ID>(latentEffect.GetConditionsValue());
 
             switch (region)
             {
-                case REGION_TYPE::SANDORIA:
+                case REGION_ID::SAN_DORIA:
                     expression = m_POwner->profile.nation == 0 && PZone->GetRegionID() == region;
                     break;
-                case REGION_TYPE::BASTOK:
+                case REGION_ID::BASTOK:
                     expression = m_POwner->profile.nation == 1 && PZone->GetRegionID() == region;
                     break;
-                case REGION_TYPE::WINDURST:
+                case REGION_ID::WINDURST:
                     expression = m_POwner->profile.nation == 2 && PZone->GetRegionID() == region;
                     break;
                 default:
