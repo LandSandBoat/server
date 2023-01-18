@@ -553,11 +553,6 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
         }
         m_POwner->updatemask |= UPDATE_HP;
 
-        if (statusId == EFFECT_FOOD || statusId == EFFECT_DEDICATION)
-        {
-            m_POwner->StatusEffectContainer->SaveStatusEffects();
-        }
-
         return true;
     }
     else
@@ -796,7 +791,7 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
             if (flag & EFFECTFLAG_DAMAGE && isNightmare)
             {
                 // If it's a player, or player's pet, then taking damage should not wake the entity
-                if (this->m_POwner->objtype == TYPE_PC or this->m_POwner->objtype == TYPE_PET)
+                if (this->m_POwner->objtype == TYPE_PC || this->m_POwner->objtype == TYPE_PET)
                 {
                     continue;
                 }
