@@ -5,8 +5,8 @@
 -- 2Min, All Races
 -----------------------------------
 -- Enchantment: Synthesis image support
--- Duration: 2Min
--- Fishing Skill +3
+-- Duration: 2 Earth Hours
+-- Fishing Skill +2
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -37,7 +37,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FISHING_IMAGERY, 3, 0, 120)
+    target:addStatusEffect(xi.effect.FISHING_IMAGERY, 2, 0, 7200)
 end
 
 itemObject.onEffectGain = function(target, effect)
