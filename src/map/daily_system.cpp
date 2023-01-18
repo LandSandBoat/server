@@ -154,8 +154,8 @@ namespace daily
 
     void UpdateDailyTallyPoints()
     {
-        uint16 dailyTallyLimit  = settings::get<uint16>("map.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("map.DAILY_TALLY_AMOUNT");
+        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
+        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
 
         const char* fmtQuery = "UPDATE char_points \
                 SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
