@@ -758,7 +758,46 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
-    calcParams.finalDmg = finaldmg
+
+    -- DAMAGE Clamp
+    local minValue = 0
+
+    -- 1000 - 1050 DMG ~ 10 damage range
+    if finaldmg > 1000 and finaldmg <= 1100 then
+        minValue = math.floor((finaldmg - 1000) / 10)
+        minValue = minValue * 5 + 1000
+
+    -- 1050 - 1500 DMG ~ 15 damage range
+    elseif finaldmg > 1100 and finaldmg <= 2450 then
+        minValue = math.floor((finaldmg - 1100) / 15)
+        minValue = minValue * 5 + 1045
+
+    -- 1500 - 1800 DMG ~ 20 damage range
+    elseif finaldmg > 2450 and finaldmg <= 3750 then
+        minValue = math.floor((finaldmg - 2450) / 20)
+        minValue = minValue * 5 + 1500
+
+    -- 1800 - 1900 DMG ~ 50 damage range
+    elseif finaldmg > 3750 and finaldmg <= 4750 then
+        minValue = math.floor((finaldmg - 3750) / 50)
+        minValue = minValue * 5 + 1800
+
+    -- 1900 - 2000 DMG ~ 100 damage range
+    elseif finaldmg > 4750 and finaldmg <= 6750 then
+        minValue = math.floor((finaldmg - 4750) / 100)
+        minValue = minValue * 5 + 1900
+
+    -- 2000 and higher ~ 200 damage range
+    elseif finaldmg > 6750 then
+        minValue = math.floor((finaldmg - 6750) / 200)
+        minValue = minValue * 5 + 2000
+    end
+
+    -- Final operation.
+    if minValue > 0 then
+        calcParams.finalDmg = math.random(minValue, minValue + 5)
+    end
+
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
@@ -824,7 +863,45 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
-    calcParams.finalDmg = finaldmg
+
+    -- DAMAGE Clamp
+    local minValue = 0
+
+    -- 1000 - 1050 DMG ~ 10 damage range
+    if finaldmg > 1000 and finaldmg <= 1100 then
+        minValue = math.floor((finaldmg - 1000) / 10)
+        minValue = minValue * 5 + 1000
+
+    -- 1050 - 1500 DMG ~ 15 damage range
+    elseif finaldmg > 1100 and finaldmg <= 2450 then
+        minValue = math.floor((finaldmg - 1100) / 15)
+        minValue = minValue * 5 + 1045
+
+    -- 1500 - 1800 DMG ~ 20 damage range
+    elseif finaldmg > 2450 and finaldmg <= 3750 then
+        minValue = math.floor((finaldmg - 2450) / 20)
+        minValue = minValue * 5 + 1500
+
+    -- 1800 - 1900 DMG ~ 50 damage range
+    elseif finaldmg > 3750 and finaldmg <= 4750 then
+        minValue = math.floor((finaldmg - 3750) / 50)
+        minValue = minValue * 5 + 1800
+
+    -- 1900 - 2000 DMG ~ 100 damage range
+    elseif finaldmg > 4750 and finaldmg <= 6750 then
+        minValue = math.floor((finaldmg - 4750) / 100)
+        minValue = minValue * 5 + 1900
+
+    -- 2000 and higher ~ 200 damage range
+    elseif finaldmg > 6750 then
+        minValue = math.floor((finaldmg - 6750) / 200)
+        minValue = minValue * 5 + 2000
+    end
+
+    -- Final operation.
+    if minValue > 0 then
+        calcParams.finalDmg = math.random(minValue, minValue + 5)
+    end
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
@@ -926,6 +1003,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     else
         calcParams.shadowsAbsorbed = 1
     end
+
 
     calcParams.finalDmg = dmg
 
