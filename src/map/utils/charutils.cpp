@@ -3874,10 +3874,10 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        uint8       pcinzone = 0;
-        uint8       minlevel = 0;
-        uint8       maxlevel = PChar->GetMLevel();
-        REGION_ID   region   = PChar->loc.zone->GetRegionID();
+        uint8     pcinzone = 0;
+        uint8     minlevel = 0;
+        uint8     maxlevel = PChar->GetMLevel();
+        REGION_ID region   = PChar->loc.zone->GetRegionID();
 
         if (PChar->PParty)
         {

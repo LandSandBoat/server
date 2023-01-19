@@ -133,7 +133,7 @@ namespace conquest
     void LoseInfluencePoints(CCharEntity* PChar)
     {
         REGION_ID region = PChar->loc.zone->GetRegionID();
-        int         points = 0;
+        int       points = 0;
 
         switch (region)
         {
