@@ -514,6 +514,21 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
     PChar->pushPacket(new CMessageCombatPacket(PSpeaker, PChar, p0, p1, message));
 }
 
+/************************************************************************
+ *  Function: messageStandard(id)
+ *  Purpose : Sends a standard message
+ *  Example : player:messageStandard(287)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::messageStandard(uint16 messageID)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->pushPacket(new CMessageStandardPacket(messageID));
+    }
+}
+
 void CLuaBaseEntity::customMenu(sol::object const& obj)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -15009,6 +15024,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("messageSpecial", CLuaBaseEntity::messageSpecial);
     SOL_REGISTER("messageSystem", CLuaBaseEntity::messageSystem);
     SOL_REGISTER("messageCombat", CLuaBaseEntity::messageCombat);
+    SOL_REGISTER("messageStandard", CLuaBaseEntity::messageStandard);
     SOL_REGISTER("customMenu", CLuaBaseEntity::customMenu);
 
     // Variables
