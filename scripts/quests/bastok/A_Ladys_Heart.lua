@@ -94,7 +94,7 @@ quest.sections =
                         if quest:complete(player) then
                             player:confirmTrade()
                             local mhflag = player:getMoghouseFlag()
-                            player:setMoghouseFlag(bit.band(mhflag, 0x0002))
+                            player:setMoghouseFlag(mhflag + 0x0002)
                             player:messageSpecial(portBastokID.text.MOGHOUSE_EXIT)
                         end
 
