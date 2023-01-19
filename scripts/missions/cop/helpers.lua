@@ -181,7 +181,6 @@ xi.cop.helpers.spireEventFinish = function(mission, player, csid, option, npc)
         if numCompletedPromyvions == 3 then
             -- We need to make sure the fallthrough does not trigger an overriding
             -- teleport.
-            player:setLocalVar('toLufaise', 1)
             teleportLocation = xi.teleport.id.LUFAISE
         end
 
