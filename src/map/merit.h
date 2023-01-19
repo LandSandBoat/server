@@ -575,6 +575,7 @@ public:
     uint16 GetLimitPoints() const;
     uint8  GetMeritPoints() const;
     int32  GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar);
+    uint16 GetMeritCountInSameCategory(MERIT_TYPE merit);
 
     bool AddLimitPoints(uint16 points);  // automatically adds merit points > 10000
     bool IsMeritExist(MERIT_TYPE merit); // проверяем существование merit
