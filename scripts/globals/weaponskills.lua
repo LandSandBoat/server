@@ -771,7 +771,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
         minValue = math.floor((finaldmg - 4750) / 100)
         minValue = minValue * 5 + 1900
 
-   -- 2000 and higher ~ 200 damage range
+    -- 2000 and higher ~ 200 damage range
     elseif finaldmg > 6750 then
         minValue = math.floor((finaldmg - 6750) / 200)
         minValue = minValue * 5 + 2000
@@ -876,7 +876,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
         minValue = math.floor((finaldmg - 4750) / 100)
         minValue = minValue * 5 + 1900
 
-   -- 2000 and higher ~ 200 damage range
+    -- 2000 and higher ~ 200 damage range
     elseif finaldmg > 6750 then
         minValue = math.floor((finaldmg - 6750) / 200)
         minValue = minValue * 5 + 2000
