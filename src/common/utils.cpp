@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <regex>
 #include <string>
 
 #ifdef _MSC_VER
@@ -876,6 +877,11 @@ bool matches(std::string const& target, std::string const& pattern, std::string 
 bool starts_with(std::string const& target, std::string const& pattern)
 {
     return target.rfind(pattern, 0) != std::string::npos;
+}
+
+std::string replace(std::string const& target, std::string const& search, std::string const& replace)
+{
+    return std::regex_replace(target, std::regex(search), replace);
 }
 
 look_t stringToLook(std::string str)
