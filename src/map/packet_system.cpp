@@ -3800,9 +3800,6 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
 
-            // TODO: Handle 2F unlock
-            std::ignore = moghouse2FUnlocked;
-
             // Validate travel
             if (moghouseExitRegular || moghouseExitQuestZoneline || moghouseExitMogGardenZoneline)
             {
@@ -3815,11 +3812,25 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else if (requestedMoghouseFloorChange)
             {
-                // Toggle Moghouse 2F tracker flag
-                PChar->profile.mhflag ^= 0x40;
-
                 PChar->loc.destination = destinationZone;
                 PChar->loc.p           = {};
+
+                if (moghouse2FUnlocked)
+                {
+                    // Toggle Moghouse 2F tracker flag
+                    PChar->profile.mhflag ^= 0x40;
+                }
+                else
+                {
+                    // Set back to their starting position. Since we haven't yet figured out how to grey out the
+                    // "Change Floors" option.
+                    // TODO: Once we figure this out, make this punitive, like zoneline abuse - since this will
+                    //     : happen through packet abuse.
+                    PChar->loc.destination = startingZone;
+                    PChar->loc.p           = startingPos;
+                    PChar->status = STATUS_TYPE::NORMAL;
+                    ShowWarning("SmallPacket0x05E: Moghouse 2F requested without it being unlocked: %s", PChar->GetName());
+                }
             }
             else
             {
@@ -3877,6 +3888,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         ShowInfo("Zoning from zone %u to zone %u: %s", PChar->getZone(), PChar->loc.destination, PChar->GetName());
     }
+
     PChar->clearPacketList();
 
     if (PChar->loc.destination >= MAX_ZONEID)
