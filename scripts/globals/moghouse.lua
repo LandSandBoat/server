@@ -193,7 +193,7 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     then
         cs = xi.moghouse.moghouse2FUnlockCSs[player:getZoneID()]
 
-        player:setMoghouseFlag(bit.band(mhflag, 0x0020)) -- Set unlock flag now, rather than in onEventFinish
+        player:setMoghouseFlag(mhflag + 0x0020) -- Set unlock flag now, rather than in onEventFinish
 
         local nation = player:getNation()
         xi.moghouse.set2ndFloorStyle(player, nation)

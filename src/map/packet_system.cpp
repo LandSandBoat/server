@@ -6205,8 +6205,17 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
         // remodel mog house
         auto type = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105, Patio: 106
 
+        if (type == 106 && !charutils::hasKeyItem(PChar, 3051))
+        {
+            ShowWarning(fmt::format("Player {} is trying to remodel to MH2F to Patio without owning the KI to unlock it.", PChar->GetName()));
+            return;
+        }
+
         // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
         // 0x0100: ^ As above
+
+        // Extract original model and add 103 so it's in line with what comes in with the packet.
+        uint16 oldType = (uint8)(((PChar->profile.mhflag & 0x0100) + (PChar->profile.mhflag & 0x0080)) >> 7) + 103;
 
         // Clear bits first
         PChar->profile.mhflag &= ~(0x0080);
@@ -6216,7 +6225,20 @@ void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->profile.mhflag |= ((type - 103) << 7);
         charutils::SaveCharStats(PChar);
 
-        // TODO: It's possible to do this from 2F, so if you're on 2F (check the  flag), force a re-zone to get the new look
+        // TODO: Send message on successful remodel
+
+        // If the model changes AND you're on MH2F; force a rezone so the model change can take effect.
+        if (type != oldType && PChar->profile.mhflag & 0x0040)
+        {
+            auto zoneid = PChar->getZone();
+            auto ipp    = zoneutils::GetZoneIPP(zoneid);
+
+            PChar->loc.destination = zoneid;
+            PChar->status          = STATUS_TYPE::DISAPPEAR;
+
+            PChar->clearPacketList();
+            charutils::SendToZone(PChar, 2, ipp);
+        }
     }
     else
     {
@@ -7029,6 +7051,14 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
     CItemFurnishing* PItem = (CItemFurnishing*)PChar->getStorage(containerID)->GetItem(slotID);
 
+    // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
+    if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
+    {
+        ShowWarning(fmt::format("{} has tried to gardening pot {} ({}) on 2nd floor",
+                                PChar->GetName(), PItem->getID(), PItem->getName()));
+        return;
+    }
+
     if (PItem != nullptr && PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
     {
         if (PItem->getFlag() & ITEM_FLAG_WALLHANGING)
@@ -7046,7 +7076,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Update installed furniture placement orders
         // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE* 2> placedItems = { nullptr };
+        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE * 2> placedItems = { nullptr };
         for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(safeContainerId);
@@ -7247,6 +7277,13 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    if (!PPotItem->isGardeningPot())
+    {
+        ShowWarning(fmt::format("{} has tried to invalid gardening pot {} ({})",
+                                PChar->GetName(), PPotItem->getID(), PPotItem->getName()));
+        return;
+    }
+
     CItemContainer* PItemContainer = PChar->getStorage(containerID);
     CItem*          PItem          = PItemContainer->GetItem(slotID);
     if (PItem == nullptr || PItem->getQuantity() < 1)
@@ -7392,6 +7429,14 @@ void SmallPacket0x0FE(map_session_data_t* const PSession, CCharEntity* const PCh
     CItemFlowerpot* PItem          = (CItemFlowerpot*)PItemContainer->GetItem(slotID);
     if (PItem == nullptr)
     {
+        return;
+    }
+
+    // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
+    if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
+    {
+        ShowWarning(fmt::format("{} has tried to uproot gardening pot {} ({}) on 2nd floor",
+                                PChar->GetName(), PItem->getID(), PItem->getName()));
         return;
     }
 

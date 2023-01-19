@@ -108,7 +108,7 @@ quest.sections =
                         if quest:complete(player) then
                             player:confirmTrade()
                             local mhflag = player:getMoghouseFlag()
-                            player:setMoghouseFlag(bit.band(mhflag, 0x0008))
+                            player:setMoghouseFlag(mhflag + 0x0008)
                             player:messageSpecial(portJeunoID.text.MOGHOUSE_EXIT)
                         end
                     elseif player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
