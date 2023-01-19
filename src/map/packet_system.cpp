@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -7067,6 +7067,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             placedItems[i]->setOrder(placedItems[i]->getOrder() + 1);
         }
+
         // Set this item to being the most recently placed item
         PItem->setOrder(0);
 
@@ -7084,7 +7085,11 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (sql->Query(Query, extra, containerID, slotID, PChar->id) != SQL_ERROR && sql->AffectedRows() != 0 && !wasInstalled)
         {
-            PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
+            // Storage mods only apply on the 1st floor
+            if (!PItem->getOn2ndFloor())
+            {
+                PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
+            }
 
             PChar->pushPacket(new CInventorySizePacket(PChar));
 
@@ -7175,7 +7180,12 @@ void SmallPacket0x0FB(map_session_data_t* const PSession, CCharEntity* const PCh
                         charutils::MoveItem(PChar, LOC_STORAGE, SlotID, ERROR_SLOTID);
                     }
                 }
-                PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PItem->getStorage());
+
+                // Storage mods only apply on the 1st floor
+                if (!PItem->getOn2ndFloor())
+                {
+                    PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PItem->getStorage());
+                }
 
                 PChar->pushPacket(new CInventorySizePacket(PChar));
 
