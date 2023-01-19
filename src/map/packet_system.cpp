@@ -840,7 +840,23 @@ void SmallPacket0x016(map_session_data_t* const PSession, CCharEntity* const PCh
                 ShowWarning(fmt::format("Server missing npc_list.sql entry <{}> in zone <{} ({})>",
                                         PEntity->id, zoneutils::GetZone(PChar->getZone())->GetName(), PChar->getZone()));
             }
-            PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+
+            // Special case for onZoneIn cutscenes in Mog House
+            if (PChar->m_moghouseID &&
+                PEntity->status == STATUS_TYPE::DISAPPEAR &&
+                PEntity->loc.p.z == 1.5 &&
+                PEntity->look.face == 0x52)
+            {
+                // Using the same logic as in ZoneEntities::SpawnMoogle:
+                // Change the status of the entity, send the packet, change it back to disappear
+                PEntity->status = STATUS_TYPE::NORMAL;
+                PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                PEntity->status = STATUS_TYPE::DISAPPEAR;
+            }
+            else
+            {
+                PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+            }
         }
     }
 }
