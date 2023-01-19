@@ -92,7 +92,7 @@ xi.spells.healing.getDayWeatherBonus = function(caster, element)
 end
 
 xi.spells.healing.getEquipBonuses = function(caster)
-    return math.min(1 + math.floor((caster:getMod(xi.mod.CURE_POTENCY) / 100) + (caster:getMod(xi.mod.CURE_POTENCY_II) / 100) + caster:getMod(xi.mod.CURE_POTENCY_BONUS)), 1.60)
+    return math.min(1 + (math.min(caster:getMod(xi.mod.CURE_POTENCY), 50) / 100) + (math.min(caster:getMod(xi.mod.CURE_POTENCY_II), 30) / 100) + caster:getMod(xi.mod.CURE_POTENCY_BONUS), 1.60)
 end
 
 xi.spells.healing.getAbilityBonus = function(caster, isWhiteMagic)
