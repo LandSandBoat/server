@@ -4220,6 +4220,7 @@ xi.items =
     ANJU                            = 17771,
     ZUSHIO                          = 17772,
     KODACHI_OF_TRIALS               = 17773,
+    FUKURO                          = 17775,
     GANKO                           = 17786,
     OHAGURO                         = 17787,
     SAIREN                          = 17788,

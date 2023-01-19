@@ -49,7 +49,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.nmTODPersist(mob, math.random(126, 144) * 60) -- 21 to 24 hours, 10 minute windows
+    xi.mob.nmTODPersist(mob, math.random(126, 144) * 600) -- 21 to 24 hours, 10 minute windows
     DespawnMob(ID.mob.MEWW_THE_TURTLERIDER + 1)
     DespawnMob(ID.mob.MEWW_THE_TURTLERIDER + 2)
 end

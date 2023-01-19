@@ -16,7 +16,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onGameHour = function(zone)
-    SetServerVariable("Selbina_Deastination", math.random(1, 100))
+    SetServerVariable("Selbina_Destination", math.random(1, 100))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
