@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(xi.region.QUFIMISLAND) ~= xi.nation.SANDORIA then
+    if GetRegionOwner(xi.region.QUFIM) ~= xi.nation.SANDORIA then
         player:showText(npc, ID.text.EUGBALLION_CLOSED_DIALOG)
     else
         local stock =

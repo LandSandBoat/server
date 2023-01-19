@@ -51,7 +51,7 @@ public:
     auto               getMobs() -> sol::table;
     ZONEID             getID();
     const std::string& getName();
-    REGION_TYPE        getRegionID();
+    REGION_ID          getRegionID();
     ZONE_TYPE          getType();
     auto               getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
     bool               battlefieldsFull(int battlefieldId);

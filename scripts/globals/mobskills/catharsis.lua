@@ -11,7 +11,7 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if target:getCurrentRegion() == xi.region.TAVNAZIANARCH then
+    if target:getCurrentRegion() == xi.region.TAVNAZIAN_ARCHIPELAGO then
         return 0
     end
 

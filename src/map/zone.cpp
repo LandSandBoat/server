@@ -114,7 +114,7 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
  *                                                                       *
  ************************************************************************/
 
-CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
+CZone::CZone(ZONEID ZoneID, REGION_ID RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
 , m_zoneType(ZONE_TYPE::NONE)
 , m_regionID(RegionID)
@@ -165,7 +165,7 @@ ZONE_TYPE CZone::GetType()
     return m_zoneType;
 }
 
-REGION_TYPE CZone::GetRegionID()
+REGION_ID CZone::GetRegionID()
 {
     return m_regionID;
 }

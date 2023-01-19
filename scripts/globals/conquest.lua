@@ -62,25 +62,25 @@ end
 
 local outposts =
 {
-    [xi.region.RONFAURE]        = { zone = 100, ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
-    [xi.region.ZULKHEIM]        = { zone = 103, ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
-    [xi.region.NORVALLEN]       = { zone = 104, ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
-    [xi.region.GUSTABERG]       = { zone = 106, ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
-    [xi.region.DERFLAND]        = { zone = 109, ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
-    [xi.region.SARUTABARUTA]    = { zone = 115, ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
-    [xi.region.KOLSHUSHU]       = { zone = 118, ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
-    [xi.region.ARAGONEU]        = { zone = 119, ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
-    [xi.region.FAUREGANDI]      = { zone = 111, ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
-    [xi.region.VALDEAUNIA]      = { zone = 112, ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
-    [xi.region.QUFIMISLAND]     = { zone = 126, ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
-    [xi.region.LITELOR]         = { zone = 121, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
-    [xi.region.KUZOTZ]          = { zone = 114, ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
-    [xi.region.VOLLBOW]         = { zone = 113, ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
-    [xi.region.ELSHIMOLOWLANDS] = { zone = 123, ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
-    [xi.region.ELSHIMOUPLANDS]  = { zone = 124, ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
-    [xi.region.TULIA]           = { zone = 130,                                            cp = 0,  lvl = 70, fee = 500 },
-    [xi.region.MOVALPOLOS]      = { zone =  11,                                            cp = 40, lvl = 25, fee = 250 },
-    [xi.region.TAVNAZIANARCH]   = { zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
+    [xi.region.RONFAURE]              = { zone = 100, ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
+    [xi.region.ZULKHEIM]              = { zone = 103, ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
+    [xi.region.NORVALLEN]             = { zone = 104, ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
+    [xi.region.GUSTABERG]             = { zone = 106, ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
+    [xi.region.DERFLAND]              = { zone = 109, ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.SARUTABARUTA]          = { zone = 115, ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
+    [xi.region.KOLSHUSHU]             = { zone = 118, ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
+    [xi.region.ARAGONEU]              = { zone = 119, ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.FAUREGANDI]            = { zone = 111, ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
+    [xi.region.VALDEAUNIA]            = { zone = 112, ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
+    [xi.region.QUFIM]                 = { zone = 126, ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
+    [xi.region.LITELOR]               = { zone = 121, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
+    [xi.region.KUZOTZ]                = { zone = 114, ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
+    [xi.region.VOLLBOW]               = { zone = 113, ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
+    [xi.region.ELSHIMO_LOWLANDS]      = { zone = 123, ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
+    [xi.region.ELSHIMO_UPLANDS]       = { zone = 124, ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
+    [xi.region.TULIA]                 = { zone = 130,                                            cp = 0,  lvl = 70, fee = 500 },
+    [xi.region.MOVALPOLOS]            = { zone =  11,                                            cp = 40, lvl = 25, fee = 250 },
+    [xi.region.TAVNAZIAN_ARCHIPELAGO] = { zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
 }
 
 local function hasOutpost(player, region)
@@ -89,7 +89,7 @@ local function hasOutpost(player, region)
         if xi.settings.main.UNLOCK_OUTPOST_WARPS == 2 then
             hasOP = true
         elseif xi.settings.main.UNLOCK_OUTPOST_WARPS == 1 then
-            hasOP = region <= xi.region.ELSHIMOUPLANDS
+            hasOP = region <= xi.region.ELSHIMO_UPLANDS
         end
     end
 
@@ -117,7 +117,7 @@ end
 
 local function getRegionsMask(nation)
     local mask = 0
-    for region = xi.region.RONFAURE, xi.region.TAVNAZIANARCH do
+    for region = xi.region.RONFAURE, xi.region.TAVNAZIAN_ARCHIPELAGO do
         if GetRegionOwner(region) == nation then
             mask = bit.bor(mask, bit.lshift(1, region + 5)) -- Region bits start at 5th bit
         end
@@ -135,7 +135,7 @@ local function getAllowedTeleports(player, nation)
         return 0x3FE0001F -- Allow all outposts except for Tulia and Tavnazia
     end
 
-    for region = xi.region.RONFAURE, xi.region.TAVNAZIANARCH do
+    for region = xi.region.RONFAURE, xi.region.TAVNAZIAN_ARCHIPELAGO do
         if not xi.conquest.canTeleportToOutpost(player, region) then
             allowedTeleports = bit.bor(allowedTeleports, bit.lshift(1, region + 5)) -- Region bits start at 5th bit
         end
@@ -409,7 +409,7 @@ local overseerOffsets =
         { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
         { offset = 10, nation = xi.nation.OTHER },    -- Pelogrant
     },
-    [xi.region.QUFIMISLAND] =
+    [xi.region.QUFIM] =
     {
         { offset =  0, nation = xi.nation.SANDORIA }, -- Pitoire, R.K.
         { offset =  7, nation = xi.nation.SANDORIA }, -- Matica, R.K.
@@ -481,7 +481,7 @@ local overseerOffsets =
         { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
         { offset = 10, nation = xi.nation.OTHER },    -- Bright Moon
     },
-    [xi.region.ELSHIMOLOWLANDS] =
+    [xi.region.ELSHIMO_LOWLANDS] =
     {
         { offset =  0, nation = xi.nation.SANDORIA }, -- Zorchorevi, R.K.
         { offset =  7, nation = xi.nation.SANDORIA }, -- Mupia, R.K.
@@ -499,7 +499,7 @@ local overseerOffsets =
         { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
         { offset = 10, nation = xi.nation.OTHER },    -- Robino-Mobino
     },
-    [xi.region.ELSHIMOUPLANDS] =
+    [xi.region.ELSHIMO_UPLANDS] =
     {
         { offset =  0, nation = xi.nation.SANDORIA }, -- Ilieumort, R.K.
         { offset =  7, nation = xi.nation.SANDORIA }, -- Emila, R.K.
@@ -531,7 +531,7 @@ local overseerOffsets =
         { offset =  2, nation = xi.nation.WINDURST }, -- flag
         { offset =  3, nation = xi.nation.BEASTMEN }, -- flag
     },
-    [xi.region.TAVNAZIANARCH] =
+    [xi.region.TAVNAZIAN_ARCHIPELAGO] =
     {
         { offset =  0, nation = xi.nation.SANDORIA }, -- Jemmoquel, R.K.
         { offset =  7, nation = xi.nation.SANDORIA }, -- Chilaumme, R.K.
