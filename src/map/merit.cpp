@@ -274,6 +274,32 @@ uint8 CMeritPoints::GetMeritPoints() const
 
 /************************************************************************
  *                                                                       *
+ *  Return the total merits in the same category as the given merit.     *
+ *                                                                       *
+ ************************************************************************/
+
+uint16 CMeritPoints::GetMeritCountInSameCategory(MERIT_TYPE merit)
+{
+    if (!this->IsMeritExist(merit))
+    {
+        return 0;
+    }
+
+    Merit_t* PMerit = Categories[GetMeritCategory(merit)];
+
+    uint16 total = 0;
+
+    for (int i = 0; i < meritCatInfo[GetMeritCategory(merit)].MeritsInCat; ++i)
+    {
+        total += PMerit->count;
+        PMerit++;
+    }
+
+    return total;
+}
+
+/************************************************************************
+ *                                                                       *
  *  Добавляем персонажу limit points                                     *
  *                                                                       *
  ************************************************************************/
@@ -403,7 +429,7 @@ void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 {
     Merit_t* PMerit = GetMeritPointer(merit);
 
-    if (m_MeritPoints >= PMerit->next)
+    if (m_MeritPoints >= PMerit->next && PMerit->count < PMerit->upgrade && GetMeritCountInSameCategory(merit) < meritCatInfo[GetMeritCategory(merit)].MaxPoints)
     {
         m_MeritPoints -= PMerit->next;
 
