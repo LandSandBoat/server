@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_SAVAGE then
-        if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.WINDURST then
+        if GetRegionOwner(xi.region.TAVNAZIAN_ARCHIPELAGO) ~= xi.nation.WINDURST then
             player:showText(npc, ID.text.ALIZABE_CLOSED_DIALOG)
         else
             local stock =

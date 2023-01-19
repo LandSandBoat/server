@@ -9,7 +9,7 @@ require("scripts/globals/shop")
 -----------------------------------
 local entity = {}
 
-local vendorRegion  = xi.region.QUFIMISLAND
+local vendorRegion  = xi.region.QUFIM
 local vendorEvent   = 32756
 
 entity.onTrade = function(player, npc, trade)
