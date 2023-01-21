@@ -58,17 +58,15 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)
-    local kreutzetID = ID.mob.KREUTZET
-    local kreutzet = GetMobByID(kreutzetID)
+    local kreutzet = GetMobByID(ID.mob.KREUTZET)
 
     if
-        os.time() > GetServerVariable(string.format("[SPAWN]%s", kreutzetID)) and
+        not kreutzet:isSpawned() and
+        os.time() > GetServerVariable("[SPAWN]17093082") and
         (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
-        DisallowRespawn(kreutzetID, false)
+        DisallowRespawn(kreutzet:getID(), false)
         kreutzet:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
-    else
-        DisallowRespawn(kreutzetID, true)
     end
 end
 
