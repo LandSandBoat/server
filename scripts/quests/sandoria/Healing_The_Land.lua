@@ -18,7 +18,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-	item = xi.items.SCROLL_OF_TELEPORT_HOLLA,
+    item = xi.items.SCROLL_OF_TELEPORT_HOLLA,
     title = xi.title.PILGRIM_TO_HOLLA,
 }
 
@@ -83,8 +83,7 @@ quest.sections =
                         player:messageSpecial(ID2.text.FOUND_LOCATION_SEAL, xi.ki.SEAL_OF_BANISHING)
                         player:delKeyItem(xi.ki.SEAL_OF_BANISHING)
                         return quest:noAction()
-                    elseif
-                        not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
+                    elseif not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
                         player:messageSpecial(ID2.text.IS_ON_THIS_SEAL, xi.ki.SEAL_OF_BANISHING)
                         return quest:noAction()
                     end
