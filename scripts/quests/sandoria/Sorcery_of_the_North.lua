@@ -56,7 +56,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) then
                         return quest:event(686)
-                    elseif 
+                    elseif
                         player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME) then
                         return quest:progressEvent(687)
                     end

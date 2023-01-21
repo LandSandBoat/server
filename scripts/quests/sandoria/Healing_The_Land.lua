@@ -57,7 +57,8 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
                         return quest:event(682)
-                    elseif not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
+                    elseif
+                        not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
                         return quest:progressEvent(683)
                     else
                         return quest:event(684)
