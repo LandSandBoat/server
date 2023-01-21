@@ -11,7 +11,8 @@ zoneObject.onInitialize = function(zone)
     -- NM Persistence
     local timeOfDeath = GetServerVariable("[POP]Overlord_Bakgodek")
     local kills       = GetServerVariable("[PH]Overlord_Bakgodek")
-    local popNow      = math.random(1, 5) == 3 or kills > 6
+    local popNow      = GetServerVariable("[POPNUM]Overlord_Bakgodek") == 3 or kills > 6 -- Set as server var in case HQ is up and server crashes
+
     if os.time() > timeOfDeath and popNow then
         xi.mob.nmTODPersistCache(zone, ID.mob.ORCISH_OVERLORD + 1)
     else
