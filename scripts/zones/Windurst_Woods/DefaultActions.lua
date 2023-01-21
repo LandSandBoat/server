@@ -7,6 +7,7 @@ return {
     ['Bopa_Greso']   = { event = 77 },
     ['Cha_Lebagta']  = { event = 78 },
     ['Cheh_Raihah']  = { event = 73 },
+    ['Gioh_Ajihri']  = { event = 424 },
     ['Hae_Jakkya']   = { event = 41 },
     ['Kototo']       = { event = 410 },
     ['Mourices']     = { event = 441 },

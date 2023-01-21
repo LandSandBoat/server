@@ -1141,11 +1141,12 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
 
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
-        CCharEntity* PCurrentChar = (CCharEntity*)it->second;
-
-        if (alwaysInclude || type == ENTITY_SPAWN || type == ENTITY_DESPAWN || charutils::hasEntitySpawned(PCurrentChar, PEntity))
+        if (CCharEntity* PCurrentChar = dynamic_cast<CCharEntity*>(it->second))
         {
-            PCurrentChar->updateEntityPacket(PEntity, type, updatemask);
+            if (alwaysInclude || type == ENTITY_SPAWN || type == ENTITY_DESPAWN || charutils::hasEntitySpawned(PCurrentChar, PEntity))
+            {
+                PCurrentChar->updateEntityPacket(PEntity, type, updatemask);
+            }
         }
     }
 }

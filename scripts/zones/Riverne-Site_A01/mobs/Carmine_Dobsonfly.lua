@@ -39,8 +39,8 @@ entity.onMobDespawn = function(mob)
             DisallowRespawn(i, false)
             xi.mob.nmTODPersist(GetMobByID(i), respawnTime) -- 21 to 24 hours
         end
-    -- else
-    --    DisallowRespawn(mob:getID(), true)
+    else
+        DisallowRespawn(mob:getID(), true)
     end
 end
 

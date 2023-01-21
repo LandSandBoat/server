@@ -31,6 +31,14 @@ local function doTerrorRun(mob)
 end
 
 g_mixins.families.empty_terroanima = function(emptyMob)
+    emptyMob:addListener("SPAWN", "EMPTY_TERROANIMA_SPAWN", function(mob)
+        -- Prevent mob from entering a state where they can't attack
+        -- if killed during the time an anima is applied to them.
+        mob:setAutoAttackEnabled(true)
+        mob:setMobAbilityEnabled(true)
+        mob:setMagicCastingEnabled(true)
+    end)
+
     emptyMob:addListener("ROAM_TICK", "EMPTY_TERROANIMA_RTICK", function(mob)
         doTerrorRun(mob)
     end)

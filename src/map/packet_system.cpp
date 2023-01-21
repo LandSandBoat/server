@@ -3206,8 +3206,9 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     return;
                 }
 
-                // 2. Remove item from inventory
+                // 2. Remove item from inventory. Cache name because this method may actually delete the item pointer
                 auto deductQuantity = -(int32)(quantity != 0 ? 1 : PItem->getStackSize());
+                auto itemName       = PItem->getName();
                 auto itemId         = charutils::UpdateItem(PChar, LOC_INVENTORY, slot, deductQuantity);
                 if (itemId == 0)
                 {
@@ -3215,17 +3216,17 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
 
                 // 3. Deduct AH fee
-                itemId = charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee);
-                if (itemId == 0)
+                auto gilItemId = charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee);
+                if (gilItemId == 0)
                 {
                     return;
                 }
 
                 // 4. List the item into the auction house
                 const char* fmtQuery = "INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(%u,%u,%u,'%s',%u,%u)";
-                if (sql->Query(fmtQuery, PItem->getID(), quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
+                if (sql->Query(fmtQuery, itemId, quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
                 {
-                    ShowError("SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database", PItem->getName());
+                    ShowError("SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database", itemName);
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, quantity)); // failed to place up
                     return;
                 }
@@ -3265,7 +3266,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price)
                     {
                         const char* fmtQuery = "UPDATE auction_house SET buyer_name = '%s', sale = %u, sell_date = %u WHERE itemid = %u AND buyer_name IS NULL "
-                                               "AND stack = %u AND price <= %u ORDER BY price LIMIT 1";
+                                               "AND stack = %u AND price <= %u ORDER BY price, date LIMIT 1";
 
                         if (sql->Query(fmtQuery, PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price) != SQL_ERROR &&
                             sql->AffectedRows() != 0)

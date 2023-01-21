@@ -24,7 +24,7 @@ itemObject.onItemUse = function(target, player)
     local duration = math.random(25, 32) -- Random duration between 25s and 32s
     target:setLocalVar("EmptyTerror", os.time()) -- Sets terror start time.
     target:setLocalVar("EmptyTerrorDuration", duration) -- Sets terror duration.
-    target:setLocalVar("EmptyTerrorUser", player:getID()) -- Sets terror duration.
+    target:setLocalVar("EmptyTerrorUser", player:getID()) -- Sets user (used to indicate who the empty should run away from).
     target:addEnmity(player, 0, 1) -- Add player to target's enmity list to prevent exploitable behavior.
 end
 

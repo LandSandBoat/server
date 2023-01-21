@@ -847,6 +847,7 @@ namespace petutils
         int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
         int32 scaleOver30Column = 2; // Column number with modifier after level 30
         int32 scaleOver60Column = 3; // Column number with modifier after level 60
+        int32 scaleOver60       = 2; // Column number with a modifier for calculating MP after level 60
 
         uint8 grade = 5; // Grade for HP
 
@@ -859,6 +860,7 @@ namespace petutils
         int32 mainLevelOver30     = std::clamp(mLvl - 30, 0, 30); // Calculation of the condition + 1HP each LVL after level 30
         int32 mainLevelUpTo60     = (mLvl < 60 ? mLvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
         int32 mainLevelOver60To75 = std::clamp(mLvl - 60, 0, 15); // The second calculation mode after level 60
+        int32 mainLevelOver60     = (mLvl < 60 ? 0 : mLvl - 60);
 
         // Calculate level ranges of sub job
         int32 subLevelOver10 = std::clamp(sLvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
@@ -894,6 +896,42 @@ namespace petutils
         }
         PPet->health.maxhp = (int16)(raceStat + jobStat + bonusStat + sJobStat);
         PPet->health.hp    = PPet->health.maxhp;
+
+        // if a spirit then add mp so it can cast spells
+        if (PPet->m_PetID <= PETID_DARKSPIRIT)
+        {
+            // Start MP calculation
+            raceStat = 0;
+            jobStat  = 0;
+            sJobStat = 0;
+
+            grade = 4; // Grade for MP
+
+            // If the main job doesn't have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
+            if (!(grade::GetJobGrade(mjob, 1) == 0 && grade::GetJobGrade(sjob, 1) == 0))
+            {
+                // calculate normal racial bonus
+                raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
+                           grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            }
+
+            // For the main profession
+            grade = grade::GetJobGrade(mjob, 1);
+            if (grade > 0)
+            {
+                jobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
+                          grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            }
+
+            grade = grade::GetJobGrade(sjob, 1);
+            if (grade > 0)
+            {
+                sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
+                           grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
+            }
+
+            PPet->health.maxmp = (int32)(raceStat + jobStat + sJobStat);
+        }
 
         PPet->UpdateHealth();
         PPet->health.tp  = 0;

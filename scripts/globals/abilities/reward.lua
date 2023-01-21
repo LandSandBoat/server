@@ -21,18 +21,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     else
         local id = player:getEquipID(xi.slot.AMMO)
         if (id >= 17016 and id <= 17023) then
-            local playerLevel = player:getMainLvl()
-            local itemLevels = {}
-            itemLevels[17016] = 12 -- Alpha
-            itemLevels[17017] = 24 -- Beta
-            itemLevels[17018] = 36 -- Gamma
-            itemLevels[17019] = 48 -- Delta
-            itemLevels[17020] = 60 -- Epsilon
-            itemLevels[17021] = 72 -- Zeta
-            itemLevels[17022] = 84 -- Eta
-            itemLevels[17023] = 96 -- Theta
-
-            if playerLevel < itemLevels[id] then return xi.msg.basic.MUST_HAVE_FOOD, 0 end
             return 0, 0
         else
             return xi.msg.basic.MUST_HAVE_FOOD, 0
@@ -66,27 +54,27 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         end,
         [17017] = function (x) -- pet food beta biscuit
             minimumHealing = 50
-            regenAmount    = 3
+            regenAmount    = 2
             totalHealing   = math.floor(minimumHealing + 1 * (playerMnd - 33))
         end,
         [17018] = function (x) -- pet food gamma biscuit
             minimumHealing = 100
-            regenAmount    = 5
+            regenAmount    = 3
             totalHealing   = math.floor(minimumHealing + 1 * (playerMnd - 35)) -- TO BE VERIFIED.
         end,
         [17019] = function (x) -- pet food delta biscuit
             minimumHealing = 150
-            regenAmount    = 8
+            regenAmount    = 4
             totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 40)) -- TO BE VERIFIED.
         end,
         [17020] = function (x) -- pet food epsilon biscuit
             minimumHealing = 300
-            regenAmount    = 11
+            regenAmount    = 5
             totalHealing   = math.floor(minimumHealing + 2 * (playerMnd - 45))
         end,
         [17021] = function (x) -- pet food zeta biscuit
             minimumHealing = 350
-            regenAmount    = 14
+            regenAmount    = 6
             totalHealing   = math.floor(minimumHealing + 3 * (playerMnd - 45))
         end,
         [17022] = function (x) -- pet food eta biscuit
