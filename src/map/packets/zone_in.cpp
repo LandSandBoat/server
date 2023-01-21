@@ -204,7 +204,14 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     if (PChar->m_moghouseID != 0)
     {
-        ref<uint8>(0x80)  = 1;
+        ref<uint8>(0x80) = 1;
+
+        if (PChar->profile.mhflag & 0x0040) // On MH2F
+        {
+            // Ensure full exit menu appears
+            ref<uint16>(0xA8) = 0x02;
+        }
+
         ref<uint16>(0xAA) = GetMogHouseModelID(PChar);
     }
     else
