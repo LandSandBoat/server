@@ -433,7 +433,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     if (PChar->animation == ANIMATION_SYNTH)
     {
         PChar->CraftContainer->setQuantity(0, synthutils::SYNTHESIS_FAIL);
-        synthutils::sendSynthDone(PChar);
+        synthutils::sendSynthDone(PChar, true);
     }
 
     // TODO: могут возникать проблемы с переходом между одной и той же зоной (zone == prevzone)

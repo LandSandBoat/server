@@ -56,7 +56,7 @@ namespace synthutils
     };
 
     int32 startSynth(CCharEntity* PChar);
-    int32 sendSynthDone(CCharEntity* PChar);
+    int32 sendSynthDone(CCharEntity* PChar, bool forced);
     int32 doSynthFail(CCharEntity* PChar);
 }; // namespace synthutils
 

@@ -903,12 +903,21 @@ namespace synthutils
      *                                                                       *
      ************************************************************************/
 
-    int32 doSynthResult(CCharEntity* PChar)
+    int32 doSynthResult(CCharEntity* PChar, bool forced = false)
     {
         uint8 m_synthResult = PChar->CraftContainer->getQuantity(0);
         PChar->SetLocalVar("InSynth", 0);
         if (settings::get<bool>("map.ANTICHEAT_ENABLED"))
         {
+            // If player was forced to end synthesis early due to zone (eg. Airship/Boat)
+            if (forced)
+            {
+                PChar->CraftContainer->setQuantity(0, synthutils::SYNTHESIS_FAIL);
+                m_synthResult = SYNTHESIS_FAIL;
+                doSynthFail(PChar);
+                return 0;
+            }
+
             std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
             if (animationDuration < 10s)
             {
@@ -1042,9 +1051,9 @@ namespace synthutils
      *                                                                       *
      ************************************************************************/
 
-    int32 sendSynthDone(CCharEntity* PChar)
+    int32 sendSynthDone(CCharEntity* PChar, bool forced = false)
     {
-        doSynthResult(PChar);
+        doSynthResult(PChar, forced);
 
         PChar->animation = ANIMATION_NONE;
         PChar->updatemask |= UPDATE_HP;

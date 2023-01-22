@@ -3594,7 +3594,7 @@ void SmallPacket0x059(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     if (PChar->animation == ANIMATION_SYNTH)
     {
-        synthutils::sendSynthDone(PChar);
+        synthutils::sendSynthDone(PChar, false);
     }
 }
 
