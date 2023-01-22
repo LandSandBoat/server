@@ -277,7 +277,7 @@ namespace synthutils
                 synthDiff = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
                 success   = 0.95;
 
-                if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
+                if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth lower success rate
                 {
                     success -= 0.50; // Result 0.45/1
                 }
@@ -290,7 +290,7 @@ namespace synthutils
                 success = std::clamp(success, 0.05, 0.95);
 
                 // Apply synthesis success rate modifier
-                modSynthSuccess = PChar->CraftContainer->getCraftType() == CRAFT_SYNTHESIS ? PChar->getMod(Mod::SYNTH_SUCCESS) : PChar->getMod(Mod::DESYNTH_SUCCESS);
+                modSynthSuccess = PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS ? PChar->getMod(Mod::DESYNTH_SUCCESS) : PChar->getMod(Mod::SYNTH_SUCCESS);
                 success += (double)modSynthSuccess * 0.01;
 
                 if (!canSynthesizeHQ(PChar, skillID))
@@ -343,7 +343,7 @@ namespace synthutils
                     break;
             }
 
-            if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
             {
                 chance = 0.4 + (hqtier * 0.03);
             }
@@ -355,7 +355,7 @@ namespace synthutils
             if (chance > 0)
             {
                 // limit max hq chance
-                if (PChar->CraftContainer->getCraftType() == 1)
+                if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS)
                 {
                     chance = std::clamp(chance, 0., 0.800);
                 }
@@ -369,7 +369,7 @@ namespace synthutils
 
             if (random < chance && canHQ) // We HQ. Proceed to selct HQ Tier
             {
-                if (PChar->CraftContainer->getCraftType() != 1)
+                if (PChar->CraftContainer->getCraftType() != CRAFT_DESYNTHESIS)
                 {
                     random = xirand::GetRandomNumber(0, 16);
 
@@ -495,7 +495,7 @@ namespace synthutils
             // Chance penalties.
             uint8 penalty = 1;
 
-            if (PChar->CraftContainer->getCraftType() == 1) // If it's a desynth, lower skill up rate
+            if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // If it's a desynth, lower skill up rate
             {
                 penalty += 1;
             }
@@ -695,22 +695,22 @@ namespace synthutils
         double random   = 0;
         double lostItem = std::clamp(0.15 - reduction + (synthDiff > 0 ? synthDiff / 20 : 0), 0.0, 1.0);
 
-        if (PChar->CraftContainer->m_failType == 1) // desynth failures break the items much more frequently
-        {
-            lostItem += 0.35;
-        }
-        else if (PChar->CraftContainer->m_failType == 2) // special item that cannot break, i.e. Lu Shang's Broken Rod
-        {
-            lostItem = 0.0;
-        }
-        else if (PChar->CraftContainer->m_failType == 3) // special item that always breaks, i.e. Hakutaku Eye Cluster
-        {
-            lostItem = 1.0;
-        }
-
         // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
         // see: http://wiki.ffo.jp/html/18416.html
         lostItem += (double)modSynthFailRate * 0.01;
+
+        if (PChar->CraftContainer->m_failType == CRAFT_DESYNTHESIS) // desynth failures break the items much more frequently
+        {
+            lostItem += 0.35;
+        }
+        else if (PChar->CraftContainer->m_failType == CRAFT_SYNTHESIS_NO_MATS_LOSS) // special item that cannot break, i.e. Lu Shang's Broken Rod
+        {
+            lostItem = 0.0;
+        }
+        else if (PChar->CraftContainer->m_failType == CRAFT_SYNTHESIS_FULL_MATS_LOSS) // special item that always breaks, i.e. Hakutaku Eye Cluster
+        {
+            lostItem = 1.0;
+        }
 
         invSlotID = PChar->CraftContainer->getInvSlotID(1);
 

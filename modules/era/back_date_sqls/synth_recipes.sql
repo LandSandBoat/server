@@ -195,6 +195,7 @@ UPDATE synth_recipes SET ResultHQ3 = "718" WHERE ID = "3493" and ResultName = "P
 UPDATE synth_recipes SET KeyItem = "1987" WHERE ID = "3915" and ResultName = "Black Bolt"; -- This also requires keyitem "Boltmaker".
 UPDATE synth_recipes SET Smith = "38" WHERE ID = "3343" AND ResultName = "Dark Mezraq"; -- Subcraft levels aren't confirmed anywhere, but this post confirms both subs should be Apprentice (38-50): https://www.bluegartr.com/threads/49240-Dark-mezraq-subcraft-question
 UPDATE synth_recipes SET Bone = "1" WHERE ID = "343" AND ResultName = "Yew Lumber"; -- Subcraft levels aren't confirmed anywhere, but this post confirms both subs should be Apprentice (38-50): https://www.bluegartr.com/threads/49240-Dark-mezraq-subcraft-question
+UPDATE synth_recipes SET Wood = "80" WHERE ID = "3049" AND ResultName = "Lu Shang\'s Fishing Rod"; -- Changed to 70 wood synth only in 2015
 
 
 -- ----------
