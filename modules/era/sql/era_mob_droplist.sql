@@ -11386,7 +11386,6 @@ INSERT INTO `mob_droplist` VALUES (1405,0,0,1000,4484,80);        -- Shall Shell
 INSERT INTO `mob_droplist` VALUES (1406,0,0,1000,17750,220); -- Anthos Xiphos (22.0%)
 INSERT INTO `mob_droplist` VALUES (1406,0,0,1000,2507,90);   -- Lycopodium Flower (9.0%)
 
--- ZoneID: 173 - Jelly
 -- ZoneID: 198 - Jelly
 INSERT INTO `mob_droplist` VALUES (1407,0,0,1000,637,@RARE); -- Vial Of Slime Oil (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1407,0,0,1000,637,@RARE); -- Vial Of Slime Oil (Rare, 5%)
@@ -26386,6 +26385,11 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
+
+-- ZoneID: 173 - Jelly
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,637,430); -- Vial Of Slime Oil (43.0%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,637,220); -- Vial Of Slime Oil (22.0%)
+INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,637,140); -- Vial Of Slime Oil (14.0%)
 
 --------------------------------
 -- ASB Droplists Start at 6000

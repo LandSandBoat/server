@@ -993,6 +993,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Lacerator' AND groupid='18' AND zoneid='173';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Spool_Leech' AND groupid='19' AND zoneid='173';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Thoon' AND groupid='27' AND zoneid='173';
+UPDATE mob_groups SET dropid = 3234 WHERE name='Jelly' AND zoneid = 173;
 
 UPDATE mob_groups SET minLevel = 30, maxLevel = 33 WHERE name = "Greater_Pugil"  and zoneid = 173;
 INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (40,3500,173,'Scimitar_Scorpion',480,0,6040,0,0,34,37,0); -- These are in prep for complete zone revamps
