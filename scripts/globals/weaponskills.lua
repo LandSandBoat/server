@@ -94,18 +94,6 @@ local function souleaterBonus(attacker, wsParams)
     return bonus
 end
 
-local scarletDeliriumBonus = function(attacker)
-    local bonus = 1
-
-    if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
-        local power = attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
-        bonus = 1 + power / 100
-    end
-
-    return bonus
-end
-
 local function fencerBonus(attacker)
     local bonus = 0
 
@@ -445,18 +433,14 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         end
     end
 
-    -- Scarlet Delirium
-    adjustedDamage = adjustedDamage * scarletDeliriumBonus(attacker)
-
-    -- Souleater
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
-
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
+
+    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -758,46 +742,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
-
-    -- DAMAGE Clamp
-    local minValue = 0
-
-    -- 1000 - 1050 DMG ~ 10 damage range
-    if finaldmg > 1000 and finaldmg <= 1100 then
-        minValue = math.floor((finaldmg - 1000) / 10)
-        minValue = minValue * 5 + 1000
-
-    -- 1050 - 1500 DMG ~ 15 damage range
-    elseif finaldmg > 1100 and finaldmg <= 2450 then
-        minValue = math.floor((finaldmg - 1100) / 15)
-        minValue = minValue * 5 + 1045
-
-    -- 1500 - 1800 DMG ~ 20 damage range
-    elseif finaldmg > 2450 and finaldmg <= 3750 then
-        minValue = math.floor((finaldmg - 2450) / 20)
-        minValue = minValue * 5 + 1500
-
-    -- 1800 - 1900 DMG ~ 50 damage range
-    elseif finaldmg > 3750 and finaldmg <= 4750 then
-        minValue = math.floor((finaldmg - 3750) / 50)
-        minValue = minValue * 5 + 1800
-
-    -- 1900 - 2000 DMG ~ 100 damage range
-    elseif finaldmg > 4750 and finaldmg <= 6750 then
-        minValue = math.floor((finaldmg - 4750) / 100)
-        minValue = minValue * 5 + 1900
-
-    -- 2000 and higher ~ 200 damage range
-    elseif finaldmg > 6750 then
-        minValue = math.floor((finaldmg - 6750) / 200)
-        minValue = minValue * 5 + 2000
-    end
-
-    -- Final operation.
-    if minValue > 0 then
-        calcParams.finalDmg = math.random(minValue, minValue + 5)
-    end
-
+    calcParams.finalDmg = finaldmg
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
@@ -863,45 +808,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
-
-    -- DAMAGE Clamp
-    local minValue = 0
-
-    -- 1000 - 1050 DMG ~ 10 damage range
-    if finaldmg > 1000 and finaldmg <= 1100 then
-        minValue = math.floor((finaldmg - 1000) / 10)
-        minValue = minValue * 5 + 1000
-
-    -- 1050 - 1500 DMG ~ 15 damage range
-    elseif finaldmg > 1100 and finaldmg <= 2450 then
-        minValue = math.floor((finaldmg - 1100) / 15)
-        minValue = minValue * 5 + 1045
-
-    -- 1500 - 1800 DMG ~ 20 damage range
-    elseif finaldmg > 2450 and finaldmg <= 3750 then
-        minValue = math.floor((finaldmg - 2450) / 20)
-        minValue = minValue * 5 + 1500
-
-    -- 1800 - 1900 DMG ~ 50 damage range
-    elseif finaldmg > 3750 and finaldmg <= 4750 then
-        minValue = math.floor((finaldmg - 3750) / 50)
-        minValue = minValue * 5 + 1800
-
-    -- 1900 - 2000 DMG ~ 100 damage range
-    elseif finaldmg > 4750 and finaldmg <= 6750 then
-        minValue = math.floor((finaldmg - 4750) / 100)
-        minValue = minValue * 5 + 1900
-
-    -- 2000 and higher ~ 200 damage range
-    elseif finaldmg > 6750 then
-        minValue = math.floor((finaldmg - 6750) / 200)
-        minValue = minValue * 5 + 2000
-    end
-
-    -- Final operation.
-    if minValue > 0 then
-        calcParams.finalDmg = math.random(minValue, minValue + 5)
-    end
+    calcParams.finalDmg = finaldmg
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
@@ -959,10 +866,6 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         dmg = dmg * ftp
 
-        -- Apply Consume Mana and Scarlet Delirium
-        -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
-        dmg = dmg * scarletDeliriumBonus(attacker)
-
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
         if
@@ -1003,7 +906,6 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     else
         calcParams.shadowsAbsorbed = 1
     end
-
 
     calcParams.finalDmg = dmg
 

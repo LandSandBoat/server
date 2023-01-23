@@ -246,10 +246,6 @@ xi.settings.map =
     -- Set to 1 to completely disable auto-jailing offenders
     ANTICHEAT_JAIL_DISABLE = false,
 
-    -- Gobbie Mystery Box settings
-    DAILY_TALLY_AMOUNT = 10,
-    DAILY_TALLY_LIMIT  = 50000,
-
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,
 }

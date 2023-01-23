@@ -93,7 +93,8 @@ quest.sections =
                     if option == 1002 then
                         if quest:complete(player) then
                             player:confirmTrade()
-                            player:setMoghouseFlag(1)
+                            local mhflag = player:getMoghouseFlag()
+                            player:setMoghouseFlag(mhflag + 0x0001)
                             player:messageSpecial(northenSandoriaID.text.MOGHOUSE_EXIT)
                         end
 
