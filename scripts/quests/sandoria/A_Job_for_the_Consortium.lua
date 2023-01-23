@@ -97,7 +97,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.BRUGAIRE_GOODS) then
-                        if math.random() > 0.25 or (VanadielHour() < 6 and VanadielHour() > 18) then
+                        if math.random() > 0.25 or (VanadielHour() < 6 or VanadielHour() > 18) then
                             quest:setVar(player, 'Option', 0)
                             return quest:progressEvent(54)
                         else
