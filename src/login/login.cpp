@@ -65,9 +65,6 @@ struct epoll_event login_lobbyviewEpollEvent = { EPOLLIN };
 #include "login.h"
 #include "login_auth.h"
 #include "login_conf.h"
-#include "message_server.h"
-
-std::thread messageThread;
 
 std::unique_ptr<SqlConnection> sql;
 
@@ -129,7 +126,6 @@ int32 do_init(int32 argc, char** argv)
         ShowInfo("Character deletion is currently disabled.");
     }
 
-    messageThread = std::thread(message_server_init, std::ref(requestExit));
     // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
 
@@ -185,11 +181,6 @@ int32 do_init(int32 argc, char** argv)
 void do_final(int code)
 {
     requestExit = true;
-    message_server_close();
-    if (messageThread.joinable())
-    {
-        messageThread.join();
-    }
 
     timer_final();
     socket_final();

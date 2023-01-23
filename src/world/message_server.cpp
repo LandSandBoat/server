@@ -24,11 +24,18 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <queue>
 
 #include "common/logging.h"
-#include "login.h"
 #include "message_server.h"
 
 zmq::context_t                 zContext;
 std::unique_ptr<zmq::socket_t> zSocket;
+
+struct chat_message_t
+{
+    uint64         dest;
+    MSGSERVTYPE    type;
+    zmq::message_t data;
+    zmq::message_t packet;
+};
 
 moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
 
@@ -256,6 +263,8 @@ void message_server_init(const bool& requestExit)
                               settings::get<std::string>("network.ZMQ_IP"),
                               settings::get<std::string>("network.ZMQ_PORT"));
 
+    ShowInfo("Starting ZMQ Server on %s", server.c_str());
+
     try
     {
         zSocket->bind(server.c_str());
@@ -265,6 +274,7 @@ void message_server_init(const bool& requestExit)
         ShowCritical(fmt::format("Unable to bind chat socket: {}", err.what()));
     }
 
+    ShowInfo("ZMQ Server listening...");
     message_server_listen(requestExit);
 }
 
