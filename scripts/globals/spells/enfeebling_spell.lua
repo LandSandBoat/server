@@ -112,7 +112,7 @@ local function getElementalDebuffPotency(caster, statUsed)
         potency = potency + 1
     end
 
-    potency  = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) / 2 -- TODO: Add BLM Toban gear effect (potency) here.
+    potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) -- TODO: Add BLM Toban gear effect (potency) here.
 
     return potency
 end
