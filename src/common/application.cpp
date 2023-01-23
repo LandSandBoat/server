@@ -32,7 +32,7 @@
 
 Application::Application(std::string serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
 : m_ServerName(serverName)
-, m_IsRunning(true)
+, m_RequestExit(false)
 , gArgParser(std::move(pArgParser))
 {
 #ifdef _WIN32
@@ -54,14 +54,14 @@ Application::Application(std::string serverName, std::unique_ptr<argparse::Argum
 
 bool Application::IsRunning()
 {
-    return m_IsRunning;
+    return !m_RequestExit;
 }
 
 void Application::Tick()
 {
     // Main runtime cycle
     duration next;
-    while (m_IsRunning)
+    while (!m_RequestExit)
     {
         next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
     }

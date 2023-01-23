@@ -1,7 +1,7 @@
-/*
+﻿/*
 ===========================================================================
 
-Copyright (c) 2022 LandSandBoat Dev Teams
+Copyright (c) 2010-2015 Darkstar Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,30 +20,31 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #pragma once
 
-#include "common/application.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
 
-#include "besieged_system.h"
-#include "campaign_system.h"
-#include "colonization_system.h"
-#include "conquest_system.h"
-#include "http_server.h"
-#include "message_server.h"
+#include <nonstd/jthread.hpp>
+#include <zmq.hpp>
+#include <zmq_addon.hpp>
 
-class WorldServer final : public Application
+void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+
+void message_server_init(const bool& requestExit);
+void message_server_close();
+
+struct message_server_wrapper_t
 {
-public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
-    ~WorldServer() override;
+    message_server_wrapper_t(const std::atomic_bool& requestExit)
+    : m_thread(std::make_unique<nonstd::jthread>(std::bind(message_server_init, std::ref(requestExit))))
+    {
+    }
 
-    void Tick() override;
+    ~message_server_wrapper_t()
+    {
+        message_server_close();
+    }
 
 private:
-    std::unique_ptr<message_server_wrapper_t> messageServer;
-
-    std::unique_ptr<ConquestSystem>     conquestSystem;
-    std::unique_ptr<BesiegedSystem>     besiegedSystem;
-    std::unique_ptr<CampaignSystem>     campaignSystem;
-    std::unique_ptr<ColonizationSystem> colonizationSystem;
-
-    std::unique_ptr<HTTPServer> httpServer;
+    std::unique_ptr<nonstd::jthread> m_thread;
 };

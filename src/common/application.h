@@ -44,7 +44,7 @@ public:
 
 protected:
     std::string       m_ServerName;
-    std::atomic<bool> m_IsRunning;
+    std::atomic<bool> m_RequestExit;
 
     std::unique_ptr<argparse::ArgumentParser> gArgParser;
     std::unique_ptr<ConsoleService>           gConsoleService;

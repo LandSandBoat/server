@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-Copyright (c) 2022 LandSandBoat Dev Teams
+Copyright (c) 2023 LandSandBoat Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,30 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #pragma once
 
-#include "common/application.h"
-
-#include "besieged_system.h"
-#include "campaign_system.h"
-#include "colonization_system.h"
-#include "conquest_system.h"
-#include "http_server.h"
-#include "message_server.h"
-
-class WorldServer final : public Application
+class ColonizationSystem
 {
 public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
-    ~WorldServer() override;
-
-    void Tick() override;
-
-private:
-    std::unique_ptr<message_server_wrapper_t> messageServer;
-
-    std::unique_ptr<ConquestSystem>     conquestSystem;
-    std::unique_ptr<BesiegedSystem>     besiegedSystem;
-    std::unique_ptr<CampaignSystem>     campaignSystem;
-    std::unique_ptr<ColonizationSystem> colonizationSystem;
-
-    std::unique_ptr<HTTPServer> httpServer;
+    ColonizationSystem()  = default;
+    ~ColonizationSystem() = default;
 };
