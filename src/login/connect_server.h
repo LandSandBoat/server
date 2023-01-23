@@ -1054,11 +1054,12 @@ protected:
                 ShowInfo(fmt::format("attempt to delete char:<{}> from ip:<{}>",
                                      CharID, ipAddress));
 
-                // Perform character deletion from the database. It is sufficient to remove the
-                // value from the `chars` table. The mysql server will handle the rest.
+                // Perform character deletion.
+                // Instead of performing an actual character deletion, we simply set accid to 0, and original_accid to old accid.
+                // This allows character recovery.
 
-                const char* pfmtQuery = "DELETE FROM chars WHERE charid = %i AND accid = %i";
-                sql->Query(pfmtQuery, CharID, session.accountID);
+                const char* pfmtQuery = "UPDATE chars SET accid = 0, original_accid = %i WHERE charid = %i AND accid = %i";
+                sql->Query(pfmtQuery, session.accountID, CharID, session.accountID);
             }
             break;
             case 0x21: // 33: Registering character name onto the lobby server
