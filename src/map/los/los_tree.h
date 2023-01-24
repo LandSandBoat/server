@@ -34,14 +34,15 @@ public:
     ~LosTree();
 
     LosTreeNodeStats GetStats();
+
     bool DoesRayCollide(Vector3D& rayOrigin, Vector3D& rayVector);
 
 private:
     Triangle* elements;
-    int* elementNexts;
-    size_t elementCount;
+    int*      elementNexts;
+    size_t    elementCount;
 
     LosTreeNode* root = nullptr;
 };
 
-#endif
+#endif // _LOS_TREE_H

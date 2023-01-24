@@ -20,13 +20,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "weaponskill_state.h"
+
+#include "ai/ai_container.h"
 #include "entities/battleentity.h"
 #include "packets/action.h"
 #include "roe.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "weapon_skill.h"
-#include "ai/ai_container.h"
 
 CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)

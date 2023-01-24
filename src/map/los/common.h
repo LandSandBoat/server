@@ -96,7 +96,7 @@ struct Vector3D
     // Addition
     Vector3D operator+(const Vector3D& vec)
     {
-        return Vector3D { x + vec.x, y + vec.y, z + vec.z };
+        return Vector3D{ x + vec.x, y + vec.y, z + vec.z };
     }
 
     Vector3D& operator+=(const Vector3D& vec)
@@ -106,10 +106,11 @@ struct Vector3D
         z += vec.z;
         return *this;
     }
-    // Substraction
+
+    // Subtraction
     Vector3D operator-(const Vector3D& vec)
     {
-        return Vector3D { x - vec.x, y - vec.y, z - vec.z };
+        return Vector3D{ x - vec.x, y - vec.y, z - vec.z };
     }
 
     Vector3D& operator-=(const Vector3D& vec)
@@ -123,7 +124,7 @@ struct Vector3D
     // Scalar multiplication
     Vector3D operator*(float value)
     {
-        return Vector3D { x * value, y * value, z * value };
+        return Vector3D{ x * value, y * value, z * value };
     }
 
     Vector3D& operator*=(float value)
@@ -137,7 +138,7 @@ struct Vector3D
     // Scalar division
     Vector3D operator/(float value)
     {
-        return Vector3D { x / value, y / value, z / value };
+        return Vector3D{ x / value, y / value, z / value };
     }
 
     Vector3D& operator/=(float value)
@@ -163,7 +164,7 @@ struct Vector3D
         float ni = y * other.z - z * other.y;
         float nj = z * other.x - x * other.z;
         float nk = x * other.y - y * other.x;
-        return Vector3D { ni, nj, nk };
+        return Vector3D{ ni, nj, nk };
     }
 
     float dotProduct(Vector3D other)
@@ -183,7 +184,7 @@ struct Triangle
 
     BoundingBox getBoundingBox()
     {
-        return BoundingBox {
+        return BoundingBox{
             std::min(std::min(vertices[0].x, vertices[1].x), vertices[2].x),
             std::max(std::max(vertices[0].x, vertices[1].x), vertices[2].x),
             std::min(std::min(vertices[0].y, vertices[1].y), vertices[2].y),
@@ -197,23 +198,29 @@ struct Triangle
     bool doesRayIntersect(Vector3D rayOrigin, Vector3D rayVector)
     {
         const float EPSILON = 0.0000001f;
-        Vector3D edge1, edge2, h, s, q;
-        float a, f, u, v;
+        Vector3D    edge1, edge2, h, s, q;
+        float       a, f, u, v;
         edge1 = vertices[1] - vertices[0];
         edge2 = vertices[2] - vertices[0];
         h     = rayVector.crossProduct(edge2);
         a     = edge1.dotProduct(h);
         if (a > -EPSILON && a < EPSILON)
+        {
             return false; // This ray is parallel to this triangle.
+        }
         f = 1.0f / a;
         s = rayOrigin - vertices[0];
         u = f * s.dotProduct(h);
         if (u < 0.0 || u > 1.0)
+        {
             return false;
+        }
         q = s.crossProduct(edge1);
         v = f * rayVector.dotProduct(q);
         if (v < 0.0 || u + v > 1.0)
+        {
             return false;
+        }
         // At this stage we can compute t to find out where the intersection point is on the line.
         float t = f * edge2.dotProduct(q);
         if (t > EPSILON && t <= 1.f) // ray intersection
@@ -223,8 +230,10 @@ struct Triangle
             return true;
         }
         else // This means that there is a line intersection but not a ray intersection.
+        {
             return false;
+        }
     }
 };
 
-#endif
+#endif // _LOS_COMMON_H

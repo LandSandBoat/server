@@ -36,10 +36,10 @@
 #include "campaign_handler.h"
 #include "common/vana_time.h"
 #include "trigger_area.h"
-#include "common/vana_time.h"
 #include "los/zone_los.h"
 #include "navmesh.h"
 #include "packets/weather.h"
+#include "trigger_area.h"
 
 enum ZONEID : uint16
 {
@@ -800,7 +800,7 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskMgr::CTask* ZoneTimer; //The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
 
     void createZoneTimer();
     void CharZoneIn(CCharEntity* PChar);

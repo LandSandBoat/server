@@ -20,8 +20,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "ability_state.h"
-#include "common/utils.h"
+
 #include "ability.h"
+#include "ai/ai_container.h"
+#include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
@@ -30,7 +32,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
-#include "ai/ai_container.h"
 
 CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
 : CState(PEntity, targid)

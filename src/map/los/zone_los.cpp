@@ -40,6 +40,7 @@ ZoneLos::ZoneLos(Triangle* elements, int elementCount)
 
 ZoneLos* ZoneLos::Load(uint16 zoneId, std::string pathToObj)
 {
+    TracyZoneScoped;
     // Check if file exists before loading the OBJ model.
     if (FILE* file = fopen(pathToObj.c_str(), "r"))
     {

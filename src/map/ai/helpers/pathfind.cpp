@@ -28,6 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "zone.h"
 #include "ai/ai_container.h"
 #include "lua/luautils.h"
+#include "zone.h"
 
 namespace
 {

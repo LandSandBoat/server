@@ -21,6 +21,8 @@
 
 #include "magic_state.h"
 
+#include "ai/ai_container.h"
+#include "ai/states/inactive_state.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
@@ -32,8 +34,6 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
-#include "ai/ai_container.h"
-#include "ai/states/inactive_state.h"
 
 CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags)
 : CState(PEntity, targid)

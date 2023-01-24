@@ -29,6 +29,8 @@
 #include "ai/states/mobskill_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "battlefield.h"
+#include "common/timer.h"
+#include "common/utils.h"
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
@@ -51,8 +53,6 @@
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 #include "weapon_skill.h"
-#include "common/timer.h"
-#include "common/utils.h"
 #include <algorithm>
 #include <cstring>
 #include <random>
