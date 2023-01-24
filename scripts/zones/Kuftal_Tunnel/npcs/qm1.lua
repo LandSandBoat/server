@@ -18,8 +18,8 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 645) and
-        npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, { radius = 1 })
+        npcUtil.tradeHasExactly(trade, 645) and
+        npcUtil.popFromQM(player, npc, ID.mob.PHANTOM_WORM, { radius = 1, hide = 0 })
     then
         -- Darksteel Ore
         player:confirmTrade()
