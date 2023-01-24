@@ -30,6 +30,7 @@ entity.onMobDespawn = function(mob)
     for i = ID.mob.CARMINE_DOBSONFLY_OFFSET, ID.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
         if GetMobByID(i):isAlive() then
             allFliesDead = false
+            break -- Break if 1 fly is found alive
         end
     end
 

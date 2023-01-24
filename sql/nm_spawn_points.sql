@@ -560,6 +560,16 @@ INSERT INTO `nm_spawn_points` VALUES (16896107,46,641.520,20.508,666.251);
 INSERT INTO `nm_spawn_points` VALUES (16896107,47,635.831,20.273,674.376);
 INSERT INTO `nm_spawn_points` VALUES (16896107,48,643.327,20.000,679.882);
 INSERT INTO `nm_spawn_points` VALUES (16896107,49,653.482,20.489,681.112);
+INSERT INTO `nm_spawn_points` VALUES (16900230,0,-177.14,48.00,-860.12); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900231,0,-199.48,47.86,-846.69); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900232,0,-191.20,48.22,-854.39); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900233,0,-177.91,47.91,-860.99); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900234,0,-174.60,48.33,-862.92); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900235,0,-174.40,47.74,-861.63); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900236,0,-173.86,48.08,-860.40); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900237,0,-178.71,47.50,-864.46); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900238,0,-174.73,48.20,-859.06); -- Carmine Dobsonfly
+INSERT INTO `nm_spawn_points` VALUES (16900239,0,-179.69,47.63,-863.42); -- Carmine Dobsonfly
 INSERT INTO `nm_spawn_points` VALUES (16916814,0,-426.739,-0.500,687.728); -- Jailer of Temperance
 INSERT INTO `nm_spawn_points` VALUES (16941066,0,43.488,-16.666,-6.216); -- Woodnix_Shrillwhistle
 INSERT INTO `nm_spawn_points` VALUES (16941082,0,-11.923,-15.769,0.747); -- Shamblix_Rottenheart

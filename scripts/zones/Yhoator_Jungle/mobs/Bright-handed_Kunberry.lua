@@ -16,12 +16,12 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.DMG,-5000)
+    mob:addMod(xi.mod.DMG, -5000)
 
     -- May spawn in a party with two other Orcs
-    if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+    if math.random(1, 2) == 1 then
+        GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.BRIGHT_HANDED_KUNBERRY + 1)
         SpawnMob(ID.mob.BRIGHT_HANDED_KUNBERRY + 2)
     end
@@ -30,7 +30,7 @@ end
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
-        local guardID = GetMobByID(mobId+i)
+        local guardID = GetMobByID(mobId + i)
         guardID:updateEnmity(target)
     end
 end
@@ -53,8 +53,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(75600, 77400)) -- 21 to 21.5 hours
+    xi.mob.nmTODPersist(mob, math.random(75600, 77400)) -- 21 to 21.5 hours
     DespawnMob(ID.mob.BRIGHT_HANDED_KUNBERRY + 1)
     DespawnMob(ID.mob.BRIGHT_HANDED_KUNBERRY + 2)
 end

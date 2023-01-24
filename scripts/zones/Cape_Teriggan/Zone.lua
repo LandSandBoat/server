@@ -62,7 +62,7 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     if
         not kreutzet:isSpawned() and
-        os.time() > GetServerVariable("[SPAWN]17093082") and
+        os.time() > GetServerVariable("\\[SPAWN\\]"..ID.mob.KREUTZET) and
         (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
         DisallowRespawn(kreutzet:getID(), false)

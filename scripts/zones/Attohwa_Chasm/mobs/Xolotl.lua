@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("xolotlDead", 0)
 end
 
-entity.onMobFight = function(mob,target)
+entity.onMobFight = function(mob, target)
     local timeInterval = mob:getBattleTime() % 6
 
     -- Spawn skeleton pets
@@ -23,7 +23,11 @@ entity.onMobFight = function(mob,target)
             if target and child:getCurrentAction() == xi.act.ROAMING then -- doing nothing, make share enmity
                 child:updateEnmity(target)
             end
-        elseif mob:getCurrentAction() ~= xi.act.MAGIC_CASTING and mob:actionQueueEmpty() and timeInterval == (i-1)*3 then -- not spawned, not casting, not using an ability and should summon
+        elseif -- not spawned, not casting, not using an ability and should summon
+                mob:getCurrentAction() ~= xi.act.MAGIC_CASTING and
+                mob:actionQueueEmpty() and
+                timeInterval == (i - 1) * 3
+        then
             mob:setMagicCastingEnabled(false)
             mob:setAutoAttackEnabled(false)
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
@@ -58,8 +62,14 @@ end
 
 entity.onMagicHit = function(caster, target, spell)
     -- Sets max sleep resist if a light based sleep lands on Xolotl
-    if spell:tookEffect() and caster:isPC() and (spell:getID() == 376 or
-    spell:getID() == 463 or spell:getID() == 576 or spell:getID() == 584) then
+    if
+        spell:tookEffect() and
+        caster:isPC() and
+        (spell:getID() == 376 or
+        spell:getID() == 463 or
+        spell:getID() == 576 or
+        spell:getID() == 584)
+    then
         target:setMod(xi.mod.SLEEPRES, 100)
     end
 end
@@ -73,12 +83,10 @@ end
 entity.onMobDespawn = function(mob)
     -- Xolotl respawn timer only triggers on death, will respawn next game night if not defeated
     local xolotlDead = mob:getLocalVar("xolotlDead")
+    local cooldown = math.random(75600, 86400) -- 21h to 24h
 
     if xolotlDead == 1 then
-        UpdateNMSpawnPoint(mob:getID())
-        local respawn = math.random(75600, 86400) -- 21h to 24h
-        mob:setRespawnTime(respawn)
-        mob:setLocalVar("xolotlRespawn",(os.time() + respawn))
+        xi.mob.nmTODPersist(mob, cooldown)
         DisallowRespawn(ID.mob.XOLOTL, true)
     elseif xolotlDead == 0 then
         DisallowRespawn(ID.mob.XOLOTL, true)

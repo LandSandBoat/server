@@ -102,7 +102,7 @@ zoneObject.onGameHour = function(zone)
     --]]
 
     -- Don't allow Citipati or Xolotl to spawn outside of night
-    local xolre = GetMobByID(ID.mob.XOLOTL):getLocalVar("xolotlRespawn")
+    local xolre = GetServerVariable(string.format("\\[SPAWN\\]"..ID.mob.XOLOTL))
 
     if VanadielHour() >= 4 and VanadielHour() < 20 then
         DisallowRespawn(ID.mob.CITIPATI, true)

@@ -1163,7 +1163,7 @@ INSERT INTO `mob_groups` VALUES (8,1901,30,'Hawker',330,0,142,0,0,45,48,0);
 INSERT INTO `mob_groups` VALUES (9,747,30,'Cloud_Hippogryph',330,0,488,0,0,45,47,0);
 INSERT INTO `mob_groups` VALUES (10,277,30,'Atomic_Cluster',330,0,188,0,0,45,48,0);
 INSERT INTO `mob_groups` VALUES (11,1355,30,'Flamedrake',330,0,841,0,0,47,49,0);
-INSERT INTO `mob_groups` VALUES (12,641,30,'Carmine_Dobsonfly',86400,0,418,1420,0,44,45,0);
+INSERT INTO `mob_groups` VALUES (12,641,30,'Carmine_Dobsonfly',0,128,418,1420,0,44,45,0);
 INSERT INTO `mob_groups` VALUES (13,4532,30,'Darner',330,0,142,0,0,84,85,0);
 INSERT INTO `mob_groups` VALUES (14,68,30,'Aiatar',0,32,35,6500,0,44,45,0);
 INSERT INTO `mob_groups` VALUES (15,4309,30,'Water_Elemental',0,128,0,4000,10000,75,75,0);

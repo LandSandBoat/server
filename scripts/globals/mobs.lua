@@ -42,7 +42,7 @@ local function persistLotteryPrimed(phList)
     for k, v in pairs(phList) do
         nm = GetMobByID(v)
         local zone = nm:getZone()
-        local respawnPersist = zone:getLocalVar(string.format("[SPAWN]%s", nm:getID()))
+        local respawnPersist = zone:getLocalVar(string.format("\\[SPAWN\\]%s", nm:getID()))
 
         if respawnPersist == 0 then
             return false
@@ -73,7 +73,7 @@ xi.mob.nmTODPersistCache = function(zone, mobId)
             return
         end
 
-        local respawn = GetServerVariable(string.format("[SPAWN]%s", mobId))
+        local respawn = GetServerVariable(string.format("\\[SPAWN\\]%s", mobId))
         zone:setLocalVar(string.format("[SPAWN]%s", mobId), respawn)
         if
             mob ~= nil and
@@ -102,7 +102,7 @@ end
 -- Needs to be added to the NM's zone onInit() function.
 xi.mob.lotteryPersistCache = function(zone, mobId)
     local mob = GetMobByID(mobId)
-    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getID()))
+    local respawn = GetServerVariable(string.format("\\[SPAWN\\]%s", mob:getID()))
     zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
 end
 
