@@ -1290,6 +1290,11 @@ INSERT INTO `item_latents` VALUES (14737,384,500,8,14);
 INSERT INTO `item_latents` VALUES (14738,5,30,8,15);
 
 -- -------------------------------------------------------
+-- Minuet Earring
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (14764,25,3,13,198);  -- Minuet: Accuracy+3
+
+-- -------------------------------------------------------
 -- Vampire Earring
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14783,8,4,26,1);      -- STR+4 during Nighttime
