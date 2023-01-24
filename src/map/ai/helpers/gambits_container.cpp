@@ -977,14 +977,14 @@ namespace gambits
                         for (auto& skill : tp_skills)
                         {
                             std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
 
                             std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
                             if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties);
                                 possible_skillchain != SC_NONE)
                             {
