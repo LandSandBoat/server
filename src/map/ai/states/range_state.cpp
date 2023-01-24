@@ -20,14 +20,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "range_state.h"
-#include "../../entities/charentity.h"
-#include "../../entities/trustentity.h"
-#include "../../items/item_weapon.h"
-#include "../../packets/action.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/charutils.h"
-#include "../ai_container.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
+#include "items/item_weapon.h"
+#include "packets/action.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
+#include "ai/ai_container.h"
 
 CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 : CState(PEntity, targid)
@@ -199,7 +199,8 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
         return false;
     }
-    if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))
+
+    if (!m_PEntity->CanSeeTarget(PTarget, false))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
         return false;
