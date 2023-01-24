@@ -1374,6 +1374,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Honey' AND ID 
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Mercury' AND ID = 60515;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Himantes' AND ID = 42503;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Beast Horn' AND ID = 53025;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Reraise Gorget' AND ID = 54007;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1605,7 +1606,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Tusk Ar
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Tusk Arrowheads' AND ID = 53526;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Darksteel Shield' AND ID = 54001;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Ring' AND ID = 54002;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Reraise Gorget' AND ID = 54007;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lamia Garland' AND ID = 54009;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Mega Fan' AND ID = 54011;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Hellish Bugle' AND ID = 54020;
