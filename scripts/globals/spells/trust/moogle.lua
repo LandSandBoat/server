@@ -1,6 +1,7 @@
 -----------------------------------
 -- Trust: Moogle
 -----------------------------------
+require("scripts/globals/status")
 require("scripts/globals/trust")
 -----------------------------------
 local spellObject = {}
