@@ -190,6 +190,8 @@ local pTable =
     [xi.magic.spell.BANISHGA_IV ] = { xi.mod.MND,  600,  1.5,  600, 600 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.HOLY        ] = { xi.mod.MND,  125,    1,  125, 150 },
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,  250,    2,  250, 300 },
+
+-- TODO: Healing Spells when used against undead/zombie
 }
 
 -----------------------------------
@@ -758,6 +760,50 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, 
     return nukeAbsorbOrNullify
 end
 
+-- Consecutive Elemental Damage Penalty. Most commonly known as "Nuke Wall".
+xi.spells.damage.calculateNukeWallFactor = function(caster, target, spell, spellElement, finalDamage)
+    local nukeWallFactor = 1
+
+    -- Initial check.
+    if
+        not target:isNM() or
+        spellElement <= 0 or
+        finalDamage < 0
+    then
+        return nukeWallFactor
+    end
+
+    -- Calculate current effect potency and apply it to nukeWallFactor.
+    local potency = 0
+
+    if target:hasStatusEffect(xi.effect.NUKE_WALL) then
+        local effect = target:getStatusEffect(xi.effect.NUKE_WALL)
+
+        if spellElement == effect:getSubPower() then
+            potency = effect:getPower()
+
+            -- Effect potency is reduced by 20% after 1 second and remains stable for the remaining time, unless refreshed.
+            if effect:getTimeRemaining() <= 4000 then
+                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 after first second has happened. Can't go below 0.
+            end
+        end
+    end
+
+    nukeWallFactor = 1 - potency / 10000
+
+    -- Calculate damage needed to reach the potency cap (4000). The lower the level, the easier to hit potency cap.
+    local damageCap = target:getMainLvl() * 21 + 500
+
+    -- Calculate final effect potency, dependant on damage dealt.
+    local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
+
+    -- Renew status effect.
+    target:delStatusEffect(xi.effect.NUKE_WALL)
+    target:addStatusEffect(xi.effect.NUKE_WALL, finalPotency, 0, 5, 0, spellElement)
+
+    return nukeWallFactor
+end
+
 -----------------------------------
 -- Spell Helper Function
 -----------------------------------
@@ -811,6 +857,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
+
+    -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
+    local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(caster, target, spell, spellElement, finalDamage)
+
+    finalDamage = math.floor(finalDamage * nukeWallFactor)
 
     -- Handle Phalanx
     if finalDamage > 0 then
