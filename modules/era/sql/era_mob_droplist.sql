@@ -4985,7 +4985,7 @@ INSERT INTO `mob_droplist` VALUES (560,0,0,1000,5850,20);  -- Bottle Of Swiftsho
 INSERT INTO `mob_droplist` VALUES (560,0,0,1000,5851,20);  -- Bottle Of Berserkers Tonic (2.0%)
 
 -- ZoneID: 173 - Dame Blanche
-INSERT INTO `mob_droplist` VALUES (561,0,0,1000,1280,@VCOMMON); -- Square Of Sarcenet Cloth (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (561,0,0,1000,1280,@ALWAYS); -- Square Of Sarcenet Cloth (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (561,0,0,1000,1280,@VCOMMON); -- Square Of Sarcenet Cloth (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (561,0,0,1000,1280,@VCOMMON); -- Square Of Sarcenet Cloth (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (561,0,0,1000,1280,@VCOMMON); -- Square Of Sarcenet Cloth (Very Common, 24%)
