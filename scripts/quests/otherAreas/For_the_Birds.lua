@@ -61,10 +61,10 @@ quest.sections =
                         return quest:event(15, { [1] = xi.items.ARNICA_ROOT })
                     elseif prog == 1 and not player:hasKeyItem(xi.ki.GLITTERING_FRAGMENT) then
                         return quest:progressEvent(16, { [1] = xi.ki.GLITTERING_FRAGMENT })
-                    elseif player:hasKeyItem(xi.ki.GLITTERING_FRAGMENT) then
-                        return quest:event(17)
                     elseif prog == 4 then
                         return quest:progressEvent(18)
+                    elseif player:hasKeyItem(xi.ki.GLITTERING_FRAGMENT) then
+                        return quest:event(17)
                     end
                 end,
             },
