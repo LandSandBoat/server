@@ -20,13 +20,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "pathfind.h"
-#include "../../../common/settings.h"
-#include "../../../common/utils.h"
-#include "../../entities/baseentity.h"
-#include "../../entities/mobentity.h"
-#include "../../mob_modifier.h"
-#include "../../zone.h"
-#include "../ai_container.h"
+#include "common/settings.h"
+#include "common/utils.h"
+#include "entities/baseentity.h"
+#include "entities/mobentity.h"
+#include "mob_modifier.h"
+#include "zone.h"
+#include "ai/ai_container.h"
 #include "lua/luautils.h"
 
 namespace
@@ -653,16 +653,6 @@ bool CPathFind::InWater()
     }
 
     return false;
-}
-
-bool CPathFind::CanSeePoint(const position_t& point, bool lookOffMesh)
-{
-    if (isNavMeshEnabled())
-    {
-        return m_POwner->loc.zone->m_navMesh->raycast(m_POwner->loc.p, point, lookOffMesh);
-    }
-
-    return true;
 }
 
 const position_t& CPathFind::GetDestination() const

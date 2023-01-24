@@ -20,11 +20,11 @@
 */
 #include <cstring>
 
-#include "../ai/ai_container.h"
-#include "../battlefield.h"
-#include "../instance.h"
-#include "../map.h"
-#include "../zone.h"
+#include "ai/ai_container.h"
+#include "battlefield.h"
+#include "instance.h"
+#include "map.h"
+#include "zone.h"
 #include "baseentity.h"
 
 CBaseEntity::CBaseEntity()
@@ -153,6 +153,25 @@ bool CBaseEntity::GetUntargetable() const
 bool CBaseEntity::isWideScannable()
 {
     return status != STATUS_TYPE::DISAPPEAR && !IsNameHidden() && !GetUntargetable();
+}
+
+bool CBaseEntity::CanSeeTarget(CBaseEntity* target, bool fallbackNavMesh)
+{
+    return CanSeeTarget(target->loc.p, fallbackNavMesh);
+}
+
+bool CBaseEntity::CanSeeTarget(const position_t& targetPointBase, bool fallbackNavMesh)
+{
+    if (loc.zone->lineOfSight)
+    {
+        return loc.zone->lineOfSight->CanEntitySee(this, targetPointBase);
+    }
+    else if (fallbackNavMesh && loc.zone->m_navMesh)
+    {
+        return loc.zone->m_navMesh->raycast(loc.p, targetPointBase);
+    }
+
+    return true;
 }
 
 CBaseEntity* CBaseEntity::GetEntity(uint16 targid, uint8 filter) const

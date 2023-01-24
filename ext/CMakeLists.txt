@@ -3,6 +3,7 @@
 # add_subdirectory(zmq) # Handled globally
 
 add_subdirectory(concurrentqueue)
+add_subdirectory(fast_obj)
 add_subdirectory(sol)
 
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
@@ -135,6 +136,7 @@ set(EXTERNAL_LIBS
     mariadbclient
     RecastNavigation::Recast
     RecastNavigation::Detour
+    fast_obj
     sol2_single
     argparse
     efsw

@@ -22,9 +22,10 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "../packets/message_basic.h"
+#include "packets/message_basic.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+
 #include <map>
 #include <memory>
 #include <vector>
@@ -270,6 +271,9 @@ public:
     bool         IsNameHidden() const;    // checks if name is hidden
     virtual bool GetUntargetable() const; // checks if entity is untargetable
     virtual bool isWideScannable();       // checks if the entity should show up on wide scan
+
+    bool CanSeeTarget(CBaseEntity* target, bool fallbackNavMesh = true);
+    bool CanSeeTarget(const position_t& targetPoint, bool fallbackNavMesh = true);
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
     void         SendZoneUpdate();

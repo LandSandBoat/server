@@ -19,7 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "ai_container.h"
+#include "ai/ai_container.h"
 
 #include "../entities/baseentity.h"
 #include "../entities/battleentity.h"
