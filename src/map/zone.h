@@ -32,11 +32,11 @@
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
-#include "trigger_area.h"
-#include "vana_time.h"
 #include "los/zone_los.h"
 #include "navmesh.h"
 #include "packets/weather.h"
+#include "trigger_area.h"
+#include "vana_time.h"
 
 enum ZONEID : uint16
 {
@@ -615,7 +615,7 @@ public:
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
     CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
-    CNavMesh* m_navMesh   = nullptr;  // zones navmesh for finding paths
+    CNavMesh* m_navMesh   = nullptr; // zones navmesh for finding paths
     ZoneLos*  lineOfSight = nullptr;
 
     time_point m_LoadedAt; // time zone was loaded
@@ -659,7 +659,7 @@ private:
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
-    CTaskMgr::CTask* ZoneTimer; //The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
+    CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
 
     void createZoneTimer();
     void CharZoneIn(CCharEntity* PChar);

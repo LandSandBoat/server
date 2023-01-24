@@ -20,6 +20,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "range_state.h"
+
+#include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
 #include "items/item_weapon.h"
@@ -27,7 +29,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
-#include "ai/ai_container.h"
 
 CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 : CState(PEntity, targid)

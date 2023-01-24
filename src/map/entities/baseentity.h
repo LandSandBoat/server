@@ -22,9 +22,9 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "packets/message_basic.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "packets/message_basic.h"
 
 #include <map>
 #include <memory>
@@ -217,6 +217,9 @@ struct EntityID_t
     uint16 targid;
 };
 
+class CAIContainer;
+class CBattlefield;
+class CInstance;
 class CZone;
 
 struct location_t
@@ -237,10 +240,6 @@ struct location_t
     {
     }
 };
-
-class CAIContainer;
-class CInstance;
-class CBattlefield;
 
 /************************************************************************
  *                                                                       *
@@ -314,7 +313,7 @@ public:
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
-    bool m_bReleaseTargIDOnDisappear = false;
+    bool m_bReleaseTargIDOnDisappear;
 
     SPAWN_ANIMATION spawnAnimation;
 

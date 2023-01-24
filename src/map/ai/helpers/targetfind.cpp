@@ -21,11 +21,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "targetfind.h"
 
-#include "common/mmo.h"
-#include "common/utils.h"
 #include "ai/ai_container.h"
 #include "ai/states/inactive_state.h"
 #include "alliance.h"
+#include "common/mmo.h"
+#include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
 #include "entities/mobentity.h"

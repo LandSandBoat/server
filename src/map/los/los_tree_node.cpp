@@ -20,6 +20,7 @@
 */
 
 #include "los_tree_node.h"
+
 #include "common/utils.h"
 
 #define TOP_ANGLE    M_PI / 5
@@ -28,12 +29,18 @@
 template <typename F>
 int splitArraySort(int* arr, int start, int end, F&& splitFunc)
 {
+    TracyZoneScoped;
     while (start < end)
     {
-        while (splitFunc(arr[start]) && start < end)
+        while (start < end && splitFunc(arr[start]))
+        {
             ++start;
-        while (!splitFunc(arr[end]) && start < end)
+        }
+
+        while (start < end && !splitFunc(arr[end]))
+        {
             --end;
+        }
 
         if (start >= end)
         {
@@ -46,16 +53,16 @@ int splitArraySort(int* arr, int start, int end, F&& splitFunc)
 }
 
 LosTreeNode::LosTreeNode(
-    Triangle* elements,
+    Triangle*    elements,
     BoundingBox* boundingBoxes,
-    int* elementNexts,
-    int* elementIndices,
-    int indexStart,
-    int indexEnd,
-    int splitsLeft,
-    float boxSizeThreshold,
-    size_t elementsThreshold,
-    bool normalSplit)
+    int*         elementNexts,
+    int*         elementIndices,
+    int          indexStart,
+    int          indexEnd,
+    int          splitsLeft,
+    float        boxSizeThreshold,
+    size_t       elementsThreshold,
+    bool         normalSplit)
 {
     int indexCount = indexEnd - indexStart + 1;
     if (indexCount <= 0)
@@ -77,19 +84,21 @@ LosTreeNode::LosTreeNode(
     {
         splitAxis = Axis::None;
 
+        // clang-format off
         indexSplit = splitArraySort(elementIndices, indexStart, indexEnd, [&elements](int index)
-            {
-                auto element = elements[index];
-                auto normal  = (element.vertices[1] - element.vertices[0]).crossProduct(element.vertices[2] - element.vertices[0]);
-                auto angle   = acosf(normal.y / normal.magnitude());
-                return angle <= TOP_ANGLE || angle >= BOTTOM_ANGLE;
-            });
+        {
+            auto element = elements[index];
+            auto normal  = (element.vertices[1] - element.vertices[0]).crossProduct(element.vertices[2] - element.vertices[0]);
+            auto angle   = acosf(normal.y / normal.magnitude());
+            return angle <= TOP_ANGLE || angle >= BOTTOM_ANGLE;
+        });
+        // clang-format on
     }
     else
     {
         // Use longest axis as heuritistic for spliting the node, and split by its median of objects.
-        BoundingBox nodeBox = boundingBoxes[indexStart];
-        float medians[3]    = { 0, 0, 0 };
+        BoundingBox nodeBox    = boundingBoxes[indexStart];
+        float       medians[3] = { 0, 0, 0 };
         for (auto i = indexStart; i <= indexEnd; i++)
         {
             auto& bounds = boundingBoxes[elementIndices[i]];
@@ -123,20 +132,22 @@ LosTreeNode::LosTreeNode(
         leftMax          = nodeBox.getAxisMin(splitAxis);
         rightMin         = nodeBox.getAxisMax(splitAxis);
 
+        // clang-format off
         indexSplit = splitArraySort(elementIndices, indexStart, indexEnd, [&boundingBoxes, &elements, &splitValue, this](int index)
+        {
+            auto& bounds = boundingBoxes[index];
+            if (bounds.getAxisMiddle(splitAxis) < splitValue)
             {
-                auto& bounds = boundingBoxes[index];
-                if (bounds.getAxisMiddle(splitAxis) < splitValue)
-                {
-                    leftMax = std::max(leftMax, bounds.getAxisMax(splitAxis));
-                    return true;
-                }
-                else
-                {
-                    rightMin = std::min(rightMin, bounds.getAxisMin(splitAxis));
-                    return false;
-                }
-            });
+                leftMax = std::max(leftMax, bounds.getAxisMax(splitAxis));
+                return true;
+            }
+            else
+            {
+                rightMin = std::min(rightMin, bounds.getAxisMin(splitAxis));
+                return false;
+            }
+        });
+        // clang-format on
     }
 
     if (indexSplit > indexStart)
@@ -168,6 +179,7 @@ LosTreeNode::~LosTreeNode()
 
 void LosTreeNode::SetElements(Triangle* elements, int* elementNexts, int* elementIndices, int indexStart, int indexEnd)
 {
+    TracyZoneScoped;
     // Store elements in a singly-linked list for this node.
     headElementIdx = elementIndices[indexStart];
     auto& element  = elements[headElementIdx];
@@ -203,6 +215,7 @@ void LosTreeNode::SetElements(Triangle* elements, int* elementNexts, int* elemen
 
 bool LosTreeNode::DoesRayCollide(BoundingBox& bounds, Vector3D& rayOrigin, Vector3D& rayVector, int* elementNexts, Triangle* elements)
 {
+    TracyZoneScoped;
     if (bounds.coords[2] > maxY || bounds.coords[3] < minY)
     {
         return false;
@@ -226,8 +239,7 @@ bool LosTreeNode::DoesRayCollide(BoundingBox& bounds, Vector3D& rayOrigin, Vecto
     // Special case if split axis is not defined. Both children are visited.
     if (splitAxis == Axis::None)
     {
-        return (right && right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
-               || (left && left->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements));
+        return (right && right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements)) || (left && left->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements));
     }
 
     if (right && bounds.getAxisMax(splitAxis) >= rightMin && right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
@@ -245,6 +257,7 @@ bool LosTreeNode::DoesRayCollide(BoundingBox& bounds, Vector3D& rayOrigin, Vecto
 
 LosTreeNodeStats LosTreeNode::GetStats(int* elementNexts, Triangle* elements)
 {
+    TracyZoneScoped;
     LosTreeNodeStats stats;
     if (headElementIdx != -1)
     {
@@ -259,13 +272,12 @@ LosTreeNodeStats LosTreeNode::GetStats(int* elementNexts, Triangle* elements)
             count++;
         }
 
-        stats.emptyNodes      = 0;
-        stats.nodes           = 1;
-        stats.maxDepth        = 1;
-        stats.minDepth        = 1;
-        stats.averageElements = count;
-        stats.minElements     = count;
-        stats.maxElements     = count;
+        stats.emptyNodes  = 0;
+        stats.nodes       = 1;
+        stats.maxDepth    = 1;
+        stats.minDepth    = 1;
+        stats.minElements = count;
+        stats.maxElements = count;
 
         stats.maxAxis = std::max(std::max(stats.boundingBox.getAxisSize(Axis::X), stats.boundingBox.getAxisSize(Axis::Y)), stats.boundingBox.getAxisSize(Axis::Z));
 

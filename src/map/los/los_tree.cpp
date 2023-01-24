@@ -28,7 +28,7 @@ LosTree::LosTree(Triangle* elements, int elementCount)
     this->elementCount = elementCount;
 
     BoundingBox* boundingBoxes = new BoundingBox[elementCount];
-    int* indices               = new int[elementCount];
+    int*         indices       = new int[elementCount];
 
     for (int i = 0; i < elementCount; i++)
     {
@@ -54,11 +54,13 @@ LosTree::~LosTree()
 
 LosTreeNodeStats LosTree::GetStats()
 {
+    TracyZoneScoped;
     return root->GetStats(this->elementNexts, this->elements);
 }
 
 bool LosTree::DoesRayCollide(Vector3D& rayOrigin, Vector3D& rayEnd)
 {
+    TracyZoneScoped;
     BoundingBox bounds = BoundingBox();
     bounds.coords[0]   = std::min(rayOrigin.x, rayEnd.x);
     bounds.coords[1]   = std::max(rayOrigin.x, rayEnd.x);

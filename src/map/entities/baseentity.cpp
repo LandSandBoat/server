@@ -18,36 +18,38 @@
 
 ===========================================================================
 */
-#include <cstring>
+
+#include "baseentity.h"
 
 #include "ai/ai_container.h"
 #include "battlefield.h"
 #include "instance.h"
 #include "map.h"
 #include "zone.h"
-#include "baseentity.h"
+
+#include <cstring>
 
 CBaseEntity::CBaseEntity()
-: objtype(ENTITYTYPE::TYPE_NONE)
+: id(0)
+, targid(0)
+, objtype(ENTITYTYPE::TYPE_NONE)
 , status(STATUS_TYPE::DISAPPEAR)
+, m_TargID(0)
+, animation(0)
+, animationsub(0)
+, speed(50 + settings::get<int8>("map.SPEED_MOD")) // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
+, speedsub(50)                                     // Retail does NOT adjust this when speed is adjusted.
+, namevis(0)
 , allegiance(ALLEGIANCE_TYPE::MOB)
+, updatemask(0)
+, isRenamed(false)
+, m_bReleaseTargIDOnDisappear(false)
 , spawnAnimation(SPAWN_ANIMATION::NORMAL)
 , PAI(nullptr)
+, PBattlefield(nullptr)
+, PInstance(nullptr)
 , m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
-    id       = 0;
-    targid   = 0;
-    m_TargID = 0;
-
-    isRenamed    = false;
-    animation    = 0;
-    animationsub = 0;
-    speed        = 50 + settings::get<int8>("map.SPEED_MOD"); // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
-    speedsub     = 50;                                        // Retail does NOT adjust this when speed is adjusted.
-    namevis      = 0;
-    updatemask   = 0;
-    PBattlefield = nullptr;
-    PInstance    = nullptr;
 }
 
 CBaseEntity::~CBaseEntity()

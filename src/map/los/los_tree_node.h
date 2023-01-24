@@ -28,15 +28,15 @@
 
 struct LosTreeNodeStats
 {
-    int minDepth        = INT_MAX;
-    int maxDepth        = INT_MIN;
-    int minElements     = INT_MAX;
-    int averageElements = 0;
-    int maxElements     = INT_MIN;
-    int nodes           = 0;
-    int emptyNodes      = 0;
+    int minDepth    = INT_MAX;
+    int maxDepth    = INT_MIN;
+    int minElements = INT_MAX;
+    int maxElements = INT_MIN;
+    int nodes       = 0;
+    int emptyNodes  = 0;
 
     float maxAxis = 0;
+
     BoundingBox boundingBox;
 };
 
@@ -44,16 +44,16 @@ class LosTreeNode
 {
 public:
     LosTreeNode(
-        Triangle* elements,
+        Triangle*    elements,
         BoundingBox* boundingBoxes,
-        int* elementNexts,
-        int* elementIndices,
-        int indexStart,
-        int indexEnd,
-        int splitsLeft,
-        float boxSizeThreshold,
-        size_t elementsThreshold,
-        bool normalSplit = false);
+        int*         elementNexts,
+        int*         elementIndices,
+        int          indexStart,
+        int          indexEnd,
+        int          splitsLeft,
+        float        boxSizeThreshold,
+        size_t       elementsThreshold,
+        bool         normalSplit = false);
 
     ~LosTreeNode();
 
@@ -61,24 +61,24 @@ public:
 
     bool DoesRayCollide(
         BoundingBox& bounds,
-        Vector3D& rayOrigin,
-        Vector3D& rayVector,
-        int* elementNexts,
-        Triangle* elements);
+        Vector3D&    rayOrigin,
+        Vector3D&    rayVector,
+        int*         elementNexts,
+        Triangle*    elements);
 
 private:
     void SetElements(Triangle* elements, int* elementNexts, int* elementIndices, int indexStart, int indexEnd);
-    int headElementIdx = -1;
+    int  headElementIdx = -1;
 
     // Keep bounds for Y-axis since rays are usually mostly horizontal, so we can skip a bunch of triangle checks.
     float minY = 100000.0f;
     float maxY = -100000.0f;
 
-    Axis splitAxis     = Axis::None;
-    float leftMax      = 0;
-    float rightMin     = 0;
-    LosTreeNode* left  = nullptr;
-    LosTreeNode* right = nullptr;
+    Axis         splitAxis = Axis::None;
+    float        leftMax   = 0;
+    float        rightMin  = 0;
+    LosTreeNode* left      = nullptr;
+    LosTreeNode* right     = nullptr;
 };
 
-#endif
+#endif // _LOS_TREE_NODE_H
