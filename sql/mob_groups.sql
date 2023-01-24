@@ -11666,7 +11666,7 @@ INSERT INTO `mob_groups` VALUES (8,771,173,'Combat',792,0,401,0,0,27,30,0);
 INSERT INTO `mob_groups` VALUES (9,2146,173,'Jelly',660,0,1407,0,0,23,27,0);
 INSERT INTO `mob_groups` VALUES (10,3912,173,'Thunder_Elemental',792,4,2410,0,0,32,34,0);
 INSERT INTO `mob_groups` VALUES (11,3523,173,'Sea_Monk',792,0,290,0,0,32,35,0);
-INSERT INTO `mob_groups` VALUES (12,1807,173,'Greater_Pugil',0,128,1231,0,0,25,32,0);
+INSERT INTO `mob_groups` VALUES (12,1807,173,'Greater_Pugil',792,0,1231,0,0,25,32,0);
 INSERT INTO `mob_groups` VALUES (13,743,173,'Clipper',792,0,483,0,0,29,32,0);
 INSERT INTO `mob_groups` VALUES (14,4309,173,'Water_Elemental',792,4,2629,0,0,32,34,0);
 INSERT INTO `mob_groups` VALUES (15,639,173,'Cargo_Crab_Colin',0,32,416,0,0,34,37,0);
