@@ -623,7 +623,7 @@ INSERT INTO `synth_recipes` VALUES (5508,0,0,115,70,0,0,0,0,0,0,4098,4240,1346,4
 -- INSERT INTO `synth_recipes` VALUES (5527,0,1989,255,0,0,0,0,0,255,0,4099,4241,821,830,8754,9007,9246,9246,0,0,25551,25552,25552,25552,1,1,1,1,'Kendatsuba Jinpachi');
 -- INSERT INTO `synth_recipes` VALUES (5528,0,1989,255,0,0,0,0,0,0,0,4096,4238,4074,9246,9247,17333,17333,17333,0,0,21310,21310,21310,21310,33,33,33,33,'Raetic Arrow');
 INSERT INTO `synth_recipes` VALUES (9901,1,0,28,0,0,0,0,0,0,0,4100,4242,15289,0,0,0,0,0,0,0,856,850,850,850,1,2,3,4,'Bolt Belt (desynth)'); -- based on synth - results varied, scaled HQ's 10/30/21
-INSERT INTO `synth_recipes` VALUES (9902,1,0,2,0,0,0,0,0,0,0,4100,4242,17345,0,0,0,0,0,0,0,917,708,708,708,1,1,1,1,'Flute (desynth)'); -- based on synth lvl 10/30/21
+INSERT INTO `synth_recipes` VALUES (9902,1,0,2,0,0,0,0,0,0,0,4100,4242,17345,0,0,0,0,0,0,0,917,917,708,708,1,1,1,1,'Flute (desynth)'); -- based on synth lvl 10/30/21
 INSERT INTO `synth_recipes` VALUES (9903,1,0,18,0,0,0,0,0,0,0,4100,4242,16833,0,0,0,0,0,0,0,715,817,649,649,1,1,1,1,'Bronze Spear (desynth)'); -- use synth lvl, xiclopedia HQ results
 INSERT INTO `synth_recipes` VALUES (9904,1,0,54,0,0,0,0,0,0,0,4100,4242,17030,0,0,0,0,0,0,0,649,649,717,717,1,1,1,1,'Great Club (desynth)'); -- Level based on level to synth
 INSERT INTO `synth_recipes` VALUES (9905,1,0,23,0,0,0,0,0,0,0,4100,4242,17051,0,0,0,0,0,0,0,841,713,713,713,1,1,1,1,'Yew Wand (desynth)'); -- Level based on level to synth
