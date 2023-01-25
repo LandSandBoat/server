@@ -213,12 +213,12 @@ void LosTreeNode::SetElements(Triangle* elements, int* elementNexts, int* elemen
     }
 }
 
-bool LosTreeNode::DoesRayCollide(BoundingBox& bounds, Vector3D& rayOrigin, Vector3D& rayVector, int* elementNexts, Triangle* elements) const
+std::optional<Vector3D> LosTreeNode::DoesRayCollide(BoundingBox& bounds, Vector3D& rayOrigin, Vector3D& rayVector, int* elementNexts, Triangle* elements) const
 {
     TracyZoneScoped;
     if (bounds.coords[2] > maxY || bounds.coords[3] < minY)
     {
-        return false;
+        return std::nullopt;
     }
 
     if (headElementIdx != -1)
@@ -226,33 +226,55 @@ bool LosTreeNode::DoesRayCollide(BoundingBox& bounds, Vector3D& rayOrigin, Vecto
         int idx = headElementIdx;
         while (idx != -1)
         {
-            if (elements[idx].doesRayIntersect(rayOrigin, rayVector))
+            if (auto vec = elements[idx].doesRayIntersect(rayOrigin, rayVector))
             {
-                return true;
+                return vec;
             }
             idx = elementNexts[idx];
         }
 
-        return false;
+        return std::nullopt;
     }
 
     // Special case if split axis is not defined. Both children are visited.
     if (splitAxis == Axis::None)
     {
-        return (right && right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements)) || (left && left->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements));
+        if (right)
+        {
+            if (auto rightPos = right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
+            {
+                return rightPos;
+            }
+        }
+
+        if (left)
+        {
+            if (auto leftPos = left->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
+            {
+                return leftPos;
+            }
+        }
+
+        return std::nullopt;
     }
 
-    if (right && bounds.getAxisMax(splitAxis) >= rightMin && right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
+    if (right && bounds.getAxisMax(splitAxis) >= rightMin)
     {
-        return true;
+        if (auto rightPos = right->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
+        {
+            return rightPos;
+        }
     }
 
-    if (left && bounds.getAxisMin(splitAxis) <= leftMax && left->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
+    if (left && bounds.getAxisMin(splitAxis) <= leftMax)
     {
-        return true;
+        if (auto leftPos = left->DoesRayCollide(bounds, rayOrigin, rayVector, elementNexts, elements))
+        {
+            return leftPos;
+        }
     }
 
-    return false;
+    return std::nullopt;
 }
 
 LosTreeNodeStats LosTreeNode::GetStats(int* elementNexts, Triangle* elements)

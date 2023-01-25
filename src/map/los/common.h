@@ -25,6 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/logging.h"
 
+#include <optional>
+
 enum class Axis : uint8
 {
     None = 255,
@@ -188,43 +190,58 @@ struct Triangle
     }
 
     // Taken from: https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm#C++_implementation
-    bool doesRayIntersect(Vector3D rayOrigin, Vector3D rayVector)
+    std::optional<Vector3D> doesRayIntersect(Vector3D rayOrigin, Vector3D rayVector)
     {
-        const float EPSILON = 0.0000001f;
-        Vector3D    edge1, edge2, h, s, q;
-        float       a, f, u, v;
+        constexpr float EPSILON = 0.0000001f;
+
+        Vector3D edge1;
+        Vector3D edge2;
+        Vector3D h;
+        Vector3D s;
+        Vector3D q;
+
+        float a;
+        float f;
+        float u;
+        float v;
+
         edge1 = vertices[1] - vertices[0];
         edge2 = vertices[2] - vertices[0];
         h     = rayVector.crossProduct(edge2);
         a     = edge1.dotProduct(h);
+
         if (a > -EPSILON && a < EPSILON)
         {
-            return false; // This ray is parallel to this triangle.
+            return std::nullopt; // This ray is parallel to this triangle.
         }
+
         f = 1.0f / a;
         s = rayOrigin - vertices[0];
         u = f * s.dotProduct(h);
+
         if (u < 0.0 || u > 1.0)
         {
-            return false;
+            return std::nullopt;
         }
+
         q = s.crossProduct(edge1);
         v = f * rayVector.dotProduct(q);
+
         if (v < 0.0 || u + v > 1.0)
         {
-            return false;
+            return std::nullopt;
         }
+
         // At this stage we can compute t to find out where the intersection point is on the line.
         float t = f * edge2.dotProduct(q);
         if (t > EPSILON && t <= 1.f) // ray intersection
         {
-            // Can get intersection point if needed
-            // Vector3D outIntersectionPoint = rayOrigin + rayVector * t;
-            return true;
+            Vector3D outIntersectionPoint = rayOrigin + rayVector * t;
+            return outIntersectionPoint;
         }
         else // This means that there is a line intersection but not a ray intersection.
         {
-            return false;
+            return std::nullopt;
         }
     }
 };

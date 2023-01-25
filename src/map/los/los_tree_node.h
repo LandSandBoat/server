@@ -59,7 +59,7 @@ public:
 
     LosTreeNodeStats GetStats(int* elementNexts, Triangle* elements);
 
-    bool DoesRayCollide(
+    std::optional<Vector3D> DoesRayCollide(
         BoundingBox& bounds,
         Vector3D&    rayOrigin,
         Vector3D&    rayVector,

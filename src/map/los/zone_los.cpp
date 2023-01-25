@@ -122,7 +122,19 @@ bool ZoneLos::CanEntitySee(CBaseEntity* source, const position_t& targetPointBas
     return !DoesRayCollide({ source->loc.p.x, source->loc.p.y - 2, source->loc.p.z }, { targetPointBase.x, targetPointBase.y - 2, targetPointBase.z });
 }
 
-bool ZoneLos::DoesRayCollide(Vector3D rayOrigin, Vector3D rayEnd) const
+std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, CBaseEntity* target) const
+{
+    TracyZoneScoped;
+    return Raycast(source, target->loc.p);
+}
+
+std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, const position_t& targetPointBase) const
+{
+    TracyZoneScoped;
+    return DoesRayCollide({ source->loc.p.x, source->loc.p.y - 2, source->loc.p.z }, { targetPointBase.x, targetPointBase.y - 2, targetPointBase.z });
+}
+
+std::optional<Vector3D> ZoneLos::DoesRayCollide(Vector3D rayOrigin, Vector3D rayEnd) const
 {
     TracyZoneScoped;
     return tree.DoesRayCollide(rayOrigin, rayEnd);
