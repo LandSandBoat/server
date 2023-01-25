@@ -1141,16 +1141,28 @@ bool CMobController::Cast(uint16 targid, SpellID spellid)
 bool CMobController::CanMoveForward(float currentDistance)
 {
     TracyZoneScoped;
-    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < 20)
+
+    uint16 standbackRange = 20;
+
+    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }
 
-    if (PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 && PMob->getMobMod(MOBMOD_HP_STANDBACK) > 0 && currentDistance < 20 &&
-        PMob->GetHPP() >= PMob->getMobMod(MOBMOD_HP_STANDBACK))
+    auto standbackThreshold = PMob->getMobMod(MOBMOD_HP_STANDBACK);
+    if (currentDistance < standbackRange &&
+        standbackThreshold > 0 &&
+        PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 &&
+        PMob->GetHPP() >= standbackThreshold &&
+        (PMob->GetMaxMP() == 0 || PMob->GetMPP() >= standbackThreshold))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
         return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
+    }
+
+    if (!PMob->CanSeeTarget(PTarget))
+    {
+        return true;
     }
 
     if (PMob->getMobMod(MOBMOD_SPAWN_LEASH) > 0 && distance(PMob->loc.p, PMob->m_SpawnPoint) > PMob->getMobMod(MOBMOD_SPAWN_LEASH))
