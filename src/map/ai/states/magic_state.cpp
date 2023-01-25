@@ -55,7 +55,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
         throw CStateInitException(std::move(m_errorMsg));
     }
 
-    if (!CanCastSpell(PTarget))
+    if (!CanCastSpell(PTarget, false))
     {
         throw CStateInitException(std::move(m_errorMsg));
     }
@@ -278,7 +278,7 @@ CSpell* CMagicState::GetSpell()
     return m_PSpell.get();
 }
 
-bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
+bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
 {
     auto ret = m_PEntity->CanUseSpell(GetSpell());
 
@@ -351,7 +351,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
         }
     }
 
-    if (m_PEntity->objtype == TYPE_PC && m_PEntity->loc.zone->CanUseMisc(MISC_LOS_PLAYER_BLOCK) && !m_PEntity->CanSeeTarget(PTarget, false))
+    if (!isEndOfCast && m_PEntity->objtype == TYPE_PC && m_PEntity->loc.zone->CanUseMisc(MISC_LOS_PLAYER_BLOCK) && !m_PEntity->CanSeeTarget(PTarget, false))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_CANNOT_PERFORM_ACTION);
         return false;
