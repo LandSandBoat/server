@@ -152,7 +152,7 @@ struct Vector3D
     }
 
     // Misc other
-    Vector3D crossProduct(Vector3D const& other)
+    Vector3D crossProduct(Vector3D const& other) const
     {
         float ni = y * other.z - z * other.y;
         float nj = z * other.x - x * other.z;
@@ -160,12 +160,12 @@ struct Vector3D
         return Vector3D{ ni, nj, nk };
     }
 
-    float dotProduct(Vector3D const& other)
+    float dotProduct(Vector3D const& other) const
     {
         return x * other.x + y * other.y + z * other.z;
     }
 
-    float magnitude()
+    float magnitude() const
     {
         return sqrt(x * x + y * y + z * z);
     }
