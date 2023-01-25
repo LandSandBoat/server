@@ -979,14 +979,23 @@ def configure_and_launch_multi_process_by_zonetype():
     # fmt: on
 
 
+def update_submodules():
+    # fmt: off
+    result = subprocess.run(
+        ["git", "submodule", "update", "--init", "--recursive", "--progress"], capture_output=True, text=True).stdout
+    print(result)
+    # fmt: on
+
+
 def tasks_menu():
     present_menu(
         "Maintenance Tasks",
         {
-            "1": ["Set zone IP addresses", set_external_ip_dialog],
-            "2": ["Server-wide announcement", announce_menu],
-            "3": ["Show table sizes (min 2MB)", print_db_tables_by_size],
-            # "4": [
+            "1": ["Update git submodules", update_submodules],
+            "2": ["Set zone IP addresses", set_external_ip_dialog],
+            "3": ["Server-wide announcement", announce_menu],
+            "4": ["Show table sizes (min 2MB)", print_db_tables_by_size],
+            # "5": [
             #     "Offload historical auction data to auction_house_history",
             #     offload_to_auction_house_history,
             # ],
@@ -1065,6 +1074,7 @@ def main():
         print(colorama.ansi.clear_screen())
         connect()
         while cur:
+            colorama.init(autoreset=True)
             title = (
                 "LandSandBoat Database Management Tool\n" + "Connected to " + database
             )

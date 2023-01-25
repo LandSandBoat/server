@@ -20,21 +20,22 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "mob_controller.h"
-#include "../../../common/utils.h"
-#include "../../enmity_container.h"
-#include "../../entities/mobentity.h"
-#include "../../mob_modifier.h"
-#include "../../mob_spell_container.h"
-#include "../../mobskill.h"
-#include "../../party.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/petutils.h"
-#include "../ai_container.h"
-#include "../helpers/targetfind.h"
-#include "../states/ability_state.h"
-#include "../states/magic_state.h"
-#include "../states/weaponskill_state.h"
+
+#include "ai/ai_container.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/mobentity.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "mobskill.h"
+#include "party.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/petutils.h"
 
 CMobController::CMobController(CMobEntity* PEntity)
 : CController(PEntity)
@@ -155,7 +156,7 @@ bool CMobController::CheckLock(CBattleEntity* PTarget)
 bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    if (CanDetectTarget(PTarget) || CanPursueTarget(PTarget) ||
+    if (CanPursueTarget(PTarget) || CanDetectTarget(PTarget) ||
         PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY, EFFECT_PETRIFICATION }))
     {
         TapDeaggroTime();
@@ -251,9 +252,11 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         hasSneak     = PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK);
     }
 
+    bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange();
+
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((PMob->m_Behaviour & BEHAVIOUR_AGGRO_AMBUSH) && currentDistance < 3 && !hasSneak)
@@ -263,13 +266,13 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if ((detects & DETECT_HEARING) && currentDistance < PMob->getMobMod(MOBMOD_SOUND_RANGE) && !hasSneak)
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
         PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     // everything below require distance to be below 20
@@ -280,31 +283,20 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_WEAPONSKILL) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_JOBABILITY) && PTarget->PAI->IsCurrentState<CAbilityState>())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     return false;
-}
-
-bool CMobController::CanSeePoint(position_t pos)
-{
-    TracyZoneScoped;
-    if (PMob->PAI->PathFind)
-    {
-        return PMob->PAI->PathFind->CanSeePoint(pos);
-    }
-
-    return true;
 }
 
 bool CMobController::MobSkill(int wsList)
@@ -1149,16 +1141,28 @@ bool CMobController::Cast(uint16 targid, SpellID spellid)
 bool CMobController::CanMoveForward(float currentDistance)
 {
     TracyZoneScoped;
-    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < 20)
+
+    uint16 standbackRange = 20;
+
+    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }
 
-    if (PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 && PMob->getMobMod(MOBMOD_HP_STANDBACK) > 0 && currentDistance < 20 &&
-        PMob->GetHPP() >= PMob->getMobMod(MOBMOD_HP_STANDBACK))
+    auto standbackThreshold = PMob->getMobMod(MOBMOD_HP_STANDBACK);
+    if (currentDistance < standbackRange &&
+        standbackThreshold > 0 &&
+        PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 &&
+        PMob->GetHPP() >= standbackThreshold &&
+        (PMob->GetMaxMP() == 0 || PMob->GetMPP() >= standbackThreshold))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
         return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
+    }
+
+    if (!PMob->CanSeeTarget(PTarget))
+    {
+        return true;
     }
 
     if (PMob->getMobMod(MOBMOD_SPAWN_LEASH) > 0 && distance(PMob->loc.p, PMob->m_SpawnPoint) > PMob->getMobMod(MOBMOD_SPAWN_LEASH))

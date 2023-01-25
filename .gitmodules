@@ -4,3 +4,6 @@
 [submodule "documentation/wiki"]
 	path = documentation/wiki
 	url = https://github.com/LandSandBoat/server.wiki.git
+[submodule "losmeshes"]
+	path = losmeshes
+	url = https://github.com/LandSandBoat/losmeshes.git
