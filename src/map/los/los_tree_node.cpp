@@ -29,7 +29,6 @@
 template <typename F>
 int splitArraySort(int* arr, int start, int end, F&& splitFunc)
 {
-    TracyZoneScoped;
     while (start < end)
     {
         while (start < end && splitFunc(arr[start]))
@@ -179,7 +178,6 @@ LosTreeNode::~LosTreeNode()
 
 void LosTreeNode::SetElements(Triangle* elements, int* elementNexts, int* elementIndices, int indexStart, int indexEnd)
 {
-    TracyZoneScoped;
     // Store elements in a singly-linked list for this node.
     headElementIdx = elementIndices[indexStart];
     auto& element  = elements[headElementIdx];
