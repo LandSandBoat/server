@@ -33,6 +33,11 @@
 float totalMemory = 0;
 #endif
 
+namespace
+{
+    float ENTITY_HEIGHT = 2.0f;
+}
+
 ZoneLos::ZoneLos(Triangle* elements, int elementCount)
 : tree(LosTree(elements, elementCount))
 {
@@ -116,10 +121,10 @@ bool ZoneLos::CanEntitySee(CBaseEntity* source, CBaseEntity* target) const
     return CanEntitySee(source, target->loc.p);
 }
 
-bool ZoneLos::CanEntitySee(CBaseEntity* source, const position_t& targetPointBase) const
+bool ZoneLos::CanEntitySee(CBaseEntity* source, position_t const& targetPointBase) const
 {
     TracyZoneScoped;
-    return !DoesRayCollide({ source->loc.p.x, source->loc.p.y - 2, source->loc.p.z }, { targetPointBase.x, targetPointBase.y - 2, targetPointBase.z });
+    return !DoesRayCollide({ source->loc.p.x, source->loc.p.y - ENTITY_HEIGHT, source->loc.p.z }, { targetPointBase.x, targetPointBase.y - ENTITY_HEIGHT, targetPointBase.z });
 }
 
 std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, CBaseEntity* target) const
@@ -128,10 +133,10 @@ std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, CBaseEntity* targe
     return Raycast(source, target->loc.p);
 }
 
-std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, const position_t& targetPointBase) const
+std::optional<Vector3D> ZoneLos::Raycast(position_t const& source, position_t const& target) const
 {
     TracyZoneScoped;
-    return DoesRayCollide({ source->loc.p.x, source->loc.p.y - 2, source->loc.p.z }, { targetPointBase.x, targetPointBase.y - 2, targetPointBase.z });
+    return DoesRayCollide({ source.x, source.y, source.z }, { target.x, target.y, target.z });
 }
 
 std::optional<Vector3D> ZoneLos::DoesRayCollide(Vector3D rayOrigin, Vector3D rayEnd) const
