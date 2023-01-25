@@ -284,6 +284,16 @@ int32 do_init(int32 argc, char** argv)
     daily::LoadDailyItems();
     roeutils::UpdateUnityRankings();
 
+    if (!std::filesystem::exists("./navmeshes/") || std::filesystem::is_empty("./navmeshes/"))
+    {
+        ShowInfo("./navmeshes/ directory isn't present or is empty");
+    }
+
+    if (!std::filesystem::exists("./losmeshes/") || std::filesystem::is_empty("./losmeshes/"))
+    {
+        ShowInfo("./losmeshes/ directory isn't present or is empty");
+    }
+
     ShowInfo("do_init: loading zones");
     zoneutils::LoadZoneList();
 
