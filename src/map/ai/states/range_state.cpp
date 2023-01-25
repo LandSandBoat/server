@@ -214,5 +214,12 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
         return false;
     }
 
+    uint8 anim = m_PEntity->animation;
+    if (anim != ANIMATION_NONE && anim != ANIMATION_ATTACK)
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
+        return false;
+    }
+
     return true;
 }
