@@ -780,6 +780,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
         local maxHPDiff = member:getMaxHP() - member:getHP()
         if
             inBreathRange(member) and
+            not member:isDead() and
             (maxHPDiff > highestHPDiff and maxHPDiff > 0) -- Dont pick target if they have full HP
         then
             target = member
