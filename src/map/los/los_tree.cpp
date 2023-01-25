@@ -58,7 +58,7 @@ LosTreeNodeStats LosTree::GetStats()
     return root->GetStats(this->elementNexts, this->elements);
 }
 
-bool LosTree::DoesRayCollide(Vector3D& rayOrigin, Vector3D& rayEnd)
+bool LosTree::DoesRayCollide(Vector3D& rayOrigin, Vector3D& rayEnd) const
 {
     TracyZoneScoped;
     BoundingBox bounds = BoundingBox();

@@ -32,12 +32,12 @@ class ZoneLos
 public:
     static ZoneLos* Load(uint16 zoneId, std::string pathToObj);
 
-    bool CanEntitySee(CBaseEntity* source, CBaseEntity* target);
-    bool CanEntitySee(CBaseEntity* source, const position_t& targetPointBase);
+    bool CanEntitySee(CBaseEntity* source, CBaseEntity* target) const;
+    bool CanEntitySee(CBaseEntity* source, const position_t& targetPointBase) const;
 
 private:
     ZoneLos(Triangle* elements, int elementCount);
-    bool DoesRayCollide(Vector3D rayOrigin, Vector3D rayEnd);
+    bool DoesRayCollide(Vector3D rayOrigin, Vector3D rayEnd) const;
 
     LosTree tree;
 };

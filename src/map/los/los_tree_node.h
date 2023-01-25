@@ -64,7 +64,7 @@ public:
         Vector3D&    rayOrigin,
         Vector3D&    rayVector,
         int*         elementNexts,
-        Triangle*    elements);
+        Triangle*    elements) const;
 
 private:
     void SetElements(Triangle* elements, int* elementNexts, int* elementIndices, int indexStart, int indexEnd);
