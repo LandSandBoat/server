@@ -69,7 +69,7 @@ local function doHealingBreath(player, threshold)
     else
         local party = player:getPartyWithTrusts()
         for _, member in pairs(party) do
-            if member:getHPP() <= threshold and inBreathRange(member) then
+            if member:getHPP() <= threshold and inBreathRange(member) and not member:isDead() then
                 player:getPet():useJobAbility(healingbreath, member)
                 break
             end
@@ -189,7 +189,6 @@ entity.onMobDeath = function(mob, player)
 end
 
 entity.onPetLevelRestriction = function(pet)
-    removeWyvernLevels(pet)
     pet:setLocalVar("wyvern_exp", 0)
     pet:setLocalVar("level_Ups", 0)
 end
