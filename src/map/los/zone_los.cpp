@@ -130,7 +130,7 @@ bool ZoneLos::CanEntitySee(CBaseEntity* source, position_t const& targetPointBas
 std::optional<Vector3D> ZoneLos::Raycast(CBaseEntity* source, CBaseEntity* target) const
 {
     TracyZoneScoped;
-    return Raycast(source, target->loc.p);
+    return Raycast(source->loc.p, target->loc.p);
 }
 
 std::optional<Vector3D> ZoneLos::Raycast(position_t const& source, position_t const& target) const
