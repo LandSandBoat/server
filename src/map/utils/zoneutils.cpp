@@ -19,27 +19,28 @@
 ===========================================================================
 */
 
-#include "common/logging.h"
-
-#include "common/timer.h"
-#include <cstring>
-
-#include "../ai/ai_container.h"
-
-#include "../battlefield.h"
-#include "../campaign_system.h"
-#include "../conquest_system.h"
-#include "../entities/mobentity.h"
-#include "../entities/npcentity.h"
-#include "../items/item_weapon.h"
-#include "../lua/luautils.h"
-#include "../map.h"
-#include "../mob_modifier.h"
-#include "../mob_spell_list.h"
-#include "../packets/entity_update.h"
-#include "../zone_instance.h"
-#include "mobutils.h"
 #include "zoneutils.h"
+
+#include "ai/ai_container.h"
+#include "battlefield.h"
+#include "campaign_system.h"
+#include "common/logging.h"
+#include "common/timer.h"
+#include "conquest_system.h"
+#include "entities/mobentity.h"
+#include "entities/npcentity.h"
+#include "items/item_weapon.h"
+#include "lua/luautils.h"
+#include "map.h"
+#include "mob_modifier.h"
+#include "mob_spell_list.h"
+#include "mobutils.h"
+#include "packets/entity_update.h"
+#include "zone_instance.h"
+
+#include <algorithm>
+#include <cstring>
+#include <execution>
 
 std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 CNpcEntity*              g_PTrigger;  // trigger to start events
@@ -681,11 +682,27 @@ namespace zoneutils
             g_PZoneList[0] = CreateZone(0);
         }
 
+        // clang-format off
+        std::for_each(
+#ifndef __APPLE__ // TODO: OSX machines in CI don't have a compiler compliant with this
+            std::execution::par,
+#endif // __APPLE__
+            std::begin(zones),
+            std::end(zones),
+            [](uint16 zone)
+            {
+                // NOTE: It is not safe to use SQL in this parallel loop!
+                g_PZoneList[zone]->LoadNavMesh();
+                g_PZoneList[zone]->LoadZoneLos();
+            });
+        // clang-format on
+
         // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
         luautils::PopulateIDLookups();
 
         LoadNPCList();
         LoadMOBList();
+
         campaign::LoadState();
         campaign::LoadNations();
 

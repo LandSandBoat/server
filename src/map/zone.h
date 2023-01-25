@@ -620,6 +620,9 @@ public:
 
     time_point m_LoadedAt; // time zone was loaded
 
+    void LoadNavMesh();
+    void LoadZoneLos();
+
 private:
     ZONEID         m_zoneID;
     ZONE_TYPE      m_zoneType;
@@ -646,11 +649,9 @@ private:
     triggerAreaList_t m_triggerAreaList;
     zoneLineList_t    m_zoneLineList;
 
+    void LoadZoneSettings();
     void LoadZoneLines();
     void LoadZoneWeather();
-    void LoadZoneSettings();
-    void LoadNavMesh();
-    void LoadZoneLos();
 
     CTreasurePool* m_TreasurePool;
 

@@ -122,6 +122,7 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 , m_levelRestriction(levelRestriction)
 {
     TracyZoneScoped;
+
     m_useNavMesh = false;
     std::ignore  = m_useNavMesh;
     ZoneTimer    = nullptr;
@@ -139,8 +140,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
     LoadZoneLines();
     LoadZoneWeather();
-    LoadNavMesh();
-    LoadZoneLos();
+
+    // NOTE: Heavy resources like Navmesh are now loaded outside of the constructor in zoneutils::LoadZoneList
 }
 
 CZone::~CZone()
