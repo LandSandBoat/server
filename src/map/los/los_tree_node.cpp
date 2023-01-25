@@ -133,7 +133,7 @@ LosTreeNode::LosTreeNode(
         rightMin         = nodeBox.getAxisMax(splitAxis);
 
         // clang-format off
-        indexSplit = splitArraySort(elementIndices, indexStart, indexEnd, [&boundingBoxes, &elements, &splitValue, this](int index)
+        indexSplit = splitArraySort(elementIndices, indexStart, indexEnd, [&boundingBoxes, &splitValue, this](int index)
         {
             auto& bounds = boundingBoxes[index];
             if (bounds.getAxisMiddle(splitAxis) < splitValue)
