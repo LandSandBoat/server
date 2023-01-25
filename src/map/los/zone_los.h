@@ -33,10 +33,10 @@ public:
     static ZoneLos* Load(uint16 zoneId, std::string pathToObj);
 
     bool CanEntitySee(CBaseEntity* source, CBaseEntity* target) const;
-    bool CanEntitySee(CBaseEntity* source, const position_t& targetPointBase) const;
+    bool CanEntitySee(CBaseEntity* source, position_t const& targetPointBase) const;
 
     std::optional<Vector3D> Raycast(CBaseEntity* source, CBaseEntity* target) const;
-    std::optional<Vector3D> Raycast(CBaseEntity* source, const position_t& targetPointBase) const;
+    std::optional<Vector3D> Raycast(position_t const& source, position_t const& target) const;
 
 private:
     ZoneLos(Triangle* elements, int elementCount);
