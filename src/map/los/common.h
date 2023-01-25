@@ -37,28 +37,28 @@ struct BoundingBox
 {
     float coords[6];
 
-    const float getAxisMin(Axis axis)
+    float getAxisMin(Axis axis)
     {
         return coords[((int)axis) * 2];
     }
 
-    const float getAxisMax(Axis axis)
+    float getAxisMax(Axis axis)
     {
         return coords[((int)axis) * 2 + 1];
     }
 
-    const float getAxisSize(Axis axis)
+    float getAxisSize(Axis axis)
     {
         return getAxisMax(axis) - getAxisMin(axis);
     }
 
-    const float getAxisMiddle(Axis axis)
+    float getAxisMiddle(Axis axis)
     {
         float axisMin = getAxisMin(axis);
         return (getAxisMax(axis) - axisMin) / 2 + axisMin;
     }
 
-    void expandTo(const BoundingBox& other)
+    void expandTo(BoundingBox const& other)
     {
         if (other.coords[0] < coords[0])
         {
@@ -91,15 +91,17 @@ struct BoundingBox
 
 struct Vector3D
 {
-    float x, y, z;
+    float x;
+    float y;
+    float z;
 
     // Addition
-    Vector3D operator+(const Vector3D& vec)
+    Vector3D operator+(Vector3D const& vec)
     {
         return Vector3D{ x + vec.x, y + vec.y, z + vec.z };
     }
 
-    Vector3D& operator+=(const Vector3D& vec)
+    Vector3D& operator+=(Vector3D const& vec)
     {
         x += vec.x;
         y += vec.y;
@@ -108,12 +110,12 @@ struct Vector3D
     }
 
     // Subtraction
-    Vector3D operator-(const Vector3D& vec)
+    Vector3D operator-(Vector3D const& vec)
     {
         return Vector3D{ x - vec.x, y - vec.y, z - vec.z };
     }
 
-    Vector3D& operator-=(const Vector3D& vec)
+    Vector3D& operator-=(Vector3D const& vec)
     {
         x -= vec.x;
         y -= vec.y;
@@ -149,17 +151,8 @@ struct Vector3D
         return *this;
     }
 
-    // Assignment
-    Vector3D& operator=(const Vector3D& vec)
-    {
-        x = vec.x;
-        y = vec.y;
-        z = vec.z;
-        return *this;
-    }
-
     // Misc other
-    Vector3D crossProduct(Vector3D other)
+    Vector3D crossProduct(Vector3D const& other)
     {
         float ni = y * other.z - z * other.y;
         float nj = z * other.x - x * other.z;
@@ -167,7 +160,7 @@ struct Vector3D
         return Vector3D{ ni, nj, nk };
     }
 
-    float dotProduct(Vector3D other)
+    float dotProduct(Vector3D const& other)
     {
         return x * other.x + y * other.y + z * other.z;
     }
