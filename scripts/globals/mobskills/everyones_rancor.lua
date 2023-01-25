@@ -27,16 +27,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local realDmg = 0
-
-    if target:getID() > 100000 then
-        realDmg = 50 * math.random(50, 100)
-    else
-        realDmg = 10 * target:getCharVar("EVERYONES_GRUDGE_KILLS")
-    end
-
+    local realDmg = 50 * target:getCharVar("EVERYONES_GRUDGE_KILLS")
     target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
-
     return realDmg
 end
 
