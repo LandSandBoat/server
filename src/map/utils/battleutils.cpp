@@ -5004,7 +5004,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    void tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
+    bool tryToCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim)
     {
         // Gear with Charm + does not affect the success rate of Charm, but increases the duration of the Charm.
         // Each +1 to Charm increases the duration of charm by 5%; +20 Charm doubles the duration of charm.
@@ -5018,7 +5018,7 @@ namespace battleutils
             if (((CMobEntity*)PVictim)->getMobMod(MOBMOD_CHARMABLE) == 0 || PVictim->PMaster != nullptr)
             {
                 PVictim->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_BIND, EFFECT_BIND, 1, 0, xirand::GetRandomNumber(1, 5)));
-                return;
+                return false;
             }
 
             // mob is charmable
@@ -5095,11 +5095,12 @@ namespace battleutils
 
             if (!TryCharm(PCharmer, PVictim))
             {
-                return;
+                return false;
             }
         }
 
         applyCharm(PCharmer, PVictim, std::chrono::seconds(CharmTime));
+        return true;
     }
 
     void applyCharm(CBattleEntity* PCharmer, CBattleEntity* PVictim, duration charmTime)

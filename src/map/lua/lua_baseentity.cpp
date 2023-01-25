@@ -13105,12 +13105,13 @@ void CLuaBaseEntity::registerChocobo(uint32 value)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::charmPet(CLuaBaseEntity const* target)
+bool CLuaBaseEntity::charmPet(CLuaBaseEntity const* target)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
-        battleutils::tryToCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()));
+        return battleutils::tryToCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()));
     }
+    return false;
 }
 
 /************************************************************************
