@@ -681,7 +681,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
         local currency = optionToItem[category][selection]
 
         if copperVouchersStored >= qty then
-            if currency.name ~= "kinetic_unit" then
+            if currency.name ~= "obsidian_fragment" then
                 player:delCurrency("aman_vouchers", qty)
             end
 
@@ -697,7 +697,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
                 end
             end
 
-            if currency.name == "kinetic_unit" then
+            if currency.name == "obsidian_fragment" then
                 player:PrintToPlayer("You are not allowed to receive Kinetic Units in this way.", 17)
             else
                 player:addCurrency(currency.name, currency.amount * qty, getCurrencyCap(currency.name))
