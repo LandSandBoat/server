@@ -698,7 +698,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
             end
 
             if currency.name == "obsidian_fragment" then
-                player:PrintToPlayer("You are not allowed to receive Kinetic Units in this way.", 17)
+                player:PrintToPlayer("You are not allowed to receive Obsidian Fragments in this way.", 17)
             else
                 player:addCurrency(currency.name, currency.amount * qty, getCurrencyCap(currency.name))
             end
