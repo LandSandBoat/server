@@ -567,7 +567,7 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
 
     -- https://www.bg-wiki.com/ffxi/Steady_Wing
     if wyvern then
-        local power = 1.3 * wyvern:getMaxHP() + wyvern:getHP()
+        local power = wyvern:getMaxHP() * 1.3 + wyvern:getMaxHP() - wyvern:getHP()
 
         action:reaction(wyvern:getID(), 0x10) -- Observed on retail
         if wyvern:addStatusEffect(xi.effect.STONESKIN, power, 0, 300) then
@@ -780,6 +780,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
         local maxHPDiff = member:getMaxHP() - member:getHP()
         if
             inBreathRange(member) and
+            not member:isDead() and
             (maxHPDiff > highestHPDiff and maxHPDiff > 0) -- Dont pick target if they have full HP
         then
             target = member

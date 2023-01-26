@@ -22,9 +22,10 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "../packets/message_basic.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "packets/message_basic.h"
+
 #include <map>
 #include <memory>
 #include <vector>
@@ -216,6 +217,9 @@ struct EntityID_t
     uint16 targid;
 };
 
+class CAIContainer;
+class CBattlefield;
+class CInstance;
 class CZone;
 
 struct location_t
@@ -236,10 +240,6 @@ struct location_t
     {
     }
 };
-
-class CAIContainer;
-class CInstance;
-class CBattlefield;
 
 /************************************************************************
  *                                                                       *
@@ -270,6 +270,9 @@ public:
     bool         IsNameHidden() const;    // checks if name is hidden
     virtual bool GetUntargetable() const; // checks if entity is untargetable
     virtual bool isWideScannable();       // checks if the entity should show up on wide scan
+
+    bool CanSeeTarget(CBaseEntity* target, bool fallbackNavMesh = true);
+    bool CanSeeTarget(const position_t& targetPoint, bool fallbackNavMesh = true);
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
     void         SendZoneUpdate();
@@ -310,7 +313,7 @@ public:
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
-    bool m_bReleaseTargIDOnDisappear = false;
+    bool m_bReleaseTargIDOnDisappear;
 
     SPAWN_ANIMATION spawnAnimation;
 

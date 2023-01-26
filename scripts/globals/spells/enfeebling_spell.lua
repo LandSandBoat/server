@@ -26,19 +26,19 @@ local pTable =
     [xi.magic.spell.BLINDGA      ] = { xi.effect.BLINDNESS,          xi.mod.INT,     xi.mod.BLINDRES,    xi.mod.BLIND_MEVA,       0,   0,      180,      2,   0,       64, true,      false   },
     [xi.magic.spell.BREAK        ] = { xi.effect.PETRIFICATION,      xi.mod.INT,     xi.mod.PETRIFYRES,  xi.mod.PETRIFY_MEVA,     1,   0,       30,      2,   0,        0, false,     false   },
     [xi.magic.spell.BREAKGA      ] = { xi.effect.PETRIFICATION,      xi.mod.INT,     xi.mod.PETRIFYRES,  xi.mod.PETRIFY_MEVA,     1,   0,       30,      2,   0,        0, false,     false   },
-    [xi.magic.spell.BURN         ] = { xi.effect.BURN,               xi.mod.INT,     0,                  0,                       0,   3,       90,      4,   1,        0, true,      false   },
-    [xi.magic.spell.CHOKE        ] = { xi.effect.CHOKE,              xi.mod.INT,     0,                  0,                       0,   3,       90,      4,   1,        0, true,      false   },
+    [xi.magic.spell.BURN         ] = { xi.effect.BURN,               xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false   },
+    [xi.magic.spell.CHOKE        ] = { xi.effect.CHOKE,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false   },
     [xi.magic.spell.CURSE        ] = { xi.effect.CURSE_I,            xi.mod.INT,     xi.mod.CURSERES,    xi.mod.CURSE_MEVA,      50,   0,      300,      2,   0,        0, false,     false   },
     [xi.magic.spell.DISPEL       ] = { xi.effect.NONE,               xi.mod.INT,     0,                  0,                       0,   0,        0,      4,   0,        0, false,     false   },
     [xi.magic.spell.DISPELGA     ] = { xi.effect.NONE,               xi.mod.INT,     0,                  0,                       0,   0,        0,      4,   0,        0, false,     false   },
     [xi.magic.spell.DISTRACT     ] = { xi.effect.EVASION_DOWN,       xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true    },
     [xi.magic.spell.DISTRACT_II  ] = { xi.effect.EVASION_DOWN,       xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true    },
     [xi.magic.spell.DISTRACT_III ] = { xi.effect.EVASION_DOWN,       xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true    },
-    [xi.magic.spell.DROWN        ] = { xi.effect.DROWN,              xi.mod.INT,     0,                  0,                       0,   3,       90,      4,   1,        0, true,      false   },
+    [xi.magic.spell.DROWN        ] = { xi.effect.DROWN,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false   },
     [xi.magic.spell.FRAZZLE      ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true    },
     [xi.magic.spell.FRAZZLE_II   ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true    },
     [xi.magic.spell.FRAZZLE_III  ] = { xi.effect.MAGIC_EVASION_DOWN, xi.mod.MND,     0,                  0,                       0,   0,      120,      2,   0,        0, true,      true    },
-    [xi.magic.spell.FROST        ] = { xi.effect.FROST,              xi.mod.INT,     0,                  0,                       0,   3,       90,      4,   1,        0, true,      false   },
+    [xi.magic.spell.FROST        ] = { xi.effect.FROST,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false   },
     [xi.magic.spell.GRAVITY      ] = { xi.effect.WEIGHT,             xi.mod.INT,     xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    26,   0,      120,      2,   0,        2, true,      false   },
     [xi.magic.spell.GRAVITY_II   ] = { xi.effect.WEIGHT,             xi.mod.INT,     xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    32,   0,      180,      2,   0,        2, true,      false   },
     [xi.magic.spell.GRAVIGA      ] = { xi.effect.WEIGHT,             xi.mod.INT,     xi.mod.GRAVITYRES,  xi.mod.GRAVITY_MEVA,    50,   0,      120,      2,   0,        2, true,      false   },
@@ -48,8 +48,8 @@ local pTable =
     [xi.magic.spell.POISONGA     ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,      false   },
     [xi.magic.spell.POISONGA_II  ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,      false   },
     [xi.magic.spell.POISONGA_III ] = { xi.effect.POISON,             xi.mod.INT,     xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,      false   },
-    [xi.magic.spell.RASP         ] = { xi.effect.RASP,               xi.mod.INT,     0,                  0,                       0,   3,       90,      4,   1,        0, true,      false   },
-    [xi.magic.spell.SHOCK        ] = { xi.effect.SHOCK,              xi.mod.INT,     0,                  0,                       0,   3,       90,      4,   1,        0, true,      false   },
+    [xi.magic.spell.RASP         ] = { xi.effect.RASP,               xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false   },
+    [xi.magic.spell.SHOCK        ] = { xi.effect.SHOCK,              xi.mod.INT,     0,                  0,                       0,   3,       90,      3,   1,        0, true,      false   },
     [xi.magic.spell.SLEEP        ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false   },
     [xi.magic.spell.SLEEP_II     ] = { xi.effect.SLEEP_II,           xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       2,   0,       90,      2,   0,        1, false,     false   },
     [xi.magic.spell.SLEEPGA      ] = { xi.effect.SLEEP_I,            xi.mod.INT,     xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,     false   },
@@ -89,13 +89,13 @@ local pTable =
 
 local elementalDebuffTable =
 {
-    -- effect = Nullified by, Nullifies
-    [xi.effect.BURN ] = { xi.effect.DROWN, xi.effect.FROST },
-    [xi.effect.CHOKE] = { xi.effect.FROST, xi.effect.RASP  },
-    [xi.effect.DROWN] = { xi.effect.SHOCK, xi.effect.BURN  },
-    [xi.effect.FROST] = { xi.effect.BURN,  xi.effect.CHOKE },
-    [xi.effect.RASP ] = { xi.effect.CHOKE, xi.effect.SHOCK },
-    [xi.effect.SHOCK] = { xi.effect.RASP,  xi.effect.DROWN },
+    -- effect = Nullified by
+    [xi.effect.BURN ] = { xi.effect.DROWN },
+    [xi.effect.CHOKE] = { xi.effect.FROST },
+    [xi.effect.DROWN] = { xi.effect.SHOCK },
+    [xi.effect.FROST] = { xi.effect.BURN  },
+    [xi.effect.RASP ] = { xi.effect.CHOKE },
+    [xi.effect.SHOCK] = { xi.effect.RASP  },
 }
 
 local function getElementalDebuffPotency(caster, statUsed)
@@ -111,6 +111,8 @@ local function getElementalDebuffPotency(caster, statUsed)
     elseif casterStat > 40 then
         potency = potency + 1
     end
+
+    potency = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) -- TODO: Add BLM Toban gear effect (potency) here.
 
     return potency
 end
@@ -274,8 +276,20 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
 end
 
 -- Calculate duration before resist
-xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, skillType)
-    local duration = pTable[spellId][7]
+xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spellEffect, skillType)
+    local duration = pTable[spellId][7] -- Get base duration.
+
+    -- Additions to base duration.
+    if
+        spellEffect == xi.effect.BURN or
+        spellEffect == xi.effect.CHOKE or
+        spellEffect == xi.effect.DROWN or
+        spellEffect == xi.effect.FROST or
+        spellEffect == xi.effect.RASP or
+        spellEffect == xi.effect.SHOCK
+    then
+        duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION) -- TODO: Add BLM Toban gear effect (duration) here.
+    end
 
     if caster:hasStatusEffect(xi.effect.SABOTEUR) then
         if target:isNM() then
@@ -307,8 +321,8 @@ end
 
 -- Main function, called by spell scripts
 xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
-    local spellId        = spell:getID()
-    local spellEffect    = pTable[spellId][1]
+    local spellId     = spell:getID()
+    local spellEffect = pTable[spellId][1]
 
     ------------------------------
     -- STEP 1: Check spell nullification.
@@ -332,6 +346,22 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
 
         return spellEffect
+    end
+
+    -- Elemental DoTs effects.
+    if
+        spellEffect == xi.effect.BURN or
+        spellEffect == xi.effect.CHOKE or
+        spellEffect == xi.effect.DROWN or
+        spellEffect == xi.effect.FROST or
+        spellEffect == xi.effect.RASP or
+        spellEffect == xi.effect.SHOCK
+    then
+        if target:hasStatusEffect(elementalDebuffTable[spellEffect][1]) then
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+
+            return spellEffect
+        end
     end
 
     ------------------------------
@@ -387,7 +417,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     -- STEP 4: Calculate Duration, Potency and Tick.
     ------------------------------
     -- Calculate Duration.
-    local duration = xi.spells.enfeebling.calculateDuration(caster, target, spellId, skillType)
+    local duration = xi.spells.enfeebling.calculateDuration(caster, target, spellId, spellEffect, skillType)
     duration       = math.floor(duration * resistDuration)
 
     -- Calculate potency.
@@ -416,26 +446,6 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
         end
 
         return spellEffect
-    end
-
-    -- Elemental DoTs
-    if
-        spellEffect == xi.effect.BURN or
-        spellEffect == xi.effect.CHOKE or
-        spellEffect == xi.effect.DROWN or
-        spellEffect == xi.effect.FROST or
-        spellEffect == xi.effect.RASP or
-        spellEffect == xi.effect.SHOCK
-    then
-        if target:hasStatusEffect(elementalDebuffTable[spellEffect][1]) then
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-
-            return spellEffect
-        end
-
-        target:delStatusEffect(elementalDebuffTable[spellEffect][2])
-        duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
-        potency  = potency + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT) / 2
     end
 
     ------------------------------
