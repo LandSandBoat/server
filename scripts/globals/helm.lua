@@ -64,9 +64,9 @@ local helmInfo =
                     {  470, 1845 }, -- Red Moko Grass
                     {  430, 1524 }, -- Fresh Mugwort
                     {  240,  951 }, -- Wijnruit
-                    { 120, 4273}, -- Kitron					
+                    {  120, 4273 }, -- Kitron
                 },
-
+                
                 points =
                 {
                     { -672.000,  -9.000,  -98.000 },
@@ -105,7 +105,7 @@ local helmInfo =
                     {  460, 1524 }, -- Fresh Mugwort
                     {  370,  951 }, -- Wijnruit
                     {  360, 2645 }, -- Eastern Ginger
-                    { 120, 4273}, -- Kitron
+                    {  120, 4273 }, -- Kitron
                 },
 
                 points =
