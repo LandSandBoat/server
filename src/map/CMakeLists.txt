@@ -1,6 +1,7 @@
 add_subdirectory(ai)
 add_subdirectory(entities)
 add_subdirectory(items)
+add_subdirectory(los)
 add_subdirectory(lua)
 add_subdirectory(packets)
 add_subdirectory(utils)
@@ -10,6 +11,7 @@ set(SOURCES
     ${AI_SOURCES}
     ${ENTITY_SOURCES}
     ${ITEM_SOURCES}
+    ${LOS_SOURCES}
     ${LUA_SOURCES}
     ${PACKET_SOURCES}
     ${UTIL_SOURCES}

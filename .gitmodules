@@ -4,3 +4,6 @@
 [submodule "modules/catseyexi"]
 	path = modules/catseyexi
 	url = https://github.com/catseyexi/modules
+[submodule "losmeshes"]
+	path = losmeshes
+	url = https://github.com/LandSandBoat/losmeshes.git

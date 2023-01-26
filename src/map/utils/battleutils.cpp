@@ -5927,6 +5927,19 @@ namespace battleutils
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
+        // Make sure we can raycast to that position
+        // from the mob's "eyeline" to the ground where we want to draw players in to
+        if (PMob->loc.zone->lineOfSight)
+        {
+            auto entityHeight = 2.0f;
+            auto mobEyeline   = position_t{ pos.x, pos.y - entityHeight, pos.z, 0, 0 };
+            if (auto optHit = PMob->loc.zone->lineOfSight->Raycast(mobEyeline, nearEntity))
+            {
+                auto hit   = *optHit;
+                nearEntity = { hit.x, hit.y, hit.z, 0, 0 };
+            }
+        }
+
         // Snap nearEntity to a guaranteed valid position
         if (PMob->loc.zone->m_navMesh)
         {
