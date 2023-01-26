@@ -21,7 +21,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local noResist = 1
 
     -- 2 minute unresisted duration.
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 5000, 0, 120, 0, 0, noResist))
+    if target:hasStatusEffect(xi.effect.HASTE) then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        return
+    else
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 5000, 0, 120, 0, 0, noResist))
+    end
 
     return xi.effect.SLOW
 end
