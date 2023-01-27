@@ -4,6 +4,8 @@
 -----------------------------------
 xi = xi or {}
 
+-- NOTE: When adding items to this list, be sure to add the long name variant, not the short name.
+-- Example: PONZE_OF_SHELL_POWDER instead of SHELL_POWDER
 xi.items =
 {
     NONE                            = 0,
@@ -816,7 +818,7 @@ xi.items =
     TACTICS_MANUAL_OF_ENDURANCE     = 1876,
     CLUSTERED_TAR                   = 1880,
     SHIELD_BUG                      = 1881,
-    SHELL_POWDER                    = 1887,
+    PONZE_OF_SHELL_POWDER           = 1883,
     GLASS_SHEET                     = 1887,
     SALINATOR                       = 1893,
     HIGH_QUALITY_EUVHI_ORGAN        = 1899,
