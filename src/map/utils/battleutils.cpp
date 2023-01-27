@@ -45,6 +45,7 @@
 #include "ai/states/magic_state.h"
 #include "alliance.h"
 #include "attack.h"
+#include "attackround.h"
 #include "attackutils.h"
 #include "battleutils.h"
 #include "charutils.h"
@@ -7056,6 +7057,45 @@ namespace battleutils
             }
         }
         return 1.0;
+    }
+
+    bool TryProcTreasureHunter(CCharEntity* PChar, CMobEntity* PMob, CAttackRound* attackRound, bool feintApplied)
+    {
+        // The Treasure Hunter proc system was introduced in the December 2010 update and applies to players using Thief main job, as well as the Ranger job ability Bounty Shot.
+        // https://www.bg-wiki.com/ffxi/Treasure_Hunter
+        // https://ffxiclopedia.fandom.com/wiki/Treasure_Hunter
+
+        auto playerTH = PChar->getMod(Mod::TREASURE_HUNTER);
+        auto mobTH    = PMob->PEnmityContainer->GetHighestTH();
+
+        // Treasure Hunter can be increased up to a maximum value of 12
+        // (boostable by Job Points)
+        auto thCap = 12 + PChar->getMod(Mod::TREASURE_HUNTER_CAP);
+
+        // The maximum base Treasure Hunter level that can be applied from the first action against an enemy is 8.
+        if (!mobTH)
+        {
+            thCap = 8;
+        }
+
+        float rate = 6.0; // percent
+        float diff = playerTH > mobTH ? playerTH - mobTH : mobTH - playerTH;
+
+        // Decay based on difference
+        // 0 level difference: 6 * (0.7^0) = 6
+        // 3 level difference: 6 * (0.7^3) = 2
+        rate *= std::pow(0.7f, diff);
+
+        // Add any flat bonus
+        rate += PChar->getMod(Mod::TREASURE_HUNTER_PROC);
+
+        // If SA or TA landed, the rate is 10x
+        rate *= attackRound->GetSATAOccured() ? 10 : 1;
+
+        // If Feint landed, the rate is doubled
+        rate *= feintApplied ? 2 : 1;
+
+        return xirand::GetRandomNumber(1, 100) <= std::clamp<uint8>(rate, 1, 100);
     }
 
 }; // namespace battleutils

@@ -35,9 +35,11 @@
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
+#include "enmity_container.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "lua/luautils.h"
+#include "mobentity.h"
 #include "notoriety_container.h"
 #include "packets/action.h"
 #include "recast_container.h"
@@ -2067,6 +2069,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         // Set the swing animation.
         actionTarget.animation = attack.GetAnimationID();
 
+        bool feintApplied = false;
+
         if (attack.CheckCover())
         {
             PTarget             = attackRound.GetCoverAbilityUserEntity();
@@ -2164,7 +2168,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
             }
-            else
+            else // Melee hit
             {
                 // Set this attack's critical flag.
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
@@ -2208,6 +2212,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     PTarget->StatusEffectContainer->AddStatusEffect(
                         new CStatusEffect(EFFECT_EVASION_DOWN, EFFECT_EVASION_DOWN, PFeintEffect->GetPower(), 3, 30));
                     StatusEffectContainer->DelStatusEffect(EFFECT_FEINT);
+                    feintApplied = true;
                 }
 
                 // Process damage.
@@ -2278,11 +2283,32 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             actionTarget.param = 0;
         }
 
+        if (this->objtype == TYPE_PC &&
+            PTarget->objtype == TYPE_MOB &&
+            GetMJob() == JOB_THF &&
+            attack.IsFirstSwing())
+        {
+            auto* PChar = static_cast<CCharEntity*>(this);
+            auto* PMob  = static_cast<CMobEntity*>(PTarget);
+            if (uint8 newTHLevel = battleutils::TryProcTreasureHunter(PChar, PMob, &attackRound, feintApplied))
+            {
+                actionTarget.additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
+                actionTarget.addEffectMessage = MSGBASIC_TREASURE_HUNTER_UP;
+                actionTarget.addEffectParam   = newTHLevel;
+            }
+        }
+
+        bool effectAlreadyApplied = actionTarget.additionalEffect != SUBEFFECT_NONE ||
+                                    actionTarget.addEffectMessage != MSGBASIC_NONE;
+
         // if we did hit, run enspell/spike routines as long as this isn't a Daken swing
         if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
         {
-            battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()],
-                                       attack.GetDamage());
+            if (!effectAlreadyApplied)
+            {
+                battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()],
+                                        attack.GetDamage());
+            }
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 

@@ -32,6 +32,7 @@
 #include "entities/battleentity.h"
 
 class CAbility;
+class CAttackRound;
 class CItemWeapon;
 class CMobSkill;
 class CPetSkill;
@@ -270,6 +271,8 @@ namespace battleutils
     bool           IsMagicCovered(CCharEntity* PCoverAbilityUser);
     void           ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered);
     float          CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType);
+
+    bool TryProcTreasureHunter(CCharEntity* PChar, CMobEntity* PMob, CAttackRound* attackRound, bool feintApplied);
 }; // namespace battleutils
 
 #endif
