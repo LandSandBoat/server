@@ -4,6 +4,8 @@
 -----------------------------------
 xi = xi or {}
 
+-- NOTE: When adding items to this list, be sure to add the long name variant, not the short name.
+-- Example: PONZE_OF_SHELL_POWDER instead of SHELL_POWDER
 xi.items =
 {
     NONE                            = 0,
@@ -353,7 +355,7 @@ xi.items =
     WATER_BEAD                      = 1304,
     LIGHT_BEAD                      = 1305,
     DARK_BEAD                       = 1306,
-    PIECE_OF_OXBLOOD                = 1312,
+    PIECE_OF_OXBLOOD                = 1311,
     PIECE_OF_ANGEL_SKIN             = 1312,
     DRYADIC_ABJURATION_HEAD         = 1314,
     DRYADIC_ABJURATION_BODY         = 1315,
@@ -587,7 +589,7 @@ xi.items =
     BRIGANDS_CHART                  = 1873,
     PIRATES_CHART                   = 1874,
     ANCIENT_BEASTCOIN               = 1875,
-    SHELL_POWDER                    = 1887,
+    PONZE_OF_SHELL_POWDER           = 1883,
     GLASS_SHEET                     = 1887,
     VICE_OF_ANTIPATHY               = 1901,
     IVORY_CHIP                      = 1904,
