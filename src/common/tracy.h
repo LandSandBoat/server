@@ -7,7 +7,7 @@
 #include "cbasetypes.h"
 
 #define TracyFrameMark          FrameMark
-#define TracyZoneScoped         ZoneScoped; ShowTrace(__func__)
+#define TracyZoneScoped         ZoneScoped;
 #define TracyZoneScopedN(n)     ZoneScopedN(n)
 #define TracyZoneNamed(var)     ZoneNamedN(var, #var, true)
 #define TracyZoneText(n, l)     ZoneText(n, l)
@@ -52,7 +52,7 @@ inline std::string Hex16ToString(uint16 hex)
 
 #else // Empty stubs for regular builds
 #define TracyFrameMark                     ;
-#define TracyZoneScoped                    ShowTrace(__func__);
+#define TracyZoneScoped                    ;
 #define TracyZoneScopedN(n)                std::ignore = n;
 #define TracyZoneNamed(var)                std::ignore = #var;
 #define TracyZoneText(n, l)                std::ignore = n; std::ignore = l;
