@@ -172,7 +172,7 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 
-    elseif csid == 199 and option == 0 then
+    elseif csid == 199 and option == 1 then
         local valid = player:getLocalVar("validFortune")
         if valid == 1 then
             player:setLocalVar("validFortune", 0)
