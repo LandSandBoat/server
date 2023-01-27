@@ -2,6 +2,7 @@
 -- Mithran Delicacies
 -----------------------------------
 -- Log ID: 4, Quest ID: 97
+-- Anguenet: !pos 215.5699 -2.0176 -527.8190 2
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -22,8 +23,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THREE_PATHS
+            return status == QUEST_AVAILABLE
         end,
 
         [xi.zone.CARPENTERS_LANDING] =
