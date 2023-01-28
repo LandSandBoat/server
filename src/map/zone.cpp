@@ -637,9 +637,12 @@ void CZone::UpdateWeather()
 {
     TracyZoneScoped;
 
-    uint32 CurrentVanaDate   = CVanaTime::getInstance()->getDate();                                  // Current Vanadiel timestamp in minutes
-    uint32 StartFogVanaDate  = (CurrentVanaDate - (CurrentVanaDate % VTIME_DAY)) + (VTIME_HOUR * 2); // Vanadiel timestamp of 2 AM in minutes
-    uint32 EndFogVanaDate    = StartFogVanaDate + (VTIME_HOUR * 5);                                  // Vanadiel timestamp of 7 AM in minutes
+    uint32 CurrentVanaDate   = CVanaTime::getInstance()->getDate();             // Current Vanadiel timestamp in minutes
+    uint32 Midnight          = CurrentVanaDate - (CurrentVanaDate % VTIME_DAY); // Vanadiel timestamp of midnight in minutes
+    uint32 StartFogVanaDate  = Midnight + (VTIME_HOUR * 2);                     // Vanadiel timestamp of 2 AM in minutes
+    uint32 EndFogVanaDate    = Midnight + (VTIME_HOUR * 7);                     // Vanadiel timestamp of 7 AM in minutes
+    uint32 NightTimeVanaDate = Midnight + (VTIME_HOUR * 18);                    // Vanadiel timestamp of 6 PM in minutes
+
     uint32 WeatherNextUpdate = 0;
     uint32 WeatherDay        = 0;
     uint8  WeatherChance     = 0;
@@ -686,6 +689,15 @@ void CZone::UpdateWeather()
     else
     {
         Weather = weatherType.normal;
+    }
+
+    // If the weather is SUNSHINE, but its after 6pm (or before 7am)
+    // change the weather to NONE/CLEAR
+    if (((CurrentVanaDate >= NightTimeVanaDate) ||
+        (CurrentVanaDate < EndFogVanaDate)) &&
+        Weather == WEATHER_SUNSHINE)
+    {
+        Weather = WEATHER_NONE;
     }
 
     // Fog in the morning between the hours of 2 and 7 if there is not a specific elemental weather to override it
