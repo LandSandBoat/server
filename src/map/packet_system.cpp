@@ -3799,7 +3799,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             bool moghouseExitRegular          = requestedZone == 0 && PChar->m_moghouseID > 0;
-            bool requestedMoghouseFloorChange = startingZone == destinationZone;
+            bool requestedMoghouseFloorChange = startingZone == destinationZone && requestedZone >= 125 && requestedZone <= 127;
             bool moghouse2FUnlocked           = PChar->profile.mhflag & 0x20;
             auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
@@ -3838,14 +3838,9 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 else
                 {
-                    // Set back to their starting position. Since we haven't yet figured out how to grey out the
-                    // "Change Floors" option.
-                    // TODO: Once we figure this out, make this punitive, like zoneline abuse - since this will
-                    //     : happen through packet abuse.
-                    PChar->loc.destination = startingZone;
-                    PChar->loc.p           = startingPos;
-                    PChar->status          = STATUS_TYPE::NORMAL;
+                    PChar->status = STATUS_TYPE::NORMAL;
                     ShowWarning("SmallPacket0x05E: Moghouse 2F requested without it being unlocked: %s", PChar->GetName());
+                    return;
                 }
             }
             else
