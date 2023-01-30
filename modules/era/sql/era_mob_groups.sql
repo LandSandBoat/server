@@ -317,7 +317,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 (92,1390,24,'Fomor_Samurai',330,1,877,0,0,52,54,0),     -- These are in prep for complete zone revamps
     -- 42-44
 (93,1397,24,'Fomor_Thief',330,1,885,0,0,42,44,0),       -- These are in prep for complete zone revamps
-(94,1388,24,'Fomor_Ranger',330,1,872,0,0,42,44,0),      -- These are in prep for complete zone revamps
+(94,1388,24,'Fomor_Ranger',330,1,0,0,0,42,44,0),        -- These are in prep for complete zone revamps
 (95,1398,24,'Fomor_Warrior',330,1,888,0,0,42,44,0),     -- These are in prep for complete zone revamps
 (96,1391,24,'Fomor_Summoner',330,1,880,0,0,42,44,0),    -- These are in prep for complete zone revamps
 (97,1395,24,'Fomors_Elemental',0,128,0,0,0,34,36,0),    -- These are in prep for complete zone revamps
