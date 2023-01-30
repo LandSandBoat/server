@@ -3,7 +3,6 @@
 # add_subdirectory(zmq) # Handled globally
 
 add_subdirectory(concurrentqueue)
-add_subdirectory(fast_obj)
 add_subdirectory(sol)
 
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
