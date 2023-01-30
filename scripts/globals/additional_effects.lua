@@ -100,7 +100,8 @@ end
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
 -- TODO: Reduce complexity in this function:
--- - replace giant if/else chain with switch statement
+-- - replace giant if/else chain with table+key functions
+--   e.g. [procType.DAMAGE] = { code }
 -- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
     local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
@@ -240,7 +241,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgParam = dispel
         end
 
-    elseif addType == procType.ABSORB then
+    elseif addType == procType.ABSORB_STATUS then
         -- Ripping off Aura Steal here
         local resist = applyResistanceAddEffect(attacker, defender, element, 0)
         if resist > 0.0625 then
