@@ -3146,6 +3146,23 @@ INSERT INTO `nm_spawn_points` VALUES (17273278,0,-391.184,-0.269,-159.086);
 INSERT INTO `nm_spawn_points` VALUES (17276982,0,-108.575,-5.699,-5.432); -- Nightmare Vase (west)
 INSERT INTO `nm_spawn_points` VALUES (17276992,0,69,-5,21); -- Nightmare Vase (east)
 INSERT INTO `nm_spawn_points` VALUES (17277079,0,219.8,-3.2,-41.22); -- Rogue Receptacle
+INSERT INTO `nm_spawn_points` VALUES (17277127,0,-115.2444, -3.0000, -35.890); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,1,-89.3184, -6.0000, -11.694); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,2,-39.2035, -6.0000, 9.2974); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,3,4.2395, -6.2012, 11.6062); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,4,36.6689, -6.0442, 9.4981); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,5,68.7912, -6.0000, -1.5367); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,6,105.2481, -5.0000, -25.0951); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,7,106.2071, -3.2500, -54.0569); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,8,86.3615, -1.0000, -70.1052); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,9,60.1828, -4.0000, -49.5072); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,10,35.5070, -4.0000, -38.1231); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,11,4.7893, -4.2012, -35.7697); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,12,-21.0111, -4.0000, -37.2042); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,13,-50.2208, -4.0000, -43.7794); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,14,-74.8710, -1.9847, -57.1117); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,15,-87.8773, -1.0000, -71.3820); -- Shikigami_Weapon
+INSERT INTO `nm_spawn_points` VALUES (17277127,16,-105.6787, -3.2500, -57.4370); -- Shikigami_Weapon
 INSERT INTO `nm_spawn_points` VALUES (17281061,0,-307.000,2.000,216.000);
 INSERT INTO `nm_spawn_points` VALUES (17281061,1,-299.000,0.000,192.000);
 INSERT INTO `nm_spawn_points` VALUES (17281061,2,-334.000,3.000,182.000);

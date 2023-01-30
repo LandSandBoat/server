@@ -8733,7 +8733,7 @@ INSERT INTO `mob_groups` VALUES (14,906,122,'Darksteel_Golem',330,0,565,0,0,80,8
 INSERT INTO `mob_groups` VALUES (15,3420,122,'Rogue_Receptacle',0,32,3086,0,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (16,5842,122,'Nargun',7200,0,6005,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (17,1194,122,'Eldhrimnir',0,128,0,9600,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (18,3603,122,'Shikigami_Weapon',0,128,2237,0,0,77,80,0);
+INSERT INTO `mob_groups` VALUES (18,3603,122,'Shikigami_Weapon',0,128,2237,11000,0,77,80,0);
 INSERT INTO `mob_groups` VALUES (19,2117,122,'Jackpot',0,128,0,0,0,1,1,0); -- TODO: capture level from retail
 INSERT INTO `mob_groups` VALUES (20,4727,122,'Mimic_King',0,128,0,0,9999,93,95,0);
 INSERT INTO `mob_groups` VALUES (21,4726,122,'Mimic_Jester',0,128,0,0,9999,90,91,0);
@@ -13129,7 +13129,7 @@ INSERT INTO `mob_groups` VALUES (19,2842,205,'Nightmare_Bats',300,0,1784,0,0,68,
 INSERT INTO `mob_groups` VALUES (20,266,205,'Ash_Lizard',300,0,180,0,0,73,76,0);
 INSERT INTO `mob_groups` VALUES (21,2015,205,'Hurricane_Wyvern',300,0,1340,0,0,75,78,0);
 INSERT INTO `mob_groups` VALUES (22,4258,205,'Vouivre',0,32,2591,0,0,79,80,0);
-INSERT INTO `mob_groups` VALUES (23,265,205,'Ash_Dragon',0,128,179,0,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (23,265,205,'Ash_Dragon',0,128,179,60000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (24,2664,205,'Mimic',0,128,1691,0,0,63,69,0);
 INSERT INTO `mob_groups` VALUES (25,498,205,'Bomb_Queen',0,128,334,50000,0,80,81,0);
 INSERT INTO `mob_groups` VALUES (26,497,205,'Bomb_Princess',0,128,0,1000,0,64,65,0);
