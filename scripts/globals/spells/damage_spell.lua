@@ -798,8 +798,8 @@ xi.spells.damage.calculateNukeWallFactor = function(caster, target, spell, spell
     local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect.
-    target:delStatusEffect(xi.effect.NUKE_WALL)
-    target:addStatusEffect(xi.effect.NUKE_WALL, finalPotency, 0, 5, 0, spellElement)
+    target:delStatusEffectSilent(xi.effect.NUKE_WALL)
+    target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
 
     return nukeWallFactor
 end

@@ -93,6 +93,7 @@ auto to_upper(std::string const& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 bool matches(std::string const& target, std::string const& pattern, std::string const& wildcard = "%");
 bool starts_with(std::string const& target, std::string const& pattern);
+auto replace(std::string const& target, std::string const& search, std::string const& replace) -> std::string;
 
 look_t stringToLook(std::string str);
 
