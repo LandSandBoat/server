@@ -14,8 +14,7 @@ itemObject.onItemEquip = function(player, item)
             mob:addListener("TAKE_DAMAGE", "VALID_KILL", function(mobArg, amount, attacker, attackType, damageType)
                 mob:setLocalVar("listenerApplied", 1)
                 if
-                    (attacker:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or
-                    attacker:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
+                    attacker:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) >= QUEST_ACCEPTED and
                     attacker:getEquipID(xi.slot.MAIN) == xi.items.CHAOSBRINGER and
                     attackType == xi.attackType.PHYSICAL and
                     amount > mobArg:getHP()
