@@ -49,10 +49,6 @@ local nmsToShield =
     { "Valkurm_Dunes", "Valkurm_Emperor" },
     { "Wajaom_Woodlands", "Hydra" },
     { "Western_Altepa_Desert", "King_Vinegarroon" },
-    { "South_Gustaberg", "Leaping_Lizzy" },
-    { "Valkurm_Dunes", "Valkurm_Emperor" },
-    { "Maze_of_Shakhrami", "Argus" },
-    { "Sea_Serpent_Grotto", "Charybdis" },
 }
 
 -- Find the position of a target entity in a table,
