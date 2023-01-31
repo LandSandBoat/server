@@ -1326,14 +1326,14 @@ namespace petutils
             PPet->setModifier(Mod::LIGHT_SDT, petData->light_sdt);
             PPet->setModifier(Mod::DARK_SDT, petData->dark_sdt);
 
-            PMob->setModifier(Mod::FIRE_RES_RANK, petData->fire_res_rank);
-            PMob->setModifier(Mod::ICE_RES_RANK, petData->ice_res_rank);
-            PMob->setModifier(Mod::WIND_RES_RANK, petData->wind_res_rank;
-            PMob->setModifier(Mod::EARTH_RES_RANK, petData->earth_res_rank;
-            PMob->setModifier(Mod::THUNDER_RES_RANK, petData->thunder_res_rank);
-            PMob->setModifier(Mod::WATER_RES_RANK, petData->water_res_rank);
-            PMob->setModifier(Mod::LIGHT_RES_RANK, petData->light_res_rank);
-            PMob->setModifier(Mod::DARK_RES_RANK, petData->dark_res_rank);
+            PPet->setModifier(Mod::FIRE_RES_RANK, petData->fire_res_rank);
+            PPet->setModifier(Mod::ICE_RES_RANK, petData->ice_res_rank);
+            PPet->setModifier(Mod::WIND_RES_RANK, petData->wind_res_rank);
+            PPet->setModifier(Mod::EARTH_RES_RANK, petData->earth_res_rank);
+            PPet->setModifier(Mod::THUNDER_RES_RANK, petData->thunder_res_rank);
+            PPet->setModifier(Mod::WATER_RES_RANK, petData->water_res_rank);
+            PPet->setModifier(Mod::LIGHT_RES_RANK, petData->light_res_rank);
+            PPet->setModifier(Mod::DARK_RES_RANK, petData->dark_res_rank);
         }
     }
 
