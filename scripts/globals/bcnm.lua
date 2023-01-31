@@ -1177,9 +1177,9 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [640] = function() -- PM5-3 U3: Flames for the Dead
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-            (player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8)
-            and npcId == getEntranceOffset(0)
+            return (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+            player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8) and
+            npcId == getEntranceOffset(0)
         end,
 
         [641] = function() -- ENM: Follow the White Rabbit
@@ -1196,6 +1196,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [644] = function() -- ENM: Holy Cow
             return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(8)
+        end,
+
+        [672] = function() -- PM5-3 U2: Head Wind
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
         end,
 
         [673] = function() -- ENM: Like the Wind
