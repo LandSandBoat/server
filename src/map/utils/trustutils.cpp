@@ -99,15 +99,6 @@ struct Trust_t
     int16 light_sdt;
     int16 dark_sdt;
 
-    int16 fire_meva;
-    int16 ice_meva;
-    int16 wind_meva;
-    int16 earth_meva;
-    int16 thunder_meva;
-    int16 water_meva;
-    int16 light_meva;
-    int16 dark_meva;
-
     int8 fire_res_rank;
     int8 ice_res_rank;
     int8 wind_res_rank;
@@ -168,15 +159,6 @@ struct Trust_t
         water_sdt   = 0;
         light_sdt   = 0;
         dark_sdt    = 0;
-
-        fire_meva    = 0;
-        ice_meva     = 0;
-        wind_meva    = 0;
-        earth_meva   = 0;
-        thunder_meva = 0;
-        water_meva   = 0;
-        light_meva   = 0;
-        dark_meva    = 0;
 
         fire_res_rank    = 0;
         ice_res_rank     = 0;
@@ -261,10 +243,6 @@ namespace trustutils
                 mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
                 mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
                 mob_resistances.light_sdt, mob_resistances.dark_sdt, \
-                mob_resistances.fire_meva, mob_resistances.ice_meva, \
-                mob_resistances.wind_meva, mob_resistances.earth_meva, \
-                mob_resistances.lightning_meva, mob_resistances.water_meva, \
-                mob_resistances.light_meva, mob_resistances.dark_meva, \
                 mob_resistances.fire_res_rank, mob_resistances.ice_res_rank, \
                 mob_resistances.wind_res_rank, mob_resistances.earth_res_rank, \
                 mob_resistances.lightning_res_rank, mob_resistances.water_res_rank, \
@@ -349,23 +327,14 @@ namespace trustutils
                 trust->light_sdt   = (int16)sql->GetIntData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                 trust->dark_sdt    = (int16)sql->GetIntData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                trust->fire_meva    = (int16)sql->GetIntData(44);
-                trust->ice_meva     = (int16)sql->GetIntData(45);
-                trust->wind_meva    = (int16)sql->GetIntData(46);
-                trust->earth_meva   = (int16)sql->GetIntData(47);
-                trust->thunder_meva = (int16)sql->GetIntData(48);
-                trust->water_meva   = (int16)sql->GetIntData(49);
-                trust->light_meva   = (int16)sql->GetIntData(50);
-                trust->dark_meva    = (int16)sql->GetIntData(51);
-
-                trust->fire_meva    = (int8)sql->GetIntData(52);
-                trust->ice_meva     = (int8)sql->GetIntData(53);
-                trust->wind_meva    = (int8)sql->GetIntData(54);
-                trust->earth_meva   = (int8)sql->GetIntData(55);
-                trust->thunder_meva = (int8)sql->GetIntData(56);
-                trust->water_meva   = (int8)sql->GetIntData(57);
-                trust->light_meva   = (int8)sql->GetIntData(58);
-                trust->dark_meva    = (int8)sql->GetIntData(59);
+                trust->fire_res_rank    = (int8)sql->GetIntData(44);
+                trust->ice_res_rank     = (int8)sql->GetIntData(45);
+                trust->wind_res_rank    = (int8)sql->GetIntData(46);
+                trust->earth_res_rank   = (int8)sql->GetIntData(47);
+                trust->thunder_res_rank = (int8)sql->GetIntData(48);
+                trust->water_res_rank   = (int8)sql->GetIntData(49);
+                trust->light_res_rank   = (int8)sql->GetIntData(50);
+                trust->dark_res_rank    = (int8)sql->GetIntData(51);
 
                 g_PTrustList.push_back(trust);
             }
