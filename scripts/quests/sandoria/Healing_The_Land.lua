@@ -59,8 +59,6 @@ quest.sections =
                         return quest:event(682)
                     elseif not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
                         return quest:progressEvent(683)
-                    else
-                        return quest:event(684)
                     end
                 end,
             },
@@ -89,6 +87,17 @@ quest.sections =
                     end
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Eperdur'] = quest:event(684):replaceDefault(),
         },
     },
 }
