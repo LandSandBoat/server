@@ -514,6 +514,21 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
     PChar->pushPacket(new CMessageCombatPacket(PSpeaker, PChar, p0, p1, message));
 }
 
+/************************************************************************
+ *  Function: messageStandard(id)
+ *  Purpose : Sends a standard message
+ *  Example : player:messageStandard(287)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::messageStandard(uint16 messageID)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->pushPacket(new CMessageStandardPacket(messageID));
+    }
+}
+
 void CLuaBaseEntity::customMenu(sol::object const& obj)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
@@ -1173,35 +1188,40 @@ void CLuaBaseEntity::setFlag(uint32 flags)
 }
 
 /************************************************************************
- *  Function: setMoghouseFlag()
- *  Purpose : Creates or returns exit flag for Mog House
- *  Example : player:moghouseFlag(2)
- *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
- ************************************************************************/
-
-void CLuaBaseEntity::setMoghouseFlag(uint8 flag)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    PChar->profile.mhflag |= flag;
-    charutils::SaveCharStats(PChar);
-}
-
-/************************************************************************
  *  Function: getMoghouseFlag()
  *  Purpose : Returns exit flag for Mog House
  *  Example :
  *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getMoghouseFlag()
+uint16 CLuaBaseEntity::getMoghouseFlag()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->profile.mhflag;
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return PChar->profile.mhflag;
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setMoghouseFlag()
+ *  Purpose : Creates or returns exit flag for Mog House
+ *  Example : player:moghouseFlag(bit.band(mhflag, 0x02))
+ *  Notes   : Used in Mog House exit quests (ex. A Lady's Heart)
+ ************************************************************************/
+
+void CLuaBaseEntity::setMoghouseFlag(uint16 flag)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->profile.mhflag = flag;
+        charutils::SaveCharStats(PChar);
+    }
 }
 
 /************************************************************************
@@ -10670,6 +10690,23 @@ bool CLuaBaseEntity::getClaimable()
 }
 
 /************************************************************************
+ *  Function: clearEnmityForEntity(...)
+ *  Purpose :
+ *  Example : mob:clearEnmityForEntity(player)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->PEnmityContainer->Clear(PEntity->getID());
+        return;
+    }
+    ShowError("lua::clearEnmityForEntity called on invalid entity");
+}
+
+/************************************************************************
  *  Function: addStatusEffect(effect, power, tick, duration)
  *  Purpose : Adds a specified Status Effect to the Entity
  *  Example : target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 3, 60)
@@ -14992,6 +15029,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("messageSpecial", CLuaBaseEntity::messageSpecial);
     SOL_REGISTER("messageSystem", CLuaBaseEntity::messageSystem);
     SOL_REGISTER("messageCombat", CLuaBaseEntity::messageCombat);
+    SOL_REGISTER("messageStandard", CLuaBaseEntity::messageStandard);
     SOL_REGISTER("customMenu", CLuaBaseEntity::customMenu);
 
     // Variables
@@ -15512,6 +15550,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getNotorietyList", CLuaBaseEntity::getNotorietyList);
     SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
     SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
+    SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);

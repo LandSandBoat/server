@@ -246,10 +246,12 @@ xi.settings.map =
     -- Set to 1 to completely disable auto-jailing offenders
     ANTICHEAT_JAIL_DISABLE = false,
 
-    -- Gobbie Mystery Box settings
-    DAILY_TALLY_AMOUNT = 10,
-    DAILY_TALLY_LIMIT  = 50000,
-
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,
+
+    -- Send stack traces to the client after caught Lua errors if
+    -- their GM level is the same or higher than this number.
+    -- The max GM level is 5, so setting this to 6 disables it
+    -- for everone. Setting it to 0 enables for everyone.
+    REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 6,
 }

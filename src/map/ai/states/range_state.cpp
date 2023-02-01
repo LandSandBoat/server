@@ -20,14 +20,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "range_state.h"
-#include "../../entities/charentity.h"
-#include "../../entities/trustentity.h"
-#include "../../items/item_weapon.h"
-#include "../../packets/action.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/charutils.h"
-#include "../ai_container.h"
+
+#include "ai/ai_container.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
+#include "items/item_weapon.h"
+#include "packets/action.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
 
 CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 : CState(PEntity, targid)
@@ -40,10 +41,11 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
         throw CStateInitException(std::move(m_errorMsg));
     }
 
-    if (!CanUseRangedAttack(PTarget))
+    if (!CanUseRangedAttack(PTarget, false))
     {
         throw CStateInitException(std::move(m_errorMsg));
     }
+
     if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
@@ -101,7 +103,7 @@ bool CRangeState::Update(time_point tick)
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
-        CanUseRangedAttack(PTarget);
+        CanUseRangedAttack(PTarget, true);
         if (m_startPos.x != m_PEntity->loc.p.x || m_startPos.y != m_PEntity->loc.p.y)
         {
             m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_MOVE_AND_INTERRUPT);
@@ -143,7 +145,7 @@ void CRangeState::Cleanup(time_point tick)
 {
 }
 
-bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
+bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
 {
     if (!PTarget)
     {
@@ -199,7 +201,21 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
         return false;
     }
-    if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))
+
+    if (!isEndOfAttack && distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
+        return false;
+    }
+
+    if (!isEndOfAttack && !m_PEntity->CanSeeTarget(PTarget, false))
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
+        return false;
+    }
+
+    uint8 anim = m_PEntity->animation;
+    if (anim != ANIMATION_NONE && anim != ANIMATION_ATTACK)
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
         return false;

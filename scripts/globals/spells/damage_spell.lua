@@ -190,6 +190,8 @@ local pTable =
     [xi.magic.spell.BANISHGA_IV ] = { xi.mod.MND,  600,  1.5,  600, 600 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.HOLY        ] = { xi.mod.MND,  125,    1,  125, 150 },
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,  250,    2,  250, 300 },
+
+-- TODO: Healing Spells when used against undead/zombie
 }
 
 -----------------------------------
@@ -725,6 +727,19 @@ xi.spells.damage.calculateUndeadDivinePenalty = function(caster, target, spell, 
     return undeadDivinePenalty
 end
 
+xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
+    local scarletDeliriumMultiplier = 1
+
+    -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
+    if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
+
+        scarletDeliriumMultiplier = 1 + power / 100
+    end
+
+    return scarletDeliriumMultiplier
+end
+
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
 
@@ -743,6 +758,50 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, 
     end
 
     return nukeAbsorbOrNullify
+end
+
+-- Consecutive Elemental Damage Penalty. Most commonly known as "Nuke Wall".
+xi.spells.damage.calculateNukeWallFactor = function(caster, target, spell, spellElement, finalDamage)
+    local nukeWallFactor = 1
+
+    -- Initial check.
+    if
+        not target:isNM() or
+        spellElement <= 0 or
+        finalDamage < 0
+    then
+        return nukeWallFactor
+    end
+
+    -- Calculate current effect potency and apply it to nukeWallFactor.
+    local potency = 0
+
+    if target:hasStatusEffect(xi.effect.NUKE_WALL) then
+        local effect = target:getStatusEffect(xi.effect.NUKE_WALL)
+
+        if spellElement == effect:getSubPower() then
+            potency = effect:getPower()
+
+            -- Effect potency is reduced by 20% after 1 second and remains stable for the remaining time, unless refreshed.
+            if effect:getTimeRemaining() <= 4000 then
+                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 after first second has happened. Can't go below 0.
+            end
+        end
+    end
+
+    nukeWallFactor = 1 - potency / 10000
+
+    -- Calculate damage needed to reach the potency cap (4000). The lower the level, the easier to hit potency cap.
+    local damageCap = target:getMainLvl() * 21 + 500
+
+    -- Calculate final effect potency, dependant on damage dealt.
+    local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
+
+    -- Renew status effect.
+    target:delStatusEffectSilent(xi.effect.NUKE_WALL)
+    target:addStatusEffectEx(xi.effect.NUKE_WALL, 0, finalPotency, 0, 5, 0, spellElement)
+
+    return nukeWallFactor
 end
 
 -----------------------------------
@@ -776,30 +835,8 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, target, spell, skillType)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
-
-    -- Debug
-    -- printf("=====================")
-    -- printf("spellDamage = %s", spellDamage)
-    -- printf("======Multipliers====")
-    -- printf("MTDR = %s", multipleTargetReduction)
-    -- printf("eleStaffBonus = %s", eleStaffBonus)
-    -- printf("magianAffinity = %s", magianAffinity)
-    -- printf("SDT = %s", sdt)
-    -- printf("resist = %s", resist)
-    -- printf("magicBurst = %s", magicBurst)
-    -- printf("magicBurstBonus = %s", magicBurstBonus)
-    -- printf("dayAndWeather = %s", dayAndWeather)
-    -- printf("magicBonusDiff = %s", magicBonusDiff)
-    -- printf("TMDA = %s", targetMagicDamageAdjustment)
-    -- printf("divineEmblemMultiplier = %s", divineEmblemMultiplier)
-    -- printf("ebullienceMultiplier = %s", ebullienceMultiplier)
-    -- printf("skillTypeMultiplier = %s", skillTypeMultiplier)
-    -- printf("ninSkillBonus = %s", ninSkillBonus)
-    -- printf("ninFutaeBonus = %s", ninFutaeBonus)
-    -- printf("undeadDivinePenalty = %s", undeadDivinePenalty)
-    -- printf("nukeAbsorbOrNullify = %s", nukeAbsorbOrNullify)
-    -- printf("=====================")
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
@@ -818,7 +855,13 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * ninSkillBonus)
     finalDamage = math.floor(finalDamage * ninFutaeBonus)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
+    finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
+
+    -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
+    local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(caster, target, spell, spellElement, finalDamage)
+
+    finalDamage = math.floor(finalDamage * nukeWallFactor)
 
     -- Handle Phalanx
     if finalDamage > 0 then

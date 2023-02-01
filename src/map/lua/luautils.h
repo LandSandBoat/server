@@ -126,7 +126,7 @@ namespace luautils
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
-    void CacheLuaObjectFromFile(std::string filename, bool printOutput = false);
+    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry = false);
     auto GetCacheEntryFromFilename(std::string filename) -> sol::table;
     void OnEntityLoad(CBaseEntity* PEntity);
 

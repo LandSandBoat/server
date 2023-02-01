@@ -58,11 +58,10 @@ public:
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
-
-    void messageSpecial(uint16 messageID, sol::variadic_args va); // Sends Special Message
-
-    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
-    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
+    void messageSpecial(uint16 messageID, sol::variadic_args va);                                                          // Sends Special Message
+    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1);                                    // Sends System Message
+    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);                                     // Sends Combat Message
+    void messageStandard(uint16 messageID);                                                                                // Send Standard Message
 
     void customMenu(sol::object const& obj);
 
@@ -99,10 +98,10 @@ public:
     bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
     void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
-    void  setFlag(uint32 flags);
-    uint8 getMoghouseFlag();
-    void  setMoghouseFlag(uint8 flag);
-    bool  needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
+    void   setFlag(uint32 flags);
+    uint16 getMoghouseFlag();
+    void   setMoghouseFlag(uint16 flag);
+    bool   needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
 
     // Object Identification
     uint32 getID();
@@ -600,6 +599,7 @@ public:
     auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
     void  setClaimable(bool claimable);
     bool  getClaimable();
+    void  clearEnmityForEntity(CLuaBaseEntity* PEntity);
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);

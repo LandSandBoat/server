@@ -51,7 +51,7 @@ entity.onMobEngaged = function(mob, target)
     mob:castSpell(xi.magic.spell.UTSUSEMI_SAN, mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local hundredfacedHapoolJa = mob:getID()
     for i = 1, 4 do DespawnMob(hundredfacedHapoolJa + i) end
 end

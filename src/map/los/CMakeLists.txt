@@ -1,0 +1,10 @@
+set(LOS_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/common.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/los_tree_node.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/los_tree_node.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/los_tree.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/los_tree.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/zone_los.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/zone_los.h
+    PARENT_SCOPE
+)

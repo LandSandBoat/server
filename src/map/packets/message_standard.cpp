@@ -35,6 +35,14 @@ CMessageStandardPacket::CMessageStandardPacket(MsgStd MessageID)
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 }
 
+CMessageStandardPacket::CMessageStandardPacket(uint16 MessageID)
+{
+    this->setType(0x09);
+    this->setSize(0x10);
+
+    ref<uint16>(0x0A) = MessageID;
+}
+
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 {
     this->setType(0x09);
