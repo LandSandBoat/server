@@ -22495,7 +22495,7 @@ INSERT INTO `mob_droplist` VALUES (2743,2,0,1000,656,0);         -- Beastcoin (S
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,841,@VCOMMON);   -- Yagudo Feather (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,841,@VCOMMON);   -- Yagudo Feather (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,841,@VCOMMON);   -- Yagudo Feather (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (2745,0,0,1000,498,@VCOMMON);   -- Yagudo Bead Necklace (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,498,@VCOMMON);   -- Yagudo Bead Necklace (Very Common, 24%)
 -- INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,2742,@UNCOMMON); -- Seedspall Astrum (Uncommon, 10%) ACP item
 -- INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,4994,@UNCOMMON); -- Scroll Of Mages Ballad (Uncommon, 10%)  Approx 2012
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,5071,@RARE);     -- Scroll Of Foe Lullaby (Rare, 5%)
