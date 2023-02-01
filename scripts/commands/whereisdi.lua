@@ -22,4 +22,8 @@ function onTrigger(player)
         GetServerVariable("[Domain]NM") == 3 then
         player:PrintToPlayer("{Apururu} Unity intelligence reports indicate a domain invasion is imminent in Provenance.", xi.msg.channel.SYSTEM_3)
     end
+
+	if GetServerVariable("[Domain]NM") == 4 then
+        player:PrintToPlayer("{Apururu} Unity intelligence reports indicate a domain invasion is imminent in RaKaznar Turris.", xi.msg.channel.SYSTEM_3)
+    end	
 end
