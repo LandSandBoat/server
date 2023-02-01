@@ -26,10 +26,9 @@ end
 zoneObject.onGameHour = function(zone)
     local qmObj        = zone:queryEntitiesByName('qm1')[1]
     local vanadielHour = VanadielHour()
-
     if
         IsMoonFull() and
-        vanadielHour >= 18 and
+        vanadielHour >= 18 or
         vanadielHour < 6
     then
         qmObj:setStatus(xi.status.NORMAL)
