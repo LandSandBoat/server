@@ -1378,6 +1378,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Reraise Gorget
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Bittern' AND ID = 60537;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Bullet' AND ID = 62001;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Poison Katars' AND ID = 62014;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Couse' AND ID = 3516;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
