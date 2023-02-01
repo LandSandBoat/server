@@ -7179,7 +7179,6 @@ INSERT INTO `mob_droplist` VALUES (871,0,0,1000,1659,@UNCOMMON);  -- Coral Crest
 INSERT INTO `mob_droplist` VALUES (871,0,0,1000,15376,@UNCOMMON); -- Taurus Subligar (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (871,0,0,1000,1061,@RARE);      -- Sacrarium Chest Key (Rare, 5%)
 
--- ZoneID:  24 - Fomor Ranger
 -- ZoneID:  28 - Fomor Paladin
 INSERT INTO `mob_droplist` VALUES (872,0,0,1000,1659,@UNCOMMON);  -- Coral Crest Key (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (872,0,0,1000,15386,@UNCOMMON); -- Pisces Subligar (Uncommon, 10%)

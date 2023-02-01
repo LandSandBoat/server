@@ -910,7 +910,7 @@ INSERT INTO `mob_groups` VALUES (42,6521,24,'Fomor_Dragoon',330,1,0,0,0,41,44,0)
 INSERT INTO `mob_groups` VALUES (43,1396,24,'Fomors_Wyvern',0,128,0,0,0,34,35,0);
 INSERT INTO `mob_groups` VALUES (44,6520,24,'Fomor_Dark_Knight',330,1,0,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (45,6519,24,'Fomor_Black_Mage',330,1,0,0,0,41,44,0);
-INSERT INTO `mob_groups` VALUES (46,1388,24,'Fomor_Ranger',330,1,872,0,0,41,44,0);
+INSERT INTO `mob_groups` VALUES (46,1388,24,'Fomor_Ranger',330,1,0,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (47,1391,24,'Fomor_Summoner',330,1,880,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (48,1395,24,'Fomors_Elemental',0,128,0,0,0,34,35,0);
 INSERT INTO `mob_groups` VALUES (49,6517,24,'Fomor_Beastmaster',330,1,858,0,0,41,44,0);
