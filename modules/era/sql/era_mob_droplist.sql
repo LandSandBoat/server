@@ -5018,6 +5018,7 @@ INSERT INTO `mob_droplist` VALUES (566,4,0,1000,4552,0);         -- Serving Of H
 -- ZoneID: 167 - Dark Aspic
 -- ZoneID: 167 - Mousse
 -- ZoneID: 169 - Dark Aspic
+-- ZoneID: 173 - Jelly
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
@@ -26385,11 +26386,6 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
-
--- ZoneID: 173 - Jelly
-INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,637,430); -- Vial Of Slime Oil (43.0%)
-INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,637,220); -- Vial Of Slime Oil (22.0%)
-INSERT INTO `mob_droplist` VALUES (3234,0,0,1000,637,140); -- Vial Of Slime Oil (14.0%)
 
 --------------------------------
 -- ASB Droplists Start at 6000
