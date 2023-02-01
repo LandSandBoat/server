@@ -78,9 +78,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
-                        player:messageSpecial(ID2.text.FOUND_LOCATION_SEAL, xi.ki.SEAL_OF_BANISHING)
                         player:delKeyItem(xi.ki.SEAL_OF_BANISHING)
-                        return quest:noAction()
+                        return quest:messageSpecial(ID2.text.FOUND_LOCATION_SEAL, xi.ki.SEAL_OF_BANISHING)
                     elseif not player:hasKeyItem(xi.ki.SEAL_OF_BANISHING) then
                         player:messageSpecial(ID2.text.IS_ON_THIS_SEAL, xi.ki.SEAL_OF_BANISHING)
                         return quest:noAction()
