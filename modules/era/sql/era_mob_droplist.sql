@@ -5018,6 +5018,7 @@ INSERT INTO `mob_droplist` VALUES (566,4,0,1000,4552,0);         -- Serving Of H
 -- ZoneID: 167 - Dark Aspic
 -- ZoneID: 167 - Mousse
 -- ZoneID: 169 - Dark Aspic
+-- ZoneID: 173 - Jelly
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
@@ -11385,7 +11386,6 @@ INSERT INTO `mob_droplist` VALUES (1405,0,0,1000,4484,80);        -- Shall Shell
 INSERT INTO `mob_droplist` VALUES (1406,0,0,1000,17750,220); -- Anthos Xiphos (22.0%)
 INSERT INTO `mob_droplist` VALUES (1406,0,0,1000,2507,90);   -- Lycopodium Flower (9.0%)
 
--- ZoneID: 173 - Jelly
 -- ZoneID: 198 - Jelly
 INSERT INTO `mob_droplist` VALUES (1407,0,0,1000,637,@RARE); -- Vial Of Slime Oil (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1407,0,0,1000,637,@RARE); -- Vial Of Slime Oil (Rare, 5%)
