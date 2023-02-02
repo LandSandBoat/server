@@ -2049,13 +2049,13 @@ void CLuaBaseEntity::setWeather(uint8 weatherType)
 }
 
 /************************************************************************
- *  Function: ChangeMusic()
+ *  Function: changeMusic()
  *  Purpose : Select a new .bgw file to play on the client
- *  Example : player:ChangeMusic(5,84)
+ *  Example : player:changeMusic(5,84)
  *  Notes   : Used for mounting Chocobo and changing Jeuno music in Winter
  ************************************************************************/
 
-void CLuaBaseEntity::ChangeMusic(uint8 blockID, uint8 musicTrackID)
+void CLuaBaseEntity::changeMusic(uint8 blockID, uint8 musicTrackID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -15673,7 +15673,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setWeather", CLuaBaseEntity::setWeather);
 
     // PC Instructions
-    SOL_REGISTER("ChangeMusic", CLuaBaseEntity::ChangeMusic);
+    SOL_REGISTER("changeMusic", CLuaBaseEntity::changeMusic);
     SOL_REGISTER("sendMenu", CLuaBaseEntity::sendMenu);
     SOL_REGISTER("sendGuild", CLuaBaseEntity::sendGuild);
     SOL_REGISTER("openSendBox", CLuaBaseEntity::openSendBox);
