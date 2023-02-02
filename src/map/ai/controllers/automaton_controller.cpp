@@ -608,9 +608,9 @@ bool CAutomatonController::TryElemental(const CurrentManeuvers& maneuvers)
     if (PAutomaton->getMod(Mod::AUTO_SCAN_RESISTS))
     {
         std::vector<std::pair<SpellID, int16>> reslist{
-            std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRE_MEVA)), std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICE_MEVA)),
-            std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WIND_MEVA)), std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTH_MEVA)),
-            std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDER_MEVA)), std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATER_MEVA))
+            std::make_pair(SpellID::Fire, PTarget->getMod(Mod::FIRE_RES_RANK)), std::make_pair(SpellID::Blizzard, PTarget->getMod(Mod::ICE_RES_RANK)),
+            std::make_pair(SpellID::Aero, PTarget->getMod(Mod::WIND_RES_RANK)), std::make_pair(SpellID::Stone, PTarget->getMod(Mod::EARTH_RES_RANK)),
+            std::make_pair(SpellID::Thunder, PTarget->getMod(Mod::THUNDER_RES_RANK)), std::make_pair(SpellID::Water, PTarget->getMod(Mod::WATER_RES_RANK))
         };
         std::stable_sort(reslist.begin(), reslist.end(), resistanceComparator);
         for (std::pair<SpellID, int16>& res : reslist)
