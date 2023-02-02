@@ -35,6 +35,7 @@ entity.onMobDespawn = function(mob)
     local nqMob = GetMobByID(mob:getID() - 3)
     SetServerVariable("[POP]Tzee_Xicu_the_Manifest", os.time() + 259200) -- 3 days
     SetServerVariable("[PH]Tzee_Xicu_the_Manifest", 0)
+    SetServerVariable("[POPNUM]Tzee_Xicu_the_Manifest", 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqID, false)
     xi.mob.nmTODPersist(nqMob, math.random(75600, 86400)) -- 21 to 24 hours
