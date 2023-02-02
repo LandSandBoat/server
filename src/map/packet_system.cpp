@@ -3912,6 +3912,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 // clang-format on
 
                 if ((PZoneLine->m_toZoneType == ZONE_TYPE::CITY && PZoneLine->m_toZone == 0 && !RentExempt) &&
+                    (settings::get<bool>("map.RENT_A_ROOM") || settings::get<bool>("map.ERA_RENT_A_ROOM")) &&
                     (settings::get<bool>("map.RENT_A_ROOM") && settings::get<bool>("map.ERA_RENT_A_ROOM") ? !IsRentedCity : !IsInHomeNation && !IsRentedCity))
                 {
                     PChar->loc.p.rotation += 128;
