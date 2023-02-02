@@ -243,6 +243,7 @@ INSERT INTO `mob_droplist` VALUES (21,0,0,1000,646,@UNCOMMON);   -- Chunk Of Ada
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,908,@UNCOMMON);   -- Adamantoise Shell (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,12361,@UNCOMMON); -- Sipar (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,13794,@UNCOMMON); -- Heavy Cuirass (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (21,0,0,1000,1525,@RARE);      -- Adamantoise Egg (Rare, 5%)
 
 -- ZoneID:  92 - Adaman Quadav
 INSERT INTO `mob_droplist` VALUES (22,0,0,1000,2504,130); -- Heavy Quadav Chestplate (13.0%)
@@ -2509,6 +2510,7 @@ INSERT INTO `mob_droplist` VALUES (251,0,0,1000,860,@VCOMMON);    -- Behemoth Hi
 INSERT INTO `mob_droplist` VALUES (251,0,0,1000,860,@VCOMMON);    -- Behemoth Hide (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (251,0,0,1000,16869,@COMMON);   -- Thundercloud (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (251,0,0,1000,17294,@UNCOMMON); -- Comet Tail (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (251,0,0,1000,1527,@RARE);      -- Behemoth Tongue (Rare, 5%)
 
 -- ZoneID:  45 - Beholder
 INSERT INTO `mob_droplist` VALUES (252,0,0,1000,2917,@UNCOMMON); -- Bloodshot Hecteye (Uncommon, 10%)
@@ -6714,6 +6716,7 @@ INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16942,@UNCOMMON); -- Balmung (Un
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,17653,@UNCOMMON); -- Hrotti (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,3340,@RARE);      -- Cup Of Sweet Tea (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16555,@VRARE);    -- Ridill (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (805,0,0,1000,1526,@RARE);      -- Wyrm Beard (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@VCOMMON,1321,250);    -- Earthen Abjuration Hands (Group 1 - 25.0%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@VCOMMON,1326,250);    -- Aquarian Abjuration Hands (Group 1 - 25.0%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@VCOMMON,1328,250);    -- Aquarian Abjuration Feet (Group 1 - 25.0%)
