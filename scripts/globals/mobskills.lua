@@ -718,49 +718,41 @@ end
 -- end
 
 xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, damageType)
-    if not target:isUndead() then
-        if drainType == xi.mobskills.drainType.MP then
-            -- can't go over limited mp
-            if target:getMP() < drain then
-                drain = target:getMP()
-            end
-
-            target:delMP(drain)
-            mob:addMP(drain)
-
-            return xi.msg.basic.SKILL_DRAIN_MP
-        elseif drainType == xi.mobskills.drainType.TP then
-            -- can't go over limited tp
-            if target:getTP() < drain then
-                drain = target:getTP()
-            end
-
-            target:delTP(drain)
-            mob:addTP(drain)
-
-            return xi.msg.basic.SKILL_DRAIN_TP
-        elseif drainType == xi.mobskills.drainType.HP then
-            -- can't go over limited hp
-            if target:getHP() < drain then
-                drain = target:getHP()
-            end
-
-            target:takeDamage(drain, mob, attackType, damageType)
-            mob:addHP(drain)
-
-            return xi.msg.basic.SKILL_DRAIN_HP
+    if drainType == xi.mobskills.drainType.MP then
+        -- can't go over limited mp
+        if target:getMP() < drain then
+            drain = target:getMP()
         end
-    else
-        -- it's undead so just deal damage
+
+        target:delMP(drain)
+        mob:addMP(drain)
+
+        return xi.msg.basic.SKILL_DRAIN_MP
+    elseif drainType == xi.mobskills.drainType.TP then
+        -- can't go over limited tp
+        if target:getTP() < drain then
+            drain = target:getTP()
+        end
+
+        target:delTP(drain)
+        mob:addTP(drain)
+
+        return xi.msg.basic.SKILL_DRAIN_TP
+    elseif drainType == xi.mobskills.drainType.HP then
         -- can't go over limited hp
         if target:getHP() < drain then
             drain = target:getHP()
         end
 
         target:takeDamage(drain, mob, attackType, damageType)
-        return xi.msg.basic.DAMAGE
+        -- if not undead then drain else just do damage
+        if not target:isUndead() then
+            mob:addHP(drain)
+            return xi.msg.basic.SKILL_DRAIN_HP
+        else
+            return xi.msg.basic.DAMAGE
+        end
     end
-
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
