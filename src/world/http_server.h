@@ -20,18 +20,29 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #pragma once
 
-#include "common/application.h"
+#include "common/logging.h"
+#include "map/zone.h"
 
-class HTTPServer;
+#include <mutex>
 
-class WorldServer final : public Application
+#include <httplib.h>
+
+class HTTPServer
 {
 public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
-    ~WorldServer() override;
+    HTTPServer();
+    ~HTTPServer();
 
-    void Tick() override;
+    void LockingUpdate();
 
 private:
-    std::unique_ptr<HTTPServer> httpServer;
+    httplib::Server         m_httpServer;
+    std::mutex              m_updateBottleneck;
+    std::atomic<time_point> m_lastUpdate;
+
+    struct APIDataCache
+    {
+        uint32                                 activeSessionCount;
+        std::array<uint32, ZONEID::MAX_ZONEID> zonePlayerCounts;
+    } m_apiDataCache;
 };

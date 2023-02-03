@@ -18,20 +18,25 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#pragma once
+#include "world_server.h"
 
 #include "common/application.h"
+#include "common/console_service.h"
+#include "common/logging.h"
 
-class HTTPServer;
+#include "http_server.h"
 
-class WorldServer final : public Application
+WorldServer::WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
+: Application("world", std::move(pArgParser))
+, httpServer(std::make_unique<HTTPServer>())
 {
-public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
-    ~WorldServer() override;
+}
 
-    void Tick() override;
+WorldServer::~WorldServer()
+{
+}
 
-private:
-    std::unique_ptr<HTTPServer> httpServer;
-};
+void WorldServer::Tick()
+{
+    Application::Tick();
+}
