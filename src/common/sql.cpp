@@ -34,62 +34,6 @@
 #include <string>
 #include <thread>
 
-#include <concurrentqueue.h>
-
-moodycamel::ConcurrentQueue<std::function<void(SqlConnection*)>> asyncQueue;
-
-std::atomic<bool>            asyncRunning;
-std::unique_ptr<std::thread> asyncThread;
-
-void AsyncThreadBody(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
-{
-    TracySetThreadName("Async DB Thread");
-    SqlConnection con(user, passwd, host, port, db);
-    while (asyncRunning)
-    {
-        con.HandleAsync();
-        std::this_thread::sleep_for(200ms); // TODO: This is bad and ugly. Replace with something better.
-    }
-}
-
-void SqlConnection::Async(std::function<void(SqlConnection*)>&& func)
-{
-    TracyZoneScoped;
-    asyncQueue.enqueue(std::move(func));
-}
-
-void SqlConnection::Async(std::string const& query)
-{
-    TracyZoneScoped;
-    TracyZoneString(query);
-
-    // clang-format off
-    Async([query = std::move(query)](SqlConnection* sql)
-    {
-        // Executed on worker thread
-        if (sql->QueryStr(query.c_str()) == SQL_ERROR)
-        {
-            ShowCritical("Asyc Query Error");
-        }
-    });
-    // clang-format on
-}
-
-void SqlConnection::HandleAsync()
-{
-    std::function<void(SqlConnection*)> func;
-    while (asyncQueue.try_dequeue(func))
-    {
-        TracyZoneScoped;
-        func(this);
-    }
-}
-
-void SqlConnection::SetLatencyWarning(bool _LatencyWarning)
-{
-    m_LatencyWarning = _LatencyWarning;
-}
-
 SqlConnection::SqlConnection()
 : SqlConnection(settings::get<std::string>("network.SQL_LOGIN").c_str(),
                 settings::get<std::string>("network.SQL_PASSWORD").c_str(),
@@ -142,7 +86,6 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 SqlConnection::~SqlConnection()
 {
     TracyZoneScoped;
-    asyncRunning = false;
     if (self)
     {
         mysql_close(&self->handle);
