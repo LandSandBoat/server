@@ -14,14 +14,6 @@ require('scripts/globals/zone')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
 
-quest.reward =
-{
-    fame = 80,
-    fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.WRAPPED_BOW,
-    title = xi.title.BOND_FIXER
-}
-
 quest.sections =
 {
     -- Quest Acceptance
@@ -83,11 +75,21 @@ quest.sections =
 
                 [490] = function(player, csid, option, npc)
                     if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_COMPLETED then
+                        -- rewards for repeat completion
                         quest.reward =
                         {
                             fame = 10,
                             fameArea = xi.quest.fame_area.WINDURST,
                             gil = 900 * xi.settings.main.GIL_RATE
+                        }
+                    else
+                        -- rewards for first completion
+                        quest.reward =
+                        {
+                            fame = 80,
+                            fameArea = xi.quest.fame_area.WINDURST,
+                            item = xi.items.WRAPPED_BOW,
+                            title = xi.title.BOND_FIXER
                         }
                     end
 
