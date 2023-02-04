@@ -18,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local selfDestHPP = mob:getLocalVar("HPSelfDestruct") / 3
+    local selfDestHPP = mob:getLocalVar("HPSelfDestruct") / 6
 
     -- Razon - ENM: Fire in the Sky
     if mob:getHPP() <= 33 and mob:getPool() == 3333 then
