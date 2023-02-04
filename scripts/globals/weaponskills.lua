@@ -184,7 +184,10 @@ local function getMultiAttacks(attacker, target, numHits, wsParams)
     end
 
     -- QA/TA/DA can only proc on the first hit of each weapon or each fist
-    if attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
+    if
+        attacker:getOffhandDmg() > 0 or
+        attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND
+    then
         multiChances = 2
     end
 
