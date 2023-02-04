@@ -72,6 +72,9 @@ quest.sections =
             onEventFinish =
             {
                 [920] = function(player, csid, option, npc)
+                    quest.reward.item = nil
+                    quest.reward.gil = nil
+
                     if option == 1 and not player:hasItem(xi.items.DIABOLOSS_POLE) then
                         quest.reward.item = xi.items.DIABOLOSS_POLE
 
