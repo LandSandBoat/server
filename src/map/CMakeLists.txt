@@ -146,55 +146,44 @@ endif()
 set(module_include_dirs "")
 file(STRINGS ${CMAKE_SOURCE_DIR}/modules/init.txt INIT_FILE_ENTRIES REGEX "^[^#\n].*")
 foreach(entry ${INIT_FILE_ENTRIES})
-    if (${entry} STREQUAL "")
+    if(${entry} STREQUAL "")
         continue()
     endif()
-    if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${entry}")
-        file(GLOB_RECURSE module_files
+    if(IS_DIRECTORY "${CMAKE_SOURCE_DIR}/modules/${entry}")
+        file(
+            GLOB_RECURSE
+            module_files
             "${CMAKE_SOURCE_DIR}/modules/${entry}/*.cpp"
-            "${CMAKE_SOURCE_DIR}/modules/${entry}/*.h")
+            "${CMAKE_SOURCE_DIR}/modules/${entry}/*.h"
+        )
         list(APPEND module_include_dirs "${CMAKE_SOURCE_DIR}/modules/${entry}")
         list(APPEND SOURCES ${module_files})
         message(STATUS "Adding module files to build: ${module_files}")
-    elseif (${entry} MATCHES "\.cpp")
+    elseif(${entry} MATCHES "\.cpp")
         list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/modules/${entry}")
         message(STATUS "Adding module files to build: ${CMAKE_SOURCE_DIR}/modules/${entry}")
     endif()
 endforeach()
 
-add_executable(xi_map
-    ${SOURCES}
-    ${resource})
+add_executable(xi_map ${SOURCES} ${resource})
 
 if(WIN32)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map)
 endif()
 
-target_compile_definitions(
+target_compile_definitions(xi_map PUBLIC -DdsUDPSERV -DDEBUGLOGMAP)
+
+target_link_libraries(
     xi_map
-    PUBLIC
-    -DdsUDPSERV
-    -DDEBUGLOGMAP
+    PUBLIC ${EXTERNAL_LIBS} project_options
+    PRIVATE project_warnings
 )
 
-target_link_libraries(xi_map
-    PUBLIC
-        ${EXTERNAL_LIBS}
-        project_options
-    PRIVATE
-        project_warnings
-)
-
-target_include_directories(xi_map
-    PUBLIC
-        ${CMAKE_SOURCE_DIR}/src
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${module_include_dirs}
-)
+target_include_directories(xi_map PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR} ${module_include_dirs})
 
 target_precompile_headers(xi_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
 
-if (APPLE)
+if(APPLE)
     disable_lto(xi_map)
 endif()
 

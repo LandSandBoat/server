@@ -29,29 +29,37 @@
 #
 # TEST AND MAKE SURE THAT EVERYTHING STILL WORKS!
 
-find_library(ZeroMQ_LIBRARY 
-    NAMES 
-        "zmq${lib_debug}" "zmq${lib_debug}_64" "libzmq${lib_debug}" "libzmq${lib_debug}_64"
-    PATHS
-        ${PROJECT_SOURCE_DIR}/ext/zmq/${libpath}
-        /usr/
-        /usr/bin/
-        /usr/include/
-        /usr/lib/
-        /usr/local/
-        /usr/local/bin/
-        /opt/)
+find_library(
+    ZeroMQ_LIBRARY
+    NAMES "zmq${lib_debug}"
+          "zmq${lib_debug}_64"
+          "libzmq${lib_debug}"
+          "libzmq${lib_debug}_64"
+    PATHS ${PROJECT_SOURCE_DIR}/ext/zmq/${libpath}
+          /usr/
+          /usr/bin/
+          /usr/include/
+          /usr/lib/
+          /usr/local/
+          /usr/local/bin/
+          /opt/
+)
 
 set(ZeroMQ_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/ext/zmq/include/zmq/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(ZeroMQ DEFAULT_MSG ZeroMQ_LIBRARY ZeroMQ_INCLUDE_DIR)
+find_package_handle_standard_args(
+    ZeroMQ
+    DEFAULT_MSG
+    ZeroMQ_LIBRARY
+    ZeroMQ_INCLUDE_DIR
+)
 
 message(STATUS "ZeroMQ_FOUND: ${ZeroMQ_FOUND}")
 message(STATUS "ZeroMQ_LIBRARY: ${ZeroMQ_LIBRARY}")
 message(STATUS "ZeroMQ_INCLUDE_DIR: ${ZeroMQ_INCLUDE_DIR}")
 
-if (${ZeroMQ_FOUND})
+if(${ZeroMQ_FOUND})
     link_libraries(${ZeroMQ_LIBRARY})
     include_directories(SYSTEM ${ZeroMQ_INCLUDE_DIR})
     include_directories(SYSTEM ${ZeroMQ_INCLUDE_DIR}/../)

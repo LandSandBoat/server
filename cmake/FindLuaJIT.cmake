@@ -54,31 +54,40 @@
 #    endif()
 #endif()
 
-find_library(LuaJIT_LIBRARY
-    NAMES
-        luajit luajit_64 luajit-5.1 libluajit libluajit_64
-    PATHS
-        ${LuaJIT_SOURCE_DIR}/src/
-        ${PROJECT_SOURCE_DIR}/ext/luajit/${libpath}
-        /usr/
-        /usr/bin/
-        /usr/include/
-        /usr/lib/
-        /usr/local/
-        /usr/local/bin/
-        /opt/)
+find_library(
+    LuaJIT_LIBRARY
+    NAMES luajit
+          luajit_64
+          luajit-5.1
+          libluajit
+          libluajit_64
+    PATHS ${LuaJIT_SOURCE_DIR}/src/
+          ${PROJECT_SOURCE_DIR}/ext/luajit/${libpath}
+          /usr/
+          /usr/bin/
+          /usr/include/
+          /usr/lib/
+          /usr/local/
+          /usr/local/bin/
+          /opt/
+)
 
 set(LuaJIT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/ext/luajit/include/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(LuaJIT DEFAULT_MSG LuaJIT_LIBRARY LuaJIT_INCLUDE_DIR)
+find_package_handle_standard_args(
+    LuaJIT
+    DEFAULT_MSG
+    LuaJIT_LIBRARY
+    LuaJIT_INCLUDE_DIR
+)
 
 message(STATUS "LuaJIT_FOUND: ${LuaJIT_FOUND}")
 message(STATUS "LuaJIT_LIBRARY: ${LuaJIT_LIBRARY}")
 message(STATUS "LuaJIT_INCLUDE_DIR: ${LuaJIT_INCLUDE_DIR}")
 
 # TODO: Don't do this globally
-if (${LuaJIT_FOUND})
+if(${LuaJIT_FOUND})
     link_libraries(${LuaJIT_LIBRARY})
     include_directories(SYSTEM ${LuaJIT_INCLUDE_DIR})
     include_directories(SYSTEM ${LuaJIT_INCLUDE_DIR}/../)
