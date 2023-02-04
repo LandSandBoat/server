@@ -99,6 +99,7 @@ endif()
 string(REPLACE ";" " " FLAGS_AND_DEFINES_STR "${FLAGS_AND_DEFINES}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS_AND_DEFINES_STR}")
 
+# Set binary output location for target
 function(set_target_output_directory target)
     message(STATUS "Setting output directory for ${target} to ${CMAKE_SOURCE_DIR}")
     set_target_properties(${target} PROPERTIES
@@ -110,6 +111,7 @@ function(set_target_output_directory target)
     )
 endfunction()
 
+# Disable LTO for target
 function(disable_lto target)
     target_compile_options(${target} PRIVATE -fno-lto)
     target_link_options(${target} PRIVATE -fno-lto)

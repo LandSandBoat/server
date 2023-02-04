@@ -1,8 +1,7 @@
+# Set compiler warnings for given target
 # from here:
-#
 # https://github.com/lefticus/cppbestpractices/blob/master/02-Use_the_Tools_Available.md
-
-function(set_project_warnings project_name)
+function(set_target_warnings target_name)
   set(MSVC_WARNINGS
       /W4 # Baseline reasonable warnings
 
@@ -112,5 +111,5 @@ function(set_project_warnings project_name)
     endif()
   endif()
 
-  target_compile_options(${project_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
-endfunction() #set_project_warnings
+  target_compile_options(${target_name} INTERFACE ${ERRORS} ${PROJECT_WARNINGS})
+endfunction() # set_target_warnings
