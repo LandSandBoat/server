@@ -64,7 +64,7 @@ end
 local function getWyvern(player)
     local wyvern = player:getPet()
 
-    if wyvern and player:getPetID() == xi.pet.id.WYVERN then
+    if wyvern and wyvern:getPetID() == xi.pet.id.WYVERN then
         return wyvern
     end
 

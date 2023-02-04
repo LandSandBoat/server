@@ -394,7 +394,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     local ftpMult = xi.mobskills.ftP(tp, ftp100, ftp200, ftp300)
 
-    -- resistence is added last
+    -- resistance is added last
     local finaldmg = damage * mab * ftpMult + dStat
     -- Check for dmgmod if it still has one. To be removed.
     if dmgmod then
@@ -412,12 +412,12 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     if mob:isPet() and mob:getMaster():isPC() then
         local master = mob:getMaster()
-        if master:getPetID() >= 0 and master:getPetID() <= 20 then -- check to ensure pet is avatar
+        if mob:isAvatar() then
             bonusMacc = bonusMacc + utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
 
-    -- get resistence
+    -- get resistance
     local params = { diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil }
     resist = xi.magic.applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
 

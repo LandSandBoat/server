@@ -720,7 +720,9 @@ public:
 
     bool   hasPet();                                  // returns true if the player has a pet
     auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
-    uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
+    uint32 getPetID();                                // returns the PetID of an entity if it is a pet, otherwise 0.
+    bool   isAutomaton();                             // returns true if entity is an automaton.
+    bool   isAvatar();                                // returns true if entity is an avatar
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);
