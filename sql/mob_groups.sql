@@ -11927,7 +11927,7 @@ INSERT INTO `mob_groups` VALUES (42,965,176,'Delta_Sahagin',960,0,603,0,0,62,72,
 INSERT INTO `mob_groups` VALUES (43,2317,176,'Lagoon_Sahagin',960,0,1479,0,0,62,72,0);
 INSERT INTO `mob_groups` VALUES (44,6368,176,'Robber_Crab',924,0,1223,0,0,62,67,0);
 INSERT INTO `mob_groups` VALUES (45,4467,176,'Yarr_the_Pearleyed',0,32,2780,8000,0,64,66,0);
-INSERT INTO `mob_groups` VALUES (46,2914,176,'Novv_the_Whitehearted',0,32,1825,0,0,66,66,0);
+INSERT INTO `mob_groups` VALUES (46,2914,176,'Novv_the_Whitehearted',0,32,1825,7500,0,66,66,0);
 INSERT INTO `mob_groups` VALUES (47,6456,176,'Dire_Bat',960,0,234,0,0,63,66,0);
 INSERT INTO `mob_groups` VALUES (48,999,176,'Denn_the_Orcavoiced',0,32,628,0,0,64,65,0);
 INSERT INTO `mob_groups` VALUES (49,1018,176,'Devil_Manta',960,0,645,0,0,66,69,0);

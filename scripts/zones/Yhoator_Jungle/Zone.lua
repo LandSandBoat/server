@@ -32,12 +32,6 @@ zoneObject.onInitialize = function(zone)
         xi.mob.nmTODPersistCache(zone, ID.mob.POWDERER_PENNY)
     end
 
-    UpdateNMSpawnPoint(ID.mob.BISQUE_HEELED_SUNBERRY)
-    GetMobByID(ID.mob.BISQUE_HEELED_SUNBERRY):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.BRIGHT_HANDED_KUNBERRY)
-    GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY):setRespawnTime(math.random(900, 10800))
-
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.chocobo.initZone(zone)
@@ -99,7 +93,7 @@ zoneObject.onZoneOut = function(player)
     end
 end
 
-zoneObject.onEventUpdate = function( player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 2 then
         quests.rainbow.onEventUpdate(player)
     end
