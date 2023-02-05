@@ -117,6 +117,11 @@ public:
     size_t EscapeString(char* out_to, const char* from);
     size_t EscapeStringLen(char* out_to, const char* from, size_t from_len);
 
+    /// Escapes a string.
+    ///
+    /// @return The escaped string
+    std::string EscapeString(std::string input);
+
     /// Executes a query.
     /// Any previous result is freed.
     /// The query is used directly.
