@@ -262,6 +262,7 @@ int32 SqlConnection::TryPing()
 
 size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t from_len)
 {
+    TracyZoneScoped;
     if (self)
     {
         return mysql_real_escape_string(&self->handle, out_to, from, (uint32)from_len);
@@ -271,11 +272,13 @@ size_t SqlConnection::EscapeStringLen(char* out_to, const char* from, size_t fro
 
 size_t SqlConnection::EscapeString(char* out_to, const char* from)
 {
+    TracyZoneScoped;
     return EscapeStringLen(out_to, from, strlen(from));
 }
 
 std::string SqlConnection::EscapeString(std::string const& input)
 {
+    TracyZoneScoped;
     std::string escaped_full_string;
     escaped_full_string.reserve(input.size() * 2 + 1);
     EscapeString(escaped_full_string.data(), input.data());

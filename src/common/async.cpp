@@ -54,6 +54,10 @@ void Async::query(std::string const& query)
     // clang-format on
 }
 
+// NOTE: Be _very_ careful when defining your sql argument in the passed-in function.
+//     : If you define your arg as _sql, but then call sql, it will use the global
+//     : SQLConnection, which is on the main thread.
+//     : Remember that SQLConnection is NOT THREAD-SAFE!
 void Async::query(std::function<void(SqlConnection*)> func)
 {
     // clang-format off
