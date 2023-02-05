@@ -8,4 +8,5 @@ return {
     ['Rosel']       = { text = ID.text.ROSEL_GREETINGS },
     ['Sobane']      = { text = ID.text.SOBANE_DIALOG },
     ['Valderotaux'] = { event = 58 },
+    ['Oaken_Box']   = { text = ID.text.BOX_SCATTERED },
 }
