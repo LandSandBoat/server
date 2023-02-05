@@ -1,0 +1,23 @@
+-----------------------------------
+-- ID: 25774
+-- Fancy Gilet
+-- Dispenses Persikos Snow Cone
+-----------------------------------
+require("scripts/globals/msg")
+-----------------------------------
+local itemObject = {}
+
+itemObject.onItemCheck = function(target)
+    local result = 0
+    if target:getFreeSlotsCount() == 0 then
+        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
+    end
+
+    return result
+end
+
+itemObject.onItemUse = function(target)
+    target:addItem(6565) -- Persikos Snow Cone
+end
+
+return itemObject
