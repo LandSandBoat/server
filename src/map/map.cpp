@@ -225,6 +225,7 @@ int32 do_init(int32 argc, char** argv)
 
     ShowInfo(sql->GetClientVersion().c_str());
     ShowInfo(sql->GetServerVersion().c_str());
+    sql->CheckCollation();
 
     luautils::init(); // Also calls moduleutils::LoadLuaModules();
 

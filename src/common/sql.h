@@ -103,6 +103,8 @@ public:
 
     void SetupKeepalive();
 
+    void CheckCollation();
+
     /// Pings the connection.
     ///
     /// @return SQL_SUCCESS or SQL_ERROR
