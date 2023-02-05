@@ -120,7 +120,7 @@ public:
     /// Escapes a string.
     ///
     /// @return The escaped string
-    std::string EscapeString(std::string input);
+    std::string EscapeString(std::string const& input);
 
     /// Executes a query.
     /// Any previous result is freed.
@@ -210,5 +210,7 @@ private:
     void InitPreparedStatements();
 
     std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
+
+    std::thread::id m_ThreadId;
 };
 #endif // _COMMON_SQL_H

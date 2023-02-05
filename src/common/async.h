@@ -21,14 +21,11 @@
 
 #pragma once
 
+#include "sql.h"
+#include <task_system.hpp>
+
 #include <functional>
 #include <string>
-
-class SqlConnection;
-namespace ts
-{
-    class task_system;
-};
 
 class Async
 {
@@ -37,7 +34,8 @@ public:
 
     static Async* getInstance();
 
-    void query(std::string query);
+    void query(std::string const& query);
+    void query(std::function<void(SqlConnection*)> func);
     void submit(std::function<void()> func);
 
 private:

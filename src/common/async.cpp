@@ -44,13 +44,22 @@ Async* Async::getInstance()
     return _instance;
 }
 
-void Async::query(std::string query)
+void Async::query(std::string const& query)
 {
     // clang-format off
     _ts->schedule([query]()
     {
-        auto escaped_string = _sql->EscapeString(query);
-        std::ignore = _sql->Query(escaped_string.c_str());
+        _sql->Query(query.c_str());
+    });
+    // clang-format on
+}
+
+void Async::query(std::function<void(SqlConnection*)> func)
+{
+    // clang-format off
+    _ts->schedule([func]()
+    {
+        func(_sql);
     });
     // clang-format on
 }
