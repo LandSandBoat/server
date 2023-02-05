@@ -277,6 +277,7 @@ size_t SqlConnection::EscapeString(char* out_to, const char* from)
 
 std::string SqlConnection::EscapeString(std::string const& input)
 {
+    TracyZoneScoped;
     std::string escaped_full_string;
     escaped_full_string.reserve(input.size() * 2 + 1);
     EscapeString(escaped_full_string.data(), input.data());

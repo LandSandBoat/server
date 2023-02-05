@@ -7,8 +7,10 @@
 #include "cbasetypes.h"
 #include "sql_prepared_stmt.h"
 
-#include <mysql.h>
+#include <thread>
 #include <unordered_map>
+
+#include <mysql.h>
 
 #ifdef WIN32
 #include <winsock2.h>
