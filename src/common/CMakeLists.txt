@@ -1,6 +1,8 @@
 set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/application.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/application.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/async.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/async.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blowfish.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/blowfish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/cbasetypes.h
