@@ -13,7 +13,7 @@ CREATE TABLE `zonelines` (
   `toz` float(7,3) NOT NULL DEFAULT'0.000',
   `rotation` tinyint(3) unsigned NOT NULL DEFAULT'0',
   PRIMARY KEY (`zoneline`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of zonelines

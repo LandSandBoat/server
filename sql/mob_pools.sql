@@ -44,7 +44,7 @@ CREATE TABLE `mob_pools` (
   `skill_list_id` smallint(5) unsigned NOT NULL DEFAULT 0,
   `resist_id` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`poolid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7115,7 +7115,7 @@ INSERT INTO `mob_pools` VALUES (7054,'Leviathan_Prime_TSTBW','Leviathan_Prime',4
 
 INSERT INTO `mob_pools` VALUES (7055,'Armoury_Crate','Armoury_Crate',183,0x0000C00300000000000000000000000000000000,1,0,0,240,100,1024,0,0,0,64,0,0,0,131,8,0,0,0,0,0,183);
 
--- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja 
+-- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja
 INSERT INTO `mob_pools` VALUES (7056,'Hundredfaced_clone','Hundredfaced_Hapool_Ja',176,0x0600530600000000000000000000000000000000,13,13,10,280,100,0,1,1,1,2,0,32,0,159,4,0,7,0,0,176,176);
 
 -- Grand Palace of Hu'Xzoi - Escort Quest for PM 8-2

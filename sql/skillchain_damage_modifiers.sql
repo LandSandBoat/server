@@ -9,7 +9,7 @@ CREATE TABLE `skillchain_damage_modifiers` (
   `initial_modifier` int(3) NOT NULL DEFAULT '1',
   `magic_burst_modifier` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`chain_level`,`chain_count`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of skillchain_damage_modifiers
