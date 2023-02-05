@@ -8,7 +8,7 @@ CREATE TABLE `blue_spell_mods` (
   `modid` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`spellId`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Venom Shell
@@ -54,12 +54,12 @@ INSERT INTO `blue_spell_mods` VALUES ('524', '10', '1'); -- VIT+1
 INSERT INTO `blue_spell_mods` VALUES ('527', '11', '3'); -- AGI+3
 
 -- ----------------------------
--- Bludgeon 
+-- Bludgeon
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('529', '8', '1'); -- STR+1
 
 -- ----------------------------
--- Refueling 
+-- Refueling
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('530', '11', '2'); -- AGI+2
 
@@ -145,7 +145,7 @@ INSERT INTO `blue_spell_mods` VALUES ('545', '2', '-5'); -- HP-5
 INSERT INTO `blue_spell_mods` VALUES ('545', '5', '15'); -- MP+15
 
 -- ----------------------------
--- Cocoon 
+-- Cocoon
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('547', '10', '3'); -- VIT+3
 
@@ -600,19 +600,19 @@ INSERT INTO `blue_spell_mods` VALUES ('654', '10', '3'); -- VIT+3
 INSERT INTO `blue_spell_mods` VALUES ('655', '8', '3'); -- STR+3
 
 -- ----------------------------
--- Acrid Stream 
+-- Acrid Stream
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('656', '9', '2'); -- DEX+2
 INSERT INTO `blue_spell_mods` VALUES ('656', '13', '2'); -- MND+2
 
 -- ----------------------------
--- Blazing Bound 
+-- Blazing Bound
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('657', '11', '1'); -- AGI+1
 INSERT INTO `blue_spell_mods` VALUES ('657', '10', '2'); -- VIT+2
 
 -- ----------------------------
--- Plenilune Embrace 
+-- Plenilune Embrace
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('658', '5', '5'); -- HP+5
 INSERT INTO `blue_spell_mods` VALUES ('658', '8', '2'); -- STR+2
@@ -635,7 +635,7 @@ INSERT INTO `blue_spell_mods` VALUES ('660', '11', '2'); -- AGI+2
 INSERT INTO `blue_spell_mods` VALUES ('661', '2', '20'); -- HP+20
 
 -- ----------------------------
--- Battery Charge 
+-- Battery Charge
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('662', '5', '10'); -- MP+10
 INSERT INTO `blue_spell_mods` VALUES ('662', '13', '1'); -- MND+1
@@ -816,54 +816,54 @@ INSERT INTO `blue_spell_mods` VALUES ('690', '11', '1'); -- AGI+1
 -- ----------------------------
 -- Sudden Lunge
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('692', '2', '-5'); -- HP-5  
+INSERT INTO `blue_spell_mods` VALUES ('692', '2', '-5'); -- HP-5
 INSERT INTO `blue_spell_mods` VALUES ('692', '5', '-5'); -- MP-5
 INSERT INTO `blue_spell_mods` VALUES ('692', '11', '1'); -- AGI+1
-INSERT INTO `blue_spell_mods` VALUES ('692', '9', '1'); -- DEX+1 
+INSERT INTO `blue_spell_mods` VALUES ('692', '9', '1'); -- DEX+1
 
 -- ----------------------------
 -- Quadrastrike
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('693', '8', '3'); -- STR+3 
+INSERT INTO `blue_spell_mods` VALUES ('693', '8', '3'); -- STR+3
 INSERT INTO `blue_spell_mods` VALUES ('693', '14', '3'); -- CHR+3
 
 -- ----------------------------
 -- Vapor Spray
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('694', '2', '15'); -- HP+15 
+INSERT INTO `blue_spell_mods` VALUES ('694', '2', '15'); -- HP+15
 INSERT INTO `blue_spell_mods` VALUES ('694', '10', '4'); -- VIT+4
 
 -- ----------------------------
 -- Thunder Breath
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('695', '8', '2'); -- STR+2 
+INSERT INTO `blue_spell_mods` VALUES ('695', '8', '2'); -- STR+2
 INSERT INTO `blue_spell_mods` VALUES ('695', '9', '2'); -- DEX+2
 
 -- ----------------------------
 -- Orcish Counterstance
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('696', '2', '10'); -- HP+10 
-INSERT INTO `blue_spell_mods` VALUES ('696', '8', '3'); -- STR+3 
-INSERT INTO `blue_spell_mods` VALUES ('696', '10', '3'); -- VIT+3 
-INSERT INTO `blue_spell_mods` VALUES ('696', '9', '-2'); -- DEX-2 
+INSERT INTO `blue_spell_mods` VALUES ('696', '2', '10'); -- HP+10
+INSERT INTO `blue_spell_mods` VALUES ('696', '8', '3'); -- STR+3
+INSERT INTO `blue_spell_mods` VALUES ('696', '10', '3'); -- VIT+3
+INSERT INTO `blue_spell_mods` VALUES ('696', '9', '-2'); -- DEX-2
 INSERT INTO `blue_spell_mods` VALUES ('696', '11', '-2'); -- AGI-2
 
 -- ----------------------------
 -- Amorphic Spikes
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('697', '12', '5'); -- INT+5 
+INSERT INTO `blue_spell_mods` VALUES ('697', '12', '5'); -- INT+5
 INSERT INTO `blue_spell_mods` VALUES ('697', '13', '2'); -- MND+2
 
 -- ----------------------------
 -- Wind Breath
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('698', '8', '2'); -- STR+2 
+INSERT INTO `blue_spell_mods` VALUES ('698', '8', '2'); -- STR+2
 INSERT INTO `blue_spell_mods` VALUES ('698', '11', '2'); -- AGI+2
 
 -- ----------------------------
 -- Barbed Crescent
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('699', '8', '-3'); -- STR-3 
+INSERT INTO `blue_spell_mods` VALUES ('699', '8', '-3'); -- STR-3
 INSERT INTO `blue_spell_mods` VALUES ('699', '9', '4'); -- DEX+4
 
 -- ----------------------------
@@ -889,116 +889,116 @@ INSERT INTO `blue_spell_mods` VALUES ('703', '8', '6'); -- STR+6
 -- ----------------------------
 -- Paralyzing Triad
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('704', '2', '-10'); -- HP-10  
+INSERT INTO `blue_spell_mods` VALUES ('704', '2', '-10'); -- HP-10
 INSERT INTO `blue_spell_mods` VALUES ('704', '8', '4'); -- STR+4
 INSERT INTO `blue_spell_mods` VALUES ('704', '9', '4'); -- DEX+4
 
 -- ----------------------------
 -- Foul Waters
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('705', '2', '10'); -- HP+10 
+INSERT INTO `blue_spell_mods` VALUES ('705', '2', '10'); -- HP+10
 INSERT INTO `blue_spell_mods` VALUES ('705', '10', '4'); -- VIT+4
 
 -- ----------------------------
 -- Glutinous Dart
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('706', '2', '15'); -- HP+15 
-INSERT INTO `blue_spell_mods` VALUES ('706', '8', '3'); -- STR+3 
-INSERT INTO `blue_spell_mods` VALUES ('706', '9', '3'); -- DEX+3 
+INSERT INTO `blue_spell_mods` VALUES ('706', '2', '15'); -- HP+15
+INSERT INTO `blue_spell_mods` VALUES ('706', '8', '3'); -- STR+3
+INSERT INTO `blue_spell_mods` VALUES ('706', '9', '3'); -- DEX+3
 INSERT INTO `blue_spell_mods` VALUES ('706', '12', '-3'); -- INT-3
 
 -- ----------------------------
 -- Retinal Glare
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('707', '5', '15'); -- MP+15 
+INSERT INTO `blue_spell_mods` VALUES ('707', '5', '15'); -- MP+15
 INSERT INTO `blue_spell_mods` VALUES ('707', '12', '3'); -- INT+3
 
 -- ----------------------------
 -- Subduction
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('708', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('708', '0', '0'); --
 
 -- ----------------------------
 --  Thrashing Assault
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('709', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('709', '0', '0'); --
 
 -- ----------------------------
 -- Erratic Flutter
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('710', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('710', '0', '0'); --
 
 -- ----------------------------
  -- Restoral
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('711', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('711', '0', '0'); --
 
 -- ----------------------------
  -- Rail Cannon
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('712', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('712', '0', '0'); --
 
 -- ----------------------------
  -- Diffusion Ray
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('713', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('713', '0', '0'); --
 
 -- ----------------------------
  -- Sinker Drill
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('714', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('714', '0', '0'); --
 
 -- ----------------------------
 -- Thunderbolt
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('736', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('736', '0', '0'); --
 
 -- ----------------------------
 -- Harden Shell
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('737', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('737', '0', '0'); --
 
 -- ----------------------------
 -- Absolute Terror
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('738', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('738', '0', '0'); --
 
 -- ----------------------------
 -- Gates of Hades
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('739', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('739', '0', '0'); --
 
 -- ----------------------------
 -- Tourbillion
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('740', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('740', '0', '0'); --
 
 -- ----------------------------
 -- Pyric Bulwark
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('741', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('741', '0', '0'); --
 
 -- ----------------------------
 -- Bilgestorm
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('742', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('742', '0', '0'); --
 
 -- ----------------------------
 -- Bloodrake
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('743', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('743', '0', '0'); --
 
 -- ----------------------------
 -- Droning Whirlwind
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('744', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('744', '0', '0'); --
 
 -- ----------------------------
 -- Carcharian Verve
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('745', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('745', '0', '0'); --
 
 -- ----------------------------
 -- Blistering Roar
 -- ----------------------------
-INSERT INTO `blue_spell_mods` VALUES ('746', '0', '0'); -- 
+INSERT INTO `blue_spell_mods` VALUES ('746', '0', '0'); --

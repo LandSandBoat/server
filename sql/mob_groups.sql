@@ -30,7 +30,7 @@ CREATE TABLE `mob_groups` (
   `maxLevel` tinyint(2) unsigned NOT NULL DEFAULT 0,
   `allegiance` tinyint(2) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`zoneid`,`groupid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=22;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=22;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

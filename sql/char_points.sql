@@ -192,7 +192,7 @@ CREATE TABLE `char_points` (
   `silver_aman_voucher` int(10) unsigned NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of char_points
