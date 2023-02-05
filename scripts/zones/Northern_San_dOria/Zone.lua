@@ -29,13 +29,6 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = { -1 }
 
-    if
-        player:getCharVar("peaceForTheSpiritCS") == 5 and
-        player:getFreeSlotsCount() >= 1
-    then
-        cs = { 49 }
-    end
-
     -- MOG HOUSE EXIT
     if
         player:getXPos() == 0 and
@@ -84,11 +77,6 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 569 then
         player:setPos(0, 0, -13, 192, 233)
-    elseif
-        csid == 49 and
-        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, { item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE })
-    then
-        player:setCharVar("peaceForTheSpiritCS", 0)
     elseif csid == 16 then
         player:setCharVar("Wait1DayM8-1_date", 0)
         player:setCharVar("Mission8-1Completed", 1)
