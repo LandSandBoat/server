@@ -11,4 +11,4 @@ CREATE TABLE `account_ip_record` (
   `charid` int(10) NOT NULL,
   `client_ip` tinytext NOT NULL,
   PRIMARY KEY (`login_time`,`accid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
