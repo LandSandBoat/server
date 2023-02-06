@@ -154,7 +154,7 @@ public:
     void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    void ChangeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
+    void changeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
     void sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
     bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
     void openSendBox();                                                     // Opens send box (to deliver items)
@@ -450,12 +450,12 @@ public:
     int32 addMP(int32 amount);     // Modify mp of Entity +/-
     void  setMP(int32 value);      // Set mp of Entity to value
     int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
-    void  delMP(int32 amount);     // Subtract mp of Entity
+    int32 delMP(int32 amount);     // Subtract mp of Entity
 
     float getTP();
-    void  addTP(int16 amount); // Modify tp of Entity +/-
+    int16 addTP(int16 amount); // Modify tp of Entity +/-
     void  setTP(int16 value);  // Set tp of Entity to value
-    void  delTP(int16 amount); // Subtract tp of Entity
+    int16 delTP(int16 amount); // Subtract tp of Entity
 
     void  updateHealth();
     uint8 getAverageItemLevel();
@@ -720,7 +720,9 @@ public:
 
     bool   hasPet();                                  // returns true if the player has a pet
     auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
-    uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
+    uint32 getPetID();                                // returns the PetID of an entity if it is a pet, otherwise 0.
+    bool   isAutomaton();                             // returns true if entity is an automaton.
+    bool   isAvatar();                                // returns true if entity is an avatar
     auto   getMaster() -> std::optional<CLuaBaseEntity>;
     uint8  getPetElement();
     void   setPet(sol::object const& petObj);

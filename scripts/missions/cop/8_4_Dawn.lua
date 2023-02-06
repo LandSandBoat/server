@@ -149,8 +149,7 @@ mission.sections =
                     player:setPos(539, 0, -593, 192)
                     player:addTitle(xi.title.AVERTER_OF_THE_APOCALYPSE)
                     if not player:hasKeyItem(xi.ki.TEAR_OF_ALTANA) then
-                        mission:keyItem(xi.ki.TEAR_OF_ALTANA)
-                        mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
+                        npcUtil.giveKeyItem(player, xi.ki.TEAR_OF_ALTANA)
                     end
                     if mission:getVar(player, 'Status') < 3 then
                         mission:setVar(player, 'Wait', getMidnight())

@@ -125,6 +125,8 @@ jobs:
       if: always()
       run: |
         touch lua_checks.txt
+        python3 tools/ci/lua_stylecheck.py test >> lua_checks.txt
+
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.lua ]]; then
@@ -287,7 +289,8 @@ jobs:
             xi_connect.exe
             xi_map.exe
             xi_search.exe
-  Windows_64bit_Release_Tracy_Modules_World:
+
+  Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
     runs-on: windows-latest
     env:
@@ -314,7 +317,7 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON -DBUILD_WORLD=ON
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
       - name: Build
         shell: cmd
         run: |

@@ -63,7 +63,13 @@ namespace mobutils
         {
             bonus = 5;
         }
+
         if (lvl == 1)
+        {
+            bonus = 0;
+        }
+
+        if (PMob->objtype == TYPE_PET)
         {
             bonus = 0;
         }

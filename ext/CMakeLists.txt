@@ -87,6 +87,18 @@ CPMAddPackage(
     GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
 ) # defines: jthread-lite
 
+CPMAddPackage(
+    NAME cpp-httplib
+    GITHUB_REPOSITORY yhirose/cpp-httplib
+    GIT_TAG v0.11.3
+) # defines: httplib::httplib
+
+CPMAddPackage(
+    NAME json
+    GITHUB_REPOSITORY nlohmann/json
+    GIT_TAG v3.11.2
+) # defines: nlohmann_json::nlohmann_json
+
 set(EXTERNAL_LIBS
     concurrentqueue
     mariadbclient
@@ -97,6 +109,8 @@ set(EXTERNAL_LIBS
     argparse
     efsw
     jthread-lite
+    httplib::httplib
+    nlohmann_json::nlohmann_json
 )
 
 if (WIN32)

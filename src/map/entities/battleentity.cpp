@@ -409,6 +409,11 @@ int16 CBattleEntity::GetAmmoDelay()
 uint16 CBattleEntity::GetMainWeaponDmg()
 {
     TracyZoneScoped;
+    if (objtype == TYPE_PET || objtype == TYPE_MOB)
+    {
+        return mobutils::GetWeaponDamage(static_cast<CMobEntity*>(this), SLOT_MAIN);
+    }
+
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)

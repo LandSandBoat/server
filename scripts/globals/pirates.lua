@@ -19,7 +19,7 @@ xi.pirates.status =
 
 local function SetZoneMusic(zone, block, track)
     for _, player in pairs(zone:getPlayers()) do
-        player:ChangeMusic(block, track)
+        player:changeMusic(block, track)
     end
 end
 

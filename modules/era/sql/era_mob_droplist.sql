@@ -243,6 +243,7 @@ INSERT INTO `mob_droplist` VALUES (21,0,0,1000,646,@UNCOMMON);   -- Chunk Of Ada
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,908,@UNCOMMON);   -- Adamantoise Shell (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,12361,@UNCOMMON); -- Sipar (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,13794,@UNCOMMON); -- Heavy Cuirass (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (21,0,0,1000,1525,@RARE);      -- Adamantoise Egg (Rare, 5%)
 
 -- ZoneID:  92 - Adaman Quadav
 INSERT INTO `mob_droplist` VALUES (22,0,0,1000,2504,130); -- Heavy Quadav Chestplate (13.0%)
@@ -2509,6 +2510,7 @@ INSERT INTO `mob_droplist` VALUES (251,0,0,1000,860,@VCOMMON);    -- Behemoth Hi
 INSERT INTO `mob_droplist` VALUES (251,0,0,1000,860,@VCOMMON);    -- Behemoth Hide (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (251,0,0,1000,16869,@COMMON);   -- Thundercloud (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (251,0,0,1000,17294,@UNCOMMON); -- Comet Tail (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (251,0,0,1000,1527,@RARE);      -- Behemoth Tongue (Rare, 5%)
 
 -- ZoneID:  45 - Beholder
 INSERT INTO `mob_droplist` VALUES (252,0,0,1000,2917,@UNCOMMON); -- Bloodshot Hecteye (Uncommon, 10%)
@@ -5018,6 +5020,7 @@ INSERT INTO `mob_droplist` VALUES (566,4,0,1000,4552,0);         -- Serving Of H
 -- ZoneID: 167 - Dark Aspic
 -- ZoneID: 167 - Mousse
 -- ZoneID: 169 - Dark Aspic
+-- ZoneID: 173 - Jelly
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (567,0,0,1000,637,@COMMON); -- Vial Of Slime Oil (Common, 15%)
@@ -6713,6 +6716,7 @@ INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16942,@UNCOMMON); -- Balmung (Un
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,17653,@UNCOMMON); -- Hrotti (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,3340,@RARE);      -- Cup Of Sweet Tea (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16555,@VRARE);    -- Ridill (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (805,0,0,1000,1526,@RARE);      -- Wyrm Beard (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@VCOMMON,1321,250);    -- Earthen Abjuration Hands (Group 1 - 25.0%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@VCOMMON,1326,250);    -- Aquarian Abjuration Hands (Group 1 - 25.0%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@VCOMMON,1328,250);    -- Aquarian Abjuration Feet (Group 1 - 25.0%)
@@ -7179,7 +7183,6 @@ INSERT INTO `mob_droplist` VALUES (871,0,0,1000,1659,@UNCOMMON);  -- Coral Crest
 INSERT INTO `mob_droplist` VALUES (871,0,0,1000,15376,@UNCOMMON); -- Taurus Subligar (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (871,0,0,1000,1061,@RARE);      -- Sacrarium Chest Key (Rare, 5%)
 
--- ZoneID:  24 - Fomor Ranger
 -- ZoneID:  28 - Fomor Paladin
 INSERT INTO `mob_droplist` VALUES (872,0,0,1000,1659,@UNCOMMON);  -- Coral Crest Key (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (872,0,0,1000,15386,@UNCOMMON); -- Pisces Subligar (Uncommon, 10%)
@@ -11386,7 +11389,6 @@ INSERT INTO `mob_droplist` VALUES (1405,0,0,1000,4484,80);        -- Shall Shell
 INSERT INTO `mob_droplist` VALUES (1406,0,0,1000,17750,220); -- Anthos Xiphos (22.0%)
 INSERT INTO `mob_droplist` VALUES (1406,0,0,1000,2507,90);   -- Lycopodium Flower (9.0%)
 
--- ZoneID: 173 - Jelly
 -- ZoneID: 198 - Jelly
 INSERT INTO `mob_droplist` VALUES (1407,0,0,1000,637,@RARE); -- Vial Of Slime Oil (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1407,0,0,1000,637,@RARE); -- Vial Of Slime Oil (Rare, 5%)
@@ -19206,8 +19208,8 @@ INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4808,@VCOMMON);  -- Scroll Of W
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1119,@ALWAYS);   -- Tonberry Coat (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4779,@VCOMMON);  -- Scroll Of Water Iii (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4822,@RARE);     -- Scroll Of Flood (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,751,@VCOMMON);   -- Platinum Beastcoin (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (2748,0,0,1000,1429,@ALWAYS);   -- Black Mages Testimony (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,751,@VCOMMON);   -- Platinum Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1429,@ALWAYS);   -- Black Mages Testimony (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1162,@COMMON);   -- Tonberry Lantern (Common, 15%)
 
 -- ZoneID: 159 - Tonberry Pursuer
@@ -22495,7 +22497,7 @@ INSERT INTO `mob_droplist` VALUES (2743,2,0,1000,656,0);         -- Beastcoin (S
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,841,@VCOMMON);   -- Yagudo Feather (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,841,@VCOMMON);   -- Yagudo Feather (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,841,@VCOMMON);   -- Yagudo Feather (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (2745,0,0,1000,498,@VCOMMON);   -- Yagudo Bead Necklace (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,498,@VCOMMON);   -- Yagudo Bead Necklace (Very Common, 24%)
 -- INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,2742,@UNCOMMON); -- Seedspall Astrum (Uncommon, 10%) ACP item
 -- INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,4994,@UNCOMMON); -- Scroll Of Mages Ballad (Uncommon, 10%)  Approx 2012
 INSERT INTO `mob_droplist` VALUES (2744,0,0,1000,5071,@RARE);     -- Scroll Of Foe Lullaby (Rare, 5%)

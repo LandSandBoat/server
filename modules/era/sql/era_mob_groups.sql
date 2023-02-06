@@ -317,7 +317,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 (92,1390,24,'Fomor_Samurai',330,1,877,0,0,52,54,0),     -- These are in prep for complete zone revamps
     -- 42-44
 (93,1397,24,'Fomor_Thief',330,1,885,0,0,42,44,0),       -- These are in prep for complete zone revamps
-(94,1388,24,'Fomor_Ranger',330,1,872,0,0,42,44,0),      -- These are in prep for complete zone revamps
+(94,1388,24,'Fomor_Ranger',330,1,0,0,0,42,44,0),        -- These are in prep for complete zone revamps
 (95,1398,24,'Fomor_Warrior',330,1,888,0,0,42,44,0),     -- These are in prep for complete zone revamps
 (96,1391,24,'Fomor_Summoner',330,1,880,0,0,42,44,0),    -- These are in prep for complete zone revamps
 (97,1395,24,'Fomors_Elemental',0,128,0,0,0,34,36,0),    -- These are in prep for complete zone revamps
@@ -993,6 +993,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Lacerator' AND groupid='18' AND zoneid='173';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Spool_Leech' AND groupid='19' AND zoneid='173';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Thoon' AND groupid='27' AND zoneid='173';
+UPDATE mob_groups SET dropid = 567 WHERE name='Jelly' AND zoneid = 173;
 
 UPDATE mob_groups SET minLevel = 30, maxLevel = 33 WHERE name = "Greater_Pugil"  and zoneid = 173;
 INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (40,3500,173,'Scimitar_Scorpion',480,0,6040,0,0,34,37,0); -- These are in prep for complete zone revamps

@@ -98,7 +98,11 @@ mission.sections =
             ['_0z0'] = -- BCNM Entrance
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 3 then
+                    if
+                        mission:getVar(player, 'Status') == 3 and
+                        player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) and
+                        player:hasKeyItem(xi.ki.BRAND_OF_DAWN)
+                    then
                         return mission:progressEvent(203)
                     elseif mission:getVar(player, 'Status') == 5 then
                         return mission:progressEvent(205)
@@ -144,7 +148,6 @@ mission.sections =
                 [111] = function(player, csid, option)
                     if option == 1 then
                         player:addKeyItem(xi.ki.BRAND_OF_TWILIGHT)
-                        mission:setVar(player, "Status", mission:getVar(player, 'Status') + 1)
                         return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
                     end
                 end,
@@ -152,7 +155,6 @@ mission.sections =
                 [110] = function(player, csid, option)
                     if option == 1 then
                         player:addKeyItem(xi.ki.BRAND_OF_DAWN)
-                        mission:setVar(player, "Status", mission:getVar(player, 'Status') + 1)
                         return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_DAWN)
                     end
                 end,

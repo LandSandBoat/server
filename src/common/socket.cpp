@@ -53,7 +53,7 @@ typedef int socklen_t;
 #define S_EINTR        WSAEINTR
 #define S_ECONNABORTED WSAECONNABORTED
 
-SOCKET sock_arr[FD_SETSIZE];
+SOCKET sock_arr[MAX_FD];
 int    sock_arr_len = 0;
 
 /// Returns the first fd associated with the socket.
@@ -79,7 +79,7 @@ int sock2fd(SOCKET s)
 /// Returns a new fd associated with the socket.
 /// If there are too many sockets it closes the socket, sets an error and
 //  returns -1 instead.
-/// Since fd 0 is reserved, it returns values in the range [1,FD_SETSIZE[.
+/// Since fd 0 is reserved, it returns values in the range [1,MAX_FD[.
 ///
 /// @param s Socket
 /// @return New fd or -1
@@ -178,10 +178,10 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
         sClose(fd);
         return -1;
     }
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
@@ -253,14 +253,14 @@ bool _vsocket_init()
 #elif defined(HAVE_SETRLIMIT) && !defined(CYGWIN)
     // NOTE: getrlimit and setrlimit have bogus behaviour in cygwin.
     //       "Number of fds is virtually unlimited in cygwin" (sys/param.h)
-    { // set socket limit to FD_SETSIZE
+    { // set socket limit to MAX_FD
         struct rlimit rlp;
         if (0 == getrlimit(RLIMIT_NOFILE, &rlp))
         {
-            rlp.rlim_cur = FD_SETSIZE;
+            rlp.rlim_cur = MAX_FD;
             if (0 != setrlimit(RLIMIT_NOFILE, &rlp))
             { // failed, try setting the maximum too (permission to change system limits is required)
-                rlp.rlim_max = FD_SETSIZE;
+                rlp.rlim_max = MAX_FD;
                 if (0 != setrlimit(RLIMIT_NOFILE, &rlp))
                 { // failed
                     // set to maximum allowed
@@ -269,7 +269,7 @@ bool _vsocket_init()
                     setrlimit(RLIMIT_NOFILE, &rlp);
                     // report limit
                     getrlimit(RLIMIT_NOFILE, &rlp);
-                    ShowWarning("socket_init: failed to set socket limit to %d (current limit %d).", FD_SETSIZE, (int)rlp.rlim_cur);
+                    ShowWarning("socket_init: failed to set socket limit to %d (current limit %d).", MAX_FD, (int)rlp.rlim_cur);
                 }
             }
         }
@@ -713,7 +713,7 @@ ParseFunc default_func_parse = null_parse;
 bool session_isValid(int fd)
 {
     TracyZoneScoped;
-    return (fd > 0 && fd < FD_SETSIZE && sessions[fd] != nullptr);
+    return (fd > 0 && fd < MAX_FD && sessions[fd] != nullptr);
 }
 bool session_isActive(int fd)
 {
@@ -756,10 +756,10 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
         sClose(fd);
         return -1;
     }
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("connect_client: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("connect_client: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
@@ -802,10 +802,10 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
         return -1;
     }
 
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }
@@ -1119,7 +1119,7 @@ int delete_session(int fd)
 
     DebugSockets(fmt::format("delete_session fd: {}", fd).c_str());
 
-    if (fd <= 0 || fd >= FD_SETSIZE)
+    if (fd <= 0 || fd >= MAX_FD)
     {
         return -1;
     }
@@ -1185,10 +1185,10 @@ int32 makeBind_udp(uint32 ip, uint16 port)
         sClose(fd);
         return -1;
     }
-    if (fd >= FD_SETSIZE)
+    if (fd >= MAX_FD)
     { // socket number too big
-        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
-                  fd, FD_SETSIZE);
+        ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of MAX_FD (currently %d) for your OS to fix this!",
+                  fd, MAX_FD);
         sClose(fd);
         return -1;
     }

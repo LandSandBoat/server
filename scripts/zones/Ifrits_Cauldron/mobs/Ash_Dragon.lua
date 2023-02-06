@@ -7,7 +7,22 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+end
+
+entity.onMobFight = function(mob, target)
+    local drawInTableNorth =
+    {
+        condition1 = target:getXPos() < -290 and target:getZPos() > 130,
+        position   = { -291.05, 40.0, 130.5, target:getRotPos() },
+    }
+    local drawInTableSouth =
+    {
+        condition1 = target:getXPos() > -230 and target:getZPos() < 69.5,
+        position   = { -229.0, 40.0, 70, target:getRotPos() },
+    }
+
+    utils.arenaDrawIn(mob, target, drawInTableNorth)
+    utils.arenaDrawIn(mob, target, drawInTableSouth)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

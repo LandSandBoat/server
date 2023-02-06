@@ -660,7 +660,7 @@ std::vector<CItemEquipment*> CCharEntity::getVisibleEquip()
     std::vector<CItemEquipment*> visibleItems;
     CItemEquipment*              item = nullptr;
 
-    for (SLOTTYPE slot : { SLOT_HEAD, SLOT_BODY, SLOT_HANDS, SLOT_LEGS, SLOT_FEET })
+    for (SLOTTYPE slot : { SLOT_MAIN, SLOT_SUB, SLOT_RANGED, SLOT_AMMO, SLOT_BODY, SLOT_HANDS, SLOT_LEGS, SLOT_FEET })
     {
         item = getEquip(slot);
         if (item != nullptr)

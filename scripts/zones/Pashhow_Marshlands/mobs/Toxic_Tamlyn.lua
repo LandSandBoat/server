@@ -11,14 +11,24 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    if not (mob:getWeather() == xi.weather.RAIN or mob:getWeather() == xi.weather.SQUALL) then
-        DespawnMob(mob:getID())
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        if
+            not (mob:getWeather() == xi.weather.RAIN or
+            mob:getWeather() == xi.weather.SQUALL)
+        then
+            DespawnMob(mob:getID())
+        end
     end
 end
 
 entity.onMobDisengage = function(mob)
-    if not (mob:getWeather() == xi.weather.RAIN or mob:getWeather() == xi.weather.SQUALL) then
-        DespawnMob(mob:getID())
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        if
+            not (mob:getWeather() == xi.weather.RAIN or
+            mob:getWeather() == xi.weather.SQUALL)
+        then
+            DespawnMob(mob:getID())
+        end
     end
 end
 
@@ -28,7 +38,7 @@ end
 
 entity.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
-    SetServerVariable("TamlynRespawn",(os.time() + 3600))
+    SetServerVariable("TamlynRespawn", (os.time() + 3600))
     mob:setRespawnTime(3600)
 end
 

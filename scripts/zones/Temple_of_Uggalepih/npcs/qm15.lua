@@ -19,11 +19,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local pet = player:getPet()
     if
         player:getCharVar("KnightStalker_Progress") == 4 and
         player:getCharVar("KnightStalker_Kill") == 0 and
         player:getMainJob() == xi.job.DRG and
-        player:getPetID() == xi.pet.id.WYVERN and
+        pet and
+        pet:getPetID() == xi.pet.id.WYVERN and
         npcUtil.popFromQM(player, npc, { ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE }, { hide = 0, claim = false })
     then
         player:messageSpecial(ID.text.SOME_SORT_OF_CEREMONY + 1) -- Your wyvern reacts violently to this spot!

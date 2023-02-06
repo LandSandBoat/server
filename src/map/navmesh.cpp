@@ -96,6 +96,16 @@ void CNavMesh::ToDetourPos(const position_t* pos, float* out)
     out[2] = z * -1;
 }
 
+CNavMesh::CNavMesh(CNavMesh* other)
+: m_zoneID(other->m_zoneID)
+, m_navMesh(other->m_navMesh)
+{
+    std::memset(&m_hitPath, 0, sizeof(m_hitPath));
+
+    m_hit.path    = m_hitPath;
+    m_hit.maxPath = 20;
+}
+
 CNavMesh::CNavMesh(uint16 zoneID)
 : m_zoneID(zoneID)
 , m_navMesh(nullptr)
@@ -110,7 +120,7 @@ CNavMesh::~CNavMesh() = default;
 
 bool CNavMesh::load(std::string const& filename)
 {
-    this->filename = filename;
+    this->m_filename = filename;
 
     std::ifstream file(filename.c_str(), std::ios_base::in | std::ios_base::binary);
 
@@ -182,7 +192,7 @@ bool CNavMesh::load(std::string const& filename)
 void CNavMesh::reload()
 {
     this->unload();
-    this->load(this->filename);
+    this->load(this->m_filename);
 }
 
 void CNavMesh::unload()
@@ -193,42 +203,6 @@ void CNavMesh::unload()
 float CNavMesh::GetVerticalLimit()
 {
     return verticalLimit;
-}
-
-void CNavMesh::outputError(uint32 status)
-{
-    if (status & DT_WRONG_MAGIC)
-    {
-        ShowError("Detour: Input data is not recognized.");
-    }
-    else if (status & DT_WRONG_VERSION)
-    {
-        ShowError("Detour: Input data is in wrong version.");
-    }
-    else if (status & DT_OUT_OF_MEMORY)
-    {
-        ShowError("Detour: Operation ran out of memory.");
-    }
-    else if (status & DT_INVALID_PARAM)
-    {
-        ShowError("Detour: An input parameter was invalid.");
-    }
-    else if (status & DT_BUFFER_TOO_SMALL)
-    {
-        ShowError("Detour: Result buffer for the query was too small to store all results.");
-    }
-    else if (status & DT_OUT_OF_NODES)
-    {
-        ShowError("Detour: Query ran out of nodes during search.");
-    }
-    else if (status & DT_PARTIAL_RESULT)
-    {
-        ShowError("Detour: Query did not reach the end location, returning best guess.");
-    }
-    else if (status & DT_ALREADY_OCCUPIED)
-    {
-        ShowError("Detour: A tile has already been assigned to the given x,y coordinate");
-    }
 }
 
 std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const position_t& end)

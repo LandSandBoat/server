@@ -17,10 +17,16 @@ zoneObject.onInitialize = function(zone)
 
     SetServerVariable("realPadfoot", math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do
-        SpawnMob(v)
+        local respawnP = GetServerVariable("\\[SPAWN\\]"..v)
+        if os.time() > respawnP then
+            SpawnMob(v)
+        else
+            GetMobByID(v):setRespawnTime(respawnP - os.time())
+        end
     end
+
     if xi.settings.main.ENABLE_WOTG == 1 then
-        GetMobByID(ID.mob.YALUN_EKE):setLocalVar("chooseYalun", math.random(1,2))
+        GetMobByID(ID.mob.YALUN_EKE):setLocalVar("chooseYalun", math.random(1, 2))
     end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())

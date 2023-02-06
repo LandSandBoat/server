@@ -144,7 +144,7 @@ local potencyData =
 local function getLuopan(player)
     local pet = player:getPet()
 
-    if pet and player:getPetID() == xi.pet.id.LUOPAN then
+    if pet and pet:getPetID() == xi.pet.id.LUOPAN then
         return pet
     end
 
@@ -463,10 +463,10 @@ end
 -----------------------------------
 xi.job_utils.geomancer.bolsterOnEffectLose = function(target, effect)
     local bolsterJP = target:getJobPointLevel(xi.jp.BOLSTER_EFFECT)
+    local pet       = target:getPet()
 
     -- Luopan Geo effect
-    if target:getPet() and target:getPet():getPetID() == xi.pet.id.LUOPAN then
-        local pet            = target:getPet()
+    if pet and pet:getPetID() == xi.pet.id.LUOPAN then
         local geoPotency     = pet:getLocalVar("GEO_POTENCY")
         local currentPotency = pet:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
         if currentPotency == geoPotency * 2 then -- will always be this value with Bolster or Blaze of Glory active

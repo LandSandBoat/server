@@ -100,10 +100,10 @@ entity.onTrigger = function(player, npc)
         if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             member:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         end
-        member:ChangeMusic(0, 0)
-        member:ChangeMusic(1, 0)
-        member:ChangeMusic(2, 101)
-        member:ChangeMusic(3, 102)
+        member:changeMusic(0, 0)
+        member:changeMusic(1, 0)
+        member:changeMusic(2, 101)
+        member:changeMusic(3, 102)
         member:setLocalVar("Chart", 0)
     end
 end
