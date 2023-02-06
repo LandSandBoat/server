@@ -155,6 +155,10 @@ local mapVendors =
             xi.ki.MAP_OF_THE_ELDIEME_NECROPOLIS,
             xi.ki.MAP_OF_THE_GARLAIGE_CITADEL,
             xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+            xi.ki.MAP_OF_THE_JEUNO_AREA,
+            xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
+            xi.ki.MAP_OF_THE_BASTOK_AREA,
+            xi.ki.MAP_OF_THE_WINDURST_AREA
         },
     },
 
@@ -168,6 +172,10 @@ local mapVendors =
             xi.ki.MAP_OF_THE_ELDIEME_NECROPOLIS,
             xi.ki.MAP_OF_THE_GARLAIGE_CITADEL,
             xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+            xi.ki.MAP_OF_THE_JEUNO_AREA,
+            xi.ki.MAP_OF_THE_SAN_DORIA_AREA,
+            xi.ki.MAP_OF_THE_BASTOK_AREA,
+            xi.ki.MAP_OF_THE_WINDURST_AREA
         },
     },
 
@@ -277,6 +285,7 @@ local function isMapOutOfEra(mapId)
     if era ~= "" then
         return eraData[era]
     end
+
     return false
 end
 
@@ -296,6 +305,7 @@ local function isMapFromVendor(npc, mapKeyItem)
             return true
         end
     end
+
     return false
 end
 
