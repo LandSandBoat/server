@@ -84,7 +84,7 @@ entity.onTrigger = function(player, npc)
 
         if rootProblemCS == 1 then
             player:startEvent(277, 0, 829)
-        elseif rootProblemCS == 2 then
+        elseif rootProblemCS == 2 and not player:hasKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I) then
             player:startEvent(279)
         elseif rootProblemCS == 3 then
             player:startEvent(281, 0, 182)
