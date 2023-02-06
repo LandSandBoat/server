@@ -132,6 +132,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Molybdenum She
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Cursed Breeches' AND ID = 14516;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Mlbd. Sheet' AND ID = 14520;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Death Scythe' AND ID = 14522;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Yasha Jinpachi' AND ID = 14523;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Cursed Sollerets' AND ID = 14527;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Black Cuisses' AND ID = 14529;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Hachiman Kote' AND ID = 14531;
