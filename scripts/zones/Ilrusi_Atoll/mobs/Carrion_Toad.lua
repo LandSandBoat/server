@@ -18,7 +18,7 @@ entity.onMobDespawn = function(mob)
         SpawnMob(ID.mob.UNDEAD_TOAD, instance)
         toadMob:setLocalVar("ToadSpawned", 1)
     else
-        instance:setProgress(instance:getProgress() + 1)
+        xi.assault.progressInstance(mob, 1)
     end
 end
 

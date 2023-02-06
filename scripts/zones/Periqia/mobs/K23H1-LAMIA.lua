@@ -8,9 +8,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    local progress = math.random(1, 4)
-    instance:setProgress(instance:getProgress() + progress)
+    xi.assault.progressInstance(mob, math.random(1, 4))
 end
 
 return entity
