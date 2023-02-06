@@ -54825,9 +54825,9 @@ INSERT INTO `item_mods` VALUES (25838,1,2); -- DEF: 2
 INSERT INTO `item_mods` VALUES (25838,15,10); -- FIRE_RES: 10 (Summer Tidings)
 INSERT INTO `item_mods` VALUES (25838,20,10); -- WATER_RES: 10 (Summer Tidings)
 -- Fancy Shorts
-INSERT INTO `item_mods` VALUES (25838,1,2); -- DEF: 2
-INSERT INTO `item_mods` VALUES (25838,15,10); -- FIRE_RES: 10 (Summer Tidings)
-INSERT INTO `item_mods` VALUES (25838,20,10); -- WATER_RES: 10 (Summer Tidings)
+INSERT INTO `item_mods` VALUES (25839,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (25839,15,10); -- FIRE_RES: 10 (Summer Tidings)
+INSERT INTO `item_mods` VALUES (25839,20,10); -- WATER_RES: 10 (Summer Tidings)
 
 -- Herculean Trousers
 INSERT INTO `item_mods` VALUES (25842,1,114);    -- DEF: 114
