@@ -3,6 +3,7 @@
 -- Fancy Top
 -- Dispenses Persikos Snow Cone
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(6565) -- Persikos Snow Cone
+    target:addItem(xi.items.PERSIKOS_SNOW_CONE)
 end
 
 return itemObject

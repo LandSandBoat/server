@@ -1659,6 +1659,7 @@ xi.items =
     DECANTER_AUGUST                 = 6527,
     DECANTER_SAJJAKA                = 6528,
     DECANTER_ARCIELA_II             = 6529,
+    PERSIKOS_SNOW_CONE              = 6565,
     MAATS_CONCOCTION                = 6597,
     MAATS_MIX                       = 6598,
     HARLEQUIN_HEAD                  = 8193,
