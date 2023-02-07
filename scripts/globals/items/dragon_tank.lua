@@ -3,6 +3,7 @@
 -- Dragon Tank
 -- Dispense: Dragon Fruit au Lait
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5933, 1)
+    target:addItem(xi.items.DRAGON_FRUIT_AU_LAIT, 1)
 end
 
 return itemObject

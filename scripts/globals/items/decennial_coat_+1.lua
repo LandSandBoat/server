@@ -3,6 +3,7 @@
 -- Decennial Coat +1
 -- Dispense: Moogurt
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5935, 1)
+    target:addItem(xi.items.MOOGURT, 1)
 end
 
 return itemObject
