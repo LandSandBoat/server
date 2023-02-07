@@ -10833,7 +10833,7 @@ INSERT INTO `mob_groups` VALUES (7,1710,157,'Goblin_Shaman',300,0,1151,0,0,30,34
 INSERT INTO `mob_groups` VALUES (8,1526,157,'Giant_Gatekeeper',300,0,0,0,0,30,32,0);
 INSERT INTO `mob_groups` VALUES (9,1528,157,'Giant_Guard',300,0,964,0,0,30,32,0);
 INSERT INTO `mob_groups` VALUES (10,1538,157,'Giant_Sentry',300,0,964,0,0,30,32,0);
-INSERT INTO `mob_groups` VALUES (11,1589,157,'Gigass_Bat',0,128,0,964,0,23,25,0);
+INSERT INTO `mob_groups` VALUES (11,1589,157,'Gigass_Bat',0,128,0,0,0,23,25,0);
 INSERT INTO `mob_groups` VALUES (12,1531,157,'Giant_Lobber',300,0,968,0,0,30,32,0);
 INSERT INTO `mob_groups` VALUES (13,1262,157,'Eurytos',0,32,787,1750,0,32,32,0);
 INSERT INTO `mob_groups` VALUES (14,2480,157,'Magic_Pot',300,0,1568,0,0,28,29,0);
