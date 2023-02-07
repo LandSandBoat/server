@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
---   NM: Seiryu (Pet)
+--   NM: Byakko (Pet)
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
