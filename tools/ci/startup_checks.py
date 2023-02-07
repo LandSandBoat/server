@@ -19,9 +19,9 @@ def main():
         ["xi_map", "--log", "game-server.log", "--load_all"], stdout=subprocess.PIPE
     )
 
-    print("Sleeping for 2 minutes...")
+    print("Sleeping for 5 minutes...")
 
-    time.sleep(120)
+    time.sleep(300)
 
     p0.kill()
     p1.kill()

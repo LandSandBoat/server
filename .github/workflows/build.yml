@@ -413,7 +413,7 @@ jobs:
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:
-        timeout_minutes: 5
+        timeout_minutes: 15
         max_attempts: 3
         retry_on: timeout
         shell: bash
@@ -428,8 +428,8 @@ jobs:
           screen -d -m -S xi_search ./xi_search --log search-server.log
           screen -d -m -S xi_map ./xi_map --log map-server.log
 
-          printf "\nWaiting 90s for servers to fully start up\n"
-          sleep 90s
+          printf "\nWaiting 5m for servers to fully start up\n"
+          sleep 300s
 
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
@@ -549,7 +549,7 @@ jobs:
         screen -d -m -S xi_search ./xi_search --log search-server.log
         screen -d -m -S xi_map ./xi_map --log map-server-0.log --ip 127.0.0.1 --port 54230
         screen -d -m -S xi_map ./xi_map --log map-server-1.log --ip 127.0.0.1 --port 54231
-        sleep 2m
+        sleep 300s
         killall screen
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
