@@ -1,7 +1,9 @@
 -----------------------------------
 -- ID: 15926
--- bronze_bandolier
+-- Bronze Bandolier
+-- When used, you will obtain one stack of Bronze Bullets
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -16,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17343, 99) -- bronze_bullet
+    target:addItem(xi.items.BRONZE_BULLET, 99)
 end
 
 return itemObject
