@@ -1379,6 +1379,11 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Bittern' AND I
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Bullet' AND ID = 62001;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Poison Katars' AND ID = 62014;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Couse' AND ID = 3516;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Darksteel Shield' AND ID = 54001;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Platinum Mace' AND ID = 24014;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Anelace' AND ID = 14542;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Golden Spear' AND ID = 24017;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ID = 52502;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1437,7 +1442,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Inferno Core'
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Jadagna' AND ID = 14504;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Ponderous Gully' AND ID = 14521;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Adaman Kilij' AND ID = 14540;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Anelace' AND ID = 14542;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Januwiyah' AND ID = 14558;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Pealing Anelace' AND ID = 14577;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Ponder. Manoples' AND ID = 14581;
@@ -1476,8 +1480,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Tsurugitachi'
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Accelerator II' AND ID = 23044;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Sipahi Boots' AND ID = 23529;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Amir Bed' AND ID = 23543;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Platinum Mace' AND ID = 24014;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Golden Spear' AND ID = 24017;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Darksteel Sainti' AND ID = 24041;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Frigid Orichalcum Ingot' AND ID = 24062;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Star Earring' AND ID = 24069;
@@ -1593,7 +1595,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Deathbone Kni
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Thunder Mittens' AND ID = 52019;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Jet Sickle' AND ID = 52026;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Shock Subligar' AND ID = 52501;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ID = 52502;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Spirit Shell' AND ID = 52503;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'High Healing Harness' AND ID = 52504;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Stone Bangles' AND ID = 52513;
@@ -1608,7 +1609,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lithic Wyvern
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ID = 53520;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Tusk Arrowheads' AND ID = 53524;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Tusk Arrowheads' AND ID = 53526;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Darksteel Shield' AND ID = 54001;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Marid Ring' AND ID = 54002;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lamia Garland' AND ID = 54009;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Mega Fan' AND ID = 54011;
