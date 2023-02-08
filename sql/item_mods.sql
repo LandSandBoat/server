@@ -55345,6 +55345,11 @@ INSERT INTO `item_mods` VALUES (25765,68,38);   -- EVA: 38
 INSERT INTO `item_mods` VALUES (25765,302,5);   -- TRIPLE_ATTACK: 5
 INSERT INTO `item_mods` VALUES (25765,384,400); -- HASTE_GEAR: 400
 
+-- Fancy Gilet
+INSERT INTO `item_mods` VALUES (25774,1,2); -- DEF: 2
+-- Fancy Top
+INSERT INTO `item_mods` VALUES (25775,1,2); -- DEF: 2
+
 -- Black Chocobo Suit
 INSERT INTO `item_mods` VALUES (25776,1,1); -- DEF: 1
 
@@ -55930,6 +55935,15 @@ INSERT INTO `item_mods` VALUES (25823,31,48);   -- MEVA: 48
 INSERT INTO `item_mods` VALUES (25823,68,19);   -- EVA: 19
 INSERT INTO `item_mods` VALUES (25823,311,49);  -- MAGIC_DAMAGE: 49
 INSERT INTO `item_mods` VALUES (25823,384,400); -- HASTE_GEAR: 400
+
+-- Fancy Trunks
+INSERT INTO `item_mods` VALUES (25838,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (25838,15,10); -- FIRE_RES: 10 (Summer Tidings)
+INSERT INTO `item_mods` VALUES (25838,20,10); -- WATER_RES: 10 (Summer Tidings)
+-- Fancy Shorts
+INSERT INTO `item_mods` VALUES (25839,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (25839,15,10); -- FIRE_RES: 10 (Summer Tidings)
+INSERT INTO `item_mods` VALUES (25839,20,10); -- WATER_RES: 10 (Summer Tidings)
 
 -- Herculean Trousers
 INSERT INTO `item_mods` VALUES (25842,1,114);    -- DEF: 114

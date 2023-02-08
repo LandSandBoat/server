@@ -4670,6 +4670,7 @@ INSERT INTO `item_weapon` VALUES (21973,'eletta_tachi',10,0,231,231,231,0,1,450,
 INSERT INTO `item_weapon` VALUES (21974,'kaja_tachi',10,0,242,242,242,0,1,450,300,0);     -- DMG:300 Delay:450
 INSERT INTO `item_weapon` VALUES (21975,'hachimonji',10,0,250,250,250,0,1,450,318,0);     -- DMG:318 Delay:450
 INSERT INTO `item_weapon` VALUES (21976,'voluspa_tachi',10,0,215,215,215,0,1,450,243,0);
+INSERT INTO `item_weapon` VALUES (21977,'mutsunokami',10,0,0,0,0,0,1,450,1,0);            -- DMG:1 Delay:450
 INSERT INTO `item_weapon` VALUES (21990,'zanmato_+2',10,0,269,269,269,0,1,464,320,0);
 INSERT INTO `item_weapon` VALUES (22004,'soulflayers_wand',11,0,0,0,0,3,1,264,1,0);       -- DMG:1 Delay:264
 INSERT INTO `item_weapon` VALUES (22005,'burrowers_wand',11,0,0,0,0,3,1,264,1,0);         -- DMG:1 Delay:264
