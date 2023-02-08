@@ -103,7 +103,7 @@ public:
 
     void SetupKeepalive();
 
-    void CheckCollation();
+    void CheckCharset();
 
     /// Pings the connection.
     ///
