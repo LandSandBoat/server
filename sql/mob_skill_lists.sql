@@ -469,8 +469,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Funguar',116,312);
 INSERT INTO `mob_skill_lists` VALUES ('Funguar',116,314);
 INSERT INTO `mob_skill_lists` VALUES ('Funguar',116,315);
 -- 117: Gruesome Gargouille
-INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',118,2421);
-INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',118,2422);
+INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',117,2421);
+INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',117,2422);
 INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',118,2423);
 INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',118,2424);
 INSERT INTO `mob_skill_lists` VALUES ('Gargoyle',118,2425);
