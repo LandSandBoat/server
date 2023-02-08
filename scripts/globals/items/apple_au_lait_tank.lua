@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.APPLE_AU_LAIT, 1)
+    target:addItem(xi.items.FLASK_OF_APPLE_AU_LAIT, 1)
 end
 
 return itemObject
