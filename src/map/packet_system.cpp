@@ -2461,7 +2461,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        delete PUBoxItem;
+                        destroy(PUBoxItem);
                     }
                 }
             }
@@ -2726,7 +2726,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     if (!commit || !sql->TransactionCommit())
                     {
-                        delete PItem;
+                        destroy(PItem);
 
                         sql->TransactionRollback();
                         ShowError("Could not find new item to add to delivery box. PlayerID: %d Box :%d Slot: %d", PChar->id, boxtype, slotID);
@@ -2767,7 +2767,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0x02));
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, deliverySlotID, received_items, 0x01));
                                 PChar->UContainer->SetItem(deliverySlotID, nullptr);
-                                delete PItem;
+                                destroy(PItem);
                             }
                         }
                     }
@@ -2839,7 +2839,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 {
                                     PChar->UContainer->SetItem(slotID, nullptr);
                                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
-                                    delete PItem;
+                                    destroy(PItem);
                                     commit = true;
                                 }
                             }
@@ -2923,7 +2923,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
                         PChar->pushPacket(new CInventoryFinishPacket());
                         PChar->UContainer->SetItem(slotID, nullptr);
-                        delete PItem;
+                        destroy(PItem);
                     }
                 }
 
@@ -2949,7 +2949,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->UContainer->SetItem(slotID, nullptr);
 
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
-                    delete PItem;
+                    destroy(PItem);
                 }
             }
             return;
@@ -5534,7 +5534,7 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
             LinkshellID = linkshell::RegisterNewLinkshell(DecodedName, LinkshellColor);
             if (LinkshellID != 0)
             {
-                delete PItemLinkshell;
+                destroy(PItemLinkshell);
                 PItemLinkshell = (CItemLinkshell*)itemutils::GetItem(513);
                 if (PItemLinkshell == nullptr)
                 {

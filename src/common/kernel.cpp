@@ -60,59 +60,30 @@ void* operator new(std::size_t count)
 {
     void* ptr = malloc(count);
     TracyAlloc(ptr, count);
-    return ptr;
 }
 
 void operator delete(void* ptr) noexcept
 {
     TracyFree(ptr);
     free(ptr);
-    ptr = nullptr;
 }
 
 void operator delete(void* ptr, std::size_t count) noexcept
 {
     TracyFree(ptr);
     free(ptr);
-    ptr = nullptr;
 }
 
 void operator delete[](void* ptr) noexcept
 {
     TracyFree(ptr);
     free(ptr);
-    ptr = nullptr;
 }
 
 void operator delete[](void* ptr, std::size_t count) noexcept
 {
     TracyFree(ptr);
     free(ptr);
-    ptr = nullptr;
-}
-#else  // !TRACY_ENABLE
-void operator delete(void* ptr) noexcept
-{
-    free(ptr);
-    ptr = nullptr;
-}
-
-void operator delete(void* ptr, std::size_t count) noexcept
-{
-    free(ptr);
-    ptr = nullptr;
-}
-
-void operator delete[](void* ptr) noexcept
-{
-    free(ptr);
-    ptr = nullptr;
-}
-
-void operator delete[](void* ptr, std::size_t count) noexcept
-{
-    free(ptr);
-    ptr = nullptr;
 }
 #endif // TRACY_ENABLE
 

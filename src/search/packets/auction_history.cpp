@@ -49,7 +49,8 @@ void CAHHistoryPacket::AddItem(ahHistory* item)
 
         ref<uint16>(m_PData, (0x08)) = 0x20 + 40 * ++m_count;
     }
-    delete item;
+
+    destroy(item);
 }
 
 /************************************************************************

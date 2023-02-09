@@ -226,7 +226,7 @@ CStatusEffectContainer::~CStatusEffectContainer()
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        delete PStatusEffect;
+        destroy(PStatusEffect);
     }
 }
 
@@ -558,7 +558,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
     }
     else
     {
-        delete PStatusEffect;
+        destroy(PStatusEffect);
     }
 
     return false;
@@ -586,7 +586,7 @@ void CStatusEffectContainer::DeleteStatusEffects()
                 update_icons = true;
             }
             effect_iter = m_StatusEffectSet.erase(effect_iter);
-            delete PStatusEffect;
+            destroy(PStatusEffect);
             effects_removed = true;
         }
         else
@@ -727,7 +727,7 @@ void CStatusEffectContainer::KillAllStatusEffect()
 
             effect_iter = m_StatusEffectSet.erase(effect_iter);
 
-            delete PStatusEffect;
+            destroy(PStatusEffect);
         }
         else
         {
