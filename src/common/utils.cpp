@@ -500,7 +500,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
     }
 
     {
-        destroy(modifiedTarget);
+        destroy_arr(modifiedTarget);
     }
     return retVal;
 }
