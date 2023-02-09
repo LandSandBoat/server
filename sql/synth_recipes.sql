@@ -1832,7 +1832,7 @@ INSERT INTO `synth_recipes` VALUES (24025,0,0,0,0,85,0,0,0,0,0,4099,4241,813,133
 INSERT INTO `synth_recipes` VALUES (24026,0,0,0,0,85,0,0,0,0,0,4096,4238,745,914,12313,0,0,0,0,0,12376,12377,12377,12377,1,1,1,1,'Temple Knight Army Shield +1');
 INSERT INTO `synth_recipes` VALUES (24027,0,0,0,0,85,0,0,0,0,0,4096,4238,745,914,12931,0,0,0,0,0,15333,15337,15337,15337,1,1,1,1,'Lord\'s Sabatons');
 INSERT INTO `synth_recipes` VALUES (24028,0,0,0,0,85,0,0,0,0,0,4099,4241,804,13316,0,0,0,0,0,0,13354,13410,13410,13410,1,1,1,1,'Spinel Earring');
-INSERT INTO `synth_recipes` VALUES (24029,1,0,0,0,85,0,0,0,0,0,4100,4242,13355,0,0,0,0,0,0,0,794,794,746,746,1,1,1,2,'Sapphire Earring (desynth)');
+INSERT INTO `synth_recipes` VALUES (24029,1,0,0,0,85,0,0,0,0,0,4100,4242,13355,0,0,0,0,0,0,0,794,794,746,746,1,1,1,2,'Sapphire Earring (desynth)');  -- JP Wiki says desynth available http://wiki.ffo.jp/html/10023.html
 INSERT INTO `synth_recipes` VALUES (24030,0,0,0,0,85,0,0,0,0,0,4098,4240,800,929,1134,1836,0,0,0,0,348,348,348,348,1,1,1,1,'Marble Plaque');
 INSERT INTO `synth_recipes` VALUES (24031,0,0,0,0,85,0,0,0,0,0,4099,4241,789,13316,0,0,0,0,0,0,13318,13412,13412,13412,1,1,1,1,'Topaz Earring');
 INSERT INTO `synth_recipes` VALUES (24032,0,0,0,0,85,0,0,0,0,0,4099,4241,794,13316,0,0,0,0,0,0,13355,13411,13411,13411,1,1,1,1,'Sapphire Earring');
@@ -2079,7 +2079,7 @@ INSERT INTO `synth_recipes` VALUES (29951,1,0,0,0,55,0,0,0,0,0,4100,4242,13478,0
 -- INSERT INTO `synth_recipes` VALUES (29952,1,0,0,0,21,0,0,0,0,0,4100,4242,17399,0,0,0,0,0,0,0,648,648,818,818,1,2,2,2,'Sabiki Rig (desynth)'); -- 2022.03.04 Base on FFXIclopedia removed Hq2 stated copper ingot X 3 strange result and flag needing verification
 INSERT INTO `synth_recipes` VALUES (29953,1,0,0,0,66,0,0,0,0,0,4100,4242,12673,0,0,0,0,0,0,0,817,850,653,1228,6,4,1,6,'Mythril Gauntlets (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29954,1,0,0,0,48,0,0,0,0,0,4100,4242,12426,0,0,0,0,0,0,0,648,850,850,850,1,1,1,1,'Banded Helm (desynth)'); -- BGWiki desynth yield incomplete, but does not contradict this
--- INSERT INTO `synth_recipes` VALUES (29955,1,0,0,0,85,0,0,0,0,0,4100,4242,13352,0,0,0,0,0,0,0,746,786,786,786,1,1,1,1,'Ruby Earring (desynth)'); -- 2022.03.04 Base on FFXIclopedia Level Unknown Hq3 rubyX2 strange result
+INSERT INTO `synth_recipes` VALUES (29955,1,0,0,0,85,0,0,0,0,0,4100,4242,13352,0,0,0,0,0,0,0,786,786,746,746,1,1,1,2,'Ruby Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10013.html
 INSERT INTO `synth_recipes` VALUES (29956,1,0,0,0,7,0,0,0,0,0,4100,4242,12496,0,0,0,0,0,0,0,648,648,648,648,1,1,1,1,'Copper Hairpin (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29957,1,0,0,0,49,0,0,0,0,0,4100,4242,12301,0,0,0,0,0,0,0,714,651,653,653,1,2,1,2,'Buckler (desynth)'); -- 2022.03.04 No desynth data Base on normal desynth behavior
 INSERT INTO `synth_recipes` VALUES (29958,1,0,0,0,34,0,0,0,0,0,4100,4242,13209,0,0,0,0,0,0,0,744,744,744,744,4,5,6,6,'Chain Belt (desynth)'); -- 2022.03.04 Base on FFXIclopedia
@@ -4753,6 +4753,12 @@ INSERT INTO `synth_recipes` VALUES (75528,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,27
 INSERT INTO `synth_recipes` VALUES (75529,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4157,0,0,2779,2779,2779,2779,1,1,1,1,'Enfeeb. Kit Poison');
 INSERT INTO `synth_recipes` VALUES (75530,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4163,0,0,2780,2780,2780,2780,1,1,1,1,'Enfeeb. Kit Blind');
 INSERT INTO `synth_recipes` VALUES (75531,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4161,0,0,2781,2781,2781,2781,1,1,1,1,'Enfeeb. Kit Sleep');
+INSERT INTO `synth_recipes` VALUES (75532,1,0,0,0,85,0,0,0,0,0,4100,4242,13351,0,0,0,0,0,0,0,785,785,746,746,1,1,1,2,'Emerald Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (75533,1,0,0,0,85,0,0,0,0,0,4100,4242,13353,0,0,0,0,0,0,0,787,787,746,746,1,1,1,2,'Diamond Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (75534,1,0,0,0,85,0,0,0,0,0,4100,4242,13318,0,0,0,0,0,0,0,789,789,746,746,1,1,1,2,'Topaz Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (75535,1,0,0,0,85,0,0,0,0,0,4100,4242,13354,0,0,0,0,0,0,0,786,786,746,746,1,1,1,2,'Spinel Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10015.html
+INSERT INTO `synth_recipes` VALUES (75537,1,0,0,0,85,0,0,0,0,0,4100,4242,13356,0,0,0,0,0,0,0,812,812,746,746,1,1,1,2,'Death Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (75538,1,0,0,0,85,0,0,0,0,0,4100,4242,13357,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Angel\'s Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10013.html
 
 -- -----------
 -- RECIPES END
