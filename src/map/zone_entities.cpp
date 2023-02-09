@@ -1161,7 +1161,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         // Ensure this packet is not despawning us..
         if (packet->ref<uint8>(0x0A) != 0x20)
         {
-            delete packet;
+            destroy(packet);
             return;
         }
     }
@@ -1286,7 +1286,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         }
         // clang-format on
     }
-    delete packet;
+    destroy(packet);
 }
 
 void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
@@ -1371,7 +1371,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
             it->second = nullptr;
             m_mobList.erase(it++);
             dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
-            delete PMob;
+            destroy(PMob);
             continue;
         }
 
@@ -1418,8 +1418,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 }
             }
 
-            delete it->second;
-            it->second = nullptr;
+            destroy(it->second);
             dynamicTargIdsToDelete.push_back({ it->first, server_clock::now() });
 
             m_npcList.erase(it++);
@@ -1454,8 +1453,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
                 {
-                    delete it->second;
-                    it->second = nullptr;
+                    destroy(it->second);
                 }
 
                 dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
@@ -1502,8 +1500,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                     }
                 }
 
-                delete it->second;
-                it->second = nullptr;
+                destroy(it->second);
                 dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
 
                 m_trustList.erase(it++);

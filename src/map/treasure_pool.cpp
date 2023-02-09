@@ -141,7 +141,8 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
 
     if (m_TreasurePoolType != TREASUREPOOL_ZONE && members.empty())
     {
-        delete this;
+        CTreasurePool* PTreasurePool = this;
+        destroy(PTreasurePool);
         return;
     }
 }

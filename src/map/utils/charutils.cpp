@@ -1292,9 +1292,10 @@ namespace charutils
         if (PItem->isType(ITEM_CURRENCY))
         {
             UpdateItem(PChar, LocationID, 0, PItem->getQuantity());
-            delete PItem;
+            destroy(PItem);
             return 0;
         }
+
         if (PItem->getFlag() & ITEM_FLAG_RARE)
         {
             if (HasItem(PChar, PItem->getID()))
@@ -1303,7 +1304,7 @@ namespace charutils
                 {
                     PChar->pushPacket(new CMessageStandardPacket(PChar, PItem->getID(), 0, MsgStd::ItemEx));
                 }
-                delete PItem;
+                destroy(PItem);
                 return ERROR_SLOTID;
             }
         }
@@ -1339,7 +1340,7 @@ namespace charutils
             {
                 ShowError("charplugin::AddItem: Cannot insert item to database");
                 PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
-                delete PItem;
+                destroy(PItem);
                 return ERROR_SLOTID;
             }
             PChar->pushPacket(new CInventoryItemPacket(PItem, LocationID, SlotID));
@@ -1348,7 +1349,7 @@ namespace charutils
         else
         {
             ShowDebug("charplugin::AddItem: Location %i is full", LocationID);
-            delete PItem;
+            destroy(PItem);
         }
         return SlotID;
     }
@@ -1546,7 +1547,7 @@ namespace charutils
                     }
                 }
                 luautils::OnItemDrop(PChar, PItem);
-                delete PItem;
+                destroy(PItem);
             }
         }
         return ItemID;
@@ -6001,6 +6002,7 @@ namespace charutils
             if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)
             {
                 PChar->PParty->DisbandParty();
+                destroy(PChar->PParty);
             }
         }
     }

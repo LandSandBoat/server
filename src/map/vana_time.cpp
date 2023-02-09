@@ -46,8 +46,7 @@ void CVanaTime::delInstance()
 {
     if (_instance)
     {
-        delete _instance;
-        _instance = nullptr;
+        destroy(_instance);
     }
 }
 

@@ -107,7 +107,8 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
 
         this->partyList.clear();
 
-        delete this;
+        CAlliance* alliance = this;
+        destroy(alliance);
     }
 }
 

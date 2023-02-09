@@ -678,13 +678,13 @@ namespace itemutils
     {
         for (int32 ItemID = 0; ItemID < MAX_ITEMID; ++ItemID)
         {
-            delete g_pItemList[ItemID];
+            destroy(g_pItemList[ItemID]);
             g_pItemList[ItemID] = nullptr;
         }
 
         for (int32 DropID = 0; DropID < MAX_DROPID; ++DropID)
         {
-            delete g_pDropList[DropID];
+            destroy(g_pDropList[DropID]);
             g_pDropList[DropID] = nullptr;
         }
     }

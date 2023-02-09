@@ -66,7 +66,7 @@ void CUnityChat::PushPacket(uint32 senderID, CBasicPacket* packet)
             member->pushPacket(newPacket);
         }
     }
-    delete packet;
+    destroy(packet);
 }
 
 namespace unitychat

@@ -58,7 +58,8 @@ void CAHItemsListPacket::AddItem(ahItem* item)
     ref<uint32>(m_PData, (0x18 + 0x0A * m_count) + 6) = item->StackAmount;
 
     m_count++;
-    delete item;
+
+    destroy(item);
 }
 
 /************************************************************************

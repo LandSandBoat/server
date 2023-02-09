@@ -37,6 +37,9 @@ def contains_delete(line):
     if "// cpp.sh allow" in line:
         return False
 
+    if "void operator delete" in line:
+        return False
+
     if "//" in line:
         line = line.split("//")[0]
 
