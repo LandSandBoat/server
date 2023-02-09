@@ -1162,11 +1162,10 @@ namespace zoneutils
     {
         for (auto PZone : g_PZoneList)
         {
-            delete PZone.second;
+            destroy(PZone.second);
         }
         g_PZoneList.clear();
-        delete g_PTrigger;
-        g_PTrigger = nullptr;
+        destroy(g_PTrigger);
     }
 
     void ForEachZone(const std::function<void(CZone*)>& func)
