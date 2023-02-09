@@ -5,6 +5,7 @@ require('scripts/globals/jobpoints')
 require('scripts/globals/magic')
 require('scripts/globals/msg')
 require('scripts/globals/status')
+require("scripts/globals/utils")
 require('scripts/globals/weaponskills')
 -----------------------------------
 xi = xi or {}
@@ -28,6 +29,9 @@ local function getStepFinishingMovesBase(player)
     elseif player:getMainJob() == xi.job.DNC then
         numAwardedMoves = 2
     end
+
+    numAwardedMoves = numAwardedMoves + player:getMod(xi.mod.STEP_FINISH)
+    utils.clamp(numAwardedMoves, 0, 5)
 
     return numAwardedMoves
 end
