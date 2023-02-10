@@ -5,12 +5,39 @@ require('scripts/globals/jobpoints')
 require('scripts/globals/magic')
 require('scripts/globals/msg')
 require('scripts/globals/status')
+require("scripts/globals/utils")
 require('scripts/globals/weaponskills')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.dancer = xi.job_utils.dancer or {}
 -----------------------------------
+
+-- Terpsichore Item IDs
+local terpsichoreItemIDs =
+{
+    18989, -- LV 75
+    19078, -- LV 80
+    19098, -- LV 85
+    19630, -- LV 90
+    19728, -- LV 95
+    19837, -- LV 99
+    19966, -- LV 99
+    20557, -- LV 99 i119
+    20558, -- LV 99 i119
+    20584  -- LV 99 i119
+}
+
+-- Check to see if item is a Terpsichore
+local function isTerpsichore(itemID)
+    for _, entry in pairs(terpsichoreItemIDs) do
+        if entry == itemID then
+            return true
+        end
+    end
+
+    return false
+end
 
 local function getMaxFinishingMoves(player)
     return 5 + player:getMod(xi.mod.MAX_FINISHING_MOVE_BONUS)
@@ -24,9 +51,15 @@ local function getStepFinishingMovesBase(player)
     local numAwardedMoves = 1
 
     if player:hasStatusEffect(xi.effect.PRESTO) then
-        numAwardedMoves = 5
-    elseif player:getMainJob() == xi.job.DNC then
-        numAwardedMoves = 2
+        numAwardedMoves = numAwardedMoves + 4
+    end
+
+    if player:getMainJob() == xi.job.DNC then
+        numAwardedMoves = numAwardedMoves + 1
+    end
+
+    if isTerpsichore(player:getEquipID(xi.slot.MAIN)) then
+        numAwardedMoves = numAwardedMoves + player:getMod(xi.mod.STEP_FINISH)
     end
 
     return numAwardedMoves
@@ -200,6 +233,69 @@ xi.job_utils.dancer.useReverseFlourishAbility = function(player, target, ability
     setFinishingMoves(player, numMoves - usedMoves)
 
     return tpGained
+end
+
+xi.job_utils.dancer.checkWildFlourishAbility = function(player, target, ability)
+    if player:getAnimation() ~= 1 then
+        return xi.msg.basic.REQUIRES_COMBAT, 0
+    else
+        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+            return 0, 0
+        else
+            return xi.msg.basic.NO_FINISHINGMOVES, 0
+        end
+    end
+end
+
+xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, action)
+    local numMoves             = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+    if
+        not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
+        not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
+    then
+        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 1, 0, 5, 0, 1)
+    else
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
+    end
+
+    action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+    action:speceffect(target:getID(), 1)
+    setFinishingMoves(player, numMoves - 2)
+
+    return 0
+end
+
+xi.job_utils.dancer.checkBuildingFlourishAbility = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+        return 0, 0
+    else
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
+    end
+end
+
+-- TODO: Add Job Point bonuses
+xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, ability, action)
+    local numMerits            = player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT)
+    local numMoves             = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+    if numMoves == 1 then
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 1, 0, 60, 0, numMerits)
+        setFinishingMoves(player, 0)
+    elseif numMoves == 2 then
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 2, 0, 60, 0, numMerits)
+        setFinishingMoves(player, 0)
+    elseif numMoves > 2 then
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, numMerits)
+        setFinishingMoves(player, numMoves - 3)
+    end
+end
+
+xi.job_utils.dancer.checkContradanceAbility = function(player, target, ability)
+    return 0, 0
+end
+
+-- TODO: implement xi.effect.CONTRADANCE
+xi.job_utils.dancer.useContradanceAbility = function(player, target, ability, action)
+    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
 end
 
 xi.job_utils.dancer.checkAnimatedFlourishAbility = function(player, target, ability)
