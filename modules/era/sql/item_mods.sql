@@ -26,6 +26,7 @@ WHERE itemId IN (
     SELECT itemId
     FROM item_weapon
     WHERE skill < 25
+    AND skill != 0
     )
 AND modId = 165;
 
@@ -35,6 +36,7 @@ WHERE itemId IN (
     SELECT itemId
     FROM item_weapon
     WHERE skill < 25
+    AND skill != 0
     )
 AND modId = 23;
 
