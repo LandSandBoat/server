@@ -2105,6 +2105,12 @@ INSERT INTO `synth_recipes` VALUES (29977,1,0,0,0,9,0,0,0,0,0,4100,4242,12472,0,
 INSERT INTO `synth_recipes` VALUES (29978,1,0,0,0,9,0,0,0,0,0,4100,4242,12527,0,0,0,0,0,0,0,648,648,650,650,1,1,1,1,'Circlet +1 (desynth)');
 INSERT INTO `synth_recipes` VALUES (29979,1,0,0,0,26,0,0,0,0,0,4098,4240,1632,0,0,0,0,0,0,0,661,661,661,752,2,2,2,1,'Moblin Mail (desynth)');
 INSERT INTO `synth_recipes` VALUES (29980,1,0,0,0,25,0,0,0,0,0,4098,4240,1625,0,0,0,0,0,0,0,661,661,661,752,1,1,1,1,'Moblin Helm (desynth)');
+INSERT INTO `synth_recipes` VALUES (29981,1,0,0,0,85,0,0,0,0,0,4100,4242,13351,0,0,0,0,0,0,0,785,785,746,746,1,1,1,2,'Emerald Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (29982,1,0,0,0,85,0,0,0,0,0,4100,4242,13353,0,0,0,0,0,0,0,787,787,746,746,1,1,1,2,'Diamond Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (29983,1,0,0,0,85,0,0,0,0,0,4100,4242,13318,0,0,0,0,0,0,0,789,789,746,746,1,1,1,2,'Topaz Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (29984,1,0,0,0,85,0,0,0,0,0,4100,4242,13354,0,0,0,0,0,0,0,786,786,746,746,1,1,1,2,'Spinel Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10015.html
+INSERT INTO `synth_recipes` VALUES (29985,1,0,0,0,85,0,0,0,0,0,4100,4242,13356,0,0,0,0,0,0,0,812,812,746,746,1,1,1,2,'Death Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
+INSERT INTO `synth_recipes` VALUES (29986,1,0,0,0,85,0,0,0,0,0,4100,4242,13357,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Angel\'s Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10013.html
 INSERT INTO `synth_recipes` VALUES (30001,0,0,0,0,0,1,1,0,0,1,4099,4241,917,4497,13568,0,0,0,0,0,5230,5231,5231,5231,1,1,1,1,'Love Chocolate');
 INSERT INTO `synth_recipes` VALUES (30002,1,0,0,0,0,1,0,0,0,0,4098,4240,498,0,0,0,0,0,0,0,817,817,817,817,3,6,9,12,'Yagudo Necklace (desynth)');
 INSERT INTO `synth_recipes` VALUES (30003,0,2011,0,0,0,2,0,0,0,0,4098,4240,840,840,840,840,840,840,2145,0,1221,1221,1221,1221,18,24,30,36,'Chocobo Fletchings');
@@ -4753,12 +4759,6 @@ INSERT INTO `synth_recipes` VALUES (75528,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,27
 INSERT INTO `synth_recipes` VALUES (75529,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4157,0,0,2779,2779,2779,2779,1,1,1,1,'Enfeeb. Kit Poison');
 INSERT INTO `synth_recipes` VALUES (75530,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4163,0,0,2780,2780,2780,2780,1,1,1,1,'Enfeeb. Kit Blind');
 INSERT INTO `synth_recipes` VALUES (75531,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4161,0,0,2781,2781,2781,2781,1,1,1,1,'Enfeeb. Kit Sleep');
-INSERT INTO `synth_recipes` VALUES (75532,1,0,0,0,85,0,0,0,0,0,4100,4242,13351,0,0,0,0,0,0,0,785,785,746,746,1,1,1,2,'Emerald Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
-INSERT INTO `synth_recipes` VALUES (75533,1,0,0,0,85,0,0,0,0,0,4100,4242,13353,0,0,0,0,0,0,0,787,787,746,746,1,1,1,2,'Diamond Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
-INSERT INTO `synth_recipes` VALUES (75534,1,0,0,0,85,0,0,0,0,0,4100,4242,13318,0,0,0,0,0,0,0,789,789,746,746,1,1,1,2,'Topaz Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
-INSERT INTO `synth_recipes` VALUES (75535,1,0,0,0,85,0,0,0,0,0,4100,4242,13354,0,0,0,0,0,0,0,786,786,746,746,1,1,1,2,'Spinel Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10015.html
-INSERT INTO `synth_recipes` VALUES (75537,1,0,0,0,85,0,0,0,0,0,4100,4242,13356,0,0,0,0,0,0,0,812,812,746,746,1,1,1,2,'Death Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10017.html
-INSERT INTO `synth_recipes` VALUES (75538,1,0,0,0,85,0,0,0,0,0,4100,4242,13357,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Angel\'s Earring (desynth)'); -- JP Wiki says desynth available http://wiki.ffo.jp/html/10013.html
 
 -- -----------
 -- RECIPES END
