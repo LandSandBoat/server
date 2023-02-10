@@ -31,7 +31,7 @@
 class Application
 {
 public:
-    Application(std::string serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    Application(std::string serverName, int argc, char** argv);
     virtual ~Application() = default;
 
     Application(const Application&)            = delete;
