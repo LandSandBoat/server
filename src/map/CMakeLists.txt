@@ -140,6 +140,9 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/mapserver.rc")
 endif()
 
+# Track the init file to make sure a re-configure will happen on build if needed
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/modules/init.txt")
+
 # Search for module directories
 set(module_include_dirs "")
 file(STRINGS ${CMAKE_SOURCE_DIR}/modules/init.txt INIT_FILE_ENTRIES REGEX "^[^#\n].*")
