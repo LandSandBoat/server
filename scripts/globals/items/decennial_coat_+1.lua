@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 10253
 -- Decennial Coat +1
--- Dispense: Moogurt
+-- Dispense: Bowl of Moogurt
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/msg")
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.MOOGURT, 1)
+    target:addItem(xi.items.BOWL_OF_MOOGURT, 1)
 end
 
 return itemObject

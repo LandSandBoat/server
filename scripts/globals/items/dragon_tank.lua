@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 11002
 -- Dragon Tank
--- Dispense: Dragon Fruit au Lait
+-- Dispense: Flask of Dragon Fruit au Lait
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/msg")
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.items.DRAGON_FRUIT_AU_LAIT, 1)
+    target:addItem(xi.items.FLASK_OF_DRAGON_FRUIT_AU_LAIT, 1)
 end
 
 return itemObject
