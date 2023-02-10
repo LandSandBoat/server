@@ -1303,6 +1303,10 @@ namespace fishingutils
 
     fishingarea_t* GetFishingArea(CCharEntity* PChar)
     {
+        // We should not be here. Caller is responsible for acting on a player that
+        // is attempting to fish in MH
+        XI_DEBUG_BREAK_IF(PChar->m_moghouseID > 0)
+
         int16        zoneId = PChar->getZone();
         position_t   p      = PChar->loc.p;
         areavector_t loc    = { p.x, p.y, p.z };
@@ -1926,6 +1930,12 @@ namespace fishingutils
             ShowWarning("Fishing is currently disabled");
             PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+            return;
+        }
+
+        if (PChar->m_moghouseID > 0)
+        {
+            ShowError(fmt::format("Player {} attempting to fish inside Mog House", PChar->GetName()));
             return;
         }
 
