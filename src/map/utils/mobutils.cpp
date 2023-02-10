@@ -287,6 +287,11 @@ namespace mobutils
                 {
                     mobHP = (baseMobHP + sjHP) * .95;
                 }
+                // Manticore family has 50% more HP
+                else if (PMob->m_Family == 179)
+                {
+                    mobHP = (baseMobHP + sjHP) * 1.5;
+                }
                 else
                 {
                     mobHP = baseMobHP + sjHP;
