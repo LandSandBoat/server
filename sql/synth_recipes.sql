@@ -1096,7 +1096,7 @@ INSERT INTO `synth_recipes` VALUES (14519,0,0,0,92,0,0,0,0,0,0,4099,4241,1359,91
 INSERT INTO `synth_recipes` VALUES (14520,0,1995,0,92,0,0,0,0,0,0,4096,4238,1711,1711,1711,1711,1711,1711,2144,0,669,669,669,669,6,6,6,6,'Mlbd. Sheet');
 INSERT INTO `synth_recipes` VALUES (14521,0,0,0,92,0,0,0,0,0,0,4096,4238,1286,16470,0,0,0,0,0,0,17625,17625,17625,17625,1,1,1,1,'Ponderous Gully');
 INSERT INTO `synth_recipes` VALUES (14522,0,0,20,93,0,0,0,0,59,0,4096,4238,652,654,654,654,713,824,924,0,16777,16791,16791,16791,1,1,1,1,'Death Scythe');  -- JPWiki/ffxiclopedia  Discrepancies between pages, but highest value used.
--- INSERT INTO `synth_recipes` VALUES (14523,0,0,0,93,0,255,0,0,0,0,4098,4240,664,682,1764,1764,0,0,0,0,12490,15192,15192,15192,1,1,1,1,'Yasha Jinpachi');  -- JPWiki data 93SM, 58CL, subs/mats unconfirmed elsewhere
+INSERT INTO `synth_recipes` VALUES (14523,0,0,0,93,0,58,0,0,0,0,4098,4240,664,682,1764,1764,0,0,0,0,12490,15192,15192,15192,1,1,1,1,'Yasha Jinpachi');  -- JPWiki data 93SM, 58CL, subs/mats unconfirmed elsewhere
 INSERT INTO `synth_recipes` VALUES (14524,0,0,0,93,40,0,25,0,0,0,4096,4238,2001,2001,2275,2823,12698,0,0,0,12189,12189,12189,12189,1,1,1,1,'Ebon Gauntlets');  -- JPWiki data, ffxiclopedia agree since 07/2019 revision,subs unconfirmed elsewhere
 INSERT INTO `synth_recipes` VALUES (14525,0,0,0,93,0,0,0,0,0,0,4096,4238,3918,3918,3918,3918,0,0,0,0,3919,3919,3919,3919,1,1,1,1,'Midrium Ingot');
 -- INSERT INTO `synth_recipes` VALUES (14526,0,0,0,93,255,0,0,0,0,0,4096,4238,655,716,745,914,0,0,0,0,16653,16685,16685,16685,1,1,1,1,'Nadziak');  -- JPWiki data 93SM, 49GS, 13WW, subs/mats unconfirmed elsewhere
