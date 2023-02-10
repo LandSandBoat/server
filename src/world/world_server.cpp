@@ -24,8 +24,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/console_service.h"
 #include "common/logging.h"
 
-WorldServer::WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
-: Application("world", std::move(pArgParser))
+WorldServer::WorldServer(int argc, char** argv)
+: Application("world", argc, argv)
 , messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
 , httpServer(std::make_unique<HTTPServer>())
 {

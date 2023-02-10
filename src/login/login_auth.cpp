@@ -22,6 +22,8 @@
 #include "common/logging.h"
 #include "common/socket.h"
 
+#include "map/message.h"
+
 #include "login.h"
 #include "login_auth.h"
 
@@ -131,6 +133,36 @@ int32 login_parse(int32 fd)
                     {
                         fmtQuery = "UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d";
                         sql->Query(fmtQuery, sd->accid);
+
+                        fmtQuery = "SELECT charid, server_addr, server_port \
+                                FROM accounts_sessions JOIN accounts \
+                                ON accounts_sessions.accid = accounts.id \
+                                WHERE accounts.id = %d;";
+                        ret      = sql->Query(fmtQuery, sd->accid);
+                        if (ret != SQL_ERROR && sql->NumRows() == 1)
+                        {
+                            while (sql->NextRow() == SQL_SUCCESS)
+                            {
+                                uint32 charid = sql->GetUIntData(0);
+                                uint64 ip     = sql->GetUIntData(1);
+                                uint64 port   = sql->GetUIntData(2);
+
+                                ip |= (port << 32);
+
+                                std::ignore = ip;
+
+                                zmq::message_t chardata(sizeof(charid));
+                                ref<uint32>((uint8*)chardata.data(), 0) = charid;
+                                zmq::message_t empty(0);
+
+                                // TODO: MSG_LOGIN is a no-op in message_server.cpp,
+                                //     : so sending this does nothing?
+                                //     : But in the client (message.cpp), it _could_
+                                //     : be used to clear out lingering PChar data.
+                                // queue_message(ipp, MSG_LOGIN, &chardata, &empty);
+                            }
+                        }
+
                         memset(&sessions[fd]->wdata[0], 0, 33);
                         sessions[fd]->wdata.resize(33);
                         ref<uint8>(sessions[fd]->wdata.data(), 0)  = LOGIN_SUCCESS;

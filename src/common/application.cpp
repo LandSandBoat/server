@@ -30,16 +30,31 @@
 #include <windows.h>
 #endif
 
-Application::Application(std::string serverName, std::unique_ptr<argparse::ArgumentParser>&& pArgParser)
+Application::Application(std::string serverName, int argc, char** argv)
 : m_ServerName(serverName)
 , m_RequestExit(false)
-, gArgParser(std::move(pArgParser))
+, gArgParser(std::make_unique<argparse::ArgumentParser>(argv[0]))
 {
 #ifdef _WIN32
     SetConsoleTitleA(fmt::format("{}-server", serverName).c_str());
 #endif
 
-    logging::InitializeLog(serverName, fmt::format("log/{}-server.log", serverName), false);
+    gArgParser->add_argument("--log")
+        .default_value(fmt::format("log/{}-server.log", serverName));
+
+    try
+    {
+        gArgParser->parse_args(argc, argv);
+    }
+    catch (const std::runtime_error& err)
+    {
+        std::cerr << err.what() << std::endl;
+        std::cerr << *gArgParser;
+        std::exit(1);
+    }
+
+    auto logName = gArgParser->get<std::string>("--log");
+    logging::InitializeLog(serverName, logName, false);
     lua_init();
     settings::init();
     ShowInfo("Begin %s-server initialisation...", serverName);

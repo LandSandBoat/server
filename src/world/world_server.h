@@ -32,7 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class WorldServer final : public Application
 {
 public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    WorldServer(int argc, char** argv);
     ~WorldServer() override;
 
     void Tick() override;
