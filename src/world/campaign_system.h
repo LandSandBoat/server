@@ -1,7 +1,7 @@
 /*
 ===========================================================================
 
-Copyright (c) 2022 LandSandBoat Dev Teams
+Copyright (c) 2023 LandSandBoat Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,23 +18,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#include "world_server.h"
+#pragma once
 
-#include "common/application.h"
-#include "common/console_service.h"
-#include "common/logging.h"
-
-WorldServer::WorldServer(int argc, char** argv)
-: Application("world", argc, argv)
-, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
-, httpServer(std::make_unique<HTTPServer>())
+class CampaignSystem
 {
-}
-
-WorldServer::~WorldServer()
-{
-}
-
-void WorldServer::Tick()
-{
-}
+public:
+    CampaignSystem()  = default;
+    ~CampaignSystem() = default;
+};

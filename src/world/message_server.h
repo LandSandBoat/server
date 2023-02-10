@@ -1,7 +1,7 @@
-/*
+﻿/*
 ===========================================================================
 
-Copyright (c) 2022 LandSandBoat Dev Teams
+Copyright (c) 2010-2015 Darkstar Dev Teams
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,23 +18,33 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#include "world_server.h"
+#pragma once
 
-#include "common/application.h"
-#include "common/console_service.h"
-#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
 
-WorldServer::WorldServer(int argc, char** argv)
-: Application("world", argc, argv)
-, messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
-, httpServer(std::make_unique<HTTPServer>())
+#include <nonstd/jthread.hpp>
+#include <zmq.hpp>
+#include <zmq_addon.hpp>
+
+void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+
+void message_server_init(const bool& requestExit);
+void message_server_close();
+
+struct message_server_wrapper_t
 {
-}
+    message_server_wrapper_t(const std::atomic_bool& requestExit)
+    : m_thread(std::make_unique<nonstd::jthread>(std::bind(message_server_init, std::ref(requestExit))))
+    {
+    }
 
-WorldServer::~WorldServer()
-{
-}
+    ~message_server_wrapper_t()
+    {
+        message_server_close();
+    }
 
-void WorldServer::Tick()
-{
-}
+private:
+    std::unique_ptr<nonstd::jthread> m_thread;
+};
