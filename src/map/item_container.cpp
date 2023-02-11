@@ -44,7 +44,7 @@ CItemContainer::~CItemContainer()
 {
     for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
     {
-        delete m_ItemList[SlotID];
+        destroy(m_ItemList[SlotID]);
     }
 }
 
@@ -151,7 +151,7 @@ uint8 CItemContainer::InsertItem(CItem* PItem)
     }
     ShowDebug("ItemContainer: Container is full");
 
-    // delete PItem;//todo: what if the item is a valid item??
+    // destroy(PItem); //TODO: what if the item is a valid item??
     return ERROR_SLOTID;
 }
 
@@ -185,7 +185,7 @@ uint8 CItemContainer::InsertItem(CItem* PItem, uint8 SlotID)
     }
     ShowDebug("ItemContainer: SlotID %i is out of range", SlotID);
 
-    delete PItem;
+    destroy(PItem);
     return ERROR_SLOTID;
 }
 
@@ -251,7 +251,7 @@ void CItemContainer::Clear()
 {
     for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
     {
-        delete m_ItemList[SlotID];
+        destroy(m_ItemList[SlotID]);
         m_ItemList[SlotID] = nullptr;
     }
 }

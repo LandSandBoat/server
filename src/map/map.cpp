@@ -73,27 +73,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <io.h>
 #endif
 
-#ifdef TRACY_ENABLE
-void* operator new(std::size_t count)
-{
-    auto ptr = malloc(count);
-    TracyAlloc(ptr, count);
-    return ptr;
-}
-
-void operator delete(void* ptr) noexcept
-{
-    TracyFree(ptr);
-    free(ptr);
-}
-
-void operator delete(void* ptr, std::size_t count)
-{
-    TracyFree(ptr);
-    free(ptr);
-}
-#endif // TRACY_ENABLE
-
 const char* MAP_CONF_FILENAME = nullptr;
 
 int8* g_PBuff   = nullptr; // Global packet clipboard
@@ -225,6 +204,7 @@ int32 do_init(int32 argc, char** argv)
 
     ShowInfo(sql->GetClientVersion().c_str());
     ShowInfo(sql->GetServerVersion().c_str());
+    sql->CheckCharset();
 
     luautils::init(); // Also calls moduleutils::LoadLuaModules();
 
@@ -384,10 +364,8 @@ void do_final(int code)
 {
     TracyZoneScoped;
 
-    delete[] g_PBuff;
-    g_PBuff = nullptr;
-    delete[] PTempBuff;
-    PTempBuff = nullptr;
+    destroy_arr(g_PBuff);
+    destroy_arr(PTempBuff);
 
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
@@ -397,6 +375,7 @@ void do_final(int code)
     petutils::FreePetList();
     trustutils::FreeTrustList();
     zoneutils::FreeZoneList();
+
     message::close();
     if (messageThread.joinable())
     {
@@ -1013,10 +992,9 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
 
         map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(map_session_data->shuttingDown == 1);
 
-        delete[] map_session_data->server_packet_data;
-        delete map_session_data->PChar;
-        delete map_session_data;
-        map_session_data = nullptr;
+        destroy_arr(map_session_data->server_packet_data);
+        destroy(map_session_data->PChar);
+        destroy(map_session_data);
 
         map_session_list.erase(ipp);
         return 0;
@@ -1097,10 +1075,9 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
                         sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
 
-                        delete[] map_session_data->server_packet_data;
-                        delete map_session_data->PChar;
-                        delete map_session_data;
-                        map_session_data = nullptr;
+                        destroy_arr(map_session_data->server_packet_data);
+                        destroy(map_session_data->PChar);
+                        destroy(map_session_data);
 
                         map_session_list.erase(it++);
                         continue;
@@ -1113,9 +1090,9 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                     const char* Query = "DELETE FROM accounts_sessions WHERE client_addr = %u AND client_port = %u";
                     sql->Query(Query, map_session_data->client_addr, map_session_data->client_port);
 
-                    delete[] map_session_data->server_packet_data;
+                    destroy_arr(map_session_data->server_packet_data);
                     map_session_list.erase(it++);
-                    delete map_session_data;
+                    destroy(map_session_data);
                     continue;
                 }
             }

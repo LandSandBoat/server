@@ -55,6 +55,38 @@
 #endif
 #endif
 
+#ifdef TRACY_ENABLE
+void* operator new(std::size_t count)
+{
+    void* ptr = malloc(count);
+    TracyAlloc(ptr, count);
+}
+
+void operator delete(void* ptr) noexcept
+{
+    TracyFree(ptr);
+    free(ptr);
+}
+
+void operator delete(void* ptr, std::size_t count) noexcept
+{
+    TracyFree(ptr);
+    free(ptr);
+}
+
+void operator delete[](void* ptr) noexcept
+{
+    TracyFree(ptr);
+    free(ptr);
+}
+
+void operator delete[](void* ptr, std::size_t count) noexcept
+{
+    TracyFree(ptr);
+    free(ptr);
+}
+#endif // TRACY_ENABLE
+
 std::atomic<bool> gRunFlag = true;
 
 std::array<std::unique_ptr<socket_data>, MAX_FD> sessions;

@@ -537,7 +537,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
             if ((!hist->ddos && (tick - hist->tick) > connect_interval * 3) || (hist->ddos && (tick - hist->tick) > connect_lockout))
             { // Remove connection history
                 prev_hist->next = hist->next;
-                delete hist;
+                destroy(hist);
                 hist = prev_hist->next;
                 clear++;
             }
@@ -1068,7 +1068,7 @@ void socket_final_tcp()
         while (hist)
         {
             next_hist = hist->next;
-            delete hist;
+            destroy(hist);
             hist = next_hist;
         }
     }

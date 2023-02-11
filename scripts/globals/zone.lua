@@ -284,6 +284,7 @@ xi.zone =
     DYNAMIS_BASTOK                  = 186,
     DYNAMIS_WINDURST                = 187,
     DYNAMIS_JEUNO                   = 188,
+    OUTER_RAKAZNAR_U3               = 189,
     KING_RANPERRES_TOMB             = 190,
     DANGRUF_WADI                    = 191,
     INNER_HORUTOTO_RUINS            = 192,

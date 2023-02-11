@@ -27,7 +27,7 @@ CREATE TABLE `item_basic` (
   `NoSale` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `BaseSell` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=34 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=34 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

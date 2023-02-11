@@ -16,4 +16,4 @@ CREATE TABLE IF NOT EXISTS `char_pet` (
   `chocoboid` int(11) unsigned NOT NULL DEFAULT '0',
   `field_chocobo` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

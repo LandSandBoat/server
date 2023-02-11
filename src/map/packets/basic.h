@@ -104,7 +104,7 @@ public:
     {
         if (owner && data)
         {
-            delete[] data;
+            destroy_arr(data);
         }
     }
 

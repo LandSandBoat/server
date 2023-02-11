@@ -1895,7 +1895,7 @@ namespace fishingutils
 
         if (PChar->hookedFish != nullptr)
         {
-            delete PChar->hookedFish;
+            destroy(PChar->hookedFish);
             PChar->hookedFish = nullptr;
         }
 
@@ -1943,7 +1943,8 @@ namespace fishingutils
         if (FishingAreaID > 0)
         {
             PChar->fishingToken = 1 + xirand::GetRandomNumber(9999);
-            delete PChar->hookedFish;
+            destroy(PChar->hookedFish);
+
             PChar->hookedFish              = new fishresponse_t();
             PChar->hookedFish->hooked      = false;
             PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_NONE;
@@ -2648,7 +2649,7 @@ namespace fishingutils
 
                 if (PChar->hookedFish != nullptr)
                 {
-                    delete PChar->hookedFish;
+                    destroy(PChar->hookedFish);
                     PChar->hookedFish = nullptr;
                 }
 
@@ -2755,7 +2756,7 @@ namespace fishingutils
 
                         if (response != nullptr)
                         {
-                            delete response;
+                            destroy(response);
                             response = nullptr;
                         }
                     }
@@ -2848,7 +2849,7 @@ namespace fishingutils
                         }
                     }
 
-                    delete PChar->hookedFish;
+                    destroy(PChar->hookedFish);
                     PChar->hookedFish = nullptr;
                 }
 

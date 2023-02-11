@@ -36,7 +36,7 @@ CREATE TABLE `pet_skills` (
   `secondary_sc` tinyint(4) NOT NULL DEFAULT 0,
   `tertiary_sc` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`pet_skill_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table contents for `pet_skills`

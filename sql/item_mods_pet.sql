@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `item_mods_pet` (
  `value` smallint(5) NOT NULL DEFAULT '0',
  `petType` tinyint(3) unsigned NOT NULL DEFAULT '0',
  PRIMARY KEY (`itemId`,`modId`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 -- (Please keep item ID sequential)
 -- Charivari Earring

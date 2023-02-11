@@ -42,7 +42,7 @@ CREATE TABLE `spell_list` (
   `spell_range` smallint(3) unsigned NOT NULL DEFAULT '0',
   `content_tag` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`spellid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=68;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=68;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
