@@ -11,11 +11,28 @@ namespace daily
     std::vector<uint16> sundries1DialItems;
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
-    std::vector<uint16> gobbieJunk = { 507, 508, 510, 511, 566, 568, 1239, 1868, 2542, 2543, 4539, 4543, 9777, 15203, 18180, 19220 };
+    std::vector<uint16> gobbieJunk = {
+        507,   // Goblin Mail
+        508,   // Goblin Helm
+        510,   // Goblin Armor
+        511,   // Goblin Mask
+        566,   // Goblin Cup
+        568,   // Goblin Die
+        1239,  // Goblin Doll
+        1868,  // Goblin Coif Cutting
+        2542,  // Goblin Mess Tin
+        2543,  // Goblin Weel
+        4539,  // Goblin Pie
+        4543,  // Goblin Mushpot
+        9777,  // Goblin Offering
+        15203, // Goblin Coif
+        18180, // Goblin Grenade
+        19220  // Goblin Cracker
+    };
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        int                  selection;
+        uint16               selection;
         std::vector<uint16>* dialItems = &gobbieJunk;
         switch (dial)
         {
@@ -50,16 +67,16 @@ namespace daily
                 break;
             }
         }
-        selection = std::rand() % dialItems->size();
+        selection = xirand::GetRandomElement(dialItems);
 
         // Check if Rare item is already owned and substitute with Goblin trash item.
-        if ((itemutils::GetItem((*dialItems)[selection])->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, (*dialItems)[selection]))
+        if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
         {
             dialItems = &gobbieJunk;
-            selection = std::rand() % dialItems->size();
+            selection = xirand::GetRandomElement(dialItems);
         }
 
-        return (*dialItems)[selection];
+        return selection;
     }
 
     void LoadDailyItems()
