@@ -71,22 +71,22 @@ local anniversaryItems =
 }
 local gobbieJunk =
 {
-    507,
-    508,
-    510,
-    511,
-    566,
-    568,
-    1239,
-    1868,
-    2542,
-    2543,
-    4539,
-    4543,
-    9777,
-    15203,
-    18180,
-    19220,
+    507,   -- Goblin Mail
+    508,   -- Goblin Helm
+    510,   -- Goblin Armor
+    511,   -- Goblin Mask
+    566,   -- Goblin Cup
+    568,   -- Goblin Die
+    1239,  -- Goblin Doll
+    1868,  -- Goblin Coif Cutting
+    2542,  -- Goblin Mess Tin
+    2543,  -- Goblin Weel
+    4539,  -- Goblin Pie
+    4543,  -- Goblin Mushpot
+    9777,  -- Goblin Offering
+    15203, -- Goblin Coif
+    18180, -- Goblin Grenade
+    19220, -- Goblin Cracker
 }
 xi.mystery.onTrade = function(player, npc, trade, events)
     if trade:getItemCount() == 1 then
