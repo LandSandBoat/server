@@ -11,49 +11,55 @@ namespace daily
     std::vector<uint16> sundries1DialItems;
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
+    std::vector<uint16> gobbieJunk = { 507, 508, 510, 511, 566, 568, 1239, 1868, 2542, 2543, 4539, 4543, 9777, 15203, 18180, 19220 };
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        int                 selection;
-        std::vector<uint16> dialItems;
+        int                  selection;
+        std::vector<uint16>* dialItems = &gobbieJunk;
         switch (dial)
         {
             case 1:
             {
-                dialItems = materialsDialItems;
+                dialItems = &materialsDialItems;
                 break;
             }
             case 2:
             {
-                dialItems = foodDialItems;
+                dialItems = &foodDialItems;
                 break;
             }
             case 3:
             {
-                dialItems = medicineDialItems;
+                dialItems = &medicineDialItems;
                 break;
             }
             case 4:
             {
-                dialItems = sundries1DialItems;
+                dialItems = &sundries1DialItems;
                 break;
             }
             case 5:
             {
-                dialItems = sundries2DialItems;
+                dialItems = &sundries2DialItems;
                 break;
             }
             case 6:
             {
-                dialItems = specialDialItems;
+                dialItems = &specialDialItems;
                 break;
             }
         }
-        do
+        selection = std::rand() % dialItems->size();
+
+        // Check if Rare item is already owned and substitute with Goblin trash item.
+        if ((itemutils::GetItem((*dialItems)[selection])->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, (*dialItems)[selection]))
         {
-            selection = std::rand() % dialItems.size();
-        } while ((itemutils::GetItem(dialItems[selection])->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, dialItems[selection]));
-        return dialItems[selection];
+            dialItems = &gobbieJunk;
+            selection = std::rand() % dialItems->size();
+        }
+
+        return (*dialItems)[selection];
     }
 
     void LoadDailyItems()
