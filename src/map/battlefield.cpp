@@ -980,6 +980,18 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
             {
                 ++group.deathCount;
 
+                break;
+            }
+        }
+    }
+
+    auto groups(m_groups);
+    for (auto& group : groups)
+    {
+        for (uint32 mobId : group.mobIds)
+        {
+            if (mobId == PEntity->id)
+            {
                 if (group.deathCallback.valid())
                 {
                     auto result = group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), group.deathCount);
