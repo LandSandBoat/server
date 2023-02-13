@@ -12,22 +12,14 @@ namespace daily
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
     std::vector<uint16> gobbieJunk = {
-        507,   // Goblin Mail
-        508,   // Goblin Helm
-        510,   // Goblin Armor
-        511,   // Goblin Mask
-        566,   // Goblin Cup
-        568,   // Goblin Die
-        1239,  // Goblin Doll
-        1868,  // Goblin Coif Cutting
-        2542,  // Goblin Mess Tin
-        2543,  // Goblin Weel
-        4539,  // Goblin Pie
-        4543,  // Goblin Mushpot
-        9777,  // Goblin Offering
-        15203, // Goblin Coif
-        18180, // Goblin Grenade
-        19220  // Goblin Cracker
+        2542, // Goblin Mess Tin
+        2543, // Goblin Weel
+        4324, // Hobgoblin Chocolate
+        4325, // Hobgoblin Pie
+        4328, // Hobgoblin Bread
+        4458, // Goblin Bread
+        4495, // Goblin Chocolate
+        4539  // Goblin Pie
     };
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
