@@ -616,7 +616,7 @@ local loot =
         },
         {
             { itemid = xi.items.FUMA_SUNE_ATE,       droprate = 550 },
-            { itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 200 },
+            { itemid = xi.items.ADAMAN_INGOT, droprate = 200 },
             { itemid = xi.items.ORICHALCUM_INGOT,    droprate = 250 },
         },
         {
