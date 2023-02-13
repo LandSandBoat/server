@@ -9,4 +9,5 @@ return {
     ['qm12'] = { messageSpecial = ID.text.HOLE_IN_THE_CEILING },
     ['qm13'] = { messageSpecial = ID.text.HOLE_IN_THE_CEILING },
     ['qm15'] = { messageSpecial = ID.text.HOLE_IN_THE_CEILING },
+    ['Oaken_Box'] = { messageSpecial = ID.text.BOX_DEFAULT },
 }

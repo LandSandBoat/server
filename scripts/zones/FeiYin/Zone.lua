@@ -29,13 +29,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(99.98, -1.768, 275.993, 70)
     end
 
-    if
-        player:getCharVar("peaceForTheSpiritCS") == 1 and
-        not player:hasItem(1093) -- Antique Coin
-    then
-        SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
-    end
-
     if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I then
         cs = 29
     elseif
