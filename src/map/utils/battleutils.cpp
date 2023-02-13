@@ -2758,7 +2758,7 @@ namespace battleutils
                 }
             }
 
-            critHitRate = std::clamp(critHitRate, 0, 100);
+            critHitRate = std::clamp(critHitRate, 1, 100);
         }
         return (uint8)critHitRate;
     }
@@ -2770,13 +2770,6 @@ namespace battleutils
         int32 defenderAgi = PDefender->AGI();
         int32 dDex        = attackerDex - defenderAgi;
         int32 dDexAbs     = std::abs(dDex);
-        int32 sign        = 1;
-
-        if (dDex < 0)
-        {
-            // Target has higher AGI so this will be a decrease to crit rate
-            sign = -1;
-        }
 
         // Default to +0 crit rate for a delta of 0-6
         int32 critRate = 0;
@@ -2806,7 +2799,7 @@ namespace battleutils
         }
 
         // Crit rate delta from stats caps at +-15
-        return std::min(critRate, 15) * sign;
+        return std::min(critRate, 15);
     }
 
     /************************************************************************
@@ -2844,7 +2837,7 @@ namespace battleutils
         critHitRate += GetAGICritBonus(PAttacker, PDefender);
         critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
         critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
-        critHitRate = std::clamp(critHitRate, 0, 100);
+        critHitRate = std::clamp(critHitRate, 1, 100);
 
         return (uint8)critHitRate;
     }
@@ -2856,20 +2849,13 @@ namespace battleutils
         int32 defenderAgi = PDefender->AGI();
         int32 dAGI        = attackerAgi - defenderAgi;
         int32 dAgiAbs     = std::abs(dAGI);
-        int32 sign        = 1;
-
-        if (dAGI < 0)
-        {
-            // Target has higher AGI so this will be a decrease to crit rate
-            sign = -1;
-        }
 
         // Default to +0 crit rate
         int32 critRate = 0;
 
         critRate = dAgiAbs / 10;
 
-        return std::min(critRate, 15) * sign;
+        return std::min(critRate, 15);
     }
 
     /************************************************************************
