@@ -581,7 +581,7 @@ INSERT INTO `item_latents` VALUES (13557,13,3,53,0);     -- MND +3 in areas insi
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (13558,1,4,53,0);      -- DEF +4 in areas inside own nation's control
 INSERT INTO `item_latents` VALUES (13558,11,2,53,0);     -- AGI +2 in areas inside own nation's control
-INSERT INTO `item_latents` VALUES (13558,10,2,53,0);     -- VIT +3 in areas inside own nation's control
+INSERT INTO `item_latents` VALUES (13558,10,3,53,0);     -- VIT +3 in areas inside own nation's control
 
 -- -------------------------------------------------------
 -- Patriarch Protector's Ring

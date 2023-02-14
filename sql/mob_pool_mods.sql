@@ -357,6 +357,8 @@ INSERT INTO `mob_pool_mods` VALUES (2748,370,5,0); -- REGEN: 5
 INSERT INTO `mob_pool_mods` VALUES (2790,168,50,0); -- SPELLINTERRUPT: 50
 INSERT INTO `mob_pool_mods` VALUES (2790,240,7,0);  -- SLEEPRES: 7
 INSERT INTO `mob_pool_mods` VALUES (2790,244,7,0);  -- SILENCERES: 7
+INSERT INTO `mob_pool_mods` VALUES (2790,1,3000,1); -- GIL_MIN: 3000
+INSERT INTO `mob_pool_mods` VALUES (2790,2,5000,1); -- GIL_MAX: 5000 (~9000 with max gilfinder)
 
 -- Mythril Golem
 INSERT INTO `mob_pool_mods` VALUES (2793,4,4,1); -- SIGHT_RANGE: 4
