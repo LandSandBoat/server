@@ -2313,19 +2313,21 @@ INSERT INTO `item_latents` VALUES (17592,171,83,49,4468); -- (pamamas)
 INSERT INTO `item_latents` VALUES (17592,171,83,49,4596); -- (wild pamamas)
 
 -- -------------------------------------------------------
--- Diabolos's Pole
+-- Dagger of Trials
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (17599,315,25,52,8);   -- +25% drain/aspir potency in Dark weather
-
+INSERT INTO `item_latents` VALUES (17616,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (17616,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17616,16,-10,47,0);
+
+-- -------------------------------------------------------
+-- Diabolos's Pole
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17599,315,25,52,8);   -- +25% ENH_DRAIN_ASPIR in dark weather
 
 -- -------------------------------------------------------
 -- Master Caster's Knife
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (17617,1,10,70,2);    -- Citizens of Windurst: DEF +10
-
-INSERT INTO `item_latents` VALUES (17616,18,-10,47,0);
 
 -- -------------------------------------------------------
 -- Daylight Dagger
