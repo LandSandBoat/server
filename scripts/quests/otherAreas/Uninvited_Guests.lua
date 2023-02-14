@@ -15,6 +15,14 @@ require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
+--[[
+    UninvitedGuestsStatus
+    1 = Accepted
+    2 = Won
+    3 = Lost
+    4 = On Cooldown Due to Loss
+]]
+
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
 
 local rewards =
@@ -88,6 +96,7 @@ local generateUninvitedGuestsReward = function(player)
             break
         end
     end
+
     player:setCharVar("UninvitedGuestsReward", rewardId)
     return rewardId
 end
@@ -120,10 +129,9 @@ quest.sections =
             },
         },
     },
-
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return (status == QUEST_ACCEPTED) or (status == QUEST_COMPLETED)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -131,89 +139,39 @@ quest.sections =
             ['Justinius'] =
             {
                 onTrigger = function(player, npc)
-                    local uninvitedGuests =  player:getCharVar("UninvitedGuestsStatus")
-
-                    if uninvitedGuests == 0 then
-                        if not player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT) then
-                            npcUtil.giveKeyItem(player, xi.ki.MONARCH_LINN_PATROL_PERMIT)
-                        end
+                    local uninvitedGuests = player:getCharVar("UninvitedGuestsStatus")
+                    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
+                    -- Reminder to go to Monarch Linn
+                    if
+                        uninvitedGuests == 1 and
+                        questStatus == QUEST_ACCEPTED
+                    then
                         return quest:progressEvent(571)
                     -- Player won, give reward
-                    elseif uninvitedGuests == 1 then
+                    elseif uninvitedGuests == 2 then
                         return quest:progressEvent(572)
-                    -- Uninvited Guests Failure - mocks player until conquest tally
-                    elseif uninvitedGuests == 2 or (uninvitedGuests == 3 and player:getCharVar("UninvitedGuestsReset")) >= os.time() then
-                        return quest:progressEvent(575)
                     -- Reissues permit post failure
-                    elseif uninvitedGuests == 3 and player:getCharVar("UninvitedGuestsReset") <= os.time() then
+                    elseif
+                        uninvitedGuests == 4 and
+                        player:getCharVar("UninvitedGuestsReset") <= os.time()
+                    then
                         return quest:progressEvent(574)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [572] = function(player, csid, option, npc)
-                    -- Determine Reward (or check if a reward is pending)
-                    local rewardId = player:getCharVar("UninvitedGuestsReward") -- Done to prevent ppl holding the r/ex xp page and forcing a recalculation
-                    if rewardId == 0 then
-                        rewardId = generateUninvitedGuestsReward(player)
-                    end
-
-                    if rewardId == 1 and quest:complete(player) then -- special case for Gil
-                        updateUninvitedGuests(player, true)
-                        npcUtil.giveCurrency(player, "gil", 10000)
-                    elseif quest:complete(player) then -- Reward item
-                        updateUninvitedGuests(player, true)
-                        npcUtil.giveItem(player, rewardId)
-                    end
-                end,
-
-                [574] = function(player, csid, option, npc)
-                    npcUtil.giveKeyItem(player, xi.ki.MONARCH_LINN_PATROL_PERMIT)
-                    player:setCharVar("UninvitedGuestsStatus", 0)
-                end,
-
-                [575] = function(player, csid, option, npc)
-                    -- Player has failed and must wait until conquest to retry
-                    if player:getCharVar("UninvitedGuestsStatus") == 2 then
-                        updateUninvitedGuests(player, false)
-                        player:setCharVar("UninvitedGuestsStatus", 3)
-                    end
-                end,
-            },
-        },
-    },
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED
-        end,
-
-        [xi.zone.TAVNAZIAN_SAFEHOLD] =
-        {
-            ['Justinius'] =
-            {
-                onTrigger = function(player, npc)
-                    local uninvitedGuests =  player:getCharVar("UninvitedGuestsStatus")
-
-                    -- Restart quest after conquest tally
-                    if player:getCharVar("UninvitedGuestsReset") <= os.time() and
-                    not player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT) then
+                    -- Uninvited Guests Failure - mocks player until conquest tally
+                    elseif
+                        uninvitedGuests == 3 or
+                        (uninvitedGuests == 4 and player:getCharVar("UninvitedGuestsReset") >= os.time())
+                    then
+                        return quest:progressEvent(575)
+                    -- The repeat quest kick off
+                    elseif
+                        player:getCharVar("UninvitedGuestsReset") <= os.time() and
+                        not player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
+                    then
                         return quest:progressEvent(573)
-                    -- Player won, give reward
-                    elseif uninvitedGuests == 1 then
-                        return quest:progressEvent(572)
-                    -- Uninvited Guests Failure - mocks player until conquest tally
-                    elseif uninvitedGuests == 2 or (uninvitedGuests == 3 and
-                    player:getCharVar("UninvitedGuestsReset")) >= os.time() then
-                        return quest:progressEvent(575)
-                    -- Reissues permit post failure
-                    elseif uninvitedGuests == 3 and
-                    player:getCharVar("UninvitedGuestsReset") <= os.time() then
-                        return quest:progressEvent(574)
                     end
                 end,
             },
+
             onEventFinish =
             {
                 [572] = function(player, csid, option, npc)
@@ -223,32 +181,37 @@ quest.sections =
                         rewardId = generateUninvitedGuestsReward(player)
                     end
 
-                    if rewardId == 1 then -- special case for Gil
-                        updateUninvitedGuests(player, true)
-                        npcUtil.giveCurrency(player, "gil", 10000)
-                    else -- Reward item
-                        updateUninvitedGuests(player, true)
-                        npcUtil.giveItem(player, rewardId)
+                    if
+                        rewardId == 1 and
+                        quest:complete(player)
+                    then -- special case for Gil
+                        if npcUtil.giveCurrency(player, "gil", 10000) then
+                            updateUninvitedGuests(player, true)
+                        end
+                    elseif quest:complete(player) then -- Reward item
+                        if npcUtil.giveItem(player, rewardId) then
+                            updateUninvitedGuests(player, true)
+                        end
                     end
                 end,
 
                 [573] = function(player, csid, option, npc)
                     if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.MONARCH_LINN_PATROL_PERMIT)
-                        player:setCharVar("UninvitedGuestsStatus", 0) -- accepted
+                        player:setCharVar("UninvitedGuestsStatus", 1) -- accepted
                     end
                 end,
 
                 [574] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.MONARCH_LINN_PATROL_PERMIT)
-                    player:setCharVar("UninvitedGuestsStatus", 0)
+                    player:setCharVar("UninvitedGuestsStatus", 1) -- accepted
                 end,
 
                 [575] = function(player, csid, option, npc)
                     -- Player has failed and must wait until conquest to retry
-                    if player:getCharVar("UninvitedGuestsStatus") == 2 then
+                    if player:getCharVar("UninvitedGuestsStatus") == 3 then
                         updateUninvitedGuests(player, false)
-                        player:setCharVar("UninvitedGuestsStatus", 3)
+                        player:setCharVar("UninvitedGuestsStatus", 4)
                     end
                 end,
             },
