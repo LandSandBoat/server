@@ -6430,11 +6430,16 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         uint8 ExitType = (data.ref<uint8>(0x06) == 1 ? 7 : 35);
 
-        if (PChar->PPet == nullptr || (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR && PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL))
+        if (PChar->PPet && (PChar->PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PChar->PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL))
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 345));
+            return;
+        }
+        else
         {
             PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
+            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEAVEGAME, 0, ExitType, 5, 0));
         }
-        PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEAVEGAME, 0, ExitType, 5, 0));
     }
     else if (PChar->animation == ANIMATION_HEALING)
     {

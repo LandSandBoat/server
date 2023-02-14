@@ -100,6 +100,7 @@ xi.items =
     ORC_MASK                        = 509,
     GOBLIN_ARMOR                    = 510,
     GOBLIN_MASK                     = 511,
+    CASTLE_FLOOR_PLANS              = 530,
     LANOLIN_CUBE                    = 531,
     MAGICMART_FLYER                 = 532,
     CLUMP_OF_GAUSEBIT_WILDGRASS     = 534,
