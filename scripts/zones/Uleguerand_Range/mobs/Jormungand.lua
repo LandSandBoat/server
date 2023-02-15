@@ -2,7 +2,11 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = 
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------

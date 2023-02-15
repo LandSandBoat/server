@@ -3,7 +3,11 @@
 --   NM: Zuug the Shoreleaper
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/job_special") }
+mixins = 
+{
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/claim_shield")
+}
 -----------------------------------
 local entity = {}
 

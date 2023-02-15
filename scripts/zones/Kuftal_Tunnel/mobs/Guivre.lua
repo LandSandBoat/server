@@ -2,6 +2,7 @@
 -- Area: Kuftal Tunnel
 --   NM: Guivre
 -----------------------------------
+mixins = { require("scripts/mixins/claim_shield") }
 require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
