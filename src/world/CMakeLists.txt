@@ -1,8 +1,18 @@
 set(SOURCES
     ${COMMON_SOURCES}
+    besieged_system.cpp
+    besieged_system.h
+    campaign_system.cpp
+    campaign_system.h
+    colonization_system.cpp
+    colonization_system.h
+    conquest_system.cpp
+    conquest_system.h
     http_server.cpp
     http_server.h
     main.cpp
+    message_server.cpp
+    message_server.h
     world_server.cpp
     world_server.h)
 

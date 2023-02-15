@@ -18,6 +18,10 @@ def main():
     p2 = subprocess.Popen(
         ["xi_map", "--log", "game-server.log", "--load_all"], stdout=subprocess.PIPE
     )
+    p3 = subprocess.Popen(
+        ["xi_world", "--log", "world-server.log"], stdout=subprocess.PIPE
+    )
+
 
     print("Sleeping for 2 minutes...")
 
@@ -26,12 +30,13 @@ def main():
     p0.kill()
     p1.kill()
     p2.kill()
+    p3.kill()
 
     print("Killing exes and checking logs...")
 
     has_seen_output = False
     error = False
-    for proc in {p0, p1, p2}:
+    for proc in {p0, p1, p2, p3}:
         print(proc.args[0])
         for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
             print(line.replace("\n", ""))
