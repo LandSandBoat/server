@@ -151,4 +151,5 @@ WorldServer::~WorldServer()
 
 void WorldServer::Tick()
 {
+    Application::Tick();
 }
