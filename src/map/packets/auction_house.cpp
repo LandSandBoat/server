@@ -19,16 +19,15 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
-#include <cstring>
-
+#include "map.h"
 #include "auction_house.h"
 
-#include "../entities/charentity.h"
-#include "../map.h"
-#include "../utils/itemutils.h"
+#include "common/socket.h"
 #include "common/vana_time.h"
+#include "utils/itemutils.h"
+#include "entities/charentity.h"
+
+#include <cstring>
 
 bool IsAuctionOpen = true; // Trading is allowed at the auction
 

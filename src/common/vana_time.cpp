@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "logging.h"
+#include "common/logging.h"
 
 #include <ctime>
 

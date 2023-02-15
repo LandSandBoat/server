@@ -20,13 +20,16 @@
 */
 
 // TODO:
-// нужно разделить класс czone на базовый и наследников. уже нарисовались: Standard, Rezident, Instance и Dinamis
-// у каждой из указанных зон особое поведение
+// It is necessary to divide the Czone class into basic and heirs. Already painted: Standard, Rezident, Instance and Dinamis
+// Each of these zones has special behavior
+
+#include "zone.h"
 
 #include "common/logging.h"
 #include "common/socket.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
@@ -176,12 +179,6 @@ CZone::~CZone()
     destroy(m_CampaignHandler);
     destroy(m_zoneEntities);
 }
-
-/************************************************************************
- *                                                                       *
- *  Функции доступа к полям класса                                       *
- *                                                                       *
- ************************************************************************/
 
 ZONEID CZone::GetID()
 {
@@ -358,13 +355,6 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  Загружаем ZoneLines, необходимые для правильного перемещения между   *
- *  зонами.                                                              *
- *                                                                       *
- ************************************************************************/
-
 void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
@@ -442,12 +432,6 @@ void CZone::LoadZoneWeather()
         ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
-
-/************************************************************************
- *                                                                       *
- *  Загружаем настройки зоны из базы                                     *
- *                                                                       *
- ************************************************************************/
 
 void CZone::LoadZoneSettings()
 {
