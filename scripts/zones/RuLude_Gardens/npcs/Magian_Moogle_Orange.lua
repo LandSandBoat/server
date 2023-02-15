@@ -7,11 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
-        return
-    end
-
-    xi.magian.magianOnTrade(player, npc, trade, xi.itemType.WEAPON, eventIds)
+    xi.magian.magianOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
@@ -19,11 +15,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    xi.magian.magianEventUpdate(player, csid, option, eventIds)
+    xi.magian.magianEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.magian.magianOnEventFinish(player, csid, option, eventIds)
+    xi.magian.magianOnEventFinish(player, csid, option, npc)
 end
 
 return entity

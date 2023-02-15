@@ -6,55 +6,6 @@ require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.magian = xi.magian or {}
-xi.magian.trialCache = xi.magian.trialCache or {}
-
--- creates table to track trial and progress per trial slot
-local function getPlayerTrials(player)
-    local activeTrials = xi.magian.trialCache[player:getID()]
-
-    if
-        activeTrials and
-        player:getLocalVar('magianUpdated') == 1
-    then
-        return activeTrials
-    end
-
-    activeTrials = {}
-
-    for i = 1, 10 do
-        local trialBits      = player:getCharVar('[trial]' .. i)
-        local trialId        = bit.rshift(trialBits, 16)
-        local progression    = bit.band(trialBits, 0xFFFF)
-        local trialSQL       = GetMagianTrial(trialId)
-        local objectiveTotal = trialSQL.objectiveTotal or 0
-        activeTrials[i]      = { trial = trialId, progress = progression, objectiveTotal = objectiveTotal }
-    end
-
-    xi.magian.trialCache[player:getID()] = activeTrials
-
-    player:setLocalVar('magianUpdated', 1)
-
-    return activeTrials
-end
-
--- packs current trials into params for onTrigger
-local function parseParams(player)
-    local paramTrials = {}
-
-    for _, v in pairs(getPlayerTrials(player)) do
-        if v.trial > 0 then
-            table.insert(paramTrials, v.trial)
-        end
-    end
-
-    local params = { 0, 0, 0, 0, 0 }
-
-    for i = 1, #paramTrials, 2 do
-        params[(i + 1) / 2] = paramTrials[i] + bit.lshift((paramTrials[i + 1] or 0), 16)
-    end
-
-    return params, #paramTrials
-end
 
 -- trial id and progress
 local function getPlayerTrialByIndex(player, i)
@@ -89,28 +40,6 @@ local function getPlayerTrialByItemId(player, itemId)
     return resultTrials
 end
 
--- packs trial id and trial progress
-local function setTrial(player, slot, trialId, progress)
-    local activeTrials = getPlayerTrials(player)
-    if
-        trialId == activeTrials[slot].trial and
-        progress == activeTrials[slot].progress
-    then
-        return
-    end
-
-    local trialSQL       = GetMagianTrial(trialId)
-    local objectiveTotal = trialSQL.objectiveTotal or 0
-
-    activeTrials[slot].trial          = trialId
-    activeTrials[slot].progress       = progress or 0
-    activeTrials[slot].objectiveTotal = objectiveTotal
-
-    local trialBits = bit.lshift(trialId, 16) + progress
-
-    player:setCharVar('[trial]' .. slot, trialBits)
-end
-
 -- finds empty trial slot
 local function firstEmptySlot(player)
     for i, v in ipairs(getPlayerTrials(player)) do
@@ -121,10 +50,6 @@ local function firstEmptySlot(player)
 end
 
 local function hasTrial(player, trialId)
-    if trialId == nil then
-        return nil
-    end
-
     for i, v in ipairs(getPlayerTrials(player)) do
         if v.trial == trialId then
             return i, v
@@ -132,30 +57,6 @@ local function hasTrial(player, trialId)
     end
 
     return false
-end
-
--- builds augment params for required items
-local function reqAugmentParams(t)
-    local leftAug1  = bit.lshift(t.reqItemAugValue1, 11) + t.reqItemAug1
-    local rightAug1 = bit.lshift(t.reqItemAugValue2, 11) + t.reqItemAug2
-    local augBits1  = bit.lshift(leftAug1, 16) + rightAug1
-    local leftAug2  = bit.lshift(t.reqItemAugValue3, 11) + t.reqItemAug3
-    local rightAug2 = bit.lshift(t.reqItemAugValue4, 11) + t.reqItemAug4
-    local augBits2  = bit.lshift(leftAug2, 16) + rightAug2
-
-    return augBits1, augBits2
-end
-
--- builds augment params for reward items
-local function rewardAugmentParams(t)
-    local leftAug1  = bit.lshift(t.rewardItemAugValue1, 11) + t.rewardItemAug1
-    local rightAug1 = bit.lshift(t.rewardItemAugValue2, 11) + t.rewardItemAug2
-    local augBits1  = bit.lshift(leftAug1, 16) + rightAug1
-    local leftAug2  = bit.lshift(t.rewardItemAugValue3, 11) + t.rewardItemAug3
-    local rightAug2 = bit.lshift(t.rewardItemAugValue4, 11) + t.rewardItemAug4
-    local augBits2  = bit.lshift(leftAug2, 16) + rightAug2
-
-    return augBits1, augBits2
 end
 
 local function checkAndSetProgression(player, trialId, conditions, multiplier)
@@ -186,20 +87,18 @@ local function checkAndSetProgression(player, trialId, conditions, multiplier)
 end
 
 local function checkItemIdExistsInTable(table, itemId)
-    local exists = false
-
-    for index, v in ipairs(table) do
-        if not exists and v.id == itemId then
-            exists = true
+    for _, v in ipairs(table) do
+        if v.id == itemId then
+            return true
         end
     end
 
-    return exists
+    return false
 end
 
 local function getItemsInTrade(trade)
-    local itemsTrials = { }
-    local otherItems  = { }
+    local itemsTrials = {}
+    local otherItems  = {}
 
     for i = 0, 7 do
         local item = trade:getItem(i)
@@ -235,18 +134,6 @@ local function getTrialsBits(player, trials)
     return trialsBits
 end
 
-local function getItemIdByTrials(trialId)
-    local trial = xi.magian.trials[trialId]
-    local itemId = 0
-    if trial and trial.reqs and trial.reqs.itemId then
-        for item in pairs(trial.reqs.itemId) do
-            itemId = item
-        end
-    end
-
-    return itemId
-end
-
 local function returnUselessItems(player, items, itemIdException)
     for _, item in ipairs(items) do
         if item.id ~= itemIdException and item.quantity then
@@ -261,13 +148,6 @@ end
 -----------------------------------
 -- Delivery Crate
 -----------------------------------
-
-xi.magian.deliveryCrateOnTrigger = function(player, npc)
-    local zoneid = player:getZoneID()
-    local msg    = zones[zoneid].text
-
-    player:messageSpecial(msg.DELIVERY_CRATE_TEXT)
-end
 
 xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     -- items = parts of stuff
@@ -405,245 +285,17 @@ end
 -----------------------------------
 -- Magian Orange / Blue
 -----------------------------------
-xi.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
-    local p, t = parseParams(player)
-
-    if EVENT_IDS[1] and player:getMainLvl() < 75 then
-        player:startEvent(EVENT_IDS[1]) -- can't take a trial before lvl 75
-
-    elseif not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
-        player:startEvent(EVENT_IDS[2]) -- player can start magian for the first time
-
-    else
-        player:startEvent(EVENT_IDS[3], p[1], p[2], p[3], p[4], p[5], 0, 0, t) -- standard dialogue
-    end
-end
-
-xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
-    local itemId  = trade:getItemId()
-    local item    = trade:getItem()
-    local matchId = item:getMatchingTrials()
-    local trialId = item:getTrialNumber()
-    local t       = GetMagianTrial(trialId)
-    local zoneid  = player:getZoneID()
-    local msg     = zones[zoneid].text
-    local _, pt   = parseParams(player)
-
-    player:setLocalVar('storeItemId', itemId)
-
-    if player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) and trade:getSlotCount() == 1 then
-        if not next(matchId) and item:isType(TYPE) then
-            player:setLocalVar('invalidItem', 1)
-            player:startEvent(EVENT_IDS[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32) -- invalid weapon
-
-            return
-
-        -- player can only keep 10 trials at once
-        elseif pt >= 10 and trialId == 0 then
-            player:startEvent(EVENT_IDS[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32 - 254)
-
-            return
-
-        elseif trialId ~= 0 then
-            for i, v in pairs(getPlayerTrials(player)) do
-                if v.trial == trialId then
-                    player:setLocalVar('storeTrialId', trialId)
-                    player:tradeComplete()
-
-                    if v.progress >= t.objectiveTotal then
-                        player:startEvent(EVENT_IDS[6], 0, 0, 0, t.rewardItem, 0, 0, 0, itemId) -- completes trial
-                    else
-                        player:startEvent(EVENT_IDS[5], trialId, itemId, 0, 0, v, 0, 0, utils.MAX_UINT32 - 1) -- checks status of trial
-                    end
-
-                    return
-                end
-            end
-
-            -- item has trial, player does not
-            player:setLocalVar('storeTrialId', trialId)
-            player:startEvent(EVENT_IDS[5], trialId, t.reqItem, 0, 0, 0, 0, 0, utils.MAX_UINT32 - 2)
-            player:tradeComplete()
-
-            return
-
-        elseif next(matchId) then
-            player:setLocalVar('storeTrialId', matchId[1])
-            player:tradeComplete()
-            player:startEvent(EVENT_IDS[4], matchId[1], matchId[2], matchId[3], matchId[4], 0, itemId) -- starts trial
-
-            return
-        else
-            player:messageSpecial(msg.ITEM_NOT_WEAPON_MAGIAN) -- item traded isn't a weapon
-        end
-    else
-        player:messageSpecial(msg.ITEM_NOT_WEAPON_MAGIAN) -- item traded isn't a weapon
-    end
-end
-
-local rareItems = set{ 16192, 18574, 19397, 19398, 19399, 19400, 19401, 19402, 19403, 19404, 19405, 19406, 19407, 19408, 19409, 19410 }
-
-xi.magian.magianEventUpdate = function(player, csid, option, EVENT_IDS)
-    local optionMod = bit.band(option, 0xFF)
-
-    switch (optionMod): caseof
-    {
-        [1] = function()
-            if
-                csid == EVENT_IDS[3] or
-                csid == EVENT_IDS[4] or
-                csid == EVENT_IDS[5]
-            then
-                local trialId = bit.rshift(option, 16)
-                local t       = GetMagianTrial(trialId)
-                local a1, a2  = reqAugmentParams(t)
-                local itemId  = getItemIdByTrials(trialId)
-
-                player:updateEvent(2, a1, a2, t.reqItem, 0, itemId, t.trialTarget)
-            end
-        end,
-
-        [2] = function()
-            if
-                csid == EVENT_IDS[3] or
-                csid == EVENT_IDS[4] or
-                csid == EVENT_IDS[5]
-            then
-                local trialId      = bit.rshift(option, 16)
-                local t            = GetMagianTrial(trialId)
-                local _, cacheData = hasTrial(player, trialId)
-                local progress     = cacheData and cacheData.progress or 0
-                local itemId       = getItemIdByTrials(trialId)
-
-                player:updateEvent(t.objectiveTotal, 0, progress, 0, 0, itemId, t.element)
-            end
-        end,
-
-        [3] = function()
-            if
-                csid == EVENT_IDS[3] or
-                csid == EVENT_IDS[4] or
-                csid == EVENT_IDS[5]
-            then
-                local trialId = bit.rshift(option, 16)
-                local t       = GetMagianTrial(trialId)
-                local a1, a2  = rewardAugmentParams(t)
-
-                player:updateEvent(2, a1, a2, t.rewardItem, 0, t.objectiveItem)
-            end
-        end,
-
-        [4] = function()
-            if
-                csid == EVENT_IDS[3] or
-                csid == EVENT_IDS[4] or
-                csid == EVENT_IDS[5]
-            then
-                local trialId = bit.rshift(option, 16)
-                local t       = GetMagianTrial(trialId)
-                local results = GetMagianTrialsWithParent(trialId)
-
-                if results then
-                    player:updateEvent(results[1], results[2], results[3], results[4], t.previousTrial, t.objectiveItem)
-                end
-            end
-        end,
-
-        -- Lists trials to abandon
-        [5] = function()
-            if csid == EVENT_IDS[3] then
-                local params, trialCount = parseParams(player)
-
-                player:updateEvent(params[1], params[2], params[3], params[4], params[5], 0, 0, trialCount)
-            end
-        end,
-
-        -- Abandon trial through menu
-        [6] = function()
-            if csid == EVENT_IDS[3] then
-                local trialId = bit.rshift(option, 8)
-                local slot    = hasTrial(player, trialId)
-
-                if slot then
-                    player:updateEvent(0, 0, 0, 0, 0, slot)
-                    setTrial(player, slot, 0, 0)
-                end
-            end
-        end,
-
-        -- Checks if trial is already in progress
-        [7] = function()
-            if csid == EVENT_IDS[4] then
-                local trialId = bit.rshift(option, 8)
-                local t       = GetMagianTrial(trialId)
-                local a1, a2  = reqAugmentParams(t)
-                local slot    = hasTrial(player, trialId)
-
-                if slot then
-                    player:updateEvent(0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32)
-                    return
-                end
-
-                player:updateEvent(2, a1, a2, t.reqItem)
-            end
-        end,
-
-        -- Abandoning trial through trade (8 and 11)
-        [8] = function()
-            if csid == EVENT_IDS[5] then
-                local trialId = bit.rshift(option, 8)
-                local t       = GetMagianTrial(trialId)
-
-                player:updateEvent(0, 0, 0, t.reqItem)
-            end
-        end,
-
-        [11] = function()
-            if csid == EVENT_IDS[5] then
-                local trialId = bit.rshift(option, 8)
-                local t       = GetMagianTrial(trialId)
-
-                player:updateEvent(0, 0, 0, t.reqItem)
-            end
-        end,
-
-        -- Checks if item's level will increase
-        [13] = function()
-            if csid == EVENT_IDS[4] then
-                local trialId    = bit.rshift(option, 8)
-                local t          = GetMagianTrial(trialId)
-                local reqItem    = GetReadOnlyItem(t.reqItem)
-                local rewardItem = GetReadOnlyItem(t.rewardItem)
-
-                if reqItem:getReqLvl() < rewardItem:getReqLvl() then
-                    player:updateEvent(1)
-                else
-                    player:updateEvent(0)
-                end
-            end
-        end,
-
-        -- Checks if player already owns reward item (if it's rare)
-        [14] = function()
-            if csid == EVENT_IDS[4] then
-                local trialId = bit.rshift(option, 8)
-                local t       = GetMagianTrial(trialId)
-
-                if player:hasItem(t.rewardItem) and rareItems[t.rewardItem] then
-                    player:updateEvent(1)
-                else
-                    player:updateEvent(0)
-                end
-            end
-        end,
-    }
-end
-
-xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
+xi.magian.magianOnEventFinishOld = function(player, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
     local zoneid    = player:getZoneID()
     local msg       = zones[zoneid].text
     local ID        = zones[xi.zone.RULUDE_GARDENS]
+
+    print(option)
+
+    -- if option == 1073741824 then
+    --     return
+    -- end
 
     if
         csid == EVENT_IDS[2] and
@@ -732,11 +384,3 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         player:setLocalVar('storeTrialId', 0)
     end
 end
-
------------------------------------
--- Magian Green
------------------------------------
---[[
-function magianGreenEventUpdate(player, ItemID, csid, option)
-end
-]]--

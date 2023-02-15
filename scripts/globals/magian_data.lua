@@ -13,7 +13,7 @@ xi.magian = xi.magian or {}
 -- listener.
 
 -- Available Options to define:
--- mobId  : Specific Mob ID required to be defeated
+-- mobId  : Specific Mob ID(s) required to be defeated
 
 xi.magian.trials =
 {
@@ -324,8 +324,7 @@ xi.magian.trials =
             itemId       = xi.items.ATHAME,
             itemAugments =
             {
-                [1] = { 757, 0 }, -- Delay:-33
-                [2] = { 764, 6 }, -- Delay:-7
+                [1] = { 757, 7 }, -- Delay:-40
             },
         },
     },
