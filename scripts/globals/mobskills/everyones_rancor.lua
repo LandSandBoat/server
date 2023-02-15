@@ -10,6 +10,7 @@
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
+require("scripts/globals/items")
 -----------------------------------
 local mobskillObject = {}
 
@@ -27,7 +28,27 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local realDmg = 50 * target:getCharVar("EVERYONES_GRUDGE_KILLS")
+    local grudgeKills = 0
+    local player = nil
+
+    if target:isPC() then
+        grudgeKills = target:getCharVar("EVERYONES_GRUDGE_KILLS")
+        player = target
+    elseif target:isPet() then
+        grudgeKills = target:getMaster():getCharVar("EVERYONES_GRUDGE_KILLS")
+        player = target:getMaster()
+    end
+
+    local realDmg = 50 * grudgeKills -- Damage is 50 times the amount you have killed
+
+    if
+        player and
+        player:getEquipID(xi.slot.NECK) == xi.items.UGGALEPIH_NECKLACE
+    then
+        realDmg = math.floor(realDmg * (1 - (player:getTP() / 3000)))
+        player:setTP(0)
+    end
+
     target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
     return realDmg
 end

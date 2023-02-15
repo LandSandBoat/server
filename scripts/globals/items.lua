@@ -2940,6 +2940,7 @@ xi.items =
     SPIDER_TORQUE                   = 13137,
     YINYANG_LORGNETTE               = 13139,
     OPO_OPO_NECKLACE                = 13143,
+    UGGALEPIH_NECKLACE              = 13147,
     EVASION_TORQUE                  = 13148,
     PARRYING_TORQUE                 = 13149,
     SHIELD_TORQUE                   = 13150,
