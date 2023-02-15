@@ -19,19 +19,19 @@
 ===========================================================================
 */
 
+#include "char_update.h"
+
 #include "common/logging.h"
 #include "common/socket.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "char_update.h"
-
-#include "../ai/ai_container.h"
-#include "../ai/states/death_state.h"
-#include "../entities/charentity.h"
-#include "../status_effect_container.h"
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "ai/ai_container.h"
+#include "ai/states/death_state.h"
+#include "entities/charentity.h"
+#include "status_effect_container.h"
+#include "utils/itemutils.h"
 
 CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 {

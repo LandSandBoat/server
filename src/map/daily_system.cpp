@@ -1,4 +1,5 @@
 #include "daily_system.h"
+
 #include "items/item.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -11,7 +12,10 @@ namespace daily
     std::vector<uint16> sundries1DialItems;
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
-    std::vector<uint16> gobbieJunk = {
+
+    // clang-format off
+    std::vector<uint16> gobbieJunk =
+    {
         2542, // Goblin Mess Tin
         2543, // Goblin Weel
         4324, // Hobgoblin Chocolate
@@ -21,10 +25,10 @@ namespace daily
         4495, // Goblin Chocolate
         4539  // Goblin Pie
     };
+    // clang-format on
 
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        uint16               selection;
         std::vector<uint16>* dialItems = &gobbieJunk;
         switch (dial)
         {
@@ -59,7 +63,7 @@ namespace daily
                 break;
             }
         }
-        selection = xirand::GetRandomElement(dialItems);
+        uint16 selection = xirand::GetRandomElement(dialItems);
 
         // Check if Rare item is already owned and substitute with Goblin trash item.
         if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
@@ -164,34 +168,6 @@ namespace daily
         else
         {
             ShowError("Failed to load daily tally items");
-        }
-    }
-
-    void UpdateDailyTallyPoints()
-    {
-        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
-
-        const char* fmtQuery = "UPDATE char_points \
-                SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
-                WHERE char_points.daily_tally > -1;";
-
-        int32 ret = sql->Query(fmtQuery, dailyTallyLimit, dailyTallyAmount);
-
-        if (ret == SQL_ERROR)
-        {
-            ShowError("Failed to update daily tally points");
-        }
-        else
-        {
-            ShowDebug("Distributed daily tally points");
-        }
-
-        fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
-
-        if (sql->Query(fmtQuery, dailyTallyAmount) == SQL_ERROR)
-        {
-            ShowError("Failed to delete daily tally char_vars entries");
         }
     }
 } // namespace daily

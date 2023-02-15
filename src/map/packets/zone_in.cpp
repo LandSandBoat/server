@@ -21,12 +21,13 @@
 
 #include "zone_in.h"
 
+#include "common/vana_time.h"
+
 #include "entities/charentity.h"
 #include "utils/zoneutils.h"
 
 #include "instance.h"
 #include "status_effect_container.h"
-#include "vana_time.h"
 #include "zone.h"
 
 // Returns the Model ID of the mog house to be used
