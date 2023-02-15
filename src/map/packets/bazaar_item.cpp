@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
+#include "bazaar_item.h"
+
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "bazaar_item.h"
-
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "utils/itemutils.h"
 
 CBazaarItemPacket::CBazaarItemPacket(CItem* PItem, uint8 SlotID, uint16 Tax)
 {

@@ -20,10 +20,12 @@
 */
 
 #include "conquest_system.h"
+
+#include "common/vana_time.h"
+
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 
 #include "packets/conquest_map.h"
 

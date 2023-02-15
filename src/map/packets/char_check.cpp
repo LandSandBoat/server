@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
+#include "char_check.h"
+
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "char_check.h"
-
-#include "../entities/charentity.h"
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "entities/charentity.h"
+#include "utils/itemutils.h"
 
 CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
 {
