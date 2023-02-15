@@ -30,92 +30,102 @@ using json = nlohmann::json;
 
 HTTPServer::HTTPServer()
 {
+    if (!settings::get<bool>("network.ENABLE_HTTP"))
+    {
+        return;
+    }
+
+    ts = std::make_unique<ts::task_system>(1);
+
     // NOTE: Everything registered in here happens off the main thread, so lock any global resources
     //     : you might be using.
 
     LockingUpdate();
 
+    auto host = settings::get<std::string>("network.HTTP_HOST");
+    auto port = settings::get<uint16>("network.HTTP_PORT");
+
     // clang-format off
-    m_httpServer.Get("/api", [&](httplib::Request const& req, httplib::Response& res)
+    ts->schedule([this, host, port]()
     {
-        res.set_content("Hello LSB API", "text/plain");
-    });
+        m_httpServer.Get("/api", [&](httplib::Request const& req, httplib::Response& res)
+        {
+            res.set_content("Hello LSB API", "text/plain");
+        });
 
-    m_httpServer.Get("/api/sessions", [&](httplib::Request const& req, httplib::Response& res)
-    {
-        LockingUpdate();
-
-        std::unique_lock<std::mutex> lock(m_updateBottleneck);
-        json j;
-        j = m_apiDataCache.activeSessionCount;
-        res.set_content(j.dump(), "application/json");
-    });
-
-    m_httpServer.Get("/api/zones", [&](httplib::Request const& req, httplib::Response& res)
-    {
-        LockingUpdate();
-
-        std::unique_lock<std::mutex> lock(m_updateBottleneck);
-        json j = m_apiDataCache.zonePlayerCounts;
-        res.set_content(j.dump(), "application/json");
-    });
-
-    m_httpServer.Get(R"(/api/zones/(\d+))", [&](httplib::Request const& req, httplib::Response& res)
-    {
-        auto maybeZoneId = req.matches[1].str();
-        uint16 zoneId = std::strtol(maybeZoneId.c_str(), nullptr, 10);
-        if (zoneId && zoneId < ZONEID::MAX_ZONEID)
+        m_httpServer.Get("/api/sessions", [&](httplib::Request const& req, httplib::Response& res)
         {
             LockingUpdate();
 
             std::unique_lock<std::mutex> lock(m_updateBottleneck);
-            json j = m_apiDataCache.zonePlayerCounts[zoneId];
+            json j;
+            j = m_apiDataCache.activeSessionCount;
             res.set_content(j.dump(), "application/json");
-        }
-        else
-        {
-            res.status = 404;
-        }
-    });
+        });
 
-    m_httpServer.Get("/api/settings", [&](httplib::Request const& req, httplib::Response& res)
-    {
-        // TODO: Cache these
-        json j;
-        j["SERVER_NAME"]          = settings::get<std::string>("main.SERVER_NAME");
-        j["EXP_RATE"]             = settings::get<float>("main.EXP_RATE");
-        j["ENABLE_TRUST_CASTING"] = settings::get<bool>("main.ENABLE_TRUST_CASTING");
-        j["MAX_LEVEL"]            = settings::get<uint8>("main.MAX_LEVEL");
-        res.set_content(j.dump(), "application/json");
-    });
-
-    m_httpServer.set_error_handler([](httplib::Request const& /*req*/, httplib::Response& res)
-    {
-        auto str = fmt::format("<p>Error Status: <span style='color:red;'>{} ({})</span></p>", res.status, httplib::detail::status_message(res.status));
-        res.set_content(str, "text/html");
-    });
-
-    m_httpServer.set_logger([](httplib::Request const& req, httplib::Response const& res)
-    {
-        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-        if (res.status >= 500)
+        m_httpServer.Get("/api/zones", [&](httplib::Request const& req, httplib::Response& res)
         {
-            ShowError(fmt::format("Server Error: {} ({})", res.status, httplib::detail::status_message(res.status)));
-            return;
-        }
-        else if (res.status >= 400)
+            LockingUpdate();
+
+            std::unique_lock<std::mutex> lock(m_updateBottleneck);
+            json j = m_apiDataCache.zonePlayerCounts;
+            res.set_content(j.dump(), "application/json");
+        });
+
+        m_httpServer.Get(R"(/api/zones/(\d+))", [&](httplib::Request const& req, httplib::Response& res)
         {
-            ShowError(fmt::format("Client Error: {} ({})", res.status, httplib::detail::status_message(res.status)));
-            return;
-        }
+            auto maybeZoneId = req.matches[1].str();
+            uint16 zoneId = std::strtol(maybeZoneId.c_str(), nullptr, 10);
+            if (zoneId && zoneId < ZONEID::MAX_ZONEID)
+            {
+                LockingUpdate();
+
+                std::unique_lock<std::mutex> lock(m_updateBottleneck);
+                json j = m_apiDataCache.zonePlayerCounts[zoneId];
+                res.set_content(j.dump(), "application/json");
+            }
+            else
+            {
+                res.status = 404;
+            }
+        });
+
+        m_httpServer.Get("/api/settings", [&](httplib::Request const& req, httplib::Response& res)
+        {
+            // TODO: Cache these
+            json j;
+            j["SERVER_NAME"]          = settings::get<std::string>("main.SERVER_NAME");
+            j["EXP_RATE"]             = settings::get<float>("main.EXP_RATE");
+            j["ENABLE_TRUST_CASTING"] = settings::get<bool>("main.ENABLE_TRUST_CASTING");
+            j["MAX_LEVEL"]            = settings::get<uint8>("main.MAX_LEVEL");
+            res.set_content(j.dump(), "application/json");
+        });
+
+        m_httpServer.set_error_handler([](httplib::Request const& /*req*/, httplib::Response& res)
+        {
+            auto str = fmt::format("<p>Error Status: <span style='color:red;'>{} ({})</span></p>", res.status, httplib::detail::status_message(res.status));
+            res.set_content(str, "text/html");
+        });
+
+        m_httpServer.set_logger([](httplib::Request const& req, httplib::Response const& res)
+        {
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+            if (res.status >= 500)
+            {
+                ShowError(fmt::format("Server Error: {} ({})", res.status, httplib::detail::status_message(res.status)));
+                return;
+            }
+            else if (res.status >= 400)
+            {
+                ShowError(fmt::format("Client Error: {} ({})", res.status, httplib::detail::status_message(res.status)));
+                return;
+            }
+        });
+
+        ShowInfo(fmt::format("Starting HTTP Server on http://{}:{}/api", host, port));
+        m_httpServer.listen(host, port);
     });
     // clang-format on
-
-    auto host = settings::get<std::string>("network.HTTP_HOST");
-    auto port = settings::get<uint16>("network.HTTP_PORT");
-
-    ShowInfo(fmt::format("Starting HTTP Server on http://{}:{}/api", host, port));
-    m_httpServer.listen(host, port);
 }
 
 HTTPServer::~HTTPServer()
