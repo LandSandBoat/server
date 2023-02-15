@@ -23,14 +23,24 @@
 
 #include "gardenutils.h"
 
+#include "common/vana_time.h"
+
 #include <cmath>
 
+<<<<<<< HEAD
 #include "../entities/charentity.h"
 #include "../item_container.h"
 #include "../items/item_flowerpot.h"
 #include "../map.h"
 #include "../packets/inventory_item.h"
 #include "common/vana_time.h"
+=======
+#include "entities/charentity.h"
+#include "item_container.h"
+#include "items/item_flowerpot.h"
+#include "map.h"
+#include "packets/inventory_item.h"
+>>>>>>> 0f01578129 ([core] Update more vana_time includes)
 
 #define MAX_RESULTID 2500
 

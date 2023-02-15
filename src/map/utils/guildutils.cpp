@@ -19,17 +19,28 @@
 ===========================================================================
 */
 
+#include "guildutils.h"
+
+#include "common/vana_time.h"
+
 #include <vector>
 
-#include "../items/item_shop.h"
+#include "items/item_shop.h"
 
+<<<<<<< HEAD
 #include "../guild.h"
 #include "../item_container.h"
 #include "../map.h"
 #include "charutils.h"
 #include "common/vana_time.h"
 #include "guildutils.h"
+=======
+#include "charutils.h"
+#include "guild.h"
+#include "item_container.h"
+>>>>>>> 0f01578129 ([core] Update more vana_time includes)
 #include "itemutils.h"
+#include "map.h"
 #include "serverutils.h"
 
 // TODO: During the closure of the guild, all viewing products of the goods are sent 0x86 with information about the closure of the guild

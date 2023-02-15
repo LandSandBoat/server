@@ -21,15 +21,22 @@
 
 #include "transport.h"
 
+<<<<<<< HEAD
 #include "../common/timer.h"
 #include "common/vana_time.h"
+=======
+#include "common/timer.h"
+#include "common/vana_time.h"
+
+#include <cstdlib>
+
+>>>>>>> 0f01578129 ([core] Update more vana_time includes)
 #include "entities/charentity.h"
 #include "map.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
-#include <cstdlib>
 
 std::unique_ptr<CTransportHandler> CTransportHandler::_instance;
 
