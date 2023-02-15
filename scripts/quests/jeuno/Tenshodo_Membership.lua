@@ -118,6 +118,7 @@ quest.sections =
                         if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
                             player:delKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM)
                         end
+
                         player:confirmTrade()
                     end
                 end,
