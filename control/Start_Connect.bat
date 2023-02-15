@@ -1,4 +1,5 @@
 @echo off
+title Connect Server
 cd ..
 :onCrash
 echo [%date% %time%] Restarting Lobby/Connection Server...

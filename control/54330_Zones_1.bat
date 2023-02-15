@@ -1,7 +1,8 @@
 @echo off
+title Zone 1 - Kuzotz, Volbow
 cd ..
 :onCrash
 echo [%date% %time%] Restarting Dungeons Map Server...
-topaz_game_64.exe --ip 71.164.90.4 --port 54331
+xi_map.exe --ip 96.236.43.244 --port 54330
 echo ...
 GOTO onCrash

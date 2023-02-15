@@ -1,0 +1,8 @@
+@echo off
+title Zone 9 - Treasures of Aht Urhgan
+cd ..
+:onCrash
+echo [%date% %time%] Restarting Dynamis Map Server...
+xi_map.exe --ip 96.236.43.244 --port 54338
+echo ...
+GOTO onCrash

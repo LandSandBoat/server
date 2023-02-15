@@ -1,7 +1,8 @@
 @echo off
+title Zone 3 - Ronfaure, Zulkheim
 cd ..
 :onCrash
 echo [%date% %time%] Restarting Battlefields Map Server...
-topaz_game_64.exe --ip 71.164.90.4 --port 54333
+xi_map.exe --ip 96.236.43.244 --port 54332
 echo ...
 GOTO onCrash

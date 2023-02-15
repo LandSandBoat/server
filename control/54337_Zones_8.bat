@@ -1,7 +1,8 @@
 @echo off
+title Zone 8 - Tu'Lia (Sky)
 cd ..
 :onCrash
 echo [%date% %time%] Restarting Dynamis Map Server...
-topaz_game_64.exe --ip 71.164.90.4 --port 54334
+xi_map.exe --ip 96.236.43.244 --port 54337
 echo ...
 GOTO onCrash
