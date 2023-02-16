@@ -30,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.bonus = 0
+    params.bonus = 150
     params.effect = xi.effect.EVASION_DOWN
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 

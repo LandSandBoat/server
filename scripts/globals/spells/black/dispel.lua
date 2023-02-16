@@ -15,6 +15,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.bonus = 175
+
     local resist = xi.magic.applyResistance(caster, target, spell, params)
     local effect = xi.effect.NONE
 
