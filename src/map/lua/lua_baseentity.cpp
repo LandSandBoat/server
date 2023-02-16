@@ -10864,6 +10864,23 @@ bool CLuaBaseEntity::getClaimable()
 }
 
 /************************************************************************
+ *  Function: clearEnmityForEntity(...)
+ *  Purpose :
+ *  Example : mob:clearEnmityForEntity(player)
+ *  Notes   : Taken from LSB. When merging from upstream, please accept theirs.
+ ************************************************************************/
+
+void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
+{
+    if (auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity))
+    {
+        PMob->PEnmityContainer->Clear(PEntity->getID());
+        return;
+    }
+    ShowError("lua::clearEnmityForEntity called on invalid entity");
+}
+
+/************************************************************************
  *  Function: addStatusEffect(effect, power, tick, duration)
  *  Purpose : Adds a specified Status Effect to the Entity
  *  Example : target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 3, 60)
