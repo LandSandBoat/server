@@ -30,8 +30,9 @@ xi.settings.network =
 
     SEARCH_PORT = 54002,
 
-    HTTP_HOST = "localhost",
-    HTTP_PORT = 8080,
+    ENABLE_HTTP = false,
+    HTTP_HOST   = "localhost",
+    HTTP_PORT   = 8088,
 
     -- Central message server settings (ensure these are the same on both all map servers and the central (lobby) server
     ZMQ_IP   = "127.0.0.1",

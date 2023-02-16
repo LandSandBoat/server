@@ -18,14 +18,17 @@
 
 ===========================================================================
 */
+
+#include "roe.h"
+
+#include "common/vana_time.h"
+
 #include <ctime>
 
 #include "lua/luautils.h"
 #include "packets/chat_message.h"
-#include "roe.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 
 #include "packets/char_spells.h"
 #include "packets/roe_questlog.h"

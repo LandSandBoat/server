@@ -1,4 +1,26 @@
+/*
+===========================================================================
+
+Copyright (c) 2022 LandSandBoat Dev Teams
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
 #include "daily_system.h"
+
 #include "items/item.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
@@ -12,48 +34,66 @@ namespace daily
     std::vector<uint16> sundries2DialItems;
     std::vector<uint16> specialDialItems;
 
+    // clang-format off
+    std::vector<uint16> gobbieJunk =
+    {
+        2542, // Goblin Mess Tin
+        2543, // Goblin Weel
+        4324, // Hobgoblin Chocolate
+        4325, // Hobgoblin Pie
+        4328, // Hobgoblin Bread
+        4458, // Goblin Bread
+        4495, // Goblin Chocolate
+        4539  // Goblin Pie
+    };
+    // clang-format on
+
     uint16 SelectItem(CCharEntity* player, uint8 dial)
     {
-        int                 selection;
-        std::vector<uint16> dialItems;
+        std::vector<uint16>* dialItems = &gobbieJunk;
         switch (dial)
         {
             case 1:
             {
-                dialItems = materialsDialItems;
+                dialItems = &materialsDialItems;
                 break;
             }
             case 2:
             {
-                dialItems = foodDialItems;
+                dialItems = &foodDialItems;
                 break;
             }
             case 3:
             {
-                dialItems = medicineDialItems;
+                dialItems = &medicineDialItems;
                 break;
             }
             case 4:
             {
-                dialItems = sundries1DialItems;
+                dialItems = &sundries1DialItems;
                 break;
             }
             case 5:
             {
-                dialItems = sundries2DialItems;
+                dialItems = &sundries2DialItems;
                 break;
             }
             case 6:
             {
-                dialItems = specialDialItems;
+                dialItems = &specialDialItems;
                 break;
             }
         }
-        do
+        uint16 selection = xirand::GetRandomElement(dialItems);
+
+        // Check if Rare item is already owned and substitute with Goblin trash item.
+        if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
         {
-            selection = std::rand() % dialItems.size();
-        } while ((itemutils::GetItem(dialItems[selection])->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, dialItems[selection]));
-        return dialItems[selection];
+            dialItems = &gobbieJunk;
+            selection = xirand::GetRandomElement(dialItems);
+        }
+
+        return selection;
     }
 
     void LoadDailyItems()
@@ -149,34 +189,6 @@ namespace daily
         else
         {
             ShowError("Failed to load daily tally items");
-        }
-    }
-
-    void UpdateDailyTallyPoints()
-    {
-        uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
-        uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
-
-        const char* fmtQuery = "UPDATE char_points \
-                SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
-                WHERE char_points.daily_tally > -1;";
-
-        int32 ret = sql->Query(fmtQuery, dailyTallyLimit, dailyTallyAmount);
-
-        if (ret == SQL_ERROR)
-        {
-            ShowError("Failed to update daily tally points");
-        }
-        else
-        {
-            ShowDebug("Distributed daily tally points");
-        }
-
-        fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
-
-        if (sql->Query(fmtQuery, dailyTallyAmount) == SQL_ERROR)
-        {
-            ShowError("Failed to delete daily tally char_vars entries");
         }
     }
 } // namespace daily

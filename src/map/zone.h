@@ -25,6 +25,7 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/taskmgr.h"
+#include "common/vana_time.h"
 
 #include <list>
 #include <map>
@@ -36,7 +37,6 @@
 #include "navmesh.h"
 #include "packets/weather.h"
 #include "trigger_area.h"
-#include "vana_time.h"
 
 enum ZONEID : uint16
 {
