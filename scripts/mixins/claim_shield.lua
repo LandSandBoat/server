@@ -123,6 +123,17 @@ g_mixins.claim_shield = function(claimshieldMob)
 				
 				-- Update Claim to winner
 				mobArg:updateClaim(claimWinner)
+            else
+                -- Drop mods
+				mobArg:setClaimable(true)
+				mobArg:setUnkillable(false)
+				mobArg:setCallForHelpBlocked(false)
+				mobArg:resetAI()
+				mobArg:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
+				mobArg:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
+				mobArg:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
+				mobArg:delStatusEffectsByFlag(0xFFFF)
+				mobArg:setHP(mobArg:getMaxHP())
             end
         end)
     end)
