@@ -604,6 +604,7 @@ public:
     void  clearEnmity(CLuaBaseEntity* PEntity);   // clears player enmity from notoriety list
     void  setClaimable(bool claimable);
     bool  getClaimable();
+    void  clearEnmityForEntity(CLuaBaseEntity* PEntity); // Clears enmity table for a given entity
 
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
