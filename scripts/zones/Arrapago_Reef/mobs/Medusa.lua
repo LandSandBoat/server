@@ -5,8 +5,12 @@
 -- TODO: resists, attack/def boosts
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
-mixins = {require("scripts/mixins/job_special")}
-mixins = {require("scripts/mixins/rage")}
+mixins = 
+{
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------

@@ -2,7 +2,11 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = 
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/claim_shield")
+}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

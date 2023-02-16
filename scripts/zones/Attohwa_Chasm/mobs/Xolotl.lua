@@ -3,6 +3,7 @@
 --  Mob: Xolotl
 -----------------------------------
 require("scripts/globals/titles")
+mixins = { require("scripts/mixins/claim_shield") }
 -----------------------------------
 local entity = {}
 

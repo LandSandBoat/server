@@ -5,8 +5,12 @@
 require("scripts/globals/titles")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Mamook/IDs")
-mixins = {require("scripts/mixins/rage")}
-mixins = {require("scripts/mixins/job_special")}
+mixins =
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/job_special"),
+    require("scripts/mixins/claim_shield")
+}
 
 -----------------------------------
 local entity = {}
