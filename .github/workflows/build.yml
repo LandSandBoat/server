@@ -270,7 +270,9 @@ jobs:
         shell: cmd
         run: |
           pwd
+          mkdir -p modules\catseyexi\cpp
           move modules\custom\cpp\*.* modules\catseyexi\cpp\
+          mkdir -p build
           cmake -S . -B build -A Win32
       - name: Build
         shell: cmd
@@ -367,6 +369,9 @@ jobs:
           key: ${{ runner.os }}-osx
       - name: Configure CMake
         run: |
+          pwd
+          mkdir -p modules/catseyexi/cpp
+          mv modules/custom/cpp/* modules/catseyexi/cpp/
           mkdir -p build
           cmake -S . -B build
       - name: Build
