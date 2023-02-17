@@ -533,8 +533,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         critrate = critrate + xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
-        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
-            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower() / 2) / 100
+        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() >= 3 then  -- 3 Finishing Moves used.
+            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()) / 100
         end
 
         local fencerBonusVal = calcParams.fencerBonus or 0
@@ -1109,8 +1109,8 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus, isSub
         bonus = bonus + (accVarryTP * 100)
     end
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        bonus = bonus + (20 + flourisheffect:getPower())
+    if flourisheffect ~= nil and flourisheffect:getPower() >= 1 then
+        bonus = bonus + (40 + flourisheffect:getPower() * 2)
     end
 
     if isSubAttack then
@@ -1165,11 +1165,11 @@ end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp, slot)
-    local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
     local isGuarded = false
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+        attacker:addMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
     local atkmulti = 0
@@ -1206,8 +1206,8 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local pdif = attacker:getPDIF(defender, false, atkmulti, slot, ignoredDef, isGuarded)
     local pdifcrit = attacker:getPDIF(defender, true, atkmulti, slot, ignoredDef, isGuarded)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+        attacker:delMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
     return { pdif, pdifcrit }
