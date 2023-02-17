@@ -111,65 +111,22 @@ xi.job_utils.dancer.checkNoFootRiseAbility = function(player, target, ability)
     end
 end
 
-xi.job_utils.dancer.checkReverseFlourishAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+xi.job_utils.dancer.checkFlourishAbility = function(player, target, ability, combatOnly, minimumCost)
+    -- Combat Check.
+    if
+        combatOnly and
+        player:getAnimation() ~= 1
+    then
+        return xi.msg.basic.REQUIRES_COMBAT, 0
+    end
+
+    -- Finishing Move check.
+    local finishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
+    if finishingMoves >= minimumCost then
         return 0, 0
     else
         return xi.msg.basic.NO_FINISHINGMOVES, 0
-    end
-end
-
-xi.job_utils.dancer.checkAnimatedFlourishAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-        return 0, 0
-    else
-        return xi.msg.basic.NO_FINISHINGMOVES, 0
-    end
-end
-
-xi.job_utils.dancer.checkDesperateFlourishAbility = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-            return 0, 0
-        else
-            return xi.msg.basic.NO_FINISHINGMOVES, 0
-        end
-    end
-end
-
-xi.job_utils.dancer.checkViolentFlourishAbility = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-            return 0, 0
-        else
-            return xi.msg.basic.NO_FINISHINGMOVES, 0
-        end
-    end
-end
-
-xi.job_utils.dancer.checkBuildingFlourishAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-        return 0, 0
-    else
-        return xi.msg.basic.NO_FINISHINGMOVES, 0
-    end
-end
-
-xi.job_utils.dancer.checkWildFlourishAbility = function(player, target, ability)
-    if player:getAnimation() ~= 1 then
-        return xi.msg.basic.REQUIRES_COMBAT, 0
-    else
-        local finishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
-
-        if finishingMoves >= 2 then
-            return 0, 0
-        else
-            return xi.msg.basic.NO_FINISHINGMOVES, 0
-        end
     end
 end
 

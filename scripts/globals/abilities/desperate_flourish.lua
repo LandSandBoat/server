@@ -11,7 +11,7 @@ require('scripts/globals/job_utils/dancer')
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.dancer.checkDesperateFlourishAbility(player, target, ability)
+    return xi.job_utils.dancer.checkFlourishAbility(player, target, ability, true, 1)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
