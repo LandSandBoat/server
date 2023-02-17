@@ -1482,6 +1482,7 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Accelerator I
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Sipahi Boots' AND ID = 23529;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Amir Bed' AND ID = 23543;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Darksteel Sainti' AND ID = 24041;
+UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Crimson Earring' AND ID = 24061;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Frigid Orichalcum Ingot' AND ID = 24062;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Star Earring' AND ID = 24069;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Spirit Orichalcum Ingot' AND ID = 24070;
@@ -1496,6 +1497,8 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Light Lamp' A
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Lightning Lamp' AND ID = 24563;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Water Lamp' AND ID = 24564;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Wind Lamp' AND ID = 24565;
+UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Crimson Ring' AND ID = 24580;
+UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Star Ring' AND ID = 24582;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Sturdy Slacks' AND ID = 30537;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Taikyoku Kenpogi' AND ID = 31005;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Blissful Chapeau' AND ID = 31031;
