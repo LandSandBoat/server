@@ -151,6 +151,47 @@ xi.job_utils.dancer.checkViolentFlourishAbility = function(player, target, abili
     end
 end
 
+xi.job_utils.dancer.checkBuildingFlourishAbility = function(player, target, ability)
+    if
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)
+    then
+        return 0, 0
+    end
+
+    return xi.msg.basic.NO_FINISHINGMOVES, 0
+end
+
+xi.job_utils.dancer.checkWildFlourishAbility = function(player, target, ability)
+    if player:getAnimation() ~= 1 then
+        return xi.msg.basic.REQUIRES_COMBAT, 0
+    else
+        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+            return xi.msg.basic.NO_FINISHINGMOVES, 0
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
+            player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
+            return 0, 0
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
+            return 0, 0
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
+            return 0, 0
+        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_5)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
+            return 0, 0
+        else
+            return xi.msg.basic.NO_FINISHINGMOVES, 0
+        end
+    end
+end
+
 xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
     local waltzInfo = waltzAbilities[ability:getID()]
 
@@ -387,6 +428,48 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         ability:setMsg(xi.msg.basic.JA_MISS)
         return 0
     end
+end
+
+xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, ability)
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 1, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 2, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_5)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    end
+end
+
+xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, action)
+    if
+        not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
+        not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
+    then
+        target:addStatusEffectEx(xi.effect.CHAINBOUND, 0, 1, 0, 5, 0, 1)
+    else
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
+    end
+
+    action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
+    action:speceffect(target:getID(), 1)
+
+    return 0
+end
+
+-- TODO: Implement Contradance status effect.
+xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
+    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
 end
 
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
