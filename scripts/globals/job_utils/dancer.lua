@@ -152,39 +152,20 @@ xi.job_utils.dancer.checkViolentFlourishAbility = function(player, target, abili
 end
 
 xi.job_utils.dancer.checkBuildingFlourishAbility = function(player, target, ability)
-    if
-        player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) or
-        player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) or
-        player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) or
-        player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) or
-        player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)
-    then
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return 0, 0
+    else
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
     end
-
-    return xi.msg.basic.NO_FINISHINGMOVES, 0
 end
 
 xi.job_utils.dancer.checkWildFlourishAbility = function(player, target, ability)
     if player:getAnimation() ~= 1 then
         return xi.msg.basic.REQUIRES_COMBAT, 0
     else
-        if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-            return xi.msg.basic.NO_FINISHINGMOVES, 0
-        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
-            player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
-            return 0, 0
-        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
-            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
-            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
-            return 0, 0
-        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
-            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
-            player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
-            return 0, 0
-        elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
-            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_5)
-            player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
+        local finishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
+        if finishingMoves >= 2 then
             return 0, 0
         else
             return xi.msg.basic.NO_FINISHINGMOVES, 0
