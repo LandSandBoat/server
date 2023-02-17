@@ -297,8 +297,8 @@ jobs:
         shell: cmd
         run: |
           pwd
-          mkdir -p modules/catseyexi/cpp
-          mv modules/custom/cpp/* modules/catseyexi/cpp/
+          mkdir -p modules\catseyexi\cpp
+          move modules\custom\cpp\*.* modules\catseyexi\cpp\
           mkdir -p build
           cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
       - name: Build
