@@ -203,6 +203,7 @@ jobs:
     #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
+        cp modules/custom/cpp/* modules/catseyexi/cpp/
         export CC=/usr/bin/clang-14
         export CXX=/usr/bin/clang++-14
         mkdir -p build
