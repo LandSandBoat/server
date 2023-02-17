@@ -744,11 +744,13 @@ enum EFFECT
     EFFECT_FULL_SPEED_AHEAD    = 803, // Used to track Full Speed Ahead quest minigame
     EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
     EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
-    // 806-1022
+    EFFECT_NUKE_WALL           = 806, // Custom effect for NM type mobs only. Applied by elemental magic damage sources
+
+    // 807-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID 806 // 768 real + 38 custom
+#define MAX_EFFECTID 807 // 768 real + 39 custom
 
 /************************************************************************
  *                                                                       *

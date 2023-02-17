@@ -39,10 +39,17 @@ enum class MsgStd
     // Used as a sentinal value. This should not be used as part of a packet.
     Unknown = -1,
 
-    InvitationDeclined           = 11,  // Your invitation was declined
-    CannotBeProcessed            = 14,  // That request cannot be processed
+    InvitationDeclined           = 11,  // Your invitation was declined.
+    PersonIsPartyMember          = 12,  // That person is a party member.
+    CannotPerformJobEmote        = 13,  // You cannot perform that job emote.
+    CannotBeProcessed            = 14,  // That request cannot be processed.
+    CallPlacedInTheQueue         = 20,  // Your call has been placed in the queue.
     NotPartyLeader               = 21,  // You are not the party leader.
+    UnclaimedTreasureWillBeLost  = 22,  // Caution: All unclaimed treasure will be lost if you join a party.
     CannotInvite                 = 23,  // You cannot invite that person at this time.
+    UnableToPerformInMoghouse    = 32,  // Unable to perform action in Mog House.
+    PersonIsAway                 = 33,  // That person is currently away and cannot respond.
+    PersonIsUsingPOL             = 34,  // That person is currently using the PlayOnline Viewer and can only be reached by sending a "knock message" from the Search menu.
     NoPartyMembers               = 36,  // There are no party members.
     NoLinkshellEquipped          = 37,  // You do not have a linkshell item equipped.
     WaitLonger                   = 38,  // You must wait longer to perform that action.
@@ -72,6 +79,15 @@ enum class MsgStd
     LinkshellNoAccess            = 158, // You do not have access to those linkshell commands.
     ThrowAway                    = 180, // You throw away <item>.
     TellNotReceivedAway          = 181, // Your tell was not received.  The recipient is currently away.
+    CannotPerformPetra           = 209, // You cannot perform that action while holding a Petra.
+    CannotPerformNoPetra         = 210, // You cannot perform that action without a Petra.
+    LostYourPetras               = 211, // You lost your Petras.
+    GateBreachDisengaged         = 212, // Gate Breach status has been disengaged.
+    ReturningToBattle            = 214, // Returning to battle.
+    ReturningToCamp              = 215, // Returning to camp.
+    CannotPerformInConflict      = 216, // This action cannot be performed while participating in Conflict.
+    CannotPerformPreparingBattle = 216, // This action cannot be performed while preparing for battle.
+    ChevronsEarned               = 219, // Chevrons earned: Gold: 0 Mythril: 0 Silver: 0 Bronze: 0 Job: 0
     ItemEx                       = 220, // You cannot possess more than one of that item.
     BlockingAid                  = 225, // Target is currently blocking outside magical assistance
     Sell                         = 232, // You sell <item>.
@@ -89,6 +105,7 @@ enum class MsgStd
     StyleLockOff                 = 268, // Style lock mode disabled.
     StyleLockIsOn                = 269, // Style lock mode is enabled.
     StyleLockIsOff               = 270, // Style lock mode is disabled.
+    UnityChatFull                = 287, // The maximum number of people are already participating in Unity chat. Please try again later.
     PollProposalLinkshell2       = 289, // Player Name's proposal to the linkshell group (cast vote with command: "/vote ?"):
     CurrentPollResultsLinkshell2 = 290, // Player Name's proposal - Current poll results:
     FinalPollResultsLinkshell2   = 291, // Player Name's proposal - Final poll results:
@@ -97,7 +114,8 @@ enum class MsgStd
     TrustLimit                   = 298, // You have called forth your maximum number of alter egos.
     TrustSame                    = 299, // That alter ego has already been called forth.
     TrustEnmity                  = 300, // You cannot use Trust magic while having gained enmity.
-    TrustSoloOrLeader            = 301  // You cannot use Trust magic unless you are solo or the party leader.
+    TrustSoloOrLeader            = 301, // You cannot use Trust magic unless you are solo or the party leader.
+    AnErrorHasOccured            = 308, // An error has occured.
 };
 
 class CCharEntity;
@@ -105,6 +123,9 @@ class CCharEntity;
 class CMessageStandardPacket : public CBasicPacket
 {
 public:
+    // Debug version of CMessageStandardPacket, it is preferred to use the type-safe versions below
+    CMessageStandardPacket(uint16 MessageID);
+
     CMessageStandardPacket(MsgStd MessageID);
     CMessageStandardPacket(uint32 param0, uint16 MessageID);
     CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID);

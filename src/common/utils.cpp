@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <regex>
 #include <string>
 
 #ifdef _MSC_VER
@@ -441,8 +442,9 @@ uint32 packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset
     }
 
     {
-        delete[] modifiedTarget;
+        destroy_arr(modifiedTarget);
     }
+
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
 
@@ -499,7 +501,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
     }
 
     {
-        delete[] modifiedTarget;
+        destroy_arr(modifiedTarget);
     }
     return retVal;
 }
@@ -875,6 +877,11 @@ bool matches(std::string const& target, std::string const& pattern, std::string 
 bool starts_with(std::string const& target, std::string const& pattern)
 {
     return target.rfind(pattern, 0) != std::string::npos;
+}
+
+std::string replace(std::string const& target, std::string const& search, std::string const& replace)
+{
+    return std::regex_replace(target, std::regex(search), replace);
 }
 
 look_t stringToLook(std::string str)

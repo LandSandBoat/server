@@ -5,6 +5,7 @@
 -- !pos 0 0 -37 59
 -----------------------------------
 local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
+require('scripts/globals/items')
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
@@ -19,12 +20,12 @@ entity.onTrade = function(player, npc, trade)
         not GetMobByID(ID.mob.ASPIDOCHELONE):isSpawned()
     then
         if
-            npcUtil.tradeHasExactly(trade, 3343) and
+            npcUtil.tradeHasExactly(trade, xi.items.BLUE_PONDWEED) and
             npcUtil.popFromQM(player, npc, ID.mob.ADAMANTOISE)
         then
             player:confirmTrade()
         elseif
-            npcUtil.tradeHasExactly(trade, 3344) and
+            npcUtil.tradeHasExactly(trade, xi.items.RED_PONDWEED) and
             npcUtil.popFromQM(player, npc, ID.mob.ASPIDOCHELONE)
         then
             player:confirmTrade()

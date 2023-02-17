@@ -226,7 +226,7 @@ CStatusEffectContainer::~CStatusEffectContainer()
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        delete PStatusEffect;
+        destroy(PStatusEffect);
     }
 }
 
@@ -558,7 +558,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
     }
     else
     {
-        delete PStatusEffect;
+        destroy(PStatusEffect);
     }
 
     return false;
@@ -586,7 +586,7 @@ void CStatusEffectContainer::DeleteStatusEffects()
                 update_icons = true;
             }
             effect_iter = m_StatusEffectSet.erase(effect_iter);
-            delete PStatusEffect;
+            destroy(PStatusEffect);
             effects_removed = true;
         }
         else
@@ -727,7 +727,7 @@ void CStatusEffectContainer::KillAllStatusEffect()
 
             effect_iter = m_StatusEffectSet.erase(effect_iter);
 
-            delete PStatusEffect;
+            destroy(PStatusEffect);
         }
         else
         {
@@ -1626,7 +1626,13 @@ void CStatusEffectContainer::LoadStatusEffects()
 
 void CStatusEffectContainer::SaveStatusEffects(bool logout)
 {
-    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    // Print entity name and bail out if entity isn't a player.
+    if (m_POwner->objtype != TYPE_PC)
+    {
+        ShowDebug("Non-player entity %s (ID: %d) attempt to save Status Effect.", m_POwner->GetName(), m_POwner->id);
+
+        return;
+    }
 
     sql->Query("DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
 

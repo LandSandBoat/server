@@ -44,6 +44,12 @@ xi.settings.main =
     FOV_REWARD_ALLIANCE   = 0, -- Allow Fields of Valor rewards while being a member of an alliance. (default retail behavior: 0)
     GOV_REWARD_ALLIANCE   = 1, -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
+    -- Daily points / Gobbie mystery box.
+    ENABLE_DAILY_TALLY = 1,  -- Allows acquisition of daily points for gobbie mystery box.
+    DAILY_TALLY_AMOUNT = 10,
+    DAILY_TALLY_LIMIT  = 50000,
+    GOBBIE_BOX_MIN_AGE = 45, -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
+
     -- Records of Eminence
     ENABLE_ROE            = 1, -- Enable Records of Eminence
     ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records
@@ -234,6 +240,5 @@ xi.settings.main =
     DIG_GRANT_BORE               = 0,     -- Set to 1 to grant bore ability
     ENM_COOLDOWN                 = 120,   -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
     FORCE_SPAWN_QM_RESET_TIME    = 300,   -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
-    GOBBIE_BOX_MIN_AGE           = 45,    -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
 }

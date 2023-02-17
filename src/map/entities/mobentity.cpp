@@ -21,38 +21,39 @@
 
 #include "mobentity.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/mob_controller.h"
-#include "../ai/helpers/pathfind.h"
-#include "../ai/helpers/targetfind.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/mobskill_state.h"
-#include "../ai/states/weaponskill_state.h"
-#include "../battlefield.h"
-#include "../conquest_system.h"
-#include "../enmity_container.h"
-#include "../entities/charentity.h"
-#include "../lua/lua_loot.h"
-#include "../mob_modifier.h"
-#include "../mob_spell_container.h"
-#include "../mob_spell_list.h"
-#include "../mobskill.h"
-#include "../packets/action.h"
-#include "../packets/entity_update.h"
-#include "../packets/pet_sync.h"
-#include "../roe.h"
-#include "../status_effect_container.h"
-#include "../treasure_pool.h"
-#include "../utils/battleutils.h"
-#include "../utils/blueutils.h"
-#include "../utils/charutils.h"
-#include "../utils/itemutils.h"
-#include "../utils/mobutils.h"
-#include "../utils/petutils.h"
-#include "../utils/zoneutils.h"
-#include "../weapon_skill.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/mob_controller.h"
+#include "ai/helpers/pathfind.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/mobskill_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "battlefield.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "conquest_system.h"
+#include "enmity_container.h"
+#include "entities/charentity.h"
+#include "lua/lua_loot.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "mob_spell_list.h"
+#include "mobskill.h"
+#include "packets/action.h"
+#include "packets/entity_update.h"
+#include "packets/pet_sync.h"
+#include "roe.h"
+#include "status_effect_container.h"
+#include "treasure_pool.h"
+#include "utils/battleutils.h"
+#include "utils/blueutils.h"
+#include "utils/charutils.h"
+#include "utils/itemutils.h"
+#include "utils/mobutils.h"
+#include "utils/petutils.h"
+#include "utils/zoneutils.h"
+#include "weapon_skill.h"
+
 #include <cstring>
 
 CMobEntity::CMobEntity()
@@ -153,8 +154,8 @@ void CMobEntity::setEntityFlags(uint32 EntityFlags)
 
 CMobEntity::~CMobEntity()
 {
-    delete PEnmityContainer;
-    delete SpellContainer;
+    destroy(PEnmityContainer);
+    destroy(SpellContainer);
 }
 
 /************************************************************************
@@ -342,7 +343,7 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
         return false;
     }
 
-    if (!PAI->PathFind->CanSeePoint(*pos))
+    if (!CanSeeTarget(*pos))
     {
         return false;
     }

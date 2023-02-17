@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/sql.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <array>
 #include <chrono>
@@ -31,70 +32,69 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cstdio>
 #include <cstring>
 
-#include "../lua/luautils.h"
+#include "lua/luautils.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/states/attack_state.h"
-#include "../ai/states/item_state.h"
+#include "ai/ai_container.h"
+#include "ai/states/attack_state.h"
+#include "ai/states/item_state.h"
 
-#include "../packets/char_abilities.h"
-#include "../packets/char_appearance.h"
-#include "../packets/char_equip.h"
-#include "../packets/char_health.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/char_jobs.h"
-#include "../packets/char_recast.h"
-#include "../packets/char_skills.h"
-#include "../packets/char_stats.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/chat_message.h"
-#include "../packets/conquest_map.h"
-#include "../packets/delivery_box.h"
-#include "../packets/inventory_assign.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/inventory_modify.h"
-#include "../packets/key_items.h"
-#include "../packets/linkshell_equip.h"
-#include "../packets/menu_jobpoints.h"
-#include "../packets/menu_merit.h"
-#include "../packets/message_basic.h"
-#include "../packets/message_combat.h"
-#include "../packets/message_special.h"
-#include "../packets/message_standard.h"
-#include "../packets/monipulator1.h"
-#include "../packets/monipulator2.h"
-#include "../packets/quest_mission_log.h"
-#include "../packets/roe_sparkupdate.h"
-#include "../packets/server_ip.h"
-#include "../packets/timer_bar_util.h"
+#include "packets/char_abilities.h"
+#include "packets/char_appearance.h"
+#include "packets/char_equip.h"
+#include "packets/char_health.h"
+#include "packets/char_job_extra.h"
+#include "packets/char_jobs.h"
+#include "packets/char_recast.h"
+#include "packets/char_skills.h"
+#include "packets/char_stats.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/chat_message.h"
+#include "packets/conquest_map.h"
+#include "packets/delivery_box.h"
+#include "packets/inventory_assign.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/inventory_modify.h"
+#include "packets/key_items.h"
+#include "packets/linkshell_equip.h"
+#include "packets/menu_jobpoints.h"
+#include "packets/menu_merit.h"
+#include "packets/message_basic.h"
+#include "packets/message_combat.h"
+#include "packets/message_special.h"
+#include "packets/message_standard.h"
+#include "packets/monipulator1.h"
+#include "packets/monipulator2.h"
+#include "packets/quest_mission_log.h"
+#include "packets/roe_sparkupdate.h"
+#include "packets/server_ip.h"
+#include "packets/timer_bar_util.h"
 
-#include "../ability.h"
-#include "../alliance.h"
-#include "../conquest_system.h"
-#include "../grades.h"
-#include "../item_container.h"
-#include "../latent_effect_container.h"
-#include "../linkshell.h"
-#include "../map.h"
-#include "../message.h"
-#include "../mob_modifier.h"
-#include "../recast_container.h"
-#include "../roe.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trait.h"
-#include "../treasure_pool.h"
-#include "../unitychat.h"
-#include "../universal_container.h"
-#include "../vana_time.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "alliance.h"
+#include "conquest_system.h"
+#include "grades.h"
+#include "item_container.h"
+#include "latent_effect_container.h"
+#include "linkshell.h"
+#include "map.h"
+#include "message.h"
+#include "mob_modifier.h"
+#include "recast_container.h"
+#include "roe.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trait.h"
+#include "treasure_pool.h"
+#include "unitychat.h"
+#include "universal_container.h"
+#include "weapon_skill.h"
 
-#include "../entities/automatonentity.h"
-#include "../entities/charentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/petentity.h"
+#include "entities/automatonentity.h"
+#include "entities/charentity.h"
+#include "entities/mobentity.h"
+#include "entities/petentity.h"
 
 #include "battleutils.h"
 #include "blueutils.h"
@@ -679,7 +679,7 @@ namespace charutils
             HP = sql->GetIntData(3);
             MP = sql->GetIntData(4);
 
-            PChar->profile.mhflag = (uint8)sql->GetIntData(5);
+            PChar->profile.mhflag = (uint16)sql->GetIntData(5);
             PChar->profile.title  = (uint16)sql->GetIntData(6);
 
             int8* bazaarMessage = sql->GetData(7);
@@ -1292,9 +1292,10 @@ namespace charutils
         if (PItem->isType(ITEM_CURRENCY))
         {
             UpdateItem(PChar, LocationID, 0, PItem->getQuantity());
-            delete PItem;
+            destroy(PItem);
             return 0;
         }
+
         if (PItem->getFlag() & ITEM_FLAG_RARE)
         {
             if (HasItem(PChar, PItem->getID()))
@@ -1303,7 +1304,7 @@ namespace charutils
                 {
                     PChar->pushPacket(new CMessageStandardPacket(PChar, PItem->getID(), 0, MsgStd::ItemEx));
                 }
-                delete PItem;
+                destroy(PItem);
                 return ERROR_SLOTID;
             }
         }
@@ -1339,7 +1340,7 @@ namespace charutils
             {
                 ShowError("charplugin::AddItem: Cannot insert item to database");
                 PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
-                delete PItem;
+                destroy(PItem);
                 return ERROR_SLOTID;
             }
             PChar->pushPacket(new CInventoryItemPacket(PItem, LocationID, SlotID));
@@ -1348,7 +1349,7 @@ namespace charutils
         else
         {
             ShowDebug("charplugin::AddItem: Location %i is full", LocationID);
-            delete PItem;
+            destroy(PItem);
         }
         return SlotID;
     }
@@ -1546,7 +1547,7 @@ namespace charutils
                     }
                 }
                 luautils::OnItemDrop(PChar, PItem);
-                delete PItem;
+                destroy(PItem);
             }
         }
         return ItemID;
@@ -6001,6 +6002,7 @@ namespace charutils
             if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)
             {
                 PChar->PParty->DisbandParty();
+                destroy(PChar->PParty);
             }
         }
     }

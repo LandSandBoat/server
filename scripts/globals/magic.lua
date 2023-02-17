@@ -987,31 +987,6 @@ function getElementalDamageReduction(target, element)
     return defense
 end
 
------------------------------------
---  Elemental Debuff Potency functions
------------------------------------
-
-function getElementalDebuffDOT(INT)
-    local DOT = 0
-    if INT <= 39 then
-        DOT = 1
-    elseif INT <= 69 then
-        DOT = 2
-    elseif INT <= 99 then
-        DOT = 3
-    elseif INT <= 149 then
-        DOT = 4
-    else
-        DOT = 5
-    end
-
-    return DOT
-end
-
-function getElementalDebuffStatDownFromDOT(dot)
-    return (dot - 1) * 2 + 5
-end
-
 function getHelixDuration(caster)
     --Dark Arts will further increase Helix duration, but testing is ongoing.
 

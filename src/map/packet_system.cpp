@@ -19,6 +19,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
+#include "common/async.h"
 #include "common/blowfish.h"
 #include "common/logging.h"
 #include "common/md52.h"
@@ -717,7 +718,23 @@ void SmallPacket0x016(map_session_data_t* const PSession, CCharEntity* const PCh
                 ShowWarning(fmt::format("Server missing npc_list.sql entry <{}> in zone <{} ({})>",
                                         PEntity->id, zoneutils::GetZone(PChar->getZone())->GetName(), PChar->getZone()));
             }
-            PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+
+            // Special case for onZoneIn cutscenes in Mog House
+            if (PChar->m_moghouseID &&
+                PEntity->status == STATUS_TYPE::DISAPPEAR &&
+                PEntity->loc.p.z == 1.5 &&
+                PEntity->look.face == 0x52)
+            {
+                // Using the same logic as in ZoneEntities::SpawnMoogle:
+                // Change the status of the entity, send the packet, change it back to disappear
+                PEntity->status = STATUS_TYPE::NORMAL;
+                PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+                PEntity->status = STATUS_TYPE::DISAPPEAR;
+            }
+            else
+            {
+                PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
+            }
         }
     }
 }
@@ -2444,7 +2461,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        delete PUBoxItem;
+                        destroy(PUBoxItem);
                     }
                 }
             }
@@ -2709,7 +2726,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     if (!commit || !sql->TransactionCommit())
                     {
-                        delete PItem;
+                        destroy(PItem);
 
                         sql->TransactionRollback();
                         ShowError("Could not find new item to add to delivery box. PlayerID: %d Box :%d Slot: %d", PChar->id, boxtype, slotID);
@@ -2750,7 +2767,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0x02));
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, deliverySlotID, received_items, 0x01));
                                 PChar->UContainer->SetItem(deliverySlotID, nullptr);
-                                delete PItem;
+                                destroy(PItem);
                             }
                         }
                     }
@@ -2822,7 +2839,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                                 {
                                     PChar->UContainer->SetItem(slotID, nullptr);
                                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
-                                    delete PItem;
+                                    destroy(PItem);
                                     commit = true;
                                 }
                             }
@@ -2906,7 +2923,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
                         PChar->pushPacket(new CInventoryFinishPacket());
                         PChar->UContainer->SetItem(slotID, nullptr);
-                        delete PItem;
+                        destroy(PItem);
                     }
                 }
 
@@ -2932,7 +2949,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->UContainer->SetItem(slotID, nullptr);
 
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, PChar->UContainer->GetItemsCount(), 1));
-                    delete PItem;
+                    destroy(PItem);
                 }
             }
             return;
@@ -3065,7 +3082,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     while (sql->NextRow() == SQL_SUCCESS)
                     {
-                        AuctionHistory_t ah;
+                        AuctionHistory_t ah{};
                         ah.itemid = (uint16)sql->GetIntData(0);
                         ah.price  = sql->GetUIntData(1);
                         ah.stack  = (uint8)sql->GetIntData(2);
@@ -3743,6 +3760,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
         if (zoneLineID == 1903324538)
         {
             uint16 destinationZone = PChar->getZone();
+
             // Note: zone zero actually exists but is unused in retail, we should stop using zero someday.
             // If zero, return to previous zone otherwise, determine the zone
             if (requestedZone != 0)
@@ -3766,27 +3784,36 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                         break;
                 }
 
-                // Handle case for mog garden (Above addition does not work for this zone.)
+                // Handle case for mog garden (Above addition does not work for this zone)
                 if (requestedZone == 127)
                 {
                     destinationZone = ZONE_MOG_GARDEN;
                 }
-                else if (requestedZone == 125) // Go to second floor
+                else if (requestedZone == 126) // Go to first floor from second
+                {
+                    destinationZone = PChar->getZone();
+                }
+                else if (requestedZone == 125) // Go to second floor from first
                 {
                     destinationZone = PChar->getZone();
                 }
             }
 
-            bool moghouseExitRegular = requestedZone == 0 && PChar->m_moghouseID > 0;
-
-            auto startingRegion            = zoneutils::GetCurrentRegion(startingZone);
-            auto destinationRegion         = zoneutils::GetCurrentRegion(destinationZone);
-            auto moghouseExitRegions       = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
-            auto moghouseQuestComplete     = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
-            bool moghouseExitQuestZoneline = moghouseQuestComplete && startingRegion == destinationRegion && PChar->m_moghouseID > 0 &&
-                                             std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
-                                                         [&destinationRegion](REGION_TYPE acceptedReg)
-                                                         { return destinationRegion == acceptedReg; });
+            bool moghouseExitRegular          = requestedZone == 0 && PChar->m_moghouseID > 0;
+            bool requestedMoghouseFloorChange = startingZone == destinationZone && requestedZone >= 125 && requestedZone <= 127;
+            bool moghouse2FUnlocked           = PChar->profile.mhflag & 0x20;
+            auto startingRegion               = zoneutils::GetCurrentRegion(startingZone);
+            auto destinationRegion            = zoneutils::GetCurrentRegion(destinationZone);
+            auto moghouseExitRegions          = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
+            auto moghouseSameRegion           = std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
+                                                            [&destinationRegion](REGION_TYPE acceptedReg)
+                                                            { return destinationRegion == acceptedReg; });
+            auto moghouseQuestComplete        = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
+            bool moghouseExitQuestZoneline    = moghouseQuestComplete &&
+                                             startingRegion == destinationRegion &&
+                                             PChar->m_moghouseID > 0 &&
+                                             moghouseSameRegion &&
+                                             !requestedMoghouseFloorChange;
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
 
@@ -3796,6 +3823,26 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
                 PChar->loc.p           = {};
+
+                // Clear Moghouse 2F tracker flag
+                PChar->profile.mhflag &= ~(0x40);
+            }
+            else if (requestedMoghouseFloorChange)
+            {
+                PChar->loc.destination = destinationZone;
+                PChar->loc.p           = {};
+
+                if (moghouse2FUnlocked)
+                {
+                    // Toggle Moghouse 2F tracker flag
+                    PChar->profile.mhflag ^= 0x40;
+                }
+                else
+                {
+                    PChar->status = STATUS_TYPE::NORMAL;
+                    ShowWarning("SmallPacket0x05E: Moghouse 2F requested without it being unlocked: %s", PChar->GetName());
+                    return;
+                }
             }
             else
             {
@@ -3853,6 +3900,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         ShowInfo("Zoning from zone %u to zone %u: %s", PChar->getZone(), PChar->loc.destination, PChar->GetName());
     }
+
     PChar->clearPacketList();
 
     if (PChar->loc.destination >= MAX_ZONEID)
@@ -5052,24 +5100,20 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                 {
-                    char escaped_speaker[16 * 2 + 1];
-                    sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                    std::string escaped_full_string;
-                    escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                    sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                    const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
-                    if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                    // clang-format off
+                    Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
                     {
-                        ShowError("packet_system::call: Failed to log inPrison MESSAGE_SAY.");
-                    }
+                        auto message = _sql->EscapeString(rawMessage);
+                        std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())",
+                            name.c_str(), message.c_str());
+                    });
+                    // clang-format on
                 }
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, MESSAGE_SAY, (const char*)data[6]));
             }
             else
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANT_BE_USED_IN_AREA));
             }
         }
         else
@@ -5080,41 +5124,35 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                     {
-                        char escaped_speaker[16 * 2 + 1];
-                        sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                        std::string escaped_full_string;
-                        escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                        sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                        const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
-                        if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                        // clang-format off
+                        Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
                         {
-                            ShowError("packet_system::call: Failed to log MESSAGE_SAY.");
-                        }
+                            auto message = _sql->EscapeString(rawMessage);
+                            std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())",
+                                name.c_str(), message.c_str());
+                        });
+                        // clang-format on
                     }
                     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, MESSAGE_SAY, (const char*)data[6]));
                 }
                 break;
                 case MESSAGE_EMOTION:
+                {
                     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, MESSAGE_EMOTION, (const char*)data[6]));
-                    break;
+                }
+                break;
                 case MESSAGE_SHOUT:
                 {
                     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SHOUT"))
                     {
-                        char escaped_speaker[16 * 2 + 1];
-                        sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                        std::string escaped_full_string;
-                        escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                        sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                        const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SHOUT','%s',current_timestamp())";
-                        if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                        // clang-format off
+                        Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
                         {
-                            ShowError("packet_system::call: Failed to log MESSAGE_SHOUT.");
-                        }
+                            auto message = _sql->EscapeString(rawMessage);
+                            std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','SHOUT','%s',current_timestamp())",
+                                name.c_str(), message.c_str());
+                        });
+                        // clang-format on
                     }
                     PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, MESSAGE_SHOUT, (const char*)data[6]));
                 }
@@ -5131,25 +5169,16 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
                         {
-                            char escaped_speaker[16 * 2 + 1];
-                            sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                            char DecodedName[DecodeStringLength];
-                            DecodeStringLinkshell(PChar->PLinkshell1->getName(), DecodedName);
-
-                            char escaped_ls[19 * 2 + 1];
-                            sql->EscapeString(escaped_ls, DecodedName);
-
-                            std::string escaped_full_string;
-                            escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                            sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                            const char* fmtQuery =
-                                "INSERT into audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())";
-                            if (sql->Query(fmtQuery, escaped_speaker, escaped_ls, escaped_full_string.data()) == SQL_ERROR)
+                            char decodedLinkshellName[DecodeStringLength];
+                            DecodeStringLinkshell(PChar->PLinkshell1->getName(), decodedLinkshellName);
+                            // clang-format off
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6], decodedLinkshellName](SqlConnection* _sql)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_LINKSHELL.");
-                            }
+                                auto message = _sql->EscapeString(rawMessage);
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())",
+                                    name.c_str(), decodedLinkshellName, message.c_str());
+                            });
+                            // clang-format on
                         }
                     }
                 }
@@ -5166,25 +5195,15 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
                         {
-                            char escaped_speaker[16 * 2 + 1];
-                            sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                            char DecodedName[DecodeStringLength];
-                            DecodeStringLinkshell(PChar->PLinkshell2->getName(), DecodedName);
-
-                            char escaped_ls[19 * 2 + 1];
-                            sql->EscapeString(escaped_ls, DecodedName);
-
-                            std::string escaped_full_string;
-                            escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                            sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                            const char* fmtQuery =
-                                "INSERT into audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())";
-                            if (sql->Query(fmtQuery, escaped_speaker, escaped_ls, escaped_full_string.data()) == SQL_ERROR)
+                            char decodedLinkshellName[DecodeStringLength];
+                            DecodeStringLinkshell(PChar->PLinkshell2->getName(), decodedLinkshellName);
+                            // clang-format off
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6], decodedLinkshellName](SqlConnection* _sql)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_LINKSHELL2.");
-                            }
+                                auto message = _sql->EscapeString(rawMessage);
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())",
+                                    name.c_str(), decodedLinkshellName, message.c_str());
+                            });
                         }
                     }
                 }
@@ -5200,18 +5219,14 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_PARTY"))
                         {
-                            char escaped_speaker[16 * 2 + 1];
-                            sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                            std::string escaped_full_string;
-                            escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                            sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                            const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','PARTY','%s',current_timestamp())";
-                            if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                            // clang-format off
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_PARTY.");
-                            }
+                                auto message = _sql->EscapeString(rawMessage);
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','PARTY','%s',current_timestamp())",
+                                    name.c_str(), message.c_str());
+                            });
+                            // clang-format on
                         }
                     }
                 }
@@ -5235,18 +5250,14 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_YELL"))
                         {
-                            char escaped_speaker[16 * 2 + 1];
-                            sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                            std::string escaped_full_string;
-                            escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                            sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                            const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','YELL','%s',current_timestamp())";
-                            if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                            // clang-format off
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
                             {
-                                ShowError("packet_system::call: Failed to log MESSAGE_YELL.");
-                            }
+                                auto message = _sql->EscapeString(rawMessage);
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','YELL','%s',current_timestamp())",
+                                    name.c_str(), message.c_str());
+                            });
+                            // clang-format on
                         }
                     }
                     else // You cannot use that command in this area.
@@ -5269,18 +5280,14 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
                         {
-                            char escaped_speaker[16 * 2 + 1];
-                            sql->EscapeString(escaped_speaker, PChar->GetName().c_str());
-
-                            std::string escaped_full_string;
-                            escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
-                            sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
-                            const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
-                            if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                            // clang-format off
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
                             {
-                                ShowError("packet_system::call: Failed to log inPrison MESSAGE_UNITY.");
-                            }
+                                auto message = _sql->EscapeString(rawMessage);
+                                std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','UNITY','%s',current_timestamp())",
+                                    name.c_str(), message.c_str());
+                            });
+                            // clang-format on
                         }
                     }
                 }
@@ -5321,7 +5328,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    int8 packetData[64];
+    int8 packetData[64]{};
     strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
     ref<uint32>(packetData, 0) = PChar->id;
 
@@ -5527,7 +5534,7 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
             LinkshellID = linkshell::RegisterNewLinkshell(DecodedName, LinkshellColor);
             if (LinkshellID != 0)
             {
-                delete PItemLinkshell;
+                destroy(PItemLinkshell);
                 PItemLinkshell = (CItemLinkshell*)itemutils::GetItem(513);
                 if (PItemLinkshell == nullptr)
                 {
@@ -5649,20 +5656,62 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Open/Close Mog House                                                 *
+ *  Mog House actions                                                    *
  *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x0CB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (data.ref<uint8>(0x04) == 1)
+
+    auto operation = data.ref<uint8>(0x04);
+    if (operation == 1)
     {
-        // open
+        // open mog house
     }
-    else if (data.ref<uint8>(0x04) == 2)
+    else if (operation == 2)
     {
-        // close
+        // close mog house
+    }
+    else if (operation == 5)
+    {
+        // remodel mog house
+        auto type = data.ref<uint8>(0x06); // Sandy: 103, Bastok: 104, Windy: 105, Patio: 106
+
+        if (type == 106 && !charutils::hasKeyItem(PChar, 3051))
+        {
+            ShowWarning(fmt::format("Player {} is trying to remodel to MH2F to Patio without owning the KI to unlock it.", PChar->GetName()));
+            return;
+        }
+
+        // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+        // 0x0100: ^ As above
+
+        // Extract original model and add 103 so it's in line with what comes in with the packet.
+        uint16 oldType = (uint8)(((PChar->profile.mhflag & 0x0100) + (PChar->profile.mhflag & 0x0080)) >> 7) + 103;
+
+        // Clear bits first
+        PChar->profile.mhflag &= ~(0x0080);
+        PChar->profile.mhflag &= ~(0x0100);
+
+        // Write new model bits
+        PChar->profile.mhflag |= ((type - 103) << 7);
+        charutils::SaveCharStats(PChar);
+
+        // TODO: Send message on successful remodel
+
+        // If the model changes AND you're on MH2F; force a rezone so the model change can take effect.
+        if (type != oldType && PChar->profile.mhflag & 0x0040)
+        {
+            auto zoneid = PChar->getZone();
+            auto ipp    = zoneutils::GetZoneIPP(zoneid);
+
+            PChar->loc.destination = zoneid;
+            PChar->status          = STATUS_TYPE::DISAPPEAR;
+
+            PChar->clearPacketList();
+            charutils::SendToZone(PChar, 2, ipp);
+        }
     }
     else
     {
@@ -6442,6 +6491,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint8 slotID      = data.ref<uint8>(0x06);
     uint8 containerID = data.ref<uint8>(0x07);
+    uint8 on2ndFloor  = data.ref<uint8>(0x08);
     uint8 col         = data.ref<uint8>(0x09);
     uint8 level       = data.ref<uint8>(0x0A);
     uint8 row         = data.ref<uint8>(0x0B);
@@ -6454,6 +6504,14 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
     CItemFurnishing* PItem = (CItemFurnishing*)PChar->getStorage(containerID)->GetItem(slotID);
 
+    // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
+    if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
+    {
+        ShowWarning(fmt::format("{} has tried to gardening pot {} ({}) on 2nd floor",
+                                PChar->GetName(), PItem->getID(), PItem->getName()));
+        return;
+    }
+
     if (PItem != nullptr && PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
     {
         if (PItem->getFlag() & ITEM_FLAG_WALLHANGING)
@@ -6463,6 +6521,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         bool wasInstalled = PItem->isInstalled();
         PItem->setInstalled(true);
+        PItem->setOn2ndFloor(on2ndFloor);
         PItem->setCol(col);
         PItem->setRow(row);
         PItem->setLevel(level);
@@ -6503,6 +6562,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             placedItems[i]->setOrder(placedItems[i]->getOrder() + 1);
         }
+
         // Set this item to being the most recently placed item
         PItem->setOrder(0);
 
@@ -6520,7 +6580,11 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (sql->Query(Query, extra, containerID, slotID, PChar->id) != SQL_ERROR && sql->AffectedRows() != 0 && !wasInstalled)
         {
-            PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
+            // Storage mods only apply on the 1st floor
+            if (!PItem->getOn2ndFloor())
+            {
+                PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
+            }
 
             PChar->pushPacket(new CInventorySizePacket(PChar));
 
@@ -6611,7 +6675,12 @@ void SmallPacket0x0FB(map_session_data_t* const PSession, CCharEntity* const PCh
                         charutils::MoveItem(PChar, LOC_STORAGE, SlotID, ERROR_SLOTID);
                     }
                 }
-                PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PItem->getStorage());
+
+                // Storage mods only apply on the 1st floor
+                if (!PItem->getOn2ndFloor())
+                {
+                    PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PItem->getStorage());
+                }
 
                 PChar->pushPacket(new CInventorySizePacket(PChar));
 
@@ -6658,6 +6727,13 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
     CItemFlowerpot* PPotItem          = (CItemFlowerpot*)PPotItemContainer->GetItem(potSlotID);
     if (PPotItem == nullptr)
     {
+        return;
+    }
+
+    if (!PPotItem->isGardeningPot())
+    {
+        ShowWarning(fmt::format("{} has tried to invalid gardening pot {} ({})",
+                                PChar->GetName(), PPotItem->getID(), PPotItem->getName()));
         return;
     }
 
@@ -6806,6 +6882,14 @@ void SmallPacket0x0FE(map_session_data_t* const PSession, CCharEntity* const PCh
     CItemFlowerpot* PItem          = (CItemFlowerpot*)PItemContainer->GetItem(slotID);
     if (PItem == nullptr)
     {
+        return;
+    }
+
+    // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
+    if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
+    {
+        ShowWarning(fmt::format("{} has tried to uproot gardening pot {} ({}) on 2nd floor",
+                                PChar->GetName(), PItem->getID(), PItem->getName()));
         return;
     }
 

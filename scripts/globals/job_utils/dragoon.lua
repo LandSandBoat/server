@@ -460,9 +460,13 @@ xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
 end
 
 xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
-    -- Reduce 99% of total accumulated enmity
-    if target:isMob() then
-        target:lowerEnmity(player, 99)
+    -- http://wiki.ffo.jp/html/3367.html
+    for _, mob in pairs(player:getNotorietyList()) do
+        -- TODO: testing shows max range on this is >50' but stops somewhere above this. Need exact number.
+        if mob:isMob() and mob:checkDistance(player) <= 75.0 then
+            mob:setCE(player, 1)
+            mob:setVE(player, 0)
+        end
     end
 
     ability:setMsg(xi.msg.basic.NONE)
@@ -480,6 +484,38 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern:isEngaged()
     then
         wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
+    end
+
+    -- Handle Spirit Surge -50% enmity reduction on super jump to closest party member behind the dragoon
+    if player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
+        local minDistance = 9999
+        local closestPartyMember = nil
+
+        -- Find the closest party member
+        local party = player:getPartyWithTrusts()
+        for _, member in pairs(party) do
+            local distance = member:checkDistance(player)
+            if
+                member:getID() ~= player:getID() and
+                not member:isDead() and
+                (distance < minDistance or closestPartyMember == nil)
+            then
+                closestPartyMember = member
+                minDistance = distance
+            end
+        end
+
+        -- TODO: verify conditions for how close the dragoon needs to be to the mob, if at all
+        -- It doesn't matter what direction the dragoon is facing http://wiki.ffo.jp/html/3367.html#comment_1
+        if
+            closestPartyMember and
+            closestPartyMember:isBehind(player) and
+            (player:checkDistance(target) < closestPartyMember:checkDistance(target)) -- Verify dragoon is closer than the party member that we want to reduce the enmity of
+        then
+            if target:isMob() then
+                target:lowerEnmity(closestPartyMember, 50)
+            end
+        end
     end
 end
 
@@ -567,7 +603,7 @@ xi.job_utils.dragoon.useSteadyWing = function(player, target, ability, action)
 
     -- https://www.bg-wiki.com/ffxi/Steady_Wing
     if wyvern then
-        local power = 1.3 * wyvern:getMaxHP() + wyvern:getHP()
+        local power = wyvern:getMaxHP() * 0.3 + wyvern:getMaxHP() - wyvern:getHP()
 
         action:reaction(wyvern:getID(), 0x10) -- Observed on retail
         if wyvern:addStatusEffect(xi.effect.STONESKIN, power, 0, 300) then
@@ -780,6 +816,7 @@ xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
         local maxHPDiff = member:getMaxHP() - member:getHP()
         if
             inBreathRange(member) and
+            not member:isDead() and
             (maxHPDiff > highestHPDiff and maxHPDiff > 0) -- Dont pick target if they have full HP
         then
             target = member

@@ -46,7 +46,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- TODO: Requires logic to ensure Alsha is killed by a player and not by herself.
 end
 

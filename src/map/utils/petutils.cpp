@@ -115,15 +115,6 @@ struct Pet_t
     int16 light_sdt;
     int16 dark_sdt;
 
-    int16 fire_meva;
-    int16 ice_meva;
-    int16 wind_meva;
-    int16 earth_meva;
-    int16 thunder_meva;
-    int16 water_meva;
-    int16 light_meva;
-    int16 dark_meva;
-
     int8 fire_res_rank;
     int8 ice_res_rank;
     int8 wind_res_rank;
@@ -186,15 +177,6 @@ struct Pet_t
         light_sdt   = 0;
         dark_sdt    = 0;
 
-        fire_meva    = 0;
-        ice_meva     = 0;
-        wind_meva    = 0;
-        earth_meva   = 0;
-        thunder_meva = 0;
-        water_meva   = 0;
-        light_meva   = 0;
-        dark_meva    = 0;
-
         fire_res_rank    = 0;
         ice_res_rank     = 0;
         wind_res_rank    = 0;
@@ -250,7 +232,6 @@ namespace petutils
                 hasSpellScript, spellList, \
                 slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
                 fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-                fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
                 fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
                 cmbDelay, name_prefix, mob_pools.skill_list_id \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
@@ -316,27 +297,18 @@ namespace petutils
                 Pet->dark_sdt    = (int16)sql->GetIntData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
-                Pet->fire_meva    = (int16)sql->GetIntData(40);
-                Pet->ice_meva     = (int16)sql->GetIntData(41);
-                Pet->wind_meva    = (int16)sql->GetIntData(42);
-                Pet->earth_meva   = (int16)sql->GetIntData(43);
-                Pet->thunder_meva = (int16)sql->GetIntData(44);
-                Pet->water_meva   = (int16)sql->GetIntData(45);
-                Pet->light_meva   = (int16)sql->GetIntData(46);
-                Pet->dark_meva    = (int16)sql->GetIntData(47);
+                Pet->fire_res_rank    = (int8)sql->GetIntData(40);
+                Pet->ice_res_rank     = (int8)sql->GetIntData(41);
+                Pet->wind_res_rank    = (int8)sql->GetIntData(42);
+                Pet->earth_res_rank   = (int8)sql->GetIntData(43);
+                Pet->thunder_res_rank = (int8)sql->GetIntData(44);
+                Pet->water_res_rank   = (int8)sql->GetIntData(45);
+                Pet->light_res_rank   = (int8)sql->GetIntData(46);
+                Pet->dark_res_rank    = (int8)sql->GetIntData(47);
 
-                Pet->fire_res_rank    = (int8)sql->GetIntData(48);
-                Pet->ice_res_rank     = (int8)sql->GetIntData(49);
-                Pet->wind_res_rank    = (int8)sql->GetIntData(50);
-                Pet->earth_res_rank   = (int8)sql->GetIntData(51);
-                Pet->thunder_res_rank = (int8)sql->GetIntData(52);
-                Pet->water_res_rank   = (int8)sql->GetIntData(53);
-                Pet->light_res_rank   = (int8)sql->GetIntData(54);
-                Pet->dark_res_rank    = (int8)sql->GetIntData(55);
-
-                Pet->cmbDelay       = (uint16)sql->GetIntData(56);
-                Pet->name_prefix    = (uint8)sql->GetUIntData(57);
-                Pet->m_MobSkillList = (uint16)sql->GetUIntData(58);
+                Pet->cmbDelay       = (uint16)sql->GetIntData(48);
+                Pet->name_prefix    = (uint8)sql->GetUIntData(49);
+                Pet->m_MobSkillList = (uint16)sql->GetUIntData(50);
 
                 g_PPetList.push_back(Pet);
             }
@@ -353,7 +325,7 @@ namespace petutils
     {
         while (!g_PPetList.empty())
         {
-            delete *g_PPetList.begin();
+            destroy(*g_PPetList.begin());
             g_PPetList.erase(g_PPetList.begin());
         }
     }
@@ -1153,7 +1125,7 @@ namespace petutils
         FinalizePetStatistics(PMaster, PPet);
     }
 
-    void CalculateLoupanStats(CBattleEntity* PMaster, CPetEntity* PPet)
+    void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         PPet->SetMLevel(PMaster->GetMLevel());
         PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
@@ -1354,24 +1326,14 @@ namespace petutils
             PPet->setModifier(Mod::LIGHT_SDT, petData->light_sdt);
             PPet->setModifier(Mod::DARK_SDT, petData->dark_sdt);
 
-            PPet->setModifier(Mod::FIRE_MEVA, petData->fire_meva); // These are stored as signed integers which
-            PPet->setModifier(Mod::ICE_MEVA, petData->ice_meva);   // is directly the modifier starting value.
-            PPet->setModifier(Mod::WIND_MEVA, petData->wind_meva); // Positives signify increased resist chance.
-            PPet->setModifier(Mod::EARTH_MEVA, petData->earth_meva);
-            PPet->setModifier(Mod::THUNDER_MEVA, petData->thunder_meva);
-            PPet->setModifier(Mod::WATER_MEVA, petData->water_meva);
-            PPet->setModifier(Mod::LIGHT_MEVA, petData->light_meva);
-            PPet->setModifier(Mod::DARK_MEVA, petData->dark_meva);
-            /* Todo
-            fire_res_rank
-            ice_res_rank
-            wind_res_rank
-            earth_res_rank
-            thunder_res_rank
-            water_res_rank
-            light_res_rank
-            dark_res_rank
-            */
+            PPet->setModifier(Mod::FIRE_RES_RANK, petData->fire_res_rank);
+            PPet->setModifier(Mod::ICE_RES_RANK, petData->ice_res_rank);
+            PPet->setModifier(Mod::WIND_RES_RANK, petData->wind_res_rank);
+            PPet->setModifier(Mod::EARTH_RES_RANK, petData->earth_res_rank);
+            PPet->setModifier(Mod::THUNDER_RES_RANK, petData->thunder_res_rank);
+            PPet->setModifier(Mod::WATER_RES_RANK, petData->water_res_rank);
+            PPet->setModifier(Mod::LIGHT_RES_RANK, petData->light_res_rank);
+            PPet->setModifier(Mod::DARK_RES_RANK, petData->dark_res_rank);
         }
     }
 
@@ -1880,7 +1842,7 @@ namespace petutils
         }
         else if (PPet->getPetType() == PET_TYPE::LUOPAN && PMaster->objtype == TYPE_PC)
         {
-            CalculateLoupanStats(PMaster, PPet);
+            CalculateLuopanStats(PMaster, PPet);
         }
 
         PPet->setSpawnLevel(PPet->GetMLevel());

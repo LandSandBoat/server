@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS `char_equip_saved` (
     `ring2` smallint(5) unsigned NOT NULL DEFAULT '0',
     `back` smallint(5) unsigned NOT NULL DEFAULT '0',
     PRIMARY KEY (`charid`, `jobid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=20;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=20;

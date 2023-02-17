@@ -46,6 +46,7 @@ SqlConnection::SqlConnection()
 
 SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
 : m_LatencyWarning(false)
+, m_ThreadId(std::this_thread::get_id())
 {
     TracyZoneScoped;
 
@@ -90,7 +91,7 @@ SqlConnection::~SqlConnection()
     {
         mysql_close(&self->handle);
         FreeResult();
-        delete self;
+        destroy(self);
     }
 }
 
@@ -113,7 +114,6 @@ std::string SqlConnection::GetServerVersion()
 
 int32 SqlConnection::GetTimeout(uint32* out_timeout)
 {
-    TracyZoneScoped;
     if (out_timeout && SQL_SUCCESS == Query("SHOW VARIABLES LIKE 'wait_timeout'"))
     {
         char*  data;
@@ -133,7 +133,6 @@ int32 SqlConnection::GetTimeout(uint32* out_timeout)
 
 int32 SqlConnection::GetColumnNames(const char* table, char* out_buf, size_t buf_len, char sep)
 {
-    TracyZoneScoped;
     char*  data;
     size_t len;
     size_t off = 0;
@@ -164,7 +163,6 @@ int32 SqlConnection::GetColumnNames(const char* table, char* out_buf, size_t buf
 
 int32 SqlConnection::SetEncoding(const char* encoding)
 {
-    TracyZoneScoped;
     if (mysql_set_character_set(&self->handle, encoding) == 0)
     {
         return SQL_SUCCESS;
@@ -193,6 +191,35 @@ void SqlConnection::SetupKeepalive()
     // 30-second reserve
     uint8 reserve  = 30;
     m_PingInterval = timeout + reserve;
+}
+
+void SqlConnection::CheckCharset()
+{
+    // Check that the SQL charset is what we require
+    auto ret = QueryStr("SELECT @@character_set_database, @@collation_database;");
+    if (ret != SQL_ERROR && NumRows())
+    {
+        bool foundError = false;
+        while (NextRow() == SQL_SUCCESS)
+        {
+            auto charsetSetting   = GetStringData(0);
+            auto collationSetting = GetStringData(1);
+            if (!starts_with(charsetSetting, "utf8") || !starts_with(collationSetting, "utf8"))
+            {
+                foundError = true;
+                // clang-format off
+                ShowWarning(fmt::format("Unexpected character_set or collation setting in database: {}: {}. Expected utf8*.",
+                    charsetSetting, collationSetting).c_str());
+                // clang-format on
+            }
+        }
+
+        if (foundError)
+        {
+            ShowWarning("Non utf8 charset can result in data reads and writes being corrupted!");
+            ShowWarning("Non utf8 collation can be indicative that the database was not set up per required specifications.");
+        }
+    }
 }
 
 int32 SqlConnection::TryPing()
@@ -250,10 +277,25 @@ size_t SqlConnection::EscapeString(char* out_to, const char* from)
     return EscapeStringLen(out_to, from, strlen(from));
 }
 
+std::string SqlConnection::EscapeString(std::string const& input)
+{
+    TracyZoneScoped;
+    std::string escaped_full_string;
+    escaped_full_string.reserve(input.size() * 2 + 1);
+    EscapeString(escaped_full_string.data(), input.data());
+    return escaped_full_string;
+}
+
 int32 SqlConnection::QueryStr(const char* query)
 {
     TracyZoneScoped;
     TracyZoneCString(query);
+
+    auto currentThreadId = std::this_thread::get_id();
+    if (currentThreadId != m_ThreadId)
+    {
+        ShowError("SqlConnection::Query called on thread that doesn't own it. SqlConnection is not thread-safe!");
+    }
 
     DebugSQL(query);
 
@@ -268,7 +310,6 @@ int32 SqlConnection::QueryStr(const char* query)
     auto startTime = hires_clock::now();
 
     {
-        TracyZoneNamed(mysql_real_query_);
         self->buf += query;
         if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
         {
@@ -279,7 +320,6 @@ int32 SqlConnection::QueryStr(const char* query)
     }
 
     {
-        TracyZoneNamed(mysql_store_result_);
         self->result = mysql_store_result(&self->handle);
         if (mysql_errno(&self->handle) != 0)
         {
@@ -308,7 +348,6 @@ int32 SqlConnection::QueryStr(const char* query)
 
 uint64 SqlConnection::AffectedRows()
 {
-    TracyZoneScoped;
     if (self)
     {
         return (uint64)mysql_affected_rows(&self->handle);
@@ -318,7 +357,6 @@ uint64 SqlConnection::AffectedRows()
 
 uint64 SqlConnection::LastInsertId()
 {
-    TracyZoneScoped;
     if (self)
     {
         return (uint64)mysql_insert_id(&self->handle);
@@ -328,7 +366,6 @@ uint64 SqlConnection::LastInsertId()
 
 uint32 SqlConnection::NumColumns()
 {
-    TracyZoneScoped;
     if (self && self->result)
     {
         return mysql_num_fields(self->result);
@@ -338,7 +375,6 @@ uint32 SqlConnection::NumColumns()
 
 uint64 SqlConnection::NumRows()
 {
-    TracyZoneScoped;
     if (self && self->result)
     {
         return mysql_num_rows(self->result);
@@ -348,7 +384,6 @@ uint64 SqlConnection::NumRows()
 
 int32 SqlConnection::NextRow()
 {
-    TracyZoneScoped;
     if (self && self->result)
     {
         self->row = mysql_fetch_row(self->result);
@@ -370,7 +405,6 @@ int32 SqlConnection::NextRow()
 
 int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -404,7 +438,6 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 
 int8* SqlConnection::GetData(size_t col)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -419,7 +452,6 @@ int8* SqlConnection::GetData(size_t col)
 
 int32 SqlConnection::GetIntData(size_t col)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -434,7 +466,6 @@ int32 SqlConnection::GetIntData(size_t col)
 
 uint32 SqlConnection::GetUIntData(size_t col)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -449,7 +480,6 @@ uint32 SqlConnection::GetUIntData(size_t col)
 
 uint64 SqlConnection::GetUInt64Data(size_t col)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -464,7 +494,6 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
 
 float SqlConnection::GetFloatData(size_t col)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -479,7 +508,6 @@ float SqlConnection::GetFloatData(size_t col)
 
 std::string SqlConnection::GetStringData(size_t col)
 {
-    TracyZoneScoped;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -494,7 +522,6 @@ std::string SqlConnection::GetStringData(size_t col)
 
 void SqlConnection::FreeResult()
 {
-    TracyZoneScoped;
     if (self && self->result)
     {
         mysql_free_result(self->result);

@@ -81,10 +81,27 @@ CPMAddPackage(
 ) # defines: RecastNavigation::Recast, RecastNavigation::Detour
 
 CPMAddPackage(
+    NAME fast_obj
+    GITHUB_REPOSITORY thisistherk/fast_obj
+    GIT_TAG 85778da5fc320b7e52885f8e869edc079695cc79
+) # defines: fast_obj
+
+CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
     GIT_TAG f901d9edb47d45a287ca44d5bab48540c1fcdcce
 ) # defines: argparse
+
+CPMAddPackage(
+    NAME task_system
+    GITHUB_REPOSITORY p-ranav/task_system
+    GIT_TAG 241acb039152b646589fcbbcfb4d8d8e5bddc815
+) # defines: task_system
+
+if(task_system_ADDED)
+    add_library(task_system INTERFACE)
+    target_include_directories(task_system SYSTEM INTERFACE ${task_system_SOURCE_DIR}/include/task_system/)
+endif()
 
 CPMAddPackage(
     NAME efsw
@@ -123,8 +140,10 @@ set(EXTERNAL_LIBS
     mariadbclient
     RecastNavigation::Recast
     RecastNavigation::Detour
+    fast_obj
     sol2_single
     argparse
+    task_system
     efsw
     jthread-lite
     httplib::httplib

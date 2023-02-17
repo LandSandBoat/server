@@ -2,7 +2,6 @@
 -- Common Requires
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/conquest")
 require("scripts/globals/zone")
 
 -----------------------------------
@@ -15,48 +14,51 @@ local behemothDomID   = require("scripts/zones/Behemoths_Dominion/IDs")
 -----------------------------------
 -- Module definition
 -----------------------------------
+-- This module attempts to replicate old Land King pop system in an era-accurate way.
+-- It comes along a ToD perpetuation/retainment system, for server crashes, since this NMs were usually contested by endgame LSs.
 local hnmSystem = Module:new("era_HNM_System")
 
--- NOTE: This module attempts to replicate old Land King pop system in an era-accurate way.
--- It comes along a ToD perpetuation/retainment system, for server crashes, since this NMs were usually contested by endgame LSs.
+-----------------------------------
+-- Module enable/disable
+-----------------------------------
 -- Do not use along custom_HNM_System module. Choose one or the other.
+hnmSystem:setEnabled(false)
 
 ----------------------------------------------------------------------------------------------------
 -- Dragon's Aery: Fafnir, Nidhogg
 ----------------------------------------------------------------------------------------------------
-
 hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
+    super(zone)
+
     local hnmPopTime   = GetServerVariable("[HNM]Fafnir")   -- Time the NM will spawn at.
     local hnmKillCount = GetServerVariable("[HNM]Fafnir_C") -- Number of times NQ King has been slain in a row.
+    local currentTime  = os.time()
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = os.time() + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.random(1, 48) * 1800
 
         SetServerVariable("[HNM]Fafnir", hnmPopTime) -- Save pop time.
     end
 
-    -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
-        UpdateNMSpawnPoint(dragonsAeryID.mob.NIDHOGG)
+    -- Calculate monster to pop.
+    local monster = dragonsAeryID.mob.FAFNIR
 
-        -- Spawn mob or set spawn time.
-        if hnmPopTime <= os.time() then
-            SpawnMob(dragonsAeryID.mob.NIDHOGG)
-        else
-            GetMobByID(dragonsAeryID.mob.NIDHOGG):setRespawnTime(hnmPopTime - os.time())
-        end
+    if
+        hnmKillCount > 3 and
+        (math.random(1, 5) == 3 or hnmKillCount > 6)
+    then
+        monster = dragonsAeryID.mob.NIDHOGG
+    end
 
-    -- NQ King.
+    -- Update mob spawn position.
+    UpdateNMSpawnPoint(monster)
+
+    -- Spawn mob or set spawn time.
+    if hnmPopTime <= currentTime then
+        SpawnMob(monster)
     else
-        UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
-
-        -- Spawn mob or set spawn time.
-        if hnmPopTime <= os.time() then
-            SpawnMob(dragonsAeryID.mob.FAFNIR)
-        else
-            GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(hnmPopTime - os.time())
-        end
+        GetMobByID(monster):setRespawnTime(hnmPopTime - currentTime)
     end
 
     -- Hide ??? NPC.
@@ -64,6 +66,8 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function(mob)
+    super(mob)
+
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
     local hnmKillCount  = GetServerVariable("[HNM]Fafnir_C") + 1
@@ -71,72 +75,69 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function
     SetServerVariable("[HNM]Fafnir", os.time() + randomPopTime) -- Save next pop time.
     SetServerVariable("[HNM]Fafnir_C", hnmKillCount)            -- Save kill count.
 
-    -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
-        UpdateNMSpawnPoint(dragonsAeryID.mob.NIDHOGG)
+    -- Mob setup.
+    local monster = dragonsAeryID.mob.FAFNIR
 
-        -- Set spawn time.
-        GetMobByID(dragonsAeryID.mob.NIDHOGG):setRespawnTime(randomPopTime)
-
-    -- NQ King.
-    else
-        UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
-
-        -- Set spawn time.
-        GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(randomPopTime)
+    if
+        hnmKillCount > 3 and
+        (math.random(1, 5) == 3 or hnmKillCount > 6)
+    then
+        monster = dragonsAeryID.mob.NIDHOGG
     end
+
+    UpdateNMSpawnPoint(monster)
+    GetMobByID(monster):setRespawnTime(randomPopTime)
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Nidhogg.onMobDespawn", function(mob)
+    super(mob)
+
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
     SetServerVariable("[HNM]Fafnir", os.time() + randomPopTime) -- Save next pop time.
     SetServerVariable("[HNM]Fafnir_C", 0)                       -- Save kill count.
 
-    -- Setup NQ King.
+    -- Mob setup.
     UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
-
-    -- Set spawn time.
     GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(randomPopTime)
 end)
 
 ----------------------------------------------------------------------------------------------------
 -- Valley of Sorrows: Adamantoise, Aspidochelone
 ----------------------------------------------------------------------------------------------------
-
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(zone)
+    super(zone)
+
     local hnmPopTime   = GetServerVariable("[HNM]Adamantoise")   -- Time the NM will spawn at.
     local hnmKillCount = GetServerVariable("[HNM]Adamantoise_C") -- Number of times NQ King has been slain in a row.
+    local currentTime  = os.time()
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = os.time() + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.random(1, 48) * 1800
 
         SetServerVariable("[HNM]Adamantoise", hnmPopTime) -- Save pop time.
     end
 
-    -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
-        UpdateNMSpawnPoint(valleySorrowsID.mob.ASPIDOCHELONE)
+    -- Calculate monster to pop.
+    local monster = valleySorrowsID.mob.ADAMANTOISE
 
-        -- Spawn mob or set spawn time.
-        if hnmPopTime <= os.time() then
-            SpawnMob(valleySorrowsID.mob.ASPIDOCHELONE)
-        else
-            GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):setRespawnTime(hnmPopTime - os.time())
-        end
+    if
+        hnmKillCount > 3 and
+        (math.random(1, 5) == 3 or hnmKillCount > 6)
+    then
+        monster = valleySorrowsID.mob.ASPIDOCHELONE
+    end
 
-    -- NQ King.
+    -- Update mob spawn position.
+    UpdateNMSpawnPoint(monster)
+
+    -- Spawn mob or set spawn time.
+    if hnmPopTime <= currentTime then
+        SpawnMob(monster)
     else
-        UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
-
-        -- Spawn mob or set spawn time.
-        if hnmPopTime <= os.time() then
-            SpawnMob(valleySorrowsID.mob.ADAMANTOISE)
-        else
-            GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(hnmPopTime - os.time())
-        end
+        GetMobByID(monster):setRespawnTime(hnmPopTime - currentTime)
     end
 
     -- Hide ??? NPC.
@@ -144,6 +145,8 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
 end)
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn", function(mob)
+    super(mob)
+
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
     local hnmKillCount  = GetServerVariable("[HNM]Adamantoise_C") + 1
@@ -151,72 +154,69 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn"
     SetServerVariable("[HNM]Adamantoise", os.time() + randomPopTime) -- Save next pop time.
     SetServerVariable("[HNM]Adamantoise_C", hnmKillCount)            -- Save kill count.
 
-    -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
-        UpdateNMSpawnPoint(valleySorrowsID.mob.ASPIDOCHELONE)
+    -- Mob setup.
+    local monster = valleySorrowsID.mob.ADAMANTOISE
 
-        -- Set spawn time.
-        GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):setRespawnTime(randomPopTime)
-
-    -- NQ King.
-    else
-        UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
-
-        -- Set spawn time.
-        GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(randomPopTime)
+    if
+        hnmKillCount > 3 and
+        (math.random(1, 5) == 3 or hnmKillCount > 6)
+    then
+        monster = valleySorrowsID.mob.ASPIDOCHELONE
     end
+
+    UpdateNMSpawnPoint(monster)
+    GetMobByID(monster):setRespawnTime(randomPopTime)
 end)
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Aspidochelone.onMobDespawn", function(mob)
+    super(mob)
+
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
     SetServerVariable("[HNM]Adamantoise", os.time() + randomPopTime) -- Save next pop time.
     SetServerVariable("[HNM]Adamantoise_C", 0)                       -- Save kill count.
 
-    -- Setup NQ King.
+    -- Mob setup.
     UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
-
-    -- Set spawn time.
     GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(randomPopTime)
 end)
 
 ----------------------------------------------------------------------------------------------------
 -- Behemoth's Dominion: Behemoth, King Behemoth
 ----------------------------------------------------------------------------------------------------
-
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(zone)
+    super(zone)
+
     local hnmPopTime   = GetServerVariable("[HNM]Behemoth")   -- Time the NM will spawn at.
     local hnmKillCount = GetServerVariable("[HNM]Behemoth_C") -- Number of times NQ King has been slain in a row.
+    local currentTime  = os.time()
 
     -- First-time setup.
     if hnmPopTime == 0 then
-        hnmPopTime = os.time() + math.random(1, 48) * 1800
+        hnmPopTime = currentTime + math.random(1, 48) * 1800
 
         SetServerVariable("[HNM]Behemoth", hnmPopTime) -- Save pop time.
     end
 
-    -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
-        UpdateNMSpawnPoint(behemothDomID.mob.KING_BEHEMOTH)
+    -- Calculate monster to pop.
+    local monster = behemothDomID.mob.BEHEMOTH
 
-        -- Spawn mob or set spawn time.
-        if hnmPopTime <= os.time() then
-            SpawnMob(behemothDomID.mob.KING_BEHEMOTH)
-        else
-            GetMobByID(behemothDomID.mob.KING_BEHEMOTH):setRespawnTime(hnmPopTime - os.time())
-        end
+    if
+        hnmKillCount > 3 and
+        (math.random(1, 5) == 3 or hnmKillCount > 6)
+    then
+        monster = behemothDomID.mob.KING_BEHEMOTH
+    end
 
-    -- NQ King.
+    -- Update mob spawn position.
+    UpdateNMSpawnPoint(monster)
+
+    -- Spawn mob or set spawn time.
+    if hnmPopTime <= currentTime then
+        SpawnMob(monster)
     else
-        UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
-
-        -- Spawn mob or set spawn time.
-        if hnmPopTime <= os.time() then
-            SpawnMob(behemothDomID.mob.BEHEMOTH)
-        else
-            GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(hnmPopTime - os.time())
-        end
+        GetMobByID(monster):setRespawnTime(hnmPopTime - currentTime)
     end
 
     -- Hide ??? NPC.
@@ -224,6 +224,8 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", function(mob)
+    super(mob)
+
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
     local hnmKillCount  = GetServerVariable("[HNM]Behemoth_C") + 1
@@ -231,33 +233,31 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", 
     SetServerVariable("[HNM]Behemoth", os.time() + randomPopTime) -- Save next pop time.
     SetServerVariable("[HNM]Behemoth_C", hnmKillCount)            -- Save kill count.
 
-    -- HQ King.
-    if hnmKillCount > 3 and (math.random(1, 5) == 3 or hnmKillCount > 6) then
-        UpdateNMSpawnPoint(behemothDomID.mob.KING_BEHEMOTH)
+    -- Mob setup.
+    local monster = behemothDomID.mob.BEHEMOTH
 
-        -- Set spawn time.
-        GetMobByID(behemothDomID.mob.KING_BEHEMOTH):setRespawnTime(randomPopTime)
-
-    -- NQ King.
-    else
-        UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
-
-        -- Set spawn time.
-        GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
+    if
+        hnmKillCount > 3 and
+        (math.random(1, 5) == 3 or hnmKillCount > 6)
+    then
+        monster = behemothDomID.mob.KING_BEHEMOTH
     end
+
+    UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
+    GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobDespawn", function(mob)
+    super(mob)
+
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
     SetServerVariable("[HNM]Behemoth", os.time() + randomPopTime) -- Save next pop time.
     SetServerVariable("[HNM]Behemoth_C", 0)                       -- Save kill count.
 
-    -- Setup NQ King.
+    -- Mob setup.
     UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
-
-    -- Set spawn time.
     GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(randomPopTime)
 end)
 

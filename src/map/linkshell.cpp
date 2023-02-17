@@ -189,7 +189,8 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                     newShellItem->setSubType(ITEM_LOCKED);
                     uint8 LocationID = PItemLinkshell->getLocationID();
                     uint8 SlotID     = PItemLinkshell->getSlotID();
-                    delete PItemLinkshell;
+                    destroy(PItemLinkshell);
+
                     PItemLinkshell = newShellItem;
                     char extra[sizeof(PItemLinkshell->m_extra) * 2 + 1];
                     sql->EscapeStringLen(extra, (const char*)PItemLinkshell->m_extra, sizeof(PItemLinkshell->m_extra));
@@ -342,7 +343,7 @@ void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
             member->pushPacket(newPacket);
         }
     }
-    delete packet;
+    destroy(packet);
 }
 
 void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, bool ls1)

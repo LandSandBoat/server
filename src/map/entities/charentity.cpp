@@ -264,21 +264,23 @@ CCharEntity::~CCharEntity()
         PTreasurePool->DelMember(this);
     }
 
-    delete TradeContainer;
-    delete Container;
-    delete UContainer;
-    delete CraftContainer;
-    delete PMeritPoints;
-    delete PJobPoints;
+    destroy(TradeContainer);
+    destroy(Container);
+    destroy(UContainer);
+    destroy(CraftContainer);
+    destroy(PMeritPoints);
+    destroy(PJobPoints);
+
     PGuildShop = nullptr;
-    delete eventPreparation;
-    delete currentEvent;
+
+    destroy(eventPreparation);
+    destroy(currentEvent);
 
     while (!eventQueue.empty())
     {
         auto head = eventQueue.front();
         eventQueue.pop_front();
-        delete head;
+        destroy(head);
     }
 }
 
@@ -296,7 +298,8 @@ void CCharEntity::clearPacketList()
 {
     while (!PacketList.empty())
     {
-        delete popPacket();
+        auto* packet = popPacket();
+        destroy(packet);
     }
 }
 
@@ -313,7 +316,7 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
         if (PendingPositionPacket)
         {
             PendingPositionPacket->copy(packet);
-            delete packet;
+            destroy(packet);
         }
         else
         {
@@ -404,7 +407,8 @@ void CCharEntity::erasePackets(uint8 num)
 {
     for (auto i = 0; i < num; i++)
     {
-        delete popPacket();
+        auto* packet = popPacket();
+        destroy(packet);
     }
 }
 
@@ -2244,6 +2248,7 @@ bool CCharEntity::hasMoghancement(uint16 moghancementID) const
 void CCharEntity::UpdateMoghancement()
 {
     TracyZoneScoped;
+
     // Add up all of the installed furniture auras
     std::array<uint16, 8> elements = { 0 };
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
@@ -2255,7 +2260,7 @@ void CCharEntity::UpdateMoghancement()
             if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
             {
                 CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
-                if (PFurniture->isInstalled())
+                if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor())
                 {
                     elements[PFurniture->getElement() - 1] += PFurniture->getAura();
                 }
@@ -2298,7 +2303,7 @@ void CCharEntity::UpdateMoghancement()
                 {
                     CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                     // If aura is tied then use whichever furniture was placed most recently
-                    if (PFurniture->isInstalled() && PFurniture->getElement() == dominantElement &&
+                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement &&
                         (PFurniture->getAura() > bestAura || (PFurniture->getAura() == bestAura && PFurniture->getOrder() < bestOrder)))
                     {
                         bestAura          = PFurniture->getAura();
@@ -2653,7 +2658,7 @@ void CCharEntity::tryStartNextEvent()
     EventInfo* oldEvent = currentEvent;
     currentEvent        = eventQueue.front();
     eventQueue.pop_front();
-    delete oldEvent;
+    destroy(oldEvent);
 
     eventPreparation->reset();
 

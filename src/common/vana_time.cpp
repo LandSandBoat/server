@@ -19,11 +19,10 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
+#include "common/logging.h"
 
 #include <ctime>
 
-#include "utils/zoneutils.h"
 #include "vana_time.h"
 
 CVanaTime* CVanaTime::_instance = nullptr;
@@ -46,8 +45,7 @@ void CVanaTime::delInstance()
 {
     if (_instance)
     {
-        delete _instance;
-        _instance = nullptr;
+        destroy(_instance);
     }
 }
 

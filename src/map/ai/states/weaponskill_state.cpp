@@ -20,13 +20,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "weaponskill_state.h"
-#include "../../entities/battleentity.h"
-#include "../../packets/action.h"
-#include "../../roe.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../weapon_skill.h"
-#include "../ai_container.h"
+
+#include "ai/ai_container.h"
+#include "entities/battleentity.h"
+#include "packets/action.h"
+#include "roe.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "weapon_skill.h"
 
 CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
@@ -45,10 +46,12 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
     {
         throw CStateInitException(std::move(m_errorMsg));
     }
-    if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))
+
+    if (!m_PEntity->CanSeeTarget(PTarget, false))
     {
         throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION));
     }
+
     m_PSkill = std::make_unique<CWeaponSkill>(*skill);
 
     action_t action;

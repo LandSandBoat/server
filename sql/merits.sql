@@ -12,7 +12,7 @@ CREATE TABLE `merits` (
   `upgradeid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `catagoryid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`meritid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `merits`
@@ -219,7 +219,7 @@ INSERT INTO `merits` VALUES (2252,'anc_magic_attack_bonus',5,3,8,7,34);
 INSERT INTO `merits` VALUES (2254,'anc_magic_burst_dmg',5,3,8,7,34);
 INSERT INTO `merits` VALUES (2256,'ele_magic_acc',5,5,8,7,34);
 INSERT INTO `merits` VALUES (2258,'ele_magic_debuff_duration',5,12,8,7,34);
-INSERT INTO `merits` VALUES (2260,'ele_magic_debuff_effect',5,2,8,7,34);
+INSERT INTO `merits` VALUES (2260,'ele_magic_debuff_effect',5,1,8,7,34);
 INSERT INTO `merits` VALUES (2262,'aspir_absorption_amount',5,4,8,7,34);
 INSERT INTO `merits` VALUES (2304,'dia_iii',5,30,16,7,35);
 INSERT INTO `merits` VALUES (2306,'slow_ii',5,1,16,7,35);

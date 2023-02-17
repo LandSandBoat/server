@@ -19,4 +19,4 @@ CREATE TABLE `char_unlocks` (
   `waypoints` blob DEFAULT 0,
   `claimed_deeds` blob DEFAULT NULL,
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
