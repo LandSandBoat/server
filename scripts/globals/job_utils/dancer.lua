@@ -57,7 +57,7 @@ local function setFinishingMoves(player, numMoves)
     numMoves              = math.min(numMoves, getMaxFinishingMoves(player))
 
     if finishingEffect then
-        if numMoves == 0 then
+        if numMoves <= 0 then
             player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
         else
             finishingEffect:setPower(numMoves)
@@ -369,27 +369,18 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
 end
 
 xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
-        player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
-        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 1, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
-        player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
-        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 2, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
-        player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
-        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
-        player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
-        player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
-        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
-        player:delStatusEffect(xi.effect.FINISHING_MOVE_5)
-        player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
-        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
-    end
+    local flourishMerits = player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT)
+    local availableMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
+    local power = utils.clamp(availableMoves, 0, 3)
+
+    player:addStatusEffect(xi.effect.BUILDING_FLOURISH, power, 0, 60, 0, flourishMerits)
+    setFinishingMoves(player, availableMoves - 3)
 end
 
 xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, action)
+    local numMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+
     if
         not target:hasStatusEffect(xi.effect.CHAINBOUND, 0) and
         not target:hasStatusEffect(xi.effect.SKILLCHAIN, 0)
@@ -401,6 +392,7 @@ xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, a
 
     action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
     action:speceffect(target:getID(), 1)
+    setFinishingMoves(player, numMoves - 2)
 
     return 0
 end

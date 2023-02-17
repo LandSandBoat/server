@@ -553,8 +553,8 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         local nativecrit = 0
         critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
-        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
-            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower() / 2) / 100
+        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() >= 3 then  -- 3 Finishing Moves used.
+            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()) / 100
         end
 
         local fencerBonusVal = calcParams.fencerBonus or 0
@@ -1032,17 +1032,17 @@ function getMeleeDmg(attacker, weaponType, kick)
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
-    local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
+        attacker:addMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
     end
 
     local acc = attacker:getACC()
     local eva = target:getEVA()
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
+        attacker:delMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
     end
 
     if bonus == nil then
@@ -1130,10 +1130,10 @@ end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
-    local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+        attacker:addMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
     local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
@@ -1141,8 +1141,8 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
 
     cratio = utils.clamp(cratio, 0, 2.25)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+        attacker:delMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
     local levelCorrection = 0
