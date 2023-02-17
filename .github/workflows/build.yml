@@ -270,9 +270,7 @@ jobs:
         shell: cmd
         run: |
           pwd
-          mkdir -p modules\catseyexi\cpp
           move modules\custom\cpp\*.* modules\catseyexi\cpp\
-          mkdir -p build
           cmake -S . -B build -A Win32
       - name: Build
         shell: cmd
