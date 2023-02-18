@@ -2303,23 +2303,58 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 boxtype = data.ref<uint8>(0x05);
     uint8 slotID  = data.ref<uint8>(0x06);
 
-    ShowInfo("DeliveryBox Action (%02hx)", data.ref<uint8>(0x04));
-    PrintPacket(data);
+    constexpr auto actionToStr = [](uint8 actionIn)
+    {
+        switch (actionIn)
+        {
+            case 0x01:
+                return "Send old items";
+            case 0x02:
+                return "Add item";
+            case 0x03:
+                return "Send confirmation";
+            case 0x04:
+                return "Cancel item";
+            case 0x05:
+                return "Send item count";
+            case 0x06:
+                return "Send new items";
+            case 0x07:
+                return "Remove delivered item";
+            case 0x08:
+                return "Update delivery slot";
+            case 0x09:
+                return "Return to sender";
+            case 0x0A:
+                return "Take item";
+            case 0x0B:
+                return "Remove item";
+            case 0x0C:
+                return "Confirm name";
+            case 0x0D:
+                return "Open send box";
+            case 0x0E:
+                return "Open recv box";
+            case 0x0F:
+                return "Close box";
+            default:
+                return "Unknown";
+        }
+    };
+
+    if (settings::get<bool>("logging.DEBUG_DELIVERY_BOX"))
+    {
+        ShowDebug(fmt::format("DeliveryBox Action 0x{:02X} ({}) by {}", action, actionToStr(action), PChar->name));
+    }
 
     if (jailutils::InPrison(PChar)) // If jailed, no mailbox menu for you.
     {
         return;
     }
 
-    if (boxtype < 1 || boxtype > 2)
-    {
-        ShowWarning(fmt::format("Invalid boxtype sent by {}", PChar->name).c_str());
-        return;
-    }
-
     if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
     {
-        ShowDebug("%s is trying to use the delivery box in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
+        ShowWarning("%s is trying to use the delivery box in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
         return;
     }
 
@@ -2341,7 +2376,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         // 0x01 - Send old items
         case 0x01:
         {
-            if (!charutils::isAnyDeliveryBoxOpen(PChar))
+            if (boxtype < 1 || boxtype > 2 || !charutils::isAnyDeliveryBoxOpen(PChar))
             {
                 ShowWarning("Delivery Box packet handler received action %u while UContainer is in an invalid state (%s)", action, PChar->GetName());
                 return;
@@ -2630,7 +2665,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         case 0x05:
         {
             // Send the player the new items count not seen
-            if (!charutils::isAnyDeliveryBoxOpen(PChar))
+            if (boxtype < 1 || boxtype > 2 || !charutils::isAnyDeliveryBoxOpen(PChar))
             {
                 ShowWarning("Delivery Box packet handler received action %u while UContainer is in an invalid state (%s)", action, PChar->GetName());
                 return;
@@ -2882,7 +2917,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         // 0x0a - Take item from cell
         case 0x0A:
         {
-            if (!charutils::isAnyDeliveryBoxOpen(PChar))
+            if (boxtype < 1 || boxtype > 2 || !charutils::isAnyDeliveryBoxOpen(PChar))
             {
                 ShowWarning("Delivery Box packet handler received action %u while UContainer is in an invalid state (%s)", action, PChar->GetName());
                 return;
