@@ -37,6 +37,7 @@ xi.spells.healing.calculatePower = function(player)
     if player then
         return 3 * player:getStat(xi.mod.MND) + player:getStat(xi.mod.VIT) + 3 * (math.floor(player:getSkillLevel(xi.skill.HEALING_MAGIC) / 5))
     end
+
     return 0
 end
 
@@ -107,7 +108,11 @@ xi.spells.healing.getAbilityBonus = function(caster, isWhiteMagic)
 end
 
 xi.spells.healing.handleAfflatusSolace = function(caster, target, final)
-    if caster:isPC() and caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and not target:hasStatusEffect(xi.effect.STONESKIN) then
+    if
+        caster:isPC() and
+        caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and
+        not target:hasStatusEffect(xi.effect.STONESKIN)
+    then
         local bonuses = { [11186] = 0.30, [11086] = 0.35 }
         local body = caster:getEquipID(xi.slot.BODY)
         local stoneskin = math.floor((final * utils.ternary(bonuses[body], bonuses[body], 0.25)) * 1 + caster:getMerit(xi.merit.ANIMUS_SOLACE) / 100)
@@ -128,8 +133,11 @@ xi.spells.healing.doHealingSpell = function(caster, target, spell, isWhiteMagic)
     local spellId      = spell:getID()
     local power        = xi.spells.healing.calculatePower(caster)
     local healingTable = xi.spells.healing.getHealTable(power, spellId)
-    local base         = utils.clamp((math.floor(power / 2) / healingTable.rate) + healingTable.constant, healingTable.minCap, healingTable.maxCap)
+    local base         = (math.floor(power / 2) / healingTable.rate) + healingTable.constant
     local healingspell = true
+
+    -- Clamp on base instead of maxCap. Power can create over-cure
+    base = utils.clamp(base, 0, base)
 
     if xi.magic.isValidHealTarget(caster, target) then
         final = xi.spells.healing.applyCasterBonuses(caster, base, spell:getElement(), isWhiteMagic)
