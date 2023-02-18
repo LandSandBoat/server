@@ -783,6 +783,15 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
     if (ref<uint16>(buff, 2) != map_session_data->server_packet_id)
     {
+        /*
+         * If the client and server have become out of sync, then caching takes place. However, caching
+         * zone packets will result in the client never properly connecting. Ignore those specifically.
+         */
+        if (SmallPD_Type == 0x0A)
+        {
+            return 0;
+        }
+
         ref<uint16>(map_session_data->server_packet_data, 2) = SmallPD_Code;
         ref<uint16>(map_session_data->server_packet_data, 8) = (uint32)time(nullptr);
 

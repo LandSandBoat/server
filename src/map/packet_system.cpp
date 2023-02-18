@@ -248,6 +248,22 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    /*
+     * Handle out of sync zone correction..
+     */
+    if (data.ref<uint16_t>(0x02) > 1)
+    {
+        PSession->server_packet_id = data.ref<uint16_t>(0x02);
+
+        // Clear all pending packets for this character.
+        // This incoming 0x00A from the client wants us to set the the starting sync count for all new packets to the sync count from 0x02.
+        // If we do not do this, all further packets may be ignored by the client and will result in disconnection from the server.
+        if (PChar)
+        {
+            PChar->clearPacketList();
+        }
+    }
+
     if (PSession->blowfish.status == BLOWFISH_WAITING) // Generate new blowfish session, call zone in, etc, only once.
     {
         PChar->clearPacketList();
