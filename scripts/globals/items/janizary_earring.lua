@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.DEFENSE_BOOST)
-    if effect ~= nil and effect:getSubType() == 14785 then
+    if effect ~= nil and effect:getItemSourceID() == 14785 then
         target:delStatusEffect(xi.effect.DEFENSE_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.DEFENSE_BOOST, 32, 0, 180, 14785)
+    target:addStatusEffect(xi.effect.DEFENSE_BOOST, 32, 0, 180, 0, 0, 0, 14785)
 end
 
 return itemObject

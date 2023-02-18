@@ -14,7 +14,7 @@ itemObject.onItemCheck = function(target)
     local pet = target:getPet()
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif effect ~= nil and effect:getSubType() == 18242 then
+    elseif effect ~= nil and effect:getItemSourceID() == 18242 then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 
@@ -22,7 +22,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 18242)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, 18242)
 end
 
 itemObject.onEffectGain = function(target, effect)

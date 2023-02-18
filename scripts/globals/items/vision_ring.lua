@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 15559 then
+    if effect ~= nil and effect:getItemSourceID() == 15559 then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 

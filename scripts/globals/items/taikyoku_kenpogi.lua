@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.EVASION_BOOST)
-    if effect ~= nil and effect:getSubType() == 14541 then
+    if effect ~= nil and effect:getItemSourceID() == 14541 then
         target:delStatusEffect(xi.effect.EVASION_BOOST)
     end
 

@@ -8,9 +8,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENFIRE)
-    if effect ~= nil and effect:getSubType() == 18381 then
+    if effect ~= nil and effect:getItemSourceID() == 18381 then
         target:delStatusEffect(xi.effect.ENFIRE)
     end
+
     return 0
 end
 
@@ -27,7 +28,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 18381)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, 18381)
 end
 
 return itemObject

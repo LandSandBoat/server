@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 14678 then
+    if effect ~= nil and effect:getItemSourceID() == 14678 then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 14678)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, 14678)
 end
 
 itemObject.onEffectGain = function(target, effect)

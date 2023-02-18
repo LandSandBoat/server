@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.VIT_BOOST)
-    if effect ~= nil and effect:getSubType() == 15864 then
+    if effect ~= nil and effect:getItemSourceID() == 15864 then
         target:delStatusEffect(xi.effect.VIT_BOOST)
     end
 

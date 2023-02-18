@@ -10,9 +10,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.STONESKIN)
-    if effect ~= nil and effect:getSubType() == 15170 then
+    if effect ~= nil and effect:getItemSourceID() == 15170 then
         target:delStatusEffect(xi.effect.STONESKIN)
     end
+
     return 0
 end
 
