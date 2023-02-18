@@ -209,7 +209,11 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar);
 
-    void OpenSendBox(CCharEntity* PChar);
+    void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
+    void OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
+    bool isSendBoxOpen(CCharEntity* PChar);
+    bool isRecvBoxOpen(CCharEntity* PChar);
+    bool isAnyDeliveryBoxOpen(CCharEntity* PChar);
 
     bool CheckAbilityAddtype(CCharEntity* PChar, CAbility* PAbility);
 
