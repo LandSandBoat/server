@@ -23,9 +23,9 @@ def main():
     )
 
 
-    print("Sleeping for 8 minutes...")
+    print("Sleeping for 5 minutes...")
 
-    time.sleep(480)
+    time.sleep(300)
 
     p0.kill()
     p1.kill()
