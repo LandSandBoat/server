@@ -23,7 +23,7 @@ def main():
     )
 
 
-    print("Sleeping for 5 minutes...")
+    print("Sleeping for 8 minutes...")
 
     time.sleep(480)
 
