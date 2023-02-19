@@ -295,6 +295,7 @@ int32 SqlConnection::QueryStr(const char* query)
     if (currentThreadId != m_ThreadId)
     {
         ShowError("SqlConnection::Query called on thread that doesn't own it. SqlConnection is not thread-safe!");
+        ShowError(query);
     }
 
     DebugSQL(query);
