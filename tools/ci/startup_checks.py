@@ -25,7 +25,7 @@ def main():
 
     print("Sleeping for 5 minutes...")
 
-    time.sleep(300)
+    time.sleep(480)
 
     p0.kill()
     p1.kill()
