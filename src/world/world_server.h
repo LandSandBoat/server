@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "conquest_system.h"
 #include "http_server.h"
 #include "message_server.h"
+#include "party_system.h"
 
 class WorldServer final : public Application
 {
@@ -40,6 +41,8 @@ public:
 
 private:
     std::unique_ptr<message_server_wrapper_t> messageServer;
+
+    std::unique_ptr<PartySystem> partySystem;
 
     std::unique_ptr<ConquestSystem>     conquestSystem;
     std::unique_ptr<BesiegedSystem>     besiegedSystem;

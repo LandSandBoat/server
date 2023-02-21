@@ -127,6 +127,8 @@ enum CHATFILTERTYPE : uint64
     // Filter level is 0-3
 };
 
+// TODO: Move all messaging types to their own file
+
 enum MSGSERVTYPE : uint8
 {
     MSG_LOGIN,
@@ -153,6 +155,12 @@ enum MSGSERVTYPE : uint8
     // rpc
     MSG_RPC_SEND, // sent by sender -> reciever
     MSG_RPC_RECV, // sent by reciever -> sender
+
+    // map to world server
+    MSG_M2W_PARTY_INVITE,
+
+    // world to map server
+    MSG_W2M_PARTY_INVITE,
 };
 
 constexpr auto msgTypeToStr = [](uint8 msgtype)
@@ -202,6 +210,24 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
         default:
             return "Unknown";
     };
+};
+
+struct M2W_PartyInvite
+{
+    uint8  inviteType;
+    uint32 recipientWorldId;
+    uint16 recipientZoneIndex;
+    uint32 senderWorldId;
+    uint16 senderZoneIndex;
+};
+
+struct W2M_PartyInvite
+{
+    uint8  inviteType;
+    uint32 recipientWorldId;
+    uint16 recipientZoneIndex;
+    uint32 senderWorldId;
+    uint16 senderZoneIndex;
 };
 
 // For characters, the size is stored in `size`.

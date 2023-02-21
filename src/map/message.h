@@ -75,6 +75,16 @@ namespace message
     void send(uint16 zone, std::string const& luaFunc);
     void send(uint32 playerId, CBasicPacket* packet);
     void send(std::string const& playerName, CBasicPacket* packet);
+
+    template <typename T>
+    void send(T payload)
+    {
+        // TODO: Lookup message type based on T
+        MSGSERVTYPE messageType = MSG_M2W_PARTY_INVITE;
+
+        send(messageType, &payload, sizeof(payload));
+    }
+
     void send_charvar_update(uint32 charId, std::string const& varName, uint32 value);
     void rpc_send(uint16 sendZone, uint16 recvZone, std::string const& sendStr, sol::function recvFunc);
 

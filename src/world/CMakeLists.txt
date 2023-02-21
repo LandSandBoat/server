@@ -13,6 +13,8 @@ set(SOURCES
     main.cpp
     message_server.cpp
     message_server.h
+    party_system.cpp
+    party_system.h
     world_server.cpp
     world_server.h)
 

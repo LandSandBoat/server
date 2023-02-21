@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/logging.h"
 #include "message_server.h"
+#include "party_system.h"
 
 zmq::context_t                 zContext;
 std::unique_ptr<zmq::socket_t> zSocket;
@@ -163,6 +164,12 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             // no op
             break;
         }
+        case MSG_M2W_PARTY_INVITE:
+        {
+            // TODO: Use a real singleton, or a dependency container.
+            PartySystem::HandleIncoming(from, packet);
+            break;
+        }
         default:
         {
             ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), from_address, from_port));
@@ -170,6 +177,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
     }
 
+    // NOTE: If ret hasn't been altered or assigned, this block won't fire
     if (ret != SQL_ERROR)
     {
         ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
