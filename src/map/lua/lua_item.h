@@ -51,9 +51,8 @@ public:
     uint8  getLocationID(); // get the location id (container id)
     uint8  getSlotID();     // get the slot id
     uint16 getTrialNumber();
-    auto   getMatchingTrials() -> sol::table; // returns a table of trial #'s which match this item precisely
-    uint8  getWornUses();                     // check if the item has been used
-    uint32 getBasePrice();                    // get the base sell price
+    uint8  getWornUses();  // check if the item has been used
+    uint32 getBasePrice(); // get the base sell price
 
     bool isType(uint8 type);       // check the item type
     bool isSubType(uint8 subtype); // check the item's sub type

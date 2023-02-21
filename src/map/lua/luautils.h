@@ -157,8 +157,6 @@ namespace luautils
     void DespawnMob(uint32 mobid, sol::object const& arg2);                                                         // Despawn (Fade Out) Mob By Id
     auto GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
     auto GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
-    auto GetMagianTrial(sol::variadic_args va) -> sol::table;
-    auto GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
 
     uint32 GetSystemTime();
     uint32 JstMidnight();
