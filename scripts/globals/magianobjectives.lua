@@ -42,8 +42,6 @@ end
 
 xi.magian.trialsold =
 {
-    [   2] = { check = checks.checkTrials, reqs = { mobid = set{ 17563801 } } }, -- Nocuous Weapon
-
     [1092] = { check = checks.checkTrials, reqs = { mobid = set{ 17195484 } } }, -- Tammuz
     [  68] = { check = checks.checkTrials, reqs = { mobid = set{ 17195259 } } }, -- Tumbling Truffle
     [  69] = { check = checks.checkTrials, reqs = { mobid = set{ 17260907 } } }, -- Helldiver
