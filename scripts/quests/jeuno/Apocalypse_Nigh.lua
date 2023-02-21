@@ -32,6 +32,7 @@ local function finishProgress(player, option)
     if npcUtil.giveItem(player, possibleItems[option]) then
         quest:complete(player)
     end
+
     player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
     player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
     player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
@@ -64,8 +65,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and -- Needs to be available
             player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and -- Requires Shadows of the Departed
-            quest:getVar(player, 'Wait') <= VanadielUniqueDay() and -- Must wait 1 game day
-            not quest:getMustZone(player) -- Must have zoned since last quest
+            quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
+            not quest:getMustZone(player)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -165,7 +166,10 @@ quest.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Status') == 4 and player:getRank(player:getNation()) > 5 then
+                    if
+                        quest:getVar(player, 'Status') == 4 and
+                        player:getRank(player:getNation()) > 5
+                    then
                         return quest:progressEvent(10057)
                     elseif quest:getVar(player, 'Status') == 5 then
                         return quest:event(10058)
@@ -204,10 +208,17 @@ quest.sections =
             ['Gilgamesh'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Status') == 5 and VanadielUniqueDay() >= quest:getVar(player, 'Wait') then
+                    if
+                        quest:getVar(player, 'Status') == 5 and
+                        VanadielUniqueDay() >= quest:getVar(player, 'Wait')
+                    then
                         return quest:progressEvent(232, 252)
                     end
-                    if quest:getVar(player, 'Status') == 6 and VanadielUniqueDay() >= quest:getVar(player, 'Wait') then
+
+                    if
+                        quest:getVar(player, 'Status') == 6 and
+                        VanadielUniqueDay() >= quest:getVar(player, 'Wait')
+                    then
                         return quest:progressEvent(234, 252)
                     end
                 end,
@@ -216,10 +227,14 @@ quest.sections =
             ['_700'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Status') == 5 and quest:getVar(player, 'Wait') > VanadielUniqueDay() then
+                    if
+                        quest:getVar(player, 'Status') == 5 and
+                        quest:getVar(player, 'Wait') > VanadielUniqueDay()
+                    then
                         return quest:event(235)
                     end
                 end,
+
             },
 
             onEventUpdate =
@@ -227,6 +242,7 @@ quest.sections =
                 [232] = function(player, csid, option)
                     updateItemEvent(player, option)
                 end,
+
                 [234] = function(player, csid, option)
                     updateItemEvent(player, option)
                 end,
@@ -241,12 +257,14 @@ quest.sections =
                         finishProgress(player, option)
                     end
                 end,
+
                 [234] = function(player, csid, option, npc)
                     if option >= 1 and option <= 4 then
                         quest:setVar(player, 'Status', 7)
                         finishProgress(player, option)
                     end
                 end,
+
             },
         },
     },
@@ -277,6 +295,7 @@ quest.sections =
                                 return quest:messageSpecial(zones[player:getZoneID()].text.QM_TEXT)
                             end
                         end
+
                         return quest:progressEvent(5)
                     end
                 end,
