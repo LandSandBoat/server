@@ -403,16 +403,23 @@ xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
 end
 
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
-    local waltzInfo      = waltzAbilities[ability:getID()]
+    local abilityId      = ability:getID()
+    local waltzInfo      = waltzAbilities[abilityId]
     local statMultiplier = waltzInfo[2]
     local amtCured       = 0
 
     -- Handle TP cost.
-    if
-        not player:hasStatusEffect(xi.effect.TRANCE) and
-        target:getID() == ability:getPrimaryTargetID() -- Ensure TP is only used once, and not once per target.
-    then
-        player:delTP(waltzInfo[1])
+    if not player:hasStatusEffect(xi.effect.TRANCE) then
+        if
+            abilityId == xi.jobAbility.DIVINE_WALTZ or
+            abilityId == xi.jobAbility.DIVINE_WALTZ_II
+        then
+            if player:getID() == target:getID() then
+                player:delTP(waltzInfo[1])
+            end
+        else
+            player:delTP(waltzInfo[1])
+        end
     end
 
     if player:getMainJob() ~= xi.job.DNC then
