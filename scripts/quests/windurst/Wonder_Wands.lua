@@ -67,9 +67,9 @@ quest.sections =
                 end,
             },
 
-            ['Goltata'] = quest:event(257, 0, 0, xi.items.OAK_STAFF),
+            ['Goltata']        = quest:event(257, 0, 0, xi.items.OAK_STAFF),
             ['Yaman-Hachuman'] = quest:event(256, 0, 0, 0, xi.items.MYTHRIL_ROD),
-            ['Ohruru'] = quest:event(258, 0, xi.items.ROSE_WAND),
+            ['Ohruru']         = quest:event(258, 0, xi.items.ROSE_WAND),
 
             onEventFinish =
             {
