@@ -330,7 +330,16 @@ int32 do_init(int32 argc, char** argv)
         auto level = std::clamp<uint8>(static_cast<uint8>(stoi(inputs[2])), 0, 5);
 
         PChar->m_GMlevel = level;
-        charutils::SaveCharGMLevel(PChar);
+
+        // NOTE: This is the same logic as charutils::SaveCharGMLevel(PChar);
+        // But we're not executing on the main thread, so we're doing it with
+        // our own SQL connection.
+        {
+            auto _sql  = std::make_unique<SqlConnection>();
+            auto query = "UPDATE %s SET %s %u WHERE charid = %u;";
+            _sql->Query(query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
+            _sql->Query(query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
+        }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
@@ -783,6 +792,15 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
     if (ref<uint16>(buff, 2) != map_session_data->server_packet_id)
     {
+        /*
+         * If the client and server have become out of sync, then caching takes place. However, caching
+         * zone packets will result in the client never properly connecting. Ignore those specifically.
+         */
+        if (SmallPD_Type == 0x0A)
+        {
+            return 0;
+        }
+
         ref<uint16>(map_session_data->server_packet_data, 2) = SmallPD_Code;
         ref<uint16>(map_session_data->server_packet_data, 8) = (uint32)time(nullptr);
 

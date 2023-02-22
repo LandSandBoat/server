@@ -45,7 +45,7 @@ CUContainer::CUContainer()
 
 void CUContainer::Clean()
 {
-    if (m_ContainerType == UCONTAINER_DELIVERYBOX)
+    if (m_ContainerType == UCONTAINER_SEND_DELIVERYBOX || m_ContainerType == UCONTAINER_RECV_DELIVERYBOX)
     {
         for (uint8 i = 0; i < UCONTAINER_SIZE; ++i)
         {
