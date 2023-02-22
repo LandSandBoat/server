@@ -19,7 +19,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.diff = dINT
     params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.bonus = 0
+    params.bonus = 30
     params.effect = xi.effect.POISON
     params.tier = 2
 

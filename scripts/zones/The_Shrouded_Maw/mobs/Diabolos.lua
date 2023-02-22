@@ -23,6 +23,8 @@ entity.onMobSpawn = function(mob)
         mob:addMod(xi.mod.ATTP, -15)
         mob:addMod(xi.mod.DEFP, -15)
         mob:addMod(xi.mod.MDEF, -40)
+        -- If this is CoP mission Diabolos then no 2hr
+        xi.mix.jobSpecial.config(mob, { specials = { }, })
     else
     -- If this is Diabolos Prime, give him Ruinous Omen
         xi.mix.jobSpecial.config(mob, {
@@ -37,14 +39,16 @@ entity.onMobSpawn = function(mob)
     local triggerVal = math.random(1, 28) + math.random(1, 28) + 18
 
     -- If this is prime, adjust the "base" to be the prime set
-    if mob:getID() >= dPrimeBase then dBase = dPrimeBase end  -- Prime "block" of mobs is offset 27 from CoP mobs
+    -- Prime "block" of mobs is offset 27 from CoP mobs
+    if mob:getID() >= dPrimeBase then
+        dBase = dPrimeBase
+    end
 
     local area = utils.clamp((mob:getID() - dBase) / 7 + 1, 1, 3)
 
     mob:setLocalVar("TileTriggerHPP", triggerVal) -- Starting point for tile drops
     mob:setLocalVar("Area", area)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-
 end
 
 entity.onMobFight = function(mob, target)
