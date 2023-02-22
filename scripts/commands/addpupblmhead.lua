@@ -1,6 +1,6 @@
 -----------------------------------
--- func: pupblmhead
--- desc: Unlocks all attachments
+-- func: addpupblmhead
+-- desc: Adds the Spiritreaver head attachment
 -----------------------------------
 
 cmdprops =
@@ -9,26 +9,30 @@ cmdprops =
     parameters = "s"
 }
 
-local ValidAttachments = {
-	8198,
+local validAttachments =
+{
+    8198,
 }
 
 local function AddAllAttachments(player)
-    for i = 1, #ValidAttachments do
-        player:unlockAttachment(ValidAttachments[i])
+    local ID = zones[player:getZoneID()]
+    for i = 1, #validAttachments do
+        player:unlockAttachment(validAttachments[i])
     end
-    player:PrintToPlayer(string.format("%s now has pup blm head.", player:getName()))
+
+    player:messageSpecial(ID.text.ITEM_OBTAINED, validAttachments[1])
 end
 
 function onTrigger(player, target)
-    if (target == nil) then
+    if target == nil then
         AddAllAttachments(player)
     else
         local targ = GetPlayerByName(target)
-        if (targ == nil) then
-            player:PrintToPlayer(string.format( "Player named '%s' not found!", target ))
+        if targ == nil then
+            player:PrintToPlayer(string.format("Player named '%s' not found!", target))
         else
             AddAllAttachments(targ)
+            player:PrintToPlayer(string.format("You have given %s the pup blm head.", targ:getName()))
         end
     end
 end
