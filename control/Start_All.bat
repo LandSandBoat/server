@@ -17,4 +17,3 @@ start 54342_Zones_13.bat
 start Start_Connect.bat
 start Start_Search.bat
 start Start_World.bat
-pause
