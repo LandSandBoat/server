@@ -19,7 +19,7 @@ effectObject.onEffectLose = function(target, effect)
     --restore HP and MP to its former state. Remove 100% slow
     target:delMod(xi.mod.HPP, -effect:getPower())
     target:delMod(xi.mod.MPP, -effect:getPower())
-    target:addMod(xi.mod.MOVE, -effect:getPower())
+    target:delMod(xi.mod.MOVE, -effect:getPower())
 end
 
 return effectObject
