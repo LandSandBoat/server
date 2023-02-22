@@ -18719,6 +18719,7 @@ INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,505,@RARE);     -- Sheepskin (R
 INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,4378,@VRARE);   -- Jug Of Selbina Milk (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,4378,@VRARE);   -- Jug Of Selbina Milk (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2382,2,0,1000,832,0);         -- Clump Of Sheep Wool (Steal)
+INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,5154,@VRARE);   -- Tavnazian Liver (Very Rare, 1%)
 
 -- ZoneID:  25 - Tavnazian Sheep
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,4372,@VCOMMON); -- Slice Of Giant Sheep Meat (Very Common, 24%)
@@ -18726,6 +18727,7 @@ INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,505,@COMMON);   -- Sheepskin (C
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,882,@RARE);     -- Sheep Tooth (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,4378,@RARE);    -- Jug Of Selbina Milk (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2383,2,0,1000,832,0);         -- Clump Of Sheep Wool (Steal)
+INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,5154,@VRARE);   -- Tavnazian Liver (Very Rare, 1%)
 
 -- ZoneID: 160 - Tawny-Fingered Mugberry
 INSERT INTO `mob_droplist` VALUES (2384,0,0,1000,13147,@ALWAYS); -- Uggalepih Necklace (Always, 100%)
@@ -26389,6 +26391,25 @@ INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3233,0,0,1000,1875,@VCOMMON); -- Ancient Beastcoin (Very Common, 24%)
 
+-- ZoneiD: 25 - Orcish Footsoldiers
+-- ZoneiD: 25 - Orcish Gladiators
+-- ZoneiD: 25 - Orcish Troopers
+INSERT INTO `mob_droplist` VALUES (3234,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3234,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Very Rare, 1%)
+
+-- ZoneiD: 25 - Orcish Bowshooters
+INSERT INTO `mob_droplist` VALUES (3235,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3235,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon 10%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,5154,@UNCOMMON);   -- Tavnazian Liver (Uncommon 10%)
+
+-- ZoneiD: 24 - Orcish Beastrider
+-- ZoneiD: 24 - Orcish Brawler
+-- ZoneiD: 24 - Orcish Footsoldier
+-- ZoneiD: 24 - Orcish Nightrider
+-- ZoneiD: 24 - Orcish Galdiator
+-- ZoneiD: 24 - Orcish Trooper
+INSERT INTO `mob_droplist` VALUES (3236,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,5154,@UNCOMMON);   -- Tavnazian Liver (Uncommon, 10%)
 --------------------------------
 -- ASB Droplists Start at 6000
 --------------------------------
