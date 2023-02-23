@@ -397,8 +397,13 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local spellId       = spell:getID()
     local eleBonusMagicAccuracy = pTable[spellId][bonusMAcc]
 
-    local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + eleBonusMagicAccuracy
-    local resMod        = 0 -- Some spells may possibly be non elemental.
+    local magicAcc = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
+    local resMod   = 0 -- Some spells may possibly be non elemental.
+
+    -- The only damage spells that have bonus accuracy are single target ele nukes
+    if eleBonusMagicAccuracy ~= nil then
+        magicAcc = magicAcc + eleBonusMagicAccuracy
+    end
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target)
