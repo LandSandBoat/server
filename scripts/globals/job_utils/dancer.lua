@@ -13,7 +13,22 @@ xi.job_utils.dancer = xi.job_utils.dancer or {}
 -----------------------------------
 
 -----------------------------------
--- Local functions and tables.
+-- Local tables.
+-----------------------------------
+local waltzAbilities =
+{
+--  [Ability ID] =     { tpCost, statMultiplier, baseHp }
+    [xi.jobAbility.CURING_WALTZ    ] = { 200, 0.25,  60 },
+    [xi.jobAbility.CURING_WALTZ_II ] = { 350, 0.50, 130 },
+    [xi.jobAbility.CURING_WALTZ_III] = { 500, 0.75, 270 },
+    [xi.jobAbility.CURING_WALTZ_IV ] = { 650, 1.00, 450 },
+    [xi.jobAbility.CURING_WALTZ_V  ] = { 800, 1.25, 600 },
+    [xi.jobAbility.DIVINE_WALTZ    ] = { 400, 0.25,  60 },
+    [xi.jobAbility.DIVINE_WALTZ_II ] = { 800, 0.75, 270 },
+}
+
+-----------------------------------
+-- Local functions.
 -----------------------------------
 local function getMaxFinishingMoves(player)
     return 5 + player:getMod(xi.mod.MAX_FINISHING_MOVE_BONUS)
@@ -69,17 +84,57 @@ local function setFinishingMoves(player, numMoves)
     end
 end
 
-local waltzAbilities =
-{
---  [Ability ID] =     { tpCost, statMultiplier, baseHp }
-    [xi.jobAbility.CURING_WALTZ    ] = { 200, 0.25,  60 },
-    [xi.jobAbility.CURING_WALTZ_II ] = { 350, 0.50, 130 },
-    [xi.jobAbility.CURING_WALTZ_III] = { 500, 0.75, 270 },
-    [xi.jobAbility.CURING_WALTZ_IV ] = { 650, 1.00, 450 },
-    [xi.jobAbility.CURING_WALTZ_V  ] = { 800, 1.25, 600 },
-    [xi.jobAbility.DIVINE_WALTZ    ] = { 400, 0.25,  60 },
-    [xi.jobAbility.DIVINE_WALTZ_II ] = { 800, 0.75, 270 },
-}
+local function getStepAnimation(weaponSkillType)
+    if weaponSkillType <= 1 then
+        return 15
+    elseif weaponSkillType <= 3 then
+        return 14
+    elseif weaponSkillType == 4 then
+        return 19
+    elseif weaponSkillType == 5 then
+        return 16
+    elseif weaponSkillType <= 7 then
+        return 18
+    elseif weaponSkillType == 8 then
+        return 20
+    elseif weaponSkillType == 9 then
+        return 21
+    elseif weaponSkillType == 10 then
+        return 22
+    elseif weaponSkillType == 11 then
+        return 17
+    elseif weaponSkillType == 12 then
+        return 23
+    else
+        return 0
+    end
+end
+
+local function getFlourishAnimation(weaponSkillType)
+    if weaponSkillType <= 1 then
+        return 25
+    elseif weaponSkillType <= 3 then
+        return 24
+    elseif weaponSkillType == 4 then
+        return 29
+    elseif weaponSkillType == 5 then
+        return 26
+    elseif weaponSkillType <= 7 then
+        return 28
+    elseif weaponSkillType == 8 then
+        return 30
+    elseif weaponSkillType == 9 then
+        return 31
+    elseif weaponSkillType == 10 then
+        return 32
+    elseif weaponSkillType == 11 then
+        return 27
+    elseif weaponSkillType == 12 then
+        return 33
+    else
+        return 0
+    end
+end
 
 -----------------------------------
 -- Ability Check.
