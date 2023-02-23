@@ -256,9 +256,11 @@ uint8 CBattleEntity::GetSpeed()
     // Mod::MOUNT_MOVE (972)
     Mod mod = isMounted() ? Mod::MOUNT_MOVE : Mod::MOVE;
 
-    float modAmount = (100.0f + static_cast<float>(getMod(mod))) / 100.0f;
+    // Get the percentage of increase/decreate by mod
+    auto modAmount = static_cast<float>(getMod(mod)) / 100.0f;
+
     // Cap unmounted movement speed increase to 25%
-    if (mod == Mod::MOVE)
+    if (mod == Mod::MOVE && modAmount > 0) // Only clamp position/negatvie if we're increasing speed
     {
         if (StatusEffectContainer->GetStatusEffect(EFFECT_FLEE))
         {
@@ -270,9 +272,13 @@ uint8 CBattleEntity::GetSpeed()
         }
     }
 
-    float modifiedSpeed = static_cast<float>(startingSpeed) * modAmount;
-    uint8 outputSpeed   = static_cast<uint8>(modifiedSpeed < 0 ? 0 : modifiedSpeed);
+    // Add speed mod to base speed
+    auto modifiedSpeed = startingSpeed + static_cast<float>(startingSpeed) * modAmount;
 
+    // Make sure speed cannot go negative
+    auto outputSpeed = static_cast<uint8>(modifiedSpeed < 0 ? 0 : modifiedSpeed);
+
+    // Actually need this clamp?
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
 

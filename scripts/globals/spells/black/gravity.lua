@@ -15,7 +15,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    local power = 26
+    -- -46% pulled from Retail
+    -- -26% not nearly even despite that value being listed on Wiki
+    local power = 46
 
     -- Duration, including resistance.  Unconfirmed.
     local duration = xi.magic.calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
