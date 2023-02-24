@@ -10,7 +10,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.BLAZE_SPIKES)
-    if effect ~= nil and effect:getItemSourceID() == 15652 then
+    if
+        effect ~= nil and
+        effect:getItemSourceID() == xi.items.BLAZE_HOSE
+    then
         target:delStatusEffect(xi.effect.BLAZE_SPIKES)
     end
 
@@ -18,7 +21,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.BLAZE_SPIKES, 15, 0, 180, 0, 0, 0, 15652)
+    target:addStatusEffect(xi.effect.BLAZE_SPIKES, 15, 0, 180, 0, 0, 0, xi.items.BLAZE_HOSE)
 end
 
 return itemObject

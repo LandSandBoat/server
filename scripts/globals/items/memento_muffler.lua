@@ -11,7 +11,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.VIT_BOOST)
-    if effect ~= nil and effect:getItemSourceID() == 13173 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.MEMENTO_MUFFLER then
         target:delStatusEffect(xi.effect.VIT_BOOST)
     end
 
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, 13173)
+    target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.items.MEMENTO_MUFFLER)
 end
 
 return itemObject
