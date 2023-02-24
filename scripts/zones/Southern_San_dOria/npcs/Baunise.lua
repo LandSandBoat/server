@@ -14,24 +14,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:hasKeyItem(xi.ki.BOOK_OF_TASKS) and
-        not player:hasKeyItem(xi.ki.BOOK_OF_THE_WEST)
-    then
-        player:startEvent(634)
-    else
-        player:showText(npc, ID.text.NOTHING_TO_REPORT)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 634 then
-        player:addKeyItem(xi.ki.BOOK_OF_THE_WEST)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOOK_OF_THE_WEST)
-    end
 end
 
 return entity
