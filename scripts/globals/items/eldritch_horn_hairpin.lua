@@ -10,7 +10,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.ELDRITCH_HORN_HAIRPIN then
+    if
+        effect ~= nil and
+        effect:getItemSourceID() == xi.items.ELDRITCH_HORN_HAIRPIN
+    then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 

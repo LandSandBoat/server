@@ -10,9 +10,13 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.REFRESH)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.HYDRA_HAUBERT then
+    if
+        effect ~= nil and
+        effect:getItemSourceID() == xi.items.HYDRA_HAUBERT
+    then
         target:delStatusEffect(xi.effect.REFRESH)
     end
+
     return 0
 end
 

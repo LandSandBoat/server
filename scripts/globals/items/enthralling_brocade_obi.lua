@@ -10,7 +10,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.ENTHRALLING_BROCADE_OBI then
+    if
+        effect ~= nil and
+        effect:getItemSourceID() == xi.items.ENTHRALLING_BROCADE_OBI
+    then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 
