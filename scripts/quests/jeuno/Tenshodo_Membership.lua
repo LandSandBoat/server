@@ -70,9 +70,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
-                        return quest:progressEvent(152)
+                        return quest:progressEvent(152, 1)
                     else
-                        return quest:progressEvent(151)
+                        return quest:progressEvent(151, 1)
                     end
                 end,
             },
@@ -118,6 +118,7 @@ quest.sections =
                         if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
                             player:delKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM)
                         end
+
                         player:confirmTrade()
                     end
                 end,

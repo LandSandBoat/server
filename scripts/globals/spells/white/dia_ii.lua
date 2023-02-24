@@ -22,7 +22,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.hasMultipleTargetReduction = false
     params.diff = 0
-    params.bonus = 1.0
+    params.bonus = 10
 
     -- Calculate raw damage
     local dmg = basedmg

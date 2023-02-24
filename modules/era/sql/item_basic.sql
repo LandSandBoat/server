@@ -699,7 +699,6 @@ REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `
     (4159, 0, 'flask_of_paralyze_potion', 'paralyze_potion', 12, 1540, 33, 0, 727),
     (4215, 0, 'popstar', 'popstar', 99, 1548, 63, 0, 10),
     (4224, 0, 'demon_quiver', 'demon_quiver', 12, 1540, 15, 0, 687),
-    (4266, 0, 'fulm-long_salmon_sub', 'fulm-long_sub', 12, 1548, 66, 0, 293),
     (4272, 0, 'slice_of_dragon_meat', 'dragon_meat', 12, 1548, 59, 0, 275),
     (4273, 0, 'kitron', 'kitron', 12, 1548, 59, 0, 342),
     (4277, 0, 'tonosama_rice_ball', 'tonosama_r.ball', 12, 1548, 56, 0, 367),

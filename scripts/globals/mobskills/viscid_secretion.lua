@@ -9,7 +9,14 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if
+        mob:getName() == "Pasuk" or
+        mob:getName() == "Gnyan"
+    then
+        return 0
+    end
+
+    return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
@@ -17,8 +24,16 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local gravity = xi.effect.WEIGHT
     local duration = math.random(120, 180)
 
-    xi.mobskills.mobStatusEffectMove(mob, target, gravity, 50, 0, duration)
+    local gravityMessage = xi.mobskills.mobStatusEffectMove(mob, target, gravity, 50, 0, duration)
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, slow, 5000, 0, duration))
+
+    if
+        skill:getMsg() == xi.msg.basic.SKILL_MISS or
+        skill:getMsg() == xi.msg.basic.SKILL_NO_EFFECT
+    then
+        skill:setMsg(gravityMessage)
+        return gravity
+    end
 
     return slow
 end

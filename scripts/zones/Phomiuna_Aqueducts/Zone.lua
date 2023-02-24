@@ -16,6 +16,9 @@ zoneObject.onInitialize = function(zone)
     else
         xi.mob.nmTODPersistCache(zone, ID.mob.EBA)
     end
+
+    -- FFXI wiki has some info stating ~10mins realtime for Phomiuna Aqueducts
+    GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

@@ -783,8 +783,8 @@ local overseerInvNation =
         [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13106 },                -- royal_guards_collar
         [32850] = { rank =  6, cp = 24000, lvl = 55, item = 12430 },                -- royal_knights_bascinet
         [32851] = { rank =  6, cp = 24000, lvl = 55, item = 13722 },                -- royal_knights_aketon
-        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 12558, place = 1 },     -- royal_knights_chainmail
-        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 12814, place = 1 },     -- royal_knights_breeches
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 12558, place = 2 },     -- royal_knights_chainmail
+        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 12814, place = 2 },     -- royal_knights_breeches
         [32854] = { rank =  6, cp = 24000, lvl = 55, item = 12321, place = 2 },     -- royal_guards_shield
         [32855] = { rank =  6, cp = 24000, lvl = 55, item = 17067, place = 1 },     -- royal_guards_rod
         [32856] = { rank =  6, cp = 24000, lvl = 55, item = 16599, place = 1 },     -- royal_guards_sword
@@ -995,6 +995,7 @@ xi.conquest.outpostFee = function(player, region)
             -- Other nation control is 4x Beastmen is 5x
             return fee * utils.ternary(regionOwner ~= 3, 4, 5)
         end
+
         return fee * 3
     end
 end
