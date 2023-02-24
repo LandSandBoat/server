@@ -31,7 +31,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, xi.items.VULCAN_SWORD)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.VULCAN_SWORD)
 end
 
 return itemObject

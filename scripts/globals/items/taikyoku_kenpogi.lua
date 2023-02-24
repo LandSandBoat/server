@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.EVASION_BOOST, 3, 0, 1800, xi.items.TAIKYOKU_KENPOGI)
+    target:addStatusEffect(xi.effect.EVASION_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.TAIKYOKU_KENPOGI)
 end
 
 return itemObject

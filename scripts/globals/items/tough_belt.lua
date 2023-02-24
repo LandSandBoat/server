@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, xi.items.TOUGH_BELT)
+    target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 0, 0, 0, xi.items.TOUGH_BELT)
 end
 
 return itemObject

@@ -27,7 +27,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, xi.items.THUNDER_MITTENS)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.THUNDER_MITTENS)
 end
 
 return itemObject
