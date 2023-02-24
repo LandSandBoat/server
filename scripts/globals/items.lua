@@ -2942,6 +2942,7 @@ xi.items =
     YINYANG_LORGNETTE               = 13139,
     OPO_OPO_NECKLACE                = 13143,
     WING_GORGET                     = 13144,
+    UGGALEPIH_NECKLACE              = 13147,
     EVASION_TORQUE                  = 13148,
     PARRYING_TORQUE                 = 13149,
     SHIELD_TORQUE                   = 13150,

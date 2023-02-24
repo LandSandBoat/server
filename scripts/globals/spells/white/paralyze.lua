@@ -26,7 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.bonus = 0
+    params.bonus = 10
     params.effect = xi.effect.PARALYSIS
     params.tier = 1
 

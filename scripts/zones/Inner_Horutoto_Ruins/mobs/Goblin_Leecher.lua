@@ -12,7 +12,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.SLENDLIX_SPINDLETHUMB_PH, 10, 3600) -- 1 hour
+    if xi.settings.main.ENABLE_WOTG then
+        xi.mob.phOnDespawn(mob, ID.mob.SLENDLIX_SPINDLETHUMB_PH, 10, 3600) -- 1 hour
+    end
 end
 
 return entity

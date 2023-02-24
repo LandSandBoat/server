@@ -906,13 +906,13 @@ INSERT INTO `item_latents` VALUES (14009,23,9,0,75);     -- Attack+9 when HP <=7
 -- Grand Temple Knight's Gauntlets
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14013,9,2,53,1);      -- DEX +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (14013,110,10,53,1);   -- DEX +2 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (14013,110,10,53,1);   -- PARRY +10 in areas outside own nation's control
 
 -- -------------------------------------------------------
 -- Grand Temple Knight's Bangles
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14014,11,2,53,1);     -- AGI +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (14014,68,7,53,1);     -- EVA +7 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (14014,108,7,53,1);     -- Evasion Skill +7 in areas outside own nation's control
 
 -- -------------------------------------------------------
 -- Praefectus's Gloves
