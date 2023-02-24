@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.REFRESH)
-    if effect ~= nil and effect:getItemSourceID() == 18241 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.VIAL_OF_REFRESH_MUSK then
         target:delStatusEffect(xi.effect.REFRESH)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.REFRESH, 3, 3, 60, 18241)
+    target:addStatusEffect(xi.effect.REFRESH, 3, 3, 60, xi.items.VIAL_OF_REFRESH_MUSK)
 end
 
 return itemObject

@@ -11,7 +11,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.MAX_MP_BOOST)
-    if effect ~= nil and effect:getItemSourceID() == 15782 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.MANASHELL_RING then
         target:delStatusEffect(xi.effect.MAX_MP_BOOST)
     end
 
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.MAX_MP_BOOST, 9, 0, 180, 0, 0, 0, 15782)
+    target:addStatusEffect(xi.effect.MAX_MP_BOOST, 9, 0, 180, 0, 0, 0, xi.items.MANASHELL_RING)
 end
 
 return itemObject

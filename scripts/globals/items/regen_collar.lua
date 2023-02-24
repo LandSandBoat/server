@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.REGEN)
-    if effect ~= nil and effect:getItemSourceID() == 15526 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.REGEN_COLLAR then
         target:delStatusEffect(xi.effect.REGEN)
     end
 
@@ -19,7 +19,7 @@ end
 
 itemObject.onItemUse = function(target)
     if not target:hasStatusEffect(xi.effect.REGEN) then
-        target:addStatusEffect(xi.effect.REGEN, 1, 3, 120, 0, 0, 0, 15526)
+        target:addStatusEffect(xi.effect.REGEN, 1, 3, 120, 0, 0, 0, xi.items.REGEN_COLLAR)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

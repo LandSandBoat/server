@@ -7,7 +7,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENBLIZZARD)
-    if effect ~= nil and effect:getItemSourceID() == 14990 then
+    if
+        effect ~= nil and
+        effect:getItemSourceID() == xi.items.BLIZZARD_GLOVES
+    then
         target:delStatusEffect(xi.effect.ENBLIZZARD)
     end
 
@@ -27,7 +30,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, 14990)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.BLIZZARD_GLOVES)
 end
 
 return itemObject

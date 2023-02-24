@@ -11,7 +11,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == 15507 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.PURGATORY_COLLAR then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 45, 0, 0, 0, 15507)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 45, 0, 0, 0, xi.items.PURGATORY_COLLAR)
 end
 
 itemObject.onEffectGain = function(target)
