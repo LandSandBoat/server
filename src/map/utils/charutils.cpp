@@ -114,6 +114,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 static constexpr int32                               ExpTableRowCount = 60;
 std::array<std::array<uint16, 20>, ExpTableRowCount> g_ExpTable;
 std::array<uint16, 100>                              g_ExpPerLevel;
+std::array<uint16, 50>                               g_ExemplarPerLevel;
 
 /************************************************************************
  *                                                                       *
@@ -660,6 +661,68 @@ namespace charutils
             PChar->jobs.exp[JOB_RUN] = (uint16)sql->GetIntData(22);
             meritPoints              = (uint8)sql->GetIntData(23);
             limitPoints              = (uint16)sql->GetIntData(24);
+        }
+
+        fmtQuery = "SELECT war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
+                   "FROM char_exemplar_points "
+                   "WHERE charid = %u;";
+
+        ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            PChar->jobs.exemplar_points[JOB_WAR] = (uint16)sql->GetIntData(0);
+            PChar->jobs.exemplar_points[JOB_MNK] = (uint16)sql->GetIntData(1);
+            PChar->jobs.exemplar_points[JOB_WHM] = (uint16)sql->GetIntData(2);
+            PChar->jobs.exemplar_points[JOB_BLM] = (uint16)sql->GetIntData(3);
+            PChar->jobs.exemplar_points[JOB_RDM] = (uint16)sql->GetIntData(4);
+            PChar->jobs.exemplar_points[JOB_THF] = (uint16)sql->GetIntData(5);
+            PChar->jobs.exemplar_points[JOB_PLD] = (uint16)sql->GetIntData(6);
+            PChar->jobs.exemplar_points[JOB_DRK] = (uint16)sql->GetIntData(7);
+            PChar->jobs.exemplar_points[JOB_BST] = (uint16)sql->GetIntData(8);
+            PChar->jobs.exemplar_points[JOB_BRD] = (uint16)sql->GetIntData(9);
+            PChar->jobs.exemplar_points[JOB_RNG] = (uint16)sql->GetIntData(10);
+            PChar->jobs.exemplar_points[JOB_SAM] = (uint16)sql->GetIntData(11);
+            PChar->jobs.exemplar_points[JOB_NIN] = (uint16)sql->GetIntData(12);
+            PChar->jobs.exemplar_points[JOB_DRG] = (uint16)sql->GetIntData(13);
+            PChar->jobs.exemplar_points[JOB_SMN] = (uint16)sql->GetIntData(14);
+            PChar->jobs.exemplar_points[JOB_BLU] = (uint16)sql->GetIntData(15);
+            PChar->jobs.exemplar_points[JOB_COR] = (uint16)sql->GetIntData(16);
+            PChar->jobs.exemplar_points[JOB_PUP] = (uint16)sql->GetIntData(17);
+            PChar->jobs.exemplar_points[JOB_DNC] = (uint16)sql->GetIntData(18);
+            PChar->jobs.exemplar_points[JOB_SCH] = (uint16)sql->GetIntData(19);
+            PChar->jobs.exemplar_points[JOB_GEO] = (uint16)sql->GetIntData(20);
+            PChar->jobs.exemplar_points[JOB_RUN] = (uint16)sql->GetIntData(21);
+        }
+
+        fmtQuery = "SELECT war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
+                   "FROM char_master_levels "
+                   "WHERE charid = %u;";
+
+        ret = sql->Query(fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            PChar->jobs.job_mastery[JOB_WAR] = (uint16)sql->GetIntData(0);
+            PChar->jobs.job_mastery[JOB_MNK] = (uint16)sql->GetIntData(1);
+            PChar->jobs.job_mastery[JOB_WHM] = (uint16)sql->GetIntData(2);
+            PChar->jobs.job_mastery[JOB_BLM] = (uint16)sql->GetIntData(3);
+            PChar->jobs.job_mastery[JOB_RDM] = (uint16)sql->GetIntData(4);
+            PChar->jobs.job_mastery[JOB_THF] = (uint16)sql->GetIntData(5);
+            PChar->jobs.job_mastery[JOB_PLD] = (uint16)sql->GetIntData(6);
+            PChar->jobs.job_mastery[JOB_DRK] = (uint16)sql->GetIntData(7);
+            PChar->jobs.job_mastery[JOB_BST] = (uint16)sql->GetIntData(8);
+            PChar->jobs.job_mastery[JOB_BRD] = (uint16)sql->GetIntData(9);
+            PChar->jobs.job_mastery[JOB_RNG] = (uint16)sql->GetIntData(10);
+            PChar->jobs.job_mastery[JOB_SAM] = (uint16)sql->GetIntData(11);
+            PChar->jobs.job_mastery[JOB_NIN] = (uint16)sql->GetIntData(12);
+            PChar->jobs.job_mastery[JOB_DRG] = (uint16)sql->GetIntData(13);
+            PChar->jobs.job_mastery[JOB_SMN] = (uint16)sql->GetIntData(14);
+            PChar->jobs.job_mastery[JOB_BLU] = (uint16)sql->GetIntData(15);
+            PChar->jobs.job_mastery[JOB_COR] = (uint16)sql->GetIntData(16);
+            PChar->jobs.job_mastery[JOB_PUP] = (uint16)sql->GetIntData(17);
+            PChar->jobs.job_mastery[JOB_DNC] = (uint16)sql->GetIntData(18);
+            PChar->jobs.job_mastery[JOB_SCH] = (uint16)sql->GetIntData(19);
+            PChar->jobs.job_mastery[JOB_GEO] = (uint16)sql->GetIntData(20);
+            PChar->jobs.job_mastery[JOB_RUN] = (uint16)sql->GetIntData(21);
         }
 
         fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
@@ -3642,6 +3705,23 @@ namespace charutils
                 }
             }
         }
+
+        auto maxML = settings::get<uint8>("main.MAX_MASTER_LEVEL");
+        if (maxML > 0)
+        {
+            ret = sql->Query("SELECT level, exp FROM exp_master_levels LIMIT 100;");
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
+            {
+                while (sql->NextRow() == SQL_SUCCESS)
+                {
+                    uint8 level = (uint8)sql->GetIntData(0) - 1;
+                    if (level < maxML)
+                    {
+                        g_ExemplarPerLevel[level] = (uint16)sql->GetIntData(1);
+                    }
+                }
+            }
+        }
     }
 
     /************************************************************************
@@ -3714,6 +3794,22 @@ namespace charutils
         if (charlvl > 0 && charlvl < 100)
         {
             return g_ExpPerLevel[charlvl];
+        }
+        return 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     * Returns the EXP needed to obtain the next master level                *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 GetMasterExpNextLevel(uint8 masterlvl)
+    {
+        auto maxML = settings::get<uint8>("main.MAX_MASTER_LEVEL");
+        if (maxML > 0 && masterlvl > 0 && masterlvl < maxML)
+        {
+            return g_ExemplarPerLevel[masterlvl];
         }
         return 0;
     }
@@ -4573,6 +4669,11 @@ namespace charutils
         uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
         bool   onLimitMode = false;
 
+        // If the player is job mastered
+        // if (charutils::hasKeyItem())
+        // {
+        // }
+
         // Incase player de-levels to 74 on the field
         if (PChar->MeritMode && PChar->jobs.job[PChar->GetMJob()] > 74 && !expFromRaise)
         {
@@ -4778,6 +4879,16 @@ namespace charutils
         {
             roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("exp", exp));
         }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Add Master Level Experience Points                                   *
+     *                                                                       *
+     ************************************************************************/
+
+    void AddMasterExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
+    {
     }
 
     /************************************************************************

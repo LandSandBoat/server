@@ -1001,7 +1001,21 @@ int32 lobby_createchar_save(uint32 accid, uint32 charid, char_mini* createchar)
         return -1;
     }
 
+    Query = "INSERT INTO char_exemplar_points(charid) VALUES(%u) \
+            ON DUPLICATE KEY UPDATE charid = charid;";
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
+    {
+        return -1;
+    }
+
     Query = "INSERT INTO char_jobs(charid) VALUES(%u) \
+            ON DUPLICATE KEY UPDATE charid = charid;";
+    if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
+    {
+        return -1;
+    }
+
+    Query = "INSERT INTO char_master_levels(charid) VALUES(%u) \
             ON DUPLICATE KEY UPDATE charid = charid;";
     if (sql->Query(Query, charid, createchar->m_mjob) == SQL_ERROR)
     {

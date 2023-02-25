@@ -58,11 +58,17 @@ struct jobs_t
     uint16 exp[MAX_JOBTYPE]; // the experience points for each of the jobs above
     uint8  genkai;           // the maximum genkai level achieved
 
+    // Master Levels
+    uint8  job_mastery[MAX_JOBTYPE];
+    uint16 exemplar_points[MAX_JOBTYPE];
+
     jobs_t()
     {
         unlocked = 0;
         std::memset(&job, 0, sizeof(job));
         std::memset(&exp, 0, sizeof(exp));
+        std::memset(&job_mastery, 0, sizeof(job_mastery));
+        std::memset(&exemplar_points, 0, sizeof(exemplar_points));
         genkai = 0;
     }
 };

@@ -84,13 +84,14 @@ namespace charutils
 
     uint32 GetBaseExp(uint8 charlvl, uint8 moblvl);
     uint32 GetExpNEXTLevel(uint8 charlvl);
+    uint32 GetMasterExpNextLevel(uint8 masterlvl);
 
     void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);
     void DistributeGil(CCharEntity* PChar, CMobEntity* PMob);
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate);
-    void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak,
-                             bool isexpchain = false);
+    void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
+    void AddMasterExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
     void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
