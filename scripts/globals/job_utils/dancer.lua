@@ -27,6 +27,24 @@ local waltzAbilities =
     [xi.jobAbility.DIVINE_WALTZ_II ] = { 800, 0.75, 270 },
 }
 
+local animationTable =
+{
+-- [weapon type] = { step, flourish }
+    [ 0] = { 15, 25 },
+    [ 1] = { 15, 25 },
+    [ 2] = { 14, 24 },
+    [ 3] = { 14, 24 },
+    [ 4] = { 19, 29 },
+    [ 5] = { 16, 26 },
+    [ 6] = { 18, 28 },
+    [ 7] = { 18, 28 },
+    [ 8] = { 20, 30 },
+    [ 9] = { 21, 31 },
+    [10] = { 22, 32 },
+    [11] = { 17, 27 },
+    [12] = { 23, 33 },
+}
+
 -----------------------------------
 -- Local functions.
 -----------------------------------
@@ -72,7 +90,7 @@ local function setFinishingMoves(player, numMoves)
     numMoves              = math.min(numMoves, getMaxFinishingMoves(player))
 
     if finishingEffect then
-        if numMoves <= 0 then
+        if numMoves == 0 then
             player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
         else
             finishingEffect:setPower(numMoves)
@@ -85,52 +103,16 @@ local function setFinishingMoves(player, numMoves)
 end
 
 local function getStepAnimation(weaponSkillType)
-    if weaponSkillType <= 1 then
-        return 15
-    elseif weaponSkillType <= 3 then
-        return 14
-    elseif weaponSkillType == 4 then
-        return 19
-    elseif weaponSkillType == 5 then
-        return 16
-    elseif weaponSkillType <= 7 then
-        return 18
-    elseif weaponSkillType == 8 then
-        return 20
-    elseif weaponSkillType == 9 then
-        return 21
-    elseif weaponSkillType == 10 then
-        return 22
-    elseif weaponSkillType == 11 then
-        return 17
-    elseif weaponSkillType == 12 then
-        return 23
+    if weaponSkillType <= 12 then
+        return animationTable[weaponSkillType][1]
     else
         return 0
     end
 end
 
 local function getFlourishAnimation(weaponSkillType)
-    if weaponSkillType <= 1 then
-        return 25
-    elseif weaponSkillType <= 3 then
-        return 24
-    elseif weaponSkillType == 4 then
-        return 29
-    elseif weaponSkillType == 5 then
-        return 26
-    elseif weaponSkillType <= 7 then
-        return 28
-    elseif weaponSkillType == 8 then
-        return 30
-    elseif weaponSkillType == 9 then
-        return 31
-    elseif weaponSkillType == 10 then
-        return 32
-    elseif weaponSkillType == 11 then
-        return 27
-    elseif weaponSkillType == 12 then
-        return 33
+    if weaponSkillType <= 12 then
+        return animationTable[weaponSkillType][2]
     else
         return 0
     end
@@ -176,9 +158,9 @@ xi.job_utils.dancer.checkFlourishAbility = function(player, target, ability, com
     end
 
     -- Finishing Move check.
-    local finishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
+    local numFinishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
 
-    if finishingMoves >= minimumCost then
+    if numFinishingMoves >= minimumCost then
         return 0, 0
     else
         return xi.msg.basic.NO_FINISHINGMOVES, 0
@@ -430,7 +412,7 @@ xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, abilit
     local power = utils.clamp(availableMoves, 0, 3)
 
     player:addStatusEffect(xi.effect.BUILDING_FLOURISH, power, 0, 60, 0, flourishMerits)
-    setFinishingMoves(player, availableMoves - 3)
+    setFinishingMoves(player, availableMoves - power)
 end
 
 xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, action)
