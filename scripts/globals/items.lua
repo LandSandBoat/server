@@ -422,6 +422,7 @@ xi.items =
     FALLEN_STAR                     = 1192,
     SAHAGIN_KEY                     = 1197,
     SACRED_SPRIG                    = 1198,
+    BAG_OF_CACTUS_STEMS             = 1236,
     BAG_OF_TREE_CUTTINGS            = 1237,
     GOBLIN_DOLL                     = 1239,
     CHUNK_OF_FIRE_ORE               = 1255,
