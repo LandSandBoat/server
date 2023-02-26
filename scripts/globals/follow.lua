@@ -185,7 +185,7 @@ function onMobRoamAction(follower)
     if follower:isFollowingPath() then
         return
     end
-    
+
     local followerId = follower:getID()
     local leaderId = leader:getID()
     local options = followerOptions[followerId]

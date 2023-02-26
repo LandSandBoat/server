@@ -8,18 +8,14 @@ require("scripts/globals/status")
 local entity = {}
 
 function entity.onMobSpawn(mob)
-    local mobId = mob:getID()
-    local x = mob:getXPos()
-    local y = mob:getYPos()
-    local z = mob:getZPos()
-    local r = mob:getRotPos()
-
     mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 50)
 
+    local mobId = mob:getID()
     local numFollowers = mob:getMobMod(xi.mobMod.LEADER)
 
     if numFollowers == 0 then
+        -- Baby Ul'xzomit
         mob:setMobFlags(1153)
 
         for i = 1, 2 do
@@ -36,6 +32,7 @@ function entity.onMobSpawn(mob)
             end
         end
     else
+        -- Mother Ul'xzomit
         for i = 1, numFollowers do
             local follower = GetMobByID(mobId + i)
 
