@@ -15,8 +15,9 @@ local followerToLeaderMap = {}
 local followerOptions = {}
 
 local addFollower
-local removeFollower
+local cleanupFollower
 local onMobRoamAction
+local onMobDespawn
 
 --- Change one mob's roaming behavior to persistently follow a target.
 -- Will be reset when the mob or target despawns. A variety of options are available to configure the follow behavior.
@@ -26,11 +27,11 @@ local onMobRoamAction
 -- @param leader the target to follow.
 -- @param @{ followOptions } options[opt] a table of configuration settings for the follow behavior.
 --
--- @field followDistance[opt=8.0] in yalms, the preferred distance to the target to stay within.
--- @field separationAngle[opt=0.125] in radians, separation to keep from other followers. 0.125 is roughly 1 yalm separation at 8 yalms distance.
--- @field pathFlags[opt=xi.pathflag.RUN & xi.pathflag.WALLHACK & xi.pathflag.SCRIPT] flags to pass to the pathTo() function.
--- @field roamCooldown[opt=2] in seconds, wait time between each new calculation of a follow path.
--- @field warpDistance[opt=35.0] in yalms, distance at which the follower will teleport to the target.
+-- @field followDistance[opt=5.0] in yalms, the preferred distance to the target to stay within.
+-- @field separationAngle[opt=0.2] in radians, minimum separation to keep from other followers. 0.2 is roughly 1 yalm separation at 5 yalms distance.
+-- @field pathFlags[opt=xi.pathflag.WALLHACK & xi.pathflag.SCRIPT] flags to pass to the pathTo() function.
+-- @field roamCooldown[opt=false] in seconds, wait time between each new calculation of a follow path. false to leave unchanged.
+-- @field warpDistance[opt=35.0] in yalms, distance at which the follower will teleport to the target. 0 to disable.
 -- @table followOptions
 -----------------------------------
 function xi.follow.follow(mob, leader, options)
@@ -43,10 +44,10 @@ function xi.follow.follow(mob, leader, options)
     end
 
     options = options or {}
-    options.followDistance = options.followDistance or 8.0
-    options.separationAngle = options.separationAngle or 0.125
-    options.pathFlags = options.pathFlags or bit.band(xi.pathflag.RUN, xi.pathflag.WALLHACK, xi.pathflag.SCRIPT)
-    options.roamCooldown = options.roamCooldown or 2
+    options.followDistance = options.followDistance or 5.0
+    options.separationAngle = options.separationAngle or 0.2
+    options.pathFlags = options.pathFlags or bit.band(xi.pathflag.WALLHACK, xi.pathflag.SCRIPT)
+    options.roamCooldown = options.roamCooldown or false
     options.warpDistance = options.warpDistance or 35.0
 
     addFollower(leader, mob, options)
@@ -56,9 +57,7 @@ function addFollower(leader, follower, options)
     local leaderId = leader:getID()
     local followerId = follower:getID()
 
-    if followerToLeaderMap[followerId] then
-        removeFollower(followerToLeaderMap[followerId], follower)
-    end
+    xi.follow.stopFollowing(follower)
 
     leaderToFollowersMap[leaderId] = leaderToFollowersMap[leaderId] or {}
 
@@ -66,19 +65,50 @@ function addFollower(leader, follower, options)
     followerToLeaderMap[followerId] = leader
 
     follower:addListener("ROAM_ACTION", "FOLLOW_ROAM_ACTION", onMobRoamAction)
+    follower:addListener("DESPAWN", "FOLLOW_DESPAWN", onMobDespawn)
+    follower:setLocalVar("[follow]roamFlags", follower:getRoamFlags())
+    follower:setLocalVar("[follow]DONT_ROAM_HOME", follower:getMobMod(xi.mobMod.DONT_ROAM_HOME))
+    follower:setLocalVar("[follow]ROAM_COOL", follower:getMobMod(xi.mobMod.ROAM_COOL))
     follower:setRoamFlags(xi.roamFlag.SCRIPTED)
     follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, 1)
-    follower:setMobMod(xi.mobMod.ROAM_COOL, options.roamCooldown)
+    if options.roamCooldown then
+        follower:setMobMod(xi.mobMod.ROAM_COOL, options.roamCooldown)
+    end
+
     followerOptions[followerId] = options
 end
 
-function removeFollower(leader, follower)
-    local leaderId = leader:getID()
-    local followerId = follower:getID()
+function cleanupFollower(follower)
+    followerOptions[follower:getID()] = nil
+    follower:removeListener("FOLLOW_ROAM_ACTION")
+    follower:removeListener("FOLLOW_DESPAWN")
+    follower:setRoamFlags(follower:getLocalVar("[follow]roamFlags"))
+    follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, follower:getLocalVar("[follow]DONT_ROAM_HOME"))
+    follower:setMobMod(xi.mobMod.ROAM_COOL, follower:getLocalVar("[follow]ROAM_COOL"))
+end
 
-    if followerToLeaderMap[followerId] == leaderId then
-        followerToLeaderMap[followerId] = nil
+function xi.follow.clearFollowers(leader)
+    local followers = xi.follow.getFollowers(leader)
+
+    if not followers or #followers == 0 then
+        return
     end
+
+    for _, follower in ipairs(followers) do
+        xi.follow.stopFollowing(follower)
+    end
+end
+
+function xi.follow.stopFollowing(follower)
+    local followerId = follower:getID()
+    local leader = followerToLeaderMap[followerId]
+
+    if not leader then
+        return
+    end
+
+    followerToLeaderMap[followerId] = nil
+    local leaderId = leader:getID()
 
     if leaderToFollowersMap[leaderId] then
         for i, mob in ipairs(leaderToFollowersMap[leaderId]) do
@@ -93,39 +123,14 @@ function removeFollower(leader, follower)
         end
     end
 
-    follower:removeListener("FOLLOW_ROAM_ACTION")
-    followerOptions[followerId] = nil
-end
-
-function xi.follow.clearFollowers(leader)
-    local leaderId = leader:getID()
-
-    if not leaderToFollowersMap[leaderId] then
-        return
-    end
-
-    for _, follower in ipairs(leaderToFollowersMap[leaderId]) do
-        local followerId = follower:getID()
-        if followerToLeaderMap[followerId] == leaderId then
-            followerToLeaderMap[followerId] = nil
-            follower:removeListener("FOLLOW_ROAM_ACTION")
-            followerOptions[followerId] = nil
-        end
-    end
-
-    leaderToFollowersMap[leaderId] = nil
-end
-
-function xi.follow.stopFollowing(follower)
-    local leader = followerToLeaderMap[follower:getID()]
-    if leader then
-        removeFollower(leader, follower)
-    end
+    cleanupFollower(follower)
 end
 
 local function getAveragePos(mobsPos)
     if #mobsPos == 0 then
         return nil
+    elseif #mobsPos == 1 then
+        return mobsPos[1]
     end
 
     local count = #mobsPos
@@ -152,6 +157,7 @@ local function filterFollowersToPosArray(leaderPos, followerPos, followers, with
 
     for _, mob in ipairs(followers) do
         local mobPos = mob:getPos()
+
         if
             mob:isSpawned() and
             not utils.distanceWithin(leaderPos, mobPos, withinDistance, true) and
@@ -165,11 +171,9 @@ local function filterFollowersToPosArray(leaderPos, followerPos, followers, with
 end
 
 function onMobRoamAction(follower)
-    local followerId = follower:getID()
-    local leader = followerToLeaderMap[followerId]
+    local leader = xi.follow.getFollowTarget(follower)
 
     if
-        not follower:isSpawned() or
         not leader or
         not leader:isSpawned() or
         leader:getZoneID() ~= follower:getZoneID()
@@ -181,7 +185,9 @@ function onMobRoamAction(follower)
     if follower:isFollowingPath() then
         return
     end
-
+    
+    local followerId = follower:getID()
+    local leaderId = leader:getID()
     local options = followerOptions[followerId]
     local leaderPos = leader:getPos()
     local followerPos = follower:getPos()
@@ -191,7 +197,7 @@ function onMobRoamAction(follower)
     local separationAngle = options.separationAngle
 
     if followerDistance > followDistance + 1.0 then
-        local followers = leaderToFollowersMap[leader:getID()]
+        local followers = leaderToFollowersMap[leaderId]
         local followerIndex
         local followerCount = #followers
 
@@ -208,24 +214,23 @@ function onMobRoamAction(follower)
             -- Ignore other followers, go straight to leader.
             local targetAngle = utils.getWorldAngle(leaderPos, followerPos)
             local targetPos = utils.getNearPosition(leaderPos, followDistance, targetAngle)
-            follower:resetAI()
+
             follower:pathTo(targetPos.x, targetPos.y, targetPos.z)
         else
             -- Go to leader while leaving room for other followers.
             local targetAngle = getAverageWorldAngle(leaderPos, filteredFollowersPos)
             targetAngle = targetAngle + (separationAngle * (followerIndex - 1)) - (separationAngle * (followerCount - 1) / 2)
             local targetPos = utils.getNearPosition(leaderPos, followDistance, targetAngle)
-            follower:resetAI()
+
             follower:pathTo(targetPos.x, targetPos.y, targetPos.z)
         end
-    elseif followerDistance > warpDistance then
+    elseif warpDistance > 0 and followerDistance > warpDistance then
         follower:teleport(utils.getNearPosition(leaderPos, 2 + math.random() * (followDistance - 2), math.random() * 2 * math.pi), leader)
     end
 end
 
--- Similar to xi.follow.follow(), except the followers will fan out evenly around the target.
--- If requiredAngle is provided, that angle (relative to the target's facing) will be kept by one of the followers.
-function xi.follow.bodyguard(mob, target, followDistance, requiredAngle, pathingFlags)
+function onMobDespawn(mob)
+    xi.follow.stopFollowing(mob)
 end
 
 function xi.follow.getFollowers(leader)
@@ -236,7 +241,9 @@ function xi.follow.getFollowers(leader)
 
     local clone = {}
     for _, follower in ipairs(followers) do
-        table.insert(clone, follower)
+        if follower then
+            table.insert(clone, follower)
+        end
     end
 
     return clone

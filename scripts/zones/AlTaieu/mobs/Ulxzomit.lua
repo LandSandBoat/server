@@ -3,75 +3,86 @@
 --  Mob: Ul'xzomit
 -----------------------------------
 require("scripts/globals/follow")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+function entity.onMobSpawn(mob)
     local mobId = mob:getID()
     local x = mob:getXPos()
     local y = mob:getYPos()
     local z = mob:getZPos()
     local r = mob:getRotPos()
 
-    if mob:getMobMod(xi.mobMod.LEADER) > 0 then
-        for i = 1, mob:getMobMod(xi.mobMod.LEADER) do
-            local followerId = mobId + i
-            local follower = GetMobByID(followerId)
+    mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 50)
 
-            if not follower:isSpawned() then
-                local newX = x + math.random(-2, 2)
-                local newY = y
-                local newZ = z + math.random(-2, 2)
+    local numFollowers = mob:getMobMod(xi.mobMod.LEADER)
 
-                follower:setSpawn(newX, newY, newZ, r)
-                follower:spawn()
-                follower:setMobFlags(1153)
+    if numFollowers == 0 then
+        mob:setMobFlags(1153)
+
+        for i = 1, 2 do
+            local leader = GetMobByID(mobId - i)
+
+            if leader and leader:getMobMod(xi.mobMod.LEADER) >= i then
+                mob:setLocalVar("leaderID", leader:getID())
+
+                if leader:isSpawned() then
+                    xi.follow.follow(mob, leader)
+                end
+
+                return
             end
+        end
+    else
+        for i = 1, numFollowers do
+            local follower = GetMobByID(mobId + i)
 
-            xi.follow.follow(follower, mob)
+            if follower and follower:isSpawned() then
+                xi.follow.follow(follower, mob)
+            end
         end
     end
 end
 
-entity.onMobEngaged = function(mob, target)
-    local followers = xi.follow.getFollowers(mob)
+function entity.onMobFight(mob, target)
+end
 
-    if not followers then
+function entity.onMobEngaged(mob, target)
+end
+
+function entity.onMobDisengage(mob)
+end
+
+function entity.onMobRoam(mob)
+end
+
+-- Do the linking for the babies.
+function entity.onMobRoamAction(mob)
+    if mob:getMobMod(xi.mobMod.LEADER) > 0 then
         return
     end
 
-    for _, follower in ipairs(followers) do
-        if follower:isSpawned() and not follower:isEngaged() then
-            follower:updateEnmity(target)
-        end
-    end
-end
+    local leader = GetMobByID(mob:getLocalVar("leaderID"))
 
-entity.onMobRoam = function(mob, player)
-    -- TODO: Respawn followers?
-    -- They might all stay dead until the entire group is killed, then respawn as a group.
-end
-
--- Do the following and linking for the babies.
-entity.onMobRoamAction = function(mob)
-    local leader = xi.follow.getFollowTarget(mob)
-    if
-        not leader or
-        not leader:isSpawned()
-    then
+    if not leader or not leader:isSpawned() then
         return
     end
 
-    if leader:isEngaged() then
+    if leader:isEngaged() and leader:checkDistance(mob) <= 8 then
         local leaderTarget = leader:getTarget()
+
         if leaderTarget then
             mob:updateEnmity(leaderTarget)
             return
         end
     end
+end
 
-    if mob:isFollowingPath() then
-        return
+function entity.onMobDeath(mob, player, isKiller)
+    if mob:getMobMod(xi.mobMod.LEADER) > 0 then
+        xi.follow.clearFollowers(mob)
     end
 end
 
