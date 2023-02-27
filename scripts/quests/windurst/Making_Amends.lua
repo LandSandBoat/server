@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AM
 
 quest.reward =
 {
-    fame     = 150,
+    fame     = 75,
     fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.QUICK_FIXER,
     gil      = 1500,
@@ -31,7 +31,7 @@ quest.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Hakkuru-Rinkuru'] = quest:progressEvent(274, 0, xi.items.ANIMAL_GLUE),
+            ['Hakkuru-Rinkuru'] = quest:progressEvent(274, 0, xi.items.BLOCK_OF_ANIMAL_GLUE),
 
             onEventFinish =
             {
@@ -54,15 +54,15 @@ quest.sections =
             ['Hakkuru-Rinkuru'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.ANIMAL_GLUE) then
-                        return quest:event(277, 1500)
+                    if npcUtil.tradeHasExactly(trade, xi.items.BLOCK_OF_ANIMAL_GLUE) then
+                        return quest:event(277, quest.reward.gil)
                     else
-                        return quest:event(275, 0, xi.items.ANIMAL_GLUE)
+                        return quest:event(275, 0, xi.items.BLOCK_OF_ANIMAL_GLUE)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    return quest:event(275, 0, xi.items.ANIMAL_GLUE)
+                    return quest:event(275, 0, xi.items.BLOCK_OF_ANIMAL_GLUE)
                 end,
             },
 

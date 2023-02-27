@@ -63,7 +63,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(260, 0, xi.items.OAK_STAFF, xi.items.MYTHRIL_ROD, xi.items.ROSE_WAND)
+                    return quest:event(260, 0, xi.items.OAK_STAFF, xi.items.MYTHRIL_ROD, xi.items.ROSE_WAND)
                 end,
             },
 
