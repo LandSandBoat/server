@@ -849,27 +849,27 @@ end
 
 xi.job_utils.dragoon.addWyvernExp = function(player, exp)
     local wyvern   = player:getPet()
-    local prev_exp = wyvern:getLocalVar("wyvern_exp")
-    local levels_gained = wyvern:getLocalVar("wyvern_level_ups")
+    local prevExp = wyvern:getLocalVar("wyvern_exp")
+    local numLevelUps = wyvern:getLocalVar("wyvern_level_ups")
 
-    if prev_exp < 1000 and levels_gained < 5 then
+    if prevExp < 1000 and numLevelUps < 5 then
         -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
-        local currentExp = utils.clamp(exp + prev_exp, 0, 1000)
-        local diff = math.floor(currentExp / 200) - levels_gained
+        local currentExp = utils.clamp(exp + prevExp, 0, 1000)
+        local diff = math.floor(currentExp / 200) - numLevelUps
 
         while diff > 0 do
-            -- wyvern levelled up (diff is the number of level ups)
+            -- wyvern leveled up (diff is the number of level ups)
             wyvern:addMod(xi.mod.ACC, 6)
             wyvern:addMod(xi.mod.HPP, 6)
             wyvern:addMod(xi.mod.ATTP, 5)
             wyvern:setHP(wyvern:getMaxHP())
             player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
-            wyvern:setLocalVar("wyvern_level_ups", levels_gained + 1)
+            wyvern:setLocalVar("wyvern_level_ups", numLevelUps + 1)
             diff = diff - 1
         end
 
-        wyvern:setLocalVar("wyvern_exp", prev_exp + exp)
+        wyvern:setLocalVar("wyvern_exp", prevExp + exp)
     end
 
-    return levels_gained
+    return numLevelUps
 end
