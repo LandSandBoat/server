@@ -382,6 +382,7 @@ class CJobPoints
 {
 public:
     CJobPoints(CCharEntity* PChar);
+    bool   IsJobMastered(JOBPOINT_TYPE jpCategory);
     bool   IsJobPointExist(JOBPOINT_TYPE jpType); // Check to see if JP exists
     void   RaiseJobPoint(JOBPOINT_TYPE jpType);   // Add upgrade
     uint16 GetJobPoints();                        // Get unspent job points for current job

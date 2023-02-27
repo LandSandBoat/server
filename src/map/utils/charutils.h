@@ -84,18 +84,23 @@ namespace charutils
 
     uint32 GetBaseExp(uint8 charlvl, uint8 moblvl);
     uint32 GetExpNEXTLevel(uint8 charlvl);
-    uint32 GetMasterExpNextLevel(uint8 masterlvl);
 
     void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
     void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);
     void DistributeGil(CCharEntity* PChar, CMobEntity* PMob);
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate);
     void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
-    void AddMasterExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
     void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
     void   DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob);
+
+    // Exemplar Points (Master Levels)
+    uint32 GetExemplarNextLevel(uint8 masterlvl);
+    uint32 GetBaseExemplarPoints(uint8 masterlvl, uint8 moblvl);
+    void   DelExemplarPoints(CCharEntity* PChar, float reainpct, uint16 forcedXpLoss);
+    void   AddExemplarPoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak, bool isexpchain = false);
+    void   DistributeExemplarPoints(CCharEntity* PChar, CMobEntity* PMob);
 
     void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp = false, bool useSubSkill = false);
     void BuildingCharSkillsTable(CCharEntity* PChar);
@@ -169,11 +174,14 @@ namespace charutils
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // сохраняем уровень для выбранной профессий персонажа
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // сохраняем опыт для выбранной профессии персонажа
-    void SaveCharEquip(CCharEntity* PChar);            // сохраняем экипировку и внешний вид персонажа
-    void SaveCharLook(CCharEntity* PChar);             // Saves a character's appearance based on style locking.
-    void SaveCharPosition(CCharEntity* PChar);         // сохраняем позицию персонажа
+    void SaveCharJob(CCharEntity* PChar, JOBTYPE job);            // сохраняем уровень для выбранной профессий персонажа
+    void SaveCharExp(CCharEntity* PChar, JOBTYPE job);            // сохраняем опыт для выбранной профессии персонажа
+    void SaveCharEquip(CCharEntity* PChar);                       // сохраняем экипировку и внешний вид персонажа
+    void SaveCharLook(CCharEntity* PChar);                        // Saves a character's appearance based on style locking.
+    void SaveCharPosition(CCharEntity* PChar);                    // сохраняем позицию персонажа
+    void SaveCharMasterLevel(CCharEntity* PChar, JOBTYPE job);    // Persist master levels
+    void SaveCharExemplarPoints(CCharEntity* PChar, JOBTYPE job); // Persist exemplar points
+
     // void SaveCharLinkshells(CCharEntity* PChar);            // TODO
     void SaveMissionsList(CCharEntity* PChar);                 // Save the missions list
     void SaveEminenceData(CCharEntity* PChar);                 // Save Eminence Record (RoE) data

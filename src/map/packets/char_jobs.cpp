@@ -23,8 +23,9 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
 #include "char_jobs.h"
+#include "entities/charentity.h"
+#include "job_points.h"
 
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 {
@@ -54,6 +55,25 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
     ref<uint8>(0x65) = 0;    // Mentor Icon
     ref<uint8>(0x66) = 0x01; // Mastery Rank (In Profile Menu)
 
-    ref<uint8>(0x68) = 0; // Is job mastered, and has Master Breaker KI
-    ref<uint8>(0x6D) = 0; // Master Level
+    // If player has received master breaker, send job mastery data in job update.
+    if (PChar->hasMasterBreaker())
+    {
+        uint32 jobMastery = 0;
+        for (uint8 i = MAX_JOBTYPE; i > 0; --i)
+        {
+            jobMastery |= PChar->PJobPoints->IsJobMastered((JOBPOINT_TYPE)(i * 0x20)) << i;
+        }
+        // Is job mastered, and has Master Breaker KI
+        ref<uint32>(0x68) = jobMastery;
+
+        // Job Master Levels
+        memcpy(data + (0x6C), &PChar->jobs.job_mastery, MAX_JOBTYPE); // Job Mastery Levels
+    }
+    else
+    {
+        // If the player has not received the master breaker key item yet
+        // they should not receive this data.
+        ref<uint8>(0x68) = 0;
+        ref<uint8>(0x6D) = 0;
+    }
 }

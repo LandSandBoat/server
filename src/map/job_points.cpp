@@ -66,6 +66,16 @@ void CJobPoints::LoadJobPoints()
     }
 }
 
+bool CJobPoints::IsJobMastered(JOBPOINT_TYPE jpType)
+{
+    auto jp = this->GetJobPointsByType(jpType);
+    if (jp)
+    {
+        return jp->totalJpSpent == 2100;
+    }
+    return false;
+}
+
 bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jpType)
 {
     if ((static_cast<uint16>(jpType) < JOBPOINTS_CATEGORY_START) ||

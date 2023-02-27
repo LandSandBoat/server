@@ -3709,7 +3709,7 @@ namespace charutils
         auto maxML = settings::get<uint8>("main.MAX_MASTER_LEVEL");
         if (maxML > 0)
         {
-            ret = sql->Query("SELECT level, exp FROM exp_master_levels LIMIT 100;");
+            ret = sql->Query("SELECT level, exp FROM exemplar_levels LIMIT 100;");
             if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
                 while (sql->NextRow() == SQL_SUCCESS)
@@ -3800,11 +3800,24 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * Returns the EXP needed to obtain the next master level                *
+     *  Unmodified Exemplar Points that the character will                   *
+     *  receive from the target                                              *
      *                                                                       *
      ************************************************************************/
 
-    uint32 GetMasterExpNextLevel(uint8 masterlvl)
+    uint32 GetBaseExemplarPoints(uint8 masterlvl, uint8 moblvl)
+    {
+        // TODO: Stubbed
+        return 0;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     * Returns the Exemplar Points needed to obtain the next master level    *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 GetExemplarNextLevel(uint8 masterlvl)
     {
         auto maxML = settings::get<uint8>("main.MAX_MASTER_LEVEL");
         if (maxML > 0 && masterlvl > 0 && masterlvl < maxML)
@@ -3957,6 +3970,189 @@ namespace charutils
                     return 0.35;
                 default:
                     return 1.8 / membersInZone;
+            }
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Allocate capacity points                                             *
+     *                                                                       *
+     ************************************************************************/
+
+    void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
+    {
+        TracyZoneScoped;
+
+        // TODO: Capacity Points cannot be gained in Abyssea or Reives.  In addition, Gates areas,
+        //       Ra'Kaznar, Escha, and Reisenjima reduce party penalty for capacity points earned.
+        ZONEID zone     = PChar->loc.zone->GetID();
+        uint8  mobLevel = PMob->GetMLevel();
+
+        PChar->ForAlliance([&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember)
+                           {
+            CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
+
+            if (!PMember || PMember->isDead() || (PMember->loc.zone->GetID() != zone))
+            {
+                // Do not grant Capacity points if null, Dead, or in a different area
+                return;
+            }
+
+            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 99)
+            {
+                // Do not grant Capacity points without Job Breaker or Level 99
+                return;
+            }
+
+            bool  chainActive = false;
+            int16 levelDiff   = mobLevel - 99; // Passed previous 99 check, no need to calculate
+
+            // Capacity Chains are only granted for Mobs level 100+
+            // Ref: https://www.bg-wiki.com/ffxi/Job_Points
+            float capacityPoints = 0;
+
+            if (mobLevel > 99)
+            {
+                // Base Capacity Point formula derived from the table located at:
+                // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
+                capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
+
+                if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
+                {
+                    chainActive = true;
+
+                    // TODO: Needs verification, pulled from: https://www.bluegartr.com/threads/120445-Job-Points-discussion?p=6138288&viewfull=1#post6138288
+                    // Assumption: Chain0 is no bonus, Chains 10+ capped at 1.5 value, f(chain) = 1 + 0.05 * chain
+                    float chainModifier = std::min(1 + 0.05 * PMember->capacityChain.chainNumber, 1.5);
+                    capacityPoints *= chainModifier;
+                }
+                else
+                {
+                    // TODO: Capacity Chain Timer is reduced after Chain 30
+                    PMember->capacityChain.chainTime   = gettick() + 30000;
+                    PMember->capacityChain.chainNumber = 1;
+                }
+
+                if (chainActive)
+                {
+                    PMember->capacityChain.chainTime = gettick() + 30000;
+                }
+
+                capacityPoints = AddCapacityBonus(PMember, capacityPoints);
+                AddCapacityPoints(PMember, PMob, capacityPoints, levelDiff, chainActive);
+            } });
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Return adjusted Capacity point value based on bonuses                *
+     *  Note: rawBonus uses whole number percentage values until returning   *
+     *                                                                       *
+     ************************************************************************/
+
+    uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
+    {
+        TracyZoneScoped;
+
+        float rawBonus = 0;
+
+        // COMMITMENT from Capacity Bands
+
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
+        {
+            CStatusEffect* commitment = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT);
+            int16          percentage = commitment->GetPower();
+            int16          cap        = commitment->GetSubPower();
+            rawBonus += std::clamp<int32>(((capacityPoints * percentage) / 100), 0, cap);
+            commitment->SetSubPower(cap -= rawBonus);
+
+            if (cap <= 0)
+            {
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_COMMITMENT);
+            }
+        }
+
+        // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
+        // This value is stored as uint, as a whole number percentage value
+        rawBonus += PChar->getMod(Mod::CAPACITY_BONUS);
+
+        // Unity Concord Ranking: 2 * (Unity Ranking - 1)
+        uint8 unity = PChar->profile.unity_leader;
+        if (unity >= 1 && unity <= 11)
+        {
+            rawBonus += 2 * (roeutils::RoeSystem.unityLeaderRank[unity - 1] - 1);
+        }
+
+        // RoE Objectives
+        for (auto const& recordValue : roeCapacityBonusRecords)
+        {
+            if (roeutils::GetEminenceRecordCompletion(PChar, recordValue.first))
+            {
+                rawBonus += recordValue.second;
+            }
+        }
+
+        // RoV Key Items - Fuchsia, Puce, Ochre (30%)
+        for (uint16 rovKeyItem = 2890; rovKeyItem <= 2892; rovKeyItem++)
+        {
+            if (hasKeyItem(PChar, rovKeyItem))
+            {
+                rawBonus += 30;
+            }
+        }
+
+        capacityPoints *= 1.f + rawBonus / 100;
+        return capacityPoints;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Add Capacity Points to an individual player                          *
+     *                                                                       *
+     ************************************************************************/
+
+    void AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff, bool isCapacityChain)
+    {
+        TracyZoneScoped;
+
+        if (PChar->isDead())
+        {
+            return;
+        }
+
+        capacityPoints = (uint32)(capacityPoints * settings::get<float>("map.EXP_RATE"));
+
+        if (capacityPoints > 0)
+        {
+            // Capacity Chains start at lv100 mobs
+            if (levelDiff >= 1 && isCapacityChain)
+            {
+                if (PChar->capacityChain.chainNumber != 0)
+                {
+                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735));
+                }
+                else
+                {
+                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
+                }
+                PChar->capacityChain.chainNumber++;
+            }
+            else
+            {
+                PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
+            }
+
+            // Add capacity points
+            if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
+            {
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
+            }
+            PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+
+            if (PMob != PChar) // Only mob kills count for gain EXP records
+            {
+                roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("capacity", capacityPoints));
             }
         }
     }
@@ -4363,189 +4559,6 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Allocate capacity points                                             *
-     *                                                                       *
-     ************************************************************************/
-
-    void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
-    {
-        TracyZoneScoped;
-
-        // TODO: Capacity Points cannot be gained in Abyssea or Reives.  In addition, Gates areas,
-        //       Ra'Kaznar, Escha, and Reisenjima reduce party penalty for capacity points earned.
-        ZONEID zone     = PChar->loc.zone->GetID();
-        uint8  mobLevel = PMob->GetMLevel();
-
-        PChar->ForAlliance([&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember)
-                           {
-            CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
-
-            if (!PMember || PMember->isDead() || (PMember->loc.zone->GetID() != zone))
-            {
-                // Do not grant Capacity points if null, Dead, or in a different area
-                return;
-            }
-
-            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 99)
-            {
-                // Do not grant Capacity points without Job Breaker or Level 99
-                return;
-            }
-
-            bool  chainActive = false;
-            int16 levelDiff   = mobLevel - 99; // Passed previous 99 check, no need to calculate
-
-            // Capacity Chains are only granted for Mobs level 100+
-            // Ref: https://www.bg-wiki.com/ffxi/Job_Points
-            float capacityPoints = 0;
-
-            if (mobLevel > 99)
-            {
-                // Base Capacity Point formula derived from the table located at:
-                // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
-                capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
-
-                if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
-                {
-                    chainActive = true;
-
-                    // TODO: Needs verification, pulled from: https://www.bluegartr.com/threads/120445-Job-Points-discussion?p=6138288&viewfull=1#post6138288
-                    // Assumption: Chain0 is no bonus, Chains 10+ capped at 1.5 value, f(chain) = 1 + 0.05 * chain
-                    float chainModifier = std::min(1 + 0.05 * PMember->capacityChain.chainNumber, 1.5);
-                    capacityPoints *= chainModifier;
-                }
-                else
-                {
-                    // TODO: Capacity Chain Timer is reduced after Chain 30
-                    PMember->capacityChain.chainTime   = gettick() + 30000;
-                    PMember->capacityChain.chainNumber = 1;
-                }
-
-                if (chainActive)
-                {
-                    PMember->capacityChain.chainTime = gettick() + 30000;
-                }
-
-                capacityPoints = AddCapacityBonus(PMember, capacityPoints);
-                AddCapacityPoints(PMember, PMob, capacityPoints, levelDiff, chainActive);
-            } });
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Return adjusted Capacity point value based on bonuses                *
-     *  Note: rawBonus uses whole number percentage values until returning   *
-     *                                                                       *
-     ************************************************************************/
-
-    uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
-    {
-        TracyZoneScoped;
-
-        float rawBonus = 0;
-
-        // COMMITMENT from Capacity Bands
-
-        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
-        {
-            CStatusEffect* commitment = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT);
-            int16          percentage = commitment->GetPower();
-            int16          cap        = commitment->GetSubPower();
-            rawBonus += std::clamp<int32>(((capacityPoints * percentage) / 100), 0, cap);
-            commitment->SetSubPower(cap -= rawBonus);
-
-            if (cap <= 0)
-            {
-                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_COMMITMENT);
-            }
-        }
-
-        // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
-        // This value is stored as uint, as a whole number percentage value
-        rawBonus += PChar->getMod(Mod::CAPACITY_BONUS);
-
-        // Unity Concord Ranking: 2 * (Unity Ranking - 1)
-        uint8 unity = PChar->profile.unity_leader;
-        if (unity >= 1 && unity <= 11)
-        {
-            rawBonus += 2 * (roeutils::RoeSystem.unityLeaderRank[unity - 1] - 1);
-        }
-
-        // RoE Objectives
-        for (auto const& recordValue : roeCapacityBonusRecords)
-        {
-            if (roeutils::GetEminenceRecordCompletion(PChar, recordValue.first))
-            {
-                rawBonus += recordValue.second;
-            }
-        }
-
-        // RoV Key Items - Fuchsia, Puce, Ochre (30%)
-        for (uint16 rovKeyItem = 2890; rovKeyItem <= 2892; rovKeyItem++)
-        {
-            if (hasKeyItem(PChar, rovKeyItem))
-            {
-                rawBonus += 30;
-            }
-        }
-
-        capacityPoints *= 1.f + rawBonus / 100;
-        return capacityPoints;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Add Capacity Points to an individual player                          *
-     *                                                                       *
-     ************************************************************************/
-
-    void AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff, bool isCapacityChain)
-    {
-        TracyZoneScoped;
-
-        if (PChar->isDead())
-        {
-            return;
-        }
-
-        capacityPoints = (uint32)(capacityPoints * settings::get<float>("map.EXP_RATE"));
-
-        if (capacityPoints > 0)
-        {
-            // Capacity Chains start at lv100 mobs
-            if (levelDiff >= 1 && isCapacityChain)
-            {
-                if (PChar->capacityChain.chainNumber != 0)
-                {
-                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735));
-                }
-                else
-                {
-                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
-                }
-                PChar->capacityChain.chainNumber++;
-            }
-            else
-            {
-                PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
-            }
-
-            // Add capacity points
-            if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
-            {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
-            }
-            PChar->pushPacket(new CMenuJobPointsPacket(PChar));
-
-            if (PMob != PChar) // Only mob kills count for gain EXP records
-            {
-                roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("capacity", capacityPoints));
-            }
-        }
-    }
-
-    /************************************************************************
-     *                                                                       *
      *  Losing exp on death. retainPercent is the amount of exp to be        *
      *  saved on death, e.g. 0.05 = retain 5% of lost exp. A value of        *
      *  1 means no exp loss. A value of 0 means full exp loss.               *
@@ -4883,11 +4896,33 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
+     *  Allocate Exemplar Points                                             *
+     *                                                                       *
+     ************************************************************************/
+
+    void DistributeExemplarPoints(CCharEntity* PChar, CMobEntity* PMob)
+    {
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Losing exp on death. retainPercent is the amount of exp to be        *
+     *  saved on death, e.g. 0.05 = retain 5% of lost exp. A value of        *
+     *  1 means no exp loss. A value of 0 means full exp loss.               *
+     *                                                                       *
+     ************************************************************************/
+
+    void DelExemplarPoints(CCharEntity* PChar, float reinpct, uint16 forcedXpLoss)
+    {
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Add Master Level Experience Points                                   *
      *                                                                       *
      ************************************************************************/
 
-    void AddMasterExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
+    void AddExemplarPoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck, bool isexpchain)
     {
     }
 
@@ -5559,6 +5594,173 @@ namespace charutils
 
         sql->Query(Query, PChar->id, SkillID, PChar->RealSkills.skill[SkillID], PChar->RealSkills.rank[SkillID], PChar->RealSkills.skill[SkillID],
                    PChar->RealSkills.rank[SkillID]);
+    }
+
+    void SaveCharMasterLevel(CCharEntity* PChar, JOBTYPE job)
+    {
+        TracyZoneScoped;
+        XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
+
+        const char* fmtQuery;
+
+        switch (job)
+        {
+            case JOB_WAR:
+                fmtQuery = "UPDATE char_master_levels SET war = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_MNK:
+                fmtQuery = "UPDATE char_master_levels SET mnk = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_WHM:
+                fmtQuery = "UPDATE char_master_levels SET whm = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_BLM:
+                fmtQuery = "UPDATE char_master_levels SET blm = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_RDM:
+                fmtQuery = "UPDATE char_master_levels SET rdm = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_THF:
+                fmtQuery = "UPDATE char_master_levels SET thf = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_PLD:
+                fmtQuery = "UPDATE char_master_levels SET pld = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_DRK:
+                fmtQuery = "UPDATE char_master_levels SET drk = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_BST:
+                fmtQuery = "UPDATE char_master_levels SET bst = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_BRD:
+                fmtQuery = "UPDATE char_master_levels SET brd = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_RNG:
+                fmtQuery = "UPDATE char_master_levels SET rng = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_SAM:
+                fmtQuery = "UPDATE char_master_levels SET sam = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_NIN:
+                fmtQuery = "UPDATE char_master_levels SET nin = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_DRG:
+                fmtQuery = "UPDATE char_master_levels SET drg = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_SMN:
+                fmtQuery = "UPDATE char_master_levels SET smn = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_BLU:
+                fmtQuery = "UPDATE char_master_levels SET blu = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_COR:
+                fmtQuery = "UPDATE char_master_levels SET cor = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_PUP:
+                fmtQuery = "UPDATE char_master_levels SET pup = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_DNC:
+                fmtQuery = "UPDATE char_master_levels SET dnc = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_SCH:
+                fmtQuery = "UPDATE char_master_levels SET sch = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_GEO:
+                fmtQuery = "UPDATE char_master_levels SET geo = %u WHERE charid = %u LIMIT 1";
+                break;
+            case JOB_RUN:
+                fmtQuery = "UPDATE char_master_levels SET run = %u WHERE charid = %u LIMIT 1";
+                break;
+            default:
+                fmtQuery = "";
+                return;
+        }
+
+        sql->Query(fmtQuery, PChar->jobs.job_mastery[job], PChar->id);
+    }
+
+    void SaveCharExemplarPoints(CCharEntity* PChar, JOBTYPE job)
+    {
+        TracyZoneScoped;
+
+        XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
+
+        const char* Query;
+
+        switch (job)
+        {
+            case JOB_WAR:
+                Query = "UPDATE char_exemplar_points SET war = %u WHERE charid = %u";
+                break;
+            case JOB_MNK:
+                Query = "UPDATE char_exemplar_points SET mnk = %u WHERE charid = %u";
+                break;
+            case JOB_WHM:
+                Query = "UPDATE char_exemplar_points SET whm = %u WHERE charid = %u";
+                break;
+            case JOB_BLM:
+                Query = "UPDATE char_exemplar_points SET blm = %u WHERE charid = %u";
+                break;
+            case JOB_RDM:
+                Query = "UPDATE char_exemplar_points SET rdm = %u WHERE charid = %u";
+                break;
+            case JOB_THF:
+                Query = "UPDATE char_exemplar_points SET thf = %u WHERE charid = %u";
+                break;
+            case JOB_PLD:
+                Query = "UPDATE char_exemplar_points SET pld = %u WHERE charid = %u";
+                break;
+            case JOB_DRK:
+                Query = "UPDATE char_exemplar_points SET drk = %u WHERE charid = %u";
+                break;
+            case JOB_BST:
+                Query = "UPDATE char_exemplar_points SET bst = %u WHERE charid = %u";
+                break;
+            case JOB_BRD:
+                Query = "UPDATE char_exemplar_points SET brd = %u WHERE charid = %u";
+                break;
+            case JOB_RNG:
+                Query = "UPDATE char_exemplar_points SET rng = %u WHERE charid = %u";
+                break;
+            case JOB_SAM:
+                Query = "UPDATE char_exemplar_points SET sam = %u WHERE charid = %u";
+                break;
+            case JOB_NIN:
+                Query = "UPDATE char_exemplar_points SET nin = %u WHERE charid = %u";
+                break;
+            case JOB_DRG:
+                Query = "UPDATE char_exemplar_points SET drg = %u WHERE charid = %u";
+                break;
+            case JOB_SMN:
+                Query = "UPDATE char_exemplar_points SET smn = %u WHERE charid = %u";
+                break;
+            case JOB_BLU:
+                Query = "UPDATE char_exemplar_points SET blu = %u WHERE charid = %u";
+                break;
+            case JOB_COR:
+                Query = "UPDATE char_exemplar_points SET cor = %u WHERE charid = %u";
+                break;
+            case JOB_PUP:
+                Query = "UPDATE char_exemplar_points SET pup = %u WHERE charid = %u";
+                break;
+            case JOB_DNC:
+                Query = "UPDATE char_exemplar_points SET dnc = %u WHERE charid = %u";
+                break;
+            case JOB_SCH:
+                Query = "UPDATE char_exemplar_points SET sch = %u WHERE charid = %u";
+                break;
+            case JOB_GEO:
+                Query = "UPDATE char_exemplar_points SET geo = %u WHERE charid = %u";
+                break;
+            case JOB_RUN:
+                Query = "UPDATE char_exemplar_points SET run = %u WHERE charid = %u";
+                break;
+            default:
+                Query = "";
+                return;
+        }
+
+        sql->Query(Query, PChar->jobs.exemplar_points[job], PChar->id);
     }
 
     /************************************************************************

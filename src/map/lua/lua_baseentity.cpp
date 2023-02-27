@@ -5598,6 +5598,25 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
 }
 
 /************************************************************************
+ *  Function: setMasterLevel()
+ *  Purpose : Updates the player's master level for current job
+ *  Example : player:setMasterLevel(level)
+ *  Notes   : Eventually make this work for more than the current job
+ ************************************************************************/
+
+void CLuaBaseEntity::setMasterLevel(uint8 level)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Trying to set master levels for a non-PC.");
+        return;
+    }
+
+    auto PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->SetMasterLevel(level);
+}
+
+/************************************************************************
  *  Function: getLevelCap()
  *  Purpose : Returns the player's level cap (genkai)
  *  Example : player:getLevelCap()
@@ -15279,6 +15298,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getJobLevel", CLuaBaseEntity::getJobLevel);
     SOL_REGISTER("setLevel", CLuaBaseEntity::setLevel);
     SOL_REGISTER("setsLevel", CLuaBaseEntity::setsLevel);
+    SOL_REGISTER("setMasterLevel", CLuaBaseEntity::setMasterLevel);
     SOL_REGISTER("getLevelCap", CLuaBaseEntity::getLevelCap);
     SOL_REGISTER("setLevelCap", CLuaBaseEntity::setLevelCap);
     SOL_REGISTER("levelRestriction", CLuaBaseEntity::levelRestriction);

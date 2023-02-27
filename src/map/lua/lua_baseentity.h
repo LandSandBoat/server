@@ -399,6 +399,10 @@ public:
     void   setJobPoints(uint16 amount);     // Set Job Points for current job
     void   setCapacityPoints(uint16 amount);
 
+    void addExemplarPoints(uint32 points);
+    void setMasterLevel(uint8 level);
+    void setJobBreaker(bool enabled);
+
     uint32 getGil();
     void   addGil(int32 gil);
     void   setGil(int32 amount);

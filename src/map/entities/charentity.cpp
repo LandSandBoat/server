@@ -30,6 +30,7 @@
 #include "packets/char.h"
 #include "packets/char_appearance.h"
 #include "packets/char_health.h"
+#include "packets/char_jobs.h"
 #include "packets/char_recast.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
@@ -2581,6 +2582,29 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
         default:
             break;
     }
+}
+
+bool CCharEntity::hasMasterBreaker()
+{
+    // KI 3262 - Master Breaker
+    return charutils::hasKeyItem(this, 3262);
+}
+
+uint8 CCharEntity::GetMasterLevel()
+{
+    auto mainJob = this->GetMJob();
+    return this->jobs.job_mastery[mainJob];
+}
+
+void CCharEntity::SetMasterLevel(uint8 level)
+{
+    auto mainJob = this->GetMJob();
+
+    this->jobs.job_mastery[mainJob] = level;
+    this->pushPacket(new CCharJobsPacket(this));
+    this->pushPacket(new CCharHealthPacket(this));
+
+    charutils::SaveCharMasterLevel(this, this->GetMJob());
 }
 
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)

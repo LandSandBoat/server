@@ -564,6 +564,10 @@ public:
     bool hasMoghancement(uint16 moghancementID) const;
     void SetMoghancement(uint16 moghancementID);
 
+    bool  hasMasterBreaker();
+    uint8 GetMasterLevel();
+    void  SetMasterLevel(uint8 level);
+
     /* State callbacks */
     virtual bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
     virtual bool           OnAttack(CAttackState&, action_t&) override;

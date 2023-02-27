@@ -90,8 +90,13 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x5C) = charutils::GetPoints(PChar, "current_accolades") / 1000; // Partial Personal Eval
     ref<uint16>(0x5E) = charutils::GetPoints(PChar, "prev_accolades") / 1000;    // Personal Eval
 
-    ref<uint8>(0x65)  = 0; // Master Level
-    ref<uint8>(0x66)  = 0; // Bit0 - Master Breaker
-    ref<uint32>(0x68) = 0; // Current Exemplar Points
-    ref<uint32>(0x6C) = 0; // Required Exemplar Points
+    // Pull the player's master level data
+    auto ml  = PChar->jobs.job_mastery[PChar->GetMJob()];
+    auto ep  = PChar->jobs.exemplar_points[PChar->GetMJob()];
+    auto req = charutils::GetExemplarNextLevel(ml);
+
+    ref<uint8>(0x65)  = ml;                        // Master Level
+    ref<uint8>(0x66)  = PChar->hasMasterBreaker(); // Bit0 - Master Breaker
+    ref<uint32>(0x68) = ep;                        // Current Exemplar Points
+    ref<uint32>(0x6C) = req;                       // Required Exemplar Points
 }
