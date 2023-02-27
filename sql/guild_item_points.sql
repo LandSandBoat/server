@@ -1067,7 +1067,7 @@ INSERT INTO `guild_item_points` VALUES (6, 13062, 3, 542, 10320, 7); -- Green Go
 -- Bonecraft / Apprentice
 INSERT INTO `guild_item_points` VALUES (6, 17352, 4, 780, 12960, 0); -- Horn (780 / 12960)
 INSERT INTO `guild_item_points` VALUES (6, 17371, 4, 840, 12960, 0); -- Horn +1 (840 / 12960)
-INSERT INTO `guild_item_points` VALUES (6, 17371, 4, 1540, 15840, 1); -- Carapace Subligar (1540 / 15840)
+INSERT INTO `guild_item_points` VALUES (6, 12837, 4, 1540, 15840, 1); -- Carapace Subligar (1540 / 15840)
 INSERT INTO `guild_item_points` VALUES (6, 12914, 4, 1610, 15840, 1); -- Carapace Subligar +1 (1610 / 15840)
 INSERT INTO `guild_item_points` VALUES (6, 13461, 4, 1812, 16560, 2); -- Carapace Ring (1812 / 16560)
 INSERT INTO `guild_item_points` VALUES (6, 13503, 4, 2537, 16560, 2); -- Carapace Ring +1 (2537 / 16560)
