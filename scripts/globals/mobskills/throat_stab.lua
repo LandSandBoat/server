@@ -24,6 +24,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
+    -- only allow a maximum of 95% damage even if modifiers would increase the damage
+    -- like weakness to piercing
+    dmg = math.min(damage, dmg)
+
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     mob:resetEnmity(target)
     return dmg
