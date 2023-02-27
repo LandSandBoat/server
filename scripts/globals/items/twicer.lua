@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 18216 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.TWICER then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 30, 18216)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 30, 0, 0, 0, xi.items.TWICER)
 end
 
 itemObject.onEffectGain = function(target, effect)

@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ATTACK_BOOST)
-    if effect ~= nil and effect:getSubType() == 18029 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.PIERCING_DAGGER then
         target:delStatusEffect(xi.effect.ATTACK_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 18029)
+    target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.PIERCING_DAGGER)
 end
 
 return itemObject

@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.VIT_BOOST)
-    if effect ~= nil and effect:getSubType() == 15864 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.TOUGH_BELT then
         target:delStatusEffect(xi.effect.VIT_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 15864)
+    target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 0, 0, 0, xi.items.TOUGH_BELT)
 end
 
 return itemObject

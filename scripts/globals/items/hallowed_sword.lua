@@ -10,9 +10,10 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENLIGHT)
-    if effect ~= nil and effect:getSubType() == 16550 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.HALLOWED_SWORD then
         target:delStatusEffect(xi.effect.ENLIGHT)
     end
+
     return 0
 end
 
@@ -29,7 +30,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 16550)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.HALLOWED_SWORD)
 end
 
 return itemObject

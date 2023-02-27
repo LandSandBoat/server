@@ -159,6 +159,11 @@ void CLuaStatusEffect::setTier(uint16 tier)
     m_PLuaStatusEffect->SetTier(tier);
 }
 
+void CLuaStatusEffect::setItemSourceID(uint16 itemSourceID)
+{
+    m_PLuaStatusEffect->SetItemSourceID(itemSourceID);
+}
+
 //======================================================//
 
 void CLuaStatusEffect::setDuration(uint32 duration)
@@ -216,6 +221,11 @@ uint16 CLuaStatusEffect::getIcon()
     return m_PLuaStatusEffect->GetIcon();
 }
 
+uint16 CLuaStatusEffect::getItemSourceID()
+{
+    return m_PLuaStatusEffect->GetItemSourceID();
+}
+
 //======================================================//
 
 void CLuaStatusEffect::Register()
@@ -240,6 +250,8 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("setTier", CLuaStatusEffect::setTier);
     SOL_REGISTER("getTick", CLuaStatusEffect::getTick);
     SOL_REGISTER("setTick", CLuaStatusEffect::setTick);
+    SOL_REGISTER("getItemSourceID", CLuaStatusEffect::getItemSourceID);
+    SOL_REGISTER("setItemSourceID", CLuaStatusEffect::setItemSourceID);
     SOL_REGISTER("setStartTime", CLuaStatusEffect::setStartTime);
     SOL_REGISTER("getFlag", CLuaStatusEffect::getFlag);
     SOL_REGISTER("setFlag", CLuaStatusEffect::setFlag);

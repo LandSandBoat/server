@@ -52,6 +52,7 @@ public:
     uint32 getTickCount();
     uint32 getTick();
     uint16 getIcon();
+    uint16 getItemSourceID();
 
     void setIcon(uint16 icon);
     void setPower(uint16 power);
@@ -59,6 +60,7 @@ public:
     void setTier(uint16 tier);
     void setDuration(uint32 duration);
     void setTick(uint32 tick);
+    void setItemSourceID(uint16 itemSourceID);
 
     void setStartTime(uint32 time);
     void resetStartTime();

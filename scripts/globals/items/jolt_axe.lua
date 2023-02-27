@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ATTACK_BOOST)
-    if effect ~= nil and effect:getSubType() == 17954 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.JOLT_AXE then
         target:delStatusEffect(xi.effect.ATTACK_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 17954)
+    target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.JOLT_AXE)
 end
 
 return itemObject

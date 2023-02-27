@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.EVASION_BOOST)
-    if effect ~= nil and effect:getSubType() == 15681 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.HYDRA_SPATS then
         target:delStatusEffect(xi.effect.EVASION_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 1200, 15681)
+    target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 1200, 0, 0, 0, xi.items.HYDRA_SPATS)
 end
 
 return itemObject
