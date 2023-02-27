@@ -398,6 +398,7 @@ public:
     uint8  getJobPointLevel(uint16 jpType); // Returns Value of Job Point Type
     void   setJobPoints(uint16 amount);     // Set Job Points for current job
     void   setCapacityPoints(uint16 amount);
+    void   masterJob();
 
     uint32 getGil();
     void   addGil(int32 gil);
