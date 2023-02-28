@@ -23,6 +23,27 @@ xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.physical = xi.combat.physical or {}
 -----------------------------------
+local wsElementalProperties =
+{
+-- [Resonance] = { None, Fire, Ice, Wind, Earth, Thunder, Water, Light, Dark },
+    [       0] = {    0,    0,   0,    0,     0,       0,     0,     0,    0 }, -- Lv 0, NONE
+    [       1] = {    0,    0,   0,    0,     0,       0,     0,     1,    0 }, -- Lv 1, Transfixion
+    [       2] = {    0,    0,   0,    0,     0,       0,     0,     0,    1 }, -- Lv 1, Compression
+    [       3] = {    0,    1,   0,    0,     0,       0,     0,     0,    0 }, -- Lv 1, Liquefaction
+    [       4] = {    0,    0,   0,    0,     1,       0,     0,     0,    0 }, -- Lv 1, Scission
+    [       5] = {    0,    0,   0,    0,     0,       0,     1,     0,    0 }, -- Lv 1, Reverberation
+    [       6] = {    0,    0,   0,    1,     0,       0,     0,     0,    0 }, -- Lv 1, Detonation
+    [       7] = {    0,    0,   1,    0,     0,       0,     0,     0,    0 }, -- Lv 1, Induration
+    [       8] = {    0,    0,   0,    0,     0,       1,     0,     0,    0 }, -- Lv 1, Impaction
+    [       9] = {    0,    0,   0,    0,     1,       0,     0,     0,    1 }, -- Lv 2, Gravitation
+    [      10] = {    0,    0,   1,    0,     0,       0,     1,     0,    0 }, -- Lv 2, Distorsion
+    [      11] = {    0,    1,   0,    0,     0,       0,     0,     1,    0 }, -- Lv 2, Fusion
+    [      12] = {    0,    0,   0,    1,     0,       1,     0,     0,    0 }, -- Lv 2, Fragmentation
+    [      13] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv 3, Light
+    [      14] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 3, Darkness
+    [      15] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv 4, Light
+    [      16] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 4, Darkness
+}
 
 -- "fSTR" in English Wikis. "SV function" in JP wiki and Studio Gobli.
 -- BG wiki: https://www.bg-wiki.com/ffxi/FSTR
@@ -134,6 +155,83 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
     finalWSC = wscSTR + wscDEX + wscVIT + wscAGI + wscINT + wscMND + wscCHR
 
     return finalWSC
+end
+
+-- TP Multiplier calculations.
+xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
+    local fTP     = 1
+    local actorTP = actor:getTP()
+
+    -- Regular fTP
+    if actorTP >= 2000 then
+        fTP = wsTP2000 + (((wsTP3000 - wsTP2000) / 1000) * (actorTP - 2000))
+    elseif actorTP >= 1000 then
+        fTP = wsTP1000 + (((wsTP2000 - wsTP1000) / 1000) * (actorTP - 1000))
+    end
+
+    -- Get elemental properties of weaponskill.
+    local scProp1, scProp2, scProp3 = actor:getWSSkillchainProp()
+
+    -- Calculate Gorget fTP bonus.
+    local gorgetFtpBonus = 0
+
+    if actor:getObjType() == xi.objType.PC then
+        local elementalGorget = { 15495, 15498, 15500, 15497, 15496, 15499, 15501, 15502 }
+        local neckItem        = actor:getEquipID(xi.slot.NECK)
+        local neckElement     = 1
+
+        -- Get Gorget associated element.
+        for i, v in ipairs(elementalGorget) do
+            if neckItem == v then
+                neckElement = neckElement + i
+
+                break
+            end
+        end
+
+        -- Compare WS elemental property with Gorget element.
+        if
+            wsElementalProperties[scProp1][neckElement] == 1 or
+            wsElementalProperties[scProp2][neckElement] == 1 or
+            wsElementalProperties[scProp3][neckElement] == 1 or
+            neckItem == 27510
+        then
+            gorgetFtpBonus = 0.1
+        end
+    end
+
+    -- Calculate Belt fTP bonus.
+    local beltFtpBonus = 0
+
+    if actor:getObjType() == xi.objType.PC then
+        local elementalBelt = { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
+        local waistItem     = actor:getEquipID(xi.slot.WAIST)
+        local waistElement  = 1
+
+        -- Get Belt associated element.
+        for i, v in ipairs(elementalBelt) do
+            if waistItem == v then
+                waistElement = waistElement + i
+
+                break
+            end
+        end
+
+        -- Compare WS elemental property with Belt element.
+        if
+            wsElementalProperties[scProp1][waistElement] == 1 or
+            wsElementalProperties[scProp2][waistElement] == 1 or
+            wsElementalProperties[scProp3][waistElement] == 1 or
+            waistItem == 28420
+        then
+            beltFtpBonus = 0.1
+        end
+    end
+
+    -- Add all bonuses and return.
+    fTP = fTP + gorgetFtpBonus + beltFtpBonus
+
+    return fTP
 end
 
 xi.combat.physical.calculatePDIF = function(actor, additionalParamsHere)
