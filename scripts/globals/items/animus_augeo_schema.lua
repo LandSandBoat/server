@@ -3,14 +3,16 @@
 -- Item: Animus Augeo Schema
 -- Teaches the white magic Animus Augeo
 -----------------------------------
+require("scripts/globals/spell_data")
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(308)
+    return target:canLearnSpell(xi.magic.spell.ANIMUS_AUGEO)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(308)
+    target:addSpell(xi.magic.spell.ANIMUS_AUGEO)
 end
 
 return itemObject
