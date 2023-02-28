@@ -1,7 +1,23 @@
 -----------------------------------
 -- Global, independent functions for physical calculations.
 -- Includes:
--- fSTR, fSTR2
+-- fSTR, fSTR2, WSC
+
+-- For weapon skill:
+-- Damage PER HIT = floor((D + fSTR + WSC) * fTP) * pDIF
+
+-- Intended WS structure:
+-- 1  - Calculate number of hits (max 8)
+-- 1a - Calculate hits absorbed by blink and utsusemi, if aplicable.
+
+-- 2  - Calculate first hit:
+-- 2a - Calculate if first hit lands
+-- 2b - Calculate if first hit crits
+-- 2c - Calculate first hit DMG
+
+-- 3  - Calculate, per hit, secondary hits, following the same structure as before, but simplified (no first-hit bonuses)
+
+-- 4  - Add them all, and final operations/considerations.
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
@@ -100,4 +116,48 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
     fSTR = utils.clamp(fSTR2 / 2, fSTRlowerCap, fSTRupperCap)
 
     return fSTR
+end
+
+-- Weapon Skill Secondary Attribute Modifier: Function used to get stat addition to base damage.
+xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, wsAGImod, wsINTmod, wsMNDmod, wsCHRmod)
+    local finalWSC = 0
+
+    -- wscSTAT = actor stat * (WS stat modifier + Actor-specific WS stat modifier)
+    local wscSTR = actor:getStat(xi.mod.STR) * (wsSTRmod + actor:getMod(xi.mod.WS_STR_BONUS) / 100)
+    local wscDEX = actor:getStat(xi.mod.DEX) * (wsDEXmod + actor:getMod(xi.mod.WS_DEX_BONUS) / 100)
+    local wscVIT = actor:getStat(xi.mod.VIT) * (wsVITmod + actor:getMod(xi.mod.WS_VIT_BONUS) / 100)
+    local wscAGI = actor:getStat(xi.mod.AGI) * (wsAGImod + actor:getMod(xi.mod.WS_AGI_BONUS) / 100)
+    local wscINT = actor:getStat(xi.mod.INT) * (wsINTmod + actor:getMod(xi.mod.WS_INT_BONUS) / 100)
+    local wscMND = actor:getStat(xi.mod.MND) * (wsMNDmod + actor:getMod(xi.mod.WS_MND_BONUS) / 100)
+    local wscCHR = actor:getStat(xi.mod.CHR) * (wsCHRmod + actor:getMod(xi.mod.WS_CHR_BONUS) / 100)
+
+    finalWSC = wscSTR + wscDEX + wscVIT + wscAGI + wscINT + wscMND + wscCHR
+
+    return finalWSC
+end
+
+xi.combat.physical.calculatePDIF = function(actor, additionalParamsHere)
+end
+
+xi.combat.physical.calculateNumberOfHits = function(actor, additionalParamsHere)
+end
+
+-- Main Hit (First hit) Functions.
+xi.combat.physical.calculateMainHitAccuracy = function(actor, additionalParamsHere)
+end
+
+xi.combat.physical.calculateMainHitCritical = function(actor, additionalParamsHere)
+end
+
+xi.combat.physical.calculateMainHitDamage = function(actor, additionalParamsHere)
+end
+
+-- Secondary Hits (All other) Functions.
+xi.combat.physical.calculateSecondaryHitAccuracy = function(actor, additionalParamsHere)
+end
+
+xi.combat.physical.calculateSecondaryHitCritical = function(actor, additionalParamsHere)
+end
+
+xi.combat.physical.calculateSecondaryHitDamage = function(actor, additionalParamsHere)
 end
