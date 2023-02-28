@@ -1,7 +1,7 @@
 -----------------------------------
 -- Global, independent functions for physical calculations.
 -- Includes:
--- fSTR, fSTR2, WSC
+-- fSTR, fSTR2, WSC, fTP
 
 -- For weapon skill:
 -- Damage PER HIT = floor((D + fSTR + WSC) * fTP) * pDIF
@@ -18,6 +18,8 @@
 -- 3  - Calculate, per hit, secondary hits, following the same structure as before, but simplified (no first-hit bonuses)
 
 -- 4  - Add them all, and final operations/considerations.
+-----------------------------------
+require("scripts/globals/items")
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
@@ -43,6 +45,30 @@ local wsElementalProperties =
     [      14] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 3, Darkness
     [      15] = {    0,    1,   0,    1,     0,       1,     0,     1,    0 }, -- Lv 4, Light
     [      16] = {    0,    0,   1,    0,     1,       0,     1,     0,    1 }, -- Lv 4, Darkness
+}
+
+local elementalGorget = -- Ordered by element.
+{
+    xi.items.FLAME_GORGET,
+    xi.items.SOIL_GORGET,
+    xi.items.AQUA_GORGET,
+    xi.items.BREEZE_GORGET,
+    xi.items.SNOW_GORGET,
+    xi.items.THUNDER_GORGET,
+    xi.items.LIGHT_GORGET,
+    xi.items.SHADOW_GORGET
+}
+
+local elementalBelt = -- Ordered by element.
+{
+    xi.items.FLAME_BELT,
+    xi.items.SOIL_BELT,
+    xi.items.AQUA_BELT,
+    xi.items.BREEZE_BELT,
+    xi.items.SNOW_BELT,
+    xi.items.THUNDER_BELT,
+    xi.items.LIGHT_BELT,
+    xi.items.SHADOW_BELT
 }
 
 -- "fSTR" in English Wikis. "SV function" in JP wiki and Studio Gobli.
@@ -176,9 +202,8 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
     local gorgetFtpBonus = 0
 
     if actor:getObjType() == xi.objType.PC then
-        local elementalGorget = { 15495, 15498, 15500, 15497, 15496, 15499, 15501, 15502 }
-        local neckItem        = actor:getEquipID(xi.slot.NECK)
-        local neckElement     = 1
+        local neckItem    = actor:getEquipID(xi.slot.NECK)
+        local neckElement = 1 -- We start at 1 for table lookup. 1 = no element.
 
         -- Get Gorget associated element.
         for i, v in ipairs(elementalGorget) do
@@ -194,7 +219,7 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
             wsElementalProperties[scProp1][neckElement] == 1 or
             wsElementalProperties[scProp2][neckElement] == 1 or
             wsElementalProperties[scProp3][neckElement] == 1 or
-            neckItem == 27510
+            neckItem == xi.items.FOTIA_GORGET
         then
             gorgetFtpBonus = 0.1
         end
@@ -204,9 +229,8 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
     local beltFtpBonus = 0
 
     if actor:getObjType() == xi.objType.PC then
-        local elementalBelt = { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
-        local waistItem     = actor:getEquipID(xi.slot.WAIST)
-        local waistElement  = 1
+        local waistItem    = actor:getEquipID(xi.slot.WAIST)
+        local waistElement = 1 -- We start at 1 for table lookup. 1 = no element.
 
         -- Get Belt associated element.
         for i, v in ipairs(elementalBelt) do
@@ -222,7 +246,7 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
             wsElementalProperties[scProp1][waistElement] == 1 or
             wsElementalProperties[scProp2][waistElement] == 1 or
             wsElementalProperties[scProp3][waistElement] == 1 or
-            waistItem == 28420
+            waistItem == xi.items.FOTIA_BELT
         then
             beltFtpBonus = 0.1
         end
