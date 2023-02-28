@@ -14,8 +14,6 @@ local leaderToFollowersMap = {}
 local followerToLeaderMap = {}
 local followerOptions = {}
 
-local addFollower
-local cleanupFollower
 local onMobRoamAction
 local onMobDespawn
 
@@ -23,8 +21,8 @@ local onMobDespawn
 -- Will be reset when the mob or target despawns. A variety of options are available to configure the follow behavior.
 -- Continuously follow an entity.
 --
--- @param mob the mob that will be doing the following.
--- @param leader the target to follow.
+-- @param follower the mob that will be doing the following.
+-- @param leader the target entity to follow.
 -- @param @{ followOptions } options[opt] a table of configuration settings for the follow behavior.
 --
 -- @field followDistance[opt=5.0] in yalms, the preferred distance to the target to stay within.
@@ -34,11 +32,11 @@ local onMobDespawn
 -- @field warpDistance[opt=35.0] in yalms, distance at which the follower will teleport to the target. 0 to disable.
 -- @table followOptions
 -----------------------------------
-function xi.follow.follow(mob, leader, options)
+xi.follow.follow = function(follower, leader, options)
     if
         not leader:isSpawned() or
-        not mob:isSpawned() or
-        leader:getZoneID() ~= mob:getZoneID()
+        not follower:isSpawned() or
+        leader:getZoneID() ~= follower:getZoneID()
     then
         return false
     end
@@ -50,10 +48,6 @@ function xi.follow.follow(mob, leader, options)
     options.roamCooldown = options.roamCooldown or false
     options.warpDistance = options.warpDistance or 35.0
 
-    addFollower(leader, mob, options)
-end
-
-function addFollower(leader, follower, options)
     local leaderId = leader:getID()
     local followerId = follower:getID()
 
@@ -78,16 +72,7 @@ function addFollower(leader, follower, options)
     followerOptions[followerId] = options
 end
 
-function cleanupFollower(follower)
-    followerOptions[follower:getID()] = nil
-    follower:removeListener("FOLLOW_ROAM_ACTION")
-    follower:removeListener("FOLLOW_DESPAWN")
-    follower:setRoamFlags(follower:getLocalVar("[follow]roamFlags"))
-    follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, follower:getLocalVar("[follow]DONT_ROAM_HOME"))
-    follower:setMobMod(xi.mobMod.ROAM_COOL, follower:getLocalVar("[follow]ROAM_COOL"))
-end
-
-function xi.follow.clearFollowers(leader)
+xi.follow.clearFollowers = function(leader)
     local followers = xi.follow.getFollowers(leader)
 
     if not followers or #followers == 0 then
@@ -99,7 +84,7 @@ function xi.follow.clearFollowers(leader)
     end
 end
 
-function xi.follow.stopFollowing(follower)
+xi.follow.stopFollowing = function(follower)
     local followerId = follower:getID()
     local leader = followerToLeaderMap[followerId]
 
@@ -123,7 +108,12 @@ function xi.follow.stopFollowing(follower)
         end
     end
 
-    cleanupFollower(follower)
+    followerOptions[follower:getID()] = nil
+    follower:removeListener("FOLLOW_ROAM_ACTION")
+    follower:removeListener("FOLLOW_DESPAWN")
+    follower:setRoamFlags(follower:getLocalVar("[follow]roamFlags"))
+    follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, follower:getLocalVar("[follow]DONT_ROAM_HOME"))
+    follower:setMobMod(xi.mobMod.ROAM_COOL, follower:getLocalVar("[follow]ROAM_COOL"))
 end
 
 local function getAveragePos(mobsPos)
@@ -233,10 +223,10 @@ function onMobDespawn(mob)
     xi.follow.stopFollowing(mob)
 end
 
-function xi.follow.getFollowers(leader)
+xi.follow.getFollowers = function(leader)
     local followers = leaderToFollowersMap[leader:getID()]
     if not followers or #followers == 0 then
-        return
+        return nil
     end
 
     local clone = {}
@@ -249,6 +239,6 @@ function xi.follow.getFollowers(leader)
     return clone
 end
 
-function xi.follow.getFollowTarget(follower)
+xi.follow.getFollowTarget = function(follower)
     return followerToLeaderMap[follower:getID()]
 end

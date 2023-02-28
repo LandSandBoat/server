@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function entity.onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 50)
 
@@ -43,20 +43,8 @@ function entity.onMobSpawn(mob)
     end
 end
 
-function entity.onMobFight(mob, target)
-end
-
-function entity.onMobEngaged(mob, target)
-end
-
-function entity.onMobDisengage(mob)
-end
-
-function entity.onMobRoam(mob)
-end
-
 -- Do the linking for the babies.
-function entity.onMobRoamAction(mob)
+entity.onMobRoamAction = function(mob)
     if mob:getMobMod(xi.mobMod.LEADER) > 0 then
         return
     end
@@ -77,7 +65,7 @@ function entity.onMobRoamAction(mob)
     end
 end
 
-function entity.onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if mob:getMobMod(xi.mobMod.LEADER) > 0 then
         xi.follow.clearFollowers(mob)
     end
