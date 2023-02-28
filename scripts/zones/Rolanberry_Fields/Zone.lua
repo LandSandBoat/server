@@ -28,7 +28,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(-381.747, -31.068, -788.092, 211)
+        player:setPos(339, 23, 607, 93)
     end
 
     if quests.rainbow.onZoneIn(player) then
