@@ -2,7 +2,7 @@
 -- Twinstone Bonding
 -----------------------------------
 -- !addquest 2 62
--- Gioh Ajirhri : !pos 107 -5 174 130
+-- Gioh Ajirhri : !pos 107 -5 174 241
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require("scripts/globals/items")
@@ -53,6 +53,7 @@ quest.sections =
                     if player:needToZone() then
                         return quest:event(491, 0, item)
                     end
+
                     return quest:progressEvent(488, 0, item)
                 end,
 
