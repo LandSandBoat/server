@@ -1353,7 +1353,7 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
     local accBonus = 0
 
     if attacker:getObjType() == xi.objType.PC then
-        local elementalGorget = -- Ordered by element correctly.
+        local elementalGorget = -- Ordered by element correctly. TODO: mods/latents instead of items
         {
             xi.items.FLAME_GORGET,
             xi.items.SNOW_GORGET,
@@ -1364,8 +1364,8 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
             xi.items.LIGHT_GORGET,
             xi.items.SHADOW_GORGET
         }
-        
-        local elementalBelt = -- Ordered by element correctly.
+
+        local elementalBelt = -- Ordered by element correctly. TODO: mods/latents instead of items
         {
             xi.items.FLAME_BELT,
             xi.items.SNOW_BELT,

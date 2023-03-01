@@ -188,20 +188,29 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
     local fTP     = 1
     local actorTP = actor:getTP()
 
+    ------------------------------
     -- Regular fTP
+    ------------------------------
     if actorTP >= 2000 then
         fTP = wsTP2000 + (((wsTP3000 - wsTP2000) / 1000) * (actorTP - 2000))
     elseif actorTP >= 1000 then
         fTP = wsTP1000 + (((wsTP2000 - wsTP1000) / 1000) * (actorTP - 1000))
     end
 
-    -- Get elemental properties of weaponskill.
+    ------------------------------
+    -- Equipment fTP bonuses.
+    ------------------------------
+    -- TODO: Use item mods and latents for the conditional fTP bonuses they provide.
     local scProp1, scProp2, scProp3 = actor:getWSSkillchainProp()
+    local dayElement                = VanadielDayElement() + 1
 
-    -- Calculate Gorget fTP bonus.
-    local gorgetFtpBonus = 0
+    local neckFtpBonus  = 0
+    local waistFtpBonus = 0
+    local headFtpBonus  = 0
+    local handsFtpBonus = 0
 
     if actor:getObjType() == xi.objType.PC then
+        -- Calculate Neck fTP bonus.
         local neckItem    = actor:getEquipID(xi.slot.NECK)
         local neckElement = 1 -- We start at 1 for table lookup. 1 = no element.
 
@@ -221,14 +230,10 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
             wsElementalProperties[scProp3][neckElement] == 1 or
             neckItem == xi.items.FOTIA_GORGET
         then
-            gorgetFtpBonus = 0.1
+            neckFtpBonus = 0.1
         end
-    end
 
-    -- Calculate Belt fTP bonus.
-    local beltFtpBonus = 0
-
-    if actor:getObjType() == xi.objType.PC then
+        -- Calculate Waist fTP bonus.
         local waistItem    = actor:getEquipID(xi.slot.WAIST)
         local waistElement = 1 -- We start at 1 for table lookup. 1 = no element.
 
@@ -248,12 +253,43 @@ xi.combat.physical.calculateFTP = function(actor, wsTP1000, wsTP2000, wsTP3000)
             wsElementalProperties[scProp3][waistElement] == 1 or
             waistItem == xi.items.FOTIA_BELT
         then
-            beltFtpBonus = 0.1
+            waistFtpBonus = 0.1
+        end
+
+        -- Claculate Head fTP bonus.
+        local headItem = actor:getEquipID(xi.slot.HEAD)
+
+        if
+            wsElementalProperties[scProp1][dayElement] == 1 or
+            wsElementalProperties[scProp2][dayElement] == 1 or
+            wsElementalProperties[scProp3][dayElement] == 1
+        then
+            if
+                headItem == xi.items.MEKIRA_OTO or
+                headItem == xi.items.MEKIRA_OTO_P1
+            then
+                headFtpBonus = 0.1
+            elseif headItem == xi.items.GAVIALIS_HELM then
+                headFtpBonus = 0.117
+            end
+        end
+
+        -- Calculate Hands fTP bonus.
+        local handsItem = actor:getEquipID(xi.slot.HANDS)
+
+        if
+            wsElementalProperties[scProp1][dayElement] == 1 or
+            wsElementalProperties[scProp2][dayElement] == 1 or
+            wsElementalProperties[scProp3][dayElement] == 1
+        then
+            if handsItem == xi.items.ATHOSS_GLOVES then
+                handsFtpBonus = 0.06
+            end
         end
     end
 
     -- Add all bonuses and return.
-    fTP = fTP + gorgetFtpBonus + beltFtpBonus
+    fTP = fTP + neckFtpBonus + waistFtpBonus + headFtpBonus + handsFtpBonus
 
     return fTP
 end
