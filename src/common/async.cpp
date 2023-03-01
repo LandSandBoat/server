@@ -24,16 +24,18 @@
 #include "sql.h"
 #include <task_system.hpp>
 
+// Allocated on and owned the main thread
 Async*           Async::_instance = nullptr;
-SqlConnection*   Async::_sql      = nullptr;
 ts::task_system* Async::_ts       = nullptr;
+
+// Allocated on and owned by by _ts
+SqlConnection* Async::_sql = nullptr;
 
 Async* Async::getInstance()
 {
     if (_instance == nullptr)
     {
         _instance = new Async();
-        _sql      = new SqlConnection();
 
         // NOTE: We only create a single worker thread in the task_system
         //     : because we're going to be using _sql, which isn't thread safe.
@@ -49,6 +51,11 @@ void Async::query(std::string const& query)
     // clang-format off
     _ts->schedule([query]()
     {
+        TracySetThreadName("Async Worker Thread");
+        if (_sql == nullptr)
+        {
+            _sql = new SqlConnection();
+        }
         _sql->Query(query.c_str());
     });
     // clang-format on
@@ -63,6 +70,11 @@ void Async::query(std::function<void(SqlConnection*)> func)
     // clang-format off
     _ts->schedule([func]()
     {
+        TracySetThreadName("Async Worker Thread");
+        if (_sql == nullptr)
+        {
+            _sql = new SqlConnection();
+        }
         func(_sql);
     });
     // clang-format on
@@ -73,6 +85,7 @@ void Async::submit(std::function<void()> func)
     // clang-format off
     _ts->schedule([func]()
     {
+        TracySetThreadName("Async Worker Thread");
         func();
     });
     // clang-format on

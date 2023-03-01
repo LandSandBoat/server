@@ -4,7 +4,7 @@ import io
 import platform
 import subprocess
 import time
-
+import signal
 
 def main():
     print("Running exe startup checks...({})".format(platform.system()))
@@ -27,17 +27,13 @@ def main():
 
     time.sleep(300)
 
-    p0.kill()
-    p1.kill()
-    p2.kill()
-    p3.kill()
-
-    print("Killing exes and checking logs...")
+    print("Checking logs and killing exes...")
 
     has_seen_output = False
     error = False
     for proc in {p0, p1, p2, p3}:
         print(proc.args[0])
+        proc.send_signal(signal.SIGTERM)
         for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
             print(line.replace("\n", ""))
             has_seen_output = True
@@ -55,6 +51,7 @@ def main():
     if error or not has_seen_output:
         exit(-1)
 
+    time.sleep(5)
 
 if __name__ == "__main__":
     main()
