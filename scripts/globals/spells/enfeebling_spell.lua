@@ -2,7 +2,7 @@
 -- Enfeebling Spell Utilities
 -- Used for spells that deal negative status effects upon targets.
 -----------------------------------
-require("scripts/globals/damage/magic_hit_rate")
+require("scripts/globals/combat/magic_hit_rate")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/msg")
@@ -375,17 +375,17 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local message      = pTable[spellId][9]
 
     -- Magic Hit Rate calculations.
-    local magicAcc     = xi.damage.magicHitRate.calculateCasterMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
-    local magicEva     = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
-    local magicHitRate = xi.damage.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
+    local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
+    local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, true, mEvaMod)
+    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 
     -- Calculate individualy resist rates for potency and duration.
-    local resistDuration = xi.damage.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
+    local resistDuration = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
     local resistPotency  = 1
 
     -- Check if potency is affected by resist rate.
     if pTable[spellId][12] then
-        resistPotency  = xi.damage.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
+        resistPotency  = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
     end
 
     ------------------------------

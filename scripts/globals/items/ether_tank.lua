@@ -3,6 +3,7 @@
 -- Ether Tank
 -- When used, you will obtain one Ether
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4128, 1)
+    target:addItem(xi.items.ETHER, 1)
 end
 
 return itemObject

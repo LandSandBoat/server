@@ -3,6 +3,7 @@
 -- Elixir Tank
 -- When used, you will obtain one Elixir
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4145, 1)
+    target:addItem(xi.items.ELIXIR, 1)
 end
 
 return itemObject
