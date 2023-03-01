@@ -2475,7 +2475,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     // Before inserting to DBox, check we CAN actually remove this item (locked, etc..)
                     if (!charutils::ValidateUpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
                     {
-                        delete PUBoxItem;
+                        destroy(PUBoxItem);
                         return;
                     }
 

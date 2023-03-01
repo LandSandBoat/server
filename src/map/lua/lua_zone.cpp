@@ -258,6 +258,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     PEntity->isRenamed = true;
 
+    PEntity->m_bReleaseTargIDOnDisappear = table["releaseIdOnDisappear"].get_or(false);
+
     auto typeKey    = (PEntity->objtype == TYPE_NPC) ? "npcs" : "mobs";
     auto cacheEntry = lua[sol::create_if_nil]["xi"]["zones"][m_pLuaZone->GetName()][typeKey][lookupName];
 
@@ -314,8 +316,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->saveModifiers();
         PMob->saveMobModifiers();
 
-        PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
-        PMob->m_isAggroable           = table["isAggroable"].get_or(false);
+        PMob->m_bReleaseTargIDOnDisappear = table["releaseIdOnDeath"].get_or(false);
+        PMob->m_isAggroable               = table["isAggroable"].get_or(false);
 
         PMob->spawnAnimation = table["specialSpawnAnimation"].get_or(false) ? SPAWN_ANIMATION::SPECIAL : SPAWN_ANIMATION::NORMAL;
 

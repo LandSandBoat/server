@@ -1354,7 +1354,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
         auto PEntity = static_cast<CBattleEntity*>(PMob); // Battle Entity Cast for Pet Checks
 
-        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath) // Only Affects Dynamic Mobs
+        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear) // Only Affects Dynamic Mobs
         {
             if (PEntity->PPet != nullptr)
             {
@@ -1418,7 +1418,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
         }
     }
 
-    for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
+    for (auto it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
         PNpc->PAI->Tick(tick);
