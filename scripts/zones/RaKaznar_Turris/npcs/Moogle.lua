@@ -12,11 +12,13 @@ entity.onTrigger = function(player, npc)
     local helgaId = GetMobByID(helga)
     local zone    = npc:getZone()
     local pedestalTriggers = GetMobByID(helga):getLocalVar("TowerTrigger")
+	local getDamage = player:getLocalVar("[Domain]Damage")
 
     -- Add a check so player's can't get trolled by others
     if pedestalTriggers < 3 then
         helgaId:weaknessTrigger(1)
         helgaId:addStatusEffect(xi.effect.STUN, 0, 0, 6)
+		player:setLocalVar("[Domain]Damage", getDamage + 5000)
     elseif pedestalTriggers > 3 then
         local Rafflesia1 = zone:insertDynamicEntity({
             objtype     = xi.objType.MOB,
