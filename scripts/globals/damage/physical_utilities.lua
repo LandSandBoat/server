@@ -50,11 +50,11 @@ local wsElementalProperties =
 local elementalGorget = -- Ordered by element.
 {
     xi.items.FLAME_GORGET,
-    xi.items.SOIL_GORGET,
-    xi.items.AQUA_GORGET,
-    xi.items.BREEZE_GORGET,
     xi.items.SNOW_GORGET,
+    xi.items.BREEZE_GORGET,
+    xi.items.SOIL_GORGET,
     xi.items.THUNDER_GORGET,
+    xi.items.AQUA_GORGET,
     xi.items.LIGHT_GORGET,
     xi.items.SHADOW_GORGET
 }
@@ -62,11 +62,11 @@ local elementalGorget = -- Ordered by element.
 local elementalBelt = -- Ordered by element.
 {
     xi.items.FLAME_BELT,
-    xi.items.SOIL_BELT,
-    xi.items.AQUA_BELT,
-    xi.items.BREEZE_BELT,
     xi.items.SNOW_BELT,
+    xi.items.BREEZE_BELT,
+    xi.items.SOIL_BELT,
     xi.items.THUNDER_BELT,
+    xi.items.AQUA_BELT,
     xi.items.LIGHT_BELT,
     xi.items.SHADOW_BELT
 }
