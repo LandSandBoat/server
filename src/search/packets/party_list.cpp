@@ -117,7 +117,8 @@ void CPartyListPacket::AddPlayer(SearchEntity* PPlayer)
 
     ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1; // Entity data size
     ref<uint16>(m_data, (0x08))     = m_offset / 8;                   // Size of the data to send
-    delete PPlayer;
+
+    destroy(PPlayer);
 }
 
 /************************************************************************

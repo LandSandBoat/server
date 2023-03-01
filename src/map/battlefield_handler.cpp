@@ -77,7 +77,7 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
             {
                 it = m_Battlefields.erase(it);
                 ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
-                delete PBattlefield;
+                destroy(PBattlefield);
                 continue;
             }
         }

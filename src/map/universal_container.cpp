@@ -49,9 +49,10 @@ void CUContainer::Clean()
     {
         for (uint8 i = 0; i < UCONTAINER_SIZE; ++i)
         {
-            delete m_PItem[i];
+            destroy(m_PItem[i]);
         }
     }
+
     if (m_ContainerType == UCONTAINER_TRADE)
     {
         for (auto&& PItem : m_PItem)
@@ -62,6 +63,7 @@ void CUContainer::Clean()
             }
         }
     }
+
     m_ContainerType = UCONTAINER_EMPTY;
 
     m_lock   = false;

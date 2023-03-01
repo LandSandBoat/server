@@ -727,7 +727,6 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         }
     }
 
-    // todo: delete all the things?
     for (const auto& mob : m_RequiredEnemyList)
     {
         if (mob.PMob->isAlive() && mob.PMob->PAI->IsSpawned())

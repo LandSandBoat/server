@@ -811,8 +811,14 @@ namespace message
 
         if (packet)
         {
-            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint)
-                                        { delete[](uint8*) data; });
+            // clang-format off
+            msg.packet = zmq::message_t(*packet, packet->getSize(),
+            [](void* data, void* hint)
+            {
+                auto* intdata = (uint8*)data;
+                destroy_arr(intdata);
+            });
+            // clang-format on
         }
         else
         {

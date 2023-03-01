@@ -45,19 +45,19 @@ CInstance::~CInstance()
 {
     for (auto entity : m_mobList)
     {
-        delete entity.second;
+        destroy(entity.second);
     }
     for (auto entity : m_npcList)
     {
-        delete entity.second;
+        destroy(entity.second);
     }
     for (auto entity : m_petList)
     {
-        delete entity.second;
+        destroy(entity.second);
     }
     for (auto entity : m_trustList)
     {
-        delete entity.second;
+        destroy(entity.second);
     }
 }
 

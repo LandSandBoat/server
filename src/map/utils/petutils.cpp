@@ -337,7 +337,7 @@ namespace petutils
     {
         while (!g_PPetList.empty())
         {
-            delete *g_PPetList.begin();
+            destroy(*g_PPetList.begin());
             g_PPetList.erase(g_PPetList.begin());
         }
     }
