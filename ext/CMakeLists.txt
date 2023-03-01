@@ -17,7 +17,7 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.9)
+    set(TRACY_VERSION 0.9.1)
 
     # Download client library
     CPMAddPackage(

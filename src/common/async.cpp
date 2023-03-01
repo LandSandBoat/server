@@ -51,6 +51,7 @@ void Async::query(std::string const& query)
     // clang-format off
     _ts->schedule([query]()
     {
+        TracySetThreadName("Async Worker Thread");
         if (_sql == nullptr)
         {
             _sql = new SqlConnection();
@@ -69,6 +70,7 @@ void Async::query(std::function<void(SqlConnection*)> func)
     // clang-format off
     _ts->schedule([func]()
     {
+        TracySetThreadName("Async Worker Thread");
         if (_sql == nullptr)
         {
             _sql = new SqlConnection();
@@ -83,6 +85,7 @@ void Async::submit(std::function<void()> func)
     // clang-format off
     _ts->schedule([func]()
     {
+        TracySetThreadName("Async Worker Thread");
         func();
     });
     // clang-format on

@@ -330,7 +330,7 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DENABLE_TRACY=ON
       - name: Build
         shell: cmd
         run: |
