@@ -73,10 +73,10 @@ entity.onMobFight = function(mob, target)
 
     if chainsUsed < chainsTrigger and mob:canUseAbilities() then
         local chains = {}
-        local spawner = mob:getLocalVar("spawner")
+        local players = mob:getBattlefield():getPlayers()
 
         -- Create table of usable Chains TP moves
-        for _, member in pairs(GetPlayerByID(spawner):getParty()) do
+        for _, member in pairs(players) do
             local trigger = 0
             local race = member:getRace()
             for _, v in pairs(chains) do
@@ -129,6 +129,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
                 mob:showText(mob, ID.text.PROMATHIA_TEXT + tp[2])
                 mob:setLocalVar("tpMessage", 1)
             end
+
             mob:setTP(mobTP)
         end
     end
@@ -162,9 +163,17 @@ entity.onEventFinish = function(player, csid, option, target)
         local mob = SpawnMob(target:getID() + 1)
         local bcnmAllies = mob:getBattlefield():getAllies()
         for i, v in pairs(bcnmAllies) do
+            -- reset local vars so prise stars by waiting and can use 2hr again and such
             v:resetLocalVars()
-            local spawn = v:getSpawnPos()
-            v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
+            -- only reset Prishe position if she is alive at end of first phase
+            if v:isAlive() then
+                v:disengage()
+                local spawn = v:getSpawnPos()
+                v:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
+            end
+
+            -- TODO: figure out how to make Prishe start fighting right away when she dies in first phase
+            -- and is raised in second phase before engaging 2nd phase Promathia
         end
     end
 end
