@@ -1418,7 +1418,8 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
         }
     }
 
-    for (auto it = m_npcList.begin(); it != m_npcList.end(); ++it)
+    it = m_npcList.begin();
+    while (it != m_npcList.end())
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
         PNpc->PAI->Tick(tick);
