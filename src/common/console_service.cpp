@@ -21,6 +21,8 @@
 
 #include "console_service.h"
 
+#include "lua.h"
+
 #include <sstream>
 
 #ifdef _WIN32
@@ -125,6 +127,19 @@ ConsoleService::ConsoleService()
         else
         {
             fmt::print("> Invalid inputs.\n");
+        }
+    });
+
+    RegisterCommand("lua", "Provides a Lua REPL",
+    [](std::vector<std::string> inputs)
+    {
+        if (inputs.size() >= 2)
+        {
+            // Remove "lua" from the front of the inputs
+            inputs = std::vector<std::string>(inputs.begin() + 1, inputs.end());
+
+            auto input = fmt::format("local var = {}; if type(var) ~= \"nil\" then print(var) end", fmt::join(inputs, " "));
+            lua.safe_script(input);
         }
     });
 
