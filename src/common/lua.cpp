@@ -112,9 +112,16 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
 
             // Stringify everything first
             std::vector<std::string> stringVec;
-            for (auto& pair : table)
+            for (auto const& [keyObj, valObj] : table)
             {
-                stringVec.emplace_back(lua_to_string(pair.second, depth + 1));
+                if (keyObj.get_type() == sol::type::string)
+                {
+                    stringVec.emplace_back(fmt::format("{}: {}", lua_to_string(keyObj), lua_to_string(valObj, depth + 1)));
+                }
+                else
+                {
+                    stringVec.emplace_back(lua_to_string(valObj, depth + 1));
+                }
             }
 
             // Accumulate into a pretty string
