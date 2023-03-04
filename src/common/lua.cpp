@@ -111,7 +111,7 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
             auto table = obj.as<sol::table>();
 
             std::string indent = "";
-            for (int i = 0; i < depth + 1; ++i)
+            for (std::size_t i = 0U; i < depth + 1U; ++i)
             {
                 indent += "    ";
             }
