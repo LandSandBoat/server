@@ -36,13 +36,6 @@ local setupItemCrate = function(crateID, floor)
     end)
 end
 
-local setupLootCrate = function(crateID, floor)
-    local crate = GetEntityByID(crateID)
-    xi.limbus.hideCrate(crate)
-    crate:setModelId(961)
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", utils.bind(content.handleOpenLootCrate, content))
-end
-
 local setupTimeCrate = function(crateID, floor)
     local crate = GetEntityByID(crateID)
     xi.limbus.hideCrate(crate)
@@ -66,8 +59,6 @@ function content:onBattlefieldInitialise(battlefield)
         setupTimeCrate,
         setupRecoverCrate,
     }
-
-    setupLootCrate(ID.TEMENOS_WESTERN_TOWER.npc.LOOT_CRATE, 7)
 
     -- Crates are always spawned with sequential IDs
     -- Randomize crate type order by shuffling setup functions
