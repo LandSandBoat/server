@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     end
 
     -- Count Earrings
-    for i = 14739, 14743 do
+    for i = xi.items.SUPPANOMIMI, xi.items.BUSHINOMIMI do
         if player:hasItem(i) then
             dmEarrings = dmEarrings + 1
         end
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         zmProgress == 1 and
         divineStatus < 2
     then
-        player:startEvent(54, 917, 1408, 1550)
+        player:startEvent(54, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK, xi.items.ARK_PENTASPHERE)
 
     -- Alternative cutscene for those that have done one or more AA fight
     elseif
@@ -53,14 +53,14 @@ entity.onTrigger = function(player, npc)
         dmStatus == QUEST_AVAILABLE and
         aaKeyitems > 0
     then
-        player:startEvent(56, 917, 1408, 1550)
+        player:startEvent(56, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK, xi.items.ARK_PENTASPHERE)
 
     -- CS when player has completed Divine might, award earring
     elseif
         dmStatus == QUEST_ACCEPTED and
         divineStatus >= 2
     then
-        player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
+        player:startEvent(55, xi.items.SUPPANOMIMI, xi.items.KNIGHTS_EARRING, xi.items.ABYSSAL_EARRING, xi.items.BEASTLY_EARRING, xi.items.BUSHINOMIMI)
 
     -- You threw away old Earring, start the repeat quest
     elseif
@@ -78,7 +78,7 @@ entity.onTrigger = function(player, npc)
         if not hasMoonOre then
             player:startEvent(58) -- Reminder for Moonlight Ore
         else
-            player:startEvent(56, 917, 1408, 1550) -- Reminder for Ark Pentasphere
+            player:startEvent(56, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK, xi.items.ARK_PENTASPHERE) -- Reminder for Ark Pentasphere
         end
 
     -- Repeat turn in
@@ -99,7 +99,7 @@ entity.onEventUpdate = function(player, csid, option)
         (csid == 55 or csid == 59) and
         option == 2
     then
-        player:updateEvent(14739, 14740, 14741, 14742, 14743)
+        player:updateEvent(xi.items.SUPPANOMIMI, xi.items.KNIGHTS_EARRING, xi.items.ABYSSAL_EARRING, xi.items.BEASTLY_EARRING, xi.items.BUSHINOMIMI)
     end
 end
 
@@ -124,15 +124,15 @@ entity.onEventFinish = function(player, csid, option)
         local reward = 0
 
         if option == 1 then
-            reward = 14739 -- Suppanomimi
+            reward = xi.items.SUPPANOMIMI
         elseif option == 2 then
-            reward = 14740 -- Knight's Earring
+            reward = xi.items.KNIGHTS_EARRING
         elseif option == 3 then
-            reward = 14741 -- Abyssal Earring
+            reward = xi.items.ABYSSAL_EARRING
         elseif option == 4 then
-            reward = 14742 -- Beastly Earring
+            reward = xi.items.BEASTLY_EARRING
         elseif option == 5 then
-            reward = 14743 -- Bushinomimi
+            reward = xi.items.BUSHINOMIMI
         end
 
         if reward ~= 0 then
