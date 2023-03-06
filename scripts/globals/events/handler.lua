@@ -16,12 +16,16 @@ end
 
 function SeasonalEvent:new(id)
     local obj = {}
+
     setmetatable(obj, self)
     obj.id = id
     obj.isEnabled = false
-    obj.enableCheck = function() return false end
     obj.startFunc = {}
     obj.endFunc = {}
+    obj.enableCheck = function()
+        return false
+    end
+
     return obj
 end
 
@@ -42,19 +46,23 @@ end
 
 function SeasonalEvent:checkStarting()
     local isEnabled = self.enableCheck()
+
     if isEnabled then
         print("Starting Seasonal Event: " .. self.id)
         self:startFunc()
     end
+
     return self
 end
 
 function SeasonalEvent:checkEnding()
     local isEnabled = self:enableCheck()
+
     if not isEnabled then
         print("Ending Seasonal Event: " .. self.id)
         self:endFunc()
     end
+
     return self
 end
 
