@@ -304,7 +304,7 @@ xi.garrison.tick = function(npc)
     local zoneData     = xi.garrison.zoneData[zone:getID()]
     local ID           = zones[npc:getZoneID()]
 
-    local entityMapper = function (_, entityId)
+    local entityMapper = function(_, entityId)
         return GetPlayerByID(entityId)
     end
 
@@ -704,6 +704,7 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
     local sameZone = function(_, v)
         return v ~= nil and v:getZoneID() == player:getZoneID()
     end
+
     local membersInZone = utils.filterArray(player:getAlliance(), sameZone)
 
     -- This assumes that only the player trading the item has to be from the right nation
@@ -716,12 +717,11 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
         return false
     end
 
-    if utils.any(
-        membersInZone,
+    if utils.any(membersInZone,
         function(_, v)
             return v:isLevelSync()
-        end)
-    then
+        end
+    ) then
         -- Your party is unable to participate because certain members' levels are restricted
         debugLog("One or more alliance members have level sync on")
         player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
