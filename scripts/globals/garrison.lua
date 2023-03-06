@@ -717,11 +717,11 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
         return false
     end
 
-    if utils.any(membersInZone,
-        function(_, v)
-            return v:isLevelSync()
-        end
-    ) then
+    local isLevelSync = function(_, v)
+        return v:isLevelSync()
+    end
+
+    if utils.any(membersInZone, isLevelSync) then
         -- Your party is unable to participate because certain members' levels are restricted
         debugLog("One or more alliance members have level sync on")
         player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
