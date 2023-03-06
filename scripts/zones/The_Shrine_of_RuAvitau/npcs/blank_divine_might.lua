@@ -8,6 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
+require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
@@ -151,6 +152,7 @@ entity.onEventFinish = function(player, csid, option)
 
                 player:setCharVar("DivineMight", 0)
                 player:setCharVar("DM_Earring", reward)
+                player:addTitle(xi.title.PENTACIDE_PERPETRATOR)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward)
             end
