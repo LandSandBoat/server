@@ -66,7 +66,7 @@ local function getTrialProgress(player, trialId)
         return playerTrials.trialData.progress
     end
 
-    return 0
+    return nil
 end
 
 -- Returns the Index of first available Trial Slot
@@ -314,6 +314,7 @@ xi.magian.magianOnTrade = function(player, npc, trade)
                     else
                         -- Display status of selected trial
                         -- TODO: v was always a table, determine what value is expected here
+                        local v = 1 -- Test
                         player:startEvent(moogleData[5], trialId, itemId, 0, 0, v, 0, 0, utils.MAX_UINT32 - 1)
                     end
 
@@ -515,7 +516,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
 
             xi.magian.giveRequiredItem(player, trialId, true)
             player:messageSpecial(ruludeID.text.RETURN_MAGIAN_ITEM, trialInfo.requiredItem.itemId)
-            updatePlayerTrial(player, trialSlot, trialId, 0)
+            updatePlayerTrial(player, getAvailableTrialSlot(player), trialId, 0)
 
             -- TODO: These are unused here, and we should probably add some validation
             player:setLocalVar("storeTrialId", 0)
@@ -534,7 +535,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ruludeID.text.RETURN_MAGIAN_ITEM, trialInfo.requiredItem.itemId)
             player:setLocalVar("invalidItem", 0)
             player:setLocalVar("storeTrialId", 0)
-            player:setLocalVar("storeItemId", 0)            
+            player:setLocalVar("storeItemId", 0)
         end
     elseif csid == moogleData[5] then
         if
@@ -561,7 +562,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
             local activeSlot = getTrialSlot(player, trialId)
 
             if activeSlot then
-                updatePlayerTrial(player, trialSlot, 0, 0)
+                updatePlayerTrial(player, activeSlot, 0, 0)
             end
 
             xi.magian.giveRequiredItem(player, trialId, false)
@@ -578,7 +579,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
         local activeSlot = getTrialSlot(player, trialId)
 
         if activeSlot then
-            updatePlayerTrial(player, trialSlot, 0, 0)
+            updatePlayerTrial(player, activeSlot, 0, 0)
         end
 
         xi.magian.giveRewardItem(player, trialId)
@@ -588,6 +589,142 @@ xi.magian.magianOnEventFinish = function(player, csid, option, npc)
     end
 end
 
+-----------------------------------
+-- Delivery Crate
+-----------------------------------
+
+xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
+    local trialId    = 0
+    local tradeItems = {}
+
+    for tradeSlot = 0, 7 do
+        local itemObj = trade:getItem(tradeSlot)
+
+        if itemObj then
+            local itemId      = itemObj:getID()
+            local itemTrialId = itemObj:getTrialNumber()
+
+            if
+                itemTrialId ~= 0 and
+                trialId == 0 and
+                xi.magian.trials[itemTrialId] and
+                xi.magian.trials[itemTrialId].tradeItem
+            then
+                -- NOTE: First in Wins, and we ignore any other item with a trial
+                trialId = itemTrialId
+            elseif not tradeItems[itemId] then
+                tradeItems[itemId] = trade:getItemQty(itemId)
+            end
+        end
+    end
+
+    if trialId ~= 0 then
+        local trialInfo           = xi.magian.trials[trialId]
+        local playerTrialProgress = getTrialProgress(player, trialId)
+
+        if
+            playerTrialProgress and
+            trialInfo.tradeItem and
+            tradeItems[trialInfo.tradeItem]
+        then
+            local numRemainingItems = trialInfo.numRequired - playerTrialProgress
+
+            trade:confirmItem(trialInfo.tradeItem, math.min(tradeItems[trialInfo.tradeItem], numRemainingItems))
+        end
+    end
+
+    -- TODO: Update these based on need
+    player:setLocalVar("storeTrialId", trialId)
+    -- player:setLocalVar("storeItemId", currentItem.id)
+    -- player:setLocalVar("storeItemTrialId", currentItemTrial.id)
+    -- player:setLocalVar("storeItemTrialQty", currentItemTrial.quantity)
+
+    -- TODO: If this is just the number of active trials, replace with lookup function
+    player:setLocalVar("storeNbTrialsPlayer", nbTrialsPlayer)
+
+    player:confirmTrade()
+    player:startEvent(10134, currentItemTrial.id, currentItemTrial.quantity, nbTrialsPlayer, currentTrialId, 0, 0, 0, 0)
+end
+
+-- Get the active trials which requires the traded item in parameter
+local function getPlayerTrialsByTradeItemId(player, itemId)
+    local activeTrials = getPlayerTrialData(player)
+    local resultTrials = {}
+
+    for trialId, trialSlot in pairs(activeTrials.slotLookup) do
+        if
+            itemId == xi.magian.trials[trialId].tradeItem and
+            activeTrials.trialData[trialSlot].progress < activeTrials.trialData[trialSlot].objectiveTotal
+        then
+            table.insert(resultTrials, activeTrials.trialData[trialSlot])
+        end
+    end
+
+    return resultTrials
+end
+
+xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
+    local optionMod      = bit.band(option, 0xFF)
+    local itemTrialId    = player:getLocalVar("storeItemTrialId")
+    local nbTrialsPlayer = player:getLocalVar("storeNbTrialsPlayer")
+    local maxNumber      = 31 -- TODO: What does this do?  I bet this is a bitmask of active trials, and the shift is cheesing it out of scope
+
+    if csid == 10134 then
+        if optionMod == 101 then
+            player:updateEvent(itemTrialId, 0, 0, 0, 0, 0, maxNumber, 0)
+
+        elseif optionMod == 103 then
+            local places            = bit.rshift(maxNumber, nbTrialsPlayer)
+            local activeTradeTrials = getPlayerTrialsByTradeItemId(player, itemTrialId)
+            local trialParams = {}
+
+            for i = 5, 1, -1 do
+                local currentTrial = activeTradeTrials[i]
+                
+                if currentTrial and currentTrial.trialId ~= 0 then
+                    local remainingObjectives = currentTrial.objectiveTotal - currentTrial.progress
+
+                    table.insert(trialParams, bit.lshift(remainingObjectives, 16) + currentTrial.trialId)
+                else
+                    table.insert(trialParams, 0)
+                end
+            end
+
+            player:updateEvent(trialParams[1], trialParams[2], trialParams[3], trialParams[4], trialParams[5], nbTrialsPlayer, places, 0)
+        end
+    end
+end
+
+xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
+    local optionMod         = bit.band(option, 0xFF)
+    local trialId           = bit.rshift(option, 8)
+    local itemTrialId       = player:getLocalVar("storeItemTrialId")
+    local itemTrialQuantity = player:getLocalVar("storeItemTrialQty")
+
+    if csid == 10134 then
+        if optionMod == 0 then
+            player:messageSpecial(ruludeID.text.RETURN_ITEM, itemTrialId)
+        elseif optionMod == 102 then
+            checkAndSetProgression(player, trialId, { itemId = itemTrialId, quantity = itemTrialQuantity }, xi.settings.main.MAGIAN_TRIALS_TRADE_MULTIPLIER)
+        end
+
+        -- TODO: Find out what's really necessary for all of these locals
+        if
+            optionMod == 0 or
+            optionMod == 102
+        then
+            player:setLocalVar("storeTrialId", 0)
+            player:setLocalVar("storeItemId", 0)
+            player:setLocalVar("storeItemTrialId", 0)
+            player:setLocalVar("storeItemTrialQty", 0)
+            player:setLocalVar("storeNbTrialsPlayer", 0)
+        end
+    end
+end
+
+-----------------------------------
+-- Item Globals/Callbacks
+-----------------------------------
 xi.magian.onItemEquip = function(player, item)
     -- If not Trial on Item, return
     -- Find major listener required for item
