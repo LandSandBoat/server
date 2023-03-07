@@ -35,6 +35,27 @@ local findIndexForName = function(list, name)
     return nil
 end
 
+local logListToFile = function(fileName, textToAdd)
+    local filePath = io.popen("cd"):read'*all'
+    local logFile = filePath:sub(1, -2) .. "\\log\\claim_shield_logs\\" .. fileName .. ".html"
+    local textHTML = ""
+    local logRead = io.open(logFile, "r")
+
+    -- Handle the text for the HTML
+    if logRead ~= nil then
+        local oldFile = logRead:read("*all")
+        textHTML = oldFile:sub(1, -15) .. textToAdd .. "</body></html>"
+        logRead:close()
+    else
+        textHTML = "<html><title>Claim Shield Log [" .. os.date("%x", os.time()) .. "]</title><body style=\"background-color:DarkSlateGray; color:LimeGreen; font-family:Helvetica, Sans-Serif;\"><h2>Claim Shield Log [" .. os.date("%x", os.time()) .. "]</h2>" .. textToAdd .. "</body></html>"
+    end
+
+    -- Write the HTML file out
+    local logWrite = io.open(logFile, "w")
+    logWrite:write(textHTML)
+    logWrite:close()
+end
+
 g_mixins.claim_shield = function(claimshieldMob)
     claimshieldMob:addListener("SPAWN", "CS_SPAWN", function(mob)
         mob:setClaimable(false)
@@ -87,6 +108,10 @@ g_mixins.claim_shield = function(claimshieldMob)
 
             local claimWinner = GetPlayerByName(winningName)
             if claimWinner then
+                -- Setup Log File
+                local fileName = os.date("%x", os.time()):gsub("/", "-")
+                local textToAdd = "<h3>[" .. os.date("%X", os.time()) .. "] - { " .. mobArg:getName() .. " }</h3><br><b>&emsp;Winners:</b><br>&emsp;<ul>"
+
                 -- Message winner and their party/alliance that they've won
                 local alliance = claimWinner:getAlliance()
                 for _, member in pairs(alliance) do
@@ -97,12 +122,18 @@ g_mixins.claim_shield = function(claimshieldMob)
 
                     member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
 
+                    -- Add name to Log
+                    textToAdd = textToAdd .. "<li>" .. member:getName() .. "</li><br>"
+
                     -- Remove from entries table
                     local pos = findIndexForName(entries, member:getName())
                     if pos then
                         table.remove(entries, pos)
                     end
                 end
+
+                -- Finalize winners log
+                textToAdd = textToAdd .. "</ul><br><b>&emsp;Losers:</b><br>&emsp;<ul>"
 
                 -- Everyone left in the entries table isn't part of the winning group, message them and
                 -- clear them from the enmity list
@@ -115,9 +146,16 @@ g_mixins.claim_shield = function(claimshieldMob)
                         mobArg:clearEnmityForEntity(memberEntity:getPet())
                     end
 
+                    -- Add name to Log
+                    textToAdd = textToAdd .. "<li>" .. member .. "</li><br>"
+
                     mobArg:disengage()
                     mobArg:clearEnmityForEntity(memberEntity)
                 end
+
+                -- Finalize log and store
+                textToAdd = textToAdd .. "</ul><br><br>"
+                logListToFile(fileName, textToAdd)
 
                 -- Drop mods
                 mobArg:setClaimable(true)
