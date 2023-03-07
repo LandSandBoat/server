@@ -1436,8 +1436,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 }
             }
 
-            delete it->second;
-            it->second = nullptr;
+            destroy(it->second);
             dynamicTargIdsToDelete.push_back({ it->first, server_clock::now() });
 
             m_npcList.erase(it++);
