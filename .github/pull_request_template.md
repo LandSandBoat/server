@@ -7,7 +7,7 @@
 - [ ] I have read and understood the [Contributing Guide](https://github.com/AirSkyBoat/AirSkyBoat/blob/staging/CONTRIBUTING.md) and the [Code of Conduct](https://github.com/AirSkyBoat/AirSkyBoat/blob/staging/CODE_OF_CONDUCT.md).
 - [ ] I have _**tested my code and the things my code has changed**_ since the last commit in the PR and will test after any later commits.
 
-## Please enter a customer-centric description
+## Please enter a player-facing description
 
 <!-- Example: Adjusted the damage limits on physical weaponskills (Shozokui) -->
 
@@ -21,4 +21,5 @@
 
 ## Special Deployment Considersings
 
-<!-- Include any steps that need to be taken when deploying to the live environment. Example: Need to run one_time_sql_conversion.sql -->
+<!-- Include any steps that need to be taken when deploying to the live environment. -->
+<!-- Example: Need to run one_time_sql_conversion.sql -->

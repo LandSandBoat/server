@@ -61,6 +61,8 @@ jobs:
             console.log(`description: ${description}`)
             console.log(`type_name: ${type_name}`)
 
+            const errors = [];
+
             // Count the filled in checkboxes:
             // 1x pre-filled
             // 2x to be filled
@@ -69,12 +71,7 @@ jobs:
             if (checkbox_count < 3)
             {
                 console.log(`Found ${checkbox_count} completed checkboxes. Leaving a reminder comment.`)
-                const result = await github.rest.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly completed all of the checkboxes in the pre-filled template.`
-                 })
+                errors.push("- Check all boxes")
             }
             else
             {
@@ -83,10 +80,16 @@ jobs:
 
             if (description.length < 10)
             {
+              errors.push("- Provide a strong customer-center description of the work.")
+            }
+
+            if (errors.length > 0)
+            {
+              const format = `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't look at your ${type_name} until you've properly provided all requirements:\n\n${errors.join("\n")}`;
               const result = await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `✨ Thanks for the ${type_name}! ✨\n\nThis is a friendly automated reminder that the maintainers won't accept your ${type_name} without filling in a proper description.`
+                body: format
               })
             }
