@@ -94,9 +94,7 @@ mission.sections =
             ['Ancient_Weapon'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if optParams.isKiller then
-                        GetNPCByID(behemothsDominionID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
-                    end
+                    GetNPCByID(behemothsDominionID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
                 end,
             },
 
@@ -355,7 +353,7 @@ mission.sections =
             ['Tipha'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if optParams.isKiller and GetMobByID(yuhtungaJungleID.mob.CARTHI):isDead() then
+                    if GetMobByID(yuhtungaJungleID.mob.CARTHI):isDead() then
                         GetNPCByID(yuhtungaJungleID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
                     end
                 end,
@@ -364,7 +362,7 @@ mission.sections =
             ['Carthi'] =
             {
                 onMobDeath = function(mob, player, optParams)
-                    if optParams.isKiller and GetMobByID(yuhtungaJungleID.mob.TIPHA):isDead() then
+                    if GetMobByID(yuhtungaJungleID.mob.TIPHA):isDead() then
                         GetNPCByID(yuhtungaJungleID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
                     end
                 end,
