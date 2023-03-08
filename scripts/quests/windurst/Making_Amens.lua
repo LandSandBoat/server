@@ -64,13 +64,7 @@ quest.sections =
 
         [xi.zone.PORT_WINDURST] =
         {
-            ['Kuroido-Moido'] =
-            {
-                onTrigger =
-                {
-                    quest:event(283)
-                }
-            }
+            ['Kuroido-Moido'] = quest:event(283):replaceDefault(),
         },
     },
 
