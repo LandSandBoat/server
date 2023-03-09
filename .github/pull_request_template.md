@@ -19,7 +19,7 @@
 
 <!-- Clear and detailed steps to test your changes here. -->
 
-## Special Deployment Considersings
+## Special Deployment Considerations
 
 <!-- Include any steps that need to be taken when deploying to the live environment. -->
 <!-- Example: Need to run one_time_sql_conversion.sql -->

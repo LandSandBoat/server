@@ -21,12 +21,12 @@ jobs:
 
             function get_description(str)
             {
-              var startIndex = str.indexOf("## Please enter a customer-centric description");
+              var startIndex = str.indexOf("## Please enter a player-facing description");
               var endIndex = str.indexOf("## What does this pull request do? (Please be technical)");
 
-              if (startIndex === -1 || endIndex === -1) return null;
+              if (startIndex === -1 || endIndex === -1) return "";
 
-              startIndex += "## Please enter a customer-centric description".length;
+              startIndex += "## Please enter a player-facing description".length;
 
               var desc = str.substring(startIndex, endIndex);
               desc = desc.replace(/(\r\n|\n|\r)/gm, " ");
