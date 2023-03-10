@@ -36,7 +36,7 @@ xi.helm.type =
 -- (R) for retail-verified coordinates
 -----------------------------------
 
-local helmInfo =
+xi.helm.helmInfo =
 {
     [xi.helm.type.HARVESTING] =
     {
@@ -864,6 +864,7 @@ local helmInfo =
                     { 1430,  721 }, -- Rattan Lumber
                     { 1190,  689 }, -- Lauan Log
                     { 1190,  940 }, -- Revival Tree Root
+                    {  950,  731 }, -- Aquilaria Log
                     {  480,  912 }, -- Beehive Chip
                     {  480, 1237 }, -- Tree Cuttings
                     {  100, 5662 }, -- Dragon Fruit
@@ -891,7 +892,10 @@ local helmInfo =
                     { 1130,  689 }, -- Lauan Log
                     {  780,  912 }, -- Beehive Chip
                     {  650,  923 }, -- Dryad Root
+                    {  650, 5908 }, -- Butterpear
                     {  610,  940 }, -- Revival Tree Root
+                    {  610,  731 }, -- Aquilaria Log
+                    {  570,  732 }, -- Kapor Log
                     {  350,  700 }, -- Mahogany Log
                     {  170,  702 }, -- Ebony Log
                     {   90, 1237 }, -- Tree Cuttings
@@ -1499,7 +1503,7 @@ end
 
 xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local npcs   = zones[zoneId].npc[info.id]
 
     for _, npcId in ipairs(npcs) do
@@ -1512,7 +1516,7 @@ xi.helm.initZone = function(zone, helmType)
 end
 
 xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local zoneId = player:getZoneID()
     local lastTrade = player:getLocalVar("[HELM]Last_Trade")
 
@@ -1581,21 +1585,21 @@ end
 
 xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)
 end
 
 xi.helm.movePoint = function(target, zoneId, helmType)
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     movePoint(target, zoneId, info)
 end
 
 xi.helm.doesToolBreak = function(player, helmType)
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     return doesToolBreak(player, info) and 1 or 0
 end
 
 xi.helm.pickItem = function(player, helmType)
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     return pickItem(player, info)
 end
