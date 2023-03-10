@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
         allegiance = xi.allegiance.PLAYER,
         isAggroable = true,
         specialSpawnAnimation = true,
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
     })
 
     if quasilumin == nil then

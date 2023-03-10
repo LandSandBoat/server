@@ -1468,10 +1468,12 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                     CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
                     PCurrentMob->PEnmityContainer->Clear(PPet->id);
                 }
+
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
                 {
                     destroy(it->second);
                 }
+
                 dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
 
                 m_petList.erase(it++);

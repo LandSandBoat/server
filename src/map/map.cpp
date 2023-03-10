@@ -301,6 +301,8 @@ int32 do_init(int32 argc, char** argv)
 
     moduleutils::OnInit();
 
+    luautils::OnServerStart();
+
     moduleutils::ReportLuaModuleUsage();
 
     ShowInfo("The map-server is ready to work!");

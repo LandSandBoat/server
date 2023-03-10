@@ -29,7 +29,7 @@ def main():
 
     function_names.append("skip_to_next")
 
-    # Add exceptions for interaction and battle frameworks
+    # Add exceptions for interaction, battle frameworks, and other user Lua types
     function_names.append("new")
     function_names.append("event")
     function_names.append("begin")
@@ -90,6 +90,14 @@ def main():
     function_names.append("face")
     function_names.append("validateHourglass")
     function_names.append("duplicateHourglass")
+    function_names.append("startFunc")
+    function_names.append("enableCheck")
+    function_names.append("endFunc")
+    function_names.append("checkEnding")
+    function_names.append("checkStarting")
+    function_names.append("setEnableCheck")
+    function_names.append("setStartFunction")
+    function_names.append("setEndFunction")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):

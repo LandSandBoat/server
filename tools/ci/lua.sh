@@ -72,6 +72,7 @@ global_objects=(
     BattlefieldMission
     BattlefieldQuest
     Limbus
+    SeasonalEvent
 
     removeSleepEffects
 
