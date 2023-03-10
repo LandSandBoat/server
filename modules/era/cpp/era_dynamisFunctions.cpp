@@ -245,11 +245,48 @@ class DynaFuncModule : public CPPModule
                 for_each(participants.begin(), participants.end(), [&charids](const std::string& charid)
                          { charids += charid; });
 
-                query = "UPDATE char_vars SET value = %u"
+                query = "UPDATE char_vars SET value = %u "
                         "WHERE charid IN (%s) AND varname = '%s'";
 
                 sql->Query(query, 73, charids, "DynaReservationStart");
             }
+        };
+
+        lua["SaveDynamisSnapshot"] = [this](uint32 instanceId, sol::table indicies)
+        {
+            auto query = "DELETE FROM dynamis_instance_state WHERE instanceid = %u";
+            if (sql->Query(query, instanceId) == SQL_ERROR)
+            {
+                ShowDebug(fmt::format("Era Dynamis: ERROR! Failed to clear dynamis_instance_state for instanceID: {}", instanceId));
+            }
+
+            for (const auto& kvp : indicies)
+            {
+                if (kvp.second.as<uint32>() == 0)
+                {
+                    continue;
+                }
+
+                query = "INSERT INTO dynamis_instance_state VALUES (%u, %u)";
+                if (sql->Query(query, instanceId, kvp.second.as<uint32>()) == SQL_ERROR)
+                {
+                    ShowDebug(fmt::format("Era Dynamis: ERROR! Failed to save dynamis state for instanceID: {} mobIndex: {}", instanceId, kvp.second.as<uint32>()));
+                }
+            }
+        };
+
+        lua["LoadDynamisSnapshot"] = [this](uint32 instanceId)
+        {
+            sol::table mobIndicies;
+            auto       query = "SELECT mobindex FROM dynamis_instance_state WHERE instanceid = %u";
+            if (sql->Query(query, instanceId) != SQL_ERROR && sql->NumRows() > 0)
+            {
+                while (sql->NextRow() != SQL_ERROR)
+                {
+                    mobIndicies.add(sql->GetUIntData(0));
+                }
+            }
+            return mobIndicies;
         };
     }
 };

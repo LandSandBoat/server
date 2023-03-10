@@ -748,12 +748,86 @@ end
 
 
 local function restoreInstance(zone)
+    -- Restore snapshotted variables
+    local zoneID = zone:getID()
+    local snapshotVariables =
+    {
+        string.format("[DYNA]Token_%s", zoneID),
+        string.format("[DYNA]InstanceID_%s", zoneID),
+        string.format("[DYNA]ExpireRoutine_%s", zoneID),
+        string.format("[DYNA]Given10MinuteWarning_%s", zoneID),
+        string.format("[DYNA]Given3MinuteWarning_%s", zoneID),
+        string.format("[DYNA]Given1MinuteWarning_%s", zoneID),
+        string.format("[DYNA]CurrentWave_%s", zoneID)
+    }
+
+    for _, variable in pairs(snapshotVariables) do
+        local value = GetServerVariable(string.format("[SNAPSHOT]%s", variable))
+        SetServerVariable(variable, value)
+        zone:setLocalVar(variable, value)
+    end
+    print("Done restoring variables")
+
+    -- Despawn current
+    xi.dynamis.despawnAll(zone)
+    print("Done despawning all")
+
+    -- Restore wave enemies
+    local instanceID = GetServerVariable(string.format("[DYNA]InstanceID_%s", zoneID))
+    local waveNumber = GetServerVariable(string.format("[DYNA]CurrentWave_%s", zoneID))
+    if instanceID and instanceID > 0 then
+        local mobIndicies = LoadDynamisSnapshot(instanceID)
+        xi.dynamis.spawnWaveIndicies(zone, waveNumber or 1, mobIndicies)
+        print("Spawn finish")
+    else
+        print(instanceID)
+        print(waveNumber)
+    end
+
 end
 
 local function snapshotInstance(zone)
+    local zoneID = zone:getID()
+    local instanceID = zone:getLocalVar(string.format("[DYNA]InstanceID_%s", zoneID))
+
+    -- Snapshot Mob List
     local mobs = zone:getMobs()
+    local availableMobList = {}
 
+    for _, mob in pairs(mobs) do
+        if mob:isAlive() then
+            local index = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
+            if index and index > 0 then
+                table.insert(availableMobList, index)
+            end
+        end
+    end
 
+    -- Persist to Database
+    SaveDynamisSnapshot(instanceID, availableMobList)
+
+    -- Snapshot Variables
+    local snapshotVariables =
+    {
+        string.format("[DYNA]Token_%s", zoneID),
+        string.format("[DYNA]InstanceID_%s", zoneID),
+        string.format("[DYNA]ExpireRoutine_%s", zoneID),
+        string.format("[DYNA]Given10MinuteWarning_%s", zoneID),
+        string.format("[DYNA]Given3MinuteWarning_%s", zoneID),
+        string.format("[DYNA]Given1MinuteWarning_%s", zoneID),
+        string.format("[DYNA]CurrentWave_%s", zoneID)
+    }
+
+    for _, key in pairs(snapshotVariables) do
+        local value = zone:getLocalVar(key)
+        SetServerVariable(string.format("[SNAPSHOT]%s", key), value)
+        print(string.format("[SNAPSHOT]%s", key), value)
+    end
+
+    local zoneTimepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID))
+    local zoneTimeRemaining = xi.dynamis.getDynaTimeRemaining(zoneTimepoint)
+    SetServerVariable(string.format("[SNAPSHOT][DYNA]Timepoint_%s", zoneID), zoneTimepoint)
+    SetServerVariable(string.format("[SNAPSHOT][DYNA]TimeRemaining_%s", zoneID), zoneTimeRemaining)
 end
 
 --------------------------------------------
@@ -863,11 +937,16 @@ xi.dynamis.handleDynamis = function(zone)
     if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) ~= 0 then
         if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) <= os.time() then -- If cooldown period eclipses current OS time, cleanup.
             xi.dynamis.cleanupDynamis(zone)
+            return
         end
     end
 
     -- Handle the snapshot
-    if os.clock() - dynamis_last_snapshot > dynamis_snapshot_interval then
+    if
+        os.clock() - dynamis_last_snapshot > dynamis_snapshot_interval and
+        #playersInZone > 0 and
+        #zone:getMobs() > 0
+    then
         snapshotInstance(zone)
         dynamis_last_snapshot = os.clock()
     end
@@ -977,7 +1056,14 @@ xi.dynamis.cleanupDynamis = function(zone)
     SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zoneID), 0)
     zone:resetLocalVars()
     xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
+    xi.dynamis.despawnAll(zone) -- Despawns all mobs / npcs in zone
+end
 
+xi.dynamis.restoreDynamis = function(zone)
+    restoreInstance(zone)
+end
+
+xi.dynamis.despawnAll = function(zone)
     -- Cleanup Zone
     local mobsInZone = zone:getMobs()
     local npcsInZone = zone:getNPCs()
@@ -1030,6 +1116,7 @@ xi.dynamis.registerDynamis = function(player)
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
     zone:setLocalVar(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), dynamisToken)
     zone:setLocalVar(string.format("[DYNA]InstanceID_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), instanceID)
+    zone:setLocalVar(string.format("[DYNA]CurrentWave_%s", zoneID), 1)
     player:getZone():setLocalVar(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), dynamisToken)
     player:getZone():setLocalVar(string.format("[DYNA]InstanceID_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), instanceID)
 end

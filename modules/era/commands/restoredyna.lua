@@ -1,6 +1,6 @@
 -----------------------------------
--- func: resetdyna
--- desc: Resets an instance of Dynamis
+-- func: restoredyna
+-- desc: Stores the last dyna instance for a zone 
 -----------------------------------
 
 cmdprops =
@@ -25,7 +25,7 @@ local zoneMap =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!resetdyna <zoneName>")
+    player:PrintToPlayer("!adddynatime <zoneName> <minutes>")
 end
 
 function onTrigger(player, zoneName)
@@ -47,18 +47,11 @@ function onTrigger(player, zoneName)
         return
     end
 
-    -- Get Instance ID for zone 
-    local instanceID = GetServerVariable(string.format("[DYNA]InstanceID_%s", zone:getID()));
+    -- Get Instance ID for zone
+    local instanceID = GetServerVariable(string.format("[SNAPSHOT][DYNA]InstanceID_%s", zone:getID()));
 
-    -- Eject inhabiting players
-    if #zone:getPlayers() > 0 then
-        xi.dynamis.ejectAllPlayers(zone)
-    end
-
-    -- Cleanup the zone
-    xi.dynamis.cleanupDynamis(zone)
-
-    -- Reset all player's dynamis variables
+    -- Restore Zone
+    xi.dynamis.restoreDynamis(zone)
     ResetDynamisInstance(instanceID)
-    player:PrintToPlayer(string.format("ResetDyna: Successfully reset Dynamis Instance %s for Zone: %s", instanceID, zoneName))
+    player:PrintToPlayer("RestoreDyna: Successfully restored Dynamis!")
 end
