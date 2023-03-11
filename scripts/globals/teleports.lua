@@ -151,6 +151,7 @@ local destinations =
     [ids.ESCHA_RUAUN]           = {   -0.371,  -34.279, -466.980, 192, 289 },
     [ids.MISAREAUX_CONFLUENCE]  = {  -57.385,  -21.460,  568.941, 160,  25 }
 }
+xi.teleport.destination = destinations
 
 xi.teleport.type =
 {
