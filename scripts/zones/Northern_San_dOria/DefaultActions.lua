@@ -2,6 +2,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 return {
     ['Abeaule']    = { text = ID.text.ABEAULE_DIALOG_THANKS },
+    ['Abioleget']  = { text = ID.text.ABIOLEGET_DIALOG },
     ['Ailbeche']   = { event = 868 },
     ['Bacherume']  = { text = ID.text.BACHERUME_DIALOG },
     ['Chasalvige'] = { event = 6 },
@@ -19,6 +20,7 @@ return {
                     return
                 end
             end
+
             player:showText(npc, ID.text.GILIPESE_DIALOG)
         end,
     },
@@ -42,6 +44,7 @@ return {
                     return
                 end
             end
+
             player:showText(npc, ID.text.RODAILLECE_DIALOG)
         end,
     },
