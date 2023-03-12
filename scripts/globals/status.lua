@@ -1324,7 +1324,9 @@ xi.mod =
     DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
     ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
-
+    ENHANCES_NETHER_VOID            = 74,   -- Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%, e.g. mod
+    ENHANCES_MUTED_SOUL             = 75,   -- Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
+    ENHANCES_DIABOLIC_EYE           = 76,   -- Enhances "Diabolic Eye" effect (Increases duration by <value> seconds per merit, e.g. mod value 6 = +6s)
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
 

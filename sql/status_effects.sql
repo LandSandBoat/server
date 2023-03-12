@@ -374,7 +374,7 @@ INSERT INTO `status_effects` VALUES (341,'formless_strikes',4194336,0,0,0,0,0,0,
 INSERT INTO `status_effects` VALUES (342,'assassins_charge',4194340,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (343,'feint',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (344,'fealty',4194337,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (345,'dark_seal',161,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (345,'dark_seal',33,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (346,'diabolic_eye',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (347,'nightingale',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (348,'troubadour',4194336,0,0,0,0,0,0,0,0);

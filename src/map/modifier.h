@@ -422,10 +422,13 @@ enum class Mod
     DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
-    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
+    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
     ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_NETHER_VOID   = 74,   // Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%, e.g. mod
+    ENHANCES_MUTED_SOUL    = 75,   // Enhances "Muted Soul" effect (Adds 3% Zanshin rate per MUTED_SOUL merit level)
+    ENHANCES_DIABOLIC_EYE  = 76,   // Enhances "Diabolic Eye" effect (Increases duration by <value> seconds per merit, e.g. mod value 6 = +6s)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -964,7 +967,7 @@ enum class Mod
     //
     // SPARE IDs:
     // 53
-    // 74 to 79
+    // 77 to 79
     // 138 to 143
     // 156 to 159
     // 217 to 223
