@@ -3045,8 +3045,9 @@ xi.mount =
     BYAKKO         = 33,
     NOBLE_CHOCOBO  = 34, -- NOTE: This is currently blank, probably needs additional packets sent
     IXION          = 35,
+    PHUABO         = 36,
     --
-    MOUNT_MAX      = 36,
+    MOUNT_MAX      = 37,
 }
 
 -----------------------------------
