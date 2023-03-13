@@ -4,11 +4,13 @@
 -- Any zone in which contains a mob over lvl 99, level correction is deactivated.
 -- Adoulin zones, zones with Apex or Locus mobs, etc...
 -----------------------------------
+require("scripts/globals/settings")
+require("scripts/globals/status")
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.levelCorrection = xi.combat.levelCorrection or {}
 -----------------------------------
-
 -- List of zones in which level correction still happens.
 local levelCorrectionZoneList =
 set{
@@ -234,7 +236,11 @@ set{
 -- Meant to be called from a master function and fed to corresponding calculation.
 -- Example: pDIF functions, Actor magic accuracy, etc...
 xi.combat.levelCorrection.isLevelCorrectedZone = function(actor)
-    local actorZone = actor:getZoneID()
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        local actorZone = actor:getZoneID()
 
-    return levelCorrectionZoneList[actorZone] or false
+        return levelCorrectionZoneList[actorZone] or false
+    else
+        return true
+    end
 end

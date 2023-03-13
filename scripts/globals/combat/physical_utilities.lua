@@ -50,7 +50,8 @@ local wsElementalProperties =
 -- Table with pDIF caps per weapon/skill type.
 local pDifWeaponCapTable =
 {
-    [xi.skill.NONE            ] = { 3.5  },
+    -- [Skill/weapon type used] = {pre-randomizer_pDIF_cap}, Values from: https://www.bg-wiki.com/ffxi/PDIF
+    [xi.skill.NONE            ] = { 3    }, -- We will use this for mobs.
     [xi.skill.HAND_TO_HAND    ] = { 3.5  },
     [xi.skill.DAGGER          ] = { 3.25 },
     [xi.skill.SWORD           ] = { 3.25 },
@@ -328,7 +329,9 @@ end
 xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
     local pDif = 0
 
+    ----------------------------------------
     -- Step 1: Attack / Defense Ratio
+    ----------------------------------------
     local baseRatio     = 0
     local actorAttack   = math.floor(actor:getStat(xi.mod.ATT) * wsAttackMod)
     local targetDefense = target:getStat(xi.mod.DEF)
@@ -353,20 +356,31 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
     baseRatio = actorAttack / targetDefense
 
+    -- Apply cap to baseRatio.
+    baseRatio = utils.clamp(baseRatio, 0, 10) -- Can't be negative.
+
+    ----------------------------------------
     -- Step 2: cRatio (Level correction, corrected ratio) Zone based!
+    ----------------------------------------
     local levelDifFactor = 0
 
     if applyLevelCorrection then
         levelDifFactor = (target:getMainLvl() - actor:getMainLvl()) * 0.05
     end
 
-    local cRatio = baseRatio - levelDifFactor
-
-    if cRatio < 0 then
-        cRatio = 0
+    -- Only players suffer from negative level difference.
+    if
+        not actor:isPC() and
+        levelDifFactor < 0
+    then
+        levelDifFactor = 0
     end
 
+    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+
+    ----------------------------------------
     -- Step 3: wRatio and pDif Caps (Melee)
+    ----------------------------------------
     local wRatio       = cRatio + isCritical
     local pDifUpperCap = 0
     local pDifLowerCap = 0
@@ -380,10 +394,8 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         pDifUpperCap = wRatio + 0.3
     elseif wRatio < 1.5 then
         pDifUpperCap = wRatio + wRatio * 0.25
-    elseif wRatio < 2.625 then
-        pDifUpperCap = wRatio + 0.375
     else
-        pDifUpperCap = 3
+        pDifUpperCap = utils.clamp(wRatio + 0.375, 1, 3)
     end
 
     -- pDIF lower cap.
@@ -401,12 +413,16 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
     pDif = math.random(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
 
+    ----------------------------------------
     -- Step 4: Apply weapon type caps.
-    local pDifCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
+    ----------------------------------------
+    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
 
-    pDif = utils.clamp(pDif, 0, pDifCap)
+    pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
+    ----------------------------------------
     -- Step 5: Melee random factor.
+    ----------------------------------------
     local meleeRandom = math.random(100, 105) / 100
 
     pDif = pDif * meleeRandom
@@ -417,7 +433,9 @@ end
 xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
     local pDif = 0
 
+    ----------------------------------------
     -- Step 1: Attack / Defense Ratio
+    ----------------------------------------
     local baseRatio     = 0
     local actorAttack   = math.floor(actor:getStat(xi.mod.RATT) * wsAttackMod)
     local targetDefense = target:getStat(xi.mod.DEF)
@@ -442,20 +460,33 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
 
     baseRatio = actorAttack / targetDefense
 
+    -- Apply cap to baseRatio.
+    baseRatio = utils.clamp(baseRatio, 0, 10) -- Can't be negative.
+
+    ----------------------------------------
     -- Step 2: cRatio (Level correction, corrected ratio) Zone based!
+    ----------------------------------------
     local levelDifFactor = 0
 
     if applyLevelCorrection then
         levelDifFactor = (target:getMainLvl() - actor:getMainLvl()) * 0.05
     end
 
-    local cRatio = baseRatio - levelDifFactor
-
-    if cRatio < 0 then
-        cRatio = 0
+    -- Only players suffer from negative level difference.
+    if
+        not actor:isPC() and
+        levelDifFactor < 0
+    then
+        levelDifFactor = 0
     end
 
+    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+
+    -- TODO: Presumably, pets get a Cap here if the target checks as "Too Weak". More info needed.
+
+    ----------------------------------------
     -- Step 3: pDif Caps (Ranged)
+    ----------------------------------------
     local pDifUpperCap = 0
     local pDifLowerCap = 0
 
@@ -473,13 +504,17 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
 
     pDif = math.random(pDifLowerCap * 1000, pDifUpperCap * 1000) / 1000
 
+    ----------------------------------------
     -- Step 4: Apply weapon type caps.
-    local pDifCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
+    ----------------------------------------
+    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
 
-    pDif = utils.clamp(pDif, 0, pDifCap)
+    pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
+    ----------------------------------------
     -- Step 5: Ranged critical factor. Bypasses caps.
-    if isCritical then
+    ----------------------------------------
+    if isCritical == 1 then
         pDif = pDif * 1.25
     end
 
