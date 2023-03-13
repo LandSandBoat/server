@@ -76,27 +76,28 @@ xi.weaponskills.getAlpha = function(level)
     return alpha
 end
 
+-- http://wiki.ffo.jp/html/1705.html
+-- https://www.ffxiah.com/forum/topic/21497/stalwart-soul/ some anecdotal data that aligns with JP
+-- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
 local function souleaterBonus(attacker, wsParams)
-    local bonus = 0
-
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
+        local souleaterEffect    = math.min(0.02, attacker:getMod(xi.mod.SOULEATER_EFFECT) * 0.01)
+        local souleaterEffectII  = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) * 0.01 -- No known cap to this bonus. Used on Agwu's scythe
+        local stalwartSoulBonus = 1 - attacker:getMod(xi.mod.STALWART_SOUL) / 100
+        local bonusDamage       = attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII)
 
-        if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
+        if bonusDamage >= 1 then
+            attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
+
+            if attacker:getMainJob() ~= xi.job.DRK then
+                return bonusDamage / 2
+            end
+
+            return bonusDamage
         end
-
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
-        end
-
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
     end
 
-    return bonus
+    return 0
 end
 
 local function fencerBonus(attacker)
