@@ -210,7 +210,8 @@ enum SUBSKILLTYPE
     SUBSKILL_RAPHIE     = 65,
     SUBSKILL_MAC        = 66,
     SUBSKILL_SILAS      = 67,
-    SUBSKILL_TOLOI      = 68
+    SUBSKILL_TOLOI      = 68,
+    SUBSKILL_DSANCHEZ   = 100
 };
 
 // ячейки экипировки. монстры используют лишь первые четыре, персонаж использует все
