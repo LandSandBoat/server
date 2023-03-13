@@ -634,8 +634,6 @@ enum class Mod
     SAVETP      = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
-    WYRMAL_ABJ_KILLER_EFFECT = 53, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
-
     // Rune Fencer
     INQUARTATA                  = 963,  // Increases parry rate by a flat %.
     ENHANCES_BATTUTA            = 1004, // Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
@@ -969,6 +967,8 @@ enum class Mod
     SILENCE_MEVA           = 1175, // Silence MEVA from Barspells
     VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
     PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
+
+    WYRMAL_ABJ_KILLER_EFFECT = 1178, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
