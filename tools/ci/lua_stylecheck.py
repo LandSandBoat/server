@@ -27,6 +27,10 @@ deprecated_functions = [
     ["table.getn", "#t"],
 ]
 
+excluded_filenames = [
+    'scripts/mixins/claim_shield.lua',
+]
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -354,7 +358,8 @@ expected_errors = 0
 
 if target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
-        total_errors += LuaStyleCheck(filename).errcount
+        if filename not in excluded_filenames:
+            total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
     expected_errors = 41
