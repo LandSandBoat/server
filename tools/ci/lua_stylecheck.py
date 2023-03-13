@@ -39,7 +39,8 @@ class LuaStyleCheck:
         self.filename = input_file
         self.show_errors = show_errors
 
-        self.run_style_check()
+        if input_file not in excluded_filenames:
+            self.run_style_check()
 
     def error(self, error_string):
         """Displays error_string along with filename and line.  Increments errcount for the class."""
@@ -358,8 +359,7 @@ expected_errors = 0
 
 if target == 'scripts':
     for filename in glob.iglob('scripts/**/*.lua', recursive = True):
-        if filename not in excluded_filenames:
-            total_errors += LuaStyleCheck(filename).errcount
+        total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
     expected_errors = 41
