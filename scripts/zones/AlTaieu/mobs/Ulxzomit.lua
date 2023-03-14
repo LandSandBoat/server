@@ -7,6 +7,8 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+local followOptions = { forceRepathInterval = 1 }
+
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_COOL, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 50)
@@ -25,7 +27,7 @@ entity.onMobSpawn = function(mob)
                 mob:setLocalVar("leaderID", leader:getID())
 
                 if leader:isSpawned() then
-                    xi.follow.follow(mob, leader)
+                    xi.follow.follow(mob, leader, followOptions)
                 end
 
                 return
@@ -37,7 +39,7 @@ entity.onMobSpawn = function(mob)
             local follower = GetMobByID(mobId + i)
 
             if follower and follower:isSpawned() then
-                xi.follow.follow(follower, mob)
+                xi.follow.follow(follower, mob, followOptions)
             end
         end
     end

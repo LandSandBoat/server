@@ -75,19 +75,31 @@ local function onMobRoamAction(follower)
     end
 
     local followerId = follower:getID()
-    local leaderId = leader:getID()
-    local options = followerOptions[followerId]
-    local leaderPos = leader:getPos()
-    local followerPos = follower:getPos()
-    local followerDistance = utils.distance(leaderPos, followerPos)
-    local followDistance = options.followDistance
-    local warpDistance = options.warpDistance
-    local separationAngle = options.separationAngle
+    local options    = followerOptions[followerId]
 
-    if followerDistance > followDistance + 1.0 then
-        local followers = leaderToFollowersMap[leaderId]
-        local followerIndex
+    if options.forceRepathInterval then
+        local lastPath = follower:getLocalVar("[follow]lastPath") + 1
+        follower:setLocalVar("[follow]lastPath", lastPath)
+        follower:queue(options.forceRepathInterval * 1000, function()
+            if follower:getLocalVar("[follow]lastPath") == lastPath then
+                follower:clearPath()
+            end
+        end)
+    end
+
+    local leaderId         = leader:getID()
+    local leaderPos        = leader:getPos()
+    local followerPos      = follower:getPos()
+    local followerDistance = utils.distance(leaderPos, followerPos)
+    local followDistance   = options.followDistance
+    local separationAngle  = options.separationAngle
+
+    if options.warpDistance and followerDistance > options.warpDistance then
+        follower:teleport(utils.getNearPosition(leaderPos, 2 + math.random() * (followDistance - 2), math.random() * 2 * math.pi), leader)
+    elseif followerDistance > followDistance + 1.0 then
+        local followers     = leaderToFollowersMap[leaderId]
         local followerCount = #followers
+        local followerIndex
 
         for i, mob in ipairs(followers) do
             if mob:getID() == followerId then
@@ -97,23 +109,19 @@ local function onMobRoamAction(follower)
         end
 
         local filteredFollowersPos = filterFollowersToPosArray(leaderPos, followerPos, followers, followDistance, separationAngle)
+        local targetAngle
 
         if #filteredFollowersPos == 1 then
             -- Ignore other followers, go straight to leader.
-            local targetAngle = utils.getWorldAngle(leaderPos, followerPos)
-            local targetPos = utils.getNearPosition(leaderPos, followDistance, targetAngle)
-
-            follower:pathTo(targetPos.x, targetPos.y, targetPos.z, options.pathFlags)
+            targetAngle = utils.getWorldAngle(leaderPos, followerPos)
         else
             -- Go to leader while leaving room for other followers.
-            local targetAngle = getAverageWorldAngle(leaderPos, filteredFollowersPos)
+            targetAngle = getAverageWorldAngle(leaderPos, filteredFollowersPos)
             targetAngle = targetAngle + (separationAngle * (followerIndex - 1)) - (separationAngle * (followerCount - 1) / 2)
-            local targetPos = utils.getNearPosition(leaderPos, followDistance, targetAngle)
-
-            follower:pathTo(targetPos.x, targetPos.y, targetPos.z, options.pathFlags)
         end
-    elseif warpDistance > 0 and followerDistance > warpDistance then
-        follower:teleport(utils.getNearPosition(leaderPos, 2 + math.random() * (followDistance - 2), math.random() * 2 * math.pi), leader)
+
+        local targetPos = utils.getNearPosition(leaderPos, followDistance, targetAngle)
+        follower:pathTo(targetPos.x, targetPos.y, targetPos.z, options.pathFlags)
     end
 end
 
@@ -133,7 +141,8 @@ end
 -- @field separationAngle[opt=0.2] in radians, minimum separation to keep from other followers. 0.2 is roughly 1 yalm separation at 5 yalms distance.
 -- @field pathFlags[opt=xi.pathflag.WALLHACK & xi.pathflag.SCRIPT] flags to pass to the pathTo() function.
 -- @field roamCooldown[opt=false] in seconds, wait time between each new calculation of a follow path. false to leave unchanged.
--- @field warpDistance[opt=35.0] in yalms, distance at which the follower will teleport to the target. 0 to disable.
+-- @field forceRepathInterval[opt=false] in seconds, maximum time between re-pathing while following, in case the target moves in transit. false for no maximum.
+-- @field warpDistance[opt=false] in yalms, distance above which the follower will teleport to the target. false to disable.
 -- @table followOptions
 -----------------------------------
 xi.follow.follow = function(follower, leader, options)
@@ -145,12 +154,13 @@ xi.follow.follow = function(follower, leader, options)
         return false
     end
 
-    options = options or {}
-    options.followDistance = options.followDistance or 5.0
-    options.separationAngle = options.separationAngle or 0.2
-    options.pathFlags = options.pathFlags or bit.bor(xi.pathflag.WALLHACK, xi.pathflag.SCRIPT)
-    options.roamCooldown = options.roamCooldown or false
-    options.warpDistance = options.warpDistance or 35.0
+    options                     = options or {}
+    options.followDistance      = options.followDistance or 5.0
+    options.separationAngle     = options.separationAngle or 0.2
+    options.pathFlags           = options.pathFlags or bit.bor(xi.pathflag.WALLHACK, xi.pathflag.SCRIPT)
+    options.roamCooldown        = options.roamCooldown or false
+    options.forceRepathInterval = options.forceRepathInterval or false
+    options.warpDistance        = options.warpDistance or false
 
     local leaderId = leader:getID()
     local followerId = follower:getID()
