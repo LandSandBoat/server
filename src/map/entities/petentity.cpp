@@ -48,13 +48,13 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_jugSpawnTime(time_point::min())
 , m_jugDuration(duration::min())
 {
-    objtype                 = TYPE_PET;
-    m_EcoSystem             = ECOSYSTEM::UNCLASSIFIED;
-    allegiance              = ALLEGIANCE_TYPE::PLAYER;
-    m_MobSkillList          = 0;
-    m_IsClaimable           = false;
-    m_bReleaseTargIDOnDeath = true;
-    spawnAnimation          = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
+    objtype                     = TYPE_PET;
+    m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
+    allegiance                  = ALLEGIANCE_TYPE::PLAYER;
+    m_MobSkillList              = 0;
+    m_IsClaimable               = false;
+    m_bReleaseTargIDOnDisappear = true;
+    spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
     memset(&m_TraitList, 0, sizeof(m_TraitList));
 
@@ -314,7 +314,9 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
             return;
         }
 
-        if (battleutils::IsParalyzed(this))
+        // Currently, only the Wyvern uses abilities at all as of writing, but their abilities are not instant and are mob abilities.
+        // Abilities are not subject to paralyze if they have non-zero cast time due to this corner case.
+        if (state.GetAbility()->getCastTime() == 0s && battleutils::IsParalyzed(this))
         {
             setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, 0);
             return;

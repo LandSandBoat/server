@@ -11,7 +11,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ACCURACY_BOOST)
-    if effect ~= nil and effect:getSubType() == 18067 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.KEEN_ZAGHNAL then
         target:delStatusEffect(xi.effect.ACCURACY_BOOST)
     end
 
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ACCURACY_BOOST, 3, 0, 1800, 18067)
+    target:addStatusEffect(xi.effect.ACCURACY_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.KEEN_ZAGHNAL)
 end
 
 return itemObject

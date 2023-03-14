@@ -256,9 +256,11 @@ uint8 CBattleEntity::GetSpeed()
     // Mod::MOUNT_MOVE (972)
     Mod mod = isMounted() ? Mod::MOUNT_MOVE : Mod::MOVE;
 
-    float modAmount = (100.0f + static_cast<float>(getMod(mod))) / 100.0f;
+    // Get the percentage of increase/decreate by mod
+    auto modAmount = static_cast<float>(getMod(mod)) / 100.0f;
+
     // Cap unmounted movement speed increase to 25%
-    if (mod == Mod::MOVE)
+    if (mod == Mod::MOVE && modAmount > 0) // Only clamp position/negatvie if we're increasing speed
     {
         if (StatusEffectContainer->GetStatusEffect(EFFECT_FLEE))
         {
@@ -270,9 +272,13 @@ uint8 CBattleEntity::GetSpeed()
         }
     }
 
-    float modifiedSpeed = static_cast<float>(startingSpeed) * modAmount;
-    uint8 outputSpeed   = static_cast<uint8>(modifiedSpeed < 0 ? 0 : modifiedSpeed);
+    // Add speed mod to base speed
+    auto modifiedSpeed = startingSpeed + static_cast<float>(startingSpeed) * modAmount;
 
+    // Make sure speed cannot go negative
+    auto outputSpeed = static_cast<uint8>(modifiedSpeed < 0 ? 0 : modifiedSpeed);
+
+    // Actually need this clamp?
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
 
@@ -2157,11 +2163,16 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
                 actionTarget.reaction = REACTION::HIT;
 
-                if (this->GetLocalVar("TREDECIM_COUNTER") == 13 && weaponSlot == SLOT_MAIN)
+                if (this->objtype == TYPE_PC && weaponSlot == SLOT_MAIN && ((CCharEntity*)this)->getCharVar("TREDECIM_COUNTER") > 12)
                 {
-                    // Ensure critical is only set to main weapon slot
-                    attack.SetCritical(true, weaponSlot, attack.IsGuarded());
-                    this->SetLocalVar("TREDECIM_COUNTER", -1);
+                    // Check for Tredecim
+                    auto* equippedWeapon = dynamic_cast<CItemWeapon*>(this->m_Weapons[SLOT_MAIN]);
+                    if (equippedWeapon->getID() == 18052)
+                    {
+                        // Ensure critical is only set to main weapon slot
+                        attack.SetCritical(true, weaponSlot, attack.IsGuarded());
+                        ((CCharEntity*)this)->setCharVar("TREDECIM_COUNTER", -1);
+                    }
                 }
 
                 // Critical hit.

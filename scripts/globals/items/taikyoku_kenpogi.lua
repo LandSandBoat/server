@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.EVASION_BOOST)
-    if effect ~= nil and effect:getSubType() == 14541 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.TAIKYOKU_KENPOGI then
         target:delStatusEffect(xi.effect.EVASION_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.EVASION_BOOST, 3, 0, 1800, 14541)
+    target:addStatusEffect(xi.effect.EVASION_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.TAIKYOKU_KENPOGI)
 end
 
 return itemObject

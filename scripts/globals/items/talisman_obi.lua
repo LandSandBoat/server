@@ -10,14 +10,15 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect and effect:getSubType() == 15881 then
+    if effect and effect:getItemSourceID() == xi.items.TALISMAN_OBI then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
     end
+
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15881)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.TALISMAN_OBI)
 end
 
 itemObject.onEffectGain = function(target, effect)

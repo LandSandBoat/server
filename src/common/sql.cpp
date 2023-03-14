@@ -90,7 +90,7 @@ SqlConnection::~SqlConnection()
     {
         mysql_close(&self->handle);
         FreeResult();
-        delete self;
+        destroy(self);
     }
 }
 

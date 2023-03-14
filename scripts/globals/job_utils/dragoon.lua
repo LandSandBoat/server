@@ -456,9 +456,13 @@ xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
 end
 
 xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
-    -- Reduce 99% of total accumulated enmity
-    if target:isMob() then
-        target:lowerEnmity(player, 99)
+    -- http://wiki.ffo.jp/html/3367.html
+    for _, mob in pairs(player:getNotorietyList()) do
+        -- TODO: testing shows max range on this is >50' but stops somewhere above this. Need exact number.
+        if mob:isMob() and mob:checkDistance(player) <= 75.0 then
+            mob:setCE(player, 1)
+            mob:setVE(player, 0)
+        end
     end
 
     ability:setMsg(xi.msg.basic.NONE)
@@ -476,6 +480,38 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
         wyvern:isEngaged()
     then
         wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
+    end
+
+    -- Handle Spirit Surge -50% enmity reduction on super jump to closest party member behind the dragoon
+    if player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
+        local minDistance = 9999
+        local closestPartyMember = nil
+
+        -- Find the closest party member
+        local party = player:getPartyWithTrusts()
+        for _, member in pairs(party) do
+            local distance = member:checkDistance(player)
+            if
+                member:getID() ~= player:getID() and
+                not member:isDead() and
+                (distance < minDistance or closestPartyMember == nil)
+            then
+                closestPartyMember = member
+                minDistance = distance
+            end
+        end
+
+        -- TODO: verify conditions for how close the dragoon needs to be to the mob, if at all
+        -- It doesn't matter what direction the dragoon is facing http://wiki.ffo.jp/html/3367.html#comment_1
+        if
+            closestPartyMember and
+            closestPartyMember:isBehind(player) and
+            (player:checkDistance(target) < closestPartyMember:checkDistance(target)) -- Verify dragoon is closer than the party member that we want to reduce the enmity of
+        then
+            if target:isMob() then
+                target:lowerEnmity(closestPartyMember, 50)
+            end
+        end
     end
 end
 
@@ -813,27 +849,27 @@ end
 
 xi.job_utils.dragoon.addWyvernExp = function(player, exp)
     local wyvern   = player:getPet()
-    local prev_exp = wyvern:getLocalVar("wyvern_exp")
-    local levels_gained = wyvern:getLocalVar("wyvern_level_ups")
+    local prevExp = wyvern:getLocalVar("wyvern_exp")
+    local numLevelUps = wyvern:getLocalVar("wyvern_level_ups")
 
-    if prev_exp < 1000 and levels_gained < 5 then
+    if prevExp < 1000 and numLevelUps < 5 then
         -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
-        local currentExp = utils.clamp(exp + prev_exp, 0, 1000)
-        local diff = math.floor(currentExp / 200) - levels_gained
+        local currentExp = utils.clamp(exp + prevExp, 0, 1000)
+        local diff = math.floor(currentExp / 200) - numLevelUps
 
         while diff > 0 do
-            -- wyvern levelled up (diff is the number of level ups)
+            -- wyvern leveled up (diff is the number of level ups)
             wyvern:addMod(xi.mod.ACC, 6)
             wyvern:addMod(xi.mod.HPP, 6)
             wyvern:addMod(xi.mod.ATTP, 5)
             wyvern:setHP(wyvern:getMaxHP())
             player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, wyvern)
-            wyvern:setLocalVar("wyvern_level_ups", levels_gained + 1)
+            wyvern:setLocalVar("wyvern_level_ups", numLevelUps + 1)
             diff = diff - 1
         end
 
-        wyvern:setLocalVar("wyvern_exp", prev_exp + exp)
+        wyvern:setLocalVar("wyvern_exp", prevExp + exp)
     end
 
-    return levels_gained
+    return numLevelUps
 end

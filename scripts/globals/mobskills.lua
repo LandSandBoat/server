@@ -636,12 +636,12 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     then --remove 'shadowbehav' shadows.
 
+        local didTargetHaveShadows = target:hasStatusEffect(xi.effect.COPY_IMAGE) or target:hasStatusEffect(xi.effect.BLINK)
         dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
-        -- dealt zero damage, so shadows took hit
+        -- dealt zero damage, so shadows took all hits
         if
-            (target:hasStatusEffect(xi.effect.COPY_IMAGE) or
-            target:hasStatusEffect(xi.effect.BLINK)) and
+            didTargetHaveShadows and
             dmg == 0
         then
             skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
@@ -766,6 +766,7 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
             return xi.msg.basic.DAMAGE
         end
     end
+
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 

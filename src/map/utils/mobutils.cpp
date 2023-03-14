@@ -1398,7 +1398,7 @@ Usage:
                 newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
 
                 // Ensure dynamic targid is released on death
-                PMob->m_bReleaseTargIDOnDeath = true;
+                PMob->m_bReleaseTargIDOnDisappear = true;
 
                 // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
                 newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;

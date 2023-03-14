@@ -1,5 +1,5 @@
 -----------------------------------
--- ID: 15290
+-- ID: 15596
 -- Item: Hydra Tights
 -- Item Effect: 10% haste
 -- Duration: 3 minutes
@@ -11,15 +11,16 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.HASTE)
-    if effect ~= nil and effect:getSubType() == 15596 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.HYDRA_TIGHTS then
         target:delStatusEffect(xi.effect.HASTE)
     end
+
     return 0
 end
 
 itemObject.onItemUse = function(target)
     if not target:hasStatusEffect(xi.effect.HASTE) then
-        target:addStatusEffect(xi.effect.HASTE, 1000, 0, 180, 15596)
+        target:addStatusEffect(xi.effect.HASTE, 1000, 0, 180, 0, 0, 0, xi.items.HYDRA_TIGHTS)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

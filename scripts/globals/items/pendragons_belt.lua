@@ -10,7 +10,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.DEX_BOOST)
-    if effect ~= nil and effect:getSubType() == 15869 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.PENDRAGONS_BELT then
         target:delStatusEffect(xi.effect.DEX_BOOST)
     end
 
@@ -18,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.DEX_BOOST, 10, 0, 60, 15869)
+    target:addStatusEffect(xi.effect.DEX_BOOST, 10, 0, 60, 0, 0, 0, xi.items.PENDRAGONS_BELT)
 end
 
 return itemObject

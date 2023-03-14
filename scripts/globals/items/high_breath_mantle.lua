@@ -11,7 +11,7 @@ local itemObject = {}
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
     if effect ~= nil then
-        if effect:getSubType() == 15487 then
+        if effect:getItemSourceID() == xi.items.HIGH_BREATH_MANTLE then
             target:delStatusEffect(xi.effect.ENCHANTMENT)
         end
     end
@@ -22,9 +22,9 @@ end
 itemObject.onItemUse = function(target)
     if target:hasStatusEffect(xi.effect.ENCHANTMENT) then
         target:delStatusEffect(xi.effect.ENCHANTMENT)
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15487)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.HIGH_BREATH_MANTLE)
     else
-        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15487)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.HIGH_BREATH_MANTLE)
     end
 end
 

@@ -36,7 +36,7 @@ xi.helm.type =
 -- (R) for retail-verified coordinates
 -----------------------------------
 
-local helmInfo =
+xi.helm.helmInfo =
 {
     [xi.helm.type.HARVESTING] =
     {
@@ -544,10 +544,16 @@ local helmInfo =
 
                 points =
                 {
-                    { -218.855, -16.142,  286.809 },
-                    { -212.218, -16.399,  316.257 },
-                    {   93.994,  -9.035,  -55.871 },
-                    {  120.026,  -8.607,   -9.430 },
+                    { -218.855, -16.142, 286.809 },
+                    {   93.994,  -9.035, -55.871 },
+                    {   82.697,  -8.610,   7.324 },
+                    {  120.026,  -8.607,  -9.430 },
+                    { -176.225, -16.288, 294.007 },
+                    { -453.739,  -7.930,  74.015 },
+                    { -408.364,  -8.010,  64.173 },
+                    { -238.046, -15.981, 257.771 },
+                    { -428.247,  -8.431,  34.783 },
+                    { -218.855, -16.142, 286.809 },
                 },
             },
 
@@ -567,9 +573,14 @@ local helmInfo =
 
                 points =
                 {
-                    { -323.737, -32.938,  203.954 },
-                    { -288.729, -32.055,  140.837 },
+                    {   29.643, -24.514,  361.756 },
+                    {  -29.950, -24.155,  495.225 },
+                    {  306.851,  23.677, -330.013 },
+                    {  -66.369, -24.960,  535.166 },
+                    {  -94.736, -24.929,  653.229 },
+                    { -170.298, -32.188,   94.226 },
                     { -260.170, -32.656,  174.636 },
+                    { -288.729, -32.055,  140.837 },
                     { -213.362, -32.315,  150.466 },
                 },
             },
@@ -853,6 +864,7 @@ local helmInfo =
                     { 1430,  721 }, -- Rattan Lumber
                     { 1190,  689 }, -- Lauan Log
                     { 1190,  940 }, -- Revival Tree Root
+                    {  950,  731 }, -- Aquilaria Log
                     {  480,  912 }, -- Beehive Chip
                     {  480, 1237 }, -- Tree Cuttings
                     {  100, 5662 }, -- Dragon Fruit
@@ -880,7 +892,10 @@ local helmInfo =
                     { 1130,  689 }, -- Lauan Log
                     {  780,  912 }, -- Beehive Chip
                     {  650,  923 }, -- Dryad Root
+                    {  650, 5908 }, -- Butterpear
                     {  610,  940 }, -- Revival Tree Root
+                    {  610,  731 }, -- Aquilaria Log
+                    {  570,  732 }, -- Kapor Log
                     {  350,  700 }, -- Mahogany Log
                     {  170,  702 }, -- Ebony Log
                     {   90, 1237 }, -- Tree Cuttings
@@ -1488,7 +1503,7 @@ end
 
 xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local npcs   = zones[zoneId].npc[info.id]
 
     for _, npcId in ipairs(npcs) do
@@ -1501,7 +1516,7 @@ xi.helm.initZone = function(zone, helmType)
 end
 
 xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local zoneId = player:getZoneID()
     local lastTrade = player:getLocalVar("[HELM]Last_Trade")
 
@@ -1570,21 +1585,21 @@ end
 
 xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)
 end
 
 xi.helm.movePoint = function(target, zoneId, helmType)
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     movePoint(target, zoneId, info)
 end
 
 xi.helm.doesToolBreak = function(player, helmType)
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     return doesToolBreak(player, info) and 1 or 0
 end
 
 xi.helm.pickItem = function(player, helmType)
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     return pickItem(player, info)
 end

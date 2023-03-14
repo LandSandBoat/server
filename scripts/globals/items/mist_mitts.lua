@@ -10,15 +10,16 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.EVASION_BOOST)
-    if effect ~= nil and effect:getSubType() == 14855 then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.MIST_MITTS then
         target:delStatusEffect(xi.effect.EVASION_BOOST)
     end
+
     return 0
 end
 
 itemObject.onItemUse = function(target)
     if not target:hasStatusEffect(xi.effect.EVASION_BOOST) then
-        target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 180, 14855)
+        target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 180, 0, 0, 0, xi.items.MIST_MITTS)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end

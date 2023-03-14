@@ -120,7 +120,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
         groupId = groupId,
         groupZoneId = xi.zone.GM_HOME,
 
-        releaseIdOnDeath = true,
+        releaseIdOnDisappear = true,
         specialSpawnAnimation = true,
     })
 
@@ -282,7 +282,10 @@ xi.garrison.watchdog = nil -- prototype
 xi.garrison.watchdog = function(npc)
     npc:timer(5000, function(npcArg)
         local zoneData = xi.garrison.zoneData[npcArg:getZoneID()]
-        if zoneData.isRunning and os.time() - zoneData.lastTick > 2 * xi.garrison.tickIntervalMs / 1000 then
+        if
+            zoneData.isRunning and
+            os.time() - zoneData.lastTick > 2 * xi.garrison.tickIntervalMs / 1000
+        then
             local zone = npcArg:getZone()
             debugLogf("[error] Invalid garrison state detected for zone: %s. Stopping it now.", zone:getName())
             xi.garrison.stop(zone)
@@ -300,7 +303,11 @@ xi.garrison.tick = function(npc)
     local zone         = npc:getZone()
     local zoneData     = xi.garrison.zoneData[zone:getID()]
     local ID           = zones[npc:getZoneID()]
-    local entityMapper = function (_, entityId) return GetPlayerByID(entityId) end
+
+    local entityMapper = function(_, entityId)
+        return GetPlayerByID(entityId)
+    end
+
     local players      = utils.map(zoneData.players, entityMapper)
 
     switch (zoneData.state) : caseof
@@ -318,7 +325,10 @@ xi.garrison.tick = function(npc)
 
             -- We do not cache player entity state as they can reraise or DC,
             -- making caching more error prone
-            local isAliveFn = function(_, player) return player ~= nil and player:isAlive() end
+            local isAliveFn = function(_, player)
+                return player ~= nil and player:isAlive()
+            end
+
             local allPlayersDead = not utils.any(players, isAliveFn)
 
             -- This caching works because the same mob ID is never used to respawn a mob
@@ -348,7 +358,12 @@ xi.garrison.tick = function(npc)
             -- case 3: All mobs spawned for last wave. Spawn boss
             local numWaves = #zoneData.spawnSchedule
             local isLastWave = zoneData.waveIndex == numWaves
-            if shouldSpawnMobs and isLastWave and isLastGroup and not zoneData.bossSpawned then
+            if
+                shouldSpawnMobs and
+                isLastWave and
+                isLastGroup and
+                not zoneData.bossSpawned
+            then
                 zoneData.state = xi.garrison.state.SPAWN_BOSS
                 return
             end
@@ -420,7 +435,12 @@ xi.garrison.tick = function(npc)
                 return
             end
 
-            local poolSize = utils.sum(zoneData.spawnSchedule[zoneData.waveIndex], function(_, v) return v end)
+            local poolSize = utils.sum(
+                zoneData.spawnSchedule[zoneData.waveIndex],
+                function(_, v)
+                    return v
+                end
+            )
             local numMobs   = zoneData.spawnSchedule[zoneData.waveIndex][zoneData.groupIndex]
             local lastMobID = firstMobID + poolSize - 1
 
@@ -681,17 +701,27 @@ xi.garrison.validateEntry = function(zoneData, player, npc, guardNation)
         return false
     end
 
-    local sameZone = function (_, v) return v ~= nil and v:getZoneID() == player:getZoneID() end
+    local sameZone = function(_, v)
+        return v ~= nil and v:getZoneID() == player:getZoneID()
+    end
+
     local membersInZone = utils.filterArray(player:getAlliance(), sameZone)
 
     -- This assumes that only the player trading the item has to be from the right nation
-    if xi.settings.main.GARRISON_NATION_BYPASS == false and guardNation ~= player:getNation() then
+    if
+        not xi.settings.main.GARRISON_NATION_BYPASS and
+        guardNation ~= player:getNation()
+    then
         debugLog("Outpost not controller by player's nation")
         player:messageSpecial(ID.text.GARRISON_BASE + player:getNation(), zoneData.itemReq)
         return false
     end
 
-    if utils.any(membersInZone, function(_, v) return v:isLevelSync() end) then
+    local isLevelSync = function(_, v)
+        return v:isLevelSync()
+    end
+
+    if utils.any(membersInZone, isLevelSync) then
         -- Your party is unable to participate because certain members' levels are restricted
         debugLog("One or more alliance members have level sync on")
         player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
@@ -736,7 +766,7 @@ end
 -- Stores the next valid entry time based on next conquest tally
 -- This lockout is only for the trading player
 xi.garrison.saveTallyLockout = function(player)
-    if xi.settings.main.GARRISON_ONCE_PER_WEEK == false then
+    if not xi.settings.main.GARRISON_ONCE_PER_WEEK then
         return
     end
 
@@ -747,7 +777,7 @@ end
 -- according to the GARRISON_ONCE_PER_WEEK settings
 -- and their last entry time
 xi.garrison.isPlayerOnTallyLockout = function(player)
-    if xi.settings.main.GARRISON_ONCE_PER_WEEK == false then
+    if not xi.settings.main.GARRISON_ONCE_PER_WEEK then
         return false
     end
 

@@ -32,6 +32,20 @@ using uint16 = std::uint16_t;
 using uint32 = std::uint32_t;
 using uint64 = std::uint64_t;
 
+template <typename T>
+inline void destroy(T*& ptr)
+{
+    delete ptr; // cpp.sh allow
+    ptr = nullptr;
+}
+
+template <typename T>
+inline void destroy_arr(T*& ptr)
+{
+    delete[] ptr; // cpp.sh allow
+    ptr = nullptr;
+}
+
 // string case comparison for *nix portability
 #if !defined(_MSC_VER)
 #define strcmpi strcasecmp

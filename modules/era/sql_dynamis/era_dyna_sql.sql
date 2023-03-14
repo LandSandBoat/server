@@ -27,7 +27,7 @@ DELETE FROM `mob_droplist` WHERE dropid = "20"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (20,0,0,1000,749,50); -- Mythril Beastcoin
 REPLACE INTO `mob_droplist` VALUES (20,0,0,1000,748,50); -- Gold Beastcoin
 REPLACE INTO `mob_droplist` VALUES (20,0,0,1000,1474,100); -- Infinity Core
-REPLACE INTO `mob_droplist` VALUES (20,0,0,1000,1456,50); -- Hundred Byne Bill
+REPLACE INTO `mob_droplist` VALUES (20,0,0,1000,1456,10); -- Hundred Byne Bill
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "2907"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (2907,1,1,100,15133,91); -- MNK Feet
@@ -105,7 +105,7 @@ DELETE FROM `mob_droplist` WHERE dropid = "2201"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (2201,0,0,1000,749,50); -- Mythril Beastcoin
 REPLACE INTO `mob_droplist` VALUES (2201,0,0,1000,748,50); -- Gold Beastcoin
 REPLACE INTO `mob_droplist` VALUES (2201,0,0,1000,1474,100); -- Infinity Core
-REPLACE INTO `mob_droplist` VALUES (2201,0,0,1000,1453,50); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (2201,0,0,1000,1453,10); -- Montiont Silverpiece
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "3111"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (3111,1,1,100,15132,90); -- WAR Feet
@@ -131,7 +131,7 @@ REPLACE INTO `mob_droplist` VALUES (3111,0,0,1000,1452,240); -- Bronzepiece 1
 REPLACE INTO `mob_droplist` VALUES (3111,0,0,1000,1452,150); -- Bronzepiece 2
 REPLACE INTO `mob_droplist` VALUES (3111,0,0,1000,1452,100); -- Bronzepiece 3
 REPLACE INTO `mob_droplist` VALUES (3111,2,0,1000,1452,0); -- Bronzepiece (Steal)
-REPLACE INTO `mob_droplist` VALUES (3111,0,0,1000,1453,50); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (3111,0,0,1000,1453,10); -- Montiont Silverpiece
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2548"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (2548,1,1,50,15132,90); -- WAR Feet
@@ -186,7 +186,7 @@ DELETE FROM `mob_droplist` WHERE dropid = "195"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (195,0,0,1000,749,50); -- Mythril Beastcoin
 REPLACE INTO `mob_droplist` VALUES (195,0,0,1000,748,50); -- Gold Beastcoin
 REPLACE INTO `mob_droplist` VALUES (195,0,0,1000,1474,100); -- Infinity Core
-REPLACE INTO `mob_droplist` VALUES (195,0,0,1000,1450,50); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (195,0,0,1000,1450,10); -- Jadeshell
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "1560"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (1560,1,1,100,15072,90); -- WAR Head
@@ -212,7 +212,7 @@ REPLACE INTO `mob_droplist` VALUES (1560,0,0,1000,1449,240); -- Whiteshell 1
 REPLACE INTO `mob_droplist` VALUES (1560,0,0,1000,1449,150); -- Whiteshell 2
 REPLACE INTO `mob_droplist` VALUES (1560,0,0,1000,1449,100); -- Whiteshell 3
 REPLACE INTO `mob_droplist` VALUES (1560,2,0,1000,1449,0); -- Whiteshell (Steal)
-REPLACE INTO `mob_droplist` VALUES (1560,0,0,1000,1450,50); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (1560,0,0,1000,1450,10); -- Jadeshell
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2553"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (2553,1,1,50,15072,90); -- WAR Head
@@ -237,7 +237,7 @@ REPLACE INTO `mob_droplist` VALUES (2553,0,0,1000,1470,50); -- Sparkling Stone
 REPLACE INTO `mob_droplist` VALUES (2553,0,0,1000,1449,240); -- Whiteshell 1
 REPLACE INTO `mob_droplist` VALUES (2553,0,0,1000,1449,150); -- Whiteshell 2
 REPLACE INTO `mob_droplist` VALUES (2553,0,0,1000,1449,100); -- Whiteshell 3
-REPLACE INTO `mob_droplist` VALUES (2553,2,0,1000,1449,240); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (2553,2,0,1000,1449,0); -- Whiteshell (Steal)
 REPLACE INTO `mob_droplist` VALUES (2553,1,3,50,18266,250); -- Relic Dagger
 REPLACE INTO `mob_droplist` VALUES (2553,1,3,50,18260,250); -- Relic Knuckles
 REPLACE INTO `mob_droplist` VALUES (2553,1,3,50,18320,250); -- Relic Maul
@@ -272,9 +272,9 @@ REPLACE INTO `mob_droplist` VALUES (1144,0,0,1000,749,50); -- Mythril Beastcoin
 REPLACE INTO `mob_droplist` VALUES (1144,0,0,1000,748,50); -- Gold Beastcoin
 REPLACE INTO `mob_droplist` VALUES (1144,0,0,1000,1474,100); -- Infinity Core
 REPLACE INTO `mob_droplist` VALUES (1144,0,0,1000,1470,50); -- Sparkling Stone
-REPLACE INTO `mob_droplist` VALUES (1144,1,1,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (1144,1,1,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (1144,1,1,50,1453,334); -- Montinont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (1144,1,1,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (1144,1,1,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (1144,1,1,10,1453,334); -- Montinont Silverpiece
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "143"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (143,1,1,100,15102,90); -- WAR Hands
@@ -300,10 +300,10 @@ REPLACE INTO `mob_droplist` VALUES (143,0,0,1000,1452,150); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (143,0,0,1000,1455,100); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (143,0,0,1000,1449,100); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (143,0,0,1000,1452,100); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (143,2,0,1000,1449,150); -- Whiteshell (Steal)
-REPLACE INTO `mob_droplist` VALUES (143,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (143,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (143,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (143,2,0,1000,1449,0); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (143,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (143,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (143,1,3,10,1453,334); -- Montiont Silverpiece
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2543"; -- Delete
 REPLACE INTO `mob_droplist` VALUES (2543,1,1,50,15102,90); -- WAR Hands
@@ -347,27 +347,27 @@ REPLACE INTO `mob_droplist` VALUES (2543,1,3,50,15066,250); -- Relic Shield
 -- Use Drop ID 0
 --             Eyes              --
 DELETE FROM `mob_droplist` WHERE dropid = "3207"; -- Angra Mainyu
-REPLACE INTO `mob_droplist` VALUES (3207,1,1,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (3207,1,1,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (3207,1,1,50,1453,334); -- Montinont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (3207,1,1,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (3207,1,1,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (3207,1,1,10,1453,334); -- Montinont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "2561"; -- Eyes
-REPLACE INTO `mob_droplist` VALUES (2561,1,1,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (2561,1,1,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (2561,1,1,50,1453,334); -- Montinont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (2561,1,1,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (2561,1,1,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (2561,1,1,10,1453,334); -- Montinont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "6000"; -- Eyes
-REPLACE INTO `mob_droplist` VALUES (6000,1,1,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (6000,1,1,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (6000,1,1,50,1453,334); -- Montinont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (6000,1,1,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (6000,1,1,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (6000,1,1,10,1453,334); -- Montinont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (6000,0,0,1000,4248,100); -- Ginurva's Battle Theory
 DELETE FROM `mob_droplist` WHERE dropid = "6001"; -- Orc Statues
-REPLACE INTO `mob_droplist` VALUES (6002,0,0,1000,1453,50); -- Montinont Silverpiece
-REPLACE INTO `mob_droplist` VALUES (6002,0,0,1000,4248,100); -- Ginurva's Battle Theory
+REPLACE INTO `mob_droplist` VALUES (6001,0,0,1000,1453,50); -- Montinont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (6001,0,0,1000,4248,100); -- Ginurva's Battle Theory
 DELETE FROM `mob_droplist` WHERE dropid = "6002"; -- Quadav Statues
-REPLACE INTO `mob_droplist` VALUES (6003,0,0,1000,1456,50); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (6003,0,0,1000,4248,100); -- Ginurva's Battle Theory
+REPLACE INTO `mob_droplist` VALUES (6002,0,0,1000,1456,10); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (6002,0,0,1000,4248,100); -- Ginurva's Battle Theory
 DELETE FROM `mob_droplist` WHERE dropid = "6003"; -- Yagudo Statues
-REPLACE INTO `mob_droplist` VALUES (6004,0,0,1000,1450,50); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (6004,0,0,1000,4248,100); -- Ginurva's Battle Theory
+REPLACE INTO `mob_droplist` VALUES (6003,0,0,1000,1450,10); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (6003,0,0,1000,4248,100); -- Ginurva's Battle Theory
 --              NMs              --
 DELETE FROM `mob_droplist` WHERE dropid = "176"; -- Goblin NM
 REPLACE INTO `mob_droplist` VALUES (176,1,1,100,15117,66); -- WAR Legs
@@ -396,10 +396,10 @@ REPLACE INTO `mob_droplist` VALUES (176,0,0,1000,1452,150); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (176,0,0,1000,1455,100); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (176,0,0,1000,1449,100); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (176,0,0,1000,1452,100); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (176,2,0,1000,1449,150); -- Whiteshell (Steal)
-REPLACE INTO `mob_droplist` VALUES (176,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (176,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (176,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (176,2,0,1000,1449,0); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (176,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (176,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (176,1,3,10,1453,334); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "493"; -- Orc NM
 REPLACE INTO `mob_droplist` VALUES (493,1,1,100,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (493,1,1,100,15088,66); -- MNK Body
@@ -423,8 +423,8 @@ REPLACE INTO `mob_droplist` VALUES (493,1,1,100,15101,67); -- SMN Body
 -- REPLACE INTO `mob_droplist` VALUES (493,1,3,50,16360,500); -- DNC Legs (Comment in for WoTG)
 REPLACE INTO `mob_droplist` VALUES (493,0,0,1000,1452,150); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (493,0,0,1000,1452,100); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (493,2,0,1000,1452,150); -- Bronzepiece (Steal)
-REPLACE INTO `mob_droplist` VALUES (493,0,0,1000,1453,50); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (493,2,0,1000,1452,0);   -- Bronzepiece (Steal)
+REPLACE INTO `mob_droplist` VALUES (493,0,0,1000,1453,10); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "261"; -- Quadav NM
 REPLACE INTO `mob_droplist` VALUES (261,1,1,100,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (261,1,1,100,15088,66); -- MNK Body
@@ -448,8 +448,8 @@ REPLACE INTO `mob_droplist` VALUES (261,1,1,100,15101,67); -- SMN Body
 -- REPLACE INTO `mob_droplist` VALUES (261,1,3,50,16360,500); -- DNC Legs (Comment in for WoTG)
 REPLACE INTO `mob_droplist` VALUES (261,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (261,0,0,1000,1455,100); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (261,2,0,1000,1455,150); -- Byne Bill (Steal)
-REPLACE INTO `mob_droplist` VALUES (261,0,0,1000,1456,50); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (261,2,0,1000,1455,0); -- Byne Bill (Steal)
+REPLACE INTO `mob_droplist` VALUES (261,0,0,1000,1456,10); -- Hundred Byne
 DELETE FROM `mob_droplist` WHERE dropid = "265"; -- Yagudo NM
 REPLACE INTO `mob_droplist` VALUES (265,1,1,100,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (265,1,1,100,15088,66); -- MNK Body
@@ -473,48 +473,48 @@ REPLACE INTO `mob_droplist` VALUES (265,1,1,100,15101,67); -- SMN Body
 -- REPLACE INTO `mob_droplist` VALUES (265,1,3,50,16360,500); -- DNC Legs (Comment in for WoTG)
 REPLACE INTO `mob_droplist` VALUES (265,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (265,0,0,1000,1449,100); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (265,2,0,1000,1449,150); -- Whiteshell (Steal)
-REPLACE INTO `mob_droplist` VALUES (265,0,0,1000,1450,50); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (265,2,0,1000,1449,0); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (265,0,0,1000,1450,10); -- Jadeshell
 DELETE FROM `mob_droplist` WHERE dropid = "559"; -- Dagourmarche
 REPLACE INTO `mob_droplist` VALUES (559,1,1,300,1560,333); -- Attestation of Bravery
 REPLACE INTO `mob_droplist` VALUES (559,1,1,300,1563,333); -- Attestation of Fortitude
 REPLACE INTO `mob_droplist` VALUES (559,1,1,300,1567,334); -- Attestation of Virtue
-REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (559,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (559,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (559,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (559,1,3,10,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (559,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "1211"; -- Goublefaupe
 REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,1821,300); -- Attestation of Invulnerability
 REPLACE INTO `mob_droplist` VALUES (1211,1,1,300,1559,333); -- Attestation of Righteousness
 REPLACE INTO `mob_droplist` VALUES (1211,1,1,300,1558,333); -- Attestation of Glory
 REPLACE INTO `mob_droplist` VALUES (1211,1,1,300,1561,334); -- Attestation of Force
-REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (1211,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (1211,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (1211,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (1211,1,3,10,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (1211,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "1672"; -- Mildaunegeux
 REPLACE INTO `mob_droplist` VALUES (1672,1,1,300,1570,333); -- Attestation of Accuracy
 REPLACE INTO `mob_droplist` VALUES (1672,1,1,300,1564,333); -- Attestation of Legerity
 REPLACE INTO `mob_droplist` VALUES (1672,1,1,300,1556,334); -- Attestation of Might
-REPLACE INTO `mob_droplist` VALUES (1672,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (1672,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (1672,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (1672,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (1672,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (1672,1,3,10,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (1672,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "2066"; -- Quiebitiel
 REPLACE INTO `mob_droplist` VALUES (2066,1,1,300,1557,333); -- Attestation of Celerity
 REPLACE INTO `mob_droplist` VALUES (2066,1,1,300,1566,333); -- Attestation of Sacrifice
 REPLACE INTO `mob_droplist` VALUES (2066,1,1,300,1569,334); -- Attestation of Harmony
-REPLACE INTO `mob_droplist` VALUES (2066,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (2066,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (2066,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (2066,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (2066,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (2066,1,3,10,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (2066,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "2574"; -- Velosareon
 REPLACE INTO `mob_droplist` VALUES (2574,1,1,300,1562,333); -- Attestation of Vigor
 REPLACE INTO `mob_droplist` VALUES (2574,1,1,300,1565,333); -- Attestation of Decisiveness
 REPLACE INTO `mob_droplist` VALUES (2574,1,1,300,1568,334); -- Attestation of Transcendence
-REPLACE INTO `mob_droplist` VALUES (2574,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (2574,1,3,50,1450,333); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (2574,1,3,50,1453,334); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (2574,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (2574,1,3,10,1450,333); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (2574,1,3,10,1453,334); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (2574,0,0,1000,4249,500); -- Schultz's Strategems
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2542"; -- Goblin
@@ -546,7 +546,7 @@ REPLACE INTO `mob_droplist` VALUES (2542,0,0,1000,1452,150); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (2542,0,0,1000,1455,100); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (2542,0,0,1000,1449,100); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (2542,0,0,1000,1452,100); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (2542,2,0,1000,1449,150); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (2542,2,0,1000,1449,0); -- Whiteshell (Steal)
 DELETE FROM `mob_droplist` WHERE dropid = "2547"; -- Orc
 REPLACE INTO `mob_droplist` VALUES (2547,1,1,50,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (2547,1,1,50,15088,66); -- MNK Body
@@ -574,7 +574,7 @@ REPLACE INTO `mob_droplist` VALUES (2547,0,0,1000,1516,10); -- Griffon Hide
 REPLACE INTO `mob_droplist` VALUES (2547,0,0,1000,1470,50); -- Sparkling Stone
 REPLACE INTO `mob_droplist` VALUES (2547,0,0,1000,1452,150); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (2547,0,0,1000,1452,100); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (2547,2,0,1000,1452,150); -- Bronzepiece (Steal)
+REPLACE INTO `mob_droplist` VALUES (2547,2,0,1000,1452,0); -- Bronzepiece (Steal)
 DELETE FROM `mob_droplist` WHERE dropid = "2557"; -- Quadav
 REPLACE INTO `mob_droplist` VALUES (2557,1,1,50,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (2557,1,1,50,15088,66); -- MNK Body
@@ -601,7 +601,7 @@ REPLACE INTO `mob_droplist` VALUES (2557,0,0,1000,1521,10); -- Slime Juice
 REPLACE INTO `mob_droplist` VALUES (2557,0,0,1000,1470,50); -- Sparkling Stone
 REPLACE INTO `mob_droplist` VALUES (2557,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (2557,0,0,1000,1455,100); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (2557,2,0,1000,1455,150); -- Byne Bill (Steal)
+REPLACE INTO `mob_droplist` VALUES (2557,2,0,1000,1455,0); -- Byne Bill (Steal)
 DELETE FROM `mob_droplist` WHERE dropid = "2552"; -- Yagudo
 REPLACE INTO `mob_droplist` VALUES (2552,1,1,50,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (2552,1,1,50,15088,66); -- MNK Body
@@ -629,7 +629,7 @@ REPLACE INTO `mob_droplist` VALUES (2552,0,0,1000,1464,10); -- Lancewood Log
 REPLACE INTO `mob_droplist` VALUES (2552,0,0,1000,1470,50); -- Sparkling Stone
 REPLACE INTO `mob_droplist` VALUES (2552,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (2552,0,0,1000,1449,100); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (2552,2,0,1000,1449,150); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (2552,2,0,1000,1449,0); -- Whiteshell (Steal)
 DELETE FROM `mob_droplist` WHERE dropid = "3220"; -- Hydra
 REPLACE INTO `mob_droplist` VALUES (3220,1,1,50,15117,66); -- WAR Legs
 REPLACE INTO `mob_droplist` VALUES (3220,1,1,50,15088,66); -- MNK Body
@@ -659,7 +659,7 @@ REPLACE INTO `mob_droplist` VALUES (3220,0,0,1000,1452,150); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (3220,0,0,1000,1455,100); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (3220,0,0,1000,1449,100); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (3220,0,0,1000,1452,100); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (3220,2,0,1000,1455,150); -- Byne Bill (Steal)
+REPLACE INTO `mob_droplist` VALUES (3220,2,0,1000,1455,0); -- Byne Bill (Steal)
 -- ---------------------------------
 --   Special Mob Skills/Spells   --
 -- ---------------------------------
@@ -736,14 +736,14 @@ REPLACE INTO `mob_droplist` VALUES (2021,0,0,1000,1450,18); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (2021,0,0,1000,1453,18); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (2021,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "717"; -- Duke Scox
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,15079,150); -- DRK Head
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1455,300); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1449,300); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1452,300); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1456,18); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1450,18); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1453,18); -- Montiont Silverpiece
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,4249,500); -- Schultz's Strategems
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,15079,150); -- DRK Head
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,1455,300); -- Byne Bill
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,1449,300); -- Whiteshell
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,1452,300); -- Bronzepiece
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,1456,18); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,1450,18); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,1453,18); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (717,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "1628"; -- Marquis Gamygyn
 REPLACE INTO `mob_droplist` VALUES (1628,0,0,1000,15114,150); -- NIN Hands
 REPLACE INTO `mob_droplist` VALUES (1628,0,0,1000,1455,300); -- Byne Bill
@@ -808,14 +808,14 @@ REPLACE INTO `mob_droplist` VALUES (1452,0,0,1000,1450,18); -- Jadeshell
 REPLACE INTO `mob_droplist` VALUES (1452,0,0,1000,1453,18); -- Montiont Silverpiece
 REPLACE INTO `mob_droplist` VALUES (1452,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "1625"; -- Marquis Cimeries
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,15097,150); -- RNG Body
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1455,300); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1449,300); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1452,300); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1456,18); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1450,18); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,1453,18); -- Montiont Silverpiece
-REPLACE INTO `mob_droplist` VALUES (521,0,0,1000,4249,500); -- Schultz's Strategems
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,15097,150); -- RNG Body
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,1455,300); -- Byne Bill
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,1449,300); -- Whiteshell
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,1452,300); -- Bronzepiece
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,1456,18); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,1450,18); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,1453,18); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (1625,0,0,1000,4249,500); -- Schultz's Strategems
 DELETE FROM `mob_droplist` WHERE dropid = "99"; -- Animated Hammer
 REPLACE INTO `mob_droplist` VALUES (99,0,0,1000,1581,1000); -- Heavenly Fragment
 DELETE FROM `mob_droplist` WHERE dropid = "108"; -- Animated Staff
@@ -873,7 +873,7 @@ REPLACE INTO `mob_droplist` VALUES (1442,1,1,50,15086,67); -- SMN Head
 REPLACE INTO `mob_droplist` VALUES (1442,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (1442,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (1442,0,0,1000,1452,150); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (1442,2,0,1000,1452,150); -- Bronzepiece (Steal)
+REPLACE INTO `mob_droplist` VALUES (1442,2,0,1000,1452,0); -- Bronzepiece (Steal)
 DELETE FROM `mob_droplist` WHERE dropid = "2559"; -- Vanguard Dragon
 REPLACE INTO `mob_droplist` VALUES (2559,0,0,1000,1455,30); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (2559,0,0,1000,1449,30); -- Whiteshell
@@ -924,9 +924,9 @@ REPLACE INTO `mob_droplist` VALUES (2910,1,1,100,2103,67);  -- SMN -1 Head
 REPLACE INTO `mob_droplist` VALUES (2910,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (2910,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (2910,0,0,1000,1452,150); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (2910,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (2910,1,3,50,1450,334); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (2910,1,3,50,1453,333); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (2910,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (2910,1,3,10,1450,334); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (2910,1,3,10,1453,333); -- Montiont Silverpiece
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2539"; -- Goblin
 REPLACE INTO `mob_droplist` VALUES (2539,1,1,50,15132,66);  -- WAR Feet
@@ -1167,9 +1167,9 @@ REPLACE INTO `mob_droplist` VALUES (230,1,1,100,2105,67);  -- SMN -1 Hands
 REPLACE INTO `mob_droplist` VALUES (230,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (230,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (230,0,0,1000,1452,150); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (230,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (230,1,3,50,1450,334); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (230,1,3,50,1453,333); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (230,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (230,1,3,10,1450,334); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (230,1,3,10,1453,333); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "2667"; -- Goblin NM
 REPLACE INTO `mob_droplist` VALUES (2667,1,1,100,15102,66);  -- WAR Hands
 REPLACE INTO `mob_droplist` VALUES (2667,1,1,100,15118,66);  -- MNK Legs
@@ -1195,9 +1195,9 @@ REPLACE INTO `mob_droplist` VALUES (2667,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (2667,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (2667,2,0,1000,1449,0); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (2667,0,0,1000,1452,150); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (2667,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (2667,1,3,50,1450,334); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (2667,1,3,50,1453,333); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (2667,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (2667,1,3,10,1450,334); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (2667,1,3,10,1453,333); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "760"; -- Orc NM
 REPLACE INTO `mob_droplist` VALUES (760,1,1,100,15102,66);  -- WAR Hands
 REPLACE INTO `mob_droplist` VALUES (760,1,1,100,15118,66);  -- MNK Legs
@@ -1220,8 +1220,8 @@ REPLACE INTO `mob_droplist` VALUES (760,1,1,100,15116,67);  -- SMN Hands
 -- REPLACE INTO `mob_droplist` VALUES (760,1,3,100,11478,200); -- DNC Head  (Comment in for WoTG)
 -- REPLACE INTO `mob_droplist` VALUES (760,1,3,100,11398,200); -- SCH Feet  (Comment in for WoTG)
 REPLACE INTO `mob_droplist` VALUES (760,0,0,1000,1452,150); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (760,2,0,1000,1452,0); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (760,0,0,50,1453,18); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (760,2,0,1000,1452,0); -- Bronzepiece (Steal)
+REPLACE INTO `mob_droplist` VALUES (760,0,0,1000,1453,10); -- Montiont Silverpiece
 DELETE FROM `mob_droplist` WHERE dropid = "2901"; -- Quadav NM
 REPLACE INTO `mob_droplist` VALUES (2901,1,1,100,15102,66);  -- WAR Hands
 REPLACE INTO `mob_droplist` VALUES (2901,1,1,100,15118,66);  -- MNK Legs
@@ -1244,8 +1244,8 @@ REPLACE INTO `mob_droplist` VALUES (2901,1,1,100,15116,67);  -- SMN Hands
 -- REPLACE INTO `mob_droplist` VALUES (2901,1,3,100,11478,200); -- DNC Head  (Comment in for WoTG)
 -- REPLACE INTO `mob_droplist` VALUES (2901,1,3,100,11398,200); -- SCH Feet  (Comment in for WoTG)
 REPLACE INTO `mob_droplist` VALUES (2901,0,0,1000,1455,150); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (2901,2,0,1000,1455,0); -- Byne Bill
-REPLACE INTO `mob_droplist` VALUES (2901,0,0,50,1456,18); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (2901,2,0,1000,1455,0); -- Byne Bill (Steal)
+REPLACE INTO `mob_droplist` VALUES (2901,0,0,1000,1456,10); -- Hundred Byne
 DELETE FROM `mob_droplist` WHERE dropid = "2085"; -- Yagudo NM
 REPLACE INTO `mob_droplist` VALUES (2085,1,1,100,15102,66);  -- WAR Hands
 REPLACE INTO `mob_droplist` VALUES (2085,1,1,100,15118,66);  -- MNK Legs
@@ -1268,8 +1268,8 @@ REPLACE INTO `mob_droplist` VALUES (2085,1,1,100,15116,67);  -- SMN Hands
 -- REPLACE INTO `mob_droplist` VALUES (2085,1,3,100,11478,200); -- DNC Head  (Comment in for WoTG)
 -- REPLACE INTO `mob_droplist` VALUES (2085,1,3,100,11398,200); -- SCH Feet  (Comment in for WoTG)
 REPLACE INTO `mob_droplist` VALUES (2085,0,0,1000,1449,150); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (2085,2,0,1000,1449,0); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (2085,0,0,50,1450,18); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (2085,2,0,1000,1449,0); -- Whiteshell (Steal)
+REPLACE INTO `mob_droplist` VALUES (2085,0,0,1000,1450,10); -- Jadeshell
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2540"; -- Goblin
 REPLACE INTO `mob_droplist` VALUES (2540,1,1,100,15102,66);  -- WAR Hands
@@ -1653,9 +1653,9 @@ REPLACE INTO `mob_droplist` VALUES (3131,1,1,100,2107,67);  -- SMN -1 Feet
 REPLACE INTO `mob_droplist` VALUES (3131,0,0,1000,1455,150); -- Byne Bill
 REPLACE INTO `mob_droplist` VALUES (3131,0,0,1000,1449,150); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (3131,0,0,1000,1452,150); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (3131,1,3,50,1456,333); -- Hundred Byne
-REPLACE INTO `mob_droplist` VALUES (3131,1,3,50,1450,334); -- Jadeshell
-REPLACE INTO `mob_droplist` VALUES (3131,1,3,50,1453,333); -- Montiont Silverpiece
+REPLACE INTO `mob_droplist` VALUES (3131,1,3,10,1456,333); -- Hundred Byne
+REPLACE INTO `mob_droplist` VALUES (3131,1,3,10,1450,334); -- Jadeshell
+REPLACE INTO `mob_droplist` VALUES (3131,1,3,10,1453,333); -- Montiont Silverpiece
 --            Regular            --
 DELETE FROM `mob_droplist` WHERE dropid = "2541"; -- Goblin
 REPLACE INTO `mob_droplist` VALUES (2541,1,1,100,15072,66);  -- WAR Head

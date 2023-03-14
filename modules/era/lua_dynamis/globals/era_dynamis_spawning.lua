@@ -382,6 +382,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 end,
                 onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
                 releaseIdOnDeath = true,
+                spawnSet = 3,
                 specialSpawnAnimation = spawnAnim,
                 entityFlags = nameObj[job][6],
                 mixins =
@@ -596,6 +597,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         end,
         onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
+        spawnSet = 3,
         specialSpawnAnimation = oMob ~= nil,
         mixins = mobFunctions[mobMobType]["mixins"],
     })
@@ -655,7 +657,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     {
         -- Below use used to lookup Beastmen NMs
         -- Goblin
-        -- Dynamis - Beaucedine
+        -- Dynamis - Beaucedine (Done)
         ["Ascetox Ratgums"] = { "A.Ratgums", 143, 134, 176, 5000, 5013, "Beastmen" }, -- Asce (BLM)
         ["Bordox Kittyback"] = { "B.Kittyback", 146, 134, 176, 0, 5013, "Beastmen" }, -- Bord (THF)
         ["Brewnix Bittypupils"] = { "B.Bittypupils", 142, 134, 176, 1, 5013, "Beastmen" }, -- Brew (WHM)
@@ -671,11 +673,11 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Swypestix Tigershins"] = { "S.Tigershins", 145, 134, 176, 7, 5013, "Beastmen" }, -- Swyp (NIN)
         ["Tocktix Thinlids"] = { "T.Thinlids", 150, 134, 176, 5, 5013, "Beastmen" }, -- Tock (DRK)
         ["Whistix Toadthroat"] = { "W.Toadthroat", 154, 134, 176, 6, 5013, "Beastmen" }, -- Whis (BRD)
-        -- Dynamis - Buburimu
+        -- Dynamis - Buburimu (Done)
         ["Gosspix Blabberlips"] = { "G.Blabberlips", 24, 40, 2667, 3, 5013, "Beastmen" }, -- Goss (RDM)
         ["Shamblix Rottenheart"] = { "S.Rottenheart", 16, 40, 2667, 5, 5013, "Beastmen" }, -- Sham (DRK)
         ["Woodnix Shrillwhistle"] = { "W.Shrillwhistle", 6, 40, 2667, 0, 5013, "Beastmen" }, -- Wood (BST)
-        -- Dynamis - Jeuno
+        -- Dynamis - Jeuno (Done)
         ["Bandrix Rockjaw"] = { "B.Rockjaw", 32, 188, 143, 0, 5013, "Beastmen" }, -- Band (THF)
         ["Buffrix Eargone"] = { "B.Eargone", 33, 188, 143, 4, 5013, "Beastmen" }, -- Buff (PLD)
         ["Cloktix Longnail"] = { "C.Longnail", 51, 188, 143, 5, 5013, "Beastmen" }, -- Cloc (DRK)
@@ -710,7 +712,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Slystix Megapeepers"] = { "S.Megapeepers", 53, 188, 143, 7, 5013, "Beastmen" }, -- Slys (NIN)
         ["Tymexox Ninefingers"] = { "T.Ninefingers", 54, 188, 143, 5, 5013, "Beastmen" }, -- Tyme (DRK)
         -- Orc
-        -- Dynamis - Beaucedine
+        -- Dynamis - Beaucedine (Done)
         ["Cobraclaw Buchzvotch"] = { "C.Buchzvotch", 65, 134, 493, 0, 5012, "Beastmen" }, -- CBuc (MNK)
         ["Deathcaller Bidfbid"] = { "D.Bidfbid", 73, 134, 493, 0, 5012, "Beastmen" }, -- DBid (SMN)
         ["Drakefeast Wubmfub"] = { "D.Wubmfub", 88, 134, 493, 0, 5012, "Beastmen" }, -- DWub (DRG)
@@ -726,19 +728,19 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Taruroaster Biggsjig"] = { "T.Biggsjig", 84, 134, 493, 5000, 5012, "Beastmen" }, -- TBig (BLM)
         ["Ultrasonic Zeknajak"] = { "U.Zeknajak", 87, 134, 493, 6, 5012, "Beastmen" }, -- UZek (BRD)
         ["Wraithdancer Gidbnod"] = { "W.Gidbnod", 63, 134, 493, 1, 5012, "Beastmen" }, -- WGid (WHM)
-        -- Dynamis Buburimu
+        -- Dynamis Buburimu (Done)
         ["Elvaansticker Bxafraff"] = { "E.Bxafraff", 35, 40, 760, 0, 5012, "Beastmen" }, -- Elva (DRG)
         ["Flamecaller Zoeqdoq"] = { "F.Zoeqdoq", 34, 40, 760, 5000, 5012, "Beastmen" }, -- Flam (BLM)
         ["Hamfist Gukhbuk"] = { "H.Gukhbuk", 46, 40, 760, 0, 5012, "Beastmen" }, -- Hamf (MNK)
         ["Lyncean Juwgneg"] = { "L.Juvgneg", 47, 40, 760, 0, 5012, "Beastmen" }, -- Lync (RNG)
-        -- Dynamis - San d'Oria
-        ["Wyrmgnasher Bjakdek"] = { "W.Bjakdek", 25, 185, 237, 0, 5012, "Beastmen" }, -- WyrB (DRG)
-        ["Reapertongue Gadgquok"] = { "R.Gadgquok", 23, 185, 237, 0, 5012, "Beastmen" }, -- ReaG (SMN)
-        ["Voidstreaker Butchnotch"] = { "V.Butchnotch", 26, 185, 237, 7, 5012, "Beastmen" }, -- VoiB (NIN)
-        ["Battlechoir Gitchfotch"] = { "B.Gitchfotch", 2, 185, 237, 6, 5012, "Beastmen" }, -- BatG (BRD)
-        ["Soulsender Fugbrag"] = { "S.Fugbrag", 3, 185, 237, 6, 5012, "Beastmen" }, -- SouF (BRD)
+        -- Dynamis - San d'Oria (Done)
+        ["Wyrmgnasher Bjakdek"] = { "W.Bjakdek", 25, 185, 3111, 0, 5012, "Beastmen" }, -- WyrB (DRG)
+        ["Reapertongue Gadgquok"] = { "R.Gadgquok", 23, 185, 3111, 0, 5012, "Beastmen" }, -- ReaG (SMN)
+        ["Voidstreaker Butchnotch"] = { "V.Butchnotch", 26, 185, 3111, 7, 5012, "Beastmen" }, -- VoiB (NIN)
+        ["Battlechoir Gitchfotch"] = { "B.Gitchfotch", 2, 185, 3111, 6, 5012, "Beastmen" }, -- BatG (BRD)
+        ["Soulsender Fugbrag"] = { "S.Fugbrag", 3, 185, 3111, 6, 5012, "Beastmen" }, -- SouF (BRD)
         -- Quadav
-        -- Dynamis - Beaucedine
+        -- Dynamis - Beaucedine (Done)
         ["Be'Zhe Keeprazer"] = { "B.Keeprazer", 53, 134, 261, 0, 5011, "Beastmen" }, -- BeZh (SMN)
         ["De'Bho Pyrohand"] = { "D.Pyrohand", 43, 134, 261, 5000, 5011, "Beastmen" }, --DeBh (BLM)
         ["Ga'Fho Venomtouch"] = { "G.Venomtouch", 39, 134, 261, 3, 5011, "Beastmen" }, -- GaFh (WHM)
@@ -754,7 +756,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["So'Gho Adderhandler"] = { "S.Adderhandler", 48, 134, 261, 0, 5011, "Beastmen" }, -- SoGh (BST)
         ["So'Zho Metalbender"] = { "S.Metalbender", 46, 134, 261, 0, 5011, "Beastmen" }, -- SoZh (MNK)
         ["Ta'Hyu Gallanthunter"] = { "T.Gallanthunter", 40, 134, 261, 5, 5011, "Beastmen" }, -- TaHy (DRK)
-        -- Dynamis Buburimu
+        -- Dynamis Buburimu (Done)
         ["Gi'Bhe Flesheater"] = { "G.Flesheater", 57, 40, 2901, 1, 5011, "Beastmen" }, -- GiBh (WHM)
         ["Qu'Pho Bloodspiller"] = { "Q.Bloodspiller", 56, 40, 2901, 0, 5011, "Beastmen" }, -- QuPh (WAR)
         ["Te'Zha Ironclad"] = { "T.Ironclad", 69, 40, 2901, 4, 5011, "Beastmen" }, -- TeZh (PLD)
@@ -772,7 +774,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Effigy Shield DRK"] = { "Effigy Shield", 38, 134, 2907, 5, 5011, "Beastmen" }, -- EDRK (DRK)
         ["Effigy Shield SAM"] = { "Effigy Shield", 31, 134, 2907, 0, 5011, "Beastmen" }, -- ESAM (SAM)
         -- Yagudo
-        -- Dynamis - Beaucedine
+        -- Dynamis - Beaucedine (Done)
         ["Bhuu Wjato the Firepool"] = { "B.Firepool", 106, 134, 265, 5000, 5014, "Beastmen" }, -- Bhuu (BLM)
         ["Caa Xaza the Madpiercer"] = { "C.Madpiercer", 107, 134, 265, 3, 5014, "Beastmen" }, -- CaaX (RDM)
         ["Foo Peku the Bloodcloak"] = { "F.Bloodcloak", 94, 134, 265, 0, 5014, "Beastmen" }, -- FooP (WAR)
@@ -788,12 +790,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Soo Jopo the Fiendking"] = { "S.Fiendking", 116, 134, 265, 0, 5014, "Beastmen" }, -- SooJ (BST)
         ["Xaa Chau the Roctalon"] = { "X.Roctalon", 97, 134, 265, 0, 5014, "Beastmen" }, -- XaaC (MNK)
         ["Xhoo Fuza the Sublime"] = { "X.Sublime", 119, 134, 265, 6, 5014, "Beastmen" }, -- Xhoo (BRD)
-        -- Dynamis - Buburimu
+        -- Dynamis - Buburimu (Done)
         ["Baa Dava the Bibliopage"] = { "B.Bibliopage", 24, 187, 2085, 0, 5014, "Beastmen" }, -- BaaD (SMN)
         ["Doo Peku the Fleetfoot"] = { "D.Fleetfoot", 115, 134, 2085, 7, 5014, "Beastmen" }, -- DooP (NIN)
         ["Koo Rahi the Levinblade"] = { "K.Levinblade", 121, 134, 2085, 0, 5014, "Beastmen" }, -- KooR (SAM)
         ["Ree Nata the Melomanic"] = { "R.Melomanic", 119, 134, 2085, 6, 5014, "Beastmen" }, -- ReeN (BRD)
-        -- Dynamis - Windurst
+        -- Dynamis - Windurst (Done)
         ["Xoo Kaza the Solemn"] = { "X.Solemn", 27, 187, 1560, 5000, 5014, "Beastmen" }, -- XooK (BLM)
         ["Haa Pevi the Stentorian"] = { "H.Stentorian", 24, 187, 1560, 0, 5014, "Beastmen" }, -- HaaP (SMN)
         ["Wuu Qoho the Razorclaw"] = { "W.Razorclaw", 26, 187, 1560, 0, 5014, "Beastmen" }, -- WuuQ (MNK)
@@ -801,7 +803,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Muu Febi the Steadfast"] = { "Muu.Steadfast", 3, 187, 1560, 4, 5014, "Beastmen" }, -- MuuF (PLD)
         ["Maa Febi the Steadfast"] = { "Maa.Steadfast", 2, 187, 1560, 4, 5014, "Beastmen" }, -- MaaF (PLD)
         -- Kindred
-        -- Dynamis - Xarcabard
+        -- Dynamis - Xarcabard (Done)
         ["Count Zaebos"] = { "C.Zaebos", 51, 135, 521, 0, 358, "Beastmen" }, -- Zaeb (WAR)
         ["Duke Berith"] = { "D.Berith", 47, 135, 714, 3, 358, "Beastmen" }, -- Beri (RDM)
         ["Marquis Decarabia"] = { "M.Decarabia", 21, 135, 1626, 6, 358, "Beastmen" }, -- Deca (BRD)
@@ -818,22 +820,22 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["King Zagan"] = { "K.Zagan", 60, 135, 1452, 0, 358, "Beastmen" }, -- Zaga (DRG)
         ["Marquis Cimeries"] = { "M.Cimeries", 56, 135, 1625, 0, 358, "Beastmen" }, -- Cime (RNG)
         -- Hydra
-        -- Dynamis - Beaucedine
+        -- Dynamis - Beaucedine (Done)
         ["Dagourmarche"] = { "Dagourmarche", 10, 134, 559, 0, 359, "Dagourmarche" }, -- Dago (DRG/BST/SMN)
         ["Goublefaupe"] = { "Goublefaupe", 6, 134, 1211, 5001, 359, "Goublefaupe" }, -- Goub (WAR/PLD/RDM)
         ["Mildaunegeux"] = { "Mildaunegeux", 8, 134, 1672, 7, 359, "Mildaunegeux" }, -- Mild (MNK/THF/NIN)
         ["Quiebitiel"] = { "Quiebitiel", 7, 134, 2066, 5002, 359, "Quiebitiel" }, -- Quie (WHM/BLM/BRD)
         ["Velosareon"] = { "Velosareon", 9, 134, 2574, 5, 359, "Velosareon" }, -- Velo (RNG/SAM/DRK)
         -- Below is used to lookup non-beastmen NMs.
-        -- Dynamis - Bastok
+        -- Dynamis - Bastok (Done)
         ["Gu'Dha Effigy"] = { "Gu'Dha Effigy", 1, 186, 2906, 0, 94, "Statue Megaboss" }, -- BMb (Bastok Megaboss)
-        -- Dynamis - Jeuno
+        -- Dynamis - Jeuno (Done)
         ["Goblin Golem"] = { "Goblin Golem", 1, 188, 1085, 47, 92, "Statue Megaboss" }, -- JMb
-        -- Dynamis - San d'Oria
+        -- Dynamis - San d'Oria (Done)
         ["Overlord's Tombstone"] = { "O. Tombstone", 1, 185, 1967, 49, 93, "Statue Megaboss" }, -- SMb
-        -- Dynamis - Windurst
+        -- Dynamis - Windurst (Done)
         ["Tzee Xicu Manifest"] = { "Tzee Xicu Mani.", 1, 187, 2510, 50, 95, "Statue Megaboss" }, -- WMb
-        -- Dynamis - Xarcabard Non-Beastmen
+        -- Dynamis - Xarcabard Non-Beastmen (Done)
         ["Animated Hammer"] = { "A.Hammer", 81, 135, 99, 0, 9, "Animated Weapon" }, -- AHam
         ["Animated Staff"] = { "A.Staff", 87, 135, 108, 0, 23, "Animated Weapon" }, -- ASta
         ["Animated Longsword"] = { "A.Longsword", 84, 135, 104, 0, 24, "Animated Weapon" }, -- ALon
@@ -869,7 +871,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Ying"] = { "Ying", 2, 135, 0, 0, 87, "Ying", 159 }, -- Ying
         ["Yang"] = { "Yang", 3, 135, 0, 0, 87, "Yang", 159 }, -- Yang
         ["Dynamis Lord"] = { "Dynamis Lord", 1, 135, 730, 86, 361, "Dynamis Lord", 135 }, -- DL
-        -- Dynamis - Beaucedine Non-Beastmen
+        -- Dynamis - Beaucedine Non-Beastmen (Done)
         ["Angra Mainyu"] = { "Angra Mainyu", 1, 134, 3207, 5000, 4, "Angra Mainyu" }, -- Angr
         ["Fire Pukis"] = { "Fire Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- FPuk
         ["Wind Pukis"] = { "Wind Pukis", 2, 135, 0, 0, 87, "Enabled Auto Attack" }, -- WPuk
@@ -879,7 +881,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Dynamis Tombstone"] = { "D. Tombstone" , 201, 134, 2201, 5000, 93, "Enabled Auto Attack" }, -- Dynamis Tombstone (DynT)
         ["Dynamis Effigy"] = { "D. Effigy" , 200, 134, 20, 0, 94, "Enabled Auto Attack" }, -- Dynamis Effigy (DynE)
         ["Dynamis Icon"] = { "D. Icon" , 198, 134, 195, 5000, 95, "Enabled Auto Attack" }, -- Dynamis Icon (DynI)
-        -- Dynamis - Buburimu Non-Beastmen
+        -- Dynamis - Buburimu Non-Beastmen (Done)
         ["Aitvaras"] = { "Aitvaras", 105, 40, 230, 0, 5008, "Buburimu Dwagon" }, -- Aitv
         ["Alklha"] = { "Alklha", 105, 40, 230, 0, 5006, "Buburimu Dwagon" }, -- Alkl
         ["Barong"] = { "Barong", 105, 40, 230, 0, 5004, "Buburimu Dwagon" }, -- Baro
@@ -891,7 +893,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Tarasca"] = { "Tarasca", 105, 40, 230, 0, 5005, "Buburimu Dwagon" }, -- Tara
         ["Vishap"] = { "Vishap", 105, 40, 230, 0, 5002, "Buburimu Dwagon" }, -- Vish
         ["Apocalyptic Beast"] = { "Apoc. Beast", 1, 40, 146, 0, 0, "Apocalyptic Beast" }, -- Apoc
-        -- Dynamis - Valkurm
+        -- Dynamis - Valkurm (Done)
         ["Dragontrap_1"] = { "Dragontrap", 63, 77, 2910, 0, 114, "No Auto Attack" }, -- Drat
         ["Dragontrap_2"] = { "Dragontrap", 63, 77, 2910, 0, 114, "No Auto Attack" }, -- Drat
         ["Dragontrap_3"] = { "Dragontrap", 63, 77, 2910, 0, 114, "No Auto Attack" }, -- Drat
@@ -900,7 +902,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Stcemqestcint"] = { "Stcemqestcint", 6, 39, 2910, 0, 245, "No Auto Attack" }, -- Stce
         ["Nightmare Morbol"] = { "N. Morbol", 33, 85, 0, 0, 186, "Nightmare Morbol" }, -- NMor
         ["Cirrate Christelle"] = { "C. Christelle", 1, 39, 472, 0, 0, "Cirrate Christelle" }, -- Cirr
-        -- Dynamis - Qufim Non-Beastmen
+        -- Dynamis - Qufim Non-Beastmen (Done)
         ["Scolopendra"] = { "Scolopendra", 76, 41, 3131, 0, 218, "Enabled Auto Attack" }, -- Scol
         ["Suttung"] = { "Suttung", 85, 41, 3131, 0, 135, "Enabled Auto Attack" }, -- Sutt
         ["Stringes"] = { "Stringes", 79, 41, 3131, 0, 46, "Enabled Auto Attack" }, -- Stri
@@ -1203,6 +1205,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobDeath= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobDeath"][1],
         onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
+        spawnSet = 3,
         specialSpawnAnimation = oMob ~= nil,
         entityFlags = flags,
         mixins = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
@@ -1558,6 +1561,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         onMobDeath = function(mob, player, optParams) xi.dynamis.onPetDeath(mob) end,
         onMobDespawn = function (mob) xi.dynamis.mobOnDespawn(mob) end,
         releaseIdOnDeath = true,
+        spawnSet = 3,
         specialSpawnAnimation = oMob ~= nil,
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
     })
@@ -1804,6 +1808,22 @@ xi.dynamis.setNightmareStats = function(mob)
     end
 end
 
+local mdbValues =
+{
+    [93] = 162, -- Orc Statue
+    [193] = 100, -- Wyvern
+    [229] = 100, -- Hecteyes
+    [334] = 100, -- Orc
+}
+
+xi.dynamis.setMDB = function(mob)
+    for family, mdb in ipairs(mdbValues) do
+        if mob:getFamily() == family then
+            mob:setMod(xi.mod.MDEF, mdb)
+        end
+    end
+end
+
 xi.dynamis.setNMStats = function(mob)
     local job = mob:getMainJob()
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
@@ -1812,7 +1832,7 @@ xi.dynamis.setNMStats = function(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(math.random(80,82))
     mob:setTrueDetection(true)
-    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+    xi.dynamis.setMDB(mob)
 
     xi.dynamis.addParentListeners(mob)
 
@@ -1842,6 +1862,7 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setSpeed(20)
 
+    xi.dynamis.setMDB(mob)
     xi.dynamis.addParentListeners(mob)
 
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
@@ -1863,6 +1884,7 @@ xi.dynamis.setMegaBossStats = function(mob)
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
+    xi.dynamis.setMDB(mob)
 
     xi.dynamis.addParentListeners(mob)
 end
@@ -1876,6 +1898,7 @@ xi.dynamis.setPetStats = function(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
     mob:setMobLevel(78)
     mob:setTrueDetection(true)
+    xi.dynamis.setMDB(mob)
 end
 
 xi.dynamis.setAnimatedWeaponStats = function(mob)

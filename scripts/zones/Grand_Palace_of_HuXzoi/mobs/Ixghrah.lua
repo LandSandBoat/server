@@ -112,31 +112,39 @@ entity.onMobFight = function(mob, target)
         while state == mob:getAnimationSub() do
             state = math.random(0, 3)
         end
+
+        local hpp = mob:getHPP()
         if state == 0 then -- Ball
             mob:changeJob(xi.job.BLM)
+            -- need to set hpp back to level before job change since the change heals to full
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
             mob:setMagicCastingEnabled(true)
             mob:setMod(xi.mod.DMG, 0)
             mob:setMod(xi.mod.DMGPHYS, 0)
             mob:setDamage(79)
         elseif state == 1 then -- Human
             mob:changeJob(xi.job.PLD)
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
             mob:setMagicCastingEnabled(true)
             mob:setMod(xi.mod.DMG, -5000)
             mob:setMod(xi.mod.DMGPHYS, 0)
             mob:setDamage(79)
         elseif state == 2 then -- Spider
             mob:changeJob(xi.job.WAR)
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
             mob:setMagicCastingEnabled(false)
             mob:setMod(xi.mod.DMG, 0)
             mob:setMod(xi.mod.DMGPHYS, 3000)
             mob:setDamage(140)
         elseif state == 3 then -- Bird
             mob:changeJob(xi.job.THF)
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
             mob:setMagicCastingEnabled(false)
             mob:setMod(xi.mod.DMG, 0)
             mob:setMod(xi.mod.DMGPHYS, 0)
             mob:setDamage(79)
         end
+
         mob:setLocalVar("state", state)
         mob:setAnimationSub(state)
         mob:setLocalVar("change", 0)

@@ -164,9 +164,9 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
 CZone::~CZone()
 {
-    delete m_TreasurePool;
-    delete m_CampaignHandler;
-    delete m_zoneEntities;
+    destroy(m_TreasurePool);
+    destroy(m_CampaignHandler);
+    destroy(m_zoneEntities);
 }
 
 /************************************************************************
@@ -515,8 +515,7 @@ void CZone::LoadNavMesh()
     if (!m_navMesh->load(file))
     {
         DebugNavmesh("CZone::LoadNavMesh: Cannot load navmesh file (%s)", file);
-        delete m_navMesh;
-        m_navMesh = nullptr;
+        destroy(m_navMesh);
     }
 }
 
