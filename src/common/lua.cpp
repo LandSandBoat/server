@@ -110,23 +110,43 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
         {
             auto table = obj.as<sol::table>();
 
+            std::string indent = "";
+            for (std::size_t i = 0U; i < depth + 1U; ++i)
+            {
+                indent += "    ";
+            }
+
+            std::string unindent = "";
+            if (!indent.empty())
+            {
+                unindent = std::string(indent.begin(), indent.end() - 4);
+            }
+
             // Stringify everything first
             std::vector<std::string> stringVec;
-            for (auto& pair : table)
+            for (auto const& [keyObj, valObj] : table)
             {
-                stringVec.emplace_back(lua_to_string(pair.second, depth + 1));
+                if (keyObj.get_type() == sol::type::string)
+                {
+                    stringVec.emplace_back(fmt::format("{}{}: {}", indent, lua_to_string(keyObj), lua_to_string(valObj, depth + 1)));
+                }
+                else
+                {
+                    stringVec.emplace_back(fmt::format("{}{}", indent, lua_to_string(valObj, depth + 1)));
+                }
             }
 
             // Accumulate into a pretty string
             // clang-format off
-            std::string outStr = "table{ ";
+            std::string outStr = "\n" + unindent + "{" + (stringVec.empty() ? "" : "\n");
             outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
             [](std::string& ss, std::string& s)
             {
-                return ss.empty() ? s : ss + ", " + s;
+                return ss.empty() ? s : (ss + ",\n" + s);
             });
             // clang-format on
-            return outStr + " }";
+
+            return outStr + (stringVec.empty() ? "" : "\n") + unindent + "}";
         }
         default:
         {

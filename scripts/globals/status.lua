@@ -1062,6 +1062,7 @@ xi.mod =
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
     WARDING_CIRCLE_DURATION         = 95,  -- Warding Circle duration in seconds
     SOULEATER_EFFECT                = 96,  -- Souleater power in percents
+    SOULEATER_EFFECT_II             = 53,  -- Uncapped additive Souleaterbonus in percents, 10 = .1
     DESPERATE_BLOWS                 = 906, -- Adds ability haste to Last Resort
     STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
@@ -3045,8 +3046,9 @@ xi.mount =
     BYAKKO         = 33,
     NOBLE_CHOCOBO  = 34, -- NOTE: This is currently blank, probably needs additional packets sent
     IXION          = 35,
+    PHUABO         = 36,
     --
-    MOUNT_MAX      = 36,
+    MOUNT_MAX      = 37,
 }
 
 -----------------------------------

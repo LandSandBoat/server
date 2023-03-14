@@ -3,6 +3,7 @@
 -- Item: Acid Bolt Quiver
 -- When used, you will obtain one stack of Acid Bolts
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(18148, 99)
+    target:addItem(xi.items.ACID_BOLT, 99)
 end
 
 return itemObject

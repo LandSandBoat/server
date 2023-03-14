@@ -13,6 +13,7 @@
 require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
+require("scripts/globals/items")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
@@ -71,27 +72,28 @@ local function getAlpha(level)
     return alpha
 end
 
+-- http://wiki.ffo.jp/html/1705.html
+-- https://www.ffxiah.com/forum/topic/21497/stalwart-soul/ some anecdotal data that aligns with JP
+-- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
 local function souleaterBonus(attacker, wsParams)
-    local bonus = 0
-
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
+        local souleaterEffect    = math.min(0.02, attacker:getMod(xi.mod.SOULEATER_EFFECT) * 0.01)
+        local souleaterEffectII  = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) * 0.01 -- No known cap to this bonus. Used on Agwu's scythe
+        local stalwartSoulBonus = 1 - attacker:getMod(xi.mod.STALWART_SOUL) / 100
+        local bonusDamage       = attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII)
 
-        if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
+        if bonusDamage >= 1 then
+            attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
+
+            if attacker:getMainJob() ~= xi.job.DRK then
+                return bonusDamage / 2
+            end
+
+            return bonusDamage
         end
-
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
-        end
-
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
     end
 
-    return bonus
+    return 0
 end
 
 local scarletDeliriumBonus = function(attacker)
@@ -553,8 +555,8 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         local nativecrit = 0
         critrate = fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
-        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() > 1 then
-            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower() / 2) / 100
+        if calcParams.flourishEffect and calcParams.flourishEffect:getPower() >= 3 then  -- 3 Finishing Moves used.
+            critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()) / 100
         end
 
         local fencerBonusVal = calcParams.fencerBonus or 0
@@ -1032,17 +1034,17 @@ function getMeleeDmg(attacker, weaponType, kick)
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
-    local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
+        attacker:addMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
     end
 
     local acc = attacker:getACC()
     local eva = target:getEVA()
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
+        attacker:delMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
     end
 
     if bonus == nil then
@@ -1130,10 +1132,10 @@ end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
-    local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:addMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+        attacker:addMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
     local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
@@ -1141,8 +1143,8 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
 
     cratio = utils.clamp(cratio, 0, 2.25)
 
-    if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
-        attacker:delMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
+    if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+        attacker:delMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
     local levelCorrection = 0
@@ -1300,66 +1302,35 @@ function generatePdif (cratiomin, cratiomax, melee)
     return pdif
 end
 
-function getStepAnimation(skill)
-    if skill <= 1 then
-        return 15
-    elseif skill <= 3 then
-        return 14
-    elseif skill == 4 then
-        return 19
-    elseif skill == 5 then
-        return 16
-    elseif skill <= 7 then
-        return 18
-    elseif skill == 8 then
-        return 20
-    elseif skill == 9 then
-        return 21
-    elseif skill == 10 then
-        return 22
-    elseif skill == 11 then
-        return 17
-    elseif skill == 12 then
-        return 23
-    else
-        return 0
-    end
-end
-
-function getFlourishAnimation(skill)
-    if skill <= 1 then
-        return 25
-    elseif skill <= 3 then
-        return 24
-    elseif skill == 4 then
-        return 29
-    elseif skill == 5 then
-        return 26
-    elseif skill <= 7 then
-        return 28
-    elseif skill == 8 then
-        return 30
-    elseif skill == 9 then
-        return 31
-    elseif skill == 10 then
-        return 32
-    elseif skill == 11 then
-        return 27
-    elseif skill == 12 then
-        return 33
-    else
-        return 0
-    end
-end
-
 function handleWSGorgetBelt(attacker)
     local ftpBonus = 0
     local accBonus = 0
 
     if attacker:getObjType() == xi.objType.PC then
-        -- TODO: Get these out of itemid checks when possible.
-        local elementalGorget = { 15495, 15498, 15500, 15497, 15496, 15499, 15501, 15502 }
-        local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
+        local elementalGorget = -- Ordered by element correctly. TODO: mods/latents instead of items
+        {
+            xi.items.FLAME_GORGET,
+            xi.items.SNOW_GORGET,
+            xi.items.BREEZE_GORGET,
+            xi.items.SOIL_GORGET,
+            xi.items.THUNDER_GORGET,
+            xi.items.AQUA_GORGET,
+            xi.items.LIGHT_GORGET,
+            xi.items.SHADOW_GORGET
+        }
+
+        local elementalBelt = -- Ordered by element correctly. TODO: mods/latents instead of items
+        {
+            xi.items.FLAME_BELT,
+            xi.items.SNOW_BELT,
+            xi.items.BREEZE_BELT,
+            xi.items.SOIL_BELT,
+            xi.items.THUNDER_BELT,
+            xi.items.AQUA_BELT,
+            xi.items.LIGHT_BELT,
+            xi.items.SHADOW_BELT
+        }
+
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
         local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
@@ -1379,7 +1350,7 @@ function handleWSGorgetBelt(attacker)
             end
         end
 
-        if neck == 27510 then -- Fotia Gorget
+        if neck == xi.items.FOTIA_GORGET then -- Fotia Gorget
             accBonus = accBonus + 10
             ftpBonus = ftpBonus + 0.1
         end
@@ -1399,7 +1370,7 @@ function handleWSGorgetBelt(attacker)
             end
         end
 
-        if belt == 28420 then -- Fotia Belt
+        if belt == xi.items.FOTIA_BELT then -- Fotia Belt
             accBonus = accBonus + 10
             ftpBonus = ftpBonus + 0.1
         end

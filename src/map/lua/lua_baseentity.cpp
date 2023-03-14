@@ -7364,6 +7364,41 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
 }
 
 /************************************************************************
+ *  Function: masterJob()
+ *  Purpose : Fully masters / unlocks player's current job
+ *  Example : player:masterJob()
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::masterJob()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to master job for non-PC type!");
+        return;
+    }
+
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    auto jpCategory = 0x020 * PChar->GetMJob();
+    for (auto i = jpCategory; i < jpCategory + 0xA; i++)
+    {
+        auto points       = PChar->PJobPoints->GetJobPointType((JOBPOINT_TYPE)i);
+        auto pointsNeeded = 20 - points->value;
+        auto currentJP    = PChar->PJobPoints->GetJobPoints();
+
+        for (auto x = 0; x < pointsNeeded; x++)
+        {
+            auto cost = JobPointCost(points->value);
+            PChar->PJobPoints->SetJobPoints(currentJP + cost);
+            PChar->PJobPoints->RaiseJobPoint((JOBPOINT_TYPE)i);
+        }
+    }
+
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+}
+
+/************************************************************************
  *  Function: getGil()
  *  Purpose : Returns the total amount of a gil a player has
  *  Example : player:getGil()
@@ -13583,6 +13618,36 @@ bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
 }
 
 /************************************************************************
+ *  Function: addImmunity()
+ *  Purpose : Adds any immunity
+ *  Example : mob:addImmunity(xi.immunity.SILENCE)
+ ************************************************************************/
+
+void CLuaBaseEntity::addImmunity(uint32 immunityID)
+{
+    auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PEntity)
+    {
+        PEntity->m_Immunity |= immunityID;
+    }
+}
+
+/************************************************************************
+ *  Function: delImmunity()
+ *  Purpose : Delete any immunity
+ *  Example : mob:delImmunity(xi.immunity.SILENCE)
+ ************************************************************************/
+
+void CLuaBaseEntity::delImmunity(uint32 immunityID)
+{
+    auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PEntity)
+    {
+        PEntity->m_Immunity &= ~immunityID;
+    }
+}
+
+/************************************************************************
  *  Function: setAggressive()
  *  Purpose : Toggle a Mob to an aggressive or passive state
  *  Example : mob:setAggressive(true)
@@ -15354,6 +15419,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addCapacityPoints", CLuaBaseEntity::addCapacityPoints);
     SOL_REGISTER("setCapacityPoints", CLuaBaseEntity::setCapacityPoints);
     SOL_REGISTER("setJobPoints", CLuaBaseEntity::setJobPoints);
+    SOL_REGISTER("masterJob", CLuaBaseEntity::masterJob);
 
     SOL_REGISTER("getGil", CLuaBaseEntity::getGil);
     SOL_REGISTER("addGil", CLuaBaseEntity::addGil);
@@ -15727,6 +15793,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("hasTrait", CLuaBaseEntity::hasTrait);
     SOL_REGISTER("hasImmunity", CLuaBaseEntity::hasImmunity);
+    SOL_REGISTER("addImmunity", CLuaBaseEntity::addImmunity);
+    SOL_REGISTER("delImmunity", CLuaBaseEntity::delImmunity);
 
     SOL_REGISTER("setAggressive", CLuaBaseEntity::setAggressive);
     SOL_REGISTER("setTrueDetection", CLuaBaseEntity::setTrueDetection);
