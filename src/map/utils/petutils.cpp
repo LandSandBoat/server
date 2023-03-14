@@ -1154,7 +1154,7 @@ namespace petutils
         LoadAvatarStats(PMaster, PPet);                                                                               // follows PC calcs (w/o SJ)
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
-        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(mLvl * 0.9f)));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
         // Set stat modifiers
         PPet->setModifier(Mod::DEF, mobutils::GetDefense(PPet, PPet->defRank));
         PPet->setModifier(Mod::EVA, mobutils::GetBase(PPet, PPet->evaRank));
