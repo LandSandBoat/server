@@ -419,6 +419,7 @@ enum class Mod
     ARCANE_CIRCLE_DURATION = 858,  // Arcane Circle extended duration in seconds
     ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
     SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    SOULEATER_EFFECT_II    = 53,   // Uncapped additive Souleaterbonus in percents, 10 = .1
     DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
@@ -963,7 +964,6 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 53
     // 74 to 79
     // 138 to 143
     // 156 to 159

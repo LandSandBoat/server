@@ -13,6 +13,7 @@
 require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
+require("scripts/globals/items")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
@@ -71,27 +72,28 @@ local function getAlpha(level)
     return alpha
 end
 
+-- http://wiki.ffo.jp/html/1705.html
+-- https://www.ffxiah.com/forum/topic/21497/stalwart-soul/ some anecdotal data that aligns with JP
+-- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
 local function souleaterBonus(attacker, wsParams)
-    local bonus = 0
-
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
+        local souleaterEffect    = math.min(0.02, attacker:getMod(xi.mod.SOULEATER_EFFECT) * 0.01)
+        local souleaterEffectII  = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) * 0.01 -- No known cap to this bonus. Used on Agwu's scythe
+        local stalwartSoulBonus = 1 - attacker:getMod(xi.mod.STALWART_SOUL) / 100
+        local bonusDamage       = attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII)
 
-        if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
+        if bonusDamage >= 1 then
+            attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
+
+            if attacker:getMainJob() ~= xi.job.DRK then
+                return bonusDamage / 2
+            end
+
+            return bonusDamage
         end
-
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
-        end
-
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
     end
 
-    return bonus
+    return 0
 end
 
 local scarletDeliriumBonus = function(attacker)
@@ -1305,9 +1307,30 @@ function handleWSGorgetBelt(attacker)
     local accBonus = 0
 
     if attacker:getObjType() == xi.objType.PC then
-        -- TODO: Get these out of itemid checks when possible.
-        local elementalGorget = { 15495, 15498, 15500, 15497, 15496, 15499, 15501, 15502 }
-        local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
+        local elementalGorget = -- Ordered by element correctly. TODO: mods/latents instead of items
+        {
+            xi.items.FLAME_GORGET,
+            xi.items.SNOW_GORGET,
+            xi.items.BREEZE_GORGET,
+            xi.items.SOIL_GORGET,
+            xi.items.THUNDER_GORGET,
+            xi.items.AQUA_GORGET,
+            xi.items.LIGHT_GORGET,
+            xi.items.SHADOW_GORGET
+        }
+
+        local elementalBelt = -- Ordered by element correctly. TODO: mods/latents instead of items
+        {
+            xi.items.FLAME_BELT,
+            xi.items.SNOW_BELT,
+            xi.items.BREEZE_BELT,
+            xi.items.SOIL_BELT,
+            xi.items.THUNDER_BELT,
+            xi.items.AQUA_BELT,
+            xi.items.LIGHT_BELT,
+            xi.items.SHADOW_BELT
+        }
+
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
         local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
@@ -1327,7 +1350,7 @@ function handleWSGorgetBelt(attacker)
             end
         end
 
-        if neck == 27510 then -- Fotia Gorget
+        if neck == xi.items.FOTIA_GORGET then -- Fotia Gorget
             accBonus = accBonus + 10
             ftpBonus = ftpBonus + 0.1
         end
@@ -1347,7 +1370,7 @@ function handleWSGorgetBelt(attacker)
             end
         end
 
-        if belt == 28420 then -- Fotia Belt
+        if belt == xi.items.FOTIA_BELT then -- Fotia Belt
             accBonus = accBonus + 10
             ftpBonus = ftpBonus + 0.1
         end
