@@ -45,6 +45,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define MAX_MISSIONAREA  15
 #define MAX_MISSIONID    851
 #define MAX_ABYSSEAZONES 9
+#define MAX_ESCHANZONES  3
 
 #define TIME_BETWEEN_PERSIST 2min
 
@@ -166,6 +167,7 @@ struct teleport_t
     telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
     waypoint_t  waypoints;
+    uint8       eschanPortal[MAX_ESCHANZONES];
 
     teleport_t()
     {
@@ -178,6 +180,7 @@ struct teleport_t
         campaignBastok = 0;
         campaignWindy  = 0;
         std::memset(&abysseaConflux, 0, sizeof(abysseaConflux));
+        std::memset(&eschanPortal, 0, sizeof(eschanPortal));
     }
 };
 

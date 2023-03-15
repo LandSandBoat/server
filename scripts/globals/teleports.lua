@@ -166,6 +166,7 @@ xi.teleport.type =
     HOMEPOINT          = 9,
     SURVIVAL           = 10,
     WAYPOINT           = 11,
+    ESCHAN_PORTAL      = 12,
 }
 
 xi.teleport.runic_portal =
