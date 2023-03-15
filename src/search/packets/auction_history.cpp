@@ -27,14 +27,22 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "auction_history.h"
 
-CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
+CAHHistoryPacket::CAHHistoryPacket(ahItem item, uint8 stack)
 : m_count(0)
 {
     memset(m_PData, 0, sizeof(m_PData));
 
-    ref<uint8>(m_PData, (0x0A)) = 0x80;
-    ref<uint8>(m_PData, (0x0B)) = 0x85; // packet type
-    ref<uint16>(m_PData, 0x10)  = ItemID;
+    // Comments and RE by atom0s
+    ref<uint8>(m_PData, 0x0A)  = 0x80;        // flags, may be int8 as it's checked against negative.
+    ref<uint8>(m_PData, 0x0B)  = 0x85;        // packet type, masked as val & 0x1F
+    ref<uint16>(m_PData, 0x0E) = 0;           // Unknown use
+    ref<uint16>(m_PData, 0x10) = item.ItemID; // may be obsolete
+    ref<uint16>(m_PData, 0x12) = 0;           // Unknown use
+    ref<uint16>(m_PData, 0x14) = 0;           // Unknown use
+    ref<uint16>(m_PData, 0x16) = 0;           // Unknown use
+    ref<uint16>(m_PData, 0x18) = item.ItemID;
+    ref<uint32>(m_PData, 0x1A) = stack != 0 ? item.StackAmount : item.SingleAmount;
+    ref<uint16>(m_PData, 0x1E) = item.Category;
 }
 
 void CAHHistoryPacket::AddItem(ahHistory* item)
