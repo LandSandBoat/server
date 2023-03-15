@@ -21648,10 +21648,11 @@ INSERT INTO `mob_droplist` VALUES (2639,0,0,1000,880,@VCOMMON);   -- Bone Chip (
 INSERT INTO `mob_droplist` VALUES (2639,0,0,1000,1031,@VRARE);    -- Gusgen Chest Key (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2639,2,0,1000,880,0);          -- Bone Chip (Steal)
 
--- ZoneID: 198 - Wendigo Blm
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,880,@COMMON); -- Bone Chip (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,4824,@RARE);  -- Scroll Of Gravity (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2640,2,0,1000,880,0);       -- Bone Chip (Steal)
+-- ZoneID: 192 - Wendigo Blm
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,544,@RARE);    -- Pile Of Answer Sheets (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2640,2,0,1000,880,0);        -- Bone Chip (Steal)
 
 -- ZoneID: 167 - Werebat
 INSERT INTO `mob_droplist` VALUES (2641,0,0,1000,922,@VCOMMON);  -- Bat Wing (Very Common, 24%)
