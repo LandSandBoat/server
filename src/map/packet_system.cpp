@@ -3118,7 +3118,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 if (PItem->isSubType(ITEM_CHARGED) && ((CItemUsable*)PItem)->getCurrentCharges() < ((CItemUsable*)PItem)->getMaxCharges())
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0));
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0));
                     return;
                 }
                 PChar->pushPacket(new CAuctionHousePacket(action, PItem, quantity, price));
@@ -3156,7 +3156,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0)); // try again in a little while msg
+                PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0, 0, 0)); // try again in a little while msg
                 break;
             }
         }
@@ -3179,7 +3179,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 if (PItem->isSubType(ITEM_CHARGED) && ((CItemUsable*)PItem)->getCurrentCharges() < ((CItemUsable*)PItem)->getMaxCharges())
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0));
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0));
                     return;
                 }
                 uint32 auctionFee = 0;
@@ -3188,7 +3188,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PItem->getStackSize() == 1 || PItem->getStackSize() != PItem->getQuantity())
                     {
                         ShowError("SmallPacket0x04E::AuctionHouse: Incorrect quantity of item %s", PItem->getName());
-                        PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
+                        PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Failed to place up
                         return;
                     }
                     auctionFee = (uint32)(settings::get<uint32>("map.AH_BASE_FEE_STACKS") + (price * settings::get<float>("map.AH_TAX_RATE_STACKS") / 100));
@@ -3202,7 +3202,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Not enough gil to pay fee
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Not enough gil to pay fee
                     return;
                 }
 
@@ -3220,7 +3220,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (settings::get<uint8>("map.AH_LIST_LIMIT") && ah_listings >= settings::get<uint8>("map.AH_LIST_LIMIT"))
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Failed to place up
                     return;
                 }
 
@@ -3229,13 +3229,13 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (sql->Query(fmtQuery, PItem->getID(), quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
                 {
                     ShowError("SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database", PItem->getName());
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // failed to place up
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // failed to place up
                     return;
                 }
                 charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -(int32)(quantity != 0 ? 1 : PItem->getStackSize()));
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee); // Deduct AH fee
 
-                PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0));                 // Merchandise put up on auction msg
+                PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0, 0, 0));           // Merchandise put up on auction msg
                 PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)ah_listings, PChar)); // Inform history of slot
             }
         }
@@ -3246,7 +3246,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
             {
-                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0));
+                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
             }
             else
             {
@@ -3260,7 +3260,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             if (PChar->getStorage(LocID)->SearchItem(itemid) != ERROR_SLOTID)
                             {
-                                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0));
+                                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
                                 return;
                             }
                         }
@@ -3281,14 +3281,22 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                             {
                                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price));
 
-                                PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price));
+                                PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price, quantity, PItem->getStackSize()));
                                 PChar->pushPacket(new CInventoryFinishPacket());
                             }
                             return;
                         }
                     }
                 }
-                PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price));
+                // You were unable to buy the {qty} {item}
+                if (PItem)
+                {
+                    PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, PItem->getStackSize()));
+                }
+                else
+                {
+                    PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, 0));
+                }
             }
         }
         break;
