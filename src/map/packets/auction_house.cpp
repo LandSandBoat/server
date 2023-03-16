@@ -101,7 +101,7 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 slot, CCharEntity* 
     }
 }
 
-CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 itemid, uint32 price)
+CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 itemid, uint32 price, uint8 quantity, uint8 stacksize)
 {
     this->setType(0x4C);
     this->setSize(0x3C);
@@ -110,6 +110,8 @@ CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, uint16 ite
     ref<uint8>(0x06)  = message;
     ref<uint32>(0x08) = price;
     ref<uint16>(0x0C) = itemid;
+    // Following previous nomenclature, "quantity == 0" indicates a stack. This might be 0 = stack 1 = single flag.
+    ref<uint16>(0x10) = quantity == 0 ? stacksize : 1;
 }
 
 CAuctionHousePacket::CAuctionHousePacket(uint8 action, uint8 message, CCharEntity* PChar, uint8 slot, bool keepItem)
