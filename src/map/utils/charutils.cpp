@@ -775,8 +775,8 @@ namespace charutils
         }
 
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
-                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, abyssea_conflux, "
-                   "waypoints, claimed_deeds "
+                   "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, "
+                   "abyssea_conflux, waypoints, eschan_portals, claimed_deeds "
                    "FROM char_unlocks "
                    "WHERE charid = %u;";
 
@@ -816,6 +816,11 @@ namespace charutils
             length = 0;
             buf    = nullptr;
             sql->GetData(12, &buf, &length);
+            memcpy(&PChar->teleport.eschanPortal, buf, (length > sizeof(PChar->teleport.eschanPortal) ? sizeof(PChar->teleport.eschanPortal) : length));
+
+            length = 0;
+            buf    = nullptr;
+            sql->GetData(13, &buf, &length);
             memcpy(&PChar->m_claimedDeeds, buf, (length > sizeof(PChar->m_claimedDeeds) ? sizeof(PChar->m_claimedDeeds) : length));
         }
 
@@ -5526,6 +5531,14 @@ namespace charutils
                 char buf[sizeof(PChar->teleport.waypoints) * 2 + 1];
                 sql->EscapeStringLen(buf, (const char*)&PChar->teleport.waypoints, sizeof(PChar->teleport.waypoints));
                 const char* query = "UPDATE char_unlocks SET waypoints = '%s' WHERE charid = %u;";
+                sql->Query(query, buf, PChar->id);
+                return;
+            }
+            case TELEPORT_TYPE::ESCHAN_PORTAL:
+            {
+                char buf[sizeof(PChar->teleport.eschanPortal) * 2 + 1];
+                sql->EscapeStringLen(buf, (const char*)&PChar->teleport.eschanPortal, sizeof(PChar->teleport.eschanPortal));
+                const char* query = "UPDATE char_unlocks SET eschan_portals = '%s' WHERE charid = %u;";
                 sql->Query(query, buf, PChar->id);
                 return;
             }

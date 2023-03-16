@@ -2800,6 +2800,9 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
             PChar->teleport.waypoints.access[index] |= (1 << setBit);
         }
         break;
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            PChar->teleport.eschanPortal |= bit;
+            break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
@@ -2862,6 +2865,9 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& abysseaRegionO
 
             return PChar->teleport.abysseaConflux[abysseaRegion];
         }
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            return PChar->teleport.eschanPortal;
+            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
