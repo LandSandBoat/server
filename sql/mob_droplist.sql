@@ -21929,11 +21929,10 @@ INSERT INTO `mob_droplist` VALUES (2639,0,0,1000,1031,30); -- Gusgen Chest Key (
 INSERT INTO `mob_droplist` VALUES (2639,2,0,1000,880,0);   -- Bone Chip (Steal)
 
 -- ZoneID: 192 - Wendigo Blm
--- ZoneID: 198 - Wendigo Blm
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,880,210);    -- Bone Chip (21.0%)
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,544,90);     -- Pile Of Answer Sheets (9.0%)
-INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,4824,@RARE); -- Scroll Of Gravity (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2640,2,0,1000,880,0);      -- Bone Chip (Steal)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,544,@RARE);    -- Pile Of Answer Sheets (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2640,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2640,2,0,1000,880,0);        -- Bone Chip (Steal)
 
 -- ZoneID: 167 - Werebat
 INSERT INTO `mob_droplist` VALUES (2641,0,0,1000,922,@VCOMMON); -- Bat Wing (Very Common, 24%)
@@ -26849,6 +26848,11 @@ INSERT INTO `mob_droplist` VALUES (3252,0,0,1000,1585,@ALWAYS); -- Ethereal Frag
 
 -- ZoneID:  135 - Animated Shield
 INSERT INTO `mob_droplist` VALUES (3253,0,0,1000,1822,@ALWAYS); -- Supernal Fragment (Always, 100%)
+
+-- ZoneID: 198 - Wendigo Blm
+INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3254,2,0,1000,880,0);        -- Bone Chip (Steal)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
