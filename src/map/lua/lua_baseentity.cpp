@@ -2801,7 +2801,7 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
         }
         break;
         case TELEPORT_TYPE::ESCHAN_PORTAL:
-            PChar->teleport.eschanPortal[set] |= bit;
+            PChar->teleport.eschanPortal |= bit;
             break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
@@ -2818,7 +2818,7 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
  *  Notes   :
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& regionObj)
+uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& abysseaRegionObj)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -2856,7 +2856,7 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& regionObj)
             break;
         case TELEPORT_TYPE::ABYSSEA_CONFLUX:
         {
-            uint8 abysseaRegion = regionObj.is<uint8>() ? regionObj.as<uint8>() : MAX_ABYSSEAZONES;
+            uint8 abysseaRegion = abysseaRegionObj.is<uint8>() ? abysseaRegionObj.as<uint8>() : MAX_ABYSSEAZONES;
 
             if (abysseaRegion >= MAX_ABYSSEAZONES)
             {
@@ -2866,16 +2866,8 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& regionObj)
             return PChar->teleport.abysseaConflux[abysseaRegion];
         }
         case TELEPORT_TYPE::ESCHAN_PORTAL:
-        {
-            uint8 eschanRegion = regionObj.is<uint8>() ? regionObj.as<uint8>() : MAX_ESCHANZONES;
-
-            if (eschanRegion >= MAX_ESCHANZONES)
-            {
-                return 0;
-            }
-
-            return PChar->teleport.eschanPortal[eschanRegion];
-        }
+            return PChar->teleport.eschanPortal;
+            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }

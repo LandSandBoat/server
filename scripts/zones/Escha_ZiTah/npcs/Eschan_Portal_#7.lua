@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.escha.portals.eschanPortalOnTrigger(player, npc)
+    xi.escha.portals.eschanPortalOnTrigger(player, npc, 6)
 end
 
 entity.onEventUpdate = function(player, csid, option)
