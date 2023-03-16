@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Escha - Ru'Aun (289)
--- NPC: Eschan Portal #7
--- !pos -430.5 -71.849 334.5 289
+-- Area: Reisenjima (291)
+-- NPC: Ethereal Ingress #10
+-- !pos -389.22 -439.71 -835.13 291
 -----------------------------------
 require("scripts/globals/teleports/eschan_portals")
 -----------------------------------
@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.escha.portals.eschanPortalOnTrigger(player, npc, 14)
+    xi.escha.portals.eschanPortalOnTrigger(player, npc, 32)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -3,7 +3,7 @@
 -- NPC: Eschan Portal #1
 -- !pos -344.275 1.659 -182.613 288
 -----------------------------------
-require("scripts/globals/teleport_systems/eschan_portals")
+require("scripts/globals/teleports/eschan_portals")
 -----------------------------------
 local entity = {}
 
