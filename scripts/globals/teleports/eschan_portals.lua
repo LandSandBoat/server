@@ -32,7 +32,7 @@ local portalOffsets =
 --  [ZoneId] = { First Portal, Last Portal },
     [xi.zone.ESCHA_ZITAH] = {  0,  7 },
     [xi.zone.ESCHA_RUAUN] = {  8, 22 },
-    [xi.zone.REISENJIMA ] = { 23, 30 },
+    [xi.zone.REISENJIMA ] = { 23, 31 },
 }
 
 -------------------------------------------------------------------------------------------------------------
@@ -53,22 +53,31 @@ local function getPortalCost(player)
 end
 
 xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumber)
-    local portalBitMask = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL) -- Param 2.
-    local zoneId        = player:getZoneID()                                 -- Param 3.
+    local portalBitMask       = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL) -- Param 2.
+    local zoneId              = player:getZoneID()                                 -- Param 3.
+    local lockValue           = 0                                                  -- Param 5.
+    local zonePortalsUnlocked = 0
 
-    -- Get lock / unlock info.
-    local lockValue = 0 -- Assume activated. Param 5. TODO: KI affects it in Reisenjima?
+    -- Reisenjima portal #10. Unlocked with Key Item.
+    if
+        zoneId == xi.zone.REISENJIMA and
+        player:hasKeyItem(xi.ki.SCINTILLATING_RHAPSODY)
+    then
+        lockValue           = 4
+        zonePortalsUnlocked = 1
+    end
 
-    -- TODO: Having feather KI adds 4 to the value in Reisenjima?
-    -- if
-    --     zoneId == xi.zone.REISENJIMA and
-    --     player:hasKeyItem(feather?)
-    -- then
-    --     lockValue = 4
+    -- Ethereal droplet.
+    -- TODO: Confirm Ethereal droplet logic. Adds +2 to lockValue when in possesion of one.
+    -- if player:hasItem(9202, 0) then
+    --     lockValue = lockValue + 2
     -- end
 
     -- Player has not activated this Portal.
-    if not utils.mask.getBit(portalBitMask, portalGlobalNumber) then
+    if
+        portalGlobalNumber ~= 32 and -- Reisenjima Portal #10 exception.
+        not utils.mask.getBit(portalBitMask, portalGlobalNumber)
+    then
         -- Unlock Portal.
         player:addTeleport(xi.teleport.type.ESCHAN_PORTAL, portalGlobalNumber)
 
@@ -78,8 +87,6 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
     end
 
     -- Get Zone Portals and count how many we have unlocked.
-    local zonePortalsUnlocked = 0
-
     for v = portalOffsets[zoneId][1], portalOffsets[zoneId][2] do
         if utils.mask.getBit(portalBitMask, v) then
             zonePortalsUnlocked = zonePortalsUnlocked + 1
@@ -91,9 +98,9 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
         if zoneId == xi.zone.ESCHA_ZITAH then
             portalBitMask = 1
         elseif zoneId == xi.zone.ESCHA_RUAUN then
-            portalBitMask = 256
+            portalBitMask = 256 -- 8 "true" bits + 1
         else
-            portalBitMask = 65533 -- TODO: Get correct value for Reisenjima.
+            portalBitMask = 8388608 -- 23 "true" bits + 1
         end
     end
 
