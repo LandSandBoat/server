@@ -181,22 +181,27 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
     elseif player:getTP() < waltzInfo[1] then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
-        -- Waltz Delay (-1s per mod value)
+        local newRecast = ability:getRecast()
+
+        -- Apply Waltz Delay Modifier (-1s per mod value)
         local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
+
         if recastMod ~= 0 then
-            local newRecast = ability:getRecast() + recastMod
-            ability:setRecast(utils.clamp(newRecast, 0, newRecast))
+            newRecast = newRecast + recastMod
         end
 
         -- Apply "Fan Dance" Waltz recast reduction.  All tiers above 1 grant 5%
         -- recast reduction each.
-        local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
+        local fanDanceMeritValue = player:getMerit(xi.merit.FAN_DANCE) -- Get's merit number * merit value (5 in db).
+
         if
             player:hasStatusEffect(xi.effect.FAN_DANCE) and
-            fanDanceMerits > 1
+            fanDanceMeritValue > 5 -- 1 merit = Value of 5.
         then
-            ability:setRecast(ability:getRecast() * (1 - 0.05 * (fanDanceMerits - 1)))
+            newRecast = newRecast * (105 - fanDanceMeritValue) / 100
         end
+
+        ability:setRecast(utils.clamp(newRecast, 0, newRecast))
 
         return 0, 0
     end
