@@ -11,54 +11,6 @@ xi = xi or {}
 xi.escha = xi.escha or {}
 xi.escha.portals = xi.escha.portals or {}
 
-local zoneMaskID =
-{
-    [xi.zone.ESCHA_ZITAH] = 0,
-    [xi.zone.ESCHA_RUAUN] = 1,
-    [xi.zone.REISENJIMA ] = 2,
-}
-
-local portalData =
-{
-    [xi.zone.ESCHA_ZITAH] =
-    {--  NPC Name              Bit
-        ['Eschan_Portal_#1' ] = 0,
-        ['Eschan_Portal_#2' ] = 1,
-        ['Eschan_Portal_#3' ] = 2,
-        ['Eschan_Portal_#4' ] = 3,
-        ['Eschan_Portal_#5' ] = 4,
-        ['Eschan_Portal_#6' ] = 5,
-        ['Eschan_Portal_#7' ] = 6,
-        ['Eschan_Portal_#8' ] = 7,
-    },
-
-    [xi.zone.ESCHA_RUAUN] =
-    {--  NPC Name              Bit
-        ['Eschan_Portal_#1' ] = 0,
-        ['Eschan_Portal_#2' ] = 1,
-        ['Eschan_Portal_#3' ] = 2,
-        ['Eschan_Portal_#4' ] = 3,
-        ['Eschan_Portal_#5' ] = 4,
-        ['Eschan_Portal_#6' ] = 5,
-        ['Eschan_Portal_#7' ] = 6,
-        ['Eschan_Portal_#8' ] = 7,
-    },
-
-    [xi.zone.REISENJIMA] =
-    {--  NPC Name              Bit
-        ['Eschan_Portal_#1' ] = 0,
-        ['Eschan_Portal_#2' ] = 1,
-        ['Eschan_Portal_#3' ] = 2,
-        ['Eschan_Portal_#4' ] = 3,
-        ['Eschan_Portal_#5' ] = 4,
-        ['Eschan_Portal_#6' ] = 5,
-        ['Eschan_Portal_#7' ] = 6,
-        ['Eschan_Portal_#8' ] = 7,
-        ['Eschan_Portal_#9' ] = 8,
-        ['Eschan_Portal_#10'] = 9,
-    },
-}
-
 local costReduction = -- Based on Luck+ Vorseal power
 {-- Power, reduction (percentage based, will always be (100 minus reduction))
     [ 0] =  0,
@@ -73,6 +25,14 @@ local costReduction = -- Based on Luck+ Vorseal power
     [ 9] = 45,
     [10] = 50,
     [11] = 55,
+}
+
+local portalOffsets =
+{
+--  [ZoneId] = { First Portal, Last Portal },
+    [xi.zone.ESCHA_ZITAH] = {  0,  7 },
+    [xi.zone.ESCHA_RUAUN] = {  8, 22 },
+    [xi.zone.REISENJIMA ] = { 23, 30 },
 }
 
 -------------------------------------------------------------------------------------------------------------
@@ -92,31 +52,52 @@ local function getPortalCost(player)
     return cost
 end
 
-xi.escha.portals.eschanPortalOnTrigger = function(player, npc)
-    local zoneID          = player:getZoneID()
-    local maskOffset      = zoneMaskID[zoneID]
-    local activatedMask   = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL, maskOffset)
-    local portalNumber    = portalData[zoneID][npc:getName()]
-    local portalsUnlocked = utils.mask.countBits(activatedMask)
-    local unlockBit       = 1 -- Assume not activated.
+xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumber)
+    local portalBitMask = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL) -- Param 2.
+    local zoneId        = player:getZoneID()                                 -- Param 3.
 
-    -- Player has already activated this Portal.
-    if utils.mask.getBit(activatedMask, portalNumber) then
-        unlockBit = 0
+    -- Get lock / unlock info.
+    local lockValue = 0 -- Assume activated. Param 5. TODO: KI affects it in Reisenjima?
 
-    -- Player has not activated this Portal, so unlock it and update variables.
-    else
-        player:addTeleport(xi.teleport.type.ESCHAN_PORTAL, portalNumber, maskOffset)
-        portalsUnlocked = portalsUnlocked + 1
-        activatedMask   = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL, maskOffset)
+    -- TODO: Having feather KI adds 4 to the value in Reisenjima?
+    -- if
+    --     zoneId == xi.zone.REISENJIMA and
+    --     player:hasKeyItem(feather?)
+    -- then
+    --     lockValue = 4
+    -- end
+
+    -- Player has not activated this Portal.
+    if not utils.mask.getBit(portalBitMask, portalGlobalNumber) then
+        -- Unlock Portal.
+        player:addTeleport(xi.teleport.type.ESCHAN_PORTAL, portalGlobalNumber)
+
+        -- Update Variables.
+        portalBitMask = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL)
+        lockValue     = lockValue + 1 -- We set it to "Locked" even if we JUST unlocked it.
+    end
+
+    -- Get Zone Portals and count how many we have unlocked.
+    local zonePortalsUnlocked = 0
+
+    for v = portalOffsets[zoneId][1], portalOffsets[zoneId][2] do
+        if utils.mask.getBit(portalBitMask, v) then
+            zonePortalsUnlocked = zonePortalsUnlocked + 1
+        end
     end
 
     -- Check if we have other portals to warp to. Do not display menu if not.
-    if portalsUnlocked <= 1 then
-        activatedMask = 1
+    if zonePortalsUnlocked <= 1 then
+        if zoneId == xi.zone.ESCHA_ZITAH then
+            portalBitMask = 1
+        elseif zoneId == xi.zone.ESCHA_RUAUN then
+            portalBitMask = 256
+        else
+            portalBitMask = 65533 -- TODO: Get correct value for Reisenjima.
+        end
     end
 
-    player:startEvent(9100, 0, activatedMask, zoneID, portalNumber, unlockBit, player:getCurrency("escha_silt"), getPortalCost(player), 0)
+    player:startEvent(9100, 0, portalBitMask, zoneId, portalGlobalNumber, lockValue, player:getCurrency("escha_silt"), getPortalCost(player), 0)
 end
 
 xi.escha.portals.eschanPortalEventUpdate = function(player, csid, option)

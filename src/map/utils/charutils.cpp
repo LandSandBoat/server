@@ -841,7 +841,7 @@ namespace charutils
             length = 0;
             buf    = nullptr;
             sql->GetData(12, &buf, &length);
-            memcpy(&PChar->teleport.eschanPortal, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.eschanPortal) : length));
+            memcpy(&PChar->teleport.eschanPortal, buf, (length > sizeof(PChar->teleport.eschanPortal) ? sizeof(PChar->teleport.eschanPortal) : length));
 
             length = 0;
             buf    = nullptr;
