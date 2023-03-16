@@ -84,9 +84,9 @@ quest.sections =
                             (player:getWeather() == xi.weather.NONE or player:getWeather() == xi.weather.SUNSHINE) and
                             (VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT)
                         then
-                            player:progressEvent(334)
+                            return quest:progressEvent(334)
                         else
-                            player:startEvent(337)
+                            return quest:event(337)
                         end
                     end
                 end,
