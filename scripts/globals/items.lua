@@ -1770,6 +1770,7 @@ xi.items =
     CYLLENIAN_ABJURATION_HANDS      = 9127,
     CYLLENIAN_ABJURATION_LEGS       = 9128,
     CYLLENIAN_ABJURATION_FEET       = 9129,
+    ETHEREAL_DROPLET                = 9202,
     DIAL_KEY_AB                     = 9217,
     DIAL_KEY_FO                     = 9218,
     DIAL_KEY_ANV                    = 9274,
