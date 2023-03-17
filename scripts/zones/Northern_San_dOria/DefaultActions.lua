@@ -30,6 +30,7 @@ return {
     ['Maurinne']   = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']    = { event = 517 },
     ['Nouveil']    = { event = 574 },
+    ['Olbergieut'] = { event = 612 },
     ['Pepigort']   = { text = ID.text.PEPIGORT_DIALOG },
     ['Rodaillece'] =
     {
