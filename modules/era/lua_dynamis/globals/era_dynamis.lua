@@ -791,20 +791,22 @@ local function snapshotInstance(zone)
     local instanceID = zone:getLocalVar(string.format("[DYNA]InstanceID_%s", zoneID))
 
     -- Snapshot Mob List
-    local mobs = zone:getMobs()
-    local availableMobList = {}
+    -- Disabled to ensure stability of release
 
-    for _, mob in pairs(mobs) do
-        if mob:isAlive() then
-            local index = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
-            if index and index > 0 then
-                table.insert(availableMobList, index)
-            end
-        end
-    end
+    -- local mobs = zone:getMobs()
+    -- local availableMobList = {}
+
+    -- for _, mob in pairs(mobs) do
+    --     if mob:isAlive() then
+    --         local index = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
+    --         if index and index > 0 then
+    --             table.insert(availableMobList, index)
+    --         end
+    --     end
+    -- end
 
     -- Persist to Database
-    SaveDynamisSnapshot(instanceID, availableMobList)
+    -- SaveDynamisSnapshot(instanceID, availableMobList)
 
     -- Snapshot Variables
     local snapshotVariables =

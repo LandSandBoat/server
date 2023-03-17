@@ -1,6 +1,6 @@
 -----------------------------------
--- func: dynasetwave
--- desc: Sets spawns the given wave for given dynamis zone
+-- func: dynaspawnnm
+-- desc: Spawns an NM by index
 -----------------------------------
 
 cmdprops =
@@ -25,10 +25,10 @@ local zoneMap =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!dynasetwave <zoneName> <wave>")
+    player:PrintToPlayer("!dynaspawnnm <zoneName> <monsterIndex>")
 end
 
-function onTrigger(player, zoneName, wave)
+function onTrigger(player, zoneName, mobIndex)
     if not zoneName or zoneName == "" then
         error(player, "Invalid zone name provided.")
     end
@@ -47,14 +47,12 @@ function onTrigger(player, zoneName, wave)
         return
     end
 
-    wave = tonumber(wave)
-    if not wave or wave < 1 or wave > 3 then
-        error(player, string.format("[DynaSetWave] Invalid wave provided. Must be 1-3"))
+    mobIndex = tonumber(mobIndex)
+    if not wave then
+        error(player, string.format("[DynaSetWave] Invalid monster index provided."))
         return
     end
 
-    player:PrintToPlayer(string.format("[DynaSetWave] Despawning current wave for %s...", zone:getName()))
-    xi.dynamis.despawnAll(zone)
-    xi.dynamis.spawnWave(zone, zone:getID(), wave)
-    player:PrintToPlayer(string.format("[DynaSetWave] Finished Spawning Wave %n for %s", wave, zone:getName()))
+    xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zone:getID())
+    player:PrintToPlayer(string.format("[DynaSetWave] Spawned Notorious Monster %n", mobIndex))
 end
