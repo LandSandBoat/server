@@ -12490,7 +12490,7 @@ bool CLuaBaseEntity::hasValidJugPetItem()
 
     CItemWeapon* PItem = static_cast<CItemWeapon*>(static_cast<CCharEntity*>(m_PBaseEntity)->getEquip(SLOT_AMMO));
 
-    if (PItem != nullptr && PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI)
+    if (PItem != nullptr && (PItem->getSubSkillType() >= SUBSKILL_SHEEP && PItem->getSubSkillType() <= SUBSKILL_TOLOI) || (PItem->getSubSkillType() == SUBSKILL_DSANCHEZ))
     {
         return true;
     }
