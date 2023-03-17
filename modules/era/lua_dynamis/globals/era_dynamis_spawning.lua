@@ -45,6 +45,43 @@ xi.dynamis = xi.dynamis or {  }
 --          Dynamis Mob Spawning          --
 --------------------------------------------
 
+xi.dynamis.spawnWaveIndicies = function(zone, waveNumber, indicies)
+    if not waveNumber then
+        return
+    end
+
+    if not indicies then
+        return
+    end
+
+    local zoneID = zone:getID()
+
+    local mobList = xi.dynamis.mobList[zone:getID()][waveNumber].wave
+    if not mobList then
+        return
+    end
+
+    for _, mobIndex in indicies do
+        local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
+        if mobType == "NM" then
+            xi.dynamis.nmDynamicSpawn(mobIndex, nil, true, zoneID)
+        else
+            xi.dynamis.nonStandardDynamicSpawn(mobIndex, nil, true, zoneID)
+        end
+    end
+
+    -- Account for previous waves if this is not the first wave
+    if waveNumber > 1 then
+        for n = 1, waveNumber do
+            zone:setLocalVar(string.format("Wave_%i_Spawned", n), 1)
+        end
+    end
+
+    -- Update current variables for wave
+    zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
+    zone:setLocalVar(string.format("[DYNA]CurrentWave_%s", zoneID), waveNumber)
+end
+
 xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
     for _, mobIndex in pairs(xi.dynamis.mobList[zoneID][waveNumber].wave) do
         local mobType = xi.dynamis.mobList[zoneID][mobIndex].info[1]
@@ -61,6 +98,7 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
         end
     end
     zone:setLocalVar(string.format("Wave_%i_Spawned", waveNumber), 1)
+    zone:setLocalVar(string.format("[DYNA]CurrentWave_%s", zoneID), waveNumber)
 end
 
 xi.dynamis.parentOnEngaged = function(mob, target)
