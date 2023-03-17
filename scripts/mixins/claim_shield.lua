@@ -3,17 +3,16 @@
 -- Used to add Claim Shield to a mob without overwriting
 -- the onSpawn() function.
 ----------------------------------------------------------------
-
 require("scripts/globals/mixins")
 require("scripts/globals/utils")
 require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
-local claimshieldTime = 7500
+local claimshieldTime = 4000
 
 -- Checks the list to see if the entry exists already
-local listContains = function(list, element)
+local function listContains(list, element)
     for _, v in pairs(list)
     do
         if v == element then
@@ -25,7 +24,7 @@ local listContains = function(list, element)
 end
 
 -- Find the index for the given entry name
-local findIndexForName = function(list, name)
+local function findIndexForName(list, name)
     for index, entryName in ipairs(list) do
         if entryName == name then
             return index
@@ -35,11 +34,11 @@ local findIndexForName = function(list, name)
     return nil
 end
 
-local logListToFile = function(fileName, textToAdd)
+local function logListToFile(fileName, textToAdd)
     local filePath = io.popen("cd"):read'*all'
-    local logFile = filePath:sub(1, -2) .. "\\log\\claim_shield_logs\\" .. fileName .. ".html"
+    local logFile  = filePath:sub(1, -2) .. "\\log\\claim_shield_logs\\" .. fileName .. ".html"
     local textHTML = ""
-    local logRead = io.open(logFile, "r")
+    local logRead  = io.open(logFile, "r")
 
     -- Handle the text for the HTML
     if logRead ~= nil then
@@ -77,8 +76,10 @@ g_mixins.claim_shield = function(claimshieldMob)
             for _, v in pairs(enmityList) do
                 local entity = v["entity"]
                 local master = entity:getMaster()
+
                 if entity:getObjType() ~= xi.objType.TRUST then
                     local name = entity:getName()
+
                     if
                         not entity:isPC() and
                         master and
@@ -87,9 +88,7 @@ g_mixins.claim_shield = function(claimshieldMob)
                         name = master:getName()
                     end
 
-                    if
-                        not listContains(entries, name)
-                    then
+                    if not listContains(entries, name) then
                         table.insert(entries, name)
                     end
                 end
@@ -98,8 +97,9 @@ g_mixins.claim_shield = function(claimshieldMob)
             local numEntries = #entries
 
             -- Select a winner
-            local winningNum = math.random(1, #entries)
+            local winningNum  = math.random(1, #entries)
             local winningName = "Carver"
+
             for index, entryName in ipairs(entries) do
                 if index == winningNum then
                     winningName = entryName
@@ -107,15 +107,18 @@ g_mixins.claim_shield = function(claimshieldMob)
             end
 
             local claimWinner = GetPlayerByName(winningName)
+
             if claimWinner then
                 -- Setup Log File
-                local fileName = os.date("%x", os.time()):gsub("/", "-")
+                local fileName  = os.date("%x", os.time()):gsub("/", "-")
                 local textToAdd = "<h3>[" .. os.date("%X", os.time()) .. "] - { " .. mobArg:getName() .. " }</h3><br><b>&emsp;Winners:</b><br>&emsp;<ul>"
 
                 -- Message winner and their party/alliance that they've won
                 local alliance = claimWinner:getAlliance()
+
                 for _, member in pairs(alliance) do
                     local str = string.format("Your group has won the lottery for %s! (out of %i players)", mobArg:getName(), numEntries)
+ 
                     if #alliance == 1 then
                         str = string.format("You have won the lottery for %s! (out of %i players)", mobArg:getName(), numEntries)
                     end
@@ -127,6 +130,7 @@ g_mixins.claim_shield = function(claimshieldMob)
 
                     -- Remove from entries table
                     local pos = findIndexForName(entries, member:getName())
+ 
                     if pos then
                         table.remove(entries, pos)
                     end
@@ -139,17 +143,42 @@ g_mixins.claim_shield = function(claimshieldMob)
                 -- clear them from the enmity list
                 for _, member in pairs(entries) do
                     local memberEntity = GetPlayerByName(member)
-                    local str = string.format("You were not successful in the lottery for %s. (out of %i players)", mobArg:getName(), numEntries)
-                    memberEntity:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+                    local memberParty  = memberEntity:getPartyWithTrusts()
+
+                    for _, partyMember in pairs(memberParty) do
+                        if partyMember:getObjType() == xi.objType.TRUST then
+                            if partyMember:isEngaged() then
+                                partyMember:disengage()
+                            end
+
+                            mobArg:clearEnmityForEntity(partyMember)
+                        end
+                    end
+
+                    local header    = string.format("==================================================================")
+                    local stringOne = string.format("You were not successful in the lottery for %s. (out of %i players)", mobArg:getName(), numEntries)
+                    local stringTwo = string.format("Disengage from the mob immediately if it hasn't happened automatically")
+
+                    memberEntity:PrintToPlayer(header, xi.msg.channel.SYSTEM_3, "")
+                    memberEntity:PrintToPlayer(stringOne, xi.msg.channel.SYSTEM_3, "")
+                    memberEntity:PrintToPlayer(stringTwo, xi.msg.channel.SYSTEM_3, "")
+                    memberEntity:PrintToPlayer(header, xi.msg.channel.SYSTEM_3, "")
+
                     if memberEntity:getPet() ~= nil then
-                        memberEntity:getPet():disengage()
+                        if memberEntity:getPet():isEngaged() then
+                            memberEntity:getPet():disengage()
+                        end
+
                         mobArg:clearEnmityForEntity(memberEntity:getPet())
                     end
 
                     -- Add name to Log
                     textToAdd = textToAdd .. "<li>" .. member .. "</li><br>"
 
-                    mobArg:disengage()
+                    if memberEntity:isEngaged() then
+                        memberEntity:disengage()
+                    end
+
                     mobArg:clearEnmityForEntity(memberEntity)
                 end
 
@@ -169,8 +198,10 @@ g_mixins.claim_shield = function(claimshieldMob)
                 mobArg:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
                 mobArg:delStatusEffectsByFlag(0xFFFF)
                 mobArg:setHP(mobArg:getMaxHP())
+
                 -- Update Claim to winner
                 mobArg:updateClaim(claimWinner)
+                mobArg:addEnmity(claimWinner, 1, 1000)
             else
                 -- Drop mods
                 mobArg:setClaimable(true)
