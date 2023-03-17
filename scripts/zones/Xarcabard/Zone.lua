@@ -5,7 +5,7 @@ local ID = require('scripts/zones/Xarcabard/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
 require('scripts/globals/keyitems')
-require("scripts/globals/teleports")
+require('scripts/globals/teleports')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
@@ -44,9 +44,9 @@ zoneObject.onZoneIn = function(player, prevZone)
         cs = 9
     elseif unbridledPassionCS == 3 then
         if
-            math.floor(pos.x) == math.floor(xi.teleport.destination[xi.teleport.id.VAHZL][1]) and
-            math.floor(pos.y) == math.floor(xi.teleport.destination[xi.teleport.id.VAHZL][2]) and
-            math.floor(pos.z) == math.floor(xi.teleport.destination[xi.teleport.id.VAHZL][3])
+            math.abs(pos.x - xi.teleport.destination[xi.teleport.id.VAHZL][1]) < 0.1 and
+            math.abs(pos.y - xi.teleport.destination[xi.teleport.id.VAHZL][2]) < 0.1 and
+            math.abs(pos.z - xi.teleport.destination[xi.teleport.id.VAHZL][3]) < 0.1
         then
             cs = 5
         else
