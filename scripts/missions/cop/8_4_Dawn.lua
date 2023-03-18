@@ -38,11 +38,13 @@ local checkAdditionalCS = function(player)
             csCount = csCount + 1
         end
     end
+
     if csCount == 5 then
         for _, cs in pairs(additionalCS) do
             mission:setVar(player, cs, 0)
         end
     end
+
     return csCount
 end
 
@@ -59,6 +61,7 @@ local ringCheck = function(player)
             return true
         end
     end
+
     return false
 end
 
@@ -142,7 +145,9 @@ mission.sections =
                 end,
 
                 [3] = function(player, csid, option)
-                    mission:setVar(player, 'Status', 4)
+                    if mission:getVar(player, 'Status') < 4 then
+                        mission:setVar(player, 'Status', 4)
+                    end
                 end,
 
                 [6] = function(player, csid, option)
@@ -151,10 +156,12 @@ mission.sections =
                     if not player:hasKeyItem(xi.ki.TEAR_OF_ALTANA) then
                         npcUtil.giveKeyItem(player, xi.ki.TEAR_OF_ALTANA)
                     end
+
                     if mission:getVar(player, 'Status') < 3 then
                         mission:setVar(player, 'Wait', getMidnight())
                         mission:setVar(player, 'Status', 3)
                     end
+
                     return mission:progressEvent(3)
                 end,
             },
@@ -333,11 +340,13 @@ mission.sections =
                             if mission:getVar(player, 'ColoredDrop') < 4258 then
                                 mission:setVar(player, 'ColoredDrop', coloredDrop)
                             end
+
                             return mission:messageSpecial(zones[npc:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, coloredDrop)
                         else
                             if mission:getVar(player, 'ColoredDrop') < 4258 then
                                 mission:setVar(player, 'ColoredDrop', coloredDrop)
                             end
+
                             return mission:progressEvent(43)
                         end
                     end
