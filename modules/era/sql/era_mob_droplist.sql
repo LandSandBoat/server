@@ -3838,9 +3838,9 @@ INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1162,@COMMON);  -- Tonberry Lant
 INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1443,@RARE);    -- Pinch Of Dried Mugwort (Rare, 5%)
 
 -- ZoneID:  30 - Carmine Dobsonfly
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,@UNCOMMON); -- Dobson Bandana (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,14669,@UNCOMMON); -- Jaeger Ring (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15184,@RARE);     -- Voyager Sallet (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,@ALWAYS);   -- Dobson Bandana (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,14669,@VCOMMON);  -- Jaeger Ring (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15184,@UNCOMMON); -- Voyager Sallet (Uncommon, 10%)
 
 -- ZoneID:  51 - Carmine Eruca
 -- ZoneID:  61 - Scoriaceous Eruca
