@@ -1,10 +1,11 @@
 -------------------------------------------
 -- Escha/Reisenjima Portals Global
 -------------------------------------------
-require("scripts/globals/teleports")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
+require("scripts/globals/teleports")
 require("scripts/globals/utils")
 -------------------------------------------
 xi = xi or {}
@@ -13,18 +14,18 @@ xi.escha.portals = xi.escha.portals or {}
 
 local costReduction = -- Based on Luck+ Vorseal power
 {-- Power, reduction (percentage based, will always be (100 minus reduction))
-    [ 0] =  0,
-    [ 1] =  5,
-    [ 2] = 10,
-    [ 3] = 15,
-    [ 4] = 20,
-    [ 5] = 25,
-    [ 6] = 30,
-    [ 7] = 35,
-    [ 8] = 40,
-    [ 9] = 45,
-    [10] = 50,
-    [11] = 55,
+    [ 0] = 100,
+    [ 1] =  95,
+    [ 2] =  90,
+    [ 3] =  85,
+    [ 4] =  80,
+    [ 5] =  75,
+    [ 6] =  70,
+    [ 7] =  65,
+    [ 8] =  60,
+    [ 9] =  55,
+    [10] =  50,
+    [11] =  45,
 }
 
 local portalOffsets =
@@ -37,17 +38,18 @@ local portalOffsets =
 
 -------------------------------------------------------------------------------------------------------------
 -- Notes:
--- Portal base cost is 100 in every escha zone.
+-- Portal base cost is 50 in every escha zone.
 -- Vorseal Luck+ (Portal Cost per unpgrade) -5%, -10%, -15%, -20%, -25%, -30%, -35%, -40%, -45%, -50%, -55%
 -- Vorseal status effect = 602
 -------------------------------------------------------------------------------------------------------------
 local function getPortalCost(player)
-    local cost             = 100
+    local cost             = 50
     local luckVorsealPower = 0
 
-    --TODO: get Vorseal Luck+ power amount.
+    -- TODO: get Vorseal Luck+ power amount.
+    -- Note: Rounded down. Base 50 with luck+ 3 (-15%) results in 42. (17/march/2023)
 
-    cost = cost - costReduction[luckVorsealPower]
+    cost = math.floor(cost * costReduction[luckVorsealPower] / 100)
 
     return cost
 end
@@ -58,20 +60,19 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
     local lockValue           = 0                                                  -- Param 5.
     local zonePortalsUnlocked = 0
 
-    -- Reisenjima portal #10. Unlocked with Key Item.
-    if
-        zoneId == xi.zone.REISENJIMA and
-        player:hasKeyItem(xi.ki.SCINTILLATING_RHAPSODY)
-    then
-        lockValue           = 4
-        zonePortalsUnlocked = 1
-    end
+    -- Reisenjima only.
+    if zoneId == xi.zone.REISENJIMA then
+        -- Scintillating Rhapsody. Unlocks Portal #8 and #10.
+        if player:hasKeyItem(xi.ki.SCINTILLATING_RHAPSODY) then
+            lockValue           = lockValue + 4
+            zonePortalsUnlocked = zonePortalsUnlocked + 1
+        end
 
-    -- Ethereal droplet.
-    -- TODO: Confirm Ethereal droplet logic. Adds +2 to lockValue when in possesion of one.
-    -- if player:hasItem(9202, 0) then
-    --     lockValue = lockValue + 2
-    -- end
+        -- Ethereal droplet. Warps you to Portal #1.
+        if player:hasItem(xi.items.ETHEREAL_DROPLET, xi.inv.TEMPITEMS) then
+            lockValue = lockValue + 2
+        end
+    end
 
     -- Player has not activated this Portal.
     if
@@ -113,8 +114,12 @@ end
 xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     local portalCost = getPortalCost(player)
 
-    if
+    if option == 3 then-- Ethereal droplet usage.
+        player:delItem(xi.items.ETHEREAL_DROPLET, 1, xi.inv.TEMPITEMS)
+        player:messageSpecial(ID.text.YOU_HAVE_USED, xi.items.ETHEREAL_DROPLET)
+    elseif
         option ~= 0 and
+        option ~= 4 and -- Scintillating Rhapsody usage.
         option ~= 1073741824
     then
         player:delCurrency("escha_silt", portalCost)
