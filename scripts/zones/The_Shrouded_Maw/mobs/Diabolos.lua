@@ -49,6 +49,8 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("TileTriggerHPP", triggerVal) -- Starting point for tile drops
     mob:setLocalVar("Area", area)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
+    mob:setMod(xi.mod.DMGPHYS, -5000)
 end
 
 entity.onMobFight = function(mob, target)
