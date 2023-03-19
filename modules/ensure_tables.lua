@@ -15,5 +15,5 @@ function ensureTable(str)
         table       = table[part]
     end
 
-    printf(string.format("File %s doesn't exist. Creating virtual entry in cache table.", str))
+    -- printf(string.format("File %s doesn't exist. Creating virtual entry in cache table.", str))
 end
