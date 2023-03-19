@@ -4173,6 +4173,7 @@ xi.items =
     EARTH_WAND                      = 17076,
     BRASS_ROD                       = 17081,
     TIME_HAMMER                     = 17083,
+    ELM_STAFF                       = 17090,
     MISERY_STAFF                    = 17116,
     HYPNO_STAFF                     = 17117,
     SHORTBOW                        = 17152,
