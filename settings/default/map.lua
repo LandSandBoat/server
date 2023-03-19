@@ -74,6 +74,10 @@ xi.settings.map =
     -- Minimum level at which experience points can be lost
     EXP_LOSS_LEVEL = 31,
 
+    -- Minimum level at which regional influence is lost in conquest when a player dies
+    -- Level 5 and below don't lose influence: http://wiki.ffo.jp/html/498.html
+    MINIMUM_LEVEL_CONQUEST_INFUENCE_LOSS = 6,
+
     -- Enable/disable Level Sync
     LEVEL_SYNC_ENABLE = true,
 
