@@ -14,6 +14,7 @@
 -- Modifiers: STR:50%  VIT:50%
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.00      1.00
+-- Duration is 180/240/300 - resulting in (tp / 1000 * 60) + 120
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
@@ -35,7 +36,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     effectParams.element = xi.magic.ele.WIND
     effectParams.effect = xi.effect.DEFENSE_DOWN
     effectParams.skillType = xi.skill.GREAT_AXE
-    effectParams.duration = (tp / 1000 * 30) + 60
+    effectParams.duration = (tp / 1000 * 60) + 120
     effectParams.power = 12.5
     effectParams.tick = 0
     effectParams.maccBonus = 0
@@ -44,7 +45,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     effectParams2.element = xi.magic.ele.WATER
     effectParams2.effect = xi.effect.ATTACK_DOWN
     effectParams2.skillType = xi.skill.GREAT_AXE
-    effectParams2.duration = (tp / 1000 * 30) + 60
+    effectParams2.duration = (tp / 1000 * 60) + 120
     effectParams2.power = 12.5
     effectParams2.tick = 0
     effectParams2.maccBonus = 0
@@ -53,7 +54,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     effectParams3.element = xi.magic.ele.ICE
     effectParams3.effect = xi.effect.EVASION_DOWN
     effectParams3.skillType = xi.skill.GREAT_AXE
-    effectParams3.duration = (tp / 1000 * 30) + 60
+    effectParams3.duration = (tp / 1000 * 60) + 120
     effectParams3.power = 20
     effectParams3.tick = 0
     effectParams3.maccBonus = 0
@@ -62,7 +63,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     effectParams4.element = xi.magic.ele.EARTH
     effectParams4.effect = xi.effect.ACCURACY_DOWN
     effectParams4.skillType = xi.skill.GREAT_AXE
-    effectParams4.duration = (tp / 1000 * 30) + 60
+    effectParams4.duration = (tp / 1000 * 60) + 120
     effectParams4.power = 20
     effectParams4.tick = 0
     effectParams4.maccBonus = 0
