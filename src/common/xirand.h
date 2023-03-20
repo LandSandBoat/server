@@ -86,7 +86,7 @@ public:
     template <typename T>
     static inline typename std::enable_if<std::is_floating_point<T>::value, T>::type GetRandomNumber(T min, T max)
     {
-        if (min == max || min > max)
+        if (min >= max)
         {
             return min;
         }
