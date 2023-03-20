@@ -103,6 +103,7 @@ xi.items =
     CASTLE_FLOOR_PLANS              = 530,
     LANOLIN_CUBE                    = 531,
     MAGICMART_FLYER                 = 532,
+    CHUNK_OF_DERFLAND_HUMUS         = 533,
     CLUMP_OF_GAUSEBIT_WILDGRASS     = 534,
     ADVENTURERS_COUPON              = 536,
     DAMSELFLY_WORM                  = 537,
