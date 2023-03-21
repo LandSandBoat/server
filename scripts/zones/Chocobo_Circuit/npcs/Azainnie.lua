@@ -15,7 +15,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinsih = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity
