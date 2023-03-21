@@ -26,3 +26,47 @@ cppcheck -v -j 4 --force --quiet --inconclusive --std=c++17 \
 --suppress=passedByValue:src/map/packet_system.cpp \
 -DSA_INTERRUPT -DZMQ_DEPRECATED -DZMQ_EVENT_MONITOR_STOPPED -DTRACY_ENABLE \
 ${target}
+
+python3 << EOF
+import glob
+import os
+
+target = '${target}'
+
+def contains_delete(line):
+    if "// cpp.sh allow" in line:
+        return False
+
+    if "void operator delete" in line:
+        return False
+
+    if "//" in line:
+        line = line.split("//")[0]
+
+    if "*" in line:
+        line = line.split("*")[0]
+
+    line = line.strip()
+    if line.startswith("Show"):
+        return False
+
+    return "delete " in line or "delete[]" in line or "delete []" in line
+
+def check(name):
+    if os.path.isfile(name):
+        with open(name) as f:
+            counter = 0
+            for line in f.readlines():
+                counter = counter + 1
+                if contains_delete(line):
+                    print(f"{name}:{counter}: Found naked delete. Please use destroy(ptr) or destroy_arr(ptr).")
+                    print(line)
+
+if target == 'src':
+    for filename in glob.iglob('src/**/*.cpp', recursive=True):
+        check(filename)
+    for filename in glob.iglob('src/**/*.h', recursive=True):
+        check(filename)
+else:
+    check(target)
+EOF

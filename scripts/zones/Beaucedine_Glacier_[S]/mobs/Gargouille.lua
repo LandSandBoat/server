@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Beaucedine_Glacier_[S]/IDs")
 require("scripts/globals/mobs")
+mixins = { require("scripts/mixins/families/gargouille") }
 -----------------------------------
 local entity = {}
 

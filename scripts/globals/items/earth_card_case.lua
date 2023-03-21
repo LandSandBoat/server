@@ -3,6 +3,7 @@
 -- Earth Card Case
 -- When used, you will obtain one stack of Earth Cards
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2179, 99)
+    target:addItem(xi.items.EARTH_CARD, 99)
 end
 
 return itemObject

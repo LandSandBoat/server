@@ -53,4 +53,5 @@ xi.settings.logging =
     DEBUG_ID_LOOKUP      = false, -- Calls in C++: DebugIDLookup(...)
     DEBUG_MODULES        = false, -- Calls in C++: DebugModules(...)
     DEBUG_PACKET_BACKLOG = false, -- Special logic in map.cpp::send_parse
+    DEBUG_DELIVERY_BOX   = false, -- Special logic in packet_system.cpp::SmallPacket0x04D
 }

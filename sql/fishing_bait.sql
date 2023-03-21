@@ -32,7 +32,7 @@ CREATE TABLE `fishing_bait` (
   `mmm` tinyint(2) unsigned NOT NULL,
   `rankmod` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`baitid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

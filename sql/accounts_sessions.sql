@@ -35,4 +35,4 @@ CREATE TABLE `accounts_sessions` (
   `seacom_message` TINYBLOB NULL DEFAULT NULL,
   PRIMARY KEY (`charid`),
   UNIQUE KEY `accid` (`accid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

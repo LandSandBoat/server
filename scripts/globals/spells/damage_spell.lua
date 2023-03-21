@@ -2,7 +2,7 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
-require("scripts/globals/damage/magic_hit_rate")
+require("scripts/globals/combat/magic_hit_rate")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
 require("scripts/globals/msg")
@@ -379,16 +379,16 @@ end
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
 xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statUsed)
     -- Get Caster Magic Accuracy.
-    local magicAcc = xi.damage.magicHitRate.calculateCasterMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
+    local magicAcc = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, spell, skillType, spellElement, statUsed)
 
     -- Get Target Magic Evasion.
-    local magicEva = xi.damage.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0) -- false = not an enfeeble. 0 = No meva modifier.
+    local magicEva = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, spellElement, false, 0) -- false = not an enfeeble. 0 = No meva modifier.
 
     -- Calculate Magic Hit Rate with the previous 2 values.
-    local magicHitRate = xi.damage.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
+    local magicHitRate = xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva)
 
     -- Calculate Resist Rate.
-    local resist = xi.damage.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
+    local resist = xi.combat.magicHitRate.calculateResistRate(caster, target, skillType, spellElement, magicHitRate)
 
     return resist
 end

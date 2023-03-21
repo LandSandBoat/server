@@ -410,7 +410,6 @@ namespace zoneutils
                         STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
                         slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
                         fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-                        fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
                         fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
                         Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
                         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
@@ -506,29 +505,20 @@ namespace zoneutils
                                 PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                                 PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                                PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50))); // These are stored as signed integers which
-                                PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));  // is directly the modifier starting value.
-                                PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(52))); // Positives signify increased resist chance.
-                                PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(53)));
-                                PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(54)));
-                                PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(55)));
-                                PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(56)));
-                                PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(57)));
+                                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(50)));
+                                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(51)));
+                                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(52)));
+                                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(53)));
+                                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(54)));
+                                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(55)));
+                                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(56)));
+                                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(57)));
 
-                                PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(58)));
-                                PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(59)));
-                                PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(60)));
-                                PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(61)));
-                                PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(62)));
-                                PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(63)));
-                                PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(64)));
-                                PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(65)));
-
-                                PMob->m_Element     = (uint8)sql->GetIntData(66);
-                                PMob->m_Family      = (uint16)sql->GetIntData(67);
-                                PMob->m_SuperFamily = (uint16)sql->GetIntData(68);
-                                PMob->m_name_prefix = (uint8)sql->GetIntData(69);
-                                PMob->m_flags       = (uint32)sql->GetIntData(70);
+                                PMob->m_Element     = (uint8)sql->GetIntData(58);
+                                PMob->m_Family      = (uint16)sql->GetIntData(59);
+                                PMob->m_SuperFamily = (uint16)sql->GetIntData(60);
+                                PMob->m_name_prefix = (uint8)sql->GetIntData(61);
+                                PMob->m_flags       = (uint32)sql->GetIntData(62);
 
                                 // Cap Level if Necessary (Don't Cap NMs)
                                 if (normalLevelRangeMin > 0 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && PMob->m_minLevel > normalLevelRangeMin)
@@ -544,7 +534,7 @@ namespace zoneutils
                                 // Special sub animation for Mob (yovra, jailer of love, phuabo)
                                 // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
                                 // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-                                PMob->animationsub = (uint32)sql->GetIntData(71);
+                                PMob->animationsub = (uint32)sql->GetIntData(63);
 
                                 if (PMob->animationsub != 0)
                                 {
@@ -552,28 +542,28 @@ namespace zoneutils
                                 }
 
                                 // Setup HP / MP Stat Percentage Boost
-                                PMob->HPscale = sql->GetFloatData(72);
-                                PMob->MPscale = sql->GetFloatData(73);
+                                PMob->HPscale = sql->GetFloatData(64);
+                                PMob->MPscale = sql->GetFloatData(65);
 
                                 // TODO: Remove me
                                 // Check if we should be looking up scripts for this mob
-                                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(74);
+                                // PMob->m_HasSpellScript = (uint8)sql->GetIntData(66);
 
-                                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(75));
+                                PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(67));
 
-                                PMob->m_Pool = sql->GetUIntData(76);
+                                PMob->m_Pool = sql->GetUIntData(68);
 
-                                PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(77));
-                                PMob->namevis    = sql->GetUIntData(78);
-                                PMob->m_Aggro    = sql->GetUIntData(79);
+                                PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(69));
+                                PMob->namevis    = sql->GetUIntData(70);
+                                PMob->m_Aggro    = sql->GetUIntData(71);
 
-                                PMob->m_roamFlags    = (uint16)sql->GetUIntData(80);
-                                PMob->m_MobSkillList = sql->GetUIntData(81);
+                                PMob->m_roamFlags    = (uint16)sql->GetUIntData(72);
+                                PMob->m_MobSkillList = sql->GetUIntData(73);
 
-                                PMob->m_TrueDetection = sql->GetUIntData(82);
-                                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(83));
+                                PMob->m_TrueDetection = sql->GetUIntData(74);
+                                PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(75));
 
-                                PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(84));
+                                PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(76));
 
                                 // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                                 // can be set in mob_spawn_mods or in their onInitialize
@@ -763,6 +753,10 @@ namespace zoneutils
             g_PZoneList[0] = CreateZone(0);
         }
 
+#ifdef ENV32BIT
+        ShowInfo("NOTE: LOS meshes wont be loaded on the 32-bit build. They take up enough memory to crash to process.");
+#endif // ENV32BIT
+
         // clang-format off
         {
             ts::task_system ts;
@@ -773,12 +767,16 @@ namespace zoneutils
                     // NOTE: It is not safe to use SQL in this parallel loop!
                     g_PZoneList[zone]->LoadNavMesh();
                 });
-
+#ifndef ENV32BIT
+                // The LOS meshes take up A LOT of memory, so they're hard-disabled on 32-bit builds.
+                // (If you re-enable them, you'll meed the memory limit for a 32-bit application and crash!)
+                // TODO: Find a sane way around this
                 ts.schedule([zone]()
                 {
                     // NOTE: It is not safe to use SQL in this parallel loop!
                     g_PZoneList[zone]->LoadZoneLos();
                 });
+#endif // !ENV32BIT
             }
         }
         // clang-format on
@@ -1157,11 +1155,10 @@ namespace zoneutils
     {
         for (auto PZone : g_PZoneList)
         {
-            delete PZone.second;
+            destroy(PZone.second);
         }
         g_PZoneList.clear();
-        delete g_PTrigger;
-        g_PTrigger = nullptr;
+        destroy(g_PTrigger);
     }
 
     void ForEachZone(const std::function<void(CZone*)>& func)

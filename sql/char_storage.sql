@@ -28,4 +28,4 @@ CREATE TABLE IF NOT EXISTS `char_storage` (
   `wardrobe8` tinyint(2) unsigned NOT NULL DEFAULT '80',
 
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

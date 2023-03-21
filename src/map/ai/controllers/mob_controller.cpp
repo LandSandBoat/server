@@ -784,9 +784,12 @@ void CMobController::DoRoamTick(time_point tick)
         // i'm claimed by someone and need hate towards this person
         PTarget = (CBattleEntity*)PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST);
 
-        PMob->PEnmityContainer->AddBaseEnmity(PTarget);
+        if (PTarget != NULL)
+        {
+            PMob->PEnmityContainer->AddBaseEnmity(PTarget);
+            Engage(PTarget->targid);
+        }
 
-        Engage(PTarget->targid);
         return;
     }
     //#TODO

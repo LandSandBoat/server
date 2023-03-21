@@ -10,4 +10,4 @@ CREATE TABLE `audit_chat` (
     `datetime` DATETIME NOT NULL,
     PRIMARY KEY (`lineID`)
 )
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

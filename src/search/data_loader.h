@@ -37,6 +37,7 @@ struct ahItem
     uint16 ItemID;
     uint32 SingleAmount;
     uint32 StackAmount;
+    uint16 Category;
 };
 
 struct ahHistory
@@ -93,6 +94,7 @@ public:
     std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
     std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
+    ahItem                   GetAHItemFromItemID(uint16 ItemID);
     void                     ExpireAHItems(uint16 expireAgeInDays);
 
 private:

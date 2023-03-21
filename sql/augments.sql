@@ -11,7 +11,7 @@ CREATE TABLE `augments` (
   `isPet` tinyint(1) NOT NULL DEFAULT 0,
   `petType` tinyint(3) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`augmentId`,`multiplier`,`modId`,`isPet`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `augments`
@@ -88,32 +88,32 @@ INSERT INTO `augments` VALUES (58,0,29,-1,0,0); -- Mag.Def.Bns.-1
 INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+10 (Do via Latent: triggered with your current weapon drawn for 10 TP/tick.)
 INSERT INTO `augments` VALUES (60,0,0,0,0,0); -- Latent effect: Refresh+1 (Do via Latent: triggered with your current weapon not drawn for 1 MP/tick. Refresh is not present while resting(/heal),chocobo or /sit.)
 INSERT INTO `augments` VALUES (61,0,958,1,0,0); -- Occ. inc. resist to stat ailments+1
-INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy+33
-INSERT INTO `augments` VALUES (63,0,26,33,0,0); -- Rng.Accuracy+33
-INSERT INTO `augments` VALUES (64,0,30,33,0,0); -- Mag. Acc.+33
-INSERT INTO `augments` VALUES (65,0,23,33,0,0); -- Attack+33
-INSERT INTO `augments` VALUES (66,0,24,33,0,0); -- Rng.Attack+33
-INSERT INTO `augments` VALUES (67,0,452,1,0,0); -- All songs+1
-INSERT INTO `augments` VALUES (68,0,25,1,0,0); -- Accuracy+1 Attack+1
+INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy +33
+INSERT INTO `augments` VALUES (63,0,26,33,0,0); -- Rng.Accuracy +33
+INSERT INTO `augments` VALUES (64,0,30,33,0,0); -- Mag. Acc. +33
+INSERT INTO `augments` VALUES (65,0,23,33,0,0); -- Attack +33
+INSERT INTO `augments` VALUES (66,0,24,33,0,0); -- Rng.Attack +33
+INSERT INTO `augments` VALUES (67,0,452,1,0,0); -- All songs +1
+INSERT INTO `augments` VALUES (68,0,25,1,0,0); -- Accuracy +1 Attack +1
 INSERT INTO `augments` VALUES (68,0,23,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc.+1 Rng.Atk.+1
+INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc. +1 Rng.Atk. +1
 INSERT INTO `augments` VALUES (69,0,24,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc.+33 Mag.Atk.Bns+33
+INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc. +33 Mag.Atk.Bns +33
 INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
 INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
-INSERT INTO `augments` VALUES (72,0,0,0,0,0); -- 72 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (73,0,0,0,0,0); -- 73 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+INSERT INTO `augments` VALUES (72,0,0,1,0,0); -- Exp. Point +1%
+INSERT INTO `augments` VALUES (73,0,0,33,0,0); -- Exp. Point +33%
 INSERT INTO `augments` VALUES (74,0,915,1,0,0); -- Cap. Point +1%
 INSERT INTO `augments` VALUES (75,0,915,33,0,0); -- Cap. Point +33%
-INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG+33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
+INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG +33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (77,0,0,0,0,0); -- Delay -33% Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
-INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP+2 (count by 2)
-INSERT INTO `augments` VALUES (79,0,2,3,0,0); -- HP+3 (count by 3)
-INSERT INTO `augments` VALUES (80,0,30,1,0,0); -- Mag. Acc+1/Mag. Dmg+1
+INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP +2 (count by 2)
+INSERT INTO `augments` VALUES (79,0,2,3,0,0); -- HP +3 (count by 3)
+INSERT INTO `augments` VALUES (80,0,30,1,0,0); -- Mag. Acc. +1/Mag. Dmg. +1
 INSERT INTO `augments` VALUES (80,0,311,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (81,0,0,0,0,0); -- Eva+1/Mag Eva$+d (corrupted)
-INSERT INTO `augments` VALUES (82,0,5,2,0,0); -- MP+2 (count by 2)
-INSERT INTO `augments` VALUES (83,0,5,3,0,0); -- MP+3 (count by 3)
+INSERT INTO `augments` VALUES (81,0,0,0,0,0); -- Eva +1/Mag. Eva + d (corrupted)
+INSERT INTO `augments` VALUES (82,0,5,2,0,0); -- MP +2 (count by 2)
+INSERT INTO `augments` VALUES (83,0,5,3,0,0); -- MP +3 (count by 3)
 
 -- 84 to 95 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (84,0,0,0,0,0);

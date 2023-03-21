@@ -218,6 +218,7 @@ jobs:
           xi_connect
           xi_map
           xi_search
+          xi_world
 
   Linux_GCC11_64bit:
     needs: Sanity_Checks
@@ -300,6 +301,7 @@ jobs:
             xi_connect.exe
             xi_map.exe
             xi_search.exe
+            xi_world.exe
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
@@ -328,7 +330,7 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON
+          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DENABLE_TRACY=ON
       - name: Build
         shell: cmd
         run: |
@@ -413,7 +415,7 @@ jobs:
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
       with:
-        timeout_minutes: 5
+        timeout_minutes: 15
         max_attempts: 3
         retry_on: timeout
         shell: bash
@@ -421,15 +423,17 @@ jobs:
           chmod +x xi_connect
           chmod +x xi_map
           chmod +x xi_search
+          chmod +x xi_world
           ls -l
 
           printf "\nStart server processes\n"
           screen -d -m -S xi_connect ./xi_connect --log login-server.log
           screen -d -m -S xi_search ./xi_search --log search-server.log
           screen -d -m -S xi_map ./xi_map --log map-server.log
+          screen -d -m -S xi_world ./xi_world --log world-server.log
 
-          printf "\nWaiting 90s for servers to fully start up\n"
-          sleep 90s
+          printf "\nWaiting 5m for servers to fully start up\n"
+          sleep 300s
 
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
@@ -482,6 +486,7 @@ jobs:
         cat login-server*.log
         cat map-server*.log
         cat search-server*.log
+        cat world-server*.log
 
         if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
@@ -492,6 +497,10 @@ jobs:
         fi
 
         if grep -qi "warning\|error\|crash" search-server*.log; then
+            exit -1
+        fi
+
+        if grep -qi "warning\|error\|crash" world-server*.log; then
             exit -1
         fi
 
@@ -542,6 +551,7 @@ jobs:
         chmod +x xi_connect
         chmod +x xi_map
         chmod +x xi_search
+        chmod +x xi_world
         ls -l
 
         printf "\nStart server processes\n"
@@ -549,7 +559,8 @@ jobs:
         screen -d -m -S xi_search ./xi_search --log search-server.log
         screen -d -m -S xi_map ./xi_map --log map-server-0.log --ip 127.0.0.1 --port 54230
         screen -d -m -S xi_map ./xi_map --log map-server-1.log --ip 127.0.0.1 --port 54231
-        sleep 2m
+        screen -d -m -S xi_world ./xi_world --log world-server.log
+        sleep 300s
         killall screen
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
@@ -558,6 +569,7 @@ jobs:
         cat search-server*.log
         cat map-server-0*.log
         cat map-server-1*.log
+        cat world-server*.log
 
         if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
@@ -572,6 +584,10 @@ jobs:
         fi
 
         if grep -qi "warning\|error\|crash" map-server-1*.log; then
+          exit -1
+        fi
+
+        if grep -qi "warning\|error\|crash" world-server*.log; then
           exit -1
         fi
 

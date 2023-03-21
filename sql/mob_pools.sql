@@ -44,7 +44,7 @@ CREATE TABLE `mob_pools` (
   `skill_list_id` smallint(5) unsigned NOT NULL DEFAULT 0,
   `resist_id` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`poolid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6869,7 +6869,7 @@ INSERT INTO `mob_pools` VALUES (6827,'Otherworldly_Rimester','Otherworldly_Rimes
 INSERT INTO `mob_pools` VALUES (6828,'Emperor_Arthro','Emperor_Arthro',77,0x0000650100000000000000000000000000000000,7,7,4,240,100,0,1,0,0,2,0,32,0,133,0,0,0,0,0,77,77);
 INSERT INTO `mob_pools` VALUES (6829,'Septic_Boil','Septic_Boil',66,0x0000260100000000000000000000000000000000,1,1,11,240,100,0,1,1,1,2,0,2,0,135,8,0,0,0,0,66,66);
 INSERT INTO `mob_pools` VALUES (6830,'Bounding_Belinda','Bounding_Belinda',174,0x0000480100000000000000000000000000000000,6,6,7,240,100,0,0,0,1,2,0,32,0,133,0,0,0,0,0,174,174);
-INSERT INTO `mob_pools` VALUES (6831,'Toxic_Tamlyn','Toxic_Tamlyn',186,0x00007C0100000000000000000000000000000000,6,8,7,200,100,0,1,0,1,2,0,32,0,667,8,0,0,0,0,186,186);
+INSERT INTO `mob_pools` VALUES (6831,'Toxic_Tamlyn','Toxic_Tamlyn',186,0x00007C0100000000000000000000000000000000,6,8,7,200,100,0,1,0,1,2,0,32,0,667,8,1,500,0,0,186,186);
 INSERT INTO `mob_pools` VALUES (6832,'Joyous_Green','Joyous_Green',136,0x0000280100000000000000000000000000000000,1,1,12,320,100,0,1,0,1,2,0,32,0,133,0,0,0,0,0,136,136);
 INSERT INTO `mob_pools` VALUES (6833,'Strix','Strix',125,0x0000500100000000000000000000000000000000,10,10,11,240,100,0,1,0,0,2,0,32,0,133,0,0,0,0,0,125,125);
 INSERT INTO `mob_pools` VALUES (6834,'Largantua','Largantua',135,0x0000B00100000000000000000000000000000000,1,1,11,320,100,0,1,0,0,2,0,32,0,133,0,0,0,0,0,135,135);
@@ -7115,7 +7115,7 @@ INSERT INTO `mob_pools` VALUES (7054,'Leviathan_Prime_TSTBW','Leviathan_Prime',4
 
 INSERT INTO `mob_pools` VALUES (7055,'Armoury_Crate','Armoury_Crate',183,0x0000C00300000000000000000000000000000000,1,0,0,240,100,1024,0,0,0,64,0,0,0,131,8,0,0,0,0,0,183);
 
--- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja 
+-- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja
 INSERT INTO `mob_pools` VALUES (7056,'Hundredfaced_clone','Hundredfaced_Hapool_Ja',176,0x0600530600000000000000000000000000000000,13,13,10,280,100,0,1,1,1,2,0,32,0,159,4,0,7,0,0,176,176);
 
 -- Grand Palace of Hu'Xzoi - Escort Quest for PM 8-2

@@ -3,6 +3,7 @@
 -- Dark Adaman Bullet Pouch
 -- When used, you will obtain one stack of Dark Adaman Bullets
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
@@ -17,7 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(19184, 99)
+    target:addItem(xi.items.DARK_ADAMAN_BULLET, 99)
 end
 
 return itemObject

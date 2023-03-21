@@ -9,4 +9,4 @@ CREATE TABLE `audit_gm` (
   `command` varchar(40) NOT NULL,
   `full_string` varchar(200) NOT NULL,
   PRIMARY KEY (`date_time`,`gm_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

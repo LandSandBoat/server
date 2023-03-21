@@ -264,21 +264,23 @@ CCharEntity::~CCharEntity()
         PTreasurePool->DelMember(this);
     }
 
-    delete TradeContainer;
-    delete Container;
-    delete UContainer;
-    delete CraftContainer;
-    delete PMeritPoints;
-    delete PJobPoints;
+    destroy(TradeContainer);
+    destroy(Container);
+    destroy(UContainer);
+    destroy(CraftContainer);
+    destroy(PMeritPoints);
+    destroy(PJobPoints);
+
     PGuildShop = nullptr;
-    delete eventPreparation;
-    delete currentEvent;
+
+    destroy(eventPreparation);
+    destroy(currentEvent);
 
     while (!eventQueue.empty())
     {
         auto head = eventQueue.front();
         eventQueue.pop_front();
-        delete head;
+        destroy(head);
     }
 }
 
@@ -296,7 +298,8 @@ void CCharEntity::clearPacketList()
 {
     while (!PacketList.empty())
     {
-        delete popPacket();
+        auto* packet = popPacket();
+        destroy(packet);
     }
 }
 
@@ -313,7 +316,7 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
         if (PendingPositionPacket)
         {
             PendingPositionPacket->copy(packet);
-            delete packet;
+            destroy(packet);
         }
         else
         {
@@ -404,7 +407,8 @@ void CCharEntity::erasePackets(uint8 num)
 {
     for (auto i = 0; i < num; i++)
     {
-        delete popPacket();
+        auto* packet = popPacket();
+        destroy(packet);
     }
 }
 
@@ -2654,7 +2658,7 @@ void CCharEntity::tryStartNextEvent()
     EventInfo* oldEvent = currentEvent;
     currentEvent        = eventQueue.front();
     eventQueue.pop_front();
-    delete oldEvent;
+    destroy(oldEvent);
 
     eventPreparation->reset();
 

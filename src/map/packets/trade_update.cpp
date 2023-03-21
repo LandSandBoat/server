@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
+#include "trade_update.h"
+
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
-
-#include "trade_update.h"
+#include "utils/itemutils.h"
 
 CTradeUpdatePacket::CTradeUpdatePacket(CItem* PItem, uint8 SlotID)
 {

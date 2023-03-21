@@ -21,17 +21,30 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #pragma once
 
 #include "common/application.h"
+#include "common/taskmgr.h"
 
-class HTTPServer;
+#include "besieged_system.h"
+#include "campaign_system.h"
+#include "colonization_system.h"
+#include "conquest_system.h"
+#include "http_server.h"
+#include "message_server.h"
 
 class WorldServer final : public Application
 {
 public:
-    WorldServer(std::unique_ptr<argparse::ArgumentParser>&& pArgParser);
+    WorldServer(int argc, char** argv);
     ~WorldServer() override;
 
     void Tick() override;
 
 private:
+    std::unique_ptr<message_server_wrapper_t> messageServer;
+
+    std::unique_ptr<ConquestSystem>     conquestSystem;
+    std::unique_ptr<BesiegedSystem>     besiegedSystem;
+    std::unique_ptr<CampaignSystem>     campaignSystem;
+    std::unique_ptr<ColonizationSystem> colonizationSystem;
+
     std::unique_ptr<HTTPServer> httpServer;
 };

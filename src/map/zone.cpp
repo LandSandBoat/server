@@ -20,13 +20,16 @@
 */
 
 // TODO:
-// нужно разделить класс czone на базовый и наследников. уже нарисовались: Standard, Rezident, Instance и Dinamis
-// у каждой из указанных зон особое поведение
+// It is necessary to divide the Czone class into basic and heirs. Already painted: Standard, Rezident, Instance and Dinamis
+// Each of these zones has special behavior
+
+#include "zone.h"
 
 #include "common/logging.h"
 #include "common/socket.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
@@ -42,8 +45,6 @@
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "unitychat.h"
-#include "vana_time.h"
-#include "zone.h"
 #include "zone_entities.h"
 
 #include "entities/automatonentity.h"
@@ -146,16 +147,10 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 
 CZone::~CZone()
 {
-    delete m_TreasurePool;
-    delete m_CampaignHandler;
-    delete m_zoneEntities;
+    destroy(m_TreasurePool);
+    destroy(m_CampaignHandler);
+    destroy(m_zoneEntities);
 }
-
-/************************************************************************
- *                                                                       *
- *  Функции доступа к полям класса                                       *
- *                                                                       *
- ************************************************************************/
 
 ZONEID CZone::GetID()
 {
@@ -332,13 +327,6 @@ zoneLine_t* CZone::GetZoneLine(uint32 zoneLineID)
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  Загружаем ZoneLines, необходимые для правильного перемещения между   *
- *  зонами.                                                              *
- *                                                                       *
- ************************************************************************/
-
 void CZone::LoadZoneLines()
 {
     TracyZoneScoped;
@@ -404,12 +392,6 @@ void CZone::LoadZoneWeather()
         ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
-
-/************************************************************************
- *                                                                       *
- *  Загружаем настройки зоны из базы                                     *
- *                                                                       *
- ************************************************************************/
 
 void CZone::LoadZoneSettings()
 {
@@ -481,8 +463,7 @@ void CZone::LoadNavMesh()
     if (!m_navMesh->load(file))
     {
         DebugNavmesh("CZone::LoadNavMesh: Cannot load navmesh file (%s)", file);
-        delete m_navMesh;
-        m_navMesh = nullptr;
+        destroy(m_navMesh);
     }
 }
 
@@ -497,7 +478,7 @@ void CZone::LoadZoneLos()
     if (lineOfSight)
     {
         // Clean up previous object if one exists.
-        delete lineOfSight;
+        destroy(lineOfSight);
     }
 
     lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", GetName()));

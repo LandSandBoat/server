@@ -3,14 +3,16 @@
 -- Item: Adloquium Schema
 -- Teaches the white magic Adloquium
 -----------------------------------
+require("scripts/globals/spell_data")
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(495)
+    return target:canLearnSpell(xi.magic.spell.ADLOQUIUM)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(495)
+    target:addSpell(xi.magic.spell.ADLOQUIUM)
 end
 
 return itemObject

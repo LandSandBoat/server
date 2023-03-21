@@ -20,10 +20,12 @@
 */
 
 #include "conquest_system.h"
+
+#include "common/vana_time.h"
+
 #include "entities/charentity.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 
 #include "packets/conquest_map.h"
 
@@ -132,6 +134,12 @@ namespace conquest
 
     void LoseInfluencePoints(CCharEntity* PChar)
     {
+        // http://wiki.ffo.jp/html/498.html
+        if (PChar->GetMLevel() < settings::get<uint8>("map.MINIMUM_LEVEL_CONQUEST_INFUENCE_LOSS"))
+        {
+            return;
+        }
+
         REGION_TYPE region = PChar->loc.zone->GetRegionID();
         int         points = 0;
 

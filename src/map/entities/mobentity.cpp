@@ -154,8 +154,8 @@ void CMobEntity::setEntityFlags(uint32 EntityFlags)
 
 CMobEntity::~CMobEntity()
 {
-    delete PEnmityContainer;
-    delete SpellContainer;
+    destroy(PEnmityContainer);
+    destroy(SpellContainer);
 }
 
 /************************************************************************

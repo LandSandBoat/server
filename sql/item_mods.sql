@@ -21,7 +21,7 @@ CREATE TABLE `item_mods` (
   `modId` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`itemId`,`modId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -26799,7 +26799,7 @@ INSERT INTO `item_mods` VALUES (15365,2,12);   -- HP: 12
 INSERT INTO `item_mods` VALUES (15365,9,5);    -- DEX: 5
 INSERT INTO `item_mods` VALUES (15365,11,5);   -- AGI: 5
 INSERT INTO `item_mods` VALUES (15365,108,10); -- EVASION: 10
-INSERT INTO `item_mods` VALUES (15365,362,10); -- JUMP_ATT_BONUS: 10
+INSERT INTO `item_mods` VALUES (15365,362,10); -- JUMP_ATT_BONUS: 15
 
 -- Evokers Pigaches +1
 INSERT INTO `item_mods` VALUES (15366,1,10);  -- DEF: 10
@@ -47862,7 +47862,7 @@ INSERT INTO `item_mods` VALUES (23321,25,36);   -- ACC: 36
 INSERT INTO `item_mods` VALUES (23321,29,2);    -- MDEF: 2
 INSERT INTO `item_mods` VALUES (23321,31,85);   -- MEVA: 85
 INSERT INTO `item_mods` VALUES (23321,68,72);   -- EVA: 72
-INSERT INTO `item_mods` VALUES (23321,361,24);  -- JUMP_TP_BONUS: 24
+INSERT INTO `item_mods` VALUES (23321,362,24);  -- JUMP_ATT_BONUS: 24
 INSERT INTO `item_mods` VALUES (23321,384,300); -- HASTE_GEAR: 300
 
 -- Convokers Pigaches +2
@@ -50306,7 +50306,7 @@ INSERT INTO `item_mods` VALUES (23656,25,46);   -- ACC: 46
 INSERT INTO `item_mods` VALUES (23656,29,3);    -- MDEF: 3
 INSERT INTO `item_mods` VALUES (23656,31,95);   -- MEVA: 95
 INSERT INTO `item_mods` VALUES (23656,68,82);   -- EVA: 82
-INSERT INTO `item_mods` VALUES (23656,361,26);  -- JUMP_TP_BONUS: 26
+INSERT INTO `item_mods` VALUES (23656,362,26);  -- JUMP_ATT_BONUS: 26
 INSERT INTO `item_mods` VALUES (23656,384,300); -- HASTE_GEAR: 300
 
 -- Convokers Pigaches +3
@@ -54229,6 +54229,11 @@ INSERT INTO `item_mods` VALUES (25765,68,38);   -- EVA: 38
 INSERT INTO `item_mods` VALUES (25765,302,5);   -- TRIPLE_ATTACK: 5
 INSERT INTO `item_mods` VALUES (25765,384,400); -- HASTE_GEAR: 400
 
+-- Fancy Gilet
+INSERT INTO `item_mods` VALUES (25774,1,2); -- DEF: 2
+-- Fancy Top
+INSERT INTO `item_mods` VALUES (25775,1,2); -- DEF: 2
+
 -- Black Chocobo Suit
 INSERT INTO `item_mods` VALUES (25776,1,1); -- DEF: 1
 
@@ -54814,6 +54819,15 @@ INSERT INTO `item_mods` VALUES (25823,31,48);   -- MEVA: 48
 INSERT INTO `item_mods` VALUES (25823,68,19);   -- EVA: 19
 INSERT INTO `item_mods` VALUES (25823,311,49);  -- MAGIC_DAMAGE: 49
 INSERT INTO `item_mods` VALUES (25823,384,400); -- HASTE_GEAR: 400
+
+-- Fancy Trunks
+INSERT INTO `item_mods` VALUES (25838,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (25838,15,10); -- FIRE_RES: 10 (Summer Tidings)
+INSERT INTO `item_mods` VALUES (25838,20,10); -- WATER_RES: 10 (Summer Tidings)
+-- Fancy Shorts
+INSERT INTO `item_mods` VALUES (25839,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (25839,15,10); -- FIRE_RES: 10 (Summer Tidings)
+INSERT INTO `item_mods` VALUES (25839,20,10); -- WATER_RES: 10 (Summer Tidings)
 
 -- Herculean Trousers
 INSERT INTO `item_mods` VALUES (25842,1,114);    -- DEF: 114

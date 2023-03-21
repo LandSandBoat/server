@@ -319,8 +319,7 @@ namespace battleutils
     {
         for (int32 SkillId = 0; SkillId < MAX_WEAPONSKILL_ID; ++SkillId)
         {
-            delete g_PWeaponSkillList[SkillId];
-            g_PWeaponSkillList[SkillId] = nullptr;
+            destroy(g_PWeaponSkillList[SkillId]);
         }
     }
 
@@ -331,8 +330,7 @@ namespace battleutils
     {
         for (auto& mobskill : g_PMobSkillList)
         {
-            delete mobskill;
-            mobskill = nullptr;
+            destroy(mobskill);
         }
     }
 
@@ -343,7 +341,7 @@ namespace battleutils
     {
         for (auto& petskill : g_PPetSkillList)
         {
-            delete petskill.second;
+            destroy(petskill.second);
         }
         g_PPetSkillList.clear();
     }
@@ -4466,24 +4464,27 @@ namespace battleutils
      ************************************************************************/
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage)
     {
-        // Souleater has no effect <10HP.
-        if (m_PChar->GetMJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
+        if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            // lost 10% current hp, converted to damage (displayed as just a strong regular hit)
-            float drainPercent = 0.1f;
-
             // at most 2% bonus from gear
-            auto gearBonusPercent = m_PChar->getMod(Mod::SOULEATER_EFFECT);
-            drainPercent          = drainPercent + std::min(0.02f, 0.01f * gearBonusPercent);
+            float souleaterBonus    = std::min(0.2, m_PChar->getMod(Mod::SOULEATER_EFFECT) * 0.01);
+            float souleaterBonusII  = m_PChar->getMod(Mod::SOULEATER_EFFECT_II) * 0.01; // No known cap to this bonus. Used on Agwu's scythe
+            float stalwartSoulBonus = 1 - static_cast<float>(m_PChar->getMod(Mod::STALWART_SOUL)) / 100;
+            float bonusDamage       = m_PChar->health.hp * (0.1f + souleaterBonus + souleaterBonusII);
 
-            damage += (uint32)(m_PChar->health.hp * drainPercent);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * (drainPercent - m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f))));
-        }
-        else if (m_PChar->GetSJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
-        {
-            // lose 10% Current HP, only HALF (5%) converted to damage
-            damage += (uint32)(m_PChar->health.hp * 0.05f);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * 0.1f)));
+            if (bonusDamage >= 1)
+            {
+                m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
+
+                if (m_PChar->GetMJob() == JOB_DRK)
+                {
+                    damage += bonusDamage;
+                }
+                else
+                {
+                    damage += bonusDamage / 2;
+                }
+            }
         }
         return damage;
     }
@@ -5768,43 +5769,57 @@ namespace battleutils
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar)
     {
+        if (PEntity == nullptr || zoneutils::GetZone(PEntity->getZone()) == nullptr)
+        {
+            return WEATHER_NONE;
+        }
+
         return GetWeather(PEntity, ignoreScholar, zoneutils::GetZone(PEntity->getZone())->GetWeather());
     }
 
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather)
     {
+        if (PEntity == nullptr)
+        {
+            return WEATHER_NONE;
+        }
+
         WEATHER scholarSpell = WEATHER_NONE;
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_FIRESTORM))
+
+        if (!ignoreScholar) // Do not need to check for status effects if we're ignoring scholar spells
         {
-            scholarSpell = WEATHER_HOT_SPELL;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RAINSTORM))
-        {
-            scholarSpell = WEATHER_RAIN;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SANDSTORM))
-        {
-            scholarSpell = WEATHER_DUST_STORM;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_WINDSTORM))
-        {
-            scholarSpell = WEATHER_WIND;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HAILSTORM))
-        {
-            scholarSpell = WEATHER_SNOW;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_THUNDERSTORM))
-        {
-            scholarSpell = WEATHER_THUNDER;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AURORASTORM))
-        {
-            scholarSpell = WEATHER_AURORAS;
-        }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VOIDSTORM))
-        {
-            scholarSpell = WEATHER_GLOOM;
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_FIRESTORM))
+            {
+                scholarSpell = WEATHER_HOT_SPELL;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RAINSTORM))
+            {
+                scholarSpell = WEATHER_RAIN;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SANDSTORM))
+            {
+                scholarSpell = WEATHER_DUST_STORM;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_WINDSTORM))
+            {
+                scholarSpell = WEATHER_WIND;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_HAILSTORM))
+            {
+                scholarSpell = WEATHER_SNOW;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_THUNDERSTORM))
+            {
+                scholarSpell = WEATHER_THUNDER;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AURORASTORM))
+            {
+                scholarSpell = WEATHER_AURORAS;
+            }
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VOIDSTORM))
+            {
+                scholarSpell = WEATHER_GLOOM;
+            }
         }
 
         if (ignoreScholar || scholarSpell == WEATHER_NONE || zoneWeather == (scholarSpell + 1))

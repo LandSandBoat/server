@@ -19,33 +19,34 @@
 ===========================================================================
 */
 
+#include "synthutils.h"
+
 #include "common/logging.h"
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cmath>
 #include <cstring>
 
-#include "../packets/char_skills.h"
-#include "../packets/char_update.h"
-#include "../packets/inventory_assign.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/inventory_item.h"
-#include "../packets/message_basic.h"
-#include "../packets/synth_animation.h"
-#include "../packets/synth_message.h"
-#include "../packets/synth_result.h"
+#include "packets/char_skills.h"
+#include "packets/char_update.h"
+#include "packets/inventory_assign.h"
+#include "packets/inventory_finish.h"
+#include "packets/inventory_item.h"
+#include "packets/message_basic.h"
+#include "packets/synth_animation.h"
+#include "packets/synth_message.h"
+#include "packets/synth_result.h"
 
-#include "../anticheat.h"
-#include "../item_container.h"
-#include "../map.h"
-#include "../roe.h"
-#include "../trade_container.h"
-#include "../vana_time.h"
+#include "anticheat.h"
+#include "item_container.h"
+#include "map.h"
+#include "roe.h"
+#include "trade_container.h"
 
 #include "charutils.h"
 #include "itemutils.h"
-#include "synthutils.h"
 #include "zoneutils.h"
 
 namespace synthutils

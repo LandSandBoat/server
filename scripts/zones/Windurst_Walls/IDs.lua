@@ -28,16 +28,16 @@ zones[xi.zone.WINDURST_WALLS] =
         HOMEPOINT_SET                  = 6649,  -- Home point set!
         YOU_ACCEPT_THE_MISSION         = 6742,  -- You have accepted the mission.
         MOG_LOCKER_OFFSET              = 6823,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
-        ITEM_DELIVERY_DIALOG           = 6976,  -- We can deliver goods to your residence or to the residences of your friends.
-        FISHING_MESSAGE_OFFSET         = 7072,  -- You can't fish here.
-        DOORS_SEALED_SHUT              = 7747,  -- The doors are firmly sealed shut.
-        MOGHOUSE_EXIT                  = 8204,  -- You have learned your way through the back alleys of Windurst! Now you can exit to any area from your residence.
-        SCAVNIX_SHOP_DIALOG            = 8688,  -- <Pshoooooowaaaaa> I'm goood Goblin from underwooorld.  I find lotshhh of gooodieshhh.  You want try shhhome chipshhh? Cheap for yooou.
-        RETRIBUTION_LEARNED            = 9076,  -- You have learned the weapon skill Retribution!
-        YOU_CANNOT_ENTER_DYNAMIS       = 9099,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
-        PLAYERS_HAVE_NOT_REACHED_LEVEL = 9101,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
-        DYNA_NPC_DEFAULT_MESSAGE       = 9113,  -- The strands of grass here have been tied together.
-        TEAR_IN_FABRIC_OF_SPACE        = 10848, -- There appears to be a tear in the fabric of space...
+        ITEM_DELIVERY_DIALOG           = 6990,  -- We can deliver goods to your residence or to the residences of your friends.
+        FISHING_MESSAGE_OFFSET         = 7086,  -- You can't fish here.
+        DOORS_SEALED_SHUT              = 7761,  -- The doors are firmly sealed shut.
+        MOGHOUSE_EXIT                  = 8218,  -- You have learned your way through the back alleys of Windurst! Now you can exit to any area from your residence.
+        SCAVNIX_SHOP_DIALOG            = 8702,  -- <Pshoooooowaaaaa> I'm goood Goblin from underwooorld.  I find lotshhh of gooodieshhh.  You want try shhhome chipshhh? Cheap for yooou.
+        RETRIBUTION_LEARNED            = 9090,  -- You have learned the weapon skill Retribution!
+        YOU_CANNOT_ENTER_DYNAMIS       = 9113,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
+        PLAYERS_HAVE_NOT_REACHED_LEVEL = 9115,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
+        DYNA_NPC_DEFAULT_MESSAGE       = 9127,  -- The strands of grass here have been tied together.
+        TEAR_IN_FABRIC_OF_SPACE        = 10862, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

@@ -25,6 +25,7 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 #include "common/taskmgr.h"
+#include "common/vana_time.h"
 
 #include <list>
 #include <map>
@@ -36,7 +37,6 @@
 #include "navmesh.h"
 #include "packets/weather.h"
 #include "trigger_area.h"
-#include "vana_time.h"
 
 enum ZONEID : uint16
 {
@@ -232,7 +232,7 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_BASTOK                 = 186,
     ZONE_DYNAMIS_WINDURST               = 187,
     ZONE_DYNAMIS_JEUNO                  = 188,
-    ZONE_189                            = 189,
+    ZONE_OUTER_RAKAZNAR_U3              = 189,
     ZONE_KING_RANPERRES_TOMB            = 190,
     ZONE_DANGRUF_WADI                   = 191,
     ZONE_INNER_HORUTOTO_RUINS           = 192,
@@ -438,6 +438,7 @@ enum class TELEPORT_TYPE : uint8
     HOMEPOINT       = 9,
     SURVIVAL        = 10,
     WAYPOINT        = 11,
+    ESCHAN_PORTAL   = 12,
 };
 
 enum ZONEMISC
