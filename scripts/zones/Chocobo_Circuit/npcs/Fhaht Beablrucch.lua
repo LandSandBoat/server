@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(212,213,214,215,219,223,228,234)
+    player:startEvent(212, 213, 214, 215, 219, 223, 228, 234)
 end
 
 entity.onEventUpdate = function(player, csid, option)
