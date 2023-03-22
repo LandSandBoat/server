@@ -33,6 +33,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 695 then
         mob:messageText(mob, ID.text.SCENT_OF_BLOOD)
     end
+
     mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
     mob:setLocalVar("control", 0)
     mob:setLocalVar("TP", 0)
@@ -44,8 +45,8 @@ end
 
 entity.onMobFight = function(mob, target)
     if mob:getTP() == 3000 and mob:getLocalVar("control") == 0 then
-        local shikX = GetMobByID(mob:getID()+1)
-        local shikZ = GetMobByID(mob:getID()-1)
+        local shikX = GetMobByID(mob:getID() + 1)
+        local shikZ = GetMobByID(mob:getID() - 1)
         local shikXTP = shikX:getLocalVar("TP")
         local shikZTP = shikZ:getLocalVar("TP")
         mob:setLocalVar("TP", 1)
@@ -107,17 +108,19 @@ entity.onMobFight = function(mob, target)
 
         -- Shik Y is last alive
         else
-                mob:messageText(mob, dialogue[math.random(1,3)])
+                mob:messageText(mob, dialogue[math.random(1, 3)])
                 mob:setMobMod(xi.mobMod.SKILL_LIST, 1166)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:messageText(mob, ID.text.I_LOST)
-    -- Reset controls so that remaining shiks don't get locked from weaponskilling
-    GetMobByID(mob:getID()+1):setLocalVar("control", 0)
-    GetMobByID(mob:getID()-1):setLocalVar("control", 0)
+    if optParams.isKiller then
+        mob:messageText(mob, ID.text.I_LOST)
+        -- Reset controls so that remaining shiks don't get locked from weaponskilling
+        GetMobByID(mob:getID() + 1):setLocalVar("control", 0)
+        GetMobByID(mob:getID() - 1):setLocalVar("control", 0)
+    end
 end
 
 return entity
