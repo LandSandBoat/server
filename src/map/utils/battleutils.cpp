@@ -5656,24 +5656,24 @@ namespace battleutils
      ************************************************************************/
     void assistTarget(CCharEntity* PChar, uint16 TargID)
     {
-        // get the player we want to assist
-        CBattleEntity* PlayerToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
-        if (PlayerToAssist != nullptr)
+        // get the entity we want to assist
+        CBattleEntity* EntityToAssist = (CBattleEntity*)PChar->GetEntity(TargID, TYPE_MOB | TYPE_PC);
+        if (EntityToAssist != nullptr)
         {
-            if (PlayerToAssist->objtype == TYPE_PC && PlayerToAssist->m_TargID != 0)
+            if (EntityToAssist->objtype == TYPE_PC && EntityToAssist->GetBattleTargetID() != 0)
             {
-                // get that players target (mob,player,pet only)
-                CBattleEntity* EntityToLockon = (CBattleEntity*)PChar->GetEntity(PlayerToAssist->m_TargID, TYPE_MOB | TYPE_PC | TYPE_PET);
+                // get that players engaged target
+                CBattleEntity* EntityToLockon = EntityToAssist->GetBattleTarget();
                 if (EntityToLockon != nullptr)
                 {
                     // lock on to the new target!
                     PChar->pushPacket(new CLockOnPacket(PChar, EntityToLockon));
                 }
             }
-            else if (PlayerToAssist->GetBattleTargetID() != 0)
+            else if (EntityToAssist->GetBattleTargetID() != 0)
             {
                 // lock on to the new target!
-                PChar->pushPacket(new CLockOnPacket(PChar, PlayerToAssist->GetBattleTarget()));
+                PChar->pushPacket(new CLockOnPacket(PChar, EntityToAssist->GetBattleTarget()));
             }
         }
     }
