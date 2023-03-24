@@ -48,4 +48,5 @@ return {
             player:showText(npc, ID.text.RODAILLECE_DIALOG)
         end,
     },
+    ['Vamorcote']    = { event = 651 },
 }
