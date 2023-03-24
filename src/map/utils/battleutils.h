@@ -103,6 +103,7 @@ namespace battleutils
     void LoadMobSkillsList();
     void LoadPetSkillsList();
     void LoadSkillChainDamageModifiers();
+    void LoadDistanceCorrection();
 
     uint8 CheckMultiHits(CBattleEntity* PEntity, CItemWeapon* PWeapon);
 

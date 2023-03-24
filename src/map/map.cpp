@@ -264,6 +264,7 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadMobSkillsList();
     battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
+    battleutils::LoadDistanceCorrection();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
