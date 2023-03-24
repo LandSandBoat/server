@@ -3089,6 +3089,7 @@ xi.items =
     PURPLE_RIBBON                   = 13569,
     RAM_MANTLE                      = 13570,
     NIGHT_CAPE                      = 13576,
+    WHITE_CAPE                      = 13585,
     DHALMEL_MANTLE                  = 13588,
     RAPTOR_MANTLE                   = 13593,
     RABBIT_MANTLE                   = 13594,
