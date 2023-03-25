@@ -77,7 +77,7 @@ quest.sections =
             {
                 [186] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+                        player:needToZone(true) -- Need to zone to trigger A Test of True Love
                     end
                 end,
             },
