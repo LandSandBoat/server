@@ -36,8 +36,8 @@ end
 
 entity.onMobFight = function(mob, target)
     if mob:getTP() == 3000 and mob:getLocalVar("control") == 0 then
-        local shikY = GetMobByID(mob:getID()+1)
-        local shikX = GetMobByID(mob:getID()+2)
+        local shikY = GetMobByID(mob:getID() + 1)
+        local shikX = GetMobByID(mob:getID() + 2)
         local shikYTP = shikY:getLocalVar("TP")
         local shikXTP = shikX:getLocalVar("TP")
         mob:setLocalVar("TP", 1)
@@ -93,17 +93,19 @@ entity.onMobFight = function(mob, target)
 
         -- Shik Z is last alive
         else
-                mob:messageText(mob, dialogue[math.random(1,3)])
+                mob:messageText(mob, dialogue[math.random(1, 3)])
                 mob:setMobMod(xi.mobMod.SKILL_LIST, 1167)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:messageText(mob, ID.text.HOW_IS_THIS_POSSIBLE)
-    -- Reset controls so that remaining shiks don't get locked from weaponskilling
-    GetMobByID(mob:getID()+1):setLocalVar("control", 0)
-    GetMobByID(mob:getID()+2):setLocalVar("control", 0)
+    if optParams.isKiller then
+        mob:messageText(mob, ID.text.HOW_IS_THIS_POSSIBLE)
+        -- Reset controls so that remaining shiks don't get locked from weaponskilling
+        GetMobByID(mob:getID() + 1):setLocalVar("control", 0)
+        GetMobByID(mob:getID() + 2):setLocalVar("control", 0)
+    end
 end
 
 return entity

@@ -1,12 +1,9 @@
 -----------------------------------
--- Area: Northern San d'Oria
---  NPC: Pagisalis
--- Involved In Quest: Enveloped in Darkness
--- !zone 231
+-- Area: Bostaunieux Obliette
+--  NPC: Cell Door
+-- !pos -19.000 -17.899 20.000 167
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
 -----------------------------------
 local entity = {}
 
@@ -19,7 +16,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

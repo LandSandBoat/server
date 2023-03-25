@@ -37,8 +37,6 @@ battlefieldObject.onBattlefieldTick = function(battlefield, tick)
 end
 
 battlefieldObject.onBattlefieldRegister = function(player, battlefield)
-    local promathia = GetMobByID(ID.mob.PROMATHIA_OFFSET + battlefield:getArea())
-    promathia:setLocalVar("spawner", player:getID())
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)

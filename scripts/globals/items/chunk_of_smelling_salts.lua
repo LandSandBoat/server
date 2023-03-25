@@ -21,7 +21,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180, 5320) then
+    if target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180, 0, 0, 0, xi.items.CHUNK_OF_SMELLING_SALTS) then
         local pet = target:getPet()
         -- TODO: Verify targeting and messages are correct
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.MEDICINE)

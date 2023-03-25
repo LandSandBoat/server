@@ -13,14 +13,8 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     if target:isPC() then
         target:sendRaise(3)
-    else
-        if target:getName() == "Prishe" then
-            -- CoP 8-4 Prishe
-            target:setLocalVar("Raise", 1)
-            target:entityAnimationPacket("sp00")
-            target:addHP(target:getMaxHP())
-            target:addMP(target:getMaxMP())
-        end
+    elseif bit.band(target:getBehaviour(), xi.behavior.RAISABLE) == xi.behavior.RAISABLE then
+        target:triggerListener("RAISE_RECEIVED", target, 3)
     end
 
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)

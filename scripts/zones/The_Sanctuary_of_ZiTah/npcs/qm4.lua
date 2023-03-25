@@ -15,24 +15,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK) == QUEST_ACCEPTED and
-        VanadielHour() >= 16 and
-        VanadielHour() <= 18
-    then
-        player:startEvent(204)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 204 then
-        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK, { item = 17346, fame = 120 })
-    end
 end
 
 return entity

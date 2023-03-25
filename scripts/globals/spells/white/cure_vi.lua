@@ -50,6 +50,12 @@ spellObject.onSpellCast = function(caster, target, spell)
         basepower = 0
     end
 
+    -- special case where healing spells should have no effect
+    if target:getMod(xi.mod.CURE_POTENCY_RCVD) == -100 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
+    end
+
     if xi.magic.isValidHealTarget(caster, target) then
         basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)
         final = xi.magic.getCureFinal(caster, spell, basecure, minCure, false)
@@ -111,7 +117,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else
             -- e.g. monsters healing themselves.
-            if (xi.settings.main.USE_OLD_CURE_FORMULA == true) then
+            if xi.settings.main.USE_OLD_CURE_FORMULA then
                 basecure = xi.magic.getBaseCureOld(power, divisor, constant)
             else
                 basecure = xi.magic.getBaseCure(power, divisor, constant, basepower)

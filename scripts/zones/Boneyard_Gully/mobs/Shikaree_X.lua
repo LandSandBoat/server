@@ -33,6 +33,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 695 then
         mob:messageText(mob, ID.text.END_THE_HUNT)
     end
+
     mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
     mob:setLocalVar("control", 0)
     mob:setLocalVar("TP", 0)
@@ -40,8 +41,8 @@ end
 
 entity.onMobFight = function(mob, target)
     if mob:getTP() == 3000 and mob:getLocalVar("control") == 0 then
-        local shikY = GetMobByID(mob:getID()-1)
-        local shikZ = GetMobByID(mob:getID()-2)
+        local shikY = GetMobByID(mob:getID() - 1)
+        local shikZ = GetMobByID(mob:getID() - 2)
         local shikYTP = shikY:getLocalVar("TP")
         local shikZTP = shikZ:getLocalVar("TP")
         mob:setLocalVar("TP", 1)
@@ -110,10 +111,12 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:messageText(mob, ID.text.AT_MY_BEST)
-    -- Reset controls so thatremaining shiks don't get locked from weaponskilling
-    GetMobByID(mob:getID()-1):setLocalVar("control", 0)
-    GetMobByID(mob:getID()-2):setLocalVar("control", 0)
+    if optParams.isKiller then
+        mob:messageText(mob, ID.text.AT_MY_BEST)
+        -- Reset controls so that remaining shiks don't get locked from weaponskilling
+        GetMobByID(mob:getID() - 1):setLocalVar("control", 0)
+        GetMobByID(mob:getID() - 2):setLocalVar("control", 0)
+    end
 end
 
 return entity
