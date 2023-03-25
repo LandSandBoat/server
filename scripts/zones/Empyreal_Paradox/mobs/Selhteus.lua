@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if target:getTarget():getID() ~= mob:getID() then
+    if target:getTarget() and target:getTarget():getID() ~= mob:getID() then
         local targetPos = target:getPos()
         local radians = (256 - targetPos.rot) * (math.pi / 128)
         mob:pathTo(targetPos.x + math.cos(radians) * 16, targetPos.y, targetPos.z + math.sin(radians) * 16)

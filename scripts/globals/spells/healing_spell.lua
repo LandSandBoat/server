@@ -139,6 +139,12 @@ xi.spells.healing.doHealingSpell = function(caster, target, spell, isWhiteMagic)
     -- Clamp on base instead of maxCap. Power can create over-cure
     base = utils.clamp(base, 0, base)
 
+    -- special case where healing spells should have no effect
+    if target:getMod(xi.mod.CURE_POTENCY_RCVD) == -100 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
+    end
+
     if xi.magic.isValidHealTarget(caster, target) then
         final = xi.spells.healing.applyCasterBonuses(caster, base, spell:getElement(), isWhiteMagic)
         final = (final + (final * target:getMod(xi.mod.CURE_POTENCY_RCVD))) * xi.settings.main.CURE_POWER

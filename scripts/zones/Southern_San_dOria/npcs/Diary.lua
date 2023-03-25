@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     local aSquiresTestII = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    local toCureaCough = player:getCharVar("toCureaCough")
+    local toCureaCough = player:getCharVar("Quest[0][20]Prog")
     local diaryPage = player:getCharVar("DiaryPage")
 
     if diaryPage == 0 then

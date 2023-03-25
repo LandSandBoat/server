@@ -12,9 +12,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local id = mob:getID()
-    for i = 1, 3 do
-        GetMobByID(id + i):addMod(xi.mod.DELAY, 1000)
+    if optParams.isKiller then
+        local id = mob:getID()
+        for i = 1, 3 do
+            GetMobByID(id + i):addMod(xi.mod.DELAY, 1000)
+        end
     end
 end
 

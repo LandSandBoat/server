@@ -14,6 +14,12 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     -- TODO: Correct message is "Incorrect job, job level too low, or required ability not activated."  Unable to locate this in our basic or system message functions.
     -- The client blocks the spell via menus, but it can still be cast via text commands, so we have to block it here, albiet with the wrong message.
     if caster:isMob() then
+        -- Promathia has significant fast cast thus need to increase cast time
+        -- to match the retail cast time of 10 seconds
+        if caster:getName() == "Promathia_2" then
+            spell:setCastTime(18000)
+        end
+
         return 0
     elseif caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) then
         return 0
