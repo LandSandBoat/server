@@ -174,13 +174,23 @@ bool CAttack::IsBlocked() const
     return m_isBlocked;
 }
 
+/************************************************************************
+ *                                                                      *
+ *  Gets the Parried flag if set, else calculates a new one and returns.*
+ *                                                                      *
+ ************************************************************************/
 bool CAttack::IsParried()
 {
+    if (m_isParried.has_value())
+    {
+        return m_isParried.value();
+    }
+
     if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN)
     {
-        return attackutils::IsParried(m_attacker, m_victim);
+        m_isParried.emplace(attackutils::IsParried(m_attacker, m_victim));
     }
-    return false;
+    return m_isParried.value_or(false);
 }
 
 bool CAttack::IsAnticipated() const

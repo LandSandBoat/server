@@ -42,8 +42,8 @@ local function getIndexAtPosition(targetChest, typeId, zoneId)
     local targetChestPos = targetChest:getPos()
     for chestId, chestCoords in pairs(treasurePoints) do
         if
-            math.abs(tonumber(chestCoords[1]) - tonumber(targetChestPos['x']) ) < 1 and
-            math.abs(tonumber(chestCoords[3]) - tonumber(targetChestPos['z']) ) < 1
+            math.abs(tonumber(chestCoords[1]) - tonumber(targetChestPos['x'])) < 1 and
+            math.abs(tonumber(chestCoords[3]) - tonumber(targetChestPos['z'])) < 1
         then
             return chestId
         end
@@ -397,7 +397,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("Quest[1][62]Prog", 1)
                         end,
                     },
                 },
@@ -438,7 +438,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("Quest[1][62]Prog", 1)
                         end,
                     },
                 },
@@ -474,7 +474,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LEPHEMERE)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("Quest[1][62]Prog", 1)
                         end,
                     },
                 },
@@ -858,7 +858,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LANCIENNE)
-                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("Quest[1][62]Prog", 1)
                         end,
                     },
                 },
@@ -1171,6 +1171,7 @@ xi.treasure.treasureInfo =
                                 xi.quest.getVar(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD, 'Prog') == 3) and
                                 not player:hasKeyItem(xi.ki.JOKER_CARD)
                         end,
+
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.JOKER_CARD)
                         end,

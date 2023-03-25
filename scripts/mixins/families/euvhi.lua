@@ -27,12 +27,7 @@ local function openFlower(mob)
     mob:setMod(xi.mod.SLASH_SDT, 2000)
     mob:setMod(xi.mod.PIERCE_SDT, 2000)
     mob:setMod(xi.mod.IMPACT_SDT, 2000)
-    for n =1, #xi.magic.resistMod, 1 do
-        mob:setMod(xi.magic.resistMod[n], 25)
-    end
-    for n =1, #xi.magic.defenseMod, 1 do
-        mob:setMod(xi.magic.defenseMod[n], -128) -- 50% more damage from magic
-    end
+    mob:setMod(xi.mod.UDMG, 5000) -- Takes double damage from all sources when open
     mob:setAnimationSub(2)
 end
 
@@ -46,13 +41,9 @@ local function closeFlower(mob)
     mob:setMod(xi.mod.SLASH_SDT, 1000)
     mob:setMod(xi.mod.PIERCE_SDT, 1000)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
-    for n =1, #xi.magic.resistMod, 1 do
-        mob:setMod(xi.magic.resistMod[n], 0)
-    end
-    for n =1, #xi.magic.defenseMod, 1 do
-        mob:setMod(xi.magic.defenseMod[n], 0)
-    end
-    mob:setLocalVar("[euvhi]changeTime", mob:getBattleTime() + math.random(45, 60))
+    mob:setMod(xi.mod.UDMG, 0) -- Takes predicted damage when open
+
+    mob:setLocalVar("[euvhi]changeTime", mob:getBattleTime() + 80) -- Flower will open after 80 seconds
     mob:setAnimationSub(1)
 end
 
@@ -68,6 +59,7 @@ g_mixins.families.euvhi = function(euvhiArg)
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1) -- stem will appear after engaging target
         end
+
         mob:setLocalVar("PhysicalDamage", 0)
         mob:setLocalVar("MagicalDamage", 0)
         mob:setLocalVar("RangedDamage", 0)
@@ -98,9 +90,15 @@ g_mixins.families.euvhi = function(euvhiArg)
 
     euvhiArg:addListener("COMBAT_TICK", "EUVHI_CTICK", function(mob)
         local sum = mob:getLocalVar("PhysicalDamage") + mob:getLocalVar("MagicalDamage") + mob:getLocalVar("RangedDamage") + mob:getLocalVar("BreathDamage")
-        if mob:getAnimationSub() == 2 and sum > 500 then
+        if
+            mob:getAnimationSub() == 2 and
+            sum > 350
+        then
             closeFlower(mob)
-        elseif mob:getAnimationSub() == 1 and mob:getBattleTime() > mob:getLocalVar("[euvhi]changeTime") then
+        elseif
+            mob:getAnimationSub() == 1 and
+            mob:getBattleTime() > mob:getLocalVar("[euvhi]changeTime")
+        then
             openFlower(mob)
         end
     end)
