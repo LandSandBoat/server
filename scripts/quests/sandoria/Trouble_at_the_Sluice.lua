@@ -84,7 +84,8 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DAHLIA) then
+                        npcUtil.tradeHasExactly(trade, xi.items.DAHLIA)
+                    then
                         return quest:progressEvent(17)
                     end
                 end,
@@ -107,7 +108,6 @@ quest.sections =
                 end,
 
                 [17] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 0)
                     player:tradeComplete()
                     npcUtil.giveKeyItem(player, xi.ki.NEUTRALIZER)
                 end,
