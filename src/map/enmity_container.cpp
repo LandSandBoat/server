@@ -233,9 +233,14 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
 
 bool CEnmityContainer::HasID(uint32 TargetID)
 {
-    return std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem)
-                        { return elem.first == TargetID && elem.second.active; }) !=
-           m_EnmityList.end();
+    // clang-format off
+    auto maybeID = std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem)
+    {
+        return elem.first == TargetID && elem.second.active;
+    });
+    // clang-format on
+
+    return maybeID != m_EnmityList.end();
 }
 
 /************************************************************************

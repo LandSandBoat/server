@@ -213,8 +213,12 @@ void CItemEquipment::addLatent(LATENT ConditionsID, uint16 ConditionsValue, Mod 
 
 bool CItemEquipment::delModifier(Mod mod, int16 modValue)
 {
+    // clang-format off
     auto it = std::find_if(modList.begin(), modList.end(), [mod, modValue](const CModifier& compare)
-                           { return compare.getModID() == mod && compare.getModAmount() == modValue; });
+    {
+        return compare.getModID() == mod && compare.getModAmount() == modValue;
+    });
+    // clang-format on
 
     if (it == modList.end())
     {
@@ -227,8 +231,12 @@ bool CItemEquipment::delModifier(Mod mod, int16 modValue)
 
 bool CItemEquipment::delPetModifier(Mod mod, PetModType petType, int16 modValue)
 {
+    // clang-format off
     auto it = std::find_if(petModList.begin(), petModList.end(), [mod, petType, modValue](const CPetModifier& compare)
-                           { return compare.getModID() == mod && compare.getPetModType() == petType && compare.getModAmount() == modValue; });
+    {
+        return compare.getModID() == mod && compare.getPetModType() == petType && compare.getModAmount() == modValue;
+    });
+    // clang-format on
 
     if (it == petModList.end())
     {

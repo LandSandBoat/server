@@ -876,9 +876,14 @@ namespace petutils
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        uint32 petID    = PPet->m_PetID;
+        uint32 petID = PPet->m_PetID;
+
+        // clang-format off
         Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-                                        { return t->PetID == petID; });
+        {
+            return t->PetID == petID;
+        });
+        // clang-format on
 
         uint8 mLvl = PMaster->GetMLevel();
 
@@ -1051,9 +1056,14 @@ namespace petutils
 
     void CalculateJugPetStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        uint32 petID    = PPet->m_PetID;
+        uint32 petID = PPet->m_PetID;
+
+        // clang-format off
         Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-                                        { return t->PetID == petID; });
+        {
+            return t->PetID == petID;
+        });
+        // clang-format on
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
@@ -1683,8 +1693,12 @@ namespace petutils
         XI_DEBUG_BREAK_IF(PMaster == nullptr);
         XI_DEBUG_BREAK_IF(PetID >= MAX_PETID);
 
+        // clang-format off
         Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
-                                        { return t->PetID == PetID; });
+        {
+            return t->PetID == PetID;
+        });
+        // clang-format on
 
         if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
         {
