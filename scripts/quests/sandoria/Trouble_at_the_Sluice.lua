@@ -82,7 +82,8 @@ quest.sections =
             {
 
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, 'Prog') == 2 and
+                    if
+                        quest:getVar(player, 'Prog') == 2 and
                         npcUtil.tradeHasExactly(trade, xi.items.DAHLIA) then
                         return quest:progressEvent(17)
                     end
