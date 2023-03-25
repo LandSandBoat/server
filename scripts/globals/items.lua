@@ -4126,6 +4126,7 @@ xi.items =
     GERWITZS_AXE                    = 16681,
     KABRAKANS_AXE                   = 16684,
     BUTTERFLY_AXE                   = 16704,
+    HEAVY_AXE                       = 16706,
     NECKCHOPPER                     = 16714,
     EXECUTIONER                     = 16723,
     FORSETIS_AXE                    = 16726,

@@ -1,12 +1,13 @@
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 
 return {
-    ['Abeaule']    = { text = ID.text.ABEAULE_DIALOG_THANKS },
-    ['Abioleget']  = { text = ID.text.ABIOLEGET_DIALOG },
-    ['Ailbeche']   = { event = 868 },
-    ['Bacherume']  = { text = ID.text.BACHERUME_DIALOG },
-    ['Chasalvige'] = { event = 6 },
-    ['Eperdur']    = { event = 678 },
+    ['Abeaule']     = { text = ID.text.ABEAULE_DIALOG_THANKS },
+    ['Abioleget']   = { text = ID.text.ABIOLEGET_DIALOG },
+    ['Ailbeche']    = { event = 868 },
+    ['Bacherume']   = { text = ID.text.BACHERUME_DIALOG },
+    ['Belgidiveau'] = { event = 585 },
+    ['Chasalvige']  = { event = 6 },
+    ['Eperdur']     = { event = 678 },
     ['Gilipese']   =
     {
         onTrigger = function(player, npc)
