@@ -32,18 +32,24 @@ local function surface(mob)
 end
 
 local function openMouth(mob)
-    mob:addMod(xi.mod.ATTP, 100)
-    mob:addMod(xi.mod.DEFP, -50)
-    mob:addMod(xi.mod.DMGMAGIC, -5000)
+    -- Double the mob weapon damage
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 200)
+    -- Boost all damage taken by 100%
+    mob:setMod(xi.mod.UDMGPHYS, 10000)
+    mob:setMod(xi.mod.UDMGRANGE, 10000)
+    mob:setMod(xi.mod.UDMGMAGIC, 10000)
+    mob:setMod(xi.mod.UDMGBREATH, 10000)
     mob:setLocalVar("[hpemde]closeMouthHP", mob:getHP() - math.ceil(mob:getMaxHP() / 3))
     mob:setAnimationSub(3)
     mob:wait(2000)
 end
 
 local function closeMouth(mob)
-    mob:delMod(xi.mod.ATTP, 100)
-    mob:delMod(xi.mod.DEFP, -50)
-    mob:delMod(xi.mod.DMGMAGIC, -5000)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 100)
+    mob:setMod(xi.mod.UDMGPHYS, 0)
+    mob:setMod(xi.mod.UDMGRANGE, 0)
+    mob:setMod(xi.mod.UDMGMAGIC, 0)
+    mob:setMod(xi.mod.UDMGBREATH, 0)
     mob:setLocalVar("[hpemde]changeTime", mob:getBattleTime() + 30)
     mob:setAnimationSub(6)
     mob:wait(2000)
