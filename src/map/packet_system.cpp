@@ -1267,13 +1267,16 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     const uint8 HEADER_LENGTH = 4;
 
+    // clang-format off
     std::vector<char> chars;
     std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
-                  {
+    {
         if (isascii(ch) && ch != '\0')
         {
             chars.emplace_back(ch);
-        } });
+        }
+    });
+    // clang-format on
     auto str = std::string(chars.begin(), chars.end());
     luautils::OnPlayerVolunteer(PChar, str);
 }
