@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -7059,7 +7059,7 @@ namespace battleutils
         return 1.0;
     }
 
-    bool TryProcTreasureHunter(CCharEntity* PChar, CMobEntity* PMob, CAttackRound* attackRound, bool feintApplied)
+    uint8 TryProcTreasureHunter(CCharEntity* PChar, CMobEntity* PMob, CAttackRound* attackRound, bool feintApplied)
     {
         // The Treasure Hunter proc system was introduced in the December 2010 update and applies to players using Thief main job, as well as the Ranger job ability Bounty Shot.
         // https://www.bg-wiki.com/ffxi/Treasure_Hunter
@@ -7099,7 +7099,13 @@ namespace battleutils
             rate *= 1 + (PChar->getMod(Mod::AUGMENTS_FEINT) * 0.25) - 0.25;
         }
 
-        return xirand::GetRandomNumber(1, 100) <= std::clamp<uint8>(rate, 1, 100);
+        // Roll!
+        if (xirand::GetRandomNumber(1, 100) <= std::clamp<uint8>(rate, 1, 100))
+        {
+            return thCap + 1;
+        }
+
+        return thCap;
     }
 
 }; // namespace battleutils

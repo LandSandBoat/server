@@ -2283,18 +2283,22 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             actionTarget.param = 0;
         }
 
-        if (this->objtype == TYPE_PC &&
-            PTarget->objtype == TYPE_MOB &&
-            GetMJob() == JOB_THF &&
-            attack.IsFirstSwing())
+        // The Treasure Hunter proc system was introduced in the December 2010 update and applies to players using Thief main job, as well as the Ranger job ability Bounty Shot.
+        if (!settings::get<bool>("main.DISABLE_TREASURE_HUNTER_PROC"))
         {
-            auto* PChar = static_cast<CCharEntity*>(this);
-            auto* PMob  = static_cast<CMobEntity*>(PTarget);
-            if (uint8 newTHLevel = battleutils::TryProcTreasureHunter(PChar, PMob, &attackRound, feintApplied))
+            if (this->objtype == TYPE_PC &&
+                PTarget->objtype == TYPE_MOB &&
+                GetMJob() == JOB_THF &&
+                attack.IsFirstSwing())
             {
-                actionTarget.additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
-                actionTarget.addEffectMessage = MSGBASIC_TREASURE_HUNTER_UP;
-                actionTarget.addEffectParam   = newTHLevel;
+                auto* PChar = static_cast<CCharEntity*>(this);
+                auto* PMob  = static_cast<CMobEntity*>(PTarget);
+                if (uint8 newTHLevel = battleutils::TryProcTreasureHunter(PChar, PMob, &attackRound, feintApplied))
+                {
+                    actionTarget.additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
+                    actionTarget.addEffectMessage = MSGBASIC_TREASURE_HUNTER_UP;
+                    actionTarget.addEffectParam   = newTHLevel;
+                }
             }
         }
 

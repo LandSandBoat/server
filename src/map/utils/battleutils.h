@@ -272,7 +272,7 @@ namespace battleutils
     void           ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered);
     float          CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType);
 
-    bool TryProcTreasureHunter(CCharEntity* PChar, CMobEntity* PMob, CAttackRound* attackRound, bool feintApplied);
+    uint8 TryProcTreasureHunter(CCharEntity* PChar, CMobEntity* PMob, CAttackRound* attackRound, bool feintApplied);
 }; // namespace battleutils
 
 #endif
