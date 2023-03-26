@@ -10824,6 +10824,10 @@ void CLuaBaseEntity::clearEnmity(CLuaBaseEntity* PEntity)
     {
         auto* PBattleEntity = static_cast<CBattleEntity*>(PEntity->m_PBaseEntity);
         PMob->PEnmityContainer->Clear(PBattleEntity->id);
+        if (PEntity->getPet().has_value())
+        {
+            PMob->PEnmityContainer->Clear(PEntity->getPet().value().getID());
+        }
         auto* PTarget = PMob->PEnmityContainer->GetHighestEnmity();
         PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
     }
