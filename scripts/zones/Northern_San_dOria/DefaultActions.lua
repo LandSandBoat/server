@@ -29,6 +29,7 @@ return {
     ['Kasaroro']   = { event = 548 },
     ['Maurinne']   = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']    = { event = 517 },
+    ['Narcheral']  = { event = 688 },
     ['Nouveil']    = { event = 574 },
     ['Pepigort']   = { text = ID.text.PEPIGORT_DIALOG },
     ['Rodaillece'] =

@@ -35,6 +35,7 @@ zones[xi.zone.VALKURM_DUNES] =
         SIGNPOST2                      = 7370,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands West: Selbina
         SIGNPOST1                      = 7371,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands Southwest: Selbina
         CONQUEST                       = 7381,  -- You've earned conquest points!
+        FOUL_PRESENSE                  = 7715,  -- You sense a foul presense.
         AN_EMPTY_LIGHT_SWIRLS          = 7770,  -- An empty light swirls about the cave, eating away at the surroundings...
         GARRISON_BASE                  = 7772,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         RETURN_TO_SEA                  = 7823,  -- You return the <item> to the sea.
