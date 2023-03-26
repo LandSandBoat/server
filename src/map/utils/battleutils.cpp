@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -7092,8 +7092,12 @@ namespace battleutils
         // If SA or TA landed, the rate is 10x
         rate *= attackRound->GetSATAOccured() ? 10 : 1;
 
-        // If Feint landed, the rate is doubled
-        rate *= feintApplied ? 2 : 1;
+        // Each merit after the first increases the chance of Treasure Hunter level up by 25 percent.
+        auto feintMod = PChar->getMod(Mod::AUGMENTS_FEINT);
+        if (feintApplied && feintMod > 1)
+        {
+            rate *= 1 + (PChar->getMod(Mod::AUGMENTS_FEINT) * 0.25) - 0.25;
+        }
 
         return xirand::GetRandomNumber(1, 100) <= std::clamp<uint8>(rate, 1, 100);
     }
