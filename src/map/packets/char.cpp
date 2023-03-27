@@ -92,10 +92,10 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint32>(0x20) = PChar->nameflags.flags;
                 ref<uint8>(0x21) |= PChar->GetGender() * 128 + (1 << PChar->look.size);
 
-                // if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
-                //{
-                //  ref<uint8>(data,(0x22)) = 0x20;
-                //}
+                if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
+                {
+                    ref<uint8>(0x2A) |= 0x20;
+                }
 
                 if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
                 {
