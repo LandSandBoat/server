@@ -18,7 +18,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENMITY_BOOST, 10, 0, 180, 0, 0, 0, xi.items.NARUKO_EARRING)
+    if target:hasEquipped(xi.items.NARUKO_EARRING) then
+        target:addStatusEffect(xi.effect.ENMITY_BOOST, 10, 0, 180, 0, 0, 0, xi.items.NARUKO_EARRING)
+    end
 end
 
 return itemObject

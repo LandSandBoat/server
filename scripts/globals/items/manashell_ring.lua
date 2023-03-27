@@ -19,7 +19,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.MAX_MP_BOOST, 9, 0, 180, 0, 0, 0, xi.items.MANASHELL_RING)
+    if target:hasEquipped(xi.items.MANASHELL_RING) then
+        target:addStatusEffect(xi.effect.MAX_MP_BOOST, 9, 0, 180, 0, 0, 0, xi.items.MANASHELL_RING)
+    end
 end
 
 return itemObject

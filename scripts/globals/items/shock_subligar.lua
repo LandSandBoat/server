@@ -9,11 +9,6 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.SHOCK_SPIKES)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.SHOCK_SUBLIGAR then
-        target:delStatusEffect(xi.effect.SHOCK_SPIKES)
-    end
-
     return 0
 end
 

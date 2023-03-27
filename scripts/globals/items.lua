@@ -3732,6 +3732,7 @@ xi.items =
     VALOR_CAPE                      = 15481,
     BARDS_CAPE                      = 15482,
     SUMMONERS_CAPE                  = 15484,
+    BREATH_MANTLE                   = 15486,
     HIGH_BREATH_MANTLE              = 15487,
     GUNNERS_MANTLE                  = 15488,
     STORM_CAPE                      = 15489,

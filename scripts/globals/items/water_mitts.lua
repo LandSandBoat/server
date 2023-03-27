@@ -6,11 +6,6 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENWATER)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.WATER_MITTS then
-        target:delStatusEffect(xi.effect.ENWATER)
-    end
-
     return 0
 end
 

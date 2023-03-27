@@ -9,16 +9,17 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.HYDRA_MITTENS then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.HYDRA_MITTENS) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.HYDRA_MITTENS)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.items.HYDRA_MITTENS)
+    if target:hasEquipped(xi.items.HYDRA_MITTENS) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.items.HYDRA_MITTENS)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)
