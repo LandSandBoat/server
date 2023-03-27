@@ -63,7 +63,7 @@ public:
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask) override;
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;
 
-    virtual void ZoneServer(time_point tick, bool check_regions) override;
+    virtual void ZoneServer(time_point tick) override;
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> func) override;
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func) override;

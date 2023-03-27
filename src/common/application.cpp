@@ -64,7 +64,16 @@ Application::Application(std::string serverName, int argc, char** argv)
     ShowInfo("The %s-server is ready to work...", serverName);
     ShowInfo("=======================================================================");
 
+    // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
+
+    gConsoleService->RegisterCommand("exit", "Terminate the program.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::print("> Goodbye!\n");
+        m_RequestExit = true;
+    });
+    // clang-format on
 }
 
 bool Application::IsRunning()
