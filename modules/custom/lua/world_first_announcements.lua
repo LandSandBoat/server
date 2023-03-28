@@ -24,32 +24,90 @@ require("scripts/globals/status")
 -----------------------------------
 local m = Module:new("world_first_announcements")
 
-local openingDecoration = "\129\154"
-local closingDecoration = "\129\154"
+xi = xi or {}
+xi.world_first = xi.world_first or {}
 
-local checkWorldFirstServerVar = function(player, varName, worldMessage)
+--[[************************************************************************
+                         Settings example
+****************************************************************************
+    xi.world_first_announcements = {
+        -- Summon big swirly starry animation which lingers on the players client in the location
+        -- where this event happened. It will linger in that area for anyone that saw it until
+        -- they zone.
+        ANIMATION =
+        {
+            ENABLED = true,
+            ID      = 12,
+            MODE    = 3,
+        },
+
+        DECORATION =
+        {
+            OPENING = "\129\154",
+            CLOSING = "\129\154",
+        },
+    }
+**************************************************************************]]
+
+-- Default settings
+xi.world_first.settings =
+{
+    ANIMATION =
+    {
+        ENABLED = false,
+        ID      = 12,
+        MODE    = 3,
+    },
+
+    DECORATION =
+    {
+        OPENING = "\129\154",
+        CLOSING = "\129\154",
+    },
+}
+
+if xi.settings[m.name] then
+    if xi.settings[m.name].ANIMATION then
+        xi.world_first.settings.ANIMATION.ENABLED  = xi.settings[m.name].ANIMATION.ENABLED
+        xi.world_first.settings.ANIMATION.ID       = xi.settings[m.name].ANIMATION.ID
+        xi.world_first.settings.ANIMATION.MODE     = xi.settings[m.name].ANIMATION.MODE
+    end
+
+    if xi.settings[m.name].DECORATION then
+        xi.world_first.settings.DECORATION.OPENING = xi.settings[m.name].DECORATION.OPENING
+        xi.world_first.settings.DECORATION.CLOSING = xi.settings[m.name].DECORATION.CLOSING
+    end
+end
+
+xi.world_first.checkServerVar = function(player, varName, worldMessage, opening, closing)
     local worldFirst = string.format("WF_%s", varName)
     local worldTime  = string.format("WT_%s", varName)
 
     if GetVolatileServerVariable(worldFirst) == 0 then -- Record hasn't been set yet
-        local decoratedMessage = string.format("%s %s %s", openingDecoration, worldMessage, closingDecoration)
+        local decoratedMessage = string.format(
+            "%s %s %s",
+            opening or xi.world_first.settings.DECORATION.OPENING,
+            worldMessage,
+            closing or xi.world_first.settings.DECORATION.CLOSING
+        )
+
         player:PrintToArea(decoratedMessage, xi.msg.channel.SYSTEM_3, 0, "") -- Sends announcement via ZMQ to all processes and zones
 
         -- Write out World First (WF) and World First Time (WT) to server vars)
         SetVolatileServerVariable(worldFirst, player:getID())
         SetVolatileServerVariable(worldTime, os.time())
 
-        -- Summon big swirly starry animation which lingers on the players client in the location
-        -- where this event happened. It will linger in that area for anyone that saw it until
-        -- they zone.
-        -- player:independentAnimation(player, 12, 3)
+        -- Display animation at player (if enabled)
+        if xi.world_first.settings.ANIMATION.ENABLED then
+            player:independentAnimation(player, xi.world_first.settings.ANIMATION.ID, xi.world_first.settings.ANIMATION.MODE)
+        end
     end
 end
 
 m:addOverride("xi.player.onPlayerDeath", function(player)
     super(player)
 
-    checkWorldFirstServerVar(player,
+    xi.world_first.checkServerVar(player,
         "PLAYER_DEATH",
         string.format("%s has been the first player to die!", player:getName()))
 end)
@@ -57,14 +115,14 @@ end)
 m:addOverride("xi.player.onPlayerLevelUp", function(player)
     super(player)
 
-    checkWorldFirstServerVar(player,
+    xi.world_first.checkServerVar(player,
         "PLAYER_LEVEL_UP",
         string.format("%s has been the first player to level up!", player:getName()))
 
     local levelMilestones = { 10, 20, 30, 40, 50, 60, 70, 75, 80, 90, 99 }
     for _, level in pairs(levelMilestones) do
         if player:getMainLvl() == level then
-            checkWorldFirstServerVar(player,
+            xi.world_first.checkServerVar(player,
                 string.format("JOB_%u_%s", level, xi.jobNames[player:getMainJob()][1]),
                 string.format("%s has been the first player to reach level %u on %s!", player:getName(), level, xi.jobNames[player:getMainJob()][2]))
         end
@@ -74,7 +132,7 @@ end)
 m:addOverride("xi.player.onPlayerLevelDown", function(player)
     super(player)
 
-    checkWorldFirstServerVar(player,
+    xi.world_first.checkServerVar(player,
         "PLAYER_LEVEL_DOWN",
         string.format("%s has been the first player to level down!", player:getName()))
 end)
@@ -84,7 +142,7 @@ m:addOverride("xi.mob.onMobDeathEx", function(mob, player, isKiller, isWeaponSki
 
     if mob:isNM() and isKiller then
         local nmName, _ = string.gsub(mob:getName(), "_", " ")
-        checkWorldFirstServerVar(player,
+        xi.world_first.checkServerVar(player,
             "NM_KILL_" .. string.upper(mob:getName()),
             string.format("%s has been killed for the first time by %s!", nmName, player:getName()))
     end
