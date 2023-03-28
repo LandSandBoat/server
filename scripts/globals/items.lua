@@ -393,6 +393,7 @@ xi.items =
     REGAL_DIE                       = 1092,
     ANTIQUE_COIN                    = 1093,
     NAIL_PULLER                     = 1094,
+    WELL_WEIGHT                     = 1095,
     PARASITE_SKIN                   = 1099,
     XALMO_FEATHER                   = 1100,
     MOTTLED_QUADAV_EGG              = 1101,
