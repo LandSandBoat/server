@@ -7176,6 +7176,9 @@ INSERT INTO `mob_pools` VALUES (20013,'Land_Pugil_BE','Land_Pugil_BE',197,0x0000
 INSERT INTO `mob_pools` VALUES (20014,'Lemures','Lemures',121,0x0000700100000000000000000000000000000000,4,4,12,240,100,0,1,0,0,0,0,0,396,133,0,0,28,0,0,121,121);
 INSERT INTO `mob_pools` VALUES (20015,'Thousand_Eyes_KRT','Thousand_Eyes_KRT',139,0x0000800100000000000000000000000000000000,4,4,12,280,100,0,1,0,0,0,0,0,112,133,0,0,10,0,0,139,139);
 
+-- More mobs with different aggro and linking behaviors in diff zones
+INSERT INTO `mob_pools` VALUES (20016,'Diatryma','Diatryma',125,0x0000500100000000000000000000000000000000,1,1,11,240,100,0,0,0,1,0,0,0,680,131,0,0,0,0,0,125,125);
+
 -- End of AirSkyBoat section
 -- ------------------------------------------------------------
 
