@@ -9612,7 +9612,7 @@ INSERT INTO `mob_droplist` VALUES (1168,0,0,1000,17017,@UNCOMMON); -- Pet Food B
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17860,350);   -- Jug of Carrot Broth (Group 1 - 35%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17864,250);   -- Jug of Herbal Broth (Group 1 - 25%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17876,100);   -- Jug of Fish Broth (Group 1 - 10%)
-INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17920,100);   -- Jug of Meat Broth (Group 1 - 10%)
+INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17870,100);   -- Jug of Meat Broth (Group 1 - 10%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17872,100);   -- Jug of Tree Sap (Group 1 - 10%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17867,50);    -- Jug of Cold Carrion Broth (Group 1 - 5%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17877,50);    -- Jug of Fish Oil Broth (Group 1 - 5%)
