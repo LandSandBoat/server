@@ -3848,7 +3848,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima_Phase5',1196,1521); -- armor
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima_Phase5',1196,1522); -- energy_screen
 INSERT INTO `mob_skill_lists` VALUES ('Proto-Ultima_Phase5',1196,1523); -- mana_screen
 
--- Next available ID: 1190
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3648); -- august_melee_sword
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3649); -- august_melee_axe
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3650); -- august_melee_h2h
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3651); -- august_melee_bow
+
+-- Next available ID: 1198
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
