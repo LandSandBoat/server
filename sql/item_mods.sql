@@ -19755,6 +19755,7 @@ INSERT INTO `item_mods` VALUES (14074,23,12); -- ATT: 12
 -- Andvaranauts
 INSERT INTO `item_mods` VALUES (14075,1,12);  -- DEF: 12
 INSERT INTO `item_mods` VALUES (14075,12,-7); -- INT: -7
+INSERT INTO `item_mods` VALUES (14075,897,1); -- GILFINDER: 1
 
 -- Hecatomb Mittens
 INSERT INTO `item_mods` VALUES (14076,1,25);     -- DEF: 25
