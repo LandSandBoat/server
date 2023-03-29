@@ -1388,6 +1388,9 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ID = 52502;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Dark Bronze Ingot' AND ID = 13511;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Lt. Steel Sheet' AND ID = 11529;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Lt. Steel Sheet' AND ID = 11534;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44539;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44541;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44545;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1873,9 +1876,6 @@ UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Lynx Mantle' 
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Khromated Leather' AND ID = 44036;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Khromated Leather' AND ID = 44039;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Peiste Mantle' AND ID = 44530;
-UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Griffon Leather' AND ID = 44539;
-UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Griffon Leather' AND ID = 44541;
-UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Griffon Leather' AND ID = 44545;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ID = 45007;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ID = 52022;
 UPDATE `synth_recipes` SET ContentTag = 'WOTG' WHERE ResultName = 'Darksteel Jambiya' AND ID = 53005;
