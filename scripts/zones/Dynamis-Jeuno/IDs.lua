@@ -103,9 +103,6 @@ zones[xi.zone.DYNAMIS_JEUNO] =
             [17547512] = { trade = { { item = 3394, mob = 17547496 } } }, -- Scourquix Scaleskin
             [17547513] = { trade = { { item = 3395, mob = 17547498 } } }, -- Wilywox Tenderpalm
         },
-
-    SCRUFFIX_SHAGGYCHEST_PH      = { [17547481] = 17547485 }, -- Vanguard_Armorer
-
     },
 }
 
