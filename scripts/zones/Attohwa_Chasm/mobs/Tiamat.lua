@@ -84,7 +84,6 @@ entity.flight = function(mob)
     mob:setLocalVar("changeTime", os.time() + 120)
 end
 
-
 entity.onMobFight = function(mob, target)
     local drawInTableNorth =
     {
