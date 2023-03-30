@@ -91,7 +91,7 @@ struct MeritCategoryInfo_t
 };
 
 static const MeritCategoryInfo_t meritCatInfo[] = {
-    { 3, 45, 0 },   // MCATEGORY_HP_MP       catNumber 00
+    { 3, 75, 0 },   // MCATEGORY_HP_MP       catNumber 00 (HP 15, MP 15, Max_merits 45)
     { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
     { 19, 152, 2 }, // MCATEGORY_COMBAT      catNumber 02
     { 14, 112, 4 }, // MCATEGORY_MAGIC       catNumber 03

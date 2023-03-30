@@ -1,31 +1,25 @@
 -----------------------------------
--- Area: Escha - Zi'Tah Island (288)
---  NPC: Eschan Portal #1
--- !pos --344.275 1.659 -182.613 288
+-- Area: Escha - Zi'Tah (288)
+-- NPC: Eschan Portal #3
+-- !pos -261 0.67 -15 288
 -----------------------------------
-local ID = require("scripts/zones/Escha_ZiTah/IDs")
+require("scripts/globals/teleports/eschan_portals")
 -----------------------------------
 local entity = {}
--- Cost will end up being double, since onEventUpdate triggers twice
-local warpCost = 25 
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local beads = player:getCurrency("escha_beads")
-    player:startEvent(9100, 0, 2046820351, 288, 2, 0, beads, 50, 0)
-	player:PrintToPlayer("WARNING: You are about to consume escha beads, not silt.", xi.msg.channel.SYSTEM)
+    xi.escha.portals.eschanPortalOnTrigger(player, npc, 2)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    local beads = player:getCurrency("escha_beads")
-    if option > 0 then
-	    player:setCurrency("escha_beads", beads - warpCost)
-	end
+    xi.escha.portals.eschanPortalEventUpdate(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.escha.portals.eschanPortalEventFinish(player, csid, option, npc)
 end
 
 return entity

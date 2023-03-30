@@ -2800,6 +2800,9 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
             PChar->teleport.waypoints.access[index] |= (1 << setBit);
         }
         break;
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            PChar->teleport.eschanPortal |= bit;
+            break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
@@ -2862,6 +2865,9 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& abysseaRegionO
 
             return PChar->teleport.abysseaConflux[abysseaRegion];
         }
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            return PChar->teleport.eschanPortal;
+            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
@@ -13618,6 +13624,36 @@ bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
 }
 
 /************************************************************************
+ *  Function: addImmunity()
+ *  Purpose : Adds any immunity
+ *  Example : mob:addImmunity(xi.immunity.SILENCE)
+ ************************************************************************/
+
+void CLuaBaseEntity::addImmunity(uint32 immunityID)
+{
+    auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PEntity)
+    {
+        PEntity->m_Immunity |= immunityID;
+    }
+}
+
+/************************************************************************
+ *  Function: delImmunity()
+ *  Purpose : Delete any immunity
+ *  Example : mob:delImmunity(xi.immunity.SILENCE)
+ ************************************************************************/
+
+void CLuaBaseEntity::delImmunity(uint32 immunityID)
+{
+    auto PEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PEntity)
+    {
+        PEntity->m_Immunity &= ~immunityID;
+    }
+}
+
+/************************************************************************
  *  Function: setAggressive()
  *  Purpose : Toggle a Mob to an aggressive or passive state
  *  Example : mob:setAggressive(true)
@@ -15763,6 +15799,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("hasTrait", CLuaBaseEntity::hasTrait);
     SOL_REGISTER("hasImmunity", CLuaBaseEntity::hasImmunity);
+    SOL_REGISTER("addImmunity", CLuaBaseEntity::addImmunity);
+    SOL_REGISTER("delImmunity", CLuaBaseEntity::delImmunity);
 
     SOL_REGISTER("setAggressive", CLuaBaseEntity::setAggressive);
     SOL_REGISTER("setTrueDetection", CLuaBaseEntity::setTrueDetection);

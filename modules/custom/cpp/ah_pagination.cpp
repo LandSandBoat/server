@@ -93,7 +93,7 @@ class AHPaginationModule : public CPPModule
                 }
                 else
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0)); // try again in a little while msg
+                    PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0, 0, 0)); // try again in a little while msg
                 }
             }
             else // Otherwise, call original handler

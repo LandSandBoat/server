@@ -26799,7 +26799,7 @@ INSERT INTO `item_mods` VALUES (15365,2,12);   -- HP: 12
 INSERT INTO `item_mods` VALUES (15365,9,5);    -- DEX: 5
 INSERT INTO `item_mods` VALUES (15365,11,5);   -- AGI: 5
 INSERT INTO `item_mods` VALUES (15365,108,10); -- EVASION: 10
-INSERT INTO `item_mods` VALUES (15365,362,10); -- JUMP_ATT_BONUS: 15
+INSERT INTO `item_mods` VALUES (15365,362,15); -- JUMP_ATT_BONUS: 15
 
 -- Evokers Pigaches +1
 INSERT INTO `item_mods` VALUES (15366,1,10);  -- DEF: 10
