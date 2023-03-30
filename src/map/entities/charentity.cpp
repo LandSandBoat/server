@@ -678,8 +678,13 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
         return;
     }
 
+    // clang-format off
     auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust)
-                                { return PTrust == trust; });
+    {
+        return PTrust == trust;
+    });
+    // clang-format on
+
     if (trustIt != PTrusts.end())
     {
         if (PTrust->animation == ANIMATION_DESPAWN)

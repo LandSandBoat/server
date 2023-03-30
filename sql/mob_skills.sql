@@ -3479,10 +3479,10 @@ INSERT INTO `mob_skills` VALUES (3644,266,'ruthlessness',0,7.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (3645,268,'inexorable_strike',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3646,267,'self-aggrandizement',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3647,82,'merciless_strike',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3648,409,'',0,7.0,2000,1500,4,0,0,0,0,0,0); -- August
-INSERT INTO `mob_skills` VALUES (3649,410,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3650,411,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3651,412,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3648,2457,'august_melee_sword',0,7.0,2000,0,4,4,0,0,0,0,0); -- August
+INSERT INTO `mob_skills` VALUES (3649,2458,'august_melee_axe',0,7.0,2000,0,4,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3650,2459,'august_melee_h2h',0,7.0,2000,0,4,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3651,2460,'august_melee_bow',0,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3652,413,'daybreak',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3653,414,'tartaric_sigil',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3654,415,'null_field"',0,7.0,2000,1500,4,0,0,0,0,0,0);

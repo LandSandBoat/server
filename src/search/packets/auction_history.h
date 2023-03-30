@@ -27,7 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CAHHistoryPacket
 {
 public:
-    CAHHistoryPacket(uint16 ItemID);
+    CAHHistoryPacket(ahItem item, uint8 stack);
 
     void AddItem(ahHistory* item);
 

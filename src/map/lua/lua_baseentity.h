@@ -776,6 +776,8 @@ public:
 
     bool hasTrait(uint16 traitID);
     bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
+    void addImmunity(uint32 immunityID); // Adds immunity to an entity
+    void delImmunity(uint32 immunityID); // Deletes immunity from an entity
 
     void setAggressive(bool aggressive);
     void setTrueDetection(bool truedetection);
