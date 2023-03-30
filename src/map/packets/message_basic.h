@@ -166,6 +166,9 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_ROE_TIMED    = 705, // You have undertaken the timed record X.
     MSGBASIC_ROE_RECORD   = 697, // Records of Eminence: <record>.
     MSGBASIC_ROE_PROGRESS = 698, // Progress: <amount>/<amount>.
+    /* Merits */
+    MSGBASIC_MERIT_INCREASE = 380, // Your <merit> modification has risen to level <level>
+    MSGBASIC_MERIT_DECREASE = 381, // Your <merit> modification has dropped to level <level>
     /* DEBUG MESSAGES */
     MSGBASIC_DEBUG_RESISTED_SPELL   = 66, /* Debug: Resisted spell! */
     MSGBASIC_DEBUG_RECEIVED_STATUS  = 73, /* Debug: <target>'s status is now .. */
