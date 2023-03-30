@@ -389,10 +389,10 @@ entity.onEventFinish = function(player, csid, option)
         local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
         local unlockedAttachments = getHeadMask(player)
 
-        if (attachmentStatus == 12 or attachmentStatus == 13) then
+        if attachmentStatus == 12 then
             player:unlockAttachment(xi.items.SOULSOOTHER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SOULSOOTHER_UNLOCK)
-        elseif attachmentStatus == 14 then
+        elseif attachmentStatus == 13 then
             player:unlockAttachment(xi.items.SPIRITREAVER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SPIRITREAVER_UNLOCK)
         elseif attachmentStatus == 14 and unlockedAttachments == 30 then

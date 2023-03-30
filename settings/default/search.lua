@@ -12,10 +12,10 @@ xi.settings = xi.settings or {}
 xi.settings.search =
 {
     -- After EXPIRE_DAYS, will listed auctions expire?
-    EXPIRE_AUCTIONS = false,
+    EXPIRE_AUCTIONS = true,
 
     -- Expire items older than this number of days
-    EXPIRE_DAYS = 365,
+    EXPIRE_DAYS = 30,
 
     -- Interval is in seconds, default is one hour
     EXPIRE_INTERVAL = 3600,
