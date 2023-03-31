@@ -1457,6 +1457,7 @@ xi.items =
     VEYDAL_WRASSE                   = 5141,
     SLICE_OF_BUFFALO_MEAT           = 5152,
     JAR_OF_GROUND_WASABI            = 5164,
+    BOWL_OF_ADAMANTOISE_SOUP        = 5210,
     PITCHER_OF_HOMEMADE_HERBAL_TEA  = 5221,
     BOWL_OF_HOMEMADE_STEW           = 5222,
     CONE_OF_HOMEMADE_GELATO         = 5223,
