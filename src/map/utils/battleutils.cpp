@@ -4301,7 +4301,7 @@ namespace battleutils
             return false;
         };
 
-        auto checkTrusts = [&](CBattleEntity* PEntity, float& closestDistance ) -> CBattleEntity*
+        auto checkTrusts = [&](CBattleEntity* PEntity, float& closestDistance) -> CBattleEntity*
         {
             if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
             {
