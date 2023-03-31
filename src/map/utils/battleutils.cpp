@@ -4225,19 +4225,14 @@ namespace battleutils
     }
 
     /*
-     * Find if any party members are in position for trick attack.  Do this by making a narrow triangle:
-     *  one endpoint at the mob, and the other two endpoints being equidistant from the TA user, perpendicular to
-     *  the line between the mob and the TA user.  Find the slope of the line between the TA user and the mob, and
-     *  decide whether to use x or z as the dependent variable (to avoid big numbers and divide by 0 errors on
-     *  vertical slopes).  Using this slope, we can find the angle of the perpendicular line to the x or z line
-     *  (depending on what the dependent var is), and using that angle, the disassembled x and z components to that
-     *  line.  Divide those by 2 for a half yalm length line for each side of the base of the triangle, and we get
-     *  the min and max values for x/z around the TA user.  Now it's simply a matter of first: making sure the
-     *  TA target is closer than the TA user, and that the TA targets x and z coordinates fall within the triangle
-     *  we made.  Using the min/max points and the mobs coordinate, we can construct min and max slopes, check that
-     *  the x or z coordinates are between the mob and player, and finally calculate where the z coordinate should
-     *  be based on the users x coordinate (or the other way around in a z dependent scenario) and check if the
-     *  actual z coordinate is between those two values.
+     * Find if any party members are in position for trick attack. Uses diamond angles as a
+     * fast, non-trig implementation with low loss of accuracy, https://stackoverflow.com/a/14675998
+     * for more info. Calculates the diamond angle for the vectors from the mob to the TA
+     * user and a potential TA partner, subtracting the latter from the former to determine
+     * the angle between their vectors which can be used to check if the  TA user is +/-2
+     * degrees in relation to the TA partner. TL;DR: checks to see if the TA user is basically
+     * behind the TA partner. Additionally, it will return the valid TA partner closest to the
+     * mob in the case that there is more than one.
      */
 
     CBattleEntity* getAvailableTrickAttackChar(CBattleEntity* taUser, CBattleEntity* PMob)
@@ -4247,84 +4242,72 @@ namespace battleutils
             return nullptr;
         }
 
-        float taUserX = taUser->loc.p.x;
-        float taUserZ = taUser->loc.p.z;
-        float mobX    = PMob->loc.p.x;
-        float mobZ    = PMob->loc.p.z;
+        float mobX = PMob->loc.p.x;
+        float mobZ = PMob->loc.p.z;
 
-        float xdif       = taUserX - mobX;
-        float zdif       = taUserZ - mobZ;
-        float slope      = 0;
-        float maxSlope   = 0;
-        float minSlope   = 0;
-        bool  zDependent = true; // using a slope where z is dependent var
+        float taVecX = taUser->loc.p.x - mobX;
+        float taVecZ = taUser->loc.p.z - mobZ;
 
-        if (abs(xdif) <= abs(zdif))
+        auto calculateDiamondAngle = [&](float x, float y) -> float
         {
-            slope = xdif / zdif;
-
-            float angle = (float)atan((double)1) * 2 - atan(slope);
-
-            float zoffset   = cos(angle) / 2;
-            float xoffset   = sin(angle) / 2;
-            float maxXpoint = taUserX + xoffset;
-            float maxZpoint = taUserZ - zoffset;
-            float minXpoint = taUserX - xoffset;
-            float minZpoint = taUserZ + zoffset;
-            maxSlope        = ((maxXpoint - mobX) / (maxZpoint - mobZ));
-            minSlope        = ((minXpoint - mobX) / (minZpoint - mobZ));
-            zDependent      = false;
-        }
-        else
-        {
-            slope = zdif / xdif;
-
-            float angle = (float)atan((double)1) * 2 - atan(slope);
-
-            float xoffset   = cos(angle) / 2;
-            float zoffset   = sin(angle) / 2;
-            float maxXpoint = taUserX - xoffset;
-            float maxZpoint = taUserZ + zoffset;
-            float minXpoint = taUserX + xoffset;
-            float minZpoint = taUserZ - zoffset;
-            maxSlope        = (maxZpoint - mobZ) / (maxXpoint - mobX);
-            minSlope        = (minZpoint - mobZ) / (minXpoint - mobX);
-        }
-
-        auto checkPosition = [&](CBattleEntity* PEntity) -> bool
-        {
-            if (taUser->id != PEntity->id && distance(PEntity->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
+            if (y >= 0)
             {
-                float memberXdif = PEntity->loc.p.x - mobX;
-                float memberZdif = PEntity->loc.p.z - mobZ;
-                if (zDependent)
+                if (x >= 0)
                 {
-                    if ((memberZdif <= memberXdif * maxSlope) && (memberZdif >= memberXdif * minSlope))
-                    {
-                        // finally found a TA partner
-                        return true;
-                    }
+                    return y / (x + y);
                 }
-                else
+
+                return 1 - (x / (-x + y));
+            }
+
+            if (x < 0)
+            {
+                return 2 - (y / (-x - y));
+            }
+
+            return 3 + (x / (x - y));
+        };
+
+        float taUserDiamondAngle = calculateDiamondAngle(taVecX, taVecZ);
+        float taUserDistance     = distance(taUser->loc.p, PMob->loc.p);
+        float closestDistance    = taUserDistance;
+
+        // Determines if a given party/alliance member is a valid candidate for Trick Attack
+        auto isValidTrickAttackHelper = [&](CBattleEntity* PEntity, float& closestDistance) -> bool
+        {
+            // Dead PEntity should not be TA-able
+            if (PEntity->isDead())
+            {
+                return false;
+            }
+            float memberDistance = distance(PEntity->loc.p, PMob->loc.p);
+            if (taUser->id != PEntity->id && memberDistance <= taUserDistance && memberDistance < closestDistance)
+            {
+                float memberVecX         = PEntity->loc.p.x - mobX;
+                float memberVecZ         = PEntity->loc.p.z - mobZ;
+                float memberDiamondAngle = calculateDiamondAngle(memberVecX, memberVecZ);
+
+                // Subtract the member angle from the TA user angle to determine the angle between their vectors
+                float pairAngle = taUserDiamondAngle - memberDiamondAngle;
+
+                // Found a TA partner if the pair angle is between +/-0.034, or roughly +/-2 degrees
+                if (pairAngle >= -0.034 && pairAngle <= 0.034)
                 {
-                    if ((memberXdif <= memberZdif * maxSlope) && (memberXdif >= memberZdif * minSlope))
-                    {
-                        // finally found a TA partner
-                        return true;
-                    }
+                    closestDistance = memberDistance;
+                    return true;
                 }
             }
 
             return false;
         };
 
-        auto checkTrusts = [&](CBattleEntity* PEntity) -> CBattleEntity*
+        auto checkTrusts = [&](CBattleEntity* PEntity, float& closestDistance ) -> CBattleEntity*
         {
             if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
             {
                 for (auto* PTrust : PChar->PTrusts)
                 {
-                    if (checkPosition(PTrust))
+                    if (isValidTrickAttackHelper(PTrust, closestDistance))
                     {
                         return PTrust;
                     }
@@ -4334,6 +4317,7 @@ namespace battleutils
             return nullptr;
         };
 
+        CBattleEntity* taPartner = nullptr;
         if (taUser->PParty != nullptr)
         {
             if (taUser->PParty->m_PAlliance != nullptr)
@@ -4343,14 +4327,13 @@ namespace battleutils
                     for (std::size_t i = 0; i < a->members.size(); ++i)
                     {
                         CBattleEntity* member = a->members.at(i);
-                        if (checkPosition(member))
+                        if (isValidTrickAttackHelper(member, closestDistance))
                         {
-                            return member;
+                            taPartner = member;
                         }
-
-                        if (auto* potentialTrust = checkTrusts(member))
+                        else if (auto* potentialTrust = checkTrusts(member, closestDistance))
                         {
-                            return potentialTrust;
+                            taPartner = potentialTrust;
                         }
                     }
                 }
@@ -4359,21 +4342,20 @@ namespace battleutils
             { // No alliance
                 for (auto member : taUser->PParty->members)
                 {
-                    if (checkPosition(member))
+                    if (isValidTrickAttackHelper(member, closestDistance))
                     {
-                        return member;
+                        taPartner = member;
                     }
-
-                    if (auto* potentialTrust = checkTrusts(member))
+                    else if (auto* potentialTrust = checkTrusts(member, closestDistance))
                     {
-                        return potentialTrust;
+                        taPartner = potentialTrust;
                     }
                 }
             }
         }
 
-        // No Trick attack party member available
-        return nullptr;
+        // Return closest, viable TA partner, otherwise no TA partner available
+        return taPartner;
     }
 
     /************************************************************************
