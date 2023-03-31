@@ -4,6 +4,7 @@
 -- !pos -249.320 -16.189 41.497 24
 -----------------------------------
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
+require('scripts/globals/items')
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
@@ -15,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
     then
         -- Adamantoise Soup
         player:confirmTrade()
-        player:messageSpecial(ID.text.KURREA_SPAWN, xi.items.ADAMANTOISE_SOUP)
+        player:messageSpecial(ID.text.KURREA_SPAWN, xi.items.BOWL_OF_ADAMANTOISE_SOUP)
     else
         player:messageSpecial(ID.text.KURREA_WRONG_TRADE)
     end
