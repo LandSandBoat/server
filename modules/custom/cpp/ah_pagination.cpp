@@ -35,6 +35,12 @@ class AHPaginationModule : public CPPModule
         {
             TracyZoneScoped;
 
+            if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
+            {
+                ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
+                return;
+            }
+
             // Only intercept for action 0x05: Open List Of Sales / Wait
             auto action = data.ref<uint8>(0x04);
             if (action == 0x05)
