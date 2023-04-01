@@ -110,32 +110,63 @@ bool CWeaponSkillState::Update(time_point tick)
 {
     if (!IsCompleted())
     {
-        SpendCost();
-        action_t action;
-        m_PEntity->OnWeaponSkillFinished(*this, action);
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+        CBattleEntity* PTarget = dynamic_cast<CBattleEntity*>(GetTarget());
+        action_t       action;
 
-        auto* PTarget{ GetTarget() };
-
-        // Reset Restraint bonus and trackers on weaponskill use
-        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
+        if (PTarget && PTarget->isAlive())
         {
-            uint16 WSBonus = m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->GetPower();
-            m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetPower(0);
-            m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetSubPower(0);
-            m_PEntity->delModifier(Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
-        }
+            SpendCost();
 
-        if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
-        {
-            // only send lua the WS events if we are in range
-            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, CLuaAction(&action));
-            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, CLuaAction(&action));
+            m_PEntity->OnWeaponSkillFinished(*this, action);
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
-            if (m_PEntity->objtype == TYPE_PC)
+            // Reset Restraint bonus and trackers on weaponskill use
+            if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
             {
-                roeutils::event(ROE_EVENT::ROE_WSKILL_USE, static_cast<CCharEntity*>(m_PEntity), RoeDatagram("skillType", m_PSkill->getType()));
+                uint16 WSBonus = m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->GetPower();
+                m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetPower(0);
+                m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetSubPower(0);
+                m_PEntity->delModifier(Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
             }
+
+            if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
+            {
+                // only send lua the WS events if we are in range
+                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, CLuaAction(&action));
+                PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, CLuaAction(&action));
+
+                if (m_PEntity->objtype == TYPE_PC)
+                {
+                    roeutils::event(ROE_EVENT::ROE_WSKILL_USE, static_cast<CCharEntity*>(m_PEntity), RoeDatagram("skillType", m_PSkill->getType()));
+                }
+            }
+        }
+        else // Mob is dead before we could finish WS, generate interrupt for WS
+        {
+            // Could not reproduce on retail due to server tick rate, this entire block is assumed.
+            // Ideally, you would ready a WS then have the mob die to either a DoT or a JA like Quick Draw/Jump and dump the packet.
+            // To the best of our knowledge this would produce a similar-enough effect to cancel the WS animation
+            // Essentially, very similar to "too far away" and casting out of range spell cancellation, with no message.
+            action.actiontype        = ACTION_MAGIC_FINISH;
+            action.actionid          = 28787; // Some hardcoded magic for interrupts
+            actionList_t& actionList = action.getNewActionList();
+
+            if (PTarget)
+            {
+                actionList.ActionTargetID = PTarget->id;
+            }
+            else // Dead code? PTarget should probably never be nullptr.
+            {
+                actionList.ActionTargetID = 0;
+            }
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+
+            actionTarget.animation = 0x1FC;
+            actionTarget.messageID = 0;
+            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
+
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         }
 
         auto delay   = m_PSkill->getAnimationTime(); // TODO: Is delay time a fixed number if the weaponskill is used out of range?
