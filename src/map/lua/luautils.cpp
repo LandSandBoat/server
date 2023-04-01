@@ -304,7 +304,7 @@ namespace luautils
 
         moduleutils::LoadLuaModules();
 
-        filewatcher = std::make_unique<Filewatcher>(std::vector<std::string>{ "scripts", "modules" });
+        filewatcher = std::make_unique<Filewatcher>(std::vector<std::string>{ "scripts", "modules", "settings" });
 
         TracyReportLuaMemory(lua.lua_state());
 
@@ -568,6 +568,24 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] RE-RUNNING MODULE FILE %s", filename);
+            return;
+        }
+
+        // Handle Lua settings files, then return
+        if (!parts.empty() && parts[0] == "settings")
+        {
+            auto result = lua.safe_script_file(filename);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load settings error: %s: %s", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] RELOADING ALL LUA SETTINGS FILES");
+
+            settings::init();
+
             return;
         }
 
