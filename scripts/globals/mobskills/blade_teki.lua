@@ -19,7 +19,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN) * 3, xi.magic.ele.WATER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1, 0, 1, 1.5, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, info.hitslanded)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+    end
+
     return dmg
 end
 
