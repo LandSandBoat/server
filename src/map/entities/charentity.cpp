@@ -1346,12 +1346,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
-        if (battleutils::IsParalyzed(this))
-        {
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
-            return;
-        }
-
         // get any available merit recast reduction
         uint8 meritRecastReduction = 0;
         uint8 chargeTime           = 0;
@@ -1447,12 +1441,17 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
 
-        if (battleutils::IsParalyzed(this) && !(PAbility->getRecastTime() == 7200)) // If Paralyzed and Not JSA (7200s = 2Hr)
+        if (battleutils::IsParalyzed(this))
         {
-            // display paralyzed
-            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
-            pushPacket(new CCharRecastPacket(this));
-            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+
+            // You got paralyzed, reset the timer for this JA which is era behavior, unless it is the 2hr.
+            // RecastID 0 & 254 are starting 2hr and level 96 2hr respectively. 2hrs do not get their recast eaten.
+            if (PAbility->getRecastId() != 0 && PAbility->getRecastId() != 254)
+            {
+                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
+                pushPacket(new CCharRecastPacket(this));
+            }
             return;
         }
 
