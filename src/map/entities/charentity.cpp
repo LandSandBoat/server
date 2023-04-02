@@ -1698,13 +1698,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
-    if (battleutils::IsParalyzed(this))
-    {
-        // display paralyzed
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
-        return;
-    }
-
     int32 damage      = 0;
     int32 totalDamage = 0;
 
