@@ -18946,6 +18946,7 @@ INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,505,30);      -- Sheepskin (3.0
 INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,4378,20);     -- Jug Of Selbina Milk (2.0%)
 INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,4378,@VRARE); -- Jug Of Selbina Milk (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2382,2,0,1000,832,0);       -- Clump Of Sheep Wool (Steal)
+INSERT INTO `mob_droplist` VALUES (2382,0,0,1000,5154,@VRARE);   -- Tavnazian Liver (Very Rare, 1%)
 
 -- ZoneID:  25 - Tavnazian Sheep
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,4372,@VCOMMON); -- Slice Of Giant Sheep Meat (Very Common, 24%)
@@ -18953,6 +18954,7 @@ INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,505,200);       -- Sheepskin (2
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,4378,70);       -- Jug Of Selbina Milk (7.0%)
 INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,882,@RARE);     -- Sheep Tooth (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2383,2,0,1000,832,0);         -- Clump Of Sheep Wool (Steal)
+INSERT INTO `mob_droplist` VALUES (2383,0,0,1000,5154,@VRARE);   -- Tavnazian Liver (Very Rare, 1%)
 
 -- ZoneID: 160 - Tawny-Fingered Mugberry
 INSERT INTO `mob_droplist` VALUES (2384,0,0,1000,13147,@ALWAYS); -- Uggalepih Necklace (Always, 100%)
@@ -26853,6 +26855,29 @@ INSERT INTO `mob_droplist` VALUES (3253,0,0,1000,1822,@ALWAYS); -- Supernal Frag
 INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,880,@VCOMMON); -- Bone Chip (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3254,0,0,1000,4824,@RARE);   -- Scroll Of Gravity (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3254,2,0,1000,880,0);        -- Bone Chip (Steal)
+
+-- ZoneID: 25 - Orcish Footsoldiers
+-- ZoneID: 25 - Orcish Gladiators
+-- ZoneID: 25 - Orcish Troopers
+INSERT INTO `mob_droplist` VALUES (3255,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3255,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon, 10%) http://www.ffxidb.com/items/1661
+
+-- ZoneID: 25 - Orcish Bowshooters
+INSERT INTO `mob_droplist` VALUES (3256,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3256,2,0,1000,1661,@UNCOMMON); -- Misareaux Garlic (Uncommon, 10%)-- http://www.ffxidb.com/items/1661
+INSERT INTO `mob_droplist` VALUES (3256,0,0,1000,5154,@RARE);   -- Tavnazian Liver (Rare 5%) http://www.ffxidb.com/items/5154
+
+-- ZoneID: 24 - Orcish Beastrider
+-- ZoneID: 24 - Orcish Brawler
+-- ZoneID: 24 - Orcish Footsoldier
+-- ZoneID: 24 - Orcish Nightrider
+-- ZoneID: 24 - Orcish Gladiator
+-- ZoneID: 24 - Orcish Trooper
+INSERT INTO `mob_droplist` VALUES (3257,2,0,1000,750,0); -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (3257,0,0,1000,5154,@RARE);   -- Tavnazian Liver (Rare, 5%) http://www.ffxidb.com/items/5154
+
+-- ZoneID:123  - Pyuu_the_Spatemaker
+INSERT INTO `mob_droplist` VALUES (3258,0,0,1000,2850,@UNCOMMON);   -- Sahagin Gold (Uncommon, ~10%) http://www.ffxidb.com/zones/123/pyuu-the-spatemaker
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
