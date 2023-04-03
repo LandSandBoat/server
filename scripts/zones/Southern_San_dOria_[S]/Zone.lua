@@ -22,11 +22,6 @@ zoneObject.onZoneIn = function(player, prevZone)
             player:getCharVar("KnotQuiteThere") == 2
         then
             cs = 62
-        elseif
-            player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX) == QUEST_ACCEPTED and
-            player:getCharVar("DownwardHelix") == 0
-        then
-            cs = 65
         end
     end
 
@@ -51,8 +46,6 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 62 then
         player:setCharVar("KnotQuiteThere", 3)
-    elseif csid == 65 then
-        player:setCharVar("DownwardHelix", 1)
     end
 end
 

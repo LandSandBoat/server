@@ -4,6 +4,7 @@
 -- !addquest 7 6
 -- Erlene : !pos 376.936 -39.999 17.914 175
 -----------------------------------
+require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
@@ -182,7 +183,33 @@ quest.sections =
 
         [xi.zone.THE_ELDIEME_NECROPOLIS_S] =
         {
-            ['Erlene'] = quest:event(15):replaceDefault(),
+            ['Erlene'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:canLearnSpell(xi.magic.spell.EMBRAVA) and
+                        player:canLearnSpell(xi.magic.spell.KAUSTRA)
+                    then
+                        return quest:progressEvent(47)
+                    else
+                        return quest:event(15):replaceDefault()
+                    end
+                end
+            },
+
+            onEventFinish =
+            {
+                [47] = function(player, csid, option, npc)
+                    if
+                        player:canLearnSpell(xi.magic.spell.EMBRAVA) and
+                        player:canLearnSpell(xi.magic.spell.KAUSTRA)
+                    then
+                        player:addSpell(xi.magic.spell.EMBRAVA, true)
+                        player:addSpell(xi.magic.spell.KAUSTRA, true)
+                        player:messageSpecial(eldiemeSID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
+                    end
+                end,
+            }
         },
     },
 }
