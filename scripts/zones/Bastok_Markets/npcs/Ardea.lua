@@ -14,7 +14,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
-    local chasingQuotasStatus = player:getCharVar("ChasingQuotas_Progress")
 
     -- Rock Racketeer
     if
@@ -22,11 +21,6 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)
     then
         player:startEvent(261)
-
-    elseif chasingQuotasStatus == 3 then
-        player:startEvent(264) -- Someone was just asking about that earring.
-    elseif chasingQuotasStatus == 4 then
-        player:startEvent(265) -- They'll be happy if you return it.
     end
 end
 
@@ -41,8 +35,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("rockracketeer_sold", 1)
     elseif csid == 261 and option ~= 2 then
         player:setCharVar("rockracketeer_sold", 2)
-    elseif csid == 264 then
-        player:setCharVar("ChasingQuotas_Progress", 4)
     end
 end
 

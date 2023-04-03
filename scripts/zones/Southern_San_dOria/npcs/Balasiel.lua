@@ -27,12 +27,7 @@ entity.onTrigger = function(player, npc)
     local aSquiresTestII = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II)
     local aKnightsTest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHT_S_TEST)
 
-    if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and
-        player:getCharVar("KnightStalker_Progress") == 2
-    then
-        player:startEvent(63) -- DRG AF3 cutscene, doesn't appear to have a follow up.
-    elseif lvl < 7 then
+    if lvl < 7 then
         player:startEvent(668)
     elseif lvl >= 7 and aSquiresTest ~= QUEST_COMPLETED then
         if aSquiresTest == 0 then
@@ -137,8 +132,6 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12306) -- Kite Shield
         end
-    elseif csid == 63 then
-        player:setCharVar("KnightStalker_Progress", 3)
     end
 end
 

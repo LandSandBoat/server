@@ -20,6 +20,8 @@ return {
     ['Maurine']       = { text = ID.text.MAURINE_DIALOG },  -- NOTE: These are two different NPCs
     ['Maurinne']      = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']       = { event = 517 },
+    ['Miaux']         = { event = 517 },
+    ['Morjean']       = { event = 601 },
     ['Nouveil']       = { event = 574 },
     ['Pellimie']      = { text = ID.text.PELLIMIE_DIALOG },
     ['Pepigort']      = { text = ID.text.PEPIGORT_DIALOG },
