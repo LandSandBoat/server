@@ -102,11 +102,11 @@ xi.wotg.helpers.helmTrade = function(player, helmType, broke)
             npcUtil.giveKeyItem(player, xi.ki.RONFAURE_MAPLE_SYRUP)
             return true
         elseif
-            zoneId == xi.zone.EAST_RONFAURE_S and
+            zoneId == xi.zone.JUGNER_FOREST_S and
             not player:hasKeyItem(xi.ki.LENGTH_OF_JUGNER_IVY) and
             xi.quest.getVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BONDS_THAT_NEVER_DIE, 'Prog') == 1
         then
-            npcUtil.giveItem(player, xi.ki.LENGTH_OF_JUGNER_IVY)
+            npcUtil.giveKeyItem(player, xi.ki.LENGTH_OF_JUGNER_IVY)
             return true
         end
     end
