@@ -1032,7 +1032,7 @@ namespace luautils
         return std::optional<CLuaBaseEntity>(PMob);
     }
 
-    std::optional<CLuaBaseEntity> GetEntityByID(uint32 entityid, sol::object const& instanceObj)
+    std::optional<CLuaBaseEntity> GetEntityByID(uint32 entityid, sol::object const& instanceObj, sol::object const& arg3)
     {
         TracyZoneScoped;
 
@@ -1041,6 +1041,8 @@ namespace luautils
         {
             PInstance = instanceObj.as<CLuaInstance>().GetInstance();
         }
+
+        bool silenceWarning = arg3.get_type() == sol::type::boolean ? arg3.as<bool>() : false;
 
         CBaseEntity* PEntity{ nullptr };
 
@@ -1055,7 +1057,10 @@ namespace luautils
 
         if (!PEntity)
         {
-            ShowWarning("luautils::GetEntityByID Mob doesn't exist (%d)", entityid);
+            if (!silenceWarning)
+            {
+                ShowWarning("luautils::GetEntityByID Mob doesn't exist (%d)", entityid);
+            }
             return std::nullopt;
         }
 
