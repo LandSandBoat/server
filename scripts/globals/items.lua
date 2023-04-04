@@ -104,6 +104,7 @@ xi.items =
     LANOLIN_CUBE                    = 531,
     MAGICMART_FLYER                 = 532,
     CLUMP_OF_GAUSEBIT_WILDGRASS     = 534,
+    ENGRAVED_KEY                    = 535,
     ADVENTURERS_COUPON              = 536,
     DAMSELFLY_WORM                  = 537,
     MAGICKED_SKULL                  = 538,
