@@ -19826,6 +19826,8 @@ INSERT INTO `mob_droplist` VALUES (2516,0,0,1000,1852,@RARE);     -- High-Qualit
 INSERT INTO `mob_droplist` VALUES (2516,2,0,1000,1783,0);         -- Sample Of Luminian Tissue (Steal)
 
 -- ZoneID:  33 - Ulxzomit
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1785,@ALWAYS);   -- Xzomit Organ (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1783,@UNCOMMON); -- Luminian Tissue (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@UNCOMMON); -- High-Quality Xzomit Organ (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@UNCOMMON); -- High-Quality Xzomit Organ (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4104,125);  -- Fire Cluster (Group 1 - Uncommon, 10% * 12.5%)
