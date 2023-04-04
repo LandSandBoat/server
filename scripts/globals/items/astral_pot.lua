@@ -10,22 +10,21 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
     local pet = target:getPet()
     if not pet then
         return xi.msg.basic.REQUIRES_A_PET, 0
-    elseif
-        effect ~= nil and
-        effect:getItemSourceID() == xi.items.ASTRAL_POT
-    then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    elseif target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.ASTRAL_POT) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.ASTRAL_POT)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 300, 0, 0, 0, xi.items.ASTRAL_POT)
+    local pet = target:getPet()
+    if target:hasEquipped(xi.items.ASTRAL_POT) and pet ~= nil then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 300, 0, 0, 0, xi.items.ASTRAL_POT)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

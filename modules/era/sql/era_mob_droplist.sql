@@ -9597,7 +9597,7 @@ INSERT INTO `mob_droplist` VALUES (1165,0,0,1000,12936,@VRARE); -- Greaves (Very
 INSERT INTO `mob_droplist` VALUES (1165,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID:  12 - Goblin Swordsman
-INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,1781,@COMMON); -- Sylvan Stone (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,1781,@ALWAYS); -- Sylvan Stone (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,508,@RARE);    -- Goblin Helm (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,507,@VRARE);   -- Goblin Mail (Very Rare, 1%)
 
@@ -19826,6 +19826,8 @@ INSERT INTO `mob_droplist` VALUES (2516,0,0,1000,1852,@RARE);     -- High-Qualit
 INSERT INTO `mob_droplist` VALUES (2516,2,0,1000,1783,0);         -- Sample Of Luminian Tissue (Steal)
 
 -- ZoneID:  33 - Ulxzomit
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1785,@ALWAYS);   -- Xzomit Organ (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1783,@UNCOMMON); -- Luminian Tissue (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@UNCOMMON); -- High-Quality Xzomit Organ (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@UNCOMMON); -- High-Quality Xzomit Organ (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4104,125);  -- Fire Cluster (Group 1 - Uncommon, 10% * 12.5%)

@@ -58,12 +58,23 @@ local loot =
         },
 
         {
+            { itemid =    0,  droprate = 512 }, -- Nothing
             { itemid = 17829, droprate =  82 }, -- Hagun
-            { itemid = 17945, droprate =  92 }, -- Martial Axe
+            { itemid = 17945, droprate =  93 }, -- Martial Axe
             { itemid = 17467, droprate =  63 }, -- Martial Wand
-            { itemid = 13690, droprate = 105 }, -- Forager's Mantle
-            { itemid = 13109, droprate = 121 }, -- Harmonia's Torque
+            { itemid = 13690, droprate = 128 }, -- Forager's Mantle
+            { itemid = 13109, droprate = 122 }, -- Harmonia's Torque
         },
+
+        {
+            { itemid =    0,  droprate = 512 }, -- Nothing
+            { itemid = 17829, droprate =  82 }, -- Hagun
+            { itemid = 17945, droprate =  93 }, -- Martial Axe
+            { itemid = 17467, droprate =  63 }, -- Martial Wand
+            { itemid = 13690, droprate = 128 }, -- Forager's Mantle
+            { itemid = 13109, droprate = 122 }, -- Harmonia's Torque
+        },
+
     },
 
     -- ENM: Shell We Dance?

@@ -9,14 +9,6 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.BLINK)
-    if
-        effect ~= nil and
-        effect:getItemSourceID() == xi.items.BLINK_BAND
-    then
-        target:delStatusEffect(xi.effect.BLINK)
-    end
-
     return 0
 end
 
