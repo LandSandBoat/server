@@ -9597,7 +9597,7 @@ INSERT INTO `mob_droplist` VALUES (1165,0,0,1000,12936,@VRARE); -- Greaves (Very
 INSERT INTO `mob_droplist` VALUES (1165,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID:  12 - Goblin Swordsman
-INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,1781,@COMMON); -- Sylvan Stone (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,1781,@ALWAYS); -- Sylvan Stone (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,508,@RARE);    -- Goblin Helm (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1166,0,0,1000,507,@VRARE);   -- Goblin Mail (Very Rare, 1%)
 

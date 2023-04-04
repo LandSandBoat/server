@@ -18,10 +18,12 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if not target:hasStatusEffect(xi.effect.EVASION_BOOST) then
-        target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 180, 0, 0, 0, xi.items.MIST_MITTS)
-    else
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    if target:hasEquipped(xi.items.MIST_MITTS) then
+        if not target:hasStatusEffect(xi.effect.EVASION_BOOST) then
+            target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 180, 0, 0, 0, xi.items.MIST_MITTS)
+        else
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        end
     end
 end
 

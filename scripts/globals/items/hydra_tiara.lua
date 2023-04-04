@@ -18,7 +18,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.POTENCY, 7, 0, 180, 0, 0, 0, xi.items.HYDRA_TIARA)
+    if target:hasEquipped(xi.items.HYDRA_TIARA) then
+        target:addStatusEffect(xi.effect.POTENCY, 7, 0, 180, 0, 0, 0, xi.items.HYDRA_TIARA)
+    end
 end
 
 return itemObject
