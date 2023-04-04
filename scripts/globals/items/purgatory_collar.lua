@@ -10,16 +10,17 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.PURGATORY_COLLAR then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.PURGATORY_COLLAR) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.PURGATORY_COLLAR)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 45, 0, 0, 0, xi.items.PURGATORY_COLLAR)
+    if target:hasEquipped(xi.items.PURGATORY_COLLAR) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 45, 0, 0, 0, xi.items.PURGATORY_COLLAR)
+    end
 end
 
 itemObject.onEffectGain = function(target)

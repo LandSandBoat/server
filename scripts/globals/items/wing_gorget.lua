@@ -18,10 +18,12 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasStatusEffect(xi.effect.REGAIN) then
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
-    else
-        target:addStatusEffect(xi.effect.REGAIN, 5, 3, 30, 0, 0, 0, xi.items.WING_GORGET)
+    if target:hasEquipped(xi.items.WING_GORGET) then
+        if target:hasStatusEffect(xi.effect.REGAIN) then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addStatusEffect(xi.effect.REGAIN, 5, 3, 30, 0, 0, 0, xi.items.WING_GORGET)
+        end
     end
 end
 

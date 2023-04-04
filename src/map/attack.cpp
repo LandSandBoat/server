@@ -99,12 +99,12 @@ void CAttack::SetCritical(bool value, uint16 slot, bool isGuarded)
     }
     else
     {
-        float attBonus = 0.f;
+        float attBonus = 1.f;
         if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
         {
             if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
             {
-                attBonus = footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
+                attBonus = 1.0 + footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
             }
         }
 
