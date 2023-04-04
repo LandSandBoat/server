@@ -24,8 +24,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 1
+            return status == QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -45,8 +44,7 @@ quest.sections =
     -- the quest.  Does not have to be flagged again to complete an additional time.
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 1 or
+            return status ~= QUEST_AVAILABLE or
             player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER) == QUEST_COMPLETED
         end,
 
@@ -68,14 +66,14 @@ quest.sections =
             {
                 [216] = function(player, csid, option, npc)
                     player:confirmTrade()
-                        if not player:hasCompletedQuest(quest.areaId, quest.questId) then
-                            quest:complete(player)
-                            player:needToZone(true)
-                        else
-                            player:addFame(xi.quest.fame_area.BASTOK, 5)
-                            npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 180)
-                            player:needToZone(true)
-                        end
+                    if not player:hasCompletedQuest(quest.areaId, quest.questId) then
+                        quest:complete(player)
+                        player:needToZone(true)
+                    else
+                        player:addFame(xi.quest.fame_area.BASTOK, 5)
+                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 180)
+                        player:needToZone(true)
+                    end
                 end,
             },
         },

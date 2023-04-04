@@ -105,11 +105,6 @@ quest.sections =
                         return quest:event(316)
                     elseif
                         questProgress == 3 and
-                        player:needToZone()
-                    then
-                        return quest:progressEvent(320)
-                    elseif
-                        questProgress == 3 and
                         not player:needToZone()
                     then
                         return quest:progressEvent(318)
@@ -149,10 +144,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'finalCS') == 1 then
-                        return quest:event(319)
+                        return quest:progressEvent(319)
                     end
                 end,
-
             },
 
             onEventFinish =
