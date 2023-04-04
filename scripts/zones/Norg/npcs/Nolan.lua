@@ -379,7 +379,7 @@ entity.onTrigger = function(player, npc)
             "Carver's torque",
             function(playerArg)
                 player:timer(50, function(playerArg)
-                    item = 11580
+                    item = 10948
                     cost = 15000
                     completeTransaction(player, npc, item, cost)
                 end)
