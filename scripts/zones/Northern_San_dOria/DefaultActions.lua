@@ -6,6 +6,7 @@ return {
     ['Ailbeche']   = { event = 868 },
     ['Bacherume']  = { text = ID.text.BACHERUME_DIALOG },
     ['Chasalvige'] = { event = 6 },
+    ['Dauperiat']  = { event = 641 },
     ['Eperdur']    = { event = 678 },
     ['Gilipese']   =
     {
