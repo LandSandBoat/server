@@ -7,11 +7,6 @@ require("scripts/globals/items")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENAERO)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.AERO_MUFFLERS then
-        target:delStatusEffect(xi.effect.ENAERO)
-    end
-
     return 0
 end
 

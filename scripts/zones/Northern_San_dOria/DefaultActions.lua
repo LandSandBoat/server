@@ -6,6 +6,7 @@ return {
     ['Ailbeche']   = { event = 868 },
     ['Bacherume']  = { text = ID.text.BACHERUME_DIALOG },
     ['Chasalvige'] = { event = 6 },
+    ['Dauperiat']  = { event = 641 },
     ['Eperdur']    = { event = 678 },
     ['Gilipese']   =
     {
@@ -30,6 +31,7 @@ return {
     ['Maurinne']   = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']    = { event = 517 },
     ['Nouveil']    = { event = 574 },
+    ['Olbergieut'] = { event = 612 },
     ['Pepigort']   = { text = ID.text.PEPIGORT_DIALOG },
     ['Rodaillece'] =
     {
@@ -48,4 +50,5 @@ return {
             player:showText(npc, ID.text.RODAILLECE_DIALOG)
         end,
     },
+    ['Vamorcote']    = { event = 651 },
 }

@@ -19,7 +19,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ARCANE_CIRCLE, 20, 0, 600, 0, 0, 0, xi.items.MESSHIKIMARU)
+    if target:hasEquipped(xi.items.MESSHIKIMARU) then
+        target:addStatusEffect(xi.effect.ARCANE_CIRCLE, 20, 0, 600, 0, 0, 0, xi.items.MESSHIKIMARU)
+    end
 end
 
 return itemObject

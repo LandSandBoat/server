@@ -18,7 +18,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 1200, 0, 0, 0, xi.items.HYDRA_SPATS)
+    if target:hasEquipped(xi.items.HYDRA_SPATS) then
+        target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 1200, 0, 0, 0, xi.items.HYDRA_SPATS)
+    end
 end
 
 return itemObject

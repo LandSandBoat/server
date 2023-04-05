@@ -33,7 +33,7 @@ entity.onTrade = function(player, npc, trade)
         not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
         tradeGil > 0 and tradeGil <= 10000 and
         npcUtil.tradeHasExactly(trade, { { "gil", tradeGil } }) and
-        gateDialCD < os.time()
+        gateDialCD < VanadielTime()
     then
         local maxRoll = tradeGil / 200
         local diceRoll = math.random(2, 100)
@@ -43,7 +43,7 @@ entity.onTrade = function(player, npc, trade)
     elseif
         trade:hasItemQty(1781, 1) and
         trade:getItemCount() == 1 and
-        operatingLeverCD < os.time()
+        operatingLeverCD < VanadielTime()
     then
         player:startEvent(51, 1781)
     end
@@ -53,14 +53,17 @@ entity.onTrigger = function(player, npc)
     local operatingLeverCD = player:getCharVar("[ENM]OperatingLever")
     local gateDialCD = player:getCharVar("[ENM]GateDial")
 
-    if player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) or player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) then
+    if
+        player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) or
+        player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
+    then
         player:startEvent(50)
 
-    elseif operatingLeverCD > os.time() then
-        player:startEvent(53, 1781, VanadielTime() + (operatingLeverCD - os.time()))
+    elseif operatingLeverCD > VanadielTime() then
+        player:startEvent(53, 1781, operatingLeverCD)
 
-    elseif gateDialCD > os.time() then
-        player:startEvent(52, 1781, 432000, 10, VanadielTime() + (gateDialCD - os.time()), 2, 209, 209, 0)
+    elseif gateDialCD > VanadielTime() then
+        player:startEvent(52, 1781, 432000, 10, gateDialCD, 2, 209, 209, 0)
 
     else
         player:startEvent(52, 1781)
@@ -74,12 +77,12 @@ entity.onEventFinish = function(player, csid, option)
     print(option)
 
     if csid == 51 then
-        player:setCharVar("[ENM]OperatingLever", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600))
+        player:setCharVar("[ENM]OperatingLever", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600))
         npcUtil.giveKeyItem(player, xi.ki.SHAFT_2716_OPERATING_LEVER)
         player:tradeComplete()
 
     elseif csid == 55 and option == 1 then
-        player:setCharVar("[ENM]GateDial", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600))
+        player:setCharVar("[ENM]GateDial", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600))
         npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
 
     elseif csid == 56 and option == 1 then

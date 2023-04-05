@@ -18,7 +18,9 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 0, 0, 0, xi.items.TOUGH_BELT)
+    if target:hasEquipped(xi.items.TOUGH_BELT) then
+        target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 0, 0, 0, xi.items.TOUGH_BELT)
+    end
 end
 
 return itemObject

@@ -18,10 +18,12 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasStatusEffect(xi.effect.REGEN) then
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
-    else
-        target:addStatusEffect(xi.effect.REGEN, 5, 3, 75, 0, 0, 0, xi.items.REGEN_CUIRASS)
+    if target:hasEquipped(xi.items.REGEN_CUIRASS) then
+        if target:hasStatusEffect(xi.effect.REGEN) then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addStatusEffect(xi.effect.REGEN, 5, 3, 75, 0, 0, 0, xi.items.REGEN_CUIRASS)
+        end
     end
 end
 
