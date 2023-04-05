@@ -247,7 +247,7 @@ end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
     local hppRemaining = target:getHPP()
-    local mpCost       = target:getLocalVar("MP_COST")
+    local mpCost       = player:getLocalVar("MP_COST")
     local fcMerit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
     local crMerit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
     local fcMod        = player:getMod(xi.mod.FULL_CIRCLE)
@@ -425,7 +425,7 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     xi.job_utils.geomancer.addAura(luopan, 0, effect, finalPotency, targetType)
 
     -- Save the mp cost for use with Full Circle on the luopan
-    luopan:setLocalVar("MP_COST", spell:getMPCost())
+    player:setLocalVar("MP_COST", spell:getMPCost())
 
     -- Change the luopans appearance to match the effect
     luopan:setModelId(modelID)
