@@ -14,7 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.A_GLOWING_MIST)
+    if not xi.bcnm.onTrigger(player, npc) then
+        player:messageSpecial(ID.text.A_GLOWING_MIST)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
@@ -22,6 +24,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity
