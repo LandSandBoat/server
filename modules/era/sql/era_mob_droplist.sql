@@ -6913,7 +6913,7 @@ INSERT INTO `mob_droplist` VALUES (829,0,0,1000,2518,120); -- Smilodon Hide (12.
 INSERT INTO `mob_droplist` VALUES (829,0,0,1000,5668,40);  -- Smilodon Liver (4.0%)
 
 -- ZoneID:  30 - Firedrake
-INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1691,@COMMON);   -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1691,@VCOMMON);   -- Giant Scale (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (830,0,0,1000,1124,@UNCOMMON); -- Wyvern Wing (Uncommon, 10%)
 
@@ -6998,7 +6998,7 @@ INSERT INTO `mob_droplist` VALUES (840,2,0,1000,1452,0);        -- Ordelle Bronz
 -- ZoneID:  30 - Flamedrake
 INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1122,@COMMON); -- Wyvern Skin (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1124,@COMMON); -- Wyvern Wing (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1691,@COMMON); -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (841,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
 
 -- ZoneID: 216 - Flame Skimmer
 INSERT INTO `mob_droplist` VALUES (842,0,0,1000,3178,@UNCOMMON);  -- Ferine Seal Legs (Uncommon, 10%)
@@ -9612,7 +9612,7 @@ INSERT INTO `mob_droplist` VALUES (1168,0,0,1000,17017,@UNCOMMON); -- Pet Food B
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17860,350);   -- Jug of Carrot Broth (Group 1 - 35%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17864,250);   -- Jug of Herbal Broth (Group 1 - 25%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17876,100);   -- Jug of Fish Broth (Group 1 - 10%)
-INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17920,100);   -- Jug of Meat Broth (Group 1 - 10%)
+INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17870,100);   -- Jug of Meat Broth (Group 1 - 10%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17872,100);   -- Jug of Tree Sap (Group 1 - 10%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17867,50);    -- Jug of Cold Carrion Broth (Group 1 - 5%)
 INSERT INTO `mob_droplist` VALUES (1168,1,1,@VCOMMON,17877,50);    -- Jug of Fish Oil Broth (Group 1 - 5%)
@@ -10994,7 +10994,7 @@ INSERT INTO `mob_droplist` VALUES (1351,4,0,1000,1606,0);         -- Remnant Of 
 
 -- ZoneID:  29 - Ignidrake
 -- ZoneID:  29 - Blazedrake
-INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1691,@COMMON); -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1122,@RARE);   -- Wyvern Skin (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1352,0,0,1000,1124,@VRARE);  -- Wyvern Wing (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1352,2,0,1000,1691,0);       -- Giant Scale (Steal)
@@ -16404,7 +16404,7 @@ INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13180,@UNCOMMON); -- Republic S
 INSERT INTO `mob_droplist` VALUES (2047,0,0,1000,13181,@UNCOMMON); -- Federation Stables Scarf (Uncommon, 10%)
 
 -- ZoneID:  29 - Pyrodrake
-INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1691,@COMMON); -- Giant Scale (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1691,@VCOMMON); -- Giant Scale (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1122,@RARE);   -- Wyvern Skin (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2048,0,0,1000,1124,@VRARE);  -- Wyvern Wing (Very Rare, 1%)
 

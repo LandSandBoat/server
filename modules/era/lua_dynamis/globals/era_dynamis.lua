@@ -1344,8 +1344,9 @@ end
 
 m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standard qmOnTrigger()
     local zoneId = npc:getZoneID()
-    player:addKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI)
-    player:messageSpecial(zones[zoneId].text.KEYITEM_OBTAINED, xi.dynamis.dynaInfoEra[zoneId].winKI)
+    if not player:hasKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI) then
+        npcUtil.giveKeyItem(player, xi.dynamis.dynaInfoEra[zoneId].winKI)
+    end
 end)
 
 --------------------------------------------
