@@ -1522,7 +1522,8 @@ namespace petutils
                 // charm time is up, mob attacks player now
                 if (PMob->PEnmityContainer->IsWithinEnmityRange(PMob->PMaster))
                 {
-                    PMob->PEnmityContainer->UpdateEnmity(PChar, 0, 0);
+                    PMob->PEnmityContainer->UpdateEnmity(PChar, 1, 1);
+                    PMob->SetBattleTargetID(PChar->targid);
                 }
                 else
                 {
