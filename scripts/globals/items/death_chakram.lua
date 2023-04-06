@@ -8,16 +8,17 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.DEATH_CHAKRAM then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.DEATH_CHAKRAM) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.DEATH_CHAKRAM)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.items.DEATH_CHAKRAM)
+    if target:hasEquipped(xi.items.DEATH_CHAKRAM) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.items.DEATH_CHAKRAM)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

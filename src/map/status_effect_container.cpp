@@ -695,6 +695,19 @@ bool CStatusEffectContainer::DelStatusEffect(EFFECT StatusID, uint16 SubID)
     return false;
 }
 
+bool CStatusEffectContainer::DelStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetItemSourceID() == ItemSourceID && !PStatusEffect->deleted)
+        {
+            RemoveStatusEffect(PStatusEffect);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool CStatusEffectContainer::DelStatusEffectByTier(EFFECT StatusID, uint16 tier)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1294,6 +1307,18 @@ CStatusEffect* CStatusEffectContainer::GetStatusEffect(EFFECT StatusID, uint32 S
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
         if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetSubID() == SubID && !PStatusEffect->deleted)
+        {
+            return PStatusEffect;
+        }
+    }
+    return nullptr;
+}
+
+CStatusEffect* CStatusEffectContainer::GetStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetItemSourceID() == ItemSourceID && !PStatusEffect->deleted)
         {
             return PStatusEffect;
         }

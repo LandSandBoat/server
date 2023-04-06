@@ -1,6 +1,9 @@
 -----------------------------------
 -- Area: Upper Jeuno
 --  NPC: Moritz
+-- Type: ENM Quest Timer
+-----------------------------------
+require("scripts/globals/enm")
 -----------------------------------
 local entity = {}
 
@@ -8,13 +11,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(10027)
+    xi.enm.timerNpcOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.enm.timerNpcOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.enm.timerNpcOnEventFinish(player, csid, option)
 end
 
 return entity
