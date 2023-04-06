@@ -358,6 +358,7 @@ xi.items =
     KING_OF_COINS_CARD              = 1011,
     DODO_SKIN                       = 1014,
     SAND_BAT_FANG                   = 1015,
+    BULB_OF_SHAMAN_GARLIC           = 1018,
     SICKLE                          = 1020,
     HATCHET                         = 1021,
     SET_OF_THIEFS_TOOLS             = 1022,
