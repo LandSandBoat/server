@@ -17,38 +17,68 @@ entity.onMobSpawn = function(mob)
     mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
     mob:setMod(xi.mod.COUNTER, 10)
     mob:setMod(xi.mod.UFASTCAST, 50)
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
+    mob:setMod(xi.mod.UDMGRANGE, -5000)
+    mob:setMod(xi.mod.UDMGBREATH, -5000)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:addMod(xi.mod.SILENCERESBUILD, 200)
+    mob:addMod(xi.mod.SILENCERES, 90)
     mob:setMod(xi.mod.DEF, 459)
     mob:setMod(xi.mod.EVA, 422)
     mob:setMod(xi.mod.VIT, 19)
     mob:setMod(xi.mod.STR, 3)
     mob:setMod(xi.mod.MATT, 0)
     mob:setMod(xi.mod.ATT, 436)
+    mob:setMod(xi.mod.REFRESH, 200)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 
     mob:addListener("TAKE_DAMAGE", "TIAMAT_TAKE_DAMAGE", function(defender, amount, attacker, attackType, damageType)
         local damageTaken = defender:getLocalVar("damageTaken") + amount
         if damageTaken > 10000 then
-            if defender:getAnimationSub() == 1 and defender:canUseAbilities() then
+            if
+                defender:getAnimationSub() == 1 and
+                defender:canUseAbilities()
+            then
                 defender:useMobAbility(1282)
                 defender:setLocalVar("damageTaken", 0)
-            elseif defender:getAnimationSub() == 2 and not defender:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and defender:canUseAbilities() then
+            elseif
+                defender:getAnimationSub() == 2 and
+                not defender:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
+                defender:canUseAbilities()
+            then
                 defender:setAnimationSub(1)
                 defender:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
                 defender:setMobSkillAttack(730)
                 defender:setLocalVar("damageTaken", 0)
             end
+
             defender:setLocalVar("changeHP", defender:getHP() / 1000)
         end
     end)
-
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:setLocalVar("twohourTime", os.time() + 30)
     mob:setLocalVar("changeTime", os.time() + 30)
+end
+
+entity.land = function(mob)
+    mob:useMobAbility(1282)
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setLocalVar("changeTime", os.time() + 120)
+end
+
+entity.flight = function(mob)
+    mob:setAnimationSub(1)
+    mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+    mob:setBehaviour(0)
+    mob:setMobSkillAttack(730)
+    mob:setLocalVar("changeTime", os.time() + 120)
 end
 
 entity.onMobFight = function(mob, target)
@@ -64,42 +94,51 @@ entity.onMobFight = function(mob, target)
     }
 
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
-    if mob:getHPP() < 25 and mob:getMod(xi.mod.ATT) <= 800 then
+    if mob:getHPP() <= 25 and mob:getMod(xi.mod.ATT) <= 800 then
         mob:setMod(xi.mod.ATT, 1200)
     end
 
-    if not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and mob:canUseAbilities() then
+    if
+        not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
+        mob:actionQueueEmpty()
+    then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
 
-        if mob:getAnimationSub() == 2 and os.time() > twohourTime then
+        if
+            mob:getAnimationSub() == 2 and
+            os.time() > twohourTime
+        then -- If mob uses its 2hr
             mob:useMobAbility(688)
             twohourTime = os.time() + math.random(180, 300)
             mob:setLocalVar("twohourTime", twohourTime)
-        elseif mob:getAnimationSub() == 0 and os.time() > changeTime then
-            mob:setAnimationSub(1)
-            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:setBehaviour(0)
-            mob:setMobSkillAttack(730)
-            mob:setLocalVar("changeTime", os.time() + 120)
-        -- subanimation 1 is flight, so check if she should land
-        elseif mob:getAnimationSub() == 1 and os.time() > changeTime then
-            mob:useMobAbility(1282)
-            mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-            mob:setLocalVar("changeTime", os.time() + 120)
-        -- subanimation 2 is grounded mode, so check if she should take off
-        elseif mob:getAnimationSub() == 2 and os.time() > changeTime then
-            mob:setAnimationSub(1)
-            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
-            mob:setBehaviour(0)
-            mob:setMobSkillAttack(730)
-            mob:setLocalVar("changeTime", os.time() + 120)
+        elseif -- subanimation 2 is grounded mode, so check if she should take off
+            (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) and
+            os.time() > changeTime
+        then
+            entity.flight(mob)
+        elseif
+            mob:getAnimationSub() == 1 and
+            os.time() > changeTime
+        then -- subanimation 1 is flight, so check if she should land
+            entity.land(mob)
         end
     end
 
+    if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
+        mob:setMobAbilityEnabled(false)
+        mob:setMagicCastingEnabled(false)
+    else
+        mob:setMobAbilityEnabled(true)
+        mob:setMagicCastingEnabled(true)
+    end
+
     -- Wyrms automatically wake from sleep in the air
-    if hasSleepEffects(mob) and mob:getAnimationSub() == 1 then
-        removeSleepEffects(mob)
+    if
+        hasSleepEffects(mob) and
+        mob:getAnimationSub() == 1
+    then
+        mob:wakeUp()
     end
 
     -- Tiamat draws in from set boundaries leaving her spawn area
@@ -116,7 +155,7 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- Don't lose TP from autos during flight
     if skill:getID() == 1278 then
-        mob:addTP(mob:getLocalVar("skill_tp") + 65) -- Needs to gain TP from flight auto attacks
+        mob:addTP(65) -- Needs to gain TP from flight auto attacks
         mob:setLocalVar("skill_tp", 0)
     elseif skill:getID() == 1282 then
         mob:addTP(mob:getLocalVar("skill_tp"))

@@ -16,44 +16,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
-    local theRumor = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.sandoria.THE_RUMOR)
-    local neutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
-
-    if
-        theRumor == QUEST_COMPLETED and
-        troubleAtTheSluice == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
-    then
-        player:startEvent(57)
-    elseif troubleAtTheSluice == QUEST_ACCEPTED and not neutralizerKI then
-        player:startEvent(55)
-    elseif neutralizerKI then
-        player:startEvent(56)
-    else
-        player:startEvent(585)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 57 and option == 0 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
-        player:setCharVar("troubleAtTheSluiceVar", 1)
-    elseif csid == 56 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16706) -- Heavy Axe
-        else
-            player:tradeComplete()
-            player:delKeyItem(xi.ki.NEUTRALIZER)
-            player:addItem(16706)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 16706) -- Heavy Axe
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
-        end
-    end
 end
 
 return entity

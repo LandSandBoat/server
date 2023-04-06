@@ -31,16 +31,9 @@ entity.onSpawn = function(npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if
-        player:getCharVar("troubleAtTheSluiceVar") == 2 and
-        npcUtil.tradeHas(trade, 959)
-    then -- Dahlia
-        player:startEvent(17)
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local troubleAtTheSluiceStat = player:getCharVar("troubleAtTheSluiceVar")
     local theHolyCrestStat = player:getCharVar("TheHolyCrest_Event")
 
     -- THE HOLY CREST
@@ -51,12 +44,6 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("theHolyCrestCheck") == 0
     then
         player:startEvent(7)
-
-    -- TROUBLE AT THE SLUICE
-    elseif troubleAtTheSluiceStat == 1 then
-        player:startEvent(15)
-    elseif troubleAtTheSluiceStat == 2 then
-        player:startEvent(16)
     end
 end
 
@@ -65,13 +52,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("TheHolyCrest_Event", 2)
     elseif csid == 7 then
         player:setCharVar("theHolyCrestCheck", 1)
-    elseif csid == 15 then
-        player:setCharVar("troubleAtTheSluiceVar", 2)
-    elseif csid == 17 then
-        npcUtil.giveKeyItem(player, xi.ki.NEUTRALIZER)
-        player:setCharVar("troubleAtTheSluiceVar", 0)
-        player:setCharVar("theHolyCrestCheck", 0)
-        player:confirmTrade()
     end
 end
 

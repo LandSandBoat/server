@@ -9,16 +9,17 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.MIGHTY_RING then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.MIGHTY_RING) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.items.MIGHTY_RING)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.MIGHTY_RING)
+    if target:hasEquipped(xi.items.MIGHTY_RING) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.items.MIGHTY_RING)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

@@ -18,10 +18,12 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:addStatusEffect(xi.effect.STONESKIN, 104, 0, 300, 0, 0, 4, xi.items.STONESKIN_TORQUE) then
-        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.STONESKIN)
-    else
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    if target:hasEquipped(xi.items.STONESKIN_TORQUE) then
+        if target:addStatusEffect(xi.effect.STONESKIN, 104, 0, 300, 0, 0, 4, xi.items.STONESKIN_TORQUE) then
+            target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.STONESKIN)
+        else
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        end
     end
 end
 
