@@ -11,5 +11,6 @@ return {
     -- ['Hinaree']     = { event = 0 }, -- Needs new data
     ['Rosel']       = { text = ID.text.ROSEL_GREETINGS },
     ['Sobane']      = { text = ID.text.SOBANE_DIALOG },
+    ['Legata']      = { event = 35 },
     ['Valderotaux'] = { event = 58 },
 }
