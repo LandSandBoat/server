@@ -1,8 +1,8 @@
 -----------------------------------
--- The Elvaan Goldsmith
+-- Starting A Flame
 -----------------------------------
--- Log ID: 1, Quest ID: 13
--- Michea : !pos -298 -16 -157 235
+-- Log ID: 0, Quest ID: 77
+-- Legata : !pos 82 0 116 230
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
@@ -10,14 +10,16 @@ require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
+-----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
 
 quest.reward =
 {
-    fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
-    gil      = 180,
+    fame = 30,
+    fameArea = xi.quest.fame_area.SANDORIA,
+    gil = 100,
 }
 
 quest.sections =
@@ -27,14 +29,16 @@ quest.sections =
             return status == QUEST_AVAILABLE
         end,
 
-        [xi.zone.BASTOK_MARKETS] =
+        [xi.zone.SOUTHERN_SAN_DORIA] =
         {
-            ['Michea'] = quest:progressEvent(215),
+            ['Legata'] = quest:progressEvent(37),
 
             onEventFinish =
             {
-                [215] = function(player, csid, option, npc)
-                    quest:begin(player)
+                [37] = function(player, csid, option, npc)
+                    if option == 1 then
+                        quest:begin(player)
+                    end
                 end,
             },
         },
@@ -44,35 +48,33 @@ quest.sections =
     -- the quest.  Does not have to be flagged again to complete an additional time.
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE or
-            player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER) == QUEST_COMPLETED
+            return status ~= QUEST_AVAILABLE
         end,
 
-        [xi.zone.BASTOK_MARKETS] =
+        [xi.zone.SOUTHERN_SAN_DORIA] =
         {
-            ['Michea'] =
+            ['Legata'] =
             {
                 onTrade = function(player, npc, trade)
-                    if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.COPPER_INGOT, 1 } }) and
-                        not player:needToZone()
-                    then
-                        return quest:progressEvent(216)
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.FLINT_STONE, 4 } }) then
+                        return quest:progressEvent(36)
                     end
+                end,
+
+                onTrigger = function(player, npc)
+                    return quest:event(35)
                 end,
             },
 
             onEventFinish =
             {
-                [216] = function(player, csid, option, npc)
+                [36] = function(player, csid, option, npc)
                     player:confirmTrade()
                     if not player:hasCompletedQuest(quest.areaId, quest.questId) then
                         quest:complete(player)
-                        player:needToZone(true)
                     else
-                        player:addFame(xi.quest.fame_area.BASTOK, 5)
-                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 180)
-                        player:needToZone(true)
+                        player:addFame(xi.quest.fame_area.SANDORIA, 5)
+                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 100)
                     end
                 end,
             },

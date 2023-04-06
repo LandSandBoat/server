@@ -999,7 +999,7 @@ INSERT INTO `mob_groups` VALUES (42,4105,25,'Upyri',86400,0,2526,5000,0,43,47,0)
 INSERT INTO `mob_groups` VALUES (43,1389,25,'Fomor_Red_Mage',330,1,855,0,0,49,51,0);
 INSERT INTO `mob_groups` VALUES (44,1391,25,'Fomor_Summoner',330,1,880,0,0,48,50,0);
 INSERT INTO `mob_groups` VALUES (45,1395,25,'Fomors_Elemental',0,128,0,0,0,43,49,0);
-INSERT INTO `mob_groups` VALUES (46,1035,25,'Diatryma',330,0,651,0,0,47,51,0);
+INSERT INTO `mob_groups` VALUES (46,20016,25,'Diatryma',330,0,651,0,0,47,51,0);
 INSERT INTO `mob_groups` VALUES (47,5773,25,'Okyupete',0,32,3057,5550,0,57,60,0);
 INSERT INTO `mob_groups` VALUES (48,4814,25,'Bigclaw',330,0,271,0,0,45,48,0);
 INSERT INTO `mob_groups` VALUES (49,2491,25,'Makara',330,0,1579,0,0,46,49,0);
