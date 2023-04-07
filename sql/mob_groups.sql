@@ -620,7 +620,7 @@ INSERT INTO `mob_groups` VALUES (34,1840,15,'Guimauve',0,32,1250,0,999,80,85,0);
 INSERT INTO `mob_groups` VALUES (35,1348,15,'Fistule',900,0,835,0,0,90,90,0);
 INSERT INTO `mob_groups` VALUES (36,3235,15,'Pustule',0,128,0,0,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (37,2743,15,'Morboling',300,0,1737,0,0,79,80,0);
-INSERT INTO `mob_groups` VALUES (38,742,15,'Clingy_Clare',0,128,479,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,742,15,'Clingy_Clare',0,128,479,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (39,1943,15,'Highland_Treant',300,0,1306,0,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (40,3633,15,'Siranpa-kamuy',0,128,0,0,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (41,4480,15,'Ypotryll',300,0,2792,0,0,79,80,0);
