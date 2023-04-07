@@ -1587,14 +1587,15 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 
     // Determine if this is a BRD Song or COR Effect.
     if ((StatusEffect->GetSubID() == 0 ||
-         StatusEffect->GetSubID() > 20000 ||
-         (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-         (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
-         effect == EFFECT_RUNEISTS_ROLL ||
-         effect == EFFECT_DRAIN_DAZE ||
-         effect == EFFECT_ASPIR_DAZE ||
-         effect == EFFECT_HASTE_DAZE ||
-         effect == EFFECT_BATTLEFIELD) &&
+        StatusEffect->GetSubID() > 20000 ||
+        (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
+        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
+        effect == EFFECT_RUNEISTS_ROLL ||
+        effect == EFFECT_DRAIN_DAZE ||
+        effect == EFFECT_ASPIR_DAZE ||
+        effect == EFFECT_HASTE_DAZE ||
+        effect == EFFECT_ATMA ||
+        effect == EFFECT_BATTLEFIELD) &&
         !effectFromItemEnchant)
     {
         name.insert(0, "globals/effects/");
