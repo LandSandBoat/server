@@ -184,6 +184,7 @@ namespace luautils
     bool   IsMoonNew();  // Returns true if the moon is new
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
+    int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
     int32 GetServerVariable(std::string const& name);
     void  SetServerVariable(std::string const& name, int32 value);

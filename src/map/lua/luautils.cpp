@@ -166,6 +166,7 @@ namespace luautils
         lua.set_function("IsMoonNew", &luautils::IsMoonNew);
         lua.set_function("IsMoonFull", &luautils::IsMoonFull);
         lua.set_function("RunElevator", &luautils::StartElevator);
+        lua.set_function("GetElevatorState", &luautils::GetElevatorState);
         lua.set_function("GetServerVariable", &luautils::GetServerVariable);
         lua.set_function("SetServerVariable", &luautils::SetServerVariable);
         lua.set_function("GetVolatileServerVariable", &luautils::GetVolatileServerVariable);
@@ -4535,6 +4536,20 @@ namespace luautils
     {
         TracyZoneScoped;
         CTransportHandler::getInstance()->startElevator(ElevatorID);
+    }
+
+    // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
+    int16 GetElevatorState(uint8 id) // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
+    {
+        TracyZoneScoped;
+        Elevator_t* elevator = CTransportHandler::getInstance()->getElevator(id);
+
+        if (elevator)
+        {
+            return elevator->state;
+        }
+
+        return -1;
     }
 
     int32 GetServerVariable(std::string const& name)
