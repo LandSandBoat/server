@@ -17,7 +17,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, 2500, 0, 60)
-    xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, 5000, 0, 60)
+    xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, 50, 0, 60)
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
