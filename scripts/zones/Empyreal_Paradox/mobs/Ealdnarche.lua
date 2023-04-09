@@ -20,12 +20,21 @@ local spellList =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMod(xi.mod.MDEF, 50);
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 15)
+    mob:addMod(xi.mod.EVA, 50) -- Meant to be highly evasive.
+    mob:addMod(xi.mod.REFRESH, 100)
+    mob:addMod(xi.mod.UFASTCAST, 40)
+    mob:setMod(xi.mod.MDEF, 305)
+    mob:setMod(xi.mod.MATT, 30)
+    mob:addMod(xi.mod.DEF, 200)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.EVA, 50) -- Meant to be highly evasive.
 end
 
 entity.onMobFight = function(mob, target)
