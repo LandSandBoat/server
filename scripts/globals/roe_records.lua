@@ -5621,6 +5621,254 @@ function getRoeRecords(triggers)
         },
 
         -----------------------------------
+        -- Content (Dynamis 1)
+        -----------------------------------
+
+        [732] =
+        { -- Subjugation: Overlord's Tombstone
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17534977 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [733] =
+        { -- Subjugation: Bladeburner Rokgevok
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535207 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [734] =
+        { -- Subjugation: Steelshank Kratzvatz
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535208 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [735] =
+        { -- Subjugation: Bloodfist Voshgrosh
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535210 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [736] =
+        { -- Subjugation: Spellspear Djokvukk
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17535211 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [737] =
+        { -- Subjugation: Gu'Dha Effigy
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539073 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [738] =
+        { -- Subjugation: Zo'Pha Forgesoul
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539307 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [739] =
+        { -- Subjugation: Ra'Gho Darkfount
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539308 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [740] =
+        { -- Subjugation: Va'Zhe Pummelsong
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539310 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [741] =
+        { -- Subjugation: Bu'Bho Truesteel
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17539311 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [742] =
+        { -- Subjugation: Tzee Xicu Idol
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543169 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [743] =
+        { -- Subjugation: Xuu Bhoqa the Enigma
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543464 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [744] =
+        { -- Subjugation: Fuu Tzapo the Blessed
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543466 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [745] =
+        { -- Subjugation: Naa Yixo the Stillrage
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543467 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [746] =
+        { -- Subjugation: Tee Zaska the Ceaseless
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17543468 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [747] =
+        { -- Subjugation: Goblin Golem
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547265 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [748] =
+        { -- Subjugation: Quicktrix Hexhands
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547493 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [749] =
+        { -- Subjugation: Feralox Honeylips
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547494 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [750] =
+        { -- Subjugation: Scourquix Scaleskin
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547496 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [751] =
+        { -- Subjugation: Wilywox Tenderpalm
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17547498 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        -----------------------------------
+        -- Content (Dynamis 2)
+        -----------------------------------
+
+        [752] =
+        { -- Subjugation: Angra Mainyu
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326081 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [753] =
+        { -- Subjugation: Taquede
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326093 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [754] =
+        { -- Subjugation: Pignonpausard
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326095 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [755] =
+        { -- Subjugation: Hitaume
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326096 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [756] =
+        { -- Subjugation: Cavanneche
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17326097 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [757] =
+        { -- Subjugation: Dynamis Lord
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330177 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [758] =
+        { -- Subjugation: Duke Haures
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330185 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [759] =
+        { -- Subjugation: Marquis Caim
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330186 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [760] =
+        { -- Subjugation: Baron Avnas
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330188 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        [761] =
+        { -- Subjugation: Count Haagenti
+            trigger = triggers.mobKill,
+            reqs = { mobID = set { 17330189 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
+        },
+
+        -----------------------------------
         -- Achievements - Job Levels 1
         -----------------------------------
 
