@@ -32,6 +32,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     end
 
+    if mob:getPool() == 6750 then  -- Fahrafahr the Bloodied
+        mob:resetEnmity(target)
+    end
+
     return dmg
 end
 
