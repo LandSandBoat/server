@@ -596,7 +596,7 @@ INSERT INTO `mob_groups` VALUES (10,2404,15,'Ley_Clionid',300,0,1516,5000,999,74
 INSERT INTO `mob_groups` VALUES (11,1244,15,'Ephemeral_Clionid',300,0,781,5000,1000,74,75,0);
 INSERT INTO `mob_groups` VALUES (12,3696,15,'Sods_Limule',300,0,2291,0,1000,74,75,0);
 INSERT INTO `mob_groups` VALUES (13,1245,15,'Ephemeral_Limule',300,0,783,5000,1000,74,75,0);
-INSERT INTO `mob_groups` VALUES (14,261,15,'Ashtaerh_the_Gallvexed',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (14,261,15,'Ashtaerh_the_Gallvexed',0,128,0,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (15,1457,15,'Gangly_Gean',900,0,928,0,999,80,83,0);
 INSERT INTO `mob_groups` VALUES (16,3334,15,'Razorback',300,0,2079,0,0,78,88,0);
 INSERT INTO `mob_groups` VALUES (17,3466,15,'Sarcophilus',0,128,2163,0,0,78,88,0);
