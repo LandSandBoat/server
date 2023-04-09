@@ -1386,10 +1386,10 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 }
             }
 
-            it->second = nullptr;
-            m_mobList.erase(it++);
-            dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
             destroy(PMob);
+            dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
+
+            m_mobList.erase(it++);
             continue;
         }
 
