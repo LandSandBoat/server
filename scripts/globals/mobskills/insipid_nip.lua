@@ -28,7 +28,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:dispelStatusEffect()
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    end
+
     return dmg
 end
 

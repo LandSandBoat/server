@@ -29,7 +29,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.RANGED, 2, 2.5, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.BLUNT)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.BLUNT)
+    end
+
     return dmg
 end
 

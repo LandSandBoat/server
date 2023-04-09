@@ -27,7 +27,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BIND
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    end
 
     return dmg
 end

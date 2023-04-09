@@ -37,10 +37,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
         local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
-        mob:resetEnmity(target)
-        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 1, 0, 30))
-        xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 50, 3, 60)
+        if not skill:hasMissMsg() then
+            mob:resetEnmity(target)
+            target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+            skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 1, 0, 30))
+            xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 50, 3, 60)
+        end
 
         return typeEffectOne
     else
