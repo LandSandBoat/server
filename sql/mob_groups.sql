@@ -3022,7 +3022,7 @@ INSERT INTO `mob_groups` VALUES (55,5191,61,'Vanasarvik',0,128,0,0,25000,99,99,0
 INSERT INTO `mob_groups` VALUES (56,6751,61,'Elders_Imp',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (57,6752,61,'Grand_Grenade',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (58,6753,61,'Sarama',0,128,0,0,0,99,99,0);
-INSERT INTO `mob_groups` VALUES (59,6750,61,'Fahrafahr_the_Bloodied',0,32,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,6750,61,'Fahrafahr_the_Bloodied',0,32,3259,0,0,80,80,0);
 
 -- ------------------------------------------------------------
 -- Halvung (Zone 62)
