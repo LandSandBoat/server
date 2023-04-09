@@ -2499,9 +2499,9 @@ namespace luautils
             return -1;
         }
 
-        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
-        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
-        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
+        Action->spikesEffect  = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
         return 0;
     }
