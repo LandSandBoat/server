@@ -13,6 +13,7 @@ entity.onMobSpawn = function(mob)
     -- setMod
     mob:setMod(xi.mod.REGEN, 500)
 
+    -- TODO: these variables seem to be reset on kill of JoL and thus will never be set.
     local jailerOfLove = GetMobByID(ID.mob.JAILER_OF_LOVE)
     -- Special check for regen modification by JoL pets killed
     if jailerOfLove:getLocalVar("JoL_Qn_xzomit_Killed") == 9 then
@@ -54,7 +55,9 @@ entity.onMagicHit = function(caster, target, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.VIRTUOUS_SAINT)
+    if player then
+        player:addTitle(xi.title.VIRTUOUS_SAINT)
+    end
 end
 
 return entity

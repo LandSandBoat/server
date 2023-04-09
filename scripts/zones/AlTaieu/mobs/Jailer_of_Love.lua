@@ -8,6 +8,8 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.lastEnmityList = {}
+
 local minionGroup =
 {
     [0] = 10, -- Qnxzomit
@@ -22,15 +24,21 @@ local minionGroup =
 
 local spellLists =
 {
-    [459] = 5025, -- Fire List
-    [460] = 5026, -- Ice List
-    [461] = 5027, -- Wind List
-    [462] = 5028, -- Earth List
-    [463] = 5029, -- Ltng List
-    [464] = 5030, -- Water List
-    [465] = 5024, -- Light List
-    [466] = 5031, -- Dark List
+    [1] = 5025, -- Fire List
+    [2] = 5026, -- Ice List
+    [3] = 5027, -- Wind List
+    [4] = 5028, -- Earth List
+    [5] = 5029, -- Ltng List
+    [6] = 5030, -- Water List
+    [7] = 5024, -- Light List
+    [8] = 5031, -- Dark List
 }
+
+-- Animations, action IDs and elemental absorb mods are directly mapped to eachother per retail caps
+-- in the "standard" order, Fire Ice Wind Earth Thunder Water Holy Dark
+local eleAbsorbModID      = { 459, 460, 461, 462, 463, 464, 465, 466 }
+local eleAbsorbActionID   = { 603, 604, 624, 404, 625, 626, 627, 307 }
+local eleAbsorbAnimations = { 432, 433, 434, 435, 436, 437, 438, 439 }
 
 local astralFlowPets = function()
     for i = ID.mob.JAILER_OF_LOVE + 1, ID.mob.JAILER_OF_LOVE + 27 do
@@ -85,6 +93,7 @@ local spawnSharks = function(mob)
             table.insert(phuaboDn, i)
         end
     end
+
     -- how many sharks spawn depends on number currently alive
     -- https://www.bg-wiki.com/bg/Jailer_of_Love
     local numToSpawn = 0
@@ -95,12 +104,19 @@ local spawnSharks = function(mob)
     elseif #phuaboUp == 1 then
         numToSpawn = math.random(3)
     end
+
     -- spawn sharks
     for i = 1, math.min(numToSpawn, #phuaboDn) do
         -- spawnSharks(mob, phuaboDn)
         local target = mob:getTarget()
-        GetMobByID(phuaboDn[i]):setSpawn(target:getXPos() + math.random(-2, 2), target:getYPos(), target:getZPos())
-        GetMobByID(phuaboDn[i]):updateEnmity(mob:getTarget())
+        local phuabo = GetMobByID(phuaboDn[i])
+
+        if phuabo then
+            phuabo:setSpawn(target:getXPos() + math.random(-2, 2), target:getYPos(), target:getZPos())
+            SpawnMob(phuaboDn[i])
+            phuabo:setMobMod(xi.mobMod.SUPERLINK, mob:getTargID())
+            phuabo:updateEnmity(target)
+        end
     end
 end
 
@@ -115,6 +131,20 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 452)
     mob:setMod(xi.mod.DEF, 620)
     mob:setMod(xi.mod.EVA, 328)
+
+    mob:addImmunity(xi.immunity.SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.PARALYZE)
+    mob:addImmunity(xi.immunity.BLIND)
+    mob:addImmunity(xi.immunity.SLOW)
+    mob:addImmunity(xi.immunity.POISON)
+    mob:addImmunity(xi.immunity.ELEGY)
+    mob:addImmunity(xi.immunity.REQUIEM)
+    mob:addImmunity(xi.immunity.TERROR)
+
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -130,9 +160,9 @@ entity.onMobEngaged = function(mob, target)
     mob:setAnimationSub(2)
     mob:setLocalVar("elementAbsorb", os.time() + 120)
     mob:setLocalVar("pop_pets", os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
-    mob:setLocalVar("currentAbsorb", math.random(459, 466)) -- pick a random element to absorb after engaging
+    mob:setLocalVar("currentAbsorb", math.random(#eleAbsorbModID)) -- pick a random element to absorb after engaging
     mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])
-    mob:setMod(mob:getLocalVar('currentAbsorb'), 100)
+    mob:setMod(eleAbsorbModID[mob:getLocalVar('currentAbsorb')], 100)
 end
 
 entity.onMobFight = function(mob, target)
@@ -151,22 +181,25 @@ entity.onMobFight = function(mob, target)
 
     -- every 2 minutes JoL will change the element it absorbs/casts spells this change happens after a two hour animation
     if os.time() > mob:getLocalVar("elementAbsorb") then
-        local abilities = { 307, 404, 603, 604, 624, 625, 626, 627 }
+
         local previousAbsorb = mob:getLocalVar("currentAbsorb")
-        mob:setLocalVar("currentAbsorb", math.random(459, 466))
         mob:setLocalVar("elementAbsorb", os.time() + 60)
         mob:setLocalVar("twohour_tp", mob:getTP())
-        mob:useMobAbility(abilities[math.random(#abilities)])
-        mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])
 
         -- remove previous absorb mod, if set
         if previousAbsorb > 0 then
-            mob:setMod(previousAbsorb, 0)
+            mob:setMod(eleAbsorbModID[previousAbsorb], 0)
         end
 
         -- add new absorb mod
-        mob:setLocalVar("currentAbsorb", mob:getLocalVar("currentAbsorb"))
-        mob:setMod(mob:getLocalVar("currentAbsorb"), 100)
+        local currentAbsorb = math.random(#eleAbsorbModID)
+        mob:setLocalVar("currentAbsorb", currentAbsorb)
+
+        -- Inject 2hr animation based on element, this shows in the captures.
+        mob:injectActionPacket(mob:getID(), 11, eleAbsorbAnimations[currentAbsorb], 0x18, 0, 0, eleAbsorbActionID[currentAbsorb], 0)
+        mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])
+
+        mob:setMod(eleAbsorbModID[currentAbsorb], 100)
         mob:addTP(mob:getLocalVar("twohour_tp"))
         mob:setLocalVar("twohour_tp", 0)
     end
@@ -174,7 +207,7 @@ entity.onMobFight = function(mob, target)
     -- spawn minions in 2.5 minute intervals
     if
         os.time() > mob:getLocalVar("pop_pets") and
-        mob:canUseAbilities() == true
+        mob:canUseAbilities()
     then
         mob:setLocalVar("pop_pets", os.time() + 150)
 
@@ -200,6 +233,24 @@ entity.onMobFight = function(mob, target)
 
         mob:setLocalVar("SPAWNS", spawns + 1)
     end
+
+    -- empty table
+    for key in pairs (entity.lastEnmityList) do
+        entity.lastEnmityList[key] = nil
+    end
+
+    local enmityList = mob:getEnmityList()
+    for index in ipairs(enmityList) do
+
+        entity.lastEnmityList[index] = {}
+        local tempEntity = enmityList[index]["entity"]
+        local ce         = enmityList[index]["ce"]
+        local ve         = enmityList[index]["ve"]
+
+        entity.lastEnmityList[index]["id"] = tempEntity:getID()
+        entity.lastEnmityList[index]["ce"] = ce
+        entity.lastEnmityList[index]["ve"] = ve
+    end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -221,7 +272,33 @@ end
 
 entity.onMobDespawn = function(mob)
     if math.random(1, 100) <= 25 then -- 25% chance to spawn Absolute Virtue
+        local highestEnmityTarget = nil
+        local highestEnmity = -1
+
+        for index in ipairs(entity.lastEnmityList) do
+            local id = entity.lastEnmityList[index]["id"]
+            local ce = entity.lastEnmityList[index]["ce"]
+            local ve = entity.lastEnmityList[index]["ve"]
+
+            local target = GetPlayerByID(id)
+            if target == nil then
+                -- try mob
+                target = GetEntityByID(id, mob:getInstance(), true)
+            end
+
+            local enmity = ce + ve
+            if target then
+                if enmity > highestEnmity then
+                    highestEnmityTarget = target
+                    highestEnmity       = enmity
+                end
+            end
+        end
+
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
+        if highestEnmityTarget then
+            GetMobByID(ID.mob.ABSOLUTE_VIRTUE):updateEnmity(highestEnmityTarget)
+        end
     end
 end
 
