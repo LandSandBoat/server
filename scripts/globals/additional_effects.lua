@@ -106,7 +106,11 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
     params.bonusmab   = 0
     params.includemab = false
 
-    if addType == xi.additionalEffect.procType.DAMAGE and element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
+    if
+        addType == xi.additionalEffect.procType.DAMAGE and
+        element == xi.magic.ele.LIGHT and
+        item:getSkillType() == xi.skill.MARKSMANSHIP
+    then
         params.element = xi.magic.ele.LIGHT
         params.attribute = xi.mod.MND
         params.skillType = item:getSkillType()
@@ -157,7 +161,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 { status = xi.effect.TERROR,    immunity = xi.immunity.TERROR   },
             }
 
-    if addStatus == xi.effect.DEFENSE_DOWN  and item:getSkillType() == xi.skill.MARKSMANSHIP then
+    if
+        addStatus == xi.effect.DEFENSE_DOWN and
+        item:getSkillType() == xi.skill.MARKSMANSHIP
+    then
         local dLvl = defender:getMainLvl() - attacker:getMainLvl()
         if dLvl <= 0 then
             chance = 99
@@ -192,7 +199,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     -- Additional Effect Damage
     --------------------------------------
     if addType == xi.additionalEffect.procType.DAMAGE then
-        if element == xi.magic.ele.LIGHT and item:getSkillType() == xi.skill.MARKSMANSHIP then
+        if
+            element == xi.magic.ele.LIGHT and
+            item:getSkillType() == xi.skill.MARKSMANSHIP
+        then
             damage = math.floor(attacker:getStat(xi.mod.MND) / 2) -- MAB/MDB bonuses caled in xi.additionalEffect.calcDamage.
         end
 
@@ -228,6 +238,8 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 defender:addStatusEffect(addStatus, power, tick, duration * resist)
                 msgID    = xi.msg.basic.ADD_EFFECT_STATUS
                 msgParam = addStatus
+            else
+                return 0, 0, 0
             end
         end
     --------------------------------------
@@ -401,9 +413,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:setUnkillable(false)
             damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)
             msgID = xi.msg.basic.ADD_EFFECT_DMG
+
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
             end
+
             msgParam = damage
         else
             return 0, 0, 0 -- Conditions not hit
