@@ -624,9 +624,11 @@ void CMobController::Move()
         }
     }
 
-    bool  move            = PMob->PAI->PathFind->IsFollowingPath();
-    float attack_range    = PMob->GetMeleeRange();
-    float closureDistance = attack_range - 0.2f - (static_cast<float>(PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET)) / 10.0);
+    bool  move          = PMob->PAI->PathFind->IsFollowingPath();
+    float attack_range  = PMob->GetMeleeRange();
+    int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
+    float offset        = static_cast<float>(offsetMod) / 10.0f;
+    float closeDistance = attack_range - (offsetMod == 0 ? 0.2 : offset);
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
@@ -648,7 +650,7 @@ void CMobController::Move()
         CMobEntity* posShare = (CMobEntity*)PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_POS) + PMob->targid, TYPE_MOB);
         PMob->loc            = posShare->loc;
     }
-    else if (((currentDistance > closureDistance) || move) && PMob->PAI->CanFollowPath())
+    else if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
     {
         //#TODO: can this be moved to scripts entirely?
         if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
@@ -687,7 +689,7 @@ void CMobController::Move()
                 else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
                 {
                     // try to find path towards target
-                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closureDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                 }
 
                 PMob->PAI->PathFind->FollowPath(m_Tick);

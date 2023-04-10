@@ -13,6 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 37)
 end
 
 entity.onMobSpawn = function(mob)
@@ -20,7 +21,6 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP() * 0.004))
     mob:addMod(xi.mod.BIND_MEVA, 40)
     mob:addMod(xi.mod.MOVE, 15)
-    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 35)
     mob:setAutoAttackEnabled(false)
 end
 

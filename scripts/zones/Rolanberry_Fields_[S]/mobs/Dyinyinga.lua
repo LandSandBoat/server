@@ -6,8 +6,8 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 35)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 37)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
