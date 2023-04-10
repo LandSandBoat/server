@@ -13,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.IXAERN_MNK)
 
-    if not nm:isSpawned() then
+    if npc:getStatus() == xi.status.NORMAL and not nm:isSpawned() then
         local chance = 0 -- percent chance that an item will drop.
 
         if npcUtil.tradeHas(trade, { { xi.items.HIGH_QUALITY_AERN_ORGAN, 3 } }) then
