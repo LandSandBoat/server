@@ -3853,6 +3853,8 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3649); -- august
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3650); -- august_melee_h2h
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_August_Melee',1197,3651); -- august_melee_bow
 
+INSERT INTO `mob_skill_lists` VALUES ('Fahrafahr_the_Bloodied',1198,2083); -- drop_hammer
+
 -- Next available ID: 1198
 
 -- ------------------------------------------------------------

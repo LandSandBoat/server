@@ -26879,6 +26879,9 @@ INSERT INTO `mob_droplist` VALUES (3257,0,0,1000,5154,@RARE);   -- Tavnazian Liv
 -- ZoneID:123  - Pyuu_the_Spatemaker
 INSERT INTO `mob_droplist` VALUES (3258,0,0,1000,2850,@UNCOMMON);   -- Sahagin Gold (Uncommon, ~10%) http://www.ffxidb.com/zones/123/pyuu-the-spatemaker
 
+-- ZoneID:61  - Fahrafahr the Bloodied
+INSERT INTO `mob_droplist` VALUES (3259,0,0,1000,18872,@COMMON);   -- Lyft Ferule (Common, ~15%) http://www.ffxidb.com/items/18872
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
