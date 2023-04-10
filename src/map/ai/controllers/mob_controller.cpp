@@ -626,7 +626,7 @@ void CMobController::Move()
 
     bool  move            = PMob->PAI->PathFind->IsFollowingPath();
     float attack_range    = PMob->GetMeleeRange();
-    float closureDistance = attack_range - 0.2f - (static_cast<float>(PMob->getMobMod(MOBMOD_ENCROACH_TARGET)) / 10.0);
+    float closureDistance = attack_range - 0.2f - (static_cast<float>(PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET)) / 10.0);
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
